@@ -1,0 +1,14 @@
+flowchart LR
+  M[Mir]
+  F[Mirrorea]
+  P[PrismCascade]
+  W[Typed-Effect Wiring Platform]
+  A[Applications / Reversed Library]
+
+  M <--> F
+  M <--> W
+  F <--> W
+  P <--> W
+  P <--> M
+  F --> A
+  P --> A

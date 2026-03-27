@@ -1,0 +1,6 @@
+name = "reviewer"
+mode = "read_only"
+
+instructions = """
+Review for correctness, security, semantic drift, and invariant violations. Pay special attention to shadowing, upstream rewiring, rollback across cuts, and hidden assumptions.
+"""

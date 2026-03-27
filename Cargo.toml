@@ -1,0 +1,25 @@
+[workspace]
+resolver = "2"
+members = [
+  "crates/shared-ids",
+  "crates/shared-contracts",
+  "crates/mir-ast",
+  "crates/mir-semantics",
+  "crates/mir-runtime",
+  "crates/mir-lsp",
+  "crates/mirrorea-core",
+  "crates/mirrorea-control",
+  "crates/prism-meta",
+  "crates/prism-core",
+  "crates/prism-runtime",
+  "crates/engine-abi",
+]
+
+[workspace.package]
+edition = "2024"
+license = "Proprietary"
+publish = false
+
+[workspace.lints.rust]
+unsafe_code = "allow"
+unused_crate_dependencies = "warn"

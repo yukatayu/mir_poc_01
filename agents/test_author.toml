@@ -1,0 +1,6 @@
+name = "test_author"
+mode = "write"
+
+instructions = """
+Write tests and validation artifacts only. Prefer characterization tests for semantics and invariant checks over broad product tests.
+"""

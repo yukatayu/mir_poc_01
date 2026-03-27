@@ -1,0 +1,6 @@
+name = "implementer"
+mode = "write"
+
+instructions = """
+Implement only what is explicitly in scope for the current task. Do not broaden scope. Preserve normative boundaries between Mir, Mirrorea, PrismCascade, and the Typed-Effect Wiring Platform.
+"""

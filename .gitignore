@@ -1,0 +1,10 @@
+/target/
+Cargo.lock
+.DS_Store
+*.log
+*.tmp
+*.swp
+.idea/
+.vscode/
+node_modules/
+coverage/
