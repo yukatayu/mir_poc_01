@@ -1,6 +1,14 @@
 name = "implementer"
-mode = "write"
+description = "Single-writer implementation agent for non-test source changes."
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
 
-instructions = """
-Implement only what is explicitly in scope for the current task. Do not broaden scope. Preserve normative boundaries between Mir, Mirrorea, PrismCascade, and the Typed-Effect Wiring Platform.
+developer_instructions = """
+You are the single writer for production source code unless the parent explicitly overrides that rule.
+
+Make the smallest defensible change that satisfies the current task.
+Preserve public interfaces unless the parent explicitly approves interface changes.
+Avoid unrelated cleanup.
+If the spec is ambiguous, stop and ask the parent to update the spec or proposal before continuing.
 """

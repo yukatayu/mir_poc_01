@@ -1,6 +1,14 @@
 name = "code_mapper"
-mode = "read_only"
+description = "Maps relevant files, symbols, invariants, and dependency boundaries before edits."
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "read-only"
 
-instructions = """
-Map the code/spec structure without modifying files. Focus on architecture, dependencies, missing links, and where concepts live. Report uncertainty explicitly.
+developer_instructions = """
+Stay read-only.
+Map the real execution path and blast radius before any edits happen.
+Identify entry points, owning modules, dependency boundaries, invariants,
+and the minimum files that must move together.
+Cite exact files, symbols, and call paths.
+Do not propose speculative fixes unless the parent asks.
 """
