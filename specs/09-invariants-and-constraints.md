@@ -5,7 +5,7 @@ This document lists constraints that should be treated as strong unless and unti
 ## Graph / causality invariants
 
 1. The semantic event structure is directed and acyclic.
-2. Cuts (`atomic_cut`, `durable_cut`) create explicit global decision boundaries.
+2. Cuts create explicit decision boundaries. Mir-0 では `atomic_cut` だけを最小の place-local cut primitive として扱う。`atomic_cut` は current `place` の rollback frontier を確定するが、単一プロセス全体・分散系・永続化の finalization は意味しない。`durable_cut` のような後段の cut vocabulary は scope を広げうるが、同じ explicit-finalization discipline を守らなければならない。
 3. If a mechanism would allow hidden backward edges in meaning, it is suspect by default.
 
 ## Evolution invariants
@@ -18,12 +18,12 @@ This document lists constraints that should be treated as strong unless and unti
 
 7. Linear resources must not be duplicated by continuation tricks or patching tricks.
 8. Lifetime degradation is monotone.
-9. Preference / fallback chains must normalize into an unambiguous monotone form.
+9. Preference / fallback chains, once fully formalized beyond primitive fallback, must normalize into an unambiguous monotone form.
 
 ## Failure / rollback invariants
 
 10. Failure should remain semantically explicit.
-11. Rollback may not cross finalizing cuts unless transformed into compensation.
+11. Rollback may not cross finalizing cuts unless transformed into compensation. Mir-0 では、これは current `place` 内の rollback が先行する `atomic_cut` を越えられないことを意味する。
 12. Non-rollbackable effects must be marked, isolated, or compensated.
 
 ## Integration invariants
