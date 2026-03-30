@@ -71,7 +71,8 @@ flowchart LR
 3. 次に `specs/02-system-overview.md`
 4. 次に `specs/03-layer-model.md` と `specs/09-invariants-and-constraints.md`
 5. その後、必要な subsystem に進む
-6. 既存判断は `specs/12-decision-register.md` を参照する
+6. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
+7. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 

@@ -18,6 +18,13 @@
 7. `11-roadmap-and-workstreams.md`
 8. `12-decision-register.md`
 
+## 例示文書
+
+- `specs/examples/00-representative-mir-programs.md`
+  - current L2 の representative Mir programs をまとめた例示文書。
+  - parser / interpreter を固定するものではなく、コード片ごとの static 判定、runtime outcome、最小 trace 説明を揃えるための補助正本である。
+  - `specs/04-mir-core.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md` を読んだ後に参照すると、現時点で何が自然に書けるかを追いやすい。
+
 ## 各文書の役割
 
 - `01-charter-and-decision-levels.md`
@@ -44,11 +51,19 @@
   - 提案されている実装 / 研究の順序。
 - `12-decision-register.md`
   - 現在の主要判断と、その強度レベル。
+- `specs/examples/00-representative-mir-programs.md`
+  - current L2 の representative Mir program と、その static 判定 / runtime outcome / trace の最小読解。
 
 ## レポート
 
 - `docs/reports/` には時系列の作業ログが入る。
 - report 自体は規範文書ではないが、なぜ変更が行われたかを説明する。
+
+## 補助文書
+
+- `specs/examples/`
+  - representative program、説明用記法、例示中心の補助文書置き場。
+  - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針
 
