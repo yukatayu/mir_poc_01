@@ -1,60 +1,74 @@
-# 11 — Roadmap and Workstreams
+# 11 — ロードマップと Workstream
 
-## Principle
+## 原則
 
-The project should advance by stabilizing semantics before broad implementation.
+このプロジェクトは、大規模な実装へ進む前に意味論を安定化することで前進すべきである。
 
-## Recommended workstreams
+## 推奨 workstream
 
-### Workstream A — Mir specification core
-Goals:
-- settle the minimum formal semantics for Mir-0,
-- write precise syntax and type rules for the currently agreed primitives,
-- pin down cuts, effects, contracts, failure, and monotone ownership/lifetime behavior.
+### Workstream A — Mir 仕様コア
 
-### Workstream B — Mir runtime proof-of-concept
-Goals:
-- build a single-process interpreter,
-- support event graph extraction,
-- support fallback/try/cut,
-- generate trace artifacts.
+目標:
 
-### Workstream C — Mirrorea minimum fabric
-Goals:
-- logical naming,
-- route rebinding,
-- overlay registration,
-- downstream patch activation,
-- basic audit.
+- Mir-0 の最小形式意味論を確定する
+- 現時点で合意されている primitive の正確な syntax と type rule を記述する
+- cut、effect、contract、failure、monotone な ownership / lifetime behavior を固定する
 
-### Workstream D — PrismCascade minimal kernel
-Goals:
-- Meta/Core/Runtime separation,
-- graph normalization,
-- minimal scheduler and memory plan,
-- minimal trace output.
+### Workstream B — Mir runtime proof of concept
 
-### Workstream E — Shared integration surfaces
-Goals:
-- shared identifiers,
-- shared contract schemas where appropriate,
-- linked tracing strategy,
-- minimal bridge between Mir and Prism.
+目標:
 
-### Workstream F — Visualization and editor support
-Goals:
-- language server basics,
-- graph view,
-- cut/route/patch visualization,
-- report-driven workflow support.
+- single-process interpreter を構築する
+- event graph extraction を支援する
+- fallback / try / cut を支援する
+- trace artifact を生成する
 
-### Workstream G — Application experiments
-Goals:
-- at least one small synchronized shared-space example,
-- one small virtual-world or collaborative editing example,
-- one small route/overlay insertion example.
+### Workstream C — Mirrorea の最小 fabric
 
-## Recommended phase ordering
+目標:
+
+- 論理名
+- route rebinding
+- overlay registration
+- downstream patch activation
+- 基本的な audit
+
+### Workstream D — PrismCascade の最小 kernel
+
+目標:
+
+- Meta / Core / Runtime 分離
+- graph normalization
+- 最小 scheduler と memory plan
+- 最小 trace output
+
+### Workstream E — 共有統合面
+
+目標:
+
+- 共有 identifier
+- 適切な範囲での共有 contract schema
+- link された tracing strategy
+- Mir と Prism の最小 bridge
+
+### Workstream F — 可視化と editor support
+
+目標:
+
+- language server の基礎
+- graph view
+- cut / route / patch visualization
+- report-driven workflow support
+
+### Workstream G — アプリケーション実験
+
+目標:
+
+- 少なくとも 1 つの小さな synchronized shared-space 例
+- 1 つの小さな virtual-world または collaborative editing 例
+- 1 つの小さな route / overlay insertion 例
+
+## 推奨される phase 順序
 
 1. Workstream A
 2. Workstream B
@@ -64,9 +78,9 @@ Goals:
 6. Workstream F
 7. Workstream G
 
-## Provisional implementation recommendations (not architectural laws)
+## 仮の実装推奨（アーキテクチャ上の法則ではない）
 
-- Rust for core runtimes, graph processing, and tooling backends.
-- Separate native crates for Mir / Mirrorea / Prism components.
-- Keep engine integration behind adapters.
-- Prefer explicit schemas and versioned interfaces over implicit coupling.
+- Core runtime、graph processing、tooling backend には Rust。
+- Mir / Mirrorea / Prism component ごとに分離した native crate。
+- Engine integration は adapter の背後に置く。
+- 暗黙結合よりも、明示的 schema と version づけられた interface を優先する。

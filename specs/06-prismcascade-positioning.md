@@ -1,41 +1,45 @@
-# 06 — PrismCascade Positioning
+# 06 — PrismCascade の位置づけ
 
-## Purpose of this document
+## この文書の目的
 
-This document explains where PrismCascade sits relative to Mir and Mirrorea.
-It is not the full PrismCascade specification; it is the architectural positioning summary.
+この文書は、PrismCascade が Mir と Mirrorea に対してどこに位置づくかを説明する。
+これは PrismCascade の完全仕様ではなく、アーキテクチャ上の位置づけ要約である。
 
-## Current conclusion
+## 現在の結論
 
-PrismCascade should be developed as a **separate kernel**, not as a sub-runtime inside Mir.
+PrismCascade は、Mir の sub-runtime ではなく、**独立した kernel** として開発すべきである。
 
-## Why
+## 理由
 
-### PrismCascade has a different optimization center
-Its core concerns include:
-- effect-only graph normalization,
-- planning before execution,
-- explicit memory ownership and reuse,
-- CPU/GPU/transfer scheduling,
-- offline/live causality distinctions.
+### PrismCascade は最適化中心が異なる
 
-These concerns are different enough from Mir's primary concerns that merging the runtimes too early would likely distort both.
+その中核的な関心事には次が含まれる。
 
-### PrismCascade still has strong integration points with Mir
-Good integration points include:
-- Meta-layer effect providers (for example TTS, model inference, asset lookup),
-- remote execution or remote resource delegation,
-- shared identifiers for tracing and audit,
-- collaborative editing and synchronization around Prism graphs.
+- effect-only graph の正規化
+- 実行前 planning
+- 明示的な memory ownership と再利用
+- CPU / GPU / transfer scheduling
+- offline / live の因果区別
 
-## Strong recommendation
+これらの関心事は Mir の主要関心事と十分に異なるため、runtime を早期に統合すると、両方の設計を歪める可能性が高い。
 
-- Develop PrismCascade independently.
-- Define narrow, explicit integration points with Mir/Mirrorea.
-- Do not force Prism runtime internals into Mir's general runtime model.
+### それでも PrismCascade は Mir と強い統合点を持つ
 
-## Open integration questions
+良い統合点には次が含まれる。
 
-- Which effect contracts should be shared between Prism and Mir?
-- What is the minimum shared trace schema?
-- What is the smallest sensible remote execution unit for Prism?
+- Meta-layer effect provider（例えば TTS、model inference、asset lookup）
+- remote execution または remote resource delegation
+- tracing と audit のための共有 identifier
+- Prism graph 周辺での collaborative editing と synchronization
+
+## 強い推奨
+
+- PrismCascade は独立に開発する。
+- Mir / Mirrorea との統合点は狭く明示的に定義する。
+- Prism runtime の内部を Mir の一般 runtime model に押し込まない。
+
+## 開かれた統合上の問い
+
+- Prism と Mir の間でどの effect contract を共有すべきか。
+- 最小の共有 trace schema は何か。
+- Prism にとって最も小さく妥当な remote execution unit は何か。

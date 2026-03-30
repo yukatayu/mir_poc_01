@@ -1,61 +1,76 @@
-# 03 — Layer Model
+# 03 — レイヤーモデル
 
-## Layers
+## レイヤー
 
-### L0 — Existing operating-system and network substrate
-Examples: processes, file systems, sockets, kernel interfaces, device drivers, graphics APIs, service orchestrators.
-This layer is assumed, not redesigned.
+### L0 — 既存の operating-system / network substrate
+
+例: process、file system、socket、kernel interface、device driver、graphics API、service orchestrator。
+この層は前提とするのであって、ここで再設計しない。
 
 ### L1 — Mir Core
-Responsibilities:
-- causality and directed-acyclic-graph execution model,
-- effects and contracts,
-- cuts / boundaries / rollback constraints,
-- ownership / lifetimes / monotone degradation,
-- safe evolution primitives.
+
+責務:
+
+- 因果と directed-acyclic-graph execution model
+- effects と contracts
+- cut / boundary / rollback constraint
+- ownership / lifetime / monotone degradation
+- 安全な進化の primitive
 
 ### L2 — Mirrorea Fabric
-Responsibilities:
-- logical naming,
-- routing and route rebinding,
-- overlay insertion,
-- patch application,
-- distributed cut realization,
-- audit and path proof,
-- safe integration of non-Mir systems.
 
-### L3 — Shared Space / Shared State
-Responsibilities:
-- session / space abstractions,
-- shared object synchronization models,
-- consistency mode selection,
-- movement or linkage between spaces.
+責務:
 
-### L4 — Domain Engines / Frameworks
-Responsibilities:
-- domain-specific kernels such as PrismCascade,
-- virtual-reality world engines,
-- collaborative document engines,
-- future GUI-programming substrate.
+- logical naming
+- routing と route rebinding
+- overlay insertion
+- patch application
+- distributed cut の実現
+- audit と path proof
+- non-Mir system の safe integration
 
-### L5 — Applications / Communities / Reversed Library
-Responsibilities:
-- actual user-facing spaces,
-- concrete virtual social systems,
-- web synchronization experiences,
-- curriculum/progression systems,
-- the Reversed Library as an application-level architecture.
+### L3 — 共有空間 / 共有状態
 
-## Cross-cutting concern: observability
-Observability crosses all layers but should be conceptually anchored in:
-- L1 for normative event semantics,
-- L2 for routing/audit,
-- L4 for domain-specific traces (for example media plans),
-- L5 for user-visible diagnostics where appropriate.
+責務:
 
-## Cross-cutting concern: replaceability
-Replaceability is strongest when boundaries are explicit:
-- language semantics boundary at L1,
-- routing/overlay boundary at L2,
-- domain-kernel boundary at L4,
-- user experience boundary at L5.
+- session / space abstraction
+- shared object の同期モデル
+- consistency mode の選択
+- space 間の movement または linkage
+
+### L4 — ドメインエンジン / フレームワーク
+
+責務:
+
+- PrismCascade のような domain-specific kernel
+- virtual reality world engine
+- collaborative document engine
+- 将来の GUI プログラミング基盤
+
+### L5 — アプリケーション / コミュニティ / Reversed Library
+
+責務:
+
+- 実際の user-facing space
+- 具体的な virtual social system
+- web synchronization experience
+- curriculum / progression system
+- application-level architecture としての Reversed Library
+
+## 横断的関心事: 可観測性（observability）
+
+可観測性（observability）は全 layer を横断するが、概念上の主たる足場は次であるべきである。
+
+- 規範的 event semantics を扱う L1
+- routing / audit を扱う L2
+- domain-specific trace（例: media plan）を扱う L4
+- 必要に応じて user-visible diagnostics を扱う L5
+
+## 横断的関心事: 置換可能性（replaceability）
+
+置換可能性（replaceability）は、境界が明示的なときに最も強くなる。
+
+- L1 の language semantics boundary
+- L2 の routing / overlay boundary
+- L4 の domain-kernel boundary
+- L5 の user experience boundary

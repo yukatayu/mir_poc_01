@@ -1,112 +1,116 @@
 # 04 — Mir Core
 
-## Status
+## 状態
 
-Mir Core is the most foundational part of the project.
-Its architecture should be treated as decision level L0/L1 unless explicitly marked otherwise.
+Mir Core は、このプロジェクトで最も基盤的な部分である。
+明示的に別記されていない限り、そのアーキテクチャは decision level L0 / L1 として扱うべきである。
 
-This document distinguishes between:
+この文書は次を区別する。
 
-- **Mir as a whole**: the broader semantic foundation that also constrains later evolution and integration work.
-- **Mir-0**: the minimum semantic kernel that should be stabilized first.
+- **Mir 全体**: 後続の進化や統合作業も拘束する、より広い意味論的基盤。
+- **Mir-0**: 最初に安定化すべき最小意味論カーネル。
 
-Unless explicitly marked otherwise, the "Mir-0 minimum semantic core" section below is the current focal definition of Mir-0 for Workstream A.
-It does not replace the earlier normative documents; it is read together with `specs/01` through `specs/03` and `specs/09`.
+明示的に別記されていない限り、以下の「Mir-0 の最小意味論コア」節が、Workstream A における Mir-0 の現在の焦点定義である。
+これは先行する規範文書を置き換えるものではなく、`specs/01` から `specs/03` と `specs/09` を併読して読む。
 
-## The four pillars
+## 四本柱
 
-### 1. Causality and Time
-- Computation is represented as a directed acyclic graph of events.
-- Finalization boundaries matter semantically.
-- The broader Mir cut vocabulary previously mentioned `barrier`, `atomic_cut`, and `durable_cut`. Mir-0 fixes only `atomic_cut`; the status of `barrier` and `durable_cut` is deferred.
-- The system must be able to explain "what happened before what" and "what became final when".
+### 1. 因果と時間
 
-### 2. Effects and Contracts
-- External actions are first-class effects, not hidden implementation details.
-- Contracts (`require`, `ensure`, `invariant`) are part of executable meaning.
-- Failure is not a generic exception bucket; it is structured and contract-aware.
+- 計算は event の directed acyclic graph として表現される。
+- finalization boundary は意味論上重要である。
+- より広い Mir の cut vocabulary では以前から `barrier`、`atomic_cut`、`durable_cut` が言及されていたが、Mir-0 が固定するのは `atomic_cut` だけである。`barrier` と `durable_cut` の扱いは後段へ送る。
+- システムは「何が何より前に起きたか」と「何がいつ final になったか」を説明できなければならない。
 
-### 3. Ownership and Lifetime
-- Linear or ownership-like resources matter.
-- Lifetimes and fallback-style degradation must remain monotone.
-- Preference chains and guarded references are currently an active design topic.
+### 2. Effects と Contracts
 
-### 4. Safe Evolution
-- Patches should preserve meaning and respect graph discipline.
-- Default rule: evolve by downstream addition rather than arbitrary rewiring.
-- Overlays must preserve compatibility and must not silently shadow existing APIs.
+- 外部作用は、隠れた実装詳細ではなく first-class effect である。
+- Contracts（`require`、`ensure`、`invariant`）は実行可能意味の一部である。
+- failure は汎用的な exception の入れ物ではなく、構造を持ち contract-aware でなければならない。
 
-Mir-0 does not attempt to fix the complete operational semantics of patches, overlays, or route rebinding.
-It fixes only the semantic constraints that later mechanisms must obey.
+### 3. Ownership と Lifetime
 
-## Mir-0 minimum semantic core
+- linear resource、あるいは ownership に類する resource は重要である。
+- lifetime と fallback 風の degradation は monotone に保たれなければならない。
+- preference chain と guarded reference は現在も活発な設計論点である。
 
-The minimum kernel fixed here is intentionally narrow.
-It includes only the primitives needed to state causality, explicit effects, rollback constraints, and ownership discipline without importing Mirrorea- or Prism-specific machinery.
+### 4. 安全な進化
 
-### 1. Event DAG and causality
+- patch は意味を保ち、graph discipline を尊重すべきである。
+- 既定規則は arbitrary rewiring ではなく downstream addition による進化である。
+- overlay は互換性を保ち、既存 API を silent shadowing してはならない。
 
-- Mir-0 computation is represented as a directed acyclic graph of semantic events.
-- The graph must make causal explanation explicit: which event happened before which other event, and which boundary made an earlier prefix final.
-- Hidden backward edges in meaning are not permitted.
+Mir-0 は、patch、overlay、route rebinding の完全な運用意味論 (operational semantics) を固定しない。
+ここで固定するのは、後続の mechanism が従うべき意味論的制約だけである。
+
+## Mir-0 の最小意味論コア
+
+ここで固定する最小 kernel は、意図的に狭い。
+Mirrorea 固有、Prism 固有の machinery を持ち込まずに、因果、明示的 effect、rollback constraint、ownership discipline を述べるのに必要な primitive だけを含む。
+
+### 1. Event DAG と因果
+
+- Mir-0 の計算は semantic event の directed acyclic graph で表現される。
+- graph は因果説明を明示しなければならない。すなわち、どの event がどの event より前に起き、どの boundary が先行 prefix を final にしたかを説明できなければならない。
+- 意味の上で隠れた backward edge は許されない。
 
 ### 2. `place`
 
-- Mir-0 includes a minimum notion of `place`.
-- A `place` is the smallest semantic locus at which local state, rollback scope, and ownership transfer are interpreted.
-- Mir-0 requires enough structure to distinguish same-place reasoning from cross-place interaction.
-- Exact routing, naming, and distributed placement policy are outside Mir-0 and belong to later Mir or Mirrorea work.
+- Mir-0 は `place` の最小概念を含む。
+- `place` は、local state、rollback scope、ownership transfer が解釈される最小の意味論的 locus である。
+- Mir-0 は、same-place reasoning と cross-place interaction を区別できるだけの構造を要求する。
+- 正確な routing、naming、distributed placement policy は Mir-0 の外にあり、後段の Mir または Mirrorea の作業に属する。
 
-### 3. `perform`, effect, and contract
+### 3. `perform`、effect、contract
 
 - Mir-0 では、明示された contract の下で effect を要求する最小操作だけを仮定する。
 - 本文ではその操作を便宜上 `perform` と表記するが、これは Mir-0 の規範的な表面構文としてはまだ確定しない。
 - `perform` を最終的な予約語として採用するかどうかは **未決定** である。
-- Effects are first-class semantic actions, not hidden implementation details.
-- Contracts constrain both admission and outcome space. Current vocabulary includes `require`, `ensure`, and `invariant`, but the exact surface syntax is not fixed here.
-- Effect success, rejection, approximation, and compensation must remain visible in the event graph.
+- effect は、隠れた実装詳細ではなく first-class semantic action である。
+- contract は admission と outcome space の両方を制約する。現在の vocabulary には `require`、`ensure`、`invariant` があるが、正確な表面構文はここでは固定しない。
+- effect success、rejection、approximation、compensation は event graph 上で可視であり続けなければならない。
 
-### 4. Minimum failure space
+### 4. 最小 failure space
 
-- Mir-0 fixes a minimum structured failure space with at least these named outcomes:
+- Mir-0 は、少なくとも次の named outcome を持つ最小 structured failure space を固定する。
   - `Reject`
   - `Approximate`
   - `Compensate`
-- A contract must state which degraded outcomes are permitted.
-- The exact lattice-theoretic presentation beyond these minimum classes is **UNRESOLVED**.
+- contract は、どの degraded outcome が許可されるかを明示しなければならない。
+- これら最小 class を超えた lattice-theoretic な正確な表現は **UNRESOLVED** である。
 
 ### 5. Primitive fallback
 
-- Mir-0 includes fallback as a primitive way to move to the next contract-compatible option after explicit failure or monotone degradation.
-- Fallback must not introduce hidden backtracking, hidden API shadowing, or duplication of linear resources.
-- Full normalization of nested fallback / preference chains is outside Mir-0.
+- Mir-0 は、明示的 failure または monotone degradation の後に、次の contract-compatible option へ進む primitive として fallback を含む。
+- fallback は、隠れた backtracking、隠れた API shadowing、linear resource の duplication を導入してはならない。
+- nested fallback / preference chain の完全な normalization は Mir-0 の外にある。
 
-### 6. `try` with local rollback
+### 6. local rollback を伴う `try`
 
-- Mir-0 includes `try` with local rollback semantics.
-- Rollback is local to the current `place` and may only revert state that has not crossed a finalizing cut.
+- Mir-0 は、local rollback semantics を持つ `try` を含む。
+- rollback は current `place` に局所であり、finalizing cut を越えていない state だけを巻き戻せる。
 - Mir-0 における `try` の rollback frontier は current `place` 内で閉じており、途中に `atomic_cut` があればそこで停止する。
-- Non-rollbackable effects must be prohibited inside the rollback region, isolated from it, or handled by explicit compensation.
-- Rollback is not a hidden control-flow trick; it is part of the explicit failure/effect semantics.
+- rollback 不可能な effect は rollback region の内部で禁止するか、そこから隔離するか、明示的 compensation で扱わなければならない。
+- rollback は隠れた control-flow trick ではなく、明示的な failure / effect semantics の一部である。
 
 ### 7. `atomic_cut`
 
-- Mir-0 includes `atomic_cut` as the minimum place-local finalizing cut primitive.
+- Mir-0 は、最小の place-local finalizing cut primitive として `atomic_cut` を含む。
 - Mir-0 において `atomic_cut` が確定するのは current `place` の rollback frontier だけである。
-- `atomic_cut` は単一プロセス全体の同期点、複数 `place` をまたぐ合意点、永続化完了点を意味しない。
-- Within a `place`, an `atomic_cut` creates an explicit decision boundary after which rollback may not pass.
-- `atomic_cut` の後で failure が表面化しても、同じ `place` の pre-cut 部分は rollback されない。以後は compensation、fallback、または明示的な failure として扱う。
-- Mir-0 fixes the rollback/finalization role of `atomic_cut`, but it does not use `atomic_cut` alone to decide persistence or distributed finalization semantics.
-- If later computation needs to account for pre-cut effects, it must do so through explicit continuation or compensation rather than implicit rollback across the cut.
+- `atomic_cut` は、単一 process 全体の同期点、複数 `place` をまたぐ合意点、永続化完了点を意味しない。
+- `place` の内部では、`atomic_cut` は rollback が通過できない明示的 decision boundary を作る。
+- `atomic_cut` の後で failure が表面化しても、同じ `place` の pre-cut 部分は rollback されない。以後は compensation、fallback、または明示的 failure として扱う。
+- Mir-0 は `atomic_cut` の rollback / finalization 上の役割を固定するが、それだけで persistence や distributed finalization の semantics を決めることはしない。
+- 後続計算が pre-cut effect を考慮する必要があるなら、implicit rollback across the cut ではなく、明示的 continuation または compensation を通じて扱わなければならない。
 
-### 8. Linear resources and monotone lifetime
+### 8. Linear resource と monotone lifetime
 
-- Mir-0 includes the minimum linear-resource discipline needed to prevent duplication by rollback, fallback, or later evolution machinery.
-- Ownership transfer must remain explicit.
-- Lifetime degradation is monotone.
-- Any later convenience layer must preserve these rules rather than weaken them.
+- Mir-0 は、rollback、fallback、後続の進化 machinery による duplication を防ぐために必要な最小 linear-resource discipline を含む。
+- ownership transfer は明示的でなければならない。
+- lifetime degradation は monotone である。
+- 後続の convenience layer は、これらの規則を弱めるのではなく保持しなければならない。
 
-## Topics intentionally outside Mir-0
+## Mir-0 の外に意図的に置く論点
 
 - `durable_cut` は Mir-0 に含めない。Mir-1 側では、`atomic_cut` に abstract persistence requirement を伴う durable commit guarantee を追加する cut vocabulary 候補として扱う。
 - `durable_cut` の最小意味は、successful として観測された pre-cut prefix が local rollback、process restart、route rebinding の後に未確定状態へ戻らないことである。Mir-1 はこの guarantee を意味づけるが、具体的な storage / replication / consensus mechanism は固定しない。
@@ -119,16 +123,17 @@ It includes only the primitives needed to state causality, explicit effects, rol
 - **未決定**: `barrier` が Mir-1 で独立語彙として本当に必要か、それとも他の ordering / cut 構成に吸収されるか。
 - **未決定**: `durable_cut` の persistence evidence をどの形式で観測・検証するか。
 - **未決定**: contract が durability を弱めた代替結果を本当に許す場合、その degraded path を `Approximate` としてどこまで許容するか。
-- **UNRESOLVED**: full fallback normalization and the complete algebra of preference chains.
-- **UNRESOLVED**: exact relationship between `emit`, effect handlers, and structured event routing.
-- **UNRESOLVED**: coroutine support, including suspension restrictions and interaction with cuts, rollback, and patching.
-- **UNRESOLVED**: overlay alias details, route rebinding details, and other Mirrorea-dependent safe-evolution mechanisms.
+- **UNRESOLVED**: fallback の完全 normalization と、preference chain の完全代数。
+- **UNRESOLVED**: `emit`、effect handler、structured event routing の正確な関係。
+- **UNRESOLVED**: suspension restriction と cut / rollback / patching との相互作用を含む coroutine support。
+- **UNRESOLVED**: overlay alias detail、route rebinding detail、およびその他の Mirrorea 依存の safe-evolution mechanism。
 
-These are still part of broader Mir design space, but they are not part of the minimum kernel being fixed in this pass.
+これらはより広い Mir の設計空間には属しているが、この段階で固定する最小 kernel には含めない。
 
-## What Mir is not
-- It is not the same thing as the deployment fabric.
-- It is not the same thing as the route / overlay control plane.
-- It is not a domain-specific media runtime.
-- It is not a virtual-reality engine.
-- It is not only a type system; it also includes operational boundaries and evolution rules.
+## Mir が何ではないか
+
+- それは deployment fabric と同一ではない。
+- それは route / overlay の制御プレーン（control plane）と同一ではない。
+- それは domain-specific media runtime ではない。
+- それは virtual reality engine ではない。
+- それは type system だけではなく、operational boundary と evolution rule も含む。

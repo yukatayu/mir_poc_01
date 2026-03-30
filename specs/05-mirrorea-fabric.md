@@ -1,49 +1,53 @@
 # 05 — Mirrorea Fabric
 
-## Purpose
+## 目的
 
-Mirrorea is the control-and-routing fabric that executes Mir-defined systems across real nodes and allows safe evolution under those semantics.
+Mirrorea は、Mir で定義された system を実ノード上で実行し、その意味論の下で安全に進化させるための制御・経路付け fabric である。
 
-## Main responsibilities
+## 主な責務
 
-1. **Logical names and routing**
-   - Clients talk to logical names.
-   - The physical route behind a logical name may change under controlled rules.
+1. **論理名と routing**
+   - client は logical name に対して話しかける。
+   - logical name の背後にある physical route は、制御されたルールの下で変更されうる。
 
 2. **Overlay insertion**
-   - A service may be wrapped by compatible overlays.
-   - Overlays may inspect, transform, log, rate-limit, authenticate, or reject, but they may not shadow a previously defined API.
+   - service は compatibility-preserving overlay で包まれうる。
+   - Overlay は inspect、transform、log、rate-limit、authenticate、reject を行ってよいが、以前に定義された API を shadow してはならない。
 
 3. **Patch application**
-   - The preferred model is downstream addition.
-   - Patch activation should happen at explicit cuts.
+   - 推奨モデルは downstream addition である。
+   - patch activation は明示的な cut で行われるべきである。
 
-4. **Path proof and audit**
-   - It should be possible to prove that a request passed through required overlays.
-   - Audit traces should explain route changes and execution history.
+4. **Path proof と audit**
+   - request が必要な overlay を通過したことを証明できるべきである。
+   - audit trace は route change と execution history を説明できなければならない。
 
-5. **Scaling and reconfiguration**
-   - Dynamic scaling and route rebinding should fit the same semantic discipline.
+5. **Scaling と再構成**
+   - dynamic scaling と route rebinding は、同じ意味論 discipline に適合しなければならない。
 
-## Already-discussed principles
+## すでに議論されている原則
 
 ### No shadowing
-A route or overlay may not make a previously reachable interface simply disappear as an untyped "no service" error.
-If a request is rejected, rejection must be representable inside the original or explicitly versioned contract space.
 
-### Compatibility-preserving overlays
-Current direction:
-- do not strengthen preconditions,
-- do not weaken guarantees,
-- do not worsen time/resource budgets without explicit contract change,
-- keep failure behavior inside an agreed failure space.
+route または overlay が、以前は到達可能だった interface を、型のない "no service" error として単純に消し去ってはならない。
+request が拒否される場合、その rejection は元の、あるいは明示的に version づけられた contract space の中で表現可能でなければならない。
 
-### Existing-system integration
-Mirrorea should be able to wrap legacy systems using tunnels/proxies/adapters.
-However, whether that is theoretically "inside" Mir or merely operational wrapping must be stated clearly in each case.
+### compatibility-preserving overlay
 
-## Important unresolved issues
+現時点の方向性:
 
-- How strongly route changes are tied to a single consensus mechanism (they should not be specified in that way).
-- How path proofs are represented and validated.
-- How in-flight coroutine/task state behaves across route change or patch activation.
+- precondition を強めない
+- guarantee を弱めない
+- 明示的な contract change なしに time / resource budget を悪化させない
+- failure behavior を合意された failure space の中に保つ
+
+### 既存システムとの統合
+
+Mirrorea は tunnel / proxy / adapter を用いて legacy system を包める（wrap できる）べきである。
+ただし、それが理論上 Mir の「内部」にあるのか、単なる operational wrapping なのかは、各ケースで明確に述べなければならない。
+
+## 重要な未解決事項
+
+- route change が単一の consensus mechanism にどれほど強く結びつくべきか（そのように仕様化すべきではない）。
+- path proof をどう表現し、どう検証するか。
+- in-flight coroutine / task state が route change や patch activation をまたぐときにどう振る舞うか。

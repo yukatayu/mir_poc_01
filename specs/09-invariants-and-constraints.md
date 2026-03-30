@@ -1,39 +1,39 @@
-# 09 — Invariants and Constraints
+# 09 — 不変条件と制約
 
-This document lists constraints that should be treated as strong unless and until explicitly revised.
+この文書は、明示的に改訂されるまでは強く扱うべき制約を列挙する。
 
-## Graph / causality invariants
+## グラフ / 因果の不変条件
 
-1. The semantic event structure is directed and acyclic.
-2. Cuts create explicit decision boundaries. Mir-0 では `atomic_cut` だけを最小の place-local cut primitive として扱う。`atomic_cut` は current `place` の rollback frontier を確定するが、単一プロセス全体・分散系・永続化の finalization は意味しない。`durable_cut` のような後段の cut vocabulary は scope を広げうるが、同じ explicit-finalization discipline を守らなければならない。
-3. If a mechanism would allow hidden backward edges in meaning, it is suspect by default.
+1. semantic event structure は有向かつ非循環である。
+2. cut は明示的 decision boundary を作る。Mir-0 では `atomic_cut` だけを最小の place-local cut primitive として扱う。`atomic_cut` は current `place` の rollback frontier を確定するが、単一 process 全体・分散系・永続化の finalization は意味しない。`durable_cut` のような後段の cut vocabulary は scope を広げうるが、同じ explicit-finalization discipline を守らなければならない。
+3. 意味の上で隠れた backward edge を許す mechanism は、既定では疑わしい。
 
-## Evolution invariants
+## 進化の不変条件
 
-4. Default evolution mode is downstream addition, not arbitrary upstream rewiring.
-5. API shadowing is forbidden as a default design rule.
-6. Compatibility-preserving overlays must not silently narrow domain behavior.
+4. 既定の進化モードは arbitrary upstream rewiring ではなく downstream addition である。
+5. API shadowing は既定設計規則として禁止される。
+6. compatibility-preserving overlay は domain behavior を黙って狭めてはならない。
 
-## Ownership / lifetime invariants
+## ownership / lifetime の不変条件
 
-7. Linear resources must not be duplicated by continuation tricks or patching tricks.
-8. Lifetime degradation is monotone.
-9. Preference / fallback chains, once fully formalized beyond primitive fallback, must normalize into an unambiguous monotone form.
+7. linear resource は continuation trick や patching trick によって duplication されてはならない。
+8. lifetime degradation は monotone である。
+9. primitive fallback を超えて完全に形式化された後の preference / fallback chain は、曖昧さのない monotone form へ正規化されなければならない。
 
-## Failure / rollback invariants
+## failure / rollback の不変条件
 
-10. Failure should remain semantically explicit.
-11. Rollback may not cross finalizing cuts unless transformed into compensation. Mir-0 では、これは current `place` 内の rollback が先行する `atomic_cut` を越えられないことを意味する。
-12. Non-rollbackable effects must be marked, isolated, or compensated.
+10. failure は意味論上明示的であり続けるべきである。
+11. rollback は、compensation へ変換されない限り finalizing cut を越えてはならない。Mir-0 では、これは current `place` 内の rollback が先行する `atomic_cut` を越えられないことを意味する。
+12. rollback 不可能な effect は mark するか、隔離するか、compensate しなければならない。
 
-## Integration invariants
+## 統合の不変条件
 
-13. PrismCascade runtime internals must not be forced into Mir runtime semantics if doing so would weaken Prism's planning guarantees.
-14. Legacy integration must state clearly which guarantees remain inside Mir semantics and which do not.
-15. Engine-specific concepts must not leak into core language semantics.
+13. PrismCascade runtime の内部は、その planning guarantee を弱めるなら Mir runtime semantics に押し込んではならない。
+14. legacy integration では、どの guarantee が Mir semantics の内部に残り、どれが残らないかを明確に記述しなければならない。
+15. engine-specific concept は core language semantics に漏れ込んではならない。
 
-## Tooling invariants
+## tooling の不変条件
 
-16. Any major design change should have a report.
-17. Specs must say what is unresolved.
-18. Visual tools must be explainable from the same underlying graph/contract model, not from ad-hoc hidden state.
+16. 主要な設計変更には report があるべきである。
+17. specs は何が未解決かを記さなければならない。
+18. visual tool は、ad-hoc な hidden state ではなく、同じ graph / contract model から説明可能でなければならない。

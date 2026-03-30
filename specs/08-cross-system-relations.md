@@ -1,46 +1,51 @@
-# 08 — Cross-System Relations
+# 08 — システム横断関係
 
-## Summary
+## 要約
 
-This project currently contains at least three major conceptual systems:
+このプロジェクトには現在、少なくとも三つの主要な概念システムがある。
 
-1. Mir / Mirrorea,
-2. PrismCascade,
-3. the Typed-Effects Wiring Platform.
+1. Mir / Mirrorea
+2. PrismCascade
+3. Typed-Effects Wiring Platform
 
-They are related but should not be collapsed into one undifferentiated runtime.
+これらは関連していますが、未分化な 1 つの runtime に潰してはなりません。
 
-## A useful division of concerns
+## 有用な関心事の分割
 
 ### Mir / Mirrorea
-- semantic core of distributed computation,
-- contracts, ownership, lifetimes, cuts, overlays, safe evolution,
-- logical routing and audit.
+
+- 分散計算の意味論核
+- contract、ownership、lifetime、cut、overlay、安全な進化
+- 論理 routing と audit
 
 ### PrismCascade
-- time-series media graph kernel,
-- Meta/Core/Runtime separation,
-- scheduling and memory planning,
-- live/offline distinction.
+
+- 時系列メディア graph カーネル
+- Meta / Core / Runtime 分離
+- scheduling と memory planning
+- live / offline distinction
 
 ### Typed-Effects Wiring Platform
-- typed effect boundary representation,
-- rewritable routes,
-- observability and state↔event graphing,
-- legacy integration.
 
-## Shared foundations
-All three projects care about:
-- explicit effects,
-- visibility of dependency and causality,
-- replaceability and compatibility,
-- the need to separate normative semantics from implementation choice.
+- typed effect boundary representation
+- rewritable route
+- observability と state↔event graphing
+- legacy integration
 
-## Recommended relationship
+## 共有基盤
 
-- Keep them separate in implementation.
-- Share only what must be shared:
-  - identifiers,
-  - contract syntax or schemas where useful,
-  - trace linking strategy,
-  - effect vocabulary where compatible.
+三つの project はいずれも次を重視する。
+
+- 明示的 effect
+- dependency と causality の可視性
+- replaceability と compatibility
+- 規範的 semantics と implementation choice を分離する必要
+
+## 推奨される関係
+
+- 実装では分離したまま保つ。
+- 共有は本当に必要なものに限る:
+  - identifier
+  - 必要に応じた contract syntax または schema
+  - trace linking strategy
+  - 互換性がある範囲での effect vocabulary

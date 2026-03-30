@@ -1,44 +1,47 @@
 # 07 — Typed-Effects Wiring Platform
 
-## Purpose
+## 目的
 
-The Typed-Effects Wiring Platform is a separate but closely related project idea.
-Its role is to make external effects visible, typed, contract-aware, and rewritable at the operational layer.
+Typed-Effects Wiring Platform は、分離されているが密接に関連した project idea である。
+その役割は、外部 effect を operational layer で可視化し、型づけし、contract-aware にし、rewritable にすることにある。
 
-## Core idea
+## 中核アイデア
 
-A program or container should declare, or be wrapped into a form that exposes:
-- what effects it may perform,
-- what data shape those effects have,
-- what contracts those effects obey,
-- and where those effects are routed.
+program または container は、次を露出する形で宣言されるか、または包まれるべきである。
 
-## What it is not
+- どの effect を実行しうるか
+- それらの effect がどの data shape を持つか
+- それらの effect がどの contract に従うか
+- それらの effect がどこへ route されるか
 
-It is not the same thing as Mir's language semantics.
-It is not merely a logger.
-It is not merely a service mesh.
-It is a conceptual layer for typed effect routing, inspection, and rewiring.
+## それが何ではないか
 
-## Relationship to Mir
+これは Mir の言語意味論そのものではない。
+これは単なる logger ではない。
+これは単なる service mesh ではない。
+これは typed effect routing / inspection / rewiring のための概念層である。
 
-Mir can be seen as the semantic language that defines effects and contracts.
-The Typed-Effects Wiring Platform can be seen as a lower or adjacent operational layer that:
-- observes effect boundaries,
-- routes or rewires them,
-- records their relation to state and event histories,
-- supports integration of non-Mir systems.
+## Mir との関係
 
-## Relationship to PrismCascade
+Mir は、effect と contract を定義する意味論言語として捉えられる。
+Typed-Effects Wiring Platform は、より低位、または隣接する operational layer として次を担う。
 
-PrismCascade can use this platform for:
-- Meta-layer services,
-- remote execution requests,
-- trace linkage,
-- controlled integration with external systems.
+- effect boundary の観測
+- それらの routing または rewiring
+- state と event history との関係の記録
+- 非 Mir system の統合支援
 
-## Open questions
+## PrismCascade との関係
 
-- Whether this should be considered part of Mirrorea or a separate subsystem under it.
-- How much of its contract language should literally reuse Mir syntax.
-- How to represent unknown/opaque effects without giving up safety entirely.
+PrismCascade はこの platform を次のために利用できる。
+
+- Meta-layer service
+- remote execution request
+- trace linkage
+- 外部 system との制御された統合
+
+## 開かれた問い
+
+- これを Mirrorea の一部とみなすべきか、それともその下の別 subsystem とみなすべきか。
+- その contract language のどこまでを Mir syntax と文字どおり再利用すべきか。
+- unknown / opaque effect を、安全性を完全には捨てずにどう表現するか。
