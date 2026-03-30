@@ -49,10 +49,11 @@
 - `specs/00-document-map.md` に最小の用語方針 section を追加し、何を日本語正本にし、何を formal token / 原語保持にするかを明文化した。
 - `specs/01-charter-and-decision-levels.md`、`specs/03-layer-model.md`、`specs/05-mirrorea-fabric.md`、`specs/12-decision-register.md` の語彙を上の方針に合わせて整えた。
 - `docs/reports/0016-japanese-canonicalization-and-semantic-drift-check.md` から、`## 8. Suggested next prompt` の後ろに重複混入していた断片を除去した。
-- `reviewer` は最後に 2 回起動したが、いずれも待機時間内に結果を回収できなかったため、代替として手元 diff 監査、`git diff --check`、`validate_docs.py` を採用した。
+- `reviewer` は最後に 2 回起動した。待機時間内には結果を回収できなかったため、いったん手元 diff 監査、`git diff --check`、`validate_docs.py` を採用し、その後に返ってきた asynchronous completion を最終結果として追記した。
 - commit は 2 段に分ける方針を採った。
   - 1 本目は、task-start dirty state に含まれていた仕様文書群と既存 report 群を、今回の整流済み状態で基準点として記録する。
   - 2 本目は、reviewer 指摘への追補修正とこの監査 report を記録する。
+  - 3 本目は、遅延到着した reviewer の `no findings` をこの report に追記する。
 
 作業開始時に確認した既存 dirty state:
 
@@ -203,6 +204,14 @@ fatal: failed to write commit object
 {"status":{},"timed_out":true}
 ```
 
+9. 遅延到着した `reviewer` 完了通知
+
+```text
+no findings
+
+今回の対象範囲では、用語方針と現行表現の齟齬は解消されています。`0016` も翻訳 pass の記録であることと、用語方針追加と cross-reference 整流は後続の `0017` task として別扱いにすることが明記されており、後続 task との混同は解消されています。
+```
+
 ## 6. 証拠 / 所見
 
 用語統一の方針:
@@ -247,7 +256,7 @@ semantic drift を起こしていないと判断した根拠:
 - `git diff --check` が無出力だった。
 - `validate_docs.py` が通過した。
 - `0016` の heading scan で section numbering が 1〜8 の単系列に戻ったことを確認した。
-- reviewer は 2 回とも timeout で結果を回収できなかったため、外部 review 証跡は得られていない。
+- reviewer は待機中には 2 回 timeout したが、最終的には `no findings` が返り、用語方針と現行表現の齟齬が解消していることを確認できた。
 
 add / commit の粒度:
 
@@ -258,6 +267,9 @@ add / commit の粒度:
 - 2 本目の commit
   - メッセージ: `用語統一監査と追補修正を記録する`
   - 内容: reviewer 指摘を受けた追補修正と、この `0017`
+- 3 本目の commit
+  - メッセージ: `reviewer結果を監査レポートに追記する`
+  - 内容: 遅延到着した reviewer の `no findings` を `0017` に追記する
 
 **AMBIGUOUS**:
 
@@ -276,7 +288,6 @@ add / commit の粒度:
 
 ## 8. 未解決事項
 
-- reviewer が 2 回とも timeout したため、表現統一に対する外部レビュー証跡は今回得られていない。
 - `wrap`, `fabric`, `kernel`, `runtime` のような subsystem 境界に近い語を、将来さらに日本語へ寄せるべきかは **AMBIGUOUS** である。
 - `0016` は重複断片を除去して読める形に戻したが、template 順の完全整列まで行うかは今回のスコープ外とした。
 
