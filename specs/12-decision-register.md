@@ -6,7 +6,7 @@
 |---|---|---|---|---|
 | D-001 | 全体アーキテクチャ | Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform を分離しつつ相互運用可能に保つ | L1 | 中核的なアーキテクチャ上の立場 |
 | D-002 | 中核実装言語 | core implementation には Rust を優先する | L2 | 推奨であり、法ではない |
-| D-003 | Graph evolution | 既定の進化規則として downstream / leaf-style patching を優先する | L0/L1 | 強い基盤制約 |
+| D-003 | Graph evolution | 既定の進化規則として downstream addition / leaf-style patching を優先する | L0/L1 | 強い基盤制約 |
 | D-004 | API evolution | silent shadowing を禁止し、compatibility-preserving overlay のみを許可する | L0/L1 | 安全な進化の中心 |
 | D-005 | Failure handling | failure を明示的かつ構造化されたまま保つ | L0/L1 | 正確な形式化はなお refinement 中 |
 | D-006 | Prism runtime placement | PrismCascade runtime を Mir runtime から分離して保つ | L1 | 統合は明示的 boundary で行うべき |

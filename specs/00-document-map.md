@@ -58,8 +58,11 @@
   - `control plane` は各文書の初出で「制御プレーン（control plane）」と併記してよい。
 - formal token / 原語保持を優先する語:
   - `downstream addition`
+    - 文脈により `downstream-only patching` や `leaf-style patching` といった局所表現を使う場合があるが、既定の進化方向を指す語幹として扱う。
   - `compatibility-preserving overlay`
+    - 日本語 prose では「互換性を保つ overlay」と説明してよいが、formal token としてはこの形を優先する。
   - `wrap`
+    - 日本語 prose では「包む」と書いてよいが、legacy integration や boundary operation を指すときは `wrap` を残してよい。
   - `fabric`
   - `kernel`
   - `runtime`

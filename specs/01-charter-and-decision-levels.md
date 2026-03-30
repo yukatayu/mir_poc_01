@@ -39,8 +39,8 @@
 例:
 
 - Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform を分離しつつ相互運用可能に保つこと
-- downstream-only patching を既定の進化規則とすること
-- 互換性保存 overlay
+- downstream addition を既定の進化規則とすること
+- compatibility-preserving overlay
 
 ### L2 — 設計提案
 

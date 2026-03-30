@@ -16,6 +16,7 @@
 - `specs/10-open-questions.md` と `specs/12-decision-register.md` は作業開始時点ですでに dirty state だったため、`HEAD` ではなく作業開始時の workspace 内容を正本として扱った。
 - formal token、identifier、decision ID、L0〜L3 ラベル、failure lattice の名前、`atomic_cut` / `durable_cut` / `place` などの形式語彙は保持し、説明文だけを日本語化した。
 - 空の report template がこのセッション中に `0017` と `0018` として生成されたため、最終成果物を 1 本に保つため削除した。
+- この report は 0016 時点の翻訳 pass を記録する。後続の用語方針追加と cross-reference 整流は `0017` の task として別扱いにする。
 
 ## 3. 参照文書
 
@@ -236,7 +237,7 @@ semantic drift の危険が高かった箇所:
 - `compatibility-preserving overlay`
   - 型互換、contract 互換、時間資源上の互換のどこまでを含むかが文書横断で分散している。
 - `wrap`
-  - 「包む」で統一したが、legacy integration では operational wrapping の含意が残るため、完全な日本語等価ではない可能性がある。
+  - 日本語説明では「包む」を使うが、boundary operation を指す formal token として `wrap` を残す箇所もあり、完全な一語統一にはしていない。
 - `fabric`
   - 「基盤」と訳すと implementation substrate に寄りすぎ、「fabric」を残すと抽象度が高い。今回は subsystem 名に近い箇所では原語を維持した。
 
