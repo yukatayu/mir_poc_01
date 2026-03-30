@@ -11,7 +11,10 @@
    - write は current option の contract が許すときだけ成立し、write-capable option の `lease` が期限切れた後は、後段の write-capable option への explicit fallback がない限り `Reject` として扱う。
    - canonical normalization の最小 law は left-to-right flattening であり、`fallback(x, y)` は `canon(x) ++ canon(y)` として canonical chain へ畳む。ただし同じ logical access path / semantic lineage を共有し、後段が monotone degradation を保つ場合に限る。
    - canonical form が一意に表すのは候補の優先順と各候補の guard / contract / capability であり、元の nested syntax の内側 / 外側そのものではない。
-   - **未決定**: `lease` / `GuardedRef` の最終 surface syntax、preference chain の完全代数、redundant option の collapse rule、incompatible branch をどの段階で拒否するかという static capability rule、`lease` 期限切れの dedicated observation surface。
+   - incompatible branch の最小分類は、same logical access path / semantic lineage を共有しない branch、monotone degradation を壊す branch、declared contract surface / capability surface だけで contract-compatible fallback successor になれない branch である。
+   - これらの incompatibility が declared target / lineage / contract / capability だけで判定できる場合、その nested fallback は evaluation に入る前に static rejection する。canonical chain を作った後の runtime `Reject` に落として hidden repair してはならない。
+   - 逆に canonical chain 自体が well-formed であり、current evaluation で `lease` 期限切れ、`require` 不成立、explicit failure、write-after-expiry 後の後段不在が起きる場合は、従来どおり dynamic `Reject` に残す。
+   - **未決定**: `lease` / `GuardedRef` の最終 surface syntax、preference chain の完全代数、redundant option の collapse rule、same logical access path / semantic lineage を static に証明する最小証拠、contract-compatible fallback successor を static に判定する最小規則、mixed case を static rejection と dynamic `Reject` のどちらに寄せるか、`lease` 期限切れの dedicated observation surface。
 2. `durable_cut` は Mir-0 に含めない。Mir-1 側では、`atomic_cut` に abstract persistence requirement を伴う durable commit guarantee を追加する cut vocabulary 候補として扱う。
    - 最小意味に含めるのは、successful として観測された pre-cut prefix が local rollback / process restart / route rebinding の後に未確定へ戻らないことを要求する durable commit guarantee である。
    - persistence はその guarantee を支える abstract requirement として前提するが、具体的な storage / replication / consensus mechanism は Mir-1 では固定しない。
