@@ -110,6 +110,26 @@ Mirrorea 固有、Prism 固有の machinery を持ち込まずに、因果、明
 - lifetime degradation は monotone である。
 - 後続の convenience layer は、これらの規則を弱めるのではなく保持しなければならない。
 
+## fallback / preference chain / `lease` の最小意味（L2）
+
+この節は、Mir-0 を広げずに、primitive fallback と monotone lifetime から導かれる**より広い Mir の現在の最小読解**を L2 として記録する。
+Mir-0 に残るのは従来どおり primitive fallback と monotone lifetime であり、ここで述べるのは、その先の正規形と guard の暫定的な最小解釈である。
+
+- fallback 付き参照、または guarded reference は、1 つの論理的な access path に対して、有限個の contract-compatible option を優先順で結びつけたものとして読む。
+- 各 option は、少なくとも access target、許可された contract surface、そしてその option がまだ利用可能かを決める lifetime guard を持つ。
+- この lifetime guard を本文では `lease` と呼ぶ。`lease` は later cut vocabulary や新しい failure class ではなく、ある option の lifetime がまだ有効かどうかを定める guard に留まる。
+- `GuardedRef` のような convenience vocabulary を将来導入する場合でも、その意味は「reference と、それに付随する guarded option chain」の sugar として解釈されるべきであり、独立した core primitive を増やすものではない。
+- preference chain は一次 primitive ではなく、nested fallback を曖昧さなく書き下した正規形として扱う。`A > B > C` は、「`A` が explicit failure または monotone degradation で使えなければ `B`、さらに使えなければ `C`」という意味に読む。
+- したがって fallback の推移律は、`A > B` と `B > C` が同じ論理的 access path 上の monotone degradation を表している限り、`A > B > C` への正規化が nested fallback と同じ outcome discipline を保つ、という**最小読解**でだけ扱う。
+- chain の各段は、それより前の option から見て同等以下の guarantee しか持たない monotone degradation でなければならない。より強い capability への再昇格は許されない。
+- `lease` の期限切れは、その option が以後の評価で success-side choice になれないことを意味する。期限切れは monotone degradation の一種であり、同じ semantic lineage の後段からその option を再び有効化してはならない。
+- `try` の local rollback は current `place` の state を巻き戻せても、期限切れた `lease` や、すでに確定した degradation order を復活させてはならない。rollback は local state に作用するのであって、monotone lifetime order を逆転させるものではない。
+- `atomic_cut` も `lease` を生成したり解除したりしない。`atomic_cut` の前後を問わず、期限切れや degradation で後段 option へ進んだなら、その lineage で earlier option へ暗黙に戻ってはならない。
+- 書き込みは、現在選ばれている option の contract が write を許す場合にだけ成立する。より後段の option が read-only なら、fallback によって write capability も単調に弱くなりうる。
+- write-capable option の `lease` が期限切れた場合、その option への write は成功してはならない。後段に write を許す option があり、かつ contract がその degrade を許すなら明示的 fallback でそちらへ進める。そうでなければ結果は explicit `Reject` である。
+- 期限切れ後の write を hidden buffering や hidden resurrection で吸収してはならない。必要なら explicit fallback、explicit compensation、または explicit failure として可視でなければならない。
+- 後段 option での成功が元の option より弱い guarantee を持つなら、その outcome は contract が許す範囲でのみ admissible である。正確に `Success` / `Approximate` のどちらへ分類するかは contract surface に従う。
+
 ## Mir-0 の外に意図的に置く論点
 
 - `durable_cut` は Mir-0 に含めない。Mir-1 側では、`atomic_cut` に abstract persistence requirement を伴う durable commit guarantee を追加する cut vocabulary 候補として扱う。
@@ -123,7 +143,9 @@ Mirrorea 固有、Prism 固有の machinery を持ち込まずに、因果、明
 - **未決定**: `barrier` が Mir-1 で独立語彙として本当に必要か、それとも他の ordering / cut 構成に吸収されるか。
 - **未決定**: `durable_cut` の persistence evidence をどの形式で観測・検証するか。
 - **未決定**: contract が durability を弱めた代替結果を本当に許す場合、その degraded path を `Approximate` としてどこまで許容するか。
-- **UNRESOLVED**: fallback の完全 normalization と、preference chain の完全代数。
+- **未決定**: `lease` を surface syntax / contract language でどの token にするか。また `GuardedRef` のような convenience vocabulary を本当に導入するか。
+- **未決定**: preference chain の完全 normalization law、full algebra、static capability rule をどこまで固定するか。
+- **未決定**: `lease` 期限切れの観測面を dedicated event として持つか、それとも fallback / failure 側の既存 event だけで表すか。
 - **UNRESOLVED**: `emit`、effect handler、structured event routing の正確な関係。
 - **UNRESOLVED**: suspension restriction と cut / rollback / patching との相互作用を含む coroutine support。
 - **UNRESOLVED**: overlay alias detail、route rebinding detail、およびその他の Mirrorea 依存の safe-evolution mechanism。
