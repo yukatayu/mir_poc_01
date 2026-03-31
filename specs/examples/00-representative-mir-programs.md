@@ -13,14 +13,16 @@
 
 - `place name { ... }`
   - current `place` を入れ子で示す説明用記法である。
-- `perform op[...]`
-  - 最小 effect request operation を示す説明用記法である。`perform` 自体は最終予約語として未決定である。
-- `candidate[target=..., capability=..., lease=...]`
-  - fallback / preference chain の候補を簡潔に書くための説明用 shorthand である。候補宣言の最終 syntax は未決定である。
-- `fallback(A, B) @ lineage(A -> B)`
-  - current L2 の `documented lineage annotation` を添えた説明用記法である。`lineage(...)` は例示であり、最終 token ではない。
+- `perform op on target` / `perform op via chain_ref`
+  - `perform` と direct target / option chain 参照の current L2 候補である。最終 reserved keyword は未決定である。
+- `option name on target capability cap lease guard`
+  - option declaration の current L2 候補である。`declared access target`、最小 capability surface、lifetime guard を inline で置く。
+- `chain ref = head` と、それに続く `fallback successor @ lineage(predecessor -> successor)`
+  - canonical form を examples で書くための current L2 候補である。`lineage(...)` は例示であり、最終 token ではない。
 - `try { ... } fallback { ... }`
   - current `place` に局所な rollback を伴う `try` と、その後段の explicit fallback をまとめて示す説明用 shorthand である。正確な surface syntax は未決定である。
+
+より詳しい候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md` を参照。
 
 ## 例の一覧
 
@@ -41,18 +43,14 @@
 place root {
   place session {
     place authority_cell {
-      perform update_authority[
-        target=profile_authority,
-        require=write,
-        ensure=owner_is(session_user)
-      ]
+      perform update_authority on profile_authority
+        require write
+        ensure owner_is(session_user)
 
       atomic_cut
 
-      perform append_audit[
-        target=authority_log,
-        require=append
-      ]
+      perform append_audit on authority_log
+        require append
     }
   }
 }
@@ -94,20 +92,14 @@ place root {
   place session {
     place draft_profile {
       try {
-        perform stage_profile_patch[
-          target=profile_draft,
-          require=write
-        ]
+        perform stage_profile_patch on profile_draft
+          require write
 
-        perform validate_profile_patch[
-          target=profile_draft,
-          require=well_formed
-        ]
+        perform validate_profile_patch on profile_draft
+          require well_formed
       } fallback {
-        perform load_last_snapshot[
-          target=profile_snapshot,
-          require=read
-        ]
+        perform load_last_snapshot on profile_snapshot
+          require read
       }
     }
   }
@@ -152,21 +144,16 @@ place root {
 place root {
   place session {
     place profile_access {
-      primary[target=profile_doc, capability=write, lease=live]
-      mirror[target=profile_doc, capability=write, lease=live]
-      readonly[target=profile_doc, capability=read, lease=live]
+      option primary on profile_doc capability write lease live
+      option mirror on profile_doc capability write lease live
+      option readonly on profile_doc capability read lease live
 
-      profile_ref =
-        fallback(
-          fallback(primary, mirror) @ lineage(primary -> mirror),
-          readonly
-        ) @ lineage(mirror -> readonly)
+      chain profile_ref = primary
+        fallback mirror @ lineage(primary -> mirror)
+        fallback readonly @ lineage(mirror -> readonly)
 
-      perform read_profile[
-        target=profile_doc,
-        via=profile_ref,
-        require=read
-      ]
+      perform read_profile via profile_ref
+        require read
     }
   }
 }
@@ -179,6 +166,7 @@ place root {
   - 3 候補は同じ `declared access target` を共有している。
   - edge-local な `documented lineage annotation` が `primary -> mirror` と `mirror -> readonly` をそれぞれ明示している。
   - capability は `write -> write -> read` と単調に弱くなる側へしか進んでいない。
+  - この例では capability だけで successor compatibility を説明できるため、追加の option-local contract clause を省略しても underdeclared にはしない。
 
 ### 期待される runtime outcome
 
@@ -209,12 +197,12 @@ place root {
 place root {
   place session {
     place profile_access {
-      primary[target=profile_doc, capability=read, lease=live]
-      mirror[target=profile_doc, capability=read, lease=live]
-      archive[target=profile_doc, capability=read, lease=live]
+      option primary on profile_doc capability read lease live
+      option mirror on profile_doc capability read lease live
+      option archive on profile_doc capability read lease live
 
-      profile_ref =
-        fallback(primary, mirror) @ lineage(primary -> archive)
+      chain profile_ref = primary
+        fallback mirror @ lineage(primary -> archive)
     }
   }
 }
@@ -246,11 +234,11 @@ place root {
 place root {
   place session {
     place profile_access {
-      primary[target=profile_doc, capability=read, lease=live]
-      mirror[target=profile_doc, capability=read, lease=live]
+      option primary on profile_doc capability read lease live
+      option mirror on profile_doc capability read lease live
 
-      profile_ref =
-        fallback(primary, mirror)
+      chain profile_ref = primary
+        fallback mirror
     }
   }
 }
@@ -282,17 +270,14 @@ place root {
 place root {
   place session {
     place profile_access {
-      writer[target=profile_doc, capability=write, lease=expired]
-      readonly[target=profile_doc, capability=read, lease=live]
+      option writer on profile_doc capability write lease expired
+      option readonly on profile_doc capability read lease live
 
-      profile_ref =
-        fallback(writer, readonly) @ lineage(writer -> readonly)
+      chain profile_ref = writer
+        fallback readonly @ lineage(writer -> readonly)
 
-      perform write_profile[
-        target=profile_doc,
-        via=profile_ref,
-        require=write
-      ]
+      perform write_profile via profile_ref
+        require write
     }
   }
 }
@@ -304,6 +289,7 @@ place root {
 - 理由:
   - declared target と edge-local lineage annotation はそろっている。
   - capability は `write -> read` と単調に弱くなる方向であり、chain 自体は well-formed である。
+  - current request は `require write` だけであり、追加の option-local contract clause がなくても runtime `Reject` の読みは保てる。
 
 ### 期待される runtime outcome
 
@@ -325,13 +311,13 @@ place root {
 
 ## 書いてみて見えた current L2 の穴
 
-- `perform`、候補宣言、`via=...`、`try { ... } fallback { ... }` の exact surface syntax はまだ足りない。
-- fallback / preference chain は current L2 の理論では十分に説明できるが、手で書くと candidate declaration と annotation の書式が未固定で、長くなりやすい。
+- `perform` と option chain 参照については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。
+- それでも `try { ... } fallback { ... }` の exact sugar、richer な option-local contract surface、`lineage(...)` の最終 token はまだ足りない。
 - `place` を入れ子で書く方式は例示には十分だが、cross-place transfer や same-place / cross-place の surface rule にはまだ補助 syntax が必要になる可能性がある。
 - `emit` や coroutine は今回の代表例には不要だった。ただし long-lived interaction や stream 的 trace を例示し始めると、将来は別文書で必要になる可能性が高い。
 
 ## ここで決めていないこと
 
 - ここで使った code block はすべて説明用記法であり、parser 実装用の最終 syntax ではない。
-- `documented lineage annotation` の token 形、candidate declaration の token 形、`try` / `fallback` の exact sugar は **未決定** である。
+- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` を最終 reserved keyword にするかどうか、`try` / `fallback` の exact sugar は **未決定** である。
 - cross-place 版の representative programs は今回含めない。cut family や same-place / cross-place syntax の未決定を、ここで勝手に埋めないためである。

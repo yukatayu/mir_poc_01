@@ -66,6 +66,9 @@
    - 未決定なのは、`quorum-like` を将来の Mir-1 拡張 profile として本当に採用するか、`all_of` の per-place evidence 参照を event surface にどこまで露出するか、local evidence と distributed outcome の関係をどこまで Mir-1 で語るか、timeout-like closure や policy-driven closure を Mir-1 の独立語彙に引き上げる必要が将来あるか、coverage state の三状態を将来 Mir-1 の独立語彙や contract language に引き上げる必要があるか、`reason_ref` 相当の参照語彙を Mir-1 で標準化する必要があるか、snapshot の複数時点比較を Mir-1 で語る必要があるか、audit の粒度を per-place / per-attempt / per-prefix のどこまで固定するか、将来 profile family が増えたときに aggregate evidence / aggregate failure justification / audit minimum requirements / snapshot semantics の意味差分をどこまで先に固定するか、`Approximate` を許す contract 条件である。
 3. `barrier` は Mir-0 に含めない。Mir-1 に残すとすれば ordering primitive 候補であり、commit-like primitive として扱うべきではない。未決定なのは、独立語彙として残す価値が本当にあるかどうかである。
 4. `perform` は現時点では最小 effect request operation の説明用記法であり、Mir-0 の規範的な表面構文として採用するかどうかは未決定である。
+   - current L2 の representative examples では、direct target に対して `perform op on target`、option chain に対して `perform op via chain_ref` という companion syntax 候補を使ってよい。
+   - ただしこれは examples 用の安定した表記候補であり、`perform`、`on`、`via` を最終 reserved keyword として固定する判断ではない。
+   - option chain 側の候補書式として `option name on target capability cap lease guard` と `chain ref = head` / `fallback successor @ lineage(...)` を current L2 で使ってよいが、これも final parser syntax ではない。
 5. `emit`、effect handler、structured event routing の正確な関係。
 6. final coroutine model:
    - one-shot と multi-shot のどちらか

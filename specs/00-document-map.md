@@ -24,6 +24,9 @@
   - current L2 の representative Mir programs をまとめた例示文書。
   - parser / interpreter を固定するものではなく、コード片ごとの static 判定、runtime outcome、最小 trace 説明を揃えるための補助正本である。
   - `specs/04-mir-core.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md` を読んだ後に参照すると、現時点で何が自然に書けるかを追いやすい。
+- `specs/examples/01-current-l2-surface-syntax-candidates.md`
+  - representative examples で使う `perform` と option chain 参照の current L2 候補書式をまとめた補助文書。
+  - final parser syntax や reserved keyword を固定するものではなく、examples 用の安定した companion notation を示す。
 
 ## 各文書の役割
 
@@ -53,6 +56,8 @@
   - 現在の主要判断と、その強度レベル。
 - `specs/examples/00-representative-mir-programs.md`
   - current L2 の representative Mir program と、その static 判定 / runtime outcome / trace の最小読解。
+- `specs/examples/01-current-l2-surface-syntax-candidates.md`
+  - current L2 の representative examples で使う最小 surface syntax 候補。
 
 ## レポート
 
