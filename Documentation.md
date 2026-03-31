@@ -72,7 +72,7 @@ flowchart LR
 4. 次に `specs/03-layer-model.md` と `specs/09-invariants-and-constraints.md`
 5. その後、必要な subsystem に進む
 6. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
-7. その examples で使う `perform`、option chain 参照、`try` / `fallback` の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
+7. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
 8. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート

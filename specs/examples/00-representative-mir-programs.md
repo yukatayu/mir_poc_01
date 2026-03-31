@@ -15,12 +15,16 @@
   - current `place` を入れ子で示す説明用記法である。
 - `perform op on target` / `perform op via chain_ref`
   - `perform` と direct target / option chain 参照の current L2 候補である。最終 reserved keyword は未決定である。
+- `require pred` / `ensure pred`
+  - 直前の `perform` に付く statement-local clause の current L2 候補である。`contract` は semantic role の名前であり、examples では独立 keyword にしない。
 - `option name on target capability cap lease guard`
   - option declaration の current L2 候補である。`declared access target`、最小 capability surface、lifetime guard を inline で置く。
 - `chain ref = head` と、それに続く `fallback successor @ lineage(predecessor -> successor)`
   - canonical form を examples で書くための current L2 候補である。`lineage(...)` は例示であり、最終 token ではない。
 - `try { ... } fallback { ... }`
   - current `place` に局所な rollback を伴う `try` の block form と、その直後に置かれる explicit fallback branch の current L2 候補である。最終 keyword と punctuation は未決定である。
+- blank line
+  - readability のための区切りであり、独立した意味論 token としては扱わない。statement の切れ目は block structure、dedent、行頭 keyword で読む。
 
 より詳しい候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md` を参照。
 
@@ -63,6 +67,7 @@ place root {
   - `place` の入れ子は current Mir-0 / L2 と矛盾しない。
   - `atomic_cut` は current `place` の rollback frontier を確定する最小 cut として使われている。
   - `perform` は説明用記法であり、ここでは effect / contract / cut の関係を見るために使っている。
+  - `require` / `ensure` は `update_authority` に付く statement-local clause として読み、blank line は `atomic_cut` 前後の読みやすさのためだけに置いている。
 
 ### 期待される runtime outcome
 
@@ -311,13 +316,13 @@ place root {
 
 ## 書いてみて見えた current L2 の穴
 
-- `perform`、option chain 参照、local `try` / `fallback` については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。
-- それでも `try` / `fallback` の最終 keyword と punctuation、richer な option-local contract surface、`lineage(...)` の最終 token はまだ足りない。
+- `perform`、statement-local `require` / `ensure`、option chain 参照、local `try` / `fallback` については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。
+- それでも `try` / `fallback` の最終 keyword と punctuation、`contract` を独立 block にするかどうか、richer な option-local contract surface、`lineage(...)` の最終 token はまだ足りない。
 - `place` を入れ子で書く方式は例示には十分だが、cross-place transfer や same-place / cross-place の surface rule にはまだ補助 syntax が必要になる可能性がある。
 - `emit` や coroutine は今回の代表例には不要だった。ただし long-lived interaction や stream 的 trace を例示し始めると、将来は別文書で必要になる可能性が高い。
 
 ## ここで決めていないこと
 
 - ここで使った code block はすべて説明用記法であり、parser 実装用の最終 syntax ではない。
-- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` / `try` / `fallback` を最終 reserved keyword にするかどうか、`try` / `fallback` の式形式や追加 sugar は **未決定** である。
+- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` / `try` / `fallback` / `contract` を最終 reserved keyword にするかどうか、`try` / `fallback` の式形式や追加 sugar、`require` / `ensure` の最終 punctuation は **未決定** である。
 - cross-place 版の representative programs は今回含めない。cut family や same-place / cross-place syntax の未決定を、ここで勝手に埋めないためである。

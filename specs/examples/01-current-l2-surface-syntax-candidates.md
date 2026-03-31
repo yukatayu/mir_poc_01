@@ -1,13 +1,13 @@
 # examples/01 — current L2 surface syntax candidates
 
 この文書は、`specs/examples/00-representative-mir-programs.md` で使う**current L2 の最小 surface syntax 候補**をまとめる補助文書である。
-ここで整理するのは、`perform`、option chain 参照、`try` / `fallback` に関する**書き方の候補**だけであり、Mir-0 / Mir-1 / Mirrorea の境界や、canonical normalization law、rejection phase、static evidence floor、underdeclared handling 自体は変更しない。
+ここで整理するのは、`perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、statement separator / block nesting に関する**書き方の候補**だけであり、Mir-0 / Mir-1 / Mirrorea の境界や、canonical normalization law、rejection phase、static evidence floor、underdeclared handling 自体は変更しない。
 
 ## この文書の位置づけ
 
 - current L2 の representative examples を、過度に ad-hoc ではない一定の書式で読めるようにする。
 - parser-ready な最終 grammar や reserved keyword 集合は固定しない。
-- `perform`、option declaration、chain 参照、`try` / `fallback` のうち、current L2 で最も摩擦の少ない最小表記だけを候補として置く。
+- `perform`、option declaration、chain 参照、`try` / `fallback`、statement-local clause、block nesting のうち、current L2 で最も摩擦の少ない最小表記だけを候補として置く。
 
 ## current L2 の最小候補
 
@@ -23,9 +23,23 @@ perform update_authority on profile_authority
 
 - `perform` は依然として説明用記法であり、最終 reserved keyword ではない。
 - `on <target>` は direct な `declared access target` を表す候補である。
-- `require` / `ensure` は既存の contract vocabulary をそのまま clause として並べる読みであり、final punctuation は未決定である。
 
-### 2. option declaration
+### 2. `contract` / `require` / `ensure` の最小 clause form
+
+current L2 では、`contract` を独立した block keyword に上げず、`require` / `ensure` を直前の `perform` に付く statement-local clause として書く形を最小候補とする。
+
+```text
+perform update_authority on profile_authority
+  require write
+  ensure owner_is(session_user)
+```
+
+- `contract` はここでは semantic role の名前であり、representative examples に mandatory な surface keyword とはしない。
+- `require` / `ensure` は、1 行ごとに 1 clause を置く indented line として読む。
+- current L2 では clause の既定順を `require` の後に `ensure` とする。ただしこれは examples を読みやすく保つための companion 規則であり、final grammar の順序制約を固定するものではない。
+- `contract { require { ... } ensure { ... } }` のような block form は **未決定** の future syntax 候補として残し、current L2 の最小候補には含めない。
+
+### 3. option declaration
 
 option declaration は、同一 chain の候補を個別に宣言する最小形として、次を current L2 候補とする。
 
@@ -41,7 +55,7 @@ option readonly on profile_doc capability read lease live
 - richer な declared contract surface が必要な場合の exact notation は **未決定** である。current L2 では、capability だけで successor compatibility を説明できる例ではそれ以上を inline で固定しない。
 - 逆に、capability だけでは successor 判定が足りない例では、option-local contract surface の追加明示が必要になりうる。そこは current L2 の候補から外し、未決定として残す。
 
-### 3. chain declaration
+### 4. chain declaration
 
 nested fallback の canonical form を examples で安定して書くために、chain declaration は次を current L2 候補とする。
 
@@ -57,7 +71,7 @@ chain profile_ref = primary
 - `lineage(...)` は例示用 token であり、最終 keyword / punctuation / serialization は **未決定** である。
 - この書式は canonical form を書くための候補であり、preference chain を新しい core primitive へ昇格させるものではない。
 
-### 4. chain 経由の `perform`
+### 5. chain 経由の `perform`
 
 option chain を使う effect request は、次の形を current L2 候補とする。
 
@@ -70,7 +84,38 @@ perform read_profile via profile_ref
 - `via` を使う場合、`target` は option declaration 側に置き、`perform` 側で重複記述しないのを既定とする。
 - どの option が runtime で実際に選ばれるかは `via` 自体には書かず、canonical order と current evaluation で決まる。
 
-### 5. local rollback を伴う `try`
+### 6. statement separator と block nesting
+
+current L2 の representative examples では、statement separator と block nesting を次の最小規則で読む。
+
+```text
+place root {
+  place session {
+    perform update_authority on profile_authority
+      require write
+      ensure owner_is(session_user)
+
+    atomic_cut
+
+    try {
+      perform load_profile on profile_snapshot
+        require read
+    } fallback {
+      perform load_backup on backup_snapshot
+        require read
+    }
+  }
+}
+```
+
+- `place`, `try`, `fallback` は brace-delimited block head として読む。
+- `perform`、`atomic_cut`、`option`、`chain` は current block に属する ordinary statement として読む。
+- 直後の indented `require` / `ensure` 行は、直前の `perform` statement にだけ属する。dedent した時点で clause attachment は終わる。
+- `chain ref = head` の直後に indented された `fallback successor ...` 行は、その chain declaration に属する continuation line として読む。
+- blank line は readability のためだけに使い、意味論上の独立 separator token とはしない。
+- current L2 では `;` や `,` のような明示 separator は要求しない。statement の切れ目は block structure、dedent、行頭 keyword で読む。
+
+### 7. local rollback を伴う `try`
 
 local rollback を伴う `try` は、current L2 では block form だけを最小候補とする。
 
@@ -92,7 +137,7 @@ try {
 - `fallback { ... }` は、直前の `try` に後置される explicit fallback branch を表す current L2 候補である。
 - この `fallback` は chain declaration の `fallback successor` と同じ token を共有していても、構文形が異なる。前者は block branch、後者は canonical chain の後続候補である。
 
-### 6. `atomic_cut` と並ぶときの読み
+### 8. `atomic_cut` と並ぶときの読み
 
 `atomic_cut` は `try` body の普通の statement として置き、`try` 専用の別書式は導入しない。
 
@@ -216,7 +261,9 @@ try {
 ## ここであえて決めていないこと
 
 - `perform`、`option`、`chain`、`on`、`via` を最終 reserved keyword にするかどうか。
-- `require` / `ensure` clause の改行・区切り記号・入れ子 block 形。
+- `contract` を独立した surface keyword として立てるかどうか。
+- `require` / `ensure` clause の最終 punctuation、inline 形、block 形。
+- blank line 以外の explicit separator token を最終 grammar で導入するかどうか。
 - richer な `declared contract surface` を option declaration にどう書くか。
 - `try` / `fallback` の最終 keyword、`try { ... } fallback { ... }` を唯一の block form にするか、将来 sugar や式形式を許すか。
 - `lineage(...)` の最終 token、同じ意味を持つ sugar、same-place / cross-place で形を共有するかどうか。
