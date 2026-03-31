@@ -43,7 +43,8 @@ option-local `admit` miss と `lease` expiry を current L2 では dedicated ski
 5. その結果、current L2 の最小 conceptual shape は「current request evaluation に結び付いた audit metadata」として、少なくとも `option ref` と `subreason` を持つ形で足りると整理した。broad family として non-admissible reason であることは metadata channel 自体から読めればよく、独立した `reason kind` field は current L2 の必須要件に含めない。
 6. explicit な `request ref` field も current L2 の最小 shape には含めず、request-local attachment だけを要件として残した。detached serialization や cross-trace correlation の都合で将来必要になる可能性は **未決定** とした。
 7. この方針を `specs/examples/01-current-l2-surface-syntax-candidates.md`、`specs/examples/00-representative-mir-programs.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md` に最小反映した。
-8. 最後に `reviewer` を使い、今回の metadata shape が既存理論と矛盾しないかを確認する。
+8. 最後に `reviewer` を使い、今回の metadata shape が既存理論と矛盾しないかを確認した。
+9. reviewer は別 report `docs/reports/0044-review-non-admissible-reason-audit-metadata-shape.md` を返し、findings なしであることを確認した。
 
 ## 4. Files changed
 
@@ -53,6 +54,7 @@ option-local `admit` miss と `lease` expiry を current L2 では dedicated ski
   - `specs/10-open-questions.md`
   - `specs/12-decision-register.md`
   - `docs/reports/0043-non-admissible-reason-audit-metadata-shape-current-l2.md`
+  - `docs/reports/0044-review-non-admissible-reason-audit-metadata-shape.md`
 - Checked but not changed:
   - `README.md`
   - `Documentation.md`
@@ -84,6 +86,12 @@ option-local `admit` miss と `lease` expiry を current L2 では dedicated ski
 - `git commit --no-gpg-sign -m "non-admissible reason metadata の最小 shape を整理する"`
   - `[main 87c2765] non-admissible reason metadata の最小 shape を整理する`
   - ` 4 files changed, 22 insertions(+), 2 deletions(-)`
+- `git diff --check HEAD~4 HEAD && python3 scripts/validate_docs.py && git status --short --branch`
+  - `[no output from git diff --check]`
+  - `Documentation scaffold looks complete.`
+  - `Found 44 numbered report(s).`
+  - `## main...origin/main [ahead 11]`
+  - `?? docs/reports/0044-review-non-admissible-reason-audit-metadata-shape.md`
 
 ## 6. Evidence / findings
 
@@ -120,8 +128,9 @@ option-local `admit` miss と `lease` expiry を current L2 では dedicated ski
 ### 6.5 reviewer
 
 - `reviewer` は起動し、今回の 5 ファイルだけに絞った review を依頼した。
-- ただしこの session では completion を回収できなかった。したがって reviewer finding を捏造せず、reviewer 未返却であることをそのまま記録する。
-- local verification と diff inspection の範囲では、event surface を増やさず、`request ref` を explicit field として固定せず、field naming / serialization を未決定に残していることを確認した。
+- reviewer report `0044-review-non-admissible-reason-audit-metadata-shape.md` は findings なしだった。
+- reviewer は、`option ref` / `subreason` の最小化、event surface 非拡張、capability mismatch の premature な taxonomy 編入なし、の 3 点で current L2 の整理と矛盾しないことを確認した。
+- local verification と diff inspection の範囲でも、event surface を増やさず、`request ref` を explicit field として固定せず、field naming / serialization を未決定に残していることを確認した。
 
 ### 6.6 specification-body commit
 
