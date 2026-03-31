@@ -16,7 +16,7 @@
 - `perform op on target` / `perform op via chain_ref`
   - `perform` と direct target / option chain 参照の current L2 候補である。最終 reserved keyword は未決定である。
 - `require pred` / `ensure pred`
-  - 直前の `perform` に付く statement-local clause の current L2 候補である。single-line clause は `require pred` / `ensure pred` と書き、multi-line predicate が必要な場合だけ `require:` / `ensure:` に続く 1 段深い predicate block を使う。current examples では `require` を先、`ensure` を後に置き、blank line を挟まず同じ clause suite として読む。`contract` は semantic role の名前であり、examples では独立 keyword にせず、`contract { ... }` block sugar も使わない。
+  - 直前の `perform` に付く statement-local clause の current L2 候補である。single-line clause は `require pred` / `ensure pred` と書き、multi-line predicate が必要な場合だけ `require:` / `ensure:` に続く 1 段深い predicate block を使う。predicate の最小断片としては bare atom、application-like form、explicit `and`、括弧 grouping までを使ってよく、改行だけで implicit conjunction は導入しない。current examples では `require` を先、`ensure` を後に置き、blank line を挟まず同じ clause suite として読む。`contract` は semantic role の名前であり、examples では独立 keyword にせず、`contract { ... }` block sugar も使わない。
 - `option name on target capability cap lease guard`
   - option declaration の current L2 候補である。`declared access target`、最小 capability surface、lifetime guard を inline で置く。
 - `chain ref = head` と、それに続く `fallback successor @ lineage(predecessor -> successor)`
@@ -50,9 +50,7 @@ place root {
       perform update_authority on profile_authority
         require write
         ensure:
-          owner_is(
-            session_user
-          )
+          owner_is(session_user)
 
       atomic_cut
 
@@ -105,8 +103,9 @@ place root {
 
         perform validate_profile_patch on profile_draft
           require:
-            well_formed(
-              profile_draft
+            (
+              owner_is(session_user)
+              and well_formed(profile_draft)
             )
       } fallback {
         perform load_last_snapshot on profile_snapshot
@@ -125,6 +124,7 @@ place root {
   - この例では `atomic_cut` を跨いでいないため、rollback frontier は `draft_profile` の内部に閉じている。
   - current L2 では block form の `try { ... } fallback { ... }` を examples 用 companion syntax 候補として使ってよい。
   - `require` 行はそれぞれ直前の `perform` にだけ属し、multi-line predicate block を使う場合でも fallback branch や次の statement へ共有されない。
+  - `owner_is(session_user) and well_formed(profile_draft)` は 1 つの predicate expression として読み、改行だけで暗黙の conjunction を増やしたり、別 clause を生やしたりしない。
 
 ### 期待される runtime outcome
 
@@ -325,12 +325,12 @@ place root {
 ## 書いてみて見えた current L2 の穴
 
 - `perform`、statement-local `require` / `ensure`、option chain 参照、local `try` / `fallback` については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。特に `contract` を semantic role に留め、surface では statement-local clause だけを使う方針にすると、`place` / `try` / `fallback` の block 読みと競合しにくい。single-line clause を bare form、multi-line predicate を colon-headed clause block に分けると、長い predicate でも attachment を見失いにくい。
-- それでも `try` / `fallback` の最終 keyword と punctuation、`contract` を独立 block にするかどうか、richer な option-local contract surface、`lineage(...)` の最終 token はまだ足りない。
+- それでも `try` / `fallback` の最終 keyword と punctuation、`contract` を独立 block にするかどうか、richer な option-local contract surface、`lineage(...)` の最終 token、predicate に `or` / `not` / 比較演算子をどこまで入れるかはまだ足りない。
 - `place` を入れ子で書く方式は例示には十分だが、cross-place transfer や same-place / cross-place の surface rule にはまだ補助 syntax が必要になる可能性がある。
 - `emit` や coroutine は今回の代表例には不要だった。ただし long-lived interaction や stream 的 trace を例示し始めると、将来は別文書で必要になる可能性が高い。
 
 ## ここで決めていないこと
 
 - ここで使った code block はすべて説明用記法であり、parser 実装用の最終 syntax ではない。
-- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` / `try` / `fallback` / `contract` を最終 reserved keyword にするかどうか、`try` / `fallback` の式形式や追加 sugar、`require` / `ensure` の final parser punctuation、predicate block 内の boolean expression grammar は **未決定** である。
+- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` / `try` / `fallback` / `contract` を最終 reserved keyword にするかどうか、`try` / `fallback` の式形式や追加 sugar、`require` / `ensure` の final parser punctuation、predicate block 内で `or` / `not` / precedence / blank line をどう扱うかは **未決定** である。
 - cross-place 版の representative programs は今回含めない。cut family や same-place / cross-place syntax の未決定を、ここで勝手に埋めないためである。

@@ -73,7 +73,8 @@
    - current L2 の companion notation では、`contract { require { ... } ensure { ... } }` のような block form を optional sugar としても採用しない。`place` / `try` / `fallback` の既存 block nesting と競合させず、clause attachment の読みを 1 つに保つためである。
    - current L2 の companion notation では、statement separator に dedicated token を要求しない。`place` / `try` / `fallback` の brace-delimited block、`perform` / `atomic_cut` / `option` / `chain` の statement line、直後の indented clause / continuation line、dedent によって最小の読みを与える。
    - current L2 の companion notation では、single-line clause を `require pred` / `ensure pred` と書き、multi-line predicate が必要な場合だけ `require:` / `ensure:` に続く 1 段深い predicate block を使ってよい。predicate block は 1 つの predicate を複数行に折り返したものとして読む。
-   - ただし `contract` を最終 reserved keyword にするか、`contract { require { ... } ensure { ... } }` のような block form を将来導入するか、`require` / `ensure` の final parser punctuation、predicate block 内の boolean expression grammar、blank line 許可、explicit separator token をどうするかは未決定である。
+   - current L2 の最小 predicate fragment としては、bare atom、application-like form、explicit `and`、括弧 grouping を使ってよい。predicate block 内の改行は continuation としてだけ読み、改行だけで implicit conjunction を導入しない。blank line も current L2 では許さない。
+   - ただし `contract` を最終 reserved keyword にするか、`contract { require { ... } ensure { ... } }` のような block form を将来導入するか、`require` / `ensure` の final parser punctuation、`or` / `not` / precedence table を含む predicate grammar、predicate block 内の blank line 許可、explicit separator token をどうするかは未決定である。
 5. `try` は現時点では local rollback semantics を持つ primitive であり、representative examples では block form の `try { ... } fallback { ... }` を current L2 companion syntax 候補として使ってよい。
    - current `place` の入れ子がすでに rollback scope を与えるので、現時点の候補では `try` に追加の scope 指定句を要求しない。
    - `fallback { ... }` は直前の `try` に後置される explicit branch として読む。option chain の `fallback successor` と token を共有していても、構文形が異なる以上、同じ construct として固定しない。

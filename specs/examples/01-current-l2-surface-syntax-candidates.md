@@ -35,9 +35,7 @@ current L2 では、`contract` を独立した block keyword に上げず、`req
 perform update_authority on profile_authority
   require write
   ensure:
-    owner_is(
-      session_user
-    )
+    owner_is(session_user)
 ```
 
 - `contract` はここでは semantic role の名前であり、representative examples に mandatory な surface keyword とはしない。
@@ -48,6 +46,29 @@ perform update_authority on profile_authority
 - current L2 の representative examples では、statement-local clause を持てる head は `perform` だけに限定する。`atomic_cut`、`option`、`chain`、`place`、`try`、`fallback` に clause をぶら下げない。
 - `require` と `ensure` の間に blank line は入れず、同じ clause suite として隣接させるのを既定とする。
 - `contract { require { ... } ensure { ... } }` のような block form は **未決定** の future syntax 候補として残すが、current L2 companion notation の optional sugar としては採用しない。
+
+#### predicate sublanguage の最小候補
+
+current L2 の companion notation では、`require` / `ensure` にぶら下がる predicate は、representative examples を安定して読めるだけの**最小 predicate 断片**に留める。
+
+```text
+require write
+
+ensure owner_is(session_user)
+
+require:
+  (
+    owner_is(session_user)
+    and well_formed(profile_draft)
+  )
+```
+
+- atomic predicate は、bare atom (`write`, `read`, `append`) か、application-like form (`owner_is(session_user)`, `well_formed(profile_draft)`) のどちらかで書いてよい。
+- 複数 predicate を 1 つの clause で結ぶ必要がある場合、current L2 では explicit `and` だけを最小 connective として使ってよい。
+- grouping が必要なら `(` `)` を使う。current L2 companion notation では、これで十分とする。
+- multi-line predicate block の改行は、predicate expression の継続を示す whitespace としてだけ読む。改行そのものでは implicit conjunction を導入しない。
+- multi-line predicate block 内の blank line は current L2 では使わない。clause attachment と predicate continuation の読みを混ぜないためである。
+- `or`、`not`、比較演算子の最小集合、precedence table、predicate block の内部でどこまで indentation-sensitive に読むかは **未決定** である。
 
 ### 3. option declaration
 
@@ -122,6 +143,7 @@ place root {
 - `perform`、`atomic_cut`、`option`、`chain` は current block に属する ordinary statement として読む。
 - 直後の indented `require` / `ensure` 行は、直前の `perform` statement にだけ属する。single-line clause でも multi-line predicate block でも、perform line より浅く dedent した時点で clause attachment は終わる。
 - `require:` / `ensure:` の header line に続く、さらに 1 段深い predicate block は、その clause の continuation として読む。predicate block から clause indent に戻った時点では clause 自体はまだ継続してよく、その後の次 clause または dedent / 次 statement head で clause suite が終わる。
+- predicate block 内の改行は continuation であり、boolean connective の省略を意味しない。複数 predicate を結ぶなら `and` を明示しなければならない。
 - `chain ref = head` の直後に indented された `fallback successor ...` 行は、その chain declaration に属する continuation line として読む。
 - 行頭 keyword が `perform`、`atomic_cut`、`option`、`chain`、`place`、`try`、`}` のいずれかに切り替わった時点でも、直前の clause suite は終わったものとして読む。
 - blank line は readability のためだけに使い、意味論上の独立 separator token とはしない。
@@ -275,7 +297,7 @@ try {
 
 - `perform`、`option`、`chain`、`on`、`via` を最終 reserved keyword にするかどうか。
 - `contract` を独立した surface keyword として立てるかどうか。
-- current L2 companion notation として、single-line clause を `require pred` / `ensure pred`、multi-line predicate を `require:` / `ensure:` に続く predicate block と読むところまでは採ってよい。ただし final parser syntax としての punctuation、predicate block 内の boolean expression grammar、blank line 許可は未決定である。
+- current L2 companion notation として、single-line clause を `require pred` / `ensure pred`、multi-line predicate を `require:` / `ensure:` に続く predicate block と読み、predicate 断片として bare atom、application-like form、explicit `and`、括弧 grouping を使うところまでは採ってよい。ただし final parser syntax としての punctuation、`or` / `not` / precedence table、predicate block 内の boolean expression grammar、blank line 許可は未決定である。
 - blank line 以外の explicit separator token を最終 grammar で導入するかどうか。
 - richer な `declared contract surface` を option declaration にどう書くか。
 - `try` / `fallback` の最終 keyword、`try { ... } fallback { ... }` を唯一の block form にするか、将来 sugar や式形式を許すか。
