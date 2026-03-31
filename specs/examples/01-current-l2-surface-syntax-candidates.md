@@ -146,7 +146,8 @@ current L2 では、`admit` miss や `lease` expiry を dedicated skip event に
 - `subreason` がないと、E3 の `admit-miss` と E6 の `lease-expired` を同じ broad bucket に潰してしまい、representative examples が要求する説明力を失う。
 - detached serialization や cross-trace correlation を後で導入するなら、`request ref` またはそれに相当する carrier が必要になる可能性は残る。この点は **未決定** である。
 - 同様に、field 名、reason code 名、serialization、key ordering は current L2 では固定しない。ここで固定するのは概念的 shape だけである。
-- capability mismatch を同じ metadata family の formal subreason に入れるかどうかも **未決定** とする。current L2 では、E6 を説明するために `lease-expired` と narrative な capability mismatch 説明があれば足りる。
+- current L2 では、`admit-miss` と `lease-expired` だけを formal subreason として残し、capability mismatch は narrative audit explanation に留める。理由は、前二者が option-local miss metadata だけで表せるのに対し、capability mismatch は request-local `require` と declared capability surface の比較から読む方が E6 を小さく保てるためである。
+- したがって current L2 では、capability mismatch を formal subreason にしなくても E6 を十分に説明できる。formal subreason 化は将来の taxonomy 拡張候補としては残すが、現時点では **未決定** とする。
 
 ### 4. chain declaration
 

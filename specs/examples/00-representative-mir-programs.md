@@ -349,11 +349,11 @@ place root {
   - explicit `Reject`
 - audit / trace metadata:
   - `writer` は current request evaluation にぶら下がる metadata として `option ref = writer` と `subreason = lease-expired`
-  - `readonly` は request / capability mismatch により success-side choice になれなかったこと
+  - `readonly` は request / capability mismatch により success-side choice になれなかったこと。この点は current L2 では formal subreason に上げず、narrative explanation に留める
 - 説明可能であるべきこと:
   - chain 自体は static に well-formed だが、current evaluation の request 種別によって runtime `Reject` へ落ちること
   - `lease` expiry 自体は current L2 では dedicated event を必須にせず、`Reject` に至る non-admissible reason metadata の 1 つとして残してよいこと
-  - `readonly` 側の request / capability mismatch は request-local `require write` と declared capability surface から読めるため、current L2 の最小 metadata shape にまで持ち上げなくてもよいこと
+  - `readonly` 側の request / capability mismatch は request-local `require write` と declared capability surface から読めるため、current L2 では formal subreason にせず narrative explanation に留めるだけでよいこと
 
 ## 書いてみて見えた current L2 の穴
 
