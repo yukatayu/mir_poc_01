@@ -16,7 +16,7 @@
 - `perform op on target` / `perform op via chain_ref`
   - `perform` と direct target / option chain 参照の current L2 候補である。最終 reserved keyword は未決定である。
 - `require pred` / `ensure pred`
-  - 直前の `perform` に付く statement-local clause の current L2 候補である。`contract` は semantic role の名前であり、examples では独立 keyword にしない。
+  - 直前の `perform` に付く statement-local clause の current L2 候補である。current examples では `require` を先、`ensure` を後に置き、blank line を挟まず同じ clause suite として読む。`contract` は semantic role の名前であり、examples では独立 keyword にしない。
 - `option name on target capability cap lease guard`
   - option declaration の current L2 候補である。`declared access target`、最小 capability surface、lifetime guard を inline で置く。
 - `chain ref = head` と、それに続く `fallback successor @ lineage(predecessor -> successor)`
@@ -67,7 +67,7 @@ place root {
   - `place` の入れ子は current Mir-0 / L2 と矛盾しない。
   - `atomic_cut` は current `place` の rollback frontier を確定する最小 cut として使われている。
   - `perform` は説明用記法であり、ここでは effect / contract / cut の関係を見るために使っている。
-  - `require` / `ensure` は `update_authority` に付く statement-local clause として読み、blank line は `atomic_cut` 前後の読みやすさのためだけに置いている。
+  - `require` / `ensure` は `update_authority` にだけ付く statement-local clause として読み、dedent と blank line でその clause suite が終わる。
 
 ### 期待される runtime outcome
 
@@ -118,6 +118,7 @@ place root {
   - `try` は current `place` に局所な rollback semantics を持つ。
   - この例では `atomic_cut` を跨いでいないため、rollback frontier は `draft_profile` の内部に閉じている。
   - current L2 では block form の `try { ... } fallback { ... }` を examples 用 companion syntax 候補として使ってよい。
+  - `require` 行はそれぞれ直前の `perform` にだけ属し、fallback branch や次の statement へ共有されない。
 
 ### 期待される runtime outcome
 
@@ -172,6 +173,7 @@ place root {
   - edge-local な `documented lineage annotation` が `primary -> mirror` と `mirror -> readonly` をそれぞれ明示している。
   - capability は `write -> write -> read` と単調に弱くなる側へしか進んでいない。
   - この例では capability だけで successor compatibility を説明できるため、追加の option-local contract clause を省略しても underdeclared にはしない。
+  - `perform read_profile via profile_ref` に続く `require read` は、その request にだけ付く clause suite として読む。
 
 ### 期待される runtime outcome
 
@@ -294,7 +296,7 @@ place root {
 - 理由:
   - declared target と edge-local lineage annotation はそろっている。
   - capability は `write -> read` と単調に弱くなる方向であり、chain 自体は well-formed である。
-  - current request は `require write` だけであり、追加の option-local contract clause がなくても runtime `Reject` の読みは保てる。
+  - current request は `perform write_profile via profile_ref` に付く `require write` だけであり、追加の option-local contract clause がなくても runtime `Reject` の読みは保てる。
 
 ### 期待される runtime outcome
 
