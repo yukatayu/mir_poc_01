@@ -34,11 +34,16 @@ current L2 では、`contract` を独立した block keyword に上げず、`req
 ```text
 perform update_authority on profile_authority
   require write
-  ensure owner_is(session_user)
+  ensure:
+    owner_is(
+      session_user
+    )
 ```
 
 - `contract` はここでは semantic role の名前であり、representative examples に mandatory な surface keyword とはしない。
-- `require` / `ensure` は、1 行ごとに 1 clause を置く indented line として読む。
+- single-line clause は `require pred` / `ensure pred` と書き、keyword の後ろに空白 1 つだけを置く。current L2 では追加の trailing punctuation を要求しない。
+- multi-line predicate が必要な場合だけ、header line を `require:` / `ensure:` と書き、その直下に 1 段深い predicate block を置く。
+- predicate block は、複数 clause の列挙ではなく**1 つの predicate を複数行に折り返したもの**として読む。predicate block の内部では blank line を使わない。
 - current L2 では clause の既定順を `require` の後に `ensure` とする。ただしこれは examples を読みやすく保つための companion 規則であり、final grammar の順序制約を固定するものではない。
 - current L2 の representative examples では、statement-local clause を持てる head は `perform` だけに限定する。`atomic_cut`、`option`、`chain`、`place`、`try`、`fallback` に clause をぶら下げない。
 - `require` と `ensure` の間に blank line は入れず、同じ clause suite として隣接させるのを既定とする。
@@ -115,7 +120,8 @@ place root {
 
 - `place`, `try`, `fallback` は brace-delimited block head として読む。
 - `perform`、`atomic_cut`、`option`、`chain` は current block に属する ordinary statement として読む。
-- 直後の indented `require` / `ensure` 行は、直前の `perform` statement にだけ属する。dedent した時点で clause attachment は終わる。
+- 直後の indented `require` / `ensure` 行は、直前の `perform` statement にだけ属する。single-line clause でも multi-line predicate block でも、perform line より浅く dedent した時点で clause attachment は終わる。
+- `require:` / `ensure:` の header line に続く、さらに 1 段深い predicate block は、その clause の continuation として読む。predicate block から clause indent に戻った時点では clause 自体はまだ継続してよく、その後の次 clause または dedent / 次 statement head で clause suite が終わる。
 - `chain ref = head` の直後に indented された `fallback successor ...` 行は、その chain declaration に属する continuation line として読む。
 - 行頭 keyword が `perform`、`atomic_cut`、`option`、`chain`、`place`、`try`、`}` のいずれかに切り替わった時点でも、直前の clause suite は終わったものとして読む。
 - blank line は readability のためだけに使い、意味論上の独立 separator token とはしない。
@@ -269,7 +275,7 @@ try {
 
 - `perform`、`option`、`chain`、`on`、`via` を最終 reserved keyword にするかどうか。
 - `contract` を独立した surface keyword として立てるかどうか。
-- `require` / `ensure` clause の最終 punctuation、inline 形、block 形。
+- current L2 companion notation として、single-line clause を `require pred` / `ensure pred`、multi-line predicate を `require:` / `ensure:` に続く predicate block と読むところまでは採ってよい。ただし final parser syntax としての punctuation、predicate block 内の boolean expression grammar、blank line 許可は未決定である。
 - blank line 以外の explicit separator token を最終 grammar で導入するかどうか。
 - richer な `declared contract surface` を option declaration にどう書くか。
 - `try` / `fallback` の最終 keyword、`try { ... } fallback { ... }` を唯一の block form にするか、将来 sugar や式形式を許すか。

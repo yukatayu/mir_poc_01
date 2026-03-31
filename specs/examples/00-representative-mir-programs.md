@@ -16,7 +16,7 @@
 - `perform op on target` / `perform op via chain_ref`
   - `perform` と direct target / option chain 参照の current L2 候補である。最終 reserved keyword は未決定である。
 - `require pred` / `ensure pred`
-  - 直前の `perform` に付く statement-local clause の current L2 候補である。current examples では `require` を先、`ensure` を後に置き、blank line を挟まず同じ clause suite として読む。`contract` は semantic role の名前であり、examples では独立 keyword にせず、`contract { ... }` block sugar も使わない。
+  - 直前の `perform` に付く statement-local clause の current L2 候補である。single-line clause は `require pred` / `ensure pred` と書き、multi-line predicate が必要な場合だけ `require:` / `ensure:` に続く 1 段深い predicate block を使う。current examples では `require` を先、`ensure` を後に置き、blank line を挟まず同じ clause suite として読む。`contract` は semantic role の名前であり、examples では独立 keyword にせず、`contract { ... }` block sugar も使わない。
 - `option name on target capability cap lease guard`
   - option declaration の current L2 候補である。`declared access target`、最小 capability surface、lifetime guard を inline で置く。
 - `chain ref = head` と、それに続く `fallback successor @ lineage(predecessor -> successor)`
@@ -49,7 +49,10 @@ place root {
     place authority_cell {
       perform update_authority on profile_authority
         require write
-        ensure owner_is(session_user)
+        ensure:
+          owner_is(
+            session_user
+          )
 
       atomic_cut
 
@@ -67,7 +70,7 @@ place root {
   - `place` の入れ子は current Mir-0 / L2 と矛盾しない。
   - `atomic_cut` は current `place` の rollback frontier を確定する最小 cut として使われている。
   - `perform` は説明用記法であり、ここでは effect / contract / cut の関係を見るために使っている。
-  - `require` / `ensure` は `update_authority` にだけ付く statement-local clause として読み、dedent と blank line でその clause suite が終わる。
+  - `require` / `ensure` は `update_authority` にだけ付く statement-local clause として読む。`ensure:` の下に置かれた predicate block も含めて 1 つの clause suite であり、dedent または次 statement head への移行でその suite が終わる。
 
 ### 期待される runtime outcome
 
@@ -101,7 +104,10 @@ place root {
           require write
 
         perform validate_profile_patch on profile_draft
-          require well_formed
+          require:
+            well_formed(
+              profile_draft
+            )
       } fallback {
         perform load_last_snapshot on profile_snapshot
           require read
@@ -118,7 +124,7 @@ place root {
   - `try` は current `place` に局所な rollback semantics を持つ。
   - この例では `atomic_cut` を跨いでいないため、rollback frontier は `draft_profile` の内部に閉じている。
   - current L2 では block form の `try { ... } fallback { ... }` を examples 用 companion syntax 候補として使ってよい。
-  - `require` 行はそれぞれ直前の `perform` にだけ属し、fallback branch や次の statement へ共有されない。
+  - `require` 行はそれぞれ直前の `perform` にだけ属し、multi-line predicate block を使う場合でも fallback branch や次の statement へ共有されない。
 
 ### 期待される runtime outcome
 
@@ -318,7 +324,7 @@ place root {
 
 ## 書いてみて見えた current L2 の穴
 
-- `perform`、statement-local `require` / `ensure`、option chain 参照、local `try` / `fallback` については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。特に `contract` を semantic role に留め、surface では statement-local clause だけを使う方針にすると、`place` / `try` / `fallback` の block 読みと競合しにくい。
+- `perform`、statement-local `require` / `ensure`、option chain 参照、local `try` / `fallback` については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。特に `contract` を semantic role に留め、surface では statement-local clause だけを使う方針にすると、`place` / `try` / `fallback` の block 読みと競合しにくい。single-line clause を bare form、multi-line predicate を colon-headed clause block に分けると、長い predicate でも attachment を見失いにくい。
 - それでも `try` / `fallback` の最終 keyword と punctuation、`contract` を独立 block にするかどうか、richer な option-local contract surface、`lineage(...)` の最終 token はまだ足りない。
 - `place` を入れ子で書く方式は例示には十分だが、cross-place transfer や same-place / cross-place の surface rule にはまだ補助 syntax が必要になる可能性がある。
 - `emit` や coroutine は今回の代表例には不要だった。ただし long-lived interaction や stream 的 trace を例示し始めると、将来は別文書で必要になる可能性が高い。
@@ -326,5 +332,5 @@ place root {
 ## ここで決めていないこと
 
 - ここで使った code block はすべて説明用記法であり、parser 実装用の最終 syntax ではない。
-- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` / `try` / `fallback` / `contract` を最終 reserved keyword にするかどうか、`try` / `fallback` の式形式や追加 sugar、`require` / `ensure` の最終 punctuation は **未決定** である。
+- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` / `try` / `fallback` / `contract` を最終 reserved keyword にするかどうか、`try` / `fallback` の式形式や追加 sugar、`require` / `ensure` の final parser punctuation、predicate block 内の boolean expression grammar は **未決定** である。
 - cross-place 版の representative programs は今回含めない。cut family や same-place / cross-place syntax の未決定を、ここで勝手に埋めないためである。
