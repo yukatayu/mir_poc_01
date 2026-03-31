@@ -23,6 +23,7 @@ perform update_authority on profile_authority
 
 - `perform` は依然として説明用記法であり、最終 reserved keyword ではない。
 - `on <target>` は direct な `declared access target` を表す候補である。
+- current L2 examples では、head statement とそれに続く clause suite 全体を 1 つの statement cluster として読む。
 
 ### 2. `contract` / `require` / `ensure` の最小 clause form
 
@@ -37,6 +38,8 @@ perform update_authority on profile_authority
 - `contract` はここでは semantic role の名前であり、representative examples に mandatory な surface keyword とはしない。
 - `require` / `ensure` は、1 行ごとに 1 clause を置く indented line として読む。
 - current L2 では clause の既定順を `require` の後に `ensure` とする。ただしこれは examples を読みやすく保つための companion 規則であり、final grammar の順序制約を固定するものではない。
+- current L2 の representative examples では、statement-local clause を持てる head は `perform` だけに限定する。`atomic_cut`、`option`、`chain`、`place`、`try`、`fallback` に clause をぶら下げない。
+- `require` と `ensure` の間に blank line は入れず、同じ clause suite として隣接させるのを既定とする。
 - `contract { require { ... } ensure { ... } }` のような block form は **未決定** の future syntax 候補として残し、current L2 の最小候補には含めない。
 
 ### 3. option declaration
@@ -112,8 +115,10 @@ place root {
 - `perform`、`atomic_cut`、`option`、`chain` は current block に属する ordinary statement として読む。
 - 直後の indented `require` / `ensure` 行は、直前の `perform` statement にだけ属する。dedent した時点で clause attachment は終わる。
 - `chain ref = head` の直後に indented された `fallback successor ...` 行は、その chain declaration に属する continuation line として読む。
+- 行頭 keyword が `perform`、`atomic_cut`、`option`、`chain`、`place`、`try`、`}` のいずれかに切り替わった時点でも、直前の clause suite は終わったものとして読む。
 - blank line は readability のためだけに使い、意味論上の独立 separator token とはしない。
 - current L2 では `;` や `,` のような明示 separator は要求しない。statement の切れ目は block structure、dedent、行頭 keyword で読む。
+- `require` / `ensure` を clause suite の外へ浮かせたり、複数の `perform` に共有させたりする書き方は、current L2 companion notation には含めない。
 
 ### 7. local rollback を伴う `try`
 
