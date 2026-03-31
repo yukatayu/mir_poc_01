@@ -25,9 +25,11 @@ perform update_authority on profile_authority
 - `on <target>` は direct な `declared access target` を表す候補である。
 - current L2 examples では、head statement とそれに続く clause suite 全体を 1 つの statement cluster として読む。
 
-### 2. `contract` / `require` / `ensure` の最小 clause form
+### 2. `contract` の surface policy と `require` / `ensure` の最小 clause form
 
 current L2 では、`contract` を独立した block keyword に上げず、`require` / `ensure` を直前の `perform` に付く statement-local clause として書く形を最小候補とする。
+比較対象としては、`contract { ... }` block form を optional sugar として許す案もあるが、current L2 の companion notation では採らない。
+理由は、representative examples がすでに `place` / `try` / `fallback` を brace-delimited block として使っており、`contract` まで block head にすると、statement-local clause attachment より block nesting の見た目が前面に出て読みがぶれやすくなるためである。
 
 ```text
 perform update_authority on profile_authority
@@ -40,7 +42,7 @@ perform update_authority on profile_authority
 - current L2 では clause の既定順を `require` の後に `ensure` とする。ただしこれは examples を読みやすく保つための companion 規則であり、final grammar の順序制約を固定するものではない。
 - current L2 の representative examples では、statement-local clause を持てる head は `perform` だけに限定する。`atomic_cut`、`option`、`chain`、`place`、`try`、`fallback` に clause をぶら下げない。
 - `require` と `ensure` の間に blank line は入れず、同じ clause suite として隣接させるのを既定とする。
-- `contract { require { ... } ensure { ... } }` のような block form は **未決定** の future syntax 候補として残し、current L2 の最小候補には含めない。
+- `contract { require { ... } ensure { ... } }` のような block form は **未決定** の future syntax 候補として残すが、current L2 companion notation の optional sugar としては採用しない。
 
 ### 3. option declaration
 

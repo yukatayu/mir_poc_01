@@ -70,8 +70,9 @@
    - ただしこれは examples 用の安定した表記候補であり、`perform`、`on`、`via` を最終 reserved keyword として固定する判断ではない。
    - option chain 側の候補書式として `option name on target capability cap lease guard` と `chain ref = head` / `fallback successor @ lineage(...)` を current L2 で使ってよいが、これも final parser syntax ではない。
    - `contract` は semantic role の名前としては使うが、current L2 の representative examples では独立 block keyword にしない。`require` / `ensure` は indented な statement-local clause として直前の `perform` に付けてよい。
+   - current L2 の companion notation では、`contract { require { ... } ensure { ... } }` のような block form を optional sugar としても採用しない。`place` / `try` / `fallback` の既存 block nesting と競合させず、clause attachment の読みを 1 つに保つためである。
    - current L2 の companion notation では、statement separator に dedicated token を要求しない。`place` / `try` / `fallback` の brace-delimited block、`perform` / `atomic_cut` / `option` / `chain` の statement line、直後の indented clause / continuation line、dedent によって最小の読みを与える。
-   - ただし `contract` を最終 reserved keyword にするか、`contract { require { ... } ensure { ... } }` のような block form を導入するか、`require` / `ensure` の final punctuation や explicit separator token をどうするかは未決定である。
+   - ただし `contract` を最終 reserved keyword にするか、`contract { require { ... } ensure { ... } }` のような block form を将来導入するか、`require` / `ensure` の final punctuation や explicit separator token をどうするかは未決定である。
 5. `try` は現時点では local rollback semantics を持つ primitive であり、representative examples では block form の `try { ... } fallback { ... }` を current L2 companion syntax 候補として使ってよい。
    - current `place` の入れ子がすでに rollback scope を与えるので、現時点の候補では `try` に追加の scope 指定句を要求しない。
    - `fallback { ... }` は直前の `try` に後置される explicit branch として読む。option chain の `fallback successor` と token を共有していても、構文形が異なる以上、同じ construct として固定しない。
