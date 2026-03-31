@@ -228,6 +228,7 @@ place root {
 - current L2 では、`owner_writer` の `admit` が満たされなければ、その option は non-admissible skip として候補から外れ、`delegated_writer` が次の success-side candidate になる。
 - この skip だけでは explicit failure は立たない。explicit failure は、admitted option を実際に試したあとに operation が失敗した場合へ残す。
 - request 全体が dynamic `Reject` になるのは、後段 option まで見ても write request を満たす admissible candidate が残らない場合だけである。
+- current L2 の最小 trace / audit では、`owner_writer` の skip を独立 event にする必要はなく、`non-admissible reason = admit-miss` を audit metadata として残せばよい。
 - current L2 では、ここで option-local `ensure` や outcome guarantee を追加せず、admission-side metadata だけに留める。
 
 ## E4 — malformed fallback branch（static rejection）
@@ -345,11 +346,13 @@ place root {
 ### 最小 trace / audit 説明
 
 - event:
-  - writer lease-expiry による不適格化
-  - readonly の capability mismatch
   - explicit `Reject`
+- audit / trace metadata:
+  - `writer` は `non-admissible reason = lease-expired`
+  - `readonly` は request / capability mismatch により success-side choice になれなかったこと
 - 説明可能であるべきこと:
   - chain 自体は static に well-formed だが、current evaluation の request 種別によって runtime `Reject` へ落ちること
+  - `lease` expiry 自体は current L2 では dedicated event を必須にせず、`Reject` に至る non-admissible reason metadata の 1 つとして残してよいこと
 
 ## 書いてみて見えた current L2 の穴
 

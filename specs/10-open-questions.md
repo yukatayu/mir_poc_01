@@ -78,7 +78,9 @@
 - option-local `admit` は `perform` に付く statement-local `require` / `ensure` を option declaration に流用しないための companion marker であり、request-local clause attachment を壊さないために別 token として扱う。current L2 では option-local `ensure` / `invariant` や outcome-side guarantee を導入しない。
 - option-local `admit` に書く predicate 断片は current L2 では statement-local clause と同じ最小 fragment に揃えてよい。ただしこれは examples 用の安定した表記候補であり、option-local contract surface の final parser syntax を固定する判断ではない。
 - current L2 では、`admit` 不成立は non-admissible skip と読む。すなわち、その option は current request の success-side candidate から外れるだけであり、その時点では explicit failure outcome も dynamic `Reject` も立てない。explicit failure は admitted option を試した後の failure に残し、dynamic `Reject` は後続 option も含めて admissible candidate が尽きたときにだけ立てる。
-- ただし `admit` 不成立を trace / audit 上で独立 event として立てるか、skip reason としてだけ残すかは **未決定** である。
+- current L2 の最小観測面としては、`admit` 不成立や `lease` expiry を dedicated skip event として event surface に上げる必要はない。event surface には request-level outcome を優先して残し、individual option miss は audit / trace 側の non-admissible reason metadata に留めてよい。
+- その場合、`admit` miss と `lease` expiry は同じ大分類の non-admissible reason に入れてよいが、少なくとも `admit-miss` と `lease-expired` を区別できるだけの subreason は残すべきである。最終的な field 名、reason code 名、serialization は未決定である。
+- ただし `admit` 不成立や `lease` expiry を将来 dedicated skip event として立てる必要があるか、また capability mismatch のような他の non-admissible reason を同じ taxonomy にどう収めるかは **未決定** である。
 - ただし `contract` を最終 reserved keyword にするか、`contract { require { ... } ensure { ... } }` のような block form を将来導入するか、`require` / `ensure` の final parser punctuation、option-local `admit` の最終 keyword / punctuation、option-local outcome metadata を別 marker で持つか、`or` / `not` / precedence table を含む predicate grammar、predicate block 内の blank line 許可、explicit separator token をどうするかは未決定である。
 5. `try` は現時点では local rollback semantics を持つ primitive であり、representative examples では block form の `try { ... } fallback { ... }` を current L2 companion syntax 候補として使ってよい。
    - current `place` の入れ子がすでに rollback scope を与えるので、現時点の候補では `try` に追加の scope 指定句を要求しない。
