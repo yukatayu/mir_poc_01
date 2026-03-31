@@ -128,6 +128,11 @@ option-local `admit` miss と `lease` expiry を current L2 では dedicated ski
 - 仕様本文の commit は `87c2765` `non-admissible reason metadata の最小 shape を整理する` で記録した。
 - report 自身を含む報告 commit の hash は self-reference の都合で本書には固定せず、最終の assistant response と `git log` で示す。
 
+### 6.6 specification-body commit
+
+- 仕様本文の commit は `87c2765` `non-admissible reason metadata の最小 shape を整理する` で記録した。
+- report 自身を含む報告 commit の hash は self-reference の都合で本書には固定せず、最終の assistant response と `git log` で示す。
+
 ## 7. Changes in understanding
 
 current L2 で本当に必要なのは、skip を event 化することではなく、「どの option が、どの subreason によって success-side candidate から外れたか」を request-local に説明できることだった。broad family は metadata channel から読めればよく、`request ref` も概念的には必要でも field としてはまだ固定しなくてよい。
