@@ -69,47 +69,51 @@
    - current L2 の representative examples では、direct target に対して `perform op on target`、option chain に対して `perform op via chain_ref` という companion syntax 候補を使ってよい。
    - ただしこれは examples 用の安定した表記候補であり、`perform`、`on`、`via` を最終 reserved keyword として固定する判断ではない。
    - option chain 側の候補書式として `option name on target capability cap lease guard` と `chain ref = head` / `fallback successor @ lineage(...)` を current L2 で使ってよいが、これも final parser syntax ではない。
-5. `emit`、effect handler、structured event routing の正確な関係。
-6. final coroutine model:
+5. `try` は現時点では local rollback semantics を持つ primitive であり、representative examples では block form の `try { ... } fallback { ... }` を current L2 companion syntax 候補として使ってよい。
+   - current `place` の入れ子がすでに rollback scope を与えるので、現時点の候補では `try` に追加の scope 指定句を要求しない。
+   - `fallback { ... }` は直前の `try` に後置される explicit branch として読む。option chain の `fallback successor` と token を共有していても、構文形が異なる以上、同じ construct として固定しない。
+   - ただしこれは examples 用の安定した block-form 候補であり、`try` / `fallback` の最終 keyword、punctuation、式形式、追加 sugar を固定する判断ではない。
+6. `emit`、effect handler、structured event routing の正確な関係。
+7. final coroutine model:
    - one-shot と multi-shot のどちらか
    - suspension restriction
    - patch interaction
    - lifetime crossing rule
-7. 線形 continuation に関する既存研究を使って、制約付き multi-shot を支援するかどうか、またどう支援するか。
-8. overlay と route rebinding の正確な構文と静的規則。overlay alias detail を含む。
-9. routing semantics を Mir-0 に潰さずに、`place` 導入と cross-place transfer の正確な surface syntax と静的規則をどう定めるか。
+8. 線形 continuation に関する既存研究を使って、制約付き multi-shot を支援するかどうか、またどう支援するか。
+9. overlay と route rebinding の正確な構文と静的規則。overlay alias detail を含む。
+10. routing semantics を Mir-0 に潰さずに、`place` 導入と cross-place transfer の正確な surface syntax と静的規則をどう定めるか。
 
 ## Mirrorea / routing
 
-10. route proof representation の最終形。
-11. route change と suspended task / coroutine の相互作用。
-12. scaling のどこまでが Mirrorea に属し、どこからが external orchestration に属するか。
-13. Mir-1 で定義された later cut vocabulary、特に `durable_cut` を Mirrorea がどの operational boundary から引き受けるか。現在の最小理解では、Mirrorea は durable commit guarantee、aggregate success / failure event の意味、scope rule 自体の意味づけは行わず、storage / replication / distributed finalization / member observation の収集と相関 / aggregate event と audit representation の実現責務だけを負う。さらに `all_of` aggregate evidence についても、Mir-1 が固定するのは full coverage 条件だけであり、per-place evidence reference の表現、圧縮、共有形式は Mirrorea の裁量に残す。`all_of` aggregate failure audit についても同様であり、justification source、missing coverage snapshot、`reason_ref` 相当の参照表現をどう ID 化・直列化・配置するかは Mirrorea の裁量に残す。snapshot 基準時点より前の中間状態を保存するか、複数 snapshot を保持するか、どの圧縮表現を使うかも Mirrorea の裁量に残す。scope rule profile についても、Mirrorea が独自 profile を意味語彙として追加することはせず、Mir-1 が意味づけた `all_of` などの profile について同じ aggregate success / failure 観測を保つ形で実現するだけに留まる。未決定なのは、その実現に必要な最小 protocol surface、evidence の具象形式、将来 profile 拡張時の相互運用条件である。
+11. route proof representation の最終形。
+12. route change と suspended task / coroutine の相互作用。
+13. scaling のどこまでが Mirrorea に属し、どこからが external orchestration に属するか。
+14. Mir-1 で定義された later cut vocabulary、特に `durable_cut` を Mirrorea がどの operational boundary から引き受けるか。現在の最小理解では、Mirrorea は durable commit guarantee、aggregate success / failure event の意味、scope rule 自体の意味づけは行わず、storage / replication / distributed finalization / member observation の収集と相関 / aggregate event と audit representation の実現責務だけを負う。さらに `all_of` aggregate evidence についても、Mir-1 が固定するのは full coverage 条件だけであり、per-place evidence reference の表現、圧縮、共有形式は Mirrorea の裁量に残す。`all_of` aggregate failure audit についても同様であり、justification source、missing coverage snapshot、`reason_ref` 相当の参照表現をどう ID 化・直列化・配置するかは Mirrorea の裁量に残す。snapshot 基準時点より前の中間状態を保存するか、複数 snapshot を保持するか、どの圧縮表現を使うかも Mirrorea の裁量に残す。scope rule profile についても、Mirrorea が独自 profile を意味語彙として追加することはせず、Mir-1 が意味づけた `all_of` などの profile について同じ aggregate success / failure 観測を保つ形で実現するだけに留まる。未決定なのは、その実現に必要な最小 protocol surface、evidence の具象形式、将来 profile 拡張時の相互運用条件である。
 
 ## PrismCascade
 
-14. Mir / Mirrorea との正確な integration surface。
-15. audio block semantics。
-16. `fps=0` またはそれに相当する call-set semantics。
-17. 色 / HDR / format negotiation model の正確な形。
-18. remote execution granularity をどの程度まで細かくするか。
+15. Mir / Mirrorea との正確な integration surface。
+16. audio block semantics。
+17. `fps=0` またはそれに相当する call-set semantics。
+18. 色 / HDR / format negotiation model の正確な形。
+19. remote execution granularity をどの程度まで細かくするか。
 
 ## Typed-Effects Wiring Platform
 
-19. これを Mirrorea の subsystem と見るべきか、それとも sibling project と見るべきか。
-20. effect declaration のための正確な contract language。
-21. opaque または部分的にしか wrap されていない legacy effect の扱い。
-22. state↔event graph visualization の scale limit と abstraction method。
+20. これを Mirrorea の subsystem と見るべきか、それとも sibling project と見るべきか。
+21. effect declaration のための正確な contract language。
+22. opaque または部分的にしか wrap されていない legacy effect の扱い。
+23. state↔event graph visualization の scale limit と abstraction method。
 
 ## Reversed Library / アプリケーション層
 
-23. virtual-reality social mode と Reversed Library mode の関係:
+24. virtual-reality social mode と Reversed Library mode の関係:
     - ひと続きの mode とするか、明示的 mode switch を置くか。
-24. 知識分類戦略:
+25. 知識分類戦略:
     - 人文学 / 科学 / 実践知
     - 既存の図書分類体系との関係
-25. progression / capability unlock の設計。
-26. アーキテクチャを歪めずに、play-theory evaluation perspective（例: Caillois-like axis）をどう取り入れるか。
-27. synchronized web browsing モデル。
-28. Mir-based GUI プログラミング基盤。
-29. 以前の prototype diagram を最終的な Mir syntax / semantics にどう対応づけるか。
+26. progression / capability unlock の設計。
+27. アーキテクチャを歪めずに、play-theory evaluation perspective（例: Caillois-like axis）をどう取り入れるか。
+28. synchronized web browsing モデル。
+29. Mir-based GUI プログラミング基盤。
+30. 以前の prototype diagram を最終的な Mir syntax / semantics にどう対応づけるか。

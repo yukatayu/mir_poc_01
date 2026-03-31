@@ -20,7 +20,7 @@
 - `chain ref = head` と、それに続く `fallback successor @ lineage(predecessor -> successor)`
   - canonical form を examples で書くための current L2 候補である。`lineage(...)` は例示であり、最終 token ではない。
 - `try { ... } fallback { ... }`
-  - current `place` に局所な rollback を伴う `try` と、その後段の explicit fallback をまとめて示す説明用 shorthand である。正確な surface syntax は未決定である。
+  - current `place` に局所な rollback を伴う `try` の block form と、その直後に置かれる explicit fallback branch の current L2 候補である。最終 keyword と punctuation は未決定である。
 
 より詳しい候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md` を参照。
 
@@ -112,7 +112,7 @@ place root {
 - 理由:
   - `try` は current `place` に局所な rollback semantics を持つ。
   - この例では `atomic_cut` を跨いでいないため、rollback frontier は `draft_profile` の内部に閉じている。
-  - `try { ... } fallback { ... }` は説明用 shorthand であり、最終 syntax は未決定である。
+  - current L2 では block form の `try { ... } fallback { ... }` を examples 用 companion syntax 候補として使ってよい。
 
 ### 期待される runtime outcome
 
@@ -311,13 +311,13 @@ place root {
 
 ## 書いてみて見えた current L2 の穴
 
-- `perform` と option chain 参照については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。
-- それでも `try { ... } fallback { ... }` の exact sugar、richer な option-local contract surface、`lineage(...)` の最終 token はまだ足りない。
+- `perform`、option chain 参照、local `try` / `fallback` については、`specs/examples/01-current-l2-surface-syntax-candidates.md` の current L2 候補でかなり安定して書けるようになった。
+- それでも `try` / `fallback` の最終 keyword と punctuation、richer な option-local contract surface、`lineage(...)` の最終 token はまだ足りない。
 - `place` を入れ子で書く方式は例示には十分だが、cross-place transfer や same-place / cross-place の surface rule にはまだ補助 syntax が必要になる可能性がある。
 - `emit` や coroutine は今回の代表例には不要だった。ただし long-lived interaction や stream 的 trace を例示し始めると、将来は別文書で必要になる可能性が高い。
 
 ## ここで決めていないこと
 
 - ここで使った code block はすべて説明用記法であり、parser 実装用の最終 syntax ではない。
-- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` を最終 reserved keyword にするかどうか、`try` / `fallback` の exact sugar は **未決定** である。
+- `documented lineage annotation` の token 形、`perform` / `option` / `chain` / `on` / `via` / `try` / `fallback` を最終 reserved keyword にするかどうか、`try` / `fallback` の式形式や追加 sugar は **未決定** である。
 - cross-place 版の representative programs は今回含めない。cut family や same-place / cross-place syntax の未決定を、ここで勝手に埋めないためである。

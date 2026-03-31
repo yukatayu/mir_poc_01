@@ -1,13 +1,13 @@
 # examples/01 — current L2 surface syntax candidates
 
 この文書は、`specs/examples/00-representative-mir-programs.md` で使う**current L2 の最小 surface syntax 候補**をまとめる補助文書である。
-ここで整理するのは、`perform` と option chain 参照に関する**書き方の候補**だけであり、Mir-0 / Mir-1 / Mirrorea の境界や、canonical normalization law、rejection phase、static evidence floor、underdeclared handling 自体は変更しない。
+ここで整理するのは、`perform`、option chain 参照、`try` / `fallback` に関する**書き方の候補**だけであり、Mir-0 / Mir-1 / Mirrorea の境界や、canonical normalization law、rejection phase、static evidence floor、underdeclared handling 自体は変更しない。
 
 ## この文書の位置づけ
 
 - current L2 の representative examples を、過度に ad-hoc ではない一定の書式で読めるようにする。
 - parser-ready な最終 grammar や reserved keyword 集合は固定しない。
-- `perform`、option declaration、chain 参照のうち、current L2 で最も摩擦の少ない最小表記だけを候補として置く。
+- `perform`、option declaration、chain 参照、`try` / `fallback` のうち、current L2 で最も摩擦の少ない最小表記だけを候補として置く。
 
 ## current L2 の最小候補
 
@@ -69,6 +69,50 @@ perform read_profile via profile_ref
 - `via <chain-ref>` は、request が option chain を通じて admissible option を探すことを示す current L2 候補である。
 - `via` を使う場合、`target` は option declaration 側に置き、`perform` 側で重複記述しないのを既定とする。
 - どの option が runtime で実際に選ばれるかは `via` 自体には書かず、canonical order と current evaluation で決まる。
+
+### 5. local rollback を伴う `try`
+
+local rollback を伴う `try` は、current L2 では block form だけを最小候補とする。
+
+```text
+try {
+  perform stage_profile_patch on profile_draft
+    require write
+
+  perform validate_profile_patch on profile_draft
+    require well_formed
+} fallback {
+  perform load_last_snapshot on profile_snapshot
+    require read
+}
+```
+
+- current `place` の入れ子がすでに rollback scope を与えるので、`try` 自体に追加の scope 指定句は要求しない。
+- current L2 では、`try` の式形式や value-returning form は導入しない。representative examples では block form だけを使う。
+- `fallback { ... }` は、直前の `try` に後置される explicit fallback branch を表す current L2 候補である。
+- この `fallback` は chain declaration の `fallback successor` と同じ token を共有していても、構文形が異なる。前者は block branch、後者は canonical chain の後続候補である。
+
+### 6. `atomic_cut` と並ぶときの読み
+
+`atomic_cut` は `try` body の普通の statement として置き、`try` 専用の別書式は導入しない。
+
+```text
+try {
+  perform update_authority on profile_authority
+    require write
+
+  atomic_cut
+
+  perform append_audit on authority_log
+    require append
+} fallback {
+  perform load_last_snapshot on authority_snapshot
+    require read
+}
+```
+
+- block formを保つことで、`atomic_cut` が rollback frontier を切る ordinary statement であることを読みやすく保つ。
+- failure が `atomic_cut` の後で起きた場合でも、pre-cut 部分は rollback されない。これは意味論上の制約であり、surface syntax 側に追加 token を要求しない。
 
 ## `declared access target` と lineage annotation の役割分担
 
@@ -151,12 +195,30 @@ perform write_profile via profile_ref
 - chain 自体は well-formed である。
 - runtime では `writer` が success-side choice になれず、後段の `readonly` も write request を満たせないため `Reject` になる。
 
+local `try` + `fallback` は次のように書ける。
+
+```text
+try {
+  perform stage_profile_patch on profile_draft
+    require write
+
+  perform validate_profile_patch on profile_draft
+    require well_formed
+} fallback {
+  perform load_last_snapshot on profile_snapshot
+    require read
+}
+```
+
+- `try` body は current `place` に局所な rollback region を表す。
+- fallback branch は rollback の後に explicit に選ばれる branch であり、option chain declaration ではない。
+
 ## ここであえて決めていないこと
 
 - `perform`、`option`、`chain`、`on`、`via` を最終 reserved keyword にするかどうか。
 - `require` / `ensure` clause の改行・区切り記号・入れ子 block 形。
 - richer な `declared contract surface` を option declaration にどう書くか。
-- `try` / `fallback` の exact sugar。
+- `try` / `fallback` の最終 keyword、`try { ... } fallback { ... }` を唯一の block form にするか、将来 sugar や式形式を許すか。
 - `lineage(...)` の最終 token、同じ意味を持つ sugar、same-place / cross-place で形を共有するかどうか。
 
 ここで固定するのは、current L2 の representative examples を安定して書き直せるだけの最小候補であり、final parser syntax ではない。
