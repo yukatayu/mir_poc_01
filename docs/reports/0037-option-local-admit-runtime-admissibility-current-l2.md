@@ -101,7 +101,7 @@ option-local `admit` failure を、non-admissible skip、explicit failure、dyna
   - `Reject` は chain 全体で admissible candidate が尽きたときにだけ残せる。
 - explicit failure
   - option を実際に試した後の failure と、success-side choice に入る前の admission miss を混同する。
-  - E3 比較用 variant では、単に `owner_writer` が使えないだけの場面に অত剰な failure event を立てることになる。
+  - E3 比較用 variant では、単に `owner_writer` が使えないだけの場面に過剰な failure event を立てることになる。
 - dynamic `Reject`
   - 1 つの option の `admit` miss で request 全体を落としやすくなり、後続 fallback successor を素直に読む canonical chain と噛み合いにくい。
   - E6 の `Reject` が持つ「chain 全体で admissible candidate が尽きた結果」という位置づけも曖昧になる。
