@@ -70,7 +70,7 @@ require:
 - multi-line predicate block 内の blank line は current L2 では使わない。clause attachment と predicate continuation の読みを混ぜないためである。
 - `or`、`not`、比較演算子の最小集合、precedence table、predicate block の内部でどこまで indentation-sensitive に読むかは **未決定** である。
 
-### 3. option declaration
+### 3. option declaration と option-local declared contract surface
 
 option declaration は、同一 chain の候補を個別に宣言する最小形として、次を current L2 候補とする。
 
@@ -83,8 +83,33 @@ option readonly on profile_doc capability read lease live
 - `option <name>` は chain 内で参照する候補名を導入する current L2 候補である。
 - `on <target>` は option-local な `declared access target` を表す。
 - `capability <cap>` と `lease <guard>` は、current L2 examples で最小限必要な declared capability surface と lifetime guard を inline で置く候補である。
-- richer な declared contract surface が必要な場合の exact notation は **未決定** である。current L2 では、capability だけで successor compatibility を説明できる例ではそれ以上を inline で固定しない。
-- 逆に、capability だけでは successor 判定が足りない例では、option-local contract surface の追加明示が必要になりうる。そこは current L2 の候補から外し、未決定として残す。
+- current L2 では、capability と `lease` だけで successor compatibility を説明できる例では、それ以上の option-local contract 情報を要求しない。
+- 逆に、capability と `lease` だけでは successor 判定や admissibility の違いを書き分けられない場合、current L2 companion notation では option-local declared contract surface を admission-side metadata として明示しなければならない。省略したまま same-lineage / successor 判定へ進めてはならない。
+
+#### option-local declared contract surface の最小候補
+
+current L2 で option declaration 側へ追加してよい最小 metadata は、option が success-side choice になれる条件を表す admission-side information だけに留める。
+
+```text
+option owner_writer on profile_doc capability write lease live
+  admit owner_is(session_user)
+
+option delegated_writer on profile_doc capability write lease live
+  admit:
+    (
+      delegate_granted(session_user)
+      and well_formed(profile_draft)
+    )
+```
+
+- option-local declared contract surface は、current L2 では `admit pred` または `admit:` に続く 1 段深い predicate block で書く companion 候補とする。
+- `admit` は statement-local `require` / `ensure` を option declaration に流用しないための別 marker である。これは examples 用の companion token であり、最終 reserved keyword を固定する判断ではない。
+- `admit` がぶら下がる先は直前の `option` declaration だけである。`perform` に付く `require` / `ensure` と clause attachment を共有しない。
+- `admit` に書ける predicate 断片は、current L2 では statement-local clause と同じ最小 fragment に揃えてよい。すなわち bare atom、application-like form、explicit `and`、括弧 grouping までを使ってよい。
+- option-local metadata として current L2 で先に認めるのは admission-side だけであり、option-local `ensure`、option-local `invariant`、outcome guarantee の書式はまだ導入しない。
+- したがって current L2 では、`perform` に付く `require` / `ensure` は request-local contract、option declaration に付く `admit` は option-local admissibility を表す、という役割分担に留める。
+- `admit` を使うのは、capability と `lease` だけでは option 間の admissibility の違いを書けない場合に限る。その場合は省略してはならない。capability-only case では省略するのを既定とする。
+- `admit` の最終 keyword / punctuation、option-local outcome metadata を別 marker で持つかどうか、option-local contract surface を line-based continuation 以外でも書けるようにするかは **未決定** である。
 
 ### 4. chain declaration
 
@@ -275,6 +300,25 @@ perform write_profile via profile_ref
 - chain 自体は well-formed である。
 - runtime では `writer` が success-side choice になれず、後段の `readonly` も write request を満たせないため `Reject` になる。
 
+capability と `lease` だけでは option 間の admissibility の差を書き分けられない場合は、次のように option-local declared contract surface を足さなければならない。
+
+```text
+option owner_writer on profile_doc capability write lease live
+  admit owner_is(session_user)
+option delegated_writer on profile_doc capability write lease live
+  admit delegate_granted(session_user)
+
+chain profile_ref = owner_writer
+  fallback delegated_writer @ lineage(owner_writer -> delegated_writer)
+
+perform write_profile via profile_ref
+  require write
+```
+
+- この例では、両 option は同じ target / capability / `lease` を持つので、admissibility の違いは option-local `admit` に置く方が読みやすい。
+- `perform` 側の `require write` は request-local condition のままであり、option 側の `admit` と別役割を保つ。
+- outcome-side guarantee を option 側へどう書くかは、current L2 では **未決定** のまま残す。
+
 local `try` + `fallback` は次のように書ける。
 
 ```text
@@ -299,7 +343,8 @@ try {
 - `contract` を独立した surface keyword として立てるかどうか。
 - current L2 companion notation として、single-line clause を `require pred` / `ensure pred`、multi-line predicate を `require:` / `ensure:` に続く predicate block と読み、predicate 断片として bare atom、application-like form、explicit `and`、括弧 grouping を使うところまでは採ってよい。ただし final parser syntax としての punctuation、`or` / `not` / precedence table、predicate block 内の boolean expression grammar、blank line 許可は未決定である。
 - blank line 以外の explicit separator token を最終 grammar で導入するかどうか。
-- richer な `declared contract surface` を option declaration にどう書くか。
+- option-local declared contract surface の最終 keyword / punctuation をどうするか。また `admit` 以外の marker が必要かどうか。
+- option-local outcome guarantee / invariant を current L2 companion notation に含めるかどうか。
 - `try` / `fallback` の最終 keyword、`try { ... } fallback { ... }` を唯一の block form にするか、将来 sugar や式形式を許すか。
 - `lineage(...)` の最終 token、同じ意味を持つ sugar、same-place / cross-place で形を共有するかどうか。
 
