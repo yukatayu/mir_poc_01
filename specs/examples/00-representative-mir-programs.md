@@ -225,6 +225,9 @@ place root {
 
 - この variant では、両 option は同じ target / capability / `lease` を持つため、option 間の admissibility の差は option-local `admit` を見ないと表せない。
 - `perform` に付く `require write` は request-local condition のままであり、option 側の `admit` は各 option が success-side choice になれる追加条件として読む。
+- current L2 では、`owner_writer` の `admit` が満たされなければ、その option は non-admissible skip として候補から外れ、`delegated_writer` が次の success-side candidate になる。
+- この skip だけでは explicit failure は立たない。explicit failure は、admitted option を実際に試したあとに operation が失敗した場合へ残す。
+- request 全体が dynamic `Reject` になるのは、後段 option まで見ても write request を満たす admissible candidate が残らない場合だけである。
 - current L2 では、ここで option-local `ensure` や outcome guarantee を追加せず、admission-side metadata だけに留める。
 
 ## E4 — malformed fallback branch（static rejection）
@@ -336,6 +339,7 @@ place root {
   - 後段の `readonly` は read-only であり、write request を満たせない。
 - outcome:
   - write-admissible option が残らないため explicit `Reject`。
+  - この `Reject` は単一 option の admission miss そのものではなく、chain 全体で admissible candidate が尽きた結果として読む。
   - hidden buffering、hidden resurrection、earlier option への再昇格は起こらない。
 
 ### 最小 trace / audit 説明

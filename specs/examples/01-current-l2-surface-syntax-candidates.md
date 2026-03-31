@@ -111,6 +111,23 @@ option delegated_writer on profile_doc capability write lease live
 - `admit` を使うのは、capability と `lease` だけでは option 間の admissibility の違いを書けない場合に限る。その場合は省略してはならない。capability-only case では省略するのを既定とする。
 - `admit` の最終 keyword / punctuation、option-local outcome metadata を別 marker で持つかどうか、option-local contract surface を line-based continuation 以外でも書けるようにするかは **未決定** である。
 
+#### option-local `admit` と runtime admissibility
+
+current L2 では、`admit` が不成立だった option を runtime でどう読むかについて、少なくとも次の 3 読みがありうる。
+
+- non-admissible skip
+- explicit failure
+- dynamic `Reject`
+
+このうち current L2 の最小読解として採るのは non-admissible skip である。
+
+- `admit` が満たされない option は、その request 評価において success-side candidate から外れるだけである。
+- この時点では explicit failure outcome を立てない。explicit failure は、admitted だった option を実際に試した後に operation 側で失敗した場合へ残す。
+- この時点では request 全体を直ちに dynamic `Reject` にもしない。dynamic `Reject` は、後続 option も含めて current request を満たす admissible candidate が残らなかったときにだけ立つ。
+- したがって canonical chain の runtime 読みは「leftmost admitted and request-compatible option を選ぶ」であり、`admit` 不成立はその候補を silently repair するのではなく、単に success-side 候補集合から外す。
+- この読解でも hidden acceptance は起きない。理由は、`admit` の存在自体が static に明示されており、かつ不成立時は earlier option へ戻るのではなく canonical chain の後段へしか進めないためである。
+- ただし `admit` 不成立を trace / audit 上で独立 event として立てるか、skip reason としてだけ残すかは **未決定** である。
+
 ### 4. chain declaration
 
 nested fallback の canonical form を examples で安定して書くために、chain declaration は次を current L2 候補とする。
@@ -317,6 +334,9 @@ perform write_profile via profile_ref
 
 - この例では、両 option は同じ target / capability / `lease` を持つので、admissibility の違いは option-local `admit` に置く方が読みやすい。
 - `perform` 側の `require write` は request-local condition のままであり、option 側の `admit` と別役割を保つ。
+- runtime では、先頭 option の `admit` が満たされなければ、その option は non-admissible skip として候補集合から外れ、次の fallback successor を見る。
+- ここで explicit failure を立てる必要はない。explicit failure は admitted option を試した後の failure にだけ残す。
+- ここで dynamic `Reject` を立てるのは、後続 option も含めて write request を満たす admissible candidate が尽きた場合だけである。
 - outcome-side guarantee を option 側へどう書くかは、current L2 では **未決定** のまま残す。
 
 local `try` + `fallback` は次のように書ける。
