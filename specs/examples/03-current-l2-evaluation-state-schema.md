@@ -8,6 +8,7 @@
 - current L2 representative examples を parser なしで実行準備できる形に落とす。
 - AST fixture schema と runtime semantics の間にある最小 state carrier を定める。
 - `E1`、`E2`、`E3` 比較用 variant、`E6` を動かすのに必要な state 粒度だけを固定する。
+- node ごとの進め方自体は `specs/examples/04-current-l2-step-semantics.md` に分離する。
 
 ## ここで固定すること / しないこと
 
@@ -109,6 +110,7 @@ current L2 では `require` / `ensure` は surface clause ではなく semantic 
 - 今見ている option ref
 
 current L2 では、admissibility miss を dedicated event にせず metadata に留めるので、`chain_cursor` は option evaluation の途中結果を trace sink に流せれば十分であり、複雑な backtracking state は要らない。
+`canonical option order` は、current L2 では mutable runtime state ではなく、current request から参照される `ChainDecl` と `OptionDecl` を immutable な fixture carrier から引いて初期化すれば足りる。
 
 ### 6. `rollback_stack`
 

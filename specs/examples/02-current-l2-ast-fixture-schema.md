@@ -9,6 +9,7 @@
 - syntax 未決部分を固定せず、意味側の構造だけを machine-readable に保つ。
 - static verdict、runtime outcome、trace / audit expectation を example fixture 側でも持てるようにする。
 - parser なし最小 interpreter に必要な runtime carrier は `specs/examples/03-current-l2-evaluation-state-schema.md` を参照する。
+- parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md` を参照する。
 
 ## ここで固定すること / しないこと
 
