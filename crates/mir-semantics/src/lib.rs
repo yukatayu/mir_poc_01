@@ -20,10 +20,12 @@ use std::{
 use serde::Deserialize;
 
 pub use harness::{
-    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, EffectPlanRule, EffectPlanVerdict,
-    FixtureCommitPlan, FixtureHostPlan, FixtureHostStub, FixtureStoreMutation,
-    PredicatePlanRule, TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path,
-    load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path,
+    BundleRunReport, CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, EffectPlanRule,
+    EffectPlanVerdict, FixtureBundle, FixtureCommitPlan, FixtureHostPlan, FixtureHostStub,
+    FixtureRuntimeRequirement, FixtureStoreMutation, PredicatePlanRule,
+    TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path,
+    load_bundle_from_fixture_path, load_host_plan_from_path,
+    load_host_plan_sidecar_for_fixture_path, run_bundle,
 };
 
 pub type PlaceStore = BTreeMap<String, Vec<String>>;

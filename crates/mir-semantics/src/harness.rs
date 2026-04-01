@@ -5,12 +5,36 @@ use std::{
 
 use crate::{
     CurrentL2Fixture, EffectInput, EffectOracle, EffectVerdict, ExpectedNonAdmissibleMetadata,
-    InterpreterError, NonAdmissibleMetadata, PlaceStore, PredicateInput, PredicateOracle,
-    PredicateSite, PredicateVerdict, RequestMode, RunReport, SuccessCarrier, run_to_completion,
+    FixtureRuntimeOutcome, InterpreterError, NonAdmissibleMetadata, PlaceStore, PredicateInput,
+    PredicateOracle, PredicateSite, PredicateVerdict, RequestMode, RunReport, SuccessCarrier,
+    TerminalOutcome, run_to_completion,
 };
 use serde::Deserialize;
 
 pub const CURRENT_L2_HOST_PLAN_SCHEMA_VERSION: &str = "current-l2-host-plan-v0";
+
+/// bundle が runtime host plan を必須とするかどうか。
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum FixtureRuntimeRequirement {
+    StaticOnly,
+    RuntimeWithHostPlan,
+}
+
+/// fixture 本体と sidecar を 1 組として扱う current L2 bundle。
+#[derive(Debug, Clone)]
+pub struct FixtureBundle {
+    pub fixture_path: PathBuf,
+    pub host_plan_path: Option<PathBuf>,
+    pub fixture: CurrentL2Fixture,
+    pub host_plan: Option<FixtureHostPlan>,
+    pub runtime_requirement: FixtureRuntimeRequirement,
+}
+
+/// bundle 単位 helper が返す最小 run report。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BundleRunReport {
+    pub report: RunReport,
+}
 
 /// current L2 host harness が declarative に持つ最小 store mutation。
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
@@ -318,6 +342,101 @@ pub fn load_host_plan_sidecar_for_fixture_path(
     load_host_plan_from_path(host_plan_sidecar_path_for_fixture_path(fixture_path))
 }
 
+pub fn load_bundle_from_fixture_path(
+    fixture_path: impl AsRef<Path>,
+) -> Result<FixtureBundle, InterpreterError> {
+    let fixture_path = fixture_path.as_ref().to_path_buf();
+    let fixture = crate::load_fixture_from_path(&fixture_path)?;
+    let runtime_requirement = if fixture.expected_runtime.enters_evaluation {
+        FixtureRuntimeRequirement::RuntimeWithHostPlan
+    } else {
+        FixtureRuntimeRequirement::StaticOnly
+    };
+
+    let sidecar_path = host_plan_sidecar_path_for_fixture_path(&fixture_path);
+    let (host_plan_path, host_plan) = if sidecar_path.exists() {
+        let plan = load_host_plan_from_path(&sidecar_path)?;
+        (Some(sidecar_path), Some(plan))
+    } else if runtime_requirement == FixtureRuntimeRequirement::RuntimeWithHostPlan {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "runtime fixture requires a .host-plan.json sidecar: {}",
+            fixture_path.display()
+        )));
+    } else {
+        (None, None)
+    };
+
+    Ok(FixtureBundle {
+        fixture_path,
+        host_plan_path,
+        fixture,
+        host_plan,
+        runtime_requirement,
+    })
+}
+
+pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, InterpreterError> {
+    let harness = match &bundle.host_plan {
+        Some(plan) => FixtureHostStub::new(plan.clone())?,
+        None => FixtureHostStub::default(),
+    };
+    let report = harness.run_fixture(&bundle.fixture)?;
+
+    let expected_terminal_outcome =
+        expected_terminal_outcome(bundle.fixture.expected_runtime.final_outcome);
+    if report.static_verdict != bundle.fixture.expected_static.verdict {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "bundle static verdict mismatch for {}: expected {:?}, got {:?}",
+            bundle.fixture.fixture_id, bundle.fixture.expected_static.verdict, report.static_verdict
+        )));
+    }
+    if report.entered_evaluation != bundle.fixture.expected_runtime.enters_evaluation {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "bundle enters_evaluation mismatch for {}: expected {}, got {}",
+            bundle.fixture.fixture_id,
+            bundle.fixture.expected_runtime.enters_evaluation,
+            report.entered_evaluation
+        )));
+    }
+    if report.terminal_outcome != expected_terminal_outcome {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "bundle terminal outcome mismatch for {}: expected {:?}, got {:?}",
+            bundle.fixture.fixture_id, expected_terminal_outcome, report.terminal_outcome
+        )));
+    }
+    if report.trace_audit_sink.events != bundle.fixture.expected_trace_audit.event_kinds {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "bundle event_kinds mismatch for {}: expected {:?}, got {:?}",
+            bundle.fixture.fixture_id,
+            bundle.fixture.expected_trace_audit.event_kinds,
+            report.trace_audit_sink.events
+        )));
+    }
+
+    let expected_non_admissible_metadata = harness.expected_non_admissible_metadata(&bundle.fixture);
+    if report.trace_audit_sink.non_admissible_metadata != expected_non_admissible_metadata {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "bundle non_admissible_metadata mismatch for {}: expected {:?}, got {:?}",
+            bundle.fixture.fixture_id,
+            expected_non_admissible_metadata,
+            report.trace_audit_sink.non_admissible_metadata
+        )));
+    }
+
+    let expected_narrative_explanations =
+        harness.expected_narrative_explanations(&bundle.fixture);
+    if report.trace_audit_sink.narrative_explanations != expected_narrative_explanations {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "bundle narrative_explanations mismatch for {}: expected {:?}, got {:?}",
+            bundle.fixture.fixture_id,
+            expected_narrative_explanations,
+            report.trace_audit_sink.narrative_explanations
+        )));
+    }
+
+    Ok(BundleRunReport { report })
+}
+
 /// parser-free minimal interpreter を fixture ごとに差し替える test harness。
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct FixtureHostStub {
@@ -456,6 +575,17 @@ fn non_admissible_from_expected(
     NonAdmissibleMetadata {
         option_ref: expected.option_ref.clone(),
         subreason: expected.subreason,
+    }
+}
+
+fn expected_terminal_outcome(
+    outcome: FixtureRuntimeOutcome,
+) -> Option<TerminalOutcome> {
+    match outcome {
+        FixtureRuntimeOutcome::Success => Some(TerminalOutcome::Success),
+        FixtureRuntimeOutcome::ExplicitFailure => Some(TerminalOutcome::ExplicitFailure),
+        FixtureRuntimeOutcome::Reject => Some(TerminalOutcome::Reject),
+        FixtureRuntimeOutcome::NotEvaluated => None,
     }
 }
 

@@ -1,11 +1,11 @@
 use std::{fs, path::PathBuf, time::{SystemTime, UNIX_EPOCH}};
 
 use mir_semantics::{
-    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostPlan, FixtureHostStub,
-    FixtureRuntimeOutcome, NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict,
-    TerminalOutcome, TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path,
+    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostPlan, FixtureHostStub, FixtureRuntimeRequirement, NonAdmissibleMetadata,
+    NonAdmissibleSubreason, StaticGateVerdict, TraceExpectationOverride,
+    host_plan_sidecar_path_for_fixture_path, load_bundle_from_fixture_path,
     load_fixture_from_path, load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path,
-    static_gate,
+    run_bundle, static_gate,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -14,21 +14,21 @@ fn fixture_path(name: &str) -> PathBuf {
         .join(name)
 }
 
-fn expected_outcome(outcome: FixtureRuntimeOutcome) -> Option<TerminalOutcome> {
-    match outcome {
-        FixtureRuntimeOutcome::Success => Some(TerminalOutcome::Success),
-        FixtureRuntimeOutcome::ExplicitFailure => Some(TerminalOutcome::ExplicitFailure),
-        FixtureRuntimeOutcome::Reject => Some(TerminalOutcome::Reject),
-        FixtureRuntimeOutcome::NotEvaluated => None,
-    }
+fn load_bundle(name: &str) -> mir_semantics::FixtureBundle {
+    load_bundle_from_fixture_path(fixture_path(name)).unwrap()
 }
 
-fn load_runtime_fixture_and_harness(name: &str) -> (mir_semantics::CurrentL2Fixture, FixtureHostStub) {
-    let path = fixture_path(name);
-    let fixture = load_fixture_from_path(&path).unwrap();
-    let plan = load_host_plan_sidecar_for_fixture_path(&path).unwrap();
-    let harness = FixtureHostStub::new(plan).unwrap();
-    (fixture, harness)
+fn expected_outcome(
+    outcome: mir_semantics::FixtureRuntimeOutcome,
+) -> Option<mir_semantics::TerminalOutcome> {
+    match outcome {
+        mir_semantics::FixtureRuntimeOutcome::Success => Some(mir_semantics::TerminalOutcome::Success),
+        mir_semantics::FixtureRuntimeOutcome::ExplicitFailure => {
+            Some(mir_semantics::TerminalOutcome::ExplicitFailure)
+        }
+        mir_semantics::FixtureRuntimeOutcome::Reject => Some(mir_semantics::TerminalOutcome::Reject),
+        mir_semantics::FixtureRuntimeOutcome::NotEvaluated => None,
+    }
 }
 
 fn unique_temp_json_path(label: &str) -> PathBuf {
@@ -40,6 +40,67 @@ fn unique_temp_json_path(label: &str) -> PathBuf {
         "mir-semantics-{label}-{}-{nanos}.json",
         std::process::id()
     ))
+}
+
+#[test]
+fn bundle_loader_resolves_runtime_and_static_fixtures() {
+    let runtime_bundle = load_bundle_from_fixture_path(fixture_path("e1-place-atomic-cut.json")).unwrap();
+    assert_eq!(
+        runtime_bundle.runtime_requirement,
+        FixtureRuntimeRequirement::RuntimeWithHostPlan
+    );
+    assert!(runtime_bundle.host_plan_path.is_some());
+    assert!(runtime_bundle.host_plan.is_some());
+
+    let static_bundle = load_bundle_from_fixture_path(fixture_path("e4-malformed-lineage.json")).unwrap();
+    assert_eq!(
+        static_bundle.runtime_requirement,
+        FixtureRuntimeRequirement::StaticOnly
+    );
+    assert!(static_bundle.host_plan_path.is_none());
+    assert!(static_bundle.host_plan.is_none());
+}
+
+#[test]
+fn bundle_loader_requires_host_plan_for_runtime_fixture() {
+    let source_path = fixture_path("e1-place-atomic-cut.json");
+    let temp_dir = std::env::temp_dir().join(format!(
+        "mir-semantics-bundle-missing-sidecar-{}",
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    ));
+    fs::create_dir_all(&temp_dir).unwrap();
+
+    let copied_fixture_path = temp_dir.join("e1-place-atomic-cut.json");
+    fs::copy(&source_path, &copied_fixture_path).unwrap();
+
+    let error = load_bundle_from_fixture_path(&copied_fixture_path).unwrap_err();
+    let _ = fs::remove_dir_all(&temp_dir);
+
+    assert!(error
+        .to_string()
+        .contains("runtime fixture requires a .host-plan.json sidecar"));
+}
+
+#[test]
+fn run_bundle_checks_static_runtime_and_trace_expectations() {
+    let runtime_bundle = load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
+    let runtime_result = run_bundle(&runtime_bundle).unwrap();
+    assert_eq!(
+        runtime_result.report.terminal_outcome,
+        expected_outcome(runtime_bundle.fixture.expected_runtime.final_outcome)
+    );
+    assert_eq!(
+        runtime_result.report.trace_audit_sink.events,
+        runtime_bundle.fixture.expected_trace_audit.event_kinds
+    );
+
+    let static_bundle = load_bundle_from_fixture_path(fixture_path("e5-underdeclared-lineage.json")).unwrap();
+    let static_result = run_bundle(&static_bundle).unwrap();
+    assert_eq!(static_result.report.static_verdict, StaticGateVerdict::Underdeclared);
+    assert!(!static_result.report.entered_evaluation);
 }
 
 #[test]
@@ -60,10 +121,7 @@ fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
             result.entered_evaluation,
             fixture.expected_runtime.enters_evaluation
         );
-        assert_eq!(
-            result.terminal_outcome,
-            expected_outcome(fixture.expected_runtime.final_outcome)
-        );
+        assert_eq!(result.terminal_outcome, None);
     }
 }
 
@@ -77,20 +135,11 @@ fn runtime_fixtures_reach_expected_outcomes_via_declarative_host_plan() {
     ];
 
     for fixture_name in cases {
-        let (fixture, harness) = load_runtime_fixture_and_harness(fixture_name);
-        let result = harness.run_fixture(&fixture).unwrap();
-
-        assert_eq!(result.static_verdict, fixture.expected_static.verdict, "{fixture_name}");
-        assert_eq!(
-            result.entered_evaluation,
-            fixture.expected_runtime.enters_evaluation,
-            "{fixture_name}"
-        );
-        assert_eq!(
-            result.terminal_outcome,
-            expected_outcome(fixture.expected_runtime.final_outcome),
-            "{fixture_name}"
-        );
+        let bundle = load_bundle(fixture_name);
+        let result = run_bundle(&bundle).unwrap();
+        assert_eq!(result.report.static_verdict, bundle.fixture.expected_static.verdict, "{fixture_name}");
+        assert_eq!(result.report.entered_evaluation, bundle.fixture.expected_runtime.enters_evaluation, "{fixture_name}");
+        assert!(result.report.terminal_outcome.is_some(), "{fixture_name}");
     }
 }
 
@@ -104,22 +153,23 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
     ];
 
     for fixture_name in cases {
-        let (fixture, harness) = load_runtime_fixture_and_harness(fixture_name);
-        let result = harness.run_fixture(&fixture).unwrap();
+        let bundle = load_bundle(fixture_name);
+        let harness = FixtureHostStub::new(bundle.host_plan.clone().unwrap()).unwrap();
+        let result = run_bundle(&bundle).unwrap();
 
         assert_eq!(
-            result.trace_audit_sink.events,
-            fixture.expected_trace_audit.event_kinds,
+            result.report.trace_audit_sink.events,
+            bundle.fixture.expected_trace_audit.event_kinds,
             "{fixture_name}"
         );
         assert_eq!(
-            result.trace_audit_sink.non_admissible_metadata,
-            harness.expected_non_admissible_metadata(&fixture),
+            result.report.trace_audit_sink.non_admissible_metadata,
+            harness.expected_non_admissible_metadata(&bundle.fixture),
             "{fixture_name}"
         );
         assert_eq!(
-            result.trace_audit_sink.narrative_explanations,
-            harness.expected_narrative_explanations(&fixture),
+            result.report.trace_audit_sink.narrative_explanations,
+            harness.expected_narrative_explanations(&bundle.fixture),
             "{fixture_name}"
         );
     }
