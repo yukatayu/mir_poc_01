@@ -9,6 +9,7 @@
 - AST fixture schema と runtime semantics の間にある最小 state carrier を定める。
 - `E1`、`E2`、`E3` 比較用 variant、`E6` を動かすのに必要な state 粒度だけを固定する。
 - node ごとの進め方自体は `specs/examples/04-current-l2-step-semantics.md` に分離する。
+- predicate / effect oracle の最小 API と success-side carrier は `specs/examples/05-current-l2-oracle-api.md` に分離する。
 
 ## ここで固定すること / しないこと
 
@@ -111,6 +112,7 @@ current L2 では `require` / `ensure` は surface clause ではなく semantic 
 
 current L2 では、admissibility miss を dedicated event にせず metadata に留めるので、`chain_cursor` は option evaluation の途中結果を trace sink に流せれば十分であり、複雑な backtracking state は要らない。
 `canonical option order` は、current L2 では mutable runtime state ではなく、current request から参照される `ChainDecl` と `OptionDecl` を immutable な fixture carrier から引いて初期化すれば足りる。
+effect success が返す success-side carrier は、current L2 では独立した persisted state field にせず、step-local な値として扱ってよい。`place_store` への可視な反映は request-local `ensure` が通った後にだけ起こる。
 
 ### 6. `rollback_stack`
 
@@ -218,12 +220,13 @@ E2 では `rollback_stack` に `restore_snapshot_ref` が必要であり、valid
 
 - `cursor_stack`
 - `place_stack`
+- `place_store`
 - `current_request`
 - `chain_cursor`
 - `trace_audit_sink`
 - `terminal_outcome`
 
-この例では `owner_writer` の `admit` miss を explicit failure にせず、`trace_audit_sink` の non-admissible metadata として残しつつ、`chain_cursor` を次の option へ進められればよい。
+この例では `owner_writer` の `admit` miss を explicit failure にせず、`trace_audit_sink` の non-admissible metadata として残しつつ、`chain_cursor` を次の option へ進められればよい。あわせて、leftmost admitted option が success したときに、`ensure` 通過後の `place_store` 更新を説明できなければならない。
 
 ### E6 — `lease` expiry と final `Reject`
 

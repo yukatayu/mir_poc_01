@@ -8,6 +8,7 @@
 - parser なし最小 interpreter が持つべき step 粒度を定める。
 - AST fixture schema と evaluation state schema の間を、「どの node をどう 1 step で進めるか」という規則で接続する。
 - E1 / E2 / E3 variant / E6 の walkthrough を与え、最小 state が実際に足りることを確認する。
+- predicate / effect oracle がどこで呼ばれるかという責務境界は `specs/examples/05-current-l2-oracle-api.md` を参照する。
 
 ## ここで固定すること / しないこと
 
@@ -16,7 +17,7 @@
   - `cursor_stack`、`place_stack`、`place_store`、`current_request`、`chain_cursor`、`rollback_stack`、`trace_audit_sink`、`terminal_outcome` の更新タイミング
   - static gate が runtime state の外にあること
 - 固定しないこと:
-  - predicate evaluator の完全 API
+  - predicate / effect oracle の richer API
   - `place_store` や snapshot ref の concrete layout
   - detached trace / audit serialization
   - multi-request scheduler
@@ -56,7 +57,7 @@ current L2 の parser-free 最小 interpreter では、1 回の `step` は「現
 |---|---|
 | `cursor_stack` | block へ入る / block を抜ける / 同一 block 内で次 statement へ進むとき |
 | `place_stack` | `PlaceBlock` へ入るとき push、抜けるとき pop |
-| `place_store` | `PerformOn` / admissible な `PerformVia` が success したとき mutate、rollback で restore、`AtomicCut` で snapshot を読む |
+| `place_store` | `PerformOn` / admissible な `PerformVia` が success-side carrier を得て、request-local `ensure` まで通過したときに mutate、rollback で restore、`AtomicCut` で snapshot を読む |
 | `current_request` | `PerformOn` / `PerformVia` の開始時に install、終了時に clear |
 | `chain_cursor` | `PerformVia` の開始時に生成、option miss / failure / success ごとに更新し、終了時に破棄 |
 | `rollback_stack` | `TryFallback` 開始時に push、body failure 時に top frame を参照して rollback、`AtomicCut` で top frame を更新、終了時に pop |
@@ -123,19 +124,23 @@ current L2 の parser-free 最小 interpreter では、1 回の `step` は「現
 
 1. request install step
    - `current_request = { op, mode = on, target, contract }` を install する。
-2. evaluation step
-   - request-local `require` と target operation を、predicate / effect oracle に委ねて評価する。
-   - current L2 では、この oracle の API 自体は **未決定** である。
-3. success branch
-   - success なら `place_store` を mutate し、`trace_audit_sink.events` に `perform-success` を追記する。
+2. request-local predicate step
+   - request-local `require` を predicate oracle に委ねて評価する。
+   - `require` が不成立なら `trace_audit_sink.events` に `perform-failure` を追記し、`current_request` を clear して `BubbleFailure(explicit_failure)` を返す。
+3. effect attempt step
+   - `require` が通ったら、target operation を effect oracle に委ねて評価する。
+   - effect oracle は最小でも success-side carrier か `explicit_failure` のいずれかを返せばよい。
+4. success commit step
+   - effect oracle が success-side carrier を返したら、その carrier から読める tentative post-state を使って request-local `ensure` を predicate oracle に委ねて評価する。
+   - `ensure` が通った場合にだけ success-side carrier を `place_store` へ反映し、`trace_audit_sink.events` に `perform-success` を追記する。
    - `current_request` を clear し、同一 block の cursor を次 statement へ進める。
    - result は `Continue`。
-4. failure branch
-   - failure なら `trace_audit_sink.events` に `perform-failure` を追記する。
+5. failure branch
+   - effect oracle が `explicit_failure` を返した場合、または `ensure` が不成立だった場合は、`trace_audit_sink.events` に `perform-failure` を追記する。
    - `current_request` を clear する。
    - enclosing `TryFallback` がいれば `BubbleFailure(kind)` を返し、いなければ `terminal_outcome = kind` として `Halt` する。
 
-current L2 の representative examples では、`PerformOn` が返す `kind` として `explicit_failure` だけを使えば足りる。
+current representative set では、`PerformOn` の failure branch に request-level `Reject` を要求しない。direct target に対する `Reject` を最小 oracle carrier に入れる必要があるかは、current L2 では未決定である。
 
 ### 6. `PerformVia`
 
@@ -150,19 +155,23 @@ current L2 の representative examples では、`PerformOn` が返す `kind` と
    - `lease` が失効していれば、`trace_audit_sink.non_admissible_metadata` に `{ option_ref, subreason = lease-expired }` を追記し、`chain_cursor` を次候補へ進める。
    - option-local `admit` が不成立なら、`trace_audit_sink.non_admissible_metadata` に `{ option_ref, subreason = admit-miss }` を追記し、`chain_cursor` を次候補へ進める。
    - request-local `require` と option capability が両立しないなら、formal subreason は増やさず `trace_audit_sink.narrative_explanations` に capability mismatch explanation を追記し、`chain_cursor` を次候補へ進める。
-3. admissible option success step
-   - option が admissible かつ request-compatible なら、その option 上で operation を試す。
-   - success なら `trace_audit_sink.events` に `perform-success` を追記し、`current_request` と `chain_cursor` を clear し、親 cursor を次 statement へ進める。
+3. admitted option request predicate step
+   - option が admissible かつ request-compatible なら、その option 上で request-local `require` を predicate oracle に委ねて評価する。
+   - `require` が不成立なら `trace_audit_sink.events` に `perform-failure` を追記し、`current_request` と `chain_cursor` を clear して `BubbleFailure(explicit_failure)` を返す。
+4. admitted option success step
+   - request-local `require` が通った option に対して operation を試し、effect oracle から success-side carrier または `explicit_failure` を受け取る。
+   - success-side carrier を得たら、その carrier から読める tentative post-state を使って request-local `ensure` を predicate oracle に委ねて評価する。
+   - `ensure` が通った場合にだけ `place_store` を更新し、`trace_audit_sink.events` に `perform-success` を追記し、`current_request` と `chain_cursor` を clear して親 cursor を次 statement へ進める。
    - result は `Continue`。
-4. admissible option explicit failure step
-   - admitted option の operation が explicit failure なら、`trace_audit_sink.events` に `perform-failure` を追記する。
+5. admissible option explicit failure step
+   - admitted option の operation が `explicit_failure` を返した場合、または admitted option success 後に `ensure` が不成立だった場合は、`trace_audit_sink.events` に `perform-failure` を追記する。
    - 後続 option が残っていれば `chain_cursor` を次候補へ進め、同じ `PerformVia` を継続する。
    - 後続 option が残っていなければ、`current_request` と `chain_cursor` を clear し、`BubbleFailure(explicit_failure)` を返す。enclosing `TryFallback` が無ければ `terminal_outcome = explicit_failure` で `Halt` する。
-5. chain exhaustion step
+6. chain exhaustion step
    - success を返す admissible candidateが 1 つも見つからず `candidate_order` が尽きた場合、`current_request` と `chain_cursor` を clear する。
-   - その exhaustion が E6 のような non-admissible skip / mismatch だけで起きたなら、result は `BubbleFailure(Reject)` である。enclosing `TryFallback` が無ければ `terminal_outcome = Reject` として `Halt` する。
+   - その exhaustion が E6 のような non-admissible skip / mismatch だけで起きたなら、`trace_audit_sink.events` に `Reject` を追記したうえで、result は `BubbleFailure(Reject)` である。enclosing `TryFallback` が無ければ `terminal_outcome = Reject` として `Halt` する。
 
-この規則により、`admit` miss は non-admissible skip、`lease` expiry も non-admissible skip、capability mismatch は narrative explanation に留まり、event surface は request-level outcome のまま保たれる。
+この規則により、`admit` miss は non-admissible skip、`lease` expiry も non-admissible skip、capability mismatch は narrative explanation に留まり、`ensure` は semantically dead にならず、event surface は request-level outcome のまま保たれる。
 
 ### 7. `TryFallback`
 
@@ -212,7 +221,8 @@ current L2 の representative examples では、`PerformOn` が返す `kind` と
 2. `Program` が root frame を push する。
 3. `PlaceBlock(root)`、`PlaceBlock(session)`、`PlaceBlock(authority_cell)` が順に `place_stack` を push する。
 4. `PerformOn(update_authority)` が `current_request` を install し、success する。
-   - `place_store` が mutate される。
+   - effect oracle が success-side carrier を返し、`ensure owner_is(session_user)` が通る。
+   - その後にだけ `place_store` が mutate される。
    - `trace_audit_sink.events += perform-success`
    - `current_request` を clear
 5. `AtomicCut` が走る。
@@ -233,7 +243,7 @@ current L2 の representative examples では、`PerformOn` が返す `kind` と
 3. `TryFallback` enter:
    - `draft_profile` の entry snapshot を取り、top rollback frame を push
 4. `PerformOn(stage_profile_patch)` success:
-   - `place_store` を mutate
+   - success-side carrier が `ensure` 空のまま commit され、`place_store` を mutate
    - `trace_audit_sink.events += perform-success`
 5. `PerformOn(validate_profile_patch)` explicit failure:
    - `trace_audit_sink.events += perform-failure`
@@ -262,7 +272,8 @@ current representative set には `try` body 内の `atomic_cut` 例は入って
    - `chain_cursor` を `delegated_writer` へ進める
 5. `delegated_writer` inspection:
    - admissible かつ request-compatible
-   - operation success
+   - operation が success-side carrier を返し、`ensure` 空のまま commit される
+   - `place_store` が mutate される
    - `trace_audit_sink.events += perform-success`
    - `current_request` と `chain_cursor` を clear
 6. Program が尽き、`terminal_outcome = success`
@@ -284,9 +295,9 @@ current representative set には `try` body 内の `atomic_cut` 例は入って
    - `trace_audit_sink.narrative_explanations += "readonly is request/capability mismatch"`
    - `chain_cursor` を exhaust する
 5. chain exhaustion:
-   - admissible かつ request-compatible な candidate が尽きたので `BubbleFailure(Reject)`
+   - admissible かつ request-compatible な candidate が尽きたので `trace_audit_sink.events += Reject`
+   - `BubbleFailure(Reject)`
    - enclosing `TryFallback` が無いため `terminal_outcome = Reject`
-   - event surface には `Reject`
 6. `Halt`
 
 この例で、`lease` expiry は formal subreason、capability mismatch は narrative explanation、最終 outcome は request-level `Reject` のまま保たれる。
@@ -305,7 +316,8 @@ current representative set には `try` body 内の `atomic_cut` 例は入って
 
 ## current L2 に残し、ここで決めないこと
 
-- predicate evaluator が success / explicit_failure / Reject をどう返すかという API 形は **未決定**。
+- predicate / effect oracle の richer API、host integration、success-side carrier の concrete layout は **未決定**。
+- direct target に対する request-level `Reject` を将来 oracle carrier に入れる必要があるかは **未決定**。
 - `place_store` snapshot の concrete representation は **未決定**。
 - `cursor_stack` / `chain_cursor` / `rollback_stack` の最終 field naming は **未決定**。
 - detached trace / audit serialization と event id は **未決定**。
