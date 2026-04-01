@@ -89,6 +89,7 @@ bundle manifest を導入せずに、current L2 fixture directory 内の bundle 
 - 上記を含む仕様本文 / 実装本文 commit: `097d4b7` (`current L2 の selection helper を追加する`)
 - report commit に含める変更:
   - 新規: `docs/reports/0063-current-l2-selection-helper.md`
+- report 自身の commit hash は self-reference の都合で本文に固定しない。
 
 ### Commands run and exact outputs
 
