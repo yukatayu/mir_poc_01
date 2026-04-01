@@ -70,7 +70,7 @@ bundle manifest を導入せずに、current L2 fixture directory 内の bundle 
    - 存在しない selector が fail する
 9. 新規補助文書 `specs/examples/11-current-l2-selection-helper.md` を追加し、selection helper の最小責務、sidecar discovery との整合、machine-check と human-facing explanation の境界を整理した。
 10. `Documentation.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md` に selection helper の mirror を追加した。
-11. narrow-scope reviewer を依頼したが、このセッションでは completion を回収できなかったため、最終確認は local spot-check で補った。
+11. narrow-scope reviewer を 1 回だけ当て、`no findings` を確認した。
 
 ## 5. Evidence / outputs / test results
 
@@ -194,6 +194,12 @@ git -c commit.gpgsign=false commit -m "current L2 の selection helper を追加
 [main 097d4b7] current L2 の selection helper を追加する
 ```
 
+final reviewer:
+
+```text
+no findings
+```
+
 ### Findings
 
 - selection helper の最小責務は、bundle discovery の再利用、runtime/static-only/single-fixture の filter、selected bundle 群に対する batch 実行、selected summary の返却だけで足りた。
@@ -201,6 +207,7 @@ git -c commit.gpgsign=false commit -m "current L2 の selection helper を追加
 - `single-fixture` は stem と path の両方を受けられるが、selector grammar の長期固定までは current L2 に入れていない。
 - `must_explain` は selection helper でも machine-check に入れていない。比較対象は static/runtime/trace-audit/coverage に留まっている。
 - pre-classification discovery failure を hidden に落とさないため、`runtime-only` / `static-only` selection でも `runtime_requirement = None` の discovery failure は可視のまま残す方針にした。
+- final reviewer は narrow scope で `no findings` だった。
 
 ## 6. What changed in understanding
 
@@ -216,7 +223,6 @@ git -c commit.gpgsign=false commit -m "current L2 の selection helper を追加
 - directory discovery rule を長期固定するかは **未決定**。
 - detached trace / audit serialization は **未決定**。
 - richer host interface、multi-request scheduler、`Approximate` / `Compensate` は **未決定**。
-- narrow reviewer completion を取得できなかった場合の process evidence をどこまで標準化するかは **未決定**。
 
 ## 8. Suggested next prompt
 
