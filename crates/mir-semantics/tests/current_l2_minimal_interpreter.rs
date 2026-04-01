@@ -6,12 +6,12 @@ use std::{
 
 use mir_semantics::{
     CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostPlan, FixtureHostStub,
-    FixtureRuntimeRequirement, NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict,
-    SelectionMode, SingleFixtureSelector, TraceExpectationOverride,
-    discover_bundles_in_directory,
+    FixtureRuntimeRequirement, NonAdmissibleMetadata, NonAdmissibleSubreason, ProfileRunSummary,
+    SelectionMode, SelectionProfile, SelectionRequest, SelectionScope, SingleFixtureSelector,
+    StaticGateVerdict, TraceExpectationOverride, discover_bundles_in_directory,
     host_plan_sidecar_path_for_fixture_path, load_bundle_from_fixture_path, load_fixture_from_path,
     load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path, run_bundle, run_directory,
-    run_directory_selected, select_bundles_from_discovery, static_gate,
+    run_directory_profiled, run_directory_selected, select_bundles_from_discovery, static_gate,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -618,6 +618,115 @@ fn run_directory_selected_rejects_unknown_single_fixture() {
         )),
     )
     .unwrap_err();
+
+    assert!(error.to_string().contains("selected fixture was not found"));
+}
+
+fn assert_profile_selected_counts(
+    summary: &ProfileRunSummary,
+    total_selected_bundles: usize,
+    runtime_selected_bundles: usize,
+    static_selected_bundles: usize,
+) {
+    assert_eq!(summary.total_selected_bundles, total_selected_bundles);
+    assert_eq!(summary.runtime_selected_bundles, runtime_selected_bundles);
+    assert_eq!(summary.static_selected_bundles, static_selected_bundles);
+}
+
+#[test]
+fn run_directory_profiled_runtime_single_fixture_runs_one_runtime_bundle() {
+    let profile = SelectionProfile::new(
+        "runtime-e2",
+        SelectionRequest::new()
+            .with_scope(SelectionScope::RuntimeOnly)
+            .with_single_fixture(SingleFixtureSelector::Stem("e2-try-fallback".to_string())),
+    );
+
+    let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
+
+    assert_eq!(summary.profile_name, "runtime-e2");
+    assert_profile_selected_counts(&summary, 1, 1, 0);
+    assert_eq!(summary.passed, 1);
+    assert_eq!(summary.failed, 0);
+    assert_eq!(summary.bundle_reports.len(), 1);
+    assert!(summary.bundle_reports[0]
+        .fixture_path
+        .ends_with("e2-try-fallback.json"));
+}
+
+#[test]
+fn run_directory_profiled_static_single_fixture_runs_one_static_bundle() {
+    let profile = SelectionProfile::new(
+        "static-e4",
+        SelectionRequest::new()
+            .with_scope(SelectionScope::StaticOnly)
+            .with_single_fixture(SingleFixtureSelector::Stem(
+                "e4-malformed-lineage".to_string(),
+            )),
+    );
+
+    let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
+
+    assert_eq!(summary.profile_name, "static-e4");
+    assert_profile_selected_counts(&summary, 1, 0, 1);
+    assert_eq!(summary.passed, 1);
+    assert_eq!(summary.failed, 0);
+    assert_eq!(summary.bundle_reports.len(), 1);
+    assert!(summary.bundle_reports[0]
+        .fixture_path
+        .ends_with("e4-malformed-lineage.json"));
+}
+
+#[test]
+fn run_directory_profiled_runtime_path_selector_runs_requested_bundle() {
+    let profile = SelectionProfile::new(
+        "runtime-path-e6",
+        SelectionRequest::new()
+            .with_scope(SelectionScope::RuntimeOnly)
+            .with_single_fixture(SingleFixtureSelector::Path(fixture_path(
+                "e6-write-after-expiry.json",
+            ))),
+    );
+
+    let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
+
+    assert_eq!(summary.profile_name, "runtime-path-e6");
+    assert_profile_selected_counts(&summary, 1, 1, 0);
+    assert_eq!(summary.passed, 1);
+    assert_eq!(summary.failed, 0);
+    assert_eq!(summary.bundle_reports.len(), 1);
+    assert!(summary.bundle_reports[0]
+        .fixture_path
+        .ends_with("e6-write-after-expiry.json"));
+}
+
+#[test]
+fn run_directory_profiled_includes_profile_name_in_summary() {
+    let profile = SelectionProfile::new(
+        "runtime-all",
+        SelectionRequest::new().with_scope(SelectionScope::RuntimeOnly),
+    );
+
+    let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
+
+    assert_eq!(summary.profile_name, "runtime-all");
+    assert_profile_selected_counts(&summary, 4, 4, 0);
+    assert_eq!(summary.passed, 4);
+    assert_eq!(summary.failed, 0);
+}
+
+#[test]
+fn run_directory_profiled_rejects_unknown_single_fixture() {
+    let profile = SelectionProfile::new(
+        "missing-runtime",
+        SelectionRequest::new()
+            .with_scope(SelectionScope::RuntimeOnly)
+            .with_single_fixture(SingleFixtureSelector::Stem(
+                "does-not-exist".to_string(),
+            )),
+    );
+
+    let error = run_directory_profiled(fixture_dir(), &profile).unwrap_err();
 
     assert!(error.to_string().contains("selected fixture was not found"));
 }

@@ -83,7 +83,8 @@ flowchart LR
 15. current L2 fixture と sidecar を 1 組として扱う bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md`
 16. current L2 fixture directory を bundle 群として一括実行する batch runner は `specs/examples/10-current-l2-batch-runner.md`
 17. current L2 batch runner の上に薄く載る bundle selection helper は `specs/examples/11-current-l2-selection-helper.md`
-18. 既存判断は `specs/12-decision-register.md` を参照する
+18. current L2 selection helper の primitive mode を組み合わせる profile helper は `specs/examples/12-current-l2-selection-profiles.md`
+19. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 

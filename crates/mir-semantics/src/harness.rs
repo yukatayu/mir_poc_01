@@ -98,6 +98,13 @@ pub struct BatchRunSummary {
     pub bundle_reports: Vec<BatchBundleReport>,
 }
 
+/// current L2 profile layer が使う bundle class filter。
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SelectionScope {
+    RuntimeOnly,
+    StaticOnly,
+}
+
 /// single-fixture selection の最小 selector。
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum SingleFixtureSelector {
@@ -111,6 +118,70 @@ pub enum SelectionMode {
     RuntimeOnly,
     StaticOnly,
     SingleFixture(SingleFixtureSelector),
+}
+
+/// primitive selection を組み合わせる current L2 request。
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct SelectionRequest {
+    pub scope: Option<SelectionScope>,
+    pub single_fixture: Option<SingleFixtureSelector>,
+}
+
+impl SelectionRequest {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn with_scope(mut self, scope: SelectionScope) -> Self {
+        self.scope = Some(scope);
+        self
+    }
+
+    pub fn with_single_fixture(mut self, selector: SingleFixtureSelector) -> Self {
+        self.single_fixture = Some(selector);
+        self
+    }
+
+    fn from_mode(mode: &SelectionMode) -> Self {
+        match mode {
+            SelectionMode::RuntimeOnly => Self::new().with_scope(SelectionScope::RuntimeOnly),
+            SelectionMode::StaticOnly => Self::new().with_scope(SelectionScope::StaticOnly),
+            SelectionMode::SingleFixture(selector) => {
+                Self::new().with_single_fixture(selector.clone())
+            }
+        }
+    }
+}
+
+/// selected batch 実行に名前を付ける current L2 profile。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct SelectionProfile {
+    pub profile_name: String,
+    pub request: SelectionRequest,
+}
+
+impl SelectionProfile {
+    pub fn new(profile_name: impl Into<String>, request: SelectionRequest) -> Self {
+        Self {
+            profile_name: profile_name.into(),
+            request,
+        }
+    }
+}
+
+/// profile 名付きの selected batch summary。
+#[derive(Debug, Clone)]
+pub struct ProfileRunSummary {
+    pub profile_name: String,
+    pub total_selected_bundles: usize,
+    pub runtime_selected_bundles: usize,
+    pub static_selected_bundles: usize,
+    pub passed: usize,
+    pub failed: usize,
+    pub discovery_failures: Vec<BundleDiscoveryFailure>,
+    pub bundle_failures: Vec<BundleExecutionFailure>,
+    pub host_plan_coverage_failures: Vec<BundleExecutionFailure>,
+    pub bundle_reports: Vec<BatchBundleReport>,
 }
 
 /// current L2 host harness が declarative に持つ最小 store mutation。
@@ -537,6 +608,30 @@ pub fn select_bundles_from_discovery(
     })
 }
 
+pub fn select_bundles_from_request(
+    discovery: BundleDiscoveryReport,
+    request: &SelectionRequest,
+) -> Result<BundleDiscoveryReport, InterpreterError> {
+    let mut selected = discovery;
+
+    if let Some(scope) = request.scope {
+        let mode = match scope {
+            SelectionScope::RuntimeOnly => SelectionMode::RuntimeOnly,
+            SelectionScope::StaticOnly => SelectionMode::StaticOnly,
+        };
+        selected = select_bundles_from_discovery(selected, &mode)?;
+    }
+
+    if let Some(selector) = &request.single_fixture {
+        selected = select_bundles_from_discovery(
+            selected,
+            &SelectionMode::SingleFixture(selector.clone()),
+        )?;
+    }
+
+    Ok(selected)
+}
+
 pub fn run_directory(directory: impl AsRef<Path>) -> Result<BatchRunSummary, InterpreterError> {
     let discovery = discover_bundles_in_directory(directory)?;
     batch_summary_from_discovery(discovery)
@@ -547,8 +642,30 @@ pub fn run_directory_selected(
     mode: &SelectionMode,
 ) -> Result<BatchRunSummary, InterpreterError> {
     let discovery = discover_bundles_in_directory(directory)?;
-    let selected = select_bundles_from_discovery(discovery, mode)?;
+    let request = SelectionRequest::from_mode(mode);
+    let selected = select_bundles_from_request(discovery, &request)?;
     batch_summary_from_discovery(selected)
+}
+
+pub fn run_directory_profiled(
+    directory: impl AsRef<Path>,
+    profile: &SelectionProfile,
+) -> Result<ProfileRunSummary, InterpreterError> {
+    let discovery = discover_bundles_in_directory(directory)?;
+    let selected = select_bundles_from_request(discovery, &profile.request)?;
+    let summary = batch_summary_from_discovery(selected)?;
+    Ok(ProfileRunSummary {
+        profile_name: profile.profile_name.clone(),
+        total_selected_bundles: summary.total_bundles,
+        runtime_selected_bundles: summary.runtime_bundles,
+        static_selected_bundles: summary.static_only_bundles,
+        passed: summary.passed,
+        failed: summary.failed,
+        discovery_failures: summary.discovery_failures,
+        bundle_failures: summary.bundle_failures,
+        host_plan_coverage_failures: summary.host_plan_coverage_failures,
+        bundle_reports: summary.bundle_reports,
+    })
 }
 
 fn batch_summary_from_discovery(

@@ -7,6 +7,7 @@
 - bundle discovery と directory 単位 batch 実行の間に、薄い selection step を追加する。
 - current L2 semantics 自体は変えず、既存の sidecar discovery rule と runtime/static-only classification を再利用する。
 - `must_explain` は引き続き human-facing explanation obligation に残し、selection helper でも machine-check に上げない。
+- 複合指定や profile 名付き summary は、この文書の責務に含めず、必要なら上位の profile helper に送る。
 
 ## current L2 で固定すること
 
@@ -31,6 +32,8 @@ current L2 の selection helper は、少なくとも次の 4 つだけを責務
    - stem または path 指定で 1 件だけ選ぶ。
 4. selected bundle の batch 実行
    - 選別後の bundle 群に対して既存 batch helper を走らせる。
+
+複合指定は current L2 selection helper の責務ではない。`runtime-only + single-fixture` のような profile request は、selection helper の primitive mode を組み合わせる上位 helper で扱ってよい。
 
 ## sidecar discovery と selection の整合
 

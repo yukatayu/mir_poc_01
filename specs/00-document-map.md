@@ -108,6 +108,8 @@
   - current L2 fixture directory を bundle 群として一括 discovery / 実行 / 集計するための最小 batch helper 境界。
 - `specs/examples/11-current-l2-selection-helper.md`
   - current L2 bundle 群を `runtime-only` / `static-only` / `single-fixture` で絞って batch 実行するための最小 selection helper 境界。
+- `specs/examples/12-current-l2-selection-profiles.md`
+  - current L2 selection helper の primitive mode を組み合わせ、profile 名付き summary で selected batch 実行するための最小 profile helper 境界。
 
 ## レポート
 
@@ -128,6 +130,7 @@
   - parser なし minimal interpreter の fixture bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md` に置く。
   - parser なし minimal interpreter の fixture directory batch runner / summary helper は `specs/examples/10-current-l2-batch-runner.md` に置く。
   - parser なし minimal interpreter の filtered batch runner / selection helper は `specs/examples/11-current-l2-selection-helper.md` に置く。
+  - parser なし minimal interpreter の selection mode を組み合わせる profile helper は `specs/examples/12-current-l2-selection-profiles.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針

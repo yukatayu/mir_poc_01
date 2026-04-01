@@ -23,11 +23,13 @@ pub use harness::{
     BundleDiscoveryReport, BundleExecutionFailure, BundleRunReport,
     CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, EffectPlanRule, EffectPlanVerdict, FixtureBundle,
     FixtureCommitPlan, FixtureHostPlan, FixtureHostStub, FixtureRuntimeRequirement,
-    FixtureStoreMutation, PredicatePlanRule, SelectionMode, SingleFixtureSelector,
+    FixtureStoreMutation, PredicatePlanRule, ProfileRunSummary, SelectionMode,
+    SelectionProfile, SelectionRequest, SelectionScope, SingleFixtureSelector,
     TraceExpectationOverride, discover_bundles_in_directory,
     host_plan_sidecar_path_for_fixture_path, load_bundle_from_fixture_path,
     load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path, run_bundle,
-    run_directory, run_directory_selected, select_bundles_from_discovery,
+    run_directory, run_directory_profiled, run_directory_selected,
+    select_bundles_from_discovery, select_bundles_from_request,
 };
 
 pub type PlaceStore = BTreeMap<String, Vec<String>>;
