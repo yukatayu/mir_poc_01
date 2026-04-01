@@ -39,6 +39,9 @@
 - `specs/examples/05-current-l2-oracle-api.md`
   - parser なし最小 interpreter の current L2 predicate / effect oracle API をまとめた補助文書。
   - `PerformOn` / `PerformVia` が oracle に渡す最小 input、oracle が返す最小 carrier、step semantics との接続を整理する。
+- `specs/examples/06-current-l2-interpreter-skeleton.md`
+  - parser なし最小 interpreter skeleton の current L2 実装境界をまとめた補助文書。
+  - static gate、runtime evaluation、machine-checked expectation、future work の境界を整理する。
 
 ## 各文書の役割
 
@@ -78,6 +81,8 @@
   - current L2 の representative examples を parser なし最小 interpreter で進めるための最小 step semantics。
 - `specs/examples/05-current-l2-oracle-api.md`
   - current L2 の representative examples を parser なし最小 interpreter で動かすための最小 oracle boundary。
+- `specs/examples/06-current-l2-interpreter-skeleton.md`
+  - current L2 の representative examples を parser なし最小 interpreter skeleton で動かすときの最小実装境界。
 
 ## レポート
 
@@ -92,6 +97,7 @@
   - parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md` に置く。
   - parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md` に置く。
   - parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md` に置く。
+  - parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針

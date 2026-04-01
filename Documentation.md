@@ -77,7 +77,8 @@ flowchart LR
 9. parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md`
 10. parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md`
 11. parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md`
-12. 既存判断は `specs/12-decision-register.md` を参照する
+12. parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md`
+13. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 

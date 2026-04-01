@@ -169,11 +169,15 @@ current L2 では、
 | `request-require` (`PerformOn`) | `Satisfied` | effect attempt へ進む | `Continue` |
 | `request-require` (`PerformOn`) | `Unsatisfied` | `perform-failure` を記録し `current_request` を clear | `BubbleFailure(explicit_failure)` |
 | `request-require` (`PerformVia`) | `Satisfied` | admitted option の effect attempt へ進む | `Continue` |
-| `request-require` (`PerformVia`) | `Unsatisfied` | `perform-failure` を記録し `current_request` と `chain_cursor` を clear | `BubbleFailure(explicit_failure)` |
-| `request-ensure` | `Satisfied` | success-side carrier を `place_store` へ反映し `perform-success` を記録 | `Continue` |
-| `request-ensure` | `Unsatisfied` | success-side carrier を破棄し `perform-failure` を記録 | `BubbleFailure(explicit_failure)` |
+| `request-require` (`PerformVia`) | `Unsatisfied` + next option あり | `perform-failure` を記録し `chain_cursor` を前進 | `Continue` |
+| `request-require` (`PerformVia`) | `Unsatisfied` + next option なし | `perform-failure` と `Reject` を記録し `current_request` と `chain_cursor` を clear | `BubbleFailure(Reject)` |
+| `request-ensure` (`PerformOn`) | `Satisfied` | success-side carrier を `place_store` へ反映し `perform-success` を記録 | `Continue` |
+| `request-ensure` (`PerformOn`) | `Unsatisfied` | success-side carrier を破棄し `perform-failure` を記録 | `BubbleFailure(explicit_failure)` |
+| `request-ensure` (`PerformVia`) | `Satisfied` | success-side carrier を `place_store` へ反映し `perform-success` を記録 | `Continue` |
+| `request-ensure` (`PerformVia`) | `Unsatisfied` + next option あり | success-side carrier を破棄し `perform-failure` を記録して `chain_cursor` を前進 | `Continue` |
+| `request-ensure` (`PerformVia`) | `Unsatisfied` + next option なし | success-side carrier を破棄し `perform-failure` と `Reject` を記録して `current_request` と `chain_cursor` を clear | `BubbleFailure(Reject)` |
 
-`request-ensure` の不成立を `explicit_failure` に寄せることで、`ensure` は semantically dead にならず、しかも request-level `Reject` や non-admissible skip と混ざらない。
+`request-ensure` の不成立は、direct target では `explicit_failure` に寄せ、via-chain では「well-formed chain が success を返さずに尽きた」とき request-level `Reject` に畳む。これにより `ensure` は semantically dead にならず、しかも request-level `Reject` を option-local carrier に混ぜない。
 
 ### `EffectOracle`
 
@@ -183,7 +187,7 @@ current L2 では、
 | `PerformOn` | `ExplicitFailure` | `perform-failure` を記録し `current_request` を clear | `BubbleFailure(explicit_failure)` |
 | `PerformVia` admitted option | `Success(success_side_carrier)` | `ensure` 評価へ進む | `Continue` |
 | `PerformVia` admitted option | `ExplicitFailure` + next option あり | `perform-failure` を記録し `chain_cursor` を前進 | `Continue` |
-| `PerformVia` admitted option | `ExplicitFailure` + next option なし | `perform-failure` を記録し `current_request` と `chain_cursor` を clear | `BubbleFailure(explicit_failure)` |
+| `PerformVia` admitted option | `ExplicitFailure` + next option なし | `perform-failure` と `Reject` を記録し `current_request` と `chain_cursor` を clear | `BubbleFailure(Reject)` |
 
 ### interpreter 側だけで生じる branch
 
@@ -191,7 +195,7 @@ current L2 では、
 |---|---|---|
 | `lease` expiry | `non_admissible_metadata += { option_ref, subreason = lease-expired }`、`chain_cursor` を前進 | `Continue` |
 | capability mismatch | `narrative_explanations += ...`、`chain_cursor` を前進 | `Continue` |
-| non-admissible skip だけで chain exhaustion | `Reject` を記録し `current_request` と `chain_cursor` を clear | `BubbleFailure(Reject)` |
+| well-formed chain が success を返さずに exhaustion | `Reject` を記録し `current_request` と `chain_cursor` を clear | `BubbleFailure(Reject)` |
 | direct target で request-level `Reject` を返す必要が生じる将来拡張 | current L2 では未採用 | **未決定** |
 
 ## representative examples での読み

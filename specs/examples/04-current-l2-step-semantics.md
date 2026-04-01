@@ -157,7 +157,9 @@ current representative set では、`PerformOn` の failure branch に request-l
    - request-local `require` と option capability が両立しないなら、formal subreason は増やさず `trace_audit_sink.narrative_explanations` に capability mismatch explanation を追記し、`chain_cursor` を次候補へ進める。
 3. admitted option request predicate step
    - option が admissible かつ request-compatible なら、その option 上で request-local `require` を predicate oracle に委ねて評価する。
-   - `require` が不成立なら `trace_audit_sink.events` に `perform-failure` を追記し、`current_request` と `chain_cursor` を clear して `BubbleFailure(explicit_failure)` を返す。
+   - `require` が不成立なら `trace_audit_sink.events` に `perform-failure` を追記する。
+   - 後続 option が残っていれば `chain_cursor` を次候補へ進め、同じ `PerformVia` を継続する。
+   - 後続 option が残っていなければ、`trace_audit_sink.events` に `Reject` を追記し、`current_request` と `chain_cursor` を clear して `BubbleFailure(Reject)` を返す。enclosing `TryFallback` が無ければ `terminal_outcome = Reject` で `Halt` する。
 4. admitted option success step
    - request-local `require` が通った option に対して operation を試し、effect oracle から success-side carrier または `explicit_failure` を受け取る。
    - success-side carrier を得たら、その carrier から読める tentative post-state を使って request-local `ensure` を predicate oracle に委ねて評価する。
@@ -166,10 +168,10 @@ current representative set では、`PerformOn` の failure branch に request-l
 5. admissible option explicit failure step
    - admitted option の operation が `explicit_failure` を返した場合、または admitted option success 後に `ensure` が不成立だった場合は、`trace_audit_sink.events` に `perform-failure` を追記する。
    - 後続 option が残っていれば `chain_cursor` を次候補へ進め、同じ `PerformVia` を継続する。
-   - 後続 option が残っていなければ、`current_request` と `chain_cursor` を clear し、`BubbleFailure(explicit_failure)` を返す。enclosing `TryFallback` が無ければ `terminal_outcome = explicit_failure` で `Halt` する。
+   - 後続 option が残っていなければ、`trace_audit_sink.events` に `Reject` を追記し、`current_request` と `chain_cursor` を clear して `BubbleFailure(Reject)` を返す。enclosing `TryFallback` が無ければ `terminal_outcome = Reject` で `Halt` する。
 6. chain exhaustion step
    - success を返す admissible candidateが 1 つも見つからず `candidate_order` が尽きた場合、`current_request` と `chain_cursor` を clear する。
-   - その exhaustion が E6 のような non-admissible skip / mismatch だけで起きたなら、`trace_audit_sink.events` に `Reject` を追記したうえで、result は `BubbleFailure(Reject)` である。enclosing `TryFallback` が無ければ `terminal_outcome = Reject` として `Halt` する。
+   - その exhaustion が non-admissible skip / mismatch だけで起きた場合でも、途中に request-local `require` 不成立や admitted option の `explicit_failure` が含まれていた場合でも、current L2 では「well-formed chain が success を返さずに尽きた」という request-level outcome として `trace_audit_sink.events` に `Reject` を追記したうえで、result は `BubbleFailure(Reject)` である。enclosing `TryFallback` が無ければ `terminal_outcome = Reject` として `Halt` する。
 
 この規則により、`admit` miss は non-admissible skip、`lease` expiry も non-admissible skip、capability mismatch は narrative explanation に留まり、`ensure` は semantically dead にならず、event surface は request-level outcome のまま保たれる。
 
