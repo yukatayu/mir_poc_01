@@ -61,6 +61,9 @@
   - current L2 selection helper の primitive mode を組み合わせ、profile 名付き summary で selected batch 実行するための最小 profile helper 境界。
 - `specs/examples/13-current-l2-profile-catalog.md`
   - current L2 selection profile helper の上に small named profile catalog / preset table を薄く載せ、human-friendly alias を既存 request へ解決するための最小境界。
+- `specs/examples/14-current-l2-profile-catalog-externalization.md`
+  - current L2 named profile catalog を hard-coded table のまま維持するか、machine-readable catalog asset / preset manifest へ外出しするかを比較する補助文書。
+  - production manifest を固定せず、PoC 実験ループの観点から current L2 でどこまで externalization する価値があるかだけを整理する。
 
 ## 各文書の役割
 
@@ -116,6 +119,8 @@
   - current L2 selection helper の primitive mode を組み合わせ、profile 名付き summary で selected batch 実行するための最小 profile helper 境界。
 - `specs/examples/13-current-l2-profile-catalog.md`
   - current L2 selection profile helper の上に thin な named alias layer を足し、human-friendly preset 名を既存 request へ解決するための最小 catalog 境界。
+- `specs/examples/14-current-l2-profile-catalog-externalization.md`
+  - current L2 named profile catalog を hard-coded table に留めるか、machine-readable asset として比較するための最小 companion 境界。
 
 ## レポート
 
@@ -138,6 +143,7 @@
   - parser なし minimal interpreter の filtered batch runner / selection helper は `specs/examples/11-current-l2-selection-helper.md` に置く。
   - parser なし minimal interpreter の selection mode を組み合わせる profile helper は `specs/examples/12-current-l2-selection-profiles.md` に置く。
   - parser なし minimal interpreter の small named profile catalog / preset table は `specs/examples/13-current-l2-profile-catalog.md` に置く。
+  - parser なし minimal interpreter の named profile catalog を hard-coded table に留めるか、machine-readable asset として比較する整理は `specs/examples/14-current-l2-profile-catalog-externalization.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針

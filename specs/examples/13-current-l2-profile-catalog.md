@@ -126,4 +126,6 @@ current L2 で最低限必要なのは次である。
 - `Approximate` / `Compensate`
 - alias catalog を sidecar や manifest へ外出しするかどうか
 
+catalog externalization の比較整理は `specs/examples/14-current-l2-profile-catalog-externalization.md` を参照する。
+
 これらは **未決定** とする。current L2 で固定するのは、selection profile helper の上に薄く載る small named profile catalog だけである。
