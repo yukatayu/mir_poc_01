@@ -106,6 +106,12 @@ bundle manifest をまだ導入せずに、既存の `SelectionRequest` / `Selec
 - named profile catalog は current L2 selection profile helper の上に載る薄い alias layer として十分であり、selection/profile/batch/bundle の責務境界を崩していない。
 - `must_explain` は引き続き machine-check に上げず、人間向け explanation obligation に残している。
 
+関連 commit:
+
+- `b3acda5` `current L2 の named profile catalog を追加する`
+- `93837b1` `named profile catalog の作業報告を追加する`
+  - report 自身の commit hash は self-reference の都合で執筆時点には固定できないため、ここでは追記時点の hash として記録する。
+
 ## 7. Changes in understanding
 
 - `resolved_request` を summary に含めるだけで、人間向け alias 層を追加しても selection/profile helper 自体を膨らませずに済むことが確認できた。
