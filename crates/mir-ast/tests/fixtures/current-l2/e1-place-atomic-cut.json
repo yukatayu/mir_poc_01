@@ -1,0 +1,96 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e1_place_atomic_cut",
+  "source_example_id": "E1",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "authority_cell",
+                "body": [
+                  {
+                    "kind": "PerformOn",
+                    "op": "update_authority",
+                    "target": "profile_authority",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "write"
+                        }
+                      ],
+                      "ensure": [
+                        {
+                          "kind": "call",
+                          "callee": "owner_is",
+                          "args": [
+                            "session_user"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "AtomicCut"
+                  },
+                  {
+                    "kind": "PerformOn",
+                    "op": "append_audit",
+                    "target": "authority_log",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "append"
+                        }
+                      ],
+                      "ensure": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "place nesting is well-formed",
+      "atomic_cut is place-local",
+      "statement-local contract is attached only to perform"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "explicit_failure",
+    "notes": [
+      "update_authority succeeds before atomic_cut",
+      "append_audit fails after atomic_cut"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-success",
+      "atomic-cut",
+      "perform-failure"
+    ],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "pre-cut prefix is not rolled back",
+      "failure happens after the rollback frontier is fixed"
+    ]
+  }
+}

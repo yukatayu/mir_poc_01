@@ -27,6 +27,9 @@
 - `specs/examples/01-current-l2-surface-syntax-candidates.md`
   - representative examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、statement separator / block nesting の current L2 候補書式をまとめた補助文書。
   - final parser syntax や reserved keyword を固定するものではなく、examples 用の安定した companion notation を示す。
+- `specs/examples/02-current-l2-ast-fixture-schema.md`
+  - representative examples を parser なしで machine-readable に扱うための current L2 AST fixture schema をまとめた補助文書。
+  - syntax の punctuation を固定せず、意味側の構造と expected static / runtime / trace-audit を fixture 化する。
 
 ## 各文書の役割
 
@@ -58,6 +61,8 @@
   - current L2 の representative Mir program と、その static 判定 / runtime outcome / trace の最小読解。
 - `specs/examples/01-current-l2-surface-syntax-candidates.md`
   - current L2 の representative examples で使う最小 surface syntax 候補。
+- `specs/examples/02-current-l2-ast-fixture-schema.md`
+  - current L2 の representative examples を parser なしで fixture に落とすための最小 AST schema。
 
 ## レポート
 
@@ -68,6 +73,7 @@
 
 - `specs/examples/`
   - representative program、説明用記法、例示中心の補助文書置き場。
+  - parser なしで扱う representative example fixture の schema は `specs/examples/02-current-l2-ast-fixture-schema.md` に置き、machine-readable な fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針

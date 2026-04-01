@@ -1,0 +1,122 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e2_try_fallback",
+  "source_example_id": "E2",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "draft_profile",
+                "body": [
+                  {
+                    "kind": "TryFallback",
+                    "body": [
+                      {
+                        "kind": "PerformOn",
+                        "op": "stage_profile_patch",
+                        "target": "profile_draft",
+                        "contract": {
+                          "require": [
+                            {
+                              "kind": "atom",
+                              "name": "write"
+                            }
+                          ],
+                          "ensure": []
+                        }
+                      },
+                      {
+                        "kind": "PerformOn",
+                        "op": "validate_profile_patch",
+                        "target": "profile_draft",
+                        "contract": {
+                          "require": [
+                            {
+                              "kind": "and",
+                              "terms": [
+                                {
+                                  "kind": "call",
+                                  "callee": "owner_is",
+                                  "args": [
+                                    "session_user"
+                                  ]
+                                },
+                                {
+                                  "kind": "call",
+                                  "callee": "well_formed",
+                                  "args": [
+                                    "profile_draft"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "ensure": []
+                        }
+                      }
+                    ],
+                    "fallback_body": [
+                      {
+                        "kind": "PerformOn",
+                        "op": "load_last_snapshot",
+                        "target": "profile_snapshot",
+                        "contract": {
+                          "require": [
+                            {
+                              "kind": "atom",
+                              "name": "read"
+                            }
+                          ],
+                          "ensure": []
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "try/fallback block form is allowed as current L2 companion notation",
+      "rollback scope stays local to the current place"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "success",
+    "notes": [
+      "validate_profile_patch fails explicitly",
+      "try body rolls back locally",
+      "fallback branch succeeds"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-success",
+      "perform-failure",
+      "rollback",
+      "perform-success"
+    ],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "rollback is local to draft_profile",
+      "fallback branch runs after rollback"
+    ]
+  }
+}

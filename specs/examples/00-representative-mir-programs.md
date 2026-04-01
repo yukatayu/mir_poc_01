@@ -8,6 +8,7 @@
 - Mir-0 / current L2 で何が自然に書けるかを確認する。
 - static 判定、runtime outcome、trace / audit の最小読解を例ごとに並べる。
 - 書きづらい箇所や、未決のため決め打ちできない箇所を早めに発見する。
+- parser なしで実行準備するための machine-readable fixture は `specs/examples/02-current-l2-ast-fixture-schema.md` と `crates/mir-ast/tests/fixtures/current-l2/` を参照する。
 
 ## 説明用記法
 

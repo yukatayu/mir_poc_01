@@ -8,6 +8,7 @@
 - current L2 の representative examples を、過度に ad-hoc ではない一定の書式で読めるようにする。
 - parser-ready な最終 grammar や reserved keyword 集合は固定しない。
 - `perform`、option declaration、chain 参照、`try` / `fallback`、statement-local clause、block nesting のうち、current L2 で最も摩擦の少ない最小表記だけを候補として置く。
+- parser なしの machine-readable carrier が必要な場合は、syntax ではなく意味側の構造へ正規化した `specs/examples/02-current-l2-ast-fixture-schema.md` を参照する。
 
 ## current L2 の最小候補
 

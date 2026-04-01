@@ -1,0 +1,79 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e5_underdeclared_lineage",
+  "source_example_id": "E5",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "mirror",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [
+                      {
+                        "predecessor": "primary",
+                        "successor": "mirror",
+                        "lineage_assertion": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "underdeclared",
+    "reasons": [
+      "declared access target alone is not enough",
+      "edge-local lineage evidence is missing"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "underdeclared chain is stopped as a surface-level static error"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "target equality is not same-lineage evidence",
+      "underdeclared fallback is not pushed into dynamic Reject"
+    ]
+  }
+}

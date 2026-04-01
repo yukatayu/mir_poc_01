@@ -73,7 +73,8 @@ flowchart LR
 5. その後、必要な subsystem に進む
 6. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
 7. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
-8. 既存判断は `specs/12-decision-register.md` を参照する
+8. parser なしで representative examples を machine-readable に扱う最小 AST fixture schema は `specs/examples/02-current-l2-ast-fixture-schema.md`、fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/`
+9. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 

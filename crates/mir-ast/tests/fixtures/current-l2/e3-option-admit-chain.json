@@ -1,0 +1,117 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e3_option_admit_chain",
+  "source_example_id": "E3-variant",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "owner_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": {
+                      "kind": "call",
+                      "callee": "owner_is",
+                      "args": [
+                        "session_user"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "delegated_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": {
+                      "kind": "call",
+                      "callee": "delegate_granted",
+                      "args": [
+                        "session_user"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "owner_writer",
+                    "edges": [
+                      {
+                        "predecessor": "owner_writer",
+                        "successor": "delegated_writer",
+                        "lineage_assertion": {
+                          "predecessor": "owner_writer",
+                          "successor": "delegated_writer"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "PerformVia",
+                    "op": "write_profile",
+                    "chain_ref": "profile_ref",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "write"
+                        }
+                      ],
+                      "ensure": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "declared target is present on both options",
+      "lineage assertion matches the chain edge",
+      "admit carries option-local admissibility difference"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "success",
+    "notes": [
+      "owner_writer is skipped because admit is not satisfied",
+      "delegated_writer becomes the leftmost admitted candidate"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-success"
+    ],
+    "non_admissible_metadata": [
+      {
+        "option_ref": "owner_writer",
+        "subreason": "admit-miss"
+      }
+    ],
+    "narrative_explanations": [],
+    "must_explain": [
+      "admit miss is not an explicit failure",
+      "chain evaluation continues to the next admissible option"
+    ]
+  }
+}

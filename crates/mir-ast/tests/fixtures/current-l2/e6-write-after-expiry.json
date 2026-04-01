@@ -1,0 +1,106 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e6_write_after_expiry",
+  "source_example_id": "E6",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "expired",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "readonly",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "writer",
+                    "edges": [
+                      {
+                        "predecessor": "writer",
+                        "successor": "readonly",
+                        "lineage_assertion": {
+                          "predecessor": "writer",
+                          "successor": "readonly"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "PerformVia",
+                    "op": "write_profile",
+                    "chain_ref": "profile_ref",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "write"
+                        }
+                      ],
+                      "ensure": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "chain is well-formed statically",
+      "capability degrades monotonically from write to read"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "Reject",
+    "notes": [
+      "writer is not admissible because lease is expired",
+      "readonly cannot satisfy the write request"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "Reject"
+    ],
+    "non_admissible_metadata": [
+      {
+        "option_ref": "writer",
+        "subreason": "lease-expired"
+      }
+    ],
+    "narrative_explanations": [
+      "readonly remains a request/capability mismatch narrative explanation"
+    ],
+    "must_explain": [
+      "chain is statically well-formed but runtime admissibility is exhausted",
+      "lease expiry remains metadata rather than a dedicated event"
+    ]
+  }
+}

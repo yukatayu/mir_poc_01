@@ -1,0 +1,89 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e4_malformed_lineage",
+  "source_example_id": "E4",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "mirror",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "archive",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [
+                      {
+                        "predecessor": "primary",
+                        "successor": "mirror",
+                        "lineage_assertion": {
+                          "predecessor": "primary",
+                          "successor": "archive"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "reasons": [
+      "lineage assertion does not describe the decorated edge"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "chain is rejected before runtime evaluation"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "malformed lineage evidence is a static problem",
+      "hidden repair to mirror is forbidden"
+    ]
+  }
+}
