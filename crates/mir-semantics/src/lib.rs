@@ -12,20 +12,21 @@ mod harness;
 
 use std::{
     collections::{BTreeMap, HashMap},
-    fmt,
-    fs,
+    fmt, fs,
     path::Path,
 };
 
 use serde::Deserialize;
 
 pub use harness::{
-    BundleRunReport, CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, EffectPlanRule,
-    EffectPlanVerdict, FixtureBundle, FixtureCommitPlan, FixtureHostPlan, FixtureHostStub,
-    FixtureRuntimeRequirement, FixtureStoreMutation, PredicatePlanRule,
-    TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path,
+    BatchBundleOutcome, BatchBundleReport, BatchRunSummary, BundleDiscoveryFailure,
+    BundleDiscoveryReport, BundleExecutionFailure, BundleRunReport,
+    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, EffectPlanRule, EffectPlanVerdict, FixtureBundle,
+    FixtureCommitPlan, FixtureHostPlan, FixtureHostStub, FixtureRuntimeRequirement,
+    FixtureStoreMutation, PredicatePlanRule, TraceExpectationOverride,
+    discover_bundles_in_directory, host_plan_sidecar_path_for_fixture_path,
     load_bundle_from_fixture_path, load_host_plan_from_path,
-    load_host_plan_sidecar_for_fixture_path, run_bundle,
+    load_host_plan_sidecar_for_fixture_path, run_bundle, run_directory,
 };
 
 pub type PlaceStore = BTreeMap<String, Vec<String>>;
@@ -376,13 +377,20 @@ pub struct CursorFrame {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum CursorFrameKind {
-    Program { statements: Vec<Statement> },
-    Place { place: String, statements: Vec<Statement> },
+    Program {
+        statements: Vec<Statement>,
+    },
+    Place {
+        place: String,
+        statements: Vec<Statement>,
+    },
     TryBody {
         statements: Vec<Statement>,
         fallback_body: Vec<Statement>,
     },
-    TryFallback { statements: Vec<Statement> },
+    TryFallback {
+        statements: Vec<Statement>,
+    },
 }
 
 impl CursorFrame {
@@ -540,11 +548,10 @@ impl DirectStyleEvaluator {
         }
 
         let statement = {
-            let frame = self
-                .state
-                .cursor_stack
-                .last_mut()
-                .ok_or_else(|| InterpreterError::InvalidProgram("cursor_stack is empty".into()))?;
+            let frame =
+                self.state.cursor_stack.last_mut().ok_or_else(|| {
+                    InterpreterError::InvalidProgram("cursor_stack is empty".into())
+                })?;
             let statement = frame
                 .statements()
                 .get(frame.next_index)
@@ -557,23 +564,32 @@ impl DirectStyleEvaluator {
         match statement {
             Statement::PlaceBlock { place, body } => {
                 self.state.place_stack.push(place.clone());
-                self.state.cursor_stack.push(CursorFrame::place(place, body));
+                self.state
+                    .cursor_stack
+                    .push(CursorFrame::place(place, body));
                 Ok(StepControl::Continue)
             }
             Statement::OptionDecl { .. } | Statement::ChainDecl { .. } => Ok(StepControl::Continue),
             Statement::AtomicCut => {
-                self.state.trace_audit_sink.events.push(EventKind::AtomicCut);
+                self.state
+                    .trace_audit_sink
+                    .events
+                    .push(EventKind::AtomicCut);
                 let current_place = self.current_place().cloned();
-                if let (Some(frame), Some(place)) =
-                    (self.state.rollback_stack.last_mut(), current_place.as_deref())
-                {
+                if let (Some(frame), Some(place)) = (
+                    self.state.rollback_stack.last_mut(),
+                    current_place.as_deref(),
+                ) {
                     if frame.place_anchor == *place {
                         frame.restore_snapshot = self.state.place_store.clone();
                     }
                 }
                 Ok(StepControl::Continue)
             }
-            Statement::TryFallback { body, fallback_body } => {
+            Statement::TryFallback {
+                body,
+                fallback_body,
+            } => {
                 let place_anchor = self
                     .current_place()
                     .ok_or_else(|| {
@@ -591,9 +607,11 @@ impl DirectStyleEvaluator {
                     .push(CursorFrame::try_body(body, fallback_body));
                 Ok(StepControl::Continue)
             }
-            Statement::PerformOn { op, target, contract } => {
-                self.eval_perform_on(op, target, contract, predicate_oracle, effect_oracle)
-            }
+            Statement::PerformOn {
+                op,
+                target,
+                contract,
+            } => self.eval_perform_on(op, target, contract, predicate_oracle, effect_oracle),
             Statement::PerformVia {
                 op,
                 chain_ref,
@@ -617,7 +635,10 @@ impl DirectStyleEvaluator {
             let frame = self.state.cursor_stack.pop()?;
             match frame.kind {
                 CursorFrameKind::Program { .. } => {
-                    let outcome = self.state.terminal_outcome.unwrap_or(TerminalOutcome::Success);
+                    let outcome = self
+                        .state
+                        .terminal_outcome
+                        .unwrap_or(TerminalOutcome::Success);
                     self.state.terminal_outcome = Some(outcome);
                     return Some(StepControl::Halt(outcome));
                 }
@@ -663,7 +684,10 @@ impl DirectStyleEvaluator {
             &contract.require,
             None,
         ) {
-            self.state.trace_audit_sink.events.push(EventKind::PerformFailure);
+            self.state
+                .trace_audit_sink
+                .events
+                .push(EventKind::PerformFailure);
             self.state.current_request = None;
             return Ok(self.propagate_failure(FailureKind::ExplicitFailure));
         }
@@ -682,7 +706,10 @@ impl DirectStyleEvaluator {
 
         match effect_oracle.apply_effect(effect_input) {
             EffectVerdict::ExplicitFailure => {
-                self.state.trace_audit_sink.events.push(EventKind::PerformFailure);
+                self.state
+                    .trace_audit_sink
+                    .events
+                    .push(EventKind::PerformFailure);
                 self.state.current_request = None;
                 Ok(self.propagate_failure(FailureKind::ExplicitFailure))
             }
@@ -700,13 +727,19 @@ impl DirectStyleEvaluator {
                     Some(&preview),
                 );
                 if !ensure_ok {
-                    self.state.trace_audit_sink.events.push(EventKind::PerformFailure);
+                    self.state
+                        .trace_audit_sink
+                        .events
+                        .push(EventKind::PerformFailure);
                     self.state.current_request = None;
                     return Ok(self.propagate_failure(FailureKind::ExplicitFailure));
                 }
 
                 commit.apply_place_store(&mut self.state.place_store);
-                self.state.trace_audit_sink.events.push(EventKind::PerformSuccess);
+                self.state
+                    .trace_audit_sink
+                    .events
+                    .push(EventKind::PerformSuccess);
                 self.state.current_request = None;
                 Ok(StepControl::Continue)
             }
@@ -794,13 +827,12 @@ impl DirectStyleEvaluator {
                     None,
                 );
                 if !admit_ok {
-                    self.state
-                        .trace_audit_sink
-                        .non_admissible_metadata
-                        .push(NonAdmissibleMetadata {
+                    self.state.trace_audit_sink.non_admissible_metadata.push(
+                        NonAdmissibleMetadata {
                             option_ref: option.name.clone(),
                             subreason: NonAdmissibleSubreason::AdmitMiss,
-                        });
+                        },
+                    );
                     continue;
                 }
             }
@@ -817,7 +849,10 @@ impl DirectStyleEvaluator {
                 None,
             );
             if !require_ok {
-                self.state.trace_audit_sink.events.push(EventKind::PerformFailure);
+                self.state
+                    .trace_audit_sink
+                    .events
+                    .push(EventKind::PerformFailure);
                 if idx + 1 < candidate_order.len() {
                     continue;
                 }
@@ -841,7 +876,10 @@ impl DirectStyleEvaluator {
 
             match effect_oracle.apply_effect(effect_input) {
                 EffectVerdict::ExplicitFailure => {
-                    self.state.trace_audit_sink.events.push(EventKind::PerformFailure);
+                    self.state
+                        .trace_audit_sink
+                        .events
+                        .push(EventKind::PerformFailure);
                     if idx + 1 < candidate_order.len() {
                         continue;
                     }
@@ -864,7 +902,10 @@ impl DirectStyleEvaluator {
                         Some(&preview),
                     );
                     if !ensure_ok {
-                        self.state.trace_audit_sink.events.push(EventKind::PerformFailure);
+                        self.state
+                            .trace_audit_sink
+                            .events
+                            .push(EventKind::PerformFailure);
                         if idx + 1 < candidate_order.len() {
                             continue;
                         }
@@ -875,7 +916,10 @@ impl DirectStyleEvaluator {
                     }
 
                     commit.apply_place_store(&mut self.state.place_store);
-                    self.state.trace_audit_sink.events.push(EventKind::PerformSuccess);
+                    self.state
+                        .trace_audit_sink
+                        .events
+                        .push(EventKind::PerformSuccess);
                     self.state.current_request = None;
                     self.state.chain_cursor = None;
                     return Ok(StepControl::Continue);
@@ -1038,7 +1082,10 @@ impl DeclarationIndex {
                     self.collect_statements(body, scope);
                     scope.pop();
                 }
-                Statement::TryFallback { body, fallback_body } => {
+                Statement::TryFallback {
+                    body,
+                    fallback_body,
+                } => {
                     self.collect_statements(body, scope);
                     self.collect_statements(fallback_body, scope);
                 }
@@ -1062,7 +1109,7 @@ impl DeclarationIndex {
                         .insert(
                             name.clone(),
                             OptionDeclView {
-                            name: name.clone(),
+                                name: name.clone(),
                                 target: target.clone(),
                                 capability: capability.clone(),
                                 lease: lease.clone(),
@@ -1118,17 +1165,25 @@ impl DeclarationIndex {
     }
 
     fn find_visible_option_scope(&self, scope: &[String], name: &str) -> Option<ScopePath> {
-        self.visible_scope_paths(scope)
-            .find(|path| self.options_by_scope.get(path).is_some_and(|entries| entries.contains_key(name)))
+        self.visible_scope_paths(scope).find(|path| {
+            self.options_by_scope
+                .get(path)
+                .is_some_and(|entries| entries.contains_key(name))
+        })
     }
 
     fn find_visible_chain_scope(&self, scope: &[String], name: &str) -> Option<ScopePath> {
-        self.visible_scope_paths(scope)
-            .find(|path| self.chains_by_scope.get(path).is_some_and(|entries| entries.contains_key(name)))
+        self.visible_scope_paths(scope).find(|path| {
+            self.chains_by_scope
+                .get(path)
+                .is_some_and(|entries| entries.contains_key(name))
+        })
     }
 }
 
-pub fn load_fixture_from_path(path: impl AsRef<Path>) -> Result<CurrentL2Fixture, InterpreterError> {
+pub fn load_fixture_from_path(
+    path: impl AsRef<Path>,
+) -> Result<CurrentL2Fixture, InterpreterError> {
     let text = fs::read_to_string(path)?;
     Ok(serde_json::from_str(&text)?)
 }
@@ -1173,8 +1228,7 @@ pub fn static_gate_detailed(fixture: &CurrentL2Fixture) -> StaticGateResult {
                     ));
                     continue;
                 };
-                let Some(successor) =
-                    declarations.resolve_option_in_scope(scope, &edge.successor)
+                let Some(successor) = declarations.resolve_option_in_scope(scope, &edge.successor)
                 else {
                     verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
                     reasons.push(format!(

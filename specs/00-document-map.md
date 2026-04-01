@@ -51,6 +51,9 @@
 - `specs/examples/09-current-l2-bundle-loader.md`
   - current L2 fixture と `.host-plan.json` sidecar を 1 組として扱う bundle loader / bundle-level helper の補助文書。
   - static gate fixture と runtime fixture を同じ入口から扱い、machine-check と human-facing explanation obligation の境界を bundle 層で維持する。
+- `specs/examples/10-current-l2-batch-runner.md`
+  - current L2 fixture directory を bundle 群として一括 discovery / 実行する batch runner の補助文書。
+  - runtime bundle / static-only bundle の振り分け、summary report、machine-check と human-facing explanation obligation の境界を directory 層で維持する。
 
 ## 各文書の役割
 
@@ -98,6 +101,8 @@
   - current L2 host harness 用の machine-readable host plan schema と `.host-plan.json` sidecar asset の最小方針。
 - `specs/examples/09-current-l2-bundle-loader.md`
   - current L2 fixture と sidecar asset を 1 つの bundle として load / run / verify するための最小 helper 境界。
+- `specs/examples/10-current-l2-batch-runner.md`
+  - current L2 fixture directory を bundle 群として一括 discovery / 実行 / 集計するための最小 batch helper 境界。
 
 ## レポート
 
@@ -116,6 +121,7 @@
   - parser なし minimal interpreter の host stub / fixture runner harness は `specs/examples/07-current-l2-host-stub-harness.md` に置く。
   - parser なし minimal interpreter の machine-readable host plan schema と sidecar loader 方針は `specs/examples/08-current-l2-host-plan-schema.md` に置く。
   - parser なし minimal interpreter の fixture bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md` に置く。
+  - parser なし minimal interpreter の fixture directory batch runner / summary helper は `specs/examples/10-current-l2-batch-runner.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針

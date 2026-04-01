@@ -81,7 +81,8 @@ flowchart LR
 13. current L2 host stub / fixture runner harness の最小境界は `specs/examples/07-current-l2-host-stub-harness.md`
 14. current L2 host harness が読む machine-readable host plan schema と `.host-plan.json` sidecar 方針は `specs/examples/08-current-l2-host-plan-schema.md`
 15. current L2 fixture と sidecar を 1 組として扱う bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md`
-16. 既存判断は `specs/12-decision-register.md` を参照する
+16. current L2 fixture directory を bundle 群として一括実行する batch runner は `specs/examples/10-current-l2-batch-runner.md`
+17. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 

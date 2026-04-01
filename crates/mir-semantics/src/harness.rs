@@ -36,6 +36,68 @@ pub struct BundleRunReport {
     pub report: RunReport,
 }
 
+/// bundle discovery 時の per-fixture failure。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BundleDiscoveryFailure {
+    pub fixture_path: PathBuf,
+    pub runtime_requirement: Option<FixtureRuntimeRequirement>,
+    pub error: String,
+}
+
+/// directory 単位 discovery の結果。
+#[derive(Debug, Clone)]
+pub struct BundleDiscoveryReport {
+    pub total_candidates: usize,
+    pub runtime_bundles: usize,
+    pub static_only_bundles: usize,
+    pub bundles: Vec<FixtureBundle>,
+    pub failures: Vec<BundleDiscoveryFailure>,
+}
+
+/// batch 実行時の per-bundle 実行 failure。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BundleExecutionFailure {
+    pub fixture_path: PathBuf,
+    pub fixture_id: String,
+    pub runtime_requirement: FixtureRuntimeRequirement,
+    pub error: String,
+}
+
+/// bundle 単位実行の結果。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum BatchBundleOutcome {
+    Passed {
+        report: BundleRunReport,
+    },
+    Failed {
+        error: String,
+        host_plan_coverage_failure: bool,
+    },
+}
+
+/// batch summary に載せる per-bundle report。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BatchBundleReport {
+    pub fixture_path: PathBuf,
+    pub fixture_id: String,
+    pub runtime_requirement: FixtureRuntimeRequirement,
+    pub outcome: BatchBundleOutcome,
+}
+
+/// directory 単位 batch run の最小 summary。
+#[derive(Debug, Clone)]
+pub struct BatchRunSummary {
+    pub total_bundles: usize,
+    pub runtime_bundles: usize,
+    pub static_only_bundles: usize,
+    pub passed: usize,
+    pub failed: usize,
+    pub discovery_failures: Vec<BundleDiscoveryFailure>,
+    pub bundle_failures: Vec<BundleExecutionFailure>,
+    pub host_plan_coverage_failures: Vec<BundleExecutionFailure>,
+    pub bundle_reports: Vec<BatchBundleReport>,
+}
+
 /// current L2 host harness が declarative に持つ最小 store mutation。
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 #[serde(tag = "kind")]
@@ -127,7 +189,10 @@ impl PredicatePlanRule {
         self.site == input.site
             && self.op == input.op
             && self.mode.is_none_or(|mode| mode == input.mode)
-            && self.target.as_ref().is_none_or(|target| Some(target) == input.target.as_ref())
+            && self
+                .target
+                .as_ref()
+                .is_none_or(|target| Some(target) == input.target.as_ref())
             && self
                 .chain_ref
                 .as_ref()
@@ -200,10 +265,7 @@ impl EffectPlanRule {
         }
     }
 
-    pub fn explicit_failure_on(
-        op: impl Into<String>,
-        selected_target: impl Into<String>,
-    ) -> Self {
+    pub fn explicit_failure_on(op: impl Into<String>, selected_target: impl Into<String>) -> Self {
         Self {
             op: op.into(),
             mode: Some(RequestMode::On),
@@ -217,16 +279,18 @@ impl EffectPlanRule {
     fn matches(&self, input: &EffectInput) -> bool {
         self.op == input.op
             && self.mode.is_none_or(|mode| mode == input.mode)
-            && self.selected_target.as_ref().is_none_or(|target| {
-                target == &input.selected_target
-            })
+            && self
+                .selected_target
+                .as_ref()
+                .is_none_or(|target| target == &input.selected_target)
             && self
                 .chain_ref
                 .as_ref()
                 .is_none_or(|chain_ref| Some(chain_ref) == input.chain_ref.as_ref())
-            && self.selected_option_ref.as_ref().is_none_or(|option_ref| {
-                Some(option_ref) == input.selected_option_ref.as_ref()
-            })
+            && self
+                .selected_option_ref
+                .as_ref()
+                .is_none_or(|option_ref| Some(option_ref) == input.selected_option_ref.as_ref())
     }
 
     fn overlaps(&self, other: &Self) -> bool {
@@ -322,9 +386,7 @@ impl FixtureHostPlanAsset {
     }
 }
 
-pub fn host_plan_sidecar_path_for_fixture_path(
-    fixture_path: impl AsRef<Path>,
-) -> PathBuf {
+pub fn host_plan_sidecar_path_for_fixture_path(fixture_path: impl AsRef<Path>) -> PathBuf {
     fixture_path.as_ref().with_extension("host-plan.json")
 }
 
@@ -347,6 +409,137 @@ pub fn load_bundle_from_fixture_path(
 ) -> Result<FixtureBundle, InterpreterError> {
     let fixture_path = fixture_path.as_ref().to_path_buf();
     let fixture = crate::load_fixture_from_path(&fixture_path)?;
+    bundle_from_loaded_fixture(fixture_path, fixture)
+}
+
+pub fn discover_bundles_in_directory(
+    directory: impl AsRef<Path>,
+) -> Result<BundleDiscoveryReport, InterpreterError> {
+    let mut candidate_paths = Vec::new();
+    for entry in fs::read_dir(directory)? {
+        let entry = entry?;
+        let path = entry.path();
+        if !path.is_file() {
+            continue;
+        }
+        if path.extension().is_none_or(|extension| extension != "json") {
+            continue;
+        }
+        if path
+            .file_name()
+            .and_then(|name| name.to_str())
+            .is_some_and(|name| name.ends_with(".host-plan.json"))
+        {
+            continue;
+        }
+        candidate_paths.push(path);
+    }
+    candidate_paths.sort();
+
+    let mut bundles = Vec::new();
+    let mut failures = Vec::new();
+    let mut runtime_bundles = 0usize;
+    let mut static_only_bundles = 0usize;
+
+    for fixture_path in candidate_paths.iter().cloned() {
+        match crate::load_fixture_from_path(&fixture_path) {
+            Ok(fixture) => {
+                let runtime_requirement = runtime_requirement_for_fixture(&fixture);
+                match runtime_requirement {
+                    FixtureRuntimeRequirement::StaticOnly => static_only_bundles += 1,
+                    FixtureRuntimeRequirement::RuntimeWithHostPlan => runtime_bundles += 1,
+                }
+
+                match bundle_from_loaded_fixture(fixture_path.clone(), fixture) {
+                    Ok(bundle) => bundles.push(bundle),
+                    Err(error) => failures.push(BundleDiscoveryFailure {
+                        fixture_path,
+                        runtime_requirement: Some(runtime_requirement),
+                        error: error.to_string(),
+                    }),
+                }
+            }
+            Err(error) => failures.push(BundleDiscoveryFailure {
+                fixture_path,
+                runtime_requirement: None,
+                error: error.to_string(),
+            }),
+        }
+    }
+
+    Ok(BundleDiscoveryReport {
+        total_candidates: candidate_paths.len(),
+        runtime_bundles,
+        static_only_bundles,
+        bundles,
+        failures,
+    })
+}
+
+pub fn run_directory(directory: impl AsRef<Path>) -> Result<BatchRunSummary, InterpreterError> {
+    let discovery = discover_bundles_in_directory(directory)?;
+    let mut passed = 0usize;
+    let mut bundle_failures = Vec::new();
+    let mut host_plan_coverage_failures = Vec::new();
+    let mut bundle_reports = Vec::new();
+
+    for bundle in &discovery.bundles {
+        match run_bundle(bundle) {
+            Ok(report) => {
+                passed += 1;
+                bundle_reports.push(BatchBundleReport {
+                    fixture_path: bundle.fixture_path.clone(),
+                    fixture_id: bundle.fixture.fixture_id.clone(),
+                    runtime_requirement: bundle.runtime_requirement,
+                    outcome: BatchBundleOutcome::Passed { report },
+                });
+            }
+            Err(error) => {
+                let error_text = error.to_string();
+                let is_host_plan_coverage_failure =
+                    error_text.contains("host plan did not cover all oracle calls");
+                let failure = BundleExecutionFailure {
+                    fixture_path: bundle.fixture_path.clone(),
+                    fixture_id: bundle.fixture.fixture_id.clone(),
+                    runtime_requirement: bundle.runtime_requirement,
+                    error: error_text.clone(),
+                };
+                if is_host_plan_coverage_failure {
+                    host_plan_coverage_failures.push(failure.clone());
+                }
+                bundle_failures.push(failure);
+                bundle_reports.push(BatchBundleReport {
+                    fixture_path: bundle.fixture_path.clone(),
+                    fixture_id: bundle.fixture.fixture_id.clone(),
+                    runtime_requirement: bundle.runtime_requirement,
+                    outcome: BatchBundleOutcome::Failed {
+                        error: error_text,
+                        host_plan_coverage_failure: is_host_plan_coverage_failure,
+                    },
+                });
+            }
+        }
+    }
+
+    let failed = discovery.failures.len() + bundle_failures.len();
+
+    Ok(BatchRunSummary {
+        total_bundles: discovery.total_candidates,
+        runtime_bundles: discovery.runtime_bundles,
+        static_only_bundles: discovery.static_only_bundles,
+        passed,
+        failed,
+        discovery_failures: discovery.failures,
+        bundle_failures,
+        host_plan_coverage_failures,
+        bundle_reports,
+    })
+}
+
+fn bundle_from_loaded_fixture(
+    fixture_path: PathBuf,
+    fixture: CurrentL2Fixture,
+) -> Result<FixtureBundle, InterpreterError> {
     let runtime_requirement = if fixture.expected_runtime.enters_evaluation {
         FixtureRuntimeRequirement::RuntimeWithHostPlan
     } else {
@@ -375,6 +568,14 @@ pub fn load_bundle_from_fixture_path(
     })
 }
 
+fn runtime_requirement_for_fixture(fixture: &CurrentL2Fixture) -> FixtureRuntimeRequirement {
+    if fixture.expected_runtime.enters_evaluation {
+        FixtureRuntimeRequirement::RuntimeWithHostPlan
+    } else {
+        FixtureRuntimeRequirement::StaticOnly
+    }
+}
+
 pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, InterpreterError> {
     let harness = match &bundle.host_plan {
         Some(plan) => FixtureHostStub::new(plan.clone())?,
@@ -387,7 +588,9 @@ pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, Interpreter
     if report.static_verdict != bundle.fixture.expected_static.verdict {
         return Err(InterpreterError::InvalidProgram(format!(
             "bundle static verdict mismatch for {}: expected {:?}, got {:?}",
-            bundle.fixture.fixture_id, bundle.fixture.expected_static.verdict, report.static_verdict
+            bundle.fixture.fixture_id,
+            bundle.fixture.expected_static.verdict,
+            report.static_verdict
         )));
     }
     if report.entered_evaluation != bundle.fixture.expected_runtime.enters_evaluation {
@@ -413,7 +616,8 @@ pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, Interpreter
         )));
     }
 
-    let expected_non_admissible_metadata = harness.expected_non_admissible_metadata(&bundle.fixture);
+    let expected_non_admissible_metadata =
+        harness.expected_non_admissible_metadata(&bundle.fixture);
     if report.trace_audit_sink.non_admissible_metadata != expected_non_admissible_metadata {
         return Err(InterpreterError::InvalidProgram(format!(
             "bundle non_admissible_metadata mismatch for {}: expected {:?}, got {:?}",
@@ -423,8 +627,7 @@ pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, Interpreter
         )));
     }
 
-    let expected_narrative_explanations =
-        harness.expected_narrative_explanations(&bundle.fixture);
+    let expected_narrative_explanations = harness.expected_narrative_explanations(&bundle.fixture);
     if report.trace_audit_sink.narrative_explanations != expected_narrative_explanations {
         return Err(InterpreterError::InvalidProgram(format!(
             "bundle narrative_explanations mismatch for {}: expected {:?}, got {:?}",
@@ -453,15 +656,11 @@ impl FixtureHostStub {
         &self.plan
     }
 
-    pub fn run_fixture(
-        &self,
-        fixture: &CurrentL2Fixture,
-    ) -> Result<RunReport, InterpreterError> {
+    pub fn run_fixture(&self, fixture: &CurrentL2Fixture) -> Result<RunReport, InterpreterError> {
         let mut predicate_oracle = PlannedPredicateOracle::new(self.plan.clone());
         let mut effect_oracle = PlannedEffectOracle::new(self.plan.clone());
         let report = run_to_completion(fixture, &mut predicate_oracle, &mut effect_oracle)?;
-        if !predicate_oracle.violations.is_empty() || !effect_oracle.violations.is_empty()
-        {
+        if !predicate_oracle.violations.is_empty() || !effect_oracle.violations.is_empty() {
             return Err(InterpreterError::InvalidProgram(format!(
                 "host plan did not cover all oracle calls: predicate_violations={:?}, effect_violations={:?}",
                 predicate_oracle.violations, effect_oracle.violations
@@ -488,10 +687,7 @@ impl FixtureHostStub {
             })
     }
 
-    pub fn expected_narrative_explanations(
-        &self,
-        fixture: &CurrentL2Fixture,
-    ) -> Vec<String> {
+    pub fn expected_narrative_explanations(&self, fixture: &CurrentL2Fixture) -> Vec<String> {
         self.plan
             .trace_expectation_override
             .narrative_explanations
@@ -546,13 +742,16 @@ impl PlannedEffectOracle {
 
 impl EffectOracle<EffectInput, FixtureCommitPlan> for PlannedEffectOracle {
     fn apply_effect(&mut self, input: EffectInput) -> EffectVerdict<FixtureCommitPlan> {
-        if let Some(rule) = self.plan.effect_rules.iter().find(|rule| rule.matches(&input)) {
+        if let Some(rule) = self
+            .plan
+            .effect_rules
+            .iter()
+            .find(|rule| rule.matches(&input))
+        {
             return match &rule.verdict {
-                EffectPlanVerdict::Success { commit } => {
-                    EffectVerdict::Success {
-                        commit: commit.clone(),
-                    }
-                }
+                EffectPlanVerdict::Success { commit } => EffectVerdict::Success {
+                    commit: commit.clone(),
+                },
                 EffectPlanVerdict::ExplicitFailure => EffectVerdict::ExplicitFailure,
             };
         }
@@ -569,18 +768,14 @@ fn optional_field_overlaps<T: PartialEq>(left: &Option<T>, right: &Option<T>) ->
     }
 }
 
-fn non_admissible_from_expected(
-    expected: &ExpectedNonAdmissibleMetadata,
-) -> NonAdmissibleMetadata {
+fn non_admissible_from_expected(expected: &ExpectedNonAdmissibleMetadata) -> NonAdmissibleMetadata {
     NonAdmissibleMetadata {
         option_ref: expected.option_ref.clone(),
         subreason: expected.subreason,
     }
 }
 
-fn expected_terminal_outcome(
-    outcome: FixtureRuntimeOutcome,
-) -> Option<TerminalOutcome> {
+fn expected_terminal_outcome(outcome: FixtureRuntimeOutcome) -> Option<TerminalOutcome> {
     match outcome {
         FixtureRuntimeOutcome::Success => Some(TerminalOutcome::Success),
         FixtureRuntimeOutcome::ExplicitFailure => Some(TerminalOutcome::ExplicitFailure),
