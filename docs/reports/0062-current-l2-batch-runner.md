@@ -121,7 +121,7 @@ python3 scripts/validate_docs.py
 
 ```text
 Documentation scaffold looks complete.
-Found 63 numbered report(s).
+Found 62 numbered report(s).
 ```
 
 ```bash
@@ -151,7 +151,7 @@ git diff --check
   - `failed`
   - `discovery_failures`
   - `host_plan_coverage_failures`
-- final reviewer は 1 回 spawn したが completion を回収できず、その後の fresh retry は agent thread limit で拒否された。current task では local verification を主証跡として残す。
+- final reviewer は最終的に completion を返し、追加 finding は無かった。
 - report 自身の commit hash は self-reference の都合で本文に固定しない。
 
 ## 7. Changes in understanding
