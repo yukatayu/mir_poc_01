@@ -341,11 +341,11 @@ impl FixtureHostStub {
         let mut predicate_oracle = PlannedPredicateOracle::new(self.plan.clone());
         let mut effect_oracle = PlannedEffectOracle::new(self.plan.clone());
         let report = run_to_completion(fixture, &mut predicate_oracle, &mut effect_oracle)?;
-        if !predicate_oracle.unmatched_inputs.is_empty() || !effect_oracle.unmatched_inputs.is_empty()
+        if !predicate_oracle.violations.is_empty() || !effect_oracle.violations.is_empty()
         {
             return Err(InterpreterError::InvalidProgram(format!(
-                "host plan did not cover all oracle calls: predicate_unmatched={:?}, effect_unmatched={:?}",
-                predicate_oracle.unmatched_inputs, effect_oracle.unmatched_inputs
+                "host plan did not cover all oracle calls: predicate_violations={:?}, effect_violations={:?}",
+                predicate_oracle.violations, effect_oracle.violations
             )));
         }
         Ok(report)
@@ -384,14 +384,14 @@ impl FixtureHostStub {
 #[derive(Debug, Clone)]
 struct PlannedPredicateOracle {
     plan: FixtureHostPlan,
-    unmatched_inputs: Vec<PredicateInput>,
+    violations: Vec<PredicateInput>,
 }
 
 impl PlannedPredicateOracle {
     fn new(plan: FixtureHostPlan) -> Self {
         Self {
             plan,
-            unmatched_inputs: Vec::new(),
+            violations: Vec::new(),
         }
     }
 }
@@ -404,8 +404,8 @@ impl PredicateOracle<PredicateInput> for PlannedPredicateOracle {
             .find(|rule| rule.matches(&input))
             .map(|rule| rule.verdict)
             .unwrap_or_else(|| {
-                self.unmatched_inputs.push(input);
-                PredicateVerdict::Satisfied
+                self.violations.push(input);
+                PredicateVerdict::Unsatisfied
             })
     }
 }
@@ -413,14 +413,14 @@ impl PredicateOracle<PredicateInput> for PlannedPredicateOracle {
 #[derive(Debug, Clone)]
 struct PlannedEffectOracle {
     plan: FixtureHostPlan,
-    unmatched_inputs: Vec<EffectInput>,
+    violations: Vec<EffectInput>,
 }
 
 impl PlannedEffectOracle {
     fn new(plan: FixtureHostPlan) -> Self {
         Self {
             plan,
-            unmatched_inputs: Vec::new(),
+            violations: Vec::new(),
         }
     }
 }
@@ -438,10 +438,8 @@ impl EffectOracle<EffectInput, FixtureCommitPlan> for PlannedEffectOracle {
             };
         }
 
-        self.unmatched_inputs.push(input.clone());
-        EffectVerdict::Success {
-            commit: default_commit_from_input(&input),
-        }
+        self.violations.push(input);
+        EffectVerdict::ExplicitFailure
     }
 }
 
@@ -450,17 +448,6 @@ fn optional_field_overlaps<T: PartialEq>(left: &Option<T>, right: &Option<T>) ->
         (Some(left), Some(right)) => left == right,
         _ => true,
     }
-}
-
-fn default_commit_from_input(input: &EffectInput) -> FixtureCommitPlan {
-    let label = input
-        .selected_option_ref
-        .clone()
-        .unwrap_or_else(|| input.selected_target.clone());
-    FixtureCommitPlan::new(vec![FixtureStoreMutation::append_record(
-        input.selected_target.clone(),
-        format!("{}@{}", input.op, label),
-    )])
 }
 
 fn non_admissible_from_expected(

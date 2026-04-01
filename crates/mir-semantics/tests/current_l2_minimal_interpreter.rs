@@ -1,10 +1,11 @@
 use std::{fs, path::PathBuf, time::{SystemTime, UNIX_EPOCH}};
 
 use mir_semantics::{
-    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostStub, FixtureRuntimeOutcome,
-    NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
-    TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path, load_fixture_from_path,
-    load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path, static_gate,
+    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostPlan, FixtureHostStub,
+    FixtureRuntimeOutcome, NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict,
+    TerminalOutcome, TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path,
+    load_fixture_from_path, load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path,
+    static_gate,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -268,4 +269,16 @@ fn host_plan_loader_rejects_overlapping_effect_rules() {
     assert!(error
         .to_string()
         .contains("overlapping effect plan rules are forbidden"));
+}
+
+#[test]
+fn harness_rejects_uncovered_oracle_calls_without_synthetic_success_commit() {
+    let fixture = load_fixture_from_path(fixture_path("e1-place-atomic-cut.json")).unwrap();
+    let harness = FixtureHostStub::new(FixtureHostPlan::default()).unwrap();
+
+    let error = harness.run_fixture(&fixture).unwrap_err();
+    let message = error.to_string();
+
+    assert!(message.contains("host plan did not cover all oracle calls"));
+    assert!(!message.contains("Success { commit"));
 }

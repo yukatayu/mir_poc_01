@@ -20,6 +20,7 @@
   - exact compare する narrative explanation override
 - `must_explain` は sidecar JSON に移さず、fixture / report 側の human-facing obligation に残す。
 - runtime に入る fixture で実際に発生した oracle call は、host plan rule によって明示的に被覆されていなければならない。
+- current L2 parser-free PoC では、fixture path の `.json` 拡張子を `.host-plan.json` に置き換えた隣接 sidecar を discovery rule として使ってよい。
 - broader wildcard rule は許してよいが、複数 rule が同じ input を同時に受理できる overlap は current L2 では禁止し、loader が reject してよい。
 
 ## sidecar JSON を採る理由
@@ -96,6 +97,7 @@ effect rule は、少なくとも次を持てばよい。
   - `mutations`
 
 current L2 では representative fixtures に必要な mutation は `append-record` だけで足りる。
+未被覆 effect call を permissive success commit で補う reading は current L2 では採らない。
 
 ## trace expectation override の最小 shape
 
@@ -138,6 +140,13 @@ current L2 では representative fixtures に必要な mutation は `append-reco
 - human-facing explanation obligation
 
 の三層分離を保ったまま、machine-readable host plan を追加できる。
+
+## uncovered oracle call の current L2 読み
+
+- host plan に被覆されていない predicate / effect oracle call は current L2 では invalid host plan である。
+- current oracle trait skeleton は infallible だが、harness 実装は fail-closed placeholder verdict と violation 記録でこれを扱ってよい。
+- 重要なのは、未被覆 effect call に対して synthetic success-side carrier や hidden commit を発明しないことである。
+- uncovered call の最終 reject timing や richer preflight coverage analysis は **未決定** である。
 
 ## representative fixtures での最小読み
 
