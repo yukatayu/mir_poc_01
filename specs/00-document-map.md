@@ -42,6 +42,9 @@
 - `specs/examples/06-current-l2-interpreter-skeleton.md`
   - parser なし最小 interpreter skeleton の current L2 実装境界をまとめた補助文書。
   - static gate、runtime evaluation、machine-checked expectation、future work の境界を整理する。
+- `specs/examples/07-current-l2-host-stub-harness.md`
+  - parser なし minimal interpreter を fixture ごとに検証する current L2 host stub / harness の補助文書。
+  - predicate verdict、effect outcome、success-side carrier、trace expectation override を declarative に差し替える最小 test harness を整理する。
 
 ## 各文書の役割
 
@@ -83,6 +86,8 @@
   - current L2 の representative examples を parser なし最小 interpreter で動かすための最小 oracle boundary。
 - `specs/examples/06-current-l2-interpreter-skeleton.md`
   - current L2 の representative examples を parser なし最小 interpreter skeleton で動かすときの最小実装境界。
+- `specs/examples/07-current-l2-host-stub-harness.md`
+  - current L2 の representative examples を parser なし minimal interpreter で検証しやすくする host stub / harness の最小境界。
 
 ## レポート
 
@@ -98,6 +103,7 @@
   - parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md` に置く。
   - parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md` に置く。
   - parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md` に置く。
+  - parser なし minimal interpreter の host stub / fixture runner harness は `specs/examples/07-current-l2-host-stub-harness.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針

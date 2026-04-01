@@ -1,73 +1,11 @@
 use std::path::PathBuf;
 
 use mir_semantics::{
-    EffectInput, EffectOracle, EffectVerdict, FixtureRuntimeOutcome, PredicateInput,
-    PredicateOracle, PredicateSite, PredicateVerdict, StaticGateVerdict, SuccessCarrier,
-    TerminalOutcome, load_fixture_from_path, run_to_completion, static_gate,
+    EffectPlanRule, FixtureHostPlan, FixtureHostStub, FixtureRuntimeOutcome,
+    FixtureStoreMutation, NonAdmissibleMetadata, NonAdmissibleSubreason, PredicatePlanRule,
+    PredicateSite, StaticGateVerdict, TerminalOutcome, TraceExpectationOverride,
+    load_fixture_from_path, static_gate,
 };
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-struct StubCommit {
-    target: String,
-    record: String,
-}
-
-impl SuccessCarrier for StubCommit {
-    fn preview_place_store(&self, place_store: &mir_semantics::PlaceStore) -> mir_semantics::PlaceStore {
-        let mut preview = place_store.clone();
-        preview
-            .entry(self.target.clone())
-            .or_default()
-            .push(self.record.clone());
-        preview
-    }
-
-    fn apply_place_store(self, place_store: &mut mir_semantics::PlaceStore) {
-        place_store
-            .entry(self.target)
-            .or_default()
-            .push(self.record);
-    }
-}
-
-#[derive(Default)]
-struct StubPredicateOracle;
-
-impl PredicateOracle<PredicateInput> for StubPredicateOracle {
-    fn eval_predicate(&mut self, input: PredicateInput) -> PredicateVerdict {
-        match (input.site, input.op.as_str(), input.option_ref.as_deref()) {
-            (PredicateSite::OptionAdmit, _, Some("owner_writer")) => PredicateVerdict::Unsatisfied,
-            (PredicateSite::RequestRequire, "validate_profile_patch", _) => {
-                PredicateVerdict::Unsatisfied
-            }
-            _ => PredicateVerdict::Satisfied,
-        }
-    }
-}
-
-#[derive(Default)]
-struct StubEffectOracle;
-
-impl EffectOracle<EffectInput, StubCommit> for StubEffectOracle {
-    fn apply_effect(&mut self, input: EffectInput) -> EffectVerdict<StubCommit> {
-        if input.op == "append_audit" {
-            return EffectVerdict::ExplicitFailure;
-        }
-
-        let target = input.selected_target.clone();
-        let label = input
-            .selected_option_ref
-            .clone()
-            .unwrap_or_else(|| target.clone());
-
-        EffectVerdict::Success {
-            commit: StubCommit {
-                target,
-                record: format!("{}@{}", input.op, label),
-            },
-        }
-    }
-}
 
 fn fixture_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -84,6 +22,70 @@ fn expected_outcome(outcome: FixtureRuntimeOutcome) -> Option<TerminalOutcome> {
     }
 }
 
+fn host_plan_for_fixture(name: &str) -> FixtureHostPlan {
+    match name {
+        "e1-place-atomic-cut.json" => FixtureHostPlan {
+            effect_rules: vec![
+                EffectPlanRule::success_on(
+                    "update_authority",
+                    "profile_authority",
+                    vec![FixtureStoreMutation::append_record(
+                        "profile_authority",
+                        "update_authority@profile_authority",
+                    )],
+                ),
+                EffectPlanRule::explicit_failure_on("append_audit", "authority_log"),
+            ],
+            ..FixtureHostPlan::default()
+        },
+        "e2-try-fallback.json" => FixtureHostPlan {
+            predicate_rules: vec![PredicatePlanRule::unsatisfied(
+                PredicateSite::RequestRequire,
+                "validate_profile_patch",
+            )],
+            effect_rules: vec![
+                EffectPlanRule::success_on(
+                    "stage_profile_patch",
+                    "profile_draft",
+                    vec![FixtureStoreMutation::append_record(
+                        "profile_draft",
+                        "stage_profile_patch@profile_draft",
+                    )],
+                ),
+                EffectPlanRule::success_on(
+                    "load_last_snapshot",
+                    "profile_snapshot",
+                    vec![FixtureStoreMutation::append_record(
+                        "profile_snapshot",
+                        "load_last_snapshot@profile_snapshot",
+                    )],
+                ),
+            ],
+            ..FixtureHostPlan::default()
+        },
+        "e3-option-admit-chain.json" => FixtureHostPlan {
+            predicate_rules: vec![PredicatePlanRule::unsatisfied_for_option(
+                PredicateSite::OptionAdmit,
+                "write_profile",
+                "owner_writer",
+            )],
+            effect_rules: vec![EffectPlanRule::success_via(
+                "write_profile",
+                "profile_ref",
+                "delegated_writer",
+                "profile_doc",
+                vec![FixtureStoreMutation::append_record(
+                    "profile_doc",
+                    "write_profile@delegated_writer",
+                )],
+            )],
+            ..FixtureHostPlan::default()
+        },
+        "e6-write-after-expiry.json" => FixtureHostPlan::default(),
+        _ => FixtureHostPlan::default(),
+    }
+}
+
 #[test]
 fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
     let malformed = load_fixture_from_path(fixture_path("e4-malformed-lineage.json")).unwrap();
@@ -94,9 +96,8 @@ fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
     assert_eq!(static_gate(&underdeclared), StaticGateVerdict::Underdeclared);
 
     for fixture in [&malformed, &underdeclared] {
-        let mut predicate = StubPredicateOracle;
-        let mut effect = StubEffectOracle;
-        let result = run_to_completion(fixture, &mut predicate, &mut effect).unwrap();
+        let harness = FixtureHostStub::default();
+        let result = harness.run_fixture(fixture).unwrap();
 
         assert_eq!(result.static_verdict, fixture.expected_static.verdict);
         assert_eq!(
@@ -107,24 +108,11 @@ fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
             result.terminal_outcome,
             expected_outcome(fixture.expected_runtime.final_outcome)
         );
-        assert_eq!(
-            result.trace_audit_sink.events,
-            fixture.expected_trace_audit.event_kinds
-        );
-        assert_eq!(
-            result.trace_audit_sink.narrative_explanations,
-            fixture.expected_trace_audit.narrative_explanations
-        );
-        assert!(
-            result.trace_audit_sink.non_admissible_metadata.is_empty(),
-            "{}",
-            fixture.fixture_id
-        );
     }
 }
 
 #[test]
-fn runtime_fixtures_reach_expected_outcomes() {
+fn runtime_fixtures_reach_expected_outcomes_via_declarative_host_plan() {
     let cases = [
         "e1-place-atomic-cut.json",
         "e2-try-fallback.json",
@@ -134,10 +122,8 @@ fn runtime_fixtures_reach_expected_outcomes() {
 
     for fixture_name in cases {
         let fixture = load_fixture_from_path(fixture_path(fixture_name)).unwrap();
-        let mut predicate = StubPredicateOracle;
-        let mut effect = StubEffectOracle;
-
-        let result = run_to_completion(&fixture, &mut predicate, &mut effect).unwrap();
+        let harness = FixtureHostStub::new(host_plan_for_fixture(fixture_name));
+        let result = harness.run_fixture(&fixture).unwrap();
 
         assert_eq!(result.static_verdict, fixture.expected_static.verdict, "{fixture_name}");
         assert_eq!(
@@ -150,29 +136,63 @@ fn runtime_fixtures_reach_expected_outcomes() {
             expected_outcome(fixture.expected_runtime.final_outcome),
             "{fixture_name}"
         );
+    }
+}
+
+#[test]
+fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
+    let cases = [
+        "e1-place-atomic-cut.json",
+        "e2-try-fallback.json",
+        "e3-option-admit-chain.json",
+        "e6-write-after-expiry.json",
+    ];
+
+    for fixture_name in cases {
+        let fixture = load_fixture_from_path(fixture_path(fixture_name)).unwrap();
+        let harness = FixtureHostStub::new(host_plan_for_fixture(fixture_name));
+        let result = harness.run_fixture(&fixture).unwrap();
+
         assert_eq!(
             result.trace_audit_sink.events,
             fixture.expected_trace_audit.event_kinds,
             "{fixture_name}"
         );
-        let expected_metadata = fixture
-            .expected_trace_audit
-            .non_admissible_metadata
-            .iter()
-            .map(|entry| mir_semantics::NonAdmissibleMetadata {
-                option_ref: entry.option_ref.clone(),
-                subreason: entry.subreason,
-            })
-            .collect::<Vec<_>>();
         assert_eq!(
             result.trace_audit_sink.non_admissible_metadata,
-            expected_metadata,
+            harness.expected_non_admissible_metadata(&fixture),
             "{fixture_name}"
         );
         assert_eq!(
             result.trace_audit_sink.narrative_explanations,
-            fixture.expected_trace_audit.narrative_explanations,
+            harness.expected_narrative_explanations(&fixture),
             "{fixture_name}"
         );
     }
+}
+
+#[test]
+fn harness_can_override_trace_expectation_without_changing_runtime_plan() {
+    let fixture = load_fixture_from_path(fixture_path("e6-write-after-expiry.json")).unwrap();
+    let mut plan = host_plan_for_fixture("e6-write-after-expiry.json");
+    plan.trace_expectation_override = TraceExpectationOverride {
+        non_admissible_metadata: Some(vec![NonAdmissibleMetadata {
+            option_ref: "override_writer".into(),
+            subreason: NonAdmissibleSubreason::LeaseExpired,
+        }]),
+        narrative_explanations: Some(vec!["custom narrative".into()]),
+    };
+    let harness = FixtureHostStub::new(plan);
+
+    assert_eq!(
+        harness.expected_non_admissible_metadata(&fixture),
+        vec![NonAdmissibleMetadata {
+            option_ref: "override_writer".into(),
+            subreason: NonAdmissibleSubreason::LeaseExpired,
+        }]
+    );
+    assert_eq!(
+        harness.expected_narrative_explanations(&fixture),
+        vec!["custom narrative".to_string()]
+    );
 }

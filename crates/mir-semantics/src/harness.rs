@@ -1,0 +1,339 @@
+use crate::{
+    CurrentL2Fixture, EffectInput, EffectOracle, EffectVerdict, ExpectedNonAdmissibleMetadata,
+    InterpreterError, NonAdmissibleMetadata, PlaceStore, PredicateInput, PredicateOracle,
+    PredicateSite, PredicateVerdict, RequestMode, RunReport, SuccessCarrier, run_to_completion,
+};
+
+/// current L2 host harness が declarative に持つ最小 store mutation。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum FixtureStoreMutation {
+    AppendRecord { target: String, record: String },
+}
+
+impl FixtureStoreMutation {
+    pub fn append_record(target: impl Into<String>, record: impl Into<String>) -> Self {
+        Self::AppendRecord {
+            target: target.into(),
+            record: record.into(),
+        }
+    }
+}
+
+/// effect success が返す current L2 harness 用 commit carrier。
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct FixtureCommitPlan {
+    pub mutations: Vec<FixtureStoreMutation>,
+}
+
+impl FixtureCommitPlan {
+    pub fn new(mutations: Vec<FixtureStoreMutation>) -> Self {
+        Self { mutations }
+    }
+}
+
+impl SuccessCarrier for FixtureCommitPlan {
+    fn preview_place_store(&self, place_store: &PlaceStore) -> PlaceStore {
+        let mut preview = place_store.clone();
+        apply_mutations(&mut preview, &self.mutations);
+        preview
+    }
+
+    fn apply_place_store(self, place_store: &mut PlaceStore) {
+        apply_mutations(place_store, &self.mutations);
+    }
+}
+
+/// predicate verdict を declarative に差し替える current L2 用 rule。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PredicatePlanRule {
+    pub site: PredicateSite,
+    pub op: String,
+    pub mode: Option<RequestMode>,
+    pub target: Option<String>,
+    pub chain_ref: Option<String>,
+    pub option_ref: Option<String>,
+    pub verdict: PredicateVerdict,
+}
+
+impl PredicatePlanRule {
+    pub fn unsatisfied(site: PredicateSite, op: impl Into<String>) -> Self {
+        Self {
+            site,
+            op: op.into(),
+            mode: None,
+            target: None,
+            chain_ref: None,
+            option_ref: None,
+            verdict: PredicateVerdict::Unsatisfied,
+        }
+    }
+
+    pub fn unsatisfied_for_option(
+        site: PredicateSite,
+        op: impl Into<String>,
+        option_ref: impl Into<String>,
+    ) -> Self {
+        Self {
+            site,
+            op: op.into(),
+            mode: None,
+            target: None,
+            chain_ref: None,
+            option_ref: Some(option_ref.into()),
+            verdict: PredicateVerdict::Unsatisfied,
+        }
+    }
+
+    fn matches(&self, input: &PredicateInput) -> bool {
+        self.site == input.site
+            && self.op == input.op
+            && self.mode.is_none_or(|mode| mode == input.mode)
+            && self.target.as_ref().is_none_or(|target| Some(target) == input.target.as_ref())
+            && self
+                .chain_ref
+                .as_ref()
+                .is_none_or(|chain_ref| Some(chain_ref) == input.chain_ref.as_ref())
+            && self
+                .option_ref
+                .as_ref()
+                .is_none_or(|option_ref| Some(option_ref) == input.option_ref.as_ref())
+    }
+}
+
+/// effect outcome を declarative に差し替える current L2 用 rule。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct EffectPlanRule {
+    pub op: String,
+    pub mode: Option<RequestMode>,
+    pub selected_target: Option<String>,
+    pub chain_ref: Option<String>,
+    pub selected_option_ref: Option<String>,
+    pub verdict: EffectPlanVerdict,
+}
+
+impl EffectPlanRule {
+    pub fn success_on(
+        op: impl Into<String>,
+        selected_target: impl Into<String>,
+        mutations: Vec<FixtureStoreMutation>,
+    ) -> Self {
+        Self {
+            op: op.into(),
+            mode: Some(RequestMode::On),
+            selected_target: Some(selected_target.into()),
+            chain_ref: None,
+            selected_option_ref: None,
+            verdict: EffectPlanVerdict::Success {
+                commit: FixtureCommitPlan::new(mutations),
+            },
+        }
+    }
+
+    pub fn success_via(
+        op: impl Into<String>,
+        chain_ref: impl Into<String>,
+        selected_option_ref: impl Into<String>,
+        selected_target: impl Into<String>,
+        mutations: Vec<FixtureStoreMutation>,
+    ) -> Self {
+        Self {
+            op: op.into(),
+            mode: Some(RequestMode::Via),
+            selected_target: Some(selected_target.into()),
+            chain_ref: Some(chain_ref.into()),
+            selected_option_ref: Some(selected_option_ref.into()),
+            verdict: EffectPlanVerdict::Success {
+                commit: FixtureCommitPlan::new(mutations),
+            },
+        }
+    }
+
+    pub fn explicit_failure_on(
+        op: impl Into<String>,
+        selected_target: impl Into<String>,
+    ) -> Self {
+        Self {
+            op: op.into(),
+            mode: Some(RequestMode::On),
+            selected_target: Some(selected_target.into()),
+            chain_ref: None,
+            selected_option_ref: None,
+            verdict: EffectPlanVerdict::ExplicitFailure,
+        }
+    }
+
+    fn matches(&self, input: &EffectInput) -> bool {
+        self.op == input.op
+            && self.mode.is_none_or(|mode| mode == input.mode)
+            && self.selected_target.as_ref().is_none_or(|target| {
+                target == &input.selected_target
+            })
+            && self
+                .chain_ref
+                .as_ref()
+                .is_none_or(|chain_ref| Some(chain_ref) == input.chain_ref.as_ref())
+            && self.selected_option_ref.as_ref().is_none_or(|option_ref| {
+                Some(option_ref) == input.selected_option_ref.as_ref()
+            })
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum EffectPlanVerdict {
+    Success { commit: FixtureCommitPlan },
+    ExplicitFailure,
+}
+
+/// human-facing / metadata expectation override。
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct TraceExpectationOverride {
+    pub non_admissible_metadata: Option<Vec<NonAdmissibleMetadata>>,
+    pub narrative_explanations: Option<Vec<String>>,
+}
+
+/// current L2 用 fixture host plan。
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct FixtureHostPlan {
+    pub predicate_rules: Vec<PredicatePlanRule>,
+    pub effect_rules: Vec<EffectPlanRule>,
+    pub trace_expectation_override: TraceExpectationOverride,
+}
+
+/// parser-free minimal interpreter を fixture ごとに差し替える test harness。
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct FixtureHostStub {
+    plan: FixtureHostPlan,
+}
+
+impl FixtureHostStub {
+    pub fn new(plan: FixtureHostPlan) -> Self {
+        Self { plan }
+    }
+
+    pub fn plan(&self) -> &FixtureHostPlan {
+        &self.plan
+    }
+
+    pub fn run_fixture(
+        &self,
+        fixture: &CurrentL2Fixture,
+    ) -> Result<RunReport, InterpreterError> {
+        let mut predicate_oracle = PlannedPredicateOracle::new(self.plan.clone());
+        let mut effect_oracle = PlannedEffectOracle::new(self.plan.clone());
+        run_to_completion(fixture, &mut predicate_oracle, &mut effect_oracle)
+    }
+
+    pub fn expected_non_admissible_metadata(
+        &self,
+        fixture: &CurrentL2Fixture,
+    ) -> Vec<NonAdmissibleMetadata> {
+        self.plan
+            .trace_expectation_override
+            .non_admissible_metadata
+            .clone()
+            .unwrap_or_else(|| {
+                fixture
+                    .expected_trace_audit
+                    .non_admissible_metadata
+                    .iter()
+                    .map(non_admissible_from_expected)
+                    .collect()
+            })
+    }
+
+    pub fn expected_narrative_explanations(
+        &self,
+        fixture: &CurrentL2Fixture,
+    ) -> Vec<String> {
+        self.plan
+            .trace_expectation_override
+            .narrative_explanations
+            .clone()
+            .unwrap_or_else(|| fixture.expected_trace_audit.narrative_explanations.clone())
+    }
+}
+
+#[derive(Debug, Clone)]
+struct PlannedPredicateOracle {
+    plan: FixtureHostPlan,
+}
+
+impl PlannedPredicateOracle {
+    fn new(plan: FixtureHostPlan) -> Self {
+        Self { plan }
+    }
+}
+
+impl PredicateOracle<PredicateInput> for PlannedPredicateOracle {
+    fn eval_predicate(&mut self, input: PredicateInput) -> PredicateVerdict {
+        self.plan
+            .predicate_rules
+            .iter()
+            .find(|rule| rule.matches(&input))
+            .map(|rule| rule.verdict)
+            .unwrap_or(PredicateVerdict::Satisfied)
+    }
+}
+
+#[derive(Debug, Clone)]
+struct PlannedEffectOracle {
+    plan: FixtureHostPlan,
+}
+
+impl PlannedEffectOracle {
+    fn new(plan: FixtureHostPlan) -> Self {
+        Self { plan }
+    }
+}
+
+impl EffectOracle<EffectInput, FixtureCommitPlan> for PlannedEffectOracle {
+    fn apply_effect(&mut self, input: EffectInput) -> EffectVerdict<FixtureCommitPlan> {
+        if let Some(rule) = self.plan.effect_rules.iter().find(|rule| rule.matches(&input)) {
+            return match &rule.verdict {
+                EffectPlanVerdict::Success { commit } => {
+                    EffectVerdict::Success {
+                        commit: commit.clone(),
+                    }
+                }
+                EffectPlanVerdict::ExplicitFailure => EffectVerdict::ExplicitFailure,
+            };
+        }
+
+        EffectVerdict::Success {
+            commit: default_commit_from_input(&input),
+        }
+    }
+}
+
+fn default_commit_from_input(input: &EffectInput) -> FixtureCommitPlan {
+    let label = input
+        .selected_option_ref
+        .clone()
+        .unwrap_or_else(|| input.selected_target.clone());
+    FixtureCommitPlan::new(vec![FixtureStoreMutation::append_record(
+        input.selected_target.clone(),
+        format!("{}@{}", input.op, label),
+    )])
+}
+
+fn non_admissible_from_expected(
+    expected: &ExpectedNonAdmissibleMetadata,
+) -> NonAdmissibleMetadata {
+    NonAdmissibleMetadata {
+        option_ref: expected.option_ref.clone(),
+        subreason: expected.subreason,
+    }
+}
+
+fn apply_mutations(place_store: &mut PlaceStore, mutations: &[FixtureStoreMutation]) {
+    for mutation in mutations {
+        match mutation {
+            FixtureStoreMutation::AppendRecord { target, record } => {
+                place_store
+                    .entry(target.clone())
+                    .or_default()
+                    .push(record.clone());
+            }
+        }
+    }
+}

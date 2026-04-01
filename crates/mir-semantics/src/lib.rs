@@ -8,6 +8,8 @@ for representative fixtures. It is intentionally narrow and does not try to beco
 the full Mir runtime.
 "#]
 
+mod harness;
+
 use std::{
     collections::{BTreeMap, HashMap},
     fmt,
@@ -17,7 +19,13 @@ use std::{
 
 use serde::Deserialize;
 
+pub use harness::{
+    EffectPlanRule, EffectPlanVerdict, FixtureCommitPlan, FixtureHostPlan, FixtureHostStub,
+    FixtureStoreMutation, PredicatePlanRule, TraceExpectationOverride,
+};
+
 pub type PlaceStore = BTreeMap<String, Vec<String>>;
+type ScopePath = Vec<String>;
 
 /// current L2 の parser-free 最小 interpreter が使う failure kind の最小集合。
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -455,8 +463,9 @@ impl From<serde_json::Error> for InterpreterError {
 
 #[derive(Debug, Clone)]
 struct DeclarationIndex {
-    options: HashMap<String, OptionDeclView>,
-    chains: HashMap<String, ChainDeclView>,
+    options_by_scope: HashMap<ScopePath, HashMap<String, OptionDeclView>>,
+    chains_by_scope: HashMap<ScopePath, HashMap<String, ChainDeclView>>,
+    duplicate_reasons: Vec<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -714,7 +723,8 @@ impl DirectStyleEvaluator {
             contract: contract.clone(),
         });
 
-        let candidate_order = self.resolve_chain_order(&chain_ref)?;
+        let current_scope = self.state.place_stack.clone();
+        let candidate_order = self.resolve_chain_order(&current_scope, &chain_ref)?;
         self.state.chain_cursor = Some(ChainCursor {
             chain_ref: chain_ref.clone(),
             candidate_order: candidate_order.clone(),
@@ -730,12 +740,11 @@ impl DirectStyleEvaluator {
 
             let option = self
                 .declarations
-                .options
-                .get(option_name)
+                .resolve_option_in_scope(&current_scope, option_name)
                 .cloned()
                 .ok_or_else(|| {
                     InterpreterError::MissingDeclaration(format!(
-                        "missing option declaration for {option_name}"
+                        "missing option declaration for {option_name} in current place visibility"
                     ))
                 })?;
 
@@ -938,14 +947,17 @@ impl DirectStyleEvaluator {
             .all(|mode| capability_allows(capability, mode))
     }
 
-    fn resolve_chain_order(&self, chain_ref: &str) -> Result<Vec<String>, InterpreterError> {
+    fn resolve_chain_order(
+        &self,
+        scope: &[String],
+        chain_ref: &str,
+    ) -> Result<Vec<String>, InterpreterError> {
         let chain = self
             .declarations
-            .chains
-            .get(chain_ref)
+            .resolve_chain_in_scope(scope, chain_ref)
             .ok_or_else(|| {
                 InterpreterError::MissingDeclaration(format!(
-                    "missing chain declaration for {chain_ref}"
+                    "missing chain declaration for {chain_ref} in current place visibility"
                 ))
             })?;
 
@@ -998,20 +1010,26 @@ impl DirectStyleEvaluator {
 impl DeclarationIndex {
     fn from_program(program: &Program) -> Self {
         let mut index = Self {
-            options: HashMap::new(),
-            chains: HashMap::new(),
+            options_by_scope: HashMap::new(),
+            chains_by_scope: HashMap::new(),
+            duplicate_reasons: Vec::new(),
         };
-        index.collect_statements(&program.body);
+        let mut scope = ScopePath::new();
+        index.collect_statements(&program.body, &mut scope);
         index
     }
 
-    fn collect_statements(&mut self, statements: &[Statement]) {
+    fn collect_statements(&mut self, statements: &[Statement], scope: &mut ScopePath) {
         for statement in statements {
             match statement {
-                Statement::PlaceBlock { body, .. } => self.collect_statements(body),
+                Statement::PlaceBlock { place, body } => {
+                    scope.push(place.clone());
+                    self.collect_statements(body, scope);
+                    scope.pop();
+                }
                 Statement::TryFallback { body, fallback_body } => {
-                    self.collect_statements(body);
-                    self.collect_statements(fallback_body);
+                    self.collect_statements(body, scope);
+                    self.collect_statements(fallback_body, scope);
                 }
                 Statement::OptionDecl {
                     name,
@@ -1020,31 +1038,82 @@ impl DeclarationIndex {
                     lease,
                     admit,
                 } => {
-                    self.options.insert(
-                        name.clone(),
-                        OptionDeclView {
+                    if let Some(existing_scope) = self.find_visible_option_scope(scope, name) {
+                        self.duplicate_reasons.push(format!(
+                            "duplicate option declaration {name} is visible from {} and {}",
+                            display_scope(&existing_scope),
+                            display_scope(scope),
+                        ));
+                    }
+                    self.options_by_scope
+                        .entry(scope.clone())
+                        .or_default()
+                        .insert(
+                            name.clone(),
+                            OptionDeclView {
                             name: name.clone(),
-                            target: target.clone(),
-                            capability: capability.clone(),
-                            lease: lease.clone(),
-                            admit: admit.clone(),
-                        },
-                    );
+                                target: target.clone(),
+                                capability: capability.clone(),
+                                lease: lease.clone(),
+                                admit: admit.clone(),
+                            },
+                        );
                 }
                 Statement::ChainDecl { name, head, edges } => {
-                    self.chains.insert(
-                        name.clone(),
-                        ChainDeclView {
-                            head: head.clone(),
-                            edges: edges.clone(),
-                        },
-                    );
+                    if let Some(existing_scope) = self.find_visible_chain_scope(scope, name) {
+                        self.duplicate_reasons.push(format!(
+                            "duplicate chain declaration {name} is visible from {} and {}",
+                            display_scope(&existing_scope),
+                            display_scope(scope),
+                        ));
+                    }
+                    self.chains_by_scope
+                        .entry(scope.clone())
+                        .or_default()
+                        .insert(
+                            name.clone(),
+                            ChainDeclView {
+                                head: head.clone(),
+                                edges: edges.clone(),
+                            },
+                        );
                 }
                 Statement::PerformOn { .. }
                 | Statement::PerformVia { .. }
                 | Statement::AtomicCut => {}
             }
         }
+    }
+
+    fn duplicate_reasons(&self) -> &[String] {
+        &self.duplicate_reasons
+    }
+
+    fn resolve_option_in_scope(&self, scope: &[String], name: &str) -> Option<&OptionDeclView> {
+        self.visible_scope_paths(scope)
+            .find_map(|path| self.options_by_scope.get(&path)?.get(name))
+    }
+
+    fn resolve_chain_in_scope(&self, scope: &[String], name: &str) -> Option<&ChainDeclView> {
+        self.visible_scope_paths(scope)
+            .find_map(|path| self.chains_by_scope.get(&path)?.get(name))
+    }
+
+    fn visible_scope_paths(&self, scope: &[String]) -> impl Iterator<Item = ScopePath> + '_ {
+        let owned_scope = scope.to_vec();
+        (0..=owned_scope.len())
+            .rev()
+            .map(move |depth| owned_scope[..depth].to_vec())
+    }
+
+    fn find_visible_option_scope(&self, scope: &[String], name: &str) -> Option<ScopePath> {
+        self.visible_scope_paths(scope)
+            .find(|path| self.options_by_scope.get(path).is_some_and(|entries| entries.contains_key(name)))
+    }
+
+    fn find_visible_chain_scope(&self, scope: &[String], name: &str) -> Option<ScopePath> {
+        self.visible_scope_paths(scope)
+            .find(|path| self.chains_by_scope.get(path).is_some_and(|entries| entries.contains_key(name)))
     }
 }
 
@@ -1062,65 +1131,92 @@ pub fn static_gate_detailed(fixture: &CurrentL2Fixture) -> StaticGateResult {
     let mut verdict = StaticGateVerdict::Valid;
     let mut reasons = Vec::new();
 
-    for chain in declarations.chains.values() {
-        if !declarations.options.contains_key(&chain.head) {
-            verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
-            reasons.push(format!("missing option declaration for chain head {}", chain.head));
-        }
+    for reason in declarations.duplicate_reasons() {
+        verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
+        reasons.push(reason.clone());
+    }
 
-        for edge in &chain.edges {
-            let Some(predecessor) = declarations.options.get(&edge.predecessor) else {
+    for (scope, chains) in &declarations.chains_by_scope {
+        for chain in chains.values() {
+            if declarations
+                .resolve_option_in_scope(scope, &chain.head)
+                .is_none()
+            {
                 verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
-                reasons.push(format!("missing predecessor option {}", edge.predecessor));
-                continue;
-            };
-            let Some(successor) = declarations.options.get(&edge.successor) else {
-                verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
-                reasons.push(format!("missing successor option {}", edge.successor));
-                continue;
-            };
+                reasons.push(format!(
+                    "missing option declaration for chain head {} at {}",
+                    chain.head,
+                    display_scope(scope),
+                ));
+            }
 
-            match &edge.lineage_assertion {
-                None => {
+            for edge in &chain.edges {
+                let Some(predecessor) =
+                    declarations.resolve_option_in_scope(scope, &edge.predecessor)
+                else {
+                    verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
+                    reasons.push(format!(
+                        "missing predecessor option {} at {}",
+                        edge.predecessor,
+                        display_scope(scope),
+                    ));
+                    continue;
+                };
+                let Some(successor) =
+                    declarations.resolve_option_in_scope(scope, &edge.successor)
+                else {
+                    verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
+                    reasons.push(format!(
+                        "missing successor option {} at {}",
+                        edge.successor,
+                        display_scope(scope),
+                    ));
+                    continue;
+                };
+
+                match &edge.lineage_assertion {
+                    None => {
+                        verdict = escalate_verdict(verdict, StaticGateVerdict::Underdeclared);
+                        reasons.push(format!(
+                            "missing lineage assertion for {} -> {}",
+                            edge.predecessor, edge.successor
+                        ));
+                    }
+                    Some(assertion)
+                        if assertion.predecessor != edge.predecessor
+                            || assertion.successor != edge.successor =>
+                    {
+                        verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
+                        reasons.push(format!(
+                            "lineage assertion does not describe {} -> {}",
+                            edge.predecessor, edge.successor
+                        ));
+                    }
+                    Some(_) => {}
+                }
+
+                if predecessor.target.is_empty() || successor.target.is_empty() {
                     verdict = escalate_verdict(verdict, StaticGateVerdict::Underdeclared);
                     reasons.push(format!(
-                        "missing lineage assertion for {} -> {}",
+                        "declared access target is missing for {} -> {}",
+                        edge.predecessor, edge.successor
+                    ));
+                } else if predecessor.target != successor.target {
+                    verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
+                    reasons.push(format!(
+                        "declared access target mismatch between {} and {}",
                         edge.predecessor, edge.successor
                     ));
                 }
-                Some(assertion)
-                    if assertion.predecessor != edge.predecessor
-                        || assertion.successor != edge.successor =>
+
+                if capability_rank(&successor.capability) > capability_rank(&predecessor.capability)
                 {
                     verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
                     reasons.push(format!(
-                        "lineage assertion does not describe {} -> {}",
-                        edge.predecessor, edge.successor
+                        "capability strengthens from {} to {}",
+                        predecessor.capability, successor.capability
                     ));
                 }
-                Some(_) => {}
-            }
-
-            if predecessor.target.is_empty() || successor.target.is_empty() {
-                verdict = escalate_verdict(verdict, StaticGateVerdict::Underdeclared);
-                reasons.push(format!(
-                    "declared access target is missing for {} -> {}",
-                    edge.predecessor, edge.successor
-                ));
-            } else if predecessor.target != successor.target {
-                verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
-                reasons.push(format!(
-                    "declared access target mismatch between {} and {}",
-                    edge.predecessor, edge.successor
-                ));
-            }
-
-            if capability_rank(&successor.capability) > capability_rank(&predecessor.capability) {
-                verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
-                reasons.push(format!(
-                    "capability strengthens from {} to {}",
-                    predecessor.capability, successor.capability
-                ));
             }
         }
     }
@@ -1216,6 +1312,14 @@ fn escalate_verdict(current: StaticGateVerdict, incoming: StaticGateVerdict) -> 
             StaticGateVerdict::Underdeclared
         }
         _ => StaticGateVerdict::Valid,
+    }
+}
+
+fn display_scope(scope: &[String]) -> String {
+    if scope.is_empty() {
+        "<root>".into()
+    } else {
+        scope.join(" / ")
     }
 }
 

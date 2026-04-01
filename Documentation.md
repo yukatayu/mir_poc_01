@@ -78,7 +78,8 @@ flowchart LR
 10. parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md`
 11. parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md`
 12. parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md`
-13. 既存判断は `specs/12-decision-register.md` を参照する
+13. current L2 host stub / fixture runner harness の最小境界は `specs/examples/07-current-l2-host-stub-harness.md`
+14. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 
