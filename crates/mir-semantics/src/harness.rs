@@ -98,6 +98,21 @@ pub struct BatchRunSummary {
     pub bundle_reports: Vec<BatchBundleReport>,
 }
 
+/// single-fixture selection の最小 selector。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum SingleFixtureSelector {
+    Stem(String),
+    Path(PathBuf),
+}
+
+/// batch runner の上に薄く載る current L2 selection mode。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum SelectionMode {
+    RuntimeOnly,
+    StaticOnly,
+    SingleFixture(SingleFixtureSelector),
+}
+
 /// current L2 host harness が declarative に持つ最小 store mutation。
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 #[serde(tag = "kind")]
@@ -476,8 +491,69 @@ pub fn discover_bundles_in_directory(
     })
 }
 
+pub fn select_bundles_from_discovery(
+    discovery: BundleDiscoveryReport,
+    mode: &SelectionMode,
+) -> Result<BundleDiscoveryReport, InterpreterError> {
+    let mut bundles = Vec::new();
+    let mut failures = Vec::new();
+    let mut runtime_bundles = 0usize;
+    let mut static_only_bundles = 0usize;
+
+    for bundle in discovery.bundles {
+        if bundle_matches_selection(&bundle, mode) {
+            match bundle.runtime_requirement {
+                FixtureRuntimeRequirement::StaticOnly => static_only_bundles += 1,
+                FixtureRuntimeRequirement::RuntimeWithHostPlan => runtime_bundles += 1,
+            }
+            bundles.push(bundle);
+        }
+    }
+
+    for failure in discovery.failures {
+        if failure_matches_selection(&failure, mode) {
+            match failure.runtime_requirement {
+                Some(FixtureRuntimeRequirement::StaticOnly) => static_only_bundles += 1,
+                Some(FixtureRuntimeRequirement::RuntimeWithHostPlan) => runtime_bundles += 1,
+                None => {}
+            }
+            failures.push(failure);
+        }
+    }
+
+    if matches!(mode, SelectionMode::SingleFixture(_)) && bundles.is_empty() && failures.is_empty() {
+        return Err(InterpreterError::InvalidProgram(
+            "selected fixture was not found".to_string(),
+        ));
+    }
+
+    let total_candidates = bundles.len() + failures.len();
+    Ok(BundleDiscoveryReport {
+        total_candidates,
+        runtime_bundles,
+        static_only_bundles,
+        bundles,
+        failures,
+    })
+}
+
 pub fn run_directory(directory: impl AsRef<Path>) -> Result<BatchRunSummary, InterpreterError> {
     let discovery = discover_bundles_in_directory(directory)?;
+    batch_summary_from_discovery(discovery)
+}
+
+pub fn run_directory_selected(
+    directory: impl AsRef<Path>,
+    mode: &SelectionMode,
+) -> Result<BatchRunSummary, InterpreterError> {
+    let discovery = discover_bundles_in_directory(directory)?;
+    let selected = select_bundles_from_discovery(discovery, mode)?;
+    batch_summary_from_discovery(selected)
+}
+
+fn batch_summary_from_discovery(
+    discovery: BundleDiscoveryReport,
+) -> Result<BatchRunSummary, InterpreterError> {
     let mut passed = 0usize;
     let mut bundle_failures = Vec::new();
     let mut host_plan_coverage_failures = Vec::new();
@@ -534,6 +610,51 @@ pub fn run_directory(directory: impl AsRef<Path>) -> Result<BatchRunSummary, Int
         host_plan_coverage_failures,
         bundle_reports,
     })
+}
+
+fn bundle_matches_selection(bundle: &FixtureBundle, mode: &SelectionMode) -> bool {
+    match mode {
+        SelectionMode::RuntimeOnly => {
+            bundle.runtime_requirement == FixtureRuntimeRequirement::RuntimeWithHostPlan
+        }
+        SelectionMode::StaticOnly => {
+            bundle.runtime_requirement == FixtureRuntimeRequirement::StaticOnly
+        }
+        SelectionMode::SingleFixture(selector) => {
+            selector_matches_fixture_path(&bundle.fixture_path, selector)
+        }
+    }
+}
+
+fn failure_matches_selection(
+    failure: &BundleDiscoveryFailure,
+    mode: &SelectionMode,
+) -> bool {
+    match mode {
+        SelectionMode::RuntimeOnly => {
+            failure.runtime_requirement.is_none()
+                || failure.runtime_requirement
+                    == Some(FixtureRuntimeRequirement::RuntimeWithHostPlan)
+        }
+        SelectionMode::StaticOnly => {
+            failure.runtime_requirement.is_none()
+                || failure.runtime_requirement == Some(FixtureRuntimeRequirement::StaticOnly)
+        }
+        SelectionMode::SingleFixture(selector) => {
+            selector_matches_fixture_path(&failure.fixture_path, selector)
+        }
+    }
+}
+
+fn selector_matches_fixture_path(path: &Path, selector: &SingleFixtureSelector) -> bool {
+    match selector {
+        SingleFixtureSelector::Stem(stem) => path
+            .file_stem()
+            .is_some_and(|candidate| candidate == stem.as_str()),
+        SingleFixtureSelector::Path(selector_path) => {
+            path == selector_path || path.ends_with(selector_path)
+        }
+    }
 }
 
 fn bundle_from_loaded_fixture(

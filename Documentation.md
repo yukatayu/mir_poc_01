@@ -82,7 +82,8 @@ flowchart LR
 14. current L2 host harness が読む machine-readable host plan schema と `.host-plan.json` sidecar 方針は `specs/examples/08-current-l2-host-plan-schema.md`
 15. current L2 fixture と sidecar を 1 組として扱う bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md`
 16. current L2 fixture directory を bundle 群として一括実行する batch runner は `specs/examples/10-current-l2-batch-runner.md`
-17. 既存判断は `specs/12-decision-register.md` を参照する
+17. current L2 batch runner の上に薄く載る bundle selection helper は `specs/examples/11-current-l2-selection-helper.md`
+18. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 

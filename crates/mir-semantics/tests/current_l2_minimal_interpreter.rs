@@ -7,10 +7,11 @@ use std::{
 use mir_semantics::{
     CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostPlan, FixtureHostStub,
     FixtureRuntimeRequirement, NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict,
-    TraceExpectationOverride, discover_bundles_in_directory,
+    SelectionMode, SingleFixtureSelector, TraceExpectationOverride,
+    discover_bundles_in_directory,
     host_plan_sidecar_path_for_fixture_path, load_bundle_from_fixture_path, load_fixture_from_path,
     load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path, run_bundle, run_directory,
-    static_gate,
+    run_directory_selected, select_bundles_from_discovery, static_gate,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -493,4 +494,130 @@ fn run_directory_reports_host_plan_coverage_failures_in_summary() {
             } if error.contains("host plan did not cover all oracle calls")
         )
     }));
+}
+
+#[test]
+fn selection_runtime_only_keeps_only_runtime_bundles() {
+    let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
+    let selected = select_bundles_from_discovery(discovery, &SelectionMode::RuntimeOnly).unwrap();
+
+    let stems: Vec<_> = selected
+        .bundles
+        .iter()
+        .map(|bundle| {
+            bundle
+                .fixture_path
+                .file_stem()
+                .unwrap()
+                .to_string_lossy()
+                .into_owned()
+        })
+        .collect();
+
+    assert_eq!(selected.total_candidates, 4);
+    assert_eq!(selected.runtime_bundles, 4);
+    assert_eq!(selected.static_only_bundles, 0);
+    assert_eq!(selected.failures.len(), 0);
+    assert_eq!(
+        stems,
+        vec![
+            "e1-place-atomic-cut",
+            "e2-try-fallback",
+            "e3-option-admit-chain",
+            "e6-write-after-expiry",
+        ]
+    );
+}
+
+#[test]
+fn selection_static_only_keeps_only_static_bundles() {
+    let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
+    let selected = select_bundles_from_discovery(discovery, &SelectionMode::StaticOnly).unwrap();
+
+    let stems: Vec<_> = selected
+        .bundles
+        .iter()
+        .map(|bundle| {
+            bundle
+                .fixture_path
+                .file_stem()
+                .unwrap()
+                .to_string_lossy()
+                .into_owned()
+        })
+        .collect();
+
+    assert_eq!(selected.total_candidates, 2);
+    assert_eq!(selected.runtime_bundles, 0);
+    assert_eq!(selected.static_only_bundles, 2);
+    assert_eq!(selected.failures.len(), 0);
+    assert_eq!(stems, vec!["e4-malformed-lineage", "e5-underdeclared-lineage"]);
+}
+
+#[test]
+fn run_directory_selected_single_fixture_runs_only_requested_fixture() {
+    let summary = run_directory_selected(
+        fixture_dir(),
+        &SelectionMode::SingleFixture(SingleFixtureSelector::Stem(
+            "e2-try-fallback".to_string(),
+        )),
+    )
+    .unwrap();
+
+    assert_eq!(summary.total_bundles, 1);
+    assert_eq!(summary.runtime_bundles, 1);
+    assert_eq!(summary.static_only_bundles, 0);
+    assert_eq!(summary.passed, 1);
+    assert_eq!(summary.failed, 0);
+    assert_eq!(summary.bundle_reports.len(), 1);
+    assert!(summary.bundle_reports[0]
+        .fixture_path
+        .ends_with("e2-try-fallback.json"));
+}
+
+#[test]
+fn run_directory_selected_runtime_only_executes_only_runtime_bundles() {
+    let summary = run_directory_selected(fixture_dir(), &SelectionMode::RuntimeOnly).unwrap();
+
+    assert_eq!(summary.total_bundles, 4);
+    assert_eq!(summary.runtime_bundles, 4);
+    assert_eq!(summary.static_only_bundles, 0);
+    assert_eq!(summary.passed, 4);
+    assert_eq!(summary.failed, 0);
+    assert_eq!(summary.discovery_failures.len(), 0);
+    assert_eq!(summary.host_plan_coverage_failures.len(), 0);
+}
+
+#[test]
+fn run_directory_selected_single_fixture_accepts_path_selector() {
+    let summary = run_directory_selected(
+        fixture_dir(),
+        &SelectionMode::SingleFixture(SingleFixtureSelector::Path(fixture_path(
+            "e6-write-after-expiry.json",
+        ))),
+    )
+    .unwrap();
+
+    assert_eq!(summary.total_bundles, 1);
+    assert_eq!(summary.runtime_bundles, 1);
+    assert_eq!(summary.static_only_bundles, 0);
+    assert_eq!(summary.passed, 1);
+    assert_eq!(summary.failed, 0);
+    assert_eq!(summary.bundle_reports.len(), 1);
+    assert!(summary.bundle_reports[0]
+        .fixture_path
+        .ends_with("e6-write-after-expiry.json"));
+}
+
+#[test]
+fn run_directory_selected_rejects_unknown_single_fixture() {
+    let error = run_directory_selected(
+        fixture_dir(),
+        &SelectionMode::SingleFixture(SingleFixtureSelector::Stem(
+            "does-not-exist".to_string(),
+        )),
+    )
+    .unwrap_err();
+
+    assert!(error.to_string().contains("selected fixture was not found"));
 }
