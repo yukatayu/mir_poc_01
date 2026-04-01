@@ -184,6 +184,26 @@ pub struct ProfileRunSummary {
     pub bundle_reports: Vec<BatchBundleReport>,
 }
 
+/// current L2 の small named profile catalog を引く入口。
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ProfileCatalog;
+
+/// alias 解決後の request を含む current L2 catalog summary。
+#[derive(Debug, Clone)]
+pub struct NamedProfileRunSummary {
+    pub profile_name: String,
+    pub resolved_request: SelectionRequest,
+    pub total_selected_bundles: usize,
+    pub runtime_selected_bundles: usize,
+    pub static_selected_bundles: usize,
+    pub passed: usize,
+    pub failed: usize,
+    pub discovery_failures: Vec<BundleDiscoveryFailure>,
+    pub bundle_failures: Vec<BundleExecutionFailure>,
+    pub host_plan_coverage_failures: Vec<BundleExecutionFailure>,
+    pub bundle_reports: Vec<BatchBundleReport>,
+}
+
 /// current L2 host harness が declarative に持つ最小 store mutation。
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 #[serde(tag = "kind")]
@@ -659,6 +679,65 @@ pub fn run_directory_profiled(
         total_selected_bundles: summary.total_bundles,
         runtime_selected_bundles: summary.runtime_bundles,
         static_selected_bundles: summary.static_only_bundles,
+        passed: summary.passed,
+        failed: summary.failed,
+        discovery_failures: summary.discovery_failures,
+        bundle_failures: summary.bundle_failures,
+        host_plan_coverage_failures: summary.host_plan_coverage_failures,
+        bundle_reports: summary.bundle_reports,
+    })
+}
+
+impl ProfileCatalog {
+    pub fn aliases() -> &'static [&'static str] {
+        &["smoke-runtime", "smoke-static", "runtime-e3", "static-e4"]
+    }
+
+    pub fn resolve(alias: &str) -> Result<SelectionProfile, InterpreterError> {
+        match alias {
+            "smoke-runtime" => Ok(SelectionProfile::new(
+                "smoke-runtime",
+                SelectionRequest::new().with_scope(SelectionScope::RuntimeOnly),
+            )),
+            "smoke-static" => Ok(SelectionProfile::new(
+                "smoke-static",
+                SelectionRequest::new().with_scope(SelectionScope::StaticOnly),
+            )),
+            "runtime-e3" => Ok(SelectionProfile::new(
+                "runtime-e3",
+                SelectionRequest::new()
+                    .with_scope(SelectionScope::RuntimeOnly)
+                    .with_single_fixture(SingleFixtureSelector::Stem(
+                        "e3-option-admit-chain".to_string(),
+                    )),
+            )),
+            "static-e4" => Ok(SelectionProfile::new(
+                "static-e4",
+                SelectionRequest::new()
+                    .with_scope(SelectionScope::StaticOnly)
+                    .with_single_fixture(SingleFixtureSelector::Stem(
+                        "e4-malformed-lineage".to_string(),
+                    )),
+            )),
+            _ => Err(InterpreterError::InvalidProgram(format!(
+                "unknown named profile alias: {alias}"
+            ))),
+        }
+    }
+}
+
+pub fn run_directory_named_profile(
+    directory: impl AsRef<Path>,
+    alias: &str,
+) -> Result<NamedProfileRunSummary, InterpreterError> {
+    let profile = ProfileCatalog::resolve(alias)?;
+    let summary = run_directory_profiled(directory, &profile)?;
+    Ok(NamedProfileRunSummary {
+        profile_name: summary.profile_name,
+        resolved_request: profile.request,
+        total_selected_bundles: summary.total_selected_bundles,
+        runtime_selected_bundles: summary.runtime_selected_bundles,
+        static_selected_bundles: summary.static_selected_bundles,
         passed: summary.passed,
         failed: summary.failed,
         discovery_failures: summary.discovery_failures,

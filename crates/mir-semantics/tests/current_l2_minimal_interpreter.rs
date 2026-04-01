@@ -6,12 +6,14 @@ use std::{
 
 use mir_semantics::{
     CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostPlan, FixtureHostStub,
-    FixtureRuntimeRequirement, NonAdmissibleMetadata, NonAdmissibleSubreason, ProfileRunSummary,
-    SelectionMode, SelectionProfile, SelectionRequest, SelectionScope, SingleFixtureSelector,
-    StaticGateVerdict, TraceExpectationOverride, discover_bundles_in_directory,
+    FixtureRuntimeRequirement, NamedProfileRunSummary, NonAdmissibleMetadata,
+    NonAdmissibleSubreason, ProfileCatalog, ProfileRunSummary, SelectionMode, SelectionProfile,
+    SelectionRequest, SelectionScope, SingleFixtureSelector, StaticGateVerdict,
+    TraceExpectationOverride, discover_bundles_in_directory,
     host_plan_sidecar_path_for_fixture_path, load_bundle_from_fixture_path, load_fixture_from_path,
     load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path, run_bundle, run_directory,
-    run_directory_profiled, run_directory_selected, select_bundles_from_discovery, static_gate,
+    run_directory_named_profile, run_directory_profiled, run_directory_selected,
+    select_bundles_from_discovery, static_gate,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -729,4 +731,100 @@ fn run_directory_profiled_rejects_unknown_single_fixture() {
     let error = run_directory_profiled(fixture_dir(), &profile).unwrap_err();
 
     assert!(error.to_string().contains("selected fixture was not found"));
+}
+
+fn assert_named_profile_selected_counts(
+    summary: &NamedProfileRunSummary,
+    total_selected_bundles: usize,
+    runtime_selected_bundles: usize,
+    static_selected_bundles: usize,
+) {
+    assert_eq!(summary.total_selected_bundles, total_selected_bundles);
+    assert_eq!(summary.runtime_selected_bundles, runtime_selected_bundles);
+    assert_eq!(summary.static_selected_bundles, static_selected_bundles);
+}
+
+#[test]
+fn named_profile_catalog_lists_expected_aliases() {
+    let aliases = ProfileCatalog::aliases();
+
+    assert_eq!(
+        aliases,
+        &["smoke-runtime", "smoke-static", "runtime-e3", "static-e4"]
+    );
+}
+
+#[test]
+fn run_directory_named_profile_smoke_runtime_matches_runtime_only_request() {
+    let summary = run_directory_named_profile(fixture_dir(), "smoke-runtime").unwrap();
+
+    assert_eq!(summary.profile_name, "smoke-runtime");
+    assert_eq!(
+        summary.resolved_request,
+        SelectionRequest::new().with_scope(SelectionScope::RuntimeOnly)
+    );
+    assert_named_profile_selected_counts(&summary, 4, 4, 0);
+    assert_eq!(summary.passed, 4);
+    assert_eq!(summary.failed, 0);
+}
+
+#[test]
+fn run_directory_named_profile_smoke_static_matches_static_only_request() {
+    let summary = run_directory_named_profile(fixture_dir(), "smoke-static").unwrap();
+
+    assert_eq!(summary.profile_name, "smoke-static");
+    assert_eq!(
+        summary.resolved_request,
+        SelectionRequest::new().with_scope(SelectionScope::StaticOnly)
+    );
+    assert_named_profile_selected_counts(&summary, 2, 0, 2);
+    assert_eq!(summary.passed, 2);
+    assert_eq!(summary.failed, 0);
+}
+
+#[test]
+fn run_directory_named_profile_runtime_e3_runs_only_e3_runtime_bundle() {
+    let summary = run_directory_named_profile(fixture_dir(), "runtime-e3").unwrap();
+
+    assert_eq!(summary.profile_name, "runtime-e3");
+    assert_eq!(
+        summary.resolved_request,
+        SelectionRequest::new()
+            .with_scope(SelectionScope::RuntimeOnly)
+            .with_single_fixture(SingleFixtureSelector::Stem(
+                "e3-option-admit-chain".to_string(),
+            ))
+    );
+    assert_named_profile_selected_counts(&summary, 1, 1, 0);
+    assert_eq!(summary.bundle_reports.len(), 1);
+    assert!(summary.bundle_reports[0]
+        .fixture_path
+        .ends_with("e3-option-admit-chain.json"));
+}
+
+#[test]
+fn run_directory_named_profile_static_e4_runs_only_e4_static_bundle() {
+    let summary = run_directory_named_profile(fixture_dir(), "static-e4").unwrap();
+
+    assert_eq!(summary.profile_name, "static-e4");
+    assert_eq!(
+        summary.resolved_request,
+        SelectionRequest::new()
+            .with_scope(SelectionScope::StaticOnly)
+            .with_single_fixture(SingleFixtureSelector::Stem(
+                "e4-malformed-lineage".to_string(),
+            ))
+    );
+    assert_named_profile_selected_counts(&summary, 1, 0, 1);
+    assert_eq!(summary.bundle_reports.len(), 1);
+    assert!(summary.bundle_reports[0]
+        .fixture_path
+        .ends_with("e4-malformed-lineage.json"));
+}
+
+#[test]
+fn run_directory_named_profile_rejects_unknown_alias() {
+    let error = run_directory_named_profile(fixture_dir(), "no-such-profile").unwrap_err();
+
+    assert!(error.to_string().contains("unknown named profile alias"));
 }
