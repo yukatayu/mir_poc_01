@@ -30,6 +30,9 @@
 - `specs/examples/02-current-l2-ast-fixture-schema.md`
   - representative examples を parser なしで machine-readable に扱うための current L2 AST fixture schema をまとめた補助文書。
   - syntax の punctuation を固定せず、意味側の構造と expected static / runtime / trace-audit を fixture 化する。
+- `specs/examples/03-current-l2-evaluation-state-schema.md`
+  - parser なし最小 interpreter に必要な current L2 evaluation state schema をまとめた補助文書。
+  - AST fixture から runtime state へ渡す最小 carrier と、E1 / E2 / E3 variant / E6 を動かすのに必要な state 粒度を整理する。
 
 ## 各文書の役割
 
@@ -63,6 +66,8 @@
   - current L2 の representative examples で使う最小 surface syntax 候補。
 - `specs/examples/02-current-l2-ast-fixture-schema.md`
   - current L2 の representative examples を parser なしで fixture に落とすための最小 AST schema。
+- `specs/examples/03-current-l2-evaluation-state-schema.md`
+  - current L2 の representative examples を parser なし最小 interpreter で読むための最小 evaluation state schema。
 
 ## レポート
 
@@ -74,6 +79,7 @@
 - `specs/examples/`
   - representative program、説明用記法、例示中心の補助文書置き場。
   - parser なしで扱う representative example fixture の schema は `specs/examples/02-current-l2-ast-fixture-schema.md` に置き、machine-readable な fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/` に置く。
+  - parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 用語と参照の編集方針

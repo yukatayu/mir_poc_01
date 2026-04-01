@@ -8,6 +8,7 @@
 - current L2 の representative examples を parser 実装なしで fixture 化する。
 - syntax 未決部分を固定せず、意味側の構造だけを machine-readable に保つ。
 - static verdict、runtime outcome、trace / audit expectation を example fixture 側でも持てるようにする。
+- parser なし最小 interpreter に必要な runtime carrier は `specs/examples/03-current-l2-evaluation-state-schema.md` を参照する。
 
 ## ここで固定すること / しないこと
 
