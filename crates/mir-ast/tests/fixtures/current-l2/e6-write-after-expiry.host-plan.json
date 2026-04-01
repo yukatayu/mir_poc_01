@@ -1,0 +1,16 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [],
+  "effect_rules": [],
+  "trace_expectation_override": {
+    "non_admissible_metadata": [
+      {
+        "option_ref": "writer",
+        "subreason": "lease-expired"
+      }
+    ],
+    "narrative_explanations": [
+      "readonly remains a request/capability mismatch narrative explanation"
+    ]
+  }
+}

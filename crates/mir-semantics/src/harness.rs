@@ -1,12 +1,22 @@
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
+
 use crate::{
     CurrentL2Fixture, EffectInput, EffectOracle, EffectVerdict, ExpectedNonAdmissibleMetadata,
     InterpreterError, NonAdmissibleMetadata, PlaceStore, PredicateInput, PredicateOracle,
     PredicateSite, PredicateVerdict, RequestMode, RunReport, SuccessCarrier, run_to_completion,
 };
+use serde::Deserialize;
+
+pub const CURRENT_L2_HOST_PLAN_SCHEMA_VERSION: &str = "current-l2-host-plan-v0";
 
 /// current L2 host harness が declarative に持つ最小 store mutation。
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[serde(tag = "kind")]
 pub enum FixtureStoreMutation {
+    #[serde(rename = "append-record")]
     AppendRecord { target: String, record: String },
 }
 
@@ -20,8 +30,9 @@ impl FixtureStoreMutation {
 }
 
 /// effect success が返す current L2 harness 用 commit carrier。
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default, Deserialize)]
 pub struct FixtureCommitPlan {
+    #[serde(default)]
     pub mutations: Vec<FixtureStoreMutation>,
 }
 
@@ -44,13 +55,17 @@ impl SuccessCarrier for FixtureCommitPlan {
 }
 
 /// predicate verdict を declarative に差し替える current L2 用 rule。
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 pub struct PredicatePlanRule {
     pub site: PredicateSite,
     pub op: String,
+    #[serde(default)]
     pub mode: Option<RequestMode>,
+    #[serde(default)]
     pub target: Option<String>,
+    #[serde(default)]
     pub chain_ref: Option<String>,
+    #[serde(default)]
     pub option_ref: Option<String>,
     pub verdict: PredicateVerdict,
 }
@@ -98,15 +113,28 @@ impl PredicatePlanRule {
                 .as_ref()
                 .is_none_or(|option_ref| Some(option_ref) == input.option_ref.as_ref())
     }
+
+    fn overlaps(&self, other: &Self) -> bool {
+        self.site == other.site
+            && self.op == other.op
+            && optional_field_overlaps(&self.mode, &other.mode)
+            && optional_field_overlaps(&self.target, &other.target)
+            && optional_field_overlaps(&self.chain_ref, &other.chain_ref)
+            && optional_field_overlaps(&self.option_ref, &other.option_ref)
+    }
 }
 
 /// effect outcome を declarative に差し替える current L2 用 rule。
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 pub struct EffectPlanRule {
     pub op: String,
+    #[serde(default)]
     pub mode: Option<RequestMode>,
+    #[serde(default)]
     pub selected_target: Option<String>,
+    #[serde(default)]
     pub chain_ref: Option<String>,
+    #[serde(default)]
     pub selected_option_ref: Option<String>,
     pub verdict: EffectPlanVerdict,
 }
@@ -176,18 +204,31 @@ impl EffectPlanRule {
                 Some(option_ref) == input.selected_option_ref.as_ref()
             })
     }
+
+    fn overlaps(&self, other: &Self) -> bool {
+        self.op == other.op
+            && optional_field_overlaps(&self.mode, &other.mode)
+            && optional_field_overlaps(&self.selected_target, &other.selected_target)
+            && optional_field_overlaps(&self.chain_ref, &other.chain_ref)
+            && optional_field_overlaps(&self.selected_option_ref, &other.selected_option_ref)
+    }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[serde(tag = "kind")]
 pub enum EffectPlanVerdict {
+    #[serde(rename = "success")]
     Success { commit: FixtureCommitPlan },
+    #[serde(rename = "explicit-failure")]
     ExplicitFailure,
 }
 
 /// human-facing / metadata expectation override。
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default, Deserialize)]
 pub struct TraceExpectationOverride {
+    #[serde(default)]
     pub non_admissible_metadata: Option<Vec<NonAdmissibleMetadata>>,
+    #[serde(default)]
     pub narrative_explanations: Option<Vec<String>>,
 }
 
@@ -199,6 +240,84 @@ pub struct FixtureHostPlan {
     pub trace_expectation_override: TraceExpectationOverride,
 }
 
+impl FixtureHostPlan {
+    pub fn validate(&self) -> Result<(), InterpreterError> {
+        for (i, left) in self.predicate_rules.iter().enumerate() {
+            for right in self.predicate_rules.iter().skip(i + 1) {
+                if left.overlaps(right) {
+                    return Err(InterpreterError::InvalidProgram(format!(
+                        "overlapping predicate plan rules are forbidden: {:?} and {:?}",
+                        left, right
+                    )));
+                }
+            }
+        }
+
+        for (i, left) in self.effect_rules.iter().enumerate() {
+            for right in self.effect_rules.iter().skip(i + 1) {
+                if left.overlaps(right) {
+                    return Err(InterpreterError::InvalidProgram(format!(
+                        "overlapping effect plan rules are forbidden: {:?} and {:?}",
+                        left, right
+                    )));
+                }
+            }
+        }
+
+        Ok(())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+struct FixtureHostPlanAsset {
+    pub schema_version: String,
+    #[serde(default)]
+    pub predicate_rules: Vec<PredicatePlanRule>,
+    #[serde(default)]
+    pub effect_rules: Vec<EffectPlanRule>,
+    #[serde(default)]
+    pub trace_expectation_override: TraceExpectationOverride,
+}
+
+impl FixtureHostPlanAsset {
+    fn into_plan(self) -> Result<FixtureHostPlan, InterpreterError> {
+        if self.schema_version != CURRENT_L2_HOST_PLAN_SCHEMA_VERSION {
+            return Err(InterpreterError::InvalidProgram(format!(
+                "unsupported host plan schema version: {}",
+                self.schema_version
+            )));
+        }
+
+        let plan = FixtureHostPlan {
+            predicate_rules: self.predicate_rules,
+            effect_rules: self.effect_rules,
+            trace_expectation_override: self.trace_expectation_override,
+        };
+        plan.validate()?;
+        Ok(plan)
+    }
+}
+
+pub fn host_plan_sidecar_path_for_fixture_path(
+    fixture_path: impl AsRef<Path>,
+) -> PathBuf {
+    fixture_path.as_ref().with_extension("host-plan.json")
+}
+
+pub fn load_host_plan_from_path(
+    path: impl AsRef<Path>,
+) -> Result<FixtureHostPlan, InterpreterError> {
+    let payload = fs::read_to_string(path)?;
+    let asset: FixtureHostPlanAsset = serde_json::from_str(&payload)?;
+    asset.into_plan()
+}
+
+pub fn load_host_plan_sidecar_for_fixture_path(
+    fixture_path: impl AsRef<Path>,
+) -> Result<FixtureHostPlan, InterpreterError> {
+    load_host_plan_from_path(host_plan_sidecar_path_for_fixture_path(fixture_path))
+}
+
 /// parser-free minimal interpreter を fixture ごとに差し替える test harness。
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct FixtureHostStub {
@@ -206,8 +325,9 @@ pub struct FixtureHostStub {
 }
 
 impl FixtureHostStub {
-    pub fn new(plan: FixtureHostPlan) -> Self {
-        Self { plan }
+    pub fn new(plan: FixtureHostPlan) -> Result<Self, InterpreterError> {
+        plan.validate()?;
+        Ok(Self { plan })
     }
 
     pub fn plan(&self) -> &FixtureHostPlan {
@@ -220,7 +340,15 @@ impl FixtureHostStub {
     ) -> Result<RunReport, InterpreterError> {
         let mut predicate_oracle = PlannedPredicateOracle::new(self.plan.clone());
         let mut effect_oracle = PlannedEffectOracle::new(self.plan.clone());
-        run_to_completion(fixture, &mut predicate_oracle, &mut effect_oracle)
+        let report = run_to_completion(fixture, &mut predicate_oracle, &mut effect_oracle)?;
+        if !predicate_oracle.unmatched_inputs.is_empty() || !effect_oracle.unmatched_inputs.is_empty()
+        {
+            return Err(InterpreterError::InvalidProgram(format!(
+                "host plan did not cover all oracle calls: predicate_unmatched={:?}, effect_unmatched={:?}",
+                predicate_oracle.unmatched_inputs, effect_oracle.unmatched_inputs
+            )));
+        }
+        Ok(report)
     }
 
     pub fn expected_non_admissible_metadata(
@@ -256,11 +384,15 @@ impl FixtureHostStub {
 #[derive(Debug, Clone)]
 struct PlannedPredicateOracle {
     plan: FixtureHostPlan,
+    unmatched_inputs: Vec<PredicateInput>,
 }
 
 impl PlannedPredicateOracle {
     fn new(plan: FixtureHostPlan) -> Self {
-        Self { plan }
+        Self {
+            plan,
+            unmatched_inputs: Vec::new(),
+        }
     }
 }
 
@@ -271,18 +403,25 @@ impl PredicateOracle<PredicateInput> for PlannedPredicateOracle {
             .iter()
             .find(|rule| rule.matches(&input))
             .map(|rule| rule.verdict)
-            .unwrap_or(PredicateVerdict::Satisfied)
+            .unwrap_or_else(|| {
+                self.unmatched_inputs.push(input);
+                PredicateVerdict::Satisfied
+            })
     }
 }
 
 #[derive(Debug, Clone)]
 struct PlannedEffectOracle {
     plan: FixtureHostPlan,
+    unmatched_inputs: Vec<EffectInput>,
 }
 
 impl PlannedEffectOracle {
     fn new(plan: FixtureHostPlan) -> Self {
-        Self { plan }
+        Self {
+            plan,
+            unmatched_inputs: Vec::new(),
+        }
     }
 }
 
@@ -299,9 +438,17 @@ impl EffectOracle<EffectInput, FixtureCommitPlan> for PlannedEffectOracle {
             };
         }
 
+        self.unmatched_inputs.push(input.clone());
         EffectVerdict::Success {
             commit: default_commit_from_input(&input),
         }
+    }
+}
+
+fn optional_field_overlaps<T: PartialEq>(left: &Option<T>, right: &Option<T>) -> bool {
+    match (left, right) {
+        (Some(left), Some(right)) => left == right,
+        _ => true,
     }
 }
 

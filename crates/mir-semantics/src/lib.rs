@@ -20,8 +20,10 @@ use std::{
 use serde::Deserialize;
 
 pub use harness::{
-    EffectPlanRule, EffectPlanVerdict, FixtureCommitPlan, FixtureHostPlan, FixtureHostStub,
-    FixtureStoreMutation, PredicatePlanRule, TraceExpectationOverride,
+    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, EffectPlanRule, EffectPlanVerdict,
+    FixtureCommitPlan, FixtureHostPlan, FixtureHostStub, FixtureStoreMutation,
+    PredicatePlanRule, TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path,
+    load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path,
 };
 
 pub type PlaceStore = BTreeMap<String, Vec<String>>;
@@ -63,17 +65,22 @@ pub enum StepControl {
 }
 
 /// predicate evaluation の site。
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
 pub enum PredicateSite {
+    #[serde(rename = "request-require")]
     RequestRequire,
+    #[serde(rename = "request-ensure")]
     RequestEnsure,
+    #[serde(rename = "option-admit")]
     OptionAdmit,
 }
 
 /// predicate oracle が返す current L2 の最小 verdict。
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
 pub enum PredicateVerdict {
+    #[serde(rename = "satisfied")]
     Satisfied,
+    #[serde(rename = "unsatisfied")]
     Unsatisfied,
 }
 
@@ -85,9 +92,11 @@ pub enum EffectVerdict<Commit = ()> {
 }
 
 /// parser-free current L2 で使う request mode。
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
 pub enum RequestMode {
+    #[serde(rename = "on")]
     On,
+    #[serde(rename = "via")]
     Via,
 }
 
@@ -309,7 +318,7 @@ pub trait EffectOracle<Input, Commit = ()> {
     fn apply_effect(&mut self, input: Input) -> EffectVerdict<Commit>;
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 pub struct NonAdmissibleMetadata {
     pub option_ref: String,
     pub subreason: NonAdmissibleSubreason,

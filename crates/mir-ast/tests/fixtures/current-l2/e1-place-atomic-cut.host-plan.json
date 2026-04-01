@@ -1,0 +1,54 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "request-require",
+      "op": "update_authority",
+      "mode": "on",
+      "target": "profile_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "update_authority",
+      "mode": "on",
+      "target": "profile_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "append_audit",
+      "mode": "on",
+      "target": "authority_log",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "update_authority",
+      "mode": "on",
+      "selected_target": "profile_authority",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "profile_authority",
+              "record": "update_authority@profile_authority"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "append_audit",
+      "mode": "on",
+      "selected_target": "authority_log",
+      "verdict": {
+        "kind": "explicit-failure"
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

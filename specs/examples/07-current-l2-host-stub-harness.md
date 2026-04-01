@@ -8,6 +8,7 @@
 - parser-free minimal interpreter に対し、fixture ごとに declarative な host plan を差し替える最小 harness を与える。
 - `specs/examples/05-current-l2-oracle-api.md` の predicate / effect oracle 境界を、test-only stub としてどう concretize するかを示す。
 - machine-check する expectation と human-facing な説明責務の境界を明示する。
+- machine-readable な host plan schema / sidecar asset 自体は `specs/examples/08-current-l2-host-plan-schema.md` を参照する。
 
 ## current L2 で固定すること
 
@@ -19,6 +20,8 @@
   - formal な non-admissible metadata expectation
   - exact compare する narrative explanation expectation
 - `must_explain` のような human-facing explanation obligation は machine-check carrier に上げず、report / prose 側に残す。
+- current L2 harness は、未指定 rule を permissive default として常用しない。runtime に入る fixture で実際に発生した predicate / effect oracle call は、host plan 側で明示的に被覆されていなければならない。
+- wildcard を使った broader rule は許してよいが、同じ入力を複数 rule が同時に受理できる overlap は current L2 では禁止し、loader / harness 側で reject してよい。
 
 ## host plan の最小 shape
 
@@ -67,6 +70,13 @@ field 名や serialization は未固定だが、conceptual shape として curre
 
 current L2 では、`narrative_explanations` は machine-check 可能な短い explanation carrier として比較してよい。
 一方で、`must_explain` は「人が説明責務を果たしたか」を見る prose obligation であり、harness に exact string compare を持ち込まない。
+
+## host plan coverage の最小方針
+
+- runtime に入る fixture で実際に発生した `PredicateOracle` / `EffectOracle` call は、host plan rule のどれか 1 つに明示的に対応づけられなければならない。
+- 被覆されていない oracle call があった場合、current L2 harness はその run を invalid host plan として失敗させてよい。
+- rule 同士の precedence を current L2 で語彙化しない代わりに、overlap を reject する。これにより first-match / last-match の hidden policy を持ち込まない。
+- これは production host interface の制約ではなく、current L2 verification harness の最小方針である。
 
 ## representative fixtures での読み
 

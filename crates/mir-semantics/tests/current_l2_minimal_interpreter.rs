@@ -1,10 +1,10 @@
-use std::path::PathBuf;
+use std::{fs, path::PathBuf, time::{SystemTime, UNIX_EPOCH}};
 
 use mir_semantics::{
-    EffectPlanRule, FixtureHostPlan, FixtureHostStub, FixtureRuntimeOutcome,
-    FixtureStoreMutation, NonAdmissibleMetadata, NonAdmissibleSubreason, PredicatePlanRule,
-    PredicateSite, StaticGateVerdict, TerminalOutcome, TraceExpectationOverride,
-    load_fixture_from_path, static_gate,
+    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostStub, FixtureRuntimeOutcome,
+    NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
+    TraceExpectationOverride, host_plan_sidecar_path_for_fixture_path, load_fixture_from_path,
+    load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path, static_gate,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -22,68 +22,23 @@ fn expected_outcome(outcome: FixtureRuntimeOutcome) -> Option<TerminalOutcome> {
     }
 }
 
-fn host_plan_for_fixture(name: &str) -> FixtureHostPlan {
-    match name {
-        "e1-place-atomic-cut.json" => FixtureHostPlan {
-            effect_rules: vec![
-                EffectPlanRule::success_on(
-                    "update_authority",
-                    "profile_authority",
-                    vec![FixtureStoreMutation::append_record(
-                        "profile_authority",
-                        "update_authority@profile_authority",
-                    )],
-                ),
-                EffectPlanRule::explicit_failure_on("append_audit", "authority_log"),
-            ],
-            ..FixtureHostPlan::default()
-        },
-        "e2-try-fallback.json" => FixtureHostPlan {
-            predicate_rules: vec![PredicatePlanRule::unsatisfied(
-                PredicateSite::RequestRequire,
-                "validate_profile_patch",
-            )],
-            effect_rules: vec![
-                EffectPlanRule::success_on(
-                    "stage_profile_patch",
-                    "profile_draft",
-                    vec![FixtureStoreMutation::append_record(
-                        "profile_draft",
-                        "stage_profile_patch@profile_draft",
-                    )],
-                ),
-                EffectPlanRule::success_on(
-                    "load_last_snapshot",
-                    "profile_snapshot",
-                    vec![FixtureStoreMutation::append_record(
-                        "profile_snapshot",
-                        "load_last_snapshot@profile_snapshot",
-                    )],
-                ),
-            ],
-            ..FixtureHostPlan::default()
-        },
-        "e3-option-admit-chain.json" => FixtureHostPlan {
-            predicate_rules: vec![PredicatePlanRule::unsatisfied_for_option(
-                PredicateSite::OptionAdmit,
-                "write_profile",
-                "owner_writer",
-            )],
-            effect_rules: vec![EffectPlanRule::success_via(
-                "write_profile",
-                "profile_ref",
-                "delegated_writer",
-                "profile_doc",
-                vec![FixtureStoreMutation::append_record(
-                    "profile_doc",
-                    "write_profile@delegated_writer",
-                )],
-            )],
-            ..FixtureHostPlan::default()
-        },
-        "e6-write-after-expiry.json" => FixtureHostPlan::default(),
-        _ => FixtureHostPlan::default(),
-    }
+fn load_runtime_fixture_and_harness(name: &str) -> (mir_semantics::CurrentL2Fixture, FixtureHostStub) {
+    let path = fixture_path(name);
+    let fixture = load_fixture_from_path(&path).unwrap();
+    let plan = load_host_plan_sidecar_for_fixture_path(&path).unwrap();
+    let harness = FixtureHostStub::new(plan).unwrap();
+    (fixture, harness)
+}
+
+fn unique_temp_json_path(label: &str) -> PathBuf {
+    let nanos = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_nanos();
+    std::env::temp_dir().join(format!(
+        "mir-semantics-{label}-{}-{nanos}.json",
+        std::process::id()
+    ))
 }
 
 #[test]
@@ -121,8 +76,7 @@ fn runtime_fixtures_reach_expected_outcomes_via_declarative_host_plan() {
     ];
 
     for fixture_name in cases {
-        let fixture = load_fixture_from_path(fixture_path(fixture_name)).unwrap();
-        let harness = FixtureHostStub::new(host_plan_for_fixture(fixture_name));
+        let (fixture, harness) = load_runtime_fixture_and_harness(fixture_name);
         let result = harness.run_fixture(&fixture).unwrap();
 
         assert_eq!(result.static_verdict, fixture.expected_static.verdict, "{fixture_name}");
@@ -149,8 +103,7 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
     ];
 
     for fixture_name in cases {
-        let fixture = load_fixture_from_path(fixture_path(fixture_name)).unwrap();
-        let harness = FixtureHostStub::new(host_plan_for_fixture(fixture_name));
+        let (fixture, harness) = load_runtime_fixture_and_harness(fixture_name);
         let result = harness.run_fixture(&fixture).unwrap();
 
         assert_eq!(
@@ -173,8 +126,9 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
 
 #[test]
 fn harness_can_override_trace_expectation_without_changing_runtime_plan() {
-    let fixture = load_fixture_from_path(fixture_path("e6-write-after-expiry.json")).unwrap();
-    let mut plan = host_plan_for_fixture("e6-write-after-expiry.json");
+    let fixture_path = fixture_path("e6-write-after-expiry.json");
+    let fixture = load_fixture_from_path(&fixture_path).unwrap();
+    let mut plan = load_host_plan_sidecar_for_fixture_path(&fixture_path).unwrap();
     plan.trace_expectation_override = TraceExpectationOverride {
         non_admissible_metadata: Some(vec![NonAdmissibleMetadata {
             option_ref: "override_writer".into(),
@@ -182,7 +136,7 @@ fn harness_can_override_trace_expectation_without_changing_runtime_plan() {
         }]),
         narrative_explanations: Some(vec!["custom narrative".into()]),
     };
-    let harness = FixtureHostStub::new(plan);
+    let harness = FixtureHostStub::new(plan).unwrap();
 
     assert_eq!(
         harness.expected_non_admissible_metadata(&fixture),
@@ -195,4 +149,123 @@ fn harness_can_override_trace_expectation_without_changing_runtime_plan() {
         harness.expected_narrative_explanations(&fixture),
         vec!["custom narrative".to_string()]
     );
+}
+
+#[test]
+fn host_plan_loader_reads_sidecar_for_runtime_fixture() {
+    let path = fixture_path("e3-option-admit-chain.json");
+    let sidecar = host_plan_sidecar_path_for_fixture_path(&path);
+    let plan = load_host_plan_from_path(&sidecar).unwrap();
+
+    assert_eq!(sidecar, fixture_path("e3-option-admit-chain.host-plan.json"));
+    assert_eq!(plan.predicate_rules.len(), 3);
+    assert_eq!(plan.effect_rules.len(), 1);
+    assert!(plan.trace_expectation_override.non_admissible_metadata.is_none());
+}
+
+#[test]
+fn host_plan_loader_rejects_unknown_schema_version() {
+    let path = unique_temp_json_path("host-plan-schema");
+    fs::write(
+        &path,
+        format!(
+            r#"{{
+  "schema_version": "wrong-schema",
+  "predicate_rules": [],
+  "effect_rules": [],
+  "trace_expectation_override": {{}}
+}}"#
+        ),
+    )
+    .unwrap();
+
+    let error = load_host_plan_from_path(&path).unwrap_err();
+    let _ = fs::remove_file(&path);
+
+    let message = error.to_string();
+    assert!(message.contains("unsupported host plan schema version"));
+    assert!(message.contains("wrong-schema"));
+}
+
+#[test]
+fn host_plan_loader_rejects_overlapping_predicate_rules() {
+    let path = unique_temp_json_path("host-plan-overlap");
+    fs::write(
+        &path,
+        format!(
+            r#"{{
+  "schema_version": "{schema}",
+  "predicate_rules": [
+    {{
+      "site": "request-require",
+      "op": "validate_profile_patch",
+      "verdict": "unsatisfied"
+    }},
+    {{
+      "site": "request-require",
+      "op": "validate_profile_patch",
+      "mode": "on",
+      "verdict": "satisfied"
+    }}
+  ],
+  "effect_rules": [],
+  "trace_expectation_override": {{}}
+}}"#,
+            schema = CURRENT_L2_HOST_PLAN_SCHEMA_VERSION
+        ),
+    )
+    .unwrap();
+
+    let error = load_host_plan_from_path(&path).unwrap_err();
+    let _ = fs::remove_file(&path);
+
+    assert!(error
+        .to_string()
+        .contains("overlapping predicate plan rules are forbidden"));
+}
+
+#[test]
+fn host_plan_loader_rejects_overlapping_effect_rules() {
+    let path = unique_temp_json_path("host-plan-effect-overlap");
+    fs::write(
+        &path,
+        format!(
+            r#"{{
+  "schema_version": "{schema}",
+  "predicate_rules": [],
+  "effect_rules": [
+    {{
+      "op": "write_profile",
+      "mode": "via",
+      "chain_ref": "profile_ref",
+      "verdict": {{
+        "kind": "explicit-failure"
+      }}
+    }},
+    {{
+      "op": "write_profile",
+      "mode": "via",
+      "chain_ref": "profile_ref",
+      "selected_option_ref": "delegated_writer",
+      "verdict": {{
+        "kind": "success",
+        "commit": {{
+          "mutations": []
+        }}
+      }}
+    }}
+  ],
+  "trace_expectation_override": {{}}
+}}"#,
+            schema = CURRENT_L2_HOST_PLAN_SCHEMA_VERSION
+        ),
+    )
+    .unwrap();
+
+    let error = load_host_plan_from_path(&path).unwrap_err();
+    let _ = fs::remove_file(&path);
+
+    assert!(error
+        .to_string()
+        .contains("overlapping effect plan rules are forbidden"));
 }
