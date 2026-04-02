@@ -36,7 +36,7 @@ current L2 で固定している最小 reading は次である。
 ### 一致する部分
 
 - 後段にまだ使える option があり、その option が同じ semantic lineage 上の admissible candidate なら、request を継続できる。
-- write-after-expiry でも、later write-capable option が存在すればその候補を試行でき、success-side condition が満たされれば request を継続できる。
+- write-after-expiry でも、later write-capable option が存在すればその候補を試行でき、success-side condition が満たされれば request を継続できる。ただし later write-capable option の存在そのものは success guarantee ではない。
 - fallback は hidden acceptance ではなく、明示された候補列に沿って進む。
 
 ### drift している部分

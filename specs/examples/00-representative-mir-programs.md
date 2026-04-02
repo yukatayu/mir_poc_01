@@ -23,6 +23,7 @@
 - `chain ref = head` と、それに続く `fallback successor` / indented `@ lineage(predecessor -> successor)`
   - canonical form を examples で書くための current L2 候補である。current L2 では hanging continuation を polished first choice に置くが、短い row では `fallback successor @ lineage(predecessor -> successor)` の inline 省略形も companion-equivalent な shorthand として残してよい。`lineage(...)` は例示であり、最終 token ではない。
   - ただし representative examples の本文で fallback / preference chain 自体を主題にしているコード片では、A2 の hanging continuation を first-choice rendering とする。inline 省略形は最小 snippet や局所比較に留める。
+  - A2 の追加 indent は outer / inner wrapper の入れ子を増やすものではなく、直前の `fallback <successor>` row にだけ属する edge-local metadata continuation として読む。
 - `try { ... } fallback { ... }`
   - current `place` に局所な rollback を伴う `try` の block form と、その直後に置かれる explicit fallback branch の current L2 候補である。最終 keyword と punctuation は未決定である。
 - blank line
@@ -348,6 +349,7 @@ place root {
 - outcome:
   - write-admissible option が残らないため explicit `Reject`。
   - この `Reject` は単一 option の admission miss そのものではなく、chain 全体で admissible candidate が尽きた結果として読む。
+  - 逆に言えば、後段 option の存在は automatic success を意味しない。current request を実際に満たす admissible candidate が残るときにだけ継続できる。
   - hidden buffering、hidden resurrection、earlier option への再昇格は起こらない。
 
 ### 最小 trace / audit 説明

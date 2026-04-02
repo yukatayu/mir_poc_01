@@ -77,6 +77,7 @@ chain profile_ref = writer
 
 - rollout は docs-only に留めず、representative examples のうち fallback / preference chain を主題にする code block まで広げてよい。
 - 一方で fixture schema、interpreter、tests は machine-check surface が主目的なので、A2 rendering へ同期させない。
+- hanging continuation の追加 indent は outer / inner wrapper の入れ子ではなく、直前 edge row にだけ属する edge-local metadata continuation として読む。
 
 ### companion-equivalent shorthand
 

@@ -54,7 +54,7 @@ current L2 では `A > B > C` を次のように読む。
 | 状況 | current L2 の読み |
 |---|---|
 | 先頭 write-capable option が `lease-expired` | その option は success-side candidate から外れる |
-| 後段に write-capable option がある | later option を試行してよい |
+| 後段に write-capable option がある | later option を試行してよいが、それだけで success は確定しない |
 | 後段に write-capable option が無い | request-level `Reject` |
 | read-only option しか残らない | capability mismatch は narrative explanation、最終 outcome は `Reject` |
 

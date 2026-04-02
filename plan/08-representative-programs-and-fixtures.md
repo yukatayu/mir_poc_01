@@ -68,7 +68,7 @@
 ### `e7-write-fallback-after-expiry`
 
 - `e6` の補完
-- expiry があっても later write-capable option があれば success しうる
+- expiry があっても later write-capable option があり、その option 自体が admissible で request を満たせるなら success しうる
 
 ### `e8-monotone-degradation-reject`
 
