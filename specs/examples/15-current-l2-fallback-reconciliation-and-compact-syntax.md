@@ -194,6 +194,104 @@ current L2 で **いま暫定的に最も筋が良いのは Candidate A の expl
 一方で **将来 compact 化を再検討するなら Candidate B が最有力**である。
 ただし current L2 では、`>` の operator 感、canonical chain の expression 化、edge-local lineage の付属情報化を避けたいので、まだ昇格させない。
 
+## explicit edge-row family の polishing 比較
+
+0079 / 0080 / 0081 / 0082 までで、family の選択自体は explicit edge-row form を維持する方針で揃った。
+今回さらに比較するのは、その **explicit edge-row family の内部**でどこまで compact に磨けるかだけである。
+
+- 前提 semantics は変えない。
+  - guarded option chain
+  - left-to-right monotone degradation
+  - no re-promotion
+  - write-after-expiry 後の later write-capable option 試行または `Reject`
+  - rollback / `atomic_cut` による degradation order 非干渉
+- 比較対象 example は E3 variant / E6 / E7 / E8 に限る。
+- option-local な `target` / `capability` / `lease` は option declaration 側に残し、chain row は edge-local successor と lineage の表示に集中させる、という current L2 方針を出発点にする。
+
+### Edge-row Candidate A1 — current inline row
+
+```text
+chain profile_ref = writer
+  fallback delegated_writer @ lineage(writer -> delegated_writer)
+  fallback readonly @ lineage(delegated_writer -> readonly)
+```
+
+- 長所:
+  - 1 行に edge-local successor と lineage が収まり、現在の mirror とそのまま一致する。
+  - `fallback` が毎行に残るので、operator 列ではなく successor declaration と読みやすい。
+- 短所:
+  - E7 / E8 のように option 名が長くなると、lineage annotation が右に伸びて横幅が出やすい。
+  - 「row head」と「edge metadata」が同じ行に詰まり、縦方向の視線移動はやや弱い。
+
+### Edge-row Candidate A2 — hanging lineage continuation
+
+```text
+chain profile_ref = writer
+  fallback delegated_writer
+    @ lineage(writer -> delegated_writer)
+  fallback readonly
+    @ lineage(delegated_writer -> readonly)
+```
+
+- 長所:
+  - row head は `fallback <successor>` に絞られ、視線を上から下へ落としやすい。
+  - lineage annotation が indented metadata として見えるため、edge-locality を保ったまま inline clutter を減らせる。
+  - outer / inner wrapper 直感よりも、「いま見えている row が 1 本の edge で、その下が説明 metadata」という読みを作りやすい。
+- 短所:
+  - 1 edge あたり 2 行になり、短い chain ではやや背が高く見える。
+  - `@` continuation の形を prose で補わないと、annotation が mandatory か optional かを初見で迷う余地は残る。
+
+### Edge-row Candidate A3 — packed metadata row
+
+```text
+chain profile_ref = writer
+  fallback delegated_writer on profile_doc capability write lease live
+    @ lineage(writer -> delegated_writer)
+  fallback readonly on profile_doc capability read lease live
+    @ lineage(delegated_writer -> readonly)
+```
+
+- 長所:
+  - row 単体だけを切り出しても、successor 側の最低限の shape を把握しやすい。
+- 短所:
+  - option declaration 側にすでにある `target` / `capability` / `lease` を edge row に重ねてしまい、option-local information と edge-local information の境界が濁る。
+  - E6 / E7 / E8 では AST encoding や schema dump に近い見た目になりやすい。
+  - current L2 が大事にしている「chain row は canonical successor relation、option row は option-local surface」という役割分担を崩しやすい。
+
+### Edge-row family の直接比較
+
+| 比較軸 | A1: inline row | A2: hanging lineage continuation | A3: packed metadata row | 現時点の評価 |
+|---|---|---|---|---|
+| guarded option chain の honesty | 明確 | 明確 | metadata 重複で少し鈍る | A1 / A2 が優勢 |
+| left-to-right monotone degradation の読み | 良い | 最も縦に追いやすい | 情報量が多く流れが散る | A2 が優勢 |
+| no re-promotion の読み | prose 依存が少ない | prose 依存が少ない | row 自体が重く、edge の向きが埋もれる | A1 / A2 が優勢 |
+| write-after-expiry try-later-or-`Reject` の読み | 良い | E6 / E7 / E8 では最も見やすい | option surface の重複で request evaluation 境界が見えにくい | A2 が優勢 |
+| rollback / cut non-interference の誤読抑制 | 良い | edge row と metadata の分離により最も安定 | packed row が state dump に見え、境界理解に寄与しにくい | A2 が優勢 |
+| 視覚的な簡潔さ | 横に長い | 縦に伸びるが整理される | 最も重い | A1 / A2 が実用域 |
+| インデントとの相性 | 良い | 最も良い | 深くなる割に得るものが少ない | A2 が優勢 |
+| C 的 / AST エンコード感の少なさ | 低い | 低い | 高くなりやすい | A1 / A2 が優勢 |
+| outer / inner wrapper 誤読の抑制 | 良い | 最も良い | row role が増えすぎ、別種の誤読が入る | A2 が優勢 |
+| examples 書き換えコスト | 最小 | 小さい | 中程度 | A1 が優勢 |
+
+### polishing の暫定判断
+
+explicit edge-row family の中で **いま最も筋が良い polishing 候補は Candidate A2** である。
+
+理由は次のとおりである。
+
+- explicit edge-row family を保ったまま、row head と edge-local metadata を分離できる。
+- E3 variant / E6 / E7 / E8 のように option 名や audit 説明が少し長い例でも、横幅より縦の流れを優先できる。
+- `fallback` keyword を残すので outer/inner wrapper でも operator expression でもなく、successor declaration の列だと読みやすい。
+- `target` / `capability` / `lease` を edge row に再掲しないため、option-local surface と edge-local surface の責務分担を崩さない。
+
+ただし current L2 では、**A1 も companion-equivalent な短い表記として残してよい**。
+したがって現時点の最小判断は次である。
+
+- family としては explicit edge-row form を維持する。
+- polished rendering としては A2 を優先候補に置く。
+- ただし short inline rendering として A1 を禁止しない。
+- A3 のような packed metadata row は current L2 companion notation には採らない。
+
 ## current L2 に残すこと / まだ決めないこと
 
 ### current L2 に残すこと
@@ -202,7 +300,9 @@ current L2 で **いま暫定的に最も筋が良いのは Candidate A の expl
 - degradation は left-to-right monotone degradation として読む。
 - earlier option への再昇格は禁止する。
 - `lease-expired` の後に later write-capable option があればその候補を試行し、どの候補も成立しなければ `Reject`。
-- compact syntax 比較の結果として、current L2 companion notation は explicit edge-row form を暫定維持する。
+- compact syntax 比較の結果として、current L2 companion notation は explicit edge-row family を暫定維持する。
+- その family の中では、lineage annotation を hanging continuation にした A2 を polished rendering の第一候補に置く。
+- ただし short inline rendering としての A1 も current L2 companion-equivalent な書き方として残す。
 
 ### まだ決めないこと
 

@@ -20,8 +20,8 @@
   - 直前の `perform` に付く statement-local clause の current L2 候補である。single-line clause は `require pred` / `ensure pred` と書き、multi-line predicate が必要な場合だけ `require:` / `ensure:` に続く 1 段深い predicate block を使う。predicate の最小断片としては bare atom、application-like form、explicit `and`、括弧 grouping までを使ってよく、改行だけで implicit conjunction は導入しない。current examples では `require` を先、`ensure` を後に置き、blank line を挟まず同じ clause suite として読む。`contract` は semantic role の名前であり、examples では独立 keyword にせず、`contract { ... }` block sugar も使わない。
 - `option name on target capability cap lease guard`
   - option declaration の current L2 候補である。`declared access target`、最小 capability surface、lifetime guard を inline で置く。capability と `lease` だけでは option 間の admissibility の違いを書けない場合は、直後に indented な `admit pred` / `admit:` を option-local declared contract surface として付けなければならない。
-- `chain ref = head` と、それに続く `fallback successor @ lineage(predecessor -> successor)`
-  - canonical form を examples で書くための current L2 候補である。`lineage(...)` は例示であり、最終 token ではない。
+- `chain ref = head` と、それに続く `fallback successor` / indented `@ lineage(predecessor -> successor)`
+  - canonical form を examples で書くための current L2 候補である。current L2 では hanging continuation を polished first choice に置くが、短い row では `fallback successor @ lineage(predecessor -> successor)` の inline 省略形も companion-equivalent な shorthand として残してよい。`lineage(...)` は例示であり、最終 token ではない。
 - `try { ... } fallback { ... }`
   - current `place` に局所な rollback を伴う `try` の block form と、その直後に置かれる explicit fallback branch の current L2 候補である。最終 keyword と punctuation は未決定である。
 - blank line
