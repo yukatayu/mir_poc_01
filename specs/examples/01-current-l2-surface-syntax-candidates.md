@@ -165,6 +165,8 @@ chain profile_ref = primary
 - edge-local な `documented lineage annotation` は、各 `fallback` 行に `@ lineage(predecessor -> successor)` として付ける。
 - `lineage(...)` は例示用 token であり、最終 keyword / punctuation / serialization は **未決定** である。
 - この書式は canonical form を書くための候補であり、preference chain を新しい core primitive へ昇格させるものではない。
+- この書式は outer option を寿命の長い container として表すものではない。current L2 では canonical chain の優先順だけを表し、元の nested outer / inner 形そのものは観測可能意味に残さない。
+- compact syntax candidate の比較は `specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md` にまとめる。current L2 では、より短い案を比較対象として残しつつも、この explicit edge-row form を暫定 companion notation として維持する。
 
 ### 5. chain 経由の `perform`
 

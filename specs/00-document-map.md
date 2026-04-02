@@ -64,6 +64,9 @@
 - `specs/examples/14-current-l2-profile-catalog-externalization.md`
   - current L2 named profile catalog を hard-coded table のまま維持するか、machine-readable catalog asset / preset manifest へ外出しするかを比較する補助文書。
   - production manifest を固定せず、PoC 実験ループの観点から current L2 でどこまで externalization する価値があるかだけを整理する。
+- `specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md`
+  - current L2 の fallback / `lease` reading と「外側 option の寿命延長」直感とのズレを整理し、fallback / preference chain の compact syntax candidate を比較する補助文書。
+  - semantics は変えず、current L2 companion notation にどこまで compact candidate を昇格させるかだけを整理する。
 
 ## 各文書の役割
 
@@ -121,6 +124,8 @@
   - current L2 selection profile helper の上に thin な named alias layer を足し、human-friendly preset 名を既存 request へ解決するための最小 catalog 境界。
 - `specs/examples/14-current-l2-profile-catalog-externalization.md`
   - current L2 named profile catalog を hard-coded table に留めるか、machine-readable asset として比較するための最小 companion 境界。
+- `specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md`
+  - current L2 の guarded option chain 読みと outer-longer-lifetime 直感のズレを説明し、compact syntax candidate の比較と暫定 companion notation 判断を与える。
 
 ## レポート
 
