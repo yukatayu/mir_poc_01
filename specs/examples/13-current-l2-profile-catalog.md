@@ -87,11 +87,10 @@ current L2 では、named profile alias mirror の責務を次のように切っ
 
 - alias 一覧の exact compare
 - alias ごとの literal な `resolved_request` expectation
-- selected bundle counts
-- single-fixture alias の concrete fixture suffix
+- named profile 実行が literal な `resolved_request` を持つ profile 実行へ薄く委譲されること
 - unknown alias failure
 
-tests 側では、`SelectionRequest` を組み立てる小さな builder 関数や case table で expectation を helper 化してよい。また、selected bundle counts と single-fixture alias の concrete fixture suffix は、tests ローカルの assertion helper に束ねてよい。ただし expectation 自体を `ProfileCatalog::resolve()` やほかの catalog 実装から導いてはならない。`resolved_request` は public behavior なので、test oracle は catalog 実装から独立でなければならない。unknown alias failure も literal expectation のまま残してよい。
+tests 側では、`SelectionRequest` を組み立てる小さな builder 関数や case table で expectation を helper 化してよい。ただし expectation 自体を `ProfileCatalog::resolve()` やほかの catalog 実装から導いてはならない。`resolved_request` は public behavior なので、test oracle は catalog 実装から独立でなければならない。unknown alias failure も literal expectation のまま残してよい。selected bundle counts と single-fixture alias の concrete fixture suffix は、current L2 では profile helper 側の integration tests が主に持ち、named profile integration tests では literal request に基づく profiled execution への委譲一致として確認してよい。
 
 ### code 側に残すもの
 
@@ -146,7 +145,7 @@ current L2 で最低限必要なのは次である。
 - `runtime-e3` は E3 向けの focused runtime preset として読んでよい。
 - `static-e4` は E4 向けの focused static-only preset として読んでよい。
 
-正確な selected bundle counts や concrete fixture suffix は machine-check の責務であり、`crates/mir-semantics/tests/current_l2_minimal_interpreter.rs` の named profile behavior tests に残してよい。current L2 では、それらを tests ローカルの assertion helper にまとめてもよいが、helper は code 側 catalog 実装を test oracle として再利用してはならない。
+正確な selected bundle counts や concrete fixture suffix は machine-check の責務である。current L2 では、それらの詳細比較を主に `run_directory_profiled` 系の integration tests に残し、named profile behavior tests では literal な `resolved_request` と profiled execution への委譲一致を確認してよい。いずれの場合も、helper は code 側 catalog 実装を test oracle として再利用してはならない。
 
 ## current L2 でまだ決めないこと
 

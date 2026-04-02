@@ -1155,6 +1155,9 @@ fn apply_mutations(place_store: &mut PlaceStore, mutations: &[FixtureStoreMutati
 mod tests {
     use super::*;
 
+    // Internal tests only guard single-source-of-truth wiring around the
+    // private preset table. Public contract coverage belongs in the integration
+    // tests under `tests/current_l2_minimal_interpreter.rs`.
     #[test]
     fn named_profile_catalog_aliases_are_derived_from_internal_specs() {
         let aliases_from_specs: Vec<_> = named_profile_specs().iter().map(|spec| spec.alias).collect();
