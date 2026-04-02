@@ -22,6 +22,7 @@
   - option declaration の current L2 候補である。`declared access target`、最小 capability surface、lifetime guard を inline で置く。capability と `lease` だけでは option 間の admissibility の違いを書けない場合は、直後に indented な `admit pred` / `admit:` を option-local declared contract surface として付けなければならない。
 - `chain ref = head` と、それに続く `fallback successor` / indented `@ lineage(predecessor -> successor)`
   - canonical form を examples で書くための current L2 候補である。current L2 では hanging continuation を polished first choice に置くが、短い row では `fallback successor @ lineage(predecessor -> successor)` の inline 省略形も companion-equivalent な shorthand として残してよい。`lineage(...)` は例示であり、最終 token ではない。
+  - ただし representative examples の本文で fallback / preference chain 自体を主題にしているコード片では、A2 の hanging continuation を first-choice rendering とする。inline 省略形は最小 snippet や局所比較に留める。
 - `try { ... } fallback { ... }`
   - current `place` に局所な rollback を伴う `try` の block form と、その直後に置かれる explicit fallback branch の current L2 候補である。最終 keyword と punctuation は未決定である。
 - blank line
@@ -162,8 +163,10 @@ place root {
       option readonly on profile_doc capability read lease live
 
       chain profile_ref = primary
-        fallback mirror @ lineage(primary -> mirror)
-        fallback readonly @ lineage(mirror -> readonly)
+        fallback mirror
+          @ lineage(primary -> mirror)
+        fallback readonly
+          @ lineage(mirror -> readonly)
 
       perform read_profile via profile_ref
         require read
@@ -215,7 +218,8 @@ place root {
         admit delegate_granted(session_user)
 
       chain profile_ref = owner_writer
-        fallback delegated_writer @ lineage(owner_writer -> delegated_writer)
+        fallback delegated_writer
+          @ lineage(owner_writer -> delegated_writer)
 
       perform write_profile via profile_ref
         require write
@@ -245,7 +249,8 @@ place root {
       option archive on profile_doc capability read lease live
 
       chain profile_ref = primary
-        fallback mirror @ lineage(primary -> archive)
+        fallback mirror
+          @ lineage(primary -> archive)
     }
   }
 }
@@ -317,7 +322,8 @@ place root {
       option readonly on profile_doc capability read lease live
 
       chain profile_ref = writer
-        fallback readonly @ lineage(writer -> readonly)
+        fallback readonly
+          @ lineage(writer -> readonly)
 
       perform write_profile via profile_ref
         require write

@@ -75,6 +75,9 @@ chain profile_ref = writer
     @ lineage(delegated_writer -> readonly)
 ```
 
+- rollout は docs-only に留めず、representative examples のうち fallback / preference chain を主題にする code block まで広げてよい。
+- 一方で fixture schema、interpreter、tests は machine-check surface が主目的なので、A2 rendering へ同期させない。
+
 ### companion-equivalent shorthand
 
 短い row では **A1 inline row** も companion-equivalent shorthand として残してよい。
@@ -133,6 +136,7 @@ chain profile_ref = writer
 - explicit edge-row family を維持
 - A2 を polished first choice
 - A1 を shorthand として許容
+- A2 の rollout は representative examples の chain-heavy code block まで
 
 ### OPEN
 

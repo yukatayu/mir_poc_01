@@ -166,11 +166,13 @@ chain profile_ref = primary
 - 後続候補は、優先順に `fallback <successor>` を縦に並べる。
 - edge-local な `documented lineage annotation` は、各 `fallback` row にぶら下がる indented continuation line として `@ lineage(predecessor -> successor)` を置いてよい。current L2 では、この hanging continuation を polished rendering の第一候補とする。
 - ただし row が短く収まり、視認性を落とさない場合に限って、`fallback mirror @ lineage(primary -> mirror)` のような inline 省略形を companion-equivalent な短い書き方として残してよい。
+- representative examples の本文で fallback / preference chain 自体を読むコード片では、A2 を first-choice rendering にしてよい。A1 は valid / malformed / underdeclared の最小 snippet や局所比較のように、行数を増やさない方が読みやすい場面へ残す。
 - `lineage(...)` は例示用 token であり、最終 keyword / punctuation / serialization は **未決定** である。
 - この書式は canonical form を書くための候補であり、preference chain を新しい core primitive へ昇格させるものではない。
 - この書式は outer option を寿命の長い container として表すものではない。current L2 では canonical chain の優先順だけを表し、元の nested outer / inner 形そのものは観測可能意味に残さない。
 - `target` / `capability` / `lease` は option declaration 側の option-local surface に残し、chain row へ再掲しないのを current L2 の既定とする。chain row は successor relation と edge-local lineage を表すだけに留める。
 - compact syntax candidate の比較は `specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md` にまとめる。current L2 では、line-leading `>` ladder のようなより短い案を比較対象として残しつつも、edge-local lineage と request-evaluation 境界を最も誤読させにくい explicit edge-row family を暫定 companion notation として維持する。その family の中では、hanging continuation を使う rendering を polished first choice に置き、inline 省略形は短い chain 向けの companion-equivalent shorthand として残す。
+- notation rollout の current L2 判断としては、A2 を docs-only の候補に留めず、representative examples のうち fallback / preference chain を主題にするコード片へ limited rollout してよい。fixture JSON や machine-check surface はこの rollout の対象にしない。
 
 ### 5. chain 経由の `perform`
 
@@ -323,8 +325,10 @@ option mirror on profile_doc capability write lease live
 option readonly on profile_doc capability read lease live
 
 chain profile_ref = primary
-  fallback mirror @ lineage(primary -> mirror)
-  fallback readonly @ lineage(mirror -> readonly)
+  fallback mirror
+    @ lineage(primary -> mirror)
+  fallback readonly
+    @ lineage(mirror -> readonly)
 
 perform read_profile via profile_ref
   require read
@@ -337,7 +341,8 @@ option writer on profile_doc capability write lease expired
 option readonly on profile_doc capability read lease live
 
 chain profile_ref = writer
-  fallback readonly @ lineage(writer -> readonly)
+  fallback readonly
+    @ lineage(writer -> readonly)
 
 perform write_profile via profile_ref
   require write
@@ -355,7 +360,8 @@ option delegated_writer on profile_doc capability write lease live
   admit delegate_granted(session_user)
 
 chain profile_ref = owner_writer
-  fallback delegated_writer @ lineage(owner_writer -> delegated_writer)
+  fallback delegated_writer
+    @ lineage(owner_writer -> delegated_writer)
 
 perform write_profile via profile_ref
   require write
