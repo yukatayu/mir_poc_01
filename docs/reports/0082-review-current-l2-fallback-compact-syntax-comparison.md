@@ -80,22 +80,14 @@ nl -ba docs/reports/0081-current-l2-ladder-vs-edge-row-notation.md | tail -n 20
 
 ```text
 101	## 9. Suggested next prompt
-102	
 103	`current L2 parser-free PoC 基盤を前提に、fallback / preference chain の compact syntax candidate として line-leading \`>\` ladder をもし examples の一部に試験導入するなら、どの representative examples に限定して A/B 比較を行うのが最も誤読差分を観察しやすいかを整理してください。`
 104	## 2. Inputs consulted
-105	
 106	## 3. Actions taken
-107	
 108	## 4. Files changed
-109	
 110	## 5. Commands run and exact outputs
-111	
 112	## 6. Evidence / findings
-113	
 114	## 7. Changes in understanding
-115	
 116	## 8. Open questions
-117	
 118	## 9. Suggested next prompt
 ```
 
