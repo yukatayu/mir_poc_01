@@ -72,6 +72,35 @@ current L2 では、少なくとも次の対応があればよい。
 
 alias 名の長期固定や、より豊かな alias grammar は current L2 では決めない。
 
+## docs / tests / code の責務分担
+
+current L2 では、named profile alias mirror の責務を次のように切ってよい。
+
+### docs に残すもの
+
+- alias 一覧
+- alias→`SelectionRequest` の prose table
+- `resolved_request` を含む summary shape
+- alias の人間向け意味と helper boundary の説明
+
+### tests に残すもの
+
+- alias 一覧の exact compare
+- alias ごとの literal な `resolved_request` expectation
+- selected bundle counts
+- single-fixture alias の concrete fixture suffix
+- unknown alias failure
+
+tests 側では、`SelectionRequest` を組み立てる小さな builder 関数や case table で expectation を helper 化してよい。ただし expectation 自体を `ProfileCatalog::resolve()` やほかの catalog 実装から導いてはならない。`resolved_request` は public behavior なので、test oracle は catalog 実装から独立でなければならない。
+
+### code 側に残すもの
+
+- hard-coded preset table を single source of truth とする alias list
+- alias→`SelectionProfile` / `SelectionRequest` 解決
+- `run_directory_named_profile` への薄い受け渡し
+
+code 側から派生させてよいのは `aliases()` / `resolve()` の実装だけである。docs prose や tests の literal expectation は、current L2 では code から自動導出しない。
+
 ## resolved summary の最小 shape
 
 current L2 で最低限必要なのは次である。
@@ -112,10 +141,12 @@ current L2 で最低限必要なのは次である。
 
 ## representative fixture での読み
 
-- `smoke-runtime` は既存の `runtime-only` と同じ bundle 群、すなわち E1 / E2 / E3 variant / E6 を回してよい。
-- `smoke-static` は既存の `static-only` と同じ bundle 群、すなわち E4 / E5 を回してよい。
-- `runtime-e3` は E3 runtime bundle だけを回してよい。
-- `static-e4` は E4 static-only bundle だけを回してよい。
+- `smoke-runtime` は broad runtime preset として読んでよい。
+- `smoke-static` は broad static-only preset として読んでよい。
+- `runtime-e3` は E3 向けの focused runtime preset として読んでよい。
+- `static-e4` は E4 向けの focused static-only preset として読んでよい。
+
+正確な selected bundle counts や concrete fixture suffix は machine-check の責務であり、`crates/mir-semantics/tests/current_l2_minimal_interpreter.rs` の named profile behavior tests に残してよい。
 
 ## current L2 でまだ決めないこと
 

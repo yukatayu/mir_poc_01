@@ -747,6 +747,9 @@ fn assert_named_profile_selected_counts(
 #[derive(Clone, Copy)]
 struct NamedProfileBehaviorCase {
     alias: &'static str,
+    // Keep request expectations independent from ProfileCatalog::resolve().
+    // These are literal public-behavior checks, not a second path into the
+    // catalog implementation under test.
     expected_request: fn() -> SelectionRequest,
     total_selected_bundles: usize,
     runtime_selected_bundles: usize,
