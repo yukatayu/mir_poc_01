@@ -1,0 +1,121 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e7_write_fallback_after_expiry",
+  "source_example_id": "E6-variant",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "expired",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "delegated_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "readonly",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "writer",
+                    "edges": [
+                      {
+                        "predecessor": "writer",
+                        "successor": "delegated_writer",
+                        "lineage_assertion": {
+                          "predecessor": "writer",
+                          "successor": "delegated_writer"
+                        }
+                      },
+                      {
+                        "predecessor": "delegated_writer",
+                        "successor": "readonly",
+                        "lineage_assertion": {
+                          "predecessor": "delegated_writer",
+                          "successor": "readonly"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "PerformVia",
+                    "op": "write_profile",
+                    "chain_ref": "profile_ref",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "write"
+                        }
+                      ],
+                      "ensure": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "chain is well-formed statically",
+      "capability weakens monotonically from write to write to read",
+      "later write-capable fallback remains on the same semantic lineage"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "success",
+    "notes": [
+      "writer is skipped because lease is expired",
+      "delegated_writer becomes the leftmost write-capable success-side choice"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-success"
+    ],
+    "non_admissible_metadata": [
+      {
+        "option_ref": "writer",
+        "subreason": "lease-expired"
+      }
+    ],
+    "narrative_explanations": [],
+    "must_explain": [
+      "write-after-expiry can degrade to a later write-capable option on the same lineage",
+      "earlier expired writer is not revived once the chain advances"
+    ]
+  }
+}

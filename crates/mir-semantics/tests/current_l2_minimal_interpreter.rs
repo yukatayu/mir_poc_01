@@ -160,6 +160,8 @@ fn runtime_fixtures_reach_expected_outcomes_via_declarative_host_plan() {
         "e2-try-fallback.json",
         "e3-option-admit-chain.json",
         "e6-write-after-expiry.json",
+        "e7-write-fallback-after-expiry.json",
+        "e8-monotone-degradation-reject.json",
     ];
 
     for fixture_name in cases {
@@ -184,6 +186,8 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
         "e2-try-fallback.json",
         "e3-option-admit-chain.json",
         "e6-write-after-expiry.json",
+        "e7-write-fallback-after-expiry.json",
+        "e8-monotone-degradation-reject.json",
     ];
 
     for fixture_name in cases {
@@ -203,6 +207,60 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
         assert_eq!(
             result.report.trace_audit_sink.narrative_explanations,
             harness.expected_narrative_explanations(&bundle.fixture),
+            "{fixture_name}"
+        );
+    }
+}
+
+#[test]
+fn fallback_and_lease_regression_fixtures_preserve_current_l2_boundaries() {
+    let cases = [
+        (
+            "e7-write-fallback-after-expiry.json",
+            Some(mir_semantics::TerminalOutcome::Success),
+            vec![mir_semantics::EventKind::PerformSuccess],
+            vec![NonAdmissibleMetadata {
+                option_ref: "writer".to_string(),
+                subreason: NonAdmissibleSubreason::LeaseExpired,
+            }],
+            Vec::<String>::new(),
+        ),
+        (
+            "e8-monotone-degradation-reject.json",
+            Some(mir_semantics::TerminalOutcome::Reject),
+            vec![
+                mir_semantics::EventKind::PerformFailure,
+                mir_semantics::EventKind::Reject,
+            ],
+            vec![NonAdmissibleMetadata {
+                option_ref: "owner_writer".to_string(),
+                subreason: NonAdmissibleSubreason::AdmitMiss,
+            }],
+            vec!["readonly remains a request/capability mismatch narrative explanation".to_string()],
+        ),
+    ];
+
+    for (
+        fixture_name,
+        expected_outcome,
+        expected_events,
+        expected_metadata,
+        expected_narrative,
+    ) in cases
+    {
+        let bundle = load_bundle(fixture_name);
+        let result = run_bundle(&bundle).unwrap();
+
+        assert_eq!(result.report.terminal_outcome, expected_outcome, "{fixture_name}");
+        assert_eq!(result.report.trace_audit_sink.events, expected_events, "{fixture_name}");
+        assert_eq!(
+            result.report.trace_audit_sink.non_admissible_metadata,
+            expected_metadata,
+            "{fixture_name}"
+        );
+        assert_eq!(
+            result.report.trace_audit_sink.narrative_explanations,
+            expected_narrative,
             "{fixture_name}"
         );
     }
@@ -381,9 +439,9 @@ fn harness_rejects_uncovered_oracle_calls_without_synthetic_success_commit() {
 fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
     let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
 
-    assert_eq!(discovery.total_candidates, 6);
+    assert_eq!(discovery.total_candidates, 8);
     assert_eq!(discovery.failures.len(), 0);
-    assert_eq!(discovery.bundles.len(), 6);
+    assert_eq!(discovery.bundles.len(), 8);
     assert_eq!(
         discovery
             .bundles
@@ -391,7 +449,7 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
             .filter(|bundle| bundle.runtime_requirement
                 == FixtureRuntimeRequirement::RuntimeWithHostPlan)
             .count(),
-        4
+        6
     );
     assert_eq!(
         discovery
@@ -407,10 +465,10 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
 fn run_directory_returns_summary_for_current_l2_fixture_dir() {
     let summary = run_directory(fixture_dir()).unwrap();
 
-    assert_eq!(summary.total_bundles, 6);
-    assert_eq!(summary.runtime_bundles, 4);
+    assert_eq!(summary.total_bundles, 8);
+    assert_eq!(summary.runtime_bundles, 6);
     assert_eq!(summary.static_only_bundles, 2);
-    assert_eq!(summary.passed, 6);
+    assert_eq!(summary.passed, 8);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -516,8 +574,8 @@ fn selection_runtime_only_keeps_only_runtime_bundles() {
         })
         .collect();
 
-    assert_eq!(selected.total_candidates, 4);
-    assert_eq!(selected.runtime_bundles, 4);
+    assert_eq!(selected.total_candidates, 6);
+    assert_eq!(selected.runtime_bundles, 6);
     assert_eq!(selected.static_only_bundles, 0);
     assert_eq!(selected.failures.len(), 0);
     assert_eq!(
@@ -527,6 +585,8 @@ fn selection_runtime_only_keeps_only_runtime_bundles() {
             "e2-try-fallback",
             "e3-option-admit-chain",
             "e6-write-after-expiry",
+            "e7-write-fallback-after-expiry",
+            "e8-monotone-degradation-reject",
         ]
     );
 }
@@ -581,10 +641,10 @@ fn run_directory_selected_single_fixture_runs_only_requested_fixture() {
 fn run_directory_selected_runtime_only_executes_only_runtime_bundles() {
     let summary = run_directory_selected(fixture_dir(), &SelectionMode::RuntimeOnly).unwrap();
 
-    assert_eq!(summary.total_bundles, 4);
-    assert_eq!(summary.runtime_bundles, 4);
+    assert_eq!(summary.total_bundles, 6);
+    assert_eq!(summary.runtime_bundles, 6);
     assert_eq!(summary.static_only_bundles, 0);
-    assert_eq!(summary.passed, 4);
+    assert_eq!(summary.passed, 6);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -754,8 +814,8 @@ fn run_directory_profiled_includes_profile_name_in_summary() {
     let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
 
     assert_eq!(summary.profile_name, "runtime-all");
-    assert_profile_selected_counts(&summary, 4, 4, 0);
-    assert_eq!(summary.passed, 4);
+    assert_profile_selected_counts(&summary, 6, 6, 0);
+    assert_eq!(summary.passed, 6);
     assert_eq!(summary.failed, 0);
 }
 

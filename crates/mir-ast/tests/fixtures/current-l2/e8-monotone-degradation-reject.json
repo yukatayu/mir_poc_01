@@ -1,0 +1,137 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e8_monotone_degradation_reject",
+  "source_example_id": "E3-E6-regression",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "owner_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": {
+                      "kind": "call",
+                      "callee": "owner_is",
+                      "args": [
+                        "session_user"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "delegated_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": {
+                      "kind": "call",
+                      "callee": "delegate_granted",
+                      "args": [
+                        "session_user"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "readonly",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "owner_writer",
+                    "edges": [
+                      {
+                        "predecessor": "owner_writer",
+                        "successor": "delegated_writer",
+                        "lineage_assertion": {
+                          "predecessor": "owner_writer",
+                          "successor": "delegated_writer"
+                        }
+                      },
+                      {
+                        "predecessor": "delegated_writer",
+                        "successor": "readonly",
+                        "lineage_assertion": {
+                          "predecessor": "delegated_writer",
+                          "successor": "readonly"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "PerformVia",
+                    "op": "write_profile",
+                    "chain_ref": "profile_ref",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "write"
+                        }
+                      ],
+                      "ensure": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "chain is well-formed statically",
+      "capability weakens monotonically from write to write to read",
+      "same-lineage fallback remains left-to-right without re-promotion"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "Reject",
+    "notes": [
+      "owner_writer is skipped because admit is not satisfied",
+      "delegated_writer fails explicitly and the chain continues only to later options",
+      "readonly cannot satisfy the write request"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-failure",
+      "Reject"
+    ],
+    "non_admissible_metadata": [
+      {
+        "option_ref": "owner_writer",
+        "subreason": "admit-miss"
+      }
+    ],
+    "narrative_explanations": [
+      "readonly remains a request/capability mismatch narrative explanation"
+    ],
+    "must_explain": [
+      "chain evaluation degrades left-to-right without returning to earlier options",
+      "explicit failure on a middle writer does not hide the final Reject"
+    ]
+  }
+}
