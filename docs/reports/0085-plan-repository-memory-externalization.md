@@ -194,7 +194,7 @@ python3 scripts/validate_docs.py
 
 ```text
 Documentation scaffold looks complete.
-Found 85 numbered report(s).
+Found 86 numbered report(s).
 ```
 
 ```bash
@@ -215,6 +215,23 @@ running 2 tests in src/lib.rs ... ok
 running 33 tests in tests/current_l2_minimal_interpreter.rs ... ok
 running 0 doc-tests ... ok
 test result: 35 passed; 0 failed
+```
+
+```bash
+git diff --check HEAD~2 HEAD
+```
+
+```text
+<no output>
+```
+
+```bash
+git status --short --branch
+```
+
+```text
+## main...origin/main [ahead 7]
+?? "旧資料_参考_ChatGPT_01_69c5e3f6/"
 ```
 
 ## 6. Evidence / findings
@@ -303,13 +320,14 @@ test result: 35 passed; 0 failed
 ### local evidence
 
 - `python3 scripts/validate_docs.py` は成功した。
-- `git diff --check` は無出力だった。
+- `git diff --check` と `git diff --check HEAD~2 HEAD` は無出力だった。
 - `cargo test -p mir-semantics` は unit 2 件、integration 33 件、doc-tests 0 件で成功した。
 - reviewer は final 1 回 + retry 1 回の運用で completion し、指摘は 3 件だった。
   - `plan/91` の読書順が AGENTS の mandatory read order を狭めていた点
   - `plan/09` が `run_directory_named_profile` と `ProfileCatalog` の責務境界を少し曖昧にしていた点
   - report evidence trail が弱かった点
 - 上記 3 点はすべて今回の task 内で修正した。
+- reviewer evidence は `docs/reports/0086-review-plan-memory-doc-boundary-consistency.md` に残した。
 
 ### task-start dirty state
 
@@ -323,6 +341,8 @@ task 開始時点で次の pre-existing dirty state があった。
 
 - spec / plan / docs 本体の commit hash:
   - `8003e26` `plan ディレクトリと維持ルールを追加する`
+- report / review 追加の commit hash:
+  - `6a8044d` `plan 外在化の作業報告を追加する`
 - report 自身の commit hash は self-reference の都合で本文に固定できない場合がある。その場合は本文でその旨を明記する。
 
 ## 7. Changes in understanding
