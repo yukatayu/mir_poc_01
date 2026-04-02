@@ -97,6 +97,7 @@ current L2 では **案1を維持するのが妥当**である。
 ## compact syntax candidate comparison
 
 以下は final parser syntax ではなく、current L2 companion notation の比較候補である。
+主要比較は Candidate A と Candidate B に置き、Candidate C は補助比較対象としてだけ残す。
 
 ### Candidate A — explicit edge-row form
 
@@ -138,6 +139,22 @@ chain profile_ref:
   - `>` が operator 風に見えやすく、canonical chain を expression と誤読させる余地がある。
   - edge-local annotation を「行ごとの successor metadata」ではなく「チェーン演算子の付属情報」に見せやすい。
 
+### Candidate A / B の直接比較
+
+| 比較軸 | Candidate A: explicit edge-row | Candidate B: line-leading `>` ladder | 現時点の評価 |
+|---|---|---|---|
+| 視覚的な簡潔さ | `fallback` の反復があり、やや重い | 最も短く、視線を落としやすい | B が優勢 |
+| インデントとの相性 | continuation line として素直 | 階段状で見やすいが、`chain profile_ref:` への head 変更も伴う | ほぼ互角、見た目は B がやや優勢 |
+| 縦方向の流れ | 上から下へ読める | degradation の下方向感が最も強い | B が優勢 |
+| outer / inner 直感の抑制 | `fallback` 行の反復で「edge を並べている」と読める | flatten された列に見えやすく、nested wrapper 直感は減る | ここだけ見ると B も有力 |
+| guarded option chain の honesty | row ごとに fallback edge と lineage が見える | ordered expression や compact algebra に見えやすい | A が優勢 |
+| rollback / cut / `Reject` 境界の誤読 | 後段候補を順に試す request evaluation と読みやすい | compile-time canonical order や total ordering の印象が先に立ちやすい | A が優勢 |
+| earlier option への再昇格禁止 | edge ごとの monotone successor として読みやすい | `>` を単なる優先順位記号と取ると、runtime re-entry 不可が prose 依存になりやすい | A が優勢 |
+| examples の書き換えコスト | 既存 mirror をそのまま使える | `specs/examples/00`、`specs/examples/01`、`specs/examples/15`、関連 report の prose mirror をまとめて触る必要がある | A が優勢 |
+| C 的 / AST エンコード感の少なさ | statement / declaration 風で無難 | operator 感は残るが、line-leading にすればかなり抑えられる | 互角に近いが A が安全 |
+
+この比較から、**B は見た目の compactness と vertical reading では魅力があるが、current L2 で必要な edge-locality と request-evaluation 境界を薄めやすい**、というのが最小整理になる。
+
 ### Candidate C — prose-like `then` ladder
 
 ```text
@@ -171,9 +188,11 @@ current L2 で **いま暫定的に最も筋が良いのは Candidate A の expl
   - 新しい operator 風 token を持ち込まずに済む。
 - drift を減らせる:
   - `fallback` を毎行に残すことで、「ここでやっているのは nested control-flow ではなく successor declaration だ」と読みやすい。
+- examples mirror を安定に保てる:
+  - representative examples、surface candidate 文書、0079/0080 で固めた prose を最小変更で維持できる。
 
 一方で **将来 compact 化を再検討するなら Candidate B が最有力**である。
-ただし current L2 では、`>` の operator 感と canonical chain の expression 化を避けたいので、まだ昇格させない。
+ただし current L2 では、`>` の operator 感、canonical chain の expression 化、edge-local lineage の付属情報化を避けたいので、まだ昇格させない。
 
 ## current L2 に残すこと / まだ決めないこと
 
