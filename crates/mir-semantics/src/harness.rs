@@ -691,6 +691,9 @@ pub fn run_directory_selected(
     batch_summary_from_discovery(selected)
 }
 
+/// current L2 profile helper の thin wrapper。
+/// request の逐次合成と profile 名付き summary はここで持ち、
+/// per-bundle expectation compare 自体は下位 helper の結果を再利用する。
 pub fn run_directory_profiled(
     directory: impl AsRef<Path>,
     profile: &SelectionProfile,
@@ -763,6 +766,9 @@ fn static_e4_request() -> SelectionRequest {
         ))
 }
 
+/// current L2 named profile catalog の thin wrapper。
+/// alias 一覧、alias -> request 解決、unknown alias failure をここで持ち、
+/// selected counts や concrete fixture shape の coverage は profiled execution 側へ委譲する。
 pub fn run_directory_named_profile(
     directory: impl AsRef<Path>,
     alias: &str,

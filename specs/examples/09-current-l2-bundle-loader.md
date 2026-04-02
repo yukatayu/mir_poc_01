@@ -44,6 +44,21 @@ current L2 で最低限必要なのは次である。
 
 ここで `runtime_requirement` は final wire field ではなく、bundle loader が runtime に入る fixture と static gate で止まる fixture を区別するための companion carrier である。
 
+## public behavior と thin delegation の境界
+
+### bundle loader が public behavior として持つもの
+
+- fixture 本体と adjacent sidecar を 1 bundle として解決すること
+- `expected_runtime.enters_evaluation` から runtime/static-only requirement を判定すること
+- 1 bundle 単位で static / runtime / trace-audit expectation を照合すること
+
+### bundle loader が thin delegation に留めるもの
+
+- directory 単位の discovery
+- 複数 bundle の集約 summary
+- `runtime-only` / `static-only` / `single-fixture` の選別
+- profile 名や named alias の包装
+
 ## sidecar discovery の最小方針
 
 - discovery の入口は fixture JSON path である。
@@ -54,7 +69,7 @@ current L2 で最低限必要なのは次である。
 
 ## bundle-level helper が machine-check するもの
 
-bundle helper は、少なくとも次を exact compare してよい。
+bundle helper は、自身の public behavior として少なくとも次を exact compare してよい。
 
 - static verdict
 - `enters_evaluation`

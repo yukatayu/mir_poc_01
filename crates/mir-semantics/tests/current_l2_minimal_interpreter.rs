@@ -635,6 +635,10 @@ fn assert_profile_selected_counts(
     assert_eq!(summary.static_selected_bundles, static_selected_bundles);
 }
 
+// Profile-layer integration tests own selected-count and concrete fixture-shape
+// coverage. Named-profile tests below should only verify alias resolution,
+// literal resolved_request behavior, unknown alias failure, and thin
+// delegation into this profiled execution path.
 #[test]
 fn run_directory_profiled_runtime_single_fixture_runs_one_runtime_bundle() {
     let profile = SelectionProfile::new(
