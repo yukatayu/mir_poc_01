@@ -16,7 +16,7 @@ current L2 で固定している最小 reading は次である。
 - `fallback` は lifetime extension container ではなく、1 つの logical access path に対する guarded option chain として読む。
 - canonical chain は left-to-right の優先順を表し、元の nested outer / inner 形そのものは保持しない。
 - degradation は monotone であり、same semantic lineage で earlier option への再昇格を許さない。
-- `lease-expired` は option-local miss metadata であり、later write-capable option があればそちらへ進み、無ければ `Reject` になる。
+- `lease-expired` は option-local miss metadata であり、later write-capable option があればそちらを試行できる。そこで success-side condition が満たされれば継続し、どの後段候補でも成立しなければ `Reject` になる。
 - `try` / rollback / `atomic_cut` は local state や rollback frontier を制約しても、chain の degradation order 自体は巻き戻さない。
 
 この reading は、E3 variant、E6、E7、E8 の parser-free fixture で machine-check されている。
@@ -30,13 +30,13 @@ current L2 で固定している最小 reading は次である。
 | fallback の基本像 | guarded option chain | outer option が長寿命の包みになり、その内側で fallback する | ここが最も大きいズレである |
 | `A > B > C` の向き | `A` から `B`、`C` へ left-to-right に degrade する | outer / inner nesting に意味が残り、`A` に戻れる余地がありそうに見える | current L2 は nested shape を flatten して優先順だけを残す |
 | earlier option への再昇格 | 禁止 | outer option がまだ生きていれば戻れそうに見える | current L2 では戻らない |
-| `lease-expired` 後の write | later write-capable option があれば success、無ければ `Reject` | 外側の長寿命 option に戻って継続したい | same-lineage の later option に進む限りは一致、earlier option へ戻る読みは不一致 |
+| `lease-expired` 後の write | later write-capable option があればその候補を試行でき、どの候補でも成立しなければ `Reject` | 外側の長寿命 option に戻って継続したい | same-lineage の later option に進む限りは一致、earlier option へ戻る読みは不一致 |
 | `try` / rollback / `atomic_cut` | local state は戻っても degradation order は戻らない | rollback で outer option へ戻れるように見える | current L2 では戻らない |
 
 ### 一致する部分
 
 - 後段にまだ使える option があり、その option が同じ semantic lineage 上の admissible candidate なら、request を継続できる。
-- write-after-expiry でも、later write-capable option が存在すれば success できる。
+- write-after-expiry でも、later write-capable option が存在すればその候補を試行でき、success-side condition が満たされれば request を継続できる。
 - fallback は hidden acceptance ではなく、明示された候補列に沿って進む。
 
 ### drift している部分
@@ -90,7 +90,7 @@ current L2 では **案1を維持するのが妥当**である。
 - rollback / cut 境界:
   - rollback が local state を巻き戻しても degradation order を巻き戻さない読みを保てる。
 - `Reject` boundary:
-  - later write-capable option があるときの success と、無いときの `Reject` を明快に分けられる。
+  - later write-capable option を試行できる場合と、どの候補も成立せず `Reject` になる場合を明快に分けられる。
 
 したがって、current L2 では semantics を変えるのではなく、「outer-longer-lifetime と読まない」ことを prose と notation で明示するのが最小である。
 
@@ -182,7 +182,7 @@ current L2 で **いま暫定的に最も筋が良いのは Candidate A の expl
 - semantics は guarded option chain のまま維持する。
 - degradation は left-to-right monotone degradation として読む。
 - earlier option への再昇格は禁止する。
-- `lease-expired` の後に later write-capable option があれば success、無ければ `Reject`。
+- `lease-expired` の後に later write-capable option があればその候補を試行し、どの候補も成立しなければ `Reject`。
 - compact syntax 比較の結果として、current L2 companion notation は explicit edge-row form を暫定維持する。
 
 ### まだ決めないこと
