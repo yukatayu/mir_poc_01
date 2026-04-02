@@ -188,6 +188,30 @@ pub struct ProfileRunSummary {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ProfileCatalog;
 
+#[derive(Clone, Copy)]
+struct NamedProfileSpec {
+    alias: &'static str,
+    build_request: fn() -> SelectionRequest,
+}
+
+impl NamedProfileSpec {
+    fn build_request(self) -> SelectionRequest {
+        (self.build_request)()
+    }
+}
+
+macro_rules! define_named_profile_catalog {
+    ($(($alias:literal, $build_request:ident)),+ $(,)?) => {
+        const NAMED_PROFILE_ALIASES: &[&str] = &[$($alias),+];
+        const NAMED_PROFILE_SPECS: &[NamedProfileSpec] = &[
+            $(NamedProfileSpec {
+                alias: $alias,
+                build_request: $build_request,
+            }),+
+        ];
+    };
+}
+
 /// alias 解決後の request を含む current L2 catalog summary。
 #[derive(Debug, Clone)]
 pub struct NamedProfileRunSummary {
@@ -690,40 +714,53 @@ pub fn run_directory_profiled(
 
 impl ProfileCatalog {
     pub fn aliases() -> &'static [&'static str] {
-        &["smoke-runtime", "smoke-static", "runtime-e3", "static-e4"]
+        NAMED_PROFILE_ALIASES
     }
 
     pub fn resolve(alias: &str) -> Result<SelectionProfile, InterpreterError> {
-        match alias {
-            "smoke-runtime" => Ok(SelectionProfile::new(
-                "smoke-runtime",
-                SelectionRequest::new().with_scope(SelectionScope::RuntimeOnly),
-            )),
-            "smoke-static" => Ok(SelectionProfile::new(
-                "smoke-static",
-                SelectionRequest::new().with_scope(SelectionScope::StaticOnly),
-            )),
-            "runtime-e3" => Ok(SelectionProfile::new(
-                "runtime-e3",
-                SelectionRequest::new()
-                    .with_scope(SelectionScope::RuntimeOnly)
-                    .with_single_fixture(SingleFixtureSelector::Stem(
-                        "e3-option-admit-chain".to_string(),
-                    )),
-            )),
-            "static-e4" => Ok(SelectionProfile::new(
-                "static-e4",
-                SelectionRequest::new()
-                    .with_scope(SelectionScope::StaticOnly)
-                    .with_single_fixture(SingleFixtureSelector::Stem(
-                        "e4-malformed-lineage".to_string(),
-                    )),
-            )),
-            _ => Err(InterpreterError::InvalidProgram(format!(
+        named_profile_specs()
+            .iter()
+            .find(|spec| spec.alias == alias)
+            .map(|spec| SelectionProfile::new(spec.alias, spec.build_request()))
+            .ok_or_else(|| InterpreterError::InvalidProgram(format!(
                 "unknown named profile alias: {alias}"
-            ))),
-        }
+            )))
     }
+}
+
+fn named_profile_specs() -> &'static [NamedProfileSpec] {
+    NAMED_PROFILE_SPECS
+}
+
+define_named_profile_catalog!(
+    ("smoke-runtime", smoke_runtime_request),
+    ("smoke-static", smoke_static_request),
+    ("runtime-e3", runtime_e3_request),
+    ("static-e4", static_e4_request),
+);
+
+fn smoke_runtime_request() -> SelectionRequest {
+    SelectionRequest::new().with_scope(SelectionScope::RuntimeOnly)
+}
+
+fn smoke_static_request() -> SelectionRequest {
+    SelectionRequest::new().with_scope(SelectionScope::StaticOnly)
+}
+
+fn runtime_e3_request() -> SelectionRequest {
+    SelectionRequest::new()
+        .with_scope(SelectionScope::RuntimeOnly)
+        .with_single_fixture(SingleFixtureSelector::Stem(
+            "e3-option-admit-chain".to_string(),
+        ))
+}
+
+fn static_e4_request() -> SelectionRequest {
+    SelectionRequest::new()
+        .with_scope(SelectionScope::StaticOnly)
+        .with_single_fixture(SingleFixtureSelector::Stem(
+            "e4-malformed-lineage".to_string(),
+        ))
 }
 
 pub fn run_directory_named_profile(
@@ -1110,6 +1147,28 @@ fn apply_mutations(place_store: &mut PlaceStore, mutations: &[FixtureStoreMutati
                     .or_default()
                     .push(record.clone());
             }
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn named_profile_catalog_aliases_are_derived_from_internal_specs() {
+        let aliases_from_specs: Vec<_> = named_profile_specs().iter().map(|spec| spec.alias).collect();
+
+        assert_eq!(ProfileCatalog::aliases(), aliases_from_specs);
+    }
+
+    #[test]
+    fn named_profile_catalog_resolve_is_derived_from_internal_specs() {
+        for spec in named_profile_specs() {
+            let resolved = ProfileCatalog::resolve(spec.alias).unwrap();
+
+            assert_eq!(resolved.profile_name, spec.alias);
+            assert_eq!(resolved.request, spec.build_request());
         }
     }
 }
