@@ -733,15 +733,71 @@ fn run_directory_profiled_rejects_unknown_single_fixture() {
     assert!(error.to_string().contains("selected fixture was not found"));
 }
 
-fn assert_named_profile_selected_counts(
-    summary: &NamedProfileRunSummary,
+// Keep selected-bundle count and suffix expectations in test-local helpers only.
+// Unlike `expected_request`, this helper may factor out test noise as long as it
+// does not derive from the catalog implementation under test.
+#[derive(Clone, Copy)]
+struct ExpectedSelectedBundles {
     total_selected_bundles: usize,
     runtime_selected_bundles: usize,
     static_selected_bundles: usize,
+    single_fixture_suffix: Option<&'static str>,
+}
+
+impl ExpectedSelectedBundles {
+    const fn multiple(
+        total_selected_bundles: usize,
+        runtime_selected_bundles: usize,
+        static_selected_bundles: usize,
+    ) -> Self {
+        Self {
+            total_selected_bundles,
+            runtime_selected_bundles,
+            static_selected_bundles,
+            single_fixture_suffix: None,
+        }
+    }
+
+    const fn single_runtime(single_fixture_suffix: &'static str) -> Self {
+        Self {
+            total_selected_bundles: 1,
+            runtime_selected_bundles: 1,
+            static_selected_bundles: 0,
+            single_fixture_suffix: Some(single_fixture_suffix),
+        }
+    }
+
+    const fn single_static(single_fixture_suffix: &'static str) -> Self {
+        Self {
+            total_selected_bundles: 1,
+            runtime_selected_bundles: 0,
+            static_selected_bundles: 1,
+            single_fixture_suffix: Some(single_fixture_suffix),
+        }
+    }
+}
+
+fn assert_named_profile_selected_bundles(
+    summary: &NamedProfileRunSummary,
+    expected: ExpectedSelectedBundles,
 ) {
-    assert_eq!(summary.total_selected_bundles, total_selected_bundles);
-    assert_eq!(summary.runtime_selected_bundles, runtime_selected_bundles);
-    assert_eq!(summary.static_selected_bundles, static_selected_bundles);
+    assert_eq!(summary.total_selected_bundles, expected.total_selected_bundles);
+    assert_eq!(
+        summary.runtime_selected_bundles,
+        expected.runtime_selected_bundles
+    );
+    assert_eq!(
+        summary.static_selected_bundles,
+        expected.static_selected_bundles
+    );
+    assert_eq!(summary.bundle_reports.len(), expected.total_selected_bundles);
+
+    if let Some(expected_suffix) = expected.single_fixture_suffix {
+        assert_eq!(summary.bundle_reports.len(), 1);
+        assert!(summary.bundle_reports[0]
+            .fixture_path
+            .ends_with(expected_suffix));
+    }
 }
 
 #[derive(Clone, Copy)]
@@ -751,12 +807,9 @@ struct NamedProfileBehaviorCase {
     // These are literal public-behavior checks, not a second path into the
     // catalog implementation under test.
     expected_request: fn() -> SelectionRequest,
-    total_selected_bundles: usize,
-    runtime_selected_bundles: usize,
-    static_selected_bundles: usize,
+    selected_bundles: ExpectedSelectedBundles,
     passed: usize,
     failed: usize,
-    selected_fixture_suffix: Option<&'static str>,
 }
 
 fn expected_smoke_runtime_request() -> SelectionRequest {
@@ -787,42 +840,34 @@ const NAMED_PROFILE_BEHAVIOR_CASES: &[NamedProfileBehaviorCase] = &[
     NamedProfileBehaviorCase {
         alias: "smoke-runtime",
         expected_request: expected_smoke_runtime_request,
-        total_selected_bundles: 4,
-        runtime_selected_bundles: 4,
-        static_selected_bundles: 0,
+        selected_bundles: ExpectedSelectedBundles::multiple(4, 4, 0),
         passed: 4,
         failed: 0,
-        selected_fixture_suffix: None,
     },
     NamedProfileBehaviorCase {
         alias: "smoke-static",
         expected_request: expected_smoke_static_request,
-        total_selected_bundles: 2,
-        runtime_selected_bundles: 0,
-        static_selected_bundles: 2,
+        selected_bundles: ExpectedSelectedBundles::multiple(2, 0, 2),
         passed: 2,
         failed: 0,
-        selected_fixture_suffix: None,
     },
     NamedProfileBehaviorCase {
         alias: "runtime-e3",
         expected_request: expected_runtime_e3_request,
-        total_selected_bundles: 1,
-        runtime_selected_bundles: 1,
-        static_selected_bundles: 0,
+        selected_bundles: ExpectedSelectedBundles::single_runtime(
+            "e3-option-admit-chain.json",
+        ),
         passed: 1,
         failed: 0,
-        selected_fixture_suffix: Some("e3-option-admit-chain.json"),
     },
     NamedProfileBehaviorCase {
         alias: "static-e4",
         expected_request: expected_static_e4_request,
-        total_selected_bundles: 1,
-        runtime_selected_bundles: 0,
-        static_selected_bundles: 1,
+        selected_bundles: ExpectedSelectedBundles::single_static(
+            "e4-malformed-lineage.json",
+        ),
         passed: 1,
         failed: 0,
-        selected_fixture_suffix: Some("e4-malformed-lineage.json"),
     },
 ];
 
@@ -847,22 +892,9 @@ fn run_directory_named_profiles_match_catalog_resolution_and_expected_selection(
 
         assert_eq!(summary.profile_name, case.alias);
         assert_eq!(summary.resolved_request, (case.expected_request)());
-        assert_named_profile_selected_counts(
-            &summary,
-            case.total_selected_bundles,
-            case.runtime_selected_bundles,
-            case.static_selected_bundles,
-        );
+        assert_named_profile_selected_bundles(&summary, case.selected_bundles);
         assert_eq!(summary.passed, case.passed);
         assert_eq!(summary.failed, case.failed);
-        assert_eq!(summary.bundle_reports.len(), case.total_selected_bundles);
-
-        if let Some(expected_suffix) = case.selected_fixture_suffix {
-            assert_eq!(summary.bundle_reports.len(), 1);
-            assert!(summary.bundle_reports[0]
-                .fixture_path
-                .ends_with(expected_suffix));
-        }
     }
 }
 
