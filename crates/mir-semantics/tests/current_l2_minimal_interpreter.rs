@@ -744,82 +744,123 @@ fn assert_named_profile_selected_counts(
     assert_eq!(summary.static_selected_bundles, static_selected_bundles);
 }
 
+#[derive(Clone, Copy)]
+struct NamedProfileBehaviorCase {
+    alias: &'static str,
+    expected_request: fn() -> SelectionRequest,
+    total_selected_bundles: usize,
+    runtime_selected_bundles: usize,
+    static_selected_bundles: usize,
+    passed: usize,
+    failed: usize,
+    selected_fixture_suffix: Option<&'static str>,
+}
+
+fn expected_smoke_runtime_request() -> SelectionRequest {
+    SelectionRequest::new().with_scope(SelectionScope::RuntimeOnly)
+}
+
+fn expected_smoke_static_request() -> SelectionRequest {
+    SelectionRequest::new().with_scope(SelectionScope::StaticOnly)
+}
+
+fn expected_runtime_e3_request() -> SelectionRequest {
+    SelectionRequest::new()
+        .with_scope(SelectionScope::RuntimeOnly)
+        .with_single_fixture(SingleFixtureSelector::Stem(
+            "e3-option-admit-chain".to_string(),
+        ))
+}
+
+fn expected_static_e4_request() -> SelectionRequest {
+    SelectionRequest::new()
+        .with_scope(SelectionScope::StaticOnly)
+        .with_single_fixture(SingleFixtureSelector::Stem(
+            "e4-malformed-lineage".to_string(),
+        ))
+}
+
+const NAMED_PROFILE_BEHAVIOR_CASES: &[NamedProfileBehaviorCase] = &[
+    NamedProfileBehaviorCase {
+        alias: "smoke-runtime",
+        expected_request: expected_smoke_runtime_request,
+        total_selected_bundles: 4,
+        runtime_selected_bundles: 4,
+        static_selected_bundles: 0,
+        passed: 4,
+        failed: 0,
+        selected_fixture_suffix: None,
+    },
+    NamedProfileBehaviorCase {
+        alias: "smoke-static",
+        expected_request: expected_smoke_static_request,
+        total_selected_bundles: 2,
+        runtime_selected_bundles: 0,
+        static_selected_bundles: 2,
+        passed: 2,
+        failed: 0,
+        selected_fixture_suffix: None,
+    },
+    NamedProfileBehaviorCase {
+        alias: "runtime-e3",
+        expected_request: expected_runtime_e3_request,
+        total_selected_bundles: 1,
+        runtime_selected_bundles: 1,
+        static_selected_bundles: 0,
+        passed: 1,
+        failed: 0,
+        selected_fixture_suffix: Some("e3-option-admit-chain.json"),
+    },
+    NamedProfileBehaviorCase {
+        alias: "static-e4",
+        expected_request: expected_static_e4_request,
+        total_selected_bundles: 1,
+        runtime_selected_bundles: 0,
+        static_selected_bundles: 1,
+        passed: 1,
+        failed: 0,
+        selected_fixture_suffix: Some("e4-malformed-lineage.json"),
+    },
+];
+
+fn expected_named_profile_aliases() -> Vec<&'static str> {
+    NAMED_PROFILE_BEHAVIOR_CASES
+        .iter()
+        .map(|case| case.alias)
+        .collect()
+}
+
 #[test]
 fn named_profile_catalog_lists_expected_aliases() {
     let aliases = ProfileCatalog::aliases();
 
-    assert_eq!(
-        aliases,
-        &["smoke-runtime", "smoke-static", "runtime-e3", "static-e4"]
-    );
+    assert_eq!(aliases, expected_named_profile_aliases());
 }
 
 #[test]
-fn run_directory_named_profile_smoke_runtime_matches_runtime_only_request() {
-    let summary = run_directory_named_profile(fixture_dir(), "smoke-runtime").unwrap();
+fn run_directory_named_profiles_match_catalog_resolution_and_expected_selection() {
+    for case in NAMED_PROFILE_BEHAVIOR_CASES {
+        let summary = run_directory_named_profile(fixture_dir(), case.alias).unwrap();
 
-    assert_eq!(summary.profile_name, "smoke-runtime");
-    assert_eq!(
-        summary.resolved_request,
-        SelectionRequest::new().with_scope(SelectionScope::RuntimeOnly)
-    );
-    assert_named_profile_selected_counts(&summary, 4, 4, 0);
-    assert_eq!(summary.passed, 4);
-    assert_eq!(summary.failed, 0);
-}
+        assert_eq!(summary.profile_name, case.alias);
+        assert_eq!(summary.resolved_request, (case.expected_request)());
+        assert_named_profile_selected_counts(
+            &summary,
+            case.total_selected_bundles,
+            case.runtime_selected_bundles,
+            case.static_selected_bundles,
+        );
+        assert_eq!(summary.passed, case.passed);
+        assert_eq!(summary.failed, case.failed);
+        assert_eq!(summary.bundle_reports.len(), case.total_selected_bundles);
 
-#[test]
-fn run_directory_named_profile_smoke_static_matches_static_only_request() {
-    let summary = run_directory_named_profile(fixture_dir(), "smoke-static").unwrap();
-
-    assert_eq!(summary.profile_name, "smoke-static");
-    assert_eq!(
-        summary.resolved_request,
-        SelectionRequest::new().with_scope(SelectionScope::StaticOnly)
-    );
-    assert_named_profile_selected_counts(&summary, 2, 0, 2);
-    assert_eq!(summary.passed, 2);
-    assert_eq!(summary.failed, 0);
-}
-
-#[test]
-fn run_directory_named_profile_runtime_e3_runs_only_e3_runtime_bundle() {
-    let summary = run_directory_named_profile(fixture_dir(), "runtime-e3").unwrap();
-
-    assert_eq!(summary.profile_name, "runtime-e3");
-    assert_eq!(
-        summary.resolved_request,
-        SelectionRequest::new()
-            .with_scope(SelectionScope::RuntimeOnly)
-            .with_single_fixture(SingleFixtureSelector::Stem(
-                "e3-option-admit-chain".to_string(),
-            ))
-    );
-    assert_named_profile_selected_counts(&summary, 1, 1, 0);
-    assert_eq!(summary.bundle_reports.len(), 1);
-    assert!(summary.bundle_reports[0]
-        .fixture_path
-        .ends_with("e3-option-admit-chain.json"));
-}
-
-#[test]
-fn run_directory_named_profile_static_e4_runs_only_e4_static_bundle() {
-    let summary = run_directory_named_profile(fixture_dir(), "static-e4").unwrap();
-
-    assert_eq!(summary.profile_name, "static-e4");
-    assert_eq!(
-        summary.resolved_request,
-        SelectionRequest::new()
-            .with_scope(SelectionScope::StaticOnly)
-            .with_single_fixture(SingleFixtureSelector::Stem(
-                "e4-malformed-lineage".to_string(),
-            ))
-    );
-    assert_named_profile_selected_counts(&summary, 1, 0, 1);
-    assert_eq!(summary.bundle_reports.len(), 1);
-    assert!(summary.bundle_reports[0]
-        .fixture_path
-        .ends_with("e4-malformed-lineage.json"));
+        if let Some(expected_suffix) = case.selected_fixture_suffix {
+            assert_eq!(summary.bundle_reports.len(), 1);
+            assert!(summary.bundle_reports[0]
+                .fixture_path
+                .ends_with(expected_suffix));
+        }
+    }
 }
 
 #[test]

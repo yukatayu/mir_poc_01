@@ -16,6 +16,7 @@
   - `smoke-static`
   - `runtime-e3`
   - `static-e4`
+- current L2 では、具体的な alias 一覧を prose で列挙する文書はこの文書を正本としてよい。ほかの文書では、必要がない限りこの文書への導線に留めてよい。
 - hard-coded catalog を維持する実装では、alias list と alias→request 解決を 1 箇所の preset table から導いてよい。
 - catalog layer は sidecar discovery、runtime/static-only classification、primitive selection 自体を再実装しない。
 - alias 解決後は既存 `SelectionRequest` / `SelectionProfile` / `run_directory_profiled` に流し込むだけに留める。
