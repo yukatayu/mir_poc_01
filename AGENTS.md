@@ -66,6 +66,23 @@ Every report should contain, in this order:
 - `Documentation.md` should stay concise and current.
 - Keep diagrams in Mermaid source (`docs/diagrams/*.mmd`).
 
+## plan/ 維持ルール
+
+- `plan/` は人間向けの repository memory であり、scratchpad ではない。
+- semantics / examples / fixtures / helper stack / roadmap / open questions / syntax candidate / workstream sequencing / current status が変わった task では、同じ task の中で relevant な `plan/` ファイルを更新すること。
+- 更新が不要な場合でも、report に **`plan/ 更新不要`** と明記すること。
+- `plan/` では、決定・未決・仮説・履歴 / comparison を分けて書くこと。
+- `plan/` は docs mirror と同じく repo の一級成果物として扱うこと。
+- current L2 / parser-free PoC / helper stack / roadmap task では、`Documentation.md` と基礎 specs に加えて、`plan/00-index.md` と relevant な `plan/` ファイルも読むこと。ただし規範判断の正本は常に `specs/` とする。
+
+## review と task close の運用
+
+- task はできるだけ内部で閉じる。中途で user に何度も返さない。
+- self-check、focused diff review、local validation を先に行う。
+- reviewer はむやみに何度も呼ばず、最後に 1 回だけ長めに待つのを基本にする。
+- 必要なら task 内部で narrow-scope re-review を行ってよい。
+- reviewer が返らない場合だけ retry を 1 回行い、なお返らなければ local evidence と diff inspection を report に残す。
+
 ## Preferred style
 
 - Use precise language.

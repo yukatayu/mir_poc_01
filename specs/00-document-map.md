@@ -2,6 +2,13 @@
 
 この文書は、主要な関心事がそれぞれどこに書かれているかを読者または agent に示す。
 
+## planning document
+
+- `plan/`
+  - `specs/` と `docs/reports/` と code anchor を横断して、現況、roadmap、helper stack、fixture catalog、open problems、maintenance rule を長期参照しやすく整理した人間向け repository memory である。
+  - 規範判断の正本ではない。意味論や decision の正本は `specs/` に残る。
+  - current repo の現在地や PoC 検証基盤の call chain を素早く掴みたい場合は `plan/00-index.md` から読む。
+
 ## 規範的な読書順
 
 1. `01-charter-and-decision-levels.md`
@@ -150,6 +157,19 @@
   - parser なし minimal interpreter の small named profile catalog / preset table は `specs/examples/13-current-l2-profile-catalog.md` に置く。
   - parser なし minimal interpreter の named profile catalog を hard-coded table に留めるか、machine-readable asset として比較する整理は `specs/examples/14-current-l2-profile-catalog-externalization.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
+
+## 実装 anchor
+
+- `crates/mir-ast/tests/fixtures/current-l2/`
+  - current L2 parser-free PoC の representative fixture 実体と `.host-plan.json` sidecar を置く。
+- `crates/mir-semantics/src/lib.rs`
+  - parser-free minimal interpreter の entry point と evaluation 実装。
+- `crates/mir-semantics/src/harness.rs`
+  - host harness、host plan loader、bundle loader、batch runner、selection helper、selection profile helper、named profile catalog の実装 anchor。
+- `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+  - current L2 parser-free PoC の public behavior coverage を置く。
+
+これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 
 ## 用語と参照の編集方針
 

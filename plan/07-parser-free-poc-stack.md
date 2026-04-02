@@ -1,0 +1,185 @@
+# plan/07 — parser-free PoC stack
+
+## 目的
+
+current L2 の parser-free PoC stack は、representative examples を parser なしで machine-check するための最小 execution / verification infrastructure である。
+ここでは各 layer の public behavior と thin delegation の境界を揃えて記録する。
+
+## stack の全体像
+
+### artifact / helper の順序
+
+1. AST fixture schema
+2. evaluation state schema
+3. step semantics
+4. oracle API
+5. parser-free minimal interpreter
+6. host harness
+7. host plan sidecar loader
+8. bundle loader
+9. batch runner
+10. selection helper
+11. selection profile helper
+12. named profile catalog
+
+## 実行 call chain
+
+current helper stack の代表的な呼び出しは次である。
+
+```text
+run_directory_named_profile
+  -> run_directory_profiled
+    -> discover_bundles_in_directory
+    -> select_bundles_from_request
+    -> batch_summary_from_discovery
+      -> run_bundle
+        -> FixtureHostStub::run_fixture
+          -> run_to_completion
+```
+
+この call chain で、各 layer は自分の public behavior だけを持ち、下位の execution / comparison をなるべく再利用する。
+
+## 各 layer の public behavior と thin delegation
+
+| layer | public behavior | thin delegation に留めるもの |
+|---|---|---|
+| AST fixture schema | program / expected_static / expected_runtime / expected_trace_audit を machine-readable に持つ | final parser syntax の固定 |
+| evaluation state schema | parser-free 実行に必要な最小 state 粒度 | production object model |
+| step semantics | 1-step rule と terminal outcome の導出 | full scheduler |
+| oracle API | `PredicateOracle` / `EffectOracle` の最小境界 | richer host API |
+| parser-free minimal interpreter | static gate、`step_once`、`run_to_completion` | production runtime |
+| host harness | fixture ごとの declarative host plan による oracle stub | production host interface |
+| host plan sidecar | predicate/effect/commit/narrative override を asset 化 | manifest 化 |
+| bundle loader | fixture + sidecar を 1 bundle として解決し、1 bundle を run する | directory summary |
+| batch runner | directory discovery と bundle 群の一括実行 summary | selection / alias |
+| selection helper | `runtime-only` / `static-only` / `single-fixture` で bundle 群を絞る | profile 名 / alias |
+| selection profile helper | primitive selection を request と profile 名で束ねる | alias catalog |
+| named profile catalog | human-friendly alias を `SelectionRequest` へ解決する | sidecar discovery、runtime/static classification |
+
+## parser-free minimal interpreter の役割
+
+### public behavior
+
+- fixture load
+- static gate
+- `EvaluationState`
+- `step_once`
+- `run_to_completion`
+- `success` / `explicit_failure` / `Reject` / static-only stop の照合
+
+### まだやらないこと
+
+- full parser
+- full production runtime
+- distributed scheduler
+- `Approximate` / `Compensate`
+
+## host harness と host plan sidecar
+
+### host harness
+
+- `PredicateOracle` / `EffectOracle` を declarative plan で stub 化する
+- uncovered oracle call は fail-closed にする
+- overlap rule は reject する
+
+### sidecar
+
+- `.host-plan.json`
+- runtime fixture では必須
+- static-only fixture では不要
+- machine-readable asset だが production manifest ではない
+
+## bundle / batch / selection / profile / catalog
+
+### bundle
+
+- fixture 本体
+- `expected_static`
+- `expected_runtime`
+- `expected_trace_audit`
+- optional sidecar
+
+### batch
+
+- fixture directory を discovery して bundle 群として実行
+- total / runtime / static-only / passed / failed / discovery failure / host-plan coverage failure を返す
+
+### selection
+
+- `runtime-only`
+- `static-only`
+- `single-fixture`
+
+### profile
+
+- optional scope
+- optional single-fixture selector
+- `profile_name`
+
+### named profile catalog
+
+- current aliases:
+  - `smoke-runtime`
+  - `smoke-static`
+  - `runtime-e3`
+  - `static-e4`
+- hard-coded table を維持
+- machine-readable catalog externalization は比較止まり
+
+## current named profile catalog の boundary
+
+### code 側
+
+- `ProfileCatalog::aliases()` / `resolve()` は single source of truth 化済み
+- hard-coded preset table が正本
+
+### docs 側
+
+- concrete alias prose は `specs/examples/13-current-l2-profile-catalog.md` に寄せる
+
+### tests 側
+
+- integration tests は literal `resolved_request` と unknown alias failure を public behavior coverage として持つ
+- selected counts / concrete fixture shape は profile-layer tests に寄せる
+- internal tests は preset table wiring の整合だけを見る
+
+## machine-check と human-facing explanation の境界
+
+### machine-check に残すもの
+
+- static verdict
+- runtime final outcome
+- event kinds
+- formal non-admissible metadata
+- short narrative explanations
+- selected bundle counts や concrete fixture shape の一部
+- `resolved_request`
+
+### prose に残すもの
+
+- `must_explain`
+- long-form audit explanation
+- static verdict reason の長文
+- なぜ current L2 でその helper boundary を採るかの比較理由
+
+## `must_explain` の扱い
+
+`must_explain` は current L2 では machine-check に上げない。
+これは bundle / batch / selection / profile / catalog のどの layer でも一貫している。
+
+## current L2 settled / OPEN
+
+### current L2 settled
+
+- parser-free PoC stack の基本 call chain
+- bundle / batch / selection / profile / catalog の順序
+- hard-coded named profile catalog
+- helper layer ごとの public behavior / thin delegation の分離
+
+### OPEN
+
+- detached trace / audit serialization
+- richer host interface
+- machine-readable catalog asset / manifest
+- multi-request scheduler
+- `Approximate` / `Compensate`
