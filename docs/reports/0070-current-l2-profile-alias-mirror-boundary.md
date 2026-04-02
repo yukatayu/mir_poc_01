@@ -100,6 +100,9 @@ current L2 named profile catalog の alias mirror を減らす。特に次を目
   - docs の具体的 alias 列挙は `specs/examples/13-current-l2-profile-catalog.md` に寄せる
   - tests は exact alias list と literal alias-to-request mapping を machine-check に残す
   - `must_explain` や長い運用説明は prose に残す
+- 仕様本文コミットは次の 1 本である。
+  - `c27e300` `named profile alias mirror を最小化する`
+- この report 自身の commit hash は self-reference の都合で本文に固定していない。
 
 ## 7. Changes in understanding
 
