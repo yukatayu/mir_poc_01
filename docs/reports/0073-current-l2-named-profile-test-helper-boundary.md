@@ -76,7 +76,7 @@ Commands run and outputs:
   - `test result: ok. 30 passed; 0 failed; ...`（integration tests）
 - `python3 scripts/validate_docs.py`
   - `Documentation scaffold looks complete.`
-  - `Found 71 numbered report(s).`
+  - `Found 73 numbered report(s).`
 - `git diff --check`
   - 無出力
 - narrow reviewer
