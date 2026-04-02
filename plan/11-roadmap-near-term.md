@@ -10,33 +10,36 @@
 近い数 task の目的は、current L2 を次の状態へ持っていくことである。
 
 - parser-free PoC を継続的に回せる
+- parser-free PoC の実行結果を process 内比較だけに閉じ込めない
+- trace / audit と host coverage の operational boundary を semantics から独立に狭く切る
 - notation の比較結果が docs / tests / fixtures と整合している
 - helper stack の mirror drift が抑えられている
 - parser 導入前に何が未決かを誤魔化さずに進められる
 
 ## 直近 2〜4 task の候補
 
-### 候補 1. fallback / chain notation のさらに狭い polishing
+### 候補 1. detached trace / audit serialization の最小境界整理
 
-- explicit edge-row family の companion notation をさらに読みやすくする
-- E3 / E6 / E7 / E8 を使って drift を増やさないか確認する
-- final parser grammar には進まない
+- `TraceAuditSink` / `RunReport` / bundle summary から detached artifact の最小 shape を切る
+- repo 外保存・再比較・後解析に必要な field を narrow に棚卸しする
+- `must_explain` は引き続き prose obligation に残し、exact compare の core を増やしすぎない
 
-### 候補 2. parser-free representative coverage の拡張
+### 候補 2. richer host interface と coverage analysis の入口整理
+
+- current host harness から production host interface へ直進しない
+- preflight、coverage explanation、uncovered call detection のどこが本当に bottleneck かを切り分ける
+- detached artifact boundary を先に切った後でも十分な部分だけを後段 task に残す
+
+### 候補 3. parser-free representative coverage の拡張
 
 - current L2 semantics の重要点を、まだ fixture 化されていない narrow case で regression 化する
 - static-only と runtime fixture のバランスを見る
 - `must_explain` は prose に残し、machine-check 範囲を増やしすぎない
 
-### 候補 3. parser 導入前の boundary inventory
+### 候補 4. parser 導入前の boundary inventory
 
 - parser を書く前に最低限固定すべき syntax / companion notation / AST boundary を棚卸しする
 - 何を final grammar 決定に回し、何をまだ比較候補に残すかを明確にする
-
-### 候補 4. richer host interface の入口整理
-
-- current host harness から production host interface へ直進しない
-- まず、どの責務が current PoC helper にあり、どこから先が richer host interface なのかを切り分ける
 
 ## rough step estimate
 
@@ -44,7 +47,8 @@
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| PoC を継続的に回せる状態を維持しつつ drift regression を増やす | 2〜4 task | notation / fixture / helper mirror 次第で前後する |
+| PoC を継続的に回せる状態を維持しつつ drift regression を増やす | 2〜4 task | detached artifact / host coverage の切り方次第で前後する |
+| PoC を「大量に回して比較しやすい」段階へ一段進める | 2〜5 task | detached trace / audit と richer host boundary の優先順位が影響する |
 | 文法をある程度比較しながら PoC を前進させる | 4〜8 task | final parser grammar 固定はまだ含まない |
 | parser 導入判断の前提整理 | 5〜10 task | 静的解析や host interface との境界が影響する |
 
@@ -63,24 +67,31 @@
 
 - 型システム、静的解析、決定可能性、theorem prover 連携は、まだ entry criteria の段階である
 
-### 4. review infrastructure の変動
+### 4. detached trace / audit が process 内比較に閉じていること
+
+- batch / profile まで積んでも、結果を repo 外 artifact として残しにくい
+- case 数が増えると「その場で読んで終わる」運用から抜けにくい
+
+### 5. review infrastructure の変動
 
 - reviewer completion が遅い / 返らない場合があり、task の closing evidence を自前で揃える必要がある
 
 ## いまの bottleneck
 
-- syntax をどこまで companion notation のまま引っ張るか
-- parser-free PoC の気持ちよさと final grammar 決定のタイミング
-- helper stack を増やしすぎずに検証範囲を拡張すること
+- `fixture authoring / elaboration` の独立 bottleneck は引き続き残っている
+- そのうえで、**detached trace / audit serialization と richer host interface の 2 項目を比べるなら**、前者を先に切る方が前進量は大きい
+- richer host interface と coverage analysis の入口整理は、その後段候補である
+- notation 自体は current L2 の narrow task を回すには十分安定しており、直近では operational boundary の方が重い
 
 ## 近い将来の sequencing
 
 推奨順は次である。
+ただしこれは `fixture authoring / elaboration` の独立 bottleneck を取り消すものではなく、**trace/audit と host interface の比較に限った近い sequencing** である。
 
 1. semantics drift regression を増やす
-2. notation / examples / helper mirror を揃える
-3. parser 導入前 inventory を作る
-4. richer host / trace / static analysis の入口を narrow に切る
+2. detached trace / audit serialization の最小境界を切る
+3. richer host interface / coverage analysis の入口を narrow に切る
+4. parser 導入前 inventory を作る
 5. その後で parser / richer runtime の判断に進む
 
 ## 今の working assumption
@@ -92,7 +103,7 @@
 
 ## 次にやるべき narrow-scope task 候補
 
-- explicit edge-row companion notation の examples mirror をさらに細く整える
-- fallback / `lease` regression fixture の補完を 1〜2 本だけ行う
-- parser-free host harness と richer host interface の boundary inventory を作る
+- detached trace / audit artifact の最小 schema sketch を docs-only で作る
+- bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しする
+- parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す
