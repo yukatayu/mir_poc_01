@@ -259,6 +259,14 @@ current detached artifact では `host_plan_coverage_failure` を aggregate-only
 - `bundle_context` と detached non-core の責務を崩さない
 - `BatchRunSummary` はその typed bundle failure を集約する後段に留められる
 
+その次の docs-only refinement としては、bundle failure artifact の typed core を **`failure_kind` discriminator だけ**に留めるのが最小である。
+
+- artifact 全体では `bundle_context` を別 section として持ってよい
+- ただし typed carrier 自体には context reference や short note を抱かせない
+- short coverage note は必要なら detached non-core の後段 task に回す
+
+正本は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置く。
+
 正本は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
 
 ## current L2 settled / OPEN

@@ -86,6 +86,7 @@
 - actual exporter API と aggregate export の順序も引き続き未決である
 - bundle-level failure artifact を separate に切るかどうかも引き続き未決である
 - ただし current comparison としては、`host_plan_coverage_failure` を将来 typed carrier に昇格させるなら aggregate-only を維持したまま bundle failure artifact 側に切るのが最も自然であり、payload core / `bundle_context` / detached non-core に薄く混ぜるのは避ける
+- さらに docs-only schema refinement としては、bundle failure artifact 側の typed core は `failure_kind` discriminator だけに留めるのが最小であり、`bundle_context` 参照や short note は後段に回す
 
 ### richer host interface
 
