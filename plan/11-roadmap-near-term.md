@@ -24,6 +24,7 @@
 - repo 外保存・再比較・後解析に必要な field を、exact-compare core / detached non-core / human-facing explanation に分けて運ぶ
 - `must_explain` は引き続き prose obligation に残し、exact compare の core を増やしすぎない
 - その比較では、payload core は `RunReport` に寄せつつ、first exporter entry は `run_bundle` / `BundleRunReport` に置くのが current understanding である
+- さらに bundle-first artifact の内部では、`fixture_id` / `fixture_path` / `host_plan_path` / `runtime_requirement` を `bundle_context` へ寄せ、`host_plan_coverage_failure` は aggregate-only に残すのが次の narrow step である
 
 ### 候補 2. richer host interface と coverage analysis の入口整理
 
@@ -108,5 +109,6 @@
 
 - detached trace / audit の docs-only schema から thin exporter 候補の carrier mapping を切り出す
 - bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しし、bundle-first exporter entry を docs に固定する
+- bundle-first artifact の payload core / bundle_context / detached non-core / aggregate-only を docs-only で切り分ける
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す

@@ -216,6 +216,37 @@ detached artifact exporter を narrow に始める comparison では、payload c
 この判断は、bundle が `fixture + sidecar` の自然単位であり、payload core と detached non-core context を分けたまま helper boundary を壊しにくいためである。
 正本は `specs/examples/17-current-l2-detached-exporter-entry-comparison.md` に置く。
 
+## bundle-first detached payload/context split
+
+bundle-first exporter をさらに narrow に切る current understanding では、artifact の内部も次の 4 層に分ける。
+
+1. payload core
+   - `RunReport` 由来
+   - `static_verdict`
+   - `entered_evaluation`
+   - `terminal_outcome`
+   - `event_kinds`
+   - formal `non_admissible_metadata`
+   - short `narrative_explanations`
+2. `bundle_context`
+   - `fixture_id`
+   - `fixture_path`
+   - `host_plan_path`
+   - `runtime_requirement`
+3. detached non-core
+   - `steps_executed`
+   - auxiliary counters
+   - coverage explanation
+   - host-plan explanation
+4. human-facing explanation
+   - `must_explain`
+   - long-form audit
+   - why-this-is-good/bad の prose
+
+`host_plan_coverage_failure` は current code では batch / per-bundle failure classification であり、`RunReport` payload core でも `FixtureBundle` context でもない。
+そのため bundle-first artifact へは入れず、aggregate-only に残すのが current L2 の最小 judgment である。
+正本は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md` に置く。
+
 ## current L2 settled / OPEN
 
 ### current L2 settled
@@ -226,6 +257,7 @@ detached artifact exporter を narrow に始める comparison では、payload c
 - helper layer ごとの public behavior / thin delegation の分離
 - detached trace / audit artifact の docs-only minimal grouping
 - detached exporter entry の bundle-first judgment
+- bundle-first detached exporter の payload/context split
 
 ### OPEN
 

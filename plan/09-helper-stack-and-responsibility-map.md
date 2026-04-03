@@ -120,6 +120,26 @@ detached artifact exporter を narrow に始める comparison では、次の切
 interpreter / `TraceAuditSink` に直結する exporter から始めると、payload core には近くても bundle context を失いやすい。
 逆に batch から始めると、selection / profile / coverage aggregation まで一度に exporter へ持ち込みやすい。
 
+## bundle-first detached artifact の split
+
+bundle-first exporter を採る場合、`run_bundle` 周辺で見えている field は次のように分けるのが current helper boundary と最も整合する。
+
+- payload core
+  - `RunReport` 由来の field
+- `bundle_context`
+  - `fixture_id`
+  - `fixture_path`
+  - `host_plan_path`
+  - `runtime_requirement`
+- detached non-core
+  - `steps_executed`
+  - coverage explanation
+  - host-plan explanation
+- aggregate-only
+  - `host_plan_coverage_failure`
+
+ここで `host_plan_coverage_failure` を bundle-first artifact 側へ入れない理由は、current code でそれが `run_bundle` 成功 payload から得られる field ではなく、`batch_summary_from_discovery` の failure classification として materialize されるためである。
+
 ## この先の update 指針
 
 helper layer が変わったら、少なくとも次のどれを更新すべきかを見る。

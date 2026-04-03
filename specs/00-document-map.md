@@ -80,6 +80,9 @@
 - `specs/examples/17-current-l2-detached-exporter-entry-comparison.md`
   - current L2 parser-free PoC で detached artifact exporter を narrow に始めるとき、`RunReport` / `BundleRunReport` / `BatchRunSummary` のどこを entry layer に取るべきかを比較する補助文書。
   - production exporter 実装を固定せず、payload core と first exporter entry boundary の切り分けだけを与える。
+- `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md`
+  - current L2 parser-free PoC の bundle-first detached exporter で、何を `RunReport` 由来 payload core に置き、何を `bundle_context` に置き、何を detached non-core とし、何を explanation に残すかを比較する補助文書。
+  - production exporter 実装を固定せず、bundle-first artifact の docs-only payload/context split だけを与える。
 
 ## 各文書の役割
 
@@ -143,6 +146,8 @@
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として切り出すときの最小 schema と、exact-compare core / detached non-core / human-facing explanation の境界を与える。
 - `specs/examples/17-current-l2-detached-exporter-entry-comparison.md`
   - current L2 parser-free PoC の detached artifact exporter を narrow に始めるとき、payload core と entry layer をどう切り分けるかを比較する。
+- `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md`
+  - current L2 parser-free PoC の bundle-first detached artifact で、payload core / bundle context / detached non-core / human-facing explanation をどう切るかを比較する。
 
 ## レポート
 
@@ -168,6 +173,7 @@
   - parser なし minimal interpreter の named profile catalog を hard-coded table に留めるか、machine-readable asset として比較する整理は `specs/examples/14-current-l2-profile-catalog-externalization.md` に置く。
   - parser なし minimal interpreter の trace / audit 結果を repo 外へ保存する detached artifact 境界の docs-only minimal schema は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md` に置く。
   - parser なし minimal interpreter の detached artifact exporter をどの helper layer から始めるかの comparison は `specs/examples/17-current-l2-detached-exporter-entry-comparison.md` に置く。
+  - parser なし minimal interpreter の bundle-first detached exporter で payload と context をどう split するかの comparison は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor

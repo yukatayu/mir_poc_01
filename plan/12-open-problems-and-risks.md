@@ -59,6 +59,11 @@
   - first exporter entry は `run_bundle` / `BundleRunReport` に置く方が helper boundary を壊しにくい
   - `BatchRunSummary` は後段 aggregate export に回す
   という narrow judgment を current understanding とする
+- bundle-first payload/context split では、
+  - `fixture_id` / `fixture_path` / `host_plan_path` / `runtime_requirement` は `bundle_context`
+  - `steps_executed` は detached non-core
+  - `host_plan_coverage_failure` は aggregate-only
+  と切るのが current helper boundary に最も自然である
 - docs-only minimal boundary としては、
   - exact-compare core
     - `static_verdict`
@@ -79,6 +84,7 @@
   に分けるのが最小である
 - production schema version、保存パス規約、typed coverage carrier は引き続き未決である
 - actual exporter API と aggregate export の順序も引き続き未決である
+- bundle-level failure artifact を separate に切るかどうかも引き続き未決である
 
 ### richer host interface
 
