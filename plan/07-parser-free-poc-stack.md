@@ -152,6 +152,7 @@ run_directory_named_profile
 - event kinds
 - formal non-admissible metadata
 - short narrative explanations
+- batch-layer の `host_plan_coverage_failure`
 - selected bundle counts や concrete fixture shape の一部
 - `resolved_request`
 
@@ -162,10 +163,44 @@ run_directory_named_profile
 - static verdict reason の長文
 - なぜ current L2 でその helper boundary を採るかの比較理由
 
+### detached artifact に出してよいが core にしないもの
+
+- `steps_executed`
+- coverage explanation
+- host-plan explanation
+- auxiliary counters / summaries
+
+current L2 では、これらは後比較や後解析には有益だが、interpreter / helper refactor で揺れやすいため exact-compare core へは上げない。
+
 ## `must_explain` の扱い
 
 `must_explain` は current L2 では machine-check に上げない。
 これは bundle / batch / selection / profile / catalog のどの layer でも一貫している。
+
+## detached trace / audit artifact の docs-only boundary
+
+current L2 では、detached trace / audit serialization そのものはまだ production 実装しない。
+ただし docs-only minimal schema としては、次の 3 群を分けるところまでは固定してよい。
+
+1. exact-compare core
+   - `static_verdict`
+   - `entered_evaluation`
+   - `terminal_outcome`
+   - `event_kinds`
+   - formal `non_admissible_metadata`
+   - short `narrative_explanations`
+   - batch-layer の `host_plan_coverage_failure`
+2. detached artifact に出してよいが core にはしないもの
+   - `steps_executed`
+   - coverage explanation
+   - host-plan explanation
+   - auxiliary counters / summaries
+3. human-facing explanation に残すもの
+   - `must_explain`
+   - long-form audit
+   - why-this-is-good/bad の説明
+
+この docs-only boundary は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md` を正本とする。
 
 ## current L2 settled / OPEN
 
@@ -175,10 +210,11 @@ run_directory_named_profile
 - bundle / batch / selection / profile / catalog の順序
 - hard-coded named profile catalog
 - helper layer ごとの public behavior / thin delegation の分離
+- detached trace / audit artifact の docs-only minimal grouping
 
 ### OPEN
 
-- detached trace / audit serialization
+- production detached trace / audit serialization
 - richer host interface
 - machine-readable catalog asset / manifest
 - multi-request scheduler

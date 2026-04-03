@@ -20,8 +20,8 @@
 
 ### 候補 1. detached trace / audit serialization の最小境界整理
 
-- `TraceAuditSink` / `RunReport` / bundle summary から detached artifact の最小 shape を切る
-- repo 外保存・再比較・後解析に必要な field を narrow に棚卸しする
+- docs-only minimal schema は切れたので、次は `TraceAuditSink` / `RunReport` / bundle summary から thin export boundary をどう置くかを narrow に棚卸しする
+- repo 外保存・再比較・後解析に必要な field を、exact-compare core / detached non-core / human-facing explanation に分けて運ぶ
 - `must_explain` は引き続き prose obligation に残し、exact compare の core を増やしすぎない
 
 ### 候補 2. richer host interface と coverage analysis の入口整理
@@ -71,6 +71,7 @@
 
 - batch / profile まで積んでも、結果を repo 外 artifact として残しにくい
 - case 数が増えると「その場で読んで終わる」運用から抜けにくい
+- docs-only minimal schema はできたが、thin export boundary と保存パス規約はまだ未決である
 
 ### 5. review infrastructure の変動
 
@@ -103,7 +104,7 @@
 
 ## 次にやるべき narrow-scope task 候補
 
-- detached trace / audit artifact の最小 schema sketch を docs-only で作る
+- detached trace / audit の docs-only schema から thin exporter 候補の carrier mapping を切り出す
 - bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しする
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す

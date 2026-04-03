@@ -16,12 +16,12 @@
 | `plan/04-core-semantics-current-l2.md` | `specs/04-mir-core.md`、`specs/09-invariants-and-constraints.md`、`specs/10-open-questions.md`、`docs/reports/0018`〜`0046` |
 | `plan/05-fallback-lease-and-chain-semantics.md` | `docs/reports/0018`〜`0023`、`0037`、`0039`、`0043`、`0045`、`specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md`、fixtures `e3/e6/e7/e8` |
 | `plan/06-surface-notation-status.md` | `specs/examples/01-current-l2-surface-syntax-candidates.md`、`docs/reports/0025`、`0026`、`0028`、`0029`、`0030`、`0032`、`0034`、`0079`〜`0084` |
-| `plan/07-parser-free-poc-stack.md` | `specs/examples/02`〜`13`、`docs/reports/0047`〜`0077`、`crates/mir-semantics/src/lib.rs`、`crates/mir-semantics/src/harness.rs` |
+| `plan/07-parser-free-poc-stack.md` | `specs/examples/02`〜`13`、`specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`、`docs/reports/0047`〜`0077`、`0090`、`0092`、`0093`、`crates/mir-semantics/src/lib.rs`、`crates/mir-semantics/src/harness.rs` |
 | `plan/08-representative-programs-and-fixtures.md` | `specs/examples/00`、`specs/examples/02`、`specs/examples/04`、fixtures `crates/mir-ast/tests/fixtures/current-l2/`、`docs/reports/0047`、`0049`、`0078` |
 | `plan/09-helper-stack-and-responsibility-map.md` | `specs/examples/09`〜`13`、`docs/reports/0060`〜`0077`、`crates/mir-semantics/src/harness.rs`、`crates/mir-semantics/tests/current_l2_minimal_interpreter.rs` |
 | `plan/10-roadmap-overall.md` | `specs/11-roadmap-and-workstreams.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md`、`Documentation.md` |
-| `plan/11-roadmap-near-term.md` | `specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`docs/reports/0054`、`0056`、`0059`、`0060`、`0062`、`0077`〜`0084`、`0089`、`0090` |
-| `plan/12-open-problems-and-risks.md` | `specs/10-open-questions.md`、`specs/12-decision-register.md`、`docs/reports/0067`、`0079`〜`0084`、`0089`、`0090` |
+| `plan/11-roadmap-near-term.md` | `specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`、`docs/reports/0054`、`0056`、`0059`、`0060`、`0062`、`0077`〜`0084`、`0089`、`0090`、`0092`、`0093` |
+| `plan/12-open-problems-and-risks.md` | `specs/10-open-questions.md`、`specs/12-decision-register.md`、`specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`、`docs/reports/0067`、`0079`〜`0084`、`0089`、`0090`、`0092`、`0093` |
 | `plan/13-heavy-future-workstreams.md` | `specs/11-roadmap-and-workstreams.md`、`specs/10-open-questions.md`、`specs/07-typed-effects-wiring-platform.md`、`specs/08-cross-system-relations.md` |
 | `plan/14-glossary-and-boundary-rules.md` | `docs/reports/0017-terminology-audit-and-cross-reference-alignment.md`、`specs/00-document-map.md`、`specs/04-mir-core.md`、`specs/examples/09`〜`13` |
 | `plan/91-maintenance-rules.md` | `AGENTS.md`、`Documentation.md`、`specs/00-document-map.md`、report policy、helper boundary reports `0071`〜`0077` |
@@ -77,6 +77,8 @@
 - `0077`
 - `0089`
 - `0090`
+- `0092`
+- `0093`
 
 ### named profile catalog と mirror boundary
 
