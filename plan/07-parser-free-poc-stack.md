@@ -267,6 +267,11 @@ current detached artifact では `host_plan_coverage_failure` を aggregate-only
 
 placement judgment の正本は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
 schema refinement の正本は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置く。
+aggregate export との connection comparison の正本は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` に置く。
+
+typed bundle failure artifact を aggregate export が吸うとしても、`BatchRunSummary` は coarse summary に留まるべきである。
+そのため current understanding では、aggregate 側に持たせる typed 集約は `failure_kind` ごとの histogram / kind count までを最小とし、bundle failure summary の薄い再掲は採らない。
+current code の list / bool shape を histogram で置き換えるか併存させるかは、actual exporter API を切る task まで OPEN に残す。
 
 ## current L2 settled / OPEN
 

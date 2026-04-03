@@ -27,6 +27,7 @@
 - さらに bundle-first artifact の内部では、`fixture_id` / `fixture_path` / `host_plan_path` / `runtime_requirement` を `bundle_context` へ寄せ、`host_plan_coverage_failure` は aggregate-only に残すのが次の narrow step である
 - その次の narrow comparison として、`host_plan_coverage_failure` を将来 typed carrier に昇格させるなら bundle failure artifact 側へ切るのが自然かどうかを確認する
 - さらにその docs-only refinement として、bundle failure artifact 側へ切る typed carrier の最小 schema は `failure_kind` discriminator だけに留め、`bundle_context` や short note を typed core に混ぜないのが current understanding である
+- さらにその aggregate connection として、`BatchRunSummary` が typed bundle failure を吸うなら、持たせる typed 集約は `failure_kind` ごとの histogram / kind count までに留め、bundle failure summary の薄い再掲は避けるのが current understanding である
 
 ### 候補 2. richer host interface と coverage analysis の入口整理
 

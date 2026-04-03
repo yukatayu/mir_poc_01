@@ -252,3 +252,5 @@ comparison 対象としては有益だが、**いま採る最小 shape ではな
 - `BatchRunSummary` aggregate export の閾値
 - `failure_kind` を将来どこまで細分化するか
 - richer host interface typed 化との接続点
+
+typed bundle failure artifact を `BatchRunSummary` aggregate export がどこまで吸うべきかの narrow comparison は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` に切り出す。

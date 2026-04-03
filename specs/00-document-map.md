@@ -88,7 +88,9 @@
   - production exporter 実装や richer host interface を固定せず、placement boundary だけを与える。
 - `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md`
   - current L2 parser-free PoC の detached artifact で、`host_plan_coverage_failure` を bundle failure artifact 側の typed carrier に昇格させるときの最小 schema を比較する補助文書。
-  - production exporter 実装や richer host interface を固定せず、failure artifact の docs-only schema refinement だけを与える。
+- `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
+  - current L2 parser-free PoC の detached artifact で、bundle failure artifact 側の `failure.failure_kind` discriminator-only schema を `BatchRunSummary` aggregate export がどこまで typed に吸うべきかを比較する補助文書。
+  - production exporter 実装や richer host interface を固定せず、aggregate connection の docs-only boundary judgment だけを与える。
 
 ## 各文書の役割
 
@@ -158,6 +160,8 @@
   - current L2 parser-free PoC の detached artifact で、`host_plan_coverage_failure` をどの layer に置くのが自然かを比較する。
 - `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md`
   - current L2 parser-free PoC の detached artifact で、`host_plan_coverage_failure` を bundle failure artifact 側の typed carrier に昇格させる場合の最小 schema を比較する。
+- `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
+  - current L2 parser-free PoC の detached artifact で、bundle failure artifact 側の `failure.failure_kind` を `BatchRunSummary` aggregate export がどこまで typed に集約すべきかを比較する。
 
 ## レポート
 
@@ -186,6 +190,7 @@
   - parser なし minimal interpreter の bundle-first detached exporter で payload と context をどう split するかの comparison は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md` に置く。
   - parser なし minimal interpreter の `host_plan_coverage_failure` を aggregate-only に残すか、将来 typed carrier として bundle failure artifact 側へ降ろすかの comparison は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
   - parser なし minimal interpreter の `host_plan_coverage_failure` を bundle failure artifact 側の typed carrier に昇格させる場合の最小 schema refinement は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置く。
+  - parser なし minimal interpreter の bundle failure artifact 側 `failure.failure_kind` を `BatchRunSummary` aggregate export がどこまで typed に吸うべきかの comparison は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor
