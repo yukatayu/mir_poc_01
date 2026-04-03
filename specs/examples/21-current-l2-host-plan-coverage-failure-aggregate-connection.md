@@ -230,6 +230,9 @@ docs-only boundary judgment としては、bundle failure artifact の typed cor
 
 - actual exporter API
 - current list / bool shape と typed histogram の migration timing
+- histogram / kind count の field 名と docs-only migration cut の refinement
 - detached artifact 保存先と path policy
 - `failure_kind` を将来どこまで細分化するか
 - richer host interface typed 化との接続点
+
+field 名と migration cut の narrow refinement は `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md` に切り出す。

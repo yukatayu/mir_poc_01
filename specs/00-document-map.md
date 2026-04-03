@@ -91,6 +91,9 @@
 - `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
   - current L2 parser-free PoC の detached artifact で、bundle failure artifact 側の `failure.failure_kind` discriminator-only schema を `BatchRunSummary` aggregate export がどこまで typed に吸うべきかを比較する補助文書。
   - production exporter 実装や richer host interface を固定せず、aggregate connection の docs-only boundary judgment だけを与える。
+- `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
+  - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
+  - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。
 
 ## 各文書の役割
 

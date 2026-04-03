@@ -271,7 +271,17 @@ aggregate export との connection comparison の正本は `specs/examples/21-cu
 
 typed bundle failure artifact を aggregate export が吸うとしても、`BatchRunSummary` は coarse summary に留まるべきである。
 そのため current understanding では、aggregate 側に持たせる typed 集約は `failure_kind` ごとの histogram / kind count までを最小とし、bundle failure summary の薄い再掲は採らない。
-current code の list / bool shape を histogram で置き換えるか併存させるかは、actual exporter API を切る task まで OPEN に残す。
+その naming と migration cut を docs-only でさらに narrow に切るなら、field 名は `bundle_failure_kind_counts` が最小候補である。
+
+- `bundle_` prefix は current `BatchRunSummary` が `discovery_failures` と `bundle_failures` を分けている helper boundary と整合する
+- `failure_kind` は bundle failure artifact 側の `failure.failure_kind` と接続しやすい
+- `counts` は aggregate の coarse summary role に合い、per-bundle summary 再掲を誘発しにくい
+
+ただし current code の list / bool shape をただちに置き換える判断はしない。
+docs-only の最小 migration cut は、`host_plan_coverage_failures` list と `BatchBundleOutcome::Failed.host_plan_coverage_failure` bool を compatibility anchor として残したまま、aggregate 側に `bundle_failure_kind_counts` を additive に併存させる形である。
+置換時期と actual exporter API は引き続き OPEN に残す。
+
+field-name / migration-cut refinement の正本は `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md` に置く。
 
 ## current L2 settled / OPEN
 
