@@ -36,7 +36,7 @@ current L2 parser-free PoC を、
   - `specs/examples/02`〜`10`
   - `specs/examples/11`〜`13`
   - `specs/examples/15`
-  - `specs/examples/16`〜`23`
+  - `specs/examples/16`〜`24`
 - plan mirror
   - `plan/00-index.md`
   - `plan/01-status-at-a-glance.md`
@@ -119,7 +119,14 @@ $ python3 scripts/current_l2_detached_loop.py emit-fixture crates/mir-ast/tests/
 
 ```text
 $ python3 scripts/current_l2_detached_loop.py compare-fixtures crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json --left-label smoke-e3-left --right-label smoke-e3-right --overwrite
+left artifact : /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e3-left/e3-option-admit-chain.detached.json
+right artifact: /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e3-right/e3-option-admit-chain.detached.json
+=== current L2 detached artifact diff ===
+left : /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e3-left/e3-option-admit-chain.detached.json
+right: /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e3-right/e3-option-admit-chain.detached.json
+
 payload_core: exact-compare core matched
+
 note: must_explain と long-form explanation は比較対象に含めない
 ```
 
@@ -127,11 +134,23 @@ note: must_explain と long-form explanation は比較対象に含めない
 
 ```text
 $ python3 scripts/current_l2_detached_loop.py compare-fixtures crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json crates/mir-ast/tests/fixtures/current-l2/e6-write-after-expiry.json --left-label smoke-e3 --right-label smoke-e6 --overwrite
+left artifact : /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e3/e3-option-admit-chain.detached.json
+right artifact: /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e6/e6-write-after-expiry.detached.json
+=== current L2 detached artifact diff ===
+left : /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e3/e3-option-admit-chain.detached.json
+right: /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/bundles/smoke-e6/e6-write-after-expiry.detached.json
+
 payload_core differences:
 - payload_core.terminal_outcome: left="success" right="Reject"
 - payload_core.event_kinds: left=["perform-success"] right=["Reject"]
 - payload_core.non_admissible_metadata: left=[{"option_ref": "owner_writer", "subreason": "admit-miss"}] right=[{"option_ref": "writer", "subreason": "lease-expired"}]
 - payload_core.narrative_explanations: left=[] right=["readonly remains a request/capability mismatch narrative explanation"]
+
+reference-only differences:
+- bundle_context: left={"fixture_id": "e3_option_admit_chain", "fixture_path": "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json", "host_plan_path": "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.host-plan.json", "runtime_requirement": "runtime-with-host-plan"} right={"fixture_id": "e6_write_after_expiry", "fixture_path": "crates/mir-ast/tests/fixtures/current-l2/e6-write-after-expiry.json", "host_plan_path": "crates/mir-ast/tests/fixtures/current-l2/e6-write-after-expiry.host-plan.json", "runtime_requirement": "runtime-with-host-plan"}
+- detached_noncore: left={"steps_executed": 8} right={"steps_executed": 7}
+
+note: must_explain と long-form explanation は比較対象に含めない
 ```
 
 ### docs / diff / tests
@@ -139,7 +158,7 @@ payload_core differences:
 ```text
 $ python3 scripts/validate_docs.py
 Documentation scaffold looks complete.
-Found 107 numbered report(s).
+Found 109 numbered report(s).
 
 $ git diff --check
 <no output>
@@ -171,7 +190,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 - actual exporter API を `lib.rs` / `harness.rs` / example / script のどこで切るか
 - detached artifact 保存先の final policy
 - `bundle_failure_kind_counts` を row list のままにするか object map にするか
-- current bool/list anchor を 언제 actual 実装で置き換えるか
+- current bool/list anchor をいつ actual 実装で置き換えるか
 - compare input discovery をどこまで formalize するか
 - richer host interface の typed carrier 化をどの順で後段へ送るか
 - final parser syntax
