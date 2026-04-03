@@ -83,6 +83,9 @@
 - `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md`
   - current L2 parser-free PoC の bundle-first detached exporter で、何を `RunReport` 由来 payload core に置き、何を `bundle_context` に置き、何を detached non-core とし、何を explanation に残すかを比較する補助文書。
   - production exporter 実装を固定せず、bundle-first artifact の docs-only payload/context split だけを与える。
+- `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md`
+  - current L2 parser-free PoC の detached artifact で `host_plan_coverage_failure` を current では aggregate-only に残しつつ、将来 typed carrier に昇格させるならどの layer が自然かを比較する補助文書。
+  - production exporter 実装や richer host interface を固定せず、placement boundary だけを与える。
 
 ## 各文書の役割
 
@@ -148,6 +151,8 @@
   - current L2 parser-free PoC の detached artifact exporter を narrow に始めるとき、payload core と entry layer をどう切り分けるかを比較する。
 - `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md`
   - current L2 parser-free PoC の bundle-first detached artifact で、payload core / bundle context / detached non-core / human-facing explanation をどう切るかを比較する。
+- `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md`
+  - current L2 parser-free PoC の detached artifact で、`host_plan_coverage_failure` をどの layer に置くのが自然かを比較する。
 
 ## レポート
 
@@ -174,6 +179,7 @@
   - parser なし minimal interpreter の trace / audit 結果を repo 外へ保存する detached artifact 境界の docs-only minimal schema は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md` に置く。
   - parser なし minimal interpreter の detached artifact exporter をどの helper layer から始めるかの comparison は `specs/examples/17-current-l2-detached-exporter-entry-comparison.md` に置く。
   - parser なし minimal interpreter の bundle-first detached exporter で payload と context をどう split するかの comparison は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md` に置く。
+  - parser なし minimal interpreter の `host_plan_coverage_failure` を aggregate-only に残すか、将来 typed carrier として bundle failure artifact 側へ降ろすかの comparison は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor

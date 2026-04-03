@@ -247,6 +247,20 @@ bundle-first exporter をさらに narrow に切る current understanding では
 そのため bundle-first artifact へは入れず、aggregate-only に残すのが current L2 の最小 judgment である。
 正本は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md` に置く。
 
+## `host_plan_coverage_failure` の future typed placement
+
+current detached artifact では `host_plan_coverage_failure` を aggregate-only に残す。
+ただし将来 typed carrier に昇格させるなら、最も自然な layer は **bundle failure artifact 側**である。
+
+理由は次の通りである。
+
+- current code ですでに `BatchBundleOutcome::Failed { host_plan_coverage_failure: bool }` として per-bundle failure classification がある
+- `RunReport` payload core を汚さない
+- `bundle_context` と detached non-core の責務を崩さない
+- `BatchRunSummary` はその typed bundle failure を集約する後段に留められる
+
+正本は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
+
 ## current L2 settled / OPEN
 
 ### current L2 settled

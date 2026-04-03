@@ -140,6 +140,21 @@ bundle-first exporter を採る場合、`run_bundle` 周辺で見えている fi
 
 ここで `host_plan_coverage_failure` を bundle-first artifact 側へ入れない理由は、current code でそれが `run_bundle` 成功 payload から得られる field ではなく、`batch_summary_from_discovery` の failure classification として materialize されるためである。
 
+## `host_plan_coverage_failure` の placement 境界
+
+current helper stack では `host_plan_coverage_failure` を次のように読むのが最も自然である。
+
+- current detached artifact
+  - aggregate-only
+- 将来 typed carrier に昇格させる最小 layer
+  - bundle failure artifact
+- 置かない layer
+  - `RunReport` payload core
+  - `bundle_context`
+  - detached non-core
+
+この切り分けを採る理由は、current code ですでに per-bundle failure bit が `BatchBundleOutcome::Failed` に現れており、成功 payload や bundle identity と混ぜるより failure artifact として独立させる方が責務境界を保ちやすいためである。
+
 ## この先の update 指針
 
 helper layer が変わったら、少なくとも次のどれを更新すべきかを見る。
