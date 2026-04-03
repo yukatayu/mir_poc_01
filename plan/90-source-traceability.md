@@ -87,6 +87,7 @@
 - `0102`
 - `0103`
 - `0104`
+- `0105`
 
 ### named profile catalog と mirror boundary
 
