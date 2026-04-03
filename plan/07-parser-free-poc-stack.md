@@ -265,9 +265,8 @@ current detached artifact では `host_plan_coverage_failure` を aggregate-only
 - ただし typed carrier 自体には context reference や short note を抱かせない
 - short coverage note は必要なら detached non-core の後段 task に回す
 
-正本は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置く。
-
-正本は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
+placement judgment の正本は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
+schema refinement の正本は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置く。
 
 ## current L2 settled / OPEN
 

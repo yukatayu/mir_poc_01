@@ -178,7 +178,9 @@ current L2 では採らない。
 
 ### OPEN
 
-- bundle failure artifact の実際の schema
+- bundle failure artifact の docs-only minimal schema refinement
 - aggregate export がその typed carrier をいつ吸うか
 - richer host interface typed 化との接続点
 - string detection をどの段階で typed reason に置き換えるか
+
+bundle failure artifact の docs-only minimal schema refinement は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に切り出す。
