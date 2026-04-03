@@ -8,3 +8,7 @@ Cargo.lock
 .vscode/
 node_modules/
 coverage/
+
+旧資料_*
+diff_*.md
+
