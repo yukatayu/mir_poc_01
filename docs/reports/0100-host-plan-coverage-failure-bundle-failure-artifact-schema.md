@@ -103,6 +103,7 @@ current L2 parser-free PoC 基盤と 0090 / 0091 / 0092 / 0093 / 0094 / 0095 / 0
 - short failure note を typed core に混ぜる案は、note が detached non-core / explanation に属するため最小 schema としては重い。
 - `payload core` は引き続き `RunReport` 由来の exact-compare core のままとし、success artifact に同名 field を持ち込まない方が helper boundary を保ちやすい。
 - `fixture authoring / elaboration` は依然 independent bottleneck であり、この refinement はそれを直接解消しない。
+- review 記録は `docs/reports/0101-review-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置き、reviewer completion では実質 finding は無かった。
 
 ## 7. Changes in understanding
 
@@ -122,8 +123,10 @@ current L2 parser-free PoC 基盤と 0090 / 0091 / 0092 / 0093 / 0094 / 0095 / 0
 仕様本文コミット hash:
 
 - `d20e82e` `host plan coverage failure の typed schema を整理する`
+- `e823ce5` `host plan coverage failure schema の作業報告を追加する`
+- `d04d4ea` `host plan coverage failure schema の review 記録を更新する`
 
-report 自身の commit hash は self-reference の都合で本文には固定しない。
+この report の follow-up 更新 commit hash は self-reference の都合で本文には固定しない。
 
 ## 9. Suggested next prompt
 
