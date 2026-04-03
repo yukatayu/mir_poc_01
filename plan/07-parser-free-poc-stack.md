@@ -202,6 +202,20 @@ current L2 では、detached trace / audit serialization そのものはまだ p
 
 この docs-only boundary は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md` を正本とする。
 
+## detached exporter entry の current judgment
+
+detached artifact exporter を narrow に始める comparison では、payload core と entry boundary を分けて考える。
+
+- payload core
+  - `RunReport` に最も近い。
+- first exporter entry
+  - `run_bundle` / `BundleRunReport` を採るのが最小である。
+- second stage
+  - `BatchRunSummary` export は bundle-level exporter の後段に回す。
+
+この判断は、bundle が `fixture + sidecar` の自然単位であり、payload core と detached non-core context を分けたまま helper boundary を壊しにくいためである。
+正本は `specs/examples/17-current-l2-detached-exporter-entry-comparison.md` に置く。
+
 ## current L2 settled / OPEN
 
 ### current L2 settled
@@ -211,6 +225,7 @@ current L2 では、detached trace / audit serialization そのものはまだ p
 - hard-coded named profile catalog
 - helper layer ごとの public behavior / thin delegation の分離
 - detached trace / audit artifact の docs-only minimal grouping
+- detached exporter entry の bundle-first judgment
 
 ### OPEN
 

@@ -23,6 +23,7 @@
 - docs-only minimal schema は切れたので、次は `TraceAuditSink` / `RunReport` / bundle summary から thin export boundary をどう置くかを narrow に棚卸しする
 - repo 外保存・再比較・後解析に必要な field を、exact-compare core / detached non-core / human-facing explanation に分けて運ぶ
 - `must_explain` は引き続き prose obligation に残し、exact compare の core を増やしすぎない
+- その比較では、payload core は `RunReport` に寄せつつ、first exporter entry は `run_bundle` / `BundleRunReport` に置くのが current understanding である
 
 ### 候補 2. richer host interface と coverage analysis の入口整理
 
@@ -91,9 +92,10 @@
 
 1. semantics drift regression を増やす
 2. detached trace / audit serialization の最小境界を切る
-3. richer host interface / coverage analysis の入口を narrow に切る
-4. parser 導入前 inventory を作る
-5. その後で parser / richer runtime の判断に進む
+3. detached exporter の first entry を bundle 層から narrow に始める
+4. richer host interface / coverage analysis の入口を narrow に切る
+5. parser 導入前 inventory を作る
+6. その後で parser / richer runtime の判断に進む
 
 ## 今の working assumption
 
@@ -105,6 +107,6 @@
 ## 次にやるべき narrow-scope task 候補
 
 - detached trace / audit の docs-only schema から thin exporter 候補の carrier mapping を切り出す
-- bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しする
+- bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しし、bundle-first exporter entry を docs に固定する
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す

@@ -54,6 +54,11 @@
 - 現在は helper と tests の都合で in-memory compare が中心である
 - `TraceAuditSink` / `RunReport` / bundle summary から detached artifact をどう切り出すかは未決である
 - ただし detached trace / audit と richer host interface の 2 項目を比べると、前者の方が current parser-free PoC を「大量に回して比較する」段階へ進めやすい
+- さらに exporter entry layer の比較では、
+  - payload core は `RunReport` に最も近いが、
+  - first exporter entry は `run_bundle` / `BundleRunReport` に置く方が helper boundary を壊しにくい
+  - `BatchRunSummary` は後段 aggregate export に回す
+  という narrow judgment を current understanding とする
 - docs-only minimal boundary としては、
   - exact-compare core
     - `static_verdict`
@@ -73,6 +78,7 @@
     - long-form audit
   に分けるのが最小である
 - production schema version、保存パス規約、typed coverage carrier は引き続き未決である
+- actual exporter API と aggregate export の順序も引き続き未決である
 
 ### richer host interface
 
