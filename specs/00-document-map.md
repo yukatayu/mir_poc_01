@@ -94,6 +94,9 @@
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。
+- `specs/examples/23-current-l2-detached-export-loop-consolidation.md`
+  - current L2 parser-free PoC の detached exporter chain を 1 箇所へ統合し、payload core / `bundle_context` / detached_noncore / explanation の cut、`host_plan_coverage_failure` の current state、future typed bundle failure artifact と aggregate histogram migration の current understanding を集約する補助文書。
+  - production exporter API や保存先 policy を固定せず、non-production の loop attachment と next narrow step だけを整理する。
 
 ## 各文書の役割
 

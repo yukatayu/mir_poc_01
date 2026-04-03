@@ -89,6 +89,14 @@
 - さらに docs-only schema refinement としては、bundle failure artifact 側の typed core は `failure_kind` discriminator だけに留めるのが最小であり、`bundle_context` 参照や short note は後段に回す
 - aggregate export がその typed bundle failure を吸うとしても、current L2 の最小は `failure_kind` ごとの histogram / kind count までであり、bundle failure summary の再掲は避ける
 - さらに docs-only refinement としては、aggregate typed field 名の最小候補は `bundle_failure_kind_counts` であり、current `host_plan_coverage_failures` list と `BatchBundleOutcome::Failed.host_plan_coverage_failure` bool を compatibility anchor として残した additive coexistence が最小 migration cut である
+- detached exporter consolidation sprint の current state としては、
+  - `specs/examples/23-current-l2-detached-export-loop-consolidation.md` が docs-only judgment の集約文書になり、
+  - `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs` が bundle-first の non-production emitter sketch、
+  - `scripts/current_l2_diff_detached_artifacts.py` が payload core comparison helper、
+  - `plan/15-current-l2-fixture-authoring-template.md` が fixture authoring / elaboration の実務テンプレート
+  である
+- ただしこれは production exporter 完了を意味しない
+- actual exporter API、artifact 保存先と path policy、aggregate typed field の actual implementation timing は引き続き OPEN である
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 
 ### richer host interface

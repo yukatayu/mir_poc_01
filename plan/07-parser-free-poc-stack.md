@@ -202,6 +202,39 @@ current L2 では、detached trace / audit serialization そのものはまだ p
 
 この docs-only boundary は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md` を正本とする。
 
+## detached exporter consolidation の current understanding
+
+detached exporter chain の current docs-only judgment は、`specs/examples/23-current-l2-detached-export-loop-consolidation.md` に 1 箇所へ集約する。
+
+この時点の current understanding は次である。
+
+- payload core は `RunReport` 由来である
+- first exporter entry は `run_bundle` / `BundleRunReport`
+- bundle-first detached artifact は
+  - payload core
+  - `bundle_context`
+  - `detached_noncore`
+  - human-facing explanation
+  に分ける
+- `host_plan_coverage_failure` は current detached artifact では aggregate-only に残す
+- future typed bundle failure artifact の最小核は `failure.failure_kind`
+- aggregate 側で typed 集約を持つなら最小 field 名候補は `bundle_failure_kind_counts`
+
+これは current L2 の runtime semantics ではなく、PoC loop を継続実行しやすくするための docs-only / helper-boundary judgment である。
+
+## non-production の detached export loop aid
+
+current L2 では production exporter API はまだ固定しない。
+ただし PoC loop の入口として、次の non-production helper を置いてよい。
+
+- `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs`
+  - `run_bundle` / `BundleRunReport` を起点に 1 bundle の detached artifact sketch を出す
+- `scripts/current_l2_diff_detached_artifacts.py`
+  - payload core の exact-compare を最小で比較する
+
+これらは current helper stack の public behavior を置き換えない。
+実行補助であり、production API や final serialization contract として扱わない。
+
 ## detached exporter entry の current judgment
 
 detached artifact exporter を narrow に始める comparison では、payload core と entry boundary を分けて考える。

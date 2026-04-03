@@ -29,6 +29,12 @@
 - さらにその docs-only refinement として、bundle failure artifact 側へ切る typed carrier の最小 schema は `failure_kind` discriminator だけに留め、`bundle_context` や short note を typed core に混ぜないのが current understanding である
 - さらにその aggregate connection として、`BatchRunSummary` が typed bundle failure を吸うなら、持たせる typed 集約は `failure_kind` ごとの histogram / kind count までに留め、bundle failure summary の薄い再掲は避けるのが current understanding である
 - さらにその naming / migration refinement として、aggregate 側の最小 field 名候補は `bundle_failure_kind_counts` であり、current `host_plan_coverage_failures` list と `BatchBundleOutcome::Failed.host_plan_coverage_failure` bool を compatibility anchor として残した additive coexistence から始めるのが current understanding である
+- さらに detached exporter consolidation sprint の入口として、
+  - detached exporter chain の current docs-only judgment を `specs/examples/23-current-l2-detached-export-loop-consolidation.md` に集約し、
+  - bundle-first の non-production tiny exporter / emitter、
+  - payload core comparison に絞った minimal diff helper、
+  - fixture authoring / elaboration template
+  を整備して、PoC loop を「保存し、比較し、また 1 本足して回す」入口まで近づける
 
 ### 候補 2. richer host interface と coverage analysis の入口整理
 
@@ -98,9 +104,11 @@
 1. semantics drift regression を増やす
 2. detached trace / audit serialization の最小境界を切る
 3. detached exporter の first entry を bundle 層から narrow に始める
-4. richer host interface / coverage analysis の入口を narrow に切る
-5. parser 導入前 inventory を作る
-6. その後で parser / richer runtime の判断に進む
+4. non-production の bundle-first emitter と core-only diff helper を足す
+5. fixture authoring / elaboration template を整える
+6. richer host interface / coverage analysis の入口を narrow に切る
+7. parser 導入前 inventory を作る
+8. その後で parser / richer runtime の判断に進む
 
 ## 今の working assumption
 
@@ -114,5 +122,6 @@
 - detached trace / audit の docs-only schema から thin exporter 候補の carrier mapping を切り出す
 - bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しし、bundle-first exporter entry を docs に固定する
 - bundle-first artifact の payload core / bundle_context / detached non-core / aggregate-only を docs-only で切り分ける
+- detached exporter chain の docs-only judgment を 1 箇所へ集約し、non-production の tiny emitter / diff helper / fixture template を PoC loop 補助として足す
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す
