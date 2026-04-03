@@ -72,7 +72,7 @@ new spec `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-conn
 
 ### Finding 1
 
-`specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` の current code anchor 説明で、「tests でも summary / batch report 側だけを literal expectation にしている」とあるが、実際の test suite は harness layer でも uncovered oracle call の raw message を直接固定している。`batch_summary_from_discovery()` が `error_text.contains("host plan did not cover all oracle calls")` で分類している以上、この違いは migration scope の見積りを誤らせる。summary / batch report だけの問題ではなく、harness error wording も既存 anchor である。  
+`specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` の current code anchor 説明で、「tests でも summary / batch report 側だけを literal expectation にしている」とあるが、実際の test suite は harness layer でも uncovered oracle call の raw message を直接固定している。`batch_summary_from_discovery()` が `error_text.contains("host plan did not cover all oracle calls")` で分類している以上、この違いは migration scope の見積りを誤らせる。summary / batch report だけの問題ではなく、harness error wording も既存 anchor である。
 Evidence:
 - `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md:27-28`
 - `crates/mir-semantics/src/harness.rs:813-815`
@@ -81,14 +81,14 @@ Evidence:
 
 ### Finding 2
 
-`specs/00-document-map.md` の新規 entry は、spec 21 を aggregate connection comparison と説明した直後に、「failure artifact の docs-only schema refinement だけを与える」と書いており、spec 20 用の説明がそのままぶら下がっている。spec 21 本文は aggregate export との connection judgment を扱っており、failure artifact schema refinement そのものではないため、document map の mirror がずれている。  
+`specs/00-document-map.md` の新規 entry は、spec 21 を aggregate connection comparison と説明した直後に、「failure artifact の docs-only schema refinement だけを与える」と書いており、spec 20 用の説明がそのままぶら下がっている。spec 21 本文は aggregate export との connection judgment を扱っており、failure artifact schema refinement そのものではないため、document map の mirror がずれている。
 Evidence:
 - `specs/00-document-map.md:91-93`
 - `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md:5-7`
 
 ### Finding 3
 
-`plan/90-source-traceability.md` は parser-free PoC report chain に `0102` と `0103` を追加していたが、review 開始時点では対応する report file が存在しなかった。この review で必須 report として `0102` は補われたが、`0103` は依然として存在しない。repo policy では non-trivial task ごとに新 report が必要なので、traceability が先走っていた点は finding のままである。  
+`plan/90-source-traceability.md` は parser-free PoC report chain に `0102` と `0103` を追加していたが、review 開始時点では対応する report file が存在しなかった。この review で必須 report として `0102` は補われたが、`0103` は依然として存在しない。repo policy では non-trivial task ごとに新 report が必要なので、traceability が先走っていた点は finding のままである。
 Evidence:
 - `plan/90-source-traceability.md:84-88`
 - `AGENTS.md:22-25`

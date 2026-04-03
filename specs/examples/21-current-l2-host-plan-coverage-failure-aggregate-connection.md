@@ -50,7 +50,7 @@ aggregate は current code と同様に、`host_plan_coverage_failures` の list
 
 #### 評価
 
-current code / current detached artifact の **現状維持**としては妥当である。  
+current code / current detached artifact の **現状維持**としては妥当である。
 ただし future typed bundle failure artifact を aggregate export がどう吸うべきか、という問いへの答えとしては narrow judgment が足りない。
 
 ### 2. aggregate 側に typed failure histogram / kind count を持つ
@@ -179,14 +179,14 @@ BatchRunSummary aggregate export:
 
 - **aggregate 側に持たせる typed 集約は histogram / kind count までに留める。**
 
-これは「今すぐ implementation する」という意味ではない。  
+これは「今すぐ implementation する」という意味ではない。
 docs-only boundary judgment としては、bundle failure artifact の typed core を aggregate が吸うとしても、それ以上に厚くしないのが最小である。
 
 ### 次点案
 
 - current counter / list 維持を続け、typed aggregate 自体はまだ導入しない。
 
-これは implementation timing としては十分ありうる。  
+これは implementation timing としては十分ありうる。
 ただし docs-only の connection judgment としては、typed aggregate を持たせるなら histogram が最小だと先に言える。
 
 ### 今回は採らない案
