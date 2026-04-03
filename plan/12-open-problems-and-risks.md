@@ -95,9 +95,14 @@
   - `scripts/current_l2_diff_detached_artifacts.py` が payload core comparison helper、
   - `plan/15-current-l2-fixture-authoring-template.md` が fixture authoring / elaboration の実務テンプレート
   である
+- detached validation-loop continuation の current state としては、
+  - `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` が aggregate export 接続と storage/path policy の docs-only 集約文書になり、
+  - `scripts/current_l2_detached_loop.py` が bundle-first emitter と diff helper を束ねる non-production wrapper であり、
+  - current non-production default candidate は `target/current-l2-detached/` である
 - ただしこれは production exporter 完了を意味しない
 - actual exporter API、artifact 保存先と path policy、aggregate typed field の actual implementation timing は引き続き OPEN である
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
+- compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
 
 ### richer host interface
 
@@ -115,6 +120,7 @@
 - selector grammar / alias grammar の長期固定
 - path canonicalization policy
 - detached trace / audit serialization
+- detached validation loop の actual exporter API finalization
 - richer host interface
 - multi-request scheduler
 - `Approximate` / `Compensate`

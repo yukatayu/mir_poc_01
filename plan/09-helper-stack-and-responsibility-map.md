@@ -185,6 +185,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - detached artifact の payload core だけを比較する repo-level helper
   - `must_explain` を比較対象に上げない
   - `bundle_context` / `detached_noncore` は reference-only として読む
+- `scripts/current_l2_detached_loop.py`
+  - bundle-first emitter と diff helper を current validation loop 向けに束ねる薄い wrapper
+  - `target/current-l2-detached/` を current non-production default candidate として扱う
+  - explicit path compare と fixture-to-artifact compare の両方を最小で支える
 
 これらを `harness.rs` 本体へ入れない理由は次の通りである。
 
@@ -193,6 +197,20 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - diff helper を test oracle や host harness implementation と切り離すため
 
 `tests/support` に置かない理由は、test-only support に寄せると repo 外 artifact compare の補助として再利用しにくく、PoC loop の operational aid としての性格が見えにくくなるためである。
+
+さらに current helper boundary では、artifact 保存先 / path policy を helper stack 本体へ埋め込まない。
+現在の最小 cut は次である。
+
+- docs-only の current non-production default candidate
+  - `target/current-l2-detached/`
+- tiny wrapper がその candidate を使うことは許す
+- `run_bundle` / `BatchRunSummary` / `harness.rs` 本体には final storage policy を持ち込まない
+
+aggregate export も同じである。
+
+- `BatchRunSummary` は coarse summary の責務を維持する
+- `bundle_failure_kind_counts` は docs-only の additive typed field 候補として扱う
+- actual aggregate exporter API は `harness.rs` の public behavior と切り分けたまま OPEN に残す
 
 ## この先の update 指針
 

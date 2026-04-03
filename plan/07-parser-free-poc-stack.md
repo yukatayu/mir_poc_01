@@ -231,9 +231,15 @@ current L2 では production exporter API はまだ固定しない。
   - `run_bundle` / `BundleRunReport` を起点に 1 bundle の detached artifact sketch を出す
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
+- `scripts/current_l2_detached_loop.py`
+  - emitter と diff helper を bundle-first validation loop として薄くつなぐ
+  - 1 fixture export と 2 artifact compare を回しやすくする
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。
+
+current non-production default candidate としては、artifact root を `target/current-l2-detached/` に置く。
+ただしこれは final path policy ではなく、repo 相対で generated artifact を散らさず、`.gitignore` 既存境界の内側で loop を回しやすくするための暫定運用である。
 
 ## detached exporter entry の current judgment
 
@@ -315,6 +321,7 @@ docs-only の最小 migration cut は、`host_plan_coverage_failures` list と `
 置換時期と actual exporter API は引き続き OPEN に残す。
 
 field-name / migration-cut refinement の正本は `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md` に置く。
+storage / aggregate API refinement の正本は `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` に置く。
 
 ## current L2 settled / OPEN
 

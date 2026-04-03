@@ -227,6 +227,7 @@ current docs-only judgment の次に narrow に進めてよいのは次である
 1. non-production の tiny bundle-first exporter / emitter
 2. exact-compare core に絞った minimal diff helper
 3. fixture authoring / elaboration template
+4. artifact 保存先 / path policy と aggregate export の最小 API cut を別文書で narrow に整理する
 
 これらは PoC loop を回しやすくする operational aid であり、current L2 の runtime semantics や production host interface を固定しない。
 
@@ -255,4 +256,4 @@ current docs-only judgment の次に narrow に進めてよいのは次である
 - `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md`
 - `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
-
+- `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md`

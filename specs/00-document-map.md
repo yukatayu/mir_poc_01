@@ -97,6 +97,9 @@
 - `specs/examples/23-current-l2-detached-export-loop-consolidation.md`
   - current L2 parser-free PoC の detached exporter chain を 1 箇所へ統合し、payload core / `bundle_context` / detached_noncore / explanation の cut、`host_plan_coverage_failure` の current state、future typed bundle failure artifact と aggregate histogram migration の current understanding を集約する補助文書。
   - production exporter API や保存先 policy を固定せず、non-production の loop attachment と next narrow step だけを整理する。
+- `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md`
+  - current L2 parser-free PoC の detached validation loop で、bundle-first artifact の保存先 / path policy、compare input discovery、aggregate export への接続面、`bundle_failure_kind_counts` の additive coexistence をどう切るかを整理する補助文書。
+  - production exporter API や final path policy を固定せず、non-production loop を回しやすくする最小 storage / aggregate cut だけを与える。
 
 ## 各文書の役割
 
@@ -197,6 +200,7 @@
   - parser なし minimal interpreter の `host_plan_coverage_failure` を aggregate-only に残すか、将来 typed carrier として bundle failure artifact 側へ降ろすかの comparison は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
   - parser なし minimal interpreter の `host_plan_coverage_failure` を bundle failure artifact 側の typed carrier に昇格させる場合の最小 schema refinement は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置く。
   - parser なし minimal interpreter の bundle failure artifact 側 `failure.failure_kind` を `BatchRunSummary` aggregate export がどこまで typed に吸うべきかの comparison は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` に置く。
+  - parser なし minimal interpreter の detached validation loop で、artifact 保存先 / path policy と aggregate export の最小 API cut をどこに置くかの整理は `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor
@@ -207,6 +211,12 @@
   - parser-free minimal interpreter の entry point と evaluation 実装。
 - `crates/mir-semantics/src/harness.rs`
   - host harness、host plan loader、bundle loader、batch runner、selection helper、selection profile helper、named profile catalog の実装 anchor。
+- `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs`
+  - detached validation loop の bundle-first artifact を出す non-production emitter sketch。
+- `scripts/current_l2_diff_detached_artifacts.py`
+  - detached artifact の payload core だけを比較する non-production helper。
+- `scripts/current_l2_detached_loop.py`
+  - bundle-first emitter と diff helper をつなぎ、artifact 保存と compare を最小で回す non-production wrapper。
 - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
   - current L2 parser-free PoC の public behavior coverage を置く。
 

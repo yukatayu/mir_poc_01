@@ -35,6 +35,11 @@
   - payload core comparison に絞った minimal diff helper、
   - fixture authoring / elaboration template
   を整備して、PoC loop を「保存し、比較し、また 1 本足して回す」入口まで近づける
+- その次の continuation として、
+  - aggregate export 接続と artifact 保存先 / path policy の最小 cut を `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` に整理し、
+  - `target/current-l2-detached/` を current non-production default candidate として bundle artifact を保存し、
+  - tiny wrapper で 1 fixture export / 2 artifact compare を回す
+  ところまでを near-term の operational boundary とみなす
 
 ### 候補 2. richer host interface と coverage analysis の入口整理
 
@@ -61,6 +66,7 @@
 |---|---|---|
 | PoC を継続的に回せる状態を維持しつつ drift regression を増やす | 2〜4 task | detached artifact / host coverage の切り方次第で前後する |
 | PoC を「大量に回して比較しやすい」段階へ一段進める | 2〜5 task | detached trace / audit と richer host boundary の優先順位が影響する |
+| detached validation loop の入口を current helper boundary を壊さずに揃える | 1〜3 task | storage/path policy、tiny wrapper、aggregate export の actual narrow cut が主論点 |
 | 文法をある程度比較しながら PoC を前進させる | 4〜8 task | final parser grammar 固定はまだ含まない |
 | parser 導入判断の前提整理 | 5〜10 task | 静的解析や host interface との境界が影響する |
 
@@ -84,6 +90,7 @@
 - batch / profile まで積んでも、結果を repo 外 artifact として残しにくい
 - case 数が増えると「その場で読んで終わる」運用から抜けにくい
 - docs-only minimal schema はできたが、thin export boundary と保存パス規約はまだ未決である
+- current non-production candidate として `target/current-l2-detached/` は置けたが、final path policy と actual aggregate exporter API はまだ未決である
 
 ### 5. review infrastructure の変動
 
@@ -105,10 +112,11 @@
 2. detached trace / audit serialization の最小境界を切る
 3. detached exporter の first entry を bundle 層から narrow に始める
 4. non-production の bundle-first emitter と core-only diff helper を足す
-5. fixture authoring / elaboration template を整える
-6. richer host interface / coverage analysis の入口を narrow に切る
-7. parser 導入前 inventory を作る
-8. その後で parser / richer runtime の判断に進む
+5. bundle artifact 保存先 / path policy と aggregate export の最小 cut を整える
+6. fixture authoring / elaboration template を detached validation loop 前提へ寄せる
+7. richer host interface / coverage analysis の入口を narrow に切る
+8. parser 導入前 inventory を作る
+9. その後で parser / richer runtime の判断に進む
 
 ## 今の working assumption
 
@@ -123,5 +131,6 @@
 - bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しし、bundle-first exporter entry を docs に固定する
 - bundle-first artifact の payload core / bundle_context / detached non-core / aggregate-only を docs-only で切り分ける
 - detached exporter chain の docs-only judgment を 1 箇所へ集約し、non-production の tiny emitter / diff helper / fixture template を PoC loop 補助として足す
+- detached validation loop の storage/path policy、tiny wrapper、aggregate export の actual narrow cut を docs-only から thin operational aid へ進める
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す
