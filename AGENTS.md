@@ -82,6 +82,15 @@ Every report should contain, in this order:
 - `progress.md` は repo 全体の**簡潔な進捗スナップショット**であり、scratchpad ではない。
 - current status / roadmap / remaining steps / major bottleneck / validation loop の到達見込みが変わった task では、同じ task の中で `progress.md` を更新すること。
 - 進捗率や残ステップは rough estimate と明記し、問題が見つかれば巻き戻りうる前提で書くこと。
+- `progress.md` の進捗率は、可能な限り
+  - **論理仕様**
+  - **ユーザ向け仕様**
+  - **実装 / 運用**
+  の 3 軸で並べて書くこと。ここで
+  - 論理仕様 = semantics / invariants / formal boundary の整備度
+  - ユーザ向け仕様 = companion notation / examples / human-facing guidance の整備度
+  - 実装 / 運用 = parser-free PoC / helper / validation loop / 実務フローの整備度
+  を指す。
 - `progress.md` では、決定済みの規範判断を新たに作らない。規範判断の正本は `specs/`、長期参照整理は `plan/` に置くこと。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
