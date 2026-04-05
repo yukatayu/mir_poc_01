@@ -271,6 +271,8 @@
   - `missing_fallback_body` / `disallowed_fallback_placement` の wording と helper-local row family を current next phase でどこまで exact に固定してよいかを比較する。
 - `specs/examples/71-current-l2-try-rollback-first-tranche-shared-carrier-threshold-recheck.md`
   - current first tranche が saved artifact compare need の観点で shared detached carrier threshold を本当に満たしたかを再比較する。
+- `specs/examples/72-current-l2-try-rollback-first-tranche-generic-public-recheck.md`
+  - current actual first tranche から見て、generic structural checker family / public checker API comparison に進む concrete pressure が本当に揃ったかを再比較する。
 
 ## レポート
 

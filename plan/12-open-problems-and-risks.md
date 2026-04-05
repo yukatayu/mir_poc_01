@@ -155,7 +155,8 @@
 - current comparison としては、first-tranche wording / finding family は少なくとも shared carrier threshold の再比較までは exact working set に留めるのが自然であり、helper-local `finding_kind` の rename や alias / synonym 導入は hidden acceptance と premature genericization の risk を増やす
 - current recheck では、saved artifact compare need の narrow version は helper-local checker が `fixture_path` + saved `artifact_path` を直接読むことで満たせるため、shared detached carrier threshold はまだ未充足と読むのが自然である
 - ただし shared detached carrier、generic structural checker family、public checker API にはまだ上げない
-- current remaining risk は、later generic structural checker family comparison で `disallowed_fallback_placement` をどう generalize するか、generic/public checker comparison の entry criteria をどこまで narrow に切るか、である
+- current recheck では、generic structural checker family / public checker API comparison に進む concrete pressure もまだ source-backed でないため、current try/rollback checker line は pause とみなし、second concrete family / shared output contract / verifier handoff pressure のいずれかが見えるまで reopen しないのが自然である
+- current remaining risk は、later generic structural checker family comparison で `disallowed_fallback_placement` をどう generalize するか、second concrete family や shared/public pressure を later にどう inventory 化するか、である
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める
 - その next OPEN は、generic entry の比較を later public checker API comparison と同時に行うべきか、それともその前段で別 helper として試すべきかである

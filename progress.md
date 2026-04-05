@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（try rollback AST helper の shared carrier threshold recheck まで反映）
+最終更新: 2026-04-06（try rollback AST helper の generic/public recheck まで反映）
 
 ## 位置づけ
 
@@ -27,6 +27,7 @@
 - dedicated `TryFallback` / `AtomicCut` AST structural helper については、entry criteria、malformed source placement、helper-local compare contract、field 名、verdict carrier、shared carrier threshold、wrapper family、generic/public checker boundary、first tranche cut、two-fixture pair、slot selectionまでの docs-only chain を前提に、helper-local first tranche を actualize した。
 - current next phase では、dedicated `TryFallback` / `AtomicCut` AST structural helper first tranche の wording / row family を exact working set に留め、`TryFallback` / `missing_fallback_body`、`AtomicCut` / `disallowed_fallback_placement` の rename や alias / synonym 導入は shared carrier threshold の再比較と later generic/public comparison まで deferred にする。
 - current recheck では、saved artifact compare need の narrow version は helper-local checker が saved static gate artifact path を直接 compare することで満たせるため、shared detached carrier threshold はまだ未充足と読む。
+- current recheck では、generic structural checker family / public checker API comparison に進む concrete pressure もまだ不足しているため、current try/rollback checker line は source-backed trigger が出るまで一旦 pause とみなす。
 - current first tranche の actualized scope は
   - `expected_static.checked_try_rollback_structural_verdict`
   - `expected_static.checked_try_rollback_structural_findings`
@@ -224,3 +225,4 @@
 - 2026-04-06 06:03 JST — second malformed static tranche comparison を先に閉じ、current source だけでは concrete decode-valid family がまだ不足しているため actual tranche 追加は保留と判断した。next は first-tranche wording / finding family stability を narrow に点検する段階。
 - 2026-04-06 06:24 JST — first-tranche wording / finding family stability を比較し、`TryFallback` / `missing_fallback_body` と `AtomicCut` / `disallowed_fallback_placement` を current next phase の exact working set に固定した。generic 化や alias は hidden acceptance と premature genericization を招くため deferred にし、next は shared carrier threshold の再比較へ進む段階。
 - 2026-04-06 06:41 JST — first-tranche shared carrier threshold を再比較し、saved artifact compare need の narrow version は helper-local checker が `fixture + artifact_path` で満たせるため、shared detached carrier threshold はまだ未充足と判断した。next は generic structural checker family / public checker API comparison の前提条件を narrow に整理する段階。
+- 2026-04-06 07:02 JST — first-tranche generic/public recheck を行い、second concrete family と shared/public pressure がまだ不足しているため、current try/rollback checker line はここで一旦 pause と判断した。next self-drivable mainline は parser boundary / first parser cut inventory 側へ移す段階。

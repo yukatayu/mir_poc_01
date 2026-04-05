@@ -409,6 +409,18 @@
   - `docs/reports/0230-review-try-rollback-first-tranche-shared-carrier-threshold-recheck.md`
   - `docs/reports/0231-review-try-rollback-first-tranche-shared-carrier-threshold-recheck-followup.md`
 
+### 2026-04-06 try-rollback first-tranche generic/public recheck addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/62-current-l2-try-rollback-ast-helper-generic-family-boundary.md`
+  - `specs/examples/63-current-l2-try-rollback-ast-helper-public-checker-entry-criteria.md`
+  - `specs/examples/68-current-l2-try-rollback-ast-helper-first-tranche-actualization.md`
+  - `specs/examples/71-current-l2-try-rollback-first-tranche-shared-carrier-threshold-recheck.md`
+  - `specs/examples/72-current-l2-try-rollback-first-tranche-generic-public-recheck.md`
+  - `docs/reports/0232-try-rollback-first-tranche-generic-public-recheck.md`
+  - `docs/reports/0233-review-try-rollback-first-tranche-generic-public-recheck.md`
+  - `docs/reports/0234-review-try-rollback-first-tranche-generic-public-recheck-followup.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

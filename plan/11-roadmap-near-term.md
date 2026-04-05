@@ -190,6 +190,7 @@
 - current comparison としては、second malformed static tranche の問い自体は先に閉じるが、actual tranche 追加はまだ行わず、next は helper-local wording / finding family stability comparison に進むのが自然である
 - current comparison としては、first-tranche wording / finding family stability では exact wording / row family を fixed working set として維持し、generic 化や alias 導入は shared carrier threshold の再比較と later generic/public comparison まで deferred にするのが自然である
 - current comparison としては、saved artifact compare need の観点で shared carrier threshold を再比較しても、current helper-local checker が artifact path を直接読めるため threshold はまだ未充足とみなし、next は generic structural checker family / public checker API comparison の前提条件整理へ進むのが自然である
+- current comparison としては、generic structural checker family / public checker API comparison に進む concrete pressure もまだ不足しているため、current try/rollback checker line はここで一旦 pause とみなし、next self-drivable mainline は parser boundary / first parser cut inventory 側へ移すのが自然である
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
