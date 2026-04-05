@@ -261,6 +261,10 @@
   - future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然だという current docs-only judgment を整理する。
 - `specs/examples/66-current-l2-try-rollback-malformed-static-tranche-size.md`
   - future dedicated AST structural helper の malformed static first tranche は `TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を最小とするのが自然だという current docs-only judgment を整理する。
+- `specs/examples/67-current-l2-try-rollback-malformed-pattern-slot-selection.md`
+  - future dedicated AST structural helper の two-fixture first tranche に対して、`TryFallback` slot と `AtomicCut` slot に最初に入れる malformed pattern をどこまで narrow に切るかを整理する。
+- `specs/examples/68-current-l2-try-rollback-ast-helper-first-tranche-actualization.md`
+  - future dedicated AST structural helper の first tranche が helper-local carrier、two-fixture malformed corpus、static gate smoke path まで current repo でどこまで actualize 済みかを整理する。
 
 ## レポート
 
@@ -349,9 +353,12 @@
   - detached static gate artifact から `expected_static.checked_reasons` 候補を display-only で返す non-production helper。
 - `scripts/current_l2_reason_codes_assist.py`
   - detached static gate artifact の helper-local / reference-only `reason_codes` を future typed carrier 候補 row として display-only で返す non-production helper。
+- `scripts/current_l2_try_rollback_structural_checker.py`
+  - `TryFallback` / `AtomicCut` dedicated AST structural helper first tranche の helper-local compare を static gate artifact loop にだけ接続する non-production helper。
 - `scripts/current_l2_detached_loop.py`
   - detached validation loop の non-production wrapper。
   - `smoke-fixture` subcommand により、1 fixture を bundle export / optional reference compare / single-fixture aggregate smoke までまとめて回せる。
+  - `smoke-try-rollback-structural-checker` subcommand により、1 fixture の static gate artifact を保存して dedicated try/rollback structural helper first tranche を回せる。
 - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
   - current L2 parser-free PoC の public behavior coverage を置く。
 

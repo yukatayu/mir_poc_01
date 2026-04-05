@@ -259,6 +259,24 @@
   - `specs/examples/52-current-l2-try-rollback-fourth-checker-spike-comparison.md`
   - `specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md`
 
+### 2026-04-06 try-rollback AST helper first tranche actualization addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`specs/examples/02-current-l2-ast-fixture-schema.md`、`plan/07-parser-free-poc-stack.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/67-current-l2-try-rollback-malformed-pattern-slot-selection.md`
+  - `specs/examples/68-current-l2-try-rollback-ast-helper-first-tranche-actualization.md`
+  - `docs/reports/0220-try-rollback-malformed-pattern-slot-selection.md`
+  - `docs/reports/0221-review-try-rollback-malformed-pattern-slot-selection.md`
+  - `docs/reports/0222-try-rollback-ast-helper-first-tranche-actualization.md`
+  - `docs/reports/0223-review-try-rollback-ast-helper-first-tranche-actualization.md`
+  - `scripts/current_l2_try_rollback_structural_checker.py`
+  - `scripts/current_l2_detached_loop.py`
+  - `scripts/tests/test_current_l2_try_rollback_structural_checker.py`
+  - `scripts/tests/test_current_l2_static_gate_loop.py`
+  - `crates/mir-semantics/src/lib.rs`
+  - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+  - `crates/mir-ast/tests/fixtures/current-l2/e23-malformed-try-fallback-missing-fallback-body.json`
+  - `crates/mir-ast/tests/fixtures/current-l2/e24-malformed-atomic-cut-fallback-placement.json`
+
 ### 2026-04-06 try-rollback AST structural helper entry-criteria addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。

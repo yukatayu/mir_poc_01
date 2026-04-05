@@ -12,6 +12,7 @@ import current_l2_checked_reasons_assist as checked_reasons_assist
 import current_l2_capability_checker as capability_checker
 import current_l2_missing_option_checker as missing_option_checker
 import current_l2_same_lineage_checker as same_lineage_checker
+import current_l2_try_rollback_structural_checker as try_rollback_structural_checker
 import current_l2_reason_code_readiness as reason_code_readiness
 import current_l2_reason_codes_assist as reason_codes_assist
 
@@ -221,6 +222,15 @@ def check_missing_option_second_checker(fixture_path: Path, artifact_path: Path)
 
 def check_capability_third_checker(fixture_path: Path, artifact_path: Path) -> int:
     return capability_checker.main([str(fixture_path), str(artifact_path)])
+
+
+def check_try_rollback_structural_checker(
+    fixture_path: Path,
+    artifact_path: Path,
+) -> int:
+    return try_rollback_structural_checker.main(
+        [str(fixture_path), str(artifact_path)]
+    )
 
 
 def copy_fixture_bundle_to_directory(fixture_path: Path, output_dir: Path) -> None:
@@ -537,6 +547,24 @@ def command_smoke_capability_checker(args: argparse.Namespace) -> int:
     return check_capability_third_checker(fixture_path, output_path)
 
 
+def command_smoke_try_rollback_structural_checker(args: argparse.Namespace) -> int:
+    fixture_path = Path(args.fixture_path)
+    output_path = (
+        Path(args.output_path)
+        if args.output_path
+        else static_gate_artifact_path(
+            Path(args.artifact_root), args.run_label, fixture_path
+        )
+    )
+
+    emit_exit = emit_static_gate(fixture_path, output_path, args.overwrite)
+    if emit_exit != 0:
+        return emit_exit
+
+    print(f"static gate artifact: {output_path}", flush=True)
+    return check_try_rollback_structural_checker(fixture_path, output_path)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -829,6 +857,37 @@ def build_parser() -> argparse.ArgumentParser:
     )
     smoke_capability_checker_parser.set_defaults(
         func=command_smoke_capability_checker
+    )
+
+    smoke_try_rollback_structural_checker_parser = subparsers.add_parser(
+        "smoke-try-rollback-structural-checker",
+        help=(
+            "1 fixture の static gate artifact を保存し、dedicated try/rollback "
+            "structural helper first tranche をその artifact に対して回す"
+        ),
+    )
+    smoke_try_rollback_structural_checker_parser.add_argument("fixture_path")
+    smoke_try_rollback_structural_checker_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    smoke_try_rollback_structural_checker_parser.add_argument(
+        "--run-label",
+        default="try-rollback-structural",
+        help="static gate artifact を保存する run label",
+    )
+    smoke_try_rollback_structural_checker_parser.add_argument(
+        "--output-path",
+        help="explicit output path; when omitted, static gate path is derived from root/label/stem",
+    )
+    smoke_try_rollback_structural_checker_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifacts を明示的に上書きする",
+    )
+    smoke_try_rollback_structural_checker_parser.set_defaults(
+        func=command_smoke_try_rollback_structural_checker
     )
 
     compare_fixtures_parser = subparsers.add_parser(

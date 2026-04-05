@@ -607,6 +607,14 @@ fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
         "e20-malformed-late-capability-strengthening.json",
     ))
     .unwrap();
+    let malformed_missing_fallback_body = load_fixture_from_path(fixture_path(
+        "e23-malformed-try-fallback-missing-fallback-body.json",
+    ))
+    .unwrap();
+    let malformed_atomic_cut_fallback_placement = load_fixture_from_path(fixture_path(
+        "e24-malformed-atomic-cut-fallback-placement.json",
+    ))
+    .unwrap();
     let underdeclared =
         load_fixture_from_path(fixture_path("e5-underdeclared-lineage.json")).unwrap();
     let underdeclared_target_missing = load_fixture_from_path(fixture_path(
@@ -645,6 +653,14 @@ fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
         StaticGateVerdict::Malformed
     );
     assert_eq!(
+        static_gate(&malformed_missing_fallback_body),
+        StaticGateVerdict::Malformed
+    );
+    assert_eq!(
+        static_gate(&malformed_atomic_cut_fallback_placement),
+        StaticGateVerdict::Malformed
+    );
+    assert_eq!(
         static_gate(&underdeclared),
         StaticGateVerdict::Underdeclared
     );
@@ -663,6 +679,8 @@ fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
         &malformed_missing_predecessor,
         &malformed_missing_successor,
         &malformed_target_mismatch,
+        &malformed_missing_fallback_body,
+        &malformed_atomic_cut_fallback_placement,
         &underdeclared,
         &underdeclared_target_missing,
     ] {
@@ -1184,9 +1202,9 @@ fn harness_rejects_uncovered_oracle_calls_without_synthetic_success_commit() {
 fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
     let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
 
-    assert_eq!(discovery.total_candidates, 22);
+    assert_eq!(discovery.total_candidates, 24);
     assert_eq!(discovery.failures.len(), 0);
-    assert_eq!(discovery.bundles.len(), 22);
+    assert_eq!(discovery.bundles.len(), 24);
     assert_eq!(
         discovery
             .bundles
@@ -1202,7 +1220,7 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
             .iter()
             .filter(|bundle| bundle.runtime_requirement == FixtureRuntimeRequirement::StaticOnly)
             .count(),
-        11
+        13
     );
 }
 
@@ -1210,10 +1228,10 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
 fn run_directory_returns_summary_for_current_l2_fixture_dir() {
     let summary = run_directory(fixture_dir()).unwrap();
 
-    assert_eq!(summary.total_bundles, 22);
+    assert_eq!(summary.total_bundles, 24);
     assert_eq!(summary.runtime_bundles, 11);
-    assert_eq!(summary.static_only_bundles, 11);
-    assert_eq!(summary.passed, 22);
+    assert_eq!(summary.static_only_bundles, 13);
+    assert_eq!(summary.passed, 24);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -1359,9 +1377,9 @@ fn selection_static_only_keeps_only_static_bundles() {
         })
         .collect();
 
-    assert_eq!(selected.total_candidates, 11);
+    assert_eq!(selected.total_candidates, 13);
     assert_eq!(selected.runtime_bundles, 0);
-    assert_eq!(selected.static_only_bundles, 11);
+    assert_eq!(selected.static_only_bundles, 13);
     assert_eq!(selected.failures.len(), 0);
     assert_eq!(
         stems,
@@ -1375,6 +1393,8 @@ fn selection_static_only_keeps_only_static_bundles() {
             "e18-malformed-missing-successor-option",
             "e19-malformed-target-mismatch",
             "e20-malformed-late-capability-strengthening",
+            "e23-malformed-try-fallback-missing-fallback-body",
+            "e24-malformed-atomic-cut-fallback-placement",
             "e4-malformed-lineage",
             "e5-underdeclared-lineage",
         ]
@@ -1564,8 +1584,8 @@ fn run_directory_profiled_static_only_includes_profile_name_in_summary() {
     let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
 
     assert_eq!(summary.profile_name, "static-all");
-    assert_profile_selected_counts(&summary, 11, 0, 11);
-    assert_eq!(summary.passed, 11);
+    assert_profile_selected_counts(&summary, 13, 0, 13);
+    assert_eq!(summary.passed, 13);
     assert_eq!(summary.failed, 0);
 }
 

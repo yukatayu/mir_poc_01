@@ -414,6 +414,57 @@ class StaticGateLoopTests(unittest.TestCase):
         self.assertEqual(emitted[0], (fixture_path, expected_artifact, True))
         self.assertEqual(checked, [[str(fixture_path), str(expected_artifact)]])
 
+    def test_smoke_try_rollback_structural_checker_emits_artifact_then_delegates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "left.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+
+            emitted: list[tuple[Path, Path, bool]] = []
+            checked: list[tuple[Path, Path]] = []
+
+            original_emit = loop.emit_static_gate
+            original_checker = loop.check_try_rollback_structural_checker
+
+            def fake_emit(fixture: Path, output: Path, overwrite: bool) -> int:
+                emitted.append((fixture, output, overwrite))
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_text("{}", encoding="utf-8")
+                return 0
+
+            def fake_check(fixture: Path, artifact: Path) -> int:
+                checked.append((fixture, artifact))
+                return 0
+
+            loop.emit_static_gate = fake_emit
+            loop.check_try_rollback_structural_checker = fake_check
+            try:
+                exit_code = loop.command_smoke_try_rollback_structural_checker(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="try-rollback-structural",
+                        output_path=None,
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_static_gate = original_emit
+                loop.check_try_rollback_structural_checker = original_checker
+
+        self.assertEqual(exit_code, 0)
+        expected_artifact = (
+            temp_root
+            / "artifacts"
+            / "static-gates"
+            / "try-rollback-structural"
+            / "left.static-gate.json"
+        )
+        self.assertEqual(emitted, [(fixture_path, expected_artifact, True)])
+        self.assertEqual(checked, [(fixture_path, expected_artifact)])
+
 
 if __name__ == "__main__":
     unittest.main()

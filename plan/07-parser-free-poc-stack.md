@@ -240,6 +240,35 @@ detached exporter chain の current docs-only judgment は、`specs/examples/23-
 
 これは current L2 の runtime semantics ではなく、PoC loop を継続実行しやすくするための docs-only / helper-boundary judgment である。
 
+## dedicated try/rollback AST structural helper first tranche の current state
+
+current repo では、`TryFallback` / `AtomicCut` dedicated AST structural helper の first tranche が helper-local family として actualize 済みである。
+
+- fixture-side additive fields
+  - `expected_static.checked_try_rollback_structural_verdict`
+  - `expected_static.checked_try_rollback_structural_findings`
+- current helper-local verdict
+  - `no_findings`
+  - `findings_present`
+- current helper-local finding rows
+  - `TryFallback` / `missing_fallback_body`
+  - `AtomicCut` / `disallowed_fallback_placement`
+- current static malformed corpus
+  - `e23-malformed-try-fallback-missing-fallback-body`
+  - `e24-malformed-atomic-cut-fallback-placement`
+- current loop insertion
+  - static gate artifact loop の family-specific smoke
+  - `scripts/current_l2_detached_loop.py smoke-try-rollback-structural-checker`
+
+ただしこれは helper-local first tranche に留まる。
+current state でも次はまだ actualize しない。
+
+- shared detached carrier
+- bundle-first runtime artifact mirror
+- generic structural checker family
+- public checker API
+- `must_explain` の machine-check 昇格
+
 ## non-production の detached export loop aid
 
 current L2 では production exporter API はまだ固定しない。
@@ -277,7 +306,8 @@ current L2 では production exporter API はまだ固定しない。
   - `smoke-same-lineage-checker` により、1 fixture の static gate artifact を保存し、same-lineage first checker spike をその artifact に対して回せる
   - `smoke-missing-option-checker` により、1 fixture の static gate artifact を保存し、missing-option second checker spike をその artifact に対して回せる
   - `smoke-capability-checker` により、1 fixture の static gate artifact を保存し、capability third checker spike をその artifact に対して回せる
-  - future dedicated `TryFallback` / `AtomicCut` AST structural helper を loop へ入れるとしても、bundle-first runtime path ではなく、static gate artifact を emit して helper-local compare を回す dedicated smoke family に留めるのが current docs-only cut である
+  - `smoke-try-rollback-structural-checker` により、1 fixture の static gate artifact を保存し、dedicated try/rollback structural helper first tranche をその artifact に対して回せる
+  - current actual cut でも、dedicated `TryFallback` / `AtomicCut` AST structural helper first tranche は bundle-first runtime path ではなく、static gate artifact を emit して helper-local compare を回す dedicated smoke family に留める
   - compare helper の exit code `1` は informational difference として許容し、helper failure だけを non-zero で止める
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ作る
@@ -303,6 +333,10 @@ current L2 では production exporter API はまだ固定しない。
   - second checker spike として、fixture-side `checked_reason_codes` と static gate artifact の actual reason rows を読み、missing-option family だけを narrow compare する helper-local checker spike
 - `scripts/current_l2_capability_checker.py`
   - third checker spike として、fixture-side `checked_reason_codes` と static gate artifact の actual reason rows を読み、capability family だけを narrow compare する helper-local checker spike
+- `scripts/current_l2_try_rollback_structural_checker.py`
+  - `TryFallback` / `AtomicCut` dedicated AST structural helper first tranche の helper-local compare
+  - fixture-side `checked_try_rollback_structural_verdict` / `checked_try_rollback_structural_findings` と static gate artifact `checker_core.static_verdict` を照合する
+  - `missing_fallback_body` と `disallowed_fallback_placement` だけを current first-tranche finding family として扱う
 - `scripts/current_l2_family_checker_support.py`
   - same-lineage / missing-option / capability の 3 checker spike で重複する parser / filter / status / stdout rendering をまとめる non-production support module
   - family facade script と detached loop wrapper command 名は残し、generic checker-side shared entry にはしない

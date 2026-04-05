@@ -1,0 +1,64 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e23_malformed_try_fallback_missing_fallback_body",
+  "source_example_id": "E23",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "TryFallback",
+            "body": [
+              {
+                "kind": "PerformOn",
+                "op": "stage_profile_patch",
+                "target": "profile_draft",
+                "contract": {
+                  "require": [
+                    {
+                      "kind": "atom",
+                      "name": "write"
+                    }
+                  ],
+                  "ensure": []
+                }
+              }
+            ],
+            "fallback_body": []
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "reasons": [
+      "empty fallback body is a structural malformed floor for TryFallback and should stop before runtime evaluation"
+    ],
+    "checked_try_rollback_structural_verdict": "findings_present",
+    "checked_try_rollback_structural_findings": [
+      {
+        "subject_kind": "TryFallback",
+        "finding_kind": "missing_fallback_body"
+      }
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "static malformed should stop before any try-body evaluation"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "TryFallback requires a non-empty fallback body"
+    ]
+  }
+}

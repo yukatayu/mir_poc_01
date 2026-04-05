@@ -68,7 +68,8 @@
 - current docs-only refinement としては、future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper の minimal malformed static family tranche は `TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を最小とするのが自然である
-- 次の narrow question は、その two-fixture first tranche の `TryFallback` slot と `AtomicCut` slot に最初に入れる malformed pattern をどこまで narrow に切るかである
+- current actualization としては、その two-fixture first tranche の slot selection を `empty fallback_body -> missing_fallback_body` / `fallback_body AtomicCut -> disallowed_fallback_placement` に固定し、helper code / fixture-side fields / `e23` / `e24` / `smoke-try-rollback-structural-checker` まで actualize 済みである
+- 次の narrow question は、second malformed static tranche を足すべきか、それとも helper-local wording / finding family を first tranche のまま数回反復してから shared carrier / public checker comparison へ進むべきかである
 
 ### 候補 4. parser 導入前の boundary inventory
 
@@ -181,6 +182,11 @@
 - current cut では、same-lineage / missing-option / capability の 3 spike に shared support helper を導入しつつ family facade script を残すところまでは actualize 済みである
 - current docs-only judgment では、checker-side shared family compare entry はまだ切らず、family facade 維持で止める
 - 次の narrow step は、public checker cut comparison に入る前に、generic entry を later public checker API comparison と同時に扱うかどうかを見極めることである
+- `TryFallback` / `AtomicCut` dedicated AST structural helper の first tranche は actualize 済みなので、次に自走で進めるなら
+  - second malformed static tranche の候補比較
+  - first-tranche wording / row family の drift 点検
+  - saved artifact compare need が shared carrier threshold を本当に満たすかの再比較
+  の順で narrow に進めるのが自然である
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る

@@ -144,7 +144,15 @@
 - current docs-only refinement では、future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然である
 - current docs-only refinement では、future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然である
 - current docs-only refinement では、future dedicated AST structural helper の minimal malformed static family tranche は `TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を最小とするのが自然である
-- actual helper 実装は、これらの entry criteria が source-backed に揃うまで切らない
+- current actualization では、この first tranche が helper-local dedicated family として actualize 済みであり、
+  - `checked_try_rollback_structural_verdict`
+  - `checked_try_rollback_structural_findings`
+  - `e23`
+  - `e24`
+  - `smoke-try-rollback-structural-checker`
+  まで current repo に入っている
+- ただし shared detached carrier、generic structural checker family、public checker API にはまだ上げない
+- current remaining risk は、helper-local wording / finding family が second tranche や later public comparison でもそのまま耐えるか、saved artifact compare need が shared carrier threshold を本当に満たすか、である
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める
 - その next OPEN は、generic entry の比較を later public checker API comparison と同時に行うべきか、それともその前段で別 helper として試すべきかである

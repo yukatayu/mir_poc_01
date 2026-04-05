@@ -141,6 +141,36 @@ pub enum StaticGateVerdict {
     Underdeclared,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+enum TryRollbackStructuralVerdict {
+    #[serde(rename = "no_findings")]
+    NoFindings,
+    #[serde(rename = "findings_present")]
+    FindingsPresent,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+enum TryRollbackStructuralSubjectKind {
+    #[serde(rename = "TryFallback")]
+    TryFallback,
+    #[serde(rename = "AtomicCut")]
+    AtomicCut,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+enum TryRollbackStructuralFindingKind {
+    #[serde(rename = "missing_fallback_body")]
+    MissingFallbackBody,
+    #[serde(rename = "disallowed_fallback_placement")]
+    DisallowedFallbackPlacement,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+struct TryRollbackStructuralFindingRow {
+    subject_kind: TryRollbackStructuralSubjectKind,
+    finding_kind: TryRollbackStructuralFindingKind,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct StaticGateResult {
     pub verdict: StaticGateVerdict,
@@ -283,6 +313,12 @@ pub struct ExpectedStatic {
     pub checked_reasons: Option<Vec<String>>,
     #[serde(default)]
     pub checked_reason_codes: Option<Vec<StaticReasonCodeRow>>,
+    #[serde(default)]
+    #[allow(dead_code)]
+    checked_try_rollback_structural_verdict: Option<TryRollbackStructuralVerdict>,
+    #[serde(default)]
+    #[allow(dead_code)]
+    checked_try_rollback_structural_findings: Option<Vec<TryRollbackStructuralFindingRow>>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -1424,9 +1460,46 @@ pub fn static_gate_detailed(fixture: &CurrentL2Fixture) -> StaticGateResult {
         }
     }
 
+    collect_try_rollback_structural_reasons(&fixture.program.body, false, &mut reasons);
+    if reasons.iter().any(|reason| {
+        reason == "try fallback body must not be empty"
+            || reason == "atomic cut may not appear inside fallback body"
+    }) {
+        verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
+    }
+
     reasons.sort();
 
     StaticGateResult { verdict, reasons }
+}
+
+fn collect_try_rollback_structural_reasons(
+    statements: &[Statement],
+    in_fallback_body: bool,
+    reasons: &mut Vec<String>,
+) {
+    for statement in statements {
+        match statement {
+            Statement::PlaceBlock { body, .. } => {
+                collect_try_rollback_structural_reasons(body, in_fallback_body, reasons);
+            }
+            Statement::TryFallback { body, fallback_body } => {
+                if fallback_body.is_empty() {
+                    reasons.push("try fallback body must not be empty".to_string());
+                }
+                collect_try_rollback_structural_reasons(body, in_fallback_body, reasons);
+                collect_try_rollback_structural_reasons(fallback_body, true, reasons);
+            }
+            Statement::AtomicCut if in_fallback_body => {
+                reasons.push("atomic cut may not appear inside fallback body".to_string());
+            }
+            Statement::PerformOn { .. }
+            | Statement::PerformVia { .. }
+            | Statement::OptionDecl { .. }
+            | Statement::ChainDecl { .. }
+            | Statement::AtomicCut => {}
+        }
+    }
 }
 
 pub fn run_to_completion<P, E, Commit>(
@@ -1530,4 +1603,67 @@ fn display_scope(scope: &[String]) -> String {
 
 pub fn crate_name() -> &'static str {
     "mir_semantics"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::path::PathBuf;
+
+    fn fixture_path(name: &str) -> PathBuf {
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../mir-ast/tests/fixtures/current-l2")
+            .join(name)
+    }
+
+    #[test]
+    fn try_rollback_structural_first_tranche_fixtures_load_with_dedicated_expected_fields() {
+        let missing_fallback_body = load_fixture_from_path(&fixture_path(
+            "e23-malformed-try-fallback-missing-fallback-body.json",
+        ))
+        .expect("fixture should load");
+        assert_eq!(
+            missing_fallback_body.fixture_id,
+            "e23_malformed_try_fallback_missing_fallback_body"
+        );
+        assert_eq!(
+            missing_fallback_body
+                .expected_static
+                .checked_try_rollback_structural_verdict,
+            Some(TryRollbackStructuralVerdict::FindingsPresent)
+        );
+        assert_eq!(
+            missing_fallback_body
+                .expected_static
+                .checked_try_rollback_structural_findings,
+            Some(vec![TryRollbackStructuralFindingRow {
+                subject_kind: TryRollbackStructuralSubjectKind::TryFallback,
+                finding_kind: TryRollbackStructuralFindingKind::MissingFallbackBody,
+            }])
+        );
+
+        let atomic_cut_fallback_placement = load_fixture_from_path(&fixture_path(
+            "e24-malformed-atomic-cut-fallback-placement.json",
+        ))
+        .expect("fixture should load");
+        assert_eq!(
+            atomic_cut_fallback_placement.fixture_id,
+            "e24_malformed_atomic_cut_fallback_placement"
+        );
+        assert_eq!(
+            atomic_cut_fallback_placement
+                .expected_static
+                .checked_try_rollback_structural_verdict,
+            Some(TryRollbackStructuralVerdict::FindingsPresent)
+        );
+        assert_eq!(
+            atomic_cut_fallback_placement
+                .expected_static
+                .checked_try_rollback_structural_findings,
+            Some(vec![TryRollbackStructuralFindingRow {
+                subject_kind: TryRollbackStructuralSubjectKind::AtomicCut,
+                finding_kind: TryRollbackStructuralFindingKind::DisallowedFallbackPlacement,
+            }])
+        );
+    }
 }
