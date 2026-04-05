@@ -316,6 +316,21 @@
   - `docs/reports/0200-try-rollback-ast-helper-expected-field-name.md`
   - `docs/reports/0201-review-try-rollback-ast-helper-expected-field-name.md`
 
+### 2026-04-06 try-rollback AST helper detached-loop insertion addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md`
+  - `specs/examples/49-current-l2-shared-family-checker-support-helper.md`
+  - `specs/examples/50-current-l2-generic-family-checker-entry-comparison.md`
+  - `specs/examples/56-current-l2-try-rollback-ast-helper-compare-contract.md`
+  - `specs/examples/57-current-l2-try-rollback-ast-helper-expected-field-name.md`
+  - `specs/examples/58-current-l2-try-rollback-ast-helper-detached-loop-insertion.md`
+  - `docs/reports/0202-try-rollback-ast-helper-detached-loop-insertion.md`
+  - `docs/reports/0203-review-try-rollback-ast-helper-detached-loop-insertion.md`
+  - `scripts/current_l2_detached_loop.py`
+  - `crates/mir-semantics/examples/current_l2_emit_static_gate.rs`
+  - `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

@@ -243,6 +243,8 @@
   - future dedicated AST structural helper を切る場合の compare contract は、current phase では row-family 流用や detached artifact shared carrier 先行ではなく、helper-local dedicated contract から始めるのが自然だという current docs-only judgment を整理する。
 - `specs/examples/57-current-l2-try-rollback-ast-helper-expected-field-name.md`
   - future dedicated AST structural helper を切る場合の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も helper-local row list に留めるのが自然だという current docs-only judgment を整理する。
+- `specs/examples/58-current-l2-try-rollback-ast-helper-detached-loop-insertion.md`
+  - future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留めるのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 

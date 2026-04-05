@@ -59,7 +59,8 @@
 - current docs-only refinement としては、runtime representative `E2` / `E21` / `E22` が current phase の evidence として十分強く、malformed static family はまだ actual corpus に増やさないのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper を切る場合の compare contract は helper-local dedicated contract から始め、row-family 流用や detached artifact shared carrier 先行は避けるのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も `subject_kind` / `finding_kind` の helper-local row list に留めるのが自然である
-- 次の narrow question は、future dedicated AST structural helper を detached validation loop のどこへ差し込むのが最小かである
+- current docs-only refinement としては、future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留めるのが自然である
+- 次の narrow question は、future dedicated AST structural helper の structural verdict carrier / name をどこまで narrow に切るかである
 
 ### 候補 4. parser 導入前の boundary inventory
 

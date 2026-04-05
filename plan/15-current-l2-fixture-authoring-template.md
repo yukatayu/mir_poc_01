@@ -77,6 +77,7 @@
 - future typed carrier 候補 row を見たいときは、`scripts/current_l2_detached_loop.py suggest-reason-codes` で `detached_noncore.reason_codes` の display-only suggestion を確認してよい
 - tranche 単位で static-only fixture corpus の current split を見たいときは、`scripts/current_l2_detached_loop.py scan-reason-code-readiness <fixture-dir> --run-label <label> --overwrite` を使い、`checked_reasons` adoption、`reason_codes` suggestion availability、stable coexistence anchor 数、follow-up 必要 fixture をまとめて確認してよい
 - current stable cluster tranche では `checked_reason_codes` が fixture schema の field になってよく、対象は stable inventory 8 kind に限る
+- future dedicated `TryFallback` / `AtomicCut` AST structural helper を actualize するなら、loop 接続の第一候補は bundle-first runtime path ではなく static gate artifact emit のあとに helper-local compare を回す dedicated smoke family である
 - duplicate declaration cluster の `reason_codes` suggestion は引き続き absent であり、future row 候補としても current tranche には上げない
 - helper は current fixture schema に無い `expected_static.reason_codes` を見つけたら fail-closed に止まる
 - 同様に、current helper stack では `expected_static.checked_try_rollback_structural_findings` を actual field としてまだ受けない

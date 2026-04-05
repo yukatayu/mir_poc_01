@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（try rollback AST helper の expected field 名まで整理）
+最終更新: 2026-04-06（try rollback AST helper の detached-loop insertion まで整理）
 
 ## 位置づけ
 
@@ -28,6 +28,7 @@
 - さらに current docs-only refinement として、runtime representative `E2` / `E21` / `E22` が current phase の evidence として十分強いため、`TryFallback` / `AtomicCut` の malformed static family はまだ actual corpus に増やさない current judgment を固定した。
 - さらに current docs-only refinement として、future dedicated AST structural helper の compare contract は current phase では helper-local dedicated contract から始め、row-family 流用や detached artifact shared carrier 先行はしない current judgment を固定した。
 - さらに current docs-only refinement として、future dedicated AST structural helper の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も `subject_kind` / `finding_kind` の helper-local row list に留める current judgment を固定した。
+- さらに current docs-only refinement として、future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留める current judgment を固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - static-only malformed / underdeclared fixture に対しては、`scripts/current_l2_detached_loop.py suggest-checked-reasons` から actual static gate `checker_core.reasons` を見て `expected_static.checked_reasons` 候補を display-only で確認できるようになった。helper は fixture JSON を自動更新しない。
 - helper-local / reference-only `detached_noncore.reason_codes` についても、`scripts/current_l2_detached_loop.py suggest-reason-codes` から future typed carrier 候補 row を display-only で確認できるようになった。これは current fixture schema の field ではなく、reference-only assist に留まり、unsupported fixture-side typed field を見つけたら fail-closed に止まる。
@@ -203,3 +204,4 @@
 - 2026-04-06 03:45 JST — `TryFallback` / `AtomicCut` の malformed static family actualization を比較し、current phase では runtime representative `E2` / `E21` / `E22` を current evidence として維持し、malformed static family はまだ actual corpus に増やさない judgment を整理した。次は future dedicated AST structural helper の compare contract を切る段階。
 - 2026-04-06 04:02 JST — future dedicated AST structural helper の compare contract を比較し、current phase では row-family 流用や detached artifact shared carrier 先行を避け、helper-local dedicated compare から始める judgment を整理した。次は expected field 名と focused compare shape を narrow に詰める段階。
 - 2026-04-06 03:17 JST — future dedicated AST structural helper の expected field 名と focused compare shape を比較し、`expected_static.checked_try_rollback_structural_findings` と `subject_kind` / `finding_kind` の helper-local row list を current docs-only minimum に固定した。次は dedicated helper を detached validation loop のどこへ差し込むのが最小かを比べる段階。
+- 2026-04-06 03:24 JST — future dedicated AST structural helper の loop 差し込み位置を比較し、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留める current judgment を固定した。次は structural verdict carrier / name をどこまで narrow に切るかを比べる段階。

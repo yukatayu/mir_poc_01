@@ -277,6 +277,7 @@ current L2 では production exporter API はまだ固定しない。
   - `smoke-same-lineage-checker` により、1 fixture の static gate artifact を保存し、same-lineage first checker spike をその artifact に対して回せる
   - `smoke-missing-option-checker` により、1 fixture の static gate artifact を保存し、missing-option second checker spike をその artifact に対して回せる
   - `smoke-capability-checker` により、1 fixture の static gate artifact を保存し、capability third checker spike をその artifact に対して回せる
+  - future dedicated `TryFallback` / `AtomicCut` AST structural helper を loop へ入れるとしても、bundle-first runtime path ではなく、static gate artifact を emit して helper-local compare を回す dedicated smoke family に留めるのが current docs-only cut である
   - compare helper の exit code `1` は informational difference として許容し、helper failure だけを non-zero で止める
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ作る
