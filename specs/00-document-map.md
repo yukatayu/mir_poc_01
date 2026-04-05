@@ -279,6 +279,8 @@
   - checker-led staged spike の stage 1 を actual parser spike として切るとき、option declaration core / explicit edge-row family / edge-local lineage metadata / declaration-side guard slot のどこまでを accepted parse cluster に含め、どこから先を non-goal として later stage に残すかを比較する。
 - `specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md`
   - stage 1 の declaration-side guard slot を actual parser / checker handoff へ送るとき、parser-side opaque slot carrier と current parser-free AST fixture schema の `OptionDecl.lease` をどのように最小接続するかを比較する。
+- `specs/examples/76-current-l2-stage1-parser-opaque-slot-carrier-and-bridge-api.md`
+  - stage 1 parser-side opaque slot carrier の naming candidate と thin lowering bridge の private API surface をどの粒度で narrow に決めるのが自然かを比較する。
 
 ## レポート
 
@@ -317,6 +319,7 @@
   - first parser cut inventory を actual parser spike へ送る sequencing judgment は `specs/examples/73-current-l2-first-parser-spike-staging.md` に置く。
   - checker-led staged spike の stage 1 accepted parse cluster / non-goal 境界は `specs/examples/74-current-l2-stage1-parser-spike-entry-criteria.md` に置く。
   - stage 1 の declaration-side guard slot を current parser-free AST fixture schema へつなぐ最小 handoff cut は `specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md` に置く。
+  - stage 1 parser-side opaque slot carrier の naming と thin lowering bridge の private API surface は `specs/examples/76-current-l2-stage1-parser-opaque-slot-carrier-and-bridge-api.md` に置く。
   - parser なし minimal interpreter の aggregate emitter private transform を repo 内 callable boundary へ落とす shared support helper cut は `specs/examples/31-current-l2-detached-aggregate-transform-helper.md` に置く。
   - parser なし minimal interpreter の static gate verdict / reasons を detached validation loop に接続する static gate artifact helper cut は `specs/examples/32-current-l2-static-gate-artifact-loop.md` に置く。
   - parser なし minimal interpreter の `expected_static.reasons` dual-use を壊さずに optional `checked_reasons` へ narrow transfer する carrier comparison は `specs/examples/33-current-l2-checked-static-reasons-carrier.md` に置く。

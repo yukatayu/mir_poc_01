@@ -193,6 +193,7 @@
 - さらに current docs-only refinement として、stage 1 の chain / declaration structural floor に含める declaration-side guard slot は predicate fragment parser の入口としてではなく、option declaration に attached した opaque slot として扱うのが最小である。
 - したがって stage 1 では、slot の existence / attachment / boundary だけを parse 対象に残し、guard fragment の parse / well-formedness は stage 3 以降へ残す。
 - さらに current docs-only refinement として、stage 1 の actual parser / checker handoff では parser-side opaque slot carrier と current parser-free AST fixture schema を直結させず、`OptionDecl.lease` への thin lowering bridge を compatibility anchor として使うのが最小である。
+- さらに current docs-only refinement として、その parser-side opaque slot carrier 名は `decl_guard_slot` を第一候補にし、bridge は slot-only helper ではなく option declaration 単位の structural transfer として narrow に切るのが最小である。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。
 
 ### first checker cut / proof boundary

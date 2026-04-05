@@ -183,6 +183,10 @@ current repo の next narrow step としては、
 - later stage で `OptionDecl.lease` を widening するかどうか
 - stage 3 で predicate fragment parse を parser-side opaque slot からどう受けるか
 
+このうち exact carrier 名と bridge API surface の比較は、
+`specs/examples/76-current-l2-stage1-parser-opaque-slot-carrier-and-bridge-api.md`
+で次段の narrow task として扱う。
+
 ## current meaning
 
 - stage 1 の declaration-side guard slot は opaque attached slot として読む

@@ -209,8 +209,9 @@
   - declaration-side guard slot
   に留めつつ、declaration-side guard slot は predicate fragment parse へ進めず opaque attached slot として扱う cut を維持するのが自然である
 - current baseline として、stage 1 handoff は parser-side opaque slot carrier と current parser-free AST fixture schema を同一視せず、thin lowering bridge を介して `OptionDecl.lease` へ narrow に接続するのが自然である
+- current baseline として、その parser-side opaque slot carrier の naming は `decl_guard_slot` を第一候補にし、thin lowering bridge は slot-only helper ではなく option-level structural transfer として読むのが自然である
 - その次段で比較するべきなのは、
-  - opaque attached slot の actual carrier 名
-  - thin lowering bridge の actual API surface
+  - `decl_guard_slot` 内部 carrier が raw text / token slice / opaque leaf のどれか
+  - option-level structural transfer の actual private API surface
   - stage 1 smoke をどの fixture family まで使うか
   であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない
