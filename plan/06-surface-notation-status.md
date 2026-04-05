@@ -142,6 +142,11 @@ current L2 では、final grammar を先に決めずに、
 - parser cut では exact visual polish より semantic cluster を先に固定する
 - explicit edge-row family 自体は first parser cut 候補に入れてよい
 - ただし A2 hanging continuation を唯一の final lexical surface として固定するのはまだ早い
+- actual parser spike を切る順序は別問題であり、current next narrow step は
+  1. chain / declaration structural floor
+  2. `try` / rollback structural floor
+  3. request / admissibility cluster
+  の checker-led staged spike として読むのが自然である
 
 ### 目標だけは明示しているもの
 

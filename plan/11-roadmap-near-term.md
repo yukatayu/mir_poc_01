@@ -194,6 +194,11 @@
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
-- current companion notation から first parser cut に入れてよい semantic cluster を narrow に棚卸しする
-- parser 導入前の syntax decision inventory を plan と spec に切り出す
-- first parser cut inventory を、first checker cut に入れてよい local / structural judgment と theorem prover / model checker 側へ残す property の entry criteria に接続する
+- current baseline として、current companion notation から first parser cut に入れてよい semantic cluster は narrow inventory 化済みである
+- current baseline として、parser 導入前の syntax decision inventory は plan と spec に切り出し済みである
+- current baseline として、first parser cut inventory は first checker cut の local / structural judgment と theorem prover / model checker 側へ残す property の entry criteria に docs-only で接続済みである
+- current next narrow step としては、actual parser spike の比較を monolithic cut ではなく checker-led staged spike として扱い、
+  1. chain / declaration structural floor
+  2. `try` / rollback structural floor
+  3. request / admissibility cluster
+  の順で source-backed priority を揃えるのが自然である

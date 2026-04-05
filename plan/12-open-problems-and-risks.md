@@ -185,6 +185,12 @@
 - current L2 では final grammar を先に決めず、first parser cut に入れてよい semantic cluster を narrow に棚卸しする方が自然である。
 - `place` / `try-fallback` / `perform on` / `perform via` / statement-local `require` / `ensure` / option declaration core / option-local `admit` / explicit edge-row family は first parser cut 候補になりうる。
 - ただし A2 と A1 の exact lexical choice、`contract` block sugar、richer predicate grammar、option-local outcome metadata は引き続き OPEN に残す。
+- ただし actual parser spike を切る順序は別問題であり、current next narrow step では monolithic actualization を避け、
+  1. chain / declaration structural floor
+  2. `try` / rollback structural floor
+  3. request / admissibility cluster
+  の checker-led staged spike として進める方が自然である。
+- request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。
 
 ### first checker cut / proof boundary
 

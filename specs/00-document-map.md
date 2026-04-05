@@ -273,6 +273,8 @@
   - current first tranche が saved artifact compare need の観点で shared detached carrier threshold を本当に満たしたかを再比較する。
 - `specs/examples/72-current-l2-try-rollback-first-tranche-generic-public-recheck.md`
   - current actual first tranche から見て、generic structural checker family / public checker API comparison に進む concrete pressure が本当に揃ったかを再比較する。
+- `specs/examples/73-current-l2-first-parser-spike-staging.md`
+  - current first parser cut inventory を actual parser spike へ送るなら、どの semantic cluster をどの順に staged に切るべきかを比較する。
 
 ## レポート
 
@@ -308,6 +310,7 @@
   - parser なし minimal interpreter の detached validation loop で 1 fixture を bundle export / optional reference compare / single-fixture aggregate smoke まで 1 command で回す helper 境界は `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md` に置く。
   - current L2 companion notation から final grammar へ進む前に、first parser cut に入れてよい semantic cluster と companion に残す cluster を narrow に棚卸しする inventory は `specs/examples/29-current-l2-first-parser-subset-inventory.md` に置く。
   - first parser cut inventory の次段として、current L2 で core checker に入れてよい local / structural judgment と external verifier 側へ残す judgment の entry criteria は `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md` に置く。
+  - first parser cut inventory を actual parser spike へ送る sequencing judgment は `specs/examples/73-current-l2-first-parser-spike-staging.md` に置く。
   - parser なし minimal interpreter の aggregate emitter private transform を repo 内 callable boundary へ落とす shared support helper cut は `specs/examples/31-current-l2-detached-aggregate-transform-helper.md` に置く。
   - parser なし minimal interpreter の static gate verdict / reasons を detached validation loop に接続する static gate artifact helper cut は `specs/examples/32-current-l2-static-gate-artifact-loop.md` に置く。
   - parser なし minimal interpreter の `expected_static.reasons` dual-use を壊さずに optional `checked_reasons` へ narrow transfer する carrier comparison は `specs/examples/33-current-l2-checked-static-reasons-carrier.md` に置く。
