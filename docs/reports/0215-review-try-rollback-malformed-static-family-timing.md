@@ -24,6 +24,15 @@
 
 ## Evidence / outputs / test results
 
+- reviewer
+
+```text
+agent: Ampere
+wait #1: timed out after 180s
+wait #2: timed out after 180s
+status: no completion within allowed wait window
+```
+
 - local fallback
 
 ```text
