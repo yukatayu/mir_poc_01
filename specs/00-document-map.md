@@ -217,6 +217,8 @@
   - current stable cluster inventory の remaining tranche を `checked_reason_codes` に揃え、duplicate cluster だけを非昇格に残す最小 cut を整理する。
 - `specs/examples/44-current-l2-checked-reasons-coexistence-and-shrink-policy.md`
   - `checked_reasons` と `checked_reason_codes` の additive coexistence を維持し、shrink をまだ行わない条件を整理する。
+- `specs/examples/45-current-l2-first-checker-cut-regression-baseline.md`
+  - current static-only corpus が first checker cut の local / structural floor をどこまで覆っているかの baseline を整理する。
 
 ## レポート
 
@@ -263,6 +265,7 @@
   - parser なし minimal interpreter の first selected family をどの carrier へ first-class に置くかの additive actualization cut は `specs/examples/41-current-l2-first-typed-static-reason-family-carrier-cut.md` に置く。
   - parser なし minimal interpreter の second tranche と remaining stable tranche を `checked_reason_codes` に広げる cut は `specs/examples/42-current-l2-second-typed-static-reason-family-actualization.md` と `specs/examples/43-current-l2-complete-stable-static-reason-tranche.md` に置く。
   - parser なし minimal interpreter の stable cluster actualization 後の `checked_reasons` / `checked_reason_codes` coexistence と shrink 保留条件は `specs/examples/44-current-l2-checked-reasons-coexistence-and-shrink-policy.md` に置く。
+  - parser なし minimal interpreter の current static-only corpus が first checker cut 候補 cluster をどこまで覆っているかの baseline は `specs/examples/45-current-l2-first-checker-cut-regression-baseline.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor

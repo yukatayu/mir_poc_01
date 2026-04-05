@@ -195,6 +195,7 @@ current judgment としては、first checker cut に入れてよいのは次の
 - current harness / bundle machine-check は、当面 `expected_static.verdict` を core に留める
 - `expected_static.reasons` は current fixture corpus では explanatory note と machine-check 候補が混在しているため、そのまま harness 側へは上げない
 - その代わり、future checker API の narrow migration として additive optional `expected_static.checked_reasons` を置き、present のときだけ actual static gate compare を fail-closed に寄せてよい
+- current static-only corpus baseline は `specs/examples/45-current-l2-first-checker-cut-regression-baseline.md` を参照し、same-lineage floor / capability floor / missing-option structure floor の最低限の regression coverage を companion evidence として扱ってよい
 - それでも global proof obligation は theorem prover / model checker 側に残す
 
 したがって current repo では、

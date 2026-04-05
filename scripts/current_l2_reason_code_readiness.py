@@ -56,6 +56,25 @@ def kinds_for_display(rows: list[dict[str, Any]] | None) -> str:
     return ", ".join(reason_code_kinds(rows))
 
 
+def checker_cluster_name_for_kind(kind: str) -> str | None:
+    if kind in {
+        "missing_lineage_assertion",
+        "lineage_assertion_edge_mismatch",
+        "declared_target_missing",
+        "declared_target_mismatch",
+    }:
+        return "same_lineage_evidence_floor"
+    if kind == "capability_strengthens":
+        return "capability_strengthening_floor"
+    if kind in {
+        "missing_chain_head_option",
+        "missing_predecessor_option",
+        "missing_successor_option",
+    }:
+        return "missing_option_structure_floor"
+    return None
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -112,8 +131,13 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     kind_counter = Counter()
+    cluster_counter = Counter()
     for row in static_rows:
         kind_counter.update(row["reason_code_kinds"])
+        for kind in row["reason_code_kinds"]:
+            cluster_name = checker_cluster_name_for_kind(kind)
+            if cluster_name is not None:
+                cluster_counter.update([cluster_name])
 
     rows_with_suggestions = [
         row for row in static_rows if row["reason_code_kinds"]
@@ -171,6 +195,12 @@ def main(argv: list[str] | None = None) -> int:
     if kind_counter:
         for kind, count in sorted(kind_counter.items()):
             print(f"  - {kind}: {count}")
+    else:
+        print("  - none")
+    print("checker cluster coverage:")
+    if cluster_counter:
+        for cluster_name, count in sorted(cluster_counter.items()):
+            print(f"  - {cluster_name}: {count}")
     else:
         print("  - none")
 

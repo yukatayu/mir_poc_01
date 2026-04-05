@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（stable static reason coexistence scan と shrink 保留条件まで整理）
+最終更新: 2026-04-06（first checker cut regression baseline を source-backed に固定）
 
 ## 位置づけ
 
@@ -28,6 +28,8 @@
 - first-class typed carrier の最小 placement は detached-side mirror 昇格ではなく fixture-side additive optional `expected_static.checked_reason_codes` であり、current stable cluster inventory 8 kind は actualize 済みである。
 - current readiness scan では、static-only fixture corpus に対して `checked_reason_codes` adoption 8 件 / `reason_codes` suggestion 8 件 / duplicate cluster 2 件 absent が揃っている。
 - `checked_reasons` と `checked_reason_codes` の関係は current では additive coexistence 維持であり、stable cluster 8 fixture の 3-way alignment が zero follow-up でも、wording anchor を失わないため shrink はまだ行わない。
+- same-lineage floor `4`、capability floor `1`、missing-option structure floor `3` という checker cluster coverage が current static-only corpus から source-backed に見えるようになり、mainline を first checker cut 側へ戻す根拠が揃い始めた。
+- first checker cut に戻す current judgment は、carrier migration の追加 refinement より checker-boundary 整理を優先してよいという sequencing judgment として docs / plan / report chain へ固定された。
 - static-only malformed fixture の stable cluster として、`e16-malformed-missing-chain-head-option` / `e17-malformed-missing-predecessor-option` / `e18-malformed-missing-successor-option` を actual corpus に追加し、`checked_reasons` と detached static gate `reason_codes` の両方へ narrow adoption した。
 - static-only malformed fixture の stable cluster として、`e19-malformed-target-mismatch` も actual corpus に追加し、current docs で stable と列挙している same-lineage static reason clusters は一通り corpus / `checked_reasons` / detached `reason_codes` mirror に揃った。
 - static-only scaffold helper は fixture JSON を変えないまま、authoring 後段で `suggest-checked-reasons` を使えることを stderr reminder として案内できるようになった。reminder command の fixture path は shell-safe quoting で copyable に保っている。
@@ -88,7 +90,7 @@
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 58% | 50% | 61% | 着手可能 | non-production aggregate emitter と aggregate compare helperに加え、aggregate transform の actual narrow cut は shared support helper まで進んだが public API と final compare 契約は未決 |
-| static analysis / type / theorem prover workstream | 60% | 52% | 50% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、additive optional `checked_reasons` を最小 dedicated carrier として実装した。typed code は stable cluster inventory と parametric shape 条件まで整理済みで、detached-side `reason_codes` は helper-local / reference-only mirror に留めつつ、display-only assist と readiness scan で corpus 横断の actual split を観察できる。さらに current stable cluster inventory 8 kind を optional `checked_reason_codes` に actualize し、`run_bundle()` の fail-closed compare へ接続した。coexistence は scan 上収束しているが、duplicate cluster と final shrink policy はまだ OPEN |
+| static analysis / type / theorem prover workstream | 66% | 59% | 55% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、additive optional `checked_reasons` を最小 dedicated carrier として実装した。typed code は stable cluster inventory と parametric shape 条件まで整理済みで、detached-side `reason_codes` は helper-local / reference-only mirror に留めつつ、display-only assist と readiness scan で corpus 横断の actual split を観察できる。さらに current stable cluster inventory 8 kind を optional `checked_reason_codes` に actualize し、coexistence scan を zero follow-up まで揃え、same-lineage / capability / missing-option checker cluster coverage を source-backed に確認し、mainline を first checker cut 側へ戻す sequencing judgment まで固めた。duplicate cluster と final shrink policy はまだ OPEN |
 | portability / observability / debug hook 設計 | 20% | 14% | 10% | 後段依存 | HW 非依存と step / graph 可視化余地は要件化したが contract はまだない |
 | Mirrorea fabric | 18% | 12% | 8% | 要仕様確認 | 境界整理はあるが current mainline 実装はまだ先 |
 | Typed-Effect Wiring Platform | 12% | 8% | 6% | 要仕様確認 | 位置づけはあるが concrete architecture は後段 |
@@ -172,3 +174,4 @@
 - 2026-04-05 23:25 JST — declared target edge pair family と remaining stable cluster を `expected_static.checked_reason_codes` へ追加で actualize し、current stable cluster inventory 8 kind が fixture corpus / `run_bundle()` / readiness scan で 8/8 揃う状態まで進めた。duplicate declaration cluster 2 件は引き続き非昇格に留め、次は `checked_reasons` / `checked_reason_codes` coexistence の縮退条件を比較する段階。
 - 2026-04-05 23:42 JST — stable static reason `checked_reason_codes` tranche の reviewer finding 2 件を反映し、wording-derived row transform を `lib.rs` public API から外して helper-local に戻し、`plan/07` / `plan/15` / `plan/90` の drift を補正した。Python targeted tests、full `cargo test -p mir-semantics`、docs validation、`git diff --check` が揃ったので、この tranche は commit / push 可能な状態。
 - 2026-04-05 23:55 JST — `checked_reasons` / `checked_reason_codes` coexistence task として、readiness scan に stable coexistence anchor / follow-up summary を追加し、stable cluster 8 fixture が 3-way alignment・zero follow-up で収束していることを確認した。そのうえで current judgment を additive coexistence 維持 / shrink 保留に固定し、次は parser boundary / first checker cut 側へ主線を戻すか、deprecation 条件をもう一段比較する段階。
+- 2026-04-06 00:05 JST — readiness scan に checker cluster roll-up を追加し、same-lineage `4` / capability `1` / missing-option `3` の source-backed baseline を確認した。mainline を first checker cut 側へ戻す sequencing judgment を docs / plan / report chain に固定し、次は actual checker helper cut を same-lineage floor から切るか、capability floor の corpus coverage を先に厚くするかを比較する段階。

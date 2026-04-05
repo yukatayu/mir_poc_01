@@ -151,6 +151,17 @@
   - `scripts/current_l2_detached_loop.py`
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
 
+### 2026-04-05 first checker cut baseline addendum
+
+- `plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/45-current-l2-first-checker-cut-regression-baseline.md`
+  - `docs/reports/0172-first-checker-cut-regression-baseline.md`
+  - `docs/reports/0173-review-first-checker-cut-regression-baseline.md`
+  - `scripts/current_l2_reason_code_readiness.py`
+  - `scripts/tests/test_current_l2_reason_code_readiness.py`
+  - `scripts/current_l2_detached_loop.py`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

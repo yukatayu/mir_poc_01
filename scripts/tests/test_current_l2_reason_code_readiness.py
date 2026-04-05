@@ -202,6 +202,8 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
         self.assertIn("fixtures with checked_reason_codes but missing checked_reasons: 0", output)
         self.assertIn("fixtures with checked_reason_codes mismatching actual suggestion: 0", output)
         self.assertIn("declared_target_missing: 1", output)
+        self.assertIn("checker cluster coverage:", output)
+        self.assertIn("same_lineage_evidence_floor: 1", output)
         self.assertIn("e12_underdeclared_target_missing", output)
         self.assertIn("e14_malformed_duplicate_option_declaration", output)
         self.assertIn("fixtures needing coexistence follow-up:", output)
@@ -363,6 +365,8 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
         self.assertIn("fixtures with stable coexistence anchors: 0", output)
         self.assertIn("fixtures with checked_reason_codes but missing checked_reasons: 1", output)
         self.assertIn("fixtures with checked_reason_codes mismatching actual suggestion: 1", output)
+        self.assertIn("checker cluster coverage:", output)
+        self.assertIn("same_lineage_evidence_floor: 2", output)
         self.assertIn(
             "e12_underdeclared_target_missing [missing checked_reasons, kinds=declared_target_missing]",
             output,
@@ -370,6 +374,27 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
         self.assertIn(
             "e19_malformed_target_mismatch [checked_reason_codes mismatch, fixture=declared_target_missing, actual=declared_target_mismatch]",
             output,
+        )
+
+    def test_cluster_name_maps_stable_reason_kinds(self) -> None:
+        self.assertEqual(
+            readiness.checker_cluster_name_for_kind("missing_lineage_assertion"),
+            "same_lineage_evidence_floor",
+        )
+        self.assertEqual(
+            readiness.checker_cluster_name_for_kind("declared_target_mismatch"),
+            "same_lineage_evidence_floor",
+        )
+        self.assertEqual(
+            readiness.checker_cluster_name_for_kind("capability_strengthens"),
+            "capability_strengthening_floor",
+        )
+        self.assertEqual(
+            readiness.checker_cluster_name_for_kind("missing_successor_option"),
+            "missing_option_structure_floor",
+        )
+        self.assertIsNone(
+            readiness.checker_cluster_name_for_kind("duplicate_option_declaration")
         )
 
 

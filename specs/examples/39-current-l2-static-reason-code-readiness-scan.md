@@ -124,6 +124,7 @@ readiness scan は最低でも次を行ってよい。
 9. `checked_reason_codes` があるのに `checked_reasons` が無い fixture 数を表示する
 10. `checked_reason_codes` と actual suggestion が不一致な fixture 数を表示する
 11. coexistence follow-up が必要な fixture list を表示する
+12. stable kind を first checker cut companion baseline として roll-up した checker cluster coverage を表示する
 
 ### current placement
 
@@ -152,6 +153,10 @@ current corpus に対する smoke では、
 - fixtures with stable coexistence anchors: `8`
 - fixtures with checked_reason_codes but missing checked_reasons: `0`
 - fixtures with checked_reason_codes mismatching actual suggestion: `0`
+- checker cluster coverage:
+  - `same_lineage_evidence_floor`: `4`
+  - `capability_strengthening_floor`: `1`
+  - `missing_option_structure_floor`: `3`
 
 であり、stable cluster と duplicate cluster の split は次のように読める。
 

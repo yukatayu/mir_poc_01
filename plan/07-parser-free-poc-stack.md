@@ -289,6 +289,7 @@ current L2 では production exporter API はまだ固定しない。
   - static-only fixture corpus を横断し、`checked_reasons` adoption と `detached_noncore.reason_codes` suggestion availability を batch で display-only 要約する
   - current stable cluster tranche の `checked_reason_codes` adoption 数も同じ scan で観察してよい
   - coexistence scan として、stable coexistence anchor 数、`checked_reason_codes` はあるが `checked_reasons` が無い fixture 数、typed row mismatch 数も同じ summary で見てよい
+  - first checker cut readiness の companion baseline として、stable kind を same-lineage / capability / missing-option の checker cluster に roll-up した coverage count も同じ summary で見てよい
   - stable cluster と duplicate cluster の current split を tranche 単位で観察する authoring aid に留め、typed carrier actualization や detached aggregate 永続化は行わない
 
 これらは current helper stack の public behavior を置き換えない。

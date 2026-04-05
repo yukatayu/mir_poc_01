@@ -123,8 +123,10 @@
 - current actualization では、first typed family は lineage edge pair family、second tranche は declared target edge pair family、その後 missing option family と capability singleton まで current stable cluster inventory を `expected_static.checked_reason_codes` に揃えた
 - また first-class carrier placement は detached-side mirror 昇格ではなく、fixture-side additive optional `expected_static.checked_reason_codes` を stable cluster 8 kind に対して採るのが current cut である
 - current corpus では stable cluster 8 fixture の coexistence は `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っているが、これは immediate shrink を意味しない
+- current corpus では、first checker cut 候補 cluster のうち same-lineage floor / capability floor / missing-option structure floor について最低限の regression baseline が見え始めている
 - typed reason code に進むとしても、duplicate reason のように helper 内部構造へ近い cluster は急いで code 化しない
 - ただし `checked_reasons` と `checked_reason_codes` をいつ統合・縮退させるか、stable cluster と duplicate cluster の境界を later verifier / parser workstream でどう扱うかは引き続き OPEN であり、current judgment は additive coexistence 維持である
+- ただし capability floor の corpus coverage はまだ 1 fixture と薄く、first checker cut へ主線を戻すとしても regression baseline の厚みは今後の追加 task で補う必要がある
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
 - `smoke-fixture` のような fixture-level convenience を入れても、それを production CLI や final retention policy と誤読しない boundary discipline が引き続き必要である
