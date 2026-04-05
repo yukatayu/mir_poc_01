@@ -70,8 +70,9 @@ field 名や serialization は未固定だが、conceptual shape として curre
 
 current L2 では、`narrative_explanations` は machine-check 可能な短い explanation carrier として比較してよい。
 一方で、`must_explain` は「人が説明責務を果たしたか」を見る prose obligation であり、harness に exact string compare を持ち込まない。
-`expected_static.reasons` は current fixture corpus では human-facing な補助説明も兼ねているため、現時点では harness の exact machine-check へは上げない。
-static gate の actual `reasons` compare は detached static gate artifact helper 側に留め、future checker API を切るときに dedicated carrier を再検討する。
+`expected_static.reasons` は current fixture corpus では human-facing な補助説明も兼ねているため、現時点でも単独では harness の exact machine-check へ上げない。
+static gate の actual `reasons` compare は detached static gate artifact helper 側に残す。
+ただし future checker API へ narrow に寄せる入口として、additive optional な `expected_static.checked_reasons` を置き、field が存在するときだけ harness が fail-closed compare してよい。
 
 ## host plan coverage の最小方針
 
@@ -115,5 +116,8 @@ static gate の actual `reasons` compare は detached static gate artifact helpe
 - richer predicate evaluator API
 - `Approximate` / `Compensate`
 - parser syntax に対応した host binding
+
+また current host harness は、typed static reason code の最終 taxonomy もまだ実装しない。
+`checked_reasons` は current L2 の narrow migration carrier であり、typed code へ進むかどうかは後段で比較する。
 
 これらは **未決定** または future work であり、current L2 host stub harness には入れない。

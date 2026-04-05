@@ -90,6 +90,9 @@ fixture kind の選択から直ちに従うからである。
 
 は authoring 側が埋める。
 
+optional `expected_static.checked_reasons` も helper は自動補完しない。
+actual static gate compare に使うかどうかは authoring / review task 側で決める。
+
 ## host plan sidecar
 
 runtime scaffold のときだけ、helper は次の shape の empty sidecar を作ってよい。

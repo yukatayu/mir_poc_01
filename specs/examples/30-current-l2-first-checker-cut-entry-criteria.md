@@ -193,7 +193,8 @@ current judgment としては、first checker cut に入れてよいのは次の
 - parser inventory で semantic cluster を narrow に確定する
 - first checker cut で local / structural judgment だけを core へ寄せる
 - current harness / bundle machine-check は、当面 `expected_static.verdict` を core に留める
-- `expected_static.reasons` は current fixture corpus では explanatory note と machine-check 候補が混在しているため、dedicated carrier を切るまで harness 側へは上げない
+- `expected_static.reasons` は current fixture corpus では explanatory note と machine-check 候補が混在しているため、そのまま harness 側へは上げない
+- その代わり、future checker API の narrow migration として additive optional `expected_static.checked_reasons` を置き、present のときだけ actual static gate compare を fail-closed に寄せてよい
 - それでも global proof obligation は theorem prover / model checker 側に残す
 
 したがって current repo では、

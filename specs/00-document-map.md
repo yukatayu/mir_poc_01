@@ -193,6 +193,8 @@
   - current L2 parser-free PoC の detached validation loop で、aggregate emitter 内 private transform を repo 内 callable boundary へ落とす shared support helper の最小 cut を整理する。
 - `specs/examples/32-current-l2-static-gate-artifact-loop.md`
   - current L2 parser-free PoC の detached validation loop で、static gate verdict / reasons を static-only / malformed / underdeclared fixture compare に乗せる最小 helper cut を整理する。
+- `specs/examples/33-current-l2-checked-static-reasons-carrier.md`
+  - current L2 parser-free PoC の `expected_static.reasons` dual-use を壊さずに、future checker API へ additive optional `checked_reasons` を narrow transfer するための最小 carrier comparison を整理する。
 
 ## レポート
 
@@ -230,6 +232,7 @@
   - first parser cut inventory の次段として、current L2 で core checker に入れてよい local / structural judgment と external verifier 側へ残す judgment の entry criteria は `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md` に置く。
   - parser なし minimal interpreter の aggregate emitter private transform を repo 内 callable boundary へ落とす shared support helper cut は `specs/examples/31-current-l2-detached-aggregate-transform-helper.md` に置く。
   - parser なし minimal interpreter の static gate verdict / reasons を detached validation loop に接続する static gate artifact helper cut は `specs/examples/32-current-l2-static-gate-artifact-loop.md` に置く。
+  - parser なし minimal interpreter の `expected_static.reasons` dual-use を壊さずに optional `checked_reasons` へ narrow transfer する carrier comparison は `specs/examples/33-current-l2-checked-static-reasons-carrier.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor

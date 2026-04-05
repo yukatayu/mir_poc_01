@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（static gate reasons carrier 境界整理時点）
+最終更新: 2026-04-05（checked static reasons carrier 導入時点）
 
 ## 位置づけ
 
@@ -24,7 +24,7 @@
 - detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
 - aggregate emitter 内 private transform を `examples/support/current_l2_detached_aggregate_support.rs` へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary を non-production のまま shared helper 化した。
 - static gate verdict / reasons を `examples/support/current_l2_static_gate_support.rs` と `current_l2_emit_static_gate.rs` から detached artifact として保存できるようにし、static-only / malformed / underdeclared fixture を `smoke-static-gate` で compare できるようにした。
-- `expected_static.reasons` を `run_bundle()` の actual machine-check に上げる試行を行い、current fixture corpus では explanatory note と machine-check 候補が混在しているため、そのまま昇格できないことを確認した。current actual compare は detached static gate artifact 側に留め、future checker API では dedicated carrier を別立てにする方向が自然だと分かった。
+- `expected_static.reasons` を `run_bundle()` の actual machine-check に上げる試行を行い、current fixture corpus では explanatory note と machine-check 候補が混在しているため、そのまま昇格できないことを確認した。そのうえで additive optional `expected_static.checked_reasons` を導入し、field があるときだけ actual static gate reasons を fail-closed compare できる narrow carrier を入れた。
 - parser boundary については、final grammar を先に凍らせずに first parser cut に入れてよい semantic cluster を先に inventory 化する段階へ入った。
 - static analysis / theorem prover 境界については、first checker cut に入れてよい local / structural judgment と external verifier 側へ残す global property の floor を docs-only で切り始めた。
 - いま重いのは semantics そのものより、**fixture authoring / elaboration** と **detached validation loop の実運用面**である。
@@ -66,13 +66,13 @@
 | 基礎文書・decision level・invariants | 92% | 86% | 70% | 着手可能 | repo の基礎境界はかなり揃っている |
 | Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
-| parser-free PoC execution stack | 86% | 80% | 94% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、aggregate transform と static gate transform の repo 内 callable boundary が shared helper として入り、static gate reasons は detached helper compare と harness compare の境界が整理された |
+| parser-free PoC execution stack | 87% | 81% | 95% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、aggregate transform と static gate transform の repo 内 callable boundary が shared helper として入り、static gate reasons は detached helper compare と optional checked carrier の境界まで整理された |
 | detached export / validation loop | 87% | 83% | 95% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper まで揃い、runtime と static gate の loop 実地反復がさらに進んだ |
-| fixture authoring / elaboration 実務 | 76% | 79% | 81% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path が分かれたので、fixture 追加後の validation loop 接続が少し軽くなった |
+| fixture authoring / elaboration 実務 | 78% | 81% | 83% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、optional `checked_reasons` で bundle-level static compare を narrow に足せるようになった |
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 58% | 50% | 61% | 着手可能 | non-production aggregate emitter と aggregate compare helperに加え、aggregate transform の actual narrow cut は shared support helper まで進んだが public API と final compare 契約は未決 |
-| static analysis / type / theorem prover workstream | 31% | 23% | 18% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、future checker API では dedicated carrier が必要だという boundary まで見えた |
+| static analysis / type / theorem prover workstream | 34% | 27% | 24% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、additive optional `checked_reasons` を最小 dedicated carrier として実装した。typed code への移行境界はまだ OPEN |
 | portability / observability / debug hook 設計 | 20% | 14% | 10% | 後段依存 | HW 非依存と step / graph 可視化余地は要件化したが contract はまだない |
 | Mirrorea fabric | 18% | 12% | 8% | 要仕様確認 | 境界整理はあるが current mainline 実装はまだ先 |
 | Typed-Effect Wiring Platform | 12% | 8% | 6% | 要仕様確認 | 位置づけはあるが concrete architecture は後段 |
@@ -133,3 +133,4 @@
 - 2026-04-05 18:37 JST — static gate artifact loop の review fix を反映し、multi-reason fixture で `checker_core.reasons` の順序を deterministic に固定した。full `cargo test -p mir-semantics`、Python helper tests、`smoke-static-gate`、既存 `smoke-fixture`、docs validation が通ったので、次は `expected_static.reasons` を actual machine-check に寄せる段階。
 - 2026-04-05 18:45 JST — `expected_static.reasons` を `run_bundle()` の actual machine-check に上げる試行を行い、invalid fixture だけでなく valid fixture 群とも衝突することを failing test と full cargo test で確認した。current fixture corpus では explanatory note と machine-check 候補が混在しているため、この field はそのまま core に昇格させず、future checker API では dedicated carrier を別立てにする方針を docs / plan に反映する段階。
 - 2026-04-05 19:03 JST — `expected_static.reasons` は current fixture corpus で dual-use carrier だと確定し、current harness core へは昇格させない判断を report / review / traceability / roadmap に反映した。full `cargo test -p mir-semantics` と `smoke-static-gate` は green を維持し、次は dedicated static reason carrier の最小 cut を比較する段階。
+- 2026-04-05 19:35 JST — additive optional `expected_static.checked_reasons` を導入し、field があるときだけ `run_bundle()` が actual static gate reasons を fail-closed compare する narrow carrier を追加した。targeted RED/GREEN が通ったので、次は typed reason code へ進むかこの carrier を fixture authoring に広げるかを比較する段階。

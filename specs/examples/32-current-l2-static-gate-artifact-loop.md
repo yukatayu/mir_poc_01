@@ -128,6 +128,7 @@ runtime bundle / aggregate smoke は含めない。
 ## OPEN に残すもの
 
 - static gate artifact を future checker API にどう昇格させるか
-- `reasons` を string list のままにするか、typed reason code へ進めるか
+- detached artifact の `checker_core.reasons` を fixture 側の additive optional `expected_static.checked_reasons` とどう接続するか
+- `checked_reasons` を string list のままにするか、typed reason code へ進めるか
 - parser cut と checker cut の actual API 接続
 - theorem prover 向け relation と model checker 向け protocol carrier をどこで分けるか

@@ -17,7 +17,7 @@
 | path canonicalization | helper / packaging | OPEN | selector / single-fixture / sidecar discovery の長期互換性に影響 | current L2 では minimal behavior のみ保持 |
 | detached trace / audit serialization | runtime / tooling | OPEN / docs-only minimal boundary あり | trace / audit を helper 内表現に閉じ込めたままでは repo 外保存・再比較・後解析が重い | exact compare core / detached non-core / human-facing explanation を分けた docs-only minimal shape を先に切る |
 | fixture authoring / elaboration bottleneck | authoring / workflow | 継続中 | new fixture ごとに AST / sidecar / expectation / profile 影響確認の人手コストが重い | hand-written fixture を正本に保ったまま、boilerplate だけを non-production scaffold helper へ切り出す |
-| `expected_static.reasons` の二重用途 | checker / fixture schema | OPEN / boundary clarified | explanatory note と machine-check 候補が同じ field に混在しているため、そのまま harness machine-check core に昇格させると current fixture corpus と衝突する | current L2 では `verdict` だけを harness core に残し、actual `reasons` compare は detached static gate artifact に留める |
+| `expected_static.reasons` の二重用途 | checker / fixture schema | OPEN / narrow migration available | explanatory note と machine-check 候補が同じ field に混在しているため、そのまま harness machine-check core に昇格させると current fixture corpus と衝突する | current L2 では `verdict` だけを harness core に残し、actual `reasons` compare は detached static gate artifact に留める。future checker API への narrow migration として optional `checked_reasons` を additive に導入してよい |
 | richer host interface | runtime boundary | OPEN / comparison 上の後続候補 | current host harness を production host に誤昇格しやすく、coverage analysis を先に肥大化させやすい | helper と production host を分離して記述し、detached artifact 境界の後で narrow に切る |
 | constrained continuation / multi-shot | semantics / runtime boundary | OPEN / FUTURE | unrestricted multi-shot が linear resource、rollback frontier、lifetime crossing を壊しやすい | coroutine semantics を Mir-0 の外に残し、one-shot / multi-shot / capture restriction を将来 workstream で明示する |
 | dynamic membership / causal metadata | shared space / fabric | OPEN / FUTURE | participant churn を plain vector clock deletion だけで扱うと membership change と causal history が混線しやすい | shared-space / Mirrorea workstream 側で、membership reconfiguration と causal metadata を分離して設計する |
@@ -115,7 +115,7 @@
 - static gate artifact helper も同様に `examples/support/` と script helper に留まり、future checker API finalization は依然として OPEN である
 - `expected_static.reasons` は current fixture corpus では human-facing explanation と static machine-check 候補が混在しており、そのまま `run_bundle()` へ昇格させると valid fixture 群と衝突する
 - したがって current actual machine-check は `expected_static.verdict` に留め、actual `reasons` compare は detached static gate artifact 側へ残す
-- future checker API で static reason compare を core に上げたいなら、typed code か dedicated carrier を別立てにする必要がある
+- future checker API で static reason compare を core に上げたいなら、まず additive optional `checked_reasons` を dedicated carrier として別立てにするのが最小である
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
 - `smoke-fixture` のような fixture-level convenience を入れても、それを production CLI や final retention policy と誤読しない boundary discipline が引き続き必要である

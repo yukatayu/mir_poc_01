@@ -240,6 +240,55 @@ fn run_bundle_checks_static_runtime_and_trace_expectations() {
 }
 
 #[test]
+fn run_bundle_rejects_checked_static_reason_mismatch() {
+    let mut bundle =
+        load_bundle_from_fixture_path(fixture_path("e5-underdeclared-lineage.json")).unwrap();
+    bundle.fixture.expected_static.checked_reasons = Some(vec![
+        "wrong machine-check carrier".to_string(),
+        "should fail closed".to_string(),
+    ]);
+
+    let err = run_bundle(&bundle).unwrap_err();
+    let message = err.to_string();
+
+    assert!(
+        message.contains("bundle static checked_reasons mismatch"),
+        "{message}"
+    );
+    assert!(message.contains("e5_underdeclared_lineage"), "{message}");
+}
+
+#[test]
+fn run_bundle_allows_explanatory_static_reasons_without_checked_carrier() {
+    let mut bundle =
+        load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
+    bundle.fixture.expected_static.reasons = vec![
+        "different explanatory prose should stay outside machine-check".to_string(),
+    ];
+    bundle.fixture.expected_static.checked_reasons = None;
+
+    let report = run_bundle(&bundle).unwrap();
+
+    assert_eq!(report.report.static_verdict, StaticGateVerdict::Valid);
+}
+
+#[test]
+fn run_bundle_accepts_matching_checked_static_reasons() {
+    let mut bundle =
+        load_bundle_from_fixture_path(fixture_path("e5-underdeclared-lineage.json")).unwrap();
+    bundle.fixture.expected_static.checked_reasons = Some(vec![
+        "missing lineage assertion for primary -> mirror".to_string(),
+    ]);
+
+    let report = run_bundle(&bundle).unwrap();
+
+    assert_eq!(
+        report.report.static_verdict,
+        bundle.fixture.expected_static.verdict
+    );
+}
+
+#[test]
 fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
     let malformed = load_fixture_from_path(fixture_path("e4-malformed-lineage.json")).unwrap();
     let underdeclared =

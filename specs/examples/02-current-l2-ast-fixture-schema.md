@@ -130,7 +130,11 @@ current L2 では、predicate は最小 companion fragment に合わせて次の
   - `malformed`
   - `underdeclared`
 - `reasons`
-  - verdict の根拠を示す最小文字列配列
+  - human-facing な補助説明を含みうる最小文字列配列
+- optional `checked_reasons`
+  - actual static gate compare に使う fail-closed machine-check carrier
+  - current L2 では additive optional field としてのみ導入してよい
+  - absent のときは current harness が `verdict` だけを machine-check し、`reasons` は explanation に残す
 
 ### `expected_runtime`
 

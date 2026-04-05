@@ -942,6 +942,7 @@ pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, Interpreter
         None => FixtureHostStub::default(),
     };
     let report = harness.run_fixture(&bundle.fixture)?;
+    let static_gate = crate::static_gate_detailed(&bundle.fixture);
 
     let expected_terminal_outcome =
         expected_terminal_outcome(bundle.fixture.expected_runtime.final_outcome);
@@ -952,6 +953,14 @@ pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, Interpreter
             bundle.fixture.expected_static.verdict,
             report.static_verdict
         )));
+    }
+    if let Some(checked_reasons) = &bundle.fixture.expected_static.checked_reasons {
+        if static_gate.reasons != *checked_reasons {
+            return Err(InterpreterError::InvalidProgram(format!(
+                "bundle static checked_reasons mismatch for {}: expected {:?}, got {:?}",
+                bundle.fixture.fixture_id, checked_reasons, static_gate.reasons
+            )));
+        }
     }
     if report.entered_evaluation != bundle.fixture.expected_runtime.enters_evaluation {
         return Err(InterpreterError::InvalidProgram(format!(

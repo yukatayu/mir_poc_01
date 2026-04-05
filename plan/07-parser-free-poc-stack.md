@@ -177,6 +177,7 @@ current L2 では、これらは後比較や後解析には有益だが、interp
 
 - detached static gate artifact の `checker_core.reasons` は actual compare してよい
 - fixture の `expected_static.reasons` は explanatory note を兼ねるため、現時点では harness machine-check に上げない
+- ただし future checker API の narrow migration としては、optional `expected_static.checked_reasons` を additive に置き、present のときだけ harness が actual static gate reasons を fail-closed compare してよい
 
 ## `must_explain` の扱い
 

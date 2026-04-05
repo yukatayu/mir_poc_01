@@ -55,6 +55,7 @@
 - static gate verdict と reasons が主な比較軸になる
 - current harness / `run_bundle()` は `expected_static.verdict` を fail-closed に照合する
 - `expected_static.reasons` は current fixture corpus では explanatory note も兼ねるため、actual compare は detached static gate artifact 側に残す
+- optional `expected_static.checked_reasons` を置くときだけ、`run_bundle()` は actual static gate reasons を fail-closed compare してよい
 - detached artifact loop に入れても、payload core の中心は `static_verdict` と `entered_evaluation = false` になる
 - detached validation loop continuation では、runtime bundle artifact と別に static gate artifact を保存し、`checker_core.static_verdict` / `checker_core.reasons` を compare してよい
 
@@ -99,11 +100,13 @@
 
 - `verdict`
 - `reasons`
+- optional `checked_reasons`
 
 確認点:
 
 - `valid` / `malformed` / `underdeclared` の current gate judgment と一致しているか
 - malformed / underdeclared を runtime 側でごまかしていないか
+- `checked_reasons` を置くなら detached static gate artifact の actual `checker_core.reasons` と一致しているか
 
 ## 5. `expected_runtime`
 

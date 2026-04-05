@@ -242,6 +242,8 @@ pub struct LineageAssertion {
 pub struct ExpectedStatic {
     pub verdict: StaticGateVerdict,
     pub reasons: Vec<String>,
+    #[serde(default)]
+    pub checked_reasons: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
