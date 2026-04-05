@@ -161,7 +161,8 @@
 - さらに missing-option structure floor については、same-lineage spike の次段として helper-local second checker spike を追加し、`e16` / `e17` の smoke が通っている
 - さらに capability strengthening floor については、`e13` / `e20` を actual corpus に揃えたうえで helper-local third checker spike を追加し、capability family だけを narrow compare する smoke まで回してよい
 - duplicate declaration cluster は current cut のまま `checked_reasons` / `checked_reason_codes` / detached `reason_codes` stable inventory へは上げず、actual wording を `checker_core.reasons` と focused smoke で見る
-- 次の narrow step は、same-lineage / missing-option / capability の 3 spike を shared support helper へ薄く寄せるか、checker-side shared family compare を別 helper として切るかを整理することである
+- current cut では、same-lineage / missing-option / capability の 3 spike に shared support helper を導入しつつ family facade script を残すところまでは actualize 済みである
+- 次の narrow step は、checker-side shared family compare entry が still needed か、それとも family facade 維持で十分かを再比較することである
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る

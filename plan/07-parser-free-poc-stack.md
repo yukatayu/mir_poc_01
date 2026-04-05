@@ -301,7 +301,10 @@ current L2 では production exporter API はまだ固定しない。
   - second checker spike として、fixture-side `checked_reason_codes` と static gate artifact の actual reason rows を読み、missing-option family だけを narrow compare する helper-local checker spike
 - `scripts/current_l2_capability_checker.py`
   - third checker spike として、fixture-side `checked_reason_codes` と static gate artifact の actual reason rows を読み、capability family だけを narrow compare する helper-local checker spike
-  - same-lineage / missing-option / capability の shared support helper 化や public checker API 化はまだ行わない
+- `scripts/current_l2_family_checker_support.py`
+  - same-lineage / missing-option / capability の 3 checker spike で重複する parser / filter / status / stdout rendering をまとめる non-production support module
+  - family facade script と detached loop wrapper command 名は残し、generic checker-side shared entry にはしない
+  - public checker API 化はまだ行わない
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（capability third checker spike まで整理）
+最終更新: 2026-04-06（shared family checker support helper まで整理）
 
 ## 位置づけ
 
@@ -31,6 +31,7 @@
 - same-lineage floor `4`、capability floor `2`、missing-option structure floor `3` という checker cluster coverage が current static-only corpus から source-backed に見えるようになり、mainline を first checker cut 側へ戻す根拠が揃い始めた。
 - static-only malformed fixture として `e20-malformed-late-capability-strengthening` を actual corpus に追加し、capability strengthening floor を late-edge variant まで広げた。
 - capability strengthening floor については、`e13` / `e20` を fixture-side `checked_reason_codes` と detached static gate artifact `reason_codes` で narrow compare する helper-local third checker spike を追加し、family 単位の smoke を取れるようになった。
+- same-lineage / missing-option / capability の 3 checker spike で重複していた compare contract は、family facade script と detached loop command 名を保ったまま `scripts/current_l2_family_checker_support.py` へ薄く寄せた。
 - first checker cut に戻す current judgment は、carrier migration の追加 refinement より checker-boundary 整理を優先してよいという sequencing judgment として docs / plan / report chain へ固定された。
 - same-lineage static evidence floor については、fixture-side `checked_reason_codes` と static gate artifact `reason_codes` を narrow compare する helper-local first checker spike を追加し、`e4` / `e12` の smoke まで通した。
 - missing-option structure floor については、same-lineage の次段として fixture-side `checked_reason_codes` と static gate artifact `reason_codes` を narrow compare する helper-local second checker spike を追加し、`e16` / `e17` の smoke まで通した。
@@ -94,7 +95,7 @@
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 58% | 50% | 61% | 着手可能 | non-production aggregate emitter と aggregate compare helperに加え、aggregate transform の actual narrow cut は shared support helper まで進んだが public API と final compare 契約は未決 |
-| static analysis / type / theorem prover workstream | 74% | 67% | 66% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、additive optional `checked_reasons` を最小 dedicated carrier として実装した。typed code は stable cluster inventory と parametric shape 条件まで整理済みで、detached-side `reason_codes` は helper-local / reference-only mirror に留めつつ、display-only assist と readiness scan で corpus 横断の actual split を観察できる。さらに current stable cluster inventory 8 kind を optional `checked_reason_codes` に actualize し、coexistence scan を zero follow-up まで揃え、same-lineage / capability / missing-option checker cluster coverage を source-backed に確認し、same-lineage first checker spike、missing-option second checker spike、capability third checker spike まで固めた。duplicate cluster、shared support helper 化、final public checker cut と shrink policy はまだ OPEN |
+| static analysis / type / theorem prover workstream | 76% | 69% | 70% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、additive optional `checked_reasons` を最小 dedicated carrier として実装した。typed code は stable cluster inventory と parametric shape 条件まで整理済みで、detached-side `reason_codes` は helper-local / reference-only mirror に留めつつ、display-only assist と readiness scan で corpus 横断の actual split を観察できる。さらに current stable cluster inventory 8 kind を optional `checked_reason_codes` に actualize し、coexistence scan を zero follow-up まで揃え、same-lineage / capability / missing-option checker cluster coverage を source-backed に確認し、same-lineage first checker spike、missing-option second checker spike、capability third checker spike、shared family checker support helper まで固めた。duplicate cluster、generic checker-side shared entry、final public checker cut と shrink policy はまだ OPEN |
 | portability / observability / debug hook 設計 | 20% | 14% | 10% | 後段依存 | HW 非依存と step / graph 可視化余地は要件化したが contract はまだない |
 | Mirrorea fabric | 18% | 12% | 8% | 要仕様確認 | 境界整理はあるが current mainline 実装はまだ先 |
 | Typed-Effect Wiring Platform | 12% | 8% | 6% | 要仕様確認 | 位置づけはあるが concrete architecture は後段 |
@@ -183,3 +184,4 @@
 - 2026-04-06 00:27 JST — same-lineage first checker spike として helper-local compare script と `smoke-same-lineage-checker` wrapper を追加し、`e4` / `e12` の matched smoke を確認した。次は missing-option structure floor を second spike にするか、capability floor の corpus coverage を先に厚くするかを比較する段階。
 - 2026-04-06 00:39 JST — missing-option second checker spike として helper-local compare script と `smoke-missing-option-checker` wrapper を追加し、`e16` / `e17` の matched smoke を確認した。次は capability floor fixture を増やすか、same-lineage / missing-option spike を shared support helper に薄く寄せるかを比較する段階。
 - 2026-04-06 00:56 JST — `e20-malformed-late-capability-strengthening` を actual static-only corpus に追加し、capability strengthening floor を `2` fixture に広げたうえで、helper-local third checker spike と `smoke-capability-checker` wrapper を追加した。`e13` / `e20` の family smoke が通ったので、次は 3 family spike を shared support helper に寄せるか、checker-side shared family compare boundary を別 helper として切る段階。
+- 2026-04-06 01:34 JST — same-lineage / missing-option / capability の 3 checker spike で重複していた compare contract を `scripts/current_l2_family_checker_support.py` へ寄せ、family facade script と detached loop command 名は維持した。support tests、existing family tests、3 family smoke が通ったので、次は generic checker-side shared entry が本当に要るかを比較する段階。

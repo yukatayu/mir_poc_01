@@ -202,6 +202,23 @@
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e13-malformed-capability-strengthening.json`
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e20-malformed-late-capability-strengthening.json`
 
+### 2026-04-06 shared family checker support helper addendum
+
+- specs:
+  - `specs/examples/49-current-l2-shared-family-checker-support-helper.md`
+- reports:
+  - `docs/reports/0180-shared-family-checker-support-helper.md`
+  - `docs/reports/0181-review-shared-family-checker-support-helper.md`
+- scripts / tests:
+  - `scripts/current_l2_family_checker_support.py`
+  - `scripts/current_l2_same_lineage_checker.py`
+  - `scripts/current_l2_missing_option_checker.py`
+  - `scripts/current_l2_capability_checker.py`
+  - `scripts/tests/test_current_l2_family_checker_support.py`
+  - `scripts/tests/test_current_l2_same_lineage_checker.py`
+  - `scripts/tests/test_current_l2_missing_option_checker.py`
+  - `scripts/tests/test_current_l2_capability_checker.py`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

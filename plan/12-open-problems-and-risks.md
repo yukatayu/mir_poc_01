@@ -124,15 +124,17 @@
 - また first-class carrier placement は detached-side mirror 昇格ではなく、fixture-side additive optional `expected_static.checked_reason_codes` を stable cluster 8 kind に対して採るのが current cut である
 - current corpus では stable cluster 8 fixture の coexistence は `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っているが、これは immediate shrink を意味しない
 - current corpus では、first checker cut 候補 cluster のうち same-lineage floor / capability floor / missing-option structure floor について最低限の regression baseline が見え始めている
-- same-lineage floor については helper-local / non-production checker spike が入ったが、これは final checker API ではなく、missing-option / capability との順序づけもまだ OPEN である
+- same-lineage floor については helper-local / non-production checker spike が入り、current sequence は same-lineage -> missing-option -> capability まで actualize 済みである
 - missing-option structure floor についても helper-local / non-production second spike が入った
 - capability strengthening floor についても `e13` / `e20` を根拠に helper-local / non-production third spike が入った
-- 次の OPEN は、3 spike を shared support helper へ寄せるか、それとも family ごとの helper-local compare をしばらく維持するかである
+- current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
+- その next OPEN は、family facade を保ったまま十分か、それとも checker-side shared family compare entry を別 helper として切るべきかである
 - typed reason code に進むとしても、duplicate reason のように helper 内部構造へ近い cluster は急いで code 化しない
 - ただし `checked_reasons` と `checked_reason_codes` をいつ統合・縮退させるか、stable cluster と duplicate cluster の境界を later verifier / parser workstream でどう扱うかは引き続き OPEN であり、current judgment は additive coexistence 維持である
 - ただし capability floor の corpus coverage は `2` まで厚くなったとはいえ、same-lineage / missing-option よりは依然として薄いので、public checker API cut の前に helper-local evidence をもう少し積む余地がある
 - actual checker spike を public helper / API に昇格させるタイミングも引き続き OPEN であり、current same-lineage helper は detached validation loop の non-production convenience に留める
 - current missing-option helper も同様に detached validation loop の non-production convenience に留める
+- current capability helper も同様に detached validation loop の non-production convenience に留める
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
 - `smoke-fixture` のような fixture-level convenience を入れても、それを production CLI や final retention policy と誤読しない boundary discipline が引き続き必要である
