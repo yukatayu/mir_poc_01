@@ -104,6 +104,7 @@
 - detached validation-loop continuation の current state としては、
   - `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` が aggregate export 接続と storage/path policy の docs-only 集約文書になり、
   - `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md` が aggregate emitter sketch の actual narrow cut を与え、
+  - `specs/examples/37-current-l2-detached-bundle-transform-helper.md` が bundle emitter 内 private transform を shared support module へ落とす repo 内 callable boundary を与え、
   - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md` が aggregate emitter 内 private transform を shared support module へ落とす repo 内 callable boundary を与え、
   - `specs/examples/32-current-l2-static-gate-artifact-loop.md` が static gate verdict / reasons を detached validation loop に接続する static gate artifact helper cut を与え、
   - `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md` が 1 fixture loop を 1 command で回す helper 境界を与え、
@@ -111,7 +112,7 @@
   - current non-production default candidate は `target/current-l2-detached/` である
 - ただしこれは production exporter 完了を意味しない
 - actual exporter API、artifact 保存先と path policy、aggregate typed field の actual implementation timing は引き続き OPEN である
-- また current actualization は shared support module までであり、`lib.rs` / `harness.rs` の public exporter API finalization は依然として OPEN である
+- また current actualization は bundle / aggregate / static-gate の shared support module までであり、`lib.rs` / `harness.rs` の public exporter API finalization は依然として OPEN である
 - static gate artifact helper も同様に `examples/support/` と script helper に留まり、future checker API finalization は依然として OPEN である
 - `expected_static.reasons` は current fixture corpus では human-facing explanation と static machine-check 候補が混在しており、そのまま `run_bundle()` へ昇格させると valid fixture 群と衝突する
 - したがって current actual machine-check は `expected_static.verdict` に留め、actual `reasons` compare は detached static gate artifact 側へ残す

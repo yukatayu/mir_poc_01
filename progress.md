@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（checked static reasons assist reconciliation 完了時点）
+最終更新: 2026-04-05（detached bundle transform helper close 時点）
 
 ## 位置づけ
 
@@ -25,6 +25,7 @@
 - static-only scaffold helper は fixture JSON を変えないまま、authoring 後段で `suggest-checked-reasons` を使えることを stderr reminder として案内できるようになった。reminder command の fixture path は shell-safe quoting で copyable に保っている。
 - detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
 - aggregate emitter 内 private transform を `examples/support/current_l2_detached_aggregate_support.rs` へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary を non-production のまま shared helper 化した。
+- bundle emitter 内 private transform を `examples/support/current_l2_detached_bundle_support.rs` へ切り出し、`FixtureBundle + BundleRunReport -> detached bundle artifact` の repo 内 callable boundary を non-production のまま shared helper 化した。
 - static gate verdict / reasons を `examples/support/current_l2_static_gate_support.rs` と `current_l2_emit_static_gate.rs` から detached artifact として保存できるようにし、static-only / malformed / underdeclared fixture を `smoke-static-gate` で compare できるようにした。
 - `expected_static.reasons` を `run_bundle()` の actual machine-check に上げる試行を行い、current fixture corpus では explanatory note と machine-check 候補が混在しているため、そのまま昇格できないことを確認した。そのうえで additive optional `expected_static.checked_reasons` を導入し、field があるときだけ actual static gate reasons を fail-closed compare できる narrow carrier を入れた。
 - `checked_reasons` の次段として、typed reason code へ進めてよい stable cluster と parametric shape の entry criteria を docs-only で棚卸しした。immediate 全面 code 化は避け、cluster inventory を先に固める方針になった。
@@ -72,8 +73,8 @@
 | 基礎文書・decision level・invariants | 92% | 86% | 70% | 着手可能 | repo の基礎境界はかなり揃っている |
 | Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
-| parser-free PoC execution stack | 87% | 82% | 96% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、aggregate transform と static gate transform の repo 内 callable boundary が shared helper として入り、static gate reasons は detached helper compare、optional checked carrier、helper-local reason-code mirror、display-only authoring assist の境界まで整理された |
-| detached export / validation loop | 89% | 85% | 96% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper に加え、static gate detached non-core reason-code mirror を reference-only compare で扱う cut と、checked_reasons suggestion を display-only で返す wrapper convenience まで揃った |
+| parser-free PoC execution stack | 88% | 83% | 97% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、bundle / aggregate / static gate transform の repo 内 callable boundary が shared helper として入り、static gate reasons は detached helper compare、optional checked carrier、helper-local reason-code mirror、display-only authoring assist の境界まで整理された |
+| detached export / validation loop | 90% | 86% | 97% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper に加え、bundle / aggregate / static gate transform helper の shared support cut、static gate detached non-core reason-code mirror を reference-only compare で扱う cut、checked_reasons suggestion を display-only で返す wrapper convenience まで揃った |
 | fixture authoring / elaboration 実務 | 82% | 85% | 89% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、`e4` / `e5` で optional `checked_reasons` を actual corpus に narrow adoption した。valid fixture 群は actual static gate `reasons` が空なため `checked_reasons = []` を広げず、display-only assist と scaffold follow-up reminder で adoption 候補だけを確認できるようにしている |
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
@@ -148,3 +149,5 @@
 - 2026-04-05 23:10 JST — display-only `checked_reasons` assist まわりの spec / report / traceability / progress を整合させ、targeted tests・real smoke・full cargo test・docs validation が揃った。次は assist を数回実地で回し、typed reason code への first-class 昇格を急がず authoring 実務の摩擦点をさらに絞る段階。
 - 2026-04-05 23:34 JST — static-only scaffold helper から `suggest-checked-reasons` への stderr follow-up reminder を追加し、fixture JSON を変えずに authoring 次段の narrow helper を案内する cut を docs / tests / progress に揃えた。
 - 2026-04-05 20:34 JST — `checked_reasons` assist reconciliation を閉じ、existing spec / helper / report / traceability / progress の factual trail を揃えたうえで、static-only scaffold reminder の shell-safe quoting を test-first で固定した。次は current detached validation loop を実地の fixture authoring へさらに接続する段階。
+- 2026-04-05 20:42 JST — bundle-first detached artifact の private transform を `examples/support/current_l2_detached_bundle_support.rs` へ切り出し、runtime / static-only の両 fixture で repo 内 callable boundary と emitter smoke を揃えた。次は fixture authoring 実地反復か、aggregate / storage policy の actual narrow API cut をさらに詰める段階。
+- 2026-04-05 20:55 JST — detached bundle transform helper task を reviewer 付きで閉じ、generated bytecode の混入を除去したうえで `e3` の formal `non_admissible_metadata` 保持を direct test に追加した。full `cargo test -p mir-semantics`、bundle smoke、docs validation、`git diff --check` が通ったので、次は static-only / malformed fixture authoring の実地反復へ進める状態。

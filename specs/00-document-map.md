@@ -201,6 +201,8 @@
   - current L2 parser-free PoC の detached static gate artifact に helper-local / reference-only な `reason_codes` mirror を置く最小 cut を整理する。
 - `specs/examples/36-current-l2-checked-reasons-authoring-assist.md`
   - `expected_static.checked_reasons` を narrow に採用するとき、static gate artifact の actual `checker_core.reasons` を見て display-only suggestion を返す non-production assist の補助文書。
+- `specs/examples/37-current-l2-detached-bundle-transform-helper.md`
+  - current L2 parser-free PoC の detached validation loop で、bundle-first emitter 内 private transform を repo 内 callable boundary へ落とす shared support helper の最小 cut を整理する。
 
 ## レポート
 
@@ -241,6 +243,7 @@
   - parser なし minimal interpreter の `expected_static.reasons` dual-use を壊さずに optional `checked_reasons` へ narrow transfer する carrier comparison は `specs/examples/33-current-l2-checked-static-reasons-carrier.md` に置く。
   - parser なし minimal interpreter の `checked_reasons` から typed reason code へ進めてよい stable cluster と parametric shape の条件は `specs/examples/34-current-l2-static-reason-code-entry-criteria.md` に置く。
   - parser なし minimal interpreter の detached static gate artifact に helper-local / reference-only な `reason_codes` mirror を置く cut は `specs/examples/35-current-l2-detached-static-reason-code-mirror.md` に置く。
+  - parser なし minimal interpreter の bundle-first emitter private transform を repo 内 callable boundary へ落とす shared support helper cut は `specs/examples/37-current-l2-detached-bundle-transform-helper.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor
@@ -257,6 +260,8 @@
   - detached validation loop の aggregate summary artifact を出す non-production emitter sketch。
 - `crates/mir-semantics/examples/current_l2_emit_static_gate.rs`
   - detached validation loop の static gate artifact を出す non-production emitter sketch。
+- `crates/mir-semantics/examples/support/current_l2_detached_bundle_support.rs`
+  - detached validation loop の bundle-first artifact transform を repo 内で共有する non-production support helper。
 - `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
   - detached validation loop の aggregate summary artifact transform を repo 内で共有する non-production support helper。
 - `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`

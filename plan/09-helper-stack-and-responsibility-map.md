@@ -180,6 +180,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs`
   - bundle-first exporter の operational aid
   - `run_bundle` / `BundleRunReport` の public behavior を再利用する
+  - artifact transform 本体は `crates/mir-semantics/examples/support/current_l2_detached_bundle_support.rs` へ委譲し、example 内 private code ではなく repo 内 callable boundary として保つ
   - helper stack 本体の public API を増やさない
 - `crates/mir-semantics/examples/current_l2_emit_detached_aggregate.rs`
   - aggregate exporter の operational aid
@@ -194,6 +195,9 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - helper stack 本体の public API を増やさない
 - `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
   - `BatchRunSummary -> detached aggregate artifact` の pure transform と carrier struct を持つ shared support helper
+  - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
+- `crates/mir-semantics/examples/support/current_l2_detached_bundle_support.rs`
+  - `FixtureBundle + BundleRunReport -> detached bundle artifact` の pure transform と carrier struct を持つ shared support helper
   - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
 - `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
   - `CurrentL2Fixture + StaticGateResult -> static gate artifact` の pure transform と carrier struct を持つ shared support helper

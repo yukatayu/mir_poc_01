@@ -93,6 +93,7 @@
 - current non-production candidate として `target/current-l2-detached/` は置けたが、final path policy と actual aggregate exporter API はまだ未決である
 - current detached validation loop には aggregate emitter sketch と `emit-aggregate` wrapper を足せるが、これは production aggregate API finalization ではない
 - ただし actual narrow cut としては、aggregate emitter 内 private transform を shared support module へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary までは進めてよい
+- bundle emitter 側も同様に、private transform を shared support module へ切り出し、`FixtureBundle + BundleRunReport -> detached bundle artifact` の repo 内 callable boundary までは進めてよい
 
 ### 5. review infrastructure の変動
 
@@ -137,6 +138,7 @@
 - detached exporter chain の docs-only judgment を 1 箇所へ集約し、non-production の tiny emitter / diff helper / fixture template を PoC loop 補助として足す
 - detached validation loop の storage/path policy、tiny wrapper、aggregate export の actual narrow cut を docs-only から thin operational aid へ進める
 - aggregate export の actual narrow cut として、example private transform を shared support module へ落とし、public API を増やさずに repo 内 callable boundary へ寄せる
+- bundle export の actual narrow cut として、example private transform を shared support module へ落とし、public API を増やさずに repo 内 callable boundary へ寄せる
 - first checker cut の local / structural floor を detached validation loop に接続するなら、runtime artifact と混ぜずに static gate artifact helper を別立てで足す
 - detached validation loop の common path として、1 fixture の bundle export / optional reference compare / single-fixture aggregate smoke を 1 command で回す helper を足す
 - static-only / malformed / underdeclared fixture の common path として、static gate artifact の emit / compare を 1 command で回す helper を足す
