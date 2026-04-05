@@ -223,6 +223,8 @@
   - first checker cut の actual first spike として same-lineage static evidence floor を helper-local に切り出す最小 cut を整理する。
 - `specs/examples/47-current-l2-missing-option-second-checker-spike.md`
   - same-lineage first checker spike の次段として missing-option structure floor を helper-local に切り出す最小 cut を整理する。
+- `specs/examples/48-current-l2-capability-third-checker-spike.md`
+  - missing-option second checker spike の次段として capability strengthening floor を helper-local に切り出す最小 cut を整理する。
 
 ## レポート
 
@@ -272,6 +274,7 @@
   - parser なし minimal interpreter の current static-only corpus が first checker cut 候補 cluster をどこまで覆っているかの baseline は `specs/examples/45-current-l2-first-checker-cut-regression-baseline.md` に置く。
   - parser なし minimal interpreter の first checker cut actual first spike として same-lineage floor を helper-local に切り出す cut は `specs/examples/46-current-l2-same-lineage-first-checker-spike.md` に置く。
   - parser なし minimal interpreter の second checker spike として missing-option structure floor を helper-local に切り出す cut は `specs/examples/47-current-l2-missing-option-second-checker-spike.md` に置く。
+  - parser なし minimal interpreter の third checker spike として capability strengthening floor を helper-local に切り出す cut は `specs/examples/48-current-l2-capability-third-checker-spike.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor

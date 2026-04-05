@@ -275,6 +275,7 @@ current L2 では production exporter API はまだ固定しない。
   - `emit-static-gate` / `compare-static-gates` / `smoke-static-gate` により、static-only / malformed / underdeclared fixture でも static gate artifact の保存と compare を回せる
   - `smoke-same-lineage-checker` により、1 fixture の static gate artifact を保存し、same-lineage first checker spike をその artifact に対して回せる
   - `smoke-missing-option-checker` により、1 fixture の static gate artifact を保存し、missing-option second checker spike をその artifact に対して回せる
+  - `smoke-capability-checker` により、1 fixture の static gate artifact を保存し、capability third checker spike をその artifact に対して回せる
   - compare helper の exit code `1` は informational difference として許容し、helper failure だけを non-zero で止める
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ作る
@@ -298,7 +299,9 @@ current L2 では production exporter API はまだ固定しない。
   - public checker API ではなく、detached validation loop から smoke する non-production helper に留める
 - `scripts/current_l2_missing_option_checker.py`
   - second checker spike として、fixture-side `checked_reason_codes` と static gate artifact の actual reason rows を読み、missing-option family だけを narrow compare する helper-local checker spike
-  - capability floor との統合や public checker API 化はまだ行わない
+- `scripts/current_l2_capability_checker.py`
+  - third checker spike として、fixture-side `checked_reason_codes` と static gate artifact の actual reason rows を読み、capability family だけを narrow compare する helper-local checker spike
+  - same-lineage / missing-option / capability の shared support helper 化や public checker API 化はまだ行わない
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。

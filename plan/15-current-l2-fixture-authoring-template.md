@@ -66,8 +66,8 @@
   - `missing_chain_head_option`
   - `missing_predecessor_option`
   - `missing_successor_option`
-- first adoption は `e4` / `e5` から始まり、その後 `e12` / `e13` / `e16` / `e17` / `e18` / `e19` まで stable cluster を広げてよい
-- current corpus では `e12` / `e13` のような declared target missing / capability strengthening まで stable cluster を広げてよい
+- first adoption は `e4` / `e5` から始まり、その後 `e12` / `e13` / `e16` / `e17` / `e18` / `e19` / `e20` まで stable cluster を広げてよい
+- current corpus では `e12` / `e13` / `e20` のような declared target missing / capability strengthening family まで stable cluster を広げてよい
 - current corpus では `e16` / `e17` / `e18` のような missing head / predecessor / successor option cluster まで stable malformed cluster を広げてよい
 - current corpus では `e19` のような declared target mismatch cluster まで stable malformed cluster を広げてよい
 - `e14` / `e15` のような duplicate declaration cluster は actual corpus に入れてよいが、current helper cut では `checked_reasons` と detached `reason_codes` を absent のままにして、actual wording は targeted test / detached smoke 側で見る方が自然である

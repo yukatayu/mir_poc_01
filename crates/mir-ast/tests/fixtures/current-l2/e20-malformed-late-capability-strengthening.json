@@ -1,0 +1,108 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e20_malformed_late_capability_strengthening",
+  "source_example_id": "E13-late-edge-variant",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "mirror",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "escalated",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [
+                      {
+                        "predecessor": "primary",
+                        "successor": "mirror",
+                        "lineage_assertion": {
+                          "predecessor": "primary",
+                          "successor": "mirror"
+                        }
+                      },
+                      {
+                        "predecessor": "mirror",
+                        "successor": "escalated",
+                        "lineage_assertion": {
+                          "predecessor": "mirror",
+                          "successor": "escalated"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "checked_reason_codes": [
+      {
+        "kind": "capability_strengthens",
+        "from_capability": "read",
+        "to_capability": "write"
+      }
+    ],
+    "checked_reasons": [
+      "capability strengthens from read to write"
+    ],
+    "reasons": [
+      "same-lineage fallback cannot strengthen declared capability",
+      "earlier read-to-read continuation does not permit later read-to-write escalation"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "malformed chain is stopped before runtime because later successor capability strengthens"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "capability monotonicity is checked statically",
+      "later same-lineage edge cannot hide read-to-write escalation"
+    ]
+  }
+}

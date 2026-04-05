@@ -186,6 +186,22 @@
   - `scripts/tests/test_current_l2_static_gate_loop.py`
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
 
+### 2026-04-06 capability third checker spike addendum
+
+- `plan/07-parser-free-poc-stack.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/45-current-l2-first-checker-cut-regression-baseline.md`
+  - `specs/examples/48-current-l2-capability-third-checker-spike.md`
+  - `docs/reports/0178-capability-floor-third-checker-spike.md`
+  - `docs/reports/0179-review-capability-floor-third-checker-spike.md`
+  - `scripts/current_l2_capability_checker.py`
+  - `scripts/tests/test_current_l2_capability_checker.py`
+  - `scripts/current_l2_detached_loop.py`
+  - `scripts/tests/test_current_l2_static_gate_loop.py`
+  - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+  - `crates/mir-semantics/tests/current_l2_static_gate_support.rs`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e13-malformed-capability-strengthening.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e20-malformed-late-capability-strengthening.json`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

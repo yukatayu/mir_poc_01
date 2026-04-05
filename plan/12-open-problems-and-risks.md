@@ -120,15 +120,17 @@
 - その次段では、`checked_reasons` を長期維持するか、typed reason code へ進めるかが OPEN である
 - current helper cut では、detached static gate artifact 側に `detached_noncore.reason_codes` を置いてよい
 - ただしこれは `checker_core.reasons` の first-class typed replacement ではなく、stable cluster だけを best-effort で mirror する helper-local / reference-only carrier に留める
-- current actualization では、first typed family は lineage edge pair family、second tranche は declared target edge pair family、その後 missing option family と capability singleton まで current stable cluster inventory を `expected_static.checked_reason_codes` に揃えた
+- current actualization では、first typed family は lineage edge pair family、second tranche は declared target edge pair family、その後 missing option family と capability family まで current stable cluster inventory を `expected_static.checked_reason_codes` に揃えた
 - また first-class carrier placement は detached-side mirror 昇格ではなく、fixture-side additive optional `expected_static.checked_reason_codes` を stable cluster 8 kind に対して採るのが current cut である
 - current corpus では stable cluster 8 fixture の coexistence は `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っているが、これは immediate shrink を意味しない
 - current corpus では、first checker cut 候補 cluster のうち same-lineage floor / capability floor / missing-option structure floor について最低限の regression baseline が見え始めている
 - same-lineage floor については helper-local / non-production checker spike が入ったが、これは final checker API ではなく、missing-option / capability との順序づけもまだ OPEN である
-- missing-option structure floor についても helper-local / non-production second spike が入ったが、capability floor coverage を増やすか、2 spike を shared support helper へ寄せるかは引き続き OPEN である
+- missing-option structure floor についても helper-local / non-production second spike が入った
+- capability strengthening floor についても `e13` / `e20` を根拠に helper-local / non-production third spike が入った
+- 次の OPEN は、3 spike を shared support helper へ寄せるか、それとも family ごとの helper-local compare をしばらく維持するかである
 - typed reason code に進むとしても、duplicate reason のように helper 内部構造へ近い cluster は急いで code 化しない
 - ただし `checked_reasons` と `checked_reason_codes` をいつ統合・縮退させるか、stable cluster と duplicate cluster の境界を later verifier / parser workstream でどう扱うかは引き続き OPEN であり、current judgment は additive coexistence 維持である
-- ただし capability floor の corpus coverage はまだ 1 fixture と薄く、first checker cut へ主線を戻すとしても regression baseline の厚みは今後の追加 task で補う必要がある
+- ただし capability floor の corpus coverage は `2` まで厚くなったとはいえ、same-lineage / missing-option よりは依然として薄いので、public checker API cut の前に helper-local evidence をもう少し積む余地がある
 - actual checker spike を public helper / API に昇格させるタイミングも引き続き OPEN であり、current same-lineage helper は detached validation loop の non-production convenience に留める
 - current missing-option helper も同様に detached validation loop の non-production convenience に留める
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である

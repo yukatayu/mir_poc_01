@@ -32,6 +32,7 @@
 - `e17-malformed-missing-predecessor-option`
 - `e18-malformed-missing-successor-option`
 - `e19-malformed-target-mismatch`
+- `e20-malformed-late-capability-strengthening`
 
 ## fixture catalog
 
@@ -50,6 +51,7 @@
 | `e17-malformed-missing-predecessor-option` | missing predecessor option | `malformed` | `not_evaluated` | runtime に入らない | なし | E17, `0159` |
 | `e18-malformed-missing-successor-option` | missing successor option | `malformed` | `not_evaluated` | runtime に入らない | なし | E18, `0159` |
 | `e19-malformed-target-mismatch` | declared target mismatch | `malformed` | `not_evaluated` | runtime に入らない | なし | E19, `0161` |
+| `e20-malformed-late-capability-strengthening` | earlier read-to-read continuation の後に later read-to-write escalation を置く malformed static stop | `malformed` | `not_evaluated` | runtime に入らない | なし | E13 late-edge variant, `0178` |
 | `e6-write-after-expiry` | write-capable option expiry + later read-only only | `valid` | `Reject` | `lease-expired` formal metadata、capability mismatch narrative explanation、final `Reject` | あり | E6, `0039`, `0045`, `0078` |
 | `e7-write-fallback-after-expiry` | expiry 後に later write-capable option で成功 | `valid` | `success` | `lease-expired` formal metadata を残しつつ later success | あり | E6 補完, `0078` |
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject` | `valid` | `Reject` | `perform-failure`、`Reject`、formal `admit-miss`、capability mismatch narrative | あり | canonical law / no re-promotion, `0078` |
@@ -123,6 +125,11 @@
 
 - same-lineage edge の declared access target が一致しない chain は malformed static stop である
 - declared target mismatch は stable malformed cluster として actual corpus / `checked_reasons` / detached `reason_codes` に通してよい
+
+### `e20-malformed-late-capability-strengthening`
+
+- same-lineage chain の earlier edge が read-to-read でも、later edge で read-to-write escalation を入れると capability strengthening として malformed static stop である
+- capability floor を singleton fixture から外し、helper-local checker spike を `e13` と対で smoke できる actual corpus として扱ってよい
 
 ### `e6-write-after-expiry`
 

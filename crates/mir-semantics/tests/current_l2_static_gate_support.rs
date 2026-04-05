@@ -214,6 +214,29 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
         }]
     );
 
+    let late_strengthening_path =
+        fixture_path("e20-malformed-late-capability-strengthening.json");
+    let late_strengthening_fixture =
+        load_fixture("e20-malformed-late-capability-strengthening.json");
+    let late_strengthening_gate = static_gate_detailed(&late_strengthening_fixture);
+
+    let late_strengthening_artifact = build_detached_static_gate_artifact(
+        late_strengthening_path,
+        &late_strengthening_fixture,
+        &late_strengthening_gate,
+    );
+
+    assert_eq!(
+        late_strengthening_artifact
+            .detached_noncore
+            .expect("late capability cluster should emit detached_noncore")
+            .reason_codes,
+        vec![mir_semantics::StaticReasonCodeRow::CapabilityStrengthens {
+            from_capability: "read".to_string(),
+            to_capability: "write".to_string(),
+        }]
+    );
+
     let target_mismatch_path = fixture_path("e19-malformed-target-mismatch.json");
     let target_mismatch_fixture = load_fixture("e19-malformed-target-mismatch.json");
     let target_mismatch_gate = static_gate_detailed(&target_mismatch_fixture);
