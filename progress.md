@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（try rollback AST helper の first tranche cut まで整理）
+最終更新: 2026-04-06（try rollback AST helper の malformed static tranche size まで整理）
 
 ## 位置づけ
 
@@ -36,6 +36,7 @@
 - さらに current docs-only refinement として、later public checker API comparison に future dedicated AST structural helper family を載せるには、generic family 合流とは別に、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure の entry criteria が要るという current judgment を固定した。
 - さらに current docs-only refinement として、future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然だという current judgment を固定した。
 - さらに current docs-only refinement として、future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然だという current judgment を固定した。
+- さらに current docs-only refinement として、future dedicated AST structural helper の minimal malformed static family tranche は `TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を最小とする current judgment を固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - static-only malformed / underdeclared fixture に対しては、`scripts/current_l2_detached_loop.py suggest-checked-reasons` から actual static gate `checker_core.reasons` を見て `expected_static.checked_reasons` 候補を display-only で確認できるようになった。helper は fixture JSON を自動更新しない。
 - helper-local / reference-only `detached_noncore.reason_codes` についても、`scripts/current_l2_detached_loop.py suggest-reason-codes` から future typed carrier 候補 row を display-only で確認できるようになった。これは current fixture schema の field ではなく、reference-only assist に留まり、unsupported fixture-side typed field を見つけたら fail-closed に止まる。
@@ -219,3 +220,4 @@
 - 2026-04-06 05:02 JST — future dedicated AST structural helper family の public checker entry criteria を比較し、generic family 合流とは別に、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure の additional threshold を要求する current judgment を固定した。次は malformed static family を actual corpus に増やす timing をどこに置くかを比べる段階。
 - 2026-04-06 05:18 JST — future dedicated AST structural helper の malformed static family timing を比較し、current phase の今すぐではなく dedicated helper actualization first tranche と同時に actual corpus へ足す current judgment を固定した。次は helper code / fixture fields / malformed static family / smoke path を first tranche としてどこまで一体で切るかを比べる段階。
 - 2026-04-06 05:34 JST — future dedicated AST structural helper の first tranche cut を比較し、helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残す current judgment を固定した。次は minimal malformed static family tranche の exact size をどこまで narrow に切るかを比べる段階。
+- 2026-04-06 05:48 JST — future dedicated AST structural helper の minimal malformed static family tranche size を比較し、`TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を first tranche の最小とする current judgment を固定した。次はその two-fixture first tranche の各 slot に最初に入れる malformed pattern をどこまで narrow に切るかを比べる段階。

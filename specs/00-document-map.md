@@ -259,6 +259,8 @@
   - future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然だという current docs-only judgment を整理する。
 - `specs/examples/65-current-l2-try-rollback-ast-helper-first-tranche-cut.md`
   - future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然だという current docs-only judgment を整理する。
+- `specs/examples/66-current-l2-try-rollback-malformed-static-tranche-size.md`
+  - future dedicated AST structural helper の malformed static first tranche は `TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を最小とするのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 

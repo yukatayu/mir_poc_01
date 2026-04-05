@@ -64,6 +64,7 @@
 - 同様に future dedicated AST structural helper family を later public checker API comparison に載せるのも、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure が揃うまでは **まだ行わない**
 - 同様に future dedicated AST structural helper の malformed static family も、current phase の今すぐではなく dedicated helper actualization first tranche で **初めて actual corpus に足す**
 - 同様に future dedicated AST structural helper の first tranche では、helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は **まだ入れない**
+- 同様に future dedicated AST structural helper の minimal malformed static family tranche は、`TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を **最小** とする
 - current stable cluster tranche としては、stable inventory 8 kind に限って optional `expected_static.checked_reason_codes` を additive に置いてよい
 - current tranche で allowed な kind は次である
   - `missing_lineage_assertion`

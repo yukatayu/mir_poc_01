@@ -344,6 +344,7 @@
   - `specs/examples/63-current-l2-try-rollback-ast-helper-public-checker-entry-criteria.md`
   - `specs/examples/64-current-l2-try-rollback-malformed-static-family-timing.md`
   - `specs/examples/65-current-l2-try-rollback-ast-helper-first-tranche-cut.md`
+  - `specs/examples/66-current-l2-try-rollback-malformed-static-tranche-size.md`
   - `docs/reports/0204-try-rollback-ast-helper-structural-verdict-carrier.md`
   - `docs/reports/0205-review-try-rollback-ast-helper-structural-verdict-carrier.md`
   - `docs/reports/0206-try-rollback-ast-helper-shared-carrier-threshold.md`
@@ -358,10 +359,8 @@
   - `docs/reports/0215-review-try-rollback-malformed-static-family-timing.md`
   - `docs/reports/0216-try-rollback-ast-helper-first-tranche-cut.md`
   - `docs/reports/0217-review-try-rollback-ast-helper-first-tranche-cut.md`
-  - `docs/reports/0212-try-rollback-ast-helper-public-checker-entry-criteria.md`
-  - `docs/reports/0213-review-try-rollback-ast-helper-public-checker-entry-criteria.md`
-  - `docs/reports/0214-try-rollback-malformed-static-family-timing.md`
-  - `docs/reports/0215-review-try-rollback-malformed-static-family-timing.md`
+  - `docs/reports/0218-try-rollback-malformed-static-tranche-size.md`
+  - `docs/reports/0219-review-try-rollback-malformed-static-tranche-size.md`
 
 ### named profile catalog と mirror boundary
 
