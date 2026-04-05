@@ -19,16 +19,19 @@
 
 ## Actions taken
 
-1. reviewer evidence を取れれば 1 回だけ review する。
-2. waitable reviewer handle が取れない場合は local diff inspection と fresh validation を fallback evidence に採用する。
+1. reviewer agent を 1 回だけ起動する。
+2. 180s wait を 2 回行い、completion を待つ。
+3. completion が返らない場合は local diff inspection と fresh validation を fallback evidence に採用する。
 
 ## Evidence / outputs / test results
 
 - reviewer
 
 ```text
-reviewer tool surface did not yield a waitable agent handle in this task context
-fallback: local diff inspection + fresh validation
+agent: Hooke
+wait #1: timed out after 180s
+wait #2: timed out after 180s
+status: no completion within allowed wait window
 ```
 
 - local fallback
