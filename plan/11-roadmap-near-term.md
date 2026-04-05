@@ -66,7 +66,8 @@
 - current docs-only refinement としては、future dedicated AST structural helper を generic structural checker family と合流させるのは later public checker API comparison と同時に扱うのが自然である
 - current docs-only refinement としては、later public checker API comparison に future dedicated AST structural helper family を載せるには、generic family 合流とは別に、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure の entry criteria が要る
 - current docs-only refinement としては、future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然である
-- 次の narrow question は、future dedicated AST structural helper の first tranche を helper code / fixture fields / malformed static family / smoke path のどこまで一体で切るかである
+- current docs-only refinement としては、future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然である
+- 次の narrow question は、future dedicated AST structural helper の minimal malformed static family tranche の exact size をどこまで narrow に切るかである
 
 ### 候補 4. parser 導入前の boundary inventory
 

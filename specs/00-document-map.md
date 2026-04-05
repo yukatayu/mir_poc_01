@@ -257,6 +257,8 @@
   - future dedicated AST structural helper family を later public checker API comparison に載せるには、generic family 合流とは別に、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure の entry criteria が揃うまで待つのが自然だという current docs-only judgment を整理する。
 - `specs/examples/64-current-l2-try-rollback-malformed-static-family-timing.md`
   - future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然だという current docs-only judgment を整理する。
+- `specs/examples/65-current-l2-try-rollback-ast-helper-first-tranche-cut.md`
+  - future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 

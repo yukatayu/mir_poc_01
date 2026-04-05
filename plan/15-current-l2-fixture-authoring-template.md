@@ -63,6 +63,7 @@
 - 同様に future dedicated AST structural helper を generic structural checker family へ合流させる比較も、later public checker API comparison までは **まだ行わない**
 - 同様に future dedicated AST structural helper family を later public checker API comparison に載せるのも、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure が揃うまでは **まだ行わない**
 - 同様に future dedicated AST structural helper の malformed static family も、current phase の今すぐではなく dedicated helper actualization first tranche で **初めて actual corpus に足す**
+- 同様に future dedicated AST structural helper の first tranche では、helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は **まだ入れない**
 - current stable cluster tranche としては、stable inventory 8 kind に限って optional `expected_static.checked_reason_codes` を additive に置いてよい
 - current tranche で allowed な kind は次である
   - `missing_lineage_assertion`
@@ -93,6 +94,7 @@
 - 同様に、current helper stack では dedicated AST structural helper の generic structural checker family entry もまだ actualize しない
 - 同様に、current helper stack では dedicated AST structural helper の public checker API family entry もまだ actualize しない
 - 同様に、current helper stack では dedicated AST structural helper 向け malformed static family もまだ actual corpus に入れない
+- 同様に、current helper stack では dedicated AST structural helper first tranche に shared detached carrier や public checker API を混ぜない
 - ただし helper は fixture JSON を自動更新しない。採用は hand-edit と review で行う
 - detached artifact loop に入れても、payload core の中心は `static_verdict` と `entered_evaluation = false` になる
 - detached validation loop continuation では、runtime bundle artifact と別に static gate artifact を保存し、`checker_core.static_verdict` / `checker_core.reasons` を compare してよい
