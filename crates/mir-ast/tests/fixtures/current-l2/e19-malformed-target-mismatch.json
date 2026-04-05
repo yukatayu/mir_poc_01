@@ -1,0 +1,85 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e19_malformed_target_mismatch",
+  "source_example_id": "E19",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "mirror",
+                    "target": "archive_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [
+                      {
+                        "predecessor": "primary",
+                        "successor": "mirror",
+                        "lineage_assertion": {
+                          "predecessor": "primary",
+                          "successor": "mirror"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "checked_reasons": [
+      "declared access target mismatch between primary and mirror"
+    ],
+    "reasons": [
+      "same-lineage continuation は declared access target が一致していなければならない",
+      "target mismatch は hidden rebinding や dynamic Reject に落とさず malformed static stop として扱う"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "declared target mismatch は malformed static stop として runtime evaluation に入らない"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "same-lineage edge の両端は同じ declared access target を共有すること",
+      "target mismatch を hidden relocation や host-side repair にしないこと"
+    ]
+  }
+}

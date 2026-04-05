@@ -31,6 +31,7 @@
 - `e16-malformed-missing-chain-head-option`
 - `e17-malformed-missing-predecessor-option`
 - `e18-malformed-missing-successor-option`
+- `e19-malformed-target-mismatch`
 
 ## fixture catalog
 
@@ -48,6 +49,7 @@
 | `e16-malformed-missing-chain-head-option` | missing chain head option | `malformed` | `not_evaluated` | runtime に入らない | なし | E16, `0159` |
 | `e17-malformed-missing-predecessor-option` | missing predecessor option | `malformed` | `not_evaluated` | runtime に入らない | なし | E17, `0159` |
 | `e18-malformed-missing-successor-option` | missing successor option | `malformed` | `not_evaluated` | runtime に入らない | なし | E18, `0159` |
+| `e19-malformed-target-mismatch` | declared target mismatch | `malformed` | `not_evaluated` | runtime に入らない | なし | E19, `0161` |
 | `e6-write-after-expiry` | write-capable option expiry + later read-only only | `valid` | `Reject` | `lease-expired` formal metadata、capability mismatch narrative explanation、final `Reject` | あり | E6, `0039`, `0045`, `0078` |
 | `e7-write-fallback-after-expiry` | expiry 後に later write-capable option で成功 | `valid` | `success` | `lease-expired` formal metadata を残しつつ later success | あり | E6 補完, `0078` |
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject` | `valid` | `Reject` | `perform-failure`、`Reject`、formal `admit-miss`、capability mismatch narrative | あり | canonical law / no re-promotion, `0078` |
@@ -116,6 +118,11 @@
 
 - edge successor が visible option declaration を指していない chain は malformed static stop である
 - missing successor option は hidden later fallback 候補へ repair せず、stable malformed cluster として actual corpus / `checked_reasons` / detached `reason_codes` に通してよい
+
+### `e19-malformed-target-mismatch`
+
+- same-lineage edge の declared access target が一致しない chain は malformed static stop である
+- declared target mismatch は stable malformed cluster として actual corpus / `checked_reasons` / detached `reason_codes` に通してよい
 
 ### `e6-write-after-expiry`
 

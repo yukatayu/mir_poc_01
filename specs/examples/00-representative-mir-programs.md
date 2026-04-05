@@ -48,6 +48,7 @@
 | E16 | missing chain head option | malformed | visible chain head が未宣言 option のため static stop |
 | E17 | missing predecessor option | malformed | edge predecessor が未宣言 option のため static stop |
 | E18 | missing successor option | malformed | edge successor が未宣言 option のため static stop |
+| E19 | declared target mismatch | malformed | same-lineage edge の target 不一致のため static stop |
 
 ## E1 — place 入れ子 + authority update + `atomic_cut`
 
@@ -626,6 +627,45 @@ place root {
 - 説明可能であるべきこと:
   - missing successor option を hidden later candidate へ repair しないこと
   - chain edge の可視宣言要件が runtime より先に効くこと
+
+## E19 — declared target mismatch は malformed static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+      option mirror on archive_doc capability read lease live
+
+      chain profile_ref = primary
+        fallback mirror
+          @ lineage(primary -> mirror)
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `malformed`
+- 理由:
+  - same-lineage continuation は両端が同じ declared access target を共有していなければならない。
+  - `primary` と `mirror` は capability だけ見れば monotone でも、target anchor が `profile_doc` と `archive_doc` でずれている。
+  - current helper cut ではこの cluster を stable actual wording として扱ってよく、`checked_reasons` と detached `reason_codes` の両方へ narrow に載せてよい。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- target mismatch は dynamic `Reject` や route rebinding に落とさず malformed static stop として扱う。
+
+### 最小 trace / audit 説明
+
+- event は発生しない。
+- 説明可能であるべきこと:
+  - same-lineage edge は target equality を floor として要求すること
+  - target mismatch を hidden relocation で補わないこと
 
 ## 書いてみて見えた current L2 の穴
 

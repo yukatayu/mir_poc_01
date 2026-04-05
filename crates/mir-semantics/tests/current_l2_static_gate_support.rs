@@ -213,6 +213,27 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
             to_capability: "write".to_string(),
         }]
     );
+
+    let target_mismatch_path = fixture_path("e19-malformed-target-mismatch.json");
+    let target_mismatch_fixture = load_fixture("e19-malformed-target-mismatch.json");
+    let target_mismatch_gate = static_gate_detailed(&target_mismatch_fixture);
+
+    let target_mismatch_artifact = build_detached_static_gate_artifact(
+        target_mismatch_path,
+        &target_mismatch_fixture,
+        &target_mismatch_gate,
+    );
+
+    assert_eq!(
+        target_mismatch_artifact
+            .detached_noncore
+            .expect("stable target-mismatch cluster should emit detached_noncore")
+            .reason_codes,
+        vec![current_l2_static_gate_support::StaticReasonCodeRow::DeclaredTargetMismatch {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        }]
+    );
 }
 
 #[test]
