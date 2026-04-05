@@ -120,6 +120,10 @@ readiness scan は最低でも次を行ってよい。
 5. `reason_codes` suggestion がある fixture 数を表示する
 6. `kind` ごとの count を表示する
 7. suggestion あり / なし の fixture list を表示する
+8. stable coexistence anchor 数を表示する
+9. `checked_reason_codes` があるのに `checked_reasons` が無い fixture 数を表示する
+10. `checked_reason_codes` と actual suggestion が不一致な fixture 数を表示する
+11. coexistence follow-up が必要な fixture list を表示する
 
 ### current placement
 
@@ -145,6 +149,9 @@ current corpus に対する smoke では、
 - fixtures with checked_reasons: `8`
 - fixtures with reason_codes suggestions: `8`
 - fixtures with checked_reason_codes: `8`
+- fixtures with stable coexistence anchors: `8`
+- fixtures with checked_reason_codes but missing checked_reasons: `0`
+- fixtures with checked_reason_codes mismatching actual suggestion: `0`
 
 であり、stable cluster と duplicate cluster の split は次のように読める。
 
@@ -167,6 +174,9 @@ current corpus に対する smoke では、
 この split は current docs で stable cluster として扱う inventory と整合する。
 また current code / fixture corpus では、stable cluster 8 件が `checked_reason_codes` まで
 actualize 済みであり、duplicate cluster 2 件だけが absent に留まる。
+さらに current actual corpus では、stable cluster 8 件が
+`checked_reasons` / `checked_reason_codes` / actual detached suggestion の 3 者で揃っており、
+coexistence follow-up は `none` である。
 
 ## non-goal
 

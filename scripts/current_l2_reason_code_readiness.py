@@ -50,6 +50,12 @@ def reason_code_kinds(rows: list[dict[str, Any]]) -> list[str]:
     return kinds
 
 
+def kinds_for_display(rows: list[dict[str, Any]] | None) -> str:
+    if not rows:
+        return "none"
+    return ", ".join(reason_code_kinds(rows))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -93,13 +99,15 @@ def main(argv: list[str] | None = None) -> int:
 
         checked_reasons = read_fixture_checked_reasons(fixture)
         _, reason_code_rows = read_actual_reason_code_candidates(artifact)
+        fixture_checked_reason_codes = read_fixture_checked_reason_codes(fixture)
         static_rows.append(
             {
                 "fixture_id": fixture_id_for_display(fixture_path, fixture),
                 "checked_reasons_present": checked_reasons is not None,
-                "checked_reason_codes_present": read_fixture_checked_reason_codes(fixture)
-                is not None,
+                "checked_reason_codes_present": fixture_checked_reason_codes is not None,
+                "checked_reason_codes_rows": fixture_checked_reason_codes,
                 "reason_code_kinds": reason_code_kinds(reason_code_rows),
+                "actual_reason_code_rows": reason_code_rows,
             }
         )
 
@@ -112,6 +120,24 @@ def main(argv: list[str] | None = None) -> int:
     ]
     rows_without_suggestions = [
         row for row in static_rows if not row["reason_code_kinds"]
+    ]
+    stable_coexistence_rows = [
+        row
+        for row in static_rows
+        if row["checked_reasons_present"]
+        and row["checked_reason_codes_present"]
+        and row["checked_reason_codes_rows"] == row["actual_reason_code_rows"]
+    ]
+    missing_checked_reasons_rows = [
+        row
+        for row in static_rows
+        if row["checked_reason_codes_present"] and not row["checked_reasons_present"]
+    ]
+    mismatch_rows = [
+        row
+        for row in static_rows
+        if row["checked_reason_codes_present"]
+        and row["checked_reason_codes_rows"] != row["actual_reason_code_rows"]
     ]
 
     print(f"fixture directory: {fixture_directory}")
@@ -128,6 +154,18 @@ def main(argv: list[str] | None = None) -> int:
     print(
         "fixtures with checked_reason_codes: "
         + str(sum(1 for row in static_rows if row["checked_reason_codes_present"]))
+    )
+    print(
+        "fixtures with stable coexistence anchors: "
+        + str(len(stable_coexistence_rows))
+    )
+    print(
+        "fixtures with checked_reason_codes but missing checked_reasons: "
+        + str(len(missing_checked_reasons_rows))
+    )
+    print(
+        "fixtures with checked_reason_codes mismatching actual suggestion: "
+        + str(len(mismatch_rows))
     )
     print("suggested reason-code kinds:")
     if kind_counter:
@@ -159,6 +197,25 @@ def main(argv: list[str] | None = None) -> int:
                 f"  - {row['fixture_id']} "
                 f"[checked_reasons={checked}, checked_reason_codes={typed}]"
             )
+    else:
+        print("  - none")
+
+    print("fixtures needing coexistence follow-up:")
+    follow_up_rows: list[str] = []
+    for row in missing_checked_reasons_rows:
+        follow_up_rows.append(
+            f"  - {row['fixture_id']} [missing checked_reasons, "
+            f"kinds={kinds_for_display(row['actual_reason_code_rows'])}]"
+        )
+    for row in mismatch_rows:
+        follow_up_rows.append(
+            f"  - {row['fixture_id']} [checked_reason_codes mismatch, "
+            f"fixture={kinds_for_display(row['checked_reason_codes_rows'])}, "
+            f"actual={kinds_for_display(row['actual_reason_code_rows'])}]"
+        )
+    if follow_up_rows:
+        for line in follow_up_rows:
+            print(line)
     else:
         print("  - none")
 

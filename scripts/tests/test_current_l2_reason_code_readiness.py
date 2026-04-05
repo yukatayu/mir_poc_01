@@ -119,9 +119,9 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
                         ],
                         checked_reason_codes=[
                             {
-                                "kind": "missing_lineage_assertion",
-                                "predecessor": "primary",
-                                "successor": "mirror",
+                                "kind": "declared_target_missing",
+                                "predecessor": "writer",
+                                "successor": "readonly",
                             }
                         ],
                     ),
@@ -198,9 +198,14 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
         self.assertIn("fixtures with checked_reasons: 1", output)
         self.assertIn("fixtures with reason_codes suggestions: 1", output)
         self.assertIn("fixtures with checked_reason_codes: 1", output)
+        self.assertIn("fixtures with stable coexistence anchors: 1", output)
+        self.assertIn("fixtures with checked_reason_codes but missing checked_reasons: 0", output)
+        self.assertIn("fixtures with checked_reason_codes mismatching actual suggestion: 0", output)
         self.assertIn("declared_target_missing: 1", output)
         self.assertIn("e12_underdeclared_target_missing", output)
         self.assertIn("e14_malformed_duplicate_option_declaration", output)
+        self.assertIn("fixtures needing coexistence follow-up:", output)
+        self.assertIn("  - none", output)
 
     def test_main_rejects_fixture_side_typed_reason_codes(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -259,6 +264,112 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
         self.assertIn(
             "fixture already contains unsupported expected_static.reason_codes field",
             stderr.getvalue(),
+        )
+
+    def test_main_reports_coexistence_follow_up_groups(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            fixture_dir = tmpdir_path / "fixtures"
+            artifact_dir = tmpdir_path / "artifacts"
+            fixture_dir.mkdir()
+            artifact_dir.mkdir()
+
+            fixture_missing_checked_reasons = fixture_dir / "e12-underdeclared-target-missing.json"
+            fixture_missing_checked_reasons.write_text(
+                json.dumps(
+                    static_fixture_document(
+                        "e12_underdeclared_target_missing",
+                        checked_reasons=None,
+                        checked_reason_codes=[
+                            {
+                                "kind": "declared_target_missing",
+                                "predecessor": "writer",
+                                "successor": "readonly",
+                            }
+                        ],
+                    ),
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (artifact_dir / "e12-underdeclared-target-missing.static-gate.json").write_text(
+                json.dumps(
+                    static_gate_artifact(
+                        "e12_underdeclared_target_missing",
+                        reason_codes=[
+                            {
+                                "kind": "declared_target_missing",
+                                "predecessor": "writer",
+                                "successor": "readonly",
+                            }
+                        ],
+                    ),
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            fixture_mismatch = fixture_dir / "e19-malformed-target-mismatch.json"
+            fixture_mismatch.write_text(
+                json.dumps(
+                    static_fixture_document(
+                        "e19_malformed_target_mismatch",
+                        checked_reasons=[
+                            "declared access target mismatch between writer and readonly"
+                        ],
+                        checked_reason_codes=[
+                            {
+                                "kind": "declared_target_missing",
+                                "predecessor": "writer",
+                                "successor": "readonly",
+                            }
+                        ],
+                    ),
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (artifact_dir / "e19-malformed-target-mismatch.static-gate.json").write_text(
+                json.dumps(
+                    static_gate_artifact(
+                        "e19_malformed_target_mismatch",
+                        reason_codes=[
+                            {
+                                "kind": "declared_target_mismatch",
+                                "predecessor": "writer",
+                                "successor": "readonly",
+                            }
+                        ],
+                    ),
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = readiness.main([str(fixture_dir), str(artifact_dir)])
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("fixtures with stable coexistence anchors: 0", output)
+        self.assertIn("fixtures with checked_reason_codes but missing checked_reasons: 1", output)
+        self.assertIn("fixtures with checked_reason_codes mismatching actual suggestion: 1", output)
+        self.assertIn(
+            "e12_underdeclared_target_missing [missing checked_reasons, kinds=declared_target_missing]",
+            output,
+        )
+        self.assertIn(
+            "e19_malformed_target_mismatch [checked_reason_codes mismatch, fixture=declared_target_missing, actual=declared_target_mismatch]",
+            output,
         )
 
 

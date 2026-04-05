@@ -140,6 +140,17 @@
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e18-malformed-missing-successor-option.json`
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e19-malformed-target-mismatch.json`
 
+### 2026-04-05 checked reasons coexistence addendum
+
+- `plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/44-current-l2-checked-reasons-coexistence-and-shrink-policy.md`
+  - `docs/reports/0170-checked-reasons-coexistence-and-shrink-policy.md`
+  - `docs/reports/0171-review-checked-reasons-coexistence-and-shrink-policy.md`
+  - `scripts/current_l2_reason_code_readiness.py`
+  - `scripts/tests/test_current_l2_reason_code_readiness.py`
+  - `scripts/current_l2_detached_loop.py`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

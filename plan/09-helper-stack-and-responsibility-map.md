@@ -237,6 +237,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `scripts/current_l2_reason_code_readiness.py`
   - static-only fixture corpus を横断し、`checked_reasons` adoption と `detached_noncore.reason_codes` suggestion availability を batch で display-only 要約する
   - current stable cluster tranche の `checked_reason_codes` adoption 数も同じ scan に載せてよい
+  - coexistence follow-up 用に、stable coexistence anchor 数、missing `checked_reasons` 数、typed mismatch 数も同じ scan に載せてよい
   - stable cluster と duplicate cluster の current split を authoring tranche 単位で観察するが、machine-check core や detached aggregate には上げない
 
 `scripts/current_l2_detached_loop.py` では、`scan-reason-code-readiness` subcommand を追加してよい。

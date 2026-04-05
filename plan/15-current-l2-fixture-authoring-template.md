@@ -74,7 +74,7 @@
 - actual static gate `reasons` が空で、fixture 側 `reasons` だけが explanatory prose を担う valid fixture では、`checked_reasons` を無理に `[]` で足さない
 - `checked_reasons` を採用するか迷うときは、`scripts/current_l2_detached_loop.py suggest-checked-reasons` で static gate artifact の actual `checker_core.reasons` を見て、display-only suggestion を確認してよい
 - future typed carrier 候補 row を見たいときは、`scripts/current_l2_detached_loop.py suggest-reason-codes` で `detached_noncore.reason_codes` の display-only suggestion を確認してよい
-- tranche 単位で static-only fixture corpus の current split を見たいときは、`scripts/current_l2_detached_loop.py scan-reason-code-readiness <fixture-dir> --run-label <label> --overwrite` を使い、`checked_reasons` adoption と `reason_codes` suggestion availability をまとめて確認してよい
+- tranche 単位で static-only fixture corpus の current split を見たいときは、`scripts/current_l2_detached_loop.py scan-reason-code-readiness <fixture-dir> --run-label <label> --overwrite` を使い、`checked_reasons` adoption、`reason_codes` suggestion availability、stable coexistence anchor 数、follow-up 必要 fixture をまとめて確認してよい
 - current stable cluster tranche では `checked_reason_codes` が fixture schema の field になってよく、対象は stable inventory 8 kind に限る
 - duplicate declaration cluster の `reason_codes` suggestion は引き続き absent であり、future row 候補としても current tranche には上げない
 - helper は current fixture schema に無い `expected_static.reason_codes` を見つけたら fail-closed に止まる
