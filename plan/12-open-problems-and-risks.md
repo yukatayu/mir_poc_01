@@ -122,6 +122,12 @@
   - non-production scaffold helper を置いてよい。
 - ここで helper が semantics inference、expected outcome completion、profile 自動更新まで行うと hidden elaboration になりやすいので、それらは authoring / review task 側へ残す。
 
+### parser boundary / first cut inventory
+
+- current L2 では final grammar を先に決めず、first parser cut に入れてよい semantic cluster を narrow に棚卸しする方が自然である。
+- `place` / `try-fallback` / `perform on` / `perform via` / statement-local `require` / `ensure` / option declaration core / option-local `admit` / explicit edge-row family は first parser cut 候補になりうる。
+- ただし A2 と A1 の exact lexical choice、`contract` block sugar、richer predicate grammar、option-local outcome metadata は引き続き OPEN に残す。
+
 ### richer host interface
 
 - current host harness は current L2 verification basis

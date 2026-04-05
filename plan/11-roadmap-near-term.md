@@ -139,4 +139,5 @@
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
+- current companion notation から first parser cut に入れてよい semantic cluster を narrow に棚卸しする
 - parser 導入前の syntax decision inventory を plan と spec に切り出す

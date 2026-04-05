@@ -112,6 +112,37 @@ chain profile_ref = writer
 - inline / hanging continuation の最終 grammar rule
 - predicate grammar 完成形
 
+## first parser cut inventory の current understanding
+
+current L2 では、final grammar を先に決めずに、
+**first parser cut に入れてよい semantic cluster**だけを先に棚卸しするのが自然である。
+
+### first parser cut に入れてよいもの
+
+- `place { ... }`
+- `try { ... } fallback { ... }`
+- `atomic_cut`
+- `perform ... on ...`
+- `perform ... via ...`
+- statement-local `require` / `ensure`
+- `option ... on ... capability ... lease ...`
+- option-local `admit`
+- chain declaration の explicit edge-row family
+
+### まだ companion に残すもの
+
+- A2 と A1 の exact lexical choice
+- line-leading `>` ladder
+- `contract { ... }` block sugar
+- richer predicate sublanguage
+- option-local outcome metadata
+
+### current judgment
+
+- parser cut では exact visual polish より semantic cluster を先に固定する
+- explicit edge-row family 自体は first parser cut 候補に入れてよい
+- ただし A2 hanging continuation を唯一の final lexical surface として固定するのはまだ早い
+
 ### 目標だけは明示しているもの
 
 - C 的でないこと

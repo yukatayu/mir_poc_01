@@ -10,9 +10,9 @@
 Report 0128 とその差分について reviewer を 1 回だけ依頼し、
 via-chain の request-local `ensure` failure continuation regression が
 
-- current L2 の semantic boundary を壊していないか
-- earlier tentative commit discard と later success commit を十分に machine-check できているか
-- mirror / progress / traceability の説明が evidence と一致しているか
+- current L2 semantics と整合しているか
+- focused machine-check が earlier preview suppression と later success commit を十分に押さえているか
+- spec / plan / progress mirror の説明が evidence と一致しているか
 
 を確認する。
 
@@ -20,8 +20,8 @@ via-chain の request-local `ensure` failure continuation regression が
 
 - 対象は `e11-perform-via-ensure-then-success` fixture、その sidecar、interpreter test、spec / plan / progress mirror に限る。
 - current L2 の core semantics、parser grammar、failure family、machine-check policy は変更しない。
-- via-chain の request-local `ensure` unsatisfied から later success への継続だけを narrow regression として review する。
-- `plan/` は Report 0128 の relevant mirror 更新に合わせて traceability だけを追加更新する。
+- via-chain の request-local `ensure` failure から later same-lineage success へ継続する branch だけを narrow regression として review する。
+- `plan/` は Report 0128 時点で relevant mirror 更新済みのため、この review record では追加更新しない。
 
 ## 4. Documents consulted
 
@@ -46,25 +46,22 @@ via-chain の request-local `ensure` failure continuation regression が
 
 ## 5. Actions taken
 
-1. reviewer subagent を 1 回だけ起動し、`e11` regression の semantic correctness、test coverage、mirror consistency、progress wording を確認するよう依頼した。
-2. reviewer completion が返るまで長めに待つ運用に従い、wall-clock で 60 秒の待機を 2 回行った。
-3. それでも completion を取得する surface が current environment では見えなかったため、local evidence fallback に切り替えた。
-4. local fallback として次を確認した。
-   - `e11` fixture が via-chain の earlier option `ensure` failure と later success continuation を最小で表現していること
-   - host plan sidecar が earlier `request-ensure=unsatisfied` / later `request-ensure=satisfied` を区別し、両 option に success-side carrier を返していること
-   - focused regression が final `place_store` に `backup_writer` の commit だけが残ることを machine-check していること
-   - bundle / aggregate detached smoke が current loop で通ること
-   - docs validation と `git diff --check` が green であること
-5. local fallback の結果、current task は close 可能と判断した。
+1. reviewer subagent を 1 回だけ起動し、`e11` regression の semantic correctness、test coverage、mirror consistency を確認するよう依頼した。
+2. reviewer completion を 600000ms で 2 回待機したが、どちらも timeout し completion は取得できなかった。
+3. 規約どおり local evidence fallback に切り替え、次を確認した。
+   - `e11` fixture が via-chain の earlier option `ensure` unsatisfied と later same-lineage success を最小で表していること
+   - host plan sidecar が delegated / backup の `request-require` / `request-ensure` / success-side carrier を narrow に支えていること
+   - focused regression が final `terminal_outcome = success` と final `place_store = {"profile_doc": ["write_profile@backup_writer"]}` を押さえていること
+   - bundle / aggregate smoke、docs validation、`git diff --check` が green であること
+4. local fallback の結果、current task は close 可能と判断した。
 
 ## 6. Evidence / outputs / test results
 
-### reviewer fallback note
+### reviewer wait result
 
 ```text
-reviewer was requested once.
-two long wait windows were allowed, but this session did not expose a completion-retrieval surface.
-task close therefore used local evidence fallback.
+wait_agent(timeout=600000) -> timed_out
+wait_agent(timeout=600000) -> timed_out
 ```
 
 ### local fallback evidence
@@ -100,7 +97,7 @@ summary_core differences:
 ```text
 python3 scripts/validate_docs.py
 Documentation scaffold looks complete.
-Found 129 numbered report(s).
+Found 128 numbered report(s).
 ```
 
 ```text
@@ -111,15 +108,14 @@ git diff --check
 
 ## 7. What changed in understanding
 
-- via-chain の request-local `ensure` failure continuation は、option-local `admit` miss や lease-based non-admissible skip と別の branch として current L2 に固定できる。
-- earlier success-side carrier preview の discard と later commit の適用を同時に machine-check しておくと、via-chain の continuation regression を overclaim せずに済む。
-- current detached validation loop は new runtime regression を追加したあとでも bundle / aggregate compare をそのまま再利用できる。
+- via-chain の request-local `ensure` failure continuation は、direct `PerformOn` ensure failure と同じく tentative commit suppression を machine-check しておく方が安全である。
+- reviewer completion が取れない環境でも、long wait を 2 回行った上で local evidence fallback を残せば、task close の根拠を保持できる。
 
 ## 8. Open questions
 
-- via-chain `ensure` continuation variant を representative prose examples へ昇格するか。
-- aggregate export の actual narrow API cut をこの regression 追加後にどう operational に寄せるか。
+- via-chain ensure continuation variant を representative prose examples へ昇格するか。
+- aggregate export の actual narrow API cut と fixture authoring helper のどちらを next に優先するか。
 
 ## 9. Suggested next prompt
 
-`current L2 parser-free PoC 基盤を前提に、detached aggregate export の actual narrow API cut を 1 段だけ operational に寄せるか、あるいは fixture authoring / elaboration の next narrow helper を追加するかを source-backed に比較してください。`
+`current L2 parser-free PoC 基盤を前提に、aggregate export の actual narrow API cut を operational に 1 段寄せるか、fixture authoring / elaboration の next narrow helper を追加するかを source-backed に比較してください。`

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（fixture smoke helper 追加時点）
+最終更新: 2026-04-05（first parser cut inventory 追加時点）
 
 ## 位置づけ
 
@@ -22,6 +22,7 @@
 - runtime regression catalog に `e11-perform-via-ensure-then-success` を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることを machine-check で固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
+- parser boundary については、final grammar を先に凍らせずに first parser cut に入れてよい semantic cluster を先に inventory 化する段階へ入った。
 - いま重いのは semantics そのものより、**fixture authoring / elaboration** と **detached validation loop の実運用面**である。
 - richer host interface、final parser grammar、static analysis / type / theorem prover、multi-request scheduler はまだ後段である。
 - 実装上の非本質だが忘れてはいけない制約として、**OS / hardware 非依存性** と **step 実行 / graph 可視化へ伸ばせる observability 境界** を、早期固定しすぎずに守る必要がある。
@@ -64,7 +65,7 @@
 | parser-free PoC execution stack | 83% | 77% | 91% | 着手可能 | interpreter / host / bundle / batch / selection / profile と runtime regression coverage がさらに 1 本増えた |
 | detached export / validation loop | 84% | 80% | 93% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper まで揃い、runtime regression の loop 実地反復がさらに進んだ |
 | fixture authoring / elaboration 実務 | 74% | 77% | 79% | 着手可能 | template / scaffold helper は揃い、scaffold 起点の runtime regression を completed fixture まで増やし、1 fixture smoke loop も 1 command で回せるようになった |
-| parser / syntax finalization 準備 | 38% | 44% | 18% | 着手可能 | companion notation はあるが final grammar inventory がこれから |
+| parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 52% | 44% | 46% | 着手可能 | non-production aggregate emitter と aggregate compare helper は入ったが actual API と final compare 契約は未決 |
 | static analysis / type / theorem prover workstream | 12% | 8% | 4% | 後段依存 | plan と entry criteria はあるが未着手に近い |
@@ -120,3 +121,4 @@
 - 2026-04-05 17:01 JST — `e11-perform-via-ensure-then-success` fixture を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることと、earlier tentative commit が破棄され later success だけが place store に反映されることを machine-check で固定した。次は aggregate actual API cut か fixture authoring / elaboration の narrow helper を詰める段階。
 - 2026-04-05 17:02 JST — fixture authoring の boilerplate だけを出す scaffold helper を追加し、runtime/static-only skeleton と empty sidecar を `target/current-l2-fixture-scaffolds/` 下へ安全に作れるようにした。validation loop の入口は到達済みで、次は actual API cut か新 fixture の反復段階。
 - 2026-04-05 17:15 JST — `smoke-fixture` helper を detached loop wrapper に追加し、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようにした。次は aggregate actual API cut か parser 前 inventory の narrow task を詰める段階。
+- 2026-04-05 17:15 JST — first parser cut inventory を追加し、`place` / `try-fallback` / `perform on|via` / `require` / `ensure` / option declaration core / `admit` / explicit edge-row family を parser 候補 cluster として整理した。次は aggregate actual API cut を operational に寄せるか、この inventory を checker / proof entry criteria に接続する段階。
