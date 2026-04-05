@@ -304,6 +304,24 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
         Some(vec!["missing lineage assertion for primary -> mirror".to_string()])
     );
 
+    let missing_target = load_bundle_from_fixture_path(fixture_path(
+        "e12-underdeclared-target-missing.json",
+    ))
+    .expect("fixture should load");
+    assert_eq!(
+        missing_target.fixture.expected_static.checked_reasons,
+        Some(vec!["declared access target is missing for primary -> mirror".to_string()])
+    );
+
+    let strengthening = load_bundle_from_fixture_path(fixture_path(
+        "e13-malformed-capability-strengthening.json",
+    ))
+    .expect("fixture should load");
+    assert_eq!(
+        strengthening.fixture.expected_static.checked_reasons,
+        Some(vec!["capability strengthens from read to write".to_string()])
+    );
+
     let explanatory_valid =
         load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
     assert_eq!(explanatory_valid.fixture.expected_static.checked_reasons, None);
@@ -312,16 +330,37 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
 #[test]
 fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
     let malformed = load_fixture_from_path(fixture_path("e4-malformed-lineage.json")).unwrap();
+    let malformed_strengthening = load_fixture_from_path(fixture_path(
+        "e13-malformed-capability-strengthening.json",
+    ))
+    .unwrap();
     let underdeclared =
         load_fixture_from_path(fixture_path("e5-underdeclared-lineage.json")).unwrap();
+    let underdeclared_target_missing = load_fixture_from_path(fixture_path(
+        "e12-underdeclared-target-missing.json",
+    ))
+    .unwrap();
 
     assert_eq!(static_gate(&malformed), StaticGateVerdict::Malformed);
+    assert_eq!(
+        static_gate(&malformed_strengthening),
+        StaticGateVerdict::Malformed
+    );
     assert_eq!(
         static_gate(&underdeclared),
         StaticGateVerdict::Underdeclared
     );
+    assert_eq!(
+        static_gate(&underdeclared_target_missing),
+        StaticGateVerdict::Underdeclared
+    );
 
-    for fixture in [&malformed, &underdeclared] {
+    for fixture in [
+        &malformed,
+        &malformed_strengthening,
+        &underdeclared,
+        &underdeclared_target_missing,
+    ] {
         let harness = FixtureHostStub::default();
         let result = harness.run_fixture(fixture).unwrap();
 
@@ -735,9 +774,9 @@ fn harness_rejects_uncovered_oracle_calls_without_synthetic_success_commit() {
 fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
     let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
 
-    assert_eq!(discovery.total_candidates, 11);
+    assert_eq!(discovery.total_candidates, 13);
     assert_eq!(discovery.failures.len(), 0);
-    assert_eq!(discovery.bundles.len(), 11);
+    assert_eq!(discovery.bundles.len(), 13);
     assert_eq!(
         discovery
             .bundles
@@ -753,7 +792,7 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
             .iter()
             .filter(|bundle| bundle.runtime_requirement == FixtureRuntimeRequirement::StaticOnly)
             .count(),
-        2
+        4
     );
 }
 
@@ -761,10 +800,10 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
 fn run_directory_returns_summary_for_current_l2_fixture_dir() {
     let summary = run_directory(fixture_dir()).unwrap();
 
-    assert_eq!(summary.total_bundles, 11);
+    assert_eq!(summary.total_bundles, 13);
     assert_eq!(summary.runtime_bundles, 9);
-    assert_eq!(summary.static_only_bundles, 2);
-    assert_eq!(summary.passed, 11);
+    assert_eq!(summary.static_only_bundles, 4);
+    assert_eq!(summary.passed, 13);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -908,11 +947,19 @@ fn selection_static_only_keeps_only_static_bundles() {
         })
         .collect();
 
-    assert_eq!(selected.total_candidates, 2);
+    assert_eq!(selected.total_candidates, 4);
     assert_eq!(selected.runtime_bundles, 0);
-    assert_eq!(selected.static_only_bundles, 2);
+    assert_eq!(selected.static_only_bundles, 4);
     assert_eq!(selected.failures.len(), 0);
-    assert_eq!(stems, vec!["e4-malformed-lineage", "e5-underdeclared-lineage"]);
+    assert_eq!(
+        stems,
+        vec![
+            "e12-underdeclared-target-missing",
+            "e13-malformed-capability-strengthening",
+            "e4-malformed-lineage",
+            "e5-underdeclared-lineage",
+        ]
+    );
 }
 
 #[test]
@@ -1098,8 +1145,8 @@ fn run_directory_profiled_static_only_includes_profile_name_in_summary() {
     let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
 
     assert_eq!(summary.profile_name, "static-all");
-    assert_profile_selected_counts(&summary, 2, 0, 2);
-    assert_eq!(summary.passed, 2);
+    assert_profile_selected_counts(&summary, 4, 0, 4);
+    assert_eq!(summary.passed, 4);
     assert_eq!(summary.failed, 0);
 }
 

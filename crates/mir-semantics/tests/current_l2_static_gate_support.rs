@@ -171,6 +171,51 @@ fn static_gate_artifact_emits_reason_codes_for_stable_clusters() {
 }
 
 #[test]
+fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() {
+    let missing_target_path = fixture_path("e12-underdeclared-target-missing.json");
+    let missing_target_fixture = load_fixture("e12-underdeclared-target-missing.json");
+    let missing_target_gate = static_gate_detailed(&missing_target_fixture);
+
+    let missing_target_artifact = build_detached_static_gate_artifact(
+        missing_target_path,
+        &missing_target_fixture,
+        &missing_target_gate,
+    );
+
+    assert_eq!(
+        missing_target_artifact
+            .detached_noncore
+            .expect("stable target-missing cluster should emit detached_noncore")
+            .reason_codes,
+        vec![current_l2_static_gate_support::StaticReasonCodeRow::DeclaredTargetMissing {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        }]
+    );
+
+    let strengthening_path = fixture_path("e13-malformed-capability-strengthening.json");
+    let strengthening_fixture = load_fixture("e13-malformed-capability-strengthening.json");
+    let strengthening_gate = static_gate_detailed(&strengthening_fixture);
+
+    let strengthening_artifact = build_detached_static_gate_artifact(
+        strengthening_path,
+        &strengthening_fixture,
+        &strengthening_gate,
+    );
+
+    assert_eq!(
+        strengthening_artifact
+            .detached_noncore
+            .expect("stable capability cluster should emit detached_noncore")
+            .reason_codes,
+        vec![current_l2_static_gate_support::StaticReasonCodeRow::CapabilityStrengthens {
+            from_capability: "read".to_string(),
+            to_capability: "write".to_string(),
+        }]
+    );
+}
+
+#[test]
 fn static_gate_artifact_omits_reason_codes_for_unclassified_reason_text() {
     let path = fixture_path("e3-option-admit-chain.json");
     let fixture = load_fixture("e3-option-admit-chain.json");

@@ -57,6 +57,7 @@
 - `expected_static.reasons` は current fixture corpus では explanatory note も兼ねるため、actual compare は detached static gate artifact 側に残す
 - optional `expected_static.checked_reasons` を置くときだけ、`run_bundle()` は actual static gate reasons を fail-closed compare してよい
 - first adoption candidate は `e4` / `e5` のような static-only malformed / underdeclared fixture で、actual wording が 1 本に安定している場合に限る
+- current corpus では `e12` / `e13` のような declared target missing / capability strengthening まで stable cluster を広げてよい
 - actual static gate `reasons` が空で、fixture 側 `reasons` だけが explanatory prose を担う valid fixture では、`checked_reasons` を無理に `[]` で足さない
 - `checked_reasons` を採用するか迷うときは、`scripts/current_l2_detached_loop.py suggest-checked-reasons` で static gate artifact の actual `checker_core.reasons` を見て、display-only suggestion を確認してよい
 - ただし helper は fixture JSON を自動更新しない。採用は hand-edit と review で行う

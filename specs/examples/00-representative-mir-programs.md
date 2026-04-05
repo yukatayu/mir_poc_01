@@ -41,6 +41,8 @@
 | E4 | malformed fallback branch | malformed | static rejection、runtime なし |
 | E5 | underdeclared fallback case | underdeclared | surface-level static error、runtime なし |
 | E6 | write-after-expiry | valid | write-admissible option 不在のため runtime `Reject` |
+| E12 | declared target missing | underdeclared | successor target が空のため static stop |
+| E13 | capability strengthening | malformed | successor capability 強化のため static stop |
 
 ## E1 — place 入れ子 + authority update + `atomic_cut`
 
@@ -363,6 +365,80 @@ place root {
   - chain 自体は static に well-formed だが、current evaluation の request 種別によって runtime `Reject` へ落ちること
   - `lease` expiry 自体は current L2 では dedicated event を必須にせず、`Reject` に至る non-admissible reason metadata の 1 つとして残してよいこと
   - `readonly` 側の request / capability mismatch は request-local `require write` と declared capability surface から読めるため、current L2 では formal subreason にせず narrative explanation に留めるだけでよいこと
+
+## E12 — declared target missing は underdeclared static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+      option mirror on "" capability read lease live
+
+      chain profile_ref = primary
+        fallback mirror
+          @ lineage(primary -> mirror)
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `underdeclared`
+- 理由:
+  - edge-local `lineage` 自体は整っていても、successor 側の `declared access target` が空である。
+  - current L2 では declared target の欠落を hidden repair せず、same-lineage continuation claim を underdeclared として止める。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- empty target placeholder を dynamic `Reject` や implicit lookup に押し込まない。
+
+### 最小 trace / audit 説明
+
+- 説明可能であるべきこと:
+  - underdeclared の根拠が lineage 証拠不足ではなく declared target 欠落にあること
+  - missing target を runtime host lookup で埋めてはならないこと
+
+## E13 — capability strengthening は malformed static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+      option mirror on profile_doc capability write lease live
+
+      chain profile_ref = primary
+        fallback mirror
+          @ lineage(primary -> mirror)
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `malformed`
+- 理由:
+  - `primary -> mirror` は same-lineage continuation を主張しているが、declared capability が `read -> write` に強化されている。
+  - current L2 では fallback / preference chain は capability monotonicity を破ってはならず、これは malformed に寄せる。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- stronger successor capability を fallback で隠して write 権限を復活させてはならない。
+
+### 最小 trace / audit 説明
+
+- 説明可能であるべきこと:
+  - malformed の根拠が lineage annotation mismatch ではなく capability strengthening にあること
+  - current L2 の same-lineage chain が monotone weakening を前提にしていること
 
 ## 書いてみて見えた current L2 の穴
 

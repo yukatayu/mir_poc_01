@@ -1,0 +1,85 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e13_malformed_capability_strengthening",
+  "source_example_id": "E13",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "mirror",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [
+                      {
+                        "predecessor": "primary",
+                        "successor": "mirror",
+                        "lineage_assertion": {
+                          "predecessor": "primary",
+                          "successor": "mirror"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "checked_reasons": [
+      "capability strengthens from read to write"
+    ],
+    "reasons": [
+      "same-lineage fallback cannot strengthen declared capability",
+      "read-to-write escalation is rejected before runtime"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "malformed chain is stopped before runtime because successor capability strengthens"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "capability monotonicity is checked statically",
+      "stronger successor capability is not hidden by fallback"
+    ]
+  }
+}

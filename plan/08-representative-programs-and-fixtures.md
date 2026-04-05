@@ -24,6 +24,8 @@
 
 - `e4-malformed-lineage`
 - `e5-underdeclared-lineage`
+- `e12-underdeclared-target-missing`
+- `e13-malformed-capability-strengthening`
 
 ## fixture catalog
 
@@ -34,6 +36,8 @@
 | `e3-option-admit-chain` | option-local `admit` miss と later success | `valid` | `success` | event は `perform-success`、formal metadata に `admit-miss` | あり | E3 variant, `0037`, `0039`, `0078` |
 | `e4-malformed-lineage` | edge-local lineage annotation mismatch | `malformed` | `not_evaluated` | runtime に入らない | なし | E4, `0023`, `0047`, `0147` |
 | `e5-underdeclared-lineage` | lineage 証拠不足 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E5, `0021`, `0022`, `0047`, `0147` |
+| `e12-underdeclared-target-missing` | declared access target 欠落 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E12, `0155` |
+| `e13-malformed-capability-strengthening` | capability strengthening | `malformed` | `not_evaluated` | runtime に入らない | なし | E13, `0155` |
 | `e6-write-after-expiry` | write-capable option expiry + later read-only only | `valid` | `Reject` | `lease-expired` formal metadata、capability mismatch narrative explanation、final `Reject` | あり | E6, `0039`, `0045`, `0078` |
 | `e7-write-fallback-after-expiry` | expiry 後に later write-capable option で成功 | `valid` | `success` | `lease-expired` formal metadata を残しつつ later success | あり | E6 補完, `0078` |
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject` | `valid` | `Reject` | `perform-failure`、`Reject`、formal `admit-miss`、capability mismatch narrative | あり | canonical law / no re-promotion, `0078` |
@@ -67,6 +71,16 @@
 
 - static evidence floor を満たさない branch は underdeclared で止める
 - explanatory `reasons` と actual wording を分ける `checked_reasons` bridge の最初の採用例
+
+### `e12-underdeclared-target-missing`
+
+- same-lineage continuation には declared access target が両端に必要である
+- lineage 証拠不足とは別の underdeclared cluster を static gate / detached loop / `checked_reasons` bridge に通す fixture
+
+### `e13-malformed-capability-strengthening`
+
+- same-lineage edge で successor capability が predecessor より強くなってはならない
+- malformed lineage mismatch とは別の malformed cluster を static gate / detached loop / `checked_reasons` bridge に通す fixture
 
 ### `e6-write-after-expiry`
 
