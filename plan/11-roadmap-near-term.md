@@ -151,6 +151,7 @@
 - same-lineage stable cluster inventory は current docs の範囲では `e19` によって一巡したので、その次の narrow step は first-class typed carrier actualization を急ぐか、fixture authoring 実地反復をもう少し積むかの比較になる
 - current valid fixture 群では actual static gate `reasons` が空な例が多いため、`checked_reasons = []` を広く足す task は優先しない
 - その next narrow step として、`checked_reasons` を auto-fill しない display-only authoring assist を current helper stack に置き、actual static gate wording の narrow adoption を review 可能にしてよい
+- さらにその次段として、helper-local / reference-only `reason_codes` mirror を assist source にする display-only helper を current helper stack に置き、future typed carrier 候補 row を fixture schema に昇格させずに review 可能にしてよい
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る

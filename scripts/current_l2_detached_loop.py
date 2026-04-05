@@ -8,6 +8,7 @@ import tempfile
 from pathlib import Path
 
 import current_l2_checked_reasons_assist as checked_reasons_assist
+import current_l2_reason_codes_assist as reason_codes_assist
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -390,6 +391,24 @@ def command_suggest_checked_reasons(args: argparse.Namespace) -> int:
     return checked_reasons_assist.main([str(fixture_path), str(output_path)])
 
 
+def command_suggest_reason_codes(args: argparse.Namespace) -> int:
+    fixture_path = Path(args.fixture_path)
+    output_path = (
+        Path(args.output_path)
+        if args.output_path
+        else static_gate_artifact_path(
+            Path(args.artifact_root), args.run_label, fixture_path
+        )
+    )
+
+    emit_exit = emit_static_gate(fixture_path, output_path, args.overwrite)
+    if emit_exit != 0:
+        return emit_exit
+
+    print(f"static gate artifact: {output_path}", flush=True)
+    return reason_codes_assist.main([str(fixture_path), str(output_path)])
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -536,6 +555,35 @@ def build_parser() -> argparse.ArgumentParser:
         help="existing artifact を明示的に上書きする",
     )
     suggest_checked_reasons_parser.set_defaults(func=command_suggest_checked_reasons)
+
+    suggest_reason_codes_parser = subparsers.add_parser(
+        "suggest-reason-codes",
+        help=(
+            "1 fixture の static gate artifact を emit して "
+            "helper-local reason_codes 候補を display-only で表示する"
+        ),
+    )
+    suggest_reason_codes_parser.add_argument("fixture_path")
+    suggest_reason_codes_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    suggest_reason_codes_parser.add_argument(
+        "--run-label",
+        default="manual",
+        help="static gate artifact を保存する run label",
+    )
+    suggest_reason_codes_parser.add_argument(
+        "--output-path",
+        help="explicit output path; when omitted, static gate path is derived from root/label/stem",
+    )
+    suggest_reason_codes_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifact を明示的に上書きする",
+    )
+    suggest_reason_codes_parser.set_defaults(func=command_suggest_reason_codes)
 
     compare_fixtures_parser = subparsers.add_parser(
         "compare-fixtures",

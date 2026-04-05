@@ -269,6 +269,10 @@ current L2 では production exporter API はまだ固定しない。
 - `scripts/current_l2_checked_reasons_assist.py`
   - detached static gate artifact の actual `checker_core.reasons` を読んで、fixture-side `expected_static.checked_reasons` の copyable suggestion を display-only で返す
   - fixture JSON の自動更新や `checked_reasons = []` の一括補完は行わない
+- `scripts/current_l2_reason_codes_assist.py`
+  - detached static gate artifact の helper-local / reference-only `detached_noncore.reason_codes` を読んで、future typed carrier 候補 row を display-only で返す
+  - current fixture schema に typed field が無いことを明示し、unsupported fixture-side typed field を見つけたら fail-closed に止まる
+  - fixture JSON の自動更新は行わない
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。

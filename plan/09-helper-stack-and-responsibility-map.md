@@ -220,6 +220,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `smoke-fixture` subcommand では、1 fixture の bundle emit、optional reference compare、single-fixture aggregate smoke を 1 command で支える
   - `smoke-static-gate` subcommand では、1 fixture の static gate artifact emit と optional reference compare を 1 command で支える
   - `suggest-checked-reasons` subcommand では、1 fixture の static gate artifact を emit した後に display-only assist を呼び、fixture-side `expected_static.checked_reasons` 候補を表示する
+  - `suggest-reason-codes` subcommand では、1 fixture の static gate artifact を emit した後に display-only assist を呼び、future typed carrier 候補 row を reference-only で表示する
   - compare helper の exit code `1` は difference found として informational に許容し、emitter / helper failure だけを non-zero で返す
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを current validation loop の手前で補助する
@@ -228,6 +229,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `scripts/current_l2_checked_reasons_assist.py`
   - static gate artifact の `checker_core.reasons` を読んで、fixture-side `expected_static.checked_reasons` の copyable suggestion を display-only で返す
   - fixture JSON の自動更新や `checked_reasons = []` の一括補完は行わない
+- `scripts/current_l2_reason_codes_assist.py`
+  - static gate artifact の helper-local / reference-only `detached_noncore.reason_codes` を読んで、future typed carrier 候補 row を display-only で返す
+  - current fixture schema に typed field が無いことを明示し、unsupported fixture-side typed field を見つけたら fail-closed に止まる
+  - fixture JSON の自動更新や typed field の仮挿入は行わない
 
 これらを `harness.rs` 本体へ入れない理由は次の通りである。
 

@@ -203,6 +203,8 @@
   - `expected_static.checked_reasons` を narrow に採用するとき、static gate artifact の actual `checker_core.reasons` を見て display-only suggestion を返す non-production assist の補助文書。
 - `specs/examples/37-current-l2-detached-bundle-transform-helper.md`
   - current L2 parser-free PoC の detached validation loop で、bundle-first emitter 内 private transform を repo 内 callable boundary へ落とす shared support helper の最小 cut を整理する。
+- `specs/examples/38-current-l2-static-reason-codes-authoring-assist.md`
+  - detached static gate artifact の helper-local / reference-only `reason_codes` を future typed carrier 候補 row として display-only に返す non-production assist の補助文書。
 
 ## レポート
 
@@ -278,6 +280,8 @@
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ出す non-production scaffold helper。
 - `scripts/current_l2_checked_reasons_assist.py`
   - detached static gate artifact から `expected_static.checked_reasons` 候補を display-only で返す non-production helper。
+- `scripts/current_l2_reason_codes_assist.py`
+  - detached static gate artifact の helper-local / reference-only `reason_codes` を future typed carrier 候補 row として display-only で返す non-production helper。
 - `scripts/current_l2_detached_loop.py`
   - detached validation loop の non-production wrapper。
   - `smoke-fixture` subcommand により、1 fixture を bundle export / optional reference compare / single-fixture aggregate smoke までまとめて回せる。
