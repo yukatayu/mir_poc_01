@@ -104,3 +104,7 @@
 - 直近の主ボトルネックは、意味論の大変更ではなく **validation loop の運用面** と **fixture authoring** である。
 - final parser grammar や richer host interface を急ぐより、まず「artifact を保存し、比較し、fixture を増やしてまた回す」ループを安定化させるべき段階にある。
 - portability / observability は今すぐ runtime core に組み込む話ではないが、helper cut と将来 API の形を歪めないよう early reminder として管理する。
+
+## 作業ログ（簡潔）
+
+- 2026-04-05 15:14 JST — detached validation loop の aggregate emitter・wrapper・diff 周辺を検証し、bundle artifact と aggregate summary を保存して比較する current non-production loop が通った。次は fixture authoring の実地反復を増やす段階。

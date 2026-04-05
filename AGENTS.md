@@ -99,6 +99,9 @@ Every report should contain, in this order:
   - `要仕様確認` = user 側の目的 / 保証範囲 / 非機能要件が足りず、勝手に詰めると手戻りが大きい
   - `後段依存` = 先行 layer / 先行 decision が固まるまで本格着手しない方がよい
 - `progress.md` では、決定済みの規範判断を新たに作らない。規範判断の正本は `specs/`、長期参照整理は `plan/` に置くこと。
+- `progress.md` の末尾には、task close ごとに **日時つきの簡潔な作業ログ** を追記すること。
+  - 粒度は「何を検証したか」「何が通って次に進めるようになったか」が分かる 1 行でよい。
+  - 形式検証・実装・docs-only task を問わず、repo の current status に影響する non-trivial task では原則として追記すること。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
 ## review と task close の運用
