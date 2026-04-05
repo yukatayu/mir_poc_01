@@ -208,8 +208,9 @@
   - edge-local lineage metadata
   - declaration-side guard slot
   に留めつつ、declaration-side guard slot は predicate fragment parse へ進めず opaque attached slot として扱う cut を維持するのが自然である
+- current baseline として、stage 1 handoff は parser-side opaque slot carrier と current parser-free AST fixture schema を同一視せず、thin lowering bridge を介して `OptionDecl.lease` へ narrow に接続するのが自然である
 - その次段で比較するべきなのは、
   - opaque attached slot の actual carrier 名
-  - parser cut と parser-free AST fixture schema の actual handoff
+  - thin lowering bridge の actual API surface
   - stage 1 smoke をどの fixture family まで使うか
   であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない

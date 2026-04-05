@@ -263,6 +263,10 @@ current repo の next narrow step としては、
 
 という cut を current docs-only judgment とする。
 
+その actual handoff を parser-free AST fixture schema へどう接続するかは、
+`specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md`
+で parser-side opaque slot carrier と fixture-side narrow lowering bridge を分ける cut として比較する。
+
 ## OPEN に残すもの
 
 - declaration-side guard slot の actual carrier 名
