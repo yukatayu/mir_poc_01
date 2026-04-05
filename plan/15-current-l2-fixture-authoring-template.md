@@ -53,6 +53,8 @@
 - `expected_runtime.enters_evaluation = false`
 - `.host-plan.json` sidecar は不要
 - static gate verdict と reasons が主な比較軸になる
+- current harness / `run_bundle()` は `expected_static.verdict` を fail-closed に照合する
+- `expected_static.reasons` は current fixture corpus では explanatory note も兼ねるため、actual compare は detached static gate artifact 側に残す
 - detached artifact loop に入れても、payload core の中心は `static_verdict` と `entered_evaluation = false` になる
 - detached validation loop continuation では、runtime bundle artifact と別に static gate artifact を保存し、`checker_core.static_verdict` / `checker_core.reasons` を compare してよい
 

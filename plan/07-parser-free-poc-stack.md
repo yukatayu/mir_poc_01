@@ -148,6 +148,7 @@ run_directory_named_profile
 ### machine-check に残すもの
 
 - static verdict
+- static reasons（detached static gate artifact の `checker_core` compare に限る）
 - runtime final outcome
 - event kinds
 - formal non-admissible metadata
@@ -171,6 +172,11 @@ run_directory_named_profile
 - auxiliary counters / summaries
 
 current L2 では、これらは後比較や後解析には有益だが、interpreter / helper refactor で揺れやすいため exact-compare core へは上げない。
+
+ただし `static reasons` については current carrier が 2 種あることに注意する。
+
+- detached static gate artifact の `checker_core.reasons` は actual compare してよい
+- fixture の `expected_static.reasons` は explanatory note を兼ねるため、現時点では harness machine-check に上げない
 
 ## `must_explain` の扱い
 

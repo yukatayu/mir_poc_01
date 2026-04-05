@@ -70,6 +70,8 @@ field 名や serialization は未固定だが、conceptual shape として curre
 
 current L2 では、`narrative_explanations` は machine-check 可能な短い explanation carrier として比較してよい。
 一方で、`must_explain` は「人が説明責務を果たしたか」を見る prose obligation であり、harness に exact string compare を持ち込まない。
+`expected_static.reasons` は current fixture corpus では human-facing な補助説明も兼ねているため、現時点では harness の exact machine-check へは上げない。
+static gate の actual `reasons` compare は detached static gate artifact helper 側に留め、future checker API を切るときに dedicated carrier を再検討する。
 
 ## host plan coverage の最小方針
 
