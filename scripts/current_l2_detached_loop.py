@@ -19,6 +19,16 @@ EMITTER_CMD = [
     "current_l2_emit_detached_bundle",
     "--",
 ]
+AGGREGATE_EMITTER_CMD = [
+    "cargo",
+    "run",
+    "-q",
+    "-p",
+    "mir-semantics",
+    "--example",
+    "current_l2_emit_detached_aggregate",
+    "--",
+]
 DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_artifacts.py"
 
 
@@ -40,6 +50,18 @@ def bundle_artifact_path(
         / "bundles"
         / ensure_run_label(run_label)
         / f"{fixture_path.stem}.detached.json"
+    )
+
+
+def aggregate_artifact_path(
+    artifact_root: Path,
+    run_label: str,
+) -> Path:
+    return (
+        artifact_root
+        / "aggregates"
+        / ensure_run_label(run_label)
+        / "batch-summary.detached.json"
     )
 
 
@@ -69,6 +91,27 @@ def emit_fixture(
     return run_subprocess(cmd)
 
 
+def emit_aggregate(
+    fixture_directory: Path,
+    output_path: Path,
+    overwrite: bool,
+) -> int:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if output_path.exists() and not overwrite:
+        print(
+            f"artifact already exists: {output_path} (use --overwrite to replace)",
+            file=sys.stderr,
+        )
+        return 2
+    cmd = [
+        *AGGREGATE_EMITTER_CMD,
+        str(fixture_directory),
+        "--output",
+        str(output_path),
+    ]
+    return run_subprocess(cmd)
+
+
 def compare_artifacts(left: Path, right: Path) -> int:
     cmd = [sys.executable, str(DIFF_HELPER), str(left), str(right)]
     return run_subprocess(cmd)
@@ -89,6 +132,19 @@ def command_emit_fixture(args: argparse.Namespace) -> int:
 
 def command_compare_artifacts(args: argparse.Namespace) -> int:
     return compare_artifacts(Path(args.left_artifact), Path(args.right_artifact))
+
+
+def command_emit_aggregate(args: argparse.Namespace) -> int:
+    fixture_directory = Path(args.fixture_directory)
+    output_path = (
+        Path(args.output_path)
+        if args.output_path
+        else aggregate_artifact_path(Path(args.artifact_root), args.run_label)
+    )
+    exit_code = emit_aggregate(fixture_directory, output_path, args.overwrite)
+    if exit_code == 0:
+        print(output_path)
+    return exit_code
 
 
 def command_compare_fixtures(args: argparse.Namespace) -> int:
@@ -147,6 +203,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="existing artifact を明示的に上書きする",
     )
     emit_fixture_parser.set_defaults(func=command_emit_fixture)
+
+    emit_aggregate_parser = subparsers.add_parser(
+        "emit-aggregate",
+        help="fixture directory を aggregate detached artifact として保存する",
+    )
+    emit_aggregate_parser.add_argument("fixture_directory")
+    emit_aggregate_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    emit_aggregate_parser.add_argument(
+        "--run-label",
+        default="manual",
+        help="aggregate artifact を保存する run label",
+    )
+    emit_aggregate_parser.add_argument(
+        "--output-path",
+        help="explicit output path; when omitted, aggregate path is derived from root/label",
+    )
+    emit_aggregate_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifact を明示的に上書きする",
+    )
+    emit_aggregate_parser.set_defaults(func=command_emit_aggregate)
 
     compare_artifacts_parser = subparsers.add_parser(
         "compare-artifacts",

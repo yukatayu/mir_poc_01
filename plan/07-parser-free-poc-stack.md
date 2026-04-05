@@ -229,17 +229,29 @@ current L2 では production exporter API はまだ固定しない。
 
 - `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs`
   - `run_bundle` / `BundleRunReport` を起点に 1 bundle の detached artifact sketch を出す
+- `crates/mir-semantics/examples/current_l2_emit_detached_aggregate.rs`
+  - `run_directory` / `BatchRunSummary` を起点に aggregate detached artifact sketch を出す
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
 - `scripts/current_l2_detached_loop.py`
-  - emitter と diff helper を bundle-first validation loop として薄くつなぐ
-  - 1 fixture export と 2 artifact compare を回しやすくする
+  - bundle emitter、aggregate emitter、diff helper を detached validation loop として薄くつなぐ
+  - 1 fixture export、aggregate summary export、2 artifact compare を回しやすくする
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。
 
 current non-production default candidate としては、artifact root を `target/current-l2-detached/` に置く。
 ただしこれは final path policy ではなく、repo 相対で generated artifact を散らさず、`.gitignore` 既存境界の内側で loop を回しやすくするための暫定運用である。
+
+aggregate 側 actual narrow cut としては、
+
+- `aggregates/<run-label>/batch-summary.detached.json`
+- `bundle_failure_kind_counts`
+- `bundle_failure_kind_counts_scope = "migrated-kinds-only"`
+- current `host_plan_coverage_failures` list の additive coexistence
+
+までを non-production helper で扱ってよい。
+ただし actual exporter API と final aggregate compare helper は引き続き OPEN である。
 
 ## detached exporter entry の current judgment
 

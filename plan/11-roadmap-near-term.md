@@ -91,6 +91,7 @@
 - case 数が増えると「その場で読んで終わる」運用から抜けにくい
 - docs-only minimal schema はできたが、thin export boundary と保存パス規約はまだ未決である
 - current non-production candidate として `target/current-l2-detached/` は置けたが、final path policy と actual aggregate exporter API はまだ未決である
+- current detached validation loop には aggregate emitter sketch と `emit-aggregate` wrapper を足せるが、これは production aggregate API finalization ではない
 
 ### 5. review infrastructure の変動
 
@@ -113,10 +114,11 @@
 3. detached exporter の first entry を bundle 層から narrow に始める
 4. non-production の bundle-first emitter と core-only diff helper を足す
 5. bundle artifact 保存先 / path policy と aggregate export の最小 cut を整える
-6. fixture authoring / elaboration template を detached validation loop 前提へ寄せる
-7. richer host interface / coverage analysis の入口を narrow に切る
-8. parser 導入前 inventory を作る
-9. その後で parser / richer runtime の判断に進む
+6. aggregate summary export の smoke を数回回し、coarse summary / typed count / list anchor の cut を確認する
+7. fixture authoring / elaboration template を detached validation loop 前提へ寄せる
+8. richer host interface / coverage analysis の入口を narrow に切る
+9. parser 導入前 inventory を作る
+10. その後で parser / richer runtime の判断に進む
 
 ## 今の working assumption
 
@@ -132,5 +134,6 @@
 - bundle-first artifact の payload core / bundle_context / detached non-core / aggregate-only を docs-only で切り分ける
 - detached exporter chain の docs-only judgment を 1 箇所へ集約し、non-production の tiny emitter / diff helper / fixture template を PoC loop 補助として足す
 - detached validation loop の storage/path policy、tiny wrapper、aggregate export の actual narrow cut を docs-only から thin operational aid へ進める
+- aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す

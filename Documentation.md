@@ -99,9 +99,10 @@ flowchart LR
 30. aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るかの docs-only refinement は `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
 31. detached exporter chain の current docs-only judgment、bundle-first loop attachment、typed failure / aggregate migration の統合 view は `specs/examples/23-current-l2-detached-export-loop-consolidation.md`
 32. detached validation loop を回すときの aggregate export 接続、artifact 保存先 / path policy、file naming / overwrite policy、compare input discovery の最小 cut は `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md`
-33. detached validation loop の non-production helper は `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs`、`scripts/current_l2_diff_detached_artifacts.py`、`scripts/current_l2_detached_loop.py`
-34. helper stack、roadmap、未決事項、representative fixture catalog、fixture authoring template を長期参照するには `plan/07-parser-free-poc-stack.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`
-35. 既存判断は `specs/12-decision-register.md` を参照する
+33. detached validation loop の aggregate 側 actual narrow cut、`bundle_failure_kind_counts` と current list anchor の coexistence、aggregate emitter sketch は `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md`
+34. detached validation loop の non-production helper は `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs`、`crates/mir-semantics/examples/current_l2_emit_detached_aggregate.rs`、`scripts/current_l2_diff_detached_artifacts.py`、`scripts/current_l2_detached_loop.py`
+35. helper stack、roadmap、未決事項、representative fixture catalog、fixture authoring template を長期参照するには `plan/07-parser-free-poc-stack.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`
+36. 既存判断は `specs/12-decision-register.md` を参照する
 
 ## レポート
 
@@ -109,5 +110,6 @@ flowchart LR
 
 ## 現在の環境メモ
 
-この scaffold は、Python は利用できるが `cargo` は利用できない環境で作成された。
-Rust workspace skeleton は存在するが、コンパイル可能性の検証は Rust が使えるマシンで別途行う必要がある。
+- historical note: 初期 scaffold は `cargo` 未検証環境で起こされた。
+- current repo では Python と `cargo` の両方を使った local validation を前提に report が積み上がっている。
+- ただし agent は毎 task で利用可能 command を fresh に確認し、利用不能な tool を既成事実化しない。

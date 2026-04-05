@@ -111,6 +111,12 @@ PoC ループの task は、できるだけ task 内部で閉じる。
 - reviewer が返らない場合だけ retry を 1 回行う
 - なお返らなければ local evidence と diff inspection を report に残す
 
+## long-running research task の運用メモ
+
+- heavy command や generated artifact を増やす前に、`df -h .` と `free -h` 相当で disk / memory を確認する。
+- commit は対話的な GPG prompt を避けるため `git commit --no-gpg-sign` を使う。
+- user が明示的に止めない限り、commit ごとに push する。
+
 ## report に必ず残すこと
 
 - `plan/` を更新したファイル

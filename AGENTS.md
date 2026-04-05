@@ -67,6 +67,9 @@ Every report should contain, in this order:
 - If you change a normative statement, add an explicit note to the report.
 - `Documentation.md` should stay concise and current.
 - Keep diagrams in Mermaid source (`docs/diagrams/*.mmd`).
+- long-running research task では、heavy command や generated artifact を増やす前に `df -h .` と `free -h` 相当で資源状況を確認すること。
+- commit では対話的な GPG prompt を避けるため、`git commit --no-gpg-sign` を使うこと。
+- user が明示的に止めない限り、commit ごとに push すること。
 
 ## plan/ 維持ルール
 

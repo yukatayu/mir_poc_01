@@ -181,14 +181,19 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - bundle-first exporter の operational aid
   - `run_bundle` / `BundleRunReport` の public behavior を再利用する
   - helper stack 本体の public API を増やさない
+- `crates/mir-semantics/examples/current_l2_emit_detached_aggregate.rs`
+  - aggregate exporter の operational aid
+  - `run_directory` / `BatchRunSummary` の public behavior を再利用する
+  - `bundle_failure_kind_counts` を migrated kind only の partial histogram として non-production aggregate artifact に narrow に落とす
+  - helper stack 本体の public API を増やさない
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する repo-level helper
   - `must_explain` を比較対象に上げない
   - `bundle_context` / `detached_noncore` は reference-only として読む
 - `scripts/current_l2_detached_loop.py`
-  - bundle-first emitter と diff helper を current validation loop 向けに束ねる薄い wrapper
+  - bundle-first emitter、aggregate emitter、diff helper を current validation loop 向けに束ねる薄い wrapper
   - `target/current-l2-detached/` を current non-production default candidate として扱う
-  - explicit path compare と fixture-to-artifact compare の両方を最小で支える
+  - explicit path compare、fixture-to-artifact compare、aggregate summary export を最小で支える
 
 これらを `harness.rs` 本体へ入れない理由は次の通りである。
 
@@ -210,7 +215,8 @@ aggregate export も同じである。
 
 - `BatchRunSummary` は coarse summary の責務を維持する
 - `bundle_failure_kind_counts` は docs-only の additive typed field 候補として扱う
-- actual aggregate exporter API は `harness.rs` の public behavior と切り分けたまま OPEN に残す
+- current non-production aggregate emitter sketch は許容する
+- ただし actual aggregate exporter API は `harness.rs` の public behavior と切り分けたまま OPEN に残す
 
 ## この先の update 指針
 

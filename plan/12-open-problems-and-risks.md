@@ -19,6 +19,7 @@
 | richer host interface | runtime boundary | OPEN / comparison 上の後続候補 | current host harness を production host に誤昇格しやすく、coverage analysis を先に肥大化させやすい | helper と production host を分離して記述し、detached artifact 境界の後で narrow に切る |
 | constrained continuation / multi-shot | semantics / runtime boundary | OPEN / FUTURE | unrestricted multi-shot が linear resource、rollback frontier、lifetime crossing を壊しやすい | coroutine semantics を Mir-0 の外に残し、one-shot / multi-shot / capture restriction を将来 workstream で明示する |
 | dynamic membership / causal metadata | shared space / fabric | OPEN / FUTURE | participant churn を plain vector clock deletion だけで扱うと membership change と causal history が混線しやすい | shared-space / Mirrorea workstream 側で、membership reconfiguration と causal metadata を分離して設計する |
+| portability / observability hooks | implementation / tooling boundary | OPEN / FUTURE | CPU 固定や非切替デバッグ実装を早く焼き付けると、後で HW 拡張や graph 可視化 / step 実行の導入で手戻りが大きい | semantics core には入れず、detached artifact / step execution / graph export hook を replaceable layer として残す |
 | multi-request scheduler | runtime | FUTURE | current direct-style interpreter と概念が混ざる | 現時点では未着手を明示 |
 | `Approximate` / `Compensate` | semantics / runtime | FUTURE | failure space と rollback を広く再設計する必要がある | 今は plan に残すだけ |
 
@@ -91,6 +92,7 @@
 - さらに docs-only schema refinement としては、bundle failure artifact 側の typed core は `failure_kind` discriminator だけに留めるのが最小であり、`bundle_context` 参照や short note は後段に回す
 - aggregate export がその typed bundle failure を吸うとしても、current L2 の最小は `failure_kind` ごとの histogram / kind count までであり、bundle failure summary の再掲は避ける
 - さらに docs-only refinement としては、aggregate typed field 名の最小候補は `bundle_failure_kind_counts` であり、current `host_plan_coverage_failures` list と `BatchBundleOutcome::Failed.host_plan_coverage_failure` bool を compatibility anchor として残した additive coexistence が最小 migration cut である
+- current actual sketch では、`bundle_failure_kind_counts` を migrated kind only の partial histogram として扱い、`bundle_failure_kind_counts_scope = "migrated-kinds-only"` を併せて持たせて full histogram と誤読させない
 - detached exporter consolidation sprint の current state としては、
   - `specs/examples/23-current-l2-detached-export-loop-consolidation.md` が docs-only judgment の集約文書になり、
   - `crates/mir-semantics/examples/current_l2_emit_detached_bundle.rs` が bundle-first の non-production emitter sketch、
@@ -99,12 +101,14 @@
   である
 - detached validation-loop continuation の current state としては、
   - `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` が aggregate export 接続と storage/path policy の docs-only 集約文書になり、
-  - `scripts/current_l2_detached_loop.py` が bundle-first emitter と diff helper を束ねる non-production wrapper であり、
+  - `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md` が aggregate emitter sketch の actual narrow cut を与え、
+  - `scripts/current_l2_detached_loop.py` が bundle-first emitter、aggregate emitter、diff helper を束ねる non-production wrapper であり、
   - current non-production default candidate は `target/current-l2-detached/` である
 - ただしこれは production exporter 完了を意味しない
 - actual exporter API、artifact 保存先と path policy、aggregate typed field の actual implementation timing は引き続き OPEN である
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
+- current non-production aggregate emitter sketch は入ってよいが、`run_directory` / `BatchRunSummary` の public behavior を置き換えず、aggregate compare helper や final API finalization は後段に残す
 
 ### richer host interface
 
@@ -134,6 +138,16 @@
   - causal metadata / version carrier
   を分けて設計する future problem として残す。
 
+### portability / observability hooks
+
+- current repo の mainline は semantics core を先に安定させる段階であり、CPU 固定・OS 固定・特定 HW 固定の runtime assumptions を規範判断へ入れない。
+- detached artifact、step execution、graph extraction / visualization は、current L2 の semantics そのものではなく、replaceable tooling / observability layer として扱う方が手戻りが小さい。
+- したがって current PoC では、
+  - non-production helper を repo 相対 path と plain JSON で narrow に保つ
+  - debug / graph / trace hook を helper boundary の外から差し替えられる設計に寄せる
+  - GPU / accelerator support や richer debugger は future implementation concern として残す
+  という方針を採る。
+
 ## 何を未決のまま残すか
 
 次は current L2 で無理に決めない。
@@ -144,6 +158,7 @@
 - path canonicalization policy
 - detached trace / audit serialization
 - detached validation loop の actual exporter API finalization
+- portability / observability hook の concrete API
 - richer host interface
 - constrained continuation / multi-shot model
 - shared-space membership / causal metadata policy
