@@ -91,6 +91,10 @@ Every report should contain, in this order:
   - ユーザ向け仕様 = companion notation / examples / human-facing guidance の整備度
   - 実装 / 運用 = parser-free PoC / helper / validation loop / 実務フローの整備度
   を指す。
+- `progress.md` には、各章 / 層について **「着手可能か、もしくは user から追加仕様を聞く必要があるか」** を示す欄も置くこと。
+  - `着手可能` = 非本質部分を先に進めても手戻りが比較的小さい
+  - `要仕様確認` = user 側の目的 / 保証範囲 / 非機能要件が足りず、勝手に詰めると手戻りが大きい
+  - `後段依存` = 先行 layer / 先行 decision が固まるまで本格着手しない方がよい
 - `progress.md` では、決定済みの規範判断を新たに作らない。規範判断の正本は `specs/`、長期参照整理は `plan/` に置くこと。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 

@@ -48,21 +48,33 @@
 
 ## 章別 rough progress
 
-| 章 / 層 | 論理仕様 | ユーザ向け仕様 | 実装 / 運用 | 補足 |
-|---|---:|---:|---:|---|
-| 基礎文書・decision level・invariants | 92% | 86% | 70% | repo の基礎境界はかなり揃っている |
-| Mir current L2 core semantics | 82% | 72% | 68% | current task を回すには十分安定、ただし final formalization はまだ先 |
-| fallback / notation / representative examples | 84% | 79% | 62% | drift 抑制は進んだが final parser grammar は未決 |
-| parser-free PoC execution stack | 80% | 74% | 88% | interpreter / host / bundle / batch / selection / profile まで揃っている |
-| detached export / validation loop | 70% | 66% | 72% | bundle-first emitter / diff / wrapper はあるが actual narrow API は未確定 |
-| fixture authoring / elaboration 実務 | 62% | 64% | 58% | template はできたが、追加作業の人手コストはまだ高い |
-| parser / syntax finalization 準備 | 38% | 44% | 18% | companion notation はあるが final grammar inventory がこれから |
-| richer host interface / coverage typed 化 | 24% | 22% | 16% | comparison までは進んだが implementation cut は後段 |
-| aggregate export の typed actualization | 36% | 30% | 18% | docs-only naming / migration cut はあるが actual API は未決 |
-| static analysis / type / theorem prover workstream | 12% | 8% | 4% | plan と entry criteria はあるが未着手に近い |
-| Mirrorea fabric | 18% | 12% | 8% | 境界整理はあるが current mainline 実装はまだ先 |
-| Typed-Effect Wiring Platform | 12% | 8% | 6% | 位置づけはあるが concrete architecture は後段 |
-| PrismCascade / 上位空間 | 12% | 8% | 6% | 分離方針はあるが mainline の進捗対象ではない |
+| 章 / 層 | 論理仕様 | ユーザ向け仕様 | 実装 / 運用 | 着手可否 | 補足 |
+|---|---:|---:|---:|---|---|
+| 基礎文書・decision level・invariants | 92% | 86% | 70% | 着手可能 | repo の基礎境界はかなり揃っている |
+| Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
+| fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
+| parser-free PoC execution stack | 80% | 74% | 88% | 着手可能 | interpreter / host / bundle / batch / selection / profile まで揃っている |
+| detached export / validation loop | 70% | 66% | 72% | 着手可能 | bundle-first emitter / diff / wrapper はあるが actual narrow API は未確定 |
+| fixture authoring / elaboration 実務 | 62% | 64% | 58% | 着手可能 | template はできたが、追加作業の人手コストはまだ高い |
+| parser / syntax finalization 準備 | 38% | 44% | 18% | 着手可能 | companion notation はあるが final grammar inventory がこれから |
+| richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
+| aggregate export の typed actualization | 36% | 30% | 18% | 着手可能 | docs-only naming / migration cut はあるが actual API は未決 |
+| static analysis / type / theorem prover workstream | 12% | 8% | 4% | 後段依存 | plan と entry criteria はあるが未着手に近い |
+| Mirrorea fabric | 18% | 12% | 8% | 要仕様確認 | 境界整理はあるが current mainline 実装はまだ先 |
+| Typed-Effect Wiring Platform | 12% | 8% | 6% | 要仕様確認 | 位置づけはあるが concrete architecture は後段 |
+| PrismCascade / 上位空間 | 12% | 8% | 6% | 要仕様確認 | 分離方針はあるが mainline の進捗対象ではない |
+
+## 着手可否の読み方
+
+- `着手可能`
+  - 非本質部分を先に進めても手戻りが比較的小さい。
+  - current repo の mainline として、agent が narrow task を自走しやすい。
+- `要仕様確認`
+  - user 側の目的、保証範囲、非機能要件、上位層の具体像が不足しており、勝手に詰めると手戻りが大きい。
+  - たとえば上位空間の UX や社会システム仕様はここに入る。
+- `後段依存`
+  - 先行 layer / 先行 decision が固まるまで、本格着手を急がない方がよい。
+  - comparison、inventory、entry criteria 整理までは進めてよいが、mainline 実装にはまだ早い。
 
 ## いまから validation loop 入口まで何手か
 
