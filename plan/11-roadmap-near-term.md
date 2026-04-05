@@ -115,10 +115,11 @@
 4. non-production の bundle-first emitter と core-only diff helper を足す
 5. bundle artifact 保存先 / path policy と aggregate export の最小 cut を整える
 6. aggregate summary export の smoke を数回回し、coarse summary / typed count / list anchor の cut を確認する
-7. fixture authoring / elaboration template を detached validation loop 前提へ寄せる
-8. richer host interface / coverage analysis の入口を narrow に切る
-9. parser 導入前 inventory を作る
-10. その後で parser / richer runtime の判断に進む
+7. aggregate compare helper を narrow に足し、`summary_core` compare と run-label convenience を固める
+8. fixture authoring / elaboration template を detached validation loop 前提へ寄せる
+9. richer host interface / coverage analysis の入口を narrow に切る
+10. parser 導入前 inventory を作る
+11. その後で parser / richer runtime の判断に進む
 
 ## 今の working assumption
 

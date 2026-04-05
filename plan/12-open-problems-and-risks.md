@@ -108,7 +108,7 @@
 - actual exporter API、artifact 保存先と path policy、aggregate typed field の actual implementation timing は引き続き OPEN である
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
-- current non-production aggregate emitter sketch は入ってよいが、`run_directory` / `BatchRunSummary` の public behavior を置き換えず、aggregate compare helper や final API finalization は後段に残す
+- current non-production aggregate emitter sketch と aggregate compare helper は入ってよいが、`run_directory` / `BatchRunSummary` の public behavior を置き換えず、final API finalization は後段に残す
 
 ### richer host interface
 

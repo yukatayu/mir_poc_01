@@ -190,10 +190,14 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - detached artifact の payload core だけを比較する repo-level helper
   - `must_explain` を比較対象に上げない
   - `bundle_context` / `detached_noncore` は reference-only として読む
+- `scripts/current_l2_diff_detached_aggregates.py`
+  - aggregate artifact の `summary_core` だけを比較する repo-level helper
+  - `bundle_failure_kind_counts_scope = "migrated-kinds-only"` を core compare に残す
+  - `aggregate_context` / `detached_noncore` は reference-only として読む
 - `scripts/current_l2_detached_loop.py`
-  - bundle-first emitter、aggregate emitter、diff helper を current validation loop 向けに束ねる薄い wrapper
+  - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper を current validation loop 向けに束ねる薄い wrapper
   - `target/current-l2-detached/` を current non-production default candidate として扱う
-  - explicit path compare、fixture-to-artifact compare、aggregate summary export を最小で支える
+  - explicit path compare、fixture-to-artifact compare、aggregate summary export、run-label aggregate compare を最小で支える
 
 これらを `harness.rs` 本体へ入れない理由は次の通りである。
 

@@ -30,6 +30,7 @@ AGGREGATE_EMITTER_CMD = [
     "--",
 ]
 DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_artifacts.py"
+AGGREGATE_DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_aggregates.py"
 
 
 def ensure_run_label(label: str) -> str:
@@ -117,6 +118,11 @@ def compare_artifacts(left: Path, right: Path) -> int:
     return run_subprocess(cmd)
 
 
+def compare_aggregates(left: Path, right: Path) -> int:
+    cmd = [sys.executable, str(AGGREGATE_DIFF_HELPER), str(left), str(right)]
+    return run_subprocess(cmd)
+
+
 def command_emit_fixture(args: argparse.Namespace) -> int:
     fixture_path = Path(args.fixture_path)
     output_path = (
@@ -132,6 +138,13 @@ def command_emit_fixture(args: argparse.Namespace) -> int:
 
 def command_compare_artifacts(args: argparse.Namespace) -> int:
     return compare_artifacts(Path(args.left_artifact), Path(args.right_artifact))
+
+
+def command_compare_aggregates(args: argparse.Namespace) -> int:
+    artifact_root = Path(args.artifact_root)
+    left_artifact = aggregate_artifact_path(artifact_root, args.left_run_label)
+    right_artifact = aggregate_artifact_path(artifact_root, args.right_run_label)
+    return compare_aggregates(left_artifact, right_artifact)
 
 
 def command_emit_aggregate(args: argparse.Namespace) -> int:
@@ -171,7 +184,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "current L2 detached validation loop を回すための non-production helper。"
-            " bundle-first emitter と payload-core diff helper を薄くつなぐ。"
+            " bundle-first / aggregate emitter と bundle / aggregate diff helper を薄くつなぐ。"
         )
     )
     parser.set_defaults(func=None)
@@ -237,6 +250,19 @@ def build_parser() -> argparse.ArgumentParser:
     compare_artifacts_parser.add_argument("left_artifact")
     compare_artifacts_parser.add_argument("right_artifact")
     compare_artifacts_parser.set_defaults(func=command_compare_artifacts)
+
+    compare_aggregates_parser = subparsers.add_parser(
+        "compare-aggregates",
+        help="2 run label から aggregate artifact を導出して summary_core を比較する",
+    )
+    compare_aggregates_parser.add_argument("left_run_label")
+    compare_aggregates_parser.add_argument("right_run_label")
+    compare_aggregates_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    compare_aggregates_parser.set_defaults(func=command_compare_aggregates)
 
     compare_fixtures_parser = subparsers.add_parser(
         "compare-fixtures",

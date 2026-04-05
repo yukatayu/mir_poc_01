@@ -1,3 +1,4 @@
+import argparse
 import sys
 import unittest
 from pathlib import Path
@@ -31,6 +32,47 @@ class DetachedLoopPathTests(unittest.TestCase):
                 REPO_ROOT / "target" / "current-l2-detached",
                 "bad/label",
             )
+
+    def test_compare_aggregates_uses_run_label_paths(self) -> None:
+        captured: list[tuple[Path, Path]] = []
+        original_compare = loop.compare_aggregates
+
+        def fake_compare(left: Path, right: Path) -> int:
+            captured.append((left, right))
+            return 0
+
+        loop.compare_aggregates = fake_compare
+        try:
+            exit_code = loop.command_compare_aggregates(
+                argparse.Namespace(
+                    artifact_root=str(REPO_ROOT / "target" / "current-l2-detached"),
+                    left_run_label="run-left",
+                    right_run_label="run-right",
+                )
+            )
+        finally:
+            loop.compare_aggregates = original_compare
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            captured,
+            [
+                (
+                    REPO_ROOT
+                    / "target"
+                    / "current-l2-detached"
+                    / "aggregates"
+                    / "run-left"
+                    / "batch-summary.detached.json",
+                    REPO_ROOT
+                    / "target"
+                    / "current-l2-detached"
+                    / "aggregates"
+                    / "run-right"
+                    / "batch-summary.detached.json",
+                )
+            ],
+        )
 
 
 if __name__ == "__main__":

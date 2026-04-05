@@ -233,9 +233,11 @@ current L2 では production exporter API はまだ固定しない。
   - `run_directory` / `BatchRunSummary` を起点に aggregate detached artifact sketch を出す
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
+- `scripts/current_l2_diff_detached_aggregates.py`
+  - aggregate artifact の `summary_core` exact-compare を最小で比較する
 - `scripts/current_l2_detached_loop.py`
-  - bundle emitter、aggregate emitter、diff helper を detached validation loop として薄くつなぐ
-  - 1 fixture export、aggregate summary export、2 artifact compare を回しやすくする
+  - bundle emitter、aggregate emitter、bundle diff helper、aggregate diff helper を detached validation loop として薄くつなぐ
+  - 1 fixture export、aggregate summary export、2 bundle artifact compare、2 aggregate artifact compare を回しやすくする
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。
@@ -251,7 +253,19 @@ aggregate 側 actual narrow cut としては、
 - current `host_plan_coverage_failures` list の additive coexistence
 
 までを non-production helper で扱ってよい。
-ただし actual exporter API と final aggregate compare helper は引き続き OPEN である。
+ただし actual exporter API は引き続き OPEN である。
+
+current detached validation loop では、aggregate compare helper をさらに narrow に足してよい。
+
+- exact-compare core
+  - `summary_core`
+- reference-only
+  - `aggregate_context`
+  - `detached_noncore`
+- wrapper convenience
+  - `compare-aggregates <left-run-label> <right-run-label>`
+
+ただしこれは production compare API を意味しない。
 
 ## detached exporter entry の current judgment
 

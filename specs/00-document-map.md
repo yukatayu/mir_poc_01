@@ -103,6 +103,9 @@
 - `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md`
   - current L2 parser-free PoC の detached validation loop で、`run_directory` / `BatchRunSummary` 起点の aggregate emitter を non-production helper としてどこまで許すかを整理する補助文書。
   - production exporter API を固定せず、aggregate artifact の actual narrow cut と current storage / migration judgment との接続だけを与える。
+- `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
+  - current L2 parser-free PoC の detached validation loop で、aggregate artifact 2 本の `summary_core` をどこまで exact-compare し、`aggregate_context` / `detached_noncore` をどこまで reference-only に留めるかを整理する補助文書。
+  - production compare API を固定せず、`compare-aggregates` wrapper までを current non-production convenience として与える。
 
 ## 各文書の役割
 
@@ -174,6 +177,16 @@
   - current L2 parser-free PoC の detached artifact で、`host_plan_coverage_failure` を bundle failure artifact 側の typed carrier に昇格させる場合の最小 schema を比較する。
 - `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
   - current L2 parser-free PoC の detached artifact で、bundle failure artifact 側の `failure.failure_kind` を `BatchRunSummary` aggregate export がどこまで typed に集約すべきかを比較する。
+- `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
+  - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るかを比較する。
+- `specs/examples/23-current-l2-detached-export-loop-consolidation.md`
+  - current L2 parser-free PoC の detached exporter chain を 1 箇所へ統合し、bundle-first loop attachment と typed aggregate migration の current understanding を集約する。
+- `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md`
+  - current L2 parser-free PoC の detached validation loop で、artifact 保存先 / path policy / aggregate export 接続の最小 cut を整理する。
+- `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md`
+  - current L2 parser-free PoC の detached validation loop で、aggregate emitter の actual narrow cut と `bundle_failure_kind_counts` / current list anchor coexistence を整理する。
+- `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
+  - current L2 parser-free PoC の detached validation loop で、aggregate compare helper の exact-compare core / reference-only split と run-label convenience wrapper を整理する。
 
 ## レポート
 
@@ -221,8 +234,10 @@
   - detached validation loop の aggregate summary artifact を出す non-production emitter sketch。
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する non-production helper。
+- `scripts/current_l2_diff_detached_aggregates.py`
+  - aggregate artifact の `summary_core` だけを比較する non-production helper。
 - `scripts/current_l2_detached_loop.py`
-  - bundle-first emitter、aggregate emitter、diff helper をつなぎ、artifact 保存と compare を最小で回す non-production wrapper。
+  - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper をつなぎ、artifact 保存と compare を最小で回す non-production wrapper。
 - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
   - current L2 parser-free PoC の public behavior coverage を置く。
 
