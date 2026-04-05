@@ -227,6 +227,15 @@
   - `docs/reports/0182-generic-family-checker-entry-comparison.md`
   - `docs/reports/0183-review-generic-family-checker-entry-comparison.md`
 
+### 2026-04-06 try-body atomic-cut frontier runtime fixture addendum
+
+- `specs/examples/00-representative-mir-programs.md`、`specs/examples/02-current-l2-ast-fixture-schema.md`、`specs/examples/04-current-l2-step-semantics.md`、`specs/examples/09-current-l2-bundle-loader.md`、`specs/examples/10-current-l2-batch-runner.md`、`specs/examples/11-current-l2-selection-helper.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/11-roadmap-near-term.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `crates/mir-ast/tests/fixtures/current-l2/e21-try-atomic-cut-frontier.json`
+  - `crates/mir-ast/tests/fixtures/current-l2/e21-try-atomic-cut-frontier.host-plan.json`
+  - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+  - `docs/reports/0184-try-atomic-cut-frontier-runtime-fixture.md`
+  - `docs/reports/0185-review-try-atomic-cut-frontier-runtime-fixture.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

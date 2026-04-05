@@ -1,0 +1,129 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e21_try_atomic_cut_frontier",
+  "source_example_id": "E21",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "draft_profile",
+                "body": [
+                  {
+                    "kind": "TryFallback",
+                    "body": [
+                      {
+                        "kind": "PerformOn",
+                        "op": "stage_profile_patch",
+                        "target": "profile_draft",
+                        "contract": {
+                          "require": [
+                            {
+                              "kind": "atom",
+                              "name": "write"
+                            }
+                          ],
+                          "ensure": []
+                        }
+                      },
+                      {
+                        "kind": "AtomicCut"
+                      },
+                      {
+                        "kind": "PerformOn",
+                        "op": "annotate_profile_patch",
+                        "target": "profile_draft",
+                        "contract": {
+                          "require": [
+                            {
+                              "kind": "atom",
+                              "name": "write"
+                            }
+                          ],
+                          "ensure": []
+                        }
+                      },
+                      {
+                        "kind": "PerformOn",
+                        "op": "validate_profile_patch",
+                        "target": "profile_draft",
+                        "contract": {
+                          "require": [
+                            {
+                              "kind": "call",
+                              "callee": "stable_after_annotation",
+                              "args": [
+                                "profile_draft"
+                              ]
+                            }
+                          ],
+                          "ensure": []
+                        }
+                      }
+                    ],
+                    "fallback_body": [
+                      {
+                        "kind": "PerformOn",
+                        "op": "load_last_snapshot",
+                        "target": "profile_snapshot",
+                        "contract": {
+                          "require": [
+                            {
+                              "kind": "atom",
+                              "name": "read"
+                            }
+                          ],
+                          "ensure": []
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "AtomicCut may appear inside try body as the rollback frontier update point gated by the current place anchor",
+      "current implementation restores the rollback frame snapshot as a whole-store snapshot, and this fixture keeps the pre-failure mutations narrow enough to witness the frontier change directly"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "success",
+    "notes": [
+      "stage_profile_patch commits before the cut",
+      "annotate_profile_patch commits after the cut but rolls back on later failure when the whole-store snapshot is restored",
+      "fallback succeeds after rollback and preserves only the pre-cut mutation"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-success",
+      "atomic-cut",
+      "perform-success",
+      "perform-failure",
+      "rollback",
+      "perform-success"
+    ],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "AtomicCut updates the active rollback frontier for the current place",
+      "rollback restores the post-cut snapshot rather than the try-entry snapshot"
+    ]
+  }
+}

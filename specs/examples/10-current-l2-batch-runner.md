@@ -112,7 +112,7 @@ batch runner は、bundle helper へ委譲した per-bundle 実行結果を summ
 
 ## representative fixtures での読み
 
-- E1 / E2 / E3 variant / E6 は runtime bundle として discovery され、sidecar 付きで batch 実行される。
+- E1 / E2 / E21 / E3 variant / E6 は runtime bundle として discovery され、sidecar 付きで batch 実行される。
 - E4 / E5 は static-only bundle として discovery され、static gate で止まる。
 - runtime bundle の uncovered oracle call は host plan coverage failure として summary に残してよい。
 - sidecar 欠落や sidecar parse failure は discovery failure として summary に残してよい。

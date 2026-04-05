@@ -37,6 +37,7 @@
 |---|---|---|---|
 | E1 | place 入れ子 + authority update + `atomic_cut` | valid | post-cut failure でも pre-cut は rollback されない |
 | E2 | local `try` + `fallback` | valid | local rollback 後に explicit fallback が走る |
+| E21 | `try` body 内の `atomic_cut` frontier | valid | pre-cut mutation を残したまま post-cut mutation だけ rollback する |
 | E3 | valid な fallback / preference chain | valid | canonical chain 上で leftmost admissible option を選ぶ |
 | E4 | malformed fallback branch | malformed | static rejection、runtime なし |
 | E5 | underdeclared fallback case | underdeclared | surface-level static error、runtime なし |
@@ -158,6 +159,69 @@ place root {
 - 説明可能であるべきこと:
   - rollback が `draft_profile` に局所であること
   - fallback branch が rollback の後に明示的に選ばれたこと
+
+## E21 — `try` body 内の `atomic_cut` frontier
+
+### コード
+
+```text
+place root {
+  place session {
+    place draft_profile {
+      try {
+        perform stage_profile_patch on profile_draft
+          require write
+
+        atomic_cut
+
+        perform annotate_profile_patch on profile_draft
+          require write
+
+        perform validate_profile_patch on profile_draft
+          require stable_after_annotation(profile_draft)
+      } fallback {
+        perform load_last_snapshot on profile_snapshot
+          require read
+      }
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `valid`
+- 理由:
+  - `AtomicCut` は ordinary statement として `try` body の途中に置ける。
+  - `AtomicCut` は current `place` の rollback frontier 更新点であり、`TryFallback` 自体の control shape を変えない。
+  - current implementation では rollback frame は whole-store snapshot を保持するが、この例では frontier 更新点の差が `profile_draft` mutation にだけ現れるようにしている。
+  - `require` clause は `annotate_profile_patch` と `validate_profile_patch` それぞれに局所であり、cut の前後で共有されない。
+
+### 期待される runtime outcome
+
+- 想定シナリオ:
+  - `stage_profile_patch` は success する。
+  - その後 `atomic_cut` が rollback frontier を更新する。
+  - `annotate_profile_patch` は success する。
+  - `validate_profile_patch` は explicit failure を返す。
+  - fallback branch の `load_last_snapshot` は success する。
+- outcome:
+  - `stage_profile_patch` の mutation は pre-cut prefix として残る。
+  - `annotate_profile_patch` の mutation は post-cut mutation なので rollback される。
+  - fallback branch は rollback 後に通常どおり走る。
+
+### 最小 trace / audit 説明
+
+- event:
+  - stage patch success
+  - `atomic_cut`
+  - annotation success
+  - validation failure
+  - rollback
+  - snapshot load success
+- 説明可能であるべきこと:
+  - `AtomicCut` が try-entry snapshot ではなく current `place` anchor に対応する rollback frontier を更新したこと
+  - current implementation が whole-store snapshot を restore しても、この例では chain order や fallback selection を変えず、post-cut mutation だけを戻したこと
 
 ## E3 — valid な fallback / preference chain
 

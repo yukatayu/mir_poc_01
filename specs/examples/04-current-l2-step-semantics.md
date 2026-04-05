@@ -1,13 +1,13 @@
 # examples/04 — current L2 step semantics
 
 この文書は、current L2 の representative examples、AST fixture schema、evaluation state schema を前提に、**parser-free 最小 interpreter**がどの粒度で状態遷移すればよいかを整理する補助文書である。
-ここで定めるのは full interpreter 実装ではなく、`specs/examples/03-current-l2-evaluation-state-schema.md` にある最小 state carrier を、1-step 単位でどう進めれば E1 / E2 / E3 variant / E6 を読めるかという current L2 の companion semantics である。
+ここで定めるのは full interpreter 実装ではなく、`specs/examples/03-current-l2-evaluation-state-schema.md` にある最小 state carrier を、1-step 単位でどう進めれば E1 / E2 / E21 / E3 variant / E6 を読めるかという current L2 の companion semantics である。
 
 ## この文書の位置づけ
 
 - parser なし最小 interpreter が持つべき step 粒度を定める。
 - AST fixture schema と evaluation state schema の間を、「どの node をどう 1 step で進めるか」という規則で接続する。
-- E1 / E2 / E3 variant / E6 の walkthrough を与え、最小 state が実際に足りることを確認する。
+- E1 / E2 / E21 / E3 variant / E6 の walkthrough を与え、最小 state が実際に足りることを確認する。
 - predicate / effect oracle がどこで呼ばれるかという責務境界は `specs/examples/05-current-l2-oracle-api.md` を参照する。
 
 ## ここで固定すること / しないこと
@@ -49,7 +49,7 @@ current L2 の parser-free 最小 interpreter では、1 回の `step` は「現
 - `explicit_failure`
 - `Reject`
 
-`Approximate` / `Compensate` は Mir-0 の failure space に残るが、E1 / E2 / E3 variant / E6 を動かす最小 step semantics では必須でないため、ここでは固定しない。
+`Approximate` / `Compensate` は Mir-0 の failure space に残るが、E1 / E2 / E21 / E3 variant / E6 を動かす最小 step semantics では必須でないため、ここでは固定しない。
 
 ## state component 更新の全体像
 
@@ -215,7 +215,7 @@ current representative set では、`PerformOn` の failure branch に request-l
    - current cursor を次 statement へ進める。
    - result は `Continue`。
 
-## E1 / E2 / E3 variant / E6 walkthrough
+## E1 / E2 / E21 / E3 variant / E6 walkthrough
 
 ### E1 — place 入れ子 + `atomic_cut`
 
@@ -259,7 +259,37 @@ current representative set では、`PerformOn` の failure branch に request-l
 8. `TryFallback` を success で抜けて rollback frame を pop
 9. Program が尽き、`terminal_outcome = success`
 
-current representative set には `try` body 内の `atomic_cut` 例は入っていないが、同じ規則の下では、もし body 内で `AtomicCut` を踏めば top rollback frame の `restore_snapshot_ref` が post-cut snapshot に更新され、以後の rollback はそこまでしか戻らない。
+### E21 — `try` body 内 `AtomicCut` が rollback frontier を更新する場合
+
+1. static gate が `valid` を返す。
+2. `Program` と 3 段の `PlaceBlock` を enter する。
+3. `TryFallback` enter:
+   - `draft_profile` の entry snapshot を取り、top rollback frame を push
+4. `PerformOn(stage_profile_patch)` success:
+   - success-side carrier が commit され、`place_store["profile_draft"] = ["stage_profile_patch@profile_draft"]`
+   - `trace_audit_sink.events += perform-success`
+5. `AtomicCut`:
+   - `trace_audit_sink.events += atomic-cut`
+   - active rollback frame の `place_anchor` が current `place = draft_profile` と一致するので、top frame の `restore_snapshot_ref` を current `place_store` snapshot に更新する
+6. `PerformOn(annotate_profile_patch)` success:
+   - success-side carrier が commit され、`place_store["profile_draft"]` に `"annotate_profile_patch@profile_draft"` が追加される
+   - `trace_audit_sink.events += perform-success`
+7. `PerformOn(validate_profile_patch)` explicit failure:
+   - request-local `require stable_after_annotation(profile_draft)` が unsatisfied
+   - `trace_audit_sink.events += perform-failure`
+   - `BubbleFailure(explicit_failure)`
+8. `TryFallback` catch:
+   - `place_store` を top frame の **更新済み** `restore_snapshot_ref` へ戻す
+   - したがって `annotate_profile_patch` だけが rollback され、`stage_profile_patch` は残る
+   - `trace_audit_sink.events += rollback`
+   - `fallback_body` へ切り替える
+9. `PerformOn(load_last_snapshot)` success:
+   - `place_store["profile_snapshot"] = ["load_last_snapshot@profile_snapshot"]`
+   - `trace_audit_sink.events += perform-success`
+10. `TryFallback` を success で抜けて rollback frame を pop
+11. Program が尽き、`terminal_outcome = success`
+
+この例で重要なのは、`AtomicCut` が active rollback frame の snapshot を **entry snapshot から post-cut snapshot へ更新する**ため、rollback が post-cut mutation だけを戻し、pre-cut mutation は保持する点である。current implementation では rollback frame が whole `place_store` snapshot を保持するが、frontier update 自体は `place_anchor == current_place` で gate されるので、この fixture ではその差分が `profile_draft` mutation にだけ現れる。
 
 ### E3 variant — option-local `admit`
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（generic family checker entry comparison まで整理）
+最終更新: 2026-04-06（try-body atomic-cut frontier runtime fixture まで整理）
 
 ## 位置づけ
 
@@ -20,6 +20,7 @@
 - runtime regression catalog に `e9-monotone-degradation-success` を追加し、middle explicit failure のあとでも later same-lineage write-capable option へ monotone degradation して success しうることを machine-check で固定した。
 - runtime regression catalog に `e10-perform-on-ensure-failure` を追加し、direct `PerformOn` の request-local `ensure` unsatisfied が `Reject` ではなく `explicit_failure` であり、success-side carrier preview が commit されないことを machine-check で固定した。
 - runtime regression catalog に `e11-perform-via-ensure-then-success` を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることを machine-check で固定した。
+- runtime regression catalog に `e21-try-atomic-cut-frontier` を追加し、`TryFallback` body 内の `AtomicCut` が active rollback frame の frontier を post-cut snapshot へ更新し、pre-cut mutation を残したまま fallback へ進むことを machine-check と detached loop smoke で固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - static-only malformed / underdeclared fixture に対しては、`scripts/current_l2_detached_loop.py suggest-checked-reasons` から actual static gate `checker_core.reasons` を見て `expected_static.checked_reasons` 候補を display-only で確認できるようになった。helper は fixture JSON を自動更新しない。
 - helper-local / reference-only `detached_noncore.reason_codes` についても、`scripts/current_l2_detached_loop.py suggest-reason-codes` から future typed carrier 候補 row を display-only で確認できるようになった。これは current fixture schema の field ではなく、reference-only assist に留まり、unsupported fixture-side typed field を見つけたら fail-closed に止まる。
@@ -88,11 +89,11 @@
 | 章 / 層 | 論理仕様 | ユーザ向け仕様 | 実装 / 運用 | 着手可否 | 補足 |
 |---|---:|---:|---:|---|---|
 | 基礎文書・decision level・invariants | 92% | 86% | 70% | 着手可能 | repo の基礎境界はかなり揃っている |
-| Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
-| fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
+| Mir current L2 core semantics | 83% | 73% | 69% | 着手可能 | current task を回すには十分安定しており、`TryFallback` body 内 `AtomicCut` frontier の runtime representative も actual corpus に入った。ただし final formalization はまだ先 |
+| fallback / notation / representative examples | 85% | 80% | 64% | 着手可能 | drift 抑制は進み、`atomic_cut` rollback frontier の try-body representative まで actualize できたが final parser grammar は未決 |
 | parser-free PoC execution stack | 88% | 83% | 97% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、bundle / aggregate / static gate transform の repo 内 callable boundary が shared helper として入り、static gate reasons は detached helper compare、optional checked carrier、helper-local reason-code mirror、display-only authoring assist の境界まで整理された |
 | detached export / validation loop | 97% | 94% | 98% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper に加え、bundle / aggregate / static gate transform helper の shared support cut、static gate detached non-core reason-code mirror を reference-only compare で扱う cut、checked_reasons suggestion と future typed carrier 候補 row を display-only で返す wrapper convenience、static-only corpus 横断の readiness scan、stable coexistence anchor / follow-up scan、fixture-side `checked_reason_codes` adoption の stable tranche 表示まで揃った |
-| fixture authoring / elaboration 実務 | 96% | 97% | 97% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、stable malformed / underdeclared cluster `e4` / `e5` / `e12` / `e13` / `e16` / `e17` / `e18` / `e19` を `checked_reasons` と `checked_reason_codes` の current stable tranche まで actualize した。duplicate declaration cluster `e14` / `e15` は display-only actual wording に留め、stable cluster 8 件と duplicate 2 件の split が actual corpus / readiness scan / detached mirror で揃い、coexistence follow-up は現状 `none` である |
+| fixture authoring / elaboration 実務 | 96% | 97% | 98% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、stable malformed / underdeclared cluster `e4` / `e5` / `e12` / `e13` / `e16` / `e17` / `e18` / `e19` を `checked_reasons` と `checked_reason_codes` の current stable tranche まで actualize した。runtime 側でも `e21-try-atomic-cut-frontier` を actual corpus へ追加し、bundle / directory / detached smoke まで通した。duplicate declaration cluster `e14` / `e15` は display-only actual wording に留め、stable cluster 8 件と duplicate 2 件の split が actual corpus / readiness scan / detached mirror で揃い、coexistence follow-up は現状 `none` である |
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 58% | 50% | 61% | 着手可能 | non-production aggregate emitter と aggregate compare helperに加え、aggregate transform の actual narrow cut は shared support helper まで進んだが public API と final compare 契約は未決 |
@@ -187,3 +188,4 @@
 - 2026-04-06 00:56 JST — `e20-malformed-late-capability-strengthening` を actual static-only corpus に追加し、capability strengthening floor を `2` fixture に広げたうえで、helper-local third checker spike と `smoke-capability-checker` wrapper を追加した。`e13` / `e20` の family smoke が通ったので、次は 3 family spike を shared support helper に寄せるか、checker-side shared family compare boundary を別 helper として切る段階。
 - 2026-04-06 01:34 JST — same-lineage / missing-option / capability の 3 checker spike で重複していた compare contract を `scripts/current_l2_family_checker_support.py` へ寄せ、family facade script と detached loop command 名は維持した。support tests、existing family tests、3 family smoke が通ったので、次は generic checker-side shared entry が本当に要るかを比較する段階。
 - 2026-04-06 01:52 JST — shared support helper 導入後の次段として generic checker-side shared family compare entry を比較し、current phase では追加せず family facade 維持で止める判断を docs / plan / progress / traceability に固定した。次は public checker cut comparison と generic entry を同時に扱う timing を見極める段階。
+- 2026-04-06 01:39 JST — `e21-try-atomic-cut-frontier` を runtime corpus に追加し、`TryFallback` body 内 `AtomicCut` が rollback frontier を post-cut snapshot へ進めることを direct evaluator / detached loop smoke / directory summary count まで通して固定した。次は `try` / rollback locality の structural floor を checker 側へどう接続するかを narrow に比較する段階。

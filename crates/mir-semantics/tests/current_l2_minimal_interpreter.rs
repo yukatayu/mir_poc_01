@@ -683,6 +683,7 @@ fn runtime_fixtures_reach_expected_outcomes_via_declarative_host_plan() {
     let cases = [
         "e1-place-atomic-cut.json",
         "e2-try-fallback.json",
+        "e21-try-atomic-cut-frontier.json",
         "e3-option-admit-chain.json",
         "e6-write-after-expiry.json",
         "e7-write-fallback-after-expiry.json",
@@ -712,6 +713,7 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
     let cases = [
         "e1-place-atomic-cut.json",
         "e2-try-fallback.json",
+        "e21-try-atomic-cut-frontier.json",
         "e3-option-admit-chain.json",
         "e6-write-after-expiry.json",
         "e7-write-fallback-after-expiry.json",
@@ -934,6 +936,61 @@ fn perform_via_ensure_failure_can_continue_to_later_success() {
 }
 
 #[test]
+fn try_body_atomic_cut_updates_rollback_frontier_without_skipping_fallback() {
+    let bundle = load_bundle("e21-try-atomic-cut-frontier.json");
+    let result = run_bundle(&bundle).unwrap();
+
+    assert_eq!(
+        result.report.terminal_outcome,
+        Some(mir_semantics::TerminalOutcome::Success)
+    );
+    assert_eq!(
+        result.report.trace_audit_sink.events,
+        vec![
+            mir_semantics::EventKind::PerformSuccess,
+            mir_semantics::EventKind::AtomicCut,
+            mir_semantics::EventKind::PerformSuccess,
+            mir_semantics::EventKind::PerformFailure,
+            mir_semantics::EventKind::Rollback,
+            mir_semantics::EventKind::PerformSuccess,
+        ]
+    );
+    assert!(
+        result.report.trace_audit_sink.non_admissible_metadata.is_empty(),
+        "try-body rollback frontier update should not fabricate non-admissible metadata"
+    );
+    assert!(
+        result
+            .report
+            .trace_audit_sink
+            .narrative_explanations
+            .is_empty(),
+        "try-body rollback frontier update should not require narrative explanation"
+    );
+
+    let evaluator =
+        run_direct_evaluator_with_plan(&bundle.fixture, bundle.host_plan.clone().unwrap());
+    assert_eq!(
+        evaluator.state.terminal_outcome,
+        Some(mir_semantics::TerminalOutcome::Success)
+    );
+    assert_eq!(
+        evaluator.state.place_store,
+        BTreeMap::from([
+            (
+                "profile_draft".to_string(),
+                vec!["stage_profile_patch@profile_draft".to_string()],
+            ),
+            (
+                "profile_snapshot".to_string(),
+                vec!["load_last_snapshot@profile_snapshot".to_string()],
+            ),
+        ]),
+        "AtomicCut inside try body must advance the rollback frontier so that pre-cut mutations remain while post-cut mutations roll back before fallback succeeds"
+    );
+}
+
+#[test]
 fn host_plan_loader_reads_sidecar_for_runtime_fixture() {
     let path = fixture_path("e3-option-admit-chain.json");
     let sidecar = host_plan_sidecar_path_for_fixture_path(&path);
@@ -1079,9 +1136,9 @@ fn harness_rejects_uncovered_oracle_calls_without_synthetic_success_commit() {
 fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
     let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
 
-    assert_eq!(discovery.total_candidates, 20);
+    assert_eq!(discovery.total_candidates, 21);
     assert_eq!(discovery.failures.len(), 0);
-    assert_eq!(discovery.bundles.len(), 20);
+    assert_eq!(discovery.bundles.len(), 21);
     assert_eq!(
         discovery
             .bundles
@@ -1089,7 +1146,7 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
             .filter(|bundle| bundle.runtime_requirement
                 == FixtureRuntimeRequirement::RuntimeWithHostPlan)
             .count(),
-        9
+        10
     );
     assert_eq!(
         discovery
@@ -1105,10 +1162,10 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
 fn run_directory_returns_summary_for_current_l2_fixture_dir() {
     let summary = run_directory(fixture_dir()).unwrap();
 
-    assert_eq!(summary.total_bundles, 20);
-    assert_eq!(summary.runtime_bundles, 9);
+    assert_eq!(summary.total_bundles, 21);
+    assert_eq!(summary.runtime_bundles, 10);
     assert_eq!(summary.static_only_bundles, 11);
-    assert_eq!(summary.passed, 20);
+    assert_eq!(summary.passed, 21);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -1214,8 +1271,8 @@ fn selection_runtime_only_keeps_only_runtime_bundles() {
         })
         .collect();
 
-    assert_eq!(selected.total_candidates, 9);
-    assert_eq!(selected.runtime_bundles, 9);
+    assert_eq!(selected.total_candidates, 10);
+    assert_eq!(selected.runtime_bundles, 10);
     assert_eq!(selected.static_only_bundles, 0);
     assert_eq!(selected.failures.len(), 0);
     assert_eq!(
@@ -1225,6 +1282,7 @@ fn selection_runtime_only_keeps_only_runtime_bundles() {
             "e10-perform-on-ensure-failure",
             "e11-perform-via-ensure-then-success",
             "e2-try-fallback",
+            "e21-try-atomic-cut-frontier",
             "e3-option-admit-chain",
             "e6-write-after-expiry",
             "e7-write-fallback-after-expiry",
@@ -1299,10 +1357,10 @@ fn run_directory_selected_single_fixture_runs_only_requested_fixture() {
 fn run_directory_selected_runtime_only_executes_only_runtime_bundles() {
     let summary = run_directory_selected(fixture_dir(), &SelectionMode::RuntimeOnly).unwrap();
 
-    assert_eq!(summary.total_bundles, 9);
-    assert_eq!(summary.runtime_bundles, 9);
+    assert_eq!(summary.total_bundles, 10);
+    assert_eq!(summary.runtime_bundles, 10);
     assert_eq!(summary.static_only_bundles, 0);
-    assert_eq!(summary.passed, 9);
+    assert_eq!(summary.passed, 10);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -1472,8 +1530,8 @@ fn run_directory_profiled_includes_profile_name_in_summary() {
     let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
 
     assert_eq!(summary.profile_name, "runtime-all");
-    assert_profile_selected_counts(&summary, 9, 9, 0);
-    assert_eq!(summary.passed, 9);
+    assert_profile_selected_counts(&summary, 10, 10, 0);
+    assert_eq!(summary.passed, 10);
     assert_eq!(summary.failed, 0);
 }
 

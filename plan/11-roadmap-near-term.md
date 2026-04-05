@@ -52,6 +52,8 @@
 - current L2 semantics の重要点を、まだ fixture 化されていない narrow case で regression 化する
 - static-only と runtime fixture のバランスを見る
 - `must_explain` は prose に残し、machine-check 範囲を増やしすぎない
+- current actualization としては、`e21-try-atomic-cut-frontier` により `TryFallback` body 内 `AtomicCut` rollback frontier を runtime fixture / detached loop / directory summary まで通せる状態になった
+- 次の narrow question は、`try` / rollback locality の structural floor を future checker cut へどう接続するかであり、runtime representative の actual corpus 自体は 1 本追加済みである
 
 ### 候補 4. parser 導入前の boundary inventory
 
