@@ -55,6 +55,9 @@
   },
   "expected_static": {
     "verdict": "underdeclared",
+    "checked_reasons": [
+      "missing lineage assertion for primary -> mirror"
+    ],
     "reasons": [
       "declared access target alone is not enough",
       "edge-local lineage evidence is missing"

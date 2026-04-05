@@ -32,8 +32,8 @@
 | `e1-place-atomic-cut` | `place` 入れ子、success、`atomic_cut`、後続 failure | `valid` | `explicit_failure` | `perform-success` → `atomic-cut` → `perform-failure` | あり | E1, `0047`, `0054` |
 | `e2-try-fallback` | local rollback と explicit fallback branch | `valid` | `success` | `perform-success` → `perform-failure` → `rollback` → `perform-success` | あり | E2, `0047`, `0049`, `0054` |
 | `e3-option-admit-chain` | option-local `admit` miss と later success | `valid` | `success` | event は `perform-success`、formal metadata に `admit-miss` | あり | E3 variant, `0037`, `0039`, `0078` |
-| `e4-malformed-lineage` | edge-local lineage annotation mismatch | `malformed` | `not_evaluated` | runtime に入らない | なし | E4, `0023`, `0047` |
-| `e5-underdeclared-lineage` | lineage 証拠不足 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E5, `0021`, `0022`, `0047` |
+| `e4-malformed-lineage` | edge-local lineage annotation mismatch | `malformed` | `not_evaluated` | runtime に入らない | なし | E4, `0023`, `0047`, `0147` |
+| `e5-underdeclared-lineage` | lineage 証拠不足 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E5, `0021`, `0022`, `0047`, `0147` |
 | `e6-write-after-expiry` | write-capable option expiry + later read-only only | `valid` | `Reject` | `lease-expired` formal metadata、capability mismatch narrative explanation、final `Reject` | あり | E6, `0039`, `0045`, `0078` |
 | `e7-write-fallback-after-expiry` | expiry 後に later write-capable option で成功 | `valid` | `success` | `lease-expired` formal metadata を残しつつ later success | あり | E6 補完, `0078` |
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject` | `valid` | `Reject` | `perform-failure`、`Reject`、formal `admit-miss`、capability mismatch narrative | あり | canonical law / no re-promotion, `0078` |
@@ -61,10 +61,12 @@
 ### `e4-malformed-lineage`
 
 - malformed fallback branch は dynamic `Reject` ではなく static rejection
+- explanatory `reasons` は残しつつ、actual static gate wording を `checked_reasons` へ narrow transfer する最初の採用例
 
 ### `e5-underdeclared-lineage`
 
 - static evidence floor を満たさない branch は underdeclared で止める
+- explanatory `reasons` と actual wording を分ける `checked_reasons` bridge の最初の採用例
 
 ### `e6-write-after-expiry`
 

@@ -66,6 +66,9 @@
   },
   "expected_static": {
     "verdict": "malformed",
+    "checked_reasons": [
+      "lineage assertion does not describe primary -> mirror"
+    ],
     "reasons": [
       "lineage assertion does not describe the decorated edge"
     ]

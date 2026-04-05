@@ -56,6 +56,7 @@
 - current harness / `run_bundle()` は `expected_static.verdict` を fail-closed に照合する
 - `expected_static.reasons` は current fixture corpus では explanatory note も兼ねるため、actual compare は detached static gate artifact 側に残す
 - optional `expected_static.checked_reasons` を置くときだけ、`run_bundle()` は actual static gate reasons を fail-closed compare してよい
+- first adoption candidate は `e4` / `e5` のような static-only malformed / underdeclared fixture で、actual wording が 1 本に安定している場合に限る
 - detached artifact loop に入れても、payload core の中心は `static_verdict` と `entered_evaluation = false` になる
 - detached validation loop continuation では、runtime bundle artifact と別に static gate artifact を保存し、`checker_core.static_verdict` / `checker_core.reasons` を compare してよい
 - optional `detached_noncore.reason_codes` が出ても current では reference-only に留め、fixture 側 expected carrier や machine-check core へはまだ上げない

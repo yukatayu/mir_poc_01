@@ -289,6 +289,27 @@ fn run_bundle_accepts_matching_checked_static_reasons() {
 }
 
 #[test]
+fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wording() {
+    let malformed = load_bundle_from_fixture_path(fixture_path("e4-malformed-lineage.json"))
+        .expect("fixture should load");
+    assert_eq!(
+        malformed.fixture.expected_static.checked_reasons,
+        Some(vec!["lineage assertion does not describe primary -> mirror".to_string()])
+    );
+
+    let underdeclared = load_bundle_from_fixture_path(fixture_path("e5-underdeclared-lineage.json"))
+        .expect("fixture should load");
+    assert_eq!(
+        underdeclared.fixture.expected_static.checked_reasons,
+        Some(vec!["missing lineage assertion for primary -> mirror".to_string()])
+    );
+
+    let explanatory_valid =
+        load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
+    assert_eq!(explanatory_valid.fixture.expected_static.checked_reasons, None);
+}
+
+#[test]
 fn static_gate_rejects_malformed_and_underdeclared_fixtures() {
     let malformed = load_fixture_from_path(fixture_path("e4-malformed-lineage.json")).unwrap();
     let underdeclared =
