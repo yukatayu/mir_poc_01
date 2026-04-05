@@ -249,6 +249,8 @@
   - future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum に留めるのが自然だという current docs-only judgment を整理する。
 - `specs/examples/60-current-l2-try-rollback-ast-helper-shared-carrier-threshold.md`
   - future dedicated AST structural helper を detached artifact shared carrier へ上げるには、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の 5 条件が揃うまで helper-local dedicated contract に留めるのが自然だという current docs-only judgment を整理する。
+- `specs/examples/61-current-l2-try-rollback-ast-helper-subcommand-and-wrapper-family.md`
+  - future dedicated AST structural helper の wrapper family は family-specific に留め、exact subcommand 名は actual helper actualization task まで deferred にするのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 

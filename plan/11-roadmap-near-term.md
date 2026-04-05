@@ -62,7 +62,8 @@
 - current docs-only refinement としては、future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留めるのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum `no_findings` / `findings_present` に留めるのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper を detached artifact shared carrier へ上げる閾値は、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の 5 条件が揃った時点に置くのが最小であり、current state ではまだ未充足である
-- 次の narrow question は、future dedicated AST structural helper の actual subcommand 名と wrapper family をいつ narrow に切ってよいかである
+- current docs-only refinement としては、future dedicated AST structural helper の wrapper family は family-specific に留め、exact subcommand 名は actual helper actualization task まで deferred にするのが自然である
+- 次の narrow question は、future dedicated AST structural helper を future generic structural checker family とどこで合流させるかである
 
 ### 候補 4. parser 導入前の boundary inventory
 
