@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（first checker cut regression baseline を source-backed に固定）
+最終更新: 2026-04-06（first checker cut baseline の review fallback と fresh verification まで整理）
 
 ## 位置づけ
 
@@ -175,3 +175,4 @@
 - 2026-04-05 23:42 JST — stable static reason `checked_reason_codes` tranche の reviewer finding 2 件を反映し、wording-derived row transform を `lib.rs` public API から外して helper-local に戻し、`plan/07` / `plan/15` / `plan/90` の drift を補正した。Python targeted tests、full `cargo test -p mir-semantics`、docs validation、`git diff --check` が揃ったので、この tranche は commit / push 可能な状態。
 - 2026-04-05 23:55 JST — `checked_reasons` / `checked_reason_codes` coexistence task として、readiness scan に stable coexistence anchor / follow-up summary を追加し、stable cluster 8 fixture が 3-way alignment・zero follow-up で収束していることを確認した。そのうえで current judgment を additive coexistence 維持 / shrink 保留に固定し、次は parser boundary / first checker cut 側へ主線を戻すか、deprecation 条件をもう一段比較する段階。
 - 2026-04-06 00:05 JST — readiness scan に checker cluster roll-up を追加し、same-lineage `4` / capability `1` / missing-option `3` の source-backed baseline を確認した。mainline を first checker cut 側へ戻す sequencing judgment を docs / plan / report chain に固定し、次は actual checker helper cut を same-lineage floor から切るか、capability floor の corpus coverage を先に厚くするかを比較する段階。
+- 2026-04-06 00:14 JST — first checker cut baseline task の review fallback と fresh verification を閉じ、helper-local display-only boundary が壊れていないことを local diff inspection と smoke で確認した。次は actual checker helper cut の first spike を same-lineage floor / missing-option structure floor のどちらから始めるかを narrow に決める段階。

@@ -41,11 +41,12 @@ current working tree change について、次を確認する。
 
 ## 3. Actions taken
 
-1. current session では reviewer subagent tool が利用できなかったため、task close fallback として local diff inspection を採用した。
-2. required top-level docs / specs / plan files を再読し、current helper boundary と reporting / traceability policy を確認した。
-3. target diff を読み、checker cluster roll-up が display-only summary に留まり、harness / checker semantics を変更していないことを点検した。
-4. targeted Python suite と actual corpus readiness smoke を review evidence として採用した。
-5. `plan/90-source-traceability.md` が今回追加した spec / report chain を root source として参照していることを確認した。
+1. reviewer を 1 回起動し、`180000ms` を 2 回待った。
+2. reviewer は completion を返さなかったため、task close fallback として local diff inspection を採用した。
+3. required top-level docs / specs / plan files を再読し、current helper boundary と reporting / traceability policy を確認した。
+4. target diff を読み、checker cluster roll-up が display-only summary に留まり、harness / checker semantics を変更していないことを点検した。
+5. targeted Python suite と actual corpus readiness smoke を review evidence として採用した。
+6. `plan/90-source-traceability.md` が今回追加した spec / report chain を root source として参照していることを確認した。
 
 ## 4. Files changed
 
@@ -55,6 +56,10 @@ current working tree change について、次を確認する。
 
 ## 5. Commands run and exact outputs
 
+- `wait_agent(reviewer, 180000)`
+  - timeout
+- `wait_agent(reviewer, 180000)`
+  - timeout
 - `python3 -m unittest scripts.tests.test_current_l2_reason_code_readiness`
   - `Ran 4 tests in 0.007s`
   - `OK`
@@ -80,6 +85,11 @@ current working tree change について、次を確認する。
   - 無出力
 
 ## 6. Evidence / findings
+
+### reviewer completion
+
+- reviewer は 2 回の wait window 内では completion を返さなかった。
+- current task では retry 1 回までという運用に従い、local evidence fallback へ切り替えた。
 
 ### No substantive findings
 
