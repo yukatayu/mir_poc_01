@@ -1,0 +1,67 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e14_malformed_duplicate_option_declaration",
+  "source_example_id": "E14",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "profile_ref",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "profile_ref",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "reasons": [
+      "duplicate visible option declaration is rejected before runtime",
+      "same-scope option names are not silently shadowed"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "duplicate option declaration stops the fixture before runtime evaluation"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "duplicate visible option declaration is a static problem",
+      "the duplicate cluster stays outside detached reason_codes for now"
+    ]
+  }
+}

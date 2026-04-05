@@ -216,6 +216,49 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
 }
 
 #[test]
+fn static_gate_artifact_omits_reason_codes_for_duplicate_declaration_clusters() {
+    let duplicate_option_path = fixture_path("e14-malformed-duplicate-option-declaration.json");
+    let duplicate_option_fixture = load_fixture("e14-malformed-duplicate-option-declaration.json");
+    let duplicate_option_gate = static_gate_detailed(&duplicate_option_fixture);
+
+    let duplicate_option_artifact = build_detached_static_gate_artifact(
+        duplicate_option_path,
+        &duplicate_option_fixture,
+        &duplicate_option_gate,
+    );
+
+    assert_eq!(duplicate_option_artifact.checker_core.static_verdict, "malformed");
+    assert!(
+        duplicate_option_artifact
+            .checker_core
+            .reasons
+            .iter()
+            .any(|reason| reason.contains("duplicate option declaration profile_ref")),
+    );
+    assert!(duplicate_option_artifact.detached_noncore.is_none());
+
+    let duplicate_chain_path = fixture_path("e15-malformed-duplicate-chain-declaration.json");
+    let duplicate_chain_fixture = load_fixture("e15-malformed-duplicate-chain-declaration.json");
+    let duplicate_chain_gate = static_gate_detailed(&duplicate_chain_fixture);
+
+    let duplicate_chain_artifact = build_detached_static_gate_artifact(
+        duplicate_chain_path,
+        &duplicate_chain_fixture,
+        &duplicate_chain_gate,
+    );
+
+    assert_eq!(duplicate_chain_artifact.checker_core.static_verdict, "malformed");
+    assert!(
+        duplicate_chain_artifact
+            .checker_core
+            .reasons
+            .iter()
+            .any(|reason| reason.contains("duplicate chain declaration profile_ref")),
+    );
+    assert!(duplicate_chain_artifact.detached_noncore.is_none());
+}
+
+#[test]
 fn static_gate_artifact_omits_reason_codes_for_unclassified_reason_text() {
     let path = fixture_path("e3-option-admit-chain.json");
     let fixture = load_fixture("e3-option-admit-chain.json");

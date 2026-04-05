@@ -146,6 +146,7 @@
 - `checked_reasons` を bridge に置いたので、その次は typed reason code に進めてよい stable cluster と parametric shape を inventory 化する
 - detached static gate artifact 側には helper-local / reference-only な `reason_codes` mirror を actualize してよいが、next narrow step はそれを first-class typed source に昇格させるか、fixture-side typed carrier を別に切るかの比較である
 - その前段として、`e4` / `e5` から始めた static-only malformed / underdeclared fixture への `checked_reasons` narrow adoption を、`e12` / `e13` の stable cluster まで広げてよい
+- duplicate declaration cluster は next fixture-authoring comparison point として actual corpus に入れてよいが、current helper cut では `checked_reasons` と detached `reason_codes` の stable cluster へはまだ昇格させない
 - current valid fixture 群では actual static gate `reasons` が空な例が多いため、`checked_reasons = []` を広く足す task は優先しない
 - その next narrow step として、`checked_reasons` を auto-fill しない display-only authoring assist を current helper stack に置き、actual static gate wording の narrow adoption を review 可能にしてよい
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす

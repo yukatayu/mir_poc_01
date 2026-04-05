@@ -43,6 +43,8 @@
 | E6 | write-after-expiry | valid | write-admissible option 不在のため runtime `Reject` |
 | E12 | declared target missing | underdeclared | successor target が空のため static stop |
 | E13 | capability strengthening | malformed | successor capability 強化のため static stop |
+| E14 | duplicate option declaration | malformed | visible option name 衝突のため static stop |
+| E15 | duplicate chain declaration | malformed | visible chain name 衝突のため static stop |
 
 ## E1 — place 入れ子 + authority update + `atomic_cut`
 
@@ -439,6 +441,75 @@ place root {
 - 説明可能であるべきこと:
   - malformed の根拠が lineage annotation mismatch ではなく capability strengthening にあること
   - current L2 の same-lineage chain が monotone weakening を前提にしていること
+
+## E14 — duplicate option declaration は malformed static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option profile_ref on profile_doc capability read lease live
+      option profile_ref on profile_doc capability read lease live
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `malformed`
+- 理由:
+  - 同じ visibility から 2 本の `option profile_ref` が見えている。
+  - current L2 では visible option 名の衝突を hidden shadowing や declaration overwrite で repair しない。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- duplicate visible option declaration を current request evaluation に押し込まず、static stop として扱う。
+
+### 最小 trace / audit 説明
+
+- 説明可能であるべきこと:
+  - malformed の根拠が duplicate visible option declaration にあること
+  - current duplicate cluster は detached helper 側でも `checker_core.reasons` に留め、stable `reason_codes` へはまだ昇格しないこと
+
+## E15 — duplicate chain declaration は malformed static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+      option mirror on profile_doc capability read lease live
+
+      chain profile_ref = primary
+      chain profile_ref = mirror
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `malformed`
+- 理由:
+  - 同じ visibility から 2 本の `chain profile_ref` が見えている。
+  - current L2 では competing chain head を hidden choice にせず、duplicate visible chain declaration として止める。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- duplicate chain cluster を canonical chain choice の問題へ落とさず、static stop として扱う。
+
+### 最小 trace / audit 説明
+
+- 説明可能であるべきこと:
+  - malformed の根拠が competing visible chain declaration にあること
+  - current duplicate cluster は detached helper 側でも `checker_core.reasons` に留め、stable `reason_codes` へはまだ昇格しないこと
 
 ## 書いてみて見えた current L2 の穴
 
