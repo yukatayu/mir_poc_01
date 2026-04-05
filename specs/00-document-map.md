@@ -237,6 +237,8 @@
   - `TryFallback` / `AtomicCut` を将来 dedicated AST structural helper として actualize するなら、parser/loader malformed source、AST-only floor、reason-row family と分ける dedicated carrier、runtime gate を non-goal に保つこと、複数の structural family を持つこと、という最小 entry criteria を整理する。
 - `specs/examples/54-current-l2-try-rollback-structural-malformed-source-placement.md`
   - `TryFallback` / `AtomicCut` の structural malformed source を current parser-free phase では parser でも loader でもなく static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留めるべきだという current docs-only judgment を整理する。
+- `specs/examples/55-current-l2-try-rollback-malformed-static-family-actualization.md`
+  - `TryFallback` / `AtomicCut` の malformed static family は current phase ではまだ actual corpus に増やさず、runtime representative `E2` / `E21` / `E22` を current evidence として維持するのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 

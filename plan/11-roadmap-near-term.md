@@ -56,7 +56,8 @@
 - current docs-only judgment としては、`try` / rollback locality の structural floor は first checker cut 候補 cluster に残すが、existing reason-row family helper の fourth spike にはまだ actualize せず、runtime representative と `specs/examples/51` / `52` に留める
 - current docs-only refinement としては、`try` / rollback locality を dedicated AST structural helper に actualize するなら、parser/loader malformed source、AST-only floor、reason-row family と分ける dedicated carrier、runtime gate 非依存、singleton ではない structural family という entry criteria を先に満たすべきである
 - current docs-only refinement としては、current parser-free phase では structural malformed source を parser でも loader でもなく static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留めるのが最小である
-- 次の narrow question は、`TryFallback` / `AtomicCut` の malformed static family を actual corpus に追加する価値があるかである
+- current docs-only refinement としては、runtime representative `E2` / `E21` / `E22` が current phase の evidence として十分強く、malformed static family はまだ actual corpus に増やさないのが自然である
+- 次の narrow question は、future dedicated AST structural helper の compare contract を dedicated carrier 前提でどう切るかである
 
 ### 候補 4. parser 導入前の boundary inventory
 
