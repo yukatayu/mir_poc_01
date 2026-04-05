@@ -67,6 +67,7 @@ current stable cluster 8 kind の `checked_reason_codes` actualization と coexi
   - `Documentation.md`
   - `specs/00-document-map.md`
   - `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md`
+  - `specs/examples/39-current-l2-static-reason-code-readiness-scan.md`
   - `scripts/current_l2_reason_code_readiness.py`
   - `scripts/tests/test_current_l2_reason_code_readiness.py`
   - `plan/07-parser-free-poc-stack.md`
@@ -90,8 +91,10 @@ current stable cluster 8 kind の `checked_reason_codes` actualization と coexi
 - RED:
   - cluster coverage summary line が不在のため `test_main_reports_kind_counts_and_fixture_groups` 系が失敗した。
 - GREEN:
-  - `python3 -m unittest scripts.tests.test_current_l2_reason_code_readiness` は `Ran 4 tests in ...` / `OK`
+  - `python3 -m unittest scripts.tests.test_current_l2_reason_code_readiness` は `Ran 4 tests in 0.008s` / `OK`
 - actual corpus smoke:
+  - `fixture directory: crates/mir-ast/tests/fixtures/current-l2`
+  - `artifact directory: /home/yukatayu/dev/mir_poc_01/target/current-l2-detached/static-gates/checker-cut-readiness`
   - `static-only fixtures scanned: 10`
   - `runtime fixtures skipped: 9`
   - `fixtures with checked_reasons: 8`
@@ -105,7 +108,7 @@ current stable cluster 8 kind の `checked_reason_codes` actualization と coexi
   - `  - missing_option_structure_floor: 3`
   - `  - same_lineage_evidence_floor: 4`
 - final verification:
-  - targeted Python suite は `OK`
+  - `python3 -m unittest scripts.tests.test_current_l2_reason_codes_assist scripts.tests.test_current_l2_reason_code_readiness scripts.tests.test_current_l2_static_gate_loop` は `Ran 14 tests in 0.018s` / `OK`
   - `python3 scripts/validate_docs.py` は `Documentation scaffold looks complete.` / `Found 173 numbered report(s).`
   - `git diff --check` は無出力
 
