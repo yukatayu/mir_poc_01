@@ -7,6 +7,8 @@ The repository therefore treats documentation structure as part of the project's
 
 1. **Read in order**
    - Start with `README.md`, then `Documentation.md`, then the ordered specs in `specs/00...03`, then `specs/09`, then the subsystem-specific document you need.
+   - If the task asks about **current status / progress / remaining steps / roadmap**, also read `progress.md` after `Documentation.md`.
+   - `progress.md` is a rough status snapshot, not a normative source. Normative judgments remain in `specs/` and long-term repository memory remains in `plan/`.
 
 2. **Do not invent requirements**
    - If something is not decided, write **UNRESOLVED** or **OPEN QUESTION**.
@@ -74,6 +76,14 @@ Every report should contain, in this order:
 - `plan/` では、決定・未決・仮説・履歴 / comparison を分けて書くこと。
 - `plan/` は docs mirror と同じく repo の一級成果物として扱うこと。
 - current L2 / parser-free PoC / helper stack / roadmap task では、`Documentation.md` と基礎 specs に加えて、`plan/00-index.md` と relevant な `plan/` ファイルも読むこと。ただし規範判断の正本は常に `specs/` とする。
+
+## progress.md 維持ルール
+
+- `progress.md` は repo 全体の**簡潔な進捗スナップショット**であり、scratchpad ではない。
+- current status / roadmap / remaining steps / major bottleneck / validation loop の到達見込みが変わった task では、同じ task の中で `progress.md` を更新すること。
+- 進捗率や残ステップは rough estimate と明記し、問題が見つかれば巻き戻りうる前提で書くこと。
+- `progress.md` では、決定済みの規範判断を新たに作らない。規範判断の正本は `specs/`、長期参照整理は `plan/` に置くこと。
+- `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
 ## review と task close の運用
 

@@ -69,10 +69,18 @@ current L2 / parser-free PoC / helper stack / roadmap task では、少なくと
 current task で変更が入ったら、次の mirror 群の更新要否を確認する。
 
 - `plan/`
+- `progress.md`
 - `Documentation.md`
 - `specs/00-document-map.md`
 - relevant `specs/examples/`
 - relevant report
+
+## `progress.md` の扱い
+
+- `progress.md` は repo 全体の簡潔な進捗スナップショットである。
+- 規範判断の正本にはしない。規範判断は `specs/`、長期参照整理は `plan/` に残す。
+- current status / roadmap / remaining steps / major bottleneck / validation loop の到達見込みが変わった task では、同じ task の中で `progress.md` の更新要否を確認する。
+- 更新しなかった場合も、report に **`progress.md 更新不要`** と明記する。
 
 ## review 運用
 
