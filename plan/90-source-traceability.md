@@ -308,6 +308,14 @@
   - `docs/reports/0190-try-rollback-fourth-checker-spike-comparison.md`
   - `docs/reports/0191-review-try-rollback-fourth-checker-spike-comparison.md`
 
+### 2026-04-06 try-rollback AST helper expected-field-name addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/56-current-l2-try-rollback-ast-helper-compare-contract.md`
+  - `specs/examples/57-current-l2-try-rollback-ast-helper-expected-field-name.md`
+  - `docs/reports/0200-try-rollback-ast-helper-expected-field-name.md`
+  - `docs/reports/0201-review-try-rollback-ast-helper-expected-field-name.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

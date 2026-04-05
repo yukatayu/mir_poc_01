@@ -134,6 +134,7 @@
 - current docs-only refinement では、`TryFallback` / `AtomicCut` の structural malformed source は parser-free current phase では static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留める
 - current docs-only refinement では、runtime representative `E2` / `E21` / `E22` が structural floor / dynamic gate split の evidence として十分強いため、malformed static family はまだ actual corpus に増やさない
 - current docs-only refinement では、future dedicated AST structural helper の compare contract は current phase では helper-local dedicated contract から始め、row-family 流用や detached artifact shared carrier 先行はしない
+- current docs-only refinement では、future dedicated AST structural helper の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も `subject_kind` / `finding_kind` の helper-local row list に留める
 - actual helper 実装は、これらの entry criteria が source-backed に揃うまで切らない
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める

@@ -241,6 +241,8 @@
   - `TryFallback` / `AtomicCut` の malformed static family は current phase ではまだ actual corpus に増やさず、runtime representative `E2` / `E21` / `E22` を current evidence として維持するのが自然だという current docs-only judgment を整理する。
 - `specs/examples/56-current-l2-try-rollback-ast-helper-compare-contract.md`
   - future dedicated AST structural helper を切る場合の compare contract は、current phase では row-family 流用や detached artifact shared carrier 先行ではなく、helper-local dedicated contract から始めるのが自然だという current docs-only judgment を整理する。
+- `specs/examples/57-current-l2-try-rollback-ast-helper-expected-field-name.md`
+  - future dedicated AST structural helper を切る場合の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も helper-local row list に留めるのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 
