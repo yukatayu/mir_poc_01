@@ -211,8 +211,9 @@
 - current baseline として、stage 1 handoff は parser-side opaque slot carrier と current parser-free AST fixture schema を同一視せず、thin lowering bridge を介して `OptionDecl.lease` へ narrow に接続するのが自然である
 - current baseline として、その parser-side opaque slot carrier の naming は `decl_guard_slot` を第一候補にし、thin lowering bridge は slot-only helper ではなく option-level structural transfer として読むのが自然である
 - current baseline として、stage 1 actual parser spike の smoke family は `e4-malformed-lineage` と `e7-write-fallback-after-expiry` の two-fixture pair を最小 working set とし、`e3-option-admit-chain` は later-stage contrast reference に残すのが自然である
+- current baseline として、actual stage 1 parser spike は `crates/mir-ast/tests/support/` 配置の private helper として始め、compare surface は lowered fixture-subset compare に留めるのが自然である
 - その次段で比較するべきなのは、
   - `decl_guard_slot` 内部 carrier が raw text / token slice / opaque leaf のどれか
-  - option-level structural transfer の actual private API surface
-  - actual parser spike の private module / helper 配置
+  - option-level structural transfer の actual private API 名 / type 名
+  - text fixture を test inline string にするか別 fixture file にするか
   であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない

@@ -137,6 +137,10 @@ current repo の next narrow step として、stage 1 parser spike の最小 smo
 - `e3` を non-goal regression としてどの段で active smoke に昇格させるか
 - stage 1 の smoke を `e4` / `e7` 以外へ広げる条件
 
+このうち actual parser spike の private module / helper 配置と compare surface の比較は、
+`specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md`
+で次段の narrow task として扱う。
+
 ## current meaning
 
 - stage 1 smoke family は malformed / valid の declaration structural contrast と mixed `lease` anchor だけを見る

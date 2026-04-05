@@ -283,6 +283,8 @@
   - stage 1 parser-side opaque slot carrier の naming candidate と thin lowering bridge の private API surface をどの粒度で narrow に決めるのが自然かを比較する。
 - `specs/examples/77-current-l2-stage1-parser-smoke-family-working-set.md`
   - stage 1 parser spike の smoke family をどの fixture pair / trio で始めるのが最小かを比較する。
+- `specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md`
+  - stage 1 actual parser spike をどこに置き、何を compare surface にするのが最小かを比較する。
 
 ## レポート
 
@@ -323,6 +325,7 @@
   - stage 1 の declaration-side guard slot を current parser-free AST fixture schema へつなぐ最小 handoff cut は `specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md` に置く。
   - stage 1 parser-side opaque slot carrier の naming と thin lowering bridge の private API surface は `specs/examples/76-current-l2-stage1-parser-opaque-slot-carrier-and-bridge-api.md` に置く。
   - stage 1 parser spike の最小 smoke family は `specs/examples/77-current-l2-stage1-parser-smoke-family-working-set.md` に置く。
+  - stage 1 actual parser spike の private helper 配置と compare surface は `specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md` に置く。
   - parser なし minimal interpreter の aggregate emitter private transform を repo 内 callable boundary へ落とす shared support helper cut は `specs/examples/31-current-l2-detached-aggregate-transform-helper.md` に置く。
   - parser なし minimal interpreter の static gate verdict / reasons を detached validation loop に接続する static gate artifact helper cut は `specs/examples/32-current-l2-static-gate-artifact-loop.md` に置く。
   - parser なし minimal interpreter の `expected_static.reasons` dual-use を壊さずに optional `checked_reasons` へ narrow transfer する carrier comparison は `specs/examples/33-current-l2-checked-static-reasons-carrier.md` に置く。

@@ -195,6 +195,7 @@
 - さらに current docs-only refinement として、stage 1 の actual parser / checker handoff では parser-side opaque slot carrier と current parser-free AST fixture schema を直結させず、`OptionDecl.lease` への thin lowering bridge を compatibility anchor として使うのが最小である。
 - さらに current docs-only refinement として、その parser-side opaque slot carrier 名は `decl_guard_slot` を第一候補にし、bridge は slot-only helper ではなく option declaration 単位の structural transfer として narrow に切るのが最小である。
 - さらに current docs-only refinement として、stage 1 actual parser spike の smoke family は `e4-malformed-lineage` と `e7-write-fallback-after-expiry` の two-fixture pair を最小 working set にし、`e3-option-admit-chain` は request / admissibility cluster の later-stage contrast reference に残すのが自然である。
+- さらに current docs-only refinement として、actual stage 1 parser spike は `crates/mir-ast/tests/support/` 配置の private helper として始め、compare surface は parser-side raw AST ではなく lowered fixture-subset compare に留めるのが最小である。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。
 
 ### first checker cut / proof boundary
