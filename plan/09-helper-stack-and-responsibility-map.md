@@ -198,6 +198,8 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper を current validation loop 向けに束ねる薄い wrapper
   - `target/current-l2-detached/` を current non-production default candidate として扱う
   - explicit path compare、fixture-to-artifact compare、aggregate summary export、run-label aggregate compare を最小で支える
+  - `smoke-fixture` subcommand では、1 fixture の bundle emit、optional reference compare、single-fixture aggregate smoke を 1 command で支える
+  - compare helper の exit code `1` は difference found として informational に許容し、emitter / helper failure だけを non-zero で返す
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを current validation loop の手前で補助する
   - runtime / static-only の scaffold と empty `.host-plan.json` sidecar 骨格だけを作る

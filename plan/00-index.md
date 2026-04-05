@@ -40,7 +40,7 @@
 - current L2 では fallback は outer-longer-lifetime wrapper ではなく **guarded option chain** として読む。
 - same-lineage chain は **left-to-right monotone degradation** を採り、**earlier option への再昇格は禁止**している。
 - parser-free PoC 基盤は、AST fixture から named profile catalog まで一通り揃っており、current L2 representative fixtures を machine-check できる。
-- detached exporter chain については、non-production の bundle-first emitter、aggregate emitter、payload-core diff helper、tiny loop wrapper、fixture authoring template があり、継続的 validation loop の入口が見え始めている。
+- detached exporter chain については、non-production の bundle-first emitter、aggregate emitter、payload-core diff helper、tiny loop wrapper、fixture smoke helper、fixture authoring template があり、継続的 validation loop の入口が見え始めている。
 - notation では compact syntax を比較したが、現時点では **explicit edge-row form** を暫定 companion notation として維持している。
 - final parser grammar、machine-readable catalog externalization、richer host interface、multi-request scheduler、`Approximate` / `Compensate` などは未決のまま残している。
 

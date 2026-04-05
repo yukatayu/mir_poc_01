@@ -238,6 +238,8 @@ current L2 では production exporter API はまだ固定しない。
 - `scripts/current_l2_detached_loop.py`
   - bundle emitter、aggregate emitter、bundle diff helper、aggregate diff helper を detached validation loop として薄くつなぐ
   - 1 fixture export、aggregate summary export、2 bundle artifact compare、2 aggregate artifact compare を回しやすくする
+  - `smoke-fixture` subcommand により、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せる
+  - compare helper の exit code `1` は informational difference として許容し、helper failure だけを non-zero で止める
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ作る
   - runtime / static-only の違いと empty `.host-plan.json` sidecar の有無だけを扱い、expectation completion は authoring 側へ残す

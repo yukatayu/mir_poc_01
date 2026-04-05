@@ -103,12 +103,14 @@
 - detached validation-loop continuation の current state としては、
   - `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` が aggregate export 接続と storage/path policy の docs-only 集約文書になり、
   - `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md` が aggregate emitter sketch の actual narrow cut を与え、
+  - `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md` が 1 fixture loop を 1 command で回す helper 境界を与え、
   - `scripts/current_l2_detached_loop.py` が bundle-first emitter、aggregate emitter、diff helper を束ねる non-production wrapper であり、
   - current non-production default candidate は `target/current-l2-detached/` である
 - ただしこれは production exporter 完了を意味しない
 - actual exporter API、artifact 保存先と path policy、aggregate typed field の actual implementation timing は引き続き OPEN である
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
+- `smoke-fixture` のような fixture-level convenience を入れても、それを production CLI や final retention policy と誤読しない boundary discipline が引き続き必要である
 - current non-production aggregate emitter sketch と aggregate compare helper は入ってよいが、`run_directory` / `BatchRunSummary` の public behavior を置き換えず、final API finalization は後段に残す
 
 ### fixture authoring / elaboration bottleneck

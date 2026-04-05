@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（e11 perform-via ensure continuation 追加時点）
+最終更新: 2026-04-05（fixture smoke helper 追加時点）
 
 ## 位置づけ
 
@@ -21,6 +21,7 @@
 - runtime regression catalog に `e10-perform-on-ensure-failure` を追加し、direct `PerformOn` の request-local `ensure` unsatisfied が `Reject` ではなく `explicit_failure` であり、success-side carrier preview が commit されないことを machine-check で固定した。
 - runtime regression catalog に `e11-perform-via-ensure-then-success` を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることを machine-check で固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
+- detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
 - いま重いのは semantics そのものより、**fixture authoring / elaboration** と **detached validation loop の実運用面**である。
 - richer host interface、final parser grammar、static analysis / type / theorem prover、multi-request scheduler はまだ後段である。
 - 実装上の非本質だが忘れてはいけない制約として、**OS / hardware 非依存性** と **step 実行 / graph 可視化へ伸ばせる observability 境界** を、早期固定しすぎずに守る必要がある。
@@ -61,8 +62,8 @@
 | Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
 | parser-free PoC execution stack | 83% | 77% | 91% | 着手可能 | interpreter / host / bundle / batch / selection / profile と runtime regression coverage がさらに 1 本増えた |
-| detached export / validation loop | 83% | 79% | 92% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper、storage candidate、scaffold helper まで揃い、runtime regression の loop 実地反復がさらに進んだ |
-| fixture authoring / elaboration 実務 | 73% | 76% | 76% | 着手可能 | template / scaffold helper は揃い、scaffold 起点の runtime regression を completed fixture まで 1 本増やせた |
+| detached export / validation loop | 84% | 80% | 93% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper まで揃い、runtime regression の loop 実地反復がさらに進んだ |
+| fixture authoring / elaboration 実務 | 74% | 77% | 79% | 着手可能 | template / scaffold helper は揃い、scaffold 起点の runtime regression を completed fixture まで増やし、1 fixture smoke loop も 1 command で回せるようになった |
 | parser / syntax finalization 準備 | 38% | 44% | 18% | 着手可能 | companion notation はあるが final grammar inventory がこれから |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 52% | 44% | 46% | 着手可能 | non-production aggregate emitter と aggregate compare helper は入ったが actual API と final compare 契約は未決 |
@@ -118,3 +119,4 @@
 - 2026-04-05 16:47 JST — `e10-perform-on-ensure-failure` fixture を追加し、direct `PerformOn` の request-local `ensure` unsatisfied が `Reject` ではなく `explicit_failure` であることを machine-check と detached smoke で固定した。review fallback 記録まで残したので、next は `PerformVia` 側 ensure variant か aggregate actual API cut 比較の段階。
 - 2026-04-05 17:01 JST — `e11-perform-via-ensure-then-success` fixture を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることと、earlier tentative commit が破棄され later success だけが place store に反映されることを machine-check で固定した。次は aggregate actual API cut か fixture authoring / elaboration の narrow helper を詰める段階。
 - 2026-04-05 17:02 JST — fixture authoring の boilerplate だけを出す scaffold helper を追加し、runtime/static-only skeleton と empty sidecar を `target/current-l2-fixture-scaffolds/` 下へ安全に作れるようにした。validation loop の入口は到達済みで、次は actual API cut か新 fixture の反復段階。
+- 2026-04-05 17:15 JST — `smoke-fixture` helper を detached loop wrapper に追加し、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようにした。次は aggregate actual API cut か parser 前 inventory の narrow task を詰める段階。

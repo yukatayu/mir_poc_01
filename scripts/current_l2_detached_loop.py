@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 import argparse
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -66,6 +68,14 @@ def aggregate_artifact_path(
     )
 
 
+def smoke_full_run_label(run_label: str) -> str:
+    return ensure_run_label(f"{ensure_run_label(run_label)}-full")
+
+
+def smoke_single_run_label(run_label: str) -> str:
+    return ensure_run_label(f"{ensure_run_label(run_label)}-single")
+
+
 def run_subprocess(cmd: list[str]) -> int:
     completed = subprocess.run(cmd, cwd=REPO_ROOT)
     return completed.returncode
@@ -123,6 +133,15 @@ def compare_aggregates(left: Path, right: Path) -> int:
     return run_subprocess(cmd)
 
 
+def copy_fixture_bundle_to_directory(fixture_path: Path, output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(fixture_path, output_dir / fixture_path.name)
+
+    sidecar_path = fixture_path.with_name(f"{fixture_path.stem}.host-plan.json")
+    if sidecar_path.exists():
+        shutil.copy2(sidecar_path, output_dir / sidecar_path.name)
+
+
 def command_emit_fixture(args: argparse.Namespace) -> int:
     fixture_path = Path(args.fixture_path)
     output_path = (
@@ -178,6 +197,68 @@ def command_compare_fixtures(args: argparse.Namespace) -> int:
     print(f"left artifact : {left_artifact}", flush=True)
     print(f"right artifact: {right_artifact}", flush=True)
     return compare_artifacts(left_artifact, right_artifact)
+
+
+def command_smoke_fixture(args: argparse.Namespace) -> int:
+    artifact_root = Path(args.artifact_root)
+    fixture_path = Path(args.fixture_path)
+    run_label = ensure_run_label(args.run_label)
+    bundle_artifact = bundle_artifact_path(artifact_root, run_label, fixture_path)
+
+    emit_exit = emit_fixture(fixture_path, bundle_artifact, args.overwrite)
+    if emit_exit != 0:
+        return emit_exit
+
+    print(f"fixture artifact: {bundle_artifact}", flush=True)
+
+    if args.reference_fixture:
+        reference_fixture = Path(args.reference_fixture)
+        reference_label = ensure_run_label(args.reference_label)
+        reference_artifact = bundle_artifact_path(
+            artifact_root, reference_label, reference_fixture
+        )
+        reference_exit = emit_fixture(
+            reference_fixture, reference_artifact, args.overwrite
+        )
+        if reference_exit != 0:
+            return reference_exit
+
+        print(f"reference artifact: {reference_artifact}", flush=True)
+        compare_exit = compare_artifacts(bundle_artifact, reference_artifact)
+        if compare_exit not in {0, 1}:
+            return compare_exit
+
+    full_aggregate = aggregate_artifact_path(
+        artifact_root,
+        smoke_full_run_label(run_label),
+    )
+    single_aggregate = aggregate_artifact_path(
+        artifact_root,
+        smoke_single_run_label(run_label),
+    )
+
+    full_exit = emit_aggregate(fixture_path.parent, full_aggregate, args.overwrite)
+    if full_exit != 0:
+        return full_exit
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        single_fixture_dir = Path(temp_dir)
+        copy_fixture_bundle_to_directory(fixture_path, single_fixture_dir)
+        single_exit = emit_aggregate(
+            single_fixture_dir,
+            single_aggregate,
+            args.overwrite,
+        )
+        if single_exit != 0:
+            return single_exit
+
+    print(f"aggregate artifact (full)  : {full_aggregate}", flush=True)
+    print(f"aggregate artifact (single): {single_aggregate}", flush=True)
+    compare_exit = compare_aggregates(full_aggregate, single_aggregate)
+    if compare_exit not in {0, 1}:
+        return compare_exit
+
+    return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -291,6 +372,40 @@ def build_parser() -> argparse.ArgumentParser:
         help="existing artifact を明示的に上書きする",
     )
     compare_fixtures_parser.set_defaults(func=command_compare_fixtures)
+
+    smoke_fixture_parser = subparsers.add_parser(
+        "smoke-fixture",
+        help=(
+            "1 fixture を bundle-first detached loop に載せ、必要なら reference fixture compare と "
+            "single-fixture aggregate smoke までまとめて回す"
+        ),
+    )
+    smoke_fixture_parser.add_argument("fixture_path")
+    smoke_fixture_parser.add_argument(
+        "--reference-fixture",
+        help="optional reference fixture for payload_core compare",
+    )
+    smoke_fixture_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    smoke_fixture_parser.add_argument(
+        "--run-label",
+        default="smoke",
+        help="primary run label for the fixture artifact and aggregate smoke",
+    )
+    smoke_fixture_parser.add_argument(
+        "--reference-label",
+        default="reference",
+        help="run label used when --reference-fixture is supplied",
+    )
+    smoke_fixture_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifacts を明示的に上書きする",
+    )
+    smoke_fixture_parser.set_defaults(func=command_smoke_fixture)
 
     return parser
 

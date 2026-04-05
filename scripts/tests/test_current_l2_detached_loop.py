@@ -1,4 +1,5 @@
 import argparse
+import tempfile
 import sys
 import unittest
 from pathlib import Path
@@ -73,6 +74,176 @@ class DetachedLoopPathTests(unittest.TestCase):
                 )
             ],
         )
+
+    def test_smoke_fixture_emits_bundle_and_aggregate_and_tolerates_diff_status_one(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "sample.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+            sidecar_path = fixture_dir / "sample.host-plan.json"
+            sidecar_path.write_text("{}", encoding="utf-8")
+
+            emitted_fixtures: list[tuple[Path, Path, bool]] = []
+            emitted_aggregates: list[tuple[Path, Path, bool]] = []
+            compared_artifacts: list[tuple[Path, Path]] = []
+            compared_aggregates: list[tuple[Path, Path]] = []
+
+            original_emit_fixture = loop.emit_fixture
+            original_emit_aggregate = loop.emit_aggregate
+            original_compare_artifacts = loop.compare_artifacts
+            original_compare_aggregates = loop.compare_aggregates
+
+            def fake_emit_fixture(
+                fixture: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                emitted_fixtures.append((fixture, output, overwrite))
+                return 0
+
+            def fake_emit_aggregate(
+                fixture_directory: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                emitted_aggregates.append((fixture_directory, output, overwrite))
+                return 0
+
+            def fake_compare_artifacts(left: Path, right: Path) -> int:
+                compared_artifacts.append((left, right))
+                return 1
+
+            def fake_compare_aggregates(left: Path, right: Path) -> int:
+                compared_aggregates.append((left, right))
+                return 1
+
+            loop.emit_fixture = fake_emit_fixture
+            loop.emit_aggregate = fake_emit_aggregate
+            loop.compare_artifacts = fake_compare_artifacts
+            loop.compare_aggregates = fake_compare_aggregates
+            try:
+                exit_code = loop.command_smoke_fixture(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        reference_fixture=str(fixture_path),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="sample-smoke",
+                        reference_label="sample-reference",
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_fixture = original_emit_fixture
+                loop.emit_aggregate = original_emit_aggregate
+                loop.compare_artifacts = original_compare_artifacts
+                loop.compare_aggregates = original_compare_aggregates
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(len(emitted_fixtures), 2)
+        self.assertEqual(
+            emitted_fixtures[0][1],
+            temp_root
+            / "artifacts"
+            / "bundles"
+            / "sample-smoke"
+            / "sample.detached.json",
+        )
+        self.assertEqual(
+            emitted_fixtures[1][1],
+            temp_root
+            / "artifacts"
+            / "bundles"
+            / "sample-reference"
+            / "sample.detached.json",
+        )
+        self.assertEqual(
+            compared_artifacts,
+            [
+                (
+                    temp_root
+                    / "artifacts"
+                    / "bundles"
+                    / "sample-smoke"
+                    / "sample.detached.json",
+                    temp_root
+                    / "artifacts"
+                    / "bundles"
+                    / "sample-reference"
+                    / "sample.detached.json",
+                )
+            ],
+        )
+        self.assertEqual(len(emitted_aggregates), 2)
+        self.assertEqual(
+            emitted_aggregates[0][1],
+            temp_root
+            / "artifacts"
+            / "aggregates"
+            / "sample-smoke-full"
+            / "batch-summary.detached.json",
+        )
+        self.assertEqual(
+            emitted_aggregates[1][1],
+            temp_root
+            / "artifacts"
+            / "aggregates"
+            / "sample-smoke-single"
+            / "batch-summary.detached.json",
+        )
+        self.assertEqual(
+            compared_aggregates,
+            [
+                (
+                    temp_root
+                    / "artifacts"
+                    / "aggregates"
+                    / "sample-smoke-full"
+                    / "batch-summary.detached.json",
+                    temp_root
+                    / "artifacts"
+                    / "aggregates"
+                    / "sample-smoke-single"
+                    / "batch-summary.detached.json",
+                )
+            ],
+        )
+
+    def test_smoke_fixture_propagates_helper_failures_above_diff_status_one(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "sample.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+
+            original_emit_fixture = loop.emit_fixture
+            original_emit_aggregate = loop.emit_aggregate
+            original_compare_aggregates = loop.compare_aggregates
+
+            loop.emit_fixture = lambda fixture, output, overwrite: 0
+            loop.emit_aggregate = lambda fixture_directory, output, overwrite: 0
+            loop.compare_aggregates = lambda left, right: 2
+            try:
+                exit_code = loop.command_smoke_fixture(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        reference_fixture=None,
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="sample-smoke",
+                        reference_label="reference",
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_fixture = original_emit_fixture
+                loop.emit_aggregate = original_emit_aggregate
+                loop.compare_aggregates = original_compare_aggregates
+
+        self.assertEqual(exit_code, 2)
 
 
 if __name__ == "__main__":
