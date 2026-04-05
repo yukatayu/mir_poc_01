@@ -23,6 +23,17 @@ fallback delegated_writer @ lineage(writer -> delegated_writer)
 fallback readonly @ lineage(delegated_writer -> readonly)
 "#;
 
+const MISSING_LINEAGE_INPUT: &str = r#"
+option primary on profile_doc capability read lease live
+option mirror on profile_doc capability read lease live
+chain profile_ref = primary
+fallback mirror
+"#;
+
+const OPTION_ADMIT_SPILLOVER_INPUT: &str = r#"
+option owner_writer on profile_doc capability write lease live admit owner_is(session_user)
+"#;
+
 fn lower_for_compare(source: &str) -> Stage1FixtureSubset {
     let parsed = parse_stage1_program_text(source).expect("stage 1 spike should parse test input");
 
@@ -68,4 +79,26 @@ fn stage1_parser_spike_keeps_decl_guard_slot_surface_text() {
         .expect("writer option should exist");
 
     assert_eq!(writer.decl_guard_slot.surface_text, "expired");
+}
+
+#[test]
+fn stage1_parser_spike_rejects_missing_edge_local_lineage_metadata() {
+    let error = parse_stage1_program_text(MISSING_LINEAGE_INPUT)
+        .expect_err("stage 1 spike should reject fallback rows without lineage metadata");
+
+    assert!(
+        error.contains("missing edge-local lineage metadata"),
+        "expected missing-lineage wording, got: {error}"
+    );
+}
+
+#[test]
+fn stage1_parser_spike_rejects_option_local_admit_spillover() {
+    let error = parse_stage1_program_text(OPTION_ADMIT_SPILLOVER_INPUT)
+        .expect_err("stage 1 spike should reject option-local admit spillover");
+
+    assert!(
+        error.contains("option-local admit is outside stage 1 accepted cluster"),
+        "expected option-local admit wording, got: {error}"
+    );
 }

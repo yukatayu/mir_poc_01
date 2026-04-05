@@ -184,6 +184,9 @@ fn fixture_path(name: &str) -> PathBuf {
 
 fn parse_option_decl(line: &str) -> Result<Stage1ParsedOptionDecl, String> {
     let tokens: Vec<&str> = line.split_whitespace().collect();
+    if tokens.len() > 8 && tokens[8] == "admit" {
+        return Err("option-local admit is outside stage 1 accepted cluster".to_string());
+    }
     if tokens.len() != 8
         || tokens[0] != "option"
         || tokens[2] != "on"
@@ -223,9 +226,9 @@ fn parse_fallback_edge(
     let rest = line
         .strip_prefix("fallback ")
         .ok_or_else(|| format!("unsupported fallback row `{line}`"))?;
-    let (successor_part, lineage_part) = rest
-        .split_once(" @ lineage(")
-        .ok_or_else(|| format!("unsupported fallback row `{line}`"))?;
+    let (successor_part, lineage_part) = rest.split_once(" @ lineage(").ok_or_else(|| {
+        "missing edge-local lineage metadata".to_string()
+    })?;
     let lineage_inner = lineage_part
         .strip_suffix(')')
         .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;

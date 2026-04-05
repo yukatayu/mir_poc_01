@@ -289,6 +289,10 @@
   - stage 1 actual parser spike の input surface、`decl_guard_slot` internal carrier、private helper naming をどこまで narrow に決めるかを比較する。
 - `specs/examples/80-current-l2-stage1-parser-spike-first-tranche-actualization.md`
   - stage 1 actual parser spike の first tranche が `e4` / `e7` の lowered fixture-subset compare と guard-slot retention smoke まで current repo でどこまで actualize 済みかを整理する。
+- `specs/examples/81-current-l2-stage1-parser-spike-malformed-source-comparison.md`
+  - stage 1 parser spike が helper 自身でどこまで malformed-source smoke を持つべきかを比較する。
+- `specs/examples/82-current-l2-stage1-parser-spike-malformed-source-first-tranche-actualization.md`
+  - stage 1 parser spike の malformed-source first tranche が missing lineage metadata と option-local `admit` spillover の 2 件まで current repo でどこまで actualize 済みかを整理する。
 
 ## レポート
 
