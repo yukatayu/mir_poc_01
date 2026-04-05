@@ -567,6 +567,17 @@
   - `docs/reports/0253-current-l2-stage3-admit-slot-branch-comparison.md`
   - `crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json`
 
+### 2026-04-06 stage 3 admit-slot first-tranche actualization addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/83-current-l2-stage3-admit-slot-branch-comparison.md`
+  - `specs/examples/84-current-l2-stage3-admit-slot-carrier-and-compare-surface.md`
+  - `specs/examples/85-current-l2-stage3-admit-slot-first-tranche-actualization.md`
+  - `docs/reports/0255-current-l2-stage3-admit-slot-first-tranche-actualization.md`
+  - `crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

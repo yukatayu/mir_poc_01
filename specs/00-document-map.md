@@ -295,6 +295,10 @@
   - stage 1 parser spike の malformed-source first tranche が missing lineage metadata と option-local `admit` spillover の 2 件まで current repo でどこまで actualize 済みかを整理する。
 - `specs/examples/83-current-l2-stage3-admit-slot-branch-comparison.md`
   - request / admissibility cluster を stage 3 として進めるとき、`e3` を丸ごと送るのではなく declaration-side `admit` attached slot を最初の sub-cutとして先に切るのが自然かを比較する。
+- `specs/examples/84-current-l2-stage3-admit-slot-carrier-and-compare-surface.md`
+  - stage 3 admit-slot branch の actual parser spike 直前 cut として、`decl_admit_slot` naming、fixture-side `admit` node へ direct lower しない compare surface、structural subset compare と slot retention smoke の分離をどこまで narrow に決めるかを整理する。
+- `specs/examples/85-current-l2-stage3-admit-slot-first-tranche-actualization.md`
+  - stage 3 admit-slot branch の success-side first tranche が `e3` option / chain subset compare と `decl_admit_slot.surface_text` retention smoke まで current repo でどこまで actualize 済みかを整理する。
 
 ## レポート
 

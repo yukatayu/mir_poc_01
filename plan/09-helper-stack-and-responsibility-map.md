@@ -206,6 +206,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - stage 1 actual parser spike の private support helper
   - inline text から declaration / chain structural floor だけを parse し、fixture-side subset compare 用 carrier へ thin lowering bridge を渡す
   - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
+- `crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs`
+  - stage 3 admit-slot branch の private support helper
+  - inline text から declaration-side `admit` attached slot を含む option / chain subset だけを parse し、structural subset compare と `decl_admit_slot.surface_text` retention smoke を支える
+  - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する repo-level helper
   - `must_explain` を比較対象に上げない
@@ -231,6 +235,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - parser-free interpreter
   - detached validation loop
   を壊さずに、parser boundary 側の first tranche だけを独立 smoke できる
+  - stage 3 admit-slot branch でも同じ cut を維持し、fixture-side `admit` node や request cluster を current parser spike helper へ持ち込まない
   - `smoke-try-rollback-locality` subcommand では、`e22` mismatch 側と `e21` frontier 側を representative contrast pair として既定パス / label 付きでまとめて回す
   - `smoke-static-gate` subcommand では、1 fixture の static gate artifact emit と optional reference compare を 1 command で支える
   - `smoke-try-rollback-structural-checker` subcommand では、1 fixture の static gate artifact emit と dedicated try/rollback structural helper first tranche compare を 1 command で支える

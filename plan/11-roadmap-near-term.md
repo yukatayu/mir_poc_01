@@ -219,8 +219,10 @@
   - `option-local admit is outside stage 1 accepted cluster`
   の helper-local wording fragment 2 件まで actualize してよい
 - current docs-only next step としては、stage order を崩さず、request / admissibility cluster を stage 3 として進めるときの最初の sub-cutとして declaration-side `admit` attached slot を比較し、`PerformVia` / request-local clause は still later stage に残すのが自然である
+- current docs-only refinement として、stage 3 first tranche の parser-side carrier 名は `decl_admit_slot` を第一候補にし、fixture-side `OptionDecl.admit` へは direct lower せず、structural subset compare と slot retention smoke を分けるのが最小である
+- current actualization として、その success-side first tranche は `crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs` で `e3` 由来 option / chain subset compare と `decl_admit_slot.surface_text` retention smoke を通すところまで進めてよい
 - その次段で比較するべきなのは、
-  - stage 3 admit-slot branch の carrier naming / compare surface をどこまで narrow に決めるか
-  - `perform` / request-local clause spillover を stage 1 helper にどこまで持たせるか
+  - stage 3 admit-slot branch の malformed-source first tranche を helper-local にどこまで持たせるか
+  - `PerformVia` / request-local clause spillover を stage 3 admit-slot branch と混ぜずに fail-closed で示す最小 pair は何か
   - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
-  であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない
+  であり、predicate fragment floor や request cluster を still later stage に残す

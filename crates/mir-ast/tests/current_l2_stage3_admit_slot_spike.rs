@@ -1,0 +1,75 @@
+#[path = "support/current_l2_stage3_admit_slot_spike_support.rs"]
+mod current_l2_stage3_admit_slot_spike_support;
+
+use current_l2_stage3_admit_slot_spike_support::{
+    Stage3FixtureStructuralSubset, load_expected_fixture_structural_subset,
+    lower_stage3_chain_decl_to_fixture_chain, lower_stage3_option_decl_to_fixture_structural_option,
+    parse_stage3_admit_slot_program_text,
+};
+
+const E3_ADMIT_SLOT_INPUT: &str = r#"
+option owner_writer on profile_doc capability write lease live admit owner_is(session_user)
+option delegated_writer on profile_doc capability write lease live admit delegate_granted(session_user)
+chain profile_ref = owner_writer
+fallback delegated_writer @ lineage(owner_writer -> delegated_writer)
+"#;
+
+fn lower_for_compare(source: &str) -> Stage3FixtureStructuralSubset {
+    let parsed = parse_stage3_admit_slot_program_text(source)
+        .expect("stage 3 admit-slot spike should parse test input");
+
+    Stage3FixtureStructuralSubset {
+        options: parsed
+            .options
+            .iter()
+            .map(lower_stage3_option_decl_to_fixture_structural_option)
+            .collect(),
+        chains: parsed
+            .chains
+            .iter()
+            .map(lower_stage3_chain_decl_to_fixture_chain)
+            .collect(),
+    }
+}
+
+#[test]
+fn stage3_admit_slot_parser_spike_matches_e3_fixture_structural_subset() {
+    let actual = lower_for_compare(E3_ADMIT_SLOT_INPUT);
+    let expected = load_expected_fixture_structural_subset("e3-option-admit-chain.json")
+        .expect("expected e3 structural fixture subset should load");
+
+    assert_eq!(actual, expected);
+}
+
+#[test]
+fn stage3_admit_slot_parser_spike_keeps_decl_admit_slot_surface_text() {
+    let parsed = parse_stage3_admit_slot_program_text(E3_ADMIT_SLOT_INPUT)
+        .expect("stage 3 admit-slot spike should parse test input");
+    let owner_writer = parsed
+        .options
+        .iter()
+        .find(|option| option.name == "owner_writer")
+        .expect("owner_writer option should exist");
+    let delegated_writer = parsed
+        .options
+        .iter()
+        .find(|option| option.name == "delegated_writer")
+        .expect("delegated_writer option should exist");
+
+    assert_eq!(
+        owner_writer
+            .decl_admit_slot
+            .as_ref()
+            .expect("owner_writer admit slot should exist")
+            .surface_text,
+        "owner_is(session_user)"
+    );
+    assert_eq!(
+        delegated_writer
+            .decl_admit_slot
+            .as_ref()
+            .expect("delegated_writer admit slot should exist")
+            .surface_text,
+        "delegate_granted(session_user)"
+    );
+}

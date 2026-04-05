@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（stage 3 admit-slot branch comparison まで反映）
+最終更新: 2026-04-06（stage 3 admit-slot first tranche actualization まで反映）
 
 ## 位置づけ
 
@@ -30,6 +30,8 @@
 - current recheck では、generic structural checker family / public checker API comparison に進む concrete pressure もまだ不足しているため、current try/rollback checker line は source-backed trigger が出るまで一旦 pause とみなす。
 - current parser boundary 主線では、actual stage 1 parser spike の private helper 配置 / compare surface / input surface / internal carrier / helper naming に続き、`crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs` で `e4` / `e7` の lowered fixture-subset compare と guard-slot retention smoke を actual code anchor として通す first tranche まで actualize できた。
 - その次段として、stage 1 parser spike の malformed-source smoke は accepted-cluster malformed 1 件と later-stage spillover 1 件の pair が最小であると比較し、`missing edge-local lineage metadata` と `option-local admit is outside stage 1 accepted cluster` の helper-local wording fragment 2 件まで actualize できた。
+- request / admissibility cluster の stage 3 line では、declaration-side `admit` attached slot を最初の sub-cutとして切り、`decl_admit_slot` を parser-side opaque carrier にしつつ、fixture-side `OptionDecl.admit` へ direct lower しない compare surface を docs-only で固定した。
+- その success-side first tranche として、`crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs` で `e3` 由来 option / chain subset の lowered fixture-subset compare と `decl_admit_slot.surface_text` retention smoke を actual code anchor として通せた。
 - current parser boundary の次段 judgment としては、stage order を崩さず、request / admissibility cluster を stage 3 として進めるときの最初の sub-cutとして declaration-side `admit` attached slot を比較し、`PerformVia` / request-local clause は still later stage に残すのが自然である。
 - current first tranche の actualized scope は
   - `expected_static.checked_try_rollback_structural_verdict`
@@ -148,7 +150,7 @@
 - 想定する中身:
   1. detached validation loop の入口を安定化する
   2. fixture authoring / elaboration の反復コストをもう一段下げる
-  3. stage 3 admit-slot branch の carrier naming / compare surface を詰める
+  3. stage 3 admit-slot branch の malformed-source / request spillover pair を詰める
   4. richer host interface を後段に送ったまま、今必要な host coverage の cut だけ固める
   5. current L2 semantics の追加 regression を数本回して、巻き戻りが必要か確認する
   6. portability / observability の boundary を壊さない helper cut を確認する
@@ -238,4 +240,6 @@
 - 2026-04-06 07:43 JST — actual stage 1 parser spike の input surface / internal carrier / private helper naming を比較し、test inline string、dedicated wrapper + owned `surface_text`、`current_l2_stage1_parser_spike_support` を第一候補とする current judgment を spec / plan / progress に反映した。次は non-production の actual stage 1 parser spike を `crates/mir-ast/tests/support/` で実装し、`e4` / `e7` の lowered fixture-subset compare smoke を通す段階。
 - 2026-04-06 08:08 JST — stage 1 parser spike の first tranche を actualize し、`crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs` で `e4` / `e7` の lowered fixture-subset compare と guard-slot retention smoke を通した。`cargo test -p mir-ast`、`cargo test -p mir-semantics`、docs validation まで揃ったので、次は malformed-source smoke か `e3` を使う later-stage contrast のどちらを先に narrow に切るかを比べる段階。
 - 2026-04-06 08:31 JST — stage 1 parser spike の malformed-source first tranche を actualize し、accepted-cluster malformed と option-local `admit` spillover の 2 本だけを helper-local substring smoke として固定した。`cargo test -p mir-ast --test current_l2_stage1_parser_spike` と docs validation が通ったので、次は `perform` / request-local clause spillover と `e3` を使う later-stage contrast のどちらを先に切るかを比べる段階。
+- 2026-04-06 08:44 JST — stage 3 admit-slot branch の carrier naming / compare surface を比較し、`decl_admit_slot` を第一候補にしつつ、fixture-side `admit` node へ direct lower せず、structural subset compare と slot retention smoke を分ける current judgment を固定した。次はこの cut を private helper の success-side first tranche として actualize する段階。
 - 2026-04-06 08:52 JST — `e3` contrast を使う next parser branch を再比較し、`admit` attached slot は stage order を崩す stage 2 ではなく、stage 3 request / admissibility cluster の最初の sub-cutとして扱うのが自然だと整理した。request / perform は still later stage に残し、次は admit-slot branch の carrier naming / compare surface を narrow に詰める段階。
+- 2026-04-06 08:52 JST — stage 3 admit-slot branch の success-side first tranche を actualize し、`crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs` で `e3` option / chain subset compare と `decl_admit_slot.surface_text` retention smoke を通した。次は malformed-source / request spillover のどちらを helper-local first tranche に入れるかを比較する段階。

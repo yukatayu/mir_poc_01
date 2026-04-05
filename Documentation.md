@@ -167,6 +167,8 @@ flowchart LR
 98. stage 1 parser spike の malformed-source smoke を helper 自身へどこまで持たせるかの current comparison は `specs/examples/81-current-l2-stage1-parser-spike-malformed-source-comparison.md`
 99. stage 1 parser spike の malformed-source first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかは `specs/examples/82-current-l2-stage1-parser-spike-malformed-source-first-tranche-actualization.md`
 100. request / admissibility cluster を stage 3 として進めるとき、`e3` を丸ごと送るのではなく declaration-side `admit` attached slot を最初の sub-cutとして先に切るのが自然だという current docs-only judgment は `specs/examples/83-current-l2-stage3-admit-slot-branch-comparison.md`
+101. stage 3 admit-slot branch の actual parser spike 直前 cut、すなわち `decl_admit_slot` naming、fixture-side `admit` node へ direct lower しない compare surface、structural subset compare と slot retention smoke の分離は `specs/examples/84-current-l2-stage3-admit-slot-carrier-and-compare-surface.md`
+102. stage 3 admit-slot branch の success-side first tranche が `crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs` でどこまで actualize 済みかは `specs/examples/85-current-l2-stage3-admit-slot-first-tranche-actualization.md`
 
 ## レポート
 

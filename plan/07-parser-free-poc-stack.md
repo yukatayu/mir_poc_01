@@ -153,6 +153,8 @@ test-only / private な stage 1 parser spike first tranche が actualize 済み�
 
 - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
 - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+- `crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs`
+- `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs`
 
 ### current scope
 
@@ -160,6 +162,7 @@ test-only / private な stage 1 parser spike first tranche が actualize 済み�
 - declaration-side guard slot は `decl_guard_slot.surface_text` として保持
 - compare は lowered fixture-subset compare に留める
 - `e4` / `e7` の two-fixture pair と guard-slot retention smoke を cargo test で回す
+- stage 3 admit-slot branch の success-side first tranche として、`e3` 由来 option / chain subset の lowered fixture-subset compare と `decl_admit_slot.surface_text` retention smoke を cargo test で回す
 - helper-local malformed-source smoke として
   - `missing edge-local lineage metadata`
   - `option-local admit is outside stage 1 accepted cluster`
@@ -173,6 +176,8 @@ test-only / private な stage 1 parser spike first tranche が actualize 済み�
 - predicate fragment parse
 - typed parser error carrier
 - detached validation loop との直接統合
+- fixture-side `OptionDecl.admit` への direct lowering
+- `PerformVia` / request-local `require` / `ensure`
 
 ## machine-check と human-facing explanation の境界
 
