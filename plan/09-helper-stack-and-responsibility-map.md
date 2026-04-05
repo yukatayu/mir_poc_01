@@ -243,6 +243,9 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `scripts/current_l2_same_lineage_checker.py`
   - same-lineage static evidence floor に限った first checker spike
   - fixture schema や detached artifact schema を増やさず、既存 `checked_reason_codes` と static gate artifact `reason_codes` を読む helper-local compare に留める
+- `scripts/current_l2_missing_option_checker.py`
+  - missing-option structure floor に限った second checker spike
+  - fixture schema や detached artifact schema を増やさず、既存 `checked_reason_codes` と static gate artifact `reason_codes` を読む helper-local compare に留める
 
 `scripts/current_l2_detached_loop.py` では、`scan-reason-code-readiness` subcommand を追加してよい。
 
@@ -250,6 +253,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - runtime fixture は skipped count にだけ入れる
 - 上記 readiness helper を呼び、1 fixture assist と corpus 横断 scan を同じ wrapper family に収める
 - `smoke-same-lineage-checker` を追加し、static gate artifact emit と same-lineage first checker spike を同じ wrapper family に収めてよい
+- `smoke-missing-option-checker` を追加し、static gate artifact emit と missing-option second checker spike を同じ wrapper family に収めてよい
 - ただし fixture JSON 自動更新や typed carrier actualization は行わない
 
 これらを `harness.rs` 本体へ入れない理由は次の通りである。

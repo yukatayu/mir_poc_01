@@ -42,10 +42,11 @@ current working tree change について、次を確認する。
 
 ## 3. Actions taken
 
-1. reviewer を 1 回起動したが、current session では completion を受け取れなかったため local evidence fallback を採用した。
-2. target diff を読み、same-lineage checker helper と wrapper が helper-local / non-production boundary に留まるかを点検した。
-3. docs / plan / progress / traceability mirror が same-lineage first spike judgment と second-spike OPEN を正しく反映しているかを確認した。
-4. targeted unit test と actual smoke を review evidence として採用した。
+1. reviewer を 1 回起動し、`180000ms` を 2 回待った。
+2. reviewer は completion を返さなかったため、local evidence fallback を採用した。
+3. target diff を読み、same-lineage checker helper と wrapper が helper-local / non-production boundary に留まるかを点検した。
+4. docs / plan / progress / traceability mirror が same-lineage first spike judgment と second-spike OPEN を正しく反映しているかを確認した。
+5. targeted unit test と actual smoke を review evidence として採用した。
 
 ## 4. Files changed
 
@@ -55,6 +56,8 @@ current working tree change について、次を確認する。
 
 ## 5. Commands run and exact outputs
 
+- `wait_agent(reviewer, 180000)` -> timeout
+- `wait_agent(reviewer, 180000)` -> timeout
 - `python3 -m unittest scripts.tests.test_current_l2_same_lineage_checker scripts.tests.test_current_l2_static_gate_loop`
 - `python3 scripts/current_l2_detached_loop.py smoke-same-lineage-checker crates/mir-ast/tests/fixtures/current-l2/e4-malformed-lineage.json --run-label review-same-lineage --overwrite`
 - `python3 scripts/current_l2_detached_loop.py smoke-same-lineage-checker crates/mir-ast/tests/fixtures/current-l2/e12-underdeclared-target-missing.json --run-label review-same-lineage --overwrite`
@@ -62,6 +65,11 @@ current working tree change について、次を確認する。
 - `git diff --check`
 
 ## 6. Evidence / findings
+
+### reviewer completion
+
+- reviewer は 2 回の wait window 内では completion を返さなかった。
+- current task では retry 1 回までという運用に従い、local evidence fallback へ切り替えた。
 
 ### Local finding result
 

@@ -174,6 +174,18 @@
   - `scripts/tests/test_current_l2_static_gate_loop.py`
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
 
+### 2026-04-05 missing-option second checker spike addendum
+
+- `plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/47-current-l2-missing-option-second-checker-spike.md`
+  - `docs/reports/0176-missing-option-second-checker-spike.md`
+  - `docs/reports/0177-review-missing-option-second-checker-spike.md`
+  - `scripts/current_l2_missing_option_checker.py`
+  - `scripts/tests/test_current_l2_missing_option_checker.py`
+  - `scripts/current_l2_detached_loop.py`
+  - `scripts/tests/test_current_l2_static_gate_loop.py`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
+
 ### named profile catalog と mirror boundary
 
 - `0066`
