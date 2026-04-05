@@ -141,3 +141,4 @@
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - current companion notation から first parser cut に入れてよい semantic cluster を narrow に棚卸しする
 - parser 導入前の syntax decision inventory を plan と spec に切り出す
+- first parser cut inventory を、first checker cut に入れてよい local / structural judgment と theorem prover / model checker 側へ残す property の entry criteria に接続する

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（first parser cut inventory 追加時点）
+最終更新: 2026-04-05（first checker cut entry criteria 追加時点）
 
 ## 位置づけ
 
@@ -23,6 +23,7 @@
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
 - parser boundary については、final grammar を先に凍らせずに first parser cut に入れてよい semantic cluster を先に inventory 化する段階へ入った。
+- static analysis / theorem prover 境界については、first checker cut に入れてよい local / structural judgment と external verifier 側へ残す global property の floor を docs-only で切り始めた。
 - いま重いのは semantics そのものより、**fixture authoring / elaboration** と **detached validation loop の実運用面**である。
 - richer host interface、final parser grammar、static analysis / type / theorem prover、multi-request scheduler はまだ後段である。
 - 実装上の非本質だが忘れてはいけない制約として、**OS / hardware 非依存性** と **step 実行 / graph 可視化へ伸ばせる observability 境界** を、早期固定しすぎずに守る必要がある。
@@ -68,7 +69,7 @@
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 52% | 44% | 46% | 着手可能 | non-production aggregate emitter と aggregate compare helper は入ったが actual API と final compare 契約は未決 |
-| static analysis / type / theorem prover workstream | 12% | 8% | 4% | 後段依存 | plan と entry criteria はあるが未着手に近い |
+| static analysis / type / theorem prover workstream | 22% | 16% | 6% | 後段依存 | first checker cut の local / structural floor と external verifier 側へ残す property までは見えたが、actual checker / proof relation は未着手であり、heavy workstream として扱う |
 | portability / observability / debug hook 設計 | 20% | 14% | 10% | 後段依存 | HW 非依存と step / graph 可視化余地は要件化したが contract はまだない |
 | Mirrorea fabric | 18% | 12% | 8% | 要仕様確認 | 境界整理はあるが current mainline 実装はまだ先 |
 | Typed-Effect Wiring Platform | 12% | 8% | 6% | 要仕様確認 | 位置づけはあるが concrete architecture は後段 |
@@ -122,3 +123,4 @@
 - 2026-04-05 17:02 JST — fixture authoring の boilerplate だけを出す scaffold helper を追加し、runtime/static-only skeleton と empty sidecar を `target/current-l2-fixture-scaffolds/` 下へ安全に作れるようにした。validation loop の入口は到達済みで、次は actual API cut か新 fixture の反復段階。
 - 2026-04-05 17:15 JST — `smoke-fixture` helper を detached loop wrapper に追加し、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようにした。次は aggregate actual API cut か parser 前 inventory の narrow task を詰める段階。
 - 2026-04-05 17:15 JST — first parser cut inventory を追加し、`place` / `try-fallback` / `perform on|via` / `require` / `ensure` / option declaration core / `admit` / explicit edge-row family を parser 候補 cluster として整理した。次は aggregate actual API cut を operational に寄せるか、この inventory を checker / proof entry criteria に接続する段階。
+- 2026-04-05 17:30 JST — first checker cut entry criteria を追加し、same-lineage static evidence floor、malformed / underdeclared rejection、minimal capability strengthening prohibition、clause attachment、minimal predicate fragment、`try` / rollback locality の structural floor を local checker 側へ残し、global invariant proof は external verifier 側へ送る cut を docs-only で固定し始めた。次は aggregate actual API cut を進めるか、この gate を actual checker spike へ接続する段階。

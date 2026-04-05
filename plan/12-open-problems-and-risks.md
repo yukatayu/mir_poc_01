@@ -128,6 +128,12 @@
 - `place` / `try-fallback` / `perform on` / `perform via` / statement-local `require` / `ensure` / option declaration core / option-local `admit` / explicit edge-row family は first parser cut 候補になりうる。
 - ただし A2 と A1 の exact lexical choice、`contract` block sugar、richer predicate grammar、option-local outcome metadata は引き続き OPEN に残す。
 
+### first checker cut / proof boundary
+
+- current L2 では、first checker cut に local / structural / decidable 寄りの floor だけを入れ、global invariant proof は theorem prover / model checker 側へ残す方が自然である。
+- first checker cut に候補として入れてよいのは、same-lineage static evidence floor、malformed / underdeclared rejection、minimal capability strengthening prohibition、request-local / option-local clause attachment、minimal predicate fragment、`try` / rollback locality の structural floor である。
+- ただし canonical normalization の一般証明、no re-promotion、rollback / cut non-interference、multi-shot continuation / membership churn / scheduler のような global property は current L2 checker cut に入れない。
+
 ### richer host interface
 
 - current host harness は current L2 verification basis
