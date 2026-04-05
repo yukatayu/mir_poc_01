@@ -24,16 +24,37 @@
 
 ## Evidence / outputs / test results
 
-- review evidence は reviewer completion または local fallback を待って追記する。
+- reviewer
+
+```text
+reviewer handle was not acquired in this task context
+fallback: local diff inspection + fresh validation
+```
+
+- local fallback
+
+```text
+python3 scripts/validate_docs.py
+Documentation scaffold looks complete.
+Found 219 numbered report(s).
+
+git diff --check
+<no output>
+```
+
+- local diff inspection summary
+  - [66-current-l2-try-rollback-malformed-static-tranche-size.md](/home/yukatayu/dev/mir_poc_01/specs/examples/66-current-l2-try-rollback-malformed-static-tranche-size.md) は [53-current-l2-try-rollback-ast-structural-helper-entry-criteria.md](/home/yukatayu/dev/mir_poc_01/specs/examples/53-current-l2-try-rollback-ast-structural-helper-entry-criteria.md) の複数 structural family 条件と整合し、single fixture を最小扱いしていない。
+  - [66-current-l2-try-rollback-malformed-static-tranche-size.md](/home/yukatayu/dev/mir_poc_01/specs/examples/66-current-l2-try-rollback-malformed-static-tranche-size.md) は [64-current-l2-try-rollback-malformed-static-family-timing.md](/home/yukatayu/dev/mir_poc_01/specs/examples/64-current-l2-try-rollback-malformed-static-family-timing.md) と [65-current-l2-try-rollback-ast-helper-first-tranche-cut.md](/home/yukatayu/dev/mir_poc_01/specs/examples/65-current-l2-try-rollback-ast-helper-first-tranche-cut.md) の first tranche timing / composition judgement を保ったまま exact size だけを絞っている。
 
 ## What changed in understanding
 
-- pending
+- local fallback evidence の範囲では semantic inconsistency や mirror drift は見つからなかった。
+- malformed static tranche size judgement は dedicated helper entry criteria と first tranche cut の current split に整合している。
 
 ## Open questions
 
-- reviewer completion が返るか。
-- tranche size judgement に wording drift がないか。
+- `TryFallback` slot に入れる最初の malformed pattern。
+- `AtomicCut` slot に入れる最初の malformed pattern。
 
 ## Suggested next prompt
 
