@@ -212,8 +212,9 @@
 - current baseline として、その parser-side opaque slot carrier の naming は `decl_guard_slot` を第一候補にし、thin lowering bridge は slot-only helper ではなく option-level structural transfer として読むのが自然である
 - current baseline として、stage 1 actual parser spike の smoke family は `e4-malformed-lineage` と `e7-write-fallback-after-expiry` の two-fixture pair を最小 working set とし、`e3-option-admit-chain` は later-stage contrast reference に残すのが自然である
 - current baseline として、actual stage 1 parser spike は `crates/mir-ast/tests/support/` 配置の private helper として始め、compare surface は lowered fixture-subset compare に留めるのが自然である
+- current baseline として、actual implementation へ入る直前 cut では input surface は test inline string、`decl_guard_slot` internal carrier は dedicated wrapper + owned `surface_text`、private helper family は `current_l2_stage1_parser_spike_support` を第一候補にするのが自然である
 - その次段で比較するべきなのは、
-  - `decl_guard_slot` 内部 carrier が raw text / token slice / opaque leaf のどれか
-  - option-level structural transfer の actual private API 名 / type 名
-  - text fixture を test inline string にするか別 fixture file にするか
+  - stage 1 private helper を actual code としてどこまで実装してよいか
+  - lowered fixture-subset compare を test support 上でどこまで generic にするか
+  - inline text から dedicated text fixture file へ進む trigger をどこに置くか
   であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない

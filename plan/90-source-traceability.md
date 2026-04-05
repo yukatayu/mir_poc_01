@@ -523,6 +523,19 @@
   - `crates/mir-semantics/examples/support/current_l2_detached_bundle_support.rs`
   - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
 
+### 2026-04-06 stage 1 parser spike input-surface and helper-naming addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/74-current-l2-stage1-parser-spike-entry-criteria.md`
+  - `specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md`
+  - `specs/examples/76-current-l2-stage1-parser-opaque-slot-carrier-and-bridge-api.md`
+  - `specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md`
+  - `specs/examples/79-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md`
+  - `docs/reports/0247-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md`
+  - `crates/mir-ast/src/lib.rs`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e4-malformed-lineage.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e7-write-fallback-after-expiry.json`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

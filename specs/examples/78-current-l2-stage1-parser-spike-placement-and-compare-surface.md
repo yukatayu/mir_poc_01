@@ -180,6 +180,16 @@ current repo の next narrow step としては、次が最も自然である。
 - text fixture を別ファイル化するか test inline string にするか
 - example binary / script convenience を後から足すか
 
+このうち actual implementation へ入る直前の
+
+- `decl_guard_slot` internal carrier
+- private helper / file 名
+- test inline string と dedicated text fixture file の比較
+
+は、
+`specs/examples/79-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md`
+で次段の narrow task として扱う。
+
 ## current meaning
 
 - stage 1 parser spike は test-only / private helper として始める
