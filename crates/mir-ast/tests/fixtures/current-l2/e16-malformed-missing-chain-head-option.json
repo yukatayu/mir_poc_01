@@ -1,0 +1,68 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e16_malformed_missing_chain_head_option",
+  "source_example_id": "E16",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "ghost",
+                    "edges": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "checked_reasons": [
+      "missing option declaration for chain head ghost at root / session / profile_access"
+    ],
+    "reasons": [
+      "chain head は visible option declaration を指していなければならない",
+      "missing head option は hidden declaration や dynamic Reject へ回さず static stop として扱う"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "missing chain head option は runtime evaluation に入る前に malformed static stop になる"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "visible chain head は declared option から選ばれること",
+      "missing chain head option を dynamic fallback や hidden declaration で修復しないこと"
+    ]
+  }
+}

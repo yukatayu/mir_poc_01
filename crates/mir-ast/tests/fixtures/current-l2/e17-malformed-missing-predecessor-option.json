@@ -1,0 +1,85 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e17_malformed_missing_predecessor_option",
+  "source_example_id": "E17",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "mirror",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [
+                      {
+                        "predecessor": "ghost",
+                        "successor": "mirror",
+                        "lineage_assertion": {
+                          "predecessor": "ghost",
+                          "successor": "mirror"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "checked_reasons": [
+      "missing predecessor option ghost at root / session / profile_access"
+    ],
+    "reasons": [
+      "chain edge の predecessor は same scope に visible な option declaration でなければならない",
+      "missing predecessor option は lineage annotation があっても static stop のままである"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "missing predecessor option は malformed static stop として runtime evaluation に入らない"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "lineage annotation は missing predecessor option を埋め合わせないこと",
+      "missing predecessor option を hidden same-lineage repair にしないこと"
+    ]
+  }
+}

@@ -216,6 +216,69 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
 }
 
 #[test]
+fn static_gate_artifact_emits_reason_codes_for_missing_option_clusters() {
+    let missing_head_path = fixture_path("e16-malformed-missing-chain-head-option.json");
+    let missing_head_fixture = load_fixture("e16-malformed-missing-chain-head-option.json");
+    let missing_head_gate = static_gate_detailed(&missing_head_fixture);
+
+    let missing_head_artifact =
+        build_detached_static_gate_artifact(missing_head_path, &missing_head_fixture, &missing_head_gate);
+
+    assert_eq!(
+        missing_head_artifact
+            .detached_noncore
+            .expect("missing chain-head cluster should emit detached_noncore")
+            .reason_codes,
+        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingChainHeadOption {
+            head: "ghost".to_string(),
+            scope: "root / session / profile_access".to_string(),
+        }]
+    );
+
+    let missing_predecessor_path = fixture_path("e17-malformed-missing-predecessor-option.json");
+    let missing_predecessor_fixture = load_fixture("e17-malformed-missing-predecessor-option.json");
+    let missing_predecessor_gate = static_gate_detailed(&missing_predecessor_fixture);
+
+    let missing_predecessor_artifact = build_detached_static_gate_artifact(
+        missing_predecessor_path,
+        &missing_predecessor_fixture,
+        &missing_predecessor_gate,
+    );
+
+    assert_eq!(
+        missing_predecessor_artifact
+            .detached_noncore
+            .expect("missing predecessor cluster should emit detached_noncore")
+            .reason_codes,
+        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingPredecessorOption {
+            option: "ghost".to_string(),
+            scope: "root / session / profile_access".to_string(),
+        }]
+    );
+
+    let missing_successor_path = fixture_path("e18-malformed-missing-successor-option.json");
+    let missing_successor_fixture = load_fixture("e18-malformed-missing-successor-option.json");
+    let missing_successor_gate = static_gate_detailed(&missing_successor_fixture);
+
+    let missing_successor_artifact = build_detached_static_gate_artifact(
+        missing_successor_path,
+        &missing_successor_fixture,
+        &missing_successor_gate,
+    );
+
+    assert_eq!(
+        missing_successor_artifact
+            .detached_noncore
+            .expect("missing successor cluster should emit detached_noncore")
+            .reason_codes,
+        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingSuccessorOption {
+            option: "ghost".to_string(),
+            scope: "root / session / profile_access".to_string(),
+        }]
+    );
+}
+
+#[test]
 fn static_gate_artifact_omits_reason_codes_for_duplicate_declaration_clusters() {
     let duplicate_option_path = fixture_path("e14-malformed-duplicate-option-declaration.json");
     let duplicate_option_fixture = load_fixture("e14-malformed-duplicate-option-declaration.json");

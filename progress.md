@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（duplicate declaration static-only tranche 時点）
+最終更新: 2026-04-05（missing-option static-only tranche 作業中）
 
 ## 位置づけ
 
@@ -22,6 +22,7 @@
 - runtime regression catalog に `e11-perform-via-ensure-then-success` を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることを machine-check で固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - static-only malformed / underdeclared fixture に対しては、`scripts/current_l2_detached_loop.py suggest-checked-reasons` から actual static gate `checker_core.reasons` を見て `expected_static.checked_reasons` 候補を display-only で確認できるようになった。helper は fixture JSON を自動更新しない。
+- static-only malformed fixture の stable cluster として、`e16-malformed-missing-chain-head-option` / `e17-malformed-missing-predecessor-option` / `e18-malformed-missing-successor-option` を actual corpus に追加し、`checked_reasons` と detached static gate `reason_codes` の両方へ narrow adoption した。
 - static-only scaffold helper は fixture JSON を変えないまま、authoring 後段で `suggest-checked-reasons` を使えることを stderr reminder として案内できるようになった。reminder command の fixture path は shell-safe quoting で copyable に保っている。
 - detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
 - aggregate emitter 内 private transform を `examples/support/current_l2_detached_aggregate_support.rs` へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary を non-production のまま shared helper 化した。
@@ -75,12 +76,12 @@
 | Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
 | parser-free PoC execution stack | 88% | 83% | 97% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、bundle / aggregate / static gate transform の repo 内 callable boundary が shared helper として入り、static gate reasons は detached helper compare、optional checked carrier、helper-local reason-code mirror、display-only authoring assist の境界まで整理された |
-| detached export / validation loop | 90% | 86% | 97% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper に加え、bundle / aggregate / static gate transform helper の shared support cut、static gate detached non-core reason-code mirror を reference-only compare で扱う cut、checked_reasons suggestion を display-only で返す wrapper convenience まで揃った |
-| fixture authoring / elaboration 実務 | 86% | 88% | 93% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、`e4` / `e5` から始めた optional `checked_reasons` adoption を `e12` / `e13` の stable cluster まで広げ、duplicate declaration cluster `e14` / `e15` も actual corpus へ追加した。valid fixture 群は actual static gate `reasons` が空なため `checked_reasons = []` を広げず、duplicate cluster も display-only actual wording に留めている |
+| detached export / validation loop | 91% | 87% | 97% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper に加え、bundle / aggregate / static gate transform helper の shared support cut、static gate detached non-core reason-code mirror を reference-only compare で扱う cut、checked_reasons suggestion を display-only で返す wrapper convenience、stable missing-option cluster の detached smoke まで揃った |
+| fixture authoring / elaboration 実務 | 88% | 90% | 95% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、`e4` / `e5` から始めた optional `checked_reasons` adoption を `e12` / `e13`、さらに `e16` / `e17` / `e18` の stable malformed cluster まで広げ、duplicate declaration cluster `e14` / `e15` も actual corpus へ追加した。valid fixture 群は actual static gate `reasons` が空なため `checked_reasons = []` を広げず、duplicate cluster も display-only actual wording に留めている |
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 58% | 50% | 61% | 着手可能 | non-production aggregate emitter と aggregate compare helperに加え、aggregate transform の actual narrow cut は shared support helper まで進んだが public API と final compare 契約は未決 |
-| static analysis / type / theorem prover workstream | 40% | 33% | 28% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、additive optional `checked_reasons` を最小 dedicated carrier として実装した。typed code は stable cluster inventory と parametric shape 条件まで整理済みで、detached-side `reason_codes` は helper-local / reference-only mirror に留めている。`e12` / `e13` で stable cluster bridge、`e14` / `e15` で duplicate cluster の non-promotion cut を実地確認し始めた。全面移行はまだ OPEN |
+| static analysis / type / theorem prover workstream | 42% | 35% | 30% | 着手可能 | first checker cut の local / structural floor に加え、static gate reasons をそのまま harness machine-check へ昇格できないことを確認し、additive optional `checked_reasons` を最小 dedicated carrier として実装した。typed code は stable cluster inventory と parametric shape 条件まで整理済みで、detached-side `reason_codes` は helper-local / reference-only mirror に留めている。`e12` / `e13`、`e16` / `e17` / `e18` で stable cluster bridge、`e14` / `e15` で duplicate cluster の non-promotion cut を実地確認した。全面移行はまだ OPEN |
 | portability / observability / debug hook 設計 | 20% | 14% | 10% | 後段依存 | HW 非依存と step / graph 可視化余地は要件化したが contract はまだない |
 | Mirrorea fabric | 18% | 12% | 8% | 要仕様確認 | 境界整理はあるが current mainline 実装はまだ先 |
 | Typed-Effect Wiring Platform | 12% | 8% | 6% | 要仕様確認 | 位置づけはあるが concrete architecture は後段 |
@@ -108,7 +109,7 @@
 
 ## ある程度自律的な Mir 構築ループまで何手か
 
-- **ある程度自律的に「追加し、回し、比較し、次へ進む」状態まで**: あと **3〜6** task 程度
+- **ある程度自律的に「追加し、回し、比較し、次へ進む」状態まで**: あと **2〜5** task 程度
 - 想定する中身:
   1. detached validation loop の入口を安定化する
   2. fixture authoring / elaboration の反復コストをもう一段下げる
@@ -125,6 +126,8 @@
 - portability / observability は今すぐ runtime core に組み込む話ではないが、helper cut と将来 API の形を歪めないよう early reminder として管理する。
 
 ## 作業ログ（簡潔）
+
+- append-only の簡潔ログであり、task consolidation の都合で必ずしも時刻順に並べ替えない。厳密な trail は report と git history を参照。
 
 - 2026-04-05 15:14 JST — detached validation loop の aggregate emitter・wrapper・diff 周辺を検証し、bundle artifact と aggregate summary を保存して比較する current non-production loop が通った。次は fixture authoring の実地反復を増やす段階。
 - 2026-04-05 16:04 JST — `e9-monotone-degradation-success` fixture を追加し、admit miss・middle explicit failure・later success を同じ runtime chain で固定する regression を検証した。green と detached smoke が通ったので、次は aggregate compare helper を詰める段階。
@@ -154,3 +157,4 @@
 - 2026-04-05 20:55 JST — detached bundle transform helper task を reviewer 付きで閉じ、generated bytecode の混入を除去したうえで `e3` の formal `non_admissible_metadata` 保持を direct test に追加した。full `cargo test -p mir-semantics`、bundle smoke、docs validation、`git diff --check` が通ったので、次は static-only / malformed fixture authoring の実地反復へ進める状態。
 - 2026-04-05 21:18 JST — static-only fixture authoring tranche として `e12-underdeclared-target-missing` / `e13-malformed-capability-strengthening` を actual corpus に追加し、`checked_reasons` を stable cluster へ広げた。scaffold helper、`suggest-checked-reasons`、static gate smoke、bundle/aggregate smoke、full `cargo test -p mir-semantics` を通したので、次は duplicate declaration 系を actual corpus に入れる前に fixture 増加の運用コストを比較する段階。
 - 2026-04-05 23:58 JST — duplicate declaration static-only tranche として `e14-malformed-duplicate-option-declaration` / `e15-malformed-duplicate-chain-declaration` を actual corpus に追加し、count / selection / static-gate-support / detached smoke を更新した。duplicate cluster は current cut のまま `checked_reasons` と detached `reason_codes` に昇格させず、`checker_core.reasons` と focused smoke で actual wording を見る運用へ固定した。
+- 2026-04-05 21:57 JST — missing-option static-only tranche として `e16` / `e17` / `e18` を actual corpus に追加し、`checked_reasons` と detached `reason_codes` の stable malformed cluster を full cargo test・static gate smoke・bundle smoke で実地確認した。次は static-only stable cluster の残 inventory を洗い、actual corpus 追加を続けるか typed carrier 側の narrow actualization に進むかを決める段階。

@@ -1,0 +1,77 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e18_malformed_missing_successor_option",
+  "source_example_id": "E18",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [
+                      {
+                        "predecessor": "primary",
+                        "successor": "ghost",
+                        "lineage_assertion": {
+                          "predecessor": "primary",
+                          "successor": "ghost"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "malformed",
+    "checked_reasons": [
+      "missing successor option ghost at root / session / profile_access"
+    ],
+    "reasons": [
+      "chain edge の successor は same scope に visible な option declaration でなければならない",
+      "missing successor option は lineage annotation があっても static stop のままである"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": false,
+    "final_outcome": "not_evaluated",
+    "notes": [
+      "missing successor option は malformed static stop として runtime evaluation に入らない"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "lineage annotation は missing successor option を埋め合わせないこと",
+      "missing successor option を hidden later fallback として扱わないこと"
+    ]
+  }
+}

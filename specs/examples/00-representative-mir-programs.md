@@ -45,6 +45,9 @@
 | E13 | capability strengthening | malformed | successor capability 強化のため static stop |
 | E14 | duplicate option declaration | malformed | visible option name 衝突のため static stop |
 | E15 | duplicate chain declaration | malformed | visible chain name 衝突のため static stop |
+| E16 | missing chain head option | malformed | visible chain head が未宣言 option のため static stop |
+| E17 | missing predecessor option | malformed | edge predecessor が未宣言 option のため static stop |
+| E18 | missing successor option | malformed | edge successor が未宣言 option のため static stop |
 
 ## E1 — place 入れ子 + authority update + `atomic_cut`
 
@@ -510,6 +513,119 @@ place root {
 - 説明可能であるべきこと:
   - malformed の根拠が competing visible chain declaration にあること
   - current duplicate cluster は detached helper 側でも `checker_core.reasons` に留め、stable `reason_codes` へはまだ昇格しないこと
+
+## E16 — missing chain head option は malformed static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+
+      chain profile_ref = ghost
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `malformed`
+- 理由:
+  - `chain` の `head` は同じ visible scope にある option declaration を指していなければならない。
+  - 未宣言の `ghost` を head に置いても hidden declaration や hidden fallback 候補は生えない。
+  - current helper cut ではこの cluster を stable actual wording として扱ってよく、`checked_reasons` と detached `reason_codes` の両方へ narrow に載せてよい。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- missing chain head option は malformed static stop であり、dynamic `Reject` や host-plan failure へは送らない。
+
+### 最小 trace / audit 説明
+
+- event は発生しない。
+- 説明可能であるべきこと:
+  - head 参照は visible option declaration に閉じること
+  - missing head を hidden repair で埋めないこと
+
+## E17 — missing predecessor option は malformed static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+      option mirror on profile_doc capability read lease live
+
+      chain profile_ref = primary
+        fallback mirror
+          @ lineage(ghost -> mirror)
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `malformed`
+- 理由:
+  - edge の `predecessor` は visible option declaration でなければならない。
+  - `lineage(ghost -> mirror)` と書いても、missing predecessor option は same-lineage continuation として成立しない。
+  - current helper cut ではこの cluster を stable actual wording として扱ってよく、`checked_reasons` と detached `reason_codes` の両方へ narrow に載せてよい。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- missing predecessor option は chain edge の structural malformed として止める。
+
+### 最小 trace / audit 説明
+
+- event は発生しない。
+- 説明可能であるべきこと:
+  - lineage annotation は missing predecessor option を補わないこと
+  - edge-local metadata と visible declaration inventory を混同しないこと
+
+## E18 — missing successor option は malformed static stop
+
+### コード
+
+```text
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+
+      chain profile_ref = primary
+        fallback ghost
+          @ lineage(primary -> ghost)
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `malformed`
+- 理由:
+  - edge の `successor` は visible option declaration でなければならない。
+  - `lineage(primary -> ghost)` と書いても、missing successor option は same-lineage fallback 候補として成立しない。
+  - current helper cut ではこの cluster を stable actual wording として扱ってよく、`checked_reasons` と detached `reason_codes` の両方へ narrow に載せてよい。
+
+### 期待される runtime outcome
+
+- runtime evaluation には入らない。
+- missing successor option は dynamic fallback へ落とさず malformed static stop として扱う。
+
+### 最小 trace / audit 説明
+
+- event は発生しない。
+- 説明可能であるべきこと:
+  - missing successor option を hidden later candidate へ repair しないこと
+  - chain edge の可視宣言要件が runtime より先に効くこと
 
 ## 書いてみて見えた current L2 の穴
 
