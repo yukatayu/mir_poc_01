@@ -17,6 +17,7 @@
 - `e7-write-fallback-after-expiry`
 - `e8-monotone-degradation-reject`
 - `e9-monotone-degradation-success`
+- `e10-perform-on-ensure-failure`
 
 ### static-only fixture
 
@@ -36,6 +37,7 @@
 | `e7-write-fallback-after-expiry` | expiry 後に later write-capable option で成功 | `valid` | `success` | `lease-expired` formal metadata を残しつつ later success | あり | E6 補完, `0078` |
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject` | `valid` | `Reject` | `perform-failure`、`Reject`、formal `admit-miss`、capability mismatch narrative | あり | canonical law / no re-promotion, `0078` |
 | `e9-monotone-degradation-success` | `admit-miss`、middle failure、later success | `valid` | `success` | `perform-failure` の後に later write-capable option で `perform-success`、formal `admit-miss` のみを残す | あり | E3 / E6 success-side 補完, `0121` |
+| `e10-perform-on-ensure-failure` | direct `PerformOn` の request-local `ensure` failure | `valid` | `explicit_failure` | `perform-failure` のみ、formal metadata なし、success-side carrier を preview しても commit しない | あり | E1 direct-target ensure variant, `0126` |
 
 ## fixture ごとの補足
 
@@ -82,6 +84,12 @@
 - `e8` の success-side 補完
 - middle option の explicit failure があっても、later same-lineage write-capable option が request を満たせば success しうる
 - no re-promotion を保ったまま、middle failure のあとに later success へ進めることを固定する
+
+### `e10-perform-on-ensure-failure`
+
+- `PerformOn` の direct target で request-local `ensure` が unsatisfied なら `explicit_failure`
+- effect が success-side carrier を返していても tentative commit は適用しない
+- この分岐は `Reject` や non-admissible skip ではなく、request contract failure として読む
 
 ## runtime fixture と static-only fixture の区別
 

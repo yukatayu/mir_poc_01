@@ -163,6 +163,7 @@ fn runtime_fixtures_reach_expected_outcomes_via_declarative_host_plan() {
         "e7-write-fallback-after-expiry.json",
         "e8-monotone-degradation-reject.json",
         "e9-monotone-degradation-success.json",
+        "e10-perform-on-ensure-failure.json",
     ];
 
     for fixture_name in cases {
@@ -190,6 +191,7 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
         "e7-write-fallback-after-expiry.json",
         "e8-monotone-degradation-reject.json",
         "e9-monotone-degradation-success.json",
+        "e10-perform-on-ensure-failure.json",
     ];
 
     for fixture_name in cases {
@@ -318,6 +320,33 @@ fn harness_can_override_trace_expectation_without_changing_runtime_plan() {
     assert_eq!(
         harness.expected_narrative_explanations(&fixture),
         vec!["custom narrative".to_string()]
+    );
+}
+
+#[test]
+fn perform_on_ensure_failure_returns_explicit_failure_without_non_admissible_metadata() {
+    let bundle = load_bundle("e10-perform-on-ensure-failure.json");
+    let result = run_bundle(&bundle).unwrap();
+
+    assert_eq!(
+        result.report.terminal_outcome,
+        Some(mir_semantics::TerminalOutcome::ExplicitFailure)
+    );
+    assert_eq!(
+        result.report.trace_audit_sink.events,
+        vec![mir_semantics::EventKind::PerformFailure]
+    );
+    assert!(
+        result.report.trace_audit_sink.non_admissible_metadata.is_empty(),
+        "direct ensure failure should not fabricate non-admissible metadata"
+    );
+    assert!(
+        result
+            .report
+            .trace_audit_sink
+            .narrative_explanations
+            .is_empty(),
+        "direct ensure failure should not need capability-mismatch narrative explanation"
     );
 }
 
@@ -467,9 +496,9 @@ fn harness_rejects_uncovered_oracle_calls_without_synthetic_success_commit() {
 fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
     let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
 
-    assert_eq!(discovery.total_candidates, 9);
+    assert_eq!(discovery.total_candidates, 10);
     assert_eq!(discovery.failures.len(), 0);
-    assert_eq!(discovery.bundles.len(), 9);
+    assert_eq!(discovery.bundles.len(), 10);
     assert_eq!(
         discovery
             .bundles
@@ -477,7 +506,7 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
             .filter(|bundle| bundle.runtime_requirement
                 == FixtureRuntimeRequirement::RuntimeWithHostPlan)
             .count(),
-        7
+        8
     );
     assert_eq!(
         discovery
@@ -493,10 +522,10 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
 fn run_directory_returns_summary_for_current_l2_fixture_dir() {
     let summary = run_directory(fixture_dir()).unwrap();
 
-    assert_eq!(summary.total_bundles, 9);
-    assert_eq!(summary.runtime_bundles, 7);
+    assert_eq!(summary.total_bundles, 10);
+    assert_eq!(summary.runtime_bundles, 8);
     assert_eq!(summary.static_only_bundles, 2);
-    assert_eq!(summary.passed, 9);
+    assert_eq!(summary.passed, 10);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -602,14 +631,15 @@ fn selection_runtime_only_keeps_only_runtime_bundles() {
         })
         .collect();
 
-    assert_eq!(selected.total_candidates, 7);
-    assert_eq!(selected.runtime_bundles, 7);
+    assert_eq!(selected.total_candidates, 8);
+    assert_eq!(selected.runtime_bundles, 8);
     assert_eq!(selected.static_only_bundles, 0);
     assert_eq!(selected.failures.len(), 0);
     assert_eq!(
         stems,
         vec![
             "e1-place-atomic-cut",
+            "e10-perform-on-ensure-failure",
             "e2-try-fallback",
             "e3-option-admit-chain",
             "e6-write-after-expiry",
@@ -670,10 +700,10 @@ fn run_directory_selected_single_fixture_runs_only_requested_fixture() {
 fn run_directory_selected_runtime_only_executes_only_runtime_bundles() {
     let summary = run_directory_selected(fixture_dir(), &SelectionMode::RuntimeOnly).unwrap();
 
-    assert_eq!(summary.total_bundles, 7);
-    assert_eq!(summary.runtime_bundles, 7);
+    assert_eq!(summary.total_bundles, 8);
+    assert_eq!(summary.runtime_bundles, 8);
     assert_eq!(summary.static_only_bundles, 0);
-    assert_eq!(summary.passed, 7);
+    assert_eq!(summary.passed, 8);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -843,8 +873,8 @@ fn run_directory_profiled_includes_profile_name_in_summary() {
     let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
 
     assert_eq!(summary.profile_name, "runtime-all");
-    assert_profile_selected_counts(&summary, 7, 7, 0);
-    assert_eq!(summary.passed, 7);
+    assert_profile_selected_counts(&summary, 8, 8, 0);
+    assert_eq!(summary.passed, 8);
     assert_eq!(summary.failed, 0);
 }
 

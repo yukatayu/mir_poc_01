@@ -1,0 +1,39 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "request-require",
+      "op": "update_authority",
+      "mode": "on",
+      "target": "profile_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "update_authority",
+      "mode": "on",
+      "target": "profile_authority",
+      "verdict": "unsatisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "update_authority",
+      "mode": "on",
+      "selected_target": "profile_authority",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "profile_authority",
+              "record": "update_authority@profile_authority"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}
