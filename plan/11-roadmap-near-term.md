@@ -153,6 +153,10 @@
 - その next narrow step として、`checked_reasons` を auto-fill しない display-only authoring assist を current helper stack に置き、actual static gate wording の narrow adoption を review 可能にしてよい
 - さらにその次段として、helper-local / reference-only `reason_codes` mirror を assist source にする display-only helper を current helper stack に置き、future typed carrier 候補 row を fixture schema に昇格させずに review 可能にしてよい
 - その次の実地反復として、static-only fixture corpus を横断する readiness scan を current helper stack に置き、`checked_reasons` adoption と `reason_codes` suggestion availability を tranche 単位で観察してから future typed carrier actualization の着手順を決めてよい
+- readiness scan の次段として、first actualization family は lineage edge pair family、second tranche は declared target edge pair family として比較結果を固定した
+- current code / fixture corpus では、その carrier cut を current stable cluster inventory の 8 kind まで広げ、`checked_reason_codes` adoption と `reason_codes` suggestion availability が 8 / 8 で揃うところまで actualize 済みである
+- duplicate declaration cluster は current cut のまま `checked_reasons` / `checked_reason_codes` / detached `reason_codes` stable inventory へは上げず、actual wording を `checker_core.reasons` と focused smoke で見る
+- 次の narrow step は、stable cluster actualization を前提に `checked_reasons` / `checked_reason_codes` coexistence の縮退条件を比較するか、parser boundary / checker boundary 側へ主線を戻すかの整理である
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る

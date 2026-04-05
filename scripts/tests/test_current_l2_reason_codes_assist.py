@@ -13,7 +13,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 import current_l2_reason_codes_assist as assist  # noqa: E402
 
 
-def fixture_document(*, typed_reason_codes=None) -> dict:
+def fixture_document(*, checked_reason_codes=None, typed_reason_codes=None) -> dict:
     expected_static = {
         "verdict": "underdeclared",
         "reasons": ["explanatory note"],
@@ -21,6 +21,8 @@ def fixture_document(*, typed_reason_codes=None) -> dict:
             "declared access target is missing for writer -> readonly"
         ],
     }
+    if checked_reason_codes is not None:
+        expected_static["checked_reason_codes"] = checked_reason_codes
     if typed_reason_codes is not None:
         expected_static["reason_codes"] = typed_reason_codes
     return {
@@ -100,7 +102,7 @@ class CurrentL2ReasonCodesAssistTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         output = stdout.getvalue()
         self.assertIn(
-            "current fixture-side typed reason code carrier: absent (no current fixture field)",
+            "current fixture-side typed carrier: checked_reason_codes absent",
             output,
         )
         self.assertIn("reason_codes_scope: stable-clusters-only", output)
@@ -160,6 +162,46 @@ class CurrentL2ReasonCodesAssistTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         output = stdout.getvalue()
         self.assertIn("detached artifact has no reason_codes suggestion", output)
+
+    def test_main_reports_when_checked_reason_codes_already_match(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            fixture_path = tmpdir_path / "e12-underdeclared-target-missing.json"
+            artifact_path = tmpdir_path / "e12-underdeclared-target-missing.static-gate.json"
+            reason_codes = [
+                {
+                    "kind": "missing_lineage_assertion",
+                    "predecessor": "primary",
+                    "successor": "mirror",
+                }
+            ]
+            fixture_path.write_text(
+                json.dumps(
+                    fixture_document(checked_reason_codes=reason_codes),
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            artifact_path.write_text(
+                json.dumps(
+                    static_gate_artifact(reason_codes=reason_codes),
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = assist.main([str(fixture_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("current fixture-side typed carrier: checked_reason_codes present", output)
+        self.assertIn("fixture checked_reason_codes already match actual suggestion", output)
 
     def test_main_rejects_fixture_side_typed_reason_code_field(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

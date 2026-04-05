@@ -55,6 +55,13 @@
   },
   "expected_static": {
     "verdict": "underdeclared",
+    "checked_reason_codes": [
+      {
+        "kind": "missing_lineage_assertion",
+        "predecessor": "primary",
+        "successor": "mirror"
+      }
+    ],
     "checked_reasons": [
       "missing lineage assertion for primary -> mirror"
     ],

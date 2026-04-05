@@ -207,6 +207,14 @@
   - detached static gate artifact の helper-local / reference-only `reason_codes` を future typed carrier 候補 row として display-only に返す non-production assist の補助文書。
 - `specs/examples/39-current-l2-static-reason-code-readiness-scan.md`
   - static-only fixture corpus を横断し、`checked_reasons` adoption と detached static gate artifact の `reason_codes` suggestion availability を display-only に要約する non-production readiness scan の補助文書。
+- `specs/examples/40-current-l2-first-typed-static-reason-family-selection.md`
+  - future typed static reason carrier をどの stable family から narrow に actualize し始めるかの first selection を整理する。
+- `specs/examples/41-current-l2-first-typed-static-reason-family-carrier-cut.md`
+  - first selected family をどの carrier へ first-class に actualize し始めるかの placement と additive actualization cut を整理する。
+- `specs/examples/42-current-l2-second-typed-static-reason-family-actualization.md`
+  - first family の次段として declared target edge pair family を同じ fixture-side additive carrier に広げる最小 cut を整理する。
+- `specs/examples/43-current-l2-complete-stable-static-reason-tranche.md`
+  - current stable cluster inventory の remaining tranche を `checked_reason_codes` に揃え、duplicate cluster だけを非昇格に残す最小 cut を整理する。
 
 ## レポート
 
@@ -249,6 +257,9 @@
   - parser なし minimal interpreter の detached static gate artifact に helper-local / reference-only な `reason_codes` mirror を置く cut は `specs/examples/35-current-l2-detached-static-reason-code-mirror.md` に置く。
   - parser なし minimal interpreter の bundle-first emitter private transform を repo 内 callable boundary へ落とす shared support helper cut は `specs/examples/37-current-l2-detached-bundle-transform-helper.md` に置く。
   - parser なし minimal interpreter の static-only fixture corpus に対する `checked_reasons` / `reason_codes` readiness scan は `specs/examples/39-current-l2-static-reason-code-readiness-scan.md` に置く。
+  - parser なし minimal interpreter の future typed static reason carrier をどの stable family から narrow に actualize し始めるかの first selection は `specs/examples/40-current-l2-first-typed-static-reason-family-selection.md` に置く。
+  - parser なし minimal interpreter の first selected family をどの carrier へ first-class に置くかの additive actualization cut は `specs/examples/41-current-l2-first-typed-static-reason-family-carrier-cut.md` に置く。
+  - parser なし minimal interpreter の second tranche と remaining stable tranche を `checked_reason_codes` に広げる cut は `specs/examples/42-current-l2-second-typed-static-reason-family-actualization.md` と `specs/examples/43-current-l2-complete-stable-static-reason-tranche.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor

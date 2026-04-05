@@ -50,6 +50,13 @@
   },
   "expected_static": {
     "verdict": "malformed",
+    "checked_reason_codes": [
+      {
+        "kind": "missing_successor_option",
+        "option": "ghost",
+        "scope": "root / session / profile_access"
+      }
+    ],
     "checked_reasons": [
       "missing successor option ghost at root / session / profile_access"
     ],

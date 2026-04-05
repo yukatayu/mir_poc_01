@@ -114,6 +114,32 @@
   - `scripts/tests/test_current_l2_reason_code_readiness.py`
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
 
+### 2026-04-05 first typed static reason family addendum
+
+- `plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/40-current-l2-first-typed-static-reason-family-selection.md`
+  - `specs/examples/41-current-l2-first-typed-static-reason-family-carrier-cut.md`
+  - `specs/examples/42-current-l2-second-typed-static-reason-family-actualization.md`
+  - `specs/examples/43-current-l2-complete-stable-static-reason-tranche.md`
+  - `docs/reports/0168-first-typed-static-reason-family-selection.md`
+  - `docs/reports/0169-review-first-typed-static-reason-family-selection.md`
+  - `crates/mir-semantics/src/lib.rs`
+  - `crates/mir-semantics/src/harness.rs`
+  - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+  - `crates/mir-semantics/tests/current_l2_static_gate_support.rs`
+  - `scripts/current_l2_reason_codes_assist.py`
+  - `scripts/current_l2_reason_code_readiness.py`
+  - `scripts/tests/test_current_l2_reason_codes_assist.py`
+  - `scripts/tests/test_current_l2_reason_code_readiness.py`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e4-malformed-lineage.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e5-underdeclared-lineage.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e12-underdeclared-target-missing.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e13-malformed-capability-strengthening.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e16-malformed-missing-chain-head-option.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e17-malformed-missing-predecessor-option.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e18-malformed-missing-successor-option.json`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e19-malformed-target-mismatch.json`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

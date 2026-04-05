@@ -178,6 +178,17 @@ current L2 では、これらは後比較や後解析には有益だが、interp
 - detached static gate artifact の `checker_core.reasons` は actual compare してよい
 - fixture の `expected_static.reasons` は explanatory note を兼ねるため、現時点では harness machine-check に上げない
 - ただし future checker API の narrow migration としては、optional `expected_static.checked_reasons` を additive に置き、present のときだけ harness が actual static gate reasons を fail-closed compare してよい
+- さらに current stable cluster tranche としては、stable inventory 8 kind に限って optional `expected_static.checked_reason_codes` を additive に置き、present のときだけ harness が actual static gate reason から導いた typed row を fail-closed compare してよい
+- current tranche で supported なのは
+  - `missing_lineage_assertion`
+  - `lineage_assertion_edge_mismatch`
+  - `declared_target_missing`
+  - `declared_target_mismatch`
+  - `capability_strengthens`
+  - `missing_chain_head_option`
+  - `missing_predecessor_option`
+  - `missing_successor_option`
+  であり、duplicate declaration cluster は引き続き non-promotion / fail-closed のままにする
 
 ## `must_explain` の扱い
 
@@ -271,10 +282,12 @@ current L2 では production exporter API はまだ固定しない。
   - fixture JSON の自動更新や `checked_reasons = []` の一括補完は行わない
 - `scripts/current_l2_reason_codes_assist.py`
   - detached static gate artifact の helper-local / reference-only `detached_noncore.reason_codes` を読んで、future typed carrier 候補 row を display-only で返す
-  - current fixture schema に typed field が無いことを明示し、unsupported fixture-side typed field を見つけたら fail-closed に止まる
+  - fixture-side `expected_static.checked_reason_codes` が current tranche で present のときは、その current row と actual suggestion の一致も display-only に確認できる
+  - unsupported legacy fixture-side typed field を見つけたら fail-closed に止まる
   - fixture JSON の自動更新は行わない
 - `scripts/current_l2_reason_code_readiness.py`
   - static-only fixture corpus を横断し、`checked_reasons` adoption と `detached_noncore.reason_codes` suggestion availability を batch で display-only 要約する
+  - current stable cluster tranche の `checked_reason_codes` adoption 数も同じ scan で観察してよい
   - stable cluster と duplicate cluster の current split を tranche 単位で観察する authoring aid に留め、typed carrier actualization や detached aggregate 永続化は行わない
 
 これらは current helper stack の public behavior を置き換えない。

@@ -289,6 +289,110 @@ fn run_bundle_accepts_matching_checked_static_reasons() {
 }
 
 #[test]
+fn run_bundle_accepts_matching_checked_reason_codes_for_lineage_pair_family() {
+    let bundle =
+        load_bundle_from_fixture_path(fixture_path("e5-underdeclared-lineage.json")).unwrap();
+
+    let report = run_bundle(&bundle).unwrap();
+
+    assert_eq!(
+        report.report.static_verdict,
+        bundle.fixture.expected_static.verdict
+    );
+}
+
+#[test]
+fn run_bundle_rejects_checked_reason_code_mismatch() {
+    let mut bundle =
+        load_bundle_from_fixture_path(fixture_path("e5-underdeclared-lineage.json")).unwrap();
+    bundle.fixture.expected_static.checked_reason_codes = Some(vec![
+        mir_semantics::StaticReasonCodeRow::LineageAssertionEdgeMismatch {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        },
+    ]);
+
+    let err = run_bundle(&bundle).unwrap_err();
+    let message = err.to_string();
+
+    assert!(
+        message.contains("bundle static checked_reason_codes mismatch"),
+        "{message}"
+    );
+    assert!(message.contains("e5_underdeclared_lineage"), "{message}");
+}
+
+#[test]
+fn run_bundle_accepts_matching_checked_reason_codes_for_target_pair_family() {
+    let missing_target =
+        load_bundle_from_fixture_path(fixture_path("e12-underdeclared-target-missing.json"))
+            .unwrap();
+    let missing_target_report = run_bundle(&missing_target).unwrap();
+
+    assert_eq!(
+        missing_target_report.report.static_verdict,
+        missing_target.fixture.expected_static.verdict
+    );
+
+    let target_mismatch =
+        load_bundle_from_fixture_path(fixture_path("e19-malformed-target-mismatch.json"))
+            .unwrap();
+    let target_mismatch_report = run_bundle(&target_mismatch).unwrap();
+
+    assert_eq!(
+        target_mismatch_report.report.static_verdict,
+        target_mismatch.fixture.expected_static.verdict
+    );
+}
+
+#[test]
+fn run_bundle_accepts_matching_checked_reason_codes_for_remaining_stable_families() {
+    let strengthening = load_bundle_from_fixture_path(fixture_path(
+        "e13-malformed-capability-strengthening.json",
+    ))
+    .unwrap();
+    let strengthening_report = run_bundle(&strengthening).unwrap();
+
+    assert_eq!(
+        strengthening_report.report.static_verdict,
+        strengthening.fixture.expected_static.verdict
+    );
+
+    let missing_head = load_bundle_from_fixture_path(fixture_path(
+        "e16-malformed-missing-chain-head-option.json",
+    ))
+    .unwrap();
+    let missing_head_report = run_bundle(&missing_head).unwrap();
+
+    assert_eq!(
+        missing_head_report.report.static_verdict,
+        missing_head.fixture.expected_static.verdict
+    );
+
+    let missing_predecessor = load_bundle_from_fixture_path(fixture_path(
+        "e17-malformed-missing-predecessor-option.json",
+    ))
+    .unwrap();
+    let missing_predecessor_report = run_bundle(&missing_predecessor).unwrap();
+
+    assert_eq!(
+        missing_predecessor_report.report.static_verdict,
+        missing_predecessor.fixture.expected_static.verdict
+    );
+
+    let missing_successor = load_bundle_from_fixture_path(fixture_path(
+        "e18-malformed-missing-successor-option.json",
+    ))
+    .unwrap();
+    let missing_successor_report = run_bundle(&missing_successor).unwrap();
+
+    assert_eq!(
+        missing_successor_report.report.static_verdict,
+        missing_successor.fixture.expected_static.verdict
+    );
+}
+
+#[test]
 fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wording() {
     let malformed = load_bundle_from_fixture_path(fixture_path("e4-malformed-lineage.json"))
         .expect("fixture should load");
@@ -296,12 +400,26 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
         malformed.fixture.expected_static.checked_reasons,
         Some(vec!["lineage assertion does not describe primary -> mirror".to_string()])
     );
+    assert_eq!(
+        malformed.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::LineageAssertionEdgeMismatch {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        }])
+    );
 
     let underdeclared = load_bundle_from_fixture_path(fixture_path("e5-underdeclared-lineage.json"))
         .expect("fixture should load");
     assert_eq!(
         underdeclared.fixture.expected_static.checked_reasons,
         Some(vec!["missing lineage assertion for primary -> mirror".to_string()])
+    );
+    assert_eq!(
+        underdeclared.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::MissingLineageAssertion {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        }])
     );
 
     let missing_target = load_bundle_from_fixture_path(fixture_path(
@@ -312,6 +430,13 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
         missing_target.fixture.expected_static.checked_reasons,
         Some(vec!["declared access target is missing for primary -> mirror".to_string()])
     );
+    assert_eq!(
+        missing_target.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::DeclaredTargetMissing {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        }])
+    );
 
     let strengthening = load_bundle_from_fixture_path(fixture_path(
         "e13-malformed-capability-strengthening.json",
@@ -321,18 +446,27 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
         strengthening.fixture.expected_static.checked_reasons,
         Some(vec!["capability strengthens from read to write".to_string()])
     );
+    assert_eq!(
+        strengthening.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::CapabilityStrengthens {
+            from_capability: "read".to_string(),
+            to_capability: "write".to_string(),
+        }])
+    );
 
     let duplicate_option = load_bundle_from_fixture_path(fixture_path(
         "e14-malformed-duplicate-option-declaration.json",
     ))
     .expect("fixture should load");
     assert_eq!(duplicate_option.fixture.expected_static.checked_reasons, None);
+    assert_eq!(duplicate_option.fixture.expected_static.checked_reason_codes, None);
 
     let duplicate_chain = load_bundle_from_fixture_path(fixture_path(
         "e15-malformed-duplicate-chain-declaration.json",
     ))
     .expect("fixture should load");
     assert_eq!(duplicate_chain.fixture.expected_static.checked_reasons, None);
+    assert_eq!(duplicate_chain.fixture.expected_static.checked_reason_codes, None);
 
     let missing_head = load_bundle_from_fixture_path(fixture_path(
         "e16-malformed-missing-chain-head-option.json",
@@ -345,6 +479,13 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
                 .to_string(),
         ])
     );
+    assert_eq!(
+        missing_head.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::MissingChainHeadOption {
+            head: "ghost".to_string(),
+            scope: "root / session / profile_access".to_string(),
+        }])
+    );
 
     let missing_predecessor = load_bundle_from_fixture_path(fixture_path(
         "e17-malformed-missing-predecessor-option.json",
@@ -355,6 +496,13 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
         Some(vec![
             "missing predecessor option ghost at root / session / profile_access".to_string(),
         ])
+    );
+    assert_eq!(
+        missing_predecessor.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::MissingPredecessorOption {
+            option: "ghost".to_string(),
+            scope: "root / session / profile_access".to_string(),
+        }])
     );
 
     let missing_successor = load_bundle_from_fixture_path(fixture_path(
@@ -367,6 +515,13 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
             "missing successor option ghost at root / session / profile_access".to_string(),
         ])
     );
+    assert_eq!(
+        missing_successor.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::MissingSuccessorOption {
+            option: "ghost".to_string(),
+            scope: "root / session / profile_access".to_string(),
+        }])
+    );
 
     let target_mismatch = load_bundle_from_fixture_path(fixture_path(
         "e19-malformed-target-mismatch.json",
@@ -378,10 +533,18 @@ fn static_only_fixture_corpus_uses_checked_reasons_only_for_stable_actual_wordin
             "declared access target mismatch between primary and mirror".to_string(),
         ])
     );
+    assert_eq!(
+        target_mismatch.fixture.expected_static.checked_reason_codes,
+        Some(vec![mir_semantics::StaticReasonCodeRow::DeclaredTargetMismatch {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        }])
+    );
 
     let explanatory_valid =
         load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
     assert_eq!(explanatory_valid.fixture.expected_static.checked_reasons, None);
+    assert_eq!(explanatory_valid.fixture.expected_static.checked_reason_codes, None);
 }
 
 #[test]

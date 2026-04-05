@@ -41,6 +41,13 @@
   },
   "expected_static": {
     "verdict": "malformed",
+    "checked_reason_codes": [
+      {
+        "kind": "missing_chain_head_option",
+        "head": "ghost",
+        "scope": "root / session / profile_access"
+      }
+    ],
     "checked_reasons": [
       "missing option declaration for chain head ghost at root / session / profile_access"
     ],

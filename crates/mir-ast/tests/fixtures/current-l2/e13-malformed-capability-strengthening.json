@@ -58,6 +58,13 @@
   },
   "expected_static": {
     "verdict": "malformed",
+    "checked_reason_codes": [
+      {
+        "kind": "capability_strengthens",
+        "from_capability": "read",
+        "to_capability": "write"
+      }
+    ],
     "checked_reasons": [
       "capability strengthens from read to write"
     ],

@@ -231,10 +231,12 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - fixture JSON の自動更新や `checked_reasons = []` の一括補完は行わない
 - `scripts/current_l2_reason_codes_assist.py`
   - static gate artifact の helper-local / reference-only `detached_noncore.reason_codes` を読んで、future typed carrier 候補 row を display-only で返す
-  - current fixture schema に typed field が無いことを明示し、unsupported fixture-side typed field を見つけたら fail-closed に止まる
+  - current first typed tranche では fixture-side `expected_static.checked_reason_codes` の有無と actual suggestion の一致も display-only で確認してよい
+  - unsupported legacy fixture-side typed field を見つけたら fail-closed に止まる
   - fixture JSON の自動更新や typed field の仮挿入は行わない
 - `scripts/current_l2_reason_code_readiness.py`
   - static-only fixture corpus を横断し、`checked_reasons` adoption と `detached_noncore.reason_codes` suggestion availability を batch で display-only 要約する
+  - current stable cluster tranche の `checked_reason_codes` adoption 数も同じ scan に載せてよい
   - stable cluster と duplicate cluster の current split を authoring tranche 単位で観察するが、machine-check core や detached aggregate には上げない
 
 `scripts/current_l2_detached_loop.py` では、`scan-reason-code-readiness` subcommand を追加してよい。

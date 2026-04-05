@@ -163,7 +163,7 @@ fn static_gate_artifact_emits_reason_codes_for_stable_clusters() {
     );
     assert_eq!(
         detached_noncore.reason_codes,
-        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingLineageAssertion {
+        vec![mir_semantics::StaticReasonCodeRow::MissingLineageAssertion {
             predecessor: "primary".to_string(),
             successor: "mirror".to_string(),
         }]
@@ -187,7 +187,7 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
             .detached_noncore
             .expect("stable target-missing cluster should emit detached_noncore")
             .reason_codes,
-        vec![current_l2_static_gate_support::StaticReasonCodeRow::DeclaredTargetMissing {
+        vec![mir_semantics::StaticReasonCodeRow::DeclaredTargetMissing {
             predecessor: "primary".to_string(),
             successor: "mirror".to_string(),
         }]
@@ -208,7 +208,7 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
             .detached_noncore
             .expect("stable capability cluster should emit detached_noncore")
             .reason_codes,
-        vec![current_l2_static_gate_support::StaticReasonCodeRow::CapabilityStrengthens {
+        vec![mir_semantics::StaticReasonCodeRow::CapabilityStrengthens {
             from_capability: "read".to_string(),
             to_capability: "write".to_string(),
         }]
@@ -229,7 +229,7 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
             .detached_noncore
             .expect("stable target-mismatch cluster should emit detached_noncore")
             .reason_codes,
-        vec![current_l2_static_gate_support::StaticReasonCodeRow::DeclaredTargetMismatch {
+        vec![mir_semantics::StaticReasonCodeRow::DeclaredTargetMismatch {
             predecessor: "primary".to_string(),
             successor: "mirror".to_string(),
         }]
@@ -250,7 +250,7 @@ fn static_gate_artifact_emits_reason_codes_for_missing_option_clusters() {
             .detached_noncore
             .expect("missing chain-head cluster should emit detached_noncore")
             .reason_codes,
-        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingChainHeadOption {
+        vec![mir_semantics::StaticReasonCodeRow::MissingChainHeadOption {
             head: "ghost".to_string(),
             scope: "root / session / profile_access".to_string(),
         }]
@@ -271,7 +271,7 @@ fn static_gate_artifact_emits_reason_codes_for_missing_option_clusters() {
             .detached_noncore
             .expect("missing predecessor cluster should emit detached_noncore")
             .reason_codes,
-        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingPredecessorOption {
+        vec![mir_semantics::StaticReasonCodeRow::MissingPredecessorOption {
             option: "ghost".to_string(),
             scope: "root / session / profile_access".to_string(),
         }]
@@ -292,7 +292,7 @@ fn static_gate_artifact_emits_reason_codes_for_missing_option_clusters() {
             .detached_noncore
             .expect("missing successor cluster should emit detached_noncore")
             .reason_codes,
-        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingSuccessorOption {
+        vec![mir_semantics::StaticReasonCodeRow::MissingSuccessorOption {
             option: "ghost".to_string(),
             scope: "root / session / profile_access".to_string(),
         }]

@@ -58,6 +58,13 @@
   },
   "expected_static": {
     "verdict": "malformed",
+    "checked_reason_codes": [
+      {
+        "kind": "declared_target_mismatch",
+        "predecessor": "primary",
+        "successor": "mirror"
+      }
+    ],
     "checked_reasons": [
       "declared access target mismatch between primary and mirror"
     ],

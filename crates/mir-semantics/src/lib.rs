@@ -16,7 +16,7 @@ use std::{
     path::Path,
 };
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 pub use harness::{
     BatchBundleOutcome, BatchBundleReport, BatchRunSummary, BundleDiscoveryFailure,
@@ -147,6 +147,43 @@ pub struct StaticGateResult {
     pub reasons: Vec<String>,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum StaticReasonCodeRow {
+    MissingLineageAssertion {
+        predecessor: String,
+        successor: String,
+    },
+    LineageAssertionEdgeMismatch {
+        predecessor: String,
+        successor: String,
+    },
+    DeclaredTargetMissing {
+        predecessor: String,
+        successor: String,
+    },
+    DeclaredTargetMismatch {
+        predecessor: String,
+        successor: String,
+    },
+    CapabilityStrengthens {
+        from_capability: String,
+        to_capability: String,
+    },
+    MissingChainHeadOption {
+        head: String,
+        scope: String,
+    },
+    MissingPredecessorOption {
+        option: String,
+        scope: String,
+    },
+    MissingSuccessorOption {
+        option: String,
+        scope: String,
+    },
+}
+
 /// current L2 の parser-free fixture root。
 #[derive(Debug, Clone, Deserialize)]
 pub struct CurrentL2Fixture {
@@ -244,6 +281,8 @@ pub struct ExpectedStatic {
     pub reasons: Vec<String>,
     #[serde(default)]
     pub checked_reasons: Option<Vec<String>>,
+    #[serde(default)]
+    pub checked_reason_codes: Option<Vec<StaticReasonCodeRow>>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -277,6 +316,100 @@ pub struct ExpectedTraceAudit {
 pub struct ExpectedNonAdmissibleMetadata {
     pub option_ref: String,
     pub subreason: NonAdmissibleSubreason,
+}
+
+pub(crate) fn static_reason_code_rows(reasons: &[String]) -> Vec<StaticReasonCodeRow> {
+    reasons
+        .iter()
+        .filter_map(|reason| static_reason_code_from_reason(reason))
+        .collect()
+}
+
+pub(crate) fn is_supported_checked_reason_code(row: &StaticReasonCodeRow) -> bool {
+    matches!(
+        row,
+        StaticReasonCodeRow::MissingLineageAssertion { .. }
+            | StaticReasonCodeRow::LineageAssertionEdgeMismatch { .. }
+            | StaticReasonCodeRow::DeclaredTargetMissing { .. }
+            | StaticReasonCodeRow::DeclaredTargetMismatch { .. }
+            | StaticReasonCodeRow::CapabilityStrengthens { .. }
+            | StaticReasonCodeRow::MissingChainHeadOption { .. }
+            | StaticReasonCodeRow::MissingPredecessorOption { .. }
+            | StaticReasonCodeRow::MissingSuccessorOption { .. }
+    )
+}
+
+fn static_reason_code_from_reason(reason: &str) -> Option<StaticReasonCodeRow> {
+    if let Some((predecessor, successor)) =
+        parse_reason_pair(reason, "missing lineage assertion for ", " -> ")
+    {
+        return Some(StaticReasonCodeRow::MissingLineageAssertion {
+            predecessor,
+            successor,
+        });
+    }
+    if let Some((predecessor, successor)) = parse_reason_pair(
+        reason,
+        "lineage assertion does not describe ",
+        " -> ",
+    ) {
+        return Some(StaticReasonCodeRow::LineageAssertionEdgeMismatch {
+            predecessor,
+            successor,
+        });
+    }
+    if let Some((predecessor, successor)) = parse_reason_pair(
+        reason,
+        "declared access target is missing for ",
+        " -> ",
+    ) {
+        return Some(StaticReasonCodeRow::DeclaredTargetMissing {
+            predecessor,
+            successor,
+        });
+    }
+    if let Some((predecessor, successor)) = parse_reason_pair(
+        reason,
+        "declared access target mismatch between ",
+        " and ",
+    ) {
+        return Some(StaticReasonCodeRow::DeclaredTargetMismatch {
+            predecessor,
+            successor,
+        });
+    }
+    if let Some((from_capability, to_capability)) =
+        parse_reason_pair(reason, "capability strengthens from ", " to ")
+    {
+        return Some(StaticReasonCodeRow::CapabilityStrengthens {
+            from_capability,
+            to_capability,
+        });
+    }
+    if let Some((head, scope)) = parse_reason_pair(
+        reason,
+        "missing option declaration for chain head ",
+        " at ",
+    ) {
+        return Some(StaticReasonCodeRow::MissingChainHeadOption { head, scope });
+    }
+    if let Some((option, scope)) =
+        parse_reason_pair(reason, "missing predecessor option ", " at ")
+    {
+        return Some(StaticReasonCodeRow::MissingPredecessorOption { option, scope });
+    }
+    if let Some((option, scope)) =
+        parse_reason_pair(reason, "missing successor option ", " at ")
+    {
+        return Some(StaticReasonCodeRow::MissingSuccessorOption { option, scope });
+    }
+    None
+}
+
+fn parse_reason_pair(reason: &str, prefix: &str, separator: &str) -> Option<(String, String)> {
+    let rest = reason.strip_prefix(prefix)?;
+    let (left, right) = rest.split_once(separator)?;
+    Some((left.to_string(), right.to_string()))
 }
 
 /// current L2 の predicate oracle input。

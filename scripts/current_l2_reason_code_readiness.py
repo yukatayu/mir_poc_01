@@ -11,6 +11,7 @@ from current_l2_checked_reasons_assist import read_fixture_checked_reasons
 from current_l2_reason_codes_assist import (
     fixture_declares_typed_reason_codes,
     read_actual_reason_code_candidates,
+    read_fixture_checked_reason_codes,
 )
 
 
@@ -96,6 +97,8 @@ def main(argv: list[str] | None = None) -> int:
             {
                 "fixture_id": fixture_id_for_display(fixture_path, fixture),
                 "checked_reasons_present": checked_reasons is not None,
+                "checked_reason_codes_present": read_fixture_checked_reason_codes(fixture)
+                is not None,
                 "reason_code_kinds": reason_code_kinds(reason_code_rows),
             }
         )
@@ -122,6 +125,10 @@ def main(argv: list[str] | None = None) -> int:
     print(
         "fixtures with reason_codes suggestions: " + str(len(rows_with_suggestions))
     )
+    print(
+        "fixtures with checked_reason_codes: "
+        + str(sum(1 for row in static_rows if row["checked_reason_codes_present"]))
+    )
     print("suggested reason-code kinds:")
     if kind_counter:
         for kind, count in sorted(kind_counter.items()):
@@ -133,8 +140,13 @@ def main(argv: list[str] | None = None) -> int:
     if rows_with_suggestions:
         for row in rows_with_suggestions:
             checked = "present" if row["checked_reasons_present"] else "absent"
+            typed = "present" if row["checked_reason_codes_present"] else "absent"
             kinds = ", ".join(row["reason_code_kinds"])
-            print(f"  - {row['fixture_id']} [checked_reasons={checked}] kinds={kinds}")
+            print(
+                f"  - {row['fixture_id']} "
+                f"[checked_reasons={checked}, checked_reason_codes={typed}] "
+                f"kinds={kinds}"
+            )
     else:
         print("  - none")
 
@@ -142,7 +154,11 @@ def main(argv: list[str] | None = None) -> int:
     if rows_without_suggestions:
         for row in rows_without_suggestions:
             checked = "present" if row["checked_reasons_present"] else "absent"
-            print(f"  - {row['fixture_id']} [checked_reasons={checked}]")
+            typed = "present" if row["checked_reason_codes_present"] else "absent"
+            print(
+                f"  - {row['fixture_id']} "
+                f"[checked_reasons={checked}, checked_reason_codes={typed}]"
+            )
     else:
         print("  - none")
 

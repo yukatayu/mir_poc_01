@@ -1,6 +1,8 @@
 use std::path::PathBuf;
 
-use mir_semantics::{CurrentL2Fixture, StaticGateResult, StaticGateVerdict};
+use mir_semantics::{
+    CurrentL2Fixture, StaticGateResult, StaticGateVerdict, StaticReasonCodeRow,
+};
 use serde::Serialize;
 
 #[derive(Debug, Serialize, PartialEq, Eq)]
@@ -33,53 +35,12 @@ pub struct StaticGateDetachedNoncore {
     pub reason_codes: Vec<StaticReasonCodeRow>,
 }
 
-#[derive(Debug, Serialize, PartialEq, Eq)]
-#[serde(tag = "kind", rename_all = "snake_case")]
-pub enum StaticReasonCodeRow {
-    MissingLineageAssertion {
-        predecessor: String,
-        successor: String,
-    },
-    LineageAssertionEdgeMismatch {
-        predecessor: String,
-        successor: String,
-    },
-    DeclaredTargetMissing {
-        predecessor: String,
-        successor: String,
-    },
-    DeclaredTargetMismatch {
-        predecessor: String,
-        successor: String,
-    },
-    CapabilityStrengthens {
-        from_capability: String,
-        to_capability: String,
-    },
-    MissingChainHeadOption {
-        head: String,
-        scope: String,
-    },
-    MissingPredecessorOption {
-        option: String,
-        scope: String,
-    },
-    MissingSuccessorOption {
-        option: String,
-        scope: String,
-    },
-}
-
 pub fn build_detached_static_gate_artifact(
     fixture_path: PathBuf,
     fixture: &CurrentL2Fixture,
     gate: &StaticGateResult,
 ) -> DetachedStaticGateArtifact {
-    let reason_codes = gate
-        .reasons
-        .iter()
-        .filter_map(|reason| reason_code_from_reason(reason))
-        .collect::<Vec<_>>();
+    let reason_codes = detached_reason_code_rows(&gate.reasons);
     DetachedStaticGateArtifact {
         schema_version: "draft-current-l2-static-gate-v0",
         artifact_kind: "current-l2-static-gate-detached-sketch",
@@ -107,70 +68,94 @@ fn static_verdict_name(value: StaticGateVerdict) -> &'static str {
     }
 }
 
-fn reason_code_from_reason(reason: &str) -> Option<StaticReasonCodeRow> {
+fn detached_reason_code_rows(reasons: &[String]) -> Vec<StaticReasonCodeRow> {
+    reasons
+        .iter()
+        .filter_map(|reason| detached_reason_code_from_reason(reason))
+        .collect()
+}
+
+fn detached_reason_code_from_reason(reason: &str) -> Option<StaticReasonCodeRow> {
     if let Some((predecessor, successor)) =
-        parse_edge_reason(reason, "missing lineage assertion for ")
+        parse_reason_pair(reason, "missing lineage assertion for ", " -> ")
     {
         return Some(StaticReasonCodeRow::MissingLineageAssertion {
             predecessor,
             successor,
         });
     }
-    if let Some((predecessor, successor)) =
-        parse_edge_reason(reason, "lineage assertion does not describe ")
-    {
+    if let Some((predecessor, successor)) = parse_reason_pair(
+        reason,
+        "lineage assertion does not describe ",
+        " -> ",
+    ) {
         return Some(StaticReasonCodeRow::LineageAssertionEdgeMismatch {
             predecessor,
             successor,
         });
     }
-    if let Some((predecessor, successor)) =
-        parse_edge_reason(reason, "declared access target is missing for ")
-    {
+    if let Some((predecessor, successor)) = parse_reason_pair(
+        reason,
+        "declared access target is missing for ",
+        " -> ",
+    ) {
         return Some(StaticReasonCodeRow::DeclaredTargetMissing {
             predecessor,
             successor,
         });
     }
-    if let Some((predecessor, successor)) =
-        parse_pair_reason(reason, "declared access target mismatch between ", " and ")
-    {
+    if let Some((predecessor, successor)) = parse_reason_pair(
+        reason,
+        "declared access target mismatch between ",
+        " and ",
+    ) {
         return Some(StaticReasonCodeRow::DeclaredTargetMismatch {
             predecessor,
             successor,
         });
     }
-    if let Some((from_capability, to_capability)) =
-        parse_pair_reason(reason, "capability strengthens from ", " to ")
-    {
+    if let Some((from_capability, to_capability)) = parse_reason_pair(
+        reason,
+        "capability strengthens from ",
+        " to ",
+    ) {
         return Some(StaticReasonCodeRow::CapabilityStrengthens {
             from_capability,
             to_capability,
         });
     }
-    if let Some((head, scope)) =
-        parse_pair_reason(reason, "missing option declaration for chain head ", " at ")
-    {
+    if let Some((head, scope)) = parse_reason_pair(
+        reason,
+        "missing option declaration for chain head ",
+        " at ",
+    ) {
         return Some(StaticReasonCodeRow::MissingChainHeadOption { head, scope });
     }
-    if let Some((option, scope)) =
-        parse_pair_reason(reason, "missing predecessor option ", " at ")
-    {
-        return Some(StaticReasonCodeRow::MissingPredecessorOption { option, scope });
+    if let Some((option, scope)) = parse_reason_pair(
+        reason,
+        "missing predecessor option ",
+        " at ",
+    ) {
+        return Some(StaticReasonCodeRow::MissingPredecessorOption {
+            option,
+            scope,
+        });
     }
-    if let Some((option, scope)) = parse_pair_reason(reason, "missing successor option ", " at ")
-    {
-        return Some(StaticReasonCodeRow::MissingSuccessorOption { option, scope });
+    if let Some((option, scope)) = parse_reason_pair(
+        reason,
+        "missing successor option ",
+        " at ",
+    ) {
+        return Some(StaticReasonCodeRow::MissingSuccessorOption {
+            option,
+            scope,
+        });
     }
     None
 }
 
-fn parse_edge_reason(reason: &str, prefix: &str) -> Option<(String, String)> {
-    parse_pair_reason(reason, prefix, " -> ")
-}
-
-fn parse_pair_reason(reason: &str, prefix: &str, separator: &str) -> Option<(String, String)> {
-    let rest = reason.strip_prefix(prefix)?;
-    let (left, right) = rest.split_once(separator)?;
-    Some((left.to_string(), right.to_string()))
+fn parse_reason_pair(reason: &str, prefix: &str, separator: &str) -> Option<(String, String)> {
+    let tail = reason.strip_prefix(prefix)?;
+    let (left, right) = tail.split_once(separator)?;
+    Some((left.trim().to_owned(), right.trim().to_owned()))
 }

@@ -17,6 +17,7 @@ def static_fixture_document(
     fixture_id: str,
     *,
     checked_reasons: list[str] | None,
+    checked_reason_codes: list[dict] | None = None,
     typed_reason_codes=None,
 ) -> dict:
     expected_static = {
@@ -25,6 +26,8 @@ def static_fixture_document(
     }
     if checked_reasons is not None:
         expected_static["checked_reasons"] = checked_reasons
+    if checked_reason_codes is not None:
+        expected_static["checked_reason_codes"] = checked_reason_codes
     if typed_reason_codes is not None:
         expected_static["reason_codes"] = typed_reason_codes
     return {
@@ -114,6 +117,13 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
                         checked_reasons=[
                             "declared access target is missing for writer -> readonly"
                         ],
+                        checked_reason_codes=[
+                            {
+                                "kind": "missing_lineage_assertion",
+                                "predecessor": "primary",
+                                "successor": "mirror",
+                            }
+                        ],
                     ),
                     ensure_ascii=False,
                     indent=2,
@@ -187,6 +197,7 @@ class CurrentL2ReasonCodeReadinessTests(unittest.TestCase):
         self.assertIn("runtime fixtures skipped: 1", output)
         self.assertIn("fixtures with checked_reasons: 1", output)
         self.assertIn("fixtures with reason_codes suggestions: 1", output)
+        self.assertIn("fixtures with checked_reason_codes: 1", output)
         self.assertIn("declared_target_missing: 1", output)
         self.assertIn("e12_underdeclared_target_missing", output)
         self.assertIn("e14_malformed_duplicate_option_declaration", output)

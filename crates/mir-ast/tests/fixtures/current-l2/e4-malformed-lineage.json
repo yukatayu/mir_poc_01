@@ -66,6 +66,13 @@
   },
   "expected_static": {
     "verdict": "malformed",
+    "checked_reason_codes": [
+      {
+        "kind": "lineage_assertion_edge_mismatch",
+        "predecessor": "primary",
+        "successor": "mirror"
+      }
+    ],
     "checked_reasons": [
       "lineage assertion does not describe primary -> mirror"
     ],

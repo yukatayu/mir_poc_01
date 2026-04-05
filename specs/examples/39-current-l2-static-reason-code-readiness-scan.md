@@ -144,6 +144,7 @@ current corpus に対する smoke では、
 - runtime fixtures skipped: `9`
 - fixtures with checked_reasons: `8`
 - fixtures with reason_codes suggestions: `8`
+- fixtures with checked_reason_codes: `8`
 
 であり、stable cluster と duplicate cluster の split は次のように読める。
 
@@ -164,6 +165,8 @@ current corpus に対する smoke では、
 - `e15`
 
 この split は current docs で stable cluster として扱う inventory と整合する。
+また current code / fixture corpus では、stable cluster 8 件が `checked_reason_codes` まで
+actualize 済みであり、duplicate cluster 2 件だけが absent に留まる。
 
 ## non-goal
 

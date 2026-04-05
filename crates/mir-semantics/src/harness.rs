@@ -962,6 +962,27 @@ pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, Interpreter
             )));
         }
     }
+    if let Some(checked_reason_codes) = &bundle.fixture.expected_static.checked_reason_codes {
+        if let Some(unsupported) = checked_reason_codes
+            .iter()
+            .find(|row| !crate::is_supported_checked_reason_code(row))
+        {
+            return Err(InterpreterError::InvalidProgram(format!(
+                "bundle static checked_reason_codes kind not yet supported for {}: {:?}",
+                bundle.fixture.fixture_id, unsupported
+            )));
+        }
+        let actual_reason_codes = crate::static_reason_code_rows(&static_gate.reasons)
+            .into_iter()
+            .filter(crate::is_supported_checked_reason_code)
+            .collect::<Vec<_>>();
+        if actual_reason_codes != *checked_reason_codes {
+            return Err(InterpreterError::InvalidProgram(format!(
+                "bundle static checked_reason_codes mismatch for {}: expected {:?}, got {:?}",
+                bundle.fixture.fixture_id, checked_reason_codes, actual_reason_codes
+            )));
+        }
+    }
     if report.entered_evaluation != bundle.fixture.expected_runtime.enters_evaluation {
         return Err(InterpreterError::InvalidProgram(format!(
             "bundle enters_evaluation mismatch for {}: expected {}, got {}",

@@ -40,6 +40,23 @@ def fixture_declares_typed_reason_codes(fixture: dict[str, Any]) -> bool:
     return "reason_codes" in expected_static
 
 
+def read_fixture_checked_reason_codes(
+    fixture: dict[str, Any],
+) -> list[dict[str, Any]] | None:
+    expected_static = fixture.get("expected_static")
+    if not isinstance(expected_static, dict):
+        return None
+    checked_reason_codes = expected_static.get("checked_reason_codes")
+    if checked_reason_codes is None:
+        return None
+
+    normalized_rows: list[dict[str, Any]] = []
+    for row in checked_reason_codes:
+        if isinstance(row, dict):
+            normalized_rows.append(row)
+    return normalized_rows
+
+
 def reason_codes_snippet(reason_codes: list[dict[str, Any]]) -> str:
     return json.dumps(reason_codes, ensure_ascii=False, indent=2)
 
@@ -75,13 +92,22 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     reason_codes_scope, reason_codes = read_actual_reason_code_candidates(artifact)
+    current_checked_reason_codes = read_fixture_checked_reason_codes(fixture)
 
     print(f"fixture: {fixture_path}")
     print(f"artifact: {artifact_path}")
-    print("current fixture-side typed reason code carrier: absent (no current fixture field)")
+    if current_checked_reason_codes is None:
+        print("current fixture-side typed carrier: checked_reason_codes absent")
+    else:
+        print("current fixture-side typed carrier: checked_reason_codes present")
+        print(reason_codes_snippet(current_checked_reason_codes))
 
     if not reason_codes:
         print("detached artifact has no reason_codes suggestion")
+        return 0
+
+    if current_checked_reason_codes == reason_codes:
+        print("fixture checked_reason_codes already match actual suggestion")
         return 0
 
     if reason_codes_scope is not None:

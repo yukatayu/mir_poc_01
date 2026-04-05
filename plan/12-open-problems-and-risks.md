@@ -120,7 +120,10 @@
 - その次段では、`checked_reasons` を長期維持するか、typed reason code へ進めるかが OPEN である
 - current helper cut では、detached static gate artifact 側に `detached_noncore.reason_codes` を置いてよい
 - ただしこれは `checker_core.reasons` の first-class typed replacement ではなく、stable cluster だけを best-effort で mirror する helper-local / reference-only carrier に留める
+- current actualization では、first typed family は lineage edge pair family、second tranche は declared target edge pair family、その後 missing option family と capability singleton まで current stable cluster inventory を `expected_static.checked_reason_codes` に揃えた
+- また first-class carrier placement は detached-side mirror 昇格ではなく、fixture-side additive optional `expected_static.checked_reason_codes` を stable cluster 8 kind に対して採るのが current cut である
 - typed reason code に進むとしても、duplicate reason のように helper 内部構造へ近い cluster は急いで code 化しない
+- ただし `checked_reasons` と `checked_reason_codes` をいつ統合・縮退させるか、stable cluster と duplicate cluster の境界を later verifier / parser workstream でどう扱うかは引き続き OPEN である
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
 - `smoke-fixture` のような fixture-level convenience を入れても、それを production CLI や final retention policy と誤読しない boundary discipline が引き続き必要である

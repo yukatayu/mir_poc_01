@@ -58,6 +58,13 @@
   },
   "expected_static": {
     "verdict": "underdeclared",
+    "checked_reason_codes": [
+      {
+        "kind": "declared_target_missing",
+        "predecessor": "primary",
+        "successor": "mirror"
+      }
+    ],
     "checked_reasons": [
       "declared access target is missing for primary -> mirror"
     ],
