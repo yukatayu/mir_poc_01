@@ -116,6 +116,8 @@
 - `expected_static.reasons` は current fixture corpus では human-facing explanation と static machine-check 候補が混在しており、そのまま `run_bundle()` へ昇格させると valid fixture 群と衝突する
 - したがって current actual machine-check は `expected_static.verdict` に留め、actual `reasons` compare は detached static gate artifact 側へ残す
 - future checker API で static reason compare を core に上げたいなら、まず additive optional `checked_reasons` を dedicated carrier として別立てにするのが最小である
+- その次段では、`checked_reasons` を長期維持するか、typed reason code へ進めるかが OPEN である
+- typed reason code に進むとしても、duplicate reason のように helper 内部構造へ近い cluster は急いで code 化しない
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
 - `smoke-fixture` のような fixture-level convenience を入れても、それを production CLI や final retention policy と誤読しない boundary discipline が引き続き必要である

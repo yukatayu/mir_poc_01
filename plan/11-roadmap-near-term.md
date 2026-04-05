@@ -141,6 +141,7 @@
 - detached validation loop の common path として、1 fixture の bundle export / optional reference compare / single-fixture aggregate smoke を 1 command で回す helper を足す
 - static-only / malformed / underdeclared fixture の common path として、static gate artifact の emit / compare を 1 command で回す helper を足す
 - first checker cut の local / structural floor について、`expected_static.reasons` の direct promotion は current fixture corpus と衝突することが確認できたので、次は additive optional `checked_reasons` を最小 dedicated carrier として導入し、typed reason code / detached-only 維持を後段比較に送る
+- `checked_reasons` を bridge に置いたので、その次は typed reason code に進めてよい stable cluster と parametric shape を inventory 化する
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
