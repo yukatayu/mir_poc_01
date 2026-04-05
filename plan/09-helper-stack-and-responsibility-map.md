@@ -208,7 +208,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `aggregate_context` / `detached_noncore` は reference-only として読む
 - `scripts/current_l2_diff_static_gate_artifacts.py`
   - static gate artifact の `checker_core` だけを比較する repo-level helper
-  - `fixture_context` は reference-only として読む
+  - `fixture_context` と helper-local `detached_noncore.reason_codes` は reference-only として読む
 - `scripts/current_l2_detached_loop.py`
   - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper を current validation loop 向けに束ねる薄い wrapper
   - `target/current-l2-detached/` を current non-production default candidate として扱う

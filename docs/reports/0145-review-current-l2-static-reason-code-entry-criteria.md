@@ -36,10 +36,14 @@
 
 ## 3. Actions taken
 
-1. reviewer subagent を 1 回だけ起動した。
-2. reviewer completion を待つために long wait window を 2 回取り、それでも completion を受け取れないことを確認した。
-3. local fallback として、current code anchor、doc diff、traceability diff、progress diff を手動で再確認した。
-4. semantic overclaim がないことを確認したうえで、本 report に fallback evidence を記録した。
+1. reviewer subagent を 1 回だけ起動し、completion まで待った。
+2. reviewer finding として、
+   - detached-side `reason_codes` mirror actualization と docs-only judgment の不一致
+   - helper-local / reference-only cut の overclaim リスク
+   - roadmap / traceability / progress の stale
+   を受け取った。
+3. finding を読み、current dirty state が `checked_reasons` entry criteria の docs-only comparison だけでなく、detached-side mirror actualization まで含んでいることを確認した。
+4. この report には reviewer finding をそのまま記録し、actual fix は follow-up report 0146 で扱うことにした。
 
 ## 4. Files changed
 
@@ -48,61 +52,31 @@
 ## 5. Commands run and exact outputs
 
 ```text
-sleep 5 && git status --short --branch
-## main...origin/main
- M Documentation.md
- M plan/11-roadmap-near-term.md
- M plan/12-open-problems-and-risks.md
- M plan/90-source-traceability.md
- M progress.md
- M specs/00-document-map.md
-?? docs/reports/0144-current-l2-static-reason-code-entry-criteria.md
-?? specs/examples/34-current-l2-static-reason-code-entry-criteria.md
-```
-
-```text
-sleep 30 && echo reviewer-wait-window-elapsed
-reviewer-wait-window-elapsed
-```
-
-```text
-rg -n "0144|34-current-l2-static-reason-code-entry-criteria|checked_reasons.*typed" plan/90-source-traceability.md Documentation.md specs/00-document-map.md plan/11-roadmap-near-term.md plan/12-open-problems-and-risks.md progress.md
-[relevant hits only]
-```
-
-```text
-git diff --stat
- Documentation.md                   | 7 ++++---
- plan/11-roadmap-near-term.md       | 1 +
- plan/12-open-problems-and-risks.md | 2 ++
- plan/90-source-traceability.md     | 6 +++---
- progress.md                        | 6 ++++--
- specs/00-document-map.md           | 3 +++
- 6 files changed, 17 insertions(+), 8 deletions(-)
+wait_agent reviewer
+completed
 ```
 
 ## 6. Evidence / findings
 
-- current code anchor は
-  - `ExpectedStatic.checked_reasons: Option<Vec<String>>`
-  - `run_bundle()` が `checked_reasons` present 時だけ actual `static_gate.reasons` を fail-closed compare
-  であり、`specs/examples/34-current-l2-static-reason-code-entry-criteria.md` の前提と一致している。
-- report 0144 は
-  - immediate 全面 code 化を採らない
-  - `checked_reasons` を bridge として維持する
-  - stable cluster inventory を先に切る
-  という docs-only judgmentに留まっており、typed reason code を implementation 済みだとは主張していない。
-- roadmap / traceability / progress はすべて `34` と `0144` を参照しており、stale omission は見つからなかった。
+- High:
+  - current code は detached-side `reason_codes` mirror を actualize しているが、docs-only judgment はまだ「次段の未決」として残っていた。
+  - したがって current code anchor と docs-only judgment が不一致だった。
+- Medium:
+  - current `reason_codes` は `gate.reasons` から stable cluster だけを best-effort 変換した helper-local mirror に過ぎず、first-class typed source ではない。
+  - docs でその cut を明示しないと、`checked_reasons` bridge を一段飛ばして typed carrier を満たしたように読める。
+- Medium:
+  - roadmap / traceability / progress / Documentation / document map が detached-side mirror actualization 前の状態で stale だった。
+  - follow-up で spec / plan / progress / report chain を更新する必要があった。
 
 ## 7. What changed in understanding
 
-- reviewer completion が得られない場合でも、current code anchor / mirror diff / traceability diff を束ねれば、docs-only comparison task の close に必要な local evidence は揃えられる。
-- 今回の判断は implementation expansion ではなく entry criteria の整理なので、overclaim を防ぐ上では「何をまだ OPEN に残すか」を明記しておくことが特に重要である。
+- `checked_reasons` の docs-only entry criteria を切った直後でも、helper-local actualization が先に入ると docs / plan / progress はすぐ stale になる。
+- typed reason code のような重い論点では、entry criteria と helper-local mirror actualization を別 anchor に分ける方が drift を抑えやすい。
 
 ## 8. Open questions
 
-- typed static reason code を最初に detached static gate artifact 側へ mirror するか、fixture-side checked carrier 側へ入れるか。
+- detached-side `reason_codes` mirror を first-class typed source に昇格させるか、それとも helper-local / reference-only に留めるか。
 
 ## 9. Suggested next prompt
 
-`current L2 parser-free PoC 基盤を前提に、typed static reason code を最初に detached static gate artifact 側へ mirror するか、fixture-side checked carrier 側へ導入するかを source-backed に比較し、helper boundary を壊さない最小 actualization を選んでください。`
+`current L2 parser-free PoC 基盤を前提に、detached static gate artifact 側の helper-local / reference-only reason_codes mirror を正規化し、checked_reasons bridge と混同しない最小 docs / plan / progress cut を source-backed に揃えてください。`

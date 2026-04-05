@@ -146,15 +146,39 @@ typed reason code に進むなら、単なる enum string ではなく
 
 を同じ cluster 名でつなぎやすい。
 
+## current detached mirror との関係
+
+current code では、detached static gate artifact 側に
+helper-local / reference-only な `detached_noncore.reason_codes` mirror を置いてよい。
+
+ただしこれは、
+
+- `checker_core.reasons` を置き換える typed source
+- fixture-side `checked_reasons` を置き換える typed carrier
+- future theorem prover / checker contract の final row shape
+
+のいずれでもない。
+
+current mirror は
+**free-form string を stable cluster だけへ best-effort 変換する補助出力**
+に留まる。
+
+したがって、本⽂書の entry criteria は
+「helper-local mirror がある」ことと
+「typed reason code を first-class carrier として昇格させてよい」こと
+を区別して扱う。
+
 ## current L2 でまだ決めないもの
 
 - final code schema の exact serialization
 - duplicate reason cluster の code 化
-- detached static gate artifact に `reason_codes` mirror をいつ足すか
+- detached static gate artifact の helper-local `reason_codes` mirror を first-class carrier に昇格させるか
 - `checked_reasons` をいつ deprecated にするか
 
 ## current judgment
 
 - immediate 全面 code 化はまだ早い
 - `checked_reasons` は current bridge として維持する
+- detached static gate artifact の helper-local / reference-only `reason_codes` mirror は current helper cut に入れてよい
+- ただしこれは entry criteria を一段飛ばして満たしたことを意味しない
 - 次段では code 化に向く stable cluster のみ inventory 化し、parametric shape を比較する

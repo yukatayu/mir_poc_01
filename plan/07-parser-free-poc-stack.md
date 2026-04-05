@@ -246,12 +246,14 @@ current L2 では production exporter API はまだ固定しない。
 - `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
   - `CurrentL2Fixture + StaticGateResult -> static gate artifact` の pure transform だけを shared support module として持つ
   - first checker cut の local / structural floor を detached validation loop へ接続する actual narrow cut だが、`lib.rs` / `harness.rs` の public API には上げない
+  - optional `detached_noncore.reason_codes` は helper-local / reference-only mirror に留め、exact-compare core や fixture-side typed carrier と混同しない
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
 - `scripts/current_l2_diff_detached_aggregates.py`
   - aggregate artifact の `summary_core` exact-compare を最小で比較する
 - `scripts/current_l2_diff_static_gate_artifacts.py`
   - static gate artifact の `checker_core` exact-compare を最小で比較する
+  - `detached_noncore.reason_codes` は reference-only difference として表示してよい
 - `scripts/current_l2_detached_loop.py`
   - bundle emitter、aggregate emitter、bundle diff helper、aggregate diff helper を detached validation loop として薄くつなぐ
   - 1 fixture export、aggregate summary export、2 bundle artifact compare、2 aggregate artifact compare を回しやすくする

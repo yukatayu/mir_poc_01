@@ -79,6 +79,11 @@ def main(argv: list[str] | None = None) -> int:
         left_doc.get("fixture_context", {}),
         right_doc.get("fixture_context", {}),
     )
+    detached_noncore_differences = compare_reference_section(
+        "detached_noncore",
+        left_doc.get("detached_noncore", {}),
+        right_doc.get("detached_noncore", {}),
+    )
 
     print("=== current L2 static gate artifact diff ===")
     print(f"left : {left_path}")
@@ -93,10 +98,12 @@ def main(argv: list[str] | None = None) -> int:
         print("")
         print("checker_core: exact-compare core matched")
 
-    if context_differences:
+    if context_differences or detached_noncore_differences:
         print("")
         print("reference-only differences:")
         for line in context_differences:
+            print(line)
+        for line in detached_noncore_differences:
             print(line)
 
     print("")

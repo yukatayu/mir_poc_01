@@ -2,7 +2,9 @@ import json
 import sys
 import tempfile
 import unittest
+from io import StringIO
 from pathlib import Path
+from contextlib import redirect_stdout
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -66,6 +68,65 @@ class StaticGateDiffTests(unittest.TestCase):
             exit_code = static_gate_diff.main([str(left_path), str(right_path)])
 
         self.assertEqual(exit_code, 0)
+
+    def test_main_keeps_detached_noncore_reason_code_diff_reference_only(self) -> None:
+        left = {
+            "fixture_context": {
+                "fixture_id": "e4_malformed_lineage",
+                "fixture_path": "fixtures/e4-malformed-lineage.json",
+                "source_example_id": "e4",
+            },
+            "checker_core": {
+                "static_verdict": "malformed",
+                "reasons": ["lineage assertion does not describe writer -> readonly"],
+            },
+            "detached_noncore": {
+                "reason_codes_scope": "stable-clusters-only",
+                "reason_codes": [
+                    {
+                        "kind": "lineage_assertion_edge_mismatch",
+                        "predecessor": "writer",
+                        "successor": "readonly",
+                    }
+                ],
+            },
+        }
+        right = {
+            "fixture_context": {
+                "fixture_id": "e4_malformed_lineage",
+                "fixture_path": "fixtures/e4-malformed-lineage.json",
+                "source_example_id": "e4",
+            },
+            "checker_core": {
+                "static_verdict": "malformed",
+                "reasons": ["lineage assertion does not describe writer -> readonly"],
+            },
+            "detached_noncore": {
+                "reason_codes_scope": "stable-clusters-only",
+                "reason_codes": [
+                    {
+                        "kind": "missing_lineage_assertion",
+                        "predecessor": "writer",
+                        "successor": "readonly",
+                    }
+                ],
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            left_path = Path(temp_dir) / "left.json"
+            right_path = Path(temp_dir) / "right.json"
+            write_json(left_path, left)
+            write_json(right_path, right)
+
+            buffer = StringIO()
+            with redirect_stdout(buffer):
+                exit_code = static_gate_diff.main([str(left_path), str(right_path)])
+            output = buffer.getvalue()
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn("reference-only differences:", output)
+        self.assertIn("- detached_noncore:", output)
 
 
 if __name__ == "__main__":

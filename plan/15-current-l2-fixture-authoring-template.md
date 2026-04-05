@@ -58,6 +58,7 @@
 - optional `expected_static.checked_reasons` を置くときだけ、`run_bundle()` は actual static gate reasons を fail-closed compare してよい
 - detached artifact loop に入れても、payload core の中心は `static_verdict` と `entered_evaluation = false` になる
 - detached validation loop continuation では、runtime bundle artifact と別に static gate artifact を保存し、`checker_core.static_verdict` / `checker_core.reasons` を compare してよい
+- optional `detached_noncore.reason_codes` が出ても current では reference-only に留め、fixture 側 expected carrier や machine-check core へはまだ上げない
 
 ### runtime fixture
 

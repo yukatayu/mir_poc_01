@@ -144,3 +144,42 @@ fn static_gate_reasons_are_deterministic_for_multi_reason_fixture() {
     assert_eq!(left.reasons, expected);
     assert_eq!(right.reasons, expected);
 }
+
+#[test]
+fn static_gate_artifact_emits_reason_codes_for_stable_clusters() {
+    let path = fixture_path("e5-underdeclared-lineage.json");
+    let fixture = load_fixture("e5-underdeclared-lineage.json");
+    let gate = static_gate_detailed(&fixture);
+
+    let artifact = build_detached_static_gate_artifact(path, &fixture, &gate);
+
+    let detached_noncore = artifact
+        .detached_noncore
+        .expect("stable clusters should emit detached_noncore");
+
+    assert_eq!(
+        detached_noncore.reason_codes_scope,
+        "stable-clusters-only"
+    );
+    assert_eq!(
+        detached_noncore.reason_codes,
+        vec![current_l2_static_gate_support::StaticReasonCodeRow::MissingLineageAssertion {
+            predecessor: "primary".to_string(),
+            successor: "mirror".to_string(),
+        }]
+    );
+}
+
+#[test]
+fn static_gate_artifact_omits_reason_codes_for_unclassified_reason_text() {
+    let path = fixture_path("e3-option-admit-chain.json");
+    let fixture = load_fixture("e3-option-admit-chain.json");
+    let gate = mir_semantics::StaticGateResult {
+        verdict: StaticGateVerdict::Valid,
+        reasons: vec!["helper-local explanation that has no stable code cluster".to_string()],
+    };
+
+    let artifact = build_detached_static_gate_artifact(path, &fixture, &gate);
+
+    assert!(artifact.detached_noncore.is_none());
+}

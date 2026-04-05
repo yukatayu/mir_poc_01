@@ -45,10 +45,11 @@ load_fixture_from_path()
 
 ## artifact の最小 shape
 
-current static gate artifact は次だけを持つ。
+current static gate artifact は次を持つ。
 
 1. `fixture_context`
 2. `checker_core`
+3. optional `detached_noncore`
 
 ### `fixture_context`
 
@@ -65,6 +66,15 @@ current static gate artifact は次だけを持つ。
 
 これを exact-compare core とする。
 current cut では、`reasons` は lexical sort 済みの deterministic order で出す。
+
+### optional `detached_noncore`
+
+- `reason_codes_scope`
+- `reason_codes`
+
+これは helper-local / reference-only の mirror であり、exact-compare core ではない。
+current cut では、`checker_core.reasons` から stable cluster だけを best-effort に抽出した
+wording-derived row list として持ってよい。
 
 ## runtime detached artifact との違い
 
@@ -89,6 +99,7 @@ current compare helper は `checker_core` だけを exact-compare する。
 - `reasons`
 
 `fixture_context` は reference-only とする。
+`detached_noncore` も reference-only とする。
 
 ## path policy の current candidate
 
@@ -121,6 +132,7 @@ runtime bundle / aggregate smoke は含めない。
 
 - static gate artifact loop は detached validation loop の自然な extension として追加してよい。
 - exact-compare core は `checker_core.static_verdict` と `checker_core.reasons` に限る。
+- optional `detached_noncore.reason_codes` を持ってよいが、helper-local / reference-only に留める。
 - `fixture_context` は reference-only に留める。
 - current cut は final checker API でも final type system でもない。
 - runtime artifact と static gate artifact を 1 schema へ無理に統合しない。
@@ -129,6 +141,7 @@ runtime bundle / aggregate smoke は含めない。
 
 - static gate artifact を future checker API にどう昇格させるか
 - detached artifact の `checker_core.reasons` を fixture 側の additive optional `expected_static.checked_reasons` とどう接続するか
-- `checked_reasons` を string list のままにするか、typed reason code へ進めるか
+- helper-local `detached_noncore.reason_codes` を first-class typed source に昇格させるか
+- `checked_reasons` を string list のままにするか、fixture-side typed reason code へ進めるか
 - parser cut と checker cut の actual API 接続
 - theorem prover 向け relation と model checker 向け protocol carrier をどこで分けるか

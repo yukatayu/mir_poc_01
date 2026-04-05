@@ -197,6 +197,8 @@
   - current L2 parser-free PoC の `expected_static.reasons` dual-use を壊さずに、future checker API へ additive optional `checked_reasons` を narrow transfer するための最小 carrier comparison を整理する。
 - `specs/examples/34-current-l2-static-reason-code-entry-criteria.md`
   - current L2 parser-free PoC の `checked_reasons` から typed reason code へ進む条件、stable cluster、parametric shape の entry criteria を整理する。
+- `specs/examples/35-current-l2-detached-static-reason-code-mirror.md`
+  - current L2 parser-free PoC の detached static gate artifact に helper-local / reference-only な `reason_codes` mirror を置く最小 cut を整理する。
 
 ## レポート
 
@@ -236,6 +238,7 @@
   - parser なし minimal interpreter の static gate verdict / reasons を detached validation loop に接続する static gate artifact helper cut は `specs/examples/32-current-l2-static-gate-artifact-loop.md` に置く。
   - parser なし minimal interpreter の `expected_static.reasons` dual-use を壊さずに optional `checked_reasons` へ narrow transfer する carrier comparison は `specs/examples/33-current-l2-checked-static-reasons-carrier.md` に置く。
   - parser なし minimal interpreter の `checked_reasons` から typed reason code へ進めてよい stable cluster と parametric shape の条件は `specs/examples/34-current-l2-static-reason-code-entry-criteria.md` に置く。
+  - parser なし minimal interpreter の detached static gate artifact に helper-local / reference-only な `reason_codes` mirror を置く cut は `specs/examples/35-current-l2-detached-static-reason-code-mirror.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor
