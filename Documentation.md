@@ -163,6 +163,7 @@ flowchart LR
 94. helper stack、roadmap、未決事項、representative fixture catalog、fixture authoring template を長期参照するには `plan/07-parser-free-poc-stack.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`
 95. 既存判断は `specs/12-decision-register.md` を参照する
 96. actual stage 1 parser spike の実装直前 cut としては、input surface は test inline string、`decl_guard_slot` internal carrier は dedicated wrapper + owned `surface_text`、private helper family は `current_l2_stage1_parser_spike_support` を第一候補にするのが自然だという current docs-only judgment は `specs/examples/79-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md`
+97. actual stage 1 parser spike の first tranche が `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs` でどこまで actualize 済みかは `specs/examples/80-current-l2-stage1-parser-spike-first-tranche-actualization.md`
 
 ## レポート
 

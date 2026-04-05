@@ -536,6 +536,17 @@
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e4-malformed-lineage.json`
   - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/e7-write-fallback-after-expiry.json`
 
+### 2026-04-06 stage 1 parser spike first-tranche actualization addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md`
+  - `specs/examples/79-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md`
+  - `specs/examples/80-current-l2-stage1-parser-spike-first-tranche-actualization.md`
+  - `docs/reports/0249-current-l2-stage1-parser-spike-first-tranche-actualization.md`
+  - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
+  - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+  - `crates/mir-ast/Cargo.toml`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

@@ -213,8 +213,9 @@
 - current baseline として、stage 1 actual parser spike の smoke family は `e4-malformed-lineage` と `e7-write-fallback-after-expiry` の two-fixture pair を最小 working set とし、`e3-option-admit-chain` は later-stage contrast reference に残すのが自然である
 - current baseline として、actual stage 1 parser spike は `crates/mir-ast/tests/support/` 配置の private helper として始め、compare surface は lowered fixture-subset compare に留めるのが自然である
 - current baseline として、actual implementation へ入る直前 cut では input surface は test inline string、`decl_guard_slot` internal carrier は dedicated wrapper + owned `surface_text`、private helper family は `current_l2_stage1_parser_spike_support` を第一候補にするのが自然である
+- current actualization として、その first tranche は `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs` で `e4` / `e7` の lowered fixture-subset compare と guard-slot retention smoke を通すところまで進めてよい
 - その次段で比較するべきなのは、
-  - stage 1 private helper を actual code としてどこまで実装してよいか
-  - lowered fixture-subset compare を test support 上でどこまで generic にするか
-  - inline text から dedicated text fixture file へ進む trigger をどこに置くか
+  - `e3` を later-stage contrast reference として stage 2 parser spike へいつ送るか
+  - stage 1 parser spike の malformed-source smoke を parser helper 自身へどこまで持たせるか
+  - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
   であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない

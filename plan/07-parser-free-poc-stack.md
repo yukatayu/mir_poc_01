@@ -143,6 +143,32 @@ run_directory_named_profile
 - selected counts / concrete fixture shape は profile-layer tests に寄せる
 - internal tests は preset table wiring の整合だけを見る
 
+## parser boundary 側の current non-production helper
+
+current parser-free PoC stack の主線は依然として fixture-first だが、
+parser boundary の next narrow step として、
+test-only / private な stage 1 parser spike first tranche が actualize 済みである。
+
+### current actualized helper
+
+- `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
+- `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+
+### current scope
+
+- input surface は inline test strings
+- declaration-side guard slot は `decl_guard_slot.surface_text` として保持
+- compare は lowered fixture-subset compare に留める
+- `e4` / `e7` の two-fixture pair と guard-slot retention smoke を cargo test で回す
+
+### current non-goal
+
+- public parser API
+- final parser grammar
+- parser-side span / token row
+- predicate fragment parse
+- detached validation loop との直接統合
+
 ## machine-check と human-facing explanation の境界
 
 ### machine-check に残すもの

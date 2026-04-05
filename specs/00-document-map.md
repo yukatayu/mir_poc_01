@@ -287,6 +287,8 @@
   - stage 1 actual parser spike をどこに置き、何を compare surface にするのが最小かを比較する。
 - `specs/examples/79-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md`
   - stage 1 actual parser spike の input surface、`decl_guard_slot` internal carrier、private helper naming をどこまで narrow に決めるかを比較する。
+- `specs/examples/80-current-l2-stage1-parser-spike-first-tranche-actualization.md`
+  - stage 1 actual parser spike の first tranche が `e4` / `e7` の lowered fixture-subset compare と guard-slot retention smoke まで current repo でどこまで actualize 済みかを整理する。
 
 ## レポート
 
