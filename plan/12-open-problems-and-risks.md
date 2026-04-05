@@ -151,8 +151,9 @@
   - `e24`
   - `smoke-try-rollback-structural-checker`
   まで current repo に入っている
+- current comparison としては、second malformed static tranche の問いは先に閉じるが、actual tranche 追加はまだ行わないのが自然である。理由は、current source だけでは decode-valid な concrete second-tranche family がまだ不足しており、loader malformed と runtime-valid representative を除くと requirement invent に寄りやすいからである
 - ただし shared detached carrier、generic structural checker family、public checker API にはまだ上げない
-- current remaining risk は、helper-local wording / finding family が second tranche や later public comparison でもそのまま耐えるか、saved artifact compare need が shared carrier threshold を本当に満たすか、である
+- current remaining risk は、helper-local wording / finding family が later wording comparison や public comparison でもそのまま耐えるか、saved artifact compare need が shared carrier threshold を本当に満たすか、である
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める
 - その next OPEN は、generic entry の比較を later public checker API comparison と同時に行うべきか、それともその前段で別 helper として試すべきかである

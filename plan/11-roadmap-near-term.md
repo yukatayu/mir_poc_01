@@ -183,10 +183,11 @@
 - current docs-only judgment では、checker-side shared family compare entry はまだ切らず、family facade 維持で止める
 - 次の narrow step は、public checker cut comparison に入る前に、generic entry を later public checker API comparison と同時に扱うかどうかを見極めることである
 - `TryFallback` / `AtomicCut` dedicated AST structural helper の first tranche は actualize 済みなので、次に自走で進めるなら
-  - second malformed static tranche の候補比較
+  - second malformed static tranche の comparison close
   - first-tranche wording / row family の drift 点検
   - saved artifact compare need が shared carrier threshold を本当に満たすかの再比較
   の順で narrow に進めるのが自然である
+- current comparison としては、second malformed static tranche の問い自体は先に閉じるが、actual tranche 追加はまだ行わず、next は helper-local wording / finding family stability comparison に進むのが自然である
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る

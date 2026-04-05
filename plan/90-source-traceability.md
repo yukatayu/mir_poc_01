@@ -380,6 +380,15 @@
   - `docs/reports/0218-try-rollback-malformed-static-tranche-size.md`
   - `docs/reports/0219-review-try-rollback-malformed-static-tranche-size.md`
 
+### 2026-04-06 try-rollback second malformed static tranche comparison addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/67-current-l2-try-rollback-malformed-pattern-slot-selection.md`
+  - `specs/examples/68-current-l2-try-rollback-ast-helper-first-tranche-actualization.md`
+  - `specs/examples/69-current-l2-try-rollback-second-malformed-static-tranche-comparison.md`
+  - `docs/reports/0224-try-rollback-second-malformed-static-tranche-comparison.md`
+  - `docs/reports/0225-review-try-rollback-second-malformed-static-tranche-comparison.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

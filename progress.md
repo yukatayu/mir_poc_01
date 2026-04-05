@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（try rollback AST helper の first tranche actualization まで反映）
+最終更新: 2026-04-06（try rollback AST helper の second tranche comparison close まで反映）
 
 ## 位置づけ
 
@@ -218,4 +218,5 @@
 - 2026-04-06 05:18 JST — future dedicated AST structural helper の malformed static family timing を比較し、current phase の今すぐではなく dedicated helper actualization first tranche と同時に actual corpus へ足す current judgment を固定した。次は helper code / fixture fields / malformed static family / smoke path を first tranche としてどこまで一体で切るかを比べる段階。
 - 2026-04-06 05:34 JST — future dedicated AST structural helper の first tranche cut を比較し、helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残す current judgment を固定した。次は minimal malformed static family tranche の exact size をどこまで narrow に切るかを比べる段階。
 - 2026-04-06 05:48 JST — future dedicated AST structural helper の minimal malformed static family tranche size を比較し、`TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を first tranche の最小とする current judgment を固定した。次はその two-fixture first tranche の各 slot に最初に入れる malformed pattern をどこまで narrow に切るかを比べる段階。
-- 2026-04-06 05:16 JST — `TryFallback` / `AtomicCut` dedicated AST structural helper の first tranche を actualize し、`e23` / `e24`、helper-local compare、static gate smoke family を実装したうえで、reviewer 指摘だった artifact false-green と public API leak を修正した。full cargo・Python tests・real smoke・docs validation が揃ったので、次は second tranche と helper-local wording stability のどちらを先に比較するかを決める段階。
+- 2026-04-06 05:56 JST — `TryFallback` / `AtomicCut` dedicated AST structural helper の first tranche を actualize し、`e23` / `e24`、helper-local compare、static gate smoke family を実装したうえで、reviewer 指摘だった artifact false-green と public API leak を修正した。full cargo・Python tests・real smoke・docs validation が揃ったので、次は second tranche と helper-local wording stability のどちらを先に比較するかを決める段階。
+- 2026-04-06 06:03 JST — second malformed static tranche comparison を先に閉じ、current source だけでは concrete decode-valid family がまだ不足しているため actual tranche 追加は保留と判断した。next は first-tranche wording / finding family stability を narrow に点検する段階。

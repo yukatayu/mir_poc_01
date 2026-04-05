@@ -265,6 +265,8 @@
   - future dedicated AST structural helper の two-fixture first tranche に対して、`TryFallback` slot と `AtomicCut` slot に最初に入れる malformed pattern をどこまで narrow に切るかを整理する。
 - `specs/examples/68-current-l2-try-rollback-ast-helper-first-tranche-actualization.md`
   - future dedicated AST structural helper の first tranche が helper-local carrier、two-fixture malformed corpus、static gate smoke path まで current repo でどこまで actualize 済みかを整理する。
+- `specs/examples/69-current-l2-try-rollback-second-malformed-static-tranche-comparison.md`
+  - first tranche 後の second malformed static tranche を今すぐ actualize するか、それとも wording / finding family stability comparison へ進むかを比較する。
 
 ## レポート
 
