@@ -103,6 +103,17 @@
 - `0146`
 - `0149`
 
+### 2026-04-05 readiness scan addendum
+
+- `plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/15-current-l2-fixture-authoring-template.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/39-current-l2-static-reason-code-readiness-scan.md`
+  - `docs/reports/0166-static-reason-code-readiness-scan.md`
+  - `docs/reports/0167-review-static-reason-code-readiness-scan.md`
+  - `scripts/current_l2_reason_code_readiness.py`
+  - `scripts/current_l2_detached_loop.py`
+  - `scripts/tests/test_current_l2_reason_code_readiness.py`
+  - current fixture corpus `crates/mir-ast/tests/fixtures/current-l2/`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

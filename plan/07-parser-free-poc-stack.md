@@ -273,6 +273,9 @@ current L2 では production exporter API はまだ固定しない。
   - detached static gate artifact の helper-local / reference-only `detached_noncore.reason_codes` を読んで、future typed carrier 候補 row を display-only で返す
   - current fixture schema に typed field が無いことを明示し、unsupported fixture-side typed field を見つけたら fail-closed に止まる
   - fixture JSON の自動更新は行わない
+- `scripts/current_l2_reason_code_readiness.py`
+  - static-only fixture corpus を横断し、`checked_reasons` adoption と `detached_noncore.reason_codes` suggestion availability を batch で display-only 要約する
+  - stable cluster と duplicate cluster の current split を tranche 単位で観察する authoring aid に留め、typed carrier actualization や detached aggregate 永続化は行わない
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。

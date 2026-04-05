@@ -233,6 +233,16 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - static gate artifact の helper-local / reference-only `detached_noncore.reason_codes` を読んで、future typed carrier 候補 row を display-only で返す
   - current fixture schema に typed field が無いことを明示し、unsupported fixture-side typed field を見つけたら fail-closed に止まる
   - fixture JSON の自動更新や typed field の仮挿入は行わない
+- `scripts/current_l2_reason_code_readiness.py`
+  - static-only fixture corpus を横断し、`checked_reasons` adoption と `detached_noncore.reason_codes` suggestion availability を batch で display-only 要約する
+  - stable cluster と duplicate cluster の current split を authoring tranche 単位で観察するが、machine-check core や detached aggregate には上げない
+
+`scripts/current_l2_detached_loop.py` では、`scan-reason-code-readiness` subcommand を追加してよい。
+
+- static-only fixture だけに static gate artifact emit を行う
+- runtime fixture は skipped count にだけ入れる
+- 上記 readiness helper を呼び、1 fixture assist と corpus 横断 scan を同じ wrapper family に収める
+- ただし fixture JSON 自動更新や typed carrier actualization は行わない
 
 これらを `harness.rs` 本体へ入れない理由は次の通りである。
 

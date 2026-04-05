@@ -5,9 +5,11 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import json
 from pathlib import Path
 
 import current_l2_checked_reasons_assist as checked_reasons_assist
+import current_l2_reason_code_readiness as reason_code_readiness
 import current_l2_reason_codes_assist as reason_codes_assist
 
 
@@ -106,6 +108,18 @@ def smoke_single_run_label(run_label: str) -> str:
 def run_subprocess(cmd: list[str]) -> int:
     completed = subprocess.run(cmd, cwd=REPO_ROOT)
     return completed.returncode
+
+
+def read_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def fixture_enters_evaluation(fixture_path: Path) -> bool:
+    fixture = read_json(fixture_path)
+    expected_runtime = fixture.get("expected_runtime")
+    if not isinstance(expected_runtime, dict):
+        return False
+    return bool(expected_runtime.get("enters_evaluation"))
 
 
 def emit_fixture(
@@ -409,6 +423,31 @@ def command_suggest_reason_codes(args: argparse.Namespace) -> int:
     return reason_codes_assist.main([str(fixture_path), str(output_path)])
 
 
+def command_scan_reason_code_readiness(args: argparse.Namespace) -> int:
+    fixture_directory = Path(args.fixture_directory)
+    artifact_root = Path(args.artifact_root)
+    artifact_directory = artifact_root / "static-gates" / ensure_run_label(args.run_label)
+
+    fixture_paths = sorted(
+        path
+        for path in fixture_directory.glob("*.json")
+        if not path.name.endswith(".host-plan.json")
+    )
+    for fixture_path in fixture_paths:
+        if fixture_enters_evaluation(fixture_path):
+            continue
+        output_path = static_gate_artifact_path(
+            artifact_root, args.run_label, fixture_path
+        )
+        exit_code = emit_static_gate(fixture_path, output_path, args.overwrite)
+        if exit_code != 0:
+            return exit_code
+
+    return reason_code_readiness.main(
+        [str(fixture_directory), str(artifact_directory)]
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -584,6 +623,31 @@ def build_parser() -> argparse.ArgumentParser:
         help="existing artifact を明示的に上書きする",
     )
     suggest_reason_codes_parser.set_defaults(func=command_suggest_reason_codes)
+
+    scan_reason_code_readiness_parser = subparsers.add_parser(
+        "scan-reason-code-readiness",
+        help=(
+            "static-only fixture corpus を走査し、display-only reason_codes suggestion "
+            "の readiness を detached static gate artifact から要約する"
+        ),
+    )
+    scan_reason_code_readiness_parser.add_argument("fixture_directory")
+    scan_reason_code_readiness_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+    )
+    scan_reason_code_readiness_parser.add_argument(
+        "--run-label",
+        required=True,
+    )
+    scan_reason_code_readiness_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="既存 artifact を上書きする",
+    )
+    scan_reason_code_readiness_parser.set_defaults(
+        func=command_scan_reason_code_readiness
+    )
 
     compare_fixtures_parser = subparsers.add_parser(
         "compare-fixtures",

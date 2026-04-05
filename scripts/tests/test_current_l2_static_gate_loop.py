@@ -209,6 +209,73 @@ class StaticGateLoopTests(unittest.TestCase):
         self.assertEqual(emitted[0], (fixture_path, expected_artifact, True))
         self.assertEqual(assisted, [[str(fixture_path), str(expected_artifact)]])
 
+    def test_scan_reason_code_readiness_emits_static_only_artifacts_then_delegates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+
+            static_fixture = fixture_dir / "left.json"
+            static_fixture.write_text(
+                '{"expected_runtime": {"enters_evaluation": false}}',
+                encoding="utf-8",
+            )
+            runtime_fixture = fixture_dir / "right.json"
+            runtime_fixture.write_text(
+                '{"expected_runtime": {"enters_evaluation": true}}',
+                encoding="utf-8",
+            )
+
+            emitted: list[tuple[Path, Path, bool]] = []
+            assisted: list[list[str]] = []
+
+            original_emit = loop.emit_static_gate
+            original_readiness = loop.reason_code_readiness.main
+
+            def fake_emit(fixture: Path, output: Path, overwrite: bool) -> int:
+                emitted.append((fixture, output, overwrite))
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_text("{}", encoding="utf-8")
+                return 0
+
+            def fake_readiness(argv: list[str] | None = None) -> int:
+                assisted.append(list(argv or []))
+                return 0
+
+            loop.emit_static_gate = fake_emit
+            loop.reason_code_readiness.main = fake_readiness
+            try:
+                exit_code = loop.command_scan_reason_code_readiness(
+                    argparse.Namespace(
+                        fixture_directory=str(fixture_dir),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="readiness-run",
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_static_gate = original_emit
+                loop.reason_code_readiness.main = original_readiness
+
+        self.assertEqual(exit_code, 0)
+        expected_artifact_dir = (
+            temp_root / "artifacts" / "static-gates" / "readiness-run"
+        )
+        self.assertEqual(
+            emitted,
+            [
+                (
+                    static_fixture,
+                    expected_artifact_dir / "left.static-gate.json",
+                    True,
+                )
+            ],
+        )
+        self.assertEqual(
+            assisted,
+            [[str(fixture_dir), str(expected_artifact_dir)]],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
