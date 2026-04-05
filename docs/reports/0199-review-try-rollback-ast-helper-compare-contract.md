@@ -7,7 +7,7 @@
 ## Scope and assumptions
 
 - review 対象は `specs/examples/56` と mirror 更新だけである。
-- current tool surface では stable reviewer handle が無いため、local evidence fallback を採る。
+- reviewer は 1 回だけ起動し、長めの wait を 2 回行う。completion が返らなければ local evidence fallback を採る。
 
 ## Documents consulted
 
@@ -20,7 +20,7 @@
 
 ## Actions taken
 
-1. reviewer agent を 1 回だけ起動し、completion を待った。
+1. reviewer agent を 1 回だけ起動し、180s wait を 2 回行った。
 2. allowable wait window 内では reviewer completion を取得できなかったため、repo ルールどおり local evidence fallback へ切り替えた。
 3. local diff inspection で、`specs/examples/56` が row-family 流用と detached artifact shared carrier 先行を避け、helper-local dedicated contract を current judgment にしていることを確認した。
 4. fresh docs validation と whitespace check を review fallback evidence に採用した。
