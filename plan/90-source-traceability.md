@@ -331,6 +331,16 @@
   - `crates/mir-semantics/examples/current_l2_emit_static_gate.rs`
   - `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
 
+### 2026-04-06 try-rollback AST helper structural-verdict carrier addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/56-current-l2-try-rollback-ast-helper-compare-contract.md`
+  - `specs/examples/57-current-l2-try-rollback-ast-helper-expected-field-name.md`
+  - `specs/examples/58-current-l2-try-rollback-ast-helper-detached-loop-insertion.md`
+  - `specs/examples/59-current-l2-try-rollback-ast-helper-structural-verdict-carrier.md`
+  - `docs/reports/0204-try-rollback-ast-helper-structural-verdict-carrier.md`
+  - `docs/reports/0205-review-try-rollback-ast-helper-structural-verdict-carrier.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

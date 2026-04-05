@@ -245,6 +245,8 @@
   - future dedicated AST structural helper を切る場合の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も helper-local row list に留めるのが自然だという current docs-only judgment を整理する。
 - `specs/examples/58-current-l2-try-rollback-ast-helper-detached-loop-insertion.md`
   - future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留めるのが自然だという current docs-only judgment を整理する。
+- `specs/examples/59-current-l2-try-rollback-ast-helper-structural-verdict-carrier.md`
+  - future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum に留めるのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 

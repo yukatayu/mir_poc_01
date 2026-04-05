@@ -136,6 +136,7 @@
 - current docs-only refinement では、future dedicated AST structural helper の compare contract は current phase では helper-local dedicated contract から始め、row-family 流用や detached artifact shared carrier 先行はしない
 - current docs-only refinement では、future dedicated AST structural helper の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も `subject_kind` / `finding_kind` の helper-local row list に留める
 - current docs-only refinement では、future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留める
+- current docs-only refinement では、future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum `no_findings` / `findings_present` に留める
 - actual helper 実装は、これらの entry criteria が source-backed に揃うまで切らない
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める

@@ -60,7 +60,8 @@
 - current docs-only refinement としては、future dedicated AST structural helper を切る場合の compare contract は helper-local dedicated contract から始め、row-family 流用や detached artifact shared carrier 先行は避けるのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も `subject_kind` / `finding_kind` の helper-local row list に留めるのが自然である
 - current docs-only refinement としては、future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留めるのが自然である
-- 次の narrow question は、future dedicated AST structural helper の structural verdict carrier / name をどこまで narrow に切るかである
+- current docs-only refinement としては、future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum `no_findings` / `findings_present` に留めるのが自然である
+- 次の narrow question は、future dedicated AST structural helper を detached artifact shared carrier へ上げる閾値をどこに置くかである
 
 ### 候補 4. parser 導入前の boundary inventory
 
