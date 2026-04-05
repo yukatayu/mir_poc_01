@@ -52,6 +52,14 @@ STATIC_GATE_EMITTER_CMD = [
 DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_artifacts.py"
 AGGREGATE_DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_aggregates.py"
 STATIC_GATE_DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_static_gate_artifacts.py"
+DEFAULT_TRY_ROLLBACK_MISMATCH_FIXTURE = (
+    REPO_ROOT
+    / "crates/mir-ast/tests/fixtures/current-l2/e22-try-atomic-cut-place-mismatch.json"
+)
+DEFAULT_TRY_ROLLBACK_FRONTIER_FIXTURE = (
+    REPO_ROOT
+    / "crates/mir-ast/tests/fixtures/current-l2/e21-try-atomic-cut-frontier.json"
+)
 
 
 def ensure_run_label(label: str) -> str:
@@ -356,6 +364,18 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
         return compare_exit
 
     return 0
+
+
+def command_smoke_try_rollback_locality(args: argparse.Namespace) -> int:
+    delegated_args = argparse.Namespace(
+        fixture_path=str(DEFAULT_TRY_ROLLBACK_MISMATCH_FIXTURE),
+        reference_fixture=str(DEFAULT_TRY_ROLLBACK_FRONTIER_FIXTURE),
+        artifact_root=args.artifact_root,
+        run_label=args.run_label,
+        reference_label=args.reference_label,
+        overwrite=args.overwrite,
+    )
+    return command_smoke_fixture(delegated_args)
 
 
 def command_compare_static_gates(args: argparse.Namespace) -> int:
@@ -872,6 +892,37 @@ def build_parser() -> argparse.ArgumentParser:
         help="existing artifacts を明示的に上書きする",
     )
     smoke_fixture_parser.set_defaults(func=command_smoke_fixture)
+
+    smoke_try_rollback_locality_parser = subparsers.add_parser(
+        "smoke-try-rollback-locality",
+        help=(
+            "E22 mismatch と E21 frontier の detached bundle contrast を "
+            "current representative pair としてまとめて回す"
+        ),
+    )
+    smoke_try_rollback_locality_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    smoke_try_rollback_locality_parser.add_argument(
+        "--run-label",
+        default="try-rollback-mismatch",
+        help="primary run label for the mismatch-side detached artifact",
+    )
+    smoke_try_rollback_locality_parser.add_argument(
+        "--reference-label",
+        default="try-rollback-frontier",
+        help="run label for the frontier-side reference artifact",
+    )
+    smoke_try_rollback_locality_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifacts を明示的に上書きする",
+    )
+    smoke_try_rollback_locality_parser.set_defaults(
+        func=command_smoke_try_rollback_locality
+    )
 
     smoke_static_gate_parser = subparsers.add_parser(
         "smoke-static-gate",

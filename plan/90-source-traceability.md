@@ -246,6 +246,13 @@
   - `docs/reports/0186-try-rollback-structural-floor-and-restore-scope.md`
   - `docs/reports/0187-review-try-rollback-structural-floor-and-restore-scope.md`
 
+### 2026-04-06 try-rollback locality smoke convenience addendum
+
+- `plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `scripts/current_l2_detached_loop.py`
+  - `scripts/tests/test_current_l2_detached_loop.py`
+  - `docs/reports/0188-try-rollback-locality-smoke-convenience.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

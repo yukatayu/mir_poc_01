@@ -272,6 +272,7 @@ current L2 では production exporter API はまだ固定しない。
   - bundle emitter、aggregate emitter、bundle diff helper、aggregate diff helper を detached validation loop として薄くつなぐ
   - 1 fixture export、aggregate summary export、2 bundle artifact compare、2 aggregate artifact compare を回しやすくする
   - `smoke-fixture` subcommand により、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せる
+  - `smoke-try-rollback-locality` subcommand により、`e22` mismatch と `e21` frontier の representative pair を current default label つきで 1 command で回せる
   - `emit-static-gate` / `compare-static-gates` / `smoke-static-gate` により、static-only / malformed / underdeclared fixture でも static gate artifact の保存と compare を回せる
   - `smoke-same-lineage-checker` により、1 fixture の static gate artifact を保存し、same-lineage first checker spike をその artifact に対して回せる
   - `smoke-missing-option-checker` により、1 fixture の static gate artifact を保存し、missing-option second checker spike をその artifact に対して回せる

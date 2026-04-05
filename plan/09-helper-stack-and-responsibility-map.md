@@ -218,6 +218,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `target/current-l2-detached/` を current non-production default candidate として扱う
   - explicit path compare、fixture-to-artifact compare、aggregate summary export、run-label aggregate compare を最小で支える
   - `smoke-fixture` subcommand では、1 fixture の bundle emit、optional reference compare、single-fixture aggregate smoke を 1 command で支える
+  - `smoke-try-rollback-locality` subcommand では、`e22` mismatch 側と `e21` frontier 側を representative contrast pair として既定パス / label 付きでまとめて回す
   - `smoke-static-gate` subcommand では、1 fixture の static gate artifact emit と optional reference compare を 1 command で支える
   - `suggest-checked-reasons` subcommand では、1 fixture の static gate artifact を emit した後に display-only assist を呼び、fixture-side `expected_static.checked_reasons` 候補を表示する
   - `suggest-reason-codes` subcommand では、1 fixture の static gate artifact を emit した後に display-only assist を呼び、future typed carrier 候補 row を reference-only で表示する

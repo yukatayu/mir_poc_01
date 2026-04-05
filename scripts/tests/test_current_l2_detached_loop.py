@@ -245,6 +245,44 @@ class DetachedLoopPathTests(unittest.TestCase):
 
         self.assertEqual(exit_code, 2)
 
+    def test_smoke_try_rollback_locality_delegates_to_smoke_fixture_defaults(self) -> None:
+        captured: list[argparse.Namespace] = []
+        original_command = loop.command_smoke_fixture
+
+        def fake_command(args: argparse.Namespace) -> int:
+            captured.append(args)
+            return 0
+
+        loop.command_smoke_fixture = fake_command
+        try:
+            exit_code = loop.command_smoke_try_rollback_locality(
+                argparse.Namespace(
+                    artifact_root=str(REPO_ROOT / "target" / "current-l2-detached"),
+                    run_label="try-rollback-mismatch",
+                    reference_label="try-rollback-frontier",
+                    overwrite=True,
+                )
+            )
+        finally:
+            loop.command_smoke_fixture = original_command
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(len(captured), 1)
+        delegated = captured[0]
+        self.assertEqual(
+            Path(delegated.fixture_path),
+            REPO_ROOT
+            / "crates/mir-ast/tests/fixtures/current-l2/e22-try-atomic-cut-place-mismatch.json",
+        )
+        self.assertEqual(
+            Path(delegated.reference_fixture),
+            REPO_ROOT
+            / "crates/mir-ast/tests/fixtures/current-l2/e21-try-atomic-cut-frontier.json",
+        )
+        self.assertEqual(delegated.run_label, "try-rollback-mismatch")
+        self.assertEqual(delegated.reference_label, "try-rollback-frontier")
+        self.assertTrue(delegated.overwrite)
+
 
 if __name__ == "__main__":
     unittest.main()
