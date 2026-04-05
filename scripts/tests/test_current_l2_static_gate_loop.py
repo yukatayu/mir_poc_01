@@ -258,23 +258,58 @@ class StaticGateLoopTests(unittest.TestCase):
                 loop.reason_code_readiness.main = original_readiness
 
         self.assertEqual(exit_code, 0)
-        expected_artifact_dir = (
-            temp_root / "artifacts" / "static-gates" / "readiness-run"
-        )
-        self.assertEqual(
-            emitted,
-            [
-                (
-                    static_fixture,
-                    expected_artifact_dir / "left.static-gate.json",
-                    True,
+
+    def test_smoke_same_lineage_checker_emits_artifact_then_delegates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "left.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+
+            emitted: list[tuple[Path, Path, bool]] = []
+            checked: list[list[str]] = []
+
+            original_emit = loop.emit_static_gate
+            original_checker = loop.same_lineage_checker.main
+
+            def fake_emit(fixture: Path, output: Path, overwrite: bool) -> int:
+                emitted.append((fixture, output, overwrite))
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_text("{}", encoding="utf-8")
+                return 0
+
+            def fake_checker(argv: list[str] | None = None) -> int:
+                checked.append(list(argv or []))
+                return 0
+
+            loop.emit_static_gate = fake_emit
+            loop.same_lineage_checker.main = fake_checker
+            try:
+                exit_code = loop.command_smoke_same_lineage_checker(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="same-lineage-run",
+                        output_path=None,
+                        overwrite=True,
+                    )
                 )
-            ],
+            finally:
+                loop.emit_static_gate = original_emit
+                loop.same_lineage_checker.main = original_checker
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(len(emitted), 1)
+        expected_artifact = (
+            temp_root
+            / "artifacts"
+            / "static-gates"
+            / "same-lineage-run"
+            / "left.static-gate.json"
         )
-        self.assertEqual(
-            assisted,
-            [[str(fixture_dir), str(expected_artifact_dir)]],
-        )
+        self.assertEqual(emitted[0], (fixture_path, expected_artifact, True))
+        self.assertEqual(checked, [[str(fixture_path), str(expected_artifact)]])
 
 
 if __name__ == "__main__":

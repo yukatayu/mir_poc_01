@@ -1,0 +1,160 @@
+import contextlib
+import io
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+import current_l2_same_lineage_checker as checker  # noqa: E402
+
+
+class CurrentL2SameLineageCheckerTests(unittest.TestCase):
+    def write_json(self, path: Path, payload: dict) -> None:
+        path.write_text(json.dumps(payload), encoding="utf-8")
+
+    def test_main_reports_matched_same_lineage_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_path = temp_root / "fixture.json"
+            artifact_path = temp_root / "artifact.json"
+            self.write_json(
+                fixture_path,
+                {
+                    "fixture_id": "e4_malformed_lineage",
+                    "expected_static": {
+                        "checked_reason_codes": [
+                            {
+                                "kind": "lineage_assertion_edge_mismatch",
+                                "predecessor": "writer",
+                                "successor": "readonly",
+                            },
+                            {
+                                "kind": "missing_successor_option",
+                                "option": "readonly",
+                                "scope": "doc_ref",
+                            },
+                        ]
+                    },
+                },
+            )
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "stable-clusters-only",
+                        "reason_codes": [
+                            {
+                                "kind": "lineage_assertion_edge_mismatch",
+                                "predecessor": "writer",
+                                "successor": "readonly",
+                            },
+                            {
+                                "kind": "missing_successor_option",
+                                "option": "readonly",
+                                "scope": "doc_ref",
+                            },
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(fixture_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("cluster: same_lineage_evidence_floor", output)
+        self.assertIn("status: matched", output)
+        self.assertIn("lineage_assertion_edge_mismatch", output)
+        self.assertNotIn("missing_successor_option", output)
+
+    def test_main_reports_missing_fixture_same_lineage_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_path = temp_root / "fixture.json"
+            artifact_path = temp_root / "artifact.json"
+            self.write_json(
+                fixture_path,
+                {
+                    "fixture_id": "e12_underdeclared_target_missing",
+                    "expected_static": {"checked_reason_codes": []},
+                },
+            )
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "stable-clusters-only",
+                        "reason_codes": [
+                            {
+                                "kind": "declared_target_missing",
+                                "predecessor": "writer",
+                                "successor": "readonly",
+                            }
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(fixture_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 1)
+        output = stdout.getvalue()
+        self.assertIn("status: fixture_same_lineage_rows_missing", output)
+        self.assertIn("declared_target_missing", output)
+
+    def test_main_reports_out_of_scope_when_cluster_rows_absent(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_path = temp_root / "fixture.json"
+            artifact_path = temp_root / "artifact.json"
+            self.write_json(
+                fixture_path,
+                {
+                    "fixture_id": "e16_malformed_missing_chain_head_option",
+                    "expected_static": {
+                        "checked_reason_codes": [
+                            {
+                                "kind": "missing_chain_head_option",
+                                "head": "doc_ref",
+                                "scope": "scope",
+                            }
+                        ]
+                    },
+                },
+            )
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "stable-clusters-only",
+                        "reason_codes": [
+                            {
+                                "kind": "missing_chain_head_option",
+                                "head": "doc_ref",
+                                "scope": "scope",
+                            }
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(fixture_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("status: out_of_scope", output)
+
+
+if __name__ == "__main__":
+    unittest.main()

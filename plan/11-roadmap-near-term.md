@@ -157,8 +157,9 @@
 - current code / fixture corpus では、その carrier cut を current stable cluster inventory の 8 kind まで広げ、`checked_reason_codes` adoption と `reason_codes` suggestion availability が 8 / 8 で揃うところまで actualize 済みである
 - さらに current readiness scan では、stable cluster 8 件が `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っており、coexistence follow-up は `none` である
 - さらに checker cluster roll-up では、same-lineage floor `4`、capability floor `1`、missing-option structure floor `3` まで current static-only corpus が覆っていることを source-backed に確認できる
+- さらに same-lineage floor については、fixture-side `checked_reason_codes` と detached static gate artifact `reason_codes` を narrow compare する helper-local first checker spike を追加し、`e4` / `e12` の smoke が通っている
 - duplicate declaration cluster は current cut のまま `checked_reasons` / `checked_reason_codes` / detached `reason_codes` stable inventory へは上げず、actual wording を `checker_core.reasons` と focused smoke で見る
-- 次の narrow step は、stable cluster actualization と coexistence 収束を前提に mainline を first checker cut 側へ戻し、parser subset inventory との handoff を詰めるか、carrier deprecation 条件をさらに比較するかの整理である
+- 次の narrow step は、same-lineage first checker spike を踏まえて missing-option structure floor を second spike にするか、capability floor の corpus coverage を先に厚くするかを整理することである
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
