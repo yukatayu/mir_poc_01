@@ -185,7 +185,11 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - aggregate exporter の operational aid
   - `run_directory` / `BatchRunSummary` の public behavior を再利用する
   - `bundle_failure_kind_counts` を migrated kind only の partial histogram として non-production aggregate artifact に narrow に落とす
+  - artifact transform 本体は `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs` へ委譲し、example 内 private code ではなく repo 内 callable boundary として保つ
   - helper stack 本体の public API を増やさない
+- `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
+  - `BatchRunSummary -> detached aggregate artifact` の pure transform と carrier struct を持つ shared support helper
+  - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する repo-level helper
   - `must_explain` を比較対象に上げない

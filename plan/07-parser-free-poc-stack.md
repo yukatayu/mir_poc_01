@@ -231,6 +231,9 @@ current L2 では production exporter API はまだ固定しない。
   - `run_bundle` / `BundleRunReport` を起点に 1 bundle の detached artifact sketch を出す
 - `crates/mir-semantics/examples/current_l2_emit_detached_aggregate.rs`
   - `run_directory` / `BatchRunSummary` を起点に aggregate detached artifact sketch を出す
+- `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
+  - `BatchRunSummary -> detached aggregate artifact` の pure transform だけを shared support module として持つ
+  - example private transform を repo 内 callable boundary へ落とす actual narrow cut だが、`lib.rs` / `harness.rs` の public API には上げない
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
 - `scripts/current_l2_diff_detached_aggregates.py`
@@ -256,6 +259,7 @@ aggregate 側 actual narrow cut としては、
 - `bundle_failure_kind_counts`
 - `bundle_failure_kind_counts_scope = "migrated-kinds-only"`
 - current `host_plan_coverage_failures` list の additive coexistence
+- aggregate emitter 本体の private transform を `examples/support/current_l2_detached_aggregate_support.rs` へ切り出し、non-production helper 内でだけ再利用できる repo 内 callable boundary を持つ
 
 までを non-production helper で扱ってよい。
 ただし actual exporter API は引き続き OPEN である。

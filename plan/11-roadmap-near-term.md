@@ -92,6 +92,7 @@
 - docs-only minimal schema はできたが、thin export boundary と保存パス規約はまだ未決である
 - current non-production candidate として `target/current-l2-detached/` は置けたが、final path policy と actual aggregate exporter API はまだ未決である
 - current detached validation loop には aggregate emitter sketch と `emit-aggregate` wrapper を足せるが、これは production aggregate API finalization ではない
+- ただし actual narrow cut としては、aggregate emitter 内 private transform を shared support module へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary までは進めてよい
 
 ### 5. review infrastructure の変動
 
@@ -135,6 +136,7 @@
 - bundle-first artifact の payload core / bundle_context / detached non-core / aggregate-only を docs-only で切り分ける
 - detached exporter chain の docs-only judgment を 1 箇所へ集約し、non-production の tiny emitter / diff helper / fixture template を PoC loop 補助として足す
 - detached validation loop の storage/path policy、tiny wrapper、aggregate export の actual narrow cut を docs-only から thin operational aid へ進める
+- aggregate export の actual narrow cut として、example private transform を shared support module へ落とし、public API を増やさずに repo 内 callable boundary へ寄せる
 - detached validation loop の common path として、1 fixture の bundle export / optional reference compare / single-fixture aggregate smoke を 1 command で回す helper を足す
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる

@@ -29,6 +29,11 @@
 current detached validation loop の aggregate 側 actual narrow cut は、
 `crates/mir-semantics/examples/current_l2_emit_detached_aggregate.rs` を non-production helper として置くところまでである。
 
+current actualization では、この helper 内の private transform を
+`crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
+へ切り出してよい。
+これは repo 内 callable boundary ではあるが、`lib.rs` / `harness.rs` の public API ではない。
+
 この helper は次を行う。
 
 - 入力として fixture directory を受け取る
@@ -172,6 +177,7 @@ aggregate compare を汎用化しないまま、まず artifact 保存と smoke 
 current non-production aggregate emitter sketch の judgment は次である。
 
 - aggregate export は `run_directory` / `BatchRunSummary` 起点で narrow に始めてよい
+- aggregate emitter 内 private transform は shared support module へ切り出してよい
 - aggregate artifact は `aggregate_context` / `summary_core` / `detached_noncore` に分ける
 - typed aggregate の最小 field は `bundle_failure_kind_counts`
 - current actual sketch では `bundle_failure_kind_counts_scope = "migrated-kinds-only"` を併せて持ち、full failure histogram と誤読させない

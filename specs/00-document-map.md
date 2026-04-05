@@ -189,6 +189,8 @@
   - current L2 parser-free PoC の detached validation loop で、aggregate compare helper の exact-compare core / reference-only split と run-label convenience wrapper を整理する。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
+- `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
+  - current L2 parser-free PoC の detached validation loop で、aggregate emitter 内 private transform を repo 内 callable boundary へ落とす shared support helper の最小 cut を整理する。
 
 ## レポート
 
@@ -224,6 +226,7 @@
   - parser なし minimal interpreter の detached validation loop で 1 fixture を bundle export / optional reference compare / single-fixture aggregate smoke まで 1 command で回す helper 境界は `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md` に置く。
   - current L2 companion notation から final grammar へ進む前に、first parser cut に入れてよい semantic cluster と companion に残す cluster を narrow に棚卸しする inventory は `specs/examples/29-current-l2-first-parser-subset-inventory.md` に置く。
   - first parser cut inventory の次段として、current L2 で core checker に入れてよい local / structural judgment と external verifier 側へ残す judgment の entry criteria は `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md` に置く。
+  - parser なし minimal interpreter の aggregate emitter private transform を repo 内 callable boundary へ落とす shared support helper cut は `specs/examples/31-current-l2-detached-aggregate-transform-helper.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor
@@ -238,6 +241,8 @@
   - detached validation loop の bundle-first artifact を出す non-production emitter sketch。
 - `crates/mir-semantics/examples/current_l2_emit_detached_aggregate.rs`
   - detached validation loop の aggregate summary artifact を出す non-production emitter sketch。
+- `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
+  - detached validation loop の aggregate summary artifact transform を repo 内で共有する non-production support helper。
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する non-production helper。
 - `scripts/current_l2_diff_detached_aggregates.py`
