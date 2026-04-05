@@ -53,7 +53,8 @@
 - static-only と runtime fixture のバランスを見る
 - `must_explain` は prose に残し、machine-check 範囲を増やしすぎない
 - current actualization としては、`e21-try-atomic-cut-frontier` により `TryFallback` body 内 `AtomicCut` rollback frontier 更新を、`e22-try-atomic-cut-place-mismatch` により nested place mismatch 時の event-only cut を、それぞれ runtime fixture / detached loop / directory summary まで通せる状態になった
-- 次の narrow question は、`try` / rollback locality の structural floor を future checker cut へどう接続し、`place_anchor == current_place` gate と whole-store restore scope を runtime / proof boundary にどう残すかである
+- current docs-only judgment としては、`try` / rollback locality の structural floor は first checker cut 候補 cluster に残すが、existing reason-row family helper の fourth spike にはまだ actualize せず、runtime representative と `specs/examples/51` / `52` に留める
+- 次の narrow question は、parser boundary と first checker API cut がもう一段見えた段階で、`try` / rollback locality を dedicated AST structural helper として actualize する必要があるかである
 
 ### 候補 4. parser 導入前の boundary inventory
 

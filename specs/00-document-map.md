@@ -231,6 +231,8 @@
   - shared support helper 導入後も family facade script を維持し、generic checker-side shared entry はまだ切らない current judgment を整理する。
 - `specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md`
   - `TryFallback` / `AtomicCut` の structural floor を first checker cut にどこまで入れ、`place_anchor == current_place` gate と whole-store restore scope をどこから runtime / proof boundary に残すかを整理する。
+- `specs/examples/52-current-l2-try-rollback-fourth-checker-spike-comparison.md`
+  - `TryFallback` / `AtomicCut` structural floor を existing checker helper family の fourth spike として今 actualize すべきか、それとも docs/runtime representative に留めるべきかを比較する。
 
 ## レポート
 

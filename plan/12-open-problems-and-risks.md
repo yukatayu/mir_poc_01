@@ -128,6 +128,8 @@
 - same-lineage floor については helper-local / non-production checker spike が入り、current sequence は same-lineage -> missing-option -> capability まで actualize 済みである
 - missing-option structure floor についても helper-local / non-production second spike が入った
 - capability strengthening floor についても `e13` / `e20` を根拠に helper-local / non-production third spike が入った
+- 一方で `TryFallback` / `AtomicCut` の structural floor は、current representative runtime evidence と docs-only judgment は揃っているが、same reason-row family へ直ちに fourth spike actualization するのは premature である
+- current cut では、`try` / rollback locality は docs/runtime representative に留め、parser boundary と first checker API cut がもう一段見えた時点で dedicated AST structural helper の要否を比較する
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める
 - その next OPEN は、generic entry の比較を later public checker API comparison と同時に行うべきか、それともその前段で別 helper として試すべきかである
