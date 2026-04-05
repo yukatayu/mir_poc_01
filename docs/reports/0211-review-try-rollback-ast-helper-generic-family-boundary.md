@@ -7,7 +7,7 @@
 ## Scope and assumptions
 
 - review 対象は `specs/examples/62` と mirror 更新だけである。
-- reviewer handle を取得できない場合は local evidence fallback を採る。
+- reviewer は 1 回だけ起動し、長めの wait を 2 回行う。completion が返らなければ local evidence fallback を採る。
 
 ## Documents consulted
 
@@ -18,10 +18,20 @@
 
 ## Actions taken
 
-1. reviewer availability を確認する。
-2. waitable reviewer handle が取れない場合は local diff inspection と fresh validation を fallback evidence に採用する。
+1. reviewer agent を 1 回だけ起動する。
+2. 180s wait を 2 回行い、completion を待つ。
+3. completion が返らない場合は local diff inspection と fresh validation を fallback evidence に採用する。
 
 ## Evidence / outputs / test results
+
+- reviewer
+
+```text
+agent: Dalton
+wait #1: timed out after 180s
+wait #2: timed out after 180s
+status: no completion within allowed wait window
+```
 
 - local fallback
 

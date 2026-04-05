@@ -141,6 +141,7 @@
 - current docs-only refinement では、future dedicated AST structural helper の wrapper family は family-specific に留め、exact subcommand 名は actual helper actualization task まで deferred にする
 - current docs-only refinement では、future dedicated AST structural helper を generic structural checker family と合流させるのは later public checker API comparison と同時に扱い、actual helper actualization や wrapper naming cut と混ぜない
 - current docs-only refinement では、later public checker API comparison に future dedicated AST structural helper family を載せるには、generic family 合流とは別に、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure の entry criteria が要る
+- current docs-only refinement では、future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然である
 - actual helper 実装は、これらの entry criteria が source-backed に揃うまで切らない
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める
