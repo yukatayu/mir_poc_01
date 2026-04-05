@@ -253,6 +253,8 @@
   - future dedicated AST structural helper の wrapper family は family-specific に留め、exact subcommand 名は actual helper actualization task まで deferred にするのが自然だという current docs-only judgment を整理する。
 - `specs/examples/62-current-l2-try-rollback-ast-helper-generic-family-boundary.md`
   - future dedicated AST structural helper を generic structural checker family と合流させるのは later public checker API comparison と同時に扱うのが自然だという current docs-only judgment を整理する。
+- `specs/examples/63-current-l2-try-rollback-ast-helper-public-checker-entry-criteria.md`
+  - future dedicated AST structural helper family を later public checker API comparison に載せるには、generic family 合流とは別に、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure の entry criteria が揃うまで待つのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 
