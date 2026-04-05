@@ -1,0 +1,135 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e9_monotone_degradation_success",
+  "source_example_id": "E3-E6-success-regression",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "owner_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": {
+                      "kind": "call",
+                      "callee": "owner_is",
+                      "args": [
+                        "session_user"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "delegated_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": {
+                      "kind": "call",
+                      "callee": "delegate_granted",
+                      "args": [
+                        "session_user"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "backup_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "owner_writer",
+                    "edges": [
+                      {
+                        "predecessor": "owner_writer",
+                        "successor": "delegated_writer",
+                        "lineage_assertion": {
+                          "predecessor": "owner_writer",
+                          "successor": "delegated_writer"
+                        }
+                      },
+                      {
+                        "predecessor": "delegated_writer",
+                        "successor": "backup_writer",
+                        "lineage_assertion": {
+                          "predecessor": "delegated_writer",
+                          "successor": "backup_writer"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "PerformVia",
+                    "op": "write_profile",
+                    "chain_ref": "profile_ref",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "write"
+                        }
+                      ],
+                      "ensure": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "chain is well-formed statically",
+      "capability remains monotone across same-lineage write-capable options",
+      "later same-lineage writer can remain a success-side candidate after middle failure"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "success",
+    "notes": [
+      "owner_writer is skipped because admit is not satisfied",
+      "delegated_writer fails explicitly and the chain degrades to backup_writer",
+      "backup_writer becomes the later write-capable success-side choice"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-failure",
+      "perform-success"
+    ],
+    "non_admissible_metadata": [
+      {
+        "option_ref": "owner_writer",
+        "subreason": "admit-miss"
+      }
+    ],
+    "narrative_explanations": [],
+    "must_explain": [
+      "middle explicit failure does not re-promote earlier options",
+      "same-lineage degradation may still reach a later write-capable success"
+    ]
+  }
+}

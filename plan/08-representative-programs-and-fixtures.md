@@ -16,6 +16,7 @@
 - `e6-write-after-expiry`
 - `e7-write-fallback-after-expiry`
 - `e8-monotone-degradation-reject`
+- `e9-monotone-degradation-success`
 
 ### static-only fixture
 
@@ -34,6 +35,7 @@
 | `e6-write-after-expiry` | write-capable option expiry + later read-only only | `valid` | `Reject` | `lease-expired` formal metadata、capability mismatch narrative explanation、final `Reject` | あり | E6, `0039`, `0045`, `0078` |
 | `e7-write-fallback-after-expiry` | expiry 後に later write-capable option で成功 | `valid` | `success` | `lease-expired` formal metadata を残しつつ later success | あり | E6 補完, `0078` |
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject` | `valid` | `Reject` | `perform-failure`、`Reject`、formal `admit-miss`、capability mismatch narrative | あり | canonical law / no re-promotion, `0078` |
+| `e9-monotone-degradation-success` | `admit-miss`、middle failure、later success | `valid` | `success` | `perform-failure` の後に later write-capable option で `perform-success`、formal `admit-miss` のみを残す | あり | E3 / E6 success-side 補完, `0121` |
 
 ## fixture ごとの補足
 
@@ -74,6 +76,12 @@
 
 - `e3` / `e6` の補完
 - monotone degradation と no re-promotion を `Reject` まで含めて固定する
+
+### `e9-monotone-degradation-success`
+
+- `e8` の success-side 補完
+- middle option の explicit failure があっても、later same-lineage write-capable option が request を満たせば success しうる
+- no re-promotion を保ったまま、middle failure のあとに later success へ進めることを固定する
 
 ## runtime fixture と static-only fixture の区別
 

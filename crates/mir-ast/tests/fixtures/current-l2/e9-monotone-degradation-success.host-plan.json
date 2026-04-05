@@ -1,0 +1,65 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "option-admit",
+      "op": "write_profile",
+      "option_ref": "owner_writer",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "write_profile",
+      "option_ref": "delegated_writer",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "write_profile",
+      "mode": "via",
+      "chain_ref": "profile_ref",
+      "option_ref": "delegated_writer",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "write_profile",
+      "mode": "via",
+      "chain_ref": "profile_ref",
+      "option_ref": "backup_writer",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "write_profile",
+      "mode": "via",
+      "chain_ref": "profile_ref",
+      "selected_option_ref": "delegated_writer",
+      "selected_target": "profile_doc",
+      "verdict": {
+        "kind": "explicit-failure"
+      }
+    },
+    {
+      "op": "write_profile",
+      "mode": "via",
+      "chain_ref": "profile_ref",
+      "selected_option_ref": "backup_writer",
+      "selected_target": "profile_doc",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "profile_doc",
+              "record": "write_profile@backup_writer"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

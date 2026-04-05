@@ -58,7 +58,7 @@ current L2 では `A > B > C` を次のように読む。
 | 後段に write-capable option が無い | request-level `Reject` |
 | read-only option しか残らない | capability mismatch は narrative explanation、最終 outcome は `Reject` |
 
-これは `e6`、`e7`、`e8` の regression fixtures で machine-check されている。
+これは `e6`、`e7`、`e8`、`e9` の regression fixtures で machine-check されている。
 
 ## rollback / `atomic_cut` と degradation order
 
@@ -105,6 +105,7 @@ current L2 では、nested outer / inner の見た目が次の誤読を生みや
 | `e6-write-after-expiry` | write-capable option expiry + later read-only only -> `Reject` |
 | `e7-write-fallback-after-expiry` | `lease-expired` 後に later write-capable option で success |
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject`、no re-promotion |
+| `e9-monotone-degradation-success` | `admit-miss`、middle failure、later success、no re-promotion の success-side 補完 |
 
 ## settled と tension の切り分け
 
