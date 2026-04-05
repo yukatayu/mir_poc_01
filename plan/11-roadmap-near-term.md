@@ -57,7 +57,8 @@
 - current docs-only refinement としては、`try` / rollback locality を dedicated AST structural helper に actualize するなら、parser/loader malformed source、AST-only floor、reason-row family と分ける dedicated carrier、runtime gate 非依存、singleton ではない structural family という entry criteria を先に満たすべきである
 - current docs-only refinement としては、current parser-free phase では structural malformed source を parser でも loader でもなく static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留めるのが最小である
 - current docs-only refinement としては、runtime representative `E2` / `E21` / `E22` が current phase の evidence として十分強く、malformed static family はまだ actual corpus に増やさないのが自然である
-- 次の narrow question は、future dedicated AST structural helper の compare contract を dedicated carrier 前提でどう切るかである
+- current docs-only refinement としては、future dedicated AST structural helper を切る場合の compare contract は helper-local dedicated contract から始め、row-family 流用や detached artifact shared carrier 先行は避けるのが自然である
+- 次の narrow question は、future dedicated AST structural helper の expected field 名と focused compare shape をどう切るかである
 
 ### 候補 4. parser 導入前の boundary inventory
 

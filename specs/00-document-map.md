@@ -239,6 +239,8 @@
   - `TryFallback` / `AtomicCut` の structural malformed source を current parser-free phase では parser でも loader でもなく static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留めるべきだという current docs-only judgment を整理する。
 - `specs/examples/55-current-l2-try-rollback-malformed-static-family-actualization.md`
   - `TryFallback` / `AtomicCut` の malformed static family は current phase ではまだ actual corpus に増やさず、runtime representative `E2` / `E21` / `E22` を current evidence として維持するのが自然だという current docs-only judgment を整理する。
+- `specs/examples/56-current-l2-try-rollback-ast-helper-compare-contract.md`
+  - future dedicated AST structural helper を切る場合の compare contract は、current phase では row-family 流用や detached artifact shared carrier 先行ではなく、helper-local dedicated contract から始めるのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 
