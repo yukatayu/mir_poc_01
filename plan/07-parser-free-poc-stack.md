@@ -337,6 +337,7 @@ current L2 では production exporter API はまだ固定しない。
   - `TryFallback` / `AtomicCut` dedicated AST structural helper first tranche の helper-local compare
   - fixture-side `checked_try_rollback_structural_verdict` / `checked_try_rollback_structural_findings` と static gate artifact `checker_core.static_verdict` を照合する
   - `missing_fallback_body` と `disallowed_fallback_placement` だけを current first-tranche finding family として扱う
+  - current phase では saved artifact path を直接 compare できるので、shared detached carrier が無くても narrow artifact recheck を回せる
 - `scripts/current_l2_family_checker_support.py`
   - same-lineage / missing-option / capability の 3 checker spike で重複する parser / filter / status / stdout rendering をまとめる non-production support module
   - family facade script と detached loop wrapper command 名は残し、generic checker-side shared entry にはしない

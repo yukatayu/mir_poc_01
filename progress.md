@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（try rollback AST helper の first-tranche wording stability まで反映）
+最終更新: 2026-04-06（try rollback AST helper の shared carrier threshold recheck まで反映）
 
 ## 位置づけ
 
@@ -26,6 +26,7 @@
 - その次段 comparison として、`TryFallback` / `AtomicCut` structural floor は current phase では existing reason-row family helper の fourth spike に actualize せず、docs/runtime representative に留める current judgment を固定した。
 - dedicated `TryFallback` / `AtomicCut` AST structural helper については、entry criteria、malformed source placement、helper-local compare contract、field 名、verdict carrier、shared carrier threshold、wrapper family、generic/public checker boundary、first tranche cut、two-fixture pair、slot selectionまでの docs-only chain を前提に、helper-local first tranche を actualize した。
 - current next phase では、dedicated `TryFallback` / `AtomicCut` AST structural helper first tranche の wording / row family を exact working set に留め、`TryFallback` / `missing_fallback_body`、`AtomicCut` / `disallowed_fallback_placement` の rename や alias / synonym 導入は shared carrier threshold の再比較と later generic/public comparison まで deferred にする。
+- current recheck では、saved artifact compare need の narrow version は helper-local checker が saved static gate artifact path を直接 compare することで満たせるため、shared detached carrier threshold はまだ未充足と読む。
 - current first tranche の actualized scope は
   - `expected_static.checked_try_rollback_structural_verdict`
   - `expected_static.checked_try_rollback_structural_findings`
@@ -222,3 +223,4 @@
 - 2026-04-06 05:56 JST — `TryFallback` / `AtomicCut` dedicated AST structural helper の first tranche を actualize し、`e23` / `e24`、helper-local compare、static gate smoke family を実装したうえで、reviewer 指摘だった artifact false-green と public API leak を修正した。full cargo・Python tests・real smoke・docs validation が揃ったので、次は second tranche と helper-local wording stability のどちらを先に比較するかを決める段階。
 - 2026-04-06 06:03 JST — second malformed static tranche comparison を先に閉じ、current source だけでは concrete decode-valid family がまだ不足しているため actual tranche 追加は保留と判断した。next は first-tranche wording / finding family stability を narrow に点検する段階。
 - 2026-04-06 06:24 JST — first-tranche wording / finding family stability を比較し、`TryFallback` / `missing_fallback_body` と `AtomicCut` / `disallowed_fallback_placement` を current next phase の exact working set に固定した。generic 化や alias は hidden acceptance と premature genericization を招くため deferred にし、next は shared carrier threshold の再比較へ進む段階。
+- 2026-04-06 06:41 JST — first-tranche shared carrier threshold を再比較し、saved artifact compare need の narrow version は helper-local checker が `fixture + artifact_path` で満たせるため、shared detached carrier threshold はまだ未充足と判断した。next は generic structural checker family / public checker API comparison の前提条件を narrow に整理する段階。

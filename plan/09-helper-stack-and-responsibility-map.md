@@ -255,6 +255,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `scripts/current_l2_try_rollback_structural_checker.py`
   - `TryFallback` / `AtomicCut` dedicated AST structural helper first tranche の helper-local compare
   - `checked_try_rollback_structural_verdict` / `checked_try_rollback_structural_findings` と static gate artifact `checker_core.static_verdict` を narrow に照合する
+  - helper-local checker 自体が saved artifact path を直接受けるので、current first tranche の narrow artifact recheck は shared detached carrier へ上げずに支えられる
   - shared family support helper や public checker API には上げない
 - `scripts/current_l2_family_checker_support.py`
   - same-lineage / missing-option / capability の 3 checker spike が共有する parser / row filter / status / stdout contract をまとめる

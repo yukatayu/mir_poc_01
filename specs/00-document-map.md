@@ -269,6 +269,8 @@
   - first tranche 後の second malformed static tranche を今すぐ actualize するか、それとも wording / finding family stability comparison へ進むかを比較する。
 - `specs/examples/70-current-l2-try-rollback-first-tranche-wording-stability.md`
   - `missing_fallback_body` / `disallowed_fallback_placement` の wording と helper-local row family を current next phase でどこまで exact に固定してよいかを比較する。
+- `specs/examples/71-current-l2-try-rollback-first-tranche-shared-carrier-threshold-recheck.md`
+  - current first tranche が saved artifact compare need の観点で shared detached carrier threshold を本当に満たしたかを再比較する。
 
 ## レポート
 
