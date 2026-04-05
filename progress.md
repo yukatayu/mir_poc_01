@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（try rollback AST helper の second tranche comparison close まで反映）
+最終更新: 2026-04-06（try rollback AST helper の first-tranche wording stability まで反映）
 
 ## 位置づけ
 
@@ -25,6 +25,7 @@
 - `TryFallback` / `AtomicCut` の checker boundary では、structural floor だけを first checker cut 候補に残し、`place_anchor == current_place` gate と whole-store restore scope は runtime / proof boundary に残す current judgment を docs / plan / representative runtime evidence で揃えた。
 - その次段 comparison として、`TryFallback` / `AtomicCut` structural floor は current phase では existing reason-row family helper の fourth spike に actualize せず、docs/runtime representative に留める current judgment を固定した。
 - dedicated `TryFallback` / `AtomicCut` AST structural helper については、entry criteria、malformed source placement、helper-local compare contract、field 名、verdict carrier、shared carrier threshold、wrapper family、generic/public checker boundary、first tranche cut、two-fixture pair、slot selectionまでの docs-only chain を前提に、helper-local first tranche を actualize した。
+- current next phase では、dedicated `TryFallback` / `AtomicCut` AST structural helper first tranche の wording / row family を exact working set に留め、`TryFallback` / `missing_fallback_body`、`AtomicCut` / `disallowed_fallback_placement` の rename や alias / synonym 導入は shared carrier threshold の再比較と later generic/public comparison まで deferred にする。
 - current first tranche の actualized scope は
   - `expected_static.checked_try_rollback_structural_verdict`
   - `expected_static.checked_try_rollback_structural_findings`
@@ -220,3 +221,4 @@
 - 2026-04-06 05:48 JST — future dedicated AST structural helper の minimal malformed static family tranche size を比較し、`TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を first tranche の最小とする current judgment を固定した。次はその two-fixture first tranche の各 slot に最初に入れる malformed pattern をどこまで narrow に切るかを比べる段階。
 - 2026-04-06 05:56 JST — `TryFallback` / `AtomicCut` dedicated AST structural helper の first tranche を actualize し、`e23` / `e24`、helper-local compare、static gate smoke family を実装したうえで、reviewer 指摘だった artifact false-green と public API leak を修正した。full cargo・Python tests・real smoke・docs validation が揃ったので、次は second tranche と helper-local wording stability のどちらを先に比較するかを決める段階。
 - 2026-04-06 06:03 JST — second malformed static tranche comparison を先に閉じ、current source だけでは concrete decode-valid family がまだ不足しているため actual tranche 追加は保留と判断した。next は first-tranche wording / finding family stability を narrow に点検する段階。
+- 2026-04-06 06:24 JST — first-tranche wording / finding family stability を比較し、`TryFallback` / `missing_fallback_body` と `AtomicCut` / `disallowed_fallback_placement` を current next phase の exact working set に固定した。generic 化や alias は hidden acceptance と premature genericization を招くため deferred にし、next は shared carrier threshold の再比較へ進む段階。

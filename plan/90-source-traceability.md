@@ -389,6 +389,16 @@
   - `docs/reports/0224-try-rollback-second-malformed-static-tranche-comparison.md`
   - `docs/reports/0225-review-try-rollback-second-malformed-static-tranche-comparison.md`
 
+### 2026-04-06 try-rollback first-tranche wording stability addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/68-current-l2-try-rollback-ast-helper-first-tranche-actualization.md`
+  - `specs/examples/69-current-l2-try-rollback-second-malformed-static-tranche-comparison.md`
+  - `specs/examples/70-current-l2-try-rollback-first-tranche-wording-stability.md`
+  - `docs/reports/0226-try-rollback-first-tranche-wording-stability.md`
+  - `docs/reports/0227-review-try-rollback-first-tranche-wording-stability.md`
+  - `docs/reports/0228-review-try-rollback-first-tranche-wording-stability-followup.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

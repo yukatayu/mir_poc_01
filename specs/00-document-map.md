@@ -267,6 +267,8 @@
   - future dedicated AST structural helper の first tranche が helper-local carrier、two-fixture malformed corpus、static gate smoke path まで current repo でどこまで actualize 済みかを整理する。
 - `specs/examples/69-current-l2-try-rollback-second-malformed-static-tranche-comparison.md`
   - first tranche 後の second malformed static tranche を今すぐ actualize するか、それとも wording / finding family stability comparison へ進むかを比較する。
+- `specs/examples/70-current-l2-try-rollback-first-tranche-wording-stability.md`
+  - `missing_fallback_body` / `disallowed_fallback_placement` の wording と helper-local row family を current next phase でどこまで exact に固定してよいかを比較する。
 
 ## レポート
 

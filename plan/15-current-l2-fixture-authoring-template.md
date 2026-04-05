@@ -65,6 +65,7 @@
   - `TryFallback` / `missing_fallback_body`
   - `AtomicCut` / `disallowed_fallback_placement`
   だけである
+- current next phase では、この 2 件の exact spelling を fixed working set として扱い、generic 化した alias / synonym を fixture authoring 側へ先に入れない
 - 同様に future dedicated AST structural helper を detached artifact shared carrier へ mirror するのも、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の threshold が揃うまでは **まだ行わない**
 - dedicated AST structural helper の current exact subcommand 名は `smoke-try-rollback-structural-checker` だが、これは helper-local smoke family の actual command surface であり、public checker API の長期固定を意味しない
 - 同様に future dedicated AST structural helper を generic structural checker family へ合流させる比較も、later public checker API comparison までは **まだ行わない**
@@ -96,10 +97,10 @@
 - duplicate declaration cluster の `reason_codes` suggestion は引き続き absent であり、future row 候補としても current tranche には上げない
 - helper は current fixture schema に無い `expected_static.reason_codes` を見つけたら fail-closed に止まる
 - 同様に、current helper stack では dedicated AST structural helper の shared detached carrier も actualize しない
-- 同様に、current helper stack では dedicated AST structural helper の exact family-specific subcommand もまだ actual command surface に上げない
+- dedicated AST structural helper の current exact family-specific subcommand は `smoke-try-rollback-structural-checker` として actual command surface に上がっているが、これは helper-local smoke family の command surface であり、public checker API の長期固定を意味しない
 - 同様に、current helper stack では dedicated AST structural helper の generic structural checker family entry もまだ actualize しない
 - 同様に、current helper stack では dedicated AST structural helper の public checker API family entry もまだ actualize しない
-- 同様に、current helper stack では dedicated AST structural helper 向け malformed static family もまだ actual corpus に入れない
+- dedicated AST structural helper 向け malformed static family は current first tranche の `e23` / `e24` まで actual corpus に入っているが、second tranche 以降の actual corpus 追加はまだ行わない
 - 同様に、current helper stack では dedicated AST structural helper first tranche に shared detached carrier や public checker API を混ぜない
 - ただし helper は fixture JSON を自動更新しない。採用は hand-edit と review で行う
 - detached artifact loop に入れても、payload core の中心は `static_verdict` と `entered_evaluation = false` になる
