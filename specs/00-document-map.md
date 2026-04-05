@@ -247,6 +247,8 @@
   - future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留めるのが自然だという current docs-only judgment を整理する。
 - `specs/examples/59-current-l2-try-rollback-ast-helper-structural-verdict-carrier.md`
   - future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum に留めるのが自然だという current docs-only judgment を整理する。
+- `specs/examples/60-current-l2-try-rollback-ast-helper-shared-carrier-threshold.md`
+  - future dedicated AST structural helper を detached artifact shared carrier へ上げるには、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の 5 条件が揃うまで helper-local dedicated contract に留めるのが自然だという current docs-only judgment を整理する。
 
 ## レポート
 
