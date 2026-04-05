@@ -200,8 +200,8 @@ current L2 の最小 fixture set は次の 24 本とする。
 | `e21-try-atomic-cut-frontier.json` | E21 | `try` body 内 `atomic_cut` による rollback frontier 更新 |
 | `e22-try-atomic-cut-place-mismatch.json` | E22 | nested place 内 `atomic_cut` が rollback frontier を進めない contrast case |
 | `e3-option-admit-chain.json` | E3 比較用 variant | option-local `admit` を伴う valid chain |
-| `e4-malformed-lineage.json` | E4 | malformed fallback branch |
-| `e5-underdeclared-lineage.json` | E5 | underdeclared fallback case |
+| `e4-malformed-lineage.json` | E4 | lineage assertion edge mismatch による malformed static stop |
+| `e5-underdeclared-lineage.json` | E5 | lineage annotation 欠落による underdeclared static stop |
 | `e12-underdeclared-target-missing.json` | E12 | declared access target 欠落による underdeclared static stop |
 | `e13-malformed-capability-strengthening.json` | E13 | same-lineage edge で capability が強化される malformed static stop |
 | `e14-malformed-duplicate-option-declaration.json` | E14 | visible option 名の duplicate による malformed static stop |

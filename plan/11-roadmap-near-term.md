@@ -210,8 +210,9 @@
   に留めつつ、declaration-side guard slot は predicate fragment parse へ進めず opaque attached slot として扱う cut を維持するのが自然である
 - current baseline として、stage 1 handoff は parser-side opaque slot carrier と current parser-free AST fixture schema を同一視せず、thin lowering bridge を介して `OptionDecl.lease` へ narrow に接続するのが自然である
 - current baseline として、その parser-side opaque slot carrier の naming は `decl_guard_slot` を第一候補にし、thin lowering bridge は slot-only helper ではなく option-level structural transfer として読むのが自然である
+- current baseline として、stage 1 actual parser spike の smoke family は `e4-malformed-lineage` と `e7-write-fallback-after-expiry` の two-fixture pair を最小 working set とし、`e3-option-admit-chain` は later-stage contrast reference に残すのが自然である
 - その次段で比較するべきなのは、
   - `decl_guard_slot` 内部 carrier が raw text / token slice / opaque leaf のどれか
   - option-level structural transfer の actual private API surface
-  - stage 1 smoke をどの fixture family まで使うか
+  - actual parser spike の private module / helper 配置
   であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない

@@ -222,6 +222,11 @@ current repo の next narrow step としては、次の組合せが最も自然�
 - actual Rust type 名
 - bridge helper の配置が `examples/` / `tests/support/` / parser spike private module のどこになるか
 - later stage で `decl_guard_slot` を parser-side richer carrier へ widen するかどうか
+- actual parser spike の stage 1 smoke family をどの fixture pair / trio にするか
+
+このうち stage 1 smoke family の最小 working set 比較は、
+`specs/examples/77-current-l2-stage1-parser-smoke-family-working-set.md`
+で次段の narrow task として扱う。
 
 ## current meaning
 
