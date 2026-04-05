@@ -258,6 +258,17 @@
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
   - `specs/examples/52-current-l2-try-rollback-fourth-checker-spike-comparison.md`
   - `specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md`
+
+### 2026-04-06 try-rollback AST structural helper entry-criteria addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/29-current-l2-first-parser-subset-inventory.md`
+  - `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md`
+  - `specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md`
+  - `specs/examples/52-current-l2-try-rollback-fourth-checker-spike-comparison.md`
+  - `specs/examples/53-current-l2-try-rollback-ast-structural-helper-entry-criteria.md`
+  - `docs/reports/0192-try-rollback-ast-structural-helper-entry-criteria.md`
+  - `docs/reports/0193-review-try-rollback-ast-structural-helper-entry-criteria.md`
   - `scripts/current_l2_family_checker_support.py`
   - `scripts/current_l2_same_lineage_checker.py`
   - `scripts/current_l2_missing_option_checker.py`

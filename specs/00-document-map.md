@@ -233,6 +233,8 @@
   - `TryFallback` / `AtomicCut` の structural floor を first checker cut にどこまで入れ、`place_anchor == current_place` gate と whole-store restore scope をどこから runtime / proof boundary に残すかを整理する。
 - `specs/examples/52-current-l2-try-rollback-fourth-checker-spike-comparison.md`
   - `TryFallback` / `AtomicCut` structural floor を existing checker helper family の fourth spike として今 actualize すべきか、それとも docs/runtime representative に留めるべきかを比較する。
+- `specs/examples/53-current-l2-try-rollback-ast-structural-helper-entry-criteria.md`
+  - `TryFallback` / `AtomicCut` を将来 dedicated AST structural helper として actualize するなら、parser/loader malformed source、AST-only floor、reason-row family と分ける dedicated carrier、runtime gate を non-goal に保つこと、複数の structural family を持つこと、という最小 entry criteria を整理する。
 
 ## レポート
 
