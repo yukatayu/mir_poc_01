@@ -1,6 +1,7 @@
 import contextlib
 import io
 import json
+import shlex
 import sys
 import tempfile
 import unittest
@@ -57,7 +58,9 @@ class CurrentL2ScaffoldFixtureTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
 
-            with contextlib.redirect_stdout(io.StringIO()):
+            stdout = io.StringIO()
+            stderr = io.StringIO()
+            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
                 exit_code = scaffold.main(
                     [
                         "e11-new-static-case",
@@ -78,6 +81,40 @@ class CurrentL2ScaffoldFixtureTests(unittest.TestCase):
             fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
             self.assertEqual(fixture["expected_runtime"]["enters_evaluation"], False)
             self.assertEqual(fixture["expected_runtime"]["final_outcome"], "not_evaluated")
+            self.assertIn("suggest-checked-reasons", stderr.getvalue())
+            self.assertIn("after first authoring pass", stderr.getvalue())
+            self.assertIn(str(fixture_path), stdout.getvalue())
+
+    def test_runtime_scaffold_does_not_print_checked_reasons_followup_reminder(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir)
+            stdout = io.StringIO()
+            stderr = io.StringIO()
+
+            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+                exit_code = scaffold.main(
+                    [
+                        "e14-runtime-no-static-followup",
+                        "--kind",
+                        "runtime",
+                        "--output-dir",
+                        str(output_dir),
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            self.assertNotIn("suggest-checked-reasons", stderr.getvalue())
+
+    def test_static_only_followup_message_shell_quotes_fixture_path(self) -> None:
+        fixture_path = Path("dir with space") / "e11 (new).json"
+
+        message = scaffold.static_only_followup_message(fixture_path)
+
+        expected_path = shlex.quote(str(fixture_path))
+        self.assertIn(
+            f"suggest-checked-reasons {expected_path} --run-label TODO --overwrite",
+            message,
+        )
 
     def test_existing_target_requires_overwrite_flag(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

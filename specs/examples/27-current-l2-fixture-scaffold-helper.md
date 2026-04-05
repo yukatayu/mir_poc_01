@@ -92,6 +92,13 @@ fixture kind の選択から直ちに従うからである。
 
 optional `expected_static.checked_reasons` も helper は自動補完しない。
 actual static gate compare に使うかどうかは authoring / review task 側で決める。
+ただし static-only scaffold に限り、helper は stderr で
+display-only assist への follow-up reminder を出してよい。
+これは semantics inference ではなく、
+「first authoring pass の後で actual static gate wording を確認する場所」
+を示す operational hint に留まる。
+command suggestion は copyable であるべきなので、
+fixture path は shell-safe quoting した形で埋め込む。
 
 ## host plan sidecar
 

@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import shlex
 import sys
 from pathlib import Path
 from typing import Any
@@ -83,6 +84,16 @@ def build_host_plan_document() -> dict[str, Any]:
     }
 
 
+def static_only_followup_message(fixture_path: Path) -> str:
+    quoted_fixture_path = shlex.quote(str(fixture_path))
+    return (
+        "static-only scaffold follow-up: after first authoring pass, "
+        "if this fixture becomes malformed/underdeclared, run "
+        f"`python3 scripts/current_l2_detached_loop.py suggest-checked-reasons {quoted_fixture_path} "
+        "--run-label TODO --overwrite` to inspect actual static gate wording."
+    )
+
+
 def write_json(path: Path, document: dict[str, Any]) -> None:
     path.write_text(
         json.dumps(document, ensure_ascii=False, indent=2) + "\n",
@@ -162,6 +173,8 @@ def main(argv: list[str] | None = None) -> int:
     print(fixture_path)
     if args.kind == "runtime":
         print(host_plan_path)
+    else:
+        print(static_only_followup_message(fixture_path), file=sys.stderr)
     return 0
 
 

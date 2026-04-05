@@ -159,6 +159,8 @@ current helper は、`expected_static` 配下に貼り付ける最小 row とし
 - scaffold helper は `checked_reasons` を自動補完しない
 - display-only assist は scaffold 完了後、fixture が static gate を通せる段階で使う
 - scaffold helper 自体に semantics inference mode を足さない
+- static-only scaffold に follow-up reminder を出してもよいが、これは copyable suggestion helper の入口案内に留める
+- reminder に埋め込む fixture path は shell-safe quoting し、copiable command として破綻しないようにする
 
 ## detached static gate artifact との関係
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（checked static reasons authoring assist 追加時点）
+最終更新: 2026-04-05（checked static reasons assist reconciliation 完了時点）
 
 ## 位置づけ
 
@@ -22,6 +22,7 @@
 - runtime regression catalog に `e11-perform-via-ensure-then-success` を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることを machine-check で固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - static-only malformed / underdeclared fixture に対しては、`scripts/current_l2_detached_loop.py suggest-checked-reasons` から actual static gate `checker_core.reasons` を見て `expected_static.checked_reasons` 候補を display-only で確認できるようになった。helper は fixture JSON を自動更新しない。
+- static-only scaffold helper は fixture JSON を変えないまま、authoring 後段で `suggest-checked-reasons` を使えることを stderr reminder として案内できるようになった。reminder command の fixture path は shell-safe quoting で copyable に保っている。
 - detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
 - aggregate emitter 内 private transform を `examples/support/current_l2_detached_aggregate_support.rs` へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary を non-production のまま shared helper 化した。
 - static gate verdict / reasons を `examples/support/current_l2_static_gate_support.rs` と `current_l2_emit_static_gate.rs` から detached artifact として保存できるようにし、static-only / malformed / underdeclared fixture を `smoke-static-gate` で compare できるようにした。
@@ -73,7 +74,7 @@
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
 | parser-free PoC execution stack | 87% | 82% | 96% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、aggregate transform と static gate transform の repo 内 callable boundary が shared helper として入り、static gate reasons は detached helper compare、optional checked carrier、helper-local reason-code mirror、display-only authoring assist の境界まで整理された |
 | detached export / validation loop | 89% | 85% | 96% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper に加え、static gate detached non-core reason-code mirror を reference-only compare で扱う cut と、checked_reasons suggestion を display-only で返す wrapper convenience まで揃った |
-| fixture authoring / elaboration 実務 | 81% | 84% | 88% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、`e4` / `e5` で optional `checked_reasons` を actual corpus に narrow adoption した。valid fixture 群は actual static gate `reasons` が空なため `checked_reasons = []` を広げず、display-only assist で adoption 候補だけを確認できるようにしている |
+| fixture authoring / elaboration 実務 | 82% | 85% | 89% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path に加え、`e4` / `e5` で optional `checked_reasons` を actual corpus に narrow adoption した。valid fixture 群は actual static gate `reasons` が空なため `checked_reasons = []` を広げず、display-only assist と scaffold follow-up reminder で adoption 候補だけを確認できるようにしている |
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 58% | 50% | 61% | 着手可能 | non-production aggregate emitter と aggregate compare helperに加え、aggregate transform の actual narrow cut は shared support helper まで進んだが public API と final compare 契約は未決 |
@@ -144,3 +145,6 @@
 - 2026-04-05 19:52 JST — `checked_reasons` から typed reason code へ進める条件を docs-only で整理し、stable cluster と parametric shape の entry criteria を切り出した。next は static gate reason code を detached artifact 側へ mirror するか、fixture authoring で checked carrier 採用を広げるかの比較段階。
 - 2026-04-05 20:00 JST — valid fixture に `checked_reasons = []` を広く足す task は current L2 では優先しないと判断し、`specs/examples/33`、`plan/11`、`plan/15`、`progress.md` に non-adoption policy を明記した。次は scaffold / authoring helper が checked bridge 候補をどこまで assist してよいかを比較する段階。
 - 2026-04-05 20:24 JST — `checked_reasons` の authoring assist は auto-fill ではなく display-only を current cut とし、static gate artifact の actual `checker_core.reasons` を読んで suggestion を返す helper と `suggest-checked-reasons` wrapper を追加した。これで malformed / underdeclared fixture の narrow adoption を hand-edit + review 前提で補助できるようになった。
+- 2026-04-05 23:10 JST — display-only `checked_reasons` assist まわりの spec / report / traceability / progress を整合させ、targeted tests・real smoke・full cargo test・docs validation が揃った。次は assist を数回実地で回し、typed reason code への first-class 昇格を急がず authoring 実務の摩擦点をさらに絞る段階。
+- 2026-04-05 23:34 JST — static-only scaffold helper から `suggest-checked-reasons` への stderr follow-up reminder を追加し、fixture JSON を変えずに authoring 次段の narrow helper を案内する cut を docs / tests / progress に揃えた。
+- 2026-04-05 20:34 JST — `checked_reasons` assist reconciliation を閉じ、existing spec / helper / report / traceability / progress の factual trail を揃えたうえで、static-only scaffold reminder の shell-safe quoting を test-first で固定した。次は current detached validation loop を実地の fixture authoring へさらに接続する段階。
