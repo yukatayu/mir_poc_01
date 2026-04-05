@@ -219,6 +219,14 @@
   - `scripts/tests/test_current_l2_missing_option_checker.py`
   - `scripts/tests/test_current_l2_capability_checker.py`
 
+### 2026-04-06 generic family checker entry comparison addendum
+
+- specs:
+  - `specs/examples/50-current-l2-generic-family-checker-entry-comparison.md`
+- reports:
+  - `docs/reports/0182-generic-family-checker-entry-comparison.md`
+  - `docs/reports/0183-review-generic-family-checker-entry-comparison.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

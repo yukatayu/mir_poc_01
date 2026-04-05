@@ -128,7 +128,8 @@
 - missing-option structure floor についても helper-local / non-production second spike が入った
 - capability strengthening floor についても `e13` / `e20` を根拠に helper-local / non-production third spike が入った
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
-- その next OPEN は、family facade を保ったまま十分か、それとも checker-side shared family compare entry を別 helper として切るべきかである
+- current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める
+- その next OPEN は、generic entry の比較を later public checker API comparison と同時に行うべきか、それともその前段で別 helper として試すべきかである
 - typed reason code に進むとしても、duplicate reason のように helper 内部構造へ近い cluster は急いで code 化しない
 - ただし `checked_reasons` と `checked_reason_codes` をいつ統合・縮退させるか、stable cluster と duplicate cluster の境界を later verifier / parser workstream でどう扱うかは引き続き OPEN であり、current judgment は additive coexistence 維持である
 - ただし capability floor の corpus coverage は `2` まで厚くなったとはいえ、same-lineage / missing-option よりは依然として薄いので、public checker API cut の前に helper-local evidence をもう少し積む余地がある

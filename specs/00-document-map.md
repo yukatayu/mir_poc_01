@@ -227,6 +227,8 @@
   - missing-option second checker spike の次段として capability strengthening floor を helper-local に切り出す最小 cut を整理する。
 - `specs/examples/49-current-l2-shared-family-checker-support-helper.md`
   - same-lineage / missing-option / capability の 3 checker spike を family facade 維持のまま shared support helper へ薄く寄せる最小 cut を整理する。
+- `specs/examples/50-current-l2-generic-family-checker-entry-comparison.md`
+  - shared support helper 導入後も family facade script を維持し、generic checker-side shared entry はまだ切らない current judgment を整理する。
 
 ## レポート
 
@@ -278,6 +280,7 @@
   - parser なし minimal interpreter の second checker spike として missing-option structure floor を helper-local に切り出す cut は `specs/examples/47-current-l2-missing-option-second-checker-spike.md` に置く。
   - parser なし minimal interpreter の third checker spike として capability strengthening floor を helper-local に切り出す cut は `specs/examples/48-current-l2-capability-third-checker-spike.md` に置く。
   - parser なし minimal interpreter の 3 checker spike で duplicated している compare contract を shared support helper へ寄せる最小 refactor cut は `specs/examples/49-current-l2-shared-family-checker-support-helper.md` に置く。
+  - parser なし minimal interpreter の generic checker-side shared family compare entry をまだ切らず、family facade を維持する current judgment は `specs/examples/50-current-l2-generic-family-checker-entry-comparison.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor
