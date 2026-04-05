@@ -190,6 +190,8 @@
   2. `try` / rollback structural floor
   3. request / admissibility cluster
   の checker-led staged spike として進める方が自然である。
+- さらに current docs-only refinement として、stage 1 の chain / declaration structural floor に含める declaration-side guard slot は predicate fragment parser の入口としてではなく、option declaration に attached した opaque slot として扱うのが最小である。
+- したがって stage 1 では、slot の existence / attachment / boundary だけを parse 対象に残し、guard fragment の parse / well-formedness は stage 3 以降へ残す。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。
 
 ### first checker cut / proof boundary

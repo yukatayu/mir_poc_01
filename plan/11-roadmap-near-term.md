@@ -197,8 +197,19 @@
 - current baseline として、current companion notation から first parser cut に入れてよい semantic cluster は narrow inventory 化済みである
 - current baseline として、parser 導入前の syntax decision inventory は plan と spec に切り出し済みである
 - current baseline として、first parser cut inventory は first checker cut の local / structural judgment と theorem prover / model checker 側へ残す property の entry criteria に docs-only で接続済みである
-- current next narrow step としては、actual parser spike の比較を monolithic cut ではなく checker-led staged spike として扱い、
+- current baseline として、actual parser spike の比較を monolithic cut ではなく checker-led staged spike として扱い、
   1. chain / declaration structural floor
   2. `try` / rollback structural floor
   3. request / admissibility cluster
   の順で source-backed priority を揃えるのが自然である
+- current next narrow step としては、stage 1 parser spike の accepted parse cluster を
+  - option declaration core
+  - explicit edge-row family
+  - edge-local lineage metadata
+  - declaration-side guard slot
+  に留めつつ、declaration-side guard slot は predicate fragment parse へ進めず opaque attached slot として扱う cut を維持するのが自然である
+- その次段で比較するべきなのは、
+  - opaque attached slot の actual carrier 名
+  - parser cut と parser-free AST fixture schema の actual handoff
+  - stage 1 smoke をどの fixture family まで使うか
+  であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない
