@@ -105,6 +105,58 @@ class StaticGateLoopTests(unittest.TestCase):
             ],
         )
 
+    def test_suggest_checked_reasons_emits_artifact_then_delegates_to_assist(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "left.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+
+            emitted: list[tuple[Path, Path, bool]] = []
+            assisted: list[list[str]] = []
+
+            original_emit = loop.emit_static_gate
+            original_assist = loop.checked_reasons_assist.main
+
+            def fake_emit(fixture: Path, output: Path, overwrite: bool) -> int:
+                emitted.append((fixture, output, overwrite))
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_text("{}", encoding="utf-8")
+                return 0
+
+            def fake_assist(argv: list[str] | None = None) -> int:
+                assisted.append(list(argv or []))
+                return 0
+
+            loop.emit_static_gate = fake_emit
+            loop.checked_reasons_assist.main = fake_assist
+            try:
+                exit_code = loop.command_suggest_checked_reasons(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="assist-run",
+                        output_path=None,
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_static_gate = original_emit
+                loop.checked_reasons_assist.main = original_assist
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(len(emitted), 1)
+        expected_artifact = (
+            temp_root
+            / "artifacts"
+            / "static-gates"
+            / "assist-run"
+            / "left.static-gate.json"
+        )
+        self.assertEqual(emitted[0], (fixture_path, expected_artifact, True))
+        self.assertEqual(assisted, [[str(fixture_path), str(expected_artifact)]])
+
 
 if __name__ == "__main__":
     unittest.main()

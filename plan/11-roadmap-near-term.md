@@ -145,6 +145,7 @@
 - detached static gate artifact 側には helper-local / reference-only な `reason_codes` mirror を actualize してよいが、next narrow step はそれを first-class typed source に昇格させるか、fixture-side typed carrier を別に切るかの比較である
 - その前段として、`e4` / `e5` のような static-only malformed / underdeclared fixture へ `checked_reasons` を narrow adoption し、explanatory `reasons` と actual wording bridge の split を actual corpus で回してよい
 - current valid fixture 群では actual static gate `reasons` が空な例が多いため、`checked_reasons = []` を広く足す task は優先しない
+- その next narrow step として、`checked_reasons` を auto-fill しない display-only authoring assist を current helper stack に置き、actual static gate wording の narrow adoption を review 可能にしてよい
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る

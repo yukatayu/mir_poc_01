@@ -263,6 +263,9 @@ current L2 では production exporter API はまだ固定しない。
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ作る
   - runtime / static-only の違いと empty `.host-plan.json` sidecar の有無だけを扱い、expectation completion は authoring 側へ残す
+- `scripts/current_l2_checked_reasons_assist.py`
+  - detached static gate artifact の actual `checker_core.reasons` を読んで、fixture-side `expected_static.checked_reasons` の copyable suggestion を display-only で返す
+  - fixture JSON の自動更新や `checked_reasons = []` の一括補完は行わない
 
 これらは current helper stack の public behavior を置き換えない。
 実行補助であり、production API や final serialization contract として扱わない。
