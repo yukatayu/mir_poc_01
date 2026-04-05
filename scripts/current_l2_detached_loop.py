@@ -31,8 +31,19 @@ AGGREGATE_EMITTER_CMD = [
     "current_l2_emit_detached_aggregate",
     "--",
 ]
+STATIC_GATE_EMITTER_CMD = [
+    "cargo",
+    "run",
+    "-q",
+    "-p",
+    "mir-semantics",
+    "--example",
+    "current_l2_emit_static_gate",
+    "--",
+]
 DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_artifacts.py"
 AGGREGATE_DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_aggregates.py"
+STATIC_GATE_DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_static_gate_artifacts.py"
 
 
 def ensure_run_label(label: str) -> str:
@@ -65,6 +76,19 @@ def aggregate_artifact_path(
         / "aggregates"
         / ensure_run_label(run_label)
         / "batch-summary.detached.json"
+    )
+
+
+def static_gate_artifact_path(
+    artifact_root: Path,
+    run_label: str,
+    fixture_path: Path,
+) -> Path:
+    return (
+        artifact_root
+        / "static-gates"
+        / ensure_run_label(run_label)
+        / f"{fixture_path.stem}.static-gate.json"
     )
 
 
@@ -123,6 +147,27 @@ def emit_aggregate(
     return run_subprocess(cmd)
 
 
+def emit_static_gate(
+    fixture_path: Path,
+    output_path: Path,
+    overwrite: bool,
+) -> int:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if output_path.exists() and not overwrite:
+        print(
+            f"artifact already exists: {output_path} (use --overwrite to replace)",
+            file=sys.stderr,
+        )
+        return 2
+    cmd = [
+        *STATIC_GATE_EMITTER_CMD,
+        str(fixture_path),
+        "--output",
+        str(output_path),
+    ]
+    return run_subprocess(cmd)
+
+
 def compare_artifacts(left: Path, right: Path) -> int:
     cmd = [sys.executable, str(DIFF_HELPER), str(left), str(right)]
     return run_subprocess(cmd)
@@ -130,6 +175,11 @@ def compare_artifacts(left: Path, right: Path) -> int:
 
 def compare_aggregates(left: Path, right: Path) -> int:
     cmd = [sys.executable, str(AGGREGATE_DIFF_HELPER), str(left), str(right)]
+    return run_subprocess(cmd)
+
+
+def compare_static_gates(left: Path, right: Path) -> int:
+    cmd = [sys.executable, str(STATIC_GATE_DIFF_HELPER), str(left), str(right)]
     return run_subprocess(cmd)
 
 
@@ -174,6 +224,21 @@ def command_emit_aggregate(args: argparse.Namespace) -> int:
         else aggregate_artifact_path(Path(args.artifact_root), args.run_label)
     )
     exit_code = emit_aggregate(fixture_directory, output_path, args.overwrite)
+    if exit_code == 0:
+        print(output_path)
+    return exit_code
+
+
+def command_emit_static_gate(args: argparse.Namespace) -> int:
+    fixture_path = Path(args.fixture_path)
+    output_path = (
+        Path(args.output_path)
+        if args.output_path
+        else static_gate_artifact_path(
+            Path(args.artifact_root), args.run_label, fixture_path
+        )
+    )
+    exit_code = emit_static_gate(fixture_path, output_path, args.overwrite)
     if exit_code == 0:
         print(output_path)
     return exit_code
@@ -261,6 +326,50 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_compare_static_gates(args: argparse.Namespace) -> int:
+    return compare_static_gates(
+        Path(args.left_artifact),
+        Path(args.right_artifact),
+    )
+
+
+def command_smoke_static_gate(args: argparse.Namespace) -> int:
+    artifact_root = Path(args.artifact_root)
+    fixture_path = Path(args.fixture_path)
+    run_label = ensure_run_label(args.run_label)
+    left_artifact = static_gate_artifact_path(artifact_root, run_label, fixture_path)
+
+    emit_exit = emit_static_gate(fixture_path, left_artifact, args.overwrite)
+    if emit_exit != 0:
+        return emit_exit
+
+    print(f"static gate artifact: {left_artifact}", flush=True)
+
+    if not args.reference_fixture:
+        return 0
+
+    reference_fixture = Path(args.reference_fixture)
+    reference_label = ensure_run_label(args.reference_label)
+    right_artifact = static_gate_artifact_path(
+        artifact_root,
+        reference_label,
+        reference_fixture,
+    )
+    reference_exit = emit_static_gate(
+        reference_fixture,
+        right_artifact,
+        args.overwrite,
+    )
+    if reference_exit != 0:
+        return reference_exit
+
+    print(f"reference static gate artifact: {right_artifact}", flush=True)
+    compare_exit = compare_static_gates(left_artifact, right_artifact)
+    if compare_exit not in {0, 1}:
+        return compare_exit
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -324,6 +433,32 @@ def build_parser() -> argparse.ArgumentParser:
     )
     emit_aggregate_parser.set_defaults(func=command_emit_aggregate)
 
+    emit_static_gate_parser = subparsers.add_parser(
+        "emit-static-gate",
+        help="1 fixture の static gate artifact を保存する",
+    )
+    emit_static_gate_parser.add_argument("fixture_path")
+    emit_static_gate_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    emit_static_gate_parser.add_argument(
+        "--run-label",
+        default="manual",
+        help="static gate artifact を保存する run label",
+    )
+    emit_static_gate_parser.add_argument(
+        "--output-path",
+        help="explicit output path; when omitted, static gate path is derived from root/label/stem",
+    )
+    emit_static_gate_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifact を明示的に上書きする",
+    )
+    emit_static_gate_parser.set_defaults(func=command_emit_static_gate)
+
     compare_artifacts_parser = subparsers.add_parser(
         "compare-artifacts",
         help="既存 2 artifact の payload_core を比較する",
@@ -344,6 +479,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="artifact root directory (default: target/current-l2-detached)",
     )
     compare_aggregates_parser.set_defaults(func=command_compare_aggregates)
+
+    compare_static_gate_parser = subparsers.add_parser(
+        "compare-static-gates",
+        help="既存 2 static gate artifact の checker_core を比較する",
+    )
+    compare_static_gate_parser.add_argument("left_artifact")
+    compare_static_gate_parser.add_argument("right_artifact")
+    compare_static_gate_parser.set_defaults(func=command_compare_static_gates)
 
     compare_fixtures_parser = subparsers.add_parser(
         "compare-fixtures",
@@ -406,6 +549,37 @@ def build_parser() -> argparse.ArgumentParser:
         help="existing artifacts を明示的に上書きする",
     )
     smoke_fixture_parser.set_defaults(func=command_smoke_fixture)
+
+    smoke_static_gate_parser = subparsers.add_parser(
+        "smoke-static-gate",
+        help="1 fixture の static gate artifact を保存し、必要なら reference fixture compare まで回す",
+    )
+    smoke_static_gate_parser.add_argument("fixture_path")
+    smoke_static_gate_parser.add_argument(
+        "--reference-fixture",
+        help="optional reference fixture for checker_core compare",
+    )
+    smoke_static_gate_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    smoke_static_gate_parser.add_argument(
+        "--run-label",
+        default="static-gate",
+        help="primary run label for the static gate artifact",
+    )
+    smoke_static_gate_parser.add_argument(
+        "--reference-label",
+        default="reference",
+        help="run label used when --reference-fixture is supplied",
+    )
+    smoke_static_gate_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifacts を明示的に上書きする",
+    )
+    smoke_static_gate_parser.set_defaults(func=command_smoke_static_gate)
 
     return parser
 

@@ -234,14 +234,22 @@ current L2 では production exporter API はまだ固定しない。
 - `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
   - `BatchRunSummary -> detached aggregate artifact` の pure transform だけを shared support module として持つ
   - example private transform を repo 内 callable boundary へ落とす actual narrow cut だが、`lib.rs` / `harness.rs` の public API には上げない
+- `crates/mir-semantics/examples/current_l2_emit_static_gate.rs`
+  - `load_fixture_from_path` / `static_gate_detailed` を起点に static gate artifact sketch を出す
+- `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
+  - `CurrentL2Fixture + StaticGateResult -> static gate artifact` の pure transform だけを shared support module として持つ
+  - first checker cut の local / structural floor を detached validation loop へ接続する actual narrow cut だが、`lib.rs` / `harness.rs` の public API には上げない
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
 - `scripts/current_l2_diff_detached_aggregates.py`
   - aggregate artifact の `summary_core` exact-compare を最小で比較する
+- `scripts/current_l2_diff_static_gate_artifacts.py`
+  - static gate artifact の `checker_core` exact-compare を最小で比較する
 - `scripts/current_l2_detached_loop.py`
   - bundle emitter、aggregate emitter、bundle diff helper、aggregate diff helper を detached validation loop として薄くつなぐ
   - 1 fixture export、aggregate summary export、2 bundle artifact compare、2 aggregate artifact compare を回しやすくする
   - `smoke-fixture` subcommand により、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せる
+  - `emit-static-gate` / `compare-static-gates` / `smoke-static-gate` により、static-only / malformed / underdeclared fixture でも static gate artifact の保存と compare を回せる
   - compare helper の exit code `1` は informational difference として許容し、helper failure だけを non-zero で止める
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ作る

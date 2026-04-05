@@ -187,8 +187,16 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `bundle_failure_kind_counts` を migrated kind only の partial histogram として non-production aggregate artifact に narrow に落とす
   - artifact transform 本体は `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs` へ委譲し、example 内 private code ではなく repo 内 callable boundary として保つ
   - helper stack 本体の public API を増やさない
+- `crates/mir-semantics/examples/current_l2_emit_static_gate.rs`
+  - static gate artifact の operational aid
+  - `load_fixture_from_path` / `static_gate_detailed` の public behavior を再利用する
+  - runtime artifact と統合せず、`fixture_context` / `checker_core` だけを持つ static-only helper cut に留める
+  - helper stack 本体の public API を増やさない
 - `crates/mir-semantics/examples/support/current_l2_detached_aggregate_support.rs`
   - `BatchRunSummary -> detached aggregate artifact` の pure transform と carrier struct を持つ shared support helper
+  - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
+- `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
+  - `CurrentL2Fixture + StaticGateResult -> static gate artifact` の pure transform と carrier struct を持つ shared support helper
   - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する repo-level helper
@@ -198,11 +206,15 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - aggregate artifact の `summary_core` だけを比較する repo-level helper
   - `bundle_failure_kind_counts_scope = "migrated-kinds-only"` を core compare に残す
   - `aggregate_context` / `detached_noncore` は reference-only として読む
+- `scripts/current_l2_diff_static_gate_artifacts.py`
+  - static gate artifact の `checker_core` だけを比較する repo-level helper
+  - `fixture_context` は reference-only として読む
 - `scripts/current_l2_detached_loop.py`
   - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper を current validation loop 向けに束ねる薄い wrapper
   - `target/current-l2-detached/` を current non-production default candidate として扱う
   - explicit path compare、fixture-to-artifact compare、aggregate summary export、run-label aggregate compare を最小で支える
   - `smoke-fixture` subcommand では、1 fixture の bundle emit、optional reference compare、single-fixture aggregate smoke を 1 command で支える
+  - `smoke-static-gate` subcommand では、1 fixture の static gate artifact emit と optional reference compare を 1 command で支える
   - compare helper の exit code `1` は difference found として informational に許容し、emitter / helper failure だけを non-zero で返す
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを current validation loop の手前で補助する

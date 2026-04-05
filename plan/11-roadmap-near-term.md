@@ -137,7 +137,9 @@
 - detached exporter chain の docs-only judgment を 1 箇所へ集約し、non-production の tiny emitter / diff helper / fixture template を PoC loop 補助として足す
 - detached validation loop の storage/path policy、tiny wrapper、aggregate export の actual narrow cut を docs-only から thin operational aid へ進める
 - aggregate export の actual narrow cut として、example private transform を shared support module へ落とし、public API を増やさずに repo 内 callable boundary へ寄せる
+- first checker cut の local / structural floor を detached validation loop に接続するなら、runtime artifact と混ぜずに static gate artifact helper を別立てで足す
 - detached validation loop の common path として、1 fixture の bundle export / optional reference compare / single-fixture aggregate smoke を 1 command で回す helper を足す
+- static-only / malformed / underdeclared fixture の common path として、static gate artifact の emit / compare を 1 command で回す helper を足す
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
 - fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る

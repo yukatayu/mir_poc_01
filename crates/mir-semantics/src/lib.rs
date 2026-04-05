@@ -1289,6 +1289,8 @@ pub fn static_gate_detailed(fixture: &CurrentL2Fixture) -> StaticGateResult {
         }
     }
 
+    reasons.sort();
+
     StaticGateResult { verdict, reasons }
 }
 

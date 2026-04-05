@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（aggregate detached transform helper 追加時点）
+最終更新: 2026-04-05（static gate artifact helper 追加時点）
 
 ## 位置づけ
 
@@ -23,6 +23,7 @@
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - detached validation loop には `smoke-fixture` convenience が入り、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せるようになった。
 - aggregate emitter 内 private transform を `examples/support/current_l2_detached_aggregate_support.rs` へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary を non-production のまま shared helper 化した。
+- static gate verdict / reasons を `examples/support/current_l2_static_gate_support.rs` と `current_l2_emit_static_gate.rs` から detached artifact として保存できるようにし、static-only / malformed / underdeclared fixture を `smoke-static-gate` で compare できるようにした。
 - parser boundary については、final grammar を先に凍らせずに first parser cut に入れてよい semantic cluster を先に inventory 化する段階へ入った。
 - static analysis / theorem prover 境界については、first checker cut に入れてよい local / structural judgment と external verifier 側へ残す global property の floor を docs-only で切り始めた。
 - いま重いのは semantics そのものより、**fixture authoring / elaboration** と **detached validation loop の実運用面**である。
@@ -64,13 +65,13 @@
 | 基礎文書・decision level・invariants | 92% | 86% | 70% | 着手可能 | repo の基礎境界はかなり揃っている |
 | Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
-| parser-free PoC execution stack | 84% | 78% | 92% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、aggregate transform の repo 内 callable boundary が shared helper として入った |
-| detached export / validation loop | 85% | 81% | 94% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper、aggregate transform helper まで揃い、runtime regression の loop 実地反復がさらに進んだ |
-| fixture authoring / elaboration 実務 | 74% | 77% | 79% | 着手可能 | template / scaffold helper は揃い、scaffold 起点の runtime regression を completed fixture まで増やし、1 fixture smoke loop も 1 command で回せるようになった |
+| parser-free PoC execution stack | 85% | 79% | 93% | 着手可能 | interpreter / host / bundle / batch / selection / profile に加え、aggregate transform と static gate transform の repo 内 callable boundary が shared helper として入った |
+| detached export / validation loop | 87% | 83% | 95% | 着手可能 | bundle / aggregate / static gate emitter、bundle / aggregate / static gate compare helper、wrapper、storage candidate、scaffold helper、fixture smoke helper まで揃い、runtime と static gate の loop 実地反復がさらに進んだ |
+| fixture authoring / elaboration 実務 | 76% | 79% | 81% | 着手可能 | template / scaffold helper は揃い、runtime fixture と static-only fixture の detached compare path が分かれたので、fixture 追加後の validation loop 接続が少し軽くなった |
 | parser / syntax finalization 準備 | 46% | 52% | 20% | 着手可能 | first parser cut に入れてよい semantic cluster の inventory までは見えたが、final grammar と exact lexical choice は未決 |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 58% | 50% | 61% | 着手可能 | non-production aggregate emitter と aggregate compare helperに加え、aggregate transform の actual narrow cut は shared support helper まで進んだが public API と final compare 契約は未決 |
-| static analysis / type / theorem prover workstream | 22% | 16% | 6% | 後段依存 | first checker cut の local / structural floor と external verifier 側へ残す property までは見えたが、actual checker / proof relation は未着手であり、heavy workstream として扱う |
+| static analysis / type / theorem prover workstream | 28% | 20% | 14% | 着手可能 | first checker cut の local / structural floor に加え、static gate verdict / reasons を detached artifact loop に接続する actual helper までは入ったが、future checker API と proof relation は未決 |
 | portability / observability / debug hook 設計 | 20% | 14% | 10% | 後段依存 | HW 非依存と step / graph 可視化余地は要件化したが contract はまだない |
 | Mirrorea fabric | 18% | 12% | 8% | 要仕様確認 | 境界整理はあるが current mainline 実装はまだ先 |
 | Typed-Effect Wiring Platform | 12% | 8% | 6% | 要仕様確認 | 位置づけはあるが concrete architecture は後段 |
@@ -127,3 +128,5 @@
 - 2026-04-05 17:30 JST — first checker cut entry criteria を追加し、same-lineage static evidence floor、malformed / underdeclared rejection、minimal capability strengthening prohibition、clause attachment、minimal predicate fragment、`try` / rollback locality の structural floor を local checker 側へ残し、global invariant proof は external verifier 側へ送る cut を docs-only で固定し始めた。次は aggregate actual API cut を進めるか、この gate を actual checker spike へ接続する段階。
 - 2026-04-05 17:55 JST — aggregate emitter 内 private transform を `examples/support/current_l2_detached_aggregate_support.rs` へ切り出し、`BatchRunSummary -> detached aggregate artifact` の repo 内 callable boundary を non-production のまま shared helper 化した。full `cargo test -p mir-semantics` と detached loop smoke が通ったので、次は actual public exporter API をまだ凍らせずに、この cut を loop smoke と docs mirror で安定化させる段階。
 - 2026-04-05 18:05 JST — aggregate transform helper task の report / review / traceability を閉じ、shared helper cut が public API へ越境していないことを reviewer と fresh verification で確認した。次は aggregate compare contract と storage/path policy の current candidate を smoke evidence でさらに固める段階。
+- 2026-04-05 18:25 JST — static gate verdict / reasons を detached validation loop に接続する helper と `smoke-static-gate` wrapper を追加し、`e4-malformed-lineage` と `e5-underdeclared-lineage` の compare smoke が通った。次は aggregate compare contract / storage candidate をさらに固めるか、first checker cut を actual checker spike に一段寄せる段階。
+- 2026-04-05 18:37 JST — static gate artifact loop の review fix を反映し、multi-reason fixture で `checker_core.reasons` の順序を deterministic に固定した。full `cargo test -p mir-semantics`、Python helper tests、`smoke-static-gate`、既存 `smoke-fixture`、docs validation が通ったので、次は `expected_static.reasons` を actual machine-check に寄せる段階。
