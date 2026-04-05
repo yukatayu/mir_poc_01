@@ -17,6 +17,8 @@
 | path canonicalization | helper / packaging | OPEN | selector / single-fixture / sidecar discovery の長期互換性に影響 | current L2 では minimal behavior のみ保持 |
 | detached trace / audit serialization | runtime / tooling | OPEN / docs-only minimal boundary あり | trace / audit を helper 内表現に閉じ込めたままでは repo 外保存・再比較・後解析が重い | exact compare core / detached non-core / human-facing explanation を分けた docs-only minimal shape を先に切る |
 | richer host interface | runtime boundary | OPEN / comparison 上の後続候補 | current host harness を production host に誤昇格しやすく、coverage analysis を先に肥大化させやすい | helper と production host を分離して記述し、detached artifact 境界の後で narrow に切る |
+| constrained continuation / multi-shot | semantics / runtime boundary | OPEN / FUTURE | unrestricted multi-shot が linear resource、rollback frontier、lifetime crossing を壊しやすい | coroutine semantics を Mir-0 の外に残し、one-shot / multi-shot / capture restriction を将来 workstream で明示する |
+| dynamic membership / causal metadata | shared space / fabric | OPEN / FUTURE | participant churn を plain vector clock deletion だけで扱うと membership change と causal history が混線しやすい | shared-space / Mirrorea workstream 側で、membership reconfiguration と causal metadata を分離して設計する |
 | multi-request scheduler | runtime | FUTURE | current direct-style interpreter と概念が混ざる | 現時点では未着手を明示 |
 | `Approximate` / `Compensate` | semantics / runtime | FUTURE | failure space と rollback を広く再設計する必要がある | 今は plan に残すだけ |
 
@@ -111,6 +113,27 @@
 - uncovered call detection、coverage explanation、preflight の必要性は見えているが、先に host API を肥大化させるより detached artifact 境界を切った方が PoC 前進量が大きい
 - current host coverage failure が batch summary で文字列検出に依存している点は drift source だが、これは richer host interface を直ちに入れる理由ではなく、後段で typed coverage field を検討する入口とみなす
 
+### constrained continuation / multi-shot
+
+- current repo では、無制限 coroutine model を採らない方向が decision register にある一方、one-shot / multi-shot の最終モデル、suspension restriction、lifetime crossing rule は未決である。
+- current L2 / Mir-0 は linear resource、local rollback、monotone lifetime を強く保つので、state を持つ resource を unrestricted multi-shot continuation へ黙って閉じ込める設計は緊張が大きい。
+- したがって current plan では、continuation 問題を current L2 helper task に押し込まず、将来 workstream で
+  - one-shot と multi-shot の切り分け
+  - capture restriction
+  - route / patch interaction
+  - lifetime crossing
+  をまとめて扱う必要がある。
+
+### dynamic membership / causal metadata
+
+- current repo は synchronized shared-space の小例を将来 workstream に残しているが、participant churn を持つ causal metadata policy はまだ固定していない。
+- plain vector clock に participant add / remove を直接重ねると、membership reconfiguration と causal history を同じ carrier へ押し込みやすく、leave 後の古い message を新規 join と誤読しない rule を別途必要とする。
+- current plan では、この問題を current L2 parser-free PoC に持ち込まず、
+  - shared-space / session membership
+  - membership reconfiguration / activation
+  - causal metadata / version carrier
+  を分けて設計する future problem として残す。
+
 ## 何を未決のまま残すか
 
 次は current L2 で無理に決めない。
@@ -122,6 +145,8 @@
 - detached trace / audit serialization
 - detached validation loop の actual exporter API finalization
 - richer host interface
+- constrained continuation / multi-shot model
+- shared-space membership / causal metadata policy
 - multi-request scheduler
 - `Approximate` / `Compensate`
 
