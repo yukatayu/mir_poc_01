@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（try rollback AST helper の wrapper family まで整理）
+最終更新: 2026-04-06（try rollback AST helper の generic family boundary まで整理）
 
 ## 位置づけ
 
@@ -32,6 +32,7 @@
 - さらに current docs-only refinement として、future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum `no_findings` / `findings_present` に留める current judgment を固定した。
 - さらに current docs-only refinement として、future dedicated AST structural helper を detached artifact shared carrier へ上げる閾値は、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の 5 条件が揃った時点に置き、current state ではまだ未充足だという current judgment を固定した。
 - さらに current docs-only refinement として、future dedicated AST structural helper の wrapper family は family-specific に留め、exact subcommand 名は actual helper actualization task まで deferred にする current judgment を固定した。
+- さらに current docs-only refinement として、future dedicated AST structural helper を generic structural checker family と合流させるのは later public checker API comparison と同時に扱い、actual helper actualization や wrapper naming cut と混ぜない current judgment を固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - static-only malformed / underdeclared fixture に対しては、`scripts/current_l2_detached_loop.py suggest-checked-reasons` から actual static gate `checker_core.reasons` を見て `expected_static.checked_reasons` 候補を display-only で確認できるようになった。helper は fixture JSON を自動更新しない。
 - helper-local / reference-only `detached_noncore.reason_codes` についても、`scripts/current_l2_detached_loop.py suggest-reason-codes` から future typed carrier 候補 row を display-only で確認できるようになった。これは current fixture schema の field ではなく、reference-only assist に留まり、unsupported fixture-side typed field を見つけたら fail-closed に止まる。
@@ -211,3 +212,4 @@
 - 2026-04-06 03:31 JST — future dedicated AST structural helper の structural verdict carrier / name を比較し、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum `no_findings` / `findings_present` を current docs-only minimum に固定した。次は detached artifact shared carrier へ上げる閾値をどこに置くかを比べる段階。
 - 2026-04-06 04:18 JST — future dedicated AST structural helper を detached artifact shared carrier へ上げる threshold を比較し、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の 5 条件が揃うまでは helper-local dedicated contract に留める current judgment を固定した。次は actual subcommand 名と wrapper family をいつ narrow に切ってよいかを比べる段階。
 - 2026-04-06 04:32 JST — future dedicated AST structural helper の wrapper family を比較し、family-specific wrapper は維持しつつ exact subcommand 名は actual helper actualization task まで deferred にする current judgment を固定した。次は future generic structural checker family とどこで合流させるかを比べる段階。
+- 2026-04-06 04:46 JST — future dedicated AST structural helper の generic family boundary を比較し、generic structural checker family への合流は later public checker API comparison と同時に扱い、actual helper actualization や wrapper naming cut と混ぜない current judgment を固定した。次は later public checker API comparison に載せる entry criteria をどこまで narrow に切るかを比べる段階。

@@ -60,6 +60,7 @@
 - 同様に future dedicated AST structural verdict 候補は `expected_static.checked_try_rollback_structural_verdict` であるが、current phase では **まだ fixture schema の actual field ではない**
 - 同様に future dedicated AST structural helper を detached artifact shared carrier へ mirror するのも、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の threshold が揃うまでは **まだ行わない**
 - 同様に future dedicated AST structural helper の exact subcommand 名も、actual helper actualization task までは **まだ fix しない**
+- 同様に future dedicated AST structural helper を generic structural checker family へ合流させる比較も、later public checker API comparison までは **まだ行わない**
 - current stable cluster tranche としては、stable inventory 8 kind に限って optional `expected_static.checked_reason_codes` を additive に置いてよい
 - current tranche で allowed な kind は次である
   - `missing_lineage_assertion`
@@ -87,6 +88,7 @@
 - 同様に、current helper stack では `expected_static.checked_try_rollback_structural_verdict` も actual field としてまだ受けない
 - 同様に、current helper stack では dedicated AST structural helper の shared detached carrier も actualize しない
 - 同様に、current helper stack では dedicated AST structural helper の exact family-specific subcommand もまだ actual command surface に上げない
+- 同様に、current helper stack では dedicated AST structural helper の generic structural checker family entry もまだ actualize しない
 - ただし helper は fixture JSON を自動更新しない。採用は hand-edit と review で行う
 - detached artifact loop に入れても、payload core の中心は `static_verdict` と `entered_evaluation = false` になる
 - detached validation loop continuation では、runtime bundle artifact と別に static gate artifact を保存し、`checker_core.static_verdict` / `checker_core.reasons` を compare してよい

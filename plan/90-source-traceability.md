@@ -340,12 +340,15 @@
   - `specs/examples/59-current-l2-try-rollback-ast-helper-structural-verdict-carrier.md`
   - `specs/examples/60-current-l2-try-rollback-ast-helper-shared-carrier-threshold.md`
   - `specs/examples/61-current-l2-try-rollback-ast-helper-subcommand-and-wrapper-family.md`
+  - `specs/examples/62-current-l2-try-rollback-ast-helper-generic-family-boundary.md`
   - `docs/reports/0204-try-rollback-ast-helper-structural-verdict-carrier.md`
   - `docs/reports/0205-review-try-rollback-ast-helper-structural-verdict-carrier.md`
   - `docs/reports/0206-try-rollback-ast-helper-shared-carrier-threshold.md`
   - `docs/reports/0207-review-try-rollback-ast-helper-shared-carrier-threshold.md`
   - `docs/reports/0208-try-rollback-ast-helper-subcommand-and-wrapper-family.md`
   - `docs/reports/0209-review-try-rollback-ast-helper-subcommand-and-wrapper-family.md`
+  - `docs/reports/0210-try-rollback-ast-helper-generic-family-boundary.md`
+  - `docs/reports/0211-review-try-rollback-ast-helper-generic-family-boundary.md`
 
 ### named profile catalog と mirror boundary
 
