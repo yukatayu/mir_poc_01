@@ -8,7 +8,13 @@
 ## 2. Objective
 
 Report 0126 とその差分について reviewer を 1 回だけ依頼し、
-completion が取得できない環境では local evidence fallback で task close 可否を判断する。
+direct `PerformOn` の request-local `ensure` unsatisfied regression が
+
+- semantic boundary を壊していないか
+- tentative commit suppression を十分に machine-check できているか
+- mirror / progress の説明が evidence と一致しているか
+
+を確認する。
 
 ## 3. Scope and assumptions
 
@@ -40,52 +46,47 @@ completion が取得できない環境では local evidence fallback で task cl
 
 ## 5. Actions taken
 
-1. reviewer subagent に対し、`e10` regression の semantic correctness、test coverage、mirror consistency、progress accuracy を確認するよう依頼した。
-2. ただし current environment では reviewer completion を待つ専用 tool が使えないため、依頼後は local evidence fallback に切り替えた。
-3. local fallback として次を確認した。
-   - `e10` fixture が direct `PerformOn` の `request-ensure` unsatisfied を `explicit_failure` として表現していること
-   - host plan sidecar が `request-require=satisfied`、`request-ensure=unsatisfied`、effect `success` という branch を最小で支えていること
-   - interpreter tests が broad runtime loops と focused regression の両方で `e10` を拾っていること
-   - detached bundle / aggregate smoke が current loop で通ること
-   - docs validation と `git diff --check` が green であること
-4. local fallback の結果、current task は close 可能と判断した。
+1. reviewer subagent を 1 回だけ起動し、`e10` regression の semantic correctness、test coverage、mirror consistency、progress wording を確認するよう依頼した。
+2. reviewer completion が返るまで長めに待ち、completion から次の 2 finding を得た。
+   - **medium**: focused regression が `explicit_failure` / event / metadata しか確認しておらず、success-side carrier preview が final `place_store` に commit されていないことを machine-check していない。
+   - **low**: Report 0126 と `progress.md` が commit suppression まで確認済みと読める wording だが、当時の evidence ではそこまで言えていなかった。
+3. finding への対応として、
+   - `DirectStyleEvaluator` と tiny predicate / effect oracle helper を使う focused assertion を追加し、final `place_store` が空のままであることを確認するよう修正した。
+   - Report 0126 の machine-check / docs validation evidence を current suite counts に合わせて更新した。
+4. 修正後の diff を local で再確認し、task close 可能と判断した。
 
 ## 6. Evidence / outputs / test results
 
-### reviewer fallback note
+### reviewer completion 要約
 
 ```text
-reviewer was requested once, but this session did not expose a completion-wait tool.
-task close therefore used local evidence fallback.
+finding 1 (medium):
+the regression does not actually prove that the previewed success-side commit is discarded.
+it only proves explicit_failure, events, and empty metadata/narrative.
+
+finding 2 (low):
+report/progress wording overstates the machine-check evidence because commit suppression is not asserted.
 ```
 
-### local fallback evidence
+### fix summary
+
+```text
+focused regression now:
+- reruns e10 with DirectStyleEvaluator
+- asserts terminal_outcome == explicit_failure
+- asserts final place_store.is_empty()
+```
+
+### local validation after fix
 
 ```text
 cargo test -p mir-semantics
 ...
-running 35 tests
+running 36 tests
 ...
 test perform_on_ensure_failure_returns_explicit_failure_without_non_admissible_metadata ... ok
 ...
-test result: ok. 35 passed; 0 failed
-```
-
-```text
-python3 scripts/current_l2_detached_loop.py compare-fixtures crates/mir-ast/tests/fixtures/current-l2/e1-place-atomic-cut.json crates/mir-ast/tests/fixtures/current-l2/e10-perform-on-ensure-failure.json --left-label e1-ensure-smoke --right-label e10-ensure-smoke --overwrite
-...
-payload_core differences:
-- payload_core.event_kinds: left=["perform-success", "atomic-cut", "perform-failure"] right=["perform-failure"]
-```
-
-```text
-python3 scripts/current_l2_detached_loop.py compare-aggregates agg-e10-full agg-e10-only
-...
-summary_core differences:
-- summary_core.total_bundles: left=10 right=1
-- summary_core.runtime_bundles: left=8 right=1
-- summary_core.static_only_bundles: left=2 right=0
-- summary_core.passed: left=10 right=1
+test result: ok. 36 passed; 0 failed
 ```
 
 ```text
@@ -102,8 +103,8 @@ git diff --check
 
 ## 7. What changed in understanding
 
-- direct `PerformOn` の `ensure` failure は current L2 で request contract failure として narrow に固定でき、fallback / non-admissible / `Reject` family と混線させずに扱える。
-- detached validation loop は、new runtime regression を追加したあとでも bundle / aggregate compare をそのまま再利用できる。
+- direct `PerformOn` の `ensure` failure を current L2 の request contract failure として固定するには、terminal outcome だけでなく tentative commit suppression まで machine-check する方が安全である。
+- detached validation loop の smoke evidence は useful だが、success-side preview suppression のような細い state claim は focused evaluator assertion で補うべきである。
 
 ## 8. Open questions
 
@@ -112,4 +113,4 @@ git diff --check
 
 ## 9. Suggested next prompt
 
-`current L2 parser-free PoC 基盤を前提に、aggregate export の actual narrow API cut を 1 段だけ operational に寄せるか、あるいは PerformVia 側の request-local ensure regression を追加するかを source-backed に比較してください。`
+`current L2 parser-free PoC 基盤を前提に、PerformVia 側の request-local ensure failure が later same-lineage success へ継続できる branch を narrow regression fixture として追加し、direct target ensure failure との境界を比較してください。`

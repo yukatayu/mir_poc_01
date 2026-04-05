@@ -18,6 +18,7 @@
 - `e8-monotone-degradation-reject`
 - `e9-monotone-degradation-success`
 - `e10-perform-on-ensure-failure`
+- `e11-perform-via-ensure-then-success`
 
 ### static-only fixture
 
@@ -38,6 +39,7 @@
 | `e8-monotone-degradation-reject` | `admit-miss`、middle failure、final `Reject` | `valid` | `Reject` | `perform-failure`、`Reject`、formal `admit-miss`、capability mismatch narrative | あり | canonical law / no re-promotion, `0078` |
 | `e9-monotone-degradation-success` | `admit-miss`、middle failure、later success | `valid` | `success` | `perform-failure` の後に later write-capable option で `perform-success`、formal `admit-miss` のみを残す | あり | E3 / E6 success-side 補完, `0121` |
 | `e10-perform-on-ensure-failure` | direct `PerformOn` の request-local `ensure` failure | `valid` | `explicit_failure` | `perform-failure` のみ、formal metadata なし、success-side carrier を preview しても commit しない | あり | E1 direct-target ensure variant, `0126` |
+| `e11-perform-via-ensure-then-success` | via-chain の request-local `ensure` failure から later success へ継続 | `valid` | `success` | first option で `perform-failure`、later same-lineage option で `perform-success`、formal metadata なし | あり | E3 via ensure continuation variant, `0128` |
 
 ## fixture ごとの補足
 
@@ -90,6 +92,12 @@
 - `PerformOn` の direct target で request-local `ensure` が unsatisfied なら `explicit_failure`
 - effect が success-side carrier を返していても tentative commit は適用しない
 - この分岐は `Reject` や non-admissible skip ではなく、request contract failure として読む
+
+### `e11-perform-via-ensure-then-success`
+
+- via-chain の earlier option が request-local `ensure` で失敗しても、later same-lineage option が残っていれば chain evaluation を継続する
+- ensure failure では tentative commit を破棄し、formal non-admissible metadata を fabricated しない
+- later option が `require` と `ensure` を満たせば final outcome は `success` になりうる
 
 ## runtime fixture と static-only fixture の区別
 

@@ -1,0 +1,110 @@
+{
+  "schema_version": "current-l2-ast-fixture-v0",
+  "fixture_id": "e11_perform_via_ensure_then_success",
+  "source_example_id": "E3-via-ensure-variant",
+  "program": {
+    "kind": "Program",
+    "body": [
+      {
+        "kind": "PlaceBlock",
+        "place": "root",
+        "body": [
+          {
+            "kind": "PlaceBlock",
+            "place": "session",
+            "body": [
+              {
+                "kind": "PlaceBlock",
+                "place": "profile_access",
+                "body": [
+                  {
+                    "kind": "OptionDecl",
+                    "name": "delegated_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "OptionDecl",
+                    "name": "backup_writer",
+                    "target": "profile_doc",
+                    "capability": "write",
+                    "lease": "live",
+                    "admit": null
+                  },
+                  {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "delegated_writer",
+                    "edges": [
+                      {
+                        "predecessor": "delegated_writer",
+                        "successor": "backup_writer",
+                        "lineage_assertion": {
+                          "predecessor": "delegated_writer",
+                          "successor": "backup_writer"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "PerformVia",
+                    "op": "write_profile",
+                    "chain_ref": "profile_ref",
+                    "contract": {
+                      "require": [
+                        {
+                          "kind": "atom",
+                          "name": "write"
+                        }
+                      ],
+                      "ensure": [
+                        {
+                          "kind": "call",
+                          "callee": "owner_is",
+                          "args": [
+                            "session_user"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected_static": {
+    "verdict": "valid",
+    "reasons": [
+      "chain is well-formed statically",
+      "request-local ensure remains attached to the via request rather than the option declaration",
+      "later same-lineage write-capable option can remain available after an earlier ensure failure"
+    ]
+  },
+  "expected_runtime": {
+    "enters_evaluation": true,
+    "final_outcome": "success",
+    "notes": [
+      "delegated_writer returns a success-side carrier but fails request-local ensure",
+      "the tentative commit is discarded and the chain continues to backup_writer",
+      "backup_writer satisfies both require and ensure and becomes the final success-side choice"
+    ]
+  },
+  "expected_trace_audit": {
+    "event_kinds": [
+      "perform-failure",
+      "perform-success"
+    ],
+    "non_admissible_metadata": [],
+    "narrative_explanations": [],
+    "must_explain": [
+      "request-local ensure failure in a via chain does not fabricate non-admissible metadata",
+      "earlier ensure failure does not force Reject while a later same-lineage candidate remains"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（e10 perform-on ensure failure 追加時点）
+最終更新: 2026-04-05（e11 perform-via ensure continuation 追加時点）
 
 ## 位置づけ
 
@@ -18,7 +18,8 @@
 - parser-free PoC 基盤は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
 - detached validation loop は、docs-only judgment、bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper、tiny loop wrapper、fixture authoring template、fixture scaffold helper まで入った。
 - runtime regression catalog に `e9-monotone-degradation-success` を追加し、middle explicit failure のあとでも later same-lineage write-capable option へ monotone degradation して success しうることを machine-check で固定した。
-- runtime regression catalog に `e10-perform-on-ensure-failure` を追加し、direct `PerformOn` の request-local `ensure` unsatisfied が `Reject` ではなく `explicit_failure` であり、success-side carrier preview が commit されないことを machine-check で固定し始めた。
+- runtime regression catalog に `e10-perform-on-ensure-failure` を追加し、direct `PerformOn` の request-local `ensure` unsatisfied が `Reject` ではなく `explicit_failure` であり、success-side carrier preview が commit されないことを machine-check で固定した。
+- runtime regression catalog に `e11-perform-via-ensure-then-success` を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることを machine-check で固定した。
 - fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - いま重いのは semantics そのものより、**fixture authoring / elaboration** と **detached validation loop の実運用面**である。
 - richer host interface、final parser grammar、static analysis / type / theorem prover、multi-request scheduler はまだ後段である。
@@ -35,7 +36,7 @@
 ### 2. fixture authoring / elaboration bottleneck
 
 - 新しい fixture を 1 本足す手順は template 化され、scaffold helper で boilerplate だけ先に起こせるようになった
-- `e9` と `e10` により、success-side 補完と direct-target ensure failure を machine-check で増やせた
+- `e9` / `e10` / `e11` により、success-side 補完、direct-target ensure failure、via-chain ensure continuation を machine-check で増やせた
 - ただし authoring / sidecar / expected trace-audit / profile 影響確認は、まだ人手依存が大きい
 - 「1 本足して detached artifact を保存し、aggregate summary も取り、既存 artifact と比べる」運用をあと数回回して固める必要がある
 
@@ -59,9 +60,9 @@
 | 基礎文書・decision level・invariants | 92% | 86% | 70% | 着手可能 | repo の基礎境界はかなり揃っている |
 | Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
-| parser-free PoC execution stack | 82% | 76% | 90% | 着手可能 | interpreter / host / bundle / batch / selection / profile と runtime regression coverage がさらに 1 本増えた |
-| detached export / validation loop | 82% | 78% | 91% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper、storage candidate、scaffold helper まで揃い、runtime regression の loop 実地反復がもう 1 本進んだ |
-| fixture authoring / elaboration 実務 | 72% | 75% | 75% | 着手可能 | template / scaffold helper は揃い、completed runtime regression をもう 1 本反復できたが expectation completion と review はなお人手中心 |
+| parser-free PoC execution stack | 83% | 77% | 91% | 着手可能 | interpreter / host / bundle / batch / selection / profile と runtime regression coverage がさらに 1 本増えた |
+| detached export / validation loop | 83% | 79% | 92% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper、storage candidate、scaffold helper まで揃い、runtime regression の loop 実地反復がさらに進んだ |
+| fixture authoring / elaboration 実務 | 73% | 76% | 76% | 着手可能 | template / scaffold helper は揃い、scaffold 起点の runtime regression を completed fixture まで 1 本増やせた |
 | parser / syntax finalization 準備 | 38% | 44% | 18% | 着手可能 | companion notation はあるが final grammar inventory がこれから |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 52% | 44% | 46% | 着手可能 | non-production aggregate emitter と aggregate compare helper は入ったが actual API と final compare 契約は未決 |
@@ -114,5 +115,6 @@
 - 2026-04-05 15:14 JST — detached validation loop の aggregate emitter・wrapper・diff 周辺を検証し、bundle artifact と aggregate summary を保存して比較する current non-production loop が通った。次は fixture authoring の実地反復を増やす段階。
 - 2026-04-05 16:04 JST — `e9-monotone-degradation-success` fixture を追加し、admit miss・middle explicit failure・later success を同じ runtime chain で固定する regression を検証した。green と detached smoke が通ったので、次は aggregate compare helper を詰める段階。
 - 2026-04-05 16:13 JST — aggregate artifact の `summary_core` だけを比較する helper と `compare-aggregates` wrapper を追加し、run label から aggregate path を導出して partial histogram を比較できるようにした。次は fixture authoring の実地反復をもう 1 段増やすか、aggregate actual API cut を narrow に詰める段階。
-- 2026-04-05 17:02 JST — fixture authoring の boilerplate だけを出す scaffold helper を追加し、runtime/static-only skeleton と empty sidecar を `target/current-l2-fixture-scaffolds/` 下へ安全に作れるようにした。validation loop の入口は到達済みで、次は actual API cut か新 fixture の反復段階。
 - 2026-04-05 16:47 JST — `e10-perform-on-ensure-failure` fixture を追加し、direct `PerformOn` の request-local `ensure` unsatisfied が `Reject` ではなく `explicit_failure` であることを machine-check と detached smoke で固定した。review fallback 記録まで残したので、next は `PerformVia` 側 ensure variant か aggregate actual API cut 比較の段階。
+- 2026-04-05 17:01 JST — `e11-perform-via-ensure-then-success` fixture を追加し、via-chain の earlier option が request-local `ensure` で失敗しても later same-lineage option へ継続して success しうることと、earlier tentative commit が破棄され later success だけが place store に反映されることを machine-check で固定した。次は aggregate actual API cut か fixture authoring / elaboration の narrow helper を詰める段階。
+- 2026-04-05 17:02 JST — fixture authoring の boilerplate だけを出す scaffold helper を追加し、runtime/static-only skeleton と empty sidecar を `target/current-l2-fixture-scaffolds/` 下へ安全に作れるようにした。validation loop の入口は到達済みで、次は actual API cut か新 fixture の反復段階。

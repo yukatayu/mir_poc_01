@@ -1,14 +1,18 @@
 use std::{
+    collections::BTreeMap,
     fs,
     path::PathBuf,
     time::{SystemTime, UNIX_EPOCH},
 };
 
 use mir_semantics::{
-    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, FixtureHostPlan, FixtureHostStub,
+    CURRENT_L2_HOST_PLAN_SCHEMA_VERSION, CurrentL2Fixture, DirectStyleEvaluator, EffectInput,
+    EffectOracle, EffectPlanRule, EffectPlanVerdict, EffectVerdict, FixtureCommitPlan,
+    FixtureHostPlan, FixtureHostStub,
     FixtureRuntimeRequirement, NamedProfileRunSummary, NonAdmissibleMetadata,
     NonAdmissibleSubreason, ProfileCatalog, ProfileRunSummary, SelectionMode, SelectionProfile,
-    SelectionRequest, SelectionScope, SingleFixtureSelector, StaticGateVerdict,
+    PredicateInput, PredicateOracle, PredicatePlanRule, PredicateVerdict, SelectionRequest,
+    SelectionScope, SingleFixtureSelector, StaticGateVerdict, StepControl,
     TraceExpectationOverride, discover_bundles_in_directory,
     host_plan_sidecar_path_for_fixture_path, load_bundle_from_fixture_path, load_fixture_from_path,
     load_host_plan_from_path, load_host_plan_sidecar_for_fixture_path, run_bundle, run_directory,
@@ -56,6 +60,113 @@ fn unique_temp_json_path(label: &str) -> PathBuf {
 
 fn fixture_dir() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../mir-ast/tests/fixtures/current-l2")
+}
+
+#[derive(Debug, Clone)]
+struct TestPredicateOracle {
+    plan: FixtureHostPlan,
+}
+
+impl TestPredicateOracle {
+    fn new(plan: FixtureHostPlan) -> Self {
+        Self { plan }
+    }
+}
+
+impl PredicateOracle<PredicateInput> for TestPredicateOracle {
+    fn eval_predicate(&mut self, input: PredicateInput) -> PredicateVerdict {
+        self.plan
+            .predicate_rules
+            .iter()
+            .find(|rule| predicate_rule_matches(rule, &input))
+            .map(|rule| rule.verdict)
+            .unwrap_or(PredicateVerdict::Unsatisfied)
+    }
+}
+
+#[derive(Debug, Clone)]
+struct TestEffectOracle {
+    plan: FixtureHostPlan,
+}
+
+impl TestEffectOracle {
+    fn new(plan: FixtureHostPlan) -> Self {
+        Self { plan }
+    }
+}
+
+impl EffectOracle<EffectInput, FixtureCommitPlan> for TestEffectOracle {
+    fn apply_effect(&mut self, input: EffectInput) -> EffectVerdict<FixtureCommitPlan> {
+        if let Some(rule) = self
+            .plan
+            .effect_rules
+            .iter()
+            .find(|rule| effect_rule_matches(rule, &input))
+        {
+            return match &rule.verdict {
+                EffectPlanVerdict::Success { commit } => EffectVerdict::Success {
+                    commit: commit.clone(),
+                },
+                EffectPlanVerdict::ExplicitFailure => EffectVerdict::ExplicitFailure,
+            };
+        }
+
+        EffectVerdict::ExplicitFailure
+    }
+}
+
+fn predicate_rule_matches(rule: &PredicatePlanRule, input: &PredicateInput) -> bool {
+    rule.site == input.site
+        && rule.op == input.op
+        && rule.mode.is_none_or(|mode| mode == input.mode)
+        && rule
+            .target
+            .as_ref()
+            .is_none_or(|target| Some(target) == input.target.as_ref())
+        && rule
+            .chain_ref
+            .as_ref()
+            .is_none_or(|chain_ref| Some(chain_ref) == input.chain_ref.as_ref())
+        && rule
+            .option_ref
+            .as_ref()
+            .is_none_or(|option_ref| Some(option_ref) == input.option_ref.as_ref())
+}
+
+fn effect_rule_matches(rule: &EffectPlanRule, input: &EffectInput) -> bool {
+    rule.op == input.op
+        && rule.mode.is_none_or(|mode| mode == input.mode)
+        && rule
+            .selected_target
+            .as_ref()
+            .is_none_or(|target| target == &input.selected_target)
+        && rule
+            .chain_ref
+            .as_ref()
+            .is_none_or(|chain_ref| Some(chain_ref) == input.chain_ref.as_ref())
+        && rule
+            .selected_option_ref
+            .as_ref()
+            .is_none_or(|option_ref| Some(option_ref) == input.selected_option_ref.as_ref())
+}
+
+fn run_direct_evaluator_with_plan(
+    fixture: &CurrentL2Fixture,
+    plan: FixtureHostPlan,
+) -> DirectStyleEvaluator {
+    let mut evaluator = DirectStyleEvaluator::from_fixture(fixture).unwrap();
+    let mut predicate_oracle = TestPredicateOracle::new(plan.clone());
+    let mut effect_oracle = TestEffectOracle::new(plan);
+
+    loop {
+        match evaluator
+            .step_once(&mut predicate_oracle, &mut effect_oracle)
+            .unwrap()
+        {
+            StepControl::Continue | StepControl::BubbleFailure(_) => {}
+            StepControl::Halt(_) => return evaluator,
+        }
+    }
 }
 
 #[test]
@@ -164,6 +275,7 @@ fn runtime_fixtures_reach_expected_outcomes_via_declarative_host_plan() {
         "e8-monotone-degradation-reject.json",
         "e9-monotone-degradation-success.json",
         "e10-perform-on-ensure-failure.json",
+        "e11-perform-via-ensure-then-success.json",
     ];
 
     for fixture_name in cases {
@@ -192,6 +304,7 @@ fn trace_and_audit_expectations_follow_fixture_or_harness_override() {
         "e8-monotone-degradation-reject.json",
         "e9-monotone-degradation-success.json",
         "e10-perform-on-ensure-failure.json",
+        "e11-perform-via-ensure-then-success.json",
     ];
 
     for fixture_name in cases {
@@ -348,6 +461,62 @@ fn perform_on_ensure_failure_returns_explicit_failure_without_non_admissible_met
             .is_empty(),
         "direct ensure failure should not need capability-mismatch narrative explanation"
     );
+
+    let evaluator =
+        run_direct_evaluator_with_plan(&bundle.fixture, bundle.host_plan.clone().unwrap());
+    assert_eq!(
+        evaluator.state.terminal_outcome,
+        Some(mir_semantics::TerminalOutcome::ExplicitFailure)
+    );
+    assert!(
+        evaluator.state.place_store.is_empty(),
+        "request-local ensure failure must not commit previewed mutations into place_store"
+    );
+}
+
+#[test]
+fn perform_via_ensure_failure_can_continue_to_later_success() {
+    let bundle = load_bundle("e11-perform-via-ensure-then-success.json");
+    let result = run_bundle(&bundle).unwrap();
+
+    assert_eq!(
+        result.report.terminal_outcome,
+        Some(mir_semantics::TerminalOutcome::Success)
+    );
+    assert_eq!(
+        result.report.trace_audit_sink.events,
+        vec![
+            mir_semantics::EventKind::PerformFailure,
+            mir_semantics::EventKind::PerformSuccess,
+        ]
+    );
+    assert!(
+        result.report.trace_audit_sink.non_admissible_metadata.is_empty(),
+        "request-local ensure failure should not fabricate non-admissible metadata"
+    );
+    assert!(
+        result
+            .report
+            .trace_audit_sink
+            .narrative_explanations
+            .is_empty(),
+        "request-local ensure continuation should not need capability mismatch narrative explanation"
+    );
+
+    let evaluator =
+        run_direct_evaluator_with_plan(&bundle.fixture, bundle.host_plan.clone().unwrap());
+    assert_eq!(
+        evaluator.state.terminal_outcome,
+        Some(mir_semantics::TerminalOutcome::Success)
+    );
+    assert_eq!(
+        evaluator.state.place_store,
+        BTreeMap::from([(
+            "profile_doc".to_string(),
+            vec!["write_profile@backup_writer".to_string()]
+        )]),
+        "earlier ensure failure must discard delegated_writer preview and commit only the later successful writer"
+    );
 }
 
 #[test]
@@ -496,9 +665,9 @@ fn harness_rejects_uncovered_oracle_calls_without_synthetic_success_commit() {
 fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
     let discovery = discover_bundles_in_directory(fixture_dir()).unwrap();
 
-    assert_eq!(discovery.total_candidates, 10);
+    assert_eq!(discovery.total_candidates, 11);
     assert_eq!(discovery.failures.len(), 0);
-    assert_eq!(discovery.bundles.len(), 10);
+    assert_eq!(discovery.bundles.len(), 11);
     assert_eq!(
         discovery
             .bundles
@@ -506,7 +675,7 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
             .filter(|bundle| bundle.runtime_requirement
                 == FixtureRuntimeRequirement::RuntimeWithHostPlan)
             .count(),
-        8
+        9
     );
     assert_eq!(
         discovery
@@ -522,10 +691,10 @@ fn discovery_finds_fixture_bundles_and_classifies_runtime_vs_static_only() {
 fn run_directory_returns_summary_for_current_l2_fixture_dir() {
     let summary = run_directory(fixture_dir()).unwrap();
 
-    assert_eq!(summary.total_bundles, 10);
-    assert_eq!(summary.runtime_bundles, 8);
+    assert_eq!(summary.total_bundles, 11);
+    assert_eq!(summary.runtime_bundles, 9);
     assert_eq!(summary.static_only_bundles, 2);
-    assert_eq!(summary.passed, 10);
+    assert_eq!(summary.passed, 11);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -631,8 +800,8 @@ fn selection_runtime_only_keeps_only_runtime_bundles() {
         })
         .collect();
 
-    assert_eq!(selected.total_candidates, 8);
-    assert_eq!(selected.runtime_bundles, 8);
+    assert_eq!(selected.total_candidates, 9);
+    assert_eq!(selected.runtime_bundles, 9);
     assert_eq!(selected.static_only_bundles, 0);
     assert_eq!(selected.failures.len(), 0);
     assert_eq!(
@@ -640,6 +809,7 @@ fn selection_runtime_only_keeps_only_runtime_bundles() {
         vec![
             "e1-place-atomic-cut",
             "e10-perform-on-ensure-failure",
+            "e11-perform-via-ensure-then-success",
             "e2-try-fallback",
             "e3-option-admit-chain",
             "e6-write-after-expiry",
@@ -700,10 +870,10 @@ fn run_directory_selected_single_fixture_runs_only_requested_fixture() {
 fn run_directory_selected_runtime_only_executes_only_runtime_bundles() {
     let summary = run_directory_selected(fixture_dir(), &SelectionMode::RuntimeOnly).unwrap();
 
-    assert_eq!(summary.total_bundles, 8);
-    assert_eq!(summary.runtime_bundles, 8);
+    assert_eq!(summary.total_bundles, 9);
+    assert_eq!(summary.runtime_bundles, 9);
     assert_eq!(summary.static_only_bundles, 0);
-    assert_eq!(summary.passed, 8);
+    assert_eq!(summary.passed, 9);
     assert_eq!(summary.failed, 0);
     assert_eq!(summary.discovery_failures.len(), 0);
     assert_eq!(summary.host_plan_coverage_failures.len(), 0);
@@ -873,8 +1043,8 @@ fn run_directory_profiled_includes_profile_name_in_summary() {
     let summary = run_directory_profiled(fixture_dir(), &profile).unwrap();
 
     assert_eq!(summary.profile_name, "runtime-all");
-    assert_profile_selected_counts(&summary, 8, 8, 0);
-    assert_eq!(summary.passed, 8);
+    assert_profile_selected_counts(&summary, 9, 9, 0);
+    assert_eq!(summary.passed, 9);
     assert_eq!(summary.failed, 0);
 }
 

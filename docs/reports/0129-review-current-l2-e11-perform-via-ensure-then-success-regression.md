@@ -1,0 +1,125 @@
+# Report 0129 — review current L2 e11 perform-via ensure then success regression
+
+## 1. Title and identifier
+
+- Report 0129
+- review current L2 e11 perform-via ensure then success regression
+
+## 2. Objective
+
+Report 0128 とその差分について reviewer を 1 回だけ依頼し、
+via-chain の request-local `ensure` failure continuation regression が
+
+- current L2 の semantic boundary を壊していないか
+- earlier tentative commit discard と later success commit を十分に machine-check できているか
+- mirror / progress / traceability の説明が evidence と一致しているか
+
+を確認する。
+
+## 3. Scope and assumptions
+
+- 対象は `e11-perform-via-ensure-then-success` fixture、その sidecar、interpreter test、spec / plan / progress mirror に限る。
+- current L2 の core semantics、parser grammar、failure family、machine-check policy は変更しない。
+- via-chain の request-local `ensure` unsatisfied から later success への継続だけを narrow regression として review する。
+- `plan/` は Report 0128 の relevant mirror 更新に合わせて traceability だけを追加更新する。
+
+## 4. Documents consulted
+
+1. `README.md`
+2. `Documentation.md`
+3. `specs/00-document-map.md`
+4. `specs/01-charter-and-decision-levels.md`
+5. `specs/02-system-overview.md`
+6. `specs/03-layer-model.md`
+7. `specs/09-invariants-and-constraints.md`
+8. `specs/examples/02-current-l2-ast-fixture-schema.md`
+9. `specs/examples/04-current-l2-step-semantics.md`
+10. `specs/examples/06-current-l2-interpreter-skeleton.md`
+11. `plan/08-representative-programs-and-fixtures.md`
+12. `plan/90-source-traceability.md`
+13. `progress.md`
+14. `docs/reports/0128-current-l2-e11-perform-via-ensure-then-success-regression.md`
+15. `crates/mir-semantics/src/lib.rs`
+16. `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+17. `crates/mir-ast/tests/fixtures/current-l2/e11-perform-via-ensure-then-success.json`
+18. `crates/mir-ast/tests/fixtures/current-l2/e11-perform-via-ensure-then-success.host-plan.json`
+
+## 5. Actions taken
+
+1. reviewer subagent を 1 回だけ起動し、`e11` regression の semantic correctness、test coverage、mirror consistency、progress wording を確認するよう依頼した。
+2. reviewer completion が返るまで長めに待つ運用に従い、wall-clock で 60 秒の待機を 2 回行った。
+3. それでも completion を取得する surface が current environment では見えなかったため、local evidence fallback に切り替えた。
+4. local fallback として次を確認した。
+   - `e11` fixture が via-chain の earlier option `ensure` failure と later success continuation を最小で表現していること
+   - host plan sidecar が earlier `request-ensure=unsatisfied` / later `request-ensure=satisfied` を区別し、両 option に success-side carrier を返していること
+   - focused regression が final `place_store` に `backup_writer` の commit だけが残ることを machine-check していること
+   - bundle / aggregate detached smoke が current loop で通ること
+   - docs validation と `git diff --check` が green であること
+5. local fallback の結果、current task は close 可能と判断した。
+
+## 6. Evidence / outputs / test results
+
+### reviewer fallback note
+
+```text
+reviewer was requested once.
+two long wait windows were allowed, but this session did not expose a completion-retrieval surface.
+task close therefore used local evidence fallback.
+```
+
+### local fallback evidence
+
+```text
+cargo test -p mir-semantics
+...
+running 36 tests
+...
+test perform_via_ensure_failure_can_continue_to_later_success ... ok
+...
+test result: ok. 36 passed; 0 failed
+```
+
+```text
+python3 scripts/current_l2_detached_loop.py compare-fixtures crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json crates/mir-ast/tests/fixtures/current-l2/e11-perform-via-ensure-then-success.json --left-label e3-via-smoke --right-label e11-via-ensure-smoke --overwrite
+...
+payload_core differences:
+- payload_core.event_kinds: left=["perform-success"] right=["perform-failure", "perform-success"]
+- payload_core.non_admissible_metadata: left=[{"option_ref": "owner_writer", "subreason": "admit-miss"}] right=[]
+```
+
+```text
+python3 scripts/current_l2_detached_loop.py compare-aggregates agg-e11-full agg-e11-only
+...
+summary_core differences:
+- summary_core.total_bundles: left=11 right=1
+- summary_core.runtime_bundles: left=9 right=1
+- summary_core.static_only_bundles: left=2 right=0
+- summary_core.passed: left=11 right=1
+```
+
+```text
+python3 scripts/validate_docs.py
+Documentation scaffold looks complete.
+Found 129 numbered report(s).
+```
+
+```text
+git diff --check
+```
+
+無出力。
+
+## 7. What changed in understanding
+
+- via-chain の request-local `ensure` failure continuation は、option-local `admit` miss や lease-based non-admissible skip と別の branch として current L2 に固定できる。
+- earlier success-side carrier preview の discard と later commit の適用を同時に machine-check しておくと、via-chain の continuation regression を overclaim せずに済む。
+- current detached validation loop は new runtime regression を追加したあとでも bundle / aggregate compare をそのまま再利用できる。
+
+## 8. Open questions
+
+- via-chain `ensure` continuation variant を representative prose examples へ昇格するか。
+- aggregate export の actual narrow API cut をこの regression 追加後にどう operational に寄せるか。
+
+## 9. Suggested next prompt
+
+`current L2 parser-free PoC 基盤を前提に、detached aggregate export の actual narrow API cut を 1 段だけ operational に寄せるか、あるいは fixture authoring / elaboration の next narrow helper を追加するかを source-backed に比較してください。`
