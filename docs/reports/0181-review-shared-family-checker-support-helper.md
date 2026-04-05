@@ -47,8 +47,8 @@ current working tree change について、次を確認する。
 
 ## 3. Actions taken
 
-1. reviewer を 1 回起動したが、current tool surface では completion を待つ handle を取得できなかった。
-2. task 運用に従い、local evidence fallback を採用した。
+1. reviewer を 1 回起動し、`180000ms` を 2 回待った。
+2. reviewer は completion を返さなかったため、task 運用に従い local evidence fallback を採用した。
 3. target diff を読み、shared support helper が `scripts/` 内 support module に留まり、generic checker-side shared entry や public checker API を新設していないことを確認した。
 4. family facade script、wrapper smoke、docs / plan / progress / traceability の drift を点検した。
 5. targeted Python tests、3 family smoke、full `cargo test -p mir-semantics`、docs validation、`git diff --check` を review evidence とした。
@@ -61,8 +61,8 @@ current working tree change について、次を確認する。
 
 ## 5. Commands run and exact outputs
 
-- reviewer invocation
-  - current tool surface では completion wait handle を取得できず、local evidence fallback へ切り替えた
+- `wait_agent(reviewer, 180000)` -> timeout
+- `wait_agent(reviewer, 180000)` -> timeout
 - `python3 -m unittest scripts.tests.test_current_l2_family_checker_support scripts.tests.test_current_l2_same_lineage_checker scripts.tests.test_current_l2_missing_option_checker scripts.tests.test_current_l2_capability_checker scripts.tests.test_current_l2_static_gate_loop`
   - `Ran 20 tests in 0.017s`
   - `OK`
@@ -82,6 +82,11 @@ current working tree change について、次を確認する。
   - 無出力
 
 ## 6. Evidence / findings
+
+### reviewer completion
+
+- reviewer は 2 回の wait window 内では completion を返さなかった。
+- current task では retry 1 回までという運用に従い、local evidence fallback へ切り替えた。
 
 ### Local finding result
 
