@@ -55,7 +55,8 @@
 - current actualization としては、`e21-try-atomic-cut-frontier` により `TryFallback` body 内 `AtomicCut` rollback frontier 更新を、`e22-try-atomic-cut-place-mismatch` により nested place mismatch 時の event-only cut を、それぞれ runtime fixture / detached loop / directory summary まで通せる状態になった
 - current docs-only judgment としては、`try` / rollback locality の structural floor は first checker cut 候補 cluster に残すが、existing reason-row family helper の fourth spike にはまだ actualize せず、runtime representative と `specs/examples/51` / `52` に留める
 - current docs-only refinement としては、`try` / rollback locality を dedicated AST structural helper に actualize するなら、parser/loader malformed source、AST-only floor、reason-row family と分ける dedicated carrier、runtime gate 非依存、singleton ではない structural family という entry criteria を先に満たすべきである
-- 次の narrow question は、`TryFallback` / `AtomicCut` structural malformed source を parser / loader / static gate のどこへ置くのが最小かである
+- current docs-only refinement としては、current parser-free phase では structural malformed source を parser でも loader でもなく static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留めるのが最小である
+- 次の narrow question は、`TryFallback` / `AtomicCut` の malformed static family を actual corpus に追加する価値があるかである
 
 ### 候補 4. parser 導入前の boundary inventory
 

@@ -131,6 +131,7 @@
 - 一方で `TryFallback` / `AtomicCut` の structural floor は、current representative runtime evidence と docs-only judgment は揃っているが、same reason-row family へ直ちに fourth spike actualization するのは premature である
 - current cut では、`try` / rollback locality は docs/runtime representative に留め、parser boundary と first checker API cut がもう一段見えた時点で dedicated AST structural helper の要否を比較する
 - current docs-only refinement では、future dedicated AST structural helper を切るなら、parser/loader malformed source の explicit 化、AST-only floor への限定、reason-row family と別 carrier、runtime gate / restore scope を non-goal にすること、複数の structural family を持つこと、を entry criteria とする
+- current docs-only refinement では、`TryFallback` / `AtomicCut` の structural malformed source は parser-free current phase では static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留める
 - actual helper 実装は、これらの entry criteria が source-backed に揃うまで切らない
 - current cut では、3 spike に shared support helper を導入して duplicated core contract だけを束ね、family facade script と detached loop wrapper command 名は維持してよい
 - current docs-only judgment では、generic checker-side shared family compare entry はまだ切らず、family facade 維持で止める
