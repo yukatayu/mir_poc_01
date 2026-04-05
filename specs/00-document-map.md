@@ -293,6 +293,8 @@
   - stage 1 parser spike が helper 自身でどこまで malformed-source smoke を持つべきかを比較する。
 - `specs/examples/82-current-l2-stage1-parser-spike-malformed-source-first-tranche-actualization.md`
   - stage 1 parser spike の malformed-source first tranche が missing lineage metadata と option-local `admit` spillover の 2 件まで current repo でどこまで actualize 済みかを整理する。
+- `specs/examples/83-current-l2-stage3-admit-slot-branch-comparison.md`
+  - request / admissibility cluster を stage 3 として進めるとき、`e3` を丸ごと送るのではなく declaration-side `admit` attached slot を最初の sub-cutとして先に切るのが自然かを比較する。
 
 ## レポート
 

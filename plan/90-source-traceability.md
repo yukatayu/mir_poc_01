@@ -556,6 +556,17 @@
   - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
   - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
 
+### 2026-04-06 stage 3 admit-slot branch comparison addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/29-current-l2-first-parser-subset-inventory.md`
+  - `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md`
+  - `specs/examples/74-current-l2-stage1-parser-spike-entry-criteria.md`
+  - `specs/examples/80-current-l2-stage1-parser-spike-first-tranche-actualization.md`
+  - `specs/examples/83-current-l2-stage3-admit-slot-branch-comparison.md`
+  - `docs/reports/0253-current-l2-stage3-admit-slot-branch-comparison.md`
+  - `crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

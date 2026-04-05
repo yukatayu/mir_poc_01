@@ -198,6 +198,7 @@
 - さらに current docs-only refinement として、actual stage 1 parser spike は `crates/mir-ast/tests/support/` 配置の private helper として始め、compare surface は parser-side raw AST ではなく lowered fixture-subset compare に留めるのが最小である。
 - current actualization 後の remaining risk は、first tranche helper が通ったことを理由に public parser API や final grammar を早く凍らせてしまうことである。current helper はあくまで private / test-only / non-production であり、`e4` / `e7` の structural floor を超える accepted cluster は still later stage に残す。
 - malformed-source smoke を actualize した後も、helper-local wording fragment 2 件をそのまま public diagnostics surface や typed parser error carrier に昇格させないことが重要である。current wording は exact working set の smoke anchor であり、public contract ではない。
+- stage 3 request / admissibility cluster では、declaration-side `admit` attached slot と `PerformVia` / request-local clause を一気に同時 actualize すると lexical freeze pressure が急に上がる。`e3` を full-program parse へ送る前に、stage 3 の最初の sub-cutとして attached-slot extension を切り、request cluster の残りと分け続けることが重要である。
 - さらに current docs-only refinement として、actual implementation へ入る直前 cut では input surface は test inline string、`decl_guard_slot` internal carrier は dedicated wrapper + owned `surface_text`、private helper family は `current_l2_stage1_parser_spike_support` を第一候補にするのが最小である。
 - ただし dedicated text fixture file の path policy、span-aware carrier、final parser-side type 名、final parser API は引き続き OPEN である。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。

@@ -218,8 +218,9 @@
   - `missing edge-local lineage metadata`
   - `option-local admit is outside stage 1 accepted cluster`
   の helper-local wording fragment 2 件まで actualize してよい
+- current docs-only next step としては、stage order を崩さず、request / admissibility cluster を stage 3 として進めるときの最初の sub-cutとして declaration-side `admit` attached slot を比較し、`PerformVia` / request-local clause は still later stage に残すのが自然である
 - その次段で比較するべきなのは、
-  - `e3` を later-stage contrast reference として stage 2 parser spike へいつ送るか
+  - stage 3 admit-slot branch の carrier naming / compare surface をどこまで narrow に決めるか
   - `perform` / request-local clause spillover を stage 1 helper にどこまで持たせるか
   - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
   であり、predicate fragment floor や option-local `admit` を stage 1 へ前倒ししない
