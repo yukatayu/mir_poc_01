@@ -187,6 +187,8 @@
   - current L2 parser-free PoC の detached validation loop で、aggregate emitter の actual narrow cut と `bundle_failure_kind_counts` / current list anchor coexistence を整理する。
 - `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
   - current L2 parser-free PoC の detached validation loop で、aggregate compare helper の exact-compare core / reference-only split と run-label convenience wrapper を整理する。
+- `specs/examples/27-current-l2-fixture-scaffold-helper.md`
+  - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 
 ## レポート
 
@@ -218,6 +220,7 @@
   - parser なし minimal interpreter の bundle failure artifact 側 `failure.failure_kind` を `BatchRunSummary` aggregate export がどこまで typed に吸うべきかの comparison は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` に置く。
   - parser なし minimal interpreter の detached validation loop で、artifact 保存先 / path policy と aggregate export の最小 API cut をどこに置くかの整理は `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` に置く。
   - parser なし minimal interpreter の aggregate emitter sketch と `bundle_failure_kind_counts` / current list anchor coexistence の actual narrow cut は `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md` に置く。
+  - parser なし minimal interpreter の fixture authoring で required carrier だけを scaffold する non-production helper 境界は `specs/examples/27-current-l2-fixture-scaffold-helper.md` に置く。
   - ここにあるコード片は parser-ready な最終 syntax を固定するものではなく、規範文書の current reading を具体例として読むための companion として扱う。
 
 ## 実装 anchor
@@ -238,6 +241,8 @@
   - aggregate artifact の `summary_core` だけを比較する non-production helper。
 - `scripts/current_l2_detached_loop.py`
   - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper をつなぎ、artifact 保存と compare を最小で回す non-production wrapper。
+- `scripts/current_l2_scaffold_fixture.py`
+  - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ出す non-production scaffold helper。
 - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
   - current L2 parser-free PoC の public behavior coverage を置く。
 

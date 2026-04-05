@@ -198,6 +198,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper を current validation loop 向けに束ねる薄い wrapper
   - `target/current-l2-detached/` を current non-production default candidate として扱う
   - explicit path compare、fixture-to-artifact compare、aggregate summary export、run-label aggregate compare を最小で支える
+- `scripts/current_l2_scaffold_fixture.py`
+  - fixture authoring の boilerplate だけを current validation loop の手前で補助する
+  - runtime / static-only の scaffold と empty `.host-plan.json` sidecar 骨格だけを作る
+  - expectation completion、review、detached export 自体は下位の authoring / loop に残す
 
 これらを `harness.rs` 本体へ入れない理由は次の通りである。
 

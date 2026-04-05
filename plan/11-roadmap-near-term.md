@@ -136,5 +136,6 @@
 - detached exporter chain の docs-only judgment を 1 箇所へ集約し、non-production の tiny emitter / diff helper / fixture template を PoC loop 補助として足す
 - detached validation loop の storage/path policy、tiny wrapper、aggregate export の actual narrow cut を docs-only から thin operational aid へ進める
 - aggregate emitter sketch を current wrapper に接続し、directory summary を artifact として保存する smoke を増やす
+- fixture authoring bottleneck のうち boilerplate 部分だけを `target/` 下の non-production scaffold helper へ切り出し、hand-written fixture を正本に保ったまま authoring cost を下げる
 - parser-free host harness と richer host interface / coverage analysis の boundary inventory を作る
 - parser 導入前の syntax decision inventory を plan と spec に切り出す

@@ -16,6 +16,7 @@
 | machine-readable catalog / manifest を今は入れないこと | architecture | current 方針 | hard-coded catalog と externalization 比較が再燃しやすい | current L2 では comparison 止まりと明記 |
 | path canonicalization | helper / packaging | OPEN | selector / single-fixture / sidecar discovery の長期互換性に影響 | current L2 では minimal behavior のみ保持 |
 | detached trace / audit serialization | runtime / tooling | OPEN / docs-only minimal boundary あり | trace / audit を helper 内表現に閉じ込めたままでは repo 外保存・再比較・後解析が重い | exact compare core / detached non-core / human-facing explanation を分けた docs-only minimal shape を先に切る |
+| fixture authoring / elaboration bottleneck | authoring / workflow | 継続中 | new fixture ごとに AST / sidecar / expectation / profile 影響確認の人手コストが重い | hand-written fixture を正本に保ったまま、boilerplate だけを non-production scaffold helper へ切り出す |
 | richer host interface | runtime boundary | OPEN / comparison 上の後続候補 | current host harness を production host に誤昇格しやすく、coverage analysis を先に肥大化させやすい | helper と production host を分離して記述し、detached artifact 境界の後で narrow に切る |
 | constrained continuation / multi-shot | semantics / runtime boundary | OPEN / FUTURE | unrestricted multi-shot が linear resource、rollback frontier、lifetime crossing を壊しやすい | coroutine semantics を Mir-0 の外に残し、one-shot / multi-shot / capture restriction を将来 workstream で明示する |
 | dynamic membership / causal metadata | shared space / fabric | OPEN / FUTURE | participant churn を plain vector clock deletion だけで扱うと membership change と causal history が混線しやすい | shared-space / Mirrorea workstream 側で、membership reconfiguration と causal metadata を分離して設計する |
@@ -109,6 +110,15 @@
 - ただし current list / bool shape をいつ置き換えるか、actual exporter API をどこで切るか、aggregate row を object map にするか array row にするかは引き続き OPEN である
 - compare input discovery を explicit path 主体のまま保つか、run label / fixture stem からの convenience discovery をどこまで formalize するかも引き続き OPEN である
 - current non-production aggregate emitter sketch と aggregate compare helper は入ってよいが、`run_directory` / `BatchRunSummary` の public behavior を置き換えず、final API finalization は後段に残す
+
+### fixture authoring / elaboration bottleneck
+
+- current repo では fixture authoring 自体はまだ hand-written を正本に保つ。
+- ただし boilerplate 作成の反復は bottleneck なので、
+  - `target/current-l2-fixture-scaffolds/` を default candidate にし、
+  - runtime / static-only の skeleton と empty `.host-plan.json` sidecar だけを出す
+  - non-production scaffold helper を置いてよい。
+- ここで helper が semantics inference、expected outcome completion、profile 自動更新まで行うと hidden elaboration になりやすいので、それらは authoring / review task 側へ残す。
 
 ### richer host interface
 

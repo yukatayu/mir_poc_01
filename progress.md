@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-05（aggregate compare helper 追加時点）
+最終更新: 2026-04-05（fixture scaffold helper 追加時点）
 
 ## 位置づけ
 
@@ -16,8 +16,9 @@
 
 - Mir current L2 の核心意味論は、current task を回すにはかなり安定している。
 - parser-free PoC 基盤は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
-- detached validation loop は、docs-only judgment、bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper、tiny loop wrapper、fixture authoring template まで入った。
+- detached validation loop は、docs-only judgment、bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper、tiny loop wrapper、fixture authoring template、fixture scaffold helper まで入った。
 - runtime regression catalog に `e9-monotone-degradation-success` を追加し、middle explicit failure のあとでも later same-lineage write-capable option へ monotone degradation して success しうることを machine-check で固定した。
+- fixture authoring bottleneck のうち boilerplate 部分は、`target/current-l2-fixture-scaffolds/` 下に required carrier と empty sidecar 骨格だけを出す non-production helper で narrow に補助できる状態になった。
 - いま重いのは semantics そのものより、**fixture authoring / elaboration** と **detached validation loop の実運用面**である。
 - richer host interface、final parser grammar、static analysis / type / theorem prover、multi-request scheduler はまだ後段である。
 - 実装上の非本質だが忘れてはいけない制約として、**OS / hardware 非依存性** と **step 実行 / graph 可視化へ伸ばせる observability 境界** を、早期固定しすぎずに守る必要がある。
@@ -26,13 +27,13 @@
 
 ### 1. detached validation loop の actual narrow cut
 
-- bundle export / compare / aggregate summary の最小手順は揃い始めた
-- storage / path policy の current candidate を使った smoke を数回増やして、artifact naming / discovery を安定させる必要がある
+- bundle export / compare / aggregate summary の最小手順は揃った
+- storage / path policy の current candidate を使った smoke を数回増やし、artifact naming / discovery を実地で安定化させる段階に入った
 - aggregate 側の typed count field は non-production aggregate artifact にまで進んだが、actual public API cut はまだ未決
 
 ### 2. fixture authoring / elaboration bottleneck
 
-- 新しい fixture を 1 本足す手順は template 化された
+- 新しい fixture を 1 本足す手順は template 化され、scaffold helper で boilerplate だけ先に起こせるようになった
 - `e9` により「admit miss → middle explicit failure → later success」という success-side 補完 regression を 1 本追加でき、template が実地で 1 回増えた
 - ただし authoring / sidecar / expected trace-audit / profile 影響確認は、まだ人手依存が大きい
 - 「1 本足して detached artifact を保存し、aggregate summary も取り、既存 artifact と比べる」運用をあと数回回して固める必要がある
@@ -58,8 +59,8 @@
 | Mir current L2 core semantics | 82% | 72% | 68% | 着手可能 | current task を回すには十分安定、ただし final formalization はまだ先 |
 | fallback / notation / representative examples | 84% | 79% | 62% | 着手可能 | drift 抑制は進んだが final parser grammar は未決 |
 | parser-free PoC execution stack | 81% | 75% | 89% | 着手可能 | interpreter / host / bundle / batch / selection / profile まで揃い、runtime regression coverage が 1 本増えた |
-| detached export / validation loop | 79% | 75% | 88% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper までは揃ったが actual public API cut は未確定 |
-| fixture authoring / elaboration 実務 | 68% | 71% | 67% | 着手可能 | template は実地反復が増えたが、追加作業の人手コストはまだ高い |
+| detached export / validation loop | 81% | 77% | 90% | 着手可能 | bundle / aggregate emitter、bundle / aggregate compare helper、wrapper、storage candidate、scaffold helper まで揃い、入口は到達済み。actual public API cut は未確定 |
+| fixture authoring / elaboration 実務 | 71% | 75% | 73% | 着手可能 | template と scaffold helper で boilerplate は減ったが、expectation completion と review はなお人手中心 |
 | parser / syntax finalization 準備 | 38% | 44% | 18% | 着手可能 | companion notation はあるが final grammar inventory がこれから |
 | richer host interface / coverage typed 化 | 24% | 22% | 16% | 後段依存 | comparison までは進んだが implementation cut は後段 |
 | aggregate export の typed actualization | 52% | 44% | 46% | 着手可能 | non-production aggregate emitter と aggregate compare helper は入ったが actual API と final compare 契約は未決 |
@@ -83,7 +84,7 @@
 
 ## いまから validation loop 入口まで何手か
 
-- **detached validation loop の入口まで**: あと **0〜1** task 程度
+- **detached validation loop の入口まで**: **到達済み**
 - 主な中身:
   1. fixture authoring を detached artifact + aggregate summary loop 前提でさらに 1〜2 回実地に回す
   2. aggregate export の actual narrow API cut をもう一段整理する
@@ -91,7 +92,7 @@
 
 ## ある程度自律的な Mir 構築ループまで何手か
 
-- **ある程度自律的に「追加し、回し、比較し、次へ進む」状態まで**: あと **4〜7** task 程度
+- **ある程度自律的に「追加し、回し、比較し、次へ進む」状態まで**: あと **3〜6** task 程度
 - 想定する中身:
   1. detached validation loop の入口を安定化する
   2. fixture authoring / elaboration の反復コストをもう一段下げる
@@ -112,3 +113,4 @@
 - 2026-04-05 15:14 JST — detached validation loop の aggregate emitter・wrapper・diff 周辺を検証し、bundle artifact と aggregate summary を保存して比較する current non-production loop が通った。次は fixture authoring の実地反復を増やす段階。
 - 2026-04-05 16:04 JST — `e9-monotone-degradation-success` fixture を追加し、admit miss・middle explicit failure・later success を同じ runtime chain で固定する regression を検証した。green と detached smoke が通ったので、次は aggregate compare helper を詰める段階。
 - 2026-04-05 16:13 JST — aggregate artifact の `summary_core` だけを比較する helper と `compare-aggregates` wrapper を追加し、run label から aggregate path を導出して partial histogram を比較できるようにした。次は fixture authoring の実地反復をもう 1 段増やすか、aggregate actual API cut を narrow に詰める段階。
+- 2026-04-05 17:02 JST — fixture authoring の boilerplate だけを出す scaffold helper を追加し、runtime/static-only skeleton と empty sidecar を `target/current-l2-fixture-scaffolds/` 下へ安全に作れるようにした。validation loop の入口は到達済みで、次は actual API cut か新 fixture の反復段階。
