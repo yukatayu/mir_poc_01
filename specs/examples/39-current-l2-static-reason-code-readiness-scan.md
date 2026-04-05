@@ -145,17 +145,17 @@ fixture-side typed field の creep を corpus scan が隠さないためであ�
 
 current corpus に対する smoke では、
 
-- static-only fixtures scanned: `10`
-- runtime fixtures skipped: `9`
-- fixtures with checked_reasons: `8`
-- fixtures with reason_codes suggestions: `8`
-- fixtures with checked_reason_codes: `8`
-- fixtures with stable coexistence anchors: `8`
+- static-only fixtures scanned: `11`
+- runtime fixtures skipped: `11`
+- fixtures with checked_reasons: `9`
+- fixtures with reason_codes suggestions: `9`
+- fixtures with checked_reason_codes: `9`
+- fixtures with stable coexistence anchors: `9`
 - fixtures with checked_reason_codes but missing checked_reasons: `0`
 - fixtures with checked_reason_codes mismatching actual suggestion: `0`
 - checker cluster coverage:
   - `same_lineage_evidence_floor`: `4`
-  - `capability_strengthening_floor`: `1`
+  - `capability_strengthening_floor`: `2`
   - `missing_option_structure_floor`: `3`
 
 であり、stable cluster と duplicate cluster の split は次のように読める。
@@ -177,9 +177,9 @@ current corpus に対する smoke では、
 - `e15`
 
 この split は current docs で stable cluster として扱う inventory と整合する。
-また current code / fixture corpus では、stable cluster 8 件が `checked_reason_codes` まで
+また current code / fixture corpus では、stable cluster 8 kind を覆う 9 fixture が `checked_reason_codes` まで
 actualize 済みであり、duplicate cluster 2 件だけが absent に留まる。
-さらに current actual corpus では、stable cluster 8 件が
+さらに current actual corpus では、stable cluster 8 kind を覆う 9 fixture が
 `checked_reasons` / `checked_reason_codes` / actual detached suggestion の 3 者で揃っており、
 coexistence follow-up は `none` である。
 

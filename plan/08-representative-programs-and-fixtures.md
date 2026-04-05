@@ -13,6 +13,7 @@
 - `e1-place-atomic-cut`
 - `e2-try-fallback`
 - `e21-try-atomic-cut-frontier`
+- `e22-try-atomic-cut-place-mismatch`
 - `e3-option-admit-chain`
 - `e6-write-after-expiry`
 - `e7-write-fallback-after-expiry`
@@ -42,6 +43,7 @@
 | `e1-place-atomic-cut` | `place` 入れ子、success、`atomic_cut`、後続 failure | `valid` | `explicit_failure` | `perform-success` → `atomic-cut` → `perform-failure` | あり | E1, `0047`, `0054` |
 | `e2-try-fallback` | local rollback と explicit fallback branch | `valid` | `success` | `perform-success` → `perform-failure` → `rollback` → `perform-success` | あり | E2, `0047`, `0049`, `0054` |
 | `e21-try-atomic-cut-frontier` | `try` body 内 `atomic_cut` による rollback frontier 更新 | `valid` | `success` | `perform-success` → `atomic-cut` → `perform-success` → `perform-failure` → `rollback` → `perform-success` | あり | E21, `0184` |
+| `e22-try-atomic-cut-place-mismatch` | nested place 内 `atomic_cut` が frontier を更新しない contrast case | `valid` | `success` | `perform-success` → `atomic-cut` → `perform-failure` → `rollback` → `perform-success` | あり | E22, `0186` |
 | `e3-option-admit-chain` | option-local `admit` miss と later success | `valid` | `success` | event は `perform-success`、formal metadata に `admit-miss` | あり | E3 variant, `0037`, `0039`, `0078` |
 | `e4-malformed-lineage` | edge-local lineage annotation mismatch | `malformed` | `not_evaluated` | runtime に入らない | なし | E4, `0023`, `0047`, `0147` |
 | `e5-underdeclared-lineage` | lineage 証拠不足 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E5, `0021`, `0022`, `0047`, `0147` |
@@ -78,6 +80,12 @@
 - `try` body の途中にある `atomic_cut` が active rollback frame の frontier を更新する
 - current implementation では whole `place_store` snapshot を restore するが、この fixture では post-cut snapshot への frontier update が `profile_draft` mutation にだけ現れる
 - fallback branch 選択や chain order 自体は変えない
+
+### `e22-try-atomic-cut-place-mismatch`
+
+- nested place 内の `AtomicCut` は event を残してよい
+- ただし `place_anchor != current_place` なら frontier update は起きず、rollback は try-entry snapshot へ戻る
+- `e21` と対で読むことで、frontier update gate と restore scope を checker floor に混ぜない current judgmentを支える
 
 ### `e3-option-admit-chain`
 

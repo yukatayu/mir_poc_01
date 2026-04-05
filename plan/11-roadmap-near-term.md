@@ -52,8 +52,8 @@
 - current L2 semantics の重要点を、まだ fixture 化されていない narrow case で regression 化する
 - static-only と runtime fixture のバランスを見る
 - `must_explain` は prose に残し、machine-check 範囲を増やしすぎない
-- current actualization としては、`e21-try-atomic-cut-frontier` により `TryFallback` body 内 `AtomicCut` rollback frontier を runtime fixture / detached loop / directory summary まで通せる状態になった
-- 次の narrow question は、`try` / rollback locality の structural floor を future checker cut へどう接続するかであり、runtime representative の actual corpus 自体は 1 本追加済みである
+- current actualization としては、`e21-try-atomic-cut-frontier` により `TryFallback` body 内 `AtomicCut` rollback frontier 更新を、`e22-try-atomic-cut-place-mismatch` により nested place mismatch 時の event-only cut を、それぞれ runtime fixture / detached loop / directory summary まで通せる状態になった
+- 次の narrow question は、`try` / rollback locality の structural floor を future checker cut へどう接続し、`place_anchor == current_place` gate と whole-store restore scope を runtime / proof boundary にどう残すかである
 
 ### 候補 4. parser 導入前の boundary inventory
 
@@ -156,8 +156,8 @@
 - さらにその次段として、helper-local / reference-only `reason_codes` mirror を assist source にする display-only helper を current helper stack に置き、future typed carrier 候補 row を fixture schema に昇格させずに review 可能にしてよい
 - その次の実地反復として、static-only fixture corpus を横断する readiness scan を current helper stack に置き、`checked_reasons` adoption と `reason_codes` suggestion availability を tranche 単位で観察してから future typed carrier actualization の着手順を決めてよい
 - readiness scan の次段として、first actualization family は lineage edge pair family、second tranche は declared target edge pair family として比較結果を固定した
-- current code / fixture corpus では、その carrier cut を current stable cluster inventory の 8 kind まで広げ、`checked_reason_codes` adoption と `reason_codes` suggestion availability が 8 / 8 で揃うところまで actualize 済みである
-- さらに current readiness scan では、stable cluster 8 件が `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っており、coexistence follow-up は `none` である
+- current code / fixture corpus では、その carrier cut を current stable cluster inventory の 8 kind まで広げ、これを覆う 9 fixture で `checked_reason_codes` adoption と `reason_codes` suggestion availability が 9 / 9 で揃うところまで actualize 済みである
+- さらに current readiness scan では、stable cluster 8 kind を覆う 9 fixture が `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っており、coexistence follow-up は `none` である
 - さらに checker cluster roll-up では、same-lineage floor `4`、capability floor `2`、missing-option structure floor `3` まで current static-only corpus が覆っていることを source-backed に確認できる
 - さらに same-lineage floor については、fixture-side `checked_reason_codes` と detached static gate artifact `reason_codes` を narrow compare する helper-local first checker spike を追加し、`e4` / `e12` の smoke が通っている
 - さらに missing-option structure floor については、same-lineage spike の次段として helper-local second checker spike を追加し、`e16` / `e17` の smoke が通っている

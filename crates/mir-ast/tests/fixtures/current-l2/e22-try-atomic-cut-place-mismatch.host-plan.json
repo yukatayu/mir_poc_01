@@ -1,0 +1,63 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "request-require",
+      "op": "stage_profile_patch",
+      "mode": "on",
+      "target": "profile_draft",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "validate_profile_patch",
+      "mode": "on",
+      "target": "profile_draft",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "load_last_snapshot",
+      "mode": "on",
+      "target": "profile_snapshot",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "stage_profile_patch",
+      "mode": "on",
+      "selected_target": "profile_draft",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "profile_draft",
+              "record": "stage_profile_patch@profile_draft"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "load_last_snapshot",
+      "mode": "on",
+      "selected_target": "profile_snapshot",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "profile_snapshot",
+              "record": "load_last_snapshot@profile_snapshot"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

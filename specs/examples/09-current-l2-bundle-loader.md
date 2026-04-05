@@ -95,7 +95,7 @@ bundle helper は次を exact compare しない。
 
 ### runtime fixture
 
-- E1 / E2 / E21 / E3 variant / E6 は、fixture 本体と `.host-plan.json` sidecar を合わせて 1 つの runtime bundle として扱う。
+- E1 / E2 / E21 / E22 / E3 variant / E6 は、fixture 本体と `.host-plan.json` sidecar を合わせて 1 つの runtime bundle として扱う。
 - bundle helper は host plan coverage を含めて `run_to_completion` まで走らせ、その結果を `expected_runtime` と `expected_trace_audit` に照合してよい。
 
 ### static-only fixture

@@ -236,6 +236,16 @@
   - `docs/reports/0184-try-atomic-cut-frontier-runtime-fixture.md`
   - `docs/reports/0185-review-try-atomic-cut-frontier-runtime-fixture.md`
 
+### 2026-04-06 nested-place atomic-cut mismatch and checker-boundary addendum
+
+- `specs/examples/00-representative-mir-programs.md`、`specs/examples/02-current-l2-ast-fixture-schema.md`、`specs/examples/04-current-l2-step-semantics.md`、`specs/examples/09-current-l2-bundle-loader.md`、`specs/examples/10-current-l2-batch-runner.md`、`specs/examples/11-current-l2-selection-helper.md`、`specs/examples/30-current-l2-first-checker-cut-entry-criteria.md`、`specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md`、`plan/01-status-at-a-glance.md`、`plan/04-core-semantics-current-l2.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `crates/mir-ast/tests/fixtures/current-l2/e22-try-atomic-cut-place-mismatch.json`
+  - `crates/mir-ast/tests/fixtures/current-l2/e22-try-atomic-cut-place-mismatch.host-plan.json`
+  - `crates/mir-semantics/src/lib.rs`
+  - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+  - `docs/reports/0186-try-rollback-structural-floor-and-restore-scope.md`
+  - `docs/reports/0187-review-try-rollback-structural-floor-and-restore-scope.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

@@ -38,6 +38,7 @@
 | E1 | place 入れ子 + authority update + `atomic_cut` | valid | post-cut failure でも pre-cut は rollback されない |
 | E2 | local `try` + `fallback` | valid | local rollback 後に explicit fallback が走る |
 | E21 | `try` body 内の `atomic_cut` frontier | valid | pre-cut mutation を残したまま post-cut mutation だけ rollback する |
+| E22 | nested place 内 `atomic_cut` の mismatch gate | valid | mismatched cut は event のみで、try-entry snapshot へ rollback する |
 | E3 | valid な fallback / preference chain | valid | canonical chain 上で leftmost admissible option を選ぶ |
 | E4 | malformed fallback branch | malformed | static rejection、runtime なし |
 | E5 | underdeclared fallback case | underdeclared | surface-level static error、runtime なし |
@@ -222,6 +223,64 @@ place root {
 - 説明可能であるべきこと:
   - `AtomicCut` が try-entry snapshot ではなく current `place` anchor に対応する rollback frontier を更新したこと
   - current implementation が whole-store snapshot を restore しても、この例では chain order や fallback selection を変えず、post-cut mutation だけを戻したこと
+
+## E22 — nested place 内 `atomic_cut` の mismatch gate
+
+### コード
+
+```text
+place root {
+  place session {
+    place draft_profile {
+      try {
+        perform stage_profile_patch on profile_draft
+          require write
+
+        place profile_annotation {
+          atomic_cut
+        }
+
+        perform validate_profile_patch on profile_draft
+          require well_formed(profile_draft)
+      } fallback {
+        perform load_last_snapshot on profile_snapshot
+          require read
+      }
+    }
+  }
+}
+```
+
+### 期待される static 判定
+
+- `valid`
+- 理由:
+  - `AtomicCut` は ordinary statement として nested place 内にも置ける。
+  - frontier update そのものは `TryFallback` entry の `place_anchor` と `AtomicCut` 実行時の `current_place` が一致したときだけ起こる current runtime gate を持つ。
+  - この例は `profile_annotation` で cut event を起こしても、`draft_profile` rollback frontier は更新されない contrast case である。
+
+### 期待される runtime outcome
+
+- 想定シナリオ:
+  - `stage_profile_patch` は success する。
+  - nested place の `atomic_cut` は event を残すが frontier を進めない。
+  - `validate_profile_patch` は explicit failure を返す。
+  - fallback branch の `load_last_snapshot` は success する。
+- outcome:
+  - rollback は try-entry snapshot へ戻るので、`stage_profile_patch` の mutation も残らない。
+  - `atomic_cut` event は残るが、mismatched place の cut は rollback frontier 更新点にはならない。
+
+### 最小 trace / audit 説明
+
+- event:
+  - stage patch success
+  - nested-place `atomic_cut`
+  - validation failure
+  - rollback
+  - snapshot load success
+- 説明可能であるべきこと:
+  - `AtomicCut` event の存在と frontier 更新は同一ではないこと
+  - nested place の cut が try-entry rollback scope を縮めないこと
 
 ## E3 — valid な fallback / preference chain
 

@@ -229,6 +229,8 @@
   - same-lineage / missing-option / capability の 3 checker spike を family facade 維持のまま shared support helper へ薄く寄せる最小 cut を整理する。
 - `specs/examples/50-current-l2-generic-family-checker-entry-comparison.md`
   - shared support helper 導入後も family facade script を維持し、generic checker-side shared entry はまだ切らない current judgment を整理する。
+- `specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md`
+  - `TryFallback` / `AtomicCut` の structural floor を first checker cut にどこまで入れ、`place_anchor == current_place` gate と whole-store restore scope をどこから runtime / proof boundary に残すかを整理する。
 
 ## レポート
 

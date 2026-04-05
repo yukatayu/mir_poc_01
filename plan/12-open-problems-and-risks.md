@@ -21,6 +21,7 @@
 | richer host interface | runtime boundary | OPEN / comparison 上の後続候補 | current host harness を production host に誤昇格しやすく、coverage analysis を先に肥大化させやすい | helper と production host を分離して記述し、detached artifact 境界の後で narrow に切る |
 | constrained continuation / multi-shot | semantics / runtime boundary | OPEN / FUTURE | unrestricted multi-shot が linear resource、rollback frontier、lifetime crossing を壊しやすい | coroutine semantics を Mir-0 の外に残し、one-shot / multi-shot / capture restriction を将来 workstream で明示する |
 | dynamic membership / causal metadata | shared space / fabric | OPEN / FUTURE | participant churn を plain vector clock deletion だけで扱うと membership change と causal history が混線しやすい | shared-space / Mirrorea workstream 側で、membership reconfiguration と causal metadata を分離して設計する |
+| rollback restore scope / checker boundary | semantics / checker boundary | OPEN / current runtime reading あり | `AtomicCut` frontier update と restore scope を checker floor に混ぜると、current whole-store snapshot restore と place-local explanation がずれやすい | `TryFallback` / `AtomicCut` の structural floor は checker 候補に残しつつ、`place_anchor == current_place` gate と restore scope は runtime / proof boundary に残す |
 | portability / observability hooks | implementation / tooling boundary | OPEN / FUTURE | CPU 固定や非切替デバッグ実装を早く焼き付けると、後で HW 拡張や graph 可視化 / step 実行の導入で手戻りが大きい | semantics core には入れず、detached artifact / step execution / graph export hook を replaceable layer として残す |
 | multi-request scheduler | runtime | FUTURE | current direct-style interpreter と概念が混ざる | 現時点では未着手を明示 |
 | `Approximate` / `Compensate` | semantics / runtime | FUTURE | failure space と rollback を広く再設計する必要がある | 今は plan に残すだけ |
@@ -122,7 +123,7 @@
 - ただしこれは `checker_core.reasons` の first-class typed replacement ではなく、stable cluster だけを best-effort で mirror する helper-local / reference-only carrier に留める
 - current actualization では、first typed family は lineage edge pair family、second tranche は declared target edge pair family、その後 missing option family と capability family まで current stable cluster inventory を `expected_static.checked_reason_codes` に揃えた
 - また first-class carrier placement は detached-side mirror 昇格ではなく、fixture-side additive optional `expected_static.checked_reason_codes` を stable cluster 8 kind に対して採るのが current cut である
-- current corpus では stable cluster 8 fixture の coexistence は `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っているが、これは immediate shrink を意味しない
+- current corpus では stable cluster 8 kind を覆う 9 fixture の coexistence は `checked_reasons` / `checked_reason_codes` / actual suggestion の 3 者で揃っているが、これは immediate shrink を意味しない
 - current corpus では、first checker cut 候補 cluster のうち same-lineage floor / capability floor / missing-option structure floor について最低限の regression baseline が見え始めている
 - same-lineage floor については helper-local / non-production checker spike が入り、current sequence は same-lineage -> missing-option -> capability まで actualize 済みである
 - missing-option structure floor についても helper-local / non-production second spike が入った
@@ -189,6 +190,19 @@
   - membership reconfiguration / activation
   - causal metadata / version carrier
   を分けて設計する future problem として残す。
+
+### rollback restore scope / checker boundary
+
+- current runtime evidence では、`e21` が `place_anchor == current_place` の cut を、`e22` が nested place mismatch cut を表す。
+- これにより、`AtomicCut` event の存在と frontier update の成否は別であることが source-backed に確認できる。
+- current code anchor は rollback frame が whole `place_store` snapshot を保持するので、restore scope を place-local checker floor として言い切ると drift source になる。
+- したがって current cut では、
+  - `TryFallback` / `AtomicCut` の structural floor
+  - rollback / cut が chain order を変えないという structural boundary
+ までは checker 候補に残し、
+  - `place_anchor == current_place` gate
+  - restore scope の exact shape
+  は runtime / theorem prover boundary に残す。
 
 ### portability / observability hooks
 
