@@ -299,6 +299,10 @@
   - stage 3 admit-slot branch の actual parser spike 直前 cut として、`decl_admit_slot` naming、fixture-side `admit` node へ direct lower しない compare surface、structural subset compare と slot retention smoke の分離をどこまで narrow に決めるかを整理する。
 - `specs/examples/85-current-l2-stage3-admit-slot-first-tranche-actualization.md`
   - stage 3 admit-slot branch の success-side first tranche が `e3` option / chain subset compare と `decl_admit_slot.surface_text` retention smoke まで current repo でどこまで actualize 済みかを整理する。
+- `specs/examples/86-current-l2-stage3-admit-slot-malformed-source-comparison.md`
+  - stage 3 admit-slot branch が helper 自身でどこまで malformed-source smoke を持つべきかを比較し、`admit` payload 欠落と `PerformVia` spillover の pair を最小 working set として整理する。
+- `specs/examples/87-current-l2-stage3-admit-slot-malformed-source-first-tranche-actualization.md`
+  - stage 3 admit-slot branch の malformed-source first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかを整理する。
 
 ## レポート
 

@@ -124,6 +124,13 @@ pub fn parse_stage3_admit_slot_program_text(source: &str) -> Result<Stage3Parsed
             continue;
         }
 
+        if line.starts_with("perform ") {
+            return Err(format!(
+                "line {}: request head is outside stage 3 admit-slot first tranche",
+                line_no + 1
+            ));
+        }
+
         return Err(format!("line {}: unsupported stage 3 admit-slot input `{}`", line_no + 1, line));
     }
 
@@ -204,6 +211,9 @@ fn parse_option_decl(line: &str) -> Result<Stage3ParsedOptionDecl, String> {
 
     let decl_admit_slot = match tokens.len() {
         8 => None,
+        9 if tokens[8] == "admit" => {
+            return Err("missing declaration-side admit slot payload".to_string())
+        }
         10 if tokens[8] == "admit" => Some(Stage3DeclAdmitSlot {
             surface_text: tokens[9].to_string(),
         }),

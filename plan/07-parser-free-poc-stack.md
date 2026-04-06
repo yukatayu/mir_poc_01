@@ -163,6 +163,10 @@ test-only / private な stage 1 parser spike first tranche が actualize 済み�
 - compare は lowered fixture-subset compare に留める
 - `e4` / `e7` の two-fixture pair と guard-slot retention smoke を cargo test で回す
 - stage 3 admit-slot branch の success-side first tranche として、`e3` 由来 option / chain subset の lowered fixture-subset compare と `decl_admit_slot.surface_text` retention smoke を cargo test で回す
+- stage 3 admit-slot branch の malformed-source first tranche として
+  - `missing declaration-side admit slot payload`
+  - `request head is outside stage 3 admit-slot first tranche`
+  の 2 件を substring compare で見る
 - helper-local malformed-source smoke として
   - `missing edge-local lineage metadata`
   - `option-local admit is outside stage 1 accepted cluster`

@@ -14,6 +14,16 @@ chain profile_ref = owner_writer
 fallback delegated_writer @ lineage(owner_writer -> delegated_writer)
 "#;
 
+const MISSING_ADMIT_PAYLOAD_INPUT: &str = r#"
+option owner_writer on profile_doc capability write lease live admit
+"#;
+
+const PERFORM_VIA_SPILLOVER_INPUT: &str = r#"
+option owner_writer on profile_doc capability write lease live admit owner_is(session_user)
+chain profile_ref = owner_writer
+perform write_profile via profile_ref
+"#;
+
 fn lower_for_compare(source: &str) -> Stage3FixtureStructuralSubset {
     let parsed = parse_stage3_admit_slot_program_text(source)
         .expect("stage 3 admit-slot spike should parse test input");
@@ -71,5 +81,27 @@ fn stage3_admit_slot_parser_spike_keeps_decl_admit_slot_surface_text() {
             .expect("delegated_writer admit slot should exist")
             .surface_text,
         "delegate_granted(session_user)"
+    );
+}
+
+#[test]
+fn stage3_admit_slot_parser_spike_rejects_missing_admit_slot_payload() {
+    let error = parse_stage3_admit_slot_program_text(MISSING_ADMIT_PAYLOAD_INPUT)
+        .expect_err("stage 3 admit-slot spike should reject missing admit slot payload");
+
+    assert!(
+        error.contains("missing declaration-side admit slot payload"),
+        "expected missing-admit wording, got: {error}"
+    );
+}
+
+#[test]
+fn stage3_admit_slot_parser_spike_rejects_request_head_spillover() {
+    let error = parse_stage3_admit_slot_program_text(PERFORM_VIA_SPILLOVER_INPUT)
+        .expect_err("stage 3 admit-slot spike should reject request-head spillover");
+
+    assert!(
+        error.contains("request head is outside stage 3 admit-slot first tranche"),
+        "expected request-head wording, got: {error}"
     );
 }
