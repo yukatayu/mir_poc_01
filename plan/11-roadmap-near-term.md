@@ -227,6 +227,8 @@
   の helper-local wording fragment 2 件まで actualize してよい
 - その次段で比較するべきなのは、
   - request-local `require` / `ensure` spillover を stage 3 admit-slot branch の later malformed pair にどこまで持たせるか
-  - fixture-side `OptionDecl.admit` node への handoff comparison を later stage にどう残すか
+  - fixture-side `OptionDecl.admit` node handoff を current phase で docs-only deferred に留めるか
   - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
   であり、predicate fragment floor や request cluster を still later stage に残す
+- current sequencing judgment としては、stage 3 admit-slot branch の次段は request-local clause spillover より先に fixture-side `OptionDecl.admit` handoff comparison を扱うのが自然である
+- ただし current handoff comparison の結論は actual compare への昇格ではなく docs-only deferred であり、predicate fragment boundary の first cut が見えるまで reopen しない

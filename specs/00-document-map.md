@@ -303,6 +303,10 @@
   - stage 3 admit-slot branch が helper 自身でどこまで malformed-source smoke を持つべきかを比較し、`admit` payload 欠落と `PerformVia` spillover の pair を最小 working set として整理する。
 - `specs/examples/87-current-l2-stage3-admit-slot-malformed-source-first-tranche-actualization.md`
   - stage 3 admit-slot branch の malformed-source first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかを整理する。
+- `specs/examples/88-current-l2-stage3-admit-next-step-sequencing.md`
+  - stage 3 admit-slot branch の次段を request-local clause spillover と fixture-side `OptionDecl.admit` handoff のどちらから比較すべきかを整理する。
+- `specs/examples/89-current-l2-stage3-admit-node-handoff-comparison.md`
+  - stage 3 declaration-side `admit` branch と fixture-side `OptionDecl.admit` predicate node の handoff を current phase でどこまで docs-only に留めるべきかを整理する。
 
 ## レポート
 
