@@ -32,12 +32,18 @@ existing stage order、private helper boundary、request attachment non-goal、d
 
 1. reviewer subagent に narrow-scope review を依頼した。
 2. request attachment non-goal、helper-local wording、mirror drift を重点確認項目として渡した。
-3. ただし current tool surface では reviewer completion を待つ handle が返らなかったため、rule に従って local evidence fallback を行った。
-4. request attachment non-goal、private helper boundary、mirror alignment を focused diff inspection で確認した。
+3. 1 回目の long wait は timeout だったため、rule に従って retry を 1 回だけ行った。
+4. 2 回目の wait で reviewer completion を受け取り、no-findings を確認した。
+5. ただし reviewer completion には out-of-scope の progress refresh まで含まれていたため、この report では current narrow task に関する no-findings だけを採用した。
+6. 追加で request attachment non-goal、private helper boundary、mirror alignment を local diff inspection で再確認した。
 
 ## 5. Evidence / outputs / test results
 
-- Reviewer: completion handle unavailable in current tool surface
+- Reviewer:
+  - subagent `019d6027-b4fe-7df1-8175-5ea097acd001`
+  - 1 回目 `wait_agent(timeout_ms=180000)` は timeout
+  - 2 回目 `wait_agent(timeout_ms=180000)` で completion を取得
+  - current narrow task に対する reviewer verdict は `No findings`
 - Local evidence fallback:
   - `cargo test -p mir-ast --test current_l2_stage3_admit_slot_spike` passed
   - `cargo test -p mir-ast` passed
