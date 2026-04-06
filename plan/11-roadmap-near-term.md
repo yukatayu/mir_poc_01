@@ -232,3 +232,12 @@
   であり、predicate fragment floor や request cluster を still later stage に残す
 - current sequencing judgment としては、stage 3 admit-slot branch の次段は request-local clause spillover より先に fixture-side `OptionDecl.admit` handoff comparison を扱うのが自然である
 - ただし current handoff comparison の結論は actual compare への昇格ではなく docs-only deferred であり、predicate fragment boundary の first cut が見えるまで reopen しない
+- current actualization として、その later branch の first tranche は
+  - `request-local require clause is outside stage 3 admit-slot first tranche`
+  - `request-local ensure clause is outside stage 3 admit-slot first tranche`
+  の helper-local wording fragment 2 件まで進めてよい
+- その次段で比較するべきなのは、
+  - request head + clause attachment multiline shape を stage 3 helper にどこまで持たせるか
+  - predicate fragment boundary の reopen 条件を stage 3 line にどう接続するか
+  - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
+  であり、request cluster と predicate fragment parser は still later stage に残す

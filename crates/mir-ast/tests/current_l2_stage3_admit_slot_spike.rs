@@ -24,6 +24,18 @@ chain profile_ref = owner_writer
 perform write_profile via profile_ref
 "#;
 
+const REQUEST_LOCAL_REQUIRE_SPILLOVER_INPUT: &str = r#"
+option owner_writer on profile_doc capability write lease live admit owner_is(session_user)
+chain profile_ref = owner_writer
+require write
+"#;
+
+const REQUEST_LOCAL_ENSURE_SPILLOVER_INPUT: &str = r#"
+option owner_writer on profile_doc capability write lease live admit owner_is(session_user)
+chain profile_ref = owner_writer
+ensure owner_is(session_user)
+"#;
+
 fn lower_for_compare(source: &str) -> Stage3FixtureStructuralSubset {
     let parsed = parse_stage3_admit_slot_program_text(source)
         .expect("stage 3 admit-slot spike should parse test input");
@@ -103,5 +115,27 @@ fn stage3_admit_slot_parser_spike_rejects_request_head_spillover() {
     assert!(
         error.contains("request head is outside stage 3 admit-slot first tranche"),
         "expected request-head wording, got: {error}"
+    );
+}
+
+#[test]
+fn stage3_admit_slot_parser_spike_rejects_request_local_require_spillover() {
+    let error = parse_stage3_admit_slot_program_text(REQUEST_LOCAL_REQUIRE_SPILLOVER_INPUT)
+        .expect_err("stage 3 admit-slot spike should reject request-local require spillover");
+
+    assert!(
+        error.contains("request-local require clause is outside stage 3 admit-slot first tranche"),
+        "expected request-local require wording, got: {error}"
+    );
+}
+
+#[test]
+fn stage3_admit_slot_parser_spike_rejects_request_local_ensure_spillover() {
+    let error = parse_stage3_admit_slot_program_text(REQUEST_LOCAL_ENSURE_SPILLOVER_INPUT)
+        .expect_err("stage 3 admit-slot spike should reject request-local ensure spillover");
+
+    assert!(
+        error.contains("request-local ensure clause is outside stage 3 admit-slot first tranche"),
+        "expected request-local ensure wording, got: {error}"
     );
 }

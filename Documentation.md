@@ -173,6 +173,8 @@ flowchart LR
 104. stage 3 admit-slot branch の malformed-source first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかは `specs/examples/87-current-l2-stage3-admit-slot-malformed-source-first-tranche-actualization.md`
 105. stage 3 admit-slot branch の次段を request-local clause spillover と fixture-side `OptionDecl.admit` handoff のどちらから比較すべきか、その sequencing judgment は `specs/examples/88-current-l2-stage3-admit-next-step-sequencing.md`
 106. stage 3 admit-slot branch の fixture-side `OptionDecl.admit` handoff を current phase で docs-only deferred に留める current comparison は `specs/examples/89-current-l2-stage3-admit-node-handoff-comparison.md`
+107. stage 3 later branch の bare request-local `require` / `ensure` spillover を helper-local malformed-source pair にどこまで持たせるべきか、その current comparison は `specs/examples/90-current-l2-stage3-request-local-clause-spillover-comparison.md`
+108. stage 3 later branch の request-local clause spillover first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかは `specs/examples/91-current-l2-stage3-request-local-clause-spillover-first-tranche-actualization.md`
 
 ## レポート
 

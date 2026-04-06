@@ -307,6 +307,10 @@
   - stage 3 admit-slot branch の次段を request-local clause spillover と fixture-side `OptionDecl.admit` handoff のどちらから比較すべきかを整理する。
 - `specs/examples/89-current-l2-stage3-admit-node-handoff-comparison.md`
   - stage 3 declaration-side `admit` branch と fixture-side `OptionDecl.admit` predicate node の handoff を current phase でどこまで docs-only に留めるべきかを整理する。
+- `specs/examples/90-current-l2-stage3-request-local-clause-spillover-comparison.md`
+  - stage 3 later branch として bare request-local `require` / `ensure` spillover を helper-local malformed-source pair にどこまで持たせるべきかを比較する。
+- `specs/examples/91-current-l2-stage3-request-local-clause-spillover-first-tranche-actualization.md`
+  - stage 3 later branch の request-local clause spillover first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかを整理する。
 
 ## レポート
 

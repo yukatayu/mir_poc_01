@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06（stage 3 admit next-step sequencing / handoff comparison まで反映）
+最終更新: 2026-04-06（stage 3 request-local clause spillover first tranche まで反映）
 
 ## 位置づけ
 
@@ -34,6 +34,7 @@
 - その success-side first tranche として、`crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs` で `e3` 由来 option / chain subset の lowered fixture-subset compare と `decl_admit_slot.surface_text` retention smoke を actual code anchor として通せた。
 - その次段として、stage 3 admit-slot branch の malformed-source smoke は declaration-side `admit` payload 欠落 1 件と `PerformVia` spillover 1 件の pair が最小であると比較し、`missing declaration-side admit slot payload` と `request head is outside stage 3 admit-slot first tranche` の helper-local wording fragment 2 件まで actualize できた。
 - その次段 sequencing としては、request-local clause spillover より先に fixture-side `OptionDecl.admit` handoff line を比較するのが自然であり、current phase では direct lowering や canonical surface compare へは進まず docs-only deferred に留めるのが最小だと整理できた。
+- その次段として、stage 3 later branch の bare request-local `require` / `ensure` spillover は helper-local malformed-source pair が最小であると比較し、`request-local require clause is outside stage 3 admit-slot first tranche` と `request-local ensure clause is outside stage 3 admit-slot first tranche` の wording fragment 2 件まで actualize できた。
 - current parser boundary の次段 judgment としては、stage order を崩さず、request / admissibility cluster を stage 3 として進めるときの最初の sub-cutとして declaration-side `admit` attached slot を比較し、`PerformVia` / request-local clause は still later stage に残すのが自然である。
 - current first tranche の actualized scope は
   - `expected_static.checked_try_rollback_structural_verdict`
@@ -152,7 +153,7 @@
 - 想定する中身:
   1. detached validation loop の入口を安定化する
   2. fixture authoring / elaboration の反復コストをもう一段下げる
-  3. stage 3 admit-slot branch の request-local clause spillover と admit-node handoff の reopen 条件を詰める
+  3. stage 3 request-local clause line の attachment multiline shape と predicate fragment reopen 条件を詰める
   4. richer host interface を後段に送ったまま、今必要な host coverage の cut だけ固める
   5. current L2 semantics の追加 regression を数本回して、巻き戻りが必要か確認する
   6. portability / observability の boundary を壊さない helper cut を確認する
@@ -249,3 +250,5 @@
 - 2026-04-06 08:59 JST — stage 3 admit-slot branch の malformed-source first tranche を actualize し、`missing declaration-side admit slot payload` と `request head is outside stage 3 admit-slot first tranche` の 2 件を substring smoke として固定した。次は request-local clause spillover と fixture-side `admit` handoff のどちらを先に比べるかを決める段階。
 - 2026-04-06 09:14 JST — stage 3 admit-slot branch の次段 sequencing を比較し、request-local clause spillover より先に fixture-side `OptionDecl.admit` handoff line を扱うのが自然だと整理した。次は handoff line 自体を actual compare に上げず、どこまで docs-only deferred に留めるかを詰める段階。
 - 2026-04-06 09:18 JST — stage 3 admit-node handoff comparison を整理し、fixture-side `OptionDecl.admit` は already elaborated predicate node なので current phase では direct lowering も canonical surface compare も入れず、predicate fragment boundary が見えるまで docs-only deferred に留める判断を固定した。次は request-local `require` / `ensure` spillover を stage 3 later branch としてどこまで docs-only comparison に持つかを比べる段階。
+- 2026-04-06 09:23 JST — stage 3 later branch の request-local clause spillover を比較し、bare `require` / `ensure` line の malformed-source pair が最小であると整理した。次はこの pair を helper-local wording fragment smoke として actualize する段階。
+- 2026-04-06 09:25 JST — stage 3 request-local clause spillover first tranche を actualize し、`request-local require clause is outside stage 3 admit-slot first tranche` と `request-local ensure clause is outside stage 3 admit-slot first tranche` の 2 件を substring smoke として固定した。次は request head + clause attachment multiline shape を docs-only で比較するか、predicate fragment boundary の reopen 条件を stage 3 line に接続するかを決める段階。

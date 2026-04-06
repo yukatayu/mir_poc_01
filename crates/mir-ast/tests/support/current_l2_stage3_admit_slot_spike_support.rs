@@ -131,6 +131,20 @@ pub fn parse_stage3_admit_slot_program_text(source: &str) -> Result<Stage3Parsed
             ));
         }
 
+        if line.starts_with("require ") {
+            return Err(format!(
+                "line {}: request-local require clause is outside stage 3 admit-slot first tranche",
+                line_no + 1
+            ));
+        }
+
+        if line.starts_with("ensure ") {
+            return Err(format!(
+                "line {}: request-local ensure clause is outside stage 3 admit-slot first tranche",
+                line_no + 1
+            ));
+        }
+
         return Err(format!("line {}: unsupported stage 3 admit-slot input `{}`", line_no + 1, line));
     }
 
