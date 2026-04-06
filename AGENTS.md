@@ -102,6 +102,7 @@ Every report should contain, in this order:
 - `progress.md` の末尾には、task close ごとに **日時つきの簡潔な作業ログ** を追記すること。
   - 粒度は「何を検証したか」「何が通って次に進めるようになったか」が分かる 1 行でよい。
   - 形式検証・実装・docs-only task を問わず、repo の current status に影響する non-trivial task では原則として追記すること。
+  - timestamp は手打ちで推測せず、`date` コマンド等でその場で取得した値を使うこと。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
 ## review と task close の運用
