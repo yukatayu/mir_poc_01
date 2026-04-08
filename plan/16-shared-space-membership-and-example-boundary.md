@@ -193,7 +193,33 @@ room
 
 これは plain vector clock の問題というより、**membership change と causal metadata を同じ carrier に押し込んでいること**が問題である。
 
-### current working answer
+### 比較したい 3 案
+
+1. plain vector deletion
+2. epoch / incarnation split
+3. control-plane separated carrier
+
+### 案A — plain vector deletion
+
+#### 読み
+
+- participant ごとに causal slot を持つ
+- leave 後は slot を削除するか undefined 扱いにする
+
+#### 利点
+
+- 最も単純に見える
+- churn が少ない closed-world なら直感的
+
+#### 欠点
+
+- old message と new join を区別しにくい
+- historical actor identity を消しやすい
+- membership change と causality を同じ carrier に押し込む
+
+### 案B — epoch / incarnation split
+
+#### 読み
 
 少なくとも conceptual には、次を分ける。
 
@@ -207,6 +233,35 @@ room
 - `incarnation`
 
 のどれか、できれば全部に相当する情報と整合する形で読む。
+
+#### 利点
+
+- reconnect / in-flight action invalidation line と自然に接続できる
+- old incarnation と rejoined incarnation を区別しやすい
+- current `member_incarnation` working line と整合する
+
+#### 欠点
+
+- carrier が 1 段増える
+- epoch と incarnation の relation を audit / docs で説明する必要がある
+
+### 案C — control-plane separated carrier
+
+#### 読み
+
+- activation / leave / rejoin / authority handoff は control-plane log が authoritative
+- data-plane event は current active config / incarnation reference を持つ
+
+#### 利点
+
+- membership reconfiguration と data-plane causality を最もきれいに分けられる
+- authority handoff / reconnect / late join を control-plane に集約しやすい
+- old message の解釈を config boundary で fail-closed にしやすい
+
+#### 欠点
+
+- carrier と audit path がさらに 1 段増える
+- current phase では最も operational realization 寄りである
 
 ### 何が防げるか
 
@@ -226,10 +281,24 @@ room
 ここで **新規参加の成立条件を explicit join / activation event の受理に限定**しておけば、
 古い message だけで `C` を復活させる必要がない。
 
+### current working judgment
+
+- **plain vector deletion は current first choice にしない**
+- **epoch / incarnation split を first practical candidate に置く**
+- **control-plane separated carrier は next stronger candidate として比較を続ける**
+
+したがって current repo では、少なくとも
+
+- `membership_epoch`
+- `member_incarnation`
+
+を分けて考え、leave / rejoin を causal metadata の slot deletion そのものとは同一視しないのが最も自然である。
+
 ### 何がまだ OPEN か
 
 - causal metadata の final carrier
 - membership epoch と route / patch epoch を共有するか
+- control-plane separated carrier を reopen する threshold
 - deactivation を immediate に visible にするか
 - explicit leave が届かなかった場合の扱い
 
