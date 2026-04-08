@@ -92,7 +92,7 @@
 
 #### 現在地
 
-- **current tranche の closeout 完了。次回再開時は別 subline を昇格する段階**
+- **current tranche の closeout 完了。current checkpoint では self-driven portion は一旦尽き、reserve path に戻した**
 
 #### 重さ
 
@@ -100,7 +100,7 @@
 
 #### autonomy gate
 
-- **self-driven で進めてよい**
+- **docs-first inventory の再確認までは可能だが、current promoted subline としては後段依存**
 
 ### Phase 4 — shared-space / membership / practical example boundary
 
@@ -192,7 +192,7 @@
 
 ## 現在の主線
 
-いま repo の主線は、次の 2 本である。
+いま repo の主線は、次の 3 本である。
 
 1. **checkpoint / maintenance tail**
    - Phase 0 / 1 / 2 の drift suppression を継続する
@@ -202,6 +202,7 @@
    - small decidable core と proof boundary の inventory を進める
 
 shared-space line は、これらを壊さない範囲で進める **Phase 4 の side line** である。
+Phase 3 は current checkpoint では **reserve path** として残し、later pressure が出たときだけ reopen 候補にする。
 
 ## immediate execution order
 
@@ -211,23 +212,25 @@ user 指示を反映した current immediate sequence は次である。
    - repository memory / docs maintenance
    - current L2 semantics drift suppression
    - detached validation loop helper surface の smoke evidence
-2. **docs / specs / README / `progress.md` / `plan/` の top-level consistency sweep を入れる**
-3. **必要なら Phase 3 を reopen するが、current tranche は完了済みとみなす**
-4. **checkpoint ごとに現状整理を行い、次の promoted subline を narrow に選ぶ**
+2. **Phase 4 前半の docs-first side line を進める**
+   - shared-space / membership / authority / consistency / fairness の boundary を narrow に比較する
+3. **Phase 5 入口の inventory line を進める**
+   - small decidable core と proof boundary を narrow に棚卸しする
+4. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
 
-現在は 1 と 2 の first pass が閉じ、Phase 3 staged reconnect line も freeze threshold まで整理できたので、phase 読みとしては **Phase 3 current tranche は closeout 済みで、repo は checkpoint から次の promoted subline を選べる状態にある** と読む。
+現在は 1 の baseline と top-level consistency sweep が閉じ、Phase 3 staged reconnect line も freeze threshold まで整理できたので、phase 読みとしては **Phase 3 current tranche は closeout 済みで、repo は current self-driven 主線を Phase 2 maintenance tail / Phase 4 side line / Phase 5 inventory line に移してよい状態にある** と読む。
 
 ## 現在の「止めるべき線」
 
 次は self-driven に比較を続けてよい。
 
 - detached validation loop の運用摩擦低減
-- parser boundary staged spike
-- first checker cut の narrow compare family
 - shared-space docs-first boundary comparison
+- small decidable core inventory の docs-first comparison
 
 次は勝手に finalization しない。
 
+- Phase 3 reserve path の premature reopen
 - final parser grammar
 - production exporter API
 - richer host interface の全面 actualization

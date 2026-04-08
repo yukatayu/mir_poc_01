@@ -777,6 +777,14 @@
   - `docs/reports/0345-current-l2-phase3-closeout-sweep.md`
   - `docs/reports/0346-review-phase3-closeout-checkpoint.md`
 
+### 2026-04-08 phase3 self-driven reopen threshold addendum
+
+- `README.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/120-current-l2-phase3-self-driven-reopen-threshold.md`
+  - `docs/reports/0347-phase3-self-driven-reopen-threshold-and-research-abstracts.md`
+
+- `docs/research_abstract/` 配下の文書は、この addendum の **派生要約** として追加された companion であり、top-level mirror update の provenance root にはしない。
+
 ### named profile catalog と mirror boundary
 
 - `0066`

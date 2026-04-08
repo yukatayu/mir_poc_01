@@ -11,6 +11,9 @@
 - `progress.md`
   - rough progress snapshot、current mainline、phase / autonomy gate の mirror である。
   - 規範判断の正本ではない。status / remaining step / current phase を素早く掴みたいときに先に読む。
+- `docs/research_abstract/`
+  - phase ごとの本質的な研究成果だけを短く辿るための condensed summary である。
+  - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
 
 ## 規範的な読書順
 
@@ -109,6 +112,9 @@
 - `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
   - current L2 parser-free PoC の detached validation loop で、aggregate artifact 2 本の `summary_core` をどこまで exact-compare し、`aggregate_context` / `detached_noncore` をどこまで reference-only に留めるかを整理する補助文書。
   - production compare API を固定せず、`compare-aggregates` wrapper までを current non-production convenience として与える。
+- `specs/examples/120-current-l2-phase3-self-driven-reopen-threshold.md`
+  - current L2 Phase 3 closeout checkpoint を前提に、parser boundary / first checker cut の self-driven 部分をこの時点でなお reopen すべきかを比較する補助文書。
+  - final parser grammar や public checker API を固定せず、Phase 3 を reserve path に戻す current threshold judgment だけを与える。
 
 ## 各文書の役割
 

@@ -53,6 +53,7 @@ report は `python scripts/new_report.py --slug <short-name>` でテンプレー
 
 - `specs/` — 正本となる仕様書と設計文書
 - `docs/reports/` — 時系列の作業レポート
+- `docs/research_abstract/` — phase ごとの本質的な研究成果を短く辿るための要約
 - `docs/diagrams/` — Mermaid ソース図
 - `agents/` — プロジェクトローカルの agent 向けガイダンス / 設定ファイル
 - `scripts/` — レポート作成と検証の補助スクリプト

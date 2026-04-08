@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 19:37 JST
+最終更新: 2026-04-08 20:04 JST
 
 ## この文書について
 
@@ -17,7 +17,7 @@
 - **current L2 semantics** は、current mainline を進めるにはかなり安定している。
 - **parser-free PoC** は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
 - **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口が成立しており、Phase0/1/2 closeout の first-pass smoke と top-level mirror sweep も通した。
-- **parser boundary / first checker reconnect** は、stage 1 private spike と stage 3 declaration-side / later malformed-source first tranche に加え、Phase 3 checker-side reconnect の first family を stage 1 chain / declaration structural floor に置いた後、stage 2 `try` / rollback structural floor first tranche を parser-side private summary + `e23` / `e24` fixture expectation compare + valid one-shot `atomic_cut` in try body smoke まで actualize 済みであり、その次段として stage 1 summary contract を保ったまま `e18` / `e20` widening まで actualize したうえで、`e19` は typed static reason family、`E21` / `E22` は runtime / proof boundary に残して reconnect subline 自体を current tranche で freeze する threshold まで整理できた。
+- **parser boundary / first checker reconnect** は、stage 1 / stage 2 / stage 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったうえで、current checkpoint では **Phase 3 self-driven portion を一旦尽きた reserve path とみなす threshold** まで固定できた。つまり、Phase 3 は「未完了の active line」ではなく「later pressure が出たときだけ reopen する line」と読むのが current snapshot である。
 - **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較すること、room resource ごとの owner slot / delegated capability / handoff epoch を分けて読む current working model、authoritative room の activation rule 最小候補を `authority-ack` に置き、さらに **authoritative room に限って** authority placement の current first choice を `single room authority`、consistency mode の current first choice を `authoritative serial transition`、RNG / fairness source の current first choice を `authority_rng` に置き、authoritative game room の current minimal concrete bundle を `authority-ack` + `single room authority` + `authoritative serial transition` + `authority_rng` に整理し、RNG だけを `delegated_rng_service` に差し替える next practical bundle を分離した。さらに reconnect / late leave / in-flight action は room profile に全部入れず、`member_incarnation` と uncommitted action invalidation を minimal room-profile rule、timeout / retry / resend を external policy layer に残す line まで進んだ。causal metadata 側では plain vector deletion を避け、epoch / incarnation split を first practical candidate、control-plane separated carrier を next stronger candidate に置くところまで進んだ。fairness trust model 側では `opaque authority trust` を current minimal candidate、`auditable authority witness` を next narrow strengthening candidate に置き、provider placement と witness requirement を別軸で比較する line を追加した。identity / auth layering 側では membership registry には identity core だけを残し、auth stack / admission policy は別 carrier に置く line を current first practical candidate にした。admission policy / compile-time visibility 側では role / capability / visibility requirement の over-approximation だけを compile-time に残し、actual admission / activation / reconciliation は runtime control-plane に残す line を current first practical candidate にした。append-heavy room では `append-friendly room` を first practical catalog、`delegated_rng_service` を next practical candidate にする line を維持している。
 - 現在の主ボトルネックは semantics の大崩れではなく、
   - fixture authoring / elaboration の反復コスト
@@ -32,7 +32,7 @@
 | Phase 0 | repository memory / decision boundary | maintenance | 低い | 自走可能 | `specs/` / `plan/` / report / progress の整合維持 |
 | Phase 1 | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
 | Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | loop 入口と closeout baseline は成立、現在は運用摩擦低減 |
-| Phase 3 | parser boundary / first checker cut | current tranche closeout 完了 | 中〜やや重い | 自走可能 | private staged spike / reconnect subline は freeze 済み、次回は reopen 条件を narrow に選ぶ |
+| Phase 3 | parser boundary / first checker cut | current tranche closeout 完了、self-driven portion は reserve path | 中〜やや重い | 後段依存 | private staged spike / reconnect subline は freeze 済み。later pressure が出たときだけ reopen |
 | Phase 4 | shared-space / membership / practical example boundary | 前半 | 重い | 一部自走可能 | docs-first boundary は進めてよいが final profile は要仕様確認 |
 | Phase 5 | static analysis / type / theorem prover / model checker boundary | 入口整理 | とても重い | 後段依存 | small decidable core の inventory までは進めてよい |
 | Phase 6 | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | Phase 2 / 3 / 5 の gate 後に入る |
@@ -40,16 +40,18 @@
 
 ### 現在の主線
 
-- **主線**: checkpoint 後の next promoted subline 選定
+- **主線**: Phase 2 maintenance tail + Phase 4 side line + Phase 5 inventory line
 - **maintenance tail**: Phase 0 / 1 / 2
 - **side line**: Phase 4 前半
+- **inventory line**: Phase 5 入口
 - **まだ勝手に finalization しない**: final parser grammar、production exporter API、shared-space final catalog、higher-layer application contract
 
 ### immediate execution order
 
 1. Phase 0 / 1 / 2 の closeout baseline を維持しつつ drift suppression を続ける
-2. current checkpoint を維持し、次に promote する subline を narrow に選ぶ
-3. promoted subline が無ければ現状整理して一旦停止する
+2. Phase 4 前半の docs-first side line を進める
+3. Phase 5 入口の small decidable core inventory を進める
+4. Phase 3 は later pressure が出たときだけ reopen する
 
 ## いま自走で進めてよい範囲
 
@@ -59,11 +61,11 @@
 - fallback / notation / representative example の drift 修正
 - parser-free PoC helper / detached validation loop の改善
 - fixture authoring / elaboration の補助改善
-- parser boundary の staged spike comparison / private helper actualization
-- first checker cut の narrow helper / compare family actualization
 
 ### 後段依存
 
+- parser boundary / staged spike の further reopening
+- first checker cut / reconnect family の further reopening
 - richer host interface の typed carrier 化
 - static analysis / type system / theorem prover / model checker boundary の本格 actualization
 - final parser grammar の固定
@@ -76,7 +78,7 @@
 - PrismCascade / 上位 shared space / 上位アプリケーション
 - Reversed Library の具体要件
 
-## 現在の mainline
+## 現在の主線と checkpoint までの evidence
 
 ### 1. current L2 core semantics
 
@@ -97,7 +99,7 @@
   で整理済み。
 - `host_plan_coverage_failure` は current では aggregate-only を維持し、future typed carrier は bundle failure artifact 側の `failure.failure_kind` を最小核にする judgment で揃っている。
 
-### 3. parser boundary staged spike
+### 3. Phase 3 reserve-path までに揃った parser / checker evidence
 
 - stage 1:
   - `e4` / `e7` の lowered fixture-subset compare と guard-slot retention smoke を actualize 済み
@@ -124,8 +126,8 @@
   - current first-cut judgment としては、その compare を ad-hoc per-slot wiring に留めず、`Stage3RequestContractSubset` 相当の dedicated helper-local carrier へ切るのが自然である
   - `Stage3RequestContractSubset` helper-local / test-only first tranche も actualize 済みであり、same source-side suite carrier を `PerformOn` / `PerformVia` fixture の contract subset compare に通せる line まで source-backed に固定した
   - current guard judgment としては、その後の row-list widening は still early であり、current compare family は 0-or-1 guard に留める方が自然である
-  - current sequencing judgment としては、この family は current tranche で一旦 freeze し、次は parser boundary staging と first checker cut 接点の re-sweep に戻る方が自然である
-  - current side-selection judgment としては、その戻り先は parser boundary staging 側より first checker cut connection 側を先に取る方が自然である
+  - current sequencing judgment としては、この family は current tranche で一旦 freeze し、parser boundary staging と first checker cut 接点の re-sweep まで行ったうえで、current checkpoint では self-driven reopening をさらに積まず reserve path に戻す方が自然である
+  - current side-selection judgment としては、その戻り先は parser boundary staging 側より first checker cut connection 側を先に取る方が自然であり、その reconnect line も freeze threshold まで整理済みである
 
 ## 残課題の優先順位
 
@@ -137,7 +139,7 @@
 
 ### Priority B — A の後でよい
 
-1. parser boundary / first checker cut を reopen する場合の subline 条件整理
+1. Phase 3 reserve path を reopen する条件整理
 2. detached exporter actual narrow API / storage policy の final cut
 3. richer host interface に行く前の typed coverage carrier の narrow cut
 
@@ -168,8 +170,8 @@ rough estimate:
 | parser-free PoC execution stack | 90% | 85% | 98% | 着手可能 | runtime / bundle / batch / selection / profile は揃っている |
 | detached export / validation loop | 98% | 96% | 99% | 着手可能 | 入口は成立、現在は運用面の摩擦低減フェーズ |
 | fixture authoring / elaboration 実務 | 97% | 98% | 99% | 着手可能 | template / scaffold / smoke convenience は強い |
-| parser boundary / staged parser spike | 88% | 81% | 86% | 着手可能 | stage 1 / stage 2 / stage 3 の private staged spike は一区切りの freeze threshold まで整理済み |
-| first checker cut / helper-local compare family | 89% | 79% | 88% | 着手可能 | reconnect subline は stage1/2 first tranches + freeze threshold まで揃い、次回は reopen 条件を narrow に選ぶ |
+| parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | stage 1 / stage 2 / stage 3 の private staged spike は一区切りの freeze threshold まで整理済み。current checkpoint では reserve path |
+| first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は stage1/2 first tranches + freeze threshold まで揃い、current checkpoint では reserve path |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | static analysis / type / theorem prover boundary | 36% | 26% | 12% | 後段依存 | hybrid staged approach を採る前提 |
 | shared-space / dynamic membership boundary | 72% | 63% | 8% | 要仕様確認 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room の `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` first choice、authoritative game room の minimal concrete bundle、`member_incarnation` と uncommitted action invalidation を room-profile 側に残す reconnect policy cut、plain vector deletion を避けて epoch / incarnation split を first practical candidate にする causal metadata cut、fairness trust model を `opaque authority trust` / `auditable authority witness` で分ける line、identity core と auth stack / admission policy を分ける line、admission policy / compile-time visibility を over-approximation + runtime control-plane で切る line、append-heavy room の `append-friendly room` first practical catalog と `delegated_rng_service` next candidate までは進められるが、relaxed room と final activation / auth / consistency / fairness catalog は user 仕様待ち |
@@ -189,7 +191,7 @@ rough estimate:
 1. current detached loop を追加 fixture で回し、authoring / compare の friction をさらに 1 段下げる
 2. shared-space / membership boundary を docs-first で進め、activation / authority / auth / consistency finalization の stop line だけを増やす
 3. static analysis / type / theorem prover boundary の small decidable core inventory を narrow に進める
-4. parser boundary / first checker cut を reopen する場合は、current freeze line を壊さない subline だけを narrow に選ぶ
+4. Phase 3 を reopen する場合は、current freeze line を壊さない later-pressure-driven subline だけを narrow に選ぶ
 
 ## 作業ログ（簡潔）
 
@@ -250,3 +252,4 @@ rough estimate:
 - 2026-04-08 19:13 JST — Phase 3 reconnect subline の threshold を比較し、`e19` は typed static reason family、`E21` / `E22` は runtime / proof boundary に残して current reconnect line 自体を freeze する judgment を mirror へ固定した。次は Phase 3 closeout sweep と current state summary を行う段階。
 - 2026-04-08 19:28 JST — Phase 3 current tranche の closeout sweep を行い、top-level docs / plan / progress の phase reading を checkpoint 状態へ揃えた。現在は Phase 3 current tranche closeout 完了として一旦止めてよい段階。
 - 2026-04-08 19:37 JST — Phase 3 closeout checkpoint の review 指摘を反映し、`plan/11` を historical appendix 明示へ補正、`plan/90` に closeout provenance を追記した。checkpoint wording の semantic overclaim は無く、commit / push ready の状態。
+- 2026-04-08 20:04 JST — Phase 3 self-driven reopen threshold を docs-first で比較し、current checkpoint では Phase 3 を reserve path に戻す判断を `specs/examples/120` に固定しつつ、Phase 0〜3 の本質的成果を `docs/research_abstract/` に集約した。次は Phase 2 maintenance tail / Phase 4 side line / Phase 5 inventory line を主線として進める段階。
