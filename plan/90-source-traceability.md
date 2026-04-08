@@ -699,6 +699,12 @@
   - `specs/examples/107-current-l2-stage3-suite-reopen-conditions.md`
   - `docs/reports/0325-current-l2-stage3-suite-reopen-conditions.md`
 
+### 2026-04-08 stage 3 request contract subset compare cut addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/108-current-l2-stage3-request-contract-subset-compare-cut.md`
+  - `docs/reports/0327-current-l2-stage3-request-contract-subset-compare-cut.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

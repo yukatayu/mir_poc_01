@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 17:17 JST
+最終更新: 2026-04-08 17:30 JST
 
 ## この文書について
 
@@ -121,6 +121,7 @@
   - fixed two-slot suite bridge の helper-local / test-only first tranche も actualize 済みであり、single-line / multiline mixed clause payload を同じ slot carrier に載せる line まで通した
   - `missing multiline ensure block` hidden path も helper-local / test-only actual evidence として actualize 済みである
   - current reopen judgment としては、remaining suite malformed wording family を suite helper 側でまだ追うより、fixture-side full request contract subset compare を narrow に reopen する方が自然である
+  - current first-cut judgment としては、その compare を ad-hoc per-slot wiring に留めず、`Stage3RequestContractSubset` 相当の dedicated helper-local carrier へ切るのが自然である
 
 ## 残課題の優先順位
 
@@ -128,8 +129,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段 actualization
-   - fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいかを比較する
-   - request head parse を still later に残したまま、two-slot carrier と fixture-side contract subset compare をどう接続するかを整理する
+   - `Stage3RequestContractSubset` 相当の helper-local / test-only first tranche を actualize する
+   - request head parse を still later に残したまま、two-slot carrier と fixture-side contract subset compare の接点を source-backed にする
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -238,3 +239,4 @@ rough estimate:
 - 2026-04-08 16:43 JST — Phase 3 later branch の sequencing comparison 105 系列を canonical file 名と traceability addendum まで揃え、top-level docs から次段を `missing multiline ensure block` first-tranche actualization として辿れる状態にした。次はその focused smoke を追加して current hidden fail-closed path を surfaced する段階。
 - 2026-04-08 16:50 JST — Phase 3 later branch の `missing multiline ensure block` hidden path を focused smoke へ actualize し、`cargo test -p mir-ast --test current_l2_stage3_request_clause_suite_spike` と `cargo test -p mir-ast` で 9-test suite まで通した。次は remaining suite malformed wording family と fixture-side full request contract compare の reopen 条件を比べる段階。
 - 2026-04-08 17:17 JST — Phase 3 later branch の suite reopen 条件を比較し、remaining suite malformed wording family を still 追うより、request head parse を入れずに fixed two-slot suite bridge を fixture-side full request contract subset compare へ narrow に reopen する judgment を mirror へ固定した。次はその first actualization cut を比較する段階。
+- 2026-04-08 17:30 JST — Phase 3 later branch の request contract subset compare cut を比較し、ad-hoc per-slot compare ではなく `Stage3RequestContractSubset` 相当の fixture-side expected carrier を helper-local / test-only first tranche として actualize する judgment を mirror へ固定した。次はその carrier を source-backed に actualize する段階。

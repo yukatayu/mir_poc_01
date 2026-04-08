@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 3 later branch で fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいかを比較することである。
+current Phase 3 の next narrow step は、stage 3 later branch で `Stage3RequestContractSubset` 相当の helper-local / test-only first tranche を actualize することである。
 
 ## いまから数 task の主眼
 
