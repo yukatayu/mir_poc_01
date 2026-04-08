@@ -180,6 +180,7 @@ flowchart LR
 110. stage 3 later branch の minimal predicate fragment をどの carrier / compare surface から reopen するのが最小か、その current comparison は `specs/examples/93-current-l2-stage3-predicate-fragment-boundary-comparison.md`
 111. stage 3 later branch の shared isolated predicate fragment helper first tranche が `crates/mir-ast/tests/support/current_l2_stage3_predicate_fragment_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_predicate_fragment_spike.rs` でどこまで actualize 済みかは `specs/examples/94-current-l2-stage3-predicate-fragment-first-tranche-actualization.md`
 112. stage 3 later branch の次段を predicate fragment helper の malformed-source pair と request head + clause attachment multiline shape のどちらから開くべきか、その current sequencing judgment は `specs/examples/95-current-l2-stage3-fragment-vs-attachment-next-step-sequencing.md`
+113. stage 3 later branch の multiline attachment shape を declaration-side `admit:` と request-local `require:` / `ensure:` の shared structural floor としてどこまで切るか、その current comparison は `specs/examples/96-current-l2-stage3-multiline-attachment-shape-comparison.md`
 
 ## レポート
 

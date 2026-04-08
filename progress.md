@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 14:01 JST
+最終更新: 2026-04-08 14:19 JST
 
 ## この文書について
 
@@ -114,7 +114,8 @@
     - `request-local ensure clause is outside stage 3 admit-slot first tranche`
     を actualize 済み
   - shared isolated predicate fragment helper の first tranche は actualize 済みであり、`e2` / `e3` / `e10` / `e11` anchor の predicate subset compare まで通っている
-  - next docs-only step は、predicate fragment helper の malformed-source pair より先に request head + clause attachment multiline shape を shared structural floor として比較することである
+  - multiline attachment shape の docs-only comparison も済みであり、shared floor は clause suite 全体ではなく `<clause-head>:` + 直下 1 段深い predicate block という single attachment frame に留める judgment を固定した
+  - next narrow step は、shared single attachment frame を helper-local / test-only actual evidence にどこまで actualize するかを比較することである
 
 ## 残課題の優先順位
 
@@ -122,8 +123,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段比較
-   - declaration-side `admit:` と request-local `require:` / `ensure:` の multiline attachment shape を shared structural floor として比較する
-   - malformed-source pair はその後段へ残す
+   - declaration-side `admit:` と request-local `require:` / `ensure:` の shared single attachment frame を helper-local actual evidence にどこまで actualize するかを比較する
+   - request-local clause suite completion と fragment malformed-source pair はその後段へ残す
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -146,7 +147,7 @@
   3. detached exporter narrow API / storage candidate を実地 smoke で固める 1〜2 task
 
 rough estimate:
-- validation loop を「入口に到達した」と言い切るには **あと 2〜4 task**
+- validation loop を「入口に到達した」と言い切るには **あと 3〜6 task**
 - current L2 mainline を「数日単位でかなり自走できる」と言えるには **あと 5〜8 task**
 
 ## 章別 rough progress
@@ -178,8 +179,8 @@ rough estimate:
 ## 次に進めるべき task
 
 1. stage 3 later branch の
-   - declaration-side `admit:` と request-local `require:` / `ensure:` の multiline attachment shape
-   を shared structural floor として narrow に比べる
+   - declaration-side `admit:` と request-local `require:` / `ensure:` の shared single attachment frame
+   を helper-local / test-only actual evidence にどこまで actualize するかを narrow に比べる
 2. current detached loop を新しい fixture 追加手順と結び付けて、authoring friction をさらに 1 段下げる
 3. parser boundary staging と first checker cut の接点を docs-only で再棚卸しし、無理な合流を避ける
 4. shared-space / membership boundary は docs-first example まで進めてよいが、activation / authority / auth / consistency catalog の finalization は user 仕様確認で止める
@@ -217,3 +218,4 @@ rough estimate:
 - 2026-04-08 13:38 JST — Phase 3 later branch の sequencing を比較し、request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を切る judgment を `specs/examples/92` と mirror へ固定し、late reviewer finding だった detached loop help wording / report placeholder も同 task で閉じた。次は minimal predicate fragment boundary の first docs-only cut を比較する段階。
 - 2026-04-08 13:47 JST — Phase 3 later branch の predicate fragment boundary を shared isolated helper として reopen する judgment を `specs/examples/93` に固定し、`e2` / `e3` / `e10` / `e11` anchor の predicate subset compare を通す first tranche を private helper と test で actualize した。次は malformed-source pair と request head + clause attachment multiline shape のどちらを先に切るかを比較する段階。
 - 2026-04-08 14:01 JST — Phase 3 later branch の next sequencing を比較し、predicate fragment helper の malformed-source pair より先に declaration-side `admit:` と request-local `require:` / `ensure:` の multiline attachment shape を shared structural floor として比べる judgment を `specs/examples/95` と mirror へ固定した。次は multiline attachment shape 自体の exact cut を docs-only で整理する段階。
+- 2026-04-08 14:08 JST — Phase 3 later branch の multiline attachment shape を比較し、shared floor は clause suite 全体ではなく `<clause-head>:` + 直下 1 段深い predicate block の single attachment frame に留める judgment を `specs/examples/96` と mirror へ固定した。次はこの shared single attachment frame を helper-local / test-only actual evidence にどこまで actualize するかを比較する段階。
