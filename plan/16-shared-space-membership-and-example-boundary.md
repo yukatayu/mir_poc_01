@@ -913,6 +913,150 @@ participant carrier が同じでも、
 
 current repo の phase では、ここを無理に一枚岩にせず future research とする方が自然である。
 
+## authority placement の候補比較
+
+### 比較したい 3 案
+
+shared-space の authority placement として、current phase で比較対象にしてよいのは少なくとも次である。
+
+1. `single room authority`
+2. `replicated authority`
+3. `relaxed projection authority`
+
+ここでいう `authority` は、
+
+- room rule を authoritative に commit する主体
+- membership activation / deactivation を受理する主体
+- resource owner slot の最終 handoff を承認する主体
+
+を含む operational role である。
+ただし current repo では、これを algorithm 名や deployment topology に直結させない。
+
+### 案A — `single room authority`
+
+#### 読み
+
+- 1 room につき 1 つの authoritative commit point を持つ
+- membership activation も resource mutation もそこを通す
+
+概念上はたとえば次のように読む。
+
+```text
+room_authority(room_42)
+  accepts join / leave / roll / reset
+  emits authoritative transition log
+```
+
+#### 利点
+
+- current phase では最も分かりやすい
+- `authority-ack` activation と自然に組み合わさる
+- owner slot / delegation / handoff / audit を 1 本の transition sequence で説明しやすい
+- authoritative game room と相性が良い
+
+#### 欠点
+
+- failure point が 1 点に寄る
+- availability / failover を別に考える必要がある
+- scale-out では operational realization の工夫が要る
+
+#### 向く room
+
+- turn-based game room
+- reset や exclusive lock を強く使う room
+
+### 案B — `replicated authority`
+
+#### 読み
+
+- logical な authority role は 1 つに見せつつ、内部は replica group が authoritative order を共有する
+- external interface は single authority に近く保ち、内部で replication / failover を吸収する
+
+概念上はたとえば次のように読む。
+
+```text
+logical_room_authority(room_42)
+  realized_by authority_group(replica_a, replica_b, replica_c)
+  exports one authoritative transition stream
+```
+
+#### 利点
+
+- single room authority の reasoning を大きく崩さず failover を持てる
+- authoritative game room にも将来的に接続しやすい
+- `quorum-like activation` を将来 option に上げる余地を残せる
+
+#### 欠点
+
+- replication family の operational complexity を背負う
+- membership activation と authority replica membership を混同しやすい
+- current phase では、carrier を急に重くしやすい
+
+#### 向く room
+
+- authoritative room を本番運用寄りに考え始めた段階
+- failure tolerance が必要だが、room semantics 自体は authoritative serial のまま保ちたい場合
+
+### 案C — `relaxed projection authority`
+
+#### 読み
+
+- local contribution / local owner は participant 側に寄せる
+- global room view は merge / projection / moderation authority が後段でまとめる
+
+概念上はたとえば次のように読む。
+
+```text
+local_append(user_i) -> local shard / contribution owner
+global_projection(room_42) -> merge / moderation authority
+```
+
+#### 利点
+
+- append-heavy room や contribution-heavy room と相性が良い
+- local autonomy を高くできる
+- global projection を later consistency policy に委ねやすい
+
+#### 欠点
+
+- owner slot / merge authority / visibility policy が別 carrier になりやすい
+- authoritative reset / winner / exclusive lock には不向き
+- current phase では strongest open problem を多く含む
+
+#### 向く room
+
+- notice board / shared memo / contribution aggregate
+- future relaxed / merge-friendly room
+
+### authority placement と room type の相性
+
+#### authoritative game room
+
+- current first choice は `single room authority`
+- next operational upgrade path は `replicated authority`
+- `relaxed projection authority` は winner / reset / exclusive lock と相性が悪い
+
+#### append-friendly room
+
+- current first choiceは、membership activation だけを見るなら `single room authority` でもよい
+- ただし data-plane append visibility まで同じ authority discipline に固定する必要はない
+- 将来的には `relaxed projection authority` が有力候補になる
+
+### current working judgment
+
+- **authoritative game room の current first choice は `single room authority`**
+- **`replicated authority` は operational realization 側の next candidate**
+- **`relaxed projection authority` は append-friendly / merge-friendly room の future comparison に残す**
+
+つまり current phase では、
+
+- membership registry
+- activation rule
+- resource owner slot
+- authority placement
+
+を 1 carrier に潰さず、`single room authority` を最小 operational candidate として置くのが最もきれいである。
+
 ## Raft / Paxos をどう位置づけるか
 
 ### current working answer
