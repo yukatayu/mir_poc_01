@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 11:23 JST
+最終更新: 2026-04-08 11:32 JST
 
 ## この文書について
 
@@ -18,7 +18,7 @@
 - **parser-free PoC** は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
 - **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口まで来ている。
 - **parser boundary** は、stage 1 private spike と stage 3 declaration-side / later malformed-source first tranche まで actualize 済みである。
-- **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較すること、room resource ごとの owner slot / delegated capability / handoff epoch を分けて読む current working model、authoritative room の activation rule 最小候補を `authority-ack` に置き、さらに **authoritative room に限って** authority placement の current first choice を `single room authority`、next candidate を `replicated authority` とするところまで進んだ。
+- **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較すること、room resource ごとの owner slot / delegated capability / handoff epoch を分けて読む current working model、authoritative room の activation rule 最小候補を `authority-ack` に置き、さらに **authoritative room に限って** authority placement の current first choice を `single room authority`、consistency mode の current first choice を `authoritative serial transition` に置き、append-heavy room では `append-friendly room` を first practical catalog にするところまで進んだ。
 - 現在の主ボトルネックは semantics の大崩れではなく、
   - fixture authoring / elaboration の反復コスト
   - parser boundary の staged 実装
@@ -135,7 +135,7 @@ rough estimate:
 | first checker cut / helper-local compare family | 82% | 70% | 80% | 着手可能 | narrow helper family は安定、generic/public は後段 |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | static analysis / type / theorem prover boundary | 36% | 26% | 12% | 後段依存 | hybrid staged approach を採る前提 |
-| shared-space / dynamic membership boundary | 45% | 39% | 8% | 要仕様確認 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room の `authority-ack` first choice と `single room authority` first choice までは進められるが、append-friendly / relaxed room の final authority placement、final activation / auth / consistency catalog は user 仕様待ち |
+| shared-space / dynamic membership boundary | 48% | 41% | 8% | 要仕様確認 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room の `authority-ack` / `single room authority` / `authoritative serial transition` first choice、append-heavy room の `append-friendly room` first practical catalog までは進められるが、relaxed room と final activation / auth / consistency catalog は user 仕様待ち |
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様は依然 user からの追加仕様が必要 |
 
 ## 現時点での大きい未解決問題
@@ -175,3 +175,4 @@ rough estimate:
 - 2026-04-08 11:05 JST — shared-space activation rule を `authority-ack` / `full-coverage-like` / `quorum-like` で比較し、authoritative room の最小 operational candidate を `authority-ack` に置きつつ、compile-time には visibility role の over-approximation だけを残す current working line を plan mirror に追記した。次は authoritative room の authority placement と consistency mode catalog をさらに narrow に比較できる段階。
 - 2026-04-08 11:16 JST — shared-space authority placement を `single room authority` / `replicated authority` / `relaxed projection authority` で比較し、authoritative room の current first choice を `single room authority`、次候補を `replicated authority` に置く line を plan mirror に追記した。次は consistency mode catalog と RNG trust model の narrow comparison を続けられる段階。
 - 2026-04-08 11:23 JST — shared-space authority placement comparison の review 指摘を反映し、progress snapshot を authoritative room scoped の current-phase candidate だと分かる wording に補正し、report / traceability hygiene を閉じた。次は consistency mode catalog と RNG trust model の narrow comparison を続けられる段階。
+- 2026-04-08 11:32 JST — shared-space consistency mode catalog を `authoritative serial transition` / `append-friendly room` / `relaxed merge-friendly room` で比較し、authoritative room の current first choice と append-heavy room の first practical catalog を plan mirror に追記した。次は RNG trust model と fairness source placement の narrow comparison を続けられる段階。

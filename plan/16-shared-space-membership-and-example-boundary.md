@@ -1057,6 +1057,155 @@ global_projection(room_42) -> merge / moderation authority
 
 を 1 carrier に潰さず、`single room authority` を最小 operational candidate として置くのが最もきれいである。
 
+## consistency mode catalog の候補比較
+
+### 比較したい 3 案
+
+current phase で catalog 候補として比較対象にしてよいのは、少なくとも次である。
+
+1. `authoritative serial transition`
+2. `append-friendly room`
+3. `relaxed merge-friendly room`
+
+ここでいう `consistency mode` は、
+
+- room の shared object がどの順序 / commit point で見えるか
+- concurrent action をどこで serialise するか
+- local contribution と global projection をどう結ぶか
+
+を決める operational mode である。
+
+### 案A — `authoritative serial transition`
+
+#### 読み
+
+- room mutation は 1 本の authoritative transition sequence に載る
+- exclusive lock / reset / winner / handoff をその sequence 上で説明する
+
+概念上はたとえば次のように読む。
+
+```text
+join -> activate -> roll_lock -> dice -> move -> goal_notice -> reset
+```
+
+#### 利点
+
+- authoritative game room に最も自然
+- owner slot / handoff / audit と相性が良い
+- `single room authority` と `replicated authority` の両方に接続しやすい
+- turn / reset / global winner の reasoning を最も簡単に保てる
+
+#### 欠点
+
+- append-heavy room では重い
+- local autonomy を高くしにくい
+- throughput より global serial order を優先する
+
+#### 向く room
+
+- authoritative game room
+- lock / reset / reservation を伴う room
+
+### 案B — `append-friendly room`
+
+#### 読み
+
+- membership activation や room snapshot は authority 側に寄せてもよい
+- ただし data-plane は append capability を共有し、concurrent append を許す
+- append visibility は authoritative reset と同じ discipline に縛らない
+
+概念上はたとえば次のように読む。
+
+```text
+activate(user)
+append(note_1)
+append(note_2)
+publish tail(snapshot)
+```
+
+#### 利点
+
+- notice board / presence room に自然
+- append capability と read visibility を分けやすい
+- object 全体の唯一 owner を強く前面に出さずに済む
+
+#### 欠点
+
+- global reset / winner / exclusive lock には不向き
+- append order と global moderation policy を別に整理する必要がある
+- `authoritative serial transition` と同じ audit contract にはしにくい
+
+#### 向く room
+
+- notice board
+- shared memo
+- append log ベースの collaboration
+
+### 案C — `relaxed merge-friendly room`
+
+#### 読み
+
+- local contribution を participant / shard 側に持ち
+- global room view は merge / projection / moderation rule で得る
+
+概念上はたとえば次のように読む。
+
+```text
+local_edit(user_i)
+local_edit(user_j)
+merge / project / moderate
+publish merged view
+```
+
+#### 利点
+
+- local autonomy を高くできる
+- disconnected / intermittent participation と相性がよい
+- future shared creative space に向く
+
+#### 欠点
+
+- merge policy と authority placement の coupling が強い
+- convergence / conflict handling / moderation を別に要する
+- current repo phase では hardest open problem である
+
+#### 向く room
+
+- future relaxed collaboration room
+- merge / projection を中心に据える upper-layer space
+
+### consistency mode と authority placement / ownership model の相性
+
+#### authoritative game room
+
+- current first choice は `authoritative serial transition`
+- authority placement は `single room authority`
+- next operational candidate は `replicated authority`
+
+#### append-friendly room
+
+- current first choice は `append-friendly room`
+- membership activation は `single room authority` でもよい
+- data-plane authority は append capability と moderation / projection を分けて読む方が自然
+
+#### relaxed / merge-friendly room
+
+- current phase では future comparison
+- `relaxed projection authority` と一緒に詰める必要がある
+
+### current working judgment
+
+- **authoritative room の current first choice は `authoritative serial transition`**
+- **append-heavy room の current first choice は `append-friendly room`**
+- **`relaxed merge-friendly room` は future comparison に残す**
+
+したがって current phase では、consistency mode catalog を広く固定するより、
+
+- authoritative room
+- append-friendly room
+
+の 2 本を first practical catalog として置き、merge-friendly branch は later に残すのが最も自然である。
+
 ## Raft / Paxos をどう位置づけるか
 
 ### current working answer
