@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 16:30 JST
+最終更新: 2026-04-08 16:43 JST
 
 ## この文書について
 
@@ -234,3 +234,4 @@ rough estimate:
 - 2026-04-08 16:11 JST — Phase 3 later branch の suite malformed/source first-pair comparison を整理し、`duplicate ensure` + unsupported direct child line を first actualization pair に置く judgment を mirror へ固定した。次はこの pair を helper-local / test-only actual evidence と focused smoke に上げる段階。
 - 2026-04-08 16:11 JST — Phase 3 later branch の suite malformed/source first pair を focused smoke へ actualize し、`duplicate ensure` と unsupported direct child line の hidden fail-closed path を `cargo test -p mir-ast --test current_l2_stage3_request_clause_suite_spike` と `cargo test -p mir-ast` で surfaced した。次は `missing multiline ensure block` family と fixture-side full request contract compare の sequencing を比較する段階。
 - 2026-04-08 16:30 JST — Phase 3 later branch の next sequencing を比較し、first pair actualization の後も full request compare より先に `missing multiline ensure block` family を helper-local / test-only actual evidence に上げる judgment を mirror へ固定した。次はその hidden fail-closed path を focused smoke として surfaced する段階。
+- 2026-04-08 16:43 JST — Phase 3 later branch の sequencing comparison 105 系列を canonical file 名と traceability addendum まで揃え、top-level docs から次段を `missing multiline ensure block` first-tranche actualization として辿れる状態にした。次はその focused smoke を追加して current hidden fail-closed path を surfaced する段階。
