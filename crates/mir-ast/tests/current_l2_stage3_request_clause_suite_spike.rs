@@ -53,6 +53,18 @@ perform write_profile on profile_doc
   ensure owner_is(session_user)
 "#;
 
+const DUPLICATE_ENSURE_INPUT: &str = r#"
+perform write_profile on profile_doc
+  ensure owner_is(session_user)
+  ensure owner_is(session_user)
+"#;
+
+const UNSUPPORTED_DIRECT_CHILD_INPUT: &str = r#"
+perform write_profile on profile_doc
+  require write
+  note delegated
+"#;
+
 #[test]
 fn stage3_request_clause_suite_spike_extracts_single_line_require_and_ensure_slots() {
     let suite = extract_stage3_request_clause_suite(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
@@ -156,5 +168,31 @@ fn stage3_request_clause_suite_spike_rejects_blank_line_between_clauses() {
     assert!(
         error.contains("blank line is not allowed between request-local clauses"),
         "expected clause-between-blank-line wording, got: {error}"
+    );
+}
+
+#[test]
+fn stage3_request_clause_suite_spike_rejects_duplicate_ensure_clause() {
+    let error = extract_stage3_request_clause_suite(DUPLICATE_ENSURE_INPUT)
+        .expect_err("suite spike should reject duplicate ensure clause");
+
+    assert!(
+        error.contains("duplicate `ensure` clause is not allowed"),
+        "expected duplicate-ensure wording, got: {error}"
+    );
+}
+
+#[test]
+fn stage3_request_clause_suite_spike_rejects_unsupported_direct_child_line() {
+    let error = extract_stage3_request_clause_suite(UNSUPPORTED_DIRECT_CHILD_INPUT)
+        .expect_err("suite spike should reject unsupported direct child line");
+
+    assert!(
+        error.contains("unsupported request-local clause line inside fixed two-slot suite"),
+        "expected suite-local unsupported-child wording, got: {error}"
+    );
+    assert!(
+        error.contains("note delegated"),
+        "expected offending line text to be preserved, got: {error}"
     );
 }
