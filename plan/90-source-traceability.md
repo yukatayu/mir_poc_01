@@ -651,6 +651,12 @@
   - `specs/examples/99-current-l2-stage3-request-clause-suite-structural-floor.md`
   - `docs/reports/0309-current-l2-stage3-request-clause-suite-structural-floor.md`
 
+### 2026-04-08 stage 3 request clause suite first tranche comparison addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/100-current-l2-stage3-request-clause-suite-first-tranche-comparison.md`
+  - `docs/reports/0311-current-l2-stage3-request-clause-suite-first-tranche-comparison.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

@@ -330,6 +330,8 @@
   - stage 3 later branch の次段を request-local clause suite completion と multiline attachment malformed-source pair extension のどちらから開くべきかを比較する。
 - `specs/examples/99-current-l2-stage3-request-clause-suite-structural-floor.md`
   - stage 3 later branch の request-local `require:` / `ensure:` を sibling clause suite としてどこまで structural floor に入れてよいかを比較する。
+- `specs/examples/100-current-l2-stage3-request-clause-suite-first-tranche-comparison.md`
+  - stage 3 later branch の fixed two-slot request clause suite floor を helper-local / test-only actual evidence にどこまで actualize するかを比較する。
 
 ## レポート
 

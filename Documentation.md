@@ -184,6 +184,7 @@ flowchart LR
 114. stage 3 later branch の shared single attachment frame first tranche が `crates/mir-ast/tests/support/current_l2_stage3_multiline_attachment_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs` でどこまで actualize 済みかは `specs/examples/97-current-l2-stage3-multiline-attachment-first-tranche-actualization.md`
 115. stage 3 later branch の次段を request-local clause suite completion と multiline attachment malformed-source pair extension のどちらから開くべきか、その current sequencing judgment は `specs/examples/98-current-l2-stage3-suite-vs-malformed-sequencing.md`
 116. stage 3 later branch の request-local `require:` / `ensure:` を sibling clause suite としてどこまで structural floor に入れてよいか、その current comparison は `specs/examples/99-current-l2-stage3-request-clause-suite-structural-floor.md`
+117. stage 3 later branch の fixed two-slot request clause suite floor を helper-local / test-only actual evidence にどこまで actualize するか、その current comparison は `specs/examples/100-current-l2-stage3-request-clause-suite-first-tranche-comparison.md`
 
 ## レポート
 
