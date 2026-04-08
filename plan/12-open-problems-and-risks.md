@@ -223,6 +223,8 @@
 - current actualization として、その first pair は helper-local / test-only focused smoke に actualize 済みであり、current tranche では helper code widening や public diagnostics carrier 導入は不要である。
 - `missing multiline ensure block` は multiline attachment bridge family と近いため、current phase では still later に残してよい。
 - current next-step sequencing としては、その first pair actualization の後も fixture-side full request contract compare より先に `missing multiline ensure block` family を surfaced するのが自然である。理由は、current helper family の hidden fail-closed path を narrow に閉じ切ってから request head / contract node compare へ進む方が staged line に合うためである。
+- current actualization として、その `missing multiline ensure block` hidden path も helper-local / test-only focused smoke に actualize 済みであり、current phase では suite bridge family の existing hidden malformed path を narrow に surfaced する line までは閉じたと読んでよい。
+- current remaining risk は、ここから bare clause line family / fixture-side full request contract compare / public diagnostics refinement を同時に開いて staged line を崩すことである。next narrow step では remaining suite malformed wording family と full request compare の reopen 条件を改めて比較するのが自然である。
 - さらに current docs-only refinement として、actual implementation へ入る直前 cut では input surface は test inline string、`decl_guard_slot` internal carrier は dedicated wrapper + owned `surface_text`、private helper family は `current_l2_stage1_parser_spike_support` を第一候補にするのが最小である。
 - ただし dedicated text fixture file の path policy、span-aware carrier、final parser-side type 名、final parser API は引き続き OPEN である。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 16:43 JST
+最終更新: 2026-04-08 16:50 JST
 
 ## この文書について
 
@@ -119,7 +119,8 @@
   - request-local `require:` / `ensure:` の suite structural floor comparison も済みであり、current floor は `perform` owner の fixed two-slot suite に留める judgment を固定した
   - fixed two-slot suite floor の first actualization judgment も比較済みであり、current first choice は clause presence summary だけで止めず、`require_fragment_text` / `ensure_fragment_text` を持つ helper-local suite bridge を切ることである
   - fixed two-slot suite bridge の helper-local / test-only first tranche も actualize 済みであり、single-line / multiline mixed clause payload を同じ slot carrier に載せる line まで通した
-  - next narrow step は、`missing multiline ensure block` family を helper-local / test-only actual evidence に上げることである
+  - `missing multiline ensure block` hidden path も helper-local / test-only actual evidence として actualize 済みである
+  - next narrow step は、remaining suite malformed wording family と fixture-side full request contract compare の reopen 条件を narrow に比較することである
 
 ## 残課題の優先順位
 
@@ -235,3 +236,4 @@ rough estimate:
 - 2026-04-08 16:11 JST — Phase 3 later branch の suite malformed/source first pair を focused smoke へ actualize し、`duplicate ensure` と unsupported direct child line の hidden fail-closed path を `cargo test -p mir-ast --test current_l2_stage3_request_clause_suite_spike` と `cargo test -p mir-ast` で surfaced した。次は `missing multiline ensure block` family と fixture-side full request contract compare の sequencing を比較する段階。
 - 2026-04-08 16:30 JST — Phase 3 later branch の next sequencing を比較し、first pair actualization の後も full request compare より先に `missing multiline ensure block` family を helper-local / test-only actual evidence に上げる judgment を mirror へ固定した。次はその hidden fail-closed path を focused smoke として surfaced する段階。
 - 2026-04-08 16:43 JST — Phase 3 later branch の sequencing comparison 105 系列を canonical file 名と traceability addendum まで揃え、top-level docs から次段を `missing multiline ensure block` first-tranche actualization として辿れる状態にした。次はその focused smoke を追加して current hidden fail-closed path を surfaced する段階。
+- 2026-04-08 16:50 JST — Phase 3 later branch の `missing multiline ensure block` hidden path を focused smoke へ actualize し、`cargo test -p mir-ast --test current_l2_stage3_request_clause_suite_spike` と `cargo test -p mir-ast` で 9-test suite まで通した。次は remaining suite malformed wording family と fixture-side full request contract compare の reopen 条件を比べる段階。

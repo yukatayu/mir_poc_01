@@ -342,6 +342,8 @@
   - stage 3 later branch の request-local suite bridge family で `duplicate ensure` + unsupported direct child line の first pair が helper-local / test-only でどこまで surfaced 済みかを整理する。
 - `specs/examples/105-current-l2-stage3-missing-ensure-vs-request-compare-sequencing.md`
   - stage 3 later branch の remaining suite malformed family と fixture-side full request contract compare のどちらを先に扱うべきかを比較する。
+- `specs/examples/106-current-l2-stage3-missing-ensure-first-tranche-actualization.md`
+  - stage 3 later branch の `missing multiline ensure block` hidden path が helper-local / test-only でどこまで surfaced 済みかを整理する。
 
 ## レポート
 

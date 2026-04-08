@@ -65,6 +65,11 @@ perform write_profile on profile_doc
   note delegated
 "#;
 
+const MISSING_MULTILINE_ENSURE_BLOCK_INPUT: &str = r#"
+perform write_profile on profile_doc
+  ensure:
+"#;
+
 #[test]
 fn stage3_request_clause_suite_spike_extracts_single_line_require_and_ensure_slots() {
     let suite = extract_stage3_request_clause_suite(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
@@ -194,5 +199,16 @@ fn stage3_request_clause_suite_spike_rejects_unsupported_direct_child_line() {
     assert!(
         error.contains("note delegated"),
         "expected offending line text to be preserved, got: {error}"
+    );
+}
+
+#[test]
+fn stage3_request_clause_suite_spike_rejects_missing_multiline_ensure_block() {
+    let error = extract_stage3_request_clause_suite(MISSING_MULTILINE_ENSURE_BLOCK_INPUT)
+        .expect_err("suite spike should reject missing multiline ensure block");
+
+    assert!(
+        error.contains("missing multiline predicate block after ensure:"),
+        "expected missing-multiline-ensure wording, got: {error}"
     );
 }
