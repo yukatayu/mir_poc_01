@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 12:45 JST
+最終更新: 2026-04-08 13:06 JST
 
 ## この文書について
 
@@ -211,3 +211,5 @@ rough estimate:
 - 2026-04-08 12:30 JST — repo 全体の大局 phase / autonomy gate を `plan/17` に集約し、`progress.md` に current phase・重さ・自走可否の snapshot を追加した。次は shared-space の identity / auth layering を participant carrier / authority / fairness と混ぜずにどう切るかを narrow に比較する段階。
 - 2026-04-08 12:36 JST — shared-space の identity / auth layering を `membership carrier に全部入れる` / `identity core と auth stack を分ける` / `opaque actor handle だけを room core に残す` で比較し、current first practical candidate を `identity core は membership registry、auth stack / admission policy は別 carrier` に置いた。次は admission policy と compile-time over-approximation の接点を、room capability / visibility requirement の line とどう切るかを narrow に比較する段階。
 - 2026-04-08 12:45 JST — shared-space の admission policy / compile-time visibility を `runtime-only` / `declared over-approx + runtime admission` / `closed-world exact set` で比較し、current first practical candidate を `role / capability / visibility requirement は compile-time over-approx、actual admission / activation は runtime control-plane` に置いた。次は fairness witness と identity core / principal continuity の接点を、audit artifact line とどう切るかを narrow に比較する段階。
+- 2026-04-08 12:59 JST — Phase0/1/2 closeout の consistency sweep として detached validation loop の helper surface を再確認し、`smoke-fixture` で E3/E6、`smoke-static-gate` で E4/E5 を回して bundle-first / aggregate / static-gate diff の current docs line と矛盾しないことを確認した。次はこの sweep evidence を report に固定し、必要な mirror drift だけを補正する段階。
+- 2026-04-08 13:06 JST — Phase0/1/2 closeout smoke の report / document map / progress mirror を reviewer finding に合わせて補正し、detached validation loop の compare boundary と helper entry surface に concrete drift が無い状態で closeout できるところまで揃えた。次は README / Documentation / specs/examples / plan mirror 全体へ consistency sweep を広げる段階。

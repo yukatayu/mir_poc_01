@@ -414,6 +414,7 @@
 - `scripts/current_l2_detached_loop.py`
   - detached validation loop の non-production wrapper。
   - `smoke-fixture` subcommand により、1 fixture を bundle export / optional reference compare / single-fixture aggregate smoke までまとめて回せる。
+  - `smoke-static-gate` subcommand により、1 fixture の static gate artifact を保存し、optional reference fixture compare までまとめて回せる。
   - `smoke-try-rollback-structural-checker` subcommand により、1 fixture の static gate artifact を保存して dedicated try/rollback structural helper first tranche を回せる。
 - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
   - current L2 parser-free PoC の public behavior coverage を置く。
