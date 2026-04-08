@@ -46,6 +46,8 @@ The repository therefore treats documentation structure as part of the project's
 - The current stage is **still architecture and semantics**, not broad implementation.
 - Performance-sensitive kernels (for example PrismCascade runtime) must not be casually folded into Mir runtime semantics.
 - Dynamic evolution must respect the project's design principle of **safe downstream addition** unless an explicit subsystem spec says otherwise.
+- long-running research では、PoC 実装・実行・回帰確認と、formal boundary / proof obligation / invariant wording の整理を並走させること。
+- implementation を進めるときも、portability / observability / step execution / graph export hook は replaceable layer として意識し、CPU 固定や単一 debug mode を早く既成事実化しないこと。
 
 ## Reporting policy
 
@@ -112,6 +114,8 @@ Every report should contain, in this order:
 - reviewer はむやみに何度も呼ばず、最後に 1 回だけ長めに待つのを基本にする。
 - 必要なら task 内部で narrow-scope re-review を行ってよい。
 - reviewer が返らない場合だけ retry を 1 回行い、なお返らなければ local evidence と diff inspection を report に残す。
+- subagent を使う場合は、明らかに壊れている / hung している根拠がない限り、latency だけを理由に早切りせず completion まで待つこと。
+- 不要になった subagent は close する。ただし context を保持したいものは明示的に残してよい。
 
 ## Preferred style
 

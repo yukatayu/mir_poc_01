@@ -120,6 +120,10 @@ PoC ループの task は、できるだけ task 内部で閉じる。
 - heavy command や generated artifact を増やす前に、`df -h .` と `free -h` 相当で disk / memory を確認する。
 - commit は対話的な GPG prompt を避けるため `git commit --no-gpg-sign` を使う。
 - user が明示的に止めない限り、commit ごとに push する。
+- long-running research では、PoC 実装・実行・回帰確認と、formal boundary / proof obligation / invariant wording の整理を並走させる。
+- portability / observability / step execution / graph export hook は replaceable layer として意識し、CPU 固定や単一 debug mode を早く既成事実化しない。
+- subagent を使う場合は、明らかな hang / broken evidence がない限り、latency だけを理由に早切りせず completion まで待つ。
+- 不要になった subagent は close し、保持したい context があるものだけ意図的に残す。
 
 ## report に必ず残すこと
 

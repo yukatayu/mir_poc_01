@@ -583,6 +583,196 @@ current phase では、
 
 が自然である。
 
+## shared-space resource ownership / delegation の current working model
+
+### 問い
+
+user 直感として、
+
+- 「すべての resource には owner がいる」
+- 「必要に応じて owner が delegation / loan を出せる」
+
+という model はかなり分かりやすい。
+
+これは shared-space 側でも有力な working hypothesis である。
+ただしここでの `owner` は、そのまま Mir core の value-level ownership と同一視せず、**shared-space resource に対する authoritative write authority slot** として読む方が安全である。
+
+### まず分けるべきもの
+
+最低でも次は分ける。
+
+1. Mir core の ownership / lifetime
+   - linearity
+   - monotone degradation
+   - duplication prohibition
+2. shared-space resource owner
+   - room resource を authoritative に mutate できる operational authority
+3. delegated capability
+   - resource 本体の owner を増やさずに、request / append / reserve / move の権限だけを限定的に与える carrier
+
+### current working hypothesis
+
+authoritative room では、**mutable shared resource ごとに current owner slot は 1 つ**、という仮説が最も扱いやすい。
+
+概念上は次のように読む。
+
+```text
+ResourceAuthority<R> = {
+  owner_ref,
+  delegation_set,
+  handoff_epoch
+}
+```
+
+- `owner_ref`
+  - 現在 authoritative に write / commit できる主体
+- `delegation_set`
+  - owner から限定 capability を受けた主体
+- `handoff_epoch`
+  - owner handoff を audit / replay で区別する世代
+
+### 何が嬉しいか
+
+この model だと、
+
+- exclusive mutation
+- lock ownership
+- handoff audit
+- fairness source の placement
+
+を同じ語彙で比較しやすい。
+
+### 何に注意が要るか
+
+この `owner` は、
+
+- 人間の利用者本人
+- deployment 上の server
+- replicated authority group
+- delegated service
+
+のどれでもありうる。
+
+したがって「resource には owner がいる」は useful だが、「owner は常に participant である」とは言えない。
+
+### minimal invariants
+
+current working model として、少なくとも次の invariant を比較候補にしてよい。
+
+1. **exclusive-authority invariant**
+   - authoritative serial resource では、ある時点の authoritative owner slot は高々 1 つ
+2. **delegation-is-not-coownership invariant**
+   - delegated capability は co-owner を増やさない
+3. **explicit-handoff invariant**
+   - owner handoff / revocation は explicit event と audit を持つ
+4. **mode-compatibility invariant**
+   - append-friendly room では「resource owner = object 全体の唯一 owner」を常に要求しなくてよく、append capability の共有で十分な場合がある
+
+### current working judgment
+
+- **authoritative serial room**
+  - 「resource ごとに 1 owner slot + delegated request capability」が第一候補
+- **append-friendly room**
+  - 「log 全体の authoritative owner」と「append capability を持つ participant 群」を分ける方が自然
+- **relaxed / merge-friendly room**
+  - local shard / contribution owner と global projection を分ける必要があり、current phase では future research に残す
+
+要するに、「すべての resource に owner がいる」は useful だが、**owner = mutable room resource の authoritative authority slot** と読み替えると理論上きれいである。
+
+## authority placement と resource ownership の関係
+
+### authoritative game room
+
+authoritative すごろく room では、少なくとも次の 3 層が見える。
+
+1. room authority
+2. resource owner slot
+3. participant capability
+
+概念上はたとえばこう切れる。
+
+```text
+resource board_state      owner = room_authority
+resource roll_lock        owner = room_authority
+resource roll_transition  owner = room_authority
+provider dice_rng_source  selected_by = room_authority
+  source = authority_rng | delegated_rng_service
+
+capability request_roll   delegated_to = active_players
+capability read_positions delegated_to = active_players_and_watchers
+```
+
+ここで player は `request_roll` capability を持てても、
+
+- `board_state` を直接 mutate する owner
+- `roll_transition` を commit する owner
+- `dice_rng_source` をどこへ向けるかを選ぶ authority
+
+とは限らない。
+
+### append-friendly room
+
+notice board のような room では、
+
+```text
+resource notes_log           owner = room_log_authority
+capability append_note       delegated_to = active_participants
+capability read_visible_tail delegated_to = active_participants_and_watchers
+```
+
+のように、
+
+- log 本体の owner
+- append capability
+
+を分ける方が自然である。
+
+### ここから言えること
+
+participant carrier が同じでも、
+
+- authority placement
+- resource owner placement
+- delegated capability shape
+
+は room rule に依存して変わる。
+
+したがって **membership carrier と resource ownership / delegation model も別軸で比較するべき**である。
+
+## consistency mode と ownership model の相性
+
+### authoritative serial transition
+
+最も相性が良い。
+
+- single owner slot
+- explicit delegation
+- explicit handoff
+- authoritative log
+
+を素直に置ける。
+
+### append-friendly room
+
+中程度に相性が良い。
+
+- object 全体の唯一 owner を前面に出すより
+- append right を delegated capability として分ける
+
+方が自然である。
+
+### relaxed / merge-friendly room
+
+現時点では hardest case である。
+
+- local owner
+- merge authority
+- conflict resolution policy
+
+が別 carrier になりやすい。
+
+current repo の phase では、ここを無理に一枚岩にせず future research とする方が自然である。
+
 ## Raft / Paxos をどう位置づけるか
 
 ### current working answer
