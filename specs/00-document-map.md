@@ -356,6 +356,10 @@
   - stage 3 later branch で request contract subset family を current tranche で freeze し、別 Phase 3 subline に戻すべきかを比較する。
 - `specs/examples/112-current-l2-phase3-resume-side-selection.md`
   - request contract subset family freeze 後に、Phase 3 主線を parser boundary staging 側ではなく first checker cut connection 側から再開するかを比較する。
+- `specs/examples/113-current-l2-first-checker-reconnect-family-selection.md`
+  - Phase 3 の checker-side reconnect を、どの existing parser-boundary evidence family から始めるのが最小かを比較する。
+- `specs/examples/114-current-l2-stage1-first-checker-reconnect-first-tranche-actualization.md`
+  - stage 1 chain / declaration structural floor family を first checker reconnect の first tranche としてどこまで helper-local / test-only に actualize してよいかを整理する。
 
 ## レポート
 

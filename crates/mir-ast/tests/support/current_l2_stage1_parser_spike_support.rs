@@ -1,4 +1,4 @@
-use std::{fs, path::PathBuf};
+use std::{collections::BTreeMap, fs, path::PathBuf};
 
 use serde_json::Value;
 
@@ -73,6 +73,13 @@ pub struct FixtureChainDecl {
 pub struct Stage1FixtureSubset {
     pub options: Vec<FixtureOptionDecl>,
     pub chains: Vec<FixtureChainDecl>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Stage1ReconnectClusters {
+    pub same_lineage_floor: bool,
+    pub missing_option_structure_floor: bool,
+    pub capability_strengthening_floor: bool,
 }
 
 pub fn parse_stage1_program_text(source: &str) -> Result<Stage1ParsedProgram, String> {
@@ -176,10 +183,58 @@ pub fn load_expected_fixture_subset(name: &str) -> Result<Stage1FixtureSubset, S
     Ok(subset)
 }
 
+pub fn summarize_stage1_reconnect_clusters(
+    subset: &Stage1FixtureSubset,
+) -> Stage1ReconnectClusters {
+    let option_map: BTreeMap<&str, &FixtureOptionDecl> = subset
+        .options
+        .iter()
+        .map(|option| (option.name.as_str(), option))
+        .collect();
+    let mut summary = Stage1ReconnectClusters {
+        same_lineage_floor: false,
+        missing_option_structure_floor: false,
+        capability_strengthening_floor: false,
+    };
+
+    for chain in &subset.chains {
+        if !option_map.contains_key(chain.head.as_str()) {
+            summary.missing_option_structure_floor = true;
+        }
+
+        for edge in &chain.edges {
+            if edge.lineage_assertion.is_some() {
+                summary.same_lineage_floor = true;
+            }
+
+            let predecessor = option_map.get(edge.predecessor.as_str()).copied();
+            let successor = option_map.get(edge.successor.as_str()).copied();
+            if predecessor.is_none() || successor.is_none() {
+                summary.missing_option_structure_floor = true;
+            }
+
+            if let (Some(predecessor), Some(successor)) = (predecessor, successor) {
+                if capability_strengthens(
+                    predecessor.capability.as_str(),
+                    successor.capability.as_str(),
+                ) {
+                    summary.capability_strengthening_floor = true;
+                }
+            }
+        }
+    }
+
+    summary
+}
+
 fn fixture_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("tests/fixtures/current-l2")
         .join(name)
+}
+
+fn capability_strengthens(from: &str, to: &str) -> bool {
+    matches!((from, to), ("read", "write"))
 }
 
 fn parse_option_decl(line: &str) -> Result<Stage1ParsedOptionDecl, String> {

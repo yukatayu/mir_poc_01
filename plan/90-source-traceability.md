@@ -729,6 +729,13 @@
   - `specs/examples/112-current-l2-phase3-resume-side-selection.md`
   - `docs/reports/0335-current-l2-phase3-resume-side-selection.md`
 
+### 2026-04-08 first checker reconnect family addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/113-current-l2-first-checker-reconnect-family-selection.md`
+  - `specs/examples/114-current-l2-stage1-first-checker-reconnect-first-tranche-actualization.md`
+  - `docs/reports/0337-current-l2-first-checker-reconnect-family-and-first-tranche.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

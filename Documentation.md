@@ -197,6 +197,8 @@ flowchart LR
 127. stage 3 later branch の request head metadata を still later に残したまま contract-only compare surface をどこまで widening してよいか、その current guard judgment は `specs/examples/110-current-l2-stage3-request-contract-subset-widening-guard.md`
 128. stage 3 later branch の request contract subset family を current tranche で freeze して別 Phase 3 subline に戻すべきか、その current sequencing judgment は `specs/examples/111-current-l2-stage3-request-contract-subset-freeze-sequencing.md`
 129. request contract subset family freeze 後に、Phase 3 主線を parser boundary staging 側ではなく first checker cut connection 側から再開する current side-selection judgment は `specs/examples/112-current-l2-phase3-resume-side-selection.md`
+130. Phase 3 の checker-side reconnect をどの parser-boundary evidence family から始めるのが最小か、その current family selection は `specs/examples/113-current-l2-first-checker-reconnect-family-selection.md`
+131. stage 1 chain / declaration structural floor family を first checker reconnect の first tranche としてどこまで actualize してよいか、その current cut は `specs/examples/114-current-l2-stage1-first-checker-reconnect-first-tranche-actualization.md`
 
 ## レポート
 
