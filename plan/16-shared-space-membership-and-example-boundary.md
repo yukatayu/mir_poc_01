@@ -874,6 +874,128 @@ room_authority requests random draw
 
 を別軸で保つのが最も自然である。
 
+## fairness trust model をどこまで room profile に入れるか
+
+RNG provider placement とは別に、`draw が fair だった` と誰がどこまで主張するか、という trust model も分けて考える必要がある。
+
+### 比較したい 4 案
+
+1. opaque authority trust
+2. auditable authority witness
+3. delegated provider attestation
+4. distributed fairness protocol
+
+### 案A — opaque authority trust
+
+#### 読み
+
+- authority が `draw` を決める
+- audit には結果だけが残る
+- fairness claim は authority trust に寄せる
+
+#### 利点
+
+- current authoritative room では最小
+- rule / lock / move / reset を 1 本の transition history にまとめやすい
+- implementation cost が最も低い
+
+#### 欠点
+
+- fairness を後から検証しづらい
+- debug replay と real fairness claim が同じ authority trust に乗る
+- provider 差し替えや proof 境界が見えにくい
+
+### 案B — auditable authority witness
+
+#### 読み
+
+- `draw` 自体は authority が確定してよい
+- ただし audit には result だけでなく、少なくとも `witness_ref` または replay に必要な witness を残す
+
+概念上はたとえば次のように読む。
+
+```text
+draw <- authority_rng.d6()
+witness <- authority_rng.make_witness(room_epoch, turn_epoch, actor_incarnation, draw)
+commit move with draw + witness_ref
+```
+
+#### 利点
+
+- provider placement を変えずに audit / replay を 1 段強化できる
+- debug / deterministic replay hook を差し込みやすい
+- fairness claim を「authority trusted」から「authority + witness trusted」へ少し分離できる
+
+#### 欠点
+
+- witness の最小 shape を later に決める必要がある
+- cryptographic proof なのか replay token なのかを current phase では固定しないと明記し続ける必要がある
+
+### 案C — delegated provider attestation
+
+#### 読み
+
+- authority は transition commit を行う
+- randomness は delegated provider が返し、provider receipt / attestation を audit に残す
+
+#### 利点
+
+- authority placement と fairness source をより明確に分けられる
+- HW entropy / external RNG / replayable debug RNG を provider family として差し替えやすい
+- fairness claim を authority 1 点信頼から少し外せる
+
+#### 欠点
+
+- provider identity / receipt validation / failure policy が増える
+- auth / identity layering と自然に接触しやすい
+- current phase では operational realization 寄りになる
+
+### 案D — distributed fairness protocol
+
+#### 読み
+
+- commit-reveal や threshold randomness で multi-party に draw を決める
+
+#### 利点
+
+- strongest fairness claim の余地がある
+- authority 1 点の信頼を最も弱めやすい
+
+#### 欠点
+
+- membership churn / timeout / partial participation / reconnect と強く結びつく
+- current room profile の 4 軸 bundle より一段重い control-plane を要する
+- current repo phase では premature である
+
+### authoritative game room の current working line
+
+- **current minimal practical candidate は案A**
+- **next narrow strengthening candidate は案B**
+- **provider placement を分離する段階では案Cを組み合わせ候補に残す**
+- **案Dは future research に残す**
+
+ここで大事なのは、`delegated_rng_service` を採るかどうかと、fairness claim をどこまで audit witness 付きにするかを同じ軸に潰さないことである。
+
+### append-friendly room での current line
+
+- shared RNG 自体が不要なことが多い
+- 必要な場合でも、fairness claim を room profile の必須核にせず、provider-side attestation を optional capability に留める方が自然である
+
+### current working judgment
+
+- **authoritative room の fairness trust model は、current phase では `opaque authority trust` を最小候補に置く**
+- **ただし next narrow step としては provider placement より先に `auditable authority witness` を比較する方が、proof / replay / debug hook の境界をきれいに切りやすい**
+- **`delegated_rng_service` は provider placement の次 practical candidate だが、trust model 上は `auditable authority witness` と組み合わせて読む方が自然である**
+- **distributed fairness protocol は current room-profile line に混ぜず future research に残す**
+
+したがって current repo では、fairness を詰めるときも
+
+- randomness provider がどこにあるか
+- fairness claim を誰が担保するか
+- audit / replay witness をどこまで要求するか
+
+を別軸で比較するのが最も自然である。
+
 ## shared-space resource ownership / delegation の current working model
 
 ### 問い
