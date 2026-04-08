@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-06 09:19 JST
+最終更新: 2026-04-08 09:33 JST
 
 ## この文書について
 
@@ -18,6 +18,7 @@
 - **parser-free PoC** は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
 - **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口まで来ている。
 - **parser boundary** は、stage 1 private spike と stage 3 declaration-side / later malformed-source first tranche まで actualize 済みである。
+- **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較まで進んだ。
 - 現在の主ボトルネックは semantics の大崩れではなく、
   - fixture authoring / elaboration の反復コスト
   - parser boundary の staged 実装
@@ -45,6 +46,7 @@
 
 - Mirrorea Fabric の具体仕様
 - Typed-Effect Wiring Platform の具体仕様
+- shared-space / session activation / membership protocol の具体仕様
 - PrismCascade / 上位 shared space / 上位アプリケーション
 - Reversed Library の具体要件
 
@@ -133,7 +135,8 @@ rough estimate:
 | first checker cut / helper-local compare family | 82% | 70% | 80% | 着手可能 | narrow helper family は安定、generic/public は後段 |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | static analysis / type / theorem prover boundary | 36% | 26% | 12% | 後段依存 | hybrid staged approach を採る前提 |
-| Mirrorea / Typed-Effect / Prism / 上位アプリ | 15% | 10% | 5% | 要仕様確認 | user からの追加仕様が必要 |
+| shared-space / dynamic membership boundary | 28% | 22% | 6% | 要仕様確認 | docs-first boundary と example は進められるが、activation / consistency / auth は user 仕様待ち |
+| Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様は依然 user からの追加仕様が必要 |
 
 ## 現時点での大きい未解決問題
 
@@ -142,8 +145,9 @@ rough estimate:
 3. final parser syntax と companion notation の切り分け
 4. richer host interface / typed coverage carrier
 5. static analysis / type system / theorem prover / model checker boundary
+6. shared-space / membership protocol / consistency mode catalog の finalization
 
-## 次に進めるべき 3 task
+## 次に進めるべき task
 
 1. stage 3 later branch の
    - request head + clause attachment multiline shape
@@ -151,6 +155,7 @@ rough estimate:
    のどちらを先に比較するかを narrow に決める
 2. current detached loop を新しい fixture 追加手順と結び付けて、authoring friction をさらに 1 段下げる
 3. parser boundary staging と first checker cut の接点を docs-only で再棚卸しし、無理な合流を避ける
+4. shared-space / membership boundary は docs-first example まで進めてよいが、activation / authority / auth / consistency catalog の finalization は user 仕様確認で止める
 
 ## 作業ログ（簡潔）
 
@@ -162,3 +167,5 @@ rough estimate:
 - 2026-04-06 09:14 JST — stage 3 admit-slot branch の次段 sequencing を比較し、request-local clause spillover より先に fixture-side `OptionDecl.admit` handoff line を扱うのが自然だと整理した。次は handoff line 自体を actual compare に上げず、どこまで docs-only deferred に留めるかを詰める段階。
 - 2026-04-06 09:18 JST — stage 3 admit-node handoff comparison を整理し、fixture-side `OptionDecl.admit` は already elaborated predicate node なので current phase では direct lowering も canonical surface compare も入れず、predicate fragment boundary が見えるまで docs-only deferred に留める判断を固定した。次は request-local `require` / `ensure` spillover を stage 3 later branch としてどこまで docs-only comparison に持つかを比べる段階。
 - 2026-04-06 09:19 JST — stage 3 request-local clause spillover first tranche まで repo 状態を見直し、`progress.md` を snapshot 向けに再編した。次は stage 3 later branch の multiline attachment shape と predicate fragment reopen 条件のどちらを先に比較するかを narrow に決める段階。
+- 2026-04-08 09:24 JST — shared-space / participant churn の boundary を repo source と blog 起点から再整理し、participant plain array を core に焼き込まず session-scoped membership registry + derived snapshot view を第一候補にする docs-first comparison と practical example を追加した。次はこの boundary を維持したまま current L2 mainline を続け、shared-space の final activation / consistency / auth は user 仕様確認で止める段階。
+- 2026-04-08 09:33 JST — shared-space / membership boundary task を docs / plan / progress mirror まで閉じ、local validation で doc scaffold と diff formatting を確認した。upper-layer は self-driven な boundary 整理まで進め、activation / authority / auth / consistency catalog の finalization では仕様確認待ちで止める状態。

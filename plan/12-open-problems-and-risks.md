@@ -20,7 +20,7 @@
 | `expected_static.reasons` の二重用途 | checker / fixture schema | OPEN / narrow migration available | explanatory note と machine-check 候補が同じ field に混在しているため、そのまま harness machine-check core に昇格させると current fixture corpus と衝突する | current L2 では `verdict` だけを harness core に残し、actual `reasons` compare は detached static gate artifact に留める。future checker API への narrow migration として optional `checked_reasons` を additive に導入してよい |
 | richer host interface | runtime boundary | OPEN / comparison 上の後続候補 | current host harness を production host に誤昇格しやすく、coverage analysis を先に肥大化させやすい | helper と production host を分離して記述し、detached artifact 境界の後で narrow に切る |
 | constrained continuation / multi-shot | semantics / runtime boundary | OPEN / FUTURE | unrestricted multi-shot が linear resource、rollback frontier、lifetime crossing を壊しやすい | coroutine semantics を Mir-0 の外に残し、one-shot / multi-shot / capture restriction を将来 workstream で明示する |
-| dynamic membership / causal metadata | shared space / fabric | OPEN / FUTURE | participant churn を plain vector clock deletion だけで扱うと membership change と causal history が混線しやすい | shared-space / Mirrorea workstream 側で、membership reconfiguration と causal metadata を分離して設計する |
+| dynamic membership / causal metadata | shared space / fabric | OPEN / FUTURE | participant churn を plain vector clock deletion だけで扱うと membership change と causal history が混線しやすい。participant 集合を plain array の source of truth にすると、identity / activation / incarnation / ordering が混ざりやすい | shared-space / Mirrorea workstream 側で、membership reconfiguration と causal metadata を分離し、session-scoped membership registry + derived snapshot view を第一候補として比較する |
 | rollback restore scope / checker boundary | semantics / checker boundary | OPEN / current runtime reading あり | `AtomicCut` frontier update と restore scope を checker floor に混ぜると、current whole-store snapshot restore と place-local explanation がずれやすい | `TryFallback` / `AtomicCut` の structural floor は checker 候補に残しつつ、`place_anchor == current_place` gate と restore scope は runtime / proof boundary に残す |
 | portability / observability hooks | implementation / tooling boundary | OPEN / FUTURE | CPU 固定や非切替デバッグ実装を早く焼き付けると、後で HW 拡張や graph 可視化 / step 実行の導入で手戻りが大きい | semantics core には入れず、detached artifact / step execution / graph export hook を replaceable layer として残す |
 | multi-request scheduler | runtime | FUTURE | current direct-style interpreter と概念が混ざる | 現時点では未着手を明示 |
@@ -236,11 +236,19 @@
 
 - current repo は synchronized shared-space の小例を将来 workstream に残しているが、participant churn を持つ causal metadata policy はまだ固定していない。
 - plain vector clock に participant add / remove を直接重ねると、membership reconfiguration と causal history を同じ carrier へ押し込みやすく、leave 後の古い message を新規 join と誤読しない rule を別途必要とする。
+- current working comparison では、participant 集合を plain array の source of truth にするより、
+  - session-scoped membership registry
+  - explicit activation / deactivation
+  - rejoin を区別する incarnation
+  - UI / app 用の derived snapshot view
+  に分ける方が自然である。
 - current plan では、この問題を current L2 parser-free PoC に持ち込まず、
   - shared-space / session membership
   - membership reconfiguration / activation
   - causal metadata / version carrier
   を分けて設計する future problem として残す。
+- consensus family についても、`Raft` / `Paxos` / その近縁を implementation candidate として検討するのは自然だが、current repo の architectural line では language core や Mirrorea spec に単一 algorithm を焼き込まない。
+- 上位 shared-space 例としては、authoritative lock と global reset を持つ room と、append-only に近い room とで consistency mode の自然さが異なる。したがって participant carrier と consistency mode catalog は分けて比較する必要がある。
 
 ### rollback restore scope / checker boundary
 

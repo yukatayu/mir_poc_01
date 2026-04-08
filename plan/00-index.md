@@ -19,7 +19,8 @@
 5. current L2 / PoC を見るなら `plan/04` から `plan/09`
 6. 今後の進め方を見るなら `plan/10` から `plan/13`
 7. fixture を足す実務テンプレートが必要なら `plan/15-current-l2-fixture-authoring-template.md`
-8. 用語と source 根拠を引くときは `plan/14`、`plan/90`、`plan/91`
+8. shared-space / membership / practical example の boundary を見るなら `plan/16-shared-space-membership-and-example-boundary.md`
+9. 用語と source 根拠を引くときは `plan/14`、`plan/90`、`plan/91`
 
 ## status legend
 
@@ -63,6 +64,7 @@
 | `plan/13-heavy-future-workstreams.md` | 型・静的解析・定理証明・決定可能性などの重い将来 workstream |
 | `plan/14-glossary-and-boundary-rules.md` | 用語集と混同防止 |
 | `plan/15-current-l2-fixture-authoring-template.md` | fixture authoring / elaboration を追加し、detached validation loop へ接続するときの実務テンプレート |
+| `plan/16-shared-space-membership-and-example-boundary.md` | shared-space / participant churn / practical example の boundary と、どこまで self-driven に詰めてよいかの長期参照整理 |
 | `plan/90-source-traceability.md` | どの plan がどの source に依拠するか |
 | `plan/91-maintenance-rules.md` | 今後 `plan/` をどう維持するか |
 
