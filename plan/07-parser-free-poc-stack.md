@@ -157,6 +157,8 @@ test-only / private な stage 1 parser spike first tranche が actualize 済み�
 - `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs`
 - `crates/mir-ast/tests/support/current_l2_stage3_multiline_attachment_spike_support.rs`
 - `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs`
+- `crates/mir-ast/tests/support/current_l2_stage3_request_clause_suite_spike_support.rs`
+- `crates/mir-ast/tests/current_l2_stage3_request_clause_suite_spike.rs`
 
 ### current scope
 
@@ -192,6 +194,14 @@ test-only / private な stage 1 parser spike first tranche が actualize 済み�
 - current next actualization judgment としては、その fixed two-slot suite floor を helper-local / test-only actual evidence に上げるとき、clause presence summary だけで止めず、`require_fragment_text` / `ensure_fragment_text` を持つ suite bridge を first tranche にするのが最小である
   - compare は existing isolated predicate fragment helper を使う
   - full request node compare や public parser API は still later stage に残す
+- current actualization として、`crates/mir-ast/tests/support/current_l2_stage3_request_clause_suite_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_request_clause_suite_spike.rs` で fixed two-slot suite bridge first tranche を helper-local / test-only actual evidence として通してよい
+  - helper output は `require_fragment_text` / `ensure_fragment_text` の two-slot carrier に留める
+  - single-line clause payload と multiline clause payload の両方を extracted fragment text として扱ってよい
+  - helper-local structural fail-closed として
+    - `require` after `ensure`
+    - duplicate `require`
+    - clause-between blank line
+    を first tranche に入れてよい
 - helper-local malformed-source smoke として
   - `missing edge-local lineage metadata`
   - `option-local admit is outside stage 1 accepted cluster`

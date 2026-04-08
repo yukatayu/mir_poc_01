@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 14:53 JST
+最終更新: 2026-04-08 15:03 JST
 
 ## この文書について
 
@@ -118,7 +118,8 @@
   - shared single attachment frame の first tranche も actualize 済みであり、declaration-side `admit:` と request-local `require:` / `ensure:` の multiline block extraction bridge を helper-local / test-only actual evidence として通した
   - request-local `require:` / `ensure:` の suite structural floor comparison も済みであり、current floor は `perform` owner の fixed two-slot suite に留める judgment を固定した
   - fixed two-slot suite floor の first actualization judgment も比較済みであり、current first choice は clause presence summary だけで止めず、`require_fragment_text` / `ensure_fragment_text` を持つ helper-local suite bridge を切ることである
-  - next narrow step は、この fixed two-slot suite bridge の helper-local / test-only first tranche を actualize することである
+  - fixed two-slot suite bridge の helper-local / test-only first tranche も actualize 済みであり、single-line / multiline mixed clause payload を同じ slot carrier に載せる line まで通した
+  - next narrow step は、この suite bridge first tranche の後に malformed/source family extension と fixture-side full request contract compare のどちらを先に扱うかを比較することである
 
 ## 残課題の優先順位
 
@@ -126,8 +127,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段比較
-   - request-local `require:` / `ensure:` の fixed two-slot suite bridge first tranche を actualize する
-   - duplicate clause や clause-between blank line の malformed family widening は still later に残す
+   - fixed two-slot suite bridge first tranche の後に malformed/source family extension と fixture-side full request contract compare のどちらを先に扱うかを比較する
+   - duplicate clause や unsupported child line の widening は still later に残す
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -228,3 +229,4 @@ rough estimate:
 - 2026-04-08 14:47 JST — Phase 3 later branch の request-local clause suite structural floor を `perform` owner の fixed two-slot suite に留める judgment を `specs/examples/99` と mirror へ固定し、local diff inspection fallback で docs-only close を行った。次は fixed two-slot suite floor を helper-local / test-only structural compare にどこまで actualize するかを narrow に比較する段階。
 - 2026-04-08 14:51 JST — Phase 3 later branch の fixed two-slot suite floor first actualization を比較し、clause presence summary だけで止めず `require_fragment_text` / `ensure_fragment_text` を持つ helper-local suite bridge を first choice に置いた。次はこの suite bridge first tranche を test-only helper と focused smoke で actualize する段階。
 - 2026-04-08 14:53 JST — spec 100 と mirror / report chain を揃え、Phase 3 mainline の current next narrow step を fixed two-slot suite bridge first tranche actualization へ更新した。次は helper-local / test-only actual evidence と focused smoke を通す段階。
+- 2026-04-08 15:03 JST — Phase 3 later branch の fixed two-slot suite bridge first tranche を helper-local / test-only helper と focused smoke で actualize し、single-line / multiline mixed clause payload compare と最小 structural fail-closed を `cargo test -p mir-ast` まで含めて通した。次は malformed/source family extension と fixture-side full request contract compare の sequencing を比較する段階。

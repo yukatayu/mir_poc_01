@@ -332,6 +332,8 @@
   - stage 3 later branch の request-local `require:` / `ensure:` を sibling clause suite としてどこまで structural floor に入れてよいかを比較する。
 - `specs/examples/100-current-l2-stage3-request-clause-suite-first-tranche-comparison.md`
   - stage 3 later branch の fixed two-slot request clause suite floor を helper-local / test-only actual evidence にどこまで actualize するかを比較する。
+- `specs/examples/101-current-l2-stage3-request-clause-suite-first-tranche-actualization.md`
+  - stage 3 later branch の fixed two-slot request clause suite bridge first tranche が helper-local / test-only でどこまで actualize 済みかを整理する。
 
 ## レポート
 
