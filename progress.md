@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 15:07 JST
+最終更新: 2026-04-08 16:11 JST
 
 ## この文書について
 
@@ -119,16 +119,16 @@
   - request-local `require:` / `ensure:` の suite structural floor comparison も済みであり、current floor は `perform` owner の fixed two-slot suite に留める judgment を固定した
   - fixed two-slot suite floor の first actualization judgment も比較済みであり、current first choice は clause presence summary だけで止めず、`require_fragment_text` / `ensure_fragment_text` を持つ helper-local suite bridge を切ることである
   - fixed two-slot suite bridge の helper-local / test-only first tranche も actualize 済みであり、single-line / multiline mixed clause payload を同じ slot carrier に載せる line まで通した
-  - next narrow step は、request-local suite bridge family の helper-local malformed/source pair をどこから actualize するかを比較することである
+  - next narrow step は、request-local suite bridge family の `duplicate ensure` + unsupported direct child line pair を helper-local / test-only actual evidence に上げることである
 
 ## 残課題の優先順位
 
 ### Priority A — すぐ続けてよい
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
-2. stage 3 later branch の次段比較
-   - request-local suite bridge family の helper-local malformed/source pair をどこから actualize するかを比較する
-   - unsupported child line を dedicated family として切るか generic wording に留めるかを整理する
+2. stage 3 later branch の次段 actualization
+   - request-local suite bridge family の `duplicate ensure` + unsupported direct child line pair を helper-local / test-only actual evidence に上げる
+   - unsupported child line を dedicated family として切るか generic wording に留めるかを smoke で確認する
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -231,3 +231,4 @@ rough estimate:
 - 2026-04-08 14:53 JST — spec 100 と mirror / report chain を揃え、Phase 3 mainline の current next narrow step を fixed two-slot suite bridge first tranche actualization へ更新した。次は helper-local / test-only actual evidence と focused smoke を通す段階。
 - 2026-04-08 15:03 JST — Phase 3 later branch の fixed two-slot suite bridge first tranche を helper-local / test-only helper と focused smoke で actualize し、single-line / multiline mixed clause payload compare と最小 structural fail-closed を `cargo test -p mir-ast` まで含めて通した。次は malformed/source family extension と fixture-side full request contract compare の sequencing を比較する段階。
 - 2026-04-08 15:07 JST — Phase 3 later branch の next sequencing を比較し、fixture-side full request contract compare より先に request-local suite bridge family の helper-local malformed/source extension を docs-only で比較する judgment を mirror へ固定した。次は malformed/source pair の first cut を narrow に決める段階。
+- 2026-04-08 16:11 JST — Phase 3 later branch の suite malformed/source first-pair comparison を整理し、`duplicate ensure` + unsupported direct child line を first actualization pair に置く judgment を mirror へ固定した。次はこの pair を helper-local / test-only actual evidence と focused smoke に上げる段階。
