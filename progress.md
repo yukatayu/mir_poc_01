@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 09:34 JST
+最終更新: 2026-04-08 10:27 JST
 
 ## この文書について
 
@@ -18,7 +18,7 @@
 - **parser-free PoC** は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
 - **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口まで来ている。
 - **parser boundary** は、stage 1 private spike と stage 3 declaration-side / later malformed-source first tranche まで actualize 済みである。
-- **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較まで進んだ。
+- **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較することまで進んだ。
 - 現在の主ボトルネックは semantics の大崩れではなく、
   - fixture authoring / elaboration の反復コスト
   - parser boundary の staged 実装
@@ -135,7 +135,7 @@ rough estimate:
 | first checker cut / helper-local compare family | 82% | 70% | 80% | 着手可能 | narrow helper family は安定、generic/public は後段 |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | static analysis / type / theorem prover boundary | 36% | 26% | 12% | 後段依存 | hybrid staged approach を採る前提 |
-| shared-space / dynamic membership boundary | 28% | 22% | 6% | 要仕様確認 | docs-first boundary と example は進められるが、activation / consistency / auth は user 仕様待ち |
+| shared-space / dynamic membership boundary | 34% | 30% | 8% | 要仕様確認 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較までは進められるが、final activation / auth / consistency catalog は user 仕様待ち |
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様は依然 user からの追加仕様が必要 |
 
 ## 現時点での大きい未解決問題
@@ -169,3 +169,4 @@ rough estimate:
 - 2026-04-06 09:19 JST — stage 3 request-local clause spillover first tranche まで repo 状態を見直し、`progress.md` を snapshot 向けに再編した。次は stage 3 later branch の multiline attachment shape と predicate fragment reopen 条件のどちらを先に比較するかを narrow に決める段階。
 - 2026-04-08 09:24 JST — shared-space / participant churn の boundary を repo source と blog 起点から再整理し、participant plain array を core に焼き込まず session-scoped membership registry + derived snapshot view を第一候補にする docs-first comparison と practical example を追加した。次はこの boundary を維持したまま current L2 mainline を続け、shared-space の final activation / consistency / auth は user 仕様確認で止める段階。
 - 2026-04-08 09:34 JST — shared-space / membership boundary task を docs / plan / progress mirror まで閉じ、review でも substantive finding が出ないことを確認した。upper-layer は self-driven な boundary 整理まで進め、activation / authority / auth / consistency catalog の finalization では仕様確認待ちで止める状態。
+- 2026-04-08 10:27 JST — shared-space 側の open questions を再整理し、participant の tree-like view は derived に留めて source of truth は registry に置くこと、activation visibility は compile-time over-approximation までで actual dissemination は runtime control-plane に残すこと、authority / consistency / RNG provider を別軸で比較する current working line を plan mirror に追記し、review 指摘に合わせて activation policy wording を boundary-safe に補正した。次は authority placement と consistency catalog の narrow docs-first comparison を進められる段階。

@@ -120,6 +120,66 @@ active_members_snapshot(space)
 
 のような derived view として取り出す方がよい。
 
+## participant は tree-like JSON とみなしてよいか
+
+### 直感として自然な点
+
+user-facing には、
+
+- room
+  - participants
+  - board state
+  - notices
+
+のような **tree-like document** で shared space を眺めたくなる。
+これは自然であり、snapshot serialization や UI state としてはむしろ分かりやすい。
+
+### それでも source of truth を registry に寄せる理由
+
+理論上の問題は、participant が単なる「木の 1 ノード」ではなく、少なくとも次の役割を同時に持つことである。
+
+- membership identity
+- activation / deactivation の lifecycle
+- rejoin を区別する incarnation
+- routing / authority / audit の参照先
+- causal metadata と整合する actor identity
+- UI 上の list / tree / map など複数 view への投影元
+
+tree source-of-truth にすると、これらを structural position で同一視しやすい。
+しかし current repo が気にしているのは structural equality ではなく、
+
+- **同じ participant か**
+- **同じ incarnation か**
+- **現在 active か**
+- **どの authority / route / audit context に属するか**
+
+である。
+
+特に rejoin があると、
+
+```text
+room
+  participants
+    - C
+```
+
+のような木だけでは、
+
+- 古い `C`
+- 新しい `C`
+
+を hidden identifier なしに区別しづらい。
+
+### current working judgment
+
+- **tree-like 参加者表現自体は否定しない**
+- ただしそれは **derived snapshot / UI / serialization view** に留める
+- source of truth は引き続き **session-scoped membership registry**
+
+とする方が、identity / activation / incarnation / causality を混ぜずに済む。
+
+要するに、**tree view は見え方として自然だが、理論上の carrier は registry の方がきれい**である。
+
 ## vector clock から participant を消す問題
 
 ### 問題の芯
@@ -172,6 +232,70 @@ active_members_snapshot(space)
 - membership epoch と route / patch epoch を共有するか
 - deactivation を immediate に visible にするか
 - explicit leave が届かなかった場合の扱い
+
+## activation を compile-time にどこまで見抜けるか
+
+### 問題
+
+join / leave / rejoin の active 化について、
+
+- 「誰がその変化を知る必要があるか」
+- 「誰の承認が visibility 条件になるか」
+
+を compile-time に先回りして決められないか、という方向性は自然である。
+
+### current working answer
+
+**closed-world の範囲なら compile-time で over-approximation はできるが、runtime control-plane を不要にはできない**。
+
+たとえば、
+
+- room authority role
+- declared observer role
+- replicated observer class
+- publish / notify の宛先
+
+が declaration で固定されているなら、
+
+```text
+activation_visibility(room) =
+  authority_role
+  + declared_observer_roles
+  + replicated_observer_class
+```
+
+のような「知る必要のある候補集合」は静的に絞れる。
+
+しかし open room / late join / reconnect があると、compile-time 時点では
+
+- future participant
+- rebinding 後の authority replica
+- reconnect で戻る observer
+
+を closed に列挙できない。
+
+### したがって何が言えるか
+
+compile-time にできるのは主に次である。
+
+1. **どの role が activation visibility に関与しうるか** の宣言
+2. authority-ack / full-coverage-like activation / quorum-like activation の policy 候補の structural floor
+3. publish / subscribe / notify の required path の over-approximation
+
+一方で runtime に残るのは次である。
+
+1. 実際の active member 集合
+2. late join / reconnect の反映
+3. authority handoff 後の可視 participant
+4. in-flight action と membership change の衝突解決
+
+### current working judgment
+
+- compile-time は **activation visibility policy の over-approximation** に使ってよい
+- ただし **actual activation / dissemination / reconciliation は runtime control-plane に残す**
+- なお `full-coverage-like activation` / `quorum-like activation` は、Mir-1 `durable_cut` の `all_of` / quorum-like profile と**似た family comparison を shared-space 側に持ち込む**という意味であって、同じ語彙として固定するわけではない
+
+これが current repo の layer separation に最も整合する。
 
 ## practical example A — authoritative すごろく room
 
@@ -266,6 +390,7 @@ space SugorokuRoom {
 - `notify_all(goal_reached(player))` と reset の間に別 event を許すか
 - `atomic_cut` に相当する境界を app rule で要求するか、単なる authoritative log entry で足りるか
 - RNG を trusted authority に持つか、commit-reveal 的に分散するか
+- authority を single / replicated のどこで切るか
 
 ## practical example B — shared notice board / presence room
 
@@ -388,6 +513,76 @@ players: ReplicatedMembership<Player, ConsensusConfig>
 - array-like view は derived に残す
 - consensus-coupled object は implementation / operations に残す
 
+## authority / consistency / RNG の次段 research line
+
+### authority
+
+shared-space の authority は、少なくとも次を比較対象として持つのが自然である。
+
+1. single room authority
+2. replicated authority
+3. relaxed / merge-friendly room
+
+理論上重要なのは、「participant carrier」と「authority placement」を別軸に保つことである。
+`SessionMembers` を採ったから single authority になるわけではなく、同じ carrier の上で
+
+- authoritative すごろく room
+- append-only notice room
+
+を分けて持てる方が自然である。
+
+### consistency mode
+
+consistency mode は最初から広い catalog にせず、当面は
+
+1. authoritative serial transition
+2. append-friendly room
+
+程度の小 catalog から始めるのが current working line である。
+
+これにより、
+
+- exclusive lock / reset / winner notification
+- simultaneous append / eventual visibility
+
+を同一 rule に押し込まずに済む。
+
+### RNG / fairness
+
+RNG を tree の各ノードが子方向へ自由に決める model は、完全に不可能ではないが、**base model としては重い**。
+理由は、
+
+- randomness source が topology と結びつきすぎる
+- fairness をどの node が保証するかが不明瞭になる
+- audit 時に「誰が seed / proof を支配したか」が追いづらい
+
+からである。
+
+したがって current working model では、RNG は tree topology に埋め込まず、**explicit provider capability** として切る方が自然である。
+
+概念上はたとえば次の 3 候補がある。
+
+```text
+perform via authority_rng
+perform via delegated_rng_service
+perform via distributed_randomness_provider
+```
+
+- `authority_rng`
+  - 最小
+  - room authority が randomness を供給する
+- `delegated_rng_service`
+  - authority は rule を持つが、RNG 実体は別 service に委譲する
+- `distributed_randomness_provider`
+  - commit-reveal など後段候補
+
+current phase では、
+
+- authoritative game room なら `authority_rng` または `delegated_rng_service`
+- distributed randomness は future research
+
+が自然である。
+
 ## Raft / Paxos をどう位置づけるか
 
 ### current working answer
@@ -453,12 +648,14 @@ current architecture では、これは
 2. participant churn の boundary を plan に整理する
 3. authoritative room と relaxed room の対比例を置く
 4. join / leave / rejoin と incarnation の必要性を comparison として整理する
+5. authority placement / consistency mode / RNG provider placement を docs-first に比較する
+6. compile-time over-approximation と runtime control-plane の境界を comparison として整理する
 
 ## ここから先は user 仕様確認が必要
 
 1. active 化の最終 rule
    - authority 1 点承認か
-   - `all_of` 的 activation か
+   - full-coverage-like activation か
    - quorum-like activation か
 2. identity / auth model
 3. RNG の trust model
@@ -475,4 +672,3 @@ current architecture では、これは
 - vector clock deletion 問題は、**membership reconfiguration と causal metadata の分離**で扱う
 - `Raft` / `Paxos` は **implementation choice** として自然だが、spec の必須語彙にはしない
 - authoritative game room と relaxed append room を分けると、consistency mode の選択問題が見えやすい
-
