@@ -320,6 +320,8 @@
   - stage 3 later branch の minimal predicate fragment を、opaque surface retention、declaration-side only compare、shared isolated fragment helper のどこから reopen するのが最小かを比較する。
 - `specs/examples/94-current-l2-stage3-predicate-fragment-first-tranche-actualization.md`
   - stage 3 later branch の shared isolated predicate fragment helper first tranche が `e2` / `e3` / `e10` / `e11` anchor まで current repo でどこまで actualize 済みかを整理する。
+- `specs/examples/95-current-l2-stage3-fragment-vs-attachment-next-step-sequencing.md`
+  - stage 3 later branch の次段を predicate fragment helper の malformed-source pair と request head + clause attachment multiline shape のどちらから開くべきかを比較する。
 
 ## レポート
 
