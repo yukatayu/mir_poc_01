@@ -338,6 +338,8 @@
   - stage 3 later branch の fixed two-slot suite bridge first tranche の後に malformed/source family extension と fixture-side full request contract compare のどちらを先に扱うべきかを比較する。
 - `specs/examples/103-current-l2-stage3-suite-malformed-first-pair-comparison.md`
   - stage 3 later branch の request-local suite bridge family で helper-local malformed/source extension をどの first pair から actualize するのが最小かを比較する。
+- `specs/examples/104-current-l2-stage3-suite-malformed-first-pair-actualization.md`
+  - stage 3 later branch の request-local suite bridge family で `duplicate ensure` + unsupported direct child line の first pair が helper-local / test-only でどこまで surfaced 済みかを整理する。
 
 ## レポート
 

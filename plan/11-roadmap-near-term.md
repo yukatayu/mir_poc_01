@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 3 later branch で request-local suite bridge family の `duplicate ensure` + unsupported direct child line pair を helper-local / test-only actual evidence に上げることである。
+current Phase 3 の next narrow step は、stage 3 later branch で `missing multiline ensure block` family と fixture-side full request contract compare のどちらを先に開くべきかを narrow に比較することである。
 
 ## いまから数 task の主眼
 
@@ -248,6 +248,7 @@ current Phase 3 の next narrow step は、stage 3 later branch で request-loca
   - unsupported direct child line を dedicated family として切るか generic wording に留めるか
   を整理する
   - current docs-only comparison として、その first pair は `duplicate ensure` + unsupported direct child line を first choice に置く
+  - current actualization として、その first pair は helper-local / test-only focused smoke に上げてよい
   - existing isolated predicate fragment helper を再利用し、full request node compare は still later stage に残す
   - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
   であり、request cluster の attachment rule と multiline suite は still later stage に残す

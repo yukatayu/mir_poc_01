@@ -188,6 +188,7 @@ flowchart LR
 118. stage 3 later branch の fixed two-slot request clause suite bridge first tranche が `crates/mir-ast/tests/support/current_l2_stage3_request_clause_suite_spike_support.rs` と `crates/mir-ast/tests/current_l2_stage3_request_clause_suite_spike.rs` でどこまで actualize 済みかは `specs/examples/101-current-l2-stage3-request-clause-suite-first-tranche-actualization.md`
 119. stage 3 later branch の fixed two-slot suite bridge first tranche の後に malformed/source family extension と fixture-side full request contract compare のどちらを先に扱うべきか、その current sequencing judgment は `specs/examples/102-current-l2-stage3-suite-malformed-vs-request-compare-sequencing.md`
 120. stage 3 later branch の request-local suite bridge family で helper-local malformed/source extension をどの first pair から actualize するのが最小か、その current comparison は `specs/examples/103-current-l2-stage3-suite-malformed-first-pair-comparison.md`
+121. stage 3 later branch の request-local suite bridge family で `duplicate ensure` + unsupported direct child line の first pair が helper-local / test-only actual evidence としてどこまで surfaced 済みかは `specs/examples/104-current-l2-stage3-suite-malformed-first-pair-actualization.md`
 
 ## レポート
 
