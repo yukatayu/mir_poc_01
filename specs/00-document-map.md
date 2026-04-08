@@ -354,6 +354,8 @@
   - stage 3 later branch で request head metadata を still later に残したまま contract-only compare surface をどこまで widening してよいかを比較する。
 - `specs/examples/111-current-l2-stage3-request-contract-subset-freeze-sequencing.md`
   - stage 3 later branch で request contract subset family を current tranche で freeze し、別 Phase 3 subline に戻すべきかを比較する。
+- `specs/examples/112-current-l2-phase3-resume-side-selection.md`
+  - request contract subset family freeze 後に、Phase 3 主線を parser boundary staging 側ではなく first checker cut connection 側から再開するかを比較する。
 
 ## レポート
 

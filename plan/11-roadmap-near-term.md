@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、request contract subset family を current tranche で freeze したうえで、parser boundary staging と first checker cut 接点のどちらから Phase 3 主線を再棚卸しするかを narrow に比較することである。
+current Phase 3 の next narrow step は、existing parser-boundary evidence family のうち、どれを first checker cut inventory へ最初に reconnect するかを narrow に比較することである。
 
 ## いまから数 task の主眼
 
@@ -253,4 +253,6 @@ current Phase 3 の next narrow step は、request contract subset family を cu
   - existing isolated predicate fragment helper を再利用し、private helper を public parser API へ昇格させる前提条件は別 comparison に残す
 - current actualization として、その次段の `Stage3RequestContractSubset` helper-local / test-only first tranche は actualize 済みであり、same source-side suite carrier を `PerformOn` / `PerformVia` fixture の contract subset compare に通せる line まで source-backed に固定した
 - current guard judgment として、その後の next step でも row-list widening は採らず、still 0-or-1 guard に留めるのが自然である
-  - current sequencing judgment として、その次は source-side suite bridge widening 条件をさらに積むより、この family を一旦 freeze し、parser boundary staging と first checker cut 接点の re-sweep へ戻るのが自然である
+- current sequencing judgment として、その次は source-side suite bridge widening 条件をさらに積むより、この family を一旦 freeze し、parser boundary staging と first checker cut 接点の re-sweep へ戻るのが自然である
+- current side-selection judgment としては、その戻り先は parser boundary staging 側より first checker cut connection 側を先に取るのが自然である
+  - next narrow step は、existing parser-boundary evidence family のうち、どれを first checker cut inventory へ最初に reconnect するかの comparison である

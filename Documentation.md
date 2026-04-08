@@ -196,6 +196,7 @@ flowchart LR
 126. stage 3 later branch の `Stage3RequestContractSubset` helper-local / test-only first tranche が fixed two-slot suite bridge と fixture-side contract subset compare の接点としてどこまで actualize 済みかは `specs/examples/109-current-l2-stage3-request-contract-subset-first-tranche-actualization.md`
 127. stage 3 later branch の request head metadata を still later に残したまま contract-only compare surface をどこまで widening してよいか、その current guard judgment は `specs/examples/110-current-l2-stage3-request-contract-subset-widening-guard.md`
 128. stage 3 later branch の request contract subset family を current tranche で freeze して別 Phase 3 subline に戻すべきか、その current sequencing judgment は `specs/examples/111-current-l2-stage3-request-contract-subset-freeze-sequencing.md`
+129. request contract subset family freeze 後に、Phase 3 主線を parser boundary staging 側ではなく first checker cut connection 側から再開する current side-selection judgment は `specs/examples/112-current-l2-phase3-resume-side-selection.md`
 
 ## レポート
 
