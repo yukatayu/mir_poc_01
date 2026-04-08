@@ -42,6 +42,7 @@
 11. 既存判断は `specs/12-decision-register.md`
 
 文書マップ、用語方針、相互参照の基準は `specs/00-document-map.md` を参照すること。
+current status / progress / remaining steps を見たいときは `progress.md`、repo 全体の研究 phase / autonomy gate を見たいときは `plan/17-research-phases-and-autonomy-gates.md` を読むこと。
 
 ## 作業スタイル
 
@@ -70,5 +71,5 @@ report は `python scripts/new_report.py --slug <short-name>` でテンプレー
 
 ## 現在の環境メモ
 
-この scaffold は、Python は利用できるが `cargo` は利用できない環境で作成された。
-Rust workspace skeleton は存在するが、コンパイル可能性の検証は Rust が使えるマシンで別途行う必要がある。
+初期 scaffold 自体は Python のみが使える環境で起こされたが、current repo では Python と `cargo` の両方を使った local validation が運用に入っている。
+したがって、current state の build / test / helper verification は report に記録された実行 evidence を正本として読むこと。

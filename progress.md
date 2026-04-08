@@ -118,11 +118,12 @@
 
 ### Priority A — すぐ続けてよい
 
-1. stage 3 later branch の次段比較
+1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
+2. docs / specs / README / `progress.md` / `plan/` の整合性 sweep を入れ、Phase 0 / 1 / 2 closeout の mirror drift を抑える
+3. stage 3 later branch の次段比較
    - request head + clause attachment multiline shape を docs-only で比較するか
    - predicate fragment boundary の reopen 条件を先に切るか
-2. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
-3. first checker cut / parser boundary の staged line を無理なく合流させる
+4. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
 

@@ -5,6 +5,8 @@
 この文書は、今から数 task 先までの near-term roadmap を示す。
 ここに書く step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
+current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先し、**Phase 0 / 1 / 2 の closeout → docs/spec/README/progress/plan consistency sweep → Phase 3** の順で読む。
+
 ## いまから数 task の主眼
 
 近い数 task の目的は、current L2 を次の状態へ持っていくことである。

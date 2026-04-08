@@ -8,6 +8,9 @@
   - `specs/` と `docs/reports/` と code anchor を横断して、現況、roadmap、helper stack、fixture catalog、open problems、maintenance rule を長期参照しやすく整理した人間向け repository memory である。
   - 規範判断の正本ではない。意味論や decision の正本は `specs/` に残る。
   - current repo の現在地や PoC 検証基盤の call chain を素早く掴みたい場合は `plan/00-index.md` から読む。
+- `progress.md`
+  - rough progress snapshot、current mainline、phase / autonomy gate の mirror である。
+  - 規範判断の正本ではない。status / remaining step / current phase を素早く掴みたいときに先に読む。
 
 ## 規範的な読書順
 

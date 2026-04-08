@@ -14,7 +14,7 @@
 
 - docs-only review とする。
 - reviewer subagent は 1 回だけ投入し、長めに待ったうえで retry を 1 回だけ行った。
-- completion が返らない場合は local evidence fallback を採る。
+- wait 自体は timeout したが、その後 asynchronous completion が返ったため、actual reviewer finding を closeout に使う。
 
 ## Documents consulted
 
@@ -34,8 +34,8 @@
 
 1. 新しい phase 文書と `progress.md` の phase snapshot を diff inspection した。
 2. reviewer subagent を 1 回投入し、長めの wait を 2 回行った。
-3. completion が返らなかったため、local evidence fallback で closeout した。
-4. fallback closeout にあわせて、immediate execution order を `plan/17` と `progress.md` に明示した。
+3. wait は timeout したが、その後 asynchronous completion を受け取った。
+4. reviewer の 2 finding に合わせて、`Priority A` と immediate execution order を整合させ、report chain に sequencing refinement を追補した。
 
 ## Files changed
 
@@ -60,19 +60,21 @@ $ git status --short --branch
 ?? docs/reports/0286-research-phase-map-and-progress-phase-snapshot.md
 
 $ wait_agent reviewer
-timed out twice without completion
+timed out twice; asynchronous completion later delivered concrete findings
 ```
 
 ## Evidence / outputs / test results
 
 - reviewer subagent `019d6b28-f065-7972-a917-7c99717bd714` は shutdown 済み
-- local diff inspection では substantive inconsistency は見つからなかった
-- closeout に必要だった修正は、immediate execution order を docs に mirror することだけだった
+- reviewer finding は 2 件だった
+  1. `progress.md` の `Priority A` と `immediate execution order` が衝突していた
+  2. immediate execution order refinement の根拠が report 0286 に閉じていなかった
+- いずれも task 内で反映した
 
 ## What changed in understanding
 
 - phase 読みそのものは `Phase 2 終盤 + Phase 3 前半〜中盤` でよい。
-- ただし current execution order は user 指示により **Phase 0 / 1 / 2 の closeout → consistency sweep → Phase 3** と読む方が実務上明確である。
+- ただし current execution order は user 指示により **Phase 0 / 1 / 2 の closeout → consistency sweep → Phase 3** と読む方が実務上明確であり、`Priority A` もそれに揃える必要がある。
 
 ## Open questions
 
