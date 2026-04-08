@@ -736,6 +736,18 @@
   - `specs/examples/114-current-l2-stage1-first-checker-reconnect-first-tranche-actualization.md`
   - `docs/reports/0337-current-l2-first-checker-reconnect-family-and-first-tranche.md`
 
+### 2026-04-08 stage2 try-rollback reconnect addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/115-current-l2-stage1-widening-vs-stage2-try-rollback-reconnect.md`
+  - `specs/examples/116-current-l2-stage2-try-rollback-reconnect-first-tranche-actualization.md`
+  - `docs/reports/0339-current-l2-stage2-try-rollback-reconnect.md`
+  - `crates/mir-ast/tests/support/current_l2_stage2_try_rollback_spike_support.rs`
+  - `crates/mir-ast/tests/current_l2_stage2_try_rollback_spike.rs`
+  - `crates/mir-ast/tests/fixtures/current-l2/e23-malformed-try-fallback-missing-fallback-body.json`
+  - `crates/mir-ast/tests/fixtures/current-l2/e24-malformed-atomic-cut-fallback-placement.json`
+  - `scripts/current_l2_try_rollback_structural_checker.py`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

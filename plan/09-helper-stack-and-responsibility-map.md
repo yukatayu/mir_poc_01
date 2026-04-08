@@ -206,6 +206,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - stage 1 actual parser spike の private support helper
   - inline text から declaration / chain structural floor だけを parse し、fixture-side subset compare 用 carrier へ thin lowering bridge を渡す
   - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
+- `crates/mir-ast/tests/support/current_l2_stage2_try_rollback_spike_support.rs`
+  - stage 2 try/rollback reconnect の private support helper
+  - inline text から single `try { ... } fallback { ... }` block だけを parse し、`checked_try_rollback_structural_*` と同じ helper-local summary carrier へ thin lowering bridge を渡す
+  - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
 - `crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs`
   - stage 3 admit-slot branch の private support helper
   - inline text から declaration-side `admit` attached slot を含む option / chain subset だけを parse し、structural subset compare と `decl_admit_slot.surface_text` retention smoke を支える

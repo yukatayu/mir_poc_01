@@ -234,6 +234,11 @@
 - current reconnect-family judgment としては、その first reconnect family は stage 1 chain / declaration structural floor family を先に取る方が自然である。理由は、`specs/examples/45...` の same-lineage / missing-option / capability floor baseline と `specs/examples/73...` の checker-led staged spike が同じ direction を向いており、parser-side actual evidence も stage 1 family が最も厚いためである。
 - current first-tranche actualization としては、existing `e4` / `e7` stage 1 working set を維持しつつ、`e13-malformed-capability-strengthening` と `e16-malformed-missing-chain-head-option` を representative fixture compare に追加し、`Stage1ReconnectClusters` summary を helper-local / test-only に置く cut が最小である。一方で `e17-malformed-missing-predecessor-option` は current stage 1 surface で structural predecessor が chain progression に固定されるため still later に残す。
 - さらに current docs-only refinement として、actual implementation へ入る直前 cut では input surface は test inline string、`decl_guard_slot` internal carrier は dedicated wrapper + owned `surface_text`、private helper family は `current_l2_stage1_parser_spike_support` を第一候補にするのが最小である。
+- current sequencing judgment としては、その後の next reconnect step は stage 1 `e18` / `e19` / `e20` widening より先に stage 2 `try` / rollback structural floor reconnect を取る方が自然である。理由は、stage 1 widening では `e19` が current reconnect summary contract を押し広げやすい一方、stage 2 側には `checked_try_rollback_structural_*` dedicated contract と `e23` / `e24` pair が already あるためである。
+- current actualization として、その stage 2 first tranche は `current_l2_stage2_try_rollback_spike_support` private helper と focused tests で helper-local / test-only に actualize 済みである。
+  - compare surface は fixture-side `checked_try_rollback_structural_verdict` / `checked_try_rollback_structural_findings`
+  - first-tranche evidence は `e23` / `e24` malformed pair と valid one-shot `atomic_cut` in try body の `no_findings` smoke
+  - nested `place`、`place_anchor == current_place` gate、restore scope は still later に残す
 - ただし dedicated text fixture file の path policy、span-aware carrier、final parser-side type 名、final parser API は引き続き OPEN である。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。
 

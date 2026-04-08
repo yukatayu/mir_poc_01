@@ -360,6 +360,10 @@
   - Phase 3 の checker-side reconnect を、どの existing parser-boundary evidence family から始めるのが最小かを比較する。
 - `specs/examples/114-current-l2-stage1-first-checker-reconnect-first-tranche-actualization.md`
   - stage 1 chain / declaration structural floor family を first checker reconnect の first tranche としてどこまで helper-local / test-only に actualize してよいかを整理する。
+- `specs/examples/115-current-l2-stage1-widening-vs-stage2-try-rollback-reconnect.md`
+  - Phase 3 の next reconnect step を stage 1 widening と stage 2 `try` / rollback reconnect のどちらに置くのが自然かを比較する。
+- `specs/examples/116-current-l2-stage2-try-rollback-reconnect-first-tranche-actualization.md`
+  - stage 2 `try` / rollback structural floor family を first checker reconnect の first tranche としてどこまで helper-local / test-only に actualize してよいかを整理する。
 
 ## レポート
 

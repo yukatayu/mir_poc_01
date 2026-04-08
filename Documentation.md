@@ -199,6 +199,8 @@ flowchart LR
 129. request contract subset family freeze 後に、Phase 3 主線を parser boundary staging 側ではなく first checker cut connection 側から再開する current side-selection judgment は `specs/examples/112-current-l2-phase3-resume-side-selection.md`
 130. Phase 3 の checker-side reconnect をどの parser-boundary evidence family から始めるのが最小か、その current family selection は `specs/examples/113-current-l2-first-checker-reconnect-family-selection.md`
 131. stage 1 chain / declaration structural floor family を first checker reconnect の first tranche としてどこまで actualize してよいか、その current cut は `specs/examples/114-current-l2-stage1-first-checker-reconnect-first-tranche-actualization.md`
+132. Phase 3 の next reconnect step を stage 1 widening と stage 2 `try` / rollback reconnect のどちらに置くのが自然か、その current sequencing judgment は `specs/examples/115-current-l2-stage1-widening-vs-stage2-try-rollback-reconnect.md`
+133. stage 2 `try` / rollback structural floor family を first checker reconnect の first tranche としてどこまで helper-local / test-only に actualize してよいか、その current cut は `specs/examples/116-current-l2-stage2-try-rollback-reconnect-first-tranche-actualization.md`
 
 ## レポート
 
