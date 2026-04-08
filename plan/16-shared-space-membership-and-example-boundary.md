@@ -996,6 +996,161 @@ commit move with draw + witness_ref
 
 を別軸で比較するのが最も自然である。
 
+## identity / auth layering をどこで切るか
+
+shared-space line では、participant carrier を考え始めるとすぐに
+
+- stable principal identity
+- transport/session auth
+- service login / external subscription
+- room-local permission
+- display identity / avatar projection
+
+が混ざりやすい。
+
+blog 起点の直感としても、早すぎる interface concretization は避けたいし、platform / world / avatar の layered graph は分けて読みたい。これは [同期に特化した言語を考えてみる（１）](https://blog.yukatayu.tech/blog/sync_language_01/) の「実装前に node 間 interface を固定しすぎない」line と、[同期に特化した言語を考えてみる（２）](https://blog.yukatayu.tech/blog/sync_language_02/) の layered graph / platform→world→avatar line と整合する。
+
+### 比較したい 3 案
+
+1. membership carrier に identity / auth をまとめて埋め込む
+2. membership registry に identity core を残し、auth stack / admission policy を分ける
+3. room core には opaque actor handle しか持ち込まず、identity / auth を完全に外へ出す
+
+### 案A — membership carrier に identity / auth をまとめて埋め込む
+
+#### 読み
+
+- participant entry が principal / credential / permission / display identity を全部持つ
+
+概念上は次のようになる。
+
+```text
+MemberEntry {
+  member_ref,
+  principal_ref,
+  auth_token_ref,
+  permission_set,
+  display_name,
+  member_incarnation,
+  activation_state,
+}
+```
+
+#### 利点
+
+- 1 carrier だけ見れば room 参加の可否を説明しやすい
+- implementation 初期には分かりやすく見える
+
+#### 欠点
+
+- membership と auth refresh / transport session renewal / room permission を同時に更新しやすい
+- auth stack の layering が language core に漏れやすい
+- fairness witness / authority placement / admission policy と混線しやすい
+
+### 案B — identity core と auth stack / admission policy を分ける
+
+#### 読み
+
+- membership registry は identity core だけを持つ
+- auth stack と room admission policy は別 carrier に置く
+
+概念上は次のように分ける。
+
+```text
+MemberCore {
+  member_ref,
+  principal_ref,
+  member_incarnation,
+  activation_state,
+  display_ref,
+}
+
+AdmissionContext {
+  transport_auth_ref,
+  service_auth_ref,
+  room_permission_ref,
+  policy_epoch,
+}
+```
+
+#### 利点
+
+- membership churn と auth renewal を分けやすい
+- principal identity と room-local membership slot を同一視しなくて済む
+- authority / fairness / admission policy を別軸に保ちやすい
+- auth layer を TLS / OAuth / subscription / room ACL などで後から差し替えやすい
+
+#### 欠点
+
+- carrier が 1 段増える
+- room profile には admission rule と permission ref の接点だけを書き、raw auth protocol は外に残す discipline が要る
+
+### 案C — room core には opaque actor handle しか持ち込まない
+
+#### 読み
+
+- room semantics は `actor_handle` と activation state だけを見る
+- identity / auth / display identity は完全に外部 gateway / session service に置く
+
+#### 利点
+
+- language core から auth details を最もきれいに外せる
+- append-friendly room や external auth-heavy deployment と相性が良い
+
+#### 欠点
+
+- audit / blame / fairness witness と principal identity の接続が弱くなりやすい
+- authoritative room で `誰が turn を持っていたか` を説明するときに opaque handle だけでは足りない場面がある
+- room-local capability と principal continuity の bridge が別に要る
+
+### authoritative すごろく room での読み
+
+authoritative room の join path を概念上で書くと、現在自然なのは次である。
+
+```text
+join_request(player_p, auth_stack)
+  -> authority verifies admission policy
+  -> registry creates MemberCore {
+       member_ref = player_p#8,
+       principal_ref = principal:user_p,
+       member_incarnation = 8,
+       activation_state = active,
+       display_ref = avatar:user_p
+     }
+  -> room emits players_snapshot
+```
+
+room rule 側は raw token を見ず、たとえば次だけを見る。
+
+```text
+request_roll(by member_ref)
+require member_is_active(member_ref)
+require member_has_turn(member_ref)
+```
+
+ここで `member_is_active` や `member_has_turn` は room semantics に属するが、`principal:user_p` がどの TLS / OAuth / subscription stack で確認されたかは auth layer に残る。
+
+### append-friendly room での読み
+
+- `principal_ref` を持つ identity core だけあれば十分なことが多い
+- append permission は room-local capability / ACL ref に留め、transport/service auth の更新を room log に混ぜない方が自然である
+
+### current working judgment
+
+- **current first practical candidate は案B**
+- **membership registry には identity core を残し、auth stack / admission policy は別 carrier に置く**
+- **案C は auth-heavy deployment では有力だが、current authoritative room では principal continuity と audit connection が薄くなりやすい**
+- **案A は implementation 初期には単純に見えるが、layering conflict が起きやすいので current first choice にしない**
+
+したがって current repo では、shared-space identity / auth line を詰めるときも
+
+- membership core
+- admission policy
+- auth stack
+- display / projection identity
+
+を別軸に保つのが最も自然である。
+
 ## shared-space resource ownership / delegation の current working model
 
 ### 問い
