@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 12:25 JST
+最終更新: 2026-04-08 12:30 JST
 
 ## この文書について
 
@@ -24,6 +24,25 @@
   - parser boundary の staged 実装
   - richer host interface を後段に残したまま、必要最小限の typed coverage / proof boundary をどこで切るか
   である。
+
+## 研究フェーズ（大局）
+
+| Phase | 主眼 | 現在位置 | 重さ | 自走可否 | 補足 |
+|---|---|---|---|---|---|
+| Phase 0 | repository memory / decision boundary | maintenance | 低い | 自走可能 | `specs/` / `plan/` / report / progress の整合維持 |
+| Phase 1 | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
+| Phase 2 | parser-free PoC / detached validation loop | 終盤 | 中 | 自走可能 | loop 入口は成立、現在は運用摩擦低減 |
+| Phase 3 | parser boundary / first checker cut | 前半〜中盤 | 中〜やや重い | 自走可能 | stage 1 / stage 3 first tranche は actualize 済み |
+| Phase 4 | shared-space / membership / practical example boundary | 前半 | 重い | 一部自走可能 | docs-first boundary は進めてよいが final profile は要仕様確認 |
+| Phase 5 | static analysis / type / theorem prover / model checker boundary | 入口整理 | とても重い | 後段依存 | small decidable core の inventory までは進めてよい |
+| Phase 6 | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | Phase 2 / 3 / 5 の gate 後に入る |
+| Phase 7 | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Typed-Effect / Prism / app contract は user 仕様待ち |
+
+### 現在の主線
+
+- **主線**: Phase 2 終盤 + Phase 3 前半〜中盤
+- **side line**: Phase 4 前半
+- **まだ勝手に finalization しない**: final parser grammar、production exporter API、shared-space final catalog、higher-layer application contract
 
 ## いま自走で進めてよい範囲
 
@@ -181,3 +200,4 @@ rough estimate:
 - 2026-04-08 12:04 JST — shared-space の reconnect / late leave / in-flight action を room profile に全部入れず、`member_incarnation` と uncommitted action invalidation だけを minimal room-profile rule、timeout / retry / resend を external policy layer に残す cut を plan mirror に追記した。次は membership epoch / incarnation と causal metadata の接続を、plain vector deletion と対比しながら narrow に比較できる段階。
 - 2026-04-08 12:13 JST — shared-space の causal metadata を plain vector deletion に寄せず、epoch / incarnation split を first practical candidate、control-plane separated carrier を next stronger candidate に置く line を plan mirror に追記した。次は identity / auth layering と fairness trust model のどちらを先に比較するかを narrow に決める段階。
 - 2026-04-08 12:25 JST — shared-space の fairness trust model を `opaque authority trust` / `auditable authority witness` / `delegated provider attestation` / `distributed fairness protocol` で比較し、authoritative room では opaque trust を current minimal、auditable witness を next narrow strengthening candidate に置き、provider placement と witness requirement を別軸で扱う line を plan mirror に追記した。次は identity / auth layering を fairness / authority / membership boundary とどう分離するかを narrow に比較できる段階。
+- 2026-04-08 12:30 JST — repo 全体の大局 phase / autonomy gate を `plan/17` に集約し、`progress.md` に current phase・重さ・自走可否の snapshot を追加した。次は shared-space の identity / auth layering を participant carrier / authority / fairness と混ぜずにどう切るかを narrow に比較する段階。

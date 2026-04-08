@@ -105,6 +105,13 @@ Every report should contain, in this order:
   - 粒度は「何を検証したか」「何が通って次に進めるようになったか」が分かる 1 行でよい。
   - 形式検証・実装・docs-only task を問わず、repo の current status に影響する non-trivial task では原則として追記すること。
   - timestamp は手打ちで推測せず、`date` コマンド等でその場で取得した値を使うこと。
+- `progress.md` には、repo 全体の大局 phase を示す section を置き、少なくとも
+  - phase 名
+  - 主眼
+  - 現在位置
+  - 重さ
+  - 自走可否
+  を簡潔に mirror すること。phase 読みが変わった task では同じ task の中で更新すること。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
 ## review と task close の運用
@@ -116,6 +123,7 @@ Every report should contain, in this order:
 - reviewer が返らない場合だけ retry を 1 回行い、なお返らなければ local evidence と diff inspection を report に残す。
 - subagent を使う場合は、明らかに壊れている / hung している根拠がない限り、latency だけを理由に早切りせず completion まで待つこと。
 - 不要になった subagent は close する。ただし context を保持したいものは明示的に残してよい。
+- 長期研究フェーズでは、PoC 実装・実行・回帰確認と、formal boundary / proof obligation / invariant wording の整理を並走させ、可能な限り手戻りの少ない ratchet 方式で進めること。
 
 ## Preferred style
 

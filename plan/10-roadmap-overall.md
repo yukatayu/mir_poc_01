@@ -50,6 +50,8 @@
 
 つまり、広い新機能追加ではなく、**意味論・notation・検証基盤・文書構造を揃えるフェーズ**にある。
 
+phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-autonomy-gates.md` を参照する。
+
 ## 次のフェーズ
 
 ### 近い次フェーズ

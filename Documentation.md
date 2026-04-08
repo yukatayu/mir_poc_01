@@ -73,9 +73,10 @@ flowchart LR
 4. 次に `specs/03-layer-model.md` と `specs/09-invariants-and-constraints.md`
 5. current repo の現況、roadmap、helper stack、PoC 境界を早く掴みたいときは `plan/00-index.md`
 6. 直近の概算進捗、残課題、validation loop までの rough step estimate を先に見たいときは `progress.md`
-7. その後、必要な subsystem に進む
-8. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
-9. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
+7. repo 全体の研究 phase、現在位置、重さ、自走可否を見たいときは `plan/17-research-phases-and-autonomy-gates.md`
+8. その後、必要な subsystem に進む
+9. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
+10. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
 10. parser なしで representative examples を machine-readable に扱う最小 AST fixture schema は `specs/examples/02-current-l2-ast-fixture-schema.md`、fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/`
 11. parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md`
 12. parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md`
