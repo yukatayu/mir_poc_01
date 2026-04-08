@@ -56,13 +56,23 @@ Phase 0 / 1 / 2 closeout の次段として、top-level mirror が
 
 ```text
 $ date '+%Y-%m-%d %H:%M %Z'
-2026-04-08 13:10 JST
+2026-04-08 13:29 JST
 
 $ python3 scripts/current_l2_detached_loop.py --help
-[current helper help output confirmed]
+usage: current_l2_detached_loop.py [-h]
+                                   {emit-fixture,emit-aggregate,emit-static-gate,compare-artifacts,compare-aggregates,compare-static-gates,...}
+                                   ...
 
-$ rg -n "current_l2_detached_loop.py|smoke-fixture|smoke-static-gate|compare-aggregates|target/current-l2-detached|bundle_failure_kind_counts|detached validation loop" README.md Documentation.md specs plan docs/reports -g '*.md'
-[top-level mirror coverage and omissions reviewed]
+current L2 detached validation loop を回すための non-production helper。 bundle-first
+/ aggregate / static gate emitter と bundle / aggregate / static gate diff
+helper を薄くつなぐ。
+
+$ rg -n "detached validation loop|static gate|Phase 3|maintenance tail|mainline|target/current-l2-detached" Documentation.md plan/00-index.md plan/11-roadmap-near-term.md plan/17-research-phases-and-autonomy-gates.md progress.md
+plan/00-index.md:45:- detached exporter chain については、non-production の bundle-first emitter、aggregate emitter、static gate emitter、bundle / aggregate / static gate compare helper、tiny loop wrapper、fixture smoke helper、fixture authoring template があり、継続的 validation loop の入口が成立している。
+Documentation.md:17:- current L2 については、parser-free PoC 基盤と helper stack がかなり進んでおり、bundle / aggregate / static gate を含む detached validation loop の non-production 入口まで到達している。長期参照用の repository memory は `plan/` に整理している。
+plan/17-research-phases-and-autonomy-gates.md:216:現在は 1 と 2 の first pass が閉じたので、phase 読みとしては **Phase 3 を主線に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として継続する** と読む。
+progress.md:43:- **主線**: Phase 3 前半〜中盤
+progress.md:44:- **maintenance tail**: Phase 0 / 1 / 2
 ```
 
 ## 6. Evidence / findings

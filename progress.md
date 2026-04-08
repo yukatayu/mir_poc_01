@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 13:10 JST
+最終更新: 2026-04-08 13:38 JST
 
 ## この文書について
 
@@ -113,6 +113,7 @@
     - `request-local require clause is outside stage 3 admit-slot first tranche`
     - `request-local ensure clause is outside stage 3 admit-slot first tranche`
     を actualize 済み
+  - next docs-only sequencing としては、request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を比較する
 
 ## 残課題の優先順位
 
@@ -120,8 +121,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段比較
-   - request head + clause attachment multiline shape を docs-only で比較するか
-   - predicate fragment boundary の reopen 条件を先に切るか
+   - predicate fragment boundary の reopen 条件を docs-only で比較する
+   - request head + clause attachment multiline shape はその後段へ残す
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -176,9 +177,10 @@ rough estimate:
 ## 次に進めるべき task
 
 1. stage 3 later branch の
-   - request head + clause attachment multiline shape
    - predicate fragment boundary reopen 条件
-   のどちらを先に比較するかを narrow に決める
+   を narrow に切り、
+   - request head + clause attachment multiline shape
+   を still later stage に残す
 2. current detached loop を新しい fixture 追加手順と結び付けて、authoring friction をさらに 1 段下げる
 3. parser boundary staging と first checker cut の接点を docs-only で再棚卸しし、無理な合流を避ける
 4. shared-space / membership boundary は docs-first example まで進めてよいが、activation / authority / auth / consistency catalog の finalization は user 仕様確認で止める
@@ -213,3 +215,4 @@ rough estimate:
 - 2026-04-08 12:59 JST — Phase0/1/2 closeout の consistency sweep として detached validation loop の helper surface を再確認し、`smoke-fixture` で E3/E6、`smoke-static-gate` で E4/E5 を回して bundle-first / aggregate / static-gate diff の current docs line と矛盾しないことを確認した。次はこの sweep evidence を report に固定し、必要な mirror drift だけを補正する段階。
 - 2026-04-08 13:06 JST — Phase0/1/2 closeout smoke の report / document map / progress mirror を reviewer finding に合わせて補正し、detached validation loop の compare boundary と helper entry surface に concrete drift が無い状態で closeout できるところまで揃えた。次は README / Documentation / specs/examples / plan mirror 全体へ consistency sweep を広げる段階。
 - 2026-04-08 13:10 JST — README / Documentation / `plan/00` / `plan/11` / `plan/17` / `progress.md` の top-level consistency sweep を入れ、detached validation loop の short summary を static gate artifact loop まで含む形へ揃え、Phase0/1/2 は maintenance tail・Phase3 は主線という current focus を mirror へ反映した。次は Phase3 later branch の次段比較へ戻る段階。
+- 2026-04-08 13:38 JST — Phase 3 later branch の sequencing を比較し、request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を切る judgment を `specs/examples/92` と mirror へ固定し、late reviewer finding だった detached loop help wording / report placeholder も同 task で閉じた。次は minimal predicate fragment boundary の first docs-only cut を比較する段階。

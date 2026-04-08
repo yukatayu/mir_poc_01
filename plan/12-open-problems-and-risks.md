@@ -292,6 +292,7 @@
 - shared-space membership / causal metadata policy
 - multi-request scheduler
 - `Approximate` / `Compensate`
+- stage 3 parser boundary の request head + clause attachment multiline shape と predicate fragment boundary reopen の exact cut
 
 ## update の見方
 

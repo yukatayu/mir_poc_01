@@ -7,6 +7,8 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
+current Phase 3 の next narrow step は、stage 3 later branch で request head + clause attachment multiline shape を先に開かず、predicate fragment boundary の reopen 条件を先に比較することである。
+
 ## いまから数 task の主眼
 
 近い数 task の目的は、Phase 0 / 1 / 2 の closeout baseline を壊さずに current L2 を次の状態へ持っていくことである。

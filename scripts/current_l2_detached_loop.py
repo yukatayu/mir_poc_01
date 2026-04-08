@@ -569,7 +569,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "current L2 detached validation loop を回すための non-production helper。"
-            " bundle-first / aggregate emitter と bundle / aggregate diff helper を薄くつなぐ。"
+            " bundle-first / aggregate / static gate emitter と"
+            " bundle / aggregate / static gate diff helper を薄くつなぐ。"
         )
     )
     parser.set_defaults(func=None)

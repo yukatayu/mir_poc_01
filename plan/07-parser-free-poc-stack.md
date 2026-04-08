@@ -173,6 +173,7 @@ test-only / private な stage 1 parser spike first tranche が actualize 済み�
   - `request-local require clause is outside stage 3 admit-slot first tranche`
   - `request-local ensure clause is outside stage 3 admit-slot first tranche`
   の 2 件を substring compare で見る
+- stage 3 later branch の次段 sequencing では、request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を docs-only で比較する
 - helper-local malformed-source smoke として
   - `missing edge-local lineage metadata`
   - `option-local admit is outside stage 1 accepted cluster`

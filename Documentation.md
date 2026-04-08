@@ -176,6 +176,7 @@ flowchart LR
 106. stage 3 admit-slot branch の fixture-side `OptionDecl.admit` handoff を current phase で docs-only deferred に留める current comparison は `specs/examples/89-current-l2-stage3-admit-node-handoff-comparison.md`
 107. stage 3 later branch の bare request-local `require` / `ensure` spillover を helper-local malformed-source pair にどこまで持たせるべきか、その current comparison は `specs/examples/90-current-l2-stage3-request-local-clause-spillover-comparison.md`
 108. stage 3 later branch の request-local clause spillover first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかは `specs/examples/91-current-l2-stage3-request-local-clause-spillover-first-tranche-actualization.md`
+109. stage 3 later branch の次段として request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を比較する current sequencing judgment は `specs/examples/92-current-l2-stage3-predicate-fragment-reopen-sequencing.md`
 
 ## レポート
 

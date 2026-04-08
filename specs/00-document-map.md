@@ -314,6 +314,8 @@
   - stage 3 later branch として bare request-local `require` / `ensure` spillover を helper-local malformed-source pair にどこまで持たせるべきかを比較する。
 - `specs/examples/91-current-l2-stage3-request-local-clause-spillover-first-tranche-actualization.md`
   - stage 3 later branch の request-local clause spillover first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかを整理する。
+- `specs/examples/92-current-l2-stage3-predicate-fragment-reopen-sequencing.md`
+  - stage 3 later branch の次段として request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を比較する current sequencing judgment を整理する。
 
 ## レポート
 
