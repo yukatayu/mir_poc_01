@@ -352,6 +352,8 @@
   - stage 3 later branch で `Stage3RequestContractSubset` helper-local / test-only first tranche が fixed two-slot suite bridge と fixture-side contract subset compare の接点としてどこまで actualize 済みかを整理する。
 - `specs/examples/110-current-l2-stage3-request-contract-subset-widening-guard.md`
   - stage 3 later branch で request head metadata を still later に残したまま contract-only compare surface をどこまで widening してよいかを比較する。
+- `specs/examples/111-current-l2-stage3-request-contract-subset-freeze-sequencing.md`
+  - stage 3 later branch で request contract subset family を current tranche で freeze し、別 Phase 3 subline に戻すべきかを比較する。
 
 ## レポート
 
