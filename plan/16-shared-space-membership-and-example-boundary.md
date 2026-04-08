@@ -297,6 +297,146 @@ compile-time にできるのは主に次である。
 
 これが current repo の layer separation に最も整合する。
 
+## activation rule の候補比較
+
+### 比較したい 3 案
+
+current phase で比較対象として持つのは、少なくとも次の 3 案である。
+
+1. `authority-ack`
+2. `full-coverage-like activation`
+3. `quorum-like activation`
+
+ここで重要なのは、これは **shared-space membership activation の operational policy** であって、
+
+- Mir core の value-level ownership
+- Mir-1 `durable_cut` の exact profile 名
+- final consensus algorithm
+
+そのものではない、という点である。
+
+### 案A — `authority-ack`
+
+#### 読み
+
+- join / leave / rejoin は room authority が明示的に受理した時点で active / inactive に遷移する
+- その後、authority が visibility 対象へ dissemination する
+
+概念上はたとえば次のように読む。
+
+```text
+join_request(C, incarnation = 5)
+  -> room_authority accepts
+  -> activation_event(C, 5, membership_epoch = 12)
+  -> publish_to activation_visibility(room)
+```
+
+#### 利点
+
+- current repo の layer separation に最も素直
+- participant carrier と authority placement を分けたまま書ける
+- authoritative room で single transition order を説明しやすい
+- compile-time では `activation_visibility(room)` の over-approximation だけ見ればよい
+
+#### 欠点
+
+- authority の trust / liveness に依存する
+- dissemination 遅延中は「authority は知っているが他 participant はまだ知らない」状態が生じうる
+- replicated authority に進むと、authority group 内合意を別に要する
+
+#### 向く room
+
+- authoritative game room
+- lock / reset / winner notification のように single transition order が重要な room
+
+### 案B — `full-coverage-like activation`
+
+#### 読み
+
+- active 化は authority だけでなく、current activation visibility に入る全対象への反映が揃ってから成立する
+
+概念上はたとえば次のように読む。
+
+```text
+activation_event(C, 5, epoch = 12)
+  -> all known activation_visibility(room) acknowledge
+  -> C becomes active
+```
+
+#### 利点
+
+- 「active なのに必要 participant がまだ知らない」という状態を減らせる
+- fixed small room では直感的に分かりやすい
+- activation と visibility をほぼ一致させられる
+
+#### 欠点
+
+- churn / late join / reconnect に弱い
+- 「誰が current activation visibility に入るか」を runtime で精密に追う必要がある
+- participant 集合が動くと、成立条件そのものが揺れやすい
+- availability より global acknowledgement を優先するので、current phase では重い
+
+#### 向く room
+
+- closed membership に近い small room
+- active 化前に全員既知が本当に必要な workflow
+
+### 案C — `quorum-like activation`
+
+#### 読み
+
+- active 化は authority group または activation committee の threshold / quorum で成立する
+
+概念上はたとえば次のように読む。
+
+```text
+activation_event(C, 5, epoch = 12)
+  -> quorum(activation_committee) acknowledges
+  -> C becomes active
+  -> lagging replicas / observers catch up later
+```
+
+#### 利点
+
+- availability を取りやすい
+- replicated authority と相性が良い
+- single authority failure を前提にしなくてよい
+
+#### 欠点
+
+- participant room の active 化規則が consensus flavor に強く寄る
+- straggler / catch-up / stale observer の扱いが必要になる
+- current repo phase では activation だけのために carrier が重くなりやすい
+
+#### 向く room
+
+- operationally replicated authority を前提にした room
+- future workstream としての distributed control-plane
+
+### current working judgment
+
+- **authoritative room の最小 operational candidate は `authority-ack`**
+- `full-coverage-like activation` と `quorum-like activation` は **policy option comparison** に残す
+- compile-time が持つべきなのは
+  - `activation_visibility(room)` に関与しうる role 宣言
+  - required publish / notify path の over-approximation
+  までであり、
+  actual active set と actual acknowledgement frontier は runtime control-plane に残す
+
+### room 例との相性
+
+#### authoritative game room
+
+- current first choice は `authority-ack`
+- 理由は、turn order / roll lock / winner reset を single transition order で説明しやすいから
+- `full-coverage-like activation` は closed tournament room なら候補になるが、open join / leave には重い
+
+#### append-friendly room
+
+- membership 自体は `authority-ack` でもよい
+- ただし append visibility は activation rule と別に、append-friendly consistency mode で流す方が自然
+- つまり **membership activation と data-plane visibility を同じ acknowledgement rule にしない** 方が current repo の分離に合う
+
 ## practical example A — authoritative すごろく room
 
 ### 問題設定

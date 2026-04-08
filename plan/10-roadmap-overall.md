@@ -120,7 +120,7 @@
 
 - 上位構想として重要
 - ただし現在の主戦場はそこではなく、Mir core とその companion verification stack である
-- ただし docs-first の practical example、membership / consistency boundary comparison、authority / resource ownership / delegated capability / RNG provider placement の比較、layer responsibility の切り分けまでは self-driven に進めてよい
+- ただし docs-first の practical example、membership / consistency boundary comparison、authority / resource ownership / delegated capability / activation rule / RNG provider placement の比較、layer responsibility の切り分けまでは self-driven に進めてよい
 - active 化規則、authority / auth、consistency mode catalog、RNG / fairness model などの finalization は user 仕様確認が必要
 
 ## current L2 から将来層へ進むための gate
