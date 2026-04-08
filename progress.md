@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 13:06 JST
+最終更新: 2026-04-08 13:10 JST
 
 ## この文書について
 
@@ -16,7 +16,7 @@
 
 - **current L2 semantics** は、current mainline を進めるにはかなり安定している。
 - **parser-free PoC** は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
-- **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口まで来ている。
+- **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口が成立しており、Phase0/1/2 closeout の first-pass smoke と top-level mirror sweep も通した。
 - **parser boundary** は、stage 1 private spike と stage 3 declaration-side / later malformed-source first tranche まで actualize 済みである。
 - **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較すること、room resource ごとの owner slot / delegated capability / handoff epoch を分けて読む current working model、authoritative room の activation rule 最小候補を `authority-ack` に置き、さらに **authoritative room に限って** authority placement の current first choice を `single room authority`、consistency mode の current first choice を `authoritative serial transition`、RNG / fairness source の current first choice を `authority_rng` に置き、authoritative game room の current minimal concrete bundle を `authority-ack` + `single room authority` + `authoritative serial transition` + `authority_rng` に整理し、RNG だけを `delegated_rng_service` に差し替える next practical bundle を分離した。さらに reconnect / late leave / in-flight action は room profile に全部入れず、`member_incarnation` と uncommitted action invalidation を minimal room-profile rule、timeout / retry / resend を external policy layer に残す line まで進んだ。causal metadata 側では plain vector deletion を避け、epoch / incarnation split を first practical candidate、control-plane separated carrier を next stronger candidate に置くところまで進んだ。fairness trust model 側では `opaque authority trust` を current minimal candidate、`auditable authority witness` を next narrow strengthening candidate に置き、provider placement と witness requirement を別軸で比較する line を追加した。identity / auth layering 側では membership registry には identity core だけを残し、auth stack / admission policy は別 carrier に置く line を current first practical candidate にした。admission policy / compile-time visibility 側では role / capability / visibility requirement の over-approximation だけを compile-time に残し、actual admission / activation / reconciliation は runtime control-plane に残す line を current first practical candidate にした。append-heavy room では `append-friendly room` を first practical catalog、`delegated_rng_service` を next practical candidate にする line を維持している。
 - 現在の主ボトルネックは semantics の大崩れではなく、
@@ -31,8 +31,8 @@
 |---|---|---|---|---|---|
 | Phase 0 | repository memory / decision boundary | maintenance | 低い | 自走可能 | `specs/` / `plan/` / report / progress の整合維持 |
 | Phase 1 | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
-| Phase 2 | parser-free PoC / detached validation loop | 終盤 | 中 | 自走可能 | loop 入口は成立、現在は運用摩擦低減 |
-| Phase 3 | parser boundary / first checker cut | 前半〜中盤 | 中〜やや重い | 自走可能 | stage 1 / stage 3 first tranche は actualize 済み |
+| Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | loop 入口と closeout baseline は成立、現在は運用摩擦低減 |
+| Phase 3 | parser boundary / first checker cut | 前半〜中盤の主線 | 中〜やや重い | 自走可能 | stage 1 / stage 3 first tranche は actualize 済み |
 | Phase 4 | shared-space / membership / practical example boundary | 前半 | 重い | 一部自走可能 | docs-first boundary は進めてよいが final profile は要仕様確認 |
 | Phase 5 | static analysis / type / theorem prover / model checker boundary | 入口整理 | とても重い | 後段依存 | small decidable core の inventory までは進めてよい |
 | Phase 6 | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | Phase 2 / 3 / 5 の gate 後に入る |
@@ -40,16 +40,16 @@
 
 ### 現在の主線
 
-- **主線**: Phase 2 終盤 + Phase 3 前半〜中盤
+- **主線**: Phase 3 前半〜中盤
+- **maintenance tail**: Phase 0 / 1 / 2
 - **side line**: Phase 4 前半
 - **まだ勝手に finalization しない**: final parser grammar、production exporter API、shared-space final catalog、higher-layer application contract
 
 ### immediate execution order
 
-1. Phase 0 / 1 / 2 の残件 closeout
-2. docs / specs / README / `progress.md` / `plan/` の整合性 sweep
-3. Phase 3 を主線として進行
-4. Phase 3 の一区切りで現状整理して一旦停止
+1. Phase 0 / 1 / 2 の closeout baseline を維持しつつ drift suppression を続ける
+2. Phase 3 を主線として進行する
+3. Phase 3 の一区切りで現状整理して一旦停止する
 
 ## いま自走で進めてよい範囲
 
@@ -119,11 +119,10 @@
 ### Priority A — すぐ続けてよい
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
-2. docs / specs / README / `progress.md` / `plan/` の整合性 sweep を入れ、Phase 0 / 1 / 2 closeout の mirror drift を抑える
-3. stage 3 later branch の次段比較
+2. stage 3 later branch の次段比較
    - request head + clause attachment multiline shape を docs-only で比較するか
    - predicate fragment boundary の reopen 条件を先に切るか
-4. first checker cut / parser boundary の staged line を無理なく合流させる
+3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
 
@@ -213,3 +212,4 @@ rough estimate:
 - 2026-04-08 12:45 JST — shared-space の admission policy / compile-time visibility を `runtime-only` / `declared over-approx + runtime admission` / `closed-world exact set` で比較し、current first practical candidate を `role / capability / visibility requirement は compile-time over-approx、actual admission / activation は runtime control-plane` に置いた。次は fairness witness と identity core / principal continuity の接点を、audit artifact line とどう切るかを narrow に比較する段階。
 - 2026-04-08 12:59 JST — Phase0/1/2 closeout の consistency sweep として detached validation loop の helper surface を再確認し、`smoke-fixture` で E3/E6、`smoke-static-gate` で E4/E5 を回して bundle-first / aggregate / static-gate diff の current docs line と矛盾しないことを確認した。次はこの sweep evidence を report に固定し、必要な mirror drift だけを補正する段階。
 - 2026-04-08 13:06 JST — Phase0/1/2 closeout smoke の report / document map / progress mirror を reviewer finding に合わせて補正し、detached validation loop の compare boundary と helper entry surface に concrete drift が無い状態で closeout できるところまで揃えた。次は README / Documentation / specs/examples / plan mirror 全体へ consistency sweep を広げる段階。
+- 2026-04-08 13:10 JST — README / Documentation / `plan/00` / `plan/11` / `plan/17` / `progress.md` の top-level consistency sweep を入れ、detached validation loop の short summary を static gate artifact loop まで含む形へ揃え、Phase0/1/2 は maintenance tail・Phase3 は主線という current focus を mirror へ反映した。次は Phase3 later branch の次段比較へ戻る段階。

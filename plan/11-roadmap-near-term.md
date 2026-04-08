@@ -5,11 +5,11 @@
 この文書は、今から数 task 先までの near-term roadmap を示す。
 ここに書く step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
-current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先し、**Phase 0 / 1 / 2 の closeout → docs/spec/README/progress/plan consistency sweep → Phase 3** の順で読む。
+current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
 ## いまから数 task の主眼
 
-近い数 task の目的は、current L2 を次の状態へ持っていくことである。
+近い数 task の目的は、Phase 0 / 1 / 2 の closeout baseline を壊さずに current L2 を次の状態へ持っていくことである。
 
 - parser-free PoC を継続的に回せる
 - parser-free PoC の実行結果を process 内比較だけに閉じ込めない

@@ -194,10 +194,10 @@
 
 いま repo の主線は、次の 2 本である。
 
-1. **Phase 2 終盤**
-   - detached validation loop を継続運用しやすい形へ整える
-2. **Phase 3 前半〜中盤**
+1. **Phase 3 前半〜中盤**
    - parser boundary / first checker cut を staged に actualize する
+2. **Phase 2 終盤の maintenance tail**
+   - detached validation loop を継続運用しやすい形へ整え、mirror drift を抑える
 
 shared-space line は、これらを壊さない範囲で進める **Phase 4 の side line** である。
 
@@ -205,15 +205,15 @@ shared-space line は、これらを壊さない範囲で進める **Phase 4 の
 
 user 指示を反映した current immediate sequence は次である。
 
-1. **Phase 0 / 1 / 2 の残件を優先して閉じる**
+1. **Phase 0 / 1 / 2 の closeout baseline を固定する**
    - repository memory / docs maintenance
    - current L2 semantics drift suppression
-   - detached validation loop の運用摩擦低減
-2. **その時点で docs / specs / README / `progress.md` / `plan/` の整合性 sweep を入れる**
+   - detached validation loop helper surface の smoke evidence
+2. **docs / specs / README / `progress.md` / `plan/` の top-level consistency sweep を入れる**
 3. **その後で Phase 3 を主線として進める**
 4. **Phase 3 の一区切りで現状整理を行い、一旦止まる**
 
-したがって phase 読みとしては Phase 3 がすでに前半へ入っているが、**immediate execution order は Phase 0/1/2 closeout を先に寄せる** と読む。
+現在は 1 と 2 の first pass が閉じたので、phase 読みとしては **Phase 3 を主線に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として継続する** と読む。
 
 ## 現在の「止めるべき線」
 
@@ -234,6 +234,6 @@ user 指示を反映した current immediate sequence は次である。
 
 ## いまの判断
 
-- **現在地は「Phase 2 終盤 + Phase 3 前半〜中盤」が主線で、Phase 4 前半が side line」** と読むのが最も自然である。
+- **現在地は「Phase 3 前半〜中盤」が主線で、Phase 2 終盤は maintenance tail、Phase 4 前半が side line」** と読むのが最も自然である。
 - `progress.md` では、この phase 読みを rough snapshot として mirror する。
 - ただし規範判断の正本は引き続き `specs/` と relevant `plan/` 個別文書に置く。

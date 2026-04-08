@@ -14,7 +14,7 @@
 - プロジェクトは**実装前段階 / アーキテクチャ重視段階**にある。
 - 最も強い設計上の焦点は、意味論、境界、不変条件、統合点にある。
 - いくつかの実装 skeleton は、将来の作業整理をしやすくするためだけに存在している。
-- current L2 については、parser-free PoC 基盤と helper stack がかなり進んでおり、長期参照用の repository memory は `plan/` に整理している。
+- current L2 については、parser-free PoC 基盤と helper stack がかなり進んでおり、bundle / aggregate / static gate を含む detached validation loop の non-production 入口まで到達している。長期参照用の repository memory は `plan/` に整理している。
 
 ## Decision level 要約
 
