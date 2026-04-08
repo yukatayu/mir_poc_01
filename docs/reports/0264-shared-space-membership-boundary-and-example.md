@@ -121,8 +121,8 @@ $ date '+%Y-%m-%d %H:%M %Z'
 
 ### review path
 
-- reviewer subagent を 1 回だけ起動したが、この environment では completion を追跡できず、wait / poll path が成立しなかった。
-- そのため local diff review に切り替え、report 構成を repo の report policy 順へ揃え直した。
+- reviewer subagent を 1 回だけ起動し、semantic over-commitment と boundary drift を確認した。
+- completion では substantive finding は返らなかった。
 
 ### findings
 
