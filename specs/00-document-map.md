@@ -368,6 +368,8 @@
   - stage 2 runtime-contrast widening と stage 1 summary-preserving widening のどちらを次に取るのが自然かを比較する。
 - `specs/examples/118-current-l2-stage1-summary-preserving-widening-actualization.md`
   - stage 1 reconnect family の summary-preserving widening (`e18` / `e20`) を helper-local / test-only にどこまで actualize してよいかを整理する。
+- `specs/examples/119-current-l2-reconnect-freeze-threshold.md`
+  - `e19` widening と stage 2 `E21` / `E22` runtime contrast のどちらも current reconnect line へ無理に混ぜず、private staged spike を freeze する方が自然だという current threshold judgment を整理する。
 
 ## レポート
 

@@ -5,13 +5,13 @@
 この文書は、今から数 task 先までの near-term roadmap を示す。
 ここに書く step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
-current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
+current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed しており、現在は reconnect subline も freeze threshold まで整理できたので、**現在は Phase 3 current tranche closeout を終えた checkpoint にあり、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 1 summary-preserving widening (`e18` / `e20`) を actualize したことを前提に、`e19-malformed-target-mismatch` をどういう reconnect summary contract に乗せるかを比較するか、それとも stage 2 `E21` / `E22` runtime contrast を parser-side reconnect に mirror する threshold を比較するかを narrow に選ぶことである。
+current Phase 3 current tranche の closeout sweep は完了済みとみなしてよい。したがって near-term roadmap の主眼は、**checkpoint 後に何を先に再開するか** を見やすくしておくことである。
 
 ## いまから数 task の主眼
 
-近い数 task の目的は、Phase 0 / 1 / 2 の closeout baseline を壊さずに current L2 を次の状態へ持っていくことである。
+近い数 task の目的は、Phase 0 / 1 / 2 の closeout baseline を壊さずに current L2 を次の stop line から再開しやすく保つことである。
 
 - parser-free PoC を継続的に回せる
 - parser-free PoC の実行結果を process 内比較だけに閉じ込めない
@@ -20,65 +20,34 @@ current Phase 3 の next narrow step は、stage 1 summary-preserving widening (
 - helper stack の mirror drift が抑えられている
 - parser 導入前に何が未決かを誤魔化さずに進められる
 
-## 直近 2〜4 task の候補
+## 次に再開するなら有力な 2〜4 task
 
-### 候補 1. detached trace / audit serialization の最小境界整理
+### 候補 1. detached validation loop の運用摩擦をさらに下げる
 
-- docs-only minimal schema は切れたので、次は `TraceAuditSink` / `RunReport` / bundle summary から thin export boundary をどう置くかを narrow に棚卸しする
-- repo 外保存・再比較・後解析に必要な field を、exact-compare core / detached non-core / human-facing explanation に分けて運ぶ
-- `must_explain` は引き続き prose obligation に残し、exact compare の core を増やしすぎない
-- その比較では、payload core は `RunReport` に寄せつつ、first exporter entry は `run_bundle` / `BundleRunReport` に置くのが current understanding である
-- さらに bundle-first artifact の内部では、`fixture_id` / `fixture_path` / `host_plan_path` / `runtime_requirement` を `bundle_context` へ寄せ、`host_plan_coverage_failure` は aggregate-only に残すのが次の narrow step である
-- その次の narrow comparison として、`host_plan_coverage_failure` を将来 typed carrier に昇格させるなら bundle failure artifact 側へ切るのが自然かどうかを確認する
-- さらにその docs-only refinement として、bundle failure artifact 側へ切る typed carrier の最小 schema は `failure_kind` discriminator だけに留め、`bundle_context` や short note を typed core に混ぜないのが current understanding である
-- さらにその aggregate connection として、`BatchRunSummary` が typed bundle failure を吸うなら、持たせる typed 集約は `failure_kind` ごとの histogram / kind count までに留め、bundle failure summary の薄い再掲は避けるのが current understanding である
-- さらにその naming / migration refinement として、aggregate 側の最小 field 名候補は `bundle_failure_kind_counts` であり、current `host_plan_coverage_failures` list と `BatchBundleOutcome::Failed.host_plan_coverage_failure` bool を compatibility anchor として残した additive coexistence から始めるのが current understanding である
-- さらに detached exporter consolidation sprint の入口として、
-  - detached exporter chain の current docs-only judgment を `specs/examples/23-current-l2-detached-export-loop-consolidation.md` に集約し、
-  - bundle-first の non-production tiny exporter / emitter、
-  - payload core comparison に絞った minimal diff helper、
-  - fixture authoring / elaboration template
-  を整備して、PoC loop を「保存し、比較し、また 1 本足して回す」入口まで近づける
-- その次の continuation として、
-  - aggregate export 接続と artifact 保存先 / path policy の最小 cut を `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` に整理し、
-  - `target/current-l2-detached/` を current non-production default candidate として bundle artifact を保存し、
-  - tiny wrapper で 1 fixture export / 2 artifact compare を回す
-  ところまでを near-term の operational boundary とみなす
+- current tiny exporter / diff helper / loop wrapper / fixture template を使い、追加 fixture を何本か実地で回す
+- export 保存、core compare、reference update、failure triage のどこで実際に friction が残るかを観測する
+- current helper boundary を壊さずに、`scripts/` / non-production helper 側だけで減らせる摩擦を narrow に減らす
 
-### 候補 2. richer host interface と coverage analysis の入口整理
+### 候補 2. shared-space / membership side line を docs-first で進める
 
-- current host harness から production host interface へ直進しない
-- preflight、coverage explanation、uncovered call detection のどこが本当に bottleneck かを切り分ける
-- detached artifact boundary を先に切った後でも十分な部分だけを後段 task に残す
+- authoritative room と append-friendly room の authority placement / consistency mode / RNG provider を practical example で比べる
+- `authority-ack`、`single room authority`、`authoritative serial transition`、`authority_rng` の bundle をもう少し source-backed に厚くする
+- final activation / authority / auth / consistency / fairness catalog へは入らず、stop line を明確にする
 
-### 候補 3. parser-free representative coverage の拡張
+### 候補 3. static analysis / type / theorem prover boundary の inventory を進める
 
-- current L2 semantics の重要点を、まだ fixture 化されていない narrow case で regression 化する
-- static-only と runtime fixture のバランスを見る
-- `must_explain` は prose に残し、machine-check 範囲を増やしすぎない
-- current actualization としては、`e21-try-atomic-cut-frontier` により `TryFallback` body 内 `AtomicCut` rollback frontier 更新を、`e22-try-atomic-cut-place-mismatch` により nested place mismatch 時の event-only cut を、それぞれ runtime fixture / detached loop / directory summary まで通せる状態になった
-- current docs-only judgment としては、`try` / rollback locality の structural floor は first checker cut 候補 cluster に残すが、existing reason-row family helper の fourth spike にはまだ actualize せず、runtime representative と `specs/examples/51` / `52` に留める
-- current docs-only refinement としては、`try` / rollback locality を dedicated AST structural helper に actualize するなら、parser/loader malformed source、AST-only floor、reason-row family と分ける dedicated carrier、runtime gate 非依存、singleton ではない structural family という entry criteria を先に満たすべきである
-- current docs-only refinement としては、current parser-free phase では structural malformed source を parser でも loader でもなく static gate / dedicated AST structural helper 側へ置き、loader は carrier/schema malformed に留めるのが最小である
-- current docs-only refinement としては、runtime representative `E2` / `E21` / `E22` が current phase の evidence として十分強く、malformed static family はまだ actual corpus に増やさないのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper を切る場合の compare contract は helper-local dedicated contract から始め、row-family 流用や detached artifact shared carrier 先行は避けるのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper の optional expected field 名は `expected_static.checked_try_rollback_structural_findings` が最小候補であり、focused compare shape も `subject_kind` / `finding_kind` の helper-local row list に留めるのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper を detached validation loop へ差し込むなら、bundle-first runtime path ではなく static gate artifact loop の helper-local smoke family に留めるのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper の structural verdict は `expected_static.verdict` を流用せず、`expected_static.checked_try_rollback_structural_verdict` と helper-local string enum `no_findings` / `findings_present` に留めるのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper を detached artifact shared carrier へ上げる閾値は、helper actualization、fixture-side field actualization、static corpus、loop stabilization、saved artifact compare need の 5 条件が揃った時点に置くのが最小であり、current state ではまだ未充足である
-- current docs-only refinement としては、future dedicated AST structural helper の wrapper family は family-specific に留め、exact subcommand 名は actual helper actualization task まで deferred にするのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper を generic structural checker family と合流させるのは later public checker API comparison と同時に扱うのが自然である
-- current docs-only refinement としては、later public checker API comparison に future dedicated AST structural helper family を載せるには、generic family 合流とは別に、actual helper / fixture contract / corpus / loop stabilization / public comparison pressure の entry criteria が要る
-- current docs-only refinement としては、future dedicated AST structural helper の malformed static family は current phase の今すぐではなく、dedicated helper actualization first tranche と同時に actual corpus へ足すのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper の first tranche は helper code / fixture-side fields / minimal malformed static family / static gate smoke path を一体で切り、shared carrier / public checker API は外に残すのが自然である
-- current docs-only refinement としては、future dedicated AST structural helper の minimal malformed static family tranche は `TryFallback` 1 件 + `AtomicCut` 1 件の two-fixture pair を最小とするのが自然である
-- current actualization としては、その two-fixture first tranche の slot selection を `empty fallback_body -> missing_fallback_body` / `fallback_body AtomicCut -> disallowed_fallback_placement` に固定し、helper code / fixture-side fields / `e23` / `e24` / `smoke-try-rollback-structural-checker` まで actualize 済みである
-- 次の narrow question は、second malformed static tranche を足すべきか、それとも helper-local wording / finding family を first tranche のまま数回反復してから shared carrier / public checker comparison へ進むべきかである
+- local / structural / decidable 寄りの floor をどこまで core に入れるかを narrow に比べる
+- parser boundary / first checker cut / detached validation loop と衝突しない small decidable core inventory を先に作る
+- theorem prover / model checker 側へ残す global property を current docs に合わせて明確化する
 
-### 候補 4. parser 導入前の boundary inventory
+### 候補 4. parser boundary / first checker cut の reopen 条件を整理する
 
-- parser を書く前に最低限固定すべき syntax / companion notation / AST boundary を棚卸しする
-- 何を final grammar 決定に回し、何をまだ比較候補に残すかを明確にする
+- current freeze line を壊さずに reopen できる subline を比較する
+- 例:
+  - parser subset inventory の docs-only refinement
+  - public checker API comparison の前提整理
+  - `E21` / `E22` の runtime / proof boundary mirror threshold comparison
+- ただし current tranche を reopen する場合でも、既存 private helper contract を勝手に太らせない
 
 ## rough step estimate
 
@@ -152,7 +121,9 @@ current Phase 3 の next narrow step は、stage 1 summary-preserving widening (
 - hard-coded named profile catalog は維持する
 - machine-readable catalog asset / manifest はまだ future option に留める
 
-## 次にやるべき narrow-scope task 候補
+## Historical appendix — pre-checkpoint narrow-scope catalog
+
+以下は、Phase 3 current tranche closeout 前に積み上げていた narrow-scope catalog を履歴 / provenance として残す section である。**current roadmap としては読まないこと**。再開候補の current reading は、この文書の上部にある `候補 1..4`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md` を優先する。
 
 - detached trace / audit の docs-only schema から thin exporter 候補の carrier mapping を切り出す
 - bundle / batch summary が detached artifact として最低限どこまで出せば比較可能かを棚卸しし、bundle-first exporter entry を docs に固定する

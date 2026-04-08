@@ -759,6 +759,24 @@
   - `crates/mir-ast/tests/fixtures/current-l2/e18-malformed-missing-successor-option.json`
   - `crates/mir-ast/tests/fixtures/current-l2/e20-malformed-late-capability-strengthening.json`
 
+### 2026-04-08 reconnect freeze threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/117-current-l2-stage2-contrast-vs-stage1-summary-preserving-widening.md`
+  - `specs/examples/118-current-l2-stage1-summary-preserving-widening-actualization.md`
+  - `specs/examples/119-current-l2-reconnect-freeze-threshold.md`
+  - `specs/examples/42-current-l2-second-typed-static-reason-family-actualization.md`
+  - `specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md`
+  - `docs/reports/0341-current-l2-stage1-summary-preserving-widening.md`
+  - `docs/reports/0344-current-l2-reconnect-freeze-threshold.md`
+
+### 2026-04-08 phase3 closeout checkpoint addendum
+
+- `plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/119-current-l2-reconnect-freeze-threshold.md`
+  - `docs/reports/0345-current-l2-phase3-closeout-sweep.md`
+  - `docs/reports/0346-review-phase3-closeout-checkpoint.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

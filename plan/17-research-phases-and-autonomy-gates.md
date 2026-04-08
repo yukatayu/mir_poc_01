@@ -92,7 +92,7 @@
 
 #### 現在地
 
-- **前半から中盤。stage 1 / stage 3 の first tranche は actualize 済み**
+- **current tranche の closeout 完了。次回再開時は別 subline を昇格する段階**
 
 #### 重さ
 
@@ -194,10 +194,12 @@
 
 いま repo の主線は、次の 2 本である。
 
-1. **Phase 3 前半〜中盤**
-   - parser boundary / first checker cut を staged に actualize する
-2. **Phase 2 終盤の maintenance tail**
-   - detached validation loop を継続運用しやすい形へ整え、mirror drift を抑える
+1. **checkpoint / maintenance tail**
+   - Phase 0 / 1 / 2 の drift suppression を継続する
+2. **Phase 4 前半の side line**
+   - shared-space / membership の docs-first boundary を進める
+3. **Phase 5 入口の inventory line**
+   - small decidable core と proof boundary の inventory を進める
 
 shared-space line は、これらを壊さない範囲で進める **Phase 4 の side line** である。
 
@@ -210,10 +212,10 @@ user 指示を反映した current immediate sequence は次である。
    - current L2 semantics drift suppression
    - detached validation loop helper surface の smoke evidence
 2. **docs / specs / README / `progress.md` / `plan/` の top-level consistency sweep を入れる**
-3. **その後で Phase 3 を主線として進める**
-4. **Phase 3 の一区切りで現状整理を行い、一旦止まる**
+3. **必要なら Phase 3 を reopen するが、current tranche は完了済みとみなす**
+4. **checkpoint ごとに現状整理を行い、次の promoted subline を narrow に選ぶ**
 
-現在は 1 と 2 の first pass が閉じたので、phase 読みとしては **Phase 3 を主線に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として継続する** と読む。
+現在は 1 と 2 の first pass が閉じ、Phase 3 staged reconnect line も freeze threshold まで整理できたので、phase 読みとしては **Phase 3 current tranche は closeout 済みで、repo は checkpoint から次の promoted subline を選べる状態にある** と読む。
 
 ## 現在の「止めるべき線」
 
@@ -234,6 +236,6 @@ user 指示を反映した current immediate sequence は次である。
 
 ## いまの判断
 
-- **現在地は「Phase 3 前半〜中盤」が主線で、Phase 2 終盤は maintenance tail、Phase 4 前半が side line」** と読むのが最も自然である。
+- **現在地は「Phase 3 current tranche closeout 後の checkpoint」で、Phase 2 終盤が maintenance tail、Phase 4 前半が side line」** と読むのが最も自然である。
 - `progress.md` では、この phase 読みを rough snapshot として mirror する。
 - ただし規範判断の正本は引き続き `specs/` と relevant `plan/` 個別文書に置く。

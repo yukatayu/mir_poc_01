@@ -244,6 +244,10 @@
   - `e18` は `same_lineage_floor + missing_option_structure_floor`
   - `e20` は `same_lineage_floor + capability_strengthening_floor`
   - `e19` は `declared_target_mismatch_floor` の summary redesign pressure があるため still later に残す
+- current threshold judgment としては、その後も `e19` を reconnect summary へ direct に混ぜたり、stage 2 `E21` / `E22` contrast を parser-side reconnect へ mirror したりするより、reconnect subline を current tranche で freeze する方が自然である。
+  - `e19` は already declared target edge pair family の typed static reason anchor を持つ
+  - `E21` / `E22` は runtime / proof boundary に近く、current `checked_try_rollback_structural_*` contract の widening なしには reconnect helper に自然に乗らない
+  - current reconnect line は stage 1 representative widening と stage 2 malformed pair + valid one-shot `atomic_cut` smoke までで一区切りとみなしてよい
 - ただし dedicated text fixture file の path policy、span-aware carrier、final parser-side type 名、final parser API は引き続き OPEN である。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。
 
