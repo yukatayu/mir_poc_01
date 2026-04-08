@@ -201,6 +201,8 @@ flowchart LR
 131. stage 1 chain / declaration structural floor family を first checker reconnect の first tranche としてどこまで actualize してよいか、その current cut は `specs/examples/114-current-l2-stage1-first-checker-reconnect-first-tranche-actualization.md`
 132. Phase 3 の next reconnect step を stage 1 widening と stage 2 `try` / rollback reconnect のどちらに置くのが自然か、その current sequencing judgment は `specs/examples/115-current-l2-stage1-widening-vs-stage2-try-rollback-reconnect.md`
 133. stage 2 `try` / rollback structural floor family を first checker reconnect の first tranche としてどこまで helper-local / test-only に actualize してよいか、その current cut は `specs/examples/116-current-l2-stage2-try-rollback-reconnect-first-tranche-actualization.md`
+134. stage 2 runtime-contrast widening と stage 1 summary-preserving widening のどちらを次に取るのが自然か、その current sequencing judgment は `specs/examples/117-current-l2-stage2-contrast-vs-stage1-summary-preserving-widening.md`
+135. stage 1 reconnect family の summary-preserving widening (`e18` / `e20`) を helper-local / test-only にどこまで actualize してよいか、その current cut は `specs/examples/118-current-l2-stage1-summary-preserving-widening-actualization.md`
 
 ## レポート
 

@@ -205,6 +205,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
   - stage 1 actual parser spike の private support helper
   - inline text から declaration / chain structural floor だけを parse し、fixture-side subset compare 用 carrier へ thin lowering bridge を渡す
+  - current widening は `Stage1ReconnectClusters` 3-bool summary contract を保ったまま `e18` / `e20` を focused test へ足す line に留め、helper 自体の contract widening は行わない
   - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
 - `crates/mir-ast/tests/support/current_l2_stage2_try_rollback_spike_support.rs`
   - stage 2 try/rollback reconnect の private support helper

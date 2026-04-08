@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 2 `try` / rollback structural floor reconnect first tranche を actualize したことを前提に、stage 2 reconnect family を `E21` / `E22` runtime contrast まで widening するか、それとも stage 1 reconnect family の remaining widening (`e18` / `e19` / `e20`) に戻るかを narrow に比較することである。
+current Phase 3 の next narrow step は、stage 1 summary-preserving widening (`e18` / `e20`) を actualize したことを前提に、`e19-malformed-target-mismatch` をどういう reconnect summary contract に乗せるかを比較するか、それとも stage 2 `E21` / `E22` runtime contrast を parser-side reconnect に mirror する threshold を比較するかを narrow に選ぶことである。
 
 ## いまから数 task の主眼
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 18:41 JST
+最終更新: 2026-04-08 18:57 JST
 
 ## この文書について
 
@@ -17,7 +17,7 @@
 - **current L2 semantics** は、current mainline を進めるにはかなり安定している。
 - **parser-free PoC** は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
 - **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口が成立しており、Phase0/1/2 closeout の first-pass smoke と top-level mirror sweep も通した。
-- **parser boundary / first checker reconnect** は、stage 1 private spike と stage 3 declaration-side / later malformed-source first tranche に加え、Phase 3 checker-side reconnect の first family を stage 1 chain / declaration structural floor に置いた後、next reconnect step を stage 2 `try` / rollback structural floor に取り、その first tranche を parser-side private summary + `e23` / `e24` fixture expectation compare + valid one-shot `atomic_cut` in try body smoke まで actualize 済みである。
+- **parser boundary / first checker reconnect** は、stage 1 private spike と stage 3 declaration-side / later malformed-source first tranche に加え、Phase 3 checker-side reconnect の first family を stage 1 chain / declaration structural floor に置いた後、stage 2 `try` / rollback structural floor first tranche を parser-side private summary + `e23` / `e24` fixture expectation compare + valid one-shot `atomic_cut` in try body smoke まで actualize 済みであり、その次段として stage 1 summary contract を保ったまま `e18` / `e20` widening まで actualize 済みである。
 - **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較すること、room resource ごとの owner slot / delegated capability / handoff epoch を分けて読む current working model、authoritative room の activation rule 最小候補を `authority-ack` に置き、さらに **authoritative room に限って** authority placement の current first choice を `single room authority`、consistency mode の current first choice を `authoritative serial transition`、RNG / fairness source の current first choice を `authority_rng` に置き、authoritative game room の current minimal concrete bundle を `authority-ack` + `single room authority` + `authoritative serial transition` + `authority_rng` に整理し、RNG だけを `delegated_rng_service` に差し替える next practical bundle を分離した。さらに reconnect / late leave / in-flight action は room profile に全部入れず、`member_incarnation` と uncommitted action invalidation を minimal room-profile rule、timeout / retry / resend を external policy layer に残す line まで進んだ。causal metadata 側では plain vector deletion を避け、epoch / incarnation split を first practical candidate、control-plane separated carrier を next stronger candidate に置くところまで進んだ。fairness trust model 側では `opaque authority trust` を current minimal candidate、`auditable authority witness` を next narrow strengthening candidate に置き、provider placement と witness requirement を別軸で比較する line を追加した。identity / auth layering 側では membership registry には identity core だけを残し、auth stack / admission policy は別 carrier に置く line を current first practical candidate にした。admission policy / compile-time visibility 側では role / capability / visibility requirement の over-approximation だけを compile-time に残し、actual admission / activation / reconciliation は runtime control-plane に残す line を current first practical candidate にした。append-heavy room では `append-friendly room` を first practical catalog、`delegated_rng_service` を next practical candidate にする line を維持している。
 - 現在の主ボトルネックは semantics の大崩れではなく、
   - fixture authoring / elaboration の反復コスト
@@ -133,7 +133,7 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. Phase 3 主線の次段再棚卸し
-   - stage 2 reconnect family を `E21` / `E22` runtime contrast まで widening するか、stage 1 reconnect family の remaining widening (`e18` / `e19` / `e20`) に戻るかを narrow に比較する
+   - `e19-malformed-target-mismatch` をどういう reconnect summary contract に乗せるかを比較するか、stage 2 `E21` / `E22` runtime contrast を parser-side reconnect に mirror する threshold を比較する
    - request contract subset family は still 0-or-1 guard の checkpoint として保持する
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
@@ -251,3 +251,4 @@ rough estimate:
 - 2026-04-08 18:15 JST — Phase 3 の再開側選択を比較し、parser boundary staging 側の widening 再開より first checker cut connection 側から existing parser evidence の reconnect family を比べる方が自然だと mirror へ固定した。次はどの parser-boundary evidence family を first checker cut inventory へ最初に reconnect するかを narrow に比較する段階。
 - 2026-04-08 18:29 JST — Phase 3 の first checker reconnect family を stage 1 chain / declaration structural floor に固定し、`Stage1ReconnectClusters` helper-local summary と `e13` / `e16` representative fixture compare を first tranche として actualize した。次は stage 1 reconnect family を `e18` / `e19` / `e20` まで widening するか、stage 2 `try` / rollback reconnect へ進むかを narrow に比較する段階。
 - 2026-04-08 18:41 JST — Phase 3 の next reconnect step を stage 2 `try` / rollback structural floor に固定し、parser-side private summary を `checked_try_rollback_structural_*` に合わせて `e23` / `e24` malformed pair と valid one-shot `atomic_cut` in try body smoke まで actualize した。次は stage 2 reconnect family を `E21` / `E22` runtime contrast まで widening するか、stage 1 reconnect family の remaining widening (`e18` / `e19` / `e20`) に戻るかを narrow に比較する段階。
+- 2026-04-08 18:57 JST — Phase 3 の次段は stage 2 runtime-contrast widening より先に stage 1 summary-preserving widening (`e18` / `e20`) を取る judgment に固定し、current `Stage1ReconnectClusters` contract を広げずに focused fixture compare と summary compare まで actualize した。次は `e19-malformed-target-mismatch` の summary contract と stage 2 `E21` / `E22` contrast threshold のどちらを先に比べるかを narrow に決める段階。

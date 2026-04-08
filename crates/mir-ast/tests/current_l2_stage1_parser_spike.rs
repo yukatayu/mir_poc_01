@@ -47,6 +47,21 @@ option primary on profile_doc capability read lease live
 chain profile_ref = ghost
 "#;
 
+const E18_INPUT: &str = r#"
+option primary on profile_doc capability read lease live
+chain profile_ref = primary
+fallback ghost @ lineage(primary -> ghost)
+"#;
+
+const E20_INPUT: &str = r#"
+option primary on profile_doc capability read lease live
+option mirror on profile_doc capability read lease live
+option escalated on profile_doc capability write lease live
+chain profile_ref = primary
+fallback mirror @ lineage(primary -> mirror)
+fallback escalated @ lineage(mirror -> escalated)
+"#;
+
 fn lower_for_compare(source: &str) -> Stage1FixtureSubset {
     let parsed = parse_stage1_program_text(source).expect("stage 1 spike should parse test input");
 
@@ -96,6 +111,24 @@ fn stage1_parser_spike_matches_e16_fixture_subset() {
     let actual = lower_for_compare(E16_INPUT);
     let expected = load_expected_fixture_subset("e16-malformed-missing-chain-head-option.json")
         .expect("expected e16 fixture subset should load");
+
+    assert_eq!(actual, expected);
+}
+
+#[test]
+fn stage1_parser_spike_matches_e18_fixture_subset() {
+    let actual = lower_for_compare(E18_INPUT);
+    let expected = load_expected_fixture_subset("e18-malformed-missing-successor-option.json")
+        .expect("expected e18 fixture subset should load");
+
+    assert_eq!(actual, expected);
+}
+
+#[test]
+fn stage1_parser_spike_matches_e20_fixture_subset() {
+    let actual = lower_for_compare(E20_INPUT);
+    let expected = load_expected_fixture_subset("e20-malformed-late-capability-strengthening.json")
+        .expect("expected e20 fixture subset should load");
 
     assert_eq!(actual, expected);
 }
@@ -172,6 +205,34 @@ fn stage1_parser_spike_marks_missing_option_reconnect_cluster_for_e16() {
             same_lineage_floor: false,
             missing_option_structure_floor: true,
             capability_strengthening_floor: false,
+        }
+    );
+}
+
+#[test]
+fn stage1_parser_spike_marks_missing_option_reconnect_cluster_for_e18() {
+    let subset = lower_for_compare(E18_INPUT);
+
+    assert_eq!(
+        summarize_stage1_reconnect_clusters(&subset),
+        Stage1ReconnectClusters {
+            same_lineage_floor: true,
+            missing_option_structure_floor: true,
+            capability_strengthening_floor: false,
+        }
+    );
+}
+
+#[test]
+fn stage1_parser_spike_marks_capability_reconnect_cluster_for_e20() {
+    let subset = lower_for_compare(E20_INPUT);
+
+    assert_eq!(
+        summarize_stage1_reconnect_clusters(&subset),
+        Stage1ReconnectClusters {
+            same_lineage_floor: true,
+            missing_option_structure_floor: false,
+            capability_strengthening_floor: true,
         }
     );
 }

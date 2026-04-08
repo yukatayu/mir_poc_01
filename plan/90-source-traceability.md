@@ -748,6 +748,17 @@
   - `crates/mir-ast/tests/fixtures/current-l2/e24-malformed-atomic-cut-fallback-placement.json`
   - `scripts/current_l2_try_rollback_structural_checker.py`
 
+### 2026-04-08 stage1 summary-preserving widening addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/117-current-l2-stage2-contrast-vs-stage1-summary-preserving-widening.md`
+  - `specs/examples/118-current-l2-stage1-summary-preserving-widening-actualization.md`
+  - `docs/reports/0341-current-l2-stage1-summary-preserving-widening.md`
+  - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+  - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
+  - `crates/mir-ast/tests/fixtures/current-l2/e18-malformed-missing-successor-option.json`
+  - `crates/mir-ast/tests/fixtures/current-l2/e20-malformed-late-capability-strengthening.json`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

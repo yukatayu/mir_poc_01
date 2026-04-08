@@ -364,6 +364,10 @@
   - Phase 3 の next reconnect step を stage 1 widening と stage 2 `try` / rollback reconnect のどちらに置くのが自然かを比較する。
 - `specs/examples/116-current-l2-stage2-try-rollback-reconnect-first-tranche-actualization.md`
   - stage 2 `try` / rollback structural floor family を first checker reconnect の first tranche としてどこまで helper-local / test-only に actualize してよいかを整理する。
+- `specs/examples/117-current-l2-stage2-contrast-vs-stage1-summary-preserving-widening.md`
+  - stage 2 runtime-contrast widening と stage 1 summary-preserving widening のどちらを次に取るのが自然かを比較する。
+- `specs/examples/118-current-l2-stage1-summary-preserving-widening-actualization.md`
+  - stage 1 reconnect family の summary-preserving widening (`e18` / `e20`) を helper-local / test-only にどこまで actualize してよいかを整理する。
 
 ## レポート
 

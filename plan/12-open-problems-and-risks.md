@@ -239,6 +239,11 @@
   - compare surface は fixture-side `checked_try_rollback_structural_verdict` / `checked_try_rollback_structural_findings`
   - first-tranche evidence は `e23` / `e24` malformed pair と valid one-shot `atomic_cut` in try body の `no_findings` smoke
   - nested `place`、`place_anchor == current_place` gate、restore scope は still later に残す
+- current next widening judgment としては、stage 2 `E21` / `E22` runtime contrast を先に parser-side reconnect へ mirror するより、current summary contract を保ったまま stage 1 `e18` / `e20` widening を先に actualize する方が自然である。
+- current actualization として、その stage 1 summary-preserving widening tranche は support helper widening なしに focused tests だけで actualize 済みである。
+  - `e18` は `same_lineage_floor + missing_option_structure_floor`
+  - `e20` は `same_lineage_floor + capability_strengthening_floor`
+  - `e19` は `declared_target_mismatch_floor` の summary redesign pressure があるため still later に残す
 - ただし dedicated text fixture file の path policy、span-aware carrier、final parser-side type 名、final parser API は引き続き OPEN である。
 - request / admissibility cluster は semantic inventory 上は first parser cut 候補に入れてよいが、current phase では checker boundary への直結が弱いため actual parser spike の第 1 段には置かない。
 
