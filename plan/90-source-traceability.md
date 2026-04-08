@@ -610,6 +610,15 @@
   - `specs/examples/92-current-l2-stage3-predicate-fragment-reopen-sequencing.md`
   - `docs/reports/0297-current-l2-stage3-predicate-fragment-reopen-sequencing.md`
 
+### 2026-04-08 stage 3 predicate fragment first tranche addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/93-current-l2-stage3-predicate-fragment-boundary-comparison.md`
+  - `specs/examples/94-current-l2-stage3-predicate-fragment-first-tranche-actualization.md`
+  - `docs/reports/0299-current-l2-stage3-predicate-fragment-first-tranche.md`
+  - `crates/mir-ast/tests/support/current_l2_stage3_predicate_fragment_spike_support.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_predicate_fragment_spike.rs`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

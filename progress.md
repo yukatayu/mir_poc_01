@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 13:38 JST
+最終更新: 2026-04-08 13:47 JST
 
 ## この文書について
 
@@ -113,7 +113,8 @@
     - `request-local require clause is outside stage 3 admit-slot first tranche`
     - `request-local ensure clause is outside stage 3 admit-slot first tranche`
     を actualize 済み
-  - next docs-only sequencing としては、request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を比較する
+  - shared isolated predicate fragment helper の first tranche は actualize 済みであり、`e2` / `e3` / `e10` / `e11` anchor の predicate subset compare まで通っている
+  - next narrow question は、predicate fragment helper の malformed-source pair を先に切るか、request head + clause attachment multiline shape の docs-only comparison を先に開くかである
 
 ## 残課題の優先順位
 
@@ -121,8 +122,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段比較
-   - predicate fragment boundary の reopen 条件を docs-only で比較する
-   - request head + clause attachment multiline shape はその後段へ残す
+   - predicate fragment helper の malformed-source pair と request head + clause attachment multiline shape のどちらを先に切るかを比較する
+   - request cluster の attachment rule は still later stage に残す
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -158,8 +159,8 @@ rough estimate:
 | parser-free PoC execution stack | 90% | 85% | 98% | 着手可能 | runtime / bundle / batch / selection / profile は揃っている |
 | detached export / validation loop | 98% | 96% | 99% | 着手可能 | 入口は成立、現在は運用面の摩擦低減フェーズ |
 | fixture authoring / elaboration 実務 | 97% | 98% | 99% | 着手可能 | template / scaffold / smoke convenience は強い |
-| parser boundary / staged parser spike | 79% | 72% | 74% | 着手可能 | stage 1 と stage 3 first tranches は actualize 済み |
-| first checker cut / helper-local compare family | 82% | 70% | 80% | 着手可能 | narrow helper family は安定、generic/public は後段 |
+| parser boundary / staged parser spike | 82% | 75% | 79% | 着手可能 | stage 1 と stage 3 predicate fragment first tranche まで actualize 済み |
+| first checker cut / helper-local compare family | 84% | 72% | 83% | 着手可能 | minimal predicate fragment floor まで helper-local evidence が揃い始めた |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | static analysis / type / theorem prover boundary | 36% | 26% | 12% | 後段依存 | hybrid staged approach を採る前提 |
 | shared-space / dynamic membership boundary | 72% | 63% | 8% | 要仕様確認 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room の `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` first choice、authoritative game room の minimal concrete bundle、`member_incarnation` と uncommitted action invalidation を room-profile 側に残す reconnect policy cut、plain vector deletion を避けて epoch / incarnation split を first practical candidate にする causal metadata cut、fairness trust model を `opaque authority trust` / `auditable authority witness` で分ける line、identity core と auth stack / admission policy を分ける line、admission policy / compile-time visibility を over-approximation + runtime control-plane で切る line、append-heavy room の `append-friendly room` first practical catalog と `delegated_rng_service` next candidate までは進められるが、relaxed room と final activation / auth / consistency / fairness catalog は user 仕様待ち |
@@ -177,10 +178,10 @@ rough estimate:
 ## 次に進めるべき task
 
 1. stage 3 later branch の
-   - predicate fragment boundary reopen 条件
-   を narrow に切り、
+   - predicate fragment helper の malformed-source pair
+   と
    - request head + clause attachment multiline shape
-   を still later stage に残す
+   のどちらを先に切るかを narrow に比べる
 2. current detached loop を新しい fixture 追加手順と結び付けて、authoring friction をさらに 1 段下げる
 3. parser boundary staging と first checker cut の接点を docs-only で再棚卸しし、無理な合流を避ける
 4. shared-space / membership boundary は docs-first example まで進めてよいが、activation / authority / auth / consistency catalog の finalization は user 仕様確認で止める
@@ -216,3 +217,4 @@ rough estimate:
 - 2026-04-08 13:06 JST — Phase0/1/2 closeout smoke の report / document map / progress mirror を reviewer finding に合わせて補正し、detached validation loop の compare boundary と helper entry surface に concrete drift が無い状態で closeout できるところまで揃えた。次は README / Documentation / specs/examples / plan mirror 全体へ consistency sweep を広げる段階。
 - 2026-04-08 13:10 JST — README / Documentation / `plan/00` / `plan/11` / `plan/17` / `progress.md` の top-level consistency sweep を入れ、detached validation loop の short summary を static gate artifact loop まで含む形へ揃え、Phase0/1/2 は maintenance tail・Phase3 は主線という current focus を mirror へ反映した。次は Phase3 later branch の次段比較へ戻る段階。
 - 2026-04-08 13:38 JST — Phase 3 later branch の sequencing を比較し、request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を切る judgment を `specs/examples/92` と mirror へ固定し、late reviewer finding だった detached loop help wording / report placeholder も同 task で閉じた。次は minimal predicate fragment boundary の first docs-only cut を比較する段階。
+- 2026-04-08 13:47 JST — Phase 3 later branch の predicate fragment boundary を shared isolated helper として reopen する judgment を `specs/examples/93` に固定し、`e2` / `e3` / `e10` / `e11` anchor の predicate subset compare を通す first tranche を private helper と test で actualize した。次は malformed-source pair と request head + clause attachment multiline shape のどちらを先に切るかを比較する段階。

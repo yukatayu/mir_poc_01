@@ -316,6 +316,10 @@
   - stage 3 later branch の request-local clause spillover first tranche が helper-local wording fragment 2 件まで current repo でどこまで actualize 済みかを整理する。
 - `specs/examples/92-current-l2-stage3-predicate-fragment-reopen-sequencing.md`
   - stage 3 later branch の次段として request head + clause attachment multiline shape より先に predicate fragment boundary の reopen 条件を比較する current sequencing judgment を整理する。
+- `specs/examples/93-current-l2-stage3-predicate-fragment-boundary-comparison.md`
+  - stage 3 later branch の minimal predicate fragment を、opaque surface retention、declaration-side only compare、shared isolated fragment helper のどこから reopen するのが最小かを比較する。
+- `specs/examples/94-current-l2-stage3-predicate-fragment-first-tranche-actualization.md`
+  - stage 3 later branch の shared isolated predicate fragment helper first tranche が `e2` / `e3` / `e10` / `e11` anchor まで current repo でどこまで actualize 済みかを整理する。
 
 ## レポート
 

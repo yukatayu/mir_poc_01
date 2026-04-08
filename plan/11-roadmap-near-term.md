@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 3 later branch で request head + clause attachment multiline shape を先に開かず、predicate fragment boundary の reopen 条件を先に比較することである。
+current Phase 3 の next narrow step は、stage 3 later branch で request head + clause attachment multiline shape を先に開かず、shared isolated predicate fragment helper の次段 cut を比較することである。
 
 ## いまから数 task の主眼
 
@@ -240,8 +240,10 @@ current Phase 3 の next narrow step は、stage 3 later branch で request head
   - `request-local require clause is outside stage 3 admit-slot first tranche`
   - `request-local ensure clause is outside stage 3 admit-slot first tranche`
   の helper-local wording fragment 2 件まで進めてよい
+- その次段では、predicate fragment boundary を declaration-side only compare や opaque slot retention に寄せず、declaration-side `admit` と request-local `require` / `ensure` の shared floor を持つ isolated helper として reopen するのが最小である
+- current actualization として、その first tranche は `e2` / `e3` / `e10` / `e11` anchor の predicate subset compare に留め、request head + clause attachment multiline shape と fixture-side full request node compare は still later stage に残す
 - その次段で比較するべきなのは、
+  - predicate fragment helper の malformed-source pair を先に actualize するか
   - request head + clause attachment multiline shape を stage 3 helper にどこまで持たせるか
-  - predicate fragment boundary の reopen 条件を stage 3 line にどう接続するか
   - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
-  であり、request cluster と predicate fragment parser は still later stage に残す
+  であり、request cluster の attachment rule と multiline suite は still later stage に残す
