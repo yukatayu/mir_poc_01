@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 3 later branch で remaining suite malformed wording family と fixture-side full request contract compare の reopen 条件を narrow に比較することである。
+current Phase 3 の next narrow step は、stage 3 later branch で fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいかを比較することである。
 
 ## いまから数 task の主眼
 
@@ -242,15 +242,12 @@ current Phase 3 の next narrow step は、stage 3 later branch で remaining su
   の helper-local wording fragment 2 件まで進めてよい
 - その次段では、predicate fragment boundary を declaration-side only compare や opaque slot retention に寄せず、declaration-side `admit` と request-local `require` / `ensure` の shared floor を持つ isolated helper として reopen するのが最小である
 - current actualization として、その first tranche は `e2` / `e3` / `e10` / `e11` anchor の predicate subset compare に留め、request head + clause attachment multiline shape と fixture-side full request node compare は still later stage に残す
-- その次段で比較するべきなのは、
-- fixed two-slot suite bridge first tranche の current actualization を踏まえ、
-  - helper-local malformed/source family の first pair をどこに置くか
-  - unsupported direct child line を dedicated family として切るか generic wording に留めるか
-  を整理する
-  - current docs-only comparison として、その first pair は `duplicate ensure` + unsupported direct child line を first choice に置く
-  - current actualization として、その first pair は helper-local / test-only focused smoke に上げてよい
-  - current next-step sequencing として、その first pair actualization の後は `missing multiline ensure block` family を fixture-side full request contract compare より先に扱うのが自然である
-  - current actualization として、その `missing multiline ensure block` hidden path も focused smoke として surfaced 済みであり、next comparison は remaining suite malformed wording family と full request compare reopen 条件の再整理に移る
-  - existing isolated predicate fragment helper を再利用し、full request node compare は still later stage に残す
-  - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
-  であり、request cluster の attachment rule と multiline suite は still later stage に残す
+- その次段までの整理として、
+  - helper-local malformed/source family の first pair は `duplicate ensure` + unsupported direct child line を first choice に置く
+  - その first pair は helper-local / test-only focused smoke に上げてよい
+  - その後は `missing multiline ensure block` family を fixture-side full request contract compare より先に扱うのが自然である
+  - その `missing multiline ensure block` hidden path も focused smoke として surfaced 済みである
+- current reopen judgment として、その後は remaining suite malformed wording family を suite helper 側で still 追うより、fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいかを比較するのが自然である
+  - source-side helper output は `Stage3RequestClauseSuite { require_fragment_text, ensure_fragment_text }` に留める
+  - request head parse と full request node compare は still later stage に残す
+  - existing isolated predicate fragment helper を再利用し、private helper を public parser API へ昇格させる前提条件は別 comparison に残す

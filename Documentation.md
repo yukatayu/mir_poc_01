@@ -191,6 +191,7 @@ flowchart LR
 121. stage 3 later branch の request-local suite bridge family で `duplicate ensure` + unsupported direct child line の first pair が helper-local / test-only actual evidence としてどこまで surfaced 済みかは `specs/examples/104-current-l2-stage3-suite-malformed-first-pair-actualization.md`
 122. stage 3 later branch の remaining suite malformed family と fixture-side full request contract compare のどちらを先に扱うべきか、その current sequencing judgment は `specs/examples/105-current-l2-stage3-missing-ensure-vs-request-compare-sequencing.md`
 123. stage 3 later branch の `missing multiline ensure block` hidden path が helper-local / test-only actual evidence としてどこまで surfaced 済みかは `specs/examples/106-current-l2-stage3-missing-ensure-first-tranche-actualization.md`
+124. stage 3 later branch の remaining suite malformed wording family をまだ追うべきか、それとも fixture-side full request contract compare を narrow に reopen してよいか、その current reopen judgment は `specs/examples/107-current-l2-stage3-suite-reopen-conditions.md`
 
 ## レポート
 

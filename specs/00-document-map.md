@@ -344,6 +344,8 @@
   - stage 3 later branch の remaining suite malformed family と fixture-side full request contract compare のどちらを先に扱うべきかを比較する。
 - `specs/examples/106-current-l2-stage3-missing-ensure-first-tranche-actualization.md`
   - stage 3 later branch の `missing multiline ensure block` hidden path が helper-local / test-only でどこまで surfaced 済みかを整理する。
+- `specs/examples/107-current-l2-stage3-suite-reopen-conditions.md`
+  - stage 3 later branch で remaining suite malformed wording family をまだ追うべきか、それとも fixture-side full request contract compare を narrow に reopen してよいかを比較する。
 
 ## レポート
 

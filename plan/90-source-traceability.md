@@ -693,6 +693,12 @@
   - `specs/examples/106-current-l2-stage3-missing-ensure-first-tranche-actualization.md`
   - `docs/reports/0323-current-l2-stage3-missing-ensure-first-tranche-actualization.md`
 
+### 2026-04-08 stage 3 suite reopen conditions addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/107-current-l2-stage3-suite-reopen-conditions.md`
+  - `docs/reports/0325-current-l2-stage3-suite-reopen-conditions.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`
