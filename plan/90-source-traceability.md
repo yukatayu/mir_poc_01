@@ -639,6 +639,12 @@
   - `crates/mir-ast/tests/support/current_l2_stage3_multiline_attachment_spike_support.rs`
   - `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs`
 
+### 2026-04-08 stage 3 suite vs malformed sequencing addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/98-current-l2-stage3-suite-vs-malformed-sequencing.md`
+  - `docs/reports/0307-current-l2-stage3-suite-vs-malformed-sequencing.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

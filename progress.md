@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 14:30 JST
+最終更新: 2026-04-08 14:39 JST
 
 ## この文書について
 
@@ -116,7 +116,7 @@
   - shared isolated predicate fragment helper の first tranche は actualize 済みであり、`e2` / `e3` / `e10` / `e11` anchor の predicate subset compare まで通っている
   - multiline attachment shape の docs-only comparison も済みであり、shared floor は clause suite 全体ではなく `<clause-head>:` + 直下 1 段深い predicate block という single attachment frame に留める judgment を固定した
   - shared single attachment frame の first tranche も actualize 済みであり、declaration-side `admit:` と request-local `require:` / `ensure:` の multiline block extraction bridge を helper-local / test-only actual evidence として通した
-  - next narrow step は、request-local clause suite completion と multiline attachment malformed-source pair のどちらを先に扱うかを比較することである
+  - next narrow step は、request-local `require:` / `ensure:` を sibling clause suite としてどこまで structural floor に入れてよいかを docs-only で比較することである
 
 ## 残課題の優先順位
 
@@ -124,8 +124,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段比較
-   - request-local clause suite completion と multiline attachment malformed-source pair の sequencing を比較する
-   - helper-local multiline attachment bridge と request-local suite completion を再び混線させない
+   - request-local `require:` / `ensure:` を sibling clause suite としてどこまで structural floor に入れてよいかを比較する
+   - duplicate clause や clause-between blank line の malformed family は still later に残す
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -222,3 +222,4 @@ rough estimate:
 - 2026-04-08 14:08 JST — Phase 3 later branch の multiline attachment shape を比較し、shared floor は clause suite 全体ではなく `<clause-head>:` + 直下 1 段深い predicate block の single attachment frame に留める judgment を `specs/examples/96` と mirror へ固定した。次はこの shared single attachment frame を helper-local / test-only actual evidence にどこまで actualize するかを比較する段階。
 - 2026-04-08 14:23 JST — Phase 3 later branch の shared single attachment frame first tranche を actualize し、declaration-side `admit:` と request-local `require:` / `ensure:` の multiline block extraction bridge を helper-local / test-only actual evidence として通した。次は request-local clause suite completion と multiline attachment malformed-source pair の sequencing を比較する段階。
 - 2026-04-08 14:30 JST — stage 3 multiline attachment first tranche の review tightening を反映し、clause header search を immediate child attachment line に限定し、blank line を fail-closed にして 8-test targeted suite と `cargo test -p mir-ast` を通した。次は request-local clause suite completion と multiline attachment malformed-source pair の sequencing を比較する段階。
+- 2026-04-08 14:39 JST — Phase 3 later branch の next sequencing を比較し、multiline attachment malformed-source pair extension より先に request-local `require:` / `ensure:` の sibling clause suite structural floor を docs-only で比較する judgment を `specs/examples/98` と mirror へ固定した。次は sibling clause suite structural floor 自体の exact cut を整理する段階。

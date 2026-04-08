@@ -326,6 +326,8 @@
   - stage 3 later branch の multiline attachment shape を declaration-side `admit:` と request-local `require:` / `ensure:` の shared structural floor としてどこまで切るかを比較する。
 - `specs/examples/97-current-l2-stage3-multiline-attachment-first-tranche-actualization.md`
   - stage 3 later branch の shared single attachment frame first tranche が helper-local / test-only でどこまで actualize 済みかを整理する。
+- `specs/examples/98-current-l2-stage3-suite-vs-malformed-sequencing.md`
+  - stage 3 later branch の次段を request-local clause suite completion と multiline attachment malformed-source pair extension のどちらから開くべきかを比較する。
 
 ## レポート
 
