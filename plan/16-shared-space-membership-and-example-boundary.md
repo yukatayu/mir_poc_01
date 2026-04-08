@@ -1288,6 +1288,208 @@ publish merged view
 
 の 2 本を first practical catalog として置き、merge-friendly branch は later に残すのが最も自然である。
 
+## authoritative game room の concrete profile candidates
+
+ここでは、user から出てきた「途中参加可能なすごろく room」を想定し、
+
+- join / leave がある
+- サイコロを振ると数秒の pending があり、その間は誰も触れない
+- ゴールを踏み越えたらゴール止まり
+- 誰かがゴールしたら winner を全員へ通知してから全員を start へ戻す
+- player list と positions はリアルタイムに見える
+
+という room rule を、current phase の 4 軸
+
+1. activation rule
+2. authority placement
+3. consistency mode
+4. RNG / fairness source
+
+でどう束ねるかを比較する。
+
+### profile A — minimal trusted authoritative room
+
+current phase の最小 bundle は次である。
+
+- activation: `authority-ack`
+- authority placement: `single room authority`
+- consistency mode: `authoritative serial transition`
+- fairness source: `authority_rng`
+
+概念疑似コードはたとえば次のように読める。
+
+```text
+room sugoroku_room {
+  membership_source  = session_membership_registry
+  players_view       = derived_snapshot(active_members where role == player)
+  watchers_view      = derived_snapshot(active_members where role == watcher)
+
+  activation_rule    = authority_ack
+  authority_model    = single_room_authority
+  consistency_mode   = authoritative_serial_transition
+  fairness_source    = authority_rng
+
+  resource board_state      owner = room_authority
+  resource roll_lock        owner = room_authority
+  resource winner_notice    owner = room_authority
+
+  capability request_roll   delegated_to = players_view
+  capability read_positions delegated_to = players_view + watchers_view
+}
+
+request join(player p) {
+  room_authority.activate_member(p)
+  room_authority.initialize_position(p, start)
+  room_authority.emit(players_snapshot)
+  room_authority.emit(positions_snapshot)
+}
+
+request roll(player p) {
+  require active_member(p)
+  require capability(request_roll, p)
+  require roll_lock == idle
+
+  transition by room_authority {
+    roll_lock <- pending
+    n <- authority_rng.d6()
+    board_state[p] <- min(goal, board_state[p] + n)
+    emit positions_snapshot(board_state)
+
+    if board_state[p] == goal {
+      emit winner_notice(p)
+      reset board_state[*] <- start
+      emit positions_snapshot(board_state)
+    }
+
+    roll_lock <- idle
+  }
+}
+
+request leave(player p) {
+  room_authority.deactivate_member(p)
+  room_authority.remove_position_if_present(p)
+  room_authority.emit(players_snapshot)
+  room_authority.emit(positions_snapshot)
+}
+```
+
+#### この profile の利点
+
+- current phase では最も単純で説明しやすい
+- turn / pending / move / winner notify / reset を 1 本の authoritative transition sequence で扱える
+- audit と replay を取りやすい
+- compile-time では `request_roll` visibility と room authority requirement の over-approximation を比較しやすい
+
+#### この profile の欠点
+
+- fairness は authority trust に依存する
+- authority failure point が 1 点に寄る
+- HW entropy や debug RNG provider を差し替える時に authority 実装と結びつきやすい
+
+### profile B — replaceable RNG provider room
+
+次の実践候補は、activation / authority / consistency は profile A のまま維持し、RNG だけを provider 分離する形である。
+
+- activation: `authority-ack`
+- authority placement: `single room authority`
+- consistency mode: `authoritative serial transition`
+- fairness source: `delegated_rng_service`
+
+概念疑似コードは次のように読む。
+
+```text
+transition by room_authority {
+  roll_lock <- pending
+  draw <- delegated_rng_service.d6(room_id, turn_epoch)
+  emit draw_reference(draw.audit_ref)
+  board_state[p] <- min(goal, board_state[p] + draw.value)
+  ...
+}
+```
+
+#### この profile の利点
+
+- room rule と randomness provider を分けやすい
+- HW entropy / external service / deterministic debug provider を差し替えやすい
+- portability / observability hook を replaceable layer に残しやすい
+
+#### この profile の欠点
+
+- provider identity / audit reference / failure handling が追加で必要
+- provider 障害時に room authority がどう fail-closed するかを決める必要がある
+- fairness source が分離される分だけ trust graph が 1 段増える
+
+### profile C — future high-availability / stronger-fairness candidate
+
+future comparison に残す bundle は次である。
+
+- activation: `authority-ack` or successor rule via current leader / authority view
+- authority placement: `replicated authority`
+- consistency mode: `authoritative serial transition`
+- fairness source: `delegated_rng_service` or `distributed_randomness_provider`
+
+#### この profile で追加される論点
+
+- leader / authority handoff epoch
+- in-flight roll の ownership
+- late join / reconnect と fairness source の relation
+- replicated authority と RNG proof / audit reference の同期
+
+current repo phase では、この profile を first practical bundle に上げない。
+
+### 何を bundle artifact / room profile として固定し、何を外に残すか
+
+current phase で room profile に入れてよいのは、
+
+- activation rule family
+- authority placement family
+- consistency mode family
+- fairness source family
+
+までである。
+
+一方で、次は still outside に残す。
+
+- actual consensus algorithm 名
+- auth stack
+- reconnect protocol
+- fairness proof protocol
+- deployment topology
+
+### contrast — append-friendly notice / presence room
+
+同じ participant carrier を使っても、append-friendly room では 4 軸 bundle が変わる。
+
+- activation: `authority-ack` を membership control-plane に使ってもよい
+- authority placement: membership は `single room authority`、data-plane append は delegated capability
+- consistency mode: `append-friendly room`
+- fairness source: 通常は不要。必要なら `delegated_rng_service`
+
+この contrast により、authoritative game room の bundle を shared-space 全体の既定と誤読しないようにする。
+
+### current working judgment
+
+- **authoritative game room の current minimal bundle は**
+  - `authority-ack`
+  - `single room authority`
+  - `authoritative serial transition`
+  - `authority_rng`
+  **である**
+- **replaceable / portable な next practical bundle は**
+  - RNG だけ `delegated_rng_service` に差し替える形
+  **である**
+- **replicated authority や distributed randomness は future comparison に残す**
+
+したがって current phase では、shared-space の practical example を進めるときも、
+
+- participant carrier
+- activation rule
+- authority placement
+- consistency mode
+- fairness source
+
+を別軸で束ねた **room profile** として書くのが最も自然である。
+
 ## Raft / Paxos をどう位置づけるか
 
 ### current working answer
