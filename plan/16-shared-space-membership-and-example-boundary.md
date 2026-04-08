@@ -716,12 +716,94 @@ perform via distributed_randomness_provider
 - `distributed_randomness_provider`
   - commit-reveal など後段候補
 
-current phase では、
+### `authority_rng`
 
-- authoritative game room なら `authority_rng` または `delegated_rng_service`
-- distributed randomness は future research
+#### 読み
 
-が自然である。
+- room authority 自体が randomness source を持つ
+- roll / draw / random pick は authoritative transition sequence の一部として確定する
+
+#### 利点
+
+- current phase では最小
+- authoritative game room と相性が良い
+- lock / roll / move / reset を 1 本の audit sequence で追いやすい
+
+#### 欠点
+
+- fairness を authority trust に強く依存する
+- entropy source の差し替えや HW 連携を authority 実装と切り離しにくい
+
+### `delegated_rng_service`
+
+#### 読み
+
+- room authority は rule と commit point を持つ
+- randomness 実体だけを別 service / provider に委譲する
+
+概念上はたとえば次のように読む。
+
+```text
+room_authority requests random draw
+  -> delegated_rng_service returns draw + audit reference
+  -> room_authority commits transition
+```
+
+#### 利点
+
+- authority placement と randomness provider placement を分けやすい
+- HW entropy、外部 service、差し替え可能な debug provider を入れやすい
+- portability / observability hook を replaceable layer に残しやすい
+
+#### 欠点
+
+- provider identity / audit reference / failure policy を別に持つ必要がある
+- authority と provider の責務境界を曖昧にすると hidden trust shift が起きやすい
+
+### `distributed_randomness_provider`
+
+#### 読み
+
+- randomness 自体を multi-party / commit-reveal / threshold provider で作る
+
+#### 利点
+
+- authority trust 1 点への依存を弱めやすい
+- stronger fairness claim の余地がある
+
+#### 欠点
+
+- membership churn / timeout / partial participation と強く結びつく
+- activation rule、authority placement、late join / reconnect policy と同時に重くなる
+- current repo phase では最も future-facing である
+
+### room type ごとの current working line
+
+#### authoritative game room
+
+- current first choice は `authority_rng`
+- next practical candidate は `delegated_rng_service`
+- `distributed_randomness_provider` は future comparison に残す
+
+#### append-friendly room
+
+- shared RNG 自体が不要なことも多い
+- 必要な場合でも `authority_rng` を room rule と密結合させるより、`delegated_rng_service` の方が切り分けやすい
+- distributed randomness は still future comparison
+
+### current working judgment
+
+- **authoritative room の current first choice は `authority_rng`**
+- **差し替え可能性 / HW 連携 / debug provider hook を意識するなら `delegated_rng_service` が next practical candidate**
+- **`distributed_randomness_provider` は future research に残す**
+
+したがって current phase では、RNG / fairness source を tree topology や participant carrier に埋め込まず、
+
+- authority placement
+- resource owner slot
+- provider placement
+
+を別軸で保つのが最も自然である。
 
 ## shared-space resource ownership / delegation の current working model
 
