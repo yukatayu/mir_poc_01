@@ -328,6 +328,8 @@
   - stage 3 later branch の shared single attachment frame first tranche が helper-local / test-only でどこまで actualize 済みかを整理する。
 - `specs/examples/98-current-l2-stage3-suite-vs-malformed-sequencing.md`
   - stage 3 later branch の次段を request-local clause suite completion と multiline attachment malformed-source pair extension のどちらから開くべきかを比較する。
+- `specs/examples/99-current-l2-stage3-request-clause-suite-structural-floor.md`
+  - stage 3 later branch の request-local `require:` / `ensure:` を sibling clause suite としてどこまで structural floor に入れてよいかを比較する。
 
 ## レポート
 
