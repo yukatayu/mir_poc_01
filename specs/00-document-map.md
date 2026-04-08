@@ -334,6 +334,8 @@
   - stage 3 later branch の fixed two-slot request clause suite floor を helper-local / test-only actual evidence にどこまで actualize するかを比較する。
 - `specs/examples/101-current-l2-stage3-request-clause-suite-first-tranche-actualization.md`
   - stage 3 later branch の fixed two-slot request clause suite bridge first tranche が helper-local / test-only でどこまで actualize 済みかを整理する。
+- `specs/examples/102-current-l2-stage3-suite-malformed-vs-request-compare-sequencing.md`
+  - stage 3 later branch の fixed two-slot suite bridge first tranche の後に malformed/source family extension と fixture-side full request contract compare のどちらを先に扱うべきかを比較する。
 
 ## レポート
 
