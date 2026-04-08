@@ -194,6 +194,7 @@ flowchart LR
 124. stage 3 later branch の remaining suite malformed wording family をまだ追うべきか、それとも fixture-side full request contract compare を narrow に reopen してよいか、その current reopen judgment は `specs/examples/107-current-l2-stage3-suite-reopen-conditions.md`
 125. stage 3 later branch の fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいか、その current first-cut judgment は `specs/examples/108-current-l2-stage3-request-contract-subset-compare-cut.md`
 126. stage 3 later branch の `Stage3RequestContractSubset` helper-local / test-only first tranche が fixed two-slot suite bridge と fixture-side contract subset compare の接点としてどこまで actualize 済みかは `specs/examples/109-current-l2-stage3-request-contract-subset-first-tranche-actualization.md`
+127. stage 3 later branch の request head metadata を still later に残したまま contract-only compare surface をどこまで widening してよいか、その current guard judgment は `specs/examples/110-current-l2-stage3-request-contract-subset-widening-guard.md`
 
 ## レポート
 

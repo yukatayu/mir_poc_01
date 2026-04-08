@@ -350,6 +350,8 @@
   - stage 3 later branch で fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいかを比較する。
 - `specs/examples/109-current-l2-stage3-request-contract-subset-first-tranche-actualization.md`
   - stage 3 later branch で `Stage3RequestContractSubset` helper-local / test-only first tranche が fixed two-slot suite bridge と fixture-side contract subset compare の接点としてどこまで actualize 済みかを整理する。
+- `specs/examples/110-current-l2-stage3-request-contract-subset-widening-guard.md`
+  - stage 3 later branch で request head metadata を still later に残したまま contract-only compare surface をどこまで widening してよいかを比較する。
 
 ## レポート
 

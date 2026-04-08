@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 17:45 JST
+最終更新: 2026-04-08 17:55 JST
 
 ## この文書について
 
@@ -123,6 +123,7 @@
   - current reopen judgment としては、remaining suite malformed wording family を suite helper 側でまだ追うより、fixture-side full request contract subset compare を narrow に reopen する方が自然である
   - current first-cut judgment としては、その compare を ad-hoc per-slot wiring に留めず、`Stage3RequestContractSubset` 相当の dedicated helper-local carrier へ切るのが自然である
   - `Stage3RequestContractSubset` helper-local / test-only first tranche も actualize 済みであり、same source-side suite carrier を `PerformOn` / `PerformVia` fixture の contract subset compare に通せる line まで source-backed に固定した
+  - current guard judgment としては、その後の row-list widening は still early であり、current compare family は 0-or-1 guard に留める方が自然である
 
 ## 残課題の優先順位
 
@@ -130,8 +131,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段 actualization
-   - request head metadata を still later に残したまま、contract-only compare surface の次段 widening をどこで止めるかを narrow に比較する
-   - two-slot carrier と fixture-side contract subset compare の接点を保ったまま、compare family を太らせすぎない cut を決める
+   - source-side suite bridge widening の entry criteria を先に比較するか、この family を一旦 freeze して別 Phase 3 subline に戻るかを narrow に決める
+   - contract-only compare family を still 0-or-1 guard に留めたまま、次に進める筋を決める
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -243,3 +244,4 @@ rough estimate:
 - 2026-04-08 17:17 JST — Phase 3 later branch の suite reopen 条件を比較し、remaining suite malformed wording family を still 追うより、request head parse を入れずに fixed two-slot suite bridge を fixture-side full request contract subset compare へ narrow に reopen する judgment を mirror へ固定した。次はその first actualization cut を比較する段階。
 - 2026-04-08 17:30 JST — Phase 3 later branch の request contract subset compare cut を比較し、ad-hoc per-slot compare ではなく `Stage3RequestContractSubset` 相当の fixture-side expected carrier を helper-local / test-only first tranche として actualize する judgment を mirror へ固定した。次はその carrier を source-backed に actualize する段階。
 - 2026-04-08 17:45 JST — Phase 3 later branch の `Stage3RequestContractSubset` first tranche を actualize し、same source-side suite carrier を `PerformOn` / `PerformVia` fixture の contract subset compare に通した。次は request head metadata を still later に残したまま contract-only compare surface の widening guard を比べる段階。
+- 2026-04-08 17:55 JST — Phase 3 later branch の contract subset widening guard を比較し、current fixture corpus に multi-row clause array anchor が無いことから row-list widening を見送り、0-or-1 guard 維持を mirror へ固定した。次は source-side suite bridge widening の entry criteria を比べるか、この family を一旦 freeze して別 subline に戻るかを決める段階。

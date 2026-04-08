@@ -711,6 +711,12 @@
   - `specs/examples/109-current-l2-stage3-request-contract-subset-first-tranche-actualization.md`
   - `docs/reports/0329-current-l2-stage3-request-contract-subset-first-tranche-actualization.md`
 
+### 2026-04-08 stage 3 request contract subset widening guard addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/110-current-l2-stage3-request-contract-subset-widening-guard.md`
+  - `docs/reports/0331-current-l2-stage3-request-contract-subset-widening-guard.md`
+
 ### named profile catalog と mirror boundary
 
 - `0066`
