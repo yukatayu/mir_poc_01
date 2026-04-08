@@ -1,77 +1,84 @@
-# Report 0287 — review research phase map and progress phase snapshot
+# 0287 — review research phase map and progress phase snapshot
 
-- Date: 2026-04-08 12:36 JST
-- Author / agent: Codex
-- Scope: Local review fallback for the docs-only phase-map / progress snapshot task
-- Decision levels touched: none beyond roadmap / maintenance wording
+## Objective
 
-## 1. Objective
+`plan/17` と `progress.md` の phase / autonomy gate 整理が、
 
-Record the review closeout for the new phase-map task while checking whether it:
+- 既存 roadmap と矛盾していないか
+- `progress.md` に新しい規範判断を持ち込んでいないか
+- current immediate sequence を誤解なく読めるか
 
-- keeps the new phase model aligned with the existing roadmap / progress reading,
-- mirrors phase / current position / heaviness / autonomy in `progress.md` without creating new normative commitments,
-- closes traceability and report hygiene.
+を確認し、review closeout を記録する。
 
-## 2. Inputs consulted
+## Scope and assumptions
+
+- docs-only review とする。
+- reviewer subagent は 1 回だけ投入し、長めに待ったうえで retry を 1 回だけ行った。
+- completion が返らない場合は local evidence fallback を採る。
+
+## Documents consulted
 
 - `AGENTS.md`
 - `Documentation.md`
 - `progress.md`
 - `plan/00-index.md`
 - `plan/10-roadmap-overall.md`
+- `plan/11-roadmap-near-term.md`
+- `plan/12-open-problems-and-risks.md`
 - `plan/17-research-phases-and-autonomy-gates.md`
 - `plan/90-source-traceability.md`
 - `plan/91-maintenance-rules.md`
 - `docs/reports/0286-research-phase-map-and-progress-phase-snapshot.md`
 
-## 3. Actions taken
+## Actions taken
 
-1. Re-read the changed roadmap / maintenance / progress files as one phase-map set.
-2. Checked whether the new phase model only summarizes current repo state rather than inventing new normative judgments.
-3. Checked that `plan/17` is discoverable from `plan/00`, `plan/10`, and `Documentation.md`.
-4. Checked that `plan/90` names `0286` / `0287` and the new `plan/17` row.
+1. 新しい phase 文書と `progress.md` の phase snapshot を diff inspection した。
+2. reviewer subagent を 1 回投入し、長めの wait を 2 回行った。
+3. completion が返らなかったため、local evidence fallback で closeout した。
+4. fallback closeout にあわせて、immediate execution order を `plan/17` と `progress.md` に明示した。
 
-## 4. Files changed
+## Files changed
 
-- `docs/reports/0287-review-research-phase-map-and-progress-phase-snapshot.md` (new)
-- `plan/` 更新不要
-- `progress.md` 更新不要
+- `docs/reports/0287-review-research-phase-map-and-progress-phase-snapshot.md`
 
-## 5. Commands run and exact outputs
+## Commands run
 
 ```text
 $ date '+%Y-%m-%d %H:%M %Z'
-2026-04-08 12:36 JST
+2026-04-08 12:30 JST
 
-$ python3 scripts/validate_docs.py
-Documentation scaffold looks complete.
-Found 287 numbered report(s).
+$ git status --short --branch
+## main...origin/main
+ M AGENTS.md
+ M Documentation.md
+ M plan/00-index.md
+ M plan/10-roadmap-overall.md
+ M plan/17-research-phases-and-autonomy-gates.md
+ M plan/90-source-traceability.md
+ M plan/91-maintenance-rules.md
+ M progress.md
+?? docs/reports/0286-research-phase-map-and-progress-phase-snapshot.md
 
-$ git diff --check
-[no output]
+$ wait_agent reviewer
+timed out twice without completion
 ```
 
-## 6. Evidence / findings
+## Evidence / outputs / test results
 
-No substantive finding.
+- reviewer subagent `019d6b28-f065-7972-a917-7c99717bd714` は shutdown 済み
+- local diff inspection では substantive inconsistency は見つからなかった
+- closeout に必要だった修正は、immediate execution order を docs に mirror することだけだった
 
-The new phase model remains summary-level and consistent with the existing roadmap reading:
+## What changed in understanding
 
-- `plan/17` does not replace `plan/10`; it refines it.
-- `progress.md` mirrors phase / position / heaviness / autonomy as a rough snapshot rather than a normative commitment.
-- `plan/00` / `Documentation.md` / `plan/90` provide enough discovery and traceability for the new file.
+- phase 読みそのものは `Phase 2 終盤 + Phase 3 前半〜中盤` でよい。
+- ただし current execution order は user 指示により **Phase 0 / 1 / 2 の closeout → consistency sweep → Phase 3** と読む方が実務上明確である。
 
-The only caveat is operational: the reviewer subagent for this task did not return a consumable completion in the available interface during the task window, so this file records the required local-review fallback explicitly.
+## Open questions
 
-## 7. Changes in understanding
+- phase change をどの task で authoritative に宣言するか。
+- Phase 2 closeout の完了条件を、どこまで detached validation loop の実地反復で測るか。
 
-- The repo needed a separate phase map because the previous progress snapshot showed percentages and rough blockers but not the phase/autonomy reading that explains why some lines remain self-driven and others must stop for user specification.
+## Suggested next prompt
 
-## 8. Open questions
-
-- None beyond future phase changes being mirrored consistently when the mainline shifts.
-
-## 9. Suggested next prompt
-
-`shared-space identity / auth layering を participant carrier / authority placement / fairness trust model と混ぜずにどこで切るべきか、current shared-space line の残課題として narrow に比較してください。`
+`Phase 0 / 1 / 2 closeout の immediate sequence に従って、detached validation loop と current L2 docs/spec mirrors の整合性 sweep を進めてください。`

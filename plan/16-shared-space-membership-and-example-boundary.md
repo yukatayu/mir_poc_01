@@ -1151,6 +1151,150 @@ require member_has_turn(member_ref)
 
 を別軸に保つのが最も自然である。
 
+## admission policy と compile-time over-approximation の接点
+
+identity / auth layering を分けた後に残る論点は、**compile-time が何を知ってよく、runtime control-plane に何を残すか** である。
+
+shared-space authoritative room でも append-friendly room でも、compile-time が直接確定しにくいものは少なくとも次である。
+
+- actual principal set
+- late join / reconnect 後の active member set
+- transport / service auth refresh の成否
+- authority が最終的に受理した admission event
+
+一方、compile-time で **over-approximation** してよいものはある。
+
+- どの room role が activation visibility に関与しうるか
+- どの action がどの room-local capability / permission ref を要求しうるか
+- どの notify / publish path が必要になりうるか
+
+### 比較したい 3 案
+
+1. runtime-only admission
+2. declared role / capability / visibility over-approx + runtime admission
+3. closed-world exact admission / visibility set を compile-time へ上げる
+
+### 案A — runtime-only admission
+
+#### 読み
+
+- room source は role / permission requirement をほとんど宣言しない
+- authority / gateway / control-plane が runtime で全部判定する
+
+#### 利点
+
+- room syntax は最も軽い
+- auth stack の variation を最も吸収しやすい
+
+#### 欠点
+
+- compile-time で room capability / visibility requirement を見抜きにくい
+- docs / proof / audit で「この room が何を要求するか」が弱くなる
+- detached validation loop に載せられる structural evidence が減る
+
+### 案B — declared role / capability / visibility over-approx + runtime admission
+
+#### 読み
+
+- room source は role / capability / visibility requirement を declaration として持つ
+- ただし actual principal satisfaction と active set は runtime control-plane に残す
+
+概念上はたとえば次のように書ける。
+
+```text
+room sugoroku_room {
+  visibility_roles = [authority, watcher, player]
+
+  action request_roll by player
+    requires capability(room.roll)
+    notifies [watcher, player]
+}
+```
+
+runtime 側では次のように読む。
+
+```text
+join_request(principal:user_p, auth_stack)
+  -> authority checks admission_policy(role = player, capability = room.roll)
+  -> activate member_ref = player_p#8
+```
+
+#### 利点
+
+- compile-time で required role / capability / notify path の over-approximation ができる
+- type / proof / model checking 側へ送る static floor を作りやすい
+- actual admission / active member set は runtime に残せる
+- current `authority-ack` と両立しやすい
+
+#### 欠点
+
+- declaration-side wording と runtime admission policy の bridge を later に詰める必要がある
+- role / capability declaration をどこまで room syntax に載せるかは後続比較が要る
+
+### 案C — closed-world exact admission / visibility set を compile-time へ上げる
+
+#### 読み
+
+- compile-time に room participant set や visibility committee をかなり精密に固定する
+- active 化や notification の成立条件まで static に近づける
+
+#### 利点
+
+- fixed small room では strongest static explanation を作りやすい
+- proof 上はきれいに見える
+
+#### 欠点
+
+- late join / reconnect / churn に弱い
+- shared-space line を closed-world に寄せすぎる
+- auth refresh / authority handoff / delegated provider failure まで compile-time 前提に引きずりやすい
+
+### authoritative すごろく room での current line
+
+current phase の practical line は、概念上は次で十分である。
+
+```text
+room sugoroku_room {
+  visibility_roles = [authority, player, watcher]
+
+  action request_roll by player
+    requires capability(room.roll)
+    notifies [authority, watcher, player]
+}
+```
+
+この declaration は compile-time には
+
+- `request_roll` が `player` role を要求しうる
+- `room.roll` capability が必要になりうる
+- move / winner / reset が watcher/player/authority へ notify されうる
+
+ことだけを与える。
+
+actual `principal:user_p` が本当に `player` として active 化されたかは runtime admission policy と control-plane に残る。
+
+### append-friendly room での current line
+
+- append action でも `append` capability や visibility role の over-approximationは有益である
+- ただし append visibility 自体は activation ack と同じ rule に固定しない方が自然である
+
+### current working judgment
+
+- **current first practical candidate は案B**
+- **compile-time には role / capability / visibility requirement の over-approximationだけを残す**
+- **actual admission / activation / reconciliation / late join は runtime control-plane に残す**
+- **案C は fixed small room proof には魅力があるが、shared-space mainline の first choice にしない**
+
+したがって current repo では、shared-space の compile-time line を詰めるときも
+
+- identity / auth layering
+- admission policy
+- room capability declaration
+- visibility requirement declaration
+- runtime control-plane
+
+を別軸に保つのが最も自然である。
+
 ## shared-space resource ownership / delegation の current working model
 
 ### 問い

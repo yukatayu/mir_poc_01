@@ -201,6 +201,20 @@
 
 shared-space line は、これらを壊さない範囲で進める **Phase 4 の side line** である。
 
+## immediate execution order
+
+user 指示を反映した current immediate sequence は次である。
+
+1. **Phase 0 / 1 / 2 の残件を優先して閉じる**
+   - repository memory / docs maintenance
+   - current L2 semantics drift suppression
+   - detached validation loop の運用摩擦低減
+2. **その時点で docs / specs / README / `progress.md` / `plan/` の整合性 sweep を入れる**
+3. **その後で Phase 3 を主線として進める**
+4. **Phase 3 の一区切りで現状整理を行い、一旦止まる**
+
+したがって phase 読みとしては Phase 3 がすでに前半へ入っているが、**immediate execution order は Phase 0/1/2 closeout を先に寄せる** と読む。
+
 ## 現在の「止めるべき線」
 
 次は self-driven に比較を続けてよい。
