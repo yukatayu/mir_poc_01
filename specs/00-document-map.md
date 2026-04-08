@@ -348,6 +348,8 @@
   - stage 3 later branch で remaining suite malformed wording family をまだ追うべきか、それとも fixture-side full request contract compare を narrow に reopen してよいかを比較する。
 - `specs/examples/108-current-l2-stage3-request-contract-subset-compare-cut.md`
   - stage 3 later branch で fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいかを比較する。
+- `specs/examples/109-current-l2-stage3-request-contract-subset-first-tranche-actualization.md`
+  - stage 3 later branch で `Stage3RequestContractSubset` helper-local / test-only first tranche が fixed two-slot suite bridge と fixture-side contract subset compare の接点としてどこまで actualize 済みかを整理する。
 
 ## レポート
 

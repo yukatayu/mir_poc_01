@@ -193,6 +193,7 @@ flowchart LR
 123. stage 3 later branch の `missing multiline ensure block` hidden path が helper-local / test-only actual evidence としてどこまで surfaced 済みかは `specs/examples/106-current-l2-stage3-missing-ensure-first-tranche-actualization.md`
 124. stage 3 later branch の remaining suite malformed wording family をまだ追うべきか、それとも fixture-side full request contract compare を narrow に reopen してよいか、その current reopen judgment は `specs/examples/107-current-l2-stage3-suite-reopen-conditions.md`
 125. stage 3 later branch の fixed two-slot suite bridge を fixture-side full request contract subset compare へどこまで narrow に actualize してよいか、その current first-cut judgment は `specs/examples/108-current-l2-stage3-request-contract-subset-compare-cut.md`
+126. stage 3 later branch の `Stage3RequestContractSubset` helper-local / test-only first tranche が fixed two-slot suite bridge と fixture-side contract subset compare の接点としてどこまで actualize 済みかは `specs/examples/109-current-l2-stage3-request-contract-subset-first-tranche-actualization.md`
 
 ## レポート
 

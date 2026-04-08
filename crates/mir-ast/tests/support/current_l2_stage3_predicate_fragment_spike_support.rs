@@ -11,6 +11,13 @@ pub enum Stage3PredicateFragment {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[allow(dead_code)]
+pub struct Stage3RequestContractSubset {
+    pub require_fragment: Option<Stage3PredicateFragment>,
+    pub ensure_fragment: Option<Stage3PredicateFragment>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 enum Token {
     Ident(String),
     And,
@@ -111,6 +118,46 @@ pub fn load_fixture_request_clause_fragment(
     })?;
 
     parse_fixture_predicate_fragment(predicate)
+}
+
+#[allow(dead_code)]
+pub fn load_fixture_request_contract_subset(
+    fixture_name: &str,
+    perform_index: usize,
+) -> Result<Stage3RequestContractSubset, String> {
+    let path = fixture_path(fixture_name);
+    let text = fs::read_to_string(&path)
+        .map_err(|error| format!("failed to read fixture {}: {error}", path.display()))?;
+    let value: Value = serde_json::from_str(&text)
+        .map_err(|error| format!("failed to parse fixture {}: {error}", path.display()))?;
+
+    let program = value
+        .get("program")
+        .ok_or_else(|| format!("fixture {} is missing `program`", path.display()))?;
+    let mut performs = Vec::new();
+    collect_performs(program, &mut performs);
+    let perform = performs.get(perform_index).ok_or_else(|| {
+        format!(
+            "fixture {} is missing perform at index {}",
+            path.display(),
+            perform_index
+        )
+    })?;
+
+    Ok(Stage3RequestContractSubset {
+        require_fragment: load_optional_contract_fragment(
+            perform,
+            path.display().to_string().as_str(),
+            perform_index,
+            "require",
+        )?,
+        ensure_fragment: load_optional_contract_fragment(
+            perform,
+            path.display().to_string().as_str(),
+            perform_index,
+            "ensure",
+        )?,
+    })
 }
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -223,6 +270,34 @@ fn parse_fixture_predicate_fragment(value: &Value) -> Result<Stage3PredicateFrag
             Ok(Stage3PredicateFragment::And { terms })
         }
         other => Err(format!("unsupported fixture predicate kind `{other}`")),
+    }
+}
+
+#[allow(dead_code)]
+fn load_optional_contract_fragment(
+    perform: &Value,
+    fixture_path: &str,
+    perform_index: usize,
+    clause_name: &str,
+) -> Result<Option<Stage3PredicateFragment>, String> {
+    let clause = perform
+        .get("contract")
+        .and_then(|contract| contract.get(clause_name))
+        .and_then(Value::as_array)
+        .ok_or_else(|| {
+            format!(
+                "fixture {} perform[{}] is missing contract.{}",
+                fixture_path, perform_index, clause_name
+            )
+        })?;
+
+    match clause.as_slice() {
+        [] => Ok(None),
+        [only] => parse_fixture_predicate_fragment(only).map(Some),
+        _ => Err(format!(
+            "fixture {} perform[{}].{} has more than one predicate, outside stage 3 first tranche",
+            fixture_path, perform_index, clause_name
+        )),
     }
 }
 

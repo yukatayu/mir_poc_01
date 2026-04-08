@@ -6,7 +6,8 @@ mod current_l2_stage3_request_clause_suite_spike_support;
 mod current_l2_stage3_predicate_fragment_spike_support;
 
 use current_l2_stage3_predicate_fragment_spike_support::{
-    load_fixture_request_clause_fragment, parse_stage3_minimal_predicate_fragment_text,
+    load_fixture_request_clause_fragment, load_fixture_request_contract_subset,
+    parse_stage3_minimal_predicate_fragment_text, Stage3RequestContractSubset,
 };
 use current_l2_stage3_request_clause_suite_spike_support::{
     extract_stage3_request_clause_suite,
@@ -69,6 +70,23 @@ const MISSING_MULTILINE_ENSURE_BLOCK_INPUT: &str = r#"
 perform write_profile on profile_doc
   ensure:
 "#;
+
+fn parse_suite_contract_subset(
+    suite: &Stage3RequestClauseSuite,
+) -> Result<Stage3RequestContractSubset, String> {
+    Ok(Stage3RequestContractSubset {
+        require_fragment: suite
+            .require_fragment_text
+            .as_deref()
+            .map(parse_stage3_minimal_predicate_fragment_text)
+            .transpose()?,
+        ensure_fragment: suite
+            .ensure_fragment_text
+            .as_deref()
+            .map(parse_stage3_minimal_predicate_fragment_text)
+            .transpose()?,
+    })
+}
 
 #[test]
 fn stage3_request_clause_suite_spike_extracts_single_line_require_and_ensure_slots() {
@@ -211,4 +229,30 @@ fn stage3_request_clause_suite_spike_rejects_missing_multiline_ensure_block() {
         error.contains("missing multiline predicate block after ensure:"),
         "expected missing-multiline-ensure wording, got: {error}"
     );
+}
+
+#[test]
+fn stage3_request_clause_suite_spike_matches_fixture_contract_subset_for_perform_on() {
+    let suite = extract_stage3_request_clause_suite(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
+        .expect("suite spike should extract single-line require/ensure slots");
+    let actual = parse_suite_contract_subset(&suite)
+        .expect("suite spike should parse extracted slots into a contract subset");
+    let expected =
+        load_fixture_request_contract_subset("e10-perform-on-ensure-failure.json", 0)
+            .expect("fixture contract subset should load");
+
+    assert_eq!(actual, expected);
+}
+
+#[test]
+fn stage3_request_clause_suite_spike_matches_fixture_contract_subset_for_perform_via() {
+    let suite = extract_stage3_request_clause_suite(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
+        .expect("suite spike should extract single-line require/ensure slots");
+    let actual = parse_suite_contract_subset(&suite)
+        .expect("suite spike should parse extracted slots into a contract subset");
+    let expected =
+        load_fixture_request_contract_subset("e11-perform-via-ensure-then-success.json", 0)
+            .expect("fixture contract subset should load");
+
+    assert_eq!(actual, expected);
 }

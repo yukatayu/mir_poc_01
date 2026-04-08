@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 3 later branch で `Stage3RequestContractSubset` 相当の helper-local / test-only first tranche を actualize することである。
+current Phase 3 の next narrow step は、stage 3 later branch で request head metadata を still later に残したまま、contract-only compare surface の次段 widening をどこで止めるかを narrow に比較することである。
 
 ## いまから数 task の主眼
 
@@ -251,3 +251,5 @@ current Phase 3 の next narrow step は、stage 3 later branch で `Stage3Reque
   - source-side helper output は `Stage3RequestClauseSuite { require_fragment_text, ensure_fragment_text }` に留める
   - request head parse と full request node compare は still later stage に残す
   - existing isolated predicate fragment helper を再利用し、private helper を public parser API へ昇格させる前提条件は別 comparison に残す
+- current actualization として、その次段の `Stage3RequestContractSubset` helper-local / test-only first tranche は actualize 済みであり、same source-side suite carrier を `PerformOn` / `PerformVia` fixture の contract subset compare に通せる line まで source-backed に固定した
+  - next narrow step は request head metadata を still later に残したまま、contract-only compare surface の widening guard をどこで止めるかの comparison である
