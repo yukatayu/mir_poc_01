@@ -7,7 +7,7 @@
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed したので、**現在の主線は Phase 3 に戻しつつ、Phase 0 / 1 / 2 は maintenance tail として drift suppression を続ける** と読む。
 
-current Phase 3 の next narrow step は、stage 3 later branch で shared single attachment frame を helper-local / test-only actual evidence にどこまで actualize するかを比較することである。
+current Phase 3 の next narrow step は、stage 3 later branch で request-local clause suite completion と multiline attachment malformed-source pair のどちらを先に開くべきかを比較することである。
 
 ## いまから数 task の主眼
 
@@ -243,6 +243,6 @@ current Phase 3 の next narrow step は、stage 3 later branch で shared singl
 - その次段では、predicate fragment boundary を declaration-side only compare や opaque slot retention に寄せず、declaration-side `admit` と request-local `require` / `ensure` の shared floor を持つ isolated helper として reopen するのが最小である
 - current actualization として、その first tranche は `e2` / `e3` / `e10` / `e11` anchor の predicate subset compare に留め、request head + clause attachment multiline shape と fixture-side full request node compare は still later stage に残す
 - その次段で比較するべきなのは、
-- declaration-side `admit:` と request-local `require:` / `ensure:` の multiline attachment shape で共有する **single attachment frame** を helper-local actual evidence にどこまで actualize するか
+- request-local clause suite completion と multiline attachment malformed-source pair の sequencing を narrow に比較する
   - current private helper を public parser API へ昇格させる前提条件をどこまで narrow に切るか
   であり、request cluster の attachment rule と multiline suite は still later stage に残す

@@ -324,6 +324,8 @@
   - stage 3 later branch の次段を predicate fragment helper の malformed-source pair と request head + clause attachment multiline shape のどちらから開くべきかを比較する。
 - `specs/examples/96-current-l2-stage3-multiline-attachment-shape-comparison.md`
   - stage 3 later branch の multiline attachment shape を declaration-side `admit:` と request-local `require:` / `ensure:` の shared structural floor としてどこまで切るかを比較する。
+- `specs/examples/97-current-l2-stage3-multiline-attachment-first-tranche-actualization.md`
+  - stage 3 later branch の shared single attachment frame first tranche が helper-local / test-only でどこまで actualize 済みかを整理する。
 
 ## レポート
 

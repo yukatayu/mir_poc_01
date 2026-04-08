@@ -631,6 +631,14 @@
   - `specs/examples/96-current-l2-stage3-multiline-attachment-shape-comparison.md`
   - `docs/reports/0303-current-l2-stage3-multiline-attachment-shape-comparison.md`
 
+### 2026-04-08 stage 3 multiline attachment first tranche addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/97-current-l2-stage3-multiline-attachment-first-tranche-actualization.md`
+  - `docs/reports/0305-current-l2-stage3-multiline-attachment-first-tranche.md`
+  - `crates/mir-ast/tests/support/current_l2_stage3_multiline_attachment_spike_support.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs`
+
 ### named profile catalog と mirror boundary
 
 - `0066`

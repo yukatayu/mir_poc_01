@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-08 14:19 JST
+最終更新: 2026-04-08 14:30 JST
 
 ## この文書について
 
@@ -115,7 +115,8 @@
     を actualize 済み
   - shared isolated predicate fragment helper の first tranche は actualize 済みであり、`e2` / `e3` / `e10` / `e11` anchor の predicate subset compare まで通っている
   - multiline attachment shape の docs-only comparison も済みであり、shared floor は clause suite 全体ではなく `<clause-head>:` + 直下 1 段深い predicate block という single attachment frame に留める judgment を固定した
-  - next narrow step は、shared single attachment frame を helper-local / test-only actual evidence にどこまで actualize するかを比較することである
+  - shared single attachment frame の first tranche も actualize 済みであり、declaration-side `admit:` と request-local `require:` / `ensure:` の multiline block extraction bridge を helper-local / test-only actual evidence として通した
+  - next narrow step は、request-local clause suite completion と multiline attachment malformed-source pair のどちらを先に扱うかを比較することである
 
 ## 残課題の優先順位
 
@@ -123,8 +124,8 @@
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
 2. stage 3 later branch の次段比較
-   - declaration-side `admit:` と request-local `require:` / `ensure:` の shared single attachment frame を helper-local actual evidence にどこまで actualize するかを比較する
-   - request-local clause suite completion と fragment malformed-source pair はその後段へ残す
+   - request-local clause suite completion と multiline attachment malformed-source pair の sequencing を比較する
+   - helper-local multiline attachment bridge と request-local suite completion を再び混線させない
 3. first checker cut / parser boundary の staged line を無理なく合流させる
 
 ### Priority B — A の後でよい
@@ -160,8 +161,8 @@ rough estimate:
 | parser-free PoC execution stack | 90% | 85% | 98% | 着手可能 | runtime / bundle / batch / selection / profile は揃っている |
 | detached export / validation loop | 98% | 96% | 99% | 着手可能 | 入口は成立、現在は運用面の摩擦低減フェーズ |
 | fixture authoring / elaboration 実務 | 97% | 98% | 99% | 着手可能 | template / scaffold / smoke convenience は強い |
-| parser boundary / staged parser spike | 82% | 75% | 79% | 着手可能 | stage 1 と stage 3 predicate fragment first tranche まで actualize 済み |
-| first checker cut / helper-local compare family | 84% | 72% | 83% | 着手可能 | minimal predicate fragment floor まで helper-local evidence が揃い始めた |
+| parser boundary / staged parser spike | 85% | 78% | 83% | 着手可能 | stage 1、stage 3 predicate fragment、multiline attachment bridge first tranche まで actualize 済み |
+| first checker cut / helper-local compare family | 86% | 74% | 86% | 着手可能 | minimal predicate fragment floor と multiline attachment bridge まで helper-local evidence が揃い始めた |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | static analysis / type / theorem prover boundary | 36% | 26% | 12% | 後段依存 | hybrid staged approach を採る前提 |
 | shared-space / dynamic membership boundary | 72% | 63% | 8% | 要仕様確認 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room の `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` first choice、authoritative game room の minimal concrete bundle、`member_incarnation` と uncommitted action invalidation を room-profile 側に残す reconnect policy cut、plain vector deletion を避けて epoch / incarnation split を first practical candidate にする causal metadata cut、fairness trust model を `opaque authority trust` / `auditable authority witness` で分ける line、identity core と auth stack / admission policy を分ける line、admission policy / compile-time visibility を over-approximation + runtime control-plane で切る line、append-heavy room の `append-friendly room` first practical catalog と `delegated_rng_service` next candidate までは進められるが、relaxed room と final activation / auth / consistency / fairness catalog は user 仕様待ち |
@@ -219,3 +220,5 @@ rough estimate:
 - 2026-04-08 13:47 JST — Phase 3 later branch の predicate fragment boundary を shared isolated helper として reopen する judgment を `specs/examples/93` に固定し、`e2` / `e3` / `e10` / `e11` anchor の predicate subset compare を通す first tranche を private helper と test で actualize した。次は malformed-source pair と request head + clause attachment multiline shape のどちらを先に切るかを比較する段階。
 - 2026-04-08 14:01 JST — Phase 3 later branch の next sequencing を比較し、predicate fragment helper の malformed-source pair より先に declaration-side `admit:` と request-local `require:` / `ensure:` の multiline attachment shape を shared structural floor として比べる judgment を `specs/examples/95` と mirror へ固定した。次は multiline attachment shape 自体の exact cut を docs-only で整理する段階。
 - 2026-04-08 14:08 JST — Phase 3 later branch の multiline attachment shape を比較し、shared floor は clause suite 全体ではなく `<clause-head>:` + 直下 1 段深い predicate block の single attachment frame に留める judgment を `specs/examples/96` と mirror へ固定した。次はこの shared single attachment frame を helper-local / test-only actual evidence にどこまで actualize するかを比較する段階。
+- 2026-04-08 14:23 JST — Phase 3 later branch の shared single attachment frame first tranche を actualize し、declaration-side `admit:` と request-local `require:` / `ensure:` の multiline block extraction bridge を helper-local / test-only actual evidence として通した。次は request-local clause suite completion と multiline attachment malformed-source pair の sequencing を比較する段階。
+- 2026-04-08 14:30 JST — stage 3 multiline attachment first tranche の review tightening を反映し、clause header search を immediate child attachment line に限定し、blank line を fail-closed にして 8-test targeted suite と `cargo test -p mir-ast` を通した。次は request-local clause suite completion と multiline attachment malformed-source pair の sequencing を比較する段階。
