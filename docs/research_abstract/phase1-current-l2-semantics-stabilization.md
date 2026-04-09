@@ -1,7 +1,5 @@
 # Phase 1 要約 — current L2 semantics stabilization
 
-短い用語補足は `docs/research_abstract/current-l2-reading-notes.md` を参照すること。
-
 ## 何をした phase か
 
 Phase 1 は、current L2 の semantics core を
@@ -14,6 +12,8 @@ Phase 1 は、current L2 の semantics core を
 - no re-promotion
 - request-local clause と option-local clause を分ける
 - `TryFallback` / `AtomicCut` は structural floor と runtime / proof boundary を分ける
+
+ここでいう option chain の `fallback` は候補降格であり、`try { ... } fallback { ... }` の回復 branch とは別 layer の fallback である。
 
 ## 中心にある考え方
 
@@ -45,6 +45,7 @@ option writer on doc capability write lease live
 - `admit` は option-local
 
 であり、同じ predicate を見ていても役割が違う。
+また、`perform` は request 実行、`option` は候補宣言であり、`writer` や `write` は representative example の識別子であって built-in 関数名ではない。
 
 ### try / atomic_cut
 
@@ -71,6 +72,7 @@ try {
 - distributed protocol を含む rollback safety
 
 はまだ外へ残している。
+`require` は request 前提、`ensure` は commit 条件、`admit` は option の入場条件であり、`atomic_cut` は `try` 専用構文ではないが active rollback frame があるときに強く効く。
 
 ## この phase で得たもの
 

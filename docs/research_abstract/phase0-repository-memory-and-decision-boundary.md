@@ -61,3 +61,4 @@ Phase 0 は、その壊れにくさを作る phase である。
 
 Phase 1 以降は、この memory / boundary を前提にして、
 semantics と PoC を少しずつ強くしていく。
+その際に出てくるコード風の記法は、まず companion notation / representative example として読み、final parser grammar や built-in 群と早合点しないことが重要である。

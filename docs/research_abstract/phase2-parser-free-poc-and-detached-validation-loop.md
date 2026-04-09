@@ -1,7 +1,5 @@
 # Phase 2 要約 — parser-free PoC と detached validation loop
 
-短い用語補足は `docs/research_abstract/current-l2-reading-notes.md` を参照すること。
-
 ## 何をした phase か
 
 Phase 2 は、current L2 semantics を
@@ -36,6 +34,7 @@ artifact 側は、少なくとも次を分ける。
 - explanation
 
 ここで compare の中心にするのは `payload_core` だけである。
+`payload_core` などは detached loop の helper 用語であり、言語コアの syntax token ではない。
 
 ## 具体例
 

@@ -19,7 +19,5 @@
 
 ## 補助メモ
 
-- current L2 の representative example や phase 要約を読むときに引っかかりやすい語の短い説明は
-  `docs/research_abstract/current-l2-reading-notes.md`
-  にまとめる。
+- current L2 の representative example で誤解されやすい語は、phase 1〜3 の本文中に短い補足として散らしてある。
 - ここも規範判断の正本ではない。用語の厳密な根拠は `specs/` と `plan/` を参照する。
