@@ -107,6 +107,9 @@ consumer-specific attachment として後段に残すのが current first choice
 また `proof_notebook` first bridge の current lightweight attachment は
 **`goal_text`**
 に留め、`proof_hint` / `consumer_hint` はさらに後段へ残すのが current first choice である。
+そのうえで current phase では、`proof_notebook` bridge 自体を named artifact family に昇格させず、
+**docs-only derived view**
+に留めるのが自然であり、stable notebook bridge sketch や actual emitted notebook artifact は concrete notebook workflow pressure が出たときだけ reopen 候補に残す。
 
 ## まだやっていないこと
 
@@ -114,7 +117,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - theorem prover input schema の finalization
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
-- notebook bridge artifact を docs-only のまま保つか stable contract sketch に進むか
+- concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの

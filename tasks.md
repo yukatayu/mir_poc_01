@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 21:49 JST
+最終更新: 2026-04-09 22:04 JST
 
 ## この文書について
 
@@ -16,7 +16,7 @@
 
 - 主線は **Phase 0 / 1 / 2 maintenance tail + cross-phase checkpoint maintenance** である。
 - Phase 4 は、authoritative room baseline / working subset / minimal witness core / delegated-provider practical cut / control-plane threshold comparison まで current package を切り終え、**checkpoint maintenance と later reopen candidate** に移った。
-- Phase 5 は、`specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`、`specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`、`specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md`、`specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md`、`specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md`、`specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md`、`specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md`、`specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md`、`specs/examples/134-current-l2-theorem-line-consumer-class-comparison.md`、`specs/examples/135-current-l2-theorem-line-notebook-attachment-family-comparison.md` までで **small decidable core / proof / async-control boundary の theorem-line later package** を切り終え、checkpoint maintenance と notebook bridge artifact / stable contract threshold の later reopen candidate に移った。
+- Phase 5 は、`specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`、`specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`、`specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md`、`specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md`、`specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md`、`specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md`、`specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md`、`specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md`、`specs/examples/134-current-l2-theorem-line-consumer-class-comparison.md`、`specs/examples/135-current-l2-theorem-line-notebook-attachment-family-comparison.md`、`specs/examples/136-current-l2-theorem-line-notebook-bridge-artifact-threshold.md` までで **small decidable core / proof / async-control boundary の theorem-line later package** を切り終え、checkpoint maintenance と concrete notebook workflow pressure / `proof_assistant_adapter` consumer pressure の later reopen candidate に移った。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
 
 ## 次に自走で進める順番と rough estimate
@@ -24,7 +24,7 @@
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
 | 1 | cross-phase checkpoint | drift suppression / mirror sweep | Phase 4 / 5 package close 後の mirror drift を抑える | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | closeout package。Phase 5 theorem-line package close 後の first maintenance line |
-| 2 | Phase 5 checkpoint 後半 / later reopen 候補 | notebook bridge artifact / stable contract threshold | `proof_notebook` first bridge と `goal_text` attachment を前提に、docs-only bridge のまま保つか、stable contract sketch へ進むかの threshold を比べる | 中〜重 | 0〜2 task | 一部自走可能 | `specs/examples/126...` から `135...` までで current theorem-line package は close。reopen は concrete theorem consumer pressure が実際に要るとき |
+| 2 | Phase 5 checkpoint 後半 / later reopen 候補 | concrete notebook workflow / `proof_assistant_adapter` pressure comparison | `proof_notebook` first bridge を docs-only derived view に留めたまま、concrete notebook workflow pressure と `proof_assistant_adapter` consumer pressure のどちらを先に practical reopen に使うかを比べる | 中〜重 | 0〜2 task | 一部自走可能 | `specs/examples/126...` から `136...` までで current theorem-line package は close。reopen は concrete consumer pressure が実際に要るとき |
 | 3 | Phase 4 checkpoint 後半 / later reopen 候補 | shared-space control-plane / catalog later reopen | `control_epoch` 相当の split や final catalog を later pressure 時だけ再開する | 中〜重 | 0〜3 task | 一部自走可能 | `specs/examples/121...` から `125...` までで current package は close。reopen は authority handoff / provider binding / activation frontier compare need が出たとき |
 | 4 | Phase 2 maintenance tail | detached validation loop residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | `reference update / bless` は retention / path policy 依存なので later candidate |
 | 5 | Phase 4 checkpoint maintenance | authoritative room baseline / working subset の drift 抑制 | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...`、working subset は `122...`、threshold は `125...` までで checkpoint close |
@@ -90,10 +90,16 @@
   - `proof_notebook` first bridge の current lightweight attachment は `goal_text` に留める
   - `proof_hint` / `consumer_hint` は later attachment family に残す
   current first choice まで固定済みである。
+- `specs/examples/136-current-l2-theorem-line-notebook-bridge-artifact-threshold.md` で、
+  - current phase では `proof_notebook` first bridge を named artifact family に昇格させず docs-only derived view に留める
+  - named stable notebook bridge sketch は concrete notebook workflow pressure が出たときだけ reopen 候補にする
+  - actual emitted notebook artifact はさらに後段に残す
+  current first choice まで固定済みである。
 
 #### この task で残ること
 
-- notebook bridge artifact を docs-only のまま保つか stable contract sketch に進むか
+- concrete notebook workflow pressure を何とみなすか
+- `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen 候補へ上げる条件をどう置くか
 - typed symbolic `evidence_refs` family を theorem-side bridge の stable contract にいつ昇格させるか
 - actual handoff emitter を helper-local 既成事実にせず later reopen に保てるか
 - low-level memory-order family を将来 external vocabulary としてだけ残すか

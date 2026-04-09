@@ -258,6 +258,23 @@
   - `docs/reports/0358-async-control-memory-boundary-inventory.md`
   - `docs/reports/0379-phase5-small-decidable-core-and-proof-boundary-inventory.md`
 
+### 2026-04-09 Phase 5 notebook bridge artifact threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
+  - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
+  - `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md`
+  - `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md`
+  - `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md`
+  - `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md`
+  - `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md`
+  - `specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md`
+  - `specs/examples/134-current-l2-theorem-line-consumer-class-comparison.md`
+  - `specs/examples/135-current-l2-theorem-line-notebook-attachment-family-comparison.md`
+  - `specs/examples/136-current-l2-theorem-line-notebook-bridge-artifact-threshold.md`
+  - `docs/reports/0393-phase5-theorem-line-notebook-bridge-package.md`
+  - `docs/reports/0394-review-phase5-theorem-line-notebook-bridge-package.md`
+
 ### 2026-04-09 Phase 5 proof-obligation matrix / handoff addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。

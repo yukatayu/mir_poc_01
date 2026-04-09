@@ -137,7 +137,7 @@
 
 #### 現在地
 
-- **current theorem-line later package close。`specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch、`specs/examples/128...` で mixed row default / boundary-specific split / actual emitter の reopen threshold、`specs/examples/129...` で first concrete consumer pressure を theorem line に置き、`specs/examples/130...` で theorem-side projection bundle、`specs/examples/131...` で typed symbolic `evidence_refs` family、`specs/examples/132...` で public checker migration defer threshold、`specs/examples/133...` で minimum contract row core、`specs/examples/134...` で `proof_notebook` first practical consumer class、`specs/examples/135...` で `goal_text` attachment の current first choiceまで固定し、次は notebook bridge artifact / stable contract threshold を later reopen 候補として選ぶ段階**
+- **current theorem-line later package close。`specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch、`specs/examples/128...` で mixed row default / boundary-specific split / actual emitter の reopen threshold、`specs/examples/129...` で first concrete consumer pressure を theorem line に置き、`specs/examples/130...` で theorem-side projection bundle、`specs/examples/131...` で typed symbolic `evidence_refs` family、`specs/examples/132...` で public checker migration defer threshold、`specs/examples/133...` で minimum contract row core、`specs/examples/134...` で `proof_notebook` first practical consumer class、`specs/examples/135...` で `goal_text` attachment の current first choice、`specs/examples/136...` で notebook bridge artifact を docs-only derived view に留める threshold まで固定し、次は concrete notebook workflow pressure または `proof_assistant_adapter` consumer pressure を later reopen 候補として選ぶ段階**
 
 #### 重さ
 
@@ -225,7 +225,7 @@ user 指示を反映した current immediate sequence は次である。
    - `specs/examples/129...` により、first concrete consumer pressure の current first practical candidate は theorem line に寄せた
    - `specs/examples/130...` により、theorem line の current first cut は docs-only projection bundle に留めた
    - `specs/examples/131...` により、theorem-side `evidence_refs` は typed symbolic ref family を current first choice に置いた
-   - `specs/examples/132...` により、public checker migration は concrete theorem consumer pressure が出たときだけ reopen する threshold に留め、`specs/examples/133...` で minimum contract row core、`specs/examples/134...` で `proof_notebook` first consumer、`specs/examples/135...` で `goal_text` attachment の current first choiceを固定したうえで、next practical reopen は notebook bridge artifact / stable contract threshold に寄せる
+   - `specs/examples/132...` により、public checker migration は concrete theorem consumer pressure が出たときだけ reopen する threshold に留め、`specs/examples/133...` で minimum contract row core、`specs/examples/134...` で `proof_notebook` first consumer、`specs/examples/135...` で `goal_text` attachment、`specs/examples/136...` で notebook bridge artifact を docs-only derived view に留める threshold の current first choiceを固定したうえで、next practical reopen は concrete notebook workflow pressure comparison または `proof_assistant_adapter` consumer pressure comparison に寄せる
 4. **detached validation loop は maintenance mode に戻し、authoritative room baseline は checkpoint close として維持する**
 5. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
 
