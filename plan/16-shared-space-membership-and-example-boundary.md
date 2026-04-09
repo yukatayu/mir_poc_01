@@ -180,6 +180,11 @@ room
 
 要するに、**tree view は見え方として自然だが、理論上の carrier は registry の方がきれい**である。
 
+### event tree / leaf-to-root event bubbling はどう扱うか
+
+tree-like room view を前提にすると、leaf から root へ event を上げる Elm 的な execution view は直感的である。
+current working judgment では、これも source-of-truth carrier ではなく **derived execution / debug / explanation view** として比較するのが自然であり、membership registry、authority slot、transition log を直接 tree topology に埋め込まない方が理論上きれいである。
+
 ## vector clock から participant を消す問題
 
 ### 問題の芯

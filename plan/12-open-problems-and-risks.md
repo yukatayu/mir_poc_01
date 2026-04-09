@@ -24,6 +24,7 @@
 | shared-space identity / auth layering | shared space / fabric | OPEN / FUTURE | principal identity、transport auth、service login、room permission、display identity を membership carrier に潰すと、activation / authority / fairness / audit と同じ carrier に漏れやすい | current first practical candidate は identity core を membership registry に残し、auth stack / admission policy を別 carrier に置く cut である。raw auth protocol は room semantics に持ち込まず、principal continuity と room-local membership / capability の bridge だけを shared-space line に残す |
 | shared-space admission policy / compile-time visibility | shared space / fabric | OPEN / FUTURE | actual principal set や activation 成立条件まで compile-time に上げると churn / reconnect / authority handoff に弱くなり、逆に runtime-only に寄せすぎると room capability / notify requirement の static floor が弱くなる | current first practical candidate は role / capability / visibility requirement の over-approximation を compile-time に残し、actual admission / activation / reconciliation は runtime control-plane に残す cut である |
 | shared-space authority / resource ownership | shared space / fabric | OPEN / FUTURE | participant carrier、resource owner、delegated capability、consistency mode、fairness source を同じ carrier に潰すと、authoritative room と append-friendly room で必要な invariants が混線しやすい | shared-space workstream 側で、resource owner slot と delegated capability を分け、authoritative room / append-friendly room / relaxed room の相性を docs-first に比較する。authority placement は current phase では `single room authority` を room-level authoritative owner slot / write authority slot の最小候補として置き、`replicated authority` と `relaxed projection authority` は comparison option に残す。これにより、read-mostly resource、fan-out state、delegated capability を later option として残しつつ、人間 participant への単純還元を避ける。consistency mode は `authoritative serial transition` と `append-friendly room` を current working subset として置くが、これは final catalog の固定ではなく、`relaxed merge-friendly room` を future comparison に残したまま表現力 / proof burden の比較土台とする。RNG / fairness source は `authority_rng` を最小候補にし、`delegated_rng_service` を next practical candidate、`distributed_randomness_provider` は default にせず future comparison に残す。authoritative game room の concrete profile は `authority-ack` + `single room authority` + `authoritative serial transition` + `authority_rng` を current minimal bundle に置き、RNG だけ `delegated_rng_service` へ差し替える形を next practical bundle に残す。fairness trust model は `opaque authority trust` を current minimal candidate、`auditable authority witness` を next narrow strengthening candidate に置き、provider placement と witness requirement を別軸で比較する。reconnect / late leave / in-flight action は room profile に全部入れず、`member_incarnation` と uncommitted action invalidation だけを minimal room-profile rule とし、timeout / retry / resend は external policy layer に残す |
+| async control / memory-model boundary | semantics / shared space / proof boundary | OPEN / FUTURE | `atomic_cut` のような local cut だけで上位の ordering / fairness / scheduler semantics を背負わせると意味が肥大化しやすく、逆に C++ 的 low-level memory-order 語彙を早く入れると language core / scheduler / proof burden が一気に膨らむ | current phase では `atomic_cut` を place-local finalizing cut に留め、higher-level async-control は event-tree / authority-serial transition / witness-aware commit / room policy family として Phase 4 / 5 で docs-first に比較する。low-level memory-order vocabulary は immediate candidate にせず、どの局所性までを decidable core に入れ、どこから先を theorem prover / model checker / runtime policy に残すかを inventory する |
 | rollback restore scope / checker boundary | semantics / checker boundary | OPEN / current runtime reading あり | `AtomicCut` frontier update と restore scope を checker floor に混ぜると、current whole-store snapshot restore と place-local explanation がずれやすい | `TryFallback` / `AtomicCut` の structural floor は checker 候補に残しつつ、`place_anchor == current_place` gate と restore scope は runtime / proof boundary に残す |
 | portability / observability hooks | implementation / tooling boundary | OPEN / FUTURE | CPU 固定や非切替デバッグ実装を早く焼き付けると、後で HW 拡張や graph 可視化 / step 実行の導入で手戻りが大きい | semantics core には入れず、detached artifact / step execution / graph export hook を replaceable layer として残す |
 | multi-request scheduler | runtime | FUTURE | current direct-style interpreter と概念が混ざる | 現時点では未着手を明示 |
@@ -305,6 +306,19 @@
   - `place_anchor == current_place` gate
   - restore scope の exact shape
   は runtime / theorem prover boundary に残す。
+
+### async control / memory-model boundary
+
+- current repo で source-backed に固定されているのは、Mir-0 / current L2 における `atomic_cut` の **place-local finalizing cut** と、その rollback frontier への関与までである。
+- したがって current line は「`atomic_cut` だけで全非同期制御を表す」ではなく、`atomic_cut` は local cut の最小核に留め、shared-space 側の authority / consistency / fairness / audit と結びつく高位 ordering は別 line として扱う。
+- ここで C++ 的な low-level `memory_order` family を早く導入すると、scheduler・hardware-memory-like semantics・proof burden・user-facing syntax を同時に背負いやすい。
+- current repo で比較価値が高いのは、むしろ
+  - event-tree / derived execution view
+  - authoritative serial transition
+  - owner slot / delegated capability
+  - auditable witness / explicit provider
+  を組み合わせた higher-level async-control family であり、これは Phase 4 / 5 の docs-first comparison として進めるのが自然である。
+- compile-time / checker 側に残せるのは、当面は local / structural / decidable 寄りの floor までであり、global ordering・fairness・scheduler interaction は theorem prover / model checker / runtime policy 側に残す。
 
 ### portability / observability hooks
 

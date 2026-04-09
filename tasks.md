@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09
+最終更新: 2026-04-09 12:29 JST
 
 ## この文書について
 
@@ -19,7 +19,7 @@
 - したがって、今すぐ進めるべきものは
   - detached validation loop の運用摩擦低減
   - shared-space / membership の docs-first boundary 整理
-  - static analysis / type / theorem prover boundary の inventory 整理
+  - static analysis / type / theorem prover / async-control boundary の inventory 整理
   の 3 本である。
 
 ## 自走で進められる task package
@@ -128,7 +128,7 @@ rng: delegated_rng_service
 
 ---
 
-### Task C. static analysis / type / theorem prover boundary の inventory
+### Task C. static analysis / type / theorem prover / async-control boundary の inventory
 
 #### 目的
 
@@ -136,6 +136,7 @@ rng: delegated_rng_service
 
 - 何を local / structural / decidable core に入れるか
 - 何を theorem prover / model checker 側へ残すか
+- `atomic_cut` のような local cut と、高位の async-control / ordering / consistency rule をどこで分けるか
 
 を small inventory として整理する。
 
@@ -144,6 +145,7 @@ rng: delegated_rng_service
 - first checker cut に寄せやすい性質を narrow に列挙する
 - shared-space / membership / continuation / fairness などの global property を external verifier 側へ残す根拠を明文化する
 - parser boundary / detached validation loop と衝突しない bridge 条件を定義する
+- C++ 的 low-level memory-order 語彙をそのまま入れずに、event-tree / authority-serial / witness-aware async control family をどこまで docs-first に比べられるか整理する
 
 #### いま自走できる理由
 
@@ -155,6 +157,7 @@ rng: delegated_rng_service
 - docs-first comparison
 - small decidable core inventory
 - future proof obligation の分類表
+- async-control boundary の比較メモ
 
 #### 重さ
 
@@ -422,12 +425,64 @@ Phase 3 self-driven portion は reserve path に戻したが、
 - 早く public surface を決めると semantics より surface が先行しやすい
 - 逆に inventory を作らないと Phase 5 に進みにくい
 
+---
+
+### 6. 非同期制御 / memory-model boundary
+
+#### 概要
+
+`atomic_cut` のような local finalizing cut だけで十分か、それとも memory-order 的な並列制御語彙や、もっと高位の async-control family が要るかが未決である。
+
+#### 何に影響するか
+
+- room / authority / consistency の表現力
+- scheduler / fairness / replay / debug hook の設計
+- 型システム / 定理証明 / model checker へどこまで送るか
+- user-facing syntax を low-level concurrency 語彙に寄せるかどうか
+
+#### 選択肢
+
+1. `atomic_cut` を最小 cut とし、上位 ordering は room policy / runtime / external verifier 側へ残す
+2. C++ 的な `memory_order` に近い low-level ordering vocabulary を language 側へ入れる
+3. event-tree / owner slot / authority-serial transition / witness-aware commit を使う higher-level async-control family を別 workstream として育てる
+
+#### current recommendation
+
+- **いまは 1 を core 側の baseline に置く**
+- **ただし「`atomic_cut` だけで全部を背負う」とは読まず、3 を Phase 4 / 5 の docs-first comparison として進める**
+- **2 は current phase では採らない**
+
+#### 理由
+
+- `atomic_cut` は current repo で place-local finalizing cut として source-backed だが、global ordering / fairness / scheduler まで直接表す primitive ではない
+- C++ 的 low-level memory-order を早く入れると、language core・scheduler・proof burden が同時に膨らみやすい
+- tree-like room view、authority placement、consistency mode、audit witness を活かすなら、より高位の async-control family として比べる方が理論上きれいで、user-facing でも分かりやすくなりやすい
+
+#### 簡単な例
+
+authoritative room での move request は、現段階では
+
+```text
+request move(player)
+  -> authority validates request
+  -> authority applies serial transition
+  -> authority publishes committed state
+```
+
+のような high-level ordering として読む方が自然であり、ここを直接 low-level memory barrier 群へ落とす必要はまだない。
+
+#### 残っている悩み
+
+- event-tree / leaf-to-root event bubbling を source-of-truth ではなく execution / debug view としてどこまで formalize できるか
+- higher-level async-control family を consistency mode / authority placement / fairness witness とどう直交化するか
+- どの局所性までが decidable core に入り、どこから先を theorem prover / model checker 側へ送るべきか
+
 ## current recommendation summary
 
 - **すぐ進める**:
   - detached validation loop friction reduction
   - shared-space / membership docs-first boundary
-  - static analysis / proof boundary inventory
+  - static analysis / proof / async-control boundary inventory
 - **今は止める / later pressure 待ち**:
   - Phase 3 reserve path の reopen
   - final parser grammar

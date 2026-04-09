@@ -805,6 +805,17 @@
   - consistency mode の small catalog は final / exhaustive catalog ではなく working subset として扱う
   - distributed randomness は default にせず future option に残す
 
+### 2026-04-09 async control / memory-model boundary inventory
+
+- `tasks.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`progress.md` の今回更新分は、追加で次を主根拠にする。
+  - user からの 2026-04-09 async control / memory-model boundary discussion
+  - `docs/reports/0358-async-control-memory-boundary-inventory.md`
+
+- 反映した current reading は次である。
+  - `atomic_cut` は current core で place-local finalizing cut の最小核に留める
+  - higher-level async control は event-tree / authority-serial transition / witness-aware commit family として Phase 4 / 5 で docs-first に比較する
+  - C++ 的 low-level memory-order family は current immediate candidate にしない
+
 ### named profile catalog と mirror boundary
 
 - `0066`
