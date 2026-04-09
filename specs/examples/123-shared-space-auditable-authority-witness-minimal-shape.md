@@ -249,4 +249,4 @@ fairness_claim  = auditable_authority_witness
 - note-only witness は弱すぎ、expanded attested receipt は current phase では強すぎる
 - provider placement、membership / causality、auth / identity は引き続き別軸で扱う
 
-したがって current repo の next narrow step は、`auditable_authority_witness` を provider attestation や distributed fairness に肥大化させることではなく、**この minimal witness core を前提に `delegated_rng_service` を authoritative room 側でもどこまで practical candidate に置けるかを比較すること**である。
+したがって current repo の next narrow step は、`auditable_authority_witness` を provider attestation や distributed fairness に肥大化させることではなく、**この minimal witness core と delegated-provider practical cut を前提に、control-plane separated causal carrier を authoritative room side line に reopen する threshold を比べること**である。

@@ -836,6 +836,23 @@ room_authority requests random draw
 - provider identity / audit reference / failure policy を別に持つ必要がある
 - authority と provider の責務境界を曖昧にすると hidden trust shift が起きやすい
 
+#### authoritative room 側の current practical cut
+
+current phase では、authoritative room 側でも `delegated_rng_service` を次の cut で practical candidate として読んでよい。
+
+- authority は request / lock / commit / publish の owner のまま
+- provider は `draw_result` を返すが、room state mutation を commit しない
+- `auditable_authority_witness` を使う場合でも witness core は
+
+```text
+witness_kind + action_ref + draw_slot + draw_result
+```
+
+  のままでよい
+- provider receipt / draw ref は current witness core に入れず、audit / receipt side optional attachment に留める
+
+この judgment は `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` に切り出した。
+
 ### `distributed_randomness_provider`
 
 #### 読み
@@ -993,7 +1010,7 @@ commit move with draw + witness_ref
 
 - **authoritative room の fairness trust model は、current phase では `opaque authority trust` を最小候補に置く**
 - **`auditable_authority_witness` の minimal witness core は `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` で切り出し済みであり、room profile claim と audit / receipt side の typed witness bundle を分ける cut まで current checkpoint に含めてよい**
-- **`delegated_rng_service` は provider placement の next practical candidate であり、current next narrow step は authoritative room 側でもこの差し替えをどこまで practical に読めるかを比べることである**
+- **`delegated_rng_service` は provider placement の next practical candidate であり、その authoritative-room practical cut は `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切ってよい**
 - **その際も trust model 上は `auditable_authority_witness` と組み合わせて読めるが、provider placement と witness requirement 自体は同じ軸に潰さない**
 - **distributed fairness protocol は current room-profile line に混ぜず future research に残す**
 - delegated provider を採るかどうか、fairness claim をどこまで witness 付きにするか、provider placement を room topology / owner slot とどう接続するかは、引き続き別軸で比較する
@@ -1035,7 +1052,7 @@ witness = {
 - auth / identity layering
 
 を minimal witness core に混ぜずに済む。
-したがって current phase の次段は、provider placement を `delegated_rng_service` に差し替えた authoritative room candidate を、この witness core と still independent に比較する line に移るのが自然である。
+したがって current phase の次段は、provider placement を `delegated_rng_service` に差し替えた authoritative room candidate 自体は `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切り、その次に control-plane separated causal carrier を reopen する threshold を比べる line に移るのが自然である。
 
 ## identity / auth layering をどこで切るか
 

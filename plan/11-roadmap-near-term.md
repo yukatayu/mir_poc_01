@@ -26,7 +26,8 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - current first tranche として、authoritative room / append-friendly room をまたぐ small working subset row は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` までで切ってよい
 - room mode catalog を final fixed catalog と見なさず、working subset と deferred finalization に分ける
 - `auditable_authority_witness` の最小 witness shape は `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` までで切ってよい
-- 次の narrow step は `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読むかを比べることに置く
+- `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読めるかの comparison は `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切った
+- 次の narrow step は control-plane separated causal carrier を authoritative room side line に reopen する threshold を比べることに置く
 - append-friendly room と authoritative room の contrast を崩さずに catalog の stop line を増やす
 - rough weight: 重
 - rough 所要: 3〜6 task / 4〜10日

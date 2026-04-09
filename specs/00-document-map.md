@@ -208,6 +208,8 @@
   - final exhaustive catalog を固定せず、room profile row と deferred finalization を分けて扱う。
 - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
   - shared-space / membership line の current working subset から次段として、`auditable_authority_witness` を room profile と audit / receipt side にどう分け、最小 typed witness core をどこまでに留めるかを整理する。
+- `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`
+  - shared-space / membership line の current working subset から次段として、authoritative room 側でも `delegated_rng_service` を provider-placement candidate としてどこまで practical に読めるか、authority / witness / provider attachment の cut を崩さずに整理する。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

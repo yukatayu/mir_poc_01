@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 16:19 JST
+最終更新: 2026-04-09 16:46 JST
 
 ## この文書について
 
@@ -17,7 +17,7 @@
 - 主線は **Phase 2 maintenance tail + Phase 4 side line + Phase 5 inventory line** である。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
 - したがって、今すぐ自走で進める順番は
-  1. consistency / fairness / causal metadata を room profile working subset として比べ、provider / causal stop line を詰める
+  1. consistency / fairness / causal metadata を room profile working subset として比べ、provider practical cut の次に causal stop line を詰める
   2. static analysis / type / theorem prover / async-control boundary の inventory を整える
   3. detached validation loop は maintenance mode に戻して drift と policy-dependent residual だけを見る
   4. authoritative room baseline は checkpoint close として維持する
@@ -35,7 +35,7 @@
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 4 前半 closeout後〜中盤入口 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 2〜5 task / 3〜8日 | 一部自走可能 | current first cut は `specs/examples/122...`、minimal witness core は `specs/examples/123...`。next は authoritative room 側の `delegated_rng_service` practical cut |
+| 1 | Phase 4 前半 closeout後〜中盤入口 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 2〜5 task / 3〜8日 | 一部自走可能 | current first cut は `specs/examples/122...`、minimal witness core は `specs/examples/123...`、authoritative delegated-provider practical cut は `specs/examples/124...`。next は control-plane separated carrier の reopen threshold |
 | 2 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
 | 3 | Phase 2 maintenance tail | detached validation loop の maintenance residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | current self-driven friction reduction は checkpoint close。`reference update / bless` は later candidate |
 | 4 | Phase 4 前半 checkpoint | authoritative room baseline の checkpoint maintenance | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...` までで checkpoint close |
@@ -140,7 +140,6 @@ shared-space を language core に早く焼き込まずに、
 #### この task で残ること
 
 - authoritative room baseline と append-friendly / relaxed room の drift suppression
-- `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読むか
 - control-plane separated carrier を reopen する threshold
 - final activation / authority / fairness / consistency catalog を早く固定しないこと
 
@@ -438,8 +437,8 @@ RNG を
 #### current recommendation
 
 - **authoritative room の current minimal は `authority_rng`**
-- **provider placement の next practical candidate は `delegated_rng_service`**
-- **current active line では `auditable_authority_witness` の minimal witness core を切り終えており、次は provider placement を `delegated_rng_service` へ差し替える practical cut を比べる**
+- **provider placement の next practical candidateだった `delegated_rng_service` は、authoritative room 側でも practical cut を切り終えた**
+- **current first choice では authority が request / lock / commit / publish の owner のまま、provider は draw result だけを返し、provider receipt は optional attachment に留める**
 - **`distributed_randomness_provider` は default にせず、authority または delegated provider が必要なときに明示的に接続する future option に残す**
 
 #### 理由
@@ -461,8 +460,9 @@ roll_dice uses rng_provider
 
 #### 残っている悩み
 
-- delegated provider を room policy / topology / authority delegation のどこで自然に選ばせるか
-- fairness claim、audit witness、provider placement をどこまで別軸のまま保てるか
+- provider receipt / draw ref をいつ typed required attachment に上げるか
+- `delegated_provider_attestation` を room profile row に昇格させるか、それとも optional audit capability に留めるか
+- provider placement と control-plane carrier をどこまで直交させて保てるか
 
 ---
 

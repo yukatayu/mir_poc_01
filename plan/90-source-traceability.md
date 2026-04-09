@@ -218,8 +218,18 @@
   - `scripts/current_l2_capability_checker.py`
   - `scripts/tests/test_current_l2_family_checker_support.py`
   - `scripts/tests/test_current_l2_same_lineage_checker.py`
-  - `scripts/tests/test_current_l2_missing_option_checker.py`
-  - `scripts/tests/test_current_l2_capability_checker.py`
+
+### 2026-04-09 shared-space delegated RNG provider placement addendum
+
+- `plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/121-shared-space-authoritative-room-baseline.md`
+  - `specs/examples/122-shared-space-catalog-working-subset-comparison.md`
+  - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
+  - `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`
+  - `docs/reports/0369-authoritative-room-baseline-docs-first-refinement.md`
+  - `docs/reports/0371-shared-space-catalog-working-subset-comparison.md`
+  - `docs/reports/0373-shared-space-auditable-authority-witness-minimal-shape.md`
+  - `docs/reports/0375-shared-space-authoritative-room-delegated-rng-provider-placement.md`
 
 ### 2026-04-06 generic family checker entry comparison addendum
 
