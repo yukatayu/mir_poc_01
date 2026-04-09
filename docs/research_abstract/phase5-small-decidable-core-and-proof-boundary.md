@@ -77,12 +77,17 @@ current cut では、external handoff artifact を actual API にせず、
 boundary-specific handoff artifact と actual emitter は concrete consumer pressure が出たときだけ reopen する**
 という cut まで固定した。
 
+さらに current first practical candidate として、
+**first concrete external consumer pressure は `theorem_prover_boundary` に置き、
+`protocol_verifier_boundary` は second practical candidate、`runtime_policy_boundary` は later candidate**
+と読むのが自然だと整理した。
+
 ## まだやっていないこと
 
 - public checker API の finalization
 - theorem prover input schema の finalization
 - protocol verifier input schema の finalization
-- first concrete external consumer がどこで現れるか
+- theorem line の narrow actualization をどこまで mixed row default のまま切るか
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - low-level memory-order family の導入
 

@@ -278,6 +278,16 @@
   - `docs/reports/0383-phase5-handoff-artifact-threshold-and-checkpoint-sweep.md`
   - `docs/reports/0384-review-phase5-handoff-artifact-threshold-and-checkpoint-sweep.md`
 
+### 2026-04-09 Phase 5 first external consumer pressure addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
+  - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
+  - `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md`
+  - `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md`
+  - `docs/reports/0385-phase5-first-external-consumer-pressure-comparison.md`
+  - `docs/reports/0386-review-phase5-first-external-consumer-pressure-comparison.md`
+
 ### 2026-04-06 generic family checker entry comparison addendum
 
 - specs:

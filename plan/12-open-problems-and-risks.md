@@ -260,7 +260,8 @@
 - current first package は `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` に集約済みであり、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split を current first choice に置く。
 - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` までで、proof-obligation matrix を docs 正本に置き、source evidence を参照する mixed row bundle を later reopen 用 handoff sketch として切る current first choice までは整理済みである。
 - `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` により、current docs-only default は mixed row bundle 維持であり、boundary-specific handoff artifact と actual handoff emitter は concrete consumer pressure が出たときだけ reopen 候補にする threshold まで固定済みである。
-- 引き続き OPEN なのは、どの external consumer が first concrete pressure になるか、stable `evidence_refs` family をどこまで actual artifact ref に寄せるか、public checker API への narrow migration をどこまで許すかである。
+- `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md` により、current first practical candidate は `theorem_prover_boundary`、`protocol_verifier_boundary` は second practical candidate、`runtime_policy_boundary` は later candidate に置く current first choice まで固定済みである。
+- 引き続き OPEN なのは、theorem line を first actualization candidate にしたときの minimal dedicated row shape、stable `evidence_refs` family をどこまで actual artifact ref に寄せるか、public checker API への narrow migration をどこまで許すかである。
 
 ### richer host interface
 
