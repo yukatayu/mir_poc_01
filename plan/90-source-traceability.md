@@ -306,6 +306,17 @@
   - `docs/reports/0401-phase5-notebook-review-unit-named-bundle-threshold.md`
   - `docs/reports/0402-review-phase5-notebook-review-unit-named-bundle-threshold.md`
 
+### 2026-04-09 Phase 5 review-unit to bridge-sketch addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/138-current-l2-theorem-line-concrete-notebook-workflow-pressure-comparison.md`
+  - `specs/examples/139-current-l2-theorem-line-notebook-review-unit-named-bundle-threshold.md`
+  - `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md`
+  - `docs/reports/0401-phase5-notebook-review-unit-named-bundle-threshold.md`
+  - `docs/reports/0402-review-phase5-notebook-review-unit-named-bundle-threshold.md`
+  - `docs/reports/0403-phase5-review-unit-to-bridge-sketch-comparison.md`
+  - `docs/reports/0404-review-phase5-review-unit-to-bridge-sketch-comparison.md`
+
 ### 2026-04-09 Phase 5 proof-obligation matrix / handoff addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。

@@ -271,7 +271,8 @@
 - `specs/examples/137-current-l2-theorem-line-next-consumer-pressure-comparison.md` により、next practical reopen は concrete notebook workflow pressure comparison を first choice にし、`proof_assistant_adapter` consumer pressure comparison は second practical candidate に留める current order まで固定済みである。
 - `specs/examples/138-current-l2-theorem-line-concrete-notebook-workflow-pressure-comparison.md` により、concrete notebook workflow pressure の current first threshold は human review checklist / walkthrough pressure に置き、compare / bless-like flow は second step、actual file exchange はさらに後段に残す current first choice まで固定済みである。
 - `specs/examples/139-current-l2-theorem-line-notebook-review-unit-named-bundle-threshold.md` により、current first cut は review checklist / walkthrough unit を docs-only named review unit bundle に寄せるところまでであり、stronger notebook bridge sketch は second step に残す current first choice まで固定済みである。
-- 引き続き OPEN なのは、named review unit を stronger notebook bridge sketch へどこまで拡張するか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
+- `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md` により、current first cut は named review unit を docs-only notebook bridge sketch (`bridge_subject_ref + review_units + bridge_goal_text`) へ寄せるところまでであり、compare / bless-like review flow metadata は second step に残す current first choice まで固定済みである。
+- 引き続き OPEN なのは、bridge sketch に compare / bless-like review flow metadata をどこまで足すか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
 
 ### richer host interface
 

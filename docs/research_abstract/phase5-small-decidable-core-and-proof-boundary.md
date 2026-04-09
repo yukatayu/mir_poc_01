@@ -119,6 +119,9 @@ consumer-specific attachment として後段に残すのが current first choice
 その next cut では、review checklist / walkthrough unit 自体を
 **`subject_ref + row(obligation_kind + evidence_refs + goal_text) + checklist` を持つ docs-only named review unit bundle**
 へ寄せるところまでは自然だが、stronger notebook bridge sketch や actual emitted artifact はまだ後段に残す。
+さらにその次段では、named review unit を複数束ねる
+**`bridge_subject_ref + review_units + bridge_goal_text` を持つ docs-only notebook bridge sketch**
+まで寄せるところまでは自然だが、compare / bless metadata や retained file policy は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -127,7 +130,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- named review unit を stronger notebook bridge sketch へどこまで拡張するか
+- bridge sketch に compare / bless-like review flow metadata をどこまで足すか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 

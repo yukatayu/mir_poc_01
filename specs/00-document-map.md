@@ -242,6 +242,8 @@
   - Phase 5 theorem-side next consumer order の次段として、concrete notebook workflow pressure を human review checklist / walkthrough、compare / bless-like flow、actual file exchange のどこに置くかを比較し、current first threshold を整理する補助文書。
 - `specs/examples/139-current-l2-theorem-line-notebook-review-unit-named-bundle-threshold.md`
   - Phase 5 theorem-side notebook workflow pressure の次段として、review checklist / walkthrough unit を docs-only named bundle としてどこまで stable notebook bridge sketch に寄せるかを比較する補助文書。
+- `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md`
+  - Phase 5 theorem-side named review unit の次段として、docs-only named review unit を notebook bridge sketch へどこまで拡張するかを比較し、bridge-level の最小 cut を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
