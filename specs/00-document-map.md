@@ -278,6 +278,8 @@
   - Phase 5 theorem-side invocation-ready retained bridge の次段として、exchange-body ref だけをどこまで先に足し、concrete runtime coupling / transport protocol / failure body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/157-current-l2-theorem-line-exchange-body-ready-runtime-coupling-threshold.md`
   - Phase 5 theorem-side exchange-body-ready retained bridge の次段として、runtime-coupling ref だけをどこまで先に足し、concrete transport protocol / failure body をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/158-current-l2-theorem-line-runtime-coupling-ready-transport-protocol-threshold.md`
+  - Phase 5 theorem-side runtime-coupling-ready retained bridge の次段として、transport-protocol ref だけをどこまで先に足し、concrete failure body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
