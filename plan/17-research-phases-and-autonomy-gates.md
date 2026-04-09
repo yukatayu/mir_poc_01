@@ -137,7 +137,7 @@
 
 #### 現在地
 
-- **second inventory package close。`specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch まで current first choice に固定し、次は later pressure が出たときの threshold comparison を残す段階**
+- **third inventory package close。`specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch、`specs/examples/128...` で mixed row default / boundary-specific split / actual emitter の reopen threshold まで current first choice に固定し、次は concrete consumer pressure が出たときだけ later reopen を選ぶ段階**
 
 #### 重さ
 
@@ -200,7 +200,7 @@
    - shared-space / membership の baseline closeout を保ちつつ、catalog comparison を進める
 3. **Phase 5 入口の inventory line**
    - small decidable core と proof boundary の inventory は `specs/examples/126...` と `specs/examples/127...` までで current package close に入った
-   - next pressure が出たときだけ、mixed row bundle を維持するか boundary-specific handoff artifact に割るかの threshold comparison を reopen 候補にする
+   - `specs/examples/128...` により、mixed row bundle を current default に維持し、boundary-specific handoff artifact や actual emitter は concrete pressure が出たときだけ reopen する threshold まで current package に含めてよい
 
 shared-space line は、これらを壊さない範囲で進める **Phase 4 の side line** である。
 Phase 3 は current checkpoint では **reserve path** として残し、later pressure が出たときだけ reopen 候補にする。
@@ -220,7 +220,7 @@ user 指示を反映した current immediate sequence は次である。
 3. **Phase 5 current package は checkpoint close として維持する**
    - small decidable core / proof boundary / async-control boundary の 4-way split は current first choice に固定した
    - proof-obligation matrix は docs 正本、external handoff artifact は mixed row sketch に留めた
-   - mixed row bundle を維持するか boundary-specific handoff artifact に割るかは later pressure が出たときだけ reopen 候補にする
+   - `specs/examples/128...` により、mixed row default を current first choice とし、boundary-specific handoff artifact と actual emitter は concrete pressure が出たときだけ reopen 候補にする
 4. **detached validation loop は maintenance mode に戻し、authoritative room baseline は checkpoint close として維持する**
 5. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
 

@@ -5,7 +5,7 @@
 この文書は、今から数 task 先までの near-term roadmap を示す。
 ここに書く step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
-current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed しており、reconnect subline も freeze threshold まで整理でき、さらに current checkpoint では **Phase 3 self-driven portion を reserve path に戻す threshold** まで固定した。その後、Phase 4 の current package も `specs/examples/125...` までで checkpoint close に入り、Phase 5 入口の small decidable core / proof / async-control inventory も `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` で first package close、`specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` で later package の docs-only cut まで進んだ。したがって、**現在は Phase 0 / 1 / 2 を maintenance tail として維持しつつ、Phase 4 / 5 の current package は checkpoint maintenance と later reopen 候補として読む** のが自然である。
+current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed しており、reconnect subline も freeze threshold まで整理でき、さらに current checkpoint では **Phase 3 self-driven portion を reserve path に戻す threshold** まで固定した。その後、Phase 4 の current package も `specs/examples/125...` までで checkpoint close に入り、Phase 5 入口の small decidable core / proof / async-control inventory も `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` で first package close、`specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` で second package、`specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` で third package の threshold cut まで進んだ。したがって、**現在は Phase 0 / 1 / 2 を maintenance tail として維持しつつ、Phase 4 / 5 の current package は checkpoint maintenance を主とし、later reopen は concrete pressure が出たときだけ選ぶ** のが自然である。
 
 ## いまから数 task の主眼
 
@@ -45,8 +45,8 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
   - `protocol_verifier_boundary`
   - `runtime_policy_boundary`
   の 4-way split を current first choice とみなしてよい
-- current docs-only later package は `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` までで切ってよい
-- next later candidate は、mixed row bundle を維持するか、boundary-specific handoff artifact に割るか、actual handoff emitter をどこで切るかの threshold comparison である
+- current docs-only later package は `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` と `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` までで切ってよい
+- next later candidate は、concrete consumer pressure が出たときに boundary-specific handoff artifact や actual handoff emitter を reopen するかの comparison である
 - rough weight: 重
 - rough 所要: 3〜6 task / 3〜8日
 
@@ -86,7 +86,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
 | consistency / fairness / causal metadata catalog を working subset として比較する | current package close | `specs/examples/121...` から `specs/examples/125...` までで checkpoint close。stronger control-plane split は later pressure が出たときだけ reopen |
-| small decidable core / proof / async-control inventory を一段進める | current package close | `specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix + mixed handoff sketch まで固定。next は mixed row bundle vs boundary-specific handoff artifact の threshold comparison |
+| small decidable core / proof / async-control inventory を一段進める | current package close | `specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix + mixed handoff sketch、`specs/examples/128...` で mixed row default / boundary-specific split / actual emitter の threshold まで固定。next は concrete consumer pressure が出たときだけ reopen |
 | detached validation loop を maintenance mode で維持する | 0〜1 task | current self-driven portion は close。`reference update / bless` は later candidate |
 | authoritative room baseline の drift を checkpoint close として維持する | 0〜1 task | current baseline は `specs/examples/121...` に集約済み |
 | Phase 3 reserve path を reopen する条件整理 | 0〜2 task | later pressure が出たときだけ着手 |

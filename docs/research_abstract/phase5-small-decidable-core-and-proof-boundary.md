@@ -72,12 +72,18 @@ current cut では、external handoff artifact を actual API にせず、
 **proof obligation row が参照する source evidence**
 に残す。
 
+次段の threshold comparison では、
+**mixed row bundle を current docs-only default に維持し、
+boundary-specific handoff artifact と actual emitter は concrete consumer pressure が出たときだけ reopen する**
+という cut まで固定した。
+
 ## まだやっていないこと
 
 - public checker API の finalization
 - theorem prover input schema の finalization
 - protocol verifier input schema の finalization
-- mixed row bundle と boundary-specific handoff artifact の最終選択
+- first concrete external consumer がどこで現れるか
+- stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの

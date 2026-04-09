@@ -259,7 +259,8 @@
 - ただし canonical normalization の一般証明、no re-promotion、rollback / cut non-interference、multi-shot continuation / membership churn / scheduler のような global property は current L2 checker cut に入れない。
 - current first package は `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` に集約済みであり、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split を current first choice に置く。
 - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` までで、proof-obligation matrix を docs 正本に置き、source evidence を参照する mixed row bundle を later reopen 用 handoff sketch として切る current first choice までは整理済みである。
-- ただし mixed row bundle を維持するか、boundary-specific handoff artifact に割るか、actual handoff emitter をどこで切るか、public checker API への narrow migration をどこまで許すかは引き続き OPEN であり、Phase 5 later reopen 候補に残る。
+- `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` により、current docs-only default は mixed row bundle 維持であり、boundary-specific handoff artifact と actual handoff emitter は concrete consumer pressure が出たときだけ reopen 候補にする threshold まで固定済みである。
+- 引き続き OPEN なのは、どの external consumer が first concrete pressure になるか、stable `evidence_refs` family をどこまで actual artifact ref に寄せるか、public checker API への narrow migration をどこまで許すかである。
 
 ### richer host interface
 
