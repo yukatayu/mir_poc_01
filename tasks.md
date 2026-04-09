@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 12:52 JST
+最終更新: 2026-04-09 12:53 JST
 
 ## この文書について
 
@@ -23,6 +23,13 @@
   4. static analysis / type / theorem prover / async-control boundary の inventory を整える
   5. checkpoint ごとに drift suppression と mirror sweep を入れる
   である。
+
+## 設計上の基本線
+
+- **throughput を先に上げる**: detached validation loop の friction を先に下げ、以後の研究で fixture / artifact / compare の反復コストを抑える。
+- **practical bundle を先に固める**: shared-space は final catalog を急がず、まず authoritative room の最小 practical bundle を厚くする。
+- **working subset を先に比べる**: consistency / fairness / causal metadata は exhaustive catalog より先に、room profile の working subset を source-backed に比較する。
+- **docs-first inventory を先に作る**: static analysis / proof / async-control は actualization より先に、small decidable core と deferred global property の境界を明確にする。
 
 ## 次に自走で進める順番と rough estimate
 

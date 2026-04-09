@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-09 12:52 JST
+最終更新: 2026-04-09 12:53 JST
 
 ## この文書について
 
@@ -263,3 +263,4 @@ rough estimate:
 - 2026-04-08 19:37 JST — Phase 3 closeout checkpoint の review 指摘を反映し、`plan/11` を historical appendix 明示へ補正、`plan/90` に closeout provenance を追記した。checkpoint wording の semantic overclaim は無く、commit / push ready の状態。
 - 2026-04-08 20:04 JST — Phase 3 self-driven reopen threshold を docs-first で比較し、current checkpoint では Phase 3 を reserve path に戻す判断を `specs/examples/120` に固定しつつ、Phase 0〜3 の本質的成果を `docs/research_abstract/` に集約した。次は Phase 2 maintenance tail / Phase 4 side line / Phase 5 inventory line を主線として進める段階。
 - 2026-04-09 12:29 JST — `atomic_cut` を core の最小 cut に留めつつ、higher-level async control は event-tree / authority-serial / witness-aware commit family として Phase 4 / 5 の inventory line で比較する方針を `tasks.md` と `plan/12` / `plan/13` / `plan/16` に追加した。次は shared-space 実例と small decidable core inventory の両側からこの boundary を絞る段階。
+- 2026-04-09 12:53 JST — 次に自走で進める research package の順番を `detached validation loop → authoritative room baseline → consistency / fairness / causal metadata catalog → static analysis / proof / async-control inventory` に整理し、`tasks.md` / `progress.md` / `plan/11` / `plan/17` の immediate order を揃えた。次はこの順番どおり detached validation loop friction reduction から再開できる段階。
