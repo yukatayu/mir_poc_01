@@ -36,6 +36,13 @@
   - `docs/reports/0440-phase5-actual-materialized-runtime-handoff-threshold.md`
   - `docs/reports/0441-review-phase5-actual-materialized-runtime-handoff-threshold.md`
 
+## 2026-04-10 Phase 5 concrete payload addendum
+
+- `plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/167-current-l2-theorem-line-materialized-ready-concrete-payload-threshold.md`
+  - `docs/reports/0442-phase5-concrete-payload-threshold.md`
+  - `docs/reports/0443-review-phase5-concrete-payload-threshold.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。
@@ -251,6 +258,16 @@
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
   - `specs/examples/150-current-l2-theorem-line-path-ready-emitted-artifact-threshold.md`
+
+### 2026-04-10 theorem-line concrete payload threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/165-current-l2-theorem-line-invocation-receipt-ready-runtime-transcript-threshold.md`
+  - `specs/examples/166-current-l2-theorem-line-transcript-ready-materialized-runtime-handoff-threshold.md`
+  - `specs/examples/167-current-l2-theorem-line-materialized-ready-concrete-payload-threshold.md`
+  - `docs/reports/0442-phase5-concrete-payload-threshold.md`
+  - `docs/reports/0443-review-phase5-concrete-payload-threshold.md`
+  - `docs/reports/0444-review-phase5-concrete-payload-threshold-package.md`
   - `specs/examples/151-current-l2-theorem-line-emitted-ready-handoff-emitter-threshold.md`
   - `docs/reports/0416-phase5-emitted-artifact-threshold-package.md`
   - `docs/reports/0417-review-phase5-emitted-artifact-threshold-package.md`

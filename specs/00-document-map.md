@@ -296,6 +296,8 @@
   - Phase 5 theorem-side receipt-ready retained bridge の次段として、runtime-transcript ref だけをどこまで先に足し、concrete payload / transcript body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/166-current-l2-theorem-line-transcript-ready-materialized-runtime-handoff-threshold.md`
   - Phase 5 theorem-side transcript-ready retained bridge の次段として、materialized-runtime-handoff ref だけをどこまで先に足し、concrete payload / transcript body をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/167-current-l2-theorem-line-materialized-ready-concrete-payload-threshold.md`
+  - Phase 5 theorem-side materialized-ready retained bridge の次段として、concrete-payload ref だけをどこまで先に足し、concrete transcript body / actual serialized channel body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
