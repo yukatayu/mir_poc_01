@@ -75,16 +75,17 @@ flowchart LR
 6. 直近の概算進捗、残課題、validation loop までの rough step estimate を先に見たいときは `progress.md`
 7. repo 全体の研究 phase、現在位置、重さ、自走可否を見たいときは `plan/17-research-phases-and-autonomy-gates.md`
 8. いま自走で進める task と、方針決定が必要な current blocker を素早く見たいときは `tasks.md`
-9. phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
-10. その後、必要な subsystem に進む
-11. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
-12. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
-13. parser なしで representative examples を machine-readable に扱う最小 AST fixture schema は `specs/examples/02-current-l2-ast-fixture-schema.md`、fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/`
-14. parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md`
-15. parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md`
-16. parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md`
-17. parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md`
-18. current L2 host stub / fixture runner harness の最小境界は `specs/examples/07-current-l2-host-stub-harness.md`
+9. shared-space / membership / authoritative room の docs-first boundary を先に掴みたいときは `plan/16-shared-space-membership-and-example-boundary.md` と `specs/examples/121-shared-space-authoritative-room-baseline.md`
+10. phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
+11. その後、必要な subsystem に進む
+12. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
+13. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
+14. parser なしで representative examples を machine-readable に扱う最小 AST fixture schema は `specs/examples/02-current-l2-ast-fixture-schema.md`、fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/`
+15. parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md`
+16. parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md`
+17. parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md`
+18. parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md`
+19. current L2 host stub / fixture runner harness の最小境界は `specs/examples/07-current-l2-host-stub-harness.md`
 19. current L2 host harness が読む machine-readable host plan schema と `.host-plan.json` sidecar 方針は `specs/examples/08-current-l2-host-plan-schema.md`
 20. current L2 fixture と sidecar を 1 組として扱う bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md`
 21. current L2 fixture directory を bundle 群として一括実行する batch runner は `specs/examples/10-current-l2-batch-runner.md`

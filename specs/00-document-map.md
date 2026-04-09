@@ -200,6 +200,9 @@
   - current L2 parser-free PoC の detached validation loop で、aggregate emitter の actual narrow cut と `bundle_failure_kind_counts` / current list anchor coexistence を整理する。
 - `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
   - current L2 parser-free PoC の detached validation loop で、aggregate compare helper の exact-compare core / reference-only split と run-label convenience wrapper を整理する。
+- `specs/examples/121-shared-space-authoritative-room-baseline.md`
+  - shared-space / membership line のうち、authoritative room を practical example として進めるための current baseline を 1 本に畳んだ補助文書。
+  - `authority-ack`、`single room authority`、`authoritative serial transition`、`authority_rng` の current baseline と、そこから外に残す policy option / future strengthening をまとめる。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

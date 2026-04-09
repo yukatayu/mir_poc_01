@@ -1992,6 +1992,11 @@ current phase で room profile に入れてよいのは、
 
 を別軸で束ねた **room profile** として書くのが最も自然である。
 
+### baseline consolidation note
+
+この 4 軸 bundle と side condition を 1 本の current baseline judgment に畳んだ正本は `specs/examples/121-shared-space-authoritative-room-baseline.md` である。
+`plan/16` は引き続き比較の repository memory と practical contrast を保持し、baseline 自体の current stop line は `specs/examples/121...` を優先して読む。
+
 ## Raft / Paxos をどう位置づけるか
 
 ### current working answer

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 14:53 JST
+最終更新: 2026-04-09 15:35 JST
 
 ## この文書について
 
@@ -17,10 +17,10 @@
 - 主線は **Phase 2 maintenance tail + Phase 4 side line + Phase 5 inventory line** である。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
 - したがって、今すぐ自走で進める順番は
-  1. shared-space の authoritative baseline を practical example で厚くする
-  2. consistency / fairness / causal metadata を room profile として比べる
-  3. static analysis / type / theorem prover / async-control boundary の inventory を整える
-  4. detached validation loop は maintenance mode に戻して drift と policy-dependent residual だけを見る
+  1. consistency / fairness / causal metadata を room profile として比べる
+  2. static analysis / type / theorem prover / async-control boundary の inventory を整える
+  3. detached validation loop は maintenance mode に戻して drift と policy-dependent residual だけを見る
+  4. authoritative room baseline は checkpoint close として維持する
   5. checkpoint ごとに drift suppression と mirror sweep を入れる
   である。
 
@@ -35,10 +35,10 @@
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 4 前半 | authoritative room baseline の docs-first 精密化 | activation / authority / consistency / RNG の最小 practical bundle を厚くする | 中〜重 | 2〜4 task / 2〜5日 | 自走可能 | すごろく room などの practical example に直結しやすい |
-| 2 | Phase 4 前半〜中盤 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
-| 3 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
-| 4 | Phase 2 maintenance tail | detached validation loop の maintenance residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | current self-driven friction reduction は checkpoint close。`reference update / bless` は later candidate |
+| 1 | Phase 4 前半 closeout後〜中盤入口 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
+| 2 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
+| 3 | Phase 2 maintenance tail | detached validation loop の maintenance residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | current self-driven friction reduction は checkpoint close。`reference update / bless` は later candidate |
+| 4 | Phase 4 前半 checkpoint | authoritative room baseline の checkpoint maintenance | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...` までで checkpoint close |
 | 5 | cross-phase checkpoint | drift suppression / checkpoint sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task というより closeout package |
 | 6 | Phase 3 reserve path | Phase 3 reserve path reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
 
@@ -120,14 +120,27 @@ shared-space を language core に早く焼き込まずに、
 
 の境界を、practical example で崩れない形に整理する。
 
-#### この task でやること
+#### current checkpoint
 
-- authoritative room と append-friendly room を対比する
-- `authority-ack`、`single room authority`、`authoritative serial transition`、`authority_rng` の組み合わせを practical profile として精密化する
-- `session-scoped membership registry + derived snapshot view`
-  を source-of-truth model として保ちつつ、
-  tree-like / JSON-like な derived view をどう見せるかを整理する
-- membership epoch / incarnation と causal metadata の split を比較する
+- authoritative room baseline の current first choice は `specs/examples/121-shared-space-authoritative-room-baseline.md` に集約済みである
+- そこでは
+  - `authority-ack`
+  - `single room authority`
+  - `authoritative serial transition`
+  - `authority_rng`
+  を 4 軸 bundle として固定し、
+  - membership registry + derived snapshot view
+  - `opaque authority trust`
+  - `member_incarnation + uncommitted action invalidation`
+  - compile-time over-approximation / runtime control-plane split
+  を side condition に置いている
+- したがって current self-driven baseline package は checkpoint close とみなしてよい
+
+#### この task で残ること
+
+- authoritative room baseline と append-friendly / relaxed room の drift suppression
+- `delegated_rng_service`、`auditable authority witness`、epoch / incarnation split との接続を catalog comparison task に送ること
+- final activation / authority / fairness / consistency catalog を baseline 側で早く固定しないこと
 
 #### いま自走できる理由
 
@@ -157,17 +170,16 @@ rng: delegated_rng_service
 
 #### 重さ
 
-- 重い
+- 低
 
 #### rough 所要
 
-- 2〜4 task で authoritative baseline を一段厚くする
-- 4〜8 task で consistency / fairness / causal metadata の working subset comparison まで進める
-- 実時間では 2〜10日程度を見込む
+- baseline 自体は checkpoint close
+- drift 時のみ 0〜1 task
 
 #### 現在の推奨度
 
-- **高い**
+- **checkpoint close / maintenance**
 
 ---
 

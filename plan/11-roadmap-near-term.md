@@ -20,23 +20,16 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. authoritative room baseline を docs-first で進める
+### 1. consistency / fairness / causal metadata catalog を working subset として比較する
 
-- authoritative room と append-friendly room の authority placement / consistency mode / RNG provider を practical example で比べる
-- `authority-ack`、`single room authority`、`authoritative serial transition`、`authority_rng` の bundle をもう少し source-backed に厚くする
-- final activation / authority / auth / consistency / fairness catalog へは入らず、stop line を明確にする
-- rough weight: 中〜重
-- rough 所要: 2〜4 task / 2〜5日
-
-### 2. consistency / fairness / causal metadata catalog を working subset として比較する
-
+- authoritative room baseline の current first choice は `specs/examples/121-shared-space-authoritative-room-baseline.md` までで checkpoint close とみなしてよい
 - room mode catalog を final fixed catalog と見なさず、working subset と deferred finalization に分ける
 - membership epoch / incarnation、authority witness、`authority_rng` / `delegated_rng_service` の関係を practical profile で比べる
 - append-friendly room と authoritative room の contrast を崩さずに catalog の stop line を増やす
 - rough weight: 重
 - rough 所要: 3〜6 task / 4〜10日
 
-### 3. static analysis / type / theorem prover / async-control boundary の inventory を進める
+### 2. static analysis / type / theorem prover / async-control boundary の inventory を進める
 
 - local / structural / decidable 寄りの floor をどこまで core に入れるかを narrow に比べる
 - parser boundary / first checker cut / detached validation loop と衝突しない small decidable core inventory を先に作る
@@ -45,7 +38,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - rough weight: 重
 - rough 所要: 3〜6 task / 3〜8日
 
-### 4. detached validation loop は maintenance mode に戻す
+### 3. detached validation loop は maintenance mode に戻す
 
 - current self-driven friction reduction は
   - fixture stem shorthand
@@ -57,6 +50,13 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - 残りの `reference update / bless` は、final path policy / retention policy と接続するため current mainline からは外し、later candidate に残す
 - rough weight: 低
 - rough 所要: 0〜1 task
+
+### 4. authoritative room baseline は checkpoint close として維持する
+
+- `specs/examples/121-shared-space-authoritative-room-baseline.md` を current baseline judgment として drift 監視する
+- final activation / authority / auth / consistency / fairness catalog へは入らず、baseline と next practical candidate の stop line を維持する
+- rough weight: 低
+- rough 所要: 0〜1 task / drift 時のみ
 
 ### 5. parser boundary / first checker cut は reserve path として維持する
 
@@ -73,10 +73,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| authoritative room baseline を practical example で source-backed に厚くする | 2〜4 task | activation / authority / consistency / RNG の bundle を厚くする |
 | consistency / fairness / causal metadata catalog を working subset として比較する | 3〜6 task | final fixed catalog はまだ作らない |
 | small decidable core / proof / async-control inventory を一段進める | 3〜6 task | final type system actualization はまだ含まない |
 | detached validation loop を maintenance mode で維持する | 0〜1 task | current self-driven portion は close。`reference update / bless` は later candidate |
+| authoritative room baseline の drift を checkpoint close として維持する | 0〜1 task | current baseline は `specs/examples/121...` に集約済み |
 | Phase 3 reserve path を reopen する条件整理 | 0〜2 task | later pressure が出たときだけ着手 |
 
 ## いまの blocker

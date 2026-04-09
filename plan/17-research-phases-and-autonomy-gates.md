@@ -116,7 +116,7 @@
 
 #### 現在地
 
-- **前半。docs-first boundary はかなり進んだが、final profile は未決**
+- **前半の authoritative baseline closeout 済み。current mainline は catalog comparison line へ移行**
 
 #### 重さ
 
@@ -197,7 +197,7 @@
 1. **checkpoint / maintenance tail**
    - Phase 0 / 1 / 2 の drift suppression を継続する
 2. **Phase 4 前半の side line**
-   - shared-space / membership の docs-first boundary を進める
+   - shared-space / membership の baseline closeout を保ちつつ、catalog comparison を進める
 3. **Phase 5 入口の inventory line**
    - small decidable core と proof boundary の inventory を進める
 
@@ -209,16 +209,15 @@ Phase 3 は current checkpoint では **reserve path** として残し、later p
 user 指示を反映した current immediate sequence は次である。
 
 1. **detached validation loop の運用摩擦低減を先に進める**
-   - export / compare / reference update / failure triage の friction を実地で減らす
-2. **authoritative room baseline を practical example で厚くする**
-   - `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` の最小 bundle を source-backed に厚くする
-3. **consistency / fairness / causal metadata catalog を working subset として比較する**
+   - export / compare / triage の current baseline は checkpoint close とみなし、`reference update / bless` だけを later candidate に残す
+2. **consistency / fairness / causal metadata catalog を working subset として比較する**
    - fixed final catalog は作らず、room profile の stop line を増やす
-4. **Phase 5 入口の inventory line を進める**
+3. **Phase 5 入口の inventory line を進める**
    - small decidable core / proof boundary / async-control boundary を narrow に棚卸しする
+4. **detached validation loop は maintenance mode に戻し、authoritative room baseline は checkpoint close として維持する**
 5. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
 
-現在は 1 の baseline と top-level consistency sweep が閉じ、Phase 3 staged reconnect line も freeze threshold まで整理できたので、phase 読みとしては **Phase 3 current tranche は closeout 済みで、repo は current self-driven 主線を Phase 2 maintenance tail / Phase 4 side line / Phase 5 inventory line に移してよい状態にある** と読む。
+現在は detached validation loop の current self-driven friction reduction と authoritative room baseline closeout が終わり、Phase 3 staged reconnect line も freeze threshold まで整理できたので、phase 読みとしては **Phase 3 current tranche は closeout 済みで、repo は current self-driven 主線を Phase 2 maintenance tail / Phase 4 side line / Phase 5 inventory line に移してよい状態にある** と読む。
 
 ## 現在の「止めるべき線」
 
