@@ -172,6 +172,7 @@ proof_notebook_bridge_compare_sketch = {
 - reviewer session id
 
 を入れない。
+review-session metadata や retained artifact metadata は later carrier に残す。
 
 ## なぜ bless decision state をまだ入れないか
 

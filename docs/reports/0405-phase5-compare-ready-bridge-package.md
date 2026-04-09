@@ -1,8 +1,8 @@
 # 0405 — Phase 5 compare-ready bridge package
 
-- Date: 2026-04-09 23:13 JST
+- Date: 2026-04-09 23:32 JST
 - Author / agent: Codex
-- Scope: Phase 5 theorem-line の compare-ready bridge package (`141...` / `142...`) と mirror 更新
+- Scope: Phase 5 theorem-line の compare-ready bridge package (`141...` / `142...` / `143...`) と mirror 更新
 - Decision levels touched: L1 / L2
 
 ## 1. Objective
@@ -11,7 +11,8 @@ Phase 5 theorem-line の later reopen package として、
 
 - docs-only bridge sketch に compare basis refs をどこまで足すか
 - compare-ready bridge sketch に bless decision state をどこまで足すか
-- reviewer notes / retained notebook path / review session lifecycle をどこまで後段に残すか
+- bless-ready bridge sketch に review-note refs をどこまで足すか
+- retained notebook path / review session lifecycle をどこまで後段に残すか
 
 を docs-first に比較し、current first choice を固定する。
 
@@ -71,13 +72,23 @@ Phase 5 theorem-line の later reopen package として、
    - compare-ready bridge sketch の次段では bless decision state までは足してよい
    - reviewer notes / retained path / review session metadata は second step
    に固定した。
-5. `Documentation.md`、`specs/00-document-map.md`、`plan/11`、`plan/12`、`plan/13`、`plan/17`、`plan/90`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` を current snapshot に揃えた。
-6. current environment では reviewer / spawn capability が利用できなかったため、AGENTS の fallback 運用に従い local diff inspection review を `0406` に残す方針を取った。
+5. `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md` を追加し、
+   - bless-ready bridge sketch を terminal cut にする
+   - review-note refs だけを足す review-linked bless bridge
+   - full review session metadata をまとめて入れる
+   を比較した。
+6. current first choice を
+   - bless-ready bridge sketch の次段では review-note refs までは足してよい
+   - retained notebook path / reviewer actor / timestamp / review session metadata は second step
+   に固定した。
+7. `Documentation.md`、`specs/00-document-map.md`、`plan/11`、`plan/12`、`plan/13`、`plan/17`、`plan/90`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` を current snapshot に揃えた。
+8. reviewer subagent を起動し、completion を長めに待つ closeout 方針を取った。
 
 ## 4. Files changed
 
 - `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`
 - `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md`
+- `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md`
 - `Documentation.md`
 - `specs/00-document-map.md`
 - `plan/11-roadmap-near-term.md`
@@ -102,28 +113,32 @@ git status --short --branch
 
 - `specs/examples/141...` で、docs-only bridge sketch の次段は compare / bless metadata 全体ではなく `comparison_basis_refs` までに留めるのが最小だと固定した。
 - `specs/examples/142...` で、そのさらに次段は full review session metadata ではなく `bless_decision_state` までに留めるのが最小だと固定した。
+- `specs/examples/143...` で、そのさらに次段は full review session metadata ではなく `review_note_refs` までに留めるのが最小だと固定した。
 - current theorem-line chain では、
   - `bridge_subject_ref + review_units + bridge_goal_text`
   - `+ comparison_basis_refs`
   - `+ bless_decision_state`
+  - `+ review_note_refs`
   の順で narrow に強くする ratchet が current first choice になった。
-- local validation と local diff inspection review closeout は `0406` に記録する。
+- local validation と review closeout は `0406` に記録する。
 
 ## 7. Changes in understanding
 
 - compare need と bless decision need は、review session lifecycle や retained notebook path より一段軽い bridge pressureとして分離できる。
+- bless decision と note linkage も、retained path / actor / timestamp より一段軽い review-session pressureとして分離できる。
 - `proof_notebook` first bridge では、current phase の docs-first disciplineを壊さずに、
   - compare-ready bridge sketch
   - bless-ready bridge sketch
+  - review-linked bless bridge
   まで進める余地がある。
 
 ## 8. Open questions
 
-- bless-ready bridge sketch に review-session metadata をどこまで足すか
+- review-linked bless bridge に retained notebook path / review session lifecycle をどこまで足すか
 - actual theorem handoff emitter を later reopen に保てるか
 - typed symbolic `evidence_refs` family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか
 - `proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるか
 
 ## 9. Suggested next prompt
 
-`Phase 5 の next later reopen candidate として、bless-ready bridge sketch に review-session metadata をどこまで足すのが最小かを docs-first で比較してください。`
+`Phase 5 の next later reopen candidate として、review-linked bless bridge に retained notebook path / review session lifecycle をどこまで足すのが最小かを docs-first で比較してください。`

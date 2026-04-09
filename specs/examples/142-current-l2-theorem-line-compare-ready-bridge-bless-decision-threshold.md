@@ -178,6 +178,7 @@ current task では、
 - retained notebook path
 
 をここに入れない。
+`accepted` / `revise_requested` のような label は example 用の短い symbolic tag であり、final closed enum としてはまだ固定しない。
 
 ## なぜ reviewer notes / retained path をまだ入れないか
 

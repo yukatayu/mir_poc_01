@@ -1,41 +1,24 @@
 # 0406 — review: Phase 5 compare-ready bridge package
 
-- Date: 2026-04-09 23:21 JST
-- Reviewer / agent: Codex (local diff inspection fallback)
-- Scope: `specs/examples/141...` / `142...` と mirror 更新の semantic review
-- Decision levels touched: L1 / L2
+- Date: 2026-04-09 23:32 JST
+- Reviewer: reviewer subagent `019d729d-e7dc-7551-8233-119667d2deac`
+- Scope: `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`、`specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md`、`specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md` と関連 mirror / provenance
 
-## 1. Objective
+## 1. Review objective
 
-`specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`
-と
-`specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md`
-が、
+Phase 5 theorem-line compare-ready bridge package が、
 
-- current theorem-line chain の docs-first discipline を壊していないか
-- previous `138...` / `139...` / `140...` と整合するか
-- mirror 更新と provenance に stale / omission がないか
+- 138 / 139 / 140 からの docs-first ratchet と整合しているか
+- theorem-line bridge の docs-only discipline を壊していないか
+- mirror / provenance に stale / traceability 漏れがないか
 
 を確認する。
 
-## 2. Review method
+## 2. Inputs reviewed
 
-- reviewer subagent を使う想定だったが、current tool set では reviewer / spawn capability が利用できなかった。
-- そのため AGENTS の fallback 運用に従い、
-  - changed-file diff inspection
-  - mirror wording inspection
-  - `python3 scripts/validate_docs.py`
-  - `git diff --check`
-  - `git status --short --branch`
-  による local review で closeout した。
-
-## 3. Documents reviewed
-
-- `specs/examples/138-current-l2-theorem-line-concrete-notebook-workflow-pressure-comparison.md`
-- `specs/examples/139-current-l2-theorem-line-notebook-review-unit-named-bundle-threshold.md`
-- `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md`
 - `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`
 - `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md`
+- `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md`
 - `Documentation.md`
 - `specs/00-document-map.md`
 - `plan/11-roadmap-near-term.md`
@@ -45,38 +28,21 @@
 - `plan/90-source-traceability.md`
 - `progress.md`
 - `tasks.md`
-- `docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`
 - `docs/reports/0405-phase5-compare-ready-bridge-package.md`
 
-## 4. Commands run
-
-```bash
-python3 scripts/validate_docs.py
-git diff --check
-git diff -- specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md Documentation.md specs/00-document-map.md plan/11-roadmap-near-term.md plan/12-open-problems-and-risks.md plan/13-heavy-future-workstreams.md plan/17-research-phases-and-autonomy-gates.md plan/90-source-traceability.md progress.md tasks.md docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md docs/reports/0405-phase5-compare-ready-bridge-package.md
-git status --short --branch
-```
-
-## 5. Findings
+## 3. Reviewer findings
 
 ### No findings
 
-- `141...` は `140...` の docs-only bridge sketch の次段として `comparison_basis_refs` だけを足し、bless / review-session policy を premature に混ぜていない。
-- `142...` は `141...` の compare-ready bridge sketch の次段として `bless_decision_state` だけを足し、reviewer notes / retained path / session lifecycle を still 後段に残している。
-- `plan/11`、`plan/12`、`plan/13`、`plan/17`、`progress.md`、`tasks.md`、`Documentation.md`、`specs/00-document-map.md` は current next reopen を `bless-ready bridge -> review-session metadata threshold` に揃えており、stale wording は見当たらなかった。
-- `plan/90` には 141/142 package の provenance addendum を追加済みである。
+reviewer は blocking / substantive finding を返さなかった。
 
-## 6. Evidence
+## 4. Residual risks
 
-- `python3 scripts/validate_docs.py` → `Documentation scaffold looks complete.` / `Found 405 numbered report(s).`
-- `git diff --check` → 無出力
-- `git status --short --branch` → modified files は 141/142 package とその mirror / reports のみ
+- `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md` の `comparison_basis_refs` は current docs-first discipline と整合しているが、後段で retained path / session lifecycle を扱うときに「source evidence ref」と「review-session ref」を混同しない説明維持が必要である。
+- `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md` の `bless_decision_state` も 138 / 139 / 140 → 141 の ratchet と整合しているが、`accepted` / `revise_requested` を final enum と誤読させない discipline は引き続き必要である。
+- `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md` の `review_note_refs` は minimal bridge pressure として自然だが、note ref を retained file path や session id と混ぜない wording を維持する必要がある。
 
-## 7. Residual risk
+## 5. Closeout
 
-- bless decision state の symbolic vocabulary は current docs-only では final enum に固定していないため、later reopen で review-session metadata を比べる際に wording を揃え直す必要がある。
-- reviewer subagent を使えない current environment では、threaded / independent review evidence が弱い。後続 package で capability が戻れば通常 review に戻すのが望ましい。
-
-## 8. Suggested next prompt
-
-`Phase 5 の next later reopen candidate として、bless-ready bridge sketch に review-session metadata をどこまで足すのが最小かを docs-first で比較してください。`
+- mirror / provenance は `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/reports/0405-phase5-compare-ready-bridge-package.md` まで揃っており、明確な stale / traceability 漏れは見当たらない。
+- current package は 141 / 142 / 143 までで checkpoint close と読んでよい。

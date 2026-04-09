@@ -1061,6 +1061,7 @@
   - `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md`
   - `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`
   - `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md`
+  - `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md`
   - `docs/reports/0403-phase5-review-unit-to-bridge-sketch-comparison.md`
   - `docs/reports/0404-review-phase5-review-unit-to-bridge-sketch-comparison.md`
   - `docs/reports/0405-phase5-compare-ready-bridge-package.md`
