@@ -486,11 +486,13 @@ activation_event(C, 5, epoch = 12)
 
 - **authoritative room の最小 operational candidate は `authority-ack`**
 - `full-coverage-like activation` と `quorum-like activation` は **policy option comparison** に残す
+- final activation profile はまだ固定せず、必要なら `authority-ack` の上に overlay 的な room policy として載せる方向を first practical reading に置く
 - compile-time が持つべきなのは
   - `activation_visibility(room)` に関与しうる role 宣言
   - required publish / notify path の over-approximation
   までであり、
   actual active set と actual acknowledgement frontier は runtime control-plane に残す
+- auth / admission layer が後から重なることも考えると、activation rule を language core の value-level rule として早く固定するより、shared-space / runtime / compile option 側の policy layer に留める方が current phase では自然である
 
 ### room 例との相性
 
@@ -865,6 +867,7 @@ room_authority requests random draw
 - **authoritative room の current first choice は `authority_rng`**
 - **差し替え可能性 / HW 連携 / debug provider hook を意識するなら `delegated_rng_service` が next practical candidate**
 - **`distributed_randomness_provider` は future research に残す**
+- distributed randomness は default にせず、authority または delegated provider が必要に応じて明示的に接続する future option として残す
 
 したがって current phase では、RNG / fairness source を tree topology や participant carrier に埋め込まず、
 
@@ -987,6 +990,7 @@ commit move with draw + witness_ref
 - **ただし next narrow step としては provider placement より先に `auditable authority witness` を比較する方が、proof / replay / debug hook の境界をきれいに切りやすい**
 - **`delegated_rng_service` は provider placement の次 practical candidate だが、trust model 上は `auditable authority witness` と組み合わせて読む方が自然である**
 - **distributed fairness protocol は current room-profile line に混ぜず future research に残す**
+- delegated provider を採るかどうか、fairness claim をどこまで witness 付きにするか、provider placement を room topology / owner slot とどう接続するかは、引き続き別軸で比較する
 
 したがって current repo では、fairness を詰めるときも
 
@@ -1619,6 +1623,8 @@ global_projection(room_42) -> merge / moderation authority
 - **authoritative game room の current first choice は `single room authority`**
 - **`replicated authority` は operational realization 側の next candidate**
 - **`relaxed projection authority` は append-friendly / merge-friendly room の future comparison に残す**
+- ここでいう `single room authority` は、まず **room-level authoritative owner slot / write authority slot** を 1 つ置く読みであり、すべての resource owner を人間 participant に単純還元する意味ではない
+- read-mostly snapshot、fan-out state、delegated capability のような例外は、owner slot と delegated capability を分けたまま later option として扱う
 
 つまり current phase では、
 
@@ -1770,6 +1776,7 @@ publish merged view
 - **authoritative room の current first choice は `authoritative serial transition`**
 - **append-heavy room の current first choice は `append-friendly room`**
 - **`relaxed merge-friendly room` は future comparison に残す**
+- current small catalog は final catalog や exhaustive / MECE 完了形ではなく、表現力と proof burden を比較するための **working subset** として扱う
 
 したがって current phase では、consistency mode catalog を広く固定するより、
 

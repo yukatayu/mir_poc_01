@@ -217,17 +217,20 @@ participant が join / leave / rejoin するとき、
 #### current recommendation
 
 - **現段階では `authority-ack` を最小 operational candidate に置く**
+- **ただし final activation rule はまだ固定せず、`full-coverage-like` / `quorum-like` は overlay 可能な room policy option として残す**
 
 #### 理由
 
 - authoritative room との整合が最も良い
 - implementation と audit の説明がしやすい
 - compile-time には visibility over-approximation だけを残し、actual activation は runtime control-plane に逃がせる
+- final profile を language core に早く焼き込むより、shared-space / runtime / compile option 側の policy layer に残す方が手戻りが小さい
 
 #### 残っている悩み
 
 - `authority-ack` を language core に見せるか、room policy に留めるか
 - reconnect / in-flight action との接続をどこまで room profile に入れるか
+- auth / admission layer を重ねたときに activation profile をどこまで独立に差し替えられるか
 
 ---
 
@@ -260,12 +263,14 @@ participant が join / leave / rejoin するとき、
 
 - **authoritative room では `single room authority` を first choice**
 - **`replicated authority` は next candidate**
+- **ここでいう `single room authority` は「room の authoritative owner slot / write authority slot を 1 つ置く」読みを第一候補にし、人間 participant そのものへの単純還元はしない**
 
 #### 理由
 
 - semantics が最も素直
 - game room のような exclusive action と相性が良い
 - `replicated authority` は failover に強いが、いまの phase では proof / protocol burden が重い
+- read-only snapshot、fan-out、delegated capability などの例外を、owner slot / delegated capability の分離で後から足しやすい
 
 #### 簡単な例
 
@@ -281,6 +286,11 @@ request move(player)
 
 で済む。  
 replicated authority にすると、ここに replication / agreement / failover の protocol が増える。
+
+#### 残っている悩み
+
+- 「全 resource に owner がいる」という直感を、owner slot / delegated capability / replicated realization の 3 層でどう分けて説明するか
+- read-mostly resource や大規模 fan-out state で `single room authority` をどこまで baseline にできるか
 
 ---
 
@@ -310,14 +320,16 @@ room の consistency mode を
 
 #### current recommendation
 
-- **小 catalog で始める**
+- **小 catalog を current working subset として使う**
   - `authoritative serial transition`
   - `append-friendly room`
+- **ただしこれは final catalog でも MECE 完了形でもなく、今後の表現力 / 証明可能性 / 実装可能性の比較の土台に留める**
 
 #### 理由
 
 - room の違いを見せるには十分
 - relaxed merge semantics を早く言語コアへ入れると、proof burden が大きくなる
+- final catalog を拙速に固定すると、将来の拡張余地を不必要に狭める
 
 ---
 
@@ -349,12 +361,14 @@ RNG を
 
 - **authoritative room の current minimal は `authority_rng`**
 - **next practical candidate は `delegated_rng_service`**
+- **`distributed_randomness_provider` は default にせず、authority または delegated provider が必要なときに明示的に接続する future option に残す**
 
 #### 理由
 
 - 最小で回すには authority が持つのが一番簡単
 - ただし audit や trust を強くしたいなら delegated provider の余地を残したい
 - distributed randomness は将来の重い workstream
+- fairness / RNG source を participant tree topology や room ownership model に直結させない方が、provider 差し替えと audit model を分けやすい
 
 #### 簡単な例
 
@@ -365,6 +379,11 @@ roll_dice uses rng_provider
 ```
 
 のように explicit provider capability として切る方が、topology と randomness source を混ぜずに済む。
+
+#### 残っている悩み
+
+- delegated provider を room policy / topology / authority delegation のどこで自然に選ばせるか
+- fairness claim、audit witness、provider placement をどこまで別軸のまま保てるか
 
 ---
 

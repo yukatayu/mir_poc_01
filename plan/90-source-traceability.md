@@ -793,6 +793,18 @@
 
 - `tasks.md` は current task map の snapshot であり、規範判断の正本ではない。
 
+### 2026-04-09 shared-space blocker recommendation refresh
+
+- `tasks.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - user からの 2026-04-09 shared-space blocker feedback
+  - `docs/reports/0353-shared-space-blocker-recommendation-refresh.md`
+
+- 反映した current reading は次である。
+  - activation は `authority-ack` を最小 operational candidate に置くが、final profile はまだ固定せず overlay 可能な room policy option を残す
+  - `single room authority` は room-level authoritative owner slot / write authority slot の読みを first choice にする
+  - consistency mode の small catalog は final / exhaustive catalog ではなく working subset として扱う
+  - distributed randomness は default にせず future option に残す
+
 ### named profile catalog と mirror boundary
 
 - `0066`
