@@ -285,7 +285,8 @@
 - `specs/examples/151-current-l2-theorem-line-emitted-ready-handoff-emitter-threshold.md` により、current first cut は emitted-ready retained bridge に `handoff_emitter_ref` までは足し、actual consumer adapter / notebook exchange rule は second step に残す current first choice まで固定済みである。
 - `specs/examples/152-current-l2-theorem-line-emitter-linked-consumer-adapter-threshold.md` により、current first cut は emitter-linked retained bridge に `consumer_adapter_ref` までは足し、actual notebook exchange rule / concrete file-blob exchange protocol は second step に残す current first choice まで固定済みである。
 - `specs/examples/153-current-l2-theorem-line-adapter-linked-exchange-rule-threshold.md` により、current first cut は adapter-linked retained bridge に `exchange_rule_ref` までは足し、adapter-local validation / concrete file-blob exchange protocol は second step に残す current first choice まで固定済みである。
-- 引き続き OPEN なのは、adapter-validation threshold をどこまで足すか、actual notebook exchange rule / adapter-local validation / environment-specific invocation surface を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
+- `specs/examples/154-current-l2-theorem-line-exchange-ready-adapter-validation-threshold.md` により、current first cut は exchange-ready retained bridge に `adapter_validation_ref` までは足し、actual notebook exchange rule body / environment-specific invocation surface は second step に残す current first choice まで固定済みである。
+- 引き続き OPEN なのは、invocation-surface threshold をどこまで足すか、actual notebook exchange rule body / environment-specific invocation surface / concrete file-blob exchange protocol を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
 
 ### richer host interface
 
