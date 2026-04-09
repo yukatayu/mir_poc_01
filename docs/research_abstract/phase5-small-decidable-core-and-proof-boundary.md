@@ -166,6 +166,18 @@ consumer-specific attachment として後段に残すのが current first choice
 **`failure_body_ref`**
 までは足してよいが、actual runtime invocation protocol / host binding / failure wording は still 後段に残す。
 
+その次段では、
+**`actual_invocation_protocol_ref`**
+までは足してよいが、consumer-host-specific binding / failure wording は still 後段に残す。
+
+その次段では、
+**`consumer_host_binding_ref`**
+までは足してよいが、failure wording と actual notebook runtime handoff actualization は still 後段に残す。
+
+その次段では、
+**`failure_wording_ref`**
+までは足してよいが、actual notebook runtime handoff actualization / emitted invocation receipt / runtime transcript family は still 後段に残す。
+
 ## まだやっていないこと
 
 - public checker API の finalization
@@ -173,7 +185,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- `actual_invocation_protocol_ref` をどこまで足すか
+- actual notebook runtime handoff actualization をどこまで theorem-line bridge に寄せるか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 

@@ -282,6 +282,12 @@
   - Phase 5 theorem-side runtime-coupling-ready retained bridge の次段として、transport-protocol ref だけをどこまで先に足し、concrete failure body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/159-current-l2-theorem-line-transport-ready-failure-body-threshold.md`
   - Phase 5 theorem-side transport-ready retained bridge の次段として、failure-body ref だけをどこまで先に足し、actual invocation protocol / host binding / failure wording をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/160-current-l2-theorem-line-failure-ready-actual-invocation-protocol-threshold.md`
+  - Phase 5 theorem-side failure-ready retained bridge の次段として、actual-invocation-protocol ref だけをどこまで先に足し、consumer-host-specific binding / failure wording をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/161-current-l2-theorem-line-invocation-ready-host-binding-threshold.md`
+  - Phase 5 theorem-side invocation-ready retained bridge の次段として、consumer-host-binding ref だけをどこまで先に足し、failure wording をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/162-current-l2-theorem-line-binding-ready-failure-wording-threshold.md`
+  - Phase 5 theorem-side binding-ready retained bridge の次段として、failure-wording ref だけをどこまで先に足し、actual notebook runtime handoff actualization をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
