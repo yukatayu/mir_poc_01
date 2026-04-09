@@ -187,6 +187,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`runtime_transcript_ref`**
 までは足してよいが、concrete channel payload / transcript body は still 後段に残す。
 
+**`materialized_runtime_handoff_ref`**
+までは足してよいが、concrete payload / transcript body と actual serialized channel body は still 後段に残す。
+
 ## まだやっていないこと
 
 - public checker API の finalization
@@ -194,7 +197,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- actual notebook runtime handoff materialization をどこまで theorem-line bridge に寄せるか
+- concrete payload / transcript body と actual serialized channel body をどこまで theorem-line bridge に寄せるか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 

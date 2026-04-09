@@ -29,6 +29,13 @@
 | `plan/17-research-phases-and-autonomy-gates.md` | `plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`progress.md`、`docs/reports/0286`、`docs/reports/0287` |
 | `plan/91-maintenance-rules.md` | `AGENTS.md`、`Documentation.md`、`specs/00-document-map.md`、report policy、helper boundary reports `0071`〜`0077`、`docs/reports/0268`、`docs/reports/0269`、`docs/reports/0286`、`docs/reports/0287` |
 
+## 2026-04-10 Phase 5 materialized handoff addendum
+
+- `plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/166-current-l2-theorem-line-transcript-ready-materialized-runtime-handoff-threshold.md`
+  - `docs/reports/0440-phase5-actual-materialized-runtime-handoff-threshold.md`
+  - `docs/reports/0441-review-phase5-actual-materialized-runtime-handoff-threshold.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。
