@@ -137,7 +137,7 @@
 
 #### 現在地
 
-- **current theorem-line later package close。`specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch、`specs/examples/128...` で mixed row default / boundary-specific split / actual emitter の reopen threshold、`specs/examples/129...` で first concrete consumer pressure を theorem line に置き、`specs/examples/130...` で theorem-side projection bundle、`specs/examples/131...` で typed symbolic `evidence_refs` family の current first choiceまで固定し、次は theorem-side public checker migration threshold を later reopen 候補として選ぶ段階**
+- **current theorem-line later package close。`specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch、`specs/examples/128...` で mixed row default / boundary-specific split / actual emitter の reopen threshold、`specs/examples/129...` で first concrete consumer pressure を theorem line に置き、`specs/examples/130...` で theorem-side projection bundle、`specs/examples/131...` で typed symbolic `evidence_refs` family、`specs/examples/132...` で public checker migration defer threshold の current first choiceまで固定し、次は concrete theorem consumer bridge の minimum contract row comparison を later reopen 候補として選ぶ段階**
 
 #### 重さ
 
@@ -224,7 +224,8 @@ user 指示を反映した current immediate sequence は次である。
    - `specs/examples/128...` により、mixed row default を current first choice とし、boundary-specific handoff artifact と actual emitter は concrete pressure が出たときだけ reopen 候補にする
    - `specs/examples/129...` により、first concrete consumer pressure の current first practical candidate は theorem line に寄せた
    - `specs/examples/130...` により、theorem line の current first cut は docs-only projection bundle に留めた
-   - `specs/examples/131...` により、theorem-side `evidence_refs` は typed symbolic ref family を current first choice に置き、next practical reopen は public checker migration threshold comparison に寄せる
+   - `specs/examples/131...` により、theorem-side `evidence_refs` は typed symbolic ref family を current first choice に置いた
+   - `specs/examples/132...` により、public checker migration は concrete theorem consumer pressure が出たときだけ reopen する threshold に留め、next practical reopen は minimum contract row comparison に寄せる
 4. **detached validation loop は maintenance mode に戻し、authoritative room baseline は checkpoint close として維持する**
 5. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
 

@@ -263,7 +263,8 @@
 - `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md` により、current first practical candidate は `theorem_prover_boundary`、`protocol_verifier_boundary` は second practical candidate、`runtime_policy_boundary` は later candidate に置く current first choice まで固定済みである。
 - `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md` により、mixed row default を壊さずに theorem-side projection bundle を docs-only first cut に置く current first choice まで固定済みである。
 - `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md` により、theorem-side projection bundle の `evidence_refs` は typed symbolic ref family を current first choice に置き、actual path / URI / emitted artifact id は later reopen に残す current cut まで固定済みである。
-- 引き続き OPEN なのは、projection bundle を public checker API へ narrow migration してよい threshold をどこに置くか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
+- `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md` により、projection bundle を current phase では docs-only に留め、public checker migration は concrete theorem consumer pressure が出たときだけ reopen 候補にする threshold まで固定済みである。
+- 引き続き OPEN なのは、concrete theorem consumer bridge に必要な minimum contract rows をどこまで docs-only で書くか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
 
 ### richer host interface
 

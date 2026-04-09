@@ -973,3 +973,10 @@
   - `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md`
   - `docs/reports/0387-phase5-theorem-line-narrow-actualization-package.md`
   - `docs/reports/0388-review-phase5-theorem-line-narrow-actualization-package.md`
+
+### 2026-04-09 phase5 theorem-line public checker threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md`
+  - `docs/reports/0389-phase5-theorem-line-public-checker-migration-threshold.md`
+  - `docs/reports/0390-review-phase5-theorem-line-public-checker-migration-threshold.md`

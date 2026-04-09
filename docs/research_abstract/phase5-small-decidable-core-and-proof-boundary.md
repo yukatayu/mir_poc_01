@@ -90,13 +90,17 @@ boundary-specific handoff artifact と actual emitter は concrete consumer pres
 actual path ではなく **`ref_kind + ref_id` の typed symbolic ref family**
 へ整えるのが current first choice である。
 
+ただし current phase では、これをまだ public checker API へは上げず、
+**concrete theorem consumer pressure が出るまで docs-only bridge に留める**
+のが current first choice である。
+
 ## まだやっていないこと
 
 - public checker API の finalization
 - theorem prover input schema の finalization
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
-- theorem-side projection bundle を public checker API へ narrow migration してよい threshold
+- concrete theorem consumer bridge に必要な minimum contract rows
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの
