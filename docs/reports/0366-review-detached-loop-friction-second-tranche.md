@@ -1,24 +1,43 @@
 # Report 0366 — review detached loop friction second tranche
 
-- Date: 2026-04-09T04:20:00Z
+- Date: 2026-04-09T04:22:00Z
 - Author / agent: Codex
-- Scope: detached validation loop friction second tranche の review fallback 記録
+- Scope: `0365` の detached validation loop friction second tranche に対する closeout review
 - Decision levels touched: L2
 
 ## 1. Objective
 
-- detached validation loop friction second tranche について、helper boundary 逸脱や mirror drift がないかを closeout 前に確認する。
+- detached validation loop friction second tranche の差分が current non-production helper boundary を壊していないかを closeout 前に確認する。
+- `compare-fixture-aggregates` の追加が aggregate compare API の premature publicization になっていないかを見る。
 
 ## 2. Scope and assumptions
 
-- current session では reviewer subagent tool が使えなかったため、local diff inspection と fresh verification を review fallback とする。
-- current semantics / final API / production CLI は対象外であり、thin helper / docs mirror の整合だけを確認する。
+- 対象は `scripts/current_l2_detached_loop.py`、`scripts/tests/test_current_l2_detached_loop.py`、`specs/examples/26`、`specs/examples/28`、`plan/07`、`plan/09`、`plan/90`、`plan/91`、`AGENTS.md`、`tasks.md`、`progress.md`、`0365` report に限る。
+- final exporter API、final path policy、reference update flow の導入までは今回扱わない。
 
-## 3. Documents consulted
+## 3. Review method
 
-- `docs/reports/0365-detached-loop-friction-second-tranche.md`
+- reviewer subagent に、working tree の未commit差分を対象として
+  - helper boundary 逸脱
+  - focused tests の十分性
+  - docs / plan / task / progress mirror drift
+  を確認してもらった。
+- あわせて local verification evidence を再確認した。
+
+## 4. Findings
+
+### Finding 1 — `compare-fixture-aggregates` は current helper boundary に収まっている
+
 - `scripts/current_l2_detached_loop.py`
+- current helper は temporary single-fixture directory を内部で作り、existing aggregate emitter / diff helper を再利用しているだけであり、`lib.rs` / `harness.rs` の public aggregate API を増やしていない。
+
+### Finding 2 — focused tests は second tranche の意図を十分に固定している
+
 - `scripts/tests/test_current_l2_detached_loop.py`
+- fixture stem shorthand、`<stem>-single` default label、`.host-plan.json` sidecar copy、compare path derivationを 1 本の test で押さえており、薄い helper convenience としては十分である。
+
+### Finding 3 — mirror / provenance / maintenance rule の drift は見当たらない
+
 - `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
 - `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md`
 - `plan/07-parser-free-poc-stack.md`
@@ -28,38 +47,18 @@
 - `AGENTS.md`
 - `tasks.md`
 - `progress.md`
+- second tranche の helper cut、`tasks.md` の phase column rule、progress log は互いに矛盾していない。
 
-## 4. Actions taken
+## 5. Result
 
-- changed file 一式を `git diff` で再点検した。
-- `compare-fixture-aggregates` が
-  - temporary single-fixture directory を内部で作るだけの thin convenience であること
-  - `summary_core` compare helper を再利用していること
-  - production aggregate API / final path policy を固定していないこと
-  を確認した。
-- `scripts/tests/test_current_l2_detached_loop.py` の追加 test が
-  - default run label
-  - sidecar copy
-  - compare target path
-  を固定していることを確認した。
-- mirror / provenance / maintenance rule の更新漏れを確認した。
+- substantive finding は無かった。
+- current tranche は narrow helper improvement として close してよい。
 
-## 5. Evidence / outputs / test results
+## 6. Open questions
 
-- local review fallback として見た限り、重大な semantic drift や helper boundary 逸脱は見つからなかった。
-- `specs/examples/26` と `specs/examples/28` の wording は、current second tranche を non-production convenience として記述しており、public compare API へ昇格させていない。
-- `plan/07`、`plan/09`、`plan/90`、`plan/91`、`AGENTS.md`、`tasks.md`、`progress.md` の mirror も整合している。
+- next friction を `reference update / bless` と `longer compare triage` のどちらから取るか。
+- `compare-fixture-aggregates` の run label policy を今後 generalize する必要があるか。
 
-## 6. Findings
-
-- substantive finding はなし。
-- hygiene:
-  - reviewer tool unavailable のため、この record 自体が local fallback 証跡になる。
-
-## 7. Open questions
-
-- reference update / bless 相当を helper に薄く入れるかどうかは次 tranche で比較が必要。
-
-## 8. Suggested next prompt
+## 7. Suggested next prompt
 
 detached validation loop friction reduction の次 tranche として、reference update flow と longer compare triage のどちらを先に薄く改善するかを narrow comparison してください。

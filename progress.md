@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-09 13:20 JST
+最終更新: 2026-04-09 13:22 JST
 
 ## この文書について
 
@@ -267,3 +267,4 @@ rough estimate:
 - 2026-04-09 12:29 JST — `atomic_cut` を core の最小 cut に留めつつ、higher-level async control は event-tree / authority-serial / witness-aware commit family として Phase 4 / 5 の inventory line で比較する方針を `tasks.md` と `plan/12` / `plan/13` / `plan/16` に追加した。次は shared-space 実例と small decidable core inventory の両側からこの boundary を絞る段階。
 - 2026-04-09 12:53 JST — 次に自走で進める research package の順番を `detached validation loop → authoritative room baseline → consistency / fairness / causal metadata catalog → static analysis / proof / async-control inventory` に整理し、`tasks.md` / `progress.md` / `plan/11` / `plan/17` の immediate order を揃えた。次はこの順番どおり detached validation loop friction reduction から再開できる段階。
 - 2026-04-09 13:07 JST — detached validation loop friction reduction の first tranche として、fixture stem shorthand・default run label derivation・missing fixture fail-fast を thin helper に actualize し、`scripts/tests/test_current_l2_detached_loop.py` と shorthand smoke で current baseline を通した。次は aggregate-noise / reference update / longer compare triage のどれを先に薄く改善するかを比較する段階。
+- 2026-04-09 13:22 JST — detached validation loop friction reduction の second tranche として、`compare-fixture-aggregates` を追加し、single-fixture aggregate 同士の direct compare を noisy な full-vs-single contrast から分離した。`scripts/tests/test_current_l2_detached_loop.py`、shorthand aggregate compare、docs/plan/tasks mirror を通し、次の friction は reference update / bless と longer compare triage に寄った。
