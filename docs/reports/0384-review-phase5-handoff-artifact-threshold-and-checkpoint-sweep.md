@@ -1,20 +1,20 @@
-# 0384 — review record for Phase 5 handoff artifact threshold and checkpoint sweep
+# 0384 — review: Phase 5 handoff artifact threshold and checkpoint sweep
 
 ## Objective
 
-`0383` の task package について、
+`specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` と
+その mirror 更新が、
 
-- `specs/examples/128...` の threshold judgment が `126...` / `127...` と矛盾しないか
-- Phase 4 / 5 checkpoint reading の mirror drift が無いか
-- traceability と progress / tasks snapshot に欠落が無いか
+- `specs/examples/126...` / `127...` の current judgment
+- Phase 5 checkpoint close の読み
+- Phase 4 / 5 checkpoint maintenance snapshot
 
-を closing review として確認する。
+を壊していないかを確認する。
 
 ## Scope and assumptions
 
-- review 対象は docs-first package に限る。
-- current session では reviewer agent の completion 回収口が利用できない可能性があるため、
-  返答が取れなかった場合は local evidence fallback を明示する。
+- review 対象は Phase 5 later reopen threshold package 全体である。
+- code change は無く、docs / plan / progress / tasks / report の一貫性を主に見る。
 
 ## Documents consulted
 
@@ -35,33 +35,26 @@
 
 ## Actions taken
 
-1. reviewer agent を 1 回起動した。
-2. current session では completion 回収手段が利用できず、reviewer output を取得できなかった。
-3. fallback として、対象ファイルの focused `git diff` と `git diff --stat` を確認し、
-   Phase 5 / Phase 4 の checkpoint reading と traceability drift を点検した。
+1. reviewer subagent を 1 回だけ起動した。
+2. `specs/examples/128...` と mirror 一式を reviewer に読ませ、矛盾・traceability 漏れ・checkpoint reading の不一致を確認させた。
+3. completion を回収し、substantive finding が無いことを確認した。
 
 ## Evidence / outputs / test results
 
-- reviewer attempt:
-  - `spawn_agent(reviewer)` は実行した
-  - ただし completion を取得する wait interface が current session に露出しておらず、review text 自体は回収できなかった
-- local diff inspection:
-  - `specs/examples/128...` は mixed row default / boundary-specific split defer / actual emitter defer を一貫して記述している
-  - `plan/11`、`plan/17`、`progress.md`、`tasks.md` は Phase 5 を third inventory package close として読む snapshot に揃った
-  - `plan/90` には `0383` / `0384` provenance を追加済み
-- `python3 scripts/validate_docs.py` は成功
-- `git diff --check` は無出力
+- reviewer completion summary:
+  - external handoff artifact は current docs-only default として mixed row bundle を維持し、boundary-specific handoff artifact と actual emitter は concrete consumer pressure が出たときだけ reopen する、という judgment は current Phase 5 line と整合する
+  - `phase5-small-decidable-core-and-proof-boundary.md`、`tasks.md`、`progress.md`、`plan/11`、`plan/12`、`plan/13`、`plan/17`、`plan/90` は third inventory package close の読みへ揃っている
+  - substantive finding は無し
 
 ## What changed in understanding
 
-- current session では reviewer spawn 自体はできても、completion 回収口が使えないことがありうる。
-- その場合でも、Phase 5 docs-first package は focused diff inspection と validation evidence を report に残すことで close できる。
+- reviewer 観点でも、current Phase 5 package は mixed row default を維持したまま checkpoint close に入ってよく、次に比較すべき問いは first concrete external consumer pressure だと再確認できた。
 
 ## Open questions
 
-- reviewer completion 回収口が current session で使えない条件は何か。
-- 将来同じ条件が出たとき、local review fallback の標準手順をさらに短く定義する必要があるか。
+- theorem / protocol / runtime のどの consumer が first actual handoff pressure になるか
+- `evidence_refs` を actual artifact ref に寄せる narrow migration をどこで始めるか
 
 ## Suggested next prompt
 
-`Phase 5 checkpoint close 後の cross-phase drift suppression と mirror sweep を narrow に実施し、Phase 4 / 5 package close が progress/tasks/plan で同じ snapshot を指しているかを点検してください。`
+`Phase 5 の later reopen 候補として、theorem / protocol / runtime の 3 系統で first concrete external consumer pressure を比較し、どの consumer が boundary-specific handoff artifact または actual emitter を最初に要求するかを docs-first で整理してください。`

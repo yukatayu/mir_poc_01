@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-09 20:53 JST
+最終更新: 2026-04-09 20:55 JST
 
 ## この文書について
 
@@ -276,4 +276,4 @@ rough estimate:
 - 2026-04-09 17:50 JST — control-plane separated causal carrier threshold を `specs/examples/125-shared-space-control-plane-carrier-threshold.md` に固定し、`membership_epoch + member_incarnation` を current default に維持する条件と `control_epoch` 相当の first reopen cut 条件を切り分けた。Phase 4 current package は checkpoint close とし、次の promoted line は Phase 5 inventory に移した。
 - 2026-04-09 18:33 JST — Phase 5 の small decidable core / proof / async-control boundary を `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` に集約し、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split を current first choice に固定した。Phase 5 current package は first inventory package close とし、次は drift suppression と later reopen candidate 管理に移れる状態になった。
 - 2026-04-09 19:35 JST — Phase 5 later package として `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` を追加し、proof-obligation matrix と mixed handoff row sketch を current first choice に固定した。review finding 2 件も反映し、Phase 5 は second inventory package close として checkpoint maintenance / later reopen 候補へ移れる状態になった。
-- 2026-04-09 20:53 JST — Phase 5 later reopen threshold として `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` を追加し、mixed row bundle を current docs-only default に維持しつつ boundary-specific split / actual emitter は concrete consumer pressure が出たときだけ reopen する判断を mirror へ反映した。Phase 5 は third inventory package close と読み替え、reviewer no-return は local diff inspection fallback で閉じた。
+- 2026-04-09 20:55 JST — Phase 5 later reopen threshold として `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` を追加し、mixed row bundle を current docs-only default に維持しつつ boundary-specific split / actual emitter は concrete consumer pressure が出たときだけ reopen する判断を mirror へ反映した。Phase 5 は third inventory package close と読み替え、reviewer completion で no findings を確認したうえで checkpoint maintenance に戻した。
