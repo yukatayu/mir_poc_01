@@ -250,6 +250,14 @@
   - `docs/reports/0418-phase5-handoff-emitter-threshold-package.md`
   - `docs/reports/0419-review-phase5-handoff-emitter-threshold-package.md`
 
+### 2026-04-10 theorem-line consumer adapter threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/151-current-l2-theorem-line-emitted-ready-handoff-emitter-threshold.md`
+  - `specs/examples/152-current-l2-theorem-line-emitter-linked-consumer-adapter-threshold.md`
+  - `docs/reports/0420-phase5-consumer-adapter-threshold-package.md`
+  - `docs/reports/0421-review-phase5-consumer-adapter-threshold-package.md`
+
 ### 2026-04-09 shared-space control-plane carrier threshold addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
