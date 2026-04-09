@@ -23,8 +23,9 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 ### 1. consistency / fairness / causal metadata catalog を working subset として比較する
 
 - authoritative room baseline の current first choice は `specs/examples/121-shared-space-authoritative-room-baseline.md` までで checkpoint close とみなしてよい
+- current first tranche として、authoritative room / append-friendly room をまたぐ small working subset row は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` までで切ってよい
 - room mode catalog を final fixed catalog と見なさず、working subset と deferred finalization に分ける
-- membership epoch / incarnation、authority witness、`authority_rng` / `delegated_rng_service` の関係を practical profile で比べる
+- 次の narrow step は `auditable_authority_witness` の最小 witness shape を、provider placement と別軸のまま比べることに置く
 - append-friendly room と authoritative room の contrast を崩さずに catalog の stop line を増やす
 - rough weight: 重
 - rough 所要: 3〜6 task / 4〜10日

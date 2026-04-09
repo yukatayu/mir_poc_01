@@ -203,6 +203,9 @@
 - `specs/examples/121-shared-space-authoritative-room-baseline.md`
   - shared-space / membership line のうち、authoritative room を practical example として進めるための current baseline を 1 本に畳んだ補助文書。
   - `authority-ack`、`single room authority`、`authoritative serial transition`、`authority_rng` の current baseline と、そこから外に残す policy option / future strengthening をまとめる。
+- `specs/examples/122-shared-space-catalog-working-subset-comparison.md`
+  - shared-space / membership line の次段として、authoritative room と append-friendly room をまたぐ consistency / fairness / causal metadata catalog の current working subset と stop line を整理した補助文書。
+  - final exhaustive catalog を固定せず、room profile row と deferred finalization を分けて扱う。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

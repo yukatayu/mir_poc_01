@@ -1997,6 +1997,11 @@ current phase で room profile に入れてよいのは、
 この 4 軸 bundle と side condition を 1 本の current baseline judgment に畳んだ正本は `specs/examples/121-shared-space-authoritative-room-baseline.md` である。
 `plan/16` は引き続き比較の repository memory と practical contrast を保持し、baseline 自体の current stop line は `specs/examples/121...` を優先して読む。
 
+### catalog working subset note
+
+authoritative room baseline を practical room catalog の first row として含めつつ、append-friendly room との contrast、`auditable_authority_witness`、`membership_epoch + member_incarnation` split、`delegated_rng_service` の optional capability row までを small working subset として切った current judgment の正本は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` である。
+`plan/16` は引き続き比較の repository memory を保持するが、catalog の current working subset と deferred finalization の線引きは `specs/examples/122...` を優先して読む。
+
 ## Raft / Paxos をどう位置づけるか
 
 ### current working answer

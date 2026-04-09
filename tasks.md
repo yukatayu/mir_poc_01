@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 15:35 JST
+最終更新: 2026-04-09 16:07 JST
 
 ## この文書について
 
@@ -17,7 +17,7 @@
 - 主線は **Phase 2 maintenance tail + Phase 4 side line + Phase 5 inventory line** である。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
 - したがって、今すぐ自走で進める順番は
-  1. consistency / fairness / causal metadata を room profile として比べる
+  1. consistency / fairness / causal metadata を room profile working subset として比べ、witness / provider / causal stop line を詰める
   2. static analysis / type / theorem prover / async-control boundary の inventory を整える
   3. detached validation loop は maintenance mode に戻して drift と policy-dependent residual だけを見る
   4. authoritative room baseline は checkpoint close として維持する
@@ -35,7 +35,7 @@
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 4 前半 closeout後〜中盤入口 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
+| 1 | Phase 4 前半 closeout後〜中盤入口 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | current first cut は `specs/examples/122...`。next は `auditable_authority_witness` の最小 shape 比較 |
 | 2 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
 | 3 | Phase 2 maintenance tail | detached validation loop の maintenance residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | current self-driven friction reduction は checkpoint close。`reference update / bless` は later candidate |
 | 4 | Phase 4 前半 checkpoint | authoritative room baseline の checkpoint maintenance | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...` までで checkpoint close |
@@ -134,13 +134,16 @@ shared-space を language core に早く焼き込まずに、
   - `member_incarnation + uncommitted action invalidation`
   - compile-time over-approximation / runtime control-plane split
   を side condition に置いている
-- したがって current self-driven baseline package は checkpoint close とみなしてよい
+- その次段として、authoritative room と append-friendly room をまたぐ small cross-room working subset は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` に整理済みである
+- したがって current self-driven baseline package は checkpoint close であり、active package は catalog comparison 側に移っている
 
 #### この task で残ること
 
 - authoritative room baseline と append-friendly / relaxed room の drift suppression
-- `delegated_rng_service`、`auditable authority witness`、epoch / incarnation split との接続を catalog comparison task に送ること
-- final activation / authority / fairness / consistency catalog を baseline 側で早く固定しないこと
+- `auditable_authority_witness` の最小 witness shape
+- `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読むか
+- control-plane separated carrier を reopen する threshold
+- final activation / authority / fairness / consistency catalog を早く固定しないこと
 
 #### いま自走できる理由
 
@@ -150,7 +153,7 @@ shared-space を language core に早く焼き込まずに、
 
 #### 実践例
 
-たとえば authoritative game room なら、次のような profile が current first choice である。
+たとえば authoritative game room なら、次のような baseline row が current first choice である。
 
 ```text
 activation: authority-ack
@@ -163,23 +166,23 @@ fairness source: authority_rng
 
 ```text
 consistency: append-friendly room
-rng: delegated_rng_service
+fairness: room core では要求しない
 ```
 
-のように、room profile を変える必要がある。
+のような baseline row を置き、optional capability としてだけ `delegated_rng_service` を足す方が自然である。
 
 #### 重さ
 
-- 低
+- 中〜重
 
 #### rough 所要
 
-- baseline 自体は checkpoint close
-- drift 時のみ 0〜1 task
+- 3〜6 task / 4〜10日 の active package
+- baseline drift 自体は 0〜1 task の maintenance に留める
 
 #### 現在の推奨度
 
-- **checkpoint close / maintenance**
+- **高い（current active package）**
 
 ---
 
@@ -428,7 +431,8 @@ RNG を
 #### current recommendation
 
 - **authoritative room の current minimal は `authority_rng`**
-- **next practical candidate は `delegated_rng_service`**
+- **provider placement の next practical candidate は `delegated_rng_service`**
+- **ただし current active line では、provider placement より先に `auditable_authority_witness` の最小 shape を比べる**
 - **`distributed_randomness_provider` は default にせず、authority または delegated provider が必要なときに明示的に接続する future option に残す**
 
 #### 理由

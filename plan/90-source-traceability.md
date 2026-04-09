@@ -883,3 +883,10 @@
   - `specs/examples/121-shared-space-authoritative-room-baseline.md`
   - `docs/reports/0369-authoritative-room-baseline-docs-first-refinement.md`
   - `docs/reports/0370-review-authoritative-room-baseline-docs-first-refinement.md`
+
+### 2026-04-09 shared-space catalog working subset addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/122-shared-space-catalog-working-subset-comparison.md`
+  - `docs/reports/0371-shared-space-catalog-working-subset-comparison.md`
+  - `docs/reports/0372-review-shared-space-catalog-working-subset-comparison.md`
