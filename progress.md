@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-09 16:07 JST
+最終更新: 2026-04-09 16:11 JST
 
 ## この文書について
 
@@ -270,4 +270,4 @@ rough estimate:
 - 2026-04-09 13:22 JST — detached validation loop friction reduction の second tranche として、`compare-fixture-aggregates` を追加し、single-fixture aggregate 同士の direct compare を noisy な full-vs-single contrast から分離した。`scripts/tests/test_current_l2_detached_loop.py`、shorthand aggregate compare、docs/plan/tasks mirror を通し、次の friction は reference update / bless と longer compare triage に寄った。
 - 2026-04-09 14:53 JST — detached validation loop friction reduction の third tranche として bundle / aggregate / static gate diff helper の reference-only section を shallow per-field summary に揃え、longer compare triage を短くした。related unit test、E3/E6 compare smoke、docs/tasks/progress mirror を通し、current self-driven portion は checkpoint close、残りは policy-dependent な reference update / bless 候補に絞られた。
 - 2026-04-09 15:35 JST — authoritative room baseline の docs-first 精密化を `specs/examples/121-shared-space-authoritative-room-baseline.md` に集約し、Phase 4 前半 package を checkpoint close に移して、current mainline を consistency / fairness / causal metadata catalog comparison へ更新した。review 指摘も反映したうえで `validate_docs` と `git diff --check` を通した。
-- 2026-04-09 16:07 JST — shared-space catalog comparison の first cut として `specs/examples/122-shared-space-catalog-working-subset-comparison.md` を追加し、authoritative room / append-friendly room をまたぐ small working subset row と stop line を固定した。mirror も current mainline を `auditable_authority_witness` の最小 shape comparison へ揃え、`validate_docs` と `git diff --check` を通した。
+- 2026-04-09 16:11 JST — shared-space catalog comparison の first cut として `specs/examples/122-shared-space-catalog-working-subset-comparison.md` を追加し、authoritative room / append-friendly room をまたぐ small working subset row と stop line を固定した。mirror も current mainline を `auditable_authority_witness` の最小 shape comparison へ揃え、review / `validate_docs` / `git diff --check` を通した。

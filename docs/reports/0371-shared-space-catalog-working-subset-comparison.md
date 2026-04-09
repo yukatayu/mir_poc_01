@@ -83,7 +83,7 @@ Swap:           19Gi       1.3Gi        18Gi
 
 $ python3 scripts/validate_docs.py
 Documentation scaffold looks complete.
-Found 371 numbered report(s).
+Found 372 numbered report(s).
 
 $ git diff --check
 [no output]
@@ -99,6 +99,7 @@ $ git diff --check
   - append-friendly 側の optional RNG capability
   を final catalog に見せずに source-backed に並べられるようになった。
 - current next narrow step は provider placement をさらに広げることではなく、`auditable_authority_witness` の最小 witness shape comparison に置く方が自然だと整理できた。
+- reviewer は 1 回 + 長め wait 1 回で completion し、substantive finding は無かった。
 
 ## 7. Changes in understanding
 
