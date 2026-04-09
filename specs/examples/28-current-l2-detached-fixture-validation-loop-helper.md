@@ -34,11 +34,19 @@ current detached validation loop で 1 fixture の反復を支える actual narr
 4. target fixture だけを一時 directory に複製した single-fixture aggregate artifact を emit する
 5. full directory aggregate と single-fixture aggregate の `summary_core` を compare する
 
+さらに current first tranche では、fixture 引数に
+
+- explicit path
+- current fixture directory に対する stem shorthand
+
+を受けてよい。missing fixture は deep IO error に落とさず fail-fast に止める。
+
 さらに current helper は、operational friction を下げるために次を支えてよい。
 
 - fixture 引数は explicit path だけでなく fixture stem shorthand でも受けてよい
 - `smoke-fixture` と `compare-fixtures` の run label は、明示されない場合 fixture stem から導出してよい
 - missing fixture / missing fixture directory は emitter subprocess へ落とす前に fail-closed にしてよい
+- noisy な full-vs-single aggregate contrast と fixture-to-fixture aggregate compare を分けるため、`compare-fixture-aggregates` subcommand を追加してよい
 
 この helper は次を行わない。
 
@@ -101,6 +109,9 @@ reference fixture を併用するときは、reference 側もその stem を def
 
 この cut にすると、新しい fixture を足した直後でも
 「difference が出ること自体」は smoke を止める理由にならない。
+current first tranche では、`smoke-fixture` は compare helper が `1` を返したとき
+それが informational difference であることを stdout に short note として補足してよい。
+current second tranche では、`compare-fixture-aggregates` を single-fixture aggregate 同士の direct compare convenience として許してよい。
 
 ## fixture authoring との関係
 
@@ -127,4 +138,6 @@ reference fixture を併用するときは、reference 側もその stem を def
 - `smoke-fixture` は current detached validation loop の non-production convenience として許容してよい
 - bundle compare / aggregate compare の existing helper をそのまま再利用してよい
 - compare exit code `1` は differences found として informational 扱いに留めてよい
+- fixture 引数は current first tranche として stem shorthand を受けてよく、missing fixture は fail-fast に止めてよい
+- current second tranche では `compare-fixture-aggregates` により、single-fixture aggregate 同士の compare convenience を thin helper に入れてよい
 - ただし production CLI、final exporter API、final path policy はまだ固定しない

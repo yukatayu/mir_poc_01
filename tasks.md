@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 13:07 JST
+最終更新: 2026-04-09 13:20 JST
 
 ## この文書について
 
@@ -33,14 +33,14 @@
 
 ## 次に自走で進める順番と rough estimate
 
-| 順番 | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
-|---|---|---|---|---|---|---|
-| 1 | detached validation loop の運用摩擦低減 | fixture を足して export / compare / triage を反復しやすくする | 中 | 1〜3 task / 半日〜2日 | 自走可能 | 既存 helper と detached loop を使って friction point を実地観測する |
-| 2 | authoritative room baseline の docs-first 精密化 | activation / authority / consistency / RNG の最小 practical bundle を厚くする | 中〜重 | 2〜4 task / 2〜5日 | 自走可能 | すごろく room などの practical example に直結しやすい |
-| 3 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
-| 4 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
-| 5 | drift suppression / checkpoint sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task というより closeout package |
-| 6 | Phase 3 reserve path reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
+| 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 1 | Phase 2 maintenance tail | detached validation loop の運用摩擦低減 | fixture を足して export / compare / triage を反復しやすくする | 中 | 1〜3 task / 半日〜2日 | 自走可能 | 既存 helper と detached loop を使って friction point を実地観測する |
+| 2 | Phase 4 前半 | authoritative room baseline の docs-first 精密化 | activation / authority / consistency / RNG の最小 practical bundle を厚くする | 中〜重 | 2〜4 task / 2〜5日 | 自走可能 | すごろく room などの practical example に直結しやすい |
+| 3 | Phase 4 前半〜中盤 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
+| 4 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
+| 5 | cross-phase checkpoint | drift suppression / checkpoint sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task というより closeout package |
+| 6 | Phase 3 reserve path | Phase 3 reserve path reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
 
 ## 自走で進められる task package
 
@@ -70,7 +70,7 @@
 - detached validation loop の入口自体は成立済み
 - payload core / bundle context / detached non-core / explanation の split も固まっている
 - production API にしない限り、手戻りは比較的小さい
-- current baseline では fixture stem shorthand、default run label derivation、missing fixture の fail-fast を thin helper に入れてよく、next friction を aggregate-noise / reference update 側へ寄せられる
+- current baseline では fixture stem shorthand、missing fixture の fail-fast、informational compare note、single-fixture aggregate direct compare convenience を thin helper に入れてよく、next friction を reference update / longer compare triage 側へ寄せられる
 
 #### 成果物のイメージ
 

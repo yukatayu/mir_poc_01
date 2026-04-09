@@ -84,6 +84,10 @@ current detached validation loop の tiny wrapper は、aggregate compare 側で
   - 2 run label を受け取る
   - `target/current-l2-detached/aggregates/<run-label>/batch-summary.detached.json` から path を導出する
   - aggregate compare helper を呼ぶ
+- `compare-fixture-aggregates`
+  - 2 fixture を temporary single-fixture directory に複製する
+  - `summary_core` compare 用の aggregate artifact を 2 本だけ emit する
+  - noisy な full-vs-single contrast を経由せず single-fixture aggregate 同士を比べる
 
 この wrapper は convenience discovery を与えるだけであり、final compare input discovery policy を固定しない。
 

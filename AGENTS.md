@@ -122,6 +122,7 @@ Every report should contain, in this order:
   を整理するための文書である。
 - `tasks.md` は append-only の履歴ではない。**更新時には毎回全体を書き直し、現況と整合した snapshot に保つこと。**
 - phase end、checkpoint close、mainline 切り替え、major blocker の入れ替わりが起きた task では、同じ task の中で `tasks.md` の更新要否を確認すること。
+- `tasks.md` の **「次に自走で進める順番と rough estimate」** には、各 task package がどの大局 phase の前半 / 中盤 / reserve path かを短く書くこと。
 - `tasks.md` では、少なくとも次を分けて書くこと。
   - 自走可能な task package
   - 方針決定が必要な blocker / open question

@@ -128,6 +128,10 @@ def smoke_single_run_label(run_label: str) -> str:
     return ensure_run_label(f"{ensure_run_label(run_label)}-single")
 
 
+def default_single_fixture_aggregate_run_label(fixture_path: Path) -> str:
+    return smoke_single_run_label(default_run_label_for_fixture(fixture_path))
+
+
 def run_subprocess(cmd: list[str]) -> int:
     completed = subprocess.run(cmd, cwd=REPO_ROOT)
     return completed.returncode
@@ -356,6 +360,49 @@ def command_compare_fixtures(args: argparse.Namespace) -> int:
     print(f"left artifact : {left_artifact}", flush=True)
     print(f"right artifact: {right_artifact}", flush=True)
     return compare_artifacts(left_artifact, right_artifact)
+
+
+def emit_single_fixture_aggregate(
+    fixture_path: Path,
+    output_path: Path,
+    overwrite: bool,
+) -> int:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        single_fixture_dir = Path(temp_dir)
+        copy_fixture_bundle_to_directory(fixture_path, single_fixture_dir)
+        return emit_aggregate(single_fixture_dir, output_path, overwrite)
+
+
+def command_compare_fixture_aggregates(args: argparse.Namespace) -> int:
+    artifact_root = Path(args.artifact_root)
+    left_fixture = resolve_fixture_argument(args.left_fixture)
+    right_fixture = resolve_fixture_argument(args.right_fixture)
+    left_label = (
+        ensure_run_label(args.left_label)
+        if args.left_label
+        else default_single_fixture_aggregate_run_label(left_fixture)
+    )
+    right_label = (
+        ensure_run_label(args.right_label)
+        if args.right_label
+        else default_single_fixture_aggregate_run_label(right_fixture)
+    )
+    left_artifact = aggregate_artifact_path(artifact_root, left_label)
+    right_artifact = aggregate_artifact_path(artifact_root, right_label)
+
+    left_exit = emit_single_fixture_aggregate(left_fixture, left_artifact, args.overwrite)
+    if left_exit != 0:
+        return left_exit
+
+    right_exit = emit_single_fixture_aggregate(
+        right_fixture, right_artifact, args.overwrite
+    )
+    if right_exit != 0:
+        return right_exit
+
+    print(f"left aggregate artifact : {left_artifact}", flush=True)
+    print(f"right aggregate artifact: {right_artifact}", flush=True)
+    return compare_aggregates(left_artifact, right_artifact)
 
 
 def command_smoke_fixture(args: argparse.Namespace) -> int:
@@ -728,6 +775,43 @@ def build_parser() -> argparse.ArgumentParser:
         help="artifact root directory (default: target/current-l2-detached)",
     )
     compare_aggregates_parser.set_defaults(func=command_compare_aggregates)
+
+    compare_fixture_aggregates_parser = subparsers.add_parser(
+        "compare-fixture-aggregates",
+        help=(
+            "2 fixture を single-fixture aggregate artifact として emit して "
+            "summary_core を比較する"
+        ),
+    )
+    compare_fixture_aggregates_parser.add_argument("left_fixture")
+    compare_fixture_aggregates_parser.add_argument("right_fixture")
+    compare_fixture_aggregates_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    compare_fixture_aggregates_parser.add_argument(
+        "--left-label",
+        help=(
+            "left aggregate artifact を保存する run label; omitted なら "
+            "left fixture stem から <stem>-single を導出する"
+        ),
+    )
+    compare_fixture_aggregates_parser.add_argument(
+        "--right-label",
+        help=(
+            "right aggregate artifact を保存する run label; omitted なら "
+            "right fixture stem から <stem>-single を導出する"
+        ),
+    )
+    compare_fixture_aggregates_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifact を明示的に上書きする",
+    )
+    compare_fixture_aggregates_parser.set_defaults(
+        func=command_compare_fixture_aggregates
+    )
 
     compare_static_gate_parser = subparsers.add_parser(
         "compare-static-gates",

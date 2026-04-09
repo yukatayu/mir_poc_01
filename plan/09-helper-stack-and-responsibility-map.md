@@ -231,6 +231,9 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `target/current-l2-detached/` を current non-production default candidate として扱う
   - explicit path compare、fixture-to-artifact compare、aggregate summary export、run-label aggregate compare を最小で支える
   - `smoke-fixture` subcommand では、1 fixture の bundle emit、optional reference compare、single-fixture aggregate smoke を 1 command で支える
+  - current first tranche では fixture 引数の stem shorthand 解決と missing fixture の fail-fast を担ってよい
+  - current second tranche では `compare-fixture-aggregates` により、single-fixture aggregate 同士の direct compare convenience を担ってよい
+  - compare helper の exit code `1` は informational difference として扱い、そのことを short note で補足してよい
 
 ## parser boundary 側の current splice point
 

@@ -827,6 +827,21 @@
   - Phase 3 は current checkpoint では reserve path のままで、later pressure が出たときだけ reopen する
   - rough estimate は promise ではなく、comparison / report / review / validation / drift suppression を含む概算として扱う
 
+### 2026-04-09 detached validation loop friction second tranche
+
+- `plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/91-maintenance-rules.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
+  - `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md`
+  - `AGENTS.md`
+  - `scripts/current_l2_detached_loop.py`
+  - `scripts/tests/test_current_l2_detached_loop.py`
+  - `docs/reports/0365-detached-loop-friction-second-tranche.md`
+  - `docs/reports/0366-review-detached-loop-friction-second-tranche.md`
+
+- 反映した current reading は次である。
+  - detached loop の second tranche では、noisy な full-vs-single aggregate contrast を `smoke-fixture` に残しつつ、single-fixture aggregate 同士の direct compare は `compare-fixture-aggregates` に分離してよい
+  - `tasks.md` の rough estimate table には phase 情報を短く添える
+
 ### named profile catalog と mirror boundary
 
 - `0066`

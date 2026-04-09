@@ -171,6 +171,105 @@ class DetachedLoopPathTests(unittest.TestCase):
             temp_root / "artifacts" / "bundles" / "right-case" / "right-case.detached.json",
         )
 
+    def test_compare_fixture_aggregates_derives_single_labels_and_copies_sidecars(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+
+            left_fixture = fixture_dir / "left-case.json"
+            left_fixture.write_text("{}", encoding="utf-8")
+            (fixture_dir / "left-case.host-plan.json").write_text("{}", encoding="utf-8")
+
+            right_fixture = fixture_dir / "right-case.json"
+            right_fixture.write_text("{}", encoding="utf-8")
+
+            emitted_aggregates: list[tuple[Path, Path, bool, list[str]]] = []
+            compared_aggregates: list[tuple[Path, Path]] = []
+            original_emit_aggregate = loop.emit_aggregate
+            original_compare_aggregates = loop.compare_aggregates
+
+            def fake_emit_aggregate(
+                fixture_directory: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                emitted_aggregates.append(
+                    (
+                        fixture_directory,
+                        output,
+                        overwrite,
+                        sorted(path.name for path in fixture_directory.iterdir()),
+                    )
+                )
+                return 0
+
+            def fake_compare_aggregates(left: Path, right: Path) -> int:
+                compared_aggregates.append((left, right))
+                return 0
+
+            loop.emit_aggregate = fake_emit_aggregate
+            loop.compare_aggregates = fake_compare_aggregates
+            try:
+                exit_code = loop.command_compare_fixture_aggregates(
+                    argparse.Namespace(
+                        left_fixture=str(left_fixture),
+                        right_fixture=str(right_fixture),
+                        artifact_root=str(temp_root / "artifacts"),
+                        left_label=None,
+                        right_label=None,
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_aggregate = original_emit_aggregate
+                loop.compare_aggregates = original_compare_aggregates
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            emitted_aggregates[0][1],
+            temp_root
+            / "artifacts"
+            / "aggregates"
+            / "left-case-single"
+            / "batch-summary.detached.json",
+        )
+        self.assertEqual(
+            emitted_aggregates[1][1],
+            temp_root
+            / "artifacts"
+            / "aggregates"
+            / "right-case-single"
+            / "batch-summary.detached.json",
+        )
+        self.assertEqual(
+            emitted_aggregates[0][3],
+            ["left-case.host-plan.json", "left-case.json"],
+        )
+        self.assertEqual(
+            emitted_aggregates[1][3],
+            ["right-case.json"],
+        )
+        self.assertEqual(
+            compared_aggregates,
+            [
+                (
+                    temp_root
+                    / "artifacts"
+                    / "aggregates"
+                    / "left-case-single"
+                    / "batch-summary.detached.json",
+                    temp_root
+                    / "artifacts"
+                    / "aggregates"
+                    / "right-case-single"
+                    / "batch-summary.detached.json",
+                )
+            ],
+        )
+
     def test_smoke_fixture_emits_bundle_and_aggregate_and_tolerates_diff_status_one(
         self,
     ) -> None:
