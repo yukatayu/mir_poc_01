@@ -16,3 +16,10 @@
   を、日本語で短くまとめる。
 - 細かい wording drift や small helper cut は、ここでは省略してよい。
 - 必要なところだけ具体例や疑似コードを置く。
+
+## 補助メモ
+
+- current L2 の representative example や phase 要約を読むときに引っかかりやすい語の短い説明は
+  `docs/research_abstract/current-l2-reading-notes.md`
+  にまとめる。
+- ここも規範判断の正本ではない。用語の厳密な根拠は `specs/` と `plan/` を参照する。

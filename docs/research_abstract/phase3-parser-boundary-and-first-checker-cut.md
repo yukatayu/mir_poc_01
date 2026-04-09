@@ -1,5 +1,7 @@
 # Phase 3 要約 — parser boundary と first checker cut
 
+短い用語補足は `docs/research_abstract/current-l2-reading-notes.md` を参照すること。
+
 ## 何をした phase か
 
 Phase 3 は、

@@ -1,5 +1,7 @@
 # Phase 2 要約 — parser-free PoC と detached validation loop
 
+短い用語補足は `docs/research_abstract/current-l2-reading-notes.md` を参照すること。
+
 ## 何をした phase か
 
 Phase 2 は、current L2 semantics を

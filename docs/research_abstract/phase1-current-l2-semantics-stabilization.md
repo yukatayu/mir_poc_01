@@ -1,5 +1,7 @@
 # Phase 1 要約 — current L2 semantics stabilization
 
+短い用語補足は `docs/research_abstract/current-l2-reading-notes.md` を参照すること。
+
 ## 何をした phase か
 
 Phase 1 は、current L2 の semantics core を
