@@ -76,8 +76,9 @@ flowchart LR
 7. repo 全体の研究 phase、現在位置、重さ、自走可否を見たいときは `plan/17-research-phases-and-autonomy-gates.md`
 8. いま自走で進める task と、方針決定が必要な current blocker を素早く見たいときは `tasks.md`
 9. shared-space / membership / authoritative room の docs-first boundary を先に掴みたいときは `plan/16-shared-space-membership-and-example-boundary.md`、`specs/examples/121-shared-space-authoritative-room-baseline.md`、`specs/examples/122-shared-space-catalog-working-subset-comparison.md`、`specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`、`specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`、`specs/examples/125-shared-space-control-plane-carrier-threshold.md`
-10. phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
-11. その後、必要な subsystem に進む
+10. Phase 5 の small decidable core / proof / async-control boundary を先に掴みたいときは `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md` と `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
+11. phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
+- その後、必要な subsystem に進む
 12. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
 13. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
 14. parser なしで representative examples を machine-readable に扱う最小 AST fixture schema は `specs/examples/02-current-l2-ast-fixture-schema.md`、fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/`

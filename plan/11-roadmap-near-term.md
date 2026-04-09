@@ -5,7 +5,7 @@
 この文書は、今から数 task 先までの near-term roadmap を示す。
 ここに書く step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
-current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed しており、reconnect subline も freeze threshold まで整理でき、さらに current checkpoint では **Phase 3 self-driven portion を reserve path に戻す threshold** まで固定した。したがって、**現在は Phase 0 / 1 / 2 を maintenance tail として維持しつつ、near-term の主線を Phase 4 side line と Phase 5 inventory line に移す** と読む。
+current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。baseline closeout と top-level consistency sweep の first pass は fixed しており、reconnect subline も freeze threshold まで整理でき、さらに current checkpoint では **Phase 3 self-driven portion を reserve path に戻す threshold** まで固定した。その後、Phase 4 の current package も `specs/examples/125...` までで checkpoint close に入り、Phase 5 入口の small decidable core / proof / async-control inventory も `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` で first package close まで進んだ。したがって、**現在は Phase 0 / 1 / 2 を maintenance tail として維持しつつ、Phase 4 / 5 の current package は checkpoint maintenance と later reopen 候補として読む** のが自然である。
 
 ## いまから数 task の主眼
 
@@ -39,6 +39,13 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - parser boundary / first checker cut / detached validation loop と衝突しない small decidable core inventory を先に作る
 - theorem prover / model checker 側へ残す global property を current docs に合わせて明確化する
 - `atomic_cut` を最小核に留め、higher-level async-control family を docs-first に比較する
+- current first package は `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` に集約済みであり、current checkpoint では
+  - `core_static_checker`
+  - `theorem_prover_boundary`
+  - `protocol_verifier_boundary`
+  - `runtime_policy_boundary`
+  の 4-way split を current first choice とみなしてよい
+- next later candidate は、proof-obligation matrix と external handoff artifact shape をどこまで narrow に切るかの comparison である
 - rough weight: 重
 - rough 所要: 3〜6 task / 3〜8日
 
@@ -78,7 +85,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
 | consistency / fairness / causal metadata catalog を working subset として比較する | current package close | `specs/examples/121...` から `specs/examples/125...` までで checkpoint close。stronger control-plane split は later pressure が出たときだけ reopen |
-| small decidable core / proof / async-control inventory を一段進める | 3〜6 task | final type system actualization はまだ含まない |
+| small decidable core / proof / async-control inventory を一段進める | current package close | `specs/examples/126...` で 4-way split まで固定。next は proof-obligation matrix / external handoff artifact の later candidate |
 | detached validation loop を maintenance mode で維持する | 0〜1 task | current self-driven portion は close。`reference update / bless` は later candidate |
 | authoritative room baseline の drift を checkpoint close として維持する | 0〜1 task | current baseline は `specs/examples/121...` に集約済み |
 | Phase 3 reserve path を reopen する条件整理 | 0〜2 task | later pressure が出たときだけ着手 |

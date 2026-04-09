@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 17:50 JST
+最終更新: 2026-04-09 18:33 JST
 
 ## この文書について
 
@@ -14,24 +14,25 @@
 
 ## 現在の読み
 
-- 主線は **Phase 2 maintenance tail + Phase 5 inventory line** である。
+- 主線は **Phase 0 / 1 / 2 maintenance tail + cross-phase checkpoint maintenance** である。
 - Phase 4 は、authoritative room baseline / working subset / minimal witness core / delegated-provider practical cut / control-plane threshold comparison まで current package を切り終え、**checkpoint maintenance と later reopen candidate** に移った。
+- Phase 5 は、`specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` までで **small decidable core / proof / async-control boundary の first inventory package** を切り終え、checkpoint maintenance と later reopen candidate に移った。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
 
 ## 次に自走で進める順番と rough estimate
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を詰める | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留めたまま、higher-level async-control family と proof obligation catalog を docs-first に整理する |
-| 2 | Phase 4 checkpoint 後半 / later reopen 候補 | shared-space control-plane / catalog later reopen | `control_epoch` 相当の split や final catalog を later pressure 時だけ再開する | 中〜重 | 0〜3 task | 一部自走可能 | `specs/examples/121...` から `125...` までで current package は close。reopen は authority handoff / provider binding / activation frontier compare need が出たとき |
-| 3 | Phase 2 maintenance tail | detached validation loop residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | `reference update / bless` は retention / path policy 依存なので later candidate |
-| 4 | Phase 4 checkpoint maintenance | authoritative room baseline / working subset の drift 抑制 | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...`、working subset は `122...`、threshold は `125...` までで checkpoint close |
-| 5 | cross-phase checkpoint | drift suppression / mirror sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task ではなく closeout package |
+| 1 | cross-phase checkpoint | drift suppression / mirror sweep | Phase 4 / 5 package close 後の mirror drift を抑える | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | closeout package。Phase 5 package close 後の first maintenance line |
+| 2 | Phase 5 checkpoint 後半 / later reopen 候補 | proof-obligation matrix / external handoff artifact comparison | 4-way split を崩さずに theorem / protocol / runtime handoff の narrow candidate を比較する | 中〜重 | 0〜3 task | 一部自走可能 | `specs/examples/126...` までは close。reopen は actual checker / proof / protocol handoff pressure が出たとき |
+| 3 | Phase 4 checkpoint 後半 / later reopen 候補 | shared-space control-plane / catalog later reopen | `control_epoch` 相当の split や final catalog を later pressure 時だけ再開する | 中〜重 | 0〜3 task | 一部自走可能 | `specs/examples/121...` から `125...` までで current package は close。reopen は authority handoff / provider binding / activation frontier compare need が出たとき |
+| 4 | Phase 2 maintenance tail | detached validation loop residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | `reference update / bless` は retention / path policy 依存なので later candidate |
+| 5 | Phase 4 checkpoint maintenance | authoritative room baseline / working subset の drift 抑制 | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...`、working subset は `122...`、threshold は `125...` までで checkpoint close |
 | 6 | Phase 3 reserve path | parser boundary / first checker cut reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
 
 ## 自走で進められる task package
 
-### Task A. static analysis / type / theorem prover / async-control boundary inventory
+### Task A. static analysis / type / theorem prover / async-control boundary の checkpoint maintenance と later reopen 候補整理
 
 #### 目的
 
@@ -45,30 +46,35 @@
 
 - hybrid staged approach 自体は direction として固まっている。
 - parser boundary / detached validation loop / shared-space working subset も、inventory を支える前提として揃っている。
-- したがって current next promoted line はここである。
+- `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` で
+  - `core_static_checker`
+  - `theorem_prover_boundary`
+  - `protocol_verifier_boundary`
+  - `runtime_policy_boundary`
+  の 4-way split を current first choice として集約済みである。
 
 #### この task で残ること
 
-- small decidable core candidate の cluster 切り出し
-- async-control family を low-level memory-order 語彙に直結させずに整理すること
-- shared-space / continuation / fairness / scheduler を external proof line に残す根拠整理
+- proof-obligation matrix をどの artifact / relation 単位で表すか
+- external handoff artifact を checker / prover / protocol 側でどう分けるか
+- low-level memory-order family を将来 external vocabulary としてだけ残すか
 
 #### いま自走できる理由
 
-- final type system actualization に入らず、inventory comparison に留める限り手戻りが比較的小さい
+- final type system actualization に入らず、inventory comparison と handoff comparison に留める限り手戻りが比較的小さい
 - `specs/09` の invariants、Phase 3 reserve path、Phase 4 working subset の境界がすでにある
 
 #### 重さ
 
-- 重
+- 中〜重
 
 #### rough 所要
 
-- 3〜6 task / 3〜8日
+- 0〜3 task / later pressure 時のみ
 
 #### 現在の推奨度
 
-- **最優先の active package**
+- **checkpoint maintenance / later reopen candidate**
 
 ---
 

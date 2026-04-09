@@ -137,7 +137,7 @@
 
 #### 現在地
 
-- **入口整理段階**
+- **first inventory package close。`specs/examples/126...` で 4-way split を current first choice に固定し、次は later pressure が出たときの narrow reopen 候補を残す段階**
 
 #### 重さ
 
@@ -199,7 +199,8 @@
 2. **Phase 4 前半の side line**
    - shared-space / membership の baseline closeout を保ちつつ、catalog comparison を進める
 3. **Phase 5 入口の inventory line**
-   - small decidable core と proof boundary の inventory を進める
+   - small decidable core と proof boundary の inventory は `specs/examples/126...` までで current first package close に入った
+   - next pressure が出たときだけ、proof-obligation matrix / external handoff artifact の比較を reopen 候補にする
 
 shared-space line は、これらを壊さない範囲で進める **Phase 4 の side line** である。
 Phase 3 は current checkpoint では **reserve path** として残し、later pressure が出たときだけ reopen 候補にする。
@@ -216,8 +217,9 @@ user 指示を反映した current immediate sequence は次である。
    - `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読めるかは `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切った
    - control-plane separated causal carrier を authoritative room side line に reopen する threshold も `specs/examples/125-shared-space-control-plane-carrier-threshold.md` までで current first choice を切った
    - stronger control-plane split は later pressure が出たときだけ reopen 候補に残す
-3. **Phase 5 入口の inventory line を進める**
-   - small decidable core / proof boundary / async-control boundary を narrow に棚卸しする
+3. **Phase 5 current package は checkpoint close として維持する**
+   - small decidable core / proof boundary / async-control boundary の 4-way split は current first choice に固定した
+   - proof-obligation matrix / external handoff artifact は later pressure が出たときだけ reopen 候補にする
 4. **detached validation loop は maintenance mode に戻し、authoritative room baseline は checkpoint close として維持する**
 5. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
 
