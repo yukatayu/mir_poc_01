@@ -279,7 +279,9 @@
 - `specs/examples/145-current-l2-theorem-line-retained-bridge-review-session-link-threshold.md` により、current first cut は retained-ready bless bridge に review-session ref までは足し、reviewer actor / timestamp / lifecycle state は second step に残す current first choice まで固定済みである。
 - `specs/examples/146-current-l2-theorem-line-session-linked-retained-bridge-review-observation-threshold.md` により、current first cut は session-linked retained bridge に `reviewed_by_ref + reviewed_at_ref` までは足し、session lifecycle state と retention state は second step に残す current first choice まで固定済みである。
 - `specs/examples/147-current-l2-theorem-line-observed-session-lifecycle-threshold.md` により、current first cut は observed session-linked retained bridge に `review_session_state` までは足し、retention state / actual retained path policy / emitted artifact pressure は second step に残す current first choice まで固定済みである。
-- 引き続き OPEN なのは、retention state / actual retained path policy / emitted artifact threshold をどこまで足すか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
+- `specs/examples/148-current-l2-theorem-line-lifecycle-ready-retention-state-threshold.md` により、current first cut は lifecycle-ready retained bridge に `retention_state` までは足し、actual retained path policy / emitted artifact pressure は second step に残す current first choice まで固定済みである。
+- `specs/examples/149-current-l2-theorem-line-retention-ready-path-policy-threshold.md` により、current first cut は retention-ready retained bridge に `retained_path_policy_ref` までは足し、actual emitted notebook artifact は second step に残す current first choice まで固定済みである。
+- 引き続き OPEN なのは、actual emitted notebook artifact threshold をどこまで足すか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
 
 ### richer host interface
 
