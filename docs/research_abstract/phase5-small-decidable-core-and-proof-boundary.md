@@ -146,7 +146,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`handoff_emitter_ref`**
 までは足してよく、そのさらに次段として
 **`consumer_adapter_ref`**
-までは足してよいが、actual notebook exchange rule / adapter-local validation はまだ後段に残す。
+までは足してよく、そのさらに次段として
+**`exchange_rule_ref`**
+までは足してよいが、adapter-local validation / environment-specific invocation surface はまだ後段に残す。
 
 ## まだやっていないこと
 
@@ -155,7 +157,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- notebook exchange rule threshold をどこまで足すか
+- adapter-validation threshold をどこまで足すか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
