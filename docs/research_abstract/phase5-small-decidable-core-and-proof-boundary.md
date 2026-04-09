@@ -223,6 +223,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`archive_bundle_member_family_ref`**
 までは足してよいが、actual archive member body compare は still 後段に残す。
 
+**`archive_member_body_compare_ref`**
+までは足してよいが、actual archive bless / update policy は still 後段に残す。
+
 ## まだやっていないこと
 
 - public checker API の finalization
@@ -230,8 +233,8 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- actual archive member body compare の最小 shapeをどう切るか
-- actual archive member body compare をどこまで theorem-line bridge に寄せるか
+- actual archive bless / update policy の最小 shapeをどう切るか
+- actual archive bless / update policy をどこまで theorem-line bridge に寄せるか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
