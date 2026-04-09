@@ -265,7 +265,9 @@
 - `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md` により、theorem-side projection bundle の `evidence_refs` は typed symbolic ref family を current first choice に置き、actual path / URI / emitted artifact id は later reopen に残す current cut まで固定済みである。
 - `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md` により、projection bundle を current phase では docs-only に留め、public checker migration は concrete theorem consumer pressure が出たときだけ reopen 候補にする threshold まで固定済みである。
 - `specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md` により、concrete theorem consumer bridge の current minimum contract row core は `obligation_kind + evidence_refs` に留め、`goal_text` / `proof_hint` / `consumer_hint` は later consumer-specific attachment に残す threshold まで固定済みである。
-- 引き続き OPEN なのは、concrete theorem consumer class を何に置くか、`goal_text` / `proof_hint` / `consumer_hint` の attachment family をどこまで docs-only で先に比べるか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
+- `specs/examples/134-current-l2-theorem-line-consumer-class-comparison.md` により、concrete theorem consumer class の current first practical candidate は `proof_notebook`、`proof_assistant_adapter` は second practical candidate、`theorem_export_checker` は later candidate に固定済みである。
+- `specs/examples/135-current-l2-theorem-line-notebook-attachment-family-comparison.md` により、`proof_notebook` first bridge の current lightweight attachment は `goal_text` に留め、`proof_hint` / `consumer_hint` は later attachment family に残す threshold まで固定済みである。
+- 引き続き OPEN なのは、notebook bridge artifact を docs-only に留めるか stable contract sketch に進めるか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
 
 ### richer host interface
 

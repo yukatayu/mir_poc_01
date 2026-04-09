@@ -100,14 +100,21 @@ minimum contract row core を
 に留め、`goal_text` / `proof_hint` / `consumer_hint` は
 consumer-specific attachment として後段に残すのが current first choice である。
 
+その次段では、concrete theorem consumer class の current first practical candidate を
+**`proof_notebook`**
+に置き、`proof_assistant_adapter` は second practical candidate、
+`theorem_export_checker` は later candidate に留めるのが自然だと整理した。
+また `proof_notebook` first bridge の current lightweight attachment は
+**`goal_text`**
+に留め、`proof_hint` / `consumer_hint` はさらに後段へ残すのが current first choice である。
+
 ## まだやっていないこと
 
 - public checker API の finalization
 - theorem prover input schema の finalization
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
-- concrete theorem consumer class を何に置くか
-- `goal_text` / `proof_hint` / `consumer_hint` の attachment family
+- notebook bridge artifact を docs-only のまま保つか stable contract sketch に進むか
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの
