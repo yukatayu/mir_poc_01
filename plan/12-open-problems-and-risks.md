@@ -290,7 +290,8 @@
 - `specs/examples/156-current-l2-theorem-line-invocation-ready-exchange-body-threshold.md` により、current first cut は invocation-ready retained bridge に `exchange_rule_body_ref` までは足し、concrete runtime coupling / file-blob transport / failure body は second step に残す current first choice まで固定済みである。
 - `specs/examples/157-current-l2-theorem-line-exchange-body-ready-runtime-coupling-threshold.md` により、current first cut は exchange-body-ready retained bridge に `runtime_coupling_ref` までは足し、concrete transport protocol / failure body は second step に残す current first choice まで固定済みである。
 - `specs/examples/158-current-l2-theorem-line-runtime-coupling-ready-transport-protocol-threshold.md` により、current first cut は runtime-coupling-ready retained bridge に `transport_protocol_ref` までは足し、concrete failure body は second step に残す current first choice まで固定済みである。
-- 引き続き OPEN なのは、failure-body threshold をどこまで足すか、concrete failure body を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
+- `specs/examples/159-current-l2-theorem-line-transport-ready-failure-body-threshold.md` により、current first cut は transport-ready retained bridge に `failure_body_ref` までは足し、actual runtime invocation protocol / host binding / failure wording は second step に残す current first choice まで固定済みである。
+- 引き続き OPEN なのは、actual-invocation-protocol threshold をどこまで足すか、consumer-host-specific binding と failure wording を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
 
 ### richer host interface
 
