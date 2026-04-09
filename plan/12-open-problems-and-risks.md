@@ -275,7 +275,9 @@
 - `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md` により、current first cut は bridge sketch に compare basis refs までは足し、bless decision / reviewer notes / retained path は second step に残す current first choice まで固定済みである。
 - `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md` により、current first cut は compare-ready bridge sketch に bless decision state までは足し、reviewer notes / retained path / review session metadata は second step に残す current first choice まで固定済みである。
 - `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md` により、current first cut は bless-ready bridge sketch に review-note refs までは足し、retained notebook path / reviewer actor / timestamp / review session metadata は second step に残す current first choice まで固定済みである。
-- 引き続き OPEN なのは、review-linked bless bridge に retained notebook path / review session lifecycle をどこまで足すか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
+- `specs/examples/144-current-l2-theorem-line-review-linked-bless-bridge-retained-notebook-threshold.md` により、current first cut は review-linked bless bridge に retained-notebook ref までは足し、actual retained path / overwrite / retention policy は second step に残す current first choice まで固定済みである。
+- `specs/examples/145-current-l2-theorem-line-retained-bridge-review-session-link-threshold.md` により、current first cut は retained-ready bless bridge に review-session ref までは足し、reviewer actor / timestamp / lifecycle state は second step に残す current first choice まで固定済みである。
+- 引き続き OPEN なのは、session-linked retained bridge に actor / timestamp / lifecycle state をどこまで足すか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
 
 ### richer host interface
 

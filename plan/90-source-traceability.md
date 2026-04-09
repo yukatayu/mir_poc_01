@@ -1066,3 +1066,12 @@
   - `docs/reports/0404-review-phase5-review-unit-to-bridge-sketch-comparison.md`
   - `docs/reports/0405-phase5-compare-ready-bridge-package.md`
   - `docs/reports/0406-review-phase5-compare-ready-bridge-package.md`
+
+### 2026-04-09 phase5 retained bridge addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/144-current-l2-theorem-line-review-linked-bless-bridge-retained-notebook-threshold.md`
+  - `specs/examples/145-current-l2-theorem-line-retained-bridge-review-session-link-threshold.md`
+  - `docs/reports/0407-phase5-retained-bridge-session-link-package.md`
+  - `docs/reports/0408-review-phase5-retained-bridge-session-link-package.md`
+  - `docs/reports/0409-review-phase5-retained-bridge-session-link-package-followup.md`

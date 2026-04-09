@@ -250,6 +250,10 @@
   - Phase 5 theorem-side compare-ready bridge sketch の次段として、bless decision state だけをどこまで先に足し、review session metadata をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md`
   - Phase 5 theorem-side bless-ready bridge sketch の次段として、review note refs だけをどこまで先に足し、review session metadata と retained path をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/144-current-l2-theorem-line-review-linked-bless-bridge-retained-notebook-threshold.md`
+  - Phase 5 theorem-side review-linked bless bridge の次段として、retained-notebook ref だけをどこまで先に足し、review session metadata と actual retained path policy をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/145-current-l2-theorem-line-retained-bridge-review-session-link-threshold.md`
+  - Phase 5 theorem-side retained-ready bless bridge の次段として、review-session ref だけをどこまで先に足し、actor / timestamp / lifecycle state をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
