@@ -272,7 +272,9 @@
 - `specs/examples/138-current-l2-theorem-line-concrete-notebook-workflow-pressure-comparison.md` により、concrete notebook workflow pressure の current first threshold は human review checklist / walkthrough pressure に置き、compare / bless-like flow は second step、actual file exchange はさらに後段に残す current first choice まで固定済みである。
 - `specs/examples/139-current-l2-theorem-line-notebook-review-unit-named-bundle-threshold.md` により、current first cut は review checklist / walkthrough unit を docs-only named review unit bundle に寄せるところまでであり、stronger notebook bridge sketch は second step に残す current first choice まで固定済みである。
 - `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md` により、current first cut は named review unit を docs-only notebook bridge sketch (`bridge_subject_ref + review_units + bridge_goal_text`) へ寄せるところまでであり、compare / bless-like review flow metadata は second step に残す current first choice まで固定済みである。
-- 引き続き OPEN なのは、bridge sketch に compare / bless-like review flow metadata をどこまで足すか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
+- `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md` により、current first cut は bridge sketch に compare basis refs までは足し、bless decision / reviewer notes / retained path は second step に残す current first choice まで固定済みである。
+- `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md` により、current first cut は compare-ready bridge sketch に bless decision state までは足し、reviewer notes / retained path / review session metadata は second step に残す current first choice まで固定済みである。
+- 引き続き OPEN なのは、bless-ready bridge sketch に review-session metadata をどこまで足すか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
 
 ### richer host interface
 

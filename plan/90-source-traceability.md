@@ -1054,3 +1054,14 @@
   - `specs/examples/135-current-l2-theorem-line-notebook-attachment-family-comparison.md`
   - `docs/reports/0393-phase5-theorem-line-notebook-bridge-package.md`
   - `docs/reports/0394-review-phase5-theorem-line-notebook-bridge-package.md`
+
+### 2026-04-09 phase5 compare-ready bridge addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md`
+  - `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`
+  - `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md`
+  - `docs/reports/0403-phase5-review-unit-to-bridge-sketch-comparison.md`
+  - `docs/reports/0404-review-phase5-review-unit-to-bridge-sketch-comparison.md`
+  - `docs/reports/0405-phase5-compare-ready-bridge-package.md`
+  - `docs/reports/0406-review-phase5-compare-ready-bridge-package.md`
