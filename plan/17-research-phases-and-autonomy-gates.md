@@ -116,7 +116,7 @@
 
 #### 現在地
 
-- **前半の authoritative baseline closeout 済み。catalog comparison の first cut として working subset row を切り、`auditable_authority_witness` の minimal witness core と authoritative delegated-provider practical cut まで整理済み。current mainline は causal stop line の refinement に移行**
+- **前半の authoritative baseline closeout 済み。catalog comparison の first cut として working subset row を切り、`auditable_authority_witness` の minimal witness core、authoritative delegated-provider practical cut、control-plane separated carrier threshold comparison まで整理済み。current package は checkpoint close で、next promoted line は Phase 5 inventory へ寄せる**
 
 #### 重さ
 
@@ -210,11 +210,12 @@ user 指示を反映した current immediate sequence は次である。
 
 1. **detached validation loop の運用摩擦低減を先に進める**
    - export / compare / triage の current baseline は checkpoint close とみなし、`reference update / bless` だけを later candidate に残す
-2. **consistency / fairness / causal metadata catalog を working subset として比較する**
+2. **consistency / fairness / causal metadata catalog の current package は checkpoint close として維持する**
    - fixed final catalog は作らず、room profile の stop line を増やす
    - current first cut は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` の row set とし、`specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` までで minimal witness core を切る
    - `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読めるかは `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切った
-   - next narrow step は control-plane separated causal carrier を authoritative room side line に reopen する threshold を比べる
+   - control-plane separated causal carrier を authoritative room side line に reopen する threshold も `specs/examples/125-shared-space-control-plane-carrier-threshold.md` までで current first choice を切った
+   - stronger control-plane split は later pressure が出たときだけ reopen 候補に残す
 3. **Phase 5 入口の inventory line を進める**
    - small decidable core / proof boundary / async-control boundary を narrow に棚卸しする
 4. **detached validation loop は maintenance mode に戻し、authoritative room baseline は checkpoint close として維持する**

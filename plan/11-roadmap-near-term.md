@@ -27,7 +27,8 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - room mode catalog を final fixed catalog と見なさず、working subset と deferred finalization に分ける
 - `auditable_authority_witness` の最小 witness shape は `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` までで切ってよい
 - `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読めるかの comparison は `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切った
-- 次の narrow step は control-plane separated causal carrier を authoritative room side line に reopen する threshold を比べることに置く
+- control-plane separated causal carrier を authoritative room side line に reopen する threshold comparison も `specs/examples/125-shared-space-control-plane-carrier-threshold.md` までで current first choice を切った
+- current checkpoint では、この package は checkpoint close とみなし、stronger control-plane split の actualization は later pressure が出たときだけ reopen 候補に戻す
 - append-friendly room と authoritative room の contrast を崩さずに catalog の stop line を増やす
 - rough weight: 重
 - rough 所要: 3〜6 task / 4〜10日
@@ -76,7 +77,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| consistency / fairness / causal metadata catalog を working subset として比較する | 3〜6 task | final fixed catalog はまだ作らない |
+| consistency / fairness / causal metadata catalog を working subset として比較する | current package close | `specs/examples/121...` から `specs/examples/125...` までで checkpoint close。stronger control-plane split は later pressure が出たときだけ reopen |
 | small decidable core / proof / async-control inventory を一段進める | 3〜6 task | final type system actualization はまだ含まない |
 | detached validation loop を maintenance mode で維持する | 0〜1 task | current self-driven portion は close。`reference update / bless` は later candidate |
 | authoritative room baseline の drift を checkpoint close として維持する | 0〜1 task | current baseline は `specs/examples/121...` に集約済み |

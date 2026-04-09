@@ -218,15 +218,15 @@ current phase の working subset に **まだ入れない**ものは次である
 
 これらは存在候補としては重要だが、current phase では row-level working subset に混ぜない。
 
-## next narrow step
+## current sequencing outcome
 
-working subset を current row set に切った後の next narrow step は、次の順で比べるのが自然である。
+working subset を current row set に切った後の sequencing は、次の順で source-backed に整理できた。
 
-1. `auditable_authority_witness` の最小 witness shape
-2. `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読むか
-3. control-plane separated causal carrier を reopen する threshold
+1. `auditable_authority_witness` の最小 witness shape → `specs/examples/123...`
+2. `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読むか → `specs/examples/124...`
+3. control-plane separated causal carrier を reopen する threshold → `specs/examples/125...`
 
-つまり、current phase では **provider placement と fairness claim strengthening を別軸に保ったまま**、まず witness shape を比べる方が理論上きれいである。
+したがって current phase では、**provider placement と fairness claim strengthening を別軸に保ったまま** working subset package を 1 段閉じ、stronger control-plane split 自体の actualization は later pressure が出たときだけ reopen 候補に残すのが自然である。
 
 ## current judgment
 

@@ -291,6 +291,8 @@ current working judgment では、これも source-of-truth carrier ではなく
 - **plain vector deletion は current first choice にしない**
 - **epoch / incarnation split を first practical candidate に置く**
 - **control-plane separated carrier は next stronger candidate として比較を続ける**
+- **current threshold judgment としては、authority handoff / provider binding / activation frontier を room rule 側へ上げない限り、この stronger candidate を current default に reopen しない**
+- **ただし reopen するなら、first cut は full control-plane log ではなく `control_epoch` 相当の lightweight split に留める**
 
 したがって current repo では、少なくとも
 
@@ -1052,7 +1054,17 @@ witness = {
 - auth / identity layering
 
 を minimal witness core に混ぜずに済む。
-したがって current phase の次段は、provider placement を `delegated_rng_service` に差し替えた authoritative room candidate 自体は `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切り、その次に control-plane separated causal carrier を reopen する threshold を比べる line に移るのが自然である。
+したがって current phase の次段は、provider placement を `delegated_rng_service` に差し替えた authoritative room candidate 自体は `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切り、その次に control-plane separated causal carrier を reopen する threshold を `specs/examples/125-shared-space-control-plane-carrier-threshold.md` で比べる line に移るのが自然である。
+
+### control-plane separated carrier の threshold 読み
+
+`specs/examples/125-shared-space-control-plane-carrier-threshold.md` の current judgment は次である。
+
+- `membership_epoch + member_incarnation` は、authoritative room baseline、minimal witness core、delegated-provider practical cutを current package として維持する間は first practical candidate のままでよい
+- authority handoff、provider binding rotation、activation ack frontier の compare need を room core / audit compare に上げた時点で、control-plane separated carrier の reopen threshold は満たす
+- その場合でも first reopen cut は full control-plane log ではなく、`control_epoch` 相当の lightweight split に留めるのが自然である
+
+したがって current repo では、causal metadata line をこれ以上 current package に押し広げず、Phase 4 の current package は authoritative baseline、working subset、minimal witness core、delegated-provider practical cut、control-plane threshold comparisonまでで checkpoint close とみなしてよい。
 
 ## identity / auth layering をどこで切るか
 

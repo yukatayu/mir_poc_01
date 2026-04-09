@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 16:46 JST
+最終更新: 2026-04-09 17:50 JST
 
 ## この文書について
 
@@ -8,86 +8,96 @@
 - `progress.md` が rough progress snapshot なのに対し、ここでは
   - ある程度まとまった task として自走できるもの
   - 方針決定が必要で、いま研究の障害になっているもの
-  を、もう少し具体的に整理する。
+  をもう少し具体的に整理する。
 - 規範判断の正本は `specs/`、長期比較と repository memory は `plan/` である。
-- ここは append で積み増さず、**毎回 current snapshot に合わせて全体を書き直す**。
+- append で履歴を積まず、**毎回 current snapshot に合わせて全体を書き直す**。
 
 ## 現在の読み
 
-- 主線は **Phase 2 maintenance tail + Phase 4 side line + Phase 5 inventory line** である。
+- 主線は **Phase 2 maintenance tail + Phase 5 inventory line** である。
+- Phase 4 は、authoritative room baseline / working subset / minimal witness core / delegated-provider practical cut / control-plane threshold comparison まで current package を切り終え、**checkpoint maintenance と later reopen candidate** に移った。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
-- したがって、今すぐ自走で進める順番は
-  1. consistency / fairness / causal metadata を room profile working subset として比べ、provider practical cut の次に causal stop line を詰める
-  2. static analysis / type / theorem prover / async-control boundary の inventory を整える
-  3. detached validation loop は maintenance mode に戻して drift と policy-dependent residual だけを見る
-  4. authoritative room baseline は checkpoint close として維持する
-  5. checkpoint ごとに drift suppression と mirror sweep を入れる
-  である。
-
-## 設計上の基本線
-
-- **throughput を先に上げる**: detached validation loop の friction を先に下げ、以後の研究で fixture / artifact / compare の反復コストを抑える。
-- **practical bundle を先に固める**: shared-space は final catalog を急がず、まず authoritative room の最小 practical bundle を厚くする。
-- **working subset を先に比べる**: consistency / fairness / causal metadata は exhaustive catalog より先に、room profile の working subset を source-backed に比較する。
-- **docs-first inventory を先に作る**: static analysis / proof / async-control は actualization より先に、small decidable core と deferred global property の境界を明確にする。
 
 ## 次に自走で進める順番と rough estimate
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 4 前半 closeout後〜中盤入口 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 2〜5 task / 3〜8日 | 一部自走可能 | current first cut は `specs/examples/122...`、minimal witness core は `specs/examples/123...`、authoritative delegated-provider practical cut は `specs/examples/124...`。next は control-plane separated carrier の reopen threshold |
-| 2 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
-| 3 | Phase 2 maintenance tail | detached validation loop の maintenance residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | current self-driven friction reduction は checkpoint close。`reference update / bless` は later candidate |
-| 4 | Phase 4 前半 checkpoint | authoritative room baseline の checkpoint maintenance | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...` までで checkpoint close |
-| 5 | cross-phase checkpoint | drift suppression / checkpoint sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task というより closeout package |
-| 6 | Phase 3 reserve path | Phase 3 reserve path reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
+| 1 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を詰める | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留めたまま、higher-level async-control family と proof obligation catalog を docs-first に整理する |
+| 2 | Phase 4 checkpoint 後半 / later reopen 候補 | shared-space control-plane / catalog later reopen | `control_epoch` 相当の split や final catalog を later pressure 時だけ再開する | 中〜重 | 0〜3 task | 一部自走可能 | `specs/examples/121...` から `125...` までで current package は close。reopen は authority handoff / provider binding / activation frontier compare need が出たとき |
+| 3 | Phase 2 maintenance tail | detached validation loop residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | `reference update / bless` は retention / path policy 依存なので later candidate |
+| 4 | Phase 4 checkpoint maintenance | authoritative room baseline / working subset の drift 抑制 | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...`、working subset は `122...`、threshold は `125...` までで checkpoint close |
+| 5 | cross-phase checkpoint | drift suppression / mirror sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task ではなく closeout package |
+| 6 | Phase 3 reserve path | parser boundary / first checker cut reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
 
 ## 自走で進められる task package
 
-### Task A. detached validation loop の運用摩擦低減
+### Task A. static analysis / type / theorem prover / async-control boundary inventory
 
 #### 目的
 
-- fixture を追加し、
-- artifact を保存し、
-- compare し、
-- 差分を見て次の fixture を足す
+- 何を local / structural / decidable core に入れるか
+- 何を theorem prover / model checker / external verifier 側へ残すか
+- `atomic_cut` と higher-level async-control / authority-serial / witness-aware commit family をどこで分けるか
 
-という loop を、もっと機械的に回せるようにする。
+を docs-first に inventory 化する。
 
 #### current checkpoint
 
-- current self-driven portion は checkpoint close とみなしてよい。
-- first tranche で
-  - fixture stem shorthand
-  - default run label derivation
-  - missing fixture fail-fast
-  を thin helper に actualize した。
-- second tranche で `compare-fixture-aggregates` を追加し、single-fixture aggregate 同士の direct compare を noisy な full-vs-single contrast から分離した。
-- third tranche で bundle / aggregate / static gate diff helper の reference-only section を shallow per-field summary に揃え、longer compare triage を短くした。
-- したがって current remaining residual は
-  - `reference update / bless`
-  - retention / overwrite / path policy と接続する update flow
-  だけである。
+- hybrid staged approach 自体は direction として固まっている。
+- parser boundary / detached validation loop / shared-space working subset も、inventory を支える前提として揃っている。
+- したがって current next promoted line はここである。
+
+#### この task で残ること
+
+- small decidable core candidate の cluster 切り出し
+- async-control family を low-level memory-order 語彙に直結させずに整理すること
+- shared-space / continuation / fairness / scheduler を external proof line に残す根拠整理
 
 #### いま自走できる理由
 
-- detached validation loop の入口自体は成立済み
-- payload core / bundle context / detached non-core / explanation の split も固まっている
-- production API にしない限り、手戻りは比較的小さい
-- current self-driven portion は閉じたため、残りは path policy / retention policy に近い residual だけである
+- final type system actualization に入らず、inventory comparison に留める限り手戻りが比較的小さい
+- `specs/09` の invariants、Phase 3 reserve path、Phase 4 working subset の境界がすでにある
 
-#### 残すもの
+#### 重さ
 
-- `reference update / bless` を detached loop helper と同じ layer に入れるか
-- overwrite / retention / path policy とどう接続するか
-- compare-only baseline を維持するか
+- 重
 
-#### 成果物のイメージ
+#### rough 所要
 
-- thin helper の 3 tranche
-- additional smoke evidence
-- residual blocker の明確化
+- 3〜6 task / 3〜8日
+
+#### 現在の推奨度
+
+- **最優先の active package**
+
+---
+
+### Task B. shared-space / membership line の checkpoint maintenance と later reopen 候補整理
+
+#### 目的
+
+- `specs/examples/121...` から `125...` までで切った current package を drift させない
+- stronger control-plane split や final catalog を、later pressure が出たときだけ reopen できる形で残す
+
+#### current checkpoint
+
+- authoritative room baseline は `121...`
+- working subset row は `122...`
+- minimal witness core は `123...`
+- authoritative delegated-provider practical cut は `124...`
+- control-plane separated carrier threshold は `125...`
+
+まで source-backed に揃った。
+
+#### この task で残ること
+
+- authority handoff / provider binding / activation frontier を room rule 側へ上げる必要が実際に出た時だけ、`control_epoch` 相当の first reopen cut を比較する
+- final consistency catalog を MECE に寄せる判断はまだ保留のまま残す
+
+#### いま自走できる理由
+
+- current package 自体は close したので、maintenance と later comparison だけなら手戻りが小さい
+- final activation / authority / fairness catalog は user 仕様確認前に固定しない運用が成立している
 
 #### 重さ
 
@@ -95,166 +105,54 @@
 
 #### rough 所要
 
-- current self-driven portion は完了
-- residual は 0〜1 task だが、policy-dependent candidate として後ろへ送ってよい
+- 0〜3 task / later pressure 時のみ
 
 #### 現在の推奨度
 
-- **checkpoint close / maintenance mode**
+- **checkpoint maintenance / later reopen candidate**
 
 ---
 
-### Task B. shared-space / membership boundary の docs-first 研究
+### Task C. detached validation loop の maintenance residual
 
 #### 目的
 
-shared-space を language core に早く焼き込まずに、
-
-- participant carrier
-- activation rule
-- authority placement
-- consistency mode
-- fairness / RNG provider
-- reconnect / leave / rejoin
-- causal metadata
-
-の境界を、practical example で崩れない形に整理する。
+- bundle / aggregate / static gate の emit / compare / smoke を維持する
+- policy-dependent residual と self-driven helper 改善を分ける
 
 #### current checkpoint
 
-- authoritative room baseline の current first choice は `specs/examples/121-shared-space-authoritative-room-baseline.md` に集約済みである
-- そこでは
-  - `authority-ack`
-  - `single room authority`
-  - `authoritative serial transition`
-  - `authority_rng`
-  を 4 軸 bundle として固定し、
-  - membership registry + derived snapshot view
-  - `opaque authority trust`
-  - `member_incarnation + uncommitted action invalidation`
-  - compile-time over-approximation / runtime control-plane split
-  を side condition に置いている
-- その次段として、authoritative room と append-friendly room をまたぐ small cross-room working subset は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` に整理済みである
-- したがって current self-driven baseline package は checkpoint close であり、active package は catalog comparison 側に移っている
+- current self-driven friction reduction は checkpoint close 済み
+- residual は `reference update / bless` と retention / path policy 接続だけである
 
-#### この task で残ること
+#### 残すもの
 
-- authoritative room baseline と append-friendly / relaxed room の drift suppression
-- control-plane separated carrier を reopen する threshold
-- final activation / authority / fairness / consistency catalog を早く固定しないこと
-
-#### いま自走できる理由
-
-- current repo には authoritative room の minimal candidate と `auditable_authority_witness` の minimal witness core までの line が既にある
-- final catalog を決めない範囲なら、docs-first comparison を積める
-- 具体例を使った境界比較は、まだ user 仕様なしでも進められる
-
-#### 実践例
-
-たとえば authoritative game room なら、次のような baseline row が current first choice である。
-
-```text
-activation: authority-ack
-authority: single room authority
-consistency: authoritative serial transition
-fairness source: authority_rng
-```
-
-一方、append-heavy room では
-
-```text
-consistency: append-friendly room
-fairness: room core では要求しない
-```
-
-のような baseline row を置き、optional capability としてだけ `delegated_rng_service` を足す方が自然である。
-
-`auditable_authority_witness` 自体の minimal core は、current checkpoint では
-
-```text
-witness_kind + action_ref + draw_slot + draw_result
-```
-
-で切っており、provider placement や auth / identity はまだ witness core に混ぜない。
+- `reference update / bless` を helper に入れるか
+- retention / overwrite / path policy とどう接続するか
 
 #### 重さ
 
-- 中〜重
+- 低
 
 #### rough 所要
 
-- 2〜5 task / 3〜8日 の active package
-- baseline drift 自体は 0〜1 task の maintenance に留める
+- 0〜1 task / 必要時のみ
 
 #### 現在の推奨度
 
-- **高い（current active package）**
+- **maintenance mode**
 
 ---
 
-### Task C. static analysis / type / theorem prover / async-control boundary の inventory
+### Task D. cross-phase drift suppression / checkpoint sweep
 
 #### 目的
 
-将来の型システムや証明器との接続のために、
-
-- 何を local / structural / decidable core に入れるか
-- 何を theorem prover / model checker 側へ残すか
-- `atomic_cut` のような local cut と、高位の async-control / ordering / consistency rule をどこで分けるか
-
-を small inventory として整理する。
-
-#### この task でやること
-
-- first checker cut に寄せやすい性質を narrow に列挙する
-- shared-space / membership / continuation / fairness などの global property を external verifier 側へ残す根拠を明文化する
-- parser boundary / detached validation loop と衝突しない bridge 条件を定義する
-- C++ 的 low-level memory-order 語彙をそのまま入れずに、event-tree / authority-serial / witness-aware async control family をどこまで docs-first に比べられるか整理する
+- docs / helper / plan / progress / tasks / reports の mirror drift を抑える
 
 #### いま自走できる理由
 
-- current repo はすでに hybrid staged approach を前提にしている
-- final type system actualization に入らず、inventory だけを切るなら手戻りが小さい
-
-#### 期待する成果物
-
-- docs-first comparison
-- small decidable core inventory
-- future proof obligation の分類表
-- async-control boundary の比較メモ
-
-#### 重さ
-
-- 重い
-
-#### rough 所要
-
-- 3〜6 task
-- 3〜8日
-
-#### 現在の推奨度
-
-- **高い**
-
----
-
-### Task D. current L2 semantics / notation / examples の drift suppression
-
-#### 目的
-
-主線ではないが、他の研究を進める前提として、
-
-- prose drift
-- representative example drift
-- helper / plan / progress mirror drift
-
-を抑える。
-
-#### この task でやること
-
-- representative example prose の drift を narrow に点検する
-- helper 実装や compare wording と docs を合わせる
-- checkpoint ごとに mirror 群を見直す
+- checkpoint close ごとの closeout package として運用が安定している
 
 #### 重さ
 
@@ -263,310 +161,161 @@ witness_kind + action_ref + draw_slot + draw_result
 #### rough 所要
 
 - 各 checkpoint ごとに 0.5〜1日
-- 単独主線にはしない
 
 #### 現在の推奨度
 
-- **随時**
+- **常時必要**
 
-## 方針決定が必要で、いま研究の障害になっている悩み
+## 方針決定が必要で、いま研究の障害になっているもの
 
-### 1. shared-space の final activation rule
+### Blocker 1. shared-space の final activation rule
 
 #### 概要
 
-participant が join / leave / rejoin するとき、
-「いつ active member とみなすか」を final に決め切れていない。
+authoritative room の current baseline では `authority-ack` を first choice にしているが、final activation rule をそれで固定するか、overlay 可能な policy family をどう残すかが未決である。
 
 #### 何に影響するか
 
-- room への publish / notify の成立条件
-- late join / reconnect の扱い
-- membership と causality の整合
-- practical game room / collaboration room の semantics
+- shared-space final catalog
+- admission / activation / reconciliation の semantics
+- authority handoff や auth layering との接続
 
-#### 選択肢
+#### 主要な選択肢
 
-1. `authority-ack`
-2. `full-coverage-like`
-3. `quorum-like`
+1. `authority-ack` を final default に寄せる
+2. `authority-ack` を baseline にしつつ、`full-coverage-like` / `quorum-like` を overlay policy として残す
+3. 最初から activation family を広い catalog として language 側に出す
 
-#### current recommendation
+#### current recommendation / 見解
 
-- **現段階では `authority-ack` を最小 operational candidate に置く**
-- **ただし final activation rule はまだ固定せず、`full-coverage-like` / `quorum-like` は overlay 可能な room policy option として残す**
-
-#### 理由
-
-- authoritative room との整合が最も良い
-- implementation と audit の説明がしやすい
-- compile-time には visibility over-approximation だけを残し、actual activation は runtime control-plane に逃がせる
-- final profile を language core に早く焼き込むより、shared-space / runtime / compile option 側の policy layer に残す方が手戻りが小さい
-
-#### 残っている悩み
-
-- `authority-ack` を language core に見せるか、room policy に留めるか
-- reconnect / in-flight action との接続をどこまで room profile に入れるか
-- auth / admission layer を重ねたときに activation profile をどこまで独立に差し替えられるか
+- **2 を推奨**
+- current baseline は `authority-ack` で進めてよいが、final activation family はまだ固定しない
+- control-plane / auth / operational realization の研究が進んでから narrow に再比較する方が自然である
 
 ---
 
-### 2. authority placement の final shape
+### Blocker 2. authority placement の final shape
 
 #### 概要
 
-排他制御の要である authority を、
-
-- single に置くか
-- replicated にするか
-- room ごとに relaxed にするか
-
-を final に決めていない。
+current baseline では `single room authority` を room-level authoritative owner slot / write authority slot の first choice にしているが、final shape を single-authority に固定するか、replicated / relaxed projection authority をどこまで language 側へ出すかが未決である。
 
 #### 何に影響するか
 
-- 排他 action
-- reset / global notification
-- fairness / RNG trust model
-- failure handling
+- exclusive action や global reset の semantics
+- fairness / RNG provider placement
+- read-mostly / fan-out state の model
 
-#### 選択肢
+#### 主要な選択肢
 
-1. `single room authority`
-2. `replicated authority`
-3. `relaxed projection authority`
+1. `single room authority` を final default に寄せる
+2. `single room authority` を baseline にしつつ、replicated / relaxed authority を later option に残す
+3. authority placement を room profile catalog の同格 row として早く広げる
 
-#### current recommendation
+#### current recommendation / 見解
 
-- **authoritative room では `single room authority` を first choice**
-- **`replicated authority` は next candidate**
-- **ここでいう `single room authority` は「room の authoritative owner slot / write authority slot を 1 つ置く」読みを第一候補にし、人間 participant そのものへの単純還元はしない**
-
-#### 理由
-
-- semantics が最も素直
-- game room のような exclusive action と相性が良い
-- `replicated authority` は failover に強いが、いまの phase では proof / protocol burden が重い
-- read-only snapshot、fan-out、delegated capability などの例外を、owner slot / delegated capability の分離で後から足しやすい
-
-#### 簡単な例
-
-すごろく room で「サイコロを振ってコマを進める」は、single authority なら
-
-```text
-request move(player)
-  -> authority checks lock
-  -> authority draws RNG
-  -> authority applies transition
-  -> authority broadcasts state
-```
-
-で済む。  
-replicated authority にすると、ここに replication / agreement / failover の protocol が増える。
-
-#### 残っている悩み
-
-- 「全 resource に owner がいる」という直感を、owner slot / delegated capability / replicated realization の 3 層でどう分けて説明するか
-- read-mostly resource や大規模 fan-out state で `single room authority` をどこまで baseline にできるか
+- **2 を推奨**
+- current package は `single room authority` baseline で十分 practical であり、replicated / relaxed authority は later pressure が出たときに reopen する方が理論上きれいである
 
 ---
 
-### 3. consistency mode catalog をどこまで language 側に持つか
+### Blocker 3. consistency mode catalog をどこまで language 側に持つか
 
 #### 概要
 
-room の consistency mode を
-
-- authoritative serial transition だけに絞るか
-- append-friendly room などを catalog に入れるか
-- merge-friendly room まで広げるか
-
-で迷っている。
+working subset として `authoritative_serial_transition` / `append_friendly_room` までは切ったが、final catalog をどこまで MECE に寄せ、どこまで room library / policy family に残すかが未決である。
 
 #### 何に影響するか
 
 - shared-space の表現力
-- proof / model checking の複雑さ
-- examples の分かりやすさ
+- proof burden
+- practical example の書き味
 
-#### 選択肢
+#### 主要な選択肢
 
-1. `authoritative serial transition` だけを強く押す
-2. `authoritative serial transition` + `append-friendly room` の小 catalog
-3. merge-friendly room まで catalog に入れる
+1. small catalog を長く維持する
+2. working subset を保ちつつ final catalog へ narrow expansion する
+3. early に broad catalog を language 側へ出す
 
-#### current recommendation
+#### current recommendation / 見解
 
-- **小 catalog を current working subset として使う**
-  - `authoritative serial transition`
-  - `append-friendly room`
-- **ただしこれは final catalog でも MECE 完了形でもなく、今後の表現力 / 証明可能性 / 実装可能性の比較の土台に留める**
-
-#### 理由
-
-- room の違いを見せるには十分
-- relaxed merge semantics を早く言語コアへ入れると、proof burden が大きくなる
-- final catalog を拙速に固定すると、将来の拡張余地を不必要に狭める
+- **1 から 2 へ narrow に進む**のを推奨
+- 今は working subset と stop line の cut を守り、MECE な final catalog は later research に残す方が自然である
 
 ---
 
-### 4. fairness / RNG trust model
+### Blocker 4. fairness / RNG trust model
 
 #### 概要
 
-RNG を
-
-- authority に持たせるか
-- delegated provider に出すか
-- distributed protocol にするか
-
-を final に決めていない。
+`authority_rng`、`delegated_rng_service`、`auditable_authority_witness`、provider attachment、distributed randomness provider をどの順で catalog に入れるかが未決である。
 
 #### 何に影響するか
 
-- game room の fairness
-- replay / audit
-- performance / trust / implementation complexity
+- shared-space fairness claim
+- audit / replay
+- delegated provider / auth layering
+- control-plane carrier reopen 条件
 
-#### 選択肢
+#### 主要な選択肢
 
-1. `authority_rng`
-2. `delegated_rng_service`
-3. `distributed_randomness_provider`
+1. `authority_rng` を default に固定し、残りは library / provider policy に残す
+2. `authority_rng` baseline を維持しつつ、`delegated_rng_service` と `auditable_authority_witness` を別軸で narrow に進める
+3. delegated provider / distributed randomness を早く room core へ上げる
 
-#### current recommendation
+#### current recommendation / 見解
 
-- **authoritative room の current minimal は `authority_rng`**
-- **provider placement の next practical candidateだった `delegated_rng_service` は、authoritative room 側でも practical cut を切り終えた**
-- **current first choice では authority が request / lock / commit / publish の owner のまま、provider は draw result だけを返し、provider receipt は optional attachment に留める**
-- **`distributed_randomness_provider` は default にせず、authority または delegated provider が必要なときに明示的に接続する future option に残す**
-
-#### 理由
-
-- 最小で回すには authority が持つのが一番簡単
-- ただし audit や trust を強くしたいなら delegated provider の余地を残したい
-- distributed randomness は将来の重い workstream
-- fairness / RNG source を participant tree topology や room ownership model に直結させない方が、provider 差し替えと audit model を分けやすい
-
-#### 簡単な例
-
-サイコロ object を room に持ち込めても、RNG だけは
-
-```text
-roll_dice uses rng_provider
-```
-
-のように explicit provider capability として切る方が、topology と randomness source を混ぜずに済む。
-
-#### 残っている悩み
-
-- provider receipt / draw ref をいつ typed required attachment に上げるか
-- `delegated_provider_attestation` を room profile row に昇格させるか、それとも optional audit capability に留めるか
-- provider placement と control-plane carrier をどこまで直交させて保てるか
+- **2 を推奨**
+- provider placement と witness requirement を別軸に保つ current line が最も理論的にきれいである
+- distributed randomness は default にしない
 
 ---
 
-### 5. final parser grammar / public checker boundary
+### Blocker 5. control-plane separated causal carrier の final actualization
 
 #### 概要
 
-Phase 3 self-driven portion は reserve path に戻したが、
-最終的には
-
-- final parser grammar
-- public checker API
-- runtime / proof boundary
-
-をどこかで決める必要がある。
+current threshold judgment では、`membership_epoch + member_incarnation` を維持し、authority handoff / provider binding / activation frontier が room rule 側へ入る時だけ `control_epoch` 相当の split へ reopen する line にしているが、その final shape はまだ未決である。
 
 #### 何に影響するか
 
-- parser / checker 実装の actualization
-- syntax sugar の整理
-- theorem prover / model checker との接続
+- stale action rejection
+- authority handoff / provider binding compare
+- audit / replay
+- exported artifact に載せる carrier の粒度
 
-#### 選択肢
+#### 主要な選択肢
+
+1. membership-only carrier を長く維持する
+2. `control_epoch` 相当の lightweight split を first reopen cut にする
+3. full control-plane log / ref bundle を早く current core に入れる
+
+#### current recommendation / 見解
+
+- **1 を current default、2 を first reopen cut** とするのを推奨
+- 3 は current phase では重すぎる
+
+---
+
+### Blocker 6. final parser grammar / public checker boundary
+
+#### 概要
+
+Phase 3 reserve path は freeze しているが、final parser grammar と public checker boundary は未固定である。
+
+#### 何に影響するか
+
+- syntax の public surface
+- type / checker の entry criteria
+- implementation actualization の timing
+
+#### 主要な選択肢
 
 1. companion notation を長く維持する
-2. minimal parser subset から narrow に public 化する
-3. grammar を広く先に固定する
+2. minimal parser subset だけ narrow に public 化する
+3. broad grammar / public checker API を早く固定する
 
-#### current recommendation
+#### current recommendation / 見解
 
-- **いまは 1 + 2 の間**
-- companion notation を維持しつつ、public 化は later pressure が出たときだけ narrow に行う
-
-#### 理由
-
-- 早く public surface を決めると semantics より surface が先行しやすい
-- 逆に inventory を作らないと Phase 5 に進みにくい
-
----
-
-### 6. 非同期制御 / memory-model boundary
-
-#### 概要
-
-`atomic_cut` のような local finalizing cut だけで十分か、それとも memory-order 的な並列制御語彙や、もっと高位の async-control family が要るかが未決である。
-
-#### 何に影響するか
-
-- room / authority / consistency の表現力
-- scheduler / fairness / replay / debug hook の設計
-- 型システム / 定理証明 / model checker へどこまで送るか
-- user-facing syntax を low-level concurrency 語彙に寄せるかどうか
-
-#### 選択肢
-
-1. `atomic_cut` を最小 cut とし、上位 ordering は room policy / runtime / external verifier 側へ残す
-2. C++ 的な `memory_order` に近い low-level ordering vocabulary を language 側へ入れる
-3. event-tree / owner slot / authority-serial transition / witness-aware commit を使う higher-level async-control family を別 workstream として育てる
-
-#### current recommendation
-
-- **いまは 1 を core 側の baseline に置く**
-- **ただし「`atomic_cut` だけで全部を背負う」とは読まず、3 を Phase 4 / 5 の docs-first comparison として進める**
-- **2 は current phase では採らない**
-
-#### 理由
-
-- `atomic_cut` は current repo で place-local finalizing cut として source-backed だが、global ordering / fairness / scheduler まで直接表す primitive ではない
-- C++ 的 low-level memory-order を早く入れると、language core・scheduler・proof burden が同時に膨らみやすい
-- tree-like room view、authority placement、consistency mode、audit witness を活かすなら、より高位の async-control family として比べる方が理論上きれいで、user-facing でも分かりやすくなりやすい
-
-#### 簡単な例
-
-authoritative room での move request は、現段階では
-
-```text
-request move(player)
-  -> authority validates request
-  -> authority applies serial transition
-  -> authority publishes committed state
-```
-
-のような high-level ordering として読む方が自然であり、ここを直接 low-level memory barrier 群へ落とす必要はまだない。
-
-#### 残っている悩み
-
-- event-tree / leaf-to-root event bubbling を source-of-truth ではなく execution / debug view としてどこまで formalize できるか
-- higher-level async-control family を consistency mode / authority placement / fairness witness とどう直交化するか
-- どの局所性までが decidable core に入り、どこから先を theorem prover / model checker 側へ送るべきか
-
-## current recommendation summary
-
-- **自走の順番**:
-  1. authoritative room baseline の docs-first 精密化
-  2. consistency / fairness / causal metadata catalog comparison
-  3. static analysis / proof / async-control boundary inventory
-  4. detached validation loop maintenance residual
-  5. checkpoint ごとの drift suppression / mirror sweep
-- **今は止める / later pressure 待ち**:
-  - Phase 3 reserve path の reopen
-  - final parser grammar
-  - public checker API
-  - shared-space final catalog
-- **user 仕様が強く要る**:
-  - upper-layer application contract
-  - final shared-space profile catalog
-  - higher-layer integration details
+- **1 から 2 へ narrow に進む**のを推奨
+- current promoted line ではなく、later pressure が出たときだけ reopen するのが自然である
