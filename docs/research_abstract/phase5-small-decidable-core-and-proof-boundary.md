@@ -208,6 +208,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`retained_file_body_ref`**
 までは足してよいが、actual archive materialization は still 後段に残す。
 
+**`archive_materialization_ref`**
+までは足してよいが、actual archive body / bundle family は still 後段に残す。
+
 ## まだやっていないこと
 
 - public checker API の finalization
@@ -215,7 +218,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- actual archive materialization をどこまで theorem-line bridge に寄せるか
+- actual archive body / bundle family をどこまで theorem-line bridge に寄せるか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
