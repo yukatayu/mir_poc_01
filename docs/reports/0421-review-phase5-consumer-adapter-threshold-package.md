@@ -2,12 +2,13 @@
 
 ## Objective
 
-`0420-phase5-consumer-adapter-threshold-package.md` の closeout review を残し、consumer adapter threshold package の mirror drift と premature commitment がないかを確認する。
+`docs/reports/0420-phase5-consumer-adapter-threshold-package.md` の package について、consumer adapter threshold の current first choice が mirror drift や premature commitment を起こしていないかを確認する。
 
 ## Scope and assumptions
 
-- 対象は `specs/examples/152-current-l2-theorem-line-emitter-linked-consumer-adapter-threshold.md` とその mirror、`docs/reports/0420-phase5-consumer-adapter-threshold-package.md` に限る。
-- reviewer subagent は 1 回だけ起動したが、この tool surface では completion を polling する handle が露出していないため、current task では local evidence fallback を使う。
+- 対象は `specs/examples/152-current-l2-theorem-line-emitter-linked-consumer-adapter-threshold.md` と関連 mirror に限る。
+- reviewer subagent は 1 回だけ起動し、180 秒 wait を 2 回まで行う。
+- completion が返らない場合は AGENTS の local evidence fallback に切り替える。
 
 ## Documents consulted
 
@@ -23,48 +24,44 @@
 - `progress.md`
 - `tasks.md`
 - `docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`
+- `AGENTS.md`
 
 ## Actions taken
 
-1. package 全体について、
-   - `consumer_adapter_ref` までを current first choice に留めているか
-   - actual notebook exchange rule / adapter-local validation を premature に current package へ混ぜていないか
-   - next later reopen が `notebook exchange rule threshold` に揃っているか
-   - report / traceability / progress / tasks に stale wording が残っていないか
-   を local diff review した。
-2. `progress.md` に旧 wording `consumer adapter threshold` が 1 箇所残っているのを見つけ、`notebook exchange rule threshold` に補正した。
-3. それ以外に substantive inconsistency は見当たらないことを確認した。
+1. reviewer subagent `019d72fe-a60a-77c2-9efa-e359e7949f78` を起動した。
+2. `wait_agent` を 180 秒で 2 回行い、completion を待った。
+3. どちらも timeout だったため、AGENTS の fallback に従って local diff inspection と validation evidence に切り替えた。
+4. stray draft として現れた `specs/examples/153-current-l2-theorem-line-adapter-linked-exchange-rule-threshold.md` は current task scope 外だったため削除した。
+5. `python3 scripts/validate_docs.py`、`git diff --check`、`git status --short --branch` で closeout evidence を確認した。
+6. reviewer subagent は close 済みである。
 
 ## Files changed
 
-- `progress.md`
 - `docs/reports/0421-review-phase5-consumer-adapter-threshold-package.md`
 
 ## Evidence / outputs / test results
 
-- local grep review:
-  - `rg -n "consumer adapter threshold|notebook exchange rule threshold|consumer_adapter_ref|0420-phase5-consumer-adapter-threshold-package|0421-review-phase5-consumer-adapter-threshold-package" ...`
-- review で見つかった補正:
-  - `progress.md` の current action line に旧名 `consumer adapter threshold` が残っていたため `notebook exchange rule threshold` へ修正
-- reviewer fallback:
-  - reviewer subagent 起動は試みたが、current tool surface では completion polling handle を取得できなかったため local evidence fallback で closeout した
-- post-fix validation:
-  - `python3 scripts/validate_docs.py` → `Documentation scaffold looks complete.` / `Found 421 numbered report(s).`
-  - `git diff --check` → 無出力
+- reviewer wait 1 → timeout
+- reviewer wait 2 → timeout
+- `close_agent` → `previous_status: running`
+- `python3 scripts/validate_docs.py` → `Documentation scaffold looks complete.` / `Found 421 numbered report(s).`
+- `git diff --check` → 無出力
+- `git status --short --branch` → scope cleanup 後は `docs/reports/0421-review-phase5-consumer-adapter-threshold-package.md` 自身だけが未commit差分
 
 ## What changed in understanding
 
-- package 自体の semantic cut は安定しており、`consumer_adapter_ref` を symbolic ref として current first choice に含めつつ actual notebook exchange rule を still 後段に残す line は mirror 全体と整合している。
-- drift は `progress.md` の stale wording 1 件だけで、fix 後は next later reopen が `notebook exchange rule threshold` に揃った。
+- consumer adapter threshold package では、`consumer_adapter_ref` を current first choice に入れても、actual notebook exchange rule / adapter-local validation を theorem-line bridge に premature に混ぜていない。
+- next later reopen を `notebook exchange rule threshold` に揃えることで、current package と次段 reopen の境界が明確になった。
+- stray draft を残すと closeout evidence を濁すため、scope 外 draft はこの task の中で必ず除去する方がよい。
 
 ## Open questions
 
-- actual notebook exchange rule / adapter-local validation / concrete file-blob exchange protocol を次段でどう分けるか。
-- reviewer completion polling を current tool surface でどう扱うかは operational issue として残る。
-- `plan/` 更新不要。review closeout では新しい規範判断は作っていない。
-- `progress.md` 更新不要ではない。stale wording correction 1 件を反映した。
-- `tasks.md` 更新不要。current task map 自体は 0420 時点で整合しており、この review では変化がない。
+- reviewer completion 自体は得られていないため、この review record は local evidence fallback である。
+- notebook exchange rule threshold comparison の具体的な row split は次 task に残る。
+- `plan/` 更新不要。review record task では mirror judgment 自体は変えていない。
+- `progress.md` 更新不要。review record task では current phase 読みを変えていない。
+- `tasks.md` 更新不要。review record task では task map を変えていない。
 
 ## Suggested next prompt
 
-Phase 5 theorem-line later reopen の次段として、`exchange_rule_ref` をどこまで theorem-line retained bridge に近づけてよいか、actual notebook exchange rule / adapter-local validation / concrete file-blob exchange protocol をどう分けるべきかを narrow に比較してください。
+Phase 5 theorem-line later reopen の次段として、`consumer_adapter_ref` の上に `exchange_rule_ref` をどこまで足してよいか、adapter-local validation と environment-specific invocation surface をどう分けるべきかを narrow に比較してください。
