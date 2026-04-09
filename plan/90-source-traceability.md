@@ -1249,3 +1249,12 @@
   - `specs/examples/170-current-l2-theorem-line-serialized-ready-emitted-attachment-body-threshold.md`
   - `docs/reports/0451-phase5-emitted-attachment-body-threshold.md`
   - `docs/reports/0452-review-phase5-emitted-attachment-body-threshold.md`
+
+### 2026-04-10 phase5 emitted attachment blob threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/170-current-l2-theorem-line-serialized-ready-emitted-attachment-body-threshold.md`
+  - `specs/examples/171-current-l2-theorem-line-attachment-body-ready-emitted-attachment-blob-threshold.md`
+  - `docs/reports/0453-phase5-emitted-attachment-blob-threshold.md`
+  - `docs/reports/0454-review-phase5-emitted-attachment-blob-threshold.md`
+  - `docs/reports/0455-review-phase5-attachment-blob-bridge-package.md`
