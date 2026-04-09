@@ -62,7 +62,7 @@
 4. `plan/11`、`plan/12`、`plan/13`、`plan/17` を更新し、Phase 5 の current package を checkpoint close と読み直した。
 5. `progress.md` と `tasks.md` を更新し、mainline を active inventory line から checkpoint maintenance / later reopen candidate へ切り替えた。
 6. `plan/90-source-traceability.md` に addendum を追加した。
-7. local validation を通した後、reviewer 起動を 1 回試みたが、この session では completion を待機できる handle を取得できなかったため、`AGENTS.md` の fallback rule に従って local diff inspection と source cross-check へ切り替えた。
+7. local validation を通した後、reviewer を 1 回だけ起動して completion まで待ち、no-findings review を確認した。
 
 ## 4. Files changed
 
@@ -95,16 +95,17 @@ $ python3 scripts/new_report.py --slug phase5-small-decidable-core-and-proof-bou
 
 $ python3 scripts/validate_docs.py
 Documentation scaffold looks complete.
-Found 379 numbered report(s).
+Found 380 numbered report(s).
+
+$ reviewer agent wait result
+[completed: no semantic findings]
 
 $ git diff --check
 [no output]
 
 $ date '+%Y-%m-%d %H:%M JST'
-2026-04-09 18:33 JST
+2026-04-09 18:39 JST
 ```
-
-reviewer completion は取得できなかったため、closeout は `docs/reports/0380-review-phase5-small-decidable-core-and-proof-boundary-inventory.md` の local evidence fallback に従う。
 
 ## 6. Evidence / findings
 
@@ -125,6 +126,7 @@ reviewer completion は取得できなかったため、closeout は `docs/repor
   - activation / auth / retention / retry
   を外に残す line が 1 本で読めるようになった。
 - これにより、Phase 5 は「強い型システムの即時 actualization」ではなく「small decidable core と proof / protocol / runtime obligation の inventory を切る段階」として checkpoint close に入れてよい。
+- reviewer completion も no findings であり、current package close の wording と mirror update は整合している。
 - `plan/ 更新済み`
 - `progress.md 更新済み`
 - `tasks.md 更新済み`
