@@ -992,8 +992,9 @@ commit move with draw + witness_ref
 ### current working judgment
 
 - **authoritative room の fairness trust model は、current phase では `opaque authority trust` を最小候補に置く**
-- **ただし next narrow step としては provider placement より先に `auditable authority witness` を比較する方が、proof / replay / debug hook の境界をきれいに切りやすい**
-- **`delegated_rng_service` は provider placement の次 practical candidate だが、trust model 上は `auditable authority witness` と組み合わせて読む方が自然である**
+- **`auditable_authority_witness` の minimal witness core は `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` で切り出し済みであり、room profile claim と audit / receipt side の typed witness bundle を分ける cut まで current checkpoint に含めてよい**
+- **`delegated_rng_service` は provider placement の next practical candidate であり、current next narrow step は authoritative room 側でもこの差し替えをどこまで practical に読めるかを比べることである**
+- **その際も trust model 上は `auditable_authority_witness` と組み合わせて読めるが、provider placement と witness requirement 自体は同じ軸に潰さない**
 - **distributed fairness protocol は current room-profile line に混ぜず future research に残す**
 - delegated provider を採るかどうか、fairness claim をどこまで witness 付きにするか、provider placement を room topology / owner slot とどう接続するかは、引き続き別軸で比較する
 
@@ -1004,6 +1005,37 @@ commit move with draw + witness_ref
 - audit / replay witness をどこまで要求するか
 
 を別軸で比較するのが最も自然である。
+
+### `auditable_authority_witness` の minimal witness core
+
+`auditable_authority_witness` の minimal witness core comparison は `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` に切り出した。
+current first choice は、room profile に
+
+```text
+fairness_claim = auditable_authority_witness
+```
+
+だけを残し、witness payload 自体は audit / receipt side に
+
+```text
+witness = {
+  witness_kind,
+  action_ref,
+  draw_slot,
+  draw_result
+}
+```
+
+の 4 field を持つ typed bundle として置く cut である。
+
+この judgment により、
+
+- provider placement
+- membership / causality carrier
+- auth / identity layering
+
+を minimal witness core に混ぜずに済む。
+したがって current phase の次段は、provider placement を `delegated_rng_service` に差し替えた authoritative room candidate を、この witness core と still independent に比較する line に移るのが自然である。
 
 ## identity / auth layering をどこで切るか
 

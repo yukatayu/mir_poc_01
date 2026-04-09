@@ -75,7 +75,7 @@ flowchart LR
 6. 直近の概算進捗、残課題、validation loop までの rough step estimate を先に見たいときは `progress.md`
 7. repo 全体の研究 phase、現在位置、重さ、自走可否を見たいときは `plan/17-research-phases-and-autonomy-gates.md`
 8. いま自走で進める task と、方針決定が必要な current blocker を素早く見たいときは `tasks.md`
-9. shared-space / membership / authoritative room の docs-first boundary を先に掴みたいときは `plan/16-shared-space-membership-and-example-boundary.md`、`specs/examples/121-shared-space-authoritative-room-baseline.md`、`specs/examples/122-shared-space-catalog-working-subset-comparison.md`
+9. shared-space / membership / authoritative room の docs-first boundary を先に掴みたいときは `plan/16-shared-space-membership-and-example-boundary.md`、`specs/examples/121-shared-space-authoritative-room-baseline.md`、`specs/examples/122-shared-space-catalog-working-subset-comparison.md`、`specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
 10. phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
 11. その後、必要な subsystem に進む
 12. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
