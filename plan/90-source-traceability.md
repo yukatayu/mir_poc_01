@@ -317,6 +317,14 @@
   - `specs/examples/162-current-l2-theorem-line-binding-ready-failure-wording-threshold.md`
   - `docs/reports/0436-phase5-invocation-binding-wording-threshold-tranche.md`
 
+### 2026-04-10 theorem-line runtime handoff / receipt / transcript threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/163-current-l2-theorem-line-wording-ready-runtime-handoff-threshold.md`
+  - `specs/examples/164-current-l2-theorem-line-runtime-handoff-ready-invocation-receipt-threshold.md`
+  - `specs/examples/165-current-l2-theorem-line-invocation-receipt-ready-runtime-transcript-threshold.md`
+  - `docs/reports/0438-phase5-runtime-handoff-threshold-tranche.md`
+
 ### 2026-04-09 shared-space control-plane carrier threshold addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。

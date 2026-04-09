@@ -178,6 +178,15 @@ consumer-specific attachment として後段に残すのが current first choice
 **`failure_wording_ref`**
 までは足してよいが、actual notebook runtime handoff actualization / emitted invocation receipt / runtime transcript family は still 後段に残す。
 
+**`actual_runtime_handoff_ref`**
+までは足してよく、actual handoff step 自体を symbolic ref にできる。
+
+**`emitted_invocation_receipt_ref`**
+までは足してよく、receipt row と transcript family はまだ分けて扱う。
+
+**`runtime_transcript_ref`**
+までは足してよいが、concrete channel payload / transcript body は still 後段に残す。
+
 ## まだやっていないこと
 
 - public checker API の finalization
@@ -185,7 +194,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- actual notebook runtime handoff actualization をどこまで theorem-line bridge に寄せるか
+- actual notebook runtime handoff materialization をどこまで theorem-line bridge に寄せるか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 

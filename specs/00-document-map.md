@@ -288,6 +288,12 @@
   - Phase 5 theorem-side invocation-ready retained bridge の次段として、consumer-host-binding ref だけをどこまで先に足し、failure wording をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/162-current-l2-theorem-line-binding-ready-failure-wording-threshold.md`
   - Phase 5 theorem-side binding-ready retained bridge の次段として、failure-wording ref だけをどこまで先に足し、actual notebook runtime handoff actualization をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/163-current-l2-theorem-line-wording-ready-runtime-handoff-threshold.md`
+  - Phase 5 theorem-side wording-ready retained bridge の次段として、actual-runtime-handoff ref だけをどこまで先に足し、emitted invocation receipt / runtime transcript family をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/164-current-l2-theorem-line-runtime-handoff-ready-invocation-receipt-threshold.md`
+  - Phase 5 theorem-side handoff-ready retained bridge の次段として、emitted-invocation-receipt ref だけをどこまで先に足し、runtime transcript family をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/165-current-l2-theorem-line-invocation-receipt-ready-runtime-transcript-threshold.md`
+  - Phase 5 theorem-side receipt-ready retained bridge の次段として、runtime-transcript ref だけをどこまで先に足し、concrete payload / transcript body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
