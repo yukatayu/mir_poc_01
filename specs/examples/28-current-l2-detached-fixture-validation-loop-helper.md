@@ -34,6 +34,12 @@ current detached validation loop で 1 fixture の反復を支える actual narr
 4. target fixture だけを一時 directory に複製した single-fixture aggregate artifact を emit する
 5. full directory aggregate と single-fixture aggregate の `summary_core` を compare する
 
+さらに current helper は、operational friction を下げるために次を支えてよい。
+
+- fixture 引数は explicit path だけでなく fixture stem shorthand でも受けてよい
+- `smoke-fixture` と `compare-fixtures` の run label は、明示されない場合 fixture stem から導出してよい
+- missing fixture / missing fixture directory は emitter subprocess へ落とす前に fail-closed にしてよい
+
 この helper は次を行わない。
 
 - `harness.rs` / `lib.rs` の public helper API を増やすこと
@@ -60,6 +66,8 @@ current helper は、既存 detached loop と同じ current non-production defau
   - `<run-label>-single`
 
 これは convenience discovery であり、final path policy ではない。
+run label 自体が省略されたときは、target fixture の stem を primary label に使ってよい。
+reference fixture を併用するときは、reference 側もその stem を default label にしてよい。
 
 ## compare の最小 cut
 

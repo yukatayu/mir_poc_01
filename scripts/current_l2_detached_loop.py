@@ -20,6 +20,7 @@ import current_l2_reason_codes_assist as reason_codes_assist
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 DEFAULT_ARTIFACT_ROOT = REPO_ROOT / "target" / "current-l2-detached"
+DEFAULT_FIXTURE_DIRECTORY = REPO_ROOT / "crates" / "mir-ast" / "tests" / "fixtures" / "current-l2"
 EMITTER_CMD = [
     "cargo",
     "run",
@@ -69,6 +70,16 @@ def ensure_run_label(label: str) -> str:
     if label in {".", ".."} or "/" in label:
         raise ValueError("run label must be a single path segment")
     return label
+
+
+def default_run_label_for_fixture(fixture_path: Path) -> str:
+    return ensure_run_label(fixture_path.stem)
+
+
+def effective_run_label(label: str | None, fixture_path: Path) -> str:
+    if label:
+        return ensure_run_label(label)
+    return default_run_label_for_fixture(fixture_path)
 
 
 def bundle_artifact_path(
@@ -122,6 +133,26 @@ def run_subprocess(cmd: list[str]) -> int:
     return completed.returncode
 
 
+def resolve_fixture_argument(argument: str) -> Path:
+    candidate = Path(argument)
+    if candidate.exists():
+        return candidate.resolve()
+
+    if candidate.suffix == ".json" or "/" in argument:
+        raise ValueError(
+            f"fixture not found: {argument} (searched direct path only)"
+        )
+
+    fixture_path = DEFAULT_FIXTURE_DIRECTORY / f"{argument}.json"
+    if fixture_path.exists():
+        return fixture_path
+
+    raise ValueError(
+        "fixture not found: "
+        f"{argument} (searched direct path and {DEFAULT_FIXTURE_DIRECTORY})"
+    )
+
+
 def read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -139,6 +170,9 @@ def emit_fixture(
     output_path: Path,
     overwrite: bool,
 ) -> int:
+    if not fixture_path.is_file():
+        print(f"fixture does not exist: {fixture_path}", file=sys.stderr)
+        return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists() and not overwrite:
         print(
@@ -160,6 +194,9 @@ def emit_aggregate(
     output_path: Path,
     overwrite: bool,
 ) -> int:
+    if not fixture_directory.is_dir():
+        print(f"fixture directory does not exist: {fixture_directory}", file=sys.stderr)
+        return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists() and not overwrite:
         print(
@@ -181,6 +218,9 @@ def emit_static_gate(
     output_path: Path,
     overwrite: bool,
 ) -> int:
+    if not fixture_path.is_file():
+        print(f"fixture does not exist: {fixture_path}", file=sys.stderr)
+        return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists() and not overwrite:
         print(
@@ -243,11 +283,12 @@ def copy_fixture_bundle_to_directory(fixture_path: Path, output_dir: Path) -> No
 
 
 def command_emit_fixture(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
+    run_label = effective_run_label(args.run_label, fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
-        else bundle_artifact_path(Path(args.artifact_root), args.run_label, fixture_path)
+        else bundle_artifact_path(Path(args.artifact_root), run_label, fixture_path)
     )
     exit_code = emit_fixture(fixture_path, output_path, args.overwrite)
     if exit_code == 0:
@@ -280,12 +321,13 @@ def command_emit_aggregate(args: argparse.Namespace) -> int:
 
 
 def command_emit_static_gate(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
+    run_label = effective_run_label(args.run_label, fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
         else static_gate_artifact_path(
-            Path(args.artifact_root), args.run_label, fixture_path
+            Path(args.artifact_root), run_label, fixture_path
         )
     )
     exit_code = emit_static_gate(fixture_path, output_path, args.overwrite)
@@ -296,10 +338,12 @@ def command_emit_static_gate(args: argparse.Namespace) -> int:
 
 def command_compare_fixtures(args: argparse.Namespace) -> int:
     artifact_root = Path(args.artifact_root)
-    left_fixture = Path(args.left_fixture)
-    right_fixture = Path(args.right_fixture)
-    left_artifact = bundle_artifact_path(artifact_root, args.left_label, left_fixture)
-    right_artifact = bundle_artifact_path(artifact_root, args.right_label, right_fixture)
+    left_fixture = resolve_fixture_argument(args.left_fixture)
+    right_fixture = resolve_fixture_argument(args.right_fixture)
+    left_label = effective_run_label(args.left_label, left_fixture)
+    right_label = effective_run_label(args.right_label, right_fixture)
+    left_artifact = bundle_artifact_path(artifact_root, left_label, left_fixture)
+    right_artifact = bundle_artifact_path(artifact_root, right_label, right_fixture)
 
     left_exit = emit_fixture(left_fixture, left_artifact, args.overwrite)
     if left_exit != 0:
@@ -316,8 +360,8 @@ def command_compare_fixtures(args: argparse.Namespace) -> int:
 
 def command_smoke_fixture(args: argparse.Namespace) -> int:
     artifact_root = Path(args.artifact_root)
-    fixture_path = Path(args.fixture_path)
-    run_label = ensure_run_label(args.run_label)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
+    run_label = effective_run_label(args.run_label, fixture_path)
     bundle_artifact = bundle_artifact_path(artifact_root, run_label, fixture_path)
 
     emit_exit = emit_fixture(fixture_path, bundle_artifact, args.overwrite)
@@ -327,8 +371,8 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
     print(f"fixture artifact: {bundle_artifact}", flush=True)
 
     if args.reference_fixture:
-        reference_fixture = Path(args.reference_fixture)
-        reference_label = ensure_run_label(args.reference_label)
+        reference_fixture = resolve_fixture_argument(args.reference_fixture)
+        reference_label = effective_run_label(args.reference_label, reference_fixture)
         reference_artifact = bundle_artifact_path(
             artifact_root, reference_label, reference_fixture
         )
@@ -342,6 +386,11 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
         compare_exit = compare_artifacts(bundle_artifact, reference_artifact)
         if compare_exit not in {0, 1}:
             return compare_exit
+        if compare_exit == 1:
+            print(
+                "bundle compare: differences found (informational)",
+                flush=True,
+            )
 
     full_aggregate = aggregate_artifact_path(
         artifact_root,
@@ -372,6 +421,12 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
     compare_exit = compare_aggregates(full_aggregate, single_aggregate)
     if compare_exit not in {0, 1}:
         return compare_exit
+    if compare_exit == 1:
+        print(
+            "aggregate compare: differences found (informational) "
+            "- full directory aggregate と single-fixture aggregate の contrast を見ている",
+            flush=True,
+        )
 
     return 0
 
@@ -397,7 +452,7 @@ def command_compare_static_gates(args: argparse.Namespace) -> int:
 
 def command_smoke_static_gate(args: argparse.Namespace) -> int:
     artifact_root = Path(args.artifact_root)
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
     run_label = ensure_run_label(args.run_label)
     left_artifact = static_gate_artifact_path(artifact_root, run_label, fixture_path)
 
@@ -410,7 +465,7 @@ def command_smoke_static_gate(args: argparse.Namespace) -> int:
     if not args.reference_fixture:
         return 0
 
-    reference_fixture = Path(args.reference_fixture)
+    reference_fixture = resolve_fixture_argument(args.reference_fixture)
     reference_label = ensure_run_label(args.reference_label)
     right_artifact = static_gate_artifact_path(
         artifact_root,
@@ -433,7 +488,7 @@ def command_smoke_static_gate(args: argparse.Namespace) -> int:
 
 
 def command_suggest_checked_reasons(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
@@ -451,7 +506,7 @@ def command_suggest_checked_reasons(args: argparse.Namespace) -> int:
 
 
 def command_suggest_reason_codes(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
@@ -494,7 +549,7 @@ def command_scan_reason_code_readiness(args: argparse.Namespace) -> int:
 
 
 def command_smoke_same_lineage_checker(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
@@ -512,7 +567,7 @@ def command_smoke_same_lineage_checker(args: argparse.Namespace) -> int:
 
 
 def command_smoke_missing_option_checker(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
@@ -530,7 +585,7 @@ def command_smoke_missing_option_checker(args: argparse.Namespace) -> int:
 
 
 def command_smoke_capability_checker(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
@@ -548,7 +603,7 @@ def command_smoke_capability_checker(args: argparse.Namespace) -> int:
 
 
 def command_smoke_try_rollback_structural_checker(args: argparse.Namespace) -> int:
-    fixture_path = Path(args.fixture_path)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
     output_path = (
         Path(args.output_path)
         if args.output_path
@@ -589,8 +644,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     emit_fixture_parser.add_argument(
         "--run-label",
-        default="manual",
-        help="bundle artifact を保存する run label",
+        help="bundle artifact を保存する run label; omitted なら fixture stem から導出する",
     )
     emit_fixture_parser.add_argument(
         "--output-path",
@@ -641,8 +695,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     emit_static_gate_parser.add_argument(
         "--run-label",
-        default="manual",
-        help="static gate artifact を保存する run label",
+        help="static gate artifact を保存する run label; omitted なら fixture stem から導出する",
     )
     emit_static_gate_parser.add_argument(
         "--output-path",
@@ -904,13 +957,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     compare_fixtures_parser.add_argument(
         "--left-label",
-        default="left",
-        help="left artifact を保存する run label",
+        help="left artifact を保存する run label; omitted なら left fixture stem から導出する",
     )
     compare_fixtures_parser.add_argument(
         "--right-label",
-        default="right",
-        help="right artifact を保存する run label",
+        help="right artifact を保存する run label; omitted なら right fixture stem から導出する",
     )
     compare_fixtures_parser.add_argument(
         "--overwrite",
@@ -938,13 +989,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     smoke_fixture_parser.add_argument(
         "--run-label",
-        default="smoke",
-        help="primary run label for the fixture artifact and aggregate smoke",
+        help="primary run label for the fixture artifact and aggregate smoke; omitted なら fixture stem から導出する",
     )
     smoke_fixture_parser.add_argument(
         "--reference-label",
-        default="reference",
-        help="run label used when --reference-fixture is supplied",
+        help="run label used when --reference-fixture is supplied; omitted なら reference fixture stem から導出する",
     )
     smoke_fixture_parser.add_argument(
         "--overwrite",

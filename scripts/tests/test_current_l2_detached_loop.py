@@ -1,7 +1,9 @@
 import argparse
+import io
 import tempfile
 import sys
 import unittest
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
 
@@ -12,6 +14,55 @@ import current_l2_detached_loop as loop  # noqa: E402
 
 
 class DetachedLoopPathTests(unittest.TestCase):
+    def test_resolve_fixture_argument_accepts_stem_without_extension(self) -> None:
+        resolved = loop.resolve_fixture_argument("e3-option-admit-chain")
+        self.assertEqual(
+            resolved,
+            REPO_ROOT
+            / "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json",
+        )
+
+    def test_resolve_fixture_argument_accepts_absolute_existing_path(self) -> None:
+        fixture_path = (
+            REPO_ROOT
+            / "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json"
+        )
+        resolved = loop.resolve_fixture_argument(str(fixture_path))
+        self.assertEqual(resolved, fixture_path)
+
+    def test_resolve_fixture_argument_rejects_missing_stem_with_helpful_error(self) -> None:
+        with self.assertRaises(ValueError) as raised:
+            loop.resolve_fixture_argument("e999-missing")
+
+        self.assertIn("fixture not found", str(raised.exception))
+        self.assertIn("current-l2", str(raised.exception))
+
+    def test_emit_fixture_rejects_missing_fixture_before_spawning_subprocess(self) -> None:
+        captured_cmds: list[list[str]] = []
+        original_runner = loop.run_subprocess
+
+        def fake_runner(cmd: list[str]) -> int:
+            captured_cmds.append(cmd)
+            return 0
+
+        loop.run_subprocess = fake_runner
+        try:
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                exit_code = loop.emit_fixture(
+                    REPO_ROOT
+                    / "crates/mir-ast/tests/fixtures/current-l2/does-not-exist.json",
+                    REPO_ROOT
+                    / "target/current-l2-detached/bundles/test/missing.detached.json",
+                    overwrite=True,
+                )
+        finally:
+            loop.run_subprocess = original_runner
+
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(captured_cmds, [])
+        self.assertIn("fixture does not exist", stderr.getvalue())
+
     def test_aggregate_artifact_path_uses_run_label_and_batch_summary_name(self) -> None:
         path = loop.aggregate_artifact_path(
             REPO_ROOT / "target" / "current-l2-detached",
@@ -73,6 +124,51 @@ class DetachedLoopPathTests(unittest.TestCase):
                     / "batch-summary.detached.json",
                 )
             ],
+        )
+
+    def test_compare_fixtures_derives_labels_from_fixture_stems_when_omitted(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            left_fixture = fixture_dir / "left-case.json"
+            right_fixture = fixture_dir / "right-case.json"
+            left_fixture.write_text("{}", encoding="utf-8")
+            right_fixture.write_text("{}", encoding="utf-8")
+
+            emitted_fixtures: list[tuple[Path, Path, bool]] = []
+            original_emit_fixture = loop.emit_fixture
+            original_compare_artifacts = loop.compare_artifacts
+
+            def fake_emit_fixture(fixture: Path, output: Path, overwrite: bool) -> int:
+                emitted_fixtures.append((fixture, output, overwrite))
+                return 0
+
+            loop.emit_fixture = fake_emit_fixture
+            loop.compare_artifacts = lambda left, right: 0
+            try:
+                exit_code = loop.command_compare_fixtures(
+                    argparse.Namespace(
+                        left_fixture=str(left_fixture),
+                        right_fixture=str(right_fixture),
+                        artifact_root=str(temp_root / "artifacts"),
+                        left_label=None,
+                        right_label=None,
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_fixture = original_emit_fixture
+                loop.compare_artifacts = original_compare_artifacts
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            emitted_fixtures[0][1],
+            temp_root / "artifacts" / "bundles" / "left-case" / "left-case.detached.json",
+        )
+        self.assertEqual(
+            emitted_fixtures[1][1],
+            temp_root / "artifacts" / "bundles" / "right-case" / "right-case.detached.json",
         )
 
     def test_smoke_fixture_emits_bundle_and_aggregate_and_tolerates_diff_status_one(
@@ -212,6 +308,94 @@ class DetachedLoopPathTests(unittest.TestCase):
             ],
         )
 
+    def test_smoke_fixture_derives_labels_from_fixture_stems_when_omitted(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "sample-case.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+            reference_fixture = fixture_dir / "reference-case.json"
+            reference_fixture.write_text("{}", encoding="utf-8")
+
+            emitted_fixtures: list[tuple[Path, Path, bool]] = []
+            emitted_aggregates: list[tuple[Path, Path, bool]] = []
+            original_emit_fixture = loop.emit_fixture
+            original_emit_aggregate = loop.emit_aggregate
+            original_compare_artifacts = loop.compare_artifacts
+            original_compare_aggregates = loop.compare_aggregates
+
+            def fake_emit_fixture(
+                fixture: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                emitted_fixtures.append((fixture, output, overwrite))
+                return 0
+
+            def fake_emit_aggregate(
+                fixture_directory: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                emitted_aggregates.append((fixture_directory, output, overwrite))
+                return 0
+
+            loop.emit_fixture = fake_emit_fixture
+            loop.emit_aggregate = fake_emit_aggregate
+            loop.compare_artifacts = lambda left, right: 0
+            loop.compare_aggregates = lambda left, right: 0
+            try:
+                exit_code = loop.command_smoke_fixture(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        reference_fixture=str(reference_fixture),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label=None,
+                        reference_label=None,
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_fixture = original_emit_fixture
+                loop.emit_aggregate = original_emit_aggregate
+                loop.compare_artifacts = original_compare_artifacts
+                loop.compare_aggregates = original_compare_aggregates
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            emitted_fixtures[0][1],
+            temp_root
+            / "artifacts"
+            / "bundles"
+            / "sample-case"
+            / "sample-case.detached.json",
+        )
+        self.assertEqual(
+            emitted_fixtures[1][1],
+            temp_root
+            / "artifacts"
+            / "bundles"
+            / "reference-case"
+            / "reference-case.detached.json",
+        )
+        self.assertEqual(
+            emitted_aggregates[0][1],
+            temp_root
+            / "artifacts"
+            / "aggregates"
+            / "sample-case-full"
+            / "batch-summary.detached.json",
+        )
+        self.assertEqual(
+            emitted_aggregates[1][1],
+            temp_root
+            / "artifacts"
+            / "aggregates"
+            / "sample-case-single"
+            / "batch-summary.detached.json",
+        )
+
     def test_smoke_fixture_propagates_helper_failures_above_diff_status_one(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_root = Path(temp_dir)
@@ -244,6 +428,44 @@ class DetachedLoopPathTests(unittest.TestCase):
                 loop.compare_aggregates = original_compare_aggregates
 
         self.assertEqual(exit_code, 2)
+
+    def test_smoke_fixture_prints_informational_notes_for_diff_status_one(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "sample.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+
+            original_emit_fixture = loop.emit_fixture
+            original_emit_aggregate = loop.emit_aggregate
+            original_compare_aggregates = loop.compare_aggregates
+
+            loop.emit_fixture = lambda fixture, output, overwrite: 0
+            loop.emit_aggregate = lambda fixture_directory, output, overwrite: 0
+            loop.compare_aggregates = lambda left, right: 1
+            capture = io.StringIO()
+            try:
+                with redirect_stdout(capture):
+                    exit_code = loop.command_smoke_fixture(
+                        argparse.Namespace(
+                            fixture_path=str(fixture_path),
+                            reference_fixture=None,
+                            artifact_root=str(temp_root / "artifacts"),
+                            run_label="sample-smoke",
+                            reference_label="reference",
+                            overwrite=True,
+                        )
+                    )
+            finally:
+                loop.emit_fixture = original_emit_fixture
+                loop.emit_aggregate = original_emit_aggregate
+                loop.compare_aggregates = original_compare_aggregates
+
+        self.assertEqual(exit_code, 0)
+        output = capture.getvalue()
+        self.assertIn("aggregate compare: differences found (informational)", output)
+        self.assertIn("full directory aggregate と single-fixture aggregate", output)
 
     def test_smoke_try_rollback_locality_delegates_to_smoke_fixture_defaults(self) -> None:
         captured: list[argparse.Namespace] = []

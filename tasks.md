@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 12:53 JST
+最終更新: 2026-04-09 13:07 JST
 
 ## この文書について
 
@@ -70,6 +70,7 @@
 - detached validation loop の入口自体は成立済み
 - payload core / bundle context / detached non-core / explanation の split も固まっている
 - production API にしない限り、手戻りは比較的小さい
+- current baseline では fixture stem shorthand、default run label derivation、missing fixture の fail-fast を thin helper に入れてよく、next friction を aggregate-noise / reference update 側へ寄せられる
 
 #### 成果物のイメージ
 
