@@ -114,6 +114,25 @@ Every report should contain, in this order:
   を簡潔に mirror すること。phase 読みが変わった task では同じ task の中で更新すること。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
+## tasks.md 維持ルール
+
+- `tasks.md` は repo 全体の **current task map** であり、`progress.md` より少し具体的に
+  - ある程度まとまった単位で自走して進められる task
+  - 方針決定が必要で、かつ current research の障害になっている blocker / open question
+  を整理するための文書である。
+- `tasks.md` は append-only の履歴ではない。**更新時には毎回全体を書き直し、現況と整合した snapshot に保つこと。**
+- phase end、checkpoint close、mainline 切り替え、major blocker の入れ替わりが起きた task では、同じ task の中で `tasks.md` の更新要否を確認すること。
+- `tasks.md` では、少なくとも次を分けて書くこと。
+  - 自走可能な task package
+  - 方針決定が必要な blocker / open question
+- blocker 側では、各項目について少なくとも次を書くこと。
+  - 概要
+  - 何に影響するか
+  - 主要な選択肢
+  - current recommendation / 見解
+- `tasks.md` は規範判断の正本ではない。規範判断は `specs/`、長期比較と repository memory は `plan/` に残すこと。
+- `tasks.md` を更新しなかった場合でも、report に **`tasks.md 更新不要`** と明記すること。
+
 ## review と task close の運用
 
 - task はできるだけ内部で閉じる。中途で user に何度も返さない。

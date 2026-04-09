@@ -785,6 +785,14 @@
 
 - `docs/research_abstract/` 配下の文書は、この addendum の **派生要約** として追加された companion であり、top-level mirror update の provenance root にはしない。
 
+### 2026-04-09 task snapshot and maintenance rule addendum
+
+- `README.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/91-maintenance-rules.md` の今回更新分は、追加で次を主根拠にする。
+  - `tasks.md`
+  - `docs/reports/0349-task-snapshot-and-maintenance-rule.md`
+
+- `tasks.md` は current task map の snapshot であり、規範判断の正本ではない。
+
 ### named profile catalog と mirror boundary
 
 - `0066`

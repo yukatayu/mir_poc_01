@@ -11,6 +11,10 @@
 - `progress.md`
   - rough progress snapshot、current mainline、phase / autonomy gate の mirror である。
   - 規範判断の正本ではない。status / remaining step / current phase を素早く掴みたいときに先に読む。
+- `tasks.md`
+  - current self-driven task package と、方針決定が必要な current blocker / open question を読みやすく整理した current task map である。
+  - append で履歴を積まず、現況に合わせて全体を書き直す snapshot として扱う。
+  - 規範判断の正本ではない。根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
 - `docs/research_abstract/`
   - phase ごとの本質的な研究成果だけを短く辿るための condensed summary である。
   - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。

@@ -40,6 +40,7 @@
 9. 未解決事項は `specs/10-open-questions.md`
 10. 実装や研究の順序は `specs/11-roadmap-and-workstreams.md`
 11. 既存判断は `specs/12-decision-register.md`
+12. 自走 task と current blocker の current snapshot を見たいときは `tasks.md`
 
 文書マップ、用語方針、相互参照の基準は `specs/00-document-map.md` を参照すること。
 current status / progress / remaining steps を見たいときは `progress.md`、repo 全体の研究 phase / autonomy gate を見たいときは `plan/17-research-phases-and-autonomy-gates.md` を読むこと。
@@ -52,6 +53,7 @@ report は `python scripts/new_report.py --slug <short-name>` でテンプレー
 ## リポジトリ構成
 
 - `specs/` — 正本となる仕様書と設計文書
+- `tasks.md` — 自走 task と current blocker をまとめた current task map
 - `docs/reports/` — 時系列の作業レポート
 - `docs/research_abstract/` — phase ごとの本質的な研究成果を短く辿るための要約
 - `docs/diagrams/` — Mermaid ソース図
