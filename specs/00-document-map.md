@@ -302,6 +302,8 @@
   - Phase 5 theorem-side payload-ready retained bridge の次段として、concrete-transcript-body ref だけをどこまで先に足し、actual serialized channel body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/169-current-l2-theorem-line-transcript-body-ready-serialized-channel-body-threshold.md`
   - Phase 5 theorem-side transcript-body-ready retained bridge の次段として、serialized-channel-body ref だけをどこまで先に足し、actual emitted attachment blob / file body をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/170-current-l2-theorem-line-serialized-ready-emitted-attachment-body-threshold.md`
+  - Phase 5 theorem-side serialized-ready retained bridge の次段として、`emitted_attachment_body_ref` だけをどこまで先に足し、actual emitted attachment blob / file materialization をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
