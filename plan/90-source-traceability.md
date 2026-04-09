@@ -258,6 +258,23 @@
   - `docs/reports/0358-async-control-memory-boundary-inventory.md`
   - `docs/reports/0379-phase5-small-decidable-core-and-proof-boundary-inventory.md`
 
+### 2026-04-10 Phase 5 observed session lifecycle addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`
+  - `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md`
+  - `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md`
+  - `specs/examples/144-current-l2-theorem-line-review-linked-bless-bridge-retained-notebook-threshold.md`
+  - `specs/examples/145-current-l2-theorem-line-retained-bridge-review-session-link-threshold.md`
+  - `specs/examples/146-current-l2-theorem-line-session-linked-retained-bridge-review-observation-threshold.md`
+  - `specs/examples/147-current-l2-theorem-line-observed-session-lifecycle-threshold.md`
+  - `docs/reports/0407-phase5-retained-bridge-session-link-package.md`
+  - `docs/reports/0408-review-phase5-retained-bridge-session-link-package.md`
+  - `docs/reports/0409-review-phase5-retained-bridge-session-link-package-followup.md`
+  - `docs/reports/0410-phase5-observed-session-lifecycle-package.md`
+  - `docs/reports/0411-review-phase5-observed-session-lifecycle-package.md`
+  - `docs/reports/0412-review-current-uncommitted-phase5-package.md`
+
 ### 2026-04-09 Phase 5 notebook bridge artifact threshold addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。

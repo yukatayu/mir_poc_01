@@ -132,7 +132,11 @@ consumer-specific attachment として後段に残すのが current first choice
 **`retained_notebook_ref`**
 までは足してよく、そのさらに次段として
 **`review_session_ref`**
-までは足してよいが、actor / timestamp / lifecycle state / actual retained path policy はまだ後段に残す。
+までは足してよく、そのさらに次段として
+**`reviewed_by_ref + reviewed_at_ref`**
+までは足してよく、そのさらに次段として
+**`review_session_state`**
+までは足してよいが、retention state / actual retained path policy / emitted artifact pressure はまだ後段に残す。
 
 ## まだやっていないこと
 
@@ -141,7 +145,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- session-linked retained bridge に actor / timestamp / lifecycle state をどこまで足すか
+- retention state / actual retained path policy / emitted artifact threshold をどこまで足すか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
