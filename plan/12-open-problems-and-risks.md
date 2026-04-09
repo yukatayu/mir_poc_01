@@ -264,7 +264,8 @@
 - `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md` により、mixed row default を壊さずに theorem-side projection bundle を docs-only first cut に置く current first choice まで固定済みである。
 - `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md` により、theorem-side projection bundle の `evidence_refs` は typed symbolic ref family を current first choice に置き、actual path / URI / emitted artifact id は later reopen に残す current cut まで固定済みである。
 - `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md` により、projection bundle を current phase では docs-only に留め、public checker migration は concrete theorem consumer pressure が出たときだけ reopen 候補にする threshold まで固定済みである。
-- 引き続き OPEN なのは、concrete theorem consumer bridge に必要な minimum contract rows をどこまで docs-only で書くか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
+- `specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md` により、concrete theorem consumer bridge の current minimum contract row core は `obligation_kind + evidence_refs` に留め、`goal_text` / `proof_hint` / `consumer_hint` は later consumer-specific attachment に残す threshold まで固定済みである。
+- 引き続き OPEN なのは、concrete theorem consumer class を何に置くか、`goal_text` / `proof_hint` / `consumer_hint` の attachment family をどこまで docs-only で先に比べるか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
 
 ### richer host interface
 

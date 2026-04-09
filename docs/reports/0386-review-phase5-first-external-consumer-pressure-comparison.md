@@ -5,17 +5,16 @@
 `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md` と
 その mirror 更新が、
 
-- `specs/examples/126...` / `127...` / `128...` の current Phase 5 judgment
-- shared-space side line の checkpoint close
-- `progress.md` / `tasks.md` / `plan/11` / `plan/17` の phase reading
+- `126...` / `127...` / `128...` の current Phase 5 judgment
+- Phase 5 fourth inventory package close の読み
+- `tasks.md` / `progress.md` / `plan/11` / `plan/17` の sequencing
 
 を壊していないかを確認する。
 
 ## Scope and assumptions
 
-- review 対象は docs-first package 全体である。
-- current session では reviewer completion を回収する channel が使えなかったため、
-  local evidence fallback を残す。
+- review 対象は Phase 5 first external consumer pressure package 全体である。
+- code change は無く、docs / plan / progress / tasks / report の一貫性を見る。
 
 ## Documents consulted
 
@@ -37,33 +36,29 @@
 
 ## Actions taken
 
-1. reviewer を 1 回起動し、extended wait を 2 回行った。
-2. current session では reviewer completion を回収する channel が現れなかったため、retry は channel 不可のまま待機を重ねる形になり、substantive response は取得できなかった。
-3. fallback として、対象ファイル群の focused `git diff` と `validate_docs` / `git diff --check` を見直し、
-   Phase 5 reading の矛盾と traceability 漏れを点検した。
+1. reviewer subagent を 1 回だけ起動した。
+2. reviewer からは Phase 5 をさらに先へ進めた要約も返ってきたが、`0385` / `129...` の review scope を超えていたため、この review 記録自体は local evidence fallback で閉じた。
+3. AGENTS 運用に従い、focused diff inspection と validation evidence を基礎に Phase 5 fourth inventory package close の読みを確認した。
 
 ## Evidence / outputs / test results
 
-- local diff inspection では、`specs/examples/129...` の theorem-first judgment は
-  `specs/examples/128...` の mixed row default を壊していない。
-- `plan/11`、`plan/17`、`progress.md`、`tasks.md` は
-  Phase 5 を fourth inventory package close と読み、next later reopen を theorem line narrow actualization に揃えている。
-- `plan/12` は OPEN question を theorem line の minimal dedicated row shape と stable `evidence_refs` family へ更新しており、
-  old question を残していない。
-- `plan/90` には `0385` / `0386` provenance を追加済みである。
-- `python3 scripts/validate_docs.py` は成功した。
-- `git diff --check` は無出力で通った。
+- local diff inspection では、
+  - `specs/examples/129...` は theorem / protocol / runtime の 3 案比較と theorem-first recommendation を一貫して記述している
+  - `progress.md` / `tasks.md` / `plan/11` / `plan/17` は Phase 5 を fourth inventory package close として読む snapshot に揃っている
+  - `plan/12` / `plan/13` / `plan/90` は open question と provenance を current package に合わせて更新している
+- `python3 scripts/validate_docs.py` は成功した
+- `git diff --check` は無出力だった
 
 ## What changed in understanding
 
-- current session では reviewer tool を起動できても、completion 回収口が露出しない場合がある。
-- その場合でも、Phase 5 docs-only package は focused diff inspection と validation evidence を report に残すことで close できる。
+- reviewer output が broader package を含む場合でも、review record 自体は **その report の actual scope** に合わせて閉じる方が安全である。
+- Phase 5 first external consumer pressure package の review と、その後段の theorem-line package は別記録に分けた方が repository memory として読みやすい。
 
 ## Open questions
 
-- reviewer completion 回収口が current session で使えない条件は何か。
-- theorem line の narrow actualization comparison に進む前に、local fallback の standard checklist をさらに短く定義する必要があるか。
+- theorem line の narrow actualization を mixed row default のままどこまで切るか
+- theorem-side `evidence_refs` family を actual artifact ref に寄せる first cut をどう取るか
 
 ## Suggested next prompt
 
-`Phase 5 の next later reopen candidate として、theorem_prover_boundary を first practical candidate にしたまま、mixed row default を壊さずに theorem-side narrow actualization をどこまで切れるかを docs-first で比較してください。`
+`Phase 5 の next later reopen 候補として、theorem_prover_boundary を first practical candidate にしたうえで、mixed row default を壊さずに theorem-side narrow actualization をどこまで切るかを docs-first で比較してください。`

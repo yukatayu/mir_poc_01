@@ -94,13 +94,20 @@ actual path ではなく **`ref_kind + ref_id` の typed symbolic ref family**
 **concrete theorem consumer pressure が出るまで docs-only bridge に留める**
 のが current first choice である。
 
+さらに current later reopen では、concrete theorem consumer bridge に渡してよい
+minimum contract row core を
+**`obligation_kind + evidence_refs`**
+に留め、`goal_text` / `proof_hint` / `consumer_hint` は
+consumer-specific attachment として後段に残すのが current first choice である。
+
 ## まだやっていないこと
 
 - public checker API の finalization
 - theorem prover input schema の finalization
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
-- concrete theorem consumer bridge に必要な minimum contract rows
+- concrete theorem consumer class を何に置くか
+- `goal_text` / `proof_hint` / `consumer_hint` の attachment family
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの

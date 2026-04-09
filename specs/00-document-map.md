@@ -228,6 +228,8 @@
   - Phase 5 theorem-side projection bundle の次段として、stable `evidence_refs` family を free-form string / typed symbolic ref / actual path系で比較し、typed symbolic ref family を current first choice に置く補助文書。
 - `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md`
   - Phase 5 theorem-side projection bundle の次段として、public checker migration を今進めるか deferred に残すかを比較し、docs-only bridge に留める current first choice を整理する補助文書。
+- `specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md`
+  - Phase 5 theorem-side public-checker defer threshold の次段として、concrete theorem consumer bridge に渡す minimum contract row をどこまで docs-only で切るかを比較し、row core を `obligation_kind + evidence_refs` に留める current first choice を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
