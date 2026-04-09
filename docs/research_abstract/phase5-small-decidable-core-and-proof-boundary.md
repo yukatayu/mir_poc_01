@@ -113,6 +113,12 @@ consumer-specific attachment として後段に残すのが current first choice
 さらに current order としては、
 **concrete notebook workflow pressure を first practical reopen**
 に置き、`proof_assistant_adapter` consumer pressure は second practical candidate に残すのが自然である。
+その具体的な first threshold も、
+**human review checklist / walkthrough pressure**
+に置くのが最小であり、compare / bless-like flow や actual file exchange はさらに後段に残す。
+その next cut では、review checklist / walkthrough unit 自体を
+**`subject_ref + row(obligation_kind + evidence_refs + goal_text) + checklist` を持つ docs-only named review unit bundle**
+へ寄せるところまでは自然だが、stronger notebook bridge sketch や actual emitted artifact はまだ後段に残す。
 
 ## まだやっていないこと
 
@@ -121,6 +127,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
+- named review unit を stronger notebook bridge sketch へどこまで拡張するか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
