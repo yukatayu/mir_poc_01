@@ -268,7 +268,8 @@
 - `specs/examples/134-current-l2-theorem-line-consumer-class-comparison.md` により、concrete theorem consumer class の current first practical candidate は `proof_notebook`、`proof_assistant_adapter` は second practical candidate、`theorem_export_checker` は later candidate に固定済みである。
 - `specs/examples/135-current-l2-theorem-line-notebook-attachment-family-comparison.md` により、`proof_notebook` first bridge の current lightweight attachment は `goal_text` に留め、`proof_hint` / `consumer_hint` は later attachment family に残す threshold まで固定済みである。
 - `specs/examples/136-current-l2-theorem-line-notebook-bridge-artifact-threshold.md` により、current phase では `proof_notebook` first bridge を named artifact family へ昇格させず、docs-only derived view に留める first choice まで固定済みである。named stable notebook bridge sketch は concrete notebook workflow pressure が出たときだけ reopen 候補にし、actual emitted notebook artifact はさらに強い consumer pressure が揃うまで later reopen に残す。
-- 引き続き OPEN なのは、concrete notebook workflow pressure を何とみなすか、`proof_assistant_adapter` を notebook line より先に reopen する条件をどう置くか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
+- `specs/examples/137-current-l2-theorem-line-next-consumer-pressure-comparison.md` により、next practical reopen は concrete notebook workflow pressure comparison を first choice にし、`proof_assistant_adapter` consumer pressure comparison は second practical candidate に留める current order まで固定済みである。
+- 引き続き OPEN なのは、concrete notebook workflow pressure を何とみなすか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすか、`proof_assistant_adapter` consumer pressure を second practical candidate のまま維持する条件がいつ崩れるかである。
 
 ### richer host interface
 
