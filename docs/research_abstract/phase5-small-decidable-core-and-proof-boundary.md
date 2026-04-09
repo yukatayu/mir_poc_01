@@ -82,13 +82,21 @@ boundary-specific handoff artifact と actual emitter は concrete consumer pres
 `protocol_verifier_boundary` は second practical candidate、`runtime_policy_boundary` は later candidate**
 と読むのが自然だと整理した。
 
+その次段では、mixed row default を壊さずに、
+**theorem line だけを `subject_kind + subject_ref + theorem_rows[]` の docs-only projection bundle として切る**
+のが current first choice であると整理した。
+
+さらに projection bundle の `evidence_refs` は、
+actual path ではなく **`ref_kind + ref_id` の typed symbolic ref family**
+へ整えるのが current first choice である。
+
 ## まだやっていないこと
 
 - public checker API の finalization
 - theorem prover input schema の finalization
 - protocol verifier input schema の finalization
-- theorem line の narrow actualization をどこまで mixed row default のまま切るか
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
+- theorem-side projection bundle を public checker API へ narrow migration してよい threshold
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの

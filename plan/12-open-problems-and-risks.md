@@ -261,7 +261,9 @@
 - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` までで、proof-obligation matrix を docs 正本に置き、source evidence を参照する mixed row bundle を later reopen 用 handoff sketch として切る current first choice までは整理済みである。
 - `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` により、current docs-only default は mixed row bundle 維持であり、boundary-specific handoff artifact と actual handoff emitter は concrete consumer pressure が出たときだけ reopen 候補にする threshold まで固定済みである。
 - `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md` により、current first practical candidate は `theorem_prover_boundary`、`protocol_verifier_boundary` は second practical candidate、`runtime_policy_boundary` は later candidate に置く current first choice まで固定済みである。
-- 引き続き OPEN なのは、theorem line を first actualization candidate にしたときの minimal dedicated row shape、stable `evidence_refs` family をどこまで actual artifact ref に寄せるか、public checker API への narrow migration をどこまで許すかである。
+- `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md` により、mixed row default を壊さずに theorem-side projection bundle を docs-only first cut に置く current first choice まで固定済みである。
+- `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md` により、theorem-side projection bundle の `evidence_refs` は typed symbolic ref family を current first choice に置き、actual path / URI / emitted artifact id は later reopen に残す current cut まで固定済みである。
+- 引き続き OPEN なのは、projection bundle を public checker API へ narrow migration してよい threshold をどこに置くか、actual theorem handoff emitter を later reopen に保てるか、typed symbolic ref family を boundary-specific handoff artifact へ昇格させる concrete pressure を何とみなすかである。
 
 ### richer host interface
 

@@ -964,3 +964,12 @@
   - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
   - `docs/reports/0373-shared-space-auditable-authority-witness-minimal-shape.md`
   - `docs/reports/0374-review-shared-space-auditable-authority-witness-minimal-shape.md`
+
+### 2026-04-09 phase5 theorem-line reopen addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md`
+  - `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md`
+  - `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md`
+  - `docs/reports/0387-phase5-theorem-line-narrow-actualization-package.md`
+  - `docs/reports/0388-review-phase5-theorem-line-narrow-actualization-package.md`

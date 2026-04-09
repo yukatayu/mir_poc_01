@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 21:04 JST
+最終更新: 2026-04-09 21:15 JST
 
 ## この文書について
 
@@ -16,15 +16,15 @@
 
 - 主線は **Phase 0 / 1 / 2 maintenance tail + cross-phase checkpoint maintenance** である。
 - Phase 4 は、authoritative room baseline / working subset / minimal witness core / delegated-provider practical cut / control-plane threshold comparison まで current package を切り終え、**checkpoint maintenance と later reopen candidate** に移った。
-- Phase 5 は、`specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`、`specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`、`specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md`、`specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md` までで **small decidable core / proof / async-control boundary の fourth inventory package** を切り終え、checkpoint maintenance と theorem line の later reopen candidate に移った。
+- Phase 5 は、`specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`、`specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`、`specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md`、`specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md`、`specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md`、`specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md` までで **small decidable core / proof / async-control boundary の theorem-line later package** を切り終え、checkpoint maintenance と public checker migration threshold の later reopen candidate に移った。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
 
 ## 次に自走で進める順番と rough estimate
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 1 | cross-phase checkpoint | drift suppression / mirror sweep | Phase 4 / 5 package close 後の mirror drift を抑える | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | closeout package。Phase 5 third package close 後の first maintenance line |
-| 2 | Phase 5 checkpoint 後半 / later reopen 候補 | theorem line narrow actualization comparison | theorem line を first concrete consumer pressure に置いたうえで、mixed row default を壊さずにどこまで narrow actualization できるかを比べる | 中〜重 | 0〜2 task | 一部自走可能 | `specs/examples/126...` から `129...` までで current package は close。reopen は theorem-side external consumer pressure が実際に要るとき |
+| 1 | cross-phase checkpoint | drift suppression / mirror sweep | Phase 4 / 5 package close 後の mirror drift を抑える | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | closeout package。Phase 5 theorem-line package close 後の first maintenance line |
+| 2 | Phase 5 checkpoint 後半 / later reopen 候補 | theorem-side public checker migration threshold comparison | theorem-side projection bundle と typed symbolic `evidence_refs` family を前提に、public checker migration と actual theorem emitter をどの threshold まで deferred に保つかを比べる | 中〜重 | 0〜2 task | 一部自走可能 | `specs/examples/126...` から `131...` までで current theorem-line package は close。reopen は concrete theorem consumer pressure が実際に要るとき |
 | 3 | Phase 4 checkpoint 後半 / later reopen 候補 | shared-space control-plane / catalog later reopen | `control_epoch` 相当の split や final catalog を later pressure 時だけ再開する | 中〜重 | 0〜3 task | 一部自走可能 | `specs/examples/121...` から `125...` までで current package は close。reopen は authority handoff / provider binding / activation frontier compare need が出たとき |
 | 4 | Phase 2 maintenance tail | detached validation loop residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | `reference update / bless` は retention / path policy 依存なので later candidate |
 | 5 | Phase 4 checkpoint maintenance | authoritative room baseline / working subset の drift 抑制 | baseline judgment と practical contrast の drift を抑える | 低 | 0〜1 task / drift 時のみ | 自走可能 | baseline 自体は `specs/examples/121...`、working subset は `122...`、threshold は `125...` までで checkpoint close |
@@ -65,11 +65,19 @@
   - `protocol_verifier_boundary` は second practical candidate に留める
   - `runtime_policy_boundary` は later candidate に留める
   current first choice まで固定済みである。
+- `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md` で、
+  - mixed row default を維持したまま
+  - theorem-side projection bundle を docs-only first cut に置く
+  current first choice まで固定済みである。
+- `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md` で、
+  - theorem-side `evidence_refs` は typed symbolic ref family に整える
+  - actual path / URI / emitted artifact id は later reopen に残す
+  current first choice まで固定済みである。
 
 #### この task で残ること
 
-- theorem line の narrow actualization をどこまで mixed row default のまま切るか
-- stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
+- theorem-side projection bundle を public checker migration に寄せてよい threshold
+- typed symbolic `evidence_refs` family をどこまで boundary-specific carrier へ昇格させるか
 - actual handoff emitter を helper-local 既成事実にせず later reopen に保てるか
 - low-level memory-order family を将来 external vocabulary としてだけ残すか
 
