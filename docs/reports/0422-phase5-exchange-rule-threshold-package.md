@@ -89,9 +89,9 @@ Phase 5 theorem-line later package の次段として、adapter-linked retained 
 - resource check は current session 冒頭の `df -h .` / `free -h` を継続参照した。
 - timestamp:
   - `date '+%Y-%m-%d %H:%M %Z'` → `2026-04-10 01:15 JST`
-- package close 後に実行予定:
-  - `python3 scripts/validate_docs.py`
-  - `git diff --check`
+- post-package validation:
+  - `python3 scripts/validate_docs.py` → `Documentation scaffold looks complete.` / `Found 423 numbered report(s).`
+  - `git diff --check` → 無出力
 
 ## What changed in understanding
 
