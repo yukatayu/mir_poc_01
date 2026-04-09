@@ -258,7 +258,8 @@
 - first checker cut に候補として入れてよいのは、same-lineage static evidence floor、malformed / underdeclared rejection、minimal capability strengthening prohibition、request-local / option-local clause attachment、minimal predicate fragment、`try` / rollback locality の structural floor である。
 - ただし canonical normalization の一般証明、no re-promotion、rollback / cut non-interference、multi-shot continuation / membership churn / scheduler のような global property は current L2 checker cut に入れない。
 - current first package は `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` に集約済みであり、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split を current first choice に置く。
-- ただし proof-obligation matrix、external handoff artifact、public checker API への narrow migration は引き続き OPEN であり、Phase 5 later package に残る。
+- `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` までで、proof-obligation matrix を docs 正本に置き、source evidence を参照する mixed row bundle を later reopen 用 handoff sketch として切る current first choice までは整理済みである。
+- ただし mixed row bundle を維持するか、boundary-specific handoff artifact に割るか、actual handoff emitter をどこで切るか、public checker API への narrow migration をどこまで許すかは引き続き OPEN であり、Phase 5 later reopen 候補に残る。
 
 ### richer host interface
 

@@ -215,6 +215,9 @@
 - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
   - Phase 5 入口の current package として、current L2 / shared-space line を支える small decidable core、theorem prover boundary、protocol verifier boundary、runtime policy boundary の 4-way split を 1 本に集約した補助文書。
   - `atomic_cut` を local cut の最小核に留めたまま、higher-level async-control family を language core へ押し込まない current first choice を整理する。
+- `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
+  - Phase 5 later package の current package として、proof obligation を docs 上の matrix と source evidence 参照の narrow handoff row bundle に分ける current first choice を整理した補助文書。
+  - detached static gate artifact、`checked_reason_codes`、shared-space witness bundle を premature に public-looking contract へ昇格させない cut を与える。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

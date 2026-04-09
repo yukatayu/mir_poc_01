@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-09 18:33 JST
+最終更新: 2026-04-09 19:35 JST
 
 ## この文書について
 
@@ -21,7 +21,7 @@
 - **parser boundary / first checker reconnect** は、stage 1 / stage 2 / stage 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったうえで、current checkpoint では **Phase 3 self-driven portion を一旦尽きた reserve path とみなす threshold** まで固定できた。つまり、Phase 3 は「未完了の active line」ではなく「later pressure が出たときだけ reopen する line」と読むのが current snapshot である。
 - **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較すること、room resource ごとの owner slot / delegated capability / handoff epoch を分けて読む current working modelを維持している。authoritative room では current baseline judgment を `specs/examples/121-shared-space-authoritative-room-baseline.md` に集約し、**authoritative room に限って** activation rule の current first choice を `authority-ack`、authority placement の current first choice を `single room authority`、consistency mode の current first choice を `authoritative serial transition`、RNG / fairness source の current first choice を `authority_rng` に固定した。さらに、その次段として `specs/examples/122-shared-space-catalog-working-subset-comparison.md` で authoritative room と append-friendly room をまたぐ small cross-room working subset row を切り、authoritative room baseline、authoritative room witnessed draw、append-friendly room baseline、append-friendly room with optional RNG capability を current subset に置いた。`auditable_authority_witness` の minimal witness core は `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` に切り出し、room profile には `fairness_claim` だけを残し、実体は `witness_kind + action_ref + draw_slot + draw_result` を持つ audit / receipt side の typed witness bundle に置く current first choice を固定した。さらに `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` で、authoritative room 側でも `delegated_rng_service` を provider-placement candidate として practical に読める current cut を整理し、authority は request / lock / commit / publish の owner のまま、provider は draw result だけを返し、provider receipt / draw ref は witness core ではなく audit / receipt side の optional attachment に留める judgment を固定した。`specs/examples/125-shared-space-control-plane-carrier-threshold.md` では、その次段として control-plane separated causal carrier を current default に reopen する threshold を比較し、authority handoff / provider binding / activation frontier を room rule 側へ上げない限り `membership_epoch + member_incarnation` を維持し、reopen するなら first cut は full control-plane log ではなく `control_epoch` 相当の lightweight split に留める current first choice を固定した。reconnect / late leave / in-flight action は room profile に全部入れず、`member_incarnation` と uncommitted action invalidation を minimal room-profile rule、timeout / retry / resend を external policy layer に残す lineまで進んだ。identity / auth layering 側では membership registry には identity core だけを残し、auth stack / admission policy は別 carrier に置く lineを current first practical candidate にした。admission policy / compile-time visibility 側では role / capability / visibility requirement の over-approximation だけを compile-time に残し、actual admission / activation / reconciliation は runtime control-plane に残す lineを current first practical candidate にした。したがって shared-space の current package は checkpoint close であり、stronger control-plane split 自体の actualization は later pressure が出たときだけ reopen 候補に残してよい。
 - **async control / memory-model boundary** は、`atomic_cut` を place-local finalizing cut の最小核に留めたまま、higher-level ordering / fairness / consistency を event-tree / authority-serial transition / witness-aware commit family として Phase 4 / 5 の docs-first inventory へ送る line を current first practical candidate に置いた。C++ 的 low-level memory-order family は current immediate candidate にしていない。
-- **Phase 5 small decidable core / proof / async-control boundary** は、`specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` に current first package を集約し、`core_static_checker`、`theorem_prover_boundary`、`protocol_verifier_boundary`、`runtime_policy_boundary` の 4-way split を current first choice に固定した。つまり、first checker cut を強い type system に即時昇格させず、global invariant proof と protocol property と runtime policy を別 line に残す current package は checkpoint close とみなしてよい。
+- **Phase 5 small decidable core / proof / async-control boundary** は、`specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` で 4-way split を current first choice に固定したうえで、`specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` で proof-obligation matrix と source evidence 参照の mixed handoff row sketch まで docs-only で切った。つまり、first checker cut を強い type system に即時昇格させず、global invariant proof と protocol property と runtime policy を別 line に残しつつ、external handoff も public-looking API に早く上げない current package は second inventory package close とみなしてよい。
 - 現在の主ボトルネックは semantics の大崩れではなく、
   - fixture authoring / elaboration の反復コスト
   - parser boundary の staged 実装
@@ -38,7 +38,7 @@
 | Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | loop 入口と closeout baseline は成立、current self-driven friction reduction は checkpoint close |
 | Phase 3 | parser boundary / first checker cut | current tranche closeout 完了、self-driven portion は reserve path | 中〜やや重い | 後段依存 | private staged spike / reconnect subline は freeze 済み。later pressure が出たときだけ reopen |
 | Phase 4 | shared-space / membership / practical example boundary | authoritative baseline・working subset・minimal witness core・delegated-provider practical cut・control-plane threshold comparisonまで current package close | 重い | 着手可能 | baseline は `specs/examples/121...`、working subset は `122...`、minimal witness core は `123...`、delegated-provider practical cut は `124...`、threshold comparison は `125...`。stronger split は later reopen 候補 |
-| Phase 5 | static analysis / type / theorem prover / model checker boundary | first inventory package close | とても重い | 着手可能 | `specs/examples/126...` で 4-way split まで固定。proof-obligation matrix / external handoff artifact は later reopen 候補 |
+| Phase 5 | static analysis / type / theorem prover / model checker boundary | second inventory package close | とても重い | 着手可能 | `specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch まで固定。next は handoff actualization threshold の later reopen 候補 |
 | Phase 6 | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | Phase 2 / 3 / 5 の gate 後に入る |
 | Phase 7 | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Typed-Effect / Prism / app contract は user 仕様待ち |
 
@@ -47,13 +47,13 @@
 - **主線**: Phase 0 / 1 / 2 maintenance tail + cross-phase checkpoint maintenance
 - **maintenance tail**: Phase 0 / 1 / 2
 - **side line**: Phase 4 checkpoint maintenance / later reopen candidate
-- **inventory line**: Phase 5 first package close / later reopen candidate
+- **inventory line**: Phase 5 second package close / later reopen candidate
 - **まだ勝手に finalization しない**: final parser grammar、production exporter API、shared-space final catalog、higher-layer application contract
 
 ### immediate execution order
 
 1. checkpoint ごとに drift suppression と mirror sweep を入れる
-2. Phase 5 current package は checkpoint close として維持し、proof-obligation matrix / external handoff artifact は later pressure が出たときだけ reopen する
+2. Phase 5 current package は checkpoint close として維持し、mixed row bundle を維持するか boundary-specific handoff artifact に割るかの threshold だけを later pressure が出たときに reopen する
 3. detached validation loop は maintenance mode に戻し、policy-dependent な `reference update / bless` だけを later candidate に残す
 4. Phase 4 current package は checkpoint close として維持し、control-plane stronger split は later pressure が出たときだけ reopen する
 5. Phase 3 は later pressure が出たときだけ reopen する
@@ -140,10 +140,10 @@
 
 ### Priority A — すぐ続けてよい
 
-1. consistency / fairness / causal metadata catalog を room profile の working subset として比較する
-2. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
+1. checkpoint close 済み package の drift suppression と mirror sweep を維持する
+2. static analysis / type / theorem prover / async-control boundary は handoff actualization threshold だけを later reopen 候補として残す
 3. detached validation loop は maintenance mode として drift suppression と smoke を継続し、`reference update / bless` は later candidate に留める
-4. authoritative room baseline は checkpoint close として drift suppression を維持する
+4. authoritative room baseline と working subset は checkpoint close として drift suppression を維持する
 
 ### Priority B — A の後でよい
 
@@ -181,7 +181,7 @@ rough estimate:
 | parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | stage 1 / stage 2 / stage 3 の private staged spike は一区切りの freeze threshold まで整理済み。current checkpoint では reserve path |
 | first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は stage1/2 first tranches + freeze threshold まで揃い、current checkpoint では reserve path |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
-| static analysis / type / theorem prover / async-control boundary | 50% | 38% | 14% | 着手可能 | `specs/examples/126...` で small decidable core と proof / protocol / runtime の 4-way split まで current package close。next は later reopen 候補 |
+| static analysis / type / theorem prover / async-control boundary | 58% | 45% | 14% | 着手可能 | `specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch まで current package close。next は mixed row bundle vs boundary-specific handoff artifact の threshold comparison |
 | shared-space / dynamic membership boundary | 82% | 75% | 11% | 着手可能 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room baseline を `specs/examples/121...` に集約した current first choice、`specs/examples/122...` の small cross-room working subset row、`specs/examples/123...` の minimal witness core、`specs/examples/124...` の delegated-provider practical cut、`specs/examples/125...` の control-plane threshold comparison まで current package として切った。current promoted line は final catalog ではなく later reopen candidate と Phase 5 inventory に移る |
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様は依然 user からの追加仕様が必要 |
 
@@ -196,10 +196,10 @@ rough estimate:
 
 ## 次に進めるべき task
 
-1. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
-2. detached validation loop は maintenance residual だけを見て、path policy / bless flow は later candidate に残す
-3. Phase 4 current package は checkpoint close として drift を抑え、control-plane stronger split は later pressure が出たときだけ reopen する
-4. authoritative room baseline は checkpoint close として drift を抑える
+1. checkpoint close 済み package の drift suppression と mirror sweep を先に回す
+2. Phase 5 を reopen する場合は、mixed row bundle と boundary-specific handoff artifact の threshold comparison だけを narrow に選ぶ
+3. detached validation loop は maintenance residual だけを見て、path policy / bless flow は later candidate に残す
+4. Phase 4 current package は checkpoint close として drift を抑え、control-plane stronger split は later pressure が出たときだけ reopen する
 5. Phase 3 を reopen する場合は、current freeze line を壊さない later-pressure-driven subline だけを narrow に選ぶ
 
 ## 作業ログ（簡潔）
@@ -275,3 +275,4 @@ rough estimate:
 - 2026-04-09 17:05 JST — authoritative room 側の `delegated_rng_service` practical cut を `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` に固定し、authority commit ownership を維持したまま provider receipt を optional audit attachment に留める judgmentを mirror へ反映した。review 指摘も反映し、次の主線は control-plane separated causal carrier threshold comparison に移った。
 - 2026-04-09 17:50 JST — control-plane separated causal carrier threshold を `specs/examples/125-shared-space-control-plane-carrier-threshold.md` に固定し、`membership_epoch + member_incarnation` を current default に維持する条件と `control_epoch` 相当の first reopen cut 条件を切り分けた。Phase 4 current package は checkpoint close とし、次の promoted line は Phase 5 inventory に移した。
 - 2026-04-09 18:33 JST — Phase 5 の small decidable core / proof / async-control boundary を `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` に集約し、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split を current first choice に固定した。Phase 5 current package は first inventory package close とし、次は drift suppression と later reopen candidate 管理に移れる状態になった。
+- 2026-04-09 19:35 JST — Phase 5 later package として `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` を追加し、proof-obligation matrix と mixed handoff row sketch を current first choice に固定した。review finding 2 件も反映し、Phase 5 は second inventory package close として checkpoint maintenance / later reopen 候補へ移れる状態になった。

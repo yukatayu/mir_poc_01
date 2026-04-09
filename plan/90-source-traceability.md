@@ -258,6 +258,16 @@
   - `docs/reports/0358-async-control-memory-boundary-inventory.md`
   - `docs/reports/0379-phase5-small-decidable-core-and-proof-boundary-inventory.md`
 
+### 2026-04-09 Phase 5 proof-obligation matrix / handoff addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
+  - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
+  - `docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`
+  - `docs/reports/0379-phase5-small-decidable-core-and-proof-boundary-inventory.md`
+  - `docs/reports/0381-phase5-proof-obligation-matrix-and-handoff-artifact.md`
+  - `docs/reports/0382-review-phase5-proof-obligation-matrix-and-handoff-artifact-package.md`
+
 ### 2026-04-06 generic family checker entry comparison addendum
 
 - specs:
