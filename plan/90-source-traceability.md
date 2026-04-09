@@ -228,6 +228,17 @@
   - `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`
   - `docs/reports/0369-authoritative-room-baseline-docs-first-refinement.md`
   - `docs/reports/0371-shared-space-catalog-working-subset-comparison.md`
+
+### 2026-04-10 theorem-line emitted artifact threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/148-current-l2-theorem-line-lifecycle-ready-retention-state-threshold.md`
+  - `specs/examples/149-current-l2-theorem-line-retention-ready-path-policy-threshold.md`
+  - `specs/examples/150-current-l2-theorem-line-path-ready-emitted-artifact-threshold.md`
+  - `docs/reports/0413-phase5-retention-state-and-path-policy-package.md`
+  - `docs/reports/0414-review-phase5-retention-state-and-path-policy-package.md`
+  - `docs/reports/0416-phase5-emitted-artifact-threshold-package.md`
+  - `docs/reports/0417-review-phase5-emitted-artifact-threshold-package.md`
   - `docs/reports/0373-shared-space-auditable-authority-witness-minimal-shape.md`
   - `docs/reports/0375-shared-space-authoritative-room-delegated-rng-provider-placement.md`
 
