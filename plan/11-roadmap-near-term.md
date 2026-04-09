@@ -20,15 +20,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. detached validation loop の運用摩擦をさらに下げる
-
-- current tiny exporter / diff helper / loop wrapper / fixture template を使い、追加 fixture を何本か実地で回す
-- export 保存、core compare、reference update、failure triage のどこで実際に friction が残るかを観測する
-- current helper boundary を壊さずに、`scripts/` / non-production helper 側だけで減らせる摩擦を narrow に減らす
-- rough weight: 中
-- rough 所要: 1〜3 task / 半日〜2日
-
-### 2. authoritative room baseline を docs-first で進める
+### 1. authoritative room baseline を docs-first で進める
 
 - authoritative room と append-friendly room の authority placement / consistency mode / RNG provider を practical example で比べる
 - `authority-ack`、`single room authority`、`authoritative serial transition`、`authority_rng` の bundle をもう少し source-backed に厚くする
@@ -36,7 +28,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - rough weight: 中〜重
 - rough 所要: 2〜4 task / 2〜5日
 
-### 3. consistency / fairness / causal metadata catalog を working subset として比較する
+### 2. consistency / fairness / causal metadata catalog を working subset として比較する
 
 - room mode catalog を final fixed catalog と見なさず、working subset と deferred finalization に分ける
 - membership epoch / incarnation、authority witness、`authority_rng` / `delegated_rng_service` の関係を practical profile で比べる
@@ -44,7 +36,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - rough weight: 重
 - rough 所要: 3〜6 task / 4〜10日
 
-### 4. static analysis / type / theorem prover / async-control boundary の inventory を進める
+### 3. static analysis / type / theorem prover / async-control boundary の inventory を進める
 
 - local / structural / decidable 寄りの floor をどこまで core に入れるかを narrow に比べる
 - parser boundary / first checker cut / detached validation loop と衝突しない small decidable core inventory を先に作る
@@ -52,6 +44,19 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - `atomic_cut` を最小核に留め、higher-level async-control family を docs-first に比較する
 - rough weight: 重
 - rough 所要: 3〜6 task / 3〜8日
+
+### 4. detached validation loop は maintenance mode に戻す
+
+- current self-driven friction reduction は
+  - fixture stem shorthand
+  - missing fixture fail-fast
+  - default run label derivation
+  - `compare-fixture-aggregates`
+  - bundle / aggregate / static gate の shallow reference-only triage
+  までで checkpoint close とみなしてよい
+- 残りの `reference update / bless` は、final path policy / retention policy と接続するため current mainline からは外し、later candidate に残す
+- rough weight: 低
+- rough 所要: 0〜1 task
 
 ### 5. parser boundary / first checker cut は reserve path として維持する
 
@@ -68,10 +73,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| detached validation loop の throughput を実務上さらに 1 段上げる | 1〜3 task | export / compare / scaffold / failure triage の friction 観測が主眼 |
 | authoritative room baseline を practical example で source-backed に厚くする | 2〜4 task | activation / authority / consistency / RNG の bundle を厚くする |
 | consistency / fairness / causal metadata catalog を working subset として比較する | 3〜6 task | final fixed catalog はまだ作らない |
 | small decidable core / proof / async-control inventory を一段進める | 3〜6 task | final type system actualization はまだ含まない |
+| detached validation loop を maintenance mode で維持する | 0〜1 task | current self-driven portion は close。`reference update / bless` は later candidate |
 | Phase 3 reserve path を reopen する条件整理 | 0〜2 task | later pressure が出たときだけ着手 |
 
 ## いまの blocker

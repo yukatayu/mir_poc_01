@@ -126,7 +126,8 @@ class StaticGateDiffTests(unittest.TestCase):
 
         self.assertEqual(exit_code, 0)
         self.assertIn("reference-only differences:", output)
-        self.assertIn("- detached_noncore:", output)
+        self.assertIn("- detached_noncore.reason_codes:", output)
+        self.assertNotIn("- detached_noncore: left=", output)
 
 
 if __name__ == "__main__":

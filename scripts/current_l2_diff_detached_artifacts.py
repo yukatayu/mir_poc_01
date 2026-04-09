@@ -47,13 +47,24 @@ def compare_reference_section(
 ) -> list[str]:
     if left == right:
         return []
+    if isinstance(left, dict) and isinstance(right, dict):
+        differences: list[str] = []
+        for field in sorted(set(left.keys()) | set(right.keys())):
+            left_value = left.get(field)
+            right_value = right.get(field)
+            if left_value != right_value:
+                differences.append(
+                    f"- {label}.{field}: left={json.dumps(left_value, ensure_ascii=False)} "
+                    f"right={json.dumps(right_value, ensure_ascii=False)}"
+                )
+        return differences
     return [
         f"- {label}: left={json.dumps(left, ensure_ascii=False)} "
         f"right={json.dumps(right, ensure_ascii=False)}"
     ]
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
             "current L2 detached artifact の payload_core を比較する最小 helper。"
@@ -62,7 +73,7 @@ def main() -> int:
     )
     parser.add_argument("left", help="left artifact path")
     parser.add_argument("right", help="right artifact path")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     left_path = Path(args.left)
     right_path = Path(args.right)

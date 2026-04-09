@@ -423,6 +423,7 @@ current L2 では production exporter API はまだ固定しない。
   - `smoke-fixture` subcommand により、1 fixture の bundle export、optional reference compare、single-fixture aggregate smoke を 1 command で回せる
   - current first tranche では fixture 引数に current fixture directory の stem shorthand を許し、missing fixture は deep IO error に落とす前に fail-fast に止める
   - current second tranche では `compare-fixture-aggregates` により、single-fixture aggregate 同士の compare を noisy な full-vs-single contrast から分離して回せる
+  - current third tranche では bundle / aggregate / static gate diff helper の reference-only section を shallow per-field summary に揃え、current exact-compare core を触らずに compare triage を短くしてよい
   - `smoke-try-rollback-locality` subcommand により、`e22` mismatch と `e21` frontier の representative pair を current default label つきで 1 command で回せる
   - `emit-static-gate` / `compare-static-gates` / `smoke-static-gate` により、static-only / malformed / underdeclared fixture でも static gate artifact の保存と compare を回せる
   - `smoke-same-lineage-checker` により、1 fixture の static gate artifact を保存し、same-lineage first checker spike をその artifact に対して回せる
@@ -433,6 +434,7 @@ current L2 では production exporter API はまだ固定しない。
   - compare helper の exit code `1` は informational difference として許容し、helper failure だけを non-zero で止める
   - `smoke-fixture` では、bundle compare / aggregate compare の exit code `1` を stdout 上でも informational note として補足してよい
   - `compare-fixture-aggregates` は temporary single-fixture directory を内部で作る thin convenience に留め、final aggregate compare API を既成事実化しない
+  - current detached validation loop friction reduction の self-driven portion は、この shallow compare triage までで checkpoint close とみなし、`reference update / bless` は final path policy / retention policy と接続する別判断に残してよい
 - `scripts/current_l2_scaffold_fixture.py`
   - fixture authoring の boilerplate だけを `target/current-l2-fixture-scaffolds/` 下へ作る
   - runtime / static-only の違いと empty `.host-plan.json` sidecar の有無だけを扱い、expectation completion は authoring 側へ残す

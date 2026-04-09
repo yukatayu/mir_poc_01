@@ -839,7 +839,23 @@
   - `docs/reports/0366-review-detached-loop-friction-second-tranche.md`
 
 - 反映した current reading は次である。
-  - detached loop の second tranche では、noisy な full-vs-single aggregate contrast を `smoke-fixture` に残しつつ、single-fixture aggregate 同士の direct compare は `compare-fixture-aggregates` に分離してよい
+- detached loop の second tranche では、noisy な full-vs-single aggregate contrast を `smoke-fixture` に残しつつ、single-fixture aggregate 同士の direct compare は `compare-fixture-aggregates` に分離してよい
+
+### 2026-04-09 detached validation loop friction third tranche
+
+- Sources:
+  - `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
+  - `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md`
+  - `plan/07-parser-free-poc-stack.md`
+  - `plan/09-helper-stack-and-responsibility-map.md`
+  - `plan/11-roadmap-near-term.md`
+  - `progress.md`
+  - `tasks.md`
+  - `docs/reports/0367-detached-loop-friction-third-tranche.md`
+  - `docs/reports/0368-review-detached-loop-friction-third-tranche.md`
+- Judgment:
+  - bundle / aggregate / static gate diff helper の reference-only section は、current exact-compare core を変えずに top-level field ごとの shallow summary に崩してよい
+  - current self-driven friction reduction は、この shallow triage までで checkpoint close とみなし、`reference update / bless` は path policy / retention policy と接続する later candidate に残してよい
   - `tasks.md` の rough estimate table には phase 情報を短く添える
 
 ### named profile catalog と mirror boundary

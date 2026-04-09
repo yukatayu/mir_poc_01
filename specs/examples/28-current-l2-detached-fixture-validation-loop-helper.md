@@ -47,6 +47,7 @@ current detached validation loop で 1 fixture の反復を支える actual narr
 - `smoke-fixture` と `compare-fixtures` の run label は、明示されない場合 fixture stem から導出してよい
 - missing fixture / missing fixture directory は emitter subprocess へ落とす前に fail-closed にしてよい
 - noisy な full-vs-single aggregate contrast と fixture-to-fixture aggregate compare を分けるため、`compare-fixture-aggregates` subcommand を追加してよい
+- longer compare triage を短くするため、bundle / aggregate / static gate の reference-only differences は top-level field ごとの shallow summary に崩してよい
 
 この helper は次を行わない。
 
@@ -83,12 +84,14 @@ reference fixture を併用するときは、reference 側もその stem を def
 
 - `payload_core` だけを exact-compare してよい
 - `bundle_context` と `detached_noncore` は reference-only でよい
+- current third tranche では、その reference-only differences は `bundle_context.fixture_id` や `detached_noncore.steps_executed` のような top-level field 単位の shallow summary に崩してよい
 - `must_explain` は compare target に上げない
 
 ### aggregate compare
 
 - `summary_core` だけを exact-compare してよい
 - `aggregate_context` と `detached_noncore` は reference-only でよい
+- current third tranche では、その reference-only differences は top-level field 単位の shallow summary に崩してよい
 - `bundle_failure_kind_counts_scope = "migrated-kinds-only"` は current aggregate core に残す
 
 ## exit code policy の最小 cut
@@ -111,7 +114,7 @@ reference fixture を併用するときは、reference 側もその stem を def
 「difference が出ること自体」は smoke を止める理由にならない。
 current first tranche では、`smoke-fixture` は compare helper が `1` を返したとき
 それが informational difference であることを stdout に short note として補足してよい。
-current second tranche では、`compare-fixture-aggregates` を single-fixture aggregate 同士の direct compare convenience として許してよい。
+current second tranche では、`compare-fixture-aggregates` を single-fixture aggregate 同士の direct compare convenience として許してよい。current third tranche では、reference-only section の whole-section blob diff を shallow per-field summary に崩してよい。
 
 ## fixture authoring との関係
 
@@ -140,4 +143,5 @@ current second tranche では、`compare-fixture-aggregates` を single-fixture 
 - compare exit code `1` は differences found として informational 扱いに留めてよい
 - fixture 引数は current first tranche として stem shorthand を受けてよく、missing fixture は fail-fast に止めてよい
 - current second tranche では `compare-fixture-aggregates` により、single-fixture aggregate 同士の compare convenience を thin helper に入れてよい
+- current third tranche では bundle / aggregate / static gate の reference-only differences を shallow per-field summary に揃え、longer compare triage を短くしてよい
 - ただし production CLI、final exporter API、final path policy はまだ固定しない

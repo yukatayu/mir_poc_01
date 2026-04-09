@@ -2,6 +2,8 @@ import json
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 
 
@@ -119,6 +121,67 @@ class DetachedAggregateDiffTests(unittest.TestCase):
             exit_code = aggregate_diff.main([str(left_path), str(right_path)])
 
         self.assertEqual(exit_code, 0)
+
+    def test_main_prints_reference_only_differences_per_field(self) -> None:
+        left = {
+            "summary_core": {
+                "total_bundles": 1,
+                "runtime_bundles": 1,
+                "static_only_bundles": 0,
+                "passed": 1,
+                "failed": 0,
+                "bundle_failure_kind_counts_scope": "migrated-kinds-only",
+                "bundle_failure_kind_counts": [],
+            },
+            "aggregate_context": {
+                "directory_path": "/tmp/left",
+                "aggregate_scope": "directory-all",
+            },
+            "detached_noncore": {
+                "host_plan_coverage_failures": [{"fixture_id": "e3"}],
+            },
+        }
+        right = {
+            "summary_core": {
+                "total_bundles": 1,
+                "runtime_bundles": 1,
+                "static_only_bundles": 0,
+                "passed": 1,
+                "failed": 0,
+                "bundle_failure_kind_counts_scope": "migrated-kinds-only",
+                "bundle_failure_kind_counts": [],
+            },
+            "aggregate_context": {
+                "directory_path": "/tmp/right",
+                "aggregate_scope": "directory-all",
+            },
+            "detached_noncore": {
+                "host_plan_coverage_failures": [],
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            left_path = Path(temp_dir) / "left.json"
+            right_path = Path(temp_dir) / "right.json"
+            write_json(left_path, left)
+            write_json(right_path, right)
+
+            buffer = StringIO()
+            with redirect_stdout(buffer):
+                exit_code = aggregate_diff.main([str(left_path), str(right_path)])
+            output = buffer.getvalue()
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn("reference-only differences:", output)
+        self.assertIn(
+            '- aggregate_context.directory_path: left="/tmp/left" right="/tmp/right"',
+            output,
+        )
+        self.assertIn(
+            '- detached_noncore.host_plan_coverage_failures: left=[{"fixture_id": "e3"}] right=[]',
+            output,
+        )
+        self.assertNotIn("- aggregate_context: left=", output)
 
 
 if __name__ == "__main__":

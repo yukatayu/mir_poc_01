@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 13:22 JST
+最終更新: 2026-04-09 14:53 JST
 
 ## この文書について
 
@@ -17,10 +17,10 @@
 - 主線は **Phase 2 maintenance tail + Phase 4 side line + Phase 5 inventory line** である。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
 - したがって、今すぐ自走で進める順番は
-  1. detached validation loop の throughput を上げる
-  2. shared-space の authoritative baseline を practical example で厚くする
-  3. consistency / fairness / causal metadata を room profile として比べる
-  4. static analysis / type / theorem prover / async-control boundary の inventory を整える
+  1. shared-space の authoritative baseline を practical example で厚くする
+  2. consistency / fairness / causal metadata を room profile として比べる
+  3. static analysis / type / theorem prover / async-control boundary の inventory を整える
+  4. detached validation loop は maintenance mode に戻して drift と policy-dependent residual だけを見る
   5. checkpoint ごとに drift suppression と mirror sweep を入れる
   である。
 
@@ -35,10 +35,10 @@
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 2 maintenance tail | detached validation loop の運用摩擦低減 | fixture を足して export / compare / triage を反復しやすくする | 中 | 1〜3 task / 半日〜2日 | 自走可能 | 既存 helper と detached loop を使って friction point を実地観測する |
-| 2 | Phase 4 前半 | authoritative room baseline の docs-first 精密化 | activation / authority / consistency / RNG の最小 practical bundle を厚くする | 中〜重 | 2〜4 task / 2〜5日 | 自走可能 | すごろく room などの practical example に直結しやすい |
-| 3 | Phase 4 前半〜中盤 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
-| 4 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
+| 1 | Phase 4 前半 | authoritative room baseline の docs-first 精密化 | activation / authority / consistency / RNG の最小 practical bundle を厚くする | 中〜重 | 2〜4 task / 2〜5日 | 自走可能 | すごろく room などの practical example に直結しやすい |
+| 2 | Phase 4 前半〜中盤 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
+| 3 | Phase 5 入口 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
+| 4 | Phase 2 maintenance tail | detached validation loop の maintenance residual | drift suppression と policy-dependent residual の切り分け | 低 | 0〜1 task / 必要時のみ | 自走可能 | current self-driven friction reduction は checkpoint close。`reference update / bless` は later candidate |
 | 5 | cross-phase checkpoint | drift suppression / checkpoint sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task というより closeout package |
 | 6 | Phase 3 reserve path | Phase 3 reserve path reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
 
@@ -55,28 +55,39 @@
 
 という loop を、もっと機械的に回せるようにする。
 
-#### この task でやること
+#### current checkpoint
 
-- current tiny emitter / diff helper / wrapper を使って、追加 fixture を数本回す
-- 実際に friction が残る箇所を観測する
-  - export path
-  - reference compare
-  - aggregate compare
-  - fixture scaffold
-- friction を `scripts/` や non-production helper の薄い改善で下げる
+- current self-driven portion は checkpoint close とみなしてよい。
+- first tranche で
+  - fixture stem shorthand
+  - default run label derivation
+  - missing fixture fail-fast
+  を thin helper に actualize した。
+- second tranche で `compare-fixture-aggregates` を追加し、single-fixture aggregate 同士の direct compare を noisy な full-vs-single contrast から分離した。
+- third tranche で bundle / aggregate / static gate diff helper の reference-only section を shallow per-field summary に揃え、longer compare triage を短くした。
+- したがって current remaining residual は
+  - `reference update / bless`
+  - retention / overwrite / path policy と接続する update flow
+  だけである。
 
 #### いま自走できる理由
 
 - detached validation loop の入口自体は成立済み
 - payload core / bundle context / detached non-core / explanation の split も固まっている
 - production API にしない限り、手戻りは比較的小さい
-- current baseline では fixture stem shorthand、missing fixture の fail-fast、informational compare note、single-fixture aggregate direct compare convenience を thin helper に入れてよく、next friction を reference update / longer compare triage 側へ寄せられる
+- current self-driven portion は閉じたため、残りは path policy / retention policy に近い residual だけである
+
+#### 残すもの
+
+- `reference update / bless` を detached loop helper と同じ layer に入れるか
+- overwrite / retention / path policy とどう接続するか
+- compare-only baseline を維持するか
 
 #### 成果物のイメージ
 
-- helper の small improvement
+- thin helper の 3 tranche
 - additional smoke evidence
-- friction point comparison の report
+- residual blocker の明確化
 
 #### 重さ
 
@@ -84,12 +95,12 @@
 
 #### rough 所要
 
-- 1〜3 task
-- 半日〜2日
+- current self-driven portion は完了
+- residual は 0〜1 task だが、policy-dependent candidate として後ろへ送ってよい
 
 #### 現在の推奨度
 
-- **最優先**
+- **checkpoint close / maintenance mode**
 
 ---
 
@@ -522,10 +533,10 @@ request move(player)
 ## current recommendation summary
 
 - **自走の順番**:
-  1. detached validation loop friction reduction
-  2. authoritative room baseline の docs-first 精密化
-  3. consistency / fairness / causal metadata catalog comparison
-  4. static analysis / proof / async-control boundary inventory
+  1. authoritative room baseline の docs-first 精密化
+  2. consistency / fairness / causal metadata catalog comparison
+  3. static analysis / proof / async-control boundary inventory
+  4. detached validation loop maintenance residual
   5. checkpoint ごとの drift suppression / mirror sweep
 - **今は止める / later pressure 待ち**:
   - Phase 3 reserve path の reopen

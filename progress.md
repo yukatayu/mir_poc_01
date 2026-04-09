@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-09 13:22 JST
+最終更新: 2026-04-09 14:53 JST
 
 ## この文書について
 
@@ -17,7 +17,7 @@
 - **current L2 semantics** は、current mainline を進めるにはかなり安定している。
 - **parser-free PoC** は、fixture / interpreter / host harness / bundle / batch / selection / profile / catalog まで揃っている。
 - **detached validation loop** は、bundle / aggregate / static gate の emit・保存・compare・smoke を回せる入口が成立しており、Phase0/1/2 closeout の first-pass smoke と top-level mirror sweep も通した。
-- detached validation loop の current helper baseline には、fixture stem shorthand、`smoke-fixture` / `compare-fixtures` の default run label derivation、missing fixture の fail-fast、`compare-fixture-aggregates` による single-fixture aggregate direct compare convenience も入っており、next friction は reference update / longer compare triage 側に寄っている。
+- detached validation loop の current helper baseline には、fixture stem shorthand、`smoke-fixture` / `compare-fixtures` の default run label derivation、missing fixture の fail-fast、`compare-fixture-aggregates` による single-fixture aggregate direct compare convenience、bundle / aggregate / static gate diff helper の shallow reference-only triage も入っている。したがって current self-driven friction reduction は checkpoint close とみなし、残りの `reference update / bless` は final path policy / retention policy と接続する later candidate に残してよい。
 - **parser boundary / first checker reconnect** は、stage 1 / stage 2 / stage 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったうえで、current checkpoint では **Phase 3 self-driven portion を一旦尽きた reserve path とみなす threshold** まで固定できた。つまり、Phase 3 は「未完了の active line」ではなく「later pressure が出たときだけ reopen する line」と読むのが current snapshot である。
 - **shared-space / membership** は mainline ではないが、upper-layer docs-first boundary として「participant plain array を core に焼き込まず、session-scoped membership registry + derived snapshot view を第一候補にする」比較に加え、tree-like view を derived に留めること、activation visibility の compile-time over-approximation と runtime control-plane を分けること、authority / consistency / RNG provider を別軸で比較すること、room resource ごとの owner slot / delegated capability / handoff epoch を分けて読む current working model、authoritative room の activation rule 最小候補を `authority-ack` に置き、さらに **authoritative room に限って** authority placement の current first choice を `single room authority`、consistency mode の current first choice を `authoritative serial transition`、RNG / fairness source の current first choice を `authority_rng` に置き、authoritative game room の current minimal concrete bundle を `authority-ack` + `single room authority` + `authoritative serial transition` + `authority_rng` に整理し、RNG だけを `delegated_rng_service` に差し替える next practical bundle を分離した。さらに reconnect / late leave / in-flight action は room profile に全部入れず、`member_incarnation` と uncommitted action invalidation を minimal room-profile rule、timeout / retry / resend を external policy layer に残す line まで進んだ。causal metadata 側では plain vector deletion を避け、epoch / incarnation split を first practical candidate、control-plane separated carrier を next stronger candidate に置くところまで進んだ。fairness trust model 側では `opaque authority trust` を current minimal candidate、`auditable authority witness` を next narrow strengthening candidate に置き、provider placement と witness requirement を別軸で比較する line を追加した。identity / auth layering 側では membership registry には identity core だけを残し、auth stack / admission policy は別 carrier に置く line を current first practical candidate にした。admission policy / compile-time visibility 側では role / capability / visibility requirement の over-approximation だけを compile-time に残し、actual admission / activation / reconciliation は runtime control-plane に残す line を current first practical candidate にした。append-heavy room では `append-friendly room` を first practical catalog、`delegated_rng_service` を next practical candidate にする line を維持している。
 - **async control / memory-model boundary** は、`atomic_cut` を place-local finalizing cut の最小核に留めたまま、higher-level ordering / fairness / consistency を event-tree / authority-serial transition / witness-aware commit family として Phase 4 / 5 の docs-first inventory へ送る line を current first practical candidate に置いた。C++ 的 low-level memory-order family は current immediate candidate にしていない。
@@ -34,7 +34,7 @@
 |---|---|---|---|---|---|
 | Phase 0 | repository memory / decision boundary | maintenance | 低い | 自走可能 | `specs/` / `plan/` / report / progress の整合維持 |
 | Phase 1 | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
-| Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | loop 入口と closeout baseline は成立、現在は運用摩擦低減 |
+| Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | loop 入口と closeout baseline は成立、current self-driven friction reduction は checkpoint close |
 | Phase 3 | parser boundary / first checker cut | current tranche closeout 完了、self-driven portion は reserve path | 中〜やや重い | 後段依存 | private staged spike / reconnect subline は freeze 済み。later pressure が出たときだけ reopen |
 | Phase 4 | shared-space / membership / practical example boundary | 前半 | 重い | 着手可能 | docs-first boundary と practical profile comparison は進めてよいが final profile は要仕様確認 |
 | Phase 5 | static analysis / type / theorem prover / model checker boundary | 入口整理 | とても重い | 着手可能 | small decidable core / async-control inventory までは進めてよい |
@@ -51,11 +51,11 @@
 
 ### immediate execution order
 
-1. detached validation loop の運用摩擦低減を先に進める
-2. authoritative room baseline を practical example で厚くする
-3. consistency / fairness / causal metadata catalog を working subset として比較する
-4. static analysis / type / theorem prover / async-control boundary の inventory を進める
-5. checkpoint ごとに drift suppression と mirror sweep を入れる
+1. authoritative room baseline を practical example で厚くする
+2. consistency / fairness / causal metadata catalog を working subset として比較する
+3. static analysis / type / theorem prover / async-control boundary の inventory を進める
+4. checkpoint ごとに drift suppression と mirror sweep を入れる
+5. detached validation loop は maintenance mode に戻し、policy-dependent な `reference update / bless` だけを later candidate に残す
 6. Phase 3 は later pressure が出たときだけ reopen する
 
 ## いま自走で進めてよい範囲
@@ -140,10 +140,10 @@
 
 ### Priority A — すぐ続けてよい
 
-1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
-2. authoritative room baseline を docs-first で進め、activation / authority / consistency / RNG の practical bundle を厚くする
-3. consistency / fairness / causal metadata catalog を room profile の working subset として比較する
-4. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
+1. authoritative room baseline を docs-first で進め、activation / authority / consistency / RNG の practical bundle を厚くする
+2. consistency / fairness / causal metadata catalog を room profile の working subset として比較する
+3. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
+4. detached validation loop は maintenance mode として drift suppression と smoke を継続し、`reference update / bless` は later candidate に留める
 
 ### Priority B — A の後でよい
 
@@ -176,7 +176,7 @@ rough estimate:
 | Mir current L2 core semantics | 86% | 80% | 78% | 着手可能 | current mainline には十分安定 |
 | fallback / notation / representative examples | 86% | 82% | 68% | 着手可能 | examples drift はかなり抑えられている |
 | parser-free PoC execution stack | 90% | 85% | 98% | 着手可能 | runtime / bundle / batch / selection / profile は揃っている |
-| detached export / validation loop | 98% | 96% | 99% | 着手可能 | 入口は成立、現在は運用面の摩擦低減フェーズ |
+| detached export / validation loop | 98% | 97% | 99% | 着手可能 | 入口は成立、current self-driven friction reduction は checkpoint close。残りは policy-dependent な bless/update 候補 |
 | fixture authoring / elaboration 実務 | 97% | 98% | 99% | 着手可能 | template / scaffold / smoke convenience は強い |
 | parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | stage 1 / stage 2 / stage 3 の private staged spike は一区切りの freeze threshold まで整理済み。current checkpoint では reserve path |
 | first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は stage1/2 first tranches + freeze threshold まで揃い、current checkpoint では reserve path |
@@ -268,3 +268,4 @@ rough estimate:
 - 2026-04-09 12:53 JST — 次に自走で進める research package の順番を `detached validation loop → authoritative room baseline → consistency / fairness / causal metadata catalog → static analysis / proof / async-control inventory` に整理し、`tasks.md` / `progress.md` / `plan/11` / `plan/17` の immediate order を揃えた。次はこの順番どおり detached validation loop friction reduction から再開できる段階。
 - 2026-04-09 13:07 JST — detached validation loop friction reduction の first tranche として、fixture stem shorthand・default run label derivation・missing fixture fail-fast を thin helper に actualize し、`scripts/tests/test_current_l2_detached_loop.py` と shorthand smoke で current baseline を通した。次は aggregate-noise / reference update / longer compare triage のどれを先に薄く改善するかを比較する段階。
 - 2026-04-09 13:22 JST — detached validation loop friction reduction の second tranche として、`compare-fixture-aggregates` を追加し、single-fixture aggregate 同士の direct compare を noisy な full-vs-single contrast から分離した。`scripts/tests/test_current_l2_detached_loop.py`、shorthand aggregate compare、docs/plan/tasks mirror を通し、次の friction は reference update / bless と longer compare triage に寄った。
+- 2026-04-09 14:53 JST — detached validation loop friction reduction の third tranche として bundle / aggregate / static gate diff helper の reference-only section を shallow per-field summary に揃え、longer compare triage を短くした。related unit test、E3/E6 compare smoke、docs/tasks/progress mirror を通し、current self-driven portion は checkpoint close、残りは policy-dependent な reference update / bless 候補に絞られた。

@@ -233,6 +233,8 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `smoke-fixture` subcommand では、1 fixture の bundle emit、optional reference compare、single-fixture aggregate smoke を 1 command で支える
   - current first tranche では fixture 引数の stem shorthand 解決と missing fixture の fail-fast を担ってよい
   - current second tranche では `compare-fixture-aggregates` により、single-fixture aggregate 同士の direct compare convenience を担ってよい
+  - current third tranche では bundle / aggregate / static gate diff helper の reference-only section を whole-section blob でなく shallow per-field summary に崩し、longer compare triage を短くしてよい
+  - `reference update / bless` は compare helper と同じ layerへまだ入れず、path policy / retention policy と接続する later candidate に残してよい
   - compare helper の exit code `1` は informational difference として扱い、そのことを short note で補足してよい
 
 ## parser boundary 側の current splice point

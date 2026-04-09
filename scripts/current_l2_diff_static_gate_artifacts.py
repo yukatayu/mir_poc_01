@@ -43,6 +43,17 @@ def compare_reference_section(
 ) -> list[str]:
     if left == right:
         return []
+    if isinstance(left, dict) and isinstance(right, dict):
+        differences: list[str] = []
+        for field in sorted(set(left.keys()) | set(right.keys())):
+            left_value = left.get(field)
+            right_value = right.get(field)
+            if left_value != right_value:
+                differences.append(
+                    f"- {label}.{field}: left={json.dumps(left_value, ensure_ascii=False)} "
+                    f"right={json.dumps(right_value, ensure_ascii=False)}"
+                )
+        return differences
     return [
         f"- {label}: left={json.dumps(left, ensure_ascii=False)} "
         f"right={json.dumps(right, ensure_ascii=False)}"

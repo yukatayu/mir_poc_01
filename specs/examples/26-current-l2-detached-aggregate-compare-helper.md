@@ -32,6 +32,7 @@ current detached validation loop で aggregate compare を担う actual narrow c
 - 2 本の aggregate artifact JSON を読む
 - `summary_core` を exact-compare core として比較する
 - `aggregate_context` と `detached_noncore` は reference-only differences として表示する
+  - current third tranche では、section 全体を 1 行で丸ごと出すのでなく、top-level field ごとの shallow summary に崩してよい
 
 この helper は次を行わない。
 
@@ -66,7 +67,7 @@ aggregate compare helper では、次は reference-only に留める。
 - `directory_path`
 - `aggregate_scope`
 
-これは compare 対象 run の provenance を示すために有益だが、current L2 の typed aggregate core そのものではない。
+これは compare 対象 run の provenance を示すために有益だが、current L2 の typed aggregate core そのものではない。したがって helper は `aggregate_context.directory_path` や `aggregate_context.aggregate_scope` のような shallow summary を reference-only として出してよい。
 
 ### `detached_noncore`
 
@@ -74,7 +75,7 @@ aggregate compare helper では、次は reference-only に留める。
 - `bundle_failures`
 - `host_plan_coverage_failures`
 
-これらは coarse summary の補助や explanation に有益だが、`bundle_failure_kind_counts` と current list anchor の coexistence を保つため、typed aggregate core には上げない。
+これらは coarse summary の補助や explanation に有益だが、`bundle_failure_kind_counts` と current list anchor の coexistence を保つため、typed aggregate core には上げない。current third tranche では、`detached_noncore.host_plan_coverage_failures` のような shallow summary を reference-only として出してよい。
 
 ## current wrapper との接続
 
@@ -88,6 +89,7 @@ current detached validation loop の tiny wrapper は、aggregate compare 側で
   - 2 fixture を temporary single-fixture directory に複製する
   - `summary_core` compare 用の aggregate artifact を 2 本だけ emit する
   - noisy な full-vs-single contrast を経由せず single-fixture aggregate 同士を比べる
+  - `summary_core` が一致したまま provenance だけが違う case でも、reference-only section を shallow summary で短く triage してよい
 
 この wrapper は convenience discovery を与えるだけであり、final compare input discovery policy を固定しない。
 
@@ -123,6 +125,7 @@ aggregate compare helper 自体は explicit path で呼べば十分である。
 
 - aggregate compare helper は `summary_core` だけを exact-compare してよい
 - `aggregate_context` と `detached_noncore` は reference-only でよい
+  - current third tranche では、その reference-only differences は top-level field ごとの shallow summary に崩してよい
 - `bundle_failure_kind_counts_scope = "migrated-kinds-only"` は exact-compare core に残す
 - run label から aggregate artifact path を導出する tiny wrapper は current detached validation loop の convenience として許容する
 - ただし final compare API、final path policy、profile-aware aggregate compare はまだ固定しない
