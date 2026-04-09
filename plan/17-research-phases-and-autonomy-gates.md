@@ -208,15 +208,15 @@ Phase 3 は current checkpoint では **reserve path** として残し、later p
 
 user 指示を反映した current immediate sequence は次である。
 
-1. **Phase 0 / 1 / 2 の closeout baseline を固定する**
-   - repository memory / docs maintenance
-   - current L2 semantics drift suppression
-   - detached validation loop helper surface の smoke evidence
-2. **Phase 4 前半の docs-first side line を進める**
-   - shared-space / membership / authority / consistency / fairness の boundary を narrow に比較する
-3. **Phase 5 入口の inventory line を進める**
-   - small decidable core と proof boundary を narrow に棚卸しする
-4. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
+1. **detached validation loop の運用摩擦低減を先に進める**
+   - export / compare / reference update / failure triage の friction を実地で減らす
+2. **authoritative room baseline を practical example で厚くする**
+   - `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` の最小 bundle を source-backed に厚くする
+3. **consistency / fairness / causal metadata catalog を working subset として比較する**
+   - fixed final catalog は作らず、room profile の stop line を増やす
+4. **Phase 5 入口の inventory line を進める**
+   - small decidable core / proof boundary / async-control boundary を narrow に棚卸しする
+5. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
 
 現在は 1 の baseline と top-level consistency sweep が閉じ、Phase 3 staged reconnect line も freeze threshold まで整理できたので、phase 読みとしては **Phase 3 current tranche は closeout 済みで、repo は current self-driven 主線を Phase 2 maintenance tail / Phase 4 side line / Phase 5 inventory line に移してよい状態にある** と読む。
 

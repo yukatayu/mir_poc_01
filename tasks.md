@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-09 12:29 JST
+最終更新: 2026-04-09 12:52 JST
 
 ## この文書について
 
@@ -16,11 +16,24 @@
 
 - 主線は **Phase 2 maintenance tail + Phase 4 side line + Phase 5 inventory line** である。
 - Phase 3 は current checkpoint では **reserve path** であり、later pressure が出たときだけ reopen 候補にする。
-- したがって、今すぐ進めるべきものは
-  - detached validation loop の運用摩擦低減
-  - shared-space / membership の docs-first boundary 整理
-  - static analysis / type / theorem prover / async-control boundary の inventory 整理
-  の 3 本である。
+- したがって、今すぐ自走で進める順番は
+  1. detached validation loop の throughput を上げる
+  2. shared-space の authoritative baseline を practical example で厚くする
+  3. consistency / fairness / causal metadata を room profile として比べる
+  4. static analysis / type / theorem prover / async-control boundary の inventory を整える
+  5. checkpoint ごとに drift suppression と mirror sweep を入れる
+  である。
+
+## 次に自走で進める順番と rough estimate
+
+| 順番 | task package | 主眼 | rough weight | rough 所要 | 自走可否 | 備考 |
+|---|---|---|---|---|---|---|
+| 1 | detached validation loop の運用摩擦低減 | fixture を足して export / compare / triage を反復しやすくする | 中 | 1〜3 task / 半日〜2日 | 自走可能 | 既存 helper と detached loop を使って friction point を実地観測する |
+| 2 | authoritative room baseline の docs-first 精密化 | activation / authority / consistency / RNG の最小 practical bundle を厚くする | 中〜重 | 2〜4 task / 2〜5日 | 自走可能 | すごろく room などの practical example に直結しやすい |
+| 3 | consistency / fairness / causal metadata catalog comparison | room mode catalog と membership / epoch / witness / RNG provider の切り分けを詰める | 重 | 3〜6 task / 4〜10日 | 一部自走可能 | final catalog の固定は避け、working subset と stop line を増やす |
+| 4 | static analysis / type / theorem prover / async-control boundary inventory | local / decidable core と external verifier 側の境界を整理する | 重 | 3〜6 task / 3〜8日 | 自走可能 | `atomic_cut` を最小核に留め、上位 async-control family を docs-first 比較する |
+| 5 | drift suppression / checkpoint sweep | docs / helper / report / progress / plan の整合を保つ | 低〜中 | 各 checkpoint ごとに 0.5〜1日 | 自走可能 | 独立 task というより closeout package |
+| 6 | Phase 3 reserve path reopen | parser boundary / first checker cut を later pressure が出たときだけ再開する | 中〜重 | 0〜2 task | 後段依存 | 今は active package ではない |
 
 ## 自走で進められる task package
 
@@ -60,6 +73,11 @@
 #### 重さ
 
 - 中
+
+#### rough 所要
+
+- 1〜3 task
+- 半日〜2日
 
 #### 現在の推奨度
 
@@ -122,6 +140,12 @@ rng: delegated_rng_service
 
 - 重い
 
+#### rough 所要
+
+- 2〜4 task で authoritative baseline を一段厚くする
+- 4〜8 task で consistency / fairness / causal metadata の working subset comparison まで進める
+- 実時間では 2〜10日程度を見込む
+
 #### 現在の推奨度
 
 - **高い**
@@ -163,6 +187,11 @@ rng: delegated_rng_service
 
 - 重い
 
+#### rough 所要
+
+- 3〜6 task
+- 3〜8日
+
 #### 現在の推奨度
 
 - **高い**
@@ -190,6 +219,11 @@ rng: delegated_rng_service
 #### 重さ
 
 - 低〜中
+
+#### rough 所要
+
+- 各 checkpoint ごとに 0.5〜1日
+- 単独主線にはしない
 
 #### 現在の推奨度
 
@@ -479,10 +513,12 @@ request move(player)
 
 ## current recommendation summary
 
-- **すぐ進める**:
-  - detached validation loop friction reduction
-  - shared-space / membership docs-first boundary
-  - static analysis / proof / async-control boundary inventory
+- **自走の順番**:
+  1. detached validation loop friction reduction
+  2. authoritative room baseline の docs-first 精密化
+  3. consistency / fairness / causal metadata catalog comparison
+  4. static analysis / proof / async-control boundary inventory
+  5. checkpoint ごとの drift suppression / mirror sweep
 - **今は止める / later pressure 待ち**:
   - Phase 3 reserve path の reopen
   - final parser grammar

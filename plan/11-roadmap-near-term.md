@@ -18,27 +18,42 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - helper stack の mirror drift が抑えられている
 - parser / checker public boundary を早く既成事実化せずに進められる
 
-## 次に再開するなら有力な 2〜4 task
+## 次に自走で進める順番
 
-### 候補 1. detached validation loop の運用摩擦をさらに下げる
+### 1. detached validation loop の運用摩擦をさらに下げる
 
 - current tiny exporter / diff helper / loop wrapper / fixture template を使い、追加 fixture を何本か実地で回す
 - export 保存、core compare、reference update、failure triage のどこで実際に friction が残るかを観測する
 - current helper boundary を壊さずに、`scripts/` / non-production helper 側だけで減らせる摩擦を narrow に減らす
+- rough weight: 中
+- rough 所要: 1〜3 task / 半日〜2日
 
-### 候補 2. shared-space / membership side line を docs-first で進める
+### 2. authoritative room baseline を docs-first で進める
 
 - authoritative room と append-friendly room の authority placement / consistency mode / RNG provider を practical example で比べる
 - `authority-ack`、`single room authority`、`authoritative serial transition`、`authority_rng` の bundle をもう少し source-backed に厚くする
 - final activation / authority / auth / consistency / fairness catalog へは入らず、stop line を明確にする
+- rough weight: 中〜重
+- rough 所要: 2〜4 task / 2〜5日
 
-### 候補 3. static analysis / type / theorem prover boundary の inventory を進める
+### 3. consistency / fairness / causal metadata catalog を working subset として比較する
+
+- room mode catalog を final fixed catalog と見なさず、working subset と deferred finalization に分ける
+- membership epoch / incarnation、authority witness、`authority_rng` / `delegated_rng_service` の関係を practical profile で比べる
+- append-friendly room と authoritative room の contrast を崩さずに catalog の stop line を増やす
+- rough weight: 重
+- rough 所要: 3〜6 task / 4〜10日
+
+### 4. static analysis / type / theorem prover / async-control boundary の inventory を進める
 
 - local / structural / decidable 寄りの floor をどこまで core に入れるかを narrow に比べる
 - parser boundary / first checker cut / detached validation loop と衝突しない small decidable core inventory を先に作る
 - theorem prover / model checker 側へ残す global property を current docs に合わせて明確化する
+- `atomic_cut` を最小核に留め、higher-level async-control family を docs-first に比較する
+- rough weight: 重
+- rough 所要: 3〜6 task / 3〜8日
 
-### 候補 4. parser boundary / first checker cut は reserve path として維持する
+### 5. parser boundary / first checker cut は reserve path として維持する
 
 - current checkpoint では Phase 3 self-driven portion は一旦尽きたとみなし、active candidate にしない
 - reopen は次の pressure が出たときだけ行う
@@ -53,11 +68,11 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| PoC を継続的に回せる状態を維持しつつ drift regression を増やす | 2〜4 task | detached artifact / host coverage の切り方次第で前後する |
-| PoC を「大量に回して比較しやすい」段階へ一段進める | 2〜5 task | detached trace / audit と richer host boundary の優先順位が影響する |
-| detached validation loop の入口を current helper boundary を壊さずに揃える | 1〜3 task | storage/path policy、tiny wrapper、aggregate export の actual narrow cut が主論点 |
-| 文法をある程度比較しながら PoC を前進させる | 4〜8 task | final parser grammar 固定はまだ含まない |
-| parser 導入判断の前提整理 | 5〜10 task | 静的解析や host interface との境界が影響する |
+| detached validation loop の throughput を実務上さらに 1 段上げる | 1〜3 task | export / compare / scaffold / failure triage の friction 観測が主眼 |
+| authoritative room baseline を practical example で source-backed に厚くする | 2〜4 task | activation / authority / consistency / RNG の bundle を厚くする |
+| consistency / fairness / causal metadata catalog を working subset として比較する | 3〜6 task | final fixed catalog はまだ作らない |
+| small decidable core / proof / async-control inventory を一段進める | 3〜6 task | final type system actualization はまだ含まない |
+| Phase 3 reserve path を reopen する条件整理 | 0〜2 task | later pressure が出たときだけ着手 |
 
 ## いまの blocker
 

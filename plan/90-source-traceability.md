@@ -816,6 +816,17 @@
   - higher-level async control は event-tree / authority-serial transition / witness-aware commit family として Phase 4 / 5 で docs-first に比較する
   - C++ 的 low-level memory-order family は current immediate candidate にしない
 
+### 2026-04-09 self-driven research order and rough estimate refresh
+
+- `tasks.md`、`progress.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md` の今回更新分は、追加で次を主根拠にする。
+  - `docs/reports/0361-self-driven-research-order-and-estimates.md`
+  - user からの 2026-04-09 「このあと研究を自律的に進めるべきところの順番や計画，設計など」依頼
+
+- 反映した current reading は次である。
+  - next self-driven order は、detached validation loop friction reduction → authoritative room baseline refinement → consistency / fairness / causal metadata catalog comparison → static analysis / proof / async-control inventory の順に置く
+  - Phase 3 は current checkpoint では reserve path のままで、later pressure が出たときだけ reopen する
+  - rough estimate は promise ではなく、comparison / report / review / validation / drift suppression を含む概算として扱う
+
 ### named profile catalog と mirror boundary
 
 - `0066`

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-09 12:29 JST
+最終更新: 2026-04-09 12:52 JST
 
 ## この文書について
 
@@ -35,8 +35,8 @@
 | Phase 1 | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
 | Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | loop 入口と closeout baseline は成立、現在は運用摩擦低減 |
 | Phase 3 | parser boundary / first checker cut | current tranche closeout 完了、self-driven portion は reserve path | 中〜やや重い | 後段依存 | private staged spike / reconnect subline は freeze 済み。later pressure が出たときだけ reopen |
-| Phase 4 | shared-space / membership / practical example boundary | 前半 | 重い | 一部自走可能 | docs-first boundary は進めてよいが final profile は要仕様確認 |
-| Phase 5 | static analysis / type / theorem prover / model checker boundary | 入口整理 | とても重い | 後段依存 | small decidable core の inventory までは進めてよい |
+| Phase 4 | shared-space / membership / practical example boundary | 前半 | 重い | 着手可能 | docs-first boundary と practical profile comparison は進めてよいが final profile は要仕様確認 |
+| Phase 5 | static analysis / type / theorem prover / model checker boundary | 入口整理 | とても重い | 着手可能 | small decidable core / async-control inventory までは進めてよい |
 | Phase 6 | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | Phase 2 / 3 / 5 の gate 後に入る |
 | Phase 7 | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Typed-Effect / Prism / app contract は user 仕様待ち |
 
@@ -50,10 +50,12 @@
 
 ### immediate execution order
 
-1. Phase 0 / 1 / 2 の closeout baseline を維持しつつ drift suppression を続ける
-2. Phase 4 前半の docs-first side line を進める
-3. Phase 5 入口の small decidable core inventory を進める
-4. Phase 3 は later pressure が出たときだけ reopen する
+1. detached validation loop の運用摩擦低減を先に進める
+2. authoritative room baseline を practical example で厚くする
+3. consistency / fairness / causal metadata catalog を working subset として比較する
+4. static analysis / type / theorem prover / async-control boundary の inventory を進める
+5. checkpoint ごとに drift suppression と mirror sweep を入れる
+6. Phase 3 は later pressure が出たときだけ reopen する
 
 ## いま自走で進めてよい範囲
 
@@ -63,6 +65,8 @@
 - fallback / notation / representative example の drift 修正
 - parser-free PoC helper / detached validation loop の改善
 - fixture authoring / elaboration の補助改善
+- shared-space / authoritative room の docs-first boundary comparison
+- static analysis / type / theorem prover / async-control boundary の inventory
 
 ### 後段依存
 
@@ -136,8 +140,9 @@
 ### Priority A — すぐ続けてよい
 
 1. detached validation loop を何本か追加 fixture で回し、authoring / compare の friction を実地で減らす
-2. shared-space / membership boundary を docs-first で進め、activation / authority / auth / consistency finalization の stop line を増やす
-3. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
+2. authoritative room baseline を docs-first で進め、activation / authority / consistency / RNG の practical bundle を厚くする
+3. consistency / fairness / causal metadata catalog を room profile の working subset として比較する
+4. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
 
 ### Priority B — A の後でよい
 
@@ -175,8 +180,8 @@ rough estimate:
 | parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | stage 1 / stage 2 / stage 3 の private staged spike は一区切りの freeze threshold まで整理済み。current checkpoint では reserve path |
 | first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は stage1/2 first tranches + freeze threshold まで揃い、current checkpoint では reserve path |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
-| static analysis / type / theorem prover / async-control boundary | 36% | 26% | 12% | 後段依存 | hybrid staged approach を採る前提。`atomic_cut` の局所 cut と higher-level async control の切り分けもここで inventory 化する |
-| shared-space / dynamic membership boundary | 72% | 63% | 8% | 要仕様確認 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room の `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` first choice、authoritative game room の minimal concrete bundle、`member_incarnation` と uncommitted action invalidation を room-profile 側に残す reconnect policy cut、plain vector deletion を避けて epoch / incarnation split を first practical candidate にする causal metadata cut、fairness trust model を `opaque authority trust` / `auditable authority witness` で分ける line、identity core と auth stack / admission policy を分ける line、admission policy / compile-time visibility を over-approximation + runtime control-plane で切る line、append-heavy room の `append-friendly room` first practical catalog と `delegated_rng_service` next candidate までは進められるが、relaxed room と final activation / auth / consistency / fairness catalog は user 仕様待ち |
+| static analysis / type / theorem prover / async-control boundary | 36% | 26% | 12% | 着手可能 | hybrid staged approach を採る前提。`atomic_cut` の局所 cut と higher-level async control の切り分けを inventory 化する段階は自走可能 |
+| shared-space / dynamic membership boundary | 72% | 63% | 8% | 着手可能 | docs-first boundary と example、tree-view vs registry、activation visibility、authority / consistency / RNG provider の比較に加え、resource owner slot / delegated capability / handoff epoch の working model、authoritative room の `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` first choice、authoritative game room の minimal concrete bundle、`member_incarnation` と uncommitted action invalidation を room-profile 側に残す reconnect policy cut、plain vector deletion を避けて epoch / incarnation split を first practical candidate にする causal metadata cut、fairness trust model を `opaque authority trust` / `auditable authority witness` で分ける line、identity core と auth stack / admission policy を分ける line、admission policy / compile-time visibility を over-approximation + runtime control-plane で切る line、append-heavy room の `append-friendly room` first practical catalog と `delegated_rng_service` next candidate までは進められるが、relaxed room と final activation / auth / consistency / fairness catalog は user 仕様待ち |
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様は依然 user からの追加仕様が必要 |
 
 ## 現時点での大きい未解決問題
@@ -191,9 +196,10 @@ rough estimate:
 ## 次に進めるべき task
 
 1. current detached loop を追加 fixture で回し、authoring / compare の friction をさらに 1 段下げる
-2. shared-space / membership boundary を docs-first で進め、activation / authority / auth / consistency finalization の stop line だけを増やす
-3. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
-4. Phase 3 を reopen する場合は、current freeze line を壊さない later-pressure-driven subline だけを narrow に選ぶ
+2. authoritative room baseline を practical example で厚くし、activation / authority / consistency / RNG の stop line を増やす
+3. consistency / fairness / causal metadata を room profile catalog の問題として比較し、working subset と deferred finalization を分ける
+4. static analysis / type / theorem prover / async-control boundary の small decidable core inventory を narrow に進める
+5. Phase 3 を reopen する場合は、current freeze line を壊さない later-pressure-driven subline だけを narrow に選ぶ
 
 ## 作業ログ（簡潔）
 
@@ -218,6 +224,7 @@ rough estimate:
 - 2026-04-08 11:54 JST — shared-space authoritative game room の concrete profile を `authority-ack` / `single room authority` / `authoritative serial transition` / `authority_rng` の minimal bundle と、RNG だけを `delegated_rng_service` に差し替える next practical bundle で整理し、append-friendly room との contrast も plan mirror に追記した。次は fairness / reconnect / auth をどこまで room profile に入れずに外部 policy に残すかをさらに narrow に比較できる段階。
 - 2026-04-08 12:04 JST — shared-space の reconnect / late leave / in-flight action を room profile に全部入れず、`member_incarnation` と uncommitted action invalidation だけを minimal room-profile rule、timeout / retry / resend を external policy layer に残す cut を plan mirror に追記した。次は membership epoch / incarnation と causal metadata の接続を、plain vector deletion と対比しながら narrow に比較できる段階。
 - 2026-04-08 12:13 JST — shared-space の causal metadata を plain vector deletion に寄せず、epoch / incarnation split を first practical candidate、control-plane separated carrier を next stronger candidate に置く line を plan mirror に追記した。次は identity / auth layering と fairness trust model のどちらを先に比較するかを narrow に決める段階。
+- 2026-04-09 12:52 JST — 次に自走で進める順番を見直し、detached validation loop friction reduction → authoritative room baseline → consistency / fairness / causal metadata catalog comparison → static analysis / proof / async-control inventory の順を `tasks.md` / `progress.md` / `plan/11` / `plan/17` に揃えた。Phase 4 / 5 の docs-first package は current checkpoint では `着手可能` と読む。
 - 2026-04-08 12:25 JST — shared-space の fairness trust model を `opaque authority trust` / `auditable authority witness` / `delegated provider attestation` / `distributed fairness protocol` で比較し、authoritative room では opaque trust を current minimal、auditable witness を next narrow strengthening candidate に置き、provider placement と witness requirement を別軸で扱う line を plan mirror に追記した。次は identity / auth layering を fairness / authority / membership boundary とどう分離するかを narrow に比較できる段階。
 - 2026-04-08 12:30 JST — repo 全体の大局 phase / autonomy gate を `plan/17` に集約し、`progress.md` に current phase・重さ・自走可否の snapshot を追加した。次は shared-space の identity / auth layering を participant carrier / authority / fairness と混ぜずにどう切るかを narrow に比較する段階。
 - 2026-04-08 12:36 JST — shared-space の identity / auth layering を `membership carrier に全部入れる` / `identity core と auth stack を分ける` / `opaque actor handle だけを room core に残す` で比較し、current first practical candidate を `identity core は membership registry、auth stack / admission policy は別 carrier` に置いた。次は admission policy と compile-time over-approximation の接点を、room capability / visibility requirement の line とどう切るかを narrow に比較する段階。
