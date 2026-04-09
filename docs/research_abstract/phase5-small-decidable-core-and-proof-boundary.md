@@ -154,7 +154,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`consumer_invocation_surface_ref`**
 までは足してよく、そのさらに次段として
 **`exchange_rule_body_ref`**
-までは足してよいが、concrete runtime coupling / transport protocol / failure body はまだ後段に残す。
+までは足してよく、そのさらに次段として
+**`runtime_coupling_ref`**
+までは足してよいが、concrete transport protocol / failure body はまだ後段に残す。
 
 ## まだやっていないこと
 
@@ -163,7 +165,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- runtime-coupling threshold をどこまで足すか
+- transport / failure threshold をどこまで足すか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
