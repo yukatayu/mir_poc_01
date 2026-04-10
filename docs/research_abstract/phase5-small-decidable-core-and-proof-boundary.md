@@ -291,6 +291,9 @@ consumer-specific attachment として後段に残すのが current first choice
 までは checker-facing pressure marker として足してよい。その次段として
 **`retained_payload_body_materialization_theorem_export_checker_contract`**
 までは actual checker-facing contract として足してよい。ただし exported checker payload は still 後段に残す。
+その次段として
+**`retained_payload_body_materialization_theorem_export_checker_payload_pressure`**
+までは exported checker payload pressure marker として足してよい。ただし actual exported checker payload は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -300,8 +303,8 @@ consumer-specific attachment として後段に残すのが current first choice
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
 - exported checker payload をどの field / row / payload family で切るか
-- `theorem_export_checker` contract を retained bridge のまま維持するか exported checker payload family へ actualize するか
-- exported checker payload を theorem-line retained bridge の checker-facing contract の次段としてどこまで actualize するか
+- exported checker payload pressure marker を retained bridge のまま維持するか actual exported checker payload family へ actualize するか
+- actual exported checker payload を theorem-line retained bridge の checker-facing contract の次段としてどこまで actualize するか
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの

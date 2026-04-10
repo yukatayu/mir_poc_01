@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-10 20:11 JST
+最終更新: 2026-04-10 20:38 JST
 
 ## この文書について
 
@@ -18,14 +18,14 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。current L2 semantics、parser-free PoC、detached validation loop の mainline は安定しており、drift suppression と residual maintenance が主眼である。
 - **Phase 3** は reserve path である。private staged spike / reconnect freeze threshold までは source-backed に揃っているが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは source-backed に固まっている。
-- **Phase 5** は `specs/examples/126...205` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory から theorem-side retained bridge を `retained_payload_body_materialization_theorem_export_checker_contract` まで伸ばし、**next later reopen** を `theorem-export-checker-contract-ready exported-checker-payload-pressure comparison` に置いている。
+- **Phase 5** は `specs/examples/126...206` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory から theorem-side retained bridge を `retained_payload_body_materialization_theorem_export_checker_payload_pressure` まで伸ばし、**next later reopen** を `theorem-export-checker-payload-pressure-ready actual-exported-checker-payload comparison` に置いている。
 - 現在の主線は、**Phase 5 later reopen の narrow comparison** と **cross-phase checkpoint maintenance** の 2 本である。
 
 ## 次に自走で進める順番と rough estimate
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | current 読み |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 5 後半 | theorem-export-checker-contract-ready exported-checker-payload-pressure comparison | theorem-line retained bridge に exported checker payload pressure をどこまで近づけるかを narrow に比較する | 中〜重 | 1〜3 task / 2〜6日 | 自走可能 | **current promoted line** |
+| 1 | Phase 5 後半 | theorem-export-checker-payload-pressure-ready actual-exported-checker-payload comparison | theorem-line retained bridge に actual exported checker payload をどこまで近づけるかを narrow に比較する | 中〜重 | 1〜3 task / 2〜6日 | 自走可能 | **current promoted line** |
 | 2 | cross-phase checkpoint | drift suppression / mirror sweep | `specs/` / `plan/` / `progress.md` / `tasks.md` / research abstract の drift を抑える | 低〜中 | 0.5〜1日 / checkpoint ごと | 自走可能 | closeout package |
 | 3 | Phase 4 後半 reserve path | shared-space later reopen | `control_epoch` first reopen cut、catalog refinement、provider / witness / authority の later compare | 中〜重 | 0〜3 task | 一部自走可能 | concrete pressure が出たときだけ promoted |
 | 4 | Phase 2 maintenance tail | detached validation loop residual | bless / update / retention policy の policy-dependent residual を narrow に扱う | 低 | 0〜1 task | 自走可能 | drift または practical need 時のみ |
@@ -44,12 +44,12 @@
 
 - `specs/examples/126...127` で 4-way split と proof-obligation matrix を集約済み。
 - `specs/examples/128...134` で mixed row default、consumer pressure order、minimum contract row、first consumer class を固定済み。
-- `specs/examples/135...205` で theorem-line retained bridge を段階的に伸ばし、現時点では `retained_payload_body_materialization_theorem_export_checker_contract` までを current first choice に置ける。
+- `specs/examples/135...206` で theorem-line retained bridge を段階的に伸ばし、現時点では `retained_payload_body_materialization_theorem_export_checker_payload_pressure` までを current first choice に置ける。
 
 #### 次に扱うべき narrow question
 
-- `retained_payload_body_materialization_theorem_export_checker_contract` の次段として exported checker payload pressure を theorem-side retained bridge にどこまで近づけるか
-- それとも actual checker-facing contract を terminal cut にして exported checker payload を still 後段に残すか
+- `retained_payload_body_materialization_theorem_export_checker_payload_pressure` の次段として actual exported checker payload を theorem-side retained bridge にどこまで近づけるか
+- それとも exported checker payload pressure marker 自体を terminal cut にして actual exported checker payload を still 後段に残すか
 
 #### いま自走できる理由
 
@@ -78,7 +78,7 @@
 
 - Phase 2 detached validation loop は checkpoint close。
 - Phase 4 shared-space package は `specs/examples/121...125` で checkpoint close。
-- Phase 5 theorem-line package は `specs/examples/126...205` で current package close。
+- Phase 5 theorem-line package は `specs/examples/126...206` で current package close。
 
 #### いま自走できる理由
 
