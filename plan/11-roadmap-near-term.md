@@ -13,7 +13,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...194` までで theorem-line later package close であり、**next promoted line は `boundary-specific-handoff-pair-ready actual handoff pair shape comparison`** である。
+- Phase 5 は `specs/examples/126...195` までで theorem-line later package close であり、**next promoted line は `actual-handoff-pair-shape-ready boundary-specific handoff artifact row comparison`** である。
 
 ## いまから数 task の主眼
 
@@ -25,10 +25,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. boundary-specific-handoff-pair-ready actual handoff pair shape comparison を Phase 5 later reopen の current promoted line として扱う
+### 1. actual-handoff-pair-shape-ready boundary-specific handoff artifact row comparison を Phase 5 later reopen の current promoted line として扱う
 
-- `retained_payload_body_materialization_boundary_handoff_pair_ref` の次段として、actual boundary-specific handoff pair shape をどこまで theorem-side retained bridge に近づけるかを比較する
-- actual handoff pair shape 自体を current external contract に上げず、threshold comparison に留める
+- `retained_payload_body_materialization_boundary_handoff_pair` の次段として、boundary-specific handoff artifact row をどこまで theorem-side retained bridge に近づけるかを比較する
+- actual handoff pair shape 自体は current first choice に入ったまま、artifact row と actual external contract を still 後段に残す
 - rough weight: 中〜重
 - rough 所要: 1〜3 task / 2〜6日
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| boundary-specific-handoff-pair-ready actual handoff pair shape comparison | 1〜3 task | current promoted line |
+| actual-handoff-pair-shape-ready boundary-specific handoff artifact row comparison | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
@@ -83,7 +83,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ### 3. actual type / theorem prover / protocol verifier actualization
 
-- current lineは inventory と theorem-side symbolic retained bridge comparison に留める
+- current lineは inventory と theorem-side retained bridge comparison に留める
 - actual external contract finalization はまだ後段である
 
 ## いまの bottleneck
