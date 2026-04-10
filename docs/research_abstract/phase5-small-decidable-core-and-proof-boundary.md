@@ -235,6 +235,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`archive_retention_layout_ref`**
 までは足してよいが、actual retained archive payload body family と actual bless-side row / update-side row split は still 後段に残す。
 
+**`retained_archive_payload_body_family_ref`**
+までは足してよいが、retained payload materialization family と actual bless-side row / update-side row split は still 後段に残す。
+
 ## まだやっていないこと
 
 - public checker API の finalization
@@ -242,9 +245,9 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- actual retained archive payload body family の最小 shapeをどう切るか
+- retained payload materialization family の最小 shapeをどう切るか
 - actual bless-side row と update-side row をどこで分けるか
-- archive retention layout family を actual retained payload materialization family とどこで接続するか
+- actual retained archive payload body family を body materialization detail とどこで接続するか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
