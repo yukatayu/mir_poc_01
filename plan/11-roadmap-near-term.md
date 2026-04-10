@@ -13,7 +13,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...197` までで theorem-line later package close であり、**next promoted line は `external-contract-facing-handoff-row-ready actual external contract comparison`** である。
+- Phase 5 は `specs/examples/126...198` までで theorem-line later package close であり、**next promoted line は `actual-external-contract-ready consumer-specific external contract payload comparison`** である。
 
 ## いまから数 task の主眼
 
@@ -25,10 +25,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. external-contract-facing-handoff-row-ready actual external contract comparison を Phase 5 later reopen の current promoted line として扱う
+### 1. actual-external-contract-ready consumer-specific external contract payload comparison を Phase 5 later reopen の current promoted line として扱う
 
-- `retained_payload_body_materialization_external_handoff_row` の次段として、actual external contract をどこまで current line に近づけるかを比較する
-- external-contract-facing handoff row 自体は current first choice に入ったまま、actual external contract は still 後段に残す
+- `retained_payload_body_materialization_external_contract` の次段として、consumer-specific external contract payload をどこまで current line に近づけるかを比較する
+- actual external contract 自体は current first choice に入ったまま、consumer-specific external contract payload は still 後段に残す
 - rough weight: 中〜重
 - rough 所要: 1〜3 task / 2〜6日
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| external-contract-facing-handoff-row-ready actual external contract comparison | 1〜3 task | current promoted line |
+| actual-external-contract-ready consumer-specific external contract payload comparison | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
@@ -84,7 +84,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 ### 3. actual type / theorem prover / protocol verifier actualization
 
 - current lineは inventory と theorem-side retained bridge comparison に留める
-- actual external contract finalization はまだ後段である
+- consumer-specific external contract payload finalization はまだ後段である
 
 ## いまの bottleneck
 
@@ -107,4 +107,4 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - parser-free PoC は継続利用する
 - detached validation loop は non-production helper として維持する
 - shared-space の current working subset は final catalog ではない
-- theorem-line retained bridge は symbolic threshold comparison として扱い、actual external contract とは区別する
+- theorem-line retained bridge は symbolic threshold comparison を基調に扱い、minimal actual external contract field と actual exported / consumer-specific contract finalization を混同しない
