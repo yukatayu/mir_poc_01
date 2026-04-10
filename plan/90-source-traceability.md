@@ -1481,3 +1481,11 @@
   - `specs/examples/200-current-l2-theorem-line-external-contract-payload-ready-proof-hint-threshold.md`
   - `docs/reports/0516-phase5-proof-hint-threshold.md`
   - `docs/reports/0517-review-phase5-proof-hint-threshold-package.md`
+
+### 2026-04-10 phase5 consumer-hint threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/200-current-l2-theorem-line-external-contract-payload-ready-proof-hint-threshold.md`
+  - `specs/examples/201-current-l2-theorem-line-proof-hint-ready-consumer-hint-threshold.md`
+  - `docs/reports/0518-phase5-consumer-hint-threshold.md`
+  - `docs/reports/0519-review-phase5-consumer-hint-threshold-package.md`
