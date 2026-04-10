@@ -13,7 +13,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...203` までで theorem-line later package close であり、**next promoted line は `proof-assistant-adapter-contract-ready theorem-export-checker-pressure comparison`** である。
+- Phase 5 は `specs/examples/126...204` までで theorem-line later package close であり、**next promoted line は `theorem-export-checker-pressure-ready checker-facing contract comparison`** である。
 
 ## いまから数 task の主眼
 
@@ -25,10 +25,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. proof-assistant-adapter-contract-ready theorem-export-checker-pressure comparison を Phase 5 later reopen の current promoted line として扱う
+### 1. theorem-export-checker-pressure-ready checker-facing contract comparison を Phase 5 later reopen の current promoted line として扱う
 
-- `retained_payload_body_materialization_proof_assistant_adapter_contract` の次段として、`theorem_export_checker` pressure をどこまで current line に近づけるかを比較する
-- actual `proof_assistant_adapter` contract 自体は current first choice に入ったまま、checker-facing pressure は still 後段に残す
+- `retained_payload_body_materialization_theorem_export_checker_pressure` の次段として、actual checker-facing contract をどこまで current line に近づけるかを比較する
+- checker-facing pressure 自体は current first choice に入ったまま、actual checker-facing contract は still 後段に残す
 - rough weight: 中〜重
 - rough 所要: 1〜3 task / 2〜6日
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| proof-assistant-adapter-contract-ready theorem-export-checker-pressure comparison | 1〜3 task | current promoted line |
+| theorem-export-checker-pressure-ready checker-facing contract comparison | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |

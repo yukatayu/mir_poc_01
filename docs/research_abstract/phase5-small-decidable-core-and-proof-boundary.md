@@ -286,7 +286,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`retained_payload_body_materialization_external_contract_second_consumer_pressure`**
 までは symbolic second consumer pressure marker として足してよい。その次段として
 **`retained_payload_body_materialization_proof_assistant_adapter_contract`**
-までは actual adapter-facing contract として足してよい。ただし `theorem_export_checker` pressure は still 後段に残す。
+までは actual adapter-facing contract として足してよい。その次段として
+**`retained_payload_body_materialization_theorem_export_checker_pressure`**
+までは checker-facing pressure marker として足してよい。ただし actual checker-facing contract は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -295,9 +297,9 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- `theorem_export_checker` pressure をどの field / row / consumer split で切るか
-- actual `proof_assistant_adapter` contract を retained bridge のまま維持するか checker-facing pressure へ actualize するか
-- `theorem_export_checker` pressure を theorem-line retained bridge の actual adapter-facing contract の次段としてどこまで actualize するか
+- actual checker-facing contract をどの field / row / consumer split で切るか
+- `theorem_export_checker` pressure を retained bridge のまま維持するか checker-facing contract へ actualize するか
+- actual checker-facing contract を theorem-line retained bridge の checker-facing pressure marker の次段としてどこまで actualize するか
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの
