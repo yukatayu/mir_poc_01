@@ -1353,3 +1353,11 @@
   - `specs/examples/184-current-l2-theorem-line-retained-payload-materialization-family-ready-retained-payload-body-materialization-detail-threshold.md`
   - `docs/reports/0484-phase5-retained-payload-body-materialization-detail-threshold.md`
   - `docs/reports/0485-review-phase5-retained-payload-body-materialization-detail-threshold.md`
+
+### 2026-04-10 phase5 retained payload body materialization payload threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/184-current-l2-theorem-line-retained-payload-materialization-family-ready-retained-payload-body-materialization-detail-threshold.md`
+  - `specs/examples/185-current-l2-theorem-line-retained-payload-body-materialization-detail-ready-retained-payload-body-materialization-payload-threshold.md`
+  - `docs/reports/0486-phase5-retained-payload-body-materialization-payload-threshold.md`
+  - `docs/reports/0487-review-phase5-retained-payload-body-materialization-payload-threshold.md`
