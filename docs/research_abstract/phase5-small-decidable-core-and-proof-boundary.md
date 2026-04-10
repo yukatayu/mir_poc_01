@@ -270,7 +270,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`retained_payload_body_materialization_boundary_handoff_pair_ref`**
 までは symbolic handoff-facing pair ref として足してよい。その次段として
 **`retained_payload_body_materialization_boundary_handoff_pair`**
-までは actual handoff-facing pair shape として足してよい。ただし boundary-specific handoff artifact row は still 後段に残す。
+までは actual handoff-facing pair shape として足してよい。その次段として
+**`retained_payload_body_materialization_boundary_handoff_artifact_row`**
+までは boundary-specific handoff artifact row として足してよい。ただし external-contract-facing handoff row は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -279,7 +281,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- actual handoff pair shape の次段として boundary-specific handoff artifact row をどの field で切るか
+- boundary-specific handoff artifact row の次段として external-contract-facing handoff row をどの field で切るか
 - actual handoff pair shape を retained bridge のまま維持するか boundary-specific artifact row へ actualize するか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入

@@ -1441,3 +1441,11 @@
   - `specs/examples/195-current-l2-theorem-line-boundary-specific-handoff-pair-ready-actual-handoff-pair-shape-threshold.md`
   - `docs/reports/0506-phase5-actual-handoff-pair-shape-threshold.md`
   - `docs/reports/0507-review-phase5-actual-handoff-pair-shape-threshold.md`
+
+### 2026-04-10 phase5 boundary-specific handoff artifact row threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/195-current-l2-theorem-line-boundary-specific-handoff-pair-ready-actual-handoff-pair-shape-threshold.md`
+  - `specs/examples/196-current-l2-theorem-line-actual-handoff-pair-shape-ready-boundary-specific-handoff-artifact-row-threshold.md`
+  - `docs/reports/0508-phase5-boundary-specific-handoff-artifact-row-threshold.md`
+  - `docs/reports/0509-review-phase5-boundary-specific-handoff-artifact-row-threshold.md`
