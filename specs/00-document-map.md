@@ -344,6 +344,8 @@
   - Phase 5 theorem-side retained-payload-bless-update-split-ready retained bridge の次段として、`retained_payload_body_materialization_bless_update_row_pair_ref` だけをどこまで先に足し、actual bless-side row ref / update-side row ref をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/190-current-l2-theorem-line-retained-payload-bless-update-row-pair-ready-retained-payload-bless-update-row-ref-family-threshold.md`
   - Phase 5 theorem-side retained-payload-bless-update-row-pair-ready retained bridge の次段として、`retained_payload_body_materialization_bless_update_row_ref_family_ref` だけをどこまで先に足し、actual bless-side row ref / update-side row ref の concrete dual-ref shape をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/191-current-l2-theorem-line-retained-payload-bless-update-row-ref-family-ready-retained-payload-bless-update-dual-ref-bundle-threshold.md`
+  - Phase 5 theorem-side retained-payload-bless-update-row-ref-family-ready retained bridge の次段として、`retained_payload_body_materialization_bless_update_dual_ref_bundle_ref` だけをどこまで先に足し、actual bless-side row ref / update-side row ref の strict dual-field shape をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
