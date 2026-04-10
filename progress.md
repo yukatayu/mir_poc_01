@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-10 09:39 JST
+最終更新: 2026-04-10 09:50 JST
 
 ## この文書について
 
@@ -106,4 +106,4 @@
 - 2026-04-09 13:20 JST — detached validation loop の second friction tranche として `compare-fixture-aggregates` を追加し、single-fixture aggregate 同士の compare を noisy な full-vs-single contrast から分離した。次の friction は reference update / longer compare triage 側に寄ることを確認した。
 - 2026-04-10 08:44 JST — stage 3 request / predicate / attachment branch の current snapshot を整理し、Phase 3 を reserve path として読む phase gate を固定した。next は shared-space の identity / auth / admission / fairness line を narrow に比較する段階。
 - 2026-04-10 09:19 JST — Phase 5 theorem-line later package を `archive_bless_update_policy_ref` まで current first choice に伸ばし、next later reopen を retained archive payload comparison に置いた。Phase 5 は current package close と読める状態になった。
-- 2026-04-10 09:39 JST — `tasks.md` と `progress.md` を current snapshot として全面整理し、Phase 5 promoted line、Phase 4 checkpoint close、Blocker baseline recommendation を短い形で見直した。next は retained archive payload comparison を promoted line として進める段階。
+- 2026-04-10 09:50 JST — `tasks.md` と `progress.md` を current snapshot として全面整理し、review finding に合わせて `plan/11` / `plan/17` も current promoted line へ追随させた。next は retained archive payload comparison を promoted line として進める段階。
