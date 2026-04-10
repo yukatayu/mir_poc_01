@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-10 09:16 JST
+最終更新: 2026-04-10 09:19 JST
 
 ## この文書について
 
@@ -325,3 +325,4 @@ rough estimate:
 - 2026-04-10 07:40 JST — Phase 5 theorem-line later package の次段として `specs/examples/175-current-l2-theorem-line-archive-body-ready-archive-bundle-threshold.md` を整理し、retained bridge に `archive_bundle_ref` までを current first choice として固定した。next later reopen は actual archive bundle manifest / member family comparison に更新した。
 - 2026-04-10 07:54 JST — Phase 5 theorem-line later package の次段として `specs/examples/176-current-l2-theorem-line-archive-bundle-ready-archive-manifest-threshold.md` を整理し、retained bridge に `archive_bundle_manifest_ref` までを current first choice として固定した。next later reopen は actual archive bundle member family comparison に更新した。
 - 2026-04-10 08:36 JST — Phase 5 theorem-line later package の次段として `specs/examples/177-current-l2-theorem-line-archive-manifest-ready-archive-member-family-threshold.md` を整理し、retained bridge に `archive_bundle_member_family_ref` までを current first choice として固定した。review finding だった `plan/11` の stale reopen wording と report evidence gap も補正し、next later reopen は actual archive member body compare comparison に更新した。
+- 2026-04-10 09:19 JST — Phase 5 theorem-line later package の次段として `specs/examples/179-current-l2-theorem-line-archive-member-body-compare-ready-archive-bless-update-policy-threshold.md` を整理し、retained bridge に `archive_bless_update_policy_ref` までを current first choice として固定した。reviewer は substantive finding なしで、next later reopen は retained archive payload comparison に更新した。

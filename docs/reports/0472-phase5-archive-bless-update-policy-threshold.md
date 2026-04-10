@@ -59,7 +59,7 @@ docs-first で比較し、current first choice を固定する。
   - `python3 scripts/validate_docs.py`
   - `git diff --check`
 - reviewer:
-  - reviewer subagent を 1 回起動したが、この session の tool surface では completion handle が返らなかったため local diff inspection fallback を採った
+  - reviewer subagent を 1 回だけ起動し、completion まで待って substantive finding が無いことを確認した
 
 ## What changed in understanding
 
@@ -75,7 +75,6 @@ docs-first で比較し、current first choice を固定する。
 - retained archive payload の最小 shape
 - actual bless-side row と update-side row をどこで split するか
 - `proof_assistant_adapter` pressure を second practical candidate のまま維持する条件
-- reviewer subagent completion をこの session でどう安定取得するか
 
 ## Suggested next prompt
 
