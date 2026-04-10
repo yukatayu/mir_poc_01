@@ -356,6 +356,8 @@
   - Phase 5 theorem-side boundary-specific-handoff-pair-ready retained bridge の次段として、`retained_payload_body_materialization_boundary_handoff_pair` を actual handoff pair shape としてどこまで先に足し、boundary-specific artifact row と actual external contract をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/196-current-l2-theorem-line-actual-handoff-pair-shape-ready-boundary-specific-handoff-artifact-row-threshold.md`
   - Phase 5 theorem-side actual-handoff-pair-shape-ready retained bridge の次段として、`retained_payload_body_materialization_boundary_handoff_artifact_row` を boundary-specific handoff artifact row としてどこまで先に足し、actual external contract をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/197-current-l2-theorem-line-boundary-specific-handoff-artifact-row-ready-external-contract-facing-handoff-row-threshold.md`
+  - Phase 5 theorem-side boundary-specific-handoff-artifact-row-ready retained bridge の次段として、`retained_payload_body_materialization_external_handoff_row` を external-contract-facing handoff row としてどこまで先に足し、actual external contract をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
