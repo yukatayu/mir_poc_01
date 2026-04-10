@@ -13,7 +13,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...179` までで theorem-line later package close であり、**next promoted line は `retained archive payload comparison`** である。
+- Phase 5 は `specs/examples/126...180` までで theorem-line later package close であり、**next promoted line は `archive retention layout comparison`** である。
 
 ## いまから数 task の主眼
 
@@ -25,10 +25,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. retained archive payload comparison を Phase 5 later reopen の current promoted line として扱う
+### 1. archive retention layout comparison を Phase 5 later reopen の current promoted line として扱う
 
-- `archive_bless_update_policy_ref` の次段として、retained archive payload をどこまで theorem-side retained bridge に近づけるかを比較する
-- actual retained payload body / bless actualization は current core に上げず、threshold comparison に留める
+- `retained_archive_payload_ref` の次段として、archive retention layout をどこまで theorem-side retained bridge に近づけるかを比較する
+- actual retained payload body / bless-side row / update-side row split は current core に上げず、threshold comparison に留める
 - rough weight: 中〜重
 - rough 所要: 1〜3 task / 2〜6日
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| retained archive payload comparison | 1〜3 task | current promoted line |
+| archive retention layout comparison | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
