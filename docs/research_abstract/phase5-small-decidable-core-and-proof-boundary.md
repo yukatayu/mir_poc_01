@@ -257,7 +257,9 @@ consumer-specific attachment として後段に残すのが current first choice
 までは足してよいが、actual bless-side row / update-side row pair は still 後段に残す。
 
 **`retained_payload_body_materialization_bless_update_row_pair_ref`**
-までは足してよいが、actual bless-side row ref / update-side row ref family は still 後段に残す。
+までは足してよいが、その次段として
+**`retained_payload_body_materialization_bless_update_row_ref_family_ref`**
+までは足してよい。ただし actual bless-side row ref / update-side row ref の concrete dual-ref shape は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -267,7 +269,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
 - actual bless-side row ref と update-side row ref の最小 dual-ref shape をどこで切るか
-- row ref family を 2 ref で切るか named pair bundle からさらに staged split するか
+- dual-ref shape を strict dual field にするか named pair bundle に戻すか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
