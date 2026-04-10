@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-10 21:50 JST
+最終更新: 2026-04-11 00:57 JST
 
 ## この文書について
 
@@ -11,6 +11,7 @@
   - **論理仕様**: semantics / invariants / formal boundary の整備度
   - **ユーザ向け仕様**: companion notation / examples / human-facing guidance の整備度
   - **実装 / 運用**: parser-free PoC / helper / validation loop / 実務フローの整備度
+- phase 表の `%` は、その phase 全体に対する **rough overall estimate** であり、3 軸の平均を厳密計算した値ではない。後続 research や rollback で戻ることがある。
 
 ## 現在の要約
 
@@ -23,16 +24,16 @@
 
 ## 研究フェーズ（大局）
 
-| Phase | 主眼 | 現在位置 | 重さ | 自走可否 | 補足 |
-|---|---|---|---|---|---|
-| Phase 0 | repository memory / decision boundary | maintenance | 低い | 自走可能 | `specs/` / `plan/` / report / snapshot の整合維持 |
-| Phase 1 | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
-| Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | 入口は成立、残りは bless/update など policy-dependent residual |
-| Phase 3 | parser boundary / first checker cut | reserve path | 中〜やや重い | 後段依存 | private staged spike と reconnect freeze threshold までは整理済み |
-| Phase 4 | shared-space / membership / practical example boundary | checkpoint close | 重い | 一部自走可能 | `121...125` までは current package close。final catalog は user spec / later pressure 依存 |
-| Phase 5 | static analysis / type / theorem prover / async-control boundary | theorem-line later package close | とても重い | 自走可能 | `126...211` まで current package close。next reopen は checker-verdict-payload-family-ready checker-verdict-witness-family comparison |
-| Phase 6 | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | final public boundary はまだ固定しない |
-| Phase 7 | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
+| Phase | rough % | 主眼 | 現在位置 | 重さ | 自走可否 | 補足 |
+|---|---:|---|---|---|---|---|
+| Phase 0 | 94% | repository memory / decision boundary | maintenance | 低い | 自走可能 | `specs/` / `plan/` / report / snapshot の整合維持 |
+| Phase 1 | 87% | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
+| Phase 2 | 96% | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | 入口は成立、残りは bless/update など policy-dependent residual |
+| Phase 3 | 83% | parser boundary / first checker cut | reserve path | 中〜やや重い | 後段依存 | private staged spike と reconnect freeze threshold までは整理済み |
+| Phase 4 | 64% | shared-space / membership / practical example boundary | checkpoint close | 重い | 一部自走可能 | `121...125` までは current package close。final catalog は user spec / later pressure 依存 |
+| Phase 5 | 69% | static analysis / type / theorem prover / async-control boundary | theorem-line later package close | とても重い | 自走可能 | `126...211` まで current package close。next reopen は checker-verdict-payload-family-ready checker-verdict-witness-family comparison |
+| Phase 6 | 8% | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | final public boundary はまだ固定しない |
+| Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
@@ -137,3 +138,4 @@
 - 2026-04-10 21:21 JST — Phase 5 theorem-line later reopen として `retained_payload_body_materialization_theorem_export_checker_result_payload` を current first choice に追加し、actual checker result payload 自体を theorem-side retained bridge に narrow に actualize した。next promoted line は checker-result-materialization-family-ready checker-verdict-carrier-detail comparison で、Phase 5 は `126...209` まで current package close と読める状態になった。
 - 2026-04-10 21:24 JST — Phase 5 theorem-line later reopen として `retained_payload_body_materialization_theorem_export_checker_verdict_carrier_detail` を current first choice に追加し、checker verdict carrier detail 自体を theorem-side retained bridge に narrow に actualize した。next promoted line は checker-verdict-carrier-detail-ready checker-verdict-payload-family comparison で、Phase 5 は `126...210` まで current package close と読める状態になった。
 - 2026-04-10 21:40 JST — Phase 5 theorem-line later reopen として `retained_payload_body_materialization_theorem_export_checker_verdict_payload_family` を current first choice に追加し、checker verdict payload family marker 自体を theorem-side retained bridge に narrow に actualize した。next promoted line は checker-verdict-payload-family-ready checker-verdict-witness-family comparison で、Phase 5 は `126...211` まで current package close と読める状態になった。
+- 2026-04-11 00:57 JST — `progress.md` の phase table に rough overall percent を追加し、Phase 0〜7 の進み具合を current snapshot として見やすく補正した。規範判断は変えず、next promoted line は引き続き Phase 5 の checker-verdict-witness-family comparison である。
