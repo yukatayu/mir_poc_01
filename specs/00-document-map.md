@@ -320,6 +320,8 @@
   - Phase 5 theorem-side archive-manifest-ready retained bridge の次段として、`archive_bundle_member_family_ref` だけをどこまで先に足し、actual archive member body compare をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/178-current-l2-theorem-line-archive-member-family-ready-archive-member-body-compare-threshold.md`
   - Phase 5 theorem-side archive-member-family-ready retained bridge の次段として、`archive_member_body_compare_ref` だけをどこまで先に足し、actual archive bless / update policy をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/179-current-l2-theorem-line-archive-member-body-compare-ready-archive-bless-update-policy-threshold.md`
+  - Phase 5 theorem-side archive-member-body-compare-ready retained bridge の次段として、`archive_bless_update_policy_ref` だけをどこまで先に足し、retained archive payload をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
