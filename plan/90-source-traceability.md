@@ -1417,3 +1417,11 @@
   - `specs/examples/192-current-l2-theorem-line-retained-payload-bless-update-dual-ref-bundle-ready-retained-payload-bless-update-strict-dual-field-threshold.md`
   - `docs/reports/0500-phase5-retained-payload-strict-dual-field-threshold.md`
   - `docs/reports/0501-review-phase5-retained-payload-strict-dual-field-threshold.md`
+
+### 2026-04-10 phase5 retained payload consumer-visible pair threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/192-current-l2-theorem-line-retained-payload-bless-update-dual-ref-bundle-ready-retained-payload-bless-update-strict-dual-field-threshold.md`
+  - `specs/examples/193-current-l2-theorem-line-retained-payload-bless-update-strict-dual-field-ready-consumer-visible-pair-threshold.md`
+  - `docs/reports/0502-phase5-retained-payload-consumer-visible-pair-threshold.md`
+  - `docs/reports/0503-review-phase5-retained-payload-consumer-visible-pair-threshold.md`

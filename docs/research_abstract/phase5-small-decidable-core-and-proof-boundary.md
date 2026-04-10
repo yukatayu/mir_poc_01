@@ -264,7 +264,9 @@ consumer-specific attachment として後段に残すのが current first choice
 までは足してよい。そのさらに次段として
 **`retained_payload_body_materialization_bless_side_row_ref`** と
 **`retained_payload_body_materialization_update_side_row_ref`**
-までは internal-only strict dual field として足してよい。ただし consumer-visible pair は still 後段に残す。
+までは internal-only strict dual field として足してよい。そのさらに次段として
+**`retained_payload_body_materialization_bless_update_pair`**
+までは notebook consumer 向け pair surface として足してよい。ただし boundary-specific handoff pair は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -273,8 +275,8 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- strict dual field を consumer-visible pair にどう束ねるか
-- pair surface を internal notebook consumer にだけ見せるか boundary-specific handoff artifact まで上げるか
+- notebook consumer pair を handoff-facing pair にどう昇格させるか
+- pair surface を symbolic retained bridge のまま維持するか boundary-specific artifact row へ actualize するか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 

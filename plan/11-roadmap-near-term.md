@@ -13,7 +13,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...192` までで theorem-line later package close であり、**next promoted line は `strict dual-field ready consumer-visible pair comparison`** である。
+- Phase 5 は `specs/examples/126...193` までで theorem-line later package close であり、**next promoted line は `consumer-visible-pair-ready boundary-specific handoff pair comparison`** である。
 
 ## いまから数 task の主眼
 
@@ -25,10 +25,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. strict dual-field ready consumer-visible pair comparison を Phase 5 later reopen の current promoted line として扱う
+### 1. consumer-visible-pair-ready boundary-specific handoff pair comparison を Phase 5 later reopen の current promoted line として扱う
 
-- `retained_payload_body_materialization_bless_side_row_ref` / `retained_payload_body_materialization_update_side_row_ref` の次段として、consumer-visible pair surface をどこまで theorem-side retained bridge に近づけるかを比較する
-- consumer-visible pair 自体を current external contract に上げず、threshold comparison に留める
+- `retained_payload_body_materialization_bless_update_pair` の次段として、boundary-specific handoff pair をどこまで theorem-side retained bridge に近づけるかを比較する
+- handoff-facing pair 自体を current external contract に上げず、threshold comparison に留める
 - rough weight: 中〜重
 - rough 所要: 1〜3 task / 2〜6日
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| strict dual-field ready consumer-visible pair comparison | 1〜3 task | current promoted line |
+| consumer-visible-pair-ready boundary-specific handoff pair comparison | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
