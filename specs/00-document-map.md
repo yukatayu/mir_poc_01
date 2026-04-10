@@ -372,6 +372,8 @@
   - Phase 5 theorem-side second-consumer-pressure-ready retained bridge の次段として、`retained_payload_body_materialization_proof_assistant_adapter_contract` を actual adapter-facing contract としてどこまで先に足し、`theorem_export_checker` pressure をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/204-current-l2-theorem-line-proof-assistant-adapter-contract-ready-theorem-export-checker-pressure-threshold.md`
   - Phase 5 theorem-side proof-assistant-adapter-contract-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_pressure` を checker-facing pressure marker としてどこまで先に足し、actual checker-facing contract をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/205-current-l2-theorem-line-theorem-export-checker-pressure-ready-checker-facing-contract-threshold.md`
+  - Phase 5 theorem-side theorem-export-checker-pressure-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_contract` を actual checker-facing contract としてどこまで先に足し、exported checker payload をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
