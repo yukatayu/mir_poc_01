@@ -309,6 +309,12 @@ consumer-specific attachment として後段に残すのが current first choice
 その次段として
 **`retained_payload_body_materialization_theorem_export_checker_verdict_payload_family`**
 までは checker verdict payload family marker として足してよい。ただし checker verdict witness / transport は still 後段に残す。
+その次段として
+**`retained_payload_body_materialization_theorem_export_checker_verdict_witness_family`**
+までは checker verdict witness family marker として足してよい。ただし checker verdict transport は still 後段に残す。
+その次段として
+**`retained_payload_body_materialization_theorem_export_checker_verdict_transport_family`**
+までは checker verdict transport family marker として足してよい。ただし checker verdict transport carrier detail / payload / receipt は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -317,9 +323,9 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- checker verdict witness family をどの field / row / payload family で切るか
-- `retained_payload_body_materialization_theorem_export_checker_verdict_payload_family` を retained bridge のまま維持するか checker verdict witness family へ actualize するか
-- checker verdict transport line をどの concrete threshold で呼ぶか
+- checker verdict transport carrier detail をどの field / row / payload family で切るか
+- `retained_payload_body_materialization_theorem_export_checker_verdict_transport_family` を retained bridge のまま維持するか checker verdict transport carrier detail へ actualize するか
+- checker verdict transport payload / receipt line をどの concrete threshold で呼ぶか
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの
