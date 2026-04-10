@@ -1377,3 +1377,11 @@
   - `specs/examples/187-current-l2-theorem-line-retained-payload-body-materialization-carrier-detail-ready-retained-payload-body-materialization-carrier-payload-threshold.md`
   - `docs/reports/0490-phase5-retained-payload-body-materialization-carrier-payload-threshold.md`
   - `docs/reports/0491-review-phase5-retained-payload-body-materialization-carrier-payload-threshold.md`
+
+### 2026-04-10 phase5 retained payload bless/update split threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/187-current-l2-theorem-line-retained-payload-body-materialization-carrier-detail-ready-retained-payload-body-materialization-carrier-payload-threshold.md`
+  - `specs/examples/188-current-l2-theorem-line-retained-payload-body-materialization-carrier-payload-ready-retained-payload-bless-update-split-threshold.md`
+  - `docs/reports/0492-phase5-retained-payload-bless-update-split-threshold.md`
+  - `docs/reports/0493-review-phase5-retained-payload-bless-update-split-threshold.md`
