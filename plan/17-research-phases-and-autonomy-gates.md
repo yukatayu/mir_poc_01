@@ -14,243 +14,114 @@
 
 ## この文書の読み方
 
-- ここでいう phase は厳密なウォーターフォールではない。
+- phase は厳密なウォーターフォールではない。
 - 複数 phase が並走することはある。
-- ただし、**主線** と **side line** は区別する。
-- `self-driven` と書いてあるものは、agent が narrow comparison / PoC / docs / regression を進めてよい範囲を指す。
-- `user spec required` と書いてあるものは、勝手に finalization すると手戻りが大きい範囲を指す。
+- ただし、**current promoted line** と **checkpoint maintenance / reserve path** は区別する。
+- `self-driven` は、agent が narrow comparison / PoC / docs / regression を進めてよい範囲を指す。
+- `user spec required` は、勝手に finalization すると手戻りが大きい範囲を指す。
 
 ## phase 一覧
 
 ### Phase 0 — repository memory / decision boundary
 
-#### 主眼
-
-- `specs/` / `plan/` / `docs/reports/` / `progress.md` の役割分離
-- L0/L1/L2/L3 の decision level
-- invariant / open question / traceability の運用安定化
-
-#### 現在地
-
-- **ほぼ maintenance phase**
-
-#### 重さ
-
-- 低い
-
-#### autonomy gate
-
-- **self-driven で維持してよい**
+- 主眼: `specs/` / `plan/` / report / snapshot の役割分離、traceability、maintenance rule
+- 現在地: maintenance
+- 重さ: 低い
+- autonomy gate: **self-driven**
 
 ### Phase 1 — current L2 semantics stabilization
 
-#### 主眼
-
-- fallback / `lease` / `TryFallback` / `AtomicCut` / guarded option chain の安定化
-- representative example と prose drift の抑制
-- parser に先行する semantics core の固定
-
-#### 現在地
-
-- **終盤**
-
-#### 重さ
-
-- 中程度
-
-#### autonomy gate
-
-- **self-driven で進めてよい**
+- 主眼: fallback / `lease` / guarded option chain / `TryFallback` / `AtomicCut` の安定化
+- 現在地: 終盤
+- 重さ: 中
+- autonomy gate: **self-driven**
 
 ### Phase 2 — parser-free PoC and detached validation loop
 
-#### 主眼
-
-- fixture / interpreter / host harness / bundle / batch / selection / profile の machine-check loop
-- detached artifact の emit / save / compare / smoke
-- fixture authoring / elaboration 実務の摩擦低減
-
-#### 現在地
-
-- **終盤。入口は成立済み、いまは運用摩擦の低減フェーズ**
-
-#### 重さ
-
-- 中程度
-
-#### autonomy gate
-
-- **self-driven で進めてよい**
+- 主眼: fixture / interpreter / host harness / bundle / batch / selection / detached loop
+- 現在地: maintenance tail
+- 重さ: 中
+- autonomy gate: **self-driven**
 
 ### Phase 3 — parser boundary and first checker cut
 
-#### 主眼
-
-- final parser grammar を決めずに staged parser spike を actualize する
-- helper-local compare family と static structural floor を narrow に切る
-- parser / checker / runtime を一気に混ぜずに接点を inventory 化する
-
-#### 現在地
-
-- **current tranche の closeout 完了。current checkpoint では self-driven portion は一旦尽き、reserve path に戻した**
-
-#### 重さ
-
-- 中程度からやや重い
-
-#### autonomy gate
-
-- **docs-first inventory の再確認までは可能だが、current promoted subline としては後段依存**
+- 主眼: staged parser spike、helper-local compare family、first checker reconnect
+- 現在地: reserve path
+- 重さ: 中〜やや重い
+- autonomy gate: **後段依存**
 
 ### Phase 4 — shared-space / membership / practical example boundary
 
-#### 主眼
+- 主眼: participant carrier、activation rule、authority placement、consistency mode、RNG / fairness、reconnect / leave / rejoin / causal metadata
+- 現在地: `specs/examples/121...125` までで current package close
+- 重さ: 重い
+- autonomy gate:
+  - docs-first boundary と practical example は **self-driven**
+  - final activation / authority / auth / consistency / fairness catalog は **user spec required**
 
-- participant carrier
-- activation rule
-- authority placement
-- consistency mode
-- RNG / fairness source
-- reconnect / leave / rejoin / causal metadata
-- practical example での room profile
+### Phase 5 — static analysis / type / theorem prover / async-control boundary
 
-#### 現在地
-
-- **前半の authoritative baseline closeout 済み。catalog comparison の first cut として working subset row を切り、`auditable_authority_witness` の minimal witness core、authoritative delegated-provider practical cut、control-plane separated carrier threshold comparison まで整理済み。current package は checkpoint close で、next promoted line は Phase 5 inventory へ寄せる**
-
-#### 重さ
-
-- 重い
-
-#### autonomy gate
-
-- **比較・PoC 例示・docs-first boundary までは self-driven**
-- **final activation / authority / auth / consistency / fairness catalog は user spec required**
-
-### Phase 5 — static analysis / type / theorem prover / model checker boundary
-
-#### 主眼
-
-- local / decidable judgment を core に入れる候補の整理
-- external verifier / theorem prover / model checker に送る候補の整理
-- hybrid staged approach の entry criteria 明文化
-
-#### 現在地
-
-- **current theorem-line later package close。`specs/examples/126...` で 4-way split、`specs/examples/127...` で proof-obligation matrix と mixed handoff sketch、`specs/examples/128...` で mixed row default / boundary-specific split / actual emitter の reopen threshold、`specs/examples/129...` で first concrete consumer pressure を theorem line に置き、`specs/examples/130...` で theorem-side projection bundle、`specs/examples/131...` で typed symbolic `evidence_refs` family、`specs/examples/132...` で public checker migration defer threshold、`specs/examples/133...` で minimum contract row core、`specs/examples/134...` で `proof_notebook` first practical consumer class、`specs/examples/135...` で `goal_text` attachment の current first choice、`specs/examples/136...` で notebook bridge artifact を docs-only derived view に留める threshold、`specs/examples/137...` で next practical reopen を notebook workflow pressure first / `proof_assistant_adapter` second に固定し、`specs/examples/138...` で workflow pressure の current first threshold を review checklist / walkthrough に置き、`specs/examples/139...` で review unit を docs-only named bundle に寄せ、`specs/examples/140...` で bridge-level の docs-only sketch に寄せ、`specs/examples/141...` で compare basis refs を足し、`specs/examples/142...` で bless decision state を足し、`specs/examples/143...` で review-note refs を足し、`specs/examples/144...` で retained-notebook ref を足し、`specs/examples/145...` で review-session ref を足し、`specs/examples/146...` で `reviewed_by_ref + reviewed_at_ref` を足し、`specs/examples/147...` で `review_session_state` を足し、`specs/examples/148...` で `retention_state` を足し、`specs/examples/149...` で `retained_path_policy_ref` を足し、`specs/examples/150...` で `emitted_artifact_ref` を足し、`specs/examples/151...` で `handoff_emitter_ref` を足し、`specs/examples/152...` で `consumer_adapter_ref` を足し、`specs/examples/153...` で `exchange_rule_ref` を足し、`specs/examples/154...` で `adapter_validation_ref` を足し、`specs/examples/155...` で `consumer_invocation_surface_ref` を足し、`specs/examples/156...` で `exchange_rule_body_ref` を足し、`specs/examples/157...` で `runtime_coupling_ref` を足し、`specs/examples/158...` で `transport_protocol_ref` を足し、`specs/examples/159...` で `failure_body_ref` を足し、`specs/examples/160...` で `actual_invocation_protocol_ref` を足し、`specs/examples/161...` で `consumer_host_binding_ref` を足し、`specs/examples/162...` で `failure_wording_ref` を足し、`specs/examples/163...` で `actual_runtime_handoff_ref` を足し、`specs/examples/164...` で `emitted_invocation_receipt_ref` を足し、`specs/examples/165...` で `runtime_transcript_ref` を足し、`specs/examples/166...` で `materialized_runtime_handoff_ref` を足し、`specs/examples/167...` で `concrete_payload_ref` を足し、`specs/examples/168...` で `concrete_transcript_body_ref` を足し、`specs/examples/169...` で `serialized_channel_body_ref` を足し、`specs/examples/170...` で `emitted_attachment_body_ref` を足し、`specs/examples/171...` で `emitted_attachment_blob_ref` を足し、`specs/examples/172...` で `retained_file_body_ref` を足し、`specs/examples/173...` で `archive_materialization_ref` を足し、`specs/examples/174...` で `archive_body_ref` を足し、`specs/examples/175...` で `archive_bundle_ref` を足し、`specs/examples/176...` で `archive_bundle_manifest_ref` を足し、`specs/examples/177...` で `archive_bundle_member_family_ref` を足し、`specs/examples/178...` で `archive_member_body_compare_ref` を足し、`specs/examples/179...` で `archive_bless_update_policy_ref` を足す current first choice まで固定したうえで、次は retained archive payload comparison を later reopen 候補として選ぶ段階**
-
-#### 重さ
-
-- とても重い
-
-#### autonomy gate
-
-- **docs-first inventory と small proof obligation 整理までは self-driven**
-- **本格 actualization は後段依存**
+- 主眼: small decidable core、proof boundary、protocol verifier boundary、runtime policy boundary
+- 現在地: `specs/examples/126...179` までで theorem-line later package close、**next promoted line は retained archive payload comparison**
+- 重さ: とても重い
+- autonomy gate:
+  - docs-first inventory と theorem-line threshold comparison は **self-driven**
+  - actual external contract finalization は **後段依存**
 
 ### Phase 6 — actual parser / checker / runtime commitment
 
-#### 主眼
-
-- parser subset の actual introduction
-- checker family の external / internal 境界確定
-- runtime / host / artifact API の actual narrow cut
-
-#### 現在地
-
-- **未着手**
-
-#### 重さ
-
-- 重い
-
-#### autonomy gate
-
-- **後段依存**
+- 主眼: actual parser subset、public checker boundary、runtime / host / artifact API
+- 現在地: 未着手
+- 重さ: 重い
+- autonomy gate: **後段依存**
 
 ### Phase 7 — higher-layer integration and domain realization
 
-#### 主眼
-
-- Mirrorea Fabric
-- Typed-Effect Wiring Platform
-- PrismCascade
-- shared-space upper layer
-- domain/application design（例: Reversed Library）
-
-#### 現在地
-
-- **未着手**
-
-#### 重さ
-
-- とても重い
-
-#### autonomy gate
-
-- **user spec required**
+- 主眼: Mirrorea Fabric、Typed-Effect Wiring Platform、PrismCascade、shared-space upper layer、application design
+- 現在地: 未着手
+- 重さ: とても重い
+- autonomy gate: **user spec required**
 
 ## 現在の主線
 
 いま repo の主線は、次の 3 本である。
 
-1. **checkpoint / maintenance tail**
-   - Phase 0 / 1 / 2 の drift suppression を継続する
-2. **Phase 4 前半の side line**
-   - shared-space / membership の baseline closeout を保ちつつ、catalog comparison を進める
-3. **Phase 5 入口の inventory line**
-   - small decidable core と proof boundary の inventory は `specs/examples/126...` と `specs/examples/127...` までで current package close に入った
-   - `specs/examples/128...` により、mixed row bundle を current default に維持し、boundary-specific handoff artifact や actual emitter は concrete pressure が出たときだけ reopen する threshold まで current package に含めてよい
-   - `specs/examples/129...` により、first concrete consumer pressure の current first practical candidate は `theorem_prover_boundary` に置いてよい
+1. **Phase 5 later reopen の current promoted line**
+   - retained archive payload comparison
+2. **checkpoint / maintenance tail**
+   - Phase 0 / 1 / 2 の drift suppression
+   - Phase 4 / 5 checkpoint close 済み package の mirror 維持
+3. **Phase 4 later reopen candidate**
+   - authority handoff / provider binding / activation frontier の concrete pressureが出たときだけ reopen
 
-shared-space line は、これらを壊さない範囲で進める **Phase 4 の side line** である。
 Phase 3 は current checkpoint では **reserve path** として残し、later pressure が出たときだけ reopen 候補にする。
 
 ## immediate execution order
 
-user 指示を反映した current immediate sequence は次である。
+1. **Phase 5 later reopen** として retained archive payload comparison を扱う
+2. 同じ task の中で **cross-phase checkpoint maintenance** を行う
+3. Phase 4 current package は checkpoint close を維持する
+4. detached validation loop residual は practical need が出たときだけ扱う
+5. Phase 3 reserve path は later pressure が出るまで reopen しない
 
-1. **detached validation loop の運用摩擦低減を先に進める**
-   - export / compare / triage の current baseline は checkpoint close とみなし、`reference update / bless` だけを later candidate に残す
-2. **consistency / fairness / causal metadata catalog の current package は checkpoint close として維持する**
-   - fixed final catalog は作らず、room profile の stop line を増やす
-   - current first cut は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` の row set とし、`specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md` までで minimal witness core を切る
-   - `delegated_rng_service` を authoritative room 側でも provider-placement candidate としてどこまで practical に読めるかは `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md` までで current first choice を切った
-   - control-plane separated causal carrier を authoritative room side line に reopen する threshold も `specs/examples/125-shared-space-control-plane-carrier-threshold.md` までで current first choice を切った
-   - stronger control-plane split は later pressure が出たときだけ reopen 候補に残す
-3. **Phase 5 current package は checkpoint close として維持する**
-   - small decidable core / proof boundary / async-control boundary の 4-way split は current first choice に固定した
-   - proof-obligation matrix は docs 正本、external handoff artifact は mixed row sketch に留めた
-   - `specs/examples/128...` により、mixed row default を current first choice とし、boundary-specific handoff artifact と actual emitter は concrete pressure が出たときだけ reopen 候補にする
-   - `specs/examples/129...` により、first concrete consumer pressure の current first practical candidate は theorem line に寄せた
-   - `specs/examples/130...` により、theorem line の current first cut は docs-only projection bundle に留めた
-   - `specs/examples/131...` により、theorem-side `evidence_refs` は typed symbolic ref family を current first choice に置いた
-   - `specs/examples/132...` から `specs/examples/147...` までで theorem line は `review_session_state` まで伸び、`specs/examples/148...` から `specs/examples/179...` までで `retention_state`、`retained_path_policy_ref`、`emitted_artifact_ref`、`handoff_emitter_ref`、`consumer_adapter_ref`、`exchange_rule_ref`、`adapter_validation_ref`、`consumer_invocation_surface_ref`、`exchange_rule_body_ref`、`runtime_coupling_ref`、`transport_protocol_ref`、`failure_body_ref`、`actual_invocation_protocol_ref`、`consumer_host_binding_ref`、`failure_wording_ref`、`actual_runtime_handoff_ref`、`emitted_invocation_receipt_ref`、`runtime_transcript_ref`、`materialized_runtime_handoff_ref`、`concrete_payload_ref`、`concrete_transcript_body_ref`、`serialized_channel_body_ref`、`emitted_attachment_body_ref`、`emitted_attachment_blob_ref`、`retained_file_body_ref`、`archive_materialization_ref`、`archive_body_ref`、`archive_bundle_ref`、`archive_bundle_manifest_ref`、`archive_bundle_member_family_ref`、`archive_member_body_compare_ref`、`archive_bless_update_policy_ref` を順に足す current first choice まで固定した
-   - next practical reopen は retained archive payload comparison であり、`proof_assistant_adapter` pressure は still second practical candidate に残す
-4. **detached validation loop は maintenance mode に戻し、authoritative room baseline は checkpoint close として維持する**
-5. **Phase 3 は current では reopen せず、later pressure が出たときだけ reserve path として見直す**
-
-現在は detached validation loop の current self-driven friction reduction と authoritative room baseline closeout が終わり、Phase 3 staged reconnect line も freeze threshold まで整理できたので、phase 読みとしては **Phase 3 current tranche は closeout 済みで、repo は current self-driven 主線を Phase 2 maintenance tail / Phase 4 side line / Phase 5 inventory line に移してよい状態にある** と読む。
-
-## 現在の「止めるべき線」
+## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- detached validation loop の運用摩擦低減
-- shared-space docs-first boundary comparison
-- small decidable core inventory の docs-first comparison
+- Phase 5 theorem-line later reopen の docs-first comparison
+- checkpoint maintenance
+- shared-space の docs-first boundary comparison
 
 次は勝手に finalization しない。
 
-- Phase 3 reserve path の premature reopen
 - final parser grammar
-- production exporter API
-- richer host interface の全面 actualization
+- public checker API
+- actual external proof / protocol verifier contract
 - shared-space の final activation / authority / auth / consistency / fairness catalog
 - higher-layer application contract
 
-## いまの判断
+## 現在の判断
 
-- **現在地は「Phase 3 current tranche closeout 後の checkpoint」で、Phase 2 終盤が maintenance tail、Phase 4 前半が side line」** と読むのが最も自然である。
-- `progress.md` では、この phase 読みを rough snapshot として mirror する。
-- ただし規範判断の正本は引き続き `specs/` と relevant `plan/` 個別文書に置く。
+- **current promoted line は Phase 5 retained archive payload comparison** と読むのが自然である。
+- **Phase 4 は current package close、Phase 3 は reserve path** と読むのが自然である。
+- `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

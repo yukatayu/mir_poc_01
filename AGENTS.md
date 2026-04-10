@@ -105,6 +105,7 @@ Every report should contain, in this order:
   - 粒度は「何を検証したか」「何が通って次に進めるようになったか」が分かる 1 行でよい。
   - 形式検証・実装・docs-only task を問わず、repo の current status に影響する non-trivial task では原則として追記すること。
   - timestamp は手打ちで推測せず、`date` コマンド等でその場で取得した値を使うこと。
+  - `progress.md` は snapshot 文書なので、作業ログは **recent log** として保ってよい。古い詳細履歴は `docs/reports/` を正本にし、checkpoint ごとに古い行を要約・圧縮してよい。
 - `progress.md` には、repo 全体の大局 phase を示す section を置き、少なくとも
   - phase 名
   - 主眼
@@ -123,6 +124,7 @@ Every report should contain, in this order:
 - `tasks.md` は append-only の履歴ではない。**更新時には毎回全体を書き直し、現況と整合した snapshot に保つこと。**
 - phase end、checkpoint close、mainline 切り替え、major blocker の入れ替わりが起きた task では、同じ task の中で `tasks.md` の更新要否を確認すること。
 - `tasks.md` の **「次に自走で進める順番と rough estimate」** には、各 task package がどの大局 phase の前半 / 中盤 / reserve path かを短く書くこと。
+- `tasks.md` では、long chain を毎回 exhaustively 再列挙せず、**current checkpoint / current promoted line / next reopen point** が分かる粒度に圧縮してよい。
 - `tasks.md` では、少なくとも次を分けて書くこと。
   - 自走可能な task package
   - 方針決定が必要な blocker / open question
