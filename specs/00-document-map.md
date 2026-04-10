@@ -330,6 +330,8 @@
   - Phase 5 theorem-side archive-retention-layout-ready retained bridge の次段として、`retained_archive_payload_body_family_ref` だけをどこまで先に足し、retained payload materialization family をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/183-current-l2-theorem-line-retained-archive-payload-body-family-ready-retained-payload-materialization-family-threshold.md`
   - Phase 5 theorem-side retained-archive-payload-body-family-ready retained bridge の次段として、`retained_payload_materialization_family_ref` だけをどこまで先に足し、actual retained payload body materialization detail をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/184-current-l2-theorem-line-retained-payload-materialization-family-ready-retained-payload-body-materialization-detail-threshold.md`
+  - Phase 5 theorem-side retained-payload-materialization-family-ready retained bridge の次段として、`retained_payload_body_materialization_detail_ref` だけをどこまで先に足し、actual retained payload body materialization payload をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
