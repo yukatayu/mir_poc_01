@@ -360,6 +360,8 @@
   - Phase 5 theorem-side boundary-specific-handoff-artifact-row-ready retained bridge の次段として、`retained_payload_body_materialization_external_handoff_row` を external-contract-facing handoff row としてどこまで先に足し、actual external contract をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/198-current-l2-theorem-line-external-contract-facing-handoff-row-ready-actual-external-contract-threshold.md`
   - Phase 5 theorem-side external-contract-facing-handoff-row-ready retained bridge の次段として、`retained_payload_body_materialization_external_contract` を actual external contract としてどこまで先に足し、consumer-specific external contract payload をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/199-current-l2-theorem-line-actual-external-contract-ready-consumer-specific-external-contract-payload-threshold.md`
+  - Phase 5 theorem-side actual-external-contract-ready retained bridge の次段として、`retained_payload_body_materialization_external_contract_payload` を consumer-specific external contract payload としてどこまで先に足し、richer notebook payload と second consumer pressure をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

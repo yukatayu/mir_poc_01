@@ -1465,3 +1465,11 @@
   - `specs/examples/198-current-l2-theorem-line-external-contract-facing-handoff-row-ready-actual-external-contract-threshold.md`
   - `docs/reports/0512-phase5-actual-external-contract-threshold.md`
   - `docs/reports/0513-review-phase5-actual-external-contract-threshold.md`
+
+### 2026-04-10 phase5 consumer-specific external contract payload threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/198-current-l2-theorem-line-external-contract-facing-handoff-row-ready-actual-external-contract-threshold.md`
+  - `specs/examples/199-current-l2-theorem-line-actual-external-contract-ready-consumer-specific-external-contract-payload-threshold.md`
+  - `docs/reports/0514-phase5-consumer-specific-external-contract-payload-threshold.md`
+  - `docs/reports/0515-review-phase5-consumer-specific-external-contract-payload-threshold-package.md`
