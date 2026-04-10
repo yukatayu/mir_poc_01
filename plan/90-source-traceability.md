@@ -1321,3 +1321,4 @@
   - `specs/examples/180-current-l2-theorem-line-archive-bless-update-policy-ready-retained-archive-payload-threshold.md`
   - `docs/reports/0476-phase5-retained-archive-payload-threshold.md`
   - `docs/reports/0477-review-phase5-retained-archive-payload-threshold.md`
+  - `docs/reports/0477-review-phase5-retained-archive-payload-threshold.md`
