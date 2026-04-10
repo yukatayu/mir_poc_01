@@ -297,6 +297,9 @@ consumer-specific attachment として後段に残すのが current first choice
 その次段として
 **`retained_payload_body_materialization_theorem_export_checker_payload`**
 までは actual exported checker payload として足してよい。ただし checker result materialization family は still 後段に残す。
+その次段として
+**`retained_payload_body_materialization_theorem_export_checker_result_materialization_family`**
+までは checker result materialization family marker として足してよい。ただし actual checker result payload は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -305,9 +308,9 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- checker result materialization family をどの field / row / payload family で切るか
-- actual exported checker payload を retained bridge のまま維持するか checker result materialization family へ actualize するか
-- checker result materialization family を theorem-line retained bridge の exported checker payload の次段としてどこまで actualize するか
+- actual checker result payload をどの field / row / payload family で切るか
+- `theorem_export_checker_result_payload` family marker を retained bridge のまま維持するか actual checker result payload へ actualize するか
+- checker verdict carrier detail をどの concrete threshold で呼ぶか
 - low-level memory-order family の導入
 
 ## この phase が次へ渡すもの

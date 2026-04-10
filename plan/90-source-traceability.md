@@ -1532,3 +1532,10 @@
   - `specs/examples/206-current-l2-theorem-line-theorem-export-checker-contract-ready-exported-checker-payload-pressure-threshold.md`
   - `specs/examples/207-current-l2-theorem-line-theorem-export-checker-payload-pressure-ready-actual-exported-checker-payload-threshold.md`
   - `docs/reports/0530-phase5-actual-exported-checker-payload-threshold.md`
+
+### 2026-04-10 phase5 checker-result-materialization-family threshold addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/207-current-l2-theorem-line-theorem-export-checker-payload-pressure-ready-actual-exported-checker-payload-threshold.md`
+  - `specs/examples/208-current-l2-theorem-line-actual-exported-checker-payload-ready-checker-result-materialization-family-threshold.md`
+  - `docs/reports/0532-phase5-checker-result-materialization-family-threshold.md`
