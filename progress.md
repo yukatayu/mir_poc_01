@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-10 17:16 JST
+最終更新: 2026-04-10 17:27 JST
 
 ## この文書について
 
@@ -18,7 +18,7 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。parser-free PoC、detached validation loop、fixture 実務の入口は成立しており、主眼は drift suppression と residual maintenance に移っている。
 - **Phase 3** は reserve path である。stage 1 / 2 / 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは整理済みで、final catalog はまだ固定しない。
-- **Phase 5** は `specs/examples/126...199` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory と theorem-side retained bridge は `retained_payload_body_materialization_external_contract_payload` まで current first choice を切れており、**next later reopen** は `external-contract-payload-ready payload enrichment / second-consumer-pressure comparison` に置いている。
+- **Phase 5** は `specs/examples/126...200` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory と theorem-side retained bridge は `retained_payload_body_materialization_external_contract_proof_hint` まで current first choice を切れており、**next later reopen** は `proof-hint-ready consumer-hint / second-consumer-pressure comparison` に置いている。
 - current main bottleneck は semantics の大崩れではなく、**shared-space final catalog**、**final parser / public checker boundary**、**actual type / proof / protocol verifier actualization timing** である。
 
 ## 研究フェーズ（大局）
@@ -30,14 +30,14 @@
 | Phase 2 | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | 入口は成立、残りは bless/update など policy-dependent residual |
 | Phase 3 | parser boundary / first checker cut | reserve path | 中〜やや重い | 後段依存 | private staged spike と reconnect freeze threshold までは整理済み |
 | Phase 4 | shared-space / membership / practical example boundary | checkpoint close | 重い | 一部自走可能 | `121...125` までは current package close。final catalog は user spec / later pressure 依存 |
-| Phase 5 | static analysis / type / theorem prover / async-control boundary | theorem-line later package close | とても重い | 自走可能 | `126...199` まで current package close。next reopen は external-contract-payload-ready payload enrichment / second-consumer-pressure comparison |
+| Phase 5 | static analysis / type / theorem prover / async-control boundary | theorem-line later package close | とても重い | 自走可能 | `126...200` まで current package close。next reopen は proof-hint-ready consumer-hint / second-consumer-pressure comparison |
 | Phase 6 | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | final public boundary はまだ固定しない |
 | Phase 7 | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
 1. **Phase 5 later reopen**
-   - external-contract-payload-ready payload enrichment / second-consumer-pressure comparison を next promoted line に置く。
+   - proof-hint-ready consumer-hint / second-consumer-pressure comparison を next promoted line に置く。
 2. **cross-phase checkpoint maintenance**
    - `Documentation.md`、`plan/`、`tasks.md`、`progress.md`、research abstract の drift を抑える。
 3. **Phase 4 later reopen candidate**
@@ -81,7 +81,7 @@
 | parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | reserve path。later pressure 時だけ reopen |
 | first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は freeze threshold まで整理済み |
 | shared-space / dynamic membership boundary | 83% | 76% | 12% | 一部自走可能 | `121...125` まで current package close |
-| static analysis / type / theorem prover / async-control boundary | 98% | 93% | 18% | 着手可能 | `126...199` まで current package close。next は external-contract-payload-ready payload enrichment / second-consumer-pressure comparison |
+| static analysis / type / theorem prover / async-control boundary | 98% | 93% | 18% | 着手可能 | `126...200` まで current package close。next は proof-hint-ready consumer-hint / second-consumer-pressure comparison |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様がまだ足りない |
 
@@ -96,7 +96,7 @@
 
 ## 次に進めるべき task
 
-1. **Phase 5 later reopen** として `external-contract-payload-ready payload enrichment / second-consumer-pressure comparison` を扱う
+1. **Phase 5 later reopen** として `proof-hint-ready consumer-hint / second-consumer-pressure comparison` を扱う
 2. その task close の中で mirror sweep を同時に行い、checkpoint drift を抑える
 3. Phase 4 は current package close を維持し、stronger split は concrete pressure が出たときだけ reopen する
 
@@ -125,3 +125,4 @@
 - 2026-04-10 16:50 JST — Phase 5 theorem-line later reopen として `retained_payload_body_materialization_external_handoff_row` を current first choice に追加し、external-contract-facing handoff row を theorem-side retained bridge に narrow に actualize した。next promoted line は external-contract-facing-handoff-row-ready actual external contract comparison で、Phase 5 は `126...197` まで current package close と読める状態になった。
 - 2026-04-10 17:00 JST — Phase 5 theorem-line later reopen として `retained_payload_body_materialization_external_contract` を current first choice に追加し、actual external contract を theorem-side retained bridge に narrow に actualize した。next promoted line は actual-external-contract-ready consumer-specific external contract payload comparison で、Phase 5 は `126...198` まで current package close と読める状態になった。
 - 2026-04-10 17:16 JST — Phase 5 theorem-line later reopen として `retained_payload_body_materialization_external_contract_payload` を current first choice に追加し、`proof_notebook` first consumer 向け minimal payload を theorem-side retained bridge に narrow に actualize した。next promoted line は external-contract-payload-ready payload enrichment / second-consumer-pressure comparison で、Phase 5 は `126...199` まで current package close と読める状態になった。
+- 2026-04-10 17:27 JST — Phase 5 theorem-line later reopen として `retained_payload_body_materialization_external_contract_proof_hint` を current first choice に追加し、`proof_notebook` first consumer 向け minimal proof hint を theorem-side retained bridge に narrow に actualize した。next promoted line は proof-hint-ready consumer-hint / second-consumer-pressure comparison で、Phase 5 は `126...200` まで current package close と読める状態になった。

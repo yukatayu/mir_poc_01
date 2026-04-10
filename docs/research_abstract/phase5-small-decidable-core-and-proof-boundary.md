@@ -278,7 +278,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`retained_payload_body_materialization_external_contract`**
 までは actual external contract として足してよい。その次段として
 **`retained_payload_body_materialization_external_contract_payload`**
-までは consumer-specific external contract payload として足してよい。ただし richer notebook payload と second consumer pressure は still 後段に残す。
+までは consumer-specific external contract payload として足してよい。その次段として
+**`retained_payload_body_materialization_external_contract_proof_hint`**
+までは `proof_hint` enrichment として足してよい。ただし `consumer_hint` と second consumer pressure は still 後段に残す。
 
 ## まだやっていないこと
 
@@ -287,7 +289,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- consumer-specific external contract payload の次段として richer notebook payload をどの field で切るか
+- `proof_hint` enrichment の次段として `consumer_hint` をどの field で切るか
 - `proof_assistant_adapter` consumer pressure を notebook line より先に practical reopen へ上げる条件をどう置くか
 - low-level memory-order family の導入
 
