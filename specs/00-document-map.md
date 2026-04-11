@@ -581,6 +581,10 @@
   - parser second tranche first を選んだ次段として、stage3 declaration-side admit attached slot と shared isolated predicate fragment を `mir_ast::current_l2` へ actualize するか、より広い attachment / request suite / perform head widen へ進むかを比較する補助文書。
 - `specs/examples/308-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-ready-minimal-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold.md`
   - parser second tranche first package の minimal docs-first shape を `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/309-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-ready-phase6-reserve-formal-tool-binding-inventory-comparison.md`
+  - parser second tranche first package fixed 後の次段として、theorem-first / model-check concrete binding をどの reserve inventory で保持するか、tool-neutral formal hook を current entry criteria に維持したまま formal-side non-selected line をどう mirror するかを比較する補助文書。
+- `specs/examples/310-current-l2-phase6-reserve-formal-tool-binding-inventory-ready-minimal-phase6-reserve-formal-tool-binding-inventory-threshold.md`
+  - Phase 6 reserve formal tool binding inventory の minimal docs-first shape を `inventory_kind + fixed_entry_criteria_refs + first_reserve_ref + second_reserve_ref + guard_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

@@ -90,14 +90,17 @@ compile-ready checkpoint close 後の next reopen sequencing は parser second t
 `specs/examples/307...308` により、
 parser second tranche first package も attached-slot / minimal predicate fragment まで actualize 済みである。
 
+`specs/examples/309...310` により、
+reserve formal tool binding inventory も fixed 済みであり、theorem-first concrete binding は first reserve、model-check side は second reserve に整理した。
+
 current mainline は、
-**Phase 6 reserve formal tool binding inventory**
+**Phase 6 parser-side follow-up package sequencing**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- theorem-first / model-check concrete binding の reserve wording
 - parser-side follow-up package sequencing
-- sample/program corpus を later に繋ぐための stop line
+- parser-side follow-up package actualization
+- fixed-subset sample/program corpus を later に繋ぐための stop line
 
 を揃えるのが主眼になる。

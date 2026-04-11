@@ -90,24 +90,25 @@
 
 いま repo の主線は、次の 2 本である。
 
-1. **Phase 6 reserve formal tool binding inventory**
-   - theorem-first / model-check line を reserve path として整理する
-2. **Phase 6 parser-side follow-up package sequencing**
+1. **Phase 6 parser-side follow-up package sequencing**
    - shared single attachment frame を next package に含めるかを narrow に決める
+2. **Phase 6 parser-side follow-up package actualization**
+   - selected follow-up line の最小 cut を actualize する
 
 Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。Phase 5 closeout も `specs/examples/297...298` で fixed 済みであり、verifier handoff surface、theorem retained bridge stop line、boundary inventory、retained-later line は current entry criteria と読んでよい。
 
 ## immediate execution order
 
-1. **Phase 6 reserve formal tool binding inventory** を immediate line として扱う
-2. **Phase 6 parser-side follow-up package sequencing** を narrow に行う
+1. **Phase 6 parser-side follow-up package sequencing** を immediate line として扱う
+2. **Phase 6 parser-side follow-up package actualization** を narrow に行う
 
 ## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- Phase 6 reserve formal tool binding inventory
 - Phase 6 parser-side follow-up package sequencing
+- Phase 6 parser-side follow-up package actualization
+- Phase 6 fixed-subset sample/program corpus staging
 - checkpoint close 済み package の maintenance
 
 次は勝手に finalization しない。
@@ -119,7 +120,7 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 ## 現在の判断
 
-- **current immediate line は Phase 6 reserve formal tool binding inventory** と読むのが自然である。
+- **current immediate line は Phase 6 parser-side follow-up package sequencing** と読むのが自然である。
 - **Phase 1 / 2 / 3 / 4 / 5 は Phase 6 front-half のための self-driven entry criteria を fixed 済み** と読むのが自然である。
 - **`mir-ast` stage 1 / stage 2 carrier は Phase 6 parser first tranche として fixed 済み** と読むのが自然である。
 - **`mir-semantics` program-level entry と `mir-runtime` current L2 thin skeleton は Phase 6 checker/runtime first tranche として fixed 済み** と読むのが自然である。
