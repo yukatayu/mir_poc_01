@@ -215,6 +215,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - stage 3 admit-slot branch の private support helper
   - inline text から declaration-side `admit` attached slot を含む option / chain subset だけを parse し、structural subset compare と `decl_admit_slot.surface_text` retention smoke を支える
   - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
+- current parser subset freeze では、stage 1 / stage 2 support helper が Phase 6 front-half actual parser first tranche の accepted floor evidence であり、stage 3 support helper は retained-later floor evidence として扱う
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する repo-level helper
   - `must_explain` を比較対象に上げない

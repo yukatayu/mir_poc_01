@@ -1805,3 +1805,18 @@
   - `specs/examples/285-current-l2-minimal-public-checker-boundary-ready-verifier-handoff-surface-comparison.md`
   - `specs/examples/286-current-l2-verifier-handoff-surface-ready-minimal-verifier-handoff-surface-threshold.md`
   - `docs/reports/0604-phase5-verifier-handoff-surface-package.md`
+
+### 2026-04-11 phase3 minimal parser subset freeze addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/29-current-l2-first-parser-subset-inventory.md`
+  - `specs/examples/73-current-l2-first-parser-spike-staging.md`
+  - `specs/examples/112-current-l2-phase3-resume-side-selection.md`
+  - `specs/examples/113-current-l2-first-checker-reconnect-family-selection.md`
+  - `specs/examples/287-current-l2-minimal-verifier-handoff-surface-ready-minimal-parser-subset-freeze-comparison.md`
+  - `specs/examples/288-current-l2-minimal-parser-subset-freeze-ready-minimal-parser-subset-freeze-threshold.md`
+  - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage2_try_rollback_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_request_clause_suite_spike.rs`
+  - `docs/reports/0605-phase3-minimal-parser-subset-freeze-package.md`

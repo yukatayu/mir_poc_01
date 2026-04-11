@@ -62,7 +62,7 @@
 ### Phase 5 — static analysis / type / theorem prover / async-control boundary
 
 - 主眼: small decidable core、proof boundary、protocol verifier boundary、runtime policy boundary
-- 現在地: `specs/examples/126...286` までで current package close、verifier handoff gate は fixed 済みであり、proof-model-check handoff closeout が still 要る。**immediate next line は minimal-verifier-handoff-surface-ready minimal-parser-subset-freeze comparison**
+- 現在地: minimal parser subset freeze は fixed 済みであり、proof-model-check handoff closeout は still 要る。**immediate next line は minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison**
 - 重さ: とても重い
 - autonomy gate:
   - docs-first inventory と theorem-line threshold comparison は **self-driven**
@@ -86,9 +86,8 @@
 
 いま repo の主線は、次の 4 本である。
 
-1. **Phase 3 reopen for Phase 6 front-half**
-   - minimal-verifier-handoff-surface-ready minimal-parser-subset-freeze comparison
-   - parser-to-checker reconnect freeze
+1. **Phase 3 reconnect gate**
+   - minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison
 2. **Phase 1 / 2 / 4 / 5 closeout sweep**
    - self-driven / current-recommendation scope を phase-complete snapshot へ揃える
 3. **Phase 6 front-half actualization**
@@ -98,7 +97,7 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ実際に入
 
 ## immediate execution order
 
-1. **Phase 3 reopen** として minimal-verifier-handoff-surface-ready minimal-parser-subset-freeze comparison と parser-to-checker reconnect freeze を扱う
+1. **Phase 3 reconnect gate** として minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison を扱う
 2. **Phase 1 / 2 / 4 / 5 closeout sweep** を順に進める
 3. **Phase 6 front-half actual parser / checker / runtime first tranche** を actualize する
 4. 同じ task 群の中で checkpoint / mirror maintenance を継続する
@@ -107,7 +106,7 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ実際に入
 
 次は self-driven に比較を続けてよい。
 
-- Phase 3 minimal parser subset / reconnect freeze の narrow comparison
+- Phase 3 parser-to-checker reconnect freeze の narrow comparison
 - checkpoint maintenance
 - shared-space の docs-first boundary comparison
 
@@ -120,6 +119,6 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ実際に入
 
 ## 現在の判断
 
-- **current immediate line は Phase 3 minimal-verifier-handoff-surface-ready minimal-parser-subset-freeze comparison** と読むのが自然である。
-- **Phase 3 は Phase 6 front-half のために reopen 準備済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
+- **current immediate line は Phase 3 minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison** と読むのが自然である。
+- **Phase 3 は Phase 6 front-half のために reopen 済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

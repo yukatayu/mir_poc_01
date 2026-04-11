@@ -536,6 +536,10 @@
   - Phase 5 checker-side line の次段として、public checker boundary minimum の後に verifier handoff surface comparison をどの docs-only mixed-row bridge cut から始めるべきかを比較する補助文書。
 - `specs/examples/286-current-l2-verifier-handoff-surface-ready-minimal-verifier-handoff-surface-threshold.md`
   - Phase 5 checker-side line の次段として、verifier handoff surface の minimal docs-first shape を `handoff_surface_kind + public_checker_boundary_ref + proof_obligation_matrix_ref + handoff_artifact_mode` までに留めるべきかを比較する補助文書。
+- `specs/examples/287-current-l2-minimal-verifier-handoff-surface-ready-minimal-parser-subset-freeze-comparison.md`
+  - Phase 3 reopen line の次段として、Phase 6 front-half actual parser first tranche を stage 1 only で止めるか、stage 1 + stage 2 structural floor で止めるか、stage 3 cluster まで入れるかを比較する補助文書。
+- `specs/examples/288-current-l2-minimal-parser-subset-freeze-ready-minimal-parser-subset-freeze-threshold.md`
+  - Phase 3 reopen line の次段として、minimal parser subset freeze の docs-first shape を `freeze_kind + accepted_cluster_refs + reject_cluster_refs + retention_floor_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
