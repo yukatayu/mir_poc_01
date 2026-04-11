@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-11 13:36 JST
+最終更新: 2026-04-11 14:48 JST
 
 ## この文書について
 
@@ -18,14 +18,14 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。current L2 semantics、parser-free PoC、detached validation loop の mainline は安定しており、drift suppression と residual maintenance が主眼である。
 - **Phase 3** は reserve path である。private staged spike / reconnect freeze threshold までは source-backed に揃っているが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは source-backed に固まっている。
-- **Phase 5** は `specs/examples/126...254` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory から theorem-side retained bridge を `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` まで伸ばし、**next later reopen** を `minimal-handoff-transport-channel-body-ready low-level-memory-order-family comparison` に置いている。
+- **Phase 5** は `specs/examples/126...261` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切れており、current promoted line は **`typed-family-coverage-state-ready supported-kind-summary threshold`** に置いている。
 - 現在の主線は、**Phase 5 later reopen の narrow comparison** と **cross-phase checkpoint maintenance** の 2 本である。
 
 ## 次に自走で進める順番と rough estimate
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | current 読み |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 5 後半 | minimal-handoff-transport-channel-body-ready low-level-memory-order-family comparison | minimal handoff transport channel body の次段として low-level memory-order family を theorem-line retained bridge にどこまで近づけるかを narrow に整理する | 中〜重 | 1〜3 task / 2〜6日 | 自走可能 | **current promoted line** |
+| 1 | Phase 5 後半 | typed-family-coverage-state-ready supported-kind-summary threshold | first checker cut の 6 cluster を docs-only matrix として見せつつ、`coverage_state` の次段で `supported_kind_refs[]` のような summary をどこまで足すかを narrow に整理する | 中 | 1〜3 task / 2〜5日 | 自走可能 | **current promoted line** |
 | 2 | cross-phase checkpoint | drift suppression / mirror sweep | `specs/` / `plan/` / `progress.md` / `tasks.md` / research abstract の drift を抑える | 低〜中 | 0.5〜1日 / checkpoint ごと | 自走可能 | closeout package |
 | 3 | Phase 4 後半 reserve path | shared-space later reopen | `control_epoch` first reopen cut、catalog refinement、provider / witness / authority の later compare | 中〜重 | 0〜3 task | 一部自走可能 | concrete pressure が出たときだけ promoted |
 | 4 | Phase 2 maintenance tail | detached validation loop residual | bless / update / retention policy の policy-dependent residual を narrow に扱う | 低 | 0〜1 task | 自走可能 | drift または practical need 時のみ |
@@ -33,32 +33,38 @@
 
 ## 自走で進められる task package
 
-### Task A. Phase 5 theorem-line later reopen
+### Task A. Phase 5 checker-cluster matrix / evidence attachment line
 
 #### 目的
 
-- small decidable core / proof boundary inventory の later branch を、public checker や actual runtime contract に早く落とさずに伸ばす。
-- theorem-side retained bridge を、proof obligation / external handoff artifact の docs-first 比較として narrow に進める。
+- small decidable core / proof boundary inventory の次段として、first checker cut の 6 cluster を docs-only matrix へ整理する。
+- public checker API や final type system に早く落とさず、checker-side inventory を narrow に見える化する。
 
 #### current checkpoint
 
 - `specs/examples/126...127` で 4-way split と proof-obligation matrix を集約済み。
 - `specs/examples/128...134` で mixed row default、consumer pressure order、minimum contract row、first consumer class を固定済み。
-- `specs/examples/135...254` で theorem-line retained bridge を段階的に伸ばし、現時点では `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` まで current first choice に置ける。
+- `specs/examples/135...255` で theorem-line retained bridge を段階的に伸ばし、現時点では `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、low-level memory-order family は still later に残す current first choice を固定済み。
+- `specs/examples/256` で Phase 5 の next line を theorem-line の先ではなく small decidable core / checker-cluster matrix side に戻した。
+- `specs/examples/257` で minimal checker-cluster row core を `cluster_kind + checker_subject + decidable_class + external_handoff` に留める current first choice を固定した。
+- `specs/examples/258` で `fixture_evidence_refs` を row core ではなく attachment として足す current first choice を固定した。
+- `specs/examples/259` で `typed_reason_family_hint` を row core ではなく optional attachment に留める current first choice を固定した。
+- `specs/examples/260` で `typed_reason_family_hint` payload を `family_refs[]` minimal bundle に留める current first choice を固定した。
+- `specs/examples/261` で multi-family row の誤読を抑える lightweight `coverage_state` を current checker-side line に足す current first choice を固定した。
 
 #### 次に扱うべき narrow question
 
-- `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` の次段として、low-level memory-order family をどこまで narrow に retained bridge へ寄せるか
+- `supported_kind_refs[]` のような actual kind summary を current checker-side line に足すべきか
 
 #### いま自走できる理由
 
-- current line は docs-first threshold comparison に留まっており、actual public API / actual archive materialization finalization までは踏み込んでいない。
+- current line は docs-only cluster matrix / row core / evidence attachment の threshold comparison に留まり、actual public checker API / final type system / actual theorem prover relation までは踏み込んでいない。
 - `specs/09` の invariants と Phase 3 reserve path の freeze line を壊さずに進められる。
 
 #### 重さ / rough 所要
 
-- 重さ: 中〜重
-- rough 所要: 1〜3 task / 2〜6日
+- 重さ: 中
+- rough 所要: 1〜3 task / 2〜5日
 
 #### 現在の推奨度
 
@@ -77,7 +83,7 @@
 
 - Phase 2 detached validation loop は checkpoint close。
 - Phase 4 shared-space package は `specs/examples/121...125` で checkpoint close。
-- Phase 5 theorem-line package は `specs/examples/126...254` で current package close。
+- Phase 5 current package は `specs/examples/126...261` で current package close。
 
 #### いま自走できる理由
 

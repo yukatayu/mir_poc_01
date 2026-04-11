@@ -472,6 +472,20 @@
   - minimal handoff transport receipt row の次段として symbolic handoff transport channel body をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
 - `specs/examples/254-current-l2-theorem-line-handoff-transport-channel-body-ready-minimal-handoff-transport-channel-body-threshold.md`
   - handoff transport channel body row の current first choice を `handoff_transport_receipt_ref + handoff_transport_channel_body` に置く threshold を整理する補助文書。
+- `specs/examples/255-current-l2-theorem-line-minimal-handoff-transport-channel-body-ready-low-level-memory-order-family-threshold.md`
+  - handoff transport channel body の次段として low-level memory-order family を retained bridge に入れるべきかを比較し、current theorem-line を channel body で止める threshold を整理する補助文書。
+- `specs/examples/256-current-l2-small-decidable-core-ready-checker-cluster-matrix-comparison.md`
+  - theorem-line stop line 後の Phase 5 next line として、first checker cut の 6 cluster を docs-only checker-cluster matrix にまとめるべきかを比較する補助文書。
+- `specs/examples/257-current-l2-checker-cluster-matrix-ready-minimal-checker-cluster-row-threshold.md`
+  - Phase 5 checker-cluster matrix line の次段として、docs-only checker-cluster row core をどの field で止め、`fixture_evidence_refs` / `typed_reason_family_hint` を still later に残すかを比較する補助文書。
+- `specs/examples/258-current-l2-minimal-checker-cluster-row-ready-checker-cluster-fixture-evidence-attachment-comparison.md`
+  - Phase 5 checker-cluster row core の次段として、row core を変えずに `fixture_evidence_refs` を attachment としてどこまで足し、typed reason hint をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/259-current-l2-checker-cluster-fixture-evidence-attachment-ready-typed-reason-family-hint-threshold.md`
+  - Phase 5 checker-cluster evidence attachment line の次段として、`typed_reason_family_hint` を optional attachment に留め、stable typed static reason actualization との接点をどこまで docs-first に見せるかを比較する補助文書。
+- `specs/examples/260-current-l2-typed-reason-family-hint-ready-checker-cluster-hint-bundle-shape-comparison.md`
+  - Phase 5 checker-cluster typed reason hint line の次段として、`typed_reason_family_hint` payload を `family_refs[]` minimal bundle に留めるべきかを比較し、single ref や heavier carrier detail を still later に残す補助文書。
+- `specs/examples/261-current-l2-checker-cluster-hint-bundle-shape-ready-typed-family-coverage-state-threshold.md`
+  - Phase 5 checker-cluster typed reason hint bundle の次段として、multi-family row の誤読を抑える lightweight `coverage_state` を current line に足してよいかを比較し、supported kind summary は still later に残す補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

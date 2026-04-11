@@ -1688,3 +1688,20 @@
   - `docs/reports/0567-review-phase5-replay-attachment-ref-package.md`
   - `docs/reports/0568-phase5-handoff-payload-ref-package.md`
   - `docs/reports/0569-review-phase5-handoff-payload-ref-package.md`
+
+### 2026-04-11 phase5 handoff low-level threshold and checker-cluster matrix addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/255-current-l2-theorem-line-minimal-handoff-transport-channel-body-ready-low-level-memory-order-family-threshold.md`
+  - `specs/examples/256-current-l2-small-decidable-core-ready-checker-cluster-matrix-comparison.md`
+  - `specs/examples/257-current-l2-checker-cluster-matrix-ready-minimal-checker-cluster-row-threshold.md`
+  - `specs/examples/258-current-l2-minimal-checker-cluster-row-ready-checker-cluster-fixture-evidence-attachment-comparison.md`
+  - `specs/examples/259-current-l2-checker-cluster-fixture-evidence-attachment-ready-typed-reason-family-hint-threshold.md`
+  - `specs/examples/260-current-l2-typed-reason-family-hint-ready-checker-cluster-hint-bundle-shape-comparison.md`
+  - `specs/examples/261-current-l2-checker-cluster-hint-bundle-shape-ready-typed-family-coverage-state-threshold.md`
+  - `docs/reports/0578-phase5-handoff-low-level-memory-order-threshold.md`
+  - `docs/reports/0579-review-phase5-handoff-low-level-memory-order-threshold.md`
+  - `docs/reports/0580-phase5-checker-cluster-row-and-evidence-attachment-package.md`
+  - `docs/reports/0581-review-phase5-checker-cluster-row-and-evidence-attachment-package.md`
+  - `docs/reports/0582-phase5-typed-reason-family-hint-threshold.md`
+  - `docs/reports/0583-review-phase5-current-docs-only-package.md`

@@ -13,24 +13,24 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...254` までで theorem-line later package close であり、**next promoted line は `minimal-handoff-transport-channel-body-ready low-level-memory-order-family comparison`** である。
+- Phase 5 は `specs/examples/126...261` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、checker-side では minimal checker-cluster row core、fixture evidence attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切れている。**next promoted line は `typed-family-coverage-state-ready supported-kind-summary threshold`** である。
 
 ## いまから数 task の主眼
 
-近い数 task の目的は、Phase 0 / 1 / 2 の closeout baseline を壊さずに、Phase 5 later reopen の narrow comparison を current promoted line として進めることである。
+近い数 task の目的は、Phase 0 / 1 / 2 の closeout baseline を壊さずに、Phase 5 の current promoted line を theorem-line の先ではなく small decidable core / checker cluster 側で narrow に進めることである。
 
-- theorem-line retained bridge をどこまで symbolic に保つかを比較する
-- actual public API / actual retained payload body を早く既成事実化しない
+- first checker cut の 6 cluster を docs-only matrix としてどこまで stable に見せ、row core と evidence attachment をどこで切るかを比較する
+- actual public checker API / final type system を早く既成事実化しない
 - Phase 4 / Phase 2 / Phase 3 の checkpoint line を drift させない
 
 ## 次に自走で進める順番
 
-### 1. minimal-handoff-transport-channel-body-ready low-level-memory-order-family comparison を Phase 5 later reopen の current promoted line として扱う
+### 1. typed-family-coverage-state-ready supported-kind-summary threshold を Phase 5 の current promoted line として扱う
 
-- `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current first cut に置いた前提で、low-level memory-order family を theorem-line retained bridge にどこまで近づけるかを整理する
-- `witness_aware_commit_family` と `event_tree_execution_view` は second/later candidate に残し、low-level memory-order family も still later candidate に残す
-- rough weight: 中〜重
-- rough 所要: 1〜3 task / 2〜6日
+- theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` で止め、low-level memory-order family は still later candidate に残す
+- そのうえで、first checker cut の 6 cluster を docs-only checker-cluster matrix として見せつつ、`coverage_state` の次段として `supported_kind_refs[]` のような summary を足すべきかを narrow に整理する
+- rough weight: 中
+- rough 所要: 1〜3 task / 2〜5日
 
 ### 2. cross-phase checkpoint maintenance を並走する
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| minimal-handoff-transport-channel-body-ready low-level-memory-order-family comparison | 1〜3 task | current promoted line |
+| typed-family-coverage-state-ready supported-kind-summary threshold | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
