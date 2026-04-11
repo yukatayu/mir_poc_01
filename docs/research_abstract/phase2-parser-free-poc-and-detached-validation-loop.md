@@ -74,16 +74,34 @@ Phase 2 ではそれを避けるため、
 - detached exporter と aggregate summary の最小 cut
 - fixture authoring template と scaffold helper
 
+## closeout で固定した current baseline
+
+Phase 2 closeout では、parser-free companion baseline を次の gate で固定した。
+
+- `cargo test -p mir-semantics --test current_l2_minimal_interpreter`
+- `cargo test -p mir-semantics --example current_l2_emit_detached_bundle --example current_l2_emit_detached_aggregate --example current_l2_emit_static_gate`
+- `python3 -m unittest scripts.tests.test_current_l2_detached_loop`
+- `python3 scripts/current_l2_detached_loop.py smoke-fixture ...`
+- `python3 scripts/current_l2_detached_loop.py compare-fixture-aggregates ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-try-rollback-structural-checker ...`
+
+ここで detached loop は compare-only / non-production helper に留める。
+`target/current-l2-detached/` は current default candidate であって final retention/path policy ではない。
+また compare helper の exit code `1` は informational difference に留める。
+
 ## まだ未決のもの
 
-- final exporter API
+- public exporter API finalization
 - final storage/path policy
 - richer host interface
 - typed coverage carrier の本格 actualization
+- reference update / bless workflow
 
 これらは後段に残している。
 
 ## 次 phase へ渡したもの
 
-Phase 3 は、Phase 2 の loop を壊さずに、
-parser boundary と first checker cut を private staged spike として narrow に切る。
+Phase 2 closeout fixed 後の current mainline は、
+Phase 4 shared-space self-driven closeout である。
+一方で Phase 3 reserve path は、Phase 2 の loop を壊さずに
+parser boundary と first checker cut を private staged spike として narrow に切った entry criteria として残る。

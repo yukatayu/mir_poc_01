@@ -42,12 +42,12 @@
 ## 現在のフェーズ
 
 現在の主フェーズは、単なる drift suppression だけではなく、
-**Phase 3 reconnect freeze と Phase 1 closeout を fixed entry criteria としたうえで、Phase 2 / 4 / 5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入る段階**
+**Phase 3 reconnect freeze と Phase 1 / 2 closeout を fixed entry criteria としたうえで、Phase 4 / 5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入る段階**
 と読むのが自然である。
 
 具体的には次が主線である。
 
-1. Phase 2 / 4 / 5 closeout sweep
+1. Phase 4 / 5 closeout sweep
 2. `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path の準備
 
 つまり、広い production 実装へ進む前に、
@@ -59,7 +59,7 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- parser-free PoC / detached validation loop / shared-space current recommendation の closeout sweep
+- shared-space current recommendation と proof/model-check handoff の closeout sweep
 - actual parser / checker / runtime first tranche に上げる surface の棚卸し
 - Phase 3 reconnect freeze の fixed snapshot を保ったまま Phase 6 front-half の crate-local contract を actualization する
 
@@ -140,5 +140,5 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 ## いまの判断
 
 - current L2 は **まだ architecture and semantics のフェーズ**である。
-- parser-free PoC はその意味論を machine-check する companion 基盤であって、production 実装の着手宣言ではない。
+- parser-free PoC はその意味論を machine-check する companion 基盤であり、Phase 2 closeout fixed 後も production 実装の着手宣言ではない。
 - したがって、今の roadmap では **先に meaning / notation / verification boundary を揃え、その後に parser / richer runtime / static analysis へ進む** のが妥当である。

@@ -548,6 +548,10 @@
   - Phase 3 reopen line fixed 後の次段として、Phase 1 semantics closeout を semantic redesign ではなく invariant bridge と notation boundary の narrow closeout bundle としてどこまで切るべきかを比較する補助文書。
 - `specs/examples/292-current-l2-phase1-semantics-closeout-ready-minimal-phase1-semantics-closeout-threshold.md`
   - Phase 1 closeout の minimal docs-first shape を `closeout_kind + core_semantics_refs + invariant_bridge_refs + notation_status_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/293-current-l2-phase1-semantics-closeout-ready-phase2-parser-free-poc-closeout-comparison.md`
+  - Phase 1 closeout fixed 後の次段として、parser-free PoC / detached validation loop を Phase 2 closeout bundle としてどこまで snapshot に前面化し、compile gate / helper boundary / detached loop policy と bless / retention / public API later line をどう分けるかを比較する補助文書。
+- `specs/examples/294-current-l2-phase2-parser-free-poc-closeout-ready-minimal-phase2-parser-free-poc-closeout-threshold.md`
+  - Phase 2 closeout の minimal docs-first shape を `closeout_kind + compile_gate_refs + helper_boundary_refs + detached_loop_policy_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
