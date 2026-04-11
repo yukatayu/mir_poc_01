@@ -99,9 +99,8 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 ## immediate execution order
 
-1. **Phase 6 front-half actual checker / runtime first tranche** を immediate line として扱う
-2. **compile-ready verification and formal hook** を checkpoint close まで揃える
-3. **Phase 6 compile-ready checkpoint drift suppression / mirror sweep** を閉じる
+1. **compile-ready verification and formal hook** を immediate line として扱う
+2. **Phase 6 compile-ready checkpoint drift suppression / mirror sweep** を閉じる
 
 ## いま止めるべき線
 
@@ -120,7 +119,8 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 ## 現在の判断
 
-- **current immediate line は Phase 6 actual checker / runtime first tranche** と読むのが自然である。
+- **current immediate line は Phase 6 compile-ready verification / formal hook** と読むのが自然である。
 - **Phase 1 / 2 / 3 / 4 / 5 は Phase 6 front-half のための self-driven entry criteria を fixed 済み** と読むのが自然である。
 - **`mir-ast` stage 1 / stage 2 carrier は Phase 6 parser first tranche として fixed 済み** と読むのが自然である。
+- **`mir-semantics` program-level entry と `mir-runtime` current L2 thin skeleton は Phase 6 checker/runtime first tranche として fixed 済み** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

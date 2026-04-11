@@ -3,10 +3,13 @@
 
 Single-process execution/runtime skeleton for Mir experiments.
 
-This crate is currently a **placeholder skeleton** whose purpose is to make subsystem boundaries explicit.
-
-It intentionally contains no production logic yet.
+This crate currently exposes a **non-production current L2 runtime skeleton**.
+It intentionally stays thin: parser carrier evidence lives in `mir-ast`, semantic
+evaluation lives in `mir-semantics`, and this crate only wires the compile path
+between them.
 "#]
+
+pub mod current_l2;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"

@@ -682,16 +682,19 @@ pub struct DirectStyleEvaluator {
 }
 
 impl DirectStyleEvaluator {
-    pub fn from_fixture(fixture: &CurrentL2Fixture) -> Result<Self, InterpreterError> {
-        let gate = static_gate_detailed(fixture);
+    pub fn from_program(program: Program) -> Result<Self, InterpreterError> {
+        let gate = static_gate_program_detailed(&program);
         if gate.verdict != StaticGateVerdict::Valid {
             return Err(InterpreterError::StaticRejected(gate));
         }
 
+        let declarations = DeclarationIndex::from_program(&program);
+        let Program { kind: _, body } = program;
+
         Ok(Self {
-            declarations: DeclarationIndex::from_program(&fixture.program),
+            declarations,
             state: EvaluationState {
-                cursor_stack: vec![CursorFrame::program(fixture.program.body.clone())],
+                cursor_stack: vec![CursorFrame::program(body)],
                 place_stack: Vec::new(),
                 place_store: PlaceStore::new(),
                 current_request: None,
@@ -701,6 +704,10 @@ impl DirectStyleEvaluator {
                 terminal_outcome: None,
             },
         })
+    }
+
+    pub fn from_fixture(fixture: &CurrentL2Fixture) -> Result<Self, InterpreterError> {
+        Self::from_program(fixture.program.clone())
     }
 
     pub fn step_once<P, E, Commit>(
@@ -1363,11 +1370,19 @@ pub fn load_fixture_from_path(
 }
 
 pub fn static_gate(fixture: &CurrentL2Fixture) -> StaticGateVerdict {
-    static_gate_detailed(fixture).verdict
+    static_gate_program(&fixture.program)
 }
 
 pub fn static_gate_detailed(fixture: &CurrentL2Fixture) -> StaticGateResult {
-    let declarations = DeclarationIndex::from_program(&fixture.program);
+    static_gate_program_detailed(&fixture.program)
+}
+
+pub fn static_gate_program(program: &Program) -> StaticGateVerdict {
+    static_gate_program_detailed(program).verdict
+}
+
+pub fn static_gate_program_detailed(program: &Program) -> StaticGateResult {
+    let declarations = DeclarationIndex::from_program(program);
     let mut verdict = StaticGateVerdict::Valid;
     let mut reasons = Vec::new();
 
@@ -1460,7 +1475,7 @@ pub fn static_gate_detailed(fixture: &CurrentL2Fixture) -> StaticGateResult {
         }
     }
 
-    collect_try_rollback_structural_reasons(&fixture.program.body, false, &mut reasons);
+    collect_try_rollback_structural_reasons(&program.body, false, &mut reasons);
     if reasons.iter().any(|reason| {
         reason == "try fallback body must not be empty"
             || reason == "atomic cut may not appear inside fallback body"
@@ -1502,8 +1517,8 @@ fn collect_try_rollback_structural_reasons(
     }
 }
 
-pub fn run_to_completion<P, E, Commit>(
-    fixture: &CurrentL2Fixture,
+pub fn run_program_to_completion<P, E, Commit>(
+    program: Program,
     predicate_oracle: &mut P,
     effect_oracle: &mut E,
 ) -> Result<RunReport, InterpreterError>
@@ -1512,7 +1527,7 @@ where
     E: EffectOracle<EffectInput, Commit>,
     Commit: SuccessCarrier,
 {
-    let gate = static_gate_detailed(fixture);
+    let gate = static_gate_program_detailed(&program);
     if gate.verdict != StaticGateVerdict::Valid {
         return Ok(RunReport {
             static_verdict: gate.verdict,
@@ -1523,7 +1538,7 @@ where
         });
     }
 
-    let mut evaluator = DirectStyleEvaluator::from_fixture(fixture)?;
+    let mut evaluator = DirectStyleEvaluator::from_program(program)?;
     let mut steps = 0usize;
 
     loop {
@@ -1539,6 +1554,19 @@ where
             });
         }
     }
+}
+
+pub fn run_to_completion<P, E, Commit>(
+    fixture: &CurrentL2Fixture,
+    predicate_oracle: &mut P,
+    effect_oracle: &mut E,
+) -> Result<RunReport, InterpreterError>
+where
+    P: PredicateOracle<PredicateInput>,
+    E: EffectOracle<EffectInput, Commit>,
+    Commit: SuccessCarrier,
+{
+    run_program_to_completion(fixture.program.clone(), predicate_oracle, effect_oracle)
 }
 
 fn collect_mode_atoms(predicates: &[Predicate]) -> Vec<String> {

@@ -6,8 +6,8 @@ use std::{
 use crate::{
     CurrentL2Fixture, EffectInput, EffectOracle, EffectVerdict, ExpectedNonAdmissibleMetadata,
     FixtureRuntimeOutcome, InterpreterError, NonAdmissibleMetadata, PlaceStore, PredicateInput,
-    PredicateOracle, PredicateSite, PredicateVerdict, RequestMode, RunReport, SuccessCarrier,
-    TerminalOutcome, run_to_completion,
+    PredicateOracle, PredicateSite, PredicateVerdict, Program, RequestMode, RunReport,
+    SuccessCarrier, TerminalOutcome, run_program_to_completion, run_to_completion,
 };
 use serde::Deserialize;
 
@@ -1050,6 +1050,20 @@ impl FixtureHostStub {
         let mut predicate_oracle = PlannedPredicateOracle::new(self.plan.clone());
         let mut effect_oracle = PlannedEffectOracle::new(self.plan.clone());
         let report = run_to_completion(fixture, &mut predicate_oracle, &mut effect_oracle)?;
+        if !predicate_oracle.violations.is_empty() || !effect_oracle.violations.is_empty() {
+            return Err(InterpreterError::InvalidProgram(format!(
+                "host plan did not cover all oracle calls: predicate_violations={:?}, effect_violations={:?}",
+                predicate_oracle.violations, effect_oracle.violations
+            )));
+        }
+        Ok(report)
+    }
+
+    pub fn run_program(&self, program: Program) -> Result<RunReport, InterpreterError> {
+        let mut predicate_oracle = PlannedPredicateOracle::new(self.plan.clone());
+        let mut effect_oracle = PlannedEffectOracle::new(self.plan.clone());
+        let report =
+            run_program_to_completion(program, &mut predicate_oracle, &mut effect_oracle)?;
         if !predicate_oracle.violations.is_empty() || !effect_oracle.violations.is_empty() {
             return Err(InterpreterError::InvalidProgram(format!(
                 "host plan did not cover all oracle calls: predicate_violations={:?}, effect_violations={:?}",

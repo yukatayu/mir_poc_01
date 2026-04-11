@@ -561,6 +561,14 @@
   - Phase 4 closeout fixed 後の次段として、verifier handoff surface fixed 後の checker-side stop line、theorem retained bridge stop line、proof / protocol / runtime-policy inventory を Phase 5 closeout bundle としてどこまでまとめるかを比較する補助文書。
 - `specs/examples/298-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-minimal-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold.md`
   - Phase 5 handoff closeout の minimal docs-first shape を `closeout_kind + verifier_handoff_surface_ref + theorem_retained_bridge_stop_ref + boundary_inventory_ref + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/299-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-phase6-actual-parser-ast-carrier-first-tranche-comparison.md`
+  - Phase 5 closeout fixed 後の次段として、Phase 6 front-half actual parser first tranche を stage 1 only で止めるか、stage 1 + stage 2 structural floor で止めるか、stage 3 cluster まで入れるかを比較する補助文書。
+- `specs/examples/300-current-l2-phase6-actual-parser-ast-carrier-first-tranche-ready-minimal-phase6-actual-parser-ast-carrier-first-tranche-threshold.md`
+  - Phase 6 parser first tranche の minimal docs-first shape を `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/301-current-l2-phase6-actual-parser-ast-carrier-first-tranche-ready-phase6-actual-checker-runtime-skeleton-first-tranche-comparison.md`
+  - Phase 6 parser first tranche fixed 後の次段として、checker/runtime first tranche を docs-only のまま止めるか、`mir-semantics` program-level entry と `mir-runtime::current_l2` thin orchestrator を actualize するか、actual lowering / public runtime まで widen するかを比較する補助文書。
+- `specs/examples/302-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-ready-minimal-phase6-actual-checker-runtime-skeleton-first-tranche-threshold.md`
+  - Phase 6 checker/runtime first tranche の minimal docs-first shape を `skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

@@ -36,11 +36,21 @@ parser first tranche の actual code anchor は次である。
 
 ここでは stage 1 / stage 2 spike tests を crate API import へ寄せ、TDD の red/green を通して narrow carrier を昇格した。
 
+### 2. checker / runtime first tranche の cut
+
+`specs/examples/301...302` により、Phase 6 front-half actual checker / runtime first tranche の current first choice は、
+
+- `mir-semantics` に `static_gate_program_detailed`、`DirectStyleEvaluator::from_program`、`FixtureHostStub::run_program` を足す
+- `mir-runtime` に `mir_runtime::current_l2` thin orchestrator を足す
+- parser side evidence は stage 1 reconnect summary と stage 2 try/rollback structural summary の optional bridge input に留める
+- bridge input と semantic `Program` が食い違うときは fail-closed に止める
+
+というものに固定した。
+
 ## まだ fixed していないこと
 
-- `mir-semantics` / `mir-runtime` をまたぐ actual checker / runtime skeleton first tranche
 - compile-ready checkpoint の selected cargo / smoke gate
-- theorem / model-check first tranche の concrete tool binding
+- theorem / model-check formal hook の first tranche
 - stage 3 request / predicate reconnect
 - perform head final public parser API
 - span-rich diagnostics と final grammar
@@ -49,20 +59,24 @@ parser first tranche の actual code anchor は次である。
 
 - `specs/examples/287...290`
 - `specs/examples/299...300`
+- `specs/examples/301...302`
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
+- `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 - `crates/mir-ast/src/current_l2.rs`
+- `crates/mir-runtime/src/current_l2.rs`
 - `cargo test -p mir-ast`
+- `cargo test -p mir-runtime`
 
 ## 次の mainline
 
 next mainline は、
-**Phase 6 front-half actual checker / runtime skeleton first tranche**
+**Phase 6 compile-ready verification and formal hook**
 である。
 
-ここでは parser carrier を前提に、
+ここでは parser carrier と checker/runtime skeleton を前提に、
 
-- `mir-semantics` の program-level checker / eval entry
-- `mir-runtime` thin orchestrator
-- parser-first-tranche と parser-free interpreter の boundary wording
+- selected cargo / smoke gate
+- theorem-side / model-check-sideの tool-neutral formal hook first tranche
+- compile-ready checkpoint wording
 
 を揃えるのが主眼になる。

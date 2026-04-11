@@ -206,6 +206,18 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - Phase 6 front-half parser first tranche の non-production carrier
   - stage 1 option/chain surface と stage 2 try/fallback structural surface だけを持つ
   - final parser API ではなく、checker/runtime first tranche へ渡す narrow code anchor に留める
+- `crates/mir-semantics/src/lib.rs`
+  - Phase 6 front-half checker/runtime first tranche の semantic entry anchor
+  - `static_gate_program_detailed`、`DirectStyleEvaluator::from_program`、`run_program_to_completion` を current L2 `Program` 直受けの narrow surface として持つ
+  - `CurrentL2Fixture` wrapper や public exporter API を置き換えず、parser-free baseline を壊さない
+- `crates/mir-semantics/src/harness.rs`
+  - Phase 6 front-half checker/runtime first tranche の host runner anchor
+  - `FixtureHostStub::run_program` で host plan validation / oracle coverage check を維持したまま semantic `Program` 直実行 path を支える
+  - bundle / batch / selection helper stack を public runtime API に widen しない
+- `crates/mir-runtime/src/current_l2.rs`
+  - Phase 6 front-half checker/runtime first tranche の non-production thin orchestrator
+  - semantic `Program`、`FixtureHostPlan`、optional parser bridge input を受け、stage 1 reconnect summary、stage 2 try/rollback structural summary、static gate report、runtime report を束ねる
+  - parser bridge input と semantic `Program` の mismatch は fail-closed に止め、actual parser-to-`Program` lowering や final public runtime API は still later に残す
 - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
   - stage 1 parser first tranche の fixture compare / summary support helper
   - parser 本体は `mir_ast::current_l2` を使い、fixture-side subset compare 用 lowering bridge と reconnect summary だけを担う
@@ -220,7 +232,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - inline text から declaration-side `admit` attached slot を含む option / chain subset だけを parse し、structural subset compare と `decl_admit_slot.surface_text` retention smoke を支える
   - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
 - current parser subset freeze では、stage 1 / stage 2 accepted floor は `crates/mir-ast/src/current_l2.rs` と stage 1 / stage 2 parser spike tests に actualize 済みであり、stage 3 support helper は retained-later floor evidence として扱う
-- current parser-to-checker reconnect freeze では、stage 1 support helper は `Stage1ReconnectClusters` summary floor、stage 2 support helper は `checked_try_rollback_structural_*` floor をそれぞれ source-backed bridge evidence として扱う
+- current parser-to-checker reconnect freeze では、stage 1 support helper は `Stage1ReconnectClusters` summary floor、stage 2 support helper は `checked_try_rollback_structural_*` floor をそれぞれ source-backed bridge evidence として扱う。Phase 6 checker/runtime first tranche では、この bridge evidence を `mir-runtime::current_l2` の optional parser bridge input と consistency guard へ narrow actualize した。
 - stage 3 request / predicate reconnect helper line、`e19` direct target mismatch redesign、`E21` / `E22` runtime contrast は helper stack の current bridge contract には入れず、later reopen line として扱う
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する repo-level helper
