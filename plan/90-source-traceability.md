@@ -1820,3 +1820,22 @@
   - `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs`
   - `crates/mir-ast/tests/current_l2_stage3_request_clause_suite_spike.rs`
   - `docs/reports/0605-phase3-minimal-parser-subset-freeze-package.md`
+
+### 2026-04-11 phase3 parser-to-checker reconnect freeze addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/07-parser-free-poc-stack.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md`
+  - `specs/examples/45-current-l2-first-checker-cut-regression-baseline.md`
+  - `specs/examples/73-current-l2-first-parser-spike-staging.md`
+  - `specs/examples/112-current-l2-phase3-resume-side-selection.md`
+  - `specs/examples/113-current-l2-first-checker-reconnect-family-selection.md`
+  - `specs/examples/289-current-l2-minimal-parser-subset-freeze-ready-parser-to-checker-reconnect-freeze-comparison.md`
+  - `specs/examples/290-current-l2-parser-to-checker-reconnect-freeze-ready-minimal-parser-to-checker-reconnect-freeze-threshold.md`
+  - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage2_try_rollback_spike.rs`
+  - `scripts/tests/test_current_l2_family_checker_support.py`
+  - `scripts/tests/test_current_l2_same_lineage_checker.py`
+  - `scripts/tests/test_current_l2_missing_option_checker.py`
+  - `scripts/tests/test_current_l2_capability_checker.py`
+  - `scripts/tests/test_current_l2_static_gate_loop.py`
+  - `docs/reports/0606-phase3-parser-to-checker-reconnect-freeze-package.md`

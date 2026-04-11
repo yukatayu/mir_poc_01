@@ -46,9 +46,11 @@
 ### Phase 3 — parser boundary and first checker cut
 
 - 主眼: staged parser spike、helper-local compare family、first checker reconnect
-- 現在地: reserve path
+- 現在地: self-driven freeze fixed / later widen reserved
 - 重さ: 中〜やや重い
-- autonomy gate: **後段依存**
+- autonomy gate:
+  - minimal parser subset / reconnect freeze は **self-driven**
+  - stage 3 request reconnect / public parser-checker boundary widen は **後段依存**
 
 ### Phase 4 — shared-space / membership / practical example boundary
 
@@ -62,7 +64,7 @@
 ### Phase 5 — static analysis / type / theorem prover / async-control boundary
 
 - 主眼: small decidable core、proof boundary、protocol verifier boundary、runtime policy boundary
-- 現在地: minimal parser subset freeze は fixed 済みであり、proof-model-check handoff closeout は still 要る。**immediate next line は minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison**
+- 現在地: verifier handoff gate は fixed 済みであり、proof-model-check handoff closeout は still 要る
 - 重さ: とても重い
 - autonomy gate:
   - docs-first inventory と theorem-line threshold comparison は **self-driven**
@@ -84,21 +86,19 @@
 
 ## 現在の主線
 
-いま repo の主線は、次の 4 本である。
+いま repo の主線は、次の 3 本である。
 
-1. **Phase 3 reconnect gate**
-   - minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison
-2. **Phase 1 / 2 / 4 / 5 closeout sweep**
+1. **Phase 1 / 2 / 4 / 5 closeout sweep**
    - self-driven / current-recommendation scope を phase-complete snapshot へ揃える
-3. **Phase 6 front-half actualization**
+2. **Phase 6 front-half actualization**
    - `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ compile-ready minimal PoC の first tranche
 
-Phase 3 は長く reserve path だったが、Phase 6 front-half へ実際に入るなら reopen が必要である。
+Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。
 
 ## immediate execution order
 
-1. **Phase 3 reconnect gate** として minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison を扱う
-2. **Phase 1 / 2 / 4 / 5 closeout sweep** を順に進める
+1. **Phase 1 semantics / invariants / notation final sweep** を immediate line として扱う
+2. **Phase 2 / 4 / 5 closeout sweep** を順に進める
 3. **Phase 6 front-half actual parser / checker / runtime first tranche** を actualize する
 4. 同じ task 群の中で checkpoint / mirror maintenance を継続する
 
@@ -106,9 +106,10 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ実際に入
 
 次は self-driven に比較を続けてよい。
 
-- Phase 3 parser-to-checker reconnect freeze の narrow comparison
+- Phase 1 / 2 / 4 / 5 closeout sweep
 - checkpoint maintenance
 - shared-space の docs-first boundary comparison
+- compile-ready first tranche に必要な crate-local surface inventory
 
 次は勝手に finalization しない。
 
@@ -119,6 +120,6 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ実際に入
 
 ## 現在の判断
 
-- **current immediate line は Phase 3 minimal-parser-subset-freeze-ready parser-to-checker-reconnect-freeze comparison** と読むのが自然である。
-- **Phase 3 は Phase 6 front-half のために reopen 済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
+- **current immediate line は Phase 1 semantics / invariants / notation final sweep** と読むのが自然である。
+- **Phase 3 は Phase 6 front-half のための self-driven freeze を fixed 済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

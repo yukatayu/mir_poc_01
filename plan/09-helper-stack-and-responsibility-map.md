@@ -216,6 +216,8 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - inline text から declaration-side `admit` attached slot を含む option / chain subset だけを parse し、structural subset compare と `decl_admit_slot.surface_text` retention smoke を支える
   - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
 - current parser subset freeze では、stage 1 / stage 2 support helper が Phase 6 front-half actual parser first tranche の accepted floor evidence であり、stage 3 support helper は retained-later floor evidence として扱う
+- current parser-to-checker reconnect freeze では、stage 1 support helper は `Stage1ReconnectClusters` summary floor、stage 2 support helper は `checked_try_rollback_structural_*` floor をそれぞれ source-backed bridge evidence として扱う
+- stage 3 request / predicate reconnect helper line、`e19` direct target mismatch redesign、`E21` / `E22` runtime contrast は helper stack の current bridge contract には入れず、later reopen line として扱う
 - `scripts/current_l2_diff_detached_artifacts.py`
   - detached artifact の payload core だけを比較する repo-level helper
   - `must_explain` を比較対象に上げない
