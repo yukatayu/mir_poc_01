@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-11 22:45 JST
+最終更新: 2026-04-11 22:57 JST
 
 ## この文書について
 
@@ -15,7 +15,7 @@
 - **Phase 1** の current L2 semantics は、`specs/examples/291...292` により self-driven closeout fixed と読んでよい。semantic core 自体は変えず、invariants / proof-obligation wording / notation boundary の narrow closeout を source-backed に閉じ、final parser grammar / final type system / actual external schema は later に残している。
 - **Phase 2** は `specs/examples/293...294` により self-driven closeout fixed と読んでよい。parser-free companion baseline の compile/test/smoke gate、helper boundary、detached loop compare-only policy は source-backed に固定し、reference update / bless、final retention/path policy、public exporter API は later に残している。
 - **Phase 3** は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。minimal parser subset は stage 1 + stage 2 structural floor、first checker reconnect は stage 1 summary + stage 2 try/rollback structural contract までを bridge にし、stage 3 request / predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残している。
-- **Phase 4** は `specs/examples/121...125` までで current package close だが、Phase 完了と呼ぶには「current recommendation で self-driven に閉じる範囲」と「user spec required な final catalog」を tasks / progress / plan でさらに明確化する closeout package が要る。
+- **Phase 4** は `specs/examples/295...296` により self-driven closeout fixed と読んでよい。current package は `specs/examples/121...125` を維持し、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、`delegated_provider_attestation` non-core line、control-plane separated carrier actualization、distributed fairness protocol、final operational realizationは later に残している。
 - **Phase 5** は `specs/examples/126...286` までで current package close である。verifier handoff gate は `handoff_surface_kind + public_checker_boundary_ref + proof_obligation_matrix_ref + handoff_artifact_mode` docs-only mixed-row bridge まで fixed したが、proof / protocol / model-check handoff closeout は still later に残る。
 - **実装面の現在地** は uneven である。`mir-semantics` には parser-free current L2 minimal interpreter と harness があり、`cargo test -p mir-semantics --test current_l2_minimal_interpreter -- --list` で 46 tests が列挙できる。一方で `mir-ast` / `mir-runtime` / `mir-lsp` の public `src/lib.rs` はまだ placeholder skeleton であり、actual parser evidence は `mir-ast/tests/support/current_l2_stage*` の test-only helper に留まる。
 
@@ -24,9 +24,9 @@
 | 目標 | 現在地 | rough 進捗 | 追加で必要な package | rough 所要 | 注記 |
 |---|---|---:|---|---|---|
 | parser-free current L2 PoC | 実在し、compile / test evidence あり | 90%+ | maintenance closeout だけ | 1〜2 package / 2〜4日 | `mir-semantics` 主線はすでに回る |
-| Phase 6 前半 compile-ready minimal actual PoC | docs / test-only spike / parser-free harness / reconnect freeze と Phase 1 / 2 closeout までは揃っているが、public crates は未 actualize | **40% 前後** | 下の Task 1〜5 | **5 package 前後 / 3〜5週** | current L2 subset に scope を絞った rough estimate |
+| Phase 6 前半 compile-ready minimal actual PoC | docs / test-only spike / parser-free harness / reconnect freeze と Phase 1 / 2 / 4 closeout までは揃っているが、public crates は未 actualize | **45% 前後** | 下の Task 1〜4 | **4 package 前後 / 2〜5週** | current L2 subset に scope を絞った rough estimate |
 
-### 進捗 40% 前後の根拠
+### 進捗 45% 前後の根拠
 
 - 進んでいるもの
   - semantic core、invariants、representative fixtures、parser-free harness、detached validation loop、Phase 3 staged parser spike の private evidence、minimal parser subset freeze、parser-to-checker reconnect freeze。
@@ -40,24 +40,14 @@
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 4 closeout | shared-space self-driven closeout | current recommendation package を close し、user-spec-required final catalog を明示分離 | 重め | 2〜4 task / 4〜8日 | 一部自走可能 |
-| 2 | Phase 5 closeout | proof / protocol / runtime-policy handoff closeout | theorem / model-check / runtime-policy 側へ送る relation slice と stop line を固定 | 重い | 2〜4 task / 4〜8日 | 自走可能 |
-| 3 | Phase 6 前半 | actual parser / AST carrier first tranche | `mir-ast` に non-production minimal parser carrier を actualize し compile させる | 重い | 2〜4 task / 4〜7日 | 後段依存 |
-| 4 | Phase 6 前半 | actual checker / runtime skeleton first tranche | `mir-semantics` / `mir-runtime` をまたぐ minimal compile path を actualize する | 重い | 2〜4 task / 4〜7日 | 後段依存 |
-| 5 | Phase 6 前半 | compile-ready PoC verification and formal hook | cargo gate、smoke、proof/model-check first tranche を揃えて checkpoint close | 重い | 1〜3 task / 3〜6日 | 後段依存 |
+| 1 | Phase 5 closeout | proof / protocol / runtime-policy handoff closeout | theorem / model-check / runtime-policy 側へ送る relation slice と stop line を固定 | 重い | 1〜3 task / 3〜7日 | 自走可能 |
+| 2 | Phase 6 前半 | actual parser / AST carrier first tranche | `mir-ast` に non-production minimal parser carrier を actualize し compile させる | 重い | 2〜4 task / 4〜7日 | 後段依存 |
+| 3 | Phase 6 前半 | actual checker / runtime skeleton first tranche | `mir-semantics` / `mir-runtime` をまたぐ minimal compile path を actualize する | 重い | 2〜4 task / 4〜7日 | 後段依存 |
+| 4 | Phase 6 前半 | compile-ready PoC verification and formal hook | cargo gate、smoke、proof/model-check first tranche を揃えて checkpoint close | 重い | 1〜3 task / 3〜6日 | 後段依存 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 4 shared-space self-driven closeout
-
-- 目的
-  - current recommendation を前提に、Phase 4 の self-driven portion を close する。
-- 完了条件
-  - authoritative room baseline、working subset、minimal witness core、delegated RNG provider placement、control-plane threshold が final snapshot として読める。
-  - final activation / authority / auth / consistency / fairness catalog は **user spec required** として tasks / progress / plan/12 に明示されている。
-  - Phase 6 current L2 compile-ready PoC に不要な shared-space finalization を immediate blocker にしていない。
-
-### Task 2. Phase 5 proof / protocol / runtime-policy handoff closeout
+### Task 1. Phase 5 proof / protocol / runtime-policy handoff closeout
 
 - 目的
   - theorem prover / protocol verifier / runtime policy へ送る relation slice と stop line を Phase 5 closeout package として固定する。
@@ -66,7 +56,7 @@
   - verifier handoff surface、theorem-side retained bridge、protocol/model-check side inventory が 1 本の sequencing として読める。
   - actual external schema / actual emitter / low-level memory-order family は still later と明示されている。
 
-### Task 3. Phase 6 前半 actual parser / AST carrier first tranche
+### Task 2. Phase 6 前半 actual parser / AST carrier first tranche
 
 - 目的
   - `mir-ast` public crate を placeholder から一段 actualize し、minimal parser carrier を compile-ready にする。
@@ -75,7 +65,7 @@
   - existing stage 1 / 2 / 3 test-only evidence を壊さず、representative fixtures か inline source smoke が通る。
   - generic parser、span-rich diagnostics、final grammar、full request head parse は still later として切れている。
 
-### Task 4. Phase 6 前半 actual checker / runtime skeleton first tranche
+### Task 3. Phase 6 前半 actual checker / runtime skeleton first tranche
 
 - 目的
   - `mir-semantics` / `mir-runtime` をまたいで、parsed subset -> checker floor -> runtime skeleton の compile path を成立させる。
@@ -84,7 +74,7 @@
   - `mir-runtime` が placeholder ではなく、current L2 subset を受ける non-production skeleton と smoke entry を持つ。
   - parser-free interpreter と actual path の boundary が明記され、両者を混同していない。
 
-### Task 5. Phase 6 前半 compile-ready PoC verification and formal hook
+### Task 4. Phase 6 前半 compile-ready PoC verification and formal hook
 
 - 目的
   - compile-ready PoC を checkpoint close 扱いできる verification package を揃える。
@@ -96,8 +86,8 @@
 
 ## 方針決定が必要な blocker / open question
 
-- **現時点で、Task 1〜2 を止める immediate blocker は 0 件** と読むのが自然である。
-- ただし、Task 3〜5 へ進む時点では次の decision point が効いてくる。
+- **現時点で、Task 1 を止める immediate blocker は 0 件** と読むのが自然である。
+- ただし、Task 2〜4 へ進む時点では次の decision point が効いてくる。
 
 ### Blocker 1. actual parser subset の public boundary
 
@@ -129,5 +119,5 @@
   3. model-check side を先に concrete tool へ結ぶ
   4. theorem / model-check の 2 本を同時に concrete tool へ結ぶ
 - current recommendation / 見解
-  - **Task 1〜4 の後で 1 か 2+3 を narrow に選ぶ** のを推奨。
+  - **Task 1〜3 の後で 1 か 2+3 を narrow に選ぶ** のを推奨。
   - 現時点では public boundary がまだ薄いため、先に tool を固定すると surface が逆流しやすい。

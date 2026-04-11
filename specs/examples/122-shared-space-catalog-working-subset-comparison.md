@@ -149,12 +149,12 @@ activation_rule            = authority-ack
 authority_placement        = single_room_authority
 consistency_mode           = append_friendly_room
 fairness_source            = delegated_rng_service
-fairness_claim             = delegated_provider_attestation
+fairness_claim             = [room core では要求しない]
 causal_membership_carrier  = membership_epoch + member_incarnation
 ```
 
 これは append-friendly room に抽選や random notice ordering のような optional capability を足す場合の practical candidate である。
-ただし authoritative room と違い、ここでの fairness claim は room core の必須核ではなく optional capability として読む。
+current row で固定するのは `delegated_rng_service` を optional capability source として読めることまでであり、`delegated_provider_attestation` は room core の必須核に上げず optional capability の later candidate に残す。
 
 ## practical examples
 

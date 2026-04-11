@@ -5,7 +5,7 @@
 `specs/examples/122-shared-space-catalog-working-subset-comparison.md` で
 
 - `authoritative_room_witnessed_draw`
-- `append_friendly_room_with_rng_capability`
+- `append_friendly_room_with_rng_capability` optional capability candidate
 
 を current working subset に置いた後の次段として、`auditable_authority_witness` を **room profile と audit / receipt side を混ぜずに** どこまで narrow に切れるかを整理する。
 

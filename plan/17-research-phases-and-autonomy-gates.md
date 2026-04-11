@@ -55,11 +55,11 @@
 ### Phase 4 — shared-space / membership / practical example boundary
 
 - 主眼: participant carrier、activation rule、authority placement、consistency mode、RNG / fairness、reconnect / leave / rejoin / causal metadata
-- 現在地: `specs/examples/121...125` までで current package close
+- 現在地: self-driven closeout fixed
 - 重さ: 重い
 - autonomy gate:
   - docs-first boundary と practical example は **self-driven**
-  - final activation / authority / auth / consistency / fairness catalog は **user spec required**
+  - final activation / authority / auth / identity / admission / consistency / fairness catalog は **user spec required**
 
 ### Phase 5 — static analysis / type / theorem prover / async-control boundary
 
@@ -88,38 +88,36 @@
 
 いま repo の主線は、次の 3 本である。
 
-1. **Phase 4 / 5 closeout sweep**
+1. **Phase 5 closeout sweep**
    - self-driven / current-recommendation scope を phase-complete snapshot へ揃える
 2. **Phase 6 front-half actualization**
    - `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ compile-ready minimal PoC の first tranche
 
-Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。
+Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。
 
 ## immediate execution order
 
-1. **Phase 4 shared-space self-driven closeout** を immediate line として扱う
-2. **Phase 5 closeout sweep** を順に進める
-3. **Phase 6 front-half actual parser / checker / runtime first tranche** を actualize する
-4. 同じ task 群の中で checkpoint / mirror maintenance を継続する
+1. **Phase 5 proof / protocol / runtime-policy handoff closeout** を immediate line として扱う
+2. **Phase 6 front-half actual parser / checker / runtime first tranche** を actualize する
+3. 同じ task 群の中で checkpoint / mirror maintenance を継続する
 
 ## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- Phase 4 / 5 closeout sweep
+- Phase 5 closeout sweep
 - checkpoint maintenance
-- shared-space の docs-first boundary comparison
 - compile-ready first tranche に必要な crate-local surface inventory
 
 次は勝手に finalization しない。
 
 - final parser grammar
 - actual external proof / protocol verifier contract
-- shared-space の final activation / authority / auth / consistency / fairness catalog
+- shared-space の final activation / authority / auth / identity / admission / consistency / fairness catalog
 - higher-layer application contract
 
 ## 現在の判断
 
-- **current immediate line は Phase 4 shared-space self-driven closeout** と読むのが自然である。
-- **Phase 1 / 2 / 3 は Phase 6 front-half のための self-driven entry criteria を fixed 済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
+- **current immediate line は Phase 5 proof / protocol / runtime-policy handoff closeout** と読むのが自然である。
+- **Phase 1 / 2 / 3 / 4 は Phase 6 front-half のための self-driven entry criteria を fixed 済み、Phase 5 は self-driven closeout 前** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

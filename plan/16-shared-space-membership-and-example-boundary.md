@@ -2061,6 +2061,7 @@ current phase で room profile に入れてよいのは、
 ### catalog working subset note
 
 authoritative room baseline を practical room catalog の first row として含めつつ、append-friendly room との contrast、`auditable_authority_witness`、`membership_epoch + member_incarnation` split、`delegated_rng_service` の optional capability row までを small working subset として切った current judgment の正本は `specs/examples/122-shared-space-catalog-working-subset-comparison.md` である。
+ここで append-friendly optional capability row が固定するのは `delegated_rng_service` source までであり、`delegated_provider_attestation` は room-core claim としては凍結せず later candidate に残す。
 `plan/16` は引き続き比較の repository memory を保持するが、catalog の current working subset と deferred finalization の線引きは `specs/examples/122...` を優先して読む。
 
 ## Raft / Paxos をどう位置づけるか

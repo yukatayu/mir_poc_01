@@ -552,6 +552,10 @@
   - Phase 1 closeout fixed 後の次段として、parser-free PoC / detached validation loop を Phase 2 closeout bundle としてどこまで snapshot に前面化し、compile gate / helper boundary / detached loop policy と bless / retention / public API later line をどう分けるかを比較する補助文書。
 - `specs/examples/294-current-l2-phase2-parser-free-poc-closeout-ready-minimal-phase2-parser-free-poc-closeout-threshold.md`
   - Phase 2 closeout の minimal docs-first shape を `closeout_kind + compile_gate_refs + helper_boundary_refs + detached_loop_policy_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/295-current-l2-phase2-parser-free-poc-closeout-ready-phase4-shared-space-self-driven-closeout-comparison.md`
+  - Phase 2 closeout fixed 後の次段として、shared-space / membership line の self-driven current package をどこまで checkpoint close と読み、current package refs と user-spec-required final catalog refs をどう分けるかを比較する補助文書。
+- `specs/examples/296-current-l2-phase4-shared-space-self-driven-closeout-ready-minimal-phase4-shared-space-self-driven-closeout-threshold.md`
+  - Phase 4 self-driven closeout の minimal docs-first shape を `closeout_kind + current_package_refs + user_spec_required_catalog_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

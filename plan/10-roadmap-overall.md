@@ -42,12 +42,12 @@
 ## 現在のフェーズ
 
 現在の主フェーズは、単なる drift suppression だけではなく、
-**Phase 3 reconnect freeze と Phase 1 / 2 closeout を fixed entry criteria としたうえで、Phase 4 / 5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入る段階**
+**Phase 3 reconnect freeze と Phase 1 / 2 / 4 closeout を fixed entry criteria としたうえで、Phase 5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入る段階**
 と読むのが自然である。
 
 具体的には次が主線である。
 
-1. Phase 4 / 5 closeout sweep
+1. Phase 5 closeout sweep
 2. `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path の準備
 
 つまり、広い production 実装へ進む前に、
@@ -59,7 +59,7 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- shared-space current recommendation と proof/model-check handoff の closeout sweep
+- proof / protocol / runtime-policy handoff の closeout sweep
 - actual parser / checker / runtime first tranche に上げる surface の棚卸し
 - Phase 3 reconnect freeze の fixed snapshot を保ったまま Phase 6 front-half の crate-local contract を actualization する
 

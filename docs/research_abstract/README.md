@@ -20,5 +20,5 @@
 ## 補助メモ
 
 - current L2 の representative example で誤解されやすい語は、phase 1〜3 の本文中に短い補足として散らしてある。
-- current snapshot では、phase 0 / 1 / 2 / 3 / 5 の condensed summary がある。
+- current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 の condensed summary がある。
 - ここも規範判断の正本ではない。用語の厳密な根拠は `specs/` と `plan/` を参照する。

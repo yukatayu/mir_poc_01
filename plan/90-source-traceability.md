@@ -150,6 +150,16 @@
   - `specs/examples/294-current-l2-phase2-parser-free-poc-closeout-ready-minimal-phase2-parser-free-poc-closeout-threshold.md`
   - `docs/reports/0608-phase2-parser-free-poc-closeout-package.md`
 
+## 2026-04-11 Phase 4 closeout addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/122-shared-space-catalog-working-subset-comparison.md`
+  - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
+  - `specs/examples/125-shared-space-control-plane-carrier-threshold.md`
+  - `specs/examples/295-current-l2-phase2-parser-free-poc-closeout-ready-phase4-shared-space-self-driven-closeout-comparison.md`
+  - `specs/examples/296-current-l2-phase4-shared-space-self-driven-closeout-ready-minimal-phase4-shared-space-self-driven-closeout-threshold.md`
+  - `docs/reports/0609-phase4-shared-space-self-driven-closeout-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。
