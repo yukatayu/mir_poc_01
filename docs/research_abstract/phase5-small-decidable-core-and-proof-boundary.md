@@ -350,6 +350,9 @@ consumer-specific attachment として後段に残すのが current first choice
 その次段では、
 **`retained_payload_body_materialization_theorem_export_authority_handoff_epoch_ref`**
 までは symbolic authority handoff epoch ref として足してよい。ただし witness / replay attachment、handoff payload / carrier detail、low-level memory-order family は still 後段に残す。
+その次段では、
+**`retained_payload_body_materialization_theorem_export_witness_aware_handoff_family`**
+までは symbolic witness-aware handoff family として足してよい。ただし actual witness row、replay attachment、handoff payload / carrier detail、low-level memory-order family は still 後段に残す。
 
 ## まだやっていないこと
 
