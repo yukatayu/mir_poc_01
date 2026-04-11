@@ -425,6 +425,11 @@ current L2 では production exporter API はまだ固定しない。
   - `CurrentL2Fixture + StaticGateResult -> static gate artifact` の pure transform だけを shared support module として持つ
   - first checker cut の local / structural floor を detached validation loop へ接続する actual narrow cut だが、`lib.rs` / `harness.rs` の public API には上げない
   - optional `detached_noncore.reason_codes` は helper-local / reference-only mirror に留め、exact-compare core や fixture-side typed carrier と混同しない
+- `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
+  - detached static gate artifact または detached bundle artifact を起点に tool-neutral formal hook artifact sketch を出す
+- `crates/mir-semantics/examples/support/current_l2_formal_hook_support.rs`
+  - theorem-line existing cut と同じ `subject_kind + subject_ref + contract_rows(obligation_kind + typed symbolic evidence_refs)` を保ったまま formal hook artifact へ落とす pure transform を持つ
+  - source artifact schema/kind mismatch は fail-closed に止め、concrete theorem/model-check tool binding は still later に残す
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
 - `scripts/current_l2_diff_detached_aggregates.py`
@@ -441,6 +446,7 @@ current L2 では production exporter API はまだ固定しない。
   - current third tranche では bundle / aggregate / static gate diff helper の reference-only section を shallow per-field summary に揃え、current exact-compare core を触らずに compare triage を短くしてよい
   - `smoke-try-rollback-locality` subcommand により、`e22` mismatch と `e21` frontier の representative pair を current default label つきで 1 command で回せる
   - `emit-static-gate` / `compare-static-gates` / `smoke-static-gate` により、static-only / malformed / underdeclared fixture でも static gate artifact の保存と compare を回せる
+  - `smoke-formal-hook-static` / `smoke-formal-hook-runtime` により、static gate artifact または detached bundle artifact から theorem-line整合の formal hook artifact までを smoke できる
   - `smoke-same-lineage-checker` により、1 fixture の static gate artifact を保存し、same-lineage first checker spike をその artifact に対して回せる
   - `smoke-missing-option-checker` により、1 fixture の static gate artifact を保存し、missing-option second checker spike をその artifact に対して回せる
   - `smoke-capability-checker` により、1 fixture の static gate artifact を保存し、capability third checker spike をその artifact に対して回せる

@@ -15,25 +15,32 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 3 は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。stage 1 / 2 structural floor と first checker reconnect bridge は entry criteria として整理され、stage 3 request/admit/predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残る。
 - Phase 4 は `specs/examples/295...296` により self-driven closeout fixed である。current package は `specs/examples/121...125` を維持し、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、stronger control-plane split と distributed fairness は later に残している。
 - Phase 5 は `specs/examples/297...298` により self-driven closeout fixed である。verifier handoff surface docs-only mixed-row bridge、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual artifact / tool binding / low-level memory-order family は later に残している。
-- Phase 6 front-half の compile-ready minimal PoC では、`mir-ast` stage 1 / stage 2 carrier、`mir-semantics` / `mir-runtime` checker/runtime first tranche、tool-neutral formal hook first trancheは actualize 済みである。残る主線は checkpoint sweep である。
+- Phase 6 front-half の compile-ready minimal PoC では、`mir-ast` stage 1 / stage 2 carrier、`mir-semantics` / `mir-runtime` checker/runtime first tranche、tool-neutral formal hook first tranche、checkpoint sweepは actualize / close 済みである。残る主線は next reopen sequencing である。
 
 ## いまから数 task の主眼
 
-近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 / 5 entry criteria と parser + checker/runtime + formal-hook first tranche を前提に、Phase 6 front-half actualization を最後の 1 package で compile-ready checkpoint close まで進めることである。
+近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 / 5 entry criteria と parser + checker/runtime + formal-hook checkpoint close を前提に、次の reopen point を narrow に選び、2〜3 package 先の順序を決めることである。
 
 ## 次に自走で進める順番
 
-### 1. Phase 6 compile-ready checkpoint drift suppression / mirror sweep
+### 1. Phase 6 next reopen sequencing
 
-- checkpoint wording と mirror audit
+- parser second tranche widen と concrete formal tool binding の順序比較
 - rough weight: 中
 - rough 所要: 1 task / 1〜3日
+
+### 2. concrete tool binding or parser second tranche first package
+
+- sequencing judgment の first execution package
+- rough weight: 中〜重い
+- rough 所要: 1〜2 task / 3〜7日
 
 ## rough step estimate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| Phase 6 compile-ready checkpoint drift suppression / mirror sweep | 1 task | specs / plan / snapshot / abstract の stale wording を掃除する |
+| Phase 6 next reopen sequencing | 1 task | parser second tranche widen と concrete formal tool binding の順序を narrow に決める |
+| sequencing judgment の first execution package | 1〜2 task | selected first reopen line の最小 cut を actualize する |
 
 ## いま見えている later blocker / open question
 
@@ -47,7 +54,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 - tool-neutral export で一旦 close するか
 - theorem side / model-check side の concrete tool first cut をどこで選ぶか
-- current recommendation は **near-term Task 1 で tool-neutral first cut を優先して narrow に選ぶ** である
+- current recommendation は **tool-neutral first cut を entry criteria に維持したまま、checkpoint close 後の concrete tool comparison へ送る** である
 
 ## 今の working assumption
 

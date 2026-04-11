@@ -50,7 +50,7 @@
 1. `mir-ast` stage 1 / stage 2 non-production parser carrier を fixed entry criteria とする
 2. `mir-semantics` / `mir-runtime` をまたぐ non-production checker/runtime first tranche を fixed entry criteria とする
 3. compile-ready verification / formal hook first tranche を fixed entry criteria とする
-4. checkpoint drift suppression / mirror sweep を最後の close step に置く
+4. compile-ready checkpoint close 後の next reopen sequencing を narrow に決める
 
 つまり、広い production 実装へ進む前に、
 **意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
@@ -61,13 +61,13 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- checkpoint wording と mirror sweep
-- checkpoint close 後の next reopen point 整理
+- checkpoint close 後の next reopen sequencing
+- concrete tool binding / parser second tranche の比較開始
 
 ### その次のフェーズ
 
-- proof / model-check handoff の first tranche を tool-neutral か concrete tool first cut へ落とす比較
-- richer host interface の actual widening を still later に残したまま、compile-ready checkpoint を閉じる
+- proof / model-check handoff の first concrete tool cut
+- richer host interface の actual widening を still later に残したまま、parser second tranche widen を比較する
 - parser / checker / runtime public surface の second tranche inventory
 
 ### さらに先のフェーズ

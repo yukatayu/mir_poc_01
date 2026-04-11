@@ -74,6 +74,7 @@ parser first tranche の actual code anchor は次である。
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
 - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 - `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
+- `docs/reports/0614-phase6-compile-ready-checkpoint-drift-suppression-and-mirror-sweep.md`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
@@ -84,13 +85,13 @@ parser first tranche の actual code anchor は次である。
 ## 次の mainline
 
 next mainline は、
-**Phase 6 compile-ready checkpoint drift suppression / mirror sweep**
+**Phase 6 next reopen sequencing（parser second tranche widen vs concrete formal tool binding）**
 である。
 
-ここでは parser carrier、checker/runtime skeleton、formal hook first tranche を前提に、
+ここでは compile-ready checkpoint close を entry criteria に、
 
-- compile-ready checkpoint wording
-- specs / progress / tasks / abstract / plan の stale wording 掃除
-- next reopen point の整理
+- parser second tranche widen と concrete formal tool binding のどちらを先に reopen するか
+- next 2〜3 package の execution order
+- retained-later line をどこまで narrow に維持するか
 
 を揃えるのが主眼になる。
