@@ -6,6 +6,21 @@
 - parser-ready な最終 syntax ではない
 - parser-free PoC では、これらを machine-readable fixture へ正規化して検証する
 
+## layered sample stack の current reading
+
+- current roadmap では、少なくとも 3 層の sample 表現を区別して扱うのが自然である。
+  - representative programs
+  - machine-readable fixture corpus
+  - fixed-subset source-sample corpus
+- representative programs は人間向けの説明用であり、final grammar を固定しない。
+- fixture corpus は machine-check の current baseline であり、parser-free / detached loop / static gate / interpreter の正本に近い。
+- source-sample corpus は、**representative programs をそのまま昇格するものでも、fixture JSON を逆生成するものでもなく**、fixed subset の syntax-backed regression layer として別に置くのが current first choice であり、現時点ではまだ target layer である。
+- current near-term では、source-sample corpus は
+  - fixed subset だけを対象にする
+  - representative prose と fixture corpus の対応表を持つ
+  - `static gate` / `interpreter` / `formal hook` reached stage を sample ごとに段階化する
+  という条件で整備するのが自然である。
+
 ## fixture 一覧
 
 ### runtime fixture

@@ -88,12 +88,16 @@
 
 ## 現在の主線
 
-いま repo の主線は、次の 2 本である。
+いま repo の主線は、次の 4 本である。
 
 1. **Phase 6 parser-side follow-up package sequencing**
    - shared single attachment frame を next package に含めるかを narrow に決める
 2. **Phase 6 parser-side follow-up package actualization**
    - selected follow-up line の最小 cut を actualize する
+3. **Phase 6 fixed-subset source-sample corpus scope / mapping**
+   - representative prose / fixture corpus / source sample の 3 層を固定する
+4. **Phase 6 parser-to-`Program` lowering / syntax-backed runner**
+   - source sample を parse / lower / static / interpreter に通す narrow path を作る
 
 Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。Phase 5 closeout も `specs/examples/297...298` で fixed 済みであり、verifier handoff surface、theorem retained bridge stop line、boundary inventory、retained-later line は current entry criteria と読んでよい。
 
@@ -101,6 +105,8 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 1. **Phase 6 parser-side follow-up package sequencing** を immediate line として扱う
 2. **Phase 6 parser-side follow-up package actualization** を narrow に行う
+3. **Phase 6 fixed-subset source-sample corpus scope / mapping** を行う
+4. **Phase 6 parser-to-`Program` lowering / syntax-backed runner** を narrow に行う
 
 ## いま止めるべき線
 
@@ -108,7 +114,9 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 - Phase 6 parser-side follow-up package sequencing
 - Phase 6 parser-side follow-up package actualization
-- Phase 6 fixed-subset sample/program corpus staging
+- Phase 6 fixed-subset source-sample corpus scope / mapping
+- Phase 6 parser-to-`Program` lowering / syntax-backed runner
+- Phase 6 verification ladder / source-sample policy
 - checkpoint close 済み package の maintenance
 
 次は勝手に finalization しない。
@@ -121,8 +129,10 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 ## 現在の判断
 
 - **current immediate line は Phase 6 parser-side follow-up package sequencing** と読むのが自然である。
+- **front-half compile-ready checkpoint close と syntax-backed sample verification readiness は別の progress axis** と読むのが自然である。
 - **Phase 1 / 2 / 3 / 4 / 5 は Phase 6 front-half のための self-driven entry criteria を fixed 済み** と読むのが自然である。
 - **`mir-ast` stage 1 / stage 2 carrier は Phase 6 parser first tranche として fixed 済み** と読むのが自然である。
 - **`mir-semantics` program-level entry と `mir-runtime` current L2 thin skeleton は Phase 6 checker/runtime first tranche として fixed 済み** と読むのが自然である。
 - **tool-neutral formal hook first tranche は Phase 6 compile-ready gate として fixed 済み** と読むのが自然である。
+- **LLVM-family backend や higher-level async-control / low-level memory-order-like surface は source corpus / lowering / runner / ladder より前に mainline へ入れない** のが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

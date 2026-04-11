@@ -42,7 +42,7 @@
 ## 現在のフェーズ
 
 現在の主フェーズは、単なる drift suppression だけではなく、
-**Phase 1 / 2 / 3 / 4 / 5 の self-driven closeout / freeze を fixed entry criteria としたうえで、Phase 6 前半の compile-ready minimal PoC を actualize する段階**
+**Phase 1 / 2 / 3 / 4 / 5 の self-driven closeout / freeze を fixed entry criteria としたうえで、Phase 6 前半の compile-ready minimal PoC を維持しつつ、syntax-backed fixed-subset sample verification path を actualize する段階**
 と読むのが自然である。
 
 具体的には次が主線である。
@@ -51,6 +51,7 @@
 2. `mir-semantics` / `mir-runtime` をまたぐ non-production checker/runtime first tranche を fixed entry criteria とする
 3. compile-ready verification / formal hook first tranche を fixed entry criteria とする
 4. compile-ready checkpoint close 後の next reopen sequencing を parser second tranche first に fixed し、first package 実装と reserve formal tool binding inventory fixed 後の follow-up package を narrow に整理する
+5. fixed-subset source corpus / mapping / lowering / runner / verification ladder を、final grammar や concrete backend に逆流させず段階 actualize する
 
 つまり、広い production 実装へ進む前に、
 **意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
@@ -63,10 +64,13 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 - parser-side follow-up package sequencing
 - parser-side follow-up package actualization
+- fixed-subset source-sample corpus scope / mapping
+- actual parser-to-`Program` lowering first cut
+- syntax-backed sample runner / verification ladder
 
 ### その次のフェーズ
 
-- fixed-subset sample/program corpus staging
+- source-sample authoring / bless / regression policy
 - proof / model-check handoff の first concrete tool cut
 - richer host interface の actual widening を still later に残したまま、parser second tranche widen を比較する
 - parser / checker / runtime public surface の second tranche inventory
@@ -91,6 +95,7 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 - production parser
 - full production runtime
+- LLVM-family backend / external codegen binding
 - machine-readable catalog manifest
 - richer host interface の一般化
 - multi-request scheduler
@@ -142,4 +147,4 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 - current L2 は **まだ architecture and semantics のフェーズ**である。
 - parser-free PoC はその意味論を machine-check する companion 基盤であり、Phase 2 closeout fixed 後も production 実装の着手宣言ではない。
-- したがって、今の roadmap では **meaning / notation / verification boundary を fixed entry criteria として保ったまま、Phase 6 の minimal parser / checker / runtime / formal-hook first trancheを non-production に narrow actualize し、その後に checkpoint drift suppression を閉じる** のが妥当である。
+- したがって、今の roadmap では **meaning / notation / verification boundary を fixed entry criteria として保ったまま、Phase 6 の minimal parser / checker / runtime / formal-hook first trancheを non-production に narrow actualize し、その後に source corpus / lowering / runner / verification ladder を fixed subset だけで積み上げる** のが妥当である。

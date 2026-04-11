@@ -61,9 +61,14 @@ parser first tranche の actual code anchor は次である。
 ## まだ fixed していないこと
 
 - stage 3 request / predicate reconnect
+- shared single attachment frame の current package boundary
+- fixed-subset source-sample corpus scope / mapping / authoring policy
+- actual parser-to-`Program` lowering first cut
+- syntax-backed sample runner と sample ごとの verification ladder
 - concrete theorem / model-check tool binding
 - perform head final public parser API
 - span-rich diagnostics と final grammar
+- LLVM-family backend / external codegen binding の timing
 
 ## この phase の evidence
 
@@ -101,6 +106,14 @@ current mainline は、
 
 - parser-side follow-up package sequencing
 - parser-side follow-up package actualization
-- fixed-subset sample/program corpus を later に繋ぐための stop line
+- fixed-subset source-sample corpus scope / mapping
+- actual parser-to-`Program` lowering と syntax-backed sample runner の first cut
+- sample ごとの `static gate` / `interpreter` / `formal hook` ladder
 
 を揃えるのが主眼になる。
+
+current recommendation としては、
+
+- fixed subset の executable sample を厚くすること自体はよい
+- ただし higher-level async-control family や low-level memory-order-like surface を current executable core に混ぜるのは早い
+- theorem/model-check concrete tool binding や LLVM-family backend / external codegen も、source corpus / lowering / runner / ladder のあとに narrow pilot として扱う

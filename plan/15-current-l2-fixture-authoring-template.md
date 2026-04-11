@@ -13,6 +13,18 @@
 
 を、task ごとに拾い直さなくて済む形で固定することにある。
 
+## scope note
+
+- この文書は **fixture authoring** 用であり、future source-sample corpus authoring template を兼ねない。
+- fixed-subset source-sample corpus は、representative prose と fixture corpus のあいだに置く別 layer であり、
+  - source file layout
+  - representative / fixture / source mapping
+  - parser-to-`Program` lowering
+  - syntax-backed runner
+  - bless / regression policy
+  を別 task chain として整理してから template 化するのが current first choice である。
+- したがって、source text sample を増やしたいときでも、現時点ではこの文書をそのまま拡張して final template と誤読しない。
+
 ## fixture authoring の最小 checklist
 
 新しい current L2 fixture を 1 本足すときは、最低でも次を確認する。

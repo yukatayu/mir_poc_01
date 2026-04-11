@@ -3,7 +3,7 @@
 ## project 全体の主眼
 
 - 主眼は **Mir** の意味論基盤である。
-- 現在の主要作業は、Phase 1〜5 の self-driven closeout / freeze と Phase 6 front-half compile-ready checkpoint close を entry criteria にしつつ、parser-side follow-up package と fixed-subset sample/program corpus reserve line を narrow に整理することである。
+- 現在の主要作業は、Phase 1〜5 の self-driven closeout / freeze と Phase 6 front-half compile-ready checkpoint close を entry criteria にしつつ、parser-side follow-up package と **syntax-backed fixed-subset sample verification path** を narrow に整理することである。
 - PrismCascade は重要な比較対象・将来統合対象だが、現時点では **optional / side-track に近い独立 kernel** として扱う。
 
 ## いまの主フェーズ
@@ -14,6 +14,7 @@
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
 4. parser-side first package fixed 後の reserve formal tool binding inventory を fixed 済み entry criteria とし、parser-side follow-up sequencing を narrow に整理する
+5. fixed-subset source corpus / mapping / lowering / runner / verification ladder を、final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
 
@@ -32,8 +33,10 @@
 ### まだ未決のもの
 
 - final parser grammar
-- actual parser-to-`Program` lowering second tranche
+- actual parser-to-`Program` lowering first cut とその後段 widen boundary
 - concrete theorem / model-check tool binding
+- fixed-subset source-sample corpus の final authoring / bless policy
+- LLVM-family backend / external codegen binding の timing
 - richer host interface
 - multi-request scheduler
 - `Approximate` / `Compensate` の PoC 実装読み
@@ -68,7 +71,9 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 - parser-side follow-up package sequencing を整理する
 - parser-side follow-up package actualization を整理する
-- fixed-subset sample/program corpus staging を整理する
+- fixed-subset source-sample corpus scope / mapping を整理する
+- actual parser-to-`Program` lowering first cut を整理する
+- syntax-backed sample runner と verification ladder を整理する
 - checkpoint close fixed 後の snapshot を維持する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
@@ -79,7 +84,10 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 前に最後の整流が必要 |
+| source-sample corpus layering 未固定 | representative prose / fixture corpus / source sample の 3 層を整理中 |
+| lowering / runner 未整備 | compile-ready checkpoint はあるが source sample から `Program` / `interpreter` への narrow path はまだない |
+| backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
+| helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
 | heavy future workstream 未着手 | 型・静的解析・定理証明・決定可能性はまだ本格着手前 |
 
 ## rough step estimate
@@ -89,8 +97,10 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| Phase 6 next reopen sequencing | 1 task |
-| parser second tranche widen / concrete tool binding の next reopen を narrow に選ぶ | 2〜4 task |
+| Phase 6 parser-side follow-up sequencing | 1 task |
+| parser-side follow-up actualization | 1〜2 task |
+| fixed-subset source corpus / mapping / lowering / runner / ladder | 6〜8 task |
+| theorem-first concrete tool pilot | 2〜4 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |
 

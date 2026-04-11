@@ -19,6 +19,12 @@ repo-local 運用を簡潔に固定する。
   - 何を検証したか
   - 次に進む package は何か
   を短く示す。
+- source-sample corpus / ladder work や roadmap refresh を含む連続 task では、中間報告に **どの ladder stage が新しく reachable になったか** も短く入れる。
+  - `scope/layout`
+  - `mapping`
+  - `lowering`
+  - `runner`
+  - `static/interpreter/formal`
 - 通知 failure は主作業の failure にしない。
 
 ## Scope note

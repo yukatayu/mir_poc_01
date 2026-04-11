@@ -6,7 +6,7 @@
 ここに書く step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。
-この文書は snapshot として、**Phase 3 reconnect freeze fixed 後の Phase 1〜5 closeout と Phase 6 front-half compile-ready gate** を短く保つ。
+この文書は snapshot として、**Phase 6 front-half compile-ready gate fixed 後に、syntax-backed fixed-subset sample verification までどう進むか** を短く保つ。
 
 ## current reading
 
@@ -15,11 +15,18 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 3 は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。stage 1 / 2 structural floor と first checker reconnect bridge は entry criteria として整理され、stage 3 request/admit/predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残る。
 - Phase 4 は `specs/examples/295...296` により self-driven closeout fixed である。current package は `specs/examples/121...125` を維持し、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、stronger control-plane split と distributed fairness は later に残している。
 - Phase 5 は `specs/examples/297...298` により self-driven closeout fixed である。verifier handoff surface docs-only mixed-row bridge、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual artifact / tool binding / low-level memory-order family は later に残している。
-- Phase 6 front-half の compile-ready minimal PoC では、`mir-ast` stage 1 / stage 2 carrier、`mir-semantics` / `mir-runtime` checker/runtime first tranche、tool-neutral formal hook first tranche、checkpoint sweepは actualize / close 済みである。`specs/examples/305...306` により next reopen sequencing も fixed 済みであり、`specs/examples/307...308` により parser second tranche first package も actualize 済みである。`specs/examples/309...310` により reserve formal tool binding inventory も fixed 済みであり、残る主線は parser-side follow-up sequencing と parser-side follow-up actualization である。fixed-subset sample/program corpus staging はその後段 reserve line である。
+- Phase 6 front-half compile-ready minimal PoC では、`mir-ast` stage 1 / stage 2 carrier、`mir-semantics` / `mir-runtime` checker/runtime first tranche、tool-neutral formal hook first tranche、checkpoint sweepは actualize / close 済みである。`specs/examples/305...306` により next reopen sequencing も fixed 済みであり、`specs/examples/307...308` により parser second tranche first package も actualize 済みである。`specs/examples/309...310` により reserve formal tool binding inventory も fixed 済みである。
+- ただし、source text sample を fixed subset で持ち、`static gate` / `interpreter` / `formal hook` を sample 単位で通す経路はまだ early である。old snapshot の `fixed-subset sample/program corpus staging` 1 項目では粗すぎるため、近接ロードマップでは source corpus / mapping / lowering / runner / ladder / policy に分解して扱う。
 
 ## いまから数 task の主眼
 
-近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 / 5 entry criteria と parser + checker/runtime + formal-hook checkpoint close を前提に、parser-side follow-up package の順序と actual cut を整えることである。
+近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 / 5 entry criteria と parser + checker/runtime + formal-hook checkpoint close を前提に、
+
+1. parser-side follow-up package の順序と actual cut を整える
+2. fixed subset の source text sample corpus を第 3 層として定義する
+3. parse / lower / static / interpreter / formal hook の syntax-backed ladder を narrow に通す
+
+ことである。
 
 ## 次に自走で進める順番
 
@@ -35,11 +42,41 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - rough weight: 中〜重い
 - rough 所要: 1〜2 task / 3〜7日
 
-### 3. fixed-subset sample/program corpus staging
+### 3. fixed-subset source-sample corpus scope / file layout
 
-- single-element から non-trivial sample までの段階化と static / interpreter / later formal staging を整理する
+- source corpus の対象 subset、ID policy、directory、non-goal を固定する
 - rough weight: 中
-- rough 所要: 1〜2 task / 2〜5日
+- rough 所要: 1 task / 1〜3日
+
+### 4. representative / fixture / source mapping matrix
+
+- representative prose、fixture corpus、source sample の 3 層対応を作る
+- rough weight: 中
+- rough 所要: 1 task / 1〜2日
+
+### 5. actual parser-to-`Program` lowering first cut
+
+- fixed subset の parse result を semantic `Program` へ fail-closed に落とす
+- rough weight: 重い
+- rough 所要: 1〜2 task / 3〜7日
+
+### 6. syntax-backed sample runner first cut
+
+- source sample を parse / lower / static gate / interpreter に流す narrow runner を作る
+- rough weight: 重い
+- rough 所要: 1〜2 task / 3〜7日
+
+### 7. verification ladder wiring
+
+- sample ごとに `static gate` / `interpreter` / `formal hook` の reached stage を明示する
+- rough weight: 中〜重い
+- rough 所要: 1〜2 task / 2〜6日
+
+### 8. source-sample authoring / bless / regression policy
+
+- source sample 更新手順と drift suppression を repo-local に固定する
+- rough weight: 中
+- rough 所要: 1 task / 1〜3日
 
 ## rough step estimate
 
@@ -47,27 +84,38 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 |---|---|---|
 | parser-side follow-up package sequencing | 1 task | shared single attachment frame の位置を narrow に決める |
 | parser-side follow-up package actualization | 1〜2 task | selected follow-up line の最小 cut を actualize する |
-| fixed-subset sample/program corpus staging | 1〜2 task | static / interpreter / later formal staging を current freeze を壊さずに整理する |
+| fixed-subset source-sample corpus scope / mapping | 2 task | representative prose と fixture corpus の間に source corpus を第 3 層として置く |
+| parser-to-`Program` lowering + syntax-backed runner | 2〜4 task | fixed subset だけを fail-closed に接続する |
+| verification ladder + authoring/bless policy | 2〜3 task | `static` / `interpreter` / `formal hook` を sample ID 単位で整理する |
 
 ## いま見えている later blocker / open question
 
 ### 1. actual parser subset の second-tranche package boundary
 
-- stage 1 / 2 carrier を compile-ready checkpoint minimum として固定するか
-- selected stage 3 / perform head を second tranche にどう reopen するか
-- current recommendation は **attached-slot / predicate route を first package に置く** である
+- stage 1 / 2 carrier と attached-slot / predicate route の後に、shared single attachment frame をどこへ置くか
+- request head / clause suite / richer diagnostics を同時に reopen しないことが重要である
+- current recommendation は **shared single attachment frame までを next narrow candidate に置き、それ以上は later に残す** である
 
-### 2. fixed-subset sample/program corpus staging
+### 2. source corpus の layering
 
-- compile-ready checkpoint close を壊さずに sample/program corpus をどの順で増やすか
-- static gate / interpreter / later theorem-model-check staging をどう分けるか
-- current recommendation は **fixed subset の sample/program corpus を grammar widening や concrete tool binding と切り離して段階化する** である
+- representative prose と fixture corpus のあいだに、fixed subset source corpus をどのように置くか
+- current recommendation は **source corpus を第 3 層として分け、representative prose や fixture JSON をそのまま転用しない** である
+
+### 3. concrete tool binding / backend timing
+
+- theorem/model-check concrete tool や LLVM-family backend / external codegen をいつつなぐか
+- current recommendation は **source corpus / lowering / runner / verification ladder の後** である
+
+### 4. higher-level async-control / low-level memory-order family
+
+- `atomic_cut` sample を増やすことと、高位制御 family や low-level memory-order-like surface を current executable core に入れることは分けて扱う
+- current recommendation は **settled subset の sample 拡張を先に行い、async-control / memory-order family は heavy future workstream に残す** である
 
 ## 今の working assumption
 
 - current L2 semantics と Phase 1 / 2 closeout bridge は大きく動かさない
 - parser-free PoC は current baseline として維持する
 - Phase 3 reconnect freeze は fixed 済みの entry criteria として扱う
-- Phase 4 self-driven closeout は fixed 済みとし、shared-space final catalog は user-spec-required item に留める
 - actual parser / checker / runtime first tranche は non-production minimal cut に留める
-- reserve formal tool binding inventory は fixed 済み entry criteria として保持し、parser-side current mainline と fixed-subset sample/program corpus staging を先に進める
+- reserve formal tool binding inventory は fixed 済み entry criteria として保持し、source corpus / lowering / runner / verification ladder を先に進める
+- LLVM-family backend や external codegen は current near-term mainline に置かない
