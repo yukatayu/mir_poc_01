@@ -398,6 +398,12 @@
   - Phase 5 theorem-side checker-verdict-transport-payload-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_receipt` を checker verdict transport receipt としてどこまで先に足し、checker verdict transport channel body をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/217-current-l2-theorem-line-checker-verdict-transport-receipt-ready-checker-verdict-transport-channel-body-threshold.md`
   - Phase 5 theorem-side checker-verdict-transport-receipt-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_channel_body` を checker verdict transport channel body としてどこまで先に足し、low-level memory-order family をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/218-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-low-level-memory-order-family-threshold.md`
+  - Phase 5 theorem-side checker-verdict-transport-channel-body-ready retained bridge の stop line をどこに置き、low-level memory-order family を theorem-line の外に残すかを比較する補助文書。
+- `specs/examples/219-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-higher-level-async-control-family-comparison.md`
+  - Phase 5 theorem-side retained bridge の next step として、`event_tree_execution_view` / `authority_serial_transition_family` / `witness_aware_commit_family` のどれを higher-level async-control family の first cut に置くかを比較する補助文書。
+- `specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md`
+  - higher-level async-control family の current first cut を `authority_serial_transition_family` に置いた後、それを theorem-line retained bridge にどこまで近づけるかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

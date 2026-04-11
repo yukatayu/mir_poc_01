@@ -13,7 +13,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...218` までで theorem-line later package close であり、**next promoted line は `checker-verdict-transport-channel-body-ready higher-level-async-control-family comparison`** である。
+- Phase 5 は `specs/examples/126...220` までで theorem-line later package close であり、**next promoted line は `authority-serial-transition-family-ready authority-serial-transition-contract comparison`** である。
 
 ## いまから数 task の主眼
 
@@ -25,10 +25,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. checker-verdict-transport-channel-body-ready higher-level-async-control-family comparison を Phase 5 later reopen の current promoted line として扱う
+### 1. authority-serial-transition-family-ready authority-serial-transition-contract comparison を Phase 5 later reopen の current promoted line として扱う
 
-- `retained_payload_body_materialization_theorem_export_checker_verdict_transport_channel_body` を theorem-line retained bridge の stop line に維持したまま、higher-level async-control family をどこから比較するかを整理する
-- `event_tree_execution_view`、`authority_serial_transition_family`、`witness_aware_commit_family` を first candidates として比べ、low-level memory-order family は still later candidate に残す
+- `retained_payload_body_materialization_theorem_export_authority_serial_transition_family` を current first cut に置いた前提で、minimal `authority_serial_transition_contract` row を theorem-line retained bridge にどこまで近づけるかを整理する
+- `witness_aware_commit_family` と `event_tree_execution_view` は second/later candidate に残し、low-level memory-order family も still later candidate に残す
 - rough weight: 中〜重
 - rough 所要: 1〜3 task / 2〜6日
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| checker-verdict-transport-channel-body-ready higher-level-async-control-family comparison | 1〜3 task | current promoted line |
+| authority-serial-transition-family-ready authority-serial-transition-contract comparison | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |

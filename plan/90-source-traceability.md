@@ -51,6 +51,15 @@
   - `docs/reports/0547-review-phase5-low-level-memory-order-family-threshold.md`
   - `docs/reports/0548-review-phase5-low-level-memory-order-family-threshold-package.md`
 
+## 2026-04-11 Phase 5 higher-level async-control authority-serial addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/219-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-higher-level-async-control-family-comparison.md`
+  - `specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md`
+  - `docs/reports/0549-phase5-higher-level-async-control-family-comparison.md`
+  - `docs/reports/0550-phase5-higher-level-async-control-authority-serial-threshold.md`
+  - `docs/reports/0551-review-phase5-higher-level-async-control-family-comparison-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。
