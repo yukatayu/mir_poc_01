@@ -78,6 +78,8 @@ Every report should contain, in this order:
 - repo-scoped skill `discord-report` を使う task では、実装・コマンド実行・ファイル編集を始める前に `python3 .agents/skills/discord-report/scripts/discord_notify.py begin --cwd .` を 1 回実行し、通知を送らずに差分基準だけを記録すること。
 - 短い task では途中通知を送らず、終了時だけを対象にすること。
 - 長い task では、自然な区切りがあり、かつ前回通知からおおむね 1 時間以上空いたときだけ `progress` を送ること。
+- user が **連続した task package をまとめて自走してほしい** と依頼した場合は、各 package 完了時点を自然な区切りとして扱い、1 時間未満でも `progress` を送ってよい。
+- 上の連続 task 依頼では、Discord 通知だけで済ませず、user にも各 package close ごとの簡潔な中間報告を返すこと。
 - `complete` は、その user 依頼への最終返答を返す直前に 1 回だけ送ること。途中報告、質問待ち、追加調査継続中には使わないこと。
 - `begin` があるときは task-scoped の差分を使い、`begin` がなくても Git 差分が取れるなら `変更量(参考)` を出し、どちらも取れないときだけ差分欄を出さないこと。
 - 通知失敗は主作業の失敗にしない。Webhook は repo 直下の `.codex-discord/config.local.json` に保存し、commit しないこと。
@@ -149,6 +151,7 @@ Every report should contain, in this order:
 ## review と task close の運用
 
 - task はできるだけ内部で閉じる。中途で user に何度も返さない。
+- ただし、user が連続 task の自走を依頼している場合は、task package の close ごとに brief intermediate report を返し、次に進む package を短く明示すること。
 - self-check、focused diff review、local validation を先に行う。
 - reviewer はむやみに何度も呼ばず、最後に 1 回だけ長めに待つのを基本にする。
 - 必要なら task 内部で narrow-scope re-review を行ってよい。

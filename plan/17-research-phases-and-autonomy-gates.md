@@ -62,7 +62,7 @@
 ### Phase 5 — static analysis / type / theorem prover / async-control boundary
 
 - 主眼: small decidable core、proof boundary、protocol verifier boundary、runtime policy boundary
-- 現在地: `specs/examples/126...284` までで current package close、**next promoted line は minimal-public-checker-boundary-ready verifier-handoff-surface comparison**
+- 現在地: `specs/examples/126...284` までで current package close、**immediate next line は minimal-public-checker-boundary-ready verifier-handoff-surface comparison**。Phase close 読みには verifier handoff / proof-model-check handoff closeout がまだ要る
 - 重さ: とても重い
 - autonomy gate:
   - docs-first inventory と theorem-line threshold comparison は **self-driven**
@@ -71,7 +71,7 @@
 ### Phase 6 — actual parser / checker / runtime commitment
 
 - 主眼: actual parser subset、public checker boundary、runtime / host / artifact API
-- 現在地: 未着手
+- 現在地: entry criteria visible / actual public crate path は未着手
 - 重さ: 重い
 - autonomy gate: **後段依存**
 
@@ -84,44 +84,46 @@
 
 ## 現在の主線
 
-いま repo の主線は、次の 3 本である。
+いま repo の主線は、次の 4 本である。
 
-1. **Phase 5 later reopen の current promoted line**
+1. **Phase 5 verifier handoff gate**
    - minimal-public-checker-boundary-ready verifier-handoff-surface comparison
-2. **checkpoint / maintenance tail**
-   - Phase 0 / 1 / 2 の drift suppression
-   - Phase 4 / 5 checkpoint close 済み package の mirror 維持
-3. **Phase 4 later reopen candidate**
-   - authority handoff / provider binding / activation frontier の concrete pressureが出たときだけ reopen
+2. **Phase 3 reopen for Phase 6 front-half**
+   - minimal parser subset freeze
+   - parser-to-checker reconnect freeze
+3. **Phase 1 / 2 / 4 / 5 closeout sweep**
+   - self-driven / current-recommendation scope を phase-complete snapshot へ揃える
+4. **Phase 6 front-half actualization**
+   - `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ compile-ready minimal PoC の first tranche
 
-Phase 3 は current checkpoint では **reserve path** として残し、later pressure が出たときだけ reopen 候補にする。
+Phase 3 は長く reserve path だったが、Phase 6 front-half へ実際に入るなら reopen が必要である。
 
 ## immediate execution order
 
-1. **Phase 5 later reopen** として minimal-public-checker-boundary-ready verifier-handoff-surface comparison を扱う
-2. 同じ task の中で **cross-phase checkpoint maintenance** を行う
-3. Phase 4 current package は checkpoint close を維持する
-4. detached validation loop residual は practical need が出たときだけ扱う
-5. Phase 3 reserve path は later pressure が出るまで reopen しない
+1. **Phase 5 verifier handoff gate** として minimal-public-checker-boundary-ready verifier-handoff-surface comparison を扱う
+2. **Phase 3 reopen** として minimal parser subset freeze / parser-to-checker reconnect freeze を扱う
+3. **Phase 1 / 2 / 4 / 5 closeout sweep** を順に進める
+4. **Phase 6 front-half actual parser / checker / runtime first tranche** を actualize する
+5. 同じ task 群の中で checkpoint / mirror maintenance を継続する
 
 ## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- Phase 5 checker-cluster matrix line の docs-first comparison
+- Phase 5 verifier handoff surface の docs-first comparison
+- Phase 3 minimal parser subset / reconnect freeze の narrow comparison
 - checkpoint maintenance
 - shared-space の docs-first boundary comparison
 
 次は勝手に finalization しない。
 
 - final parser grammar
-- public checker API
 - actual external proof / protocol verifier contract
 - shared-space の final activation / authority / auth / consistency / fairness catalog
 - higher-layer application contract
 
 ## 現在の判断
 
-- **current promoted line は Phase 5 minimal-public-checker-boundary-ready verifier-handoff-surface comparison** と読むのが自然である。
-- **Phase 4 は current package close、Phase 3 は reserve path** と読むのが自然である。
+- **current immediate line は Phase 5 minimal-public-checker-boundary-ready verifier-handoff-surface comparison** と読むのが自然である。
+- **Phase 3 は Phase 6 front-half のために reopen 準備済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

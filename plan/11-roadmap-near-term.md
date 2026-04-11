@@ -6,108 +6,94 @@
 ここに書く step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
 current immediate execution order は `plan/17-research-phases-and-autonomy-gates.md` と `progress.md` の phase section を優先する。
-この文書は snapshot として、**current promoted line / checkpoint close / next reopen point** を短く保つ。
+この文書は snapshot として、**Phase 1〜5 closeout と Phase 6 front-half compile-ready gate** を短く保つ。
 
 ## current reading
 
-- Phase 0 / 1 / 2 は maintenance tail である。
-- Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
-- Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...284` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、checker-side では minimal checker-cluster row core、fixture evidence attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs`、public checker payload schema は `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper、public checker API は `checker_subject + public_checker_payload_schema_ref` docs-only read relation まで docs-first に切れており、その次段では public checker entry criteria を docs-only minimal API fixed + source-backed family-facade command-surface pressure に留め、そのさらに次段では public checker command surface を `command_surface_kind + family_facade_command_refs + public_checker_api_ref` minimal family-facade bundle、shared output contract を `output_contract_kind + checker_cluster_name + checker_status + public_checker_payload_schema_ref` minimal summary bundle、public checker boundary を `boundary_kind + public_checker_command_surface_ref + shared_output_contract_ref` docs-only parser-front bundle に留める。detached loop `smoke-*` wrapper と `static gate artifact:` path line、shared generic entry、final parser grammar、verifier handoff surface は still later に残す。**next promoted line は `minimal-public-checker-boundary-ready verifier-handoff-surface comparison`** である。
-- shared-space finalization と final parser / public checker boundary は repo 全体では強い open question だが、current promoted line の直前 blocker ではない。
+- Phase 1 は closeout 前である。semantic core は安定しているが、invariants / notation / proof-obligation wording の最終 sweep はまだ残る。
+- Phase 2 は closeout 前である。parser-free PoC、detached validation loop、fixture authoring baseline は成立済みで、残りは compile gate / retention policy / docs mirror closeout に寄る。
+- Phase 3 は reopen 準備済みである。stage 1 / 2 / 3 parser spike の private evidence はあるが、`mir-ast` public crate は placeholder skeleton のままである。
+- Phase 4 は `specs/examples/121...125` までで current package close である。self-driven current recommendation closeout と user-spec-required final catalog の切り分けをもう一段明示したい。
+- Phase 5 は `specs/examples/126...284` までで current package close であり、immediate next line は **`minimal-public-checker-boundary-ready verifier-handoff-surface comparison`** である。
+- Phase 6 front-half の compile-ready minimal PoC は、docs / parser-free harness / test-only parser spike まではあるが、`mir-ast` / `mir-runtime` public crate の actual compile path はまだ薄い。
 
 ## いまから数 task の主眼
 
-近い数 task の目的は、Phase 0 / 1 / 2 の closeout baseline を壊さずに、Phase 5 の current promoted line を theorem-line の先ではなく small decidable core / checker cluster 側で narrow に進めることである。
-
-- first checker cut の 6 cluster を docs-only matrix としてどこまで stable に見せ、row core と evidence attachment をどこで切るかを比較する
-- actual public checker API / final type system を早く既成事実化しない
-- Phase 4 / Phase 2 / Phase 3 の checkpoint line を drift させない
+近い数 task の目的は、Phase 5 の current package を Phase 6 front-half actualization に接続できるところまで narrow に閉じ、その前提として Phase 3 reserve path を reopen し、Phase 1 / 2 / 4 / 5 の self-driven scope を phase-complete snapshot まで揃えることである。
 
 ## 次に自走で進める順番
 
-### 1. minimal-public-checker-boundary-ready verifier-handoff-surface comparison を Phase 5 の current promoted line として扱う
+### 1. Phase 5 verifier handoff surface
 
-- theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` で止め、low-level memory-order family は still later candidate に残す
-- そのうえで、first checker cut の 6 cluster を docs-only checker-cluster matrix として見せる line は `coverage_state` で止め、actual checker payload family を `payload_family_kind + source_refs`、checker payload row family を `payload_family_ref + row_family_kind`、checker payload row detail を `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body を `row_body` variant-local slot bundle、checker payload supported kind summary を `payload_row_family_ref + supported_kind_scope + supported_kind_refs`、public checker payload schema を `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper、public checker API を `checker_subject + public_checker_payload_schema_ref` docs-only read relation、public checker entry criteria を docs-only minimal API fixed + source-backed family-facade command-surface pressure、public checker command surface を `command_surface_kind + family_facade_command_refs + public_checker_api_ref` minimal family-facade bundle、shared output contract を `output_contract_kind + checker_cluster_name + checker_status + public_checker_payload_schema_ref` minimal summary bundle、public checker boundary を `boundary_kind + public_checker_command_surface_ref + shared_output_contract_ref` docs-only parser-front bundle に留めた current package を前提に、verifier handoff surface をどこまで narrow に切るべきかを整理する
+- public checker boundary の次段として verifier handoff surface をどこまで narrow に切るかを比較する
+- final parser grammar、actual external schema、generic shared entry は still later に残す
 - rough weight: 中
 - rough 所要: 1〜3 task / 2〜5日
 
-### 2. cross-phase checkpoint maintenance を並走する
+### 2. Phase 3 minimal parser subset freeze
 
-- `Documentation.md`、`plan/`、`progress.md`、`tasks.md`、research abstract の drift を抑える
-- checkpoint close 済み package の current promoted line が読める状態を保つ
-- rough weight: 低〜中
-- rough 所要: 0.5〜1日 / checkpoint ごと
+- actual parser first tranche に上げる accepted cluster / reject cluster / retention floor を固定する
+- `mir-ast/tests/support/current_l2_stage*` private helper と future public parser API の境界を明示する
+- rough weight: 重め
+- rough 所要: 2〜4 task / 4〜8日
 
-### 3. Phase 4 current package は checkpoint close として維持する
+### 3. Phase 3 -> 5 parser-to-checker reconnect freeze
 
-- authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison は `specs/examples/121...125` までで current package close とみなしてよい
-- stronger split や final catalog は、authority handoff / provider binding / activation frontier の concrete pressure が出たときだけ reopen 候補に残す
-- rough weight: 低〜中
-- rough 所要: 0〜1 task / drift 時のみ
+- parser subset と first checker cut を reconnect し、Phase 6 checker line の minimal bridge を固定する
+- rough weight: 中
+- rough 所要: 1〜3 task / 2〜5日
 
-### 4. detached validation loop は maintenance mode に戻す
+### 4. Phase 1 / 2 / 4 / 5 closeout sweep
 
-- current self-driven friction reduction は checkpoint close とみなし、`reference update / bless` は final path policy / retention policy と接続する later candidate に残す
-- rough weight: 低
-- rough 所要: 0〜1 task
+- Phase 1 semantics / invariants / notation closeout
+- Phase 2 parser-free PoC / detached loop closeout
+- Phase 4 shared-space self-driven closeout
+- Phase 5 proof / protocol / runtime-policy handoff closeout
+- rough weight: 中〜重
+- rough 所要: 6〜12 task / 2〜4週
 
-### 5. Phase 3 reserve path は later pressure が出たときだけ reopen する
+### 5. Phase 6 front-half actual parser / checker / runtime first tranche
 
-- actual parser / public checker pressure
-- Phase 5 inventory からの強い接続 need
-- runtime / proof mirror need の増加
-
-が出たときだけ reopen する。
+- `mir-ast` minimal parser carrier
+- `mir-semantics` / `mir-runtime` minimal compile path
+- compile-ready local gate
+- rough weight: 重い
+- rough 所要: 4〜7 task / 1〜3週
 
 ## rough step estimate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| minimal-public-checker-boundary-ready verifier-handoff-surface comparison | 1〜3 task | current promoted line |
-| cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
-| Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
-| detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
-| Phase 3 reserve path reopen 条件整理 | 0〜2 task | later pressure 時のみ |
+| verifier handoff surface comparison | 1〜3 task | current immediate gate |
+| minimal parser subset freeze | 2〜4 task | Phase 6 front-half parser gate |
+| parser-to-checker reconnect freeze | 1〜3 task | checker line reconnect gate |
+| Phase 1 / 2 / 4 / 5 closeout sweep | 6〜12 task | phase-complete snapshot を作る |
+| Phase 6 front-half compile-ready minimal PoC | 4〜7 task | actual code path first tranche |
 
 ## いま見えている later blocker / open question
 
-current Phase 5 promoted line と checkpoint maintenance は引き続き self-driven に進めてよく、次の論点は後段 finalization の判断材料として保持する。
+### 1. actual parser subset の public boundary
 
-### 1. shared-space finalization
+- stage 1 / 2 / 3 selected subset だけで十分か
+- request head / wider clause suite / richer diagnostics まで広げるか
+- current recommendation は **selected subset だけを先に actualize** である
 
-- activation family、authority placement、consistency catalog、fairness / RNG trust model、control-plane stronger split はまだ finalization しない
-- current recommendation は `tasks.md` と `plan/12-open-problems-and-risks.md` を優先する
+### 2. theorem / model-check tool binding
 
-### 2. final parser grammar / public checker boundary
+- tool-neutral export で一旦 close するか
+- theorem side / model-check side の concrete tool first cut をどこで選ぶか
+- current recommendation は **boundary freeze の後で narrow に選ぶ** である
 
-- companion notation は維持しつつ、minimal parser subset だけ later pressure 時に narrow に public 化する lineを保つ
+### 3. Phase 4 をどこまで完了扱いにするか
 
-### 3. actual type / theorem prover / protocol verifier actualization
-
-- current lineは inventory と theorem-side retained bridge comparison に留める
-- richer notebook payload / second consumer pressure finalization はまだ後段である
-
-## いまの bottleneck
-
-- `fixture authoring / elaboration` の独立 bottleneck
-- shared-space final catalog を早く固定しすぎないこと
-- parser / checker public boundary を premature に開かないこと
-- theorem-line retained bridge を actual API と混同しないこと
-
-## 近い将来の sequencing
-
-1. Phase 5 later reopen の promoted line を進める
-2. 同じ task の中で mirror drift を抑える
-3. Phase 4 current package は checkpoint close を維持する
-4. Phase 2 residual は practical need が出たときだけ扱う
-5. Phase 3 reserve path は later pressure が出るまで reopen しない
+- self-driven current recommendation close で十分か
+- final activation / authority / fairness catalog まで要るか
+- current recommendation は **前者** である
 
 ## 今の working assumption
 
 - current L2 semantics は大きく動かさない
-- parser-free PoC は継続利用する
-- detached validation loop は non-production helper として維持する
-- shared-space の current working subset は final catalog ではない
-- theorem-line retained bridge は symbolic threshold comparison を基調に扱い、minimal actual external contract field と actual exported / consumer-specific contract finalization を混同しない
+- parser-free PoC は current baseline として維持する
+- actual parser / checker / runtime first tranche は non-production minimal cut に留める
+- shared-space final catalog は user-spec-required item として immediate gate から外す
+- proof / model-check line は boundary freeze 後に narrow に actualize する

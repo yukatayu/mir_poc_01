@@ -41,14 +41,19 @@
 
 ## 現在のフェーズ
 
-現在の主フェーズは次である。
+現在の主フェーズは、単なる drift suppression だけではなく、
+**Phase 1〜5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入るための gate を揃える段階**
+と読むのが自然である。
 
-1. current L2 semantics の drift 抑制
-2. companion notation の整理
-3. parser-free PoC helper stack の責務境界調整
-4. long-term repository memory の外在化
+具体的には次が主線である。
 
-つまり、広い新機能追加ではなく、**意味論・notation・検証基盤・文書構造を揃えるフェーズ**にある。
+1. Phase 5 verifier handoff surface の凍結
+2. Phase 3 reserve path の reopen による minimal parser subset / first checker reconnect freeze
+3. Phase 1 / 2 / 4 / 5 closeout sweep
+4. `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path の準備
+
+つまり、広い production 実装へ進む前に、
+**意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
 
 phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-autonomy-gates.md` を参照する。
 
@@ -56,17 +61,17 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- current L2 notation のさらなる polishing
-- representative fixtures の追加と drift regression の充実
-- parser をまだ書かずに進められる helper / fixture / explanation boundary の整理
-- parser 導入前に何を最低限固定するかの棚卸し
+- verifier handoff surface の narrow comparison
+- minimal parser subset と first checker reconnect の freeze
+- parser-free PoC / detached validation loop / semantics / shared-space current recommendation の closeout sweep
+- actual parser / checker / runtime first tranche に上げる surface の棚卸し
 
 ### その次のフェーズ
 
-- parser 境界の導入準備
-- richer host interface の最小方針整理
-- trace / audit serialization の独立化検討
-- static analysis workstream の入口設計
+- `mir-ast` の minimal parser carrier actualization
+- `mir-semantics` / `mir-runtime` の minimal compile path actualization
+- proof / model-check handoff の first tranche を tool-neutral か concrete tool first cut へ落とす比較
+- richer host interface の actual widening を still later に残したまま、compile-ready checkpoint を閉じる
 
 ### さらに先のフェーズ
 

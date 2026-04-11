@@ -12,6 +12,8 @@
 | fallback intuition drift | semantics / notation | 継続中 | outer-longer-lifetime wrapper と誤読しやすい | prose、fixture、notation 比較で drift を明示 |
 | notation の outer/inner 誘発 | notation | 継続中 | nested 直感が chain semantics を上書きする | explicit edge-row form を維持 |
 | final parser grammar 未固定 | syntax | OPEN | syntax を早く決めすぎると semantics を拘束する | companion notation に留める |
+| actual parser / checker / runtime public crate の薄さ | implementation / phase transition | 継続中 | docs / test-only spike は進んでも、`mir-ast` / `mir-runtime` public crate が placeholder のままだと Phase 6 front-half compile path が見かけより遠い | verifier handoff surface と minimal parser subset を先に凍結し、その後に non-production first tranche だけを actualize する |
+| formal tool binding 未選定 | proof / model-check workflow | OPEN / later Phase 6 blocker | theorem prover / model checker の concrete tool を早く決めすぎると parser/checker surface が逆流し、逆に決めないままだと compile-ready checkpoint の formal gate が曖昧になる | Task 1〜9 では tool-neutral relation / boundary freeze を優先し、Task 10 直前で narrow に選ぶ |
 | review infrastructure の返答遅延 | process | 継続中 | task close が reviewer 依存で滞る | 最後に 1 回長く待ち、必要なら retry 1 回、なお無理なら local evidence を report に残す |
 | machine-readable catalog / manifest を今は入れないこと | architecture | current 方針 | hard-coded catalog と externalization 比較が再燃しやすい | current L2 では comparison 止まりと明記 |
 | path canonicalization | helper / packaging | OPEN | selector / single-fixture / sidecar discovery の長期互換性に影響 | current L2 では minimal behavior のみ保持 |

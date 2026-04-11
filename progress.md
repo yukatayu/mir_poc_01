@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-11 19:31 JST
+最終更新: 2026-04-11 20:22 JST
 
 ## この文書について
 
@@ -15,34 +15,44 @@
 
 ## 現在の要約
 
-- **current L2 semantics** は、current mainline を進めるには十分安定している。
-- **Phase 0 / 1 / 2** は maintenance tail である。parser-free PoC、detached validation loop、fixture 実務の入口は成立しており、主眼は drift suppression と residual maintenance に移っている。
-- **Phase 3** は reserve path である。stage 1 / 2 / 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったが、current promoted line ではなく、later pressure が出たときだけ reopen する。
-- **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは整理済みで、final catalog はまだ固定しない。
-- **Phase 5** は `specs/examples/126...284` までで current package close である。theorem-side retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs`、public checker payload schema は `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper、public checker API は `checker_subject + public_checker_payload_schema_ref` docs-only read relation、public checker entry criteria は docs-only minimal API fixed + source-backed family-facade command-surface pressure、public checker command surface は `command_surface_kind + family_facade_command_refs + public_checker_api_ref` minimal family-facade bundle、shared output contract は `output_contract_kind + checker_cluster_name + checker_status + public_checker_payload_schema_ref` minimal summary bundle、public checker boundary は `boundary_kind + public_checker_command_surface_ref + shared_output_contract_ref` docs-only parser-front bundle に留めた。detached loop `smoke-*` wrapper と `static gate artifact:` path line、shared generic entry、final parser grammar、verifier handoff surface は still later に残す current first choice を fixed しており、**next promoted line** は `minimal-public-checker-boundary-ready verifier-handoff-surface comparison` に置いている。
-- current main bottleneck は semantics の大崩れではなく、**shared-space final catalog**、**final parser / public checker boundary**、**actual type / proof / protocol verifier actualization timing** である。これらは repo 全体では強い open question だが、current promoted line の直前 blocker ではなく、Phase 5 の docs-first narrow comparison と checkpoint maintenance は引き続き self-driven に進められる。
+- **current L2 semantics** は、Phase 6 前半の minimal compile-ready PoC に入るための semantic floor としては十分安定している。
+- **Phase 0 / 1 / 2** は broad mainline では closeout 寄りに入っている。parser-free PoC、detached validation loop、fixture authoring の operational baseline は成立済みであり、残りは drift suppression と closeout audit である。
+- **Phase 3** は、長く reserve path だったが、Phase 6 前半へ実際に入るなら reopen が必要である。stage 1 / 2 / 3 の parser spike evidence は private / test-only にある一方、`mir-ast` public crate はまだ placeholder skeleton のままである。
+- **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは source-backed だが、Phase close と呼ぶには self-driven closeout と user-spec-required final catalog の切り分けをもう一段明示したい。
+- **Phase 5** は `specs/examples/126...284` までで current package close である。theorem-side retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current stop line にし、checker-side では public checker boundary を `boundary_kind + public_checker_command_surface_ref + shared_output_contract_ref` docs-only parser-front bundle に留める current cut まで進んでいる。ここから Phase 6 前半へ入る immediate next line は **`minimal-public-checker-boundary-ready verifier-handoff-surface comparison`** である。
+- **実装面の現在地** は uneven である。`mir-semantics` には parser-free current L2 minimal interpreter と harness があり、`cargo test -p mir-semantics --test current_l2_minimal_interpreter -- --list` で 46 tests、`cargo test -p mir-ast --test current_l2_stage1_parser_spike -- --list` で 14 tests、`cargo test -p mir-ast --test current_l2_stage2_try_rollback_spike -- --list` で 3 tests を確認できる。一方で `mir-ast` / `mir-runtime` / `mir-lsp` の public `src/lib.rs` は placeholder skeleton であり、actual parser / checker / runtime compile path はまだ薄い。
+- current main bottleneck は semantics の大崩れではなく、**verifier handoff surface の凍結**、**actual parser subset の凍結**、**formal tool binding 前の proof / model-check handoff 整理**、**Phase 6 front-half compile path actualization** である。
+
+## compile-ready PoC の rough 読み
+
+| 目標 | rough 進捗 | rough 残量 | 補足 |
+|---|---:|---|---|
+| parser-free current L2 PoC | 90%+ | maintenance closeout 数 package | `mir-semantics` 主線はすでに compile / test 可能 |
+| Phase 6 前半 compile-ready minimal actual PoC | 25% 前後 | 10 package 前後 / 4〜8週 | docs / test-only spike / parser-free harness はあるが public crates actualization はこれから |
 
 ## 研究フェーズ（大局）
 
 | Phase | rough % | 主眼 | 現在位置 | 重さ | 自走可否 | 補足 |
 |---|---:|---|---|---|---|---|
 | Phase 0 | 94% | repository memory / decision boundary | maintenance | 低い | 自走可能 | `specs/` / `plan/` / report / snapshot の整合維持 |
-| Phase 1 | 87% | current L2 semantics stabilization | 終盤 | 中 | 自走可能 | mainline semantics drift は narrow regression 中心 |
-| Phase 2 | 96% | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | 入口は成立、残りは bless/update など policy-dependent residual |
-| Phase 3 | 83% | parser boundary / first checker cut | reserve path | 中〜やや重い | 後段依存 | private staged spike と reconnect freeze threshold までは整理済み |
-| Phase 4 | 64% | shared-space / membership / practical example boundary | checkpoint close | 重い | 一部自走可能 | `121...125` までは current package close。final catalog は user spec / later pressure 依存 |
-| Phase 5 | 98% | static analysis / type / theorem prover / async-control boundary | current package close | とても重い | 自走可能 | `126...284` まで current package close。next promoted line は minimal-public-checker-boundary-ready verifier-handoff-surface comparison |
-| Phase 6 | 8% | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | final public boundary はまだ固定しない |
+| Phase 1 | 90% | current L2 semantics stabilization | closeout 前 | 中 | 自走可能 | semantic core は安定。残りは invariants / notation / proof-obligation sweep |
+| Phase 2 | 96% | parser-free PoC / detached validation loop | closeout 前 | 中 | 自走可能 | mainline は成立。残りは compile gate / retention policy closeout |
+| Phase 3 | 84% | parser boundary / first checker cut | reopen 準備済み | 中〜やや重い | 自走可能 | private staged spike はある。Phase 6 前半のために reserve path を reopen する段階 |
+| Phase 4 | 68% | shared-space / membership / practical example boundary | self-driven closeout 前 | 重い | 一部自走可能 | `121...125` は current package close。final catalog は user spec / later pressure 依存 |
+| Phase 5 | 90% | static analysis / type / theorem prover / async-control boundary | closeout 前 | とても重い | 自走可能 | `126...284` package close の先に verifier handoff / proof-model-check handoff closeout が残る |
+| Phase 6 | 12% | actual parser / checker / runtime commitment | entry criteria visible | 重い | 後段依存 | parser-free harness と test-only spike はあるが public crates actualization はまだ薄い |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
-1. **Phase 5 later reopen**
-   - minimal-public-checker-boundary-ready verifier-handoff-surface comparison を next promoted line に置く。
-2. **cross-phase checkpoint maintenance**
-   - `Documentation.md`、`plan/`、`tasks.md`、`progress.md`、research abstract の drift を抑える。
-3. **Phase 4 later reopen candidate**
-   - authority handoff / provider binding / activation frontier の concrete pressure が出たときだけ reopen する。
+1. **Phase 5 verifier-handoff gate**
+   - `minimal-public-checker-boundary-ready verifier-handoff-surface comparison` を immediate next line に置く。
+2. **Phase 3 reopen for Phase 6 front-half**
+   - minimal parser subset freeze と parser-to-checker reconnect freeze を取りに行く。
+3. **Phase 1 / 2 / 4 / 5 closeout sweep**
+   - self-driven scope を phase-complete と読める snapshot まで揃える。
+4. **Phase 6 front-half actualization**
+   - `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ compile-ready minimal PoC へ入る。
 
 ## いま自走で進めてよい範囲
 
@@ -50,6 +60,7 @@
 
 - current L2 semantics の narrow regression
 - parser-free PoC / detached validation loop の maintenance residual
+- Phase 3 minimal parser subset freeze / parser-to-checker reconnect freeze
 - Phase 5 checker-cluster matrix / evidence attachment line の docs-first comparison
 - shared-space の docs-first boundary comparison と practical example 整理
 - checkpoint close 済み package の drift suppression
@@ -59,7 +70,6 @@
 - final parser grammar
 - public checker API
 - richer host interface の全面 actualization
-- Phase 3 reserve path の promoted reopen
 - actual type / theorem prover / protocol verifier integration
 
 ### 要仕様確認
@@ -79,8 +89,8 @@
 | parser-free PoC execution stack | 90% | 85% | 98% | 着手可能 | runtime / bundle / batch / selection / profile は揃っている |
 | detached export / validation loop | 98% | 97% | 99% | 着手可能 | current self-driven friction reduction は checkpoint close |
 | fixture authoring / elaboration 実務 | 97% | 98% | 99% | 着手可能 | template / scaffold / smoke convenience は強い |
-| parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | reserve path。later pressure 時だけ reopen |
-| first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は freeze threshold まで整理済み |
+| parser boundary / staged parser spike | 88% | 81% | 86% | 着手可能 | Phase 6 前半に向けて minimal subset freeze を reopen する段階 |
+| first checker cut / helper-local compare family | 89% | 79% | 88% | 着手可能 | reconnect subline は freeze threshold まで整理済みで、次は actual parser gate と接続する |
 | shared-space / dynamic membership boundary | 83% | 76% | 12% | 一部自走可能 | `121...125` まで current package close |
 | static analysis / type / theorem prover / async-control boundary | 99% | 98% | 35% | 着手可能 | `126...284` まで current package close。next は minimal-public-checker-boundary-ready verifier-handoff-surface comparison |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
@@ -99,13 +109,15 @@
 
 ## 次に進めるべき task
 
-1. **Phase 5 later reopen** として `minimal-public-checker-boundary-ready verifier-handoff-surface comparison` を扱う
-2. その task close の中で mirror sweep を同時に行い、checkpoint drift を抑える
-3. Phase 4 は current package close を維持し、stronger split は concrete pressure が出たときだけ reopen する
+1. **Phase 5 verifier-handoff gate** として `minimal-public-checker-boundary-ready verifier-handoff-surface comparison` を扱う
+2. その次に **Phase 3 reopen** として minimal parser subset freeze / parser-to-checker reconnect freeze を扱う
+3. その後に **Phase 1 / 2 / 4 / 5 closeout sweep** を順に進め、self-driven scope を phase-complete snapshot へ揃える
+4. 最後に **Phase 6 front-half** の actual parser / checker / runtime minimal PoC を compile-ready checkpoint まで actualize する
 
 ## 作業ログ（簡潔）
 
 - 注記: この欄は **recent log** として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-11 20:22 JST — `tasks.md` を全面書き直し、Phase 1〜5 closeout と Phase 6 front-half compile-ready minimal PoC までの ordered package map を fixed した。`mir-semantics` の parser-free compile evidence と `mir-ast` / `mir-runtime` placeholder 状態を踏まえ、actual compile-ready PoC は rough 25% / 10 package 前後 / 4〜8週と読む snapshot に更新した。
 - 2026-04-09 13:20 JST — detached validation loop の second friction tranche として `compare-fixture-aggregates` を追加し、single-fixture aggregate 同士の compare を noisy な full-vs-single contrast から分離した。次の friction は reference update / longer compare triage 側に寄ることを確認した。
 - 2026-04-10 08:44 JST — stage 3 request / predicate / attachment branch の current snapshot を整理し、Phase 3 を reserve path として読む phase gate を固定した。next は shared-space の identity / auth / admission / fairness line を narrow に比較する段階。
 - 2026-04-10 09:19 JST — Phase 5 theorem-line later package を `archive_bless_update_policy_ref` まで current first choice に伸ばし、next later reopen を retained archive payload comparison に置いた。Phase 5 は current package close と読める状態になった。
