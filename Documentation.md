@@ -15,7 +15,7 @@
 - 最も強い設計上の焦点は、意味論、境界、不変条件、統合点にある。
 - いくつかの実装 skeleton は、将来の作業整理をしやすくするためだけに存在している。
 - current L2 については、parser-free PoC 基盤と helper stack がかなり進んでおり、bundle / aggregate / static gate を含む detached validation loop の non-production 入口まで到達している。長期参照用の repository memory は `plan/` に整理している。
-- Phase 5 theorem-line は current package を `specs/examples/126...226` まで伸ばし、retained bridge を `retained_payload_body_materialization_theorem_export_authority_transition_stage_family` まで narrow に伸ばしている。authority-serial transition line では minimal contract row、owner-slot detail、symbolic stage family までを current first choice に入れ、next promoted line は minimal-authority-transition-stage-family-ready authority-transition-stage-sequence-shape comparison に置く。
+- Phase 5 theorem-line は current package を `specs/examples/126...228` まで伸ばし、retained bridge を `retained_payload_body_materialization_theorem_export_authority_transition_stage_sequence` まで narrow に伸ばしている。authority-serial transition line では minimal contract row、owner-slot detail、symbolic stage family、actual ordered stage sequence までを current first choice に入れ、next promoted line は minimal-authority-transition-stage-sequence-ready stage-local-obligation-family comparison に置く。
 
 ## Decision level 要約
 
@@ -82,6 +82,7 @@ flowchart LR
 12. higher-level async-control family の current first cut を `authority_serial_transition_family` に置く comparison と、その symbolic retained bridge threshold は `specs/examples/219-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-higher-level-async-control-family-comparison.md` と `specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md`
 13. authority-serial transition line を family marker から minimal contract row、さらに owner-slot detail へどこまで narrow に actualize してよいかは `specs/examples/221-current-l2-theorem-line-authority-serial-transition-family-ready-authority-serial-transition-contract-comparison.md`、`specs/examples/222-current-l2-theorem-line-authority-serial-transition-contract-ready-minimal-authority-serial-contract-threshold.md`、`specs/examples/223-current-l2-theorem-line-minimal-authority-serial-contract-ready-authority-serial-row-detail-comparison.md`、`specs/examples/224-current-l2-theorem-line-authority-serial-row-detail-ready-authority-owner-ref-threshold.md`
 14. authority-serial transition line の owner-slot detail の次段として、symbolic stage family をどこまで retained bridge に actualize してよいかは `specs/examples/225-current-l2-theorem-line-authority-owner-ref-ready-authority-transition-stage-family-comparison.md` と `specs/examples/226-current-l2-theorem-line-authority-transition-stage-family-ready-minimal-authority-transition-stage-family-threshold.md`
+15. authority transition line の symbolic stage family の次段として、actual ordered stage sequence をどこまで retained bridge に actualize してよいかは `specs/examples/227-current-l2-theorem-line-minimal-authority-transition-stage-family-ready-authority-transition-stage-sequence-shape-comparison.md` と `specs/examples/228-current-l2-theorem-line-authority-transition-stage-sequence-shape-ready-minimal-authority-transition-stage-sequence-threshold.md`
 11. phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
 - その後、必要な subsystem に進む
 12. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`

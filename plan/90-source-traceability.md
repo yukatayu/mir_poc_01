@@ -271,6 +271,8 @@
   - `specs/examples/224-current-l2-theorem-line-authority-serial-row-detail-ready-authority-owner-ref-threshold.md`
   - `specs/examples/225-current-l2-theorem-line-authority-owner-ref-ready-authority-transition-stage-family-comparison.md`
   - `specs/examples/226-current-l2-theorem-line-authority-transition-stage-family-ready-minimal-authority-transition-stage-family-threshold.md`
+  - `specs/examples/227-current-l2-theorem-line-minimal-authority-transition-stage-family-ready-authority-transition-stage-sequence-shape-comparison.md`
+  - `specs/examples/228-current-l2-theorem-line-authority-transition-stage-sequence-shape-ready-minimal-authority-transition-stage-sequence-threshold.md`
   - `docs/reports/0371-shared-space-catalog-working-subset-comparison.md`
 
 ### 2026-04-10 theorem-line emitted artifact threshold addendum
