@@ -12,3 +12,4 @@ coverage/
 旧資料_*
 diff_*.md
 
+.codex-discord/
