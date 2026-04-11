@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-11 17:07 JST
+最終更新: 2026-04-11 17:46 JST
 
 ## この文書について
 
@@ -19,7 +19,7 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。parser-free PoC、detached validation loop、fixture 実務の入口は成立しており、主眼は drift suppression と residual maintenance に移っている。
 - **Phase 3** は reserve path である。stage 1 / 2 / 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは整理済みで、final catalog はまだ固定しない。
-- **Phase 5** は `specs/examples/126...272` までで current package close である。theorem-side retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs` まで docs-first に切れており、**next promoted line** は `minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison` に置いている。
+- **Phase 5** は `specs/examples/126...274` までで current package close である。theorem-side retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs`、public checker payload schema は `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper まで docs-first に切れており、**next promoted line** は `minimal-public-checker-payload-schema-ready public-checker-api comparison` に置いている。
 - current main bottleneck は semantics の大崩れではなく、**shared-space final catalog**、**final parser / public checker boundary**、**actual type / proof / protocol verifier actualization timing** である。これらは repo 全体では強い open question だが、current promoted line の直前 blocker ではなく、Phase 5 の docs-first narrow comparison と checkpoint maintenance は引き続き self-driven に進められる。
 
 ## 研究フェーズ（大局）
@@ -31,14 +31,14 @@
 | Phase 2 | 96% | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | 入口は成立、残りは bless/update など policy-dependent residual |
 | Phase 3 | 83% | parser boundary / first checker cut | reserve path | 中〜やや重い | 後段依存 | private staged spike と reconnect freeze threshold までは整理済み |
 | Phase 4 | 64% | shared-space / membership / practical example boundary | checkpoint close | 重い | 一部自走可能 | `121...125` までは current package close。final catalog は user spec / later pressure 依存 |
-| Phase 5 | 97% | static analysis / type / theorem prover / async-control boundary | current package close | とても重い | 自走可能 | `126...272` まで current package close。next promoted line は minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison |
+| Phase 5 | 97% | static analysis / type / theorem prover / async-control boundary | current package close | とても重い | 自走可能 | `126...274` まで current package close。next promoted line は minimal-public-checker-payload-schema-ready public-checker-api comparison |
 | Phase 6 | 8% | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | final public boundary はまだ固定しない |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
 1. **Phase 5 later reopen**
-   - minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison を next promoted line に置く。
+   - minimal-public-checker-payload-schema-ready public-checker-api comparison を next promoted line に置く。
 2. **cross-phase checkpoint maintenance**
    - `Documentation.md`、`plan/`、`tasks.md`、`progress.md`、research abstract の drift を抑える。
 3. **Phase 4 later reopen candidate**
@@ -82,7 +82,7 @@
 | parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | reserve path。later pressure 時だけ reopen |
 | first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は freeze threshold まで整理済み |
 | shared-space / dynamic membership boundary | 83% | 76% | 12% | 一部自走可能 | `121...125` まで current package close |
-| static analysis / type / theorem prover / async-control boundary | 99% | 98% | 34% | 着手可能 | `126...272` まで current package close。next は minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison |
+| static analysis / type / theorem prover / async-control boundary | 99% | 98% | 34% | 着手可能 | `126...274` まで current package close。next は minimal-public-checker-payload-schema-ready public-checker-api comparison |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様がまだ足りない |
 
@@ -99,7 +99,7 @@
 
 ## 次に進めるべき task
 
-1. **Phase 5 later reopen** として `minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison` を扱う
+1. **Phase 5 later reopen** として `minimal-public-checker-payload-schema-ready public-checker-api comparison` を扱う
 2. その task close の中で mirror sweep を同時に行い、checkpoint drift を抑える
 3. Phase 4 は current package close を維持し、stronger split は concrete pressure が出たときだけ reopen する
 
@@ -172,3 +172,4 @@
 - 2026-04-11 16:25 JST — Phase 5 checker-side current promoted line として `specs/examples/269...270` を追加し、checker payload row body を `row_body` variant-local slot bundle まで narrow に actualize した。next promoted line は minimal-checker-payload-row-body-ready checker-payload-supported-kind-summary comparison に切り替わり、Phase 5 は `126...270` まで current package close と読める状態になった。
 - 2026-04-11 16:36 JST — Phase 5 checker-side current promoted line として `specs/examples/271...272` を追加し、checker payload supported kind summary を `payload_row_family_ref + supported_kind_scope + supported_kind_refs` minimal bundle まで narrow に actualize した。next promoted line は minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison に切り替わり、Phase 5 は `126...272` まで current package close と読める状態になった。
 - 2026-04-11 17:07 JST — current snapshot audit を行い、Phase 5 の current promoted line は引き続き `minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison` と読め、shared-space finalization と final parser / public checker boundary は later blocker / open question として mirror 文書側で明示するのが自然だと確認した。
+- 2026-04-11 17:46 JST — Phase 5 checker-side current promoted line として `specs/examples/273...274` を追加し、public checker payload schema を `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper まで narrow に actualize した。next promoted line は minimal-public-checker-payload-schema-ready public-checker-api comparison に切り替わり、Phase 5 は `126...274` まで current package close と読める状態になった。
