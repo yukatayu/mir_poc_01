@@ -544,6 +544,10 @@
   - Phase 3 reopen line の次段として、minimal parser subset freeze の accepted cluster を first checker cut へ reconnect するとき、stage 1 summary と stage 2 structural contract のどこまでを current bridge に含めるべきかを比較する補助文書。
 - `specs/examples/290-current-l2-parser-to-checker-reconnect-freeze-ready-minimal-parser-to-checker-reconnect-freeze-threshold.md`
   - Phase 3 reopen line の次段として、parser-to-checker reconnect freeze の docs-first shape を `reconnect_kind + parser_subset_freeze_ref + checker_floor_refs + retained_helper_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/291-current-l2-parser-to-checker-reconnect-freeze-ready-phase1-semantics-closeout-comparison.md`
+  - Phase 3 reopen line fixed 後の次段として、Phase 1 semantics closeout を semantic redesign ではなく invariant bridge と notation boundary の narrow closeout bundle としてどこまで切るべきかを比較する補助文書。
+- `specs/examples/292-current-l2-phase1-semantics-closeout-ready-minimal-phase1-semantics-closeout-threshold.md`
+  - Phase 1 closeout の minimal docs-first shape を `closeout_kind + core_semantics_refs + invariant_bridge_refs + notation_status_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

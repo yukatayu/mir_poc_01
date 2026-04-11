@@ -32,7 +32,7 @@
 ### Phase 1 — current L2 semantics stabilization
 
 - 主眼: fallback / `lease` / guarded option chain / `TryFallback` / `AtomicCut` の安定化
-- 現在地: 終盤
+- 現在地: self-driven closeout fixed
 - 重さ: 中
 - autonomy gate: **self-driven**
 
@@ -88,17 +88,17 @@
 
 いま repo の主線は、次の 3 本である。
 
-1. **Phase 1 / 2 / 4 / 5 closeout sweep**
+1. **Phase 2 / 4 / 5 closeout sweep**
    - self-driven / current-recommendation scope を phase-complete snapshot へ揃える
 2. **Phase 6 front-half actualization**
    - `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ compile-ready minimal PoC の first tranche
 
-Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。
+Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。
 
 ## immediate execution order
 
-1. **Phase 1 semantics / invariants / notation final sweep** を immediate line として扱う
-2. **Phase 2 / 4 / 5 closeout sweep** を順に進める
+1. **Phase 2 parser-free PoC / detached loop closeout** を immediate line として扱う
+2. **Phase 4 / 5 closeout sweep** を順に進める
 3. **Phase 6 front-half actual parser / checker / runtime first tranche** を actualize する
 4. 同じ task 群の中で checkpoint / mirror maintenance を継続する
 
@@ -106,7 +106,7 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 次は self-driven に比較を続けてよい。
 
-- Phase 1 / 2 / 4 / 5 closeout sweep
+- Phase 2 / 4 / 5 closeout sweep
 - checkpoint maintenance
 - shared-space の docs-first boundary comparison
 - compile-ready first tranche に必要な crate-local surface inventory
@@ -120,6 +120,6 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 ## 現在の判断
 
-- **current immediate line は Phase 1 semantics / invariants / notation final sweep** と読むのが自然である。
-- **Phase 3 は Phase 6 front-half のための self-driven freeze を fixed 済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
+- **current immediate line は Phase 2 parser-free PoC / detached loop closeout** と読むのが自然である。
+- **Phase 1 と Phase 3 は Phase 6 front-half のための self-driven entry criteria を fixed 済み、Phase 4 は self-driven closeout 前** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

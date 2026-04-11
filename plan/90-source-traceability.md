@@ -130,6 +130,19 @@
   - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`
   - `docs/reports/0602-phase5-public-checker-boundary-package.md`
 
+## 2026-04-11 Phase 1 closeout addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase1-current-l2-semantics-stabilization.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/291-current-l2-parser-to-checker-reconnect-freeze-ready-phase1-semantics-closeout-comparison.md`
+  - `specs/examples/292-current-l2-phase1-semantics-closeout-ready-minimal-phase1-semantics-closeout-threshold.md`
+  - `docs/reports/0607-phase1-semantics-closeout-package.md`
+- `plan/04-core-semantics-current-l2.md` と `plan/14-glossary-and-boundary-rules.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/09-invariants-and-constraints.md`
+  - `specs/12-decision-register.md`
+  - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
+  - `specs/examples/291-current-l2-parser-to-checker-reconnect-freeze-ready-phase1-semantics-closeout-comparison.md`
+  - `specs/examples/292-current-l2-phase1-semantics-closeout-ready-minimal-phase1-semantics-closeout-threshold.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。

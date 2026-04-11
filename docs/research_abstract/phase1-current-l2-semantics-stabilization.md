@@ -22,11 +22,16 @@ Phase 1 は、current L2 の semantics core を
 ```text
 chain ref = writer
   fallback delegated_writer
+    @ lineage(writer -> delegated_writer)
   fallback readonly
+    @ lineage(delegated_writer -> readonly)
 ```
 
 これは「外側 wrapper が入れ子になる」のではなく、
 **同じ chain の候補列を左から右へ降格する**と読む。
+current closeout では explicit edge-row family を正本にし、
+この hanging continuation を polished first choice、
+inline `fallback successor @ lineage(...)` を short companion shorthand として残している。
 
 したがって、途中で一度弱い候補へ落ちた後に強い候補へ戻ることはない。
 
@@ -77,6 +82,7 @@ try {
 ## この phase で得たもの
 
 - representative example を安定して読める semantics core
+- `specs/09` invariants と Phase 5 proof-obligation wording の narrow bridge
 - prose drift を抑える 기준
 - parser-free PoC が依存できる意味論土台
 
@@ -88,6 +94,8 @@ try {
 
 つまり、Phase 1 は「意味を先に固定する」phase であり、
 「全部の surface や proof 方法を決める」phase ではない。
+closeout で fixed したのは semantics core、invariant bridge、notation family boundary までであり、
+final parser grammar、full type system、actual theorem / model-check contract は still later に残る。
 
 ## 次 phase へ渡したもの
 

@@ -126,6 +126,22 @@
 - current L2 settled judgment
 - rollback / `atomic_cut` があっても earlier option へ戻らない
 
+### checker floor
+
+- local / structural / decidable floor として current checker / helper が先に discharge する範囲
+- same-lineage floor、missing option structure、capability strengthening prohibition、`try` / `atomic_cut` structural floor を含む
+
+### residual proof obligation
+
+- checker floor の後にも global law 名として external boundary に残りうる obligation
+- 代表例は `canonical_normalization_law / no_re_promotion` と `rollback_cut_non_interference / hidden_rollback_absence`
+
+### explicit edge-row family
+
+- current L2 companion notation の settled family boundary
+- A2 hanging lineage continuation は polished first choice、A1 inline row は companion-equivalent shorthand
+- `lineage(...)` の最終 token / punctuation は未決定
+
 ### machine-check
 
 - helper / fixture / tests が exact compare する範囲

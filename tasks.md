@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-11 21:12 JST
+最終更新: 2026-04-11 22:24 JST
 
 ## この文書について
 
@@ -12,7 +12,7 @@
 
 ## 現在の読み
 
-- **Phase 1** の current L2 semantics は、Phase 6 前半へ入るための semantic floor としては十分安定している。ただし、phase close と呼ぶには invariants / proof obligation wording / notation drift の最終 sweep がまだ要る。
+- **Phase 1** の current L2 semantics は、`specs/examples/291...292` により self-driven closeout fixed と読んでよい。semantic core 自体は変えず、invariants / proof-obligation wording / notation boundary の narrow closeout を source-backed に閉じ、final parser grammar / final type system / actual external schema は later に残している。
 - **Phase 2** の parser-free PoC と detached validation loop は、`mir-semantics` 側で compile / test 可能な主線をすでに持っている。残りは bless / retention / compile gate のような closeout package である。
 - **Phase 3** は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。minimal parser subset は stage 1 + stage 2 structural floor、first checker reconnect は stage 1 summary + stage 2 try/rollback structural contract までを bridge にし、stage 3 request / predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残している。
 - **Phase 4** は `specs/examples/121...125` までで current package close だが、Phase 完了と呼ぶには「current recommendation で self-driven に閉じる範囲」と「user spec required な final catalog」を tasks / progress / plan でさらに明確化する closeout package が要る。
@@ -24,9 +24,9 @@
 | 目標 | 現在地 | rough 進捗 | 追加で必要な package | rough 所要 | 注記 |
 |---|---|---:|---|---|---|
 | parser-free current L2 PoC | 実在し、compile / test evidence あり | 90%+ | maintenance closeout だけ | 1〜2 package / 2〜4日 | `mir-semantics` 主線はすでに回る |
-| Phase 6 前半 compile-ready minimal actual PoC | docs / test-only spike / parser-free harness / reconnect freeze までは揃っているが、public crates は未 actualize | **30% 前後** | 下の Task 1〜7 | **7 package 前後 / 3〜6週** | current L2 subset に scope を絞った rough estimate |
+| Phase 6 前半 compile-ready minimal actual PoC | docs / test-only spike / parser-free harness / reconnect freeze と Phase 1 closeout までは揃っているが、public crates は未 actualize | **35% 前後** | 下の Task 1〜6 | **6 package 前後 / 3〜6週** | current L2 subset に scope を絞った rough estimate |
 
-### 進捗 30% 前後の根拠
+### 進捗 35% 前後の根拠
 
 - 進んでいるもの
   - semantic core、invariants、representative fixtures、parser-free harness、detached validation loop、Phase 3 staged parser spike の private evidence、minimal parser subset freeze、parser-to-checker reconnect freeze。
@@ -40,26 +40,16 @@
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 1 closeout | semantics / invariants / notation final sweep | current L2 closeout audit と remaining issue の future 切り分けが終わる | 中 | 1〜2 task / 2〜4日 | 自走可能 |
-| 2 | Phase 2 closeout | parser-free PoC / detached loop closeout | compile gate、retention / bless policy、authoring flow の current rule を固定 | 中 | 1〜2 task / 2〜4日 | 自走可能 |
-| 3 | Phase 4 closeout | shared-space self-driven closeout | current recommendation package を close し、user-spec-required final catalog を明示分離 | 重め | 2〜4 task / 4〜8日 | 一部自走可能 |
-| 4 | Phase 5 closeout | proof / protocol / runtime-policy handoff closeout | theorem / model-check / runtime-policy 側へ送る relation slice と stop line を固定 | 重い | 2〜4 task / 4〜8日 | 自走可能 |
-| 5 | Phase 6 前半 | actual parser / AST carrier first tranche | `mir-ast` に non-production minimal parser carrier を actualize し compile させる | 重い | 2〜4 task / 4〜7日 | 後段依存 |
-| 6 | Phase 6 前半 | actual checker / runtime skeleton first tranche | `mir-semantics` / `mir-runtime` をまたぐ minimal compile path を actualize する | 重い | 2〜4 task / 4〜7日 | 後段依存 |
-| 7 | Phase 6 前半 | compile-ready PoC verification and formal hook | cargo gate、smoke、proof/model-check first tranche を揃えて checkpoint close | 重い | 1〜3 task / 3〜6日 | 後段依存 |
+| 1 | Phase 2 closeout | parser-free PoC / detached loop closeout | compile gate、retention / bless policy、authoring flow の current rule を固定 | 中 | 1〜2 task / 2〜4日 | 自走可能 |
+| 2 | Phase 4 closeout | shared-space self-driven closeout | current recommendation package を close し、user-spec-required final catalog を明示分離 | 重め | 2〜4 task / 4〜8日 | 一部自走可能 |
+| 3 | Phase 5 closeout | proof / protocol / runtime-policy handoff closeout | theorem / model-check / runtime-policy 側へ送る relation slice と stop line を固定 | 重い | 2〜4 task / 4〜8日 | 自走可能 |
+| 4 | Phase 6 前半 | actual parser / AST carrier first tranche | `mir-ast` に non-production minimal parser carrier を actualize し compile させる | 重い | 2〜4 task / 4〜7日 | 後段依存 |
+| 5 | Phase 6 前半 | actual checker / runtime skeleton first tranche | `mir-semantics` / `mir-runtime` をまたぐ minimal compile path を actualize する | 重い | 2〜4 task / 4〜7日 | 後段依存 |
+| 6 | Phase 6 前半 | compile-ready PoC verification and formal hook | cargo gate、smoke、proof/model-check first tranche を揃えて checkpoint close | 重い | 1〜3 task / 3〜6日 | 後段依存 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 1 semantics / invariants / notation closeout sweep
-
-- 目的
-  - current L2 semantics stabilization を close 扱いできる状態にする。
-- 完了条件
-  - fallback / `lease` / guarded option chain / `atomic_cut` / `try-fallback` の settled reading が cross-doc で drift していない。
-  - `specs/09` の invariants と Phase 5 proof-obligation wording の接点が整理されている。
-  - final parser grammar や final type system を勝手に確定していない。
-
-### Task 2. Phase 2 parser-free PoC / detached loop closeout
+### Task 1. Phase 2 parser-free PoC / detached loop closeout
 
 - 目的
   - parser-free PoC を「mainline companion baseline」として close する。
@@ -68,7 +58,7 @@
   - bless / retention / reference-update の current rule が narrow に明示されている。
   - `mir-semantics` の parser-free minimal interpreter と detached loop の責務境界が plan/docs/report で揃っている。
 
-### Task 3. Phase 4 shared-space self-driven closeout
+### Task 2. Phase 4 shared-space self-driven closeout
 
 - 目的
   - current recommendation を前提に、Phase 4 の self-driven portion を close する。
@@ -77,7 +67,7 @@
   - final activation / authority / auth / consistency / fairness catalog は **user spec required** として tasks / progress / plan/12 に明示されている。
   - Phase 6 current L2 compile-ready PoC に不要な shared-space finalization を immediate blocker にしていない。
 
-### Task 4. Phase 5 proof / protocol / runtime-policy handoff closeout
+### Task 3. Phase 5 proof / protocol / runtime-policy handoff closeout
 
 - 目的
   - theorem prover / protocol verifier / runtime policy へ送る relation slice と stop line を Phase 5 closeout package として固定する。
@@ -86,7 +76,7 @@
   - verifier handoff surface、theorem-side retained bridge、protocol/model-check side inventory が 1 本の sequencing として読める。
   - actual external schema / actual emitter / low-level memory-order family は still later と明示されている。
 
-### Task 5. Phase 6 前半 actual parser / AST carrier first tranche
+### Task 4. Phase 6 前半 actual parser / AST carrier first tranche
 
 - 目的
   - `mir-ast` public crate を placeholder から一段 actualize し、minimal parser carrier を compile-ready にする。
@@ -95,7 +85,7 @@
   - existing stage 1 / 2 / 3 test-only evidence を壊さず、representative fixtures か inline source smoke が通る。
   - generic parser、span-rich diagnostics、final grammar、full request head parse は still later として切れている。
 
-### Task 6. Phase 6 前半 actual checker / runtime skeleton first tranche
+### Task 5. Phase 6 前半 actual checker / runtime skeleton first tranche
 
 - 目的
   - `mir-semantics` / `mir-runtime` をまたいで、parsed subset -> checker floor -> runtime skeleton の compile path を成立させる。
@@ -104,7 +94,7 @@
   - `mir-runtime` が placeholder ではなく、current L2 subset を受ける non-production skeleton と smoke entry を持つ。
   - parser-free interpreter と actual path の boundary が明記され、両者を混同していない。
 
-### Task 7. Phase 6 前半 compile-ready PoC verification and formal hook
+### Task 6. Phase 6 前半 compile-ready PoC verification and formal hook
 
 - 目的
   - compile-ready PoC を checkpoint close 扱いできる verification package を揃える。
@@ -116,8 +106,8 @@
 
 ## 方針決定が必要な blocker / open question
 
-- **現時点で、Task 1〜4 を止める immediate blocker は 0 件** と読むのが自然である。
-- ただし、Task 5〜7 へ進む時点では次の decision point が効いてくる。
+- **現時点で、Task 1〜3 を止める immediate blocker は 0 件** と読むのが自然である。
+- ただし、Task 4〜6 へ進む時点では次の decision point が効いてくる。
 
 ### Blocker 1. actual parser subset の public boundary
 
@@ -149,20 +139,5 @@
   3. model-check side を先に concrete tool へ結ぶ
   4. theorem / model-check の 2 本を同時に concrete tool へ結ぶ
 - current recommendation / 見解
-  - **Task 1〜6 の後で 1 か 2+3 を narrow に選ぶ** のを推奨。
+  - **Task 1〜5 の後で 1 か 2+3 を narrow に選ぶ** のを推奨。
   - 現時点では public boundary がまだ薄いため、先に tool を固定すると surface が逆流しやすい。
-
-### Blocker 3. Phase 4 をどこまで「完了」と呼ぶか
-
-- 概要
-  - shared-space の self-driven closeout と、user-specific final catalog を分けるか。
-- 何に影響するか
-  - Phase 4 完了判定
-  - Phase 6 着手タイミング
-  - tasks / progress の wording
-- 主要な選択肢
-  1. self-driven current recommendation close で Phase 4 完了と読む
-  2. final activation / authority / fairness catalog まで必須とみなす
-- current recommendation / 見解
-  - **1 を推奨**
-  - `plan/17` の autonomy gate と整合し、current L2 compile-ready PoC の immediate blocker を増やさない。

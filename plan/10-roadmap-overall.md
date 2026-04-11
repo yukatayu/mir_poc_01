@@ -42,14 +42,13 @@
 ## 現在のフェーズ
 
 現在の主フェーズは、単なる drift suppression だけではなく、
-**Phase 3 reconnect freeze を entry criteria として固定したうえで、Phase 1 / 2 / 4 / 5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入る段階**
+**Phase 3 reconnect freeze と Phase 1 closeout を fixed entry criteria としたうえで、Phase 2 / 4 / 5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入る段階**
 と読むのが自然である。
 
 具体的には次が主線である。
 
-1. Phase 1 / 2 / 4 / 5 closeout sweep
-2. Phase 5 proof / protocol / runtime-policy handoff closeout
-3. `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path の準備
+1. Phase 2 / 4 / 5 closeout sweep
+2. `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path の準備
 
 つまり、広い production 実装へ進む前に、
 **意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
@@ -60,7 +59,7 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- parser-free PoC / detached validation loop / semantics / shared-space current recommendation の closeout sweep
+- parser-free PoC / detached validation loop / shared-space current recommendation の closeout sweep
 - actual parser / checker / runtime first tranche に上げる surface の棚卸し
 - Phase 3 reconnect freeze の fixed snapshot を保ったまま Phase 6 front-half の crate-local contract を actualization する
 
@@ -132,7 +131,7 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 次の段階へ進むには、少なくとも次が必要である。
 
-- current L2 fallback / `lease` / chain reading の安定
+- current L2 fallback / `lease` / chain reading と invariant bridge の安定
 - current companion notation の十分な説明可能性
 - parser-free PoC で representative fixtures を継続的に回せること
 - helper stack の責務境界が大きく崩れていないこと

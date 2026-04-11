@@ -53,6 +53,16 @@ current repo の representative family を matrix にすると、最低限次の
 **core checker の compare row と external handoff row は同一ではない**
 ということである。
 
+Phase 1 closeout reading としては、fallback chain row の
+`canonical normalization law / no re-promotion` は
+`specs/09-invariants-and-constraints.md` の invariants 8 / 9 を受けた
+residual proof-side discharge 名であり、
+`try` / `atomic_cut` row の
+`rollback-cut non-interference / hidden rollback absence` は
+同じく invariant 11 を受けた residual proof-side discharge 名である。
+core checker 側は structural / decidable floor を先に discharge し、
+global law 名そのものは external boundary に残りうる。
+
 ## 比較観点
 
 1. current `checked_reasons` / `checked_reason_codes` / `reason_codes` mirror を premature に final contract 化しないか

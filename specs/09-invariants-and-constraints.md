@@ -18,12 +18,12 @@
 
 7. linear resource は continuation trick や patching trick によって duplication されてはならない。
 8. lifetime degradation は monotone である。
-9. primitive fallback を超えて完全に形式化された後の preference / fallback chain は、曖昧さのない monotone form へ正規化されなければならない。
+9. primitive fallback を超えて完全に形式化された後の preference / fallback chain は、曖昧さのない monotone form へ正規化されなければならない。current L2 では、Phase 5 proof boundary 側の `canonical normalization law / no re-promotion` row は、この invariant の residual proof-side discharge 名として読む。
 
 ## failure / rollback の不変条件
 
 10. failure は意味論上明示的であり続けるべきである。
-11. rollback は、compensation へ変換されない限り finalizing cut を越えてはならない。Mir-0 では、これは current `place` 内の rollback が先行する `atomic_cut` を越えられないことを意味する。
+11. rollback は、compensation へ変換されない限り finalizing cut を越えてはならない。Mir-0 では、これは current `place` 内の rollback が先行する `atomic_cut` を越えられないことを意味する。current L2 では、Phase 5 proof boundary 側の `rollback-cut non-interference / hidden rollback absence` row は、この invariant の residual proof-side discharge 名として読む。
 12. rollback 不可能な effect は mark するか、隔離するか、compensate しなければならない。
 
 ## 統合の不変条件

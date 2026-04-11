@@ -107,6 +107,26 @@ current L2 では、同じ logical access path / semantic lineage 上の nested 
 - canonical chain が表すのは優先順と guard / contract / capability
 - 正規化できるのは same-lineage / monotone degradation が成り立つ branch だけ
 
+## checker floor と residual proof obligation
+
+current L2 closeout では、次を分けて読む。
+
+- checker floor
+  - same-lineage floor
+  - capability strengthening prohibition
+  - missing option structure
+  - `try` / `atomic_cut` の structural floor
+- residual proof obligation
+  - `canonical_normalization_law / no_re_promotion`
+  - `rollback_cut_non_interference / hidden_rollback_absence`
+
+重要なのは、global law 名を external boundary に残すからといって、
+semantic invariant 自体が未確定だという意味ではないことである。
+前者は `specs/09` の invariant 8 / 9 / 11 を proof-side / handoff-side でどう呼ぶかの問題であり、
+後者は current L2 semantics の settled judgment である。
+Phase 1 closeout で固定するのはこの橋までであり、
+actual theorem/model-check schema や tool binding までは固定しない。
+
 ## incompatible branch rejection phase
 
 同じ canonical chain に載せられない branch は static rejection 寄りに扱う。
