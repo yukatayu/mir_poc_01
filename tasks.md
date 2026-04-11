@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 01:21 JST
+最終更新: 2026-04-12 01:58 JST
 
 ## この文書について
 
@@ -17,7 +17,7 @@
 - **Phase 3** は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。minimal parser subset は stage 1 + stage 2 structural floor、first checker reconnect は stage 1 summary + stage 2 try/rollback structural contract までを bridge にし、stage 3 request / predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残している。
 - **Phase 4** は `specs/examples/295...296` により self-driven closeout fixed と読んでよい。current package は `specs/examples/121...125` を維持し、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、`delegated_provider_attestation` non-core line、control-plane separated carrier actualization、distributed fairness protocol、final operational realizationは later に残している。
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。verifier handoff surface、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual subject row、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete tool binding、public checker migration、low-level memory-order family は later に残している。
-- **Phase 6 front-half** は parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304` で fixed 済みであり、checkpoint drift suppression / mirror sweep も report-backed に close 済みである。`mir-ast` には stage 1 / stage 2 non-production carrier、`mir-semantics` には program-level static gate / evaluator / host-runner entry と theorem-line整合の formal hook emitter、`mir-runtime` には semantic `Program` と optional parser bridge input を受ける thin `current_l2` skeleton が actualize 済みである。current next line は **Phase 6 next reopen sequencing** である。
+- **Phase 6 front-half** は parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304` で fixed 済みであり、checkpoint drift suppression / mirror sweep も report-backed に close 済みである。`specs/examples/305...306` により next reopen sequencing も fixed 済みであり、immediate line は parser second tranche first、formal side は reserve path と読む。`mir-ast` には stage 1 / stage 2 non-production carrier、`mir-semantics` には program-level static gate / evaluator / host-runner entry と theorem-line整合の formal hook emitter、`mir-runtime` には semantic `Program` と optional parser bridge input を受ける thin `current_l2` skeleton が actualize 済みである。current next line は **Phase 6 parser second tranche attached-slot / predicate-fragment first package** である。
 
 ## PoC compile までの rough estimate
 
@@ -31,7 +31,7 @@
 - 進んでいるもの
   - semantic core、invariants、representative fixtures、parser-free harness、detached validation loop、Phase 3 staged parser spike evidence、minimal parser subset freeze、parser-to-checker reconnect freeze、`mir-ast` stage 1 / stage 2 non-production carrier、`mir-semantics` program-level entry、`mir-runtime` current L2 thin skeleton、selected compile/test/smoke gate、tool-neutral formal hook first tranche、checkpoint drift suppression / mirror sweep。
 - まだ薄いもの
-  - parser second tranche widen の sequencing judgment
+  - parser second tranche first execution package
   - concrete theorem / model-check tool binding
   - final public parser / checker / runtime surface
 
@@ -39,41 +39,41 @@
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 6 次段 | next reopen sequencing | parser second tranche widen と concrete formal tool binding の順序を narrow に決める | 中 | 1 task / 1〜3日 | 自走可能 |
-| 2 | Phase 6 次段 | sequencing judgment の first execution package | Task 1 で選ばれた line の最小 cut を actualize する | 中〜重い | 1〜2 task / 3〜7日 | 自走可能 |
-| 3 | Phase 6 reserve path | non-selected reopen line inventory | 先に選ばなかった line を reserve path として整理する | 中 | 1 task / 1〜3日 | 自走可能 |
+| 1 | Phase 6 次段 | parser second tranche attached-slot / predicate-fragment first package | admit-slot / predicate route の最小 code anchor と verification を actualize する | 中〜重い | 1〜2 task / 3〜7日 | 自走可能 |
+| 2 | Phase 6 reserve path | non-selected formal tool binding inventory | theorem-first / model-check reserve line を整理する | 中 | 1 task / 1〜3日 | 自走可能 |
+| 3 | Phase 6 次段 | parser-side follow-up package sequencing | shared single attachment frame を同梱するか next package に残すかを narrow に決める | 中 | 1 task / 1〜3日 | 自走可能 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 6 次段 next reopen sequencing
+### Task 1. Phase 6 次段 parser second tranche attached-slot / predicate-fragment first package
 
 - 目的
-  - parser second tranche widen と concrete formal tool binding のどちらを先に reopen するかを narrow に決める。
+  - selected parser-side first execution package を admit-slot / predicate route に留めて actualize する。
 - 完了条件
-  - `mir-ast` widen pressure と formal tool binding pressure の entry criteria が docs で比較されている。
-  - first execution package の推奨順が `tasks.md` / `progress.md` / relevant `plan/` に mirror されている。
-  - retained-later line が不要に崩れていない。
+  - stage 3 attached-slot / predicate route の最小 code anchor が `mir-ast` 側に actualize されている。
+  - spec / report / verification が source-backed に揃っている。
+  - `perform head` / clause suite / richer diagnostics 一括 widenを still later に残している。
 
-### Task 2. sequencing judgment の first execution package
+### Task 2. Phase 6 reserve path non-selected formal tool binding inventory
 
 - 目的
-  - Task 1 で選ばれた line の最小 cut を actualize する。
+  - theorem-first concrete binding と model-check line を reserve path として整理し、next reopen 時の friction を下げる。
 - 完了条件
-  - その line に対応する spec / report / verification が source-backed に揃っている。
-  - 非選択側は reserve path として snapshot に残っている。
+  - theorem-first / model-check line の current recommendation が snapshot と relevant `plan/` に mirror されている。
+  - tool-neutral formal hook entry criteria を壊していない。
 
-### Task 3. non-selected reopen line inventory
+### Task 3. Phase 6 次段 parser-side follow-up package sequencing
 
 - 目的
-  - 先に選ばなかった line を reserve path として整理し、次に reopen するときの friction を減らす。
+  - parser-side first package の後に shared single attachment frame を同梱するか、次 package に残すかを narrow に決める。
 - 完了条件
-  - `tasks.md` / `progress.md` / relevant `plan/` に reserve path の読みが残っている。
-  - immediate blocker と later blocker が混線していない。
+  - attached-slot / predicate route の current stop line が snapshot に mirror されている。
+  - perform head / clause suite / richer diagnostics と混線していない。
 
 ## 方針決定が必要な blocker / open question
 
 - **現時点で、Task 1〜3 を止める immediate blocker は 0 件** と読むのが自然である。
-- ただし、current next line では次の sequencing question が効いてくる。
+- ただし、current next line では parser-side package の切り方と reserve path の明示が効いてくる。
 
 ### Blocker 1. actual parser subset の second-tranche widen boundary
 
@@ -84,11 +84,11 @@
   - parser test corpus
   - checker / verifier handoff shape
 - 主要な選択肢
-  1. stage 1 / 2 carrier + current checker/runtime + formal-hook minimum を entry criteria として維持し、stage 3 reconnect は second tranche に回す
+  1. attached-slot / predicate route を next reopen の first line に置く
   2. selected stage 3 / perform head を next reopen の first line に置く
   3. request head / clause suite / richer diagnostics まで一気に広げる
 - current recommendation / 見解
-  - **1 または 2 を sequencing comparison で絞る** のが自然である。
+  - **1 を current first choice に固定し、2 と 3 は later に残す** のが自然である。
   - current checkpoint close を壊さない narrow reopen を維持する。
 
 ### Blocker 2. theorem / model-check formal tool binding
@@ -105,5 +105,5 @@
   3. theorem / model-check の 2 本を同時に concrete tool へ結ぶ
   4. もうしばらく tool-neutral hook を維持し、parser second tranche を先に reopen する
 - current recommendation / 見解
-  - **Task 1 で 1 と 4 の比較から始める** のが自然である。
-  - current checker/runtime surface は intentionally thin なので、tool-neutral hook を entry criteria に保ったまま sequencing を決める方が安全である。
+  - **parser-side first actualization を通したうえで、theorem-first を reserve path として整理する** のが自然である。
+  - current checker/runtime surface は intentionally thin なので、tool-neutral hook を entry criteria に保ったまま reserve wording を整える方が安全である。

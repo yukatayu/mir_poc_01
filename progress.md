@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 01:21 JST
+最終更新: 2026-04-12 01:58 JST
 
 ## この文書について
 
@@ -20,8 +20,8 @@
 - **Phase 3** は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。actual parser first tranche は stage 1 + stage 2 structural floor、first checker reconnect bridge は stage 1 summary + stage 2 try/rollback structural contract に留め、stage 3 request / admit / predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残している。
 - **Phase 4** は `specs/examples/295...296` により self-driven closeout fixed と読んでよい。self-driven current package は `specs/examples/121...125` までで checkpoint close とし、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、`delegated_provider_attestation` non-core line、control-plane separated carrier actualization、distributed fairness protocol、final operational realizationは later に残している。
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。checker-side verifier handoff surface docs-only mixed-row bridge、theorem-side retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later lineを 1 本の closeout bundle に固定し、actual subject row / boundary-specific artifact / actual emitted verifier artifact / concrete tool binding / public checker migration / low-level memory-order family は still later に残している。
-- **Phase 6** は parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304` で fixed 済みであり、checkpoint drift suppression / mirror sweep も close 済みである。`mir-ast` には stage 1 / stage 2 non-production carrier、`mir-semantics` には program-level static gate / evaluator / host-runner entry と theorem-line整合の formal hook emitter、`mir-runtime` には semantic `Program` と optional parser bridge input を受ける non-production `current_l2` thin skeleton が入った。actual parser-to-`Program` lowering、concrete theorem/model-check tool binding、final public crate surfaceは still later に残る。
-- current main bottleneck は semantics の大崩れではなく、**Phase 6 next reopen sequencing** をどこまで narrow に切れるかである。
+- **Phase 6** は parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304` で fixed 済みであり、checkpoint drift suppression / mirror sweep も close 済みである。`specs/examples/305...306` により next reopen sequencing も fixed 済みであり、parser second tranche を first、formal tool binding を reserve に置く current judgmentが source-backed に揃った。`mir-ast` には stage 1 / stage 2 non-production carrier、`mir-semantics` には program-level static gate / evaluator / host-runner entry と theorem-line整合の formal hook emitter、`mir-runtime` には semantic `Program` と optional parser bridge input を受ける non-production `current_l2` thin skeleton が入った。actual parser second-tranche code anchor、concrete theorem/model-check tool binding、final public crate surfaceは still later に残る。
+- current main bottleneck は semantics の大崩れではなく、**Phase 6 parser second tranche attached-slot / predicate-fragment first package** をどこまで narrow に actualize するかである。
 
 ## compile-ready PoC の rough 読み
 
@@ -40,21 +40,21 @@
 | Phase 3 | 93% | parser boundary / first checker cut | self-driven freeze fixed | 中〜やや重い | 自走可能 | `287...290` で subset / reconnect freeze は fixed。later widen は reserve path |
 | Phase 4 | 90% | shared-space / membership / practical example boundary | self-driven closeout fixed | 重い | 一部自走可能 | `121...125` current package と final catalog / later line の境界は fixed。final catalog は user spec 依存 |
 | Phase 5 | 98% | static analysis / type / theorem prover / async-control boundary | self-driven closeout fixed | とても重い | 自走可能 | `297...298` で stop line と retained-later inventory は fixed。actual external contract は later |
-| Phase 6 | 69% | actual parser / checker / runtime commitment | compile-ready checkpoint close fixed | 重い | 自走可能 | `mir-ast` stage 1 / 2 carrier、`mir-runtime` current L2 thin skeleton、tool-neutral formal hook、checkpoint sweepは actualize / close 済み。次は reopen sequencing |
+| Phase 6 | 70% | actual parser / checker / runtime commitment | parser second tranche first package | 重い | 自走可能 | `mir-ast` stage 1 / 2 carrier、`mir-runtime` current L2 thin skeleton、tool-neutral formal hook、next reopen sequencingは fixed 済み。次は attached-slot / predicate route |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
-1. **Phase 6 next reopen sequencing**
-   - parser second tranche widen と concrete formal tool binding の順序を narrow に決める。
-2. **sequencing judgment の first execution package**
-   - Task 1 で選ばれた line の最小 cut を actualize する。
+1. **Phase 6 parser second tranche attached-slot / predicate-fragment first package**
+   - admit-slot / predicate route の最小 code anchor を actualize する。
+2. **Phase 6 reserve formal tool binding inventory**
+   - theorem-first / model-check line を reserve path として整理する。
 
 ## いま自走で進めてよい範囲
 
 ### 着手可能
 
-- Phase 6 next reopen sequencing
+- Phase 6 parser second tranche attached-slot / predicate-fragment first package
 - checkpoint close 済み package の drift suppression
 
 ### 後段依存
@@ -101,12 +101,13 @@
 
 ## 次に進めるべき task
 
-1. **Phase 6 next reopen sequencing** を immediate line として扱う
-2. その次に **sequencing judgment の first execution package** を narrow に行う
+1. **Phase 6 parser second tranche attached-slot / predicate-fragment first package** を immediate line として扱う
+2. その次に **Phase 6 reserve formal tool binding inventory** を narrow に行う
 
 ## 作業ログ（簡潔）
 
 - 注記: この欄は **recent log** として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 01:58 JST — `specs/examples/305...306` を追加し、Phase 6 next reopen sequencing を `sequencing_kind + fixed_entry_criteria_refs + selected_first_reopen_ref + deferred_reopen_refs + guard_refs` minimum に固定した。parser second tranche は attached-slot / predicate route を first line に置き、theorem-first / model-check concrete binding は reserve path に残した。next promoted line は `Phase 6 parser second tranche attached-slot / predicate-fragment first package` に切り替わった。
 - 2026-04-12 01:21 JST — compile-ready checkpoint drift suppression / mirror sweep を閉じ、`Documentation.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5...` / `phase6...`、`plan/00` / `01` / `07` / `10` / `11` / `17` などの stale wording を current line に揃えた。current mainline は `Phase 6 next reopen sequencing` に切り替わった。
 - 2026-04-12 01:04 JST — `specs/examples/303...304` を追加し、Phase 6 compile-ready verification / formal hook を `verification_gate_refs + smoke_gate_refs + formal_hook_shape + source_artifact_refs + validation_refs + retained_later_refs` minimum に固定した。formal hook row core は theorem-line existing cut と同じ `obligation_kind + typed symbolic evidence_refs` に揃え、schema/kind mismatch は fail-closed に止めた。next promoted line は `Phase 6 compile-ready checkpoint drift suppression / mirror sweep` に切り替わった。
 - 2026-04-12 00:42 JST — `specs/examples/301...302` を追加し、Phase 6 checker/runtime first tranche を `skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` minimum に固定した。`mir-semantics` に program-level entry、`mir-runtime/src/current_l2.rs` に thin orchestrator を actualize し、parser bridge mismatch は fail-closed に止めた。next promoted line は `Phase 6 compile-ready verification and formal hook` に切り替わった。

@@ -50,7 +50,7 @@
 1. `mir-ast` stage 1 / stage 2 non-production parser carrier を fixed entry criteria とする
 2. `mir-semantics` / `mir-runtime` をまたぐ non-production checker/runtime first tranche を fixed entry criteria とする
 3. compile-ready verification / formal hook first tranche を fixed entry criteria とする
-4. compile-ready checkpoint close 後の next reopen sequencing を narrow に決める
+4. compile-ready checkpoint close 後の next reopen sequencing を parser second tranche first に fixed し、その first package を narrow に actualize する
 
 つまり、広い production 実装へ進む前に、
 **意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
@@ -61,8 +61,8 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- checkpoint close 後の next reopen sequencing
-- concrete tool binding / parser second tranche の比較開始
+- parser second tranche attached-slot / predicate route first package
+- theorem/model-check concrete binding reserve line の整理
 
 ### その次のフェーズ
 

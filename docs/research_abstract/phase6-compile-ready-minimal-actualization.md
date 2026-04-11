@@ -84,14 +84,17 @@ parser first tranche の actual code anchor は次である。
 
 ## 次の mainline
 
-next mainline は、
-**Phase 6 next reopen sequencing（parser second tranche widen vs concrete formal tool binding）**
+`specs/examples/305...306` により、
+compile-ready checkpoint close 後の next reopen sequencing は parser second tranche first に fixed 済みである。
+
+current mainline は、
+**Phase 6 parser second tranche attached-slot / predicate-fragment first package**
 である。
 
-ここでは compile-ready checkpoint close を entry criteria に、
+ここでは fixed entry criteria を崩さずに、
 
-- parser second tranche widen と concrete formal tool binding のどちらを先に reopen するか
-- next 2〜3 package の execution order
-- retained-later line をどこまで narrow に維持するか
+- admit-slot / predicate route の最小 code anchor
+- theorem-first / model-check concrete binding の reserve wording
+- parser-side follow-up package の stop line
 
 を揃えるのが主眼になる。
