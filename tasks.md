@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-11 16:25 JST
+最終更新: 2026-04-11 16:36 JST
 
 ## この文書について
 
@@ -18,14 +18,14 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。current L2 semantics、parser-free PoC、detached validation loop の mainline は安定しており、drift suppression と residual maintenance が主眼である。
 - **Phase 3** は reserve path である。private staged spike / reconnect freeze threshold までは source-backed に揃っているが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは source-backed に固まっている。
-- **Phase 5** は `specs/examples/126...270` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle まで docs-first に切れており、current promoted line は **`minimal-checker-payload-row-body-ready checker-payload-supported-kind-summary comparison`** に置いている。
+- **Phase 5** は `specs/examples/126...272` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs` まで docs-first に切れており、current promoted line は **`minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison`** に置いている。
 - 現在の主線は、**Phase 5 later reopen の narrow comparison** と **cross-phase checkpoint maintenance** の 2 本である。
 
 ## 次に自走で進める順番と rough estimate
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | current 読み |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 5 後半 | minimal-checker-payload-row-body-ready checker-payload-supported-kind-summary comparison | checker-cluster matrix line を `coverage_state` で止め、actual checker payload family を `payload_family_kind + source_refs`、checker payload row family を `payload_family_ref + row_family_kind`、checker payload row detail を `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body を `row_body` variant-local slot bundle まで切った current package を前提に、supported kind summary をどこまで docs-first に戻すかを narrow に整理する | 中 | 1〜3 task / 2〜5日 | 自走可能 | **current promoted line** |
+| 1 | Phase 5 後半 | minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison | checker-cluster matrix line を `coverage_state` で止め、actual checker payload family を `payload_family_kind + source_refs`、checker payload row family を `payload_family_ref + row_family_kind`、checker payload row detail を `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body を `row_body` variant-local slot bundle、checker payload supported kind summary を `payload_row_family_ref + supported_kind_scope + supported_kind_refs` まで切った current package を前提に、public checker payload schema をどこまで docs-first に開くかを narrow に整理する | 中 | 1〜3 task / 2〜5日 | 自走可能 | **current promoted line** |
 | 2 | cross-phase checkpoint | drift suppression / mirror sweep | `specs/` / `plan/` / `progress.md` / `tasks.md` / research abstract の drift を抑える | 低〜中 | 0.5〜1日 / checkpoint ごと | 自走可能 | closeout package |
 | 3 | Phase 4 後半 reserve path | shared-space later reopen | `control_epoch` first reopen cut、catalog refinement、provider / witness / authority の later compare | 中〜重 | 0〜3 task | 一部自走可能 | concrete pressure が出たときだけ promoted |
 | 4 | Phase 2 maintenance tail | detached validation loop residual | bless / update / retention policy の policy-dependent residual を narrow に扱う | 低 | 0〜1 task | 自走可能 | drift または practical need 時のみ |
@@ -60,10 +60,12 @@
 - `specs/examples/268` で checker payload row detail の minimal shape を `payload_row_family_ref + row_source_ref + row_reason_kind` に留める current first choice を固定した。
 - `specs/examples/269` で checker payload row detail の次段として checker payload row body を docs-first line に切り、`row_body` variant-local slot bundle を current first choice に固定した。
 - `specs/examples/270` で checker payload row body の minimal shape を `row_body` variant-local slot bundle に留める current first choice を固定した。
+- `specs/examples/271` で checker payload row body の次段として checker payload supported kind summary を独立 summary line に切り、`payload_row_family_ref` keyed bundle を current first choice に固定した。
+- `specs/examples/272` で checker payload supported kind summary の minimal shape を `payload_row_family_ref + supported_kind_scope + supported_kind_refs` に留める current first choice を固定した。
 
 #### 次に扱うべき narrow question
 
-- supported kind summary を checker payload side のどの layer に戻すべきか
+- public checker payload schema を checker payload side の current package の後にどこで開くべきか
 
 #### いま自走できる理由
 
@@ -92,7 +94,7 @@
 
 - Phase 2 detached validation loop は checkpoint close。
 - Phase 4 shared-space package は `specs/examples/121...125` で checkpoint close。
-- Phase 5 current package は `specs/examples/126...270` で current package close。
+- Phase 5 current package は `specs/examples/126...272` で current package close。
 
 #### いま自走できる理由
 

@@ -1734,3 +1734,11 @@
   - `specs/examples/270-current-l2-checker-payload-row-body-ready-minimal-checker-payload-row-body-threshold.md`
   - `docs/reports/0590-phase5-checker-payload-row-body-package.md`
   - `docs/reports/0591-review-phase5-checker-payload-row-body-package.md`
+
+### 2026-04-11 phase5 checker payload supported kind summary addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/271-current-l2-minimal-checker-payload-row-body-ready-checker-payload-supported-kind-summary-comparison.md`
+  - `specs/examples/272-current-l2-checker-payload-supported-kind-summary-ready-minimal-checker-payload-supported-kind-summary-threshold.md`
+  - `docs/reports/0592-phase5-checker-payload-supported-kind-summary-package.md`
+  - `docs/reports/0593-review-phase5-checker-payload-supported-kind-summary-package.md`
