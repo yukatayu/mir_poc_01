@@ -428,6 +428,10 @@
   - symbolic stage-local obligation family の次段として actual stage-local obligation row detail をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
 - `specs/examples/232-current-l2-theorem-line-stage-local-obligation-row-detail-ready-minimal-authority-stage-local-obligation-row-detail-threshold.md`
   - stage-local obligation row detail の current first choice を `authority_transition_stage_local_obligation_family_ref + stage_label + stage_local_obligation_kind` に置く threshold を整理する補助文書。
+- `specs/examples/233-current-l2-theorem-line-minimal-authority-stage-local-obligation-row-detail-ready-authority-handoff-epoch-ref-comparison.md`
+  - actual stage-local obligation row detail の次段として symbolic authority handoff epoch ref をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/234-current-l2-theorem-line-authority-handoff-epoch-ref-ready-minimal-authority-handoff-epoch-ref-threshold.md`
+  - authority handoff epoch ref row の current first choice を `authority_transition_stage_local_obligation_row_ref + authority_handoff_epoch_ref` に置く threshold を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

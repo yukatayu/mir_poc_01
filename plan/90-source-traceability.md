@@ -277,6 +277,8 @@
   - `specs/examples/230-current-l2-theorem-line-stage-local-obligation-family-ready-minimal-authority-stage-local-obligation-family-threshold.md`
   - `specs/examples/231-current-l2-theorem-line-minimal-authority-stage-local-obligation-family-ready-stage-local-obligation-row-detail-comparison.md`
   - `specs/examples/232-current-l2-theorem-line-stage-local-obligation-row-detail-ready-minimal-authority-stage-local-obligation-row-detail-threshold.md`
+  - `specs/examples/233-current-l2-theorem-line-minimal-authority-stage-local-obligation-row-detail-ready-authority-handoff-epoch-ref-comparison.md`
+  - `specs/examples/234-current-l2-theorem-line-authority-handoff-epoch-ref-ready-minimal-authority-handoff-epoch-ref-threshold.md`
   - `docs/reports/0371-shared-space-catalog-working-subset-comparison.md`
 
 ### 2026-04-10 theorem-line emitted artifact threshold addendum
