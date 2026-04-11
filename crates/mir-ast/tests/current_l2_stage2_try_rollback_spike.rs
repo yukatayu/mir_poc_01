@@ -1,10 +1,13 @@
 #[path = "support/current_l2_stage2_try_rollback_spike_support.rs"]
 mod current_l2_stage2_try_rollback_spike_support;
 
+use mir_ast::current_l2::{
+    parse_stage2_try_rollback_text,
+};
+
 use current_l2_stage2_try_rollback_spike_support::{
     Stage2TryRollbackFindingRow, Stage2TryRollbackStructuralSummary,
-    load_expected_try_rollback_expectation, parse_stage2_try_rollback_text,
-    summarize_stage2_try_rollback_findings,
+    load_expected_try_rollback_expectation, summarize_stage2_try_rollback_findings,
 };
 
 const E23_INPUT: &str = r#"
@@ -29,6 +32,15 @@ try {
   perform validate_profile_patch on profile_draft
 } fallback {
   perform load_last_snapshot on profile_snapshot
+}
+"#;
+
+const EXTRA_CLOSING_BRACE_AFTER_FALLBACK_INPUT: &str = r#"
+try {
+  perform stage_profile_patch on profile_draft
+} fallback {
+  perform load_last_snapshot on profile_snapshot
+}
 }
 "#;
 
@@ -69,5 +81,16 @@ fn stage2_try_rollback_spike_marks_no_findings_for_atomic_cut_in_try_body() {
             verdict: "no_findings".to_string(),
             findings: Vec::<Stage2TryRollbackFindingRow>::new(),
         }
+    );
+}
+
+#[test]
+fn stage2_try_rollback_spike_rejects_extra_trailing_close_after_fallback() {
+    let error = parse_stage2_try_rollback_text(EXTRA_CLOSING_BRACE_AFTER_FALLBACK_INPUT)
+        .expect_err("stage 2 spike should reject extra trailing close brace");
+
+    assert!(
+        error.contains("unexpected content after fallback close"),
+        "expected extra-close wording, got: {error}"
     );
 }

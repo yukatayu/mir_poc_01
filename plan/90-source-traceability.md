@@ -174,6 +174,22 @@
   - `specs/examples/298-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-minimal-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold.md`
   - `docs/reports/0610-phase5-proof-protocol-runtime-policy-handoff-closeout-package.md`
 
+## 2026-04-12 Phase 6 parser first tranche addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/73-current-l2-first-parser-spike-staging.md`
+  - `specs/examples/79-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md`
+  - `specs/examples/287-current-l2-minimal-verifier-handoff-surface-ready-minimal-parser-subset-freeze-comparison.md`
+  - `specs/examples/288-current-l2-minimal-parser-subset-freeze-ready-minimal-parser-subset-freeze-threshold.md`
+  - `specs/examples/289-current-l2-minimal-parser-subset-freeze-ready-parser-to-checker-reconnect-freeze-comparison.md`
+  - `specs/examples/290-current-l2-parser-to-checker-reconnect-freeze-ready-minimal-parser-to-checker-reconnect-freeze-threshold.md`
+  - `specs/examples/299-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-phase6-actual-parser-ast-carrier-first-tranche-comparison.md`
+  - `specs/examples/300-current-l2-phase6-actual-parser-ast-carrier-first-tranche-ready-minimal-phase6-actual-parser-ast-carrier-first-tranche-threshold.md`
+  - `crates/mir-ast/src/current_l2.rs`
+  - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage2_try_rollback_spike.rs`
+  - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。

@@ -202,20 +202,24 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
   - `CurrentL2Fixture + StaticGateResult -> static gate artifact` の pure transform と carrier struct を持つ shared support helper
   - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
+- `crates/mir-ast/src/current_l2.rs`
+  - Phase 6 front-half parser first tranche の non-production carrier
+  - stage 1 option/chain surface と stage 2 try/fallback structural surface だけを持つ
+  - final parser API ではなく、checker/runtime first tranche へ渡す narrow code anchor に留める
 - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
-  - stage 1 actual parser spike の private support helper
-  - inline text から declaration / chain structural floor だけを parse し、fixture-side subset compare 用 carrier へ thin lowering bridge を渡す
+  - stage 1 parser first tranche の fixture compare / summary support helper
+  - parser 本体は `mir_ast::current_l2` を使い、fixture-side subset compare 用 lowering bridge と reconnect summary だけを担う
   - current widening は `Stage1ReconnectClusters` 3-bool summary contract を保ったまま `e18` / `e20` を focused test へ足す line に留め、helper 自体の contract widening は行わない
-  - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
+  - `mir-ast` test からだけ読む non-production module であり、fixture loader / summary helper を超えて public parser API には入れない
 - `crates/mir-ast/tests/support/current_l2_stage2_try_rollback_spike_support.rs`
-  - stage 2 try/rollback reconnect の private support helper
-  - inline text から single `try { ... } fallback { ... }` block だけを parse し、`checked_try_rollback_structural_*` と同じ helper-local summary carrier へ thin lowering bridge を渡す
-  - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
+  - stage 2 parser first tranche の structural summary support helper
+  - parser 本体は `mir_ast::current_l2` を使い、`checked_try_rollback_structural_*` と同じ helper-local summary carrier だけを担う
+  - `mir-ast` test からだけ読む non-production module であり、summary helper を超えて public parser API には入れない
 - `crates/mir-ast/tests/support/current_l2_stage3_admit_slot_spike_support.rs`
   - stage 3 admit-slot branch の private support helper
   - inline text から declaration-side `admit` attached slot を含む option / chain subset だけを parse し、structural subset compare と `decl_admit_slot.surface_text` retention smoke を支える
   - `mir-ast` test からだけ読む non-production module であり、public parser API や `mir-ast/src/lib.rs` には入れない
-- current parser subset freeze では、stage 1 / stage 2 support helper が Phase 6 front-half actual parser first tranche の accepted floor evidence であり、stage 3 support helper は retained-later floor evidence として扱う
+- current parser subset freeze では、stage 1 / stage 2 accepted floor は `crates/mir-ast/src/current_l2.rs` と stage 1 / stage 2 parser spike tests に actualize 済みであり、stage 3 support helper は retained-later floor evidence として扱う
 - current parser-to-checker reconnect freeze では、stage 1 support helper は `Stage1ReconnectClusters` summary floor、stage 2 support helper は `checked_try_rollback_structural_*` floor をそれぞれ source-backed bridge evidence として扱う
 - stage 3 request / predicate reconnect helper line、`e19` direct target mismatch redesign、`E21` / `E22` runtime contrast は helper stack の current bridge contract には入れず、later reopen line として扱う
 - `scripts/current_l2_diff_detached_artifacts.py`
@@ -242,13 +246,13 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 
 ## parser boundary 側の current splice point
 
-- current parser spike は helper stack 本体へはまだ入れず、`mir-ast` integration test support に留める
-- したがって current helper stack の public chain
+- current parser first tranche は `mir-ast/src/current_l2.rs` に narrow に actualize 済みである
+- ただし actualized したのは stage 1 / stage 2 carrier だけであり、helper stack の public chain
   - fixture schema
   - parser-free interpreter
   - detached validation loop
-  を壊さずに、parser boundary 側の first tranche だけを独立 smoke できる
-  - stage 3 admit-slot branch でも同じ cut を維持し、fixture-side `admit` node や request cluster を current parser spike helper へ持ち込まない
+  を壊さない
+  - stage 3 admit-slot branch でも同じ cut を維持し、fixture-side `admit` node や request cluster を first-tranche carrier へ持ち込まない
   - `smoke-try-rollback-locality` subcommand では、`e22` mismatch 側と `e21` frontier 側を representative contrast pair として既定パス / label 付きでまとめて回す
   - `smoke-static-gate` subcommand では、1 fixture の static gate artifact emit と optional reference compare を 1 command で支える
   - `smoke-try-rollback-structural-checker` subcommand では、1 fixture の static gate artifact emit と dedicated try/rollback structural helper first tranche compare を 1 command で支える

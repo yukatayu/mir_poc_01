@@ -1,10 +1,14 @@
 #[path = "support/current_l2_stage1_parser_spike_support.rs"]
 mod current_l2_stage1_parser_spike_support;
 
+use mir_ast::current_l2::{
+    parse_stage1_program_text,
+};
+
 use current_l2_stage1_parser_spike_support::{
     Stage1FixtureSubset, Stage1ReconnectClusters, load_expected_fixture_subset,
     lower_stage1_chain_decl_to_fixture_chain, lower_stage1_option_decl_to_fixture_option,
-    parse_stage1_program_text, summarize_stage1_reconnect_clusters,
+    summarize_stage1_reconnect_clusters,
 };
 
 const E4_INPUT: &str = r#"
@@ -143,6 +147,15 @@ fn stage1_parser_spike_keeps_decl_guard_slot_surface_text() {
         .expect("writer option should exist");
 
     assert_eq!(writer.decl_guard_slot.surface_text, "expired");
+}
+
+#[test]
+fn stage1_parser_spike_keeps_edge_local_lineage_payload_as_required_slot() {
+    let parsed = parse_stage1_program_text(E7_INPUT).expect("stage 1 spike should parse test input");
+    let lineage = &parsed.chains[0].edges[0].lineage_assertion;
+
+    assert_eq!(lineage.predecessor, "writer");
+    assert_eq!(lineage.successor, "delegated_writer");
 }
 
 #[test]

@@ -47,7 +47,7 @@
 
 具体的には次が主線である。
 
-1. `mir-ast` minimal parser / AST carrier first tranche
+1. `mir-ast` stage 1 / stage 2 non-production parser carrier を fixed entry criteria とする
 2. `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path と formal hook inventory
 
 つまり、広い production 実装へ進む前に、
@@ -59,9 +59,9 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- `mir-ast` の actual parser / AST carrier first tranche
 - `mir-semantics` / `mir-runtime` の minimal compile path actualization
 - compile-ready verification と formal hook の first tranche
+- checkpoint wording と mirror sweep
 
 ### その次のフェーズ
 

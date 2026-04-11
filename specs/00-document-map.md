@@ -18,6 +18,7 @@
 - `docs/research_abstract/`
   - phase ごとの本質的な研究成果だけを短く辿るための condensed summary である。
   - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
+  - current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の condensed summary がある。
 
 ## 規範的な読書順
 
