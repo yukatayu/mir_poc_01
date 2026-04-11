@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-11 12:33 JST
+最終更新: 2026-04-11 12:44 JST
 
 ## この文書について
 
@@ -19,7 +19,7 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。parser-free PoC、detached validation loop、fixture 実務の入口は成立しており、主眼は drift suppression と residual maintenance に移っている。
 - **Phase 3** は reserve path である。stage 1 / 2 / 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは整理済みで、final catalog はまだ固定しない。
-- **Phase 5** は `specs/examples/126...242` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory と theorem-side retained bridge は `retained_payload_body_materialization_theorem_export_handoff_payload_ref` を current first choice に置いており、**next later reopen** は `minimal-handoff-payload-ref-ready handoff-carrier-detail comparison` に置いている。
+- **Phase 5** は `specs/examples/126...244` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory と theorem-side retained bridge は `retained_payload_body_materialization_theorem_export_handoff_carrier_detail` を current first choice に置いており、**next later reopen** は `minimal-handoff-carrier-detail-ready handoff-transport-family comparison` に置いている。
 - current main bottleneck は semantics の大崩れではなく、**shared-space final catalog**、**final parser / public checker boundary**、**actual type / proof / protocol verifier actualization timing** である。
 
 ## 研究フェーズ（大局）
@@ -31,14 +31,14 @@
 | Phase 2 | 96% | parser-free PoC / detached validation loop | 終盤の maintenance tail | 中 | 自走可能 | 入口は成立、残りは bless/update など policy-dependent residual |
 | Phase 3 | 83% | parser boundary / first checker cut | reserve path | 中〜やや重い | 後段依存 | private staged spike と reconnect freeze threshold までは整理済み |
 | Phase 4 | 64% | shared-space / membership / practical example boundary | checkpoint close | 重い | 一部自走可能 | `121...125` までは current package close。final catalog は user spec / later pressure 依存 |
-| Phase 5 | 88% | static analysis / type / theorem prover / async-control boundary | theorem-line later package close | とても重い | 自走可能 | `126...242` まで current package close。next reopen は minimal-handoff-payload-ref-ready handoff-carrier-detail comparison |
+| Phase 5 | 89% | static analysis / type / theorem prover / async-control boundary | theorem-line later package close | とても重い | 自走可能 | `126...244` まで current package close。next reopen は minimal-handoff-carrier-detail-ready handoff-transport-family comparison |
 | Phase 6 | 8% | actual parser / checker / runtime commitment | 未着手 | 重い | 後段依存 | final public boundary はまだ固定しない |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
 1. **Phase 5 later reopen**
-   - minimal-handoff-payload-ref-ready handoff-carrier-detail comparison を next promoted line に置く。
+   - minimal-handoff-carrier-detail-ready handoff-transport-family comparison を next promoted line に置く。
 2. **cross-phase checkpoint maintenance**
    - `Documentation.md`、`plan/`、`tasks.md`、`progress.md`、research abstract の drift を抑える。
 3. **Phase 4 later reopen candidate**
@@ -82,7 +82,7 @@
 | parser boundary / staged parser spike | 88% | 81% | 86% | 後段依存 | reserve path。later pressure 時だけ reopen |
 | first checker cut / helper-local compare family | 89% | 79% | 88% | 後段依存 | reconnect subline は freeze threshold まで整理済み |
 | shared-space / dynamic membership boundary | 83% | 76% | 12% | 一部自走可能 | `121...125` まで current package close |
-| static analysis / type / theorem prover / async-control boundary | 99% | 98% | 24% | 着手可能 | `126...242` まで current package close。next は minimal-handoff-payload-ref-ready handoff-carrier-detail comparison |
+| static analysis / type / theorem prover / async-control boundary | 99% | 98% | 25% | 着手可能 | `126...244` まで current package close。next は minimal-handoff-carrier-detail-ready handoff-transport-family comparison |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様がまだ足りない |
 
@@ -97,7 +97,7 @@
 
 ## 次に進めるべき task
 
-1. **Phase 5 later reopen** として `minimal-handoff-payload-ref-ready handoff-carrier-detail comparison` を扱う
+1. **Phase 5 later reopen** として `minimal-handoff-carrier-detail-ready handoff-transport-family comparison` を扱う
 2. その task close の中で mirror sweep を同時に行い、checkpoint drift を抑える
 3. Phase 4 は current package close を維持し、stronger split は concrete pressure が出たときだけ reopen する
 
@@ -159,4 +159,5 @@
 - 2026-04-11 12:02 JST — Phase 5 theorem-line later reopen として `specs/examples/237` と `238` を追加し、authority transition line を actual handoff witness row detail まで narrow に actualize した。next promoted line は minimal-handoff-witness-row-detail-ready replay-attachment-ref comparison に切り替わり、Phase 5 は `126...238` まで current package close と読める状態になった。
 - 2026-04-11 12:23 JST — Phase 5 theorem-line later reopen として `specs/examples/239` と `240` を追加し、authority transition line を symbolic replay attachment ref まで narrow に actualize した。next promoted line は minimal-replay-attachment-ref-ready handoff-payload-ref comparison に切り替わり、Phase 5 は `126...240` まで current package close と読める状態になった。
 - 2026-04-11 12:33 JST — Phase 5 theorem-line later reopen として `specs/examples/241` と `242` を追加し、authority transition line を symbolic handoff payload ref まで narrow に actualize した。next promoted line は minimal-handoff-payload-ref-ready handoff-carrier-detail comparison に切り替わり、Phase 5 は `126...242` まで current package close と読める状態になった。
+- 2026-04-11 12:44 JST — Phase 5 theorem-line later reopen として `specs/examples/243` と `244` を追加し、authority transition line を minimal handoff carrier detail まで narrow に actualize した。next promoted line は minimal-handoff-carrier-detail-ready handoff-transport-family comparison に切り替わり、Phase 5 は `126...244` まで current package close と読める状態になった。
 - 2026-04-11 11:17 JST — Phase 5 authority-serial transition package の docs validation と local review fallback closeout を完了し、snapshot を `126...226` package close に揃えた。next promoted line は minimal-authority-transition-stage-family-ready authority-transition-stage-sequence-shape comparison のままである。

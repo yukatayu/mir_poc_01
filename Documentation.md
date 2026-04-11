@@ -15,7 +15,7 @@
 - 最も強い設計上の焦点は、意味論、境界、不変条件、統合点にある。
 - いくつかの実装 skeleton は、将来の作業整理をしやすくするためだけに存在している。
 - current L2 については、parser-free PoC 基盤と helper stack がかなり進んでおり、bundle / aggregate / static gate を含む detached validation loop の non-production 入口まで到達している。長期参照用の repository memory は `plan/` に整理している。
-- Phase 5 theorem-line は current package を `specs/examples/126...242` まで伸ばし、retained bridge を `retained_payload_body_materialization_theorem_export_handoff_payload_ref` まで narrow に伸ばしている。authority-serial transition line では minimal contract row、owner-slot detail、symbolic stage family、actual ordered stage sequence、symbolic stage-local obligation family、actual stage-local obligation row detail、symbolic authority handoff epoch ref、symbolic witness-aware handoff family、actual handoff witness row detail、symbolic replay attachment ref、symbolic handoff payload ref までを current first choice に入れ、next promoted line は minimal-handoff-payload-ref-ready handoff-carrier-detail comparison に置く。
+- Phase 5 theorem-line は current package を `specs/examples/126...244` まで伸ばし、retained bridge を `retained_payload_body_materialization_theorem_export_handoff_carrier_detail` まで narrow に伸ばしている。authority-serial transition line では minimal contract row、owner-slot detail、symbolic stage family、actual ordered stage sequence、symbolic stage-local obligation family、actual stage-local obligation row detail、symbolic authority handoff epoch ref、symbolic witness-aware handoff family、actual handoff witness row detail、symbolic replay attachment ref、symbolic handoff payload ref、minimal handoff carrier detail までを current first choice に入れ、next promoted line は minimal-handoff-carrier-detail-ready handoff-transport-family comparison に置く。
 
 ## Decision level 要約
 
@@ -90,43 +90,44 @@ flowchart LR
 20. authority handoff line の symbolic witness-aware handoff family の次段として、actual handoff witness row detail をどこまで retained bridge に actualize してよいかは `specs/examples/237-current-l2-theorem-line-minimal-witness-aware-handoff-family-ready-handoff-witness-row-detail-comparison.md` と `specs/examples/238-current-l2-theorem-line-handoff-witness-row-detail-ready-minimal-handoff-witness-row-detail-threshold.md`
 21. actual handoff witness row detail の次段として、symbolic replay attachment ref をどこまで retained bridge に actualize してよいかは `specs/examples/239-current-l2-theorem-line-minimal-handoff-witness-row-detail-ready-replay-attachment-ref-comparison.md` と `specs/examples/240-current-l2-theorem-line-replay-attachment-ref-ready-minimal-replay-attachment-ref-threshold.md`
 22. symbolic replay attachment ref の次段として、symbolic handoff payload ref をどこまで retained bridge に actualize してよいかは `specs/examples/241-current-l2-theorem-line-minimal-replay-attachment-ref-ready-handoff-payload-ref-comparison.md` と `specs/examples/242-current-l2-theorem-line-handoff-payload-ref-ready-minimal-handoff-payload-ref-threshold.md`
+23. symbolic handoff payload ref の次段として、minimal handoff carrier detail をどこまで retained bridge に actualize してよいかは `specs/examples/243-current-l2-theorem-line-minimal-handoff-payload-ref-ready-handoff-carrier-detail-comparison.md` と `specs/examples/244-current-l2-theorem-line-handoff-carrier-detail-ready-minimal-handoff-carrier-detail-threshold.md`
 - phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
 - その後、必要な subsystem に進む
-23. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
-24. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
-25. parser なしで representative examples を machine-readable に扱う最小 AST fixture schema は `specs/examples/02-current-l2-ast-fixture-schema.md`、fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/`
-26. parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md`
-27. parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md`
-28. parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md`
-29. parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md`
-30. current L2 host stub / fixture runner harness の最小境界は `specs/examples/07-current-l2-host-stub-harness.md`
-31. current L2 host harness が読む machine-readable host plan schema と `.host-plan.json` sidecar 方針は `specs/examples/08-current-l2-host-plan-schema.md`
-32. current L2 fixture と sidecar を 1 組として扱う bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md`
-33. current L2 fixture directory を bundle 群として一括実行する batch runner は `specs/examples/10-current-l2-batch-runner.md`
-34. current L2 batch runner の上に薄く載る bundle selection helper は `specs/examples/11-current-l2-selection-helper.md`
-35. current L2 selection helper の primitive mode を組み合わせる profile helper は `specs/examples/12-current-l2-selection-profiles.md`
-36. current L2 selection profile helper の上に薄く載る small named profile catalog は `specs/examples/13-current-l2-profile-catalog.md`
-37. current L2 named profile catalog を hard-coded table に留めるか、machine-readable asset として比較する整理は `specs/examples/14-current-l2-profile-catalog-externalization.md`
-38. fallback / `lease` の semantic reconciliation と compact syntax candidate comparison は `specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md`
-39. current L2 detached trace / audit artifact の docs-only minimal schema と exact-compare core / explanation の境界は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
-40. detached artifact exporter を narrow に始めるなら `RunReport` / `BundleRunReport` / `BatchRunSummary` のどこを entry に切るべきか、という comparison は `specs/examples/17-current-l2-detached-exporter-entry-comparison.md`
-41. bundle-first detached exporter で `RunReport` payload core と `FixtureBundle` context をどう分け、`host_plan_coverage_failure` をどこに残すか、という docs-only split は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md`
-42. `host_plan_coverage_failure` を current detached artifact では aggregate-only に残しつつ、将来 typed carrier に昇格させるならどの layer が自然か、という比較は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md`
-43. `host_plan_coverage_failure` を将来 bundle failure artifact 側の typed carrier に昇格させるなら、その最小 schema をどう切るかの docs-only refinement は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md`
-44. bundle failure artifact 側の `failure.failure_kind` discriminator-only schema を `BatchRunSummary` aggregate export がどこまで typed に吸うべきか、という narrow comparison は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
-45. aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るかの docs-only refinement は `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
-46. detached exporter chain の current docs-only judgment、bundle-first loop attachment、typed failure / aggregate migration の統合 view は `specs/examples/23-current-l2-detached-export-loop-consolidation.md`
-47. detached validation loop を回すときの aggregate export 接続、artifact 保存先 / path policy、file naming / overwrite policy、compare input discovery の最小 cut は `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md`
-48. detached validation loop の aggregate 側 actual narrow cut、`bundle_failure_kind_counts` と current list anchor の coexistence、aggregate emitter sketch は `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md`
-49. detached validation loop の aggregate compare contract と `compare-aggregates` wrapper の最小 cut は `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
-50. fixture authoring の boilerplate だけを `target/` 下へ切り出す non-production scaffold helper の最小 cut は `specs/examples/27-current-l2-fixture-scaffold-helper.md`
-51. detached validation loop で 1 fixture を bundle emit / optional reference compare / single-fixture aggregate smoke まで 1 command で回す non-production helper 境界は `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md`
-52. final grammar を固定する前に、first parser cut に入れてよい semantic cluster と companion notation に残す cluster を narrow に棚卸しする inventory は `specs/examples/29-current-l2-first-parser-subset-inventory.md`
-53. first parser cut inventory の次段として、current L2 で core checker に入れてよい local / structural judgment と theorem prover / model checker へ残す judgment の切り分けは `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md`
-54. first parser cut inventory を actual parser spike へ送る順序として、chain / declaration structural floor → `try` / rollback structural floor → request / admissibility cluster の checker-led staged spike が current next narrow step である、という sequencing judgment は `specs/examples/73-current-l2-first-parser-spike-staging.md`
-55. Phase 3 current tranche の closeout 後に、self-driven でなお reopen する価値があるかを比較した threshold judgment は `specs/examples/120-current-l2-phase3-self-driven-reopen-threshold.md`
-56. その stage 1 を actual parser spike として切るなら、option declaration core / explicit edge-row family / edge-local lineage metadata / declaration-side guard slot を structural floor に限って受け、guard fragment 自体の parse は later stage に残す current judgment は `specs/examples/74-current-l2-stage1-parser-spike-entry-criteria.md`
-57. stage 1 の declaration-side guard slot を actual parser / checker handoff へ送るときは、parser-side opaque slot carrier を持ちつつ current parser-free AST fixture schema の `OptionDecl.lease` へ narrow lowering するのが自然だという current judgment は `specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md`
+24. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
+25. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
+26. parser なしで representative examples を machine-readable に扱う最小 AST fixture schema は `specs/examples/02-current-l2-ast-fixture-schema.md`、fixture 実体は `crates/mir-ast/tests/fixtures/current-l2/`
+27. parser なし最小 interpreter に必要な evaluation state schema は `specs/examples/03-current-l2-evaluation-state-schema.md`
+28. parser なし最小 interpreter の 1-step semantics は `specs/examples/04-current-l2-step-semantics.md`
+29. parser なし最小 interpreter の predicate / effect oracle API は `specs/examples/05-current-l2-oracle-api.md`
+30. parser なし最小 interpreter skeleton の実装境界は `specs/examples/06-current-l2-interpreter-skeleton.md`
+31. current L2 host stub / fixture runner harness の最小境界は `specs/examples/07-current-l2-host-stub-harness.md`
+32. current L2 host harness が読む machine-readable host plan schema と `.host-plan.json` sidecar 方針は `specs/examples/08-current-l2-host-plan-schema.md`
+33. current L2 fixture と sidecar を 1 組として扱う bundle loader / bundle-level helper は `specs/examples/09-current-l2-bundle-loader.md`
+34. current L2 fixture directory を bundle 群として一括実行する batch runner は `specs/examples/10-current-l2-batch-runner.md`
+35. current L2 batch runner の上に薄く載る bundle selection helper は `specs/examples/11-current-l2-selection-helper.md`
+36. current L2 selection helper の primitive mode を組み合わせる profile helper は `specs/examples/12-current-l2-selection-profiles.md`
+37. current L2 selection profile helper の上に薄く載る small named profile catalog は `specs/examples/13-current-l2-profile-catalog.md`
+38. current L2 named profile catalog を hard-coded table に留めるか、machine-readable asset として比較する整理は `specs/examples/14-current-l2-profile-catalog-externalization.md`
+39. fallback / `lease` の semantic reconciliation と compact syntax candidate comparison は `specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md`
+40. current L2 detached trace / audit artifact の docs-only minimal schema と exact-compare core / explanation の境界は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
+41. detached artifact exporter を narrow に始めるなら `RunReport` / `BundleRunReport` / `BatchRunSummary` のどこを entry に切るべきか、という comparison は `specs/examples/17-current-l2-detached-exporter-entry-comparison.md`
+42. bundle-first detached exporter で `RunReport` payload core と `FixtureBundle` context をどう分け、`host_plan_coverage_failure` をどこに残すか、という docs-only split は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md`
+43. `host_plan_coverage_failure` を current detached artifact では aggregate-only に残しつつ、将来 typed carrier に昇格させるならどの layer が自然か、という比較は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md`
+44. `host_plan_coverage_failure` を将来 bundle failure artifact 側の typed carrier に昇格させるなら、その最小 schema をどう切るかの docs-only refinement は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md`
+45. bundle failure artifact 側の `failure.failure_kind` discriminator-only schema を `BatchRunSummary` aggregate export がどこまで typed に吸うべきか、という narrow comparison は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
+46. aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るかの docs-only refinement は `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
+47. detached exporter chain の current docs-only judgment、bundle-first loop attachment、typed failure / aggregate migration の統合 view は `specs/examples/23-current-l2-detached-export-loop-consolidation.md`
+48. detached validation loop を回すときの aggregate export 接続、artifact 保存先 / path policy、file naming / overwrite policy、compare input discovery の最小 cut は `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md`
+49. detached validation loop の aggregate 側 actual narrow cut、`bundle_failure_kind_counts` と current list anchor の coexistence、aggregate emitter sketch は `specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md`
+50. detached validation loop の aggregate compare contract と `compare-aggregates` wrapper の最小 cut は `specs/examples/26-current-l2-detached-aggregate-compare-helper.md`
+51. fixture authoring の boilerplate だけを `target/` 下へ切り出す non-production scaffold helper の最小 cut は `specs/examples/27-current-l2-fixture-scaffold-helper.md`
+52. detached validation loop で 1 fixture を bundle emit / optional reference compare / single-fixture aggregate smoke まで 1 command で回す non-production helper 境界は `specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md`
+53. final grammar を固定する前に、first parser cut に入れてよい semantic cluster と companion notation に残す cluster を narrow に棚卸しする inventory は `specs/examples/29-current-l2-first-parser-subset-inventory.md`
+54. first parser cut inventory の次段として、current L2 で core checker に入れてよい local / structural judgment と theorem prover / model checker へ残す judgment の切り分けは `specs/examples/30-current-l2-first-checker-cut-entry-criteria.md`
+55. first parser cut inventory を actual parser spike へ送る順序として、chain / declaration structural floor → `try` / rollback structural floor → request / admissibility cluster の checker-led staged spike が current next narrow step である、という sequencing judgment は `specs/examples/73-current-l2-first-parser-spike-staging.md`
+56. Phase 3 current tranche の closeout 後に、self-driven でなお reopen する価値があるかを比較した threshold judgment は `specs/examples/120-current-l2-phase3-self-driven-reopen-threshold.md`
+57. その stage 1 を actual parser spike として切るなら、option declaration core / explicit edge-row family / edge-local lineage metadata / declaration-side guard slot を structural floor に限って受け、guard fragment 自体の parse は later stage に残す current judgment は `specs/examples/74-current-l2-stage1-parser-spike-entry-criteria.md`
+58. stage 1 の declaration-side guard slot を actual parser / checker handoff へ送るときは、parser-side opaque slot carrier を持ちつつ current parser-free AST fixture schema の `OptionDecl.lease` へ narrow lowering するのが自然だという current judgment は `specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md`
 58. その handoff で parser-side opaque slot carrier の naming と thin lowering bridge の private API surface を narrow に決めるなら、`decl_guard_slot` を第一候補とし、bridge は slot-only ではなく option-level structural transfer として読むのが自然だという current judgment は `specs/examples/76-current-l2-stage1-parser-opaque-slot-carrier-and-bridge-api.md`
 59. actual parser spike の stage 1 smoke family をどこまで narrow に始めるかについては、`e4-malformed-lineage` と `e7-write-fallback-after-expiry` の two-fixture pair を最小 working set にし、`e3-option-admit-chain` は later-stage contrast reference に残すのが自然だという current judgment は `specs/examples/77-current-l2-stage1-parser-smoke-family-working-set.md`
 60. actual stage 1 parser spike を actualize するなら、private helper は `crates/mir-ast/tests/support/` に置き、compare surface は parser-side raw AST ではなく lowered fixture-subset compare に留めるのが自然だという current judgment は `specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md`
