@@ -15,7 +15,7 @@
 - 最も強い設計上の焦点は、意味論、境界、不変条件、統合点にある。
 - いくつかの実装 skeleton は、将来の作業整理をしやすくするためだけに存在している。
 - current L2 については、parser-free PoC 基盤と helper stack がかなり進んでおり、bundle / aggregate / static gate を含む detached validation loop の non-production 入口まで到達している。長期参照用の repository memory は `plan/` に整理している。
-- Phase 5 theorem-line は current package を `specs/examples/126...238` まで伸ばし、retained bridge を `retained_payload_body_materialization_theorem_export_handoff_witness_row` まで narrow に伸ばしている。authority-serial transition line では minimal contract row、owner-slot detail、symbolic stage family、actual ordered stage sequence、symbolic stage-local obligation family、actual stage-local obligation row detail、symbolic authority handoff epoch ref、symbolic witness-aware handoff family、actual handoff witness row detail までを current first choice に入れ、next promoted line は minimal-handoff-witness-row-detail-ready replay-attachment-ref comparison に置く。
+- Phase 5 theorem-line は current package を `specs/examples/126...240` まで伸ばし、retained bridge を `retained_payload_body_materialization_theorem_export_handoff_replay_attachment_ref` まで narrow に伸ばしている。authority-serial transition line では minimal contract row、owner-slot detail、symbolic stage family、actual ordered stage sequence、symbolic stage-local obligation family、actual stage-local obligation row detail、symbolic authority handoff epoch ref、symbolic witness-aware handoff family、actual handoff witness row detail、symbolic replay attachment ref までを current first choice に入れ、next promoted line は minimal-replay-attachment-ref-ready handoff-payload-ref comparison に置く。
 
 ## Decision level 要約
 
@@ -88,7 +88,8 @@ flowchart LR
 18. authority transition line の actual stage-local obligation row detail の次段として、symbolic authority handoff epoch ref をどこまで retained bridge に actualize してよいかは `specs/examples/233-current-l2-theorem-line-minimal-authority-stage-local-obligation-row-detail-ready-authority-handoff-epoch-ref-comparison.md` と `specs/examples/234-current-l2-theorem-line-authority-handoff-epoch-ref-ready-minimal-authority-handoff-epoch-ref-threshold.md`
 19. authority transition line の symbolic authority handoff epoch ref の次段として、symbolic witness-aware handoff family をどこまで retained bridge に actualize してよいかは `specs/examples/235-current-l2-theorem-line-minimal-authority-handoff-epoch-ref-ready-witness-aware-handoff-family-comparison.md` と `specs/examples/236-current-l2-theorem-line-witness-aware-handoff-family-ready-minimal-witness-aware-handoff-family-threshold.md`
 20. authority handoff line の symbolic witness-aware handoff family の次段として、actual handoff witness row detail をどこまで retained bridge に actualize してよいかは `specs/examples/237-current-l2-theorem-line-minimal-witness-aware-handoff-family-ready-handoff-witness-row-detail-comparison.md` と `specs/examples/238-current-l2-theorem-line-handoff-witness-row-detail-ready-minimal-handoff-witness-row-detail-threshold.md`
-21. phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
+21. actual handoff witness row detail の次段として、symbolic replay attachment ref をどこまで retained bridge に actualize してよいかは `specs/examples/239-current-l2-theorem-line-minimal-handoff-witness-row-detail-ready-replay-attachment-ref-comparison.md` と `specs/examples/240-current-l2-theorem-line-replay-attachment-ref-ready-minimal-replay-attachment-ref-threshold.md`
+ - phase ごとの本質だけを短く読み返したいときは `docs/research_abstract/`
 - その後、必要な subsystem に進む
 22. representative code で current L2 の書き味を確認したいときは `specs/examples/00-representative-mir-programs.md`
 23. その examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、separator / block nesting の候補書式は `specs/examples/01-current-l2-surface-syntax-candidates.md`
