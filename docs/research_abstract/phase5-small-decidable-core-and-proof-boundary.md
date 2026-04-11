@@ -326,7 +326,7 @@ consumer-specific attachment として後段に残すのが current first choice
 までは checker verdict transport receipt として足してよい。ただし checker verdict transport channel body は still 後段に残す。
 その次段として
 **`retained_payload_body_materialization_theorem_export_checker_verdict_transport_channel_body`**
-までは checker verdict transport channel body として足してよい。ただし low-level memory-order family は still 後段に残す。
+までは checker verdict transport channel body として足してよい。ただし low-level memory-order family は theorem-line retained bridge に入れず、ここを current stop line にする。
 
 ## まだやっていないこと
 
@@ -335,10 +335,9 @@ consumer-specific attachment として後段に残すのが current first choice
 - protocol verifier input schema の finalization
 - stable `evidence_refs` family をどこまで actual artifact ref に寄せるか
 - concrete notebook workflow pressure を何とみなし、stable notebook bridge sketch や actual emitted notebook artifact をいつ reopen するか
-- low-level memory-order family を actual comparison line に入れるべきか
-- `retained_payload_body_materialization_theorem_export_checker_verdict_transport_channel_body` を retained bridge のまま維持するか low-level memory-order family へ actualize するか
+- `event_tree_execution_view` / `authority_serial_transition_family` / `witness_aware_commit_family` のどれを higher-level async-control family の first cut に置くか
 - theorem-line retained bridge から async-control / concurrency vocabulary へ接続する最小 handoff shape
-- low-level memory-order family の導入
+- low-level memory-order family を external verifier vocabulary としてだけ残すか
 
 ## この phase が次へ渡すもの
 

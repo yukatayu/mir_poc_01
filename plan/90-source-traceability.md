@@ -43,6 +43,14 @@
   - `docs/reports/0442-phase5-concrete-payload-threshold.md`
   - `docs/reports/0443-review-phase5-concrete-payload-threshold.md`
 
+## 2026-04-11 Phase 5 low-level memory-order threshold addendum
+
+- `plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`Documentation.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/218-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-low-level-memory-order-family-threshold.md`
+  - `docs/reports/0546-phase5-low-level-memory-order-family-threshold.md`
+  - `docs/reports/0547-review-phase5-low-level-memory-order-family-threshold.md`
+  - `docs/reports/0548-review-phase5-low-level-memory-order-family-threshold-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。
