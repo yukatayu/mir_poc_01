@@ -36,7 +36,7 @@ parser first tranche の actual code anchor は次である。
 
 ここでは stage 1 / stage 2 spike tests を crate API import へ寄せ、TDD の red/green を通して narrow carrier を昇格した。
 
-### 2. checker / runtime first tranche の cut
+### 3. checker / runtime first tranche の cut
 
 `specs/examples/301...302` により、Phase 6 front-half actual checker / runtime first tranche の current first choice は、
 
@@ -47,11 +47,21 @@ parser first tranche の actual code anchor は次である。
 
 というものに固定した。
 
+### 4. compile-ready verification / formal hook の cut
+
+`specs/examples/303...304` により、Phase 6 front-half compile-ready verification / formal hook の current first choice は、
+
+- selected gate を `cargo test -p mir-ast`、`cargo test -p mir-runtime`、`cargo test -p mir-semantics --test current_l2_*` selected suite、Python detached-loop suiteに留める
+- `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs` と support helper で tool-neutral emitted formal hook を actualize する
+- emitted hook の envelope / row core は Phase 5 theorem-line existing cut と同じ `subject_kind + subject_ref + contract_rows(obligation_kind + typed symbolic evidence_refs)` に揃える
+- source artifact の `schema_version` / `artifact_kind` mismatch は fail-closed に止める
+
+というものに固定した。
+
 ## まだ fixed していないこと
 
-- compile-ready checkpoint の selected cargo / smoke gate
-- theorem / model-check formal hook の first tranche
 - stage 3 request / predicate reconnect
+- concrete theorem / model-check tool binding
 - perform head final public parser API
 - span-rich diagnostics と final grammar
 
@@ -60,23 +70,27 @@ parser first tranche の actual code anchor は次である。
 - `specs/examples/287...290`
 - `specs/examples/299...300`
 - `specs/examples/301...302`
+- `specs/examples/303...304`
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
 - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
+- `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
+- `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
 - `cargo test -p mir-ast`
 - `cargo test -p mir-runtime`
+- `python3 -m unittest scripts.tests.test_current_l2_static_gate_loop scripts.tests.test_current_l2_detached_loop`
 
 ## 次の mainline
 
 next mainline は、
-**Phase 6 compile-ready verification and formal hook**
+**Phase 6 compile-ready checkpoint drift suppression / mirror sweep**
 である。
 
-ここでは parser carrier と checker/runtime skeleton を前提に、
+ここでは parser carrier、checker/runtime skeleton、formal hook first tranche を前提に、
 
-- selected cargo / smoke gate
-- theorem-side / model-check-sideの tool-neutral formal hook first tranche
 - compile-ready checkpoint wording
+- specs / progress / tasks / abstract / plan の stale wording 掃除
+- next reopen point の整理
 
 を揃えるのが主眼になる。

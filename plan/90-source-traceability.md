@@ -205,6 +205,22 @@
   - `crates/mir-runtime/tests/current_l2_runtime_skeleton.rs`
   - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 
+## 2026-04-12 Phase 6 compile-ready verification and formal hook addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md`
+  - `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md`
+  - `specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md`
+  - `specs/examples/303-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-ready-phase6-compile-ready-verification-and-formal-hook-comparison.md`
+  - `specs/examples/304-current-l2-phase6-compile-ready-verification-and-formal-hook-ready-minimal-phase6-compile-ready-verification-and-formal-hook-threshold.md`
+  - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
+  - `crates/mir-semantics/examples/support/current_l2_formal_hook_support.rs`
+  - `crates/mir-semantics/tests/current_l2_formal_hook_support.rs`
+  - `scripts/current_l2_detached_loop.py`
+  - `scripts/tests/test_current_l2_static_gate_loop.py`
+  - `scripts/tests/test_current_l2_detached_loop.py`
+  - `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。

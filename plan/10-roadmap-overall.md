@@ -49,7 +49,8 @@
 
 1. `mir-ast` stage 1 / stage 2 non-production parser carrier を fixed entry criteria とする
 2. `mir-semantics` / `mir-runtime` をまたぐ non-production checker/runtime first tranche を fixed entry criteria とする
-3. compile-ready verification と formal hook inventory を narrow に揃える
+3. compile-ready verification / formal hook first tranche を fixed entry criteria とする
+4. checkpoint drift suppression / mirror sweep を最後の close step に置く
 
 つまり、広い production 実装へ進む前に、
 **意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
@@ -60,8 +61,8 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- compile-ready verification と formal hook の first tranche
 - checkpoint wording と mirror sweep
+- checkpoint close 後の next reopen point 整理
 
 ### その次のフェーズ
 
@@ -140,4 +141,4 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 - current L2 は **まだ architecture and semantics のフェーズ**である。
 - parser-free PoC はその意味論を machine-check する companion 基盤であり、Phase 2 closeout fixed 後も production 実装の着手宣言ではない。
-- したがって、今の roadmap では **meaning / notation / verification boundary を fixed entry criteria として保ったまま、Phase 6 の minimal parser / checker / runtime first trancheを non-production に narrow actualize し、その上に compile-ready formal hook を載せる** のが妥当である。
+- したがって、今の roadmap では **meaning / notation / verification boundary を fixed entry criteria として保ったまま、Phase 6 の minimal parser / checker / runtime / formal-hook first trancheを non-production に narrow actualize し、その後に checkpoint drift suppression を閉じる** のが妥当である。

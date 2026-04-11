@@ -1,4 +1,5 @@
 import argparse
+import json
 import tempfile
 import sys
 import unittest
@@ -26,6 +27,22 @@ class StaticGateLoopTests(unittest.TestCase):
             / "static-gates"
             / "static-smoke"
             / "e4-malformed-lineage.static-gate.json",
+        )
+
+    def test_formal_hook_artifact_path_uses_run_label_and_stem(self) -> None:
+        path = loop.formal_hook_artifact_path(
+            REPO_ROOT / "target" / "current-l2-detached",
+            "formal-smoke",
+            REPO_ROOT / "crates/mir-ast/tests/fixtures/current-l2/e5-underdeclared-lineage.json",
+        )
+        self.assertEqual(
+            path,
+            REPO_ROOT
+            / "target"
+            / "current-l2-detached"
+            / "formal-hooks"
+            / "formal-smoke"
+            / "e5-underdeclared-lineage.formal-hook.json",
         )
 
     def test_smoke_static_gate_emits_and_compares_reference(self) -> None:
@@ -156,6 +173,136 @@ class StaticGateLoopTests(unittest.TestCase):
         )
         self.assertEqual(emitted[0], (fixture_path, expected_artifact, True))
         self.assertEqual(assisted, [[str(fixture_path), str(expected_artifact)]])
+
+    def test_smoke_formal_hook_static_emits_static_gate_then_delegates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "left.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+
+            emitted: list[tuple[Path, Path, bool]] = []
+            delegated: list[tuple[str, Path, Path, bool]] = []
+
+            original_emit = loop.emit_static_gate
+            original_formal = loop.emit_formal_hook
+
+            def fake_emit(fixture: Path, output: Path, overwrite: bool) -> int:
+                emitted.append((fixture, output, overwrite))
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_text("{}", encoding="utf-8")
+                return 0
+
+            def fake_formal(
+                source_kind: str,
+                source_artifact: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                delegated.append((source_kind, source_artifact, output, overwrite))
+                return 0
+
+            loop.emit_static_gate = fake_emit
+            loop.emit_formal_hook = fake_formal
+            try:
+                exit_code = loop.command_smoke_formal_hook_static(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="formal-static",
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_static_gate = original_emit
+                loop.emit_formal_hook = original_formal
+
+        self.assertEqual(exit_code, 0)
+        static_gate_artifact = (
+            temp_root
+            / "artifacts"
+            / "static-gates"
+            / "formal-static"
+            / "left.static-gate.json"
+        )
+        formal_hook_artifact = (
+            temp_root
+            / "artifacts"
+            / "formal-hooks"
+            / "formal-static"
+            / "left.formal-hook.json"
+        )
+        self.assertEqual(emitted, [(fixture_path, static_gate_artifact, True)])
+        self.assertEqual(
+            delegated,
+            [("static-gate", static_gate_artifact, formal_hook_artifact, True)],
+        )
+
+    def test_emit_formal_hook_static_writes_expected_contract_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            source_artifact = temp_root / "left.static-gate.json"
+            output_artifact = temp_root / "left.formal-hook.json"
+            source_artifact.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "draft-current-l2-static-gate-v0",
+                        "artifact_kind": "current-l2-static-gate-detached-sketch",
+                        "fixture_context": {
+                            "fixture_id": "e5_underdeclared_lineage",
+                            "fixture_path": "/tmp/e5-underdeclared-lineage.json",
+                            "source_example_id": "E5",
+                        },
+                        "checker_core": {
+                            "static_verdict": "underdeclared",
+                            "reasons": [
+                                "missing lineage assertion for primary -> mirror"
+                            ],
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            exit_code = loop.emit_formal_hook(
+                "static-gate",
+                source_artifact,
+                output_artifact,
+                overwrite=True,
+            )
+            payload = json.loads(output_artifact.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["subject_kind"], "fixture_static_cluster")
+        self.assertEqual(payload["subject_ref"], "e5_underdeclared_lineage")
+        self.assertEqual(
+            payload["contract_rows"],
+            [
+                {
+                    "obligation_kind": "canonical_normalization_law",
+                    "evidence_refs": [
+                        {
+                            "ref_kind": "fixture",
+                            "ref_id": "e5_underdeclared_lineage",
+                        },
+                        {
+                            "ref_kind": "static_gate_artifact",
+                            "ref_id": "e5_underdeclared_lineage",
+                        },
+                    ],
+                },
+                {
+                    "obligation_kind": "no_re_promotion",
+                    "evidence_refs": [
+                        {
+                            "ref_kind": "fixture",
+                            "ref_id": "e5_underdeclared_lineage",
+                        }
+                    ],
+                },
+            ],
+        )
 
     def test_suggest_reason_codes_emits_artifact_then_delegates_to_assist(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

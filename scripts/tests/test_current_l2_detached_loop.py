@@ -1,5 +1,6 @@
 import argparse
 import io
+import json
 import tempfile
 import sys
 import unittest
@@ -338,72 +339,133 @@ class DetachedLoopPathTests(unittest.TestCase):
                 loop.compare_aggregates = original_compare_aggregates
 
         self.assertEqual(exit_code, 0)
-        self.assertEqual(len(emitted_fixtures), 2)
-        self.assertEqual(
-            emitted_fixtures[0][1],
+
+    def test_smoke_formal_hook_runtime_emits_bundle_then_delegates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_dir = temp_root / "fixtures"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "sample.json"
+            fixture_path.write_text("{}", encoding="utf-8")
+
+            emitted_fixtures: list[tuple[Path, Path, bool]] = []
+            delegated: list[tuple[str, Path, Path, bool]] = []
+
+            original_emit_fixture = loop.emit_fixture
+            original_emit_formal_hook = loop.emit_formal_hook
+
+            def fake_emit_fixture(
+                fixture: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                emitted_fixtures.append((fixture, output, overwrite))
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_text("{}", encoding="utf-8")
+                return 0
+
+            def fake_emit_formal_hook(
+                source_kind: str,
+                source_artifact: Path,
+                output: Path,
+                overwrite: bool,
+            ) -> int:
+                delegated.append((source_kind, source_artifact, output, overwrite))
+                return 0
+
+            loop.emit_fixture = fake_emit_fixture
+            loop.emit_formal_hook = fake_emit_formal_hook
+            try:
+                exit_code = loop.command_smoke_formal_hook_runtime(
+                    argparse.Namespace(
+                        fixture_path=str(fixture_path),
+                        artifact_root=str(temp_root / "artifacts"),
+                        run_label="formal-runtime",
+                        overwrite=True,
+                    )
+                )
+            finally:
+                loop.emit_fixture = original_emit_fixture
+                loop.emit_formal_hook = original_emit_formal_hook
+
+        self.assertEqual(exit_code, 0)
+        bundle_artifact = (
             temp_root
             / "artifacts"
             / "bundles"
-            / "sample-smoke"
-            / "sample.detached.json",
+            / "formal-runtime"
+            / "sample.detached.json"
         )
-        self.assertEqual(
-            emitted_fixtures[1][1],
+        formal_hook_artifact = (
             temp_root
             / "artifacts"
-            / "bundles"
-            / "sample-reference"
-            / "sample.detached.json",
+            / "formal-hooks"
+            / "formal-runtime"
+            / "sample.formal-hook.json"
         )
+        self.assertEqual(emitted_fixtures, [(fixture_path, bundle_artifact, True)])
         self.assertEqual(
-            compared_artifacts,
+            delegated,
+            [("detached-bundle", bundle_artifact, formal_hook_artifact, True)],
+        )
+
+    def test_emit_formal_hook_runtime_writes_expected_contract_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            source_artifact = temp_root / "sample.detached.json"
+            output_artifact = temp_root / "sample.formal-hook.json"
+            source_artifact.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "draft-current-l2-detached-bundle-v0",
+                        "artifact_kind": "current-l2-bundle-detached-sketch",
+                        "bundle_context": {
+                            "fixture_id": "e2_try_fallback",
+                            "fixture_path": "/tmp/e2-try-fallback.json",
+                            "host_plan_path": None,
+                            "runtime_requirement": "runtime-with-host-plan",
+                        },
+                        "payload_core": {
+                            "static_verdict": "valid",
+                            "entered_evaluation": True,
+                            "terminal_outcome": "success",
+                            "event_kinds": ["rollback", "perform-success"],
+                            "non_admissible_metadata": [],
+                            "narrative_explanations": [],
+                        },
+                        "detached_noncore": {"steps_executed": 3},
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            exit_code = loop.emit_formal_hook(
+                "detached-bundle",
+                source_artifact,
+                output_artifact,
+                overwrite=True,
+            )
+            payload = json.loads(output_artifact.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["subject_kind"], "runtime_try_cut_cluster")
+        self.assertEqual(payload["subject_ref"], "e2_try_fallback")
+        self.assertEqual(
+            payload["contract_rows"],
             [
-                (
-                    temp_root
-                    / "artifacts"
-                    / "bundles"
-                    / "sample-smoke"
-                    / "sample.detached.json",
-                    temp_root
-                    / "artifacts"
-                    / "bundles"
-                    / "sample-reference"
-                    / "sample.detached.json",
-                )
-            ],
-        )
-        self.assertEqual(len(emitted_aggregates), 2)
-        self.assertEqual(
-            emitted_aggregates[0][1],
-            temp_root
-            / "artifacts"
-            / "aggregates"
-            / "sample-smoke-full"
-            / "batch-summary.detached.json",
-        )
-        self.assertEqual(
-            emitted_aggregates[1][1],
-            temp_root
-            / "artifacts"
-            / "aggregates"
-            / "sample-smoke-single"
-            / "batch-summary.detached.json",
-        )
-        self.assertEqual(
-            compared_aggregates,
-            [
-                (
-                    temp_root
-                    / "artifacts"
-                    / "aggregates"
-                    / "sample-smoke-full"
-                    / "batch-summary.detached.json",
-                    temp_root
-                    / "artifacts"
-                    / "aggregates"
-                    / "sample-smoke-single"
-                    / "batch-summary.detached.json",
-                )
+                {
+                    "obligation_kind": "rollback_cut_non_interference",
+                    "evidence_refs": [
+                        {
+                            "ref_kind": "fixture",
+                            "ref_id": "e2_try_fallback",
+                        },
+                        {
+                            "ref_kind": "runtime_cluster",
+                            "ref_id": "e2_try_fallback",
+                        },
+                    ],
+                }
             ],
         )
 

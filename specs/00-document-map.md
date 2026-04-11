@@ -569,6 +569,10 @@
   - Phase 6 parser first tranche fixed 後の次段として、checker/runtime first tranche を docs-only のまま止めるか、`mir-semantics` program-level entry と `mir-runtime::current_l2` thin orchestrator を actualize するか、actual lowering / public runtime まで widen するかを比較する補助文書。
 - `specs/examples/302-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-ready-minimal-phase6-actual-checker-runtime-skeleton-first-tranche-threshold.md`
   - Phase 6 checker/runtime first tranche の minimal docs-first shape を `skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/303-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-ready-phase6-compile-ready-verification-and-formal-hook-comparison.md`
+  - Phase 6 checker/runtime first tranche fixed 後の次段として、compile-ready checkpoint を docs-only inventory に留めるか、selected cargo / smoke gate と theorem-line整合の tool-neutral formal hook emitter を actualize するか、concrete tool binding まで widen するかを比較する補助文書。
+- `specs/examples/304-current-l2-phase6-compile-ready-verification-and-formal-hook-ready-minimal-phase6-compile-ready-verification-and-formal-hook-threshold.md`
+  - Phase 6 compile-ready verification / formal hook の minimal docs-first shape を `verification_gate_refs + smoke_gate_refs + formal_hook_shape + source_artifact_refs + validation_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

@@ -2,42 +2,42 @@ use mir_semantics::{
     BundleRunReport, EventKind, FixtureBundle, FixtureRuntimeRequirement,
     NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct DetachedBundleArtifact {
-    pub schema_version: &'static str,
-    pub artifact_kind: &'static str,
+    pub schema_version: String,
+    pub artifact_kind: String,
     pub bundle_context: BundleContextArtifact,
     pub payload_core: PayloadCoreArtifact,
     pub detached_noncore: DetachedNoncoreArtifact,
 }
 
-#[derive(Debug, Serialize, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct BundleContextArtifact {
     pub fixture_id: String,
     pub fixture_path: String,
     pub host_plan_path: Option<String>,
-    pub runtime_requirement: &'static str,
+    pub runtime_requirement: String,
 }
 
-#[derive(Debug, Serialize, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct PayloadCoreArtifact {
-    pub static_verdict: &'static str,
+    pub static_verdict: String,
     pub entered_evaluation: bool,
-    pub terminal_outcome: Option<&'static str>,
-    pub event_kinds: Vec<&'static str>,
+    pub terminal_outcome: Option<String>,
+    pub event_kinds: Vec<String>,
     pub non_admissible_metadata: Vec<NonAdmissibleMetadataArtifact>,
     pub narrative_explanations: Vec<String>,
 }
 
-#[derive(Debug, Serialize, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct NonAdmissibleMetadataArtifact {
     pub option_ref: String,
-    pub subreason: &'static str,
+    pub subreason: String,
 }
 
-#[derive(Debug, Serialize, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct DetachedNoncoreArtifact {
     pub steps_executed: usize,
 }
@@ -48,8 +48,8 @@ pub fn build_detached_bundle_artifact(
 ) -> DetachedBundleArtifact {
     let report = &bundle_report.report;
     DetachedBundleArtifact {
-        schema_version: "draft-current-l2-detached-bundle-v0",
-        artifact_kind: "current-l2-bundle-detached-sketch",
+        schema_version: "draft-current-l2-detached-bundle-v0".to_string(),
+        artifact_kind: "current-l2-bundle-detached-sketch".to_string(),
         bundle_context: BundleContextArtifact {
             fixture_id: bundle.fixture.fixture_id.clone(),
             fixture_path: bundle.fixture_path.display().to_string(),
@@ -57,18 +57,20 @@ pub fn build_detached_bundle_artifact(
                 .host_plan_path
                 .as_ref()
                 .map(|path| path.display().to_string()),
-            runtime_requirement: runtime_requirement_name(bundle.runtime_requirement),
+            runtime_requirement: runtime_requirement_name(bundle.runtime_requirement).to_string(),
         },
         payload_core: PayloadCoreArtifact {
-            static_verdict: static_verdict_name(report.static_verdict),
+            static_verdict: static_verdict_name(report.static_verdict).to_string(),
             entered_evaluation: report.entered_evaluation,
-            terminal_outcome: report.terminal_outcome.map(terminal_outcome_name),
+            terminal_outcome: report
+                .terminal_outcome
+                .map(|value| terminal_outcome_name(value).to_string()),
             event_kinds: report
                 .trace_audit_sink
                 .events
                 .iter()
                 .copied()
-                .map(event_kind_name)
+                .map(|value| event_kind_name(value).to_string())
                 .collect(),
             non_admissible_metadata: report
                 .trace_audit_sink
@@ -129,6 +131,6 @@ fn non_admissible_metadata_artifact(
 ) -> NonAdmissibleMetadataArtifact {
     NonAdmissibleMetadataArtifact {
         option_ref: value.option_ref.clone(),
-        subreason: non_admissible_subreason_name(value.subreason),
+        subreason: non_admissible_subreason_name(value.subreason).to_string(),
     }
 }

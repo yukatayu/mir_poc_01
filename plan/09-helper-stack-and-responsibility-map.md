@@ -202,6 +202,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `crates/mir-semantics/examples/support/current_l2_static_gate_support.rs`
   - `CurrentL2Fixture + StaticGateResult -> static gate artifact` の pure transform と carrier struct を持つ shared support helper
   - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
+- `crates/mir-semantics/examples/support/current_l2_formal_hook_support.rs`
+  - `DetachedStaticGateArtifact` / `DetachedBundleArtifact -> tool-neutral formal hook artifact` の pure transform と carrier struct を持つ shared support helper
+  - theorem-line existing cut と同じ `subject_kind + subject_ref + contract_rows(obligation_kind + typed symbolic evidence_refs)` を維持し、source artifact schema/kind mismatch は fail-closed に止める
+  - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
 - `crates/mir-ast/src/current_l2.rs`
   - Phase 6 front-half parser first tranche の non-production carrier
   - stage 1 option/chain surface と stage 2 try/fallback structural surface だけを持つ
@@ -218,6 +222,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - Phase 6 front-half checker/runtime first tranche の non-production thin orchestrator
   - semantic `Program`、`FixtureHostPlan`、optional parser bridge input を受け、stage 1 reconnect summary、stage 2 try/rollback structural summary、static gate report、runtime report を束ねる
   - parser bridge input と semantic `Program` の mismatch は fail-closed に止め、actual parser-to-`Program` lowering や final public runtime API は still later に残す
+- `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
+  - Phase 6 front-half compile-ready verification / formal hook の thin CLI emitter
+  - detached static gate artifact または detached bundle artifact を読み、tool-neutral formal hook artifact を JSON として出す
+  - theorem/model-check concrete tool binding や public exporter API には widen しない
 - `crates/mir-ast/tests/support/current_l2_stage1_parser_spike_support.rs`
   - stage 1 parser first tranche の fixture compare / summary support helper
   - parser 本体は `mir_ast::current_l2` を使い、fixture-side subset compare 用 lowering bridge と reconnect summary だけを担う
@@ -247,6 +255,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `fixture_context` と helper-local `detached_noncore.reason_codes` は reference-only として読む
 - `scripts/current_l2_detached_loop.py`
   - bundle-first emitter、aggregate emitter、bundle diff helper、aggregate diff helper を current validation loop 向けに束ねる薄い wrapper
+  - compile-ready checkpoint では `smoke-formal-hook-static` / `smoke-formal-hook-runtime` も束ね、formal hook emitted path の smoke gate を持つ
   - `target/current-l2-detached/` を current non-production default candidate として扱う
   - explicit path compare、fixture-to-artifact compare、aggregate summary export、run-label aggregate compare を最小で支える
   - `smoke-fixture` subcommand では、1 fixture の bundle emit、optional reference compare、single-fixture aggregate smoke を 1 command で支える

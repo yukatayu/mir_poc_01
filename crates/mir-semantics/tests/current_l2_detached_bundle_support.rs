@@ -39,13 +39,16 @@ fn detached_bundle_support_preserves_runtime_fixture_core_and_context() {
     );
     assert_eq!(artifact.payload_core.static_verdict, "valid");
     assert!(artifact.payload_core.entered_evaluation);
-    assert_eq!(artifact.payload_core.terminal_outcome, Some("success"));
+    assert_eq!(
+        artifact.payload_core.terminal_outcome,
+        Some("success".to_string())
+    );
     assert_eq!(artifact.payload_core.event_kinds, vec!["perform-success"]);
     assert_eq!(
         artifact.payload_core.non_admissible_metadata,
         vec![NonAdmissibleMetadataArtifact {
             option_ref: "owner_writer".to_string(),
-            subreason: "admit-miss",
+            subreason: "admit-miss".to_string(),
         }]
     );
     assert_eq!(artifact.payload_core.narrative_explanations, Vec::<String>::new());

@@ -51,6 +51,16 @@ STATIC_GATE_EMITTER_CMD = [
     "current_l2_emit_static_gate",
     "--",
 ]
+FORMAL_HOOK_EMITTER_CMD = [
+    "cargo",
+    "run",
+    "-q",
+    "-p",
+    "mir-semantics",
+    "--example",
+    "current_l2_emit_formal_hook",
+    "--",
+]
 DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_artifacts.py"
 AGGREGATE_DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_detached_aggregates.py"
 STATIC_GATE_DIFF_HELPER = SCRIPT_DIR / "current_l2_diff_static_gate_artifacts.py"
@@ -117,6 +127,19 @@ def static_gate_artifact_path(
         / "static-gates"
         / ensure_run_label(run_label)
         / f"{fixture_path.stem}.static-gate.json"
+    )
+
+
+def formal_hook_artifact_path(
+    artifact_root: Path,
+    run_label: str,
+    fixture_path: Path,
+) -> Path:
+    return (
+        artifact_root
+        / "formal-hooks"
+        / ensure_run_label(run_label)
+        / f"{fixture_path.stem}.formal-hook.json"
     )
 
 
@@ -235,6 +258,32 @@ def emit_static_gate(
     cmd = [
         *STATIC_GATE_EMITTER_CMD,
         str(fixture_path),
+        "--output",
+        str(output_path),
+    ]
+    return run_subprocess(cmd)
+
+
+def emit_formal_hook(
+    source_kind: str,
+    source_artifact: Path,
+    output_path: Path,
+    overwrite: bool,
+) -> int:
+    if not source_artifact.is_file():
+        print(f"source artifact does not exist: {source_artifact}", file=sys.stderr)
+        return 2
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if output_path.exists() and not overwrite:
+        print(
+            f"artifact already exists: {output_path} (use --overwrite to replace)",
+            file=sys.stderr,
+        )
+        return 2
+    cmd = [
+        *FORMAL_HOOK_EMITTER_CMD,
+        source_kind,
+        str(source_artifact),
         "--output",
         str(output_path),
     ]
@@ -667,6 +716,56 @@ def command_smoke_try_rollback_structural_checker(args: argparse.Namespace) -> i
     return check_try_rollback_structural_checker(fixture_path, output_path)
 
 
+def command_smoke_formal_hook_static(args: argparse.Namespace) -> int:
+    artifact_root = Path(args.artifact_root)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
+    run_label = ensure_run_label(args.run_label)
+    static_gate_artifact = static_gate_artifact_path(artifact_root, run_label, fixture_path)
+    formal_hook_artifact = formal_hook_artifact_path(artifact_root, run_label, fixture_path)
+
+    emit_exit = emit_static_gate(fixture_path, static_gate_artifact, args.overwrite)
+    if emit_exit != 0:
+        return emit_exit
+
+    print(f"static gate artifact: {static_gate_artifact}", flush=True)
+    formal_hook_exit = emit_formal_hook(
+        "static-gate",
+        static_gate_artifact,
+        formal_hook_artifact,
+        args.overwrite,
+    )
+    if formal_hook_exit != 0:
+        return formal_hook_exit
+
+    print(f"formal hook artifact: {formal_hook_artifact}", flush=True)
+    return 0
+
+
+def command_smoke_formal_hook_runtime(args: argparse.Namespace) -> int:
+    artifact_root = Path(args.artifact_root)
+    fixture_path = resolve_fixture_argument(args.fixture_path)
+    run_label = ensure_run_label(args.run_label)
+    bundle_artifact = bundle_artifact_path(artifact_root, run_label, fixture_path)
+    formal_hook_artifact = formal_hook_artifact_path(artifact_root, run_label, fixture_path)
+
+    emit_exit = emit_fixture(fixture_path, bundle_artifact, args.overwrite)
+    if emit_exit != 0:
+        return emit_exit
+
+    print(f"bundle artifact: {bundle_artifact}", flush=True)
+    formal_hook_exit = emit_formal_hook(
+        "detached-bundle",
+        bundle_artifact,
+        formal_hook_artifact,
+        args.overwrite,
+    )
+    if formal_hook_exit != 0:
+        return formal_hook_exit
+
+    print(f"formal hook artifact: {formal_hook_artifact}", flush=True)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -1026,6 +1125,60 @@ def build_parser() -> argparse.ArgumentParser:
     )
     smoke_try_rollback_structural_checker_parser.set_defaults(
         func=command_smoke_try_rollback_structural_checker
+    )
+
+    smoke_formal_hook_static_parser = subparsers.add_parser(
+        "smoke-formal-hook-static",
+        help=(
+            "1 fixture の static gate artifact を保存し、tool-neutral formal hook "
+            "first tranche をその artifact から組み立てる"
+        ),
+    )
+    smoke_formal_hook_static_parser.add_argument("fixture_path")
+    smoke_formal_hook_static_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    smoke_formal_hook_static_parser.add_argument(
+        "--run-label",
+        default="formal-hook-static",
+        help="artifact 保存に使う run label",
+    )
+    smoke_formal_hook_static_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifacts を明示的に上書きする",
+    )
+    smoke_formal_hook_static_parser.set_defaults(
+        func=command_smoke_formal_hook_static
+    )
+
+    smoke_formal_hook_runtime_parser = subparsers.add_parser(
+        "smoke-formal-hook-runtime",
+        help=(
+            "1 fixture の detached bundle artifact を保存し、tool-neutral formal hook "
+            "first tranche をその artifact から組み立てる"
+        ),
+    )
+    smoke_formal_hook_runtime_parser.add_argument("fixture_path")
+    smoke_formal_hook_runtime_parser.add_argument(
+        "--artifact-root",
+        default=str(DEFAULT_ARTIFACT_ROOT),
+        help="artifact root directory (default: target/current-l2-detached)",
+    )
+    smoke_formal_hook_runtime_parser.add_argument(
+        "--run-label",
+        default="formal-hook-runtime",
+        help="artifact 保存に使う run label",
+    )
+    smoke_formal_hook_runtime_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="existing artifacts を明示的に上書きする",
+    )
+    smoke_formal_hook_runtime_parser.set_defaults(
+        func=command_smoke_formal_hook_runtime
     )
 
     compare_fixtures_parser = subparsers.add_parser(
