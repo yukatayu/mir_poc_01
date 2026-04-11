@@ -1,13 +1,13 @@
 # tasks
 
-最終更新: 2026-04-11 16:36 JST
+最終更新: 2026-04-11 17:07 JST
 
 ## この文書について
 
 - この文書は repo 全体の **current task map** である。
 - `progress.md` が rough progress snapshot なのに対し、ここでは
   - ある程度まとまった task として自走できるもの
-  - 方針決定が必要で、いま研究の障害になっている blocker
+  - 後段で方針決定が必要な open question / later blocker
   を少し具体的に整理する。
 - 規範判断の正本は `specs/`、長期比較と repository memory は `plan/`、作業履歴の正本は `docs/reports/` である。
 - append で履歴を積まず、**毎回 current snapshot に合わせて全体を書き直す**。
@@ -20,6 +20,7 @@
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは source-backed に固まっている。
 - **Phase 5** は `specs/examples/126...272` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs` まで docs-first に切れており、current promoted line は **`minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison`** に置いている。
 - 現在の主線は、**Phase 5 later reopen の narrow comparison** と **cross-phase checkpoint maintenance** の 2 本である。
+- shared-space finalization と final parser / public checker boundary は repo 全体では強い open question だが、current promoted line の直前 blocker ではない。
 
 ## 次に自走で進める順番と rough estimate
 
@@ -163,9 +164,11 @@
 
 - **必要時のみ**
 
-## 方針決定が必要で、いま研究の障害になっているもの
+## 後段で方針決定が必要な open question / later blocker
 
-### Blocker 1. shared-space の final activation rule
+- これらは repo 全体では強い open question だが、Phase 5 の current promoted line を直ちに止める blocker ではない。
+
+### Open Question 1. shared-space の final activation rule
 
 #### 概要
 
@@ -191,7 +194,7 @@ authoritative room の current baseline では `authority-ack` を first choice 
 
 ---
 
-### Blocker 2. authority placement の final shape
+### Open Question 2. authority placement の final shape
 
 #### 概要
 
@@ -217,7 +220,7 @@ current baseline では `single room authority` を room-level authoritative own
 
 ---
 
-### Blocker 3. consistency mode catalog をどこまで language 側に持つか
+### Open Question 3. consistency mode catalog をどこまで language 側に持つか
 
 #### 概要
 
@@ -242,7 +245,7 @@ current working subset として `authoritative room` と `append-friendly room`
 
 ---
 
-### Blocker 4. fairness / RNG trust model
+### Open Question 4. fairness / RNG trust model
 
 #### 概要
 
@@ -269,7 +272,7 @@ current working subset として `authoritative room` と `append-friendly room`
 
 ---
 
-### Blocker 5. control-plane separated causal carrier の final actualization
+### Open Question 5. control-plane separated causal carrier の final actualization
 
 #### 概要
 
@@ -296,7 +299,7 @@ current threshold judgment では `membership_epoch + member_incarnation` を de
 
 ---
 
-### Blocker 6. final parser grammar / public checker boundary
+### Open Question 6. final parser grammar / public checker boundary
 
 #### 概要
 

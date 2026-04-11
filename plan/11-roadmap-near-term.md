@@ -14,6 +14,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
 - Phase 5 は `specs/examples/126...272` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、checker-side では minimal checker-cluster row core、fixture evidence attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs` まで docs-first に切れている。**next promoted line は `minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison`** である。
+- shared-space finalization と final parser / public checker boundary は repo 全体では強い open question だが、current promoted line の直前 blocker ではない。
 
 ## いまから数 task の主眼
 
@@ -70,7 +71,9 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
 | Phase 3 reserve path reopen 条件整理 | 0〜2 task | later pressure 時のみ |
 
-## いまの blocker
+## いま見えている later blocker / open question
+
+current Phase 5 promoted line と checkpoint maintenance は引き続き self-driven に進めてよく、次の論点は後段 finalization の判断材料として保持する。
 
 ### 1. shared-space finalization
 

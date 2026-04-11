@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-11 16:36 JST
+最終更新: 2026-04-11 17:07 JST
 
 ## この文書について
 
@@ -20,7 +20,7 @@
 - **Phase 3** は reserve path である。stage 1 / 2 / 3 の private staged spike と reconnect freeze threshold まで source-backed に揃ったが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは整理済みで、final catalog はまだ固定しない。
 - **Phase 5** は `specs/examples/126...272` までで current package close である。theorem-side retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs` まで docs-first に切れており、**next promoted line** は `minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison` に置いている。
-- current main bottleneck は semantics の大崩れではなく、**shared-space final catalog**、**final parser / public checker boundary**、**actual type / proof / protocol verifier actualization timing** である。
+- current main bottleneck は semantics の大崩れではなく、**shared-space final catalog**、**final parser / public checker boundary**、**actual type / proof / protocol verifier actualization timing** である。これらは repo 全体では強い open question だが、current promoted line の直前 blocker ではなく、Phase 5 の docs-first narrow comparison と checkpoint maintenance は引き続き self-driven に進められる。
 
 ## 研究フェーズ（大局）
 
@@ -87,6 +87,8 @@
 | Mirrorea / Typed-Effect / Prism / 上位アプリ | 16% | 11% | 5% | 要仕様確認 | higher-layer の具体仕様がまだ足りない |
 
 ## 現時点での大きい未解決問題
+
+- これらは repo 全体では大きい未解決問題だが、current promoted line の直前 blocker ではない。
 
 1. shared-space の final activation rule
 2. authority placement の final shape
@@ -169,3 +171,4 @@
 - 2026-04-11 15:29 JST — Phase 5 checker-side current promoted line として `specs/examples/265...266` を追加し、actual checker payload family の次段を `payload_family_ref + row_family_kind` minimal checker payload row family まで narrow に actualize した。next promoted line は minimal-checker-payload-row-family-ready checker-payload-row-detail comparison に切り替わり、Phase 5 は `126...266` まで current package close と読める状態になった。
 - 2026-04-11 16:25 JST — Phase 5 checker-side current promoted line として `specs/examples/269...270` を追加し、checker payload row body を `row_body` variant-local slot bundle まで narrow に actualize した。next promoted line は minimal-checker-payload-row-body-ready checker-payload-supported-kind-summary comparison に切り替わり、Phase 5 は `126...270` まで current package close と読める状態になった。
 - 2026-04-11 16:36 JST — Phase 5 checker-side current promoted line として `specs/examples/271...272` を追加し、checker payload supported kind summary を `payload_row_family_ref + supported_kind_scope + supported_kind_refs` minimal bundle まで narrow に actualize した。next promoted line は minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison に切り替わり、Phase 5 は `126...272` まで current package close と読める状態になった。
+- 2026-04-11 17:07 JST — current snapshot audit を行い、Phase 5 の current promoted line は引き続き `minimal-checker-payload-supported-kind-summary-ready public-checker-payload-schema comparison` と読め、shared-space finalization と final parser / public checker boundary は later blocker / open question として mirror 文書側で明示するのが自然だと確認した。

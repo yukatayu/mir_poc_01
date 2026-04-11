@@ -1742,3 +1742,12 @@
   - `specs/examples/272-current-l2-checker-payload-supported-kind-summary-ready-minimal-checker-payload-supported-kind-summary-threshold.md`
   - `docs/reports/0592-phase5-checker-payload-supported-kind-summary-package.md`
   - `docs/reports/0593-review-phase5-checker-payload-supported-kind-summary-package.md`
+
+### 2026-04-11 current promoted line audit addendum
+
+- `Documentation.md`、`plan/11-roadmap-near-term.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `plan/12-open-problems-and-risks.md`
+  - `plan/17-research-phases-and-autonomy-gates.md`
+  - `specs/examples/271-current-l2-minimal-checker-payload-row-body-ready-checker-payload-supported-kind-summary-comparison.md`
+  - `specs/examples/272-current-l2-checker-payload-supported-kind-summary-ready-minimal-checker-payload-supported-kind-summary-threshold.md`
+  - `docs/reports/0595-current-promoted-line-audit-and-mirror-wording-cleanup.md`
