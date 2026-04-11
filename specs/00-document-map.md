@@ -486,6 +486,12 @@
   - Phase 5 checker-cluster typed reason hint line の次段として、`typed_reason_family_hint` payload を `family_refs[]` minimal bundle に留めるべきかを比較し、single ref や heavier carrier detail を still later に残す補助文書。
 - `specs/examples/261-current-l2-checker-cluster-hint-bundle-shape-ready-typed-family-coverage-state-threshold.md`
   - Phase 5 checker-cluster typed reason hint bundle の次段として、multi-family row の誤読を抑える lightweight `coverage_state` を current line に足してよいかを比較し、supported kind summary は still later に残す補助文書。
+- `specs/examples/262-current-l2-typed-family-coverage-state-ready-supported-kind-summary-threshold.md`
+  - Phase 5 checker-cluster typed reason hint bundle を `coverage_state` で止めるか、それとも `supported kind` summary を current matrix に足すかを比較し、kind summary は actual checker payload family 側へ送る方が自然かを整理する補助文書。
+- `specs/examples/263-current-l2-supported-kind-summary-ready-actual-checker-payload-family-comparison.md`
+  - Phase 5 checker-cluster matrix line を `coverage_state` で止めた次段として、actual checker payload family を docs-first bridge として別 line に切るべきかを比較する補助文書。
+- `specs/examples/264-current-l2-actual-checker-payload-family-ready-minimal-checker-payload-family-threshold.md`
+  - Phase 5 checker-side line の next step として、actual checker payload family の minimal docs-first shape を `payload_family_kind + source_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

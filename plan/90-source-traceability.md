@@ -1699,9 +1699,14 @@
   - `specs/examples/259-current-l2-checker-cluster-fixture-evidence-attachment-ready-typed-reason-family-hint-threshold.md`
   - `specs/examples/260-current-l2-typed-reason-family-hint-ready-checker-cluster-hint-bundle-shape-comparison.md`
   - `specs/examples/261-current-l2-checker-cluster-hint-bundle-shape-ready-typed-family-coverage-state-threshold.md`
+  - `specs/examples/262-current-l2-typed-family-coverage-state-ready-supported-kind-summary-threshold.md`
+  - `specs/examples/263-current-l2-supported-kind-summary-ready-actual-checker-payload-family-comparison.md`
+  - `specs/examples/264-current-l2-actual-checker-payload-family-ready-minimal-checker-payload-family-threshold.md`
   - `docs/reports/0578-phase5-handoff-low-level-memory-order-threshold.md`
   - `docs/reports/0579-review-phase5-handoff-low-level-memory-order-threshold.md`
   - `docs/reports/0580-phase5-checker-cluster-row-and-evidence-attachment-package.md`
   - `docs/reports/0581-review-phase5-checker-cluster-row-and-evidence-attachment-package.md`
   - `docs/reports/0582-phase5-typed-reason-family-hint-threshold.md`
   - `docs/reports/0583-review-phase5-current-docs-only-package.md`
+  - `docs/reports/0584-phase5-supported-kind-summary-and-checker-payload-family-package.md`
+  - `docs/reports/0585-review-phase5-supported-kind-summary-and-checker-payload-family-package.md`

@@ -15,7 +15,7 @@
 - 最も強い設計上の焦点は、意味論、境界、不変条件、統合点にある。
 - いくつかの実装 skeleton は、将来の作業整理をしやすくするためだけに存在している。
 - current L2 については、parser-free PoC 基盤と helper stack がかなり進んでおり、bundle / aggregate / static gate を含む detached validation loop の non-production 入口まで到達している。長期参照用の repository memory は `plan/` に整理している。
-- Phase 5 theorem-line は current package を `specs/examples/126...261` まで伸ばしている。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切れており、current promoted line は `typed-family-coverage-state-ready supported-kind-summary threshold` に置く。
+- Phase 5 theorem-line は current package を `specs/examples/126...264` まで伸ばしている。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を current stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs` minimal bundle まで docs-first に切れており、current promoted line は `minimal-checker-payload-family-ready checker-payload-row-family comparison` に置く。
 
 ## Decision level 要約
 
