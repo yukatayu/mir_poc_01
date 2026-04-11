@@ -13,7 +13,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 0 / 1 / 2 は maintenance tail である。
 - Phase 3 は reserve path であり、later pressure が出たときだけ reopen する。
 - Phase 4 は `specs/examples/121...125` までで current package close である。
-- Phase 5 は `specs/examples/126...268` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、checker-side では minimal checker-cluster row core、fixture evidence attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind` minimal bundle まで docs-first に切れている。**next promoted line は `minimal-checker-payload-row-detail-ready checker-payload-row-body comparison`** である。
+- Phase 5 は `specs/examples/126...270` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、checker-side では minimal checker-cluster row core、fixture evidence attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle まで docs-first に切れている。**next promoted line は `minimal-checker-payload-row-body-ready checker-payload-supported-kind-summary comparison`** である。
 
 ## いまから数 task の主眼
 
@@ -25,10 +25,10 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. minimal-checker-payload-row-detail-ready checker-payload-row-body comparison を Phase 5 の current promoted line として扱う
+### 1. minimal-checker-payload-row-body-ready checker-payload-supported-kind-summary comparison を Phase 5 の current promoted line として扱う
 
 - theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` で止め、low-level memory-order family は still later candidate に残す
-- そのうえで、first checker cut の 6 cluster を docs-only checker-cluster matrix として見せる line は `coverage_state` で止め、actual checker payload family を `payload_family_kind + source_refs`、checker payload row family を `payload_family_ref + row_family_kind`、checker payload row detail を `payload_row_family_ref + row_source_ref + row_reason_kind` minimal bundle まで切った current package を前提に、checker payload row body をどこまで docs-first に比較すべきかを narrow に整理する
+- そのうえで、first checker cut の 6 cluster を docs-only checker-cluster matrix として見せる line は `coverage_state` で止め、actual checker payload family を `payload_family_kind + source_refs`、checker payload row family を `payload_family_ref + row_family_kind`、checker payload row detail を `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body を `row_body` variant-local slot bundle まで切った current package を前提に、supported kind summary をどの layer へ戻すのが最小かを narrow に整理する
 - rough weight: 中
 - rough 所要: 1〜3 task / 2〜5日
 
@@ -64,7 +64,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| minimal-checker-payload-row-detail-ready checker-payload-row-body comparison | 1〜3 task | current promoted line |
+| minimal-checker-payload-row-body-ready checker-payload-supported-kind-summary comparison | 1〜3 task | current promoted line |
 | cross-phase checkpoint maintenance | checkpoint ごとに 0.5〜1日 | mirror drift suppression |
 | Phase 4 current package の checkpoint maintenance | 0〜1 task | current package close 維持 |
 | detached validation loop residual maintenance | 0〜1 task | policy-dependent residual のみ |
