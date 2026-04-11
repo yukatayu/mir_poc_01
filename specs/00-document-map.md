@@ -577,6 +577,10 @@
   - Phase 6 compile-ready checkpoint close fixed 後の次段として、parser second tranche widen を先に reopen するか、concrete formal tool binding を先に reopen するか、その sequencing と reserve path の切り方を比較する補助文書。
 - `specs/examples/306-current-l2-phase6-next-reopen-sequencing-ready-minimal-phase6-next-reopen-sequencing-threshold.md`
   - Phase 6 next reopen sequencing の minimal docs-first shape を `sequencing_kind + fixed_entry_criteria_refs + selected_first_reopen_ref + deferred_reopen_refs + guard_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/307-current-l2-phase6-next-reopen-sequencing-ready-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-comparison.md`
+  - parser second tranche first を選んだ次段として、stage3 declaration-side admit attached slot と shared isolated predicate fragment を `mir_ast::current_l2` へ actualize するか、より広い attachment / request suite / perform head widen へ進むかを比較する補助文書。
+- `specs/examples/308-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-ready-minimal-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold.md`
+  - parser second tranche first package の minimal docs-first shape を `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

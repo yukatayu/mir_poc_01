@@ -5,9 +5,11 @@ mod current_l2_stage3_request_clause_suite_spike_support;
 #[path = "support/current_l2_stage3_predicate_fragment_spike_support.rs"]
 mod current_l2_stage3_predicate_fragment_spike_support;
 
+use mir_ast::current_l2::parse_stage3_minimal_predicate_fragment_text;
+
 use current_l2_stage3_predicate_fragment_spike_support::{
     load_fixture_request_clause_fragment, load_fixture_request_contract_subset,
-    parse_stage3_minimal_predicate_fragment_text, Stage3RequestContractSubset,
+    Stage3RequestContractSubset,
 };
 use current_l2_stage3_request_clause_suite_spike_support::{
     extract_stage3_request_clause_suite,

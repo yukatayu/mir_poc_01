@@ -253,6 +253,24 @@
   - `specs/examples/306-current-l2-phase6-next-reopen-sequencing-ready-minimal-phase6-next-reopen-sequencing-threshold.md`
   - `docs/reports/0615-phase6-next-reopen-sequencing-package.md`
 
+## 2026-04-12 Phase 6 parser second tranche attached-slot and predicate first package addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/83-current-l2-stage3-admit-slot-branch-comparison.md`
+  - `specs/examples/85-current-l2-stage3-admit-slot-first-tranche-actualization.md`
+  - `specs/examples/92-current-l2-stage3-predicate-fragment-reopen-sequencing.md`
+  - `specs/examples/94-current-l2-stage3-predicate-fragment-first-tranche-actualization.md`
+  - `specs/examples/305-current-l2-phase6-compile-ready-checkpoint-close-ready-phase6-next-reopen-sequencing-comparison.md`
+  - `specs/examples/306-current-l2-phase6-next-reopen-sequencing-ready-minimal-phase6-next-reopen-sequencing-threshold.md`
+  - `specs/examples/307-current-l2-phase6-next-reopen-sequencing-ready-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-comparison.md`
+  - `specs/examples/308-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-ready-minimal-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold.md`
+  - `crates/mir-ast/src/current_l2.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_predicate_fragment_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_request_clause_suite_spike.rs`
+  - `docs/reports/0616-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。

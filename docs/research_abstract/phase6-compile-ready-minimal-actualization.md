@@ -87,14 +87,17 @@ parser first tranche の actual code anchor は次である。
 `specs/examples/305...306` により、
 compile-ready checkpoint close 後の next reopen sequencing は parser second tranche first に fixed 済みである。
 
+`specs/examples/307...308` により、
+parser second tranche first package も attached-slot / minimal predicate fragment まで actualize 済みである。
+
 current mainline は、
-**Phase 6 parser second tranche attached-slot / predicate-fragment first package**
+**Phase 6 reserve formal tool binding inventory**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- admit-slot / predicate route の最小 code anchor
 - theorem-first / model-check concrete binding の reserve wording
-- parser-side follow-up package の stop line
+- parser-side follow-up package sequencing
+- sample/program corpus を later に繋ぐための stop line
 
 を揃えるのが主眼になる。

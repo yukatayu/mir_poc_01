@@ -3,7 +3,7 @@
 ## project 全体の主眼
 
 - 主眼は **Mir** の意味論基盤である。
-- 現在の主要作業は、Phase 1〜5 の self-driven closeout / freeze と Phase 6 front-half compile-ready checkpoint close を entry criteria にしつつ、parser second tranche attached-slot / predicate route の first package を narrow に actualize することである。
+- 現在の主要作業は、Phase 1〜5 の self-driven closeout / freeze と Phase 6 front-half compile-ready checkpoint close を entry criteria にしつつ、formal reserve line と parser-side follow-up package を narrow に整理することである。
 - PrismCascade は重要な比較対象・将来統合対象だが、現時点では **optional / side-track に近い独立 kernel** として扱う。
 
 ## いまの主フェーズ
@@ -13,7 +13,7 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. next reopen sequencing fixed 後の parser-side first package を narrow に actualize する
+4. parser-side first package fixed 後の formal reserve line と parser-side follow-up sequencing を narrow に整理する
 
 ## current L2 の状態
 
@@ -66,8 +66,8 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- parser second tranche attached-slot / predicate route の first package を narrow に actualize する
 - theorem-first / model-check concrete binding reserve line を整理する
+- parser-side follow-up package sequencing を整理する
 - checkpoint close fixed 後の snapshot を維持する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 

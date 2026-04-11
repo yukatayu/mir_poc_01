@@ -1,10 +1,11 @@
 #[path = "support/current_l2_stage3_admit_slot_spike_support.rs"]
 mod current_l2_stage3_admit_slot_spike_support;
 
+use mir_ast::current_l2::parse_stage3_admit_slot_program_text;
+
 use current_l2_stage3_admit_slot_spike_support::{
     Stage3FixtureStructuralSubset, load_expected_fixture_structural_subset,
     lower_stage3_chain_decl_to_fixture_chain, lower_stage3_option_decl_to_fixture_structural_option,
-    parse_stage3_admit_slot_program_text,
 };
 
 const E3_ADMIT_SLOT_INPUT: &str = r#"

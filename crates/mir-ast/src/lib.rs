@@ -9,9 +9,11 @@ for the Phase 6 front-half compile-ready checkpoint.
 It intentionally keeps the accepted surface narrow:
 - stage 1 option/chain declarations
 - stage 2 try/fallback structural shape
+- stage 3 declaration-side admit attached slot
+- stage 3 minimal isolated predicate fragment
 
-Stage 3 request clauses, predicate fragments, span-rich diagnostics, and final grammar
-remain later work.
+Stage 3 multiline attachment, request clause suites, perform head publicization,
+span-rich diagnostics, and final grammar remain later work.
 "#]
 
 pub mod current_l2;

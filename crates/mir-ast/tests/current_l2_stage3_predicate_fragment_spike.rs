@@ -1,9 +1,13 @@
 #[path = "support/current_l2_stage3_predicate_fragment_spike_support.rs"]
 mod current_l2_stage3_predicate_fragment_spike_support;
 
+use mir_ast::current_l2::{
+    Stage3PredicateFragment, parse_stage3_minimal_predicate_fragment_text,
+};
+
 use current_l2_stage3_predicate_fragment_spike_support::{
-    Stage3PredicateFragment, load_fixture_option_admit_fragment,
-    load_fixture_request_clause_fragment, parse_stage3_minimal_predicate_fragment_text,
+    load_fixture_option_admit_fragment,
+    load_fixture_request_clause_fragment,
 };
 
 const E3_OWNER_WRITER_ADMIT: &str = "owner_is(session_user)";
