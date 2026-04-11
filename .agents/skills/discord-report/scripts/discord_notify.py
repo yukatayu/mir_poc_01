@@ -50,6 +50,7 @@ RUNNING_FOOTER_TEXT = "実行中"
 COMPLETED_FOOTER_TEXT = "完了"
 RUNNING_FOOTER_ICON_URL = "https://yukatayu.tech/files_neko/life_quest/status/star_yellow_filled.png"
 COMPLETED_FOOTER_ICON_URL = "https://yukatayu.tech/files_neko/life_quest/status/star_green_filled.png"
+EMPTY_TREE_SHA = "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
 
 
 @dataclass
@@ -60,6 +61,13 @@ class ProjectContext:
     repo_name: str
     branch: Optional[str]
     author_name: str
+
+
+@dataclass
+class DiffSummary:
+    label: str
+    added: int
+    removed: int
 
 
 class NotificationError(Exception):
@@ -290,24 +298,43 @@ def parse_numstat(output: str) -> tuple[int, int]:
     return added, removed
 
 
-def diff_totals(ctx: ProjectContext) -> Optional[tuple[int, int]]:
-    active_task = load_active_task(ctx.project_root)
-    if not active_task:
+def current_worktree_diff_summary(ctx: ProjectContext) -> Optional[DiffSummary]:
+    if not ctx.is_git_repo:
         return None
 
-    baseline_tree = active_task.get(TASK_BASELINE_TREE_KEY)
-    if not isinstance(baseline_tree, str) or not baseline_tree.strip():
-        return None
+    has_head = run_git(["rev-parse", "--verify", "HEAD"], ctx.project_root)
+    if has_head:
+        output = run_git(["diff", "--numstat", "HEAD", "--"], ctx.project_root)
+        if output is None:
+            return None
+        added, removed = parse_numstat(output)
+        return DiffSummary(label="変更量(参考)", added=added, removed=removed)
 
     current_tree = capture_worktree_tree(ctx)
     if not current_tree:
         return None
 
-    output = run_git(["diff", "--numstat", baseline_tree.strip(), current_tree, "--"], ctx.project_root)
+    output = run_git(["diff", "--numstat", EMPTY_TREE_SHA, current_tree, "--"], ctx.project_root)
     if output is None:
         return None
 
-    return parse_numstat(output)
+    added, removed = parse_numstat(output)
+    return DiffSummary(label="変更量(参考)", added=added, removed=removed)
+
+
+def diff_summary(ctx: ProjectContext) -> Optional[DiffSummary]:
+    active_task = load_active_task(ctx.project_root)
+    if active_task:
+        baseline_tree = active_task.get(TASK_BASELINE_TREE_KEY)
+        if isinstance(baseline_tree, str) and baseline_tree.strip():
+            current_tree = capture_worktree_tree(ctx)
+            if current_tree:
+                output = run_git(["diff", "--numstat", baseline_tree.strip(), current_tree, "--"], ctx.project_root)
+                if output is not None:
+                    added, removed = parse_numstat(output)
+                    return DiffSummary(label="変更量", added=added, removed=removed)
+
+    return current_worktree_diff_summary(ctx)
 
 
 def progress_allowed(project_root: Path, min_interval_seconds: int) -> bool:
@@ -388,13 +415,12 @@ def build_embed(
         fields.append({"name": "Next", "value": trim(next_step, 1024), "inline": False})
 
     if command == "complete" and include_diff:
-        totals = diff_totals(ctx)
+        totals = diff_summary(ctx)
         if totals is not None:
-            added, removed = totals
             fields.append(
                 {
-                    "name": "変更量",
-                    "value": f"+{added} / -{removed}",
+                    "name": totals.label,
+                    "value": f"+{totals.added} / -{totals.removed}",
                     "inline": True,
                 }
             )

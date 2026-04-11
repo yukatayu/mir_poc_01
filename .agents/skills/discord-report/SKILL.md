@@ -68,6 +68,7 @@ python3 .agents/skills/discord-report/scripts/discord_notify.py test \
 
 ## diff の扱い
 
-- `--include-diff` は、Git 管理下で `begin` が先に実行されているときだけ task-scoped の差分を表示します。
-- Git 管理外、または `begin` が未実行で基準がない場合は、差分欄を出しません。
+- `--include-diff` は、Git 管理下で `begin` が先に実行されているときは task-scoped の差分を表示します。
+- `begin` が未実行でも Git 差分が取れる場合は、`変更量(参考)` として現在のワークツリー差分を表示します。
+- Git 管理外などで差分が取れない場合だけ、差分欄を出しません。
 - `.codex-discord/` 配下の local state や秘密設定は差分集計に含めません。

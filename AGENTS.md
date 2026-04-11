@@ -79,6 +79,7 @@ Every report should contain, in this order:
 - 短い task では途中通知を送らず、終了時だけを対象にすること。
 - 長い task では、自然な区切りがあり、かつ前回通知からおおむね 1 時間以上空いたときだけ `progress` を送ること。
 - `complete` は、その user 依頼への最終返答を返す直前に 1 回だけ送ること。途中報告、質問待ち、追加調査継続中には使わないこと。
+- `begin` があるときは task-scoped の差分を使い、`begin` がなくても Git 差分が取れるなら `変更量(参考)` を出し、どちらも取れないときだけ差分欄を出さないこと。
 - 通知失敗は主作業の失敗にしない。Webhook は repo 直下の `.codex-discord/config.local.json` に保存し、commit しないこと。
 - 通知文は簡潔な日本語にすること。導入直後または更新直後の疎通確認以外では `test` を使わないこと。
 
