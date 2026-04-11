@@ -424,6 +424,10 @@
   - actual ordered stage sequence の次段として symbolic stage-local obligation family をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
 - `specs/examples/230-current-l2-theorem-line-stage-local-obligation-family-ready-minimal-authority-stage-local-obligation-family-threshold.md`
   - stage-local obligation family row の current first choice を `authority_transition_stage_sequence_ref + stage_local_obligation_family_kind` に置く threshold を整理する補助文書。
+- `specs/examples/231-current-l2-theorem-line-minimal-authority-stage-local-obligation-family-ready-stage-local-obligation-row-detail-comparison.md`
+  - symbolic stage-local obligation family の次段として actual stage-local obligation row detail をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/232-current-l2-theorem-line-stage-local-obligation-row-detail-ready-minimal-authority-stage-local-obligation-row-detail-threshold.md`
+  - stage-local obligation row detail の current first choice を `authority_transition_stage_local_obligation_family_ref + stage_label + stage_local_obligation_kind` に置く threshold を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
