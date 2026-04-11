@@ -116,6 +116,20 @@
   - `specs/examples/280-current-l2-public-checker-command-surface-ready-minimal-public-checker-command-surface-threshold.md`
   - `docs/reports/0600-phase5-public-checker-command-surface-package.md`
 
+## 2026-04-11 Phase 5 public checker shared output contract addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/281-current-l2-minimal-public-checker-command-surface-ready-shared-output-contract-comparison.md`
+  - `specs/examples/282-current-l2-shared-output-contract-ready-minimal-shared-output-contract-threshold.md`
+  - `docs/reports/0601-phase5-public-checker-shared-output-contract-package.md`
+
+## 2026-04-11 Phase 5 public checker boundary addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
+  - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`
+  - `docs/reports/0602-phase5-public-checker-boundary-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。

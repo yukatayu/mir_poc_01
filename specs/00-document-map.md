@@ -524,6 +524,14 @@
   - Phase 5 checker-side line の次段として、public checker entry criteria minimum の後に public checker command surface comparison をどの public-looking cut から始めるべきかを比較する補助文書。
 - `specs/examples/280-current-l2-public-checker-command-surface-ready-minimal-public-checker-command-surface-threshold.md`
   - Phase 5 checker-side line の次段として、public checker command surface の minimal docs-first shape を `command_surface_kind + family_facade_command_refs + public_checker_api_ref` までに留めるべきかを比較する補助文書。
+- `specs/examples/281-current-l2-minimal-public-checker-command-surface-ready-shared-output-contract-comparison.md`
+  - Phase 5 checker-side line の次段として、public checker command surface minimum の後に shared output contract comparison をどの shared summary line から始めるべきかを比較する補助文書。
+- `specs/examples/282-current-l2-shared-output-contract-ready-minimal-shared-output-contract-threshold.md`
+  - Phase 5 checker-side line の次段として、shared output contract の minimal docs-first shape を `output_contract_kind + checker_cluster_name + checker_status + public_checker_payload_schema_ref` までに留めるべきかを比較する補助文書。
+- `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
+  - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
+- `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`
+  - Phase 5 checker-side line の次段として、public checker boundary の minimal docs-first shape を `boundary_kind + public_checker_command_surface_ref + shared_output_contract_ref` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
