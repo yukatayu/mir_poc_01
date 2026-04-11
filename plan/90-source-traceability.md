@@ -102,6 +102,13 @@
   - `docs/reports/0576-phase5-handoff-transport-channel-body-package.md`
   - `docs/reports/0577-review-phase5-handoff-transport-channel-body-package.md`
 
+## 2026-04-11 Phase 5 public checker entry criteria addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/277-current-l2-minimal-public-checker-api-ready-public-checker-entry-criteria-comparison.md`
+  - `specs/examples/278-current-l2-public-checker-entry-criteria-ready-minimal-public-checker-entry-criteria-threshold.md`
+  - `docs/reports/0599-phase5-public-checker-entry-criteria-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。

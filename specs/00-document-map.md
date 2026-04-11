@@ -516,6 +516,10 @@
   - Phase 5 checker-side line の次段として、public checker payload schema の後に public checker API を docs-first line として切るべきか、切るならどの layer が current first choice かを比較する補助文書。
 - `specs/examples/276-current-l2-public-checker-api-ready-minimal-public-checker-api-threshold.md`
   - Phase 5 checker-side line の次段として、public checker API の minimal docs-first shape を `checker_subject + public_checker_payload_schema_ref` までに留めるべきかを比較する補助文書。
+- `specs/examples/277-current-l2-minimal-public-checker-api-ready-public-checker-entry-criteria-comparison.md`
+  - Phase 5 checker-side line の次段として、public checker API minimal relation の後に actual command surface / shared output contract / parser boundary を reopen してよい public checker entry criteria をどこまで narrow に切るべきかを比較する補助文書。
+- `specs/examples/278-current-l2-public-checker-entry-criteria-ready-minimal-public-checker-entry-criteria-threshold.md`
+  - Phase 5 checker-side line の次段として、public checker entry criteria の minimum を docs-only minimal API と source-backed family-facade command-surface pressure までに留め、shared output contract / parser boundary を still later に残すべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

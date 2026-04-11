@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-11 18:25 JST
+最終更新: 2026-04-11 18:40 JST
 
 ## この文書について
 
@@ -18,7 +18,7 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。current L2 semantics、parser-free PoC、detached validation loop の mainline は安定しており、drift suppression と residual maintenance が主眼である。
 - **Phase 3** は reserve path である。private staged spike / reconnect freeze threshold までは source-backed に揃っているが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは source-backed に固まっている。
-- **Phase 5** は `specs/examples/126...276` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs`、public checker payload schema は `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper、public checker API は `checker_subject + public_checker_payload_schema_ref` docs-only read relation まで docs-first に切れており、current promoted line は **`minimal-public-checker-api-ready public-checker-entry-criteria comparison`** に置いている。
+- **Phase 5** は `specs/examples/126...278` までで current package close である。theorem-line retained bridge は `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` を stop line にし、low-level memory-order family は still later に残す。checker-side では minimal checker-cluster row core、`fixture_evidence_refs` attachment、optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` まで source-backed に切り、`supported kind` summary は current matrix に足さない。actual checker payload family は `payload_family_kind + source_refs`、checker payload row family は `payload_family_ref + row_family_kind`、checker payload row detail は `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body は `row_body` variant-local slot bundle、checker payload supported kind summary は `payload_row_family_ref + supported_kind_scope + supported_kind_refs`、public checker payload schema は `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper、public checker API は `checker_subject + public_checker_payload_schema_ref` docs-only read relation まで docs-first に切れており、その次段では public checker entry criteria を docs-only minimal API fixed + source-backed family-facade command-surface pressure に留め、shared output contract / parser boundary は still later に残す current first choice を fixed した。current promoted line は **`minimal-public-checker-entry-criteria-ready public-checker-command-surface comparison`** に置いている。
 - 現在の主線は、**Phase 5 later reopen の narrow comparison** と **cross-phase checkpoint maintenance** の 2 本である。
 - shared-space finalization と final parser / public checker boundary は repo 全体では強い open question だが、current promoted line の直前 blocker ではない。
 
@@ -26,7 +26,7 @@
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | current 読み |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 5 後半 | minimal-public-checker-api-ready public-checker-entry-criteria comparison | checker-cluster matrix line を `coverage_state` で止め、actual checker payload family を `payload_family_kind + source_refs`、checker payload row family を `payload_family_ref + row_family_kind`、checker payload row detail を `payload_row_family_ref + row_source_ref + row_reason_kind`、checker payload row body を `row_body` variant-local slot bundle、checker payload supported kind summary を `payload_row_family_ref + supported_kind_scope + supported_kind_refs`、public checker payload schema を `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` minimal wrapper、public checker API を `checker_subject + public_checker_payload_schema_ref` docs-only read relation まで切った current package を前提に、actual command surface / shared output contract / parser boundary の entry criteria をどこまで narrow に整理するかを比較する | 中 | 1〜3 task / 2〜5日 | 自走可能 | **current promoted line** |
+| 1 | Phase 5 後半 | minimal-public-checker-entry-criteria-ready public-checker-command-surface comparison | public checker entry criteria を docs-only minimal API fixed + source-backed family-facade command-surface pressure に留めた current package を前提に、existing family facade pattern をどこまで public checker command surface comparison へ寄せてよいかを比較する。shared output contract / parser boundary は still later に残す | 中 | 1〜3 task / 2〜5日 | 自走可能 | **current promoted line** |
 | 2 | cross-phase checkpoint | drift suppression / mirror sweep | `specs/` / `plan/` / `progress.md` / `tasks.md` / research abstract の drift を抑える | 低〜中 | 0.5〜1日 / checkpoint ごと | 自走可能 | closeout package |
 | 3 | Phase 4 後半 reserve path | shared-space later reopen | `control_epoch` first reopen cut、catalog refinement、provider / witness / authority の later compare | 中〜重 | 0〜3 task | 一部自走可能 | concrete pressure が出たときだけ promoted |
 | 4 | Phase 2 maintenance tail | detached validation loop residual | bless / update / retention policy の policy-dependent residual を narrow に扱う | 低 | 0〜1 task | 自走可能 | drift または practical need 時のみ |
@@ -67,14 +67,16 @@
 - `specs/examples/274` で public checker payload schema の minimal shape を `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` に留める current first choice を固定した。
 - `specs/examples/275` で public checker payload schema の次段として public checker API を docs-only read relation に切り、`public_checker_api_ready_sketch` を current first choice に固定した。
 - `specs/examples/276` で public checker API の minimal shape を `checker_subject + public_checker_payload_schema_ref` に留める current first choice を固定した。
+- `specs/examples/277` で public checker comparison 専用の entry criteria を別に置き、first reopen target を command surface に限る current first choice を固定した。
+- `specs/examples/278` で public checker entry criteria の minimum を docs-only minimal API fixed + source-backed family-facade command-surface pressure に留め、shared output contract / parser boundary は still later に残す current first choice を固定した。
 
 #### 次に扱うべき narrow question
 
-- actual command surface / shared output contract / parser boundary を reopen してよい public checker entry criteria をどこへ置くべきか
+- existing family facade pattern をどこまで public checker command surface comparison へ寄せてよいか
 
 #### いま自走できる理由
 
-- current line は docs-only cluster matrix / row core / evidence attachment / public checker payload / public checker API read relation の threshold comparison に留まり、actual command surface / final type system / actual theorem prover relation までは踏み込んでいない。
+- current line は docs-only cluster matrix / row core / evidence attachment / public checker payload / public checker API read relation / public checker entry criteria threshold に留まり、actual command surface / final type system / actual theorem prover relation までは踏み込んでいない。
 - `specs/09` の invariants と Phase 3 reserve path の freeze line を壊さずに進められる。
 
 #### 重さ / rough 所要
@@ -99,7 +101,7 @@
 
 - Phase 2 detached validation loop は checkpoint close。
 - Phase 4 shared-space package は `specs/examples/121...125` で checkpoint close。
-- Phase 5 current package は `specs/examples/126...276` で current package close。
+- Phase 5 current package は `specs/examples/126...278` で current package close。
 
 #### いま自走できる理由
 
