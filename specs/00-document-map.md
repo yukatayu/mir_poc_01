@@ -496,6 +496,10 @@
   - Phase 5 checker-side line の次段として、actual checker payload family の後に checker payload row family を docs-first line として切るべきか、切るならどこまでが current first choice かを比較する補助文書。
 - `specs/examples/266-current-l2-checker-payload-row-family-ready-minimal-checker-payload-row-family-threshold.md`
   - Phase 5 checker-side line の次段として、checker payload row family の minimal docs-first shape を `payload_family_ref + row_family_kind` までに留めるべきかを比較する補助文書。
+- `specs/examples/267-current-l2-minimal-checker-payload-row-family-ready-checker-payload-row-detail-comparison.md`
+  - Phase 5 checker-side line の次段として、checker payload row family の後に checker payload row detail を docs-first line として切るべきか、切るならどこまでが current first choice かを比較する補助文書。
+- `specs/examples/268-current-l2-checker-payload-row-detail-ready-minimal-checker-payload-row-detail-threshold.md`
+  - Phase 5 checker-side line の次段として、checker payload row detail の minimal docs-first shape を `payload_row_family_ref + row_source_ref + row_reason_kind` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

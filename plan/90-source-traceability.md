@@ -1718,3 +1718,11 @@
   - `specs/examples/266-current-l2-checker-payload-row-family-ready-minimal-checker-payload-row-family-threshold.md`
   - `docs/reports/0586-phase5-checker-payload-row-family-package.md`
   - `docs/reports/0587-review-phase5-checker-payload-row-family-package.md`
+
+### 2026-04-11 phase5 checker payload row detail addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/267-current-l2-minimal-checker-payload-row-family-ready-checker-payload-row-detail-comparison.md`
+  - `specs/examples/268-current-l2-checker-payload-row-detail-ready-minimal-checker-payload-row-detail-threshold.md`
+  - `docs/reports/0588-phase5-checker-payload-row-detail-package.md`
+  - `docs/reports/0589-review-phase5-checker-payload-row-detail-package.md`
