@@ -373,7 +373,9 @@ consumer-specific attachment として後段に残すのが current first choice
 **`retained_payload_body_materialization_theorem_export_handoff_transport_payload`**
 までは symbolic handoff transport payload として足してよく、その次段として
 **`retained_payload_body_materialization_theorem_export_handoff_transport_receipt_row`**
-までは minimal handoff transport receipt row として足してよい。ただし handoff transport channel body と low-level memory-order family は still 後段に残す。
+までは minimal handoff transport receipt row として足してよく、その次段として
+**`retained_payload_body_materialization_theorem_export_handoff_transport_channel_body`**
+までは minimal handoff transport channel body として足してよい。ただし low-level memory-order family は still 後段に残す。
 
 ## まだやっていないこと
 

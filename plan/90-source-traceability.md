@@ -94,6 +94,14 @@
   - `docs/reports/0574-phase5-handoff-transport-carrier-payload-receipt-package.md`
   - `docs/reports/0575-review-phase5-handoff-transport-carrier-payload-receipt-package.md`
 
+## 2026-04-11 Phase 5 handoff transport channel-body addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/253-current-l2-theorem-line-minimal-handoff-transport-receipt-ready-handoff-transport-channel-body-comparison.md`
+  - `specs/examples/254-current-l2-theorem-line-handoff-transport-channel-body-ready-minimal-handoff-transport-channel-body-threshold.md`
+  - `docs/reports/0576-phase5-handoff-transport-channel-body-package.md`
+  - `docs/reports/0577-review-phase5-handoff-transport-channel-body-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。
