@@ -258,6 +258,19 @@
   - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
   - `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`
   - `docs/reports/0369-authoritative-room-baseline-docs-first-refinement.md`
+
+### 2026-04-11 authority-serial transition contract package addendum
+
+- `Documentation.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/121-shared-space-authoritative-room-baseline.md`
+  - `specs/examples/219-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-higher-level-async-control-family-comparison.md`
+  - `specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md`
+  - `specs/examples/221-current-l2-theorem-line-authority-serial-transition-family-ready-authority-serial-transition-contract-comparison.md`
+  - `specs/examples/222-current-l2-theorem-line-authority-serial-transition-contract-ready-minimal-authority-serial-contract-threshold.md`
+  - `specs/examples/223-current-l2-theorem-line-minimal-authority-serial-contract-ready-authority-serial-row-detail-comparison.md`
+  - `specs/examples/224-current-l2-theorem-line-authority-serial-row-detail-ready-authority-owner-ref-threshold.md`
+  - `specs/examples/225-current-l2-theorem-line-authority-owner-ref-ready-authority-transition-stage-family-comparison.md`
+  - `specs/examples/226-current-l2-theorem-line-authority-transition-stage-family-ready-minimal-authority-transition-stage-family-threshold.md`
   - `docs/reports/0371-shared-space-catalog-working-subset-comparison.md`
 
 ### 2026-04-10 theorem-line emitted artifact threshold addendum

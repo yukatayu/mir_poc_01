@@ -330,6 +330,14 @@ consumer-specific attachment として後段に残すのが current first choice
 その次段では、
 **`retained_payload_body_materialization_theorem_export_authority_serial_transition_family`**
 までは higher-level async-control family の current first cut として足してよい。ただし actual `authority_serial_transition_contract` row、witness / replay / fairness attachment、low-level memory-order family は still 後段に残す。
+その次段では、
+**`retained_payload_body_materialization_theorem_export_authority_serial_transition_contract`**
+までは minimal authority-serial contract row として足してよく、さらに
+**`retained_payload_body_materialization_theorem_export_authority_owner_ref`**
+までは owner-slot detail として足してよい。ただし transition stage family、authority handoff epoch、witness / replay attachment、low-level memory-order family は still 後段に残す。
+その次段では、
+**`retained_payload_body_materialization_theorem_export_authority_transition_stage_family`**
+までは symbolic stage family として足してよい。ただし explicit stage sequence、authority handoff epoch、witness / replay attachment、low-level memory-order family は still 後段に残す。
 
 ## まだやっていないこと
 

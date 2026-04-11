@@ -404,6 +404,18 @@
   - Phase 5 theorem-side retained bridge の next step として、`event_tree_execution_view` / `authority_serial_transition_family` / `witness_aware_commit_family` のどれを higher-level async-control family の first cut に置くかを比較する補助文書。
 - `specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md`
   - higher-level async-control family の current first cut を `authority_serial_transition_family` に置いた後、それを theorem-line retained bridge にどこまで近づけるかを比較する補助文書。
+- `specs/examples/221-current-l2-theorem-line-authority-serial-transition-family-ready-authority-serial-transition-contract-comparison.md`
+  - `authority_serial_transition_family` の次段として minimal `authority_serial_transition_contract` row をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/222-current-l2-theorem-line-authority-serial-transition-contract-ready-minimal-authority-serial-contract-threshold.md`
+  - `authority_serial_transition_contract` row の minimum floor を `obligation_kind + authority_subject_ref + transition_kind` に留める current first choice を整理する補助文書。
+- `specs/examples/223-current-l2-theorem-line-minimal-authority-serial-contract-ready-authority-serial-row-detail-comparison.md`
+  - minimal authority-serial contract row の次段として、owner slot detail / transition stage family / witness attachment のどれを row detail first cut に置くべきかを比較する補助文書。
+- `specs/examples/224-current-l2-theorem-line-authority-serial-row-detail-ready-authority-owner-ref-threshold.md`
+  - authority-serial row detail の current first choice を `authority_owner_ref` だけを持つ minimal detail row に置く threshold を整理する補助文書。
+- `specs/examples/225-current-l2-theorem-line-authority-owner-ref-ready-authority-transition-stage-family-comparison.md`
+  - owner-slot detail の次段として symbolic `authority_transition_stage_family` row をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/226-current-l2-theorem-line-authority-transition-stage-family-ready-minimal-authority-transition-stage-family-threshold.md`
+  - `authority_transition_stage_family` row の current first choice を `authority_owner_detail_ref + stage_family_kind` に置く threshold を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

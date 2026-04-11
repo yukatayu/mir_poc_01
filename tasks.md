@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-11 11:00 JST
+最終更新: 2026-04-11 11:17 JST
 
 ## この文書について
 
@@ -18,14 +18,14 @@
 - **Phase 0 / 1 / 2** は maintenance tail である。current L2 semantics、parser-free PoC、detached validation loop の mainline は安定しており、drift suppression と residual maintenance が主眼である。
 - **Phase 3** は reserve path である。private staged spike / reconnect freeze threshold までは source-backed に揃っているが、current promoted line ではなく、later pressure が出たときだけ reopen する。
 - **Phase 4** は `specs/examples/121...125` までで current package close である。authoritative room baseline、working subset row、minimal witness core、delegated-provider practical cut、control-plane threshold comparison までは source-backed に固まっている。
-- **Phase 5** は `specs/examples/126...220` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory から theorem-side retained bridge を `retained_payload_body_materialization_theorem_export_authority_serial_transition_family` まで伸ばし、**next later reopen** を `authority-serial-transition-family-ready authority-serial-transition-contract comparison` に置いている。
+- **Phase 5** は `specs/examples/126...226` までで theorem-line later package close である。small decidable core / proof / async-control boundary inventory から theorem-side retained bridge を `retained_payload_body_materialization_theorem_export_authority_transition_stage_family` まで伸ばし、**next later reopen** を `minimal-authority-transition-stage-family-ready authority-transition-stage-sequence-shape comparison` に置いている。
 - 現在の主線は、**Phase 5 later reopen の narrow comparison** と **cross-phase checkpoint maintenance** の 2 本である。
 
 ## 次に自走で進める順番と rough estimate
 
 | 順番 | phase | task package | 主眼 | rough weight | rough 所要 | 自走可否 | current 読み |
 |---|---|---|---|---|---|---|---|
-| 1 | Phase 5 後半 | authority-serial-transition-family-ready authority-serial-transition-contract comparison | current first cut に置いた `authority_serial_transition_family` を theorem-line retained bridge にどこまで近づけるかを narrow に整理する | 中〜重 | 1〜3 task / 2〜6日 | 自走可能 | **current promoted line** |
+| 1 | Phase 5 後半 | minimal-authority-transition-stage-family-ready authority-transition-stage-sequence-shape comparison | symbolic stage family の次段として actual stage sequence shape を theorem-line retained bridge にどこまで近づけるかを narrow に整理する | 中〜重 | 1〜3 task / 2〜6日 | 自走可能 | **current promoted line** |
 | 2 | cross-phase checkpoint | drift suppression / mirror sweep | `specs/` / `plan/` / `progress.md` / `tasks.md` / research abstract の drift を抑える | 低〜中 | 0.5〜1日 / checkpoint ごと | 自走可能 | closeout package |
 | 3 | Phase 4 後半 reserve path | shared-space later reopen | `control_epoch` first reopen cut、catalog refinement、provider / witness / authority の later compare | 中〜重 | 0〜3 task | 一部自走可能 | concrete pressure が出たときだけ promoted |
 | 4 | Phase 2 maintenance tail | detached validation loop residual | bless / update / retention policy の policy-dependent residual を narrow に扱う | 低 | 0〜1 task | 自走可能 | drift または practical need 時のみ |
@@ -44,11 +44,11 @@
 
 - `specs/examples/126...127` で 4-way split と proof-obligation matrix を集約済み。
 - `specs/examples/128...134` で mixed row default、consumer pressure order、minimum contract row、first consumer class を固定済み。
-- `specs/examples/135...220` で theorem-line retained bridge を段階的に伸ばし、現時点では `retained_payload_body_materialization_theorem_export_authority_serial_transition_family` まで current first choice に置ける。
+- `specs/examples/135...226` で theorem-line retained bridge を段階的に伸ばし、現時点では `retained_payload_body_materialization_theorem_export_authority_transition_stage_family` まで current first choice に置ける。
 
 #### 次に扱うべき narrow question
 
-- `retained_payload_body_materialization_theorem_export_authority_serial_transition_family` の次段として、minimal `authority_serial_transition_contract` row をどこまで narrow に retained bridge へ寄せるか
+- `retained_payload_body_materialization_theorem_export_authority_transition_stage_family` の次段として、authority transition stage sequence shape をどこまで narrow に retained bridge へ寄せるか
 
 #### いま自走できる理由
 
@@ -77,7 +77,7 @@
 
 - Phase 2 detached validation loop は checkpoint close。
 - Phase 4 shared-space package は `specs/examples/121...125` で checkpoint close。
-- Phase 5 theorem-line package は `specs/examples/126...220` で current package close。
+- Phase 5 theorem-line package は `specs/examples/126...226` で current package close。
 
 #### いま自走できる理由
 
