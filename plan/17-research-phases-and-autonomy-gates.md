@@ -64,7 +64,7 @@
 ### Phase 5 — static analysis / type / theorem prover / async-control boundary
 
 - 主眼: small decidable core、proof boundary、protocol verifier boundary、runtime policy boundary
-- 現在地: verifier handoff gate は fixed 済みであり、proof-model-check handoff closeout は still 要る
+- 現在地: self-driven closeout fixed
 - 重さ: とても重い
 - autonomy gate:
   - docs-first inventory と theorem-line threshold comparison は **self-driven**
@@ -73,9 +73,11 @@
 ### Phase 6 — actual parser / checker / runtime commitment
 
 - 主眼: actual parser subset、public checker boundary、runtime / host / artifact API
-- 現在地: entry criteria visible / actual public crate path は未着手
+- 現在地: immediate line / actual public crate path はまだ薄い
 - 重さ: 重い
-- autonomy gate: **後段依存**
+- autonomy gate:
+  - non-production minimal first tranche は **self-driven**
+  - final parser / public checker / runtime host finalization は **後段依存**
 
 ### Phase 7 — higher-layer integration and domain realization
 
@@ -86,26 +88,26 @@
 
 ## 現在の主線
 
-いま repo の主線は、次の 3 本である。
+いま repo の主線は、次の 2 本である。
 
-1. **Phase 5 closeout sweep**
-   - self-driven / current-recommendation scope を phase-complete snapshot へ揃える
-2. **Phase 6 front-half actualization**
+1. **Phase 6 front-half actualization**
    - `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ compile-ready minimal PoC の first tranche
+2. **checkpoint / mirror maintenance**
+   - fixed 済み closeout package の drift suppression と traceability を維持する
 
-Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。
+Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。Phase 5 closeout も `specs/examples/297...298` で fixed 済みであり、verifier handoff surface、theorem retained bridge stop line、boundary inventory、retained-later line は current entry criteria と読んでよい。
 
 ## immediate execution order
 
-1. **Phase 5 proof / protocol / runtime-policy handoff closeout** を immediate line として扱う
-2. **Phase 6 front-half actual parser / checker / runtime first tranche** を actualize する
-3. 同じ task 群の中で checkpoint / mirror maintenance を継続する
+1. **Phase 6 front-half actual parser / AST carrier first tranche** を immediate line として扱う
+2. **Phase 6 front-half actual checker / runtime first tranche** を actualize する
+3. **compile-ready verification and formal hook** を checkpoint close まで揃える
 
 ## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- Phase 5 closeout sweep
+- Phase 6 front-half actualization
 - checkpoint maintenance
 - compile-ready first tranche に必要な crate-local surface inventory
 
@@ -118,6 +120,6 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 ## 現在の判断
 
-- **current immediate line は Phase 5 proof / protocol / runtime-policy handoff closeout** と読むのが自然である。
-- **Phase 1 / 2 / 3 / 4 は Phase 6 front-half のための self-driven entry criteria を fixed 済み、Phase 5 は self-driven closeout 前** と読むのが自然である。
+- **current immediate line は Phase 6 actual parser / AST carrier first tranche** と読むのが自然である。
+- **Phase 1 / 2 / 3 / 4 / 5 は Phase 6 front-half のための self-driven entry criteria を fixed 済み** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

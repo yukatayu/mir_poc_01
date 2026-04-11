@@ -14,35 +14,40 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 2 は `specs/examples/293...294` により self-driven closeout fixed である。parser-free companion baseline の compile/test/smoke gate、helper boundary、detached loop compare-only policy は fixed し、reference update / bless、final retention/path policy、public exporter API は later に残している。
 - Phase 3 は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。stage 1 / 2 structural floor と first checker reconnect bridge は entry criteria として整理され、stage 3 request/admit/predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残る。
 - Phase 4 は `specs/examples/295...296` により self-driven closeout fixed である。current package は `specs/examples/121...125` を維持し、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、stronger control-plane split と distributed fairness は later に残している。
-- Phase 5 は `specs/examples/126...286` までで current package close であり、verifier handoff gate は fixed 済みである。
+- Phase 5 は `specs/examples/297...298` により self-driven closeout fixed である。verifier handoff surface docs-only mixed-row bridge、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual artifact / tool binding / low-level memory-order family は later に残している。
 - Phase 6 front-half の compile-ready minimal PoC は、docs / parser-free harness / test-only parser spike まではあるが、`mir-ast` / `mir-runtime` public crate の actual compile path はまだ薄い。
 
 ## いまから数 task の主眼
 
-近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 entry criteria を前提に、Phase 5 の self-driven scope を phase-complete snapshot まで揃え、その後に Phase 6 front-half actualization へ入ることである。
+近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 / 5 entry criteria を前提に、Phase 6 front-half actualization を 3 package 前後で compile-ready checkpoint まで進めることである。
 
 ## 次に自走で進める順番
 
-### 1. Phase 5 closeout sweep
-
-- proof / protocol / runtime-policy handoff closeout を片付ける
-- rough weight: 重い
-- rough 所要: 1〜3 task / 3〜7日
-
-### 2. Phase 6 front-half actual parser / checker / runtime first tranche
+### 1. Phase 6 front-half actual parser / AST carrier first tranche
 
 - `mir-ast` minimal parser carrier
-- `mir-semantics` / `mir-runtime` minimal compile path
-- compile-ready local gate
 - rough weight: 重い
-- rough 所要: 4〜7 task / 1〜3週
+- rough 所要: 1〜2 task / 3〜7日
+
+### 2. Phase 6 front-half actual checker / runtime skeleton first tranche
+
+- `mir-semantics` / `mir-runtime` minimal compile path
+- rough weight: 重い
+- rough 所要: 1〜2 task / 4〜7日
+
+### 3. compile-ready verification and formal hook
+
+- compile / smoke gate と formal hook first tranche
+- rough weight: 重い
+- rough 所要: 1〜2 task / 3〜6日
 
 ## rough step estimate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| Phase 5 closeout sweep | 1〜3 task | phase-complete snapshot を作る |
-| Phase 6 front-half compile-ready minimal PoC | 4〜7 task | actual code path first tranche |
+| Phase 6 front-half actual parser / AST carrier first tranche | 1〜2 task | selected current L2 subset を non-production public / crate-local carrier に落とす |
+| Phase 6 front-half actual checker / runtime skeleton first tranche | 1〜2 task | parsed subset から checker floor / runtime skeleton まで compile path を通す |
+| compile-ready verification and formal hook | 1〜2 task | cargo gate と tool-neutral or narrow tool first cut を揃える |
 
 ## いま見えている later blocker / open question
 
@@ -56,7 +61,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 - tool-neutral export で一旦 close するか
 - theorem side / model-check side の concrete tool first cut をどこで選ぶか
-- current recommendation は **boundary freeze の後で narrow に選ぶ** である
+- current recommendation は **Task 1〜2 の後で narrow に選ぶ** である
 
 ## 今の working assumption
 
@@ -65,4 +70,4 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 3 reconnect freeze は fixed 済みの entry criteria として扱う
 - Phase 4 self-driven closeout は fixed 済みとし、shared-space final catalog は user-spec-required item に留める
 - actual parser / checker / runtime first tranche は non-production minimal cut に留める
-- proof / model-check line は boundary freeze 後に narrow に actualize する
+- proof / model-check line は Phase 5 closeout fixed を entry criteria に、Task 1〜2 の後で narrow に actualize する

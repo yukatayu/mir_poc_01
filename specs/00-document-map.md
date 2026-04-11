@@ -556,6 +556,10 @@
   - Phase 2 closeout fixed 後の次段として、shared-space / membership line の self-driven current package をどこまで checkpoint close と読み、current package refs と user-spec-required final catalog refs をどう分けるかを比較する補助文書。
 - `specs/examples/296-current-l2-phase4-shared-space-self-driven-closeout-ready-minimal-phase4-shared-space-self-driven-closeout-threshold.md`
   - Phase 4 self-driven closeout の minimal docs-first shape を `closeout_kind + current_package_refs + user_spec_required_catalog_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/297-current-l2-phase4-shared-space-self-driven-closeout-ready-phase5-proof-protocol-runtime-policy-handoff-closeout-comparison.md`
+  - Phase 4 closeout fixed 後の次段として、verifier handoff surface fixed 後の checker-side stop line、theorem retained bridge stop line、proof / protocol / runtime-policy inventory を Phase 5 closeout bundle としてどこまでまとめるかを比較する補助文書。
+- `specs/examples/298-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-minimal-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold.md`
+  - Phase 5 handoff closeout の minimal docs-first shape を `closeout_kind + verifier_handoff_surface_ref + theorem_retained_bridge_stop_ref + boundary_inventory_ref + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

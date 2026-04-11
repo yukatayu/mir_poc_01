@@ -42,13 +42,13 @@
 ## 現在のフェーズ
 
 現在の主フェーズは、単なる drift suppression だけではなく、
-**Phase 3 reconnect freeze と Phase 1 / 2 / 4 closeout を fixed entry criteria としたうえで、Phase 5 の self-driven / current-recommendation scope を close し、Phase 6 前半の compile-ready minimal PoC へ入る段階**
+**Phase 1 / 2 / 3 / 4 / 5 の self-driven closeout / freeze を fixed entry criteria としたうえで、Phase 6 前半の compile-ready minimal PoC を actualize する段階**
 と読むのが自然である。
 
 具体的には次が主線である。
 
-1. Phase 5 closeout sweep
-2. `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path の準備
+1. `mir-ast` minimal parser / AST carrier first tranche
+2. `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path と formal hook inventory
 
 つまり、広い production 実装へ進む前に、
 **意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
@@ -59,16 +59,15 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- proof / protocol / runtime-policy handoff の closeout sweep
-- actual parser / checker / runtime first tranche に上げる surface の棚卸し
-- Phase 3 reconnect freeze の fixed snapshot を保ったまま Phase 6 front-half の crate-local contract を actualization する
+- `mir-ast` の actual parser / AST carrier first tranche
+- `mir-semantics` / `mir-runtime` の minimal compile path actualization
+- compile-ready verification と formal hook の first tranche
 
 ### その次のフェーズ
 
-- `mir-ast` の minimal parser carrier actualization
-- `mir-semantics` / `mir-runtime` の minimal compile path actualization
 - proof / model-check handoff の first tranche を tool-neutral か concrete tool first cut へ落とす比較
 - richer host interface の actual widening を still later に残したまま、compile-ready checkpoint を閉じる
+- parser / checker / runtime public surface の second tranche inventory
 
 ### さらに先のフェーズ
 
@@ -141,4 +140,4 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 - current L2 は **まだ architecture and semantics のフェーズ**である。
 - parser-free PoC はその意味論を machine-check する companion 基盤であり、Phase 2 closeout fixed 後も production 実装の着手宣言ではない。
-- したがって、今の roadmap では **先に meaning / notation / verification boundary を揃え、その後に parser / richer runtime / static analysis へ進む** のが妥当である。
+- したがって、今の roadmap では **meaning / notation / verification boundary を fixed entry criteria として保ったまま、Phase 6 の minimal parser / checker / runtime first tranche を non-production に narrow actualize する** のが妥当である。
