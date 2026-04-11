@@ -390,6 +390,14 @@
   - Phase 5 theorem-side checker-verdict-payload-family-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_witness_family` を checker verdict witness family marker としてどこまで先に足し、checker verdict transport をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/213-current-l2-theorem-line-checker-verdict-witness-family-ready-checker-verdict-transport-family-threshold.md`
   - Phase 5 theorem-side checker-verdict-witness-family-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_family` を checker verdict transport family marker としてどこまで先に足し、checker verdict transport carrier detail / payload / receipt をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/214-current-l2-theorem-line-checker-verdict-transport-family-ready-checker-verdict-transport-carrier-detail-threshold.md`
+  - Phase 5 theorem-side checker-verdict-transport-family-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_carrier_detail` を checker verdict transport carrier detail としてどこまで先に足し、checker verdict transport payload / receipt / channel body をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/215-current-l2-theorem-line-checker-verdict-transport-carrier-detail-ready-checker-verdict-transport-payload-threshold.md`
+  - Phase 5 theorem-side checker-verdict-transport-carrier-detail-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_payload` を checker verdict transport payload としてどこまで先に足し、checker verdict transport receipt / channel body をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/216-current-l2-theorem-line-checker-verdict-transport-payload-ready-checker-verdict-transport-receipt-threshold.md`
+  - Phase 5 theorem-side checker-verdict-transport-payload-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_receipt` を checker verdict transport receipt としてどこまで先に足し、checker verdict transport channel body をどこまで後段に残すかを比較する補助文書。
+- `specs/examples/217-current-l2-theorem-line-checker-verdict-transport-receipt-ready-checker-verdict-transport-channel-body-threshold.md`
+  - Phase 5 theorem-side checker-verdict-transport-receipt-ready retained bridge の次段として、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_channel_body` を checker verdict transport channel body としてどこまで先に足し、low-level memory-order family をどこまで後段に残すかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

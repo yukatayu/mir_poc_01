@@ -1569,3 +1569,14 @@
   - `specs/examples/213-current-l2-theorem-line-checker-verdict-witness-family-ready-checker-verdict-transport-family-threshold.md`
   - `docs/reports/0542-phase5-checker-verdict-witness-and-transport-family-thresholds.md`
   - `docs/reports/0543-review-phase5-checker-verdict-witness-and-transport-family-thresholds.md`
+
+### 2026-04-11 phase5 checker-verdict-transport-line thresholds addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/213-current-l2-theorem-line-checker-verdict-witness-family-ready-checker-verdict-transport-family-threshold.md`
+  - `specs/examples/214-current-l2-theorem-line-checker-verdict-transport-family-ready-checker-verdict-transport-carrier-detail-threshold.md`
+  - `specs/examples/215-current-l2-theorem-line-checker-verdict-transport-carrier-detail-ready-checker-verdict-transport-payload-threshold.md`
+  - `specs/examples/216-current-l2-theorem-line-checker-verdict-transport-payload-ready-checker-verdict-transport-receipt-threshold.md`
+  - `specs/examples/217-current-l2-theorem-line-checker-verdict-transport-receipt-ready-checker-verdict-transport-channel-body-threshold.md`
+  - `docs/reports/0544-phase5-checker-verdict-transport-line-thresholds.md`
+  - `docs/reports/0545-review-phase5-checker-verdict-transport-line-thresholds.md`
