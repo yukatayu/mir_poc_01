@@ -456,6 +456,18 @@
   - minimal handoff carrier detail の次段として symbolic handoff transport family をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
 - `specs/examples/246-current-l2-theorem-line-handoff-transport-family-ready-minimal-handoff-transport-family-threshold.md`
   - handoff transport family row の current first choice を `handoff_carrier_detail_ref + next_transport_family` に置く threshold を整理する補助文書。
+- `specs/examples/247-current-l2-theorem-line-minimal-handoff-transport-family-ready-handoff-transport-carrier-detail-comparison.md`
+  - minimal handoff transport family の次段として symbolic handoff transport carrier detail をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/248-current-l2-theorem-line-handoff-transport-carrier-detail-ready-minimal-handoff-transport-carrier-detail-threshold.md`
+  - handoff transport carrier detail row の current first choice を `handoff_transport_family_ref + handoff_transport_carrier_detail` に置く threshold を整理する補助文書。
+- `specs/examples/249-current-l2-theorem-line-minimal-handoff-transport-carrier-detail-ready-handoff-transport-payload-comparison.md`
+  - minimal handoff transport carrier detail の次段として symbolic handoff transport payload をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/250-current-l2-theorem-line-handoff-transport-payload-ready-minimal-handoff-transport-payload-threshold.md`
+  - handoff transport payload row の current first choice を `handoff_transport_carrier_detail_ref + handoff_transport_payload` に置く threshold を整理する補助文書。
+- `specs/examples/251-current-l2-theorem-line-minimal-handoff-transport-payload-ready-handoff-transport-receipt-comparison.md`
+  - minimal handoff transport payload の次段として symbolic handoff transport receipt row をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/252-current-l2-theorem-line-handoff-transport-receipt-ready-minimal-handoff-transport-receipt-threshold.md`
+  - handoff transport receipt row の current first choice を `handoff_transport_payload_ref + handoff_transport_receipt_row` に置く threshold を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
