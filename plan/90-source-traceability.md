@@ -1793,3 +1793,15 @@
   - `specs/examples/275-current-l2-minimal-public-checker-payload-schema-ready-public-checker-api-comparison.md`
   - `specs/examples/276-current-l2-public-checker-api-ready-minimal-public-checker-api-threshold.md`
   - `docs/reports/0598-phase5-public-checker-api-package.md`
+
+### 2026-04-11 phase5 verifier handoff surface addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
+  - `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md`
+  - `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md`
+  - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
+  - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`
+  - `specs/examples/285-current-l2-minimal-public-checker-boundary-ready-verifier-handoff-surface-comparison.md`
+  - `specs/examples/286-current-l2-verifier-handoff-surface-ready-minimal-verifier-handoff-surface-threshold.md`
+  - `docs/reports/0604-phase5-verifier-handoff-surface-package.md`

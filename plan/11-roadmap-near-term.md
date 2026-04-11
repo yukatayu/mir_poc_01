@@ -14,7 +14,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 2 は closeout 前である。parser-free PoC、detached validation loop、fixture authoring baseline は成立済みで、残りは compile gate / retention policy / docs mirror closeout に寄る。
 - Phase 3 は reopen 準備済みである。stage 1 / 2 / 3 parser spike の private evidence はあるが、`mir-ast` public crate は placeholder skeleton のままである。
 - Phase 4 は `specs/examples/121...125` までで current package close である。self-driven current recommendation closeout と user-spec-required final catalog の切り分けをもう一段明示したい。
-- Phase 5 は `specs/examples/126...284` までで current package close であり、immediate next line は **`minimal-public-checker-boundary-ready verifier-handoff-surface comparison`** である。
+- Phase 5 は `specs/examples/126...286` までで current package close であり、verifier handoff gate は fixed 済みである。immediate next line は **`minimal-verifier-handoff-surface-ready minimal-parser-subset-freeze comparison`** である。
 - Phase 6 front-half の compile-ready minimal PoC は、docs / parser-free harness / test-only parser spike まではあるが、`mir-ast` / `mir-runtime` public crate の actual compile path はまだ薄い。
 
 ## いまから数 task の主眼
@@ -23,27 +23,20 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. Phase 5 verifier handoff surface
-
-- public checker boundary の次段として verifier handoff surface をどこまで narrow に切るかを比較する
-- final parser grammar、actual external schema、generic shared entry は still later に残す
-- rough weight: 中
-- rough 所要: 1〜3 task / 2〜5日
-
-### 2. Phase 3 minimal parser subset freeze
+### 1. Phase 3 minimal parser subset freeze
 
 - actual parser first tranche に上げる accepted cluster / reject cluster / retention floor を固定する
 - `mir-ast/tests/support/current_l2_stage*` private helper と future public parser API の境界を明示する
 - rough weight: 重め
-- rough 所要: 2〜4 task / 4〜8日
+- rough 所要: 1〜3 task / 2〜6日
 
-### 3. Phase 3 -> 5 parser-to-checker reconnect freeze
+### 2. Phase 3 -> 5 parser-to-checker reconnect freeze
 
 - parser subset と first checker cut を reconnect し、Phase 6 checker line の minimal bridge を固定する
 - rough weight: 中
 - rough 所要: 1〜3 task / 2〜5日
 
-### 4. Phase 1 / 2 / 4 / 5 closeout sweep
+### 3. Phase 1 / 2 / 4 / 5 closeout sweep
 
 - Phase 1 semantics / invariants / notation closeout
 - Phase 2 parser-free PoC / detached loop closeout
@@ -52,7 +45,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - rough weight: 中〜重
 - rough 所要: 6〜12 task / 2〜4週
 
-### 5. Phase 6 front-half actual parser / checker / runtime first tranche
+### 4. Phase 6 front-half actual parser / checker / runtime first tranche
 
 - `mir-ast` minimal parser carrier
 - `mir-semantics` / `mir-runtime` minimal compile path
@@ -64,7 +57,6 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| verifier handoff surface comparison | 1〜3 task | current immediate gate |
 | minimal parser subset freeze | 2〜4 task | Phase 6 front-half parser gate |
 | parser-to-checker reconnect freeze | 1〜3 task | checker line reconnect gate |
 | Phase 1 / 2 / 4 / 5 closeout sweep | 6〜12 task | phase-complete snapshot を作る |

@@ -47,9 +47,9 @@
 
 具体的には次が主線である。
 
-1. Phase 5 verifier handoff surface の凍結
-2. Phase 3 reserve path の reopen による minimal parser subset / first checker reconnect freeze
-3. Phase 1 / 2 / 4 / 5 closeout sweep
+1. Phase 3 reserve path の reopen による minimal parser subset / first checker reconnect freeze
+2. Phase 1 / 2 / 4 / 5 closeout sweep
+3. Phase 5 proof / protocol / runtime-policy handoff closeout
 4. `mir-ast` / `mir-semantics` / `mir-runtime` をまたぐ non-production compile-ready path の準備
 
 つまり、広い production 実装へ進む前に、
@@ -61,7 +61,6 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- verifier handoff surface の narrow comparison
 - minimal parser subset と first checker reconnect の freeze
 - parser-free PoC / detached validation loop / semantics / shared-space current recommendation の closeout sweep
 - actual parser / checker / runtime first tranche に上げる surface の棚卸し
