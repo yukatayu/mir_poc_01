@@ -62,7 +62,7 @@
 ### Phase 5 — static analysis / type / theorem prover / async-control boundary
 
 - 主眼: small decidable core、proof boundary、protocol verifier boundary、runtime policy boundary
-- 現在地: `specs/examples/126...274` までで current package close、**next promoted line は minimal-public-checker-payload-schema-ready public-checker-api comparison**
+- 現在地: `specs/examples/126...276` までで current package close、**next promoted line は minimal-public-checker-api-ready public-checker-entry-criteria comparison**
 - 重さ: とても重い
 - autonomy gate:
   - docs-first inventory と theorem-line threshold comparison は **self-driven**
@@ -87,7 +87,7 @@
 いま repo の主線は、次の 3 本である。
 
 1. **Phase 5 later reopen の current promoted line**
-   - minimal-public-checker-payload-schema-ready public-checker-api comparison
+   - minimal-public-checker-api-ready public-checker-entry-criteria comparison
 2. **checkpoint / maintenance tail**
    - Phase 0 / 1 / 2 の drift suppression
    - Phase 4 / 5 checkpoint close 済み package の mirror 維持
@@ -98,7 +98,7 @@ Phase 3 は current checkpoint では **reserve path** として残し、later p
 
 ## immediate execution order
 
-1. **Phase 5 later reopen** として minimal-public-checker-payload-schema-ready public-checker-api comparison を扱う
+1. **Phase 5 later reopen** として minimal-public-checker-api-ready public-checker-entry-criteria comparison を扱う
 2. 同じ task の中で **cross-phase checkpoint maintenance** を行う
 3. Phase 4 current package は checkpoint close を維持する
 4. detached validation loop residual は practical need が出たときだけ扱う
@@ -122,6 +122,6 @@ Phase 3 は current checkpoint では **reserve path** として残し、later p
 
 ## 現在の判断
 
-- **current promoted line は Phase 5 minimal-public-checker-payload-schema-ready public-checker-api comparison** と読むのが自然である。
+- **current promoted line は Phase 5 minimal-public-checker-api-ready public-checker-entry-criteria comparison** と読むのが自然である。
 - **Phase 4 は current package close、Phase 3 は reserve path** と読むのが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。
