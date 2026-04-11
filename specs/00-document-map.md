@@ -452,6 +452,10 @@
   - symbolic handoff payload ref の次段として minimal handoff carrier detail をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
 - `specs/examples/244-current-l2-theorem-line-handoff-carrier-detail-ready-minimal-handoff-carrier-detail-threshold.md`
   - handoff carrier detail row の current first choice を `handoff_payload_ref + handoff_carrier_detail` に置く threshold を整理する補助文書。
+- `specs/examples/245-current-l2-theorem-line-minimal-handoff-carrier-detail-ready-handoff-transport-family-comparison.md`
+  - minimal handoff carrier detail の次段として symbolic handoff transport family をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/246-current-l2-theorem-line-handoff-transport-family-ready-minimal-handoff-transport-family-threshold.md`
+  - handoff transport family row の current first choice を `handoff_carrier_detail_ref + next_transport_family` に置く threshold を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

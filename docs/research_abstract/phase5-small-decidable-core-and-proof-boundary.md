@@ -365,6 +365,9 @@ consumer-specific attachment として後段に残すのが current first choice
 その次段では、
 **`retained_payload_body_materialization_theorem_export_handoff_carrier_detail`**
 までは minimal handoff carrier detail として足してよい。ただし handoff transport family と low-level memory-order family は still 後段に残す。
+その次段では、
+**`retained_payload_body_materialization_theorem_export_handoff_transport_family`**
+までは symbolic handoff transport family として足してよい。ただし handoff transport carrier detail と low-level memory-order family は still 後段に残す。
 
 ## まだやっていないこと
 

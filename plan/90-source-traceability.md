@@ -68,6 +68,14 @@
   - `docs/reports/0570-phase5-handoff-carrier-detail-package.md`
   - `docs/reports/0571-review-phase5-handoff-carrier-detail-package.md`
 
+## 2026-04-11 Phase 5 handoff transport family addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/245-current-l2-theorem-line-minimal-handoff-carrier-detail-ready-handoff-transport-family-comparison.md`
+  - `specs/examples/246-current-l2-theorem-line-handoff-transport-family-ready-minimal-handoff-transport-family-threshold.md`
+  - `docs/reports/0572-phase5-handoff-transport-family-package.md`
+  - `docs/reports/0573-review-phase5-handoff-transport-family-package.md`
+
 ## 実装 anchor
 
 `plan/` は docs だけでなく code anchor にも依拠する。
