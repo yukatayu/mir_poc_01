@@ -444,6 +444,10 @@
   - actual handoff witness row detail の次段として symbolic replay attachment ref をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
 - `specs/examples/240-current-l2-theorem-line-replay-attachment-ref-ready-minimal-replay-attachment-ref-threshold.md`
   - replay attachment ref row の current first choice を `handoff_witness_row_ref + replay_attachment_ref` に置く threshold を整理する補助文書。
+- `specs/examples/241-current-l2-theorem-line-minimal-replay-attachment-ref-ready-handoff-payload-ref-comparison.md`
+  - symbolic replay attachment ref の次段として symbolic handoff payload ref をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/242-current-l2-theorem-line-handoff-payload-ref-ready-minimal-handoff-payload-ref-threshold.md`
+  - handoff payload ref row の current first choice を `handoff_replay_attachment_ref + handoff_payload_ref` に置く threshold を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

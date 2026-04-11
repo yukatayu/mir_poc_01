@@ -270,6 +270,8 @@
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
   - `specs/examples/239-current-l2-theorem-line-minimal-handoff-witness-row-detail-ready-replay-attachment-ref-comparison.md`
   - `specs/examples/240-current-l2-theorem-line-replay-attachment-ref-ready-minimal-replay-attachment-ref-threshold.md`
+  - `specs/examples/241-current-l2-theorem-line-minimal-replay-attachment-ref-ready-handoff-payload-ref-comparison.md`
+  - `specs/examples/242-current-l2-theorem-line-handoff-payload-ref-ready-minimal-handoff-payload-ref-threshold.md`
   - `docs/reports/0566-phase5-replay-attachment-ref-package.md`
   - `docs/reports/0567-review-phase5-replay-attachment-ref-package.md`
   - `specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md`
@@ -1632,3 +1634,15 @@
   - `specs/examples/217-current-l2-theorem-line-checker-verdict-transport-receipt-ready-checker-verdict-transport-channel-body-threshold.md`
   - `docs/reports/0544-phase5-checker-verdict-transport-line-thresholds.md`
   - `docs/reports/0545-review-phase5-checker-verdict-transport-line-thresholds.md`
+
+### 2026-04-11 phase5 handoff replay/payload ref thresholds addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/239-current-l2-theorem-line-minimal-handoff-witness-row-detail-ready-replay-attachment-ref-comparison.md`
+  - `specs/examples/240-current-l2-theorem-line-replay-attachment-ref-ready-minimal-replay-attachment-ref-threshold.md`
+  - `specs/examples/241-current-l2-theorem-line-minimal-replay-attachment-ref-ready-handoff-payload-ref-comparison.md`
+  - `specs/examples/242-current-l2-theorem-line-handoff-payload-ref-ready-minimal-handoff-payload-ref-threshold.md`
+  - `docs/reports/0566-phase5-replay-attachment-ref-package.md`
+  - `docs/reports/0567-review-phase5-replay-attachment-ref-package.md`
+  - `docs/reports/0568-phase5-handoff-payload-ref-package.md`
+  - `docs/reports/0569-review-phase5-handoff-payload-ref-package.md`

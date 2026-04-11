@@ -359,6 +359,9 @@ consumer-specific attachment として後段に残すのが current first choice
 その次段では、
 **`retained_payload_body_materialization_theorem_export_handoff_replay_attachment_ref`**
 までは symbolic replay attachment ref として足してよい。ただし handoff payload / carrier detail、low-level memory-order family は still 後段に残す。
+その次段では、
+**`retained_payload_body_materialization_theorem_export_handoff_payload_ref`**
+までは symbolic handoff payload ref として足してよい。ただし handoff carrier detail、low-level memory-order family は still 後段に残す。
 
 ## まだやっていないこと
 
