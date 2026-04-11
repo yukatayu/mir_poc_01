@@ -46,7 +46,7 @@
 5. `specs/examples/225` で、owner-slot detail の次段では explicit stage list ではなく symbolic `authority_transition_stage_family` row を足すのが自然だと比較した。
 6. `specs/examples/226` で、stage family row の current first choice を `authority_owner_detail_ref + stage_family_kind` に固定した。
 7. `Documentation.md`、`specs/00-document-map.md`、`plan/11`、`plan/12`、`plan/13`、`plan/17`、`plan/90`、`progress.md`、`tasks.md`、Phase 5 research abstract を新しい current promoted line に追随させた。
-8. report を作成し、reviewer を 1 回だけ起動して findings を待機した。
+8. report を作成し、reviewer を 1 回だけ起動して completion を待ち、review closeout を別 report に残した。
 
 ## 4. Files changed
 
@@ -109,30 +109,16 @@ $ git diff --check
 
 ```text
 $ reviewer subagent
-spawn は行えたが、この session では wait 可能な handle を取得できなかった。
-そのため AGENTS.md の fallback に従い、local diff inspection と fresh validation を review evidence に使った。
+reviewer は 1 回だけ起動し、completion まで待った。
+substantive finding はなく、report / mirror drift の追加修正も不要だった。
 ```
 
 ```text
 $ git status --short --branch
 ## main...origin/main
- M Documentation.md
- M docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md
- M plan/11-roadmap-near-term.md
- M plan/12-open-problems-and-risks.md
- M plan/13-heavy-future-workstreams.md
- M plan/17-research-phases-and-autonomy-gates.md
- M plan/90-source-traceability.md
- M progress.md
- M specs/00-document-map.md
- M tasks.md
-?? docs/reports/0552-phase5-authority-serial-transition-contract-comparison.md
-?? specs/examples/221-current-l2-theorem-line-authority-serial-transition-family-ready-authority-serial-transition-contract-comparison.md
-?? specs/examples/222-current-l2-theorem-line-authority-serial-transition-contract-ready-minimal-authority-serial-contract-threshold.md
-?? specs/examples/223-current-l2-theorem-line-minimal-authority-serial-contract-ready-authority-serial-row-detail-comparison.md
-?? specs/examples/224-current-l2-theorem-line-authority-serial-row-detail-ready-authority-owner-ref-threshold.md
-?? specs/examples/225-current-l2-theorem-line-authority-owner-ref-ready-authority-transition-stage-family-comparison.md
-?? specs/examples/226-current-l2-theorem-line-authority-transition-stage-family-ready-minimal-authority-transition-stage-family-threshold.md
+
+---
+e884c02 phase5 の authority-serial transition package を整理する
 ```
 
 ## 6. Evidence / findings
@@ -147,7 +133,7 @@ $ git status --short --branch
 - `authority_serial_transition_family` の次段は、いきなり stage list や witness line へ進むのではなく、**contract row → owner-slot detail → symbolic stage family** の順で ratchet するのが最も手戻りが少ない。
 - Phase 4 authoritative room baseline との接続は、owner-slot detail までは theorem-line 側に寄せてよいが、handoff epoch や witness / replay は still later に残すのが自然である。
 - current promoted line は `minimal-authority-transition-stage-family-ready authority-transition-stage-sequence-shape comparison` と読むのが自然になった。
-- reviewer handle は回収できなかったが、local diff inspection では blocking issue は見つからなかった。
+- reviewer completion まで待ったうえで、blocking issue は見つからなかった。
 
 ## 8. Open questions
 

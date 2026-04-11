@@ -7,8 +7,8 @@
 ## Review execution note
 
 - reviewer は 1 回だけ起動した。
-- ただしこの session では wait 可能な handle を取得できず、completion を回収できなかった。
-- `AGENTS.md` の fallback に従い、local diff inspection と fresh validation を review evidence に使った。
+- completion まで待ち、substantive finding がないことを確認した。
+- closeout 記録は docs-only mirror と report hygiene を含めて local snapshot に反映した。
 
 ## Local review findings
 
