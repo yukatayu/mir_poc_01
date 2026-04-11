@@ -436,6 +436,10 @@
   - symbolic authority handoff epoch ref の次段として symbolic witness-aware handoff family をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
 - `specs/examples/236-current-l2-theorem-line-witness-aware-handoff-family-ready-minimal-witness-aware-handoff-family-threshold.md`
   - witness-aware handoff family row の current first choice を `authority_handoff_epoch_detail_ref + witness_aware_handoff_family_kind` に置く threshold を整理する補助文書。
+- `specs/examples/237-current-l2-theorem-line-minimal-witness-aware-handoff-family-ready-handoff-witness-row-detail-comparison.md`
+  - symbolic witness-aware handoff family の次段として actual handoff witness row detail をどこまで theorem-line retained bridge に足してよいかを比較する補助文書。
+- `specs/examples/238-current-l2-theorem-line-handoff-witness-row-detail-ready-minimal-handoff-witness-row-detail-threshold.md`
+  - handoff witness row detail の current first choice を `witness_aware_handoff_family_ref + witness_actor_ref + handoff_witness_kind` に置く threshold を整理する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
