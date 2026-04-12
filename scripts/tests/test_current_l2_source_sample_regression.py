@@ -18,24 +18,24 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertEqual(
             [row.sample_stem for row in rows],
             [
+                "e1-place-atomic-cut",
                 "e2-try-fallback",
                 "e4-malformed-lineage",
                 "e23-malformed-try-fallback-missing-fallback-body",
-                "e1-place-atomic-cut",
-                "e3-option-admit-chain",
                 "e21-try-atomic-cut-frontier",
+                "e3-option-admit-chain",
             ],
         )
         self.assertEqual(
-            [row.authored_status for row in rows[:3]],
-            ["source-authored", "source-authored", "source-authored"],
+            [row.authored_status for row in rows[:4]],
+            ["source-authored", "source-authored", "source-authored", "source-authored"],
         )
         self.assertEqual(
-            [row.authored_status for row in rows[3:]],
-            ["source-target-only", "source-target-only", "source-target-only"],
+            [row.authored_status for row in rows[4:]],
+            ["source-target-only", "source-target-only"],
         )
         self.assertEqual(rows[0].formal_hook, "runtime_try_cut_cluster")
-        self.assertEqual(rows[1].formal_hook, "fixture_static_cluster")
+        self.assertEqual(rows[2].formal_hook, "fixture_static_cluster")
 
     def test_inventory_statuses_mark_current_repo_layout_as_consistent(self) -> None:
         statuses = regression.inventory_statuses()
@@ -43,7 +43,7 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertTrue(all(status.status_ok for status in statuses))
         self.assertEqual(
             [status.file_exists for status in statuses],
-            [True, True, True, False, False, False],
+            [True, True, True, True, False, False],
         )
 
     def test_format_inventory_text_includes_header_rows_and_file_state(self) -> None:
@@ -51,8 +51,9 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
 
         self.assertIn("current L2 fixed-subset first-cluster inventory", rendered)
         self.assertIn("sample stem | authored status | expected static", rendered)
+        self.assertIn("e1-place-atomic-cut | source-authored | valid | explicit_failure", rendered)
         self.assertIn("e2-try-fallback | source-authored | valid | success", rendered)
-        self.assertIn("present | first authored trio runtime path", rendered)
+        self.assertIn("present | first widened authored row runtime path", rendered)
         self.assertIn(
             "e21-try-atomic-cut-frontier | source-target-only | not_yet_authored",
             rendered,
@@ -61,7 +62,7 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
     def test_inventory_mismatches_reports_missing_authored_sample(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             sample_root = Path(temp_dir)
-            authored = ["e2-try-fallback", "e4-malformed-lineage"]
+            authored = ["e1-place-atomic-cut", "e2-try-fallback", "e4-malformed-lineage"]
             for stem in authored:
                 (sample_root / f"{stem}.txt").write_text("placeholder\n", encoding="utf-8")
 
@@ -93,6 +94,7 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
                 "source sample runner test",
                 "verification ladder test",
                 "formal hook support test",
+                "runtime formal hook smoke for e1-place-atomic-cut",
                 "runtime formal hook smoke for e2-try-fallback",
                 "static formal hook smoke for e4-malformed-lineage",
                 "static formal hook smoke for e23-malformed-try-fallback-missing-fallback-body",
@@ -108,10 +110,14 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
         self.assertIn("--run-label", commands[4].argv)
         self.assertEqual(
             commands[4].argv[commands[4].argv.index("--run-label") + 1],
+            "phase6-smoke-e1-place-atomic-cut",
+        )
+        self.assertEqual(
+            commands[5].argv[commands[5].argv.index("--run-label") + 1],
             "phase6-smoke-e2-try-fallback",
         )
         self.assertEqual(
-            commands[6].argv[commands[6].argv.index("--run-label") + 1],
+            commands[7].argv[commands[7].argv.index("--run-label") + 1],
             "phase6-smoke-e23-malformed-try-fallback-missing-fallback-body",
         )
 
@@ -226,9 +232,13 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr.getvalue(), "")
         self.assertIn("fake regression ran", stdout.getvalue())
-        self.assertEqual(len(captured_commands), 7)
+        self.assertEqual(len(captured_commands), 8)
         self.assertEqual(
             captured_commands[4].argv[captured_commands[4].argv.index("--run-label") + 1],
+            "phase6-helper-e1-place-atomic-cut",
+        )
+        self.assertEqual(
+            captured_commands[5].argv[captured_commands[5].argv.index("--run-label") + 1],
             "phase6-helper-e2-try-fallback",
         )
 

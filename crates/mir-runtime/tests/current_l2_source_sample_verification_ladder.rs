@@ -26,6 +26,30 @@ fn fixture_path(name: &str) -> PathBuf {
 }
 
 #[test]
+fn verification_ladder_marks_e1_as_runtime_and_formal_hook_reached() {
+    let bundle = load_bundle_from_fixture_path(fixture_path("e1-place-atomic-cut.json")).unwrap();
+    let source_report =
+        run_current_l2_source_sample("e1-place-atomic-cut", bundle.host_plan.clone().unwrap())
+            .unwrap();
+
+    assert_eq!(
+        source_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert!(source_report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::ExplicitFailure)
+    );
+
+    let detached_bundle = build_detached_bundle_artifact(&bundle, &run_bundle(&bundle).unwrap());
+    let formal_hook = build_formal_hook_from_detached_bundle_artifact(&detached_bundle).unwrap();
+
+    assert_eq!(formal_hook.subject_kind, "runtime_try_cut_cluster");
+    assert_eq!(formal_hook.subject_ref, "e1_place_atomic_cut");
+}
+
+#[test]
 fn verification_ladder_marks_e2_as_runtime_and_formal_hook_reached() {
     let bundle = load_bundle_from_fixture_path(fixture_path("e2-try-fallback.json")).unwrap();
     let source_report =

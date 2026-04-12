@@ -50,14 +50,15 @@
 - `e3-option-admit-chain` は representative prose plain `E3` ではなく `E3-variant` row として扱う。
 - `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
 - current matrix 自体では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
-- source sample の actual file first trio は `e4` / `e2` / `e23` に留め、これらは current runner first cut の input として actualize 済みである。deferred authored-row widen sequencing は `e1 -> e21 -> e3` に置き、`e1` / `e21` を current runtime formal-hook family の内側で先に扱い、`e3` は admit-family / theorem-side guard を伴う third slot に残すのが current first choice である。
-- verification ladder current cut では、first authored trio にだけ reached stage row を付ける。
+- source sample の actual file current authored quartet は `e1` / `e2` / `e4` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。remaining authored-row widen sequencing は `e21 -> e3` に置き、`e21` を current runtime formal-hook family の内側で先に扱い、`e3` は admit-family / theorem-side guard を伴う third slot に残すのが current first choice である。
+- verification ladder current cut では、current authored quartet に reached stage row を付ける。
+  - `e1` は `static gate = reached(valid)`、`interpreter = reached(explicit_failure)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e2` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e4` / `e23` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
-  - `e1` / `e3` / `e21` は `source-target-only / not yet authored` として保持し、failure 扱いしない。
+  - `e21` / `e3` は `source-target-only / not yet authored` として保持し、failure 扱いしない。
 - source-sample authoring policy current cut では、repo-local flow を `.docs/current-l2-source-sample-authoring-policy.md` と `scripts/current_l2_source_sample_regression.py` に寄せる。
-  - `inventory` は first authored trio の file presence と deferred row absence を確認する。
-  - `regression` は lowering / runner / ladder / formal-hook smoke bundle を current authored trio だけに流す。
+  - `inventory` は current authored quartet の file presence と deferred row absence を確認する。
+  - `regression` は lowering / runner / ladder / formal-hook smoke bundle を current authored quartet だけに流す。
   - current `bless` は retained artifact archive ではなく、source / fixture / matrix / ladder / snapshot docs の reviewed sync と regression success を意味する。
 
 ## fixture 一覧

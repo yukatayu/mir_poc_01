@@ -20,6 +20,33 @@ fn sample_path(name: &str) -> PathBuf {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_named_e1_sample() {
+    let bundle = load_bundle_from_fixture_path(fixture_path("e1-place-atomic-cut.json")).unwrap();
+    let report =
+        run_current_l2_source_sample("e1-place-atomic-cut", bundle.host_plan.unwrap()).unwrap();
+
+    assert_eq!(report.sample_id, "e1-place-atomic-cut");
+    assert_eq!(report.sample_path, sample_path("e1-place-atomic-cut.txt"));
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert!(report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::ExplicitFailure)
+    );
+    assert_eq!(
+        report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformFailure,
+        ]
+    );
+}
+
+#[test]
 fn current_l2_source_sample_runner_resolves_named_e2_sample_and_runs_runtime() {
     let bundle = load_bundle_from_fixture_path(fixture_path("e2-try-fallback.json")).unwrap();
     let report = run_current_l2_source_sample("e2-try-fallback", bundle.host_plan.unwrap()).unwrap();

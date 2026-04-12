@@ -44,6 +44,14 @@ class InventoryStatus:
 
 CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
     InventoryRow(
+        sample_stem="e1-place-atomic-cut",
+        authored_status="source-authored",
+        expected_static="valid",
+        expected_runtime="explicit_failure",
+        formal_hook="runtime_try_cut_cluster",
+        note="first widened authored row runtime path",
+    ),
+    InventoryRow(
         sample_stem="e2-try-fallback",
         authored_status="source-authored",
         expected_static="valid",
@@ -68,7 +76,7 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         note="first authored trio static stop",
     ),
     InventoryRow(
-        sample_stem="e1-place-atomic-cut",
+        sample_stem="e21-try-atomic-cut-frontier",
         authored_status="source-target-only",
         expected_static="not_yet_authored",
         expected_runtime="not_yet_authored",
@@ -77,14 +85,6 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
     ),
     InventoryRow(
         sample_stem="e3-option-admit-chain",
-        authored_status="source-target-only",
-        expected_static="not_yet_authored",
-        expected_runtime="not_yet_authored",
-        formal_hook="not_yet_authored",
-        note="deferred authored row",
-    ),
-    InventoryRow(
-        sample_stem="e21-try-atomic-cut-frontier",
         authored_status="source-target-only",
         expected_static="not_yet_authored",
         expected_runtime="not_yet_authored",
@@ -223,6 +223,20 @@ def plan_regression_commands(
             argv=("cargo", "test", "-p", "mir-semantics", "--test", "current_l2_formal_hook_support"),
         ),
         RegressionCommand(
+            name="runtime formal hook smoke for e1-place-atomic-cut",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-runtime",
+                "e1-place-atomic-cut",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(effective_label, "e1-place-atomic-cut"),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
             name="runtime formal hook smoke for e2-try-fallback",
             argv=(
                 python_cmd,
@@ -353,7 +367,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     regression_parser = subparsers.add_parser(
         "regression",
-        help="run the authored-sample regression command set for the first authored trio",
+        help="run the authored-sample regression command set for the current authored subset",
     )
     regression_parser.add_argument(
         "--artifact-root",

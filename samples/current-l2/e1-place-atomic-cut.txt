@@ -1,0 +1,14 @@
+place root {
+  place session {
+    place authority_cell {
+      perform update_authority on profile_authority
+        require write
+        ensure owner_is(session_user)
+
+      atomic_cut
+
+      perform append_audit on authority_log
+        require append
+    }
+  }
+}

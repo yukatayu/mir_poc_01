@@ -100,6 +100,7 @@ pub fn current_l2_default_source_sample_directory() -> PathBuf {
 fn current_l2_runner_accepted_sample_paths() -> Vec<PathBuf> {
     let root = current_l2_default_source_sample_directory();
     [
+        "e1-place-atomic-cut.txt",
         "e4-malformed-lineage.txt",
         "e2-try-fallback.txt",
         "e23-malformed-try-fallback-missing-fallback-body.txt",

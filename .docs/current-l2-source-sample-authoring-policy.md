@@ -18,8 +18,8 @@ current meaning は、
 
 ## current scope
 
-- current authored source sample は first trio `e2` / `e4` / `e23` に留める。
-- `e1` / `e3` / `e21` は source target only / not yet authored row であり、current widen sequencing は `e1 -> e21 -> e3` に置く。
+- current authored source sample は `e1` / `e2` / `e4` / `e23` の authored quartet に留める。
+- `e21` / `e3` は source target only / not yet authored row であり、remaining widen sequencing は `e21 -> e3` に置く。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
@@ -42,11 +42,12 @@ current regression helper が束ねるのは次である。
 - `cargo test -p mir-runtime --test current_l2_source_sample_runner`
 - `cargo test -p mir-runtime --test current_l2_source_sample_verification_ladder`
 - `cargo test -p mir-semantics --test current_l2_formal_hook_support`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e1-place-atomic-cut ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e2-try-fallback ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e4-malformed-lineage ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
 
-helper は current authored first trio だけを対象にし、deferred row を widen しない。
+helper は current authored quartet だけを対象にし、deferred row を widen しない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
 
 ## current non-goals
