@@ -15,9 +15,9 @@
 - Phase 1〜5 closeout / freeze は fixed 済みである。
 - legacy Phase 6 front-half compile-ready checkpoint も fixed 済みである。
 - current immediate line は、legacy checkpoint 名で言えば
-  - compare-ready bridge sketch second reopen
   - deferred `e3` actualization reopen timing
   - actual `e3` authored-row reopen
+  - proof / model-check first concrete tool pilot
   の並びにある。
 
 ## macro phase reading
@@ -39,15 +39,15 @@
 - parser-free current L2 PoC は runnable。
 - current authored source sample quintet `e1` / `e2` / `e21` / `e4` / `e23` は runnable ladder に接続済みである。
 - tool-neutral formal hook と `proof_notebook_review_unit` first pilot はある。
-- plain theorem-side bridge sketch first actualization もある。
+- plain theorem-side bridge sketch first actualization と compare-ready bridge sketch second reopen もある。
 - `e3` は source target only / deferred authored row のままである。
 
 ## current mainline
 
-1. compare-ready bridge sketch second reopen
-2. deferred `e3` actualization reopen timing
-3. actual `e3` authored-row reopen
-4. proof / model-check first concrete tool pilot
+1. deferred `e3` actualization reopen timing
+2. actual `e3` authored-row reopen
+3. proof / model-check first concrete tool pilot
+4. second source-sample cluster sequencing
 
 ## biggest later gates
 

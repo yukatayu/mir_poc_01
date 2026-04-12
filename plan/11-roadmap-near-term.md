@@ -13,16 +13,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 ## immediate execution order
 
-### 1. compare-ready bridge sketch second reopen
-
-- macro phase
-  - `Macro 5`
-- rough weight
-  - 中
-- rough 所要
-  - 1〜2 task / 数日
-
-### 2. deferred `e3` actualization reopen timing
+### 1. deferred `e3` actualization reopen timing
 
 - macro phase
   - `Macro 4-5`
@@ -31,7 +22,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 - rough 所要
   - 1〜2 task / 数日
 
-### 3. actual `e3` authored-row reopen
+### 2. actual `e3` authored-row reopen
 
 - macro phase
   - `Macro 4`
@@ -40,7 +31,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 - rough 所要
   - 1〜2 task / 数日
 
-### 4. proof / model-check first concrete tool pilot
+### 3. proof / model-check first concrete tool pilot
 
 - macro phase
   - `Macro 5`
@@ -69,5 +60,5 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 ## current recommendation
 
-- current near-term では、settled subset を runnable / verifiable に厚くする line を優先する。
+- current near-term では、compare-ready bridge sketch second reopen を fixed entry criteria に閉じたうえで、settled subset を runnable / verifiable に厚くする line を優先する。
 - backend や higher-level async-control family を current executable core に早く混ぜない。

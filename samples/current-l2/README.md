@@ -88,6 +88,6 @@ current reached-stage inventory は current authored quintet `e1` / `e2` / `e21`
 
 ## next steps
 
-- current next line は theorem-side compare-ready bridge sketch second reopen である
-- その後に deferred `e3` actualization reopen timing を置く
-- actual `e3` authored-row reopen はその後段に残す
+- current next line は deferred `e3` actualization reopen timing である
+- その後に actual `e3` authored-row reopen を置く
+- proof / model-check first concrete tool pilot はその後段に残す

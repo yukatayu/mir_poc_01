@@ -74,10 +74,10 @@
 
 ## current mainline
 
-1. `Macro 5` compare-ready bridge sketch second reopen
-2. `Macro 4-5` deferred `e3` actualization reopen timing
-3. `Macro 4` actual `e3` authored-row reopen
-4. `Macro 5` proof / model-check first concrete tool pilot
+1. `Macro 4-5` deferred `e3` actualization reopen timing
+2. `Macro 4` actual `e3` authored-row reopen
+3. `Macro 5` proof / model-check first concrete tool pilot
+4. `Macro 4` second source-sample cluster sequencing
 
 ## current stop lines
 

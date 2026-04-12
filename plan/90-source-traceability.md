@@ -2053,6 +2053,14 @@
   - `specs/examples/314-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-ready-minimal-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-threshold.md`
   - `docs/reports/0621-phase6-shared-single-attachment-frame-first-package.md`
 
+### 2026-04-12 phase6 compare-ready bridge sketch second reopen addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md`
+  - `specs/examples/341-current-l2-minimal-plain-proof-notebook-bridge-sketch-ready-compare-ready-bridge-sketch-second-reopen-comparison.md`
+  - `specs/examples/342-current-l2-compare-ready-bridge-sketch-second-reopen-ready-minimal-compare-ready-bridge-sketch-threshold.md`
+  - `docs/reports/0648-phase6-compare-ready-bridge-sketch-second-reopen-package.md`
+
 ### 2026-04-12 phase6 source-sample corpus scope and layout addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/15-current-l2-fixture-authoring-template.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
