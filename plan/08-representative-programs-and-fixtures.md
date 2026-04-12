@@ -28,6 +28,7 @@
 - current extension policy は `.txt` であり、final grammar を意味しない。
 - current naming policy は fixture stem / `fixture_id` aligned kebab-case である。
 - current initial cluster は `e1` / `e2` / `e3` / `e4` / `e21` / `e23` に留める。
+- current authored corpus はその initial sextet に `e22-try-atomic-cut-place-mismatch` を加えた septet に進んでいる。
 
 ## current mapping matrix cut
 
@@ -50,20 +51,21 @@
 - `e3-option-admit-chain` は representative prose plain `E3` ではなく `E3-variant` row として扱う。
 - `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
 - current matrix 自体では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
-- source sample の actual file current authored sextet は `e1` / `e2` / `e3` / `e21` / `e4` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。`e3` は admit-family third slot として source row / runner / inventory / ladder までは実装済みだが、formal hook stage は guarded に留めるのが current first choice である。
-- verification ladder current cut では、current authored sextet に reached stage row を付ける。
+- source sample の actual file current authored septet は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。`e3` は admit-family third slot として source row / runner / inventory / ladder までは実装済みだが、formal hook stage は guarded に留めるのが current first choice である。
+- verification ladder current cut では、current authored septet に reached stage row を付ける。
   - `e1` は `static gate = reached(valid)`、`interpreter = reached(explicit_failure)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e2` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e3` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = not reached (guarded)` と読む。
   - `e21` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
+  - `e22` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e4` / `e23` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
 - source-sample authoring policy current cut では、repo-local flow を `.docs/current-l2-source-sample-authoring-policy.md` と `scripts/current_l2_source_sample_regression.py` に寄せる。
-  - `inventory` は current authored sextet の file presence と guarded row status を確認する。
-  - `regression` は lowering / runner / ladder bundle を current authored sextet に流し、formal-hook smoke sub-bundleは `runtime_try_cut_cluster` / `fixture_static_cluster` current top に入る 5 row だけに流す。
+  - `inventory` は current authored septet の file presence と guarded row status を確認する。
+  - `regression` は lowering / runner / ladder bundle を current authored septet に流し、formal-hook smoke sub-bundleは `runtime_try_cut_cluster` / `fixture_static_cluster` current top に入る 6 row だけに流す。
   - current `bless` は retained artifact archive ではなく、source / fixture / matrix / ladder / snapshot docs の reviewed sync と regression success を意味する。
-- post-sextet first cluster sequencing current cut では、first broader authored-row family は `e21` / `e22` try-rollback locality contrast に置く。
-  - `e21` は already source-authored frontier-update anchor である。
-  - `e22` は next source-authored contrast-row candidate である。
+- post-sextet first cluster current cut では、first broader authored-row family は `e21` / `e22` try-rollback locality contrast に置く。
+  - `e21` は source-authored frontier-update anchor である。
+  - `e22` は source-authored place-mismatch contrast row として actualize 済みである。
   - stable static malformed family は post-contrast broader follow-up cluster に残す。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 

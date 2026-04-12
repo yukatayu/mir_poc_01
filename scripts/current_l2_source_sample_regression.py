@@ -84,6 +84,14 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         note="second widened authored row runtime path",
     ),
     InventoryRow(
+        sample_stem="e22-try-atomic-cut-place-mismatch",
+        authored_status="source-authored",
+        expected_static="valid",
+        expected_runtime="success",
+        formal_hook="runtime_try_cut_cluster",
+        note="post-sextet first contrast-row runtime path",
+    ),
+    InventoryRow(
         sample_stem="e23-malformed-try-fallback-missing-fallback-body",
         authored_status="source-authored",
         expected_static="malformed",
@@ -142,7 +150,7 @@ def format_inventory_text(statuses: Sequence[InventoryStatus]) -> str:
     ]
     return "\n".join(
         [
-            "current L2 fixed-subset first-cluster inventory",
+            "current L2 fixed-subset authored inventory",
             header,
             divider,
             *body,
@@ -261,6 +269,20 @@ def plan_regression_commands(
                 str(artifact_root),
                 "--run-label",
                 smoke_run_label(effective_label, "e21-try-atomic-cut-frontier"),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
+            name="runtime formal hook smoke for e22-try-atomic-cut-place-mismatch",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-runtime",
+                "e22-try-atomic-cut-place-mismatch",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(effective_label, "e22-try-atomic-cut-place-mismatch"),
                 "--overwrite",
             ),
         ),

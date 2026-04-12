@@ -18,9 +18,9 @@ current meaning は、
 
 ## current scope
 
-- current authored source sample は `e1` / `e2` / `e3` / `e21` / `e4` / `e23` の authored sextet に置く。
+- current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の authored septet に置く。
 - `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
-- post-sextet first cluster sequencing は `e21` / `e22` try-rollback locality contrast に fixed しており、next authored-row candidate は `e22-try-atomic-cut-place-mismatch` に置く。
+- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、next line は stable static malformed post-contrast sequencing に置く。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
@@ -46,10 +46,11 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e1-place-atomic-cut ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e2-try-fallback ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e21-try-atomic-cut-frontier ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e22-try-atomic-cut-place-mismatch ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e4-malformed-lineage ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
 
-helper は current authored sextet を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
+helper は current authored septet を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
 
 ## current non-goals

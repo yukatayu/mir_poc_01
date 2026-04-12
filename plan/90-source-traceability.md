@@ -2207,6 +2207,22 @@
   - `scripts/current_l2_source_sample_regression.py`
   - `scripts/tests/test_current_l2_source_sample_regression.py`
 
+### 2026-04-12 phase6 actual e22 contrast-row source actualization addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/351-current-l2-second-source-sample-cluster-sequencing-ready-actual-e22-contrast-row-source-actualization-comparison.md`
+  - `specs/examples/352-current-l2-actual-e22-contrast-row-source-actualization-ready-minimal-actual-e22-contrast-row-threshold.md`
+  - `docs/reports/0654-phase6-actual-e22-contrast-row-source-actualization-package.md`
+  - `samples/current-l2/e22-try-atomic-cut-place-mismatch.txt`
+  - `crates/mir-ast/src/current_l2.rs`
+  - `crates/mir-ast/tests/current_l2_stage2_try_rollback_spike.rs`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`
+
 ### 2026-04-12 phase6 third widened row e3 guard comparison addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。

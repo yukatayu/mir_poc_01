@@ -1,0 +1,20 @@
+place root {
+  place session {
+    place draft_profile {
+      try {
+        perform stage_profile_patch on profile_draft
+          require write
+
+        place profile_annotation {
+          atomic_cut
+        }
+
+        perform validate_profile_patch on profile_draft
+          require well_formed(profile_draft)
+      } fallback {
+        perform load_last_snapshot on profile_snapshot
+          require read
+      }
+    }
+  }
+}

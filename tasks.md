@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 22:35 JST
+最終更新: 2026-04-12 23:13 JST
 
 ## この文書について
 
@@ -22,8 +22,8 @@
   - `Macro 5` theorem / verifier bridge
   が mainline である。
 - second source-sample cluster sequencing は `specs/examples/349...350` により fixed 済みであり、post-sextet first cluster は `e21` / `e22` try-rollback locality contrast に置く。
-- current promoted line は **actual `e22` contrast-row source actualization** であり、その後に
-  - stable static malformed post-contrast sequencing
+- actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の septet に進んだ。
+- current promoted line は **stable static malformed post-contrast sequencing** であり、その後に
   - parser / checker / runtime public surface inventory
   - Mirrorea / shared-space docs-first re-entry
   - model-check / public-checker second reserve inventory
@@ -33,24 +33,14 @@
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 4` | sample corpus widening | `S4 -> S5-S6` | actual `e22` contrast-row source actualization | 1〜3 task / 数日〜1週 | 自走可能 |
-| 2 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable static malformed post-contrast sequencing | 1〜3 task / 数日〜1週 | 自走可能 |
-| 3 | `Macro 3-7` | public operational surface | `S1-S2 -> S3` | parser / checker / runtime public surface inventory | 2〜4 task / 1〜2週 | 一部自走可能 |
-| 4 | `Macro 6` | fabric / shared-space boundary | `S2-S3` 維持 | Mirrorea / shared-space docs-first re-entry package | 2〜5 task / 複数週 | boundary までは自走可能 |
-| 5 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check / public-checker second reserve inventory | 1〜3 task / 1〜2週 | 一部自走可能 |
+| 1 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable static malformed post-contrast sequencing | 1〜3 task / 数日〜1週 | 自走可能 |
+| 2 | `Macro 3-7` | public operational surface | `S1-S2 -> S3` | parser / checker / runtime public surface inventory | 2〜4 task / 1〜2週 | 一部自走可能 |
+| 3 | `Macro 6` | fabric / shared-space boundary | `S2-S3` 維持 | Mirrorea / shared-space docs-first re-entry package | 2〜5 task / 複数週 | boundary までは自走可能 |
+| 4 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check / public-checker second reserve inventory | 1〜3 task / 1〜2週 | 一部自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. actual `e22` contrast-row source actualization
-
-- macro phase
-  - `Macro 4`
-- 目的
-  - `e21` / `e22` try-rollback locality contrast を first post-sextet cluster として actual source row まで接続する。
-- 完了条件
-  - `e22` source text / runner accepted set / regression inventory / README ladder / formal-hook smoke route を current contrast row として同期する。
-
-### Package 2. stable static malformed post-contrast sequencing
+### Package 1. stable static malformed post-contrast sequencing
 
 - macro phase
   - `Macro 4`
@@ -59,7 +49,7 @@
 - 完了条件
   - duplicate cluster と stable reason-code cluster を混ぜず、next broader cluster を docs / fixture / regression の 3 層で切る。
 
-### Package 3. parser / checker / runtime public surface inventory
+### Package 2. parser / checker / runtime public surface inventory
 
 - macro phase
   - `Macro 3-7`
@@ -68,7 +58,7 @@
 - 完了条件
   - final public parser / checker / runtime API をまだ固定せず、どこまで helper-local に留めるかを docs-first に整理する。
 
-### Package 4. Mirrorea / shared-space docs-first re-entry
+### Package 3. Mirrorea / shared-space docs-first re-entry
 
 - macro phase
   - `Macro 6`
@@ -77,7 +67,7 @@
 - 完了条件
   - Mirrorea、shared-space、Typed-Effect、Prism、apps を 1 行に潰さず、boundary と user-spec gate を明示する。
 
-### Package 5. model-check / public-checker second reserve inventory
+### Package 4. model-check / public-checker second reserve inventory
 
 - macro phase
   - `Macro 5`

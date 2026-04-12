@@ -210,11 +210,29 @@ pub fn parse_stage2_try_rollback_text(source: &str) -> Result<Stage2ParsedTryFal
     let mut fallback_body = Vec::new();
     let mut in_fallback = false;
     let mut closed = false;
+    let mut nested_block_depth = 0usize;
 
     for line in lines.iter().skip(1) {
+        if nested_block_depth > 0 {
+            if line.ends_with('{') {
+                nested_block_depth += 1;
+                continue;
+            }
+            if *line == "}" {
+                nested_block_depth = nested_block_depth.saturating_sub(1);
+                continue;
+            }
+            continue;
+        }
+
         if !in_fallback {
             if *line == "} fallback {" {
                 in_fallback = true;
+                continue;
+            }
+            if line.ends_with('{') {
+                body.push(Stage2StatementHeadKind::Other);
+                nested_block_depth = 1;
                 continue;
             }
             body.push(parse_statement_head(line)?);
@@ -233,11 +251,21 @@ pub fn parse_stage2_try_rollback_text(source: &str) -> Result<Stage2ParsedTryFal
             return Err(format!("unexpected content after fallback close `{line}`"));
         }
 
+        if line.ends_with('{') {
+            fallback_body.push(Stage2StatementHeadKind::Other);
+            nested_block_depth = 1;
+            continue;
+        }
+
         fallback_body.push(parse_statement_head(line)?);
     }
 
     if !in_fallback {
         return Err("stage 2 input is missing `} fallback {` delimiter".to_string());
+    }
+
+    if nested_block_depth != 0 {
+        return Err("stage 2 input is missing closing `}` for nested block".to_string());
     }
 
     if !closed {
