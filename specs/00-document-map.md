@@ -673,6 +673,10 @@
   - actual `e22` contrast-row source actualization fixed 後の次段として、stable static malformed broader cluster をどこから reopen するかを、stable reason-code / fixture-static cluster、duplicate cluster、try/rollback malformed-static family、broader runtime familyの分離を保ちながら比較する補助文書。
 - `specs/examples/354-current-l2-stable-static-malformed-post-contrast-sequencing-ready-minimal-stable-static-malformed-post-contrast-sequencing-threshold.md`
   - stable static malformed post-contrast sequencing の minimum を `sequencing_kind + entry_criteria_refs + selected_cluster_refs + selected_first_reopen_rows + guard_refs + kept_later_refs` に留める補助文書。
+- `specs/examples/355-current-l2-stable-static-malformed-post-contrast-sequencing-ready-parser-checker-runtime-public-surface-inventory-comparison.md`
+  - stable static malformed post-contrast sequencing fixed 後の次段として、already-public parser-free helper stack、crate-public but non-production parser/checker/runtime tranche、repo-local helper / example emitter surface の 3 bucket split を current public operational surface inventory として比較する補助文書。
+- `specs/examples/356-current-l2-parser-checker-runtime-public-surface-inventory-ready-minimal-parser-checker-runtime-public-surface-inventory-threshold.md`
+  - parser / checker / runtime public surface inventory の minimum を `inventory_kind + already_public_parser_free_refs + crate_public_nonproduction_refs + repo_local_helper_refs + guard_refs + kept_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

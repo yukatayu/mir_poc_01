@@ -370,6 +370,50 @@ aggregate export も同じである。
 - current non-production aggregate emitter sketch は許容する
 - ただし actual aggregate exporter API は `harness.rs` の public behavior と切り分けたまま OPEN に残す
 
+## current public operational surface inventory
+
+current repo の public operational surface inventory では、少なくとも 3 bucket を分けて読むのが自然である。
+
+### 1. already-public parser-free helper stack
+
+- `mir-semantics` crate の parser-free public behavior であり、
+  - `run_bundle`
+  - `discover_bundles_in_directory`
+  - `select_bundles_from_request`
+  - `run_directory_profiled`
+  - `run_directory_named_profile`
+  を中心とする bundle / discovery / selection / profile stack を指す。
+- これは current repo で already-public behavior と読んでよく、Phase 6 current tranche の visibility と混ぜない。
+
+### 2. crate-public but non-production compile-ready tranche
+
+- `mir_ast::current_l2`
+- `mir_runtime::current_l2`
+- `static_gate_program_detailed`
+- `DirectStyleEvaluator::from_program`
+- `run_program_to_completion`
+- `FixtureHostStub::run_program`
+
+これらは crate から見えていても、current docs では non-production thin tranche と読む。
+Rust の `pub` visibility だけで final public operational contract に昇格したと解釈しない。
+
+### 3. repo-local helper / example emitter surface
+
+- `crates/mir-semantics/examples/*`
+- `crates/mir-semantics/examples/support/*`
+- `scripts/current_l2_detached_loop.py`
+- `scripts/current_l2_source_sample_regression.py`
+- family checker / diff helper / assist helper 群
+
+これらは repo-local operational aid であり、public crate contract とは別 bucket に残す。
+
+## inventory guard
+
+- already-public parser-free stack を current tranche の later promotion pressureで巻き戻さない。
+- crate-public symbol をそのまま final public API と誤読しない。
+- example/support helper と Python orchestration helper を public crate namespace へ hidden promotion しない。
+- final public parser / checker / runtime API、public runner / exporter CLI、public theorem / model-check / checker migration は still later に残す。
+
 ## この先の update 指針
 
 helper layer が変わったら、少なくとも次のどれを更新すべきかを見る。

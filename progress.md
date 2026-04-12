@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 23:33 JST
+最終更新: 2026-04-12 23:40 JST
 
 ## この文書について
 
@@ -31,6 +31,7 @@
 - tool-neutral formal hook から `proof_notebook_review_unit` を作る first theorem-side pilot と、`comparison_basis_refs` までを持つ compare-ready bridge sketch second reopen はあるが、bless / review-session metadata、concrete theorem / model-check binding はまだ later である。
 - second source-sample cluster sequencing と actual `e22` contrast-row source actualization も fixed 済みであり、first post-sextet runtime contrast pair は `e21` / `e22` に置く。`e22` は source row / runner / regression inventory / verification ladder / runtime formal-hook smoke まで actualize 済みである。
 - stable static malformed post-contrast sequencing も fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster、Macro 4 side の next reopen point は `e4` / `e19` edge-pair に置く。repo-level current line は parser / checker / runtime public surface inventory へ進んだ。
+- parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free helper stack、crate-public but non-production compile-ready tranche、repo-local helper / example emitter surface の 3 bucket split を current reading に置く。repo-level current line は Mirrorea / shared-space docs-first re-entry へ進んだ。
 - final parser grammar、final public parser / checker / runtime API、LLVM-family backend、Mirrorea operational runtime、shared-space final catalog はまだ無い。
 
 ## Macro phase map
@@ -40,11 +41,11 @@
 | `Macro 0` | 95% | repository memory / docs / traceability | maintenance | 自走可能 | report / snapshot / plan / FAQ の整流ルールはかなり安定 |
 | `Macro 1` | 94% | semantic kernel / invariant stabilization | late | 自走可能 | current L2 semantics / invariant bridge はかなり安定 |
 | `Macro 2` | 97% | parser-free validation substrate | late | 自走可能 | parser-free PoC と detached validation loop は runnable |
-| `Macro 3` | 90% | compile-ready minimal actualization | late | 自走可能 | parser / checker / runtime / formal-hook の non-production minimal cut は揃った |
+| `Macro 3` | 91% | compile-ready minimal actualization | late | 自走可能 | parser / checker / runtime / formal-hook の non-production minimal cut と public-surface inventory は揃った |
 | `Macro 4` | 76% | executable fixed-subset sample expansion | active | 自走可能 | current authored septet runnable。`e21/e22` contrast と broader-cluster sequencing は fixed 済みで、次は stable-static edge-pair first reopen |
 | `Macro 5` | 45% | static reasoning / theorem / model-check bridge | early | 一部自走可能 | proof notebook review-unit current cut を first concrete pilot に固定。model-check side は second reserve |
 | `Macro 6` | 22% | distributed fabric / shared-space / runtime evolution | docs-first boundary only | 境界までは自走可能 | Mirrorea / shared-space は boundary と practical cut が先。final catalog は user spec required |
-| `Macro 7` | 14% | toolchain / backend / developer surface | inventory only | 一部自走可能 | Rust-heavy direction はあるが、backend / public operational surface はまだ早い |
+| `Macro 7` | 17% | toolchain / backend / developer surface | inventory only | 一部自走可能 | public operational surface inventory は fixed 済みだが、actual public CLI / backend はまだ早い |
 | `Macro 8` | 5% | domain / application realization | not started | 要仕様確認 | 上位アプリの concrete goal が未確定 |
 
 ## Feature maturity stage legend
@@ -66,7 +67,7 @@
 | `event DAG` / `place` / local `try` / `atomic_cut` | `S5-S6` | fixed subset では runnable。parser-free fixture と source sample の双方で evidence がある | `durable_cut`、distributed finalization、final syntax | 自走可能 |
 | guarded option chain / `lease` / monotone degradation | `S5-S6` | semantics / invariant / fixture baseline は厚く、`e3` source-authored row まで runtime success で通る | full syntax / algebra、`Approximate` / `Compensate`、formal-hook widening | 自走可能 |
 | parser-free validation loop | `S6` | interpreter / host harness / bundle / batch / detached compare loop が runnable | public exporter / retention policy / detached serialization | 自走可能 |
-| parser / checker / runtime actualization | `S4-S5` | `mir-ast` / `mir-semantics` / `mir-runtime` の narrow non-production tranche が compile-ready | final grammar、public surface、richer host interface | 自走可能 |
+| parser / checker / runtime actualization | `S4-S5` | `mir-ast` / `mir-semantics` / `mir-runtime` の narrow non-production tranche が compile-ready で、public-surface inventory も fixed 済み | final grammar、public surface actualization gate、richer host interface | 自走可能 |
 | source-backed sample corpus / verification ladder | `S5-S6` | current authored septet `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` が ladder に乗る。`e22` は runtime/formal-hook reached、`e3` は formal hook だけ guarded。post-contrast broader-cluster sequencing も fixed 済み | stable-static edge-pair first reopen、final CLI、public retention path | 自走可能 |
 | contracts / static gate / formal hook / proof notebook first bridge | `S4-S5` | tool-neutral formal hook、review-unit pilot、plain bridge sketch first actualization、compare-ready bridge sketch second reopenがある | bless / review-session metadata、concrete theorem / model-check binding、public checker line | 自走可能 |
 | multi-node / routing / overlay / safe downstream addition | `S2-S3` | semantic constraintsと docs-first boundaryはある | route proof、suspended task / patch interaction、operational realization | 境界までは自走可能 |
@@ -92,14 +93,14 @@
 
 ## 現在の self-driven line
 
-1. **Macro 3-7 / parser-checker-runtime public surface inventory**
-   - helper-local current surface と later public operational surface の境界を narrow に inventory 化する。
-2. **Macro 6 / Mirrorea shared-space docs-first re-entry**
+1. **Macro 6 / Mirrorea shared-space docs-first re-entry**
    - old FutureWork bucket に押し込めず、fabric / shared-space line を独立 track として再開する。
-3. **Macro 5 / model-check / public-checker second reserve inventory**
+2. **Macro 5 / model-check / public-checker second reserve inventory**
    - proof-notebook first concrete cut の後で machine-facing carrier の next reopen point を narrow に整理する。
-4. **Macro 4 / stable-static edge-pair first reopen**
+3. **Macro 4 / stable-static edge-pair first reopen**
    - stable reason-code / fixture-static cluster selection を崩さず、`e4` / `e19` edge-pair side を source-backed line へ戻す。
+4. **Macro 3-7 / public operational surface actualization gate**
+   - already-public parser-free stack を壊さず、current compile-ready tranche の later public pressure をどこから受けるかを narrow に決める。
 
 ## 研究で見つけることと、user が決めること
 
@@ -107,7 +108,7 @@
 
 - stable-static edge-pair first reopen の bundle shape
 - concrete theorem / model-check bridge の最小 carrier
-- backend / public operational surface をどこで narrow pilot するか
+- public operational surface actualization の first sub-cut
 
 ### user が決めること
 
@@ -142,6 +143,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 23:40 JST — `docs/reports/0656` と `specs/examples/355...356` で parser / checker / runtime public surface inventory を閉じ、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を固定した。repo-level current line は Mirrorea / shared-space docs-first re-entry に進んだ。
 - 2026-04-12 23:33 JST — `docs/reports/0655` と `specs/examples/353...354` で stable static malformed post-contrast sequencing を閉じ、second broader cluster を stable reason-code / fixture-static cluster、Macro 4 side の next reopen point を `e4/e19` edge-pair に固定した。repo-level current line は parser / checker / runtime public surface inventory に進んだ。
 - 2026-04-12 23:13 JST — `docs/reports/0654` と `specs/examples/351...352` で actual `e22` contrast-row source actualization を閉じ、`e22-try-atomic-cut-place-mismatch` を source-authored row / runner accepted set / regression inventory / verification ladder / runtime formal-hook smoke に actualize した。current line は stable static malformed post-contrast sequencing に進んだ。
 - 2026-04-12 22:35 JST — `docs/reports/0652` と `specs/examples/349...350` で second source-sample cluster sequencing を閉じ、post-sextet first cluster は `e21/e22` try-rollback locality contrast、next actual row は `e22` に置く cut を固定した。current line は `e22` contrast-row source actualization に進んだ。

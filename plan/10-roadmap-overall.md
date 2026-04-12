@@ -126,10 +126,10 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. parser / checker / runtime public surface inventory
-2. Mirrorea / shared-space docs-first re-entry
-3. model-check / public-checker second reserve inventory
-4. stable-static edge-pair first reopen
+1. Mirrorea / shared-space docs-first re-entry
+2. model-check / public-checker second reserve inventory
+3. stable-static edge-pair first reopen
+4. public operational surface actualization gate
 
 これは主に `Macro 4` と `Macro 5` の line である。
 

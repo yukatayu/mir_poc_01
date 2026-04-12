@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 23:33 JST
+最終更新: 2026-04-12 23:40 JST
 
 ## この文書について
 
@@ -24,33 +24,25 @@
 - second source-sample cluster sequencing は `specs/examples/349...350` により fixed 済みであり、post-sextet first cluster は `e21` / `e22` try-rollback locality contrast に置く。
 - actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の septet に進んだ。
 - stable static malformed post-contrast sequencing も `specs/examples/353...354` により fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster、Macro 4 side の next reopen point は `e4` / `e19` edge-pair に置く。
-- current promoted line は **parser / checker / runtime public surface inventory** であり、その後に
-  - Mirrorea / shared-space docs-first re-entry
+- parser / checker / runtime public surface inventory も `specs/examples/355...356` により fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split に整理した。
+- current promoted line は **Mirrorea / shared-space docs-first re-entry** であり、その後に
   - model-check / public-checker second reserve inventory
   - stable-static edge-pair first reopen
+  - public operational surface actualization gate
   を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 3-7` | public operational surface | `S1-S2 -> S3` | parser / checker / runtime public surface inventory | 2〜4 task / 1〜2週 | 一部自走可能 |
-| 2 | `Macro 6` | fabric / shared-space boundary | `S2-S3` 維持 | Mirrorea / shared-space docs-first re-entry package | 2〜5 task / 複数週 | boundary までは自走可能 |
-| 3 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check / public-checker second reserve inventory | 1〜3 task / 1〜2週 | 一部自走可能 |
-| 4 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable-static edge-pair first reopen | 1〜3 task / 数日〜1週 | 自走可能 |
+| 1 | `Macro 6` | fabric / shared-space boundary | `S2-S3` 維持 | Mirrorea / shared-space docs-first re-entry package | 2〜5 task / 複数週 | boundary までは自走可能 |
+| 2 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check / public-checker second reserve inventory | 1〜3 task / 1〜2週 | 一部自走可能 |
+| 3 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable-static edge-pair first reopen | 1〜3 task / 数日〜1週 | 自走可能 |
+| 4 | `Macro 3-7` | public operational surface | `S2-S3 -> S3-S4` | public operational surface actualization gate | 2〜4 task / 1〜2週 | 一部自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. parser / checker / runtime public surface inventory
-
-- macro phase
-  - `Macro 3-7`
-- 目的
-  - current helper-local / non-production surface と later public operational surface の境界を inventory 化する。
-- 完了条件
-  - final public parser / checker / runtime API をまだ固定せず、どこまで helper-local に留めるかを docs-first に整理する。
-
-### Package 2. Mirrorea / shared-space docs-first re-entry
+### Package 1. Mirrorea / shared-space docs-first re-entry
 
 - macro phase
   - `Macro 6`
@@ -59,7 +51,7 @@
 - 完了条件
   - Mirrorea、shared-space、Typed-Effect、Prism、apps を 1 行に潰さず、boundary と user-spec gate を明示する。
 
-### Package 3. model-check / public-checker second reserve inventory
+### Package 2. model-check / public-checker second reserve inventory
 
 - macro phase
   - `Macro 5`
@@ -68,7 +60,7 @@
 - 完了条件
   - proof notebook current cut を巻き戻さず、machine-facing carrier の reserve line だけを narrow に整理する。
 
-### Package 4. stable-static edge-pair first reopen
+### Package 3. stable-static edge-pair first reopen
 
 - macro phase
   - `Macro 4`
@@ -76,6 +68,15 @@
   - stable static malformed broader cluster の first concrete reopen を `e4` / `e19` edge-pair sideへ narrow に actualize する。
 - 完了条件
   - duplicate cluster と try/rollback malformed-static family を still later に残したまま、stable-static edge-pair line だけを source / fixture / ladder へ戻す。
+
+### Package 4. public operational surface actualization gate
+
+- macro phase
+  - `Macro 3-7`
+- 目的
+  - public surface inventory fixed 後に、already-public parser-free stack を壊さずにどの current tranche から actual promotion pressure を受けるかを整理する。
+- 完了条件
+  - `pub visibility != final public contract` を保ったまま、later public API / CLI reopen の first sub-cut を narrow に示す。
 
 ## 研究を通して見つけること
 
@@ -89,15 +90,15 @@
 - current recommendation
   - **stable reason-code / fixture-static cluster selection は fixed とし、first reopen は `e4` / `e19` edge-pair sideへ narrow に戻す**。
 
-### Discovery 2. public operational surface の inventory timing
+### Discovery 2. public operational surface の actualization timing
 
 - 概要
-  - parser / checker / runtime current helper-local surface をどの順で public inventory に切り出すか。
+  - inventory fixed 後に、parser / checker / runtime current tranche のどこから actual public pressure を受けるか。
 - 何に影響するか
   - crate boundary
   - future CLI / public API timing
 - current recommendation
-  - **current helper-local surface を先に inventory 化し、final public API は still later に残す**。
+  - **parser-free existing public behavior を維持し、current tranche の actual promotion は still later の first sub-cut に残す**。
 
 ### Discovery 3. model-check / public-checker second reserve の入口
 

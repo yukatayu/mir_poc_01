@@ -67,7 +67,7 @@
   - `e21` は source-authored frontier-update anchor である。
   - `e22` は source-authored place-mismatch contrast row として actualize 済みである。
   - stable static malformed post-contrast sequencing では、second broader cluster を stable reason-code / fixture-static cluster、Macro 4 side の next reopen point を `e4` / `e19` edge-pair に置く。
-  - repo-level next package は parser / checker / runtime public surface inventory に handoff する。
+  - parser / checker / runtime public surface inventory は fixed 済みであり、repo-level current line は Mirrorea / shared-space docs-first re-entry に handoff している。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

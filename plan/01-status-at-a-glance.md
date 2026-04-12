@@ -39,16 +39,16 @@
 
 - parser-free current L2 PoC は runnable。
 - current authored source sample septet `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` は runnable ladder に接続済みであり、`e22` は runtime/formal-hook reached、`e3` は formal hook stage だけ guarded に残す。
-- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable static malformed post-contrast sequencing も fixed 済みである。repo-level next line は parser / checker / runtime public surface inventory に置き、Macro 4 side の next reopen は `e4` / `e19` edge-pair に残す。
+- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable static malformed post-contrast sequencing も fixed 済みである。parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。repo-level next line は Mirrorea / shared-space docs-first re-entry に置き、Macro 4 side の next reopen は `e4` / `e19` edge-pair に残す。
 - tool-neutral formal hook と `proof_notebook_review_unit` first pilot はある。
 - plain theorem-side bridge sketch first actualization と compare-ready bridge sketch second reopen もある。
 
 ## current mainline
 
-1. parser / checker / runtime public surface inventory
-2. Mirrorea / shared-space docs-first re-entry
-3. model-check / public-checker second reserve inventory
-4. stable-static edge-pair first reopen
+1. Mirrorea / shared-space docs-first re-entry
+2. model-check / public-checker second reserve inventory
+3. stable-static edge-pair first reopen
+4. public operational surface actualization gate
 
 ## biggest later gates
 

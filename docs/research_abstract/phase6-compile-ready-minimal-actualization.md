@@ -185,8 +185,11 @@ actual `e22` contrast-row source actualization も fixed 済みであり、`e22-
 `specs/examples/353...354` により、
 stable static malformed post-contrast sequencing も fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster、Macro 4 side の next reopen point は `e4` / `e19` edge-pair に置く current cut を採った。duplicate cluster、`TryFallback` / `AtomicCut` malformed-static family、broader runtime family は still later に残し、repo-level next line は public surface inventory に handoff した。
 
+`specs/examples/355...356` により、
+parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free helper stack、crate-public but non-production compile-ready tranche、repo-local helper / example emitter surface の 3 bucket split を current reading に置いた。`pub` visibility だけで final public operational contract に昇格させず、repo-level next line は Mirrorea / shared-space docs-first re-entry に handoff した。
+
 current mainline は、
-**Phase 6 parser / checker / runtime public surface inventory**
+**repo-level current line は Mirrorea / shared-space docs-first re-entry**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -195,9 +198,10 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- parser / checker / runtime public surface inventory
 - Mirrorea / shared-space docs-first re-entry
 - model-check / public-checker second reserve inventory
+- stable-static edge-pair first reopen
+- public operational surface actualization gate
 
 を揃えるのが主眼になる。
 
