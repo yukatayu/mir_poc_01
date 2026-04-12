@@ -88,6 +88,6 @@ current reached-stage inventory は current authored quintet `e1` / `e2` / `e21`
 
 ## next steps
 
-- current next line は theorem-side plain bridge sketch actualization である
-- その後に theorem-side compare-ready bridge sketch second reopen を置く
-- deferred `e3` actualization reopen timing はその後段に残す
+- current next line は theorem-side compare-ready bridge sketch second reopen である
+- その後に deferred `e3` actualization reopen timing を置く
+- actual `e3` authored-row reopen はその後段に残す

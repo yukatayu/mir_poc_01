@@ -13,7 +13,7 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering、`e1` / `e21` actualization、`e3` guard comparison、maintenance close を fixed 済み entry criteria とし、current line を theorem-side plain bridge sketch actualization に置く
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering、`e1` / `e21` actualization、`e3` guard comparison、plain bridge sketch actualization、maintenance close を fixed 済み entry criteria とし、current line を theorem-side compare-ready bridge sketch second reopen に置く
 5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy と proof-notebook review-unit pilot を維持しつつ、widened authored-row order `e1 -> e21 -> e3`、theorem-side plain bridge sketch first / compare-ready bridge sketch second の順を final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
@@ -71,9 +71,9 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- theorem-side plain bridge sketch actualization を比較する
 - theorem-side compare-ready bridge sketch second reopen を比較する
 - deferred `e3` actualization reopen timing を比較する
+- actual `e3` authored-row reopen を比較する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
 ## 主要な blocker / risk
@@ -96,7 +96,7 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| plain bridge sketch actualization + compare-ready bridge sketch second reopen | 2〜4 task |
+| compare-ready bridge sketch second reopen + deferred `e3` actualization reopen timing | 2〜4 task |
 | plain bridge sketch actualization | 1〜2 task |
 | compare-ready bridge sketch second reopen | 1〜2 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |

@@ -397,7 +397,7 @@ consumer-specific attachment として後段に残すのが current first choice
 - public checker migration
 - low-level memory-order family
 
-この closeout により、Phase 5 の self-driven snapshot は fixed と読める。Phase 6 front-half の parser / checker-runtime / compile-ready formal-hook first tranche も `specs/examples/299...304` で fixed 済みであり、その後 `specs/examples/305...338` により next reopen sequencing、parser second tranche first package、reserve formal tool binding inventory、source-sample path first packages、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering、`e1` / `e21` actualization、`e3` guard comparison も fixed 済みである。follow-up maintenance も report-backed に閉じており、repo-level current mainline は **Phase 6 theorem-side plain bridge sketch actualization** である。Phase 5 は fixed entry criteria と retained-later inventory を渡し終えた状態として読むのが自然である。
+この closeout により、Phase 5 の self-driven snapshot は fixed と読める。Phase 6 front-half の parser / checker-runtime / compile-ready formal-hook first tranche も `specs/examples/299...304` で fixed 済みであり、その後 `specs/examples/305...340` により next reopen sequencing、parser second tranche first package、reserve formal tool binding inventory、source-sample path first packages、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering、`e1` / `e21` actualization、`e3` guard comparison、plain bridge sketch actualization も fixed 済みである。follow-up maintenance も report-backed に閉じており、repo-level current mainline は **Phase 6 theorem-side compare-ready bridge sketch second reopen** である。Phase 5 は fixed entry criteria と retained-later inventory を渡し終えた状態として読むのが自然である。
 
 ## まだやっていないこと
 
