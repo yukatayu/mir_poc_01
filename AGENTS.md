@@ -8,6 +8,7 @@ The repository therefore treats documentation structure as part of the project's
 1. **Read in order**
    - Start with `README.md`, then `Documentation.md`, then the ordered specs in `specs/00...03`, then `specs/09`, then the subsystem-specific document you need.
    - If the task asks about **current status / progress / remaining steps / roadmap**, also read `progress.md` after `Documentation.md`.
+   - If the task asks about **phase recut / roadmap rewrite / progress/tasks reorganization**, also read `.docs/progress-task-axes.md` after `progress.md`.
    - `progress.md` is a rough status snapshot, not a normative source. Normative judgments remain in `specs/` and long-term repository memory remains in `plan/`.
 
 2. **Do not invent requirements**
@@ -77,10 +78,15 @@ Every report should contain, in this order:
 
 - repo-scoped skill `discord-report` を使う task では、実装・コマンド実行・ファイル編集を始める前に `python3 .agents/skills/discord-report/scripts/discord_notify.py begin --cwd .` を 1 回実行し、通知を送らずに差分基準だけを記録すること。
 - 短い task では途中通知を送らず、終了時だけを対象にすること。
-- 長い task では、自然な区切りがあり、かつ前回通知からおおむね 1 時間以上空いたときだけ `progress` を送ること。
+- 長い task では、自然な区切りがあり、かつ前回通知から**平均しておおむね 1 時間前後**空いたときだけ `progress` を送ること。数分ごとの過剰通知は避けること。
 - user が **連続した task package をまとめて自走してほしい** と依頼した場合は、各 package 完了時点を自然な区切りとして扱い、1 時間未満でも `progress` を送ってよい。
 - 上の連続 task 依頼では、Discord 通知だけで済ませず、user にも各 package close ごとの簡潔な中間報告を返すこと。
-- `complete` は、その user 依頼への最終返答を返す直前に 1 回だけ送ること。途中報告、質問待ち、追加調査継続中には使わないこと。
+- `progress` は、**その後も user 入力なしで続行できる checkpoint** にだけ使うこと。package close 自体は `complete` 条件ではない。
+- `complete` は、その user 依頼について**ここで手を止める**ときに 1 回だけ送ること。
+  - scope が完了したとき
+  - あるいは、次に進むには user 入力が必要になったとき
+  のどちらかに限る。
+- user 入力なしで続行可能なときは、`complete` を送らず `progress` と brief intermediate report に留め、そのまま次の package へ進むこと。
 - `begin` があるときは task-scoped の差分を使い、`begin` がなくても Git 差分が取れるなら `変更量(参考)` を出し、どちらも取れないときだけ差分欄を出さないこと。
 - 通知失敗は主作業の失敗にしない。Webhook は repo 直下の `.codex-discord/config.local.json` に保存し、commit しないこと。
 - 通知文は簡潔な日本語にすること。導入直後または更新直後の疎通確認以外では `test` を使わないこと。
@@ -99,6 +105,8 @@ Every report should contain, in this order:
 - `progress.md` は repo 全体の**簡潔な進捗スナップショット**であり、scratchpad ではない。
 - current status / roadmap / remaining steps / major bottleneck / validation loop の到達見込みが変わった task では、同じ task の中で `progress.md` を更新すること。
 - 進捗率や残ステップは rough estimate と明記し、問題が見つかれば巻き戻りうる前提で書くこと。
+- `progress.md` の phase 整理は old `Phase 1..7` checkpoint label だけに依存せず、`.docs/progress-task-axes.md` の **macro phase** と **feature maturity stage** を併用すること。
+- old `Phase 7 = FutureWork` のような巨大 bucket を再導入しないこと。
 - `progress.md` の進捗率は、可能な限り
   - **論理仕様**
   - **ユーザ向け仕様**
@@ -125,6 +133,15 @@ Every report should contain, in this order:
   - 重さ
   - 自走可否
   を簡潔に mirror すること。phase 読みが変わった task では同じ task の中で更新すること。
+- `progress.md` には、repo の特徴機能ごとの progress row も置き、
+  - multi-node / fabric
+  - robustness via contracts / theorem / model-check boundary
+  - dynamic attach / detach / DAG-safe evolution
+  - `atomic_cut` と higher-level ordering / memory-order family
+  - executable sample corpus
+  などを分けて追うこと。
+- `Mirrorea / Typed-Effect / Prism / 上位アプリ` を 1 行に潰さず、少なくとも separable subsystem として読める粒度を保つこと。
+- `shared-space docs-first boundary fixed` と `shared-space operational realization / final catalog open` を混ぜないこと。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
 ## tasks.md 維持ルール
@@ -135,11 +152,20 @@ Every report should contain, in this order:
   を整理するための文書である。
 - `tasks.md` は append-only の履歴ではない。**更新時には毎回全体を書き直し、現況と整合した snapshot に保つこと。**
 - phase end、checkpoint close、mainline 切り替え、major blocker の入れ替わりが起きた task では、同じ task の中で `tasks.md` の更新要否を確認すること。
+- `tasks.md` は `.docs/progress-task-axes.md` に従い、
+  - 自走可能な package
+  - research を通して見つけること
+  - user が決める必要があること
+  を分けて書くこと。
 - `tasks.md` の **「次に自走で進める順番と rough estimate」** には、各 task package がどの大局 phase の前半 / 中盤 / reserve path かを短く書くこと。
 - `tasks.md` では、long chain を毎回 exhaustively 再列挙せず、**current checkpoint / current promoted line / next reopen point** が分かる粒度に圧縮してよい。
 - `tasks.md` では、少なくとも次を分けて書くこと。
   - 自走可能な task package
   - 方針決定が必要な blocker / open question
+- ここでいう「方針決定が必要」は、
+  - user が決める必要があること
+  - research を通して選別すること
+  を混ぜないこと。
 - blocker 側では、各項目について少なくとも次を書くこと。
   - 概要
   - 何に影響するか
@@ -152,6 +178,8 @@ Every report should contain, in this order:
 
 - task はできるだけ内部で閉じる。中途で user に何度も返さない。
 - ただし、user が連続 task の自走を依頼している場合は、task package の close ごとに brief intermediate report を返し、次に進む package を短く明示すること。
+- user 入力なしで次へ進めるときは、package close 後も止まらずそのまま続行すること。
+- user 入力が必要になったとき、または user が依頼したスコープを完了したときだけ、その turn の final `complete` を送って止まること。
 - self-check、focused diff review、local validation を先に行う。
 - reviewer はむやみに何度も呼ばず、最後に 1 回だけ長めに待つのを基本にする。
 - 必要なら task 内部で narrow-scope re-review を行ってよい。

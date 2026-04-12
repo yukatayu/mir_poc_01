@@ -22,6 +22,15 @@
 - 小規模な proof of concept の構築
 - 各タスク後の詳細レポート作成
 
+ただし current repo には、単なる placeholder 以上の **non-production actual path** がすでにある。
+特に current L2 では、
+
+- parser-free PoC
+- `mir-ast` / `mir-semantics` / `mir-runtime` の narrow compile-ready path
+- fixed-subset source sample の runnable ladder
+
+まで到達している。
+
 ## 人間と agent の必読順
 
 1. `AGENTS.md`
@@ -58,8 +67,8 @@ report は `python scripts/new_report.py --slug <short-name>` でテンプレー
 - `docs/research_abstract/` — phase ごとの本質的な研究成果を短く辿るための要約
 - `docs/diagrams/` — Mermaid ソース図
 - `agents/` — プロジェクトローカルの agent 向けガイダンス / 設定ファイル
-- `scripts/` — レポート作成と検証の補助スクリプト
-- `crates/` — 意図的に最小構成に留めた Rust workspace skeleton
+- `scripts/` — レポート / docs validation に加えて、detached-loop、source-sample regression、compare helper、scaffold を含む repo-local helper 群
+- `crates/` — Rust workspace。Mir current-L2 line には non-production parser / semantics / runtime / formal-hook actualization があり、その他の subsystem crate はまだ skeleton が多い
 
 ## 実装言語選択の現状
 
@@ -76,3 +85,10 @@ report は `python scripts/new_report.py --slug <short-name>` でテンプレー
 
 初期 scaffold 自体は Python のみが使える環境で起こされたが、current repo では Python と `cargo` の両方を使った local validation が運用に入っている。
 したがって、current state の build / test / helper verification は report に記録された実行 evidence を正本として読むこと。
+
+現時点の自然な読みは、
+
+- **core execution / parser / checker / runtime / formal handoff は Rust-heavy**
+- **repo-local orchestration / regression / report / docs validation は Python helper を併用**
+
+であり、単純な「全部 Rust へ寄せる / 全部 Python に残す」という二択ではない。
