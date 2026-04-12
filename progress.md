@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 21:44 JST
+最終更新: 2026-04-12 21:52 JST
 
 ## この文書について
 
@@ -26,7 +26,7 @@
   - `e23`
   の quintet である。
 - `e3` は source target only / deferred authored row のままであり、theorem-side line を先に比較する current guard を保っている。
-- tool-neutral formal hook から `proof_notebook_review_unit` を作る first theorem-side pilot と、`comparison_basis_refs` までを持つ compare-ready bridge sketch second reopen はあるが、bless / review-session metadata と concrete theorem / model-check binding はまだ later である。
+- tool-neutral formal hook から `proof_notebook_review_unit` を作る first theorem-side pilot と、`comparison_basis_refs` までを持つ compare-ready bridge sketch second reopen、deferred `e3` actualization reopen timing はあるが、actual `e3` source row、bless / review-session metadata、concrete theorem / model-check binding はまだ later である。
 - final parser grammar、final public parser / checker / runtime API、LLVM-family backend、Mirrorea operational runtime、shared-space final catalog はまだ無い。
 
 ## Macro phase map
@@ -37,7 +37,7 @@
 | `Macro 1` | 94% | semantic kernel / invariant stabilization | late | 自走可能 | current L2 semantics / invariant bridge はかなり安定 |
 | `Macro 2` | 97% | parser-free validation substrate | late | 自走可能 | parser-free PoC と detached validation loop は runnable |
 | `Macro 3` | 90% | compile-ready minimal actualization | late | 自走可能 | parser / checker / runtime / formal-hook の non-production minimal cut は揃った |
-| `Macro 4` | 58% | executable fixed-subset sample expansion | active | 自走可能 | current mainline。authored quintet runnable、`e3` と second cluster widening が残る |
+| `Macro 4` | 61% | executable fixed-subset sample expansion | active | 自走可能 | current mainline。authored quintet runnable、`e3` actualization と second cluster widening が残る |
 | `Macro 5` | 38% | static reasoning / theorem / model-check bridge | early | 一部自走可能 | tool-neutral formal hook、review-unit pilot、plain bridge sketch、compare-ready bridge sketch second reopen はあるが concrete tool binding は later |
 | `Macro 6` | 22% | distributed fabric / shared-space / runtime evolution | docs-first boundary only | 境界までは自走可能 | Mirrorea / shared-space は boundary と practical cut が先。final catalog は user spec required |
 | `Macro 7` | 14% | toolchain / backend / developer surface | inventory only | 一部自走可能 | Rust-heavy direction はあるが、backend / public operational surface はまだ早い |
@@ -88,20 +88,19 @@
 
 ## 現在の self-driven line
 
-1. **Macro 4-5 / deferred `e3` actualization reopen timing**
-   - theorem-side line の後で `e3` をどこへ戻すかを narrow に比較する。
-2. **Macro 4 / actual `e3` authored-row reopen**
+1. **Macro 4 / actual `e3` authored-row reopen**
    - reopen timing fixed 後に `e3-option-admit-chain` を actual authored row に上げる最小 package を切る。
-3. **Macro 5 / proof-model-check first concrete tool pilot**
+2. **Macro 5 / proof-model-check first concrete tool pilot**
    - `e3` reopen 後に concrete theorem / model-check side の最小 handoff pilot を比較する。
-4. **Macro 4 / second source-sample cluster sequencing**
+3. **Macro 4 / second source-sample cluster sequencing**
    - `e3` close 後に next source-sample family を narrow に順序づける。
+4. **Macro 3-7 / parser-checker-runtime public surface inventory**
+   - helper-local current surface と later public operational surface の境界を narrow に inventory 化する。
 
 ## 研究で見つけることと、user が決めること
 
 ### 研究で見つけること
 
-- `e3` actualization timing と theorem-side guard の接続
 - fixed-subset source-sample second cluster の widen 順序
 - concrete theorem / model-check bridge の最小 carrier
 - backend / public operational surface をどこで narrow pilot するか
@@ -139,6 +138,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 21:52 JST — `docs/reports/0649` と `specs/examples/343...344` で deferred `e3` actualization reopen timing を閉じ、`e3` authored-row line を compare-ready bridge の直後に reopen しつつ current formal-hook top wideningは still later に残す cut を固定した。current line は actual `e3` authored-row reopen に進んだ。
 - 2026-04-12 21:44 JST — `docs/reports/0648` と `specs/examples/341...342` で compare-ready bridge sketch second reopen を閉じ、current theorem-side bridge を `comparison_basis_refs` まで持つ docs-only second actualization に固定した。current line は deferred `e3` actualization reopen timing に進んだ。
 - 2026-04-12 20:43 JST — `docs/reports/0644` `0645` `0646` を起点に phase recut / feature maturity / Rust-Python split を再整理し、`progress.md` と `tasks.md` を macro phase + feature maturity stage 方式へ全面更新した。
 - 2026-04-12 20:10 JST — `docs/reports/0643` で post-task document consistency audit を閉じ、plain bridge sketch actualization が still-open に見える stale wording を `tasks.md` と relevant `plan/` から除去した。current line は compare-ready bridge sketch second reopen のまま維持した。

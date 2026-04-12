@@ -88,6 +88,6 @@ current reached-stage inventory は current authored quintet `e1` / `e2` / `e21`
 
 ## next steps
 
-- current next line は deferred `e3` actualization reopen timing である
-- その後に actual `e3` authored-row reopen を置く
-- proof / model-check first concrete tool pilot はその後段に残す
+- current next line は actual `e3` authored-row reopen である
+- その後に proof / model-check first concrete tool pilot を置く
+- second source-sample cluster sequencing はその後段に残す

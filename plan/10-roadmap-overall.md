@@ -126,10 +126,10 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. deferred `e3` actualization reopen timing
-2. actual `e3` authored-row reopen
-3. proof / model-check first concrete tool pilot
-4. second source-sample cluster sequencing after `e3`
+1. actual `e3` authored-row reopen
+2. proof / model-check first concrete tool pilot
+3. second source-sample cluster sequencing after `e3`
+4. parser / checker / runtime public surface inventory
 
 これは主に `Macro 4` と `Macro 5` の line である。
 

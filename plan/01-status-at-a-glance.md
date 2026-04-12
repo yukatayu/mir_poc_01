@@ -15,9 +15,9 @@
 - Phase 1〜5 closeout / freeze は fixed 済みである。
 - legacy Phase 6 front-half compile-ready checkpoint も fixed 済みである。
 - current immediate line は、legacy checkpoint 名で言えば
-  - deferred `e3` actualization reopen timing
   - actual `e3` authored-row reopen
   - proof / model-check first concrete tool pilot
+  - second source-sample cluster sequencing
   の並びにある。
 
 ## macro phase reading
@@ -44,10 +44,10 @@
 
 ## current mainline
 
-1. deferred `e3` actualization reopen timing
-2. actual `e3` authored-row reopen
-3. proof / model-check first concrete tool pilot
-4. second source-sample cluster sequencing
+1. actual `e3` authored-row reopen
+2. proof / model-check first concrete tool pilot
+3. second source-sample cluster sequencing
+4. parser / checker / runtime public surface inventory
 
 ## biggest later gates
 

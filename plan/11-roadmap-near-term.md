@@ -13,16 +13,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 ## immediate execution order
 
-### 1. deferred `e3` actualization reopen timing
-
-- macro phase
-  - `Macro 4-5`
-- rough weight
-  - 中
-- rough 所要
-  - 1〜2 task / 数日
-
-### 2. actual `e3` authored-row reopen
+### 1. actual `e3` authored-row reopen
 
 - macro phase
   - `Macro 4`
@@ -31,7 +22,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 - rough 所要
   - 1〜2 task / 数日
 
-### 3. proof / model-check first concrete tool pilot
+### 2. proof / model-check first concrete tool pilot
 
 - macro phase
   - `Macro 5`
@@ -39,6 +30,15 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
   - 中〜やや重い
 - rough 所要
   - 1〜3 task / 1〜2週
+
+### 3. second source-sample cluster sequencing
+
+- macro phase
+  - `Macro 4`
+- rough weight
+  - 中
+- rough 所要
+  - 2〜4 task / 1〜2週
 
 ## next reserve line
 

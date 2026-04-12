@@ -169,8 +169,11 @@ plain proof-notebook bridge sketch actualization も fixed 済みであり、old
 `specs/examples/341...342` により、
 compare-ready bridge sketch second reopen も fixed 済みであり、old theorem-line `specs/examples/141` の compare basis-only bridge sketch shape (`bridge_subject_ref + review_units + bridge_goal_text + comparison_basis_refs`) を current theorem-side second actualization として再利用し、bless / review-session metadata / helper-emitter / concrete tool binding は still later に残す。
 
+`specs/examples/343...344` により、
+deferred `e3` actualization reopen timing も fixed 済みであり、compare-ready bridge fixed 後の次段で `e3` authored-row line を reopen してよい一方、current theorem-side consumer と current formal-hook top は保ち、new formal-hook family と concrete theorem / model-check tool pilot は still later に残す current cut を採った。
+
 current mainline は、
-**Phase 6 deferred `e3` actualization reopen timing**
+**Phase 6 actual `e3` authored-row reopen**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -178,7 +181,7 @@ current mainline は、
 - deferred authored-row widen sequencing `e1 -> e21 -> e3`
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
-- deferred `e3` actualization reopen timing
+- deferred `e3` actualization reopen timing（fixed 済み）
 - actual `e3` authored-row reopen
 
 を揃えるのが主眼になる。

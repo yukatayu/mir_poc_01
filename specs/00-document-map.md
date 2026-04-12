@@ -649,6 +649,10 @@
   - plain proof-notebook bridge sketch actualization fixed 後の次段として、old theorem-line `141` の compare basis-only bridge sketch を current Phase 6 theorem-side lineへどこまで持ち直すかを整理する補助文書。
 - `specs/examples/342-current-l2-compare-ready-bridge-sketch-second-reopen-ready-minimal-compare-ready-bridge-sketch-threshold.md`
   - compare-ready bridge sketch second reopen の minimum を `actualization_kind + entry_criteria_refs + bridge_sketch_shape + kept_later_refs` に留める補助文書。
+- `specs/examples/343-current-l2-minimal-compare-ready-bridge-sketch-ready-deferred-e3-actualization-reopen-timing-comparison.md`
+  - compare-ready bridge sketch second reopen fixed 後の次段として、deferred `e3` actualization を concrete tool pilot より前に reopen する timing をどう切るかを整理する補助文書。
+- `specs/examples/344-current-l2-deferred-e3-actualization-reopen-timing-ready-minimal-deferred-e3-actualization-reopen-threshold.md`
+  - deferred `e3` actualization reopen timing の minimum を `timing_kind + entry_criteria_refs + current_guard_refs + next_actualization_refs + kept_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
