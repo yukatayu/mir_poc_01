@@ -219,6 +219,20 @@
   - `samples/current-l2/e2-try-fallback.txt`
   - `samples/current-l2/e23-malformed-try-fallback-missing-fallback-body.txt`
 
+## 2026-04-13 Phase 6 stable malformed broader follow-up inventory addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/47-current-l2-missing-option-second-checker-spike.md`
+  - `specs/examples/48-current-l2-capability-third-checker-spike.md`
+  - `specs/examples/55-current-l2-try-rollback-malformed-static-family-actualization.md`
+  - `specs/examples/353-current-l2-actual-e22-contrast-row-source-actualization-ready-stable-static-malformed-post-contrast-sequencing-comparison.md`
+  - `specs/examples/354-current-l2-stable-static-malformed-post-contrast-sequencing-ready-minimal-stable-static-malformed-post-contrast-sequencing-threshold.md`
+  - `specs/examples/361-current-l2-model-check-public-checker-second-reserve-inventory-ready-stable-static-edge-pair-first-reopen-comparison.md`
+  - `specs/examples/362-current-l2-stable-static-edge-pair-first-reopen-ready-minimal-stable-static-edge-pair-first-reopen-threshold.md`
+  - `specs/examples/369-current-l2-model-check-concrete-carrier-first-actualization-gate-ready-stable-malformed-broader-follow-up-inventory-comparison.md`
+  - `specs/examples/370-current-l2-stable-malformed-broader-follow-up-inventory-ready-minimal-stable-malformed-broader-follow-up-inventory-threshold.md`
+  - `docs/reports/0667-phase6-stable-malformed-broader-followup-inventory-package.md`
+
 ## 2026-04-13 Phase 6 stable-static edge-pair first reopen addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。

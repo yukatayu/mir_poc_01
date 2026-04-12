@@ -206,8 +206,11 @@ shared-space identity / auth layering reopen も fixed 済みであり、members
 `specs/examples/367...368` により、
 model-check concrete carrier first actualization gate も fixed 済みであり、`proof_notebook_review_unit` current first pilot を巻き戻さず、`tool_neutral_formal_hook_only_input + compare_ready_docs_only_bridge_sketch` を entry にする narrow gate を current first choice に昇格した。public-checker docs-only chain は parallel reserve に留め、model-check concrete carrier actualization、actual public-checker migration、actual emitted verifier handoff artifact、concrete tool binding、bless/review-session metadata は still later に残す。
 
+`specs/examples/369...370` により、
+stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first (`e16/e17/e18`)、capability family second (`e13/e20`) に固定し、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は kept-later に残す current cut を採った。
+
 current mainline は、
-**repo-level current line は stable malformed broader follow-up inventory**
+**repo-level current line は public operational CLI / final public contract later gate**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -216,11 +219,11 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- stable malformed broader follow-up inventory
 - public operational CLI / final public contract later gate
 - shared-space admission / compile-time visibility reopen
 - shared-space authority / resource ownership reopen
 - model-check concrete carrier actualization comparison（reserve）
+- stable malformed missing-option first reopen actualization comparison（reserve）
 
 を揃えるのが主眼になる。
 

@@ -126,10 +126,10 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. stable malformed broader follow-up inventory
-2. public operational CLI / final public contract later gate
-3. shared-space admission / compile-time visibility reopen
-4. shared-space authority / resource ownership reopen
+1. public operational CLI / final public contract later gate
+2. shared-space admission / compile-time visibility reopen
+3. shared-space authority / resource ownership reopen
+4. model-check concrete carrier actualization comparison
 
 これは主に `Macro 4` と `Macro 5` の line である。
 
@@ -140,6 +140,7 @@ old `Phase 7` には、
 - LLVM-family backend / external codegen
 - shared-space final catalog
 - upper-layer application finalization
+- duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family の broader source-backed promotion
 
 ## current recommendation
 

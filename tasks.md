@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 07:46 JST
+最終更新: 2026-04-13 08:50 JST
 
 ## この文書について
 
@@ -31,34 +31,26 @@
 - public operational surface actualization gate は `specs/examples/363...364` により fixed 済みであり、already-public parser-free stack を stable bucket に据えたまま、later public pressure の first docs-only candidate を `run_current_l2_source_sample` に narrow に置いた。
 - shared-space identity / auth layering reopen は `specs/examples/365...366` により fixed 済みであり、membership identity core を `member_ref + principal_ref + member_incarnation + activation_state` に narrow に残しつつ、transport/service auth、room admission、display/projection identity を side carriers に押し分ける current cut を採った。
 - model-check concrete carrier first actualization gate は `specs/examples/367...368` により fixed 済みであり、`proof_notebook_review_unit` current first pilot を保ったまま、`tool_neutral_formal_hook_only_input + compare_ready_docs_only_bridge_sketch` を entry にする narrow gate を current first choice に昇格した。public-checker docs-only chain は parallel reserve に残し、model-check concrete carrier actualization、actual public-checker migration、actual emitted verifier handoff artifact、concrete tool binding は still later に残している。
-- current promoted line は **stable malformed broader follow-up inventory** であり、その後に
-  - public operational CLI / final public contract later gate
+- stable malformed broader follow-up inventory は `specs/examples/369...370` により fixed 済みであり、broader stable malformed next reopen order を missing-option family first (`e16/e17/e18`)、capability family second (`e13/e20`) に固定し、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は kept-later に残した。
+- current promoted line は **public operational CLI / final public contract later gate** であり、その後に
   - shared-space admission / compile-time visibility reopen
   - shared-space authority / resource ownership reopen
+  - model-check concrete carrier actualization comparison
   を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 4` | malformed cluster follow-up | `S4-S5 -> S5-S6` | stable malformed broader follow-up inventory | 1〜3 task / 数日〜1週 | 自走可能 |
-| 2 | `Macro 7` | public operational contract | `S3-S4 -> S4` | public operational CLI / final public contract later gate | 2〜4 task / 1〜2週 | 一部自走可能 |
-| 3 | `Macro 6` | shared-space boundary | `S3-S4 -> S4` | shared-space admission / compile-time visibility reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
-| 4 | `Macro 6` | shared-space authority model | `S3 -> S3-S4` | shared-space authority / resource ownership reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
-| 5 | `Macro 5` | external verifier bridge | `S4 -> S4-S5` | model-check concrete carrier actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 1 | `Macro 7` | public operational contract | `S3-S4 -> S4` | public operational CLI / final public contract later gate | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 2 | `Macro 6` | shared-space boundary | `S3-S4 -> S4` | shared-space admission / compile-time visibility reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
+| 3 | `Macro 6` | shared-space authority model | `S3 -> S3-S4` | shared-space authority / resource ownership reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
+| 4 | `Macro 5` | external verifier bridge | `S4 -> S4-S5` | model-check concrete carrier actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 5 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. stable malformed broader follow-up inventory
-
-- macro phase
-  - `Macro 4`
-- 目的
-  - edge-pair close 後の broader malformed follow-up を missing-option / capability family、duplicate cluster、try/rollback malformed-static familyの順でどう reopen するかを narrow inventory に戻す。
-- 完了条件
-  - `e4/e19` edge-pair close を巻き戻さず、broader malformed side の next reopen order と kept-later guard を current task map に整理する。
-
-### Package 2. public operational CLI / final public contract later gate
+### Package 1. public operational CLI / final public contract later gate
 
 - macro phase
   - `Macro 7`
@@ -67,7 +59,7 @@
 - 完了条件
   - `run_current_l2_source_sample` first docs-only candidate を巻き戻さず、final public parser / checker / runtime API と public CLI の reopen line を separate gate として整理する。
 
-### Package 3. shared-space admission / compile-time visibility reopen
+### Package 2. shared-space admission / compile-time visibility reopen
 
 - macro phase
   - `Macro 6`
@@ -76,7 +68,7 @@
 - 完了条件
   - role / capability / visibility requirement の over-approximationを compile-time に残し、actual admission / activation / late join / reconciliation を runtime control-plane に残す current cut を snapshot に昇格する。
 
-### Package 4. shared-space authority / resource ownership reopen
+### Package 3. shared-space authority / resource ownership reopen
 
 - macro phase
   - `Macro 6`
@@ -85,7 +77,7 @@
 - 完了条件
   - authoritative room / append-friendly room / relaxed projection line を潰さず、authority placement と resource ownership の first working split を current task map に整理する。
 
-### Package 5. model-check concrete carrier actualization comparison
+### Package 4. model-check concrete carrier actualization comparison
 
 - macro phase
   - `Macro 5`
@@ -94,19 +86,18 @@
 - 完了条件
   - `proof_notebook_review_unit` current first pilot と public-checker docs-only reserve line を巻き戻さず、model-check actualization 側の next compare-ready reopen order を current task map に整理する。
 
+### Package 5. stable malformed missing-option first reopen actualization comparison
+
+- macro phase
+  - `Macro 4`
+- 目的
+  - broader malformed follow-up inventory fixed 後の次段として、missing-option family first reopen を helper-local compare と source-backed wideningのどの順で actualize するかを narrow に整理する。
+- 完了条件
+  - missing-option first / capability second の順序を巻き戻さず、`e16/e17/e18` line の first actualization cut と duplicate / try-rollback kept-later guard を current task map に整理する。
+
 ## 研究を通して見つけること
 
-### Discovery 1. stable malformed broader follow-up
-
-- 概要
-  - edge-pair close 後に、broader malformed family をどの順番で source-backed へ戻すか。
-- 何に影響するか
-  - executable subset の widening speed
-  - malformed cluster の drift suppression
-- current recommendation
-  - **missing-option / capability family、duplicate cluster、try/rollback malformed-static familyを分けて inventory し、1 package に混ぜない**。
-
-### Discovery 2. public operational CLI / final public contract later gate
+### Discovery 1. public operational CLI / final public contract later gate
 
 - 概要
   - first docs-only candidate fixed 後に、public library surface と public CLI をどの順で reopen するか。
@@ -116,7 +107,7 @@
 - current recommendation
   - **`run_current_l2_source_sample` current gate を保ち、CLI と final public contract は separate later gate として narrow に reopen する**。
 
-### Discovery 3. shared-space admission / compile-time visibility reopen
+### Discovery 2. shared-space admission / compile-time visibility reopen
 
 - 概要
   - identity/auth layering の次段として、declaration-side role/capability/visibility と runtime admission policy の橋をどこで切るか。
@@ -126,7 +117,7 @@
 - current recommendation
   - **declared role / capability / visibility over-approximation を compile-time に残し、actual admission / activation は runtime control-plane に残す**。
 
-### Discovery 4. shared-space authority / resource ownership reopen
+### Discovery 3. shared-space authority / resource ownership reopen
 
 - 概要
   - authority placement、resource owner slot、delegated capability、fairness source をどの split で扱うか。
@@ -136,7 +127,7 @@
 - current recommendation
   - **participant carrier と authority/resource owner を同一視せず、authoritative owner slot と delegated/provider placement を別軸に比較する**。
 
-### Discovery 5. model-check concrete carrier actualization comparison
+### Discovery 4. model-check concrete carrier actualization comparison
 
 - 概要
   - first actualization gate fixed 後に、actual emitted model-check carrier、concrete tool binding、public-checker actual migration のどれから reopen するか。
@@ -145,6 +136,16 @@
   - theorem / model-check / public-checker bridge
 - current recommendation
   - **current gate を compare-ready entry に保ったまま、actual emitted carrier / concrete tool binding / public-checker actual migration を同じ package に混ぜない**。
+
+### Discovery 5. stable malformed missing-option first reopen actualization comparison
+
+- 概要
+  - broader malformed follow-up inventory fixed 後に、missing-option family first reopen を helper-local compare と source-backed wideningのどちらから actualize するか。
+- 何に影響するか
+  - `Macro 4`
+  - malformed cluster widening speed
+- current recommendation
+  - **missing-option first / capability second の順序を保ったまま、duplicate cluster と try/rollback malformed-static family を later に残し、first reopen だけを separate package にする**。
 
 ## user が決める必要があること
 
