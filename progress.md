@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 02:51 JST
+最終更新: 2026-04-12 10:54 JST
 
 ## この文書について
 
@@ -20,9 +20,10 @@
 - **Phase 3** は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。actual parser first tranche は stage 1 + stage 2 structural floor、first checker reconnect bridge は stage 1 summary + stage 2 try/rollback structural contract に留め、stage 3 request / admit / predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残している。
 - **Phase 4** は `specs/examples/295...296` により self-driven closeout fixed と読んでよい。self-driven current package は `specs/examples/121...125` までで checkpoint close とし、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、`delegated_provider_attestation` non-core line、control-plane separated carrier actualization、distributed fairness protocol、final operational realizationは later に残している。
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。checker-side verifier handoff surface docs-only mixed-row bridge、theorem-side retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later lineを 1 本の closeout bundle に固定し、actual subject row / boundary-specific artifact / actual emitted verifier artifact / concrete tool binding / public checker migration / low-level memory-order family は still later に残している。
-- **Phase 6** は front-half compile-ready checkpoint 自体は fixed 済みである。parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304`、next reopen sequencing が `specs/examples/305...306`、parser second tranche first package が `specs/examples/307...308`、reserve formal tool binding inventory が `specs/examples/309...310` で fixed 済みである。`mir-ast` には stage 1 / stage 2 carrier に加えて stage 3 declaration-side admit attached slot と shared isolated predicate fragment が入り、`mir-semantics` / `mir-runtime` / formal-hook 側の narrow compile-ready gate もある。
+- **Phase 6** は front-half compile-ready checkpoint 自体は fixed 済みである。parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304`、next reopen sequencing が `specs/examples/305...306`、parser second tranche first package が `specs/examples/307...308`、reserve formal tool binding inventory が `specs/examples/309...310`、parser-side follow-up sequencing が `specs/examples/311...312` で fixed 済みである。`mir-ast` には stage 1 / stage 2 carrier に加えて stage 3 declaration-side admit attached slot と shared isolated predicate fragment が入り、`mir-semantics` / `mir-runtime` / formal-hook 側の narrow compile-ready gate もある。
 - ただし、**syntax-backed fixed-subset sample verification path はまだ early** である。current snapshot では、旧 `fixed-subset sample/program corpus staging` 1 項目を、source corpus scope / mapping / lowering / runner / verification ladder / authoring policy に分解して追う。
-- current main bottleneck は semantics の大崩れではなく、**Phase 6 parser-side follow-up package sequencing** をどこまで narrow に切るかと、その後の source-sample path をどこまで fail-closed に接続するかである。
+- `specs/examples/311...312` により、shared single attachment frame を next package に置く parser-side follow-up sequencing は fixed 済みである。
+- current main bottleneck は semantics の大崩れではなく、**Phase 6 parser-side follow-up package actualization** をどこまで narrow に切るかと、その後の source-sample path をどこまで fail-closed に接続するかである。
 
 ## compile-ready PoC の rough 読み
 
@@ -30,7 +31,7 @@
 |---|---:|---|---|
 | parser-free current L2 PoC | 90%+ | maintenance closeout 数 package | `mir-semantics` 主線はすでに compile / test 可能 |
 | Phase 6 前半 compile-ready minimal actual PoC | 96%+ | maintenance / reopen only | compile-ready checkpoint close は fixed と読める |
-| fixed-subset syntax-backed sample verification milestone | 35%前後 | parser follow-up、source corpus、mapping、lowering、runner、ladder、policy | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続する |
+| fixed-subset syntax-backed sample verification milestone | 38%前後 | parser follow-up actualization、source corpus、mapping、lowering、runner、ladder、policy | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続する |
 
 ## 研究フェーズ（大局）
 
@@ -42,25 +43,24 @@
 | Phase 3 | 93% | parser boundary / first checker cut | self-driven freeze fixed | 中〜やや重い | 自走可能 | `287...290` で subset / reconnect freeze は fixed。later widen は reserve path |
 | Phase 4 | 90% | shared-space / membership / practical example boundary | self-driven closeout fixed | 重い | 一部自走可能 | `121...125` current package と final catalog / later line の境界は fixed。final catalog は user spec 依存 |
 | Phase 5 | 98% | static analysis / type / theorem prover / async-control boundary | self-driven closeout fixed | とても重い | 自走可能 | `297...298` で stop line と retained-later inventory は fixed。actual external contract は later |
-| Phase 6 | 62% | actual parser / checker / runtime commitment と syntax-backed sample path | parser-side follow-up package sequencing | 重い | 自走可能 | front-half compile-ready checkpoint は 96%+ だが、Phase 6 全体の rough % は source corpus / lowering / runner / ladder を含めて見直した |
+| Phase 6 | 64% | actual parser / checker / runtime commitment と syntax-backed sample path | parser-side follow-up package actualization | 重い | 自走可能 | front-half compile-ready checkpoint は 96%+、follow-up sequencing も fixed 済みだが、source corpus / lowering / runner / ladder はまだこれから |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
-1. **Phase 6 parser-side follow-up package sequencing**
-   - shared single attachment frame を next line に含めるかを narrow に決める。
-2. **Phase 6 parser-side follow-up package actualization**
+1. **Phase 6 parser-side follow-up package actualization**
    - selected parser-side follow-up line の最小 cut を actualize する。
-3. **Phase 6 fixed-subset source-sample corpus scope / mapping**
+2. **Phase 6 fixed-subset source-sample corpus scope / mapping**
    - representative prose / fixture corpus / source sample の 3 層を固定する。
-4. **Phase 6 parser-to-`Program` lowering / syntax-backed runner**
+3. **Phase 6 parser-to-`Program` lowering / syntax-backed runner**
    - source sample を parse / lower / static / interpreter へ通す narrow path を作る。
+4. **Phase 6 verification ladder / source-sample policy**
+   - sample ごとの reached stage と authoring / bless policy を揃える。
 
 ## いま自走で進めてよい範囲
 
 ### 着手可能
 
-- Phase 6 parser-side follow-up package sequencing
 - Phase 6 parser-side follow-up package actualization
 - fixed-subset source-sample corpus scope / mapping
 - parser-to-`Program` lowering first cut
@@ -114,15 +114,15 @@
 
 ## 次に進めるべき task
 
-1. **Phase 6 parser-side follow-up package sequencing** を immediate line として扱う
-2. その次に **Phase 6 parser-side follow-up package actualization** を narrow に行う
-3. 続いて **fixed-subset source-sample corpus scope / mapping** を整理する
-4. その後に **parser-to-`Program` lowering / syntax-backed runner** を narrow に actualize する
-5. 最後に **sample ごとの verification ladder と authoring policy** を固定する
+1. **Phase 6 parser-side follow-up package actualization** を immediate line として扱う
+2. 続いて **fixed-subset source-sample corpus scope / mapping** を整理する
+3. その後に **parser-to-`Program` lowering / syntax-backed runner** を narrow に actualize する
+4. 最後に **sample ごとの verification ladder と authoring policy** を固定する
 
 ## 作業ログ（簡潔）
 
 - 注記: この欄は **recent log** として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 10:54 JST — `specs/examples/311...312` を追加し、Phase 6 parser-side follow-up package sequencing を `sequencing_kind + fixed_entry_criteria_refs + selected_next_package_ref + deferred_reopen_refs + guard_refs` minimum に固定した。shared single attachment frame を next package、request clause suite / perform head / richer diagnostics / final grammar を deferred reopen に押し戻し、current mainline は `Phase 6 parser-side follow-up package actualization` に切り替わった。
 - 2026-04-12 02:51 JST — `tasks.md` / `progress.md` / `Documentation.md` / `plan/01` / `08` / `10` / `11` / `12` / `13` / `15` / `17` / Phase 6 abstract を更新し、old `fixed-subset sample/program corpus staging` 1 項目を source corpus / mapping / lowering / runner / verification ladder / authoring policy へ再分解した。Phase 6 overall rough % は compile-ready checkpoint 96%+ を維持しつつ、syntax-backed sample path を含む読みへ補正した。
 - 2026-04-12 02:14 JST — `specs/examples/309...310` を追加し、Phase 6 reserve formal tool binding inventory を `inventory_kind + fixed_entry_criteria_refs + first_reserve_ref + second_reserve_ref + guard_refs` minimum に固定した。tool-neutral formal hook は current entry criteria に維持し、theorem-first concrete binding を first reserve、model-check side を second reserve に置いた。next promoted line は `Phase 6 parser-side follow-up package sequencing` に切り替わった。
 - 2026-04-12 02:06 JST — `specs/examples/307...308` を追加し、Phase 6 parser second tranche first package を `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` minimum に固定した。`mir_ast::current_l2` に stage3 declaration-side admit attached slot と shared isolated predicate fragment を actualize し、multiline attachment / request clause suite publicization / perform head は still later に残した。next promoted line は `Phase 6 reserve formal tool binding inventory` に切り替わった。

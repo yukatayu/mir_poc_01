@@ -1929,6 +1929,17 @@
   - `specs/examples/272-current-l2-checker-payload-supported-kind-summary-ready-minimal-checker-payload-supported-kind-summary-threshold.md`
   - `docs/reports/0595-current-promoted-line-audit-and-mirror-wording-cleanup.md`
 
+### 2026-04-12 phase6 parser-side follow-up sequencing addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/96-current-l2-stage3-multiline-attachment-shape-comparison.md`
+  - `specs/examples/97-current-l2-stage3-multiline-attachment-first-tranche-actualization.md`
+  - `specs/examples/100-current-l2-stage3-request-clause-suite-first-tranche-comparison.md`
+  - `specs/examples/101-current-l2-stage3-request-clause-suite-first-tranche-actualization.md`
+  - `specs/examples/311-current-l2-phase6-reserve-formal-tool-binding-inventory-ready-phase6-parser-side-follow-up-package-sequencing-comparison.md`
+  - `specs/examples/312-current-l2-phase6-parser-side-follow-up-package-sequencing-ready-minimal-phase6-parser-side-follow-up-package-sequencing-threshold.md`
+  - `docs/reports/0620-phase6-parser-followup-sequencing-package.md`
+
 ### 2026-04-11 phase5 public checker payload schema addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md` の今回更新分は、追加で次を主根拠にする。

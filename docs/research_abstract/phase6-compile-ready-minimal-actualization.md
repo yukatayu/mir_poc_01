@@ -61,7 +61,7 @@ parser first tranche の actual code anchor は次である。
 ## まだ fixed していないこと
 
 - stage 3 request / predicate reconnect
-- shared single attachment frame の current package boundary
+- shared single attachment frame の actual code cut
 - fixed-subset source-sample corpus scope / mapping / authoring policy
 - actual parser-to-`Program` lowering first cut
 - syntax-backed sample runner と sample ごとの verification ladder
@@ -76,10 +76,12 @@ parser first tranche の actual code anchor は次である。
 - `specs/examples/299...300`
 - `specs/examples/301...302`
 - `specs/examples/303...304`
+- `specs/examples/311...312`
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
 - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 - `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
 - `docs/reports/0614-phase6-compile-ready-checkpoint-drift-suppression-and-mirror-sweep.md`
+- `docs/reports/0620-phase6-parser-followup-sequencing-package.md`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
@@ -98,13 +100,15 @@ parser second tranche first package も attached-slot / minimal predicate fragme
 `specs/examples/309...310` により、
 reserve formal tool binding inventory も fixed 済みであり、theorem-first concrete binding は first reserve、model-check side は second reserve に整理した。
 
+`specs/examples/311...312` により、
+parser-side follow-up package sequencing も fixed 済みであり、shared single attachment frame を next package、request clause suite / perform head / richer diagnostics / final grammar を deferred reopen に置いた。
+
 current mainline は、
-**Phase 6 parser-side follow-up package sequencing**
+**Phase 6 parser-side follow-up package actualization**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- parser-side follow-up package sequencing
 - parser-side follow-up package actualization
 - fixed-subset source-sample corpus scope / mapping
 - actual parser-to-`Program` lowering と syntax-backed sample runner の first cut

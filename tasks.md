@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 02:51 JST
+最終更新: 2026-04-12 10:54 JST
 
 ## この文書について
 
@@ -17,9 +17,9 @@
 - **Phase 3** は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。minimal parser subset は stage 1 + stage 2 structural floor、first checker reconnect は stage 1 summary + stage 2 try/rollback structural contract までを bridge にし、stage 3 request / predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残している。
 - **Phase 4** は `specs/examples/295...296` により self-driven closeout fixed と読んでよい。current package は `specs/examples/121...125` を維持し、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、`delegated_provider_attestation` non-core line、control-plane separated carrier actualization、distributed fairness protocol、final operational realizationは later に残している。
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。verifier handoff surface、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual subject row、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete tool binding、public checker migration、low-level memory-order family は later に残している。
-- **Phase 6 front-half compile-ready checkpoint** は `specs/examples/299...310` により fixed 済みである。`mir-ast` stage 1 / stage 2 carrier、stage 3 declaration-side admit attached slot、shared isolated predicate fragment、`mir-semantics` program-level entry、`mir-runtime` current L2 thin skeleton、tool-neutral formal hook first tranche、reserve formal tool binding inventory までは narrow actual evidence がある。
+- **Phase 6 front-half compile-ready checkpoint** は `specs/examples/299...312` により fixed 済みである。`mir-ast` stage 1 / stage 2 carrier、stage 3 declaration-side admit attached slot、shared isolated predicate fragment、`mir-semantics` program-level entry、`mir-runtime` current L2 thin skeleton、tool-neutral formal hook first tranche、reserve formal tool binding inventory、shared single attachment frame next-package sequencing までは narrow actual evidence がある。
 - ただし、**「compile-ready checkpoint が fixed」であることと、「source text sample を fixed subset で持ち、static / interpreter / formal staging を sample ごとに通せる」ことは別**である。前者は 96%+ と読める一方、後者へ進むための task chain は、旧 snapshot では `fixed-subset sample/program corpus staging` の 1 項目に圧縮されすぎていた。
-- current immediate line は **Phase 6 parser-side follow-up package sequencing** である。その後は、parser-side follow-up actualization を閉じたうえで、**source-sample corpus scope/layout → representative/fixture/source mapping → actual parser-to-`Program` lowering → syntax-backed sample runner → verification ladder → authoring/bless policy** の順に進めるのが自然である。
+- current immediate line は **Phase 6 parser-side follow-up package actualization** である。`specs/examples/311...312` により、shared single attachment frame を next package に置き、request clause suite / perform head / richer diagnostics / final grammar を deferred reopen に押し戻す sequencing judgment は fixed 済みである。その後は、**source-sample corpus scope/layout → representative/fixture/source mapping → actual parser-to-`Program` lowering → syntax-backed sample runner → verification ladder → authoring/bless policy** の順に進めるのが自然である。
 - fixed subset の executable sample を増やすこと自体は current line に整合する。よいのは **既存 settled subset を `static gate` / `interpreter` / `tool-neutral formal hook` に段階接続すること**であり、low-level memory-order-like surface や higher-level async-control family を executable core surface として同時に太らせることではない。
 
 ## 具体的な sample code 検証段階までの rough estimate
@@ -28,7 +28,7 @@
 |---|---|---:|---|---|---|
 | parser-free current L2 PoC | 実在し、compile / test evidence あり | 90%+ | maintenance closeout だけ | 1〜2 package / 2〜4日 | `mir-semantics` 主線はすでに回る |
 | Phase 6 front-half compile-ready minimal actual PoC | checkpoint close fixed | 96%+ | maintenance / reopen only | maintenance only | current L2 subset の compile-ready checkpoint は閉じたと読んでよい |
-| fixed-subset syntax-backed sample verification milestone | task chain を今回明示分解 | **35%前後** | 6〜8 package | 2〜6週 | source text sample を parse / lower / static / interpreter / formal hook まで段階接続する |
+| fixed-subset syntax-backed sample verification milestone | sequencing fixed / parser-side follow-up actualization 待ち | **38%前後** | 5〜7 package | 2〜6週 | source text sample を parse / lower / static / interpreter / formal hook まで段階接続する |
 | first theorem-first concrete tool pilot | reserve inventory fixed | 8%前後 | 2〜4 package | 1〜3週 | source-sample ladder の後で narrow proof consumer pressure を受ける |
 
 ### `35%前後` の根拠
@@ -50,34 +50,25 @@
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 6 immediate | parser-side follow-up package sequencing | shared single attachment frame を current package に含めるか別 package に残すかを narrow に決める | 中 | 1 task / 1〜3日 | 自走可能 |
-| 2 | Phase 6 immediate | parser-side follow-up package actualization | selected follow-up line の最小 cut を actualize する | 中〜重い | 1〜2 task / 3〜7日 | 自走可能 |
-| 3 | Phase 6 sample path | fixed-subset source-sample corpus scope / file layout | source corpus の対象 subset、directory、ID policy、non-goal を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
-| 4 | Phase 6 sample path | representative / fixture / source mapping matrix | representative prose、fixture corpus、source sample の 3 層対応表を作る | 中 | 1 task / 1〜2日 | 自走可能 |
-| 5 | Phase 6 sample path | actual parser-to-`Program` lowering first cut | fixed subset の parse result を semantic `Program` へ fail-closed に落とす | 重い | 1〜2 task / 3〜7日 | 自走可能 |
-| 6 | Phase 6 sample path | syntax-backed sample runner first cut | source sample を parse / lower / static gate / interpreter へ流す narrow runner を作る | 重い | 1〜2 task / 3〜7日 | 自走可能 |
-| 7 | Phase 6 sample path | verification ladder wiring | sample ごとに `static gate` / `interpreter` / `formal hook` の到達段を揃える | 中〜重い | 1〜2 task / 2〜6日 | 自走可能 |
-| 8 | Phase 6 sample path | source-sample authoring / bless / regression policy | source sample の更新手順、reference 更新、drift suppression を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
+| 1 | Phase 6 immediate | parser-side follow-up package actualization | shared single attachment frame first package の最小 cut を actualize する | 中〜重い | 1〜2 task / 3〜7日 | 自走可能 |
+| 2 | Phase 6 sample path | fixed-subset source-sample corpus scope / file layout | source corpus の対象 subset、directory、ID policy、non-goal を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
+| 3 | Phase 6 sample path | representative / fixture / source mapping matrix | representative prose、fixture corpus、source sample の 3 層対応表を作る | 中 | 1 task / 1〜2日 | 自走可能 |
+| 4 | Phase 6 sample path | actual parser-to-`Program` lowering first cut | fixed subset の parse result を semantic `Program` へ fail-closed に落とす | 重い | 1〜2 task / 3〜7日 | 自走可能 |
+| 5 | Phase 6 sample path | syntax-backed sample runner first cut | source sample を parse / lower / static gate / interpreter へ流す narrow runner を作る | 重い | 1〜2 task / 3〜7日 | 自走可能 |
+| 6 | Phase 6 sample path | verification ladder wiring | sample ごとに `static gate` / `interpreter` / `formal hook` の到達段を揃える | 中〜重い | 1〜2 task / 2〜6日 | 自走可能 |
+| 7 | Phase 6 sample path | source-sample authoring / bless / regression policy | source sample の更新手順、reference 更新、drift suppression を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 6 immediate parser-side follow-up package sequencing
+### Task 1. Phase 6 immediate parser-side follow-up package actualization
 
 - 目的
-  - parser second tranche first package の後に shared single attachment frame を同梱するか、次 package に残すかを narrow に決める。
-- 完了条件
-  - attached-slot / predicate route の current stop line が snapshot に mirror されている。
-  - perform head / clause suite / richer diagnostics と混線していない。
-
-### Task 2. Phase 6 immediate parser-side follow-up package actualization
-
-- 目的
-  - selected parser-side follow-up line の最小 cut を actualize する。
+  - shared single attachment frame first package の最小 cut を actualize する。
 - 完了条件
   - spec / report / verification が source-backed に揃っている。
   - request head / richer diagnostics / broad widen を still later に残している。
 
-### Task 3. Phase 6 sample path fixed-subset source-sample corpus scope / file layout
+### Task 2. Phase 6 sample path fixed-subset source-sample corpus scope / file layout
 
 - 目的
   - fixed subset の source text sample corpus を、representative prose や fixture corpus と混線しない第 3 層として定義する。
@@ -85,7 +76,7 @@
   - source corpus の対象 cluster、file layout、sample ID policy、non-goal が snapshot に mirror されている。
   - final grammar / broad syntax revision と混線していない。
 
-### Task 4. Phase 6 sample path representative / fixture / source mapping matrix
+### Task 3. Phase 6 sample path representative / fixture / source mapping matrix
 
 - 目的
   - representative programs、fixture corpus、source sample の対応表を作り、single-element から non-trivial 例までの coverage ladder を見える化する。
@@ -130,7 +121,7 @@
 - **現時点で、Task 1〜8 を止める immediate blocker は 0 件** と読むのが自然である。
 - ただし、current mainline では parser-side widen boundary、source corpus layering、lowering cut、formal/back-end timing の guard が効く。
 
-### Blocker 1. actual parser subset の second-tranche widen boundary
+### Blocker 1. actual parser subset の second-tranche actualization boundary
 
 - 概要
   - compile-ready checkpoint close 後に、どこまで current L2 source surface を widen するか。
@@ -139,7 +130,7 @@
   - parser test corpus
   - lowering cut の複雑さ
 - 主要な選択肢
-  1. attached-slot / predicate route の follow-up に shared single attachment frame を足す
+  1. shared single attachment frame を multiline extraction bridge + existing predicate fragment parser reuse で actualize する
   2. selected stage 3 / perform head を先に reopen する
   3. request head / clause suite / richer diagnostics まで一気に広げる
 - current recommendation / 見解

@@ -62,7 +62,6 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- parser-side follow-up package sequencing
 - parser-side follow-up package actualization
 - fixed-subset source-sample corpus scope / mapping
 - actual parser-to-`Program` lowering first cut
