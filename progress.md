@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 23:48 JST
+最終更新: 2026-04-13 00:21 JST
 
 ## この文書について
 
@@ -43,8 +43,8 @@
 | `Macro 2` | 97% | parser-free validation substrate | late | 自走可能 | parser-free PoC と detached validation loop は runnable |
 | `Macro 3` | 91% | compile-ready minimal actualization | late | 自走可能 | parser / checker / runtime / formal-hook の non-production minimal cut と public-surface inventory は揃った |
 | `Macro 4` | 76% | executable fixed-subset sample expansion | active | 自走可能 | current authored septet runnable。`e21/e22` contrast と broader-cluster sequencing は fixed 済みで、次は stable-static edge-pair first reopen |
-| `Macro 5` | 45% | static reasoning / theorem / model-check bridge | early | 一部自走可能 | proof notebook review-unit current cut を first concrete pilot に固定。model-check side は second reserve |
-| `Macro 6` | 22% | distributed fabric / shared-space / runtime evolution | docs-first boundary only | 境界までは自走可能 | Mirrorea / shared-space は boundary と practical cut が先。final catalog は user spec required |
+| `Macro 5` | 45% | static reasoning / theorem / model-check bridge | early | 一部自走可能 | proof notebook review-unit current cut を first concrete pilot に固定。model-check / public-checker reserve inventory が次 line |
+| `Macro 6` | 26% | distributed fabric / shared-space / runtime evolution | docs-first re-entry fixed | 境界までは自走可能 | Mirrorea/shared-space re-entry bundle は fixed。next docs-first reopen は identity/auth layering |
 | `Macro 7` | 17% | toolchain / backend / developer surface | inventory only | 一部自走可能 | public operational surface inventory は fixed 済みだが、actual public CLI / backend はまだ早い |
 | `Macro 8` | 5% | domain / application realization | not started | 要仕様確認 | 上位アプリの concrete goal が未確定 |
 
@@ -85,22 +85,22 @@
 | compile-ready parser / checker / runtime | 87% | 76% | 84% | late | non-production minimal tranche は揃った |
 | fixed-subset source samples | 91% | 92% | 91% | active | authored septet runnable。`e22` contrast row まで source-backed に actualize 済み |
 | theorem / verifier bridge | 81% | 76% | 47% | early | formal hook と proof notebook first bridge はある。proof notebook current cut を first concrete pilot に固定し、`e3` は guarded non-reached row として接続済み |
-| Mirrorea fabric boundary | 63% | 51% | 8% | docs-first | no-shadowing / overlay / patch discipline は整理済み |
-| shared-space boundary | 68% | 58% | 12% | docs-first | practical cut はあるが final catalog は user spec required |
+| Mirrorea fabric boundary | 67% | 55% | 8% | docs-first | re-entry bundle は fixed。route proof / suspended-task interaction / operational realizationは still later |
+| shared-space boundary | 72% | 61% | 12% | docs-first | practical cut と repo-level re-entry bundleは fixed。final catalog は user spec required |
 | Typed-Effect Wiring Platform | 34% | 26% | 4% | positioning only | subsystem boundary はあるが actual line は薄い |
 | PrismCascade | 28% | 20% | 3% | positioning only | positioning / separation が主で、actual kernel work は later |
 | domain / application layer | 12% | 9% | 1% | not started | target application と success criteria が未確定 |
 
 ## 現在の self-driven line
 
-1. **Macro 6 / Mirrorea shared-space docs-first re-entry**
-   - old FutureWork bucket に押し込めず、fabric / shared-space line を独立 track として再開する。
-2. **Macro 5 / model-check / public-checker second reserve inventory**
+1. **Macro 5 / model-check / public-checker second reserve inventory**
    - proof-notebook first concrete cut の後で machine-facing carrier の next reopen point を narrow に整理する。
-3. **Macro 4 / stable-static edge-pair first reopen**
+2. **Macro 4 / stable-static edge-pair first reopen**
    - stable reason-code / fixture-static cluster selection を崩さず、`e4` / `e19` edge-pair side を source-backed line へ戻す。
-4. **Macro 3-7 / public operational surface actualization gate**
+3. **Macro 3-7 / public operational surface actualization gate**
    - already-public parser-free stack を壊さず、current compile-ready tranche の later public pressure をどこから受けるかを narrow に決める。
+4. **Macro 6 / shared-space identity/auth layering reopen**
+   - Mirrorea/shared-space re-entry bundle fixed 後の next docs-first reopen として、identity core と auth / admission / projection layering の cut を narrow に保つ。
 
 ## 研究で見つけることと、user が決めること
 
@@ -143,6 +143,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 00:21 JST — `docs/reports/0658` と `specs/examples/357...358` で Mirrorea/shared-space docs-first re-entry bundle を閉じ、Mirrorea/shared-space を repo-level current boundary track、Typed-Effect / Prism を adjacent track、shared-space final catalog と upper-layer app target を user-spec-required gate に切り分けた。repo-level current line は model-check / public-checker second reserve inventory に進んだ。
 - 2026-04-12 23:48 JST — `docs/reports/0657` で post-public-surface document consistency audit を閉じ、FAQ2/3、Phase 5 abstract、`plan/01`、`plan/12` の stale wording を修正した。reviewer 再確認は `no findings` で、repo-level current line は Mirrorea / shared-space docs-first re-entry のまま維持した。
 - 2026-04-12 23:40 JST — `docs/reports/0656` と `specs/examples/355...356` で parser / checker / runtime public surface inventory を閉じ、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を固定した。repo-level current line は Mirrorea / shared-space docs-first re-entry に進んだ。
 - 2026-04-12 23:33 JST — `docs/reports/0655` と `specs/examples/353...354` で stable static malformed post-contrast sequencing を閉じ、second broader cluster を stable reason-code / fixture-static cluster、Macro 4 side の next reopen point を `e4/e19` edge-pair に固定した。repo-level current line は parser / checker / runtime public surface inventory に進んだ。

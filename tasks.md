@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 23:40 JST
+最終更新: 2026-04-13 00:21 JST
 
 ## この文書について
 
@@ -25,33 +25,24 @@
 - actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の septet に進んだ。
 - stable static malformed post-contrast sequencing も `specs/examples/353...354` により fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster、Macro 4 side の next reopen point は `e4` / `e19` edge-pair に置く。
 - parser / checker / runtime public surface inventory も `specs/examples/355...356` により fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split に整理した。
-- current promoted line は **Mirrorea / shared-space docs-first re-entry** であり、その後に
-  - model-check / public-checker second reserve inventory
+- current promoted line は **model-check / public-checker second reserve inventory** であり、その後に
   - stable-static edge-pair first reopen
   - public operational surface actualization gate
+  - shared-space identity / auth layering reopen
   を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 6` | fabric / shared-space boundary | `S2-S3` 維持 | Mirrorea / shared-space docs-first re-entry package | 2〜5 task / 複数週 | boundary までは自走可能 |
-| 2 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check / public-checker second reserve inventory | 1〜3 task / 1〜2週 | 一部自走可能 |
-| 3 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable-static edge-pair first reopen | 1〜3 task / 数日〜1週 | 自走可能 |
-| 4 | `Macro 3-7` | public operational surface | `S2-S3 -> S3-S4` | public operational surface actualization gate | 2〜4 task / 1〜2週 | 一部自走可能 |
+| 1 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check / public-checker second reserve inventory | 1〜3 task / 1〜2週 | 一部自走可能 |
+| 2 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable-static edge-pair first reopen | 1〜3 task / 数日〜1週 | 自走可能 |
+| 3 | `Macro 3-7` | public operational surface | `S2-S3 -> S3-S4` | public operational surface actualization gate | 2〜4 task / 1〜2週 | 一部自走可能 |
+| 4 | `Macro 6` | shared-space boundary | `S3 -> S3-S4` | shared-space identity / auth layering reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. Mirrorea / shared-space docs-first re-entry
-
-- macro phase
-  - `Macro 6`
-- 目的
-  - current mainline が一段落した後に、fabric / shared-space line を old `FutureWork` bucket ではなく独立 track として再開する。
-- 完了条件
-  - Mirrorea、shared-space、Typed-Effect、Prism、apps を 1 行に潰さず、boundary と user-spec gate を明示する。
-
-### Package 2. model-check / public-checker second reserve inventory
+### Package 1. model-check / public-checker second reserve inventory
 
 - macro phase
   - `Macro 5`
@@ -60,7 +51,7 @@
 - 完了条件
   - proof notebook current cut を巻き戻さず、machine-facing carrier の reserve line だけを narrow に整理する。
 
-### Package 3. stable-static edge-pair first reopen
+### Package 2. stable-static edge-pair first reopen
 
 - macro phase
   - `Macro 4`
@@ -69,7 +60,7 @@
 - 完了条件
   - duplicate cluster と try/rollback malformed-static family を still later に残したまま、stable-static edge-pair line だけを source / fixture / ladder へ戻す。
 
-### Package 4. public operational surface actualization gate
+### Package 3. public operational surface actualization gate
 
 - macro phase
   - `Macro 3-7`
@@ -77,6 +68,15 @@
   - public surface inventory fixed 後に、already-public parser-free stack を壊さずにどの current tranche から actual promotion pressure を受けるかを整理する。
 - 完了条件
   - `pub visibility != final public contract` を保ったまま、later public API / CLI reopen の first sub-cut を narrow に示す。
+
+### Package 4. shared-space identity / auth layering reopen
+
+- macro phase
+  - `Macro 6`
+- 目的
+  - Mirrorea/shared-space docs-first re-entry fixed 後の next docs-first reopen として、membership core と auth / admission / projection layering の cut を narrow に整理する。
+- 完了条件
+  - principal identity、transport / service auth、room admission、display / projection identity を membership carrier に潰さない current boundary を current task map に昇格する。
 
 ## 研究を通して見つけること
 

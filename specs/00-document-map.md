@@ -677,6 +677,10 @@
   - stable static malformed post-contrast sequencing fixed 後の次段として、already-public parser-free helper stack、crate-public but non-production parser/checker/runtime tranche、repo-local helper / example emitter surface の 3 bucket split を current public operational surface inventory として比較する補助文書。
 - `specs/examples/356-current-l2-parser-checker-runtime-public-surface-inventory-ready-minimal-parser-checker-runtime-public-surface-inventory-threshold.md`
   - parser / checker / runtime public surface inventory の minimum を `inventory_kind + already_public_parser_free_refs + crate_public_nonproduction_refs + repo_local_helper_refs + guard_refs + kept_later_refs` に留める補助文書。
+- `specs/examples/357-current-l2-parser-checker-runtime-public-surface-inventory-ready-mirrorea-shared-space-docs-first-re-entry-comparison.md`
+  - parser / checker / runtime public surface inventory fixed 後の次段として、Mirrorea / shared-space を repo-level current line へ docs-first boundary track として再入場させつつ、Typed-Effect / Prism / app line を separable track として並べる narrow re-entry bundle を比較する補助文書。
+- `specs/examples/358-current-l2-mirrorea-shared-space-docs-first-re-entry-ready-minimal-mirrorea-shared-space-docs-first-re-entry-threshold.md`
+  - Mirrorea / shared-space docs-first re-entry の minimum を `reentry_kind + entry_criteria_refs + current_boundary_refs + adjacent_track_boundary_refs + user_spec_required_refs + next_docs_first_reopen_refs + kept_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

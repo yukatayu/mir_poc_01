@@ -259,6 +259,17 @@
   - `specs/examples/328-current-l2-theorem-first-concrete-tool-pilot-ready-minimal-theorem-first-concrete-tool-pilot-threshold.md`
   - `docs/reports/0630-phase6-theorem-first-concrete-tool-pilot.md`
 
+## 2026-04-13 Phase 6 Mirrorea/shared-space docs-first re-entry addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/357-current-l2-parser-checker-runtime-public-surface-inventory-ready-mirrorea-shared-space-docs-first-re-entry-comparison.md`
+  - `specs/examples/358-current-l2-mirrorea-shared-space-docs-first-re-entry-ready-minimal-mirrorea-shared-space-docs-first-re-entry-threshold.md`
+  - `specs/examples/121-shared-space-authoritative-room-baseline.md`
+  - `specs/examples/125-shared-space-control-plane-carrier-threshold.md`
+  - `specs/examples/295-current-l2-phase2-parser-free-poc-closeout-ready-phase4-shared-space-self-driven-closeout-comparison.md`
+  - `specs/examples/296-current-l2-phase4-shared-space-self-driven-closeout-ready-minimal-phase4-shared-space-self-driven-closeout-threshold.md`
+  - `docs/reports/0658-phase6-mirrorea-shared-space-docs-first-reentry-package.md`
+
 ## 2026-04-12 Phase 6 proof-notebook bridge-sketch reopen ordering addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。

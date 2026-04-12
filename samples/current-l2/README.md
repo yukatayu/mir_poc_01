@@ -97,5 +97,5 @@ current reached-stage inventory は current authored septet `e1` / `e2` / `e3` /
 
 ## next steps
 
-- repo-level current next line は Mirrorea / shared-space docs-first re-entry である
+- repo-level current next line は model-check / public-checker second reserve inventory である
 - source-sample side の next reopen point は stable-static edge-pair first reopen (`e4` / `e19`) である

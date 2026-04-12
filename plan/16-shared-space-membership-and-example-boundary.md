@@ -1066,6 +1066,42 @@ witness = {
 
 したがって current repo では、causal metadata line をこれ以上 current package に押し広げず、Phase 4 の current package は authoritative baseline、working subset、minimal witness core、delegated-provider practical cut、control-plane threshold comparisonまでで checkpoint close とみなしてよい。
 
+## repo-level docs-first re-entry の current reading
+
+Phase 4 self-driven closeout のあとで shared-space line を repo-level current line へ戻すときも、
+current repo では old `FutureWork` bucket を再導入しない方が自然である。
+
+### current first choice
+
+- Mirrorea / shared-space は **Macro 6 docs-first boundary track** として再入場させる
+- Typed-Effect Wiring Platform と PrismCascade は **adjacent boundary track** に留める
+- upper-layer application / domain target は **user-spec-required gate** に留める
+- shared-space line の next docs-first reopen は
+  - identity / auth layering
+  - admission policy / compile-time visibility
+  - authority / resource ownership
+  の順に読む
+
+### まだ current re-entry bundle に入れないもの
+
+- final shared-space catalog
+- control-plane separated carrier actualization
+- distributed fairness protocol
+- Mirrorea operational runtime / path-proof / consensus realization
+- upper-layer app finalization
+
+### practical reading
+
+この re-entry bundle が言いたいのは、
+Phase 4 closeout package を再拡張することではなく、
+
+- `mirrorea_fabric_boundary`
+- `shared_space_practical_boundary`
+
+を current repo-level boundary bundle として並べ直し、
+そのうえで next shared-space reopen を identity/auth line へ narrow に handoff する、
+ということである。
+
 ## identity / auth layering をどこで切るか
 
 shared-space line では、participant carrier を考え始めるとすぐに

@@ -188,8 +188,11 @@ stable static malformed post-contrast sequencing も fixed 済みであり、sec
 `specs/examples/355...356` により、
 parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free helper stack、crate-public but non-production compile-ready tranche、repo-local helper / example emitter surface の 3 bucket split を current reading に置いた。`pub` visibility だけで final public operational contract に昇格させず、repo-level next line は Mirrorea / shared-space docs-first re-entry に handoff した。
 
+`specs/examples/357...358` により、
+Mirrorea/shared-space docs-first re-entry bundle も fixed 済みであり、`mirrorea_fabric_boundary + shared_space_practical_boundary` を current repo-level boundary core に置き、Typed-Effect / Prism を adjacent track、shared-space final catalog と upper-layer app target を user-spec-required gate、identity/auth layering・admission/compile-time visibility・authority/resource ownership を next docs-first reopen refs に置く current cut を採った。control-plane separated carrier actualization、distributed fairness protocol、Mirrorea operational runtime realizationは still later に残す。
+
 current mainline は、
-**repo-level current line は Mirrorea / shared-space docs-first re-entry**
+**repo-level current line は model-check / public-checker second reserve inventory**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -198,10 +201,10 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- Mirrorea / shared-space docs-first re-entry
 - model-check / public-checker second reserve inventory
 - stable-static edge-pair first reopen
 - public operational surface actualization gate
+- shared-space identity / auth layering reopen
 
 を揃えるのが主眼になる。
 
