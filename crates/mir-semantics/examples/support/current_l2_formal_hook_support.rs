@@ -36,9 +36,7 @@ pub fn build_formal_hook_from_static_gate_artifact(
 ) -> Result<ToolNeutralFormalHookArtifact, String> {
     validate_static_gate_artifact(artifact)?;
     if artifact.checker_core.static_verdict == "valid" {
-        return Err(
-            "fixture_static_cluster requires a non-valid static gate artifact".to_string(),
-        );
+        return Err("fixture_static_cluster requires a non-valid static gate artifact".to_string());
     }
 
     let subject_ref = artifact.fixture_context.fixture_id.clone();

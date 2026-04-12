@@ -206,6 +206,15 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - `DetachedStaticGateArtifact` / `DetachedBundleArtifact -> tool-neutral formal hook artifact` の pure transform と carrier struct を持つ shared support helper
   - theorem-line existing cut と同じ `subject_kind + subject_ref + contract_rows(obligation_kind + typed symbolic evidence_refs)` を維持し、source artifact schema/kind mismatch は fail-closed に止める
   - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
+- `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs`
+  - `ToolNeutralFormalHookArtifact -> ProofNotebookReviewUnitArtifact` の pure transform と carrier struct を持つ theorem-side shared support helper
+  - current cut では `subject_kind + subject_ref + row(obligation_kind + evidence_refs + goal_text) + checklist` の row-local review unit に留め、supported pair は runtime 1 件 + static 2 件だけを受け付ける
+  - input formal hook に複数 contract row があっても、current helper は bridge sketch を作らず row-local review unit の list へ分解する
+  - bridge sketch / compare-bless metadata / proof assistant adapter / model-check side は持ち込まず、schema/kind mismatch や unsupported pair は fail-closed に止める
+  - example / test からだけ読む non-production module であり、`lib.rs` / `harness.rs` の public API には入れない
+- `crates/mir-semantics/examples/current_l2_emit_proof_notebook_review_unit.rs`
+  - theorem-first concrete tool pilot の thin CLI emitter
+  - formal-hook JSON を読んで review-unit JSON を出すだけに留め、public theorem verifier API や retained artifact bless/update には widen しない
 - `crates/mir-ast/src/current_l2.rs`
   - Phase 6 front-half parser first tranche の non-production carrier
   - stage 1 option/chain surface と stage 2 try/fallback structural surface だけを持つ

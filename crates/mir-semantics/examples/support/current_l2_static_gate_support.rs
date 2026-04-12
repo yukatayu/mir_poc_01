@@ -1,8 +1,6 @@
 use std::path::PathBuf;
 
-use mir_semantics::{
-    CurrentL2Fixture, StaticGateResult, StaticGateVerdict, StaticReasonCodeRow,
-};
+use mir_semantics::{CurrentL2Fixture, StaticGateResult, StaticGateVerdict, StaticReasonCodeRow};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -84,72 +82,49 @@ fn detached_reason_code_from_reason(reason: &str) -> Option<StaticReasonCodeRow>
             successor,
         });
     }
-    if let Some((predecessor, successor)) = parse_reason_pair(
-        reason,
-        "lineage assertion does not describe ",
-        " -> ",
-    ) {
+    if let Some((predecessor, successor)) =
+        parse_reason_pair(reason, "lineage assertion does not describe ", " -> ")
+    {
         return Some(StaticReasonCodeRow::LineageAssertionEdgeMismatch {
             predecessor,
             successor,
         });
     }
-    if let Some((predecessor, successor)) = parse_reason_pair(
-        reason,
-        "declared access target is missing for ",
-        " -> ",
-    ) {
+    if let Some((predecessor, successor)) =
+        parse_reason_pair(reason, "declared access target is missing for ", " -> ")
+    {
         return Some(StaticReasonCodeRow::DeclaredTargetMissing {
             predecessor,
             successor,
         });
     }
-    if let Some((predecessor, successor)) = parse_reason_pair(
-        reason,
-        "declared access target mismatch between ",
-        " and ",
-    ) {
+    if let Some((predecessor, successor)) =
+        parse_reason_pair(reason, "declared access target mismatch between ", " and ")
+    {
         return Some(StaticReasonCodeRow::DeclaredTargetMismatch {
             predecessor,
             successor,
         });
     }
-    if let Some((from_capability, to_capability)) = parse_reason_pair(
-        reason,
-        "capability strengthens from ",
-        " to ",
-    ) {
+    if let Some((from_capability, to_capability)) =
+        parse_reason_pair(reason, "capability strengthens from ", " to ")
+    {
         return Some(StaticReasonCodeRow::CapabilityStrengthens {
             from_capability,
             to_capability,
         });
     }
-    if let Some((head, scope)) = parse_reason_pair(
-        reason,
-        "missing option declaration for chain head ",
-        " at ",
-    ) {
+    if let Some((head, scope)) =
+        parse_reason_pair(reason, "missing option declaration for chain head ", " at ")
+    {
         return Some(StaticReasonCodeRow::MissingChainHeadOption { head, scope });
     }
-    if let Some((option, scope)) = parse_reason_pair(
-        reason,
-        "missing predecessor option ",
-        " at ",
-    ) {
-        return Some(StaticReasonCodeRow::MissingPredecessorOption {
-            option,
-            scope,
-        });
+    if let Some((option, scope)) = parse_reason_pair(reason, "missing predecessor option ", " at ")
+    {
+        return Some(StaticReasonCodeRow::MissingPredecessorOption { option, scope });
     }
-    if let Some((option, scope)) = parse_reason_pair(
-        reason,
-        "missing successor option ",
-        " at ",
-    ) {
-        return Some(StaticReasonCodeRow::MissingSuccessorOption {
-            option,
-            scope,
-        });
+    if let Some((option, scope)) = parse_reason_pair(reason, "missing successor option ", " at ") {
+        return Some(StaticReasonCodeRow::MissingSuccessorOption { option, scope });
     }
     None
 }

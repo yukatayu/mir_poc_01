@@ -70,6 +70,7 @@ current reached-stage inventory は first authored trio `e2` / `e4` / `e23` に�
 - `runtime_try_cut_cluster` と `fixture_static_cluster` は tool-neutral formal hook の current top であり、concrete theorem/model-check tool choice はまだ混ぜない。
 - `source-target-only` は failure ではなく、current authored set 外の deferred authored row を意味する。
 - current authoring / bless / regression flow は [.docs/current-l2-source-sample-authoring-policy.md](/home/yukatayu/dev/mir_poc_01/.docs/current-l2-source-sample-authoring-policy.md) と `python3 scripts/current_l2_source_sample_regression.py inventory|regression` を基準にする。
+- theorem-first concrete pilot current cut では、tool-neutral formal hook artifact を入力にする `proof_notebook_review_unit` consumer を non-production helper/example に留める。
 
 ## non-goals
 
@@ -87,5 +88,5 @@ current reached-stage inventory は first authored trio `e2` / `e4` / `e23` に�
 
 ## next steps
 
-- theorem-first concrete tool pilot を narrow に閉じる
 - deferred authored row の widen timing を later sequencing task で整理する
+- proof-notebook bridge sketch reopen ordering を later theorem-side line で整理する

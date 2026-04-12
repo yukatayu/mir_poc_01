@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 14:21 JST
+最終更新: 2026-04-12 14:49 JST
 
 ## この文書について
 
@@ -20,10 +20,10 @@
 - **Phase 3** は reopen line の self-driven freeze が `specs/examples/287...290` で fixed 済みである。actual parser first tranche は stage 1 + stage 2 structural floor、first checker reconnect bridge は stage 1 summary + stage 2 try/rollback structural contract に留め、stage 3 request / admit / predicate reconnect、`e19` redesign、`E21` / `E22` contrast は retained-later line に残している。
 - **Phase 4** は `specs/examples/295...296` により self-driven closeout fixed と読んでよい。self-driven current package は `specs/examples/121...125` までで checkpoint close とし、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、`delegated_provider_attestation` non-core line、control-plane separated carrier actualization、distributed fairness protocol、final operational realizationは later に残している。
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。checker-side verifier handoff surface docs-only mixed-row bridge、theorem-side retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later lineを 1 本の closeout bundle に固定し、actual subject row / boundary-specific artifact / actual emitted verifier artifact / concrete tool binding / public checker migration / low-level memory-order family は still later に残している。
-- **Phase 6** は front-half compile-ready checkpoint 自体は fixed 済みである。parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304`、next reopen sequencing が `specs/examples/305...306`、parser second tranche first package が `specs/examples/307...308`、reserve formal tool binding inventory が `specs/examples/309...310`、parser-side follow-up sequencing が `specs/examples/311...312`、shared single attachment frame first package が `specs/examples/313...314`、source-sample corpus scope / file layout が `specs/examples/315...316`、representative / fixture / source mapping matrix が `specs/examples/317...318`、actual parser-to-`Program` lowering first cut が `specs/examples/319...320`、syntax-backed sample runner first cut が `specs/examples/321...322`、verification ladder wiring が `specs/examples/323...324`、source-sample authoring / bless / regression policy が `specs/examples/325...326` で fixed 済みである。`mir-ast` には stage 1 / stage 2 carrier に加えて stage 3 declaration-side admit attached slot、shared isolated predicate fragment、shared single attachment frame extraction bridge が入り、`mir-semantics` / `mir-runtime` / formal-hook 側の narrow compile-ready gate に加えて helper-local source lowerer / source runner first cut、first-trio reached-stage ladder ratchet、repo-local source-sample inventory / regression helper もある。
+- **Phase 6** は front-half compile-ready checkpoint 自体は fixed 済みである。parser first tranche が `specs/examples/299...300`、checker/runtime first tranche が `specs/examples/301...302`、compile-ready verification / formal hook が `specs/examples/303...304`、next reopen sequencing が `specs/examples/305...306`、parser second tranche first package が `specs/examples/307...308`、reserve formal tool binding inventory が `specs/examples/309...310`、parser-side follow-up sequencing が `specs/examples/311...312`、shared single attachment frame first package が `specs/examples/313...314`、source-sample corpus scope / file layout が `specs/examples/315...316`、representative / fixture / source mapping matrix が `specs/examples/317...318`、actual parser-to-`Program` lowering first cut が `specs/examples/319...320`、syntax-backed sample runner first cut が `specs/examples/321...322`、verification ladder wiring が `specs/examples/323...324`、source-sample authoring / bless / regression policy が `specs/examples/325...326`、theorem-first concrete tool pilot が `specs/examples/327...328` で fixed 済みである。`mir-ast` には stage 1 / stage 2 carrier に加えて stage 3 declaration-side admit attached slot、shared isolated predicate fragment、shared single attachment frame extraction bridge が入り、`mir-semantics` / `mir-runtime` / formal-hook 側の narrow compile-ready gate に加えて helper-local source lowerer / source runner first cut、first-trio reached-stage ladder ratchet、repo-local source-sample inventory / regression helper、tool-neutral formal hook から `proof_notebook_review_unit` を導く theorem-side pilot もある。
 - ただし、**syntax-backed fixed-subset sample verification path はまだ early** である。current snapshot では、旧 `fixed-subset sample/program corpus staging` 1 項目を、source corpus mapping / lowering / runner / verification ladder / authoring policy に分解して追い、scope / layout は fixed 済み entry criteria として扱う。
 - `specs/examples/311...312` により、shared single attachment frame を next package に置く parser-side follow-up sequencing は fixed 済みである。
-- current main bottleneck は semantics の大崩れではなく、**source-sample policy fixed 後に theorem-first concrete consumer pressure をどう narrow に受け、mirror drift をどう抑えるか** である。mapping / lowering / runner / ladder / policy first cut 自体は fixed 済み entry criteria として扱える。
+- current main bottleneck は semantics の大崩れではなく、**proof-notebook review-unit pilot fixed 後に mirror drift をどう抑え、deferred authored-row widen と bridge-sketch reopen ordering をどう並べるか** である。mapping / lowering / runner / ladder / policy first cut と theorem-first pilot 自体は fixed 済み entry criteria として扱える。
 
 ## compile-ready PoC の rough 読み
 
@@ -31,7 +31,7 @@
 |---|---:|---|---|
 | parser-free current L2 PoC | 90%+ | maintenance closeout 数 package | `mir-semantics` 主線はすでに compile / test 可能 |
 | Phase 6 前半 compile-ready minimal actual PoC | 96%+ | maintenance / reopen only | compile-ready checkpoint close は fixed と読める |
-| fixed-subset syntax-backed sample verification milestone | 90%前後 | pilot、widen sequencing | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続し、repo-local policy まで fixed 済み。残りは proof consumer pressure と wider authored set sequencing |
+| fixed-subset syntax-backed sample verification milestone | 90%前後 | drift suppression、widen sequencing、bridge-sketch ordering | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続し、repo-local policy と first theorem-side pilot まで fixed 済み。残りは wider authored set sequencing と proof-notebook bridge-sketch ordering |
 
 ## 研究フェーズ（大局）
 
@@ -43,25 +43,25 @@
 | Phase 3 | 93% | parser boundary / first checker cut | self-driven freeze fixed | 中〜やや重い | 自走可能 | `287...290` で subset / reconnect freeze は fixed。later widen は reserve path |
 | Phase 4 | 90% | shared-space / membership / practical example boundary | self-driven closeout fixed | 重い | 一部自走可能 | `121...125` current package と final catalog / later line の境界は fixed。final catalog は user spec 依存 |
 | Phase 5 | 98% | static analysis / type / theorem prover / async-control boundary | self-driven closeout fixed | とても重い | 自走可能 | `297...298` で stop line と retained-later inventory は fixed。actual external contract は later |
-| Phase 6 | 88% | actual parser / checker / runtime commitment と syntax-backed sample path | theorem-first concrete tool pilot | 重い | 自走可能 | front-half compile-ready checkpoint、parser-side follow-up actualization、source corpus scope / layout、mapping、lowering、runner、ladder、policy first cut は fixed 済みで、pilot / drift suppression / wider authored-row sequencing が残る |
+| Phase 6 | 89% | actual parser / checker / runtime commitment と syntax-backed sample path | post-checkpoint drift suppression / mirror sweep | 重い | 自走可能 | front-half compile-ready checkpoint、parser-side follow-up actualization、source corpus scope / layout、mapping、lowering、runner、ladder、policy first cut、proof-notebook review-unit pilotは fixed 済みで、drift suppression / wider authored-row sequencing / bridge-sketch ordering が残る |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
-1. **Phase 6 theorem-first concrete tool pilot**
-   - tool-neutral formal hook の後段 reserve を narrow pilot に寄せる。
-2. **Phase 0 / 6 drift suppression**
+1. **Phase 0 / 6 drift suppression**
    - snapshot 文書の current line / next line / retained-later line を揃える。
-3. **Phase 6 deferred authored-row widen sequencing**
+2. **Phase 6 deferred authored-row widen sequencing**
    - source target only row `e1` / `e3` / `e21` を later package として整理する。
+3. **Phase 6 proof-notebook bridge-sketch reopen ordering**
+   - review-unit current cut を保ったまま theorem-side bridge sketch をいつ reopen するかを比較する。
 
 ## いま自走で進めてよい範囲
 
 ### 着手可能
 
-- theorem-first concrete tool pilot
 - checkpoint close 済み package の drift suppression
 - deferred authored-row widen sequencing
+- proof-notebook bridge-sketch reopen ordering
 
 ### 後段依存
 
@@ -110,9 +110,9 @@
 
 ## 次に進めるべき task
 
-1. **Phase 6 theorem-first concrete tool pilot** を immediate line として扱う
-2. 続いて checkpoint close 済み package の **drift suppression** を継続する
-3. その後に deferred authored-row widen sequencing を整理する
+1. checkpoint close 済み package の **drift suppression** を immediate line として扱う
+2. 続いて deferred authored-row widen sequencing を整理する
+3. その後に proof-notebook bridge-sketch reopen ordering を比較する
 
 ## 作業ログ（簡潔）
 
@@ -146,3 +146,4 @@
 - 2026-04-10 08:44 JST — stage 3 request / predicate / attachment branch の current snapshot を整理し、Phase 3 を reserve path として読む phase gate を固定した。next は shared-space の identity / auth / admission / fairness line を narrow に比較する段階。
 - 2026-04-12 14:02 JST — `specs/examples/323...324` と `docs/reports/0628` を追加し、first authored trio `e2` / `e4` / `e23` の verification ladder を fixed した。`e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読み、`e1` / `e3` / `e21` は source target only / not yet authored row に残した。current mainline は `source-sample authoring / bless policy` に切り替わった。
 - 2026-04-12 14:21 JST — `specs/examples/325...326` と `docs/reports/0629` を追加し、source-sample authoring / bless / regression policy を fixed した。`.docs/current-l2-source-sample-authoring-policy.md` と `scripts/current_l2_source_sample_regression.py` を repo-local policy anchor に置き、`inventory` は first authored trio の file presence / deferred row absence を確認し、current mainline は `theorem-first concrete tool pilot` に切り替わった。
+- 2026-04-12 14:49 JST — `specs/examples/327...328` と `docs/reports/0630` を追加し、tool-neutral formal hook artifact を入力にする non-production `proof_notebook_review_unit` theorem-side pilot を fixed した。supported pair は runtime 1 件 + static 2 件に留め、bridge sketch / compare-bless metadata / concrete theorem-model-check tool binding は still later に残し、current mainline は `post-checkpoint drift suppression / mirror sweep` に切り替わった。

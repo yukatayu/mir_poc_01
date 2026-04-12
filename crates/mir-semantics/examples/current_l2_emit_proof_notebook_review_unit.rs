@@ -14,7 +14,7 @@ mod current_l2_proof_notebook_review_unit_support;
 mod current_l2_static_gate_support;
 
 use current_l2_formal_hook_support::ToolNeutralFormalHookArtifact;
-use current_l2_proof_notebook_review_unit_support::build_proof_notebook_review_unit_artifact;
+use current_l2_proof_notebook_review_unit_support::build_proof_notebook_review_unit_artifacts;
 
 fn usage(program: &str) -> String {
     format!(
@@ -62,8 +62,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let payload = fs::read_to_string(&artifact_path)?;
     let formal_hook: ToolNeutralFormalHookArtifact = serde_json::from_str(&payload)?;
-    let review_unit = build_proof_notebook_review_unit_artifact(&formal_hook)?;
-    let output = serde_json::to_string_pretty(&review_unit)?;
+    let review_units = build_proof_notebook_review_unit_artifacts(&formal_hook)?;
+    let output = serde_json::to_string_pretty(&review_units)?;
 
     match output_path {
         Some(path) => fs::write(path, output)?,

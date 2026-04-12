@@ -15,7 +15,7 @@ pub struct ProofNotebookReviewUnitArtifact {
     pub artifact_kind: String,
     pub subject_kind: String,
     pub subject_ref: String,
-    pub review_rows: Vec<ProofNotebookReviewRow>,
+    pub row: ProofNotebookReviewRow,
     pub checklist: Vec<String>,
 }
 
@@ -32,9 +32,9 @@ pub struct ProofNotebookReviewUnitEvidenceRef {
     pub ref_id: String,
 }
 
-pub fn build_proof_notebook_review_unit_artifact(
+pub fn build_proof_notebook_review_unit_artifacts(
     artifact: &ToolNeutralFormalHookArtifact,
-) -> Result<ProofNotebookReviewUnitArtifact, String> {
+) -> Result<Vec<ProofNotebookReviewUnitArtifact>, String> {
     validate_formal_hook_artifact(artifact)?;
     if artifact.subject_ref.is_empty() {
         return Err("formal hook subject_ref must not be empty".to_string());
@@ -43,21 +43,21 @@ pub fn build_proof_notebook_review_unit_artifact(
         return Err("formal hook contract_rows must not be empty".to_string());
     }
 
-    let review_rows = artifact
+    artifact
         .contract_rows
         .iter()
         .map(|row| build_review_row(&artifact.subject_kind, &artifact.subject_ref, row))
-        .collect::<Result<Vec<_>, _>>()?;
-    let checklist = build_checklist(artifact, &review_rows);
-
-    Ok(ProofNotebookReviewUnitArtifact {
-        schema_version: REVIEW_UNIT_SCHEMA_VERSION.to_string(),
-        artifact_kind: REVIEW_UNIT_ARTIFACT_KIND.to_string(),
-        subject_kind: artifact.subject_kind.clone(),
-        subject_ref: artifact.subject_ref.clone(),
-        review_rows,
-        checklist,
-    })
+        .map(|row| {
+            row.map(|row| ProofNotebookReviewUnitArtifact {
+                schema_version: REVIEW_UNIT_SCHEMA_VERSION.to_string(),
+                artifact_kind: REVIEW_UNIT_ARTIFACT_KIND.to_string(),
+                subject_kind: artifact.subject_kind.clone(),
+                subject_ref: artifact.subject_ref.clone(),
+                checklist: build_checklist(artifact, &row),
+                row,
+            })
+        })
+        .collect::<Result<Vec<_>, _>>()
 }
 
 fn build_review_row(
@@ -109,20 +109,18 @@ fn derive_goal_text(
 
 fn build_checklist(
     artifact: &ToolNeutralFormalHookArtifact,
-    review_rows: &[ProofNotebookReviewRow],
+    review_row: &ProofNotebookReviewRow,
 ) -> Vec<String> {
-    let mut checklist = Vec::with_capacity(review_rows.len() + 2);
+    let mut checklist = Vec::with_capacity(3);
     checklist.push(format!(
         "Confirm subject `{}` is still reviewed as `{}`.",
         artifact.subject_ref, artifact.subject_kind
     ));
-    for row in review_rows {
-        checklist.push(format!(
-            "Check `{}` against {}.",
-            row.obligation_kind,
-            format_evidence_refs(&row.evidence_refs)
-        ));
-    }
+    checklist.push(format!(
+        "Check `{}` against {}.",
+        review_row.obligation_kind,
+        format_evidence_refs(&review_row.evidence_refs)
+    ));
     checklist.push(
         "Fail closed if any evidence ref is missing, mismatched, or no longer supports the stated goal."
             .to_string(),

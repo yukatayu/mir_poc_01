@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 14:21 JST
+最終更新: 2026-04-12 14:49 JST
 
 ## この文書について
 
@@ -19,7 +19,7 @@
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。verifier handoff surface、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual subject row、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete tool binding、public checker migration、low-level memory-order family は later に残している。
 - **Phase 6 front-half compile-ready checkpoint** は `specs/examples/299...314` により fixed 済みである。`mir-ast` stage 1 / stage 2 carrier、stage 3 declaration-side admit attached slot、shared isolated predicate fragment、shared single attachment frame extraction bridge、`mir-semantics` program-level entry、`mir-runtime` current L2 thin skeleton、tool-neutral formal hook first tranche、reserve formal tool binding inventory までは narrow actual evidence がある。
 - ただし、**「compile-ready checkpoint が fixed」であることと、「source text sample を fixed subset で持ち、static / interpreter / formal staging を sample ごとに通せる」ことは別**である。前者は 96%+ と読める一方、後者へ進むための task chain は、旧 snapshot では `fixed-subset sample/program corpus staging` の 1 項目に圧縮されすぎていた。
-- current immediate line は **Phase 6 theorem-first concrete tool pilot** である。`specs/examples/315...316` により source corpus scope / layout、`specs/examples/317...318` により representative / fixture / source mapping matrix、`specs/examples/319...320` により actual parser-to-`Program` lowering first cut、`specs/examples/321...322` により syntax-backed sample runner first cut、`specs/examples/323...324` により verification ladder wiring、`specs/examples/325...326` により source-sample authoring / bless / regression policy まで fixed 済みである。current ladder row は first authored trio `e2` / `e4` / `e23` に留め、`e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読む。`python3 scripts/current_l2_source_sample_regression.py inventory|regression` と `.docs/current-l2-source-sample-authoring-policy.md` により repo-local authoring flow も fixed した。したがって、その後は **theorem-first concrete tool pilot → drift suppression → deferred authored-row widen sequencing** の順に進めるのが自然である。
+- current immediate line は **Phase 0 / 6 post-checkpoint drift suppression / mirror sweep** である。`specs/examples/315...316` により source corpus scope / layout、`specs/examples/317...318` により representative / fixture / source mapping matrix、`specs/examples/319...320` により actual parser-to-`Program` lowering first cut、`specs/examples/321...322` により syntax-backed sample runner first cut、`specs/examples/323...324` により verification ladder wiring、`specs/examples/325...326` により source-sample authoring / bless / regression policy、`specs/examples/327...328` により theorem-first concrete tool pilot まで fixed 済みである。current ladder row は first authored trio `e2` / `e4` / `e23` に留め、`e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読む。tool-neutral formal hook 後段の theorem-side pressure も non-production `proof_notebook_review_unit` まで narrow に actualize 済みである。したがって、その後は **drift suppression → deferred authored-row widen sequencing → proof-notebook bridge-sketch reopen ordering** の順に進めるのが自然である。
 - fixed subset の executable sample を増やすこと自体は current line に整合する。よいのは **既存 settled subset を `static gate` / `interpreter` / `tool-neutral formal hook` に段階接続すること**であり、low-level memory-order-like surface や higher-level async-control family を executable core surface として同時に太らせることではない。
 
 ## 具体的な sample code 検証段階までの rough estimate
@@ -28,8 +28,8 @@
 |---|---|---:|---|---|---|
 | parser-free current L2 PoC | 実在し、compile / test evidence あり | 90%+ | maintenance closeout だけ | 1〜2 package / 2〜4日 | `mir-semantics` 主線はすでに回る |
 | Phase 6 front-half compile-ready minimal actual PoC | checkpoint close fixed | 96%+ | maintenance / reopen only | maintenance only | current L2 subset の compile-ready checkpoint は閉じたと読んでよい |
-| fixed-subset syntax-backed sample verification milestone | source corpus scope/layout、mapping、lowering、runner、verification ladder、authoring policy first cut fixed | **90%前後** | 1〜2 package | 数日〜1週 | source text sample を parse / lower / static / interpreter / formal hook と repo-local policyまで接続済みで、残りは theorem-first pilot と wider authored set sequencing |
-| first theorem-first concrete tool pilot | reserve inventory fixed | 8%前後 | 2〜4 package | 1〜3週 | source-sample ladder の後で narrow proof consumer pressure を受ける |
+| fixed-subset syntax-backed sample verification milestone | source corpus scope/layout、mapping、lowering、runner、verification ladder、authoring policy、theorem-first pilot fixed | **90%前後** | 1〜2 package | 数日〜1週 | source text sample を parse / lower / static / interpreter / formal hook と repo-local policy、proof-notebook review-unit pilotまで接続済みで、残りは wider authored set sequencing と bridge-sketch reopen ordering |
+| proof-notebook bridge-sketch reopen path | review-unit pilot fixed | 12%前後 | 1〜3 package | 1〜3週 | review-unit current cut の後で notebook bridge sketch をどこまで reopen するかが残る |
 
 ### `79%前後` の根拠
 
@@ -50,21 +50,13 @@
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 6 reserve reopen | theorem-first concrete tool pilot | tool-neutral formal hook 後段の narrow proof consumer pressure を比較する | 中 | 1〜2 task / 2〜6日 | 自走可能 |
-| 2 | Phase 0 / 6 maintenance | post-checkpoint drift suppression / mirror sweep | current promoted line と snapshot 文書のずれを抑える | 低〜中 | 継続 | 自走可能 |
-| 3 | Phase 6 sample path | deferred authored-row widen sequencing | `e1` / `e3` / `e21` をいつ authored row に移すかを整理する | 中 | 1〜2 task / 数日 | 自走可能 |
+| 1 | Phase 0 / 6 maintenance | post-checkpoint drift suppression / mirror sweep | current promoted line と snapshot 文書のずれを抑える | 低〜中 | 継続 | 自走可能 |
+| 2 | Phase 6 sample path | deferred authored-row widen sequencing | `e1` / `e3` / `e21` をいつ authored row に移すかを整理する | 中 | 1〜2 task / 数日 | 自走可能 |
+| 3 | Phase 6 theorem-side reserve reopen | proof-notebook bridge-sketch reopen ordering | review-unit current cut の後で theorem-side bridge sketch をいつ reopen するかを比較する | 中 | 1〜2 task / 数日 | 自走可能 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 6 reserve reopen theorem-first concrete tool pilot
-
-- 目的
-  - tool-neutral formal hook 後段で theorem-first concrete consumer pressure を narrow に比較する。
-- 完了条件
-  - source-sample runner / ladder / policy を壊さず、proof consumer surface を reserve reopen に留める。
-  - model-check side や LLVM-family backend timing を premature に current mainline へ戻さない。
-
-### Task 2. Phase 0 / 6 maintenance post-checkpoint drift suppression / mirror sweep
+### Task 1. Phase 0 / 6 maintenance post-checkpoint drift suppression / mirror sweep
 
 - 目的
   - current promoted line と snapshot 文書のずれを継続的に抑える。
@@ -72,7 +64,7 @@
   - current line / next line / retained-later line が `Documentation.md`、`progress.md`、`tasks.md`、relevant `plan/`、abstract、report で一致している。
   - historical log を壊さずに snapshot だけを更新できている。
 
-### Task 3. Phase 6 sample path deferred authored-row widen sequencing
+### Task 2. Phase 6 sample path deferred authored-row widen sequencing
 
 - 目的
   - `e1` / `e3` / `e21` を source target only のまま維持するか、どの順で authored row へ移すかを narrow に整理する。
@@ -80,24 +72,32 @@
   - current first trio policy と regression helper を壊さず、accepted sample surface widening の timing を premature に fixed しない。
   - representative / fixture / source mapping matrix と README ladder の更新順が later task へ handoff できる。
 
+### Task 3. Phase 6 theorem-side reserve reopen proof-notebook bridge-sketch reopen ordering
+
+- 目的
+  - `proof_notebook_review_unit` current cut を壊さずに、bridge sketch をどの package で reopen するかを narrow に整理する。
+- 完了条件
+  - review-unit current shape と source-sample path current cut を保持し、compare-bless metadata や concrete theorem/model-check tool binding を premature に混ぜない。
+  - theorem-side later reopen line が docs / plan / abstract で一貫している。
+
 ## 方針決定が必要な blocker / open question
 
 - **現時点で、current Task 1〜3 を止める immediate blocker は 0 件** と読むのが自然である。
-- ただし、current mainline では theorem-first proof consumer shape、authored-row widen timing、formal/back-end timing の guard が効く。
+- ただし、current mainline では proof-notebook bridge sketch timing、authored-row widen timing、formal/back-end timing の guard が効く。
 
-### Blocker 1. theorem-first concrete tool pilot の切り方
+### Blocker 1. proof-notebook bridge-sketch reopen ordering
 
 - 概要
-  - tool-neutral formal hook 後段の theorem-first concrete consumer をどの narrow shape に留めるか。
+  - review-unit current cut の後で theorem-side bridge sketch をどの順で reopen するか。
 - 何に影響するか
-  - proof consumer pressure
+  - theorem-side handoff shape
   - source-sample policy との handoff
 - 主要な選択肢
-  1. proof notebook review unit のような non-production theorem-first consumer に留める
-  2. model-check side や richer bridge sketch と同時に扱う
-  3. final public verifier / checker migration と同時に扱う
+  1. drift suppression の直後に bridge sketch を reopen する
+  2. drift suppression と deferred authored-row widen sequencing の後で reopen する
+  3. concrete theorem/model-check tool binding と同時に reopen する
 - current recommendation / 見解
-  - **1 を current first choice** に置き、tool-neutral formal hook の後段 reserve を narrow consumer に留め、model-check side と public migration は still later に残すのが自然である。
+  - **2 を current first choice** に置き、review-unit current cut を維持したまま snapshot と authored-row timing を先に整え、bridge sketch はその後に narrow reopen するのが自然である。
 
 ### Blocker 2. concrete formal tool binding と backend/codegen timing
 
@@ -109,7 +109,7 @@
   - long-term implementation flexibility
 - 主要な選択肢
   1. source corpus / lowering / runner より前に backend or tool binding を入れる
-  2. fixed-subset source corpus と verification ladder / authoring policy を先に揃え、その後 theorem-first concrete tool pilot を行う
+  2. fixed-subset source corpus、verification ladder / authoring policy、review-unit pilot を先に揃え、その後 bridge sketch / concrete tool binding を開く
   3. final grammar / public API closeout まで backend/tool binding を遅らせる
 - current recommendation / 見解
   - **2 を current first choice** に置くのが自然である。

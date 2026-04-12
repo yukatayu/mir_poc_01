@@ -51,7 +51,7 @@
 2. `mir-semantics` / `mir-runtime` をまたぐ non-production checker/runtime first tranche を fixed entry criteria とする
 3. compile-ready verification / formal hook first tranche を fixed entry criteria とする
 4. compile-ready checkpoint close 後の next reopen sequencing を parser second tranche first に fixed し、first package 実装と reserve formal tool binding inventory fixed 後の follow-up package を narrow に整理する
-5. fixed-subset source corpus / mapping / lowering / runner / verification ladder を、final grammar や concrete backend に逆流させず段階 actualize する
+5. fixed-subset source corpus / mapping / lowering / runner / verification ladder と proof-notebook review-unit pilot を、final grammar や concrete backend に逆流させず段階 actualize する
 
 つまり、広い production 実装へ進む前に、
 **意味論・verification boundary・PoC operational baseline・actual compile path の入口**を揃えるフェーズにある。
@@ -62,9 +62,9 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- theorem-first concrete tool pilot
 - drift suppression / mirror sweep
 - deferred authored-row widen sequencing
+- proof-notebook bridge-sketch reopen ordering
 
 ### その次のフェーズ
 

@@ -13,8 +13,8 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy を fixed 済み entry criteria とし、theorem-first concrete tool pilot を次 line に置く
-5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy を維持しつつ、proof-consumer pressure と wider authored-row sequencing を final grammar や backend 固定に逆流させず段階 actualize する
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot を fixed 済み entry criteria とし、次 line を drift suppression / authored-row widen sequencing / bridge-sketch ordering に置く
+5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy と proof-notebook review-unit pilot を維持しつつ、wider authored-row sequencing と theorem-side bridge sketch reopen を final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
 
@@ -30,6 +30,7 @@
 - compact syntax 比較の結果、**explicit edge-row family** を current L2 companion notation として維持する
 - Phase 6 front-half では stage 1 / stage 2 parser carrier、checker/runtime thin skeleton、theorem-line整合の tool-neutral formal hook first trancheまで fixed 済みである
 - first authored source sample trio `e4` / `e2` / `e23` の verification ladder も fixed 済みであり、`e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読む
+- theorem-first concrete consumer も first pilot までは fixed 済みであり、tool-neutral formal hook artifact を入力にする non-production `proof_notebook_review_unit` を current cut に置く
 
 ### まだ未決のもの
 
@@ -70,8 +71,9 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- theorem-first concrete tool pilot を整理する
 - checkpoint close fixed 後の snapshot を維持する
+- deferred authored-row widen sequencing を整理する
+- proof-notebook bridge sketch reopen ordering を整理する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
 ## 主要な blocker / risk
@@ -82,7 +84,7 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
 | source-sample path は policy まで fixed 済みだが wider authored-row sequencing は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner、first-trio reached-stage inventory、repo-local policy helper は揃ったが、`e1` / `e3` / `e21` widen timing は still later |
-| theorem-first concrete consumer 未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、first-trio ladder、source sample policy はあるが、proof notebook review unit などの concrete consumer はまだ薄い |
+| theorem-first bridge sketch / concrete tool handoff 未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、first-trio ladder、source sample policy、proof notebook review unit pilot はあるが、bridge sketch / concrete theorem-model-check tool handoff はまだ薄い |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
 | heavy future workstream 未着手 | 型・静的解析・定理証明・決定可能性はまだ本格着手前 |
@@ -94,7 +96,8 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| theorem-first concrete tool pilot | 1〜2 task |
+| drift suppression + authored-row widen sequencing | 2〜4 task |
+| proof-notebook bridge-sketch reopen ordering | 1〜2 task |
 | deferred authored-row widen sequencing | 1〜2 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |

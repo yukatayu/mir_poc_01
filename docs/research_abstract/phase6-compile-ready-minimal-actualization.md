@@ -62,6 +62,7 @@ parser first tranche の actual code anchor は次である。
 
 - stage 3 request / predicate reconnect
 - source target only row `e1` / `e3` / `e21` の authored-set widen timing
+- bridge sketch / compare-bless metadata
 - concrete theorem / model-check tool binding
 - perform head final public parser API
 - span-rich diagnostics と final grammar
@@ -127,14 +128,18 @@ verification ladder wiring も fixed 済みであり、first authored trio `e2` 
 `specs/examples/325...326` により、
 source-sample authoring / bless / regression policy も fixed 済みであり、`.docs/current-l2-source-sample-authoring-policy.md` と `python3 scripts/current_l2_source_sample_regression.py` を current repo-local policy anchor に置き、`bless` の current meaning を source / fixture / matrix / ladder / snapshot docs の reviewed sync と regression success に留めた。
 
+`specs/examples/327...328` により、
+theorem-first concrete tool pilot も fixed 済みであり、tool-neutral formal hook artifact を入力にする non-production `proof_notebook_review_unit` consumer を `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs` と example CLI に置き、bridge sketch / compare-bless metadata / proof-assistant adapter / model-check side は still later に残した。
+
 current mainline は、
-**Phase 6 theorem-first concrete tool pilot**
+**Phase 0 / 6 post-checkpoint drift suppression / mirror sweep**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- theorem-first concrete tool pilot
+- checkpoint drift suppression / mirror sweep
 - deferred authored row `e1` / `e3` / `e21` の widen timing
+- proof-notebook bridge-sketch reopen ordering
 
 を揃えるのが主眼になる。
 

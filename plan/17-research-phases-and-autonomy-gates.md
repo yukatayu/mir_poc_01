@@ -73,7 +73,7 @@
 ### Phase 6 — actual parser / checker / runtime commitment
 
 - 主眼: actual parser subset、public checker boundary、runtime / host / artifact API
-- 現在地: parser / checker-runtime / tool-neutral formal-hook first tranche fixed
+- 現在地: parser / checker-runtime / tool-neutral formal-hook / proof-notebook review-unit pilot fixed
 - 重さ: 重い
 - autonomy gate:
   - non-production minimal first tranche は **self-driven**
@@ -90,28 +90,28 @@
 
 いま repo の主線は、次の 3 本である。
 
-1. **Phase 6 theorem-first concrete tool pilot**
-   - tool-neutral formal hook の後段 reserve を narrow pilot に寄せる
-2. **Phase 0 / 6 drift suppression**
+1. **Phase 0 / 6 drift suppression**
    - current line / next line / retained-later line の mirror drift を抑える
-3. **Phase 6 deferred authored-row widen sequencing**
+2. **Phase 6 deferred authored-row widen sequencing**
    - source target only row `e1` / `e3` / `e21` をいつ authored row に移すかを later task として整理する
+3. **Phase 6 proof-notebook bridge-sketch reopen ordering**
+   - review-unit current cut の後で theorem-side bridge sketch をいつ reopen するかを later task として整理する
 
 Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。Phase 5 closeout も `specs/examples/297...298` で fixed 済みであり、verifier handoff surface、theorem retained bridge stop line、boundary inventory、retained-later line は current entry criteria と読んでよい。
 
 ## immediate execution order
 
-1. **Phase 6 theorem-first concrete tool pilot** を immediate line として扱う
-2. **Phase 0 / 6 drift suppression** をその後段で扱う
-3. deferred authored-row widen sequencing は later task として整理する
+1. **Phase 0 / 6 drift suppression** を immediate line として扱う
+2. deferred authored-row widen sequencing をその後段で扱う
+3. proof-notebook bridge-sketch reopen ordering は later task として整理する
 
 ## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- Phase 6 theorem-first concrete tool pilot
 - Phase 0 / 6 drift suppression
 - Phase 6 deferred authored-row widen sequencing
+- Phase 6 proof-notebook bridge-sketch reopen ordering
 
 次は勝手に finalization しない。
 
@@ -122,11 +122,12 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 ## 現在の判断
 
-- **current immediate line は Phase 6 theorem-first concrete tool pilot** と読むのが自然である。
+- **current immediate line は Phase 0 / 6 drift suppression** と読むのが自然である。
 - **front-half compile-ready checkpoint close と syntax-backed sample verification readiness は別の progress axis** と読むのが自然である。
 - **Phase 1 / 2 / 3 / 4 / 5 は Phase 6 front-half のための self-driven entry criteria を fixed 済み** と読むのが自然である。
 - **`mir-ast` stage 1 / stage 2 carrier は Phase 6 parser first tranche として fixed 済み** と読むのが自然である。
 - **`mir-semantics` program-level entry と `mir-runtime` current L2 thin skeleton は Phase 6 checker/runtime first tranche として fixed 済み** と読むのが自然である。
 - **tool-neutral formal hook first tranche は Phase 6 compile-ready gate として fixed 済み** と読むのが自然である。
+- **tool-neutral formal hook 後段の first theorem-side consumer は proof-notebook review unit まで fixed 済み** と読むのが自然である。
 - **LLVM-family backend や higher-level async-control / low-level memory-order-like surface は source corpus / lowering / runner / ladder より前に mainline へ入れない** のが自然である。
 - `progress.md` と `tasks.md` は、この phase 読みを rough snapshot として mirror する。

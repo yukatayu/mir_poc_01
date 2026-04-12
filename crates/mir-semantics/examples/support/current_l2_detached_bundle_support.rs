@@ -1,6 +1,6 @@
 use mir_semantics::{
-    BundleRunReport, EventKind, FixtureBundle, FixtureRuntimeRequirement,
-    NonAdmissibleMetadata, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
+    BundleRunReport, EventKind, FixtureBundle, FixtureRuntimeRequirement, NonAdmissibleMetadata,
+    NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
 };
 use serde::{Deserialize, Serialize};
 

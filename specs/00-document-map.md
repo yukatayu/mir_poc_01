@@ -617,6 +617,10 @@
   - verification ladder wiring fixed 後の次段として、source-sample authoring / bless / regression flow を manual review + repo-local helper にどう切るかを比較する補助文書。
 - `specs/examples/326-current-l2-source-sample-authoring-bless-regression-policy-ready-minimal-source-sample-authoring-bless-regression-policy-threshold.md`
   - source-sample authoring / bless / regression policy の minimum を `policy_kind + authored_rows + deferred_rows + authoring_step_refs + regression_step_refs + bless_reading + guard_refs` に留める補助文書。
+- `specs/examples/327-current-l2-source-sample-authoring-bless-regression-policy-ready-theorem-first-concrete-tool-pilot-comparison.md`
+  - source-sample policy fixed 後の次段として、tool-neutral formal hook を入力にした proof notebook review unit concrete pilot をどこまで actualize するかを比較する補助文書。
+- `specs/examples/328-current-l2-theorem-first-concrete-tool-pilot-ready-minimal-theorem-first-concrete-tool-pilot-threshold.md`
+  - theorem-first concrete tool pilot の minimum を `pilot_kind + input_artifact_ref + review_unit_shape + code_anchor_refs + guard_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
