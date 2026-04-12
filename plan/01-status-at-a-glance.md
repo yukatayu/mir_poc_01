@@ -65,7 +65,7 @@ current repo は少なくとも次まで到達している。
 17. `mir-runtime` current L2 thin skeleton
 18. tool-neutral formal hook emitter と formal-hook smoke
 
-runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e9` / `e10` / `e11`、static-only fixture は `e4` / `e5` / `e12` / `e13` / `e14` / `e15` / `e16` / `e17` / `e18` / `e19` / `e20` で揃っている。
+runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e9` / `e10` / `e11`、static-only fixture は `e4` / `e23` / `e5` / `e12` / `e13` / `e14` / `e15` / `e16` / `e17` / `e18` / `e19` / `e20` で揃っている。
 
 ## 直近の next steps
 
@@ -82,7 +82,7 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| source-sample corpus layering 未固定 | representative prose / fixture corpus / source sample の 3 層を整理中 |
+| source-sample corpus scope/layout は fixed 済みだが mapping / lowering / runner は未整備 | representative prose / fixture corpus / source sample の 3 層 path は揃ったが、対応表と executable path は整理中 |
 | lowering / runner 未整備 | compile-ready checkpoint はあるが source sample から `Program` / `interpreter` への narrow path はまだない |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
