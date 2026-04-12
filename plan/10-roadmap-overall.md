@@ -126,10 +126,10 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. model-check concrete carrier first actualization gate
-2. stable malformed broader follow-up inventory
-3. public operational CLI / final public contract later gate
-4. shared-space admission / compile-time visibility reopen
+1. stable malformed broader follow-up inventory
+2. public operational CLI / final public contract later gate
+3. shared-space admission / compile-time visibility reopen
+4. shared-space authority / resource ownership reopen
 
 これは主に `Macro 4` と `Macro 5` の line である。
 

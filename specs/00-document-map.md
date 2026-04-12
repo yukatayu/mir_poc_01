@@ -981,6 +981,10 @@
   - public operational surface actualization gate を閉じた次段として、shared-space line の first docs-first reopen を identity core / auth-admission / projection layering のどの split で固定するかを比較する。
 - `specs/examples/366-current-l2-shared-space-identity-auth-layering-reopen-ready-minimal-shared-space-identity-auth-layering-reopen-threshold.md`
   - shared-space identity/auth layering reopen の minimum を、membership identity core、auth-admission side、projection side、guard、kept-later refs で固定する。
+- `specs/examples/367-current-l2-shared-space-identity-auth-layering-reopen-ready-model-check-concrete-carrier-first-actualization-gate-comparison.md`
+  - shared-space identity/auth layering reopen fixed 後の次段として、`proof_notebook_review_unit` current first pilot を保ったまま model-check side の machine-facing reopen をどの first gate から始めるかを比較する補助文書。
+- `specs/examples/368-current-l2-model-check-concrete-carrier-first-actualization-gate-ready-minimal-model-check-concrete-carrier-first-actualization-gate-threshold.md`
+  - model-check concrete carrier first actualization gate の minimum を、entry criteria、current first pilot、gate entry、gated target、parallel reserve、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

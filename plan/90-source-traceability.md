@@ -2312,6 +2312,15 @@
   - `plan/16-shared-space-membership-and-example-boundary.md`
   - `plan/12-open-problems-and-risks.md`
 
+### 2026-04-13 phase6 model check concrete carrier first actualization gate addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_003.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/367-current-l2-shared-space-identity-auth-layering-reopen-ready-model-check-concrete-carrier-first-actualization-gate-comparison.md`
+  - `specs/examples/368-current-l2-model-check-concrete-carrier-first-actualization-gate-ready-minimal-model-check-concrete-carrier-first-actualization-gate-threshold.md`
+  - `docs/reports/0665-phase6-model-check-concrete-carrier-first-actualization-gate-package.md`
+  - `specs/examples/359-current-l2-mirrorea-shared-space-docs-first-re-entry-ready-model-check-public-checker-second-reserve-inventory-comparison.md`
+  - `specs/examples/342-current-l2-compare-ready-bridge-sketch-second-reopen-ready-minimal-compare-ready-bridge-sketch-threshold.md`
+
 ### 2026-04-12 phase6 third widened row e3 guard comparison addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
