@@ -126,9 +126,10 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. shared-space identity / auth layering reopen
-2. model-check concrete carrier first actualization gate
-3. stable malformed broader follow-up inventory
+1. model-check concrete carrier first actualization gate
+2. stable malformed broader follow-up inventory
+3. public operational CLI / final public contract later gate
+4. shared-space admission / compile-time visibility reopen
 
 これは主に `Macro 4` と `Macro 5` の line である。
 

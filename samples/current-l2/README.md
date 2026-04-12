@@ -104,4 +104,5 @@ current reached-stage inventory は current authored octet `e1` / `e2` / `e3` / 
 
 - model-check / public-checker second reserve inventory は fixed 済みであり、`proof_notebook_review_unit` を current first concrete pilot に保ったまま machine-facing reserve line を整理した
 - public operational surface actualization gate も fixed 済みであり、`run_current_l2_source_sample` を later public-pressure の first docs-only candidate、`run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` を tranche-internal support、`resolve_current_l2_source_sample_path` と repo-local script/example surface を excluded bucket に留める current cut を採った
-- repo-level current line は shared-space identity / auth layering reopen である
+- shared-space identity / auth layering reopen も fixed 済みであり、membership identity core と auth/admission/projection side carriers の split を docs-first boundary に残した
+- repo-level current line は model-check concrete carrier first actualization gate である

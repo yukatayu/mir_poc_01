@@ -977,6 +977,10 @@
   - stable-static edge-pair first reopen を閉じた次段として、already-public parser-free stack を壊さずにどの compile-ready tranche を first docs-only public-pressure candidate に置くかを比較する。
 - `specs/examples/364-current-l2-public-operational-surface-actualization-gate-ready-minimal-public-operational-surface-actualization-gate-threshold.md`
   - public operational surface actualization gate の minimum を、stable public bucket、first candidate、tranche-internal support、excluded helper、guard、kept-later refs で固定する。
+- `specs/examples/365-current-l2-public-operational-surface-actualization-gate-ready-shared-space-identity-auth-layering-reopen-comparison.md`
+  - public operational surface actualization gate を閉じた次段として、shared-space line の first docs-first reopen を identity core / auth-admission / projection layering のどの split で固定するかを比較する。
+- `specs/examples/366-current-l2-shared-space-identity-auth-layering-reopen-ready-minimal-shared-space-identity-auth-layering-reopen-threshold.md`
+  - shared-space identity/auth layering reopen の minimum を、membership identity core、auth-admission side、projection side、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

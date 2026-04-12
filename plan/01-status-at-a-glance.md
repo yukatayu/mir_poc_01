@@ -41,15 +41,15 @@
 
 - parser-free current L2 PoC は runnable。
 - current authored source sample octet `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` は runnable ladder に接続済みであり、`e22` は runtime/formal-hook reached、`e4` / `e19` は fixture-static formal-hook reached、`e3` は formal hook stage だけ guarded に残す。
-- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen も fixed 済みである。parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。さらに `specs/examples/357...358` により Mirrorea/shared-space docs-first re-entry bundle、`specs/examples/359...360` により model-check/public-checker second reserve inventory、`specs/examples/363...364` により public operational surface actualization gate も fixed 済みであり、Mirrorea/shared-space は repo-level current boundary track、Typed-Effect / Prism は adjacent track、`proof_notebook_review_unit` は current first concrete pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate、public-checker docs-only chain は second reserve bucket に留める。repo-level current line は shared-space identity/auth layering reopen に置き、model-check concrete carrier first actualization gate と stable malformed broader follow-up inventory を後続に残す。
+- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen も fixed 済みである。parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。さらに `specs/examples/357...358` により Mirrorea/shared-space docs-first re-entry bundle、`specs/examples/359...360` により model-check/public-checker second reserve inventory、`specs/examples/363...364` により public operational surface actualization gate、`specs/examples/365...366` により shared-space identity/auth layering reopen も fixed 済みである。Mirrorea/shared-space は repo-level current boundary track、Typed-Effect / Prism は adjacent track、`proof_notebook_review_unit` は current first concrete pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate、public-checker docs-only chain は second reserve bucket に留める。repo-level current line は model-check concrete carrier first actualization gate に置き、stable malformed broader follow-up inventory と shared-space admission / compile-time visibility reopen を後続に残す。
 - tool-neutral formal hook と `proof_notebook_review_unit` first pilot はある。
 - plain theorem-side bridge sketch first actualization と compare-ready bridge sketch second reopen もある。
 
 ## current mainline
 
-1. shared-space identity / auth layering reopen
-2. model-check concrete carrier first actualization gate
-3. stable malformed broader follow-up inventory
+1. model-check concrete carrier first actualization gate
+2. stable malformed broader follow-up inventory
+3. public operational CLI / final public contract later gate
 
 ## biggest later gates
 

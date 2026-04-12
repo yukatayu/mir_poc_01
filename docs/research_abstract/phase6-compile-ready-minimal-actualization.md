@@ -200,8 +200,11 @@ stable-static edge-pair first reopen も fixed 済みであり、existing `e4` r
 `specs/examples/363...364` により、
 public operational surface actualization gate も fixed 済みであり、already-public parser-free helper stack を stable bucket として据え置いたまま、later public pressure の first docs-only candidate を `mir_runtime::current_l2::run_current_l2_source_sample` に narrow に置き、`run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` を tranche-internal support、`resolve_current_l2_source_sample_path` と repo-local script/example surface を excluded bucket に留めた。final public parser / checker / runtime API、public operational CLI、shared-space identity / auth layering reopen、model-check concrete carrier first actualization gate は still later に残す。
 
+`specs/examples/365...366` により、
+shared-space identity / auth layering reopen も fixed 済みであり、membership identity core を `member_ref + principal_ref + member_incarnation + activation_state` に narrow に残しつつ、transport/service auth、room admission、display/projection identity を side carriers に押し分ける current cut を採った。admission/compile-time visibility、authority/resource ownership、concrete auth protocol binding は still later に残す。
+
 current mainline は、
-**repo-level current line は shared-space identity / auth layering reopen**
+**repo-level current line は model-check concrete carrier first actualization gate**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -210,9 +213,10 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- shared-space identity / auth layering reopen
 - model-check concrete carrier first actualization gate
 - stable malformed broader follow-up inventory
+- public operational CLI / final public contract later gate
+- shared-space admission / compile-time visibility reopen
 
 を揃えるのが主眼になる。
 

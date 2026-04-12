@@ -1168,7 +1168,6 @@ MemberCore {
   principal_ref,
   member_incarnation,
   activation_state,
-  display_ref,
 }
 
 AdmissionContext {
@@ -1176,6 +1175,10 @@ AdmissionContext {
   service_auth_ref,
   room_permission_ref,
   policy_epoch,
+}
+
+ProjectionIdentity {
+  display_projection_ref,
 }
 ```
 
@@ -1256,6 +1259,8 @@ require member_has_turn(member_ref)
 - display / projection identity
 
 を別軸に保つのが最も自然である。
+
+`specs/examples/365...366` により、この docs-first reopen は current normative package として fixed 済みである。current minimum は `member_ref + principal_ref + member_incarnation + activation_state` を membership identity core に残し、auth/admission side と projection side を separate ref family に保つ cut に留める。
 
 ## admission policy と compile-time over-approximation の接点
 
