@@ -18,6 +18,7 @@
   - actual `e3` authored-row reopen
   - proof / model-check first concrete tool pilot
   - second source-sample cluster sequencing
+  - actual `e22` contrast-row source actualization
   の並びにある。
 
 ## macro phase reading
@@ -38,15 +39,16 @@
 
 - parser-free current L2 PoC は runnable。
 - current authored source sample sextet `e1` / `e2` / `e3` / `e21` / `e4` / `e23` は runnable ladder に接続済みであり、`e3` は formal hook stage だけ guarded に残す。
+- first post-sextet cluster sequencing は `e21` / `e22` try-rollback locality contrast に fixed 済みであり、next authored-row target は `e22-try-atomic-cut-place-mismatch` に置く。
 - tool-neutral formal hook と `proof_notebook_review_unit` first pilot はある。
 - plain theorem-side bridge sketch first actualization と compare-ready bridge sketch second reopen もある。
 
 ## current mainline
 
-1. second source-sample cluster sequencing
-2. parser / checker / runtime public surface inventory
-3. Mirrorea / shared-space docs-first re-entry
-4. model-check / public-checker second reserve inventory
+1. actual `e22` contrast-row source actualization
+2. stable static malformed post-contrast sequencing
+3. parser / checker / runtime public surface inventory
+4. Mirrorea / shared-space docs-first re-entry
 
 ## biggest later gates
 

@@ -661,6 +661,10 @@
   - actual `e3` authored-row fixed 後の次段として、proof notebook review-unit を first concrete pilot に据え、model-check side を second reserve に残す cut を整理する補助文書。
 - `specs/examples/348-current-l2-proof-model-check-first-concrete-tool-pilot-ready-minimal-proof-model-check-first-concrete-tool-pilot-threshold.md`
   - proof/model-check first concrete tool pilot の minimum を `pilot_kind + actualized_code_anchor_refs + current_input_refs + kept_later_refs` に留める補助文書。
+- `specs/examples/349-current-l2-proof-model-check-first-concrete-tool-pilot-ready-second-source-sample-cluster-sequencing-comparison.md`
+  - proof/model-check first concrete tool pilot fixed 後の次段として、first post-sextet source-sample cluster を `e21` / `e22` try-rollback locality contrast に置くかを、source / fixture / formal-hook / regression の 4 層で比較する補助文書。
+- `specs/examples/350-current-l2-second-source-sample-cluster-sequencing-ready-minimal-second-source-sample-cluster-sequencing-threshold.md`
+  - second source-sample cluster sequencing の minimum を `sequencing_kind + fixed_entry_criteria_refs + selected_cluster_rows + guard_refs + kept_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

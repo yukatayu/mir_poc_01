@@ -109,6 +109,7 @@ parser first tranche の actual code anchor は次である。
 - `docs/reports/0640-phase6-second-widened-authored-row-e21-actualization-package.md`
 - `docs/reports/0641-phase6-third-widened-row-e3-guard-comparison-package.md`
 - `docs/reports/0642-phase6-plain-proof-notebook-bridge-sketch-actualization-package.md`
+- `docs/reports/0652-phase6-second-source-sample-cluster-sequencing-package.md`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
@@ -175,8 +176,11 @@ deferred `e3` actualization reopen timing も fixed 済みであり、compare-re
 `specs/examples/345...346` により、
 actual `e3` authored-row actualization も fixed 済みであり、`e3-option-admit-chain` を helper-compatible inline-`admit` source row、runner accepted set、regression helper current authored inventory、README ladder へ narrow actualize し、`static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = not reached (guarded)` の current cut に置いた。`admit-miss` は non-admissible skip に留め、new formal-hook family と theorem/model-check concrete binding は still later に残す。
 
+`specs/examples/349...350` により、
+second source-sample cluster sequencing も fixed 済みであり、post-sextet first cluster は `e21` / `e22` try-rollback locality contrast に置き、next actual source row は `e22-try-atomic-cut-place-mismatch` に置く current cut を採った。expiry / monotone degradation family、request-contract family、stable static malformed broader cluster、public surface inventory は still later に残す。
+
 current mainline は、
-**Phase 6 second source-sample cluster sequencing**
+**Phase 6 actual `e22` contrast-row source actualization**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -185,7 +189,8 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- second source-sample cluster sequencing
+- actual `e22` contrast-row source actualization
+- stable static malformed post-contrast sequencing
 
 を揃えるのが主眼になる。
 

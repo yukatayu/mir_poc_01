@@ -71,6 +71,7 @@ current reached-stage inventory は current authored sextet `e1` / `e2` / `e3` /
 - `not reached (guarded)` は failure ではなく、`e3` runtime bundle が current `runtime_try_cut_cluster` family の外にあるため、formal hook widening を still later に残していることを意味する。
 - current authoring / bless / regression flow は [.docs/current-l2-source-sample-authoring-policy.md](/home/yukatayu/dev/mir_poc_01/.docs/current-l2-source-sample-authoring-policy.md) と `python3 scripts/current_l2_source_sample_regression.py inventory|regression` を基準にする。
 - theorem-first concrete pilot current cut では、tool-neutral formal hook artifact を入力にする `proof_notebook_review_unit` consumer を non-production helper/example に留める。
+- post-sextet first cluster sequencing current cut では、existing `e21` authored row と `e22` fixture/runtime contrast を 1 cluster として扱い、next actual source row は `e22-try-atomic-cut-place-mismatch` に置く。
 
 ## non-goals
 
@@ -88,6 +89,6 @@ current reached-stage inventory は current authored sextet `e1` / `e2` / `e3` /
 
 ## next steps
 
-- current next line は second source-sample cluster sequencing である
-- parser / checker / runtime public surface inventory はその後段に置く
-- Mirrorea / shared-space docs-first re-entry はさらにその次段に置く
+- current next line は `e22-try-atomic-cut-place-mismatch` の source-authored contrast-row actualization である
+- stable static malformed family の post-contrast sequencing はその後段に置く
+- parser / checker / runtime public surface inventory はさらにその後段に置く

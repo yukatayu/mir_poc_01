@@ -2091,6 +2091,16 @@
   - `specs/examples/348-current-l2-proof-model-check-first-concrete-tool-pilot-ready-minimal-proof-model-check-first-concrete-tool-pilot-threshold.md`
   - `docs/reports/0651-phase6-proof-model-check-first-concrete-tool-pilot-package.md`
 
+### 2026-04-12 phase6 second source-sample cluster sequencing addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`.docs/current-l2-source-sample-authoring-policy.md`、`samples/current-l2/README.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/00-representative-mir-programs.md`
+  - `specs/examples/349-current-l2-proof-model-check-first-concrete-tool-pilot-ready-second-source-sample-cluster-sequencing-comparison.md`
+  - `specs/examples/350-current-l2-second-source-sample-cluster-sequencing-ready-minimal-second-source-sample-cluster-sequencing-threshold.md`
+  - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
+  - `scripts/current_l2_detached_loop.py`
+  - `docs/reports/0652-phase6-second-source-sample-cluster-sequencing-package.md`
+
 ### 2026-04-12 phase6 source-sample corpus scope and layout addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/15-current-l2-fixture-authoring-template.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

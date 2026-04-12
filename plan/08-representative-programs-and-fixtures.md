@@ -61,6 +61,11 @@
   - `inventory` は current authored sextet の file presence と guarded row status を確認する。
   - `regression` は lowering / runner / ladder bundle を current authored sextet に流し、formal-hook smoke sub-bundleは `runtime_try_cut_cluster` / `fixture_static_cluster` current top に入る 5 row だけに流す。
   - current `bless` は retained artifact archive ではなく、source / fixture / matrix / ladder / snapshot docs の reviewed sync と regression success を意味する。
+- post-sextet first cluster sequencing current cut では、first broader authored-row family は `e21` / `e22` try-rollback locality contrast に置く。
+  - `e21` は already source-authored frontier-update anchor である。
+  - `e22` は next source-authored contrast-row candidate である。
+  - stable static malformed family は post-contrast broader follow-up cluster に残す。
+  - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧
 
