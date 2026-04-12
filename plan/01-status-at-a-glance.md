@@ -13,8 +13,8 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot を fixed 済み entry criteria とし、current line を authored-row widen sequencing、next line を bridge-sketch ordering に置く
-5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy と proof-notebook review-unit pilot を維持しつつ、wider authored-row sequencing と theorem-side bridge sketch reopen を final grammar や backend 固定に逆流させず段階 actualize する
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot、authored-row widen sequencing を fixed 済み entry criteria とし、current line を bridge-sketch ordering、その後を first widened row `e1` actualization に置く
+5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy と proof-notebook review-unit pilot を維持しつつ、widened authored-row order `e1 -> e21 -> e3` と theorem-side bridge sketch reopen を final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
 
@@ -72,8 +72,8 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 ## 直近の next steps
 
 - checkpoint close fixed 後の snapshot を維持する
-- deferred authored-row widen sequencing を整理する
 - proof-notebook bridge sketch reopen ordering を整理する
+- follow-up maintenance の後に first widened authored row `e1` actualization へ進む
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
 ## 主要な blocker / risk
@@ -83,7 +83,7 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| source-sample path は policy まで fixed 済みだが wider authored-row sequencing は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner、first-trio reached-stage inventory、repo-local policy helper は揃ったが、`e1` / `e3` / `e21` widen timing は still later |
+| source-sample path は sequencing まで fixed 済みだが widened authored row は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner、first-trio reached-stage inventory、repo-local policy helper、`e1 -> e21 -> e3` widen order は揃ったが、actual widened row は still later |
 | theorem-first bridge sketch / concrete tool handoff 未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、first-trio ladder、source sample policy、proof notebook review unit pilot はあるが、bridge sketch / concrete theorem-model-check tool handoff はまだ薄い |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
@@ -96,9 +96,9 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| drift suppression + authored-row widen sequencing | 2〜4 task |
+| drift suppression + bridge-sketch ordering | 2〜4 task |
 | proof-notebook bridge-sketch reopen ordering | 1〜2 task |
-| deferred authored-row widen sequencing | 1〜2 task |
+| first widened authored row `e1` actualization | 1〜2 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |
 

@@ -2100,3 +2100,13 @@
   - `scripts/tests/test_current_l2_capability_checker.py`
   - `scripts/tests/test_current_l2_static_gate_loop.py`
   - `docs/reports/0606-phase3-parser-to-checker-reconnect-freeze-package.md`
+
+### 2026-04-12 phase6 deferred authored-row widen sequencing addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/329-current-l2-theorem-first-concrete-tool-pilot-ready-deferred-authored-row-widen-sequencing-comparison.md`
+  - `specs/examples/330-current-l2-deferred-authored-row-widen-sequencing-ready-minimal-deferred-authored-row-widen-sequencing-threshold.md`
+  - `docs/reports/0636-phase6-deferred-authored-row-widen-sequencing-package.md`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `samples/current-l2/README.md`

@@ -62,9 +62,9 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- deferred authored-row widen sequencing
 - proof-notebook bridge-sketch reopen ordering
 - drift suppression / mirror sweep follow-up maintenance
+- first widened authored-row actualization (`e1` first)
 
 ### その次のフェーズ
 

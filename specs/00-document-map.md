@@ -621,6 +621,10 @@
   - source-sample policy fixed 後の次段として、tool-neutral formal hook を入力にした proof notebook review unit concrete pilot をどこまで actualize するかを比較する補助文書。
 - `specs/examples/328-current-l2-theorem-first-concrete-tool-pilot-ready-minimal-theorem-first-concrete-tool-pilot-threshold.md`
   - theorem-first concrete tool pilot の minimum を `pilot_kind + input_artifact_ref + review_unit_shape + code_anchor_refs + guard_refs` に留める補助文書。
+- `specs/examples/329-current-l2-theorem-first-concrete-tool-pilot-ready-deferred-authored-row-widen-sequencing-comparison.md`
+  - theorem-first concrete tool pilot fixed 後の次段として、deferred authored row `e1` / `e21` / `e3` をどの順で widen するのが current runner / formal-hook / review-unit guard と整合するかを比較する補助文書。
+- `specs/examples/330-current-l2-deferred-authored-row-widen-sequencing-ready-minimal-deferred-authored-row-widen-sequencing-threshold.md`
+  - authored-row widen sequencing の minimum を `sequencing_kind + fixed_entry_criteria_refs + ordered_widen_rows + guard_refs` に留め、next bridge-sketch ordering line へ handoff する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

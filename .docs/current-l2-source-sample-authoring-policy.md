@@ -19,7 +19,7 @@ current meaning は、
 ## current scope
 
 - current authored source sample は first trio `e2` / `e4` / `e23` に留める。
-- `e1` / `e3` / `e21` は source target only / not yet authored row であり、この文書は widen timing を決めない。
+- `e1` / `e3` / `e21` は source target only / not yet authored row であり、current widen sequencing は `e1 -> e21 -> e3` に置く。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
