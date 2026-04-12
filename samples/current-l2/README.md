@@ -79,6 +79,7 @@ current reached-stage inventory は current authored septet `e1` / `e2` / `e3` /
 - current authoring / bless / regression flow は [.docs/current-l2-source-sample-authoring-policy.md](/home/yukatayu/dev/mir_poc_01/.docs/current-l2-source-sample-authoring-policy.md) と `python3 scripts/current_l2_source_sample_regression.py inventory|regression` を基準にする。
 - theorem-first concrete pilot current cut では、tool-neutral formal hook artifact を入力にする `proof_notebook_review_unit` consumer を non-production helper/example に留める。
 - post-sextet first cluster current cut では、`e21` frontier row と `e22` place-mismatch row を first runtime contrast pair として扱う。
+- stable static malformed post-contrast sequencing では、second broader cluster を stable reason-code / fixture-static cluster、Macro 4 side の next reopen point を `e4` / `e19` edge-pair に置く。
 
 ## non-goals
 
@@ -96,5 +97,5 @@ current reached-stage inventory は current authored septet `e1` / `e2` / `e3` /
 
 ## next steps
 
-- current next line は stable static malformed family の post-contrast sequencing である
-- parser / checker / runtime public surface inventory はさらにその後段に置く
+- repo-level current next line は parser / checker / runtime public surface inventory である
+- source-sample side の next reopen point は stable-static edge-pair first reopen (`e4` / `e19`) である

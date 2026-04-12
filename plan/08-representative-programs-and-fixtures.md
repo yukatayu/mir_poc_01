@@ -66,7 +66,8 @@
 - post-sextet first cluster current cut では、first broader authored-row family は `e21` / `e22` try-rollback locality contrast に置く。
   - `e21` は source-authored frontier-update anchor である。
   - `e22` は source-authored place-mismatch contrast row として actualize 済みである。
-  - stable static malformed family は post-contrast broader follow-up cluster に残す。
+  - stable static malformed post-contrast sequencing では、second broader cluster を stable reason-code / fixture-static cluster、Macro 4 side の next reopen point を `e4` / `e19` edge-pair に置く。
+  - repo-level next package は parser / checker / runtime public surface inventory に handoff する。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

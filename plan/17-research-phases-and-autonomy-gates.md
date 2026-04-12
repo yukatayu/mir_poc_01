@@ -74,10 +74,10 @@
 
 ## current mainline
 
-1. `Macro 4` stable static malformed post-contrast sequencing
-2. `Macro 3-7` parser / checker / runtime public surface inventory
-3. `Macro 6` Mirrorea / shared-space docs-first re-entry
-4. `Macro 5` model-check / public-checker second reserve inventory
+1. `Macro 3-7` parser / checker / runtime public surface inventory
+2. `Macro 6` Mirrorea / shared-space docs-first re-entry
+3. `Macro 5` model-check / public-checker second reserve inventory
+4. `Macro 4` stable-static edge-pair first reopen
 
 ## current stop lines
 

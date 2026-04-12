@@ -182,8 +182,11 @@ second source-sample cluster sequencing も fixed 済みであり、post-sextet 
 `specs/examples/351...352` により、
 actual `e22` contrast-row source actualization も fixed 済みであり、`e22-try-atomic-cut-place-mismatch` を helper-compatible source row、runner accepted set、regression helper current authored inventory、README ladder、runtime detached formal-hook smoke に actualize しつつ、stage 2 parser bridge では nested `place` block を top-level `Other` statement head として畳む current helper-local floorに留めた。current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の septetに進んだ。
 
+`specs/examples/353...354` により、
+stable static malformed post-contrast sequencing も fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster、Macro 4 side の next reopen point は `e4` / `e19` edge-pair に置く current cut を採った。duplicate cluster、`TryFallback` / `AtomicCut` malformed-static family、broader runtime family は still later に残し、repo-level next line は public surface inventory に handoff した。
+
 current mainline は、
-**Phase 6 stable static malformed post-contrast sequencing**
+**Phase 6 parser / checker / runtime public surface inventory**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -192,8 +195,9 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- stable static malformed post-contrast sequencing
 - parser / checker / runtime public surface inventory
+- Mirrorea / shared-space docs-first re-entry
+- model-check / public-checker second reserve inventory
 
 を揃えるのが主眼になる。
 
