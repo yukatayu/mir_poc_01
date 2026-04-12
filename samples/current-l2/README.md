@@ -88,5 +88,6 @@ current reached-stage inventory は first authored trio `e2` / `e4` / `e23` に�
 
 ## next steps
 
-- follow-up maintenance の後に first widened authored row `e1-place-atomic-cut` actualization へ進む
+- current next line は first widened authored row `e1-place-atomic-cut` actualization である
+- その後に second widened authored row `e21-try-atomic-cut-frontier` actualization と third widened row `e3-option-admit-chain` theorem-side / formal-hook guard comparison を置く
 - theorem-side plain bridge sketch reopen は authored-row line の後に置き、compare-ready bridge sketch はその次段に残す

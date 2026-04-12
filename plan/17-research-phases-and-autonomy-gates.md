@@ -90,29 +90,28 @@
 
 いま repo の主線は、次の 3 本である。
 
-1. **Phase 0 / 6 drift suppression**
-   - current line / next line / retained-later line の mirror drift を follow-up maintenance として抑える
-2. **Phase 6 first widened authored row actualization**
+1. **Phase 6 first widened authored row actualization**
    - current widen order `e1 -> e21 -> e3` の first slot `e1` を actual source row / runner / regression に反映する
-3. **Phase 6 second widened authored row actualization**
+2. **Phase 6 second widened authored row actualization**
    - current widen order の second slot `e21` を actual source row / runner / regression に反映する
+3. **Phase 6 third widened row theorem-side/formal-hook guard comparison**
+   - `e3` widening を current theorem-side / formal-hook family のどこで guard comparison するかを narrow に固定する
 
 Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。Phase 5 closeout も `specs/examples/297...298` で fixed 済みであり、verifier handoff surface、theorem retained bridge stop line、boundary inventory、retained-later line は current entry criteria と読んでよい。
 
 ## immediate execution order
 
-1. **Phase 0 / 6 drift suppression** を immediate line として扱う
-2. その後に first widened authored row `e1` actualization を扱う
-3. さらに second widened authored row `e21` actualization を扱う
+1. **Phase 6 first widened authored row `e1` actualization** を immediate line として扱う
+2. その後に second widened authored row `e21` actualization を扱う
+3. さらに third widened row `e3` theorem-side / formal-hook guard comparison を扱う
 
 ## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- Phase 6 proof-notebook bridge-sketch reopen ordering
 - Phase 6 first widened authored row actualization
 - Phase 6 second widened authored row actualization
-- Phase 0 / 6 drift suppression
+- Phase 6 third widened row theorem-side/formal-hook guard comparison
 
 次は勝手に finalization しない。
 
@@ -125,7 +124,7 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 - **current authored-row widen sequencing は `e1 -> e21 -> e3` に fixed 済み** と読むのが自然である。
 - **current theorem-side bridge-sketch reopen ordering は、plain docs-only bridge sketch first / compare-ready bridge sketch second に fixed 済み** と読むのが自然である。
-- **current immediate line は Phase 0 / 6 drift suppression** と読むのが自然である。
+- **current immediate line は Phase 6 first widened authored row actualization** と読むのが自然である。
 - **front-half compile-ready checkpoint close と syntax-backed sample verification readiness は別の progress axis** と読むのが自然である。
 - **Phase 1 / 2 / 3 / 4 / 5 は Phase 6 front-half のための self-driven entry criteria を fixed 済み** と読むのが自然である。
 - **`mir-ast` stage 1 / stage 2 carrier は Phase 6 parser first tranche として fixed 済み** と読むのが自然である。

@@ -22,29 +22,29 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 / 5 entry criteria と parser + checker/runtime + formal-hook checkpoint close を前提に、
 
-1. mirror drift は follow-up maintenance として抑え続ける
-2. その後に first widened authored row `e1` actualization へ進む
-3. second widened row `e21` と third-slot guard line `e3` へ進む
+1. first widened authored row `e1` actualization へ進む
+2. second widened row `e21` と third-slot guard line `e3` へ進む
+3. theorem-side plain bridge sketch actualization を authored-row line の後に置く
 
 ことである。
 
 ## 次に自走で進める順番
 
-### 1. mirror sweep follow-up maintenance
-
-- current line / next line / retained-later line の snapshot mirror を継続して揃える
-- rough weight: 低〜中
-- rough 所要: 継続
-
-### 2. first widened authored row actualization (`e1`)
+### 1. first widened authored row actualization (`e1`)
 
 - current widen order `e1 -> e21 -> e3` の first slot を actual source row / runner accepted set / regression helper まで反映する
 - rough weight: 中
 - rough 所要: 1〜2 task / 数日
 
-### 3. second widened authored row actualization (`e21`)
+### 2. second widened authored row actualization (`e21`)
 
 - current widen order の second slot を actual source row / runner accepted set / regression helper まで反映する
+- rough weight: 中
+- rough 所要: 1〜2 task / 数日
+
+### 3. third widened row guard comparison (`e3`)
+
+- `e3` widening を current theorem-side / formal-hook family のどこで guard するかを narrow に比較する
 - rough weight: 中
 - rough 所要: 1〜2 task / 数日
 
@@ -52,7 +52,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| authored-row widen actualization + bridge-sketch ordering | 3〜5 task | widen sequencing は fixed 済みであり、`e1 -> e21 -> e3` actualization と theorem-side next reopen timing を narrow に接続する |
+| authored-row widen actualization + theorem-side plain bridge sketch actualization | 3〜5 task | widen sequencing と bridge-sketch reopen ordering は fixed 済みであり、`e1 -> e21 -> e3` actualization と theorem-side next reopen timing を narrow に接続する |
 | plain bridge-sketch reopen actualization | 1〜2 task | review-unit current cut を維持したまま plain docs-only bridge sketch を actual next theorem-side reopen に置く |
 
 ## いま見えている later blocker / open question

@@ -62,10 +62,10 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- drift suppression / mirror sweep follow-up maintenance
 - first widened authored-row actualization (`e1` first)
 - second widened authored-row actualization (`e21`)
 - admit-family guard comparison (`e3`)
+- theorem-side plain bridge sketch actualization
 
 ### その次のフェーズ
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 17:06 JST
+最終更新: 2026-04-12 17:10 JST
 
 ## この文書について
 
@@ -23,7 +23,7 @@
 - **Phase 6** は front-half compile-ready checkpoint 自体は fixed 済みである。`specs/examples/299...328` により parser / checker-runtime / formal-hook / source-sample first packages / theorem-first review-unit pilot が揃っている。
 - `specs/examples/329...330` により、deferred authored-row widen sequencing も fixed 済みであり、current first choice は `e1 -> e21 -> e3` である。
 - `specs/examples/331...332` により、proof-notebook bridge-sketch reopen ordering も fixed 済みであり、current first choice は **plain docs-only bridge sketch first / compare-ready bridge sketch second** である。authored-row actualization line を先に閉じ、theorem-side reopen はその後に置く。
-- current main bottleneck は semantics の大崩れではなく、**mirror sweep follow-up maintenance を先に閉じ、その後 `e1` actualization へ clean handoff すること** である。
+- current main bottleneck は semantics の大崩れではなく、**`e1` actualization を current formal-hook / review-unit guard を壊さずに narrow actualize すること** である。
 
 ## compile-ready PoC の rough 読み
 
@@ -31,7 +31,7 @@
 |---|---:|---|---|
 | parser-free current L2 PoC | 90%+ | maintenance closeout 数 package | `mir-semantics` 主線はすでに compile / test 可能 |
 | Phase 6 前半 compile-ready minimal actual PoC | 96%+ | maintenance / reopen only | compile-ready checkpoint close は fixed と読める |
-| fixed-subset syntax-backed sample verification milestone | 92%前後 | maintenance、`e1 -> e21 -> e3` actualization line、plain bridge sketch actualization | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続し、repo-local policy と first theorem-side pilot、widen ordering、bridge-sketch reopen ordering まで fixed 済み |
+| fixed-subset syntax-backed sample verification milestone | 92%前後 | `e1 -> e21 -> e3` actualization line、plain bridge sketch actualization | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続し、repo-local policy と first theorem-side pilot、widen ordering、bridge-sketch reopen ordering、maintenance close まで fixed 済み |
 
 ## 研究フェーズ（大局）
 
@@ -43,25 +43,25 @@
 | Phase 3 | 93% | parser boundary / first checker cut | self-driven freeze fixed | 中〜やや重い | 自走可能 | `287...290` で subset / reconnect freeze は fixed。later widen は reserve path |
 | Phase 4 | 90% | shared-space / membership / practical example boundary | self-driven closeout fixed | 重い | 一部自走可能 | `121...125` current package と final catalog / later line の境界は fixed。final catalog は user spec 依存 |
 | Phase 5 | 98% | static analysis / type / theorem prover / async-control boundary | self-driven closeout fixed | とても重い | 自走可能 | `297...298` で stop line と retained-later inventory は fixed。actual external contract は later |
-| Phase 6 | 91% | actual parser / checker / runtime commitment と syntax-backed sample path | mirror sweep follow-up maintenance | 重い | 自走可能 | front-half compile-ready checkpoint、source path first packages、theorem-first review-unit pilot、authored-row widen sequencing、bridge-sketch orderingは fixed。残りは maintenance、`e1 -> e21 -> e3` actualization line、plain bridge sketch actualization |
+| Phase 6 | 92% | actual parser / checker / runtime commitment と syntax-backed sample path | first widened authored row `e1` actualization | 重い | 自走可能 | front-half compile-ready checkpoint、source path first packages、theorem-first review-unit pilot、authored-row widen sequencing、bridge-sketch ordering、maintenance closeは fixed。残りは `e1 -> e21 -> e3` actualization line と plain bridge sketch actualization |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
-1. **Phase 0 / 6 mirror sweep follow-up maintenance**
-   - snapshot 文書の current line / next line / retained-later line を follow-up maintenance として揃える。
-2. **Phase 6 first widened authored row actualization**
+1. **Phase 6 first widened authored row actualization**
    - current widen order `e1 -> e21 -> e3` の first slot `e1` を actual source row / runner / regression に反映する。
-3. **Phase 6 second widened authored row actualization**
+2. **Phase 6 second widened authored row actualization**
    - current widen order の second slot `e21` を actual source row / runner / regression に反映する。
+3. **Phase 6 third widened row theorem-side/formal-hook guard comparison**
+   - `e3` widening を current theorem-side / formal-hook family のどこで guard comparison するかを narrow に固定する。
 
 ## いま自走で進めてよい範囲
 
 ### 着手可能
 
-- mirror sweep follow-up maintenance
 - first widened authored row `e1` actualization
 - second widened authored row `e21` actualization
+- third widened row `e3` theorem-side / formal-hook guard comparison
 
 ### 後段依存
 
@@ -112,13 +112,14 @@
 
 ## 次に進めるべき task
 
-1. **Phase 0 / 6 mirror sweep follow-up maintenance** を immediate line として扱う
-2. その後に first widened authored row `e1` actualization を扱う
-3. さらに second widened authored row `e21` actualization を扱う
+1. **Phase 6 first widened authored row `e1` actualization** を immediate line として扱う
+2. その後に second widened authored row `e21` actualization を扱う
+3. さらに third widened row `e3` theorem-side / formal-hook guard comparison を扱う
 
 ## 作業ログ（簡潔）
 
 - 注記: この欄は **recent log** として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 17:10 JST — `docs/reports/0638` で mirror sweep follow-up maintenance と document consistency audit を閉じ、snapshot docs の current line を `e1` actualization へ進めた。bridge-sketch ordering / widen sequencing / current next-step wording を `Documentation.md`、`progress.md`、`tasks.md`、relevant `plan/`、abstract、sample README で同期した。
 - 2026-04-12 17:06 JST — `specs/examples/331...332` を追加し、proof-notebook bridge-sketch reopen ordering を plain docs-only bridge sketch first / compare-ready bridge sketch second に固定した。authored-row actualization line を先に閉じる guard を明示し、current mainline は `mirror sweep follow-up maintenance` に切り替わった。
 - 2026-04-12 16:49 JST — `specs/examples/329...330` を追加し、deferred authored-row widen sequencing を `e1 -> e21 -> e3` に固定した。`e1` / `e21` を current runtime formal-hook family の内側で先に扱い、`e3` は admit-family / theorem-side guard を伴う third slot に残した。
 - 2026-04-12 15:08 JST — `docs/reports/0633` で post-task drift suppression / document consistency audit を記録し、`Documentation.md`、`progress.md`、`tasks.md`、relevant `plan/`、Phase 5 / Phase 6 abstract の stale current-line wording を同期した。

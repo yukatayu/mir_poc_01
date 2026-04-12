@@ -13,7 +13,7 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering を fixed 済み entry criteria とし、current line を maintenance、その後を first widened row `e1` actualization に置く
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering、maintenance close を fixed 済み entry criteria とし、current line を first widened row `e1` actualization に置く
 5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy と proof-notebook review-unit pilot を維持しつつ、widened authored-row order `e1 -> e21 -> e3`、theorem-side plain bridge sketch first / compare-ready bridge sketch second の順を final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
@@ -71,10 +71,9 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- checkpoint close fixed 後の snapshot を維持する
-- follow-up maintenance を閉じる
 - first widened authored row `e1` actualization へ進む
 - second widened authored row `e21` actualization へ進む
+- third widened row `e3` theorem-side / formal-hook guard comparison を比較する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
 ## 主要な blocker / risk
@@ -97,7 +96,7 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| drift suppression + first widened row actualization | 2〜4 task |
+| first widened row `e1` actualization + second widened row `e21` actualization | 2〜4 task |
 | plain bridge sketch actualization | 1〜2 task |
 | first widened authored row `e1` actualization | 1〜2 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
