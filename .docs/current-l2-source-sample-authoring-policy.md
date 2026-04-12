@@ -20,7 +20,7 @@ current meaning は、
 
 - current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の authored septet に置く。
 - `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
-- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable static malformed post-contrast sequencing と parser / checker / runtime public surface inventory も fixed 済みである。repo-level next line は Mirrorea / shared-space docs-first re-entry に置き、source-sample side の next reopen は `e4` / `e19` edge-pair に残す。
+- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable static malformed post-contrast sequencing、parser / checker / runtime public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory も fixed 済みである。repo-level current line は stable-static edge-pair first reopen に置き、source-sample side の current reopen は `e4` / `e19` edge-pair にある。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
