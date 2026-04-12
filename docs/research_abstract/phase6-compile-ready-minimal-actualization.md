@@ -132,13 +132,13 @@ source-sample authoring / bless / regression policy も fixed 済みであり、
 theorem-first concrete tool pilot も fixed 済みであり、tool-neutral formal hook artifact を入力にする non-production `proof_notebook_review_unit` consumer を `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs` と example CLI に置き、bridge sketch / compare-bless metadata / proof-assistant adapter / model-check side は still later に残した。
 
 current mainline は、
-**Phase 6 proof-notebook bridge-sketch reopen ordering**
+**Phase 0 / 6 drift suppression**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
 - deferred authored-row widen sequencing `e1 -> e21 -> e3`
-- proof-notebook bridge-sketch reopen ordering
+- proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - mirror sweep follow-up maintenance
 - first widened authored row `e1` actualization
 
@@ -150,3 +150,4 @@ current recommendation としては、
 - ただし higher-level async-control family や low-level memory-order-like surface を current executable core に混ぜるのは早い
 - theorem/model-check concrete tool binding や LLVM-family backend / external codegen も、source corpus / lowering / runner / ladder のあとに narrow pilot として扱う
 - widened authored-row order は `e1 -> e21 -> e3` に置き、`e3` は admit-family / theorem-side guard を伴う third slot に残す
+- theorem-side plain bridge sketch は authored-row line の後で reopen し、compare-ready bridge sketch は second reopen に残す

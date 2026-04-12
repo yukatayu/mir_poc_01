@@ -258,6 +258,17 @@
   - `specs/examples/327-current-l2-source-sample-authoring-bless-regression-policy-ready-theorem-first-concrete-tool-pilot-comparison.md`
   - `specs/examples/328-current-l2-theorem-first-concrete-tool-pilot-ready-minimal-theorem-first-concrete-tool-pilot-threshold.md`
   - `docs/reports/0630-phase6-theorem-first-concrete-tool-pilot.md`
+
+## 2026-04-12 Phase 6 proof-notebook bridge-sketch reopen ordering addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/140-current-l2-proof-notebook-minimal-bridge-sketch-comparison.md`
+  - `specs/examples/141-current-l2-proof-notebook-compare-ready-bridge-sketch-threshold.md`
+  - `specs/examples/329-current-l2-theorem-first-concrete-tool-pilot-ready-deferred-authored-row-widen-sequencing-comparison.md`
+  - `specs/examples/330-current-l2-deferred-authored-row-widen-sequencing-ready-minimal-deferred-authored-row-widen-sequencing-threshold.md`
+  - `specs/examples/331-current-l2-deferred-authored-row-widen-sequencing-ready-proof-notebook-bridge-sketch-reopen-ordering-comparison.md`
+  - `specs/examples/332-current-l2-proof-notebook-bridge-sketch-reopen-ordering-ready-minimal-proof-notebook-bridge-sketch-reopen-ordering-threshold.md`
+  - `docs/reports/0637-phase6-proof-notebook-bridge-sketch-reopen-ordering-package.md`
   - `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs`
   - `crates/mir-semantics/examples/current_l2_emit_proof_notebook_review_unit.rs`
   - `crates/mir-semantics/tests/current_l2_proof_notebook_review_unit_support.rs`

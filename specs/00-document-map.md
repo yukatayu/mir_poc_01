@@ -625,6 +625,10 @@
   - theorem-first concrete tool pilot fixed 後の次段として、deferred authored row `e1` / `e21` / `e3` をどの順で widen するのが current runner / formal-hook / review-unit guard と整合するかを比較する補助文書。
 - `specs/examples/330-current-l2-deferred-authored-row-widen-sequencing-ready-minimal-deferred-authored-row-widen-sequencing-threshold.md`
   - authored-row widen sequencing の minimum を `sequencing_kind + fixed_entry_criteria_refs + ordered_widen_rows + guard_refs` に留め、next bridge-sketch ordering line へ handoff する補助文書。
+- `specs/examples/331-current-l2-deferred-authored-row-widen-sequencing-ready-proof-notebook-bridge-sketch-reopen-ordering-comparison.md`
+  - authored-row widen sequencing fixed 後の次段として、theorem-side plain bridge sketch と compare-ready bridge sketch をどの順で reopen するのが自然かを比較する補助文書。
+- `specs/examples/332-current-l2-proof-notebook-bridge-sketch-reopen-ordering-ready-minimal-proof-notebook-bridge-sketch-reopen-ordering-threshold.md`
+  - proof-notebook bridge-sketch reopen ordering の minimum を `ordering_kind + authored_row_line_ref + first_theorem_reopen_ref + second_theorem_reopen_ref + guard_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
