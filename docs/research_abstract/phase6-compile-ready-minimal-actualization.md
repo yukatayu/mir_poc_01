@@ -61,8 +61,8 @@ parser first tranche の actual code anchor は次である。
 ## まだ fixed していないこと
 
 - stage 3 request / predicate reconnect
-- shared single attachment frame の actual code cut
-- fixed-subset source-sample corpus scope / mapping / authoring policy
+- representative / fixture / source mapping matrix
+- fixed-subset source-sample authoring / bless / regression policy
 - actual parser-to-`Program` lowering first cut
 - syntax-backed sample runner と sample ごとの verification ladder
 - concrete theorem / model-check tool binding
@@ -78,12 +78,14 @@ parser first tranche の actual code anchor は次である。
 - `specs/examples/303...304`
 - `specs/examples/311...312`
 - `specs/examples/313...314`
+- `specs/examples/315...316`
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
 - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 - `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
 - `docs/reports/0614-phase6-compile-ready-checkpoint-drift-suppression-and-mirror-sweep.md`
 - `docs/reports/0620-phase6-parser-followup-sequencing-package.md`
 - `docs/reports/0621-phase6-shared-single-attachment-frame-first-package.md`
+- `docs/reports/0622-phase6-source-sample-corpus-scope-and-layout.md`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
@@ -108,13 +110,16 @@ parser-side follow-up package sequencing も fixed 済みであり、shared sing
 `specs/examples/313...314` により、
 shared single attachment frame first package も actualize 済みであり、`mir_ast::current_l2` は multiline extraction bridge を crate surface に持つ non-production carrier まで進んだ。
 
+`specs/examples/315...316` により、
+fixed-subset source-sample corpus scope / file layout も fixed 済みであり、repo-root `samples/current-l2/` flat `.txt` layer と fixture-stem-aligned naming を current first choice に置いた。
+
 current mainline は、
-**Phase 6 fixed-subset source-sample corpus scope / file layout**
+**Phase 6 representative / fixture / source mapping matrix**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- fixed-subset source-sample corpus scope / mapping
+- representative / fixture / source mapping
 - actual parser-to-`Program` lowering と syntax-backed sample runner の first cut
 - sample ごとの `static gate` / `interpreter` / `formal hook` ladder
 

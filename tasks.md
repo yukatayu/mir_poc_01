@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 11:17 JST
+最終更新: 2026-04-12 11:35 JST
 
 ## この文書について
 
@@ -19,7 +19,7 @@
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。verifier handoff surface、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual subject row、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete tool binding、public checker migration、low-level memory-order family は later に残している。
 - **Phase 6 front-half compile-ready checkpoint** は `specs/examples/299...314` により fixed 済みである。`mir-ast` stage 1 / stage 2 carrier、stage 3 declaration-side admit attached slot、shared isolated predicate fragment、shared single attachment frame extraction bridge、`mir-semantics` program-level entry、`mir-runtime` current L2 thin skeleton、tool-neutral formal hook first tranche、reserve formal tool binding inventory までは narrow actual evidence がある。
 - ただし、**「compile-ready checkpoint が fixed」であることと、「source text sample を fixed subset で持ち、static / interpreter / formal staging を sample ごとに通せる」ことは別**である。前者は 96%+ と読める一方、後者へ進むための task chain は、旧 snapshot では `fixed-subset sample/program corpus staging` の 1 項目に圧縮されすぎていた。
-- current immediate line は **Phase 6 sample path fixed-subset source-sample corpus scope / file layout** である。`specs/examples/311...312` により shared single attachment frame を next package に置く sequencing judgment は fixed 済みであり、`specs/examples/313...314` によりその multiline extraction bridge actualization も source-backed に閉じた。その後は、**representative/fixture/source mapping → actual parser-to-`Program` lowering → syntax-backed sample runner → verification ladder → authoring/bless policy** の順に進めるのが自然である。
+- current immediate line は **Phase 6 sample path representative / fixture / source mapping matrix** である。`specs/examples/315...316` により、source corpus は repo-root `samples/current-l2/` flat `.txt` layer に置き、sample stem は fixture stem aligned naming、initial cluster は `e1` / `e2` / `e3` / `e4` / `e21` / `e23` に留める current cut まで fixed 済みである。その後は、**actual parser-to-`Program` lowering → syntax-backed sample runner → verification ladder → authoring/bless policy** の順に進めるのが自然である。
 - fixed subset の executable sample を増やすこと自体は current line に整合する。よいのは **既存 settled subset を `static gate` / `interpreter` / `tool-neutral formal hook` に段階接続すること**であり、low-level memory-order-like surface や higher-level async-control family を executable core surface として同時に太らせることではない。
 
 ## 具体的な sample code 検証段階までの rough estimate
@@ -28,10 +28,10 @@
 |---|---|---:|---|---|---|
 | parser-free current L2 PoC | 実在し、compile / test evidence あり | 90%+ | maintenance closeout だけ | 1〜2 package / 2〜4日 | `mir-semantics` 主線はすでに回る |
 | Phase 6 front-half compile-ready minimal actual PoC | checkpoint close fixed | 96%+ | maintenance / reopen only | maintenance only | current L2 subset の compile-ready checkpoint は閉じたと読んでよい |
-| fixed-subset syntax-backed sample verification milestone | parser-side follow-up actualization fixed / source corpus scope 未固定 | **43%前後** | 4〜6 package | 2〜6週 | source text sample を parse / lower / static / interpreter / formal hook まで段階接続する |
+| fixed-subset syntax-backed sample verification milestone | source corpus scope/layout fixed / mapping 未固定 | **48%前後** | 3〜5 package | 2〜6週 | source text sample を parse / lower / static / interpreter / formal hook まで段階接続する |
 | first theorem-first concrete tool pilot | reserve inventory fixed | 8%前後 | 2〜4 package | 1〜3週 | source-sample ladder の後で narrow proof consumer pressure を受ける |
 
-### `35%前後` の根拠
+### `48%前後` の根拠
 
 - 進んでいるもの
   - representative programs の prose
@@ -50,24 +50,15 @@
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 6 sample path | fixed-subset source-sample corpus scope / file layout | source corpus の対象 subset、directory、ID policy、non-goal を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
-| 2 | Phase 6 sample path | representative / fixture / source mapping matrix | representative prose、fixture corpus、source sample の 3 層対応表を作る | 中 | 1 task / 1〜2日 | 自走可能 |
-| 3 | Phase 6 sample path | actual parser-to-`Program` lowering first cut | fixed subset の parse result を semantic `Program` へ fail-closed に落とす | 重い | 1〜2 task / 3〜7日 | 自走可能 |
-| 4 | Phase 6 sample path | syntax-backed sample runner first cut | source sample を parse / lower / static gate / interpreter へ流す narrow runner を作る | 重い | 1〜2 task / 3〜7日 | 自走可能 |
-| 5 | Phase 6 sample path | verification ladder wiring | sample ごとに `static gate` / `interpreter` / `formal hook` の到達段を揃える | 中〜重い | 1〜2 task / 2〜6日 | 自走可能 |
-| 6 | Phase 6 sample path | source-sample authoring / bless / regression policy | source sample の更新手順、reference 更新、drift suppression を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
+| 1 | Phase 6 sample path | representative / fixture / source mapping matrix | representative prose、fixture corpus、source sample の 3 層対応表を作る | 中 | 1 task / 1〜2日 | 自走可能 |
+| 2 | Phase 6 sample path | actual parser-to-`Program` lowering first cut | fixed subset の parse result を semantic `Program` へ fail-closed に落とす | 重い | 1〜2 task / 3〜7日 | 自走可能 |
+| 3 | Phase 6 sample path | syntax-backed sample runner first cut | source sample を parse / lower / static gate / interpreter へ流す narrow runner を作る | 重い | 1〜2 task / 3〜7日 | 自走可能 |
+| 4 | Phase 6 sample path | verification ladder wiring | sample ごとに `static gate` / `interpreter` / `formal hook` の到達段を揃える | 中〜重い | 1〜2 task / 2〜6日 | 自走可能 |
+| 5 | Phase 6 sample path | source-sample authoring / bless / regression policy | source sample の更新手順、reference 更新、drift suppression を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 6 sample path fixed-subset source-sample corpus scope / file layout
-
-- 目的
-  - fixed subset の source text sample corpus を、representative prose や fixture corpus と混線しない第 3 層として定義する。
-- 完了条件
-  - source corpus の対象 cluster、file layout、sample ID policy、non-goal が snapshot に mirror されている。
-  - final grammar / broad syntax revision と混線していない。
-
-### Task 2. Phase 6 sample path representative / fixture / source mapping matrix
+### Task 1. Phase 6 sample path representative / fixture / source mapping matrix
 
 - 目的
   - representative programs、fixture corpus、source sample の対応表を作り、single-element から non-trivial 例までの coverage ladder を見える化する。
@@ -75,7 +66,7 @@
   - least corpus でどの semantics / invariant / runtime behavior を押さえるかが分かる。
   - 既存 fixture corpus の regression baseline を壊さない。
 
-### Task 5. Phase 6 sample path actual parser-to-`Program` lowering first cut
+### Task 2. Phase 6 sample path actual parser-to-`Program` lowering first cut
 
 - 目的
   - fixed subset の parse result を semantic `Program` へ narrow / fail-closed に落とす。
@@ -83,7 +74,7 @@
   - lowering failure が explicit で、source / parser / semantic mismatch を silent repair しない。
   - host/runtime/public API の final shape を先取りしない。
 
-### Task 6. Phase 6 sample path syntax-backed sample runner first cut
+### Task 3. Phase 6 sample path syntax-backed sample runner first cut
 
 - 目的
   - source sample から parse / lower / static gate / interpreter を最小経路で回す。
@@ -91,7 +82,7 @@
   - parser-free fixture runner と責務が分離されている。
   - helper-local thin wrapper で止まり、public CLI / final exporter に誤昇格していない。
 
-### Task 7. Phase 6 sample path verification ladder wiring
+### Task 4. Phase 6 sample path verification ladder wiring
 
 - 目的
   - sample ごとに `static gate` / `interpreter` / `formal hook` のどこまで machine-check するかを段階化する。
@@ -99,7 +90,7 @@
   - sample ID ごとに current reached stage が明示されている。
   - theorem/model-check concrete tool binding を早く混ぜず、tool-neutral formal hook を current top として扱う。
 
-### Task 8. Phase 6 sample path source-sample authoring / bless / regression policy
+### Task 5. Phase 6 sample path source-sample authoring / bless / regression policy
 
 - 目的
   - source sample の更新手順、fixture との対応維持、reference 更新、drift suppression を repo-local に固定する。
@@ -109,23 +100,23 @@
 
 ## 方針決定が必要な blocker / open question
 
-- **現時点で、Task 1〜8 を止める immediate blocker は 0 件** と読むのが自然である。
+- **現時点で、current Task 1〜5 を止める immediate blocker は 0 件** と読むのが自然である。
 - ただし、current mainline では parser-side widen boundary、source corpus layering、lowering cut、formal/back-end timing の guard が効く。
 
-### Blocker 1. source corpus を representative / fixture とどう分けるか
+### Blocker 1. representative / fixture / source をどう結ぶか
 
 - 概要
-  - prose representative、machine fixture、source text sample の 3 層をどう分離するか。
+  - representative prose、fixture corpus、source corpus を 1 対 1 でどう対応付けるか。
 - 何に影響するか
-  - sample authoring policy
-  - docs mirror
-  - regression baseline の見通し
+  - mapping matrix
+  - lowering coverage
+  - regression baseline の意味づけ
 - 主要な選択肢
-  1. representative prose と fixture corpus の間に source corpus を第 3 層として置く
+  1. fixture stem / `fixture_id` aligned naming を軸に 3 層を結ぶ
   2. representative prose をそのまま source corpus に昇格する
   3. fixture corpus から source text を逆生成する
 - current recommendation / 見解
-  - **1 を current first choice** に置き、representative prose は説明用、fixture corpus は machine-check 正本、source corpus は fixed subset の syntax-backed regression layer として分けるのが自然である。
+  - **1 を current first choice** に置き、representative prose は説明用、fixture corpus は machine-check 正本、source corpus は syntax-backed regression layer として保ったまま aligned naming で結ぶのが自然である。
 
 ### Blocker 2. actual parser-to-`Program` lowering の first cut
 

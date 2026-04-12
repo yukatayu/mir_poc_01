@@ -14,12 +14,20 @@
   - fixed-subset source-sample corpus
 - representative programs は人間向けの説明用であり、final grammar を固定しない。
 - fixture corpus は machine-check の current baseline であり、parser-free / detached loop / static gate / interpreter の正本に近い。
-- source-sample corpus は、**representative programs をそのまま昇格するものでも、fixture JSON を逆生成するものでもなく**、fixed subset の syntax-backed regression layer として別に置くのが current first choice であり、現時点ではまだ target layer である。
+- source-sample corpus は、**representative programs をそのまま昇格するものでも、fixture JSON を逆生成するものでもなく**、fixed subset の syntax-backed regression layer として別に置くのが current first choice であり、repo-root `samples/current-l2/` flat `.txt` layer に置く current cut まで fixed 済みである。
 - current near-term では、source-sample corpus は
   - fixed subset だけを対象にする
   - representative prose と fixture corpus の対応表を持つ
   - `static gate` / `interpreter` / `formal hook` reached stage を sample ごとに段階化する
   という条件で整備するのが自然である。
+
+## source-sample corpus の current path policy
+
+- current path は `samples/current-l2/` に置く。
+- current file layout は flat / one-file-per-sample である。
+- current extension policy は `.txt` であり、final grammar を意味しない。
+- current naming policy は fixture stem / `fixture_id` aligned kebab-case である。
+- current initial cluster は `e1` / `e2` / `e3` / `e4` / `e21` / `e23` に留める。
 
 ## fixture 一覧
 
@@ -40,6 +48,7 @@
 ### static-only fixture
 
 - `e4-malformed-lineage`
+- `e23-malformed-try-fallback-missing-fallback-body`
 - `e5-underdeclared-lineage`
 - `e12-underdeclared-target-missing`
 - `e13-malformed-capability-strengthening`
@@ -61,6 +70,7 @@
 | `e22-try-atomic-cut-place-mismatch` | nested place 内 `atomic_cut` が frontier を更新しない contrast case | `valid` | `success` | `perform-success` → `atomic-cut` → `perform-failure` → `rollback` → `perform-success` | あり | E22, `0186` |
 | `e3-option-admit-chain` | option-local `admit` miss と later success | `valid` | `success` | event は `perform-success`、formal metadata に `admit-miss` | あり | E3 variant, `0037`, `0039`, `0078` |
 | `e4-malformed-lineage` | edge-local lineage annotation mismatch | `malformed` | `not_evaluated` | runtime に入らない | なし | E4, `0023`, `0047`, `0147` |
+| `e23-malformed-try-fallback-missing-fallback-body` | empty `fallback_body` を dedicated structural malformed として止める stage 2 try/rollback malformed pair | `malformed` | `not_evaluated` | runtime に入らない。stage 2 dedicated structural checker と parser reconnect evidence にも使う | なし | E23, `0222`, `0339` |
 | `e5-underdeclared-lineage` | lineage 証拠不足 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E5, `0021`, `0022`, `0047`, `0147` |
 | `e12-underdeclared-target-missing` | declared access target 欠落 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E12, `0155` |
 | `e13-malformed-capability-strengthening` | capability strengthening | `malformed` | `not_evaluated` | runtime に入らない | なし | E13, `0155` |
@@ -111,6 +121,11 @@
 
 - malformed fallback branch は dynamic `Reject` ではなく static rejection
 - explanatory `reasons` は残しつつ、actual static gate wording を `checked_reasons` へ narrow transfer する最初の採用例
+
+### `e23-malformed-try-fallback-missing-fallback-body`
+
+- empty `fallback_body` は generic malformed text ではなく、stage 2 `try` / rollback structural floor の dedicated malformed cluster として読む
+- source-sample corpus initial cluster に含めるのは、representative / fixture / source mapping を stage 2 reconnect evidence と同じ stem で揃えるためである
 
 ### `e5-underdeclared-lineage`
 

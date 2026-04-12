@@ -593,6 +593,10 @@
   - parser-side follow-up sequencing fixed 後の次段として、shared single attachment frame first package を multiline extraction bridge + existing predicate fragment parser reuse に留めて actualize するか、request clause suite / perform head widen へ進むかを比較する補助文書。
 - `specs/examples/314-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-ready-minimal-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-threshold.md`
   - shared single attachment frame first package の minimal docs-first shape を `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/315-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-ready-fixed-subset-source-sample-corpus-scope-and-file-layout-comparison.md`
+  - shared single attachment frame first package fixed 後の次段として、fixed-subset source-sample corpus を repo-root `samples/current-l2/` flat `.txt` layer に置くか、crate-local / docs-local に置くかを比較する補助文書。
+- `specs/examples/316-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-ready-minimal-fixed-subset-source-sample-corpus-scope-and-file-layout-threshold.md`
+  - fixed-subset source-sample corpus scope / file layout の minimal docs-first shape を `scope_kind + source_cluster_refs + directory_ref + file_layout_ref + file_extension_policy + sample_id_policy + non_goal_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

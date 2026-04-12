@@ -17,7 +17,7 @@
 
 - この文書は **fixture authoring** 用であり、future source-sample corpus authoring template を兼ねない。
 - fixed-subset source-sample corpus は、representative prose と fixture corpus のあいだに置く別 layer であり、
-  - source file layout
+  - source file layout (`samples/current-l2/` flat `.txt`)
   - representative / fixture / source mapping
   - parser-to-`Program` lowering
   - syntax-backed runner
