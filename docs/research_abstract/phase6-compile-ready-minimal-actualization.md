@@ -137,17 +137,20 @@ source-sample authoring / bless / regression policy も fixed 済みであり、
 `specs/examples/327...328` により、
 theorem-first concrete tool pilot も fixed 済みであり、tool-neutral formal hook artifact を入力にする non-production `proof_notebook_review_unit` consumer を `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs` と example CLI に置き、bridge sketch / compare-bless metadata / proof-assistant adapter / model-check side は still later に残した。
 
+`specs/examples/337...338` により、
+third widened row `e3` theorem-side / formal-hook guard comparison も fixed 済みであり、`e3` は current authored row にまだ入れず、current theorem-side consumer `proof_notebook_review_unit` と current formal-hook top `runtime_try_cut_cluster` を保ったまま theorem-side bridge line の後段 reopen に残す。
+
 current mainline は、
-**Phase 6 third widened row theorem-side / formal-hook guard comparison**
+**Phase 6 theorem-side plain bridge sketch actualization**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
 - deferred authored-row widen sequencing `e1 -> e21 -> e3`
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
-- third widened row `e3` theorem-side / formal-hook guard comparison
 - theorem-side plain bridge sketch actualization
 - theorem-side compare-ready bridge sketch second reopen
+- deferred `e3` actualization reopen timing
 
 を揃えるのが主眼になる。
 

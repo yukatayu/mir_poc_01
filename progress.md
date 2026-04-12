@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 19:33 JST
+最終更新: 2026-04-12 19:49 JST
 
 ## この文書について
 
@@ -25,7 +25,8 @@
 - `specs/examples/331...332` により、proof-notebook bridge-sketch reopen ordering も fixed 済みであり、current first choice は **plain docs-only bridge sketch first / compare-ready bridge sketch second** である。authored-row actualization line を先に閉じ、theorem-side reopen はその後に置く。
 - `specs/examples/333...334` により、first widened authored row `e1` actualization も fixed 済みである。`e1-place-atomic-cut` は helper-compatible single-line `ensure` source row として actualize 済みであり、current authored inventory / runner accepted set / regression bundle / README ladder で `runtime_try_cut_cluster` reached row に昇格した。
 - `specs/examples/335...336` により、second widened authored row `e21` actualization も fixed 済みである。`e21-try-atomic-cut-frontier` は helper-compatible source row として actualize 済みであり、current authored inventory / runner accepted set / regression bundle / README ladder で `runtime_try_cut_cluster` reached row に昇格した。
-- current main bottleneck は semantics の大崩れではなく、**`e3` widening を current theorem-side / formal-hook family のどこで guard comparison するかを narrow に固定すること** である。
+- `specs/examples/337...338` により、third widened row `e3` theorem-side / formal-hook guard comparison も fixed 済みである。`e3` は current authored row にまだ入れず、theorem-side row-local review-unit cut と `runtime_try_cut_cluster` top を保ったまま、plain bridge sketch actualization の後段 reopen に残す。
+- current main bottleneck は semantics の大崩れではなく、**theorem-side plain bridge sketch actualization を current cut を崩さず narrow に actual package へ落とすこと** である。
 
 ## compile-ready PoC の rough 読み
 
@@ -33,7 +34,7 @@
 |---|---:|---|---|
 | parser-free current L2 PoC | 90%+ | maintenance closeout 数 package | `mir-semantics` 主線はすでに compile / test 可能 |
 | Phase 6 前半 compile-ready minimal actual PoC | 96%+ | maintenance / reopen only | compile-ready checkpoint close は fixed と読める |
-| fixed-subset syntax-backed sample verification milestone | 95%前後 | `e3` guard comparison、plain bridge sketch actualization、compare-ready bridge sketch second reopen | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続し、repo-local policy と first theorem-side pilot、widen ordering、bridge-sketch reopen ordering、`e1` / `e21` actualization、maintenance close まで fixed 済み |
+| fixed-subset syntax-backed sample verification milestone | 96%前後 | plain bridge sketch actualization、compare-ready bridge sketch second reopen、その後段の `e3` actualization reopen timing | source text sample を `static gate` / `interpreter` / `formal hook` へ段階接続し、repo-local policy と first theorem-side pilot、widen ordering、bridge-sketch reopen ordering、`e1` / `e21` actualization、`e3` guard comparison、maintenance close まで fixed 済み |
 
 ## 研究フェーズ（大局）
 
@@ -45,25 +46,25 @@
 | Phase 3 | 93% | parser boundary / first checker cut | self-driven freeze fixed | 中〜やや重い | 自走可能 | `287...290` で subset / reconnect freeze は fixed。later widen は reserve path |
 | Phase 4 | 90% | shared-space / membership / practical example boundary | self-driven closeout fixed | 重い | 一部自走可能 | `121...125` current package と final catalog / later line の境界は fixed。final catalog は user spec 依存 |
 | Phase 5 | 98% | static analysis / type / theorem prover / async-control boundary | self-driven closeout fixed | とても重い | 自走可能 | `297...298` で stop line と retained-later inventory は fixed。actual external contract は later |
-| Phase 6 | 94% | actual parser / checker / runtime commitment と syntax-backed sample path | third widened row `e3` theorem-side / formal-hook guard comparison | 重い | 自走可能 | front-half compile-ready checkpoint、source path first packages、theorem-first review-unit pilot、authored-row widen sequencing、bridge-sketch ordering、`e1` / `e21` actualization、maintenance closeは fixed。残りは `e3` guard line と plain / compare-ready bridge sketch reopen |
+| Phase 6 | 95% | actual parser / checker / runtime commitment と syntax-backed sample path | theorem-side plain bridge sketch actualization | 重い | 自走可能 | front-half compile-ready checkpoint、source path first packages、theorem-first review-unit pilot、authored-row widen sequencing、bridge-sketch ordering、`e1` / `e21` actualization、`e3` guard comparison、maintenance closeは fixed。残りは plain / compare-ready bridge sketch reopen と、その後段の `e3` actualization timing である |
 | Phase 7 | 3% | higher-layer integration / domain realization | 未着手 | とても重い | 要仕様確認 | Mirrorea / Prism / 上位アプリは user specification が要る |
 
 ## 現在の主線
 
-1. **Phase 6 third widened row theorem-side/formal-hook guard comparison**
-   - `e3` widening を current theorem-side / formal-hook family のどこで guard comparison するかを narrow に固定する。
-2. **Phase 6 theorem-side plain bridge sketch actualization**
+1. **Phase 6 theorem-side plain bridge sketch actualization**
    - authored-row line の後段として plain docs-only bridge sketch を narrow actual package に落とす。
-3. **Phase 6 theorem-side compare-ready bridge sketch second reopen**
+2. **Phase 6 theorem-side compare-ready bridge sketch second reopen**
    - plain bridge sketch actualization の後段として compare-ready bridge sketch threshold を narrow reopen する。
+3. **Phase 6 deferred `e3` actualization reopen timing**
+   - theorem-side bridge line の後で `e3` widening をどこへ戻すかを narrow に固定する。
 
 ## いま自走で進めてよい範囲
 
 ### 着手可能
 
-- third widened row `e3` theorem-side / formal-hook guard comparison
 - theorem-side plain bridge sketch actualization
 - theorem-side compare-ready bridge sketch second reopen
+- deferred `e3` actualization reopen timing
 
 ### 後段依存
 
@@ -92,7 +93,7 @@
 | fixture authoring / elaboration 実務 | 97% | 98% | 99% | 着手可能 | template / scaffold / smoke convenience は強い |
 | parser boundary / staged parser spike | 92% | 85% | 88% | 着手可能 | subset freeze と reconnect freeze は fixed。stage 3 reconnect は still later |
 | first checker cut / helper-local compare family | 91% | 82% | 89% | 着手可能 | stage 1 + stage 2 bridge は fixed。`e19` / `E21` / `E22` は still later |
-| source-backed sample corpus / verification ladder | 92% | 93% | 91% | 着手可能 | mapping / lowering / runner / ladder / policy / theorem-first pilot / widen sequencing / bridge-sketch ordering と `e1` / `e21` actualization は fixed。残りは `e3` と plain bridge sketch actualization |
+| source-backed sample corpus / verification ladder | 92% | 93% | 91% | 着手可能 | mapping / lowering / runner / ladder / policy / theorem-first pilot / widen sequencing / bridge-sketch ordering と `e1` / `e21` actualization、`e3` guard comparison は fixed。残りは plain bridge sketch actualization とその後段 reopen である |
 | shared-space / dynamic membership boundary | 90% | 84% | 12% | 一部自走可能 | self-driven closeout は fixed。final catalog は user spec required |
 | static analysis / type / theorem prover / async-control boundary | 99% | 98% | 51% | 着手可能 | `297...298` で closeout fixed。tool-neutral formal hook、review-unit pilot、bridge-sketch orderingは fixed。concrete tool bindingは still later |
 | richer host interface / typed coverage carrier | 45% | 32% | 25% | 後段依存 | current phase では太らせない |
@@ -110,17 +111,18 @@
 6. final parser grammar / public checker boundary
 7. actual parser/runtime sample runner の final public boundary
 8. concrete formal tool binding / LLVM-family backend timing
-9. `e3` widening を current theorem-side family とどう接続するか
+9. `e3` widening を theorem-side bridge line の後でどこへ戻すか
 
 ## 次に進めるべき task
 
-1. **Phase 6 third widened row `e3` theorem-side / formal-hook guard comparison** を immediate line として扱う
-2. その後に theorem-side plain bridge sketch actualization を扱う
-3. さらに theorem-side compare-ready bridge sketch second reopen を扱う
+1. **Phase 6 theorem-side plain bridge sketch actualization** を immediate line として扱う
+2. その後に theorem-side compare-ready bridge sketch second reopen を扱う
+3. さらに deferred `e3` actualization reopen timing を扱う
 
 ## 作業ログ（簡潔）
 
 - 注記: この欄は **recent log** として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 19:49 JST — `docs/reports/0641` と `specs/examples/337...338` で third widened row `e3` theorem-side / formal-hook guard comparison を閉じ、`e3` を deferred row のまま保つ current guard と next line の plain bridge sketch actualization を固定した。snapshot docs の current line は theorem-side plain bridge sketch actualization に進めた。
 - 2026-04-12 19:33 JST — `docs/reports/0640` と `specs/examples/335...336` で second widened authored row `e21` actualization を閉じ、`e21-try-atomic-cut-frontier` を source row / runner accepted set / regression bundle / README ladder の current authored inventory に昇格した。snapshot docs の current line は `e3` theorem-side / formal-hook guard comparison に進めた。
 - 2026-04-12 19:20 JST — `docs/reports/0639` と `specs/examples/333...334` で first widened authored row `e1` actualization を閉じ、`e1-place-atomic-cut` を source row / runner accepted set / regression bundle / README ladder の current authored inventory に昇格した。snapshot docs の current line は `e21` actualization に進めた。
 - 2026-04-12 17:10 JST — `docs/reports/0638` で mirror sweep follow-up maintenance と document consistency audit を閉じ、snapshot docs の current line を `e1` actualization へ進めた。bridge-sketch ordering / widen sequencing / current next-step wording を `Documentation.md`、`progress.md`、`tasks.md`、relevant `plan/`、abstract、sample README で同期した。

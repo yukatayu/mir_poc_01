@@ -637,6 +637,10 @@
   - `e1` actualization fixed 後の次段として、`e21-try-atomic-cut-frontier` を helper-compatible source row と runner / regression / README ladder へ narrow actualize するのが自然かを比較する補助文書。
 - `specs/examples/336-current-l2-second-widened-authored-row-e21-actualization-ready-minimal-second-widened-authored-row-e21-threshold.md`
   - second widened authored row `e21` actualization の minimum を `actualization_kind + entry_criteria_refs + actualized_row + reached_stage_refs + guard_refs` に留める補助文書。
+- `specs/examples/337-current-l2-second-widened-authored-row-e21-actualization-ready-third-widened-row-e3-theorem-side-formal-hook-guard-comparison.md`
+  - `e21` actualization fixed 後の次段として、`e3-option-admit-chain` を actual authored row に上げる前に theorem-side / formal-hook guard をどこで比較するかを整理する補助文書。
+- `specs/examples/338-current-l2-third-widened-row-e3-theorem-side-formal-hook-guard-comparison-ready-minimal-third-widened-row-e3-guard-threshold.md`
+  - third widened row `e3` guard comparison の minimum を `guard_kind + deferred_row_ref + current_guard_refs + kept_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 19:33 JST
+最終更新: 2026-04-12 19:49 JST
 
 ## この文書について
 
@@ -23,7 +23,8 @@
 - `specs/examples/331...332` により proof-notebook bridge-sketch reopen ordering も fixed 済みであり、current first choice は **plain docs-only bridge sketch first / compare-ready bridge sketch second** である。authored-row actualization line を先に閉じ、theorem-side reopen はその後に置く。
 - `specs/examples/333...334` により、first widened authored row `e1` actualization も fixed 済みである。`e1-place-atomic-cut` は helper-compatible single-line `ensure` source row、runner accepted set、regression helper current authored inventory、README ladder に narrow actualize 済みであり、current runtime formal-hook top `runtime_try_cut_cluster` の内側で reached row と読んでよい。
 - `specs/examples/335...336` により、second widened authored row `e21` actualization も fixed 済みである。`e21-try-atomic-cut-frontier` は helper-compatible source row、runner accepted set、regression helper current authored inventory、README ladder に narrow actualize 済みであり、`E21` / `E22` contrast は still later に残す。
-- follow-up maintenance は report-backed に閉じた。したがって current immediate line は **Phase 6 sample path / theorem guard third widened row guard comparison (`e3`)** である。
+- `specs/examples/337...338` により、third widened row `e3` theorem-side / formal-hook guard comparison も fixed 済みである。`e3-option-admit-chain` は current authored row に昇格させず、current theorem-side consumer を row-local `proof_notebook_review_unit`、current formal-hook top を `runtime_try_cut_cluster` に保ったまま、plain bridge sketch actualization の後段 reopen に残す。
+- follow-up maintenance は report-backed に閉じた。したがって current immediate line は **Phase 6 theorem-side docs-first reopen plain bridge sketch actualization** である。
 
 ## 具体的な sample code 検証段階までの rough estimate
 
@@ -31,67 +32,67 @@
 |---|---|---:|---|---|---|
 | parser-free current L2 PoC | 実在し、compile / test evidence あり | 90%+ | maintenance closeout だけ | 1〜2 package / 2〜4日 | `mir-semantics` 主線はすでに回る |
 | Phase 6 front-half compile-ready minimal actual PoC | checkpoint close fixed | 96%+ | maintenance / reopen only | maintenance only | current L2 subset の compile-ready checkpoint は閉じたと読んでよい |
-| fixed-subset syntax-backed sample verification milestone | scope/layout、mapping、lowering、runner、ladder、authoring policy、theorem-first pilot、widen sequencing、bridge-sketch ordering、`e1` / `e21` actualization、maintenance close fixed | **95%前後** | 2〜3 package | 数日〜2週 | 残りは `e3` guard line と plain / compare-ready bridge sketch reopen |
-| plain bridge-sketch actualization path | ordering fixed、actual package未着手 | 18%前後 | 1〜3 package | 1〜3週 | plain docs-only bridge sketch をどこで actualize するかは、authored-row line の後に残る |
+| fixed-subset syntax-backed sample verification milestone | scope/layout、mapping、lowering、runner、ladder、authoring policy、theorem-first pilot、widen sequencing、bridge-sketch ordering、`e1` / `e21` actualization、`e3` guard comparison、maintenance close fixed | **96%前後** | 1〜2 package | 数日〜2週 | 残りは theorem-side plain / compare-ready bridge sketch reopen と、その後段の `e3` actualization reopen timing である |
+| plain bridge-sketch actualization path | ordering fixed、guard comparison fixed、actual package未着手 | 32%前後 | 1〜2 package | 数日〜2週 | plain docs-only bridge sketch を authored-row line の後で actualize する current cutは fixed 済みである |
 
 ## 次に着手すべき順番と rough estimate
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 6 sample path / theorem guard | third widened row guard comparison (`e3`) | `e3` widening を current formal-hook / theorem-side guard とどう接続するかを比較する | 中 | 1〜2 task / 数日 | 自走可能 |
-| 2 | Phase 6 theorem-side docs-first reopen | plain bridge sketch actualization | current order fixed 済みの plain docs-only bridge sketch を narrow actualize する | 中 | 1〜2 task / 数日 | 自走可能 |
-| 3 | Phase 6 theorem-side docs-first reopen | compare-ready bridge sketch second reopen | plain bridge sketch actualization の後段として compare-ready bridge sketch threshold を narrow reopen する | 中 | 1〜2 task / 数日 | 自走可能 |
-| 4 | Phase 6 theorem-side reserve reopen | proof / model-check handoff first concrete tool cut | compare-ready bridge sketch の後段として first concrete theorem/model-check tool cut を narrow reopen する | 中 | 1〜3 task / 1〜2週 | 自走可能 |
+| 1 | Phase 6 theorem-side docs-first reopen | plain bridge sketch actualization | current order fixed 済みの plain docs-only bridge sketch を narrow actualize する | 中 | 1〜2 task / 数日 | 自走可能 |
+| 2 | Phase 6 theorem-side docs-first reopen | compare-ready bridge sketch second reopen | plain bridge sketch actualization の後段として compare-ready bridge sketch threshold を narrow reopen する | 中 | 1〜2 task / 数日 | 自走可能 |
+| 3 | Phase 6 theorem-side reserve reopen | proof / model-check handoff first concrete tool cut | compare-ready bridge sketch の後段として first concrete theorem/model-check tool cut を narrow reopen する | 中 | 1〜3 task / 1〜2週 | 自走可能 |
+| 4 | Phase 6 sample path / theorem guard reserve reopen | deferred `e3` actualization reopen timing | theorem-side line の後で `e3` widen をどこへ戻すかを narrow に比較する | 中 | 1〜2 task / 数日 | 自走可能 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 6 sample path / theorem guard third widened row guard comparison (`e3`)
-
-- 目的
-  - `e3-option-admit-chain` widening を、current formal-hook / theorem-side family の外でどう扱うかを narrow に比較する。
-- 完了条件
-  - `e3` を runtime sample として widen する場合の theorem-side / formal-hook guard が明示され、`admit` family widening を silent に既成事実化しない。
-
-### Task 2. Phase 6 theorem-side docs-first reopen plain bridge sketch actualization
+### Task 1. Phase 6 theorem-side docs-first reopen plain bridge sketch actualization
 
 - 目的
   - current order fixed 済みの plain docs-only bridge sketch (`specs/examples/140` line) を narrow actual package に落とす。
 - 完了条件
   - review-unit current cut と compare-ready bridge sketch second reopen を保持し、compare-bless metadata や concrete theorem/model-check binding を premature に混ぜない。
 
-### Task 3. Phase 6 theorem-side docs-first reopen compare-ready bridge sketch second reopen
+### Task 2. Phase 6 theorem-side docs-first reopen compare-ready bridge sketch second reopen
 
 - 目的
   - plain bridge sketch actualization の後段として compare-ready bridge sketch threshold を reopen し、compare-bless metadata と concrete theorem/model-check binding の still-later guard を narrow に再確認する。
 - 完了条件
   - plain bridge sketch current cut を壊さず、compare-bless metadata や concrete theorem/model-check binding を still later に残す。
 
-### Task 4. Phase 6 theorem-side reserve reopen proof / model-check handoff first concrete tool cut
+### Task 3. Phase 6 theorem-side reserve reopen proof / model-check handoff first concrete tool cut
 
 - 目的
   - compare-ready bridge sketch の後段として、proof notebook / model-check side の first concrete tool cut を narrow reopen する。
 - 完了条件
   - compare-ready bridge sketch current cut を壊さず、theorem-first reserve / model-check second reserve の順を保つ。
 
+### Task 4. Phase 6 sample path / theorem guard reserve reopen deferred `e3` actualization reopen timing
+
+- 目的
+  - theorem-side bridge line の後で `e3-option-admit-chain` widening をどこへ戻すかを narrow に比較する。
+- 完了条件
+  - `e3` actualization を premature に current authored inventory へ混ぜず、theorem-side / formal-hook guard comparison fixed の意味を保つ。
+
 ## 方針決定が必要な blocker / open question
 
 - **現時点で、current Task 1〜4 を止める immediate blocker は 0 件** と読むのが自然である。
-- ただし、`e3` theorem-side / formal-hook guard、concrete tool timing、higher-level control family の guard は効いている。
+- ただし、concrete tool timing、deferred `e3` actualization timing、higher-level control family の guard は効いている。
 
-### Blocker 1. `e3` widening と theorem-side / formal-hook family guard
+### Blocker 1. deferred `e3` actualization の reopen timing
 
 - 概要
-  - `e3-option-admit-chain` は current runtime formal-hook top `runtime_try_cut_cluster` にそのままは乗らない。
+  - `e3` theorem-side / formal-hook guard comparison 自体は fixed 済みだが、actual widening を plain bridge sketch actualization の直後に戻すか、compare-ready bridge sketch の後に残すかは still later である。
 - 何に影響するか
-  - widened authored-row ladder shape
-  - theorem-first review-unit pilot の current family
+  - widened authored-row ladder の残件順序
+  - theorem-side bridge line と sample path reopen の接続
 - 主要な選択肢
-  1. `e3` widening 前に theorem-side / formal-hook family compare を 1 package 挟む
-  2. `e3` widening を formal hook not reached row として扱う
-  3. current theorem-side family を widen してから `e3` を authored row に入れる
+  1. plain bridge sketch actualization の後で `e3` reopen timing を比較する
+  2. compare-ready bridge sketch second reopen の後まで `e3` を残す
+  3. concrete tool cut の前に `e3` widen を戻す
 - current recommendation / 見解
   - **1 を current first choice** に置くのが自然である。
-  - `e1` / `e21` actualization line を先に閉じ、`e3` は admit-family / theorem-side guard comparison の後に actualize する方が staged line に合う。
+  - plain bridge sketch actualization を先に閉じ、その current cut を見てから `e3` reopen timing を narrow に比較する方が staged line に合う。
 
 ### Blocker 2. concrete formal tool binding と backend/codegen timing
 

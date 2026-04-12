@@ -65,7 +65,6 @@ current reached-stage inventory は current authored quintet `e1` / `e2` / `e21`
 | `e4-malformed-lineage` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e23-malformed-try-fallback-missing-fallback-body` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e3-option-admit-chain` | `source-target-only` | `not yet authored` | `not yet authored` | `not yet authored` | source target path only |
-| `e21-try-atomic-cut-frontier` | `source-target-only` | `not yet authored` | `not yet authored` | `not yet authored` | source target path only |
 
 - `formal hook` reached は current package では source-runner-native artifact ではなく、fixture-aligned detached artifact route を使う。
 - `runtime_try_cut_cluster` と `fixture_static_cluster` は tool-neutral formal hook の current top であり、concrete theorem/model-check tool choice はまだ混ぜない。
@@ -89,6 +88,6 @@ current reached-stage inventory は current authored quintet `e1` / `e2` / `e21`
 
 ## next steps
 
-- current next line は third widened row `e3-option-admit-chain` theorem-side / formal-hook guard comparison である
-- その後に theorem-side plain bridge sketch actualization を置く
-- compare-ready bridge sketch は plain bridge sketch の次段に残す
+- current next line は theorem-side plain bridge sketch actualization である
+- その後に theorem-side compare-ready bridge sketch second reopen を置く
+- deferred `e3` actualization reopen timing はその後段に残す
