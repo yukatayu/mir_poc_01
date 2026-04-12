@@ -13,7 +13,7 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot を fixed 済み entry criteria とし、次 line を drift suppression / authored-row widen sequencing / bridge-sketch ordering に置く
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot を fixed 済み entry criteria とし、current line を authored-row widen sequencing、next line を bridge-sketch ordering に置く
 5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy と proof-notebook review-unit pilot を維持しつつ、wider authored-row sequencing と theorem-side bridge sketch reopen を final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態

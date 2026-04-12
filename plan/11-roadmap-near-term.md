@@ -22,37 +22,37 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 近い数 task の目的は、fixed 済みの Phase 1 / 2 / 3 / 4 / 5 entry criteria と parser + checker/runtime + formal-hook checkpoint close を前提に、
 
-1. current checkpoint の mirror drift を抑える
-2. deferred authored-row widen sequencing を later task として整理する
-3. proof-notebook bridge-sketch reopen ordering を later theorem-side line として整理する
+1. deferred authored-row widen sequencing を narrow に整理する
+2. proof-notebook bridge-sketch reopen ordering を later theorem-side line として整理する
+3. mirror drift は follow-up maintenance として抑え続ける
 
 ことである。
 
 ## 次に自走で進める順番
 
-### 1. post-checkpoint drift suppression / mirror sweep
-
-- current line / next line / retained-later line の snapshot mirror を揃える
-- rough weight: 低〜中
-- rough 所要: 継続
-
-### 2. deferred authored-row widen sequencing
+### 1. deferred authored-row widen sequencing
 
 - `e1` / `e3` / `e21` を source target only row からいつ authored row に移すかを narrow に比較する
 - rough weight: 中
 - rough 所要: 1〜2 task / 数日
 
-### 3. proof-notebook bridge-sketch reopen ordering
+### 2. proof-notebook bridge-sketch reopen ordering
 
 - review-unit current cut を維持したまま theorem-side bridge sketch reopen の timing を比べる
 - rough weight: 中
 - rough 所要: 1〜2 task / 数日
 
+### 3. mirror sweep follow-up maintenance
+
+- current line / next line / retained-later line の snapshot mirror を継続して揃える
+- rough weight: 低〜中
+- rough 所要: 継続
+
 ## rough step estimate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| drift suppression + authored-row widen sequencing | 2〜3 task | proof-notebook review-unit pilot fixed 後に snapshot mirror と accepted authored surface sequencing を narrow に接続する |
+| authored-row widen sequencing + bridge-sketch ordering | 2〜4 task | proof-notebook review-unit pilot fixed 後に accepted authored surface sequencing と theorem-side next reopen timing を narrow に接続する |
 | proof-notebook bridge-sketch reopen ordering | 1〜2 task | review-unit current cut の後で theorem-side bridge sketch reopen timing を比較する |
 
 ## いま見えている later blocker / open question
@@ -78,5 +78,5 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - parser-free PoC は current baseline として維持する
 - Phase 3 reconnect freeze は fixed 済みの entry criteria として扱う
 - actual parser / checker / runtime first tranche は non-production minimal cut に留める
-- reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、theorem-first proof-notebook review-unit pilot は fixed 済み entry criteria として保持し、mapping / lowering / runner / verification ladder / source-sample policy を維持したまま drift suppression と widen sequencing を先に進める
+- reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、theorem-first proof-notebook review-unit pilot は fixed 済み entry criteria として保持し、mapping / lowering / runner / verification ladder / source-sample policy を維持したまま widen sequencing を先に進める
 - LLVM-family backend や external codegen は current near-term mainline に置かない

@@ -132,14 +132,14 @@ source-sample authoring / bless / regression policy も fixed 済みであり、
 theorem-first concrete tool pilot も fixed 済みであり、tool-neutral formal hook artifact を入力にする non-production `proof_notebook_review_unit` consumer を `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs` と example CLI に置き、bridge sketch / compare-bless metadata / proof-assistant adapter / model-check side は still later に残した。
 
 current mainline は、
-**Phase 0 / 6 post-checkpoint drift suppression / mirror sweep**
+**Phase 6 deferred authored-row widen sequencing**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- checkpoint drift suppression / mirror sweep
 - deferred authored row `e1` / `e3` / `e21` の widen timing
 - proof-notebook bridge-sketch reopen ordering
+- mirror sweep follow-up maintenance
 
 を揃えるのが主眼になる。
 
