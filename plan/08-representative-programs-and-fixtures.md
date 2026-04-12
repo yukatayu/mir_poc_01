@@ -49,8 +49,12 @@
 - `representative_status` は current cut で `direct` / `variant` / `unresolved` を使う。
 - `e3-option-admit-chain` は representative prose plain `E3` ではなく `E3-variant` row として扱う。
 - `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
-- current matrix では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
+- current matrix 自体では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
 - source sample の actual file first trio は `e4` / `e2` / `e23` に留め、これらは current runner first cut の input として actualize 済みである。`e1` / `e3` / `e21` は target path row のまま ladder / policy task に渡すのが current first choice である。
+- verification ladder current cut では、first authored trio にだけ reached stage row を付ける。
+  - `e2` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
+  - `e4` / `e23` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
+  - `e1` / `e3` / `e21` は `source-target-only / not yet authored` として保持し、failure 扱いしない。
 
 ## fixture 一覧
 

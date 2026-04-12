@@ -609,6 +609,10 @@
   - helper-local source sample runner first cut を `runner_kind + accepted_sample_refs + sample_argument_mode + host_plan_mode + code_anchor_refs + report_shape_refs + fail_closed_refs + retained_later_refs` で比較する補助文書。
 - `specs/examples/322-current-l2-syntax-backed-sample-runner-first-cut-ready-minimal-syntax-backed-sample-runner-first-cut-threshold.md`
   - syntax-backed sample runner first cut の minimum を `runner_kind + sample_argument_mode + host_plan_mode + code_anchor_refs + report_shape_refs + fail_closed_refs + retained_later_refs` に留める補助文書。
+- `specs/examples/323-current-l2-syntax-backed-sample-runner-first-cut-ready-verification-ladder-wiring-comparison.md`
+  - syntax-backed sample runner first cut の次段として、first authored source sample trio と source target only row を分けたまま `static gate` / `interpreter` / `formal hook` reached stage inventory をどう切るかを比較する補助文書。
+- `specs/examples/324-current-l2-verification-ladder-wiring-ready-minimal-verification-ladder-wiring-threshold.md`
+  - verification ladder wiring の minimum を `ladder_kind + fixed_entry_criteria_refs + authored_sample_rows + deferred_source_target_rows + guard_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

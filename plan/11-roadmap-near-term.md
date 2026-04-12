@@ -16,7 +16,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 - Phase 4 は `specs/examples/295...296` により self-driven closeout fixed である。current package は `specs/examples/121...125` を維持し、final activation / authority / auth / identity / admission / consistency / fairness catalog は user-spec-required に、stronger control-plane split と distributed fairness は later に残している。
 - Phase 5 は `specs/examples/297...298` により self-driven closeout fixed である。verifier handoff surface docs-only mixed-row bridge、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual artifact / tool binding / low-level memory-order family は later に残している。
 - Phase 6 front-half compile-ready minimal PoC では、`mir-ast` stage 1 / stage 2 carrier、`mir-semantics` / `mir-runtime` checker/runtime first tranche、tool-neutral formal hook first tranche、checkpoint sweepは actualize / close 済みである。`specs/examples/305...306` により next reopen sequencing も fixed 済みであり、`specs/examples/307...308` により parser second tranche first package も actualize 済みである。`specs/examples/309...310` により reserve formal tool binding inventory も fixed 済みであり、`specs/examples/311...312` により parser-side follow-up package sequencing も fixed 済みであり、`specs/examples/313...314` により shared single attachment frame first package も actualize 済みであり、`specs/examples/315...316` により source-sample corpus scope / file layout も fixed 済みであり、`specs/examples/317...318` により representative / fixture / source mapping matrix も fixed 済みであり、`specs/examples/319...320` により lowering first cut、`specs/examples/321...322` により runner first cut も fixed 済みである。
-- ただし、source text sample を fixed subset で持ち、`static gate` / `interpreter` / `formal hook` を sample 単位で通す経路はまだ early である。mapping / lowering / runner first cut は fixed 済み entry criteria とし、近接ロードマップでは ladder / policy を主線に置く。
+- ただし、source text sample を fixed subset で持ち、`static gate` / `interpreter` / `formal hook` を sample 単位で通す経路は still staged である。mapping / lowering / runner first cut は fixed 済み entry criteria とし、verification ladder current cut では first authored trio `e2` / `e4` / `e23` にだけ reached-stage row を付け、`e1` / `e3` / `e21` は source target only row のまま authoring/policy task へ渡す。
 
 ## いまから数 task の主眼
 
@@ -30,19 +30,13 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 ## 次に自走で進める順番
 
-### 1. verification ladder wiring
+### 1. source-sample authoring / bless / regression policy
 
-- sample ごとに `static gate` / `interpreter` / `formal hook` の reached stage を明示する
-- rough weight: 中〜重い
-- rough 所要: 1〜2 task / 2〜6日
-
-### 2. source-sample authoring / bless / regression policy
-
-- source sample 更新手順と drift suppression を repo-local に固定する
+- current first trio と deferred authored row の practical update flow を repo-local に固定する
 - rough weight: 中
 - rough 所要: 1 task / 1〜3日
 
-### 3. theorem-first concrete tool pilot
+### 2. theorem-first concrete tool pilot
 
 - source-sample ladder の後段で proof consumer pressure を narrow に比較する
 - rough weight: 中
@@ -52,7 +46,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
-| verification ladder + authoring/bless policy | 2〜3 task | fixed subset source sample を runtime / formal line と更新フローへ段階接続する |
+| authoring/bless policy + theorem-first pilot | 2〜3 task | first-trio ladder fixed 後に source sample 更新フローと proof consumer pressure を narrow に接続する |
 | theorem-first concrete tool pilot | 1〜2 task | tool-neutral formal hook 後段の narrow proof consumer pressure を比較する |
 
 ## いま見えている later blocker / open question

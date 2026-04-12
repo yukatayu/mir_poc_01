@@ -10,3 +10,6 @@ path = "src/lib.rs"
 [dependencies]
 mir-ast = { path = "../mir-ast" }
 mir-semantics = { path = "../mir-semantics" }
+
+[dev-dependencies]
+serde = { version = "1", features = ["derive"] }

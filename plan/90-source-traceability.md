@@ -228,6 +228,21 @@
   - `crates/mir-runtime/src/current_l2.rs`
   - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
 
+## 2026-04-12 Phase 6 verification ladder wiring addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/303-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-ready-phase6-compile-ready-verification-and-formal-hook-comparison.md`
+  - `specs/examples/304-current-l2-phase6-compile-ready-verification-and-formal-hook-ready-minimal-phase6-compile-ready-verification-and-formal-hook-threshold.md`
+  - `specs/examples/317-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-ready-representative-fixture-source-mapping-matrix-comparison.md`
+  - `specs/examples/318-current-l2-representative-fixture-source-mapping-matrix-ready-minimal-representative-fixture-source-mapping-matrix-threshold.md`
+  - `specs/examples/321-current-l2-actual-parser-to-program-lowering-first-cut-ready-syntax-backed-sample-runner-first-cut-comparison.md`
+  - `specs/examples/322-current-l2-syntax-backed-sample-runner-first-cut-ready-minimal-syntax-backed-sample-runner-first-cut-threshold.md`
+  - `specs/examples/323-current-l2-syntax-backed-sample-runner-first-cut-ready-verification-ladder-wiring-comparison.md`
+  - `specs/examples/324-current-l2-verification-ladder-wiring-ready-minimal-verification-ladder-wiring-threshold.md`
+  - `docs/reports/0628-phase6-source-sample-verification-ladder-wiring.md`
+  - `crates/mir-runtime/Cargo.toml`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+
 ## 2026-04-12 Phase 6 checker/runtime first tranche addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

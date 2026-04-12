@@ -90,27 +90,25 @@
 
 いま repo の主線は、次の 3 本である。
 
-1. **Phase 6 verification ladder / source-sample policy**
-   - sample ごとの reached stage と更新手順を固定する
-2. **Phase 6 source-sample authoring / bless policy**
-   - source sample の practical 更新手順と drift suppression を固定する
-3. **Phase 6 theorem-first concrete tool pilot**
+1. **Phase 6 source-sample authoring / bless policy**
+   - first-trio ladder fixed 後の practical 更新手順と drift suppression を固定する
+2. **Phase 6 theorem-first concrete tool pilot**
    - tool-neutral formal hook の後段 reserve を narrow pilot に寄せる
+3. **Phase 0 / 6 drift suppression**
+   - current line / next line / retained-later line の mirror drift を抑える
 
 Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るための self-driven freeze は `specs/examples/287...290` で fixed 済みである。Phase 1 closeout も `specs/examples/291...292` で fixed 済みであり、semantic core / invariant bridge / notation boundary は current entry criteria と読んでよい。Phase 2 closeout も `specs/examples/293...294` で fixed 済みであり、parser-free baseline の compile/test/smoke gate と detached loop policy は current entry criteria と読んでよい。Phase 4 closeout も `specs/examples/295...296` で fixed 済みであり、`specs/examples/121...125` current package と user-spec-required final catalog の境界は current entry criteria と読んでよい。Phase 5 closeout も `specs/examples/297...298` で fixed 済みであり、verifier handoff surface、theorem retained bridge stop line、boundary inventory、retained-later line は current entry criteria と読んでよい。
 
 ## immediate execution order
 
-1. **Phase 6 verification ladder / source-sample policy** を immediate line として扱う
-2. **Phase 6 source-sample authoring / bless policy** を narrow に行う
-3. **Phase 6 theorem-first concrete tool pilot** を reserve reopen として扱う
-4. checkpoint close 済み package の maintenance を継続する
+1. **Phase 6 source-sample authoring / bless policy** を immediate line として扱う
+2. **Phase 6 theorem-first concrete tool pilot** を reserve reopen として扱う
+3. checkpoint close 済み package の maintenance を継続する
 
 ## いま止めるべき線
 
 次は self-driven に比較を続けてよい。
 
-- Phase 6 verification ladder / source-sample policy
 - Phase 6 source-sample authoring / bless policy
 - Phase 6 theorem-first concrete tool pilot
 - checkpoint close 済み package の maintenance
@@ -124,7 +122,7 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 ## 現在の判断
 
-- **current immediate line は Phase 6 verification ladder / source-sample policy** と読むのが自然である。
+- **current immediate line は Phase 6 source-sample authoring / bless policy** と読むのが自然である。
 - **front-half compile-ready checkpoint close と syntax-backed sample verification readiness は別の progress axis** と読むのが自然である。
 - **Phase 1 / 2 / 3 / 4 / 5 は Phase 6 front-half のための self-driven entry criteria を fixed 済み** と読むのが自然である。
 - **`mir-ast` stage 1 / stage 2 carrier は Phase 6 parser first tranche として fixed 済み** と読むのが自然である。

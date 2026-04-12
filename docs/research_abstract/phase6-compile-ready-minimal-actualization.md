@@ -62,7 +62,7 @@ parser first tranche の actual code anchor は次である。
 
 - stage 3 request / predicate reconnect
 - fixed-subset source-sample authoring / bless / regression policy
-- syntax-backed sample runner と sample ごとの verification ladder
+- source target only row `e1` / `e3` / `e21` の authored-set widen timing
 - concrete theorem / model-check tool binding
 - perform head final public parser API
 - span-rich diagnostics と final grammar
@@ -122,14 +122,17 @@ actual parser-to-`Program` lowering first cut も fixed 済みであり、`mir_r
 `specs/examples/321...322` により、
 syntax-backed sample runner first cut も fixed 済みであり、`mir_runtime::current_l2::run_current_l2_source_sample` と `resolve_current_l2_source_sample_path` を helper-local thin wrapper に置き、accepted sample set 内の explicit path / sample stem shorthand と explicit `FixtureHostPlan` input だけを current cut に残した。
 
+`specs/examples/323...324` により、
+verification ladder wiring も fixed 済みであり、first authored trio `e2` / `e4` / `e23` にだけ reached-stage row を付け、`e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読んだ。`e1` / `e3` / `e21` は source target only / not yet authored row として残した。
+
 current mainline は、
-**Phase 6 verification ladder wiring**
+**Phase 6 source-sample authoring / bless / regression policy**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- sample ごとの `static gate` / `interpreter` / `formal hook` ladder
 - source-sample authoring / bless policy
+- deferred authored row `e1` / `e3` / `e21` の widen timing
 
 を揃えるのが主眼になる。
 

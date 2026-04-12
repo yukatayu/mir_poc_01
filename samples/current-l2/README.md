@@ -44,7 +44,7 @@ current first matrix は、representative prose / fixture corpus / source target
 
 - `e3` は plain `E3` ではなく fixture-side `source_example_id = E3-variant` を mirror する。
 - `e23` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row はまだない。
-- current matrix では source target path だけを固定し、actual reached stage や bless policy はまだ埋め込まない。
+- current matrix 自体は source target path までを固定し、reached stage inventory は下の ladder row に分けて持つ。
 
 ## current authored files
 
@@ -52,6 +52,23 @@ current first matrix は、representative prose / fixture corpus / source target
 - `e1` / `e3` / `e21` は current matrix 上の target path を維持しつつ、runner / ladder task で actualization 順を決める。
 - current lowerer first cut は single-line `require` / `ensure` と inline `admit` fragment を受け、multiline clause suite は fail-closed に止める。
 - current runner first cut は accepted sample set 内の explicit path と sample stem shorthand を受け、host plan は explicit input に留める。
+
+## current verification ladder
+
+current reached-stage inventory は first authored trio `e2` / `e4` / `e23` にだけ付ける。
+
+| sample stem | authored status | static gate | interpreter | formal hook | evidence route |
+|---|---|---|---|---|---|
+| `e2-try-fallback` | `source-authored` | `reached(valid)` | `reached(success)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
+| `e4-malformed-lineage` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
+| `e23-malformed-try-fallback-missing-fallback-body` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
+| `e1-place-atomic-cut` | `source-target-only` | `not yet authored` | `not yet authored` | `not yet authored` | source target path only |
+| `e3-option-admit-chain` | `source-target-only` | `not yet authored` | `not yet authored` | `not yet authored` | source target path only |
+| `e21-try-atomic-cut-frontier` | `source-target-only` | `not yet authored` | `not yet authored` | `not yet authored` | source target path only |
+
+- `formal hook` reached は current package では source-runner-native artifact ではなく、fixture-aligned detached artifact route を使う。
+- `runtime_try_cut_cluster` と `fixture_static_cluster` は tool-neutral formal hook の current top であり、concrete theorem/model-check tool choice はまだ混ぜない。
+- `source-target-only` は failure ではなく、current authored set 外の deferred authored row を意味する。
 
 ## non-goals
 
@@ -62,5 +79,5 @@ current first matrix は、representative prose / fixture corpus / source target
 
 ## next steps
 
-- verification ladder へ接続する
 - source-sample authoring / bless policy を narrow に閉じる
+- deferred authored row の widen timing を current policy task で整理する

@@ -29,6 +29,7 @@
 - capability mismatch は formal subreason にせず narrative explanation に留める
 - compact syntax 比較の結果、**explicit edge-row family** を current L2 companion notation として維持する
 - Phase 6 front-half では stage 1 / stage 2 parser carrier、checker/runtime thin skeleton、theorem-line整合の tool-neutral formal hook first trancheまで fixed 済みである
+- first authored source sample trio `e4` / `e2` / `e23` の verification ladder も fixed 済みであり、`e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読む
 
 ### まだ未決のもの
 
@@ -70,7 +71,7 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- verification ladder と source-sample authoring policy を整理する
+- source-sample authoring policy を整理する
 - checkpoint close fixed 後の snapshot を維持する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
@@ -81,8 +82,8 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| source-sample corpus scope/layout、mapping matrix、lowering、runner first cut は fixed 済みだが ladder / policy は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner は揃ったが、reached-stage inventory と bless policy は整理中 |
-| ladder / policy 未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner はあるが、source sample ごとの reached stage と更新フローはまだ薄い |
+| source-sample corpus scope/layout、mapping matrix、lowering、runner first cut、verification ladder first cut は fixed 済みだが policy は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner、first-trio reached-stage inventory は揃ったが、bless/update flow は整理中 |
+| policy 未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、first-trio ladder はあるが、source sample ごとの更新フローはまだ薄い |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
 | heavy future workstream 未着手 | 型・静的解析・定理証明・決定可能性はまだ本格着手前 |
@@ -94,8 +95,8 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| representative / source mapping / lowering / runner / ladder | 1〜3 task |
-| theorem-first concrete tool pilot | 2〜4 task |
+| source-sample authoring / bless policy | 1〜2 task |
+| theorem-first concrete tool pilot | 1〜3 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |
 

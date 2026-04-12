@@ -224,7 +224,9 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - parser bridge input と semantic `Program` の mismatch は fail-closed に止め、actual parser-to-`Program` lowering first cut では `lower_current_l2_fixed_source_text` を helper-local bridge として追加してよい
   - syntax-backed sample runner first cut では `run_current_l2_source_sample` と `resolve_current_l2_source_sample_path` を helper-local wrapper として追加してよく、sample argument は explicit path / stem shorthand、host plan は explicit input に留めてよい
   - source lowerer の accepted cluster は place / option / chain / perform / single-line clause / single try / `atomic_cut` / inline admit に留め、multiline clause suite、second try、final public runtime API は still later に残す
-  - runner report shape は `sample_id + sample_path + lowered + CurrentL2RuntimeSkeletonReport` に留め、reached stage inventory / bless policy / final public CLI は still later に残す
+  - runner report shape は `sample_id + sample_path + lowered + CurrentL2RuntimeSkeletonReport` に留める
+  - reached stage inventory は current package では docs-first + test-only ratchet に置き、runner 本体の public shape には still 混ぜない
+  - bless policy / final public CLI は still later に残す
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
   - Phase 6 front-half compile-ready verification / formal hook の thin CLI emitter
   - detached static gate artifact または detached bundle artifact を読み、tool-neutral formal hook artifact を JSON として出す
