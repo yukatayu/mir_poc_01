@@ -4,7 +4,8 @@ use mir_runtime::current_l2::{
     CurrentL2TryRollbackStructuralFindingKind, run_current_l2_source_sample,
 };
 use mir_semantics::{
-    EventKind, FixtureHostPlan, StaticGateVerdict, TerminalOutcome, load_bundle_from_fixture_path,
+    EventKind, FixtureHostPlan, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
+    load_bundle_from_fixture_path,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -102,6 +103,56 @@ fn current_l2_source_sample_runner_accepts_named_e21_sample() {
             EventKind::Rollback,
             EventKind::PerformSuccess,
         ]
+    );
+}
+
+#[test]
+fn current_l2_source_sample_runner_accepts_named_e3_sample() {
+    let bundle = load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
+    let report =
+        run_current_l2_source_sample("e3-option-admit-chain", bundle.host_plan.unwrap()).unwrap();
+
+    assert_eq!(report.sample_id, "e3-option-admit-chain");
+    assert_eq!(report.sample_path, sample_path("e3-option-admit-chain.txt"));
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert!(report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        report.runtime_report.run_report.trace_audit_sink.events,
+        vec![EventKind::PerformSuccess]
+    );
+    assert_eq!(
+        report
+            .runtime_report
+            .run_report
+            .trace_audit_sink
+            .non_admissible_metadata
+            .len(),
+        1
+    );
+    assert_eq!(
+        report
+            .runtime_report
+            .run_report
+            .trace_audit_sink
+            .non_admissible_metadata[0]
+            .option_ref,
+        "owner_writer"
+    );
+    assert_eq!(
+        report
+            .runtime_report
+            .run_report
+            .trace_audit_sink
+            .non_admissible_metadata[0]
+            .subreason,
+        NonAdmissibleSubreason::AdmitMiss
     );
 }
 

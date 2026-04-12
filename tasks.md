@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 21:52 JST
+最終更新: 2026-04-12 22:09 JST
 
 ## この文書について
 
@@ -16,39 +16,29 @@
 ## current checkpoint
 
 - legacy checkpoint としては、Phase 1〜5 closeout / freeze は fixed 済みである。
-- legacy Phase 6 front-half compile-ready checkpoint も fixed 済みであり、parser / checker-runtime / formal-hook / source-sample first packages / theorem-first review-unit pilot / plain bridge sketch first actualization / compare-ready bridge sketch second reopen までは current entry criteria と読んでよい。
+- legacy Phase 6 front-half compile-ready checkpoint も fixed 済みであり、parser / checker-runtime / formal-hook / source-sample first packages / theorem-first review-unit pilot / plain bridge sketch first actualization / compare-ready bridge sketch second reopen / actual `e3` authored-row actualization までは current entry criteria と読んでよい。
 - current macro phase としては、
   - `Macro 4` executable fixed-subset sample expansion
   - `Macro 5` theorem / verifier bridge
   が mainline である。
-- current promoted line は **actual `e3` authored-row reopen** であり、その後に
-  - proof / model-check first concrete tool pilot
+- current promoted line は **proof / model-check first concrete tool pilot** であり、その後に
   - second source-sample cluster sequencing
   - parser / checker / runtime public surface inventory
+  - Mirrorea / shared-space docs-first re-entry
   を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 4` | source-backed sample corpus | `S4 -> S5` | actual `e3` authored-row package | 1〜2 task / 数日 | 自走可能 |
-| 2 | `Macro 5` | external verifier bridge | `S2-S3 -> S4` | proof / model-check first concrete tool pilot | 1〜3 task / 1〜2週 | 自走可能 |
-| 3 | `Macro 4` | sample corpus widening | `S3-S4 -> S5` | second source-sample cluster sequencing after `e3` | 2〜4 task / 1〜2週 | 自走可能 |
-| 4 | `Macro 3-7` | public operational surface | `S1-S2 -> S3` | parser / checker / runtime public surface inventory | 2〜4 task / 1〜2週 | 一部自走可能 |
-| 5 | `Macro 6` | fabric / shared-space boundary | `S2-S3` 維持 | Mirrorea / shared-space docs-first re-entry package | 2〜5 task / 複数週 | boundary までは自走可能 |
+| 1 | `Macro 5` | external verifier bridge | `S2-S3 -> S4` | proof / model-check first concrete tool pilot | 1〜3 task / 1〜2週 | 自走可能 |
+| 2 | `Macro 4` | sample corpus widening | `S3-S4 -> S5` | second source-sample cluster sequencing after `e3` | 2〜4 task / 1〜2週 | 自走可能 |
+| 3 | `Macro 3-7` | public operational surface | `S1-S2 -> S3` | parser / checker / runtime public surface inventory | 2〜4 task / 1〜2週 | 一部自走可能 |
+| 4 | `Macro 6` | fabric / shared-space boundary | `S2-S3` 維持 | Mirrorea / shared-space docs-first re-entry package | 2〜5 task / 複数週 | boundary までは自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. actual `e3` authored-row package
-
-- macro phase
-  - `Macro 4`
-- 目的
-  - reopen timing fixed 後に `e3-option-admit-chain` を actual authored row に上げる最小 package を切る。
-- 完了条件
-  - theorem-side bridge line と formal-hook guard を壊さず、`e3` を current authored inventory と regression ladder に接続する。current formal-hook top widening は still later に残す。
-
-### Package 2. proof / model-check first concrete tool pilot
+### Package 1. proof / model-check first concrete tool pilot
 
 - macro phase
   - `Macro 5`
@@ -57,7 +47,7 @@
 - 完了条件
   - tool-neutral formal hook と current bridge sketch cut を壊さず、first concrete consumer pressure を narrow pilot に留める。
 
-### Package 3. second source-sample cluster sequencing after `e3`
+### Package 2. second source-sample cluster sequencing after `e3`
 
 - macro phase
   - `Macro 4`
@@ -66,7 +56,7 @@
 - 完了条件
   - settled subset の sample expansion と heavy feature expansion を混ぜず、next cluster を docs / fixture / source / regression の 4 層で切る。
 
-### Package 4. parser / checker / runtime public surface inventory
+### Package 3. parser / checker / runtime public surface inventory
 
 - macro phase
   - `Macro 3-7`
@@ -75,7 +65,7 @@
 - 完了条件
   - final public parser / checker / runtime API をまだ固定せず、どこまで helper-local に留めるかを docs-first に整理する。
 
-### Package 5. Mirrorea / shared-space docs-first re-entry
+### Package 4. Mirrorea / shared-space docs-first re-entry
 
 - macro phase
   - `Macro 6`
@@ -86,15 +76,15 @@
 
 ## 研究を通して見つけること
 
-### Discovery 1. `e3` authored-row の ladder shape
+### Discovery 1. proof / model-check first pilot の最小 carrier
 
 - 概要
-  - actual `e3` authored-row package で、どこまで reached-stage row を上げ、どこから still guarded に残すか。
+  - proof / model-check first concrete tool pilot で、tool-neutral formal hook / compare-ready bridge の後段に何を最小 carrier として置くか。
 - 何に影響するか
-  - current authored inventory
-  - regression helper / README ladder / formal-hook guard wording
+  - theorem / verifier bridge
+  - proof notebook / model-check handoff inventory
 - current recommendation
-  - **source row / runner / authored inventory / regression ladder を先に actualize し、current formal-hook top widening は still later に残す**。
+  - **row-local `proof_notebook_review_unit` current cut を起点に、bridge sketch や compare-bless metadata を混ぜず narrow concrete pilot を比較する**。
 
 ### Discovery 2. source-sample second cluster の順序
 
@@ -109,12 +99,12 @@
 ### Discovery 3. concrete theorem / model-check bridge の最小 carrier
 
 - 概要
-  - tool-neutral formal hook の後で、どの concrete tool cut を first pilot に置くか。
+  - proof notebook の後で、model-check side や public checker line をどの順で reopen するか。
 - 何に影響するか
   - public checker migration
   - retained artifact / bless policy
 - current recommendation
-  - **proof notebook current line を起点に、first concrete cut を narrow に切る**。
+  - **proof notebook current line を first pilot に維持し、model-check side と public checker migration はその後段に押し分ける**。
 
 ### Discovery 4. backend / public operational surface の timing
 

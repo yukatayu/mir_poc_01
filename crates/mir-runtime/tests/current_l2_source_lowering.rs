@@ -5,7 +5,8 @@ use mir_runtime::current_l2::{
     run_current_l2_runtime_skeleton,
 };
 use mir_semantics::{
-    EventKind, FixtureHostPlan, StaticGateVerdict, TerminalOutcome, load_bundle_from_fixture_path,
+    EventKind, FixtureHostPlan, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
+    load_bundle_from_fixture_path,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -128,6 +129,38 @@ fn current_l2_source_lowering_matches_e21_fixture_and_try_atomic_cut_frontier() 
             EventKind::Rollback,
             EventKind::PerformSuccess,
         ]
+    );
+}
+
+#[test]
+fn current_l2_source_lowering_matches_e3_fixture_and_admit_chain_runtime() {
+    let source = fs::read_to_string(sample_path("e3-option-admit-chain.txt")).unwrap();
+    let bundle = load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
+    let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
+    let report = run_current_l2_runtime_skeleton(
+        lowered.program,
+        bundle.host_plan.unwrap(),
+        Some(lowered.parser_bridge_input),
+    )
+    .unwrap();
+
+    assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
+    assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
+    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert!(report.run_report.entered_evaluation);
+    assert_eq!(report.run_report.terminal_outcome, Some(TerminalOutcome::Success));
+    assert_eq!(
+        report.run_report.trace_audit_sink.events,
+        vec![EventKind::PerformSuccess]
+    );
+    assert_eq!(report.run_report.trace_audit_sink.non_admissible_metadata.len(), 1);
+    assert_eq!(
+        report.run_report.trace_audit_sink.non_admissible_metadata[0].option_ref,
+        "owner_writer"
+    );
+    assert_eq!(
+        report.run_report.trace_audit_sink.non_admissible_metadata[0].subreason,
+        NonAdmissibleSubreason::AdmitMiss
     );
 }
 

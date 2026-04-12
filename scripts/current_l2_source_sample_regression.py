@@ -60,12 +60,12 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         note="current authored runtime path",
     ),
     InventoryRow(
-        sample_stem="e21-try-atomic-cut-frontier",
+        sample_stem="e3-option-admit-chain",
         authored_status="source-authored",
         expected_static="valid",
         expected_runtime="success",
-        formal_hook="runtime_try_cut_cluster",
-        note="second widened authored row runtime path",
+        formal_hook="not_reached_guarded",
+        note="third widened authored row runtime path; formal hook stays guarded",
     ),
     InventoryRow(
         sample_stem="e4-malformed-lineage",
@@ -76,20 +76,20 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         note="current authored static stop",
     ),
     InventoryRow(
+        sample_stem="e21-try-atomic-cut-frontier",
+        authored_status="source-authored",
+        expected_static="valid",
+        expected_runtime="success",
+        formal_hook="runtime_try_cut_cluster",
+        note="second widened authored row runtime path",
+    ),
+    InventoryRow(
         sample_stem="e23-malformed-try-fallback-missing-fallback-body",
         authored_status="source-authored",
         expected_static="malformed",
         expected_runtime="not_evaluated",
         formal_hook="fixture_static_cluster",
         note="current authored static stop",
-    ),
-    InventoryRow(
-        sample_stem="e3-option-admit-chain",
-        authored_status="source-target-only",
-        expected_static="not_yet_authored",
-        expected_runtime="not_yet_authored",
-        formal_hook="not_yet_authored",
-        note="deferred authored row",
     ),
 )
 

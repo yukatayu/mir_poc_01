@@ -653,6 +653,10 @@
   - compare-ready bridge sketch second reopen fixed 後の次段として、deferred `e3` actualization を concrete tool pilot より前に reopen する timing をどう切るかを整理する補助文書。
 - `specs/examples/344-current-l2-deferred-e3-actualization-reopen-timing-ready-minimal-deferred-e3-actualization-reopen-threshold.md`
   - deferred `e3` actualization reopen timing の minimum を `timing_kind + entry_criteria_refs + current_guard_refs + next_actualization_refs + kept_later_refs` に留める補助文書。
+- `specs/examples/345-current-l2-minimal-deferred-e3-actualization-reopen-ready-actual-e3-authored-row-reopen-comparison.md`
+  - deferred `e3` actualization reopen timing fixed 後の次段として、`e3-option-admit-chain` を source-authored row / runner / regression inventory / verification ladder へ narrow actualize しつつ、formal hook を guarded に保つ cut を整理する補助文書。
+- `specs/examples/346-current-l2-actual-e3-authored-row-reopen-ready-minimal-actual-e3-authored-row-threshold.md`
+  - actual `e3` authored-row actualization の minimum を `actualization_kind + entry_criteria_refs + actualized_row + reached_stage_refs + guard_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

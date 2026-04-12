@@ -13,16 +13,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 ## immediate execution order
 
-### 1. actual `e3` authored-row reopen
-
-- macro phase
-  - `Macro 4`
-- rough weight
-  - 中
-- rough 所要
-  - 1〜2 task / 数日
-
-### 2. proof / model-check first concrete tool pilot
+### 1. proof / model-check first concrete tool pilot
 
 - macro phase
   - `Macro 5`
@@ -31,7 +22,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 - rough 所要
   - 1〜3 task / 1〜2週
 
-### 3. second source-sample cluster sequencing
+### 2. second source-sample cluster sequencing
 
 - macro phase
   - `Macro 4`
@@ -51,6 +42,11 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 - `Macro 3-7`
 - current helper-local surface と later public surface の境界を inventory 化する。
+
+### Mirrorea / shared-space docs-first re-entry
+
+- `Macro 6`
+- old `FutureWork` bucket に戻さず、fabric / shared-space line を独立 track として再開する。
 
 ## later gates
 

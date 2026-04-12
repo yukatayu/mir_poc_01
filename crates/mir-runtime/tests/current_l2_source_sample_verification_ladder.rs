@@ -100,6 +100,30 @@ fn verification_ladder_marks_e21_as_runtime_and_formal_hook_reached() {
 }
 
 #[test]
+fn verification_ladder_marks_e3_as_runtime_reached_but_formal_hook_guarded() {
+    let bundle = load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
+    let source_report =
+        run_current_l2_source_sample("e3-option-admit-chain", bundle.host_plan.clone().unwrap())
+            .unwrap();
+
+    assert_eq!(
+        source_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert!(source_report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+
+    let detached_bundle = build_detached_bundle_artifact(&bundle, &run_bundle(&bundle).unwrap());
+    let error =
+        build_formal_hook_from_detached_bundle_artifact(&detached_bundle).unwrap_err();
+
+    assert!(error.contains("runtime_try_cut_cluster"));
+}
+
+#[test]
 fn verification_ladder_marks_e4_as_static_stop_and_static_formal_hook_reached() {
     let source_report =
         run_current_l2_source_sample("e4-malformed-lineage", FixtureHostPlan::default()).unwrap();

@@ -1,0 +1,14 @@
+place root {
+  place session {
+    place profile_access {
+      option owner_writer on profile_doc capability write lease live admit owner_is(session_user)
+      option delegated_writer on profile_doc capability write lease live admit delegate_granted(session_user)
+
+      chain profile_ref = owner_writer
+      fallback delegated_writer @ lineage(owner_writer -> delegated_writer)
+
+      perform write_profile via profile_ref
+        require write
+    }
+  }
+}

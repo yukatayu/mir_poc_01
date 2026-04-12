@@ -48,27 +48,27 @@ current first matrix は、representative prose / fixture corpus / source target
 
 ## current authored files
 
-- actual source file として current repo にあるのは `e1-place-atomic-cut.txt`、`e2-try-fallback.txt`、`e21-try-atomic-cut-frontier.txt`、`e4-malformed-lineage.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の current authored quintet である。
-- `e3` は current matrix 上の target path を維持しつつ、remaining authored-row widen sequencing / guard line に置く。
+- actual source file として current repo にあるのは `e1-place-atomic-cut.txt`、`e2-try-fallback.txt`、`e3-option-admit-chain.txt`、`e21-try-atomic-cut-frontier.txt`、`e4-malformed-lineage.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の current authored sextet である。
+- `e3` は source row / runner / inventory / ladder までは actualize 済みだが、formal hook stage は current top guard により `not reached (guarded)` に留める。
 - current lowerer first cut は single-line `require` / `ensure` と inline `admit` fragment を受け、multiline clause suite は fail-closed に止める。
 - current runner first cut は accepted sample set 内の explicit path と sample stem shorthand を受け、host plan は explicit input に留める。
 
 ## current verification ladder
 
-current reached-stage inventory は current authored quintet `e1` / `e2` / `e21` / `e4` / `e23` に付ける。
+current reached-stage inventory は current authored sextet `e1` / `e2` / `e3` / `e21` / `e4` / `e23` に付ける。
 
 | sample stem | authored status | static gate | interpreter | formal hook | evidence route |
 |---|---|---|---|---|---|
 | `e1-place-atomic-cut` | `source-authored` | `reached(valid)` | `reached(explicit_failure)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
 | `e2-try-fallback` | `source-authored` | `reached(valid)` | `reached(success)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
+| `e3-option-admit-chain` | `source-authored` | `reached(valid)` | `reached(success)` | `not reached (guarded)` | `current_l2_source_sample_runner` + guarded detached-bundle rejection evidence |
 | `e21-try-atomic-cut-frontier` | `source-authored` | `reached(valid)` | `reached(success)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
 | `e4-malformed-lineage` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e23-malformed-try-fallback-missing-fallback-body` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
-| `e3-option-admit-chain` | `source-target-only` | `not yet authored` | `not yet authored` | `not yet authored` | source target path only |
 
 - `formal hook` reached は current package では source-runner-native artifact ではなく、fixture-aligned detached artifact route を使う。
 - `runtime_try_cut_cluster` と `fixture_static_cluster` は tool-neutral formal hook の current top であり、concrete theorem/model-check tool choice はまだ混ぜない。
-- `source-target-only` は failure ではなく、current authored set 外の deferred authored row を意味する。
+- `not reached (guarded)` は failure ではなく、`e3` runtime bundle が current `runtime_try_cut_cluster` family の外にあるため、formal hook widening を still later に残していることを意味する。
 - current authoring / bless / regression flow は [.docs/current-l2-source-sample-authoring-policy.md](/home/yukatayu/dev/mir_poc_01/.docs/current-l2-source-sample-authoring-policy.md) と `python3 scripts/current_l2_source_sample_regression.py inventory|regression` を基準にする。
 - theorem-first concrete pilot current cut では、tool-neutral formal hook artifact を入力にする `proof_notebook_review_unit` consumer を non-production helper/example に留める。
 
@@ -82,12 +82,12 @@ current reached-stage inventory は current authored quintet `e1` / `e2` / `e21`
 ## current authoring flow
 
 - source sample を更新するときは source text / fixture mapping / matrix / ladder / snapshot docs を同じ task で揃える。
-- `python3 scripts/current_l2_source_sample_regression.py inventory` は current authored quintet の file presence と deferred row absence を確認する。
-- `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` は current authored quintet の lowering / runner / ladder / formal-hook smoke bundle を流す。
+- `python3 scripts/current_l2_source_sample_regression.py inventory` は current authored sextet の file presence と guarded row status を確認する。
+- `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` は current authored sextet の lowering / runner / ladder bundle を流し、formal-hook smoke sub-bundleは current top に入る 5 row だけへ留める。
 - current `bless` は retained artifact archive ではなく、review 済み repo-local sync と regression success の確認を意味する。
 
 ## next steps
 
-- current next line は actual `e3` authored-row reopen である
-- その後に proof / model-check first concrete tool pilot を置く
+- current next line は proof / model-check first concrete tool pilot である
 - second source-sample cluster sequencing はその後段に残す
+- parser / checker / runtime public surface inventory はさらにその次段に置く

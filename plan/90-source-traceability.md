@@ -2068,6 +2068,20 @@
   - `specs/examples/344-current-l2-deferred-e3-actualization-reopen-timing-ready-minimal-deferred-e3-actualization-reopen-threshold.md`
   - `docs/reports/0649-phase6-deferred-e3-actualization-reopen-timing-package.md`
 
+### 2026-04-12 phase6 actual e3 authored-row actualization addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`.docs/current-l2-source-sample-authoring-policy.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `samples/current-l2/e3-option-admit-chain.txt`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`
+  - `specs/examples/345-current-l2-minimal-deferred-e3-actualization-reopen-ready-actual-e3-authored-row-reopen-comparison.md`
+  - `specs/examples/346-current-l2-actual-e3-authored-row-reopen-ready-minimal-actual-e3-authored-row-threshold.md`
+  - `docs/reports/0650-phase6-actual-e3-authored-row-package.md`
+
 ### 2026-04-12 phase6 source-sample corpus scope and layout addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/15-current-l2-fixture-authoring-template.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

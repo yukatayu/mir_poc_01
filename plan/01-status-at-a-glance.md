@@ -37,17 +37,16 @@
 ## current capability snapshot
 
 - parser-free current L2 PoC は runnable。
-- current authored source sample quintet `e1` / `e2` / `e21` / `e4` / `e23` は runnable ladder に接続済みである。
+- current authored source sample sextet `e1` / `e2` / `e3` / `e21` / `e4` / `e23` は runnable ladder に接続済みであり、`e3` は formal hook stage だけ guarded に残す。
 - tool-neutral formal hook と `proof_notebook_review_unit` first pilot はある。
 - plain theorem-side bridge sketch first actualization と compare-ready bridge sketch second reopen もある。
-- `e3` は source target only / deferred authored row のままである。
 
 ## current mainline
 
-1. actual `e3` authored-row reopen
-2. proof / model-check first concrete tool pilot
-3. second source-sample cluster sequencing
-4. parser / checker / runtime public surface inventory
+1. proof / model-check first concrete tool pilot
+2. second source-sample cluster sequencing
+3. parser / checker / runtime public surface inventory
+4. Mirrorea / shared-space docs-first re-entry
 
 ## biggest later gates
 

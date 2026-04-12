@@ -74,10 +74,10 @@
 
 ## current mainline
 
-1. `Macro 4` actual `e3` authored-row reopen
-2. `Macro 5` proof / model-check first concrete tool pilot
-3. `Macro 4` second source-sample cluster sequencing
-4. `Macro 3-7` parser / checker / runtime public surface inventory
+1. `Macro 5` proof / model-check first concrete tool pilot
+2. `Macro 4` second source-sample cluster sequencing
+3. `Macro 3-7` parser / checker / runtime public surface inventory
+4. `Macro 6` Mirrorea / shared-space docs-first re-entry
 
 ## current stop lines
 

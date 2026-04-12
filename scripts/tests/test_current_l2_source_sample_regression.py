@@ -20,26 +20,27 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
             [
                 "e1-place-atomic-cut",
                 "e2-try-fallback",
-                "e21-try-atomic-cut-frontier",
-                "e4-malformed-lineage",
-                "e23-malformed-try-fallback-missing-fallback-body",
                 "e3-option-admit-chain",
+                "e4-malformed-lineage",
+                "e21-try-atomic-cut-frontier",
+                "e23-malformed-try-fallback-missing-fallback-body",
             ],
         )
         self.assertEqual(
-            [row.authored_status for row in rows[:5]],
+            [row.authored_status for row in rows[:6]],
             [
                 "source-authored",
                 "source-authored",
                 "source-authored",
                 "source-authored",
                 "source-authored",
+                "source-authored",
             ],
         )
-        self.assertEqual([row.authored_status for row in rows[5:]], ["source-target-only"])
+        self.assertEqual(rows[2].formal_hook, "not_reached_guarded")
         self.assertEqual(rows[0].formal_hook, "runtime_try_cut_cluster")
-        self.assertEqual(rows[2].formal_hook, "runtime_try_cut_cluster")
         self.assertEqual(rows[3].formal_hook, "fixture_static_cluster")
+        self.assertEqual(rows[4].formal_hook, "runtime_try_cut_cluster")
 
     def test_inventory_statuses_mark_current_repo_layout_as_consistent(self) -> None:
         statuses = regression.inventory_statuses()
@@ -47,7 +48,7 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertTrue(all(status.status_ok for status in statuses))
         self.assertEqual(
             [status.file_exists for status in statuses],
-            [True, True, True, True, True, False],
+            [True, True, True, True, True, True],
         )
 
     def test_format_inventory_text_includes_header_rows_and_file_state(self) -> None:
@@ -56,13 +57,14 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertIn("current L2 fixed-subset first-cluster inventory", rendered)
         self.assertIn("sample stem | authored status | expected static", rendered)
         self.assertIn("e1-place-atomic-cut | source-authored | valid | explicit_failure", rendered)
+        self.assertIn("e3-option-admit-chain | source-authored | valid | success", rendered)
         self.assertIn(
             "e21-try-atomic-cut-frontier | source-authored | valid | success",
             rendered,
         )
         self.assertIn("e2-try-fallback | source-authored | valid | success", rendered)
-        self.assertIn("present | second widened authored row runtime path", rendered)
-        self.assertIn("e3-option-admit-chain | source-target-only | not_yet_authored", rendered)
+        self.assertIn("present | third widened authored row runtime path", rendered)
+        self.assertIn("not_reached_guarded", rendered)
 
     def test_inventory_mismatches_reports_missing_authored_sample(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -70,6 +72,7 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
             authored = [
                 "e1-place-atomic-cut",
                 "e2-try-fallback",
+                "e3-option-admit-chain",
                 "e21-try-atomic-cut-frontier",
                 "e4-malformed-lineage",
             ]
@@ -197,7 +200,7 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr.getvalue(), "")
         self.assertIn("e4-malformed-lineage", stdout.getvalue())
-        self.assertIn("source-target-only", stdout.getvalue())
+        self.assertIn("not_reached_guarded", stdout.getvalue())
         self.assertIn("present", stdout.getvalue())
 
     def test_main_inventory_reports_mismatch_from_custom_sample_root(self) -> None:

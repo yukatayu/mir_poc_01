@@ -18,8 +18,8 @@ current meaning は、
 
 ## current scope
 
-- current authored source sample は `e1` / `e2` / `e21` / `e4` / `e23` の authored quintet に留める。
-- `e3` は source target only / not yet authored row であり、remaining widen sequencing / guard line に置く。
+- current authored source sample は `e1` / `e2` / `e3` / `e21` / `e4` / `e23` の authored sextet に置く。
+- `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
@@ -48,7 +48,7 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e4-malformed-lineage ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
 
-helper は current authored quintet だけを対象にし、deferred row を widen しない。
+helper は current authored sextet を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
 
 ## current non-goals
