@@ -23,6 +23,7 @@
   - syntax-backed runner
   - bless / regression policy
   を別 task chain として整理してから template 化するのが current first choice である。
+- source text sample 側の current practical flow は `.docs/current-l2-source-sample-authoring-policy.md` と `scripts/current_l2_source_sample_regression.py` を参照し、この fixture template へ取り込まない。
 - したがって、source text sample を増やしたいときでも、現時点ではこの文書をそのまま拡張して final template と誤読しない。
 
 ## fixture authoring の最小 checklist

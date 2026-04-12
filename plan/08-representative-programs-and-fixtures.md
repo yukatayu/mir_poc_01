@@ -55,6 +55,10 @@
   - `e2` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e4` / `e23` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
   - `e1` / `e3` / `e21` は `source-target-only / not yet authored` として保持し、failure 扱いしない。
+- source-sample authoring policy current cut では、repo-local flow を `.docs/current-l2-source-sample-authoring-policy.md` と `scripts/current_l2_source_sample_regression.py` に寄せる。
+  - `inventory` は first authored trio の file presence と deferred row absence を確認する。
+  - `regression` は lowering / runner / ladder / formal-hook smoke bundle を current authored trio だけに流す。
+  - current `bless` は retained artifact archive ではなく、source / fixture / matrix / ladder / snapshot docs の reviewed sync と regression success を意味する。
 
 ## fixture 一覧
 

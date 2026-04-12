@@ -227,6 +227,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - runner report shape は `sample_id + sample_path + lowered + CurrentL2RuntimeSkeletonReport` に留める
   - reached stage inventory は current package では docs-first + test-only ratchet に置き、runner 本体の public shape には still 混ぜない
   - bless policy / final public CLI は still later に残す
+- `scripts/current_l2_source_sample_regression.py`
+  - Phase 6 source-sample authoring / bless policy current cut の repo-local helper
+  - current fixed-subset first cluster inventory と first authored trio regression bundleだけを扱う
+  - public runner CLI、retained artifact bless/update、authored row widen timing は扱わない
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
   - Phase 6 front-half compile-ready verification / formal hook の thin CLI emitter
   - detached static gate artifact または detached bundle artifact を読み、tool-neutral formal hook artifact を JSON として出す

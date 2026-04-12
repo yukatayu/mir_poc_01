@@ -243,6 +243,15 @@
   - `crates/mir-runtime/Cargo.toml`
   - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
 
+## 2026-04-12 Phase 6 source-sample authoring bless regression policy addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/15-current-l2-fixture-authoring-template.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/325-current-l2-verification-ladder-wiring-ready-source-sample-authoring-bless-regression-policy-comparison.md`
+  - `specs/examples/326-current-l2-source-sample-authoring-bless-regression-policy-ready-minimal-source-sample-authoring-bless-regression-policy-threshold.md`
+  - `docs/reports/0629-phase6-source-sample-authoring-bless-regression-policy.md`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`
+
 ## 2026-04-12 Phase 6 checker/runtime first tranche addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

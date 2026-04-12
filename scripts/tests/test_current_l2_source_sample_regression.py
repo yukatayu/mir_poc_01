@@ -37,15 +37,43 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertEqual(rows[0].formal_hook, "runtime_try_cut_cluster")
         self.assertEqual(rows[1].formal_hook, "fixture_static_cluster")
 
-    def test_format_inventory_text_includes_header_and_rows(self) -> None:
-        rendered = regression.format_inventory_text(regression.inventory_rows())
+    def test_inventory_statuses_mark_current_repo_layout_as_consistent(self) -> None:
+        statuses = regression.inventory_statuses()
+
+        self.assertTrue(all(status.status_ok for status in statuses))
+        self.assertEqual(
+            [status.file_exists for status in statuses],
+            [True, True, True, False, False, False],
+        )
+
+    def test_format_inventory_text_includes_header_rows_and_file_state(self) -> None:
+        rendered = regression.format_inventory_text(regression.inventory_statuses())
 
         self.assertIn("current L2 fixed-subset first-cluster inventory", rendered)
         self.assertIn("sample stem | authored status | expected static", rendered)
         self.assertIn("e2-try-fallback | source-authored | valid | success", rendered)
+        self.assertIn("present | first authored trio runtime path", rendered)
         self.assertIn(
             "e21-try-atomic-cut-frontier | source-target-only | not_yet_authored",
             rendered,
+        )
+
+    def test_inventory_mismatches_reports_missing_authored_sample(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            sample_root = Path(temp_dir)
+            authored = ["e2-try-fallback", "e4-malformed-lineage"]
+            for stem in authored:
+                (sample_root / f"{stem}.txt").write_text("placeholder\n", encoding="utf-8")
+
+            mismatches = regression.inventory_mismatches(
+                regression.inventory_statuses(sample_root)
+            )
+
+        self.assertEqual(
+            mismatches,
+            [
+                "e23-malformed-try-fallback-missing-fallback-body: expected sample file present, observed absent"
+            ],
         )
 
 
@@ -149,6 +177,24 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
         self.assertEqual(stderr.getvalue(), "")
         self.assertIn("e4-malformed-lineage", stdout.getvalue())
         self.assertIn("source-target-only", stdout.getvalue())
+        self.assertIn("present", stdout.getvalue())
+
+    def test_main_inventory_reports_mismatch_from_custom_sample_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            sample_root = Path(temp_dir)
+            (sample_root / "e2-try-fallback.txt").write_text("placeholder\n", encoding="utf-8")
+
+            stdout = io.StringIO()
+            stderr = io.StringIO()
+            exit_code = regression.main(
+                ["inventory", "--sample-root", str(sample_root)],
+                stdout=stdout,
+                stderr=stderr,
+            )
+
+        self.assertEqual(exit_code, 2)
+        self.assertIn("e23-malformed-try-fallback-missing-fallback-body", stderr.getvalue())
+        self.assertIn("observed absent", stderr.getvalue())
 
     def test_main_regression_uses_planned_commands(self) -> None:
         original_run_regression_commands = regression.run_regression_commands
@@ -185,6 +231,42 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
             captured_commands[4].argv[captured_commands[4].argv.index("--run-label") + 1],
             "phase6-helper-e2-try-fallback",
         )
+
+    def test_main_regression_rejects_inventory_mismatch_before_running_commands(self) -> None:
+        original_inventory_statuses = regression.inventory_statuses
+        stdout = io.StringIO()
+        stderr = io.StringIO()
+
+        def fake_inventory_statuses(sample_root=None):
+            return [
+                regression.InventoryStatus(
+                    row=regression.InventoryRow(
+                        sample_stem="e2-try-fallback",
+                        authored_status="source-authored",
+                        expected_static="valid",
+                        expected_runtime="success",
+                        formal_hook="runtime_try_cut_cluster",
+                        note="first authored trio runtime path",
+                    ),
+                    sample_path=Path("/tmp/e2-try-fallback.txt"),
+                    file_exists=False,
+                    status_ok=False,
+                )
+            ]
+
+        regression.inventory_statuses = fake_inventory_statuses
+        try:
+            exit_code = regression.main(
+                ["regression"],
+                stdout=stdout,
+                stderr=stderr,
+            )
+        finally:
+            regression.inventory_statuses = original_inventory_statuses
+
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(stdout.getvalue(), "")
+        self.assertIn("expected sample file present, observed absent", stderr.getvalue())
 
     def test_main_regression_rejects_invalid_run_label(self) -> None:
         stdout = io.StringIO()

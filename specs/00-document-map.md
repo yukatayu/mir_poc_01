@@ -613,6 +613,10 @@
   - syntax-backed sample runner first cut の次段として、first authored source sample trio と source target only row を分けたまま `static gate` / `interpreter` / `formal hook` reached stage inventory をどう切るかを比較する補助文書。
 - `specs/examples/324-current-l2-verification-ladder-wiring-ready-minimal-verification-ladder-wiring-threshold.md`
   - verification ladder wiring の minimum を `ladder_kind + fixed_entry_criteria_refs + authored_sample_rows + deferred_source_target_rows + guard_refs` に留める補助文書。
+- `specs/examples/325-current-l2-verification-ladder-wiring-ready-source-sample-authoring-bless-regression-policy-comparison.md`
+  - verification ladder wiring fixed 後の次段として、source-sample authoring / bless / regression flow を manual review + repo-local helper にどう切るかを比較する補助文書。
+- `specs/examples/326-current-l2-source-sample-authoring-bless-regression-policy-ready-minimal-source-sample-authoring-bless-regression-policy-threshold.md`
+  - source-sample authoring / bless / regression policy の minimum を `policy_kind + authored_rows + deferred_rows + authoring_step_refs + regression_step_refs + bless_reading + guard_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

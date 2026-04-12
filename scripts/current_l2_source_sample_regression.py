@@ -34,6 +34,14 @@ class RegressionCommand:
     argv: tuple[str, ...]
 
 
+@dataclass(frozen=True)
+class InventoryStatus:
+    row: InventoryRow
+    sample_path: Path
+    file_exists: bool
+    status_ok: bool
+
+
 CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
     InventoryRow(
         sample_stem="e2-try-fallback",
@@ -90,18 +98,47 @@ def inventory_rows() -> list[InventoryRow]:
     return list(CURRENT_FIXED_SUBSET_FIRST_CLUSTER)
 
 
-def format_inventory_text(rows: Sequence[InventoryRow]) -> str:
+def default_sample_root() -> Path:
+    return REPO_ROOT / "samples" / "current-l2"
+
+
+def sample_path(sample_root: Path, sample_stem: str) -> Path:
+    return sample_root / f"{sample_stem}.txt"
+
+
+def inventory_statuses(sample_root: Path | None = None) -> list[InventoryStatus]:
+    root = sample_root or default_sample_root()
+    statuses: list[InventoryStatus] = []
+    for row in inventory_rows():
+        path = sample_path(root, row.sample_stem)
+        exists = path.is_file()
+        expected_exists = row.authored_status == "source-authored"
+        statuses.append(
+            InventoryStatus(
+                row=row,
+                sample_path=path,
+                file_exists=exists,
+                status_ok=exists == expected_exists,
+            )
+        )
+    return statuses
+
+
+def format_inventory_text(statuses: Sequence[InventoryStatus]) -> str:
     header = (
         "sample stem | authored status | expected static | "
-        "expected runtime | formal hook | note"
+        "expected runtime | formal hook | file state | note"
     )
     divider = "-" * len(header)
     body = [
         (
-            f"{row.sample_stem} | {row.authored_status} | {row.expected_static} | "
-            f"{row.expected_runtime} | {row.formal_hook} | {row.note}"
+            f"{status.row.sample_stem} | {status.row.authored_status} | "
+            f"{status.row.expected_static} | {status.row.expected_runtime} | "
+            f"{status.row.formal_hook} | "
+            f"{'present' if status.file_exists else 'absent'}"
+            f"{'' if status.status_ok else ' (mismatch)'} | {status.row.note}"
         )
-        for row in rows
+        for status in statuses
     ]
     return "\n".join(
         [
@@ -133,6 +170,23 @@ def effective_run_label(label: str | None) -> str:
 
 def smoke_run_label(base_label: str, sample_stem: str) -> str:
     return ensure_run_label(f"{ensure_run_label(base_label)}-{sample_stem}")
+
+
+def inventory_mismatches(statuses: Sequence[InventoryStatus]) -> list[str]:
+    mismatches: list[str] = []
+    for status in statuses:
+        if status.status_ok:
+            continue
+        expected = (
+            "present"
+            if status.row.authored_status == "source-authored"
+            else "absent"
+        )
+        observed = "present" if status.file_exists else "absent"
+        mismatches.append(
+            f"{status.row.sample_stem}: expected sample file {expected}, observed {observed}"
+        )
+    return mismatches
 
 
 def plan_regression_commands(
@@ -242,12 +296,33 @@ def run_regression_commands(
     return 0
 
 
-def command_inventory(_args: argparse.Namespace, stdout = sys.stdout) -> int:
-    print(format_inventory_text(inventory_rows()), file=stdout)
+def command_inventory(
+    args: argparse.Namespace,
+    stdout = sys.stdout,
+    stderr = sys.stderr,
+) -> int:
+    statuses = inventory_statuses(Path(args.sample_root))
+    print(format_inventory_text(statuses), file=stdout)
+    mismatches = inventory_mismatches(statuses)
+    if mismatches:
+        for mismatch in mismatches:
+            print(mismatch, file=stderr)
+        return 2
     return 0
 
 
-def command_regression(args: argparse.Namespace, stdout = sys.stdout) -> int:
+def command_regression(
+    args: argparse.Namespace,
+    stdout = sys.stdout,
+    stderr = sys.stderr,
+) -> int:
+    statuses = inventory_statuses()
+    mismatches = inventory_mismatches(statuses)
+    if mismatches:
+        for mismatch in mismatches:
+            print(mismatch, file=stderr)
+        return 2
+
     commands = plan_regression_commands(
         artifact_root=Path(args.artifact_root),
         run_label=args.run_label,
@@ -268,6 +343,11 @@ def build_parser() -> argparse.ArgumentParser:
     inventory_parser = subparsers.add_parser(
         "inventory",
         help="print the current authored/deferred fixed-subset inventory",
+    )
+    inventory_parser.add_argument(
+        "--sample-root",
+        default=str(default_sample_root()),
+        help="source-sample root directory to inspect",
     )
     inventory_parser.set_defaults(handler=command_inventory)
 
@@ -294,7 +374,7 @@ def main(argv: Sequence[str] | None = None, stdout = sys.stdout, stderr = sys.st
     parser = build_parser()
     try:
         args = parser.parse_args(list(argv) if argv is not None else None)
-        return args.handler(args, stdout=stdout)
+        return args.handler(args, stdout=stdout, stderr=stderr)
     except ValueError as error:
         print(f"error: {error}", file=stderr)
         return 2

@@ -62,8 +62,9 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- source-sample authoring / bless policy
 - theorem-first concrete tool pilot
+- drift suppression / mirror sweep
+- deferred authored-row widen sequencing
 
 ### その次のフェーズ
 

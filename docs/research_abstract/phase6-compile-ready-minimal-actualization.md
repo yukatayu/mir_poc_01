@@ -61,7 +61,6 @@ parser first tranche の actual code anchor は次である。
 ## まだ fixed していないこと
 
 - stage 3 request / predicate reconnect
-- fixed-subset source-sample authoring / bless / regression policy
 - source target only row `e1` / `e3` / `e21` の authored-set widen timing
 - concrete theorem / model-check tool binding
 - perform head final public parser API
@@ -125,13 +124,16 @@ syntax-backed sample runner first cut も fixed 済みであり、`mir_runtime::
 `specs/examples/323...324` により、
 verification ladder wiring も fixed 済みであり、first authored trio `e2` / `e4` / `e23` にだけ reached-stage row を付け、`e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読んだ。`e1` / `e3` / `e21` は source target only / not yet authored row として残した。
 
+`specs/examples/325...326` により、
+source-sample authoring / bless / regression policy も fixed 済みであり、`.docs/current-l2-source-sample-authoring-policy.md` と `python3 scripts/current_l2_source_sample_regression.py` を current repo-local policy anchor に置き、`bless` の current meaning を source / fixture / matrix / ladder / snapshot docs の reviewed sync と regression success に留めた。
+
 current mainline は、
-**Phase 6 source-sample authoring / bless / regression policy**
+**Phase 6 theorem-first concrete tool pilot**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- source-sample authoring / bless policy
+- theorem-first concrete tool pilot
 - deferred authored row `e1` / `e3` / `e21` の widen timing
 
 を揃えるのが主眼になる。
