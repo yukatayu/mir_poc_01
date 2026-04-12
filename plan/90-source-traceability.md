@@ -2082,6 +2082,15 @@
   - `specs/examples/346-current-l2-actual-e3-authored-row-reopen-ready-minimal-actual-e3-authored-row-threshold.md`
   - `docs/reports/0650-phase6-actual-e3-authored-row-package.md`
 
+### 2026-04-12 phase6 proof-model-check first concrete tool pilot addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs`
+  - `crates/mir-semantics/tests/current_l2_proof_notebook_review_unit_support.rs`
+  - `specs/examples/347-current-l2-minimal-actual-e3-authored-row-ready-proof-model-check-first-concrete-tool-pilot-comparison.md`
+  - `specs/examples/348-current-l2-proof-model-check-first-concrete-tool-pilot-ready-minimal-proof-model-check-first-concrete-tool-pilot-threshold.md`
+  - `docs/reports/0651-phase6-proof-model-check-first-concrete-tool-pilot-package.md`
+
 ### 2026-04-12 phase6 source-sample corpus scope and layout addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/15-current-l2-fixture-authoring-template.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

@@ -126,10 +126,10 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. proof / model-check first concrete tool pilot
-2. second source-sample cluster sequencing after `e3`
-3. parser / checker / runtime public surface inventory
-4. Mirrorea / shared-space docs-first re-entry
+1. second source-sample cluster sequencing after `e3`
+2. parser / checker / runtime public surface inventory
+3. Mirrorea / shared-space docs-first re-entry
+4. model-check / public-checker second reserve inventory
 
 これは主に `Macro 4` と `Macro 5` の line である。
 

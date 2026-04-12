@@ -13,16 +13,7 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 ## immediate execution order
 
-### 1. proof / model-check first concrete tool pilot
-
-- macro phase
-  - `Macro 5`
-- rough weight
-  - 中〜やや重い
-- rough 所要
-  - 1〜3 task / 1〜2週
-
-### 2. second source-sample cluster sequencing
+### 1. second source-sample cluster sequencing
 
 - macro phase
   - `Macro 4`
@@ -47,6 +38,11 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 - `Macro 6`
 - old `FutureWork` bucket に戻さず、fabric / shared-space line を独立 track として再開する。
+
+### model-check / public-checker second reserve inventory
+
+- `Macro 5`
+- proof notebook first concrete cut の後で machine-facing carrier をどこから reopen するかを整理する。
 
 ## later gates
 

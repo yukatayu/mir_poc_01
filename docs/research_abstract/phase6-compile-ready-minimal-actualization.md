@@ -176,7 +176,7 @@ deferred `e3` actualization reopen timing も fixed 済みであり、compare-re
 actual `e3` authored-row actualization も fixed 済みであり、`e3-option-admit-chain` を helper-compatible inline-`admit` source row、runner accepted set、regression helper current authored inventory、README ladder へ narrow actualize し、`static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = not reached (guarded)` の current cut に置いた。`admit-miss` は non-admissible skip に留め、new formal-hook family と theorem/model-check concrete binding は still later に残す。
 
 current mainline は、
-**Phase 6 proof / model-check first concrete tool pilot**
+**Phase 6 second source-sample cluster sequencing**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -185,7 +185,7 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- proof / model-check first concrete tool pilot
+- second source-sample cluster sequencing
 
 を揃えるのが主眼になる。
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 22:09 JST
+最終更新: 2026-04-12 22:21 JST
 
 ## この文書について
 
@@ -39,7 +39,7 @@
 | `Macro 2` | 97% | parser-free validation substrate | late | 自走可能 | parser-free PoC と detached validation loop は runnable |
 | `Macro 3` | 90% | compile-ready minimal actualization | late | 自走可能 | parser / checker / runtime / formal-hook の non-production minimal cut は揃った |
 | `Macro 4` | 69% | executable fixed-subset sample expansion | active | 自走可能 | current authored sextet runnable。`e3` は formal-hook guarded 付きで ladder に乗ったので、次は second cluster sequencing |
-| `Macro 5` | 41% | static reasoning / theorem / model-check bridge | early | 一部自走可能 | tool-neutral formal hook、review-unit pilot、plain bridge sketch、compare-ready bridge sketch second reopen はあるが concrete tool binding は later |
+| `Macro 5` | 45% | static reasoning / theorem / model-check bridge | early | 一部自走可能 | proof notebook review-unit current cut を first concrete pilot に固定。model-check side は second reserve |
 | `Macro 6` | 22% | distributed fabric / shared-space / runtime evolution | docs-first boundary only | 境界までは自走可能 | Mirrorea / shared-space は boundary と practical cut が先。final catalog は user spec required |
 | `Macro 7` | 14% | toolchain / backend / developer surface | inventory only | 一部自走可能 | Rust-heavy direction はあるが、backend / public operational surface はまだ早い |
 | `Macro 8` | 5% | domain / application realization | not started | 要仕様確認 | 上位アプリの concrete goal が未確定 |
@@ -80,7 +80,7 @@
 | parser-free PoC / detached loop | 95% | 91% | 99% | late | runnable baseline と regression policy がある |
 | compile-ready parser / checker / runtime | 87% | 76% | 84% | late | non-production minimal tranche は揃った |
 | fixed-subset source samples | 88% | 90% | 88% | active | authored sextet runnable。next questionは second cluster widening |
-| theorem / verifier bridge | 79% | 74% | 45% | early | formal hook と proof notebook first bridge はある。`e3` は guarded non-reached row として接続済み |
+| theorem / verifier bridge | 81% | 76% | 47% | early | formal hook と proof notebook first bridge はある。proof notebook current cut を first concrete pilot に固定し、`e3` は guarded non-reached row として接続済み |
 | Mirrorea fabric boundary | 63% | 51% | 8% | docs-first | no-shadowing / overlay / patch discipline は整理済み |
 | shared-space boundary | 68% | 58% | 12% | docs-first | practical cut はあるが final catalog は user spec required |
 | Typed-Effect Wiring Platform | 34% | 26% | 4% | positioning only | subsystem boundary はあるが actual line は薄い |
@@ -89,14 +89,14 @@
 
 ## 現在の self-driven line
 
-1. **Macro 5 / proof-model-check first concrete tool pilot**
-   - `e3` reopen 後に concrete theorem / model-check side の最小 handoff pilot を比較する。
-2. **Macro 4 / second source-sample cluster sequencing**
+1. **Macro 4 / second source-sample cluster sequencing**
    - `e3` close 後に next source-sample family を narrow に順序づける。
-3. **Macro 3-7 / parser-checker-runtime public surface inventory**
+2. **Macro 3-7 / parser-checker-runtime public surface inventory**
    - helper-local current surface と later public operational surface の境界を narrow に inventory 化する。
-4. **Macro 6 / Mirrorea shared-space docs-first re-entry**
+3. **Macro 6 / Mirrorea shared-space docs-first re-entry**
    - old FutureWork bucket に押し込めず、fabric / shared-space line を独立 track として再開する。
+4. **Macro 5 / model-check public-checker second reserve inventory**
+   - proof notebook current cut の後で machine-facing carrier をどの境界から reopen するかを整理する。
 
 ## 研究で見つけることと、user が決めること
 
@@ -139,6 +139,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 22:21 JST — `docs/reports/0651` と `specs/examples/347...348` で proof / model-check first concrete tool pilot を閉じ、current first concrete carrier は row-local `proof_notebook_review_unit`、model-check side は second reserve に残す cut を再固定した。current line は second source-sample cluster sequencing に進んだ。
 - 2026-04-12 22:09 JST — `docs/reports/0650` と `specs/examples/345...346` で actual `e3` authored-row reopen を閉じ、`e3-option-admit-chain` を source-authored row、runner accepted set、regression inventory、verification ladder へ actualize しつつ、formal hook は `not reached (guarded)` に留める cut を固定した。current line は proof / model-check first concrete tool pilot に進んだ。
 - 2026-04-12 21:52 JST — `docs/reports/0649` と `specs/examples/343...344` で deferred `e3` actualization reopen timing を閉じ、`e3` authored-row line を compare-ready bridge の直後に reopen しつつ current formal-hook top wideningは still later に残す cut を固定した。current line は actual `e3` authored-row reopen に進んだ。
 - 2026-04-12 21:44 JST — `docs/reports/0648` と `specs/examples/341...342` で compare-ready bridge sketch second reopen を閉じ、current theorem-side bridge を `comparison_basis_refs` まで持つ docs-only second actualization に固定した。current line は deferred `e3` actualization reopen timing に進んだ。

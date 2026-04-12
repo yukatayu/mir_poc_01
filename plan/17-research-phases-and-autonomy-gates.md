@@ -74,10 +74,10 @@
 
 ## current mainline
 
-1. `Macro 5` proof / model-check first concrete tool pilot
-2. `Macro 4` second source-sample cluster sequencing
-3. `Macro 3-7` parser / checker / runtime public surface inventory
-4. `Macro 6` Mirrorea / shared-space docs-first re-entry
+1. `Macro 4` second source-sample cluster sequencing
+2. `Macro 3-7` parser / checker / runtime public surface inventory
+3. `Macro 6` Mirrorea / shared-space docs-first re-entry
+4. `Macro 5` model-check / public-checker second reserve inventory
 
 ## current stop lines
 

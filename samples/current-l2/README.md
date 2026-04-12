@@ -88,6 +88,6 @@ current reached-stage inventory は current authored sextet `e1` / `e2` / `e3` /
 
 ## next steps
 
-- current next line は proof / model-check first concrete tool pilot である
-- second source-sample cluster sequencing はその後段に残す
-- parser / checker / runtime public surface inventory はさらにその次段に置く
+- current next line は second source-sample cluster sequencing である
+- parser / checker / runtime public surface inventory はその後段に置く
+- Mirrorea / shared-space docs-first re-entry はさらにその次段に置く
