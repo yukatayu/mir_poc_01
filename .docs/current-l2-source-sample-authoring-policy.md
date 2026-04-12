@@ -31,7 +31,7 @@ current meaning は、
 4. `samples/current-l2/README.md` の mapping matrix と verification ladder row を更新する。
 5. current task に応じて `Documentation.md`、`progress.md`、`tasks.md`、relevant `plan/`、research abstract を mirror 更新する。
 6. `python3 scripts/current_l2_source_sample_regression.py inventory` で current authored/deferred inventory と file presence / absence を確認する。
-7. `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root> --overwrite` を実行する。
+7. `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` を実行する。
 8. 非自明 task なら report を追加し、current package / next line を snapshot に反映する。
 
 ## regression bundle
