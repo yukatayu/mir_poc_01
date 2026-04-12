@@ -62,8 +62,7 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- syntax-backed sample runner / verification ladder
-- source-sample authoring / bless policy
+- verification ladder / source-sample authoring / bless policy
 - theorem-first concrete tool pilot
 
 ### その次のフェーズ

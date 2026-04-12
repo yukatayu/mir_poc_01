@@ -119,14 +119,17 @@ representative / fixture / source mapping matrix も fixed 済みであり、cur
 `specs/examples/319...320` により、
 actual parser-to-`Program` lowering first cut も fixed 済みであり、`mir_runtime::current_l2::lower_current_l2_fixed_source_text` を helper-local lowerer に置き、first authored trio `e4` / `e2` / `e23` を semantic `Program` + optional stage 1 / stage 2 bridge evidence へ fail-closed に落とす current cut を採った。
 
+`specs/examples/321...322` により、
+syntax-backed sample runner first cut も fixed 済みであり、`mir_runtime::current_l2::run_current_l2_source_sample` と `resolve_current_l2_source_sample_path` を helper-local thin wrapper に置き、accepted sample set 内の explicit path / sample stem shorthand と explicit `FixtureHostPlan` input だけを current cut に残した。
+
 current mainline は、
-**Phase 6 syntax-backed sample runner first cut**
+**Phase 6 verification ladder wiring**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- syntax-backed sample runner の first cut
 - sample ごとの `static gate` / `interpreter` / `formal hook` ladder
+- source-sample authoring / bless policy
 
 を揃えるのが主眼になる。
 

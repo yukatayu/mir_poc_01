@@ -5,7 +5,11 @@
 //! - optional `CurrentL2ParserBridgeInput` carries actual stage 1 / stage 2 parser evidence.
 //! - the runtime skeleton reports both checker-floor summaries and semantic run output.
 
-use std::collections::BTreeMap;
+use std::{
+    collections::BTreeMap,
+    fs,
+    path::{Path, PathBuf},
+};
 
 use mir_ast::current_l2::{
     Stage1DeclGuardSlot, Stage1ParsedChainDecl, Stage1ParsedChainEdge, Stage1ParsedLineageAssertion,
@@ -79,6 +83,107 @@ pub struct CurrentL2RuntimeSkeletonReport {
 pub struct CurrentL2LoweredSourceProgram {
     pub program: Program,
     pub parser_bridge_input: CurrentL2ParserBridgeInput,
+}
+
+#[derive(Debug, Clone)]
+pub struct CurrentL2SourceSampleRunReport {
+    pub sample_id: String,
+    pub sample_path: PathBuf,
+    pub lowered: CurrentL2LoweredSourceProgram,
+    pub runtime_report: CurrentL2RuntimeSkeletonReport,
+}
+
+pub fn current_l2_default_source_sample_directory() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../samples/current-l2")
+}
+
+fn current_l2_runner_accepted_sample_paths() -> Vec<PathBuf> {
+    let root = current_l2_default_source_sample_directory();
+    [
+        "e4-malformed-lineage.txt",
+        "e2-try-fallback.txt",
+        "e23-malformed-try-fallback-missing-fallback-body.txt",
+    ]
+    .into_iter()
+    .map(|name| root.join(name))
+    .collect()
+}
+
+pub fn resolve_current_l2_source_sample_path(
+    sample_argument: &str,
+) -> Result<PathBuf, InterpreterError> {
+    let trimmed = sample_argument.trim();
+    if trimmed.is_empty() {
+        return Err(InterpreterError::InvalidProgram(
+            "source sample argument must not be empty".to_string(),
+        ));
+    }
+
+    let direct_path = PathBuf::from(trimmed);
+    let accepted_paths = current_l2_runner_accepted_sample_paths();
+    if direct_path.exists() {
+        let normalized_direct = canonicalize_existing_source_sample_path(&direct_path)?;
+        for accepted_path in &accepted_paths {
+            if canonicalize_existing_source_sample_path(accepted_path)? == normalized_direct {
+                return Ok(normalized_direct);
+            }
+        }
+        return Err(InterpreterError::InvalidProgram(format!(
+            "source sample path is outside the current accepted sample set: {}",
+            direct_path.display()
+        )));
+    }
+
+    let shorthand_name = if Path::new(trimmed).extension().is_some() {
+        trimmed.to_string()
+    } else {
+        format!("{trimmed}.txt")
+    };
+    let shorthand_path = current_l2_default_source_sample_directory().join(shorthand_name);
+    if accepted_paths.iter().any(|path| path == &shorthand_path) && shorthand_path.is_file() {
+        return Ok(shorthand_path);
+    }
+
+    Err(InterpreterError::InvalidProgram(format!(
+        "source sample not found: {trimmed} (checked direct path and {})",
+        shorthand_path.display()
+    )))
+}
+
+fn canonicalize_existing_source_sample_path(path: &Path) -> Result<PathBuf, InterpreterError> {
+    fs::canonicalize(path).map_err(|error| {
+        InterpreterError::InvalidProgram(format!(
+            "failed to canonicalize source sample path {}: {error}",
+            path.display()
+        ))
+    })
+}
+
+pub fn run_current_l2_source_sample(
+    sample_argument: &str,
+    host_plan: FixtureHostPlan,
+) -> Result<CurrentL2SourceSampleRunReport, InterpreterError> {
+    let sample_path = resolve_current_l2_source_sample_path(sample_argument)?;
+    let source = fs::read_to_string(&sample_path).map_err(|error| {
+        InterpreterError::InvalidProgram(format!(
+            "failed to read source sample {}: {error}",
+            sample_path.display()
+        ))
+    })?;
+    let lowered = lower_current_l2_fixed_source_text(&source)?;
+    let sample_id = current_l2_source_sample_id(&sample_path)?;
+    let runtime_report = run_current_l2_runtime_skeleton(
+        lowered.program.clone(),
+        host_plan,
+        Some(lowered.parser_bridge_input.clone()),
+    )?;
+
+    Ok(CurrentL2SourceSampleRunReport {
+        sample_id,
+        sample_path,
+        lowered,
+        runtime_report,
+    })
 }
 
 pub fn run_current_l2_runtime_skeleton(
@@ -751,6 +856,19 @@ fn validate_parser_bridge_input(
     }
 
     Ok(())
+}
+
+fn current_l2_source_sample_id(sample_path: &Path) -> Result<String, InterpreterError> {
+    sample_path
+        .file_stem()
+        .and_then(|stem| stem.to_str())
+        .map(ToString::to_string)
+        .ok_or_else(|| {
+            InterpreterError::InvalidProgram(format!(
+                "source sample path does not have a valid file stem: {}",
+                sample_path.display()
+            ))
+        })
 }
 
 fn summarize_stage1_reconnect_clusters(

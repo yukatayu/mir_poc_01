@@ -51,6 +51,7 @@ current first matrix は、representative prose / fixture corpus / source target
 - actual source file として current repo にあるのは `e4-malformed-lineage.txt`、`e2-try-fallback.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の first trio である。
 - `e1` / `e3` / `e21` は current matrix 上の target path を維持しつつ、runner / ladder task で actualization 順を決める。
 - current lowerer first cut は single-line `require` / `ensure` と inline `admit` fragment を受け、multiline clause suite は fail-closed に止める。
+- current runner first cut は accepted sample set 内の explicit path と sample stem shorthand を受け、host plan は explicit input に留める。
 
 ## non-goals
 
@@ -61,5 +62,5 @@ current first matrix は、representative prose / fixture corpus / source target
 
 ## next steps
 
-- syntax-backed runner と verification ladder へ接続する
+- verification ladder へ接続する
 - source-sample authoring / bless policy を narrow に閉じる

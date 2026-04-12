@@ -13,8 +13,8 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix を fixed 済み entry criteria とし、lowering / runner / verification ladder を次 line に置く
-5. fixed-subset source corpus / mapping / lowering / runner / verification ladder を、final grammar や backend 固定に逆流させず段階 actualize する
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner を fixed 済み entry criteria とし、verification ladder / authoring policy を次 line に置く
+5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy を、final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
 
@@ -64,12 +64,13 @@ current repo は少なくとも次まで到達している。
 16. `mir-semantics` program-level entry
 17. `mir-runtime` current L2 thin skeleton
 18. tool-neutral formal hook emitter と formal-hook smoke
+19. helper-local source sample runner first cut
 
 runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e9` / `e10` / `e11`、static-only fixture は `e4` / `e23` / `e5` / `e12` / `e13` / `e14` / `e15` / `e16` / `e17` / `e18` / `e19` / `e20` で揃っている。
 
 ## 直近の next steps
 
-- syntax-backed sample runner と verification ladder を整理する
+- verification ladder と source-sample authoring policy を整理する
 - checkpoint close fixed 後の snapshot を維持する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
@@ -80,8 +81,8 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| source-sample corpus scope/layout、mapping matrix、lowering first cut は fixed 済みだが runner は未整備 | representative prose / fixture corpus / source target path の 3 層対応と helper-local lowering は揃ったが、file-path-backed runner と verification ladder は整理中 |
-| runner / ladder 未整備 | compile-ready checkpoint と source-to-`Program` lowerer はあるが、source sample から `static gate` / `interpreter` / `formal hook` への narrow executable path はまだ薄い |
+| source-sample corpus scope/layout、mapping matrix、lowering、runner first cut は fixed 済みだが ladder / policy は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner は揃ったが、reached-stage inventory と bless policy は整理中 |
+| ladder / policy 未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner はあるが、source sample ごとの reached stage と更新フローはまだ薄い |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
 | heavy future workstream 未着手 | 型・静的解析・定理証明・決定可能性はまだ本格着手前 |

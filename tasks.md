@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-12 12:36 JST
+最終更新: 2026-04-12 12:49 JST
 
 ## この文書について
 
@@ -19,7 +19,7 @@
 - **Phase 5** は `specs/examples/297...298` により self-driven closeout fixed と読んでよい。verifier handoff surface、theorem retained bridge stop line、proof / protocol / runtime-policy inventory、retained-later line を 1 本の closeout bundle にまとめ、actual subject row、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete tool binding、public checker migration、low-level memory-order family は later に残している。
 - **Phase 6 front-half compile-ready checkpoint** は `specs/examples/299...314` により fixed 済みである。`mir-ast` stage 1 / stage 2 carrier、stage 3 declaration-side admit attached slot、shared isolated predicate fragment、shared single attachment frame extraction bridge、`mir-semantics` program-level entry、`mir-runtime` current L2 thin skeleton、tool-neutral formal hook first tranche、reserve formal tool binding inventory までは narrow actual evidence がある。
 - ただし、**「compile-ready checkpoint が fixed」であることと、「source text sample を fixed subset で持ち、static / interpreter / formal staging を sample ごとに通せる」ことは別**である。前者は 96%+ と読める一方、後者へ進むための task chain は、旧 snapshot では `fixed-subset sample/program corpus staging` の 1 項目に圧縮されすぎていた。
-- current immediate line は **Phase 6 syntax-backed sample runner first cut** である。`specs/examples/315...316` により source corpus scope / layout、`specs/examples/317...318` により representative / fixture / source mapping matrix、`specs/examples/319...320` により actual parser-to-`Program` lowering first cut まで fixed 済みである。`mir_runtime::current_l2::lower_current_l2_fixed_source_text` は helper-local lowerer として `e4` / `e2` / `e23` を semantic `Program` + optional stage 1 / stage 2 bridge evidence へ fail-closed に落とす。したがって、その後は **syntax-backed sample runner → verification ladder → authoring/bless policy** の順に進めるのが自然である。
+- current immediate line は **Phase 6 verification ladder wiring** である。`specs/examples/315...316` により source corpus scope / layout、`specs/examples/317...318` により representative / fixture / source mapping matrix、`specs/examples/319...320` により actual parser-to-`Program` lowering first cut、`specs/examples/321...322` により syntax-backed sample runner first cut まで fixed 済みである。`mir_runtime::current_l2::run_current_l2_source_sample` は helper-local runner として accepted sample set 内の explicit path / sample stem shorthand と explicit `FixtureHostPlan` input を受け、`e4` / `e2` / `e23` を lowerer + runtime skeleton へ fail-closed に束ねる。したがって、その後は **verification ladder → authoring/bless policy → theorem-first concrete tool pilot** の順に進めるのが自然である。
 - fixed subset の executable sample を増やすこと自体は current line に整合する。よいのは **既存 settled subset を `static gate` / `interpreter` / `tool-neutral formal hook` に段階接続すること**であり、low-level memory-order-like surface や higher-level async-control family を executable core surface として同時に太らせることではない。
 
 ## 具体的な sample code 検証段階までの rough estimate
@@ -28,10 +28,10 @@
 |---|---|---:|---|---|---|
 | parser-free current L2 PoC | 実在し、compile / test evidence あり | 90%+ | maintenance closeout だけ | 1〜2 package / 2〜4日 | `mir-semantics` 主線はすでに回る |
 | Phase 6 front-half compile-ready minimal actual PoC | checkpoint close fixed | 96%+ | maintenance / reopen only | maintenance only | current L2 subset の compile-ready checkpoint は閉じたと読んでよい |
-| fixed-subset syntax-backed sample verification milestone | source corpus scope/layout、mapping matrix、lowering first cut fixed | **68%前後** | 2〜3 package | 1〜4週 | source text sample を parse / lower / static / interpreter / formal hook まで段階接続する |
+| fixed-subset syntax-backed sample verification milestone | source corpus scope/layout、mapping、lowering、runner first cut fixed | **79%前後** | 1〜3 package | 1〜3週 | source text sample を parse / lower / static / interpreter / formal hook まで段階接続する |
 | first theorem-first concrete tool pilot | reserve inventory fixed | 8%前後 | 2〜4 package | 1〜3週 | source-sample ladder の後で narrow proof consumer pressure を受ける |
 
-### `68%前後` の根拠
+### `79%前後` の根拠
 
 - 進んでいるもの
   - representative programs の prose
@@ -41,8 +41,8 @@
   - source corpus scope / layout
   - representative / fixture / source mapping matrix
   - helper-local actual parser-to-`Program` lowering first cut
+  - helper-local source sample runner first cut
 - まだ薄いもの
-  - syntax-backed sample runner
   - sample ごとの static / interpreter / formal ladder
   - source-sample bless / regression policy
 
@@ -50,22 +50,14 @@
 
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | Phase 6 sample path | syntax-backed sample runner first cut | source sample を parse / lower / static gate / interpreter へ流す narrow runner を作る | 重い | 1〜2 task / 3〜7日 | 自走可能 |
-| 2 | Phase 6 sample path | verification ladder wiring | sample ごとに `static gate` / `interpreter` / `formal hook` の到達段を揃える | 中〜重い | 1〜2 task / 2〜6日 | 自走可能 |
-| 3 | Phase 6 sample path | source-sample authoring / bless / regression policy | source sample の更新手順、reference 更新、drift suppression を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
-| 4 | Phase 6 reserve reopen | theorem-first concrete tool pilot | tool-neutral formal hook 後段の narrow proof consumer pressure を比較する | 中 | 1〜2 task / 2〜6日 | 自走可能 |
+| 1 | Phase 6 sample path | verification ladder wiring | sample ごとに `static gate` / `interpreter` / `formal hook` の到達段を揃える | 中〜重い | 1〜2 task / 2〜6日 | 自走可能 |
+| 2 | Phase 6 sample path | source-sample authoring / bless / regression policy | source sample の更新手順、reference 更新、drift suppression を固定する | 中 | 1 task / 1〜3日 | 自走可能 |
+| 3 | Phase 6 reserve reopen | theorem-first concrete tool pilot | tool-neutral formal hook 後段の narrow proof consumer pressure を比較する | 中 | 1〜2 task / 2〜6日 | 自走可能 |
+| 4 | Phase 0 / 6 maintenance | post-checkpoint drift suppression / mirror sweep | current promoted line と snapshot 文書のずれを抑える | 低〜中 | 継続 | 自走可能 |
 
 ## 自走で進める task package
 
-### Task 1. Phase 6 sample path syntax-backed sample runner first cut
-
-- 目的
-  - source sample から parse / lower / static gate / interpreter を最小経路で回す。
-- 完了条件
-  - parser-free fixture runner と責務が分離されている。
-  - helper-local thin wrapper で止まり、public CLI / final exporter に誤昇格していない。
-
-### Task 2. Phase 6 sample path verification ladder wiring
+### Task 1. Phase 6 sample path verification ladder wiring
 
 - 目的
   - sample ごとに `static gate` / `interpreter` / `formal hook` のどこまで machine-check するかを段階化する。
@@ -73,7 +65,7 @@
   - sample ID ごとに current reached stage が明示されている。
   - theorem/model-check concrete tool binding を早く混ぜず、tool-neutral formal hook を current top として扱う。
 
-### Task 3. Phase 6 sample path source-sample authoring / bless / regression policy
+### Task 2. Phase 6 sample path source-sample authoring / bless / regression policy
 
 - 目的
   - source sample の更新手順、fixture との対応維持、reference 更新、drift suppression を repo-local に固定する。
@@ -81,7 +73,7 @@
   - source sample を増やしても representative prose / fixture corpus / detached loop の責務が崩れない。
   - 長期的な bless/update が docs-only でなく実務フローとして読める。
 
-### Task 4. Phase 6 reserve reopen theorem-first concrete tool pilot
+### Task 3. Phase 6 reserve reopen theorem-first concrete tool pilot
 
 - 目的
   - tool-neutral formal hook 後段で theorem-first concrete consumer pressure を narrow に比較する。
@@ -89,28 +81,20 @@
   - source-sample runner / ladder / policy を壊さず、proof consumer surface を reserve reopen に留める。
   - model-check side や LLVM-family backend timing を premature に current mainline へ戻さない。
 
+### Task 4. Phase 0 / 6 maintenance post-checkpoint drift suppression / mirror sweep
+
+- 目的
+  - current promoted line と snapshot 文書のずれを継続的に抑える。
+- 完了条件
+  - current line / next line / retained-later line が `Documentation.md`、`progress.md`、`tasks.md`、relevant `plan/`、abstract、report で一致している。
+  - historical log を壊さずに snapshot だけを更新できている。
+
 ## 方針決定が必要な blocker / open question
 
 - **現時点で、current Task 1〜4 を止める immediate blocker は 0 件** と読むのが自然である。
-- ただし、current mainline では runner boundary、reached-stage inventory、formal/back-end timing の guard が効く。
+- ただし、current mainline では reached-stage inventory、authoring boundary、formal/back-end timing の guard が効く。
 
-### Blocker 1. syntax-backed sample runner の first cut boundary
-
-- 概要
-  - source sample を file path からどう読み、lowerer / static gate / interpreter へ束ねるか。
-- 何に影響するか
-  - runner coverage
-  - helper-local path discovery
-  - interpreter / formal hook への接続
-  - fail-closed policy
-- 主要な選択肢
-  1. helper-local narrow runner を先に入れ、authored trio を file path から parse / lower / static / interpreter へ束ねる
-  2. richer host/runtime/public surface と同時に runner を作る
-  3. source sample は lowerer test だけに留め、runner を作らない
-- current recommendation / 見解
-  - **1 を current first choice** に置き、path defaulting と runner mismatch は helper-local / fail-closed に止めるのが自然である。
-
-### Blocker 2. sample ごとの reached-stage inventory / verification ladder の切り方
+### Blocker 1. sample ごとの reached-stage inventory / verification ladder の切り方
 
 - 概要
   - sample ごとに `static gate` / `interpreter` / `formal hook` の reached stage をどう表にするか。
@@ -125,6 +109,21 @@
 - current recommendation / 見解
   - **1 を current first choice** に置き、tool-neutral formal hook を current top とするのが自然である。
 
+### Blocker 2. source-sample authoring / bless policy の切り方
+
+- 概要
+  - source sample 更新と fixture / representative / ladder の同期をどの flow で保つか。
+- 何に影響するか
+  - sample corpus の増やし方
+  - drift suppression
+  - regression / bless 更新
+- 主要な選択肢
+  1. source sample / fixture / representative / reached stage を narrow matrix と実務 flow に分けて持つ
+  2. source sample だけ更新し、mirror は report で補う
+  3. bless policy を final public CLI と同時に扱う
+- current recommendation / 見解
+  - **1 を current first choice** に置き、update flow は repo-local に narrow 固定、public CLI は still later に残すのが自然である。
+
 ### Blocker 3. concrete formal tool binding と backend/codegen timing
 
 - 概要
@@ -135,11 +134,11 @@
   - long-term implementation flexibility
 - 主要な選択肢
   1. source corpus / lowering / runner より前に backend or tool binding を入れる
-  2. fixed-subset source corpus と verification ladder を先に揃え、その後 theorem-first concrete tool pilot を行う
+  2. fixed-subset source corpus と verification ladder / authoring policy を先に揃え、その後 theorem-first concrete tool pilot を行う
   3. final grammar / public API closeout まで backend/tool binding を遅らせる
 - current recommendation / 見解
   - **2 を current first choice** に置くのが自然である。
-  - LLVM-family backend や external codegen を今すぐ主線に置くのは早い。syntax-backed fixed subset、lowering、runner、tool-neutral formal hook ladder を先に安定化した方が柔軟性を失いにくい。
+  - LLVM-family backend や external codegen を今すぐ主線に置くのは早い。syntax-backed fixed subset、lowering、runner、tool-neutral formal hook ladder、authoring policy を先に安定化した方が柔軟性を失いにくい。
 
 ### Blocker 4. `atomic_cut` sample 拡張と higher-level async-control / low-level memory-order family の関係
 

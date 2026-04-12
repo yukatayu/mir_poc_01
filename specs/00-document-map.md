@@ -605,6 +605,10 @@
   - representative / fixture / source mapping matrix fixed 後の次段として、fixed-subset source sample を semantic `Program` と optional parser bridge evidence へどこで fail-closed に lower するかを比較する補助文書。
 - `specs/examples/320-current-l2-actual-parser-to-program-lowering-first-cut-ready-minimal-actual-parser-to-program-lowering-first-cut-threshold.md`
   - actual parser-to-`Program` lowering first cut の minimum を `lowering_kind + accepted_source_cluster_refs + code_anchor_refs + bridge_output_refs + fail_closed_refs + retained_later_refs` に留める補助文書。
+- `specs/examples/321-current-l2-actual-parser-to-program-lowering-first-cut-ready-syntax-backed-sample-runner-first-cut-comparison.md`
+  - helper-local source sample runner first cut を `runner_kind + accepted_sample_refs + sample_argument_mode + host_plan_mode + code_anchor_refs + report_shape_refs + fail_closed_refs + retained_later_refs` で比較する補助文書。
+- `specs/examples/322-current-l2-syntax-backed-sample-runner-first-cut-ready-minimal-syntax-backed-sample-runner-first-cut-threshold.md`
+  - syntax-backed sample runner first cut の minimum を `runner_kind + sample_argument_mode + host_plan_mode + code_anchor_refs + report_shape_refs + fail_closed_refs + retained_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
