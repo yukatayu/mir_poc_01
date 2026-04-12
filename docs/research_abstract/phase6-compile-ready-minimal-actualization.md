@@ -220,6 +220,7 @@ current mainline は、
 - public operational CLI / final public contract later gate
 - shared-space admission / compile-time visibility reopen
 - shared-space authority / resource ownership reopen
+- model-check concrete carrier actualization comparison（reserve）
 
 を揃えるのが主眼になる。
 

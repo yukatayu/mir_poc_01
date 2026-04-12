@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-13 07:46 JST
+最終更新: 2026-04-13 08:12 JST
 
 ## この文書について
 
@@ -93,7 +93,7 @@
 | compile-ready parser / checker / runtime | 88% | 78% | 85% | late | non-production minimal tranche と public-pressure gate は揃った |
 | fixed-subset source samples | 93% | 94% | 93% | active | authored octet runnable。`e21/e22` contrast row と `e4/e19` static pair まで source-backed に actualize 済み |
 | theorem / verifier bridge | 84% | 78% | 51% | early-active | formal hook と proof notebook first bridge はある。model-check concrete carrier first actualization gate も fixed 済みで、`e3` は guarded non-reached row として接続済み |
-| Mirrorea fabric boundary | 68% | 56% | 8% | docs-first | re-entry bundle は fixed。next line は identity/auth layering reopen |
+| Mirrorea fabric boundary | 68% | 56% | 8% | docs-first | re-entry bundle と identity/auth layering cut は fixed。next shared-space line は admission / compile-time visibility reopen |
 | shared-space boundary | 73% | 62% | 12% | docs-first | practical cut と repo-level re-entry bundleは fixed。final catalog は user spec required |
 | Typed-Effect Wiring Platform | 34% | 26% | 4% | positioning only | subsystem boundary はあるが actual line は薄い |
 | PrismCascade | 28% | 20% | 3% | positioning only | positioning / separation が主で、actual kernel work は later |
@@ -107,8 +107,8 @@
    - first docs-only candidate fixed 後に、final public API/CLI をどの順で reopen するかは separate later gate に残す。
 3. **Macro 6 / shared-space admission / compile-time visibility reopen**
    - role / capability / visibility over-approximation と runtime admission / activation / reconciliation の split を next shared-space reopen として narrow に決める。
-4. **Macro 5 / model-check concrete carrier actualization comparison**
-   - gate fixed 後の次段として、actual emitted model-check carrier / concrete tool binding / public-checker actual migration のどれを先に reopen するかを later line に残す。
+4. **Macro 6 / shared-space authority / resource ownership reopen**
+   - admission / visibility line の次段として、authority placement、resource owner slot、delegated capability、fairness source の split を narrow に整理する。
 
 ## 研究で見つけることと、user が決めること
 
@@ -152,6 +152,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 08:12 JST — `docs/reports/0666` で post-model-check-gate document consistency audit を閉じ、reviewer 指摘だった post-`stable malformed broader follow-up inventory` の順序 drift と `Mirrorea fabric boundary` row の stale wording を修正した。reviewer 再確認は `No findings.` で、repo-level current line は stable malformed broader follow-up inventory のまま維持した。
 - 2026-04-13 07:46 JST — `docs/reports/0665` と `specs/examples/367...368` で model-check concrete carrier first actualization gate を閉じ、`proof_notebook_review_unit` current first pilot を保ったまま compare-ready bridge entry の narrow gate を fixed した。repo-level current line は stable malformed broader follow-up inventory に進んだ。
 - 2026-04-13 07:28 JST — `docs/reports/0664` と `specs/examples/365...366` で shared-space identity / auth layering reopen を閉じ、membership identity core と auth/admission/projection side carriers の split を fixed した。repo-level current line は model-check concrete carrier first actualization gate に進んだ。
 - 2026-04-13 03:19 JST — `docs/reports/0663` で post-package document consistency audit を閉じ、FAQ2/3、`plan/08`、Phase 6 abstract の stale `septet` / `current line` wording を修正した。reviewer 再確認と docs validator を通し、repo-level current line は shared-space identity / auth layering reopen のまま維持した。

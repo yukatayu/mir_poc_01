@@ -92,6 +92,6 @@
 ## current judgments
 
 - current repo は architecture-first だが、fixed-subset runnable path を already 持つ。
-- Mirrorea/shared-space docs-first re-entry bundle と model-check/public-checker second reserve inventory に加え、stable-static edge-pair first reopen と public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate も fixed 済みであり、current mainline は `Macro 4` stable malformed broader follow-up inventory へ進みつつ、Macro 7 の public operational later gate、Macro 6 の admission/visibility follow-up、Macro 5 の model-check actualization comparison を reserve に保持している。
+- Mirrorea/shared-space docs-first re-entry bundle と model-check/public-checker second reserve inventory に加え、stable-static edge-pair first reopen と public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate も fixed 済みであり、current mainline は `Macro 4` stable malformed broader follow-up inventory へ進みつつ、Macro 7 の public operational later gate、Macro 6 の admission/visibility と authority/resource-ownership follow-up、Macro 5 の model-check actualization comparison を reserve に保持している。
 - Mirrorea / shared-space / backend / apps は old `FutureWork` ではなく separable track として扱う。
 - current immediate mainline を止める user decision は 0 件である。

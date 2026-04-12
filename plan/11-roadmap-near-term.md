@@ -34,6 +34,11 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 - `Macro 6`
 - role / capability / visibility over-approximation と runtime admission / activation / reconciliation の split を shared-space next reopen として整理する。
 
+### shared-space authority / resource ownership reopen
+
+- `Macro 6`
+- authority placement、resource owner slot、delegated capability、fairness source を docs-first follow-up として整理する。
+
 ### model-check concrete carrier actualization comparison
 
 - `Macro 5`
@@ -47,5 +52,5 @@ step 数や task 数は厳密な約束ではなく、**rough estimate** であ�
 
 ## current recommendation
 
-- current near-term では、proof/model-check first concrete pilot、second source-sample cluster sequencing、actual `e22` contrast-row source actualization、stable static malformed post-contrast sequencing、public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory、stable-static edge-pair first reopen、public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gateを fixed entry criteria に閉じたうえで、broader malformed follow-up / public operational later gate / shared-space admission-visibility lineを staged に進める。
+- current near-term では、proof/model-check first concrete pilot、second source-sample cluster sequencing、actual `e22` contrast-row source actualization、stable static malformed post-contrast sequencing、public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory、stable-static edge-pair first reopen、public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gateを fixed entry criteria に閉じたうえで、broader malformed follow-up / public operational later gate / shared-space admission-visibility / authority-ownership lineを staged に進める。
 - backend や higher-level async-control family を current executable core に早く混ぜない。
