@@ -97,5 +97,5 @@ current reached-stage inventory は current authored septet `e1` / `e2` / `e3` /
 
 ## next steps
 
-- repo-level current next line は model-check / public-checker second reserve inventory である
-- source-sample side の next reopen point は stable-static edge-pair first reopen (`e4` / `e19`) である
+- model-check / public-checker second reserve inventory は fixed 済みであり、`proof_notebook_review_unit` を current first concrete pilot に保ったまま machine-facing reserve line を整理した
+- repo-level current next line は stable-static edge-pair first reopen (`e4` / `e19`) である

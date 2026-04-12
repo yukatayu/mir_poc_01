@@ -270,6 +270,21 @@
   - `specs/examples/296-current-l2-phase4-shared-space-self-driven-closeout-ready-minimal-phase4-shared-space-self-driven-closeout-threshold.md`
   - `docs/reports/0658-phase6-mirrorea-shared-space-docs-first-reentry-package.md`
 
+## 2026-04-13 Phase 6 model-check/public-checker second reserve inventory addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/327-current-l2-source-sample-authoring-bless-regression-policy-ready-theorem-first-concrete-tool-pilot-comparison.md`
+  - `specs/examples/328-current-l2-theorem-first-concrete-tool-pilot-ready-minimal-theorem-first-concrete-tool-pilot-threshold.md`
+  - `specs/examples/339-current-l2-minimal-third-widened-row-e3-guard-ready-plain-proof-notebook-bridge-sketch-actualization-comparison.md`
+  - `specs/examples/340-current-l2-plain-proof-notebook-bridge-sketch-actualization-ready-minimal-plain-proof-notebook-bridge-sketch-threshold.md`
+  - `specs/examples/341-current-l2-plain-proof-notebook-bridge-sketch-actualization-ready-compare-ready-proof-notebook-bridge-sketch-second-reopen-comparison.md`
+  - `specs/examples/342-current-l2-compare-ready-proof-notebook-bridge-sketch-second-reopen-ready-minimal-compare-ready-proof-notebook-bridge-sketch-threshold.md`
+  - `specs/examples/355-current-l2-stable-static-malformed-post-contrast-sequencing-ready-parser-checker-runtime-public-surface-inventory-comparison.md`
+  - `specs/examples/356-current-l2-parser-checker-runtime-public-surface-inventory-ready-minimal-parser-checker-runtime-public-surface-inventory-threshold.md`
+  - `specs/examples/359-current-l2-mirrorea-shared-space-docs-first-re-entry-ready-model-check-public-checker-second-reserve-inventory-comparison.md`
+  - `specs/examples/360-current-l2-model-check-public-checker-second-reserve-inventory-ready-minimal-model-check-public-checker-second-reserve-inventory-threshold.md`
+  - `docs/reports/0659-phase6-model-check-public-checker-second-reserve-inventory-package.md`
+
 ## 2026-04-12 Phase 6 proof-notebook bridge-sketch reopen ordering addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。

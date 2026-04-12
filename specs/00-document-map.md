@@ -681,6 +681,10 @@
   - parser / checker / runtime public surface inventory fixed 後の次段として、Mirrorea / shared-space を repo-level current line へ docs-first boundary track として再入場させつつ、Typed-Effect / Prism / app line を separable track として並べる narrow re-entry bundle を比較する補助文書。
 - `specs/examples/358-current-l2-mirrorea-shared-space-docs-first-re-entry-ready-minimal-mirrorea-shared-space-docs-first-re-entry-threshold.md`
   - Mirrorea / shared-space docs-first re-entry の minimum を `reentry_kind + entry_criteria_refs + current_boundary_refs + adjacent_track_boundary_refs + user_spec_required_refs + next_docs_first_reopen_refs + kept_later_refs` に留める補助文書。
+- `specs/examples/359-current-l2-mirrorea-shared-space-docs-first-re-entry-ready-model-check-public-checker-second-reserve-inventory-comparison.md`
+  - Mirrorea/shared-space docs-first re-entry fixed 後の次段として、`proof_notebook_review_unit` first concrete pilot を巻き戻さずに model-check side と public-checker docs-only chain を separate reserve bucket に整理する narrow inventory を比較する補助文書。
+- `specs/examples/360-current-l2-model-check-public-checker-second-reserve-inventory-ready-minimal-model-check-public-checker-second-reserve-inventory-threshold.md`
+  - model-check/public-checker second reserve inventory の minimum を `inventory_kind + entry_criteria_refs + current_first_pilot_refs + model_check_second_reserve_refs + public_checker_second_reserve_refs + guard_refs + kept_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

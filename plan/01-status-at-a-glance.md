@@ -41,16 +41,16 @@
 
 - parser-free current L2 PoC は runnable。
 - current authored source sample septet `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` は runnable ladder に接続済みであり、`e22` は runtime/formal-hook reached、`e3` は formal hook stage だけ guarded に残す。
-- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable static malformed post-contrast sequencing も fixed 済みである。parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。さらに `specs/examples/357...358` により Mirrorea/shared-space docs-first re-entry bundle も fixed 済みであり、Mirrorea/shared-space を repo-level current boundary track、Typed-Effect / Prism を adjacent track、shared-space final catalog と upper-layer app target を user-spec-required gate に切り分けた。repo-level next line は model-check / public-checker second reserve inventory に置き、Macro 4 side の next reopen は `e4` / `e19` edge-pair に残す。
+- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable static malformed post-contrast sequencing も fixed 済みである。parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。さらに `specs/examples/357...358` により Mirrorea/shared-space docs-first re-entry bundle、`specs/examples/359...360` により model-check/public-checker second reserve inventory も fixed 済みであり、Mirrorea/shared-space は repo-level current boundary track、Typed-Effect / Prism は adjacent track、`proof_notebook_review_unit` は current first concrete pilot、public-checker docs-only chain は second reserve bucket に留める。repo-level next line は stable-static edge-pair first reopen に置き、public operational surface、shared-space identity/auth layering、model-check concrete carrier first actualization gate を後続に残す。
 - tool-neutral formal hook と `proof_notebook_review_unit` first pilot はある。
 - plain theorem-side bridge sketch first actualization と compare-ready bridge sketch second reopen もある。
 
 ## current mainline
 
-1. model-check / public-checker second reserve inventory
-2. stable-static edge-pair first reopen
-3. public operational surface actualization gate
-4. shared-space identity / auth layering reopen
+1. stable-static edge-pair first reopen
+2. public operational surface actualization gate
+3. shared-space identity / auth layering reopen
+4. model-check concrete carrier first actualization gate
 
 ## biggest later gates
 

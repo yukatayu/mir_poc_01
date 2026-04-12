@@ -74,10 +74,10 @@
 
 ## current mainline
 
-1. `Macro 5` model-check / public-checker second reserve inventory
-2. `Macro 4` stable-static edge-pair first reopen
-3. `Macro 3-7` public operational surface actualization gate
-4. `Macro 6` shared-space identity / auth layering reopen
+1. `Macro 4` stable-static edge-pair first reopen
+2. `Macro 3-7` public operational surface actualization gate
+3. `Macro 6` shared-space identity / auth layering reopen
+4. `Macro 5` model-check concrete carrier first actualization gate
 
 ## current stop lines
 
@@ -93,6 +93,6 @@
 ## current judgments
 
 - current repo は architecture-first だが、fixed-subset runnable path を already 持つ。
-- Mirrorea/shared-space docs-first re-entry bundle は fixed 済みであり、current mainline は再び `Macro 5` / `Macro 4` 側へ戻りつつ、Macro 6 の next docs-first reopen を reserve に保持している。
+- Mirrorea/shared-space docs-first re-entry bundle と model-check/public-checker second reserve inventory は fixed 済みであり、current mainline は `Macro 4` stable-static edge-pair first reopen へ進みつつ、Macro 6 の next docs-first reopen と Macro 5 の machine-facing actualization gate を reserve に保持している。
 - Mirrorea / shared-space / backend / apps は old `FutureWork` ではなく separable track として扱う。
 - current immediate mainline を止める user decision は 0 件である。

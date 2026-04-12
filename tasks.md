@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 00:21 JST
+最終更新: 2026-04-13 00:37 JST
 
 ## この文書について
 
@@ -25,33 +25,25 @@
 - actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の septet に進んだ。
 - stable static malformed post-contrast sequencing も `specs/examples/353...354` により fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster、Macro 4 side の next reopen point は `e4` / `e19` edge-pair に置く。
 - parser / checker / runtime public surface inventory も `specs/examples/355...356` により fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split に整理した。
-- current promoted line は **model-check / public-checker second reserve inventory** であり、その後に
-  - stable-static edge-pair first reopen
+- model-check / public-checker second reserve inventory も `specs/examples/359...360` により fixed 済みであり、`proof_notebook_review_unit` を current first concrete pilot に維持したまま、model-check reserve と public-checker docs-only reserve を separate bucket に置く current cut を採った。
+- current promoted line は **stable-static edge-pair first reopen** であり、その後に
   - public operational surface actualization gate
   - shared-space identity / auth layering reopen
+  - model-check concrete carrier first actualization gate
   を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check / public-checker second reserve inventory | 1〜3 task / 1〜2週 | 一部自走可能 |
-| 2 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable-static edge-pair first reopen | 1〜3 task / 数日〜1週 | 自走可能 |
-| 3 | `Macro 3-7` | public operational surface | `S2-S3 -> S3-S4` | public operational surface actualization gate | 2〜4 task / 1〜2週 | 一部自走可能 |
-| 4 | `Macro 6` | shared-space boundary | `S3 -> S3-S4` | shared-space identity / auth layering reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
+| 1 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable-static edge-pair first reopen | 1〜3 task / 数日〜1週 | 自走可能 |
+| 2 | `Macro 3-7` | public operational surface | `S2-S3 -> S3-S4` | public operational surface actualization gate | 2〜4 task / 1〜2週 | 一部自走可能 |
+| 3 | `Macro 6` | shared-space boundary | `S3 -> S3-S4` | shared-space identity / auth layering reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
+| 4 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check concrete carrier first actualization gate | 1〜3 task / 1〜2週 | 一部自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. model-check / public-checker second reserve inventory
-
-- macro phase
-  - `Macro 5`
-- 目的
-  - proof notebook first concrete cut の後で、model-check side / public-checker side をどの境界から reopen するかを inventory 化する。
-- 完了条件
-  - proof notebook current cut を巻き戻さず、machine-facing carrier の reserve line だけを narrow に整理する。
-
-### Package 2. stable-static edge-pair first reopen
+### Package 1. stable-static edge-pair first reopen
 
 - macro phase
   - `Macro 4`
@@ -60,7 +52,7 @@
 - 完了条件
   - duplicate cluster と try/rollback malformed-static family を still later に残したまま、stable-static edge-pair line だけを source / fixture / ladder へ戻す。
 
-### Package 3. public operational surface actualization gate
+### Package 2. public operational surface actualization gate
 
 - macro phase
   - `Macro 3-7`
@@ -69,7 +61,7 @@
 - 完了条件
   - `pub visibility != final public contract` を保ったまま、later public API / CLI reopen の first sub-cut を narrow に示す。
 
-### Package 4. shared-space identity / auth layering reopen
+### Package 3. shared-space identity / auth layering reopen
 
 - macro phase
   - `Macro 6`
@@ -77,6 +69,15 @@
   - Mirrorea/shared-space docs-first re-entry fixed 後の next docs-first reopen として、membership core と auth / admission / projection layering の cut を narrow に整理する。
 - 完了条件
   - principal identity、transport / service auth、room admission、display / projection identity を membership carrier に潰さない current boundary を current task map に昇格する。
+
+### Package 4. model-check concrete carrier first actualization gate
+
+- macro phase
+  - `Macro 5`
+- 目的
+  - proof-notebook first concrete pilot と public-checker docs-only reserve line を巻き戻さずに、machine-facing actualization をどの model-check carrier から再開するかを narrow に整理する。
+- 完了条件
+  - tool-neutral formal hook / compare-ready bridge sketch / later public-checker chain を崩さず、model-check concrete carrier の first reopen gate だけを snapshot に昇格する。
 
 ## 研究を通して見つけること
 
@@ -100,15 +101,15 @@
 - current recommendation
   - **parser-free existing public behavior を維持し、current tranche の actual promotion は still later の first sub-cut に残す**。
 
-### Discovery 3. model-check / public-checker second reserve の入口
+### Discovery 3. model-check concrete carrier first actualization gate
 
 - 概要
-  - proof notebook の後で、model-check side や public checker line をどの順で reopen するか。
+  - proof notebook first pilot を current carrier に保ったまま、model-check concrete carrier をどの bridge / artifact から reopen するか。
 - 何に影響するか
-  - public checker migration
+  - theorem / model-check bridge
   - retained artifact / bless policy
 - current recommendation
-  - **proof notebook current line を first pilot に維持し、model-check side と public checker migration はその後段に押し分ける**。
+  - **proof notebook current line を first pilot に維持し、model-check concrete carrier だけを先に narrow inventory から reopen し、public-checker migration は still later に残す**。
 
 ### Discovery 4. backend / public operational surface の timing
 
