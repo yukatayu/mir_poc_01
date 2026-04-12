@@ -13,7 +13,7 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory と parser-side follow-up sequencing を fixed 済み entry criteria とし、shared single attachment frame actualization を next line に置く
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization を fixed 済み entry criteria とし、source corpus / mapping / lowering / runner / verification ladder を次 line に置く
 5. fixed-subset source corpus / mapping / lowering / runner / verification ladder を、final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
@@ -69,7 +69,6 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- parser-side follow-up package actualization を整理する
 - fixed-subset source-sample corpus scope / mapping を整理する
 - actual parser-to-`Program` lowering first cut を整理する
 - syntax-backed sample runner と verification ladder を整理する
@@ -96,8 +95,7 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| Phase 6 parser-side follow-up actualization | 1 task |
-| fixed-subset source corpus / mapping / lowering / runner / ladder | 5〜7 task |
+| fixed-subset source corpus / mapping / lowering / runner / ladder | 4〜6 task |
 | theorem-first concrete tool pilot | 2〜4 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |

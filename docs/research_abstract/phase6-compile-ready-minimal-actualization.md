@@ -77,11 +77,13 @@ parser first tranche の actual code anchor は次である。
 - `specs/examples/301...302`
 - `specs/examples/303...304`
 - `specs/examples/311...312`
+- `specs/examples/313...314`
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
 - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 - `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
 - `docs/reports/0614-phase6-compile-ready-checkpoint-drift-suppression-and-mirror-sweep.md`
 - `docs/reports/0620-phase6-parser-followup-sequencing-package.md`
+- `docs/reports/0621-phase6-shared-single-attachment-frame-first-package.md`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
@@ -103,13 +105,15 @@ reserve formal tool binding inventory も fixed 済みであり、theorem-first 
 `specs/examples/311...312` により、
 parser-side follow-up package sequencing も fixed 済みであり、shared single attachment frame を next package、request clause suite / perform head / richer diagnostics / final grammar を deferred reopen に置いた。
 
+`specs/examples/313...314` により、
+shared single attachment frame first package も actualize 済みであり、`mir_ast::current_l2` は multiline extraction bridge を crate surface に持つ non-production carrier まで進んだ。
+
 current mainline は、
-**Phase 6 parser-side follow-up package actualization**
+**Phase 6 fixed-subset source-sample corpus scope / file layout**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- parser-side follow-up package actualization
 - fixed-subset source-sample corpus scope / mapping
 - actual parser-to-`Program` lowering と syntax-backed sample runner の first cut
 - sample ごとの `static gate` / `interpreter` / `formal hook` ladder

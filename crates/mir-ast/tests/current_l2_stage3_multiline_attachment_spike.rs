@@ -1,20 +1,12 @@
 #[allow(dead_code)]
-#[path = "support/current_l2_stage3_multiline_attachment_spike_support.rs"]
-mod current_l2_stage3_multiline_attachment_spike_support;
-#[allow(dead_code)]
 #[path = "support/current_l2_stage3_predicate_fragment_spike_support.rs"]
 mod current_l2_stage3_predicate_fragment_spike_support;
 
+use current_l2_stage3_predicate_fragment_spike_support::load_fixture_request_clause_fragment;
 use mir_ast::current_l2::{
-    Stage3PredicateFragment, parse_stage3_minimal_predicate_fragment_text,
-};
-
-use current_l2_stage3_multiline_attachment_spike_support::{
-    extract_stage3_option_admit_multiline_fragment_text,
+    Stage3PredicateFragment, extract_stage3_option_admit_multiline_fragment_text,
     extract_stage3_request_clause_multiline_fragment_text,
-};
-use current_l2_stage3_predicate_fragment_spike_support::{
-    load_fixture_request_clause_fragment,
+    parse_stage3_minimal_predicate_fragment_text,
 };
 
 const OPTION_ADMIT_MULTILINE_INPUT: &str = r#"
@@ -67,13 +59,13 @@ option owner_writer on profile_doc capability write lease live
 
 #[test]
 fn stage3_multiline_attachment_spike_extracts_option_local_admit_fragment() {
-    let extracted = extract_stage3_option_admit_multiline_fragment_text(OPTION_ADMIT_MULTILINE_INPUT)
-        .expect("multiline attachment spike should extract option-local admit block");
+    let extracted =
+        extract_stage3_option_admit_multiline_fragment_text(OPTION_ADMIT_MULTILINE_INPUT)
+            .expect("multiline attachment spike should extract option-local admit block");
     let actual = parse_stage3_minimal_predicate_fragment_text(&extracted)
         .expect("extracted admit fragment should parse");
-    let expected =
-        load_fixture_request_clause_fragment("e2-try-fallback.json", 1, "require", 0)
-            .expect("fixture grouped and fragment should load");
+    let expected = load_fixture_request_clause_fragment("e2-try-fallback.json", 1, "require", 0)
+        .expect("fixture grouped and fragment should load");
 
     assert_eq!(actual, expected);
 }
@@ -85,9 +77,8 @@ fn stage3_multiline_attachment_spike_extracts_request_local_require_fragment() {
             .expect("multiline attachment spike should extract request-local require block");
     let actual = parse_stage3_minimal_predicate_fragment_text(&extracted)
         .expect("extracted require fragment should parse");
-    let expected =
-        load_fixture_request_clause_fragment("e2-try-fallback.json", 1, "require", 0)
-            .expect("fixture grouped and fragment should load");
+    let expected = load_fixture_request_clause_fragment("e2-try-fallback.json", 1, "require", 0)
+        .expect("fixture grouped and fragment should load");
 
     assert_eq!(actual, expected);
 }
@@ -99,21 +90,18 @@ fn stage3_multiline_attachment_spike_extracts_request_local_ensure_fragment() {
             .expect("multiline attachment spike should extract request-local ensure block");
     let actual = parse_stage3_minimal_predicate_fragment_text(&extracted)
         .expect("extracted ensure fragment should parse");
-    let expected = load_fixture_request_clause_fragment(
-        "e10-perform-on-ensure-failure.json",
-        0,
-        "ensure",
-        0,
-    )
-    .expect("fixture ensure fragment should load");
+    let expected =
+        load_fixture_request_clause_fragment("e10-perform-on-ensure-failure.json", 0, "ensure", 0)
+            .expect("fixture ensure fragment should load");
 
     assert_eq!(actual, expected);
 }
 
 #[test]
 fn stage3_multiline_attachment_spike_keeps_grouped_and_structure() {
-    let extracted = extract_stage3_option_admit_multiline_fragment_text(OPTION_ADMIT_MULTILINE_INPUT)
-        .expect("multiline attachment spike should extract option-local admit block");
+    let extracted =
+        extract_stage3_option_admit_multiline_fragment_text(OPTION_ADMIT_MULTILINE_INPUT)
+            .expect("multiline attachment spike should extract option-local admit block");
     let actual = parse_stage3_minimal_predicate_fragment_text(&extracted)
         .expect("extracted admit fragment should parse");
 
@@ -147,9 +135,11 @@ fn stage3_multiline_attachment_spike_rejects_missing_admit_block_payload() {
 
 #[test]
 fn stage3_multiline_attachment_spike_rejects_missing_require_block_payload() {
-    let error =
-        extract_stage3_request_clause_multiline_fragment_text(MISSING_REQUIRE_BLOCK_INPUT, "require")
-            .expect_err("multiline attachment spike should reject missing require block payload");
+    let error = extract_stage3_request_clause_multiline_fragment_text(
+        MISSING_REQUIRE_BLOCK_INPUT,
+        "require",
+    )
+    .expect_err("multiline attachment spike should reject missing require block payload");
 
     assert!(
         error.contains("missing multiline predicate block after require:"),
@@ -173,8 +163,9 @@ fn stage3_multiline_attachment_spike_rejects_nested_clause_header_search() {
 
 #[test]
 fn stage3_multiline_attachment_spike_rejects_blank_line_inside_block() {
-    let error = extract_stage3_option_admit_multiline_fragment_text(BLANK_LINE_IN_ADMIT_BLOCK_INPUT)
-        .expect_err("multiline attachment spike should reject blank lines inside block");
+    let error =
+        extract_stage3_option_admit_multiline_fragment_text(BLANK_LINE_IN_ADMIT_BLOCK_INPUT)
+            .expect_err("multiline attachment spike should reject blank lines inside block");
 
     assert!(
         error.contains("blank line is not allowed inside multiline predicate block after admit:"),

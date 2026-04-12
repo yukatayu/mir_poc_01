@@ -11,8 +11,9 @@ It intentionally keeps the accepted surface narrow:
 - stage 2 try/fallback structural shape
 - stage 3 declaration-side admit attached slot
 - stage 3 minimal isolated predicate fragment
+- stage 3 shared single attachment frame extraction bridge
 
-Stage 3 multiline attachment, request clause suites, perform head publicization,
+Stage 3 request clause suites, perform head publicization,
 span-rich diagnostics, and final grammar remain later work.
 "#]
 

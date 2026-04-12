@@ -589,6 +589,10 @@
   - reserve formal tool binding inventory fixed 後の次段として、shared single attachment frame を next parser-side package に置くか、request clause suite / perform head / source-sample path へどう sequencing するかを比較する補助文書。
 - `specs/examples/312-current-l2-phase6-parser-side-follow-up-package-sequencing-ready-minimal-phase6-parser-side-follow-up-package-sequencing-threshold.md`
   - Phase 6 parser-side follow-up package sequencing の minimal docs-first shape を `sequencing_kind + fixed_entry_criteria_refs + selected_next_package_ref + deferred_reopen_refs + guard_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/313-current-l2-phase6-parser-side-follow-up-package-sequencing-ready-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-comparison.md`
+  - parser-side follow-up sequencing fixed 後の次段として、shared single attachment frame first package を multiline extraction bridge + existing predicate fragment parser reuse に留めて actualize するか、request clause suite / perform head widen へ進むかを比較する補助文書。
+- `specs/examples/314-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-ready-minimal-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-threshold.md`
+  - shared single attachment frame first package の minimal docs-first shape を `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` までに留めるべきかを比較する補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`
