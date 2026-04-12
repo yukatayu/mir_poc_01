@@ -69,7 +69,7 @@
   - `e21` は source-authored frontier-update anchor である。
   - `e22` は source-authored place-mismatch contrast row として actualize 済みである。
   - stable-static edge-pair first reopen では、existing `e4` row と new `e19` row を source-backed static-stop pair に actualize 済みである。
-  - parser / checker / runtime public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory は fixed 済みであり、repo-level current line は public operational surface actualization gate に置いている。
+  - parser / checker / runtime public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory、public operational surface actualization gate は fixed 済みであり、repo-level current line は shared-space identity / auth layering reopen に置いている。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

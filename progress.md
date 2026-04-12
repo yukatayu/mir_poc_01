@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-13 03:10 JST
+最終更新: 2026-04-13 03:19 JST
 
 ## この文書について
 
@@ -150,6 +150,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 03:19 JST — `docs/reports/0663` で post-package document consistency audit を閉じ、FAQ2/3、`plan/08`、Phase 6 abstract の stale `septet` / `current line` wording を修正した。reviewer 再確認と docs validator を通し、repo-level current line は shared-space identity / auth layering reopen のまま維持した。
 - 2026-04-13 03:10 JST — `docs/reports/0662` と `specs/examples/363...364` で public operational surface actualization gate を閉じ、already-public parser-free stack を stable bucket に据えたまま `run_current_l2_source_sample` を later public-pressure の first docs-only candidate に固定した。repo-level current line は shared-space identity / auth layering reopen に進んだ。
 - 2026-04-13 02:51 JST — `docs/reports/0661` と `specs/examples/361...362` で stable-static edge-pair first reopen を閉じ、existing `e4` row と deferred `e19` row を source-backed static-stop pair に actualize した。repo-level current line は public operational surface actualization gate に進んだ。
 - 2026-04-13 00:37 JST — `docs/reports/0659` と `specs/examples/359...360` で model-check / public-checker second reserve inventory を閉じ、`proof_notebook_review_unit` を current first concrete pilot に維持したまま、model-check side と public-checker docs-only chain を separate reserve bucket に整理した。repo-level current line は stable-static edge-pair first reopen に進んだ。
