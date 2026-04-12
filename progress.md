@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 23:40 JST
+最終更新: 2026-04-12 23:48 JST
 
 ## この文書について
 
@@ -143,6 +143,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 23:48 JST — `docs/reports/0657` で post-public-surface document consistency audit を閉じ、FAQ2/3、Phase 5 abstract、`plan/01`、`plan/12` の stale wording を修正した。reviewer 再確認は `no findings` で、repo-level current line は Mirrorea / shared-space docs-first re-entry のまま維持した。
 - 2026-04-12 23:40 JST — `docs/reports/0656` と `specs/examples/355...356` で parser / checker / runtime public surface inventory を閉じ、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を固定した。repo-level current line は Mirrorea / shared-space docs-first re-entry に進んだ。
 - 2026-04-12 23:33 JST — `docs/reports/0655` と `specs/examples/353...354` で stable static malformed post-contrast sequencing を閉じ、second broader cluster を stable reason-code / fixture-static cluster、Macro 4 side の next reopen point を `e4/e19` edge-pair に固定した。repo-level current line は parser / checker / runtime public surface inventory に進んだ。
 - 2026-04-12 23:13 JST — `docs/reports/0654` と `specs/examples/351...352` で actual `e22` contrast-row source actualization を閉じ、`e22-try-atomic-cut-place-mismatch` を source-authored row / runner accepted set / regression inventory / verification ladder / runtime formal-hook smoke に actualize した。current line は stable static malformed post-contrast sequencing に進んだ。

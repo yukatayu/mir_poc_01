@@ -14,12 +14,14 @@
 
 - Phase 1〜5 closeout / freeze は fixed 済みである。
 - legacy Phase 6 front-half compile-ready checkpoint も fixed 済みである。
-- current immediate line は、legacy checkpoint 名で言えば
+- legacy checkpoint 名での recent close sequence は
   - actual `e3` authored-row reopen
   - proof / model-check first concrete tool pilot
   - second source-sample cluster sequencing
   - actual `e22` contrast-row source actualization
-  の並びにある。
+  - stable static malformed post-contrast sequencing
+  - parser / checker / runtime public surface inventory
+  まで fixed 済みと読む。
 
 ## macro phase reading
 
