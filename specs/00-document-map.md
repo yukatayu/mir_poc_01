@@ -973,6 +973,10 @@
   - `smoke-try-rollback-structural-checker` subcommand により、1 fixture の static gate artifact を保存して dedicated try/rollback structural helper first tranche を回せる。
 - `crates/mir-semantics/tests/current_l2_minimal_interpreter.rs`
   - current L2 parser-free PoC の public behavior coverage を置く。
+- `specs/examples/363-current-l2-stable-static-edge-pair-first-reopen-ready-public-operational-surface-actualization-gate-comparison.md`
+  - stable-static edge-pair first reopen を閉じた次段として、already-public parser-free stack を壊さずにどの compile-ready tranche を first docs-only public-pressure candidate に置くかを比較する。
+- `specs/examples/364-current-l2-public-operational-surface-actualization-gate-ready-minimal-public-operational-surface-actualization-gate-threshold.md`
+  - public operational surface actualization gate の minimum を、stable public bucket、first candidate、tranche-internal support、excluded helper、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

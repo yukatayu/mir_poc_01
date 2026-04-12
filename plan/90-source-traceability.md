@@ -2287,6 +2287,22 @@
   - `scripts/current_l2_detached_loop.py`
   - `scripts/current_l2_source_sample_regression.py`
 
+### 2026-04-13 phase6 public operational surface actualization gate addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/363-current-l2-stable-static-edge-pair-first-reopen-ready-public-operational-surface-actualization-gate-comparison.md`
+  - `specs/examples/364-current-l2-public-operational-surface-actualization-gate-ready-minimal-public-operational-surface-actualization-gate-threshold.md`
+  - `docs/reports/0662-phase6-public-operational-surface-actualization-gate-package.md`
+  - `plan/09-helper-stack-and-responsibility-map.md`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/src/lib.rs`
+  - `crates/mir-ast/src/current_l2.rs`
+  - `crates/mir-ast/src/lib.rs`
+  - `crates/mir-semantics/src/lib.rs`
+  - `crates/mir-semantics/src/harness.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/current_l2_detached_loop.py`
+
 ### 2026-04-12 phase6 third widened row e3 guard comparison addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。
