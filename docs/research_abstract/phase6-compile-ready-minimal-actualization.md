@@ -79,6 +79,16 @@ parser first tranche の actual code anchor は次である。
 - `specs/examples/315...316`
 - `specs/examples/317...318`
 - `specs/examples/319...320`
+- `specs/examples/321...322`
+- `specs/examples/323...324`
+- `specs/examples/325...326`
+- `specs/examples/327...328`
+- `specs/examples/329...330`
+- `specs/examples/331...332`
+- `specs/examples/333...334`
+- `specs/examples/335...336`
+- `specs/examples/337...338`
+- `specs/examples/339...340`
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
 - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 - `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
@@ -86,6 +96,19 @@ parser first tranche の actual code anchor は次である。
 - `docs/reports/0620-phase6-parser-followup-sequencing-package.md`
 - `docs/reports/0621-phase6-shared-single-attachment-frame-first-package.md`
 - `docs/reports/0622-phase6-source-sample-corpus-scope-and-layout.md`
+- `docs/reports/0624-phase6-representative-fixture-source-mapping-matrix.md`
+- `docs/reports/0625-phase6-source-lowering-first-cut.md`
+- `docs/reports/0626-phase6-source-sample-runner-first-cut.md`
+- `docs/reports/0628-phase6-source-sample-verification-ladder-wiring.md`
+- `docs/reports/0629-phase6-source-sample-authoring-bless-regression-policy.md`
+- `docs/reports/0630-phase6-theorem-first-concrete-tool-pilot.md`
+- `docs/reports/0636-phase6-deferred-authored-row-widen-sequencing-package.md`
+- `docs/reports/0637-phase6-proof-notebook-bridge-sketch-reopen-ordering-package.md`
+- `docs/reports/0638-phase6-mirror-sweep-follow-up-maintenance-and-document-consistency-audit.md`
+- `docs/reports/0639-phase6-first-widened-authored-row-e1-actualization-package.md`
+- `docs/reports/0640-phase6-second-widened-authored-row-e21-actualization-package.md`
+- `docs/reports/0641-phase6-third-widened-row-e3-guard-comparison-package.md`
+- `docs/reports/0642-phase6-plain-proof-notebook-bridge-sketch-actualization-package.md`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
@@ -163,4 +186,4 @@ current recommendation としては、
 - ただし higher-level async-control family や low-level memory-order-like surface を current executable core に混ぜるのは早い
 - theorem/model-check concrete tool binding や LLVM-family backend / external codegen も、source corpus / lowering / runner / ladder のあとに narrow pilot として扱う
 - widened authored-row order は `e1 -> e21 -> e3` に置き、`e1` / `e21` は actual authored row として閉じ、`e3` は admit-family / theorem-side guard を伴う third slot に残す
-- theorem-side plain bridge sketch は authored-row line の後で reopen し、compare-ready bridge sketch は second reopen に残す
+- theorem-side plain bridge sketch は authored-row line の後で actualize 済みであり、compare-ready bridge sketch は current second reopen line に置く

@@ -109,7 +109,6 @@ Phase 3 は長く reserve path だったが、Phase 6 front-half へ入るため
 
 次は self-driven に比較を続けてよい。
 
-- Phase 6 theorem-side plain bridge sketch actualization
 - Phase 6 theorem-side compare-ready bridge sketch second reopen
 - Phase 6 deferred `e3` actualization reopen timing
 - Phase 6 actual `e3` authored-row reopen

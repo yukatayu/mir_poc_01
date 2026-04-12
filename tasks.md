@@ -1,11 +1,11 @@
 # tasks
 
-最終更新: 2026-04-12 20:04 JST
+最終更新: 2026-04-12 20:10 JST
 
 ## この文書について
 
 - この文書は repo 全体の **current task map** である。
-- 今回の snapshot は、**Phase 1〜5 の self-driven closeout / freeze と、Phase 6 front-half compile-ready checkpoint close fixed 後に、fixed-subset source sample の actual widened row line と theorem-side plain bridge sketch reopen lineへどう接続するか** を見通せる粒度で書く。
+- 今回の snapshot は、**Phase 1〜5 の self-driven closeout / freeze と、Phase 6 front-half compile-ready checkpoint close fixed 後に、fixed-subset source sample の actual widened row line と theorem-side bridge sketch reopen lineへどう接続するか** を見通せる粒度で書く。
 - ここでいう「Phase 完了」は、**現 phase の self-driven package を閉じ、残件を user-spec-required / heavy future workstream / reserve reopen line として切り分け終えた状態**を指す。
 - 規範判断の正本は `specs/`、長期比較と repository memory は `plan/`、詳細な時系列は `docs/reports/` に置く。
 - `tasks.md` は append-only の履歴ではない。**毎回 current snapshot に合わせて全体を書き直す。**
@@ -41,9 +41,9 @@
 | 順番 | phase | task package | 完了条件の要点 | rough weight | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
 | 1 | Phase 6 theorem-side docs-first reopen | compare-ready bridge sketch second reopen | plain bridge sketch actualization の後段として compare-ready bridge sketch threshold を narrow reopen する | 中 | 1〜2 task / 数日 | 自走可能 |
-| 2 | Phase 6 theorem-side reserve reopen | proof / model-check handoff first concrete tool cut | compare-ready bridge sketch の後段として first concrete theorem/model-check tool cut を narrow reopen する | 中 | 1〜3 task / 1〜2週 | 自走可能 |
-| 3 | Phase 6 sample path / theorem guard reserve reopen | deferred `e3` actualization reopen timing | theorem-side line の後で `e3` widen をどこへ戻すかを narrow に比較する | 中 | 1〜2 task / 数日 | 自走可能 |
-| 4 | Phase 6 sample path / theorem guard reserve reopen | actual `e3` authored-row package | reopen timing fixed 後に `e3-option-admit-chain` を actual authored row に上げるかを narrow に扱う | 中 | 1〜2 task / 数日 | 自走可能 |
+| 2 | Phase 6 sample path / theorem guard reserve reopen | deferred `e3` actualization reopen timing | theorem-side line の後で `e3` widen をどこへ戻すかを narrow に比較する | 中 | 1〜2 task / 数日 | 自走可能 |
+| 3 | Phase 6 sample path / theorem guard reserve reopen | actual `e3` authored-row package | reopen timing fixed 後に `e3-option-admit-chain` を actual authored row に上げるかを narrow に扱う | 中 | 1〜2 task / 数日 | 自走可能 |
+| 4 | Phase 6 theorem-side reserve reopen | proof / model-check handoff first concrete tool cut | `e3` authored-row reopen の後段として first concrete theorem/model-check tool cut を narrow reopen する | 中 | 1〜3 task / 1〜2週 | 自走可能 |
 
 ## 自走で進める task package
 
@@ -54,26 +54,26 @@
 - 完了条件
   - plain bridge sketch current cut を壊さず、compare-bless metadata や concrete theorem/model-check binding を still later に残す。
 
-### Task 2. Phase 6 theorem-side reserve reopen proof / model-check handoff first concrete tool cut
-
-- 目的
-  - compare-ready bridge sketch の後段として、proof notebook / model-check side の first concrete tool cut を narrow reopen する。
-- 完了条件
-  - compare-ready bridge sketch current cut を壊さず、theorem-first reserve / model-check second reserve の順を保つ。
-
-### Task 3. Phase 6 sample path / theorem guard reserve reopen deferred `e3` actualization reopen timing
+### Task 2. Phase 6 sample path / theorem guard reserve reopen deferred `e3` actualization reopen timing
 
 - 目的
   - theorem-side bridge line の後で `e3-option-admit-chain` widening をどこへ戻すかを narrow に比較する。
 - 完了条件
   - `e3` actualization を premature に current authored inventory へ混ぜず、theorem-side / formal-hook guard comparison fixed の意味を保つ。
 
-### Task 4. Phase 6 sample path / theorem guard reserve reopen actual `e3` authored-row package
+### Task 3. Phase 6 sample path / theorem guard reserve reopen actual `e3` authored-row package
 
 - 目的
   - reopen timing fixed 後に `e3-option-admit-chain` を actual authored row に上げるかを narrow に扱う。
 - 完了条件
   - theorem-side bridge line と formal-hook family guard を壊さず、`e3` actualization を minimal reopened package に留める。
+
+### Task 4. Phase 6 theorem-side reserve reopen proof / model-check handoff first concrete tool cut
+
+- 目的
+  - `e3` authored-row reopen の後段として、proof notebook / model-check side の first concrete tool cut を narrow reopen する。
+- 完了条件
+  - `e3` authored-row reopen と compare-ready bridge sketch current cut を壊さず、theorem-first reserve / model-check second reserve の順を保つ。
 
 ## 方針決定が必要な blocker / open question
 

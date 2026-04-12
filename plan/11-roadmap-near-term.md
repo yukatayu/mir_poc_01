@@ -53,7 +53,7 @@ current immediate execution order は `plan/17-research-phases-and-autonomy-gate
 | 目標 | rough step estimate | 注記 |
 |---|---|---|
 | theorem-side bridge sketch reopen line | 1〜3 task | widen sequencing / bridge-sketch ordering / `e3` guard comparison / plain bridge sketch actualization は fixed 済みであり、remaining theorem-side next reopen timing を narrow に接続する |
-| plain bridge-sketch reopen actualization | 1〜2 task | review-unit current cut を維持したまま plain docs-only bridge sketch を actual next theorem-side reopen に置く |
+| actual `e3` authored-row reopen | 1〜2 task | compare-ready bridge sketch second reopen と deferred `e3` timing fixed 後に `e3-option-admit-chain` を current authored row へ戻す最小 package を切る |
 
 ## いま見えている later blocker / open question
 

@@ -84,7 +84,7 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
 | source-sample path は `e1` / `e21` widen まで fixed 済みだが remaining widened row は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner、authored quintet reached-stage inventory、repo-local policy helper、`e1 -> e21 -> e3` widen order、`e1` / `e21` actual row は揃ったが、`e3` は still later |
-| theorem-first bridge sketch / concrete tool handoff は ordering まで fixed 済みだが actual line は未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、authored quintet ladder、source sample policy、proof notebook review unit pilot、bridge sketch reopen ordering はあるが、plain bridge sketch actual package / concrete theorem-model-check tool handoff はまだ薄い |
+| theorem-first bridge sketch / concrete tool handoff は plain actualization まで fixed 済みだが compare-ready 以降は未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、authored quintet ladder、source sample policy、proof notebook review unit pilot、bridge sketch reopen ordering、plain bridge sketch actual package はあるが、compare-ready second reopen / concrete theorem-model-check tool handoff はまだ薄い |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
 | heavy future workstream 未着手 | 型・静的解析・定理証明・決定可能性はまだ本格着手前 |
@@ -97,8 +97,8 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 | 目標 | rough estimate |
 |---|---|
 | compare-ready bridge sketch second reopen + deferred `e3` actualization reopen timing | 2〜4 task |
-| plain bridge sketch actualization | 1〜2 task |
 | compare-ready bridge sketch second reopen | 1〜2 task |
+| actual `e3` authored-row reopen | 1〜2 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |
 

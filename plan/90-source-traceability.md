@@ -2175,3 +2175,11 @@
   - `specs/examples/339-current-l2-minimal-third-widened-row-e3-guard-ready-plain-proof-notebook-bridge-sketch-actualization-comparison.md`
   - `specs/examples/340-current-l2-plain-proof-notebook-bridge-sketch-actualization-ready-minimal-plain-proof-notebook-bridge-sketch-threshold.md`
   - `docs/reports/0642-phase6-plain-proof-notebook-bridge-sketch-actualization-package.md`
+
+### 2026-04-12 phase6 post-task document consistency audit addendum
+
+- `progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `docs/reports/0643-phase6-post-task-document-consistency-audit.md`
+  - `docs/reports/0642-phase6-plain-proof-notebook-bridge-sketch-actualization-package.md`
+  - `specs/examples/339-current-l2-minimal-third-widened-row-e3-guard-ready-plain-proof-notebook-bridge-sketch-actualization-comparison.md`
+  - `specs/examples/340-current-l2-plain-proof-notebook-bridge-sketch-actualization-ready-minimal-plain-proof-notebook-bridge-sketch-threshold.md`

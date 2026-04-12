@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 20:04 JST
+最終更新: 2026-04-12 20:10 JST
 
 ## この文書について
 
@@ -123,6 +123,7 @@
 ## 作業ログ（簡潔）
 
 - 注記: この欄は **recent log** として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 20:10 JST — `docs/reports/0643` で post-task document consistency audit を閉じ、plain bridge sketch actualization が still-open に見える stale wording を `tasks.md` と relevant `plan/` から除去した。current line は compare-ready bridge sketch second reopen のまま維持した。
 - 2026-04-12 20:04 JST — `docs/reports/0642` と `specs/examples/339...340` で plain proof-notebook bridge sketch actualization を閉じ、old theorem-line `specs/examples/140` の docs-only bridge shape を current theorem-side first actualization として再利用する cut を固定した。snapshot docs の current line は compare-ready bridge sketch second reopen に進めた。
 - 2026-04-12 19:49 JST — `docs/reports/0641` と `specs/examples/337...338` で third widened row `e3` theorem-side / formal-hook guard comparison を閉じ、`e3` を deferred row のまま保つ current guard と next line の plain bridge sketch actualization を固定した。snapshot docs の current line は theorem-side plain bridge sketch actualization に進めた。
 - 2026-04-12 19:33 JST — `docs/reports/0640` と `specs/examples/335...336` で second widened authored row `e21` actualization を閉じ、`e21-try-atomic-cut-frontier` を source row / runner accepted set / regression bundle / README ladder の current authored inventory に昇格した。snapshot docs の current line は `e3` theorem-side / formal-hook guard comparison に進めた。

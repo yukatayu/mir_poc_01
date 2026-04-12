@@ -122,5 +122,5 @@ next promoted line は、
 ## open questions
 
 - compare-ready bridge sketch second reopen の minimum に `comparison_basis_refs` 以外をどこまで入れるか
-- deferred `e3` actualization reopen timing を compare-ready bridge sketch の前後どちらに置くか
+- deferred `e3` actualization reopen timing を compare-ready bridge sketch second reopen の直後に置く current cutを保ったまま、その後の tool-cut line とどう接続するか
 - later helper / emitter code anchor を plain bridge sketch ではなく compare-ready package 側に寄せるべきか

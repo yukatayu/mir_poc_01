@@ -62,7 +62,6 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- theorem-side plain bridge sketch actualization
 - theorem-side compare-ready bridge sketch second reopen
 - deferred `e3` actualization reopen timing
 - actual `e3` authored-row reopen
