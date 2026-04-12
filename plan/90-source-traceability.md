@@ -219,6 +219,20 @@
   - `samples/current-l2/e2-try-fallback.txt`
   - `samples/current-l2/e23-malformed-try-fallback-missing-fallback-body.txt`
 
+## 2026-04-13 Phase 6 stable-static edge-pair first reopen addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/361-current-l2-model-check-public-checker-second-reserve-inventory-ready-stable-static-edge-pair-first-reopen-comparison.md`
+  - `specs/examples/362-current-l2-stable-static-edge-pair-first-reopen-ready-minimal-stable-static-edge-pair-first-reopen-threshold.md`
+  - `docs/reports/0661-phase6-stable-static-edge-pair-first-reopen-package.md`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+  - `samples/current-l2/e19-malformed-target-mismatch.txt`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`
+
 ## 2026-04-12 Phase 6 source sample runner first cut addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`samples/current-l2/README.md` の今回更新分は、追加で次を主根拠にする。

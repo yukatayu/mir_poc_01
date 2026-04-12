@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 00:37 JST
+最終更新: 2026-04-13 02:51 JST
 
 ## この文書について
 
@@ -22,37 +22,29 @@
   - `Macro 5` theorem / verifier bridge
   が mainline である。
 - second source-sample cluster sequencing は `specs/examples/349...350` により fixed 済みであり、post-sextet first cluster は `e21` / `e22` try-rollback locality contrast に置く。
-- actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の septet に進んだ。
-- stable static malformed post-contrast sequencing も `specs/examples/353...354` により fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster、Macro 4 side の next reopen point は `e4` / `e19` edge-pair に置く。
-- parser / checker / runtime public surface inventory も `specs/examples/355...356` により fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split に整理した。
-- model-check / public-checker second reserve inventory も `specs/examples/359...360` により fixed 済みであり、`proof_notebook_review_unit` を current first concrete pilot に維持したまま、model-check reserve と public-checker docs-only reserve を separate bucket に置く current cut を採った。
-- current promoted line は **stable-static edge-pair first reopen** であり、その後に
-  - public operational surface actualization gate
+- actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` の octet に進んだ。
+- stable static malformed post-contrast sequencing は `specs/examples/353...354` により fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster に置く。
+- parser / checker / runtime public surface inventory は `specs/examples/355...356` により fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split に整理した。
+- model-check / public-checker second reserve inventory は `specs/examples/359...360` により fixed 済みであり、`proof_notebook_review_unit` を current first concrete pilot に維持したまま、model-check reserve と public-checker docs-only reserve を separate bucket に置く current cut を採った。
+- stable-static edge-pair first reopen は `specs/examples/361...362` により fixed 済みであり、existing `e4` row と deferred `e19` row を source-backed static-stop pair に actualize した。
+- current promoted line は **public operational surface actualization gate** であり、その後に
   - shared-space identity / auth layering reopen
   - model-check concrete carrier first actualization gate
+  - stable malformed broader follow-up inventory
   を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 4` | sample corpus widening | `S3-S4 -> S4-S5` | stable-static edge-pair first reopen | 1〜3 task / 数日〜1週 | 自走可能 |
-| 2 | `Macro 3-7` | public operational surface | `S2-S3 -> S3-S4` | public operational surface actualization gate | 2〜4 task / 1〜2週 | 一部自走可能 |
-| 3 | `Macro 6` | shared-space boundary | `S3 -> S3-S4` | shared-space identity / auth layering reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
-| 4 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check concrete carrier first actualization gate | 1〜3 task / 1〜2週 | 一部自走可能 |
+| 1 | `Macro 3-7` | public operational surface | `S2-S3 -> S3-S4` | public operational surface actualization gate | 2〜4 task / 1〜2週 | 一部自走可能 |
+| 2 | `Macro 6` | shared-space boundary | `S3 -> S3-S4` | shared-space identity / auth layering reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
+| 3 | `Macro 5` | external verifier bridge | `S3-S4 -> S4-S5` | model-check concrete carrier first actualization gate | 1〜3 task / 1〜2週 | 一部自走可能 |
+| 4 | `Macro 4` | malformed cluster follow-up | `S4-S5 -> S5-S6` | stable malformed broader follow-up inventory | 1〜3 task / 数日〜1週 | 自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. stable-static edge-pair first reopen
-
-- macro phase
-  - `Macro 4`
-- 目的
-  - stable static malformed broader cluster の first concrete reopen を `e4` / `e19` edge-pair sideへ narrow に actualize する。
-- 完了条件
-  - duplicate cluster と try/rollback malformed-static family を still later に残したまま、stable-static edge-pair line だけを source / fixture / ladder へ戻す。
-
-### Package 2. public operational surface actualization gate
+### Package 1. public operational surface actualization gate
 
 - macro phase
   - `Macro 3-7`
@@ -61,7 +53,7 @@
 - 完了条件
   - `pub visibility != final public contract` を保ったまま、later public API / CLI reopen の first sub-cut を narrow に示す。
 
-### Package 3. shared-space identity / auth layering reopen
+### Package 2. shared-space identity / auth layering reopen
 
 - macro phase
   - `Macro 6`
@@ -70,7 +62,7 @@
 - 完了条件
   - principal identity、transport / service auth、room admission、display / projection identity を membership carrier に潰さない current boundary を current task map に昇格する。
 
-### Package 4. model-check concrete carrier first actualization gate
+### Package 3. model-check concrete carrier first actualization gate
 
 - macro phase
   - `Macro 5`
@@ -79,19 +71,18 @@
 - 完了条件
   - tool-neutral formal hook / compare-ready bridge sketch / later public-checker chain を崩さず、model-check concrete carrier の first reopen gate だけを snapshot に昇格する。
 
+### Package 4. stable malformed broader follow-up inventory
+
+- macro phase
+  - `Macro 4`
+- 目的
+  - edge-pair close 後の broader malformed follow-up を missing-option / capability family、duplicate cluster、try/rollback malformed-static familyの順でどう reopen するかを narrow inventory に戻す。
+- 完了条件
+  - `e4/e19` edge-pair close を巻き戻さず、broader malformed side の next reopen order と kept-later guard を current task map に整理する。
+
 ## 研究を通して見つけること
 
-### Discovery 1. stable-static edge-pair first reopen の bundle shape
-
-- 概要
-  - `e4` / `e19` を stable-static edge-pair first reopen に戻すとき、source / fixture / ladder / formal-hook のどこまでを同時に太らせるか。
-- 何に影響するか
-  - executable subset の widening speed
-  - static malformed cluster の drift suppression
-- current recommendation
-  - **stable reason-code / fixture-static cluster selection は fixed とし、first reopen は `e4` / `e19` edge-pair sideへ narrow に戻す**。
-
-### Discovery 2. public operational surface の actualization timing
+### Discovery 1. public operational surface の actualization timing
 
 - 概要
   - inventory fixed 後に、parser / checker / runtime current tranche のどこから actual public pressure を受けるか。
@@ -100,6 +91,16 @@
   - future CLI / public API timing
 - current recommendation
   - **parser-free existing public behavior を維持し、current tranche の actual promotion は still later の first sub-cut に残す**。
+
+### Discovery 2. shared-space identity / auth layering reopen
+
+- 概要
+  - Mirrorea/shared-space docs-first re-entry fixed 後に、membership core と auth / admission / projection layering をどの boundary で切るか。
+- 何に影響するか
+  - `Macro 6`
+  - later operational shared-space line
+- current recommendation
+  - **membership carrier を薄く保ち、identity / auth / admission / projection は distinct boundary として reopen する**。
 
 ### Discovery 3. model-check concrete carrier first actualization gate
 
@@ -111,14 +112,15 @@
 - current recommendation
   - **proof notebook current line を first pilot に維持し、model-check concrete carrier だけを先に narrow inventory から reopen し、public-checker migration は still later に残す**。
 
-### Discovery 4. backend / public operational surface の timing
+### Discovery 4. stable malformed broader follow-up
 
 - 概要
-  - LLVM-family backend や public operational CLI をいつ mainline に入れるか。
+  - edge-pair close 後に、broader malformed family をどの順番で source-backed へ戻すか。
 - 何に影響するか
-  - syntax / IR / public API の早期固定
+  - executable subset の widening speed
+  - malformed cluster の drift suppression
 - current recommendation
-  - **source sample / theorem-side bridge のあと** に narrow inventory から開く。
+  - **missing-option / capability family、duplicate cluster、try/rollback malformed-static familyを分けて inventory し、1 package に混ぜない**。
 
 ## user が決める必要があること
 
@@ -163,5 +165,5 @@
 
 ## 現在の blocker 読み
 
-- **current Package 1〜5 を止める immediate blocker は 0 件** と読むのが自然である。
+- **current Package 1〜4 を止める immediate blocker は 0 件** と読むのが自然である。
 - current blocker は主に research-discovery 側にあり、user decision は主として `Macro 6` 以降の gate にある。

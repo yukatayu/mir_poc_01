@@ -685,6 +685,10 @@
   - Mirrorea/shared-space docs-first re-entry fixed 後の次段として、`proof_notebook_review_unit` first concrete pilot を巻き戻さずに model-check side と public-checker docs-only chain を separate reserve bucket に整理する narrow inventory を比較する補助文書。
 - `specs/examples/360-current-l2-model-check-public-checker-second-reserve-inventory-ready-minimal-model-check-public-checker-second-reserve-inventory-threshold.md`
   - model-check/public-checker second reserve inventory の minimum を `inventory_kind + entry_criteria_refs + current_first_pilot_refs + model_check_second_reserve_refs + public_checker_second_reserve_refs + guard_refs + kept_later_refs` に留める補助文書。
+- `specs/examples/361-current-l2-model-check-public-checker-second-reserve-inventory-ready-stable-static-edge-pair-first-reopen-comparison.md`
+  - model-check/public-checker second reserve inventory fixed 後の次段として、stable static malformed broader cluster の first reopen を `e4` existing row と deferred `e19` new row の source-backed edge-pair close に narrow actualize する補助文書。
+- `specs/examples/362-current-l2-stable-static-edge-pair-first-reopen-ready-minimal-stable-static-edge-pair-first-reopen-threshold.md`
+  - stable-static edge-pair first reopen の minimum を `reopen_kind + entry_criteria_refs + actualized_edge_pair_rows + reached_stage_refs + guard_refs + kept_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

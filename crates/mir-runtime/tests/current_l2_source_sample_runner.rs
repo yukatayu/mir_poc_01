@@ -211,6 +211,25 @@ fn current_l2_source_sample_runner_accepts_explicit_e4_path() {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_named_e19_sample() {
+    let report =
+        run_current_l2_source_sample("e19-malformed-target-mismatch", FixtureHostPlan::default())
+            .unwrap();
+
+    assert_eq!(report.sample_id, "e19-malformed-target-mismatch");
+    assert_eq!(
+        report.sample_path,
+        sample_path("e19-malformed-target-mismatch.txt")
+    );
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    assert!(!report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_named_e23_sample() {
     let report = run_current_l2_source_sample(
         "e23-malformed-try-fallback-missing-fallback-body",

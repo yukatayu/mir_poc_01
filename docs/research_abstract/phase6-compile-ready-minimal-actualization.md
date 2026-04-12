@@ -194,8 +194,11 @@ Mirrorea/shared-space docs-first re-entry bundle も fixed 済みであり、`mi
 `specs/examples/359...360` により、
 model-check/public-checker second reserve inventory も fixed 済みであり、`proof_notebook_review_unit` を current first concrete pilot に維持したまま、model-check side は tool-neutral formal hook / compare-ready bridge sketch 起点の second reserve、public-checker side は payload schema から verifier handoff surface までの docs-only chain を second reserve bucket に留める current cut を採った。concrete tool binding、actual public checker migration、actual emitted verifier handoff artifact は still later に残す。
 
+`specs/examples/361...362` により、
+stable-static edge-pair first reopen も fixed 済みであり、existing `e4` row と deferred `e19` row を source-backed static-stop pair として actualize し、`e19-malformed-target-mismatch` を helper-compatible source row、runner accepted set、regression helper current authored inventory、README ladder、fixture-static detached formal-hook smoke に narrow actualize した。duplicate cluster、`TryFallback` / `AtomicCut` malformed-static family、public operational surface actualization gate は still later に残す。
+
 current mainline は、
-**repo-level current line は stable-static edge-pair first reopen**
+**repo-level current line は public operational surface actualization gate**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -204,7 +207,6 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- stable-static edge-pair first reopen
 - public operational surface actualization gate
 - shared-space identity / auth layering reopen
 - model-check concrete carrier first actualization gate

@@ -18,9 +18,9 @@ current meaning は、
 
 ## current scope
 
-- current authored source sample は `e1` / `e2` / `e3` / `e21` / `e22` / `e4` / `e23` の authored septet に置く。
+- current authored source sample は `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` の authored octet に置く。
 - `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
-- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable static malformed post-contrast sequencing、parser / checker / runtime public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory も fixed 済みである。repo-level current line は stable-static edge-pair first reopen に置き、source-sample side の current reopen は `e4` / `e19` edge-pair にある。
+- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen では existing `e4` row と new `e19` row を source-backed static-stop pair へ actualize 済みである。parser / checker / runtime public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory も fixed 済みであり、repo-level current line は public operational surface actualization gate に置く。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
@@ -48,9 +48,10 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e21-try-atomic-cut-frontier ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e22-try-atomic-cut-place-mismatch ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e4-malformed-lineage ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e19-malformed-target-mismatch ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
 
-helper は current authored septet を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
+helper は current authored octet を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
 
 ## current non-goals

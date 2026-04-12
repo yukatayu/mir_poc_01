@@ -175,6 +175,31 @@ fn verification_ladder_marks_e4_as_static_stop_and_static_formal_hook_reached() 
 }
 
 #[test]
+fn verification_ladder_marks_e19_as_static_stop_and_static_formal_hook_reached() {
+    let source_report = run_current_l2_source_sample(
+        "e19-malformed-target-mismatch",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(
+        source_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    assert!(!source_report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+
+    let path = fixture_path("e19-malformed-target-mismatch.json");
+    let fixture = load_fixture_from_path(&path).unwrap();
+    let gate = static_gate_detailed(&fixture);
+    let detached_static = build_detached_static_gate_artifact(path, &fixture, &gate);
+    let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
+
+    assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
+    assert_eq!(formal_hook.subject_ref, "e19_malformed_target_mismatch");
+}
+
+#[test]
 fn verification_ladder_marks_e23_as_static_stop_and_static_formal_hook_reached() {
     let source_report = run_current_l2_source_sample(
         "e23-malformed-try-fallback-missing-fallback-body",
