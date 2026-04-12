@@ -88,7 +88,7 @@
 
 ## 現在の主線
 
-いま repo の主線は、次の 4 本である。
+いま repo の主線は、次の 3 本である。
 
 1. **Phase 6 verification ladder / source-sample policy**
    - sample ごとの reached stage と更新手順を固定する

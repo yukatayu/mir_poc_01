@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-12 12:49 JST
+最終更新: 2026-04-12 13:09 JST
 
 ## この文書について
 
@@ -118,6 +118,7 @@
 ## 作業ログ（簡潔）
 
 - 注記: この欄は **recent log** として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-12 13:09 JST — `docs/reports/0627` で post-task document consistency audit を記録し、`plan/10` の near-term/next-phase 重複と `plan/17` の mainline count drift を修正した。current mainline は引き続き `verification ladder wiring` である。
 - 2026-04-12 12:49 JST — `specs/examples/321...322` と `docs/reports/0626` を追加し、`mir_runtime::current_l2::run_current_l2_source_sample` を helper-local runner として actualizeした。accepted sample set 内の sample stem shorthand / explicit path と explicit host plan input を current cut に留め、current mainline は `verification ladder wiring` に切り替わった。
 - 2026-04-12 12:36 JST — `specs/examples/319...320` と `docs/reports/0625` を追加し、`mir_runtime::current_l2::lower_current_l2_fixed_source_text` を helper-local lowerer として actualizeした。first authored trio `e4` / `e2` / `e23` を semantic `Program` + optional stage 1 / stage 2 bridge evidence へ fail-closed に落とし、current mainline は `syntax-backed sample runner first cut` に切り替わった。
 - 2026-04-12 12:17 JST — `specs/examples/317...318` と `docs/reports/0624` を追加し、initial cluster `e1` / `e2` / `e3` / `e4` / `e21` / `e23` の representative / fixture / source mapping matrix を fixed した。`e3` は `E3-variant` row、`e23` は unresolved representative anchor として保持し、current mainline は `actual parser-to-Program lowering first cut` に切り替わった。

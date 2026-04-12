@@ -67,7 +67,6 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### その次のフェーズ
 
-- source-sample authoring / bless / regression policy
 - proof / model-check handoff の first concrete tool cut
 - richer host interface の actual widening を still later に残したまま、parser second tranche widen を比較する
 - parser / checker / runtime public surface の second tranche inventory
