@@ -13,7 +13,7 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering、`e1` actualization、maintenance close を fixed 済み entry criteria とし、current line を second widened row `e21` actualization に置く
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix、lowering、runner、verification ladder、source-sample policy、theorem-first concrete tool pilot、authored-row widen sequencing、bridge-sketch reopen ordering、`e1` / `e21` actualization、maintenance close を fixed 済み entry criteria とし、current line を third widened row `e3` guard comparison に置く
 5. fixed-subset source corpus / mapping / lowering / runner / verification ladder / authoring policy と proof-notebook review-unit pilot を維持しつつ、widened authored-row order `e1 -> e21 -> e3`、theorem-side plain bridge sketch first / compare-ready bridge sketch second の順を final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
@@ -29,7 +29,7 @@
 - capability mismatch は formal subreason にせず narrative explanation に留める
 - compact syntax 比較の結果、**explicit edge-row family** を current L2 companion notation として維持する
 - Phase 6 front-half では stage 1 / stage 2 parser carrier、checker/runtime thin skeleton、theorem-line整合の tool-neutral formal hook first trancheまで fixed 済みである
-- current authored source sample quartet `e1` / `e2` / `e4` / `e23` の verification ladder も fixed 済みであり、`e1` / `e2` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読む
+- current authored source sample quintet `e1` / `e2` / `e21` / `e4` / `e23` の verification ladder も fixed 済みであり、`e1` / `e2` / `e21` は `static gate -> interpreter -> runtime_try_cut_cluster formal hook`、`e4` / `e23` は `static gate -> fixture_static_cluster formal hook` まで current reached と読む
 - theorem-first concrete consumer も first pilot までは fixed 済みであり、tool-neutral formal hook artifact を入力にする non-production `proof_notebook_review_unit` を current cut に置く
 
 ### まだ未決のもの
@@ -71,9 +71,9 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- second widened authored row `e21` actualization へ進む
 - third widened row `e3` theorem-side / formal-hook guard comparison を比較する
 - theorem-side plain bridge sketch actualization を比較する
+- theorem-side compare-ready bridge sketch second reopen を比較する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
 
 ## 主要な blocker / risk
@@ -83,8 +83,8 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| source-sample path は `e1` widen まで fixed 済みだが remaining widened row は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner、authored quartet reached-stage inventory、repo-local policy helper、`e1 -> e21 -> e3` widen order、`e1` actual row は揃ったが、`e21` / `e3` は still later |
-| theorem-first bridge sketch / concrete tool handoff は ordering まで fixed 済みだが actual line は未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、authored quartet ladder、source sample policy、proof notebook review unit pilot、bridge sketch reopen ordering はあるが、plain bridge sketch actual package / concrete theorem-model-check tool handoff はまだ薄い |
+| source-sample path は `e1` / `e21` widen まで fixed 済みだが remaining widened row は未整備 | representative prose / fixture corpus / source target path の 3 層対応、helper-local lowering、file-path-backed runner、authored quintet reached-stage inventory、repo-local policy helper、`e1 -> e21 -> e3` widen order、`e1` / `e21` actual row は揃ったが、`e3` は still later |
+| theorem-first bridge sketch / concrete tool handoff は ordering まで fixed 済みだが actual line は未整備 | compile-ready checkpoint、source-to-`Program` lowerer、helper-local runner、authored quintet ladder、source sample policy、proof notebook review unit pilot、bridge sketch reopen ordering はあるが、plain bridge sketch actual package / concrete theorem-model-check tool handoff はまだ薄い |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
 | heavy future workstream 未着手 | 型・静的解析・定理証明・決定可能性はまだ本格着手前 |
@@ -96,7 +96,7 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| second widened row `e21` actualization + third widened row `e3` guard comparison | 2〜4 task |
+| third widened row `e3` guard comparison + plain bridge sketch actualization | 2〜4 task |
 | plain bridge sketch actualization | 1〜2 task |
 | compare-ready bridge sketch second reopen | 1〜2 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |

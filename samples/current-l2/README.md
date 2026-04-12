@@ -48,19 +48,20 @@ current first matrix は、representative prose / fixture corpus / source target
 
 ## current authored files
 
-- actual source file として current repo にあるのは `e1-place-atomic-cut.txt`、`e2-try-fallback.txt`、`e4-malformed-lineage.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の current authored quartet である。
-- `e21` / `e3` は current matrix 上の target path を維持しつつ、remaining authored-row widen sequencing は `e21 -> e3` に置く。
+- actual source file として current repo にあるのは `e1-place-atomic-cut.txt`、`e2-try-fallback.txt`、`e21-try-atomic-cut-frontier.txt`、`e4-malformed-lineage.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の current authored quintet である。
+- `e3` は current matrix 上の target path を維持しつつ、remaining authored-row widen sequencing / guard line に置く。
 - current lowerer first cut は single-line `require` / `ensure` と inline `admit` fragment を受け、multiline clause suite は fail-closed に止める。
 - current runner first cut は accepted sample set 内の explicit path と sample stem shorthand を受け、host plan は explicit input に留める。
 
 ## current verification ladder
 
-current reached-stage inventory は current authored quartet `e1` / `e2` / `e4` / `e23` に付ける。
+current reached-stage inventory は current authored quintet `e1` / `e2` / `e21` / `e4` / `e23` に付ける。
 
 | sample stem | authored status | static gate | interpreter | formal hook | evidence route |
 |---|---|---|---|---|---|
 | `e1-place-atomic-cut` | `source-authored` | `reached(valid)` | `reached(explicit_failure)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
 | `e2-try-fallback` | `source-authored` | `reached(valid)` | `reached(success)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
+| `e21-try-atomic-cut-frontier` | `source-authored` | `reached(valid)` | `reached(success)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
 | `e4-malformed-lineage` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e23-malformed-try-fallback-missing-fallback-body` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e3-option-admit-chain` | `source-target-only` | `not yet authored` | `not yet authored` | `not yet authored` | source target path only |
@@ -82,12 +83,12 @@ current reached-stage inventory は current authored quartet `e1` / `e2` / `e4` 
 ## current authoring flow
 
 - source sample を更新するときは source text / fixture mapping / matrix / ladder / snapshot docs を同じ task で揃える。
-- `python3 scripts/current_l2_source_sample_regression.py inventory` は current authored quartet の file presence と deferred row absence を確認する。
-- `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` は current authored quartet の lowering / runner / ladder / formal-hook smoke bundle を流す。
+- `python3 scripts/current_l2_source_sample_regression.py inventory` は current authored quintet の file presence と deferred row absence を確認する。
+- `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` は current authored quintet の lowering / runner / ladder / formal-hook smoke bundle を流す。
 - current `bless` は retained artifact archive ではなく、review 済み repo-local sync と regression success の確認を意味する。
 
 ## next steps
 
-- current next line は second widened authored row `e21-try-atomic-cut-frontier` actualization である
-- その後に third widened row `e3-option-admit-chain` theorem-side / formal-hook guard comparison を置く
-- theorem-side plain bridge sketch reopen は authored-row line の後に置き、compare-ready bridge sketch はその次段に残す
+- current next line は third widened row `e3-option-admit-chain` theorem-side / formal-hook guard comparison である
+- その後に theorem-side plain bridge sketch actualization を置く
+- compare-ready bridge sketch は plain bridge sketch の次段に残す

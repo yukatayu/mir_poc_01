@@ -99,6 +99,39 @@ fn current_l2_source_lowering_matches_e2_fixture_and_stage2_bridge() {
 }
 
 #[test]
+fn current_l2_source_lowering_matches_e21_fixture_and_try_atomic_cut_frontier() {
+    let source = fs::read_to_string(sample_path("e21-try-atomic-cut-frontier.txt")).unwrap();
+    let bundle =
+        load_bundle_from_fixture_path(fixture_path("e21-try-atomic-cut-frontier.json")).unwrap();
+    let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
+    let report = run_current_l2_runtime_skeleton(
+        lowered.program,
+        bundle.host_plan.unwrap(),
+        Some(lowered.parser_bridge_input),
+    )
+    .unwrap();
+
+    assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
+    let stage2 = report.checker_floor.stage2_try_rollback_summary.unwrap();
+    assert_eq!(stage2.verdict, CurrentL2TryRollbackStructuralVerdict::NoFindings);
+    assert!(stage2.findings.is_empty());
+    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert!(report.run_report.entered_evaluation);
+    assert_eq!(report.run_report.terminal_outcome, Some(TerminalOutcome::Success));
+    assert_eq!(
+        report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformSuccess,
+            EventKind::PerformFailure,
+            EventKind::Rollback,
+            EventKind::PerformSuccess,
+        ]
+    );
+}
+
+#[test]
 fn current_l2_source_lowering_matches_e23_fixture_and_empty_fallback_bridge() {
     let source =
         fs::read_to_string(sample_path("e23-malformed-try-fallback-missing-fallback-body.txt"))

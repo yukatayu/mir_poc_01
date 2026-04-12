@@ -633,6 +633,10 @@
   - bridge-sketch reopen ordering fixed 後の次段として、`e1-place-atomic-cut` を helper-compatible single-line source row と runner / regression / README ladder へ narrow actualize するのが自然かを比較する補助文書。
 - `specs/examples/334-current-l2-first-widened-authored-row-e1-actualization-ready-minimal-first-widened-authored-row-e1-threshold.md`
   - first widened authored row `e1` actualization の minimum を `actualization_kind + entry_criteria_refs + actualized_row + reached_stage_refs + guard_refs` に留める補助文書。
+- `specs/examples/335-current-l2-first-widened-authored-row-e1-actualization-ready-second-widened-authored-row-e21-actualization-comparison.md`
+  - `e1` actualization fixed 後の次段として、`e21-try-atomic-cut-frontier` を helper-compatible source row と runner / regression / README ladder へ narrow actualize するのが自然かを比較する補助文書。
+- `specs/examples/336-current-l2-second-widened-authored-row-e21-actualization-ready-minimal-second-widened-authored-row-e21-threshold.md`
+  - second widened authored row `e21` actualization の minimum を `actualization_kind + entry_criteria_refs + actualized_row + reached_stage_refs + guard_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

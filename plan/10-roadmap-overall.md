@@ -62,10 +62,10 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- second widened authored-row actualization (`e21`)
 - admit-family guard comparison (`e3`)
 - theorem-side plain bridge sketch actualization
 - theorem-side compare-ready bridge sketch second reopen
+- proof / model-check handoff の first concrete tool cut
 
 ### その次のフェーズ
 

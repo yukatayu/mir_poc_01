@@ -74,6 +74,38 @@ fn current_l2_source_sample_runner_resolves_named_e2_sample_and_runs_runtime() {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_named_e21_sample() {
+    let bundle =
+        load_bundle_from_fixture_path(fixture_path("e21-try-atomic-cut-frontier.json")).unwrap();
+    let report =
+        run_current_l2_source_sample("e21-try-atomic-cut-frontier", bundle.host_plan.unwrap())
+            .unwrap();
+
+    assert_eq!(report.sample_id, "e21-try-atomic-cut-frontier");
+    assert_eq!(report.sample_path, sample_path("e21-try-atomic-cut-frontier.txt"));
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert!(report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformSuccess,
+            EventKind::PerformFailure,
+            EventKind::Rollback,
+            EventKind::PerformSuccess,
+        ]
+    );
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_explicit_e4_path() {
     let sample = sample_path("e4-malformed-lineage.txt");
     let report = run_current_l2_source_sample(sample.to_str().unwrap(), FixtureHostPlan::default())
