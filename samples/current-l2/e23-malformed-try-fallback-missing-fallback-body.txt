@@ -1,0 +1,7 @@
+place root {
+  try {
+    perform stage_profile_patch on profile_draft
+      require write
+  } fallback {
+  }
+}

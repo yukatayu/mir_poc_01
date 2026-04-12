@@ -221,7 +221,8 @@ detached exporter consolidation sprint の current understanding では、PoC lo
 - `crates/mir-runtime/src/current_l2.rs`
   - Phase 6 front-half checker/runtime first tranche の non-production thin orchestrator
   - semantic `Program`、`FixtureHostPlan`、optional parser bridge input を受け、stage 1 reconnect summary、stage 2 try/rollback structural summary、static gate report、runtime report を束ねる
-  - parser bridge input と semantic `Program` の mismatch は fail-closed に止め、actual parser-to-`Program` lowering や final public runtime API は still later に残す
+  - parser bridge input と semantic `Program` の mismatch は fail-closed に止め、actual parser-to-`Program` lowering first cut では `lower_current_l2_fixed_source_text` を helper-local bridge として追加してよい
+  - source lowerer の accepted cluster は place / option / chain / perform / single-line clause / single try / `atomic_cut` / inline admit に留め、multiline clause suite、second try、final public runtime API は still later に残す
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
   - Phase 6 front-half compile-ready verification / formal hook の thin CLI emitter
   - detached static gate artifact または detached bundle artifact を読み、tool-neutral formal hook artifact を JSON として出す

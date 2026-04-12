@@ -33,7 +33,7 @@
 ### まだ未決のもの
 
 - final parser grammar
-- actual parser-to-`Program` lowering first cut とその後段 widen boundary
+- actual parser/runtime sample path の widen boundary
 - concrete theorem / model-check tool binding
 - fixed-subset source-sample corpus の final authoring / bless policy
 - LLVM-family backend / external codegen binding の timing
@@ -69,7 +69,6 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- actual parser-to-`Program` lowering first cut を整理する
 - syntax-backed sample runner と verification ladder を整理する
 - checkpoint close fixed 後の snapshot を維持する
 - final parser grammar をまだ固定せず、notation / examples / fixture / helper を壊さない範囲で syntax workstream を進める
@@ -81,8 +80,8 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| source-sample corpus scope/layout と mapping matrix は fixed 済みだが lowering / runner は未整備 | representative prose / fixture corpus / source target path の 3 層対応は揃ったが、actual executable path は整理中 |
-| lowering / runner 未整備 | compile-ready checkpoint はあるが source sample から `Program` / `interpreter` への narrow path はまだない |
+| source-sample corpus scope/layout、mapping matrix、lowering first cut は fixed 済みだが runner は未整備 | representative prose / fixture corpus / source target path の 3 層対応と helper-local lowering は揃ったが、file-path-backed runner と verification ladder は整理中 |
+| runner / ladder 未整備 | compile-ready checkpoint と source-to-`Program` lowerer はあるが、source sample から `static gate` / `interpreter` / `formal hook` への narrow executable path はまだ薄い |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
 | heavy future workstream 未着手 | 型・静的解析・定理証明・決定可能性はまだ本格着手前 |
@@ -94,7 +93,7 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| representative / source mapping / lowering / runner / ladder | 2〜4 task |
+| representative / source mapping / lowering / runner / ladder | 1〜3 task |
 | theorem-first concrete tool pilot | 2〜4 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |

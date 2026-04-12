@@ -10,11 +10,13 @@ use std::collections::BTreeMap;
 use mir_ast::current_l2::{
     Stage1DeclGuardSlot, Stage1ParsedChainDecl, Stage1ParsedChainEdge, Stage1ParsedLineageAssertion,
     Stage1ParsedOptionDecl, Stage1ParsedProgram, Stage2ParsedTryFallback,
-    Stage2StatementHeadKind,
+    Stage2StatementHeadKind, Stage3PredicateFragment, parse_stage1_program_text,
+    parse_stage2_try_rollback_text, parse_stage3_minimal_predicate_fragment_text,
 };
 use mir_semantics::{
-    ChainEdge, FixtureHostPlan, FixtureHostStub, InterpreterError, LineageAssertion, Program,
-    RunReport, Statement, StaticGateResult, static_gate_program_detailed,
+    ChainEdge, Contract, FixtureHostPlan, FixtureHostStub, InterpreterError, LineageAssertion,
+    Predicate, Program, ProgramKind, RunReport, Statement, StaticGateResult,
+    static_gate_program_detailed,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -73,6 +75,12 @@ pub struct CurrentL2RuntimeSkeletonReport {
     pub run_report: RunReport,
 }
 
+#[derive(Debug, Clone)]
+pub struct CurrentL2LoweredSourceProgram {
+    pub program: Program,
+    pub parser_bridge_input: CurrentL2ParserBridgeInput,
+}
+
 pub fn run_current_l2_runtime_skeleton(
     program: Program,
     host_plan: FixtureHostPlan,
@@ -99,6 +107,623 @@ pub fn run_current_l2_runtime_skeleton(
         checker_floor,
         run_report: runtime,
     })
+}
+
+pub fn lower_current_l2_fixed_source_text(
+    source: &str,
+) -> Result<CurrentL2LoweredSourceProgram, InterpreterError> {
+    let mut parser = CurrentL2FixedSourceParser::new(collect_current_l2_source_lines(source));
+    let body = parser.parse_program_body()?;
+    let stage1_program = parser.stage1_program()?;
+    let stage2_try_fallback = parser.stage2_try_fallback()?;
+
+    Ok(CurrentL2LoweredSourceProgram {
+        program: Program {
+            kind: ProgramKind::Program,
+            body,
+        },
+        parser_bridge_input: CurrentL2ParserBridgeInput {
+            stage1_program,
+            stage2_try_fallback,
+        },
+    })
+}
+
+#[derive(Debug, Clone)]
+struct CurrentL2SourceLine {
+    line_no: usize,
+    indent: usize,
+    text: String,
+    is_blank: bool,
+}
+
+fn collect_current_l2_source_lines(source: &str) -> Vec<CurrentL2SourceLine> {
+    source
+        .lines()
+        .enumerate()
+        .map(|(line_no, raw_line)| {
+            let trimmed = raw_line.trim();
+            CurrentL2SourceLine {
+                line_no: line_no + 1,
+                indent: raw_line.chars().take_while(|ch| *ch == ' ').count(),
+                text: trimmed.to_string(),
+                is_blank: trimmed.is_empty(),
+            }
+        })
+        .collect()
+}
+
+struct CurrentL2FixedSourceParser {
+    lines: Vec<CurrentL2SourceLine>,
+    cursor: usize,
+    stage1_lines: Vec<String>,
+    stage1_supported: bool,
+    try_source: Option<String>,
+}
+
+impl CurrentL2FixedSourceParser {
+    fn new(lines: Vec<CurrentL2SourceLine>) -> Self {
+        Self {
+            lines,
+            cursor: 0,
+            stage1_lines: Vec::new(),
+            stage1_supported: true,
+            try_source: None,
+        }
+    }
+
+    fn parse_program_body(&mut self) -> Result<Vec<Statement>, InterpreterError> {
+        let mut body = Vec::new();
+
+        loop {
+            self.skip_blank_lines();
+            let Some(line) = self.peek() else {
+                break;
+            };
+            if line.indent != 0 {
+                return Err(self.line_error(
+                    line.line_no,
+                    "top-level statements must start at indent 0",
+                ));
+            }
+            body.push(self.parse_statement_at_indent(0)?);
+        }
+
+        Ok(body)
+    }
+
+    fn stage1_program(&self) -> Result<Option<Stage1ParsedProgram>, InterpreterError> {
+        if !self.stage1_supported || self.stage1_lines.is_empty() {
+            return Ok(None);
+        }
+
+        parse_stage1_program_text(&self.stage1_lines.join("\n"))
+            .map(Some)
+            .map_err(|message| {
+                InterpreterError::InvalidProgram(format!(
+                    "stage 1 bridge parse failed after source lowering: {message}"
+                ))
+            })
+    }
+
+    fn stage2_try_fallback(&self) -> Result<Option<Stage2ParsedTryFallback>, InterpreterError> {
+        let Some(source) = self.try_source.as_ref() else {
+            return Ok(None);
+        };
+
+        parse_stage2_try_rollback_text(source)
+            .map(Some)
+            .map_err(|message| {
+                InterpreterError::InvalidProgram(format!(
+                    "stage 2 bridge parse failed after source lowering: {message}"
+                ))
+            })
+    }
+
+    fn parse_statement_at_indent(
+        &mut self,
+        expected_indent: usize,
+    ) -> Result<Statement, InterpreterError> {
+        self.skip_blank_lines();
+        let line = self.peek().ok_or_else(|| {
+            InterpreterError::InvalidProgram("unexpected end of input while parsing statement".into())
+        })?;
+
+        if line.indent != expected_indent {
+            return Err(self.line_error(
+                line.line_no,
+                format!("expected indent {expected_indent}, got {}", line.indent),
+            ));
+        }
+
+        if line.text.starts_with("place ") {
+            return self.parse_place_block();
+        }
+        if line.text == "try {" {
+            return self.parse_try_fallback();
+        }
+        if line.text.starts_with("option ") {
+            return self.parse_option_decl();
+        }
+        if line.text.starts_with("chain ") {
+            return self.parse_chain_decl();
+        }
+        if line.text.starts_with("perform ") {
+            return self.parse_perform_statement();
+        }
+        if line.text == "atomic_cut" {
+            self.cursor += 1;
+            return Ok(Statement::AtomicCut);
+        }
+        if line.text.starts_with("fallback ") {
+            return Err(self.line_error(
+                line.line_no,
+                "fallback row must follow a chain declaration at the same indentation",
+            ));
+        }
+
+        Err(self.line_error(
+            line.line_no,
+            format!("unsupported fixed-subset source row `{}`", line.text),
+        ))
+    }
+
+    fn parse_place_block(&mut self) -> Result<Statement, InterpreterError> {
+        let line = self.peek().expect("place line should exist").clone();
+        let tokens: Vec<&str> = line.text.split_whitespace().collect();
+        if tokens.len() != 3 || tokens[0] != "place" || tokens[2] != "{" {
+            return Err(self.line_error(
+                line.line_no,
+                format!("unsupported place block head `{}`", line.text),
+            ));
+        }
+
+        self.cursor += 1;
+        let (body, _) = self.parse_brace_block_with_indent(line.indent, line.line_no, "}")?;
+        Ok(Statement::PlaceBlock {
+            place: tokens[1].to_string(),
+            body,
+        })
+    }
+
+    fn parse_try_fallback(&mut self) -> Result<Statement, InterpreterError> {
+        let line = self.peek().expect("try line should exist").clone();
+        let start = self.cursor;
+        self.cursor += 1;
+
+        let (body, body_indent) = self.parse_try_body(line.indent)?;
+        let (fallback_body, fallback_indent) =
+            self.parse_brace_block_with_indent(line.indent, line.line_no, "}")?;
+        let end = self.cursor.saturating_sub(1);
+
+        if self.try_source.is_some() {
+            return Err(self.line_error(
+                line.line_no,
+                "fixed-subset lowering first cut supports at most one try/fallback block",
+            ));
+        }
+        self.try_source = Some(
+            render_stage2_bridge_source(
+                &self.lines[start..=end],
+                line.indent,
+                body_indent,
+                fallback_indent,
+            ),
+        );
+
+        Ok(Statement::TryFallback { body, fallback_body })
+    }
+
+    fn parse_try_body(
+        &mut self,
+        opener_indent: usize,
+    ) -> Result<(Vec<Statement>, Option<usize>), InterpreterError> {
+        let Some(first_indent) = self.next_child_indent(opener_indent) else {
+            let line = self.peek().ok_or_else(|| {
+                InterpreterError::InvalidProgram(
+                    "missing `} fallback {` delimiter for try block".to_string(),
+                )
+            })?;
+            if line.indent == opener_indent && line.text == "} fallback {" {
+                self.cursor += 1;
+                return Ok((Vec::new(), None));
+            }
+            return Err(self.line_error(
+                line.line_no,
+                "missing `} fallback {` delimiter for try block",
+            ));
+        };
+
+        let mut body = Vec::new();
+        loop {
+            self.skip_blank_lines();
+            let line = self.peek().ok_or_else(|| {
+                InterpreterError::InvalidProgram(
+                    "missing `} fallback {` delimiter for try block".to_string(),
+                )
+            })?;
+            if line.indent <= opener_indent {
+                if line.indent == opener_indent && line.text == "} fallback {" {
+                    self.cursor += 1;
+                    break;
+                }
+                return Err(self.line_error(
+                    line.line_no,
+                    "missing `} fallback {` delimiter for try block",
+                ));
+            }
+            if line.indent != first_indent {
+                return Err(self.line_error(
+                    line.line_no,
+                    format!(
+                        "unexpected indentation inside try body: expected {first_indent}, got {}",
+                        line.indent
+                    ),
+                ));
+            }
+            body.push(self.parse_statement_at_indent(first_indent)?);
+        }
+
+        Ok((body, Some(first_indent)))
+    }
+
+    fn parse_brace_block_with_indent(
+        &mut self,
+        opener_indent: usize,
+        opener_line_no: usize,
+        close_text: &str,
+    ) -> Result<(Vec<Statement>, Option<usize>), InterpreterError> {
+        let Some(first_indent) = self.next_child_indent(opener_indent) else {
+            let line = self.peek().ok_or_else(|| {
+                InterpreterError::InvalidProgram(format!(
+                    "missing `{close_text}` to close block opened at line {opener_line_no}"
+                ))
+            })?;
+            if line.indent == opener_indent && line.text == close_text {
+                self.cursor += 1;
+                return Ok((Vec::new(), None));
+            }
+            return Err(self.line_error(
+                line.line_no,
+                format!("missing `{close_text}` to close block opened at line {opener_line_no}"),
+            ));
+        };
+
+        let mut body = Vec::new();
+        loop {
+            self.skip_blank_lines();
+            let line = self.peek().ok_or_else(|| {
+                InterpreterError::InvalidProgram(format!(
+                    "missing `{close_text}` to close block opened at line {opener_line_no}"
+                ))
+            })?;
+            if line.indent <= opener_indent {
+                if line.indent == opener_indent && line.text == close_text {
+                    self.cursor += 1;
+                    break;
+                }
+                return Err(self.line_error(
+                    line.line_no,
+                    format!("missing `{close_text}` to close block opened at line {opener_line_no}"),
+                ));
+            }
+            if line.indent != first_indent {
+                return Err(self.line_error(
+                    line.line_no,
+                    format!(
+                        "unexpected indentation inside block: expected {first_indent}, got {}",
+                        line.indent
+                    ),
+                ));
+            }
+            body.push(self.parse_statement_at_indent(first_indent)?);
+        }
+
+        Ok((body, Some(first_indent)))
+    }
+
+    fn parse_option_decl(&mut self) -> Result<Statement, InterpreterError> {
+        let line = self.peek().expect("option line should exist").clone();
+        let tokens: Vec<&str> = line.text.split_whitespace().collect();
+        if tokens.len() < 8
+            || tokens[0] != "option"
+            || tokens[2] != "on"
+            || tokens[4] != "capability"
+            || tokens[6] != "lease"
+        {
+            return Err(self.line_error(
+                line.line_no,
+                format!("unsupported option declaration `{}`", line.text),
+            ));
+        }
+
+        let admit = match tokens.len() {
+            8 => {
+                self.stage1_lines.push(line.text.clone());
+                None
+            }
+            9 if tokens[8] == "admit" => {
+                return Err(self.line_error(
+                    line.line_no,
+                    "missing declaration-side admit payload",
+                ));
+            }
+            10 if tokens[8] == "admit" => {
+                self.stage1_supported = false;
+                Some(self.parse_predicate_fragment(tokens[9], line.line_no)?)
+            }
+            _ => {
+                return Err(self.line_error(
+                    line.line_no,
+                    format!("unsupported option declaration `{}`", line.text),
+                ));
+            }
+        };
+
+        self.cursor += 1;
+        Ok(Statement::OptionDecl {
+            name: tokens[1].to_string(),
+            target: tokens[3].to_string(),
+            capability: tokens[5].to_string(),
+            lease: tokens[7].to_string(),
+            admit,
+        })
+    }
+
+    fn parse_chain_decl(&mut self) -> Result<Statement, InterpreterError> {
+        let line = self.peek().expect("chain line should exist").clone();
+        let tokens: Vec<&str> = line.text.split_whitespace().collect();
+        if tokens.len() != 4 || tokens[0] != "chain" || tokens[2] != "=" {
+            return Err(self.line_error(
+                line.line_no,
+                format!("unsupported chain declaration `{}`", line.text),
+            ));
+        }
+
+        self.stage1_lines.push(line.text.clone());
+        self.cursor += 1;
+
+        let name = tokens[1].to_string();
+        let head = tokens[3].to_string();
+        let mut previous = head.clone();
+        let mut edges = Vec::new();
+
+        loop {
+            self.skip_blank_lines();
+            let Some(next_line) = self.peek() else {
+                break;
+            };
+            if next_line.indent != line.indent || !next_line.text.starts_with("fallback ") {
+                break;
+            }
+            let (edge, successor) = parse_source_fallback_edge(&next_line.text, &previous)
+                .map_err(|message| self.line_error(next_line.line_no, message))?;
+            self.stage1_lines.push(next_line.text.clone());
+            edges.push(edge);
+            previous = successor;
+            self.cursor += 1;
+        }
+
+        Ok(Statement::ChainDecl { name, head, edges })
+    }
+
+    fn parse_perform_statement(&mut self) -> Result<Statement, InterpreterError> {
+        let line = self.peek().expect("perform line should exist").clone();
+        let tokens: Vec<&str> = line.text.split_whitespace().collect();
+        if tokens.len() != 4 || tokens[0] != "perform" {
+            return Err(self.line_error(
+                line.line_no,
+                format!("unsupported perform head `{}`", line.text),
+            ));
+        }
+
+        let op = tokens[1].to_string();
+        let subject = tokens[3].to_string();
+        let via = match tokens[2] {
+            "on" => false,
+            "via" => true,
+            _ => {
+                return Err(self.line_error(
+                    line.line_no,
+                    format!("unsupported perform head `{}`", line.text),
+                ));
+            }
+        };
+
+        self.cursor += 1;
+        let contract = self.parse_contract_clause_block(line.indent)?;
+
+        if via {
+            Ok(Statement::PerformVia {
+                op,
+                chain_ref: subject,
+                contract,
+            })
+        } else {
+            Ok(Statement::PerformOn {
+                op,
+                target: subject,
+                contract,
+            })
+        }
+    }
+
+    fn parse_contract_clause_block(
+        &mut self,
+        head_indent: usize,
+    ) -> Result<Contract, InterpreterError> {
+        let Some(clause_indent) = self.next_child_indent(head_indent) else {
+            return Ok(Contract {
+                require: Vec::new(),
+                ensure: Vec::new(),
+            });
+        };
+
+        let mut require = Vec::new();
+        let mut ensure = Vec::new();
+
+        loop {
+            self.skip_blank_lines();
+            let Some(line) = self.peek() else {
+                break;
+            };
+            if line.indent <= head_indent {
+                break;
+            }
+            if line.indent != clause_indent {
+                return Err(self.line_error(
+                    line.line_no,
+                    format!(
+                        "unexpected indentation inside contract clause block: expected {clause_indent}, got {}",
+                        line.indent
+                    ),
+                ));
+            }
+            if line.text.starts_with("require:") || line.text.starts_with("ensure:") {
+                return Err(self.line_error(
+                    line.line_no,
+                    "multiline contract clauses are outside the lowering first cut",
+                ));
+            }
+            if let Some(fragment) = line.text.strip_prefix("require ") {
+                require.push(self.parse_predicate_fragment(fragment, line.line_no)?);
+                self.cursor += 1;
+                continue;
+            }
+            if let Some(fragment) = line.text.strip_prefix("ensure ") {
+                ensure.push(self.parse_predicate_fragment(fragment, line.line_no)?);
+                self.cursor += 1;
+                continue;
+            }
+            return Err(self.line_error(
+                line.line_no,
+                format!("unsupported contract clause `{}`", line.text),
+            ));
+        }
+
+        Ok(Contract { require, ensure })
+    }
+
+    fn parse_predicate_fragment(
+        &self,
+        fragment_text: &str,
+        line_no: usize,
+    ) -> Result<Predicate, InterpreterError> {
+        let trimmed = fragment_text.trim();
+        if trimmed.is_empty() {
+            return Err(self.line_error(line_no, "missing predicate fragment"));
+        }
+
+        let fragment = parse_stage3_minimal_predicate_fragment_text(trimmed)
+            .map_err(|message| self.line_error(line_no, message))?;
+        Ok(predicate_from_stage3_fragment(fragment))
+    }
+
+    fn skip_blank_lines(&mut self) {
+        while self
+            .lines
+            .get(self.cursor)
+            .is_some_and(|line| line.is_blank)
+        {
+            self.cursor += 1;
+        }
+    }
+
+    fn next_child_indent(&self, parent_indent: usize) -> Option<usize> {
+        self.lines
+            .iter()
+            .skip(self.cursor)
+            .find(|line| !line.is_blank)
+            .and_then(|line| (line.indent > parent_indent).then_some(line.indent))
+    }
+
+    fn peek(&self) -> Option<&CurrentL2SourceLine> {
+        self.lines.get(self.cursor)
+    }
+
+    fn line_error(&self, line_no: usize, message: impl Into<String>) -> InterpreterError {
+        InterpreterError::InvalidProgram(format!("line {line_no}: {}", message.into()))
+    }
+}
+
+fn parse_source_fallback_edge(
+    line: &str,
+    previous: &str,
+) -> Result<(ChainEdge, String), String> {
+    let rest = line
+        .strip_prefix("fallback ")
+        .ok_or_else(|| format!("unsupported fallback row `{line}`"))?;
+    let (successor_part, lineage_part) = rest
+        .split_once(" @ lineage(")
+        .ok_or_else(|| "missing edge-local lineage metadata".to_string())?;
+    let lineage_inner = lineage_part
+        .strip_suffix(')')
+        .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+    let (lineage_pred, lineage_succ) = lineage_inner
+        .split_once(" -> ")
+        .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+    let successor = successor_part.trim().to_string();
+
+    Ok((
+        ChainEdge {
+            predecessor: previous.to_string(),
+            successor: successor.clone(),
+            lineage_assertion: Some(LineageAssertion {
+                predecessor: lineage_pred.trim().to_string(),
+                successor: lineage_succ.trim().to_string(),
+            }),
+        },
+        successor,
+    ))
+}
+
+fn predicate_from_stage3_fragment(fragment: Stage3PredicateFragment) -> Predicate {
+    match fragment {
+        Stage3PredicateFragment::Atom { name } => Predicate::Atom { name },
+        Stage3PredicateFragment::Call { callee, args } => Predicate::Call { callee, args },
+        Stage3PredicateFragment::And { terms } => Predicate::And {
+            terms: terms
+                .into_iter()
+                .map(predicate_from_stage3_fragment)
+                .collect(),
+        },
+    }
+}
+
+fn render_stage2_bridge_source(
+    lines: &[CurrentL2SourceLine],
+    opener_indent: usize,
+    body_indent: Option<usize>,
+    fallback_indent: Option<usize>,
+) -> String {
+    let mut rendered = Vec::new();
+    let mut in_fallback = false;
+
+    for line in lines {
+        if line.is_blank {
+            continue;
+        }
+        if line.indent == opener_indent && line.text == "try {" {
+            rendered.push(line.text.clone());
+            continue;
+        }
+        if line.indent == opener_indent && line.text == "} fallback {" {
+            rendered.push(line.text.clone());
+            in_fallback = true;
+            continue;
+        }
+        if line.indent == opener_indent && line.text == "}" {
+            rendered.push(line.text.clone());
+            continue;
+        }
+
+        let direct_indent = if in_fallback { fallback_indent } else { body_indent };
+        if direct_indent.is_some_and(|indent| line.indent == indent) {
+            rendered.push(line.text.clone());
+        }
+    }
+
+    rendered.join("\n")
 }
 
 fn validate_parser_bridge_input(

@@ -1,0 +1,16 @@
+place root {
+  place session {
+    place draft_profile {
+      try {
+        perform stage_profile_patch on profile_draft
+          require write
+
+        perform validate_profile_patch on profile_draft
+          require owner_is(session_user) and well_formed(profile_draft)
+      } fallback {
+        perform load_last_snapshot on profile_snapshot
+          require read
+      }
+    }
+  }
+}

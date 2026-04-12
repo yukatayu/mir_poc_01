@@ -601,6 +601,10 @@
   - source-sample corpus scope / layout fixed 後の次段として、representative prose / fixture corpus / source target path の 3 層を current initial cluster 6 本の mapping matrix row へどう束ねるかを比較する補助文書。
 - `specs/examples/318-current-l2-representative-fixture-source-mapping-matrix-ready-minimal-representative-fixture-source-mapping-matrix-threshold.md`
   - representative / fixture / source mapping matrix の minimum を `matrix_kind + rows(ladder_order + sample_stem + representative_anchor_ref + representative_status + source_example_id + fixture_ref + fixture_id + fixture_mode + source_sample_target_ref + coverage_focus + expected_static_verdict + expected_runtime_outcome)` に留める補助文書。
+- `specs/examples/319-current-l2-representative-fixture-source-mapping-matrix-ready-actual-parser-to-program-lowering-first-cut-comparison.md`
+  - representative / fixture / source mapping matrix fixed 後の次段として、fixed-subset source sample を semantic `Program` と optional parser bridge evidence へどこで fail-closed に lower するかを比較する補助文書。
+- `specs/examples/320-current-l2-actual-parser-to-program-lowering-first-cut-ready-minimal-actual-parser-to-program-lowering-first-cut-threshold.md`
+  - actual parser-to-`Program` lowering first cut の minimum を `lowering_kind + accepted_source_cluster_refs + code_anchor_refs + bridge_output_refs + fail_closed_refs + retained_later_refs` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

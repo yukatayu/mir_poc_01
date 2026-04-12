@@ -46,6 +46,12 @@ current first matrix は、representative prose / fixture corpus / source target
 - `e23` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row はまだない。
 - current matrix では source target path だけを固定し、actual reached stage や bless policy はまだ埋め込まない。
 
+## current authored files
+
+- actual source file として current repo にあるのは `e4-malformed-lineage.txt`、`e2-try-fallback.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の first trio である。
+- `e1` / `e3` / `e21` は current matrix 上の target path を維持しつつ、runner / ladder task で actualization 順を決める。
+- current lowerer first cut は single-line `require` / `ensure` と inline `admit` fragment を受け、multiline clause suite は fail-closed に止める。
+
 ## non-goals
 
 - final parser grammar の固定
@@ -55,5 +61,5 @@ current first matrix は、representative prose / fixture corpus / source target
 
 ## next steps
 
-- actual parser-to-`Program` lowering first cut を fail-closed に定義する
 - syntax-backed runner と verification ladder へ接続する
+- source-sample authoring / bless policy を narrow に閉じる
