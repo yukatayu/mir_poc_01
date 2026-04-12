@@ -61,7 +61,6 @@ parser first tranche の actual code anchor は次である。
 ## まだ fixed していないこと
 
 - stage 3 request / predicate reconnect
-- representative / fixture / source mapping matrix
 - fixed-subset source-sample authoring / bless / regression policy
 - actual parser-to-`Program` lowering first cut
 - syntax-backed sample runner と sample ごとの verification ladder
@@ -79,6 +78,7 @@ parser first tranche の actual code anchor は次である。
 - `specs/examples/311...312`
 - `specs/examples/313...314`
 - `specs/examples/315...316`
+- `specs/examples/317...318`
 - `docs/reports/0611-phase6-actual-parser-ast-carrier-first-tranche-package.md`
 - `docs/reports/0612-phase6-actual-checker-runtime-skeleton-first-tranche-package.md`
 - `docs/reports/0613-phase6-compile-ready-verification-and-formal-hook-package.md`
@@ -113,13 +113,15 @@ shared single attachment frame first package も actualize 済みであり、`mi
 `specs/examples/315...316` により、
 fixed-subset source-sample corpus scope / file layout も fixed 済みであり、repo-root `samples/current-l2/` flat `.txt` layer と fixture-stem-aligned naming を current first choice に置いた。
 
+`specs/examples/317...318` により、
+representative / fixture / source mapping matrix も fixed 済みであり、current initial cluster `e1` / `e2` / `e3` / `e4` / `e21` / `e23` を sample stem ごとに 3 層 row へ束ね、`e3` は `E3-variant`、`e23` は unresolved representative anchor に留める current cut を採った。
+
 current mainline は、
-**Phase 6 representative / fixture / source mapping matrix**
+**Phase 6 actual parser-to-`Program` lowering first cut**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- representative / fixture / source mapping
 - actual parser-to-`Program` lowering と syntax-backed sample runner の first cut
 - sample ごとの `static gate` / `interpreter` / `formal hook` ladder
 

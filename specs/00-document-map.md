@@ -597,6 +597,10 @@
   - shared single attachment frame first package fixed 後の次段として、fixed-subset source-sample corpus を repo-root `samples/current-l2/` flat `.txt` layer に置くか、crate-local / docs-local に置くかを比較する補助文書。
 - `specs/examples/316-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-ready-minimal-fixed-subset-source-sample-corpus-scope-and-file-layout-threshold.md`
   - fixed-subset source-sample corpus scope / file layout の minimal docs-first shape を `scope_kind + source_cluster_refs + directory_ref + file_layout_ref + file_extension_policy + sample_id_policy + non_goal_refs` までに留めるべきかを比較する補助文書。
+- `specs/examples/317-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-ready-representative-fixture-source-mapping-matrix-comparison.md`
+  - source-sample corpus scope / layout fixed 後の次段として、representative prose / fixture corpus / source target path の 3 層を current initial cluster 6 本の mapping matrix row へどう束ねるかを比較する補助文書。
+- `specs/examples/318-current-l2-representative-fixture-source-mapping-matrix-ready-minimal-representative-fixture-source-mapping-matrix-threshold.md`
+  - representative / fixture / source mapping matrix の minimum を `matrix_kind + rows(ladder_order + sample_stem + representative_anchor_ref + representative_status + source_example_id + fixture_ref + fixture_id + fixture_mode + source_sample_target_ref + coverage_focus + expected_static_verdict + expected_runtime_outcome)` に留める補助文書。
 - `specs/examples/27-current-l2-fixture-scaffold-helper.md`
   - current L2 parser-free PoC の fixture authoring で、required carrier と empty `.host-plan.json` sidecar 骨格だけを `target/` 下へ出す non-production scaffold helper の最小境界を整理する。
 - `specs/examples/31-current-l2-detached-aggregate-transform-helper.md`

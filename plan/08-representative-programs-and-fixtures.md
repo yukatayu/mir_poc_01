@@ -29,6 +29,28 @@
 - current naming policy は fixture stem / `fixture_id` aligned kebab-case である。
 - current initial cluster は `e1` / `e2` / `e3` / `e4` / `e21` / `e23` に留める。
 
+## current mapping matrix cut
+
+- `specs/examples/317...318` により、initial cluster 6 本は representative prose / fixture corpus / source target path を 1 row で結ぶ current matrix cut に fixed 済みである。
+- row minimum は
+  - `ladder_order`
+  - `sample_stem`
+  - `representative_anchor_ref`
+  - `representative_status`
+  - `source_example_id`
+  - `fixture_ref`
+  - `fixture_id`
+  - `fixture_mode`
+  - `source_sample_target_ref`
+  - `coverage_focus`
+  - `expected_static_verdict`
+  - `expected_runtime_outcome`
+  である。
+- `representative_status` は current cut で `direct` / `variant` / `unresolved` を使う。
+- `e3-option-admit-chain` は representative prose plain `E3` ではなく `E3-variant` row として扱う。
+- `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
+- current matrix では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
+
 ## fixture 一覧
 
 ### runtime fixture

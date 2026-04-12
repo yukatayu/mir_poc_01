@@ -27,6 +27,25 @@ current first cluster は次を想定する。
 - `e21-try-atomic-cut-frontier.txt`
 - `e23-malformed-try-fallback-missing-fallback-body.txt`
 
+## current mapping matrix
+
+current first matrix は、representative prose / fixture corpus / source target を次の row で結ぶ。
+
+| order | sample stem | representative anchor | status | fixture id | mode | source target | coverage focus | expected static | expected runtime |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | `e1-place-atomic-cut` | `E1` | `direct` | `e1_place_atomic_cut` | `runtime_fixture` | `samples/current-l2/e1-place-atomic-cut.txt` | post-cut failure でも pre-cut mutation を rollback しない | `valid` | `explicit_failure` |
+| 2 | `e2-try-fallback` | `E2` | `direct` | `e2_try_fallback` | `runtime_fixture` | `samples/current-l2/e2-try-fallback.txt` | local rollback 後に explicit fallback branch が走る | `valid` | `success` |
+| 3 | `e3-option-admit-chain` | `E3-variant` | `variant` | `e3_option_admit_chain` | `runtime_fixture` | `samples/current-l2/e3-option-admit-chain.txt` | option-local `admit` miss を non-admissible skip に留める | `valid` | `success` |
+| 4 | `e4-malformed-lineage` | `E4` | `direct` | `e4_malformed_lineage` | `static_only_fixture` | `samples/current-l2/e4-malformed-lineage.txt` | edge-local lineage mismatch を static stop に留める | `malformed` | `not_evaluated` |
+| 5 | `e21-try-atomic-cut-frontier` | `E21` | `direct` | `e21_try_atomic_cut_frontier` | `runtime_fixture` | `samples/current-l2/e21-try-atomic-cut-frontier.txt` | try body 内 `atomic_cut` の frontier update | `valid` | `success` |
+| 6 | `e23-malformed-try-fallback-missing-fallback-body` | unresolved representative anchor | `unresolved` | `e23_malformed_try_fallback_missing_fallback_body` | `static_only_fixture` | `samples/current-l2/e23-malformed-try-fallback-missing-fallback-body.txt` | empty `fallback_body` structural malformed floor | `malformed` | `not_evaluated` |
+
+## current notes
+
+- `e3` は plain `E3` ではなく fixture-side `source_example_id = E3-variant` を mirror する。
+- `e23` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row はまだない。
+- current matrix では source target path だけを固定し、actual reached stage や bless policy はまだ埋め込まない。
+
 ## non-goals
 
 - final parser grammar の固定
@@ -36,6 +55,5 @@ current first cluster は次を想定する。
 
 ## next steps
 
-- representative / fixture / source mapping matrix を作る
-- parser-to-`Program` lowering first cut を fail-closed に定義する
+- actual parser-to-`Program` lowering first cut を fail-closed に定義する
 - syntax-backed runner と verification ladder へ接続する

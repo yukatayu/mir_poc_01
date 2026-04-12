@@ -62,9 +62,9 @@ phase をもう少し細かく見たい場合は、`plan/17-research-phases-and-
 
 ### 近い次フェーズ
 
-- representative / fixture / source mapping matrix
 - actual parser-to-`Program` lowering first cut
 - syntax-backed sample runner / verification ladder
+- source-sample authoring / bless policy
 
 ### その次のフェーズ
 

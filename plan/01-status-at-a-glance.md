@@ -13,7 +13,7 @@
 1. current L2 semantics / parser-free PoC / proof boundary の fixed entry criteria を維持する
 2. `mir-ast` / `mir-semantics` / `mir-runtime` の front-half actual code path を narrow に保つ
 3. compile-ready verification / formal hook first tranche を fixed entry criteria として扱う
-4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout を fixed 済み entry criteria とし、mapping / lowering / runner / verification ladder を次 line に置く
+4. parser-side first package fixed 後の reserve formal tool binding inventory、parser-side follow-up sequencing、shared single attachment frame actualization、source corpus scope / layout、representative / fixture / source mapping matrix を fixed 済み entry criteria とし、lowering / runner / verification ladder を次 line に置く
 5. fixed-subset source corpus / mapping / lowering / runner / verification ladder を、final grammar や backend 固定に逆流させず段階 actualize する
 
 ## current L2 の状態
@@ -69,7 +69,6 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 
 ## 直近の next steps
 
-- representative / fixture / source mapping matrix を整理する
 - actual parser-to-`Program` lowering first cut を整理する
 - syntax-backed sample runner と verification ladder を整理する
 - checkpoint close fixed 後の snapshot を維持する
@@ -82,7 +81,7 @@ runtime fixture は `e1` / `e2` / `e21` / `e22` / `e3` / `e6` / `e7` / `e8` / `e
 | fallback 直感 drift | outer/inner wrapper 読みが残りやすい。explicit edge-row と prose で抑制中 |
 | final parser grammar 未固定 | companion notation はあるが grammar はまだ固定しない |
 | concrete formal tool binding 未選定 | tool-neutral formal hook は fixed 済みだが、concrete theorem/model-check tool は still later |
-| source-sample corpus scope/layout は fixed 済みだが mapping / lowering / runner は未整備 | representative prose / fixture corpus / source sample の 3 層 path は揃ったが、対応表と executable path は整理中 |
+| source-sample corpus scope/layout と mapping matrix は fixed 済みだが lowering / runner は未整備 | representative prose / fixture corpus / source target path の 3 層対応は揃ったが、actual executable path は整理中 |
 | lowering / runner 未整備 | compile-ready checkpoint はあるが source sample から `Program` / `interpreter` への narrow path はまだない |
 | backend timing | LLVM-family backend や external codegen を今つなぐと syntax / lowering が早期固定しやすい |
 | helper / snapshot drift | docs / tests / code の mirror 境界を狭めてきたが、checkpoint close 後も sample-path 再分解に合わせた継続整流が必要 |
@@ -95,7 +94,7 @@ current L2 / PoC の narrow task を積みながら見直す前提で読む。
 
 | 目標 | rough estimate |
 |---|---|
-| representative / source mapping / lowering / runner / ladder | 3〜5 task |
+| representative / source mapping / lowering / runner / ladder | 2〜4 task |
 | theorem-first concrete tool pilot | 2〜4 task |
 | richer runtime / host interface / static analysis の入口を切る | 6〜12 task |
 | 型システム・定理証明可能性まで含む重い workstream に実装的に着手する | 15 task 以上。現時点では荒い |
