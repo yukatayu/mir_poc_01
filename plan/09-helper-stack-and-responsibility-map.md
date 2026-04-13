@@ -468,6 +468,44 @@ public operational surface inventory の次段 current gate では、
 - `scripts/current_l2_detached_loop.py`
 - other repo-local assist / checker / diff helpers
 
+## current final public parser/checker/runtime first later gate actualization cut
+
+public operational surface actualization gate と later ordering fixed 後の current first later cut では、
+**`run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` を runtime-led thin library facade に置き、parser/checker/runtime detail は nested report carrier に留める**
+のが自然である。
+
+### chosen public entry / report
+
+- `mir_runtime::current_l2::run_current_l2_source_sample`
+- `mir_runtime::current_l2::CurrentL2SourceSampleRunReport`
+
+### nested public report carrier
+
+- `CurrentL2LoweredSourceProgram`
+- `CurrentL2RuntimeSkeletonReport`
+- `CurrentL2CheckerFloorReport`
+- `RunReport`
+
+これは runtime-led thin facade として public report から読めるが、standalone public entry promotion はまだ行わない。
+
+### support-only tranche
+
+- `mir_runtime::current_l2::run_current_l2_runtime_skeleton`
+- `mir_runtime::current_l2::lower_current_l2_fixed_source_text`
+- `static_gate_program_detailed`
+- `run_program_to_completion`
+- `FixtureHostStub::run_program`
+- `mir_ast::current_l2` parser carrier floor
+
+これらは current first later cut では support-only bucket に留める。
+
+### actualization guard
+
+- `pub` visibility だけで final public contract と解釈しない。
+- `resolve_current_l2_source_sample_path` と accepted-set hard-coding は repo layout / sample policy coupling を持つため excluded bucket に残す。
+- repo-local Python orchestration helper と example/support modules は public crate contract へ hidden promotion しない。
+- public operational CLI second gate と standalone parser/checker support actualization は still later に残す。
+
 ### gate guard
 
 - repo layout と accepted-set hard-coding を final public contract に混ぜない。

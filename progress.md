@@ -47,9 +47,10 @@
 - sample-facing theorem / model-check evidence summary and bless/review flow も fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、`source sample -> runner/ladders -> formal hook reached/guarded -> review-unit/model-check carrier` を current evidence route、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採った。
 - docs-first I/O / host-facing port boundary も fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す current cut を採った。
 - stable malformed missing-option first reopen actualization comparison も fixed 済みであり、existing helper-local missing-option compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet に維持し、current next actualization mode は source-backed widening first に置く current cut を採った。
+- final public parser / checker / runtime first later gate actualization comparison も fixed 済みであり、current first later cut は `run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` を public entry / report に置く runtime-led thin facade に留め、`CurrentL2LoweredSourceProgram` / `CurrentL2RuntimeSkeletonReport` / `CurrentL2CheckerFloorReport` / `RunReport` を nested carrier として扱う。`run_current_l2_runtime_skeleton`、`lower_current_l2_fixed_source_text`、semantic/checker core、parser carrier floor は support-only bucket、`resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local helper / example surface は excluded bucket に残す。
 - stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first (`e16/e17/e18`)、capability family second (`e13/e20`) に置き、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は kept-later に残している。
 - public operational CLI / final public contract later gate も fixed 済みであり、`run_current_l2_source_sample` current gate を保ったまま、first later gate を final public parser / checker / runtime API、public operational CLI を second later gate に置き、repo layout / accepted-set / repo-local helper surface は current final contract の外に残している。
-- next near-term path は、`final public parser / checker / runtime API first later gate actualization comparison` を current line に置き、その後に `stable malformed missing-option first source-backed widening actualization` と `public operational CLI second later gate actualization comparison` を reserve に置く。
+- next near-term path は、`stable malformed missing-option first source-backed widening actualization` を current line に置き、その後に `public operational CLI second later gate actualization comparison` と `final public parser / checker / runtime thin-facade later support actualization` を reserve に置く。
 - final parser grammar、final public parser / checker / runtime API、LLVM-family backend、Mirrorea operational runtime、shared-space final catalog はまだ無い。
 
 ## Macro phase map
@@ -88,7 +89,7 @@
 | parser / checker / runtime actualization | `S4-S5` | `mir-ast` / `mir-semantics` / `mir-runtime` の narrow non-production tranche が compile-ready で、public-pressure first gate も fixed 済み | final grammar、final public contract、richer host interface actualization | 自走可能 |
 | source-backed sample corpus / verification ladder | `S6` | current authored octet `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` が ladder に乗り、sample-facing evidence route と current bless meaning まで README / `.docs` / snapshot docs に統合済みである。missing-option first reopen comparison も source-backed widening first へ fixed 済みである | final public library contract actualization current line、missing-option triplet widen reserve | 自走可能 |
 | contracts / static gate / formal hook / proof notebook first bridge | `S6` | tool-neutral formal hook、review-unit pilot、plain bridge sketch first actualization、compare-ready bridge sketch second reopen、model-check/public-checker second reserve inventory、model-check concrete carrier first actualization gate、actualization sequencing comparison、first actual model-check carrier、source-sample emitted route、sample-facing summary がある | bless/review metadata reopen、public checker actual migration、concrete tool binding | 自走可能 |
-| public operational surface | `S3-S4` | inventory 3 bucket split、first docs-only candidate、library-before-CLI later orderingが fixed 済み | final public parser / checker / runtime API actualization、public CLI second gate、layout/host-plan decoupling | 一部自走可能 |
+| public operational surface | `S3-S4` | inventory 3 bucket split、first docs-only candidate、library-before-CLI later ordering、runtime-led thin facade first later cutが fixed 済み | public CLI second gate、layout/host-plan decoupling、standalone support entry later cut | 一部自走可能 |
 | host-facing I/O / adapter / visualizer / FFI / engine boundary | `S3` | capability-scoped input/output port / adapter boundary を docs-first first cut に固定し、visualizer / host substrate / host runtime を consumer/provider 側、FFI / engine adapter を later gate に分けた | actual host interface contract、visualizer/substrate actualization、FFI / engine adapter sequencing | docs-first boundary以降は mixed |
 | multi-node / routing / overlay / safe downstream addition | `S2-S3` | semantic constraints と docs-first boundary はある | route proof、suspended task / patch interaction、operational realization | 境界までは自走可能 |
 | shared-space / membership / authority / fairness | `S3-S4` for docs-first boundary, `S1-S2` for runtime realization | authoritative room baseline、control-plane threshold、Mirrorea/shared-space re-entry bundle、identity/auth layering cut、admission/compile-time visibility cut、authority/resource ownership splitがある | final activation / authority / auth / identity / admission / consistency / fairness catalog | user spec required beyond boundary |
@@ -104,7 +105,7 @@
 | parser-free PoC / detached loop | 95% | 91% | 99% | late | runnable baseline と regression policy がある |
 | compile-ready parser / checker / runtime | 88% | 78% | 85% | late | non-production minimal tranche と public-pressure gate は揃った |
 | fixed-subset source samples | 93% | 94% | 93% | active | authored octet runnable。`e21/e22` contrast row と `e4/e19` static pair まで source-backed に actualize 済み |
-| theorem / verifier bridge | 89% | 86% | 70% | early-active | formal hook、proof notebook first bridge、first actual model-check carrier、source-sample emitted route、sample-facing summary はある。repo-level current line は final public parser / checker / runtime first later gate actualization comparison に進んだ |
+| theorem / verifier bridge | 89% | 86% | 70% | early-active | formal hook、proof notebook first bridge、first actual model-check carrier、source-sample emitted route、sample-facing summary はある。repo-level current line は stable malformed missing-option first source-backed widening actualization に進んだ |
 | Mirrorea fabric boundary | 71% | 60% | 10% | docs-first checkpoint fixed | re-entry bundle、identity/auth layering、admission/compile-time visibility cut、authority/resource ownership split は fixed。final catalog と operational realizationは later |
 | shared-space boundary | 79% | 68% | 16% | docs-first checkpoint fixed | practical cut、repo-level re-entry bundle、admission/visibility bridge、authority/resource split は fixed。final catalog は user spec required |
 | Typed-Effect Wiring Platform | 35% | 27% | 4% | positioning only | host-facing I/O / adapter boundary の high-level anchor として参照できる |
@@ -113,20 +114,20 @@
 
 ## 現在の self-driven line
 
-1. **Macro 7 / final public parser/checker/runtime first later gate**
-   - library-before-CLI later orderingを保ったまま final public library contract actualization を後段 reserve として進める。
-2. **Macro 4 / stable malformed missing-option first source-backed widening**
-   - helper-local compare を entry evidence に使いつつ、`e16/e17/e18` triplet の source-backed widening を reserve line として進める。
-3. **Macro 7 / public operational CLI second later gate**
-   - library-side final contract actualization の後段として operational CLI gate を separate line に残す。
+1. **Macro 4 / stable malformed missing-option first source-backed widening**
+   - helper-local compare を entry evidence に使いつつ、`e16/e17/e18` family を source sample / runner / ladder line にどう widen するかを current line として進める。
+2. **Macro 7 / public operational CLI second later gate**
+   - runtime-led thin facade first later cutを巻き戻さず、operational CLI gate を separate line に残す。
+3. **Macro 7 / final public parser/checker/runtime thin-facade later support**
+   - standalone parser/checker support entry は後段 reserve として切り分ける。
 
 ## 研究で見つけることと、user が決めること
 
 ### 研究で見つけること
 
-- final public parser / checker / runtime API first later gate の最小 actualization cut
 - stable malformed missing-option first source-backed widening の最小 actualization cut
 - public operational CLI second later gate の最小 actualization cut
+- final public parser / checker / runtime thin-facade later support actualization の最小 cut
 
 ### user が決めること
 
@@ -162,6 +163,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 18:51 JST — `docs/reports/0683` と `specs/examples/389...390` で final public parser/checker/runtime first later gate actualization comparison を閉じ、`run_current_l2_source_sample` + `CurrentL2SourceSampleRunReport` の runtime-led thin facade を first later cut に固定した。repo-level current line は stable malformed missing-option first source-backed widening actualization に進んだ。
 - 2026-04-13 18:09 JST — `docs/reports/0681` と `specs/examples/387...388` で stable malformed missing-option first reopen actualization comparison を閉じ、helper-local compare を entry evidence に再利用しつつ、`e16/e17/e18` triplet の source-backed widening first cut と `e16` lead staging note を fixed した。repo-level current line は final public parser/checker/runtime first later gate actualization comparison に進んだ。
 - 2026-04-13 18:01 JST — `docs/reports/0680` と `specs/examples/385...386` で docs-first I/O / host-facing port boundary を閉じ、privileged `stdin/stdout` を避けた capability-scoped port / adapter boundary、visualizer / host substrate / host runtime の consumer/provider 側、FFI / engine adapter later gate の split を fixed した。repo-level current line は stable malformed missing-option first reopen actualization comparison に進んだ。
 - 2026-04-13 16:52 JST — `docs/reports/0678` と `specs/examples/383...384` で sample-facing theorem/model-check evidence summary and bless/review flow を閉じ、README / `.docs` / snapshot docs を current sample-facing surface に揃えた。repo-level current line は docs-first I/O / host-facing port boundary に進んだ。

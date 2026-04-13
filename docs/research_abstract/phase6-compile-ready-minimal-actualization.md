@@ -220,15 +220,18 @@ docs-first I/O / host-facing port boundary も fixed 済みであり、language 
 `specs/examples/387...388` により、
 stable malformed missing-option first reopen actualization comparison も fixed 済みであり、existing helper-local missing-option compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet に維持し、current next actualization mode は source-backed widening first に置く current cut を採った。implementation cut を narrower に取る場合でも `e16` lead は staging note に留め、capability second、duplicate later、`TryFallback` / `AtomicCut` malformed-static later を維持する。
 
+`specs/examples/389...390` により、
+final public parser / checker / runtime first later gate actualization comparison も fixed 済みであり、current first later cut は `run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` を public entry / report に置く runtime-led thin library facade に留め、`CurrentL2LoweredSourceProgram` / `CurrentL2RuntimeSkeletonReport` / `CurrentL2CheckerFloorReport` / `RunReport` を nested carrier として扱う。`run_current_l2_runtime_skeleton`、`lower_current_l2_fixed_source_text`、semantic/checker core、parser carrier floor は support-only bucket、`resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local helper / example surface は excluded bucket に残す。
+
 current mainline は、
-**repo-level current line は final public parser / checker / runtime API first later gate actualization comparison**
+**repo-level current line は stable malformed missing-option first source-backed widening actualization**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- final public parser / checker / runtime API first later gate actualization comparison
-- stable malformed missing-option first source-backed widening actualization（reserve）
+- stable malformed missing-option first source-backed widening actualization
 - public operational CLI second later gate actualization comparison（reserve）
+- final public parser / checker / runtime thin-facade later support actualization（reserve）
 
 を揃えるのが主眼になる。
 

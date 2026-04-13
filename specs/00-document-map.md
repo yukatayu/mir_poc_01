@@ -1025,6 +1025,10 @@
   - docs-first I/O / host-facing port boundary fixed 後の次段として、missing-option family first reopen を helper-local compare に留めるか、`e16/e17/e18` triplet の source-backed widening first へ進めるかを比較する。
 - `specs/examples/388-current-l2-stable-malformed-missing-option-first-reopen-actualization-ready-minimal-stable-malformed-missing-option-first-reopen-threshold.md`
   - stable malformed missing-option first reopen actualization の minimum を、entry criteria、triplet family、actualization mode、staging、guard、kept-later refs で固定する。
+- `specs/examples/389-current-l2-stable-malformed-missing-option-first-reopen-actualization-ready-final-public-parser-checker-runtime-first-later-gate-actualization-comparison.md`
+  - missing-option first reopen comparison fixed 後の次段として、library-side final public parser / checker / runtime API の first later gate actualization をどの symbol-level cut から narrow に始めるかを比較する。
+- `specs/examples/390-current-l2-final-public-parser-checker-runtime-first-later-gate-actualization-ready-minimal-final-public-parser-checker-runtime-first-later-gate-threshold.md`
+  - final public parser / checker / runtime first later gate actualization の minimum を、runtime-led thin facade entry、nested report carrier、support bucket、excluded bucket、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 
