@@ -1005,6 +1005,10 @@
   - model-check concrete carrier first actualization gate fixed 後の次段として、actual model-check carrier / source-sample emitted verification artifact wiring / sample-facing theorem-model-check evidence summary の reopen order を、actual carrier first の docs-only sequencing package として比較する。
 - `specs/examples/378-current-l2-model-check-concrete-carrier-actualization-comparison-ready-minimal-model-check-concrete-carrier-actualization-threshold.md`
   - model-check concrete carrier actualization comparison の minimum を、entry criteria、current first pilot、actualization entry、first actualization target、next-line refs、parallel reserve、guard、kept-later refs で固定する。
+- `specs/examples/379-current-l2-model-check-concrete-carrier-actualization-comparison-ready-model-check-concrete-carrier-first-actualization-comparison.md`
+  - model-check concrete carrier actualization sequencing fixed 後の次段として、tool-neutral formal hook only hard input から row-local machine-facing sibling artifact を actualize する cutと、bridge/bundle/wiring を premature に混ぜる cut を比較する。
+- `specs/examples/380-current-l2-model-check-concrete-carrier-first-actualization-ready-minimal-model-check-concrete-carrier-first-actualization-threshold.md`
+  - model-check concrete carrier first actualization の minimum を、hard input、docs-only context、actual artifact、current pilot、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

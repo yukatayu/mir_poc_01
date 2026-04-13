@@ -109,4 +109,5 @@ current reached-stage inventory は current authored octet `e1` / `e2` / `e3` / 
 - stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first、capability family second、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は later に残す
 - public operational CLI / final public contract later gate も fixed 済みであり、public-side later ordering は final public parser / checker / runtime API first、public operational CLI second に残す
 - model-check concrete carrier actualization comparison も fixed 済みであり、sample-visible theorem/model-check line の順序は actual carrier first、source-sample emitted verification artifact wiring second、sample-facing summary third に fixed 済みである
-- repo-level current line は model-check concrete carrier first actualization であり、その後の sample-side near-term line は source-sample emitted verification artifact wiring、sample-facing theorem/model-check evidence summary and bless/review flow である
+- model-check concrete carrier first actualization も fixed 済みであり、tool-neutral formal hook only hard input から row-local machine-facing carrier list を actualize 済みである
+- repo-level current line は source-sample emitted verification artifact wiring であり、その後の sample-side near-term line は sample-facing theorem/model-check evidence summary and bless/review flow である

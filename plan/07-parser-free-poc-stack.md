@@ -430,6 +430,11 @@ current L2 では production exporter API はまだ固定しない。
 - `crates/mir-semantics/examples/support/current_l2_formal_hook_support.rs`
   - theorem-line existing cut と同じ `subject_kind + subject_ref + contract_rows(obligation_kind + typed symbolic evidence_refs)` を保ったまま formal hook artifact へ落とす pure transform を持つ
   - source artifact schema/kind mismatch は fail-closed に止め、concrete theorem/model-check tool binding は still later に残す
+- `crates/mir-semantics/examples/current_l2_emit_model_check_carrier.rs`
+  - formal hook artifact を起点に row-local machine-facing model-check carrier list を出す
+- `crates/mir-semantics/examples/support/current_l2_model_check_carrier_support.rs`
+  - `subject_kind + subject_ref + case(obligation_kind + evidence_refs)` の row-local machine-facing carrier へ落とす pure transform を持つ
+  - source-sample emitted wiring や public-checker migration は still later に残す
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
 - `scripts/current_l2_diff_detached_aggregates.py`

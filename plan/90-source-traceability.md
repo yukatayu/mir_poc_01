@@ -2392,6 +2392,7 @@
   - `specs/examples/376-current-l2-shared-space-authority-resource-ownership-reopen-ready-minimal-shared-space-authority-resource-ownership-reopen-threshold.md`
   - `docs/reports/0673-phase6-shared-space-authority-resource-ownership-package.md`
   - `docs/reports/0674-phase6-model-check-concrete-carrier-actualization-comparison-package.md`
+  - `docs/reports/0675-phase6-model-check-concrete-carrier-first-actualization-package.md`
   - `specs/examples/121-shared-space-authoritative-room-baseline.md`
   - `specs/examples/122-shared-space-catalog-working-subset-comparison.md`
   - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`

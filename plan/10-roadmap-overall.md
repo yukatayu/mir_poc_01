@@ -128,12 +128,11 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. model-check concrete carrier first actualization
-2. source-sample emitted verification artifact wiring
-3. sample-facing theorem / model-check evidence summary and bless/review flow
-4. later docs-first I/O / host-facing port boundary comparison（working label）
+1. source-sample emitted verification artifact wiring
+2. sample-facing theorem / model-check evidence summary and bless/review flow
+3. later docs-first I/O / host-facing port boundary comparison（working label）
 
-ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...378` で fixed した sequencing judgment に従って `Macro 5` の sample-visible theorem/model-check line（actual carrier + 2 package）を詰め、`Macro 7` の host-facing integration boundary を docs-first に開く** である。
+ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...380` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check line（emitted route + sample-facing summary）を詰め、`Macro 7` の host-facing integration boundary を docs-first に開く** である。
 
 ## near-term reserve line
 

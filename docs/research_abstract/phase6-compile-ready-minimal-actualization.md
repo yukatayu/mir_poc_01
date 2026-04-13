@@ -206,6 +206,8 @@ shared-space identity / auth layering reopen も fixed 済みであり、members
 `specs/examples/367...368` により、
 model-check concrete carrier first actualization gate も fixed 済みであり、`proof_notebook_review_unit` current first pilot を巻き戻さず、`tool_neutral_formal_hook_only_input + compare_ready_docs_only_bridge_sketch` を entry にする narrow gate を current first choice に昇格した。public-checker docs-only chain は parallel reserve に留め、model-check concrete carrier actualization、actual public-checker migration、actual emitted verifier handoff artifact、concrete tool binding、bless/review-session metadata は still later に残す。
 
+`specs/examples/377...378` により、sample-visible theorem/model-check line の sequencing は actual model-check carrier first、source-sample emitted verification artifact wiring second、sample-facing summary third に fixed 済みである。さらに `specs/examples/379...380` により、tool-neutral formal hook only hard input から `schema_version + artifact_kind + subject_kind + subject_ref + case(obligation_kind + evidence_refs)` の row-local machine-facing carrier list を actualize 済みであり、`proof_notebook_review_unit` current first theorem-side pilot を維持したまま repo-level current line を source-sample emitted verification artifact wiring に進めた。
+
 `specs/examples/369...370` により、
 stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first (`e16/e17/e18`)、capability family second (`e13/e20`) に固定し、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は kept-later に残す current cut を採った。
 
@@ -213,7 +215,7 @@ stable malformed broader follow-up inventory も fixed 済みであり、broader
 public operational CLI / final public contract later gate も fixed 済みであり、`run_current_l2_source_sample` current gate を巻き戻さず、first later gate を final public parser / checker / runtime API、second later gate を public operational CLI に置き、repo layout / accepted-set / repo-local helper surface を current final contract の外へ残す current cut を採った。
 
 current mainline は、
-**repo-level current line は model-check concrete carrier first actualization**
+**repo-level current line は source-sample emitted verification artifact wiring**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -222,11 +224,9 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- model-check concrete carrier first actualization
 - source-sample emitted verification artifact wiring
 - sample-facing theorem / model-check evidence summary and bless/review flow
 - docs-first I/O / host-facing port boundary comparison（working label, later）
-- stable malformed missing-option first reopen actualization comparison（reserve）
 - stable malformed missing-option first reopen actualization comparison（reserve）
 - final public parser / checker / runtime API first later gate actualization comparison（reserve）
 
