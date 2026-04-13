@@ -1013,6 +1013,10 @@
   - model-check concrete carrier first actualization fixed 後の次段として、current authored source sample octet と verification ladder reached row を theorem/model-check helper output にどう接続するのが最小かを比較する。
 - `specs/examples/382-current-l2-source-sample-emitted-verification-artifact-wiring-ready-minimal-source-sample-emitted-verification-artifact-wiring-threshold.md`
   - source-sample emitted verification artifact wiring の minimum を、source entry、emitted route、route rule、guard、kept-later refs で固定する。
+- `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
+  - source-sample emitted verification artifact wiring fixed 後の次段として、sample-facing theorem/model-check evidence を README / `.docs` / snapshot docs のどこでどう見せ、current bless/review flow をどこまで repo-local に留めるかを比較する。
+- `specs/examples/384-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-minimal-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-threshold.md`
+  - sample-facing theorem/model-check evidence summary と repo-local bless/review flow の minimum を、sample surface、evidence route、docs-only context、bless/review refs、guard、kept-later refs で固定する。
 - `specs/examples/385-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-docs-first-io-host-facing-port-boundary-comparison.md`
   - sample-visible theorem/model-check summary milestone fixed 後の次段として、privileged `stdin/stdout` を避けた capability-scoped I/O / adapter boundary を docs-first first cut にし、visualizer / host substrate / host runtime と FFI / engine adapter をどう押し分けるかを比較する。
 - `specs/examples/386-current-l2-docs-first-io-host-facing-port-boundary-ready-minimal-docs-first-io-host-facing-port-boundary-threshold.md`
@@ -1021,10 +1025,6 @@
   - docs-first I/O / host-facing port boundary fixed 後の次段として、missing-option family first reopen を helper-local compare に留めるか、`e16/e17/e18` triplet の source-backed widening first へ進めるかを比較する。
 - `specs/examples/388-current-l2-stable-malformed-missing-option-first-reopen-actualization-ready-minimal-stable-malformed-missing-option-first-reopen-threshold.md`
   - stable malformed missing-option first reopen actualization の minimum を、entry criteria、triplet family、actualization mode、staging、guard、kept-later refs で固定する。
-- `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
-  - source-sample emitted verification artifact wiring fixed 後の次段として、sample-facing theorem/model-check evidence を README / `.docs` / snapshot docs のどこでどう見せ、current bless/review flow をどこまで repo-local に留めるかを比較する。
-- `specs/examples/384-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-minimal-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-threshold.md`
-  - sample-facing theorem/model-check evidence summary と repo-local bless/review flow の minimum を、sample surface、evidence route、docs-only context、bless/review refs、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

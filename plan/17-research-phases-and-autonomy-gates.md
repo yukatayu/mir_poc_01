@@ -78,13 +78,11 @@
 ## current mainline
 
 1. `Macro 7` final public parser / checker / runtime API first later gate actualization comparison
-2. `Macro 4` stable malformed missing-option first source-backed widening actualization
-3. `Macro 7` public operational CLI second later gate actualization comparison
 
 ## current reserve line
 
-- `Macro 4` stable malformed missing-option first reopen actualization comparison
-- `Macro 7` final public parser / checker / runtime API first later gate actualization comparison
+- `Macro 4` stable malformed missing-option first source-backed widening actualization
+- `Macro 7` public operational CLI second later gate actualization comparison
 
 ## current stop lines
 

@@ -104,7 +104,7 @@
 | parser-free PoC / detached loop | 95% | 91% | 99% | late | runnable baseline と regression policy がある |
 | compile-ready parser / checker / runtime | 88% | 78% | 85% | late | non-production minimal tranche と public-pressure gate は揃った |
 | fixed-subset source samples | 93% | 94% | 93% | active | authored octet runnable。`e21/e22` contrast row と `e4/e19` static pair まで source-backed に actualize 済み |
-| theorem / verifier bridge | 89% | 86% | 70% | early-active | formal hook、proof notebook first bridge、first actual model-check carrier、source-sample emitted route、sample-facing summary はある。repo-level current line は docs-first I/O へ進んだ |
+| theorem / verifier bridge | 89% | 86% | 70% | early-active | formal hook、proof notebook first bridge、first actual model-check carrier、source-sample emitted route、sample-facing summary はある。repo-level current line は final public parser / checker / runtime first later gate actualization comparison に進んだ |
 | Mirrorea fabric boundary | 71% | 60% | 10% | docs-first checkpoint fixed | re-entry bundle、identity/auth layering、admission/compile-time visibility cut、authority/resource ownership split は fixed。final catalog と operational realizationは later |
 | shared-space boundary | 79% | 68% | 16% | docs-first checkpoint fixed | practical cut、repo-level re-entry bundle、admission/visibility bridge、authority/resource split は fixed。final catalog は user spec required |
 | Typed-Effect Wiring Platform | 35% | 27% | 4% | positioning only | host-facing I/O / adapter boundary の high-level anchor として参照できる |
