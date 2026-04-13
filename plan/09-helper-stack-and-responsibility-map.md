@@ -19,6 +19,13 @@ run_directory_named_profile
 
 この前段に `discover_bundles_in_directory` があり、後段に `FixtureHostStub::run_fixture` と `run_to_completion` がある。
 
+## current L2 source support cut
+
+- `run_current_l2_source_sample` は runtime-led thin facade first public cut に留める。
+- `run_current_l2_runtime_skeleton` は final public parser/checker/runtime thin-facade later support actualization の current support cut であり、`Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` を explicit input surface に取る。
+- `lower_current_l2_fixed_source_text` は current support cut に含めず、deeper-support helper に残す。
+- `resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local Python orchestration helper は excluded bucket に残す。
+
 ## layer ごとの public behavior / thin delegation
 
 | helper | public behavior | thin delegation |

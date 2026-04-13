@@ -229,14 +229,17 @@ stable malformed missing-option first source-backed widening actualization も f
 `specs/examples/393...394` により、
 public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留め、operational shell concern は `sample_selector_argument` / `explicit_host_plan_input_mode` / `source_sample_run_report_json_or_pretty_summary` に narrow に置く。`run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` は still support-only、path resolver / accepted-set / repo-local Python helper / cargo example emitter は excluded bucket に残す。
 
+`specs/examples/395...396` により、
+final public parser / checker / runtime thin-facade later support actualization も fixed 済みであり、current first later-support cut は `run_current_l2_runtime_skeleton` と `CurrentL2RuntimeSkeletonReport` に置く。explicit input surface は `Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` に留め、`lower_current_l2_fixed_source_text`、semantic/checker core、parser carrier floor は deeper-support bucket に残し、`run_current_l2_source_sample` first public cut と Rust-side operational wrapper second gate は巻き戻さない。
+
 current mainline は、
-**repo-level current line は final public parser / checker / runtime thin-facade later support actualization**
+**repo-level current line は stable malformed capability second reopen actualization comparison**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- final public parser / checker / runtime thin-facade later support actualization
-- stable malformed capability second reopen actualization comparison（reserve）
+- stable malformed capability second reopen actualization comparison
+- public operational CLI concrete shell naming（reserve）
 
 を揃えるのが主眼になる。
 

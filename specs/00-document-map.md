@@ -106,6 +106,10 @@
   - runtime-led thin library facade first later cut を巻き戻さず、public operational CLI second gate をどの operational wrapper cut から narrow に actualize するかを比較する補助文書。
 - `specs/examples/394-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-minimal-public-operational-cli-second-later-gate-threshold.md`
   - public operational CLI second gate の minimum を delegated library entry / operational shell concern / support / excluded / guard / kept-later refs とともに固定する補助文書。
+- `specs/examples/395-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-final-public-parser-checker-runtime-thin-facade-later-support-actualization-comparison.md`
+  - runtime-led thin facade first cut と Rust-side operational wrapper second gate を巻き戻さず、standalone parser/checker/runtime support entry をどの later-support cut から narrow に actualize するかを比較する補助文書。
+- `specs/examples/396-current-l2-final-public-parser-checker-runtime-thin-facade-later-support-actualization-ready-minimal-final-public-parser-checker-runtime-thin-facade-later-support-threshold.md`
+  - final public parser/checker/runtime thin-facade later support の minimum を chosen support refs / explicit input refs / deeper-support refs / excluded refs / guard refs / kept-later refs とともに固定する補助文書。
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。
