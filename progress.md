@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-13 15:00 JST
+最終更新: 2026-04-13 15:10 JST
 
 ## この文書について
 
@@ -165,6 +165,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 15:10 JST — `docs/reports/0672` で post-package document consistency audit を閉じ、reviewer finding は empty audit report の completion のみに narrow だったことを確認した。`specs/examples/375...376` close 後の snapshot docs は current line `model-check concrete carrier actualization comparison` に整合している。
 - 2026-04-13 15:00 JST — `docs/reports/0673` と `specs/examples/375...376` で shared-space authority / resource ownership reopen を閉じ、participant carrier を membership / activation に留めたまま、resource owner slot、delegated capability、consistency mode、fairness source を separate family に置く current cut を fixed した。repo-level current line は model-check concrete carrier actualization comparison に進んだ。
 - 2026-04-13 14:31 JST — `docs/reports/0671` と `specs/examples/373...374` で shared-space admission / compile-time visibility reopen を閉じ、role / capability / visibility / notify path requirement の over-approximationだけを compile-time に残し、actual admission / activation / active member set / reconciliation は runtime control-plane に残す current cut を fixed した。repo-level current line は shared-space authority / resource ownership reopen に進んだ。
 - 2026-04-13 09:09 JST — `docs/reports/0669` で post-later-gates document consistency audit を閉じ、`.docs/current-l2-source-sample-authoring-policy.md`、`samples/current-l2/README.md`、`faq_003.md`、Phase 5 abstract の stale current-line wording を current snapshot に揃えた。reviewer 再確認は `No additional findings.` で、repo-level current line は shared-space admission / compile-time visibility reopen のまま維持した。
