@@ -464,6 +464,35 @@ public operational surface inventory の次段 current gate では、
 - partial parser surface を crate/module 単位で promotion しない。
 - `pub` visibility を final public contract と読まない。
 
+## current public operational later-gate ordering
+
+public operational surface actualization gate の次段 current reading では、
+**library-side final public contract を first later gate、public operational CLI を second later gate に置く**
+のが自然である。
+
+### first later gate
+
+- final public parser / checker / runtime API
+
+current candidate が `run_current_l2_source_sample` という library-side entry であるため、その先の first later gate も library-side contract と読むのが最小である。
+
+### second later gate
+
+- public operational CLI
+
+CLI は library-side final contract の上に載る operational wrapper として別 gate に残す。
+
+### kept-out pressure
+
+- `mir_runtime::current_l2::resolve_current_l2_source_sample_path`
+- hard-coded accepted sample set
+- `crates/mir-semantics/examples/*`
+- `crates/mir-semantics/examples/support/*`
+- `scripts/current_l2_source_sample_regression.py`
+- `scripts/current_l2_detached_loop.py`
+
+これらは repo layout / repo-local helper surface を持つため、current final public contract の外に残す。
+
 ## この先の update 指針
 
 helper layer が変わったら、少なくとも次のどれを更新すべきかを見る。

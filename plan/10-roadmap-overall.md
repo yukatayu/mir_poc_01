@@ -126,10 +126,11 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. public operational CLI / final public contract later gate
-2. shared-space admission / compile-time visibility reopen
-3. shared-space authority / resource ownership reopen
-4. model-check concrete carrier actualization comparison
+1. shared-space admission / compile-time visibility reopen
+2. shared-space authority / resource ownership reopen
+3. model-check concrete carrier actualization comparison
+4. stable malformed missing-option first reopen actualization comparison
+5. final public parser / checker / runtime API first later gate actualization comparison
 
 これは主に `Macro 4` と `Macro 5` の line である。
 

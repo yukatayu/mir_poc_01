@@ -989,6 +989,10 @@
   - model-check concrete carrier first actualization gate fixed 後の次段として、stable malformed broader follow-up を missing-option first / capability second / duplicate later / try-rollback malformed-static later のどの順で reopen するかを比較する。
 - `specs/examples/370-current-l2-stable-malformed-broader-follow-up-inventory-ready-minimal-stable-malformed-broader-follow-up-inventory-threshold.md`
   - stable malformed broader follow-up inventory の minimum を、first/second reopen family、row refs、guard、kept-later refs で固定する。
+- `specs/examples/371-current-l2-stable-malformed-broader-follow-up-inventory-ready-public-operational-cli-final-public-contract-later-gate-comparison.md`
+  - stable malformed broader follow-up inventory fixed 後の次段として、`run_current_l2_source_sample` current gate を保ったまま、final public parser/checker/runtime API と public operational CLI の later ordering をどう切るかを比較する。
+- `specs/examples/372-current-l2-public-operational-cli-final-public-contract-later-gate-ready-minimal-public-operational-cli-final-public-contract-later-gate-threshold.md`
+  - public operational later gate の minimum を、current candidate、first/second later gate、excluded bucket、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

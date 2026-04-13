@@ -71,7 +71,8 @@
   - stable-static edge-pair first reopen では、existing `e4` row と new `e19` row を source-backed static-stop pair に actualize 済みである。
   - parser / checker / runtime public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory、public operational surface actualization gate は fixed 済みである。
   - stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first、capability family second、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は later に残す。
-  - repo-level current line は public operational CLI / final public contract later gate に置いている。
+  - public operational CLI / final public contract later gate も fixed 済みであり、public-side later ordering は final public parser / checker / runtime API first、public operational CLI second に残す。
+  - repo-level current line は shared-space admission / compile-time visibility reopen に置いている。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

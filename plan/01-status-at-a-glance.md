@@ -41,15 +41,15 @@
 
 - parser-free current L2 PoC は runnable。
 - current authored source sample octet `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` は runnable ladder に接続済みであり、`e22` は runtime/formal-hook reached、`e4` / `e19` は fixture-static formal-hook reached、`e3` は formal hook stage だけ guarded に残す。
-- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen も fixed 済みである。parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。さらに `specs/examples/357...358` により Mirrorea/shared-space docs-first re-entry bundle、`specs/examples/359...360` により model-check/public-checker second reserve inventory、`specs/examples/363...364` により public operational surface actualization gate、`specs/examples/365...366` により shared-space identity/auth layering reopen、`specs/examples/367...368` により model-check concrete carrier first actualization gate、`specs/examples/369...370` により stable malformed broader follow-up inventory も fixed 済みである。Mirrorea/shared-space は repo-level current boundary track、Typed-Effect / Prism は adjacent track、`proof_notebook_review_unit` は current first concrete pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate、stable malformed next reopen order は missing-option first / capability second、public-checker docs-only chain は parallel reserve に留める。repo-level current line は public operational CLI / final public contract later gate に置き、shared-space admission / compile-time visibility reopen と shared-space authority / resource ownership reopen を後続に残す。
+- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen も fixed 済みである。parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。さらに `specs/examples/357...358` により Mirrorea/shared-space docs-first re-entry bundle、`specs/examples/359...360` により model-check/public-checker second reserve inventory、`specs/examples/363...364` により public operational surface actualization gate、`specs/examples/365...366` により shared-space identity/auth layering reopen、`specs/examples/367...368` により model-check concrete carrier first actualization gate、`specs/examples/369...370` により stable malformed broader follow-up inventory、`specs/examples/371...372` により public operational CLI / final public contract later gate も fixed 済みである。Mirrorea/shared-space は repo-level current boundary track、Typed-Effect / Prism は adjacent track、`proof_notebook_review_unit` は current first concrete pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate、stable malformed next reopen order は missing-option first / capability second、public-side later ordering は final public parser / checker / runtime API first / public operational CLI second に留める。repo-level current line は shared-space admission / compile-time visibility reopen に置き、shared-space authority / resource ownership reopen と model-check concrete carrier actualization comparison を後続に残す。
 - tool-neutral formal hook と `proof_notebook_review_unit` first pilot はある。
 - plain theorem-side bridge sketch first actualization と compare-ready bridge sketch second reopen もある。
 
 ## current mainline
 
-1. public operational CLI / final public contract later gate
-2. shared-space admission / compile-time visibility reopen
-3. shared-space authority / resource ownership reopen
+1. shared-space admission / compile-time visibility reopen
+2. shared-space authority / resource ownership reopen
+3. model-check concrete carrier actualization comparison
 
 ## biggest later gates
 
