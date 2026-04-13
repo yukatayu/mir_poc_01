@@ -30,6 +30,7 @@
   - shared-space authority / resource ownership reopen
   - model-check concrete carrier actualization comparison
   - model-check concrete carrier first actualization
+  - source-sample emitted verification artifact wiring
   まで fixed 済みと読む。
 
 ## macro phase reading
@@ -53,14 +54,15 @@
 - first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen も fixed 済みである。
 - parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。
 - Mirrorea/shared-space docs-first re-entry、shared-space identity / auth layering reopen、model-check/public-checker second reserve inventory、model-check concrete carrier first actualization gate、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate も fixed 済みである。
+- source-sample emitted verification artifact wiring も fixed 済みであり、`run_current_l2_source_sample` の public/report shape を変えずに runtime test/support helper-local route と `proof_notebook_review_unit` / model-check carrier fan-out を actualize 済みである。
 - `proof_notebook_review_unit` は current first concrete theorem/model-check pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate に留まる。
-- repo-level current line は source-sample emitted verification artifact wiring に置き、その後に sample-facing theorem/model-check evidence summary and bless/review flow、later docs-first I/O / host-facing port boundary（working label）を並べるのが current reading である。
+- repo-level current line は sample-facing theorem/model-check evidence summary and bless/review flow に置き、その後に later docs-first I/O / host-facing port boundary（working label）を並べるのが current reading である。
 
 ## current mainline
 
-1. source-sample emitted verification artifact wiring
-2. sample-facing theorem / model-check evidence summary and bless/review flow
-3. later docs-first I/O / host-facing port boundary comparison（working label）
+1. sample-facing theorem / model-check evidence summary and bless/review flow
+2. later docs-first I/O / host-facing port boundary comparison（working label）
+3. reserve stable malformed missing-option first reopen actualization comparison
 
 ## biggest later gates
 

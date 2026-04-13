@@ -219,6 +219,15 @@
   - `samples/current-l2/e2-try-fallback.txt`
   - `samples/current-l2/e23-malformed-try-fallback-missing-fallback-body.txt`
 
+## 2026-04-13 Phase 6 source-sample emitted verification artifact wiring addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/07-parser-free-poc-stack.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_003.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/381-current-l2-model-check-concrete-carrier-first-actualization-ready-source-sample-emitted-verification-artifact-wiring-comparison.md`
+  - `specs/examples/382-current-l2-source-sample-emitted-verification-artifact-wiring-ready-minimal-source-sample-emitted-verification-artifact-wiring-threshold.md`
+  - `docs/reports/0677-phase6-source-sample-emitted-verification-artifact-wiring-package.md`
+  - `crates/mir-runtime/tests/current_l2_source_sample_emitted_artifact_wiring.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
 ## 2026-04-13 Phase 6 stable malformed broader follow-up inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

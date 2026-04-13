@@ -72,7 +72,8 @@
   - parser / checker / runtime public surface inventory、Mirrorea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory、public operational surface actualization gate は fixed 済みである。
   - stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first、capability family second、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は later に残す。
   - public operational CLI / final public contract later gate も fixed 済みであり、public-side later ordering は final public parser / checker / runtime API first、public operational CLI second に残す。
-  - repo-level current line は source-sample emitted verification artifact wiring に置き、その後の sample-corpus 側 near-term line は sample-facing theorem/model-check evidence summary and bless/review flow に置く。
+  - source-sample emitted verification artifact wiring も fixed 済みであり、`run_current_l2_source_sample` の public/report shape を変えず、runtime test/support helper-local route として reached row を review-unit / model-check carrier helper output へ fan-out する current cutを actualize 済みである。
+  - repo-level current line は sample-facing theorem/model-check evidence summary and bless/review flow に置く。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

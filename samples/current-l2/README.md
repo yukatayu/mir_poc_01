@@ -110,4 +110,5 @@ current reached-stage inventory は current authored octet `e1` / `e2` / `e3` / 
 - public operational CLI / final public contract later gate も fixed 済みであり、public-side later ordering は final public parser / checker / runtime API first、public operational CLI second に残す
 - model-check concrete carrier actualization comparison も fixed 済みであり、sample-visible theorem/model-check line の順序は actual carrier first、source-sample emitted verification artifact wiring second、sample-facing summary third に fixed 済みである
 - model-check concrete carrier first actualization も fixed 済みであり、tool-neutral formal hook only hard input から row-local machine-facing carrier list を actualize 済みである
-- repo-level current line は source-sample emitted verification artifact wiring であり、その後の sample-side near-term line は sample-facing theorem/model-check evidence summary and bless/review flow である
+- source-sample emitted verification artifact wiring も fixed 済みであり、runtime test/support helper-local route として `source report -> formal hook reached/guarded split -> proof_notebook_review_units / model_check_concrete_carriers` fan-out を actualize 済みである
+- repo-level current line は sample-facing theorem/model-check evidence summary and bless/review flow であり、その次段は docs-first I/O / host-facing port boundary である

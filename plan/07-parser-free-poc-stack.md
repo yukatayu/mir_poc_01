@@ -434,7 +434,10 @@ current L2 では production exporter API はまだ固定しない。
   - formal hook artifact を起点に row-local machine-facing model-check carrier list を出す
 - `crates/mir-semantics/examples/support/current_l2_model_check_carrier_support.rs`
   - `subject_kind + subject_ref + case(obligation_kind + evidence_refs)` の row-local machine-facing carrier へ落とす pure transform を持つ
-  - source-sample emitted wiring や public-checker migration は still later に残す
+  - emitter 自体では source-sample emitted wiring や public-checker migration は still later に残す
+- `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `run_current_l2_source_sample` の report と fixture-aligned detached formal-hook route をつなぎ、`proof_notebook_review_unit` / model-check carrier helper output へ fan-out する runtime test/support helper を持つ
+  - `CurrentL2SourceSampleRunReport` の public/report shape は変えず、runtime/static reached row と guarded row の split だけを helper-local evidence に actualize する
 - `scripts/current_l2_diff_detached_artifacts.py`
   - payload core の exact-compare を最小で比較する
 - `scripts/current_l2_diff_detached_aggregates.py`
