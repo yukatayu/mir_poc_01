@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-13 15:53 JST
+最終更新: 2026-04-13 16:10 JST
 
 ## この文書について
 
@@ -162,6 +162,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 16:10 JST — `docs/reports/0676` で post-model-check-carrier document consistency audit を閉じ、`Documentation.md`、`plan/01`、Phase 6 abstract、`faq_003.md` の stale wording を reviewer finding に従って修正した。repo-level current line は source-sample emitted verification artifact wiring のまま維持した。
 - 2026-04-13 15:53 JST — `docs/reports/0675` と `specs/examples/379...380` で model-check concrete carrier first actualization を閉じ、tool-neutral formal hook only hard input から row-local machine-facing carrier list を actualize した。repo-level current line は source-sample emitted verification artifact wiring に進んだ。
 - 2026-04-13 15:35 JST — `docs/reports/0674` と `specs/examples/377...378` で model-check concrete carrier actualization comparison を閉じ、sample-visible theorem/model-check line の順序を actual carrier first / artifact wiring second / sample-facing summary third に固定した。repo-level current line は model-check concrete carrier first actualization に進んだ。
 - 2026-04-13 15:10 JST — `docs/reports/0672` で post-package document consistency audit を閉じ、reviewer finding は empty audit report の completion のみに narrow だったことを確認した。`specs/examples/375...376` close 後の snapshot docs は current line `model-check concrete carrier actualization comparison` に整合している。

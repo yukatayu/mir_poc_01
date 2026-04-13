@@ -26,6 +26,10 @@
   - model-check concrete carrier first actualization gate
   - stable malformed broader follow-up inventory
   - public operational CLI / final public contract later gate
+  - shared-space admission / compile-time visibility reopen
+  - shared-space authority / resource ownership reopen
+  - model-check concrete carrier actualization comparison
+  - model-check concrete carrier first actualization
   まで fixed 済みと読む。
 
 ## macro phase reading

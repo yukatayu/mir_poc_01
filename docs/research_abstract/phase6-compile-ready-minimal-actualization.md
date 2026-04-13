@@ -220,10 +220,6 @@ current mainline は、
 
 ここでは fixed entry criteria を崩さずに、
 
-- deferred authored-row widen sequencing `e1 -> e21 -> e3`
-- proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
-- theorem-side compare-ready bridge sketch second reopen（fixed 済み）
-- deferred `e3` actualization reopen timing（fixed 済み）
 - source-sample emitted verification artifact wiring
 - sample-facing theorem / model-check evidence summary and bless/review flow
 - docs-first I/O / host-facing port boundary comparison（working label, later）
