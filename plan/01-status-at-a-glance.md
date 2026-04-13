@@ -45,7 +45,7 @@
 | `Macro 4` executable fixed-subset expansion | active | self-driven |
 | `Macro 5` theorem / model-check / static bridge | early-active | self-driven up to boundary |
 | `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed |
-| `Macro 7` toolchain / backend / public dev surface | inventory plus later-gate order | later |
+| `Macro 7` toolchain / backend / public dev surface | inventory plus later-gate order | mixed |
 | `Macro 8` domain / application realization | not started | user spec required |
 
 ## current capability snapshot
