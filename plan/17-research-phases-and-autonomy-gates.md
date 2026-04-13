@@ -77,13 +77,12 @@
 
 ## current mainline
 
-1. `Macro 5` sample-facing theorem / model-check evidence summary and bless/review flow
-2. `Macro 7` docs-first I/O / host-facing port boundary comparison（working label）
-3. `Macro 4` stable malformed missing-option first reopen actualization comparison
+1. `Macro 7` docs-first I/O / host-facing port boundary comparison（working label）
+2. `Macro 4` stable malformed missing-option first reopen actualization comparison
+3. `Macro 7` final public parser / checker / runtime API first later gate actualization comparison
 
 ## current reserve line
 
-- `Macro 7` docs-first I/O / host-facing port boundary comparison（working label）
 - `Macro 4` stable malformed missing-option first reopen actualization comparison
 - `Macro 7` final public parser / checker / runtime API first later gate actualization comparison
 
@@ -102,7 +101,7 @@
 ## current judgments
 
 - current repo は architecture-first だが、fixed-subset runnable path を already 持つ。
-- Mirrorea/shared-space docs-first re-entry bundle、model-check/public-checker second reserve inventory、stable-static edge-pair first reopen、public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate、model-check concrete carrier actualization comparison、model-check concrete carrier first actualization、source-sample emitted verification artifact wiring、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate、shared-space admission / compile-time visibility reopen、shared-space authority / resource ownership reopen も fixed 済みであり、current mainline は `Macro 5` sample-facing theorem/model-check evidence summary and bless/review flow へ進み、その後に `Macro 7` docs-first I/O / host-facing port boundary comparison（working label）を後続に置く。
+- Mirrorea/shared-space docs-first re-entry bundle、model-check/public-checker second reserve inventory、stable-static edge-pair first reopen、public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate、model-check concrete carrier actualization comparison、model-check concrete carrier first actualization、source-sample emitted verification artifact wiring、sample-facing theorem/model-check evidence summary and bless/review flow、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate、shared-space admission / compile-time visibility reopen、shared-space authority / resource ownership reopen も fixed 済みであり、current mainline は `Macro 7` docs-first I/O / host-facing port boundary comparison（working label）へ進んでいる。
 - host-facing integration は `stdin/stdout` privileged 化ではなく、docs-first I/O / port / adapter boundary として later line に置き、visualizer / host substrate / FFI / engine adapter を separate gate に分ける。
 - Mirrorea / shared-space / backend / apps は old `FutureWork` ではなく separable track として扱う。
 - current immediate mainline を止める user decision は 0 件である。

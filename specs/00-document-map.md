@@ -1013,6 +1013,10 @@
   - model-check concrete carrier first actualization fixed 後の次段として、current authored source sample octet と verification ladder reached row を theorem/model-check helper output にどう接続するのが最小かを比較する。
 - `specs/examples/382-current-l2-source-sample-emitted-verification-artifact-wiring-ready-minimal-source-sample-emitted-verification-artifact-wiring-threshold.md`
   - source-sample emitted verification artifact wiring の minimum を、source entry、emitted route、route rule、guard、kept-later refs で固定する。
+- `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
+  - source-sample emitted verification artifact wiring fixed 後の次段として、sample-facing theorem/model-check evidence を README / `.docs` / snapshot docs のどこでどう見せ、current bless/review flow をどこまで repo-local に留めるかを比較する。
+- `specs/examples/384-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-minimal-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-threshold.md`
+  - sample-facing theorem/model-check evidence summary と repo-local bless/review flow の minimum を、sample surface、evidence route、docs-only context、bless/review refs、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

@@ -64,7 +64,7 @@
 - source-sample authoring policy current cut では、repo-local flow を `.docs/current-l2-source-sample-authoring-policy.md` と `scripts/current_l2_source_sample_regression.py` に寄せる。
   - `inventory` は current authored octet の file presence と guarded row status を確認する。
   - `regression` は lowering / runner / ladder bundle を current authored octet に流し、formal-hook smoke sub-bundleは `runtime_try_cut_cluster` / `fixture_static_cluster` current top に入る 7 row だけに流す。
-  - current `bless` は retained artifact archive ではなく、source / fixture / matrix / ladder / snapshot docs の reviewed sync と regression success を意味する。
+  - current `bless` は retained artifact archive ではなく、source / fixture / matrix / ladder / snapshot docs の reviewed sync、`inventory` / `regression` success、必要なら emitted review-unit / model-check carrier helper output の inspection を意味する。
 - post-sextet first cluster current cut では、first broader authored-row family は `e21` / `e22` try-rollback locality contrast に置く。
   - `e21` は source-authored frontier-update anchor である。
   - `e22` は source-authored place-mismatch contrast row として actualize 済みである。
@@ -73,7 +73,8 @@
   - stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first、capability family second、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は later に残す。
   - public operational CLI / final public contract later gate も fixed 済みであり、public-side later ordering は final public parser / checker / runtime API first、public operational CLI second に残す。
   - source-sample emitted verification artifact wiring も fixed 済みであり、`run_current_l2_source_sample` の public/report shape を変えず、runtime test/support helper-local route として reached row を review-unit / model-check carrier helper output へ fan-out する current cutを actualize 済みである。
-  - repo-level current line は sample-facing theorem/model-check evidence summary and bless/review flow に置く。
+  - sample-facing theorem/model-check evidence summary and bless/review flow も fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採っている。
+  - repo-level current line は docs-first I/O / host-facing port boundary に置く。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

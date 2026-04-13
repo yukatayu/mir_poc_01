@@ -98,7 +98,7 @@ current reached-stage inventory は current authored octet `e1` / `e2` / `e3` / 
 - source sample を更新するときは source text / fixture mapping / matrix / ladder / snapshot docs を同じ task で揃える。
 - `python3 scripts/current_l2_source_sample_regression.py inventory` は current authored octet の file presence と guarded row status を確認する。
 - `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` は current authored octet の lowering / runner / ladder bundle を流し、formal-hook smoke sub-bundleは current top に入る 7 row だけへ留める。
-- current `bless` は retained artifact archive ではなく、review 済み repo-local sync と regression success の確認を意味する。
+- current `bless` は retained artifact archive ではなく、review 済み repo-local sync、`inventory` / `regression` success、必要なら emitted review-unit / model-check carrier helper output の inspection を意味する。
 
 ## next steps
 
@@ -111,4 +111,5 @@ current reached-stage inventory は current authored octet `e1` / `e2` / `e3` / 
 - model-check concrete carrier actualization comparison も fixed 済みであり、sample-visible theorem/model-check line の順序は actual carrier first、source-sample emitted verification artifact wiring second、sample-facing summary third に fixed 済みである
 - model-check concrete carrier first actualization も fixed 済みであり、tool-neutral formal hook only hard input から row-local machine-facing carrier list を actualize 済みである
 - source-sample emitted verification artifact wiring も fixed 済みであり、runtime test/support helper-local route として `source report -> formal hook reached/guarded split -> proof_notebook_review_units / model_check_concrete_carriers` fan-out を actualize 済みである
-- repo-level current line は sample-facing theorem/model-check evidence summary and bless/review flow であり、その次段は docs-first I/O / host-facing port boundary である
+- sample-facing theorem/model-check evidence summary and bless/review flow も fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採っている
+- repo-level current line は docs-first I/O / host-facing port boundary であり、その後に stable malformed missing-option widen と final public parser/checker/runtime later gate を reserve に置く

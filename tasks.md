@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 16:28 JST
+最終更新: 2026-04-13 16:46 JST
 
 ## この文書について
 
@@ -40,9 +40,10 @@
 - model-check concrete carrier actualization comparison は `specs/examples/377...378` により fixed 済みであり、sample-visible theorem/model-check line の next reopen order を actual model-check carrier first、source-sample emitted verification artifact wiring second、sample-facing theorem/model-check evidence summary and bless/review flow third に固定した。
 - model-check concrete carrier first actualization は `specs/examples/379...380` により fixed 済みであり、tool-neutral formal hook only hard input から row-local machine-facing sibling artifact list を actualize し、`proof_notebook_review_unit` current first theorem-side pilot を維持したまま source-sample emitted verification artifact wiring を next line に送る current cut を採った。
 - source-sample emitted verification artifact wiring は `specs/examples/381...382` により fixed 済みであり、`run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` の public/report shape を保ったまま、runtime test/support helper-local emitted route として `source report -> formal hook reached/guarded split -> proof_notebook_review_units / model_check_concrete_carriers` fan-out を actualize した。
-- current promoted line は **sample-facing theorem / model-check evidence summary and bless/review flow** であり、その後に
-  - later `docs-first I/O / host-facing port boundary comparison`（working label）
+- sample-facing theorem / model-check evidence summary and bless/review flow は `specs/examples/383...384` により fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、`source sample -> runner/ladders -> formal hook reached/guarded -> review-unit/model-check carrier` を current evidence route、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採った。
+- current promoted line は **docs-first I/O / host-facing port boundary comparison**（working label）であり、その後に
   - reserve `stable malformed missing-option first reopen actualization comparison`
+  - reserve `final public parser / checker / runtime API first later gate actualization comparison`
   を置くのが自然である。
 - `stable malformed missing-option first reopen actualization comparison` と `final public parser / checker / runtime API first later gate actualization comparison` は near-term reserve に下げ、sample-visible theorem/model-check line（actual carrier + 2 package）の後段に残す。
 
@@ -50,23 +51,13 @@
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 5` | theorem/model-check sample visibility | `S5-S6 -> S6` | sample-facing theorem / model-check evidence summary and bless/review flow | 1〜3 task / 数日〜1週 | 一部自走可能 |
-| 2 | `Macro 7` | host-facing integration boundary | `S1-S2 -> S2-S3` | docs-first I/O / host-facing port boundary comparison | 1〜3 task / 数日〜1週 | docs-first boundary までは自走可能 |
-| 3 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
-| 4 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 1 | `Macro 7` | host-facing integration boundary | `S1-S2 -> S2-S3` | docs-first I/O / host-facing port boundary comparison | 1〜3 task / 数日〜1週 | docs-first boundary までは自走可能 |
+| 2 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
+| 3 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. sample-facing theorem / model-check evidence summary and bless/review flow
-
-- macro phase
-  - `Macro 5`
-- 目的
-  - sample code を読んだ人間が theorem/model-check evidence をどこで確認し、どの review / bless flow を current repo で踏むのかを narrow に整理する。
-- 完了条件
-  - concrete external tool binding を still later に残したまま、sample-facing evidence summary、review-unit / bridge sketch の見せ方、current bless/review flow を current task map に整理する。
-
-### Package 2. docs-first I/O / host-facing port boundary comparison
+### Package 1. docs-first I/O / host-facing port boundary comparison
 
 - macro phase
   - `Macro 7`
@@ -77,7 +68,7 @@
 - 注記
   - `host-facing port` は working label であり、final terminology は OPEN である。
 
-### Package 3. stable malformed missing-option first reopen actualization comparison
+### Package 2. stable malformed missing-option first reopen actualization comparison
 
 - macro phase
   - `Macro 4`
@@ -86,7 +77,7 @@
 - 完了条件
   - missing-option first / capability second の順序を巻き戻さず、`e16/e17/e18` line の first actualization cut と duplicate / try-rollback kept-later guard を current task map に整理する。
 
-### Package 4. final public parser/checker/runtime first later gate actualization comparison
+### Package 3. final public parser/checker/runtime first later gate actualization comparison
 
 - macro phase
   - `Macro 7`
