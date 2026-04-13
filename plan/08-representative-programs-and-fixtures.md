@@ -81,7 +81,8 @@
   - stable malformed missing-option first source-backed widening actualization も fixed 済みであり、`e16` / `e18` は source-authored static-stop pair として actualize 済み、`e17` は same-family staged guard に留める。
   - public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留める。
   - final public parser/checker/runtime thin-facade later support actualization も fixed 済みであり、later support cut は `run_current_l2_runtime_skeleton` + `CurrentL2RuntimeSkeletonReport` に置く。
-  - repo-level current line は stable malformed capability second reopen actualization comparison に置く。
+  - capability second reopen actualization comparison も fixed 済みであり、current family judgment は `e13/e20` pair、next malformed-side actualization mode は source-backed widening first に置く。
+  - repo-level current line は public operational CLI concrete shell naming comparison に置く。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

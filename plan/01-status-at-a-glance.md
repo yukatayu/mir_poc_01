@@ -64,12 +64,12 @@
 - `proof_notebook_review_unit` は current first concrete theorem/model-check pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate に留まる。
 - public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留め、operational request/output shell concern だけを narrow に残す。
 - final public parser/checker/runtime thin-facade later support actualization も fixed 済みであり、`run_current_l2_runtime_skeleton` と `CurrentL2RuntimeSkeletonReport` を later support cut に置き、explicit input surface は `Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` に留める。
-- repo-level current line は stable malformed capability second reopen actualization comparison に置き、その後に public operational CLI concrete shell naming を reserve に並べるのが current reading である。
+- repo-level current line は public operational CLI concrete shell naming comparison に置き、その後に stable malformed capability second source-backed widening actualization comparison を reserve に並べるのが current reading である。
 
 ## current mainline
 
-1. stable malformed capability second reopen actualization comparison
-2. reserve public operational CLI concrete shell naming
+1. public operational CLI concrete shell naming comparison
+2. reserve stable malformed capability second source-backed widening actualization comparison
 
 ## biggest later gates
 

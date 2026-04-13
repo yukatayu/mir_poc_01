@@ -2487,3 +2487,17 @@
   - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
   - `scripts/current_l2_source_sample_regression.py`
   - `scripts/tests/test_current_l2_source_sample_regression.py`
+
+### 2026-04-13 phase6 capability second reopen comparison addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_003.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/397-current-l2-final-public-parser-checker-runtime-thin-facade-later-support-actualization-ready-stable-malformed-capability-second-reopen-actualization-comparison.md`
+  - `specs/examples/398-current-l2-stable-malformed-capability-second-reopen-actualization-ready-minimal-stable-malformed-capability-second-reopen-threshold.md`
+  - `docs/reports/0689-phase6-stable-malformed-capability-second-reopen-package.md`
+  - `specs/examples/48-current-l2-capability-third-checker-spike.md`
+  - `crates/mir-ast/tests/current_l2_stage1_parser_spike.rs`
+  - `crates/mir-ast/tests/fixtures/current-l2/e13-malformed-capability-strengthening.json`
+  - `crates/mir-ast/tests/fixtures/current-l2/e20-malformed-late-capability-strengthening.json`
+  - `crates/mir-semantics/tests/current_l2_static_gate_support.rs`
+  - `scripts/current_l2_capability_checker.py`
+  - `scripts/current_l2_detached_loop.py`

@@ -47,27 +47,19 @@
 - stable malformed missing-option first source-backed widening actualization は `specs/examples/391...392` により fixed 済みであり、`e16` / `e18` を source-authored static-stop pair として sample / runner / ladder / regression helper に widen しつつ、`e17` は same-family staged guard に留める current cut を採った。
 - public operational CLI second later gate actualization comparison は `specs/examples/393...394` により fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留め、operational shell concern は `sample_selector_argument` / `explicit_host_plan_input_mode` / `source_sample_run_report_json_or_pretty_summary` に narrow に置く。`run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` は still support-only、path resolver / accepted-set / repo-local Python helper / cargo example emitter は excluded bucket に残す。
 - final public parser / checker / runtime thin-facade later support actualization は `specs/examples/395...396` により fixed 済みであり、runtime-led thin facade first cut と operational CLI second gate を巻き戻さない later support cut を `run_current_l2_runtime_skeleton` + `CurrentL2RuntimeSkeletonReport` に置き、explicit input surface は `Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` に留め、`lower_current_l2_fixed_source_text` / semantic-checker core / parser carrier floor は deeper-support bucket に残す current cut を採った。
-- current promoted line は **stable malformed capability second reopen actualization comparison** であり、その後に reserve `public operational CLI concrete shell naming` を置くのが自然である。
+- stable malformed capability second reopen actualization comparison も `specs/examples/397...398` により fixed 済みであり、current family judgment は `e13/e20` pair に維持しつつ、helper-local capability compare、stage1 reconnect widen、fixture-static capability rows を entry evidence に再利用し、next malformed-side actualization mode は source-backed widening first に置く current cut を採った。
+- current promoted line は **public operational CLI concrete shell naming comparison** であり、その後に reserve `stable malformed capability second source-backed widening actualization comparison` を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 4` | malformed cluster widening | `S6 -> S6` | stable malformed capability second reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
-| 2 | `Macro 7` | public operational contract | `S4-S5 -> S5` | public operational CLI concrete shell naming | 1〜2 task / 数日 | 一部自走可能 |
+| 1 | `Macro 7` | public operational contract | `S5 -> S5` | public operational CLI concrete shell naming comparison | 1〜2 task / 数日 | 一部自走可能 |
+| 2 | `Macro 4` | malformed cluster widening | `S6 -> S6` | stable malformed capability second source-backed widening actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. stable malformed capability second reopen actualization comparison
-
-- macro phase
-  - `Macro 4`
-- 目的
-  - missing-option first source-backed widening close 後の malformed-side next reopen として、capability family (`e13/e20`) をどの helper/source-backed cut から再開するかを整理する。
-- 完了条件
-  - missing-option first / capability second の順序を巻き戻さず、capability family current cut、entry evidence、kept-later guard を current task map に整理する。
-
-### Package 2. public operational CLI concrete shell naming
+### Package 1. public operational CLI concrete shell naming comparison
 
 - macro phase
   - `Macro 7`
@@ -76,19 +68,18 @@
 - 完了条件
   - public operational CLI second gate を最小 operational shell に留めたまま、concrete command/flag naming と host-plan shell concern の current cut を task map に整理する。
 
+### Package 2. stable malformed capability second source-backed widening actualization comparison
+
+- macro phase
+  - `Macro 4`
+- 目的
+  - capability second reopen comparison で fixed した `e13/e20` pair judgment を保ったまま、source-backed widening actualization の current first cut を整理する。
+- 完了条件
+  - helper-local capability compare / stage1 reconnect widen / fixture-static rows を entry evidence に再利用しつつ、source-backed widening actualization の current cut と kept-later guard を task map に整理する。
+
 ## 研究を通して見つけること
 
-### Discovery 1. stable malformed capability second reopen actualization comparison
-
-- 概要
-  - missing-option source-backed widening close 後に、capability family (`e13/e20`) を helper-local compare / source-backed widening / staged guard のどこから reopen するか。
-- 何に影響するか
-  - `Macro 4`
-  - malformed cluster widening speed
-- current recommendation
-  - **missing-option first / capability second の順序を保ち、capability family は separate reopen line に置く**。
-
-### Discovery 2. public operational CLI concrete shell naming
+### Discovery 1. public operational CLI concrete shell naming comparison
 
 - 概要
   - runtime-led thin facade first cut、operational wrapper second gate、runtime skeleton later support cut fixed 後に、CLI concrete command/flag/host-plan shell naming をどこまで narrow shell concern に留めるか。
@@ -97,6 +88,16 @@
   - public operational surface の見え方
 - current recommendation
   - **final public parser/checker/runtime API や final host/input contract を先取りせず、operational shell naming だけを separate later line に置く**。
+
+### Discovery 2. stable malformed capability second source-backed widening actualization comparison
+
+- 概要
+  - capability second reopen comparison close 後に、`e13/e20` pair judgment を helper-local compare / source-backed widening first / staged implementation cut のどれで actualize するか。
+- 何に影響するか
+  - `Macro 4`
+  - malformed cluster widening speed
+- current recommendation
+  - **pair judgment は `e13/e20` のまま保ち、actualization mode は source-backed widening first に置く**。
 
 ## user が決める必要があること
 
