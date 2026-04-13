@@ -136,7 +136,6 @@ old `Phase 7` には、
 
 ## near-term reserve line
 
-- public operational CLI second later gate
 - final public parser / checker / runtime thin-facade later support actualization
 - stable malformed capability second reopen actualization comparison
 
