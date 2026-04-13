@@ -224,7 +224,11 @@ current mainline は、
 - deferred `e3` actualization reopen timing（fixed 済み）
 - shared-space admission / compile-time visibility reopen
 - shared-space authority / resource ownership reopen
-- model-check concrete carrier actualization comparison（reserve）
+- model-check concrete carrier actualization comparison
+- model-check concrete carrier first actualization
+- source-sample emitted verification artifact wiring
+- sample-facing theorem / model-check evidence summary and bless/review flow
+- docs-first I/O / host-facing port boundary comparison（working label, later）
 - stable malformed missing-option first reopen actualization comparison（reserve）
 - final public parser / checker / runtime API first later gate actualization comparison（reserve）
 
@@ -234,6 +238,8 @@ current recommendation としては、
 
 - fixed subset の executable sample を厚くすること自体はよい
 - ただし higher-level async-control family や low-level memory-order-like surface を current executable core に混ぜるのは早い
+- theorem/model-check side は `proof_notebook_review_unit` current first pilot を保ったまま、sample-visible milestone を 3 package に分けて進める方が自然である
+- host-facing integration は `stdin/stdout` privileged 化より先に、docs-first の capability-scoped I/O / adapter boundary を切る方が自然である
 - theorem/model-check concrete tool binding や LLVM-family backend / external codegen も、source corpus / lowering / runner / ladder のあとに narrow pilot として扱う
 - widened authored-row order は `e1 -> e21 -> e3` に置き、`e1` / `e21` は actual authored row として閉じ、`e3` は admit-family / theorem-side guard を伴う third slot に残す
 - theorem-side plain bridge sketch は authored-row line の後で actualize 済みであり、compare-ready bridge sketch は current second reopen line に置く

@@ -46,9 +46,9 @@
 | `Macro 2` | parser-free validation substrate | late | 中 | self-driven |
 | `Macro 3` | compile-ready minimal actualization | late | 中〜重い | self-driven |
 | `Macro 4` | executable fixed-subset sample expansion | active | 重い | self-driven |
-| `Macro 5` | theorem / model-check / static reasoning bridge | early | 重い | self-driven up to boundary |
+| `Macro 5` | theorem / model-check / static reasoning bridge | early-active | 重い | self-driven up to boundary |
 | `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重い | mixed |
-| `Macro 7` | toolchain / backend / developer surface | inventory only | 重い | mixed |
+| `Macro 7` | toolchain / backend / developer surface | inventory plus later-gate order | 重い | mixed |
 | `Macro 8` | domain / application realization | not started | とても重い | user spec required |
 
 ## autonomy gate detail
@@ -60,23 +60,35 @@
 - compile-ready minimal actualization の narrow widening
 - fixed-subset source sample expansion
 - theorem-side bridge の compare-ready / first pilot
+- sample-visible theorem/model-check milestone の narrow actualization
 
 ### boundary までは self-driven でよい line
 
 - Mirrorea / shared-space の docs-first boundary
 - public operational surface の inventory
+- docs-first I/O / host-facing port boundary（working label）
 
 ### user specification が必要な line
 
 - shared-space final activation / authority / auth / identity / admission / consistency / fairness catalog
 - upper-layer application target
 - final backend / tooling success criteria
+- visualizer / host substrate / FFI / game engine adapter の first target profile
 
 ## current mainline
 
 1. `Macro 6` shared-space admission / compile-time visibility reopen
 2. `Macro 6` shared-space authority / resource ownership reopen
 3. `Macro 5` model-check concrete carrier actualization comparison
+4. `Macro 5` model-check concrete carrier first actualization
+5. `Macro 5` source-sample emitted verification artifact wiring
+6. `Macro 5` sample-facing theorem / model-check evidence summary and bless/review flow
+
+## current reserve line
+
+- `Macro 7` docs-first I/O / host-facing port boundary comparison（working label）
+- `Macro 4` stable malformed missing-option first reopen actualization comparison
+- `Macro 7` final public parser / checker / runtime API first later gate actualization comparison
 
 ## current stop lines
 
@@ -88,10 +100,12 @@
 - shared-space final catalog
 - backend / codegen public surface
 - upper-layer app contract
+- raw FFI / game engine direct binding actualization
 
 ## current judgments
 
 - current repo は architecture-first だが、fixed-subset runnable path を already 持つ。
-- Mirrorea/shared-space docs-first re-entry bundle と model-check/public-checker second reserve inventory に加え、stable-static edge-pair first reopen と public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate も fixed 済みであり、current mainline は `Macro 6` shared-space admission / compile-time visibility reopen へ進みつつ、Macro 6 の authority/resource-ownership follow-up、Macro 5 の model-check actualization comparison、Macro 4 の missing-option first reopen actualization、Macro 7 の final public library contract actualization を reserve に保持している。
+- Mirrorea/shared-space docs-first re-entry bundle、model-check/public-checker second reserve inventory、stable-static edge-pair first reopen、public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate も fixed 済みであり、current mainline は `Macro 6` shared-space admission / compile-time visibility reopen へ進みつつ、その後に `Macro 5` model-check concrete carrier actualization comparison を入口とする sample-visible theorem/model-check line（comparison + 3 package）を進める。
+- host-facing integration は `stdin/stdout` privileged 化ではなく、docs-first I/O / port / adapter boundary として later line に置き、visualizer / host substrate / FFI / engine adapter を separate gate に分ける。
 - Mirrorea / shared-space / backend / apps は old `FutureWork` ではなく separable track として扱う。
 - current immediate mainline を止める user decision は 0 件である。

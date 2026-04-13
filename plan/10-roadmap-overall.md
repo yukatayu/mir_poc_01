@@ -69,6 +69,7 @@
 - proof obligation boundary
 - proof notebook bridge
 - concrete theorem / model-check pilot
+- sample-visible theorem/model-check evidence
 - later type / static-analysis / external verifier line
 
 ### `Macro 6` fabric / shared-space / runtime evolution
@@ -81,6 +82,7 @@
 ### `Macro 7` toolchain / backend / public dev surface
 
 - public operational CLI
+- host-facing I/O / adapter boundary
 - backend / codegen
 - editor / LSP / graph tooling
 
@@ -117,7 +119,7 @@ old `Phase 7` には、
 そのため current roadmap では、
 
 - `Macro 6` fabric / shared-space
-- `Macro 7` toolchain / backend
+- `Macro 7` toolchain / backend / host-facing integration
 - `Macro 8` domain / application
 
 へ分ける。
@@ -129,10 +131,18 @@ old `Phase 7` には、
 1. shared-space admission / compile-time visibility reopen
 2. shared-space authority / resource ownership reopen
 3. model-check concrete carrier actualization comparison
-4. stable malformed missing-option first reopen actualization comparison
-5. final public parser / checker / runtime API first later gate actualization comparison
+4. model-check concrete carrier first actualization
+5. source-sample emitted verification artifact wiring
+6. sample-facing theorem / model-check evidence summary and bless/review flow
+7. later docs-first I/O / host-facing port boundary comparison（working label）
 
-これは主に `Macro 4` と `Macro 5` の line である。
+ここでの自然な読みは、**`Macro 6` を先に 2 package 進め、その後 `Macro 5` の model-check concrete carrier actualization comparison を入口とする sample-visible theorem/model-check line（comparison + 3 package）を詰め、`Macro 7` の host-facing integration boundary を docs-first に開く** である。
+
+## near-term reserve line
+
+- stable malformed missing-option first reopen actualization comparison
+- final public parser / checker / runtime API first later gate actualization comparison
+- public operational CLI second later gate
 
 ## まだ急がないもの
 
@@ -146,5 +156,7 @@ old `Phase 7` には、
 ## current recommendation
 
 - fixed-subset runnable path を厚くすること自体は今やってよい。
-- theorem / model-check bridge も narrow pilot までは今やってよい。
-- ただし higher-level async-control / memory-order family、fabric operational realization、backend public surface は separate track として扱う。
+- theorem / model-check bridge も sample-visible milestone までは今やってよい。
+- host-facing I/O / adapter boundary は、`stdin/stdout` のような privileged primitive を language core に入れず、capability-scoped port / adapter boundary として docs-first に切るのが自然である。
+- FFI や game engine integration は否定しないが、direct binding を先に入れず、visualizer / host substrate / FFI / engine adapter を separate gate に置く。
+- higher-level async-control / memory-order family、fabric operational realization、backend public surface は separate track として扱う。

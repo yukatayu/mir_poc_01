@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-13 09:09 JST
+最終更新: 2026-04-13 09:52 JST
 
 ## この文書について
 
@@ -41,6 +41,7 @@
 - model-check concrete carrier first actualization gate も fixed 済みであり、`proof_notebook_review_unit` current first pilot を保ったまま、`tool_neutral_formal_hook_only_input + compare_ready_docs_only_bridge_sketch` を entry にする narrow gate を current first choice に昇格した。public-checker docs-only chain は parallel reserve に留め、model-check concrete carrier actualization、actual public-checker migration、actual emitted verifier handoff artifact、concrete tool binding は still later に残している。
 - stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first (`e16/e17/e18`)、capability family second (`e13/e20`) に置き、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は kept-later に残している。
 - public operational CLI / final public contract later gate も fixed 済みであり、`run_current_l2_source_sample` current gate を保ったまま、first later gate を final public parser / checker / runtime API、public operational CLI を second later gate に置き、repo layout / accepted-set / repo-local helper surface は current final contract の外に残している。
+- next near-term path は、shared-space docs-first follow-up 2 package の後に、model-check concrete carrier actualization comparison を入口とする sample-visible theorem/model-check line（comparison + 3 package）を進め、その次段で `docs-first I/O / host-facing port boundary`（working label）を整理する line に置く。
 - final parser grammar、final public parser / checker / runtime API、LLVM-family backend、Mirrorea operational runtime、shared-space final catalog はまだ無い。
 
 ## Macro phase map
@@ -51,10 +52,10 @@
 | `Macro 1` | 94% | semantic kernel / invariant stabilization | late | 自走可能 | current L2 semantics / invariant bridge はかなり安定 |
 | `Macro 2` | 97% | parser-free validation substrate | late | 自走可能 | parser-free PoC と detached validation loop は runnable |
 | `Macro 3` | 93% | compile-ready minimal actualization | late | 自走可能 | parser / checker / runtime / formal-hook の non-production minimal cut と public-pressure gate は揃った |
-| `Macro 4` | 84% | executable fixed-subset sample expansion | active | 自走可能 | current authored octet runnable。`e21/e22` contrast と `e4/e19` static pair は fixed 済みで、broader malformed follow-up order も fixed。next malformed widening は missing-option first reopen |
-| `Macro 5` | 54% | static reasoning / theorem / model-check bridge | early-active | 一部自走可能 | proof notebook review-unit current cut を first concrete pilot に固定し、model-check concrete carrier first actualization gate まで fixed 済み |
-| `Macro 6` | 34% | distributed fabric / shared-space / runtime evolution | docs-first reopen | 境界までは自走可能 | Mirrorea/shared-space re-entry bundle と identity/auth layering cut は fixed。next shared-space reopen は admission / compile-time visibility |
-| `Macro 7` | 27% | toolchain / backend / developer surface | later-gate order fixed | 一部自走可能 | public operational surface inventory、first docs-only candidate、library-before-CLI later ordering は fixed。final public API/CLI actualization は later |
+| `Macro 4` | 84% | executable fixed-subset sample expansion | active | 自走可能 | current authored octet runnable。next malformed widening は reserve に下げつつ保持 |
+| `Macro 5` | 58% | static reasoning / theorem / model-check bridge | early-active | 一部自走可能 | proof notebook review-unit current cut と first actualization gate は fixed 済み。next は comparison + 3 package の sample-visible line |
+| `Macro 6` | 35% | distributed fabric / shared-space / runtime evolution | docs-first reopen | 境界までは自走可能 | Mirrorea/shared-space re-entry bundle と identity/auth layering cut は fixed。next shared-space line は admission / compile-time visibility |
+| `Macro 7` | 30% | toolchain / backend / developer surface | later-gate order fixed | 一部自走可能 | public operational surface inventory と library-before-CLI later orderingは fixed。nextは docs-first I/O / adapter boundary |
 | `Macro 8` | 5% | domain / application realization | not started | 要仕様確認 | 上位アプリの concrete goal が未確定 |
 
 ## Feature maturity stage legend
@@ -74,15 +75,16 @@
 | Feature family | current stage | 現在できていること | 主な残件 | 進め方 |
 |---|---|---|---|---|
 | `event DAG` / `place` / local `try` / `atomic_cut` | `S5-S6` | fixed subset では runnable。parser-free fixture と source sample の双方で evidence がある | `durable_cut`、distributed finalization、final syntax | 自走可能 |
-| guarded option chain / `lease` / monotone degradation | `S5-S6` | semantics / invariant / fixture baseline は厚く、`e3` source-authored row まで runtime success で通る | full syntax / algebra、`Approximate` / `Compensate`、formal-hook widening | 自走可能 |
+| guarded option chain / `lease` / monotone degradation | `S5-S6` | semantics / invariant / fixture baseline は厚く、`e3` source-authored row まで runtime success で通る | full syntax / algebra、`Approximate` / `Compensate`、formal-hook widening beyond current guard | 自走可能 |
 | parser-free validation loop | `S6` | interpreter / host harness / bundle / batch / detached compare loop が runnable | public exporter / retention policy / detached serialization | 自走可能 |
-| parser / checker / runtime actualization | `S4-S5` | `mir-ast` / `mir-semantics` / `mir-runtime` の narrow non-production tranche が compile-ready で、public-pressure first gate も fixed 済み | final grammar、final public contract、richer host interface | 自走可能 |
-| source-backed sample corpus / verification ladder | `S5-S6` | current authored octet `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` が ladder に乗る。`e21/e22` runtime contrast pair と `e4/e19` static-stop pair は source-backed で閉じ、broader malformed next reopen order も fixed 済み | missing-option first reopen actualization、final CLI、public retention path | 自走可能 |
-| contracts / static gate / formal hook / proof notebook first bridge | `S4-S5` | tool-neutral formal hook、review-unit pilot、plain bridge sketch first actualization、compare-ready bridge sketch second reopen、model-check/public-checker second reserve inventory、model-check concrete carrier first actualization gate がある | bless / review-session metadata、model-check concrete carrier actualization、public checker actual migration | 自走可能 |
+| parser / checker / runtime actualization | `S4-S5` | `mir-ast` / `mir-semantics` / `mir-runtime` の narrow non-production tranche が compile-ready で、public-pressure first gate も fixed 済み | final grammar、final public contract、richer host interface actualization | 自走可能 |
+| source-backed sample corpus / verification ladder | `S5-S6` | current authored octet `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` が ladder に乗る。`e21/e22` runtime contrast pair と `e4/e19` static-stop pair は source-backed で閉じた | model-check sample-visible artifact wiring、sample-facing evidence summary、missing-option widen reserve | 自走可能 |
+| contracts / static gate / formal hook / proof notebook first bridge | `S4-S5` | tool-neutral formal hook、review-unit pilot、plain bridge sketch first actualization、compare-ready bridge sketch second reopen、model-check/public-checker second reserve inventory、model-check concrete carrier first actualization gate がある | actual model-check carrier、sample-facing theorem/model-check evidence summary、bless/review metadata、public checker actual migration | 自走可能 |
 | public operational surface | `S3-S4` | inventory 3 bucket split、first docs-only candidate、library-before-CLI later orderingが fixed 済み | final public parser / checker / runtime API actualization、public CLI second gate、layout/host-plan decoupling | 一部自走可能 |
+| host-facing I/O / adapter / visualizer / FFI / engine boundary | `S1-S2` | Typed-Effect Wiring Platform、`richer host interface` risk、`C ABI / engine adapters` guidance という anchor はある | docs-first capability-scoped port boundary、visualizer/substrate adapter cut、FFI / engine adapter sequencing | docs-first boundary までは自走可能 |
 | multi-node / routing / overlay / safe downstream addition | `S2-S3` | semantic constraints と docs-first boundary はある | route proof、suspended task / patch interaction、operational realization | 境界までは自走可能 |
 | shared-space / membership / authority / fairness | `S3-S4` for docs-first boundary, `S1-S2` for runtime realization | authoritative room baseline、control-plane threshold、Mirrorea/shared-space re-entry bundle、identity/auth layering cutがある | admission/visibility bridge、authority/resource ownership split、final activation / authority / auth / identity / admission / consistency / fairness catalog | user spec required beyond boundary |
-| type system / theorem prover / model checker full line | `S1-S2` | boundary inventory と first theorem-side pilot はある | strong type system、concrete prover/model-check binding、final external contract | heavy self-driven + later user goals |
+| type system / theorem prover / model checker full line | `S1-S2` | boundary inventory と first theorem-side pilot はある | sample-visible narrow type/contract surface、concrete prover/model-check binding、full stronger type system | heavy self-driven + later user goals |
 | async-control / memory-order reconstruction | `S1` | `atomic_cut` local cut は source-backed | higher-level ordering / fairness / memory-order-like surface | heavy future research |
 | backend / public dev surface / operational CLI | `S0-S1` | Rust-heavy core direction と public-pressure gate はある | backend IR bridge、public operational CLI、LSP / editor surface | later inventory |
 
@@ -94,10 +96,10 @@
 | parser-free PoC / detached loop | 95% | 91% | 99% | late | runnable baseline と regression policy がある |
 | compile-ready parser / checker / runtime | 88% | 78% | 85% | late | non-production minimal tranche と public-pressure gate は揃った |
 | fixed-subset source samples | 93% | 94% | 93% | active | authored octet runnable。`e21/e22` contrast row と `e4/e19` static pair まで source-backed に actualize 済み |
-| theorem / verifier bridge | 84% | 78% | 51% | early-active | formal hook と proof notebook first bridge はある。model-check concrete carrier first actualization gate も fixed 済みで、`e3` は guarded non-reached row として接続済み |
+| theorem / verifier bridge | 84% | 79% | 55% | early-active | formal hook と proof notebook first bridge はある。nextは comparison + 3 package の sample-visible line |
 | Mirrorea fabric boundary | 68% | 56% | 8% | docs-first | re-entry bundle と identity/auth layering cut は fixed。next shared-space line は admission / compile-time visibility reopen |
 | shared-space boundary | 73% | 62% | 12% | docs-first | practical cut と repo-level re-entry bundleは fixed。final catalog は user spec required |
-| Typed-Effect Wiring Platform | 34% | 26% | 4% | positioning only | subsystem boundary はあるが actual line は薄い |
+| Typed-Effect Wiring Platform | 35% | 27% | 4% | positioning only | host-facing I/O / adapter boundary の high-level anchor として参照できる |
 | PrismCascade | 28% | 20% | 3% | positioning only | positioning / separation が主で、actual kernel work は later |
 | domain / application layer | 12% | 9% | 1% | not started | target application と success criteria が未確定 |
 
@@ -108,11 +110,19 @@
 2. **Macro 6 / shared-space authority / resource ownership reopen**
    - admission / visibility line の次段として、authority placement、resource owner slot、delegated capability、fairness source の split を narrow に整理する。
 3. **Macro 5 / model-check concrete carrier actualization comparison**
-   - first actualization gate fixed 後の次段として、actual emitted model-check carrier、concrete tool binding、public-checker actual migration の reorder を narrow に決める。
-4. **Macro 4 / stable malformed missing-option first reopen**
-   - broader malformed follow-up inventory fixed 後の次段として、missing-option family first reopen を helper-local compare と source-backed wideningのどちらから actualize するかを narrow に決める。
-5. **Macro 7 / final public parser/checker/runtime first later gate**
-   - library-before-CLI later ordering fixed 後の次段として、final public library contract を symbol-level でどこから narrow に actualize するかを決める。
+   - first actualization gate fixed 後の次段として、actual emitted model-check carrier、source-sample emitted verification artifact wiring、sample-facing evidence summary の reorder を narrow に決める。
+4. **Macro 5 / model-check concrete carrier first actualization**
+   - compare-ready gate を actual helper-local carrier へ narrow に actualize する。
+5. **Macro 5 / source-sample emitted verification artifact wiring**
+   - current authored sample octet と verification ladder を theorem/model-check side artifact route に狭く接続する。
+6. **Macro 5 / sample-facing theorem/model-check evidence summary and bless/review flow**
+   - sample code から見える theorem/model-check evidence と current bless/review flow を narrow に揃える。
+7. **Macro 7 / docs-first I/O / host-facing port boundary**
+   - capability-scoped port / adapter boundary を first docs-only cut として整理する。
+8. **Macro 4 / stable malformed missing-option first reopen**
+   - sample-visible milestone の後段 reserve として missing-option family widen を進める。
+9. **Macro 7 / final public parser/checker/runtime first later gate**
+   - library-before-CLI later orderingを保ったまま final public library contract actualization を後段 reserve として進める。
 
 ## 研究で見つけることと、user が決めること
 
@@ -120,7 +130,8 @@
 
 - shared-space admission / compile-time visibility reopen の最小 boundary cut
 - shared-space authority / resource ownership reopen の最小 split
-- model-check concrete carrier actualization comparison の reopen order
+- model-check concrete carrier actualization comparison を入口にした sample-visible theorem/model-check line（comparison + 3 package）の reopen order
+- docs-first I/O / host-facing port boundary の最小 adapter cut
 - stable malformed missing-option first reopen の最小 actualization cut
 - final public parser / checker / runtime API first later gate の最小 actualization cut
 
@@ -129,11 +140,12 @@
 - shared-space final activation / authority / auth / identity / admission / consistency / fairness catalog
 - upper-layer application の concrete goal と success criteria
 - backend / editor / operational tooling の final success criteria
+- visualizer / host substrate / FFI / game engine adapter の first target profile
 
 ### current reading
 
 - current immediate mainline を止める **user decision は 0 件** と読んでよい。
-- current blocker は主に research-discovery 側であり、shared-space / app 側の user decision は later gate にある。
+- current blocker は主に research-discovery 側であり、shared-space / app / integration 側の user decision は later gate にある。
 
 ## 実装言語の current split
 
@@ -157,6 +169,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 09:52 JST — roadmap refresh を行い、`tasks.md` / `progress.md` / `Documentation.md` / `plan/01,08,09,10,11,12,13,17` / `faq_003.md` / Phase 6 abstract を、`shared-space 2 package -> sample-visible theorem/model-check line（comparison + 3 package） -> later docs-first I/O boundary` の near-term line に再編した。report `0670`、reviewer 監査、re-check を通し、missing-option widen と final public API/CLI actualization は reserve に下げた。
 - 2026-04-13 09:09 JST — `docs/reports/0669` で post-later-gates document consistency audit を閉じ、`.docs/current-l2-source-sample-authoring-policy.md`、`samples/current-l2/README.md`、`faq_003.md`、Phase 5 abstract の stale current-line wording を current snapshot に揃えた。reviewer 再確認は `No additional findings.` で、repo-level current line は shared-space admission / compile-time visibility reopen のまま維持した。
 - 2026-04-13 09:00 JST — `docs/reports/0668` と `specs/examples/371...372` で public operational CLI / final public contract later gate を閉じ、public-side later ordering を final public parser/checker/runtime API first / public operational CLI second に固定した。repo-level current line は shared-space admission / compile-time visibility reopen に進んだ。
 - 2026-04-13 08:50 JST — `docs/reports/0667` と `specs/examples/369...370` で stable malformed broader follow-up inventory を閉じ、broader stable malformed next reopen order を missing-option first / capability second に固定した。repo-level current line は public operational CLI / final public contract later gate に進んだ。
@@ -164,9 +177,3 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 - 2026-04-13 07:46 JST — `docs/reports/0665` と `specs/examples/367...368` で model-check concrete carrier first actualization gate を閉じ、`proof_notebook_review_unit` current first pilot を保ったまま compare-ready bridge entry の narrow gate を fixed した。repo-level current line は stable malformed broader follow-up inventory に進んだ。
 - 2026-04-13 07:28 JST — `docs/reports/0664` と `specs/examples/365...366` で shared-space identity / auth layering reopen を閉じ、membership identity core と auth/admission/projection side carriers の split を fixed した。repo-level current line は model-check concrete carrier first actualization gate に進んだ。
 - 2026-04-13 03:19 JST — `docs/reports/0663` で post-package document consistency audit を閉じ、FAQ2/3、`plan/08`、Phase 6 abstract の stale `septet` / `current line` wording を修正した。reviewer 再確認と docs validator を通し、repo-level current line は shared-space identity / auth layering reopen のまま維持した。
-- 2026-04-13 03:10 JST — `docs/reports/0662` と `specs/examples/363...364` で public operational surface actualization gate を閉じ、already-public parser-free stack を stable bucket に据えたまま `run_current_l2_source_sample` を later public-pressure の first docs-only candidate に固定した。repo-level current line は shared-space identity / auth layering reopen に進んだ。
-- 2026-04-13 02:51 JST — `docs/reports/0661` と `specs/examples/361...362` で stable-static edge-pair first reopen を閉じ、existing `e4` row と deferred `e19` row を source-backed static-stop pair に actualize した。repo-level current line は public operational surface actualization gate に進んだ。
-- 2026-04-13 00:37 JST — `docs/reports/0659` と `specs/examples/359...360` で model-check / public-checker second reserve inventory を閉じ、`proof_notebook_review_unit` を current first concrete pilot に維持したまま、model-check side と public-checker docs-only chain を separate reserve bucket に整理した。repo-level current line は stable-static edge-pair first reopen に進んだ。
-- 2026-04-13 00:21 JST — `docs/reports/0658` と `specs/examples/357...358` で Mirrorea/shared-space docs-first re-entry bundle を閉じ、Mirrorea/shared-space を repo-level current boundary track、Typed-Effect / Prism を adjacent track、shared-space final catalog と upper-layer app target を user-spec-required gate に切り分けた。repo-level current line は model-check / public-checker second reserve inventory に進んだ。
-- 2026-04-12 23:48 JST — `docs/reports/0657` で post-public-surface document consistency audit を閉じ、FAQ2/3、Phase 5 abstract、`plan/01`、`plan/12` の stale wording を修正した。reviewer 再確認は `no findings` で、repo-level current line は Mirrorea / shared-space docs-first re-entry のまま維持した。
-- 2026-04-12 23:40 JST — `docs/reports/0656` と `specs/examples/355...356` で parser / checker / runtime public surface inventory を閉じ、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を固定した。repo-level current line は Mirrorea / shared-space docs-first re-entry に進んだ。

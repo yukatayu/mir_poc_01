@@ -108,4 +108,4 @@ current reached-stage inventory は current authored octet `e1` / `e2` / `e3` / 
 - shared-space identity / auth layering reopen も fixed 済みであり、membership identity core と auth/admission/projection side carriers の split を docs-first boundary に残した
 - stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first、capability family second、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は later に残す
 - public operational CLI / final public contract later gate も fixed 済みであり、public-side later ordering は final public parser / checker / runtime API first、public operational CLI second に残す
-- repo-level current line は shared-space admission / compile-time visibility reopen である
+- repo-level current line は shared-space admission / compile-time visibility reopen であり、その後の sample-side near-term line は model-check concrete carrier actualization comparison、model-check concrete carrier first actualization、source-sample emitted verification artifact wiring、sample-facing theorem/model-check evidence summary and bless/review flow である

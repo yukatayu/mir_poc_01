@@ -77,6 +77,7 @@ report は `python scripts/new_report.py --slug <short-name>` でテンプレー
 - core implementation と runtime kernel には **Rust**
 - 必要になった場合の可視化には **Web-based visualization**（例: TypeScript / HTML / SVG / WebGL）
 - 将来の game engine integration には **C ABI / engine adapters**
+  - ただし current roadmap では、これは immediate mainline ではなく、docs-first の host-facing I/O / adapter boundary を切った後段 gate に置く。
 
 これは**推奨される実装方針**であり、アーキテクチャ上の法ではない。
 実装ガイダンスは `specs/11-roadmap-and-workstreams.md` を参照すること。
