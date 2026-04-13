@@ -128,15 +128,13 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. public operational CLI second later gate actualization comparison
-2. reserve final public parser / checker / runtime thin-facade later support actualization
-3. reserve stable malformed capability second reopen actualization comparison
+1. final public parser / checker / runtime thin-facade later support actualization
+2. reserve stable malformed capability second reopen actualization comparison
 
-ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...384` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check milestone を閉じ、`specs/examples/385...386` で `Macro 7` の docs-first host-facing integration boundary を固定し、`specs/examples/387...388` で `Macro 4` の missing-option actualization comparison を source-backed widening first に寄せ、`specs/examples/389...390` で final public parser/checker/runtime first later gate を runtime-led thin facade に絞り、`specs/examples/391...392` で `e16/e18` source-backed widening first cut を閉じたうえで、public operational CLI second later gate を current line に置く** である。
+ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...384` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check milestone を閉じ、`specs/examples/385...386` で `Macro 7` の docs-first host-facing integration boundary を固定し、`specs/examples/387...388` で `Macro 4` の missing-option actualization comparison を source-backed widening first に寄せ、`specs/examples/389...390` で final public parser/checker/runtime first later gate を runtime-led thin facade に絞り、`specs/examples/391...392` で `e16/e18` source-backed widening first cut を閉じ、`specs/examples/393...394` で public operational CLI second gate を Rust-side operational wrapper over thin facade として narrow に固定したうえで、thin-facade later support actualization を current line に置く** である。
 
 ## near-term reserve line
 
-- final public parser / checker / runtime thin-facade later support actualization
 - stable malformed capability second reopen actualization comparison
 
 ## まだ急がないもの

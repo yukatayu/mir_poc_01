@@ -226,14 +226,16 @@ final public parser / checker / runtime first later gate actualization compariso
 `specs/examples/391...392` により、
 stable malformed missing-option first source-backed widening actualization も fixed 済みであり、`e16-malformed-missing-chain-head-option` と `e18-malformed-missing-successor-option` を source-authored static-stop pair として sample / runner / ladder / regression helper に widen し、`e17-malformed-missing-predecessor-option` は same-family staged guard に留める current cut を採った。
 
+`specs/examples/393...394` により、
+public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留め、operational shell concern は `sample_selector_argument` / `explicit_host_plan_input_mode` / `source_sample_run_report_json_or_pretty_summary` に narrow に置く。`run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` は still support-only、path resolver / accepted-set / repo-local Python helper / cargo example emitter は excluded bucket に残す。
+
 current mainline は、
-**repo-level current line は public operational CLI second later gate actualization comparison**
+**repo-level current line は final public parser / checker / runtime thin-facade later support actualization**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- public operational CLI second later gate actualization comparison
-- final public parser / checker / runtime thin-facade later support actualization（reserve）
+- final public parser / checker / runtime thin-facade later support actualization
 - stable malformed capability second reopen actualization comparison（reserve）
 
 を揃えるのが主眼になる。

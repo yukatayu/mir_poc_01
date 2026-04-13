@@ -79,7 +79,8 @@
   - docs-first I/O / host-facing port boundary も fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す。
   - stable malformed missing-option first reopen actualization comparison も fixed 済みであり、helper-local compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet、current next actualization mode は source-backed widening first に置く。
   - stable malformed missing-option first source-backed widening actualization も fixed 済みであり、`e16` / `e18` は source-authored static-stop pair として actualize 済み、`e17` は same-family staged guard に留める。
-  - repo-level current line は public operational CLI second later gate actualization comparison に置く。
+  - public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留める。
+  - repo-level current line は final public parser/checker/runtime thin-facade later support actualization に置く。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

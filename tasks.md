@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 19:15 JST
+最終更新: 2026-04-13 20:00 JST
 
 ## この文書について
 
@@ -45,31 +45,19 @@
 - stable malformed missing-option first reopen actualization comparison は `specs/examples/387...388` により fixed 済みであり、existing helper-local compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet に維持し、current next actualization mode は source-backed widening first に置く current cut を採った。implementation cut を narrower に取る場合でも `e16` lead は staging note に留め、capability second、duplicate later、`TryFallback` / `AtomicCut` malformed-static later を維持する。
 - final public parser / checker / runtime first later gate actualization comparison は `specs/examples/389...390` により fixed 済みであり、current first later cut は `run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` を public entry / report に置く runtime-led thin facade に留め、`CurrentL2LoweredSourceProgram` / `CurrentL2RuntimeSkeletonReport` / `CurrentL2CheckerFloorReport` / `RunReport` を nested carrier として扱う。`run_current_l2_runtime_skeleton`、`lower_current_l2_fixed_source_text`、semantic/checker core、parser carrier floor は support-only bucket、`resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local helper / example surface は excluded bucket に残す。
 - stable malformed missing-option first source-backed widening actualization は `specs/examples/391...392` により fixed 済みであり、`e16` / `e18` を source-authored static-stop pair として sample / runner / ladder / regression helper に widen しつつ、`e17` は same-family staged guard に留める current cut を採った。
-- current promoted line は **public operational CLI second later gate actualization comparison** であり、その後に
-  - reserve `final public parser / checker / runtime thin-facade later support actualization`
-  - reserve `stable malformed capability second reopen actualization comparison`
-  を置くのが自然である。
+- public operational CLI second later gate actualization comparison は `specs/examples/393...394` により fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留め、operational shell concern は `sample_selector_argument` / `explicit_host_plan_input_mode` / `source_sample_run_report_json_or_pretty_summary` に narrow に置く。`run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` は still support-only、path resolver / accepted-set / repo-local Python helper / cargo example emitter は excluded bucket に残す。
+- current promoted line は **final public parser / checker / runtime thin-facade later support actualization** であり、その後に reserve `stable malformed capability second reopen actualization comparison` を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 7` | operational wrapper boundary | `S3-S4 -> S4` | public operational CLI second later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
-| 2 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime thin-facade later support actualization | 1〜3 task / 数日〜1週 | 一部自走可能 |
-| 3 | `Macro 4` | malformed cluster widening | `S6 -> S6` | stable malformed capability second reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
+| 1 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime thin-facade later support actualization | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 2 | `Macro 4` | malformed cluster widening | `S6 -> S6` | stable malformed capability second reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. public operational CLI second later gate actualization comparison
-
-- macro phase
-  - `Macro 7`
-- 目的
-  - runtime-led thin facade first cut の後段として、public operational CLI を repo-local Python helper / example surface と混ぜずにどこで切るかを整理する。
-- 完了条件
-  - runtime-led thin facade first later cut を巻き戻さず、public operational CLI と repo-local support surface の境界を narrow に整理する。
-
-### Package 2. final public parser/checker/runtime thin-facade later support actualization
+### Package 1. final public parser/checker/runtime thin-facade later support actualization
 
 - macro phase
   - `Macro 7`
@@ -78,7 +66,7 @@
 - 完了条件
   - `run_current_l2_source_sample` thin facade を巻き戻さず、support-only tranche / excluded bucket の guard を保ったまま later support cut だけを narrow に整理する。
 
-### Package 3. stable malformed capability second reopen actualization comparison
+### Package 2. stable malformed capability second reopen actualization comparison
 
 - macro phase
   - `Macro 4`
@@ -89,17 +77,7 @@
 
 ## 研究を通して見つけること
 
-### Discovery 1. public operational CLI second later gate actualization comparison
-
-- 概要
-  - runtime-led thin library facade first cut の後段として、public operational CLI を repo-local helper / example surface とどう分けて narrow に actualize するか。
-- 何に影響するか
-  - `Macro 7`
-  - operational wrapper / developer surface
-- current recommendation
-  - **library-side thin facade first cut を巻き戻さず、CLI は second later gate として separate に扱う**。
-
-### Discovery 2. final public parser/checker/runtime thin-facade later support actualization
+### Discovery 1. final public parser/checker/runtime thin-facade later support actualization
 
 - 概要
   - runtime-led thin facade first later cut fixed 後に、standalone parser/checker support entry を later public support としてどこまで切るか。
@@ -109,7 +87,7 @@
 - current recommendation
   - **thin facade を first cut に保ち、standalone support actualization は later package として separate に扱う**。
 
-### Discovery 3. stable malformed capability second reopen actualization comparison
+### Discovery 2. stable malformed capability second reopen actualization comparison
 
 - 概要
   - missing-option source-backed widening close 後に、capability family (`e13/e20`) を helper-local compare / source-backed widening のどちらから reopen するか。

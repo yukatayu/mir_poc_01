@@ -533,6 +533,13 @@ current candidate が `run_current_l2_source_sample` という library-side entr
 
 CLI は library-side final contract の上に載る operational wrapper として別 gate に残す。
 
+### current second-gate actualization reading
+
+- current first cut は Rust-side operational wrapper over `run_current_l2_source_sample` に留める。
+- wrapper 側の current concern は `sample_selector_argument`、`explicit_host_plan_input_mode`、`source_sample_run_report_json_or_pretty_summary` に narrow に置く。
+- `run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` は still support-only bucket に残す。
+- `resolve_current_l2_source_sample_path`、hard-coded accepted sample set、repo-local Python helper、cargo example emitter / support module は excluded bucket に残す。
+
 ### later docs-first host-facing boundary
 
 - capability-scoped I/O / port boundary（working label）

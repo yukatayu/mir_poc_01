@@ -102,6 +102,10 @@
 - `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
   - current L2 parser-free PoC の detached artifact で、bundle failure artifact 側の `failure.failure_kind` discriminator-only schema を `BatchRunSummary` aggregate export がどこまで typed に吸うべきかを比較する補助文書。
   - production exporter 実装や richer host interface を固定せず、aggregate connection の docs-only boundary judgment だけを与える。
+- `specs/examples/393-current-l2-stable-malformed-missing-option-first-source-backed-widening-actualization-ready-public-operational-cli-second-later-gate-actualization-comparison.md`
+  - runtime-led thin library facade first later cut を巻き戻さず、public operational CLI second gate をどの operational wrapper cut から narrow に actualize するかを比較する補助文書。
+- `specs/examples/394-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-minimal-public-operational-cli-second-later-gate-threshold.md`
+  - public operational CLI second gate の minimum を delegated library entry / operational shell concern / support / excluded / guard / kept-later refs とともに固定する補助文書。
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。
