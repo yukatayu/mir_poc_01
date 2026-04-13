@@ -239,13 +239,13 @@ stable malformed capability second reopen actualization comparison も fixed 済
 public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample` に留め、current shell concern は `<sample>`、`--host-plan <path>`、`--format pretty|json` に限定する。final `mir` top-level hierarchy、inventory / regression helper verb、support-only verb、repo-local helper naming は excluded bucket に残し、actual CLI binary / final host-input contract は still later に残す。
 
 current mainline は、
-**repo-level current line は stable malformed capability second source-backed widening actualization comparison**
+**repo-level current line は public operational CLI concrete shell actualization comparison**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- stable malformed capability second source-backed widening actualization comparison
-- public operational CLI concrete shell actualization comparison（reserve）
+- public operational CLI concrete shell actualization comparison
+- stable malformed capability second source-backed widening actualization（reserve）
 
 を揃えるのが主眼になる。
 

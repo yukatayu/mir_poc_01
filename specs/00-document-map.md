@@ -118,6 +118,10 @@
   - capability second reopen comparison fixed 後の次段として、runtime-led thin facade first cut、Rust-side operational wrapper second gate、runtime skeleton later support cutを巻き戻さずに、public operational CLI の concrete shell naming を current-L2 scoped shell へどこまで narrow に留めるかを比較する補助文書。
 - `specs/examples/400-current-l2-public-operational-cli-concrete-shell-naming-ready-minimal-public-operational-cli-concrete-shell-naming-threshold.md`
   - public operational CLI concrete shell naming の minimum を、entry criteria、chosen shell、operational arguments、operational output、excluded bucket、guard、kept-later refs とともに固定する補助文書。
+- `specs/examples/401-current-l2-public-operational-cli-concrete-shell-naming-ready-stable-malformed-capability-second-source-backed-widening-actualization-comparison.md`
+  - current-L2 scoped docs-only shell naming fixed 後の次段として、capability family (`e13/e20`) の source-backed widening actualization を pair source-authored static-stop cut、single-row lead、helper-only stop のどれで扱うかを比較する補助文書。
+- `specs/examples/402-current-l2-stable-malformed-capability-second-source-backed-widening-actualization-ready-minimal-stable-malformed-capability-second-source-backed-widening-threshold.md`
+  - stable malformed capability second source-backed widening actualization の minimum を、pair family、entry evidence、actualized surface、guard、kept-later refs とともに固定する補助文書。
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。

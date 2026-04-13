@@ -128,14 +128,14 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. stable malformed capability second source-backed widening actualization comparison
-2. reserve public operational CLI concrete shell actualization comparison
+1. public operational CLI concrete shell actualization comparison
+2. reserve stable malformed capability second source-backed widening actualization
 
 ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...384` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check milestone を閉じ、`specs/examples/385...386` で `Macro 7` の docs-first host-facing integration boundary を固定し、`specs/examples/387...388` で `Macro 4` の missing-option actualization comparison を source-backed widening first に寄せ、`specs/examples/389...390` で final public parser/checker/runtime first later gate を runtime-led thin facade に絞り、`specs/examples/391...392` で `e16/e18` source-backed widening first cut を閉じ、`specs/examples/393...394` で public operational CLI second gate を Rust-side operational wrapper over thin facade として narrow に固定し、`specs/examples/395...396` で thin-facade later support cut を `run_current_l2_runtime_skeleton` に置き、`specs/examples/397...398` で capability second reopen comparison を `e13/e20` pair judgment + source-backed widening first に固定し、`specs/examples/399...400` で current-L2 scoped docs-only shell naming を `mir-current-l2 run-source-sample <sample> --host-plan <path> --format pretty|json` に narrow に固定したうえで、次段を capability source-backed widening actualization comparison に送る** である。
 
 ## near-term reserve line
 
-- public operational CLI concrete shell actualization comparison
+- stable malformed capability second source-backed widening actualization
 
 ## まだ急がないもの
 
