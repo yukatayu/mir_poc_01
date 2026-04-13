@@ -24,6 +24,7 @@ run_directory_named_profile
 - `run_current_l2_source_sample` は runtime-led thin facade first public cut に留める。
 - `run_current_l2_runtime_skeleton` は final public parser/checker/runtime thin-facade later support actualization の current support cut であり、`Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` を explicit input surface に取る。
 - `lower_current_l2_fixed_source_text` は current support cut に含めず、deeper-support helper に残す。
+- public operational CLI concrete shell naming の current docs-only cut は `mir-current-l2 run-source-sample <sample> --host-plan <path> --format pretty|json` に留め、support-only verb や repo-local maintenance helper verb は public shell concern に含めない。
 - `resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local Python orchestration helper は excluded bucket に残す。
 
 ## layer ごとの public behavior / thin delegation

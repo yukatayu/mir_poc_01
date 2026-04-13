@@ -235,14 +235,17 @@ final public parser / checker / runtime thin-facade later support actualization 
 `specs/examples/397...398` により、
 stable malformed capability second reopen actualization comparison も fixed 済みであり、current family judgment は `e13/e20` pair に維持しつつ、helper-local capability compare、stage1 reconnect widen、fixture-static capability rows を entry evidence に再利用し、next malformed-side actualization mode は source-backed widening first に置く current cut を採った。`e13` lead は implementation staging note に留め、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は still later に残す。
 
+`specs/examples/399...400` により、
+public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample` に留め、current shell concern は `<sample>`、`--host-plan <path>`、`--format pretty|json` に限定する。final `mir` top-level hierarchy、inventory / regression helper verb、support-only verb、repo-local helper naming は excluded bucket に残し、actual CLI binary / final host-input contract は still later に残す。
+
 current mainline は、
-**repo-level current line は public operational CLI concrete shell naming comparison**
+**repo-level current line は stable malformed capability second source-backed widening actualization comparison**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- public operational CLI concrete shell naming comparison
-- stable malformed capability second source-backed widening actualization comparison（reserve）
+- stable malformed capability second source-backed widening actualization comparison
+- public operational CLI concrete shell actualization comparison（reserve）
 
 を揃えるのが主眼になる。
 

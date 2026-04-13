@@ -125,4 +125,5 @@ current reached-stage inventory は current authored decet `e1` / `e2` / `e3` / 
 - public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留める
 - final public parser/checker/runtime thin-facade later support actualization も fixed 済みであり、later support cut は `run_current_l2_runtime_skeleton` + `CurrentL2RuntimeSkeletonReport` に置く
 - capability second reopen actualization comparison も fixed 済みであり、current family judgment は `e13/e20` pair、next malformed-side actualization mode は source-backed widening first に置く
-- repo-level current line は public operational CLI concrete shell naming comparison であり、その後に stable malformed capability second source-backed widening actualization comparison を reserve に置く
+- public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample`、shell concern は `<sample>` / `--host-plan` / `--format pretty|json` に留める
+- repo-level current line は stable malformed capability second source-backed widening actualization comparison であり、その後に public operational CLI concrete shell actualization comparison を reserve に置く

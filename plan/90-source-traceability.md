@@ -2501,3 +2501,19 @@
   - `crates/mir-semantics/tests/current_l2_static_gate_support.rs`
   - `scripts/current_l2_capability_checker.py`
   - `scripts/current_l2_detached_loop.py`
+
+### 2026-04-13 phase6 public operational CLI concrete shell naming addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_003.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/399-current-l2-stable-malformed-capability-second-reopen-actualization-ready-public-operational-cli-concrete-shell-naming-comparison.md`
+  - `specs/examples/400-current-l2-public-operational-cli-concrete-shell-naming-ready-minimal-public-operational-cli-concrete-shell-naming-threshold.md`
+  - `docs/reports/0690-phase6-public-operational-cli-concrete-shell-naming-package.md`
+  - `specs/examples/393-current-l2-stable-malformed-missing-option-first-source-backed-widening-actualization-ready-public-operational-cli-second-later-gate-actualization-comparison.md`
+  - `specs/examples/394-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-minimal-public-operational-cli-second-later-gate-threshold.md`
+  - `specs/examples/395-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-final-public-parser-checker-runtime-thin-facade-later-support-actualization-comparison.md`
+  - `specs/examples/396-current-l2-final-public-parser-checker-runtime-thin-facade-later-support-actualization-ready-minimal-final-public-parser-checker-runtime-thin-facade-later-support-threshold.md`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+  - `crates/mir-runtime/tests/current_l2_runtime_skeleton.rs`
+  - `scripts/current_l2_source_sample_regression.py`
