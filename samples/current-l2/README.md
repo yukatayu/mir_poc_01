@@ -106,4 +106,6 @@ current reached-stage inventory は current authored octet `e1` / `e2` / `e3` / 
 - model-check concrete carrier first actualization gate も fixed 済みであり、`tool_neutral_formal_hook_only_input + compare_ready_docs_only_bridge_sketch` を entry にする narrow gate を current first choice に昇格した
 - public operational surface actualization gate も fixed 済みであり、`run_current_l2_source_sample` を later public-pressure の first docs-only candidate、`run_current_l2_runtime_skeleton` / `lower_current_l2_fixed_source_text` を tranche-internal support、`resolve_current_l2_source_sample_path` と repo-local script/example surface を excluded bucket に留める current cut を採った
 - shared-space identity / auth layering reopen も fixed 済みであり、membership identity core と auth/admission/projection side carriers の split を docs-first boundary に残した
-- repo-level current line は stable malformed broader follow-up inventory である
+- stable malformed broader follow-up inventory も fixed 済みであり、broader stable malformed next reopen order は missing-option family first、capability family second、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は later に残す
+- public operational CLI / final public contract later gate も fixed 済みであり、public-side later ordering は final public parser / checker / runtime API first、public operational CLI second に残す
+- repo-level current line は shared-space admission / compile-time visibility reopen である

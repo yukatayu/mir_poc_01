@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-13 09:00 JST
+最終更新: 2026-04-13 09:09 JST
 
 ## この文書について
 
@@ -157,6 +157,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 09:09 JST — `docs/reports/0669` で post-later-gates document consistency audit を閉じ、`.docs/current-l2-source-sample-authoring-policy.md`、`samples/current-l2/README.md`、`faq_003.md`、Phase 5 abstract の stale current-line wording を current snapshot に揃えた。reviewer 再確認は `No additional findings.` で、repo-level current line は shared-space admission / compile-time visibility reopen のまま維持した。
 - 2026-04-13 09:00 JST — `docs/reports/0668` と `specs/examples/371...372` で public operational CLI / final public contract later gate を閉じ、public-side later ordering を final public parser/checker/runtime API first / public operational CLI second に固定した。repo-level current line は shared-space admission / compile-time visibility reopen に進んだ。
 - 2026-04-13 08:50 JST — `docs/reports/0667` と `specs/examples/369...370` で stable malformed broader follow-up inventory を閉じ、broader stable malformed next reopen order を missing-option first / capability second に固定した。repo-level current line は public operational CLI / final public contract later gate に進んだ。
 - 2026-04-13 08:12 JST — `docs/reports/0666` で post-model-check-gate document consistency audit を閉じ、reviewer 指摘だった post-`stable malformed broader follow-up inventory` の順序 drift と `Mirrorea fabric boundary` row の stale wording を修正した。reviewer 再確認は `No findings.` で、repo-level current line は stable malformed broader follow-up inventory のまま維持した。
