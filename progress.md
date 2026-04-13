@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-13 23:38 JST
+最終更新: 2026-04-13 23:56 JST
 
 ## この文書について
 
@@ -57,7 +57,8 @@
 - final public parser / checker / runtime thin-facade later support actualization も fixed 済みであり、runtime-led thin facade first cut と operational CLI second gate を巻き戻さない later support cut を `run_current_l2_runtime_skeleton` + `CurrentL2RuntimeSkeletonReport` に置き、explicit input surface は `Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` に留め、`lower_current_l2_fixed_source_text` / semantic-checker core / parser carrier floor は deeper-support bucket に残す current cut を採った。
 - stable malformed capability second reopen actualization comparison も fixed 済みであり、current family judgment は `e13/e20` pair に維持しつつ、helper-local capability compare、stage1 reconnect widen、fixture-static capability rows を entry evidence に再利用し、next malformed-side actualization mode は source-backed widening first に置く current cut を採った。`e13` lead は staging note に留め、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は still later に残す。
 - stable malformed capability second source-backed widening actualization comparison も fixed 済みであり、current actualization family は `e13/e20` source-authored static-stop pair に置き、entry evidence は helper-local capability compare、stage1 reconnect widen、fixture-static capability rows に再利用し、actualized surface は source sample / lowerer / runner / ladder / regression helper / fixture-static formal-hook smoke に留める current cut を採った。
-- next near-term path は、`public operational CLI concrete shell actualization comparison` を current line に置き、その後に `stable malformed capability second source-backed widening actualization` を reserve に置く。
+- public operational CLI concrete shell actualization comparison も fixed 済みであり、current first cut は `mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over `run_current_l2_source_sample` として読む narrow actual shell concern に留め、delegated entry / report は `run_current_l2_source_sample` / `CurrentL2SourceSampleRunReport` に据え置く。`run_current_l2_runtime_skeleton` は support refs、`lower_current_l2_fixed_source_text` と repo-local helper / example surface は excluded bucket に残す。
+- next near-term path は、`stable malformed capability second source-backed widening actualization` を current line に置き、その後に `public operational CLI concrete shell actualization` を reserve に置く。
 - final parser grammar、final public parser / checker / runtime API、LLVM-family backend、Mirrorea operational runtime、shared-space final catalog はまだ無い。
 
 ## Macro phase map
@@ -68,10 +69,10 @@
 | `Macro 1` | 94% | semantic kernel / invariant stabilization | late | 自走可能 | current L2 semantics / invariant bridge はかなり安定 |
 | `Macro 2` | 97% | parser-free validation substrate | late | 自走可能 | parser-free PoC と detached validation loop は runnable |
 | `Macro 3` | 93% | compile-ready minimal actualization | late | 自走可能 | parser / checker / runtime / formal-hook の non-production minimal cut と public-pressure gate は揃った |
-| `Macro 4` | 91% | executable fixed-subset sample expansion | active | 自走可能 | current authored decet runnable。missing-option first source-backed widening、capability second reopen comparison、capability source-backed widening actualization comparison、CLI concrete shell naming comparison は fixed 済みで、next malformed current line は capability source-backed widening actualization |
+| `Macro 4` | 91% | executable fixed-subset sample expansion | active | 自走可能 | current authored decet runnable。missing-option first source-backed widening、capability second reopen comparison、capability source-backed widening actualization comparison は fixed 済みで、next malformed current line は capability source-backed widening actualization |
 | `Macro 5` | 72% | static reasoning / theorem / model-check bridge | early-active | 一部自走可能 | proof notebook review-unit current cut、first actualization gate、actualization sequencing comparison、first actual carrier、emitted artifact wiring、sample-facing summary は fixed 済み。nextは compare-ready metadata / public-checker migration の later orderingを保ったまま repo-level mainline を Macro 7 へ渡す |
 | `Macro 6` | 46% | distributed fabric / shared-space / runtime evolution | docs-first checkpoint fixed | 境界までは自走可能 | Mirrorea/shared-space re-entry bundle、identity/auth layering、admission/compile-time visibility、authority/resource ownership split は fixed。final catalog と operational realizationは later |
-| `Macro 7` | 37% | toolchain / backend / developer surface | thin-facade support cut fixed | 一部自走可能 | public operational surface inventory、library-before-CLI later ordering、docs-first I/O / adapter boundary、runtime skeleton later support cut、CLI concrete shell naming comparison は fixed。next は CLI concrete shell actualization comparison |
+| `Macro 7` | 38% | toolchain / backend / developer surface | thin-facade support cut fixed | 一部自走可能 | public operational surface inventory、library-before-CLI later ordering、docs-first I/O / adapter boundary、runtime skeleton later support cut、CLI concrete shell naming comparison、CLI concrete shell actualization comparison は fixed。next は installed shell packaging を later に留めた reserve 整理 |
 | `Macro 8` | 5% | domain / application realization | not started | 要仕様確認 | 上位アプリの concrete goal が未確定 |
 
 ## Feature maturity stage legend
@@ -112,7 +113,7 @@
 | parser-free PoC / detached loop | 95% | 91% | 99% | late | runnable baseline と regression policy がある |
 | compile-ready parser / checker / runtime | 88% | 78% | 85% | late | non-production minimal tranche と public-pressure gate は揃った |
 | fixed-subset source samples | 94% | 95% | 94% | active | authored decet runnable。`e16/e18` missing-option static pair、`e21/e22` contrast row、`e4/e19` static pair まで source-backed に actualize 済み |
-| theorem / verifier bridge | 89% | 86% | 71% | early-active | formal hook、proof notebook first bridge、first actual model-check carrier、source-sample emitted route、sample-facing summary はある。sample-visible milestoneは一旦閉じ、runtime thin-facade later support、capability second reopen comparison、CLI concrete shell naming comparison も fixed 済みで、repo-level current line は capability source-backed widening actualization comparison に進んだ |
+| theorem / verifier bridge | 89% | 86% | 71% | early-active | formal hook、proof notebook first bridge、first actual model-check carrier、source-sample emitted route、sample-facing summary はある。sample-visible milestoneは一旦閉じ、runtime thin-facade later support、capability second reopen comparison、CLI concrete shell naming comparison、CLI concrete shell actualization comparison も fixed 済みで、repo-level current line は capability source-backed widening actualization に進んだ |
 | Mirrorea fabric boundary | 71% | 60% | 10% | docs-first checkpoint fixed | re-entry bundle、identity/auth layering、admission/compile-time visibility cut、authority/resource ownership split は fixed。final catalog と operational realizationは later |
 | shared-space boundary | 79% | 68% | 16% | docs-first checkpoint fixed | practical cut、repo-level re-entry bundle、admission/visibility bridge、authority/resource split は fixed。final catalog は user spec required |
 | Typed-Effect Wiring Platform | 35% | 27% | 4% | positioning only | host-facing I/O / adapter boundary の high-level anchor として参照できる |
@@ -121,17 +122,17 @@
 
 ## 現在の self-driven line
 
-1. **Macro 7 / public operational CLI concrete shell actualization**
-   - docs-only naming で fixed した `mir-current-l2 run-source-sample` shell を actual CLI shell concern にどう reopen するかを整理する。
-2. **Macro 4 / stable malformed capability second source-backed widening actualization**
+1. **Macro 4 / stable malformed capability second source-backed widening actualization**
    - capability family (`e13/e20`) を source-authored static-stop pair としてどこまで actual package に落とすかを整理する。
+2. **Macro 7 / public operational CLI concrete shell actualization**
+   - current-L2 scoped Rust concrete shell concern を、installed binary や final host/input contract を先取りせずにどこまで actual shell として narrow に保つかを整理する。
 
 ## 研究で見つけることと、user が決めること
 
 ### 研究で見つけること
 
-- public operational CLI concrete shell actualization comparison の最小 cut
 - stable malformed capability second source-backed widening actualization の最小 cut
+- public operational CLI concrete shell actualization の reserve cut
 
 ### user が決めること
 
@@ -167,6 +168,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-13 23:56 JST — `docs/reports/0693` と `specs/examples/403...404` で public operational CLI concrete shell actualization comparison を閉じ、`mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over thin facade として読む narrow actual shell concern を固定した。repo-level current line は stable malformed capability second source-backed widening actualization に進んだ。
 - 2026-04-13 23:38 JST — `docs/reports/0692` と `specs/examples/401...402` で stable malformed capability second source-backed widening actualization comparison を閉じ、`e13/e20` source-authored static-stop pair first cut と helper-local / stage1 / fixture-static entry evidence を固定した。repo-level current line は public operational CLI concrete shell actualization comparison に進んだ。
 - 2026-04-13 21:57 JST — `docs/reports/0691` で post-package document consistency audit を閉じ、reviewer finding だった `progress.md` snapshot table の旧 `CLI concrete shell naming comparison` 表記を `CLI concrete shell actualization comparison` へ揃えた。repo-level current line は stable malformed capability second source-backed widening actualization comparison のまま維持した。
 - 2026-04-13 21:41 JST — `docs/reports/0690` と `specs/examples/399...400` で public operational CLI concrete shell naming comparison を閉じ、current docs-only shell family を `mir-current-l2 run-source-sample`、current shell concern を `<sample>` / `--host-plan` / `--format pretty|json` に固定した。repo-level current line は stable malformed capability second source-backed widening actualization comparison に進んだ。

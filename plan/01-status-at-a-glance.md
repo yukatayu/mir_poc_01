@@ -64,12 +64,13 @@
 - `proof_notebook_review_unit` は current first concrete theorem/model-check pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate に留まる。
 - public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留め、operational request/output shell concern だけを narrow に残す。
 - final public parser/checker/runtime thin-facade later support actualization も fixed 済みであり、`run_current_l2_runtime_skeleton` と `CurrentL2RuntimeSkeletonReport` を later support cut に置き、explicit input surface は `Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` に留める。
-- repo-level current line は public operational CLI concrete shell actualization comparison に置き、その後に stable malformed capability second source-backed widening actualization を reserve に並べるのが current reading である。
+- public operational CLI concrete shell actualization comparison も fixed 済みであり、current first cut は `mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over `run_current_l2_source_sample` として読む narrow actual shell concern に留め、`run_current_l2_runtime_skeleton` は support refs、`lower_current_l2_fixed_source_text` と repo-local helper / example surface は excluded bucket に残す。
+- repo-level current line は stable malformed capability second source-backed widening actualization に置き、その後に public operational CLI concrete shell actualization を reserve に並べるのが current reading である。
 
 ## current mainline
 
-1. public operational CLI concrete shell actualization comparison
-2. reserve stable malformed capability second source-backed widening actualization
+1. stable malformed capability second source-backed widening actualization
+2. reserve public operational CLI concrete shell actualization
 
 ## biggest later gates
 

@@ -127,4 +127,5 @@ current reached-stage inventory は current authored decet `e1` / `e2` / `e3` / 
 - capability second reopen actualization comparison も fixed 済みであり、current family judgment は `e13/e20` pair、next malformed-side actualization mode は source-backed widening first に置く
 - public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample`、shell concern は `<sample>` / `--host-plan` / `--format pretty|json` に留める
 - capability second source-backed widening actualization comparison も fixed 済みであり、current actualization family は `e13/e20` source-authored static-stop pair、actualized surface は source sample / lowerer / runner / ladder / regression helper / fixture-static formal-hook smoke に留める
-- repo-level current line は public operational CLI concrete shell actualization comparison であり、その後に stable malformed capability second source-backed widening actualization を reserve に置く
+- public operational CLI concrete shell actualization comparison も fixed 済みであり、current first cut は `mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over thin facade として読む narrow actual shell concern に留める
+- repo-level current line は stable malformed capability second source-backed widening actualization であり、その後に public operational CLI concrete shell actualization を reserve に置く

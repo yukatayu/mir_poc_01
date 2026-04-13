@@ -238,14 +238,17 @@ stable malformed capability second reopen actualization comparison も fixed 済
 `specs/examples/399...400` により、
 public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample` に留め、current shell concern は `<sample>`、`--host-plan <path>`、`--format pretty|json` に限定する。final `mir` top-level hierarchy、inventory / regression helper verb、support-only verb、repo-local helper naming は excluded bucket に残し、actual CLI binary / final host-input contract は still later に残す。
 
+`specs/examples/403...404` により、
+public operational CLI concrete shell actualization comparison も fixed 済みであり、current first cut は `mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over `run_current_l2_source_sample` として読む narrow actual shell concern に留め、delegated entry / report は `run_current_l2_source_sample` / `CurrentL2SourceSampleRunReport` に据え置く。`run_current_l2_runtime_skeleton` は support refs、`lower_current_l2_fixed_source_text` と repo-local helper / example surface は excluded bucket に残す。
+
 current mainline は、
-**repo-level current line は public operational CLI concrete shell actualization comparison**
+**repo-level current line は stable malformed capability second source-backed widening actualization**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- public operational CLI concrete shell actualization comparison
-- stable malformed capability second source-backed widening actualization（reserve）
+- stable malformed capability second source-backed widening actualization
+- public operational CLI concrete shell actualization（reserve）
 
 を揃えるのが主眼になる。
 
