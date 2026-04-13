@@ -128,17 +128,17 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. docs-first I/O / host-facing port boundary comparison（working label）
-2. reserve stable malformed missing-option first reopen actualization comparison
-3. reserve final public parser / checker / runtime API first later gate actualization comparison
+1. stable malformed missing-option first reopen actualization comparison
+2. reserve final public parser / checker / runtime API first later gate actualization comparison
+3. reserve public operational CLI second later gate actualization comparison
 
-ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...384` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check milestone を閉じ、その先の `Macro 7` host-facing integration boundary を docs-first に開く** である。
+ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...384` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check milestone を閉じ、`specs/examples/385...386` で `Macro 7` の docs-first host-facing integration boundary を固定し、その次に `Macro 4` の missing-option actualization comparison を reopen する** である。
 
 ## near-term reserve line
 
-- stable malformed missing-option first reopen actualization comparison
 - final public parser / checker / runtime API first later gate actualization comparison
 - public operational CLI second later gate
+- stable malformed missing-option first source-backed widening actualization
 
 ## まだ急がないもの
 
@@ -153,6 +153,6 @@ old `Phase 7` には、
 
 - fixed-subset runnable path を厚くすること自体は今やってよい。
 - theorem / model-check bridge も sample-visible milestone までは今やってよい。
-- host-facing I/O / adapter boundary は、`stdin/stdout` のような privileged primitive を language core に入れず、capability-scoped port / adapter boundary として docs-first に切るのが自然である。
+- host-facing I/O / adapter boundary は、`specs/examples/385...386` で privileged `stdin/stdout` を避けた capability-scoped port / adapter boundary として docs-first に切る方針を fixed 済みである。
 - FFI や game engine integration は否定しないが、direct binding を先に入れず、visualizer / host substrate / FFI / engine adapter を separate gate に置く。
 - higher-level async-control / memory-order family、fabric operational realization、backend public surface は separate track として扱う。

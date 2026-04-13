@@ -214,15 +214,18 @@ stable malformed broader follow-up inventory も fixed 済みであり、broader
 `specs/examples/371...372` により、
 public operational CLI / final public contract later gate も fixed 済みであり、`run_current_l2_source_sample` current gate を巻き戻さず、first later gate を final public parser / checker / runtime API、second later gate を public operational CLI に置き、repo layout / accepted-set / repo-local helper surface を current final contract の外へ残す current cut を採った。
 
+`specs/examples/385...386` により、
+docs-first I/O / host-facing port boundary も fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す current cut を採った。`host-facing port` は settled term ではなく working label に留め、Typed-Effect Wiring Platform と Mirrorea/shared-space の subsystem affiliation は OPEN に残す。
+
 current mainline は、
-**repo-level current line は docs-first I/O / host-facing port boundary**
+**repo-level current line は stable malformed missing-option first reopen actualization comparison**
 である。
 
 ここでは fixed entry criteria を崩さずに、
 
-- docs-first I/O / host-facing port boundary comparison（working label）
-- stable malformed missing-option first reopen actualization comparison（reserve）
+- stable malformed missing-option first reopen actualization comparison
 - final public parser / checker / runtime API first later gate actualization comparison（reserve）
+- public operational CLI second later gate actualization comparison（reserve）
 
 を揃えるのが主眼になる。
 
@@ -231,7 +234,7 @@ current recommendation としては、
 - fixed subset の executable sample を厚くすること自体はよい
 - ただし higher-level async-control family や low-level memory-order-like surface を current executable core に混ぜるのは早い
 - theorem/model-check side は `proof_notebook_review_unit` current first pilot を保ったまま、sample-visible milestone を 3 package に分けて進める方が自然である
-- host-facing integration は `stdin/stdout` privileged 化より先に、docs-first の capability-scoped I/O / adapter boundary を切る方が自然である
+- host-facing integration は `specs/examples/385...386` により、`stdin/stdout` privileged 化より先に docs-first の capability-scoped I/O / adapter boundary を切る方針を fixed 済みである
 - theorem/model-check concrete tool binding や LLVM-family backend / external codegen も、source corpus / lowering / runner / ladder のあとに narrow pilot として扱う
 - widened authored-row order は `e1 -> e21 -> e3` に置き、`e1` / `e21` は actual authored row として閉じ、`e3` は admit-family / theorem-side guard を伴う third slot に残す
 - theorem-side plain bridge sketch は authored-row line の後で actualize 済みであり、compare-ready bridge sketch は current second reopen line に置く

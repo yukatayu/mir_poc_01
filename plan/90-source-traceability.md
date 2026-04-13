@@ -235,6 +235,19 @@
   - `specs/examples/384-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-minimal-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-threshold.md`
   - `docs/reports/0678-phase6-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-package.md`
 
+## 2026-04-13 Phase 6 docs-first I/O / host-facing port boundary addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_003.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/07-typed-effects-wiring-platform.md`
+  - `specs/10-open-questions.md`
+  - `specs/11-roadmap-and-workstreams.md`
+  - `specs/examples/363-current-l2-stable-static-edge-pair-first-reopen-ready-public-operational-surface-actualization-gate-comparison.md`
+  - `specs/examples/364-current-l2-public-operational-surface-actualization-gate-ready-minimal-public-operational-surface-actualization-gate-threshold.md`
+  - `specs/examples/371-current-l2-stable-malformed-broader-follow-up-inventory-ready-public-operational-cli-final-public-contract-later-gate-comparison.md`
+  - `specs/examples/372-current-l2-public-operational-cli-final-public-contract-later-gate-ready-minimal-public-operational-cli-final-public-contract-later-gate-threshold.md`
+  - `specs/examples/385-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-docs-first-io-host-facing-port-boundary-comparison.md`
+  - `specs/examples/386-current-l2-docs-first-io-host-facing-port-boundary-ready-minimal-docs-first-io-host-facing-port-boundary-threshold.md`
+
 ## 2026-04-13 Phase 6 stable malformed broader follow-up inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

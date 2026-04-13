@@ -1013,6 +1013,10 @@
   - model-check concrete carrier first actualization fixed 後の次段として、current authored source sample octet と verification ladder reached row を theorem/model-check helper output にどう接続するのが最小かを比較する。
 - `specs/examples/382-current-l2-source-sample-emitted-verification-artifact-wiring-ready-minimal-source-sample-emitted-verification-artifact-wiring-threshold.md`
   - source-sample emitted verification artifact wiring の minimum を、source entry、emitted route、route rule、guard、kept-later refs で固定する。
+- `specs/examples/385-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-docs-first-io-host-facing-port-boundary-comparison.md`
+  - sample-visible theorem/model-check summary milestone fixed 後の次段として、privileged `stdin/stdout` を避けた capability-scoped I/O / adapter boundary を docs-first first cut にし、visualizer / host substrate / host runtime と FFI / engine adapter をどう押し分けるかを比較する。
+- `specs/examples/386-current-l2-docs-first-io-host-facing-port-boundary-ready-minimal-docs-first-io-host-facing-port-boundary-threshold.md`
+  - docs-first I/O / host-facing port boundary の minimum を、entry criteria、current boundary、consumer/provider refs、guard、kept-later refs で固定する。
 - `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
   - source-sample emitted verification artifact wiring fixed 後の次段として、sample-facing theorem/model-check evidence を README / `.docs` / snapshot docs のどこでどう見せ、current bless/review flow をどこまで repo-local に留めるかを比較する。
 - `specs/examples/384-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-minimal-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-threshold.md`

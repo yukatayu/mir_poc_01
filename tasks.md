@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 16:46 JST
+最終更新: 2026-04-13 18:01 JST
 
 ## この文書について
 
@@ -41,34 +41,23 @@
 - model-check concrete carrier first actualization は `specs/examples/379...380` により fixed 済みであり、tool-neutral formal hook only hard input から row-local machine-facing sibling artifact list を actualize し、`proof_notebook_review_unit` current first theorem-side pilot を維持したまま source-sample emitted verification artifact wiring を next line に送る current cut を採った。
 - source-sample emitted verification artifact wiring は `specs/examples/381...382` により fixed 済みであり、`run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` の public/report shape を保ったまま、runtime test/support helper-local emitted route として `source report -> formal hook reached/guarded split -> proof_notebook_review_units / model_check_concrete_carriers` fan-out を actualize した。
 - sample-facing theorem / model-check evidence summary and bless/review flow は `specs/examples/383...384` により fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、`source sample -> runner/ladders -> formal hook reached/guarded -> review-unit/model-check carrier` を current evidence route、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採った。
-- current promoted line は **docs-first I/O / host-facing port boundary comparison**（working label）であり、その後に
-  - reserve `stable malformed missing-option first reopen actualization comparison`
+- docs-first I/O / host-facing port boundary は `specs/examples/385...386` により fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す current cut を採った。`host-facing port` は working label に留め、Typed-Effect Wiring Platform と Mirrorea/shared-space の affiliation は OPEN に残す。
+- current promoted line は **stable malformed missing-option first reopen actualization comparison** であり、その後に
   - reserve `final public parser / checker / runtime API first later gate actualization comparison`
+  - reserve `public operational CLI second later gate actualization comparison`
   を置くのが自然である。
-- `stable malformed missing-option first reopen actualization comparison` と `final public parser / checker / runtime API first later gate actualization comparison` は near-term reserve に下げ、sample-visible theorem/model-check line（actual carrier + 2 package）の後段に残す。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 7` | host-facing integration boundary | `S1-S2 -> S2-S3` | docs-first I/O / host-facing port boundary comparison | 1〜3 task / 数日〜1週 | docs-first boundary までは自走可能 |
-| 2 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
-| 3 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 1 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
+| 2 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 3 | `Macro 7` | operational wrapper boundary | `S3-S4 -> S4` | public operational CLI second later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. docs-first I/O / host-facing port boundary comparison
-
-- macro phase
-  - `Macro 7`
-- 目的
-  - host-facing I/O、visualizer / substrate adapter、FFI、game engine adapter を current runtime semantics と混ぜずに、docs-first boundary としてどこで切るかを整理する。
-- 完了条件
-  - `stdin/stdout` を privileged primitive にせず、capability-scoped port / adapter boundary、visualizer / host substrate、FFI / engine adapter を別 gate として比較する current cut を整理する。
-- 注記
-  - `host-facing port` は working label であり、final terminology は OPEN である。
-
-### Package 2. stable malformed missing-option first reopen actualization comparison
+### Package 1. stable malformed missing-option first reopen actualization comparison
 
 - macro phase
   - `Macro 4`
@@ -77,7 +66,7 @@
 - 完了条件
   - missing-option first / capability second の順序を巻き戻さず、`e16/e17/e18` line の first actualization cut と duplicate / try-rollback kept-later guard を current task map に整理する。
 
-### Package 3. final public parser/checker/runtime first later gate actualization comparison
+### Package 2. final public parser/checker/runtime first later gate actualization comparison
 
 - macro phase
   - `Macro 7`
@@ -86,19 +75,18 @@
 - 完了条件
   - `run_current_l2_source_sample` current gate と library-before-CLI later orderingを保ち、final public library contract actualization と public operational CLI second gate を同じ package に混ぜない。
 
+### Package 3. public operational CLI second later gate actualization comparison
+
+- macro phase
+  - `Macro 7`
+- 目的
+  - library-side final public contract actualization の後段として、public operational CLI を repo-local Python helper / example surface と混ぜずにどこで切るかを整理する。
+- 完了条件
+  - final public parser / checker / runtime API first later gate を巻き戻さず、public operational CLI と repo-local support surface の境界を narrow に整理する。
+
 ## 研究を通して見つけること
 
-### Discovery 1. docs-first I/O / host-facing port boundary
-
-- 概要
-  - host-facing I/O、visualizer / substrate adapter、FFI、game engine adapter をどの capability / adapter boundary で切るか。
-- 何に影響するか
-  - `Macro 7`
-  - future public operational surface と external integration
-- current recommendation
-  - **`stdin/stdout` を language core の privileged primitive にせず、capability-scoped port / adapter boundary を first docs-only cut にする**。
-
-### Discovery 2. stable malformed missing-option first reopen actualization comparison
+### Discovery 1. stable malformed missing-option first reopen actualization comparison
 
 - 概要
   - broader malformed follow-up inventory fixed 後に、missing-option family first reopen を helper-local compare と source-backed wideningのどちらから actualize するか。
@@ -108,7 +96,7 @@
 - current recommendation
   - **missing-option first / capability second の順序を保ったまま、duplicate cluster と try/rollback malformed-static family を later に残し、first reopen だけを separate package にする**。
 
-### Discovery 3. final public parser/checker/runtime first later gate actualization comparison
+### Discovery 2. final public parser/checker/runtime first later gate actualization comparison
 
 - 概要
   - public operational later ordering fixed 後に、library-side final public contract を symbol-level でどこから narrow に actualize するか。
@@ -117,6 +105,16 @@
   - Rust/Python split の外向き surface
 - current recommendation
   - **`run_current_l2_source_sample` current gate と library-before-CLI later orderingを保ち、final public library contract actualization と public operational CLI second gate を同じ package に混ぜない**。
+
+### Discovery 3. public operational CLI second later gate actualization comparison
+
+- 概要
+  - final public library contract の後段として、public operational CLI を repo-local helper / example surface とどう分けて narrow に actualize するか。
+- 何に影響するか
+  - `Macro 7`
+  - operational wrapper / developer surface
+- current recommendation
+  - **library-side final public contract actualization を先に置き、CLI は second later gate として separate に扱う**。
 
 ## user が決める必要があること
 
