@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 09:52 JST
+最終更新: 2026-04-13 14:31 JST
 
 ## この文書について
 
@@ -34,8 +34,8 @@
 - model-check concrete carrier first actualization gate は `specs/examples/367...368` により fixed 済みであり、`proof_notebook_review_unit` current first pilot を保ったまま、`tool_neutral_formal_hook_only_input + compare_ready_docs_only_bridge_sketch` を entry にする narrow gate を current first choice に昇格した。
 - stable malformed broader follow-up inventory は `specs/examples/369...370` により fixed 済みであり、broader stable malformed next reopen order を missing-option family first (`e16/e17/e18`)、capability family second (`e13/e20`) に固定し、duplicate cluster と `TryFallback` / `AtomicCut` malformed-static family は kept-later に残した。
 - public operational CLI / final public contract later gate は `specs/examples/371...372` により fixed 済みであり、`run_current_l2_source_sample` current gate を保ったまま、first later gate を final public parser / checker / runtime API、second later gate を public operational CLI に固定し、repo layout / accepted-set / repo-local helper surface は current final contract の外に残した。
-- current promoted line は **shared-space admission / compile-time visibility reopen** であり、その後に
-  - shared-space authority / resource ownership reopen
+- shared-space admission / compile-time visibility reopen は `specs/examples/373...374` により fixed 済みであり、role / capability / visibility / notify path requirement の over-approximation だけを compile-time に残し、actual admission / activation / active member set / reconciliation は runtime control-plane に残す current cut を採った。
+- current promoted line は **shared-space authority / resource ownership reopen** であり、その後に
   - model-check concrete carrier actualization comparison
   - model-check concrete carrier first actualization
   - source-sample emitted verification artifact wiring
@@ -48,28 +48,18 @@
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 6` | shared-space boundary | `S3-S4 -> S4` | shared-space admission / compile-time visibility reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
-| 2 | `Macro 6` | shared-space authority model | `S3 -> S3-S4` | shared-space authority / resource ownership reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
-| 3 | `Macro 5` | external verifier bridge | `S4 -> S4-S5` | model-check concrete carrier actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
-| 4 | `Macro 5` | model-check pilot | `S4-S5 -> S5` | model-check concrete carrier first actualization | 1〜3 task / 数日〜1週 | 一部自走可能 |
-| 5 | `Macro 5` | source-backed verification artifacts | `S5 -> S5-S6` | source-sample emitted verification artifact wiring | 1〜3 task / 数日〜1週 | 自走可能 |
-| 6 | `Macro 5` | theorem/model-check sample visibility | `S5-S6 -> S6` | sample-facing theorem / model-check evidence summary and bless/review flow | 1〜3 task / 数日〜1週 | 一部自走可能 |
-| 7 | `Macro 7` | host-facing integration boundary | `S1-S2 -> S2-S3` | docs-first I/O / host-facing port boundary comparison | 1〜3 task / 数日〜1週 | docs-first boundary までは自走可能 |
-| 8 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
-| 9 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 1 | `Macro 6` | shared-space authority model | `S3 -> S3-S4` | shared-space authority / resource ownership reopen | 1〜3 task / 数日〜1週 | boundary までは自走可能 |
+| 2 | `Macro 5` | external verifier bridge | `S4 -> S4-S5` | model-check concrete carrier actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 3 | `Macro 5` | model-check pilot | `S4-S5 -> S5` | model-check concrete carrier first actualization | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 4 | `Macro 5` | source-backed verification artifacts | `S5 -> S5-S6` | source-sample emitted verification artifact wiring | 1〜3 task / 数日〜1週 | 自走可能 |
+| 5 | `Macro 5` | theorem/model-check sample visibility | `S5-S6 -> S6` | sample-facing theorem / model-check evidence summary and bless/review flow | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 6 | `Macro 7` | host-facing integration boundary | `S1-S2 -> S2-S3` | docs-first I/O / host-facing port boundary comparison | 1〜3 task / 数日〜1週 | docs-first boundary までは自走可能 |
+| 7 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
+| 8 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. shared-space admission / compile-time visibility reopen
-
-- macro phase
-  - `Macro 6`
-- 目的
-  - identity/auth layering fixed 後の next shared-space reopen として、compile-time over-approximation と runtime admission / activation / reconciliation の cut を narrow に整理する。
-- 完了条件
-  - role / capability / visibility requirement の over-approximation を compile-time に残し、actual admission / activation / late join / reconciliation を runtime control-plane に残す current cut を snapshot に昇格する。
-
-### Package 2. shared-space authority / resource ownership reopen
+### Package 1. shared-space authority / resource ownership reopen
 
 - macro phase
   - `Macro 6`
@@ -78,7 +68,7 @@
 - 完了条件
   - authoritative room / append-friendly room / relaxed projection line を潰さず、authority placement と resource ownership の first working split を current task map に整理する。
 
-### Package 3. model-check concrete carrier actualization comparison
+### Package 2. model-check concrete carrier actualization comparison
 
 - macro phase
   - `Macro 5`
@@ -87,7 +77,16 @@
 - 完了条件
   - `proof_notebook_review_unit` current first pilot と public-checker docs-only reserve line を巻き戻さず、sample-visible theorem/model-check line（comparison + 3 package）の reopen order を current task map に整理する。
 
-### Package 4. model-check concrete carrier first actualization
+### Package 3. model-check concrete carrier first actualization
+
+- macro phase
+  - `Macro 5`
+- 目的
+  - first actualization gate fixed 後の次段として、actual emitted model-check carrier、sample runner に乗る emitted verification artifact wiring、sample-facing theorem/model-check evidence summary のどれから reopen するかを narrow に整理する。
+- 完了条件
+  - `proof_notebook_review_unit` current first pilot と public-checker docs-only reserve line を巻き戻さず、sample-visible theorem/model-check line（comparison + 3 package）の reopen order を current task map に整理する。
+
+### Package 4. source-sample emitted verification artifact wiring
 
 - macro phase
   - `Macro 5`
@@ -96,7 +95,7 @@
 - 完了条件
   - `proof_notebook_review_unit` current first pilot を保持しつつ、model-check side の first actual carrier shape、入力境界、fail-closed 条件、kept-later line を fixed する。
 
-### Package 5. source-sample emitted verification artifact wiring
+### Package 5. sample-facing theorem / model-check evidence summary and bless/review flow
 
 - macro phase
   - `Macro 5`
@@ -105,7 +104,7 @@
 - 完了条件
   - current guarded row (`e3`) と current runtime/static cluster split を壊さず、sample runner / ladder / emitted artifact の接点を helper-local actual path として整理する。
 
-### Package 6. sample-facing theorem / model-check evidence summary and bless/review flow
+### Package 6. docs-first I/O / host-facing port boundary comparison
 
 - macro phase
   - `Macro 5`
@@ -114,7 +113,7 @@
 - 完了条件
   - concrete external tool binding を still later に残したまま、sample-facing evidence summary、review-unit / bridge sketch の見せ方、current bless/review flow を current task map に整理する。
 
-### Package 7. docs-first I/O / host-facing port boundary comparison
+### Package 7. stable malformed missing-option first reopen actualization comparison
 
 - macro phase
   - `Macro 7`
@@ -125,7 +124,7 @@
 - 注記
   - `host-facing port` は working label であり、final terminology は OPEN である。
 
-### Package 8. stable malformed missing-option first reopen actualization comparison
+### Package 8. final public parser/checker/runtime first later gate actualization comparison
 
 - macro phase
   - `Macro 4`
@@ -134,28 +133,9 @@
 - 完了条件
   - missing-option first / capability second の順序を巻き戻さず、`e16/e17/e18` line の first actualization cut と duplicate / try-rollback kept-later guard を current task map に整理する。
 
-### Package 9. final public parser/checker/runtime first later gate actualization comparison
-
-- macro phase
-  - `Macro 7`
-- 目的
-  - public operational later ordering fixed 後の次段として、final public parser / checker / runtime API first later gate を symbol-level にどう narrow に actualize するかを整理する。
-- 完了条件
-  - library-before-CLI later orderingを巻き戻さず、first later gate actualization の最小 symbol set と second gate kept-later guard を current task map に整理する。
-
 ## 研究を通して見つけること
 
-### Discovery 1. shared-space admission / compile-time visibility reopen
-
-- 概要
-  - identity/auth layering の次段として、declaration-side role/capability/visibility と runtime admission policy の橋をどこで切るか。
-- 何に影響するか
-  - `Macro 6`
-  - proof / model-check 側へ送る shared-space static floor
-- current recommendation
-  - **declared role / capability / visibility over-approximation を compile-time に残し、actual admission / activation は runtime control-plane に残す**。
-
-### Discovery 2. shared-space authority / resource ownership reopen
+### Discovery 1. shared-space authority / resource ownership reopen
 
 - 概要
   - authority placement、resource owner slot、delegated capability、fairness source をどの split で扱うか。
@@ -165,7 +145,7 @@
 - current recommendation
   - **participant carrier と authority/resource owner を同一視せず、authoritative owner slot と delegated/provider placement を別軸に比較する**。
 
-### Discovery 3. model-check concrete carrier actualization sequencing
+### Discovery 2. model-check concrete carrier actualization sequencing
 
 - 概要
   - current first gate の次段として、actual model-check carrier / emitted verification artifact wiring / sample-facing evidence summary をどう並べるか。
@@ -175,7 +155,7 @@
 - current recommendation
   - **current gate を compare-ready entry に保ったまま、actual carrier・artifact wiring・sample summary を separate package として narrow に切る**。
 
-### Discovery 4. docs-first I/O / host-facing port boundary
+### Discovery 3. docs-first I/O / host-facing port boundary
 
 - 概要
   - host-facing I/O、visualizer / substrate adapter、FFI、game engine adapter をどの capability / adapter boundary で切るか。
@@ -185,7 +165,7 @@
 - current recommendation
   - **`stdin/stdout` を language core の privileged primitive にせず、capability-scoped port / adapter boundary を first docs-only cut にする**。
 
-### Discovery 5. stable malformed missing-option first reopen actualization comparison
+### Discovery 4. stable malformed missing-option first reopen actualization comparison
 
 - 概要
   - broader malformed follow-up inventory fixed 後に、missing-option family first reopen を helper-local compare と source-backed wideningのどちらから actualize するか。
@@ -195,7 +175,7 @@
 - current recommendation
   - **missing-option first / capability second の順序を保ったまま、duplicate cluster と try/rollback malformed-static family を later に残し、first reopen だけを separate package にする**。
 
-### Discovery 6. final public parser/checker/runtime first later gate actualization comparison
+### Discovery 5. final public parser/checker/runtime first later gate actualization comparison
 
 - 概要
   - public operational later ordering fixed 後に、library-side final public contract を symbol-level でどこから narrow に actualize するか。

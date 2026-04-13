@@ -65,4 +65,4 @@ Mirrorea/shared-space docs-first re-entry bundle として再配置した。
 ここで current core bundle は `mirrorea_fabric_boundary + shared_space_practical_boundary`、
 Typed-Effect / Prism は adjacent track、
 shared-space final catalog と upper-layer app target は user-spec-required gate に残す。
-next shared-space reopen は identity / auth layering line に置くのが current reading である。
+その後 `specs/examples/365...366` により identity / auth layering reopen、`specs/examples/373...374` により admission / compile-time visibility reopen も docs-first boundary package として fixed 済みであり、next shared-space reopen は authority / resource ownership line に置くのが current reading である。

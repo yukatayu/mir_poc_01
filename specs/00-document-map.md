@@ -993,6 +993,10 @@
   - stable malformed broader follow-up inventory fixed 後の次段として、`run_current_l2_source_sample` current gate を保ったまま、final public parser/checker/runtime API と public operational CLI の later ordering をどう切るかを比較する。
 - `specs/examples/372-current-l2-public-operational-cli-final-public-contract-later-gate-ready-minimal-public-operational-cli-final-public-contract-later-gate-threshold.md`
   - public operational later gate の minimum を、current candidate、first/second later gate、excluded bucket、guard、kept-later refs で固定する。
+- `specs/examples/373-current-l2-public-operational-cli-final-public-contract-later-gate-ready-shared-space-admission-compile-time-visibility-reopen-comparison.md`
+  - public operational later gate fixed 後の次段として、shared-space line の next docs-first reopen を admission policy / compile-time visibility に narrow に戻し、compile-time over-approximation と runtime control-plane split をどう切るかを比較する。
+- `specs/examples/374-current-l2-shared-space-admission-compile-time-visibility-reopen-ready-minimal-shared-space-admission-compile-time-visibility-reopen-threshold.md`
+  - shared-space admission / compile-time visibility reopen の minimum を、entry criteria、compile-time over-approximation、runtime control-plane refs、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

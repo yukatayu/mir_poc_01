@@ -1406,6 +1406,18 @@ actual `principal:user_p` が本当に `player` として active 化されたか
 
 を別軸に保つのが最も自然である。
 
+`specs/examples/373...374` により、
+admission / compile-time visibility line 自体は current first practical cut を固定済みであり、
+
+- compile-time には role / capability / visibility / notify path requirement の over-approximationだけを残す
+- actual admission / activation / active member set / reconciliation は runtime control-plane に残す
+- raw auth protocol と exact principal set は still later に残す
+
+という split を採った。
+したがって shared-space line の next docs-first reopen は、
+**authority / resource ownership**
+である。
+
 ## shared-space resource ownership / delegation の current working model
 
 ### 問い
