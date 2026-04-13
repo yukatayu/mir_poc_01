@@ -1001,6 +1001,10 @@
   - shared-space admission / compile-time visibility reopen fixed 後の次段として、participant carrier を membership / activation に留めたまま、resource owner slot、delegated capability、consistency mode、fairness source、authority placement をどう押し分けるかを docs-first に比較する。
 - `specs/examples/376-current-l2-shared-space-authority-resource-ownership-reopen-ready-minimal-shared-space-authority-resource-ownership-reopen-threshold.md`
   - shared-space authority / resource ownership reopen の minimum を、entry criteria、participant carrier、resource owner slot、delegated capability、room mode refs、fairness source refs、guard、kept-later refs で固定する。
+- `specs/examples/377-current-l2-shared-space-authority-resource-ownership-reopen-ready-model-check-concrete-carrier-actualization-comparison.md`
+  - model-check concrete carrier first actualization gate fixed 後の次段として、actual model-check carrier / source-sample emitted verification artifact wiring / sample-facing theorem-model-check evidence summary の reopen order を、actual carrier first の docs-only sequencing package として比較する。
+- `specs/examples/378-current-l2-model-check-concrete-carrier-actualization-comparison-ready-minimal-model-check-concrete-carrier-actualization-threshold.md`
+  - model-check concrete carrier actualization comparison の minimum を、entry criteria、current first pilot、actualization entry、first actualization target、next-line refs、parallel reserve、guard、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 
