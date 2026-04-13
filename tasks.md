@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 18:01 JST
+最終更新: 2026-04-13 18:09 JST
 
 ## この文書について
 
@@ -42,8 +42,9 @@
 - source-sample emitted verification artifact wiring は `specs/examples/381...382` により fixed 済みであり、`run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` の public/report shape を保ったまま、runtime test/support helper-local emitted route として `source report -> formal hook reached/guarded split -> proof_notebook_review_units / model_check_concrete_carriers` fan-out を actualize した。
 - sample-facing theorem / model-check evidence summary and bless/review flow は `specs/examples/383...384` により fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、`source sample -> runner/ladders -> formal hook reached/guarded -> review-unit/model-check carrier` を current evidence route、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採った。
 - docs-first I/O / host-facing port boundary は `specs/examples/385...386` により fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す current cut を採った。`host-facing port` は working label に留め、Typed-Effect Wiring Platform と Mirrorea/shared-space の affiliation は OPEN に残す。
-- current promoted line は **stable malformed missing-option first reopen actualization comparison** であり、その後に
-  - reserve `final public parser / checker / runtime API first later gate actualization comparison`
+- stable malformed missing-option first reopen actualization comparison は `specs/examples/387...388` により fixed 済みであり、existing helper-local compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet に維持し、current next actualization mode は source-backed widening first に置く current cut を採った。implementation cut を narrower に取る場合でも `e16` lead は staging note に留め、capability second、duplicate later、`TryFallback` / `AtomicCut` malformed-static later を維持する。
+- current promoted line は **final public parser / checker / runtime API first later gate actualization comparison** であり、その後に
+  - reserve `stable malformed missing-option first source-backed widening actualization`
   - reserve `public operational CLI second later gate actualization comparison`
   を置くのが自然である。
 
@@ -51,22 +52,13 @@
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 4` | malformed cluster widening | `S5-S6 -> S6` | stable malformed missing-option first reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
-| 2 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 1 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime first later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 2 | `Macro 4` | malformed cluster widening | `S6 -> S6` | stable malformed missing-option first source-backed widening actualization | 1〜3 task / 数日〜1週 | 自走可能 |
 | 3 | `Macro 7` | operational wrapper boundary | `S3-S4 -> S4` | public operational CLI second later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. stable malformed missing-option first reopen actualization comparison
-
-- macro phase
-  - `Macro 4`
-- 目的
-  - broader malformed follow-up inventory fixed 後の次段として、missing-option family first reopen を helper-local compare と source-backed wideningのどの順で actualize するかを narrow に整理する。
-- 完了条件
-  - missing-option first / capability second の順序を巻き戻さず、`e16/e17/e18` line の first actualization cut と duplicate / try-rollback kept-later guard を current task map に整理する。
-
-### Package 2. final public parser/checker/runtime first later gate actualization comparison
+### Package 1. final public parser/checker/runtime first later gate actualization comparison
 
 - macro phase
   - `Macro 7`
@@ -74,6 +66,15 @@
   - public operational later ordering fixed 後に、library-side final public contract を symbol-level でどこから narrow に actualize するかを整理する。
 - 完了条件
   - `run_current_l2_source_sample` current gate と library-before-CLI later orderingを保ち、final public library contract actualization と public operational CLI second gate を同じ package に混ぜない。
+
+### Package 2. stable malformed missing-option first source-backed widening actualization
+
+- macro phase
+  - `Macro 4`
+- 目的
+  - helper-local compare を entry evidence に使いつつ、`e16/e17/e18` triplet の source-backed widening を actual source sample / runner / ladder line にどう接続するかを narrow に actualize する。
+- 完了条件
+  - missing-option first / capability second の順序を巻き戻さず、`e16/e17/e18` triplet の source-backed widening actualization cut と duplicate / try-rollback kept-later guard を current task map に整理する。
 
 ### Package 3. public operational CLI second later gate actualization comparison
 
@@ -86,17 +87,7 @@
 
 ## 研究を通して見つけること
 
-### Discovery 1. stable malformed missing-option first reopen actualization comparison
-
-- 概要
-  - broader malformed follow-up inventory fixed 後に、missing-option family first reopen を helper-local compare と source-backed wideningのどちらから actualize するか。
-- 何に影響するか
-  - `Macro 4`
-  - malformed cluster widening speed
-- current recommendation
-  - **missing-option first / capability second の順序を保ったまま、duplicate cluster と try/rollback malformed-static family を later に残し、first reopen だけを separate package にする**。
-
-### Discovery 2. final public parser/checker/runtime first later gate actualization comparison
+### Discovery 1. final public parser/checker/runtime first later gate actualization comparison
 
 - 概要
   - public operational later ordering fixed 後に、library-side final public contract を symbol-level でどこから narrow に actualize するか。
@@ -105,6 +96,16 @@
   - Rust/Python split の外向き surface
 - current recommendation
   - **`run_current_l2_source_sample` current gate と library-before-CLI later orderingを保ち、final public library contract actualization と public operational CLI second gate を同じ package に混ぜない**。
+
+### Discovery 2. stable malformed missing-option first source-backed widening actualization
+
+- 概要
+  - broader malformed follow-up inventory と missing-option first reopen actualization comparison fixed 後に、`e16/e17/e18` triplet を source-backed widening first でどう narrow に actualize するか。
+- 何に影響するか
+  - `Macro 4`
+  - malformed cluster widening speed
+- current recommendation
+  - **helper-local compare を entry evidence に使いつつ、triplet family judgmentを保ったまま source-backed widening first へ進める**。
 
 ### Discovery 3. public operational CLI second later gate actualization comparison
 

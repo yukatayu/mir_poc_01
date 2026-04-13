@@ -1017,6 +1017,10 @@
   - sample-visible theorem/model-check summary milestone fixed 後の次段として、privileged `stdin/stdout` を避けた capability-scoped I/O / adapter boundary を docs-first first cut にし、visualizer / host substrate / host runtime と FFI / engine adapter をどう押し分けるかを比較する。
 - `specs/examples/386-current-l2-docs-first-io-host-facing-port-boundary-ready-minimal-docs-first-io-host-facing-port-boundary-threshold.md`
   - docs-first I/O / host-facing port boundary の minimum を、entry criteria、current boundary、consumer/provider refs、guard、kept-later refs で固定する。
+- `specs/examples/387-current-l2-docs-first-io-host-facing-port-boundary-ready-stable-malformed-missing-option-first-reopen-actualization-comparison.md`
+  - docs-first I/O / host-facing port boundary fixed 後の次段として、missing-option family first reopen を helper-local compare に留めるか、`e16/e17/e18` triplet の source-backed widening first へ進めるかを比較する。
+- `specs/examples/388-current-l2-stable-malformed-missing-option-first-reopen-actualization-ready-minimal-stable-malformed-missing-option-first-reopen-threshold.md`
+  - stable malformed missing-option first reopen actualization の minimum を、entry criteria、triplet family、actualization mode、staging、guard、kept-later refs で固定する。
 - `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
   - source-sample emitted verification artifact wiring fixed 後の次段として、sample-facing theorem/model-check evidence を README / `.docs` / snapshot docs のどこでどう見せ、current bless/review flow をどこまで repo-local に留めるかを比較する。
 - `specs/examples/384-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-minimal-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-threshold.md`

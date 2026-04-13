@@ -248,6 +248,15 @@
   - `specs/examples/385-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-docs-first-io-host-facing-port-boundary-comparison.md`
   - `specs/examples/386-current-l2-docs-first-io-host-facing-port-boundary-ready-minimal-docs-first-io-host-facing-port-boundary-threshold.md`
 
+## 2026-04-13 Phase 6 stable malformed missing-option first reopen actualization comparison addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_003.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/47-current-l2-missing-option-second-checker-spike.md`
+  - `specs/examples/369-current-l2-model-check-concrete-carrier-first-actualization-gate-ready-stable-malformed-broader-follow-up-inventory-comparison.md`
+  - `specs/examples/370-current-l2-stable-malformed-broader-follow-up-inventory-ready-minimal-stable-malformed-broader-follow-up-inventory-threshold.md`
+  - `specs/examples/387-current-l2-docs-first-io-host-facing-port-boundary-ready-stable-malformed-missing-option-first-reopen-actualization-comparison.md`
+  - `specs/examples/388-current-l2-stable-malformed-missing-option-first-reopen-actualization-ready-minimal-stable-malformed-missing-option-first-reopen-threshold.md`
+
 ## 2026-04-13 Phase 6 stable malformed broader follow-up inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

@@ -128,11 +128,11 @@ old `Phase 7` には、
 
 近接 mainline は次である。
 
-1. stable malformed missing-option first reopen actualization comparison
-2. reserve final public parser / checker / runtime API first later gate actualization comparison
+1. final public parser / checker / runtime API first later gate actualization comparison
+2. reserve stable malformed missing-option first source-backed widening actualization
 3. reserve public operational CLI second later gate actualization comparison
 
-ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...384` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check milestone を閉じ、`specs/examples/385...386` で `Macro 7` の docs-first host-facing integration boundary を固定し、その次に `Macro 4` の missing-option actualization comparison を reopen する** である。
+ここでの自然な読みは、**shared-space docs-first follow-up の checkpoint を `specs/examples/375...376` までで一旦閉じ、その後 `specs/examples/377...384` で fixed / actualize した carrier line に従って `Macro 5` の sample-visible theorem/model-check milestone を閉じ、`specs/examples/385...386` で `Macro 7` の docs-first host-facing integration boundary を固定し、`specs/examples/387...388` で `Macro 4` の missing-option actualization comparison を source-backed widening first に寄せた後、public-side actualization line を reopen する** である。
 
 ## near-term reserve line
 

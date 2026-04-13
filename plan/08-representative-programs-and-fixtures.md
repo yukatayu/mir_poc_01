@@ -75,7 +75,8 @@
   - source-sample emitted verification artifact wiring も fixed 済みであり、`run_current_l2_source_sample` の public/report shape を変えず、runtime test/support helper-local route として reached row を review-unit / model-check carrier helper output へ fan-out する current cutを actualize 済みである。
   - sample-facing theorem/model-check evidence summary and bless/review flow も fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採っている。
   - docs-first I/O / host-facing port boundary も fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す。
-  - repo-level current line は stable malformed missing-option first reopen actualization comparison に置く。
+  - stable malformed missing-option first reopen actualization comparison も fixed 済みであり、helper-local compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet、current next actualization mode は source-backed widening first に置く。
+  - repo-level current line は final public parser / checker / runtime first later gate actualization comparison に置く。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧
