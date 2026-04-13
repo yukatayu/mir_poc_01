@@ -1076,11 +1076,11 @@ current repo では old `FutureWork` bucket を再導入しない方が自然で
 - Mirrorea / shared-space は **Macro 6 docs-first boundary track** として再入場させる
 - Typed-Effect Wiring Platform と PrismCascade は **adjacent boundary track** に留める
 - upper-layer application / domain target は **user-spec-required gate** に留める
-- shared-space line の next docs-first reopen は
+- shared-space docs-first follow-up checkpoint は
   - identity / auth layering
   - admission policy / compile-time visibility
   - authority / resource ownership
-  の順に読む
+  の 3 package までで fixed 済みと読む
 
 ### まだ current re-entry bundle に入れないもの
 

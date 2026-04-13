@@ -213,7 +213,7 @@ stable malformed broader follow-up inventory も fixed 済みであり、broader
 public operational CLI / final public contract later gate も fixed 済みであり、`run_current_l2_source_sample` current gate を巻き戻さず、first later gate を final public parser / checker / runtime API、second later gate を public operational CLI に置き、repo layout / accepted-set / repo-local helper surface を current final contract の外へ残す current cut を採った。
 
 current mainline は、
-**repo-level current line は shared-space authority / resource ownership reopen**
+**repo-level current line は model-check concrete carrier actualization comparison**
 である。
 
 ここでは fixed entry criteria を崩さずに、
@@ -222,12 +222,12 @@ current mainline は、
 - proof-notebook bridge-sketch reopen ordering (`plain docs-only bridge sketch` first, `compare-ready bridge sketch` second)
 - theorem-side compare-ready bridge sketch second reopen（fixed 済み）
 - deferred `e3` actualization reopen timing（fixed 済み）
-- shared-space authority / resource ownership reopen
 - model-check concrete carrier actualization comparison
 - model-check concrete carrier first actualization
 - source-sample emitted verification artifact wiring
 - sample-facing theorem / model-check evidence summary and bless/review flow
 - docs-first I/O / host-facing port boundary comparison（working label, later）
+- stable malformed missing-option first reopen actualization comparison（reserve）
 - stable malformed missing-option first reopen actualization comparison（reserve）
 - final public parser / checker / runtime API first later gate actualization comparison（reserve）
 
