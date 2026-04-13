@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-13 18:09 JST
+最終更新: 2026-04-13 19:15 JST
 
 ## この文書について
 
@@ -24,7 +24,7 @@
   - `Macro 6` shared-space final catalog / operational realization
   は later mixed gate に残る。
 - second source-sample cluster sequencing は `specs/examples/349...350` により fixed 済みであり、post-sextet first cluster は `e21` / `e22` try-rollback locality contrast に置く。
-- actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e4` / `e19` / `e21` / `e22` / `e23` の octet に進んだ。
+- actual `e22` contrast-row source actualization も `specs/examples/351...352` により fixed 済みであり、current authored source sample は `e1` / `e2` / `e3` / `e4` / `e16` / `e19` / `e21` / `e22` / `e18` / `e23` の decet に進んだ。
 - stable static malformed post-contrast sequencing は `specs/examples/353...354` により fixed 済みであり、second broader cluster は stable reason-code / fixture-static cluster に置く。
 - parser / checker / runtime public surface inventory は `specs/examples/355...356` により fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split に整理した。
 - Mirrorea/shared-space docs-first re-entry は `specs/examples/357...358` により fixed 済みであり、`mirrorea_fabric_boundary + shared_space_practical_boundary` を current boundary core、Typed-Effect / Prism を adjacent track、shared-space final catalog と upper-layer app target を user-spec-required gate に置く current cut を採った。
@@ -44,31 +44,23 @@
 - docs-first I/O / host-facing port boundary は `specs/examples/385...386` により fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す current cut を採った。`host-facing port` は working label に留め、Typed-Effect Wiring Platform と Mirrorea/shared-space の affiliation は OPEN に残す。
 - stable malformed missing-option first reopen actualization comparison は `specs/examples/387...388` により fixed 済みであり、existing helper-local compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet に維持し、current next actualization mode は source-backed widening first に置く current cut を採った。implementation cut を narrower に取る場合でも `e16` lead は staging note に留め、capability second、duplicate later、`TryFallback` / `AtomicCut` malformed-static later を維持する。
 - final public parser / checker / runtime first later gate actualization comparison は `specs/examples/389...390` により fixed 済みであり、current first later cut は `run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` を public entry / report に置く runtime-led thin facade に留め、`CurrentL2LoweredSourceProgram` / `CurrentL2RuntimeSkeletonReport` / `CurrentL2CheckerFloorReport` / `RunReport` を nested carrier として扱う。`run_current_l2_runtime_skeleton`、`lower_current_l2_fixed_source_text`、semantic/checker core、parser carrier floor は support-only bucket、`resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local helper / example surface は excluded bucket に残す。
-- current promoted line は **stable malformed missing-option first source-backed widening actualization** であり、その後に
-  - reserve `public operational CLI second later gate actualization comparison`
+- stable malformed missing-option first source-backed widening actualization は `specs/examples/391...392` により fixed 済みであり、`e16` / `e18` を source-authored static-stop pair として sample / runner / ladder / regression helper に widen しつつ、`e17` は same-family staged guard に留める current cut を採った。
+- current promoted line は **public operational CLI second later gate actualization comparison** であり、その後に
   - reserve `final public parser / checker / runtime thin-facade later support actualization`
+  - reserve `stable malformed capability second reopen actualization comparison`
   を置くのが自然である。
 
 ## 次に自走で進める順番
 
 | 順番 | macro phase | feature family | current stage -> next stage | task package | rough 所要 | 自走可否 |
 |---|---|---|---|---|---|---|
-| 1 | `Macro 4` | malformed cluster widening | `S6 -> S6` | stable malformed missing-option first source-backed widening actualization | 1〜3 task / 数日〜1週 | 自走可能 |
-| 2 | `Macro 7` | operational wrapper boundary | `S3-S4 -> S4` | public operational CLI second later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
-| 3 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime thin-facade later support actualization | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 1 | `Macro 7` | operational wrapper boundary | `S3-S4 -> S4` | public operational CLI second later gate actualization comparison | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 2 | `Macro 7` | public operational contract | `S4 -> S4-S5` | final public parser/checker/runtime thin-facade later support actualization | 1〜3 task / 数日〜1週 | 一部自走可能 |
+| 3 | `Macro 4` | malformed cluster widening | `S6 -> S6` | stable malformed capability second reopen actualization comparison | 1〜3 task / 数日〜1週 | 自走可能 |
 
 ## 自走可能な task package
 
-### Package 1. stable malformed missing-option first source-backed widening actualization
-
-- macro phase
-  - `Macro 4`
-- 目的
-  - helper-local compare を entry evidence に使いつつ、`e16/e17/e18` family を current source sample / runner / ladder / regression line にどう narrow に widen するかを actualize する。
-- 完了条件
-  - missing-option first / capability second の順序を巻き戻さず、source-backed widening first cut と `e17` staged guard、duplicate / try-rollback kept-later guard を current task map に整理する。
-
-### Package 2. public operational CLI second later gate actualization comparison
+### Package 1. public operational CLI second later gate actualization comparison
 
 - macro phase
   - `Macro 7`
@@ -77,7 +69,7 @@
 - 完了条件
   - runtime-led thin facade first later cut を巻き戻さず、public operational CLI と repo-local support surface の境界を narrow に整理する。
 
-### Package 3. final public parser/checker/runtime thin-facade later support actualization
+### Package 2. final public parser/checker/runtime thin-facade later support actualization
 
 - macro phase
   - `Macro 7`
@@ -86,19 +78,18 @@
 - 完了条件
   - `run_current_l2_source_sample` thin facade を巻き戻さず、support-only tranche / excluded bucket の guard を保ったまま later support cut だけを narrow に整理する。
 
+### Package 3. stable malformed capability second reopen actualization comparison
+
+- macro phase
+  - `Macro 4`
+- 目的
+  - missing-option source-backed widening close 後の malformed-side next reopen として、capability family をどの helper/source-backed cut から再開するかを整理する。
+- 完了条件
+  - missing-option first / capability second の順序を巻き戻さず、capability family current cut と kept-later guard を current task map に整理する。
+
 ## 研究を通して見つけること
 
-### Discovery 1. stable malformed missing-option first source-backed widening actualization
-
-- 概要
-  - broader malformed follow-up inventory と missing-option first reopen actualization comparison fixed 後に、`e16/e17/e18` family を current source sample / runner / ladder line にどう narrow に widen するか。
-- 何に影響するか
-  - `Macro 4`
-  - malformed cluster widening speed
-- current recommendation
-  - **helper-local compare を entry evidence に使いつつ、`e16/e18` first cut と `e17` staged guard を current source-backed widening に落とす**。
-
-### Discovery 2. public operational CLI second later gate actualization comparison
+### Discovery 1. public operational CLI second later gate actualization comparison
 
 - 概要
   - runtime-led thin library facade first cut の後段として、public operational CLI を repo-local helper / example surface とどう分けて narrow に actualize するか。
@@ -108,7 +99,7 @@
 - current recommendation
   - **library-side thin facade first cut を巻き戻さず、CLI は second later gate として separate に扱う**。
 
-### Discovery 3. final public parser/checker/runtime thin-facade later support actualization
+### Discovery 2. final public parser/checker/runtime thin-facade later support actualization
 
 - 概要
   - runtime-led thin facade first later cut fixed 後に、standalone parser/checker support entry を later public support としてどこまで切るか。
@@ -117,6 +108,16 @@
   - public operational contract の厚み
 - current recommendation
   - **thin facade を first cut に保ち、standalone support actualization は later package として separate に扱う**。
+
+### Discovery 3. stable malformed capability second reopen actualization comparison
+
+- 概要
+  - missing-option source-backed widening close 後に、capability family (`e13/e20`) を helper-local compare / source-backed widening のどちらから reopen するか。
+- 何に影響するか
+  - `Macro 4`
+  - malformed cluster widening speed
+- current recommendation
+  - **missing-option first / capability second の順序を保ち、capability family は separate reopen line に置く**。
 
 ## user が決める必要があること
 

@@ -2472,3 +2472,18 @@
   - `specs/examples/389-current-l2-stable-malformed-missing-option-first-reopen-actualization-ready-final-public-parser-checker-runtime-first-later-gate-actualization-comparison.md`
   - `specs/examples/390-current-l2-final-public-parser-checker-runtime-first-later-gate-actualization-ready-minimal-final-public-parser-checker-runtime-first-later-gate-threshold.md`
   - `docs/reports/0683-phase6-final-public-parser-checker-runtime-first-later-gate-actualization-comparison-package.md`
+
+### 2026-04-13 phase6 missing option source backed widening addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_003.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/391-current-l2-final-public-parser-checker-runtime-first-later-gate-actualization-ready-stable-malformed-missing-option-first-source-backed-widening-actualization-comparison.md`
+  - `specs/examples/392-current-l2-stable-malformed-missing-option-first-source-backed-widening-actualization-ready-minimal-stable-malformed-missing-option-first-source-backed-widening-threshold.md`
+  - `docs/reports/0684-phase6-stable-malformed-missing-option-source-backed-widening-package.md`
+  - `samples/current-l2/e16-malformed-missing-chain-head-option.txt`
+  - `samples/current-l2/e18-malformed-missing-successor-option.txt`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`

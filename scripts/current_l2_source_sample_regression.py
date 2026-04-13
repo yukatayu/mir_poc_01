@@ -76,6 +76,14 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         note="current authored static stop",
     ),
     InventoryRow(
+        sample_stem="e16-malformed-missing-chain-head-option",
+        authored_status="source-authored",
+        expected_static="malformed",
+        expected_runtime="not_evaluated",
+        formal_hook="fixture_static_cluster",
+        note="missing-option family head-gap static stop",
+    ),
+    InventoryRow(
         sample_stem="e19-malformed-target-mismatch",
         authored_status="source-authored",
         expected_static="malformed",
@@ -98,6 +106,14 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         expected_runtime="success",
         formal_hook="runtime_try_cut_cluster",
         note="post-sextet first contrast-row runtime path",
+    ),
+    InventoryRow(
+        sample_stem="e18-malformed-missing-successor-option",
+        authored_status="source-authored",
+        expected_static="malformed",
+        expected_runtime="not_evaluated",
+        formal_hook="fixture_static_cluster",
+        note="missing-option family successor-gap static stop",
     ),
     InventoryRow(
         sample_stem="e23-malformed-try-fallback-missing-fallback-body",
@@ -309,6 +325,22 @@ def plan_regression_commands(
             ),
         ),
         RegressionCommand(
+            name="static formal hook smoke for e16-malformed-missing-chain-head-option",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-static",
+                "e16-malformed-missing-chain-head-option",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(
+                    effective_label, "e16-malformed-missing-chain-head-option"
+                ),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
             name="static formal hook smoke for e19-malformed-target-mismatch",
             argv=(
                 python_cmd,
@@ -319,6 +351,22 @@ def plan_regression_commands(
                 str(artifact_root),
                 "--run-label",
                 smoke_run_label(effective_label, "e19-malformed-target-mismatch"),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
+            name="static formal hook smoke for e18-malformed-missing-successor-option",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-static",
+                "e18-malformed-missing-successor-option",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(
+                    effective_label, "e18-malformed-missing-successor-option"
+                ),
                 "--overwrite",
             ),
         ),

@@ -1029,6 +1029,10 @@
   - missing-option first reopen comparison fixed 後の次段として、library-side final public parser / checker / runtime API の first later gate actualization をどの symbol-level cut から narrow に始めるかを比較する。
 - `specs/examples/390-current-l2-final-public-parser-checker-runtime-first-later-gate-actualization-ready-minimal-final-public-parser-checker-runtime-first-later-gate-threshold.md`
   - final public parser / checker / runtime first later gate actualization の minimum を、runtime-led thin facade entry、nested report carrier、support bucket、excluded bucket、guard、kept-later refs で固定する。
+- `specs/examples/391-current-l2-final-public-parser-checker-runtime-first-later-gate-actualization-ready-stable-malformed-missing-option-first-source-backed-widening-actualization-comparison.md`
+  - final public parser / checker / runtime first later gate actualization fixed 後の次段として、missing-option family の source-backed widening first cut を `e16/e18` actual row + `e17` staged guard に絞る current choice を比較する。
+- `specs/examples/392-current-l2-stable-malformed-missing-option-first-source-backed-widening-actualization-ready-minimal-stable-malformed-missing-option-first-source-backed-widening-threshold.md`
+  - missing-option first source-backed widening actualization の minimum を、actualized rows、staged guard、actualized surfaces、reached stage、kept-later refs で固定する。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

@@ -1,0 +1,10 @@
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+
+      chain profile_ref = primary
+      fallback ghost @ lineage(primary -> ghost)
+    }
+  }
+}
