@@ -2,303 +2,77 @@
 
 ## 目的
 
-この文書は、今すぐ着手しないが計画には明示的に入れておくべき重い workstream を整理する。
-current L2 parser-free PoC の延長だけでは扱いきれない論点を、将来の独立した workstream として切り出す。
+この文書は、current mainline や current detailed research program に即昇格させない heavy workstream を整理する。
+detail-side で今まさに詰める線は `plan/18` に置き、ここでは **まだ重すぎるもの** をまとめる。
 
-## なぜ今 plan に含めるのか
+## heavy workstream 一覧
 
-- 後で急に現れる論点ではないため
-- 現在の semantics / helper / notation の設計が、将来の型・解析・証明可能性にどの程度影響するかを意識しておく必要があるため
-- current L2 でまだ扱わない理由を明文化し、scope creep を防ぐため
+### 1. full strong type system
 
-## workstream 1. 型システムの強さ
+- 主題
+  - ownership / lifetime / contract / effect / capability をどこまで型規則へ持ち上げるか。
+- なぜ heavy か
+  - parser / checker / theorem / runtime を同時に拘束するため。
+- current recommendation
+  - first attachment candidate inventory までは `plan/18` で進める。
+  - full calculus と final syntax はここに残す。
 
-### 主題
+### 2. production-grade theorem proving
 
-- ownership / lifetime / contract / effect / capability をどこまで型レベルへ持ち上げるか
-- inference と annotation のバランス
-- linearity / monotonicity をどこまで型規則で強制するか
+- 主題
+  - concrete prover binding、proof artifact contract、review workflow finalization。
+- なぜ heavy か
+  - tool choice と public contract が逆流しやすいため。
+- current recommendation
+  - semantic-core theorem pilot planning までは `plan/18` で進める。
+  - concrete prover / proof object finalization はここに残す。
 
-### entry criteria
+### 3. production-grade model checking / protocol verification
 
-- current L2 semantics の failure space と fallback 読みが十分安定していること
-- parser 境界の最小 shape が見えていること
+- 主題
+  - concrete model-check tool binding、property language、protocol-family public contract。
+- なぜ heavy か
+  - runtime policy / shared-space / public checker / host integration と強く絡むため。
+- current recommendation
+  - projection / property-family reserve planning までは `plan/18` で進める。
+  - production contract はここに残す。
 
-### current inventory note
+### 4. full static analysis / decidability line
 
-- `place` / `try-fallback` / `perform on` / `perform via` / statement-local `require` / `ensure` / option declaration core / option-local `admit` / explicit edge-row family までは first parser cut 候補として inventory 化してよい。
-- exact lexical polish と richer predicate grammar はまだ companion / OPEN に残す。
-- same-lineage static evidence floor、malformed / underdeclared rejection、minimal capability strengthening prohibition、request-local / option-local clause attachment、minimal predicate fragment、`try` / rollback locality の structural floor までは first checker cut 候補として inventory 化してよい。
-- current static-only corpus baseline では、same-lineage floor `4`、capability floor `2`、missing-option structure floor `3` まで source-backed な regression baseline が見え始めているため、heavy workstream 前の checker-boundary整理は次段 mainline に戻してよい。
-- same-lineage floor については helper-local first checker spike を入れてよいが、heavy workstream に入る前の current 段階では final checker API へはまだ固定しない。
-- missing-option structure floor についても helper-local second checker spike を入れてよいが、same-lineage / missing-option を共通 helper に寄せるかどうかは heavy workstream 前にもう一段 narrow に比較する。
-- capability strengthening floor についても helper-local third checker spike を入れてよいが、same-lineage / missing-option / capability を共通 helper に寄せるかどうかは heavy workstream 前にもう一段 narrow に比較する。
+- 主題
+  - static checker prototype、decidability matrix、complexity note。
+- なぜ heavy か
+  - surface、IR、proof boundary が揃わないと false commitment になりやすいため。
 
-### current reserve hypothesis
+### 5. backend / codegen / editor surface
 
-- current repo の source-backed checker / boundary inventory を読むと、typed work を final parser grammar、final runtime contract、proof object carrier から始めるより、semantic carrier / checker boundary / declared source-side boundary のどこが first attachment candidate かを比較する方が自然そうである。
-- `require` / `ensure`、capability / `lease` / `admit`、declared target、edge-local lineage は source-visible first candidate として比較してよいが、これを settled first surface とはまだ言わない。
-- concrete type-theory brand や full-strength calculus への commit は、heavy workstream entry 以後に残す。
+- 主題
+  - LLVM-family backend、external codegen、editor / LSP / graph tooling。
+- なぜ heavy か
+  - syntax / lowering / runtime / public packaging を早期固定しやすいため。
 
-### 今すぐやらない理由
+### 6. operational shared-space / fabric runtime
 
-- 現在は syntax と semantics の companion 整理段階であり、型規則を先に固定すると全体が早期凍結しやすい
+- 主題
+  - final activation / authority / auth / consistency / fairness catalog と concrete protocol profile。
+- なぜ heavy か
+  - user specification と operational policy の影響が大きいため。
 
-### 将来 deliverable 候補
+### 7. raw external integration
 
-- typing judgment の最小スケッチ
-- representative programs に対する typing walk-through
-- annotation burden / inference burden の比較表
+- 主題
+  - raw FFI、game engine direct binding、production visualizer / substrate integration。
+- なぜ heavy か
+  - host-facing boundaryを越えた concrete target choice が必要になるため。
 
-## workstream 2. 静的解析可能性
+### 8. domain / application realization
 
-### 主題
+- 主題
+  - synchronized shared-space、collaborative editing、virtual-world 系などの concrete app。
+- なぜ heavy か
+  - acceptance criteria と evaluation target が user 依存だから。
 
-- lineage、fallback admissibility、capability mismatch、underdeclared case を静的にどこまで検出できるか
-- parser-free fixture の expectation を、どこまで static analysis に移せるか
+## current recommendation
 
-### entry criteria
-
-- AST / syntax boundary が一定以上安定していること
-- current helper stack の public behavior と thin delegation が整理されていること
-
-### 今すぐやらない理由
-
-- 解析対象の surface と IR がまだ companion notation 段階である
-
-### 将来 deliverable 候補
-
-- static checker の prototype
-- representative fixture に対する static-only 判定の formalization
-- false positive / false negative trade-off の整理
-
-## workstream 3. 定理証明可能性
-
-### 主題
-
-- current L2 invariants を theorem prover に送れる形へ落とせるか
-- canonical normalization、no re-promotion、rollback-cut non-interference などの性質をどう証明するか
-
-### entry criteria
-
-- semantics が current L2 で十分安定していること
-- syntax ではなく semantic core を対象にできること
-
-### 今すぐやらない理由
-
-- まだ proof object を支える core formalization が薄い
-- 先に parser-free PoC と docs mirror の drift を抑える方が費用対効果が高い
-
-### current reserve recommendation
-
-- first theorem line は syntax tree 全体ではなく semantic-core relation library から始めるのが自然である。
-- priority は `canonical_normalization_law`、`no_re_promotion`、その後に `rollback_cut_non_interference` と読むのが current reserve recommendation である。
-- proof object、notebook bridge、verifier handoff row は collapse せず別 line として保つ。
-- concrete theorem prover brand は still OPEN であり、Lean-first のような tool choice は current repo judgment にしない。
-
-### 将来 deliverable 候補
-
-- proof sketch
-- theorem prover 向け core relation の encoding 案
-- どの invariant が machine-checked proof に向くかの棚卸し
-
-## workstream 4. 決定可能性
-
-### 主題
-
-- predicate sublanguage、fallback chain validation、contract check、effect wiring のどこが decidable か
-- undecidable / semi-decidable な論点をどこで切るか
-
-### entry criteria
-
-- current L2 の範囲が一定程度閉じていること
-- static analysis の土台が見えていること
-
-### 今すぐやらない理由
-
-- 現時点では semantics の companion 整理が優先であり、decision procedure 設計はまだ早い
-
-### 将来 deliverable 候補
-
-- decidability matrix
-- complexity note
-- language core と external verifier 境界の提案
-
-## workstream 5. 実装可能性 / complexity
-
-### 主題
-
-- parser、checker、runtime、host interface、scheduler を実装したときの複雑さ
-- current semantics が implementation complexity をどこまで押し上げるか
-- LLVM-family backend / external codegen / backend IR bridge をいつ接続するか
-- host-facing I/O / adapter / visualizer / FFI / engine integration をどの boundary で切るか
-
-### entry criteria
-
-- parser 前提の syntax / AST / runtime boundary がもう少し安定していること
-
-### 今すぐやらない理由
-
-- まだ production runtime を設計する段階ではない
-- fixed-subset source corpus、parser-to-`Program` lowering、syntax-backed runner、verification ladderがまだ narrow 化の途中であり、backend を先につなぐと semantics / syntax / lowering の柔軟性を失いやすい
-
-### current reserve recommendation
-
-- public surface staging は、library-side canonical entry first、operational CLI second、parser / checker / runtime expert surface later and separately と読むのが自然である。
-- semantics-bearing / typed / machine-facing transform は、repo-local shell や Python helper より先に Rust support/helper module に寄せる。
-- repo-local orchestration / docs validation / regression glue は、final public contract に silent promotion しない限り mixed workflow のままでよい。
-- host-plan / harness artifact は final host contract ではなく、visualizer / host substrate / FFI / engine adapter は still later staged boundary に残す。
-
-### 将来 deliverable 候補
-
-- subsystem ごとの complexity inventory
-- prototype 実装比較
-- benchmark の最小設計
-- backend IR bridge / codegen adapter inventory
-- capability-scoped port / adapter inventory
-- visualizer / host substrate / FFI / engine adapter の staged boundary note
-
-## workstream 6. 非同期制御 / scheduler / memory-model boundary
-
-### 主題
-
-- `atomic_cut` のような local cut と、higher-level async-control / ordering / fairness semantics をどこで分けるか
-- event-tree / authority-serial transition / witness-aware commit のような高位制御族を language / runtime / external verifier のどこに置くか
-- low-level memory-order 語彙を採るべきか、それとも higher-level room / authority / consistency family に留めるべきか
-
-### entry criteria
-
-- shared-space / membership / authority / consistency / fairness の docs-first boundary がある程度揃っていること
-- small decidable core inventory が見えており、local cut と global ordering の切り分けを語れること
-
-### 今すぐやらない理由
-
-- current repo で source-backed なのは `atomic_cut` の place-local cut と rollback frontier line までであり、scheduler / fairness / hardware-memory-like semantics まで immediate に固定する段階ではない
-- low-level memory-order を早く入れると parser / checker / runtime / proof のすべてが同時に重くなりやすい
-- current executable sample work は fixed subset を厚くすること自体はよいが、higher-level async-control family や low-level memory-order-like surface を sample core として同時に広げる段階ではない
-
-### current reserve recommendation
-
-- `atomic_cut` は place-local cut の current executable nucleus に留める。
-- higher-level ordering / control semantics は authority-serial、witness-aware、event-tree debug view、room policy family として別 line に残す。
-- low-level memory-order vocabulary は immediate candidate にせず、どこまでを decidable core に残し、どこから先を theorem prover / model-check / runtime policy へ handoff するかを先に整理する。
-- concrete operational realization や verifier binding は still later に残す。
-
-### current inventory note
-
-- `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md` では、current first package として
-  - `core_static_checker`
-  - `theorem_prover_boundary`
-  - `protocol_verifier_boundary`
-  - `runtime_policy_boundary`
-  の 4-way split を整理済みである。
-- `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md` と `specs/examples/128-current-l2-handoff-artifact-threshold-comparison.md` により、proof-obligation matrix は docs 正本、external handoff artifact は mixed row bundle を current default に維持し、boundary-specific split と actual emitter は concrete consumer pressure が出たときだけ reopen する threshold まで切れている。
-- `specs/examples/129-current-l2-first-external-consumer-pressure-comparison.md` により、first concrete external consumer pressure の current first practical candidate は `theorem_prover_boundary` に置く。
-- `specs/examples/130-current-l2-theorem-line-narrow-actualization-comparison.md` により、theorem line の current first cut は actual emitter ではなく docs-only projection bundle に留める。
-- `specs/examples/131-current-l2-theorem-line-evidence-ref-family-comparison.md` により、theorem-side `evidence_refs` は typed symbolic ref family を current first choice に置き、actual path / URI は later reopen に残す。
-- `specs/examples/132-current-l2-theorem-line-public-checker-migration-threshold.md` により、current phase では theorem-side projection bundle を docs-only bridge に留め、public checker migration は concrete theorem consumer pressure が出たときだけ reopen する threshold まで固定した。
-- `specs/examples/133-current-l2-theorem-line-minimum-contract-row-comparison.md` により、minimum contract row core は `obligation_kind + evidence_refs` に留め、`goal_text` / `proof_hint` / `consumer_hint` は later consumer-specific attachment に残す current first choice まで固定した。
-- `specs/examples/134-current-l2-theorem-line-consumer-class-comparison.md` により、first practical consumer class は `proof_notebook` に置き、`proof_assistant_adapter` は second practical candidate、`theorem_export_checker` は later candidate に留める current first choice まで固定した。
-- `specs/examples/135-current-l2-theorem-line-notebook-attachment-family-comparison.md` により、`proof_notebook` first bridge の current attachment は `goal_text` に留め、`proof_hint` / `consumer_hint` は later reopen に残す current first choice まで固定した。
-- `specs/examples/136-current-l2-theorem-line-notebook-bridge-artifact-threshold.md` により、current phase では `proof_notebook` first bridge を docs-only derived view に留め、named notebook bridge sketch と actual emitted notebook artifact は concrete notebook workflow pressure が出たときだけ reopen 候補に残す current first choice まで固定した。
-- `specs/examples/137-current-l2-theorem-line-next-consumer-pressure-comparison.md` により、current next practical reopen は concrete notebook workflow pressure comparison を first choice、`proof_assistant_adapter` consumer pressure comparison を second practical candidate に置く current order まで固定した。
-- `specs/examples/138-current-l2-theorem-line-concrete-notebook-workflow-pressure-comparison.md` により、concrete notebook workflow pressure の current first threshold は human review checklist / walkthrough pressure に置く current first choice まで固定した。
-- `specs/examples/139-current-l2-theorem-line-notebook-review-unit-named-bundle-threshold.md` により、current first cut は review checklist / walkthrough unit を docs-only named bundle に寄せるところまでに留め、stronger notebook bridge sketch は later reopen に残す current first choice まで固定した。
-- `specs/examples/140-current-l2-theorem-line-review-unit-to-bridge-sketch-comparison.md` により、current first cut は named review unit を docs-only notebook bridge sketch に寄せるところまでに留め、compare / bless-like review flow metadata は later reopen に残す current first choice まで固定した。
-- `specs/examples/141-current-l2-theorem-line-bridge-sketch-compare-metadata-threshold.md` により、current first cut は bridge sketch に compare basis refs までを足し、bless decision state は later reopen に残す current first choice まで固定した。
-- `specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md` により、current first cut は compare-ready bridge sketch に bless decision state までを足し、review-session metadata は later reopen に残す current first choice まで固定した。
-- `specs/examples/143-current-l2-theorem-line-bless-ready-bridge-review-session-threshold.md` により、current first cut は bless-ready bridge sketch に review-note refs までを足し、retained notebook path / review session lifecycle は later reopen に残す current first choice まで固定した。
-- `specs/examples/144-current-l2-theorem-line-review-linked-bless-bridge-retained-notebook-threshold.md` により、current first cut は review-linked bless bridge に retained-notebook ref までを足し、actual retained path policy は later reopen に残す current first choice まで固定した。
-- `specs/examples/145-current-l2-theorem-line-retained-bridge-review-session-link-threshold.md` により、current first cut は retained-ready bless bridge に review-session ref までを足し、actor / timestamp / lifecycle state は later reopen に残す current first choice まで固定した。
-- `specs/examples/146-current-l2-theorem-line-session-linked-retained-bridge-review-observation-threshold.md` により、current first cut は session-linked retained bridge に `reviewed_by_ref + reviewed_at_ref` までを足し、session lifecycle state は later reopen に残す current first choice まで固定した。
-- `specs/examples/147-current-l2-theorem-line-observed-session-lifecycle-threshold.md` により、current first cut は observed session-linked retained bridge に `review_session_state` までを足し、retention state / actual retained path policy は later reopen に残す current first choice まで固定した。
-- `specs/examples/148-current-l2-theorem-line-lifecycle-ready-retention-state-threshold.md` により、current first cut は lifecycle-ready retained bridge に `retention_state` までを足し、actual retained path policy / emitted artifact は later reopen に残す current first choice まで固定した。
-- `specs/examples/149-current-l2-theorem-line-retention-ready-path-policy-threshold.md` により、current first cut は retention-ready retained bridge に `retained_path_policy_ref` までを足し、actual emitted notebook artifact は later reopen に残す current first choice まで固定した。
-- `specs/examples/150-current-l2-theorem-line-path-ready-emitted-artifact-threshold.md` により、current first cut は path-ready retained bridge に `emitted_artifact_ref` までを足し、actual handoff emitter / consumer adapter policy は later reopen に残す current first choice まで固定した。
-- `specs/examples/151-current-l2-theorem-line-emitted-ready-handoff-emitter-threshold.md` により、current first cut は emitted-ready retained bridge に `handoff_emitter_ref` までを足し、actual consumer adapter / notebook exchange rule は later reopen に残す current first choice まで固定した。
-- `specs/examples/152-current-l2-theorem-line-emitter-linked-consumer-adapter-threshold.md` により、current first cut は emitter-linked retained bridge に `consumer_adapter_ref` までを足し、actual notebook exchange rule / adapter-local validation は later reopen に残す current first choice まで固定した。
-- `specs/examples/153-current-l2-theorem-line-adapter-linked-exchange-rule-threshold.md` により、current first cut は adapter-linked retained bridge に `exchange_rule_ref` までを足し、adapter-local validation / environment-specific invocation surface は later reopen に残す current first choice まで固定した。
-- `specs/examples/154-current-l2-theorem-line-exchange-ready-adapter-validation-threshold.md` により、current first cut は exchange-ready retained bridge に `adapter_validation_ref` までを足し、actual notebook exchange rule body / environment-specific invocation surface は later reopen に残す current first choice まで固定した。
-- `specs/examples/155-current-l2-theorem-line-validation-ready-invocation-surface-threshold.md` により、current first cut は validation-ready retained bridge に `consumer_invocation_surface_ref` までを足し、actual notebook exchange body / concrete runtime coupling は later reopen に残す current first choice まで固定した。
-- `specs/examples/156-current-l2-theorem-line-invocation-ready-exchange-body-threshold.md` により、current first cut は invocation-ready retained bridge に `exchange_rule_body_ref` までを足し、concrete runtime coupling / transport protocol / failure body は later reopen に残す current first choice まで固定した。
-- `specs/examples/157-current-l2-theorem-line-exchange-body-ready-runtime-coupling-threshold.md` により、current first cut は exchange-body-ready retained bridge に `runtime_coupling_ref` までを足し、concrete transport protocol / failure body は later reopen に残す current first choice まで固定した。
-- `specs/examples/158-current-l2-theorem-line-runtime-coupling-ready-transport-protocol-threshold.md` により、current first cut は runtime-coupling-ready retained bridge に `transport_protocol_ref` までを足し、concrete failure body は later reopen に残す current first choice まで固定した。
-- `specs/examples/159-current-l2-theorem-line-transport-ready-failure-body-threshold.md` により、current first cut は transport-ready retained bridge に `failure_body_ref` までを足し、actual runtime invocation protocol / host binding / failure wording は later reopen に残す current first choice まで固定した。
-- `specs/examples/160-current-l2-theorem-line-failure-ready-actual-invocation-protocol-threshold.md` により、current first cut は failure-ready retained bridge に `actual_invocation_protocol_ref` までを足し、consumer-host-specific binding / failure wording は later reopen に残す current first choice まで固定した。
-- `specs/examples/161-current-l2-theorem-line-invocation-ready-host-binding-threshold.md` により、current first cut は invocation-ready retained bridge に `consumer_host_binding_ref` までを足し、failure wording と actual notebook runtime handoff actualization は later reopen に残す current first choice まで固定した。
-- `specs/examples/162-current-l2-theorem-line-binding-ready-failure-wording-threshold.md` により、current first cut は binding-ready retained bridge に `failure_wording_ref` までを足し、actual notebook runtime handoff actualization / emitted invocation receipt / runtime transcript family は later reopen に残す current first choice まで固定した。
-- `specs/examples/163-current-l2-theorem-line-wording-ready-runtime-handoff-threshold.md`、`164-current-l2-theorem-line-runtime-handoff-ready-invocation-receipt-threshold.md`、`165-current-l2-theorem-line-invocation-receipt-ready-runtime-transcript-threshold.md`、`166-current-l2-theorem-line-transcript-ready-materialized-runtime-handoff-threshold.md`、`167-current-l2-theorem-line-materialized-ready-concrete-payload-threshold.md`、`168-current-l2-theorem-line-payload-ready-concrete-transcript-threshold.md`、`169-current-l2-theorem-line-transcript-body-ready-serialized-channel-body-threshold.md`、`170-current-l2-theorem-line-serialized-ready-emitted-attachment-body-threshold.md`、`171-current-l2-theorem-line-attachment-body-ready-emitted-attachment-blob-threshold.md`、`172-current-l2-theorem-line-attachment-blob-ready-retained-file-body-threshold.md`、`173-current-l2-theorem-line-retained-file-body-ready-archive-materialization-threshold.md`、`174-current-l2-theorem-line-archive-materialization-ready-archive-body-bundle-threshold.md`、`175-current-l2-theorem-line-archive-body-ready-archive-bundle-threshold.md`、`176-current-l2-theorem-line-archive-bundle-ready-archive-manifest-threshold.md`、`177-current-l2-theorem-line-archive-manifest-ready-archive-member-family-threshold.md`、`178-current-l2-theorem-line-archive-member-family-ready-archive-member-body-compare-threshold.md`、`179-current-l2-theorem-line-archive-member-body-compare-ready-archive-bless-update-policy-threshold.md`、`180-current-l2-theorem-line-archive-bless-update-policy-ready-retained-archive-payload-threshold.md`、`181-current-l2-theorem-line-retained-archive-payload-ready-archive-retention-layout-threshold.md`、`182-current-l2-theorem-line-archive-retention-layout-ready-retained-archive-payload-body-family-threshold.md`、`183-current-l2-theorem-line-retained-archive-payload-body-family-ready-retained-payload-materialization-family-threshold.md`、`184-current-l2-theorem-line-retained-payload-materialization-family-ready-retained-payload-body-materialization-detail-threshold.md`、`185-current-l2-theorem-line-retained-payload-body-materialization-detail-ready-retained-payload-body-materialization-payload-threshold.md`、`186-current-l2-theorem-line-retained-payload-body-materialization-payload-ready-retained-payload-body-materialization-carrier-detail-threshold.md`、`187-current-l2-theorem-line-retained-payload-body-materialization-carrier-detail-ready-retained-payload-body-materialization-carrier-payload-threshold.md`、`188-current-l2-theorem-line-retained-payload-body-materialization-carrier-payload-ready-retained-payload-bless-update-split-threshold.md`、`189-current-l2-theorem-line-retained-payload-bless-update-split-ready-retained-payload-bless-update-row-pair-threshold.md`、`190-current-l2-theorem-line-retained-payload-bless-update-row-pair-ready-retained-payload-bless-update-row-ref-family-threshold.md`、`191-current-l2-theorem-line-retained-payload-bless-update-row-ref-family-ready-retained-payload-bless-update-dual-ref-bundle-threshold.md`、`192-current-l2-theorem-line-retained-payload-bless-update-dual-ref-bundle-ready-retained-payload-bless-update-strict-dual-field-threshold.md`、`193-current-l2-theorem-line-retained-payload-bless-update-strict-dual-field-ready-consumer-visible-pair-threshold.md`、`194-current-l2-theorem-line-consumer-visible-pair-ready-boundary-specific-handoff-pair-threshold.md`、`195-current-l2-theorem-line-boundary-specific-handoff-pair-ready-actual-handoff-pair-shape-threshold.md`、`196-current-l2-theorem-line-actual-handoff-pair-shape-ready-boundary-specific-handoff-artifact-row-threshold.md`、`197-current-l2-theorem-line-boundary-specific-handoff-artifact-row-ready-external-contract-facing-handoff-row-threshold.md`、`198-current-l2-theorem-line-external-contract-facing-handoff-row-ready-actual-external-contract-threshold.md`、`199-current-l2-theorem-line-actual-external-contract-ready-consumer-specific-external-contract-payload-threshold.md`、`200-current-l2-theorem-line-external-contract-payload-ready-proof-hint-threshold.md`、`201-current-l2-theorem-line-proof-hint-ready-consumer-hint-threshold.md`、`202-current-l2-theorem-line-consumer-hint-ready-second-consumer-pressure-threshold.md`、`203-current-l2-theorem-line-second-consumer-pressure-ready-proof-assistant-adapter-contract-threshold.md`、`204-current-l2-theorem-line-proof-assistant-adapter-contract-ready-theorem-export-checker-pressure-threshold.md`、`205-current-l2-theorem-line-theorem-export-checker-pressure-ready-checker-facing-contract-threshold.md`、`206-current-l2-theorem-line-theorem-export-checker-contract-ready-exported-checker-payload-pressure-threshold.md`、`207-current-l2-theorem-line-theorem-export-checker-payload-pressure-ready-actual-exported-checker-payload-threshold.md`、`208-current-l2-theorem-line-actual-exported-checker-payload-ready-checker-result-materialization-family-threshold.md`、`209-current-l2-theorem-line-checker-result-materialization-family-ready-actual-checker-result-payload-threshold.md`、`210-current-l2-theorem-line-actual-checker-result-payload-ready-checker-verdict-carrier-detail-threshold.md`、`211-current-l2-theorem-line-checker-verdict-carrier-detail-ready-checker-verdict-payload-family-threshold.md`、`212-current-l2-theorem-line-checker-verdict-payload-family-ready-checker-verdict-witness-family-threshold.md`、`213-current-l2-theorem-line-checker-verdict-witness-family-ready-checker-verdict-transport-family-threshold.md`、`214-current-l2-theorem-line-checker-verdict-transport-family-ready-checker-verdict-transport-carrier-detail-threshold.md`、`215-current-l2-theorem-line-checker-verdict-transport-carrier-detail-ready-checker-verdict-transport-payload-threshold.md`、`216-current-l2-theorem-line-checker-verdict-transport-payload-ready-checker-verdict-transport-receipt-threshold.md`、`217-current-l2-theorem-line-checker-verdict-transport-receipt-ready-checker-verdict-transport-channel-body-threshold.md` により、current first cut は `actual_runtime_handoff_ref`、`emitted_invocation_receipt_ref`、`runtime_transcript_ref`、`materialized_runtime_handoff_ref`、`concrete_payload_ref`、`concrete_transcript_body_ref`、`serialized_channel_body_ref`、`emitted_attachment_body_ref`、`emitted_attachment_blob_ref`、`retained_file_body_ref`、`archive_materialization_ref`、`archive_body_ref`、`archive_bundle_ref`、`archive_bundle_manifest_ref`、`archive_bundle_member_family_ref`、`archive_member_body_compare_ref`、`archive_bless_update_policy_ref`、`retained_archive_payload_ref`、`archive_retention_layout_ref`、`retained_archive_payload_body_family_ref`、`retained_payload_materialization_family_ref`、`retained_payload_body_materialization_detail_ref`、`retained_payload_body_materialization_payload_ref`、`retained_payload_body_materialization_carrier_detail_ref`、`retained_payload_body_materialization_carrier_payload_ref`、`retained_payload_body_materialization_bless_update_split_ref`、`retained_payload_body_materialization_bless_update_row_pair_ref`、`retained_payload_body_materialization_bless_update_row_ref_family_ref`、`retained_payload_body_materialization_bless_update_dual_ref_bundle_ref`、`retained_payload_body_materialization_bless_side_row_ref`、`retained_payload_body_materialization_update_side_row_ref`、`retained_payload_body_materialization_bless_update_pair`、`retained_payload_body_materialization_boundary_handoff_pair_ref`、`retained_payload_body_materialization_boundary_handoff_pair`、`retained_payload_body_materialization_boundary_handoff_artifact_row`、`retained_payload_body_materialization_external_handoff_row`、`retained_payload_body_materialization_external_contract`、`retained_payload_body_materialization_external_contract_payload`、`retained_payload_body_materialization_external_contract_proof_hint`、`retained_payload_body_materialization_external_contract_consumer_hint`、`retained_payload_body_materialization_external_contract_second_consumer_pressure`、`retained_payload_body_materialization_proof_assistant_adapter_contract`、`retained_payload_body_materialization_theorem_export_checker_pressure`、`retained_payload_body_materialization_theorem_export_checker_contract`、`retained_payload_body_materialization_theorem_export_checker_payload_pressure`、`retained_payload_body_materialization_theorem_export_checker_payload`、`retained_payload_body_materialization_theorem_export_checker_result_materialization_family`、`retained_payload_body_materialization_theorem_export_checker_result_payload`、`retained_payload_body_materialization_theorem_export_checker_verdict_carrier_detail`、`retained_payload_body_materialization_theorem_export_checker_verdict_payload_family`、`retained_payload_body_materialization_theorem_export_checker_verdict_witness_family`、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_family`、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_carrier_detail`、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_payload`、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_receipt`、`retained_payload_body_materialization_theorem_export_checker_verdict_transport_channel_body` までは theorem-side retained bridge に段階的に足し、low-level memory-order family は later reopen に残す current first choice まで固定した。
-- `specs/examples/218-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-low-level-memory-order-family-threshold.md` により、current first choice は theorem-line retained bridge を `retained_payload_body_materialization_theorem_export_checker_verdict_transport_channel_body` で止め、low-level memory-order family を current bridge に入れないことである。
-- `specs/examples/219-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-higher-level-async-control-family-comparison.md` と `220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md` により、higher-level async-control family の current first cut は `authority_serial_transition_family` であり、`witness_aware_commit_family` は second candidate、`event_tree_execution_view` は derived execution / debug view として later candidate に残す。
-- `specs/examples/221-current-l2-theorem-line-authority-serial-transition-family-ready-authority-serial-transition-contract-comparison.md`、`222-current-l2-theorem-line-authority-serial-transition-contract-ready-minimal-authority-serial-contract-threshold.md`、`223-current-l2-theorem-line-minimal-authority-serial-contract-ready-authority-serial-row-detail-comparison.md`、`224-current-l2-theorem-line-authority-serial-row-detail-ready-authority-owner-ref-threshold.md` により、その next cut は minimal contract row と owner-slot detail までを theorem-side retained bridge に足す line に進んでいる。
-- `specs/examples/225-current-l2-theorem-line-authority-owner-ref-ready-authority-transition-stage-family-comparison.md` と `226-current-l2-theorem-line-authority-transition-stage-family-ready-minimal-authority-transition-stage-family-threshold.md` により、その次 cut は symbolic stage family までを theorem-side retained bridge に足す line に進んでいる。
-- `specs/examples/227-current-l2-theorem-line-minimal-authority-transition-stage-family-ready-authority-transition-stage-sequence-shape-comparison.md`、`228-current-l2-theorem-line-authority-transition-stage-sequence-shape-ready-minimal-authority-transition-stage-sequence-threshold.md`、`229-current-l2-theorem-line-minimal-authority-transition-stage-sequence-ready-stage-local-obligation-family-comparison.md`、`230-current-l2-theorem-line-stage-local-obligation-family-ready-minimal-authority-stage-local-obligation-family-threshold.md`、`231-current-l2-theorem-line-minimal-authority-stage-local-obligation-family-ready-stage-local-obligation-row-detail-comparison.md`、`232-current-l2-theorem-line-stage-local-obligation-row-detail-ready-minimal-authority-stage-local-obligation-row-detail-threshold.md`、`233-current-l2-theorem-line-minimal-authority-stage-local-obligation-row-detail-ready-authority-handoff-epoch-ref-comparison.md`、`234-current-l2-theorem-line-authority-handoff-epoch-ref-ready-minimal-authority-handoff-epoch-ref-threshold.md`、`235-current-l2-theorem-line-minimal-authority-handoff-epoch-ref-ready-witness-aware-handoff-family-comparison.md`、`236-current-l2-theorem-line-witness-aware-handoff-family-ready-minimal-witness-aware-handoff-family-threshold.md`、`237-current-l2-theorem-line-minimal-witness-aware-handoff-family-ready-handoff-witness-row-detail-comparison.md`、`238-current-l2-theorem-line-handoff-witness-row-detail-ready-minimal-handoff-witness-row-detail-threshold.md`、`239-current-l2-theorem-line-minimal-handoff-witness-row-detail-ready-replay-attachment-ref-comparison.md`、`240-current-l2-theorem-line-replay-attachment-ref-ready-minimal-replay-attachment-ref-threshold.md`、`241-current-l2-theorem-line-minimal-replay-attachment-ref-ready-handoff-payload-ref-comparison.md`、`242-current-l2-theorem-line-handoff-payload-ref-ready-minimal-handoff-payload-ref-threshold.md` により、その次 cut は actual handoff witness row detail、symbolic replay attachment ref、symbolic handoff payload ref までを theorem-side retained bridge に足す line に進んでいる。
-- `specs/examples/255-current-l2-theorem-line-minimal-handoff-transport-channel-body-ready-low-level-memory-order-family-threshold.md` により、handoff side でも current first choice は theorem-line retained bridge を `retained_payload_body_materialization_theorem_export_handoff_transport_channel_body` で止め、low-level memory-order family を current bridge に入れないことである。
-- `specs/examples/256-current-l2-small-decidable-core-ready-checker-cluster-matrix-comparison.md`、`257-current-l2-checker-cluster-matrix-ready-minimal-checker-cluster-row-threshold.md`、`258-current-l2-minimal-checker-cluster-row-ready-checker-cluster-fixture-evidence-attachment-comparison.md` により、current next pressure は theorem-line を low-level order family に further actualize することではなく、small decidable core / checker-cluster line で minimal row core と `fixture_evidence_refs` attachment を docs-first に切ることである。
-- `specs/examples/259-current-l2-checker-cluster-fixture-evidence-attachment-ready-typed-reason-family-hint-threshold.md`、`260-current-l2-typed-reason-family-hint-ready-checker-cluster-hint-bundle-shape-comparison.md`、`261-current-l2-checker-cluster-hint-bundle-shape-ready-typed-family-coverage-state-threshold.md` により、その current checker-side line は optional `typed_reason_family_hint` attachment、`family_refs[]` minimal bundle、lightweight `coverage_state` までを docs-first に許し、`supported_kind_refs[]` のような actual kind summary は still later に残すことまで source-backed に切れている。
-- `specs/examples/262-current-l2-typed-family-coverage-state-ready-supported-kind-summary-threshold.md`、`263-current-l2-supported-kind-summary-ready-actual-checker-payload-family-comparison.md`、`264-current-l2-actual-checker-payload-family-ready-minimal-checker-payload-family-threshold.md` により、current checker-side line は `coverage_state` で止め、`supported kind` summary は checker-cluster matrix に入れず、actual checker payload family を `payload_family_kind + source_refs` minimal bundle まで docs-first bridge として切る方が自然である。actual checker payload row family / supported kind detail / public checker API は still later に残す。
-- `specs/examples/265-current-l2-minimal-checker-payload-family-ready-checker-payload-row-family-comparison.md` と `266-current-l2-checker-payload-row-family-ready-minimal-checker-payload-row-family-threshold.md` により、その次段では checker payload row family を `payload_family_ref + row_family_kind` minimal bundle まで docs-first bridge として切る方が自然である。supported kind detail / actual row payload / public checker API は still later に残す。
-- `specs/examples/267-current-l2-minimal-checker-payload-row-family-ready-checker-payload-row-detail-comparison.md` と `268-current-l2-checker-payload-row-detail-ready-minimal-checker-payload-row-detail-threshold.md` により、その次段では checker payload row detail を `payload_row_family_ref + row_source_ref + row_reason_kind` minimal bundle まで docs-first bridge として切る方が自然である。actual row body / supported kind summary / public checker API は still later に残す。
-- `specs/examples/269-current-l2-minimal-checker-payload-row-detail-ready-checker-payload-row-body-comparison.md` と `270-current-l2-checker-payload-row-body-ready-minimal-checker-payload-row-body-threshold.md` により、その次段では checker payload row body を `row_body` variant-local slot bundle まで docs-first bridge として切る方が自然である。supported kind summary / public checker payload schema / public checker API は still later に残す。
-- `specs/examples/271-current-l2-minimal-checker-payload-row-body-ready-checker-payload-supported-kind-summary-comparison.md` と `272-current-l2-checker-payload-supported-kind-summary-ready-minimal-checker-payload-supported-kind-summary-threshold.md` により、その次段では checker payload supported kind summary を独立 summary line として切り、その minimal shape を `payload_row_family_ref + supported_kind_scope + supported_kind_refs` に留める方が自然である。public checker payload schema / public checker API は still later に残す。
-- `specs/examples/273-current-l2-minimal-checker-payload-supported-kind-summary-ready-public-checker-payload-schema-comparison.md` と `274-current-l2-public-checker-payload-schema-ready-minimal-public-checker-payload-schema-threshold.md` により、その次段では public checker payload schema を docs-only wrapper line として切り、その minimal shape を `actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` に留める方が自然である。public checker API は still later に残す。
-- `specs/examples/275-current-l2-minimal-public-checker-payload-schema-ready-public-checker-api-comparison.md` と `276-current-l2-public-checker-api-ready-minimal-public-checker-api-threshold.md` により、その次段では public checker API を docs-only read relation として切り、その minimal shape を `checker_subject + public_checker_payload_schema_ref` に留める方が自然である。actual command surface / shared output contract / parser boundary は still later に残す。
-- `specs/examples/277-current-l2-minimal-public-checker-api-ready-public-checker-entry-criteria-comparison.md` と `278-current-l2-public-checker-entry-criteria-ready-minimal-public-checker-entry-criteria-threshold.md` により、その次段では public checker comparison 専用の entry criteria を別に置き、その minimum を docs-only minimal API fixed + source-backed family-facade command-surface pressure に留める方が自然である。shared output contract / parser boundary は still later に残し、current next pressure は public checker command surface comparison に置く。
-- `specs/examples/279-current-l2-minimal-public-checker-entry-criteria-ready-public-checker-command-surface-comparison.md` と `280-current-l2-public-checker-command-surface-ready-minimal-public-checker-command-surface-threshold.md` により、その次段では public checker command surface を generic shared entry ではなく family-facade anchored な docs-only bundle として切り、その minimal shape を `command_surface_kind + family_facade_command_refs + public_checker_api_ref` に留める方が自然である。detached loop `smoke-*` wrapper / shared output contract / parser boundary は still later に残し、current next pressure は shared-output-contract comparison に置く。
-- `specs/examples/281-current-l2-minimal-public-checker-command-surface-ready-shared-output-contract-comparison.md` と `282-current-l2-shared-output-contract-ready-minimal-shared-output-contract-threshold.md` により、その次段では shared output contract を family checker shared helper の summary line anchored な docs-only bundle として切り、その minimal shape を `output_contract_kind + checker_cluster_name + checker_status + public_checker_payload_schema_ref` に留める方が自然である。`static gate artifact:` path line / row snippet text / parser boundary / verifier handoff は still later に残し、current next pressure は public-checker-boundary comparison に置く。
-- `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md` と `284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md` により、その次段では public checker boundary を command surface と shared output contract をつなぐ docs-only parser-front bundle として切り、その minimal shape を `boundary_kind + public_checker_command_surface_ref + shared_output_contract_ref` に留める方が自然である。final parser grammar / generic shared entry / verifier handoff は still later に残し、current next pressure は verifier-handoff-surface comparison に置く。
-- `specs/examples/285-current-l2-minimal-public-checker-boundary-ready-verifier-handoff-surface-comparison.md` と `286-current-l2-verifier-handoff-surface-ready-minimal-verifier-handoff-surface-threshold.md` により、その次段では verifier handoff surface を actual emitted artifact ではなく matrix-backed docs-only mixed-row bridge として切り、その minimal shape を `handoff_surface_kind + public_checker_boundary_ref + proof_obligation_matrix_ref + handoff_artifact_mode` に留める方が自然である。actual subject row / dedicated handoff artifact / actual emitter は still later に残し、current next pressure は parser-side minimal subset freeze に戻す。
-- `specs/examples/297-current-l2-phase4-shared-space-self-driven-closeout-ready-phase5-proof-protocol-runtime-policy-handoff-closeout-comparison.md` と `298-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-minimal-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold.md` により、Phase 5 closeout 自体は `closeout_kind + verifier_handoff_surface_ref + theorem_retained_bridge_stop_ref + boundary_inventory_ref + retained_later_refs` bundle に留めるのが current first choice である。checker-side stop line と theorem retained bridge stop line を current package に残しつつ、actual subject row materialization、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete theorem / model-check tool binding、public checker migration、low-level memory-order family は heavy retained-later line に束ねて残す。
-
-### 将来 deliverable 候補
-
-- async-control vocabulary comparison
-- event-tree / authority-serial / witness-aware commit の formal sketch
-- decidable core と external verifier 境界の比較表
-- room profile 例に対する ordering / fairness / replay obligation walk-through
-
-## language core と external verifier の境界
-
-これは重い workstream の横断論点である。
-
-### current で残す working question
-
-- どこまでを言語 core に入れるか
-- どこからを external verifier / theorem prover / out-of-band analyzer に送るか
-- machine-check と human-facing explanation の境界をどこまで formalize するか
-
-### current 方針
-
-- いまは language core を過剰に肥大化させない
-- current L2 helper stack に proof / analysis obligations を押し込まない
-- ただし将来の移送先として external verifier / theorem prover を明示的に計画へ残す
-- first parser cut と first checker cut は、heavy workstream の前に切る narrow gate として扱う
-
-### explanatory staging read
-
-- 非規範の補助整理としては、次の 5-way read が useful である。
-  - language core は small に保つ
-  - local / structural / decidable discharge は static checker に置く
-  - global semantic law は theorem prover line に送る
-  - distributed / control obligation は protocol verifier / model-check line に送る
-  - runtime / audit artifact は evidence producer として保つ
-- ただし repo の規範判断としての split は引き続き `specs/examples/126...127` の 4-way split であり、この 5-way read で置き換えない。
-
-### current reserve recommendation
-
-- theorem-first concrete consumer remains first reserve、model-check concrete carrier / concrete tool remains second reserve と読むのが自然である。
-- model-check line の first property family は still OPEN である。rollback-cut safety のような safety property や no-repromotion-like obligation は comparison candidate になりうるが、repo judgment として固定しない。
-
-## この workstream に最低限必要なもの
-
-本格着手の前に、少なくとも次が必要である。
-
-- stable enough semantic core
-- representative examples と fixture による regression baseline
-- parser / AST / runtime の boundary inventory
-- proof / analysis / complexity を議論するための最小 IR か relation 定義
-
-## まとめ
-
-これらの heavy workstream は、今すぐ実装しない。
-しかし current L2 の decisions が将来それらに接続できるよう、**計画には明示的に残す**。
+- `plan/18` にある typed / theorem / model-check / ordering の detailed program は **今進める**。
+- この文書の線は、そこで boundary/pilot plan が固まるまで mainline に混ぜない。

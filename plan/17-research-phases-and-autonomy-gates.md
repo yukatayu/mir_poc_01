@@ -4,52 +4,33 @@
 
 この文書は、repo 全体の長期研究を
 
-- legacy checkpoint
 - macro phase
 - autonomy gate
+- stop condition
 
-の 3 つで見やすく整理する。
+で見やすく整理する。
 
 ここでいう phase は strict waterfall ではない。
-複数の line が並走してよい。
+複数 line の並走を前提にする。
 
-## how to read this document
+## legacy checkpoint の扱い
 
-### legacy checkpoint
-
-- `specs/examples/...` や report に出てくる `Phase 1..7` は、当時の closeout / freeze / reopen line を示す historical label である。
-- これは source traceability のために残す。
-
-### macro phase
-
-- `progress.md` と `tasks.md` では、repo 全体の大局を **macro phase** で整理する。
-- old `Phase 7 = FutureWork` を再導入しないためである。
-
-## legacy checkpoint reading
-
-| legacy checkpoint | current reading |
-|---|---|
-| Phase 1 | closeout fixed |
-| Phase 2 | closeout fixed |
-| Phase 3 | freeze fixed |
-| Phase 4 | closeout fixed |
-| Phase 5 | closeout fixed |
-| legacy Phase 6 front-half | compile-ready checkpoint fixed |
-| old Phase 7 | 今後は単独 bucket としては使わず、macro phase `6/7/8` へ分解する |
+- `specs/examples/...` や report に出てくる `Phase 1..7` は historical label として残す。
+- repo 全体の current status には、それとは別に macro phase を使う。
 
 ## macro phase 一覧
 
-| Macro phase | 主眼 | 現在位置 | 重さ | autonomy gate |
-|---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | maintenance | 低い | self-driven |
-| `Macro 1` | semantic kernel / invariant stabilization | late | 中 | self-driven |
-| `Macro 2` | parser-free validation substrate | late | 中 | self-driven |
-| `Macro 3` | compile-ready minimal actualization | late | 中〜重い | self-driven |
-| `Macro 4` | executable fixed-subset sample expansion | active | 重い | self-driven |
-| `Macro 5` | theorem / model-check / static reasoning bridge | early-active | 重い | self-driven up to boundary |
-| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重い | mixed |
-| `Macro 7` | toolchain / backend / developer surface | inventory plus later-gate order | 重い | mixed |
-| `Macro 8` | domain / application realization | not started | とても重い | user spec required |
+| Macro phase | 主眼 | 現在位置 | 重さ | autonomy gate | typical stop condition |
+|---|---|---|---|---|---|
+| `Macro 0` | repository memory / docs / traceability | maintenance | 低 | self-driven | snapshot/detail-side drift が増えたら更新 |
+| `Macro 1` | semantic kernel / invariant stabilization | late | 中 | self-driven | L0/L1 invariant へ影響する変更が出る |
+| `Macro 2` | parser-free validation substrate | late | 中 | self-driven | helper/public drift が出る |
+| `Macro 3` | compile-ready minimal actualization | late | 中 | self-driven | support-only/public-candidate split が崩れる |
+| `Macro 4` | executable fixed-subset sample expansion | active | 重 | self-driven | new sample family が core semantics を押し広げる |
+| `Macro 5` | typed / theorem / model-check bridge | active at boundary | 重 | self-driven up to boundary | concrete tool / full type calculus / production contract が必要になる |
+| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重 | mixed | final operational catalog / policy profile が必要になる |
+| `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | 重 | mixed | final public packaging / external target が必要になる |
+| `Macro 8` | domain / application realization | not started | とても重い | user spec required | first application target が必要になる |
 
 ## autonomy gate detail
 
@@ -59,29 +40,46 @@
 - parser-free regression / helper maintenance
 - compile-ready minimal actualization の narrow widening
 - fixed-subset source sample expansion
-- theorem-side bridge の compare-ready / first pilot
-- sample-visible theorem/model-check milestone の narrow actualization
+- typed attachment candidate inventory
+- theorem pilot planning
+- sample-visible theorem/model-check boundary hardening
 
 ### boundary までは self-driven でよい line
 
-- Mirrorea / shared-space の docs-first boundary
-- public operational surface の inventory
-- docs-first I/O / host-facing port boundary（working label）
+- model-check projection / property-family reserve planning
+- shared-space docs-first boundary
+- docs-first I/O / host-facing boundary
+- ordering / `memory_order` reinterpretation の theory-first inventory
+
+### mixed gate の line
+
+- concrete theorem prover / model-check tool binding
+- shared-space room policy / fairness / replay operational profile
+- host binding artifact から concrete adapter target への移行
+- public operational shell から final packaging への移行
 
 ### user specification が必要な line
 
-- shared-space final activation / authority / auth / identity / admission / consistency / fairness catalog
+- shared-space final activation / authority / auth / consistency / fairness catalog
+- first external integration target
+- backend / tooling success criteria
 - upper-layer application target
-- final backend / tooling success criteria
-- visualizer / host substrate / FFI / game engine adapter の first target profile
 
-## current mainline
+## current lines
+
+### current promoted line
 
 1. `Macro 4` stable malformed capability second source-backed widening actualization
 
-## current reserve line
+### current reserve line
 
 - `Macro 7` public operational CLI concrete shell actualization
+
+### active adjacent research line
+
+- `Macro 5` typed / theorem / model-check detailed planning
+- `Macro 6/7` shared-space / host-I/O reserve hardening
+- `Macro 5/6` ordering boundary inventory
 
 ## current stop lines
 
@@ -89,16 +87,16 @@
 
 - final parser grammar
 - final public parser / checker / runtime API
+- full strong type system
 - concrete theorem / model-check production contract
 - shared-space final catalog
 - backend / codegen public surface
-- upper-layer app contract
 - raw FFI / game engine direct binding actualization
+- upper-layer application contract
 
 ## current judgments
 
 - current repo は architecture-first だが、fixed-subset runnable path を already 持つ。
-- Mirrorea/shared-space docs-first re-entry bundle、model-check/public-checker second reserve inventory、stable-static edge-pair first reopen、public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate、model-check concrete carrier actualization comparison、model-check concrete carrier first actualization、source-sample emitted verification artifact wiring、sample-facing theorem/model-check evidence summary and bless/review flow、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate、shared-space admission / compile-time visibility reopen、shared-space authority / resource ownership reopen、docs-first I/O / host-facing port boundary、stable malformed missing-option first reopen actualization comparison、final public parser / checker / runtime first later gate actualization comparison、stable malformed missing-option first source-backed widening actualization、public operational CLI second later gate actualization comparison、final public parser / checker / runtime thin-facade later support actualization、stable malformed capability second reopen actualization comparison、public operational CLI concrete shell naming comparison、stable malformed capability second source-backed widening actualization comparison、public operational CLI concrete shell actualization comparison も fixed 済みであり、current mainline は `Macro 4` stable malformed capability second source-backed widening actualization へ進んでいる。
-- host-facing integration は `stdin/stdout` privileged 化ではなく、`specs/examples/385...386` の docs-first I/O / port / adapter boundary として first cut を閉じ、visualizer / host substrate / FFI / engine adapter を separate gate に分ける。
-- Mirrorea / shared-space / backend / apps は old `FutureWork` ではなく separable track として扱う。
-- current immediate mainline を止める user decision は 0 件である。
+- type/proof/model-check line は「まだ無理」ではなく、boundary/pilot planning を進められる段階にある。
+- ordering / `memory_order` reinterpretation も「未着手で何も言えない」段階ではなく、theory-first inventory と handoff boundary を整理できる段階にある。
+- ただし、この 2 系統はいずれも mainline implementation へ即昇格させる段階ではない。

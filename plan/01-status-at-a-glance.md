@@ -1,38 +1,20 @@
 # plan/01 — 現況サマリ
 
-## project 全体の主眼
+## repo 全体の主眼
 
 - 主眼は **Mir** の意味論基盤である。
-- ただし current repo は、単なる architecture memo ではなく、
-  - parser-free current L2 PoC
-  - `mir-ast` / `mir-semantics` / `mir-runtime` の narrow actual path
-  - fixed-subset source sample の runnable ladder
-  を持つ **architecture-first + runnable fixed subset** の段階にある。
-- Mirrorea / shared-space / Typed-Effect / Prism / 上位アプリは separable な track として扱う。
+- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample decet を already 持つ。
+- Mirrorea / shared-space / Typed-Effect / Prism / 上位アプリは separable track として扱う。
 
-## legacy checkpoint reading
+## current snapshot
 
-- Phase 1〜5 closeout / freeze は fixed 済みである。
-- legacy Phase 6 front-half compile-ready checkpoint も fixed 済みである。
-- legacy checkpoint 名での recent close sequence は
-  - actual `e3` authored-row reopen
-  - proof / model-check first concrete tool pilot
-  - second source-sample cluster sequencing
-  - actual `e22` contrast-row source actualization
-  - stable static malformed post-contrast sequencing
-  - parser / checker / runtime public surface inventory
-  - Mirrorea/shared-space docs-first re-entry
-  - shared-space identity / auth layering reopen
-  - model-check concrete carrier first actualization gate
-  - stable malformed broader follow-up inventory
-  - public operational CLI / final public contract later gate
-  - shared-space admission / compile-time visibility reopen
-  - shared-space authority / resource ownership reopen
-  - model-check concrete carrier actualization comparison
-  - model-check concrete carrier first actualization
-  - source-sample emitted verification artifact wiring
-  - sample-facing theorem/model-check evidence summary and bless/review flow
-  まで fixed 済みと読む。
+- legacy checkpoint としては、Phase 1〜5 closeout / freeze と legacy Phase 6 front-half compile-ready checkpoint は fixed 済みである。
+- current promoted line は `Macro 4 / stable malformed capability second source-backed widening actualization` である。
+- current reserve line は `Macro 7 / public operational CLI concrete shell actualization` である。
+- immediate blocker は `0`、current mainline を止める user decision も `0` と読む。
+- current authored source sample は `e1 / e2 / e3 / e4 / e16 / e18 / e19 / e21 / e22 / e23` の decet である。
+- `proof_notebook_review_unit` と `model_check_concrete_carriers` を含む sample-visible theorem/model-check milestone は narrow first cut まで source-backed である。
+- docs-first I/O / host-facing boundary と shared-space identity / admission / authority の docs-first boundary も fixed 済みである。
 
 ## macro phase reading
 
@@ -43,44 +25,52 @@
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
 | `Macro 4` executable fixed-subset expansion | active | self-driven |
-| `Macro 5` theorem / model-check / static bridge | early-active | self-driven up to boundary |
+| `Macro 5` typed / theorem / model-check bridge | bridge and pilot planning | self-driven up to boundary |
 | `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed |
-| `Macro 7` toolchain / backend / public dev surface | inventory plus later-gate order | mixed |
+| `Macro 7` toolchain / backend / public dev surface | thin facade and reserve shell line | mixed |
 | `Macro 8` domain / application realization | not started | user spec required |
 
 ## current capability snapshot
 
-- parser-free current L2 PoC は runnable。
-- current authored source sample decet `e1` / `e2` / `e3` / `e4` / `e16` / `e19` / `e21` / `e22` / `e18` / `e23` は runnable ladder に接続済みであり、`e16` / `e18` / `e4` / `e19` / `e23` は fixture-static formal-hook reached、`e1` / `e2` / `e21` / `e22` は runtime/formal-hook reached、`e3` は formal hook stage だけ guarded に残す。
-- first post-sextet cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen も fixed 済みである。
-- parser / checker / runtime public surface inventory も fixed 済みであり、already-public parser-free stack、crate-public but non-production tranche、repo-local helper surface の 3 bucket split を current reading に置く。
-- Mirrorea/shared-space docs-first re-entry、shared-space identity / auth layering reopen、model-check/public-checker second reserve inventory、model-check concrete carrier first actualization gate、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate も fixed 済みである。
-- source-sample emitted verification artifact wiring も fixed 済みであり、`run_current_l2_source_sample` の public/report shape を変えずに runtime test/support helper-local route と `proof_notebook_review_unit` / model-check carrier fan-out を actualize 済みである。
-- sample-facing theorem/model-check evidence summary and bless/review flow も fixed 済みであり、README / `.docs` / snapshot docs を sample-facing surface、reviewed repo-local sync + inventory/regression success を current bless に置く docs-first cut を採った。
-- docs-first I/O / host-facing port boundary も fixed 済みであり、language core に privileged `stdin/stdout` を入れず、capability-scoped input/output port / adapter boundary を first docs-only cut に置き、visualizer / host substrate / host runtime を consumer/provider 側、FFI / game engine adapter と final naming を later gate に残す current cut を採った。
-- stable malformed missing-option first reopen actualization comparison も fixed 済みであり、helper-local compare を entry evidence に再利用しつつ、first reopen family は `e16/e17/e18` triplet に維持し、current next actualization mode は source-backed widening first に置く current cut を採った。
-- stable malformed missing-option first source-backed widening actualization も fixed 済みであり、`e16` / `e18` を source-authored static-stop pair に widen しつつ、`e17` は same-family staged guard に留める current cut を採った。
-- final public parser/checker/runtime first later gate actualization comparison も fixed 済みであり、current first later cut は `run_current_l2_source_sample` と `CurrentL2SourceSampleRunReport` を public entry / report に置く runtime-led thin facade に留め、support-only tranche と excluded bucket を明示した。
-- `proof_notebook_review_unit` は current first concrete theorem/model-check pilot、`run_current_l2_source_sample` は later public-pressure の first docs-only candidate に留まる。
-- public operational CLI second later gate actualization comparison も fixed 済みであり、current first cut は runtime-led thin facade を巻き戻さない Rust-side operational wrapper over `run_current_l2_source_sample` に留め、operational request/output shell concern だけを narrow に残す。
-- final public parser/checker/runtime thin-facade later support actualization も fixed 済みであり、`run_current_l2_runtime_skeleton` と `CurrentL2RuntimeSkeletonReport` を later support cut に置き、explicit input surface は `Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` に留める。
-- public operational CLI concrete shell actualization comparison も fixed 済みであり、current first cut は `mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over `run_current_l2_source_sample` として読む narrow actual shell concern に留め、`run_current_l2_runtime_skeleton` は support refs、`lower_current_l2_fixed_source_text` と repo-local helper / example surface は excluded bucket に残す。
-- repo-level current line は stable malformed capability second source-backed widening actualization に置き、その後に public operational CLI concrete shell actualization を reserve に並べるのが current reading である。
+- parser-free current L2 PoC は runnable である。
+- syntax-backed fixed-subset source sample path も runnable である。
+- runtime / static / formal-hook ladder と regression helper は decet を current corpus として回せる。
+- theorem/model-check line は
+  - tool-neutral formal hook
+  - `proof_notebook_review_unit`
+  - row-local model-check carrier
+  - emitted artifact wiring
+  - sample-facing evidence summary
+  まで narrow first cut がある。
+- current typed work は full type system ではなく、semantic carrier / checker boundary / source-visible first attachment candidate を比較する段階にある。
+- shared-space は membership / admission / authority まで docs-first boundary があり、final operational catalog は later gate に残る。
+- host-facing integration は privileged `stdin/stdout` ではなく、capability-scoped I/O / adapter boundary の docs-first cut に留める。
+- ordering / `memory_order` reinterpretation は `atomic_cut` の place-local nucleus を越えたところでは still theory-first である。
 
-## current mainline
+## current mainline と adjacent research
 
-1. stable malformed capability second source-backed widening actualization
-2. reserve public operational CLI concrete shell actualization
+### current mainline
+
+1. `Macro 4` stable malformed capability second source-backed widening actualization
+2. `Macro 7` reserve public operational CLI concrete shell actualization
+
+### adjacent research program
+
+- `Macro 5` typed-core attachment / obligation allocation refresh
+- `Macro 5` semantic-core theorem pilot planning
+- `Macro 5` model-check projection / property-family reserve planning
+- `Macro 6/7` shared-space confusion/replay and host-I/O bridge-only hardening
+- `Macro 5/6` async-control / ordering boundary inventory
 
 ## biggest later gates
 
 - shared-space final activation / authority / auth / consistency / fairness catalog
-- upper-layer application target
+- first external integration target
 - backend / public operational surface success criteria
-- visualizer / host substrate / FFI / game engine adapter の first target profile
+- upper-layer application target
 
 ## Rust / Python split の current reading
 
-- Rust は parser / semantics / runtime / formal handoff 本体を持つ。
-- Python は detached-loop orchestration、source-sample regression、docs validation、report scaffolding を持つ。
+- Rust は parser / semantics / runtime / formal handoff / thin facade の本体を持つ。
+- Python は detached orchestration、regression、docs validation、report scaffolding を持つ。
 - current reading は **Rust-heavy core + mixed-tool helper workflow** である。

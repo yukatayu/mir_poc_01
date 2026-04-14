@@ -2,52 +2,57 @@
 
 ## 目的
 
-この文書は、今から数 task 先までの near-term roadmap を示す。
+この文書は、今から数 package 先までの near-term execution order を示す。
 step 数や task 数は厳密な約束ではなく、**rough estimate** である。
 
 ## current reading
 
-- legacy checkpoint としては、Phase 1〜5 closeout / freeze は fixed 済みである。
-- legacy Phase 6 front-half compile-ready checkpoint も fixed 済みである。
-- current macro phase mainline は、`Macro 6` shared-space docs-first follow-up checkpoint を `specs/examples/375...376` までで一旦閉じたうえで、`specs/examples/377...384` の sequencing judgment / first actual carrier / emitted route / sample-facing summary package に従い、sample-visible theorem/model-check milestone を閉じ、`specs/examples/385...386` で `Macro 7` の docs-first I/O / host-facing port boundary を固定し、`specs/examples/387...388` で `Macro 4` missing-option actualization comparison を source-backed widening first に寄せ、`specs/examples/389...390` で runtime-led thin library facade を first later cut に置き、`specs/examples/391...392` で `e16/e18` source-backed widening first cut を actualize し、`specs/examples/393...394` で public operational CLI second gate を Rust-side operational wrapper over thin facade として narrow に固定し、`specs/examples/395...396` で thin-facade later support cut を `run_current_l2_runtime_skeleton` に置き、`specs/examples/397...398` で capability second reopen comparison を `e13/e20` pair judgment + source-backed widening first に固定し、`specs/examples/399...400` で current-L2 scoped docs-only shell naming を `mir-current-l2 run-source-sample <sample> --host-plan <path> --format pretty|json` に narrow に固定し、`specs/examples/401...402` で capability source-backed widening actualization comparison を `e13/e20` source-authored static-stop pair first cut に固定し、`specs/examples/403...404` で current-L2 scoped Rust concrete shell over thin facade を public operational concrete shell concern の current first cut に固定した後、stable malformed capability second source-backed widening actualization を current line に置く line である。
-- `Macro 4` は broader malformed inventory、missing-option actualization comparison、missing-option first source-backed widening actualization を already 固めており、その次段の malformed-side current reserve は capability second reopen に残る。
+- current promoted line は `Macro 4 / stable malformed capability second source-backed widening actualization` である。
+- current reserve line は `Macro 7 / public operational CLI concrete shell actualization` である。
+- その後は、new sample family を無理に増やすより先に、typed / theorem / model-check detail-side plan を硬化するのが自然である。
+- shared-space と host-I/O は docs-first boundary が already あるので、mainline の邪魔をしない compact reserve package として並走できる。
 
-## immediate execution order
+## ordered package list
 
-### 1. stable malformed capability second source-backed widening actualization
+| 順番 | macro | task package | なぜ今やるか | completion signal | rough estimate | status |
+|---|---|---|---|---|---|---|
+| 1 | `Macro 4` | stable malformed capability second source-backed widening actualization | current runnable line を 1 段太らせるため | `e13/e20` family の actual package cut が fixed され、runner / ladder / regression への widening 条件が閉じる | 1〜3 task | promoted |
+| 2 | `Macro 7` | public operational CLI concrete shell actualization | thin facade と shell concern の境界を崩さないため | current-L2 scoped shell concern と excluded/support bucket が actual package として閉じる | 1〜2 task | reserve |
+| 3 | `Macro 5` | typed-core attachment inventory and obligation allocation refresh | full type system へ飛ばず boundary plan を前進させるため | first attachment candidate、obligation owner、stop line が docs-first に固定される | 1〜2 task | adjacent |
+| 4 | `Macro 5` | semantic-core theorem pilot planning | theorem line の next proof order を曖昧にしないため | first lemma order、carrier、tool-neutral stop line が fixed される | 1〜2 task | adjacent |
+| 5 | `Macro 5` | model-check projection / property-family reserve inventory | concrete carrier の次段を明確にするため | projection grain、first property family、tool-binding stop line が整理される | 1〜2 task | adjacent |
+| 6 | `Macro 6` | shared-space room-profile working subset and confusion/replay compact table | reopen 済み boundary の drift を抑えるため | small room-profile と confusion/replay table が docs-first にまとまる | 1〜2 task | reserve |
+| 7 | `Macro 7` | host-I/O binding artifact / bridge-only note | I/O line の hidden promotion を防ぐため | bridge-only host binding note と excluded target line が固定される | 1 task | reserve |
+| 8 | `Macro 5/6` | async-control / ordering boundary inventory | `memory_order` line を theory-first で整理するため | `atomic_cut` nucleus と higher-level ordering handoff boundary が整理される | 1〜2 task | reserve |
 
-- macro phase
-  - `Macro 4`
-- rough weight
-  - 中
-- rough 所要
-  - 1〜3 task / 数日〜1週
+## autonomous batch recommendation
 
-### 2. reserve public operational CLI concrete shell actualization
+### Batch A. execution-facing closeout
 
-- macro phase
-  - `Macro 7`
-- rough weight
-  - 中
-- rough 所要
-  - 1〜2 task / 数日
+1. package 1
+2. package 2
 
-## next reserve line
+### Batch B. reasoning-side hardening
 
-### public operational CLI concrete shell actualization
+3. package 3
+4. package 4
+5. package 5
 
-- `Macro 7`
-- current-L2 scoped Rust concrete shell over thin facade を installed binary / final host contract から切り離したまま、actual shell concern としてどう narrow に保つかを整理する。
+### Batch C. boundary reserve hardening
 
-## later gates
+6. package 6
+7. package 7
+8. package 8
 
-- shared-space final catalog
-- upper-layer application target
-- backend / public operational surface success criteria
-- visualizer / host substrate / FFI / game engine adapter の first target profile
+## reopen triggers
+
+- malformed line で runner / ladder mismatch が出たら、package 1 を優先する。
+- public shell line で hidden promotion が見えたら、package 2 を優先する。
+- typed / theorem / model-check line で sample-visible next step が曖昧になったら、packages 3〜5 を前倒しする。
+- shared-space / host-I/O / ordering line で terminology drift が見えたら、packages 6〜8 を挟む。
 
 ## current recommendation
 
-- current near-term では、public operational surface inventory と later orderingを既存固定点として尊重しつつ、shared-space docs-first follow-up checkpoint と sample-visible theorem/model-check milestone を保持したまま、`specs/examples/385...386` の docs-first host-facing boundary、`specs/examples/387...388` の missing-option actualization comparison、`specs/examples/389...390` の runtime-led thin facade first later cut、`specs/examples/391...392` の `e16/e18` source-backed widening first cut、`specs/examples/393...394` の Rust-side operational wrapper second gate cut、`specs/examples/395...396` の runtime skeleton later support cut、`specs/examples/397...398` の capability second reopen comparison、`specs/examples/399...400` の current-L2 scoped docs-only shell naming package、`specs/examples/401...402` の capability source-backed widening actualization comparison、`specs/examples/403...404` の public operational CLI concrete shell actualization comparisonを close 済みと読む。current line は stable malformed capability second source-backed widening actualization である。
-- `stdin/stdout` の privileged primitive 化や raw FFI actualization を mainline に直接混ぜず、host-facing integration は `specs/examples/385...386` の docs-first I/O / adapter boundary として separate gate に置く。
-- backend や higher-level async-control family を current executable core に早く混ぜない。
+- 近接 mainline は packages 1〜2 のままでよい。
+- ただし user が「大局計画を先に固めたい」と明示したので、packages 3〜8 の detail-side planning を `plan/18` と `plan/12` / `plan/13` へ先に明文化しておく。
+- raw FFI、game engine direct binding、full strong type system、concrete theorem / model-check tool binding は、この文書の near-term line に入れない。
