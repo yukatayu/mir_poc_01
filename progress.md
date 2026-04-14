@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-14 00:17 JST
+最終更新: 2026-04-14 10:03 JST
 
 ## この文書について
 
@@ -168,6 +168,7 @@ current reading は、**Rust-heavy core + mixed-tool helper workflow** である
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細な履歴は `docs/reports/` を正本にする。
+- 2026-04-14 10:03 JST — `docs/reports/0697` で external `answer_001...016` integration audit を閉じ、current promoted line は維持したまま `plan/09` `12` `13` `16` と `faq_003.md` に typed reserve hypothesis、theorem/model-check reserve ordering、shared-space sequencing、Rust-heavy helper-boundary hardening を反映した。repo-level current line は stable malformed capability second source-backed widening actualization のまま維持した。
 - 2026-04-14 00:17 JST — `docs/reports/0694` で post-cli-actualization document consistency audit を閉じ、`Documentation.md` top paragraph、`progress.md` feature matrix、`plan/01` autonomy gate、`specs/00-document-map.md` ordering drift を reviewer finding に従って修正した。repo-level current line は stable malformed capability second source-backed widening actualization のまま維持した。
 - 2026-04-13 23:56 JST — `docs/reports/0693` と `specs/examples/403...404` で public operational CLI concrete shell actualization comparison を閉じ、`mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over thin facade として読む narrow actual shell concern を固定した。repo-level current line は stable malformed capability second source-backed widening actualization に進んだ。
 - 2026-04-13 23:38 JST — `docs/reports/0692` と `specs/examples/401...402` で stable malformed capability second source-backed widening actualization comparison を閉じ、`e13/e20` source-authored static-stop pair first cut と helper-local / stage1 / fixture-static entry evidence を固定した。repo-level current line は public operational CLI concrete shell actualization comparison に進んだ。

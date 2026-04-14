@@ -56,6 +56,26 @@
 5. vector clock / dotted version vector / matrix clock のどれかに commit すること
 6. `Raft` / `Paxos` / `VRR` / CRDT のどれかを唯一の正解として固定すること
 
+## current staged sequencing
+
+shared-space line の docs-first reorder としては、少なくとも次の順で narrow に進めるのが自然である。
+
+1. membership identity core
+2. admission / compile-time visibility
+3. authority / resource ownership
+4. small room-profile working subset
+5. fairness / replay strengthening
+6. final operational catalog / algorithm binding / app-specific profile
+
+ここで 1〜3 は current docs-first reopen chain と整合しており、4 も authoritative room baseline / small working subset の current package 読みと矛盾しない。
+still later と読むのは 5〜6 であり、特に 6 は user-spec-required gate と読む。
+
+### confusion / replay hardening note
+
+- future docs では `logical_member_id`、`incarnation`、admission decision、authority holder、replay receipt / refusal を separate concern として扱う方がよい。
+- stale route、stale membership snapshot、stale replay receipt、new incarnation を一つの generic `invalid participant` bucket に潰さない方が confusion を減らせる。
+- exact threat table と concrete protocol profile は still OPEN である。
+
 ## participant を array-like にするか
 
 ### 結論

@@ -28,6 +28,27 @@ run_directory_named_profile
 - public operational CLI concrete shell actualization comparison の current first cut は、上の naming を current-L2 scoped Rust concrete shell concern として扱い、delegated entry / report は `run_current_l2_source_sample` / `CurrentL2SourceSampleRunReport` に据え置く。
 - `resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local Python orchestration helper は excluded bucket に残す。
 
+## current helper migration guidance
+
+- 規範判断の正本は `specs/` であり、Rust 実装を semantics の source of truth と見なさない。
+- current implementation reading は **Rust-heavy core + mixed helper workflow** である。
+- semantics-bearing / typed carrier / machine-facing transform は、repo-local shell や Python helper より先に Rust 側 support/helper module に置く方が drift を抑えやすい。
+- report scaffolding、docs validation、regression orchestration のような repo-local workflow は、final public contract に silent promotion しない限り Python に残ってよい。
+- helper promotion を新語だけで読まず、既存の source-backed bucket と対応づけて読む方が drift を抑えやすい。
+  - `stable public`
+    - already-public stable bucket
+  - `public-candidate (library-facing)`
+    - first later candidate / runtime-led thin facade
+  - `public-candidate (shell-facing)`
+    - actual shell concern / operational CLI line
+  - `bridge-only`
+    - later support cut / non-production bridge helper
+  - `support-only`
+    - support-only tranche
+  - `excluded`
+    - excluded bucket
+- public surface staging は、library-side canonical entry を先に揃え、operational CLI shell は second gate として扱う。
+
 ## layer ごとの public behavior / thin delegation
 
 | helper | public behavior | thin delegation |
