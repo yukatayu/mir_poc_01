@@ -55,6 +55,10 @@
 
 ## macro roadmap
 
+この `Macro 0〜8` は repo 全体の top-level roadmap axis として置いている。
+現時点では `Macro 9` 以降を追加する想定ではなく、今後の課題は該当する macro へ戻して配置する。
+そのため `Macro 8` は「それ以降全部」の bucket ではなく、application / domain realization 専用の終端側 phase である。
+
 | Macro phase | 主眼 | 現在位置 | 次の exit signal |
 |---|---|---|---|
 | `Macro 0` | repository memory / docs / traceability | maintenance | snapshot と detail-side plan の drift suppression |
@@ -65,7 +69,7 @@
 | `Macro 5` | typed / theorem / model-check bridge | active at boundary | first planning cut と stop line が package 単位で固定される |
 | `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | room-profile / confusion-replay / authority-family の compact note が固定される |
 | `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | shell actual package と bridge-only host note の境界が固定される |
-| `Macro 8` | domain / application realization | not started | first target profile が user と合意される |
+| `Macro 8` | domain / application realization | application-specific target not started | first target profile が user と合意される |
 
 ## current recommendation
 

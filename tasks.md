@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-17 08:00 JST
+最終更新: 2026-04-17 08:41 JST
 
 ## この文書について
 
@@ -23,6 +23,10 @@
 - current lane を止める user decision: `0`
 
 ## 自走して closeout まで持って行ける macro phase 読み
+
+`Macro 0〜8` は repo 全体の top-level macro axis であり、現時点では `Macro 9` 以降を置く想定はない。
+後続の仕事は「`Macro 8` の先に積む」のではなく、`Macro 0〜7` の深化として戻るか、application-specific realization として `Macro 8` に入る。
+したがって `Macro 8` は catch-all bucket ではなく、application / domain target 専用の phase として読む。
 
 | macro phase | self-driven closeout 読み | 注記 |
 |---|---|---|

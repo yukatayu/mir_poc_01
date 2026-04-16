@@ -23,6 +23,10 @@
 
 ## macro phase reading
 
+`Macro 0〜8` は repo 全体の top-level macro axis として読む。
+後続課題は `Macro 8` の先へ積み増すのではなく、該当する macro へ戻して配置する。
+`Macro 8` は catch-all ではなく、application / domain realization 専用の終端側 phase である。
+
 | Macro phase | current state | autonomy gate |
 |---|---|---|
 | `Macro 0` repository memory | maintenance | self-driven |
@@ -33,7 +37,7 @@
 | `Macro 5` typed / theorem / model-check bridge | third-order follow-up active | self-driven up to boundary |
 | `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed（boundary-prep までは self-driven） |
 | `Macro 7` toolchain / backend / host-facing integration | thin facade plus reserve shell | mixed（boundary-prep までは self-driven） |
-| `Macro 8` domain / application realization | not started | user spec required |
+| `Macro 8` domain / application realization | application-specific target not started | user spec required |
 
 ## current capability snapshot
 

@@ -21,6 +21,10 @@
 
 ## macro phase 一覧
 
+`Macro 0〜8` は repo 全体の top-level macro axis として読む。
+今のところ `Macro 9` 以降を足す前提はなく、後続課題は該当する macro へ戻して配置する。
+したがって `Macro 8` は catch-all ではなく、application / domain realization 専用の phase として保つ。
+
 | Macro phase | 主眼 | 現在位置 | 重さ | autonomy gate | typical stop condition |
 |---|---|---|---|---|---|
 | `Macro 0` | repository memory / docs / traceability | maintenance | 低 | self-driven | snapshot/detail-side drift が増えたら更新 |
@@ -31,7 +35,7 @@
 | `Macro 5` | typed / theorem / model-check bridge | active at boundary | 重 | self-driven up to boundary | concrete tool / full type calculus / production contract が必要になる |
 | `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重 | mixed（boundary-prep までは self-driven） | final operational catalog / policy profile が必要になる |
 | `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | 重 | mixed（boundary-prep までは self-driven） | final public packaging / external target が必要になる |
-| `Macro 8` | domain / application realization | not started | とても重い | user spec required | first application target が必要になる |
+| `Macro 8` | domain / application realization | application-specific target not started | とても重い | user spec required | first application target が必要になる |
 
 ## current lane split
 

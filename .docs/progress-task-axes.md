@@ -18,6 +18,9 @@ repo-local な **大局整理の軸** を固定する。
 ### Axis A — Macro phases
 
 `progress.md` と `tasks.md` では、repo 全体の大局を次の macro phase で整理する。
+この `Macro 0〜8` は top-level axis として全体を尽くす想定であり、現時点では `Macro 9` 以降を追加する前提ではない。
+あとから見つかった課題も、「新しい後続 phase」へ積むのではなく、該当する `Macro 0〜8` へ戻して配置する。
+特に `Macro 8` は catch-all ではなく、application / domain realization 専用の phase として保つ。
 
 | Macro phase | 主眼 |
 |---|---|
