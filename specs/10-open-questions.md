@@ -209,10 +209,12 @@
    - docs-first follow-up により、row-local carrier から small-cluster semantic projection への bridge grain と bridge bundle floor までは固まった。
    - sample-visible property summary wording により、sample-facing summary が何を言ってよく、何を order/handoff reserve 側へ残すかの current cut までは固まった。
    - tool-binding stop-line refresh により、explicit non-goal を current cut にし、concrete tool binding を still later に残す line までは固まった。
-   - 未決なのは、small-cluster projection keep/drop の exact cut、concrete model-check tool binding、first settled property language、production checker/runtime-policy contract である。
+   - model-check small-cluster projection keep/drop refresh により、same-subject stage-local small cluster を keep line に置き、typed reserve / theorem discharge / room protocol family を drop する current cut までは固まった。
+   - 未決なのは、concrete model-check tool binding、first settled property language、production checker/runtime-policy contract である。
 41. order / handoff line の falsifier coverage をどこまで hardening するか。
    - source-backed な floor として、cut family comparison、relation decomposition、adequacy corpus、property-to-boundary matrix は already ある。
    - docs-first follow-up により、negative falsifier coverage と higher-level candidate reduction までは current docs に昇格済みである。current first candidate は `authority_serial_transition_family`、second candidate は `witness_aware_commit_family`、`event_tree_execution_view` は derived/debug candidate、low-level `memory_order` family は retained-later reference family に留める。
    - property-language bridge note により、kept/second candidate と boundary matrix を property-language bridge へ connect する current cut までは固まった。
    - emitted-artifact schema reserve note により、refs-only reserve schema を first cut にし、consumer-shaped schema と source-surface-first schema を still later に残す line までは固まった。
+   - order/handoff source-surface wording reserve note により、snake_case relation family 名を principal wording に保ち、plain-language stage wording を explanation layer に重ね、low-level fence-like wording と room macro wording を still later に残す current cut までは固まった。
    - 未決なのは、final property language、final source-surface handoff wording、final emitted artifact schema、concrete theorem / protocol tool binding とどう接続するかである。

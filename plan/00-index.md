@@ -51,7 +51,7 @@
 - 近接運用は 3 lane で読むのが自然である。
   - execution lane: `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
   - theory-lab lane: `Macro 5 third-order follow-up active`
-    （typed-surface family split と notebook-consumer threshold は fixed 済み、next reopen は model-check small-cluster projection keep/drop refresh）
+    （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
   - reserve integration lane: `Macro 6/7 reserve integration checkpoint close`
     （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 - 型 / 定理証明 / モデル検査 / ordering は mainline に無理に混ぜず、detail-side research program として扱う。

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-17 00:28 JST
+最終更新: 2026-04-17 07:22 JST
 
 ## この文書について
 
@@ -14,7 +14,7 @@
   `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
 - current theory-lab line:
   `Macro 5 third-order follow-up active`
-  （typed-surface family split と notebook-consumer threshold は fixed 済み、next reopen は model-check small-cluster projection keep/drop refresh）
+  （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
 - current reserve integration line:
   `Macro 6/7 reserve integration checkpoint close`
   （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -43,14 +43,14 @@
 |---|---|---|---|
 | event DAG / local `try` / `atomic_cut` | `S5-S6` | parser-free / source-backed runnable evidence | duplicate cluster widening comparison |
 | guarded option chain / `lease` / monotone degradation | `S6` | missing-option / capability pair まで source-authored static-stop widening | duplicate cluster の next widen cut を決める |
-| contracts / static gate / formal hook | `S6` | static gate、tool-neutral formal hook、emitted artifact wiring、request / predicate / `try` cluster typed-surface reserve、typed-surface family split | model-check small-cluster projection keep/drop refresh |
-| theorem-side pilot | `S5-S6` | notebook-first pilot、lemma order、lemma wording floor、bridge stop-line refresh、admissible evidence contraction、notebook-consumer threshold / discharge reserve | model-check small-cluster projection keep/drop refresh |
-| model-check line | `S5-S6` | row-local carrier、projection reserve inventory、sample-facing summary、tool-binding stop line | small-cluster projection keep/drop refresh |
+| contracts / static gate / formal hook | `S6` | static gate、tool-neutral formal hook、emitted artifact wiring、request / predicate / `try` cluster typed-surface reserve、typed-surface family split | stronger typed-surface promotion threshold later gate |
+| theorem-side pilot | `S5-S6` | notebook-first pilot、lemma order、lemma wording floor、bridge stop-line refresh、admissible evidence contraction、notebook-consumer threshold / discharge reserve | theorem discharge transport / public-contract later gate |
+| model-check line | `S5-S6` | row-local carrier、projection reserve inventory、small-cluster projection keep/drop、sample-facing summary、tool-binding stop line | property-language / tool-binding later gate |
 | typed-core / type system | `S4` | obligation owner matrix、attachment inventory、source-visible first comparison、request/predicate/`try` reserve、typed-surface family split | stronger typed-surface promotion threshold later gate |
 | multi-node / shared-space | `S3-S4` at boundary | identity / admission / authority / room-profile-host bridge note、fairness / replay reserve note | final operational catalog / fairness operational profile mixed gate |
 | dynamic attach / detach / safe downstream addition | `S2-S3` | DAG discipline、overlay constraints、shared-space boundary notes | operational profile / fairness reserve は later |
 | host-facing I/O / adapter boundary | `S4` | capability-scoped docs-first boundary、thin facade、Rust shell actualization、CLI packaging reserve note | adapter target / final host contract mixed gate |
-| ordering / `memory_order` reinterpretation | `S4-S5` | cut-family comparison、relation decomposition、falsifier coverage、property-language bridge、emitted-artifact schema reserve | source-surface wording reserve |
+| ordering / `memory_order` reinterpretation | `S4-S5` | cut-family comparison、relation decomposition、falsifier coverage、property-language bridge、emitted-artifact schema reserve、source-surface wording reserve | modality internalization trigger と later property-language gate を切り分ける |
 | syntax / modality theory line | `S3-S4` | syntax honesty principle、stimuli comparison、modal promotion threshold、guarded-vs-MDTT/MTT reduction timing | modality internalization trigger |
 | public dev surface / CLI | `S4-S5` | thin facade、later support、current-L2 scoped Rust shell actualization | installed-binary / final packaging reserve |
 | executable sample corpus | `S6` | authored dozen、runner / ladder / regression helper、artifact fan-out、duplicate next-cut comparison | duplicate cluster source-authored static-stop pair actualization comparison |
@@ -63,10 +63,10 @@
 | parser-free substrate | 88% | 78% | 86% | 着手可能 |
 | compile-ready minimal actualization | 84% | 73% | 83% | 着手可能 |
 | fixed-subset source sample line | 83% | 78% | 83% | 着手可能 |
-| typed / theorem / model-check bridge | 81% | 75% | 62% | 着手可能 |
+| typed / theorem / model-check bridge | 82% | 76% | 62% | 着手可能 |
 | shared-space docs-first boundary | 57% | 48% | 27% | 着手可能 |
 | host-facing integration boundary | 51% | 43% | 34% | 着手可能 |
-| ordering / memory-model reinterpretation | 61% | 52% | 15% | 着手可能 |
+| ordering / memory-model reinterpretation | 63% | 54% | 15% | 着手可能 |
 | syntax / modality foundation comparison | 44% | 40% | 5% | 着手可能 |
 | backend / public packaging | 29% | 25% | 24% | 要仕様確認 |
 | application realization | 10% | 8% | 2% | 要仕様確認 |
@@ -82,8 +82,8 @@
   `Macro 5` の third-order follow-up を切り始めた段階。
   feature-stage の読みでは、typed-core は `S4`、theorem/model-check boundary は `S5-S6` にあり、bridge 全体としては `boundary hardening` 段階にいる。
 - rough progress:
-  全体の bridge line は `81% / 75% / 62%`（論理仕様 / ユーザ向け仕様 / 実装・運用）。
-  内訳の rough read は、`typed-core boundary 約64%`、`theorem pilot boundary 約78%`、`model-check boundary 約68%`。
+  全体の bridge line は `82% / 76% / 62%`（論理仕様 / ユーザ向け仕様 / 実装・運用）。
+  内訳の rough read は、`typed-core boundary 約64%`、`theorem pilot boundary 約78%`、`model-check boundary 約72%`。
   ここで内訳は repo の current package 群からの synthesis であり、規範値ではない。
 - 採用済みの骨格:
   - typed-core は full calculus first ではなく、`checker-adjacent semantic carrier` を first attachment に置く。
@@ -110,10 +110,8 @@
   - model-check concrete tool binding と first settled property language
   - final typed syntax / final public verifier contract / full strong type system
 - 直近の研究計画:
-  1. `model-check small-cluster projection keep/drop refresh`
-  2. `order / handoff source-surface wording reserve note`
-  3. `modality internalization trigger note`
-  4. その後に stronger typed surface / concrete theorem-model-check binding の可否を再評価する
+  1. `modality internalization trigger note`
+  2. その後に stronger typed surface / concrete theorem-model-check binding の later gate を再評価する
 - 自走範囲:
   current stop line までは `着手可能`。
   concrete theorem/model-check binding と stronger typed surface promotion は `mixed gate`。
@@ -128,7 +126,7 @@
   `Macro 5 third-order follow-up active` と `Macro 6 shared-space boundary strengthening` の接続部。
   feature-stage の読みでは、ordering / `memory_order` 再解釈は `S4-S5`、shared-space docs-first boundary は `S3-S4` にあり、current phase は `comparison framework hardening` である。
 - rough progress:
-  `ordering / memory-model reinterpretation` は `61% / 52% / 15%`。
+  `ordering / memory-model reinterpretation` は `63% / 54% / 15%`。
   隣接する `shared-space docs-first boundary` は `57% / 48% / 27%`。
   authority-handoff operational side は shared-space row と密接だが、current snapshot ではまだ独立の progress row を持たない。
   そのため、この重線全体に対する単一の combined percentage はまだ固定しない。
@@ -157,9 +155,8 @@
   - scheduler / runtime finalization
   - shared-space final fairness / replay / authority catalog
 - 直近の研究計画:
-  1. `order / handoff source-surface wording reserve note`
-  2. `modality internalization trigger note`
-  3. その後に source-surface handoff wording と concrete tool / runtime binding の昇格可否を再評価する
+  1. `modality internalization trigger note`
+  2. その後に source-surface handoff wording、property language、concrete tool / runtime binding の later gate を再評価する
 - 自走範囲:
   docs-first comparison、adequacy corpus hardening、candidate reduction、shared-space boundary strengthening までは `着手可能`。
   concrete tool / runtime binding と fairness operational profile は `mixed gate`。
@@ -169,8 +166,6 @@
 
 ### 研究で見つけること
 
-- model-check small-cluster projection keep/drop
-- order / handoff source-surface wording reserve
 - modality internalization trigger note
 
 ### mixed gate / later reserve
@@ -190,6 +185,7 @@
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細は `docs/reports/` を正本にする。
+- 2026-04-17 07:22 JST — `docs/reports/0708` で `specs/examples/441...442` を追加し、model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve を docs-first に固定したうえで、`faq_005.md` を literature mapping と dice-owner handoff explanation 付きの current explanation へ更新し、theory-lab lane の next reopen を modality internalization trigger note に更新した。
 - 2026-04-17 00:28 JST — `docs/reports/0707` で `specs/examples/439...440` を追加し、typed family split と notebook-consumer threshold / discharge reserve を docs-first に固定したうえで、theory-lab lane を third-order follow-up active へ進め、next reopen を model-check small-cluster projection keep/drop refresh に更新した。
 - 2026-04-17 00:04 JST — `docs/reports/0706` で `specs/examples/433...438` を追加し、typed/theorem/model-check second-order reserve、order/handoff emitted-artifact schema reserve、guarded-vs-MDTT/MTT reduction timing、duplicate-cluster next widening cut を docs-first に固定したうえで、theory-lab lane を reserve checkpoint close、execution lane を duplicate pair actualization comparison へ更新した。
 - 2026-04-16 23:42 JST — `docs/reports/0705` で `specs/examples/431...432` を追加し、public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note を docs-first に固定したうえで、reserve integration line を checkpoint close とし、current self-driven queue を theory-lab reserve packages と duplicate-cluster execution reopen に更新した。

@@ -231,6 +231,21 @@
   - `specs/examples/434-current-l2-admissible-evidence-contraction-note.md`
   - `docs/reports/0707-third-order-followup-typed-family-split-and-notebook-threshold.md`
 
+## 2026-04-17 FAQ 05 literature mapping and theory-lab follow-up addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_004.md`、`faq_005.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
+  - `specs/examples/428-current-l2-order-handoff-property-language-bridge-note.md`
+  - `specs/examples/429-current-l2-modal-promotion-threshold-note.md`
+  - `specs/examples/436-current-l2-order-handoff-emitted-artifact-schema-reserve-note.md`
+  - `specs/examples/441-current-l2-model-check-small-cluster-projection-keep-drop-refresh.md`
+  - `specs/examples/442-current-l2-order-handoff-source-surface-wording-reserve-note.md`
+  - `docs/reports/0708-faq005-literature-mapping-and-theory-lab-followup.md`
+
 ## 2026-04-12 Phase 6 reserve formal tool binding inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

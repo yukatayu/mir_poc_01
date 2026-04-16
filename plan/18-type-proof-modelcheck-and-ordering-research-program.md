@@ -144,7 +144,7 @@ full strong type system や production tool binding を immediate target にし�
 - typed-core attachment inventory
 - first source-visible typed-surface comparison
 
-### current package close detail
+### current package chain detail
 
 - checker attachment から handoff row への migration note
   - principal source は checker attachment に残す
@@ -247,10 +247,14 @@ full strong type system や production tool binding を immediate target にし�
   - room protocol / fairness / replay family を order/handoff reserve に残す
 - tool-binding stop-line refresh
   - explicit non-goal を固定し、concrete tool binding を still later に残す
+- model-check small-cluster projection keep/drop refresh
+  - same-subject stage-local small cluster を keep line に置く
+  - typed reserve / theorem discharge / room protocol family を drop する
 
 ### next package order
 
-1. model-check small-cluster projection keep/drop refresh
+1. no immediate near-term package
+   - first settled property language / concrete tool seam は later gate で再評価する
 
 ### stop line
 
@@ -329,10 +333,17 @@ full strong type system や production tool binding を immediate target にし�
 - `4D candidate reduction`
   - `authority_serial_transition_family` / `witness_aware_commit_family` / `event_tree_execution_view` / low-level reference family の keep/drop line
 
-current package では、negative corpus coverage、higher-level candidate reduction、property-language bridge までを docs-first に固める。
+current package chain では、negative corpus coverage、higher-level candidate reduction、property-language bridge までを docs-first に固める。
 actual protocol projection、final emitted-artifact schema、tool binding は still later に残す。
 さらに current reserve line では、
 refs-only reserve schema を first cut とし、consumer-shaped schema と source-surface-first schema は still later に残す。
+
+### latest package close detail
+
+- order / handoff source-surface wording reserve note
+  - snake_case relation family 名を principal wording に保つ
+  - plain-language stage wording を explanation layer に重ねる
+  - low-level fence-like wording と room macro wording は still later に残す
 
 ### stop line
 
@@ -411,9 +422,8 @@ refs-only reserve schema を first cut とし、consumer-shaped schema と sourc
 
 ## current near-term theory-lab sequence
 
-1. model-check small-cluster projection keep/drop refresh
-2. order / handoff source-surface wording reserve note
-3. modality internalization trigger note
+1. modality internalization trigger note
+2. malformed duplicate-cluster source-authored static-stop pair actualization comparison
 
 ## current recommendation
 

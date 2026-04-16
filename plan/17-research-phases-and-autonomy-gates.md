@@ -39,7 +39,7 @@
   `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
 - theory-lab lane:
   `Macro 5 third-order follow-up active`
-  （typed-surface family split と notebook-consumer threshold は fixed 済み、next reopen は model-check small-cluster projection keep/drop refresh）
+  （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
 - reserve integration lane:
   `Macro 6/7 reserve integration checkpoint close`
   （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -54,8 +54,9 @@
 - fixed-subset source sample expansion
 - typed attachment candidate inventory
 - theorem pilot planning と wording hardening
-- model-check projection / property-family reserve planning と bridge grain note
+- model-check projection / property-family reserve planning、bridge grain note、small-cluster projection keep/drop refresh
 - order / handoff / syntax / modality の docs-first comparison と follow-up bridge note
+- order / handoff source-surface wording reserve note
 - verifier-boundary matrix と adequacy corpus の docs-first hardening
 
 ### boundary までは self-driven でよい line
@@ -118,7 +119,7 @@
 - source-visible typed-surface comparison、theorem lemma wording hardening、model-check bridge grain note は docs-first に閉じられる段階にある。
 - checker attachment migration、proof artifact stop-line refresh、sample-visible property summary wording も docs-first に閉じられる段階にある。
 - request/predicate/try typed-surface reserve、admissible evidence contraction、tool-binding stop-line refresh は docs-first に fixed 済みであり、current third-order lane の直前 checkpoint を成している。
-- typed-surface family split と notebook-consumer threshold / discharge reserve は docs-first に fixed 済みであり、current lane は third-order follow-up active に入っている。
+- typed-surface family split、notebook-consumer threshold / discharge reserve、model-check small-cluster projection keep/drop、order/handoff source-surface wording reserve は docs-first に fixed 済みであり、current lane は third-order follow-up active に入っている。
 - ordering / `memory_order` reinterpretation も「未着手で何も言えない」段階ではなく、theory-first inventory と handoff boundary を整理できる段階にある。
 - order / handoff line も、falsifier loop、candidate reduction、property-language bridge、modal promotion threshold まで進められる段階にある。
 - order / handoff emitted-artifact schema reserve と guarded-vs-MDTT/MTT reduction timing は docs-first に fixed 済みであり、current third-order lane の直前 checkpoint を成している。

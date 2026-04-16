@@ -40,8 +40,8 @@ Phase 6 は、Phase 1〜5 で fixed した semantics / parser-free PoC / proof b
   `specs/examples/431...432`
 - third-order theory-lab reserve hardening and duplicate next-cut comparison:
   `specs/examples/433...438`
-- third-order follow-up first pair:
-  `specs/examples/439...440`
+- third-order follow-up:
+  `specs/examples/439...442`
 
 current authored source sample は
 `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
@@ -69,9 +69,10 @@ current authored source sample は
 - third-order follow-up active:
   request/predicate/try cluster typed-surface reserve note / admissible evidence contraction note / tool-binding stop-line refresh /
   order/handoff emitted-artifact schema reserve note / guarded-vs-MDTT/MTT reduction timing note /
-  typed-surface family split / notebook-consumer threshold
+  typed-surface family split / notebook-consumer threshold /
+  model-check small-cluster projection keep/drop / order-handoff source-surface wording reserve
 - goal:
-  sample-visible first milestone の次段 reserve を docs-first に固定したうえで、next reopen を model-check small-cluster projection keep/drop refresh に送る
+  sample-visible first milestone の次段 reserve を docs-first に固定したうえで、model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve まで進め、next reopen を modality internalization trigger note に送る
 
 ### reserve integration lane
 

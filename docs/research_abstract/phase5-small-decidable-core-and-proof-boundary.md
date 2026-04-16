@@ -120,9 +120,13 @@ current repo の post-Phase-5 theory-lab line では、この theorem-first brid
 **admissible evidence contraction note**
 と
 **notebook-consumer threshold and discharge reserve note**
-まで fixed 済みであり、next natural step は
+まで fixed 済みである。
+その後、adjacent theory-lab line では
 **model-check small-cluster projection keep/drop refresh**
-ののちに theorem discharge transport / public-contract later gate を再評価することである。
+と
+**order/handoff source-surface wording reserve note**
+まで docs-first に固定した。
+theorem-side の次 direct reopen は、その後段で theorem discharge transport / public-contract later gate を再評価することである。
 その具体的な first threshold も、
 **human review checklist / walkthrough pressure**
 に置くのが最小であり、compare / bless-like flow や actual file exchange はさらに後段に残す。
