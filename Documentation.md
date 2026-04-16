@@ -28,7 +28,8 @@
     `Macro 5/6` follow-up
     (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
   - reserve integration lane:
-    `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
+    `Macro 6/7 reserve integration checkpoint close`
+    （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 
 ## source-backed で既にあるもの
 
@@ -53,6 +54,8 @@
     `specs/examples/425...429`
   - execution-side duplicate-cluster later reopen comparison:
     `specs/examples/430`
+- reserve integration closeout follow-up:
+  `specs/examples/431...432`
 
 ## まだ OPEN のもの
 
@@ -75,14 +78,14 @@
 4. theory-lab の detail:
    `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 5. current long-form FAQ:
-   `faq_004.md`
+   `faq_005.md`
 
 ## 直近で特に重要な文書
 
 - theory-lab operating model と comparison bundle:
   `specs/examples/405...412`
 - typed / theorem / model-check / ordering の current adjacent package:
-  `specs/examples/413...430`
+  `specs/examples/413...432`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:

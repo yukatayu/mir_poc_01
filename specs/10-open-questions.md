@@ -165,7 +165,7 @@
    - 未決なのは、observation meaning、rollback interaction、durability / evidence burden、cross-place aggregation burden、verifier handoff friendlinessの観点から、local finalization / global snapshot / ordering-only barrier / commit-bearing durable cut をどう整理するのが最も誤読に強いかである。
 32. order / visibility / witness family を relation decomposition としてどこまで docs 側で整理するか。
    - C++ `memory_order_consume` / `std::kill_dependency` family は reference family として有用だが、current source language の final surface に直輸入する判断はしていない。
-   - current theory line では、少なくとも `po`、`dep`、`pub`、`obs`、`wit`、`final`、`hb(scope)` のような relation decomposition が比較候補になる。
+   - current theory line では、少なくとも `program_order`、`dependency_order`、`publication_order`、`observation_order`、`witness_order`、`finalization_order`、`scoped_happens_before` のような relation decomposition が比較候補になる。
    - 未決なのは、これらの relation 名をどこまで docs-first working vocabulary に昇格させるか、また shared-memory lowering と distributed handoff lowering の両方へ自然に接続できる分解が何かである。
 33. thread / node parity をどの水準で書くべきか。
    - source-backed な floor として固定済みなのは、`place` が deployment artifact ではなく semantic locus であり、routing / transport / distributed realization は Mir-0 の外にあるという点である。

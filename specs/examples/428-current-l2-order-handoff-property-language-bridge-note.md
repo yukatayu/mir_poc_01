@@ -28,7 +28,7 @@ order / handoff line で、
   local finalization / ordering-only barrier / snapshot-only observation / durable commit
   に分けて比較済みである。
 - relation decomposition は
-  `po / dep / pub / obs / wit / final / hb(scope)`
+  `program_order / dependency_order / publication_order / observation_order / witness_order / finalization_order / scoped_happens_before`
   まで docs-first working vocabulary に上がっている。
 - adequacy corpus と 4-way boundary matrix は fixed 済みである。
 - candidate reduction は

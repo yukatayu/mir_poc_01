@@ -51,7 +51,8 @@
 - 近接運用は 3 lane で読むのが自然である。
   - execution lane: `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
   - theory-lab lane: `Macro 5` typed / theorem / model-check reserve follow-up と `Macro 5/6` order / memory / syntax / modality reserve follow-up
-  - reserve integration lane: `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
+  - reserve integration lane: `Macro 6/7 reserve integration checkpoint close`
+    （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 - 型 / 定理証明 / モデル検査 / ordering は mainline に無理に混ぜず、detail-side research program として扱う。
 - shared-space と host-facing I/O は docs-first boundary までは自走可能だが、final operational catalog や concrete target binding は later / mixed gate に残す。
 

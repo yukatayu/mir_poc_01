@@ -36,6 +36,8 @@ Phase 6 は、Phase 1〜5 で fixed した semantics / parser-free PoC / proof b
     `specs/examples/425...429`
   - execution-side duplicate-cluster later reopen comparison:
     `specs/examples/430`
+- reserve integration closeout follow-up:
+  `specs/examples/431...432`
 
 current authored source sample は
 `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
@@ -69,9 +71,9 @@ current authored source sample は
 
 ### reserve integration lane
 
-- `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
+- `Macro 6/7 reserve integration checkpoint close`
 - goal:
-  thin facade、support-only surface、CLI shell concern の boundary を hidden promotion なしで保つ
+  thin facade、support-only surface、CLI shell concern、shared-space fairness / replay reserve line を hidden promotion なしで保ったまま、next reopen を later mixed gate に留める
 
 ## current status の短い要約
 
@@ -88,7 +90,7 @@ current authored source sample は
   - modal comparison follow-up
   まで docs-first に固まった。
 - docs-first host-I/O boundary と shared-space identity / admission / authority boundary も fixed 済みである。
-- current-L2 scoped Rust shell over thin facade と shared-space room-profile / host-binding bridge-only note も fixed 済みであり、current reserve integration line は packaging / fairness-replay strengthening 側へ進んでいる。
+- current-L2 scoped Rust shell over thin facade、shared-space room-profile / host-binding bridge-only note、public operational CLI packaging reserve note、shared-space fairness / replay strengthening reserve note も fixed 済みであり、reserve integration line は checkpoint close に入っている。
 - duplicate-cluster line は current では comparison-first に留め、source-sample widening comparison を次の execution reopen として扱う。
 - final parser grammar、final public API、concrete theorem / model-check tool binding、backend / external codegen は still later に残る。
 

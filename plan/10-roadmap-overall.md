@@ -52,9 +52,9 @@
 - 主眼:
   thin facade / public shell / shared-space / host-I/O boundary を hidden promotion なしで整理する
 - current line:
-  `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
+  `Macro 6/7 reserve integration checkpoint close`
 - goal:
-  support-only / shell / excluded bucket を混ぜずに保つ
+  support-only / shell / excluded bucket を混ぜずに保ちつつ、next reopen を later mixed gate に留める
 
 ## macro roadmap
 

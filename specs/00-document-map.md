@@ -1062,7 +1062,7 @@
 - `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
   - `atomic_cut` の local finalization と global observation / snapshot を scenario ベースで切り分ける補助文書。
 - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
-  - `po` / `dep` / `pub` / `obs` / `wit` / `final` / `hb(scope)` の relation decomposition と、low-level memory-order family を retained-later reference family に留める current judgmentを整理する補助文書。
+  - `program_order` / `dependency_order` / `publication_order` / `observation_order` / `witness_order` / `finalization_order` / `scoped_happens_before` の relation decomposition と、low-level memory-order family を retained-later reference family に留める current judgmentを整理する補助文書。
 - `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
   - thread と node を source-level causal language では近く扱いつつ、lowering / transport / evidence / failure / durability policy の差を別に保つ current working line を整理する補助文書。
 - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
@@ -1109,6 +1109,10 @@
   - `lambda-circle-box` partial basis と guarded / MDTT / MTT stronger-candidate family のあいだにある promotion threshold を整理する補助文書。
 - `specs/examples/430-current-l2-malformed-duplicate-cluster-later-reopen-comparison.md`
   - duplicate cluster の kept-later family と next reopen sequencing を、broader malformed-static familyと混線させずに比較する補助文書。
+- `specs/examples/431-current-l2-public-operational-cli-packaging-reserve-note.md`
+  - current-L2 scoped Rust shell actualization と installed-binary / final packaging success-criteria later gate の境界を、hidden promotion なしで整理する補助文書。
+- `specs/examples/432-current-l2-shared-space-fairness-replay-strengthening-reserve-note.md`
+  - shared-space identity / admission / authority / room-profile-host bridge fixed 後の fairness / replay reserve line を、final operational catalog と混ぜずに整理する補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

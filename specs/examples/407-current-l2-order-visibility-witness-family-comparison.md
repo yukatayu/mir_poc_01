@@ -15,13 +15,13 @@ order / visibility / witness を relation decomposition として比較する。
 
 | relation | working reading | current use |
 |---|---|---|
-| `po` | same-place program order | local structural / proof reading |
-| `dep` | dependency-preserving order | consume / kill-dependency reference family comparison |
-| `pub` | publication / release-like relation | handoff precondition / visibility edge |
-| `obs` | observation / acquire-or-consume-like relation | receiver / reader side visibility |
-| `wit` | witness / receipt / proof / handoff evidence relation | theorem / protocol boundary handoff |
-| `final` | local or scoped finalization relation | `atomic_cut` nucleus and later scoped finalization families |
-| `hb(scope)` | scope-aware admissible order relation | shared-memory lowering / distributed handoff lowering comparison |
+| `program_order` | same-place program order | local structural / proof reading |
+| `dependency_order` | dependency-preserving order | consume / kill-dependency reference family comparison |
+| `publication_order` | publication / release-like relation | handoff precondition / visibility edge |
+| `observation_order` | observation / acquire-or-consume-like relation | receiver / reader side visibility |
+| `witness_order` | witness / receipt / proof / handoff evidence relation | theorem / protocol boundary handoff |
+| `finalization_order` | local or scoped finalization relation | `atomic_cut` nucleus and later scoped finalization families |
+| `scoped_happens_before` | scope-aware admissible order relation | shared-memory lowering / distributed handoff lowering comparison |
 
 ## current judgment
 
@@ -34,10 +34,10 @@ order / visibility / witness を relation decomposition として比較する。
 
 | non-equation | reason |
 |---|---|
-| `pub != obs` | publish したことと、それを観測したことは別 relation である |
-| `obs != wit` | 観測したことと、handoff / receipt / proof に使える witness を持つことは別 relation である |
-| `final != durable` | local or scoped finalization と commit/evidence-bearing durability は別 family である |
-| `hb(scope) != authority_seriality` | admissible order relation と authoritative serial transition family は別 concern である |
+| `publication_order != observation_order` | publish したことと、それを観測したことは別 relation である |
+| `observation_order != witness_order` | 観測したことと、handoff / receipt / proof に使える witness を持つことは別 relation である |
+| `finalization_order != durable` | local or scoped finalization と commit/evidence-bearing durability は別 family である |
+| `scoped_happens_before != authority_seriality` | admissible order relation と authoritative serial transition family は別 concern である |
 
 ## comparison note
 
@@ -49,6 +49,6 @@ order / visibility / witness を relation decomposition として比較する。
 
 ## what is not decided here
 
-- relation 名を final user-facing token にすること
+- short alias を final user-facing token に戻すこと
 - backend lowering contract
 - theorem / protocol / runtime の final handoff schema

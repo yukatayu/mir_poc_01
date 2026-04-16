@@ -70,6 +70,20 @@ shared-space line の docs-first reorder としては、少なくとも次の順
 ここで 1〜3 は current docs-first reopen chain と整合しており、4 も authoritative room baseline / small working subset の current package 読みと矛盾しない。
 still later と読むのは 5〜6 であり、特に 6 は user-spec-required gate と読む。
 
+### fairness / replay strengthening reserve の current reading
+
+- `specs/examples/432` で、fairness / replay line は final operational catalog ではなく reserve-strengthening package として読む cut を追加した。
+- preserve する principal axes は、
+  authority placement、
+  provider placement、
+  witness requirement、
+  fairness source / trust model、
+  replay attachment、
+  payload / observation visibility
+  の 6 つである。
+- replay / fairness / provider-receipt family は主に `protocol_verifier_boundary` と `runtime_policy_boundary` に残し、room-core semantics や checker floor に collapse しない。
+- concrete replay protocol/profile、distributed fairness protocol、concrete authority binding、`control_epoch` actualization timing は still later に残す。
+
 ### confusion / replay hardening note
 
 - future docs では `logical_member_id`、`incarnation`、admission decision、authority holder、replay receipt / refusal を separate concern として扱う方がよい。

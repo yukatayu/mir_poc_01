@@ -43,7 +43,8 @@
   `Macro 5/6` follow-up
   (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
 - reserve integration lane:
-  `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
+  `Macro 6/7 reserve integration checkpoint close`
+  （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 
 ## autonomy gate detail
 

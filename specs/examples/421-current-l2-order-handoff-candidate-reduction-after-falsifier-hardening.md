@@ -14,14 +14,14 @@
 ## source-backed floor
 
 - cut family は local finalization / observation snapshot / ordering-only barrier / durable commit を分ける。
-- relation decomposition は `po / dep / pub / obs / wit / final / hb(scope)` を working vocabulary に持つ。
+- relation decomposition は `program_order / dependency_order / publication_order / observation_order / witness_order / finalization_order / scoped_happens_before` を working vocabulary に持つ。
 - falsifier family は relation collapse、handoff precondition omission、replay/epoch omission、provider/authority collapse、fairness overclaim、seriality overfit を already 含む。
 
 ## current reduction
 
 | family | current role | reason |
 |---|---|---|
-| `authority_serial_transition_family` | current first higher-level candidate | authoritative room の publication / handoff / witness / payload / epoch を、`pub != obs != wit` を保ったまま最も素直に書ける |
+| `authority_serial_transition_family` | current first higher-level candidate | authoritative room の publication / handoff / witness / payload / epoch を、`publication_order != observation_order != witness_order` を保ったまま最も素直に書ける |
 | `witness_aware_commit_family` | second candidate | durability / evidence-bearing transition が必要な line に向くが、local-finalization line へ premature に混ぜない方がよい |
 | `event_tree_execution_view` | derived/debug candidate | execution explanation / audit には有用だが、primary user-facing control family にすると order と view が collapse しやすい |
 | low-level `memory_order` / `kill_dependency` family | retained-later reference family | backend-aligned comparisonには重要だが、current source surface に直輸入しない |
@@ -37,10 +37,10 @@
 
 kept candidate と呼べるためには、少なくとも次を満たす必要がある。
 
-- `pub == obs` と short-hand しない
-- `obs == wit` と short-hand しない
-- `final == durable` と short-hand しない
-- `hb(scope) == authority_seriality` と short-hand しない
+- `publication_order == observation_order` と short-hand しない
+- `observation_order == witness_order` と short-hand しない
+- `finalization_order == durable` と short-hand しない
+- `scoped_happens_before == authority_seriality` と short-hand しない
 - provider placement と authority slot を別軸に保つ
 - fairness claim を safety claim に潰さない
 

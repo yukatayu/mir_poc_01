@@ -13,7 +13,7 @@ order / handoff line を prose-only comparison に留めず、
 ## source-backed floor
 
 - cut family comparison は `atomic_cut / barrier / snapshot-only candidate / durable_cut` の 4 分解である。
-- relation decomposition は `po / dep / pub / obs / wit / final / hb(scope)` の working vocabulary を持つ。
+- relation decomposition は `program_order / dependency_order / publication_order / observation_order / witness_order / finalization_order / scoped_happens_before` の working vocabulary を持つ。
 - order / handoff adequacy corpus と property-to-boundary matrix は already 存在する。
 - 4-way verifier split は fixed 済みである。
 
@@ -22,7 +22,7 @@ order / handoff line を prose-only comparison に留めず、
 | falsifier family | what it tries to kill |
 |---|---|
 | cut-family conflation | `atomic_cut` を snapshot / durable commit と short-hand する reading |
-| relation collapse | `pub == obs`、`obs == wit`、`final == durable`、`hb(scope) == authority-seriality` のような collapse |
+| relation collapse | `publication_order == observation_order`、`observation_order == witness_order`、`finalization_order == durable`、`scoped_happens_before == authority_seriality` のような collapse |
 | handoff precondition omission | publication / witness なし handoff が admissible に見える reading |
 | replay / epoch omission | stale receipt / duplicate receipt / epoch mismatch を hidden repair する reading |
 | provider / authority collapse | provider placement と authority slot を同一視する reading |

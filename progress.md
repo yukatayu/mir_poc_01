@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-16 23:20 JST
+最終更新: 2026-04-16 23:43 JST
 
 ## この文書について
 
@@ -18,7 +18,8 @@
   `Macro 5/6` follow-up
   (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
 - current reserve integration line:
-  `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
+  `Macro 6/7 reserve integration checkpoint close`
+  （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 - immediate blocker: `0`
 - current lane を止める user decision: `0`
 - current authored source sample:
@@ -48,9 +49,9 @@
 | theorem-side pilot | `S5-S6` | notebook-first pilot、lemma order、lemma wording floor、bridge stop-line refresh | admissible evidence contraction note |
 | model-check line | `S5-S6` | row-local carrier、projection reserve inventory、sample-facing summary | tool-binding stop-line refresh |
 | typed-core / type system | `S3-S4` | obligation owner matrix、attachment inventory、source-visible first comparison | request / predicate / `try` cluster typed-surface reserve |
-| multi-node / shared-space | `S3-S4` at boundary | identity / admission / authority / room-profile-host bridge note | fairness / replay strengthening reserve |
+| multi-node / shared-space | `S3-S4` at boundary | identity / admission / authority / room-profile-host bridge note、fairness / replay reserve note | final operational catalog / fairness operational profile mixed gate |
 | dynamic attach / detach / safe downstream addition | `S2-S3` | DAG discipline、overlay constraints、shared-space boundary notes | operational profile / fairness reserve は later |
-| host-facing I/O / adapter boundary | `S4` | capability-scoped docs-first boundary、thin facade、Rust shell actualization | public operational CLI packaging reserve |
+| host-facing I/O / adapter boundary | `S4` | capability-scoped docs-first boundary、thin facade、Rust shell actualization、CLI packaging reserve note | adapter target / final host contract mixed gate |
 | ordering / `memory_order` reinterpretation | `S4-S5` | cut-family comparison、relation decomposition、falsifier coverage、property-language bridge | emitted-artifact schema reserve |
 | syntax / modality theory line | `S3-S4` | syntax honesty principle、stimuli comparison、modal promotion threshold | guarded-vs-MDTT/MTT reduction timing |
 | public dev surface / CLI | `S4-S5` | thin facade、later support、current-L2 scoped Rust shell actualization | installed-binary / final packaging reserve |
@@ -131,7 +132,7 @@
 - 採用済みの骨格:
   - `atomic_cut` は current `place` の rollback frontier を確定する local finalizing cut であり、global consistent cut / durable commit / distributed sync point ではない。
   - cut family は `local finalization / ordering-only barrier / snapshot-only observation / durable commit` に分けて比較する。
-  - order family は `po / dep / pub / obs / wit / final / hb(scope)` を working relation decomposition とする。
+  - order family は `program_order / dependency_order / publication_order / observation_order / witness_order / finalization_order / scoped_happens_before` を working relation decomposition とする。
   - `authority_serial_transition_family` を first kept candidate、`witness_aware_commit_family` を second candidate に置く。
   - low-level `std::memory_order` / `kill_dependency` family は reference family として保持するが、current source surface には直接輸入しない。
   - thread と node は programming surface では同じ causal language で扱いたいが、差は lowering / evidence / failure / transport / fairness に残す。
@@ -153,8 +154,7 @@
 - 直近の研究計画:
   1. `order / handoff emitted-artifact schema reserve note`
   2. `guarded-vs-MDTT/MTT reduction timing note`
-  3. `shared-space fairness / replay strengthening reserve note`
-  4. その後に source-surface handoff wording と concrete tool / runtime binding の昇格可否を再評価する
+  3. その後に source-surface handoff wording と concrete tool / runtime binding の昇格可否を再評価する
 - 自走範囲:
   docs-first comparison、adequacy corpus hardening、candidate reduction、shared-space boundary strengthening までは `着手可能`。
   concrete tool / runtime binding と fairness operational profile は `mixed gate`。
@@ -169,19 +169,23 @@
 - model-check tool-binding stop line
 - order / handoff emitted-artifact schema reserve
 - guarded-vs-MDTT/MTT reduction timing
-- shared-space fairness / replay strengthening reserve
-- public operational CLI packaging reserve
+
+### mixed gate / later reserve
+
+- shared-space final fairness / replay operational profile
+- public operational CLI installed-binary / packaging success criteria
 
 ### user が後で決めること
 
 - shared-space final catalog
 - first external integration target
-- final public packaging success criteria
+- backend / tooling success criteria
 - first application target
 
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細は `docs/reports/` を正本にする。
+- 2026-04-16 23:42 JST — `docs/reports/0705` で `specs/examples/431...432` を追加し、public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note を docs-first に固定したうえで、reserve integration line を checkpoint close とし、current self-driven queue を theory-lab reserve packages と duplicate-cluster execution reopen に更新した。
 - 2026-04-16 23:20 JST — `docs/reports/0704` で twin peaks 追跡用の節を `progress.md` に追加し、typed/theorem/model-check 線と order/memory-order/authority-handoff 線について、現段階・rough progress・source-backed floor・OPEN・次の research package を分離して snapshot 化した。
 - 2026-04-16 22:34 JST — `docs/reports/0703` で `specs/examples/423...430` を追加し、public operational CLI current-L2 shell actualization、shared-space room-profile / host-binding bridge-only note、typed/theorem/model-check second-order docs-first follow-up、duplicate-cluster later reopen comparisonを close したうえで、current line を packaging reserve / fairness-replay reserve / typed-theorem-model-check reserve / duplicate-cluster source-sample widening comparison に更新した。
 - 2026-04-16 21:55 JST — `docs/reports/0702` で `e13/e20` capability pair を source-authored static-stop pair として actualize し、sample corpus を authored dozen に widen したうえで、typed-surface comparison / theorem lemma wording hardening / model-check bridge note / order-handoff candidate reduction / modal follow-up を `specs/examples/417...422` と `plan/11` `12` `17` `18` に反映した。

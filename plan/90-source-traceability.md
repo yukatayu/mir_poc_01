@@ -192,6 +192,15 @@
 - `Documentation.md`、`progress.md`、`plan/01-status-at-a-glance.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
   - `docs/reports/0694-phase6-post-cli-actualization-document-consistency-audit.md`
 
+## 2026-04-16 reserve integration closeout note addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/423-current-l2-public-operational-cli-concrete-shell-actualization.md`
+  - `specs/examples/424-current-l2-shared-space-room-profile-host-binding-bridge-only-note.md`
+  - `specs/examples/431-current-l2-public-operational-cli-packaging-reserve-note.md`
+  - `specs/examples/432-current-l2-shared-space-fairness-replay-strengthening-reserve-note.md`
+  - `docs/reports/0705-reserve-integration-closeout-notes.md`
+
 ## 2026-04-12 Phase 6 reserve formal tool binding inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
