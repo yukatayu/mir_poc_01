@@ -1113,6 +1113,18 @@
   - current-L2 scoped Rust shell actualization と installed-binary / final packaging success-criteria later gate の境界を、hidden promotion なしで整理する補助文書。
 - `specs/examples/432-current-l2-shared-space-fairness-replay-strengthening-reserve-note.md`
   - shared-space identity / admission / authority / room-profile-host bridge fixed 後の fairness / replay reserve line を、final operational catalog と混ぜずに整理する補助文書。
+- `specs/examples/433-current-l2-request-predicate-try-cluster-typed-surface-reserve-note.md`
+  - checker attachment principal を維持したまま、request / predicate / `try` cluster を grouped typed-surface reserve cue に留める current cut を整理する補助文書。
+- `specs/examples/434-current-l2-admissible-evidence-contraction-note.md`
+  - theorem-side admissible evidence を symbolic refs only に contraction する current cut を整理する補助文書。
+- `specs/examples/435-current-l2-tool-binding-stop-line-refresh.md`
+  - model-check line の explicit non-goal と tool-binding stop line を refresh する補助文書。
+- `specs/examples/436-current-l2-order-handoff-emitted-artifact-schema-reserve-note.md`
+  - order / handoff line の emitted-artifact schema を refs-only reserve schema first cut に留める current reading を整理する補助文書。
+- `specs/examples/437-current-l2-guarded-vs-mdtt-mtt-reduction-timing-note.md`
+  - guarded と MDTT/MTT cluster の exact reduction timing を threshold-gated parallel keep に留める current reading を整理する補助文書。
+- `specs/examples/438-current-l2-malformed-duplicate-cluster-source-sample-widening-comparison.md`
+  - duplicate cluster `e14/e15` の source-authored static-stop pair widening を next exact cut として比較する補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

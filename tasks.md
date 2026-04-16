@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-16 23:43 JST
+最終更新: 2026-04-17 00:04 JST
 
 ## この文書について
 
@@ -12,12 +12,10 @@
 ## current lanes
 
 - execution lane:
-  `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
+  `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
 - theory-lab lane:
-  `Macro 5` follow-up
-  (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`) と
-  `Macro 5/6` follow-up
-  (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
+  `Macro 5/6 reserve checkpoint close`
+  （typed/theorem/model-check second-order reserve と order/modality reserve は fixed 済み、next reopen は third-order follow-up）
 - reserve integration lane:
   `Macro 6/7 reserve integration checkpoint close`
   （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -28,24 +26,24 @@
 
 | 順番 | lane | macro | task package | completion signal | rough estimate |
 |---|---|---|---|---|---|
-| 1 | theory-lab | `Macro 5` | request / predicate / `try` cluster typed-surface reserve note | handoff migration 後の next typed-surface reserve line が揃う | 1〜2 task |
-| 2 | theory-lab | `Macro 5` | admissible evidence contraction note | proof artifact / bridge stop line fixed 後の next theorem reserve line が揃う | 1〜2 task |
-| 3 | theory-lab | `Macro 5` | tool-binding stop-line refresh | sample-facing summary fixed 後の next model-check reserve line が揃う | 1〜2 task |
-| 4 | theory-lab | `Macro 5/6` | order / handoff emitted-artifact schema reserve note | property-language bridge fixed 後の emitted-artifact schema reserve line が揃う | 1〜2 task |
-| 5 | theory-lab | `Macro 5/6` | guarded-vs-MDTT/MTT reduction timing note | modal promotion threshold fixed 後の stronger-candidate reduction timing が揃う | 1〜2 task |
-| 6 | execution | `Macro 4` | malformed duplicate-cluster source-sample widening comparison | duplicate cluster の next widening cut と non-promotion guard が揃う | 1〜2 task |
+| 1 | theory-lab | `Macro 5` | typed-surface family unification keep/drop note | request / predicate / `try` reserve 後の shared family split が揃う | 1〜2 task |
+| 2 | theory-lab | `Macro 5` | notebook-consumer threshold and discharge reserve note | admissible evidence contraction 後の theorem-side next threshold が揃う | 1〜2 task |
+| 3 | theory-lab | `Macro 5` | model-check small-cluster projection keep/drop refresh | tool-binding stop line 後の projection keep/drop が揃う | 1〜2 task |
+| 4 | theory-lab | `Macro 5/6` | order / handoff source-surface wording reserve note | emitted-artifact schema reserve 後の wording keep/drop が揃う | 1〜2 task |
+| 5 | theory-lab | `Macro 5/6` | modality internalization trigger note | reduction timing 後の stronger-foundation trigger が揃う | 1〜2 task |
+| 6 | execution | `Macro 4` | malformed duplicate-cluster source-authored static-stop pair actualization comparison | duplicate pair widening の exact actualization cut と non-promotion guard が揃う | 1〜2 task |
 
 ## 研究で詰める論点
 
-- request / predicate / `try` cluster typed-surface reserve
+- typed-surface family unification keep/drop
   - detail / options / current recommendation は `plan/18` Track A を参照。
-- admissible evidence contraction
+- notebook-consumer threshold and discharge reserve
   - detail / options / current recommendation は `plan/18` Track B を参照。
-- model-check tool-binding stop line
+- model-check small-cluster projection keep/drop
   - detail / options / current recommendation は `plan/18` Track C を参照。
-- order / handoff emitted-artifact schema reserve
+- order / handoff source-surface wording reserve
   - detail / options / current recommendation は `plan/18` Track D を参照。
-- guarded-vs-MDTT/MTT reduction timing
+- modality internalization trigger
   - detail / options / current recommendation は `plan/18` Track F を参照。
 
 ## mixed gate / later reserve

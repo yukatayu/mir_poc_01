@@ -135,6 +135,10 @@ current reached-stage inventory は current authored dozen `e1` / `e2` / `e3` / 
 - public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample`、shell concern は `<sample>` / `--host-plan` / `--format pretty|json` に留める
 - capability second source-backed widening actualization comparison も fixed 済みであり、current actualization family は `e13/e20` source-authored static-stop pair、actualized surface は source sample / lowerer / runner / ladder / regression helper / fixture-static formal-hook smoke に留める
 - public operational CLI concrete shell actualization も fixed 済みであり、current first cut は `mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over thin facade として actualize した narrow shell concern に留める
-- shared-space room-profile / host binding bridge-only note も fixed 済みであり、shared-space reserve side の next line は fairness / replay strengthening に残す
-- capability second source-backed widening actualization は source-authored pair として close 済みであり、sample-side next reopen は duplicate cluster source-sample widening comparison と `TryFallback` / `AtomicCut` malformed-static broader family kept-later inventory に残す
-- repo-level current line は public operational CLI packaging reserve、shared-space fairness / replay strengthening reserve、duplicate-cluster source-sample widening comparison に進んでいる
+- shared-space room-profile / host binding bridge-only note と fairness / replay strengthening reserve note も fixed 済みであり、shared-space reserve side の next line は final operational catalog / fairness operational profile later gate に残す
+- capability second source-backed widening actualization は source-authored pair として close 済みであり、sample-side next reopen は duplicate cluster source-authored static-stop pair actualization comparison と `TryFallback` / `AtomicCut` malformed-static broader family kept-later inventory に残す
+- repo-level current snapshot は
+  - execution lane: duplicate-cluster source-authored static-stop pair actualization comparison
+  - theory-lab lane: reserve checkpoint close
+  - reserve integration lane: reserve integration checkpoint close
+  の three-lane reading に進んでいる

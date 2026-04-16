@@ -36,12 +36,10 @@
 ## current lane split
 
 - execution lane:
-  `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
+  `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
 - theory-lab lane:
-  `Macro 5` follow-up
-  (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`) と
-  `Macro 5/6` follow-up
-  (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
+  `Macro 5/6 reserve checkpoint close`
+  （typed/theorem/model-check second-order reserve と order/modality reserve は fixed 済み、next reopen は third-order follow-up）
 - reserve integration lane:
   `Macro 6/7 reserve integration checkpoint close`
   （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -119,7 +117,9 @@
 - typed-core attachment inventory、semantic-core theorem pilot order、model-check projection reserve inventory は docs-first に閉じられる段階にある。
 - source-visible typed-surface comparison、theorem lemma wording hardening、model-check bridge grain note は docs-first に閉じられる段階にある。
 - checker attachment migration、proof artifact stop-line refresh、sample-visible property summary wording も docs-first に閉じられる段階にある。
+- request/predicate/try typed-surface reserve、admissible evidence contraction、tool-binding stop-line refresh は docs-first に fixed 済みであり、current lane は reserve checkpoint close にある。
 - ordering / `memory_order` reinterpretation も「未着手で何も言えない」段階ではなく、theory-first inventory と handoff boundary を整理できる段階にある。
 - order / handoff line も、falsifier loop、candidate reduction、property-language bridge、modal promotion threshold まで進められる段階にある。
+- order / handoff emitted-artifact schema reserve と guarded-vs-MDTT/MTT reduction timing は docs-first に fixed 済みであり、current lane は reserve checkpoint close にある。
 - ただし、この 2 系統はいずれも mainline implementation へ即昇格させる段階ではない。
 - theory-lab line は repo 全体から見ると advanced line だが、この particular line 自体は still early-active である。

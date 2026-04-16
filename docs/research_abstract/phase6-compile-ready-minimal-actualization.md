@@ -38,6 +38,8 @@ Phase 6 は、Phase 1〜5 で fixed した semantics / parser-free PoC / proof b
     `specs/examples/430`
 - reserve integration closeout follow-up:
   `specs/examples/431...432`
+- third-order theory-lab reserve hardening and duplicate next-cut comparison:
+  `specs/examples/433...438`
 
 current authored source sample は
 `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
@@ -56,18 +58,17 @@ current authored source sample は
 
 ### execution lane
 
-- `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
+- `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
 - goal:
-  fixed-subset source sample widening closeout 後の next reopen family を narrow に見極める
+  duplicate cluster widening の exact actualization cut を narrow に見極める
 
 ### theory-lab adjacent lane
 
-- follow-up:
-  request/predicate/try cluster typed-surface reserve note / admissible evidence contraction note / tool-binding stop-line refresh
-- post-reduction follow-up:
+- reserve checkpoint close:
+  request/predicate/try cluster typed-surface reserve note / admissible evidence contraction note / tool-binding stop-line refresh /
   order/handoff emitted-artifact schema reserve note / guarded-vs-MDTT/MTT reduction timing note
 - goal:
-  sample-visible first milestone の次段を docs-first に固定する
+  sample-visible first milestone の次段 reserve を docs-first に固定したうえで、next reopen を third-order follow-up に送る
 
 ### reserve integration lane
 
@@ -91,7 +92,7 @@ current authored source sample は
   まで docs-first に固まった。
 - docs-first host-I/O boundary と shared-space identity / admission / authority boundary も fixed 済みである。
 - current-L2 scoped Rust shell over thin facade、shared-space room-profile / host-binding bridge-only note、public operational CLI packaging reserve note、shared-space fairness / replay strengthening reserve note も fixed 済みであり、reserve integration line は checkpoint close に入っている。
-- duplicate-cluster line は current では comparison-first に留め、source-sample widening comparison を次の execution reopen として扱う。
+- duplicate-cluster line は current では pair-first actualization comparison を次の execution reopen として扱う。
 - final parser grammar、final public API、concrete theorem / model-check tool binding、backend / external codegen は still later に残る。
 
 ## まだ fixed していないこと

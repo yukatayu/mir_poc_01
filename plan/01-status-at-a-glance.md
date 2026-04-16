@@ -11,12 +11,10 @@
 - legacy checkpoint としては、Phase 1〜5 closeout / freeze と legacy Phase 6 compile-ready checkpoint は fixed 済みである。
 - current active lane は 3 本で読むのが自然である。
   - execution lane:
-    `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
+    `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
   - theory-lab lane:
-    `Macro 5` follow-up
-    (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`) と
-    `Macro 5/6` follow-up
-    (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
+    `Macro 5/6 reserve checkpoint close`
+    （typed/theorem/model-check second-order reserve と order/modality reserve は fixed 済み、next reopen は third-order follow-up）
   - reserve integration lane:
     `Macro 6/7 reserve integration checkpoint close`
     （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -56,6 +54,11 @@
   - model-check projection reserve inventory と bridge grain
   - order/handoff candidate reduction
   - modal comparison follow-up
+  - request/predicate/try cluster typed-surface reserve
+  - admissible evidence contraction
+  - tool-binding stop-line refresh
+  - order/handoff emitted-artifact schema reserve
+  - guarded-vs-MDTT/MTT reduction timing
   まで docs-first に固まった。
 - shared-space は identity / admission / authority まで docs-first boundary があり、final operational catalog は later gate に残る。
 - host-facing integration は privileged `stdin/stdout` ではなく、capability-scoped I/O / adapter boundary の docs-first cut に留める。
@@ -65,8 +68,8 @@
 ## current recommendation
 
 - reserve integration lane では public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note が fixed 済みであり、next reopen は later mixed gate に残る。
-- theory-lab lane は second-order follow-up close 後の reserve / stop-line package を mainline と混ぜずに進める。
-- execution lane は duplicate cluster source-sample widening comparison を next reopen とし、try-rollback malformed-static broader family は kept-later inventory に残す。
+- theory-lab lane は reserve checkpoint close 後の third-order follow-up を mainline と混ぜずに進める。
+- execution lane は duplicate cluster source-authored static-stop pair actualization comparison を next reopen とし、try-rollback malformed-static broader family は kept-later inventory に残す。
 
 ## biggest later gates
 

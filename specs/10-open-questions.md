@@ -192,21 +192,25 @@
    - theorem/model-check consumer artifact は current first typed source ではなく derived attachment と読む。
    - docs-first follow-up により、first source-visible typed-surface comparison は existing structural marker family を first candidate に置き、dedicated attachment block と unified obligation block を later comparison に残す current line まで固まった。
    - docs-first migration note により、principal source を checker attachment に残し、source-visible marker を mirror、handoff row を derived reserve row に留める current cut までは固まった。
-   - 未決なのは、`family_refs[]` の exact namespace をどうするか、capability / lineage / predicate / `try` cluster をどこまで同じ attachment shape に寄せるかである。
+   - request / predicate / `try` cluster typed-surface reserve note により、request / predicate / `try` cluster を grouped reserve cue に留める current cut までは固まった。
+   - 未決なのは、`family_refs[]` の exact namespace をどうするか、capability / lineage / request / predicate / `try` cluster をどこまで同じ attachment shape に寄せるかである。
 39. semantic-core theorem pilot の first lemma order / evidence floor / review-discharge stop line をどこまで固定するか。
    - source-backed な floor として、current first theorem pilot line は `canonical_normalization_law`、`no_re_promotion`、`rollback_cut_non_interference` の順で読むのが自然である。
    - また current first concrete consumer は notebook-first line に置き、tool-neutral formal hook と row-local review unit を entry に保つ。
    - docs-first follow-up により、lemma wording floor、admissible evidence floor、review artifact と theorem discharge の stop line までは固まった。
    - proof artifact / bridge stop-line refresh により、formal hook / review unit / bridge sketch / theorem discharge を collapse しない current cut と、human review checklist / walkthrough pressure first の threshold までは固まった。
-   - 未決なのは、admissible evidence contraction、concrete theorem prover brand、proof object public contract、actual discharge transport、public checker migration timingである。
+   - admissible evidence contraction note により、admissible theorem evidence を symbolic refs only に contraction する current cut までは固まった。
+   - 未決なのは、notebook-consumer threshold と discharge reserve をどこで切るか、concrete theorem prover brand、proof object public contract、actual discharge transport、public checker migration timingである。
 40. model-check projection grain と first property-family reserve をどこまで current docs に上げるか。
    - source-backed な floor として、current line は `formal_hook -> row-local machine-facing carrier -> emitted artifact wiring -> sample-facing summary` までである。
    - current next reserve としては、small-cluster semantic projection を row-local floor の次に置き、room protocol / fairness / replay / provider receipt family は order/handoff 側 reserve に残すのが自然である。
    - docs-first follow-up により、row-local carrier から small-cluster semantic projection への bridge grain と bridge bundle floor までは固まった。
    - sample-visible property summary wording により、sample-facing summary が何を言ってよく、何を order/handoff reserve 側へ残すかの current cut までは固まった。
-   - 未決なのは、concrete model-check tool binding、first settled property language、production checker/runtime-policy contract である。
+   - tool-binding stop-line refresh により、explicit non-goal を current cut にし、concrete tool binding を still later に残す line までは固まった。
+   - 未決なのは、small-cluster projection keep/drop の exact cut、concrete model-check tool binding、first settled property language、production checker/runtime-policy contract である。
 41. order / handoff line の falsifier coverage をどこまで hardening するか。
    - source-backed な floor として、cut family comparison、relation decomposition、adequacy corpus、property-to-boundary matrix は already ある。
    - docs-first follow-up により、negative falsifier coverage と higher-level candidate reduction までは current docs に昇格済みである。current first candidate は `authority_serial_transition_family`、second candidate は `witness_aware_commit_family`、`event_tree_execution_view` は derived/debug candidate、low-level `memory_order` family は retained-later reference family に留める。
    - property-language bridge note により、kept/second candidate と boundary matrix を property-language bridge へ connect する current cut までは固まった。
-   - 未決なのは、final property language、final emitted artifact schema、concrete theorem / protocol tool binding とどう接続するかである。
+   - emitted-artifact schema reserve note により、refs-only reserve schema を first cut にし、consumer-shaped schema と source-surface-first schema を still later に残す line までは固まった。
+   - 未決なのは、final property language、final source-surface handoff wording、final emitted artifact schema、concrete theorem / protocol tool binding とどう接続するかである。

@@ -21,12 +21,10 @@
   を already 持つ。
 - current status は 3 lane で読むのが自然である。
   - execution lane:
-    `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
+    `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
   - theory-lab lane:
-    `Macro 5` follow-up
-    (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`) と
-    `Macro 5/6` follow-up
-    (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
+    `Macro 5/6 reserve checkpoint close`
+    （typed/theorem/model-check second-order reserve と order/modality reserve は fixed 済み、next reopen は third-order follow-up）
   - reserve integration lane:
     `Macro 6/7 reserve integration checkpoint close`
     （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -56,6 +54,8 @@
     `specs/examples/430`
 - reserve integration closeout follow-up:
   `specs/examples/431...432`
+- theory-lab reserve hardening and duplicate next-cut comparison:
+  `specs/examples/433...438`
 
 ## まだ OPEN のもの
 
@@ -85,7 +85,7 @@
 - theory-lab operating model と comparison bundle:
   `specs/examples/405...412`
 - typed / theorem / model-check / ordering の current adjacent package:
-  `specs/examples/413...432`
+  `specs/examples/413...438`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:

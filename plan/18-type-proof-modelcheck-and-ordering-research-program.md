@@ -150,10 +150,13 @@ full strong type system や production tool binding を immediate target にし�
   - principal source は checker attachment に残す
   - source-visible marker は mirror に留める
   - handoff row は derived reserve row に留める
+- request / predicate / `try` cluster typed-surface reserve note
+  - request / predicate / `try` cluster は grouped reserve cue に留める
+  - checker attachment principal は維持する
 
 ### next package order
 
-1. request / predicate / `try` cluster typed-surface reserve note
+1. typed-surface family unification keep/drop note
 
 ### stop line
 
@@ -188,10 +191,13 @@ full strong type system や production tool binding を immediate target にし�
 - proof artifact / bridge stop-line refresh
   - formal hook / review unit / bridge sketch / theorem discharge を collapse しない
   - notebook-first review pressure を first threshold に置く
+- admissible evidence contraction note
+  - admissible theorem evidence は symbolic refs only に contraction する
+  - review prose は discharge evidence に混ぜない
 
 ### next package order
 
-1. admissible evidence contraction note
+1. notebook-consumer threshold and discharge reserve note
 
 ### stop line
 
@@ -231,10 +237,12 @@ full strong type system や production tool binding を immediate target にし�
   - row-local carrier floor を machine-facing に保つ
   - small-cluster projection を reserve に留める
   - room protocol / fairness / replay family を order/handoff reserve に残す
+- tool-binding stop-line refresh
+  - explicit non-goal を固定し、concrete tool binding を still later に残す
 
 ### next package order
 
-1. tool-binding stop-line refresh
+1. model-check small-cluster projection keep/drop refresh
 
 ### stop line
 
@@ -300,6 +308,7 @@ full strong type system や production tool binding を immediate target にし�
 6. candidate reduction after falsifier hardening
 7. order / handoff property-language bridge note
 8. order / handoff emitted-artifact schema reserve note
+9. order / handoff source-surface wording reserve note
 
 ### current package close detail
 
@@ -314,6 +323,8 @@ full strong type system や production tool binding を immediate target にし�
 
 current package では、negative corpus coverage、higher-level candidate reduction、property-language bridge までを docs-first に固める。
 actual protocol projection、final emitted-artifact schema、tool binding は still later に残す。
+さらに current reserve line では、
+refs-only reserve schema を first cut とし、consumer-shaped schema と source-surface-first schema は still later に残す。
 
 ### stop line
 
@@ -382,6 +393,7 @@ actual protocol projection、final emitted-artifact schema、tool binding は st
 3. modal foundation comparison follow-up
 4. stop-line and promotion-threshold note
 5. guarded-vs-MDTT/MTT reduction timing note
+6. modality internalization trigger note
 
 ### stop line
 
@@ -391,11 +403,11 @@ actual protocol projection、final emitted-artifact schema、tool binding は st
 
 ## current near-term theory-lab sequence
 
-1. request / predicate / `try` cluster typed-surface reserve note
-2. admissible evidence contraction note
-3. tool-binding stop-line refresh
-4. order / handoff emitted-artifact schema reserve note
-5. guarded-vs-MDTT/MTT reduction timing note
+1. typed-surface family unification keep/drop note
+2. notebook-consumer threshold and discharge reserve note
+3. model-check small-cluster projection keep/drop refresh
+4. order / handoff source-surface wording reserve note
+5. modality internalization trigger note
 
 ## current recommendation
 
