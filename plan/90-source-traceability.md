@@ -2773,3 +2773,12 @@
   - `crates/mir-semantics/examples/support/current_l2_model_check_carrier_support.rs`
   - `crates/mir-runtime/tests/current_l2_source_sample_emitted_artifact_wiring.rs`
   - `docs/reports/0701-typed-theorem-modelcheck-order-handoff-planning-quartet.md`
+
+### 2026-04-17 self-driven queue reassessment and snapshot refresh addendum
+
+- `progress.md`、`tasks.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `Documentation.md`
+  - `.docs/progress-task-axes.md`
+  - `plan/12-open-problems-and-risks.md`
+  - `docs/reports/0708-faq005-literature-mapping-and-theory-lab-followup.md`
+- 今回の要点は、self-driven queue を `promoted immediate package 2 本` に過度圧縮せず、`boundary-prep reserve 5 本` を current queue に戻した点である。

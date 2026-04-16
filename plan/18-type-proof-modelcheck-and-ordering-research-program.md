@@ -159,8 +159,10 @@ full strong type system や production tool binding を immediate target にし�
 
 ### next package order
 
-1. no immediate near-term package
-   - stronger typed surface promotion は later threshold で再評価する
+1. no promoted immediate near-term package
+   - stronger typed surface promotion の実昇格は later threshold に残す
+2. boundary-prep reserve package は self-driven に進めてよい
+   - stronger typed-surface promotion threshold framing note
 
 ### stop line
 
@@ -204,8 +206,10 @@ full strong type system や production tool binding を immediate target にし�
 
 ### next package order
 
-1. no immediate near-term package
-   - theorem discharge transport / public-contract gate は later reserve に残す
+1. no promoted immediate near-term package
+   - theorem discharge transport / public-contract の実昇格は later reserve に残す
+2. boundary-prep reserve package は self-driven に進めてよい
+   - theorem discharge transport / public-contract later-gate framing note
 
 ### stop line
 
@@ -253,8 +257,10 @@ full strong type system や production tool binding を immediate target にし�
 
 ### next package order
 
-1. no immediate near-term package
-   - first settled property language / concrete tool seam は later gate で再評価する
+1. no promoted immediate near-term package
+   - first settled property language / concrete tool seam の実昇格は later gate に残す
+2. boundary-prep reserve package は self-driven に進めてよい
+   - model-check property-language / tool-binding later-gate framing note
 
 ### stop line
 

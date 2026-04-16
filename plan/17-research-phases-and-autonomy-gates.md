@@ -29,8 +29,8 @@
 | `Macro 3` | compile-ready minimal actualization | late | 中 | self-driven | support-only/public-candidate split が崩れる |
 | `Macro 4` | executable fixed-subset sample expansion | active | 重 | self-driven | new sample family が core semantics を押し広げる |
 | `Macro 5` | typed / theorem / model-check bridge | active at boundary | 重 | self-driven up to boundary | concrete tool / full type calculus / production contract が必要になる |
-| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重 | mixed | final operational catalog / policy profile が必要になる |
-| `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | 重 | mixed | final public packaging / external target が必要になる |
+| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重 | mixed（boundary-prep までは self-driven） | final operational catalog / policy profile が必要になる |
+| `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | 重 | mixed（boundary-prep までは self-driven） | final public packaging / external target が必要になる |
 | `Macro 8` | domain / application realization | not started | とても重い | user spec required | first application target が必要になる |
 
 ## current lane split
@@ -68,6 +68,9 @@
 
 ### mixed gate の line
 
+- stronger typed-surface promotion の実昇格
+- theorem discharge transport / public-contract の具体 contract 化
+- model-check first settled property language / concrete tool seam の確定
 - concrete theorem prover / model-check tool binding
 - shared-space room policy / fairness / replay operational profile
 - host binding artifact から concrete adapter target への移行
