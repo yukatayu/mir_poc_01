@@ -42,14 +42,16 @@
 - fixed-subset source sample expansion
 - typed attachment candidate inventory
 - theorem pilot planning
-- sample-visible theorem/model-check boundary hardening
+- model-check projection / property-family reserve planning
+- order / handoff / syntax / modality の docs-first comparison
+- verifier-boundary matrix と adequacy corpus の docs-first hardening
 
 ### boundary までは self-driven でよい line
 
-- model-check projection / property-family reserve planning
 - shared-space docs-first boundary
 - docs-first I/O / host-facing boundary
 - ordering / `memory_order` reinterpretation の theory-first inventory
+- small non-production compare helper / simulator / executable semantics
 
 ### mixed gate の line
 
@@ -57,6 +59,7 @@
 - shared-space room policy / fairness / replay operational profile
 - host binding artifact から concrete adapter target への移行
 - public operational shell から final packaging への移行
+- comparison candidate を decision register に昇格させるかどうか
 
 ### user specification が必要な line
 
@@ -64,6 +67,36 @@
 - first external integration target
 - backend / tooling success criteria
 - upper-layer application target
+
+## theory-lab line
+
+### 位置づけ
+
+- theory-lab line は mainline actualization と separable に回す。
+- 主眼は
+  - literature-backed comparison
+  - adequacy corpus
+  - falsification
+  - tiny non-production prototype
+  - verifier-boundary matrix
+  である。
+
+### promotion rule
+
+- exploratory candidate は report first に留める。
+- accepted comparison / wording / package order だけを `plan/` や `specs/examples/` に昇格させる。
+- main docs / plan / spec を更新するのは integrator line だけにする。
+
+### stop line
+
+- final parser grammar
+- final public parser / checker / runtime API
+- full strong type system
+- concrete theorem / model-check production contract
+- shared-space final catalog
+- backend / codegen public surface
+- raw FFI / game engine direct binding actualization
+- upper-layer application contract
 
 ## current lines
 
@@ -78,25 +111,13 @@
 ### active adjacent research line
 
 - `Macro 5` typed / theorem / model-check detailed planning
+- `Macro 5/6` order / memory / authority-handoff / syntax / modality theory-lab packages
 - `Macro 6/7` shared-space / host-I/O reserve hardening
-- `Macro 5/6` ordering boundary inventory
-
-## current stop lines
-
-次はまだ finalization しない。
-
-- final parser grammar
-- final public parser / checker / runtime API
-- full strong type system
-- concrete theorem / model-check production contract
-- shared-space final catalog
-- backend / codegen public surface
-- raw FFI / game engine direct binding actualization
-- upper-layer application contract
 
 ## current judgments
 
 - current repo は architecture-first だが、fixed-subset runnable path を already 持つ。
-- type/proof/model-check line は「まだ無理」ではなく、boundary/pilot planning を進められる段階にある。
+- type / proof / model-check line は「まだ無理」ではなく、boundary / pilot planning を進められる段階にある。
 - ordering / `memory_order` reinterpretation も「未着手で何も言えない」段階ではなく、theory-first inventory と handoff boundary を整理できる段階にある。
 - ただし、この 2 系統はいずれも mainline implementation へ即昇格させる段階ではない。
+- theory-lab line は repo 全体から見ると advanced line だが、この particular line 自体は still early-active である。

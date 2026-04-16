@@ -76,6 +76,44 @@ still later と読むのは 5〜6 であり、特に 6 は user-spec-required ga
 - stale route、stale membership snapshot、stale replay receipt、new incarnation を一つの generic `invalid participant` bucket に潰さない方が confusion を減らせる。
 - exact threat table と concrete protocol profile は still OPEN である。
 
+## order / handoff minimal scenario の current reading
+
+shared-space line の order / handoff は、final protocol や final syntax を固定せずに、
+**authoritative room の minimal scenario** から docs-first に比較するのが自然である。
+
+### preserve すべき軸分解
+
+- authority placement
+- provider placement
+- witness requirement
+- fairness source / trust model
+- replay attachment
+- payload / observation visibility
+
+この 6 軸は 1 つの `room profile` field に潰さない。
+特に provider placement と witness requirement は、current repo では別軸に保つ。
+
+### docs-first scenario family
+
+1. authoritative game room
+   - A rolls
+   - publication
+   - handoff to B
+   - B sees that handoff implies the roll result is already in the past / visible / witnessed
+2. same-process / shared-memory analog
+   - same causal pattern を thread-local / place-local lowering に落とした比較材料
+3. rollback before local finalization
+4. rollback after local finalization
+5. snapshot-only observation cut vs durable-cut difference
+6. late join / rejoin / stale message
+
+### current judgment
+
+- authoritative room scenario は current shared-space docs-first line と整合する。
+- ただし、authoritative room を shared-space 全体の default operational profile として凍らせない。
+- `atomic_cut` は local finalization の nucleus に留め、room-level authority handoff や snapshot-only observation を同一 primitive として説明しない。
+- same-process analog は useful comparison material だが、shared-memory lowering と distributed authority-handoff lowering の差まで消してはならない。
+
 ## participant を array-like にするか
 
 ### 結論

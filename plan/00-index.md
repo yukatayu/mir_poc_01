@@ -74,7 +74,7 @@
 | `plan/15-current-l2-fixture-authoring-template.md` | fixture authoring 実務テンプレート |
 | `plan/16-shared-space-membership-and-example-boundary.md` | shared-space / membership / example boundary |
 | `plan/17-research-phases-and-autonomy-gates.md` | macro phase と autonomy gate |
-| `plan/18-type-proof-modelcheck-and-ordering-research-program.md` | 型 / 定理証明 / モデル検査 / ordering の detailed research program |
+| `plan/18-type-proof-modelcheck-and-ordering-research-program.md` | 型 / 定理証明 / モデル検査 / ordering / syntax / modality の detailed research program |
 | `plan/90-source-traceability.md` | 各 plan の主要根拠 source |
 | `plan/91-maintenance-rules.md` | `plan/` の維持規則 |
 

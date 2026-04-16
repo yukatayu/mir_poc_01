@@ -79,10 +79,11 @@ old `Phase 7` は次を 1 つに押し込んでいた。
 - ここから先は room-profile、confusion/replay、binding artifact を narrow に足せる。
 - final operational catalog、concrete adapter target、application profile は later / mixed gate である。
 
-### Track C. ordering / `memory_order` reinterpretation
+### Track C. ordering / `memory_order` / syntax / modality theory line
 
 - `atomic_cut` の place-local nucleus は current executable core にある。
 - その先の higher-level ordering / fairness / witness-aware handoff / authority-serial family は **theory-first** であり、detail-side plan を進める段階にある。
+- syntax honesty と modal foundation も、この line と同じく **comparison / adequacy / stop-line planning** を先に進める段階にある。
 - したがって、ここも **研究不能ではない** が、implementation-ready ではない。
 
 ## まだ急がないもの

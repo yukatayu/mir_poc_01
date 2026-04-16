@@ -3,6 +3,10 @@
 ## 原則
 
 このプロジェクトは、大規模な実装へ進む前に意味論を安定化することで前進すべきである。
+意味の切り分けが曖昧なまま public surface や backend を凍らせてはならない。
+
+ここでいう roadmap は strict waterfall ではない。
+mainline actualization と docs-first research package が並走してよい。
 
 ## 推奨 workstream
 
@@ -68,6 +72,38 @@
 - 1 つの小さな virtual-world または collaborative editing 例
 - 1 つの小さな route / overlay insertion 例
 
+## cross-cutting docs-first theory packages
+
+上の workstream に加えて、current repo では **meaning first, implementation later** を守るための
+cross-cutting theory package を docs-first に進めてよい。
+
+### A/E/G に跨る理論線
+
+1. **cut family / order family**
+   - `atomic_cut` の local nucleus を維持したまま、
+     observation / snapshot、ordering-only barrier、commit-bearing durable cut、
+     publication / observation / witness / finalization relation を比較する。
+2. **authority-handoff / shared-space order**
+   - authority placement、provider placement、witness、fairness source、replay attachment を同軸化せずに比較する。
+3. **thread / node parity**
+   - source-level causal language の平等性と、
+     lowering / transport / evidence / failure / durability policy の非対称性を切り分ける。
+4. **syntax / semantics honesty**
+   - compactness ではなく semantic honesty、checker legibility、modal adequacy、misreading resistance を主軸に syntax candidate を比較する。
+5. **modal foundation / verifier boundary**
+   - `lambda-circle-box` を partial basis candidate に留めつつ、
+     guarded / modal dependent / multimodal line を stronger candidate として比較する。
+   - property-to-boundary matrix は
+     `core_static_checker` / `theorem_prover_boundary` /
+     `protocol_verifier_boundary` / `runtime_policy_boundary`
+     を維持して整理する。
+
+### package discipline
+
+- these theory packages are **comparison / adequacy / operating-model work**, not immediate public API work.
+- final parser grammar、final public API、shared-space final catalog、backend success criteria、upper-layer app contract はここで固定しない。
+- 必要なら tiny non-production prototype / simulator / compare helper を使ってよいが、mainline runtime semantics へ直結させない。
+
 ## 推奨される phase 順序
 
 1. Workstream A
@@ -77,6 +113,10 @@
 5. Workstream E
 6. Workstream F
 7. Workstream G
+
+この順序は mainline の大勢であり、cross-cutting theory package を否定しない。
+current repo では、Workstream A/E/G に跨る docs-first theory package を、
+mainline actualization と separable に ratchet 方式で進めてよい。
 
 ## 仮の実装推奨（アーキテクチャ上の法則ではない）
 

@@ -155,3 +155,33 @@
 28. synchronized web browsing モデル。
 29. Mir-based GUI プログラミング基盤。
 30. 以前の prototype diagram を最終的な Mir syntax / semantics にどう対応づけるか。
+
+## order / handoff / syntax / modality 理論線
+
+31. cut family をどこまで明示的に分解するか。
+   - source-backed な floor として固定済みなのは、`atomic_cut` が current `place` の rollback frontier だけを確定する local finalizing cut であり、`barrier` と `durable_cut` は later cut family に残すという判断である。
+   - ただし、**global observation / snapshot-only cut** を、`atomic_cut` や `durable_cut` と別 family として comparison vocabulary に残すべきかは未決定である。
+   - `snapshot_cut` / `consistent_cut` のような名称は current repo の settled vocabulary ではなく、comparison candidate に留める。
+   - 未決なのは、observation meaning、rollback interaction、durability / evidence burden、cross-place aggregation burden、verifier handoff friendlinessの観点から、local finalization / global snapshot / ordering-only barrier / commit-bearing durable cut をどう整理するのが最も誤読に強いかである。
+32. order / visibility / witness family を relation decomposition としてどこまで docs 側で整理するか。
+   - C++ `memory_order_consume` / `std::kill_dependency` family は reference family として有用だが、current source language の final surface に直輸入する判断はしていない。
+   - current theory line では、少なくとも `po`、`dep`、`pub`、`obs`、`wit`、`final`、`hb(scope)` のような relation decomposition が比較候補になる。
+   - 未決なのは、これらの relation 名をどこまで docs-first working vocabulary に昇格させるか、また shared-memory lowering と distributed handoff lowering の両方へ自然に接続できる分解が何かである。
+33. thread / node parity をどの水準で書くべきか。
+   - source-backed な floor として固定済みなのは、`place` が deployment artifact ではなく semantic locus であり、routing / transport / distributed realization は Mir-0 の外にあるという点である。
+   - ただし、「thread も node も同じ causal language で扱う」という line を repo のどこまで current wording に上げるかは未決定である。
+   - working hypothesis としては、thread と node を同じ source-level causal language で扱いつつ、差分は placement / transport / witness / durability / failure policy / fairness / authority に残すのが自然である。
+34. syntax と semantics honesty の coupling principle をどこまで明文化するか。
+   - source-backed な floor として、companion notation は final parser grammar ではなく、explicit edge-row family を維持し、packed metadata row を current companion notation に採らないことは固定済みである。
+   - ただし、「自然に書けるものは自然な挙動をするべき」「理論的に破綻した動作は書けない / 書きにくいべき」という設計原則を、syntax comparison の規準としてどこまで formal に mirror するかは未決定である。
+   - 少なくとも、semantic honesty、checker legibility、modal adequacy、misreading resistance を syntax comparison の主要軸に置くかは open question である。
+35. modal foundation の最終候補をどこへ置くか。
+   - `lambda-circle-box` / `next` + `always` line は、stage / later / always と time-ordered normalization の partial basis として有望である。
+   - しかし current repo が扱いたい place / scope / visibility / authority / witness / durability の multi-axis を考えると、guarded recursion、guarded lambda-calculus、Modal Dependent Type Theory、Multimodal Dependent Type Theory、Fitch-style modal basis を stronger candidate として比較する余地がある。
+   - 未決なのは、`lambda-circle-box` を partial basis に留めるべきか、また richer modal foundation をどの時点で explicit comparison に昇格させるべきかである。
+36. order / handoff line の property-to-boundary matrix をどこまで current docs に昇格させるか。
+   - source-backed な floor として、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split は fixed 済みである。
+   - ただし、same-owner structural floor、stage sequence well-formedness、witness field presence、hidden re-promotion analog、handoff-before-publication、handoff-before-witness、replay / duplicate invalidation、room-level seriality、late-join safety、fairness claim、distributed provider receipt validation、observation orderingを、どこまで current matrix に落とすかは open question である。
+37. theory-lab line を mainline actualization と別 package としてどう運用するか。
+   - current repo には report discipline と self-driven gate はあるが、literature scout / formalizer / prototyper / falsifier / integrator の役割分担と promotion criteria はまだ fixed していない。
+   - 未決なのは、どの候補を sandbox/report first に留め、どの条件で `plan/` や `specs/examples/` へ昇格させるかの明示的 operating model である。

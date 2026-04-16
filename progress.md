@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-14 10:55 JST
+最終更新: 2026-04-16 18:06 JST
 
 ## この文書について
 
@@ -16,8 +16,8 @@
 - current mainline を止める user decision: `0`
 - active adjacent research:
   - `Macro 5` typed / theorem / model-check detailed planning
+  - `Macro 5/6` order / memory / authority-handoff / syntax / modality theory-lab packages
   - `Macro 6/7` shared-space / host-I/O reserve hardening
-  - `Macro 5/6` ordering boundary inventory
 - current authored source sample: `e1 / e2 / e3 / e4 / e16 / e18 / e19 / e21 / e22 / e23`
 
 ## macro phase map
@@ -38,7 +38,7 @@
 
 | feature family | 現在地 | できていること | 次の意味ある一歩 |
 |---|---|---|---|
-| event DAG / local `try` / `atomic_cut` | `S5-S6` | parser-free / source-backed の runnable evidence | malformed widening と later ordering boundary の分離維持 |
+| event DAG / local `try` / `atomic_cut` | `S5-S6` | parser-free / source-backed の runnable evidence | malformed widening と later ordering family の分離維持 |
 | guarded option chain / `lease` / monotone degradation | `S5` | semantics / fixtures / source sample の narrow runnable line | next malformed family widening と typed attachment candidate 整理 |
 | contracts / static gate / formal hook | `S5` | static gate、tool-neutral formal hook、emitted artifact wiring | obligation allocation refresh |
 | theorem-side pilot | `S4-S5` | `proof_notebook_review_unit` pilot、bridge sketch | semantic-core theorem pilot planning |
@@ -47,7 +47,8 @@
 | multi-node / shared-space | `S3` at boundary | identity / admission / authority の docs-first cut | room-profile / confusion-replay compact table |
 | dynamic attach / detach / safe downstream addition | `S2-S3` | DAG discipline、overlay constraints、shared-space boundary notes | operational profile は later |
 | host-facing I/O / adapter boundary | `S3` | capability-scoped docs-first boundary | binding artifact / bridge-only note |
-| ordering / `memory_order` reinterpretation | `S1-S2` | `atomic_cut` nucleus、proof/runtime policy boundary inventory | higher-level ordering boundary inventory |
+| ordering / `memory_order` reinterpretation | `S2-S3` | `atomic_cut` nucleus、cut-family comparison、relation decomposition、adequacy corpusの first docs cut | falsifier loop と verifier-boundary hardening |
+| syntax / modality theory line | `S1-S2` | syntax honesty principle、stimuli comparison、partial-basis vs stronger-candidate cut | theory-lab follow-up と typed attachment line 接続 |
 | public dev surface / CLI | `S3-S4` | thin facade、later support、concrete shell concern comparison | actual shell package close |
 
 ## 層ごとの進捗
@@ -58,10 +59,11 @@
 | parser-free substrate | 88% | 76% | 86% | 着手可能 |
 | compile-ready minimal actualization | 81% | 68% | 78% | 着手可能 |
 | fixed-subset source sample line | 76% | 70% | 73% | 着手可能 |
-| typed / theorem / model-check bridge | 58% | 46% | 52% | 着手可能 |
-| shared-space docs-first boundary | 49% | 38% | 24% | 着手可能 |
-| host-facing integration boundary | 42% | 34% | 22% | 着手可能 |
-| ordering / memory-model reinterpretation | 28% | 18% | 8% | 着手可能 |
+| typed / theorem / model-check bridge | 60% | 50% | 52% | 着手可能 |
+| shared-space docs-first boundary | 50% | 40% | 24% | 着手可能 |
+| host-facing integration boundary | 42% | 35% | 22% | 着手可能 |
+| ordering / memory-model reinterpretation | 36% | 28% | 10% | 着手可能 |
+| syntax / modality foundation comparison | 24% | 22% | 4% | 着手可能 |
 | backend / public packaging | 24% | 20% | 18% | 要仕様確認 |
 | application realization | 10% | 8% | 2% | 要仕様確認 |
 
@@ -72,7 +74,8 @@
 - typed first attachment candidate と obligation owner
 - first theorem lemma order と tool-neutral stop line
 - first model-check projection grain と property family
-- higher-level ordering / fairness / witness-aware handoff の boundary
+- higher-level ordering / witness-aware handoff / verifier-boundary matrix
+- syntax honesty と modal foundation の stronger candidate
 
 ### user が後で決めること
 
@@ -84,10 +87,7 @@
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細は `docs/reports/` を正本にする。
+- 2026-04-16 18:06 JST — `docs/reports/0699` で order / handoff / memory-model / syntax / modality theory line を `specs/examples/405...412` と `plan/11` `12` `13` `17` `18` に切り出し、mainline actualization を動かさずに theory-lab operating model、adequacy corpus、property-to-boundary matrix、literature-backed comparison cut を揃えた。
 - 2026-04-14 10:55 JST — `docs/reports/0698` で `plan/` / `tasks.md` / `progress.md` の rebuild を閉じ、Macro 6/7 の boundary-only 自走可否、`tasks.md` の薄さ、`plan/18` traceability、FAQ / Documentation wording drift を再監査まで含めて揃えた。
 - 2026-04-14 10:03 JST — `docs/reports/0697` で external `answer_001...016` integration audit を閉じ、current promoted line を維持したまま `plan/09` `12` `13` `16` と `faq_003.md` を harden した。
 - 2026-04-13 23:56 JST — `docs/reports/0693` と `specs/examples/403...404` で public operational CLI concrete shell actualization comparison を閉じ、repo-level current line を stable malformed capability second source-backed widening actualization に進めた。
-- 2026-04-13 23:38 JST — `docs/reports/0692` と `specs/examples/401...402` で stable malformed capability second source-backed widening actualization comparison を閉じ、`e13/e20` source-authored static-stop pair first cut を固定した。
-- 2026-04-13 18:01 JST — `docs/reports/0680` と `specs/examples/385...386` で docs-first I/O / host-facing port boundary を閉じ、privileged `stdin/stdout` を避けた capability-scoped boundary を固定した。
-- 2026-04-13 15:53 JST — `docs/reports/0675` と `specs/examples/379...380` で model-check concrete carrier first actualization を閉じ、row-local machine-facing carrier list を actualize した。
-- 2026-04-13 15:35 JST — `docs/reports/0674` と `specs/examples/377...378` で model-check concrete carrier actualization comparison を閉じ、actual carrier first / emitted wiring second / sample-facing summary third の順を固定した。

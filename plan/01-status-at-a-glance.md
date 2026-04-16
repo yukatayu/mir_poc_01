@@ -60,7 +60,7 @@
 - `Macro 5` semantic-core theorem pilot planning
 - `Macro 5` model-check projection / property-family reserve planning
 - `Macro 6/7` shared-space confusion/replay and host-I/O bridge-only hardening
-- `Macro 5/6` async-control / ordering boundary inventory
+- `Macro 5/6` order / memory / authority-handoff / syntax / modality theory-lab line
 
 ## biggest later gates
 

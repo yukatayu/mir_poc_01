@@ -126,6 +126,22 @@
   - capability second source-backed widening actualization comparison fixed 後の次段として、current-L2 scoped shell naming を actual shell concern へどの narrow cut から reopen するかを比較する補助文書。
 - `specs/examples/404-current-l2-public-operational-cli-concrete-shell-actualization-ready-minimal-public-operational-cli-concrete-shell-actualization-threshold.md`
   - public operational CLI concrete shell actualization の minimum を、chosen shell、delegated entry、operational arguments、support bucket、excluded bucket、guard、kept-later refs とともに固定する補助文書。
+- `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - current repo の order / cut line で、local finalization、ordering-only barrier、observation / snapshot、commit / evidence-bearing cut を 1 primitive に潰さず比較する補助文書。
+- `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
+  - `atomic_cut` の local finalization と global observation / snapshot を scenario ベースで切り分ける補助文書。
+- `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `po` / `dep` / `pub` / `obs` / `wit` / `final` / `hb(scope)` の relation decomposition と、low-level memory-order family を retained-later reference family に留める current judgmentを整理する補助文書。
+- `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
+  - thread と node を source-level causal language では近く扱いつつ、lowering / transport / evidence / failure / durability policy の差を別に保つ current working line を整理する補助文書。
+- `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - order / handoff line の rough syntax sketch を adoption 候補ではなく structure extraction material として比較し、semantic honesty / checker legibility / modal adequacy / misreading resistance を syntax comparison 軸に置く補助文書。
+- `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `lambda-circle-box` を partial basis candidate に留めつつ、guarded / MDTT / MTT を stronger candidate として比較する補助文書。
+- `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - order / handoff line の benchmark family と property-to-boundary matrix を docs-only で揃える補助文書。
+- `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - theory-lab line の role split、promotion rule、research package template を current process discipline に沿って整理する補助文書。
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。

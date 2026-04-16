@@ -258,6 +258,59 @@
   - `specs/examples/364-current-l2-public-operational-surface-actualization-gate-ready-minimal-public-operational-surface-actualization-gate-threshold.md`
   - `specs/examples/371-current-l2-stable-malformed-broader-follow-up-inventory-ready-public-operational-cli-final-public-contract-later-gate-comparison.md`
   - `specs/examples/372-current-l2-public-operational-cli-final-public-contract-later-gate-ready-minimal-public-operational-cli-final-public-contract-later-gate-threshold.md`
+
+## 2026-04-16 order / handoff / memory-model / modality theory-line addendum
+
+- `specs/10-open-questions.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/04-mir-core.md`
+  - `specs/09-invariants-and-constraints.md`
+  - `specs/12-decision-register.md`
+  - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
+  - `specs/examples/218-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-low-level-memory-order-family-threshold.md`
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
+  - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - `docs/reports/0699-order-handoff-memory-modality-theory-line-consolidation.md`
+- `specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/11-roadmap-and-workstreams.md`
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - `docs/reports/0699-order-handoff-memory-modality-theory-line-consolidation.md`
+- `plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/10-open-questions.md`
+  - `specs/11-roadmap-and-workstreams.md`
+  - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
+  - `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`
+  - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
+  - `specs/examples/218-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-low-level-memory-order-family-threshold.md`
+  - `specs/examples/219-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-higher-level-async-control-family-comparison.md`
+  - `specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md`
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
+  - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - `docs/reports/0358-async-control-memory-boundary-inventory.md`
+  - `docs/reports/0699-order-handoff-memory-modality-theory-line-consolidation.md`
+- `Documentation.md`、`progress.md`、`tasks.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - `docs/reports/0699-order-handoff-memory-modality-theory-line-consolidation.md`
   - `specs/examples/385-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-docs-first-io-host-facing-port-boundary-comparison.md`
 
 ## 2026-04-14 roadmap / snapshot rebuild addendum

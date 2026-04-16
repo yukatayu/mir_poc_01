@@ -159,6 +159,14 @@ current L2 では、final grammar を先に決めずに、
 
 ## 今後の syntax workstream で比較するもの
 
+- syntax candidate は、少なくとも
+  - semantic honesty
+  - checker legibility
+  - modal adequacy
+  - misreading resistance
+  の 4 軸で比較する。
+- 「自然に書けるものは自然な挙動をするべき」「理論的に破綻した動作は書けない / 書きにくいべき」を、
+  final grammar ではなく companion notation / theory comparison の判断軸として先に維持する。
 - explicit edge-row family のさらに良い polishing があるか
 - `perform` / `on` / `via` / `admit` / `require` / `ensure` の final token をどうするか
 - `try` / `fallback` block form と option-chain `fallback` の最終 grammar separation
