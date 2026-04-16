@@ -81,7 +81,10 @@ fn current_l2_runtime_skeleton_runs_chain_program_with_stage1_bridge_summary() {
     assert!(!stage1.missing_option_structure_floor);
     assert!(!stage1.capability_strengthening_floor);
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert!(report.run_report.entered_evaluation);
     assert_eq!(
         report.run_report.terminal_outcome,
@@ -119,10 +122,16 @@ fn current_l2_runtime_skeleton_runs_try_fallback_with_stage2_bridge_summary() {
     .unwrap();
 
     let stage2 = report.checker_floor.stage2_try_rollback_summary.unwrap();
-    assert_eq!(stage2.verdict, CurrentL2TryRollbackStructuralVerdict::NoFindings);
+    assert_eq!(
+        stage2.verdict,
+        CurrentL2TryRollbackStructuralVerdict::NoFindings
+    );
     assert!(stage2.findings.is_empty());
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert_eq!(
         report.run_report.terminal_outcome,
         Some(TerminalOutcome::Success)
@@ -143,16 +152,16 @@ fn current_l2_runtime_skeleton_runs_runtime_fixture_program_without_parser_bridg
     let bundle =
         load_bundle_from_fixture_path(fixture_path("e21-try-atomic-cut-frontier.json")).unwrap();
 
-    let report = run_current_l2_runtime_skeleton(
-        bundle.fixture.program,
-        bundle.host_plan.unwrap(),
-        None,
-    )
-    .unwrap();
+    let report =
+        run_current_l2_runtime_skeleton(bundle.fixture.program, bundle.host_plan.unwrap(), None)
+            .unwrap();
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert!(report.run_report.entered_evaluation);
     assert_eq!(
         report.run_report.terminal_outcome,
@@ -175,12 +184,9 @@ fn current_l2_runtime_skeleton_runs_runtime_fixture_program_without_parser_bridg
 fn current_l2_runtime_skeleton_preserves_static_stop_without_parser_bridge_input() {
     let bundle = load_bundle_from_fixture_path(fixture_path("e4-malformed-lineage.json")).unwrap();
 
-    let report = run_current_l2_runtime_skeleton(
-        bundle.fixture.program,
-        FixtureHostPlan::default(),
-        None,
-    )
-    .unwrap();
+    let report =
+        run_current_l2_runtime_skeleton(bundle.fixture.program, FixtureHostPlan::default(), None)
+            .unwrap();
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
@@ -252,8 +258,5 @@ fn current_l2_runtime_skeleton_keeps_stage1_capability_strengthening_frozen_to_r
         report.checker_floor.static_gate.verdict,
         StaticGateVerdict::Malformed
     );
-    assert_eq!(
-        report.run_report.terminal_outcome,
-        None
-    );
+    assert_eq!(report.run_report.terminal_outcome, None);
 }

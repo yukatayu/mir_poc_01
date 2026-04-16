@@ -35,7 +35,10 @@ fn current_l2_source_lowering_matches_e1_fixture_and_atomic_cut_runtime() {
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert!(report.run_report.entered_evaluation);
     assert_eq!(
         report.run_report.terminal_outcome,
@@ -64,7 +67,10 @@ fn current_l2_source_lowering_matches_e4_fixture_and_stage1_bridge() {
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_some());
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
     assert!(!report.run_report.entered_evaluation);
     assert_eq!(report.run_report.terminal_outcome, None);
 }
@@ -86,15 +92,18 @@ fn current_l2_source_lowering_matches_e16_fixture_and_missing_head_static_stop()
     assert!(stage1.missing_option_structure_floor);
     assert!(!stage1.capability_strengthening_floor);
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
     assert!(!report.run_report.entered_evaluation);
     assert_eq!(report.run_report.terminal_outcome, None);
 }
 
 #[test]
 fn current_l2_source_lowering_matches_e13_fixture_and_capability_static_stop() {
-    let source = fs::read_to_string(sample_path("e13-malformed-capability-strengthening.txt"))
-        .unwrap();
+    let source =
+        fs::read_to_string(sample_path("e13-malformed-capability-strengthening.txt")).unwrap();
     let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
     let report = run_current_l2_runtime_skeleton(
         lowered.program,
@@ -108,7 +117,10 @@ fn current_l2_source_lowering_matches_e13_fixture_and_capability_static_stop() {
     assert!(!stage1.missing_option_structure_floor);
     assert!(stage1.capability_strengthening_floor);
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
     assert!(!report.run_report.entered_evaluation);
     assert_eq!(report.run_report.terminal_outcome, None);
 }
@@ -126,16 +138,20 @@ fn current_l2_source_lowering_matches_e19_fixture_and_stage1_bridge() {
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_some());
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
     assert!(!report.run_report.entered_evaluation);
     assert_eq!(report.run_report.terminal_outcome, None);
 }
 
 #[test]
 fn current_l2_source_lowering_matches_e20_fixture_and_late_capability_static_stop() {
-    let source =
-        fs::read_to_string(sample_path("e20-malformed-late-capability-strengthening.txt"))
-            .unwrap();
+    let source = fs::read_to_string(sample_path(
+        "e20-malformed-late-capability-strengthening.txt",
+    ))
+    .unwrap();
     let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
     let report = run_current_l2_runtime_skeleton(
         lowered.program,
@@ -149,7 +165,10 @@ fn current_l2_source_lowering_matches_e20_fixture_and_late_capability_static_sto
     assert!(!stage1.missing_option_structure_floor);
     assert!(stage1.capability_strengthening_floor);
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
     assert!(!report.run_report.entered_evaluation);
     assert_eq!(report.run_report.terminal_outcome, None);
 }
@@ -171,7 +190,10 @@ fn current_l2_source_lowering_matches_e18_fixture_and_missing_successor_static_s
     assert!(stage1.missing_option_structure_floor);
     assert!(!stage1.capability_strengthening_floor);
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
     assert!(!report.run_report.entered_evaluation);
     assert_eq!(report.run_report.terminal_outcome, None);
 }
@@ -190,11 +212,20 @@ fn current_l2_source_lowering_matches_e2_fixture_and_stage2_bridge() {
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
     let stage2 = report.checker_floor.stage2_try_rollback_summary.unwrap();
-    assert_eq!(stage2.verdict, CurrentL2TryRollbackStructuralVerdict::NoFindings);
+    assert_eq!(
+        stage2.verdict,
+        CurrentL2TryRollbackStructuralVerdict::NoFindings
+    );
     assert!(stage2.findings.is_empty());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert!(report.run_report.entered_evaluation);
-    assert_eq!(report.run_report.terminal_outcome, Some(TerminalOutcome::Success));
+    assert_eq!(
+        report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
     assert_eq!(
         report.run_report.trace_audit_sink.events,
         vec![
@@ -221,11 +252,20 @@ fn current_l2_source_lowering_matches_e21_fixture_and_try_atomic_cut_frontier() 
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
     let stage2 = report.checker_floor.stage2_try_rollback_summary.unwrap();
-    assert_eq!(stage2.verdict, CurrentL2TryRollbackStructuralVerdict::NoFindings);
+    assert_eq!(
+        stage2.verdict,
+        CurrentL2TryRollbackStructuralVerdict::NoFindings
+    );
     assert!(stage2.findings.is_empty());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert!(report.run_report.entered_evaluation);
-    assert_eq!(report.run_report.terminal_outcome, Some(TerminalOutcome::Success));
+    assert_eq!(
+        report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
     assert_eq!(
         report.run_report.trace_audit_sink.events,
         vec![
@@ -241,12 +281,10 @@ fn current_l2_source_lowering_matches_e21_fixture_and_try_atomic_cut_frontier() 
 
 #[test]
 fn current_l2_source_lowering_matches_e22_fixture_and_nested_place_atomic_cut_mismatch() {
-    let source =
-        fs::read_to_string(sample_path("e22-try-atomic-cut-place-mismatch.txt")).unwrap();
-    let bundle = load_bundle_from_fixture_path(fixture_path(
-        "e22-try-atomic-cut-place-mismatch.json",
-    ))
-    .unwrap();
+    let source = fs::read_to_string(sample_path("e22-try-atomic-cut-place-mismatch.txt")).unwrap();
+    let bundle =
+        load_bundle_from_fixture_path(fixture_path("e22-try-atomic-cut-place-mismatch.json"))
+            .unwrap();
     let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
     let report = run_current_l2_runtime_skeleton(
         lowered.program,
@@ -257,11 +295,20 @@ fn current_l2_source_lowering_matches_e22_fixture_and_nested_place_atomic_cut_mi
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
     let stage2 = report.checker_floor.stage2_try_rollback_summary.unwrap();
-    assert_eq!(stage2.verdict, CurrentL2TryRollbackStructuralVerdict::NoFindings);
+    assert_eq!(
+        stage2.verdict,
+        CurrentL2TryRollbackStructuralVerdict::NoFindings
+    );
     assert!(stage2.findings.is_empty());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert!(report.run_report.entered_evaluation);
-    assert_eq!(report.run_report.terminal_outcome, Some(TerminalOutcome::Success));
+    assert_eq!(
+        report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
     assert_eq!(
         report.run_report.trace_audit_sink.events,
         vec![
@@ -288,14 +335,27 @@ fn current_l2_source_lowering_matches_e3_fixture_and_admit_chain_runtime() {
 
     assert!(report.checker_floor.stage1_reconnect_clusters.is_none());
     assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Valid);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
     assert!(report.run_report.entered_evaluation);
-    assert_eq!(report.run_report.terminal_outcome, Some(TerminalOutcome::Success));
+    assert_eq!(
+        report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
     assert_eq!(
         report.run_report.trace_audit_sink.events,
         vec![EventKind::PerformSuccess]
     );
-    assert_eq!(report.run_report.trace_audit_sink.non_admissible_metadata.len(), 1);
+    assert_eq!(
+        report
+            .run_report
+            .trace_audit_sink
+            .non_admissible_metadata
+            .len(),
+        1
+    );
     assert_eq!(
         report.run_report.trace_audit_sink.non_admissible_metadata[0].option_ref,
         "owner_writer"
@@ -308,9 +368,10 @@ fn current_l2_source_lowering_matches_e3_fixture_and_admit_chain_runtime() {
 
 #[test]
 fn current_l2_source_lowering_matches_e23_fixture_and_empty_fallback_bridge() {
-    let source =
-        fs::read_to_string(sample_path("e23-malformed-try-fallback-missing-fallback-body.txt"))
-            .unwrap();
+    let source = fs::read_to_string(sample_path(
+        "e23-malformed-try-fallback-missing-fallback-body.txt",
+    ))
+    .unwrap();
     let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
     let report = run_current_l2_runtime_skeleton(
         lowered.program,
@@ -326,7 +387,10 @@ fn current_l2_source_lowering_matches_e23_fixture_and_empty_fallback_bridge() {
         CurrentL2TryRollbackStructuralVerdict::FindingsPresent
     );
     assert_eq!(stage2.findings.len(), 1);
-    assert_eq!(report.checker_floor.static_gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
     assert!(!report.run_report.entered_evaluation);
     assert_eq!(report.run_report.terminal_outcome, None);
 }

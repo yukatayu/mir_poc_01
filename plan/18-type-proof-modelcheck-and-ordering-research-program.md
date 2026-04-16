@@ -144,10 +144,16 @@ full strong type system や production tool binding を immediate target にし�
 - typed-core attachment inventory
 - first source-visible typed-surface comparison
 
+### current package close detail
+
+- checker attachment から handoff row への migration note
+  - principal source は checker attachment に残す
+  - source-visible marker は mirror に留める
+  - handoff row は derived reserve row に留める
+
 ### next package order
 
-1. checker attachment から handoff row への migration note
-2. request / predicate / `try` cluster typed-surface reserve note
+1. request / predicate / `try` cluster typed-surface reserve note
 
 ### stop line
 
@@ -177,10 +183,15 @@ full strong type system や production tool binding を immediate target にし�
 - semantic-core theorem pilot planning
 - first theorem lemma family wording hardening
 
+### current package close detail
+
+- proof artifact / bridge stop-line refresh
+  - formal hook / review unit / bridge sketch / theorem discharge を collapse しない
+  - notebook-first review pressure を first threshold に置く
+
 ### next package order
 
-1. proof artifact / bridge stop-line refresh
-2. admissible evidence contraction note
+1. admissible evidence contraction note
 
 ### stop line
 
@@ -214,10 +225,16 @@ full strong type system や production tool binding を immediate target にし�
 - model-check projection / property-family reserve inventory
 - model-check carrier to projection bridge note
 
+### current package close detail
+
+- sample-visible property summary wording
+  - row-local carrier floor を machine-facing に保つ
+  - small-cluster projection を reserve に留める
+  - room protocol / fairness / replay family を order/handoff reserve に残す
+
 ### next package order
 
-1. sample-visible property summary wording
-2. tool-binding stop-line refresh
+1. tool-binding stop-line refresh
 
 ### stop line
 
@@ -282,6 +299,7 @@ full strong type system や production tool binding を immediate target にし�
 5. falsifier loop / adequacy corpus hardening
 6. candidate reduction after falsifier hardening
 7. order / handoff property-language bridge note
+8. order / handoff emitted-artifact schema reserve note
 
 ### current package close detail
 
@@ -294,8 +312,8 @@ full strong type system や production tool binding を immediate target にし�
 - `4D candidate reduction`
   - `authority_serial_transition_family` / `witness_aware_commit_family` / `event_tree_execution_view` / low-level reference family の keep/drop line
 
-current package では、negative corpus coverage と higher-level candidate reduction を docs-first に固める。
-actual protocol projection や tool binding は still later に残す。
+current package では、negative corpus coverage、higher-level candidate reduction、property-language bridge までを docs-first に固める。
+actual protocol projection、final emitted-artifact schema、tool binding は still later に残す。
 
 ### stop line
 
@@ -363,6 +381,7 @@ actual protocol projection や tool binding は still later に残す。
 2. stronger-candidate comparison
 3. modal foundation comparison follow-up
 4. stop-line and promotion-threshold note
+5. guarded-vs-MDTT/MTT reduction timing note
 
 ### stop line
 
@@ -372,19 +391,11 @@ actual protocol projection や tool binding は still later に残す。
 
 ## current near-term theory-lab sequence
 
-1. first source-visible typed-surface comparison
-2. first theorem lemma family wording hardening
-3. model-check carrier to projection bridge note
-4. order / handoff candidate reduction after falsifier hardening
-5. modal foundation comparison follow-up
-
-## post-close near-term theory-lab sequence
-
-1. checker attachment から handoff row への migration note
-2. proof artifact / bridge stop-line refresh
-3. sample-visible property summary wording
-4. order / handoff property-language bridge note
-5. modal promotion-threshold note
+1. request / predicate / `try` cluster typed-surface reserve note
+2. admissible evidence contraction note
+3. tool-binding stop-line refresh
+4. order / handoff emitted-artifact schema reserve note
+5. guarded-vs-MDTT/MTT reduction timing note
 
 ## current recommendation
 

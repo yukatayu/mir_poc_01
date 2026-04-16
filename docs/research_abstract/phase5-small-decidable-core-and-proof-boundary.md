@@ -118,6 +118,9 @@ current repo の post-Phase-5 theory-lab line では、この theorem-first brid
 までは docs-first に詰め終えており、next natural step は
 **proof artifact / bridge stop-line refresh**
 に進むことである。
+その後、この line は `specs/examples/426` により fixed 済みであり、current next theorem-side reserve line は
+**admissible evidence contraction note**
+に進むのが自然である。
 その具体的な first threshold も、
 **human review checklist / walkthrough pressure**
 に置くのが最小であり、compare / bless-like flow や actual file exchange はさらに後段に残す。

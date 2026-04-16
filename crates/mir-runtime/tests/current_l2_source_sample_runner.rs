@@ -50,7 +50,8 @@ fn current_l2_source_sample_runner_accepts_named_e1_sample() {
 #[test]
 fn current_l2_source_sample_runner_resolves_named_e2_sample_and_runs_runtime() {
     let bundle = load_bundle_from_fixture_path(fixture_path("e2-try-fallback.json")).unwrap();
-    let report = run_current_l2_source_sample("e2-try-fallback", bundle.host_plan.unwrap()).unwrap();
+    let report =
+        run_current_l2_source_sample("e2-try-fallback", bundle.host_plan.unwrap()).unwrap();
 
     assert_eq!(report.sample_id, "e2-try-fallback");
     assert_eq!(report.sample_path, sample_path("e2-try-fallback.txt"));
@@ -83,7 +84,10 @@ fn current_l2_source_sample_runner_accepts_named_e21_sample() {
             .unwrap();
 
     assert_eq!(report.sample_id, "e21-try-atomic-cut-frontier");
-    assert_eq!(report.sample_path, sample_path("e21-try-atomic-cut-frontier.txt"));
+    assert_eq!(
+        report.sample_path,
+        sample_path("e21-try-atomic-cut-frontier.txt")
+    );
     assert_eq!(
         report.runtime_report.checker_floor.static_gate.verdict,
         StaticGateVerdict::Valid
@@ -108,10 +112,9 @@ fn current_l2_source_sample_runner_accepts_named_e21_sample() {
 
 #[test]
 fn current_l2_source_sample_runner_accepts_named_e22_sample() {
-    let bundle = load_bundle_from_fixture_path(fixture_path(
-        "e22-try-atomic-cut-place-mismatch.json",
-    ))
-    .unwrap();
+    let bundle =
+        load_bundle_from_fixture_path(fixture_path("e22-try-atomic-cut-place-mismatch.json"))
+            .unwrap();
     let report = run_current_l2_source_sample(
         "e22-try-atomic-cut-place-mismatch",
         bundle.host_plan.unwrap(),
@@ -197,8 +200,8 @@ fn current_l2_source_sample_runner_accepts_named_e3_sample() {
 #[test]
 fn current_l2_source_sample_runner_accepts_explicit_e4_path() {
     let sample = sample_path("e4-malformed-lineage.txt");
-    let report = run_current_l2_source_sample(sample.to_str().unwrap(), FixtureHostPlan::default())
-        .unwrap();
+    let report =
+        run_current_l2_source_sample(sample.to_str().unwrap(), FixtureHostPlan::default()).unwrap();
 
     assert_eq!(report.sample_id, "e4-malformed-lineage");
     assert_eq!(report.sample_path, fs::canonicalize(sample).unwrap());
@@ -295,7 +298,10 @@ fn current_l2_source_sample_runner_accepts_named_e20_sample() {
     )
     .unwrap();
 
-    assert_eq!(report.sample_id, "e20-malformed-late-capability-strengthening");
+    assert_eq!(
+        report.sample_id,
+        "e20-malformed-late-capability-strengthening"
+    );
     assert_eq!(
         report.sample_path,
         sample_path("e20-malformed-late-capability-strengthening.txt")
@@ -393,11 +399,9 @@ fn current_l2_source_sample_runner_rejects_existing_out_of_scope_explicit_file()
     ));
     fs::write(&temp_path, "place x {\n}\n").unwrap();
 
-    let error = run_current_l2_source_sample(
-        temp_path.to_str().unwrap(),
-        FixtureHostPlan::default(),
-    )
-    .unwrap_err();
+    let error =
+        run_current_l2_source_sample(temp_path.to_str().unwrap(), FixtureHostPlan::default())
+            .unwrap_err();
     let message = error.to_string();
     fs::remove_file(&temp_path).ok();
 

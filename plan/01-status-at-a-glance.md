@@ -11,14 +11,14 @@
 - legacy checkpoint としては、Phase 1〜5 closeout / freeze と legacy Phase 6 compile-ready checkpoint は fixed 済みである。
 - current active lane は 3 本で読むのが自然である。
   - execution lane:
-    `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
+    `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
   - theory-lab lane:
     `Macro 5` follow-up
-    (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`) と
+    (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`) と
     `Macro 5/6` follow-up
-    (`order/handoff property-language bridge`、`modal promotion-threshold note`)
+    (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
   - reserve integration lane:
-    `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
+    `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
 - immediate blocker は `0`、current lane を止める user decision も `0` と読む。
 - current authored source sample は `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23` の dozen である。
 
@@ -58,12 +58,14 @@
   まで docs-first に固まった。
 - shared-space は identity / admission / authority まで docs-first boundary があり、final operational catalog は later gate に残る。
 - host-facing integration は privileged `stdin/stdout` ではなく、capability-scoped I/O / adapter boundary の docs-first cut に留める。
+- public operational CLI concrete shell actualization は、current-L2 scoped Rust shell helper + example wrapper over thin facade まで actualize 済みである。
+- shared-space room-profile / host binding bridge-only note も fixed 済みであり、next shared-space reserve line は fairness / replay strengthening 側に残る。
 
 ## current recommendation
 
-- reserve integration lane は public operational CLI concrete shell actualization と shared-space room-profile / host binding bridge-only note を hidden promotion なしで進める。
-- theory-lab lane は second-order follow-up package を mainline と混ぜずに進める。
-- execution lane は duplicate cluster と malformed-static broader family の reopen sequencing を later reopen inventory として保つ。
+- reserve integration lane は public operational CLI packaging reserve と shared-space fairness / replay strengthening reserve を hidden promotion なしで進める。
+- theory-lab lane は second-order follow-up close 後の reserve / stop-line package を mainline と混ぜずに進める。
+- execution lane は duplicate cluster source-sample widening comparison を next reopen とし、try-rollback malformed-static broader family は kept-later inventory に残す。
 
 ## biggest later gates
 

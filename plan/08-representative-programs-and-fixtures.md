@@ -86,7 +86,7 @@
   - final public parser/checker/runtime thin-facade later support actualization も fixed 済みであり、later support cut は `run_current_l2_runtime_skeleton` + `CurrentL2RuntimeSkeletonReport` に置く。
   - capability second reopen actualization comparison も fixed 済みであり、current family judgment は `e13/e20` pair、next malformed-side actualization mode は source-backed widening first に置く。
   - public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample`、shell concern は `<sample>` / `--host-plan` / `--format pretty|json` に留める。
-  - その時点の near-term handoff は public operational CLI concrete shell actualization comparison 側へ寄せていたが、current snapshot では execution lane と theory-lab lane を分けて読む。
+  - その時点の near-term handoff は public operational CLI concrete shell actualization comparison 側へ寄せていたが、current snapshot では execution lane / theory-lab lane / reserve integration lane を分けて読む。
   - expiry / monotone degradation family と request-contract family は current formal-hook top や parser pressure を広げやすいため still later に残す。
 
 ## fixture 一覧

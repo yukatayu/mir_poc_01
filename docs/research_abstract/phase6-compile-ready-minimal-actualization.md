@@ -29,6 +29,13 @@ Phase 6 は、Phase 1〜5 で fixed した semantics / parser-free PoC / proof b
   `specs/examples/327...384`
 - host-I/O、public surface、thin facade / CLI reserve:
   `specs/examples/363...404`
+- eight-package follow-up:
+  - reserve integration actualized / bridge package:
+    `specs/examples/423...424`
+  - theory-lab second-order follow-up:
+    `specs/examples/425...429`
+  - execution-side duplicate-cluster later reopen comparison:
+    `specs/examples/430`
 
 current authored source sample は
 `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
@@ -40,27 +47,29 @@ current authored source sample は
   `specs/examples/413...416`
 - source-visible typed comparison、theorem wording hardening、model-check bridge note、order/handoff candidate reduction、modal follow-up:
   `specs/examples/417...422`
+- second-order follow-up:
+  `specs/examples/425...429`
 
 ## current lane split
 
 ### execution lane
 
-- `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
+- `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
 - goal:
   fixed-subset source sample widening closeout 後の next reopen family を narrow に見極める
 
 ### theory-lab adjacent lane
 
 - follow-up:
-  checker attachment -> handoff migration / proof artifact bridge stop-line refresh / sample-visible property summary wording
+  request/predicate/try cluster typed-surface reserve note / admissible evidence contraction note / tool-binding stop-line refresh
 - post-reduction follow-up:
-  order/handoff property-language bridge / modal promotion-threshold note
+  order/handoff emitted-artifact schema reserve note / guarded-vs-MDTT/MTT reduction timing note
 - goal:
   sample-visible first milestone の次段を docs-first に固定する
 
 ### reserve integration lane
 
-- `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
+- `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
 - goal:
   thin facade、support-only surface、CLI shell concern の boundary を hidden promotion なしで保つ
 
@@ -79,6 +88,8 @@ current authored source sample は
   - modal comparison follow-up
   まで docs-first に固まった。
 - docs-first host-I/O boundary と shared-space identity / admission / authority boundary も fixed 済みである。
+- current-L2 scoped Rust shell over thin facade と shared-space room-profile / host-binding bridge-only note も fixed 済みであり、current reserve integration line は packaging / fairness-replay strengthening 側へ進んでいる。
+- duplicate-cluster line は current では comparison-first に留め、source-sample widening comparison を次の execution reopen として扱う。
 - final parser grammar、final public API、concrete theorem / model-check tool binding、backend / external codegen は still later に残る。
 
 ## まだ fixed していないこと
@@ -103,8 +114,8 @@ current authored source sample は
 - `specs/examples/299...324`
 - `specs/examples/327...384`
 - `specs/examples/363...404`
-- `specs/examples/405...412`
-- `docs/reports/0611...0699`
+- `specs/examples/405...430`
+- `docs/reports/0611...0703`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`

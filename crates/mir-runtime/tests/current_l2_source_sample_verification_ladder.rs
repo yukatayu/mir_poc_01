@@ -33,7 +33,11 @@ fn verification_ladder_marks_e1_as_runtime_and_formal_hook_reached() {
             .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Valid
     );
     assert!(source_report.runtime_report.run_report.entered_evaluation);
@@ -56,7 +60,11 @@ fn verification_ladder_marks_e2_as_runtime_and_formal_hook_reached() {
         run_current_l2_source_sample("e2-try-fallback", bundle.host_plan.clone().unwrap()).unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Valid
     );
     assert!(source_report.runtime_report.run_report.entered_evaluation);
@@ -83,7 +91,11 @@ fn verification_ladder_marks_e21_as_runtime_and_formal_hook_reached() {
     .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Valid
     );
     assert!(source_report.runtime_report.run_report.entered_evaluation);
@@ -101,10 +113,9 @@ fn verification_ladder_marks_e21_as_runtime_and_formal_hook_reached() {
 
 #[test]
 fn verification_ladder_marks_e22_as_runtime_and_formal_hook_reached() {
-    let bundle = load_bundle_from_fixture_path(fixture_path(
-        "e22-try-atomic-cut-place-mismatch.json",
-    ))
-    .unwrap();
+    let bundle =
+        load_bundle_from_fixture_path(fixture_path("e22-try-atomic-cut-place-mismatch.json"))
+            .unwrap();
     let source_report = run_current_l2_source_sample(
         "e22-try-atomic-cut-place-mismatch",
         bundle.host_plan.clone().unwrap(),
@@ -112,7 +123,11 @@ fn verification_ladder_marks_e22_as_runtime_and_formal_hook_reached() {
     .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Valid
     );
     assert!(source_report.runtime_report.run_report.entered_evaluation);
@@ -136,7 +151,11 @@ fn verification_ladder_marks_e3_as_runtime_reached_but_formal_hook_guarded() {
             .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Valid
     );
     assert!(source_report.runtime_report.run_report.entered_evaluation);
@@ -146,8 +165,7 @@ fn verification_ladder_marks_e3_as_runtime_reached_but_formal_hook_guarded() {
     );
 
     let detached_bundle = build_detached_bundle_artifact(&bundle, &run_bundle(&bundle).unwrap());
-    let error =
-        build_formal_hook_from_detached_bundle_artifact(&detached_bundle).unwrap_err();
+    let error = build_formal_hook_from_detached_bundle_artifact(&detached_bundle).unwrap_err();
 
     assert!(error.contains("runtime_try_cut_cluster"));
 }
@@ -158,11 +176,18 @@ fn verification_ladder_marks_e4_as_static_stop_and_static_formal_hook_reached() 
         run_current_l2_source_sample("e4-malformed-lineage", FixtureHostPlan::default()).unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Malformed
     );
     assert!(!source_report.runtime_report.run_report.entered_evaluation);
-    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
 
     let path = fixture_path("e4-malformed-lineage.json");
     let fixture = load_fixture_from_path(&path).unwrap();
@@ -183,11 +208,18 @@ fn verification_ladder_marks_e16_as_static_stop_and_static_formal_hook_reached()
     .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Malformed
     );
     assert!(!source_report.runtime_report.run_report.entered_evaluation);
-    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
 
     let path = fixture_path("e16-malformed-missing-chain-head-option.json");
     let fixture = load_fixture_from_path(&path).unwrap();
@@ -196,7 +228,10 @@ fn verification_ladder_marks_e16_as_static_stop_and_static_formal_hook_reached()
     let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
 
     assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
-    assert_eq!(formal_hook.subject_ref, "e16_malformed_missing_chain_head_option");
+    assert_eq!(
+        formal_hook.subject_ref,
+        "e16_malformed_missing_chain_head_option"
+    );
 }
 
 #[test]
@@ -208,11 +243,18 @@ fn verification_ladder_marks_e13_as_static_stop_and_static_formal_hook_reached()
     .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Malformed
     );
     assert!(!source_report.runtime_report.run_report.entered_evaluation);
-    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
 
     let path = fixture_path("e13-malformed-capability-strengthening.json");
     let fixture = load_fixture_from_path(&path).unwrap();
@@ -221,23 +263,31 @@ fn verification_ladder_marks_e13_as_static_stop_and_static_formal_hook_reached()
     let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
 
     assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
-    assert_eq!(formal_hook.subject_ref, "e13_malformed_capability_strengthening");
+    assert_eq!(
+        formal_hook.subject_ref,
+        "e13_malformed_capability_strengthening"
+    );
 }
 
 #[test]
 fn verification_ladder_marks_e19_as_static_stop_and_static_formal_hook_reached() {
-    let source_report = run_current_l2_source_sample(
-        "e19-malformed-target-mismatch",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
+    let source_report =
+        run_current_l2_source_sample("e19-malformed-target-mismatch", FixtureHostPlan::default())
+            .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Malformed
     );
     assert!(!source_report.runtime_report.run_report.entered_evaluation);
-    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
 
     let path = fixture_path("e19-malformed-target-mismatch.json");
     let fixture = load_fixture_from_path(&path).unwrap();
@@ -258,11 +308,18 @@ fn verification_ladder_marks_e20_as_static_stop_and_static_formal_hook_reached()
     .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Malformed
     );
     assert!(!source_report.runtime_report.run_report.entered_evaluation);
-    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
 
     let path = fixture_path("e20-malformed-late-capability-strengthening.json");
     let fixture = load_fixture_from_path(&path).unwrap();
@@ -286,11 +343,18 @@ fn verification_ladder_marks_e18_as_static_stop_and_static_formal_hook_reached()
     .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Malformed
     );
     assert!(!source_report.runtime_report.run_report.entered_evaluation);
-    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
 
     let path = fixture_path("e18-malformed-missing-successor-option.json");
     let fixture = load_fixture_from_path(&path).unwrap();
@@ -299,7 +363,10 @@ fn verification_ladder_marks_e18_as_static_stop_and_static_formal_hook_reached()
     let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
 
     assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
-    assert_eq!(formal_hook.subject_ref, "e18_malformed_missing_successor_option");
+    assert_eq!(
+        formal_hook.subject_ref,
+        "e18_malformed_missing_successor_option"
+    );
 }
 
 #[test]
@@ -311,11 +378,18 @@ fn verification_ladder_marks_e23_as_static_stop_and_static_formal_hook_reached()
     .unwrap();
 
     assert_eq!(
-        source_report.runtime_report.checker_floor.static_gate.verdict,
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
         StaticGateVerdict::Malformed
     );
     assert!(!source_report.runtime_report.run_report.entered_evaluation);
-    assert_eq!(source_report.runtime_report.run_report.terminal_outcome, None);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
 
     let path = fixture_path("e23-malformed-try-fallback-missing-fallback-body.json");
     let fixture = load_fixture_from_path(&path).unwrap();

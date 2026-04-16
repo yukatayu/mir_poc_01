@@ -1152,7 +1152,14 @@ current repo では old `FutureWork` bucket を再導入しない方が自然で
   - identity / auth layering
   - admission policy / compile-time visibility
   - authority / resource ownership
-  の 3 package までで fixed 済みと読む
+  - room-profile / host-binding bridge-only note
+  の 4 package までで fixed 済みと読む
+
+### current next reserve line
+
+- room-profile / host-binding bridge-only note までは fixed 済みである。
+- 次に残る shared-space reserve line は fairness / replay strengthening であり、
+  final shared-space catalog と operational realization は still later / user-spec-required gate に残す。
 
 ### まだ current re-entry bundle に入れないもの
 

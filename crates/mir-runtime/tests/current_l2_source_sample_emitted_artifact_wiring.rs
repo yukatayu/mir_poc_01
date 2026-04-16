@@ -70,7 +70,10 @@ fn emitted_artifact_wiring_reaches_capability_static_review_units_and_model_chec
         route.formal_hook_status,
         CurrentL2EmittedArtifactRouteStatus::Reached
     );
-    assert_eq!(route.source_report.sample_id, "e13-malformed-capability-strengthening");
+    assert_eq!(
+        route.source_report.sample_id,
+        "e13-malformed-capability-strengthening"
+    );
     assert_eq!(
         route.formal_hook_artifact.as_ref().unwrap().subject_kind,
         "fixture_static_cluster"
@@ -118,11 +121,13 @@ fn emitted_artifact_wiring_keeps_e3_guarded_and_emits_no_followup_artifacts() {
     );
     assert_eq!(route.source_report.sample_id, "e3-option-admit-chain");
     assert!(route.formal_hook_artifact.is_none());
-    assert!(route
-        .formal_hook_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("runtime_try_cut_cluster"));
+    assert!(
+        route
+            .formal_hook_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("runtime_try_cut_cluster")
+    );
     assert!(route.proof_notebook_review_units.is_empty());
     assert!(route.model_check_concrete_carriers.is_empty());
 }

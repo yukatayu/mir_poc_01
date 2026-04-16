@@ -36,14 +36,14 @@
 ## current lane split
 
 - execution lane:
-  `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
+  `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
 - theory-lab lane:
   `Macro 5` follow-up
-  (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`) と
+  (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`) と
   `Macro 5/6` follow-up
-  (`order/handoff property-language bridge`、`modal promotion-threshold note`)
+  (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
 - reserve integration lane:
-  `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
+  `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
 
 ## autonomy gate detail
 
@@ -117,7 +117,8 @@
 - type / proof / model-check line は「まだ無理」ではなく、boundary / pilot planning を進められる段階にある。
 - typed-core attachment inventory、semantic-core theorem pilot order、model-check projection reserve inventory は docs-first に閉じられる段階にある。
 - source-visible typed-surface comparison、theorem lemma wording hardening、model-check bridge grain note は docs-first に閉じられる段階にある。
+- checker attachment migration、proof artifact stop-line refresh、sample-visible property summary wording も docs-first に閉じられる段階にある。
 - ordering / `memory_order` reinterpretation も「未着手で何も言えない」段階ではなく、theory-first inventory と handoff boundary を整理できる段階にある。
-- order / handoff line も、falsifier loop、candidate reduction、modal follow-up まで進められる段階にある。
+- order / handoff line も、falsifier loop、candidate reduction、property-language bridge、modal promotion threshold まで進められる段階にある。
 - ただし、この 2 系統はいずれも mainline implementation へ即昇格させる段階ではない。
 - theory-lab line は repo 全体から見ると advanced line だが、この particular line 自体は still early-active である。

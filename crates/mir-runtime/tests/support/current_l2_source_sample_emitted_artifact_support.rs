@@ -85,7 +85,12 @@ fn build_formal_hook_for_source_sample(
 ) -> Result<ToolNeutralFormalHookArtifact, String> {
     let fixture_path = fixture_path(&source_report.sample_id)?;
 
-    match source_report.runtime_report.checker_floor.static_gate.verdict {
+    match source_report
+        .runtime_report
+        .checker_floor
+        .static_gate
+        .verdict
+    {
         StaticGateVerdict::Valid => {
             let bundle =
                 load_bundle_from_fixture_path(fixture_path).map_err(|error| error.to_string())?;
@@ -94,9 +99,11 @@ fn build_formal_hook_for_source_sample(
             build_formal_hook_from_detached_bundle_artifact(&detached_bundle)
         }
         StaticGateVerdict::Malformed => {
-            let fixture = load_fixture_from_path(&fixture_path).map_err(|error| error.to_string())?;
+            let fixture =
+                load_fixture_from_path(&fixture_path).map_err(|error| error.to_string())?;
             let gate = static_gate_detailed(&fixture);
-            let detached_static = build_detached_static_gate_artifact(fixture_path, &fixture, &gate);
+            let detached_static =
+                build_detached_static_gate_artifact(fixture_path, &fixture, &gate);
             build_formal_hook_from_static_gate_artifact(&detached_static)
         }
         StaticGateVerdict::Underdeclared => Err(format!(

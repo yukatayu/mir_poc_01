@@ -102,66 +102,6 @@
 - `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
   - current L2 parser-free PoC の detached artifact で、bundle failure artifact 側の `failure.failure_kind` discriminator-only schema を `BatchRunSummary` aggregate export がどこまで typed に吸うべきかを比較する補助文書。
   - production exporter 実装や richer host interface を固定せず、aggregate connection の docs-only boundary judgment だけを与える。
-- `specs/examples/393-current-l2-stable-malformed-missing-option-first-source-backed-widening-actualization-ready-public-operational-cli-second-later-gate-actualization-comparison.md`
-  - runtime-led thin library facade first later cut を巻き戻さず、public operational CLI second gate をどの operational wrapper cut から narrow に actualize するかを比較する補助文書。
-- `specs/examples/394-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-minimal-public-operational-cli-second-later-gate-threshold.md`
-  - public operational CLI second gate の minimum を delegated library entry / operational shell concern / support / excluded / guard / kept-later refs とともに固定する補助文書。
-- `specs/examples/395-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-final-public-parser-checker-runtime-thin-facade-later-support-actualization-comparison.md`
-  - runtime-led thin facade first cut と Rust-side operational wrapper second gate を巻き戻さず、standalone parser/checker/runtime support entry をどの later-support cut から narrow に actualize するかを比較する補助文書。
-- `specs/examples/396-current-l2-final-public-parser-checker-runtime-thin-facade-later-support-actualization-ready-minimal-final-public-parser-checker-runtime-thin-facade-later-support-threshold.md`
-  - final public parser/checker/runtime thin-facade later support の minimum を chosen support refs / explicit input refs / deeper-support refs / excluded refs / guard refs / kept-later refs とともに固定する補助文書。
-- `specs/examples/397-current-l2-final-public-parser-checker-runtime-thin-facade-later-support-actualization-ready-stable-malformed-capability-second-reopen-actualization-comparison.md`
-  - missing-option first source-backed widening close を巻き戻さず、capability family (`e13/e20`) をどの reopen cut から next malformed-side actualization へ送るかを比較する補助文書。
-- `specs/examples/398-current-l2-stable-malformed-capability-second-reopen-actualization-ready-minimal-stable-malformed-capability-second-reopen-threshold.md`
-  - capability second reopen comparison の minimum を chosen family / entry evidence / actualization mode / guard / kept-later refs とともに固定する補助文書。
-- `specs/examples/399-current-l2-stable-malformed-capability-second-reopen-actualization-ready-public-operational-cli-concrete-shell-naming-comparison.md`
-  - capability second reopen comparison fixed 後の次段として、runtime-led thin facade first cut、Rust-side operational wrapper second gate、runtime skeleton later support cutを巻き戻さずに、public operational CLI の concrete shell naming を current-L2 scoped shell へどこまで narrow に留めるかを比較する補助文書。
-- `specs/examples/400-current-l2-public-operational-cli-concrete-shell-naming-ready-minimal-public-operational-cli-concrete-shell-naming-threshold.md`
-  - public operational CLI concrete shell naming の minimum を、entry criteria、chosen shell、operational arguments、operational output、excluded bucket、guard、kept-later refs とともに固定する補助文書。
-- `specs/examples/401-current-l2-public-operational-cli-concrete-shell-naming-ready-stable-malformed-capability-second-source-backed-widening-actualization-comparison.md`
-  - current-L2 scoped docs-only shell naming fixed 後の次段として、capability family (`e13/e20`) の source-backed widening actualization を pair source-authored static-stop cut、single-row lead、helper-only stop のどれで扱うかを比較する補助文書。
-- `specs/examples/402-current-l2-stable-malformed-capability-second-source-backed-widening-actualization-ready-minimal-stable-malformed-capability-second-source-backed-widening-threshold.md`
-  - stable malformed capability second source-backed widening actualization の minimum を、pair family、entry evidence、actualized surface、guard、kept-later refs とともに固定する補助文書。
-- `specs/examples/403-current-l2-stable-malformed-capability-second-source-backed-widening-actualization-ready-public-operational-cli-concrete-shell-actualization-comparison.md`
-  - capability second source-backed widening actualization comparison fixed 後の次段として、current-L2 scoped shell naming を actual shell concern へどの narrow cut から reopen するかを比較する補助文書。
-- `specs/examples/404-current-l2-public-operational-cli-concrete-shell-actualization-ready-minimal-public-operational-cli-concrete-shell-actualization-threshold.md`
-  - public operational CLI concrete shell actualization の minimum を、chosen shell、delegated entry、operational arguments、support bucket、excluded bucket、guard、kept-later refs とともに固定する補助文書。
-- `specs/examples/405-current-l2-order-cut-family-comparison.md`
-  - current repo の order / cut line で、local finalization、ordering-only barrier、observation / snapshot、commit / evidence-bearing cut を 1 primitive に潰さず比較する補助文書。
-- `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
-  - `atomic_cut` の local finalization と global observation / snapshot を scenario ベースで切り分ける補助文書。
-- `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
-  - `po` / `dep` / `pub` / `obs` / `wit` / `final` / `hb(scope)` の relation decomposition と、low-level memory-order family を retained-later reference family に留める current judgmentを整理する補助文書。
-- `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
-  - thread と node を source-level causal language では近く扱いつつ、lowering / transport / evidence / failure / durability policy の差を別に保つ current working line を整理する補助文書。
-- `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
-  - order / handoff line の rough syntax sketch を adoption 候補ではなく structure extraction material として比較し、semantic honesty / checker legibility / modal adequacy / misreading resistance を syntax comparison 軸に置く補助文書。
-- `specs/examples/410-current-l2-modal-foundation-comparison.md`
-  - `lambda-circle-box` を partial basis candidate に留めつつ、guarded / MDTT / MTT を stronger candidate として比較する補助文書。
-- `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
-  - order / handoff line の benchmark family と property-to-boundary matrix を docs-only で揃える補助文書。
-- `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
-  - theory-lab line の role split、promotion rule、research package template を current process discipline に沿って整理する補助文書。
-- `specs/examples/413-current-l2-typed-core-attachment-inventory-and-obligation-allocation-refresh.md`
-  - typed-core line の first attachment candidate、obligation owner matrix、stop line を docs-first に整理する補助文書。
-- `specs/examples/414-current-l2-semantic-core-theorem-pilot-planning.md`
-  - semantic-core theorem pilot の first lemma order、subject/evidence floor、review/discharge stop line を docs-first に整理する補助文書。
-- `specs/examples/415-current-l2-model-check-projection-and-property-family-reserve-inventory.md`
-  - model-check line の projection grain、property-family reserve order、tool-binding stop line を docs-first に整理する補助文書。
-- `specs/examples/416-current-l2-order-handoff-falsifier-loop-and-adequacy-corpus-hardening.md`
-  - order / handoff line の falsifier family、negative corpus coverage、boundary-matrix hardening を docs-first に整理する補助文書。
-- `specs/examples/417-current-l2-stable-malformed-capability-second-source-backed-widening-actualization.md`
-  - current L2 source sample authored corpus を capability pair `e13/e20` まで widen し、lowerer / runner / verification ladder / emitted artifact wiring / regression bundle へ narrow actualize した current cut を整理する補助文書。
-- `specs/examples/418-current-l2-first-source-visible-typed-surface-comparison.md`
-  - checker-adjacent principal typed source を維持したまま、どの source-visible marker family を first typed-surface candidate に残すかを比較する補助文書。
-- `specs/examples/419-current-l2-first-theorem-lemma-family-wording-hardening.md`
-  - semantic-core theorem pilot の lemma statement、admissible evidence floor、review artifact と theorem discharge の stop line を docs-first に harden する補助文書。
-- `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
-  - row-local machine-facing carrier から small-cluster semantic projection へ橋をかける bridge grain と bridge bundle floor を整理する補助文書。
-- `specs/examples/421-current-l2-order-handoff-candidate-reduction-after-falsifier-hardening.md`
-  - falsifier hardening 後の kept candidate family / second candidate / derived candidate / retained-later reference family を reduction note として整理する補助文書。
-- `specs/examples/422-current-l2-modal-foundation-comparison-follow-up.md`
-  - `lambda-circle-box` を partial basis に保ちつつ、guarded / MDTT / MTT stronger-candidate family の reduction と stop line を整理する補助文書。
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。
@@ -1093,6 +1033,82 @@
   - final public parser / checker / runtime first later gate actualization fixed 後の次段として、missing-option family の source-backed widening first cut を `e16/e18` actual row + `e17` staged guard に絞る current choice を比較する。
 - `specs/examples/392-current-l2-stable-malformed-missing-option-first-source-backed-widening-actualization-ready-minimal-stable-malformed-missing-option-first-source-backed-widening-threshold.md`
   - missing-option first source-backed widening actualization の minimum を、actualized rows、staged guard、actualized surfaces、reached stage、kept-later refs で固定する。
+- `specs/examples/393-current-l2-stable-malformed-missing-option-first-source-backed-widening-actualization-ready-public-operational-cli-second-later-gate-actualization-comparison.md`
+  - runtime-led thin library facade first later cut を巻き戻さず、public operational CLI second gate をどの operational wrapper cut から narrow に actualize するかを比較する補助文書。
+- `specs/examples/394-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-minimal-public-operational-cli-second-later-gate-threshold.md`
+  - public operational CLI second gate の minimum を delegated library entry / operational shell concern / support / excluded / guard / kept-later refs とともに固定する補助文書。
+- `specs/examples/395-current-l2-public-operational-cli-second-later-gate-actualization-comparison-ready-final-public-parser-checker-runtime-thin-facade-later-support-actualization-comparison.md`
+  - runtime-led thin facade first cut と Rust-side operational wrapper second gate を巻き戻さず、standalone parser/checker/runtime support entry をどの later-support cut から narrow に actualize するかを比較する補助文書。
+- `specs/examples/396-current-l2-final-public-parser-checker-runtime-thin-facade-later-support-actualization-ready-minimal-final-public-parser-checker-runtime-thin-facade-later-support-threshold.md`
+  - final public parser/checker/runtime thin-facade later support の minimum を chosen support refs / explicit input refs / deeper-support refs / excluded refs / guard refs / kept-later refs とともに固定する補助文書。
+- `specs/examples/397-current-l2-final-public-parser-checker-runtime-thin-facade-later-support-actualization-ready-stable-malformed-capability-second-reopen-actualization-comparison.md`
+  - missing-option first source-backed widening close を巻き戻さず、capability family (`e13/e20`) をどの reopen cut から next malformed-side actualization へ送るかを比較する補助文書。
+- `specs/examples/398-current-l2-stable-malformed-capability-second-reopen-actualization-ready-minimal-stable-malformed-capability-second-reopen-threshold.md`
+  - capability second reopen comparison の minimum を chosen family / entry evidence / actualization mode / guard / kept-later refs とともに固定する補助文書。
+- `specs/examples/399-current-l2-stable-malformed-capability-second-reopen-actualization-ready-public-operational-cli-concrete-shell-naming-comparison.md`
+  - capability second reopen comparison fixed 後の次段として、runtime-led thin facade first cut、Rust-side operational wrapper second gate、runtime skeleton later support cutを巻き戻さずに、public operational CLI の concrete shell naming を current-L2 scoped shell へどこまで narrow に留めるかを比較する補助文書。
+- `specs/examples/400-current-l2-public-operational-cli-concrete-shell-naming-ready-minimal-public-operational-cli-concrete-shell-naming-threshold.md`
+  - public operational CLI concrete shell naming の minimum を、entry criteria、chosen shell、operational arguments、operational output、excluded bucket、guard、kept-later refs とともに固定する補助文書。
+- `specs/examples/401-current-l2-public-operational-cli-concrete-shell-naming-ready-stable-malformed-capability-second-source-backed-widening-actualization-comparison.md`
+  - current-L2 scoped docs-only shell naming fixed 後の次段として、capability family (`e13/e20`) の source-backed widening actualization を pair source-authored static-stop cut、single-row lead、helper-only stop のどれで扱うかを比較する補助文書。
+- `specs/examples/402-current-l2-stable-malformed-capability-second-source-backed-widening-actualization-ready-minimal-stable-malformed-capability-second-source-backed-widening-threshold.md`
+  - stable malformed capability second source-backed widening actualization の minimum を、pair family、entry evidence、actualized surface、guard、kept-later refs とともに固定する補助文書。
+- `specs/examples/403-current-l2-stable-malformed-capability-second-source-backed-widening-actualization-ready-public-operational-cli-concrete-shell-actualization-comparison.md`
+  - capability second source-backed widening actualization comparison fixed 後の次段として、current-L2 scoped shell naming を actual shell concern へどの narrow cut から reopen するかを比較する補助文書。
+- `specs/examples/404-current-l2-public-operational-cli-concrete-shell-actualization-ready-minimal-public-operational-cli-concrete-shell-actualization-threshold.md`
+  - public operational CLI concrete shell actualization の minimum を、chosen shell、delegated entry、operational arguments、support bucket、excluded bucket、guard、kept-later refs とともに固定する補助文書。
+- `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - current repo の order / cut line で、local finalization、ordering-only barrier、observation / snapshot、commit / evidence-bearing cut を 1 primitive に潰さず比較する補助文書。
+- `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
+  - `atomic_cut` の local finalization と global observation / snapshot を scenario ベースで切り分ける補助文書。
+- `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `po` / `dep` / `pub` / `obs` / `wit` / `final` / `hb(scope)` の relation decomposition と、low-level memory-order family を retained-later reference family に留める current judgmentを整理する補助文書。
+- `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
+  - thread と node を source-level causal language では近く扱いつつ、lowering / transport / evidence / failure / durability policy の差を別に保つ current working line を整理する補助文書。
+- `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - order / handoff line の rough syntax sketch を adoption 候補ではなく structure extraction material として比較し、semantic honesty / checker legibility / modal adequacy / misreading resistance を syntax comparison 軸に置く補助文書。
+- `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `lambda-circle-box` を partial basis candidate に留めつつ、guarded / MDTT / MTT を stronger candidate として比較する補助文書。
+- `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - order / handoff line の benchmark family と property-to-boundary matrix を docs-only で揃える補助文書。
+- `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - theory-lab line の role split、promotion rule、research package template を current process discipline に沿って整理する補助文書。
+- `specs/examples/413-current-l2-typed-core-attachment-inventory-and-obligation-allocation-refresh.md`
+  - typed-core line の first attachment candidate、obligation owner matrix、stop line を docs-first に整理する補助文書。
+- `specs/examples/414-current-l2-semantic-core-theorem-pilot-planning.md`
+  - semantic-core theorem pilot の first lemma order、subject/evidence floor、review/discharge stop line を docs-first に整理する補助文書。
+- `specs/examples/415-current-l2-model-check-projection-and-property-family-reserve-inventory.md`
+  - model-check line の projection grain、property-family reserve order、tool-binding stop line を docs-first に整理する補助文書。
+- `specs/examples/416-current-l2-order-handoff-falsifier-loop-and-adequacy-corpus-hardening.md`
+  - order / handoff line の falsifier family、negative corpus coverage、boundary-matrix hardening を docs-first に整理する補助文書。
+- `specs/examples/417-current-l2-stable-malformed-capability-second-source-backed-widening-actualization.md`
+  - current L2 source sample authored corpus を capability pair `e13/e20` まで widen し、lowerer / runner / verification ladder / emitted artifact wiring / regression bundle へ narrow actualize した current cut を整理する補助文書。
+- `specs/examples/418-current-l2-first-source-visible-typed-surface-comparison.md`
+  - checker-adjacent principal typed source を維持したまま、どの source-visible marker family を first typed-surface candidate に残すかを比較する補助文書。
+- `specs/examples/419-current-l2-first-theorem-lemma-family-wording-hardening.md`
+  - semantic-core theorem pilot の lemma statement、admissible evidence floor、review artifact と theorem discharge の stop line を docs-first に harden する補助文書。
+- `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
+  - row-local machine-facing carrier から small-cluster semantic projection へ橋をかける bridge grain と bridge bundle floor を整理する補助文書。
+- `specs/examples/421-current-l2-order-handoff-candidate-reduction-after-falsifier-hardening.md`
+  - falsifier hardening 後の kept candidate family / second candidate / derived candidate / retained-later reference family を reduction note として整理する補助文書。
+- `specs/examples/422-current-l2-modal-foundation-comparison-follow-up.md`
+  - `lambda-circle-box` を partial basis に保ちつつ、guarded / MDTT / MTT stronger-candidate family の reduction と stop line を整理する補助文書。
+- `specs/examples/423-current-l2-public-operational-cli-concrete-shell-actualization.md`
+  - current-L2 scoped public operational shell concern を、thin facade delegated entry、explicit host-plan input、`pretty|json` output、Rust shell wrapper まで narrow に actualize した current cut を整理する補助文書。
+- `specs/examples/424-current-l2-shared-space-room-profile-host-binding-bridge-only-note.md`
+  - shared-space room-profile floor と capability-scoped host boundary floor を reopen せずに繋ぐ bridge-only note を整理する補助文書。
+- `specs/examples/425-current-l2-checker-attachment-to-handoff-row-migration-note.md`
+  - checker-adjacent principal typed source を維持したまま、source-visible marker family と downstream handoff row reserve の migration cut を整理する補助文書。
+- `specs/examples/426-current-l2-proof-artifact-and-bridge-stop-line-refresh.md`
+  - tool-neutral formal hook、row-local review unit、docs-only bridge sketch、theorem discharge の stop line を collapse させずに整理する補助文書。
+- `specs/examples/427-current-l2-sample-visible-theorem-model-check-property-summary-wording.md`
+  - theorem/model-check line の sample-facing summary wording と keep/drop line を整理する補助文書。
+- `specs/examples/428-current-l2-order-handoff-property-language-bridge-note.md`
+  - cut-family / relation decomposition / adequacy corpus / boundary matrix / candidate reduction を property-language bridge に接続する補助文書。
+- `specs/examples/429-current-l2-modal-promotion-threshold-note.md`
+  - `lambda-circle-box` partial basis と guarded / MDTT / MTT stronger-candidate family のあいだにある promotion threshold を整理する補助文書。
+- `specs/examples/430-current-l2-malformed-duplicate-cluster-later-reopen-comparison.md`
+  - duplicate cluster の kept-later family と next reopen sequencing を、broader malformed-static familyと混線させずに比較する補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

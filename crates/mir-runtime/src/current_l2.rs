@@ -12,10 +12,11 @@ use std::{
 };
 
 use mir_ast::current_l2::{
-    Stage1DeclGuardSlot, Stage1ParsedChainDecl, Stage1ParsedChainEdge, Stage1ParsedLineageAssertion,
-    Stage1ParsedOptionDecl, Stage1ParsedProgram, Stage2ParsedTryFallback,
-    Stage2StatementHeadKind, Stage3PredicateFragment, parse_stage1_program_text,
-    parse_stage2_try_rollback_text, parse_stage3_minimal_predicate_fragment_text,
+    Stage1DeclGuardSlot, Stage1ParsedChainDecl, Stage1ParsedChainEdge,
+    Stage1ParsedLineageAssertion, Stage1ParsedOptionDecl, Stage1ParsedProgram,
+    Stage2ParsedTryFallback, Stage2StatementHeadKind, Stage3PredicateFragment,
+    parse_stage1_program_text, parse_stage2_try_rollback_text,
+    parse_stage3_minimal_predicate_fragment_text,
 };
 use mir_semantics::{
     ChainEdge, Contract, FixtureHostPlan, FixtureHostStub, InterpreterError, LineageAssertion,
@@ -295,10 +296,9 @@ impl CurrentL2FixedSourceParser {
                 break;
             };
             if line.indent != 0 {
-                return Err(self.line_error(
-                    line.line_no,
-                    "top-level statements must start at indent 0",
-                ));
+                return Err(
+                    self.line_error(line.line_no, "top-level statements must start at indent 0")
+                );
             }
             body.push(self.parse_statement_at_indent(0)?);
         }
@@ -340,7 +340,9 @@ impl CurrentL2FixedSourceParser {
     ) -> Result<Statement, InterpreterError> {
         self.skip_blank_lines();
         let line = self.peek().ok_or_else(|| {
-            InterpreterError::InvalidProgram("unexpected end of input while parsing statement".into())
+            InterpreterError::InvalidProgram(
+                "unexpected end of input while parsing statement".into(),
+            )
         })?;
 
         if line.indent != expected_indent {
@@ -416,16 +418,17 @@ impl CurrentL2FixedSourceParser {
                 "fixed-subset lowering first cut supports at most one try/fallback block",
             ));
         }
-        self.try_source = Some(
-            render_stage2_bridge_source(
-                &self.lines[start..=end],
-                line.indent,
-                body_indent,
-                fallback_indent,
-            ),
-        );
+        self.try_source = Some(render_stage2_bridge_source(
+            &self.lines[start..=end],
+            line.indent,
+            body_indent,
+            fallback_indent,
+        ));
 
-        Ok(Statement::TryFallback { body, fallback_body })
+        Ok(Statement::TryFallback {
+            body,
+            fallback_body,
+        })
     }
 
     fn parse_try_body(
@@ -518,7 +521,9 @@ impl CurrentL2FixedSourceParser {
                 }
                 return Err(self.line_error(
                     line.line_no,
-                    format!("missing `{close_text}` to close block opened at line {opener_line_no}"),
+                    format!(
+                        "missing `{close_text}` to close block opened at line {opener_line_no}"
+                    ),
                 ));
             }
             if line.indent != first_indent {
@@ -557,10 +562,7 @@ impl CurrentL2FixedSourceParser {
                 None
             }
             9 if tokens[8] == "admit" => {
-                return Err(self.line_error(
-                    line.line_no,
-                    "missing declaration-side admit payload",
-                ));
+                return Err(self.line_error(line.line_no, "missing declaration-side admit payload"));
             }
             10 if tokens[8] == "admit" => {
                 self.stage1_supported = false;
@@ -760,10 +762,7 @@ impl CurrentL2FixedSourceParser {
     }
 }
 
-fn parse_source_fallback_edge(
-    line: &str,
-    previous: &str,
-) -> Result<(ChainEdge, String), String> {
+fn parse_source_fallback_edge(line: &str, previous: &str) -> Result<(ChainEdge, String), String> {
     let rest = line
         .strip_prefix("fallback ")
         .ok_or_else(|| format!("unsupported fallback row `{line}`"))?;
@@ -831,7 +830,11 @@ fn render_stage2_bridge_source(
             continue;
         }
 
-        let direct_indent = if in_fallback { fallback_indent } else { body_indent };
+        let direct_indent = if in_fallback {
+            fallback_indent
+        } else {
+            body_indent
+        };
         if direct_indent.is_some_and(|indent| line.indent == indent) {
             rendered.push(line.text.clone());
         }
@@ -854,7 +857,8 @@ fn validate_parser_bridge_input(
     }
 
     if let Some(stage2_try_fallback) = bridge.stage2_try_fallback.as_ref() {
-        let (expected_body, expected_fallback_body) = single_stage2_try_fallback_signature(program)?;
+        let (expected_body, expected_fallback_body) =
+            single_stage2_try_fallback_signature(program)?;
         if stage2_try_fallback.body() != expected_body.as_slice()
             || stage2_try_fallback.fallback_body() != expected_fallback_body.as_slice()
         {

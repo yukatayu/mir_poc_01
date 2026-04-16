@@ -10,6 +10,7 @@ between them.
 "#]
 
 pub mod current_l2;
+pub mod current_l2_cli;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"

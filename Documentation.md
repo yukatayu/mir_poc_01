@@ -21,14 +21,14 @@
   を already 持つ。
 - current status は 3 lane で読むのが自然である。
   - execution lane:
-    `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
+    `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
   - theory-lab lane:
     `Macro 5` follow-up
-    (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`) と
+    (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`) と
     `Macro 5/6` follow-up
-    (`order/handoff property-language bridge`、`modal promotion-threshold note`)
+    (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
   - reserve integration lane:
-    `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
+    `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
 
 ## source-backed で既にあるもの
 
@@ -46,6 +46,13 @@
   `specs/examples/405...412`
 - typed / theorem / model-check / order-handoff follow-up package:
   `specs/examples/413...422`
+- eight-package closeout の mixed follow-up:
+  - reserve integration actualized / bridge package:
+    `specs/examples/423...424`
+  - theory-lab second-order follow-up:
+    `specs/examples/425...429`
+  - execution-side duplicate-cluster later reopen comparison:
+    `specs/examples/430`
 
 ## まだ OPEN のもの
 
@@ -75,7 +82,7 @@
 - theory-lab operating model と comparison bundle:
   `specs/examples/405...412`
 - typed / theorem / model-check / ordering の current adjacent package:
-  `specs/examples/413...422`
+  `specs/examples/413...430`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:

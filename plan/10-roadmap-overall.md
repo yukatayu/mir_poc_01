@@ -29,7 +29,7 @@
 - 主眼:
   fixed-subset source sample と malformed family の narrow widening
 - current line:
-  `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
+  `Macro 4 / malformed duplicate-cluster source-sample widening comparison with try-rollback malformed-static kept-later inventory`
 - goal:
   runnable corpus を広げつつ、runner / ladder / regression / docs mirror を崩さない
 
@@ -40,10 +40,10 @@
   docs-first comparison と boundary planning で進める
 - current line:
   `Macro 5` follow-up
-  (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`)
+  (`request/predicate/try cluster typed-surface reserve note`、`admissible evidence contraction note`、`tool-binding stop-line refresh`)
   と
   `Macro 5/6` follow-up
-  (`order/handoff property-language bridge`、`modal promotion-threshold note`)
+  (`order/handoff emitted-artifact schema reserve note`、`guarded-vs-MDTT/MTT reduction timing note`)
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定する
 
@@ -52,7 +52,7 @@
 - 主眼:
   thin facade / public shell / shared-space / host-I/O boundary を hidden promotion なしで整理する
 - current line:
-  `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
+  `Macro 6/7 / public operational CLI packaging reserve note と shared-space fairness/replay strengthening reserve note`
 - goal:
   support-only / shell / excluded bucket を混ぜずに保つ
 
