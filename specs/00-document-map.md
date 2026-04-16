@@ -1125,6 +1125,10 @@
   - guarded と MDTT/MTT cluster の exact reduction timing を threshold-gated parallel keep に留める current reading を整理する補助文書。
 - `specs/examples/438-current-l2-malformed-duplicate-cluster-source-sample-widening-comparison.md`
   - duplicate cluster `e14/e15` の source-authored static-stop pair widening を next exact cut として比較する補助文書。
+- `specs/examples/439-current-l2-typed-surface-family-unification-keep-drop-note.md`
+  - checker attachment principal の下で、source-visible structural marker family と reserve cluster family を two-tier split で整理する補助文書。
+- `specs/examples/440-current-l2-notebook-consumer-threshold-and-discharge-reserve-note.md`
+  - notebook-first theorem consumer の threshold と abstract discharge-entry reserve をどう分けるかを整理する補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

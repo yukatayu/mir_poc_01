@@ -118,9 +118,11 @@ current repo の post-Phase-5 theory-lab line では、この theorem-first brid
 までは docs-first に詰め終えており、その後 `specs/examples/426` により fixed 済みである。
 さらに current theorem-side reserve line として
 **admissible evidence contraction note**
-まで fixed 済みであり、next natural step は
+と
 **notebook-consumer threshold and discharge reserve note**
-に進むことである。
+まで fixed 済みであり、next natural step は
+**model-check small-cluster projection keep/drop refresh**
+ののちに theorem discharge transport / public-contract later gate を再評価することである。
 その具体的な first threshold も、
 **human review checklist / walkthrough pressure**
 に置くのが最小であり、compare / bless-like flow や actual file exchange はさらに後段に残す。

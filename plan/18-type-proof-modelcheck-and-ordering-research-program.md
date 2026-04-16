@@ -153,10 +153,14 @@ full strong type system や production tool binding を immediate target にし�
 - request / predicate / `try` cluster typed-surface reserve note
   - request / predicate / `try` cluster は grouped reserve cue に留める
   - checker attachment principal は維持する
+- typed-surface family unification keep/drop note
+  - source-visible structural marker family と reserve cluster family を two-tier split に置く
+  - shared attachment shape と stronger typed surface promotion は later threshold に残す
 
 ### next package order
 
-1. typed-surface family unification keep/drop note
+1. no immediate near-term package
+   - stronger typed surface promotion は later threshold で再評価する
 
 ### stop line
 
@@ -194,10 +198,14 @@ full strong type system や production tool binding を immediate target にし�
 - admissible evidence contraction note
   - admissible theorem evidence は symbolic refs only に contraction する
   - review prose は discharge evidence に混ぜない
+- notebook-consumer threshold and discharge reserve note
+  - abstract discharge-entry row を first threshold に置く
+  - concrete discharge result / transport / public theorem contract は later gate に残す
 
 ### next package order
 
-1. notebook-consumer threshold and discharge reserve note
+1. no immediate near-term package
+   - theorem discharge transport / public-contract gate は later reserve に残す
 
 ### stop line
 
@@ -403,11 +411,9 @@ refs-only reserve schema を first cut とし、consumer-shaped schema と sourc
 
 ## current near-term theory-lab sequence
 
-1. typed-surface family unification keep/drop note
-2. notebook-consumer threshold and discharge reserve note
-3. model-check small-cluster projection keep/drop refresh
-4. order / handoff source-surface wording reserve note
-5. modality internalization trigger note
+1. model-check small-cluster projection keep/drop refresh
+2. order / handoff source-surface wording reserve note
+3. modality internalization trigger note
 
 ## current recommendation
 

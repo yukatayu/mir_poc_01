@@ -193,14 +193,16 @@
    - docs-first follow-up により、first source-visible typed-surface comparison は existing structural marker family を first candidate に置き、dedicated attachment block と unified obligation block を later comparison に残す current line まで固まった。
    - docs-first migration note により、principal source を checker attachment に残し、source-visible marker を mirror、handoff row を derived reserve row に留める current cut までは固まった。
    - request / predicate / `try` cluster typed-surface reserve note により、request / predicate / `try` cluster を grouped reserve cue に留める current cut までは固まった。
-   - 未決なのは、`family_refs[]` の exact namespace をどうするか、capability / lineage / request / predicate / `try` cluster をどこまで同じ attachment shape に寄せるかである。
+   - typed-surface family unification keep/drop note により、current two-tier split（principal checker attachment / source-visible structural marker family / reserve cluster family）までは固まった。
+   - 未決なのは、`family_refs[]` の exact namespace をどうするか、shared attachment shape と stronger typed surface promotion をどの threshold で reopen するかである。
 39. semantic-core theorem pilot の first lemma order / evidence floor / review-discharge stop line をどこまで固定するか。
    - source-backed な floor として、current first theorem pilot line は `canonical_normalization_law`、`no_re_promotion`、`rollback_cut_non_interference` の順で読むのが自然である。
    - また current first concrete consumer は notebook-first line に置き、tool-neutral formal hook と row-local review unit を entry に保つ。
    - docs-first follow-up により、lemma wording floor、admissible evidence floor、review artifact と theorem discharge の stop line までは固まった。
    - proof artifact / bridge stop-line refresh により、formal hook / review unit / bridge sketch / theorem discharge を collapse しない current cut と、human review checklist / walkthrough pressure first の threshold までは固まった。
    - admissible evidence contraction note により、admissible theorem evidence を symbolic refs only に contraction する current cut までは固まった。
-   - 未決なのは、notebook-consumer threshold と discharge reserve をどこで切るか、concrete theorem prover brand、proof object public contract、actual discharge transport、public checker migration timingである。
+   - notebook-consumer threshold and discharge reserve note により、abstract discharge-entry row を first threshold に置く current cut までは固まった。
+   - 未決なのは、concrete theorem prover brand、proof object public contract、actual discharge transport、public checker migration timingである。
 40. model-check projection grain と first property-family reserve をどこまで current docs に上げるか。
    - source-backed な floor として、current line は `formal_hook -> row-local machine-facing carrier -> emitted artifact wiring -> sample-facing summary` までである。
    - current next reserve としては、small-cluster semantic projection を row-local floor の次に置き、room protocol / fairness / replay / provider receipt family は order/handoff 側 reserve に残すのが自然である。

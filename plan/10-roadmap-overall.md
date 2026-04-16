@@ -39,8 +39,8 @@
   typed / theorem / model-check / order / memory / syntax / modality を
   docs-first comparison と boundary planning で進める
 - current line:
-  `Macro 5/6 reserve checkpoint close`
-  （typed/theorem/model-check second-order reserve と order/modality reserve は fixed 済み、next reopen は third-order follow-up）
+  `Macro 5 third-order follow-up active`
+  （typed-surface family split と notebook-consumer threshold は fixed 済み、next reopen は model-check small-cluster projection keep/drop refresh）
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定する
 

@@ -139,6 +139,6 @@ current reached-stage inventory は current authored dozen `e1` / `e2` / `e3` / 
 - capability second source-backed widening actualization は source-authored pair として close 済みであり、sample-side next reopen は duplicate cluster source-authored static-stop pair actualization comparison と `TryFallback` / `AtomicCut` malformed-static broader family kept-later inventory に残す
 - repo-level current snapshot は
   - execution lane: duplicate-cluster source-authored static-stop pair actualization comparison
-  - theory-lab lane: reserve checkpoint close
+  - theory-lab lane: third-order follow-up active
   - reserve integration lane: reserve integration checkpoint close
   の three-lane reading に進んでいる

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-17 00:04 JST
+最終更新: 2026-04-17 00:28 JST
 
 ## この文書について
 
@@ -14,8 +14,8 @@
 - execution lane:
   `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
 - theory-lab lane:
-  `Macro 5/6 reserve checkpoint close`
-  （typed/theorem/model-check second-order reserve と order/modality reserve は fixed 済み、next reopen は third-order follow-up）
+  `Macro 5 third-order follow-up active`
+  （typed-surface family split と notebook-consumer threshold は fixed 済み、next reopen は model-check small-cluster projection keep/drop refresh）
 - reserve integration lane:
   `Macro 6/7 reserve integration checkpoint close`
   （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -26,19 +26,13 @@
 
 | 順番 | lane | macro | task package | completion signal | rough estimate |
 |---|---|---|---|---|---|
-| 1 | theory-lab | `Macro 5` | typed-surface family unification keep/drop note | request / predicate / `try` reserve 後の shared family split が揃う | 1〜2 task |
-| 2 | theory-lab | `Macro 5` | notebook-consumer threshold and discharge reserve note | admissible evidence contraction 後の theorem-side next threshold が揃う | 1〜2 task |
-| 3 | theory-lab | `Macro 5` | model-check small-cluster projection keep/drop refresh | tool-binding stop line 後の projection keep/drop が揃う | 1〜2 task |
-| 4 | theory-lab | `Macro 5/6` | order / handoff source-surface wording reserve note | emitted-artifact schema reserve 後の wording keep/drop が揃う | 1〜2 task |
-| 5 | theory-lab | `Macro 5/6` | modality internalization trigger note | reduction timing 後の stronger-foundation trigger が揃う | 1〜2 task |
-| 6 | execution | `Macro 4` | malformed duplicate-cluster source-authored static-stop pair actualization comparison | duplicate pair widening の exact actualization cut と non-promotion guard が揃う | 1〜2 task |
+| 1 | theory-lab | `Macro 5` | model-check small-cluster projection keep/drop refresh | tool-binding stop line 後の projection keep/drop が揃う | 1〜2 task |
+| 2 | theory-lab | `Macro 5/6` | order / handoff source-surface wording reserve note | emitted-artifact schema reserve 後の wording keep/drop が揃う | 1〜2 task |
+| 3 | theory-lab | `Macro 5/6` | modality internalization trigger note | reduction timing 後の stronger-foundation trigger が揃う | 1〜2 task |
+| 4 | execution | `Macro 4` | malformed duplicate-cluster source-authored static-stop pair actualization comparison | duplicate pair widening の exact actualization cut と non-promotion guard が揃う | 1〜2 task |
 
 ## 研究で詰める論点
 
-- typed-surface family unification keep/drop
-  - detail / options / current recommendation は `plan/18` Track A を参照。
-- notebook-consumer threshold and discharge reserve
-  - detail / options / current recommendation は `plan/18` Track B を参照。
 - model-check small-cluster projection keep/drop
   - detail / options / current recommendation は `plan/18` Track C を参照。
 - order / handoff source-surface wording reserve
@@ -48,6 +42,10 @@
 
 ## mixed gate / later reserve
 
+- stronger typed-surface promotion threshold later gate
+  - detail / options / current recommendation は `plan/18` Track A と `plan/12` を参照。
+- theorem discharge transport / public-contract later gate
+  - detail / options / current recommendation は `plan/18` Track B と `plan/12` を参照。
 - shared-space final fairness / replay operational profile
   - detail / options / current recommendation は `plan/16` と `plan/12` を参照。
 - public operational CLI installed-binary / packaging success criteria

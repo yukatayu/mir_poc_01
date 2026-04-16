@@ -218,6 +218,19 @@
   - `specs/examples/430-current-l2-malformed-duplicate-cluster-later-reopen-comparison.md`
   - `docs/reports/0706-theory-lab-reserve-hardening-and-duplicate-next-cut.md`
 
+## 2026-04-17 third-order follow-up typed family split and notebook threshold addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_004.md`、`faq_005.md`、`samples/current-l2/README.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/439-current-l2-typed-surface-family-unification-keep-drop-note.md`
+  - `specs/examples/440-current-l2-notebook-consumer-threshold-and-discharge-reserve-note.md`
+  - `specs/examples/418-current-l2-first-source-visible-typed-surface-comparison.md`
+  - `specs/examples/425-current-l2-checker-attachment-to-handoff-row-migration-note.md`
+  - `specs/examples/433-current-l2-request-predicate-try-cluster-typed-surface-reserve-note.md`
+  - `specs/examples/419-current-l2-first-theorem-lemma-family-wording-hardening.md`
+  - `specs/examples/426-current-l2-proof-artifact-and-bridge-stop-line-refresh.md`
+  - `specs/examples/434-current-l2-admissible-evidence-contraction-note.md`
+  - `docs/reports/0707-third-order-followup-typed-family-split-and-notebook-threshold.md`
+
 ## 2026-04-12 Phase 6 reserve formal tool binding inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

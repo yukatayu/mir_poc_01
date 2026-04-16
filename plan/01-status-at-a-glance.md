@@ -13,8 +13,8 @@
   - execution lane:
     `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
   - theory-lab lane:
-    `Macro 5/6 reserve checkpoint close`
-    （typed/theorem/model-check second-order reserve と order/modality reserve は fixed 済み、next reopen は third-order follow-up）
+    `Macro 5 third-order follow-up active`
+    （typed-surface family split と notebook-consumer threshold は fixed 済み、next reopen は model-check small-cluster projection keep/drop refresh）
   - reserve integration lane:
     `Macro 6/7 reserve integration checkpoint close`
     （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
@@ -30,7 +30,7 @@
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
 | `Macro 4` executable fixed-subset expansion | active, first capability pair widen close 済み | self-driven |
-| `Macro 5` typed / theorem / model-check bridge | follow-up phase | self-driven up to boundary |
+| `Macro 5` typed / theorem / model-check bridge | third-order follow-up active | self-driven up to boundary |
 | `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed |
 | `Macro 7` toolchain / backend / host-facing integration | thin facade plus reserve shell | mixed |
 | `Macro 8` domain / application realization | not started | user spec required |
@@ -56,6 +56,8 @@
   - modal comparison follow-up
   - request/predicate/try cluster typed-surface reserve
   - admissible evidence contraction
+  - typed-surface family split
+  - notebook-consumer threshold / discharge reserve
   - tool-binding stop-line refresh
   - order/handoff emitted-artifact schema reserve
   - guarded-vs-MDTT/MTT reduction timing
@@ -68,7 +70,7 @@
 ## current recommendation
 
 - reserve integration lane では public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note が fixed 済みであり、next reopen は later mixed gate に残る。
-- theory-lab lane は reserve checkpoint close 後の third-order follow-up を mainline と混ぜずに進める。
+- theory-lab lane は third-order follow-up active を mainline と混ぜずに進める。
 - execution lane は duplicate cluster source-authored static-stop pair actualization comparison を next reopen とし、try-rollback malformed-static broader family は kept-later inventory に残す。
 
 ## biggest later gates
