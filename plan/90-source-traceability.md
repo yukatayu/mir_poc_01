@@ -2615,3 +2615,34 @@
   - `crates/mir-ast/tests/fixtures/current-l2/e20-malformed-late-capability-strengthening.json`
   - `crates/mir-semantics/tests/current_l2_static_gate_support.rs`
   - `scripts/current_l2_capability_checker.py`
+
+### 2026-04-16 three-lane plan/docs refresh and FAQ 04 addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_04.md`、`docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md` の今回更新分は、追加で次を主根拠にする。
+  - `README.md`
+  - `.docs/progress-task-axes.md`
+  - `faq_003.md`
+  - `specs/10-open-questions.md`
+  - `specs/11-roadmap-and-workstreams.md`
+  - `specs/12-decision-register.md`
+  - `specs/examples/357-current-l2-parser-checker-runtime-public-surface-inventory-ready-mirrorea-shared-space-docs-first-re-entry-comparison.md`
+  - `specs/examples/365-current-l2-public-operational-surface-actualization-gate-ready-shared-space-identity-auth-layering-reopen-comparison.md`
+  - `specs/examples/373-current-l2-public-operational-cli-final-public-contract-later-gate-ready-shared-space-admission-compile-time-visibility-reopen-comparison.md`
+  - `specs/examples/375-current-l2-shared-space-admission-compile-time-visibility-reopen-ready-shared-space-authority-resource-ownership-reopen-comparison.md`
+  - `specs/examples/377-current-l2-shared-space-authority-resource-ownership-reopen-ready-model-check-concrete-carrier-actualization-comparison.md`
+  - `specs/examples/379-current-l2-model-check-concrete-carrier-actualization-comparison-ready-model-check-concrete-carrier-first-actualization-comparison.md`
+  - `specs/examples/381-current-l2-model-check-concrete-carrier-first-actualization-ready-source-sample-emitted-verification-artifact-wiring-comparison.md`
+  - `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
+  - `specs/examples/385-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-docs-first-io-host-facing-port-boundary-comparison.md`
+  - `specs/examples/403-current-l2-stable-malformed-capability-second-source-backed-widening-actualization-ready-public-operational-cli-concrete-shell-actualization-comparison.md`
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
+  - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - `docs/reports/0698-plan-progress-task-rebuild-and-research-program-refresh.md`
+  - `docs/reports/0699-order-handoff-memory-modality-theory-line-consolidation.md`
+  - `docs/reports/0700-three-lane-plan-refresh-faq04-and-snapshot-rewrite.md`

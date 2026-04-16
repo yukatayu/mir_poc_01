@@ -48,8 +48,10 @@
 
 - 主眼は **Mir** の意味論基盤である。
 - current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample decet を already 持つ。
-- current promoted line は `Macro 4 / stable malformed capability second source-backed widening actualization` である。
-- current reserve line は `Macro 7 / public operational CLI concrete shell actualization` である。
+- 近接運用は 3 lane で読むのが自然である。
+  - execution lane: `Macro 4 / stable malformed capability second source-backed widening actualization`
+  - theory-lab lane: `Macro 5` typed / theorem / model-check planning と `Macro 5/6` order / memory / syntax / modality comparison
+  - reserve integration lane: `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
 - 型 / 定理証明 / モデル検査 / ordering は mainline に無理に混ぜず、detail-side research program として扱う。
 - shared-space と host-facing I/O は docs-first boundary までは自走可能だが、final operational catalog や concrete target binding は later / mixed gate に残す。
 

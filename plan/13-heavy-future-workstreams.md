@@ -2,87 +2,79 @@
 
 ## 目的
 
-この文書は、current mainline や current detailed research program に即昇格させない heavy workstream を整理する。
+この文書は、current executable / theory-lab line に即昇格させない heavy workstream を整理する。
 detail-side で今まさに詰める線は `plan/18` に置き、ここでは **まだ重すぎるもの** をまとめる。
 
 ## heavy workstream 一覧
 
 ### 1. full strong type system
 
-- 主題
-  - ownership / lifetime / contract / effect / capability / modality をどこまで型規則へ持ち上げるか。
-- なぜ heavy か
-  - parser / checker / theorem / runtime を同時に拘束するため。
-- current recommendation
-  - first attachment candidate inventory までは `plan/18` で進める。
-  - full calculus と final syntax はここに残す。
+- 主題:
+  ownership / lifetime / contract / effect / capability / modality をどこまで型規則へ持ち上げるか
+- なぜ heavy か:
+  parser / checker / theorem / runtime を同時に拘束するため
+- current recommendation:
+  first attachment candidate inventory までは `plan/18` で進め、
+  full calculus と final typed syntax はここに残す
 
 ### 2. production-grade theorem proving
 
-- 主題
-  - concrete prover binding、proof artifact contract、review workflow finalization。
-- なぜ heavy か
-  - tool choice と public contract が逆流しやすいため。
-- current recommendation
-  - semantic-core theorem pilot planning までは `plan/18` で進める。
-  - concrete prover / proof object finalization はここに残す。
+- 主題:
+  concrete prover binding、proof artifact contract、review workflow finalization
+- なぜ heavy か:
+  tool choice と public contract が逆流しやすいため
+- current recommendation:
+  semantic-core theorem pilot planning までは `plan/18` で進め、
+  concrete prover / proof object finalization はここに残す
 
 ### 3. production-grade model checking / protocol verification
 
-- 主題
-  - concrete model-check tool binding、property language、protocol-family public contract。
-- なぜ heavy か
-  - runtime policy / shared-space / public checker / host integration と強く絡むため。
-- current recommendation
-  - projection / property-family reserve planning までは `plan/18` で進める。
-  - production contract はここに残す。
+- 主題:
+  concrete model-check tool binding、property language、protocol-family public contract
+- なぜ heavy か:
+  runtime policy / shared-space / public checker / host integration と強く絡むため
+- current recommendation:
+  projection / property-family reserve planning までは `plan/18` で進め、
+  production contract はここに残す
 
-### 4. full static analysis / decidability line
+### 4. scheduler / memory-model / authority-handoff runtime finalization
 
-- 主題
-  - static checker prototype、decidability matrix、complexity note。
-- なぜ heavy か
-  - surface、IR、proof boundary が揃わないと false commitment になりやすいため。
+- 主題:
+  low-level memory-order family と higher-level authority-serial / witness-aware family の最終関係、
+  scheduler / fairness / replay / authority handoff の operational semantics
+- なぜ heavy か:
+  local finalization / ordering / observation / commit を混同しやすく、shared-memory と distributed handoff の両方へ波及するため
+- current recommendation:
+  higher-level family comparison、relation decomposition、adequacy corpus、verifier-boundary matrix は `plan/18` で進め、
+  low-level source-surface adoption と runtime semantics finalization はここに残す
 
 ### 5. backend / codegen / editor surface
 
-- 主題
-  - LLVM-family backend、external codegen、editor / LSP / graph tooling。
-- なぜ heavy か
-  - syntax / lowering / runtime / public packaging を早期固定しやすいため。
+- 主題:
+  LLVM-family backend、external codegen、editor / LSP / graph tooling
+- なぜ heavy か:
+  syntax / lowering / runtime / public packaging を早期固定しやすいため
 
-### 6. async control / scheduler / memory-model / authority-handoff runtime
+### 6. operational shared-space / fabric runtime
 
-- 主題
-  - low-level memory-order family と higher-level authority-serial / witness-aware / replay-aware family の最終関係
-  - scoped synchronization / ownership / visibility / witness burden の runtime contract
-  - scheduler / fairness / replay / authority handoff の operational semantics
-- なぜ heavy か
-  - local finalization / ordering / observation / commit を混同しやすく、shared-memory と distributed handoff の両方へ波及するため。
-- current recommendation
-  - higher-level family comparison、relation decomposition、verifier-boundary matrix、adequacy corpus は `plan/18` で進める。
-  - low-level source-surface adoption、runtime semantics finalization、scheduler / fairness operational profile はここに残す。
+- 主題:
+  final activation / authority / auth / consistency / fairness catalog と concrete protocol profile
+- なぜ heavy か:
+  user specification と operational policy の影響が大きいため
 
-### 7. operational shared-space / fabric runtime
+### 7. raw external integration
 
-- 主題
-  - final activation / authority / auth / consistency / fairness catalog と concrete protocol profile。
-- なぜ heavy か
-  - user specification と operational policy の影響が大きいため。
+- 主題:
+  raw FFI、game engine direct binding、production visualizer / substrate integration
+- なぜ heavy か:
+  host-facing boundaryを越えた concrete target choice が必要になるため
 
-### 8. raw external integration
+### 8. domain / application realization
 
-- 主題
-  - raw FFI、game engine direct binding、production visualizer / substrate integration。
-- なぜ heavy か
-  - host-facing boundaryを越えた concrete target choice が必要になるため。
-
-### 9. domain / application realization
-
-- 主題
-  - synchronized shared-space、collaborative editing、virtual-world 系などの concrete app。
-- なぜ heavy か
-  - acceptance criteria と evaluation target が user 依存だから。
+- 主題:
+  synchronized shared-space、collaborative editing、virtual-world 系などの concrete app
+- なぜ heavy か:
+  acceptance criteria と evaluation target が user 依存だから
 
 ## theoretical reading pack inventory
 

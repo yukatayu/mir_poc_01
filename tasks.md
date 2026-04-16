@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-16 18:06 JST
+最終更新: 2026-04-16 19:03 JST
 
 ## この文書について
 
@@ -9,29 +9,30 @@
 - 規範判断の正本は `specs/` である。
 - `tasks.md` は append-only ではなく、毎回 snapshot に合わせて全体を書き直す。
 
-## snapshot
+## current lanes
 
-- current promoted line: `Macro 4 / stable malformed capability second source-backed widening actualization`
-- current reserve line: `Macro 7 / public operational CLI concrete shell actualization`
+- execution lane:
+  `Macro 4 / stable malformed capability second source-backed widening actualization`
+- theory-lab lane:
+  `Macro 5` typed / theorem / model-check planning と
+  `Macro 5/6` order / memory / authority-handoff / syntax / modality comparison
+- reserve integration lane:
+  `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
 - immediate blocker: `0`
-- current mainline を止める user decision: `0`
-- active adjacent research:
-  - `Macro 5` typed / theorem / model-check detailed planning
-  - `Macro 5/6` order / memory / authority-handoff / syntax / modality theory-lab packages
-  - `Macro 6/7` shared-space / host-I/O reserve hardening
+- current lane を止める user decision: `0`
 
 ## 自走可能な task package
 
-| 順番 | macro | task package | completion signal | rough estimate |
-|---|---|---|---|---|
-| 1 | `Macro 4` | stable malformed capability second source-backed widening actualization | `e13/e20` family の actual package と runner / ladder / regression widening cut が閉じる | 1〜3 task |
-| 2 | `Macro 7` | public operational CLI concrete shell actualization | current-L2 scoped shell concern と support / excluded bucket が actual package として閉じる | 1〜2 task |
-| 3 | `Macro 5` | typed-core attachment inventory and obligation allocation refresh | first attachment candidate / obligation owner / stop line が docs-first に固定される | 1〜2 task |
-| 4 | `Macro 5` | semantic-core theorem pilot planning | first lemma order / carrier / tool-neutral stop line が固定される | 1〜2 task |
-| 5 | `Macro 5` | model-check projection / property-family reserve inventory | projection grain / first property family / tool-binding stop line が固定される | 1〜2 task |
-| 6 | `Macro 5/6` | order / handoff falsifier loop and adequacy-corpus hardening | benchmark family、negative examples、boundary matrix の falsifier note が report first で揃う | 1〜3 task |
-| 7 | `Macro 5/6` | modal foundation comparison follow-up | partial basis / stronger candidate / stop line が docs-first に安定する | 1〜2 task |
-| 8 | `Macro 6/7` | shared-space room-profile・host binding note | reserve line の docs-first boundary note が 1 package ずつ閉じる | 2〜4 task |
+| 順番 | lane | macro | task package | completion signal | rough estimate |
+|---|---|---|---|---|---|
+| 1 | theory-lab | `Macro 5` | typed-core attachment inventory and obligation allocation refresh | first attachment candidate / obligation owner / stop line が docs-first に固定される | 1〜2 task |
+| 2 | theory-lab | `Macro 5` | semantic-core theorem pilot planning | first lemma order / carrier / tool-neutral stop line が固定される | 1〜2 task |
+| 3 | theory-lab | `Macro 5` | model-check projection / property-family reserve inventory | projection grain / first property family / tool-binding stop line が整理される | 1〜2 task |
+| 4 | theory-lab | `Macro 5/6` | order / handoff falsifier loop and adequacy-corpus hardening | benchmark family、negative example、boundary matrix の falsifier note が揃う | 1〜3 task |
+| 5 | execution | `Macro 4` | stable malformed capability second source-backed widening actualization | `e13/e20` family の actual package と runner / ladder / regression widening cut が閉じる | 1〜3 task |
+| 6 | theory-lab | `Macro 5/6` | modal foundation comparison follow-up | partial basis / stronger candidate / stop line が docs-first に安定する | 1〜2 task |
+| 7 | reserve | `Macro 7` | public operational CLI concrete shell actualization | current-L2 scoped shell concern と support / excluded bucket が actual package として閉じる | 1〜2 task |
+| 8 | reserve | `Macro 6/7` | shared-space room-profile・host binding bridge-only note | room-profile subset または bridge-only host note が 1 package として閉じる | 1〜2 task |
 
 ## 研究で詰める論点
 
@@ -41,7 +42,7 @@
   - detail / options / current recommendation は `plan/18` Track B を参照。
 - model-check projection grain
   - detail / options / current recommendation は `plan/18` Track C を参照。
-- order / visibility / witness decomposition
+- cut / order / visibility / witness decomposition
   - detail / options / current recommendation は `plan/18` Track D を参照。
 - syntax honesty / modal foundation
   - detail / options / current recommendation は `plan/18` Track E / F を参照。

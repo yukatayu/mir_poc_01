@@ -5,6 +5,7 @@
 この文書は、repo 全体の長期研究を
 
 - macro phase
+- lane split
 - autonomy gate
 - stop condition
 
@@ -16,7 +17,7 @@
 ## legacy checkpoint の扱い
 
 - `specs/examples/...` や report に出てくる `Phase 1..7` は historical label として残す。
-- repo 全体の current status には、それとは別に macro phase を使う。
+- repo 全体の current status には、それとは別に macro phase と lane split を使う。
 
 ## macro phase 一覧
 
@@ -31,6 +32,16 @@
 | `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重 | mixed | final operational catalog / policy profile が必要になる |
 | `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | 重 | mixed | final public packaging / external target が必要になる |
 | `Macro 8` | domain / application realization | not started | とても重い | user spec required | first application target が必要になる |
+
+## current lane split
+
+- execution lane:
+  `Macro 4 / stable malformed capability second source-backed widening actualization`
+- theory-lab lane:
+  `Macro 5` typed / theorem / model-check planning と
+  `Macro 5/6` order / memory / authority-handoff / syntax / modality comparison
+- reserve integration lane:
+  `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
 
 ## autonomy gate detail
 
@@ -72,7 +83,7 @@
 
 ### 位置づけ
 
-- theory-lab line は mainline actualization と separable に回す。
+- theory-lab line は execution lane と separable に回す。
 - 主眼は
   - literature-backed comparison
   - adequacy corpus
@@ -97,22 +108,6 @@
 - backend / codegen public surface
 - raw FFI / game engine direct binding actualization
 - upper-layer application contract
-
-## current lines
-
-### current promoted line
-
-1. `Macro 4` stable malformed capability second source-backed widening actualization
-
-### current reserve line
-
-- `Macro 7` public operational CLI concrete shell actualization
-
-### active adjacent research line
-
-- `Macro 5` typed / theorem / model-check detailed planning
-- `Macro 5/6` order / memory / authority-handoff / syntax / modality theory-lab packages
-- `Macro 6/7` shared-space / host-I/O reserve hardening
 
 ## current judgments
 

@@ -1,0 +1,381 @@
+# FAQ 04
+
+## この文書について
+
+この文書は、`faq_003.md` の内容をそのまま継ぎ足すのではなく、
+**2026-04-16 時点の current reading** に合わせて新しく書き直した FAQ である。
+
+ここでは、
+
+- 今この repo がどこまで進んでいるか
+- 今後の研究をどう進めるのが自然か
+- 型システム / 定理証明 / モデル検査 / ordering / `memory_order` 再解釈をどう扱うか
+- Rust / Python をどう使い分けるか
+
+を、current docs と current code anchor に沿って整理する。
+
+規範判断の正本は `specs/` にあり、この FAQ はあくまで **current explanation** である。
+
+## 1. いま repo はどの段階にあるのか
+
+短く言うと、**architecture / semantics first** の repo だが、すでに narrow runnable path を持っている。
+
+つまり、
+
+- 理論だけで実行できない repo
+- 実装だけ先行して仕様が空洞な repo
+
+のどちらでもない。
+
+current repo には次がある。
+
+- parser-free current L2 PoC
+- `mir-ast` / `mir-semantics` / `mir-runtime` の compile-ready minimal path
+- fixed-subset source sample の runnable ladder
+- tool-neutral formal hook
+- `proof_notebook_review_unit`
+- row-local machine-facing model-check carrier
+- sample-facing theorem/model-check summary
+
+一方で、まだ final ではないものも多い。
+
+- final parser grammar
+- final public parser / checker / runtime API
+- concrete theorem prover / model-check tool binding
+- shared-space final operational catalog
+- backend / external codegen success criteria
+- upper-layer application target
+
+## 2. いまの進め方はどう整理するのが自然か
+
+current reading では、repo の近接作業は **3 lane** で読むのが自然である。
+
+### execution lane
+
+- `Macro 4 / stable malformed capability second source-backed widening actualization`
+
+これは、今ある runnable fixed subset を narrow に太らせる line である。
+sample、runner、verification ladder、regression helper、docs mirror を一緒に揃えながら前進する。
+
+### theory-lab lane
+
+- `Macro 5` typed / theorem / model-check planning
+- `Macro 5/6` order / memory / authority-handoff / syntax / modality comparison
+
+これは、mainline implementation を急がず、
+
+- candidate family の比較
+- adequacy corpus
+- verifier-boundary matrix
+- stop line
+
+を docs-first に固める line である。
+
+### reserve integration lane
+
+- `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
+
+これは、thin facade と shell concern を hidden promotion なしで整理する line である。
+host-I/O、shared-space、public shell まわりの boundary note もここに隣接する。
+
+## 3. 型システム / 定理証明 / モデル検査は、どこまで進んでいるのか
+
+### 型システム
+
+full strong type system はまだ無い。
+ただし、何も無いわけでもない。
+
+現時点で source-backed にあるのは、
+
+- typed evidence refs
+- contract rows
+- checker boundary inventory
+- source-visible first candidate として比較できる surface
+  - `require` / `ensure`
+  - capability / `lease` / `admit`
+  - declared target
+  - lineage-related floor
+
+current line は、**full calculus を決めること**ではなく、
+**first attachment candidate を semantic carrier / checker boundary から整理すること**である。
+
+つまり、
+
+- どこに obligation owner を置くか
+- どこまで checker boundary に寄せるか
+- 何を source-visible first candidate にするか
+
+を先に比較する段階である。
+
+### 定理証明
+
+定理証明 line は、まだ production-ready ではないが、pilot planning を進められる段階にある。
+
+現時点で source-backed にあるのは、
+
+- tool-neutral formal hook
+- `proof_notebook_review_unit`
+- plain / compare-ready bridge sketch
+- sample-facing theorem-side summary
+
+current recommendation は、syntax tree 全体をいきなり証明対象にするのではなく、
+**semantic core の invariant family** から theorem-side pilot を始めることだ。
+
+first candidate の順序は、
+
+1. `canonical_normalization_law`
+2. `no_re_promotion`
+3. `rollback_cut_non_interference`
+
+で読むのが自然である。
+
+### モデル検査
+
+モデル検査 line も、まだ production-ready ではないが、pilot planning を進められる段階にある。
+
+現時点で source-backed にあるのは、
+
+- row-local machine-facing `model_check_concrete_carriers`
+- emitted artifact wiring
+- sample-facing theorem/model-check summary
+
+current line は、
+
+- projection grain をどこまで small-cluster に留めるか
+- first property family を何にするか
+- concrete tool binding をどこで止めるか
+
+を整理する段階である。
+
+したがって、型システム / 定理証明 / モデル検査は
+**「まだ全然無理」ではなく、boundary / pilot planning をかなり進められる段階**にある。
+一方で、**full implementation へ即昇格させる段階ではない**。
+
+## 4. ordering / `memory_order` 再解釈 line は見通しが厳しいか
+
+厳しいが、手を付けられないほどではない。
+
+current reading では、ここで重要なのは
+**低レイヤ語彙をそのまま source surface に輸入すること**ではなく、
+**relation decomposition を先に整理すること**である。
+
+いま比較している family は、
+
+- cut family
+  - local-finalizing cut
+  - observation / snapshot cut
+  - ordering-only barrier
+  - commit / evidence-bearing cut
+- order family
+  - `po`
+  - `dep`
+  - `pub`
+  - `obs`
+  - `wit`
+  - `final`
+  - `hb(scope)`
+
+である。
+
+ここでの重要点は次である。
+
+1. `atomic_cut` は current `place` の rollback frontier を確定する local finalizing cut である。
+   global consistent cut でも durable commit でもない。
+2. low-level `std::memory_order` / `kill_dependency` family は、reference family としては重要だが、
+   current source surface にそのまま入れる段階ではない。
+3. higher-level authority-serial / witness-aware handoff family は、
+   shared-memory lowering と distributed handoff lowering の双方へ繋がるように比較する必要がある。
+
+したがって、この line は
+**implementation-ready ではないが、theory-first inventory / adequacy corpus / verifier-boundary matrix は十分進められる**
+というのが current reading である。
+
+## 5. syntax と modality はどう扱っているのか
+
+### syntax
+
+current repo は final grammar を急いでいない。
+その代わりに、
+
+- 自然に書けるものは自然な挙動をするべき
+- 理論的に破綻した動作は書けない / 書きにくいべき
+
+という principle を先に維持している。
+
+syntax candidate の比較軸は少なくとも次の 4 つである。
+
+1. semantic honesty
+2. checker legibility
+3. modal adequacy
+4. misreading resistance
+
+rough syntax sketch は、そのまま採用候補にするのではなく、
+**どの層の primitive / sugar / macro / lowering reference を刺激しているか**
+を抽出する comparison material として扱う。
+
+### modality
+
+current reading では、
+`lambda-circle-box` は stage / later / always の micro-core には有力だが、
+full language の最終基盤としては不足する可能性が高い。
+
+なぜなら、この言語が扱いたい軸は
+
+- place
+- scope
+- visibility
+- authority
+- witness
+- durability
+
+であり、これは単一 modality では収まりにくいからである。
+
+したがって current line は、
+
+- `lambda-circle-box` を **partial basis candidate**
+- guarded / MDTT / MTT / Fitch-style multimodal を **stronger candidate**
+
+として扱い、final adoption は OPEN に残す。
+
+## 6. thread と node はどう扱うのか
+
+current line は、
+`thread == node`
+と雑に言うことではない。
+
+より正確には、
+
+- thread も node も programming surface では place として扱いたい
+- ただし違いは lowering / evidence / failure / transport / durability / fairness に出る
+
+という読みである。
+
+つまり、
+
+- syntax / semantics 上の causal language は近づける
+- backend / evidence / failure policy の非対称性は消さない
+
+という二段構えである。
+
+## 7. shared-space と host-I/O はどの段階か
+
+### shared-space
+
+shared-space は、identity / admission / authority までの docs-first boundary が source-backed である。
+
+ただし、まだ final ではない。
+OPEN に残るのは、
+
+- final activation / authority / auth / consistency / fairness catalog
+- concrete protocol profile
+- room-profile の final selection
+
+である。
+
+### host-I/O
+
+current line は、privileged `stdin/stdout` を language core に入れることではない。
+
+代わりに、
+
+- capability-scoped input / output port
+- host / visualizer / substrate が attach されたときだけ flow する adapter boundary
+- final naming や concrete adapter target は later gate
+
+という docs-first cut に留めている。
+
+この考え方は、
+
+- visualizer
+- effect-base substrate
+- FFI
+- game engine adapter
+
+のどれにも繋げやすい。
+
+ただし、raw FFI や engine direct binding actualization は current near-term line ではない。
+
+## 8. Rust と Python はどう使い分けるのか
+
+current reading は **Rust-heavy core + mixed-tool helper workflow** である。
+
+### Rust に置くもの
+
+- parser
+- semantics
+- runtime
+- formal handoff
+- thin facade
+
+つまり、repo の本体意味論と実行核は Rust に寄せる。
+
+### Python に置くもの
+
+- detached orchestration
+- regression helper
+- docs validation
+- report scaffolding
+
+つまり、運用補助や repo maintenance の速い loop は Python を併用する。
+
+最終的に全部を Rust に寄せるか、という問いに対しては、
+**core は Rust に寄るが、運用補助まで完全に Rust-only にすることは current goal ではない**
+というのが current reading である。
+
+理由は、helper / docs / regression orchestration は replaceable layer として保つ方が、この repo の設計思想に合うからである。
+
+## 9. いま自律的に進めるべきものと、user が決めるべきものは何か
+
+### 自律的に進めるべきもの
+
+- typed first attachment candidate と obligation owner
+- theorem pilot order
+- model-check projection grain と property family
+- cut / order / visibility / witness decomposition
+- syntax honesty / modal foundation comparison
+- room-profile / confusion-replay / bridge-only host note の docs-first hardening
+
+### user が決めるべきもの
+
+- shared-space final catalog
+- first external integration target
+- final public packaging success criteria
+- first application target
+
+## 10. 今後の自然な順序は何か
+
+current near-term order として自然なのは次である。
+
+1. typed-core attachment inventory and obligation allocation refresh
+2. semantic-core theorem pilot planning
+3. model-check projection / property-family reserve inventory
+4. order / handoff falsifier loop and adequacy-corpus hardening
+5. stable malformed capability second source-backed widening actualization
+6. modal foundation comparison follow-up
+7. public operational CLI concrete shell actualization
+8. shared-space room-profile・host binding bridge-only note
+
+この順序だと、
+
+- theory-lab line を mainline と混ぜずに前進できる
+- execution lane も止めずに維持できる
+- reserve integration line も hidden promotion なしで整理できる
+
+という利点がある。
+
+## 11. 何をあえて決めていないのか
+
+current repo は、次をまだ決めていない。
+
+- final parser grammar
+- final public parser / checker / runtime API
+- full strong type system
+- concrete theorem / model-check tool binding
+- shared-space final operational catalog
+- raw FFI / game engine direct binding actualization
+- backend / external codegen success criteria
+- upper-layer application target
+
+これらをまだ決めていないのは、放置ではなく、
+**いま先に boundary / adequacy / stop line を詰める方が手戻りが少ない**
+と読んでいるからである。
