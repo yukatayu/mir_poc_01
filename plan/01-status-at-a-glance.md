@@ -3,7 +3,7 @@
 ## repo 全体の主眼
 
 - 主眼は **Mir** の意味論基盤である。
-- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample decet を already 持つ。
+- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored dozen を already 持つ。
 - Mirrorea / shared-space / Typed-Effect / Prism / 上位アプリは separable track として扱う。
 
 ## current lane snapshot
@@ -11,16 +11,16 @@
 - legacy checkpoint としては、Phase 1〜5 closeout / freeze と legacy Phase 6 compile-ready checkpoint は fixed 済みである。
 - current active lane は 3 本で読むのが自然である。
   - execution lane:
-    `Macro 4 / stable malformed capability second source-backed widening actualization`
+    `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
   - theory-lab lane:
-    `Macro 5` post-planning quartet
-    (`typed-surface comparison`、`theorem lemma hardening`、`model-check bridge note`) と
-    `Macro 5/6` post-falsifier comparison
-    (`order/handoff candidate reduction`、`modal follow-up`)
+    `Macro 5` follow-up
+    (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`) と
+    `Macro 5/6` follow-up
+    (`order/handoff property-language bridge`、`modal promotion-threshold note`)
   - reserve integration lane:
-    `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
+    `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
 - immediate blocker は `0`、current lane を止める user decision も `0` と読む。
-- current authored source sample は `e1 / e2 / e3 / e4 / e16 / e18 / e19 / e21 / e22 / e23` の decet である。
+- current authored source sample は `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23` の dozen である。
 
 ## macro phase reading
 
@@ -30,8 +30,8 @@
 | `Macro 1` semantic kernel | late | self-driven |
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
-| `Macro 4` executable fixed-subset expansion | active | self-driven |
-| `Macro 5` typed / theorem / model-check bridge | active at boundary | self-driven up to boundary |
+| `Macro 4` executable fixed-subset expansion | active, first capability pair widen close 済み | self-driven |
+| `Macro 5` typed / theorem / model-check bridge | follow-up phase | self-driven up to boundary |
 | `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed |
 | `Macro 7` toolchain / backend / host-facing integration | thin facade plus reserve shell | mixed |
 | `Macro 8` domain / application realization | not started | user spec required |
@@ -40,7 +40,7 @@
 
 - parser-free current L2 PoC は runnable である。
 - syntax-backed fixed-subset source sample path も runnable である。
-- runtime / static / formal-hook ladder と regression helper は decet を current corpus として回せる。
+- runtime / static / formal-hook ladder と regression helper は authored dozen を current corpus として回せる。
 - theorem / model-check line は
   - tool-neutral formal hook
   - `proof_notebook_review_unit`
@@ -50,25 +50,20 @@
   まで narrow first cut が source-backed である。
 - typed/theorem/model-check theory-lab 側では、
   - typed-core attachment inventory
-  - semantic-core theorem pilot order
-  - model-check projection reserve inventory
+  - source-visible typed-surface comparison
+  - semantic-core theorem pilot order と lemma wording floor
+  - model-check projection reserve inventory と bridge grain
+  - order/handoff candidate reduction
+  - modal comparison follow-up
   まで docs-first に固まった。
-- current typed work は full type system ではなく、source-visible first attachment candidate を comparison に送る段階にある。
 - shared-space は identity / admission / authority まで docs-first boundary があり、final operational catalog は later gate に残る。
 - host-facing integration は privileged `stdin/stdout` ではなく、capability-scoped I/O / adapter boundary の docs-first cut に留める。
-- ordering / `memory_order` reinterpretation は `atomic_cut` の place-local nucleus を越えたところでは still theory-first だが、falsifier loop と adequacy corpus の negative coverage は docs-first に進んでいる。
 
 ## current recommendation
 
-- execution lane は fixed-subset widening を narrow に継続する。
-- theory-lab lane は
-  - first source-visible typed-surface comparison
-  - theorem lemma wording hardening
-  - model-check bridge note
-  - order/handoff candidate reduction
-  - modal follow-up
-  を mainline と混ぜずに進める。
-- reserve integration lane は CLI / host / shared-space boundary note を hidden promotion なしで保つ。
+- reserve integration lane は public operational CLI concrete shell actualization と shared-space room-profile / host binding bridge-only note を hidden promotion なしで進める。
+- theory-lab lane は second-order follow-up package を mainline と混ぜずに進める。
+- execution lane は duplicate cluster と malformed-static broader family の reopen sequencing を later reopen inventory として保つ。
 
 ## biggest later gates
 

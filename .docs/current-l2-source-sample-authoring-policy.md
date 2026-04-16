@@ -18,9 +18,9 @@ current meaning は、
 
 ## current scope
 
-- current authored source sample は `e1` / `e2` / `e3` / `e4` / `e16` / `e19` / `e21` / `e22` / `e18` / `e23` の authored decet に置く。
+- current authored source sample は `e1` / `e2` / `e3` / `e4` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` の authored dozen に置く。
 - `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
-- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen では existing `e4` row と new `e19` row を source-backed static-stop pair へ actualize 済みである。parser / checker / runtime public surface inventory、Mirroea/shared-space docs-first re-entry、model-check/public-checker second reserve inventory、public operational surface actualization gate、shared-space identity/auth layering reopen、model-check concrete carrier first actualization gate、model-check concrete carrier actualization comparison、model-check concrete carrier first actualization、source-sample emitted verification artifact wiring、sample-facing theorem/model-check evidence summary and bless/review flow、stable malformed broader follow-up inventory、public operational CLI / final public contract later gate、shared-space admission / compile-time visibility reopen、shared-space authority / resource ownership reopen、docs-first I/O / host-facing port boundary、stable malformed missing-option first reopen actualization comparison、final public parser / checker / runtime first later gate actualization comparison、stable malformed missing-option first source-backed widening actualization、public operational CLI second later gate actualization comparison、final public parser / checker / runtime thin-facade later support actualization、stable malformed capability second reopen actualization comparison、public operational CLI concrete shell naming comparison、stable malformed capability second source-backed widening actualization comparison、public operational CLI concrete shell actualization comparison も fixed 済みであり、repo-level current line は stable malformed capability second source-backed widening actualization に置く。
+- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen では existing `e4` row と new `e19` row を source-backed static-stop pair へ actualize 済みである。さらに capability second source-backed widening actualization では `e13/e20` pair も source-authored static-stop pair として actualize 済みであり、source sample / lowerer / runner / ladder / emitted artifact wiring / regression helper まで widened している。repo-level current line は reserve integration lane の public operational CLI concrete shell actualization と shared-space room-profile / host binding bridge-only note に進み、sample-side next reopen は duplicate cluster と `TryFallback` / `AtomicCut` malformed-static broader family comparison に残す。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
@@ -42,6 +42,7 @@ current regression helper が束ねるのは次である。
 - `cargo test -p mir-runtime --test current_l2_source_lowering`
 - `cargo test -p mir-runtime --test current_l2_source_sample_runner`
 - `cargo test -p mir-runtime --test current_l2_source_sample_verification_ladder`
+- `cargo test -p mir-runtime --test current_l2_source_sample_emitted_artifact_wiring`
 - `cargo test -p mir-semantics --test current_l2_formal_hook_support`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e1-place-atomic-cut ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e2-try-fallback ...`
@@ -49,11 +50,13 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e22-try-atomic-cut-place-mismatch ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e4-malformed-lineage ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e16-malformed-missing-chain-head-option ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e13-malformed-capability-strengthening ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e19-malformed-target-mismatch ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e18-malformed-missing-successor-option ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e20-malformed-late-capability-strengthening ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
 
-helper は current authored decet を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
+helper は current authored dozen を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
 
 ## current non-goals

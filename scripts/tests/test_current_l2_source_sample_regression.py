@@ -23,16 +23,20 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
                 "e3-option-admit-chain",
                 "e4-malformed-lineage",
                 "e16-malformed-missing-chain-head-option",
+                "e13-malformed-capability-strengthening",
                 "e19-malformed-target-mismatch",
                 "e21-try-atomic-cut-frontier",
                 "e22-try-atomic-cut-place-mismatch",
                 "e18-malformed-missing-successor-option",
+                "e20-malformed-late-capability-strengthening",
                 "e23-malformed-try-fallback-missing-fallback-body",
             ],
         )
         self.assertEqual(
-            [row.authored_status for row in rows[:10]],
+            [row.authored_status for row in rows[:12]],
             [
+                "source-authored",
+                "source-authored",
                 "source-authored",
                 "source-authored",
                 "source-authored",
@@ -50,9 +54,11 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertEqual(rows[3].formal_hook, "fixture_static_cluster")
         self.assertEqual(rows[4].formal_hook, "fixture_static_cluster")
         self.assertEqual(rows[5].formal_hook, "fixture_static_cluster")
-        self.assertEqual(rows[6].formal_hook, "runtime_try_cut_cluster")
+        self.assertEqual(rows[6].formal_hook, "fixture_static_cluster")
         self.assertEqual(rows[7].formal_hook, "runtime_try_cut_cluster")
-        self.assertEqual(rows[8].formal_hook, "fixture_static_cluster")
+        self.assertEqual(rows[8].formal_hook, "runtime_try_cut_cluster")
+        self.assertEqual(rows[9].formal_hook, "fixture_static_cluster")
+        self.assertEqual(rows[10].formal_hook, "fixture_static_cluster")
 
     def test_inventory_statuses_mark_current_repo_layout_as_consistent(self) -> None:
         statuses = regression.inventory_statuses()
@@ -60,7 +66,7 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertTrue(all(status.status_ok for status in statuses))
         self.assertEqual(
             [status.file_exists for status in statuses],
-            [True, True, True, True, True, True, True, True, True, True],
+            [True, True, True, True, True, True, True, True, True, True, True, True],
         )
 
     def test_format_inventory_text_includes_header_rows_and_file_state(self) -> None:
@@ -72,6 +78,10 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
         self.assertIn("e3-option-admit-chain | source-authored | valid | success", rendered)
         self.assertIn(
             "e16-malformed-missing-chain-head-option | source-authored | malformed | not_evaluated",
+            rendered,
+        )
+        self.assertIn(
+            "e13-malformed-capability-strengthening | source-authored | malformed | not_evaluated",
             rendered,
         )
         self.assertIn(
@@ -90,6 +100,10 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
             "e18-malformed-missing-successor-option | source-authored | malformed | not_evaluated",
             rendered,
         )
+        self.assertIn(
+            "e20-malformed-late-capability-strengthening | source-authored | malformed | not_evaluated",
+            rendered,
+        )
         self.assertIn("e2-try-fallback | source-authored | valid | success", rendered)
         self.assertIn("present | third widened authored row runtime path", rendered)
         self.assertIn("not_reached_guarded", rendered)
@@ -102,10 +116,12 @@ class SourceSampleRegressionInventoryTests(unittest.TestCase):
                 "e2-try-fallback",
                 "e3-option-admit-chain",
                 "e16-malformed-missing-chain-head-option",
+                "e13-malformed-capability-strengthening",
                 "e21-try-atomic-cut-frontier",
                 "e22-try-atomic-cut-place-mismatch",
                 "e4-malformed-lineage",
                 "e18-malformed-missing-successor-option",
+                "e20-malformed-late-capability-strengthening",
                 "e23-malformed-try-fallback-missing-fallback-body",
             ]
             for stem in authored:
@@ -138,6 +154,7 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
                 "runtime lowering test",
                 "source sample runner test",
                 "verification ladder test",
+                "emitted artifact wiring test",
                 "formal hook support test",
                 "runtime formal hook smoke for e1-place-atomic-cut",
                 "runtime formal hook smoke for e2-try-fallback",
@@ -145,8 +162,10 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
                 "runtime formal hook smoke for e22-try-atomic-cut-place-mismatch",
                 "static formal hook smoke for e4-malformed-lineage",
                 "static formal hook smoke for e16-malformed-missing-chain-head-option",
+                "static formal hook smoke for e13-malformed-capability-strengthening",
                 "static formal hook smoke for e19-malformed-target-mismatch",
                 "static formal hook smoke for e18-malformed-missing-successor-option",
+                "static formal hook smoke for e20-malformed-late-capability-strengthening",
                 "static formal hook smoke for e23-malformed-try-fallback-missing-fallback-body",
             ],
         )
@@ -154,44 +173,63 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
             commands[0].argv,
             ("cargo", "test", "-p", "mir-runtime", "--test", "current_l2_source_lowering"),
         )
-        self.assertEqual(commands[4].argv[0], "/usr/bin/python3")
-        self.assertEqual(commands[4].argv[2], "smoke-formal-hook-runtime")
-        self.assertIn("--artifact-root", commands[4].argv)
-        self.assertIn("--run-label", commands[4].argv)
         self.assertEqual(
-            commands[4].argv[commands[4].argv.index("--run-label") + 1],
+            commands[3].argv,
+            (
+                "cargo",
+                "test",
+                "-p",
+                "mir-runtime",
+                "--test",
+                "current_l2_source_sample_emitted_artifact_wiring",
+            ),
+        )
+        self.assertEqual(commands[5].argv[0], "/usr/bin/python3")
+        self.assertEqual(commands[5].argv[2], "smoke-formal-hook-runtime")
+        self.assertIn("--artifact-root", commands[5].argv)
+        self.assertIn("--run-label", commands[5].argv)
+        self.assertEqual(
+            commands[5].argv[commands[5].argv.index("--run-label") + 1],
             "phase6-smoke-e1-place-atomic-cut",
         )
         self.assertEqual(
-            commands[5].argv[commands[5].argv.index("--run-label") + 1],
+            commands[6].argv[commands[6].argv.index("--run-label") + 1],
             "phase6-smoke-e2-try-fallback",
         )
         self.assertEqual(
-            commands[6].argv[commands[6].argv.index("--run-label") + 1],
+            commands[7].argv[commands[7].argv.index("--run-label") + 1],
             "phase6-smoke-e21-try-atomic-cut-frontier",
         )
         self.assertEqual(
-            commands[7].argv[commands[7].argv.index("--run-label") + 1],
+            commands[8].argv[commands[8].argv.index("--run-label") + 1],
             "phase6-smoke-e22-try-atomic-cut-place-mismatch",
         )
         self.assertEqual(
-            commands[8].argv[commands[8].argv.index("--run-label") + 1],
+            commands[9].argv[commands[9].argv.index("--run-label") + 1],
             "phase6-smoke-e4-malformed-lineage",
         )
         self.assertEqual(
-            commands[9].argv[commands[9].argv.index("--run-label") + 1],
+            commands[10].argv[commands[10].argv.index("--run-label") + 1],
             "phase6-smoke-e16-malformed-missing-chain-head-option",
         )
         self.assertEqual(
-            commands[10].argv[commands[10].argv.index("--run-label") + 1],
-            "phase6-smoke-e19-malformed-target-mismatch",
-        )
-        self.assertEqual(
             commands[11].argv[commands[11].argv.index("--run-label") + 1],
-            "phase6-smoke-e18-malformed-missing-successor-option",
+            "phase6-smoke-e13-malformed-capability-strengthening",
         )
         self.assertEqual(
             commands[12].argv[commands[12].argv.index("--run-label") + 1],
+            "phase6-smoke-e19-malformed-target-mismatch",
+        )
+        self.assertEqual(
+            commands[13].argv[commands[13].argv.index("--run-label") + 1],
+            "phase6-smoke-e18-malformed-missing-successor-option",
+        )
+        self.assertEqual(
+            commands[14].argv[commands[14].argv.index("--run-label") + 1],
+            "phase6-smoke-e20-malformed-late-capability-strengthening",
+        )
+        self.assertEqual(
+            commands[15].argv[commands[15].argv.index("--run-label") + 1],
             "phase6-smoke-e23-malformed-try-fallback-missing-fallback-body",
         )
 
@@ -306,41 +344,49 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr.getvalue(), "")
         self.assertIn("fake regression ran", stdout.getvalue())
-        self.assertEqual(len(captured_commands), 13)
+        self.assertEqual(len(captured_commands), 16)
         self.assertEqual(
-            captured_commands[4].argv[captured_commands[4].argv.index("--run-label") + 1],
+            captured_commands[5].argv[captured_commands[5].argv.index("--run-label") + 1],
             "phase6-helper-e1-place-atomic-cut",
         )
         self.assertEqual(
-            captured_commands[5].argv[captured_commands[5].argv.index("--run-label") + 1],
+            captured_commands[6].argv[captured_commands[6].argv.index("--run-label") + 1],
             "phase6-helper-e2-try-fallback",
         )
         self.assertEqual(
-            captured_commands[6].argv[captured_commands[6].argv.index("--run-label") + 1],
+            captured_commands[7].argv[captured_commands[7].argv.index("--run-label") + 1],
             "phase6-helper-e21-try-atomic-cut-frontier",
         )
         self.assertEqual(
-            captured_commands[7].argv[captured_commands[7].argv.index("--run-label") + 1],
+            captured_commands[8].argv[captured_commands[8].argv.index("--run-label") + 1],
             "phase6-helper-e22-try-atomic-cut-place-mismatch",
         )
         self.assertEqual(
-            captured_commands[8].argv[captured_commands[8].argv.index("--run-label") + 1],
+            captured_commands[9].argv[captured_commands[9].argv.index("--run-label") + 1],
             "phase6-helper-e4-malformed-lineage",
         )
         self.assertEqual(
-            captured_commands[9].argv[captured_commands[9].argv.index("--run-label") + 1],
+            captured_commands[10].argv[captured_commands[10].argv.index("--run-label") + 1],
             "phase6-helper-e16-malformed-missing-chain-head-option",
         )
         self.assertEqual(
-            captured_commands[10].argv[captured_commands[10].argv.index("--run-label") + 1],
-            "phase6-helper-e19-malformed-target-mismatch",
-        )
-        self.assertEqual(
             captured_commands[11].argv[captured_commands[11].argv.index("--run-label") + 1],
-            "phase6-helper-e18-malformed-missing-successor-option",
+            "phase6-helper-e13-malformed-capability-strengthening",
         )
         self.assertEqual(
             captured_commands[12].argv[captured_commands[12].argv.index("--run-label") + 1],
+            "phase6-helper-e19-malformed-target-mismatch",
+        )
+        self.assertEqual(
+            captured_commands[13].argv[captured_commands[13].argv.index("--run-label") + 1],
+            "phase6-helper-e18-malformed-missing-successor-option",
+        )
+        self.assertEqual(
+            captured_commands[14].argv[captured_commands[14].argv.index("--run-label") + 1],
+            "phase6-helper-e20-malformed-late-capability-strengthening",
+        )
+        self.assertEqual(
+            captured_commands[15].argv[captured_commands[15].argv.index("--run-label") + 1],
             "phase6-helper-e23-malformed-try-fallback-missing-fallback-body",
         )
 

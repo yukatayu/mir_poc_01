@@ -29,7 +29,7 @@
 - 主眼:
   fixed-subset source sample と malformed family の narrow widening
 - current line:
-  `Macro 4 / stable malformed capability second source-backed widening actualization`
+  `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
 - goal:
   runnable corpus を広げつつ、runner / ladder / regression / docs mirror を崩さない
 
@@ -39,8 +39,11 @@
   typed / theorem / model-check / order / memory / syntax / modality を
   docs-first comparison と boundary planning で進める
 - current line:
-  `Macro 5` typed / theorem / model-check planning と
-  `Macro 5/6` order / memory / authority-handoff / syntax / modality comparison
+  `Macro 5` follow-up
+  (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`)
+  と
+  `Macro 5/6` follow-up
+  (`order/handoff property-language bridge`、`modal promotion-threshold note`)
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定する
 

@@ -115,7 +115,9 @@ consumer-specific attachment として後段に残すのが current first choice
 に置き、`proof_assistant_adapter` consumer pressure は second practical candidate に残すのが自然である。
 current repo の post-Phase-5 theory-lab line では、この theorem-first bridge を前提に、
 **semantic-core theorem pilot の lemma order / evidence floor / review-vs-discharge stop line**
-を docs-first に詰めるのが next natural step である。
+までは docs-first に詰め終えており、next natural step は
+**proof artifact / bridge stop-line refresh**
+に進むことである。
 その具体的な first threshold も、
 **human review checklist / walkthrough pressure**
 に置くのが最小であり、compare / bless-like flow や actual file exchange はさらに後段に残す。

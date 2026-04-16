@@ -31,34 +31,36 @@ Phase 6 は、Phase 1〜5 で fixed した semantics / parser-free PoC / proof b
   `specs/examples/363...404`
 
 current authored source sample は
-`e1 / e2 / e3 / e4 / e16 / e18 / e19 / e21 / e22 / e23`
-の decet である。
+`e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
+の authored dozen である。
 
 ## docs-first adjacent theory-lab floor
 
 - typed/theorem/model-check boundary refresh と order/handoff falsifier hardening:
   `specs/examples/413...416`
+- source-visible typed comparison、theorem wording hardening、model-check bridge note、order/handoff candidate reduction、modal follow-up:
+  `specs/examples/417...422`
 
 ## current lane split
 
 ### execution lane
 
-- `Macro 4 / stable malformed capability second source-backed widening actualization`
+- `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
 - goal:
-  fixed-subset source sample と runner / ladder / regression path を narrow に太らせる
+  fixed-subset source sample widening closeout 後の next reopen family を narrow に見極める
 
 ### theory-lab adjacent lane
 
-- post-planning quartet:
-  typed-surface comparison / theorem lemma hardening / model-check bridge note
-- post-falsifier comparison:
-  order/handoff candidate reduction / modal follow-up
+- follow-up:
+  checker attachment -> handoff migration / proof artifact bridge stop-line refresh / sample-visible property summary wording
+- post-reduction follow-up:
+  order/handoff property-language bridge / modal promotion-threshold note
 - goal:
   sample-visible first milestone の次段を docs-first に固定する
 
 ### reserve integration lane
 
-- `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
+- `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
 - goal:
   thin facade、support-only surface、CLI shell concern の boundary を hidden promotion なしで保つ
 
@@ -70,9 +72,11 @@ current authored source sample は
 - adjacent theory-lab line では、source-backed actualization を増やしたのではなく、
   docs-first planning / hardening package として
   - typed-core attachment inventory
-  - semantic-core theorem pilot order
-  - model-check projection reserve inventory
-  - order/handoff falsifier loop
+  - source-visible typed-surface comparison
+  - semantic-core theorem pilot order と lemma wording floor
+  - model-check projection reserve inventory と bridge grain
+  - order/handoff falsifier loop と candidate reduction
+  - modal comparison follow-up
   まで docs-first に固まった。
 - docs-first host-I/O boundary と shared-space identity / admission / authority boundary も fixed 済みである。
 - final parser grammar、final public API、concrete theorem / model-check tool binding、backend / external codegen は still later に残る。

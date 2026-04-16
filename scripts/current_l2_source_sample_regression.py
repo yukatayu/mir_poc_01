@@ -84,6 +84,14 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         note="missing-option family head-gap static stop",
     ),
     InventoryRow(
+        sample_stem="e13-malformed-capability-strengthening",
+        authored_status="source-authored",
+        expected_static="malformed",
+        expected_runtime="not_evaluated",
+        formal_hook="fixture_static_cluster",
+        note="capability family first static stop",
+    ),
+    InventoryRow(
         sample_stem="e19-malformed-target-mismatch",
         authored_status="source-authored",
         expected_static="malformed",
@@ -114,6 +122,14 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         expected_runtime="not_evaluated",
         formal_hook="fixture_static_cluster",
         note="missing-option family successor-gap static stop",
+    ),
+    InventoryRow(
+        sample_stem="e20-malformed-late-capability-strengthening",
+        authored_status="source-authored",
+        expected_static="malformed",
+        expected_runtime="not_evaluated",
+        formal_hook="fixture_static_cluster",
+        note="capability family later-edge static stop",
     ),
     InventoryRow(
         sample_stem="e23-malformed-try-fallback-missing-fallback-body",
@@ -251,6 +267,17 @@ def plan_regression_commands(
             ),
         ),
         RegressionCommand(
+            name="emitted artifact wiring test",
+            argv=(
+                "cargo",
+                "test",
+                "-p",
+                "mir-runtime",
+                "--test",
+                "current_l2_source_sample_emitted_artifact_wiring",
+            ),
+        ),
+        RegressionCommand(
             name="formal hook support test",
             argv=("cargo", "test", "-p", "mir-semantics", "--test", "current_l2_formal_hook_support"),
         ),
@@ -341,6 +368,22 @@ def plan_regression_commands(
             ),
         ),
         RegressionCommand(
+            name="static formal hook smoke for e13-malformed-capability-strengthening",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-static",
+                "e13-malformed-capability-strengthening",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(
+                    effective_label, "e13-malformed-capability-strengthening"
+                ),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
             name="static formal hook smoke for e19-malformed-target-mismatch",
             argv=(
                 python_cmd,
@@ -366,6 +409,22 @@ def plan_regression_commands(
                 "--run-label",
                 smoke_run_label(
                     effective_label, "e18-malformed-missing-successor-option"
+                ),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
+            name="static formal hook smoke for e20-malformed-late-capability-strengthening",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-static",
+                "e20-malformed-late-capability-strengthening",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(
+                    effective_label, "e20-malformed-late-capability-strengthening"
                 ),
                 "--overwrite",
             ),

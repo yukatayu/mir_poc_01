@@ -150,6 +150,18 @@
   - model-check line の projection grain、property-family reserve order、tool-binding stop line を docs-first に整理する補助文書。
 - `specs/examples/416-current-l2-order-handoff-falsifier-loop-and-adequacy-corpus-hardening.md`
   - order / handoff line の falsifier family、negative corpus coverage、boundary-matrix hardening を docs-first に整理する補助文書。
+- `specs/examples/417-current-l2-stable-malformed-capability-second-source-backed-widening-actualization.md`
+  - current L2 source sample authored corpus を capability pair `e13/e20` まで widen し、lowerer / runner / verification ladder / emitted artifact wiring / regression bundle へ narrow actualize した current cut を整理する補助文書。
+- `specs/examples/418-current-l2-first-source-visible-typed-surface-comparison.md`
+  - checker-adjacent principal typed source を維持したまま、どの source-visible marker family を first typed-surface candidate に残すかを比較する補助文書。
+- `specs/examples/419-current-l2-first-theorem-lemma-family-wording-hardening.md`
+  - semantic-core theorem pilot の lemma statement、admissible evidence floor、review artifact と theorem discharge の stop line を docs-first に harden する補助文書。
+- `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
+  - row-local machine-facing carrier から small-cluster semantic projection へ橋をかける bridge grain と bridge bundle floor を整理する補助文書。
+- `specs/examples/421-current-l2-order-handoff-candidate-reduction-after-falsifier-hardening.md`
+  - falsifier hardening 後の kept candidate family / second candidate / derived candidate / retained-later reference family を reduction note として整理する補助文書。
+- `specs/examples/422-current-l2-modal-foundation-comparison-follow-up.md`
+  - `lambda-circle-box` を partial basis に保ちつつ、guarded / MDTT / MTT stronger-candidate family の reduction と stop line を整理する補助文書。
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。

@@ -36,14 +36,14 @@
 ## current lane split
 
 - execution lane:
-  `Macro 4 / stable malformed capability second source-backed widening actualization`
+  `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
 - theory-lab lane:
-  `Macro 5` post-planning quartet
-  (`typed-surface comparison`、`theorem lemma hardening`、`model-check bridge note`) と
-  `Macro 5/6` post-falsifier comparison
-  (`order/handoff candidate reduction`、`modal follow-up`)
+  `Macro 5` follow-up
+  (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`) と
+  `Macro 5/6` follow-up
+  (`order/handoff property-language bridge`、`modal promotion-threshold note`)
 - reserve integration lane:
-  `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
+  `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
 
 ## autonomy gate detail
 
@@ -54,9 +54,9 @@
 - compile-ready minimal actualization の narrow widening
 - fixed-subset source sample expansion
 - typed attachment candidate inventory
-- theorem pilot planning
-- model-check projection / property-family reserve planning
-- order / handoff / syntax / modality の docs-first comparison
+- theorem pilot planning と wording hardening
+- model-check projection / property-family reserve planning と bridge grain note
+- order / handoff / syntax / modality の docs-first comparison と follow-up bridge note
 - verifier-boundary matrix と adequacy corpus の docs-first hardening
 
 ### boundary までは self-driven でよい line
@@ -116,7 +116,8 @@
 - current repo は architecture-first だが、fixed-subset runnable path を already 持つ。
 - type / proof / model-check line は「まだ無理」ではなく、boundary / pilot planning を進められる段階にある。
 - typed-core attachment inventory、semantic-core theorem pilot order、model-check projection reserve inventory は docs-first に閉じられる段階にある。
+- source-visible typed-surface comparison、theorem lemma wording hardening、model-check bridge grain note は docs-first に閉じられる段階にある。
 - ordering / `memory_order` reinterpretation も「未着手で何も言えない」段階ではなく、theory-first inventory と handoff boundary を整理できる段階にある。
-- order / handoff line も、falsifier loop と adequacy corpus の negative coverage まで進められる段階にある。
+- order / handoff line も、falsifier loop、candidate reduction、modal follow-up まで進められる段階にある。
 - ただし、この 2 系統はいずれも mainline implementation へ即昇格させる段階ではない。
 - theory-lab line は repo 全体から見ると advanced line だが、この particular line 自体は still early-active である。

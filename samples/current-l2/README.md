@@ -33,8 +33,10 @@ current authored corpus は、この initial sextet に
 - `e19-malformed-target-mismatch.txt`
 - `e16-malformed-missing-chain-head-option.txt`
 - `e18-malformed-missing-successor-option.txt`
+- `e13-malformed-capability-strengthening.txt`
+- `e20-malformed-late-capability-strengthening.txt`
 
-を順に加えた decet に進んでいる。
+を順に加えた authored dozen に進んでいる。
 
 ## current mapping matrix
 
@@ -47,21 +49,24 @@ current first matrix は、representative prose / fixture corpus / source target
 | 3 | `e3-option-admit-chain` | `E3-variant` | `variant` | `e3_option_admit_chain` | `runtime_fixture` | `samples/current-l2/e3-option-admit-chain.txt` | option-local `admit` miss を non-admissible skip に留める | `valid` | `success` |
 | 4 | `e4-malformed-lineage` | `E4` | `direct` | `e4_malformed_lineage` | `static_only_fixture` | `samples/current-l2/e4-malformed-lineage.txt` | edge-local lineage mismatch を static stop に留める | `malformed` | `not_evaluated` |
 | 5 | `e16-malformed-missing-chain-head-option` | `E16` | `direct` | `e16_malformed_missing_chain_head_option` | `static_only_fixture` | `samples/current-l2/e16-malformed-missing-chain-head-option.txt` | missing chain head option を source-backed static stop pair へ上げる | `malformed` | `not_evaluated` |
-| 6 | `e19-malformed-target-mismatch` | `E19` | `direct` | `e19_malformed_target_mismatch` | `static_only_fixture` | `samples/current-l2/e19-malformed-target-mismatch.txt` | declared target mismatch を source-backed static stop pair へ戻す | `malformed` | `not_evaluated` |
-| 7 | `e21-try-atomic-cut-frontier` | `E21` | `direct` | `e21_try_atomic_cut_frontier` | `runtime_fixture` | `samples/current-l2/e21-try-atomic-cut-frontier.txt` | try body 内 `atomic_cut` の frontier update | `valid` | `success` |
-| 8 | `e22-try-atomic-cut-place-mismatch` | `E22` | `direct` | `e22_try_atomic_cut_place_mismatch` | `runtime_fixture` | `samples/current-l2/e22-try-atomic-cut-place-mismatch.txt` | nested place 内 `atomic_cut` の place-mismatch contrast | `valid` | `success` |
-| 9 | `e18-malformed-missing-successor-option` | `E18` | `direct` | `e18_malformed_missing_successor_option` | `static_only_fixture` | `samples/current-l2/e18-malformed-missing-successor-option.txt` | missing successor option を source-backed static stop pair へ上げる | `malformed` | `not_evaluated` |
-| 10 | `e23-malformed-try-fallback-missing-fallback-body` | unresolved representative anchor | `unresolved` | `e23_malformed_try_fallback_missing_fallback_body` | `static_only_fixture` | `samples/current-l2/e23-malformed-try-fallback-missing-fallback-body.txt` | empty `fallback_body` structural malformed floor | `malformed` | `not_evaluated` |
+| 6 | `e13-malformed-capability-strengthening` | `E13` | `direct` | `e13_malformed_capability_strengthening` | `static_only_fixture` | `samples/current-l2/e13-malformed-capability-strengthening.txt` | capability strengthening first row を source-backed static stop pair へ上げる | `malformed` | `not_evaluated` |
+| 7 | `e19-malformed-target-mismatch` | `E19` | `direct` | `e19_malformed_target_mismatch` | `static_only_fixture` | `samples/current-l2/e19-malformed-target-mismatch.txt` | declared target mismatch を source-backed static stop pair へ戻す | `malformed` | `not_evaluated` |
+| 8 | `e21-try-atomic-cut-frontier` | `E21` | `direct` | `e21_try_atomic_cut_frontier` | `runtime_fixture` | `samples/current-l2/e21-try-atomic-cut-frontier.txt` | try body 内 `atomic_cut` の frontier update | `valid` | `success` |
+| 9 | `e22-try-atomic-cut-place-mismatch` | `E22` | `direct` | `e22_try_atomic_cut_place_mismatch` | `runtime_fixture` | `samples/current-l2/e22-try-atomic-cut-place-mismatch.txt` | nested place 内 `atomic_cut` の place-mismatch contrast | `valid` | `success` |
+| 10 | `e18-malformed-missing-successor-option` | `E18` | `direct` | `e18_malformed_missing_successor_option` | `static_only_fixture` | `samples/current-l2/e18-malformed-missing-successor-option.txt` | missing successor option を source-backed static stop pair へ上げる | `malformed` | `not_evaluated` |
+| 11 | `e20-malformed-late-capability-strengthening` | `E13-late-edge-variant` | `variant` | `e20_malformed_late_capability_strengthening` | `static_only_fixture` | `samples/current-l2/e20-malformed-late-capability-strengthening.txt` | late capability strengthening row を source-backed static stop pair へ上げる | `malformed` | `not_evaluated` |
+| 12 | `e23-malformed-try-fallback-missing-fallback-body` | unresolved representative anchor | `unresolved` | `e23_malformed_try_fallback_missing_fallback_body` | `static_only_fixture` | `samples/current-l2/e23-malformed-try-fallback-missing-fallback-body.txt` | empty `fallback_body` structural malformed floor | `malformed` | `not_evaluated` |
 
 ## current notes
 
 - `e3` は plain `E3` ではなく fixture-side `source_example_id = E3-variant` を mirror する。
+- `e20` は fixture-side `source_example_id = E13-late-edge-variant` を mirror する。
 - `e23` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row はまだない。
 - current matrix 自体は source target path までを固定し、reached stage inventory は下の ladder row に分けて持つ。
 
 ## current authored files
 
-- actual source file として current repo にあるのは `e1-place-atomic-cut.txt`、`e2-try-fallback.txt`、`e3-option-admit-chain.txt`、`e4-malformed-lineage.txt`、`e16-malformed-missing-chain-head-option.txt`、`e19-malformed-target-mismatch.txt`、`e21-try-atomic-cut-frontier.txt`、`e22-try-atomic-cut-place-mismatch.txt`、`e18-malformed-missing-successor-option.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の current authored decet である。
+- actual source file として current repo にあるのは `e1-place-atomic-cut.txt`、`e2-try-fallback.txt`、`e3-option-admit-chain.txt`、`e4-malformed-lineage.txt`、`e16-malformed-missing-chain-head-option.txt`、`e13-malformed-capability-strengthening.txt`、`e19-malformed-target-mismatch.txt`、`e21-try-atomic-cut-frontier.txt`、`e22-try-atomic-cut-place-mismatch.txt`、`e18-malformed-missing-successor-option.txt`、`e20-malformed-late-capability-strengthening.txt`、`e23-malformed-try-fallback-missing-fallback-body.txt` の current authored dozen である。
 - `e3` は source row / runner / inventory / ladder までは actualize 済みだが、formal hook stage は current top guard により `not reached (guarded)` に留める。
 - current lowerer first cut は single-line `require` / `ensure` と inline `admit` fragment を受け、multiline clause suite は fail-closed に止める。
 - current runner first cut は accepted sample set 内の explicit path と sample stem shorthand を受け、host plan は explicit input に留める。
@@ -69,7 +74,7 @@ current first matrix は、representative prose / fixture corpus / source target
 
 ## current verification ladder
 
-current reached-stage inventory は current authored decet `e1` / `e2` / `e3` / `e4` / `e16` / `e19` / `e21` / `e22` / `e18` / `e23` に付ける。
+current reached-stage inventory は current authored dozen `e1` / `e2` / `e3` / `e4` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` に付ける。
 
 | sample stem | authored status | static gate | interpreter | formal hook | evidence route |
 |---|---|---|---|---|---|
@@ -78,10 +83,12 @@ current reached-stage inventory は current authored decet `e1` / `e2` / `e3` / 
 | `e3-option-admit-chain` | `source-authored` | `reached(valid)` | `reached(success)` | `not reached (guarded)` | `current_l2_source_sample_runner` + guarded detached-bundle rejection evidence |
 | `e4-malformed-lineage` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e16-malformed-missing-chain-head-option` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
+| `e13-malformed-capability-strengthening` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e19-malformed-target-mismatch` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e21-try-atomic-cut-frontier` | `source-authored` | `reached(valid)` | `reached(success)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
 | `e22-try-atomic-cut-place-mismatch` | `source-authored` | `reached(valid)` | `reached(success)` | `reached(runtime_try_cut_cluster)` | `current_l2_source_sample_runner` + runtime detached bundle formal-hook smoke |
 | `e18-malformed-missing-successor-option` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
+| `e20-malformed-late-capability-strengthening` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 | `e23-malformed-try-fallback-missing-fallback-body` | `source-authored` | `reached(malformed)` | `not reached (static stop)` | `reached(fixture_static_cluster)` | `current_l2_source_sample_runner` + static-gate detached formal-hook smoke |
 
 - `formal hook` reached は current package では source-runner-native artifact ではなく、fixture-aligned detached artifact route を使う。
@@ -102,8 +109,8 @@ current reached-stage inventory は current authored decet `e1` / `e2` / `e3` / 
 ## current authoring flow
 
 - source sample を更新するときは source text / fixture mapping / matrix / ladder / snapshot docs を同じ task で揃える。
-- `python3 scripts/current_l2_source_sample_regression.py inventory` は current authored decet の file presence と guarded row status を確認する。
-- `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` は current authored decet の lowering / runner / ladder bundle を流し、formal-hook smoke sub-bundleは current top に入る 9 row だけへ留める。
+- `python3 scripts/current_l2_source_sample_regression.py inventory` は current authored dozen の file presence と guarded row status を確認する。
+- `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` は current authored dozen の lowering / runner / ladder bundle を流し、formal-hook smoke sub-bundleは current top に入る 11 row だけへ留める。
 - current `bless` は retained artifact archive ではなく、review 済み repo-local sync、`inventory` / `regression` success、必要なら emitted review-unit / model-check carrier helper output の inspection を意味する。
 
 ## next steps
@@ -128,4 +135,5 @@ current reached-stage inventory は current authored decet `e1` / `e2` / `e3` / 
 - public operational CLI concrete shell naming comparison も fixed 済みであり、current docs-only shell family は `mir-current-l2 run-source-sample`、shell concern は `<sample>` / `--host-plan` / `--format pretty|json` に留める
 - capability second source-backed widening actualization comparison も fixed 済みであり、current actualization family は `e13/e20` source-authored static-stop pair、actualized surface は source sample / lowerer / runner / ladder / regression helper / fixture-static formal-hook smoke に留める
 - public operational CLI concrete shell actualization comparison も fixed 済みであり、current first cut は `mir-current-l2 run-source-sample` を current-L2 scoped Rust concrete shell over thin facade として読む narrow actual shell concern に留める
-- repo-level current line は stable malformed capability second source-backed widening actualization であり、その後に public operational CLI concrete shell actualization を reserve に置く
+- capability second source-backed widening actualization は source-authored pair として close 済みであり、sample-side next reopen は duplicate cluster と `TryFallback` / `AtomicCut` malformed-static broader family comparison に残す
+- repo-level current line は public operational CLI concrete shell actualization と shared-space room-profile / host binding bridge-only note へ進んでいる

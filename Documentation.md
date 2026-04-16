@@ -21,20 +21,20 @@
   を already 持つ。
 - current status は 3 lane で読むのが自然である。
   - execution lane:
-    `Macro 4 / stable malformed capability second source-backed widening actualization`
+    `Macro 4 / malformed duplicate-cluster and try-rollback malformed-static later reopen inventory`
   - theory-lab lane:
-    `Macro 5` post-planning quartet
-    (`typed-surface comparison`、`theorem lemma hardening`、`model-check bridge note`) と
-    `Macro 5/6` post-falsifier comparison
-    (`order/handoff candidate reduction`、`modal follow-up`)
+    `Macro 5` follow-up
+    (`checker attachment -> handoff migration`、`proof artifact / bridge stop-line refresh`、`sample-visible property summary wording`) と
+    `Macro 5/6` follow-up
+    (`order/handoff property-language bridge`、`modal promotion-threshold note`)
   - reserve integration lane:
-    `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
+    `Macro 6/7 / public operational CLI concrete shell actualization と shared-space room-profile・host binding bridge-only note`
 
 ## source-backed で既にあるもの
 
 - current L2 semantics / parser-free validation substrate / compile-ready minimal actualization
-- fixed-subset source sample decet:
-  `e1 / e2 / e3 / e4 / e16 / e18 / e19 / e21 / e22 / e23`
+- fixed-subset source sample authored dozen:
+  `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
 - sample-visible theorem / model-check first milestone:
   formal hook、`proof_notebook_review_unit`、row-local model-check carrier、emitted artifact wiring、sample-facing summary
 
@@ -44,8 +44,8 @@
 - capability-scoped host-I/O / adapter boundary の docs-first cut
 - order / memory-model / authority-handoff / syntax / modality / verifier-boundary comparison package:
   `specs/examples/405...412`
-- typed-core attachment inventory、semantic-core theorem pilot order、model-check projection reserve inventory、order/handoff falsifier loop hardening:
-  `specs/examples/413...416`
+- typed / theorem / model-check / order-handoff follow-up package:
+  `specs/examples/413...422`
 
 ## まだ OPEN のもの
 
@@ -68,14 +68,14 @@
 4. theory-lab の detail:
    `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 5. current long-form FAQ:
-   `faq_04.md`
+   `faq_004.md`
 
 ## 直近で特に重要な文書
 
 - theory-lab operating model と comparison bundle:
   `specs/examples/405...412`
 - typed / theorem / model-check / ordering の current adjacent package:
-  `specs/examples/413...416`
+  `specs/examples/413...422`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:

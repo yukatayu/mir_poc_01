@@ -259,6 +259,33 @@
   - `specs/examples/371-current-l2-stable-malformed-broader-follow-up-inventory-ready-public-operational-cli-final-public-contract-later-gate-comparison.md`
   - `specs/examples/372-current-l2-public-operational-cli-final-public-contract-later-gate-ready-minimal-public-operational-cli-final-public-contract-later-gate-threshold.md`
 
+## 2026-04-16 Theory-lab and capability widening six-package addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`faq_004.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/401-current-l2-public-operational-cli-concrete-shell-naming-ready-stable-malformed-capability-second-source-backed-widening-actualization-comparison.md`
+  - `specs/examples/402-current-l2-stable-malformed-capability-second-source-backed-widening-actualization-ready-minimal-stable-malformed-capability-second-source-backed-widening-threshold.md`
+  - `specs/examples/413-current-l2-typed-core-attachment-inventory-and-obligation-allocation-refresh.md`
+  - `specs/examples/414-current-l2-semantic-core-theorem-pilot-planning.md`
+  - `specs/examples/415-current-l2-model-check-projection-and-property-family-reserve-inventory.md`
+  - `specs/examples/416-current-l2-order-handoff-falsifier-loop-and-adequacy-corpus-hardening.md`
+  - `specs/examples/417-current-l2-stable-malformed-capability-second-source-backed-widening-actualization.md`
+  - `specs/examples/418-current-l2-first-source-visible-typed-surface-comparison.md`
+  - `specs/examples/419-current-l2-first-theorem-lemma-family-wording-hardening.md`
+  - `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
+  - `specs/examples/421-current-l2-order-handoff-candidate-reduction-after-falsifier-hardening.md`
+  - `specs/examples/422-current-l2-modal-foundation-comparison-follow-up.md`
+  - `docs/reports/0701-typed-theorem-modelcheck-order-handoff-planning-quartet.md`
+  - `docs/reports/0702-theory-lab-and-capability-widening-six-packages.md`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_emitted_artifact_wiring.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`
+  - `samples/current-l2/e13-malformed-capability-strengthening.txt`
+  - `samples/current-l2/e20-malformed-late-capability-strengthening.txt`
+
 ## 2026-04-16 order / handoff / memory-model / modality theory-line addendum
 
 - `specs/10-open-questions.md` の今回更新分は、追加で次を主根拠にする。
@@ -2618,7 +2645,7 @@
 
 ### 2026-04-16 three-lane plan/docs refresh and FAQ 04 addendum
 
-- `Documentation.md`、`progress.md`、`tasks.md`、`faq_04.md`、`docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md` の今回更新分は、追加で次を主根拠にする。
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_004.md`、`docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md` の今回更新分は、追加で次を主根拠にする。
   - `README.md`
   - `.docs/progress-task-axes.md`
   - `faq_003.md`

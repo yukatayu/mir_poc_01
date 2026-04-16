@@ -240,6 +240,35 @@ fn current_l2_source_sample_runner_accepts_named_e16_sample() {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_named_e13_sample() {
+    let report = run_current_l2_source_sample(
+        "e13-malformed-capability-strengthening",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(report.sample_id, "e13-malformed-capability-strengthening");
+    assert_eq!(
+        report.sample_path,
+        sample_path("e13-malformed-capability-strengthening.txt")
+    );
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    let stage1 = report
+        .runtime_report
+        .checker_floor
+        .stage1_reconnect_clusters
+        .unwrap();
+    assert!(stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(stage1.capability_strengthening_floor);
+    assert!(!report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_named_e19_sample() {
     let report =
         run_current_l2_source_sample("e19-malformed-target-mismatch", FixtureHostPlan::default())
@@ -254,6 +283,35 @@ fn current_l2_source_sample_runner_accepts_named_e19_sample() {
         report.runtime_report.checker_floor.static_gate.verdict,
         StaticGateVerdict::Malformed
     );
+    assert!(!report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
+fn current_l2_source_sample_runner_accepts_named_e20_sample() {
+    let report = run_current_l2_source_sample(
+        "e20-malformed-late-capability-strengthening",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(report.sample_id, "e20-malformed-late-capability-strengthening");
+    assert_eq!(
+        report.sample_path,
+        sample_path("e20-malformed-late-capability-strengthening.txt")
+    );
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    let stage1 = report
+        .runtime_report
+        .checker_floor
+        .stage1_reconnect_clusters
+        .unwrap();
+    assert!(stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(stage1.capability_strengthening_floor);
     assert!(!report.runtime_report.run_report.entered_evaluation);
     assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
 }

@@ -105,10 +105,12 @@ fn current_l2_runner_accepted_sample_paths() -> Vec<PathBuf> {
         "e3-option-admit-chain.txt",
         "e4-malformed-lineage.txt",
         "e16-malformed-missing-chain-head-option.txt",
+        "e13-malformed-capability-strengthening.txt",
         "e19-malformed-target-mismatch.txt",
         "e21-try-atomic-cut-frontier.txt",
         "e22-try-atomic-cut-place-mismatch.txt",
         "e18-malformed-missing-successor-option.txt",
+        "e20-malformed-late-capability-strengthening.txt",
         "e23-malformed-try-fallback-missing-fallback-body.txt",
     ]
     .into_iter()
