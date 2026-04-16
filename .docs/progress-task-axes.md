@@ -61,11 +61,17 @@ repo-local な **大局整理の軸** を固定する。
 - `shared-space docs-first boundary fixed` と
   `shared-space operational realization / final catalog open`
   を分けて書く。
+- macro phase map では、各 macro phase について
+  - self-driven で closeout まで持って行けるか
+  - boundary-prep までに留まるか
+  - user specification が必要か
+  を短く mirror する。
 
 ### `tasks.md`
 
 - 少なくとも次を分けて書く。
   - ordered self-driven packages
+  - self-driven で closeout まで持って行ける macro phase 読み
   - research-discovery items
   - user decision items
 - 各 package では、可能なら

@@ -2782,3 +2782,12 @@
   - `plan/12-open-problems-and-risks.md`
   - `docs/reports/0708-faq005-literature-mapping-and-theory-lab-followup.md`
 - 今回の要点は、self-driven queue を `promoted immediate package 2 本` に過度圧縮せず、`boundary-prep reserve 5 本` を current queue に戻した点である。
+
+### 2026-04-17 macro phase map refresh and self-driven closeout reading addendum
+
+- `.docs/progress-task-axes.md`、`plan/01-status-at-a-glance.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `plan/17-research-phases-and-autonomy-gates.md`
+  - `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
+  - `docs/reports/0709-self-driven-queue-reassessment-and-snapshot-refresh.md`
+  - `docs/reports/0710-macro-phase-map-refresh-and-self-driven-closeout-reading.md`
+- 今回の要点は、macro phase map を見直し、`Macro 0〜5` は self-driven closeout、`Macro 6〜7` は boundary-prep まで self-driven、`Macro 8` は user-spec-required と読む current snapshot を明示した点である。

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-17 07:42 JST
+最終更新: 2026-04-17 08:00 JST
 
 ## この文書について
 
@@ -21,6 +21,20 @@
   （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 - immediate blocker: `0`
 - current lane を止める user decision: `0`
+
+## 自走して closeout まで持って行ける macro phase 読み
+
+| macro phase | self-driven closeout 読み | 注記 |
+|---|---|---|
+| `Macro 0` | はい | maintenance closeout まで |
+| `Macro 1` | はい | narrow semantic reopen の closeout まで |
+| `Macro 2` | はい | current parser-free substrate closeout まで |
+| `Macro 3` | はい | compile-ready minimal current tranche closeout まで |
+| `Macro 4` | はい | current fixed-subset widening closeout まで |
+| `Macro 5` | はい | current boundary / pilot / framing closeout まで |
+| `Macro 6` | いいえ | docs-first boundary / fairness-replay seam までは self-driven、full closeout は mixed gate |
+| `Macro 7` | いいえ | thin facade / packaging boundary-prep までは self-driven、full closeout は mixed gate |
+| `Macro 8` | いいえ | user specification 必須 |
 
 ## 自走可能な task package
 

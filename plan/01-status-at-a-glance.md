@@ -29,10 +29,10 @@
 | `Macro 1` semantic kernel | late | self-driven |
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
-| `Macro 4` executable fixed-subset expansion | active, first capability pair widen close 済み | self-driven |
+| `Macro 4` executable fixed-subset expansion | active, duplicate-cluster actualization comparison へ進行中 | self-driven |
 | `Macro 5` typed / theorem / model-check bridge | third-order follow-up active | self-driven up to boundary |
-| `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed |
-| `Macro 7` toolchain / backend / host-facing integration | thin facade plus reserve shell | mixed |
+| `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed（boundary-prep までは self-driven） |
+| `Macro 7` toolchain / backend / host-facing integration | thin facade plus reserve shell | mixed（boundary-prep までは self-driven） |
 | `Macro 8` domain / application realization | not started | user spec required |
 
 ## current capability snapshot

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-17 07:42 JST
+最終更新: 2026-04-17 08:00 JST
 
 ## この文書について
 
@@ -28,17 +28,20 @@
 
 ## macro phase map
 
-| Macro phase | 主眼 | 現在位置 | 重さ | 自走可否 |
-|---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | maintenance | 低 | 着手可能 |
-| `Macro 1` | semantic kernel / invariant stabilization | late | 中 | 着手可能 |
-| `Macro 2` | parser-free validation substrate | late | 中 | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | late | 中 | 着手可能 |
-| `Macro 4` | executable fixed-subset sample expansion | duplicate cluster reopen sequencing へ進行中 | 重 | 着手可能 |
-| `Macro 5` | typed / theorem / model-check bridge | third-order follow-up active | 重 | 着手可能 |
-| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary plus reserve strengthening | 重 | 着手可能（boundaryまで） |
-| `Macro 7` | toolchain / backend / host-facing integration | thin facade / shell actualization 後の packaging reserve | 重 | 着手可能（boundaryまで） |
-| `Macro 8` | domain / application realization | not started | とても重い | 要仕様確認 |
+この map は repo 全体の大局を示す。
+current macro phase reading は、`Macro 0` から `Macro 5` までは closeout まで self-driven に持って行ける読み、`Macro 6` と `Macro 7` は boundary-prep まで、`Macro 8` は user specification 必須、という切り方で読む。
+
+| Macro phase | 主眼 | 現在位置 | 重さ | 自走可否 | 自走 closeout 読み |
+|---|---|---|---|---|---|
+| `Macro 0` | repository memory / docs / traceability | maintenance | 低 | 着手可能 | maintenance closeout まで self-driven |
+| `Macro 1` | semantic kernel / invariant stabilization | late | 中 | 着手可能 | narrow semantic reopen の closeout まで self-driven |
+| `Macro 2` | parser-free validation substrate | late | 中 | 着手可能 | current substrate closeout まで self-driven |
+| `Macro 3` | compile-ready minimal actualization | late | 中 | 着手可能 | current tranche closeout まで self-driven |
+| `Macro 4` | executable fixed-subset sample expansion | duplicate cluster reopen sequencing へ進行中 | 重 | 着手可能 | current fixed-subset widening closeout まで self-driven |
+| `Macro 5` | typed / theorem / model-check bridge | third-order follow-up active | 重 | 着手可能 | current boundary / pilot / framing closeout まで self-driven |
+| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary plus reserve strengthening | 重 | 着手可能（boundaryまで） | docs-first boundary / fairness-replay seam まで self-driven |
+| `Macro 7` | toolchain / backend / host-facing integration | thin facade / shell actualization 後の packaging reserve | 重 | 着手可能（boundaryまで） | thin facade / packaging boundary-prep まで self-driven |
+| `Macro 8` | domain / application realization | not started | とても重い | 要仕様確認 | self-driven closeout はしない |
 
 ## 特徴機能ごとの到達度
 
@@ -199,6 +202,7 @@
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細は `docs/reports/` を正本にする。
+- 2026-04-17 08:00 JST — `docs/reports/0710` で macro phase map を見直し、`Macro 0〜5` は closeout まで self-driven、`Macro 6〜7` は boundary-prep まで、`Macro 8` は user-spec-required だと読み分けたうえで、`tasks.md` に current self-driven macro-phase closeout reading を追加した。
 - 2026-04-17 07:42 JST — `docs/reports/0709` で `tasks.md` / `progress.md` / `plan/11` を再読し、self-driven queue が 2 本に圧縮されすぎていた点を補正して、promoted immediate 2 本に加えて boundary-prep reserve 5 本を current self-driven queue に戻した。
 - 2026-04-17 07:22 JST — `docs/reports/0708` で `specs/examples/441...442` を追加し、model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve を docs-first に固定したうえで、`faq_005.md` を literature mapping と dice-owner handoff explanation 付きの current explanation へ更新し、theory-lab lane の next reopen を modality internalization trigger note に更新した。
 - 2026-04-17 00:28 JST — `docs/reports/0707` で `specs/examples/439...440` を追加し、typed family split と notebook-consumer threshold / discharge reserve を docs-first に固定したうえで、theory-lab lane を third-order follow-up active へ進め、next reopen を model-check small-cluster projection keep/drop refresh に更新した。
