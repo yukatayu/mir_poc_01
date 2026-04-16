@@ -79,18 +79,23 @@ cross-cutting theory package を docs-first に進めてよい。
 
 ### A/E/G に跨る理論線
 
-1. **cut family / order family**
+1. **typed / theorem / model-check boundary**
+   - first typed attachment candidate、obligation owner matrix、
+     semantic-core theorem pilot、
+     model-check projection / property-family reserve を
+     full type system / concrete tool binding の前に docs-first で整理する。
+2. **cut family / order family**
    - `atomic_cut` の local nucleus を維持したまま、
      observation / snapshot、ordering-only barrier、commit-bearing durable cut、
      publication / observation / witness / finalization relation を比較する。
-2. **authority-handoff / shared-space order**
+3. **authority-handoff / shared-space order**
    - authority placement、provider placement、witness、fairness source、replay attachment を同軸化せずに比較する。
-3. **thread / node parity**
+4. **thread / node parity**
    - source-level causal language の平等性と、
      lowering / transport / evidence / failure / durability policy の非対称性を切り分ける。
-4. **syntax / semantics honesty**
+5. **syntax / semantics honesty**
    - compactness ではなく semantic honesty、checker legibility、modal adequacy、misreading resistance を主軸に syntax candidate を比較する。
-5. **modal foundation / verifier boundary**
+6. **modal foundation / verifier boundary**
    - `lambda-circle-box` を partial basis candidate に留めつつ、
      guarded / modal dependent / multimodal line を stronger candidate として比較する。
    - property-to-boundary matrix は

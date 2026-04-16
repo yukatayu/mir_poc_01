@@ -106,6 +106,20 @@ shared-space line の order / handoff は、final protocol や final syntax を�
 4. rollback after local finalization
 5. snapshot-only observation cut vs durable-cut difference
 6. late join / rejoin / stale message
+7. handoff-before-publication / handoff-without-witness negative
+8. duplicate receipt / stale receipt / epoch mismatch negative
+9. provider-authority mismatch and fairness-fails-but-safety-holds negative
+
+### falsifier reading
+
+- positive motivating scenario だけでは authority-handoff family を過大に読みやすい。
+- current docs-first hardening では、
+  - publication omission
+  - witness omission
+  - replay / epoch drift
+  - provider / authority collapse
+  - fairness overclaim
+  を separate negative family として保つのが自然である。
 
 ### current judgment
 

@@ -13,8 +13,10 @@
   - execution lane:
     `Macro 4 / stable malformed capability second source-backed widening actualization`
   - theory-lab lane:
-    `Macro 5` typed / theorem / model-check planning と
-    `Macro 5/6` order / memory / authority-handoff / syntax / modality comparison
+    `Macro 5` post-planning quartet
+    (`typed-surface comparison`、`theorem lemma hardening`、`model-check bridge note`) と
+    `Macro 5/6` post-falsifier comparison
+    (`order/handoff candidate reduction`、`modal follow-up`)
   - reserve integration lane:
     `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
 - immediate blocker は `0`、current lane を止める user decision も `0` と読む。
@@ -46,15 +48,26 @@
   - emitted artifact wiring
   - sample-facing evidence summary
   まで narrow first cut が source-backed である。
-- current typed work は full type system ではなく、semantic carrier / checker boundary / source-visible first attachment candidate を比較する段階にある。
+- typed/theorem/model-check theory-lab 側では、
+  - typed-core attachment inventory
+  - semantic-core theorem pilot order
+  - model-check projection reserve inventory
+  まで docs-first に固まった。
+- current typed work は full type system ではなく、source-visible first attachment candidate を comparison に送る段階にある。
 - shared-space は identity / admission / authority まで docs-first boundary があり、final operational catalog は later gate に残る。
 - host-facing integration は privileged `stdin/stdout` ではなく、capability-scoped I/O / adapter boundary の docs-first cut に留める。
-- ordering / `memory_order` reinterpretation は `atomic_cut` の place-local nucleus を越えたところでは still theory-first である。
+- ordering / `memory_order` reinterpretation は `atomic_cut` の place-local nucleus を越えたところでは still theory-first だが、falsifier loop と adequacy corpus の negative coverage は docs-first に進んでいる。
 
 ## current recommendation
 
 - execution lane は fixed-subset widening を narrow に継続する。
-- theory-lab lane は typed / theorem / model-check planning と order / memory / syntax / modality comparison を mainline と混ぜずに進める。
+- theory-lab lane は
+  - first source-visible typed-surface comparison
+  - theorem lemma wording hardening
+  - model-check bridge note
+  - order/handoff candidate reduction
+  - modal follow-up
+  を mainline と混ぜずに進める。
 - reserve integration lane は CLI / host / shared-space boundary note を hidden promotion なしで保つ。
 
 ## biggest later gates

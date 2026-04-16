@@ -34,6 +34,11 @@ current authored source sample は
 `e1 / e2 / e3 / e4 / e16 / e18 / e19 / e21 / e22 / e23`
 の decet である。
 
+## docs-first adjacent theory-lab floor
+
+- typed/theorem/model-check boundary refresh と order/handoff falsifier hardening:
+  `specs/examples/413...416`
+
 ## current lane split
 
 ### execution lane
@@ -44,8 +49,10 @@ current authored source sample は
 
 ### theory-lab adjacent lane
 
-- typed / theorem / model-check planning
-- order / memory / authority-handoff / syntax / modality comparison
+- post-planning quartet:
+  typed-surface comparison / theorem lemma hardening / model-check bridge note
+- post-falsifier comparison:
+  order/handoff candidate reduction / modal follow-up
 - goal:
   sample-visible first milestone の次段を docs-first に固定する
 
@@ -60,6 +67,13 @@ current authored source sample は
 - parser-free path は runnable である。
 - syntax-backed source sample path も runnable である。
 - tool-neutral formal hook、`proof_notebook_review_unit`、row-local machine-facing model-check carrier、sample-facing evidence summaryは narrow first cut まで source-backed である。
+- adjacent theory-lab line では、source-backed actualization を増やしたのではなく、
+  docs-first planning / hardening package として
+  - typed-core attachment inventory
+  - semantic-core theorem pilot order
+  - model-check projection reserve inventory
+  - order/handoff falsifier loop
+  まで docs-first に固まった。
 - docs-first host-I/O boundary と shared-space identity / admission / authority boundary も fixed 済みである。
 - final parser grammar、final public API、concrete theorem / model-check tool binding、backend / external codegen は still later に残る。
 

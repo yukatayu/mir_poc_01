@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-16 19:03 JST
+最終更新: 2026-04-16 21:19 JST
 
 ## この文書について
 
@@ -14,8 +14,10 @@
 - execution lane:
   `Macro 4 / stable malformed capability second source-backed widening actualization`
 - theory-lab lane:
-  `Macro 5` typed / theorem / model-check planning と
-  `Macro 5/6` order / memory / authority-handoff / syntax / modality comparison
+  `Macro 5` post-planning quartet
+  (`typed-surface comparison`、`theorem lemma hardening`、`model-check bridge note`) と
+  `Macro 5/6` post-falsifier comparison
+  (`order/handoff candidate reduction`、`modal follow-up`)
 - reserve integration lane:
   `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
 - immediate blocker: `0`
@@ -25,27 +27,27 @@
 
 | 順番 | lane | macro | task package | completion signal | rough estimate |
 |---|---|---|---|---|---|
-| 1 | theory-lab | `Macro 5` | typed-core attachment inventory and obligation allocation refresh | first attachment candidate / obligation owner / stop line が docs-first に固定される | 1〜2 task |
-| 2 | theory-lab | `Macro 5` | semantic-core theorem pilot planning | first lemma order / carrier / tool-neutral stop line が固定される | 1〜2 task |
-| 3 | theory-lab | `Macro 5` | model-check projection / property-family reserve inventory | projection grain / first property family / tool-binding stop line が整理される | 1〜2 task |
-| 4 | theory-lab | `Macro 5/6` | order / handoff falsifier loop and adequacy-corpus hardening | benchmark family、negative example、boundary matrix の falsifier note が揃う | 1〜3 task |
-| 5 | execution | `Macro 4` | stable malformed capability second source-backed widening actualization | `e13/e20` family の actual package と runner / ladder / regression widening cut が閉じる | 1〜3 task |
+| 1 | execution | `Macro 4` | stable malformed capability second source-backed widening actualization | `e13/e20` family の actual package と runner / ladder / regression widening cut が閉じる | 1〜3 task |
+| 2 | theory-lab | `Macro 5` | first source-visible typed-surface comparison | source-visible typed candidate と checker-adjacent attachment の keep/drop line が docs-first に固定される | 1〜2 task |
+| 3 | theory-lab | `Macro 5` | first theorem lemma family wording hardening | lemma statement / admissible evidence / review-vs-discharge wording が揃う | 1〜2 task |
+| 4 | theory-lab | `Macro 5` | model-check carrier to projection bridge note | row-local floor と small-cluster reserve の bridge note が固定される | 1〜2 task |
+| 5 | theory-lab | `Macro 5/6` | order / handoff candidate reduction after falsifier hardening | kept-later family と next candidate family の reduction note が揃う | 1〜2 task |
 | 6 | theory-lab | `Macro 5/6` | modal foundation comparison follow-up | partial basis / stronger candidate / stop line が docs-first に安定する | 1〜2 task |
 | 7 | reserve | `Macro 7` | public operational CLI concrete shell actualization | current-L2 scoped shell concern と support / excluded bucket が actual package として閉じる | 1〜2 task |
 | 8 | reserve | `Macro 6/7` | shared-space room-profile・host binding bridge-only note | room-profile subset または bridge-only host note が 1 package として閉じる | 1〜2 task |
 
 ## 研究で詰める論点
 
-- typed first attachment candidate
+- source-visible typed surface
   - detail / options / current recommendation は `plan/18` Track A を参照。
-- theorem pilot order
+- theorem lemma wording / admissible evidence floor
   - detail / options / current recommendation は `plan/18` Track B を参照。
-- model-check projection grain
+- model-check bridge grain
   - detail / options / current recommendation は `plan/18` Track C を参照。
-- cut / order / visibility / witness decomposition
+- order / handoff candidate reduction after falsifier hardening
   - detail / options / current recommendation は `plan/18` Track D を参照。
-- syntax honesty / modal foundation
-  - detail / options / current recommendation は `plan/18` Track E / F を参照。
+- modal follow-up
+  - detail / options / current recommendation は `plan/18` Track F を参照。
 
 ## user が後で決めること
 

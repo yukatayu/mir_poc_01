@@ -142,6 +142,14 @@
   - order / handoff line の benchmark family と property-to-boundary matrix を docs-only で揃える補助文書。
 - `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
   - theory-lab line の role split、promotion rule、research package template を current process discipline に沿って整理する補助文書。
+- `specs/examples/413-current-l2-typed-core-attachment-inventory-and-obligation-allocation-refresh.md`
+  - typed-core line の first attachment candidate、obligation owner matrix、stop line を docs-first に整理する補助文書。
+- `specs/examples/414-current-l2-semantic-core-theorem-pilot-planning.md`
+  - semantic-core theorem pilot の first lemma order、subject/evidence floor、review/discharge stop line を docs-first に整理する補助文書。
+- `specs/examples/415-current-l2-model-check-projection-and-property-family-reserve-inventory.md`
+  - model-check line の projection grain、property-family reserve order、tool-binding stop line を docs-first に整理する補助文書。
+- `specs/examples/416-current-l2-order-handoff-falsifier-loop-and-adequacy-corpus-hardening.md`
+  - order / handoff line の falsifier family、negative corpus coverage、boundary-matrix hardening を docs-first に整理する補助文書。
 - `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
   - current L2 parser-free PoC の detached artifact で、aggregate export 側に typed histogram / kind count を入れるなら、その field 名と migration cut をどう切るのが最小かを比較する補助文書。
   - production exporter 実装や actual schema version を固定せず、aggregate naming と docs-only migration cut だけを与える。

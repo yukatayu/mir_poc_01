@@ -23,8 +23,10 @@
   - execution lane:
     `Macro 4 / stable malformed capability second source-backed widening actualization`
   - theory-lab lane:
-    `Macro 5` typed / theorem / model-check boundary planning と
-    `Macro 5/6` order / memory / authority-handoff / syntax / modality comparison
+    `Macro 5` post-planning quartet
+    (`typed-surface comparison`、`theorem lemma hardening`、`model-check bridge note`) と
+    `Macro 5/6` post-falsifier comparison
+    (`order/handoff candidate reduction`、`modal follow-up`)
   - reserve integration lane:
     `Macro 6/7 / public operational CLI concrete shell actualization と bridge-only reserve boundary note`
 
@@ -35,10 +37,15 @@
   `e1 / e2 / e3 / e4 / e16 / e18 / e19 / e21 / e22 / e23`
 - sample-visible theorem / model-check first milestone:
   formal hook、`proof_notebook_review_unit`、row-local model-check carrier、emitted artifact wiring、sample-facing summary
+
+## docs-first theory-lab で既にあるもの
+
 - shared-space identity / admission / authority の docs-first boundary
 - capability-scoped host-I/O / adapter boundary の docs-first cut
 - order / memory-model / authority-handoff / syntax / modality / verifier-boundary comparison package:
   `specs/examples/405...412`
+- typed-core attachment inventory、semantic-core theorem pilot order、model-check projection reserve inventory、order/handoff falsifier loop hardening:
+  `specs/examples/413...416`
 
 ## まだ OPEN のもの
 
@@ -67,8 +74,12 @@
 
 - theory-lab operating model と comparison bundle:
   `specs/examples/405...412`
+- typed / theorem / model-check / ordering の current adjacent package:
+  `specs/examples/413...416`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
+- theory-lab の detail:
+  `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 - open problems / heavy line:
   `plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`
 - compile-ready minimal actualization の current summary:

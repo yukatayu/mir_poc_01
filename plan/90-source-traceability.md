@@ -2646,3 +2646,33 @@
   - `docs/reports/0698-plan-progress-task-rebuild-and-research-program-refresh.md`
   - `docs/reports/0699-order-handoff-memory-modality-theory-line-consolidation.md`
   - `docs/reports/0700-three-lane-plan-refresh-faq04-and-snapshot-rewrite.md`
+
+### 2026-04-16 typed/theorem/model-check planning quartet and order/handoff falsifier hardening addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`、`specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/257-current-l2-checker-cluster-matrix-ready-minimal-checker-cluster-row-threshold.md`
+  - `specs/examples/259-current-l2-checker-cluster-fixture-evidence-attachment-ready-typed-reason-family-hint-threshold.md`
+  - `specs/examples/260-current-l2-typed-reason-family-hint-ready-checker-cluster-hint-bundle-shape-comparison.md`
+  - `specs/examples/327-current-l2-source-sample-authoring-bless-regression-policy-ready-theorem-first-concrete-tool-pilot-comparison.md`
+  - `specs/examples/328-current-l2-theorem-first-concrete-tool-pilot-ready-minimal-theorem-first-concrete-tool-pilot-threshold.md`
+  - `specs/examples/377-current-l2-shared-space-authority-resource-ownership-reopen-ready-model-check-concrete-carrier-actualization-comparison.md`
+  - `specs/examples/378-current-l2-model-check-concrete-carrier-actualization-comparison-ready-minimal-model-check-concrete-carrier-actualization-threshold.md`
+  - `specs/examples/381-current-l2-model-check-concrete-carrier-first-actualization-ready-source-sample-emitted-verification-artifact-wiring-comparison.md`
+  - `specs/examples/382-current-l2-source-sample-emitted-verification-artifact-wiring-ready-minimal-source-sample-emitted-verification-artifact-wiring-threshold.md`
+  - `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
+  - `specs/examples/384-current-l2-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-ready-minimal-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-threshold.md`
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/406-current-l2-local-finalization-vs-global-snapshot-comparison.md`
+  - `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
+  - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/412-current-l2-theory-lab-operating-model-and-research-package-template.md`
+  - `specs/examples/413-current-l2-typed-core-attachment-inventory-and-obligation-allocation-refresh.md`
+  - `specs/examples/414-current-l2-semantic-core-theorem-pilot-planning.md`
+  - `specs/examples/415-current-l2-model-check-projection-and-property-family-reserve-inventory.md`
+  - `specs/examples/416-current-l2-order-handoff-falsifier-loop-and-adequacy-corpus-hardening.md`
+  - `crates/mir-semantics/examples/support/current_l2_formal_hook_support.rs`
+  - `crates/mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs`
+  - `crates/mir-semantics/examples/support/current_l2_model_check_carrier_support.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_emitted_artifact_wiring.rs`
+  - `docs/reports/0701-typed-theorem-modelcheck-order-handoff-planning-quartet.md`

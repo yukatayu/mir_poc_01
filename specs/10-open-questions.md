@@ -185,3 +185,19 @@
 37. theory-lab line を mainline actualization と別 package としてどう運用するか。
    - current repo には report discipline と self-driven gate はあるが、literature scout / formalizer / prototyper / falsifier / integrator の役割分担と promotion criteria はまだ fixed していない。
    - 未決なのは、どの候補を sandbox/report first に留め、どの条件で `plan/` や `specs/examples/` へ昇格させるかの明示的 operating model である。
+38. typed-core の first attachment candidate と obligation owner をどこで固定するか。
+   - source-backed な floor として、current first typed attachment candidate は source syntax ではなく checker-adjacent semantic carrier 側に置くのが自然である。
+   - theorem/model-check consumer artifact は current first typed source ではなく derived attachment と読む。
+   - 未決なのは、source-visible typed surface をどの時点で reopen するか、`family_refs[]` の exact namespace をどうするか、capability / lineage / predicate / `try` cluster を同じ attachment shape に寄せるかである。
+39. semantic-core theorem pilot の first lemma order / evidence floor / review-discharge stop line をどこまで固定するか。
+   - source-backed な floor として、current first theorem pilot line は `canonical_normalization_law`、`no_re_promotion`、`rollback_cut_non_interference` の順で読むのが自然である。
+   - また current first concrete consumer は notebook-first line に置き、tool-neutral formal hook と row-local review unit を entry に保つ。
+   - 未決なのは、concrete theorem prover brand、proof object public contract、actual discharge transport、public checker migration timingである。
+40. model-check projection grain と first property-family reserve をどこまで current docs に上げるか。
+   - source-backed な floor として、current line は `formal_hook -> row-local machine-facing carrier -> emitted artifact wiring -> sample-facing summary` までである。
+   - current next reserve としては、small-cluster semantic projection を row-local floor の次に置き、room protocol / fairness / replay / provider receipt family は order/handoff 側 reserve に残すのが自然である。
+   - 未決なのは、concrete model-check tool binding、first settled property language、production checker/runtime-policy contract である。
+41. order / handoff line の falsifier coverage をどこまで hardening するか。
+   - source-backed な floor として、cut family comparison、relation decomposition、adequacy corpus、property-to-boundary matrix は already ある。
+   - ただし negative corpus coverage はなお不足しており、publication なし handoff、witness なし handoff、duplicate / stale receipt、epoch mismatch、provider-authority mismatch、fairness overclaim、snapshot-visible-but-not-commit-evidenced のような falsifier family をどこまで current corpus に入れるかは未決である。
+   - 未決なのは、これらの falsifier family を final property language や final emitted artifact schema とどう接続するかである。

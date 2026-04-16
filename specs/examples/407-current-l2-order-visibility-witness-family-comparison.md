@@ -30,6 +30,15 @@ order / visibility / witness を relation decomposition として比較する。
 3. `kill_dependency` line は、dependency relation をどこで切るかの comparison material として読む。
 4. relation decomposition は shared-memory lowering と distributed handoff lowering の双方に接続できるように保つ。
 
+## collapse を避ける current reading
+
+| non-equation | reason |
+|---|---|
+| `pub != obs` | publish したことと、それを観測したことは別 relation である |
+| `obs != wit` | 観測したことと、handoff / receipt / proof に使える witness を持つことは別 relation である |
+| `final != durable` | local or scoped finalization と commit/evidence-bearing durability は別 family である |
+| `hb(scope) != authority_seriality` | admissible order relation と authoritative serial transition family は別 concern である |
+
 ## comparison note
 
 - C++ `consume` line は、dependency ordering が現実に必要だという reference family である。

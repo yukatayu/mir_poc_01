@@ -131,17 +131,22 @@ full strong type system や production tool binding を immediate target にし�
 
 - first attachment は semantic carrier / checker boundary から比較する。
 - source-visible syntax を immediately typed syntax にしない。
-- first cut では
+- current first typed attachment candidate は checker-adjacent semantic carrier に置く。
+- current package では
   - obligation owner
   - typed attachment candidate
   - stop line
   を fixed すればよい。
 
-### near-term package order
+### current package close
 
-1. obligation allocation matrix refresh
-2. typed-core attachment inventory
-3. first source-visible typed-surface comparison
+- obligation allocation matrix refresh
+- typed-core attachment inventory
+
+### next package order
+
+1. first source-visible typed-surface comparison
+2. checker attachment から handoff row への migration note
 
 ### stop line
 
@@ -164,12 +169,16 @@ full strong type system や production tool binding を immediate target にし�
   1. `canonical_normalization_law`
   2. `no_re_promotion`
   3. `rollback_cut_non_interference`
+- current first concrete consumer は notebook-first line に維持する。
 
-### near-term package order
+### current package close
 
-1. semantic-core theorem pilot planning
-2. first lemma family wording hardening
-3. proof artifact / bridge stop-line refresh
+- semantic-core theorem pilot planning
+
+### next package order
+
+1. first lemma family wording hardening
+2. proof artifact / bridge stop-line refresh
 
 ### stop line
 
@@ -196,12 +205,16 @@ full strong type system や production tool binding を immediate target にし�
 - first projection は row-local / small-cluster に留める。
 - first property family は transition-system 全体より narrow に取る。
 - concrete model-check tool binding は still later に残す。
+- room protocol / fairness / replay / provider receipt family は order / handoff 側 reserve に残す。
 
-### near-term package order
+### current package close
 
-1. model-check projection / property-family reserve inventory
-2. model-check carrier to projection bridge note
-3. sample-visible property summary wording
+- model-check projection / property-family reserve inventory
+
+### next package order
+
+1. model-check carrier to projection bridge note
+2. sample-visible property summary wording
 
 ### stop line
 
@@ -264,6 +277,18 @@ full strong type system や production tool binding を immediate target にし�
 3. thread / node parity note
 4. verifier-boundary matrix refresh
 5. falsifier loop / adequacy corpus hardening
+
+### current package close detail
+
+- `4A cut/order falsifiers`
+  - cut conflation と relation-collapse の negative family
+- `4B handoff/replay/provider falsifiers`
+  - publication / witness / epoch / receipt / fairness の negative family
+- `4C boundary-matrix hardening`
+  - property row と adequacy corpus id の接続
+
+current package では、negative corpus coverage を docs-first に固める。
+actual protocol projection や tool binding は still later に残す。
 
 ### stop line
 
@@ -339,10 +364,10 @@ full strong type system や production tool binding を immediate target にし�
 
 ## current near-term theory-lab sequence
 
-1. typed-core attachment inventory and obligation allocation refresh
-2. semantic-core theorem pilot planning
-3. model-check projection / property-family reserve inventory
-4. order / handoff falsifier loop and adequacy-corpus hardening
+1. first source-visible typed-surface comparison
+2. first theorem lemma family wording hardening
+3. model-check carrier to projection bridge note
+4. order / handoff candidate reduction after falsifier hardening
 5. modal foundation comparison follow-up
 
 ## current recommendation

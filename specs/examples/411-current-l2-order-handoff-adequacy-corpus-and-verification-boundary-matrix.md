@@ -23,24 +23,31 @@ order / handoff line を prose-only comparison にせず、
 | 8 | delegated RNG provider with authority commit | provider placement / witness contrast |
 | 9 | append-friendly room where authority-serial transition is overkill | overfit seriality contrast |
 | 10 | observation / `emit`-bearing variant | later conceptual variant |
+| 11 | handoff-before-publication negative | precondition falsifier |
+| 12 | handoff-without-witness negative | precondition falsifier |
+| 13 | duplicate / stale witness receipt negative | replay falsifier |
+| 14 | handoff epoch mismatch negative | replay / epoch falsifier |
+| 15 | provider-authority mismatch negative | provider placement falsifier |
+| 16 | fairness fails while safety holds | fairness falsifier |
+| 17 | snapshot visible but not commit-evidenced | snapshot vs durable-cut falsifier |
 
 ## property-to-boundary matrix
 
-| property | core static checker | theorem prover boundary | protocol verifier boundary | runtime policy boundary |
-|---|---|---|---|---|
-| same-owner / same-authority structural floor | yes | optional proof reuse | no | no |
-| stage sequence well-formedness | yes | optional | optional | no |
-| witness field presence | structural only | optional | yes | optional |
-| local cut non-interference | no | yes | no | optional evidence |
-| no hidden re-promotion analog | no | yes | optional | no |
-| handoff requires prior publication | no | optional | yes | no |
-| handoff requires witness | no | optional | yes | optional validation |
-| replay / duplicate invalidation | no | no | yes | yes |
-| room-level single-transition seriality | no | optional model lemma | yes | optional operational support |
-| late-join / rejoin safety | no | no | yes | yes |
-| fairness claim | no | optional proof note | yes | yes |
-| distributed provider / receipt validation | no | no | yes | yes |
-| observation / `emit` ordering | no | yes if semantic law | optional | yes |
+| property | core static checker | theorem prover boundary | protocol verifier boundary | runtime policy boundary | primary corpus ids |
+|---|---|---|---|---|---|
+| same-owner / same-authority structural floor | yes | optional proof reuse | no | no | 1, 11, 15 |
+| stage sequence well-formedness | yes | optional | optional | no | 1, 11, 12 |
+| witness field presence | structural only | optional | yes | optional | 1, 12 |
+| local cut non-interference | no | yes | no | optional evidence | 3, 4 |
+| no hidden re-promotion analog | no | yes | optional | no | 1, 6, 7 |
+| handoff requires prior publication | no | optional | yes | no | 1, 11 |
+| handoff requires witness | no | optional | yes | optional validation | 1, 12, 13 |
+| replay / duplicate invalidation | no | no | yes | yes | 7, 13, 14 |
+| room-level single-transition seriality | no | optional model lemma | yes | optional operational support | 1, 9 |
+| late-join / rejoin safety | no | no | yes | yes | 6, 7, 14 |
+| fairness claim | no | optional proof note | yes | yes | 8, 16 |
+| distributed provider / receipt validation | no | no | yes | yes | 8, 15 |
+| observation / `emit` ordering | no | yes if semantic law | optional | yes | 2, 5, 10, 17 |
 
 ## current judgment
 
