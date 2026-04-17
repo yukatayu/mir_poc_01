@@ -1,0 +1,16 @@
+# stale reconnect message は rollback で落とし、owner snapshot の refresh へ回す current L2 prototype。
+place root {
+  place room {
+    place dice_authority {
+      try {
+        perform apply_stale_reconnect_message on dice_state
+          require owner_snapshot_matches(player_a)
+          ensure owner_is(player_a)
+      } fallback {
+        perform refresh_owner_snapshot on dice_state
+          require read
+          ensure owner_is(player_b)
+      }
+    }
+  }
+}

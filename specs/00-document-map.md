@@ -228,6 +228,8 @@
   - underdeclared lineage / target omission family を source-authored current-l2 sample と helper-local static artifact route に actualize した current convenience cut を整理する補助文書。
 - `specs/examples/456-current-l2-typed-theorem-model-check-sample-visible-corrected-prototype-tranche.md`
   - typed marker (`admit` / `require` / `ensure`) を含む corrected prototype `p06` を追加し、helper-local verifier preview / artifact preview の current bridge floor を sample-visible にする tranche を整理する補助文書。
+- `specs/examples/457-current-l2-order-handoff-corrected-prototype-third-tranche.md`
+  - late join visibility と stale reconnect refresh を corrected prototype `p07` / `p08` へ actualize し、order/handoff third tranche を sample-visible に閉じる補助文書。
 - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
   - Phase 5 later package の current package として、proof obligation を docs 上の matrix と source evidence 参照の narrow handoff row bundle に分ける current first choice を整理した補助文書。
   - detached static gate artifact、`checked_reason_codes`、shared-space witness bundle を premature に public-looking contract へ昇格させない cut を与える。

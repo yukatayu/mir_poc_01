@@ -336,3 +336,60 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         "rollback_cut_non_interference"
     );
 }
+
+#[test]
+fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("sample: p07-dice-late-join-visible-history"));
+    assert!(output.contains("terminal_outcome: success"));
+    assert!(output.contains("observer_debug_text_output:"));
+    assert!(output.contains("late_join_view: player_c sees result+owner history"));
+    assert!(output.contains("subject_kind: runtime_try_cut_cluster"));
+}
+
+#[test]
+fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(value["sample"], "p08-dice-stale-reconnect-refresh");
+    assert_eq!(value["checker_floor"]["static_gate"]["verdict"], "valid");
+    assert_eq!(value["runtime"]["terminal_outcome"], "success");
+    assert_eq!(
+        value["runtime"]["events"],
+        Value::Array(vec![
+            Value::String("perform-failure".into()),
+            Value::String("rollback".into()),
+            Value::String("perform-success".into()),
+        ])
+    );
+    assert_eq!(
+        value["verification_preview"]["formal_hook_status"],
+        "reached"
+    );
+    assert_eq!(
+        value["verification_preview"]["subject_kind"],
+        "runtime_try_cut_cluster"
+    );
+    assert_eq!(
+        value["artifact_preview"]["proof_notebook_review_units"][0]["obligation_kind"],
+        "rollback_cut_non_interference"
+    );
+}

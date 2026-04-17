@@ -1,0 +1,22 @@
+# handoff 済みのサイコロ結果を late joiner が past-visible な履歴として読む current L2 prototype。
+place root {
+  place room {
+    place dice_authority {
+      perform publish_roll_result on dice_state
+        require owner_is(player_a)
+        ensure result_is_visible(room_members)
+
+      atomic_cut
+
+      perform handoff_dice_authority on dice_state
+        require owner_is(player_a)
+        ensure owner_is(player_b)
+
+      atomic_cut
+
+      perform observe_late_join_view on dice_state
+        require read
+        ensure late_join_sees_published_result(player_c)
+    }
+  }
+}

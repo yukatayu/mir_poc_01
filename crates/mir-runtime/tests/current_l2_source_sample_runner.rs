@@ -385,6 +385,100 @@ fn current_l2_source_sample_runner_accepts_typed_bridge_prototype_path() {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_order_handoff_third_tranche_paths() {
+    let p07 = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let p07_host_plan = load_host_plan_from_path(&order_handoff_prototype_sample_path(
+        "p07-dice-late-join-visible-history.host-plan.json",
+    ))
+    .unwrap();
+    let p07_report = run_current_l2_source_sample(p07.to_str().unwrap(), p07_host_plan).unwrap();
+    assert_eq!(p07_report.sample_id, "p07-dice-late-join-visible-history");
+    assert_eq!(
+        p07_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        p07_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformSuccess,
+        ]
+    );
+    assert_eq!(
+        p07_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("dice_state")
+            .cloned(),
+        Some(vec![
+            "publish_roll_result@dice_state".to_string(),
+            "handoff_dice_authority@dice_state".to_string(),
+        ])
+    );
+    assert_eq!(
+        p07_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("observer_debug_text_output")
+            .cloned(),
+        Some(vec!["late_join_view: player_c sees result+owner history".to_string(),])
+    );
+
+    let p08 = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let p08_host_plan = load_host_plan_from_path(&order_handoff_prototype_sample_path(
+        "p08-dice-stale-reconnect-refresh.host-plan.json",
+    ))
+    .unwrap();
+    let p08_report = run_current_l2_source_sample(p08.to_str().unwrap(), p08_host_plan).unwrap();
+    assert_eq!(p08_report.sample_id, "p08-dice-stale-reconnect-refresh");
+    assert_eq!(
+        p08_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        p08_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformFailure,
+            EventKind::Rollback,
+            EventKind::PerformSuccess,
+        ]
+    );
+    assert_eq!(
+        p08_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("dice_state")
+            .cloned(),
+        Some(vec!["refresh_owner_snapshot@dice_state".to_string(),])
+    );
+    assert_eq!(
+        p08_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("reconnect_debug_text_output")
+            .cloned(),
+        Some(vec!["refresh_owner_snapshot: stale reconnect redirected".to_string(),])
+    );
+    assert!(
+        p08_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("dice_state")
+            .unwrap()
+            .iter()
+            .all(|record| !record.contains("apply_stale_reconnect_message"))
+    );
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_named_e16_sample() {
     let report = run_current_l2_source_sample(
         "e16-malformed-missing-chain-head-option",

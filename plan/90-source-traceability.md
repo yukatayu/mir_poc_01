@@ -2928,3 +2928,16 @@
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
   - `docs/reports/0725-typed-theorem-model-check-corrected-prototype-tranche.md`
 - 今回の要点は、typed marker (`admit` / `require` / `ensure`) を含む runtime-reaching corrected prototype `p06` を追加し、helper-local `verification_preview` / `artifact_preview` で current bridge floor を sample-visible にした点である。
+
+### 2026-04-17 order/handoff corrected prototype third tranche
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_005.md`、`samples/prototype/README.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/457-current-l2-order-handoff-corrected-prototype-third-tranche.md`
+  - `samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt`
+  - `samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.host-plan.json`
+  - `samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt`
+  - `samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.host-plan.json`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `docs/reports/0726-order-handoff-corrected-prototype-third-tranche.md`
+- 今回の要点は、late join visibility と stale reconnect refresh を current L2 corrected prototype に actualize し、order/handoff third tranche を close した点である。

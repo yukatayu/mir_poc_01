@@ -35,9 +35,11 @@
 - current L2 semantics / parser-free validation substrate / compile-ready minimal actualization
 - fixed-subset source sample authored sixteen:
   `e1 / e2 / e3 / e4 / e5 / e12 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
-- runnable prototype sample typed tranche:
-  `p01 / p02 / p03 / p04 / p05 / p06`
+- runnable prototype sample octet:
+  `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08`
   （`samples/prototype/` に置き、current lowerer / runner へ explicit path で流す）
+  - `p01...p05 / p07 / p08` は order/handoff family
+  - `p06` は typed/theorem/model-check sample-visible tranche
 - helper-local debug output preview:
   prototype / sample 実行時に `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を `debug_outputs` として見せる current cut がある
 - helper-local verification preview:
@@ -90,6 +92,8 @@
   `specs/examples/455`
 - current typed/theorem/model-check sample-visible corrected prototype tranche:
   `specs/examples/456`
+- current order/handoff corrected prototype third tranche:
+  `specs/examples/457`
 
 ## まだ OPEN のもの
 

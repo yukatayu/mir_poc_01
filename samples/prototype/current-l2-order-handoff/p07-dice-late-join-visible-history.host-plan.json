@@ -1,0 +1,111 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "request-require",
+      "op": "publish_roll_result",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "publish_roll_result",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "handoff_dice_authority",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "handoff_dice_authority",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "observe_late_join_view",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "observe_late_join_view",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "publish_roll_result",
+      "mode": "on",
+      "selected_target": "dice_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "dice_state",
+              "record": "publish_roll_result@dice_state"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_debug_text_output",
+              "record": "publish_roll_result: player_a -> visible"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "handoff_dice_authority",
+      "mode": "on",
+      "selected_target": "dice_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "dice_state",
+              "record": "handoff_dice_authority@dice_state"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_debug_text_output",
+              "record": "handoff_dice_authority: player_a -> player_b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "observe_late_join_view",
+      "mode": "on",
+      "selected_target": "dice_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "observer_debug_text_output",
+              "record": "late_join_view: player_c sees result+owner history"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}
