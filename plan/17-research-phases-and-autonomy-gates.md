@@ -32,9 +32,9 @@
 | `Macro 2` | parser-free validation substrate | late | 中 | self-driven | helper/public drift が出る |
 | `Macro 3` | compile-ready minimal actualization | late | 中 | self-driven | support-only/public-candidate split が崩れる |
 | `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed | 重 | self-driven | new sample family が core semantics を押し広げる |
-| `Macro 5` | typed / theorem / model-check bridge | active at boundary | 重 | self-driven up to boundary | concrete tool / full type calculus / production contract が必要になる |
-| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重 | mixed（boundary-prep までは self-driven） | final operational catalog / policy profile が必要になる |
-| `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | 重 | mixed（boundary-prep までは self-driven） | final public packaging / external target が必要になる |
+| `Macro 5` | typed / theorem / model-check bridge | current scoped closeout fixed | 重 | self-driven up to mixed gate | concrete tool / full type calculus / production contract が必要になる |
+| `Macro 6` | fabric / shared-space / runtime evolution | mixed-gate boundary fixed | 重 | mixed（boundaryまでは self-driven） | final operational catalog / policy profile が必要になる |
+| `Macro 7` | toolchain / backend / host-facing integration | mixed-gate boundary fixed | 重 | mixed（boundaryまでは self-driven） | final public packaging / external target が必要になる |
 | `Macro 8` | domain / application realization | application-specific target not started | とても重い | user spec required | first application target が必要になる |
 
 ## current lane split
@@ -43,11 +43,11 @@
   `Macro 0〜4 closeout fixed`
   （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
 - theory-lab lane:
-  `Macro 5 third-order follow-up active`
-  （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
+  `Macro 5 boundary / pilot / framing closeout fixed`
+  （modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は fixed 済み、remaining topics は mixed gate only）
 - reserve integration lane:
-  `Macro 6/7 reserve integration checkpoint close`
-  （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
+  `Macro 6/7 mixed-gate boundary fixed`
+  （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、remaining topics は mixed gate / user-spec-required）
 
 ## autonomy gate detail
 
@@ -62,6 +62,10 @@
 - model-check projection / property-family reserve planning、bridge grain note、small-cluster projection keep/drop refresh
 - order / handoff / syntax / modality の docs-first comparison と follow-up bridge note
 - order / handoff source-surface wording reserve note
+- modality internalization trigger note
+- stronger typed-surface promotion threshold framing note
+- theorem discharge transport / public-contract later-gate framing note
+- model-check property-language / tool-binding later-gate framing note
 - verifier-boundary matrix と adequacy corpus の docs-first hardening
 
 ### boundary までは self-driven でよい line
@@ -127,7 +131,7 @@
 - source-visible typed-surface comparison、theorem lemma wording hardening、model-check bridge grain note は docs-first に閉じられる段階にある。
 - checker attachment migration、proof artifact stop-line refresh、sample-visible property summary wording も docs-first に閉じられる段階にある。
 - request/predicate/try typed-surface reserve、admissible evidence contraction、tool-binding stop-line refresh は docs-first に fixed 済みであり、current third-order lane の直前 checkpoint を成している。
-- typed-surface family split、notebook-consumer threshold / discharge reserve、model-check small-cluster projection keep/drop、order/handoff source-surface wording reserve は docs-first に fixed 済みであり、current lane は third-order follow-up active に入っている。
+- typed-surface family split、notebook-consumer threshold / discharge reserve、model-check small-cluster projection keep/drop、order/handoff source-surface wording reserve、modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は docs-first に fixed 済みであり、current lane は current scoped closeout fixed に入っている。
 - ordering / `memory_order` reinterpretation も「未着手で何も言えない」段階ではなく、theory-first inventory と handoff boundary を整理できる段階にある。
 - order / handoff line も、falsifier loop、candidate reduction、property-language bridge、modal promotion threshold まで進められる段階にある。
 - order / handoff emitted-artifact schema reserve と guarded-vs-MDTT/MTT reduction timing は docs-first に fixed 済みであり、current third-order lane の直前 checkpoint を成している。

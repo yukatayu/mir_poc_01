@@ -40,8 +40,8 @@
   typed / theorem / model-check / order / memory / syntax / modality を
   docs-first comparison と boundary planning で進める
 - current line:
-  `Macro 5 third-order follow-up active`
-  （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
+  `Macro 5 boundary / pilot / framing closeout fixed`
+  （modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は fixed 済み、remaining topics は mixed gate only）
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定する
 
@@ -50,9 +50,9 @@
 - 主眼:
   thin facade / public shell / shared-space / host-I/O boundary を hidden promotion なしで整理する
 - current line:
-  `Macro 6/7 reserve integration checkpoint close`
+  `Macro 6/7 mixed-gate boundary fixed`
 - goal:
-  support-only / shell / excluded bucket を混ぜずに保ちつつ、next reopen を later mixed gate に留める
+  support-only / shell / excluded bucket を混ぜずに保ちつつ、remaining topics を mixed gate に留める
 
 ## macro roadmap
 
@@ -67,16 +67,16 @@
 | `Macro 2` | parser-free validation substrate | late | detached loop / fixture corpus / compare helper の drift suppression |
 | `Macro 3` | compile-ready minimal actualization | late | support-only / public-candidate split の安定化 |
 | `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed | widened row を current ladder に安全に追加できる |
-| `Macro 5` | typed / theorem / model-check bridge | active at boundary | first planning cut と stop line が package 単位で固定される |
-| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | room-profile / confusion-replay / authority-family の compact note が固定される |
-| `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | shell actual package と bridge-only host note の境界が固定される |
+| `Macro 5` | typed / theorem / model-check bridge | current scoped closeout fixed | boundary / pilot / framing closeout が fixed される |
+| `Macro 6` | fabric / shared-space / runtime evolution | mixed-gate boundary fixed | fairness / replay operational profile を mixed gate へ正しく送れる |
+| `Macro 7` | toolchain / backend / host-facing integration | mixed-gate boundary fixed | installed-binary / packaging success criteria を mixed gate へ正しく送れる |
 | `Macro 8` | domain / application realization | application-specific target not started | first target profile が user と合意される |
 
 ## current recommendation
 
 - Lane A は narrow actualization を維持する。
 - Lane B は mainline の「ついで」ではなく、separable な research program として前進させる。
-- Lane C は thin facade と shell concern の boundary hardening に留める。
+- Lane C は thin facade と shell concern の boundary hardening、および mixed-gate boundary の明確化に留める。
 - old `Phase 7 = FutureWork` の巨大 bucket は再導入しない。
 
 ## まだ急がないもの

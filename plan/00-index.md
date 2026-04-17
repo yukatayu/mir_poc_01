@@ -51,10 +51,10 @@
 - 近接運用は 3 lane で読むのが自然である。
   - execution lane: `Macro 0〜4 closeout fixed`
     （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
-  - theory-lab lane: `Macro 5 third-order follow-up active`
-    （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
-  - reserve integration lane: `Macro 6/7 reserve integration checkpoint close`
-    （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
+  - theory-lab lane: `Macro 5 boundary / pilot / framing closeout fixed`
+    （modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は fixed 済み、remaining topics は mixed gate only）
+  - reserve integration lane: `Macro 6/7 mixed-gate boundary fixed`
+    （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、remaining topics は mixed gate / user-spec-required）
 - 型 / 定理証明 / モデル検査 / ordering は mainline に無理に混ぜず、detail-side research program として扱う。
 - shared-space と host-facing I/O は docs-first boundary までは自走可能だが、final operational catalog や concrete target binding は later / mixed gate に残す。
 

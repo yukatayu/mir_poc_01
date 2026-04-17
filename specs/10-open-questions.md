@@ -178,8 +178,8 @@
 35. modal foundation の最終候補をどこへ置くか。
    - `lambda-circle-box` / `next` + `always` line は、stage / later / always と time-ordered normalization の partial basis として有望である。
    - docs-first follow-up により、guarded lambda-calculus と MDTT/MTT cluster を stronger candidate family として並行比較し、`lambda-circle-box` を partial basis に留める current line までは固まった。
-   - modal promotion-threshold note により、promotion pressure は multi-axis internalization pressure が現れた時点に置く current line まで固まった。
-   - 未決なのは、guarded line と MDTT/MTT line をどの時点でさらに reduction するか、また final foundation adoption をどの threshold で判断するかである。
+   - modal promotion-threshold note と modality internalization trigger note により、promotion pressure と internalization trigger までは current docs に昇格済みである。
+   - 未決なのは、guarded line と MDTT/MTT line をどの時点でさらに reduction するか、また final foundation adoption をどの mixed gate で判断するかである。
 36. order / handoff line の property-to-boundary matrix をどこまで current docs に昇格させるか。
    - source-backed な floor として、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split は fixed 済みである。
    - adequacy corpus と property-to-boundary matrix 自体は current docs に昇格済みであり、negative falsifier coverage も first hardening まで進んだ。
@@ -194,7 +194,8 @@
    - docs-first migration note により、principal source を checker attachment に残し、source-visible marker を mirror、handoff row を derived reserve row に留める current cut までは固まった。
    - request / predicate / `try` cluster typed-surface reserve note により、request / predicate / `try` cluster を grouped reserve cue に留める current cut までは固まった。
    - typed-surface family unification keep/drop note により、current two-tier split（principal checker attachment / source-visible structural marker family / reserve cluster family）までは固まった。
-   - 未決なのは、`family_refs[]` の exact namespace をどうするか、shared attachment shape と stronger typed surface promotion をどの threshold で reopen するかである。
+   - stronger typed-surface promotion threshold framing note により、reopen threshold と non-goal までは current docs に昇格済みである。
+   - 未決なのは、`family_refs[]` の exact namespace をどうするか、shared attachment shape と stronger typed surface promotion をどの mixed gate で actual adoption 判定へ送るかである。
 39. semantic-core theorem pilot の first lemma order / evidence floor / review-discharge stop line をどこまで固定するか。
    - source-backed な floor として、current first theorem pilot line は `canonical_normalization_law`、`no_re_promotion`、`rollback_cut_non_interference` の順で読むのが自然である。
    - また current first concrete consumer は notebook-first line に置き、tool-neutral formal hook と row-local review unit を entry に保つ。
@@ -202,6 +203,7 @@
    - proof artifact / bridge stop-line refresh により、formal hook / review unit / bridge sketch / theorem discharge を collapse しない current cut と、human review checklist / walkthrough pressure first の threshold までは固まった。
    - admissible evidence contraction note により、admissible theorem evidence を symbolic refs only に contraction する current cut までは固まった。
    - notebook-consumer threshold and discharge reserve note により、abstract discharge-entry row を first threshold に置く current cut までは固まった。
+   - theorem discharge transport / public-contract later-gate framing note により、transport seam と public-contract seam を coupled だが distinct な later gate として扱う current line までは固まった。
    - 未決なのは、concrete theorem prover brand、proof object public contract、actual discharge transport、public checker migration timingである。
 40. model-check projection grain と first property-family reserve をどこまで current docs に上げるか。
    - source-backed な floor として、current line は `formal_hook -> row-local machine-facing carrier -> emitted artifact wiring -> sample-facing summary` までである。
@@ -210,6 +212,7 @@
    - sample-visible property summary wording により、sample-facing summary が何を言ってよく、何を order/handoff reserve 側へ残すかの current cut までは固まった。
    - tool-binding stop-line refresh により、explicit non-goal を current cut にし、concrete tool binding を still later に残す line までは固まった。
    - model-check small-cluster projection keep/drop refresh により、same-subject stage-local small cluster を keep line に置き、typed reserve / theorem discharge / room protocol family を drop する current cut までは固まった。
+   - model-check property-language / tool-binding later-gate framing note により、property-language seam と tool seam を adjacent later gate として扱う current line までは固まった。
    - 未決なのは、concrete model-check tool binding、first settled property language、production checker/runtime-policy contract である。
 41. order / handoff line の falsifier coverage をどこまで hardening するか。
    - source-backed な floor として、cut family comparison、relation decomposition、adequacy corpus、property-to-boundary matrix は already ある。
@@ -218,3 +221,11 @@
    - emitted-artifact schema reserve note により、refs-only reserve schema を first cut にし、consumer-shaped schema と source-surface-first schema を still later に残す line までは固まった。
    - order/handoff source-surface wording reserve note により、snake_case relation family 名を principal wording に保ち、plain-language stage wording を explanation layer に重ね、low-level fence-like wording と room macro wording を still later に残す current cut までは固まった。
    - 未決なのは、final property language、final source-surface handoff wording、final emitted artifact schema、concrete theorem / protocol tool binding とどう接続するかである。
+42. shared-space fairness / replay line をどこで mixed gate と読むか。
+   - source-backed な floor として、identity / admission / authority / room-profile-host bridge までは docs-first に進んでいる。
+   - fairness / replay strengthening reserve note と mixed-gate boundary note により、provider placement、witness requirement、fairness source / trust model、replay attachment を別軸に保ったまま、final operational profile は mixed gate に送る current line は fixed 済みである。
+   - 未決なのは、final fairness policy、final replay invalidation protocol、final room-profile catalog、concrete authority binding / provider protocol である。
+43. public operational CLI installed-binary promotion と packaging success criteria をどこで mixed gate と読むか。
+   - source-backed な floor として、runtime-led thin facade、current-L2 scoped Rust shell actualization、public operational CLI concrete shell naming / actualization は fixed 済みである。
+   - installed-binary / packaging success-criteria mixed-gate boundary note により、current shell actualization と installed-binary promotion を分ける current line は fixed 済みである。
+   - 未決なのは、installed binary adoption、final CLI hierarchy、backend / tooling success criteria、final public parser / checker / runtime packaging success criteriaである。

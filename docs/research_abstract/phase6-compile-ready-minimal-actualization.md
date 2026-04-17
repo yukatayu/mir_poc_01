@@ -44,6 +44,8 @@ Phase 6 は、Phase 1〜5 で fixed した semantics / parser-free PoC / proof b
   `specs/examples/439...442`
 - execution closeout actualization:
   `specs/examples/443`
+- Macro 5 closeout / mixed-gate boundary follow-up:
+  `specs/examples/444...450`
 
 current authored source sample は
 `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
@@ -69,19 +71,22 @@ current authored source sample は
 
 ### theory-lab adjacent lane
 
-- third-order follow-up active:
+- boundary / pilot / framing closeout fixed:
   request/predicate/try cluster typed-surface reserve note / admissible evidence contraction note / tool-binding stop-line refresh /
   order/handoff emitted-artifact schema reserve note / guarded-vs-MDTT/MTT reduction timing note /
   typed-surface family split / notebook-consumer threshold /
-  model-check small-cluster projection keep/drop / order-handoff source-surface wording reserve
+  model-check small-cluster projection keep/drop / order-handoff source-surface wording reserve /
+  modality internalization trigger / stronger typed-surface threshold framing /
+  theorem discharge transport-public-contract later-gate framing /
+  model-check property-language-tool-binding later-gate framing
 - goal:
-  sample-visible first milestone の次段 reserve を docs-first に固定したうえで、model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve まで進め、next reopen を modality internalization trigger note に送る
+  sample-visible first milestone の次段 reserve を docs-first に固定したうえで、boundary / pilot / framing closeout を current scoped fixed 読みに揃え、remaining topics を mixed gate に送る
 
 ### reserve integration lane
 
-- `Macro 6/7 reserve integration checkpoint close`
+- `Macro 6/7 mixed-gate boundary fixed`
 - goal:
-  thin facade、support-only surface、CLI shell concern、shared-space fairness / replay reserve line を hidden promotion なしで保ったまま、next reopen を later mixed gate に留める
+  thin facade、support-only surface、CLI shell concern、shared-space fairness / replay line を hidden promotion なしで保ったまま、remaining topics を mixed gate に留める
 
 ## current status の短い要約
 
@@ -98,7 +103,7 @@ current authored source sample は
   - modal comparison follow-up
   まで docs-first に固まった。
 - docs-first host-I/O boundary と shared-space identity / admission / authority boundary も fixed 済みである。
-- current-L2 scoped Rust shell over thin facade、shared-space room-profile / host-binding bridge-only note、public operational CLI packaging reserve note、shared-space fairness / replay strengthening reserve note も fixed 済みであり、reserve integration line は checkpoint close に入っている。
+- current-L2 scoped Rust shell over thin facade、shared-space room-profile / host-binding bridge-only note、public operational CLI installed-binary / packaging success-criteria mixed-gate boundary、shared-space fairness / replay mixed-gate boundary も fixed 済みであり、reserve integration line は mixed-gate boundary fixed に入っている。
 - duplicate-cluster line は current では pair-first actualization を close 済みとし、broader malformed-static family は kept-later inventory に残す。
 - final parser grammar、final public API、concrete theorem / model-check tool binding、backend / external codegen は still later に残る。
 

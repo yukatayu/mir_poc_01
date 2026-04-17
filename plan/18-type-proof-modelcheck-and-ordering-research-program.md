@@ -160,9 +160,9 @@ full strong type system や production tool binding を immediate target にし�
 ### next package order
 
 1. no promoted immediate near-term package
-   - stronger typed surface promotion の実昇格は later threshold に残す
-2. boundary-prep reserve package は self-driven に進めてよい
-   - stronger typed-surface promotion threshold framing note
+   - stronger typed-surface promotion threshold framing note は fixed 済み
+2. next topic は mixed gate
+   - stronger typed surface promotion の実昇格は mixed gate に残す
 
 ### stop line
 
@@ -207,9 +207,9 @@ full strong type system や production tool binding を immediate target にし�
 ### next package order
 
 1. no promoted immediate near-term package
-   - theorem discharge transport / public-contract の実昇格は later reserve に残す
-2. boundary-prep reserve package は self-driven に進めてよい
-   - theorem discharge transport / public-contract later-gate framing note
+   - theorem discharge transport / public-contract later-gate framing note は fixed 済み
+2. next topic は mixed gate
+   - theorem discharge transport / public-contract の実昇格は mixed gate に残す
 
 ### stop line
 
@@ -258,9 +258,9 @@ full strong type system や production tool binding を immediate target にし�
 ### next package order
 
 1. no promoted immediate near-term package
-   - first settled property language / concrete tool seam の実昇格は later gate に残す
-2. boundary-prep reserve package は self-driven に進めてよい
-   - model-check property-language / tool-binding later-gate framing note
+   - model-check property-language / tool-binding later-gate framing note は fixed 済み
+2. next topic は mixed gate
+   - first settled property language / concrete tool seam の実昇格は mixed gate に残す
 
 ### stop line
 
@@ -419,6 +419,8 @@ refs-only reserve schema を first cut とし、consumer-shaped schema と sourc
 4. stop-line and promotion-threshold note
 5. guarded-vs-MDTT/MTT reduction timing note
 6. modality internalization trigger note
+7. no promoted immediate near-term package
+   - final adoption は mixed gate に残す
 
 ### stop line
 
@@ -428,12 +430,14 @@ refs-only reserve schema を first cut とし、consumer-shaped schema と sourc
 
 ## current near-term theory-lab sequence
 
-1. modality internalization trigger note
-2. stronger typed-surface promotion threshold framing note
-3. theorem discharge transport / public-contract later-gate framing note
-4. model-check property-language / tool-binding later-gate framing note
+1. current promoted self-driven theory-lab package は空
+2. remaining theory-lab topics は mixed gate
+   - stronger typed surface promotion
+   - theorem discharge transport / public-contract concretization
+   - model-check property-language / tool-binding concretization
 
 ## current recommendation
 
-- theory-lab line は execution lane の「あとで」ではなく、今進めてよい adjacent program として扱う。
+- theory-lab line は execution lane の「あとで」ではなく、adjacent program として扱う。
+- current snapshot では self-driven boundary / pilot / framing package は尽きており、remaining topics は mixed gate として扱う。
 - ただし accepted candidate を current executable / public surface へ直結させない。

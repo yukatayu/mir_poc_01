@@ -1135,6 +1135,20 @@
   - order/handoff line を snake_case relation family と plain-language stage wording の二層でどう説明するかを整理する補助文書。
 - `specs/examples/443-current-l2-malformed-duplicate-cluster-source-authored-static-stop-pair-actualization.md`
   - duplicate cluster `e14/e15` を source-authored static-stop pair として narrow actualize し、execution lane の current fixed-subset widening closeout をどこで閉じるかを整理する補助文書。
+- `specs/examples/444-current-l2-modality-internalization-trigger-note.md`
+  - stronger modal foundation candidate を principal boundary package へいつ internalize してよいかの trigger だけを docs-first に整理する補助文書。
+- `specs/examples/445-current-l2-stronger-typed-surface-promotion-threshold-framing-note.md`
+  - stronger typed surface を reopen してよい threshold と non-goal を docs-first に整理する補助文書。
+- `specs/examples/446-current-l2-theorem-discharge-transport-and-public-contract-later-gate-framing-note.md`
+  - theorem discharge transport seam と public-contract seam を coupled だが distinct な later gate として整理する補助文書。
+- `specs/examples/447-current-l2-model-check-property-language-and-tool-binding-later-gate-framing-note.md`
+  - model-check の first settled property language と concrete tool seam を adjacent later gate として整理する補助文書。
+- `specs/examples/448-current-l2-shared-space-fairness-and-replay-mixed-gate-boundary-note.md`
+  - shared-space fairness / replay line を final operational profile へ hidden promotion せず mixed-gate boundary に留める補助文書。
+- `specs/examples/449-current-l2-public-operational-cli-installed-binary-and-packaging-success-criteria-mixed-gate-boundary-note.md`
+  - current shell actualization と installed-binary / packaging success criteria を mixed-gate boundary で分ける補助文書。
+- `specs/examples/450-current-l2-macro5-boundary-pilot-and-framing-closeout-threshold.md`
+  - current scoped 読みで Macro 5 を boundary / pilot / framing closeout fixed とみなしてよい threshold を整理する補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-17 09:04 JST
+最終更新: 2026-04-17 09:34 JST
 
 ## この文書について
 
@@ -15,13 +15,14 @@
   `Macro 0〜4 closeout fixed`
   （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
 - theory-lab lane:
-  `Macro 5 third-order follow-up active`
-  （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
+  `Macro 5 boundary / pilot / framing closeout fixed`
+  （modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は fixed 済み、next work は mixed gate only）
 - reserve integration lane:
-  `Macro 6/7 reserve integration checkpoint close`
-  （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
+  `Macro 6/7 mixed-gate boundary fixed`
+  （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、next work は mixed gate / user-spec-required）
+- current self-driven queue: `0 package`
 - immediate blocker: `0`
-- current lane を止める user decision: `0`
+- next gate: `mixed gate / user specification`
 
 ## 自走して closeout まで持って行ける macro phase 読み
 
@@ -36,54 +37,41 @@
 | `Macro 2` | はい | current parser-free substrate closeout まで |
 | `Macro 3` | はい | compile-ready minimal current tranche closeout まで |
 | `Macro 4` | はい | current fixed-subset widening closeout まで |
-| `Macro 5` | はい | current boundary / pilot / framing closeout まで |
-| `Macro 6` | いいえ | docs-first boundary / fairness-replay seam までは self-driven、full closeout は mixed gate |
-| `Macro 7` | いいえ | thin facade / packaging boundary-prep までは self-driven、full closeout は mixed gate |
+| `Macro 5` | はい | current boundary / pilot / framing closeout は fixed 済み |
+| `Macro 6` | いいえ | docs-first boundary / mixed-gate boundary までは self-driven、full closeout は mixed gate |
+| `Macro 7` | いいえ | thin facade / shell / mixed-gate boundary までは self-driven、full closeout は mixed gate |
 | `Macro 8` | いいえ | user specification 必須 |
 
-## 自走可能な task package
+## current self-driven package reading
 
-### promoted immediate line
-
-| 順番 | lane | macro | task package | completion signal | rough estimate |
-|---|---|---|---|---|---|
-| 1 | theory-lab | `Macro 5/6` | modality internalization trigger note | stronger-foundation trigger が current stop line と整合して揃う | 1〜2 task |
-
-### boundary-prep まで自走可能な reserve queue
-
-| 順番 | lane | macro | task package | completion signal | rough estimate |
-|---|---|---|---|---|---|
-| 2 | theory-lab | `Macro 5/6 reserve` | stronger typed-surface promotion threshold framing note | stronger typed surface を current stop line から越えずに reopen する条件と non-goal が揃う | 1 task |
-| 3 | theory-lab | `Macro 5/6 reserve` | theorem discharge transport / public-contract later-gate framing note | abstract discharge-entry reserve の先にある transport / public contract の later seam が揃う | 1 task |
-| 4 | theory-lab | `Macro 5/6 reserve` | model-check property-language / tool-binding later-gate framing note | first settled property language と concrete tool seam の stop line が揃う | 1 task |
-| 5 | reserve integration | `Macro 6 reserve` | shared-space fairness / replay mixed-gate boundary note | final operational catalog へ送る前の fairness / replay boundary と user-spec-required seam が揃う | 1 task |
-| 6 | reserve integration | `Macro 7 reserve` | public operational CLI installed-binary / packaging success-criteria mixed-gate boundary note | installed-binary promotion と packaging success criteria の mixed gate が揃う | 1 task |
-
-## 研究で詰める論点
-
-- modality internalization trigger
-  - detail / options / current recommendation は `plan/18` Track F を参照。
-- stronger typed-surface promotion threshold framing
-  - detail / options / current recommendation は `plan/18` Track A と `plan/12` を参照。
-- theorem discharge transport / public-contract framing
-  - detail / options / current recommendation は `plan/18` Track B と `plan/12` を参照。
-- model-check property-language / tool-binding framing
-  - detail / options / current recommendation は `plan/18` Track C と `plan/12` を参照。
-- shared-space fairness / replay mixed-gate boundary
-  - detail / options / current recommendation は `plan/16` と `plan/12` を参照。
-- public operational CLI installed-binary / packaging success-criteria boundary
-  - detail / options / current recommendation は `plan/09` と `plan/12` を参照。
+- current snapshot では、**promoted self-driven package は残っていない**。
+- `Macro 0〜5` の current scoped self-driven closeout は fixed と読む。
+- 次に残るのは、mixed gate topic の concretization / adoption / packaging / final catalog 側であり、current `tasks.md` では self-driven package としては数えない。
 
 ## mixed gate / later reserve
 
-- 上の 2〜6 は boundary-prep までは self-driven に進めてよい。
-- ただし、その先の
-  - stronger typed surface の実昇格
-  - theorem public contract の具体化
-  - model-check concrete tool binding / property language の確定
-  - shared-space fairness / replay operational profile の最終化
-  - installed-binary promotion / packaging success criteria の確定
-  は mixed gate のままに保つ。
+| topic | lane | macro | current reading | next gate |
+|---|---|---|---|---|
+| stronger typed surface promotion | theory-lab | `Macro 5/6` | threshold framing は fixed | mixed gate |
+| theorem discharge transport / public-contract concretization | theory-lab | `Macro 5/6` | later-gate framing は fixed | mixed gate |
+| model-check property-language / tool-binding concretization | theory-lab | `Macro 5/6` | later-gate framing は fixed | mixed gate |
+| shared-space final fairness / replay operational profile | reserve integration | `Macro 6` | mixed-gate boundary は fixed | mixed gate / user spec |
+| public operational CLI installed-binary promotion / packaging success criteria | reserve integration | `Macro 7` | mixed-gate boundary は fixed | mixed gate / user spec |
+
+## 研究で詰める論点
+
+- stronger typed surface を actual adoption する threshold と non-goal
+  - detail / options / current recommendation は `plan/18` Track A と `plan/12` を参照。
+- theorem discharge transport / public-contract concretization の gate
+  - detail / options / current recommendation は `plan/18` Track B と `plan/12` を参照。
+- model-check property-language / tool-binding concretization の gate
+  - detail / options / current recommendation は `plan/18` Track C と `plan/12` を参照。
+- modal foundation adoption の mixed-gate threshold
+  - detail / options / current recommendation は `plan/18` Track F と `plan/12` を参照。
+- shared-space fairness / replay final profile
+  - detail / options / current recommendation は `plan/16` と `plan/12` を参照。
+- public operational CLI installed-binary / packaging success criteria
+  - detail / options / current recommendation は `plan/09` と `plan/12` を参照。
 
 ## user が後で決めること
 

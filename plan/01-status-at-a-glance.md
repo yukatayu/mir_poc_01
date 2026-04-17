@@ -14,11 +14,11 @@
     `Macro 0〜4 closeout fixed`
     （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
   - theory-lab lane:
-    `Macro 5 third-order follow-up active`
-    （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
+    `Macro 5 boundary / pilot / framing closeout fixed`
+    （modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は fixed 済み、remaining topics は mixed gate only）
   - reserve integration lane:
-    `Macro 6/7 reserve integration checkpoint close`
-    （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
+    `Macro 6/7 mixed-gate boundary fixed`
+    （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、remaining topics は mixed gate / user-spec-required）
 - immediate blocker は `0`、current lane を止める user decision も `0` と読む。
 - current authored source sample は `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23` の fourteen である。
 
@@ -35,9 +35,9 @@
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
 | `Macro 4` executable fixed-subset expansion | current scoped closeout fixed | self-driven |
-| `Macro 5` typed / theorem / model-check bridge | third-order follow-up active | self-driven up to boundary |
-| `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed（boundary-prep までは self-driven） |
-| `Macro 7` toolchain / backend / host-facing integration | thin facade plus reserve shell | mixed（boundary-prep までは self-driven） |
+| `Macro 5` typed / theorem / model-check bridge | current scoped closeout fixed | self-driven up to mixed gate |
+| `Macro 6` fabric / shared-space / runtime evolution | mixed-gate boundary fixed | mixed（boundaryまで self-driven） |
+| `Macro 7` toolchain / backend / host-facing integration | mixed-gate boundary fixed | mixed（boundaryまで self-driven） |
 | `Macro 8` domain / application realization | application-specific target not started | user spec required |
 
 ## current capability snapshot
@@ -68,16 +68,20 @@
   - tool-binding stop-line refresh
   - order/handoff emitted-artifact schema reserve
   - guarded-vs-MDTT/MTT reduction timing
+  - modality internalization trigger
+  - stronger typed-surface threshold framing
+  - theorem discharge transport / public-contract later-gate framing
+  - model-check property-language / tool-binding later-gate framing
   まで docs-first に固まった。
 - shared-space は identity / admission / authority まで docs-first boundary があり、final operational catalog は later gate に残る。
 - host-facing integration は privileged `stdin/stdout` ではなく、capability-scoped I/O / adapter boundary の docs-first cut に留める。
 - public operational CLI concrete shell actualization は、current-L2 scoped Rust shell helper + example wrapper over thin facade まで actualize 済みである。
-- shared-space room-profile / host binding bridge-only note と fairness / replay strengthening reserve note も fixed 済みであり、shared-space adjacent boundary line は final operational catalog / fairness operational profile later gate を残す。
+- shared-space room-profile / host binding bridge-only note と fairness / replay mixed-gate boundary note も fixed 済みであり、shared-space adjacent boundary line は final operational catalog / fairness operational profile mixed gate を残す。
 
 ## current recommendation
 
-- reserve integration lane では public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note が fixed 済みであり、next reopen は later mixed gate に残る。
-- theory-lab lane は third-order follow-up active を mainline と混ぜずに進める。
+- reserve integration lane では public operational CLI installed-binary / packaging success-criteria mixed-gate boundary と shared-space fairness / replay mixed-gate boundaryが fixed 済みであり、remaining topics は mixed gate に残る。
+- theory-lab lane は boundary / pilot / framing closeout fixed を current snapshot とし、remaining topics を mixed gate に残す。
 - execution lane は current scoped closeout fixed であり、broader try-rollback malformed-static family は kept-later inventory に残す。
 
 ## biggest later gates
