@@ -10,7 +10,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ## current reading
 
 - current execution line は `Macro 0〜4 closeout fixed` であり、broader try-rollback malformed-static family は kept-later inventory に残る。
-- corrected runnable prototype sample second tranche と exact rough-stimulus preservation bucket も fixed 済みであり、current authored sixteen inventory とは分けて読む。
+- corrected runnable prototype sample typed tranche と exact rough-stimulus preservation bucket も fixed 済みであり、current authored sixteen inventory とは分けて読む。
 - current theory-lab line は `Macro 5 boundary / pilot / framing closeout fixed` であり、remaining topics は mixed gate に残る。
 - current reserve integration line は `Macro 6/7 mixed-gate boundary fixed` であり、remaining topics は mixed gate / user-spec-required に残る。
 - mainline を急ぐ task と theory-lab package は混ぜず、同じ snapshot から parallel に進める。
@@ -20,9 +20,9 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ### current promoted self-driven packages
 
 - corrected sample-driven comparison corridor はまだ残っている。
-- current promoted self-driven package は次の 2 本で読む。
-  1. typed/theorem/model-check sample-visible corrected prototype tranche
-  2. order/handoff corrected prototype third tranche
+- typed/theorem/model-check sample-visible corrected prototype tranche は current cut を close 済みである。
+- current promoted self-driven package は次の 1 本で読む。
+  1. order/handoff corrected prototype third tranche
 
 ### mixed-gate follow-on topics
 
@@ -38,8 +38,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 
 ### Batch A. sample-driven corrected prototype follow-up
 
-1. typed/theorem/model-check sample-visible corrected prototype tranche
-2. order/handoff corrected prototype third tranche
+1. order/handoff corrected prototype third tranche
 
 ### Batch B. mixed-gate theory-lab follow-on
 
@@ -60,7 +59,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 
 ## current recommendation
 
-- current self-driven queue は `2 package` である。
+- current self-driven queue は `1 package` である。
 - 近接 priority は、corrected prototype と sample-visible comparison を先に進め、mixed-gate follow-on を premature に promote しないことである。
 - sample-driven comparison は `samples/prototype/` と `samples/not_implemented/` の bucket を使って継続してよく、current authored sixteen inventory には source-backed static/runtime floor が already ある family だけを昇格する。
 - sample-driven comparison では helper-local `debug_outputs` preview を使ってよいが、final stdio / final host-I/O / final transcript schema と混同しない。

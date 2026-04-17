@@ -13,9 +13,15 @@ fn host_plan_path(name: &str) -> PathBuf {
     fixture_path(name).with_extension("host-plan.json")
 }
 
-fn prototype_sample_path(name: &str) -> PathBuf {
+fn order_handoff_prototype_sample_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("../../samples/prototype/current-l2-order-handoff")
+        .join(name)
+}
+
+fn typed_prototype_sample_path(name: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/prototype/current-l2-typed-proof-model-check")
         .join(name)
 }
 
@@ -165,7 +171,7 @@ fn operational_cli_rejects_unknown_format() {
 fn operational_cli_uses_adjacent_host_plan_for_prototype_sample_when_omitted() {
     let output = run_current_l2_operational_cli([
         "run-source-sample",
-        prototype_sample_path("p01-dice-publication-handoff.txt")
+        order_handoff_prototype_sample_path("p01-dice-publication-handoff.txt")
             .to_str()
             .unwrap(),
         "--format",
@@ -191,7 +197,7 @@ fn operational_cli_uses_adjacent_host_plan_for_prototype_sample_when_omitted() {
 fn operational_cli_json_reports_static_verification_preview_for_prototype_sample() {
     let output = run_current_l2_operational_cli([
         "run-source-sample",
-        prototype_sample_path("p04-dice-owner-duplicate-declaration.txt")
+        order_handoff_prototype_sample_path("p04-dice-owner-duplicate-declaration.txt")
             .to_str()
             .unwrap(),
         "--format",
@@ -235,7 +241,7 @@ fn operational_cli_json_reports_static_verification_preview_for_prototype_sample
 fn operational_cli_json_reports_guarded_verification_preview_for_prototype_sample() {
     let output = run_current_l2_operational_cli([
         "run-source-sample",
-        prototype_sample_path("p05-dice-owner-guarded-chain.txt")
+        order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt")
             .to_str()
             .unwrap(),
         "--format",
@@ -266,5 +272,67 @@ fn operational_cli_json_reports_guarded_verification_preview_for_prototype_sampl
     assert_eq!(
         value["artifact_preview"]["model_check_concrete_carriers"],
         Value::Array(Vec::new())
+    );
+}
+
+#[test]
+fn operational_cli_pretty_reports_typed_bridge_prototype_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("sample: p06-typed-proof-owner-handoff"));
+    assert!(output.contains("terminal_outcome: success"));
+    assert!(output.contains("debug_outputs:"));
+    assert!(output.contains("proof_debug_text_output:"));
+    assert!(output.contains("publish_roll_result: current_owner -> visible"));
+    assert!(output.contains("verification_preview:"));
+    assert!(output.contains("subject_kind: runtime_try_cut_cluster"));
+    assert!(output.contains("artifact_preview:"));
+    assert!(output.contains("proof_notebook_review_units:"));
+    assert!(output.contains("model_check_concrete_carriers:"));
+}
+
+#[test]
+fn operational_cli_json_pins_typed_bridge_prototype_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(value["sample"], "p06-typed-proof-owner-handoff");
+    assert_eq!(value["checker_floor"]["static_gate"]["verdict"], "valid");
+    assert_eq!(value["runtime"]["terminal_outcome"], "success");
+    assert_eq!(
+        value["verification_preview"]["formal_hook_status"],
+        "reached"
+    );
+    assert_eq!(
+        value["verification_preview"]["subject_kind"],
+        "runtime_try_cut_cluster"
+    );
+    assert_eq!(
+        value["verification_preview"]["proof_notebook_review_unit_obligations"][0],
+        "rollback_cut_non_interference"
+    );
+    assert_eq!(
+        value["artifact_preview"]["proof_notebook_review_units"][0]["obligation_kind"],
+        "rollback_cut_non_interference"
+    );
+    assert_eq!(
+        value["artifact_preview"]["model_check_concrete_carriers"][0]["obligation_kind"],
+        "rollback_cut_non_interference"
     );
 }

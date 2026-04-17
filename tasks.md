@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-17 13:58 JST
+最終更新: 2026-04-17 14:19 JST
 
 ## この文書について
 
@@ -22,8 +22,8 @@
   （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、next work は mixed gate / user-spec-required）
 - sample bucket policy:
   `current-l2 / prototype / not_implemented / debug-output preview / verification-preview / artifact-preview fixed`
-  （current authored sixteen と runnable prototype quintet は分離し、exact rough stimulus は preservation bucket に残し、helper-local debug preview / verification preview / artifact preview は final host-I/O や final public verifier / artifact contract と混同しない）
-- current self-driven queue: `2 package`
+  （current authored sixteen と runnable prototype sextet は分離し、exact rough stimulus は preservation bucket に残し、helper-local debug preview / verification preview / artifact preview は final host-I/O や final public verifier / artifact contract と混同しない）
+- current self-driven queue: `1 package`
 - immediate blocker: `0`
 - next gate: `mixed gate / user specification`
 
@@ -47,10 +47,10 @@
 
 ## current self-driven package reading
 
-- `Macro 0〜5` の current scoped closeout は fixed だが、sample-driven corrected prototype corridor はまだ self-driven package を持つ。
-- current promoted self-driven package は次の 2 本で読む。
-  1. typed/theorem/model-check sample-visible corrected prototype tranche
-  2. order/handoff corrected prototype third tranche
+- `Macro 0〜5` の current scoped closeout は fixed だが、sample-driven corrected prototype corridor はまだ self-driven package を 1 本持つ。
+- typed/theorem/model-check sample-visible corrected prototype tranche は `p06-typed-proof-owner-handoff` までで current cut を close 済みである。
+- current promoted self-driven package は次の 1 本で読む。
+  1. order/handoff corrected prototype third tranche
 - underdeclared source omission family は `e5` / `e12` として `samples/current-l2/` authored corpus に actualize 済みである。
 - mixed gate topic の concretization / adoption / packaging / final catalog は引き続き separate gate に残す。
 

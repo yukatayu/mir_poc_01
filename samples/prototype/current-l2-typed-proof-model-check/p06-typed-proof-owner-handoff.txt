@@ -1,0 +1,22 @@
+# option admit と request contract を合わせ、typed marker つき handoff が runtime cluster / verifier preview に届くことを見る current L2 prototype。
+place root {
+  place room {
+    place proof_authority {
+      option current_owner on proof_state capability write lease live admit owner_is(player_a)
+      option delegated_owner on proof_state capability write lease live admit delegate_granted(player_a)
+
+      chain proof_owner_ref = current_owner
+      fallback delegated_owner @ lineage(current_owner -> delegated_owner)
+
+      perform publish_roll_result via proof_owner_ref
+        require write
+        ensure result_is_visible(room_members)
+
+      atomic_cut
+
+      perform handoff_proof_owner via proof_owner_ref
+        require write
+        ensure owner_is(player_b)
+    }
+  }
+}

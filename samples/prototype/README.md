@@ -15,6 +15,8 @@
 
 - `current-l2-order-handoff/`
   - `atomic_cut` / publication / handoff / room-local serial transition / static-stop / guarded chain の corrected prototype
+- `current-l2-typed-proof-model-check/`
+  - `admit` / `require` / `ensure` を持つ typed marker family が helper-local verifier preview にどう映るかを比較する corrected prototype
 - `current-l2-dynamic-attach-detach/`
   - attach / detach の corrected prototype
 

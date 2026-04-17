@@ -20,9 +20,15 @@ fn sample_path(name: &str) -> PathBuf {
         .join(name)
 }
 
-fn prototype_sample_path(name: &str) -> PathBuf {
+fn order_handoff_prototype_sample_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("../../samples/prototype/current-l2-order-handoff")
+        .join(name)
+}
+
+fn typed_prototype_sample_path(name: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/prototype/current-l2-typed-proof-model-check")
         .join(name)
 }
 
@@ -258,8 +264,8 @@ fn current_l2_source_sample_runner_accepts_named_e12_sample() {
 
 #[test]
 fn current_l2_source_sample_runner_accepts_explicit_prototype_path() {
-    let sample = prototype_sample_path("p01-dice-publication-handoff.txt");
-    let host_plan = load_host_plan_from_path(&prototype_sample_path(
+    let sample = order_handoff_prototype_sample_path("p01-dice-publication-handoff.txt");
+    let host_plan = load_host_plan_from_path(&order_handoff_prototype_sample_path(
         "p01-dice-publication-handoff.host-plan.json",
     ))
     .unwrap();
@@ -291,8 +297,8 @@ fn current_l2_source_sample_runner_accepts_explicit_prototype_path() {
 
 #[test]
 fn current_l2_source_sample_runner_accepts_multiple_explicit_prototype_paths() {
-    let p02 = prototype_sample_path("p02-dice-publication-fallback.txt");
-    let p02_host_plan = load_host_plan_from_path(&prototype_sample_path(
+    let p02 = order_handoff_prototype_sample_path("p02-dice-publication-fallback.txt");
+    let p02_host_plan = load_host_plan_from_path(&order_handoff_prototype_sample_path(
         "p02-dice-publication-fallback.host-plan.json",
     ))
     .unwrap();
@@ -334,6 +340,47 @@ fn current_l2_source_sample_runner_accepts_multiple_explicit_prototype_paths() {
             EventKind::AtomicCut,
             EventKind::PerformSuccess,
         ]
+    );
+}
+
+#[test]
+fn current_l2_source_sample_runner_accepts_typed_bridge_prototype_path() {
+    let sample = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
+    let host_plan = load_host_plan_from_path(&typed_prototype_sample_path(
+        "p06-typed-proof-owner-handoff.host-plan.json",
+    ))
+    .unwrap();
+    let report = run_current_l2_source_sample(sample.to_str().unwrap(), host_plan).unwrap();
+
+    assert_eq!(report.sample_id, "p06-typed-proof-owner-handoff");
+    assert_eq!(report.sample_path, fs::canonicalize(sample).unwrap());
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert_eq!(
+        report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformSuccess,
+        ]
+    );
+    assert_eq!(
+        report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("proof_debug_text_output")
+            .cloned(),
+        Some(vec![
+            "publish_roll_result: current_owner -> visible".to_string(),
+            "handoff_proof_owner: current_owner -> player_b".to_string(),
+        ])
     );
 }
 

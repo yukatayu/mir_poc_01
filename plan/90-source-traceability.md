@@ -2917,3 +2917,14 @@
   - `scripts/current_l2_source_sample_regression.py`
   - `docs/reports/0724-underdeclared-source-actualization-and-artifact-preview-widening.md`
 - 今回の要点は、underdeclared lineage / target omission family を `samples/current-l2/` authored corpus へ actualize し、helper-local `verification_preview` / `artifact_preview` を `fixture_static_cluster` reached route に widen した点である。
+
+### 2026-04-17 typed/theorem/model-check corrected prototype tranche
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_005.md`、`samples/prototype/README.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/456-current-l2-typed-theorem-model-check-sample-visible-corrected-prototype-tranche.md`
+  - `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt`
+  - `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.host-plan.json`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `docs/reports/0725-typed-theorem-model-check-corrected-prototype-tranche.md`
+- 今回の要点は、typed marker (`admit` / `require` / `ensure`) を含む runtime-reaching corrected prototype `p06` を追加し、helper-local `verification_preview` / `artifact_preview` で current bridge floor を sample-visible にした点である。

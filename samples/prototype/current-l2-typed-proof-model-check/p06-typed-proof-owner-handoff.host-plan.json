@@ -1,0 +1,112 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "option-admit",
+      "op": "publish_roll_result",
+      "option_ref": "current_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "publish_roll_result",
+      "option_ref": "delegated_owner",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "handoff_proof_owner",
+      "option_ref": "current_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "handoff_proof_owner",
+      "option_ref": "delegated_owner",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "publish_roll_result",
+      "mode": "via",
+      "chain_ref": "proof_owner_ref",
+      "option_ref": "current_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "publish_roll_result",
+      "mode": "via",
+      "chain_ref": "proof_owner_ref",
+      "option_ref": "current_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "handoff_proof_owner",
+      "mode": "via",
+      "chain_ref": "proof_owner_ref",
+      "option_ref": "current_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "handoff_proof_owner",
+      "mode": "via",
+      "chain_ref": "proof_owner_ref",
+      "option_ref": "current_owner",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "publish_roll_result",
+      "mode": "via",
+      "chain_ref": "proof_owner_ref",
+      "selected_option_ref": "current_owner",
+      "selected_target": "proof_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "proof_state",
+              "record": "publish_roll_result@current_owner"
+            },
+            {
+              "kind": "append-record",
+              "target": "proof_debug_text_output",
+              "record": "publish_roll_result: current_owner -> visible"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "handoff_proof_owner",
+      "mode": "via",
+      "chain_ref": "proof_owner_ref",
+      "selected_option_ref": "current_owner",
+      "selected_target": "proof_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "proof_state",
+              "record": "handoff_proof_owner@current_owner"
+            },
+            {
+              "kind": "append-record",
+              "target": "proof_debug_text_output",
+              "record": "handoff_proof_owner: current_owner -> player_b"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}
