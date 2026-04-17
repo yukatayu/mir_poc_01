@@ -1,4 +1,5 @@
 use std::{
+    collections::BTreeMap,
     fmt::{self, Write},
     fs,
     path::PathBuf,
@@ -322,6 +323,7 @@ struct CurrentL2OperationalCliRuntimeSummary {
     terminal_outcome: Option<&'static str>,
     steps_executed: usize,
     events: Vec<&'static str>,
+    debug_outputs: BTreeMap<String, Vec<String>>,
     non_admissible_metadata: Vec<CurrentL2OperationalCliNonAdmissibleMetadata>,
     narrative_explanations: Vec<String>,
 }
@@ -340,6 +342,7 @@ impl CurrentL2OperationalCliRuntimeSummary {
                 .copied()
                 .map(event_kind_name)
                 .collect(),
+            debug_outputs: collect_debug_outputs(&run.final_place_store),
             non_admissible_metadata: run
                 .trace_audit_sink
                 .non_admissible_metadata
@@ -449,6 +452,17 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     for event in &summary.runtime.events {
         writeln!(output, "- {event}").expect("write to string");
     }
+    if summary.runtime.debug_outputs.is_empty() {
+        writeln!(output, "debug_outputs: []").expect("write to string");
+    } else {
+        writeln!(output, "debug_outputs:").expect("write to string");
+        for (target, records) in &summary.runtime.debug_outputs {
+            writeln!(output, "- {target}:").expect("write to string");
+            for record in records {
+                writeln!(output, "  - {record}").expect("write to string");
+            }
+        }
+    }
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
     } else {
@@ -506,6 +520,20 @@ fn non_admissible_subreason_name(subreason: NonAdmissibleSubreason) -> &'static 
         NonAdmissibleSubreason::AdmitMiss => "admit-miss",
         NonAdmissibleSubreason::LeaseExpired => "lease-expired",
     }
+}
+
+fn collect_debug_outputs(place_store: &BTreeMap<String, Vec<String>>) -> BTreeMap<String, Vec<String>> {
+    place_store
+        .iter()
+        .filter(|(target, _)| is_debug_output_target(target))
+        .map(|(target, records)| (target.clone(), records.clone()))
+        .collect()
+}
+
+fn is_debug_output_target(target: &str) -> bool {
+    target.starts_with("debug_")
+        || (target.contains("_debug_")
+            && (target.ends_with("_output") || target.ends_with("_pipe")))
 }
 
 fn try_rollback_verdict_name(verdict: CurrentL2TryRollbackStructuralVerdict) -> &'static str {

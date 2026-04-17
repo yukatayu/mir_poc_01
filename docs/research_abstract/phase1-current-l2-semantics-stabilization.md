@@ -1,103 +1,31 @@
 # Phase 1 要約 — current L2 semantics stabilization
 
-## 何をした phase か
+## この phase の役割
 
-Phase 1 は、current L2 の semantics core を
-**parser より先に安定化する phase** である。
+Phase 1 は、**parser より先に current L2 の意味論を固める phase** である。
 
-ここで主に固めたのは、次の読みである。
+## 固まった current reading
 
-- fallback は guarded option chain
-- degradation は left-to-right monotone
-- no re-promotion
-- request-local clause と option-local clause を分ける
-- `TryFallback` / `AtomicCut` は structural floor と runtime / proof boundary を分ける
+- fallback は guarded option chain で読む。
+- degradation は left-to-right monotone で、no re-promotion を守る。
+- `require / ensure` は request-local、`admit` は option-local である。
+- `try { ... } fallback { ... }` と option-chain fallback は別 layer である。
+- `atomic_cut` は local rollback frontier に関わる最小核であり、global sync や durable commit ではない。
 
-ここでいう option chain の `fallback` は候補降格であり、`try { ... } fallback { ... }` の回復 branch とは別 layer の fallback である。
+## source-backed evidence
 
-## 中心にある考え方
+- `specs/04-mir-core.md`
+- `specs/09-invariants-and-constraints.md`
+- current L2 companion notation と invariant wording
 
-### fallback
-
-```text
-chain ref = writer
-  fallback delegated_writer
-    @ lineage(writer -> delegated_writer)
-  fallback readonly
-    @ lineage(delegated_writer -> readonly)
-```
-
-これは「外側 wrapper が入れ子になる」のではなく、
-**同じ chain の候補列を左から右へ降格する**と読む。
-current closeout では explicit edge-row family を正本にし、
-この hanging continuation を polished first choice、
-inline `fallback successor @ lineage(...)` を short companion shorthand として残している。
-
-したがって、途中で一度弱い候補へ落ちた後に強い候補へ戻ることはない。
-
-### request-local / option-local
-
-```text
-perform write on doc
-  require user_can_write
-  ensure write_committed
-
-option writer on doc capability write lease live
-  admit user_can_write
-```
-
-- `require` / `ensure` は request-local
-- `admit` は option-local
-
-であり、同じ predicate を見ていても役割が違う。
-また、`perform` は request 実行、`option` は候補宣言であり、`writer` や `write` は representative example の識別子であって built-in 関数名ではない。
-
-### try / atomic_cut
-
-```text
-try {
-  perform write via writer_chain
-  atomic_cut
-  perform notify on room
-} fallback {
-  perform enqueue on retry_queue
-}
-```
-
-ここで Phase 1 が先に固めたのは、
-
-- `try { ... } fallback { ... }` という structural role
-- `atomic_cut` が rollback frontier に関与する node であること
-
-までである。
-
-一方で、
-
-- restore scope の一般証明
-- distributed protocol を含む rollback safety
-
-はまだ外へ残している。
-`require` は request 前提、`ensure` は commit 条件、`admit` は option の入場条件であり、`atomic_cut` は `try` 専用構文ではないが active rollback frame があるときに強く効く。
-
-## この phase で得たもの
-
-- representative example を安定して読める semantics core
-- `specs/09` invariants と Phase 5 proof-obligation wording の narrow bridge
-- prose drift を抑える 기준
-- parser-free PoC が依存できる意味論土台
-
-## この phase で意図的に決めていないもの
+## まだここで決めていないこと
 
 - final parser grammar
-- 強い型システム
-- theorem prover / model checker の final boundary
+- full typed surface
+- theorem / model-check の concrete contract
+- higher-level ordering / fairness family
 
-つまり、Phase 1 は「意味を先に固定する」phase であり、
-「全部の surface や proof 方法を決める」phase ではない。
-closeout で fixed したのは semantics core、invariant bridge、notation family boundary までであり、
-final parser grammar、full type system、actual theorem / model-check contract は still later に残る。
+## 次へ渡したもの
 
-## 次 phase へ渡したもの
-
-Phase 2 は、この semantics core を parser-free fixture / harness / detached loop で回す。
-Phase 3 は、この semantics core を壊さずに parser boundary と first checker cut を narrow に切る。
+Phase 2 はこの semantics を parser-free に実行・比較する。
+Phase 3 はこの semantics を壊さずに parser boundary と first checker cut を narrow に切る。

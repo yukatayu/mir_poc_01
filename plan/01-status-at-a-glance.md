@@ -22,6 +22,9 @@
 - immediate blocker は `0`、current lane を止める user decision も `0` と読む。
 - current authored source sample は `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23` の fourteen である。
 - corrected runnable prototype sample は `p01 / p02 / p03` の first tranche である。
+- sample debugging 用の helper-local debug output preview は current cut にある。
+  - `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を CLI `debug_outputs` で見せてよい。
+  - これは final stdio / final host-I/O を意味しない。
 - exact rough stimulus preservation bucket は `samples/not_implemented/` に分ける。
 
 ## macro phase reading

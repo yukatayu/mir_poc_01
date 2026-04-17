@@ -1,24 +1,35 @@
 # research_abstract
 
-このフォルダは、repo 全体の研究成果を **phase ごとに短く読み返すための要約** を置く。
+この directory は、repo 全体の研究を **phase ごとに短く読み返すための condensed summary** である。
 
 - 正本は `specs/` と `plan/` である。
-- ここは本質だけを読むための condensed summary である。
-- 細部の comparison、report chain、code anchor の完全な追跡は `docs/reports/`、`specs/`、`plan/90-source-traceability.md` を参照すること。
-
-## 収録方針
-
-- 各 phase について、
-  - 何を決めたか
-  - 何を決めていないか
+- ここでは、phase ごとに
+  - 何をしようとしたか
+  - 何が current reading として固まったか
   - 何が source-backed evidence か
-  - 次の phase へ何を渡すか
-  を、日本語で短くまとめる。
-- 細かい wording drift や small helper cut は、ここでは省略してよい。
-- 必要なところだけ具体例や疑似コードを置く。
+  - 何をまだ決めていないか
+  - 次へ何を渡したか
+  だけを簡潔に書く。
+- comparison の細部、open option の列挙、report chain の完全追跡は `specs/`、`plan/`、`docs/reports/`、`plan/90-source-traceability.md` を参照する。
 
-## 補助メモ
+## current global reading
 
-- current L2 の representative example で誤解されやすい語は、phase 1〜3 の本文中に短い補足として散らしてある。
-- current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の condensed summary がある。
-- ここも規範判断の正本ではない。用語の厳密な根拠は `specs/` と `plan/` を参照する。
+- `Macro 0〜4` は current scoped closeout fixed。
+- `Macro 5` は boundary / pilot / framing closeout fixed。
+- `Macro 6/7` は mixed-gate boundary fixed。
+- `Macro 8` は application / domain realization であり、user specification が要る。
+
+## いま reader がここで把握すべきこと
+
+- semantics / invariants / boundary はかなり固まっている。
+- runnable path も既にある。
+  - authored current-L2 sample fourteen
+  - corrected runnable prototype trio
+  - exact rough stimulus preservation bucket
+- ただし final parser grammar、final public API、concrete theorem / model-check tool binding、shared-space final catalog はまだ open である。
+
+## 使い方
+
+1. phase の役割を知りたいときは各 abstract を読む。
+2. current status は `progress.md` と `tasks.md` を見る。
+3. 規範の根拠が必要になったら `specs/` に戻る。

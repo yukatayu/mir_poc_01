@@ -252,6 +252,24 @@
   - `specs/examples/442-current-l2-order-handoff-source-surface-wording-reserve-note.md`
   - `docs/reports/0708-faq005-literature-mapping-and-theory-lab-followup.md`
 
+## 2026-04-17 sample debug output preview and research abstract refresh addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_005.md`、`samples/prototype/README.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase0-repository-memory-and-decision-boundary.md`、`docs/research_abstract/phase1-current-l2-semantics-stabilization.md`、`docs/research_abstract/phase2-parser-free-poc-and-detached-validation-loop.md`、`docs/research_abstract/phase3-parser-boundary-and-first-checker-cut.md`、`docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/451-current-l2-runnable-prototype-and-not-implemented-sample-buckets.md`
+  - `specs/examples/452-current-l2-debug-output-preview-helper-cut.md`
+  - `crates/mir-semantics/src/lib.rs`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `samples/prototype/current-l2-order-handoff/p01-dice-publication-handoff.txt`
+  - `samples/prototype/current-l2-order-handoff/p01-dice-publication-handoff.host-plan.json`
+  - `samples/prototype/current-l2-order-handoff/p02-dice-publication-fallback.txt`
+  - `samples/prototype/current-l2-order-handoff/p02-dice-publication-fallback.host-plan.json`
+  - `samples/prototype/current-l2-dynamic-attach-detach/p03-avatar-controller-attach-detach.txt`
+  - `samples/prototype/current-l2-dynamic-attach-detach/p03-avatar-controller-attach-detach.host-plan.json`
+  - `docs/reports/0718-prototype-sample-actualization-first-tranche.md`
+  - `docs/reports/0721-sample-debug-output-preview-and-research-abstract-refresh.md`
+
 ## 2026-04-12 Phase 6 reserve formal tool binding inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

@@ -38,6 +38,8 @@
 - runnable prototype sample first tranche:
   `p01 / p02 / p03`
   （`samples/prototype/` に置き、current lowerer / runner へ explicit path で流す）
+- helper-local debug output preview:
+  prototype / sample 実行時に `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を `debug_outputs` として見せる current cut がある
 - exact rough stimulus preservation bucket:
   `samples/not_implemented/`
 - sample-visible theorem / model-check first milestone:
@@ -72,6 +74,8 @@
   `specs/examples/444...450`
 - runnable prototype / not-implemented bucket policy:
   `specs/examples/451`
+- current sample debug output preview helper cut:
+  `specs/examples/452`
 
 ## まだ OPEN のもの
 

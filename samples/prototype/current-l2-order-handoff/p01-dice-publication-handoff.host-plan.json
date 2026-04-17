@@ -43,6 +43,11 @@
               "kind": "append-record",
               "target": "dice_state",
               "record": "roll_dice@dice_state"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_debug_text_output",
+              "record": "roll_dice: player_a -> visible"
             }
           ]
         }
@@ -60,6 +65,11 @@
               "kind": "append-record",
               "target": "dice_state",
               "record": "handoff_dice_authority@dice_state"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_debug_text_output",
+              "record": "handoff_dice_authority: player_a -> player_b"
             }
           ]
         }

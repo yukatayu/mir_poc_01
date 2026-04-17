@@ -43,6 +43,11 @@
               "kind": "append-record",
               "target": "avatar_route",
               "record": "attach_avatar_controller@avatar_route"
+            },
+            {
+              "kind": "append-record",
+              "target": "avatar_controller_debug_output",
+              "record": "attach_avatar_controller: avatar_a"
             }
           ]
         }
@@ -60,6 +65,11 @@
               "kind": "append-record",
               "target": "avatar_route",
               "record": "detach_avatar_controller@avatar_route"
+            },
+            {
+              "kind": "append-record",
+              "target": "avatar_controller_debug_output",
+              "record": "detach_avatar_controller: avatar_a"
             }
           ]
         }

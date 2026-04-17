@@ -75,6 +75,7 @@
 ## current recommendation
 
 - Lane A は narrow actualization を維持する。
+  - corrected runnable prototype と helper-local debug output preview を使って usability / falsifier comparison を進めてよい。
 - Lane B は mainline の「ついで」ではなく、separable な research program として前進させる。
 - Lane C は thin facade と shell concern の boundary hardening、および mixed-gate boundary の明確化に留める。
 - old `Phase 7 = FutureWork` の巨大 bucket は再導入しない。

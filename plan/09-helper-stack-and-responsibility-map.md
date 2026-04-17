@@ -33,6 +33,12 @@ run_directory_named_profile
   - current authored fourteen stem inventory とは分けて扱う。
 - operational CLI の current convenience cut では、adjacent `.host-plan.json` sidecar が sample path の隣にあれば `--host-plan` を省略してよい。
   - これは current sample debugging / comparison convenience であり、installed-binary promotion や final host contract を意味しない。
+- current sample debugging の helper-local preview cut では、final place store のうち
+  - `debug_*`
+  - `_debug_` を含み `_output` で終わる target
+  - `_debug_` を含み `_pipe` で終わる target
+  target を `debug_outputs` として見せてよい。
+  - これは final stdio / final host-I/O / final transcript schema を意味しない。
 
 ## current helper migration guidance
 

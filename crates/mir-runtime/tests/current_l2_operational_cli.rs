@@ -122,4 +122,7 @@ fn operational_cli_uses_adjacent_host_plan_for_prototype_sample_when_omitted() {
     assert!(output.contains("sample: p01-dice-publication-handoff"));
     assert!(output.contains("host_plan_path:"));
     assert!(output.contains("terminal_outcome: success"));
+    assert!(output.contains("debug_outputs:"));
+    assert!(output.contains("dice_debug_text_output:"));
+    assert!(output.contains("roll_dice: player_a -> visible"));
 }

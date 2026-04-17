@@ -238,6 +238,18 @@ fn current_l2_source_sample_runner_accepts_explicit_prototype_path() {
         report.runtime_report.run_report.terminal_outcome,
         Some(TerminalOutcome::Success)
     );
+    assert_eq!(
+        report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("dice_debug_text_output")
+            .cloned(),
+        Some(vec![
+            "roll_dice: player_a -> visible".to_string(),
+            "handoff_dice_authority: player_a -> player_b".to_string(),
+        ])
+    );
 }
 
 #[test]

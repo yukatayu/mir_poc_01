@@ -616,6 +616,7 @@ pub struct RunReport {
     pub terminal_outcome: Option<TerminalOutcome>,
     pub trace_audit_sink: TraceAuditSink,
     pub steps_executed: usize,
+    pub final_place_store: PlaceStore,
 }
 
 #[derive(Debug)]
@@ -1535,6 +1536,7 @@ where
             terminal_outcome: None,
             trace_audit_sink: TraceAuditSink::default(),
             steps_executed: 0,
+            final_place_store: PlaceStore::new(),
         });
     }
 
@@ -1551,6 +1553,7 @@ where
                 terminal_outcome: Some(outcome),
                 trace_audit_sink: evaluator.state.trace_audit_sink,
                 steps_executed: steps,
+                final_place_store: evaluator.state.place_store,
             });
         }
     }

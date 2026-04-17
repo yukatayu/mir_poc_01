@@ -64,6 +64,7 @@
 - corrected runnable prototype first tranche は `p01-dice-publication-handoff`、`p02-dice-publication-fallback`、`p03-avatar-controller-attach-detach` である。
   - これらは `samples/current-l2/` inventory には数えない。
   - current L2 lowerer / runner へ explicit path で流し、adjacent `.host-plan.json` sidecar を置く。
+  - sample debugging 用には `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target へ append-record した preview を使ってよい。
 - exact rough stimuli A–D は `samples/not_implemented/order-handoff/` に preservation し、current parser / runner へは入れない。
 - verification ladder current cut では、current authored fourteen に reached stage row を付ける。
   - `e1` は `static gate = reached(valid)`、`interpreter = reached(explicit_failure)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。

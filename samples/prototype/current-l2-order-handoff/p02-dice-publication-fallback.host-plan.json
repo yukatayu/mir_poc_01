@@ -36,6 +36,11 @@
               "kind": "append-record",
               "target": "dice_state",
               "record": "roll_dice@dice_state"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_recovery_debug_output",
+              "record": "roll_dice: publication pending"
             }
           ]
         }
@@ -53,6 +58,11 @@
               "kind": "append-record",
               "target": "dice_snapshot",
               "record": "load_last_confirmed_roll@dice_snapshot"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_recovery_debug_output",
+              "record": "fallback: loaded last confirmed roll"
             }
           ]
         }
