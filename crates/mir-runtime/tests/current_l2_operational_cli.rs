@@ -40,6 +40,10 @@ fn operational_cli_pretty_runs_runtime_sample_with_explicit_host_plan_path() {
     assert!(output.contains("- perform-success"));
     assert!(output.contains("- perform-failure"));
     assert!(output.contains("- rollback"));
+    assert!(output.contains("verification_preview:"));
+    assert!(output.contains("formal_hook_status: reached"));
+    assert!(output.contains("subject_kind: runtime_try_cut_cluster"));
+    assert!(output.contains("rollback_cut_non_interference"));
 }
 
 #[test]
@@ -68,6 +72,19 @@ fn operational_cli_json_reports_static_stop_without_entering_evaluation() {
     );
     assert_eq!(value["runtime"]["entered_evaluation"], false);
     assert_eq!(value["runtime"]["terminal_outcome"], Value::Null);
+    assert_eq!(value["verification_preview"]["formal_hook_status"], "reached");
+    assert_eq!(
+        value["verification_preview"]["subject_kind"],
+        "fixture_static_cluster"
+    );
+    assert_eq!(
+        value["verification_preview"]["proof_notebook_review_unit_obligations"][0],
+        "canonical_normalization_law"
+    );
+    assert_eq!(
+        value["verification_preview"]["proof_notebook_review_unit_obligations"][1],
+        "no_re_promotion"
+    );
 }
 
 #[test]
@@ -125,4 +142,65 @@ fn operational_cli_uses_adjacent_host_plan_for_prototype_sample_when_omitted() {
     assert!(output.contains("debug_outputs:"));
     assert!(output.contains("dice_debug_text_output:"));
     assert!(output.contains("roll_dice: player_a -> visible"));
+    assert!(output.contains("verification_preview:"));
+    assert!(output.contains("subject_kind: runtime_try_cut_cluster"));
+    assert!(output.contains("rollback_cut_non_interference"));
+}
+
+#[test]
+fn operational_cli_json_reports_static_verification_preview_for_prototype_sample() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        prototype_sample_path("p04-dice-owner-duplicate-declaration.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(value["sample"], "p04-dice-owner-duplicate-declaration");
+    assert_eq!(value["checker_floor"]["static_gate"]["verdict"], "malformed");
+    assert_eq!(value["verification_preview"]["formal_hook_status"], "reached");
+    assert_eq!(
+        value["verification_preview"]["subject_kind"],
+        "fixture_static_cluster"
+    );
+    assert_eq!(
+        value["verification_preview"]["model_check_concrete_carrier_obligations"][0],
+        "canonical_normalization_law"
+    );
+}
+
+#[test]
+fn operational_cli_json_reports_guarded_verification_preview_for_prototype_sample() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        prototype_sample_path("p05-dice-owner-guarded-chain.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(value["sample"], "p05-dice-owner-guarded-chain");
+    assert_eq!(value["checker_floor"]["static_gate"]["verdict"], "valid");
+    assert_eq!(
+        value["verification_preview"]["formal_hook_status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(value["verification_preview"]["subject_kind"], Value::Null);
+    assert_eq!(
+        value["verification_preview"]["proof_notebook_review_unit_obligations"],
+        Value::Array(Vec::new())
+    );
+    assert!(
+        value["verification_preview"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("rollback or atomic-cut evidence")
+    );
 }

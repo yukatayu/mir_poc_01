@@ -1,0 +1,6 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [],
+  "effect_rules": [],
+  "trace_expectation_override": {}
+}

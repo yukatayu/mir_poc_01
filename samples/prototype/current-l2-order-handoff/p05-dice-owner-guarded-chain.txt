@@ -1,0 +1,16 @@
+# 所有権 handoff を option chain で表すが、atomic_cut や rollback を使わない guarded prototype。theorem/model-check preview が未到達のまま残る状態を比較する。
+place root {
+  place room {
+    place dice_authority {
+      option current_owner on dice_state capability write lease live admit owner_is(player_a)
+      option delegated_owner on dice_state capability write lease live admit delegate_granted(player_a)
+
+      chain dice_owner_ref = current_owner
+      fallback delegated_owner @ lineage(current_owner -> delegated_owner)
+
+      perform handoff_dice_authority via dice_owner_ref
+        require write
+        ensure owner_is(player_b)
+    }
+  }
+}

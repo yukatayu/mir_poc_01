@@ -218,6 +218,8 @@
   - `atomic_cut` を local cut の最小核に留めたまま、higher-level async-control family を language core へ押し込まない current first choice を整理する。
 - `specs/examples/451-current-l2-runnable-prototype-and-not-implemented-sample-buckets.md`
   - `samples/current-l2/`、`samples/prototype/`、`samples/not_implemented/` の current bucket policy と、corrected runnable prototype / exact rough stimulus preservation の current cut を整理する補助文書。
+- `specs/examples/453-current-l2-sample-verification-preview-and-prototype-second-tranche.md`
+  - sample / prototype 実行 summary で theorem/model-check bridge の current floor を helper-local `verification_preview` として見せる cut と、prototype second tranche の current reading を整理する補助文書。
 - `specs/examples/452-current-l2-debug-output-preview-helper-cut.md`
   - current sample debugging のための `debug_outputs` preview cut を、final host-I/O / FFI / stdio と混同しないよう整理する補助文書。
 - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`

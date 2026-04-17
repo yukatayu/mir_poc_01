@@ -39,6 +39,15 @@ run_directory_named_profile
   - `_debug_` を含み `_pipe` で終わる target
   target を `debug_outputs` として見せてよい。
   - これは final stdio / final host-I/O / final transcript schema を意味しない。
+- current sample-visible verifier preview cut では、
+  - `formal_hook_status`
+  - `subject_kind`
+  - `subject_ref`
+  - proof notebook review unit obligation list
+  - model-check concrete carrier obligation list
+  - `guard_reason`
+  を `verification_preview` として見せてよい。
+  - これは final public verifier contract を意味しない。
 
 ## current helper migration guidance
 

@@ -270,6 +270,18 @@
   - `docs/reports/0718-prototype-sample-actualization-first-tranche.md`
   - `docs/reports/0721-sample-debug-output-preview-and-research-abstract-refresh.md`
 
+## 2026-04-17 sample verification preview and prototype second tranche addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_005.md`、`samples/prototype/README.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/453-current-l2-sample-verification-preview-and-prototype-second-tranche.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `samples/prototype/current-l2-order-handoff/p04-dice-owner-duplicate-declaration.txt`
+  - `samples/prototype/current-l2-order-handoff/p04-dice-owner-duplicate-declaration.host-plan.json`
+  - `samples/prototype/current-l2-order-handoff/p05-dice-owner-guarded-chain.txt`
+  - `samples/prototype/current-l2-order-handoff/p05-dice-owner-guarded-chain.host-plan.json`
+  - `docs/reports/0722-sample-verification-preview-and-prototype-second-tranche.md`
+
 ## 2026-04-12 Phase 6 reserve formal tool binding inventory addendum
 
 - `Documentation.md`、`specs/00-document-map.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`progress.md`、`tasks.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

@@ -35,11 +35,13 @@
 - current L2 semantics / parser-free validation substrate / compile-ready minimal actualization
 - fixed-subset source sample authored fourteen:
   `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
-- runnable prototype sample first tranche:
-  `p01 / p02 / p03`
+- runnable prototype sample second tranche:
+  `p01 / p02 / p03 / p04 / p05`
   （`samples/prototype/` に置き、current lowerer / runner へ explicit path で流す）
 - helper-local debug output preview:
   prototype / sample 実行時に `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を `debug_outputs` として見せる current cut がある
+- helper-local verification preview:
+  prototype / sample 実行時に `formal_hook_status`、`subject_kind`、obligation list を `verification_preview` として見せる current cut がある
 - exact rough stimulus preservation bucket:
   `samples/not_implemented/`
 - sample-visible theorem / model-check first milestone:

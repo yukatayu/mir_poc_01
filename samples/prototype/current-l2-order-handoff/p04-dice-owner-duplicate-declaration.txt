@@ -1,0 +1,9 @@
+# サイコロ所有権の参照宣言を重複させた malformed prototype。static-stop と verifier preview の見え方を比較する。
+place root {
+  place room {
+    place dice_authority {
+      option dice_owner_ref on dice_state capability read lease live
+      option dice_owner_ref on dice_state capability read lease live
+    }
+  }
+}

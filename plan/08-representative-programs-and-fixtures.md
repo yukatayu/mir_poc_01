@@ -61,10 +61,11 @@
 - `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
 - current matrix 自体では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
 - source sample の actual file current authored fourteen は `e1` / `e2` / `e3` / `e4` / `e14` / `e15` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。`e3` は admit-family third slot として source row / runner / inventory / ladder までは実装済みだが、formal hook stage は guarded に留めるのが current first choice である。
-- corrected runnable prototype first tranche は `p01-dice-publication-handoff`、`p02-dice-publication-fallback`、`p03-avatar-controller-attach-detach` である。
+- corrected runnable prototype second tranche は `p01-dice-publication-handoff`、`p02-dice-publication-fallback`、`p03-avatar-controller-attach-detach`、`p04-dice-owner-duplicate-declaration`、`p05-dice-owner-guarded-chain` である。
   - これらは `samples/current-l2/` inventory には数えない。
   - current L2 lowerer / runner へ explicit path で流し、adjacent `.host-plan.json` sidecar を置く。
   - sample debugging 用には `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target へ append-record した preview を使ってよい。
+  - theorem/model-check bridge の current floor は helper-local `verification_preview` で sample-visible に比較してよい。
 - exact rough stimuli A–D は `samples/not_implemented/order-handoff/` に preservation し、current parser / runner へは入れない。
 - verification ladder current cut では、current authored fourteen に reached stage row を付ける。
   - `e1` は `static gate = reached(valid)`、`interpreter = reached(explicit_failure)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。

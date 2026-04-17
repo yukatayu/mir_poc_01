@@ -12,6 +12,6 @@
 ## current subdirectories
 
 - `current-l2-order-handoff/`
-  - `atomic_cut` / publication / handoff / room-local serial transition の corrected prototype
+  - `atomic_cut` / publication / handoff / room-local serial transition / static-stop / guarded chain の corrected prototype
 - `current-l2-dynamic-attach-detach/`
   - attach / detach の corrected prototype

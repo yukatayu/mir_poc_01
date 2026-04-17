@@ -21,10 +21,13 @@
     （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、remaining topics は mixed gate / user-spec-required）
 - immediate blocker は `0`、current lane を止める user decision も `0` と読む。
 - current authored source sample は `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23` の fourteen である。
-- corrected runnable prototype sample は `p01 / p02 / p03` の first tranche である。
+- corrected runnable prototype sample は `p01 / p02 / p03 / p04 / p05` の second tranche までである。
 - sample debugging 用の helper-local debug output preview は current cut にある。
   - `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を CLI `debug_outputs` で見せてよい。
   - これは final stdio / final host-I/O を意味しない。
+- sample-visible theorem / model-check 用の helper-local verification preview も current cut にある。
+  - `formal_hook_status`、`subject_kind`、obligation list を CLI `verification_preview` で見せてよい。
+  - これは final public verifier contract を意味しない。
 - exact rough stimulus preservation bucket は `samples/not_implemented/` に分ける。
 
 ## macro phase reading

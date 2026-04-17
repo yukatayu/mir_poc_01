@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-17 11:35 JST
+最終更新: 2026-04-17 12:00 JST
 
 ## この文書について
 
@@ -21,8 +21,8 @@
   `Macro 6/7 mixed-gate boundary fixed`
   （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、next work は mixed gate / user-spec-required）
 - sample bucket policy:
-  `current-l2 / prototype / not_implemented / debug-output preview fixed`
-  （current authored fourteen と runnable prototype trio は分離し、exact rough stimulus は preservation bucket に残し、helper-local debug preview は final host-I/O と混同しない）
+  `current-l2 / prototype / not_implemented / debug-output preview / verification-preview fixed`
+  （current authored fourteen と runnable prototype quintet は分離し、exact rough stimulus は preservation bucket に残し、helper-local debug preview / verification preview は final host-I/O や final public verifier contract と混同しない）
 - current self-driven queue: `0 package`
 - immediate blocker: `0`
 - next gate: `mixed gate / user specification`
@@ -49,7 +49,7 @@
 
 - current snapshot では、**promoted self-driven package は残っていない**。
 - `Macro 0〜5` の current scoped self-driven closeout は fixed と読む。
-- runnable prototype sample first tranche も fixed と読む。
+- runnable prototype sample second tranche も fixed と読む。
 - 次に残るのは、mixed gate topic の concretization / adoption / packaging / final catalog 側であり、current `tasks.md` では self-driven package としては数えない。
 
 ## mixed gate / later reserve

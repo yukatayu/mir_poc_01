@@ -218,10 +218,13 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     host_plan_path: String,
     checker_floor: CurrentL2OperationalCliCheckerFloorSummary,
     runtime: CurrentL2OperationalCliRuntimeSummary,
+    verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
     fn from_report(host_plan_path: &PathBuf, report: CurrentL2SourceSampleRunReport) -> Self {
+        let verification_preview =
+            CurrentL2OperationalCliVerificationPreviewSummary::from_source_report(&report);
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -234,6 +237,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             runtime: CurrentL2OperationalCliRuntimeSummary::from_runtime_report(
                 &report.runtime_report,
             ),
+            verification_preview,
         }
     }
 }
@@ -358,6 +362,86 @@ impl CurrentL2OperationalCliRuntimeSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliVerificationPreviewSummary {
+    formal_hook_status: &'static str,
+    subject_kind: Option<&'static str>,
+    subject_ref: Option<String>,
+    proof_notebook_review_unit_obligations: Vec<&'static str>,
+    model_check_concrete_carrier_obligations: Vec<&'static str>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliVerificationPreviewSummary {
+    fn from_source_report(report: &CurrentL2SourceSampleRunReport) -> Self {
+        let static_verdict = report.runtime_report.checker_floor.static_gate.verdict;
+
+        match static_verdict {
+            StaticGateVerdict::Malformed => Self {
+                formal_hook_status: "reached",
+                subject_kind: Some("fixture_static_cluster"),
+                subject_ref: Some(report.sample_id.clone()),
+                proof_notebook_review_unit_obligations: vec![
+                    "canonical_normalization_law",
+                    "no_re_promotion",
+                ],
+                model_check_concrete_carrier_obligations: vec![
+                    "canonical_normalization_law",
+                    "no_re_promotion",
+                ],
+                guard_reason: None,
+            },
+            StaticGateVerdict::Underdeclared => Self {
+                formal_hook_status: "guarded_not_reached",
+                subject_kind: None,
+                subject_ref: None,
+                proof_notebook_review_unit_obligations: Vec::new(),
+                model_check_concrete_carrier_obligations: Vec::new(),
+                guard_reason: Some(format!(
+                    "current helper preview does not emit verifier artifacts for `{}` because static gate verdict is underdeclared",
+                    report.sample_id
+                )),
+            },
+            StaticGateVerdict::Valid => {
+                let has_try_cut = report
+                    .runtime_report
+                    .run_report
+                    .trace_audit_sink
+                    .events
+                    .iter()
+                    .any(|event| matches!(event, EventKind::Rollback | EventKind::AtomicCut));
+
+                if has_try_cut {
+                    Self {
+                        formal_hook_status: "reached",
+                        subject_kind: Some("runtime_try_cut_cluster"),
+                        subject_ref: Some(report.sample_id.clone()),
+                        proof_notebook_review_unit_obligations: vec![
+                            "rollback_cut_non_interference",
+                        ],
+                        model_check_concrete_carrier_obligations: vec![
+                            "rollback_cut_non_interference",
+                        ],
+                        guard_reason: None,
+                    }
+                } else {
+                    Self {
+                        formal_hook_status: "guarded_not_reached",
+                        subject_kind: None,
+                        subject_ref: None,
+                        proof_notebook_review_unit_obligations: Vec::new(),
+                        model_check_concrete_carrier_obligations: Vec::new(),
+                        guard_reason: Some(format!(
+                            "current helper preview only reaches runtime_try_cut_cluster when rollback or atomic-cut evidence exists for `{}`",
+                            report.sample_id
+                        )),
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliNonAdmissibleMetadata {
     option_ref: String,
     subreason: &'static str,
@@ -463,6 +547,42 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
             }
         }
     }
+    writeln!(output, "verification_preview:").expect("write to string");
+    writeln!(
+        output,
+        "  formal_hook_status: {}",
+        summary.verification_preview.formal_hook_status
+    )
+    .expect("write to string");
+    if let Some(subject_kind) = summary.verification_preview.subject_kind {
+        writeln!(output, "  subject_kind: {subject_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_kind: none").expect("write to string");
+    }
+    if let Some(subject_ref) = &summary.verification_preview.subject_ref {
+        writeln!(output, "  subject_ref: {subject_ref}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_ref: none").expect("write to string");
+    }
+    render_obligation_list(
+        &mut output,
+        "proof_notebook_review_unit_obligations",
+        &summary
+            .verification_preview
+            .proof_notebook_review_unit_obligations,
+    );
+    render_obligation_list(
+        &mut output,
+        "model_check_concrete_carrier_obligations",
+        &summary
+            .verification_preview
+            .model_check_concrete_carrier_obligations,
+    );
+    if let Some(guard_reason) = &summary.verification_preview.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
     } else {
@@ -487,6 +607,17 @@ fn display_path(path: &PathBuf) -> String {
         .unwrap_or_else(|_| path.clone())
         .display()
         .to_string()
+}
+
+fn render_obligation_list(output: &mut String, label: &str, values: &[&'static str]) {
+    if values.is_empty() {
+        writeln!(output, "  {label}: []").expect("write to string");
+    } else {
+        writeln!(output, "  {label}:").expect("write to string");
+        for value in values {
+            writeln!(output, "  - {value}").expect("write to string");
+        }
+    }
 }
 
 fn static_gate_verdict_name(verdict: StaticGateVerdict) -> &'static str {
