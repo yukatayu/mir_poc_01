@@ -115,8 +115,9 @@
    `plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`
 4. theory-lab の detail:
    `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
-5. current long-form FAQ:
+5. current long-form FAQs:
    `faq_005.md`
+   `faq_006.md`
 
 ## 直近で特に重要な文書
 
