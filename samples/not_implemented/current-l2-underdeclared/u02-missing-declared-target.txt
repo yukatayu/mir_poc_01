@@ -1,0 +1,12 @@
+# successor option の declared target を省略し、underdeclared static stop を source text でも見たいという刺激の保存版。
+place root {
+  place room {
+    place dice_authority {
+      option primary_owner on dice_state capability write lease live
+      option delegated_owner on capability write lease live
+
+      chain dice_owner_ref = primary_owner
+      fallback delegated_owner @ lineage(primary_owner -> delegated_owner)
+    }
+  }
+}

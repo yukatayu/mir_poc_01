@@ -10,3 +10,5 @@
 
 - `order-handoff/`
   - rough syntax A〜D の exact preservation
+- `current-l2-underdeclared/`
+  - fixture-level では source-backed だが、current source parser / lowerer の convenience cut ではまだ受けない underdeclared source stimulus の preservation

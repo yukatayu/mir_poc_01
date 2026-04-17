@@ -8,13 +8,13 @@ use std::{
 use serde::Serialize;
 
 use crate::current_l2::{
+    resolve_current_l2_source_sample_path, run_current_l2_source_sample,
     CurrentL2RuntimeSkeletonReport, CurrentL2SourceSampleRunReport,
     CurrentL2TryRollbackStructuralFindingKind, CurrentL2TryRollbackStructuralSubjectKind,
     CurrentL2TryRollbackStructuralSummary, CurrentL2TryRollbackStructuralVerdict,
-    resolve_current_l2_source_sample_path, run_current_l2_source_sample,
 };
 use mir_semantics::{
-    EventKind, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome, load_host_plan_from_path,
+    load_host_plan_from_path, EventKind, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
 };
 
 pub const CURRENT_L2_OPERATIONAL_SHELL_NAME: &str = "mir-current-l2";
@@ -219,12 +219,15 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     checker_floor: CurrentL2OperationalCliCheckerFloorSummary,
     runtime: CurrentL2OperationalCliRuntimeSummary,
     verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
+    artifact_preview: CurrentL2OperationalCliArtifactPreviewSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
     fn from_report(host_plan_path: &PathBuf, report: CurrentL2SourceSampleRunReport) -> Self {
         let verification_preview =
             CurrentL2OperationalCliVerificationPreviewSummary::from_source_report(&report);
+        let artifact_preview =
+            CurrentL2OperationalCliArtifactPreviewSummary::from_source_report(&report);
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -238,6 +241,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report.runtime_report,
             ),
             verification_preview,
+            artifact_preview,
         }
     }
 }
@@ -442,6 +446,115 @@ impl CurrentL2OperationalCliVerificationPreviewSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliArtifactPreviewSummary {
+    proof_notebook_review_units: Vec<CurrentL2OperationalCliProofNotebookReviewUnitPreview>,
+    model_check_concrete_carriers: Vec<CurrentL2OperationalCliModelCheckCarrierPreview>,
+}
+
+impl CurrentL2OperationalCliArtifactPreviewSummary {
+    fn from_source_report(report: &CurrentL2SourceSampleRunReport) -> Self {
+        let static_verdict = report.runtime_report.checker_floor.static_gate.verdict;
+
+        match static_verdict {
+            StaticGateVerdict::Malformed => Self {
+                proof_notebook_review_units: vec![
+                    CurrentL2OperationalCliProofNotebookReviewUnitPreview {
+                        obligation_kind: "canonical_normalization_law",
+                        goal_text: format!(
+                            "Review that canonical normalization preserves the rejected static shape for `{}`.",
+                            report.sample_id
+                        ),
+                        evidence_refs: vec![
+                            format!("fixture:{}", report.sample_id),
+                            format!("static_gate_artifact:{}", report.sample_id),
+                        ],
+                    },
+                    CurrentL2OperationalCliProofNotebookReviewUnitPreview {
+                        obligation_kind: "no_re_promotion",
+                        goal_text: format!(
+                            "Review that `{}` remains rejected and is not re-promoted by later tooling.",
+                            report.sample_id
+                        ),
+                        evidence_refs: vec![format!("fixture:{}", report.sample_id)],
+                    },
+                ],
+                model_check_concrete_carriers: vec![
+                    CurrentL2OperationalCliModelCheckCarrierPreview {
+                        obligation_kind: "canonical_normalization_law",
+                        evidence_refs: vec![
+                            format!("fixture:{}", report.sample_id),
+                            format!("static_gate_artifact:{}", report.sample_id),
+                        ],
+                    },
+                    CurrentL2OperationalCliModelCheckCarrierPreview {
+                        obligation_kind: "no_re_promotion",
+                        evidence_refs: vec![format!("fixture:{}", report.sample_id)],
+                    },
+                ],
+            },
+            StaticGateVerdict::Underdeclared => Self {
+                proof_notebook_review_units: Vec::new(),
+                model_check_concrete_carriers: Vec::new(),
+            },
+            StaticGateVerdict::Valid => {
+                let has_try_cut = report
+                    .runtime_report
+                    .run_report
+                    .trace_audit_sink
+                    .events
+                    .iter()
+                    .any(|event| matches!(event, EventKind::Rollback | EventKind::AtomicCut));
+
+                if has_try_cut {
+                    Self {
+                        proof_notebook_review_units: vec![
+                            CurrentL2OperationalCliProofNotebookReviewUnitPreview {
+                                obligation_kind: "rollback_cut_non_interference",
+                                goal_text: format!(
+                                    "Review that rollback / atomic-cut evidence does not interfere with surviving runtime behavior for `{}`.",
+                                    report.sample_id
+                                ),
+                                evidence_refs: vec![
+                                    format!("fixture:{}", report.sample_id),
+                                    format!("runtime_cluster:{}", report.sample_id),
+                                ],
+                            },
+                        ],
+                        model_check_concrete_carriers: vec![
+                            CurrentL2OperationalCliModelCheckCarrierPreview {
+                                obligation_kind: "rollback_cut_non_interference",
+                                evidence_refs: vec![
+                                    format!("fixture:{}", report.sample_id),
+                                    format!("runtime_cluster:{}", report.sample_id),
+                                ],
+                            },
+                        ],
+                    }
+                } else {
+                    Self {
+                        proof_notebook_review_units: Vec::new(),
+                        model_check_concrete_carriers: Vec::new(),
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliProofNotebookReviewUnitPreview {
+    obligation_kind: &'static str,
+    goal_text: String,
+    evidence_refs: Vec<String>,
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliModelCheckCarrierPreview {
+    obligation_kind: &'static str,
+    evidence_refs: Vec<String>,
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliNonAdmissibleMetadata {
     option_ref: String,
     subreason: &'static str,
@@ -583,6 +696,15 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     } else {
         writeln!(output, "  guard_reason: none").expect("write to string");
     }
+    writeln!(output, "artifact_preview:").expect("write to string");
+    render_proof_review_units(
+        &mut output,
+        &summary.artifact_preview.proof_notebook_review_units,
+    );
+    render_model_check_carriers(
+        &mut output,
+        &summary.artifact_preview.model_check_concrete_carriers,
+    );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
     } else {
@@ -620,6 +742,55 @@ fn render_obligation_list(output: &mut String, label: &str, values: &[&'static s
     }
 }
 
+fn render_proof_review_units(
+    output: &mut String,
+    values: &[CurrentL2OperationalCliProofNotebookReviewUnitPreview],
+) {
+    if values.is_empty() {
+        writeln!(output, "  proof_notebook_review_units: []").expect("write to string");
+        return;
+    }
+
+    writeln!(output, "  proof_notebook_review_units:").expect("write to string");
+    for value in values {
+        writeln!(output, "  - obligation_kind: {}", value.obligation_kind)
+            .expect("write to string");
+        writeln!(output, "    goal_text: {}", value.goal_text).expect("write to string");
+        if value.evidence_refs.is_empty() {
+            writeln!(output, "    evidence_refs: []").expect("write to string");
+        } else {
+            writeln!(output, "    evidence_refs:").expect("write to string");
+            for evidence_ref in &value.evidence_refs {
+                writeln!(output, "    - {evidence_ref}").expect("write to string");
+            }
+        }
+    }
+}
+
+fn render_model_check_carriers(
+    output: &mut String,
+    values: &[CurrentL2OperationalCliModelCheckCarrierPreview],
+) {
+    if values.is_empty() {
+        writeln!(output, "  model_check_concrete_carriers: []").expect("write to string");
+        return;
+    }
+
+    writeln!(output, "  model_check_concrete_carriers:").expect("write to string");
+    for value in values {
+        writeln!(output, "  - obligation_kind: {}", value.obligation_kind)
+            .expect("write to string");
+        if value.evidence_refs.is_empty() {
+            writeln!(output, "    evidence_refs: []").expect("write to string");
+        } else {
+            writeln!(output, "    evidence_refs:").expect("write to string");
+            for evidence_ref in &value.evidence_refs {
+                writeln!(output, "    - {evidence_ref}").expect("write to string");
+            }
+        }
+    }
+}
+
 fn static_gate_verdict_name(verdict: StaticGateVerdict) -> &'static str {
     match verdict {
         StaticGateVerdict::Valid => "valid",
@@ -653,7 +824,9 @@ fn non_admissible_subreason_name(subreason: NonAdmissibleSubreason) -> &'static 
     }
 }
 
-fn collect_debug_outputs(place_store: &BTreeMap<String, Vec<String>>) -> BTreeMap<String, Vec<String>> {
+fn collect_debug_outputs(
+    place_store: &BTreeMap<String, Vec<String>>,
+) -> BTreeMap<String, Vec<String>> {
     place_store
         .iter()
         .filter(|(target, _)| is_debug_output_target(target))

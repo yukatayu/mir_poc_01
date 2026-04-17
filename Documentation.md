@@ -42,8 +42,13 @@
   prototype / sample 実行時に `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を `debug_outputs` として見せる current cut がある
 - helper-local verification preview:
   prototype / sample 実行時に `formal_hook_status`、`subject_kind`、obligation list を `verification_preview` として見せる current cut がある
+- helper-local artifact preview:
+  prototype / sample 実行時に proof notebook review unit / model-check concrete carrier の derived row preview を `artifact_preview` として見せる current cut がある
 - exact rough stimulus preservation bucket:
   `samples/not_implemented/`
+- underdeclared source-form gap preservation bucket:
+  `samples/not_implemented/current-l2-underdeclared/`
+  （fixture-level floor はあるが、current source parser / lowerer convenience cut がまだ受けない omission stimulus を保存する）
 - sample-visible theorem / model-check first milestone:
   formal hook、`proof_notebook_review_unit`、row-local model-check carrier、emitted artifact wiring、sample-facing summary
 
@@ -78,6 +83,10 @@
   `specs/examples/451`
 - current sample debug output preview helper cut:
   `specs/examples/452`
+- current sample verification preview and prototype second tranche:
+  `specs/examples/453`
+- current artifact preview and underdeclared source gap note:
+  `specs/examples/454`
 
 ## まだ OPEN のもの
 

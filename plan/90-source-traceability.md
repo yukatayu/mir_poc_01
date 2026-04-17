@@ -2889,3 +2889,14 @@
   - `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
   - `.docs/current-l2-source-sample-authoring-policy.md`
   - `faq_005.md`
+
+### 2026-04-17 helper-local artifact preview and underdeclared source gap addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`faq_005.md`、`samples/prototype/README.md`、`samples/not_implemented/README.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/454-current-l2-artifact-preview-and-underdeclared-source-gap-note.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `samples/not_implemented/current-l2-underdeclared/u01-missing-lineage-assertion.txt`
+  - `samples/not_implemented/current-l2-underdeclared/u02-missing-declared-target.txt`
+  - `docs/reports/0723-sample-artifact-preview-third-tranche.md`
+- 今回の要点は、sample / prototype 実行 summary に helper-local `artifact_preview` を追加し、underdeclared source-form omission stimulus は current parser / lowerer gap として `samples/not_implemented/current-l2-underdeclared/` に preservation した点である。

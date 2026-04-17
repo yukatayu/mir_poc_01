@@ -65,8 +65,11 @@
   - これらは `samples/current-l2/` inventory には数えない。
   - current L2 lowerer / runner へ explicit path で流し、adjacent `.host-plan.json` sidecar を置く。
   - sample debugging 用には `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target へ append-record した preview を使ってよい。
-  - theorem/model-check bridge の current floor は helper-local `verification_preview` で sample-visible に比較してよい。
+  - theorem/model-check bridge の current floor は helper-local `verification_preview` と `artifact_preview` で sample-visible に比較してよい。
 - exact rough stimuli A–D は `samples/not_implemented/order-handoff/` に preservation し、current parser / runner へは入れない。
+- underdeclared source-form omission stimulus は `samples/not_implemented/current-l2-underdeclared/` に preservation し、current parser / lowerer convenience cut へは入れない。
+  - `u01-missing-lineage-assertion` は fixture-level `e5-underdeclared-lineage` family に対応する source stimulus である。
+  - `u02-missing-declared-target` は fixture-level `e12-underdeclared-target-missing` family に対応する source stimulus である。
 - verification ladder current cut では、current authored fourteen に reached stage row を付ける。
   - `e1` は `static gate = reached(valid)`、`interpreter = reached(explicit_failure)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e2` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。

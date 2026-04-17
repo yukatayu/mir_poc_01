@@ -48,6 +48,11 @@ run_directory_named_profile
   - `guard_reason`
   を `verification_preview` として見せてよい。
   - これは final public verifier contract を意味しない。
+- current sample-visible artifact preview cut では、
+  - proof notebook review unit の `obligation_kind` / `goal_text` / symbolic `evidence_refs`
+  - model-check concrete carrier の `obligation_kind` / symbolic `evidence_refs`
+  を `artifact_preview` として見せてよい。
+  - これは current helper route から導く derived preview であり、final public artifact schema を意味しない。
 
 ## current helper migration guidance
 

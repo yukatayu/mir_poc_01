@@ -8,6 +8,8 @@
 - prototype sample は explicit path で実行し、sample file の隣に `.host-plan.json` sidecar があれば `--host-plan` を省略できる。
 - sample debugging では、sidecar が `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target に append した record を CLI が `debug_outputs` として preview してよい。
   これは helper-local convenience であり、final host-I/O / shell contract ではない。
+- theorem / model-check bridge の current floor では、CLI が `verification_preview` と helper-local `artifact_preview` を出してよい。
+  これは final public verifier contract や final emitted artifact schema を意味しない。
 
 ## current subdirectories
 
@@ -15,3 +17,11 @@
   - `atomic_cut` / publication / handoff / room-local serial transition / static-stop / guarded chain の corrected prototype
 - `current-l2-dynamic-attach-detach/`
   - attach / detach の corrected prototype
+
+## current limit
+
+- fixture-level に `underdeclared` family は already あるが、source text では
+  - lineage assertion omission
+  - declared target omission
+  を current parser / lowerer convenience cut がまだ受けない。
+- そのため、それらの source stimulus は `samples/not_implemented/current-l2-underdeclared/` に preservation する。

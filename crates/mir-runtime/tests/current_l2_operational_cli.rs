@@ -72,7 +72,10 @@ fn operational_cli_json_reports_static_stop_without_entering_evaluation() {
     );
     assert_eq!(value["runtime"]["entered_evaluation"], false);
     assert_eq!(value["runtime"]["terminal_outcome"], Value::Null);
-    assert_eq!(value["verification_preview"]["formal_hook_status"], "reached");
+    assert_eq!(
+        value["verification_preview"]["formal_hook_status"],
+        "reached"
+    );
     assert_eq!(
         value["verification_preview"]["subject_kind"],
         "fixture_static_cluster"
@@ -98,11 +101,9 @@ fn operational_cli_rejects_missing_host_plan_flag() {
     .unwrap_err();
 
     assert_eq!(error.exit_code(), 2);
-    assert!(
-        error
-            .to_string()
-            .contains("missing --host-plan <path> and no adjacent host plan was found")
-    );
+    assert!(error
+        .to_string()
+        .contains("missing --host-plan <path> and no adjacent host plan was found"));
     assert!(error.to_string().contains(
         "mir-current-l2 run-source-sample <sample-or-path> [--host-plan <path>] --format pretty|json"
     ));
@@ -145,6 +146,9 @@ fn operational_cli_uses_adjacent_host_plan_for_prototype_sample_when_omitted() {
     assert!(output.contains("verification_preview:"));
     assert!(output.contains("subject_kind: runtime_try_cut_cluster"));
     assert!(output.contains("rollback_cut_non_interference"));
+    assert!(output.contains("artifact_preview:"));
+    assert!(output.contains("proof_notebook_review_units:"));
+    assert!(output.contains("goal_text: Review that rollback / atomic-cut evidence"));
 }
 
 #[test]
@@ -161,8 +165,14 @@ fn operational_cli_json_reports_static_verification_preview_for_prototype_sample
 
     let value: Value = serde_json::from_str(&output).unwrap();
     assert_eq!(value["sample"], "p04-dice-owner-duplicate-declaration");
-    assert_eq!(value["checker_floor"]["static_gate"]["verdict"], "malformed");
-    assert_eq!(value["verification_preview"]["formal_hook_status"], "reached");
+    assert_eq!(
+        value["checker_floor"]["static_gate"]["verdict"],
+        "malformed"
+    );
+    assert_eq!(
+        value["verification_preview"]["formal_hook_status"],
+        "reached"
+    );
     assert_eq!(
         value["verification_preview"]["subject_kind"],
         "fixture_static_cluster"
@@ -170,6 +180,18 @@ fn operational_cli_json_reports_static_verification_preview_for_prototype_sample
     assert_eq!(
         value["verification_preview"]["model_check_concrete_carrier_obligations"][0],
         "canonical_normalization_law"
+    );
+    assert_eq!(
+        value["artifact_preview"]["proof_notebook_review_units"][0]["obligation_kind"],
+        "canonical_normalization_law"
+    );
+    assert_eq!(
+        value["artifact_preview"]["proof_notebook_review_units"][0]["evidence_refs"][0],
+        "fixture:p04-dice-owner-duplicate-declaration"
+    );
+    assert_eq!(
+        value["artifact_preview"]["model_check_concrete_carriers"][1]["obligation_kind"],
+        "no_re_promotion"
     );
 }
 
@@ -197,10 +219,16 @@ fn operational_cli_json_reports_guarded_verification_preview_for_prototype_sampl
         value["verification_preview"]["proof_notebook_review_unit_obligations"],
         Value::Array(Vec::new())
     );
-    assert!(
-        value["verification_preview"]["guard_reason"]
-            .as_str()
-            .unwrap()
-            .contains("rollback or atomic-cut evidence")
+    assert!(value["verification_preview"]["guard_reason"]
+        .as_str()
+        .unwrap()
+        .contains("rollback or atomic-cut evidence"));
+    assert_eq!(
+        value["artifact_preview"]["proof_notebook_review_units"],
+        Value::Array(Vec::new())
+    );
+    assert_eq!(
+        value["artifact_preview"]["model_check_concrete_carriers"],
+        Value::Array(Vec::new())
     );
 }
