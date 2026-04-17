@@ -117,6 +117,54 @@ fn current_l2_source_lowering_matches_e4_fixture_and_stage1_bridge() {
 }
 
 #[test]
+fn current_l2_source_lowering_matches_e5_fixture_and_underdeclared_lineage_static_stop() {
+    let source = fs::read_to_string(sample_path("e5-underdeclared-lineage.txt")).unwrap();
+    let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
+    let report = run_current_l2_runtime_skeleton(
+        lowered.program,
+        FixtureHostPlan::default(),
+        Some(lowered.parser_bridge_input),
+    )
+    .unwrap();
+
+    let stage1 = report.checker_floor.stage1_reconnect_clusters.unwrap();
+    assert!(!stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(!stage1.capability_strengthening_floor);
+    assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Underdeclared
+    );
+    assert!(!report.run_report.entered_evaluation);
+    assert_eq!(report.run_report.terminal_outcome, None);
+}
+
+#[test]
+fn current_l2_source_lowering_matches_e12_fixture_and_missing_target_static_stop() {
+    let source = fs::read_to_string(sample_path("e12-underdeclared-target-missing.txt")).unwrap();
+    let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
+    let report = run_current_l2_runtime_skeleton(
+        lowered.program,
+        FixtureHostPlan::default(),
+        Some(lowered.parser_bridge_input),
+    )
+    .unwrap();
+
+    let stage1 = report.checker_floor.stage1_reconnect_clusters.unwrap();
+    assert!(stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(!stage1.capability_strengthening_floor);
+    assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Underdeclared
+    );
+    assert!(!report.run_report.entered_evaluation);
+    assert_eq!(report.run_report.terminal_outcome, None);
+}
+
+#[test]
 fn current_l2_source_lowering_matches_e16_fixture_and_missing_head_static_stop() {
     let source =
         fs::read_to_string(sample_path("e16-malformed-missing-chain-head-option.txt")).unwrap();

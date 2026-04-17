@@ -1,0 +1,12 @@
+# successor option の declared target を省略し、underdeclared static stop が source text でも見える最小例。
+place root {
+  place session {
+    place profile_access {
+      option primary on profile_doc capability read lease live
+      option mirror on capability read lease live
+
+      chain profile_ref = primary
+      fallback mirror @ lineage(primary -> mirror)
+    }
+  }
+}

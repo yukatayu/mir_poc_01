@@ -30,7 +30,7 @@ run_directory_named_profile
 - `resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local Python orchestration helper は excluded bucket に残す。
 - prototype sample explicit-path acceptance は support cut に含めてよい。
   - current boundary は `samples/prototype/` 以下の `.txt` direct path に限る。
-  - current authored fourteen stem inventory とは分けて扱う。
+  - current authored sixteen stem inventory とは分けて扱う。
 - operational CLI の current convenience cut では、adjacent `.host-plan.json` sidecar が sample path の隣にあれば `--host-plan` を省略してよい。
   - これは current sample debugging / comparison convenience であり、installed-binary promotion や final host contract を意味しない。
 - current sample debugging の helper-local preview cut では、final place store のうち
@@ -305,7 +305,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - current cut では reached runtime row / reached static row / guarded row の split だけを helper-local evidence に actualize し、runner 本体や public/report shape は widen しない
 - `scripts/current_l2_source_sample_regression.py`
   - Phase 6 source-sample authoring / bless policy current cut の repo-local helper
-  - current fixed-subset authored fourteen inventory と widened regression bundleだけを扱う
+  - current fixed-subset authored sixteen inventory と widened regression bundleだけを扱う
   - public runner CLI、retained artifact bless/update、authored row widen timing は扱わない
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
   - Phase 6 front-half compile-ready verification / formal hook の thin CLI emitter

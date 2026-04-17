@@ -200,6 +200,68 @@ fn verification_ladder_marks_e4_as_static_stop_and_static_formal_hook_reached() 
 }
 
 #[test]
+fn verification_ladder_marks_e5_as_underdeclared_static_stop_and_static_formal_hook_reached() {
+    let source_report =
+        run_current_l2_source_sample("e5-underdeclared-lineage", FixtureHostPlan::default())
+            .unwrap();
+
+    assert_eq!(
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
+        StaticGateVerdict::Underdeclared
+    );
+    assert!(!source_report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
+
+    let path = fixture_path("e5-underdeclared-lineage.json");
+    let fixture = load_fixture_from_path(&path).unwrap();
+    let gate = static_gate_detailed(&fixture);
+    let detached_static = build_detached_static_gate_artifact(path, &fixture, &gate);
+    let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
+
+    assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
+    assert_eq!(formal_hook.subject_ref, "e5_underdeclared_lineage");
+}
+
+#[test]
+fn verification_ladder_marks_e12_as_underdeclared_static_stop_and_static_formal_hook_reached() {
+    let source_report = run_current_l2_source_sample(
+        "e12-underdeclared-target-missing",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
+        StaticGateVerdict::Underdeclared
+    );
+    assert!(!source_report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
+
+    let path = fixture_path("e12-underdeclared-target-missing.json");
+    let fixture = load_fixture_from_path(&path).unwrap();
+    let gate = static_gate_detailed(&fixture);
+    let detached_static = build_detached_static_gate_artifact(path, &fixture, &gate);
+    let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
+
+    assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
+    assert_eq!(formal_hook.subject_ref, "e12_underdeclared_target_missing");
+}
+
+#[test]
 fn verification_ladder_marks_e14_as_static_stop_and_static_formal_hook_reached() {
     let source_report = run_current_l2_source_sample(
         "e14-malformed-duplicate-option-declaration",

@@ -51,6 +51,20 @@ option primary on profile_doc capability read lease live
 chain profile_ref = ghost
 "#;
 
+const E5_INPUT: &str = r#"
+option primary on profile_doc capability read lease live
+option mirror on profile_doc capability read lease live
+chain profile_ref = primary
+fallback mirror
+"#;
+
+const E12_INPUT: &str = r#"
+option primary on profile_doc capability read lease live
+option mirror on capability read lease live
+chain profile_ref = primary
+fallback mirror @ lineage(primary -> mirror)
+"#;
+
 const E18_INPUT: &str = r#"
 option primary on profile_doc capability read lease live
 chain profile_ref = primary
@@ -120,6 +134,24 @@ fn stage1_parser_spike_matches_e16_fixture_subset() {
 }
 
 #[test]
+fn stage1_parser_spike_matches_e5_fixture_subset() {
+    let actual = lower_for_compare(E5_INPUT);
+    let expected = load_expected_fixture_subset("e5-underdeclared-lineage.json")
+        .expect("expected e5 fixture subset should load");
+
+    assert_eq!(actual, expected);
+}
+
+#[test]
+fn stage1_parser_spike_matches_e12_fixture_subset() {
+    let actual = lower_for_compare(E12_INPUT);
+    let expected = load_expected_fixture_subset("e12-underdeclared-target-missing.json")
+        .expect("expected e12 fixture subset should load");
+
+    assert_eq!(actual, expected);
+}
+
+#[test]
 fn stage1_parser_spike_matches_e18_fixture_subset() {
     let actual = lower_for_compare(E18_INPUT);
     let expected = load_expected_fixture_subset("e18-malformed-missing-successor-option.json")
@@ -152,21 +184,38 @@ fn stage1_parser_spike_keeps_decl_guard_slot_surface_text() {
 #[test]
 fn stage1_parser_spike_keeps_edge_local_lineage_payload_as_required_slot() {
     let parsed = parse_stage1_program_text(E7_INPUT).expect("stage 1 spike should parse test input");
-    let lineage = &parsed.chains[0].edges[0].lineage_assertion;
+    let lineage = parsed.chains[0].edges[0]
+        .lineage_assertion
+        .as_ref()
+        .expect("lineage assertion should exist");
 
     assert_eq!(lineage.predecessor, "writer");
     assert_eq!(lineage.successor, "delegated_writer");
 }
 
 #[test]
-fn stage1_parser_spike_rejects_missing_edge_local_lineage_metadata() {
-    let error = parse_stage1_program_text(MISSING_LINEAGE_INPUT)
-        .expect_err("stage 1 spike should reject fallback rows without lineage metadata");
+fn stage1_parser_spike_accepts_missing_edge_local_lineage_metadata_as_underdeclared_shape() {
+    let parsed = parse_stage1_program_text(MISSING_LINEAGE_INPUT)
+        .expect("stage 1 spike should keep missing-lineage row as underdeclared shape");
 
-    assert!(
-        error.contains("missing edge-local lineage metadata"),
-        "expected missing-lineage wording, got: {error}"
-    );
+    assert!(parsed.chains[0].edges[0].lineage_assertion.is_none());
+}
+
+#[test]
+fn stage1_parser_spike_accepts_missing_declared_target_as_underdeclared_shape() {
+    let parsed = parse_stage1_program_text(
+        r#"
+option primary on profile_doc capability read lease live
+option mirror on capability read lease live
+
+chain profile_ref = primary
+fallback mirror @ lineage(primary -> mirror)
+"#,
+    )
+    .expect("stage 1 spike should keep missing target row as underdeclared shape");
+
+    assert_eq!(parsed.options[1].target, "");
+    assert!(parsed.chains[0].edges[0].lineage_assertion.is_some());
 }
 
 #[test]

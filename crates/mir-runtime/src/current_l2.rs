@@ -109,6 +109,8 @@ fn current_l2_runner_accepted_sample_paths() -> Vec<PathBuf> {
         "e2-try-fallback.txt",
         "e3-option-admit-chain.txt",
         "e4-malformed-lineage.txt",
+        "e5-underdeclared-lineage.txt",
+        "e12-underdeclared-target-missing.txt",
         "e14-malformed-duplicate-option-declaration.txt",
         "e15-malformed-duplicate-chain-declaration.txt",
         "e16-malformed-missing-chain-head-option.txt",
@@ -566,30 +568,42 @@ impl CurrentL2FixedSourceParser {
     fn parse_option_decl(&mut self) -> Result<Statement, InterpreterError> {
         let line = self.peek().expect("option line should exist").clone();
         let tokens: Vec<&str> = line.text.split_whitespace().collect();
-        if tokens.len() < 8
-            || tokens[0] != "option"
-            || tokens[2] != "on"
-            || tokens[4] != "capability"
-            || tokens[6] != "lease"
-        {
-            return Err(self.line_error(
-                line.line_no,
-                format!("unsupported option declaration `{}`", line.text),
-            ));
-        }
-
-        let admit = match tokens.len() {
-            8 => {
-                self.stage1_lines.push(line.text.clone());
-                None
+        let (name, target, capability, lease, admit_slot) = match tokens.as_slice() {
+            ["option", name, "on", target, "capability", capability, "lease", lease] => {
+                (*name, (*target).to_string(), *capability, *lease, None)
             }
-            9 if tokens[8] == "admit" => {
+            ["option", _name, "on", _target, "capability", _capability, "lease", _lease, "admit"] => {
                 return Err(self.line_error(line.line_no, "missing declaration-side admit payload"));
             }
-            10 if tokens[8] == "admit" => {
-                self.stage1_supported = false;
-                Some(self.parse_predicate_fragment(tokens[9], line.line_no)?)
+            [
+                "option",
+                name,
+                "on",
+                target,
+                "capability",
+                capability,
+                "lease",
+                lease,
+                "admit",
+                admit_slot,
+            ] => (*name, (*target).to_string(), *capability, *lease, Some(*admit_slot)),
+            ["option", name, "on", "capability", capability, "lease", lease] => {
+                (*name, String::new(), *capability, *lease, None)
             }
+            ["option", _name, "on", "capability", _capability, "lease", _lease, "admit"] => {
+                return Err(self.line_error(line.line_no, "missing declaration-side admit payload"));
+            }
+            [
+                "option",
+                name,
+                "on",
+                "capability",
+                capability,
+                "lease",
+                lease,
+                "admit",
+                admit_slot,
+            ] => (*name, String::new(), *capability, *lease, Some(*admit_slot)),
             _ => {
                 return Err(self.line_error(
                     line.line_no,
@@ -598,12 +612,23 @@ impl CurrentL2FixedSourceParser {
             }
         };
 
+        let admit = match admit_slot {
+            None => {
+                self.stage1_lines.push(line.text.clone());
+                None
+            }
+            Some(slot) => {
+                self.stage1_supported = false;
+                Some(self.parse_predicate_fragment(slot, line.line_no)?)
+            }
+        };
+
         self.cursor += 1;
         Ok(Statement::OptionDecl {
-            name: tokens[1].to_string(),
-            target: tokens[3].to_string(),
-            capability: tokens[5].to_string(),
-            lease: tokens[7].to_string(),
+            name: name.to_string(),
+            target,
+            capability: capability.to_string(),
+            lease: lease.to_string(),
             admit,
         })
     }
@@ -788,25 +813,31 @@ fn parse_source_fallback_edge(line: &str, previous: &str) -> Result<(ChainEdge, 
     let rest = line
         .strip_prefix("fallback ")
         .ok_or_else(|| format!("unsupported fallback row `{line}`"))?;
-    let (successor_part, lineage_part) = rest
-        .split_once(" @ lineage(")
-        .ok_or_else(|| "missing edge-local lineage metadata".to_string())?;
-    let lineage_inner = lineage_part
-        .strip_suffix(')')
-        .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
-    let (lineage_pred, lineage_succ) = lineage_inner
-        .split_once(" -> ")
-        .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
-    let successor = successor_part.trim().to_string();
+    let (successor, lineage_assertion) = if let Some((successor_part, lineage_part)) =
+        rest.split_once(" @ lineage(")
+    {
+        let lineage_inner = lineage_part
+            .strip_suffix(')')
+            .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+        let (lineage_pred, lineage_succ) = lineage_inner
+            .split_once(" -> ")
+            .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+        (
+            successor_part.trim().to_string(),
+            Some(LineageAssertion {
+                predecessor: lineage_pred.trim().to_string(),
+                successor: lineage_succ.trim().to_string(),
+            }),
+        )
+    } else {
+        (rest.trim().to_string(), None)
+    };
 
     Ok((
         ChainEdge {
             predecessor: previous.to_string(),
             successor: successor.clone(),
-            lineage_assertion: Some(LineageAssertion {
-                predecessor: lineage_pred.trim().to_string(),
-                successor: lineage_succ.trim().to_string(),
-            }),
+            lineage_assertion,
         },
         successor,
     ))
@@ -926,7 +957,9 @@ fn summarize_stage1_reconnect_clusters(
         }
 
         for edge in &chain.edges {
-            summary.same_lineage_floor = true;
+            if edge.lineage_assertion.is_some() {
+                summary.same_lineage_floor = true;
+            }
 
             let predecessor = option_map.get(edge.predecessor.as_str()).copied();
             let successor = option_map.get(edge.successor.as_str()).copied();
@@ -1036,21 +1069,13 @@ fn collect_stage1_subset(
 fn stage1_edge_from_semantic_edge(
     edge: &ChainEdge,
 ) -> Result<Stage1ParsedChainEdge, InterpreterError> {
-    let lineage_assertion = edge
-        .lineage_assertion
-        .as_ref()
-        .map(stage1_lineage_from_semantic_lineage)
-        .ok_or_else(|| {
-            InterpreterError::InvalidProgram(
-                "stage 1 parser bridge cannot represent a semantic chain edge without lineage assertion"
-                    .to_string(),
-            )
-        })?;
-
     Ok(Stage1ParsedChainEdge {
         predecessor: edge.predecessor.clone(),
         successor: edge.successor.clone(),
-        lineage_assertion,
+        lineage_assertion: edge
+            .lineage_assertion
+            .as_ref()
+            .map(stage1_lineage_from_semantic_lineage),
     })
 }
 

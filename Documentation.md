@@ -33,8 +33,8 @@
 ## source-backed で既にあるもの
 
 - current L2 semantics / parser-free validation substrate / compile-ready minimal actualization
-- fixed-subset source sample authored fourteen:
-  `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
+- fixed-subset source sample authored sixteen:
+  `e1 / e2 / e3 / e4 / e5 / e12 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
 - runnable prototype sample second tranche:
   `p01 / p02 / p03 / p04 / p05`
   （`samples/prototype/` に置き、current lowerer / runner へ explicit path で流す）
@@ -46,9 +46,8 @@
   prototype / sample 実行時に proof notebook review unit / model-check concrete carrier の derived row preview を `artifact_preview` として見せる current cut がある
 - exact rough stimulus preservation bucket:
   `samples/not_implemented/`
-- underdeclared source-form gap preservation bucket:
-  `samples/not_implemented/current-l2-underdeclared/`
-  （fixture-level floor はあるが、current source parser / lowerer convenience cut がまだ受けない omission stimulus を保存する）
+- underdeclared source omission actualization:
+  `e5-underdeclared-lineage` と `e12-underdeclared-target-missing` は `samples/current-l2/` authored corpus に actualize 済みであり、helper-local `verification_preview` / `artifact_preview` でも `fixture_static_cluster` route を reached として見せる
 - sample-visible theorem / model-check first milestone:
   formal hook、`proof_notebook_review_unit`、row-local model-check carrier、emitted artifact wiring、sample-facing summary
 
@@ -85,8 +84,10 @@
   `specs/examples/452`
 - current sample verification preview and prototype second tranche:
   `specs/examples/453`
-- current artifact preview and underdeclared source gap note:
+- current artifact preview helper cut:
   `specs/examples/454`
+- current underdeclared source actualization and static artifact widening:
+  `specs/examples/455`
 
 ## まだ OPEN のもの
 

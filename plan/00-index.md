@@ -47,7 +47,7 @@
 ## current repo の短い要約
 
 - 主眼は **Mir** の意味論基盤である。
-- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored fourteen を already 持つ。
+- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored sixteen を already 持つ。
 - 近接運用は 3 lane で読むのが自然である。
   - execution lane: `Macro 0〜4 closeout fixed`
     （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）

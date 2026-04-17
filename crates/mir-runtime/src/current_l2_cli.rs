@@ -380,7 +380,7 @@ impl CurrentL2OperationalCliVerificationPreviewSummary {
         let static_verdict = report.runtime_report.checker_floor.static_gate.verdict;
 
         match static_verdict {
-            StaticGateVerdict::Malformed => Self {
+            StaticGateVerdict::Malformed | StaticGateVerdict::Underdeclared => Self {
                 formal_hook_status: "reached",
                 subject_kind: Some("fixture_static_cluster"),
                 subject_ref: Some(report.sample_id.clone()),
@@ -393,17 +393,6 @@ impl CurrentL2OperationalCliVerificationPreviewSummary {
                     "no_re_promotion",
                 ],
                 guard_reason: None,
-            },
-            StaticGateVerdict::Underdeclared => Self {
-                formal_hook_status: "guarded_not_reached",
-                subject_kind: None,
-                subject_ref: None,
-                proof_notebook_review_unit_obligations: Vec::new(),
-                model_check_concrete_carrier_obligations: Vec::new(),
-                guard_reason: Some(format!(
-                    "current helper preview does not emit verifier artifacts for `{}` because static gate verdict is underdeclared",
-                    report.sample_id
-                )),
             },
             StaticGateVerdict::Valid => {
                 let has_try_cut = report
@@ -456,7 +445,7 @@ impl CurrentL2OperationalCliArtifactPreviewSummary {
         let static_verdict = report.runtime_report.checker_floor.static_gate.verdict;
 
         match static_verdict {
-            StaticGateVerdict::Malformed => Self {
+            StaticGateVerdict::Malformed | StaticGateVerdict::Underdeclared => Self {
                 proof_notebook_review_units: vec![
                     CurrentL2OperationalCliProofNotebookReviewUnitPreview {
                         obligation_kind: "canonical_normalization_law",
@@ -491,10 +480,6 @@ impl CurrentL2OperationalCliArtifactPreviewSummary {
                         evidence_refs: vec![format!("fixture:{}", report.sample_id)],
                     },
                 ],
-            },
-            StaticGateVerdict::Underdeclared => Self {
-                proof_notebook_review_units: Vec::new(),
-                model_check_concrete_carriers: Vec::new(),
             },
             StaticGateVerdict::Valid => {
                 let has_try_cut = report

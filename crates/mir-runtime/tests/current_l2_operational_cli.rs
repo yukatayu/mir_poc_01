@@ -91,6 +91,42 @@ fn operational_cli_json_reports_static_stop_without_entering_evaluation() {
 }
 
 #[test]
+fn operational_cli_json_reports_underdeclared_verification_preview_and_artifact_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        "e5-underdeclared-lineage",
+        "--host-plan",
+        host_plan_path("e2-try-fallback.json").to_str().unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(value["sample"], "e5-underdeclared-lineage");
+    assert_eq!(
+        value["checker_floor"]["static_gate"]["verdict"],
+        "underdeclared"
+    );
+    assert_eq!(
+        value["verification_preview"]["formal_hook_status"],
+        "reached"
+    );
+    assert_eq!(
+        value["verification_preview"]["subject_kind"],
+        "fixture_static_cluster"
+    );
+    assert_eq!(
+        value["artifact_preview"]["proof_notebook_review_units"][0]["obligation_kind"],
+        "canonical_normalization_law"
+    );
+    assert_eq!(
+        value["artifact_preview"]["model_check_concrete_carriers"][1]["obligation_kind"],
+        "no_re_promotion"
+    );
+}
+
+#[test]
 fn operational_cli_rejects_missing_host_plan_flag() {
     let error = run_current_l2_operational_cli([
         "run-source-sample",

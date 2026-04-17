@@ -10,7 +10,7 @@
 1. `samples/current-l2/`
    - source-backed authored fixed subset の corpus である。
    - current runner / ladder / regression inventory の正本として扱う。
-   - current authored corpus fourteen 以外を hidden に数えない。
+   - current authored corpus sixteen 以外を hidden に数えない。
 2. `samples/prototype/`
    - **feature family 自体は comparison / mixed gate に残るが、current lowerer / runner で corrected prototype を回したい** sample を置く。
    - current L2 lowerer が受ける subset の内側へ寄せる。
@@ -41,6 +41,6 @@ current first tranche は次である。
 ## current non-goals
 
 - rough stimuli A–D を adopted syntax と読むこと
-- prototype sample を current authored fourteen に混ぜること
+- prototype sample を current authored sixteen に混ぜること
 - `samples/not_implemented/` を parser widening queue と同一視すること
 - final grammar / final public sample CLI / final packaging success criteria をここで固定すること

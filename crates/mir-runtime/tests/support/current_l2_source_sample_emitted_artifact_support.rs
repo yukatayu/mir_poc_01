@@ -98,7 +98,7 @@ fn build_formal_hook_for_source_sample(
             let detached_bundle = build_detached_bundle_artifact(&bundle, &runtime_report);
             build_formal_hook_from_detached_bundle_artifact(&detached_bundle)
         }
-        StaticGateVerdict::Malformed => {
+        StaticGateVerdict::Malformed | StaticGateVerdict::Underdeclared => {
             let fixture =
                 load_fixture_from_path(&fixture_path).map_err(|error| error.to_string())?;
             let gate = static_gate_detailed(&fixture);
@@ -106,10 +106,6 @@ fn build_formal_hook_for_source_sample(
                 build_detached_static_gate_artifact(fixture_path, &fixture, &gate);
             build_formal_hook_from_static_gate_artifact(&detached_static)
         }
-        StaticGateVerdict::Underdeclared => Err(format!(
-            "source sample `{}` is outside the current emitted artifact wiring floor because static gate verdict is underdeclared",
-            source_report.sample_id
-        )),
     }
 }
 

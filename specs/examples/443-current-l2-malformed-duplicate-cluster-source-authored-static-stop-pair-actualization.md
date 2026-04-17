@@ -74,7 +74,7 @@ current L2 では、
 
 ## current result
 
-current authored source sample corpus は `e14/e15` を含む authored fourteen に widened した。
+current authored source sample corpus は、subsequent underdeclared source actualization を含む current snapshot では authored sixteen であり、その内訳に `e14/e15` duplicate pair を含む。
 
 current runner / ladder / emitted artifact route では、
 

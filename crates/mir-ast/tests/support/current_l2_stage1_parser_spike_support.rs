@@ -69,8 +69,7 @@ pub fn lower_stage1_chain_decl_to_fixture_chain(
             .map(|edge| FixtureChainEdge {
                 predecessor: edge.predecessor.clone(),
                 successor: edge.successor.clone(),
-                lineage_assertion: Some({
-                    let lineage = &edge.lineage_assertion;
+                lineage_assertion: edge.lineage_assertion.as_ref().map(|lineage| {
                     FixtureLineageAssertion {
                         predecessor: lineage.predecessor.clone(),
                         successor: lineage.successor.clone(),

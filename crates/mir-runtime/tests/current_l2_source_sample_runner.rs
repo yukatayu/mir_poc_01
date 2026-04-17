@@ -220,6 +220,43 @@ fn current_l2_source_sample_runner_accepts_explicit_e4_path() {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_named_e5_sample() {
+    let report =
+        run_current_l2_source_sample("e5-underdeclared-lineage", FixtureHostPlan::default())
+            .unwrap();
+
+    assert_eq!(report.sample_id, "e5-underdeclared-lineage");
+    assert_eq!(report.sample_path, sample_path("e5-underdeclared-lineage.txt"));
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Underdeclared
+    );
+    assert!(!report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
+fn current_l2_source_sample_runner_accepts_named_e12_sample() {
+    let report = run_current_l2_source_sample(
+        "e12-underdeclared-target-missing",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(report.sample_id, "e12-underdeclared-target-missing");
+    assert_eq!(
+        report.sample_path,
+        sample_path("e12-underdeclared-target-missing.txt")
+    );
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Underdeclared
+    );
+    assert!(!report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_explicit_prototype_path() {
     let sample = prototype_sample_path("p01-dice-publication-handoff.txt");
     let host_plan = load_host_plan_from_path(&prototype_sample_path(

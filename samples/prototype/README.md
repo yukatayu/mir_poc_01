@@ -20,8 +20,5 @@
 
 ## current limit
 
-- fixture-level に `underdeclared` family は already あるが、source text では
-  - lineage assertion omission
-  - declared target omission
-  を current parser / lowerer convenience cut がまだ受けない。
-- そのため、それらの source stimulus は `samples/not_implemented/current-l2-underdeclared/` に preservation する。
+- `underdeclared` omission family (`e5` / `e12`) は `samples/current-l2/` authored corpus に actualize 済みである。
+- prototype bucket は、それでもなお mixed-gate の corrected prototype を runnable に比較したい family を置く場所として保つ。

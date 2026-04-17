@@ -223,7 +223,9 @@
 - `specs/examples/453-current-l2-sample-verification-preview-and-prototype-second-tranche.md`
   - sample / prototype 実行 summary で theorem/model-check bridge の current floor を helper-local `verification_preview` として見せる cut と、prototype second tranche の current reading を整理する補助文書。
 - `specs/examples/454-current-l2-artifact-preview-and-underdeclared-source-gap-note.md`
-  - sample / prototype 実行 summary で theorem/model-check bridge の current floor を helper-local `artifact_preview` として一段深く見せる cut と、underdeclared source-form omission stimulus を `samples/not_implemented/current-l2-underdeclared/` へ保つ current gap を整理する補助文書。
+  - sample / prototype 実行 summary で theorem/model-check bridge の current floor を helper-local `artifact_preview` として一段深く見せる cut を整理する補助文書。
+- `specs/examples/455-current-l2-underdeclared-source-actualization-and-static-artifact-widening.md`
+  - underdeclared lineage / target omission family を source-authored current-l2 sample と helper-local static artifact route に actualize した current convenience cut を整理する補助文書。
 - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
   - Phase 5 later package の current package として、proof obligation を docs 上の matrix と source evidence 参照の narrow handoff row bundle に分ける current first choice を整理した補助文書。
   - detached static gate artifact、`checked_reason_codes`、shared-space witness bundle を premature に public-looking contract へ昇格させない cut を与える。
