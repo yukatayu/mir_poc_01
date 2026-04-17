@@ -243,6 +243,70 @@ fn current_l2_source_sample_runner_accepts_named_e16_sample() {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_named_e14_sample() {
+    let report = run_current_l2_source_sample(
+        "e14-malformed-duplicate-option-declaration",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(
+        report.sample_id,
+        "e14-malformed-duplicate-option-declaration"
+    );
+    assert_eq!(
+        report.sample_path,
+        sample_path("e14-malformed-duplicate-option-declaration.txt")
+    );
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    let stage1 = report
+        .runtime_report
+        .checker_floor
+        .stage1_reconnect_clusters
+        .unwrap();
+    assert!(!stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(!stage1.capability_strengthening_floor);
+    assert!(!report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
+fn current_l2_source_sample_runner_accepts_named_e15_sample() {
+    let report = run_current_l2_source_sample(
+        "e15-malformed-duplicate-chain-declaration",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(
+        report.sample_id,
+        "e15-malformed-duplicate-chain-declaration"
+    );
+    assert_eq!(
+        report.sample_path,
+        sample_path("e15-malformed-duplicate-chain-declaration.txt")
+    );
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    let stage1 = report
+        .runtime_report
+        .checker_floor
+        .stage1_reconnect_clusters
+        .unwrap();
+    assert!(!stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(!stage1.capability_strengthening_floor);
+    assert!(!report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_named_e13_sample() {
     let report = run_current_l2_source_sample(
         "e13-malformed-capability-strengthening",

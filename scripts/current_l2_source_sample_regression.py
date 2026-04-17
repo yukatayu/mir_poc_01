@@ -76,6 +76,22 @@ CURRENT_FIXED_SUBSET_FIRST_CLUSTER: tuple[InventoryRow, ...] = (
         note="current authored static stop",
     ),
     InventoryRow(
+        sample_stem="e14-malformed-duplicate-option-declaration",
+        authored_status="source-authored",
+        expected_static="malformed",
+        expected_runtime="not_evaluated",
+        formal_hook="fixture_static_cluster",
+        note="duplicate cluster option-side static stop",
+    ),
+    InventoryRow(
+        sample_stem="e15-malformed-duplicate-chain-declaration",
+        authored_status="source-authored",
+        expected_static="malformed",
+        expected_runtime="not_evaluated",
+        formal_hook="fixture_static_cluster",
+        note="duplicate cluster chain-side static stop",
+    ),
+    InventoryRow(
         sample_stem="e16-malformed-missing-chain-head-option",
         authored_status="source-authored",
         expected_static="malformed",
@@ -348,6 +364,38 @@ def plan_regression_commands(
                 str(artifact_root),
                 "--run-label",
                 smoke_run_label(effective_label, "e4-malformed-lineage"),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
+            name="static formal hook smoke for e14-malformed-duplicate-option-declaration",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-static",
+                "e14-malformed-duplicate-option-declaration",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(
+                    effective_label, "e14-malformed-duplicate-option-declaration"
+                ),
+                "--overwrite",
+            ),
+        ),
+        RegressionCommand(
+            name="static formal hook smoke for e15-malformed-duplicate-chain-declaration",
+            argv=(
+                python_cmd,
+                str(detached_loop),
+                "smoke-formal-hook-static",
+                "e15-malformed-duplicate-chain-declaration",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                smoke_run_label(
+                    effective_label, "e15-malformed-duplicate-chain-declaration"
+                ),
                 "--overwrite",
             ),
         ),

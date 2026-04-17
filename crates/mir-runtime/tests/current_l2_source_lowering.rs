@@ -101,6 +101,60 @@ fn current_l2_source_lowering_matches_e16_fixture_and_missing_head_static_stop()
 }
 
 #[test]
+fn current_l2_source_lowering_matches_e14_fixture_and_duplicate_option_static_stop() {
+    let source = fs::read_to_string(sample_path(
+        "e14-malformed-duplicate-option-declaration.txt",
+    ))
+    .unwrap();
+    let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
+    let report = run_current_l2_runtime_skeleton(
+        lowered.program,
+        FixtureHostPlan::default(),
+        Some(lowered.parser_bridge_input),
+    )
+    .unwrap();
+
+    let stage1 = report.checker_floor.stage1_reconnect_clusters.unwrap();
+    assert!(!stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(!stage1.capability_strengthening_floor);
+    assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    assert!(!report.run_report.entered_evaluation);
+    assert_eq!(report.run_report.terminal_outcome, None);
+}
+
+#[test]
+fn current_l2_source_lowering_matches_e15_fixture_and_duplicate_chain_static_stop() {
+    let source = fs::read_to_string(sample_path(
+        "e15-malformed-duplicate-chain-declaration.txt",
+    ))
+    .unwrap();
+    let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
+    let report = run_current_l2_runtime_skeleton(
+        lowered.program,
+        FixtureHostPlan::default(),
+        Some(lowered.parser_bridge_input),
+    )
+    .unwrap();
+
+    let stage1 = report.checker_floor.stage1_reconnect_clusters.unwrap();
+    assert!(!stage1.same_lineage_floor);
+    assert!(!stage1.missing_option_structure_floor);
+    assert!(!stage1.capability_strengthening_floor);
+    assert!(report.checker_floor.stage2_try_rollback_summary.is_none());
+    assert_eq!(
+        report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Malformed
+    );
+    assert!(!report.run_report.entered_evaluation);
+    assert_eq!(report.run_report.terminal_outcome, None);
+}
+
+#[test]
 fn current_l2_source_lowering_matches_e13_fixture_and_capability_static_stop() {
     let source =
         fs::read_to_string(sample_path("e13-malformed-capability-strengthening.txt")).unwrap();

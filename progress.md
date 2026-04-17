@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-17 08:41 JST
+最終更新: 2026-04-17 09:12 JST
 
 ## この文書について
 
@@ -11,7 +11,8 @@
 ## current snapshot
 
 - current execution line:
-  `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+  `Macro 0〜4 closeout fixed`
+  （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
 - current theory-lab line:
   `Macro 5 third-order follow-up active`
   （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
@@ -19,12 +20,12 @@
   `Macro 6/7 reserve integration checkpoint close`
   （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 - current self-driven queue:
-  `7 package`
-  （promoted immediate 2 本 + boundary-prep reserve 5 本）
+  `6 package`
+  （promoted immediate 1 本 + boundary-prep reserve 5 本）
 - immediate blocker: `0`
 - current lane を止める user decision: `0`
 - current authored source sample:
-  `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
+  `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
 
 ## macro phase map
 
@@ -41,7 +42,7 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 | `Macro 1` | semantic kernel / invariant stabilization | late | 84% | 中 | 着手可能 | narrow semantic reopen の closeout まで self-driven |
 | `Macro 2` | parser-free validation substrate | late | 84% | 中 | 着手可能 | current substrate closeout まで self-driven |
 | `Macro 3` | compile-ready minimal actualization | late | 80% | 中 | 着手可能 | current tranche closeout まで self-driven |
-| `Macro 4` | executable fixed-subset sample expansion | duplicate cluster reopen sequencing へ進行中 | 81% | 重 | 着手可能 | current fixed-subset widening closeout まで self-driven |
+| `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed | 95% | 重 | 着手可能 | current fixed-subset widening closeout まで self-driven |
 | `Macro 5` | typed / theorem / model-check bridge | third-order follow-up active | 73% | 重 | 着手可能 | current boundary / pilot / framing closeout まで self-driven |
 | `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary plus reserve strengthening | 44% | 重 | 着手可能（boundaryまで） | docs-first boundary / fairness-replay seam まで self-driven |
 | `Macro 7` | toolchain / backend / host-facing integration | thin facade / shell actualization 後の packaging reserve | 35% | 重 | 着手可能（boundaryまで） | thin facade / packaging boundary-prep まで self-driven |
@@ -51,8 +52,8 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 
 | feature family | 現在地 | できていること | 次の意味ある一歩 |
 |---|---|---|---|
-| event DAG / local `try` / `atomic_cut` | `S5-S6` | parser-free / source-backed runnable evidence | duplicate cluster widening comparison |
-| guarded option chain / `lease` / monotone degradation | `S6` | missing-option / capability pair まで source-authored static-stop widening | duplicate cluster の next widen cut を決める |
+| event DAG / local `try` / `atomic_cut` | `S5-S6` | parser-free / source-backed runnable evidence | broader try-rollback malformed-static family は kept-later inventory に残す |
+| guarded option chain / `lease` / monotone degradation | `S6` | missing-option / capability / duplicate pair まで source-authored static-stop widening | broader malformed-static family を hidden promotion なしで reserve に保つ |
 | contracts / static gate / formal hook | `S6` | static gate、tool-neutral formal hook、emitted artifact wiring、request / predicate / `try` cluster typed-surface reserve、typed-surface family split | stronger typed-surface promotion threshold framing note |
 | theorem-side pilot | `S5-S6` | notebook-first pilot、lemma order、lemma wording floor、bridge stop-line refresh、admissible evidence contraction、notebook-consumer threshold / discharge reserve | theorem discharge transport / public-contract later-gate framing note |
 | model-check line | `S5-S6` | row-local carrier、projection reserve inventory、small-cluster projection keep/drop、sample-facing summary、tool-binding stop line | model-check property-language / tool-binding later-gate framing note |
@@ -63,7 +64,7 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 | ordering / `memory_order` reinterpretation | `S4-S5` | cut-family comparison、relation decomposition、falsifier coverage、property-language bridge、emitted-artifact schema reserve、source-surface wording reserve | modality internalization trigger と later property-language gate を切り分ける |
 | syntax / modality theory line | `S3-S4` | syntax honesty principle、stimuli comparison、modal promotion threshold、guarded-vs-MDTT/MTT reduction timing | modality internalization trigger |
 | public dev surface / CLI | `S4-S5` | thin facade、later support、current-L2 scoped Rust shell actualization | public operational CLI installed-binary / packaging success-criteria mixed-gate boundary note |
-| executable sample corpus | `S6` | authored dozen、runner / ladder / regression helper、artifact fan-out、duplicate next-cut comparison | duplicate cluster source-authored static-stop pair actualization comparison |
+| executable sample corpus | `S6` | authored fourteen、runner / ladder / regression helper、artifact fan-out、duplicate pair actualization | broader try-rollback malformed-static family は kept-later inventory に残す |
 
 ## 層ごとの進捗
 
@@ -181,7 +182,6 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 ### 研究で見つけること
 
 - modality internalization trigger note
-- malformed duplicate-cluster source-authored static-stop pair actualization comparison
 - stronger typed-surface promotion threshold framing note
 - theorem discharge transport / public-contract later-gate framing note
 - model-check property-language / tool-binding later-gate framing note
@@ -206,6 +206,7 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 ## recent log
 
 - 注記: この欄は recent log として保つ。詳細は `docs/reports/` を正本にする。
+- 2026-04-17 09:12 JST — `docs/reports/0713` で `e14/e15` duplicate pair を source-authored static-stop pair として actualize し、runner / ladder / emitted artifact wiring / regression inventory / sample docs を authored fourteen へ widen したうえで、execution lane を `Macro 0〜4 closeout fixed` に更新した。
 - 2026-04-17 08:00 JST — `docs/reports/0710` で macro phase map を見直し、`Macro 0〜5` は closeout まで self-driven、`Macro 6〜7` は boundary-prep まで、`Macro 8` は user-spec-required だと読み分けたうえで、`tasks.md` に current self-driven macro-phase closeout reading を追加した。
 - 2026-04-17 08:41 JST — `docs/reports/0712` で `macro phase map` に rough progress `%` 列を追加し、`Macro 0〜8` が repo 全体の top-level axis であり `Macro 8` は application-specific realization 専用であることを明記したうえで、repo-scoped progress estimate を再配置した。
 - 2026-04-17 07:42 JST — `docs/reports/0709` で `tasks.md` / `progress.md` / `plan/11` を再読し、self-driven queue が 2 本に圧縮されすぎていた点を補正して、promoted immediate 2 本に加えて boundary-prep reserve 5 本を current self-driven queue に戻した。

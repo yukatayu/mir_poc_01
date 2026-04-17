@@ -47,9 +47,10 @@
 ## current repo の短い要約
 
 - 主眼は **Mir** の意味論基盤である。
-- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored dozen を already 持つ。
+- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored fourteen を already 持つ。
 - 近接運用は 3 lane で読むのが自然である。
-  - execution lane: `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+  - execution lane: `Macro 0〜4 closeout fixed`
+    （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
   - theory-lab lane: `Macro 5 third-order follow-up active`
     （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
   - reserve integration lane: `Macro 6/7 reserve integration checkpoint close`

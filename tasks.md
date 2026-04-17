@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-17 08:41 JST
+最終更新: 2026-04-17 09:04 JST
 
 ## この文書について
 
@@ -12,7 +12,8 @@
 ## current lanes
 
 - execution lane:
-  `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+  `Macro 0〜4 closeout fixed`
+  （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
 - theory-lab lane:
   `Macro 5 third-order follow-up active`
   （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
@@ -47,24 +48,21 @@
 | 順番 | lane | macro | task package | completion signal | rough estimate |
 |---|---|---|---|---|---|
 | 1 | theory-lab | `Macro 5/6` | modality internalization trigger note | stronger-foundation trigger が current stop line と整合して揃う | 1〜2 task |
-| 2 | execution | `Macro 4` | malformed duplicate-cluster source-authored static-stop pair actualization comparison | duplicate pair widening の exact actualization cut と non-promotion guard が揃う | 1〜2 task |
 
 ### boundary-prep まで自走可能な reserve queue
 
 | 順番 | lane | macro | task package | completion signal | rough estimate |
 |---|---|---|---|---|---|
-| 3 | theory-lab | `Macro 5/6 reserve` | stronger typed-surface promotion threshold framing note | stronger typed surface を current stop line から越えずに reopen する条件と non-goal が揃う | 1 task |
-| 4 | theory-lab | `Macro 5/6 reserve` | theorem discharge transport / public-contract later-gate framing note | abstract discharge-entry reserve の先にある transport / public contract の later seam が揃う | 1 task |
-| 5 | theory-lab | `Macro 5/6 reserve` | model-check property-language / tool-binding later-gate framing note | first settled property language と concrete tool seam の stop line が揃う | 1 task |
-| 6 | reserve integration | `Macro 6 reserve` | shared-space fairness / replay mixed-gate boundary note | final operational catalog へ送る前の fairness / replay boundary と user-spec-required seam が揃う | 1 task |
-| 7 | reserve integration | `Macro 7 reserve` | public operational CLI installed-binary / packaging success-criteria mixed-gate boundary note | installed-binary promotion と packaging success criteria の mixed gate が揃う | 1 task |
+| 2 | theory-lab | `Macro 5/6 reserve` | stronger typed-surface promotion threshold framing note | stronger typed surface を current stop line から越えずに reopen する条件と non-goal が揃う | 1 task |
+| 3 | theory-lab | `Macro 5/6 reserve` | theorem discharge transport / public-contract later-gate framing note | abstract discharge-entry reserve の先にある transport / public contract の later seam が揃う | 1 task |
+| 4 | theory-lab | `Macro 5/6 reserve` | model-check property-language / tool-binding later-gate framing note | first settled property language と concrete tool seam の stop line が揃う | 1 task |
+| 5 | reserve integration | `Macro 6 reserve` | shared-space fairness / replay mixed-gate boundary note | final operational catalog へ送る前の fairness / replay boundary と user-spec-required seam が揃う | 1 task |
+| 6 | reserve integration | `Macro 7 reserve` | public operational CLI installed-binary / packaging success-criteria mixed-gate boundary note | installed-binary promotion と packaging success criteria の mixed gate が揃う | 1 task |
 
 ## 研究で詰める論点
 
 - modality internalization trigger
   - detail / options / current recommendation は `plan/18` Track F を参照。
-- duplicate-cluster exact actualization cut
-  - detail / options / current recommendation は `plan/11` と `plan/12` を参照。
 - stronger typed-surface promotion threshold framing
   - detail / options / current recommendation は `plan/18` Track A と `plan/12` を参照。
 - theorem discharge transport / public-contract framing
@@ -78,7 +76,7 @@
 
 ## mixed gate / later reserve
 
-- 上の 3〜7 は boundary-prep までは self-driven に進めてよい。
+- 上の 2〜6 は boundary-prep までは self-driven に進めてよい。
 - ただし、その先の
   - stronger typed surface の実昇格
   - theorem public contract の具体化

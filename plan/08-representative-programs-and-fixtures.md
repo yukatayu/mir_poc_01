@@ -28,7 +28,7 @@
 - current extension policy は `.txt` であり、final grammar を意味しない。
 - current naming policy は fixture stem / `fixture_id` aligned kebab-case である。
 - current initial cluster は `e1` / `e2` / `e3` / `e4` / `e21` / `e23` に留める。
-- current authored corpus はその initial sextet に `e22-try-atomic-cut-place-mismatch`、`e19-malformed-target-mismatch`、`e16-malformed-missing-chain-head-option`、`e18-malformed-missing-successor-option`、`e13-malformed-capability-strengthening`、`e20-malformed-late-capability-strengthening` を加えた authored dozen に進んでいる。
+- current authored corpus はその initial sextet に `e14-malformed-duplicate-option-declaration`、`e15-malformed-duplicate-chain-declaration`、`e22-try-atomic-cut-place-mismatch`、`e19-malformed-target-mismatch`、`e16-malformed-missing-chain-head-option`、`e18-malformed-missing-successor-option`、`e13-malformed-capability-strengthening`、`e20-malformed-late-capability-strengthening` を加えた authored fourteen に進んでいる。
 
 ## current mapping matrix cut
 
@@ -51,12 +51,14 @@
 - `e3-option-admit-chain` は representative prose plain `E3` ではなく `E3-variant` row として扱う。
 - `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
 - current matrix 自体では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
-- source sample の actual file current authored dozen は `e1` / `e2` / `e3` / `e4` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。`e3` は admit-family third slot として source row / runner / inventory / ladder までは実装済みだが、formal hook stage は guarded に留めるのが current first choice である。
-- verification ladder current cut では、current authored dozen に reached stage row を付ける。
+- source sample の actual file current authored fourteen は `e1` / `e2` / `e3` / `e4` / `e14` / `e15` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。`e3` は admit-family third slot として source row / runner / inventory / ladder までは実装済みだが、formal hook stage は guarded に留めるのが current first choice である。
+- verification ladder current cut では、current authored fourteen に reached stage row を付ける。
   - `e1` は `static gate = reached(valid)`、`interpreter = reached(explicit_failure)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e2` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e3` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = not reached (guarded)` と読む。
   - `e4` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
+  - `e14` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
+  - `e15` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
   - `e16` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
   - `e13` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
   - `e19` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
@@ -66,8 +68,8 @@
   - `e20` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
   - `e23` は `static gate = reached(malformed)`、`interpreter = not reached (static stop)`、`formal hook = reached(fixture_static_cluster)` と読む。
 - source-sample authoring policy current cut では、repo-local flow を `.docs/current-l2-source-sample-authoring-policy.md` と `scripts/current_l2_source_sample_regression.py` に寄せる。
-  - `inventory` は current authored dozen の file presence と guarded row status を確認する。
-  - `regression` は lowering / runner / ladder bundle を current authored dozen に流し、formal-hook smoke sub-bundleは `runtime_try_cut_cluster` / `fixture_static_cluster` current top に入る 11 row だけに流す。
+  - `inventory` は current authored fourteen の file presence と guarded row status を確認する。
+  - `regression` は lowering / runner / ladder bundle を current authored fourteen に流し、formal-hook smoke sub-bundleは `runtime_try_cut_cluster` / `fixture_static_cluster` current top に入る 13 row だけに流す。
   - current `bless` は retained artifact archive ではなく、source / fixture / matrix / ladder / snapshot docs の reviewed sync、`inventory` / `regression` success、必要なら emitted review-unit / model-check carrier helper output の inspection を意味する。
 - post-sextet first cluster current cut では、first broader authored-row family は `e21` / `e22` try-rollback locality contrast に置く。
   - `e21` は source-authored frontier-update anchor である。
@@ -134,8 +136,8 @@
 | `e5-underdeclared-lineage` | lineage 証拠不足 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E5, `0021`, `0022`, `0047`, `0147` |
 | `e12-underdeclared-target-missing` | declared access target 欠落 | `underdeclared` | `not_evaluated` | runtime に入らない | なし | E12, `0155` |
 | `e13-malformed-capability-strengthening` | capability strengthening | `malformed` | `not_evaluated` | runtime に入らない | なし | E13, `0155` |
-| `e14-malformed-duplicate-option-declaration` | duplicate option declaration | `malformed` | `not_evaluated` | runtime に入らない | なし | E14, `0157` |
-| `e15-malformed-duplicate-chain-declaration` | duplicate chain declaration | `malformed` | `not_evaluated` | runtime に入らない | なし | E15, `0157` |
+| `e14-malformed-duplicate-option-declaration` | duplicate option declaration | `malformed` | `not_evaluated` | runtime に入らない | なし | E14, `0157`, `0713` |
+| `e15-malformed-duplicate-chain-declaration` | duplicate chain declaration | `malformed` | `not_evaluated` | runtime に入らない | なし | E15, `0157`, `0713` |
 | `e16-malformed-missing-chain-head-option` | missing chain head option | `malformed` | `not_evaluated` | runtime に入らない | なし | E16, `0159` |
 | `e17-malformed-missing-predecessor-option` | missing predecessor option | `malformed` | `not_evaluated` | runtime に入らない | なし | E17, `0159` |
 | `e18-malformed-missing-successor-option` | missing successor option | `malformed` | `not_evaluated` | runtime に入らない | なし | E18, `0159` |

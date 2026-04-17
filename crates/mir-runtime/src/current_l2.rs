@@ -105,6 +105,8 @@ fn current_l2_runner_accepted_sample_paths() -> Vec<PathBuf> {
         "e2-try-fallback.txt",
         "e3-option-admit-chain.txt",
         "e4-malformed-lineage.txt",
+        "e14-malformed-duplicate-option-declaration.txt",
+        "e15-malformed-duplicate-chain-declaration.txt",
         "e16-malformed-missing-chain-head-option.txt",
         "e13-malformed-capability-strengthening.txt",
         "e19-malformed-target-mismatch.txt",

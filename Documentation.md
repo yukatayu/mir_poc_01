@@ -21,7 +21,8 @@
   を already 持つ。
 - current status は 3 lane で読むのが自然である。
   - execution lane:
-    `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+    `Macro 0〜4 closeout fixed`
+    （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
   - theory-lab lane:
     `Macro 5 third-order follow-up active`
     （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
@@ -32,8 +33,8 @@
 ## source-backed で既にあるもの
 
 - current L2 semantics / parser-free validation substrate / compile-ready minimal actualization
-- fixed-subset source sample authored dozen:
-  `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
+- fixed-subset source sample authored fourteen:
+  `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
 - sample-visible theorem / model-check first milestone:
   formal hook、`proof_notebook_review_unit`、row-local model-check carrier、emitted artifact wiring、sample-facing summary
 
@@ -60,6 +61,8 @@
   `specs/examples/439...440`
 - theory-lab third-order follow-up second pair:
   `specs/examples/441...442`
+- execution closeout actualization:
+  `specs/examples/443`
 
 ## まだ OPEN のもの
 

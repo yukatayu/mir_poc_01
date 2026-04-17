@@ -18,9 +18,9 @@ current meaning は、
 
 ## current scope
 
-- current authored source sample は `e1` / `e2` / `e3` / `e4` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` の authored dozen に置く。
+- current authored source sample は `e1` / `e2` / `e3` / `e4` / `e14` / `e15` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` の authored fourteen に置く。
 - `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
-- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen では existing `e4` row と new `e19` row を source-backed static-stop pair へ actualize 済みである。さらに capability second source-backed widening actualization では `e13/e20` pair も source-authored static-stop pair として actualize 済みであり、source sample / lowerer / runner / ladder / emitted artifact wiring / regression helper まで widened している。public operational CLI concrete shell actualization と shared-space room-profile / host-binding bridge-only note も fixed 済みであり、repo-level current line は reserve integration lane の packaging / fairness-replay reserve と sample-side duplicate cluster source-sample widening comparison に進んでいる。
+- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen では existing `e4` row と new `e19` row を source-backed static-stop pair へ actualize 済みである。さらに capability second source-backed widening actualization では `e13/e20` pair も source-authored static-stop pair として actualize 済みであり、duplicate-cluster source-authored static-stop pair actualization では `e14/e15` pair も source sample / lowerer / runner / ladder / emitted artifact wiring / regression helper まで widened している。public operational CLI concrete shell actualization と shared-space room-profile / host-binding bridge-only note も fixed 済みであり、repo-level current line は theory-lab lane の modality internalization trigger note と reserve integration lane の packaging / fairness-replay reserve に進んでいる。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 
@@ -49,6 +49,8 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e21-try-atomic-cut-frontier ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e22-try-atomic-cut-place-mismatch ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e4-malformed-lineage ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e14-malformed-duplicate-option-declaration ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e15-malformed-duplicate-chain-declaration ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e16-malformed-missing-chain-head-option ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e13-malformed-capability-strengthening ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e19-malformed-target-mismatch ...`
@@ -56,7 +58,7 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e20-malformed-late-capability-strengthening ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
 
-helper は current authored dozen を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
+helper は current authored fourteen を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
 
 ## current non-goals

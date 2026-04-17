@@ -1,0 +1,8 @@
+place root {
+  place session {
+    place profile_access {
+      option profile_ref on profile_doc capability read lease live
+      option profile_ref on profile_doc capability read lease live
+    }
+  }
+}

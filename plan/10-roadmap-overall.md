@@ -29,7 +29,8 @@
 - 主眼:
   fixed-subset source sample と malformed family の narrow widening
 - current line:
-  `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+  `Macro 0〜4 closeout fixed`
+  （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
 - goal:
   runnable corpus を広げつつ、runner / ladder / regression / docs mirror を崩さない
 
@@ -65,7 +66,7 @@
 | `Macro 1` | semantic kernel / invariant stabilization | late | current L2 semantic reopen が narrow になる |
 | `Macro 2` | parser-free validation substrate | late | detached loop / fixture corpus / compare helper の drift suppression |
 | `Macro 3` | compile-ready minimal actualization | late | support-only / public-candidate split の安定化 |
-| `Macro 4` | executable fixed-subset sample expansion | active | widened row を current ladder に安全に追加できる |
+| `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed | widened row を current ladder に安全に追加できる |
 | `Macro 5` | typed / theorem / model-check bridge | active at boundary | first planning cut と stop line が package 単位で固定される |
 | `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | room-profile / confusion-replay / authority-family の compact note が固定される |
 | `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | shell actual package と bridge-only host note の境界が固定される |

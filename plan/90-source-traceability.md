@@ -2797,3 +2797,19 @@
   - `docs/reports/0709-self-driven-queue-reassessment-and-snapshot-refresh.md`
   - `docs/reports/0710-macro-phase-map-refresh-and-self-driven-closeout-reading.md`
 - 今回の要点は、macro phase map を見直し、`Macro 0〜5` は self-driven closeout、`Macro 6〜7` は boundary-prep まで self-driven、`Macro 8` は user-spec-required と読む current snapshot を明示した点である。
+
+### 2026-04-17 duplicate pair actualization and Macro 0-4 closeout addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`samples/current-l2/README.md`、`.docs/current-l2-source-sample-authoring-policy.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/430-current-l2-malformed-duplicate-cluster-later-reopen-comparison.md`
+  - `specs/examples/438-current-l2-malformed-duplicate-cluster-source-sample-widening-comparison.md`
+  - `specs/examples/443-current-l2-malformed-duplicate-cluster-source-authored-static-stop-pair-actualization.md`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_verification_ladder.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_emitted_artifact_wiring.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`
+  - `docs/reports/0713-macro0-4-closeout-via-duplicate-cluster-actualization.md`
+- 今回の要点は、duplicate cluster `e14/e15` を source-authored static-stop pair として actualize し、execution lane を current scoped `Macro 0〜4 closeout fixed` へ更新した点である。

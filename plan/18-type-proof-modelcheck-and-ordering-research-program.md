@@ -429,7 +429,9 @@ refs-only reserve schema を first cut とし、consumer-shaped schema と sourc
 ## current near-term theory-lab sequence
 
 1. modality internalization trigger note
-2. malformed duplicate-cluster source-authored static-stop pair actualization comparison
+2. stronger typed-surface promotion threshold framing note
+3. theorem discharge transport / public-contract later-gate framing note
+4. model-check property-language / tool-binding later-gate framing note
 
 ## current recommendation
 

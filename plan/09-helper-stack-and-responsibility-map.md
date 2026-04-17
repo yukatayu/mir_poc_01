@@ -280,7 +280,7 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - current cut では reached runtime row / reached static row / guarded row の split だけを helper-local evidence に actualize し、runner 本体や public/report shape は widen しない
 - `scripts/current_l2_source_sample_regression.py`
   - Phase 6 source-sample authoring / bless policy current cut の repo-local helper
-  - current fixed-subset authored dozen inventory と widened regression bundleだけを扱う
+  - current fixed-subset authored fourteen inventory と widened regression bundleだけを扱う
   - public runner CLI、retained artifact bless/update、authored row widen timing は扱わない
 - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
   - Phase 6 front-half compile-ready verification / formal hook の thin CLI emitter

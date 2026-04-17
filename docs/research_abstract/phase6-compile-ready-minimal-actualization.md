@@ -42,10 +42,12 @@ Phase 6 は、Phase 1〜5 で fixed した semantics / parser-free PoC / proof b
   `specs/examples/433...438`
 - third-order follow-up:
   `specs/examples/439...442`
+- execution closeout actualization:
+  `specs/examples/443`
 
 current authored source sample は
-`e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23`
-の authored dozen である。
+`e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
+の authored fourteen である。
 
 ## docs-first adjacent theory-lab floor
 
@@ -60,9 +62,10 @@ current authored source sample は
 
 ### execution lane
 
-- `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+- `Macro 0〜4 closeout fixed`
+- duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory
 - goal:
-  duplicate cluster widening の exact actualization cut を narrow に見極める
+  current fixed-subset widening closeout を保ったまま broader malformed-static family を hidden promotion なしで reserve に残す
 
 ### theory-lab adjacent lane
 
@@ -96,7 +99,7 @@ current authored source sample は
   まで docs-first に固まった。
 - docs-first host-I/O boundary と shared-space identity / admission / authority boundary も fixed 済みである。
 - current-L2 scoped Rust shell over thin facade、shared-space room-profile / host-binding bridge-only note、public operational CLI packaging reserve note、shared-space fairness / replay strengthening reserve note も fixed 済みであり、reserve integration line は checkpoint close に入っている。
-- duplicate-cluster line は current では pair-first actualization comparison を次の execution reopen として扱う。
+- duplicate-cluster line は current では pair-first actualization を close 済みとし、broader malformed-static family は kept-later inventory に残す。
 - final parser grammar、final public API、concrete theorem / model-check tool binding、backend / external codegen は still later に残る。
 
 ## まだ fixed していないこと
@@ -121,7 +124,7 @@ current authored source sample は
 - `specs/examples/299...324`
 - `specs/examples/327...384`
 - `specs/examples/363...404`
-- `specs/examples/405...430`
+- `specs/examples/405...443`
 - `docs/reports/0611...0703`
 - `crates/mir-ast/src/current_l2.rs`
 - `crates/mir-runtime/src/current_l2.rs`

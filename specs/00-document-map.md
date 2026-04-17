@@ -1133,6 +1133,8 @@
   - row-local carrier から small-cluster semantic projection へ進むときの keep/drop line を整理する補助文書。
 - `specs/examples/442-current-l2-order-handoff-source-surface-wording-reserve-note.md`
   - order/handoff line を snake_case relation family と plain-language stage wording の二層でどう説明するかを整理する補助文書。
+- `specs/examples/443-current-l2-malformed-duplicate-cluster-source-authored-static-stop-pair-actualization.md`
+  - duplicate cluster `e14/e15` を source-authored static-stop pair として narrow actualize し、execution lane の current fixed-subset widening closeout をどこで閉じるかを整理する補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

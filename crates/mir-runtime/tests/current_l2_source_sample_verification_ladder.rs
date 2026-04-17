@@ -200,6 +200,76 @@ fn verification_ladder_marks_e4_as_static_stop_and_static_formal_hook_reached() 
 }
 
 #[test]
+fn verification_ladder_marks_e14_as_static_stop_and_static_formal_hook_reached() {
+    let source_report = run_current_l2_source_sample(
+        "e14-malformed-duplicate-option-declaration",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
+        StaticGateVerdict::Malformed
+    );
+    assert!(!source_report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
+
+    let path = fixture_path("e14-malformed-duplicate-option-declaration.json");
+    let fixture = load_fixture_from_path(&path).unwrap();
+    let gate = static_gate_detailed(&fixture);
+    let detached_static = build_detached_static_gate_artifact(path, &fixture, &gate);
+    let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
+
+    assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
+    assert_eq!(
+        formal_hook.subject_ref,
+        "e14_malformed_duplicate_option_declaration"
+    );
+}
+
+#[test]
+fn verification_ladder_marks_e15_as_static_stop_and_static_formal_hook_reached() {
+    let source_report = run_current_l2_source_sample(
+        "e15-malformed-duplicate-chain-declaration",
+        FixtureHostPlan::default(),
+    )
+    .unwrap();
+
+    assert_eq!(
+        source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict,
+        StaticGateVerdict::Malformed
+    );
+    assert!(!source_report.runtime_report.run_report.entered_evaluation);
+    assert_eq!(
+        source_report.runtime_report.run_report.terminal_outcome,
+        None
+    );
+
+    let path = fixture_path("e15-malformed-duplicate-chain-declaration.json");
+    let fixture = load_fixture_from_path(&path).unwrap();
+    let gate = static_gate_detailed(&fixture);
+    let detached_static = build_detached_static_gate_artifact(path, &fixture, &gate);
+    let formal_hook = build_formal_hook_from_static_gate_artifact(&detached_static).unwrap();
+
+    assert_eq!(formal_hook.subject_kind, "fixture_static_cluster");
+    assert_eq!(
+        formal_hook.subject_ref,
+        "e15_malformed_duplicate_chain_declaration"
+    );
+}
+
+#[test]
 fn verification_ladder_marks_e16_as_static_stop_and_static_formal_hook_reached() {
     let source_report = run_current_l2_source_sample(
         "e16-malformed-missing-chain-head-option",

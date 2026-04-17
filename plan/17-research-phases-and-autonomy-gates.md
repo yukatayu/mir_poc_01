@@ -31,7 +31,7 @@
 | `Macro 1` | semantic kernel / invariant stabilization | late | 中 | self-driven | L0/L1 invariant へ影響する変更が出る |
 | `Macro 2` | parser-free validation substrate | late | 中 | self-driven | helper/public drift が出る |
 | `Macro 3` | compile-ready minimal actualization | late | 中 | self-driven | support-only/public-candidate split が崩れる |
-| `Macro 4` | executable fixed-subset sample expansion | active | 重 | self-driven | new sample family が core semantics を押し広げる |
+| `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed | 重 | self-driven | new sample family が core semantics を押し広げる |
 | `Macro 5` | typed / theorem / model-check bridge | active at boundary | 重 | self-driven up to boundary | concrete tool / full type calculus / production contract が必要になる |
 | `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | 重 | mixed（boundary-prep までは self-driven） | final operational catalog / policy profile が必要になる |
 | `Macro 7` | toolchain / backend / host-facing integration | thin facade plus reserve shell | 重 | mixed（boundary-prep までは self-driven） | final public packaging / external target が必要になる |
@@ -40,7 +40,8 @@
 ## current lane split
 
 - execution lane:
-  `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+  `Macro 0〜4 closeout fixed`
+  （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
 - theory-lab lane:
   `Macro 5 third-order follow-up active`
   （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）

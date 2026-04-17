@@ -3,7 +3,7 @@
 ## repo 全体の主眼
 
 - 主眼は **Mir** の意味論基盤である。
-- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored dozen を already 持つ。
+- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored fourteen を already 持つ。
 - Mirrorea / shared-space / Typed-Effect / Prism / 上位アプリは separable track として扱う。
 
 ## current lane snapshot
@@ -11,7 +11,8 @@
 - legacy checkpoint としては、Phase 1〜5 closeout / freeze と legacy Phase 6 compile-ready checkpoint は fixed 済みである。
 - current active lane は 3 本で読むのが自然である。
   - execution lane:
-    `Macro 4 / malformed duplicate-cluster source-authored static-stop pair actualization comparison with try-rollback malformed-static kept-later inventory`
+    `Macro 0〜4 closeout fixed`
+    （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
   - theory-lab lane:
     `Macro 5 third-order follow-up active`
     （model-check small-cluster projection keep/drop と order/handoff source-surface wording reserve は fixed 済み、next reopen は modality internalization trigger note）
@@ -19,7 +20,7 @@
     `Macro 6/7 reserve integration checkpoint close`
     （public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note は fixed 済み、next reopen は later mixed gate）
 - immediate blocker は `0`、current lane を止める user decision も `0` と読む。
-- current authored source sample は `e1 / e2 / e3 / e4 / e13 / e16 / e18 / e19 / e20 / e21 / e22 / e23` の dozen である。
+- current authored source sample は `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23` の fourteen である。
 
 ## macro phase reading
 
@@ -33,7 +34,7 @@
 | `Macro 1` semantic kernel | late | self-driven |
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
-| `Macro 4` executable fixed-subset expansion | active, duplicate-cluster actualization comparison へ進行中 | self-driven |
+| `Macro 4` executable fixed-subset expansion | current scoped closeout fixed | self-driven |
 | `Macro 5` typed / theorem / model-check bridge | third-order follow-up active | self-driven up to boundary |
 | `Macro 6` fabric / shared-space / runtime evolution | docs-first boundary only | mixed（boundary-prep までは self-driven） |
 | `Macro 7` toolchain / backend / host-facing integration | thin facade plus reserve shell | mixed（boundary-prep までは self-driven） |
@@ -43,7 +44,7 @@
 
 - parser-free current L2 PoC は runnable である。
 - syntax-backed fixed-subset source sample path も runnable である。
-- runtime / static / formal-hook ladder と regression helper は authored dozen を current corpus として回せる。
+- runtime / static / formal-hook ladder と regression helper は authored fourteen を current corpus として回せる。
 - theorem / model-check line は
   - tool-neutral formal hook
   - `proof_notebook_review_unit`
@@ -77,7 +78,7 @@
 
 - reserve integration lane では public operational CLI packaging reserve note と shared-space fairness / replay strengthening reserve note が fixed 済みであり、next reopen は later mixed gate に残る。
 - theory-lab lane は third-order follow-up active を mainline と混ぜずに進める。
-- execution lane は duplicate cluster source-authored static-stop pair actualization comparison を next reopen とし、try-rollback malformed-static broader family は kept-later inventory に残す。
+- execution lane は current scoped closeout fixed であり、broader try-rollback malformed-static family は kept-later inventory に残す。
 
 ## biggest later gates
 
