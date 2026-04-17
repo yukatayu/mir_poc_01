@@ -5,7 +5,7 @@ use mir_runtime::current_l2::{
 };
 use mir_semantics::{
     EventKind, FixtureHostPlan, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
-    load_bundle_from_fixture_path,
+    load_bundle_from_fixture_path, load_host_plan_from_path,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -17,6 +17,12 @@ fn fixture_path(name: &str) -> PathBuf {
 fn sample_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("../../samples/current-l2")
+        .join(name)
+}
+
+fn prototype_sample_path(name: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/prototype/current-l2-order-handoff")
         .join(name)
 }
 
@@ -211,6 +217,75 @@ fn current_l2_source_sample_runner_accepts_explicit_e4_path() {
     );
     assert!(!report.runtime_report.run_report.entered_evaluation);
     assert_eq!(report.runtime_report.run_report.terminal_outcome, None);
+}
+
+#[test]
+fn current_l2_source_sample_runner_accepts_explicit_prototype_path() {
+    let sample = prototype_sample_path("p01-dice-publication-handoff.txt");
+    let host_plan = load_host_plan_from_path(&prototype_sample_path(
+        "p01-dice-publication-handoff.host-plan.json",
+    ))
+    .unwrap();
+    let report = run_current_l2_source_sample(sample.to_str().unwrap(), host_plan).unwrap();
+
+    assert_eq!(report.sample_id, "p01-dice-publication-handoff");
+    assert_eq!(report.sample_path, fs::canonicalize(sample).unwrap());
+    assert_eq!(
+        report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert_eq!(
+        report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+}
+
+#[test]
+fn current_l2_source_sample_runner_accepts_multiple_explicit_prototype_paths() {
+    let p02 = prototype_sample_path("p02-dice-publication-fallback.txt");
+    let p02_host_plan = load_host_plan_from_path(&prototype_sample_path(
+        "p02-dice-publication-fallback.host-plan.json",
+    ))
+    .unwrap();
+    let p02_report = run_current_l2_source_sample(p02.to_str().unwrap(), p02_host_plan).unwrap();
+    assert_eq!(p02_report.sample_id, "p02-dice-publication-fallback");
+    assert_eq!(
+        p02_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        p02_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::PerformFailure,
+            EventKind::Rollback,
+            EventKind::PerformSuccess,
+        ]
+    );
+
+    let p03 = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/prototype/current-l2-dynamic-attach-detach")
+        .join("p03-avatar-controller-attach-detach.txt");
+    let p03_host_plan = load_host_plan_from_path(
+        &PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../samples/prototype/current-l2-dynamic-attach-detach")
+            .join("p03-avatar-controller-attach-detach.host-plan.json"),
+    )
+    .unwrap();
+    let p03_report = run_current_l2_source_sample(p03.to_str().unwrap(), p03_host_plan).unwrap();
+    assert_eq!(p03_report.sample_id, "p03-avatar-controller-attach-detach");
+    assert_eq!(
+        p03_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        p03_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformSuccess,
+        ]
+    );
 }
 
 #[test]

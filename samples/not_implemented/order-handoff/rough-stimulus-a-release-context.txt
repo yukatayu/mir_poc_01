@@ -1,0 +1,4 @@
+# publication / handoff / witness を 1 行で書けないか、という rough stimulus の保存版。
+player = A
+release(context)[ roll_dice(player) ]
+- with release(context)[ dice_owner ]

@@ -50,6 +50,7 @@ full strong type system や production tool binding を immediate target にし�
   ただし、いまは theory-first boundary inventory を進める段階であり、implementation-ready ではない。
 - syntax / modality line も、final grammar や final calculus はまだ先だが、
   semantic cluster / comparison axis / stronger-foundation candidate の整理は今進められる。
+- corrected runnable prototype sample は `samples/prototype/` に置き、exact rough stimulus は `samples/not_implemented/` に残す current bucket policyで、sample-driven falsifier / usability comparison を補助してよい。
 
 ## theory-lab operating model
 

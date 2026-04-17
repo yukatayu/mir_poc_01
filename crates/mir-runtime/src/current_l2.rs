@@ -98,6 +98,10 @@ pub fn current_l2_default_source_sample_directory() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../samples/current-l2")
 }
 
+pub fn current_l2_default_prototype_sample_root() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../samples/prototype")
+}
+
 fn current_l2_runner_accepted_sample_paths() -> Vec<PathBuf> {
     let root = current_l2_default_source_sample_directory();
     [
@@ -140,6 +144,9 @@ pub fn resolve_current_l2_source_sample_path(
                 return Ok(normalized_direct);
             }
         }
+        if current_l2_is_allowed_prototype_sample_path(&normalized_direct)? {
+            return Ok(normalized_direct);
+        }
         return Err(InterpreterError::InvalidProgram(format!(
             "source sample path is outside the current accepted sample set: {}",
             direct_path.display()
@@ -169,6 +176,13 @@ fn canonicalize_existing_source_sample_path(path: &Path) -> Result<PathBuf, Inte
             path.display()
         ))
     })
+}
+
+fn current_l2_is_allowed_prototype_sample_path(path: &Path) -> Result<bool, InterpreterError> {
+    let prototype_root =
+        canonicalize_existing_source_sample_path(&current_l2_default_prototype_sample_root())?;
+    Ok(path.starts_with(&prototype_root)
+        && path.extension().and_then(|ext| ext.to_str()) == Some("txt"))
 }
 
 pub fn run_current_l2_source_sample(
@@ -255,19 +269,25 @@ struct CurrentL2SourceLine {
 }
 
 fn collect_current_l2_source_lines(source: &str) -> Vec<CurrentL2SourceLine> {
-    source
-        .lines()
-        .enumerate()
-        .map(|(line_no, raw_line)| {
-            let trimmed = raw_line.trim();
-            CurrentL2SourceLine {
-                line_no: line_no + 1,
-                indent: raw_line.chars().take_while(|ch| *ch == ' ').count(),
-                text: trimmed.to_string(),
-                is_blank: trimmed.is_empty(),
-            }
-        })
-        .collect()
+    let mut lines = Vec::new();
+    let mut in_leading_comment_block = true;
+
+    for (line_no, raw_line) in source.lines().enumerate() {
+        let trimmed = raw_line.trim();
+        let is_leading_comment = in_leading_comment_block && trimmed.starts_with('#');
+        let is_blank = trimmed.is_empty() || is_leading_comment;
+        if !trimmed.is_empty() && !is_leading_comment {
+            in_leading_comment_block = false;
+        }
+        lines.push(CurrentL2SourceLine {
+            line_no: line_no + 1,
+            indent: raw_line.chars().take_while(|ch| *ch == ' ').count(),
+            text: trimmed.to_string(),
+            is_blank,
+        });
+    }
+
+    lines
 }
 
 struct CurrentL2FixedSourceParser {

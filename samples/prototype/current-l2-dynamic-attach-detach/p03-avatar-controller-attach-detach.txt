@@ -1,0 +1,16 @@
+# ワールドに avatar controller を attach し、後で clean に detach する current L2 prototype。
+place root {
+  place world_room {
+    place avatar_slot {
+      perform attach_avatar_controller on avatar_route
+        require controller_requested(avatar_a)
+        ensure controller_attached(avatar_a)
+
+      atomic_cut
+
+      perform detach_avatar_controller on avatar_route
+        require detach_requested(avatar_a)
+        ensure controller_detached(avatar_a)
+    }
+  }
+}

@@ -12,9 +12,16 @@
   - representative programs
   - machine-readable fixture corpus
   - fixed-subset source-sample corpus
+- さらに current snapshot では、sample storage bucket として
+  - `samples/current-l2/`
+  - `samples/prototype/`
+  - `samples/not_implemented/`
+  を区別して扱うのが自然である。
 - representative programs は人間向けの説明用であり、final grammar を固定しない。
 - fixture corpus は machine-check の current baseline であり、parser-free / detached loop / static gate / interpreter の正本に近い。
 - source-sample corpus は、**representative programs をそのまま昇格するものでも、fixture JSON を逆生成するものでもなく**、fixed subset の syntax-backed regression layer として別に置くのが current first choice であり、repo-root `samples/current-l2/` flat `.txt` layer に置く current cut まで fixed 済みである。
+- corrected runnable prototype sample は、feature family 自体が mixed gate / comparison に残っていても、current lowerer / runner で explicit path 実行できる corrected text を `samples/prototype/` に置く。
+- exact rough stimulus や current parser / runner へ入れない token/macro preservation は `samples/not_implemented/` に置く。
 - current near-term では、source-sample corpus は
   - fixed subset だけを対象にする
   - representative prose と fixture corpus の対応表を持つ
@@ -27,6 +34,8 @@
 - current file layout は flat / one-file-per-sample である。
 - current extension policy は `.txt` であり、final grammar を意味しない。
 - current naming policy は fixture stem / `fixture_id` aligned kebab-case である。
+- prototype bucket は `samples/prototype/` 以下の subdirectory を許してよい。
+- not-implemented bucket は `samples/not_implemented/` 以下の subdirectory を許してよい。
 - current initial cluster は `e1` / `e2` / `e3` / `e4` / `e21` / `e23` に留める。
 - current authored corpus はその initial sextet に `e14-malformed-duplicate-option-declaration`、`e15-malformed-duplicate-chain-declaration`、`e22-try-atomic-cut-place-mismatch`、`e19-malformed-target-mismatch`、`e16-malformed-missing-chain-head-option`、`e18-malformed-missing-successor-option`、`e13-malformed-capability-strengthening`、`e20-malformed-late-capability-strengthening` を加えた authored fourteen に進んでいる。
 
@@ -52,6 +61,10 @@
 - `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
 - current matrix 自体では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
 - source sample の actual file current authored fourteen は `e1` / `e2` / `e3` / `e4` / `e14` / `e15` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。`e3` は admit-family third slot として source row / runner / inventory / ladder までは実装済みだが、formal hook stage は guarded に留めるのが current first choice である。
+- corrected runnable prototype first tranche は `p01-dice-publication-handoff`、`p02-dice-publication-fallback`、`p03-avatar-controller-attach-detach` である。
+  - これらは `samples/current-l2/` inventory には数えない。
+  - current L2 lowerer / runner へ explicit path で流し、adjacent `.host-plan.json` sidecar を置く。
+- exact rough stimuli A–D は `samples/not_implemented/order-handoff/` に preservation し、current parser / runner へは入れない。
 - verification ladder current cut では、current authored fourteen に reached stage row を付ける。
   - `e1` は `static gate = reached(valid)`、`interpreter = reached(explicit_failure)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。
   - `e2` は `static gate = reached(valid)`、`interpreter = reached(success)`、`formal hook = reached(runtime_try_cut_cluster)` と読む。

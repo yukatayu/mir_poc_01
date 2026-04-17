@@ -7,6 +7,7 @@
 - representative prose (`specs/examples/00...01`) でもない。
 - machine-readable fixture corpus (`crates/mir-ast/tests/fixtures/current-l2/`) でもない。
 - fixed subset の syntax-backed regression / lowering / runner / verification ladder に進むための第 3 層である。
+- corrected runnable prototype は `samples/prototype/`、exact rough stimulus preservation は `samples/not_implemented/` に分ける。
 
 ## current policy
 

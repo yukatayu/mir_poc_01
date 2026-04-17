@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-17 09:34 JST
+最終更新: 2026-04-17 10:50 JST
 
 ## この文書について
 
@@ -27,6 +27,10 @@
   `0`
 - current authored source sample:
   `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
+- current runnable prototype sample:
+  `p01 / p02 / p03`
+- exact rough stimulus preservation bucket:
+  `samples/not_implemented/`
 
 ## macro phase map
 
@@ -43,7 +47,7 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 | `Macro 1` | semantic kernel / invariant stabilization | late | 84% | 中 | 着手可能 | narrow semantic reopen の closeout まで self-driven |
 | `Macro 2` | parser-free validation substrate | late | 84% | 中 | 着手可能 | current substrate closeout まで self-driven |
 | `Macro 3` | compile-ready minimal actualization | late | 80% | 中 | 着手可能 | current tranche closeout まで self-driven |
-| `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed | 96% | 重 | 着手可能 | current fixed-subset widening closeout まで self-driven |
+| `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed + prototype first tranche actualized | 97% | 重 | 着手可能 | current fixed-subset widening closeout まで self-driven |
 | `Macro 5` | typed / theorem / model-check bridge | current scoped closeout fixed | 79% | 重 | 着手可能 | current boundary / pilot / framing closeout まで self-driven |
 | `Macro 6` | fabric / shared-space / runtime evolution | mixed-gate boundary fixed | 47% | 重 | 着手可能（boundaryまで） | docs-first boundary / mixed-gate boundary まで self-driven |
 | `Macro 7` | toolchain / backend / host-facing integration | mixed-gate boundary fixed | 39% | 重 | 着手可能（boundaryまで） | thin facade / shell / mixed-gate boundary まで self-driven |
@@ -65,7 +69,7 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 | ordering / `memory_order` reinterpretation | `S5` | cut-family comparison、relation decomposition、falsifier coverage、property-language bridge、source-surface wording reserve、modality trigger | final property language / source surface / emitted schema / low-level reinterpretation stanceは mixed gate |
 | syntax / modality theory line | `S4-S5` | syntax honesty principle、stimuli comparison、modal promotion threshold、guarded-vs-MDTT/MTT reduction timing、modality internalization trigger | final foundation adoption / final syntax marker は mixed gate |
 | public dev surface / CLI | `S5` | thin facade、later support、current-L2 scoped Rust shell actualization、installed-binary/packaging mixed-gate boundary | installed binary promotion / hierarchy / success criteria は mixed gate |
-| executable sample corpus | `S6` | authored fourteen、runner / ladder / regression helper、artifact fan-out、duplicate pair actualization | broader try-rollback malformed-static family は kept-later inventory に残す |
+| executable sample corpus | `S6` | authored fourteen、runner / ladder / regression helper、artifact fan-out、duplicate pair actualization、prototype runnable trio、rough-stimulus preservation bucket | broader try-rollback malformed-static family は kept-later inventory に残す |
 
 ## 層ごとの進捗
 
@@ -198,6 +202,7 @@ current macro phase reading は、`Macro 0` から `Macro 5` までは closeout 
 
 - 注記: この欄は recent log として保つ。詳細は `docs/reports/` を正本にする。
 - 2026-04-17 09:34 JST — `docs/reports/0715` で `progress.md` / `tasks.md` / `Documentation.md` / relevant `plan/` / `faq_005.md` / `specs/10` / `specs/00-document-map.md` を current snapshot に揃え、`Macro 5 boundary / pilot / framing closeout fixed` と `Macro 6/7 mixed-gate boundary fixed` の読みへ更新した。
+- 2026-04-17 10:50 JST — `docs/reports/0718` で `samples/prototype/` runnable trio、`samples/not_implemented/` rough-stimulus preservation bucket、leading `#` comment support、prototype direct-path runner support、adjacent host-plan auto resolution を追加し、sample bucket policy を `specs/examples/451` と snapshot docs に同期した。
 - 2026-04-17 09:34 JST — `docs/reports/0714` で `specs/examples/444...450` を追加し、modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport/public-contract later-gate framing、model-check property-language/tool-binding later-gate framing、shared-space fairness/replay mixed-gate boundary、public operational CLI installed-binary/packaging mixed-gate boundary、Macro 5 closeout threshold を docs-first に固定した。
 - 2026-04-17 09:12 JST — `docs/reports/0713` で `e14/e15` duplicate pair を source-authored static-stop pair として actualize し、runner / ladder / emitted artifact wiring / regression inventory / sample docs を authored fourteen へ widen したうえで、execution lane を `Macro 0〜4 closeout fixed` に更新した。
 - 2026-04-17 08:41 JST — `docs/reports/0712` で `macro phase map` に rough progress `%` 列を追加し、`Macro 0〜8` が repo 全体の top-level axis であり `Macro 8` は application-specific realization 専用であることを明記したうえで、repo-scoped progress estimate を再配置した。

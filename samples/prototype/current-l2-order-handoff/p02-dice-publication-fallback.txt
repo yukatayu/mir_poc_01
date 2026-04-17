@@ -1,0 +1,17 @@
+# 出目の公開に失敗したら直前の確定スナップショットへ fallback する current L2 prototype。
+place root {
+  place room {
+    place dice_turn {
+      try {
+        perform roll_dice on dice_state
+          require owner_is(player_a)
+
+        perform publish_roll on dice_state
+          require room_accepts_publication(dice_state)
+      } fallback {
+        perform load_last_confirmed_roll on dice_snapshot
+          require read
+      }
+    }
+  }
+}

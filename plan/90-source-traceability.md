@@ -2827,3 +2827,35 @@
   - `docs/reports/0714-macro5-closeout-and-reserve-boundary-six-packages.md`
   - `docs/reports/0715-macro0-5-closeout-refresh-and-consistency-audit.md`
 - 今回の要点は、`Macro 5 boundary / pilot / framing closeout fixed` と `Macro 6/7 mixed-gate boundary fixed` の読みを current snapshot に同期し、promoted self-driven queue を空にした点である。
+# 2026-04-17 — prototype sample actualization first tranche
+
+- primary report:
+  - `docs/reports/0718-prototype-sample-actualization-first-tranche.md`
+- supporting reports:
+  - `docs/reports/0716-sample-stimuli-status-map.md`
+  - `docs/reports/0717-inspect-current-l2-source-sample-pipeline.md`
+  - `docs/reports/0719-prototype-sample-bucket-diff-review.md`
+  - `docs/reports/0720-prototype-sample-bucket-narrow-rereview.md`
+- primary code / sample anchors:
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_source_lowering.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `samples/prototype/README.md`
+  - `samples/prototype/current-l2-order-handoff/`
+  - `samples/prototype/current-l2-dynamic-attach-detach/`
+  - `samples/not_implemented/README.md`
+  - `samples/not_implemented/order-handoff/`
+  - `specs/examples/451-current-l2-runnable-prototype-and-not-implemented-sample-buckets.md`
+- mirrored snapshot / plan anchors:
+  - `Documentation.md`
+  - `progress.md`
+  - `tasks.md`
+  - `plan/01-status-at-a-glance.md`
+  - `plan/08-representative-programs-and-fixtures.md`
+  - `plan/09-helper-stack-and-responsibility-map.md`
+  - `plan/11-roadmap-near-term.md`
+  - `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
+  - `.docs/current-l2-source-sample-authoring-policy.md`
+  - `faq_005.md`

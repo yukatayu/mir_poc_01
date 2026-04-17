@@ -5,8 +5,8 @@ use mir_runtime::current_l2::{
     run_current_l2_runtime_skeleton,
 };
 use mir_semantics::{
-    EventKind, FixtureHostPlan, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome,
-    load_bundle_from_fixture_path,
+    EventKind, FixtureHostPlan, NonAdmissibleSubreason, ProgramKind, StaticGateVerdict,
+    TerminalOutcome, load_bundle_from_fixture_path,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -19,6 +19,47 @@ fn sample_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("../../samples/current-l2")
         .join(name)
+}
+
+#[test]
+fn current_l2_source_lowering_ignores_leading_hash_comment_lines() {
+    let source = r#"
+# この sample は hash comment を先頭に置いても current L2 lowerer が落ちないことを確認する。
+place root {
+  place session {
+    place authority_cell {
+      perform update_authority on profile_authority
+        require write
+        ensure owner_is(session_user)
+
+      atomic_cut
+    }
+  }
+}
+"#;
+
+    let lowered = lower_current_l2_fixed_source_text(source).unwrap();
+    assert!(matches!(lowered.program.kind, ProgramKind::Program));
+    assert_eq!(lowered.program.body.len(), 1);
+}
+
+#[test]
+fn current_l2_source_lowering_rejects_non_leading_hash_comment_lines() {
+    let source = r#"
+# この sample は先頭 comment は許す。
+place root {
+  # 途中 comment は current convenience cut に入れない。
+  place session {
+    place authority_cell {
+      perform update_authority on profile_authority
+        require write
+        ensure owner_is(session_user)
+    }
+  }
+}
+"#;
+
+    assert!(lower_current_l2_fixed_source_text(source).is_err());
 }
 
 #[test]
@@ -129,10 +170,8 @@ fn current_l2_source_lowering_matches_e14_fixture_and_duplicate_option_static_st
 
 #[test]
 fn current_l2_source_lowering_matches_e15_fixture_and_duplicate_chain_static_stop() {
-    let source = fs::read_to_string(sample_path(
-        "e15-malformed-duplicate-chain-declaration.txt",
-    ))
-    .unwrap();
+    let source =
+        fs::read_to_string(sample_path("e15-malformed-duplicate-chain-declaration.txt")).unwrap();
     let lowered = lower_current_l2_fixed_source_text(&source).unwrap();
     let report = run_current_l2_runtime_skeleton(
         lowered.program,

@@ -1,0 +1,63 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "request-require",
+      "op": "roll_dice",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "publish_roll",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "load_last_confirmed_roll",
+      "mode": "on",
+      "target": "dice_snapshot",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "roll_dice",
+      "mode": "on",
+      "selected_target": "dice_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "dice_state",
+              "record": "roll_dice@dice_state"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "load_last_confirmed_roll",
+      "mode": "on",
+      "selected_target": "dice_snapshot",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "dice_snapshot",
+              "record": "load_last_confirmed_roll@dice_snapshot"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

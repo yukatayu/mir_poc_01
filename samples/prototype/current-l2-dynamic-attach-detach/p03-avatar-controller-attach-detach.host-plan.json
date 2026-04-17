@@ -1,0 +1,70 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "request-require",
+      "op": "attach_avatar_controller",
+      "mode": "on",
+      "target": "avatar_route",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "attach_avatar_controller",
+      "mode": "on",
+      "target": "avatar_route",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "detach_avatar_controller",
+      "mode": "on",
+      "target": "avatar_route",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "detach_avatar_controller",
+      "mode": "on",
+      "target": "avatar_route",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "attach_avatar_controller",
+      "mode": "on",
+      "selected_target": "avatar_route",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "avatar_route",
+              "record": "attach_avatar_controller@avatar_route"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "detach_avatar_controller",
+      "mode": "on",
+      "selected_target": "avatar_route",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "avatar_route",
+              "record": "detach_avatar_controller@avatar_route"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

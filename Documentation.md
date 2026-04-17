@@ -35,6 +35,11 @@
 - current L2 semantics / parser-free validation substrate / compile-ready minimal actualization
 - fixed-subset source sample authored fourteen:
   `e1 / e2 / e3 / e4 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
+- runnable prototype sample first tranche:
+  `p01 / p02 / p03`
+  （`samples/prototype/` に置き、current lowerer / runner へ explicit path で流す）
+- exact rough stimulus preservation bucket:
+  `samples/not_implemented/`
 - sample-visible theorem / model-check first milestone:
   formal hook、`proof_notebook_review_unit`、row-local model-check carrier、emitted artifact wiring、sample-facing summary
 
@@ -65,6 +70,8 @@
   `specs/examples/443`
 - Macro 5 / mixed-gate boundary closeout:
   `specs/examples/444...450`
+- runnable prototype / not-implemented bucket policy:
+  `specs/examples/451`
 
 ## まだ OPEN のもの
 

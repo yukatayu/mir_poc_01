@@ -13,6 +13,12 @@ fn host_plan_path(name: &str) -> PathBuf {
     fixture_path(name).with_extension("host-plan.json")
 }
 
+fn prototype_sample_path(name: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/prototype/current-l2-order-handoff")
+        .join(name)
+}
+
 #[test]
 fn operational_cli_pretty_runs_runtime_sample_with_explicit_host_plan_path() {
     let output = run_current_l2_operational_cli([
@@ -78,10 +84,10 @@ fn operational_cli_rejects_missing_host_plan_flag() {
     assert!(
         error
             .to_string()
-            .contains("missing required --host-plan <path>")
+            .contains("missing --host-plan <path> and no adjacent host plan was found")
     );
     assert!(error.to_string().contains(
-        "mir-current-l2 run-source-sample <sample> --host-plan <path> --format pretty|json"
+        "mir-current-l2 run-source-sample <sample-or-path> [--host-plan <path>] --format pretty|json"
     ));
 }
 
@@ -99,4 +105,21 @@ fn operational_cli_rejects_unknown_format() {
 
     assert_eq!(error.exit_code(), 2);
     assert!(error.to_string().contains("unsupported format `yaml`"));
+}
+
+#[test]
+fn operational_cli_uses_adjacent_host_plan_for_prototype_sample_when_omitted() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        prototype_sample_path("p01-dice-publication-handoff.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("sample: p01-dice-publication-handoff"));
+    assert!(output.contains("host_plan_path:"));
+    assert!(output.contains("terminal_outcome: success"));
 }

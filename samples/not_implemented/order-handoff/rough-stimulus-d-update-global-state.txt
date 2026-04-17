@@ -1,0 +1,4 @@
+# high-level room macro / transaction-like sugar を探る rough stimulus の保存版。
+update_global_state{
+  change_owner(&dice_owner)
+}

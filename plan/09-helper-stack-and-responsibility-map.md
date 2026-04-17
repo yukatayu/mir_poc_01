@@ -24,10 +24,15 @@ run_directory_named_profile
 - `run_current_l2_source_sample` は runtime-led thin facade first public cut に留める。
 - `run_current_l2_runtime_skeleton` は final public parser/checker/runtime thin-facade later support actualization の current support cut であり、`Program` / `FixtureHostPlan` / optional `CurrentL2ParserBridgeInput` を explicit input surface に取る。
 - `lower_current_l2_fixed_source_text` は current support cut に含めず、deeper-support helper に残す。
-- public operational CLI concrete shell naming の current docs-only cut は `mir-current-l2 run-source-sample <sample> --host-plan <path> --format pretty|json` に留め、support-only verb や repo-local maintenance helper verb は public shell concern に含めない。
+- public operational CLI concrete shell naming の current docs-only cut は `mir-current-l2 run-source-sample <sample-or-path> [--host-plan <path>] --format pretty|json` に留め、support-only verb や repo-local maintenance helper verb は public shell concern に含めない。
 - public operational CLI concrete shell actualization の current cut は、上の naming を current-L2 scoped Rust concrete shell concern として actualize しつつ、delegated entry / report は `run_current_l2_source_sample` / `CurrentL2SourceSampleRunReport` に据え置く。
 - public operational CLI packaging の current cut は、上の actual shell concern を installed binary fact と読まないための mixed-gate boundary に留め、installed-binary promotion、final `mir` top-level hierarchy、final host/input contract、packaging success criteria は mixed gate に残す。
 - `resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local Python orchestration helper は excluded bucket に残す。
+- prototype sample explicit-path acceptance は support cut に含めてよい。
+  - current boundary は `samples/prototype/` 以下の `.txt` direct path に限る。
+  - current authored fourteen stem inventory とは分けて扱う。
+- operational CLI の current convenience cut では、adjacent `.host-plan.json` sidecar が sample path の隣にあれば `--host-plan` を省略してよい。
+  - これは current sample debugging / comparison convenience であり、installed-binary promotion や final host contract を意味しない。
 
 ## current helper migration guidance
 

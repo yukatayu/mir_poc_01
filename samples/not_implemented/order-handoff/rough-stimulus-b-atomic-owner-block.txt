@@ -1,0 +1,5 @@
+# room-local serial transition sugar を探る rough stimulus の保存版。
+atomic[dice_owner]{
+  roll_dice(dice_owner)
+  ---fence---
+}

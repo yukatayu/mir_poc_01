@@ -1,0 +1,6 @@
+# low-level / backend fence family を直に見せる rough stimulus の保存版。
+atomic{
+  ---fence<seq_cst>---
+  change_owner(&dice_owner)
+  ---fence<seq_cst>---
+}

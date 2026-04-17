@@ -10,7 +10,7 @@ use crate::current_l2::{
     CurrentL2RuntimeSkeletonReport, CurrentL2SourceSampleRunReport,
     CurrentL2TryRollbackStructuralFindingKind, CurrentL2TryRollbackStructuralSubjectKind,
     CurrentL2TryRollbackStructuralSummary, CurrentL2TryRollbackStructuralVerdict,
-    run_current_l2_source_sample,
+    resolve_current_l2_source_sample_path, run_current_l2_source_sample,
 };
 use mir_semantics::{
     EventKind, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome, load_host_plan_from_path,
@@ -63,13 +63,13 @@ enum CurrentL2CliOutputFormat {
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct CurrentL2RunSourceSampleCommand {
     sample: String,
-    host_plan_path: PathBuf,
+    host_plan_path: Option<PathBuf>,
     format: CurrentL2CliOutputFormat,
 }
 
 pub fn current_l2_operational_cli_usage() -> String {
     format!(
-        "usage: {CURRENT_L2_OPERATIONAL_SHELL_NAME} {RUN_SOURCE_SAMPLE_COMMAND} <sample> --host-plan <path> --format pretty|json"
+        "usage: {CURRENT_L2_OPERATIONAL_SHELL_NAME} {RUN_SOURCE_SAMPLE_COMMAND} <sample-or-path> [--host-plan <path>] --format pretty|json"
     )
 }
 
@@ -152,9 +152,6 @@ fn parse_run_source_sample_command(
         }
     }
 
-    let host_plan_path = host_plan_path.ok_or_else(|| {
-        CurrentL2OperationalCliError::usage("missing required --host-plan <path>")
-    })?;
     let format = format.ok_or_else(|| {
         CurrentL2OperationalCliError::usage("missing required --format pretty|json")
     })?;
@@ -181,16 +178,28 @@ fn parse_output_format(
 fn run_source_sample_command(
     command: CurrentL2RunSourceSampleCommand,
 ) -> Result<String, CurrentL2OperationalCliError> {
-    let host_plan = load_host_plan_from_path(&command.host_plan_path).map_err(|error| {
+    let sample_path = resolve_current_l2_source_sample_path(&command.sample)
+        .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string()))?;
+    let host_plan_path = command
+        .host_plan_path
+        .unwrap_or_else(|| sample_path.with_extension("host-plan.json"));
+    if !host_plan_path.is_file() {
+        return Err(CurrentL2OperationalCliError::usage(format!(
+            "missing --host-plan <path> and no adjacent host plan was found for {}",
+            sample_path.display()
+        )));
+    }
+    let host_plan = load_host_plan_from_path(&host_plan_path).map_err(|error| {
         CurrentL2OperationalCliError::execution(format!(
             "failed to load host plan {}: {error}",
-            command.host_plan_path.display()
+            host_plan_path.display()
         ))
     })?;
-    let report = run_current_l2_source_sample(&command.sample, host_plan)
-        .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string()))?;
+    let report =
+        run_current_l2_source_sample(sample_path.to_str().unwrap_or(&command.sample), host_plan)
+            .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string()))?;
     let summary =
-        CurrentL2OperationalCliRunSourceSampleSummary::from_report(&command.host_plan_path, report);
+        CurrentL2OperationalCliRunSourceSampleSummary::from_report(&host_plan_path, report);
 
     match command.format {
         CurrentL2CliOutputFormat::Pretty => Ok(render_pretty_summary(&summary)),

@@ -1,0 +1,16 @@
+# A がサイコロを振って結果を公開し、その後 B へ所有権 handoff する current L2 prototype。
+place root {
+  place room {
+    place dice_authority {
+      perform roll_dice on dice_state
+        require owner_is(player_a)
+        ensure result_is_visible(room_members)
+
+      atomic_cut
+
+      perform handoff_dice_authority on dice_state
+        require owner_is(player_a)
+        ensure owner_is(player_b)
+    }
+  }
+}
