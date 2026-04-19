@@ -37,4 +37,6 @@ Phase 5 は、**何を local / structural / decidable core に残し、何を th
 ## 次へ渡したもの
 
 Phase 6 は、この boundary を actual code path と sample-visible evidence に narrow に接続する。
-一方で、残りの twin peaks は `plan/18` の theory-lab program として mixed gate に残る。
+一方で、残りの twin peaks は `plan/18` の theory-lab program として
+- current first-line / stop-line integration までは self-driven に進め、
+- actual adoption / concrete binding / final public contract は mixed gate に残す。

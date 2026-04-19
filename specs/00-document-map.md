@@ -19,6 +19,30 @@
   - phase ごとの本質的な研究成果だけを短く辿るための condensed summary である。
   - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
   - current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の condensed summary がある。
+- `faq_006.md`
+  - 2026-04-17 時点の current explanation delta であり、theory-lab line を
+    「promotion / stop-line / contract concretization」
+    段階として読むための current explanation を与える。
+  - 規範判断の正本ではないが、snapshot / queue / stop-line drift の監査入口として使ってよい。
+- `faq_007.md`
+  - 2026-04-18 時点の current explanation snapshot であり、
+    「現状どこまで終わっているか」
+    「二大問題を完全に解決し、言語側の実装まで終わっていると読めるか」
+    「全体像の中で今どこにいるか」
+    「何を答えればどこまで自走できるか」
+    を整理する。
+  - 規範判断の正本ではないが、current status / last-mile gate / autonomy expectation の確認入口として使ってよい。
+- `faq_008.md`
+  - 2026-04-18 時点の current explanation refresh であり、
+    `faq_007.md` 以後の actual progress を反映した上で、
+    「finished / not finished / mixed gate / true user-spec gate」
+    と
+    「これらに答えればどこまで自走できるか、どこから先は still evidence-dependent か」
+    を整理する。
+  - 規範判断の正本ではないが、current status / autonomy limit / final-public-completion misunderstanding を避ける入口として使ってよい。
+- `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
+  - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
+  - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -209,8 +233,12 @@
   - final exhaustive catalog を固定せず、room profile row と deferred finalization を分けて扱う。
 - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
   - shared-space / membership line の current working subset から次段として、`auditable_authority_witness` を room profile と audit / receipt side にどう分け、最小 typed witness core をどこまでに留めるかを整理する。
+- `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - shared-space / membership line の current working subset から次段として、`auditable_authority_witness` の minimal witness core を `p07` reached / `p08,p05` guard-only の helper-local strengthening manifest に actualize し、claim/payload split と symbolic binding ref cut を final public witness schema に上げずに固定する。
 - `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`
   - shared-space / membership line の current working subset から次段として、authoritative room 側でも `delegated_rng_service` を provider-placement candidate としてどこまで practical に読めるか、authority / witness / provider attachment の cut を崩さずに整理する。
+- `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - shared-space / membership line の current working subset から次段として、`delegated_rng_service` provider placement を `p09` reached / `p07,p08` guard-only の helper-local practical manifest と narrow prototype に actualize し、authority-kept-commit / optional provider attachment cut を final public provider schema に上げずに固定する。
 - `specs/examples/125-shared-space-control-plane-carrier-threshold.md`
   - shared-space / membership line の current working subset から次段として、authoritative room side line で control-plane separated causal carrier を reopen する threshold と、`control_epoch` 相当の lightweight split を first reopen cut に留める current judgment を整理する。
 - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
@@ -230,6 +258,8 @@
   - typed marker (`admit` / `require` / `ensure`) を含む corrected prototype `p06` を追加し、helper-local verifier preview / artifact preview の current bridge floor を sample-visible にする tranche を整理する補助文書。
 - `specs/examples/457-current-l2-order-handoff-corrected-prototype-third-tranche.md`
   - late join visibility と stale reconnect refresh を corrected prototype `p07` / `p08` へ actualize し、order/handoff third tranche を sample-visible に閉じる補助文書。
+- `specs/examples/458-current-l2-faq006-drift-audit-first-line-stop-line-and-queue-reconstruction.md`
+  - `faq_006.md` を current explanation delta として監査し、二大問題と syntax/modality の current first line / retained alternatives / stop line / true user-spec gate、および self-driven queue reconstruction を 1 本に再統合する補助文書。
 - `specs/examples/127-current-l2-proof-obligation-matrix-and-external-handoff-artifact.md`
   - Phase 5 later package の current package として、proof obligation を docs 上の matrix と source evidence 参照の narrow handoff row bundle に分ける current first choice を整理した補助文書。
   - detached static gate artifact、`checked_reason_codes`、shared-space witness bundle を premature に public-looking contract へ昇格させない cut を与える。
@@ -1024,7 +1054,7 @@
 - `specs/examples/380-current-l2-model-check-concrete-carrier-first-actualization-ready-minimal-model-check-concrete-carrier-first-actualization-threshold.md`
   - model-check concrete carrier first actualization の minimum を、hard input、docs-only context、actual artifact、current pilot、guard、kept-later refs で固定する。
 - `specs/examples/381-current-l2-model-check-concrete-carrier-first-actualization-ready-source-sample-emitted-verification-artifact-wiring-comparison.md`
-  - model-check concrete carrier first actualization fixed 後の次段として、current authored source sample octet と verification ladder reached row を theorem/model-check helper output にどう接続するのが最小かを比較する。
+  - model-check concrete carrier first actualization fixed 後の次段として、current authored source sample nonet と verification ladder reached row を theorem/model-check helper output にどう接続するのが最小かを比較する。
 - `specs/examples/382-current-l2-source-sample-emitted-verification-artifact-wiring-ready-minimal-source-sample-emitted-verification-artifact-wiring-threshold.md`
   - source-sample emitted verification artifact wiring の minimum を、source entry、emitted route、route rule、guard、kept-later refs で固定する。
 - `specs/examples/383-current-l2-source-sample-emitted-verification-artifact-wiring-ready-sample-facing-theorem-model-check-evidence-summary-and-bless-review-flow-comparison.md`
@@ -1163,6 +1193,102 @@
   - current shell actualization と installed-binary / packaging success criteria を mixed-gate boundary で分ける補助文書。
 - `specs/examples/450-current-l2-macro5-boundary-pilot-and-framing-closeout-threshold.md`
   - current scoped 読みで Macro 5 を boundary / pilot / framing closeout fixed とみなしてよい threshold を整理する補助文書。
+- `specs/examples/459-current-l2-verifier-boundary-and-typed-theorem-model-check-current-first-line-integration.md`
+  - typed / theorem / model-check line について、property-to-boundary matrix、typed-surface candidate comparison、`p06` の位置づけ、current first line / retained alternatives / stop line / remaining mixed gate を 1 本へ再統合する補助文書。
+- `specs/examples/460-current-l2-order-handoff-cut-relation-authority-current-first-line-integration.md`
+  - order / handoff line について、cut family、relation decomposition、authority-handoff ladder、`p07/p08` の位置づけ、current first line / retained alternatives / stop line / remaining mixed gate を 1 本へ再統合する補助文書。
+- `specs/examples/461-current-l2-syntax-modality-current-first-line-integration.md`
+  - syntax / modality line について、5 軸 comparison、rough stimuli A-D、`lambda_circle_box` partial basis、stronger candidate family、reduction timing、trigger、current first line / retained alternatives / stop line / remaining mixed gate を 1 本へ再統合する補助文書。
+- `specs/examples/462-current-l2-theory-line-near-end-closeout-and-mixed-gate-only-reading.md`
+  - `specs/examples/458...461` を current first-line chain として束ね、actual adoption package に進む直前の near-end closeout / mixed-gate-only reading を整理する補助文書。
+- `specs/examples/463-current-l2-verifier-preview-alignment-prefloor-and-public-contract-mixed-gate-note.md`
+  - helper-local `verification_preview` / `artifact_preview` と fixture-backed emitted-artifact route / sample-local preview-aligned typed artifact route の current関係を整理し、final public contract を凍らせずに compare/validation floor を 1 段厚くする補助文書。
+- `specs/examples/464-current-l2-model-check-projection-prefloor-and-property-tool-seam-mixed-gate-note.md`
+  - row-local `model_check_concrete_carriers`、small-cluster projection reserve、property/tool seam を public adoption へ上げずに helper-local compare floor としてどこまで concrete に見せてよいかを整理する補助文書。
+- `specs/examples/465-current-l2-theorem-discharge-prefloor-and-public-contract-mixed-gate-note.md`
+  - row-local `proof_notebook_review_unit`、abstract discharge-entry reserve、transport/public-contract seam を public adoption へ上げずに helper-local compare floor としてどこまで concrete に見せてよいかを整理する補助文書。
+- `specs/examples/466-current-l2-problem1-actual-adoption-package-and-theorem-first-pilot.md`
+  - verifier-boundary / typed / theorem / model-check line について、surviving first line と `p06` evidence、theorem-first external integration target、retained alternatives、stop line を Problem 1 actual adoption package として束ねる補助文書。
+- `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - cut / order / handoff / authoritative-room line について、relation decomposition principal、thread/node parity default wording、authoritative-room first default profile、`p07/p08` evidence、retained alternatives、stop line を Problem 2 actual adoption package として束ねる補助文書。
+- `specs/examples/468-current-l2-syntax-modality-convergence-and-current-recommendation.md`
+  - syntax / semantics coupling principle、5 evaluation axes、partial basis keep、stronger modal family retained line、minimal companion / experimental surface gate を current recommendation として束ねる補助文書。
+- `specs/examples/469-current-l2-near-end-closeout-after-actual-adoption-defaults.md`
+  - actual adoption package close 後の near-end success criteria default、queue nonzero reading、remaining mixed gate、true user-spec residual を 1 本に束ねる closeout 補助文書。
+- `specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md`
+  - Problem 1 actual adoption package の後段として、notebook-first theorem line を helper-local / repo-local emitted-artifact route まで actualize する current cut を束ねる補助文書。
+- `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - Problem 2 actual adoption package の後段として、authoritative-room default profile と `p07/p08` evidence を helper-local vertical-slice manifest に ratchet する current cut を束ねる補助文書。
+- `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - syntax / modality current recommendation の後段として、semantically honest な minimal companion lines を helper-local cut に actualize する current package を束ねる補助文書。
+- `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - order / handoff source-facing recommendation を explicit edge-row continuation principal、`stage` / `after` / `witness` secondary candidate、authoritative-room `serial` sugar reserve へ狭める current package を束ねる補助文書。
+- `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - theorem-first external integration target の後段として、notebook-first review unit を concrete prover brand や public contract に上げず、brand-neutral preflight manifest まで helper-local に actualize する current package を束ねる補助文書。
+- `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - two big problems と syntax/modality の actual adoption package を前提に、multimodal dependent core を current principal theory spine としてどう読むか、layered typing / proof architecture、compatibility metatheory、Lean-first proof roadmap を final calculus adoption 抜きで整理する補助文書。
+- `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - authoritative-room default profile の reserve strengthening line として、minimal witness core を claim/payload split を崩さず helper-local manifest に actualize する補助文書。
+- `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - authoritative-room default profile の reserve practical line として、provider placement を narrow prototype と helper-local manifest に actualize する補助文書。
+- `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+- `specs/examples/479-current-l2-theorem-discharge-actual-format-probe.md`
+- `specs/examples/480-current-l2-model-check-property-language-and-tool-seam-probe.md`
+  - Problem 1 current first line の mixed gate 直前 package として、row-local property preview、brand-neutral request preflight、public-checker second reserve split を helper-local second-line manifest に actualize する補助文書。
+- `specs/examples/481-current-l2-theorem-discharge-public-contract-threshold-default.md`
+  - theorem discharge line の mixed gate 直前 package として、review-unit-first / discharge-entry-adjacent / notebook-consumer-first / brand-neutral theorem request default を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/482-current-l2-model-check-property-tool-threshold-default.md`
+  - model-check line の mixed gate 直前 package として、row-local-property-preview first / small-cluster semantic projection second / brand-neutral model-check request / public-checker-contract-later default を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/483-current-l2-witness-provider-artifact-public-shape-threshold-default.md`
+  - shared-space reserve line の mixed gate 直前 package として、claim/payload split first / repo-local emitted artifact refs first / optional attachment refs only / combined public contract later default を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/484-current-l2-order-handoff-surface-artifact-threshold-default.md`
+  - order-handoff line の mixed gate 直前 package として、edge-row principal / stage-block secondary / repo-local emitted artifact refs first を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/485-current-l2-theorem-contract-shape-threshold-default.md`
+  - theorem line の mixed gate 直前 package として、refs-only reserve schema first / review-unit transport anchor / brand-neutral request manifest keep / consumer-shaped payload later を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/486-current-l2-theorem-transport-public-contract-coupled-later-gate.md`
+  - theorem line の mixed gate 直前 package として、transport/public-contract adjacent but distinct、review-unit anchor、refs-only reserve schema first、consumer-shaped payload later を helper-local actualization manifest に actualize する補助文書。
+- `specs/examples/487-current-l2-theorem-review-unit-transport-and-notebook-contract-actual-adoption.md`
+  - theorem line の current actual adoption package として、review-unit transport first、notebook-consumer contract first、brand-neutral binding reserve keep を helper-local actual adoption manifest に actualize する補助文書。
+- `specs/examples/491-current-l2-theorem-result-object-preview-and-proof-object-schema-reserve-actualization.md`
+  - theorem line の next mixed-gate actualization package として、notebook-consumer object first、consumer-shaped payload preview only、proof-object-schema reserve keep を helper-local actualization manifest に actualize する補助文書。
+- `specs/examples/492-current-l2-model-check-public-checker-artifact-preview-and-verifier-handoff-reserve-actualization.md`
+  - model-check line の next mixed-gate actualization package として、consumer-shaped artifact preview only、verifier-handoff reserve keep、brand-neutral tool-binding reserve keep を helper-local actualization manifest に actualize する補助文書。
+- `specs/examples/493-current-l2-witness-provider-public-contract-and-emitted-handoff-coupled-later-gate.md`
+  - shared-space / order-handoff line の next mixed-gate actualization package として、witness/provider public-contract side と emitted-handoff contract side を adjacent but distinct later gate として helper-local manifest に actualize する補助文書。
+- `specs/examples/494-current-l2-theorem-proof-object-schema-and-prover-brand-coupled-later-gate.md`
+  - theorem line の next mixed-gate actualization package として、proof-object schema side と prover-brand side を adjacent but distinct later gate として helper-local manifest に actualize する補助文書。
+- `specs/examples/495-current-l2-model-check-tool-brand-and-verifier-handoff-coupled-later-gate.md`
+  - model-check line の next mixed-gate actualization package として、tool-brand side と verifier-handoff side を adjacent but distinct later gate として helper-local manifest に actualize する補助文書。
+- `specs/examples/496-current-l2-order-handoff-source-wording-and-emitted-artifact-coupled-later-gate.md`
+  - order-handoff line の next mixed-gate actualization package として、source-wording side と emitted-artifact-schema side を adjacent but distinct later gate として helper-local manifest に actualize する補助文書。
+- `specs/examples/497-current-l2-theorem-result-object-and-payload-public-contract-coupled-later-gate.md`
+  - theorem line の next mixed-gate actualization package として、final result-object side と consumer-shaped payload public-contract side を adjacent but distinct later gate として helper-local manifest に actualize する補助文書。
+- `specs/examples/498-current-l2-model-check-public-checker-artifact-and-migration-coupled-later-gate.md`
+  - model-check line の next mixed-gate actualization package として、final public-checker artifact side と actual public checker migration side を adjacent but distinct later gate として helper-local manifest に actualize する補助文書。
+- `specs/examples/499-current-l2-witness-provider-public-schema-coupled-later-gate.md`
+  - shared-space line の next mixed-gate actualization package として、witness-schema side と provider-receipt side と combined public-contract side を adjacent but distinct later gate として helper-local manifest に actualize する補助文書。
+- `specs/examples/500-current-l2-theorem-result-object-route-actual-adoption.md`
+  - theorem line の next mixed-gate actual-adoption package として、review-unit transport first / notebook-consumer object first / consumer-shaped payload preview keep / proof-object-schema-prover-brand later を helper-local actual adoption manifest に actualize する補助文書。
+- `specs/examples/501-current-l2-model-check-checker-artifact-route-actual-adoption.md`
+  - model-check line の next mixed-gate actual-adoption package として、row-local property route first / checker-boundary contract anchor / consumer-shaped checker-artifact candidate only / migration candidate adjacent keep を helper-local actual adoption manifest に actualize する補助文書。
+- `specs/examples/502-current-l2-witness-provider-route-actual-adoption.md`
+  - shared-space line の next mixed-gate actual-adoption package として、witness/provider route first / public-schema candidate keep / combined public-contract later / final emitted-handoff contract adjacent keep を helper-local actual adoption manifest に actualize する補助文書。
+- `specs/examples/503-current-l2-order-handoff-source-wording-route-actual-adoption.md`
+  - order-handoff line の next mixed-gate actual-adoption package として、principal source wording route first / emitted-artifact schema candidate keep / final source wording later を helper-local actual adoption manifest に actualize する補助文書。
+- `specs/examples/504-current-l2-witness-provider-schema-route-actual-adoption.md`
+  - shared-space line の next mixed-gate actual-adoption package として、witness/provider schema route first / combined public-contract candidate keep / final emitted-handoff contract adjacent keep を helper-local actual adoption manifest に actualize する補助文書。
+- `specs/examples/505-current-l2-witness-provider-final-public-contract-reopen-threshold.md`
+  - shared-space line の remaining mixed gate に対して、public-schema pair first / delegated attestation + combined public-contract second / final emitted-handoff contract third の reopen 順を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/506-current-l2-theorem-final-public-contract-reopen-threshold.md`
+  - theorem line の remaining mixed gate に対して、result-object-and-payload first / prover-brand-and-proof-schema second / final public verifier contract third の reopen 順を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/507-current-l2-model-check-final-public-contract-reopen-threshold.md`
+  - model-check line の remaining mixed gate に対して、property-language-and-tool-brand first / public-checker-artifact-and-migration second / verifier-handoff-and-runtime-policy-contract third / final public verifier contract fourth の reopen 順を helper-local threshold manifest に actualize する補助文書。
+- `specs/examples/508-current-l2-theorem-lean-first-nonproduction-stub-pilot-actualization.md`
+  - theorem-first external integration target を brand-neutral preflight だけに止めず、Lean-first を non-production emitted stub pilot として helper-local actualization しつつ、actual Lean tool execution / public theorem contract / final public verifier contract は still later に残す補助文書。
+- `specs/examples/509-current-l2-theorem-review-unit-to-lean-stub-repo-local-artifact-conformance-bridge.md`
+  - theorem Lean-first non-production stub pilot の次段として、runtime/static representative source sample から formal hook / review unit / Lean stub artifact の pair alignment を repo-local helper と regression bundle に actualize しつつ、actual Lean tool execution / cross-tool public artifact contract / final public verifier contract は still later に残す補助文書。
+- `specs/examples/510-current-l2-theorem-lean-stub-representative-trace-alignment-bridge.md`
+  - theorem repo-local artifact-conformance bridge の次段として、representative runtime/static/prototype corpus `e2 / e5 / p06 / p07 / p08` と guard-only `p05` を使う review unit / Lean stub pair alignment を helper-local runtime test に actualize しつつ、actual Lean tool execution / public theorem contract / final public verifier contract は still later に残す補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

@@ -210,6 +210,8 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
                 "static formal hook smoke for e18-malformed-missing-successor-option",
                 "static formal hook smoke for e20-malformed-late-capability-strengthening",
                 "static formal hook smoke for e23-malformed-try-fallback-missing-fallback-body",
+                "theorem Lean-stub conformance for e2-try-fallback",
+                "theorem Lean-stub conformance for e5-underdeclared-lineage",
             ],
         )
         self.assertEqual(
@@ -290,6 +292,20 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
         self.assertEqual(
             commands[19].argv[commands[19].argv.index("--run-label") + 1],
             "phase6-smoke-e23-malformed-try-fallback-missing-fallback-body",
+        )
+        self.assertEqual(commands[20].argv[0], "/usr/bin/python3")
+        self.assertTrue(
+            commands[20].argv[1].endswith("scripts/current_l2_theorem_lean_stub_pipeline.py")
+        )
+        self.assertEqual(commands[20].argv[2], "e2-try-fallback")
+        self.assertEqual(
+            commands[20].argv[commands[20].argv.index("--run-label") + 1],
+            "phase6-smoke-theorem",
+        )
+        self.assertEqual(commands[21].argv[2], "e5-underdeclared-lineage")
+        self.assertEqual(
+            commands[21].argv[commands[21].argv.index("--run-label") + 1],
+            "phase6-smoke-theorem",
         )
 
     def test_plan_regression_commands_rejects_invalid_run_label(self) -> None:
@@ -403,7 +419,7 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr.getvalue(), "")
         self.assertIn("fake regression ran", stdout.getvalue())
-        self.assertEqual(len(captured_commands), 20)
+        self.assertEqual(len(captured_commands), 22)
         self.assertEqual(
             captured_commands[5].argv[captured_commands[5].argv.index("--run-label") + 1],
             "phase6-helper-e1-place-atomic-cut",
@@ -463,6 +479,16 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
         self.assertEqual(
             captured_commands[19].argv[captured_commands[19].argv.index("--run-label") + 1],
             "phase6-helper-e23-malformed-try-fallback-missing-fallback-body",
+        )
+        self.assertEqual(captured_commands[20].argv[2], "e2-try-fallback")
+        self.assertEqual(
+            captured_commands[20].argv[captured_commands[20].argv.index("--run-label") + 1],
+            "phase6-helper-theorem",
+        )
+        self.assertEqual(captured_commands[21].argv[2], "e5-underdeclared-lineage")
+        self.assertEqual(
+            captured_commands[21].argv[captured_commands[21].argv.index("--run-label") + 1],
+            "phase6-helper-theorem",
         )
 
     def test_main_regression_rejects_inventory_mismatch_before_running_commands(self) -> None:

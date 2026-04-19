@@ -218,6 +218,175 @@
   - `specs/examples/430-current-l2-malformed-duplicate-cluster-later-reopen-comparison.md`
   - `docs/reports/0706-theory-lab-reserve-hardening-and-duplicate-next-cut.md`
 
+## 2026-04-18 FAQ 007 current-status and last-mile-gate addendum
+
+- `faq_007.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `progress.md`
+  - `tasks.md`
+  - `plan/01-status-at-a-glance.md`
+  - `plan/11-roadmap-near-term.md`
+  - `plan/12-open-problems-and-risks.md`
+  - `plan/13-heavy-future-workstreams.md`
+  - `plan/17-research-phases-and-autonomy-gates.md`
+  - `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
+  - `specs/10-open-questions.md`
+  - `specs/11-roadmap-and-workstreams.md`
+  - `specs/12-decision-register.md`
+  - `specs/examples/458-current-l2-faq006-drift-audit-first-line-stop-line-and-queue-reconstruction.md`
+  - `specs/examples/459-current-l2-verifier-boundary-and-typed-theorem-model-check-current-first-line-integration.md`
+  - `specs/examples/460-current-l2-order-handoff-cut-relation-authority-current-first-line-integration.md`
+  - `specs/examples/461-current-l2-syntax-modality-current-first-line-integration.md`
+  - `specs/examples/462-current-l2-theory-line-near-end-closeout-and-mixed-gate-only-reading.md`
+  - `specs/examples/463-current-l2-verifier-preview-alignment-prefloor-and-public-contract-mixed-gate-note.md`
+
+## 2026-04-18 theorem discharge / public-theorem-contract threshold default addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/479-current-l2-theorem-discharge-actual-format-probe.md`
+  - `specs/examples/481-current-l2-theorem-discharge-public-contract-threshold-default.md`
+  - `docs/reports/0758-theorem-discharge-public-contract-threshold-default.md`
+  - `specs/examples/464-current-l2-model-check-projection-prefloor-and-property-tool-seam-mixed-gate-note.md`
+  - `specs/examples/465-current-l2-theorem-discharge-prefloor-and-public-contract-mixed-gate-note.md`
+  - `docs/reports/0730-faq006-theory-line-reintegration-and-queue-reconstruction.md`
+  - `docs/reports/0731-runnable-validation-status-and-queue-refresh.md`
+  - `docs/reports/0732-package-b-verifier-boundary-and-typed-theorem-model-check-first-line-integration.md`
+  - `docs/reports/0733-package-c-order-handoff-cut-relation-authority-first-line-integration.md`
+  - `docs/reports/0734-package-d-syntax-modality-first-line-integration.md`
+  - `docs/reports/0735-package-e-near-end-closeout-and-mixed-gate-only-reading.md`
+  - `docs/reports/0736-verifier-preview-alignment-prefloor-and-mixed-gate-hardening.md`
+  - `docs/reports/0737-model-check-projection-prefloor-and-tool-seam-hardening.md`
+  - `docs/reports/0738-theorem-discharge-prefloor-and-public-contract-hardening.md`
+  - `docs/reports/0739-faq-007-current-status-two-big-problems-and-last-mile-gates.md`
+
+## 2026-04-18 actual-adoption package, actualization floor, and near-end closeout addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `faq_007.md`
+  - `specs/examples/466-current-l2-problem1-actual-adoption-package-and-theorem-first-pilot.md`
+  - `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - `specs/examples/468-current-l2-syntax-modality-convergence-and-current-recommendation.md`
+
+## 2026-04-18 runnable validation status audit and snapshot rewrite addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `faq_008.md`
+  - `specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md`
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+  - `specs/examples/479-current-l2-theorem-discharge-actual-format-probe.md`
+  - `specs/examples/480-current-l2-model-check-property-language-and-tool-seam-probe.md`
+  - `docs/reports/0751-theory-handoff-integration-and-proof-plan-refresh.md`
+  - `docs/reports/0752-auditable-authority-witness-strengthening-actualization.md`
+  - `docs/reports/0753-delegated-rng-service-practical-actualization.md`
+  - `docs/reports/0754-model-check-second-line-concretization.md`
+  - `docs/reports/0755-theorem-discharge-actual-format-probe.md`
+  - `docs/reports/0756-model-check-property-language-and-tool-seam-probe.md`
+  - `docs/reports/0757-runnable-validation-status-audit-and-snapshot-rewrite.md`
+  - `specs/examples/469-current-l2-near-end-closeout-after-actual-adoption-defaults.md`
+  - `specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md`
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `docs/reports/0740-package1-problem1-actual-adoption-and-theorem-first-pilot.md`
+  - `docs/reports/0741-package0-faq007-drift-audit-and-queue-reconstruction.md`
+  - `docs/reports/0742-package2-problem2-order-handoff-actual-adoption-and-room-defaults.md`
+  - `docs/reports/0743-package3-syntax-modality-convergence-and-current-recommendation.md`
+  - `docs/reports/0744-package4-near-end-closeout-and-residual-gates.md`
+  - `docs/reports/0745-theorem-first-experimental-pilot-actualization.md`
+  - `docs/reports/0746-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `docs/reports/0747-minimal-companion-experimental-order-handoff-surface.md`
+  - `docs/reports/0748-order-handoff-surface-narrowing-after-external-advice.md`
+  - `docs/reports/0749-theorem-prover-experimental-binding-preflight.md`
+
+## 2026-04-18 theory handoff integration and proof-plan refresh addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`specs/00-document-map.md` の今回更新分は、追加で次を主根拠にする。
+  - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
+  - `faq_008.md`
+  - `specs/examples/466-current-l2-problem1-actual-adoption-package-and-theorem-first-pilot.md`
+  - `specs/examples/468-current-l2-syntax-modality-convergence-and-current-recommendation.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `docs/reports/0750-faq-008-current-status-and-autonomy-limit.md`
+  - `docs/reports/0751-theory-handoff-integration-and-proof-plan-refresh.md`
+
+## 2026-04-18 auditable-authority-witness strengthening actualization addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/123-shared-space-auditable-authority-witness-minimal-shape.md`
+  - `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_auditable_authority_witness_strengthening.rs`
+  - `docs/reports/0752-auditable-authority-witness-strengthening-actualization.md`
+
+## 2026-04-18 delegated-rng-service practical actualization addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`samples/prototype/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/124-shared-space-authoritative-room-delegated-rng-provider-placement.md`
+  - `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - `samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.txt`
+  - `samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.host-plan.json`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_delegated_rng_service_practical_actualization.rs`
+  - `docs/reports/0753-delegated-rng-service-practical-actualization.md`
+
+## 2026-04-18 model-check second-line concretization addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/415-current-l2-model-check-projection-and-property-family-reserve-inventory.md`
+  - `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
+  - `specs/examples/464-current-l2-model-check-projection-prefloor-and-property-tool-seam-mixed-gate-note.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_second_line_concretization.rs`
+  - `docs/reports/0754-model-check-second-line-concretization.md`
+
+## 2026-04-18 theorem discharge actual-format probe addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/440-current-l2-notebook-consumer-threshold-and-discharge-reserve-note.md`
+  - `specs/examples/446-current-l2-theorem-discharge-transport-and-public-contract-later-gate-framing-note.md`
+  - `specs/examples/465-current-l2-theorem-discharge-prefloor-and-public-contract-mixed-gate-note.md`
+  - `specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `specs/examples/479-current-l2-theorem-discharge-actual-format-probe.md`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_discharge_actual_format_probe.rs`
+  - `docs/reports/0755-theorem-discharge-actual-format-probe.md`
+
+## 2026-04-18 model-check property-language and tool-seam probe addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/415-current-l2-model-check-projection-and-property-family-reserve-inventory.md`
+  - `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
+  - `specs/examples/464-current-l2-model-check-projection-prefloor-and-property-tool-seam-mixed-gate-note.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+  - `specs/examples/479-current-l2-theorem-discharge-actual-format-probe.md`
+  - `specs/examples/480-current-l2-model-check-property-language-and-tool-seam-probe.md`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_property_tool_seam_probe.rs`
+  - `docs/reports/0756-model-check-property-language-and-tool-seam-probe.md`
+
 ## 2026-04-17 macro phase progress percent and axis clarification addendum
 
 - `progress.md`、`tasks.md`、`.docs/progress-task-axes.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/17-research-phases-and-autonomy-gates.md` の今回更新分は、追加で次を主根拠にする。
@@ -2941,3 +3110,467 @@
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
   - `docs/reports/0726-order-handoff-corrected-prototype-third-tranche.md`
 - 今回の要点は、late join visibility と stale reconnect refresh を current L2 corrected prototype に actualize し、order/handoff third tranche を close した点である。
+
+### 2026-04-17 FAQ 006 theory-line reintegration and queue reconstruction
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`samples/prototype/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `faq_006.md`
+  - `specs/examples/126-current-l2-small-decidable-core-and-proof-boundary-inventory.md`
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - `specs/examples/439-current-l2-typed-surface-family-unification-keep-drop-note.md`
+  - `specs/examples/440-current-l2-notebook-consumer-threshold-and-discharge-reserve-note.md`
+  - `specs/examples/442-current-l2-order-handoff-source-surface-wording-reserve-note.md`
+  - `specs/examples/444-current-l2-modality-internalization-trigger-note.md`
+  - `specs/examples/445-current-l2-stronger-typed-surface-promotion-threshold-framing-note.md`
+  - `specs/examples/446-current-l2-theorem-discharge-transport-and-public-contract-later-gate-framing-note.md`
+  - `specs/examples/447-current-l2-model-check-property-language-and-tool-binding-later-gate-framing-note.md`
+  - `specs/examples/448-current-l2-shared-space-fairness-and-replay-mixed-gate-boundary-note.md`
+  - `specs/examples/456-current-l2-typed-theorem-model-check-sample-visible-corrected-prototype-tranche.md`
+  - `specs/examples/457-current-l2-order-handoff-corrected-prototype-third-tranche.md`
+  - `specs/examples/458-current-l2-faq006-drift-audit-first-line-stop-line-and-queue-reconstruction.md`
+  - `docs/reports/0730-faq006-theory-line-reintegration-and-queue-reconstruction.md`
+- 今回の要点は、`faq_006.md` を current explanation delta として drift audit に使い、corrected prototype tranche close を theory-lab solved と読まない current line を repo snapshot / plan / spec / sample docs へ戻した点である。
+
+### 2026-04-17 runnable validation status and queue refresh
+
+- `progress.md`、`tasks.md`、`plan/00-index.md`、`plan/10-roadmap-overall.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `docs/reports/0731-runnable-validation-status-and-queue-refresh.md`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `samples/current-l2/README.md`
+  - `samples/prototype/README.md`
+  - `specs/examples/458-current-l2-faq006-drift-audit-first-line-stop-line-and-queue-reconstruction.md`
+- 今回の要点は、plan / research abstract 側に残っていた stale lane/sample-count 読みを fresh execution evidence と current queue 読みに揃え、authored sixteen / prototype octet / regression green を snapshot 上でも明示した点である。
+
+### 2026-04-17 package B verifier-boundary and typed/theorem/model-check first-line integration
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/459-current-l2-verifier-boundary-and-typed-theorem-model-check-current-first-line-integration.md`
+  - `docs/reports/0732-package-b-verifier-boundary-and-typed-theorem-model-check-first-line-integration.md`
+  - `specs/examples/413-current-l2-typed-core-attachment-inventory-and-obligation-allocation-refresh.md`
+  - `specs/examples/418-current-l2-first-source-visible-typed-surface-comparison.md`
+  - `specs/examples/439-current-l2-typed-surface-family-unification-keep-drop-note.md`
+  - `specs/examples/440-current-l2-notebook-consumer-threshold-and-discharge-reserve-note.md`
+  - `specs/examples/445-current-l2-stronger-typed-surface-promotion-threshold-framing-note.md`
+  - `specs/examples/446-current-l2-theorem-discharge-transport-and-public-contract-later-gate-framing-note.md`
+  - `specs/examples/447-current-l2-model-check-property-language-and-tool-binding-later-gate-framing-note.md`
+  - `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt`
+  - `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.host-plan.json`
+- 今回の要点は、typed / theorem / model-check line の current first line / retained alternatives / stop line / mixed gate を 1 本へ再統合し、`Package B` を close したうえで active queue を `Package C/D + Package E` へ進めた点である。
+
+### 2026-04-17 package C order/handoff cut-relation-authority first-line integration
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/460-current-l2-order-handoff-cut-relation-authority-current-first-line-integration.md`
+  - `docs/reports/0733-package-c-order-handoff-cut-relation-authority-first-line-integration.md`
+  - `specs/examples/405-current-l2-order-cut-family-comparison.md`
+  - `specs/examples/407-current-l2-order-visibility-witness-family-comparison.md`
+  - `specs/examples/408-current-l2-thread-node-parity-and-lowering-boundary-note.md`
+  - `specs/examples/411-current-l2-order-handoff-adequacy-corpus-and-verification-boundary-matrix.md`
+  - `specs/examples/421-current-l2-order-handoff-candidate-reduction-after-falsifier-hardening.md`
+  - `specs/examples/442-current-l2-order-handoff-source-surface-wording-reserve-note.md`
+  - `specs/examples/448-current-l2-shared-space-fairness-and-replay-mixed-gate-boundary-note.md`
+  - `samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt`
+  - `samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.host-plan.json`
+  - `samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt`
+  - `samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.host-plan.json`
+- 今回の要点は、order / handoff line の current first line / retained alternatives / stop line / mixed gate を 1 本へ再統合し、`Package C` を close したうえで active queue を `Package D + Package E` へ進めた点である。
+
+### 2026-04-17 package D syntax/modality first-line integration
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/461-current-l2-syntax-modality-current-first-line-integration.md`
+  - `docs/reports/0734-package-d-syntax-modality-first-line-integration.md`
+  - `specs/examples/409-current-l2-order-handoff-syntax-stimuli-comparison.md`
+  - `specs/examples/410-current-l2-modal-foundation-comparison.md`
+  - `specs/examples/422-current-l2-modal-foundation-comparison-follow-up.md`
+  - `specs/examples/429-current-l2-modal-promotion-threshold-note.md`
+  - `specs/examples/437-current-l2-guarded-vs-mdtt-mtt-reduction-timing-note.md`
+  - `specs/examples/444-current-l2-modality-internalization-trigger-note.md`
+  - `samples/not_implemented/README.md`
+- 今回の要点は、syntax / modality line の current first line / retained alternatives / stop line / mixed gate を 1 本へ再統合し、`Package D` を close したうえで active queue を `Package E` へ進めた点である。
+
+### 2026-04-17 package E near-end closeout and mixed-gate-only reading
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/462-current-l2-theory-line-near-end-closeout-and-mixed-gate-only-reading.md`
+  - `docs/reports/0735-package-e-near-end-closeout-and-mixed-gate-only-reading.md`
+  - `specs/examples/458-current-l2-faq006-drift-audit-first-line-stop-line-and-queue-reconstruction.md`
+  - `specs/examples/459-current-l2-verifier-boundary-and-typed-theorem-model-check-current-first-line-integration.md`
+  - `specs/examples/460-current-l2-order-handoff-cut-relation-authority-current-first-line-integration.md`
+  - `specs/examples/461-current-l2-syntax-modality-current-first-line-integration.md`
+- 今回の要点は、current first-line integration queue の closeout を theory solved と誤読しない形で source-backed に明文化し、remaining work が mixed gate / user-spec gate に限られると読めるようにした点である。
+
+### 2026-04-17 verifier preview alignment pre-floor and mixed-gate hardening
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`samples/prototype/README.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/446-current-l2-theorem-discharge-transport-and-public-contract-later-gate-framing-note.md`
+  - `specs/examples/447-current-l2-model-check-property-language-and-tool-binding-later-gate-framing-note.md`
+  - `specs/examples/453-current-l2-sample-verification-preview-and-prototype-second-tranche.md`
+  - `specs/examples/454-current-l2-artifact-preview-and-underdeclared-source-gap-note.md`
+  - `specs/examples/459-current-l2-verifier-boundary-and-typed-theorem-model-check-current-first-line-integration.md`
+  - `specs/examples/462-current-l2-theory-line-near-end-closeout-and-mixed-gate-only-reading.md`
+  - `specs/examples/463-current-l2-verifier-preview-alignment-prefloor-and-public-contract-mixed-gate-note.md`
+  - `crates/mir-runtime/tests/current_l2_verifier_preview_alignment.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_emitted_artifact_wiring.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `docs/reports/0736-verifier-preview-alignment-prefloor-and-mixed-gate-hardening.md`
+- 今回の要点は、helper-local `verification_preview` / `artifact_preview` を final public contract に昇格させず、sample-local preview-aligned typed artifact route を prototype bucket を含む compare floor に置く current mixed-gate pre-floor を source-backed にした点である。
+
+### 2026-04-18 model-check projection pre-floor and tool-seam hardening
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/420-current-l2-model-check-carrier-to-projection-bridge-note.md`
+  - `specs/examples/441-current-l2-model-check-small-cluster-projection-keep-drop-refresh.md`
+  - `specs/examples/447-current-l2-model-check-property-language-and-tool-binding-later-gate-framing-note.md`
+  - `specs/examples/463-current-l2-verifier-preview-alignment-prefloor-and-public-contract-mixed-gate-note.md`
+  - `specs/examples/464-current-l2-model-check-projection-prefloor-and-property-tool-seam-mixed-gate-note.md`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_projection_prefloor.rs`
+  - `docs/reports/0737-model-check-projection-prefloor-and-tool-seam-hardening.md`
+- 今回の要点は、row-local `model_check_concrete_carriers`、small-cluster projection reserve、property-language seam、tool-binding seam を final public adoption へ上げず、representative runtime/static/guarded/prototype corpus で compare できる helper-local pre-floor にした点である。
+
+### 2026-04-18 theorem discharge pre-floor and public-contract hardening
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/440-current-l2-notebook-consumer-threshold-and-discharge-reserve-note.md`
+  - `specs/examples/446-current-l2-theorem-discharge-transport-and-public-contract-later-gate-framing-note.md`
+  - `specs/examples/463-current-l2-verifier-preview-alignment-prefloor-and-public-contract-mixed-gate-note.md`
+  - `specs/examples/465-current-l2-theorem-discharge-prefloor-and-public-contract-mixed-gate-note.md`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_discharge_prefloor.rs`
+  - `docs/reports/0738-theorem-discharge-prefloor-and-public-contract-hardening.md`
+- 今回の要点は、row-local `proof_notebook_review_unit`、abstract discharge-entry reserve、transport seam、public-contract seam を final public adoption へ上げず、representative runtime/static/guarded/prototype corpus で compare できる helper-local pre-floor にした点である。
+
+### 2026-04-18 order-handoff surface narrowing and theorem-prover binding preflight
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`samples/prototype/README.md`、`plan/01-status-at-a-glance.md`、`plan/06-surface-notation-status.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - `specs/examples/468-current-l2-syntax-modality-convergence-and-current-recommendation.md`
+  - `specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md`
+  - `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+  - `crates/mir-runtime/tests/current_l2_order_handoff_stage_block_surface.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_prover_binding_preflight.rs`
+  - `docs/reports/0748-order-handoff-surface-narrowing-after-external-advice.md`
+  - `docs/reports/0749-theorem-prover-experimental-binding-preflight.md`
+- 今回の要点は、order / handoff source-facing recommendation を explicit edge-row principal、`stage` / `after` / `witness` secondary candidate、authoritative-room `serial` sugar reserve へ狭めた上で、theorem-first line を brand-neutral theorem preflight manifest まで helper-local に actualize し、queue を reserve strengthening / model-check second line へ進めた点である。
+
+### 2026-04-18 FAQ 008 current-status refresh and autonomy-limit clarification
+
+- `faq_008.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `progress.md`
+  - `tasks.md`
+  - `faq_007.md`
+  - `specs/examples/466-current-l2-problem1-actual-adoption-package-and-theorem-first-pilot.md`
+  - `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - `specs/examples/468-current-l2-syntax-modality-convergence-and-current-recommendation.md`
+  - `specs/examples/469-current-l2-near-end-closeout-after-actual-adoption-defaults.md`
+  - `specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md`
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `docs/reports/0740-package1-problem1-actual-adoption-and-theorem-first-pilot.md`
+  - `docs/reports/0742-package2-problem2-order-handoff-actual-adoption-and-room-defaults.md`
+  - `docs/reports/0743-package3-syntax-modality-convergence-and-current-recommendation.md`
+  - `docs/reports/0744-package4-near-end-closeout-and-residual-gates.md`
+  - `docs/reports/0745-theorem-first-experimental-pilot-actualization.md`
+  - `docs/reports/0746-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `docs/reports/0747-minimal-companion-experimental-order-handoff-surface.md`
+  - `docs/reports/0748-order-handoff-surface-narrowing-after-external-advice.md`
+  - `docs/reports/0749-theorem-prover-experimental-binding-preflight.md`
+- 今回の要点は、`faq_007.md` 以後の genuine progress として order-handoff surface narrowing と theorem-prover binding preflight を current explanation に取り込みつつ、compare floor / actual adoption floor / helper-local actualization floor / remaining mixed gate / true user-spec gate をあらためて整理し、「かなり先まで自走しやすい」と「最後まで完全 no-question を保証できる」は別である current lineを明示した点である。
+## 2026-04-18 model-check property-language / tool-brand threshold default addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+  - `specs/examples/480-current-l2-model-check-property-language-and-tool-seam-probe.md`
+  - `specs/examples/482-current-l2-model-check-property-tool-threshold-default.md`
+  - `docs/reports/0759-model-check-property-tool-threshold-default.md`
+  - `specs/examples/464-current-l2-model-check-projection-prefloor-and-property-tool-seam-mixed-gate-note.md`
+  - `docs/reports/0737-model-check-projection-prefloor-and-tool-seam-hardening.md`
+  - `docs/reports/0754-model-check-second-line-concretization.md`
+  - `docs/reports/0756-model-check-property-language-and-tool-seam-probe.md`
+## 2026-04-18 witness/provider/artifact public-shape threshold default addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - `specs/examples/483-current-l2-witness-provider-artifact-public-shape-threshold-default.md`
+  - `docs/reports/0760-witness-provider-artifact-public-shape-threshold-default.md`
+
+## 2026-04-18 order-handoff surface / artifact threshold default addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/483-current-l2-witness-provider-artifact-public-shape-threshold-default.md`
+  - `specs/examples/484-current-l2-order-handoff-surface-artifact-threshold-default.md`
+  - `docs/reports/0761-order-handoff-surface-artifact-threshold-default.md`
+
+## 2026-04-18 theorem contract shape threshold default addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/479-current-l2-theorem-discharge-actual-format-probe.md`
+  - `specs/examples/481-current-l2-theorem-discharge-public-contract-threshold-default.md`
+  - `specs/examples/485-current-l2-theorem-contract-shape-threshold-default.md`
+  - `docs/reports/0762-theorem-contract-shape-threshold-default.md`
+
+## 2026-04-18 theorem transport/public-contract coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/446-current-l2-theorem-discharge-transport-and-public-contract-later-gate-framing-note.md`
+  - `specs/examples/479-current-l2-theorem-discharge-actual-format-probe.md`
+  - `specs/examples/481-current-l2-theorem-discharge-public-contract-threshold-default.md`
+  - `specs/examples/485-current-l2-theorem-contract-shape-threshold-default.md`
+  - `specs/examples/486-current-l2-theorem-transport-public-contract-coupled-later-gate.md`
+  - `docs/reports/0763-theorem-transport-public-contract-coupled-later-gate.md`
+
+## 2026-04-19 theorem review-unit transport / notebook-contract actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/481-current-l2-theorem-discharge-public-contract-threshold-default.md`
+  - `specs/examples/486-current-l2-theorem-transport-public-contract-coupled-later-gate.md`
+  - `specs/examples/487-current-l2-theorem-review-unit-transport-and-notebook-contract-actual-adoption.md`
+  - `docs/reports/0764-theorem-review-unit-transport-and-notebook-contract-actual-adoption.md`
+
+## 2026-04-19 examples / sample buckets retention audit addendum
+
+- `docs/reports/0765-examples-and-sample-buckets-retention-audit.md` は、`specs/examples/45x...48x` と `samples/prototype/current-l2-*` の recent anchor 群に self-only dead entry がないこと、low-count entry でも `specs/00-document-map.md` / `plan/90-source-traceability.md` / package reports で外部参照が残っていることを確認した証跡として使う。
+
+## 2026-04-19 model-check row-local property / checker-boundary actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+  - `specs/examples/480-current-l2-model-check-property-language-and-tool-seam-probe.md`
+  - `specs/examples/482-current-l2-model-check-property-tool-threshold-default.md`
+  - `specs/examples/488-current-l2-model-check-row-local-property-and-checker-boundary-actual-adoption.md`
+  - `docs/reports/0766-model-check-row-local-property-and-checker-boundary-actual-adoption.md`
+
+## 2026-04-19 witness/provider/artifact public-shape actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - `specs/examples/483-current-l2-witness-provider-artifact-public-shape-threshold-default.md`
+  - `specs/examples/489-current-l2-witness-provider-artifact-public-shape-actual-adoption.md`
+  - `docs/reports/0767-witness-provider-artifact-public-shape-actual-adoption.md`
+
+## 2026-04-19 order-handoff surface actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/484-current-l2-order-handoff-surface-artifact-threshold-default.md`
+  - `specs/examples/490-current-l2-order-handoff-surface-actual-adoption.md`
+  - `docs/reports/0768-order-handoff-surface-actual-adoption.md`
+
+## 2026-04-19 theorem result-object preview / proof-object-schema reserve actualization addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/487-current-l2-theorem-review-unit-transport-and-notebook-contract-actual-adoption.md`
+  - `specs/examples/491-current-l2-theorem-result-object-preview-and-proof-object-schema-reserve-actualization.md`
+  - `docs/reports/0769-theorem-result-object-preview-and-proof-object-schema-reserve-actualization.md`
+
+## 2026-04-19 model-check public-checker artifact preview / verifier-handoff reserve actualization addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+  - `specs/examples/488-current-l2-model-check-row-local-property-and-checker-boundary-actual-adoption.md`
+  - `specs/examples/492-current-l2-model-check-public-checker-artifact-preview-and-verifier-handoff-reserve-actualization.md`
+  - `docs/reports/0770-model-check-public-checker-artifact-preview-and-verifier-handoff-reserve-actualization.md`
+
+## 2026-04-19 witness/provider public-contract / emitted-handoff coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/489-current-l2-witness-provider-artifact-public-shape-actual-adoption.md`
+  - `specs/examples/490-current-l2-order-handoff-surface-actual-adoption.md`
+  - `specs/examples/493-current-l2-witness-provider-public-contract-and-emitted-handoff-coupled-later-gate.md`
+  - `docs/reports/0771-witness-provider-public-contract-and-emitted-handoff-coupled-later-gate.md`
+
+## 2026-04-19 theorem proof-object schema / prover-brand coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/491-current-l2-theorem-result-object-preview-and-proof-object-schema-reserve-actualization.md`
+  - `specs/examples/494-current-l2-theorem-proof-object-schema-and-prover-brand-coupled-later-gate.md`
+  - `docs/reports/0772-theorem-proof-object-schema-and-prover-brand-coupled-later-gate.md`
+
+## 2026-04-19 model-check tool-brand / verifier-handoff coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/482-current-l2-model-check-property-tool-threshold-default.md`
+  - `specs/examples/492-current-l2-model-check-public-checker-artifact-preview-and-verifier-handoff-reserve-actualization.md`
+  - `specs/examples/495-current-l2-model-check-tool-brand-and-verifier-handoff-coupled-later-gate.md`
+  - `docs/reports/0773-model-check-tool-brand-and-verifier-handoff-coupled-later-gate.md`
+
+## 2026-04-19 order-handoff source wording / emitted-artifact coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/442-current-l2-order-handoff-source-surface-wording-reserve-note.md`
+  - `specs/examples/490-current-l2-order-handoff-surface-actual-adoption.md`
+  - `specs/examples/493-current-l2-witness-provider-public-contract-and-emitted-handoff-coupled-later-gate.md`
+  - `specs/examples/496-current-l2-order-handoff-source-wording-and-emitted-artifact-coupled-later-gate.md`
+  - `docs/reports/0774-order-handoff-source-wording-and-emitted-artifact-coupled-later-gate.md`
+
+## 2026-04-19 theorem result object / payload public-contract coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/491-current-l2-theorem-result-object-preview-and-proof-object-schema-reserve-actualization.md`
+  - `specs/examples/494-current-l2-theorem-proof-object-schema-and-prover-brand-coupled-later-gate.md`
+  - `specs/examples/497-current-l2-theorem-result-object-and-payload-public-contract-coupled-later-gate.md`
+  - `docs/reports/0775-theorem-result-object-and-payload-public-contract-coupled-later-gate.md`
+
+## 2026-04-19 model-check public checker artifact / migration coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/488-current-l2-model-check-row-local-property-and-checker-boundary-actual-adoption.md`
+  - `specs/examples/492-current-l2-model-check-public-checker-artifact-preview-and-verifier-handoff-reserve-actualization.md`
+  - `specs/examples/495-current-l2-model-check-tool-brand-and-verifier-handoff-coupled-later-gate.md`
+  - `specs/examples/498-current-l2-model-check-public-checker-artifact-and-migration-coupled-later-gate.md`
+  - `docs/reports/0776-model-check-public-checker-artifact-and-migration-coupled-later-gate.md`
+
+## 2026-04-19 witness/provider public-schema coupled later gate addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/489-current-l2-witness-provider-artifact-public-shape-actual-adoption.md`
+  - `specs/examples/493-current-l2-witness-provider-public-contract-and-emitted-handoff-coupled-later-gate.md`
+  - `specs/examples/499-current-l2-witness-provider-public-schema-coupled-later-gate.md`
+  - `docs/reports/0777-witness-provider-public-schema-coupled-later-gate.md`
+  - `crates/mir-runtime/tests/current_l2_witness_provider_public_schema_coupled_later_gate.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 theorem result-object route actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/487-current-l2-theorem-review-unit-transport-and-notebook-contract-actual-adoption.md`
+  - `specs/examples/491-current-l2-theorem-result-object-preview-and-proof-object-schema-reserve-actualization.md`
+  - `specs/examples/494-current-l2-theorem-proof-object-schema-and-prover-brand-coupled-later-gate.md`
+  - `specs/examples/497-current-l2-theorem-result-object-and-payload-public-contract-coupled-later-gate.md`
+  - `specs/examples/500-current-l2-theorem-result-object-route-actual-adoption.md`
+  - `docs/reports/0778-theorem-result-object-route-actual-adoption.md`
+  - `crates/mir-runtime/tests/current_l2_theorem_result_object_actual_adoption.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 model-check checker-artifact route actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/488-current-l2-model-check-row-local-property-and-checker-boundary-actual-adoption.md`
+  - `specs/examples/492-current-l2-model-check-public-checker-artifact-preview-and-verifier-handoff-reserve-actualization.md`
+  - `specs/examples/495-current-l2-model-check-tool-brand-and-verifier-handoff-coupled-later-gate.md`
+  - `specs/examples/498-current-l2-model-check-public-checker-artifact-and-migration-coupled-later-gate.md`
+  - `specs/examples/501-current-l2-model-check-checker-artifact-route-actual-adoption.md`
+  - `docs/reports/0779-model-check-checker-artifact-route-actual-adoption.md`
+  - `crates/mir-runtime/tests/current_l2_model_check_checker_artifact_route_actual_adoption.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 witness/provider route actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/489-current-l2-witness-provider-artifact-public-shape-actual-adoption.md`
+  - `specs/examples/493-current-l2-witness-provider-public-contract-and-emitted-handoff-coupled-later-gate.md`
+  - `specs/examples/499-current-l2-witness-provider-public-schema-coupled-later-gate.md`
+  - `specs/examples/502-current-l2-witness-provider-route-actual-adoption.md`
+  - `docs/reports/0780-witness-provider-route-actual-adoption.md`
+  - `crates/mir-runtime/tests/current_l2_witness_provider_route_actual_adoption.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 order-handoff source wording route actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/490-current-l2-order-handoff-surface-actual-adoption.md`
+  - `specs/examples/496-current-l2-order-handoff-source-wording-and-emitted-artifact-coupled-later-gate.md`
+  - `specs/examples/503-current-l2-order-handoff-source-wording-route-actual-adoption.md`
+  - `docs/reports/0781-order-handoff-source-wording-route-actual-adoption.md`
+  - `crates/mir-runtime/tests/current_l2_order_handoff_source_wording_route_actual_adoption.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 witness/provider schema route actual adoption addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/489-current-l2-witness-provider-artifact-public-shape-actual-adoption.md`
+  - `specs/examples/499-current-l2-witness-provider-public-schema-coupled-later-gate.md`
+  - `specs/examples/502-current-l2-witness-provider-route-actual-adoption.md`
+  - `specs/examples/504-current-l2-witness-provider-schema-route-actual-adoption.md`
+  - `docs/reports/0782-witness-provider-schema-route-actual-adoption.md`
+  - `crates/mir-runtime/tests/current_l2_witness_provider_schema_route_actual_adoption.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 witness/provider final public-contract reopen threshold addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/493-current-l2-witness-provider-public-contract-and-emitted-handoff-coupled-later-gate.md`
+  - `specs/examples/499-current-l2-witness-provider-public-schema-coupled-later-gate.md`
+  - `specs/examples/504-current-l2-witness-provider-schema-route-actual-adoption.md`
+  - `specs/examples/505-current-l2-witness-provider-final-public-contract-reopen-threshold.md`
+  - `docs/reports/0783-witness-provider-final-public-contract-reopen-threshold.md`
+  - `crates/mir-runtime/tests/current_l2_witness_provider_final_public_contract_reopen_threshold.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 theorem final public-contract reopen threshold addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/494-current-l2-theorem-proof-object-schema-and-prover-brand-coupled-later-gate.md`
+  - `specs/examples/497-current-l2-theorem-result-object-and-payload-public-contract-coupled-later-gate.md`
+  - `specs/examples/500-current-l2-theorem-result-object-route-actual-adoption.md`
+  - `specs/examples/506-current-l2-theorem-final-public-contract-reopen-threshold.md`
+  - `docs/reports/0784-theorem-final-public-contract-reopen-threshold.md`
+  - `crates/mir-runtime/tests/current_l2_theorem_final_public_contract_reopen_threshold.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 model-check final public-contract reopen threshold addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/495-current-l2-model-check-tool-brand-and-verifier-handoff-coupled-later-gate.md`
+  - `specs/examples/498-current-l2-model-check-public-checker-artifact-and-migration-coupled-later-gate.md`
+  - `specs/examples/501-current-l2-model-check-checker-artifact-route-actual-adoption.md`
+  - `specs/examples/507-current-l2-model-check-final-public-contract-reopen-threshold.md`
+  - `docs/reports/0785-model-check-final-public-contract-reopen-threshold.md`
+  - `crates/mir-runtime/tests/current_l2_model_check_final_public_contract_reopen_threshold.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 theorem Lean-first non-production stub pilot actualization addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`samples/prototype/README.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md`
+  - `specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `specs/examples/508-current-l2-theorem-lean-first-nonproduction-stub-pilot-actualization.md`
+  - `docs/reports/0786-theorem-lean-first-nonproduction-stub-pilot-actualization.md`
+  - `crates/mir-semantics/examples/support/current_l2_lean_theorem_stub_support.rs`
+  - `crates/mir-semantics/examples/current_l2_emit_lean_theorem_stub.rs`
+  - `crates/mir-semantics/tests/current_l2_lean_theorem_stub_support.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_lean_stub_pilot_actualization.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 theorem review-unit to Lean-stub repo-local artifact-conformance bridge addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`samples/prototype/README.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/508-current-l2-theorem-lean-first-nonproduction-stub-pilot-actualization.md`
+  - `specs/examples/509-current-l2-theorem-review-unit-to-lean-stub-repo-local-artifact-conformance-bridge.md`
+  - `docs/reports/0787-theorem-review-unit-to-lean-stub-repo-local-artifact-conformance-bridge.md`
+  - `scripts/current_l2_theorem_lean_stub_pipeline.py`
+  - `scripts/current_l2_source_sample_regression.py`
+  - `scripts/tests/test_current_l2_theorem_lean_stub_pipeline.py`
+  - `scripts/tests/test_current_l2_source_sample_regression.py`
+
+## 2026-04-19 theorem Lean-stub representative trace-alignment bridge addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`samples/prototype/README.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/509-current-l2-theorem-review-unit-to-lean-stub-repo-local-artifact-conformance-bridge.md`
+  - `specs/examples/510-current-l2-theorem-lean-stub-representative-trace-alignment-bridge.md`
+  - `docs/reports/0788-theorem-lean-stub-representative-trace-alignment-bridge.md`
+  - `crates/mir-runtime/tests/current_l2_theorem_lean_stub_trace_alignment_bridge.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`

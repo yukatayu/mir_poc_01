@@ -1,0 +1,131 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "option-admit",
+      "op": "fetch_provider_roll",
+      "option_ref": "delegated_rng",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "fetch_provider_roll",
+      "mode": "via",
+      "chain_ref": "delegated_rng_ref",
+      "option_ref": "delegated_rng",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "fetch_provider_roll",
+      "mode": "via",
+      "chain_ref": "delegated_rng_ref",
+      "option_ref": "delegated_rng",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "publish_roll_result",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "publish_roll_result",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "handoff_dice_authority",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "handoff_dice_authority",
+      "mode": "on",
+      "target": "dice_state",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "fetch_provider_roll",
+      "mode": "via",
+      "chain_ref": "delegated_rng_ref",
+      "selected_option_ref": "delegated_rng",
+      "selected_target": "dice_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "dice_state",
+              "record": "fetch_provider_roll@delegated_rng"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_state",
+              "record": "provider_draw_ref@delegated_rng"
+            },
+            {
+              "kind": "append-record",
+              "target": "provider_debug_text_output",
+              "record": "delegated_rng_service.draw -> primary"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "publish_roll_result",
+      "mode": "on",
+      "selected_target": "dice_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "dice_state",
+              "record": "publish_roll_result@dice_state"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_debug_text_output",
+              "record": "publish_roll_result: player_a -> visible"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "handoff_dice_authority",
+      "mode": "on",
+      "selected_target": "dice_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "dice_state",
+              "record": "handoff_dice_authority@dice_state"
+            },
+            {
+              "kind": "append-record",
+              "target": "dice_debug_text_output",
+              "record": "handoff_dice_authority: player_a -> player_b"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

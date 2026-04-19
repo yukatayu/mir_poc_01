@@ -14,18 +14,21 @@
 
 ## current global reading
 
-- `Macro 0〜4` は current scoped closeout fixed。
-- `Macro 5` は boundary / pilot / framing closeout fixed。
-- `Macro 6/7` は mixed-gate boundary fixed。
+- `Macro 4` は fixed authored/prototype floor の上で active である。
+- `Macro 5` は post-runnable mixed-gate actualization floor fixed の line である。
+  current reading では compare floor、actual adoption floor、helper-local actualization / narrowing floor、deeper-theory / reserve / mixed-gate actualization / actual-adoption floor まで close 済みであり、current principal self-driven queue は close 済みだが、remaining work は later mixed gate と user-spec residual に寄っている。
+- `Macro 6` は docs-first boundary only、`Macro 7` は mixed である。
 - `Macro 8` は application / domain realization であり、user specification が要る。
 
 ## いま reader がここで把握すべきこと
 
 - semantics / invariants / boundary はかなり固まっている。
 - runnable path も既にある。
-  - authored current-L2 sample fourteen
-  - corrected runnable prototype trio
+  - authored current-L2 sample sixteen
+  - corrected runnable prototype nonet
   - exact rough stimulus preservation bucket
+- corrected runnable version の current floorは already reached である。
+- current self-driven queue は live package none であり、remaining work は later mixed/user-spec gate 側にある。
 - ただし final parser grammar、final public API、concrete theorem / model-check tool binding、shared-space final catalog はまだ open である。
 
 ## 使い方

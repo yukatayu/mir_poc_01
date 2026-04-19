@@ -277,6 +277,7 @@ def plan_regression_commands(
     effective_label = effective_run_label(run_label)
     python_cmd = python_executable or sys.executable
     detached_loop = SCRIPT_DIR / "current_l2_detached_loop.py"
+    theorem_stub_pipeline = SCRIPT_DIR / "current_l2_theorem_lean_stub_pipeline.py"
 
     commands = [
         RegressionCommand(
@@ -536,6 +537,30 @@ def plan_regression_commands(
                     "e23-malformed-try-fallback-missing-fallback-body",
                 ),
                 "--overwrite",
+            ),
+        ),
+        RegressionCommand(
+            name="theorem Lean-stub conformance for e2-try-fallback",
+            argv=(
+                python_cmd,
+                str(theorem_stub_pipeline),
+                "e2-try-fallback",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                f"{effective_label}-theorem",
+            ),
+        ),
+        RegressionCommand(
+            name="theorem Lean-stub conformance for e5-underdeclared-lineage",
+            argv=(
+                python_cmd,
+                str(theorem_stub_pipeline),
+                "e5-underdeclared-lineage",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                f"{effective_label}-theorem",
             ),
         ),
     ]

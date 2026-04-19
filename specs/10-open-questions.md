@@ -158,74 +158,131 @@
 
 ## order / handoff / syntax / modality 理論線
 
+### current integration reading
+
+`specs/examples/458`、`459`、`460`、`461`、`462` までの current reading では、
+次は already source-backed な current first line として読める。
+
+- typed / theorem / model-check line:
+  checker attachment principal、notebook-first theorem、row-local model-check carrier first
+- order / handoff line:
+  cut family decomposition、relation decomposition principal、`authority_serial_transition_family` first
+- syntax / modality line:
+  semantic honesty axis、`lambda_circle_box` partial basis、guarded / MDTT / MTT / Fitch-style multimodal retained family
+
+したがって current open question は
+「何も分からない」ことではなく、
+actual adoption / final contract / final surface / concrete tool binding を
+どの mixed gate へ送るかに狭まっている。
+
 31. cut family をどこまで明示的に分解するか。
-   - source-backed な floor として固定済みなのは、`atomic_cut` が current `place` の rollback frontier だけを確定する local finalizing cut であり、`barrier` と `durable_cut` は later cut family に残すという判断である。
-   - ただし、**global observation / snapshot-only cut** を、`atomic_cut` や `durable_cut` と別 family として comparison vocabulary に残すべきかは未決定である。
+   - actual adoption package として固定済みなのは、`atomic_cut` を current `place` の rollback frontier だけを確定する local finalizing cut nucleus に置き、`barrier` を ordering-only later family、`durable_cut` を commit-bearing / evidence-bearing later family に残す判断である。
    - `snapshot_cut` / `consistent_cut` のような名称は current repo の settled vocabulary ではなく、comparison candidate に留める。
-   - 未決なのは、observation meaning、rollback interaction、durability / evidence burden、cross-place aggregation burden、verifier handoff friendlinessの観点から、local finalization / global snapshot / ordering-only barrier / commit-bearing durable cut をどう整理するのが最も誤読に強いかである。
+   - したがって current open question は、cut family を分解するかどうかではなく、observation-only comparison candidate を final public wording へどこまで mirror するかに狭まっている。
 32. order / visibility / witness family を relation decomposition としてどこまで docs 側で整理するか。
-   - C++ `memory_order_consume` / `std::kill_dependency` family は reference family として有用だが、current source language の final surface に直輸入する判断はしていない。
-   - current theory line では、少なくとも `program_order`、`dependency_order`、`publication_order`、`observation_order`、`witness_order`、`finalization_order`、`scoped_happens_before` のような relation decomposition が比較候補になる。
-   - 未決なのは、これらの relation 名をどこまで docs-first working vocabulary に昇格させるか、また shared-memory lowering と distributed handoff lowering の両方へ自然に接続できる分解が何かである。
+   - actual adoption package として、`program_order`、`dependency_order`、`publication_order`、`observation_order`、`witness_order`、`finalization_order`、`scoped_happens_before` を current working vocabulary に上げ、relation decomposition principal と読む current line は fixed 済みである。
+   - C++ `memory_order_consume` / `std::kill_dependency` family は backend-aligned reference family として retained し、current source principal にはしない。
+   - したがって current open question は、low-level exact surface を source principal にするかではなく、final public wording / emitted-artifact contract へ relation decomposition をどこまで mirror するかである。
 33. thread / node parity をどの水準で書くべきか。
-   - source-backed な floor として固定済みなのは、`place` が deployment artifact ではなく semantic locus であり、routing / transport / distributed realization は Mir-0 の外にあるという点である。
-   - ただし、「thread も node も同じ causal language で扱う」という line を repo のどこまで current wording に上げるかは未決定である。
-   - working hypothesis としては、thread と node を同じ source-level causal language で扱いつつ、差分は placement / transport / witness / durability / failure policy / fairness / authority に残すのが自然である。
+   - actual adoption package として、`thread と node は同じ causal language で書く` / `違いは lowering / evidence / transport / failure / durability / policy に残す` を current default wording に上げた。
+   - `thread == node` の short-hand は current line で採らない。
+   - したがって current open question は、この wording を final public companion / emitted-artifact docs へどこまで mirror するかである。
 34. syntax と semantics honesty の coupling principle をどこまで明文化するか。
    - source-backed な floor として、companion notation は final parser grammar ではなく、explicit edge-row family を維持し、packed metadata row を current companion notation に採らないことは固定済みである。
-   - ただし、「自然に書けるものは自然な挙動をするべき」「理論的に破綻した動作は書けない / 書きにくいべき」という設計原則を、syntax comparison の規準としてどこまで formal に mirror するかは未決定である。
-   - 少なくとも、semantic honesty、checker legibility、modal adequacy、misreading resistance を syntax comparison の主要軸に置くかは open question である。
+   - actual recommendation として、`自然に書けるものは自然な挙動をするべき`、`理論的に破綻した動作は書けない / 書きにくいべき`、`semantic honesty > compactness`、5 evaluation axes を current syntax comparison principle に上げた。
+   - surface narrowing note により、explicit edge-row / vertical continuation principal、`stage` / `after` / `witness` strong secondary candidate、authoritative-room `serial` sugar reserve まで narrowing は進んだ。
+   - したがって current open question は、この principle を final public parser grammar へ落とすことではなく、principal / secondary / reserve の current narrowing をどの mixed gate まで helper-local に保つかである。
 35. modal foundation の最終候補をどこへ置くか。
-   - `lambda-circle-box` / `next` + `always` line は、stage / later / always と time-ordered normalization の partial basis として有望である。
-   - docs-first follow-up により、guarded lambda-calculus と MDTT/MTT cluster を stronger candidate family として並行比較し、`lambda-circle-box` を partial basis に留める current line までは固まった。
-   - modal promotion-threshold note と modality internalization trigger note により、promotion pressure と internalization trigger までは current docs に昇格済みである。
-   - 未決なのは、guarded line と MDTT/MTT line をどの時点でさらに reduction するか、また final foundation adoption をどの mixed gate で判断するかである。
+   - `lambda-circle-box` / `next` + `always` line は current partial basis candidate に留め、guarded lambda-calculus、MDTT/MTT cluster、Fitch-style multimodal family を stronger candidate family として retained する current recommendationは fixed 済みである。
+   - syntax / modality current recommendation note により、5 軸 comparison、threshold-gated parallel keep、boundary-pressure trigger を含む current first line / retained alternatives / stop line は 1 本に再統合済みである。
+   - 未決なのは、stronger family をどの mixed gate で further reduction するか、また final foundation adoption / final source marker をどの package で判断するかである。
 36. order / handoff line の property-to-boundary matrix をどこまで current docs に昇格させるか。
-   - source-backed な floor として、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split は fixed 済みである。
-   - adequacy corpus と property-to-boundary matrix 自体は current docs に昇格済みであり、negative falsifier coverage も first hardening まで進んだ。
-   - 未決なのは、これをどの property-language bridge で theorem / protocol / runtime policy へ connect するかである。
+   - source-backed な floor として、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split と property-to-boundary matrix 自体は current docs に昇格済みである。
+   - actual adoption package 後の current open question は、matrix を theorem-first pilot / model-check second line / runtime-policy reserve へどう bridge するかであり、matrix 自体の existence ではない。
 37. theory-lab line を mainline actualization と別 package としてどう運用するか。
-   - current repo では `literature scout / formalizer / prototyper / falsifier / integrator` の role split、promotion rule、research package template までは docs-first に fixed 済みである。
-   - 未決なのは、tiny non-production prototype をどの line で mandatory にするか、また comparison candidate を decision register に上げる threshold をどの程度厳密に取るかである。
+   - current repo では `literature scout / formalizer / prototyper / falsifier / integrator` の role split、promotion rule、research package template は fixed 済みであり、`specs/examples/458...465` compare-floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`478...483` theorem/model-check/shared-space threshold floor の分離も current docs に上がっている。
+   - `specs/examples/481`、`482`、`483`、`484`、`485`、`486`、`487`、`488`、`489`、`490`、`491`、`492`、`493`、`494`、`495`、`496`、`497`、`498`、`499`、`500`、`501`、`502`、`503`、`504`、`505`、`506`、`507`、`508`、`509` により、`M1/M2/M3` threshold package、theorem/model-check/order-handoff/shared-space actual adoption package、theorem result-object preview actualization package、theorem proof-object schema/prover-brand coupled-later package、theorem result-object route actual-adoption package、theorem final-public-contract reopen-threshold package、model-check public-checker preview actualization package、model-check tool-brand/verifier-handoff coupled-later package、model-check public-checker-artifact/migration coupled-later package、model-check checker-artifact route actual-adoption package、model-check final-public-contract reopen-threshold package、shared-space/order-handoff coupled-later package、order-handoff source-wording/emitted-artifact coupled-later package、theorem result-object/payload public-contract coupled-later package、witness/provider public-schema coupled-later package、witness/provider route actual-adoption package、order-handoff source-wording route actual-adoption package、witness/provider schema-route actual-adoption package、witness/provider final-public-contract reopen-threshold package、theorem Lean-first non-production stub pilot actualization package、theorem repo-local artifact-conformance bridge package は close 済みであり、current principal self-driven queue は live package none ではなく representative trace-alignment / reserve surface reopen package に narrowed した。
+   - 未決なのは、next reopen 順と、tiny non-production helper をどの mixed gate で mandatory にするかである。
 38. typed-core の first attachment candidate と obligation owner をどこで固定するか。
-   - source-backed な floor として、current first typed attachment candidate は source syntax ではなく checker-adjacent semantic carrier 側に置くのが自然である。
-   - theorem/model-check consumer artifact は current first typed source ではなく derived attachment と読む。
-   - docs-first follow-up により、first source-visible typed-surface comparison は existing structural marker family を first candidate に置き、dedicated attachment block と unified obligation block を later comparison に残す current line まで固まった。
-   - docs-first migration note により、principal source を checker attachment に残し、source-visible marker を mirror、handoff row を derived reserve row に留める current cut までは固まった。
-   - request / predicate / `try` cluster typed-surface reserve note により、request / predicate / `try` cluster を grouped reserve cue に留める current cut までは固まった。
-   - typed-surface family unification keep/drop note により、current two-tier split（principal checker attachment / source-visible structural marker family / reserve cluster family）までは固まった。
-   - stronger typed-surface promotion threshold framing note により、reopen threshold と non-goal までは current docs に昇格済みである。
-   - 未決なのは、`family_refs[]` の exact namespace をどうするか、shared attachment shape と stronger typed surface promotion をどの mixed gate で actual adoption 判定へ送るかである。
+   - actual adoption package として、current first typed attachment candidate は checker-adjacent semantic carrier principal に置き、source-visible structural marker family first、request / predicate / `try` cluster grouped reserve、`p06` corrected prototype bridge-floor evidenceまでを fixed 済みである。
+   - stronger typed-surface promotion threshold framing も current docs に昇格済みである。
+   - 未決なのは、`family_refs[]` の exact namespace、shared attachment shape、stronger typed surface を experimental adoption に送る mixed gate である。
 39. semantic-core theorem pilot の first lemma order / evidence floor / review-discharge stop line をどこまで固定するか。
-   - source-backed な floor として、current first theorem pilot line は `canonical_normalization_law`、`no_re_promotion`、`rollback_cut_non_interference` の順で読むのが自然である。
-   - また current first concrete consumer は notebook-first line に置き、tool-neutral formal hook と row-local review unit を entry に保つ。
-   - docs-first follow-up により、lemma wording floor、admissible evidence floor、review artifact と theorem discharge の stop line までは固まった。
-   - proof artifact / bridge stop-line refresh により、formal hook / review unit / bridge sketch / theorem discharge を collapse しない current cut と、human review checklist / walkthrough pressure first の threshold までは固まった。
-   - admissible evidence contraction note により、admissible theorem evidence を symbolic refs only に contraction する current cut までは固まった。
-   - notebook-consumer threshold and discharge reserve note により、abstract discharge-entry row を first threshold に置く current cut までは固まった。
-   - theorem discharge transport / public-contract later-gate framing note により、transport seam と public-contract seam を coupled だが distinct な later gate として扱う current line までは固まった。
-   - 未決なのは、concrete theorem prover brand、proof object public contract、actual discharge transport、public checker migration timingである。
+   - source-backed な floor として、current first theorem pilot line は `canonical_normalization_law`、`no_re_promotion`、`rollback_cut_non_interference` の順、notebook-first review-unit first、symbolic-ref-only evidence floor、abstract discharge-entry reserve に置く。
+   - theorem-first external integration target は current default に上がっており、`p06`、preview alignment pre-floor、theorem discharge pre-floor、theorem-first pilot actualization、brand-neutral theorem binding preflight、theorem Lean-first non-production stub pilot actualization、theorem review-unit to Lean-stub repo-local artifact-conformance bridge、theorem Lean-stub representative trace-alignment bridge、theorem discharge actual-format probe、theorem discharge / public-theorem-contract threshold default、theorem contract shape threshold default、theorem transport/public-contract coupled later gate、theorem review-unit transport / notebook-contract actual adoption、theorem result-object preview / proof-object-schema reserve actualization、theorem result-object route actual adoption、theorem proof-object schema / prover-brand coupled later gate、theorem result-object / payload public-contract coupled later gate、theorem final public-contract reopen threshold は representative corpus で machine-check 済みである。
+   - `specs/examples/497` により、final result-object candidate side と consumer-shaped payload public-contract candidate side を adjacent but distinct later gate として helper-local actualization 済みである。
+   - `specs/examples/500` により、review-unit transport first / notebook-consumer object first / consumer-shaped payload preview keep / proof-object-schema-prover-brand later の repo-local actual adoption package まで helper-local actualization 済みである。
+   - 未決なのは、final public theorem result object、consumer-shaped theorem payload public contract、theorem prover concrete brand、proof object public schema、final public verifier contract、public checker migration timingである。
 40. model-check projection grain と first property-family reserve をどこまで current docs に上げるか。
-   - source-backed な floor として、current line は `formal_hook -> row-local machine-facing carrier -> emitted artifact wiring -> sample-facing summary` までである。
-   - current next reserve としては、small-cluster semantic projection を row-local floor の次に置き、room protocol / fairness / replay / provider receipt family は order/handoff 側 reserve に残すのが自然である。
-   - docs-first follow-up により、row-local carrier から small-cluster semantic projection への bridge grain と bridge bundle floor までは固まった。
-   - sample-visible property summary wording により、sample-facing summary が何を言ってよく、何を order/handoff reserve 側へ残すかの current cut までは固まった。
-   - tool-binding stop-line refresh により、explicit non-goal を current cut にし、concrete tool binding を still later に残す line までは固まった。
-   - model-check small-cluster projection keep/drop refresh により、same-subject stage-local small cluster を keep line に置き、typed reserve / theorem discharge / room protocol family を drop する current cut までは固まった。
-   - model-check property-language / tool-binding later-gate framing note により、property-language seam と tool seam を adjacent later gate として扱う current line までは固まった。
-   - 未決なのは、concrete model-check tool binding、first settled property language、production checker/runtime-policy contract である。
+   - source-backed な floor として、current line は `formal_hook -> row-local machine-facing carrier -> emitted artifact wiring -> sample-facing summary` に置き、small-cluster semantic projection を row-local floor の次の reserve に残す。
+   - theorem-first external integration target を current default に採るため、model-check line は current second line と読み、`specs/examples/478` により row-local property preview / request preflight / public-checker second reserve split まで helper-local actualization 済みである。
+   - `specs/examples/480` により property-language probe / tool-seam probe / checker-boundary probe まで helper-local actualization 済みであり、`specs/examples/482` により row-local-property-preview first / small-cluster-projection second / brand-neutral request keep / public-checker-contract-later default まで helper-local actualization 済みである。
+   - `specs/examples/488` により、row-local property route first / checker-boundary contract first / brand-neutral tool-binding reserve keep の repo-local actual adoption package まで helper-local actualization 済みである。
+   - `specs/examples/492` により、consumer-shaped public-checker artifact preview only / verifier-handoff reserve keep / brand-neutral tool-binding reserve keep の repo-local actualization package まで helper-local actualization 済みである。
+   - `specs/examples/495` により、public-checker artifact preview keep / verifier-handoff candidate only / tool-brand candidate only の coupled-later package まで helper-local actualization 済みである。
+   - `specs/examples/498` により、consumer-shaped public checker artifact candidate side と actual public checker migration candidate side を adjacent but distinct later gate として helper-local actualization 済みである。
+   - `specs/examples/501` により、row-local property route first / checker-boundary contract anchor / consumer-shaped checker-artifact candidate only / migration candidate adjacent keep の repo-local actual-adoption package まで helper-local actualization 済みである。
+   - `specs/examples/507` により、property-language and tool-brand first / public-checker-artifact and migration second / verifier-handoff and runtime-policy-contract third / final public verifier contract fourth の reopen threshold まで helper-local actualization 済みである。
+   - 未決なのは、concrete model-check tool binding、first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract である。
+42. witness/provider public-shape line の route-first cut をどこまで current docs に上げるか。
+   - source-backed な floor として、claim/payload split first、witness/provider route non-collapse、repo-local emitted artifact refs first の public-shape actual adoption と、witness-schema candidate only / provider-receipt candidate only / combined public-contract candidate only の public-schema coupled-later gate は current docs に昇格済みである。
+   - `specs/examples/502` により、witness/provider route first / public-schema candidate keep / combined public-contract later / final emitted-handoff contract adjacent keep の repo-local actual-adoption package まで helper-local actualization 済みである。
+   - `specs/examples/504` により、witness-schema candidate keep + witness route first / provider-receipt candidate keep + provider route first / combined public-contract candidate keep / final emitted-handoff contract adjacent keep の repo-local actual-adoption package まで helper-local actualization 済みである。
+   - `specs/examples/505` により、public-schema pair first / delegated provider attestation + combined provider+witness public contract second / final emitted-handoff contract third の reopen threshold まで helper-local actualization 済みである。
+   - 未決なのは、final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted-handoff contract、exhaustive shared-space catalog である。
+43. order-handoff line の principal source-wording route をどこまで current docs に上げるか。
+   - source-backed な floor として、edge-row / vertical continuation principal、readable high-level relation vocabulary keep、stage-block secondary keep、thread/node same causal language keep の surface actual adoption と、source-wording candidate only / emitted-artifact schema candidate only の coupled-later gate は current docs に昇格済みである。
+   - `specs/examples/503` により、principal source wording route first / emitted-artifact schema candidate keep / final source wording later の repo-local actual-adoption package まで helper-local actualization 済みである。
+   - 未決なのは、final source-surface handoff wording、final emitted-artifact schema、final emitted-handoff contract、final public witness/provider contract、final modal foundation adoption、exhaustive shared-space catalog である。
 41. order / handoff line の falsifier coverage をどこまで hardening するか。
    - source-backed な floor として、cut family comparison、relation decomposition、adequacy corpus、property-to-boundary matrix は already ある。
    - docs-first follow-up により、negative falsifier coverage と higher-level candidate reduction までは current docs に昇格済みである。current first candidate は `authority_serial_transition_family`、second candidate は `witness_aware_commit_family`、`event_tree_execution_view` は derived/debug candidate、low-level `memory_order` family は retained-later reference family に留める。
    - property-language bridge note により、kept/second candidate と boundary matrix を property-language bridge へ connect する current cut までは固まった。
    - emitted-artifact schema reserve note により、refs-only reserve schema を first cut にし、consumer-shaped schema と source-surface-first schema を still later に残す line までは固まった。
    - order/handoff source-surface wording reserve note により、snake_case relation family 名を principal wording に保ち、plain-language stage wording を explanation layer に重ね、low-level fence-like wording と room macro wording を still later に残す current cut までは固まった。
-   - 未決なのは、final property language、final source-surface handoff wording、final emitted artifact schema、concrete theorem / protocol tool binding とどう接続するかである。
+   - order / handoff current first-line integration note により、`p07/p08` corrected prototype、authority-handoff ladder、fairness/replay mixed-gate boundaryを含む current first line / retained alternatives / stop line / mixed gate は 1 本に再統合済みである。
+   - `p07/p08` corrected prototype と current runner / CLI / compare-floor tests により、authoritative-room first default profile の runnable evidence も current docs に統合済みである。
+   - `specs/examples/484` により、edge-row principal、stage-block secondary、repo-local emitted artifact refs first の threshold default まで helper-local actualization 済みである。
+   - `specs/examples/490` により、edge-row principal / stage-block secondary keep / repo-local emitted artifact refs first の repo-local actual adoption package まで helper-local actualization 済みである。
+   - `specs/examples/493` により、witness/provider public-contract side と emitted-handoff contract side を adjacent but distinct later gate として helper-local actualization 済みである。
+   - `specs/examples/496` により、source-wording candidate side と emitted-artifact-schema candidate side を adjacent but distinct later gate として helper-local actualization 済みである。
+   - 未決なのは、final source-surface handoff wording、final emitted artifact schema、final public witness/provider/artifact contract、authoritative-room `serial` sugar adoption、low-level exact source wording と final property-language bridge / final modal foundation をどう接続するかである。
 42. shared-space fairness / replay line をどこで mixed gate と読むか。
    - source-backed な floor として、identity / admission / authority / room-profile-host bridge までは docs-first に進んでいる。
-   - fairness / replay strengthening reserve note と mixed-gate boundary note により、provider placement、witness requirement、fairness source / trust model、replay attachment を別軸に保ったまま、final operational profile は mixed gate に送る current line は fixed 済みである。
-   - 未決なのは、final fairness policy、final replay invalidation protocol、final room-profile catalog、concrete authority binding / provider protocol である。
+   - actual adoption package として、first default profile
+     - `authority-ack`
+     - `single room authority`
+     - `authoritative serial transition`
+     - `authority_rng`
+     - late join visible history as past
+     - stale reconnect fail then refresh
+     - replay invalidation rather than silent merge
+     - no distributed fairness theorem required in first completion line
+     は current recommendation に上がった。
+   - `specs/examples/476` により、`auditable_authority_witness` strengthening 自体は helper-local actualization floor まで current recommendation に上がった。current cut は、room profile に `fairness_claim = auditable_authority_witness` だけを残し、minimal witness core は audit / receipt side に `witness_kind` / `action_ref` / `draw_slot` / `draw_result` の 4-field bundle として置き、`draw_result` は final public scalar receipt ではなく symbolic binding ref に留める reading である。
+   - `specs/examples/477` により、`delegated_rng_service` practical package 自体も helper-local actualization floor まで current recommendation に上がった。current cut は、`fairness_source = delegated_rng_service`、`fairness_claim = opaque_authority_trust`、authority-kept-commit、provider-draw-only、optional provider attachment を first practical line に置く reading である。
+   - `specs/examples/483` により、claim/payload split first、repo-local emitted artifact refs first、optional attachment refs only、combined public contract later の public-shape threshold default まで helper-local actualization 済みである。
+   - `specs/examples/489` により、witness route / provider route non-collapse、repo-local emitted artifact refs first、combined public contract later の repo-local actual adoption package まで helper-local actualization 済みである。
+   - `specs/examples/499` により、witness-schema candidate side、provider-receipt candidate side、combined public-contract candidate side を adjacent but distinct later gate として helper-local actualization 済みである。
+   - 未決なのは、final public provider receipt schema、delegated provider attestation、final public witness schema、combined provider+witness public contract、final emitted handoff contract、final fairness policy、final replay invalidation protocol taxonomy、exhaustive room-profile catalog である。
 43. public operational CLI installed-binary promotion と packaging success criteria をどこで mixed gate と読むか。
    - source-backed な floor として、runtime-led thin facade、current-L2 scoped Rust shell actualization、public operational CLI concrete shell naming / actualization は fixed 済みである。
    - installed-binary / packaging success-criteria mixed-gate boundary note により、current shell actualization と installed-binary promotion を分ける current line は fixed 済みである。
-   - 未決なのは、installed binary adoption、final CLI hierarchy、backend / tooling success criteria、final public parser / checker / runtime packaging success criteriaである。
+   - user-authorized default により、repo-local runnable CLI + tests + emitted artifacts + reproducible compare floor は near-end success criteria に上がった。
+   - 未決なのは、installed binary adoption、final CLI hierarchy、FFI / engine adapter / host integration target、final public parser / checker / runtime packaging success criteriaである。
+44. near-end closeout をどこまで queue close と書いてよいか。
+   - near-end closeout after actual adoption defaults note、helper-local actualization notes、`specs/examples/481`、`482`、`483`、`484`、`485`、`486`、`487`、`488`、`489`、`490`、`491`、`492`、`493`、`494`、`495`、`496`、`497`、`498`、`499`、`500`、`501`、`502`、`503`、`504`、`505`、`506`、`507` により、actual adoption / actualization / threshold package `466...507` close 後の current reading は theorem / model-check / order-handoff / shared-space actual adoption close と theorem result-object preview / theorem result-object actual adoption / theorem proof-object schema-prover-brand coupled-later / theorem result-object-payload public-contract coupled-later / theorem final-public-contract reopen-threshold close / model-check public-checker preview / model-check tool-brand-verifier-handoff coupled-later / model-check public-checker-artifact-migration coupled-later actualization / model-check checker-artifact-route actual-adoption close / model-check final-public-contract reopen-threshold close と witness/provider public-contract / emitted-contract coupled-later close と witness/provider public-schema coupled-later close と witness/provider route actual-adoption close と order-handoff source-wording / emitted-artifact coupled-later close と order-handoff source-wording route actual-adoption close と witness/provider schema-route actual-adoption close と witness/provider final-public-contract reopen-threshold close、live queue none まで narrow になった。
+   - ただし、これは theory solved や final adoption を意味しない。remaining work は mixed gate / reserve integration / residual user-spec gate に残る。
+   - 未決なのは、final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema と final public checker artifact / concrete tool seam と final public witness/provider/artifact contract をどの順で reopen するかである。
+45. principal theory spine をどこで final adopted calculus と区別して扱うか。
+   - `specs/examples/475` により、current theory-lab direction は multimodal dependent core を principal theory spine に置き、`lambda-circle-box` を partial basis candidate に留めつつ、guarded / MDTT / MTT / Fitch-style multimodal family を stronger family として retained する reading に上がった。
+   - current recommendation は final calculus adoption ではなく、typed / theorem / model-check / order-handoff を一段深い共通 spine で読む docs-first integration judgment である。
+   - 未決なのは、この spine を final adopted calculus、final source marker、final parser grammar のどれとも混線させずに、どの mixed gate で further reduction するかである。
+46. layered theory stack と compatibility metatheory をどこまで current package に上げるか。
+   - `specs/examples/475` により、multimodal dependent core、linear capability/ownership、effect rows、decidable refinement / contract、information-flow / label、theorem/model-check bridge の layered stack と、layer-compatibility / obligation export / weakening / erasure の compatibility metatheory package は current recommendation に上がった。
+   - ただし current package は exact judgment syntax、full elaborator、cross-layer serialization、public export schema を final にしたわけではない。
+   - 未決なのは、compatibility manifest / export floor / obligation handoff shape をどの mixed gate で helper-local から public に近づけるかである。
+47. Lean-first proof roadmap をどこまで current package judgment と読むか。
+   - `specs/examples/475` により、proof formalization は Lean-first を current recommendation に置き、Rocq/Coq + Iris line は runtime concurrency / separation-logic pressure が強まった場合の fallback family として retained する reading に上がった。
+   - current package で fixed したのは、semantic-core relation library first、repo-local review-unit/Lean-stub artifact-conformance bridge second、room/fabric concurrency later という staged roadmap であって、concrete production prover binding や final public proof artifact contract ではない。
+   - 未決なのは、prototype-wide exhaustive trace alignment、actual theorem discharge transport、proof object public contract、cross-tool public artifact-conformance contract、fallback trigger をどこで concretize するかである。

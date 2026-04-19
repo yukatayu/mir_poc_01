@@ -29,8 +29,8 @@
 - 主眼:
   fixed-subset source sample と malformed family の narrow widening
 - current line:
-  `Macro 0〜4 closeout fixed`
-  （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
+  `Macro 4 active on fixed authored/prototype floor`
+  （current-l2 authored sixteen、corrected prototype nonet、runner / CLI / regression floor は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
 - goal:
   runnable corpus を広げつつ、runner / ladder / regression / docs mirror を崩さない
 
@@ -40,17 +40,17 @@
   typed / theorem / model-check / order / memory / syntax / modality を
   docs-first comparison と boundary planning で進める
 - current line:
-  `Macro 5 boundary / pilot / framing closeout fixed`
-  （modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は fixed 済み、remaining topics は mixed gate only）
+  `Macro 5 post-runnable mixed-gate actualization floor fixed + reopen package active`
+  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...510` deeper-theory / reserve / mixed-gate actualization / actual-adoption floor は close 済みである。corrected runnable version の current floorは already reached であり、next self-driven line は order-handoff serial-scope reserve surface / witness-provider trace alignment / theorem actual Lean execution availability probe と読む）
 - goal:
-  full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定する
+  full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定した上で、post-runnable mixed-gate package を narrow に閉じる
 
 ### Lane C. reserve integration
 
 - 主眼:
   thin facade / public shell / shared-space / host-I/O boundary を hidden promotion なしで整理する
 - current line:
-  `Macro 6/7 mixed-gate boundary fixed`
+  `Macro 6 minimal working subset actual default / Macro 7 mixed + reserve reopen package active`
 - goal:
   support-only / shell / excluded bucket を混ぜずに保ちつつ、remaining topics を mixed gate に留める
 
@@ -66,10 +66,10 @@
 | `Macro 1` | semantic kernel / invariant stabilization | late | current L2 semantic reopen が narrow になる |
 | `Macro 2` | parser-free validation substrate | late | detached loop / fixture corpus / compare helper の drift suppression |
 | `Macro 3` | compile-ready minimal actualization | late | support-only / public-candidate split の安定化 |
-| `Macro 4` | executable fixed-subset sample expansion | current scoped closeout fixed | widened row を current ladder に安全に追加できる |
-| `Macro 5` | typed / theorem / model-check bridge | current scoped closeout fixed | boundary / pilot / framing closeout が fixed される |
-| `Macro 6` | fabric / shared-space / runtime evolution | mixed-gate boundary fixed | fairness / replay operational profile を mixed gate へ正しく送れる |
-| `Macro 7` | toolchain / backend / host-facing integration | mixed-gate boundary fixed | installed-binary / packaging success criteria を mixed gate へ正しく送れる |
+| `Macro 4` | executable fixed-subset sample expansion | active on fixed authored/prototype floor | sample widening / prototype comparison を current semantics を崩さずに保てる |
+| `Macro 5` | typed / theorem / model-check bridge | near-end closeout + pre-floor hardening | current first line / retained alternatives / stop line / later gate が source-backed に揃い、preview-alignment pre-floor、model-check projection pre-floor、theorem discharge pre-floor も helper-local compare として固定される |
+| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | shared-space docs-first boundary と mixed-gate final profile の分離が保てる |
+| `Macro 7` | toolchain / backend / host-facing integration | mixed | shell / facade / packaging boundary を final target profileから分離できる |
 | `Macro 8` | domain / application realization | application-specific target not started | first target profile が user と合意される |
 
 ## current recommendation
@@ -77,6 +77,7 @@
 - Lane A は narrow actualization を維持する。
   - corrected runnable prototype と helper-local `debug_outputs` / `verification_preview` を使って usability / falsifier comparison を進めてよい。
 - Lane B は mainline の「ついで」ではなく、separable な research program として前進させる。
+- Lane B の narrow mixed-gate pre-floor では、preview summary、model-check projection helper、theorem discharge helper を final public contract や settled property language にせず compare floor を厚くしてよい。
 - Lane C は thin facade と shell concern の boundary hardening、および mixed-gate boundary の明確化に留める。
 - old `Phase 7 = FutureWork` の巨大 bucket は再導入しない。
 

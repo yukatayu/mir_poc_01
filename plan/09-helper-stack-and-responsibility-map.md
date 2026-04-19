@@ -53,6 +53,297 @@ run_directory_named_profile
   - model-check concrete carrier の `obligation_kind` / symbolic `evidence_refs`
   を `artifact_preview` として見せてよい。
   - これは current helper route から導く derived preview であり、final public artifact schema を意味しない。
+- current model-check projection pre-floor cut では、
+  - `projection_subject_kind` / `projection_subject_ref`
+  - `principal_machine_carrier_refs`
+  - `small_cluster_projection_refs`
+  - `property_language_seam_refs`
+  - `tool_binding_seam_refs`
+  - `guard_refs` / `excluded_family_refs` / `kept_later_refs`
+  を sample-local compare floor として test/support helper に置いてよい。
+  - これは settled property language、concrete tool seam、final public verifier contract を意味しない。
+- current model-check second-line cut では、
+  - `concretization_subject_kind` / `concretization_subject_ref`
+  - `principal_machine_carrier_refs`
+  - `row_local_property_preview_refs`
+  - `secondary_projection_refs`
+  - `request_preflight_refs`
+  - `public_checker_reserve_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `excluded_family_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand、actual public checker migration、production checker/runtime-policy contract を意味しない。
+- current theorem discharge pre-floor cut では、
+  - `discharge_subject_kind` / `discharge_subject_ref`
+  - `principal_review_unit_refs`
+  - `discharge_entry_reserve_refs`
+  - `transport_seam_refs` / `public_contract_seam_refs`
+  - `guard_refs` / `kept_later_refs`
+  を sample-local compare floor として test/support helper に置いてよい。
+  - これは actual discharge transport adoption、public theorem contract adoption、proof object public schema を意味しない。
+- current theorem discharge actual-format probe cut では、
+  - `probe_subject_kind` / `probe_subject_ref`
+  - `principal_review_unit_refs`
+  - `discharge_entry_reserve_refs`
+  - `symbolic_evidence_refs`
+  - `transport_preview_refs`
+  - `public_contract_preview_refs`
+  - `consumer_boundary_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは actual discharge transport、public theorem contract、concrete theorem prover brand、proof object public schema を意味しない。
+- current theorem discharge/public-contract threshold cut では、
+  - `threshold_subject_kind` / `threshold_subject_ref`
+  - `principal_review_unit_refs`
+  - `discharge_entry_reserve_refs`
+  - `symbolic_evidence_refs`
+  - `transport_preview_refs` / `public_contract_preview_refs`
+  - `consumer_boundary_refs`
+  - `binding_preflight_manifest_refs` / `adapter_boundary_refs`
+  - `threshold_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは actual discharge transport、public theorem contract、theorem result public object、proof object public schema を意味しない。
+- current theorem Lean-first non-production stub pilot cut では、
+  - `pilot_subject_kind` / `pilot_subject_ref`
+  - `principal_review_unit_refs`
+  - `binding_preflight_manifest_refs`
+  - `lean_stub_artifacts`
+  - `pilot_binding_refs` / `code_anchor_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは actual Lean tool execution、public theorem contract、proof object public schema、final public verifier contract を意味しない。
+- current theorem review-unit to Lean-stub repo-local artifact-conformance bridge cut では、
+  - `sample_stem` / `smoke_mode`
+  - `formal_hook_output`
+  - `review_units_output`
+  - `lean_stubs_output`
+  - `review_unit_count` / `lean_stub_count` / `matched_pairs`
+  を repo-local compare floor helper に置いてよい。
+  - これは actual Lean tool execution、prototype-wide trace alignment、public theorem contract、proof object public schema、cross-tool public artifact-conformance contract を意味しない。
+- current theorem contract-shape threshold cut では、
+  - `threshold_subject_kind` / `threshold_subject_ref`
+  - `transport_shape_refs`
+  - `public_contract_shape_refs`
+  - `threshold_default_refs`
+  - `compare_floor_refs` / `contrast_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは theorem result public object、consumer-shaped theorem payload、concrete theorem prover brand、proof object public schema を意味しない。
+- current theorem transport/public-contract coupled-later cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `transport_candidate_refs`
+  - `public_contract_candidate_refs`
+  - `coupled_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは actual discharge transport adoption、public theorem contract adoption、theorem result public object、proof object public schema を意味しない。
+- current theorem review-unit transport actual-adoption cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `transport_route_refs`
+  - `notebook_contract_route_refs`
+  - `external_binding_reserve_refs`
+  - `actual_adoption_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual adoption floor として test/support helper に置いてよい。
+  - これは theorem result public object、consumer-shaped theorem payload、concrete theorem prover brand、proof object public schema、final public verifier contract を意味しない。
+- current theorem result-object preview actualization cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `result_object_route_refs`
+  - `notebook_payload_preview_refs`
+  - `proof_object_schema_reserve_refs`
+  - `actual_adoption_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、final public verifier contract を意味しない。
+- current theorem proof-object schema / prover-brand coupled-later cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `proof_object_schema_candidate_refs`
+  - `prover_brand_candidate_refs`
+  - `coupled_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand adoption、proof object public schema adoption、final public verifier contract を意味しない。
+- current model-check property/tool-seam probe cut では、
+  - `probe_subject_kind` / `probe_subject_ref`
+  - `principal_machine_carrier_refs`
+  - `row_local_property_preview_refs`
+  - `secondary_projection_refs`
+  - `property_language_probe_refs`
+  - `tool_seam_probe_refs`
+  - `checker_boundary_probe_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `excluded_family_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand、actual public checker migration、production checker/runtime-policy contract を意味しない。
+- current model-check row-local property actual-adoption cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `property_route_refs`
+  - `checker_contract_route_refs`
+  - `tool_binding_reserve_refs`
+  - `actual_adoption_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `excluded_family_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual adoption floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand、consumer-shaped public checker artifact、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract を意味しない。
+- current model-check public-checker artifact preview actualization cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `checker_artifact_preview_refs`
+  - `verifier_handoff_reserve_refs`
+  - `tool_binding_reserve_refs`
+  - `actual_adoption_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract を意味しない。
+- current model-check tool-brand / verifier-handoff coupled-later cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `verifier_handoff_candidate_refs`
+  - `tool_brand_candidate_refs`
+  - `coupled_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand adoption、final public checker artifact adoption、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract を意味しない。
+- current model-check public-checker artifact / migration coupled-later cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `public_checker_artifact_candidate_refs`
+  - `checker_migration_candidate_refs`
+  - `coupled_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actualization floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract を意味しない。
+- current model-check checker-artifact route actual-adoption cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `checker_artifact_route_refs`
+  - `migration_candidate_keep_refs`
+  - `actual_adoption_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual-adoption floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract を意味しない。
+- current witness/provider/artifact public-shape actual-adoption cut では、
+  - `profile_axis_refs`
+  - `witness_route_refs`
+  - `provider_route_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `actual_adoption_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual adoption floor として test/support helper に置いてよい。
+  - これは final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract、exhaustive shared-space catalog を意味しない。
+- current order-handoff surface actual-adoption cut では、
+  - `profile_axis_refs`
+  - `principal_surface_lines`
+  - `secondary_surface_lines`
+  - `repo_local_emitted_artifact_refs`
+  - `actual_adoption_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual adoption floor として test/support helper に置いてよい。
+  - これは final parser grammar、final source-surface handoff wording、final emitted handoff contract、final public witness/provider/artifact contract、authoritative-room `serial` sugar adoption、low-level exact source wording、final modal foundation adoption を意味しない。
+- current witness/provider public-contract / emitted-handoff coupled-later cut では、
+  - `profile_axis_refs`
+  - `witness_contract_candidate_refs`
+  - `provider_contract_candidate_refs`
+  - `emitted_contract_candidate_refs`
+  - `coupled_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local coupled-later floor として test/support helper に置いてよい。
+  - これは final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract、final source-surface handoff wording、exhaustive shared-space catalog を意味しない。
+- current witness/provider public-schema coupled-later cut では、
+  - `profile_axis_refs`
+  - `witness_schema_candidate_refs`
+  - `provider_receipt_candidate_refs`
+  - `combined_public_contract_candidate_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `coupled_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local coupled-later floor として test/support helper に置いてよい。
+  - これは final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract、final source-surface handoff wording、exhaustive shared-space catalog を意味しない。
+- current witness/provider route actual-adoption cut では、
+  - `profile_axis_refs`
+  - `witness_route_actual_refs`
+  - `provider_route_actual_refs`
+  - `schema_candidate_keep_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `actual_adoption_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual-adoption floor として test/support helper に置いてよい。
+  - これは final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract、exhaustive shared-space catalog を意味しない。
+- current witness/provider schema-route actual-adoption cut では、
+  - `profile_axis_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `witness_schema_route_refs`
+  - `provider_receipt_route_refs`
+  - `combined_public_contract_keep_refs`
+  - `actual_adoption_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual-adoption floor として test/support helper に置いてよい。
+  - これは final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract、exhaustive shared-space catalog を意味しない。
+- current witness/provider final-public-contract reopen-threshold cut では、
+  - `profile_axis_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `witness_schema_route_refs`
+  - `provider_receipt_route_refs`
+  - `combined_public_contract_keep_refs`
+  - `final_public_contract_reopen_sequence_refs`
+  - `threshold_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local threshold floor として test/support helper に置いてよい。
+  - これは final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract、exhaustive shared-space catalog を意味しない。
+- current order-handoff source-wording route actual-adoption cut では、
+  - `profile_axis_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `source_wording_route_refs`
+  - `emitted_artifact_candidate_keep_refs`
+  - `actual_adoption_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual-adoption floor として test/support helper に置いてよい。
+  - これは final parser grammar、final public parser/checker/runtime API、final source-surface handoff wording、final emitted-artifact schema、final emitted-handoff contract、final public witness/provider contract、authoritative-room `serial` sugar adoption、low-level exact source wording、final modal foundation adoption、exhaustive shared-space catalog を意味しない。
+- current order-handoff source-wording / emitted-artifact coupled-later cut では、
+  - `profile_axis_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `source_wording_candidate_refs`
+  - `emitted_artifact_schema_candidate_refs`
+  - `coupled_default_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local coupled-later floor として test/support helper に置いてよい。
+  - これは final parser grammar、final public parser/checker/runtime API、final source-surface handoff wording、final emitted-artifact schema、final emitted-handoff contract、final public witness/provider/artifact contract、authoritative-room `serial` sugar adoption、low-level exact source wording、final modal foundation adoption、exhaustive shared-space catalog を意味しない。
+- current theorem result/payload public-contract coupled-later cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `result_object_candidate_refs`
+  - `payload_public_contract_candidate_refs`
+  - `coupled_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local coupled-later floor として test/support helper に置いてよい。
+  - これは final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、final public verifier contract を意味しない。
+- current theorem result-object actual-adoption cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `result_object_route_refs`
+  - `payload_preview_keep_refs`
+  - `actual_adoption_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local actual-adoption floor として test/support helper に置いてよい。
+  - これは final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、final public verifier contract を意味しない。
+- current theorem final-public-contract reopen-threshold cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `result_object_route_refs`
+  - `payload_preview_keep_refs`
+  - `proof_object_schema_candidate_refs`
+  - `prover_brand_candidate_refs`
+  - `final_public_contract_reopen_sequence_refs`
+  - `threshold_default_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local threshold floor として test/support helper に置いてよい。
+  - これは final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、final public verifier contract を意味しない。
 
 ## current helper migration guidance
 
@@ -301,7 +592,31 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - reached stage inventory は current package では docs-first + test-only ratchet に置き、runner 本体の public shape には still 混ぜない
   - bless policy / final public CLI は still later に残す
 - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
-  - `CurrentL2SourceSampleRunReport` を起点に fixture-aligned detached formal-hook route を再利用し、`proof_notebook_review_unit` / model-check carrier helper output へ fan-out する runtime test/support helper
+  - `CurrentL2SourceSampleRunReport` を起点に compare / actualization helper route を持ってよい。
+  - fixture-backed emitted-artifact route
+    - current authored source sample fixture / detached artifact chain を再利用し、`proof_notebook_review_unit` / model-check carrier helper output へ fan-out する runtime test/support helper
+  - sample-local preview-aligned route
+    - sample stem aligned `subject_ref` と symbolic `evidence_refs` を使い、prototype bucket を含む `verification_preview` / `artifact_preview` compare floor を支える runtime test/support helper
+  - sample-local model-check projection pre-floor route
+    - row-local machine-facing carrier、small-cluster projection reserve、property/tool seam refs を distinct に保ったまま representative runtime/static/guarded/prototype corpus を compare する runtime test/support helper
+  - sample-local theorem discharge pre-floor route
+    - row-local review unit、abstract discharge-entry reserve、transport/public-contract seam refs を distinct に保ったまま representative runtime/static/guarded/prototype corpus を compare する runtime test/support helper
+  - sample-local theorem-first experimental pilot actualization route
+    - notebook-first review unit、symbolic `evidence_refs`、repo-local emitted artifact refs、compare-floor refs を public contract に上げずに束ねる runtime test/support helper
+  - theorem-prover experimental binding preflight route
+    - theorem-first pilot actualization を concrete theorem prover brand へ上げず、brand-neutral preflight manifest と adapter boundary refs を helper-local compare floor に束ねる runtime test/support helper
+  - theorem Lean-first non-production stub pilot route
+    - theorem-binding preflight を prior floor に保ったまま、review-unit first / Lean-first non-production stub only / repo-local emitted stub refs first を helper-local actualization floor に束ねる runtime test/support helper
+  - theorem review-unit to Lean-stub repo-local artifact-conformance bridge
+    - representative authored source sample `e2 / e5` を formal-hook smoke / review-unit emit / Lean stub emit / pair conformance validation に束ね、regression helper へ接続する Python-side repo-local compare-floor helper
+  - theorem Lean-stub representative trace-alignment bridge
+    - representative runtime/static/prototype corpus `e2 / e5 / p06 / p07 / p08` と guard-only `p05` を、review-unit side / Lean stub side の `theorem_trace_alignment_pair:*` exact match に束ねる runtime test/support helper
+  - authoritative-room vertical-slice actualization route
+    - `p07/p08` room-default profile、relation/handoff refs、runtime evidence refs、repo-local emitted artifact refs を final emitted schema に上げずに束ねる runtime test/support helper
+  - minimal companion / experimental order-handoff surface route
+    - authoritative-room vertical slice を起点に、semantically honest な companion lines を final grammar に上げず helper-local compare floor へ actualize する runtime test/support helper
+  - stage-block secondary surface route
+    - authoritative-room vertical slice を起点に、`stage` / `after` / `witness` family を principal wording に上げず helper-local compare floor へ actualize する runtime test/support helper
   - current cut では reached runtime row / reached static row / guarded row の split だけを helper-local evidence に actualize し、runner 本体や public/report shape は widen しない
 - `scripts/current_l2_source_sample_regression.py`
   - Phase 6 source-sample authoring / bless policy current cut の repo-local helper

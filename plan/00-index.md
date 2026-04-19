@@ -49,12 +49,12 @@
 - 主眼は **Mir** の意味論基盤である。
 - current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored sixteen を already 持つ。
 - 近接運用は 3 lane で読むのが自然である。
-  - execution lane: `Macro 0〜4 closeout fixed`
-    （duplicate pair `e14/e15` actualized、broader try-rollback malformed-static family は kept-later inventory）
-  - theory-lab lane: `Macro 5 boundary / pilot / framing closeout fixed`
-    （modality internalization trigger、stronger typed-surface threshold framing、theorem discharge transport / public-contract later-gate framing、model-check property-language / tool-binding later-gate framing は fixed 済み、remaining topics は mixed gate only）
-  - reserve integration lane: `Macro 6/7 mixed-gate boundary fixed`
-    （shared-space fairness / replay mixed-gate boundary と public operational CLI installed-binary / packaging success-criteria mixed-gate boundaryは fixed 済み、remaining topics は mixed gate / user-spec-required）
+  - execution lane: `Macro 4 active on fixed authored/prototype floor`
+    （current-l2 authored sixteen、corrected prototype nonet、runner / CLI / regression floor は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
+  - theory-lab lane: `Macro 5 post-runnable mixed-gate actualization floor fixed + reopen package active`
+    （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...510` deeper-theory / reserve / mixed-gate actualization / actual-adoption floor まで close 済みである。corrected runnable version の current floorは already reached であり、current principal self-driven queue は Package 46 以降へ narrow に戻したが、later mixed gate と user-spec residual は残る）
+  - reserve integration lane: `Macro 6 minimal working subset actual default / Macro 7 mixed`
+    （shared-space fairness / replay final operational profile は minimal working subset default まで current docs に上がったが、installed-binary / packaging success criteria と shared-space final catalog は mixed gate / user-spec-required に残る）
 - 型 / 定理証明 / モデル検査 / ordering は mainline に無理に混ぜず、detail-side research program として扱う。
 - shared-space と host-facing I/O は docs-first boundary までは自走可能だが、final operational catalog や concrete target binding は later / mixed gate に残す。
 

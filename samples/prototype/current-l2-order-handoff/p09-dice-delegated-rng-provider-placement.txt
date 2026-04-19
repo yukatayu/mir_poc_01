@@ -1,0 +1,26 @@
+# delegated RNG provider が draw を返すが commit と handoff は authority が保持する current L2 prototype。
+place root {
+  place room {
+    place dice_authority {
+      option delegated_rng on dice_state capability read lease live admit provider_online(room_epoch)
+
+      chain delegated_rng_ref = delegated_rng
+
+      perform fetch_provider_roll via delegated_rng_ref
+        require read
+        ensure provider_draw_available(primary)
+
+      atomic_cut
+
+      perform publish_roll_result on dice_state
+        require owner_is(player_a)
+        ensure result_is_visible(room_members)
+
+      atomic_cut
+
+      perform handoff_dice_authority on dice_state
+        require owner_is(player_a)
+        ensure owner_is(player_b)
+    }
+  }
+}

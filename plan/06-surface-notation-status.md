@@ -95,6 +95,37 @@ chain profile_ref = writer
 - packed metadata row
   - option-local 情報と edge-local 情報を混ぜやすい
 
+## order / handoff companion narrowing の現在地
+
+### current principal
+
+- order / handoff companion surface でも **explicit edge-row / vertical continuation family** を principal に置く。
+- source-facing vocabulary は low-level `memory_order` exact token ではなく、
+  - `publish`
+  - `observe`
+  - `handoff`
+  - `witness`
+  のような readable high-level family を優先する。
+- `after ...` continuation のように edge-local order / obligation を見せる line は current recommendation に含めてよい。
+
+### retained secondary candidate
+
+- `stage` / `after` / `witness` family は strong secondary experimental candidate に残す。
+- これは final grammar ではなく、helper-local compare floor で `p07/p08` を読む secondary surface として扱う。
+- `stage-block + witness` を current principal に上げるのは still 早い。
+
+### reserve sugar
+
+- `serial on <owner>` family は authoritative-room-specific high-level sugar として reserve に残す。
+- shared-memory lock のような source principal へ寄せず、authoritative serial transition scope の room-specific sugar として読む。
+
+### still not principal
+
+- low-level `memory_order` / fence exact surface
+- packed metadata line
+- hidden precedence
+- final modal token import
+
 ## line-leading `>` ladder の位置づけ
 
 - 視覚的 compactness と vertical reading では魅力がある
@@ -164,7 +195,8 @@ current L2 では、final grammar を先に決めずに、
   - checker legibility
   - modal adequacy
   - misreading resistance
-  の 4 軸で比較する。
+  - lowering friendliness
+  の 5 軸で比較する。
 - 「自然に書けるものは自然な挙動をするべき」「理論的に破綻した動作は書けない / 書きにくいべき」を、
   final grammar ではなく companion notation / theory comparison の判断軸として先に維持する。
 - explicit edge-row family のさらに良い polishing があるか
@@ -172,6 +204,8 @@ current L2 では、final grammar を先に決めずに、
 - `try` / `fallback` block form と option-chain `fallback` の最終 grammar separation
 - predicate sublanguage をどこまで core に入れるか
 - syntax を compact にしても semantics honesty を落とさないか
+- order / handoff で edge-row principal と stage-block secondary candidate をどこまで helper-local に保つか
+- authoritative-room `serial` sugar を room-specific reserve のまま保つか
 
 ## current L2 settled / OPEN
 

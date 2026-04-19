@@ -61,11 +61,14 @@
 - `e23-malformed-try-fallback-missing-fallback-body` は fixture-side `source_example_id = E23` を already 持つが、current representative prose row は未整備なので `representative_status = unresolved` に留める。
 - current matrix 自体では reached stage や bless policy をまだ持ち込まず、source target path ref までを minimum に残す。
 - source sample の actual file current authored sixteen は `e1` / `e2` / `e3` / `e4` / `e5` / `e12` / `e14` / `e15` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` に置き、これらは current runner first cut の input として actualize 済みである。`e3` は admit-family third slot として source row / runner / inventory / ladder までは実装済みだが、formal hook stage は guarded に留めるのが current first choice である。
-- corrected runnable prototype second tranche は `p01-dice-publication-handoff`、`p02-dice-publication-fallback`、`p03-avatar-controller-attach-detach`、`p04-dice-owner-duplicate-declaration`、`p05-dice-owner-guarded-chain` である。
+- corrected runnable prototype nonet は `p01-dice-publication-handoff`、`p02-dice-publication-fallback`、`p03-avatar-controller-attach-detach`、`p04-dice-owner-duplicate-declaration`、`p05-dice-owner-guarded-chain`、`p06-typed-proof-owner-handoff`、`p07-dice-late-join-visible-history`、`p08-dice-stale-reconnect-refresh`、`p09-dice-delegated-rng-provider-placement` である。
   - これらは `samples/current-l2/` inventory には数えない。
   - current L2 lowerer / runner へ explicit path で流し、adjacent `.host-plan.json` sidecar を置く。
   - sample debugging 用には `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target へ append-record した preview を使ってよい。
   - theorem/model-check bridge の current floor は helper-local `verification_preview` と `artifact_preview` で sample-visible に比較してよい。
+  - current mixed-gate pre-floor では、sample-local preview-aligned typed artifact route で prototype bucket も compare floor に含めてよい。
+  - model-check mixed-gate pre-floor では、sample-local model-check projection pre-floor route で row-local carrier / small-cluster projection / property/tool seam も compare floor に含めてよい。
+  - theorem mixed-gate pre-floor では、sample-local theorem discharge pre-floor route で row-local review unit / discharge-entry reserve / transport/public-contract seam も compare floor に含めてよい。
 - exact rough stimuli A–D は `samples/not_implemented/order-handoff/` に preservation し、current parser / runner へは入れない。
 - underdeclared source-form omission stimulus は `e5-underdeclared-lineage` と `e12-underdeclared-target-missing` として `samples/current-l2/` に actualize 済みである。
   - omission form widening は convenience cut であり、final grammar adoption を意味しない。
