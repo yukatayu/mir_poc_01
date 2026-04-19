@@ -133,6 +133,9 @@
 - `specs/examples/523-current-l2-source-side-ifc-authority-prototype-pair-and-representative-lean-sample-set-widening.md`
   - Package 56 の source-side explicit authority line を `p10 / p11` corrected prototype pair まで進め、verifier preview / model-check projection / theorem Lean actualization representative set widening を current checker-adjacent IFC floor として整理する補助文書。
   - final typed source principal や final IFC syntax や final public verifier contract を固定するものではなく、source-side IFC evidence pair と representative Lean sample set widening を読むための anchor である。
+- `specs/examples/524-current-l2-ifc-label-flow-negative-prototype-closeout-and-representative-lean-sample-set-widening.md`
+  - Package 56 の remaining label-flow negative line を `p12` corrected prototype まで進め、source-side IFC trio と representative Lean sample set widening を current checker-adjacent IFC closeout floor として整理する補助文書。
+  - final typed source principal や final IFC syntax や final public verifier contract を固定するものではなく、source-side IFC trio と Package 56 closeout を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

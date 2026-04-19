@@ -84,10 +84,25 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
             ),
             host_plan_path=REPO_ROOT
             / "samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.host-plan.json",
-            summary="authority なし release を explicit failure で止める typed/IFC prototype。",
+            summary="authority なし release を reject path で止める typed/IFC prototype。",
             rationale=(
                 "current checker-adjacent IFC line で、holder と release authority を "
                 "分けた negative evidence を sample-visible に保つ representative prototype として読む。"
+            ),
+        ),
+        CurrentL2ExportSpec(
+            sample_id="p12-typed-classified-fingerprint-publication-block",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.host-plan.json",
+            summary="label-flow negative を表す typed/IFC prototype。",
+            rationale=(
+                "current checker-adjacent IFC line で、authority 欠如ではなく "
+                "classified payload の Low/public publication block を sample-visible に保つ "
+                "representative prototype として読む。"
             ),
         ),
         CurrentL2ExportSpec(

@@ -471,11 +471,11 @@ actual-adoption floor では、
   - `p10 / p11` source-side explicit authority pair
   - representative Lean sample set widening
   - stronger typed source principal は still later
-- source-side IFC authority prototype pair and Lean corpus widening:
-  `specs/examples/523`
-  - `p10 / p11` source-side explicit authority pair
+- source-side IFC label-flow negative closeout and Lean corpus widening:
+  `specs/examples/524`
+  - `p12` source-side label-flow negative
   - verifier preview / model-check projection / theorem Lean actualization representative set widening
-  - final typed source principal には上げず、checker-adjacent IFC package に留める
+  - Package 56 closeout、helper/CLI hardening next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

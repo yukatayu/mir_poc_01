@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 16:16 JST
+最終更新: 2026-04-19 16:32 JST
 
 ## この文書について
 
@@ -12,17 +12,16 @@
 
 - current mapped corpus では、
   - authored sixteen
-  - corrected prototype set `p01...p11`
+  - corrected prototype set `p01...p12`
   - runner / CLI / regression / helper-local compare floor
   が already runnable である。
-- representative Lean sample set `e5 / p06 / p10 / p11 / p07 / p08` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
+- representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
 - `samples/lean/foundations/` には
   - `CurrentL2LabelModel.lean`
   - `CurrentL2IfcSecretExamples.lean`
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - layered strong typing / IFC first-fragment を checker/sample corpus 側へ押し込む
   - helper / CLI hardening と broader theorem-side / IFC / order-handoff coverage
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - packaging / FFI / broader app target の user-spec residual
@@ -33,7 +32,7 @@
 - `samples/current-l2/`
   - authored sixteen は inventory / runner / verification ladder / emitted artifact wiring / regression helper に乗っている
 - `samples/prototype/`
-  - corrected prototype set `p01...p11` は explicit path + adjacent host-plan sidecar で runnable
+  - corrected prototype set `p01...p12` は explicit path + adjacent host-plan sidecar で runnable
   - helper-local `debug_outputs` / `verification_preview` / `artifact_preview` を見せる current cut がある
 - `samples/lean/`
   - `foundations/` は actual small proof fragment
@@ -52,8 +51,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `56` layered strong typing / IFC first-fragment | strong typing / IFC をどこまで current checker/theorem split に入れるか | `M` | `Macro 5` | checker-adjacent principal + layered stack + `CurrentL2LabelModel.lean` / `CurrentL2IfcSecretExamples.lean` / `p10` / `p11` を維持しつつ、label-flow negative と checker-fragment integration を足す | source-side corpus / docs / tests が揃い、Problem 1 closeout debt を 1 段狭める |
-| `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative sample set からどう widen するか | `M` | `Macro 5/7` | export/sync helper と `samples/lean/` committed corpus を基点に、broader theorem-side / IFC / order-handoff widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、IFC / proof package を concretize する |
+| `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative sample setからどう widen するか | `M` | `Macro 5/7` | export/sync helper と `samples/lean/` committed corpus を基点に、broader theorem-side / IFC / order-handoff widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、proof / IFC helper route を concretize する |
 | `59` near-end closeout sync | mixed gate / true user-spec residual をどこまで narrow に残すか | `S-M` | `Macro 5/6/7` | final public completion を凍らせず、closeout-ready snapshot に再圧縮する | `progress.md` / `tasks.md` / `plan/` / traceability が stale wording を残さない |
 
 ## recently closed package note
@@ -71,23 +69,30 @@
 - kept later:
   concrete production prover binding、final proof object public contract、final public verifier contract
 
-## active package notes
-
 ### Package 56 — layered strong typing / IFC first-fragment
 
 - current reading:
-  stronger typed surface は early source principal に上げず、checker-adjacent principal + layered stack に保つ。
-- actualized floor:
-  `CurrentL2LabelModel.lean` と `CurrentL2IfcSecretExamples.lean` により two-point label model / secret-key valid-invalid / explicit authority-sensitive declassification reading は Lean-side actual fragment として固定済みであり、`p10 / p11` により source-side explicit authority pair も corrected prototype として固定済み。
-- target corpus:
-  `p06-typed-proof-owner-handoff`、`p10-typed-authorized-fingerprint-declassification`、`p11-typed-unauthorized-fingerprint-release`、label-flow negative、checker-fragment corpus integration
+  first actual adoption package として close 済みである。
+- close evidence:
+  `specs/examples/522`
+  `specs/examples/523`
+  `specs/examples/524`
+  `samples/lean/foundations/CurrentL2LabelModel.lean`
+  `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`
+  `samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt`
+  `samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.txt`
+  `samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.txt`
+- kept later:
+  stronger typed source principal、checker-hint / diagnostics exhaustive integration、final typed calculus、final IFC syntax、final public verifier contract
+
+## active package notes
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current reading:
   actual Lean execution reached 後の next work は helper/CLI hardening と broader theorem-side / IFC / order-handoff corpus widening である。
 - evidence:
-  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus
+  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus、source-side IFC trio `p10 / p11 / p12`
 - stop line:
   final public theorem contract / final parser grammar / packaging には上げない
 
@@ -129,6 +134,5 @@
 
 ## next reopen order
 
-1. Package 56 の label-flow negative / checker-fragment corpus を 1 つ actualize する。
-2. Package 58 で `samples/lean/` を使う broader coverage / helper hardening を narrow package で進める。
-3. Package 59 で closeout-ready snapshot を再圧縮する。
+1. Package 58 で `samples/lean/` を使う broader coverage / helper hardening を narrow package で進める。
+2. Package 59 で closeout-ready snapshot を再圧縮する。

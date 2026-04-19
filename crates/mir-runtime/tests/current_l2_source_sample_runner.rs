@@ -491,6 +491,61 @@ fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths()
             .flatten()
             .all(|record| !record.contains("publish_without_authority"))
     );
+
+    let p12 = typed_prototype_sample_path("p12-typed-classified-fingerprint-publication-block.txt");
+    let p12_host_plan = load_host_plan_from_path(&typed_prototype_sample_path(
+        "p12-typed-classified-fingerprint-publication-block.host-plan.json",
+    ))
+    .unwrap();
+    let p12_report = run_current_l2_source_sample(p12.to_str().unwrap(), p12_host_plan).unwrap();
+    assert_eq!(
+        p12_report.sample_id,
+        "p12-typed-classified-fingerprint-publication-block"
+    );
+    assert_eq!(
+        p12_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert_eq!(
+        p12_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Reject)
+    );
+    assert_eq!(
+        p12_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformFailure,
+            EventKind::Reject,
+        ]
+    );
+    assert_eq!(
+        p12_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("fingerprint_state")
+            .cloned(),
+        Some(vec!["derive_secret_fingerprint@classified_holder".to_string(),])
+    );
+    assert_eq!(
+        p12_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("fingerprint_debug_text_output")
+            .cloned(),
+        Some(vec!["derive_secret_fingerprint: secret_key -> classified".to_string(),])
+    );
+    assert!(
+        p12_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .values()
+            .flatten()
+            .all(|record| !record.contains("publish_classified_fingerprint_to_public_board"))
+    );
 }
 
 #[test]

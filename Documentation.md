@@ -22,10 +22,10 @@
 - current status は 3 lane で読むのが自然である。
   - execution lane:
     `Macro 4 active on fixed authored/prototype floor`
-    （current-l2 authored sixteen と corrected prototype set `p01...p11` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
+    （current-l2 authored sixteen と corrected prototype set `p01...p12` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p07 / p08` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523` により current remaining active line は layered strong typing / IFC first-fragment、helper/CLI hardening and broader coverage、later mixed/user-spec residual として読み直し、Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair は `samples/lean/` committed corpus と source-side prototype corpus に actualize 済みと読む）
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative は `samples/lean/` committed corpus と source-side prototype corpus に actualize 済みと読む。current remaining active line は helper/CLI hardening and broader coverage と later mixed/user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -36,10 +36,10 @@
 - fixed-subset source sample authored sixteen:
   `e1 / e2 / e3 / e4 / e5 / e12 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
 - runnable prototype sample set:
-  `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08 / p09 / p10 / p11`
+  `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08 / p09 / p10 / p11 / p12`
   （`samples/prototype/` に置き、current lowerer / runner へ explicit path で流す）
   - `p01...p05 / p07 / p08 / p09` は order/handoff family
-  - `p06 / p10 / p11` は typed/theorem/model-check / IFC sample-visible corrected prototype
+  - `p06 / p10 / p11 / p12` は typed/theorem/model-check / IFC sample-visible corrected prototype
 - helper-local debug output preview:
   prototype / sample 実行時に `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を `debug_outputs` として見せる current cut がある
 - helper-local verification preview:
@@ -295,7 +295,7 @@
 
 - current live line は、
   - layered strong typing / IFC first-fragment
-  - actual Lean execution の representative Lean sample set から helper/CLI hardening と broader coverage への widening
+  - actual Lean execution の representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08` から helper/CLI hardening と broader coverage への widening
   - committed `samples/lean/` corpus を基点にした broader theorem-side / IFC / order-handoff widening
   - later mixed gate residual maintenance
   - true user-spec residual

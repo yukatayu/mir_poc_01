@@ -15,5 +15,5 @@
 ## それでも保持する理由
 
 - current sample に結び付いた actual Lean text を inspectable snapshot として保持できる。
-- `e5-underdeclared-lineage / p06-typed-proof-owner-handoff / p10-typed-authorized-fingerprint-declassification / p11-typed-unauthorized-fingerprint-release / p07-dice-late-join-visible-history / p08-dice-stale-reconnect-refresh` のあいだで current proof obligation を具体物として比較できる。
+- `e5-underdeclared-lineage / p06-typed-proof-owner-handoff / p10-typed-authorized-fingerprint-declassification / p11-typed-unauthorized-fingerprint-release / p12-typed-classified-fingerprint-publication-block / p07-dice-late-join-visible-history / p08-dice-stale-reconnect-refresh` のあいだで current proof obligation を具体物として比較できる。
 - 「Lean が生成ファイルを受理した」ことと「domain theorem が fully proved である」ことを明示的に分けたままにできる。

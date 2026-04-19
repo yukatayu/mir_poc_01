@@ -3340,6 +3340,20 @@
   - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
   - `scripts/current_l2_lean_sample_sync.py`
 - 今回の要点は、Lean-side IFC first fragment を保ったまま `p10 / p11` source-side explicit authority pair を corrected prototype / verifier preview / model-check projection / theorem Lean actualization representative set に actualize し、Package 56 の current live queue を「explicit authority sample family」から「label-flow negative / checker-fragment integration」へ narrowed した点である。これは final typed source principal や final IFC syntax や final public verifier contract を意味しない。
+
+### 2026-04-19 Package 56 IFC label-flow negative closeout addendum
+
+- `docs/reports/0805-package56-ifc-label-flow-negative-closeout.md`、`specs/examples/524-current-l2-ifc-label-flow-negative-prototype-closeout-and-representative-lean-sample-set-widening.md`、`samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.txt`、`samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.host-plan.json`、`samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/`、`samples/prototype/README.md`、`samples/lean/README.md`、`samples/lean/manifest.json`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt`
+  - `samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.txt`
+  - `samples/lean/foundations/CurrentL2LabelModel.lean`
+  - `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_verifier_preview_alignment.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_projection_prefloor.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
+  - `scripts/current_l2_lean_sample_sync.py`
+- 今回の要点は、`p12` source-side label-flow negative を corrected prototype / verifier preview / model-check projection / theorem Lean actualization representative set に actualize し、Package 56 を source-side IFC trio closeout として閉じた点である。これは final typed source principal、final IFC syntax、final public verifier contract を意味しない。current live queue は helper/CLI hardening と broader coverage widening、later mixed gate へ移った。
 ## 2026-04-18 model-check property-language / tool-brand threshold default addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。

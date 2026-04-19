@@ -119,6 +119,18 @@ fn theorem_actual_lean_execution_reaches_unauthorized_ifc_runtime_prototype() {
 }
 
 #[test]
+fn theorem_actual_lean_execution_reaches_label_flow_negative_ifc_runtime_prototype() {
+    if !lean_available() {
+        eprintln!("lean unavailable; skipping actual prototype widening probe");
+        return;
+    }
+
+    let sample_path =
+        typed_prototype_sample_path("p12-typed-classified-fingerprint-publication-block.txt");
+    assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
+}
+
+#[test]
 fn theorem_actual_lean_execution_reaches_late_join_runtime_prototype() {
     if !lean_available() {
         eprintln!("lean unavailable; skipping actual prototype widening probe");

@@ -1,0 +1,22 @@
+# classified な fingerprint を declassify せず public board へ publish しようとして止まる current L2 typed/IFC prototype。
+place root {
+  place room {
+    place verifier_boundary {
+      option classified_holder on fingerprint_state capability write lease live admit classified_holder(player_a)
+      option audit_observer on fingerprint_state capability write lease live admit observer_role(player_b)
+
+      chain fingerprint_release_ref = classified_holder
+      fallback audit_observer @ lineage(classified_holder -> audit_observer)
+
+      perform derive_secret_fingerprint via fingerprint_release_ref
+        require write
+        ensure fingerprint_bound(secret_key)
+
+      atomic_cut
+
+      perform publish_classified_fingerprint_to_public_board via fingerprint_release_ref
+        require write
+        ensure fingerprint_visible(public_board)
+    }
+  }
+}

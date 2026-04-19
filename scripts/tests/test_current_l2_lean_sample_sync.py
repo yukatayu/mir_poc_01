@@ -10,7 +10,7 @@ import current_l2_lean_sample_sync as sync  # noqa: E402
 
 
 class CurrentL2LeanSampleSyncTests(unittest.TestCase):
-    def test_current_l2_specs_cover_representative_quartet(self) -> None:
+    def test_current_l2_specs_cover_representative_sample_set(self) -> None:
         specs = sync.current_l2_export_specs()
         sample_ids = {spec.sample_id for spec in specs}
 
@@ -21,6 +21,7 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
                 "p06-typed-proof-owner-handoff",
                 "p10-typed-authorized-fingerprint-declassification",
                 "p11-typed-unauthorized-fingerprint-release",
+                "p12-typed-classified-fingerprint-publication-block",
                 "p07-dice-late-join-visible-history",
                 "p08-dice-stale-reconnect-refresh",
             },

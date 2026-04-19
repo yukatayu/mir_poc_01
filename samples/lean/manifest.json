@@ -113,6 +113,23 @@
     },
     {
       "kind": "current-l2",
+      "sample_id": "p12-typed-classified-fingerprint-publication-block",
+      "lean_path": "samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.lean",
+      "explanation_path": "samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/README.md",
+      "bundle_path": "samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p12_typed_classified_fingerprint_publication_block__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
       "sample_id": "p07-dice-late-join-visible-history",
       "lean_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.lean",
       "explanation_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/README.md",

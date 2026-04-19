@@ -1,9 +1,9 @@
-# p11-typed-unauthorized-fingerprint-release
+# p12-typed-classified-fingerprint-publication-block
 
 ## 要約
 
-- authority なし release を reject path で止める typed/IFC prototype。
-- current checker-adjacent IFC line で、holder と release authority を 分けた negative evidence を sample-visible に保つ representative prototype として読む。
+- label-flow negative を表す typed/IFC prototype。
+- current checker-adjacent IFC line で、authority 欠如ではなく classified payload の Low/public publication block を sample-visible に保つ representative prototype として読む。
 
 ## この Lean ファイルが意味すること
 

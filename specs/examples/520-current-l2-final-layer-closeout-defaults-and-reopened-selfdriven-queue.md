@@ -215,12 +215,12 @@ current queue reopening は、execution floor 未到達を意味しない。
 already reached / machine-checked evidence として、少なくとも次がある。
 
 - authored sixteen runner / CLI / regression floor
-- corrected prototype set `p01...p11`
+- corrected prototype set `p01...p12`
 - theorem public-seam compression
 - model-check public-seam compression
 - order-handoff / witness-provider final public-seam compression
 - theorem toolchain probe / reopen manifest
-- representative Lean sample set `e5 / p06 / p10 / p11 / p07 / p08` actual Lean execution
+- representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08` actual Lean execution
 
 したがって reopened queue は
 **execution floor を作るためではなく、final-layer closeout debt を減らすため**

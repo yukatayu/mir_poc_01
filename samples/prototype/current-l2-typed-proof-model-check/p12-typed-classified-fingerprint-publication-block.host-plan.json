@@ -1,0 +1,98 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "option-admit",
+      "op": "derive_secret_fingerprint",
+      "option_ref": "classified_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "derive_secret_fingerprint",
+      "option_ref": "audit_observer",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "publish_classified_fingerprint_to_public_board",
+      "option_ref": "classified_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "publish_classified_fingerprint_to_public_board",
+      "option_ref": "audit_observer",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "classified_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "classified_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "publish_classified_fingerprint_to_public_board",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "classified_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "publish_classified_fingerprint_to_public_board",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "classified_holder",
+      "verdict": "unsatisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "selected_option_ref": "classified_holder",
+      "selected_target": "fingerprint_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "fingerprint_state",
+              "record": "derive_secret_fingerprint@classified_holder"
+            },
+            {
+              "kind": "append-record",
+              "target": "fingerprint_debug_text_output",
+              "record": "derive_secret_fingerprint: secret_key -> classified"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "publish_classified_fingerprint_to_public_board",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "selected_option_ref": "classified_holder",
+      "selected_target": "fingerprint_state",
+      "verdict": {
+        "kind": "explicit-failure"
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

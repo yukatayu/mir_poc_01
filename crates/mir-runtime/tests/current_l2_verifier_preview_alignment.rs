@@ -298,6 +298,21 @@ fn verifier_preview_alignment_matches_emitted_route_for_unauthorized_ifc_typed_r
 }
 
 #[test]
+fn verifier_preview_alignment_matches_emitted_route_for_label_flow_negative_ifc_typed_runtime_prototype(
+) {
+    let sample_path =
+        typed_prototype_sample_path("p12-typed-classified-fingerprint-publication-block.txt");
+    let preview_json = cli_json(sample_path.to_str().unwrap(), None);
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_cli_preview_matches_preview_route(&preview_json, &route);
+}
+
+#[test]
 fn verifier_preview_alignment_matches_emitted_route_for_order_handoff_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let preview_json = cli_json(sample_path.to_str().unwrap(), None);
