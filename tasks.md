@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 00:20 JST
+最終更新: 2026-04-20 00:31 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - `mir-semantics` program-level entry と `mir-runtime::current_l2` thin orchestrator をどこまで actualize するかの phase6-actual-checker-runtime-skeleton-first-tranche ratchet
+  - selected cargo / smoke gate と tool-neutral formal hook shape をどこまで actualize するかの phase6-compile-ready-verification-and-formal-hook ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `81` phase6-actual-checker-runtime-skeleton-first-tranche ratchet | phase6 parser first tranche の次段として checker/runtime minimal path をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | `phase6_current_l2_checker_runtime_first_tranche = skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` current cut を helper-local threshold に留め、parser_to_program_lowering、stage3_request_predicate_reconnect、richer_host_interface、final_public_runtime_checker_api、formal_hook_concrete_tool_binding を still later に残したまま phase6 checker/runtime first tranche を ratchet する | semantic entry / runtime bridge / parser-bridge consistency guard を narrow に actualize しつつ、lowering/public/runtime/tool binding widen を later gate に残せる |
+| `82` phase6-compile-ready-verification-and-formal-hook ratchet | phase6 checker/runtime first tranche の次段として compile-ready checkpoint をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | selected cargo / smoke gate と tool-neutral formal hook shape を narrow に actualize しつつ、parser_to_program_lowering、formal_hook concrete tool binding、final_public_runtime_checker_api を still later に残したまま compile-ready verification / formal hook first tranche を ratchet する | compile-ready gate / validation refs / formal-hook shape を narrow に actualize しつつ、tool binding と public runtime surface widen を later gate に残せる |
 
 ## recently closed package note
 
@@ -413,17 +413,32 @@
 ### Package 81 — phase6-actual-checker-runtime-skeleton-first-tranche ratchet
 
 - current reading:
-  next active line。`actual_phase6_actual_parser_ast_carrier_first_tranche_threshold` の次段として、`skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` current cut の phase6 actual checker/runtime first tranche ready sketch まで narrow に ratchet する。
+  close 済み。`actual_phase6_actual_parser_ast_carrier_first_tranche_threshold` の次段として、`skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` current cut の phase6 actual checker/runtime first tranche ready sketch を `mir-runtime` manifest と `run-source-sample` helper summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/301`
   `specs/examples/302`
-  `specs/examples/552`
+  `specs/examples/553`
 - stop line:
   parser_to_program_lowering
   stage3_request_predicate_reconnect
   richer_host_interface
   final_public_runtime_checker_api
   formal_hook_concrete_tool_binding
+
+### Package 82 — phase6-compile-ready-verification-and-formal-hook ratchet
+
+- current reading:
+  next active line。`actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold` の次段として、selected cargo / smoke gate と tool-neutral formal hook shape を current cut に留めた phase6 compile-ready verification / formal-hook ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/303`
+  `specs/examples/304`
+  `specs/examples/553`
+- stop line:
+  parser_to_program_lowering
+  concrete_formal_hook_tool_binding
+  richer_host_interface
+  final_public_runtime_checker_api
+  final_public_verifier_contract
 
 ## research-discovery items
 
@@ -456,4 +471,4 @@
 
 ## next reopen order
 
-1. Package 81 で phase6-actual-checker-runtime-skeleton-first-tranche ratchet を進める。
+1. Package 82 で phase6-compile-ready-verification-and-formal-hook ratchet を進める。

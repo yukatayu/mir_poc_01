@@ -642,6 +642,12 @@ actual-adoption floor では、
   - `actual_phase6_actual_parser_ast_carrier_first_tranche_threshold`
   - `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` parser first-tranche minimum mirror
   - Package 80 phase6-actual-parser-ast-carrier-first-tranche ratchet close、Package 81 phase6-actual-checker-runtime-skeleton-first-tranche ratchet next
+- phase6 checker/runtime first tranche threshold helper mirror:
+  `specs/examples/553`
+  - `p07 / p08 / p09` source-side shared-space trio
+  - `actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold`
+  - `skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` checker/runtime first-tranche minimum mirror
+  - Package 81 phase6-actual-checker-runtime-skeleton-first-tranche ratchet close、Package 82 phase6-compile-ready-verification-and-formal-hook ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

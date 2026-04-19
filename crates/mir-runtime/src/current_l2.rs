@@ -94,6 +94,55 @@ pub struct CurrentL2SourceSampleRunReport {
     pub runtime_report: CurrentL2RuntimeSkeletonReport,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2CheckerRuntimeFirstTrancheManifest {
+    pub skeleton_kind: &'static str,
+    pub semantic_entry_refs: &'static [&'static str],
+    pub runtime_bridge_refs: &'static [&'static str],
+    pub parser_bridge_contract_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_SEMANTIC_ENTRY_REFS: &[&str] = &[
+    "static_gate_program_detailed",
+    "direct_style_evaluator_from_program",
+    "fixture_host_stub_run_program",
+];
+
+const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_RUNTIME_BRIDGE_REFS: &[&str] = &[
+    "mir_runtime_current_l2_module",
+    "current_l2_runtime_skeleton_report",
+];
+
+const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_PARSER_BRIDGE_CONTRACT_REFS: &[&str] = &[
+    "stage1_reconnect_clusters",
+    "stage2_try_rollback_structural_summary",
+    "parser_bridge_consistency_guard",
+];
+
+const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_RETAINED_LATER_REFS: &[&str] = &[
+    "parser_to_program_lowering",
+    "stage3_request_predicate_reconnect",
+    "richer_host_interface",
+    "final_public_runtime_checker_api",
+    "formal_hook_concrete_tool_binding",
+];
+
+pub const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_MANIFEST:
+    CurrentL2CheckerRuntimeFirstTrancheManifest = CurrentL2CheckerRuntimeFirstTrancheManifest {
+    skeleton_kind: "current_l2_nonproduction_checker_runtime_skeleton",
+    semantic_entry_refs: CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_SEMANTIC_ENTRY_REFS,
+    runtime_bridge_refs: CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_RUNTIME_BRIDGE_REFS,
+    parser_bridge_contract_refs:
+        CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_PARSER_BRIDGE_CONTRACT_REFS,
+    retained_later_refs: CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_RETAINED_LATER_REFS,
+};
+
+pub fn current_l2_checker_runtime_first_tranche_manifest()
+-> &'static CurrentL2CheckerRuntimeFirstTrancheManifest {
+    &CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_MANIFEST
+}
+
 pub fn current_l2_default_source_sample_directory() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../samples/current-l2")
 }

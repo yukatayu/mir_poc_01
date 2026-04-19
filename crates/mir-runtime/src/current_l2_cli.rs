@@ -12,7 +12,8 @@ use crate::current_l2::{
     CurrentL2RuntimeSkeletonReport, CurrentL2SourceSampleRunReport,
     CurrentL2TryRollbackStructuralFindingKind, CurrentL2TryRollbackStructuralSubjectKind,
     CurrentL2TryRollbackStructuralSummary, CurrentL2TryRollbackStructuralVerdict,
-    resolve_current_l2_source_sample_path, run_current_l2_source_sample,
+    current_l2_checker_runtime_first_tranche_manifest, resolve_current_l2_source_sample_path,
+    run_current_l2_source_sample,
 };
 use mir_semantics::{
     EventKind, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome, load_host_plan_from_path,
@@ -270,6 +271,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary,
     actual_phase6_actual_parser_ast_carrier_first_tranche_threshold:
         CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary,
+    actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold:
+        CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTrancheThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -409,6 +412,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
             );
+        let actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold =
+            CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTrancheThresholdSummary::from_source_report(
+                &report,
+                &actual_phase6_actual_parser_ast_carrier_first_tranche_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -449,6 +457,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_phase4_shared_space_self_driven_closeout_threshold,
             actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
             actual_phase6_actual_parser_ast_carrier_first_tranche_threshold,
+            actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold,
         }
     }
 }
@@ -3005,6 +3014,142 @@ impl CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresh
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTrancheThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    skeleton_kind: Option<&'static str>,
+    semantic_entry_refs: Vec<String>,
+    runtime_bridge_refs: Vec<String>,
+    parser_bridge_contract_refs: Vec<String>,
+    retained_later_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTrancheThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_phase6_actual_parser_ast_carrier_first_tranche_threshold:
+            &CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && actual_phase6_actual_parser_ast_carrier_first_tranche_threshold.status
+            == "reached";
+        let manifest = current_l2_checker_runtime_first_tranche_manifest();
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_phase6_actual_parser_ast_carrier_first_tranche_threshold
+                    .compare_floor_refs
+                    .clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase6_actual_checker_runtime_skeleton_first_tranche"
+                    .to_string(),
+            );
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase6_compile_ready_verification_and_formal_hook"
+                    .to_string(),
+            );
+
+            let mut evidence_refs = actual_phase6_actual_parser_ast_carrier_first_tranche_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs.push(
+                "helper_preview:actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"
+                    .to_string(),
+            );
+            evidence_refs.push(
+                "source:phase6_actual_checker_runtime_skeleton_first_tranche_ready_sketch"
+                    .to_string(),
+            );
+            evidence_refs
+                .push("source:phase6_current_l2_checker_runtime_first_tranche".to_string());
+            evidence_refs.push("code_anchor:mir_runtime_current_l2_module".to_string());
+            evidence_refs.push("code_anchor:current_l2_runtime_skeleton_tests".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind:
+                    "phase6_actual_checker_runtime_skeleton_first_tranche_threshold_manifest",
+                skeleton_kind: Some(manifest.skeleton_kind),
+                semantic_entry_refs: manifest
+                    .semantic_entry_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                runtime_bridge_refs: manifest
+                    .runtime_bridge_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                parser_bridge_contract_refs: manifest
+                    .parser_bridge_contract_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                retained_later_refs: manifest
+                    .retained_later_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                next_comparison_target_ref: Some(
+                    "phase6_compile_ready_verification_and_formal_hook_comparison",
+                ),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs:
+                    actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_guard_refs(
+                        true,
+                    ),
+                kept_later_refs:
+                    actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "phase6_actual_checker_runtime_skeleton_first_tranche_threshold_manifest",
+            skeleton_kind: None,
+            semantic_entry_refs: vec![],
+            runtime_bridge_refs: vec![],
+            parser_bridge_contract_refs: vec![],
+            retained_later_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{sample_id}"),
+                "helper_preview:actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.closeout.phase6_actual_checker_runtime_skeleton_first_tranche"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.closeout.phase6_actual_checker_runtime_skeleton_first_tranche.guard_only"
+                    .to_string(),
+            ],
+            guard_refs:
+                actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_guard_refs(
+                    false,
+                ),
+            kept_later_refs:
+                actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual phase6 checker/runtime skeleton first tranche threshold only actualizes the representative shared-space trio (`p07` / `p08` / `p09`) after actual phase6 parser / AST carrier first tranche threshold reaches the parser first-tranche minimum for `{sample_id}`"
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -3757,6 +3902,15 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_phase6_actual_parser_ast_carrier_first_tranche_threshold(
         &mut output,
         &summary.actual_phase6_actual_parser_ast_carrier_first_tranche_threshold,
+    );
+    writeln!(
+        output,
+        "actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold:"
+    )
+    .expect("write to string");
+    render_actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold(
+        &mut output,
+        &summary.actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -5112,6 +5266,35 @@ fn actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_kept_later_re
         .collect()
 }
 
+fn actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_guard_refs(
+    reached: bool,
+) -> Vec<String> {
+    let mut refs = vec![
+        "guard:actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_required"
+            .to_string(),
+    ];
+    if reached {
+        refs.push(
+            "guard:phase6_compile_ready_verification_and_formal_hook_comparison_next".to_string(),
+        );
+    } else {
+        refs.push(
+            "guard:actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_not_reached"
+                .to_string(),
+        );
+    }
+    refs
+}
+
+fn actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_kept_later_refs()
+-> Vec<String> {
+    current_l2_checker_runtime_first_tranche_manifest()
+        .retained_later_refs
+        .iter()
+        .map(|item| (*item).to_string())
+        .collect()
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -6461,6 +6644,62 @@ fn render_actual_phase6_actual_parser_ast_carrier_first_tranche_threshold(
         1,
     );
     render_string_list(output, "code_anchor_refs", &summary.code_anchor_refs, 1);
+    render_string_list(
+        output,
+        "retained_later_refs",
+        &summary.retained_later_refs,
+        1,
+    );
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold(
+    output: &mut String,
+    summary:
+        &CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTrancheThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(skeleton_kind) = summary.skeleton_kind {
+        writeln!(output, "  skeleton_kind: {skeleton_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  skeleton_kind: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "semantic_entry_refs",
+        &summary.semantic_entry_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "runtime_bridge_refs",
+        &summary.runtime_bridge_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "parser_bridge_contract_refs",
+        &summary.parser_bridge_contract_refs,
+        1,
+    );
     render_string_list(
         output,
         "retained_later_refs",

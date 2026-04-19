@@ -454,6 +454,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -532,6 +536,30 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains("final_grammar"));
     assert!(output.contains(
         "next_comparison_target_ref: phase6_actual_checker_runtime_skeleton_first_tranche_comparison"
+    ));
+    assert!(
+        output.contains("actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold:")
+    );
+    assert!(output.contains("skeleton_kind: current_l2_nonproduction_checker_runtime_skeleton"));
+    assert!(output.contains("semantic_entry_refs:"));
+    assert!(output.contains("static_gate_program_detailed"));
+    assert!(output.contains("direct_style_evaluator_from_program"));
+    assert!(output.contains("fixture_host_stub_run_program"));
+    assert!(output.contains("runtime_bridge_refs:"));
+    assert!(output.contains("mir_runtime_current_l2_module"));
+    assert!(output.contains("current_l2_runtime_skeleton_report"));
+    assert!(output.contains("parser_bridge_contract_refs:"));
+    assert!(output.contains("stage1_reconnect_clusters"));
+    assert!(output.contains("stage2_try_rollback_structural_summary"));
+    assert!(output.contains("parser_bridge_consistency_guard"));
+    assert!(output.contains("retained_later_refs:"));
+    assert!(output.contains("parser_to_program_lowering"));
+    assert!(output.contains("stage3_request_predicate_reconnect"));
+    assert!(output.contains("richer_host_interface"));
+    assert!(output.contains("final_public_runtime_checker_api"));
+    assert!(output.contains("formal_hook_concrete_tool_binding"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase6_compile_ready_verification_and_formal_hook_comparison"
     ));
 }
 
@@ -786,6 +814,83 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["next_comparison_target_ref"],
         "phase6_actual_checker_runtime_skeleton_first_tranche_comparison"
     );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["skeleton_kind"],
+        "current_l2_nonproduction_checker_runtime_skeleton"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["semantic_entry_refs"]
+            [0],
+        "static_gate_program_detailed"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["semantic_entry_refs"]
+            [1],
+        "direct_style_evaluator_from_program"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["semantic_entry_refs"]
+            [2],
+        "fixture_host_stub_run_program"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["runtime_bridge_refs"]
+            [0],
+        "mir_runtime_current_l2_module"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["runtime_bridge_refs"]
+            [1],
+        "current_l2_runtime_skeleton_report"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["parser_bridge_contract_refs"]
+            [0],
+        "stage1_reconnect_clusters"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["parser_bridge_contract_refs"]
+            [1],
+        "stage2_try_rollback_structural_summary"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["parser_bridge_contract_refs"]
+            [2],
+        "parser_bridge_consistency_guard"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["retained_later_refs"]
+            [0],
+        "parser_to_program_lowering"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["retained_later_refs"]
+            [1],
+        "stage3_request_predicate_reconnect"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["retained_later_refs"]
+            [2],
+        "richer_host_interface"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["retained_later_refs"]
+            [3],
+        "final_public_runtime_checker_api"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["retained_later_refs"]
+            [4],
+        "formal_hook_concrete_tool_binding"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["next_comparison_target_ref"],
+        "phase6_compile_ready_verification_and_formal_hook_comparison"
+    );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]
             .as_str()
@@ -856,6 +961,14 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
     assert_eq!(
         value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["next_comparison_target_ref"],
         "phase6_actual_checker_runtime_skeleton_first_tranche_comparison"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["next_comparison_target_ref"],
+        "phase6_compile_ready_verification_and_formal_hook_comparison"
     );
     assert_eq!(
         value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"]
