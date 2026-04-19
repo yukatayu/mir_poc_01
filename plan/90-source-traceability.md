@@ -258,6 +258,7 @@
 - `specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md`
 - `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
 - `specs/examples/558-current-l2-phase6-reserve-formal-tool-binding-inventory-threshold-helper-mirror.md`
+- `specs/examples/559-current-l2-phase6-parser-side-follow-up-package-sequencing-threshold-helper-mirror.md`
 - `docs/reports/0838-first-strong-typing-layer-finite-index-spine-default-sync.md`
 
 ## 2026-04-20 Phase 6 parser second-tranche / finite-index typing / reserve inventory addendum
@@ -269,11 +270,13 @@
   - `specs/examples/310-current-l2-phase6-reserve-formal-tool-binding-inventory-ready-minimal-phase6-reserve-formal-tool-binding-inventory-threshold.md`
   - `specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md`
   - `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
-  - `specs/examples/558-current-l2-phase6-reserve-formal-tool-binding-inventory-threshold-helper-mirror.md`
-  - `docs/reports/0838-first-strong-typing-layer-finite-index-spine-default-sync.md`
+- `specs/examples/558-current-l2-phase6-reserve-formal-tool-binding-inventory-threshold-helper-mirror.md`
+- `specs/examples/559-current-l2-phase6-parser-side-follow-up-package-sequencing-threshold-helper-mirror.md`
+- `docs/reports/0838-first-strong-typing-layer-finite-index-spine-default-sync.md`
   - `docs/reports/0837-package84-phase6-parser-second-tranche-first-package-ratchet.md`
   - `docs/reports/0839-package85-phase6-reserve-formal-tool-binding-inventory-ratchet.md`
   - `docs/reports/0840-typing-policy-confirmation-and-package85-snapshot-sync.md`
+  - `docs/reports/0841-package86-phase6-parser-side-followup-package-sequencing-ratchet.md`
   - `crates/mir-ast/src/lib.rs`
   - `crates/mir-ast/src/current_l2.rs`
   - `crates/mir-ast/tests/current_l2_second_tranche_manifest.rs`
@@ -281,6 +284,7 @@
   - `crates/mir-runtime/src/current_l2.rs`
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_reserve_formal_tool_binding_inventory_manifest.rs`
+  - `crates/mir-runtime/tests/current_l2_parser_side_followup_package_sequencing_manifest.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
   - `crates/mir-ast/tests/current_l2_stage3_predicate_fragment_spike.rs`
   - `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs`

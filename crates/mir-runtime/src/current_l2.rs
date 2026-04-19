@@ -135,6 +135,15 @@ pub struct CurrentL2Phase6ReserveFormalToolBindingInventoryManifest {
     pub guard_refs: &'static [&'static str],
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2Phase6ParserSideFollowupPackageSequencingManifest {
+    pub sequencing_kind: &'static str,
+    pub fixed_entry_criteria_refs: &'static [&'static str],
+    pub selected_next_package_ref: &'static str,
+    pub deferred_reopen_refs: &'static [&'static str],
+    pub guard_refs: &'static [&'static str],
+}
+
 const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_SEMANTIC_ENTRY_REFS: &[&str] = &[
     "static_gate_program_detailed",
     "direct_style_evaluator_from_program",
@@ -297,6 +306,43 @@ pub const CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_MANIFEST:
 pub fn current_l2_phase6_reserve_formal_tool_binding_inventory_manifest()
 -> &'static CurrentL2Phase6ReserveFormalToolBindingInventoryManifest {
     &CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_MANIFEST
+}
+
+const CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_FIXED_ENTRY_CRITERIA_REFS:
+    &[&str] = &[
+    "phase6_parser_second_tranche_first_package",
+    "phase6_reserve_formal_tool_binding_inventory",
+    "stage3_multiline_attachment_first_tranche_actualization",
+];
+
+const CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_DEFERRED_REOPEN_REFS: &[&str] = &[
+    "phase6_request_clause_suite_publicization",
+    "phase6_perform_head_final_public_parser_api",
+    "phase6_span_rich_diagnostics",
+    "phase6_final_grammar",
+];
+
+const CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_GUARD_REFS: &[&str] = &[
+    "reuse_existing_stage3_minimal_predicate_fragment_surface",
+    "keep_request_head_and_suite_ordering_out_of_scope",
+    "keep_source_sample_path_after_parser_followup_cut",
+];
+
+pub const CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_MANIFEST:
+    CurrentL2Phase6ParserSideFollowupPackageSequencingManifest =
+    CurrentL2Phase6ParserSideFollowupPackageSequencingManifest {
+        sequencing_kind: "phase6_parser_followup_next_package_selection",
+        fixed_entry_criteria_refs:
+            CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_FIXED_ENTRY_CRITERIA_REFS,
+        selected_next_package_ref: "phase6_parser_second_tranche_shared_single_attachment_frame_first_package",
+        deferred_reopen_refs:
+            CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_DEFERRED_REOPEN_REFS,
+        guard_refs: CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_GUARD_REFS,
+    };
+
+pub fn current_l2_phase6_parser_side_followup_package_sequencing_manifest()
+-> &'static CurrentL2Phase6ParserSideFollowupPackageSequencingManifest {
+    &CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_MANIFEST
 }
 
 pub fn current_l2_default_source_sample_directory() -> PathBuf {

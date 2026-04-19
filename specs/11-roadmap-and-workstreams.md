@@ -679,6 +679,12 @@ actual-adoption floor では、
   - `current_l2_phase6_reserve_formal_tool_binding_inventory_manifest()`
   - `inventory_kind + fixed_entry_criteria_refs + first_reserve_ref + second_reserve_ref + minimum_guard_refs + next_comparison_target_ref + kept_later_refs` reserve inventory minimum mirror
   - Package 85 phase6-reserve-formal-tool-binding-inventory ratchet close、Package 86 phase6-parser-side-follow-up-package-sequencing ratchet next
+- phase6 parser-side follow-up package sequencing threshold helper mirror:
+  `specs/examples/559`
+  - `CurrentL2Phase6ParserSideFollowupPackageSequencingManifest`
+  - `current_l2_phase6_parser_side_followup_package_sequencing_manifest()`
+  - `sequencing_kind + fixed_entry_criteria_refs + selected_next_package_ref + deferred_reopen_refs + minimum_guard_refs + next_comparison_target_ref + kept_later_refs` sequencing minimum mirror
+  - Package 86 phase6-parser-side-follow-up-package-sequencing ratchet close、Package 87 phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

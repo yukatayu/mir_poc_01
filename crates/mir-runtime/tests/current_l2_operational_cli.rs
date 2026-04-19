@@ -652,6 +652,24 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains(
         "next_comparison_target_ref: phase6_parser_side_follow_up_package_sequencing_comparison"
     ));
+    assert!(output.contains("actual_phase6_parser_side_followup_package_sequencing_threshold:"));
+    assert!(output.contains("sequencing_kind: phase6_parser_followup_next_package_selection"));
+    assert!(output.contains("phase6_parser_second_tranche_first_package"));
+    assert!(output.contains("phase6_reserve_formal_tool_binding_inventory"));
+    assert!(output.contains("stage3_multiline_attachment_first_tranche_actualization"));
+    assert!(output.contains(
+        "selected_next_package_ref: phase6_parser_second_tranche_shared_single_attachment_frame_first_package"
+    ));
+    assert!(output.contains("phase6_request_clause_suite_publicization"));
+    assert!(output.contains("phase6_perform_head_final_public_parser_api"));
+    assert!(output.contains("phase6_span_rich_diagnostics"));
+    assert!(output.contains("phase6_final_grammar"));
+    assert!(output.contains("reuse_existing_stage3_minimal_predicate_fragment_surface"));
+    assert!(output.contains("keep_request_head_and_suite_ordering_out_of_scope"));
+    assert!(output.contains("keep_source_sample_path_after_parser_followup_cut"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase6_parser_second_tranche_shared_single_attachment_frame_first_package_comparison"
+    ));
 }
 
 #[test]
@@ -1226,6 +1244,72 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
     assert_eq!(
         value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["next_comparison_target_ref"],
         "phase6_parser_side_follow_up_package_sequencing_comparison"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["sequencing_kind"],
+        "phase6_parser_followup_next_package_selection"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["fixed_entry_criteria_refs"]
+            [0],
+        "phase6_parser_second_tranche_first_package"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["fixed_entry_criteria_refs"]
+            [1],
+        "phase6_reserve_formal_tool_binding_inventory"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["fixed_entry_criteria_refs"]
+            [2],
+        "stage3_multiline_attachment_first_tranche_actualization"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["selected_next_package_ref"],
+        "phase6_parser_second_tranche_shared_single_attachment_frame_first_package"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["deferred_reopen_refs"]
+            [0],
+        "phase6_request_clause_suite_publicization"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["deferred_reopen_refs"]
+            [1],
+        "phase6_perform_head_final_public_parser_api"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["deferred_reopen_refs"]
+            [2],
+        "phase6_span_rich_diagnostics"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["deferred_reopen_refs"]
+            [3],
+        "phase6_final_grammar"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["minimum_guard_refs"]
+            [0],
+        "reuse_existing_stage3_minimal_predicate_fragment_surface"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["minimum_guard_refs"]
+            [1],
+        "keep_request_head_and_suite_ordering_out_of_scope"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["minimum_guard_refs"]
+            [2],
+        "keep_source_sample_path_after_parser_followup_cut"
+    );
+    assert_eq!(
+        value["actual_phase6_parser_side_followup_package_sequencing_threshold"]["next_comparison_target_ref"],
+        "phase6_parser_second_tranche_shared_single_attachment_frame_first_package_comparison"
     );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]

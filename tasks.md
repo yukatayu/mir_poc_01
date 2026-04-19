@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 02:23 JST
+最終更新: 2026-04-20 02:35 JST
 
 ## この文書について
 
@@ -27,7 +27,7 @@
   IFC / taint、capture / lifetime、simple cost を
   first strong typing layer の principal target に置く読みへ同期済みである。
 - したがって、remaining work の主眼は次に移っている。
-  - shared single attachment frame を next parser-side package に固定し、request clause suite / perform head / source-sample path を deferred reopen として押し戻すかの phase6-parser-side-follow-up-package-sequencing ratchet
+  - shared single attachment frame を multiline extraction bridge + existing predicate fragment parser reuse の narrow code cut で `mir_ast::current_l2` へ actualize する phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -57,7 +57,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `86` phase6-parser-side-follow-up-package-sequencing ratchet | phase6 reserve formal tool binding inventory close の次段として shared single attachment frame を next parser-side package に置き、request clause suite / perform head / source-sample path をどう deferred reopen に押し戻すか | `M` | `Macro 6/7` | shared single attachment frame を next package に置き、request clause suite / perform head / richer diagnostics / final grammar / source-sample path は later に残す | sequencing_kind / fixed_entry_criteria_refs / selected_next_package_ref / deferred_reopen_refs / guard_refs を narrow に actualize しつつ、actual code widening は Package 87 以降に押し戻せる |
+| `87` phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet | Package 86 close の次段として、shared single attachment frame を multiline extraction bridge + existing predicate fragment parser reuse の narrow code cut で `mir_ast::current_l2` へどこまで actualize するか | `M` | `Macro 6/7` | multiline extraction bridge だけを crate surface へ actualize し、request clause suite / perform head / richer diagnostics / source-sample path は retained-later に残す | `carrier_kind / accepted_surface_refs / code_anchor_refs / retained_later_refs` の narrow manifest と stage3 multiline anchor tests で Package 87 を閉じられる |
 
 ## recently closed package note
 
@@ -496,19 +496,32 @@
 ### Package 86 — phase6-parser-side-follow-up-package-sequencing ratchet
 
 - current reading:
-  next active line。Package 85 close 後の次段として、shared single attachment frame を next parser-side package に固定し、request clause suite / perform head / source-sample path を deferred reopen として helper-local manifest と snapshot docs に narrow に actualize する。
+  close 済み。Package 85 close 後の次段として、shared single attachment frame を next parser-side package に固定し、request clause suite / perform head / source-sample path を deferred reopen として helper-local manifest と snapshot docs に narrow に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/311`
   `specs/examples/312`
-  `specs/examples/558`
-  `specs/examples/96`
-  `specs/examples/97`
+  `specs/examples/559`
+  `docs/reports/0841`
 - stop line:
-  shared_single_attachment_frame_actual_code_shape
-  request_clause_suite_publicization
-  perform_head_final_public_parser_api
-  source_sample_corpus_scope
-  final_public_parser_checker_runtime_surface
+  shared single attachment frame actual code shape
+  request clause suite publicization
+  perform head final public parser API
+  source-sample corpus scope / file layout
+  final public parser / checker / runtime surface
+
+### Package 87 — phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet
+
+- current reading:
+  next active line。shared single attachment frame を multiline extraction bridge + existing predicate fragment parser reuse の narrow code cut で `mir_ast::current_l2` へ actualize し、request clause suite / perform head / source-sample path を retained-later に残す。
+- evidence anchor:
+  `specs/examples/313`
+  `specs/examples/314`
+  `specs/examples/559`
+- stop line:
+  request clause suite publicization
+  perform head final public parser API
+  source-sample corpus scope / file layout
+  final public parser / checker / runtime surface
 
 ## research-discovery items
 
@@ -541,4 +554,4 @@
 
 ## next reopen order
 
-1. Package 86 で phase6-parser-side-follow-up-package-sequencing ratchet を進める。
+1. Package 87 で phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet を進める。
