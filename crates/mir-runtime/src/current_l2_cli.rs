@@ -257,6 +257,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary,
     actual_minimal_parser_subset_freeze_threshold:
         CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary,
+    actual_parser_to_checker_reconnect_freeze_threshold:
+        CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -366,6 +368,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_verifier_handoff_surface_threshold,
             );
+        let actual_parser_to_checker_reconnect_freeze_threshold =
+            CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary::from_source_report(
+                &report,
+                &actual_minimal_parser_subset_freeze_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -400,6 +407,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_public_checker_boundary_threshold,
             actual_verifier_handoff_surface_threshold,
             actual_minimal_parser_subset_freeze_threshold,
+            actual_parser_to_checker_reconnect_freeze_threshold,
         }
     }
 }
@@ -2285,6 +2293,110 @@ impl CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    reconnect_kind: Option<&'static str>,
+    parser_subset_freeze_ref: Option<&'static str>,
+    checker_floor_refs: Vec<String>,
+    retained_helper_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_minimal_parser_subset_freeze_threshold:
+            &CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p10-typed-authorized-fingerprint-declassification"
+                | "p11-typed-unauthorized-fingerprint-release"
+                | "p12-typed-classified-fingerprint-publication-block"
+        ) && actual_minimal_parser_subset_freeze_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_minimal_parser_subset_freeze_threshold.compare_floor_refs.clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze"
+                    .to_string(),
+            );
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase1_semantics_closeout".to_string(),
+            );
+
+            let mut evidence_refs =
+                actual_minimal_parser_subset_freeze_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_parser_to_checker_reconnect_freeze_threshold"
+                    .to_string(),
+            );
+            evidence_refs.push("source:stage1_stage2_checker_floor_bridge".to_string());
+            evidence_refs.push(
+                "source:parser_to_checker_reconnect_freeze_ready_sketch".to_string(),
+            );
+
+            return Self {
+                status: "reached",
+                threshold_kind: "parser_checker_bridge_reconnect_freeze_threshold_manifest",
+                reconnect_kind: Some("stage1_stage2_checker_floor_bridge"),
+                parser_subset_freeze_ref: Some("minimal_parser_subset_freeze_ready_sketch"),
+                checker_floor_refs: vec![
+                    "stage1_reconnect_summary_floor".to_string(),
+                    "stage2_try_rollback_structural_floor".to_string(),
+                ],
+                retained_helper_refs: vec![
+                    "stage3_request_predicate_reconnect_line".to_string(),
+                    "stage1_direct_target_mismatch_redesign_line".to_string(),
+                    "runtime_contrast_e21_e22_line".to_string(),
+                ],
+                next_comparison_target_ref: Some("phase1_semantics_closeout_comparison"),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs: actual_parser_to_checker_reconnect_freeze_threshold_guard_refs(true),
+                kept_later_refs:
+                    actual_parser_to_checker_reconnect_freeze_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "parser_checker_bridge_reconnect_freeze_threshold_manifest",
+            reconnect_kind: None,
+            parser_subset_freeze_ref: None,
+            checker_floor_refs: vec![],
+            retained_helper_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{}", report.sample_id),
+                "helper_preview:actual_parser_to_checker_reconnect_freeze_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_parser_to_checker_reconnect_freeze_threshold_guard_refs(false),
+            kept_later_refs: actual_parser_to_checker_reconnect_freeze_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual parser-to-checker reconnect freeze threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual minimal parser subset freeze threshold reaches the stage1+stage2 parser floor for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -2980,6 +3092,12 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_minimal_parser_subset_freeze_threshold(
         &mut output,
         &summary.actual_minimal_parser_subset_freeze_threshold,
+    );
+    writeln!(output, "actual_parser_to_checker_reconnect_freeze_threshold:")
+        .expect("write to string");
+    render_actual_parser_to_checker_reconnect_freeze_threshold(
+        &mut output,
+        &summary.actual_parser_to_checker_reconnect_freeze_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -4167,6 +4285,33 @@ fn actual_minimal_parser_subset_freeze_threshold_kept_later_refs() -> Vec<String
     ]
 }
 
+fn actual_parser_to_checker_reconnect_freeze_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:parser_checker_reconnect_freeze_threshold_only".to_string(),
+            "guard:phase1_semantics_closeout_comparison_next".to_string(),
+            "guard:stage3_request_reconnect_later".to_string(),
+            "guard:runtime_proof_boundary_actualization_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_parser_to_checker_reconnect_freeze_threshold_not_reached".to_string(),
+        ]
+    }
+}
+
+fn actual_parser_to_checker_reconnect_freeze_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:stage3_request_predicate_reconnect_line".to_string(),
+        "kept_later:stage1_direct_target_mismatch_redesign_line".to_string(),
+        "kept_later:runtime_contrast_e21_e22_line".to_string(),
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:final_public_parser_checker_api".to_string(),
+        "kept_later:actual_external_verifier_schema".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -5149,6 +5294,45 @@ fn render_actual_minimal_parser_subset_freeze_threshold(
     render_string_list(output, "accepted_cluster_refs", &summary.accepted_cluster_refs, 1);
     render_string_list(output, "reject_cluster_refs", &summary.reject_cluster_refs, 1);
     render_string_list(output, "retention_floor_refs", &summary.retention_floor_refs, 1);
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_parser_to_checker_reconnect_freeze_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(reconnect_kind) = summary.reconnect_kind {
+        writeln!(output, "  reconnect_kind: {reconnect_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  reconnect_kind: none").expect("write to string");
+    }
+    if let Some(parser_subset_freeze_ref) = summary.parser_subset_freeze_ref {
+        writeln!(output, "  parser_subset_freeze_ref: {parser_subset_freeze_ref}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  parser_subset_freeze_ref: none").expect("write to string");
+    }
+    render_string_list(output, "checker_floor_refs", &summary.checker_floor_refs, 1);
+    render_string_list(output, "retained_helper_refs", &summary.retained_helper_refs, 1);
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,

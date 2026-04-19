@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 22:18 JST
+最終更新: 2026-04-19 22:28 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - strong typing / IFC beyond first checker fragment の parser-to-checker-reconnect-freeze ratchet
+  - semantics / invariant / notation の phase1-semantics-closeout ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `75` parser-to-checker-reconnect-freeze ratchet | minimal-parser-subset-freeze threshold の次段として parser-to-checker reconnect freeze ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | stage 1 summary + stage 2 structural contract + retained helper refs を current cut に留めたまま、final parser grammar、public parser/checker API、final public verifier contract を still later に残して parser-to-checker reconnect freeze ready sketch を helper-local threshold まで ratchet する | parser floor と checker floor の reconnect bundle を narrow に actualize しつつ、final parser/public contract 群を later mixed gate に残せる |
+| `76` phase1-semantics-closeout ratchet | parser-to-checker reconnect freeze の次段として semantics / invariants / notation closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | core semantics + invariant bridge + notation status を current cut に留めたまま、final parser grammar、final type system、actual external schema、final public verifier contract を still later に残して phase1 semantics closeout ready sketch を helper-local threshold まで ratchet する | semantics closeout bundle を narrow に actualize しつつ、finalization pressure を later mixed gate に残せる |
 
 ## recently closed package note
 
@@ -323,14 +323,29 @@
 ### Package 75 — parser-to-checker-reconnect-freeze ratchet
 
 - current reading:
-  next active line。`actual_minimal_parser_subset_freeze_threshold` を final parser grammar や final public parser/checker API に上げず、parser-to-checker reconnect freeze ready sketch まで narrow に ratchet する。
+  close 済み。`actual_minimal_parser_subset_freeze_threshold` を final parser grammar や final public parser/checker API に上げず、parser-to-checker reconnect freeze ready sketch まで narrow に ratchet し、`actual_parser_to_checker_reconnect_freeze_threshold` を `reconnect_kind + parser_subset_freeze_ref + checker_floor_refs + retained_helper_refs` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/289`
   `specs/examples/290`
   `specs/examples/546`
+  `specs/examples/547`
 - stop line:
   final parser grammar
   final public parser/checker API
+  final public verifier contract
+
+### Package 76 — phase1-semantics-closeout ratchet
+
+- current reading:
+  next active line。`actual_parser_to_checker_reconnect_freeze_threshold` を final parser grammar や final type system に上げず、phase1 semantics closeout ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/291`
+  `specs/examples/292`
+  `specs/examples/547`
+- stop line:
+  final parser grammar
+  final type system
+  actual external schema
   final public verifier contract
 
 ## research-discovery items
@@ -364,4 +379,4 @@
 
 ## next reopen order
 
-1. Package 75 で parser-to-checker-reconnect-freeze ratchet を進める。
+1. Package 76 で phase1-semantics-closeout ratchet を進める。

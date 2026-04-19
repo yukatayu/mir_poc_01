@@ -428,6 +428,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_minimal_parser_subset_freeze_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -875,6 +879,42 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_minimal_parser_subset_freeze_threshold"]["next_comparison_target_ref"],
         "parser_to_checker_reconnect_freeze_comparison"
     );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["reconnect_kind"],
+        "stage1_stage2_checker_floor_bridge"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["parser_subset_freeze_ref"],
+        "minimal_parser_subset_freeze_ready_sketch"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["checker_floor_refs"][0],
+        "stage1_reconnect_summary_floor"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["checker_floor_refs"][1],
+        "stage2_try_rollback_structural_floor"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["retained_helper_refs"][0],
+        "stage3_request_predicate_reconnect_line"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["retained_helper_refs"][1],
+        "stage1_direct_target_mismatch_redesign_line"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["retained_helper_refs"][2],
+        "runtime_contrast_e21_e22_line"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["next_comparison_target_ref"],
+        "phase1_semantics_closeout_comparison"
+    );
 }
 
 #[test]
@@ -1010,6 +1050,23 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("stage3_predicate_fragment_branch"));
     assert!(output.contains(
         "next_comparison_target_ref: parser_to_checker_reconnect_freeze_comparison"
+    ));
+    assert!(output.contains("actual_parser_to_checker_reconnect_freeze_threshold:"));
+    assert!(output.contains(
+        "reconnect_kind: stage1_stage2_checker_floor_bridge"
+    ));
+    assert!(output.contains(
+        "parser_subset_freeze_ref: minimal_parser_subset_freeze_ready_sketch"
+    ));
+    assert!(output.contains("checker_floor_refs:"));
+    assert!(output.contains("stage1_reconnect_summary_floor"));
+    assert!(output.contains("stage2_try_rollback_structural_floor"));
+    assert!(output.contains("retained_helper_refs:"));
+    assert!(output.contains("stage3_request_predicate_reconnect_line"));
+    assert!(output.contains("stage1_direct_target_mismatch_redesign_line"));
+    assert!(output.contains("runtime_contrast_e21_e22_line"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase1_semantics_closeout_comparison"
     ));
 }
 
@@ -1157,5 +1214,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_minimal_parser_subset_freeze_threshold"]["next_comparison_target_ref"],
         "parser_to_checker_reconnect_freeze_comparison"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_parser_to_checker_reconnect_freeze_threshold"]["next_comparison_target_ref"],
+        "phase1_semantics_closeout_comparison"
     );
 }
