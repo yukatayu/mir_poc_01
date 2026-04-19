@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 21:04 JST
+最終更新: 2026-04-19 21:14 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - strong typing / IFC beyond first checker fragment の public-checker command-surface ratchet
+  - strong typing / IFC beyond first checker fragment の shared-output-contract ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `70` public-checker command-surface ratchet | public-checker entry criteria threshold の次段として command surface ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | family facade command bundle を current cut に留めたまま、detached-loop `smoke-*` wrapper / shared output contract / parser-front public checker boundary を still later に残して command-surface ready sketch を helper-local threshold まで ratchet する | shared output contract / parser-front public checker boundary を凍らせず、next reopen target を shared-output-contract comparison に narrow に保てる |
+| `71` shared-output-contract ratchet | public-checker command-surface threshold の次段として shared output contract ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | shared family checker support の current output line を current cut に留めたまま、generic shared public checker entry / parser-front public checker boundary / emitted verifier handoff surface を still later に残して shared-output-contract ready sketch を helper-local threshold まで ratchet する | parser-front public checker boundary を凍らせず、next reopen target を public-checker-boundary comparison に narrow に保てる |
 
 ## recently closed package note
 
@@ -246,13 +246,30 @@
 ### Package 70 — public-checker command-surface ratchet
 
 - current reading:
-  next active line。`actual_public_checker_entry_criteria_threshold` を shared output contract や parser-front public checker boundary に上げず、public-checker command surface ready sketch まで narrow に ratchet する。
+  close 済み。`actual_public_checker_entry_criteria_threshold` を shared output contract や parser-front public checker boundary に上げず、public-checker command surface ready sketch まで narrow に ratchet し、`actual_public_checker_command_surface_threshold` を `command_surface_kind + family_facade_command_refs + public_checker_api_ref` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/279`
   `specs/examples/280`
   `specs/examples/541`
+  `specs/examples/542`
 - stop line:
+  detached-loop `smoke-*` wrapper の public surface 昇格
+  generic shared public checker entry
   shared output contract
+  parser-front public checker boundary
+  emitted verifier handoff surface
+  final public verifier contract
+
+### Package 71 — shared-output-contract ratchet
+
+- current reading:
+  next active line。`actual_public_checker_command_surface_threshold` を parser-front public checker boundary や emitted verifier handoff surface に上げず、shared-output-contract ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/281`
+  `specs/examples/282`
+  `specs/examples/542`
+- stop line:
+  generic shared public checker entry
   parser-front public checker boundary
   emitted verifier handoff surface
   final public verifier contract
@@ -288,4 +305,4 @@
 
 ## next reopen order
 
-1. Package 70 で public-checker command-surface ratchet を進める。
+1. Package 71 で shared-output-contract ratchet を進める。

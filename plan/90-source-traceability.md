@@ -325,6 +325,17 @@
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
 
+## 2026-04-19 Package 70 IFC public-checker command-surface ratchet addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/279-current-l2-minimal-public-checker-entry-criteria-ready-public-checker-command-surface-comparison.md`
+  - `specs/examples/280-current-l2-public-checker-command-surface-ready-minimal-public-checker-command-surface-threshold.md`
+  - `specs/examples/541-current-l2-ifc-public-checker-entry-criteria-threshold-helper-mirror.md`
+  - `specs/examples/542-current-l2-ifc-public-checker-command-surface-threshold-helper-mirror.md`
+  - `docs/reports/0823-package70-ifc-public-checker-command-surface-ratchet.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
 ## 2026-04-19 runnable-status audit and snapshot rewrite addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

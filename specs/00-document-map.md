@@ -186,7 +186,10 @@
   - public checker entry criteria、actual command surface、shared output contract、parser-front public checker boundary、final public verifier contract を固定するものではなく、Package 68 close と Package 69 public-checker entry-criteria ratchet close を読むための anchor である。
 - `specs/examples/541-current-l2-ifc-public-checker-entry-criteria-threshold-helper-mirror.md`
   - Package 69 の closeout として `p10 / p11 / p12` source-side IFC trio の public-checker entry criteria threshold を `run-source-sample` helper summary に narrow に mirror し、`public_checker_api_ref + entry_criteria_refs + next_comparison_target_ref + deferred_boundary_refs` の entry-criteria minimum を helper-local operational summary で保つ補助文書。
-  - actual public checker command surface、shared output contract、parser-front public checker boundary、emitted verifier handoff surface、final public verifier contract を固定するものではなく、Package 69 close と Package 70 public-checker command-surface ratchet next line を読むための anchor である。
+  - actual public checker command surface、shared output contract、parser-front public checker boundary、emitted verifier handoff surface、final public verifier contract を固定するものではなく、Package 69 close と Package 70 public-checker command-surface ratchet close を読むための anchor である。
+- `specs/examples/542-current-l2-ifc-public-checker-command-surface-threshold-helper-mirror.md`
+  - Package 70 の closeout として `p10 / p11 / p12` source-side IFC trio の public-checker command-surface threshold を `run-source-sample` helper summary に narrow に mirror し、`command_surface_kind + family_facade_command_refs + public_checker_api_ref` の command-surface minimum を helper-local operational summary で保つ補助文書。
+  - detached-loop `smoke-*` wrapper の public surface 昇格、generic shared public checker entry、shared output contract、parser-front public checker boundary、emitted verifier handoff surface、final public verifier contract を固定するものではなく、Package 70 close と Package 71 shared-output-contract ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

@@ -408,6 +408,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_public_checker_entry_criteria_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_public_checker_command_surface_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -731,6 +735,22 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_public_checker_entry_criteria_threshold"]["next_comparison_target_ref"],
         "public_checker_command_surface_comparison"
     );
+    assert_eq!(
+        value["actual_public_checker_command_surface_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_public_checker_command_surface_threshold"]["command_surface_kind"],
+        "family_facade_checker_commands"
+    );
+    assert_eq!(
+        value["actual_public_checker_command_surface_threshold"]["family_facade_command_refs"][0],
+        "same_lineage_checker_command"
+    );
+    assert_eq!(
+        value["actual_public_checker_command_surface_threshold"]["public_checker_api_ref"],
+        "public_checker_api_ready_sketch"
+    );
 }
 
 #[test]
@@ -792,6 +812,12 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
         "next_comparison_target_ref: public_checker_command_surface_comparison"
     ));
     assert!(output.contains("smoke-same-lineage-checker"));
+    assert!(output.contains("actual_public_checker_command_surface_threshold:"));
+    assert!(output.contains(
+        "command_surface_kind: family_facade_checker_commands"
+    ));
+    assert!(output.contains("same_lineage_checker_command"));
+    assert!(output.contains("public_checker_api_ref: public_checker_api_ready_sketch"));
 }
 
 #[test]
@@ -898,5 +924,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_public_checker_entry_criteria_threshold"]["next_comparison_target_ref"],
         "public_checker_command_surface_comparison"
+    );
+    assert_eq!(
+        value["actual_public_checker_command_surface_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_public_checker_command_surface_threshold"]["next_comparison_target_ref"],
+        "shared_output_contract_comparison"
     );
 }
