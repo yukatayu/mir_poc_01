@@ -259,6 +259,17 @@
   - `docs/reports/0738-theorem-discharge-prefloor-and-public-contract-hardening.md`
   - `docs/reports/0739-faq-007-current-status-two-big-problems-and-last-mile-gates.md`
 
+## 2026-04-19 Package 64 IFC checker payload row-detail ratchet addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/267-current-l2-minimal-checker-payload-row-family-ready-checker-payload-row-detail-comparison.md`
+  - `specs/examples/268-current-l2-checker-payload-row-detail-ready-minimal-checker-payload-row-detail-threshold.md`
+  - `specs/examples/535-current-l2-ifc-checker-payload-row-family-threshold-helper-mirror.md`
+  - `specs/examples/536-current-l2-ifc-checker-payload-row-detail-threshold-helper-mirror.md`
+  - `docs/reports/0817-package64-ifc-checker-payload-row-detail-ratchet.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
 ## 2026-04-19 runnable-status audit and snapshot rewrite addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

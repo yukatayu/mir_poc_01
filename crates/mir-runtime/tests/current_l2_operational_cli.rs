@@ -384,6 +384,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_checker_payload_row_family_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -602,6 +606,22 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_checker_payload_row_family_threshold"]["row_family_kind"],
         "checked_reason_code_rows"
     );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["payload_row_family_ref"],
+        "actual_checker_payload_row_family"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["row_source_ref"],
+        "fixture_checked_reason_codes"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["row_reason_kind"],
+        "authority_sensitive_success"
+    );
 }
 
 #[test]
@@ -632,6 +652,12 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("actual_checker_payload_row_family_threshold:"));
     assert!(output.contains("payload_family_ref: actual_checker_payload_family"));
     assert!(output.contains("row_family_kind: checked_reason_code_rows"));
+    assert!(output.contains("actual_checker_payload_row_detail_threshold:"));
+    assert!(output.contains(
+        "payload_row_family_ref: actual_checker_payload_row_family"
+    ));
+    assert!(output.contains("row_source_ref: fixture_checked_reason_codes"));
+    assert!(output.contains("row_reason_kind: authority_miss_negative"));
 }
 
 #[test]
@@ -682,5 +708,17 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_checker_payload_row_family_threshold"]["coverage_state"],
         "full_cluster"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["coverage_state"],
+        "full_cluster"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["row_reason_kind"],
+        "classified_to_public_negative"
     );
 }

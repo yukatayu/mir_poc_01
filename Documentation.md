@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p14` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530`、`531`、`532`、`533`、`534`、`535` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening、near-end closeout sync after Package 58、theorem/model-check reopen-threshold helper mirror、order-handoff/shared-space public-seam helper mirror、IFC actual-checker-payload-family threshold helper mirror、IFC checker-payload-row-family threshold helper mirror は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper、snapshot / roadmap / traceability sync に actualize 済みと読む。current remaining active line は checker payload row-detail ratchet、later mixed-gate residual maintenance、true user-spec residual に narrowed した）
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530`、`531`、`532`、`533`、`534`、`535`、`536` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening、near-end closeout sync after Package 58、theorem/model-check reopen-threshold helper mirror、order-handoff/shared-space public-seam helper mirror、IFC actual-checker-payload-family threshold helper mirror、IFC checker-payload-row-family threshold helper mirror、IFC checker-payload-row-detail threshold helper mirror は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper、snapshot / roadmap / traceability sync に actualize 済みと読む。current remaining active line は checker payload row-body ratchet、later mixed-gate residual maintenance、true user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -54,6 +54,8 @@
   prototype / sample 実行時に source-side IFC trio `p10 / p11 / p12` を `actual_checker_payload_family_threshold` として見せ、`payload_family_kind + source_refs` を checker-adjacent payload bridge として sample-local helper threshold に留める current cut がある
 - helper-local checker payload row-family threshold:
   prototype / sample 実行時に source-side IFC trio `p10 / p11 / p12` を `actual_checker_payload_row_family_threshold` として見せ、`payload_family_ref + row_family_kind` を row grouping bridge として sample-local helper threshold に留める current cut がある
+- helper-local checker payload row-detail threshold:
+  prototype / sample 実行時に source-side IFC trio `p10 / p11 / p12` を `actual_checker_payload_row_detail_threshold` として見せ、`payload_row_family_ref + row_source_ref + row_reason_kind` を row-detail bridge として sample-local helper threshold に留める current cut がある
 - helper-local order-handoff negative static stop:
   `p13` missing publication witness と `p14` handoff-before-publish を current-L2 source sample runner の helper-local static gate で止め、late-join visibility line の negative corpus を sample-visible に actualize する current cut がある
 - verifier preview alignment pre-floor:
@@ -312,13 +314,13 @@
 - current live line は、
   - theorem/model-check reopen-threshold helper mirror actualization
   - order-handoff/shared-space public-seam helper mirror closeout
-  - checker payload row-detail ratchet
+  - checker payload row-body ratchet
   - committed `samples/lean/` corpus と helper-local CLI summary を基点にした residual public-seam maintenance
   - later mixed gate residual maintenance
   - true user-spec residual
   に narrow 化している。
 
-`specs/examples/466...535` は、
+`specs/examples/466...536` は、
 actual adoption package、near-end closeout、helper-local actualization floor を source-backed に揃える current anchor である。
 
 ## まだ OPEN のもの
