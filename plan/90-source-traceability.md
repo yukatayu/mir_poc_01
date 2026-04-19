@@ -3301,6 +3301,32 @@
   - `docs/reports/0748-order-handoff-surface-narrowing-after-external-advice.md`
   - `docs/reports/0749-theorem-prover-experimental-binding-preflight.md`
 - 今回の要点は、`faq_007.md` 以後の genuine progress として order-handoff surface narrowing と theorem-prover binding preflight を current explanation に取り込みつつ、compare floor / actual adoption floor / helper-local actualization floor / remaining mixed gate / true user-spec gate をあらためて整理し、「かなり先まで自走しやすい」と「最後まで完全 no-question を保証できる」は別である current lineを明示した点である。
+
+### 2026-04-19 FAQ 009 current-status and self-drive-bound refresh
+
+- `faq_009.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `progress.md`
+  - `tasks.md`
+  - `faq_008.md`
+  - `specs/10-open-questions.md`
+  - `specs/11-roadmap-and-workstreams.md`
+  - `specs/12-decision-register.md`
+  - `plan/01-status-at-a-glance.md`
+  - `plan/11-roadmap-near-term.md`
+  - `plan/12-open-problems-and-risks.md`
+  - `plan/17-research-phases-and-autonomy-gates.md`
+  - `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
+  - `docs/reports/0799-actual-lean-prototype-widening-and-snapshot-sync.md`
+- 今回の要点は、`faq_008.md` 以後の genuine progress として theorem/model-check/order-handoff/shared-space residual compression と representative theorem quartet actual Lean execution floor を current explanation に取り込みつつ、「かなり進んでいる」「current mapped corpus の runnable floor は reached」「しかし final public language implementation complete ではない」「repo-local near-end success まではかなり自走しやすいが full final completion には still mixed gate / user-spec residual が残る」という current lineを明示した点である。
+
+### 2026-04-19 final-layer closeout handoff integration
+
+- `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`docs/reports/0801-final-layer-closeout-handoff-integration.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。
+  - `faq_009.md`
+  - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
+  - `specs/examples/519-current-l2-theorem-actual-lean-execution-representative-prototype-widening.md`
+  - `docs/reports/0799-actual-lean-prototype-widening-and-snapshot-sync.md`
+- 今回の要点は、representative theorem quartet actual Lean execution floor 到達後の self-driven queue を「actual Lean hardening only」へ過度に narrow 化せず、layered strong typing / IFC first-fragment、Lean formal skeleton / proof obligations、helper/CLI hardening and broader coverage、near-end closeout sync を含む final-layer closeout packages として current repo に戻した点である。これは final public language completion を意味せず、execution floor reached と adoption/closeout debt を切り分けるための current reading である。
 ## 2026-04-18 model-check property-language / tool-brand threshold default addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。

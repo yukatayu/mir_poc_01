@@ -40,9 +40,21 @@
     「これらに答えればどこまで自走できるか、どこから先は still evidence-dependent か」
     を整理する。
   - 規範判断の正本ではないが、current status / autonomy limit / final-public-completion misunderstanding を避ける入口として使ってよい。
+- `faq_009.md`
+  - 2026-04-19 時点の current explanation refresh であり、
+    `faq_008.md` 以後の actual progress を反映した上で、
+    「どこまで終わっているか」
+    「二大問題を completely solved / language implementation complete と読めるか」
+    「全体像に対して今どこにいるか」
+    「何を答えればどこまで自走できるか」
+    を representative theorem quartet actual Lean execution floor まで含めて整理する。
+  - 規範判断の正本ではないが、current status / completion-bound / self-drive-limit の確認入口として使ってよい。
 - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
   - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
   - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。
+- `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
+  - 2026-04-19 時点の detailed closeout handoff であり、representative theorem quartet actual Lean execution 後の reopened self-driven queue、layered strong typing / IFC first-fragment、Lean formal skeleton、first completion scope を current explanation source として補強する。
+  - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -109,6 +121,9 @@
 - `specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md`
   - current L2 の fallback / `lease` reading と「外側 option の寿命延長」直感とのズレを整理し、fallback / preference chain の compact syntax candidate を比較する補助文書。
   - semantics は変えず、current L2 companion notation にどこまで compact candidate を昇格させるかだけを整理する。
+- `specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`
+  - final-layer closeout handoff を current repo の source-backed default に折り畳み、reopened self-driven queue、layered strong typing / IFC first-fragment、Lean formal skeleton、first completion scope、near-end stop line を整理する補助文書。
+  - final public language completion を固定するものではなく、current closeout tranche の package order を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

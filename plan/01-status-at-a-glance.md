@@ -12,22 +12,15 @@
 - current active lane は 3 本で読むのが自然である。
   - execution lane:
     `Macro 4 active on fixed authored/prototype floor`
-    （authored sixteen と corrected prototype nonet は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
+    （authored sixteen と corrected prototype nonet は fixed 済みであり、sample corpus は adequacy corpus として active に保つ）
   - theory-lab lane:
-    `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization / actual-adoption floor が揃った。corrected runnable version の current floor は already reached であり、Package 46〜54 は close 済み、current principal active line は actual Lean execution hardening / helper orchestration と later mixed gate / user-spec residual に narrow 化した）
+    `Macro 5 final-layer closeout packages active`
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization / actual-adoption floor が揃った。corrected runnable version の current floor と representative theorem quartet actual Lean execution は already reached であり、`specs/examples/520` により current principal active line は layered strong typing / IFC first-fragment、Lean formal skeleton / proof obligations、helper/CLI hardening and broader coverage、later mixed gate / user-spec residual に reopened した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、packaging / FFI / exhaustive final catalog は still later に残る）
 - current authored source sample は `e1 / e2 / e3 / e4 / e5 / e12 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23` の sixteen である。
 - corrected runnable prototype sample は `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08 / p09` の nonet までである。
-  - order/handoff family: `p01 / p02 / p04 / p05 / p07 / p08 / p09`
-  - dynamic attach/detach family: `p03`
-  - typed/theorem/model-check family: `p06`
-- current principal self-driven line は conditional residual に入った。
-  - actual-execution hardening: representative theorem quartet actual execution の後段 helper/CLI orchestration / broader coverage
-  - later mixed gate: final public theorem/model-check/order-handoff/shared-space seams
-  - user-spec residual: packaging / FFI / exhaustive final catalog / broader app target
 
 ## macro phase reading
 
@@ -38,7 +31,7 @@
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
 | `Macro 4` executable fixed-subset expansion | active on fixed authored/prototype floor | self-driven |
-| `Macro 5` typed / theorem / model-check / order-handoff line | post-runnable actual-adoption floor fixed + residual-gate compression closed | self-driven |
+| `Macro 5` typed / theorem / model-check / order-handoff line | final-layer closeout packages active | self-driven |
 | `Macro 6` shared-space / room-profile / runtime evolution | minimal working subset actual default + public-seam compression closed | self-driven up to exhaustive catalog gate |
 | `Macro 7` toolchain / backend / host-facing integration | mixed with repo-local near-end success criteria | self-driven up to packaging / FFI gate |
 | `Macro 8` domain / application realization | narrow authoritative-room scenario selected | mixed beyond first scenario |
@@ -67,6 +60,7 @@
 - syntax / modality line は、
   - semantic honesty principle
   - 5 評価軸
+  - explicit edge-row principal / stage-block secondary / `serial on ...` reserve
   - `lambda_circle_box` partial basis
   - stronger family keep
   まで current recommendation に上がった。
@@ -76,31 +70,12 @@
   - compatibility metatheory package
   - Lean-first proof roadmap
   まで current recommendation に上がった。
-- reserve strengthening actualization は、
-  - `auditable_authority_witness` minimal witness core
-  - claim / payload split preserve
-  - symbolic binding ref cut
-  - `p07` reached / `p08,p05` guard-only
-  まで current recommendation に上がった。
-- theorem discharge / public-theorem-contract threshold default は、
-  - review-unit first
-  - discharge-entry adjacent
-  - notebook-consumer first
-  - brand-neutral theorem request
-  - `e5/p06/p07/p08` reached / `p05` guard-only
-  まで current recommendation に上がった。
-- reserve practical actualization は、
-  - `delegated_rng_service` provider placement
-  - authority-kept-commit split
-  - optional provider attachment cut
-  - `p09` reached / `p07,p08` guard-only
-  まで current recommendation に上がった。
-- near-end success criteria default は、
-  - repo-local runnable CLI
-  - tests
-  - emitted artifacts
-  - reproducible compare floor
-  に置く。
+- final-layer closeout defaults は、
+  - layered strong typing / IFC first-fragment
+  - Lean formal skeleton / proof obligations
+  - theorem-first first completion scope
+  - reopened self-driven queue
+  を `specs/examples/520` で current package 読みに戻した。
 
 ## current recommendation
 
@@ -108,51 +83,9 @@
 - theory-lab lane は `specs/examples/466`、`467`、`468`、`469` を actual adoption / convergence / closeout anchor とする。
 - theorem-first pilot / theorem-binding preflight / authoritative-room default profile / order-handoff surface narrowing の helper-local actualization floor は `specs/examples/470`、`471`、`472`、`473`、`474` を current anchor にする。
 - principal theory spine / proof roadmap package は `specs/examples/475` を current anchor にする。
-- reserve strengthening actualization package は `specs/examples/476` を current anchor にする。
-- reserve practical actualization package は `specs/examples/477` を current anchor にする。
-- model-check second-line actualization package は `specs/examples/478` を current anchor にする。
-- theorem discharge actual-format probe package は `specs/examples/479` を current anchor にする。
-- model-check property/tool-seam probe package は `specs/examples/480` を current anchor にする。
-- theorem discharge / public-theorem-contract threshold default package は `specs/examples/481` を current anchor にする。
-- theorem contract shape threshold default package は `specs/examples/485` を current anchor にする。
-- theorem transport/public-contract coupled later-gate package は `specs/examples/486` を current anchor にする。
-- theorem review-unit transport / notebook-contract actual adoption package は `specs/examples/487` を current anchor にする。
-- theorem result-object preview / proof-object-schema reserve actualization package は `specs/examples/491` を current anchor にする。
-- theorem result-object route actual adoption package は `specs/examples/500` を current anchor にする。
-- theorem final public-contract reopen threshold package は `specs/examples/506` を current anchor にする。
-- model-check final public-contract reopen threshold package は `specs/examples/507` を current anchor にする。
-- theorem Lean-first non-production stub pilot actualization package は `specs/examples/508` を current external-theorem pilot anchor にする。
-- theorem review-unit to Lean-stub repo-local artifact-conformance bridge package は `specs/examples/509` を current theorem second-stage conformance anchor にする。
-- theorem Lean-stub representative trace-alignment bridge package は `specs/examples/510` を current theorem representative trace-alignment anchor にする。
-- order-handoff serial-scope reserve surface package は `specs/examples/511` を current reserve-surface anchor にする。
-- witness/provider emitted-contract representative trace-alignment bridge package は `specs/examples/512` を current shared-space representative trace-alignment anchor にする。
-- theorem actual Lean execution availability probe package は `specs/examples/513` を current local-environment stop-line anchor にする。
-- theorem public seam compression after local Lean-unavailable probe package は `specs/examples/514` を current theorem residual-matrix anchor にする。
-- order-handoff / witness-provider final public seam compression after reserve actualizations package は `specs/examples/515` を current Problem 2 / shared-space residual-matrix anchor にする。
-- theorem actual Lean execution toolchain probe and reopen manifest package は `specs/examples/516` を current toolchain-ready anchor にする。
-- model-check public seam compression after threshold and probe package は `specs/examples/517` を current model-check residual-matrix anchor にする。
-- theorem actual Lean execution narrow probe after global toolchain install package は `specs/examples/518` を current representative static actual-execution anchor にする。
-- theorem actual Lean execution representative prototype widening package は `specs/examples/519` を current representative prototype actual-execution anchor にする。
-- theorem proof-object schema / prover-brand coupled-later package は `specs/examples/494` を current anchor にする。
-- model-check public checker artifact / migration coupled-later package は `specs/examples/498` を current anchor にする。
-- model-check checker-artifact route actual adoption package は `specs/examples/501` を current anchor にする。
-- witness/provider route actual adoption package は `specs/examples/502` を current anchor にする。
-- witness/provider schema route actual adoption package は `specs/examples/504` を current anchor にする。
-- witness/provider final public-contract reopen threshold package は `specs/examples/505` を current anchor にする。
-- order-handoff source wording route actual adoption package は `specs/examples/503` を current anchor にする。
-- witness/provider public-schema coupled-later package は `specs/examples/499` を current anchor にする。
-- model-check row-local property / checker-boundary actual adoption package は `specs/examples/488` を current anchor にする。
-- model-check public-checker artifact preview / verifier-handoff reserve actualization package は `specs/examples/492` を current anchor にする。
-- model-check tool-brand / verifier-handoff coupled-later package は `specs/examples/495` を current anchor にする。
-- order-handoff source wording / emitted-artifact coupled-later package は `specs/examples/496` を current anchor にする。
-- theorem result object / payload public-contract coupled-later package は `specs/examples/497` を current anchor にする。
-- witness/provider/artifact public-shape actual adoption package は `specs/examples/489` を current anchor にする。
-- witness/provider public-contract / emitted-handoff coupled-later package は `specs/examples/493` を current anchor にする。
-- order-handoff surface actual adoption package は `specs/examples/490` を current anchor にする。
-- model-check property/tool-brand threshold default package は `specs/examples/482` を current anchor にする。
-- witness/provider/artifact public-shape threshold default package は `specs/examples/483` を current anchor にする。
-- order-handoff surface/artifact threshold default package は `specs/examples/484` を current anchor にする。
-- theorem public-seam compression、model-check public-seam compression、order-handoff / witness-provider final public-seam compression、representative theorem quartet actual Lean execution は close 済みである。final public witness schema / final public provider receipt schema / exhaustive final catalog は still later に残す。
+- final-layer closeout defaults / reopened queue package は `specs/examples/520` を current anchor にする。
+- representative theorem quartet actual Lean execution after global toolchain install は `specs/examples/518`、`519` を current execution-side anchor にする。
+- final public theorem/model-check/order-handoff/shared-space contract、final parser/public API、installed binary / packaging、exhaustive shared-space catalog は current line に入れない。
 
 ## biggest later gates
 
@@ -160,7 +93,6 @@
 - concrete theorem prover brand / proof object public schema
 - final public checker artifact / actual public checker migration
 - first settled property language / concrete model-check tool brand
-- settled property language / concrete model-check tool seam
 - final source-surface handoff wording / final emitted-artifact schema
 - final public witness schema / final public provider receipt schema / combined public contract
 - final modal foundation adoption / final source marker

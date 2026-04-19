@@ -265,6 +265,12 @@ actual-adoption floor では、
   - layered theory stack
   - compatibility metatheory package
   - Lean-first proof roadmap
+- final-layer closeout defaults / reopened queue:
+  `specs/examples/520`
+  - layered strong typing / IFC first-fragment
+  - Lean formal skeleton / proof obligations
+  - first completion scope
+  - reopened self-driven closeout package order
 - reserve strengthening actualization:
   `specs/examples/476`
   - `auditable_authority_witness` minimal witness core actualization
@@ -443,6 +449,12 @@ actual-adoption floor では、
   - representative prototype trio `p06 / p07 / p08` actual Lean execution
   - runtime support cut first
   - helper / CLI unification later
+- final-layer closeout queue reconstruction:
+  `specs/examples/520`
+  - representative theorem quartet actual Lean execution 後の self-driven queue は empty ではない
+  - layered strong typing / IFC first-fragment
+  - Lean formal skeleton / proof obligations
+  - broader negative corpus / helper hardening / near-end closeout sync
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

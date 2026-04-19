@@ -10,9 +10,9 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ## current reading
 
 - current execution line は `Macro 4 active on fixed authored/prototype floor` である。
-- current theory-lab line は `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed` である。
-- current reserve integration line は `Macro 6 minimal working subset actual default / Macro 7 mixed + public-seam compression closed` である。
-- corrected runnable floor は current mapped corpus で already reached しており、next packages はその floor を作るためではなく reserve/mixed-gate narrowing のために置いている。
+- current theory-lab line は `Macro 5 final-layer closeout packages active` である。
+- current reserve integration line は `Macro 6 minimal working subset actual default / Macro 7 mixed` である。
+- corrected runnable floor は current mapped corpus で already reached しており、next packages はその floor を作るためではなく closeout / mixed-gate narrowing のために置いている。
 - current defaults:
   - theorem-first external integration target
   - repo-local runnable CLI + tests + emitted artifacts + reproducible compare floor = near-end success
@@ -22,91 +22,104 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 
 ## recently closed packages
 
-| package | close evidence | current reading |
+| package band | close evidence | current reading |
 |---|---|---|
-| Package 0 | `docs/reports/0741` | `faq_007` drift audit と queue reconstruction |
-| Package 1 | `docs/reports/0740` + `specs/examples/466` | Problem 1 actual adoption package + theorem-first pilot default |
-| Package 2 | `docs/reports/0742` + `specs/examples/467` | Problem 2 actual adoption package + authoritative-room default profile |
-| Package 3 | `docs/reports/0743` + `specs/examples/468` | syntax / modality convergence + current recommendation |
-| Package 4 | `docs/reports/0744` + `specs/examples/469` | near-end closeout + residual mixed/user-spec gate |
-| Package 5 | `docs/reports/0745` + `specs/examples/470` | theorem-first experimental pilot actualization |
-| Package 6 | `docs/reports/0746` + `specs/examples/471` | authoritative-room vertical-slice emitted-artifact ratchet |
-| Package 7 | `docs/reports/0747` + `specs/examples/472` | minimal companion / experimental order-handoff surface |
-| Package 8 | `docs/reports/0748` + `specs/examples/473` | order-handoff surface narrowing + stage-block secondary candidate |
-| Package 9 | `docs/reports/0749` + `specs/examples/474` | theorem-prover experimental binding preflight |
-| Package 10 | `docs/reports/0751` + `specs/examples/475` | principal theory spine + layered typing/proof architecture + Lean-first proof roadmap |
-| Package 11 | `docs/reports/0752` + `specs/examples/476` | auditable-authority-witness strengthening actualization |
-| Package 12 | `docs/reports/0753` + `specs/examples/477` | delegated-rng-service practical actualization |
-| Package 13 | `docs/reports/0754` + `specs/examples/478` | model-check second-line concretization |
-| Package 14 | `docs/reports/0755` + `specs/examples/479` | theorem discharge actual-format probe |
-| Package 15 | `docs/reports/0756` + `specs/examples/480` | model-check property/tool-seam probe |
-| Package 16 | `docs/reports/0758` + `specs/examples/481` | theorem discharge / public-theorem-contract threshold default |
-| Package 17 | `docs/reports/0759` + `specs/examples/482` | model-check property-language / tool-brand threshold default |
-| Package 18 | `docs/reports/0760` + `specs/examples/483` | witness/provider/artifact public-shape threshold default |
-| Package 19 | `docs/reports/0761` + `specs/examples/484` | order-handoff surface / artifact threshold default |
-| Package 20 | `docs/reports/0762` + `specs/examples/485` | theorem contract shape threshold default |
-| Package 21 | `docs/reports/0763` + `specs/examples/486` | theorem transport/public-contract coupled later gate |
-| Package 22 | `docs/reports/0764` + `specs/examples/487` | theorem review-unit transport / notebook-contract actual adoption |
-| Package 23 | `docs/reports/0766` + `specs/examples/488` | model-check row-local property / checker-boundary actual adoption |
-| Package 24 | `docs/reports/0767` + `specs/examples/489` | witness/provider/artifact public-shape actual adoption |
-| Package 25 | `docs/reports/0768` + `specs/examples/490` | order-handoff surface actual adoption |
-| Package 26 | `docs/reports/0769` + `specs/examples/491` | theorem result-object preview / proof-object-schema reserve actualization |
-| Package 27 | `docs/reports/0770` + `specs/examples/492` | model-check public-checker artifact preview / verifier-handoff reserve actualization |
-| Package 28 | `docs/reports/0771` + `specs/examples/493` | witness/provider public-contract / emitted-handoff coupled later gate |
-| Package 29 | `docs/reports/0772` + `specs/examples/494` | theorem proof-object schema / prover-brand coupled later gate |
-| Package 30 | `docs/reports/0773` + `specs/examples/495` | model-check tool-brand / verifier-handoff coupled later gate |
-| Package 31 | `docs/reports/0774` + `specs/examples/496` | order-handoff source wording / emitted-artifact coupled later gate |
-| Package 32 | `docs/reports/0775` + `specs/examples/497` | theorem result object / payload public-contract coupled later gate |
-| Package 33 | `docs/reports/0776` + `specs/examples/498` | model-check public checker artifact / migration coupled later gate |
-| Package 34 | `docs/reports/0777` + `specs/examples/499` | witness/provider public-schema coupled later gate |
-| Package 35 | `docs/reports/0778` + `specs/examples/500` | theorem result-object route actual adoption |
-| Package 36 | `docs/reports/0779` + `specs/examples/501` | model-check checker-artifact route actual adoption |
-| Package 37 | `docs/reports/0780` + `specs/examples/502` | witness/provider route actual adoption |
-| Package 38 | `docs/reports/0781` + `specs/examples/503` | order-handoff source wording route actual adoption |
-| Package 39 | `docs/reports/0782` + `specs/examples/504` | witness/provider schema route actual adoption |
-| Package 40 | `docs/reports/0783` + `specs/examples/505` | witness/provider final public-contract reopen threshold |
-| Package 41 | `docs/reports/0784` + `specs/examples/506` | theorem final public-contract reopen threshold |
-| Package 42 | `docs/reports/0785` + `specs/examples/507` | model-check final public-contract reopen threshold |
-| Package 43 | `docs/reports/0786` + `specs/examples/508` | theorem Lean-first non-production stub pilot actualization |
-| Package 44 | `docs/reports/0787` + `specs/examples/509` | theorem review-unit to Lean-stub repo-local artifact-conformance bridge |
-| Package 45 | `docs/reports/0788` + `specs/examples/510` | theorem Lean-stub representative trace-alignment bridge |
-| Package 46 | `docs/reports/0791` + `specs/examples/511` | order-handoff serial-scope reserve surface |
-| Package 47 | `docs/reports/0792` + `specs/examples/512` | witness/provider emitted-contract representative trace-alignment bridge |
-| Package 48 | `docs/reports/0793` + `specs/examples/513` | theorem actual Lean execution availability probe |
-| Package 49 | `docs/reports/0794` + `specs/examples/514` | theorem public seam compression after local Lean-unavailable probe |
-| Package 50 | `docs/reports/0795` + `specs/examples/515` | order-handoff / witness-provider final public seam compression after reserve actualizations |
-| Package 51 | `docs/reports/0796` + `specs/examples/516` | theorem actual Lean execution toolchain probe and reopen manifest |
-| Package 52 | `docs/reports/0797` + `specs/examples/517` | model-check public seam compression after threshold and probe |
-| Package 53 | `docs/reports/0798` + `specs/examples/518` | theorem actual Lean execution narrow probe after global toolchain install |
-| Package 54 | `docs/reports/0799` + `specs/examples/519` | theorem actual Lean execution representative prototype widening |
+| `0...10` | `docs/reports/0740...0751` + `specs/examples/466...475` | actual adoption package、syntax/modality convergence、theory spine / Lean-first proof roadmap |
+| `11...19` | `docs/reports/0752...0761` + `specs/examples/476...484` | reserve strengthening / practical actualization、model-check second line、mixed-gate threshold defaults |
+| `20...35` | `docs/reports/0762...0778` + `specs/examples/485...500` | theorem/model-check/order-handoff/shared-space coupled-later / actual-adoption packages |
+| `36...42` | `docs/reports/0779...0785` + `specs/examples/501...507` | checker-artifact / witness-provider / theorem/model-check final-public-contract reopen thresholds |
+| `43...50` | `docs/reports/0786...0795` + `specs/examples/508...515` | Lean-stub pilot、artifact-conformance、trace alignment、public-seam compression、serial reserve surface |
+| `51...54` | `docs/reports/0796...0799` + `specs/examples/516...519` | toolchain probe / reopen manifest、model-check public-seam compression、representative theorem quartet actual Lean execution |
+| `55` | `docs/reports/0801` + `specs/examples/520` | final-layer closeout defaults and reopened self-driven queue |
 
-## ordered package list
+## active self-driven packages
 
-### current self-driven reopen packages
+| 順番 | package | macro | question | rough weight | current exit signal |
+|---|---|---|---|---|---|
+| 1 | `56` layered strong typing / IFC first-fragment | `Macro 5` | strong typing / IFC をどこまで current checker fragment と corpus に入れるか | `M` | `LabelModel` / `Labeled` / explicit authority / secret-key valid-invalid corpus が docs と sample evidence に揃う |
+| 2 | `57` Lean formal skeleton / proof obligations | `Macro 5` | mechanization-ready core をどこまで current repo-local evidence に接続するか | `M` | formal definitions / proof obligations / Rust-Lean alignment floor が doc + helper evidence に揃う |
+| 3 | `58` helper / CLI hardening and broader coverage | `Macro 5/7` | actual Lean execution floor を representative quartet からどう widen するか | `M` | helper / CLI と broader theorem-side / IFC / order-handoff corpus widening が narrow package で通る |
+| 4 | `59` near-end closeout sync | `Macro 5/6/7` | mixed gate / user-spec residual をどこまで narrow に残すか | `S-M` | snapshot / roadmap / traceability が stale wording を残さない |
 
-- unconditional reopen package は current near-end target では close 済みである。
-- `M1/M2/M3` threshold package、theorem/model-check/order-handoff/shared-space actual adoption package、Package 49〜50 は close 済みである。
-- Package 51〜54 により toolchain-ready、model-check public-seam compression、representative theorem quartet actual execution まで close 済みである。
-- remaining work は actual Lean execution helper/CLI hardening and broader coverage、later mixed gate、true user-spec residual に分けて扱う。
+## package detail
 
-### later mixed-gate topics
+### Package 56 — layered strong typing / IFC first-fragment
+
+- current source:
+  `specs/examples/475`
+  `specs/examples/520`
+- current recommendation:
+  checker-adjacent principal + layered stack を維持し、stronger typed surface early principal promotion はしない。
+- target corpus:
+  `p06-typed-proof-owner-handoff`
+  secret-key / label-flow valid-invalid
+  explicit declassification authority
+- stop line:
+  final typed source principal
+  final IFC syntax
+  final public label API
+
+### Package 57 — Lean formal skeleton / proof obligations
+
+- current source:
+  `specs/examples/475`
+  `specs/examples/519`
+  `specs/examples/520`
+- current recommendation:
+  Lean-first staged roadmap を mechanization-ready core / proof obligations / Rust-Lean alignment floor に actualize する。
+- evidence floor:
+  theorem Lean-stub bridge
+  artifact-conformance bridge
+  representative theorem quartet actual Lean execution
+- stop line:
+  concrete production prover binding
+  final proof object public contract
+  final public verifier contract
+
+### Package 58 — helper / CLI hardening and broader coverage
+
+- current source:
+  `specs/examples/516...520`
+- current recommendation:
+  actual Lean execution floor を helper / CLI hardening、broader theorem-side / IFC / order-handoff negative corpus wideningに使う。
+- promotion rule:
+  widened corpus は mixed gate を 1 つ閉じるか、formal skeleton package を concretize する場合だけ足す。
+- stop line:
+  final public theorem/model-check contract
+  packaging / host-facing integration
+
+### Package 59 — near-end closeout sync
+
+- current source:
+  `specs/examples/469`
+  `specs/examples/520`
+- current recommendation:
+  final public completion を凍らせず、mixed gate / true user-spec residual を narrow に残す。
+- required sync targets:
+  `progress.md`
+  `tasks.md`
+  `plan/01`
+  `plan/17`
+  `plan/18`
+  `plan/90`
+
+## later mixed-gate topics
 
 | 順番 | lane | macro | topic | next gate |
 |---|---|---|---|---|
-| 4 | theory-lab | `Macro 5/7` | final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema | mixed gate |
-| 5 | theory-lab | `Macro 5/7` | first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact | mixed gate |
-| 6 | theory-lab | `Macro 5/6` | final source-surface handoff wording / emitted-artifact schema | mixed gate |
-| 7 | theory-lab | `Macro 5/6` | final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract | mixed gate |
-| 8 | theory-lab | `Macro 5` | final modal foundation / source marker | mixed gate |
-| 9 | reserve integration | `Macro 6/7` | exhaustive shared-space catalog / packaging / FFI targets | mixed + user-spec residual |
+| 5 | theory-lab | `Macro 5/7` | final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema | mixed gate |
+| 6 | theory-lab | `Macro 5/7` | first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact | mixed gate |
+| 7 | theory-lab | `Macro 5/6` | final source-surface handoff wording / emitted-artifact schema | mixed gate |
+| 8 | theory-lab | `Macro 5/6` | final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract | mixed gate |
+| 9 | theory-lab | `Macro 5` | final modal foundation / source marker | mixed gate |
+| 10 | reserve integration | `Macro 6/7` | exhaustive shared-space catalog / packaging / FFI targets | mixed + user-spec residual |
 
 ## current recommendation
 
 - comparison debt より adoption debt を優先する。
-- `specs/examples/458...465` は integrator / compare floor として保持するが、current line の principal anchor は `466...469` に移った。
-- theorem-prover experimental binding preflight は close 済みであり、その後の reserve strengthening / practical lines も close 済みである。
-- principal theory spine / proof roadmap package、auditable-authority-witness strengthening actualization、delegated-rng-service practical actualization、model-check second-line concretization、theorem discharge actual-format probe、model-check property/tool-seam probe も close 済みである。
-- corrected runnable version floor は mapping 済み family では already reached であり、`M1/M2/M3`、order-handoff surface/artifact threshold、theorem/model-check/order-handoff/shared-space actual adoption、theorem result-object preview actualization、theorem result-object route actual adoption、theorem final public-contract reopen threshold、theorem Lean-first non-production stub pilot actualization、theorem review-unit to Lean-stub repo-local artifact-conformance bridge、theorem Lean-stub representative trace-alignment bridge、order-handoff serial-scope reserve surface、witness/provider emitted-contract representative trace-alignment bridge、theorem actual Lean execution availability probe、theorem public-seam compression、order-handoff / witness-provider final public-seam compression、theorem toolchain probe/reopen manifest、model-check public-seam compression、theorem actual Lean execution narrow probe、theorem actual Lean execution representative prototype widening、theorem proof-object schema/prover-brand coupled-later gate、model-check public-checker preview actualization、model-check tool-brand/verifier-handoff coupled-later gate、theorem result-object / payload public-contract coupled-later gate、model-check public-checker artifact / migration coupled-later gate、model-check checker-artifact route actual adoption、model-check final public-contract reopen threshold、witness/provider public-contract / emitted-contract coupled-later gate、witness/provider public-schema coupled-later gate、order-handoff source-wording / emitted-artifact coupled-later gate は close 済み、next active line は actual Lean execution helper/CLI hardening と broader coverage、および later mixed gate に置く。
+- `specs/examples/458...465` は integrator / compare floor として保持するが、current line の principal anchor は `466...469`、`475`、`520` に移った。
+- representative theorem quartet actual Lean execution reached は current queue zero を意味しない。
+- current self-driven queue は actual Lean execution hardening だけではなく、strong typing / IFC first-fragment、Lean formal skeleton、helper/CLI hardening、near-end closeout sync を含む。
 - authoritative-room default profile と append-friendly contrast room を shared-space current working subset に置く。
-- `auditable_authority_witness` と `delegated_rng_service` は close 済みの strengthening / practical actualization に移し、final public provider receipt / witness schema は mixed gate に残す。
+- `auditable_authority_witness` と `delegated_rng_service` は close 済み strengthening / practical actualization に移し、final public provider receipt / witness schema は mixed gate に残す。
 - final parser grammar、final public API、final public verifier contract、installed binary、exhaustive catalog は near-term line に入れない。

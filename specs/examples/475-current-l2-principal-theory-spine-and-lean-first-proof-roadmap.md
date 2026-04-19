@@ -284,9 +284,23 @@ current package は次で止める。
 
 current package を close した後の queue は引き続き nonzero である。
 
-next self-driven line は、
+follow-up chain は、現在では少なくとも次まで進んでいる。
 
-1. `delegated_rng_service`
-2. model-check second-line concretization
+1. reserve strengthening / practical actualization
+   - `specs/examples/476`
+   - `specs/examples/477`
+2. model-check second-line concretization と theorem/model-check/order-handoff mixed-gate actualization
+   - `specs/examples/478...507`
+3. theorem actual Lean execution representative prototype widening
+   - `specs/examples/519`
+4. final-layer closeout defaults / reopened self-driven queue
+   - `specs/examples/520`
+
+したがって current remaining self-driven line は、
+
+1. layered strong typing / IFC first-fragment
+2. Lean formal skeleton / proof obligations
+3. helper / CLI hardening and broader coverage
+4. near-end closeout sync
 
 に残すのが自然である。
