@@ -1,18 +1,15 @@
 #[allow(dead_code)]
 #[path = "support/current_l2_stage3_predicate_fragment_spike_support.rs"]
 mod current_l2_stage3_predicate_fragment_spike_support;
-#[allow(dead_code)]
-#[path = "support/current_l2_stage3_request_clause_suite_spike_support.rs"]
-mod current_l2_stage3_request_clause_suite_spike_support;
 
-use mir_ast::current_l2::parse_stage3_minimal_predicate_fragment_text;
+use mir_ast::current_l2::{
+    Stage3RequestClauseSuite, parse_stage3_minimal_predicate_fragment_text,
+    parse_stage3_request_clause_suite_text,
+};
 
 use current_l2_stage3_predicate_fragment_spike_support::{
     Stage3RequestContractSubset, load_fixture_request_clause_fragment,
     load_fixture_request_contract_subset,
-};
-use current_l2_stage3_request_clause_suite_spike_support::{
-    Stage3RequestClauseSuite, extract_stage3_request_clause_suite,
 };
 
 const SINGLE_LINE_REQUIRE_ENSURE_INPUT: &str = r#"
@@ -91,7 +88,7 @@ fn parse_suite_contract_subset(
 
 #[test]
 fn stage3_request_clause_suite_spike_extracts_single_line_require_and_ensure_slots() {
-    let suite = extract_stage3_request_clause_suite(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
+    let suite = parse_stage3_request_clause_suite_text(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
         .expect("suite spike should extract single-line require/ensure slots");
 
     assert_eq!(
@@ -105,7 +102,7 @@ fn stage3_request_clause_suite_spike_extracts_single_line_require_and_ensure_slo
 
 #[test]
 fn stage3_request_clause_suite_spike_matches_fixture_fragments_for_mixed_suite() {
-    let suite = extract_stage3_request_clause_suite(MULTILINE_REQUIRE_SINGLE_ENSURE_INPUT)
+    let suite = parse_stage3_request_clause_suite_text(MULTILINE_REQUIRE_SINGLE_ENSURE_INPUT)
         .expect("suite spike should extract mixed multiline/single-line clause slots");
 
     let require_actual = parse_stage3_minimal_predicate_fragment_text(
@@ -136,7 +133,7 @@ fn stage3_request_clause_suite_spike_matches_fixture_fragments_for_mixed_suite()
 
 #[test]
 fn stage3_request_clause_suite_spike_allows_ensure_only_suite() {
-    let suite = extract_stage3_request_clause_suite(ENSURE_ONLY_INPUT)
+    let suite = parse_stage3_request_clause_suite_text(ENSURE_ONLY_INPUT)
         .expect("suite spike should allow ensure-only suite");
 
     let ensure_actual = parse_stage3_minimal_predicate_fragment_text(
@@ -160,7 +157,7 @@ fn stage3_request_clause_suite_spike_allows_ensure_only_suite() {
 
 #[test]
 fn stage3_request_clause_suite_spike_rejects_require_after_ensure() {
-    let error = extract_stage3_request_clause_suite(ENSURE_BEFORE_REQUIRE_INPUT)
+    let error = parse_stage3_request_clause_suite_text(ENSURE_BEFORE_REQUIRE_INPUT)
         .expect_err("suite spike should reject require appearing after ensure");
 
     assert!(
@@ -171,7 +168,7 @@ fn stage3_request_clause_suite_spike_rejects_require_after_ensure() {
 
 #[test]
 fn stage3_request_clause_suite_spike_rejects_duplicate_require_clause() {
-    let error = extract_stage3_request_clause_suite(DUPLICATE_REQUIRE_INPUT)
+    let error = parse_stage3_request_clause_suite_text(DUPLICATE_REQUIRE_INPUT)
         .expect_err("suite spike should reject duplicate require clause");
 
     assert!(
@@ -182,7 +179,7 @@ fn stage3_request_clause_suite_spike_rejects_duplicate_require_clause() {
 
 #[test]
 fn stage3_request_clause_suite_spike_rejects_blank_line_between_clauses() {
-    let error = extract_stage3_request_clause_suite(BLANK_LINE_BETWEEN_CLAUSES_INPUT)
+    let error = parse_stage3_request_clause_suite_text(BLANK_LINE_BETWEEN_CLAUSES_INPUT)
         .expect_err("suite spike should reject blank line between clauses");
 
     assert!(
@@ -193,7 +190,7 @@ fn stage3_request_clause_suite_spike_rejects_blank_line_between_clauses() {
 
 #[test]
 fn stage3_request_clause_suite_spike_rejects_duplicate_ensure_clause() {
-    let error = extract_stage3_request_clause_suite(DUPLICATE_ENSURE_INPUT)
+    let error = parse_stage3_request_clause_suite_text(DUPLICATE_ENSURE_INPUT)
         .expect_err("suite spike should reject duplicate ensure clause");
 
     assert!(
@@ -204,7 +201,7 @@ fn stage3_request_clause_suite_spike_rejects_duplicate_ensure_clause() {
 
 #[test]
 fn stage3_request_clause_suite_spike_rejects_unsupported_direct_child_line() {
-    let error = extract_stage3_request_clause_suite(UNSUPPORTED_DIRECT_CHILD_INPUT)
+    let error = parse_stage3_request_clause_suite_text(UNSUPPORTED_DIRECT_CHILD_INPUT)
         .expect_err("suite spike should reject unsupported direct child line");
 
     assert!(
@@ -219,7 +216,7 @@ fn stage3_request_clause_suite_spike_rejects_unsupported_direct_child_line() {
 
 #[test]
 fn stage3_request_clause_suite_spike_rejects_missing_multiline_ensure_block() {
-    let error = extract_stage3_request_clause_suite(MISSING_MULTILINE_ENSURE_BLOCK_INPUT)
+    let error = parse_stage3_request_clause_suite_text(MISSING_MULTILINE_ENSURE_BLOCK_INPUT)
         .expect_err("suite spike should reject missing multiline ensure block");
 
     assert!(
@@ -230,7 +227,7 @@ fn stage3_request_clause_suite_spike_rejects_missing_multiline_ensure_block() {
 
 #[test]
 fn stage3_request_clause_suite_spike_matches_fixture_contract_subset_for_perform_on() {
-    let suite = extract_stage3_request_clause_suite(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
+    let suite = parse_stage3_request_clause_suite_text(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
         .expect("suite spike should extract single-line require/ensure slots");
     let actual = parse_suite_contract_subset(&suite)
         .expect("suite spike should parse extracted slots into a contract subset");
@@ -242,7 +239,7 @@ fn stage3_request_clause_suite_spike_matches_fixture_contract_subset_for_perform
 
 #[test]
 fn stage3_request_clause_suite_spike_matches_fixture_contract_subset_for_perform_via() {
-    let suite = extract_stage3_request_clause_suite(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
+    let suite = parse_stage3_request_clause_suite_text(SINGLE_LINE_REQUIRE_ENSURE_INPUT)
         .expect("suite spike should extract single-line require/ensure slots");
     let actual = parse_suite_contract_subset(&suite)
         .expect("suite spike should parse extracted slots into a contract subset");

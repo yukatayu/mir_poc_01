@@ -35,6 +35,10 @@ current L2 の surface notation は **companion notation** である。
 - single-line: `require pred` / `ensure pred`
 - multi-line のときだけ `require:` / `ensure:` block
 - predicate block 内では implicit conjunction を入れない
+- current parser-side crate-local non-production carrier は
+  `Stage3RequestClauseSuite { require_fragment_text, ensure_fragment_text }`
+  の fixed two-slot bridge に留める
+- perform head final public parser API と span-rich diagnostics は still later に残す
 
 ### predicate sublanguage
 

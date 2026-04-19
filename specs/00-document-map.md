@@ -246,6 +246,9 @@
 - `specs/examples/561-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-threshold-helper-mirror.md`
   - Package 88 の closeout として repo-root `samples/current-l2/` flat `.txt` layer の scope / directory / naming / non-goal minimum を runtime-local manifest に narrow に mirror し、`scope_kind + source_cluster_refs + directory_ref + file_layout_ref + file_extension_policy + sample_id_policy + non_goal_refs` の current cut を保つ補助文書。
   - representative / fixture / source mapping matrix widening、actual sample content widening、parser-to-Program lowering widening、bless / regression policy publicization、request clause suite publicization、final public parser/checker/runtime surface を固定するものではなく、Package 88 close と Package 89 request-clause-suite publicization comparison next line を読むための anchor である。
+- `specs/examples/562-current-l2-phase6-request-clause-suite-publicization-threshold-helper-mirror.md`
+  - Package 89 の closeout として request-local fixed two-slot suite bridge を crate-local non-production parser carrier に narrow に mirror し、`carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` と `Stage3RequestClauseSuite { require_fragment_text, ensure_fragment_text }` の current cut を保つ補助文書。
+  - perform head final public parser API、span-rich diagnostics、final grammar、final public parser/checker/runtime surface を固定するものではなく、Package 89 close と Package 90 perform-head-final-public-parser-API comparison next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
@@ -748,6 +751,8 @@
   - current Phase 5 / Package 87 closeout として、shared single attachment frame first package の multiline extraction bridge minimum を `CurrentL2SharedSingleAttachmentFrameManifest` と stage3 multiline attachment anchor tests に actualize し、crate-local parser follow-up bundle を narrow に mirror する補助文書。
 - `specs/examples/561-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-threshold-helper-mirror.md`
   - current Phase 5 / Package 88 closeout として、fixed-subset source-sample corpus の scope / directory / naming / non-goal minimum を `CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest` に actualize し、repo-root source corpus policy bundle を narrow に mirror する補助文書。
+- `specs/examples/562-current-l2-phase6-request-clause-suite-publicization-threshold-helper-mirror.md`
+  - current Phase 5 / Package 89 closeout として、request-local fixed two-slot suite bridge を `CurrentL2RequestClauseSuiteManifest`、`Stage3RequestClauseSuite`、`parse_stage3_request_clause_suite_text()` に actualize し、crate-local parser follow-up bundle を narrow に mirror する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

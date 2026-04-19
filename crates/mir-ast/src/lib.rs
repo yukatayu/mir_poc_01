@@ -20,13 +20,16 @@ The next parser-side follow-up package is fixed as:
   - option-local `admit:` multiline extraction
   - request-local `require:` / `ensure:` multiline extraction
   - existing predicate fragment parser reuse
+- stage 3 request clause fixed two-slot suite
+  - `require_fragment_text` / `ensure_fragment_text`
+  - perform-owner structural floor
+  - predicate fragment parser reuse
 
 These stage 3 parsers are non-production reopen-package carriers, not a final
 public parser API.
 
-Stage 3 request clause suites, perform head publicization, span-rich
-diagnostics, shared single attachment framing, and final grammar remain later
-work.
+Perform head publicization, span-rich diagnostics, and final grammar remain
+later work.
 "#]
 
 pub mod current_l2;

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 03:34 JST
+最終更新: 2026-04-20 03:52 JST
 
 ## この文書について
 
@@ -29,7 +29,7 @@
 - ここでいう principal target は checker-adjacent first layer を指し、
   stronger typed surface を early に source principal へ昇格する判断とは切り分けて読む。
 - したがって、remaining work の主眼は次に移っている。
-  - request clause suite を multiline frame cut の上にどこまで publicize するかを比較する phase6-request-clause-suite publicization comparison
+  - `perform` head をどこまで parser-side non-production carrier に上げるかを比較する phase6-perform-head-final-public-parser-API comparison
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -59,7 +59,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `89` phase6-request-clause-suite publicization comparison | Package 88 close 後の次段として、request-local `require` / `ensure` suite を multiline frame cut の上にどこまで publicize してよいか | `M` | `Macro 6/7` | shared single attachment frame と source-corpus scope/layout minimum を保ったまま、request clause suite compare floor を narrow に切り、perform head / span-rich diagnostics / final grammar は retained-later に残す | request clause suite の current first compare floor を source-backed に置き、perform head / diagnostics / final grammar へ premature に広げずに次 package を閉じられる |
+| `90` phase6-perform-head-final-public-parser-API comparison | Package 89 close 後の次段として、request clause suite bridge を保ったまま `perform` head をどこまで parser-side non-production carrier に上げるか | `M` | `Macro 6/7` | request clause suite publicization minimum を entry criteria にし、perform owner / op / target-or-via shape の current first compare floor だけを選び、span-rich diagnostics / final grammar は retained-later に残す | `perform` head line の current first compare floor を source-backed に置き、request clause suite・diagnostics・final grammar と混線させずに次 package を閉じられる |
 
 ## recently closed package note
 
@@ -543,9 +543,18 @@
 ### Package 89 — phase6-request-clause-suite publicization comparison
 
 - current reading:
-  next active line。shared single attachment frame と source-corpus scope/layout minimum を保ったまま、request-local `require` / `ensure` suite をどこまで parser-side compare floor に上げるかを narrow に比較する。
+  close 済み。shared single attachment frame と source-corpus scope/layout minimum を保ったまま、request-local `require` / `ensure` fixed two-slot suite bridge を `CurrentL2RequestClauseSuiteManifest`、`Stage3RequestClauseSuite`、`parse_stage3_request_clause_suite_text()` に actualize し、crate-local non-production parser carrier として inspectable にした。
 - stop line:
   perform head final public parser API
+  span-rich diagnostics
+  final grammar
+  final public parser / checker / runtime surface
+
+### Package 90 — phase6-perform-head-final-public-parser-API comparison
+
+- current reading:
+  next active line。request clause suite bridge を current entry criteria に保ったまま、`perform` head の owner / op / target-or-via shape をどこまで parser-side non-production carrier に上げるかを narrow に比較する。
+- stop line:
   span-rich diagnostics
   final grammar
   final public parser / checker / runtime surface
@@ -581,4 +590,4 @@
 
 ## next reopen order
 
-1. Package 89 で phase6-request-clause-suite publicization comparison を進める。
+1. Package 90 で phase6-perform-head-final-public-parser-API comparison を進める。

@@ -696,7 +696,14 @@ actual-adoption floor では、
   - `CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest`
   - `current_l2_fixed_subset_source_sample_corpus_scope_and_file_layout_manifest()`
   - `scope_kind + source_cluster_refs + directory_ref + file_layout_ref + file_extension_policy + sample_id_policy + non_goal_refs` source-corpus minimum mirror
-  - Package 88 fixed-subset-source-sample-corpus-scope-and-file-layout ratchet close、Package 89 phase6 request-clause-suite publicization comparison next
+  - Package 88 fixed-subset-source-sample-corpus-scope-and-file-layout ratchet close、Package 89 phase6 request-clause-suite publicization line を受ける前段 anchor
+- phase6 request-clause-suite publicization threshold helper mirror:
+  `specs/examples/562`
+  - `CurrentL2RequestClauseSuiteManifest`
+  - `current_l2_request_clause_suite_manifest()`
+  - `Stage3RequestClauseSuite`
+  - `parse_stage3_request_clause_suite_text()`
+  - Package 89 phase6 request-clause-suite publicization actualization close、Package 90 phase6 perform-head-final-public-parser-API comparison next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

@@ -124,6 +124,49 @@ pub fn current_l2_shared_single_attachment_frame_manifest()
     &CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_MANIFEST
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2RequestClauseSuiteManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_REQUEST_CLAUSE_SUITE_ACCEPTED_SURFACE_REFS: &[&str] = &[
+    "stage3_request_clause_suite_surface",
+    "stage3_request_clause_multiline_extraction_surface",
+    "stage3_minimal_predicate_fragment_surface",
+];
+
+const CURRENT_L2_REQUEST_CLAUSE_SUITE_CODE_ANCHOR_REFS: &[&str] = &[
+    "mir_ast_current_l2_module",
+    "stage3_request_clause_suite_tests",
+];
+
+const CURRENT_L2_REQUEST_CLAUSE_SUITE_RETAINED_LATER_REFS: &[&str] = &[
+    "perform_head_final_public_parser_api",
+    "span_rich_diagnostics",
+    "final_grammar",
+];
+
+pub const CURRENT_L2_REQUEST_CLAUSE_SUITE_MANIFEST: CurrentL2RequestClauseSuiteManifest =
+    CurrentL2RequestClauseSuiteManifest {
+        carrier_kind: "current_l2_nonproduction_request_clause_suite_carrier",
+        accepted_surface_refs: CURRENT_L2_REQUEST_CLAUSE_SUITE_ACCEPTED_SURFACE_REFS,
+        code_anchor_refs: CURRENT_L2_REQUEST_CLAUSE_SUITE_CODE_ANCHOR_REFS,
+        retained_later_refs: CURRENT_L2_REQUEST_CLAUSE_SUITE_RETAINED_LATER_REFS,
+    };
+
+pub fn current_l2_request_clause_suite_manifest() -> &'static CurrentL2RequestClauseSuiteManifest {
+    &CURRENT_L2_REQUEST_CLAUSE_SUITE_MANIFEST
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Stage3RequestClauseSuite {
+    pub require_fragment_text: Option<String>,
+    pub ensure_fragment_text: Option<String>,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Stage1DeclGuardSlot {
     pub surface_text: String,
@@ -664,6 +707,129 @@ pub fn extract_stage3_request_clause_multiline_fragment_text(
     extract_stage3_multiline_clause_from_head(&lines, head_index, clause_name)
 }
 
+/// Non-production stage 3 helper for fixed two-slot request clause suites.
+pub fn parse_stage3_request_clause_suite_text(
+    source: &str,
+) -> Result<Stage3RequestClauseSuite, String> {
+    let lines = collect_stage3_source_lines(source);
+    let head_index = find_first_stage3_head(&lines, "perform ")
+        .ok_or_else(|| "missing perform request head".to_string())?;
+    let head_indent = lines[head_index].indent;
+    let child_indent = lines.iter().skip(head_index + 1).find_map(|line| {
+        if line.is_blank || line.indent <= head_indent {
+            None
+        } else {
+            Some(line.indent)
+        }
+    });
+
+    let Some(child_indent) = child_indent else {
+        return Ok(Stage3RequestClauseSuite {
+            require_fragment_text: None,
+            ensure_fragment_text: None,
+        });
+    };
+
+    let mut suite = Stage3RequestClauseSuite {
+        require_fragment_text: None,
+        ensure_fragment_text: None,
+    };
+    let mut index = head_index + 1;
+    let mut saw_clause = false;
+    let mut pending_blank_between_clauses = false;
+
+    while index < lines.len() {
+        let line = &lines[index];
+
+        if line.is_blank {
+            if saw_clause {
+                pending_blank_between_clauses = true;
+            }
+            index += 1;
+            continue;
+        }
+
+        if line.indent <= head_indent {
+            break;
+        }
+
+        if line.indent > child_indent {
+            return Err(
+                "unexpected nested continuation outside request-local clause block".to_string(),
+            );
+        }
+
+        if line.indent < child_indent {
+            break;
+        }
+
+        if pending_blank_between_clauses {
+            return Err("blank line is not allowed between request-local clauses".to_string());
+        }
+
+        if line.text == "require:" {
+            if suite.require_fragment_text.is_some() {
+                return Err("duplicate `require` clause is not allowed".to_string());
+            }
+            if suite.ensure_fragment_text.is_some() {
+                return Err("require clause cannot appear after ensure clause".to_string());
+            }
+            let (fragment, next_index) =
+                extract_stage3_suite_multiline_block(&lines, index, "require:")?;
+            suite.require_fragment_text = Some(fragment);
+            saw_clause = true;
+            index = next_index;
+            continue;
+        }
+
+        if let Some(fragment) =
+            extract_stage3_single_line_request_clause_fragment(&line.text, "require")?
+        {
+            if suite.require_fragment_text.is_some() {
+                return Err("duplicate `require` clause is not allowed".to_string());
+            }
+            if suite.ensure_fragment_text.is_some() {
+                return Err("require clause cannot appear after ensure clause".to_string());
+            }
+            suite.require_fragment_text = Some(fragment);
+            saw_clause = true;
+            index += 1;
+            continue;
+        }
+
+        if line.text == "ensure:" {
+            if suite.ensure_fragment_text.is_some() {
+                return Err("duplicate `ensure` clause is not allowed".to_string());
+            }
+            let (fragment, next_index) =
+                extract_stage3_suite_multiline_block(&lines, index, "ensure:")?;
+            suite.ensure_fragment_text = Some(fragment);
+            saw_clause = true;
+            index = next_index;
+            continue;
+        }
+
+        if let Some(fragment) =
+            extract_stage3_single_line_request_clause_fragment(&line.text, "ensure")?
+        {
+            if suite.ensure_fragment_text.is_some() {
+                return Err("duplicate `ensure` clause is not allowed".to_string());
+            }
+            suite.ensure_fragment_text = Some(fragment);
+            saw_clause = true;
+            index += 1;
+            continue;
+        }
+
+        return Err(format!(
+            "unsupported request-local clause line inside fixed two-slot suite: `{}`",
+            line.text
+        ));
+    }
+
+    Ok(suite)
+}
+
 fn collect_stage3_source_lines(source: &str) -> Vec<Stage3SourceLine> {
     source
         .lines()
@@ -682,6 +848,23 @@ fn find_first_stage3_head(lines: &[Stage3SourceLine], prefix: &str) -> Option<us
     lines
         .iter()
         .position(|line| !line.is_blank && line.text.starts_with(prefix))
+}
+
+fn extract_stage3_single_line_request_clause_fragment(
+    text: &str,
+    clause_name: &str,
+) -> Result<Option<String>, String> {
+    let prefix = format!("{clause_name} ");
+    if !text.starts_with(&prefix) {
+        return Ok(None);
+    }
+
+    let fragment = text[prefix.len()..].trim();
+    if fragment.is_empty() {
+        return Err(format!("missing predicate fragment after `{clause_name}`"));
+    }
+
+    Ok(Some(fragment.to_string()))
 }
 
 fn extract_stage3_multiline_clause_from_head(
@@ -779,6 +962,48 @@ fn extract_stage3_multiline_block(
         .map(|line| line.dedented_text(min_indent))
         .collect::<Vec<_>>()
         .join("\n"))
+}
+
+fn extract_stage3_suite_multiline_block(
+    lines: &[Stage3SourceLine],
+    header_index: usize,
+    header: &str,
+) -> Result<(String, usize), String> {
+    let header_indent = lines[header_index].indent;
+    let mut block_lines = Vec::new();
+    let mut index = header_index + 1;
+    let blank_line_error =
+        format!("blank line is not allowed inside multiline predicate block after {header}");
+
+    while index < lines.len() {
+        let line = &lines[index];
+        if line.is_blank {
+            return Err(blank_line_error);
+        }
+        if line.indent <= header_indent {
+            break;
+        }
+        block_lines.push(line);
+        index += 1;
+    }
+
+    if block_lines.is_empty() {
+        return Err(format!("missing multiline predicate block after {header}"));
+    }
+
+    let min_indent = block_lines
+        .iter()
+        .map(|line| line.indent)
+        .min()
+        .expect("block_lines is not empty");
+
+    let fragment = block_lines
+        .iter()
+        .map(|line| line.dedented_text(min_indent))
+        .collect::<Vec<_>>()
+        .join("\n");
+
+    Ok((fragment, index))
 }
 
 impl Stage3SourceLine {
