@@ -117,6 +117,15 @@ pub struct CurrentL2CompileReadyVerificationAndFormalHookManifest {
     pub retained_later_refs: &'static [&'static str],
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2Phase6NextReopenSequencingManifest {
+    pub sequencing_kind_ref: &'static str,
+    pub fixed_entry_criteria_refs: &'static [&'static str],
+    pub selected_first_reopen_ref: &'static str,
+    pub deferred_reopen_refs: &'static [&'static str],
+    pub guard_refs: &'static [&'static str],
+}
+
 const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_SEMANTIC_ENTRY_REFS: &[&str] = &[
     "static_gate_program_detailed",
     "direct_style_evaluator_from_program",
@@ -218,6 +227,37 @@ pub const CURRENT_L2_COMPILE_READY_VERIFICATION_AND_FORMAL_HOOK_MANIFEST:
 pub fn current_l2_compile_ready_verification_and_formal_hook_manifest()
 -> &'static CurrentL2CompileReadyVerificationAndFormalHookManifest {
     &CURRENT_L2_COMPILE_READY_VERIFICATION_AND_FORMAL_HOOK_MANIFEST
+}
+
+const CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_FIXED_ENTRY_CRITERIA_REFS: &[&str] = &[
+    "phase6_parser_first_tranche",
+    "phase6_checker_runtime_first_tranche",
+    "phase6_compile_ready_formal_hook",
+];
+
+const CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_DEFERRED_REOPEN_REFS: &[&str] = &[
+    "theorem_first_concrete_tool_binding_route",
+    "concrete_model_check_tool_binding",
+];
+
+const CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_GUARD_REFS: &[&str] = &[
+    "keep_tool_neutral_formal_hook_as_entry_criteria",
+    "avoid_request_head_clause_suite_richer_diagnostics_bulk_widen",
+    "keep_model_check_line_reserve_only",
+];
+
+pub const CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_MANIFEST:
+    CurrentL2Phase6NextReopenSequencingManifest = CurrentL2Phase6NextReopenSequencingManifest {
+    sequencing_kind_ref: "phase6_checkpoint_postclose_next_reopen",
+    fixed_entry_criteria_refs: CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_FIXED_ENTRY_CRITERIA_REFS,
+    selected_first_reopen_ref: "phase6_parser_second_tranche_attached_slot_and_predicate_fragment_route",
+    deferred_reopen_refs: CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_DEFERRED_REOPEN_REFS,
+    guard_refs: CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_GUARD_REFS,
+};
+
+pub fn current_l2_phase6_next_reopen_sequencing_manifest()
+-> &'static CurrentL2Phase6NextReopenSequencingManifest {
+    &CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_MANIFEST
 }
 
 pub fn current_l2_default_source_sample_directory() -> PathBuf {

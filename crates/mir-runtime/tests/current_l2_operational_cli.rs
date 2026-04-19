@@ -462,6 +462,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -604,6 +608,27 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains("final_public_surface"));
     assert!(
         output.contains("next_comparison_target_ref: phase6_next_reopen_sequencing_comparison")
+    );
+    assert!(output.contains("actual_phase6_next_reopen_sequencing_threshold:"));
+    assert!(output.contains("sequencing_kind_ref: phase6_checkpoint_postclose_next_reopen"));
+    assert!(output.contains("fixed_entry_criteria_refs:"));
+    assert!(output.contains("phase6_parser_first_tranche"));
+    assert!(output.contains("phase6_checker_runtime_first_tranche"));
+    assert!(output.contains("phase6_compile_ready_formal_hook"));
+    assert!(output.contains(
+        "selected_first_reopen_ref: phase6_parser_second_tranche_attached_slot_and_predicate_fragment_route"
+    ));
+    assert!(output.contains("deferred_reopen_refs:"));
+    assert!(output.contains("theorem_first_concrete_tool_binding_route"));
+    assert!(output.contains("concrete_model_check_tool_binding"));
+    assert!(output.contains("minimum_guard_refs:"));
+    assert!(output.contains("keep_tool_neutral_formal_hook_as_entry_criteria"));
+    assert!(output.contains("avoid_request_head_clause_suite_richer_diagnostics_bulk_widen"));
+    assert!(output.contains("keep_model_check_line_reserve_only"));
+    assert!(
+        output.contains(
+            "next_comparison_target_ref: phase6_parser_second_tranche_attached_slot_and_predicate_fragment_first_package_comparison"
+        )
     );
 }
 
@@ -1077,6 +1102,54 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["next_comparison_target_ref"],
         "phase6_next_reopen_sequencing_comparison"
     );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["sequencing_kind_ref"],
+        "phase6_checkpoint_postclose_next_reopen"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["fixed_entry_criteria_refs"][0],
+        "phase6_parser_first_tranche"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["fixed_entry_criteria_refs"][1],
+        "phase6_checker_runtime_first_tranche"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["fixed_entry_criteria_refs"][2],
+        "phase6_compile_ready_formal_hook"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["selected_first_reopen_ref"],
+        "phase6_parser_second_tranche_attached_slot_and_predicate_fragment_route"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["deferred_reopen_refs"][0],
+        "theorem_first_concrete_tool_binding_route"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["deferred_reopen_refs"][1],
+        "concrete_model_check_tool_binding"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["minimum_guard_refs"][0],
+        "keep_tool_neutral_formal_hook_as_entry_criteria"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["minimum_guard_refs"][1],
+        "avoid_request_head_clause_suite_richer_diagnostics_bulk_widen"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["minimum_guard_refs"][2],
+        "keep_model_check_line_reserve_only"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["next_comparison_target_ref"],
+        "phase6_parser_second_tranche_attached_slot_and_predicate_fragment_first_package_comparison"
+    );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]
             .as_str()
@@ -1163,6 +1236,14 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
     assert_eq!(
         value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["next_comparison_target_ref"],
         "phase6_next_reopen_sequencing_comparison"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_next_reopen_sequencing_threshold"]["next_comparison_target_ref"],
+        "phase6_parser_second_tranche_attached_slot_and_predicate_fragment_first_package_comparison"
     );
     assert_eq!(
         value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"]

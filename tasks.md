@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 01:08 JST
+最終更新: 2026-04-20 01:26 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - parser second tranche first / theorem-first reserve / model-check second reserve の sequencing minimum をどこまで actualize するかの phase6-next-reopen-sequencing ratchet
+  - attached-slot / predicate fragment first package を `mir_ast::current_l2` にどこまで actualize するかの phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `83` phase6-next-reopen-sequencing ratchet | phase6 compile-ready checkpoint close の次段として parser second tranche first / theorem-first reserve / model-check second reserve の sequencing minimum をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | tool-neutral formal hook を entry criteria に維持したまま、parser second tranche attached-slot / predicate fragment first を current recommendation に上げ、theorem/model-check concrete tool binding は reserve path に残す | sequencing_kind / fixed_entry_criteria_refs / selected_first_reopen_ref / deferred_reopen_refs / guard_refs を narrow に actualize しつつ、parser/public widen と concrete tool binding を later gate に残せる |
+| `84` phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet | phase6 next-reopen sequencing close の次段として attached-slot / predicate fragment first package を `mir_ast::current_l2` にどこまで narrow に actualize するか | `M` | `Macro 6/7` | stage3 declaration-side admit attached slot と shared isolated predicate fragment だけを first package に取り、attachment frame / request suite / perform head / formal binding は later に残す | carrier_kind / accepted_surface_refs / code_anchor_refs / retained_later_refs を narrow に actualize しつつ、stage3 bulk widen と concrete tool binding を later gate に残せる |
 
 ## recently closed package note
 
@@ -443,17 +443,33 @@
 ### Package 83 — phase6-next-reopen-sequencing ratchet
 
 - current reading:
-  next active line。`actual_phase6_compile_ready_verification_and_formal_hook_threshold` の次段として、parser second tranche first / theorem-first reserve / model-check second reserve の sequencing minimum を helper-local threshold に留めた phase6 next-reopen line まで narrow に ratchet する。
+  close 済み。`actual_phase6_compile_ready_verification_and_formal_hook_threshold` の次段として、parser second tranche first / theorem-first reserve / model-check second reserve の sequencing minimum を helper-local threshold に留めた phase6 next-reopen line を actualize 済みと読む。
 - evidence anchor:
   `specs/examples/305`
   `specs/examples/306`
-  `specs/examples/554`
+  `specs/examples/555`
 - stop line:
   request_clause_suite_bulk_widen
   perform_head_final_public_api
   concrete_theorem_tool_binding
   concrete_model_check_tool_binding
   final_public_surface
+
+### Package 84 — phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet
+
+- current reading:
+  next active line。`actual_phase6_next_reopen_sequencing_threshold` の次段として、stage3 declaration-side admit attached slot と shared isolated predicate fragment を `mir_ast::current_l2` へ narrow に actualize する first package を ratchet する。
+- evidence anchor:
+  `specs/examples/307`
+  `specs/examples/308`
+  `specs/examples/555`
+- stop line:
+  shared_single_attachment_frame
+  request_clause_suite_publicization
+  perform_head_final_public_api
+  span_rich_diagnostics
+  final_grammar
+  theorem_model_check_concrete_binding
 
 ## research-discovery items
 
@@ -486,4 +502,4 @@
 
 ## next reopen order
 
-1. Package 83 で phase6-next-reopen-sequencing ratchet を進める。
+1. Package 84 で phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet を進める。

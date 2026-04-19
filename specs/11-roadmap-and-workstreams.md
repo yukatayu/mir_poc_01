@@ -653,7 +653,13 @@ actual-adoption floor では、
   - `p07 / p08 / p09` source-side shared-space trio
   - `actual_phase6_compile_ready_verification_and_formal_hook_threshold`
   - `verification_gate_refs + smoke_gate_refs + formal_hook_shape + source_artifact_refs + validation_refs + retained_later_refs` compile-ready checkpoint minimum mirror
-  - Package 82 phase6-compile-ready-verification-and-formal-hook ratchet close、Package 83 phase6-next-reopen-sequencing ratchet next
+  - Package 82 phase6-compile-ready-verification-and-formal-hook ratchet close、Package 83 phase6-next-reopen-sequencing ratchet close
+- phase6 next-reopen sequencing threshold helper mirror:
+  `specs/examples/555`
+  - `p07 / p08 / p09` source-side shared-space trio
+  - `actual_phase6_next_reopen_sequencing_threshold`
+  - `sequencing_kind_ref + fixed_entry_criteria_refs + selected_first_reopen_ref + deferred_reopen_refs + minimum_guard_refs + kept_later_refs` sequencing minimum mirror
+  - Package 83 phase6-next-reopen-sequencing ratchet close、Package 84 phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
