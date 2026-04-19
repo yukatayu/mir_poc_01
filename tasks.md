@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 01:26 JST
+最終更新: 2026-04-20 01:49 JST
 
 ## この文書について
 
@@ -21,8 +21,13 @@
   - `CurrentL2IfcSecretExamples.lean`
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
+- Problem 1 current first line は、
+  full dependent core を first public core に入れず、
+  finite decidable index fragment、`Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` conceptual spine、
+  IFC / taint、capture / lifetime、simple cost を
+  first strong typing layer の principal target に置く読みへ同期済みである。
 - したがって、remaining work の主眼は次に移っている。
-  - attached-slot / predicate fragment first package を `mir_ast::current_l2` にどこまで actualize するかの phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet
+  - theorem-first reserve / model-check second reserve / parser-side mainline keep をどこまで narrow に actualize するかの phase6-reserve-formal-tool-binding-inventory ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +57,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `84` phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet | phase6 next-reopen sequencing close の次段として attached-slot / predicate fragment first package を `mir_ast::current_l2` にどこまで narrow に actualize するか | `M` | `Macro 6/7` | stage3 declaration-side admit attached slot と shared isolated predicate fragment だけを first package に取り、attachment frame / request suite / perform head / formal binding は later に残す | carrier_kind / accepted_surface_refs / code_anchor_refs / retained_later_refs を narrow に actualize しつつ、stage3 bulk widen と concrete tool binding を later gate に残せる |
+| `85` phase6-reserve-formal-tool-binding-inventory ratchet | phase6 parser second-tranche first package close の次段として theorem-first reserve / model-check second reserve / parser-side mainline keep をどこまで narrow に actualize するか | `M` | `Macro 6/7` | theorem-first を first reserve、model-check を second reserve に置き、tool-neutral formal hook を entry criteria に維持しつつ parser-side follow-up package を current mainline に残す | inventory_kind / fixed_entry_criteria_refs / first_reserve_ref / second_reserve_ref / guard_refs を narrow に actualize しつつ、concrete tool choice と parser-side follow-up widening を later gate に残せる |
 
 ## recently closed package note
 
@@ -77,6 +82,7 @@
   `specs/examples/522`
   `specs/examples/523`
   `specs/examples/524`
+  `specs/examples/557`
   `samples/lean/foundations/CurrentL2LabelModel.lean`
   `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`
   `samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt`
@@ -458,11 +464,11 @@
 ### Package 84 — phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet
 
 - current reading:
-  next active line。`actual_phase6_next_reopen_sequencing_threshold` の次段として、stage3 declaration-side admit attached slot と shared isolated predicate fragment を `mir_ast::current_l2` へ narrow に actualize する first package を ratchet する。
+  close 済み。`actual_phase6_next_reopen_sequencing_threshold` の次段として、stage3 declaration-side admit attached slot と shared isolated predicate fragment の first package minimum を `CurrentL2SecondTrancheManifest` と stage3 spike regression 群へ narrow に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/307`
   `specs/examples/308`
-  `specs/examples/555`
+  `specs/examples/556`
 - stop line:
   shared_single_attachment_frame
   request_clause_suite_publicization
@@ -471,11 +477,26 @@
   final_grammar
   theorem_model_check_concrete_binding
 
+### Package 85 — phase6-reserve-formal-tool-binding-inventory ratchet
+
+- current reading:
+  next active line。`CurrentL2SecondTrancheManifest` の次段として、theorem-first reserve / model-check second reserve / tool-neutral formal-hook keep / parser-side mainline keep を helper-local manifest と snapshot docs へ narrow に actualize する。
+- evidence anchor:
+  `specs/examples/309`
+  `specs/examples/310`
+  `specs/examples/556`
+- stop line:
+  concrete_theorem_tool_name
+  concrete_model_check_tool_name
+  actual_ci_artifact_retention_policy
+  parser_side_followup_package_selection
+  final_public_parser_checker_runtime_surface
+
 ## research-discovery items
 
 | item | 何に影響するか | current recommendation |
 |---|---|---|
-| stronger typed-surface actual adoption | typed source principal | checker-adjacent principal + structural marker family first を維持し、evidence pressure が出るまで experimental adoption を待つ |
+| stronger typed-surface actual adoption | typed source principal | full dependent core は first public core に入れず、finite decidable index fragment + IFC / taint + capture / lifetime + simple cost を principal target に維持し、evidence pressure が出るまで experimental adoption を待つ |
 | final modal foundation / final source marker | syntax / modality / proof spine | partial basis + stronger family keep を維持し、final adoption は mixed gate に残す |
 | authoritative-room `serial` sugar admissibility | order-handoff source-facing reserve surface | room-specific reserve に留め、principal surface には上げないまま helper-local evidence を集める |
 | formal skeleton artifact shape beyond first slice | proof plan / Rust-Lean alignment | public proof artifact contract へ上げず、mechanization-ready internal floor に留める |
@@ -488,7 +509,7 @@
 | first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract | model-check line | row-local property route first、checker-artifact route first、reopen-threshold helper mirror keep、public-seam compression keep を維持する |
 | final source-surface handoff wording / final emitted-artifact schema | order-handoff public surface | edge-row principal、stage-block secondary keep、thread/node same causal language keep、serial sugar reserve を維持する |
 | final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract | shared-space stronger public shape | claim/payload split first、route/schema route actual adoption、trace-alignment reserve を維持し、final public contract 群には上げない |
-| stronger typed-surface actual adoption | typed source principal | checker-adjacent principal + layered stack + IFC first-fragment docs を先に actualize する |
+| stronger typed-surface actual adoption | typed source principal | `Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` conceptual spine、finite decidable index fragment、IFC / taint、capture / lifetime、simple cost を先に actualize し、full dependent core と final public type syntax は still later に残す |
 | final modal foundation / final source marker | syntax / modality | partial basis + stronger family keep を維持する |
 | final parser grammar / final public parser-checker-runtime API | public surface | this line では凍らせない |
 
@@ -502,4 +523,4 @@
 
 ## next reopen order
 
-1. Package 84 で phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet を進める。
+1. Package 85 で phase6-reserve-formal-tool-binding-inventory ratchet を進める。

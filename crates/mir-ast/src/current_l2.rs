@@ -42,6 +42,47 @@ pub fn current_l2_first_tranche_manifest() -> &'static CurrentL2FirstTrancheMani
     &CURRENT_L2_FIRST_TRANCHE_MANIFEST
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2SecondTrancheManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_SECOND_TRANCHE_ACCEPTED_SURFACE_REFS: &[&str] = &[
+    "stage3_decl_admit_slot_surface",
+    "stage3_minimal_predicate_fragment_surface",
+];
+
+const CURRENT_L2_SECOND_TRANCHE_CODE_ANCHOR_REFS: &[&str] = &[
+    "mir_ast_current_l2_module",
+    "stage3_admit_slot_tests",
+    "stage3_predicate_fragment_tests",
+    "stage3_multiline_and_suite_tests_reusing_fragment_parser",
+];
+
+const CURRENT_L2_SECOND_TRANCHE_RETAINED_LATER_REFS: &[&str] = &[
+    "shared_single_attachment_frame",
+    "request_clause_suite_publicization",
+    "perform_head_final_public_api",
+    "span_rich_diagnostics",
+    "final_grammar",
+    "theorem_model_check_concrete_binding",
+];
+
+pub const CURRENT_L2_SECOND_TRANCHE_MANIFEST: CurrentL2SecondTrancheManifest =
+    CurrentL2SecondTrancheManifest {
+        carrier_kind: "current_l2_nonproduction_parser_second_tranche_carrier",
+        accepted_surface_refs: CURRENT_L2_SECOND_TRANCHE_ACCEPTED_SURFACE_REFS,
+        code_anchor_refs: CURRENT_L2_SECOND_TRANCHE_CODE_ANCHOR_REFS,
+        retained_later_refs: CURRENT_L2_SECOND_TRANCHE_RETAINED_LATER_REFS,
+    };
+
+pub fn current_l2_second_tranche_manifest() -> &'static CurrentL2SecondTrancheManifest {
+    &CURRENT_L2_SECOND_TRANCHE_MANIFEST
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Stage1DeclGuardSlot {
     pub surface_text: String,

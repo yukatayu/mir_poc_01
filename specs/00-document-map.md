@@ -229,6 +229,11 @@
 - `specs/examples/555-current-l2-phase6-next-reopen-sequencing-threshold-helper-mirror.md`
   - Package 83 の closeout として `p07 / p08 / p09` source-side shared-space trio の phase6 next-reopen sequencing threshold を `run-source-sample` helper summary に narrow に mirror し、`sequencing_kind_ref + fixed_entry_criteria_refs + selected_first_reopen_ref + deferred_reopen_refs + minimum_guard_refs + kept_later_refs` の sequencing minimum を helper-local operational summary で保つ補助文書。
   - parser second tranche first package の actual code widening、shared single attachment frame、request clause suite publicization、perform head final public parser API、concrete theorem/model-check tool binding、final public parser/checker/runtime surface を固定するものではなく、Package 83 close と Package 84 phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet next line を読むための anchor である。
+- `specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md`
+  - Package 84 の closeout として stage3 declaration-side admit attached slot と shared isolated predicate fragment の parser second-tranche threshold を crate-local manifest と stage3 spike regression 群へ narrow に mirror し、`carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` の second-tranche minimum を保つ補助文書。
+  - shared single attachment frame、request clause suite publicization、perform head final public parser API、span-rich diagnostics、final grammar、concrete theorem/model-check tool binding、final public parser/checker/runtime surface を固定するものではなく、Package 84 close と Package 85 phase6-reserve-formal-tool-binding-inventory ratchet next line を読むための anchor である。
+- `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
+  - current L2 の first strong typing layer を full dependent core ではなく finite decidable index fragment / IFC / capture / lifetime / simple cost principal target に narrow に固定し、`Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` を conceptual floor として整理する補助文書。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
@@ -718,6 +723,8 @@
 - `specs/examples/554-current-l2-phase6-compile-ready-verification-and-formal-hook-threshold-helper-mirror.md`
   - current Phase 5 / Package 82 closeout として、source-side shared-space trio `p07 / p08 / p09` に `actual_phase6_compile_ready_verification_and_formal_hook_threshold` を actualize し、phase6 compile-ready verification / formal hook bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/555-current-l2-phase6-next-reopen-sequencing-threshold-helper-mirror.md`
+- `specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md`
+- `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
   - current Phase 5 / Package 83 closeout として、source-side shared-space trio `p07 / p08 / p09` に `actual_phase6_next_reopen_sequencing_threshold` を actualize し、phase6 next-reopen sequencing bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。

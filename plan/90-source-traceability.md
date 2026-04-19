@@ -254,7 +254,29 @@
   - `specs/examples/305-current-l2-phase6-compile-ready-checkpoint-close-ready-phase6-next-reopen-sequencing-comparison.md`
   - `specs/examples/306-current-l2-phase6-next-reopen-sequencing-ready-minimal-phase6-next-reopen-sequencing-threshold.md`
   - `specs/examples/307-current-l2-phase6-next-reopen-sequencing-ready-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-comparison.md`
-  - `specs/examples/555-current-l2-phase6-next-reopen-sequencing-threshold-helper-mirror.md`
+- `specs/examples/555-current-l2-phase6-next-reopen-sequencing-threshold-helper-mirror.md`
+- `specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md`
+- `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
+- `docs/reports/0838-first-strong-typing-layer-finite-index-spine-default-sync.md`
+
+## 2026-04-20 Phase 6 parser second-tranche first-package and finite-index typing default addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/307-current-l2-phase6-next-reopen-sequencing-ready-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-comparison.md`
+  - `specs/examples/308-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-ready-minimal-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold.md`
+  - `specs/examples/309-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-ready-phase6-reserve-formal-tool-binding-inventory-comparison.md`
+  - `specs/examples/310-current-l2-phase6-reserve-formal-tool-binding-inventory-ready-minimal-phase6-reserve-formal-tool-binding-inventory-threshold.md`
+  - `specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md`
+  - `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
+  - `docs/reports/0838-first-strong-typing-layer-finite-index-spine-default-sync.md`
+  - `docs/reports/0837-package84-phase6-parser-second-tranche-first-package-ratchet.md`
+  - `crates/mir-ast/src/lib.rs`
+  - `crates/mir-ast/src/current_l2.rs`
+  - `crates/mir-ast/tests/current_l2_second_tranche_manifest.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_admit_slot_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_predicate_fragment_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_request_clause_suite_spike.rs`
   - `docs/reports/0836-package83-phase6-next-reopen-sequencing-ratchet.md`
   - `crates/mir-runtime/src/current_l2.rs`
   - `crates/mir-runtime/src/current_l2_cli.rs`

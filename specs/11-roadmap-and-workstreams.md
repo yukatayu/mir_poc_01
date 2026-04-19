@@ -660,6 +660,17 @@ actual-adoption floor では、
   - `actual_phase6_next_reopen_sequencing_threshold`
   - `sequencing_kind_ref + fixed_entry_criteria_refs + selected_first_reopen_ref + deferred_reopen_refs + minimum_guard_refs + kept_later_refs` sequencing minimum mirror
   - Package 83 phase6-next-reopen-sequencing ratchet close、Package 84 phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet next
+- phase6 parser second-tranche attached-slot / predicate fragment first-package threshold helper mirror:
+  `specs/examples/556`
+  - `CurrentL2SecondTrancheManifest`
+  - `current_l2_second_tranche_manifest()`
+  - `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` parser second-tranche minimum mirror
+  - Package 84 phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package ratchet close、Package 85 phase6-reserve-formal-tool-binding-inventory ratchet next
+- first strong typing layer finite-index spine default:
+  `specs/examples/557`
+  - `Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C`
+  - finite decidable index fragment / IFC / capture / lifetime / simple cost principal target
+  - stronger typed surface promotion は still mixed gate
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
