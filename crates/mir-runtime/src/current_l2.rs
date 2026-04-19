@@ -20,8 +20,8 @@ use mir_ast::current_l2::{
 };
 use mir_semantics::{
     ChainEdge, Contract, FixtureHostPlan, FixtureHostStub, InterpreterError, LineageAssertion,
-    Predicate, Program, ProgramKind, RunReport, Statement, StaticGateResult,
-    static_gate_program_detailed,
+    PlaceStore, Predicate, Program, ProgramKind, RunReport, Statement, StaticGateResult,
+    StaticGateVerdict, TraceAuditSink, static_gate_program_detailed,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -223,6 +223,7 @@ pub fn run_current_l2_runtime_skeleton(
         validate_parser_bridge_input(&program, bridge)?;
     }
 
+    let static_gate = current_l2_source_static_gate_program_detailed(&program);
     let checker_floor = CurrentL2CheckerFloorReport {
         stage1_reconnect_clusters: parser_bridge_input
             .as_ref()
@@ -232,14 +233,147 @@ pub fn run_current_l2_runtime_skeleton(
             .as_ref()
             .and_then(|bridge| bridge.stage2_try_fallback.as_ref())
             .map(summarize_stage2_try_rollback_findings),
-        static_gate: static_gate_program_detailed(&program),
+        static_gate: static_gate.clone(),
     };
-    let runtime = FixtureHostStub::new(host_plan)?.run_program(program)?;
+    let runtime = if static_gate.verdict == StaticGateVerdict::Valid {
+        FixtureHostStub::new(host_plan)?.run_program(program)?
+    } else {
+        RunReport {
+            static_verdict: static_gate.verdict,
+            entered_evaluation: false,
+            terminal_outcome: None,
+            trace_audit_sink: TraceAuditSink::default(),
+            steps_executed: 0,
+            final_place_store: PlaceStore::new(),
+        }
+    };
 
     Ok(CurrentL2RuntimeSkeletonReport {
         checker_floor,
         run_report: runtime,
     })
+}
+
+fn current_l2_source_static_gate_program_detailed(program: &Program) -> StaticGateResult {
+    let mut gate = static_gate_program_detailed(program);
+    let mut scope = Vec::new();
+    collect_order_handoff_late_join_static_stop_reasons(&program.body, &mut scope, &mut gate);
+    gate
+}
+
+fn collect_order_handoff_late_join_static_stop_reasons(
+    statements: &[Statement],
+    scope: &mut Vec<String>,
+    gate: &mut StaticGateResult,
+) {
+    collect_current_scope_order_handoff_late_join_reasons(statements, scope, gate);
+
+    for statement in statements {
+        match statement {
+            Statement::PlaceBlock { place, body } => {
+                scope.push(place.clone());
+                collect_order_handoff_late_join_static_stop_reasons(body, scope, gate);
+                scope.pop();
+            }
+            Statement::TryFallback {
+                body,
+                fallback_body,
+            } => {
+                collect_order_handoff_late_join_static_stop_reasons(body, scope, gate);
+                collect_order_handoff_late_join_static_stop_reasons(fallback_body, scope, gate);
+            }
+            Statement::PerformOn { .. }
+            | Statement::PerformVia { .. }
+            | Statement::OptionDecl { .. }
+            | Statement::ChainDecl { .. }
+            | Statement::AtomicCut => {}
+        }
+    }
+}
+
+fn collect_current_scope_order_handoff_late_join_reasons(
+    statements: &[Statement],
+    scope: &[String],
+    gate: &mut StaticGateResult,
+) {
+    let direct_ops = statements
+        .iter()
+        .filter_map(|statement| match statement {
+            Statement::PerformOn { op, .. } | Statement::PerformVia { op, .. } => {
+                Some(op.as_str())
+            }
+            Statement::PlaceBlock { .. }
+            | Statement::OptionDecl { .. }
+            | Statement::ChainDecl { .. }
+            | Statement::TryFallback { .. }
+            | Statement::AtomicCut => None,
+        })
+        .collect::<Vec<_>>();
+
+    let Some(observe_idx) = direct_ops
+        .iter()
+        .position(|op| *op == "observe_late_join_view")
+    else {
+        return;
+    };
+    let Some(handoff_idx) = direct_ops[..observe_idx]
+        .iter()
+        .rposition(|op| *op == "handoff_dice_authority")
+    else {
+        return;
+    };
+    if direct_ops[..handoff_idx]
+        .iter()
+        .any(|op| *op == "publish_roll_result")
+    {
+        return;
+    }
+
+    let scope_text = current_l2_display_scope(scope);
+    if direct_ops[handoff_idx + 1..]
+        .iter()
+        .any(|op| *op == "publish_roll_result")
+    {
+        gate.verdict = current_l2_escalate_static_gate_verdict(
+            gate.verdict,
+            StaticGateVerdict::Malformed,
+        );
+        gate.reasons.push(format!(
+            "handoff appears before publish for late-join visibility at {scope_text}"
+        ));
+        return;
+    }
+
+    gate.verdict = current_l2_escalate_static_gate_verdict(
+        gate.verdict,
+        StaticGateVerdict::Underdeclared,
+    );
+    gate.reasons.push(format!(
+        "missing publication witness before handoff for late-join visibility at {scope_text}"
+    ));
+}
+
+fn current_l2_escalate_static_gate_verdict(
+    current: StaticGateVerdict,
+    incoming: StaticGateVerdict,
+) -> StaticGateVerdict {
+    match (current, incoming) {
+        (StaticGateVerdict::Malformed, _) | (_, StaticGateVerdict::Malformed) => {
+            StaticGateVerdict::Malformed
+        }
+        (StaticGateVerdict::Underdeclared, _) | (_, StaticGateVerdict::Underdeclared) => {
+            StaticGateVerdict::Underdeclared
+        }
+        _ => StaticGateVerdict::Valid,
+    }
+}
+
+fn current_l2_display_scope(scope: &[String]) -> String {
+    if scope.is_empty() {
+        "<root>".to_string()
+    } else {
+        scope.join(" / ")
+    }
 }
 
 pub fn lower_current_l2_fixed_source_text(

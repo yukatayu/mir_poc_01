@@ -208,6 +208,13 @@ current package では、少なくとも次の family を current self-driven ev
 final public language sample catalog ではなく、
 current final-layer closeout adequacy corpus として使う。
 
+`specs/examples/527` により、上の 2. と 3. は
+
+- `p13-dice-late-join-missing-publication-witness`
+- `p14-dice-late-join-handoff-before-publication`
+
+として helper-local static stop に actualize 済みである。
+
 ## actual runnable evidence
 
 current queue reopening は、execution floor 未到達を意味しない。
@@ -215,7 +222,7 @@ current queue reopening は、execution floor 未到達を意味しない。
 already reached / machine-checked evidence として、少なくとも次がある。
 
 - authored sixteen runner / CLI / regression floor
-- corrected prototype set `p01...p12`
+- corrected prototype set `p01...p14`
 - theorem public-seam compression
 - model-check public-seam compression
 - order-handoff / witness-provider final public-seam compression

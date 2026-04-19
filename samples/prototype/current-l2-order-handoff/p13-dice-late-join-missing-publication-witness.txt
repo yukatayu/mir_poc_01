@@ -1,0 +1,17 @@
+# late join view を見せたいが、publish を欠いたまま handoff してしまう helper-local negative prototype。
+# current authoritative-room line では publication witness 不在として static stop にする。
+place root {
+  place room {
+    place dice_authority {
+      perform handoff_dice_authority on dice_state
+        require owner_is(player_a)
+        ensure owner_is(player_b)
+
+      atomic_cut
+
+      perform observe_late_join_view on dice_state
+        require read
+        ensure late_join_sees_published_result(player_c)
+    }
+  }
+}

@@ -3,7 +3,7 @@
 ## repo 全体の主眼
 
 - 主眼は **Mir** の意味論基盤である。
-- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored sixteen、runnable prototype sample set `p01...p12` を already 持つ。
+- current repo は architecture-first だが、parser-free PoC、compile-ready minimal actualization、fixed-subset source sample authored sixteen、runnable prototype sample set `p01...p14` を already 持つ。
 - Mirrorea / shared-space / Typed-Effect / Prism / 上位アプリは separable track として扱う。
 
 ## current lane snapshot
@@ -12,15 +12,15 @@
 - current active lane は 3 本で読むのが自然である。
   - execution lane:
     `Macro 4 active on fixed authored/prototype floor`
-    （authored sixteen と corrected prototype set `p01...p12` は fixed 済みであり、sample corpus は adequacy corpus として active に保つ）
+    （authored sixteen と corrected prototype set `p01...p14` は fixed 済みであり、sample corpus は adequacy corpus として active に保つ）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization / actual-adoption floor が揃った。corrected runnable version の current floor と representative Lean sample set actual Lean execution は already reached であり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526` により current principal active line は helper/CLI hardening and broader coverage、later mixed gate / user-spec residual に narrowed し、Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary に actualize 済みと読む）
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization / actual-adoption floor が揃った。corrected runnable version の current floor と representative Lean sample set actual Lean execution は already reached であり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527` により current principal active line は helper/CLI hardening and broader coverage、later mixed gate / user-spec residual に narrowed し、Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate に actualize 済みと読む）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、packaging / FFI / exhaustive final catalog は still later に残る）
 - current authored source sample は `e1 / e2 / e3 / e4 / e5 / e12 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23` の sixteen である。
-- corrected runnable prototype sample は `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08 / p09 / p10 / p11 / p12` までである。
+- corrected runnable prototype sample は `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08 / p09 / p10 / p11 / p12 / p13 / p14` までである。
 
 ## macro phase reading
 

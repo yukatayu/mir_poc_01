@@ -22,10 +22,10 @@
 - current status は 3 lane で読むのが自然である。
   - execution lane:
     `Macro 4 active on fixed authored/prototype floor`
-    （current-l2 authored sixteen と corrected prototype set `p01...p12` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
+    （current-l2 authored sixteen と corrected prototype set `p01...p14` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary に actualize 済みと読む。current remaining active line は helper/CLI hardening and broader coverage と later mixed/user-spec residual に narrowed した）
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate に actualize 済みと読む。current remaining active line は helper/CLI hardening and broader coverage と later mixed/user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -36,9 +36,9 @@
 - fixed-subset source sample authored sixteen:
   `e1 / e2 / e3 / e4 / e5 / e12 / e14 / e15 / e16 / e13 / e19 / e21 / e22 / e18 / e20 / e23`
 - runnable prototype sample set:
-  `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08 / p09 / p10 / p11 / p12`
+  `p01 / p02 / p03 / p04 / p05 / p06 / p07 / p08 / p09 / p10 / p11 / p12 / p13 / p14`
   （`samples/prototype/` に置き、current lowerer / runner へ explicit path で流す）
-  - `p01...p05 / p07 / p08 / p09` は order/handoff family
+  - `p01...p05 / p07 / p08 / p09 / p13 / p14` は order/handoff family
   - `p06 / p10 / p11 / p12` は typed/theorem/model-check / IFC sample-visible corrected prototype
 - helper-local debug output preview:
   prototype / sample 実行時に `debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を `debug_outputs` として見せる current cut がある
@@ -48,6 +48,8 @@
   prototype / sample 実行時に proof notebook review unit / model-check concrete carrier の derived row preview を `artifact_preview` として見せる current cut がある
 - helper-local order-handoff surface preview:
   prototype / sample 実行時に `minimal_companion` / `stage_block_secondary` / `serial_scope_reserve` の surface family を `surface_preview` として見せる current cut がある
+- helper-local order-handoff negative static stop:
+  `p13` missing publication witness と `p14` handoff-before-publish を current-L2 source sample runner の helper-local static gate で止め、late-join visibility line の negative corpus を sample-visible に actualize する current cut がある
 - verifier preview alignment pre-floor:
   helper-local preview を final public verifier contract にせず、sample-local preview-aligned typed artifact route を compare floor に置く current cut がある
 - model-check projection pre-floor:
@@ -124,6 +126,8 @@
   `p07/p08` current default room profile を final grammar に上げず、helper-local companion lines に actualize する current cut がある
 - stage-block secondary surface:
   `p07/p08` current default room profile を final grammar に上げず、`stage` / `after` / `witness` family を strong secondary candidate として helper-local に actualize する current cut がある
+- order-handoff negative static-stop pair:
+  `p13 / p14` current late-join visibility line の negative pair を final parser grammar や final source wording に上げず、helper-local static-stop evidence に actualize する current cut がある
 - exact rough stimulus preservation bucket:
   `samples/not_implemented/`
 - underdeclared source omission actualization:
@@ -299,6 +303,7 @@
   - layered strong typing / IFC first-fragment
   - actual Lean execution の representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09` から helper/CLI hardening と broader coverage への widening
   - order-handoff helper-local `surface_preview` actualization
+  - order-handoff negative static-stop pair `p13 / p14` actualization
   - committed `samples/lean/` corpus を基点にした broader theorem-side / IFC / order-handoff widening
   - later mixed gate residual maintenance
   - true user-spec residual

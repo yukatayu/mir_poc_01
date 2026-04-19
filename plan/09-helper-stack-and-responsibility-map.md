@@ -48,6 +48,10 @@ run_directory_named_profile
   - `guard_reason`
   を `verification_preview` として見せてよい。
   - これは final public verifier contract を意味しない。
+- current order-handoff negative static-stop cut では、
+  - late-join visibility line に対する `publish -> handoff -> observe` 前提を helper-local current-L2 source sample runner 側でのみ判定してよい。
+  - `p13` missing publication witness は underdeclared static stop、`p14` handoff-before-publish は malformed static stop として sample-local negative corpus に actualize してよい。
+  - これは final parser grammar、final source wording、final emitted handoff contract を意味しない。
 - current sample-visible artifact preview cut では、
   - proof notebook review unit の `obligation_kind` / `goal_text` / symbolic `evidence_refs`
   - model-check concrete carrier の `obligation_kind` / symbolic `evidence_refs`

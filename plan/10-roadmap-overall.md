@@ -30,7 +30,7 @@
   fixed-subset source sample と malformed family の narrow widening
 - current line:
   `Macro 4 active on fixed authored/prototype floor`
-  （current-l2 authored sixteen、corrected prototype set `p01...p12`、runner / CLI / regression floor は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
+  （current-l2 authored sixteen、corrected prototype set `p01...p14`、runner / CLI / regression floor は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
 - goal:
   runnable corpus を広げつつ、runner / ladder / regression / docs mirror を崩さない
 
@@ -41,7 +41,7 @@
   docs-first comparison と boundary planning で進める
 - current line:
   `Macro 5 final-layer closeout packages active`
-  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor は close 済みである。corrected runnable floor と representative Lean sample set actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526` により next active line は helper / CLI hardening and broader coverage と later mixed/user-spec residual と読み、Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview は committed `samples/lean/` corpus、source-side prototype corpus、helper-local CLI summary に actualize 済みと読む）
+  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor は close 済みである。corrected runnable floor と representative Lean sample set actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527` により next active line は helper / CLI hardening and broader coverage と later mixed/user-spec residual と読み、Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair は committed `samples/lean/` corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate に actualize 済みと読む）
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定した上で、post-runnable closeout package と mixed-gate package を narrow に閉じる
 

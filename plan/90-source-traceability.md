@@ -3733,3 +3733,16 @@
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_order_handoff_surface_preview_cli.rs`
   - `crates/mir-runtime/examples/mir_current_l2.rs`
+
+- 2026-04-19 Package 58 order-handoff negative static-stop addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`samples/prototype/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`
+  - `specs/examples/527-current-l2-order-handoff-negative-static-stop-actualization.md`
+  - `docs/reports/0808-package58-order-handoff-negative-static-stop.md`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/tests/current_l2_order_handoff_negative_static_stop.rs`
+  - `samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.txt`
+  - `samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.host-plan.json`
+  - `samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.txt`
+  - `samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.host-plan.json`

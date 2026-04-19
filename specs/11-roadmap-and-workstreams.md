@@ -486,6 +486,11 @@ actual-adoption floor では、
   - `run-source-sample` helper-local `surface_preview`
   - `p07 / p08 / p09` principal/secondary/reserve reached/guarded actualization
   - Package 58 helper/CLI hardening first slice
+- order-handoff negative static-stop actualization:
+  `specs/examples/527`
+  - `p13 / p14` late-join visibility negative pair
+  - helper-local source-sample runner static stop
+  - Package 58 order-handoff negative corpus tightening first pair
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

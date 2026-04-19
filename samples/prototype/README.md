@@ -23,6 +23,7 @@
   - `atomic_cut` / publication / handoff / room-local serial transition / static-stop / guarded chain / late join / stale reconnect refresh の corrected prototype
   - `p07-dice-late-join-visible-history` と `p08-dice-stale-reconnect-refresh` は、order/handoff current first line を sample-visible にする corrected prototype であり、final source wording / final replay profile ではない
   - `p09-dice-delegated-rng-provider-placement` は、`delegated_rng_service` provider placement を narrow prototype として actualize する corrected prototype であり、final provider receipt schema / delegated provider attestation ではない
+  - `p13-dice-late-join-missing-publication-witness` と `p14-dice-late-join-handoff-before-publication` は、late-join visibility line の helper-local negative static-stop pair であり、final parser grammar / final source wording / final emitted-handoff contract ではない
 - `current-l2-typed-proof-model-check/`
   - `admit` / `require` / `ensure` を持つ typed marker family が helper-local verifier preview にどう映るかを比較する corrected prototype
   - `p06-typed-proof-owner-handoff` は sample-visible corrected prototype であり、final typed calculus / final public verifier contract / settled property language ではない

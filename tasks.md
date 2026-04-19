@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 16:58 JST
+最終更新: 2026-04-19 17:07 JST
 
 ## この文書について
 
@@ -12,7 +12,7 @@
 
 - current mapped corpus では、
   - authored sixteen
-  - corrected prototype set `p01...p12`
+  - corrected prototype set `p01...p14`
   - runner / CLI / regression / helper-local compare floor
   が already runnable である。
 - representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
@@ -32,7 +32,7 @@
 - `samples/current-l2/`
   - authored sixteen は inventory / runner / verification ladder / emitted artifact wiring / regression helper に乗っている
 - `samples/prototype/`
-  - corrected prototype set `p01...p12` は explicit path + adjacent host-plan sidecar で runnable
+  - corrected prototype set `p01...p14` は explicit path + adjacent host-plan sidecar で runnable
   - helper-local `debug_outputs` / `verification_preview` / `artifact_preview` を見せる current cut がある
 - `samples/lean/`
   - `foundations/` は actual small proof fragment
@@ -45,13 +45,13 @@
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression
   - order-handoff / shared-space side:
-    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、CLI `surface_preview`
+    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、CLI `surface_preview`、late-join negative static stop `p13 / p14`
 
 ## ordered self-driven packages
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative sample setからどう widen するか | `M` | `Macro 5/7` | first widening slice として `p09` carry-over を actualize 済みとし、export/sync helper と `samples/lean/` committed corpus を基点に、残る broader theorem-side / IFC / order-handoff widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、proof / IFC helper route を concretize する |
+| `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative sample setからどう widen するか | `M` | `Macro 5/7` | first widening slice `p09` carry-over、order-handoff `surface_preview`、late-join negative static-stop pair `p13 / p14` は actualize 済みとし、export/sync helper と `samples/lean/` committed corpus を基点に、残る broader theorem-side / IFC widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、proof / IFC helper route を concretize する |
 | `59` near-end closeout sync | mixed gate / true user-spec residual をどこまで narrow に残すか | `S-M` | `Macro 5/6/7` | final public completion を凍らせず、closeout-ready snapshot に再圧縮する | `progress.md` / `tasks.md` / `plan/` / traceability が stale wording を残さない |
 
 ## recently closed package note
@@ -90,9 +90,9 @@
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current reading:
-  actual Lean execution reached 後の next work は helper/CLI hardening と broader theorem-side / IFC / order-handoff corpus widening であり、first widening slice として `p09-dice-delegated-rng-provider-placement` carry-over、helper hardening slice として order-handoff CLI `surface_preview` は actualize 済みである。
+  actual Lean execution reached 後の next work は helper/CLI hardening と broader theorem-side / IFC / order-handoff corpus widening であり、first widening slice として `p09-dice-delegated-rng-provider-placement` carry-over、helper hardening slice として order-handoff CLI `surface_preview`、negative corpus tightening slice として `p13 / p14` late-join visibility static stop は actualize 済みである。
 - evidence:
-  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus、source-side IFC trio `p10 / p11 / p12`、`specs/examples/525`、`specs/examples/526`、`docs/reports/0806`、`docs/reports/0807`、`p09-dice-delegated-rng-provider-placement`
+  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus、source-side IFC trio `p10 / p11 / p12`、`specs/examples/525`、`specs/examples/526`、`specs/examples/527`、`docs/reports/0806`、`docs/reports/0807`、`docs/reports/0808`、`p09-dice-delegated-rng-provider-placement`、`p13-dice-late-join-missing-publication-witness`、`p14-dice-late-join-handoff-before-publication`
 - stop line:
   final public theorem contract / final parser grammar / packaging には上げない
 
@@ -134,5 +134,5 @@
 
 ## next reopen order
 
-1. Package 58 で CLI `surface_preview` の次段として order-handoff negative corpus tightening か broader theorem-side widening を narrow package で進める。
+1. Package 58 で order-handoff negative static-stop pair の次段として broader theorem-side / IFC helper widening を narrow package で進める。
 2. Package 59 で closeout-ready snapshot を再圧縮する。
