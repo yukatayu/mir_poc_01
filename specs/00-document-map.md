@@ -205,6 +205,9 @@
 - `specs/examples/547-current-l2-ifc-parser-to-checker-reconnect-freeze-threshold-helper-mirror.md`
   - Package 75 の closeout として `p10 / p11 / p12` source-side IFC trio の parser-to-checker-reconnect-freeze threshold を `run-source-sample` helper summary に narrow に mirror し、`reconnect_kind + parser_subset_freeze_ref + checker_floor_refs + retained_helper_refs` の reconnect minimum を helper-local operational summary で保つ補助文書。
   - stage 3 reconnect、`e19` redesign、runtime contrast `E21 / E22`、final parser grammar、final public parser/checker API、actual external verifier schema、final public verifier contract を固定するものではなく、Package 75 close と Package 76 phase1-semantics-closeout ratchet next line を読むための anchor である。
+- `specs/examples/548-current-l2-ifc-phase1-semantics-closeout-threshold-helper-mirror.md`
+  - Package 76 の closeout として `p10 / p11 / p12` source-side IFC trio の phase1-semantics-closeout threshold を `run-source-sample` helper summary に narrow に mirror し、`closeout_kind + core_semantics_refs + invariant_bridge_refs + notation_status_refs` の semantics closeout minimum を helper-local operational summary で保つ補助文書。
+  - final parser grammar、final reserved keyword / punctuation、final type system、actual external verifier schema、actual emitted verifier artifact、final public verifier contract を固定するものではなく、Package 76 close と Package 77 phase2-parser-free-poc-closeout ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
@@ -679,6 +682,8 @@
   - current Phase 5 / Package 74 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_minimal_parser_subset_freeze_threshold` を actualize し、stage 1 + stage 2 structural parser bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/547-current-l2-ifc-parser-to-checker-reconnect-freeze-threshold-helper-mirror.md`
   - current Phase 5 / Package 75 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_parser_to_checker_reconnect_freeze_threshold` を actualize し、stage 1 + stage 2 reconnect bridge bundle を helper-local operational summary に narrow に mirror する補助文書。
+- `specs/examples/548-current-l2-ifc-phase1-semantics-closeout-threshold-helper-mirror.md`
+  - current Phase 5 / Package 76 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_phase1_semantics_closeout_threshold` を actualize し、core semantics + invariant bridge + notation status bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

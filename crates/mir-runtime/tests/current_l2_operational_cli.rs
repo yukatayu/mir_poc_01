@@ -432,6 +432,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_parser_to_checker_reconnect_freeze_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -915,6 +919,46 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_parser_to_checker_reconnect_freeze_threshold"]["next_comparison_target_ref"],
         "phase1_semantics_closeout_comparison"
     );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["closeout_kind"],
+        "current_l2_semantics_closeout"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["core_semantics_refs"][0],
+        "fallback_lease_chain_semantics"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["core_semantics_refs"][1],
+        "try_atomic_cut_semantics"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["invariant_bridge_refs"][0],
+        "invariants_8_9_to_canonical_normalization_law"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["invariant_bridge_refs"][1],
+        "invariant_11_to_rollback_cut_non_interference"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["notation_status_refs"][0],
+        "explicit_edge_row_family"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["notation_status_refs"][1],
+        "a2_polished_first_choice"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["notation_status_refs"][2],
+        "a1_companion_shorthand"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["next_comparison_target_ref"],
+        "phase2_parser_free_poc_closeout_comparison"
+    );
 }
 
 #[test]
@@ -1067,6 +1111,21 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("runtime_contrast_e21_e22_line"));
     assert!(output.contains(
         "next_comparison_target_ref: phase1_semantics_closeout_comparison"
+    ));
+    assert!(output.contains("actual_phase1_semantics_closeout_threshold:"));
+    assert!(output.contains("closeout_kind: current_l2_semantics_closeout"));
+    assert!(output.contains("core_semantics_refs:"));
+    assert!(output.contains("fallback_lease_chain_semantics"));
+    assert!(output.contains("try_atomic_cut_semantics"));
+    assert!(output.contains("invariant_bridge_refs:"));
+    assert!(output.contains("invariants_8_9_to_canonical_normalization_law"));
+    assert!(output.contains("invariant_11_to_rollback_cut_non_interference"));
+    assert!(output.contains("notation_status_refs:"));
+    assert!(output.contains("explicit_edge_row_family"));
+    assert!(output.contains("a2_polished_first_choice"));
+    assert!(output.contains("a1_companion_shorthand"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase2_parser_free_poc_closeout_comparison"
     ));
 }
 
@@ -1222,5 +1281,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_parser_to_checker_reconnect_freeze_threshold"]["next_comparison_target_ref"],
         "phase1_semantics_closeout_comparison"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase1_semantics_closeout_threshold"]["next_comparison_target_ref"],
+        "phase2_parser_free_poc_closeout_comparison"
     );
 }

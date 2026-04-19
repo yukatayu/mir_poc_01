@@ -611,7 +611,13 @@ actual-adoption floor では、
   - `p10 / p11 / p12` source-side IFC trio
   - `actual_parser_to_checker_reconnect_freeze_threshold`
   - `reconnect_kind + parser_subset_freeze_ref + checker_floor_refs + retained_helper_refs` reconnect minimum mirror
-  - Package 75 parser-to-checker-reconnect-freeze ratchet close、Package 76 phase1-semantics-closeout ratchet next
+  - Package 75 parser-to-checker-reconnect-freeze ratchet close、Package 76 phase1-semantics-closeout ratchet close
+- IFC phase1-semantics-closeout threshold helper mirror:
+  `specs/examples/548`
+  - `p10 / p11 / p12` source-side IFC trio
+  - `actual_phase1_semantics_closeout_threshold`
+  - `closeout_kind + core_semantics_refs + invariant_bridge_refs + notation_status_refs` semantics closeout minimum mirror
+  - Package 76 phase1-semantics-closeout ratchet close、Package 77 phase2-parser-free-poc-closeout ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 22:28 JST
+最終更新: 2026-04-19 22:39 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - semantics / invariant / notation の phase1-semantics-closeout ratchet
+  - compile gate / helper boundary / detached loop policy の phase2-parser-free-poc-closeout ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `76` phase1-semantics-closeout ratchet | parser-to-checker reconnect freeze の次段として semantics / invariants / notation closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | core semantics + invariant bridge + notation status を current cut に留めたまま、final parser grammar、final type system、actual external schema、final public verifier contract を still later に残して phase1 semantics closeout ready sketch を helper-local threshold まで ratchet する | semantics closeout bundle を narrow に actualize しつつ、finalization pressure を later mixed gate に残せる |
+| `77` phase2-parser-free-poc-closeout ratchet | phase1 semantics closeout の次段として parser-free PoC / detached validation loop closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | compile gate + helper boundary + detached loop policy を current cut に留めたまま、reference update / bless workflow、final retention/path policy、public exporter API、production host interface を still later に残して phase2 parser-free PoC closeout ready sketch を helper-local threshold まで ratchet する | parser-free closeout bundle を narrow に actualize しつつ、運用 finalization pressure を later mixed gate に残せる |
 
 ## recently closed package note
 
@@ -337,16 +337,31 @@
 ### Package 76 — phase1-semantics-closeout ratchet
 
 - current reading:
-  next active line。`actual_parser_to_checker_reconnect_freeze_threshold` を final parser grammar や final type system に上げず、phase1 semantics closeout ready sketch まで narrow に ratchet する。
+  close 済み。`actual_parser_to_checker_reconnect_freeze_threshold` を final parser grammar や final type system に上げず、phase1 semantics closeout ready sketch まで narrow に ratchet し、`actual_phase1_semantics_closeout_threshold` を `closeout_kind + core_semantics_refs + invariant_bridge_refs + notation_status_refs` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/291`
   `specs/examples/292`
   `specs/examples/547`
+  `specs/examples/548`
 - stop line:
   final parser grammar
   final type system
   actual external schema
   final public verifier contract
+
+### Package 77 — phase2-parser-free-poc-closeout ratchet
+
+- current reading:
+  next active line。`actual_phase1_semantics_closeout_threshold` を reference update / bless workflow や public exporter API に上げず、phase2 parser-free PoC closeout ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/293`
+  `specs/examples/294`
+  `specs/examples/548`
+- stop line:
+  reference update / bless workflow
+  final retention/path policy
+  public exporter API
+  production host interface
 
 ## research-discovery items
 
@@ -379,4 +394,4 @@
 
 ## next reopen order
 
-1. Package 76 で phase1-semantics-closeout ratchet を進める。
+1. Package 77 で phase2-parser-free-poc-closeout ratchet を進める。
