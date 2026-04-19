@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 22:39 JST
+最終更新: 2026-04-19 22:59 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - compile gate / helper boundary / detached loop policy の phase2-parser-free-poc-closeout ratchet
+  - current package refs / final catalog residual / retained later refs の phase4-shared-space-self-driven-closeout ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `77` phase2-parser-free-poc-closeout ratchet | phase1 semantics closeout の次段として parser-free PoC / detached validation loop closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | compile gate + helper boundary + detached loop policy を current cut に留めたまま、reference update / bless workflow、final retention/path policy、public exporter API、production host interface を still later に残して phase2 parser-free PoC closeout ready sketch を helper-local threshold まで ratchet する | parser-free closeout bundle を narrow に actualize しつつ、運用 finalization pressure を later mixed gate に残せる |
+| `78` phase4-shared-space-self-driven-closeout ratchet | phase2 parser-free PoC closeout の次段として shared-space self-driven closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/6` | current package refs + user-spec-required final catalog refs + retained-later refs を current cut に留めたまま、final activation/authority/auth/identity/admission/consistency/fairness catalog、control-plane separated carrier actualization、distributed fairness protocol、final operational realization を still later に残して phase4 shared-space self-driven closeout ready sketch を helper-local threshold まで ratchet する | shared-space closeout bundle を narrow に actualize しつつ、user-spec-required catalog と stronger fairness finalization を later gate に残せる |
 
 ## recently closed package note
 
@@ -352,16 +352,31 @@
 ### Package 77 — phase2-parser-free-poc-closeout ratchet
 
 - current reading:
-  next active line。`actual_phase1_semantics_closeout_threshold` を reference update / bless workflow や public exporter API に上げず、phase2 parser-free PoC closeout ready sketch まで narrow に ratchet する。
+  close 済み。`actual_phase1_semantics_closeout_threshold` を reference update / bless workflow や public exporter API に上げず、phase2 parser-free PoC closeout ready sketch まで narrow に ratchet し、`actual_phase2_parser_free_poc_closeout_threshold` を `closeout_kind + compile_gate_refs + helper_boundary_refs + detached_loop_policy_refs` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/293`
   `specs/examples/294`
   `specs/examples/548`
+  `specs/examples/549`
 - stop line:
   reference update / bless workflow
   final retention/path policy
   public exporter API
   production host interface
+
+### Package 78 — phase4-shared-space-self-driven-closeout ratchet
+
+- current reading:
+  next active line。`actual_phase2_parser_free_poc_closeout_threshold` を final activation / authority / auth / identity / admission / consistency / fairness catalog に上げず、phase4 shared-space self-driven closeout ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/295`
+  `specs/examples/296`
+  `specs/examples/549`
+- stop line:
+  final activation overlay catalog
+  final authority / auth / identity / admission catalog
+  final consistency / fairness catalog
+  final operational realization
 
 ## research-discovery items
 
@@ -394,4 +409,4 @@
 
 ## next reopen order
 
-1. Package 77 で phase2-parser-free-poc-closeout ratchet を進める。
+1. Package 78 で phase4-shared-space-self-driven-closeout ratchet を進める。

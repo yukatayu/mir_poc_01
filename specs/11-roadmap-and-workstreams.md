@@ -617,7 +617,13 @@ actual-adoption floor では、
   - `p10 / p11 / p12` source-side IFC trio
   - `actual_phase1_semantics_closeout_threshold`
   - `closeout_kind + core_semantics_refs + invariant_bridge_refs + notation_status_refs` semantics closeout minimum mirror
-  - Package 76 phase1-semantics-closeout ratchet close、Package 77 phase2-parser-free-poc-closeout ratchet next
+  - Package 76 phase1-semantics-closeout ratchet close、Package 77 phase2-parser-free-poc-closeout ratchet close
+- IFC phase2-parser-free-poc-closeout threshold helper mirror:
+  `specs/examples/549`
+  - `p10 / p11 / p12` source-side IFC trio
+  - `actual_phase2_parser_free_poc_closeout_threshold`
+  - `closeout_kind + compile_gate_refs + helper_boundary_refs + detached_loop_policy_refs` parser-free closeout minimum mirror
+  - Package 77 phase2-parser-free-poc-closeout ratchet close、Package 78 phase4-shared-space-self-driven-closeout ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

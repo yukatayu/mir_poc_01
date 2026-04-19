@@ -261,6 +261,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary,
     actual_phase1_semantics_closeout_threshold:
         CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary,
+    actual_phase2_parser_free_poc_closeout_threshold:
+        CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -380,6 +382,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_parser_to_checker_reconnect_freeze_threshold,
             );
+        let actual_phase2_parser_free_poc_closeout_threshold =
+            CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary::from_source_report(
+                &report,
+                &actual_phase1_semantics_closeout_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -416,6 +423,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_minimal_parser_subset_freeze_threshold,
             actual_parser_to_checker_reconnect_freeze_threshold,
             actual_phase1_semantics_closeout_threshold,
+            actual_phase2_parser_free_poc_closeout_threshold,
         }
     }
 }
@@ -2504,6 +2512,114 @@ impl CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    closeout_kind: Option<&'static str>,
+    compile_gate_refs: Vec<String>,
+    helper_boundary_refs: Vec<String>,
+    detached_loop_policy_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_phase1_semantics_closeout_threshold:
+            &CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p10-typed-authorized-fingerprint-declassification"
+                | "p11-typed-unauthorized-fingerprint-release"
+                | "p12-typed-classified-fingerprint-publication-block"
+        ) && actual_phase1_semantics_closeout_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_phase1_semantics_closeout_threshold.compare_floor_refs.clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.closeout.phase2_parser_free_poc_closeout".to_string());
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase4_shared_space_self_driven_closeout"
+                    .to_string(),
+            );
+
+            let mut evidence_refs = actual_phase1_semantics_closeout_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_phase2_parser_free_poc_closeout_threshold".to_string(),
+            );
+            evidence_refs.push("source:phase2_parser_free_closeout_ready_sketch".to_string());
+            evidence_refs.push("source:compare_only_non_production_helper".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind: "phase2_parser_free_poc_closeout_threshold_manifest",
+                closeout_kind: Some("parser_free_companion_baseline"),
+                compile_gate_refs: vec![
+                    "interpreter_regression_suite".to_string(),
+                    "detached_loop_unit_suite".to_string(),
+                    "detached_example_compile_gate".to_string(),
+                    "runtime_smoke_fixture_gate".to_string(),
+                    "single_fixture_aggregate_compare_gate".to_string(),
+                    "static_gate_checker_smoke_gate".to_string(),
+                ],
+                helper_boundary_refs: vec![
+                    "bundle_runtime_path".to_string(),
+                    "aggregate_compare_convenience".to_string(),
+                    "static_gate_checker_smoke_family".to_string(),
+                    "display_only_authoring_assists".to_string(),
+                ],
+                detached_loop_policy_refs: vec![
+                    "compare_only_non_production_helper".to_string(),
+                    "target_current_l2_detached_default_candidate".to_string(),
+                    "diff_exit_code_one_is_informational".to_string(),
+                ],
+                next_comparison_target_ref: Some(
+                    "phase4_shared_space_self_driven_closeout_comparison",
+                ),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs: actual_phase2_parser_free_poc_closeout_threshold_guard_refs(true),
+                kept_later_refs:
+                    actual_phase2_parser_free_poc_closeout_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "phase2_parser_free_poc_closeout_threshold_manifest",
+            closeout_kind: None,
+            compile_gate_refs: vec![],
+            helper_boundary_refs: vec![],
+            detached_loop_policy_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{}", report.sample_id),
+                "helper_preview:actual_phase2_parser_free_poc_closeout_threshold".to_string(),
+                "compare_floor:current_l2.closeout.phase2_parser_free_poc_closeout".to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.closeout.phase2_parser_free_poc_closeout.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_phase2_parser_free_poc_closeout_threshold_guard_refs(false),
+            kept_later_refs: actual_phase2_parser_free_poc_closeout_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual phase2 parser-free PoC closeout threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual phase1 semantics closeout threshold reaches the semantics closeout floor for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -3211,6 +3327,12 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_phase1_semantics_closeout_threshold(
         &mut output,
         &summary.actual_phase1_semantics_closeout_threshold,
+    );
+    writeln!(output, "actual_phase2_parser_free_poc_closeout_threshold:")
+        .expect("write to string");
+    render_actual_phase2_parser_free_poc_closeout_threshold(
+        &mut output,
+        &summary.actual_phase2_parser_free_poc_closeout_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -4451,6 +4573,30 @@ fn actual_phase1_semantics_closeout_threshold_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn actual_phase2_parser_free_poc_closeout_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:phase2_parser_free_poc_closeout_threshold_only".to_string(),
+            "guard:phase4_shared_space_self_driven_closeout_comparison_next".to_string(),
+            "guard:reference_update_bless_workflow_later".to_string(),
+            "guard:retention_and_public_exporter_policy_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_phase2_parser_free_poc_closeout_threshold_not_reached".to_string(),
+        ]
+    }
+}
+
+fn actual_phase2_parser_free_poc_closeout_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:reference_update_bless_workflow".to_string(),
+        "kept_later:final_retention_path_policy".to_string(),
+        "kept_later:public_exporter_api".to_string(),
+        "kept_later:production_host_interface".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -5506,6 +5652,45 @@ fn render_actual_phase1_semantics_closeout_threshold(
     render_string_list(output, "core_semantics_refs", &summary.core_semantics_refs, 1);
     render_string_list(output, "invariant_bridge_refs", &summary.invariant_bridge_refs, 1);
     render_string_list(output, "notation_status_refs", &summary.notation_status_refs, 1);
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_phase2_parser_free_poc_closeout_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(closeout_kind) = summary.closeout_kind {
+        writeln!(output, "  closeout_kind: {closeout_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  closeout_kind: none").expect("write to string");
+    }
+    render_string_list(output, "compile_gate_refs", &summary.compile_gate_refs, 1);
+    render_string_list(output, "helper_boundary_refs", &summary.helper_boundary_refs, 1);
+    render_string_list(
+        output,
+        "detached_loop_policy_refs",
+        &summary.detached_loop_policy_refs,
+        1,
+    );
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,

@@ -436,6 +436,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_phase1_semantics_closeout_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -959,6 +963,70 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_phase1_semantics_closeout_threshold"]["next_comparison_target_ref"],
         "phase2_parser_free_poc_closeout_comparison"
     );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["closeout_kind"],
+        "parser_free_companion_baseline"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["compile_gate_refs"][0],
+        "interpreter_regression_suite"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["compile_gate_refs"][1],
+        "detached_loop_unit_suite"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["compile_gate_refs"][2],
+        "detached_example_compile_gate"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["compile_gate_refs"][3],
+        "runtime_smoke_fixture_gate"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["compile_gate_refs"][4],
+        "single_fixture_aggregate_compare_gate"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["compile_gate_refs"][5],
+        "static_gate_checker_smoke_gate"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["helper_boundary_refs"][0],
+        "bundle_runtime_path"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["helper_boundary_refs"][1],
+        "aggregate_compare_convenience"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["helper_boundary_refs"][2],
+        "static_gate_checker_smoke_family"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["helper_boundary_refs"][3],
+        "display_only_authoring_assists"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["detached_loop_policy_refs"][0],
+        "compare_only_non_production_helper"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["detached_loop_policy_refs"][1],
+        "target_current_l2_detached_default_candidate"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["detached_loop_policy_refs"][2],
+        "diff_exit_code_one_is_informational"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["next_comparison_target_ref"],
+        "phase4_shared_space_self_driven_closeout_comparison"
+    );
 }
 
 #[test]
@@ -1127,6 +1195,27 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains(
         "next_comparison_target_ref: phase2_parser_free_poc_closeout_comparison"
     ));
+    assert!(output.contains("actual_phase2_parser_free_poc_closeout_threshold:"));
+    assert!(output.contains("closeout_kind: parser_free_companion_baseline"));
+    assert!(output.contains("compile_gate_refs:"));
+    assert!(output.contains("interpreter_regression_suite"));
+    assert!(output.contains("detached_loop_unit_suite"));
+    assert!(output.contains("detached_example_compile_gate"));
+    assert!(output.contains("runtime_smoke_fixture_gate"));
+    assert!(output.contains("single_fixture_aggregate_compare_gate"));
+    assert!(output.contains("static_gate_checker_smoke_gate"));
+    assert!(output.contains("helper_boundary_refs:"));
+    assert!(output.contains("bundle_runtime_path"));
+    assert!(output.contains("aggregate_compare_convenience"));
+    assert!(output.contains("static_gate_checker_smoke_family"));
+    assert!(output.contains("display_only_authoring_assists"));
+    assert!(output.contains("detached_loop_policy_refs:"));
+    assert!(output.contains("compare_only_non_production_helper"));
+    assert!(output.contains("target_current_l2_detached_default_candidate"));
+    assert!(output.contains("diff_exit_code_one_is_informational"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase4_shared_space_self_driven_closeout_comparison"
+    ));
 }
 
 #[test]
@@ -1289,5 +1378,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_phase1_semantics_closeout_threshold"]["next_comparison_target_ref"],
         "phase2_parser_free_poc_closeout_comparison"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["next_comparison_target_ref"],
+        "phase4_shared_space_self_driven_closeout_comparison"
     );
 }
