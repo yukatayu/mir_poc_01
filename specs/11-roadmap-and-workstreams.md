@@ -528,6 +528,12 @@ actual-adoption floor では、
   - `p07 / p08` reached / `p09` guard-only
   - source wording / emitted artifact / witness-provider residual compressed keep
   - Package 61 residual mixed-gate compression close
+- IFC actual-checker-payload-family threshold helper mirror:
+  `specs/examples/534`
+  - `p10 / p11 / p12` source-side IFC trio
+  - `actual_checker_payload_family_threshold`
+  - `payload_family_kind + source_refs` checker-adjacent helper mirror
+  - Package 62 helper-to-checker ratchet close、Package 63 checker payload row-family ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

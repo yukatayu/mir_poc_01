@@ -376,6 +376,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["typed_checker_hint_preview"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_checker_payload_family_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -567,6 +571,21 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["typed_checker_hint_preview"]["typed_reason_family_hint"]["coverage_state"],
         "partial_cluster"
     );
+    assert_eq!(
+        value["actual_checker_payload_family_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_family_threshold"]["payload_family_kind"],
+        "static_reason_code_row_family"
+    );
+    assert_eq!(
+        value["actual_checker_payload_family_threshold"]["source_refs"],
+        Value::Array(vec![
+            Value::String("fixture_checked_reason_codes".into()),
+            Value::String("detached_static_gate_reason_codes".into()),
+        ])
+    );
 }
 
 #[test]
@@ -589,6 +608,11 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("ifc_label_model_family"));
     assert!(output.contains("explicit_authority_declassification_family"));
     assert!(output.contains("coverage_state: partial_cluster"));
+    assert!(output.contains("actual_checker_payload_family_threshold:"));
+    assert!(output.contains("payload_family_kind: static_reason_code_row_family"));
+    assert!(output.contains("source_refs:"));
+    assert!(output.contains("fixture_checked_reason_codes"));
+    assert!(output.contains("detached_static_gate_reason_codes"));
 }
 
 #[test]
@@ -622,6 +646,14 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     );
     assert_eq!(
         value["typed_checker_hint_preview"]["typed_reason_family_hint"]["coverage_state"],
+        "full_cluster"
+    );
+    assert_eq!(
+        value["actual_checker_payload_family_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_family_threshold"]["coverage_state"],
         "full_cluster"
     );
 }
