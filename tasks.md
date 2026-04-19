@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 03:52 JST
+最終更新: 2026-04-20 04:12 JST
 
 ## この文書について
 
@@ -29,7 +29,7 @@
 - ここでいう principal target は checker-adjacent first layer を指し、
   stronger typed surface を early に source principal へ昇格する判断とは切り分けて読む。
 - したがって、remaining work の主眼は次に移っている。
-  - `perform` head をどこまで parser-side non-production carrier に上げるかを比較する phase6-perform-head-final-public-parser-API comparison
+  - perform head structural carrier と request clause suite carrier をどこで narrow に束ねるかを比較する phase6-perform-head-request-clause-bundle-attachment comparison
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -59,7 +59,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `90` phase6-perform-head-final-public-parser-API comparison | Package 89 close 後の次段として、request clause suite bridge を保ったまま `perform` head をどこまで parser-side non-production carrier に上げるか | `M` | `Macro 6/7` | request clause suite publicization minimum を entry criteria にし、perform owner / op / target-or-via shape の current first compare floor だけを選び、span-rich diagnostics / final grammar は retained-later に残す | `perform` head line の current first compare floor を source-backed に置き、request clause suite・diagnostics・final grammar と混線させずに次 package を閉じられる |
+| `91` phase6-perform-head-request-clause-bundle-attachment comparison | Package 90 close 後の次段として、perform head structural carrier と request clause suite carrier をどの combined carrier で narrow に束ねるか | `M` | `Macro 6/7` | perform head / request clause suite の separate carrier actualization を entry criteria にし、combined carrier minimum だけを選び、span-rich diagnostics / final grammar は retained-later に残す | combined carrier の current first compare floor を source-backed に置き、diagnostics / final grammar / final public API と混線させずに次 package を閉じられる |
 
 ## recently closed package note
 
@@ -553,7 +553,17 @@
 ### Package 90 — phase6-perform-head-final-public-parser-API comparison
 
 - current reading:
-  next active line。request clause suite bridge を current entry criteria に保ったまま、`perform` head の owner / op / target-or-via shape をどこまで parser-side non-production carrier に上げるかを narrow に比較する。
+  close 済み。request clause suite bridge を current entry criteria に保ったまま、`perform` head の owner / op / target-or-via shape を `CurrentL2PerformHeadManifest`、`Stage3PerformTargetRef`、`Stage3PerformHead`、`parse_stage3_perform_head_text()` に actualize し、crate-local non-production parser carrier として inspectable にした。
+- stop line:
+  request clause suite bundle attachment
+  span-rich diagnostics
+  final grammar
+  final public parser / checker / runtime surface
+
+### Package 91 — phase6-perform-head-request-clause-bundle-attachment comparison
+
+- current reading:
+  next active line。perform head structural carrier と request clause suite carrier を current entry criteria に保ったまま、どの combined carrier で narrow に束ねるかを比較する。
 - stop line:
   span-rich diagnostics
   final grammar
@@ -590,4 +600,4 @@
 
 ## next reopen order
 
-1. Package 90 で phase6-perform-head-final-public-parser-API comparison を進める。
+1. Package 91 で phase6-perform-head-request-clause-bundle-attachment comparison を進める。

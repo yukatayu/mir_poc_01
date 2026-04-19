@@ -167,6 +167,53 @@ pub struct Stage3RequestClauseSuite {
     pub ensure_fragment_text: Option<String>,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2PerformHeadManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_PERFORM_HEAD_ACCEPTED_SURFACE_REFS: &[&str] = &[
+    "stage3_perform_owner_surface",
+    "stage3_perform_on_head_surface",
+    "stage3_perform_via_head_surface",
+];
+
+const CURRENT_L2_PERFORM_HEAD_CODE_ANCHOR_REFS: &[&str] =
+    &["mir_ast_current_l2_module", "stage3_perform_head_tests"];
+
+const CURRENT_L2_PERFORM_HEAD_RETAINED_LATER_REFS: &[&str] = &[
+    "request_clause_suite_bundle_attachment",
+    "span_rich_diagnostics",
+    "final_grammar",
+];
+
+pub const CURRENT_L2_PERFORM_HEAD_MANIFEST: CurrentL2PerformHeadManifest =
+    CurrentL2PerformHeadManifest {
+        carrier_kind: "current_l2_nonproduction_perform_head_carrier",
+        accepted_surface_refs: CURRENT_L2_PERFORM_HEAD_ACCEPTED_SURFACE_REFS,
+        code_anchor_refs: CURRENT_L2_PERFORM_HEAD_CODE_ANCHOR_REFS,
+        retained_later_refs: CURRENT_L2_PERFORM_HEAD_RETAINED_LATER_REFS,
+    };
+
+pub fn current_l2_perform_head_manifest() -> &'static CurrentL2PerformHeadManifest {
+    &CURRENT_L2_PERFORM_HEAD_MANIFEST
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Stage3PerformTargetRef {
+    On(String),
+    Via(String),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Stage3PerformHead {
+    pub op: String,
+    pub target_ref: Stage3PerformTargetRef,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Stage1DeclGuardSlot {
     pub surface_text: String,
@@ -830,6 +877,15 @@ pub fn parse_stage3_request_clause_suite_text(
     Ok(suite)
 }
 
+/// Non-production stage 3 helper for perform-head structural extraction.
+pub fn parse_stage3_perform_head_text(source: &str) -> Result<Stage3PerformHead, String> {
+    let lines = collect_stage3_source_lines(source);
+    let head_index = find_first_stage3_head(&lines, "perform ")
+        .ok_or_else(|| "missing perform request head".to_string())?;
+
+    parse_stage3_perform_head_line(&lines[head_index].text)
+}
+
 fn collect_stage3_source_lines(source: &str) -> Vec<Stage3SourceLine> {
     source
         .lines()
@@ -848,6 +904,29 @@ fn find_first_stage3_head(lines: &[Stage3SourceLine], prefix: &str) -> Option<us
     lines
         .iter()
         .position(|line| !line.is_blank && line.text.starts_with(prefix))
+}
+
+fn parse_stage3_perform_head_line(line: &str) -> Result<Stage3PerformHead, String> {
+    let tokens: Vec<&str> = line.split_whitespace().collect();
+
+    match tokens.as_slice() {
+        ["perform"] => Err("missing perform operation after `perform`".to_string()),
+        ["perform", _op, "on"] => Err("missing perform-on target after `on`".to_string()),
+        ["perform", _op, "via"] => Err("missing perform-via chain ref after `via`".to_string()),
+        ["perform", op, "on", target] => Ok(Stage3PerformHead {
+            op: (*op).to_string(),
+            target_ref: Stage3PerformTargetRef::On((*target).to_string()),
+        }),
+        ["perform", op, "via", chain_ref] => Ok(Stage3PerformHead {
+            op: (*op).to_string(),
+            target_ref: Stage3PerformTargetRef::Via((*chain_ref).to_string()),
+        }),
+        ["perform", _op, relation, ..] if *relation != "on" && *relation != "via" => Err(format!(
+            "perform head must use `on` or `via`, got `{relation}`"
+        )),
+        ["perform", ..] => Err(format!("unsupported perform head shape `{line}`")),
+        _ => Err(format!("unsupported perform head shape `{line}`")),
+    }
 }
 
 fn extract_stage3_single_line_request_clause_fragment(

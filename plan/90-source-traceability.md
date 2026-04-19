@@ -4132,3 +4132,18 @@
   - `docs/reports/0816-package63-ifc-checker-payload-row-family-ratchet.md`
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
+## 2026-04-20 Phase 6 perform-head structural carrier addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/06-surface-notation-status.md`、`plan/07-parser-free-poc-stack.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/299-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-phase6-actual-parser-ast-carrier-first-tranche-comparison.md`
+  - `specs/examples/305-current-l2-phase6-compile-ready-checkpoint-close-ready-phase6-next-reopen-sequencing-comparison.md`
+  - `specs/examples/313-current-l2-phase6-parser-side-follow-up-package-sequencing-ready-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-comparison.md`
+  - `specs/examples/562-current-l2-phase6-request-clause-suite-publicization-threshold-helper-mirror.md`
+  - `specs/examples/563-current-l2-phase6-perform-head-structural-carrier-threshold-helper-mirror.md`
+  - `docs/reports/0845-package90-perform-head-structural-carrier.md`
+  - `crates/mir-ast/src/current_l2.rs`
+  - `crates/mir-ast/src/lib.rs`
+  - `crates/mir-ast/tests/current_l2_perform_head_manifest.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_perform_head_spike.rs`
+  - `crates/mir-ast/tests/support/current_l2_stage3_predicate_fragment_spike_support.rs`

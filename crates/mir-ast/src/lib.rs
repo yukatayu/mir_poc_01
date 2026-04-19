@@ -24,11 +24,15 @@ The next parser-side follow-up package is fixed as:
   - `require_fragment_text` / `ensure_fragment_text`
   - perform-owner structural floor
   - predicate fragment parser reuse
+- stage 3 perform head structural carrier
+  - `op`
+  - `On(target)` / `Via(chain_ref)`
+  - request clause suite bundle attachment remains later
 
 These stage 3 parsers are non-production reopen-package carriers, not a final
 public parser API.
 
-Perform head publicization, span-rich diagnostics, and final grammar remain
+Perform head bundle attachment, span-rich diagnostics, and final grammar remain
 later work.
 "#]
 

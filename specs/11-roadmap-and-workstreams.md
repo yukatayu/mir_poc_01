@@ -704,6 +704,14 @@ actual-adoption floor では、
   - `Stage3RequestClauseSuite`
   - `parse_stage3_request_clause_suite_text()`
   - Package 89 phase6 request-clause-suite publicization actualization close、Package 90 phase6 perform-head-final-public-parser-API comparison next
+- phase6 perform-head structural carrier threshold helper mirror:
+  `specs/examples/563`
+  - `CurrentL2PerformHeadManifest`
+  - `current_l2_perform_head_manifest()`
+  - `Stage3PerformTargetRef`
+  - `Stage3PerformHead`
+  - `parse_stage3_perform_head_text()`
+  - Package 90 phase6 perform-head structural carrier actualization close、Package 91 phase6 perform-head-request-clause-bundle-attachment comparison next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

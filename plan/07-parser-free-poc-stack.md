@@ -5,6 +5,15 @@
 current L2 の parser-free PoC stack は、representative examples を parser なしで machine-check するための最小 execution / verification infrastructure である。
 ここでは各 layer の public behavior と thin delegation の境界を揃えて記録する。
 
+current parser-side follow-up の crate-local non-production carrier としては、
+
+- `parse_stage3_request_clause_suite_text()`
+- `parse_stage3_perform_head_text()`
+
+が `mir_ast::current_l2` に actualize 済みであり、
+fixed two-slot request clause suite と perform head structural minimum は
+parser-free stack の上に重ねる narrow reopen package として読む。
+
 ## stack の全体像
 
 ### artifact / helper の順序

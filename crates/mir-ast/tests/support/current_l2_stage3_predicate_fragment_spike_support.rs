@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::PathBuf;
 
-use mir_ast::current_l2::Stage3PredicateFragment;
+use mir_ast::current_l2::{Stage3PerformHead, Stage3PerformTargetRef, Stage3PredicateFragment};
 use serde_json::Value;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -88,6 +88,32 @@ pub fn load_fixture_request_clause_fragment(
     })?;
 
     parse_fixture_predicate_fragment(predicate)
+}
+
+pub fn load_fixture_perform_head(
+    fixture_name: &str,
+    perform_index: usize,
+) -> Result<Stage3PerformHead, String> {
+    let path = fixture_path(fixture_name);
+    let text = fs::read_to_string(&path)
+        .map_err(|error| format!("failed to read fixture {}: {error}", path.display()))?;
+    let value: Value = serde_json::from_str(&text)
+        .map_err(|error| format!("failed to parse fixture {}: {error}", path.display()))?;
+
+    let program = value
+        .get("program")
+        .ok_or_else(|| format!("fixture {} is missing `program`", path.display()))?;
+    let mut performs = Vec::new();
+    collect_performs(program, &mut performs);
+    let perform = performs.get(perform_index).ok_or_else(|| {
+        format!(
+            "fixture {} is missing perform at index {}",
+            path.display(),
+            perform_index
+        )
+    })?;
+
+    parse_fixture_perform_head(perform)
 }
 
 #[allow(dead_code)]
@@ -238,6 +264,38 @@ fn parse_fixture_predicate_fragment(value: &Value) -> Result<Stage3PredicateFrag
         }
         other => Err(format!("unsupported fixture predicate kind `{other}`")),
     }
+}
+
+fn parse_fixture_perform_head(value: &Value) -> Result<Stage3PerformHead, String> {
+    let kind = value
+        .get("kind")
+        .and_then(Value::as_str)
+        .ok_or_else(|| "perform node is missing `kind`".to_string())?;
+    let op = value
+        .get("op")
+        .and_then(Value::as_str)
+        .ok_or_else(|| "perform node is missing `op`".to_string())?
+        .to_string();
+
+    let target_ref = match kind {
+        "PerformOn" => Stage3PerformTargetRef::On(
+            value
+                .get("target")
+                .and_then(Value::as_str)
+                .ok_or_else(|| "PerformOn node is missing `target`".to_string())?
+                .to_string(),
+        ),
+        "PerformVia" => Stage3PerformTargetRef::Via(
+            value
+                .get("chain_ref")
+                .and_then(Value::as_str)
+                .ok_or_else(|| "PerformVia node is missing `chain_ref`".to_string())?
+                .to_string(),
+        ),
+        other => return Err(format!("unsupported perform fixture kind `{other}`")),
+    };
+
+    Ok(Stage3PerformHead { op, target_ref })
 }
 
 #[allow(dead_code)]
