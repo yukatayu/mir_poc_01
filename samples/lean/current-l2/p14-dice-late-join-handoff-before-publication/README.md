@@ -1,9 +1,9 @@
-# p06-typed-proof-owner-handoff
+# p14-dice-late-join-handoff-before-publication
 
 ## 要約
 
-- proof owner handoff を表す typed/theorem bridge prototype。
-- current typed/theorem representative prototype であり、final strong typed calculus ではなく bridge-floor evidence に留める。
+- publish より先に handoff が現れる malformed static stop を表す late-join negative prototype。
+- current broader coverage package で、late-join visibility line の order violation pair を theorem-side representative sample set に carry over し、helper-local static stop が Lean bridge 側でも inspectable であることを保つ prototype として読む。
 
 ## この Lean ファイルが意味すること
 

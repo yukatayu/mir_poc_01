@@ -163,3 +163,29 @@ fn theorem_actual_lean_execution_reaches_delegated_rng_provider_runtime_prototyp
         order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
     assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
 }
+
+#[test]
+fn theorem_actual_lean_execution_reaches_missing_publication_witness_static_stop_prototype() {
+    if !lean_available() {
+        eprintln!("lean unavailable; skipping actual prototype widening probe");
+        return;
+    }
+
+    let sample_path = order_handoff_prototype_sample_path(
+        "p13-dice-late-join-missing-publication-witness.txt",
+    );
+    assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
+}
+
+#[test]
+fn theorem_actual_lean_execution_reaches_handoff_before_publish_static_stop_prototype() {
+    if !lean_available() {
+        eprintln!("lean unavailable; skipping actual prototype widening probe");
+        return;
+    }
+
+    let sample_path = order_handoff_prototype_sample_path(
+        "p14-dice-late-join-handoff-before-publication.txt",
+    );
+    assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
+}

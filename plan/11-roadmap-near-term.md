@@ -38,6 +38,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 | `58 first widening slice` | `docs/reports/0806` + `specs/examples/525` | delegated RNG provider placement carry-over、representative Lean sample set widening、Package 58 started |
 | `58 helper/CLI surface` | `docs/reports/0807` + `specs/examples/526` | order-handoff helper CLI `surface_preview`、`p07 / p08 / p09` reached/guarded actualization、Package 58 helper hardening first slice |
 | `58 negative static stop` | `docs/reports/0808` + `specs/examples/527` | order-handoff late-join visibility negative pair `p13 / p14`、helper-local static stop actualization、Package 58 negative corpus tightening |
+| `58 theorem-side negative carry-over` | `docs/reports/0809` + `specs/examples/528` | order-handoff late-join visibility negative pair `p13 / p14` を representative Lean sample set / committed Lean corpus へ carry over、Package 58 broader theorem-side widening |
 
 ## active self-driven packages
 
@@ -87,9 +88,9 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current source:
-  `specs/examples/516...527`
+  `specs/examples/516...528`
 - current recommendation:
-  actual Lean execution floor と committed `samples/lean/` corpus を helper / CLI hardening、broader theorem-side / IFC widening に使う。first widening slice として `p09-dice-delegated-rng-provider-placement` を representative Lean sample set へ carry over し、helper/CLI hardening first slice として `run-source-sample` `surface_preview`、negative corpus tightening slice として `p13 / p14` late-join visibility static stop を actualize してよい。
+  actual Lean execution floor と committed `samples/lean/` corpus を helper / CLI hardening、broader theorem-side / IFC widening に使う。first widening slice として `p09-dice-delegated-rng-provider-placement` を representative Lean sample set へ carry over し、helper/CLI hardening first slice として `run-source-sample` `surface_preview`、negative corpus tightening slice として `p13 / p14` late-join visibility static stop、theorem-side widening slice として `p13 / p14` representative Lean sample set carry-over を actualize してよい。
 - promotion rule:
   widened corpus は mixed gate を 1 つ閉じるか、formal skeleton package を concretize する場合だけ足す。
 - stop line:

@@ -146,6 +146,37 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
                 "carry over する prototype として読む。"
             ),
         ),
+        CurrentL2ExportSpec(
+            sample_id="p13-dice-late-join-missing-publication-witness",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.host-plan.json",
+            summary="publication witness 欠如を underdeclared static stop に落とす late-join negative prototype。",
+            rationale=(
+                "current broader coverage package で、late-join visibility line の negative pair を "
+                "theorem-side representative sample set に carry over し、runtime 未到達でも "
+                "static rejection cluster の Lean bridge artifact を inspectable に保つ "
+                "prototype として読む。"
+            ),
+        ),
+        CurrentL2ExportSpec(
+            sample_id="p14-dice-late-join-handoff-before-publication",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.host-plan.json",
+            summary="publish より先に handoff が現れる malformed static stop を表す late-join negative prototype。",
+            rationale=(
+                "current broader coverage package で、late-join visibility line の order violation pair を "
+                "theorem-side representative sample set に carry over し、helper-local static stop が "
+                "Lean bridge 側でも inspectable であることを保つ prototype として読む。"
+            ),
+        ),
     ]
 
 

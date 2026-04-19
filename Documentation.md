@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p14` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate に actualize 済みと読む。current remaining active line は helper/CLI hardening and broader coverage と later mixed/user-spec residual に narrowed した）
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527`、`528` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper に actualize 済みと読む。current remaining active line は helper/CLI hardening と broader theorem-side / IFC widening、および later mixed/user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -301,15 +301,16 @@
 
 - current live line は、
   - layered strong typing / IFC first-fragment
-  - actual Lean execution の representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09` から helper/CLI hardening と broader coverage への widening
+  - actual Lean execution の representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` から helper/CLI hardening と broader coverage への widening
   - order-handoff helper-local `surface_preview` actualization
   - order-handoff negative static-stop pair `p13 / p14` actualization
+  - order-handoff negative pair `p13 / p14` theorem-side Lean carry-over
   - committed `samples/lean/` corpus を基点にした broader theorem-side / IFC / order-handoff widening
   - later mixed gate residual maintenance
   - true user-spec residual
   に narrow 化している。
 
-`specs/examples/466...523` は、
+`specs/examples/466...528` は、
 actual adoption package、near-end closeout、helper-local actualization floor を source-backed に揃える current anchor である。
 
 ## まだ OPEN のもの

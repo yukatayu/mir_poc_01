@@ -1,9 +1,9 @@
-# p06-typed-proof-owner-handoff
+# p13-dice-late-join-missing-publication-witness
 
 ## 要約
 
-- proof owner handoff を表す typed/theorem bridge prototype。
-- current typed/theorem representative prototype であり、final strong typed calculus ではなく bridge-floor evidence に留める。
+- publication witness 欠如を underdeclared static stop に落とす late-join negative prototype。
+- current broader coverage package で、late-join visibility line の negative pair を theorem-side representative sample set に carry over し、runtime 未到達でも static rejection cluster の Lean bridge artifact を inspectable に保つ prototype として読む。
 
 ## この Lean ファイルが意味すること
 

@@ -491,6 +491,11 @@ actual-adoption floor では、
   - `p13 / p14` late-join visibility negative pair
   - helper-local source-sample runner static stop
   - Package 58 order-handoff negative corpus tightening first pair
+- order-handoff negative pair representative Lean sample-set carry-over:
+  `specs/examples/528`
+  - `p13 / p14` late-join visibility negative pair
+  - representative Lean sample set / committed Lean corpus carry-over
+  - Package 58 broader theorem-side widening after static-stop actualization
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

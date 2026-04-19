@@ -25,6 +25,8 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
                 "p07-dice-late-join-visible-history",
                 "p08-dice-stale-reconnect-refresh",
                 "p09-dice-delegated-rng-provider-placement",
+                "p13-dice-late-join-missing-publication-witness",
+                "p14-dice-late-join-handoff-before-publication",
             },
         )
 

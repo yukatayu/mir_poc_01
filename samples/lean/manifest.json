@@ -178,6 +178,42 @@
         "stderr": "",
         "returncode": 0
       }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p13-dice-late-join-missing-publication-witness",
+      "lean_path": "samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.lean",
+      "explanation_path": "samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/README.md",
+      "bundle_path": "samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p13_dice_late_join_missing_publication_witness__canonical_normalization_law",
+        "p13_dice_late_join_missing_publication_witness__no_re_promotion"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.lean:12:8: warning: declaration uses `sorry`\n/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.lean:27:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p14-dice-late-join-handoff-before-publication",
+      "lean_path": "samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.lean",
+      "explanation_path": "samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/README.md",
+      "bundle_path": "samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p14_dice_late_join_handoff_before_publication__canonical_normalization_law",
+        "p14_dice_late_join_handoff_before_publication__no_re_promotion"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.lean:12:8: warning: declaration uses `sorry`\n/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.lean:27:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
     }
   ]
 }

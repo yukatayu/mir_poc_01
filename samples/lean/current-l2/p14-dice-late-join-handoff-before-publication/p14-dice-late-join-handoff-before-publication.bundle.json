@@ -1,0 +1,89 @@
+{
+  "sample_argument": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.txt",
+  "sample_id": "p14-dice-late-join-handoff-before-publication",
+  "sample_path": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.txt",
+  "pilot_status": "reached",
+  "pilot_guard_reason": null,
+  "pilot_subject_kind": "fixture_static_cluster",
+  "pilot_subject_ref": "p14-dice-late-join-handoff-before-publication",
+  "principal_review_unit_refs": [
+    "proof_notebook_review_unit:p14-dice-late-join-handoff-before-publication:canonical_normalization_law",
+    "proof_notebook_review_unit:p14-dice-late-join-handoff-before-publication:no_re_promotion"
+  ],
+  "binding_preflight_manifest_refs": [
+    "theorem_binding_preflight:p14-dice-late-join-handoff-before-publication:canonical_normalization_law",
+    "theorem_binding_preflight:p14-dice-late-join-handoff-before-publication:no_re_promotion"
+  ],
+  "pilot_binding_refs": [
+    "theorem_lean_stub_pilot:p14-dice-late-join-handoff-before-publication:lean_first_principal",
+    "theorem_lean_stub_pilot:p14-dice-late-join-handoff-before-publication:review_unit_input_only",
+    "theorem_lean_stub_pilot:p14-dice-late-join-handoff-before-publication:nonproduction_stub_only",
+    "theorem_lean_stub_pilot:p14-dice-late-join-handoff-before-publication:rocq_iris_fallback_retained"
+  ],
+  "code_anchor_refs": [
+    "code_anchor:current_l2_proof_notebook_review_unit_support",
+    "code_anchor:current_l2_lean_theorem_stub_support",
+    "code_anchor:current_l2_emit_lean_theorem_stub"
+  ],
+  "repo_local_emitted_artifact_refs": [
+    "repo_local_emitted_artifact:lean_theorem_stub:p14-dice-late-join-handoff-before-publication:canonical_normalization_law",
+    "repo_local_emitted_artifact:lean_theorem_stub:p14-dice-late-join-handoff-before-publication:no_re_promotion"
+  ],
+  "compare_floor_refs": [
+    "compare_floor:current_l2.theorem_binding_preflight",
+    "compare_floor:current_l2.theorem_lean_stub_pilot_actualization"
+  ],
+  "guard_refs": [
+    "guard:lean_first_nonproduction_stub_only",
+    "guard:review_unit_principal_input",
+    "guard:no_public_theorem_contract_promotion"
+  ],
+  "kept_later_refs": [
+    "kept_later:actual_lean_tool_execution",
+    "kept_later:actual_discharge_transport",
+    "kept_later:public_theorem_contract",
+    "kept_later:proof_object_public_schema",
+    "kept_later:final_public_verifier_contract",
+    "kept_later:rocq_iris_fallback"
+  ],
+  "lean_stub_artifacts": [
+    {
+      "schema_version": "draft-current-l2-lean-theorem-stub-v0",
+      "artifact_kind": "current-l2-lean-theorem-stub",
+      "tool_family": "lean-first",
+      "module_name": "CurrentL2.P14DiceLateJoinHandoffBeforePublication",
+      "theorem_name": "p14_dice_late_join_handoff_before_publication__canonical_normalization_law",
+      "subject_kind": "fixture_static_cluster",
+      "subject_ref": "p14-dice-late-join-handoff-before-publication",
+      "obligation_kind": "canonical_normalization_law",
+      "evidence_refs": [
+        {
+          "ref_kind": "fixture",
+          "ref_id": "p14-dice-late-join-handoff-before-publication"
+        },
+        {
+          "ref_kind": "static_gate_artifact",
+          "ref_id": "p14-dice-late-join-handoff-before-publication"
+        }
+      ],
+      "source_text": "/- current-l2 Lean-first theorem stub (non-production)\nsubject_kind = fixture_static_cluster\nsubject_ref = p14-dice-late-join-handoff-before-publication\nobligation_kind = canonical_normalization_law\nmodule_name = CurrentL2.P14DiceLateJoinHandoffBeforePublication\n-/\nnamespace CurrentL2\n\n-- goal: Review that canonical normalization preserves the rejected static shape for `p14-dice-late-join-handoff-before-publication`.\n-- evidence fixture:p14-dice-late-join-handoff-before-publication\n-- evidence static_gate_artifact:p14-dice-late-join-handoff-before-publication\ntheorem p14_dice_late_join_handoff_before_publication__canonical_normalization_law : True := by\nsorry\n\nend CurrentL2\n"
+    },
+    {
+      "schema_version": "draft-current-l2-lean-theorem-stub-v0",
+      "artifact_kind": "current-l2-lean-theorem-stub",
+      "tool_family": "lean-first",
+      "module_name": "CurrentL2.P14DiceLateJoinHandoffBeforePublication",
+      "theorem_name": "p14_dice_late_join_handoff_before_publication__no_re_promotion",
+      "subject_kind": "fixture_static_cluster",
+      "subject_ref": "p14-dice-late-join-handoff-before-publication",
+      "obligation_kind": "no_re_promotion",
+      "evidence_refs": [
+        {
+          "ref_kind": "fixture",
+          "ref_id": "p14-dice-late-join-handoff-before-publication"
+        }
+      ],
+      "source_text": "/- current-l2 Lean-first theorem stub (non-production)\nsubject_kind = fixture_static_cluster\nsubject_ref = p14-dice-late-join-handoff-before-publication\nobligation_kind = no_re_promotion\nmodule_name = CurrentL2.P14DiceLateJoinHandoffBeforePublication\n-/\nnamespace CurrentL2\n\n-- goal: Review that `p14-dice-late-join-handoff-before-publication` remains rejected and is not re-promoted by later tooling.\n-- evidence fixture:p14-dice-late-join-handoff-before-publication\ntheorem p14_dice_late_join_handoff_before_publication__no_re_promotion : True := by\nsorry\n\nend CurrentL2\n"
+    }
+  ]
+}

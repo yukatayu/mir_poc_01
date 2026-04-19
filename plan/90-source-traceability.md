@@ -3746,3 +3746,14 @@
   - `samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.host-plan.json`
   - `samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.txt`
   - `samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.host-plan.json`
+
+## 2026-04-19 Package 58 order-handoff negative-pair Lean carry-over addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`samples/lean/README.md`、`samples/lean/manifest.json` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/528-current-l2-order-handoff-negative-pair-representative-lean-sample-set-carryover.md`
+  - `docs/reports/0809-package58-order-handoff-negative-pair-lean-carryover.md`
+  - `scripts/current_l2_lean_sample_sync.py`
+  - `scripts/tests/test_current_l2_lean_sample_sync.py`
+  - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
+  - `samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/`
+  - `samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/`
