@@ -300,5 +300,6 @@ actual adoption / final contract / final surface / concrete tool binding を
      - helper / CLI hardening and broader theorem-side coverage
      - near-end closeout sync
      を含む reopened self-driven package chain として読む current default に上がった。
+   - `specs/examples/521` により、Lean formal skeleton / proof obligations first slice は `samples/lean/foundations/CurrentL2ProofSkeleton.lean` と representative theorem quartet committed Lean corpus に actualize 済みであり、generated current-L2 theorem stub は `sorry` を含む artifact well-formedness / bridge-alignment evidence、`foundations/` は actual small proof fragment として読む current floor が fixed した。
    - これは final public language completion を意味せず、representative theorem quartet actual Lean execution floor の後段 closeout debt をどこで処理するかを整理した current package である。
-   - 未決なのは、secret-key / IFC valid-invalid corpus をどこまで first checker fragment に入れるか、formal skeleton を public proof contract に近づけずにどこまで mechanization-ready にするか、broader theorem/model-check/order-handoff corpus widening をどこで止めるかである。
+   - 未決なのは、secret-key / IFC valid-invalid corpus をどこまで first checker fragment に入れるか、declassification authority sample family をどこまで source-side に actualize するか、broader theorem/model-check/order-handoff corpus widening をどこで止めるかである。

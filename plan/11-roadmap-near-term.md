@@ -31,15 +31,15 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 | `43...50` | `docs/reports/0786...0795` + `specs/examples/508...515` | Lean-stub pilot、artifact-conformance、trace alignment、public-seam compression、serial reserve surface |
 | `51...54` | `docs/reports/0796...0799` + `specs/examples/516...519` | toolchain probe / reopen manifest、model-check public-seam compression、representative theorem quartet actual Lean execution |
 | `55` | `docs/reports/0801` + `specs/examples/520` | final-layer closeout defaults and reopened self-driven queue |
+| `57 first slice` | `docs/reports/0802` + `specs/examples/521` | committed Lean sample corpus、IFC first fragment、proof-skeleton / proof-obligation first foundations |
 
 ## active self-driven packages
 
 | 順番 | package | macro | question | rough weight | current exit signal |
 |---|---|---|---|---|---|
-| 1 | `56` layered strong typing / IFC first-fragment | `Macro 5` | strong typing / IFC をどこまで current checker fragment と corpus に入れるか | `M` | `LabelModel` / `Labeled` / explicit authority / secret-key valid-invalid corpus が docs と sample evidence に揃う |
-| 2 | `57` Lean formal skeleton / proof obligations | `Macro 5` | mechanization-ready core をどこまで current repo-local evidence に接続するか | `M` | formal definitions / proof obligations / Rust-Lean alignment floor が doc + helper evidence に揃う |
-| 3 | `58` helper / CLI hardening and broader coverage | `Macro 5/7` | actual Lean execution floor を representative quartet からどう widen するか | `M` | helper / CLI と broader theorem-side / IFC / order-handoff corpus widening が narrow package で通る |
-| 4 | `59` near-end closeout sync | `Macro 5/6/7` | mixed gate / user-spec residual をどこまで narrow に残すか | `S-M` | snapshot / roadmap / traceability が stale wording を残さない |
+| 1 | `56` layered strong typing / IFC first-fragment | `Macro 5` | strong typing / IFC をどこまで current checker fragment と corpus に入れるか | `M` | `CurrentL2LabelModel.lean` first fragment の上に secret-key valid-invalid / explicit authority corpus が docs と sample evidence に揃う |
+| 2 | `58` helper / CLI hardening and broader coverage | `Macro 5/7` | actual Lean execution floor を representative quartet からどう widen するか | `M` | `samples/lean/current-l2/` と sync helper を基点に、broader theorem-side / IFC / order-handoff corpus widening が narrow package で通る |
+| 3 | `59` near-end closeout sync | `Macro 5/6/7` | mixed gate / user-spec residual をどこまで narrow に残すか | `S-M` | snapshot / roadmap / traceability が stale wording を残さない |
 
 ## package detail
 
@@ -48,8 +48,9 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 - current source:
   `specs/examples/475`
   `specs/examples/520`
+  `specs/examples/521`
 - current recommendation:
-  checker-adjacent principal + layered stack を維持し、stronger typed surface early principal promotion はしない。
+  checker-adjacent principal + layered stack を維持し、stronger typed surface early principal promotion はしない。`CurrentL2LabelModel.lean` により Lean-side first fragment は actualize 済みと読む。
 - target corpus:
   `p06-typed-proof-owner-handoff`
   secret-key / label-flow valid-invalid
@@ -61,17 +62,15 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 
 ### Package 57 — Lean formal skeleton / proof obligations
 
-- current source:
-  `specs/examples/475`
-  `specs/examples/519`
-  `specs/examples/520`
-- current recommendation:
-  Lean-first staged roadmap を mechanization-ready core / proof obligations / Rust-Lean alignment floor に actualize する。
-- evidence floor:
-  theorem Lean-stub bridge
-  artifact-conformance bridge
-  representative theorem quartet actual Lean execution
-- stop line:
+- current reading:
+  first slice は close 済みである。
+- close evidence:
+  `specs/examples/521`
+  `samples/lean/foundations/CurrentL2ProofSkeleton.lean`
+  `samples/lean/current-l2/`
+  `crates/mir-runtime/examples/current_l2_emit_theorem_lean_bundle.rs`
+  `scripts/current_l2_lean_sample_sync.py`
+- kept later:
   concrete production prover binding
   final proof object public contract
   final public verifier contract
@@ -79,9 +78,9 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current source:
-  `specs/examples/516...520`
+  `specs/examples/516...521`
 - current recommendation:
-  actual Lean execution floor を helper / CLI hardening、broader theorem-side / IFC / order-handoff negative corpus wideningに使う。
+  actual Lean execution floor と committed `samples/lean/` corpus を helper / CLI hardening、broader theorem-side / IFC / order-handoff negative corpus wideningに使う。
 - promotion rule:
   widened corpus は mixed gate を 1 つ閉じるか、formal skeleton package を concretize する場合だけ足す。
 - stop line:
@@ -93,6 +92,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 - current source:
   `specs/examples/469`
   `specs/examples/520`
+  `specs/examples/521`
 - current recommendation:
   final public completion を凍らせず、mixed gate / true user-spec residual を narrow に残す。
 - required sync targets:

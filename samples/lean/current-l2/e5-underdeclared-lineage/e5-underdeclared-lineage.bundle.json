@@ -1,0 +1,89 @@
+{
+  "sample_argument": "e5-underdeclared-lineage",
+  "sample_id": "e5-underdeclared-lineage",
+  "sample_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/current-l2/e5-underdeclared-lineage.txt",
+  "pilot_status": "reached",
+  "pilot_guard_reason": null,
+  "pilot_subject_kind": "fixture_static_cluster",
+  "pilot_subject_ref": "e5-underdeclared-lineage",
+  "principal_review_unit_refs": [
+    "proof_notebook_review_unit:e5-underdeclared-lineage:canonical_normalization_law",
+    "proof_notebook_review_unit:e5-underdeclared-lineage:no_re_promotion"
+  ],
+  "binding_preflight_manifest_refs": [
+    "theorem_binding_preflight:e5-underdeclared-lineage:canonical_normalization_law",
+    "theorem_binding_preflight:e5-underdeclared-lineage:no_re_promotion"
+  ],
+  "pilot_binding_refs": [
+    "theorem_lean_stub_pilot:e5-underdeclared-lineage:lean_first_principal",
+    "theorem_lean_stub_pilot:e5-underdeclared-lineage:review_unit_input_only",
+    "theorem_lean_stub_pilot:e5-underdeclared-lineage:nonproduction_stub_only",
+    "theorem_lean_stub_pilot:e5-underdeclared-lineage:rocq_iris_fallback_retained"
+  ],
+  "code_anchor_refs": [
+    "code_anchor:current_l2_proof_notebook_review_unit_support",
+    "code_anchor:current_l2_lean_theorem_stub_support",
+    "code_anchor:current_l2_emit_lean_theorem_stub"
+  ],
+  "repo_local_emitted_artifact_refs": [
+    "repo_local_emitted_artifact:lean_theorem_stub:e5-underdeclared-lineage:canonical_normalization_law",
+    "repo_local_emitted_artifact:lean_theorem_stub:e5-underdeclared-lineage:no_re_promotion"
+  ],
+  "compare_floor_refs": [
+    "compare_floor:current_l2.theorem_binding_preflight",
+    "compare_floor:current_l2.theorem_lean_stub_pilot_actualization"
+  ],
+  "guard_refs": [
+    "guard:lean_first_nonproduction_stub_only",
+    "guard:review_unit_principal_input",
+    "guard:no_public_theorem_contract_promotion"
+  ],
+  "kept_later_refs": [
+    "kept_later:actual_lean_tool_execution",
+    "kept_later:actual_discharge_transport",
+    "kept_later:public_theorem_contract",
+    "kept_later:proof_object_public_schema",
+    "kept_later:final_public_verifier_contract",
+    "kept_later:rocq_iris_fallback"
+  ],
+  "lean_stub_artifacts": [
+    {
+      "schema_version": "draft-current-l2-lean-theorem-stub-v0",
+      "artifact_kind": "current-l2-lean-theorem-stub",
+      "tool_family": "lean-first",
+      "module_name": "CurrentL2.E5UnderdeclaredLineage",
+      "theorem_name": "e5_underdeclared_lineage__canonical_normalization_law",
+      "subject_kind": "fixture_static_cluster",
+      "subject_ref": "e5-underdeclared-lineage",
+      "obligation_kind": "canonical_normalization_law",
+      "evidence_refs": [
+        {
+          "ref_kind": "fixture",
+          "ref_id": "e5-underdeclared-lineage"
+        },
+        {
+          "ref_kind": "static_gate_artifact",
+          "ref_id": "e5-underdeclared-lineage"
+        }
+      ],
+      "source_text": "/- current-l2 Lean-first theorem stub (non-production)\nsubject_kind = fixture_static_cluster\nsubject_ref = e5-underdeclared-lineage\nobligation_kind = canonical_normalization_law\nmodule_name = CurrentL2.E5UnderdeclaredLineage\n-/\nnamespace CurrentL2\n\n-- goal: Review that canonical normalization preserves the rejected static shape for `e5-underdeclared-lineage`.\n-- evidence fixture:e5-underdeclared-lineage\n-- evidence static_gate_artifact:e5-underdeclared-lineage\ntheorem e5_underdeclared_lineage__canonical_normalization_law : True := by\nsorry\n\nend CurrentL2\n"
+    },
+    {
+      "schema_version": "draft-current-l2-lean-theorem-stub-v0",
+      "artifact_kind": "current-l2-lean-theorem-stub",
+      "tool_family": "lean-first",
+      "module_name": "CurrentL2.E5UnderdeclaredLineage",
+      "theorem_name": "e5_underdeclared_lineage__no_re_promotion",
+      "subject_kind": "fixture_static_cluster",
+      "subject_ref": "e5-underdeclared-lineage",
+      "obligation_kind": "no_re_promotion",
+      "evidence_refs": [
+        {
+          "ref_kind": "fixture",
+          "ref_id": "e5-underdeclared-lineage"
+        }
+      ],
+      "source_text": "/- current-l2 Lean-first theorem stub (non-production)\nsubject_kind = fixture_static_cluster\nsubject_ref = e5-underdeclared-lineage\nobligation_kind = no_re_promotion\nmodule_name = CurrentL2.E5UnderdeclaredLineage\n-/\nnamespace CurrentL2\n\n-- goal: Review that `e5-underdeclared-lineage` remains rejected and is not re-promoted by later tooling.\n-- evidence fixture:e5-underdeclared-lineage\ntheorem e5_underdeclared_lineage__no_re_promotion : True := by\nsorry\n\nend CurrentL2\n"
+    }
+  ]
+}

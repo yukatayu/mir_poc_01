@@ -1,0 +1,69 @@
+{
+  "sample_argument": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt",
+  "sample_id": "p06-typed-proof-owner-handoff",
+  "sample_path": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt",
+  "pilot_status": "reached",
+  "pilot_guard_reason": null,
+  "pilot_subject_kind": "runtime_try_cut_cluster",
+  "pilot_subject_ref": "p06-typed-proof-owner-handoff",
+  "principal_review_unit_refs": [
+    "proof_notebook_review_unit:p06-typed-proof-owner-handoff:rollback_cut_non_interference"
+  ],
+  "binding_preflight_manifest_refs": [
+    "theorem_binding_preflight:p06-typed-proof-owner-handoff:rollback_cut_non_interference"
+  ],
+  "pilot_binding_refs": [
+    "theorem_lean_stub_pilot:p06-typed-proof-owner-handoff:lean_first_principal",
+    "theorem_lean_stub_pilot:p06-typed-proof-owner-handoff:review_unit_input_only",
+    "theorem_lean_stub_pilot:p06-typed-proof-owner-handoff:nonproduction_stub_only",
+    "theorem_lean_stub_pilot:p06-typed-proof-owner-handoff:rocq_iris_fallback_retained"
+  ],
+  "code_anchor_refs": [
+    "code_anchor:current_l2_proof_notebook_review_unit_support",
+    "code_anchor:current_l2_lean_theorem_stub_support",
+    "code_anchor:current_l2_emit_lean_theorem_stub"
+  ],
+  "repo_local_emitted_artifact_refs": [
+    "repo_local_emitted_artifact:lean_theorem_stub:p06-typed-proof-owner-handoff:rollback_cut_non_interference"
+  ],
+  "compare_floor_refs": [
+    "compare_floor:current_l2.theorem_binding_preflight",
+    "compare_floor:current_l2.theorem_lean_stub_pilot_actualization"
+  ],
+  "guard_refs": [
+    "guard:lean_first_nonproduction_stub_only",
+    "guard:review_unit_principal_input",
+    "guard:no_public_theorem_contract_promotion"
+  ],
+  "kept_later_refs": [
+    "kept_later:actual_lean_tool_execution",
+    "kept_later:actual_discharge_transport",
+    "kept_later:public_theorem_contract",
+    "kept_later:proof_object_public_schema",
+    "kept_later:final_public_verifier_contract",
+    "kept_later:rocq_iris_fallback"
+  ],
+  "lean_stub_artifacts": [
+    {
+      "schema_version": "draft-current-l2-lean-theorem-stub-v0",
+      "artifact_kind": "current-l2-lean-theorem-stub",
+      "tool_family": "lean-first",
+      "module_name": "CurrentL2.P06TypedProofOwnerHandoff",
+      "theorem_name": "p06_typed_proof_owner_handoff__rollback_cut_non_interference",
+      "subject_kind": "runtime_try_cut_cluster",
+      "subject_ref": "p06-typed-proof-owner-handoff",
+      "obligation_kind": "rollback_cut_non_interference",
+      "evidence_refs": [
+        {
+          "ref_kind": "fixture",
+          "ref_id": "p06-typed-proof-owner-handoff"
+        },
+        {
+          "ref_kind": "runtime_cluster",
+          "ref_id": "p06-typed-proof-owner-handoff"
+        }
+      ],
+      "source_text": "/- current-l2 Lean-first theorem stub (non-production)\nsubject_kind = runtime_try_cut_cluster\nsubject_ref = p06-typed-proof-owner-handoff\nobligation_kind = rollback_cut_non_interference\nmodule_name = CurrentL2.P06TypedProofOwnerHandoff\n-/\nnamespace CurrentL2\n\n-- goal: Review that rollback / atomic-cut evidence does not interfere with surviving runtime behavior for `p06-typed-proof-owner-handoff`.\n-- evidence fixture:p06-typed-proof-owner-handoff\n-- evidence runtime_cluster:p06-typed-proof-owner-handoff\ntheorem p06_typed_proof_owner_handoff__rollback_cut_non_interference : True := by\nsorry\n\nend CurrentL2\n"
+    }
+  ]
+}

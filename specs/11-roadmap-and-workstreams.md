@@ -455,6 +455,12 @@ actual-adoption floor では、
   - layered strong typing / IFC first-fragment
   - Lean formal skeleton / proof obligations
   - broader negative corpus / helper hardening / near-end closeout sync
+- Lean sample corpus and first foundations:
+  `specs/examples/521`
+  - `samples/lean/foundations/` actual small proof fragment
+  - `samples/lean/current-l2/` representative theorem quartet generated stub corpus
+  - `current_l2_emit_theorem_lean_bundle` + `current_l2_lean_sample_sync.py`
+  - generated stub = artifact well-formedness / bridge alignment, not final discharge
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

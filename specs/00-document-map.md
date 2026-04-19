@@ -124,6 +124,9 @@
 - `specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`
   - final-layer closeout handoff を current repo の source-backed default に折り畳み、reopened self-driven queue、layered strong typing / IFC first-fragment、Lean formal skeleton、first completion scope、near-end stop line を整理する補助文書。
   - final public language completion を固定するものではなく、current closeout tranche の package order を読むための anchor である。
+- `specs/examples/521-current-l2-lean-sample-corpus-and-first-foundations.md`
+  - `samples/lean/` を current repo-local Lean evidence bucket として固定し、actual small proof fragment と generated theorem stub corpus の読み分け、Package 56/57 の first actual fragment を整理する補助文書。
+  - final theorem discharge や final public theorem contract を固定するものではなく、helper-local mechanization floor と committed Lean sample corpus を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

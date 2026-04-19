@@ -15,7 +15,7 @@
     （authored sixteen と corrected prototype nonet は fixed 済みであり、sample corpus は adequacy corpus として active に保つ）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization / actual-adoption floor が揃った。corrected runnable version の current floor と representative theorem quartet actual Lean execution は already reached であり、`specs/examples/520` により current principal active line は layered strong typing / IFC first-fragment、Lean formal skeleton / proof obligations、helper/CLI hardening and broader coverage、later mixed gate / user-spec residual に reopened した）
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization / actual-adoption floor が揃った。corrected runnable version の current floor と representative theorem quartet actual Lean execution は already reached であり、`specs/examples/520` と `521` により current principal active line は layered strong typing / IFC first-fragment、helper/CLI hardening and broader coverage、later mixed gate / user-spec residual に narrowed し、Lean formal skeleton / proof obligations first slice は `samples/lean/` committed corpus に actualize 済みと読む）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、packaging / FFI / exhaustive final catalog は still later に残る）
@@ -76,6 +76,12 @@
   - theorem-first first completion scope
   - reopened self-driven queue
   を `specs/examples/520` で current package 読みに戻した。
+- Lean sample corpus and first foundations は、
+  - `samples/lean/foundations/CurrentL2LabelModel.lean`
+  - `samples/lean/foundations/CurrentL2ProofSkeleton.lean`
+  - representative theorem quartet committed Lean corpus
+  - helper-local export / sync route
+  を `specs/examples/521` で current package 読みに固定した。
 
 ## current recommendation
 

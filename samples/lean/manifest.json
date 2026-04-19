@@ -1,0 +1,102 @@
+{
+  "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+  "foundations": [
+    {
+      "kind": "foundation",
+      "filename": "CurrentL2LabelModel.lean",
+      "lean_path": "samples/lean/foundations/CurrentL2LabelModel.lean",
+      "explanation_path": "samples/lean/foundations/CurrentL2LabelModel.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "foundation",
+      "filename": "CurrentL2ProofSkeleton.lean",
+      "lean_path": "samples/lean/foundations/CurrentL2ProofSkeleton.lean",
+      "explanation_path": "samples/lean/foundations/CurrentL2ProofSkeleton.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    }
+  ],
+  "current_l2": [
+    {
+      "kind": "current-l2",
+      "sample_id": "e5-underdeclared-lineage",
+      "lean_path": "samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean",
+      "explanation_path": "samples/lean/current-l2/e5-underdeclared-lineage/README.md",
+      "bundle_path": "samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "e5_underdeclared_lineage__canonical_normalization_law",
+        "e5_underdeclared_lineage__no_re_promotion"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean:12:8: warning: declaration uses `sorry`\n/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean:27:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p06-typed-proof-owner-handoff",
+      "lean_path": "samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean",
+      "explanation_path": "samples/lean/current-l2/p06-typed-proof-owner-handoff/README.md",
+      "bundle_path": "samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p06_typed_proof_owner_handoff__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p07-dice-late-join-visible-history",
+      "lean_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.lean",
+      "explanation_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/README.md",
+      "bundle_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p07_dice_late_join_visible_history__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p08-dice-stale-reconnect-refresh",
+      "lean_path": "samples/lean/current-l2/p08-dice-stale-reconnect-refresh/p08-dice-stale-reconnect-refresh.lean",
+      "explanation_path": "samples/lean/current-l2/p08-dice-stale-reconnect-refresh/README.md",
+      "bundle_path": "samples/lean/current-l2/p08-dice-stale-reconnect-refresh/p08-dice-stale-reconnect-refresh.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p08_dice_stale_reconnect_refresh__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p08-dice-stale-reconnect-refresh/p08-dice-stale-reconnect-refresh.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    }
+  ]
+}

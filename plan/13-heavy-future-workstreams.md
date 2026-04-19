@@ -104,7 +104,7 @@ detail-side で今まさに詰める線は `plan/18` と `specs/examples/458...4
 ## current recommendation
 
 - `specs/examples/466...490` と `520` が再確認したとおり、corrected runnable version の current floorは reached であり、principal first-line package も close 済みだが、これは theory solved を意味しない。`M1/M2/M3` threshold package、theorem/model-check/order-handoff/shared-space actual adoption は close 済みであり、remaining heavy work は mixed gate / user-spec gate に残る。
-- `plan/18` にある typed / theorem / model-check / ordering / syntax / modality の detailed program は、compare-floor から actual adoption package、helper-local actualization、principal theory spine / Lean-first proof roadmap package、final-layer closeout defaults までは close 済みである。layered strong typing / IFC first-fragment と Lean formal skeleton / proof obligations は heavy line ではなく current self-driven closeout package に残す。
+- `plan/18` にある typed / theorem / model-check / ordering / syntax / modality の detailed program は、compare-floor から actual adoption package、helper-local actualization、principal theory spine / Lean-first proof roadmap package、final-layer closeout defaults、Lean sample corpus and first foundations package までは close 済みである。layered strong typing / IFC first-fragment は current self-driven closeout package に残し、Lean formal skeleton / proof obligations は first slice actualization 済みとしてその先の widening のみ heavy line から外す。
 - low-level memory-order family は retained-later reference family として保持しつつ、
   higher-level family comparison を先に進める。
 - この文書の線は、boundary / pilot / adequacy corpus が固まっても mainline に混ぜない。
