@@ -1,6 +1,8 @@
 use std::path::PathBuf;
 
-use mir_semantics::{load_bundle_from_fixture_path, load_fixture_from_path, run_bundle, static_gate_detailed};
+use mir_semantics::{
+    load_bundle_from_fixture_path, load_fixture_from_path, run_bundle, static_gate_detailed,
+};
 
 #[path = "../examples/support/current_l2_detached_bundle_support.rs"]
 mod current_l2_detached_bundle_support;
@@ -11,8 +13,8 @@ mod current_l2_static_gate_support;
 
 use current_l2_detached_bundle_support::build_detached_bundle_artifact;
 use current_l2_formal_hook_support::{
-    build_formal_hook_from_detached_bundle_artifact, build_formal_hook_from_static_gate_artifact,
-    ToolNeutralFormalEvidenceRef,
+    ToolNeutralFormalEvidenceRef, build_formal_hook_from_detached_bundle_artifact,
+    build_formal_hook_from_static_gate_artifact,
 };
 use current_l2_static_gate_support::build_detached_static_gate_artifact;
 
@@ -51,7 +53,10 @@ fn formal_hook_support_emits_static_cluster_subject_and_row_refs() {
             },
         ]
     );
-    assert_eq!(formal_hook.contract_rows[1].obligation_kind, "no_re_promotion");
+    assert_eq!(
+        formal_hook.contract_rows[1].obligation_kind,
+        "no_re_promotion"
+    );
     assert_eq!(
         formal_hook.contract_rows[1].evidence_refs,
         vec![ToolNeutralFormalEvidenceRef {
@@ -116,13 +121,11 @@ fn formal_hook_support_emits_runtime_try_cut_subject_and_row_refs() {
 
 #[test]
 fn formal_hook_support_rejects_runtime_artifact_outside_try_cut_cluster() {
-    let bundle =
-        load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
+    let bundle = load_bundle_from_fixture_path(fixture_path("e3-option-admit-chain.json")).unwrap();
     let report = run_bundle(&bundle).unwrap();
     let artifact = build_detached_bundle_artifact(&bundle, &report);
 
-    let error =
-        build_formal_hook_from_detached_bundle_artifact(&artifact).unwrap_err();
+    let error = build_formal_hook_from_detached_bundle_artifact(&artifact).unwrap_err();
 
     assert!(
         error.contains("runtime_try_cut_cluster"),

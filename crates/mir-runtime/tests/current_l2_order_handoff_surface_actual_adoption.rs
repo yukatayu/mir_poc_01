@@ -6,8 +6,7 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus,
-    CurrentL2SourceSampleOrderHandoffSurfaceActualAdoption,
+    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleOrderHandoffSurfaceActualAdoption,
     CurrentL2SourceSampleOrderHandoffSurfaceArtifactThreshold,
     build_current_l2_source_sample_order_handoff_surface_actual_adoption,
     build_current_l2_source_sample_order_handoff_surface_artifact_threshold,
@@ -33,8 +32,14 @@ fn assert_actual_adoption_matches_threshold(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(actual_adoption.actualization_status, threshold.threshold_status);
-    assert_eq!(actual_adoption.profile_axis_refs, threshold.profile_axis_refs);
+    assert_eq!(
+        actual_adoption.actualization_status,
+        threshold.threshold_status
+    );
+    assert_eq!(
+        actual_adoption.profile_axis_refs,
+        threshold.profile_axis_refs
+    );
     assert_eq!(
         actual_adoption.principal_surface_lines,
         threshold.principal_surface_lines
@@ -96,19 +101,20 @@ fn assert_actual_adoption_matches_threshold(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("order-handoff surface actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("order-handoff surface actual adoption")
+            );
         }
     }
 }
 
 #[test]
 fn order_handoff_surface_actual_adoption_reaches_late_join_default() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let threshold = build_current_l2_source_sample_order_handoff_surface_artifact_threshold(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -143,8 +149,7 @@ fn order_handoff_surface_actual_adoption_reaches_late_join_default() {
 
 #[test]
 fn order_handoff_surface_actual_adoption_reaches_stale_reconnect_default() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let threshold = build_current_l2_source_sample_order_handoff_surface_artifact_threshold(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

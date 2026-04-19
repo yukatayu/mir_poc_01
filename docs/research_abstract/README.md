@@ -15,9 +15,9 @@
 ## current global reading
 
 - `Macro 4` は fixed authored/prototype floor の上で active である。
-- `Macro 5` は post-runnable mixed-gate actualization floor fixed の line である。
-  current reading では compare floor、actual adoption floor、helper-local actualization / narrowing floor、deeper-theory / reserve / mixed-gate actualization / actual-adoption floor まで close 済みであり、current principal self-driven queue は close 済みだが、remaining work は later mixed gate と user-spec residual に寄っている。
-- `Macro 6` は docs-first boundary only、`Macro 7` は mixed である。
+- `Macro 5` は post-runnable actual-adoption floor fixed + residual-gate compression closed の line である。
+  current reading では compare floor、actual adoption floor、helper-local actualization / narrowing floor、deeper-theory / reserve / mixed-gate / actual-execution actualization floor まで close 済みであり、current self-driven queue は narrow だが nonzero で、remaining work は actual Lean execution hardening / helper orchestration と later mixed gate / user-spec residual に寄っている。
+- `Macro 6` は minimal working subset actual default、`Macro 7` は mixed である。
 - `Macro 8` は application / domain realization であり、user specification が要る。
 
 ## いま reader がここで把握すべきこと
@@ -28,7 +28,7 @@
   - corrected runnable prototype nonet
   - exact rough stimulus preservation bucket
 - corrected runnable version の current floorは already reached である。
-- current self-driven queue は live package none であり、remaining work は later mixed/user-spec gate 側にある。
+- current self-driven queue は actual Lean execution hardening を主軸に narrow 化しており、Package 46〜54 は close 済みである。
 - ただし final parser grammar、final public API、concrete theorem / model-check tool binding、shared-space final catalog はまだ open である。
 
 ## 使い方

@@ -40,7 +40,10 @@ fn assert_actual_adoption_matches_prior_floors(
         actual_adoption.actualization_status,
         surface_actual_adoption.actualization_status
     );
-    assert_eq!(actual_adoption.actualization_status, coupled_gate.coupled_status);
+    assert_eq!(
+        actual_adoption.actualization_status,
+        coupled_gate.coupled_status
+    );
     assert_eq!(
         actual_adoption.profile_axis_refs,
         surface_actual_adoption.profile_axis_refs
@@ -158,34 +161,37 @@ fn assert_actual_adoption_matches_prior_floors(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("order-handoff source wording route actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("order-handoff source wording route actual adoption")
+            );
         }
     }
 }
 
 #[test]
 fn order_handoff_source_wording_route_actual_adoption_reaches_late_join_default() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let surface_actual_adoption = build_current_l2_source_sample_order_handoff_surface_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let surface_actual_adoption =
+        build_current_l2_source_sample_order_handoff_surface_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let coupled_gate = build_current_l2_source_sample_order_handoff_source_wording_emitted_artifact_coupled_later_gate(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
     )
     .unwrap();
-    let actual_adoption = build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_prior_floors(
         &actual_adoption,
@@ -219,23 +225,24 @@ fn order_handoff_source_wording_route_actual_adoption_reaches_late_join_default(
 
 #[test]
 fn order_handoff_source_wording_route_actual_adoption_reaches_stale_reconnect_default() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let surface_actual_adoption = build_current_l2_source_sample_order_handoff_surface_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let surface_actual_adoption =
+        build_current_l2_source_sample_order_handoff_surface_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let coupled_gate = build_current_l2_source_sample_order_handoff_source_wording_emitted_artifact_coupled_later_gate(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
     )
     .unwrap();
-    let actual_adoption = build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_prior_floors(
         &actual_adoption,
@@ -269,21 +276,23 @@ fn order_handoff_source_wording_route_actual_adoption_reaches_stale_reconnect_de
 #[test]
 fn order_handoff_source_wording_route_actual_adoption_keeps_guarded_chain_not_reached() {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let surface_actual_adoption = build_current_l2_source_sample_order_handoff_surface_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let surface_actual_adoption =
+        build_current_l2_source_sample_order_handoff_surface_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let coupled_gate = build_current_l2_source_sample_order_handoff_source_wording_emitted_artifact_coupled_later_gate(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
     )
     .unwrap();
-    let actual_adoption = build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_prior_floors(
         &actual_adoption,

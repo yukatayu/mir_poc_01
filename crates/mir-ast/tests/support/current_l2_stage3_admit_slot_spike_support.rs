@@ -1,9 +1,7 @@
 use std::fs;
 use std::path::PathBuf;
 
-use mir_ast::current_l2::{
-    Stage3ParsedChainDecl, Stage3ParsedOptionDecl,
-};
+use mir_ast::current_l2::{Stage3ParsedChainDecl, Stage3ParsedOptionDecl};
 use serde_json::Value;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -51,9 +49,7 @@ pub fn lower_stage3_option_decl_to_fixture_structural_option(
     }
 }
 
-pub fn lower_stage3_chain_decl_to_fixture_chain(
-    chain: &Stage3ParsedChainDecl,
-) -> FixtureChainDecl {
+pub fn lower_stage3_chain_decl_to_fixture_chain(chain: &Stage3ParsedChainDecl) -> FixtureChainDecl {
     FixtureChainDecl {
         name: chain.name.clone(),
         head: chain.head.clone(),

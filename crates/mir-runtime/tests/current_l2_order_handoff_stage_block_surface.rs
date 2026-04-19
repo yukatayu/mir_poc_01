@@ -30,7 +30,10 @@ fn assert_surface(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(surface.surface_status, CurrentL2EmittedArtifactRouteStatus::Reached);
+    assert_eq!(
+        surface.surface_status,
+        CurrentL2EmittedArtifactRouteStatus::Reached
+    );
     assert!(surface.surface_guard_reason.is_none());
     assert_eq!(
         surface.stage_lines,
@@ -67,8 +70,7 @@ fn assert_surface(
 
 #[test]
 fn stage_block_surface_reaches_late_join_room_profile() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let surface = build_current_l2_source_sample_stage_block_surface(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -106,15 +108,17 @@ fn stage_block_surface_reaches_late_join_room_profile() {
 
 #[test]
 fn stage_block_surface_reaches_stale_reconnect_room_profile() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let surface = build_current_l2_source_sample_stage_block_surface(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
     )
     .unwrap();
 
-    assert_eq!(surface.source_report.sample_id, "p08-dice-stale-reconnect-refresh");
+    assert_eq!(
+        surface.source_report.sample_id,
+        "p08-dice-stale-reconnect-refresh"
+    );
     assert_surface(
         &surface,
         &[
@@ -148,16 +152,21 @@ fn stage_block_surface_keeps_guarded_chain_as_not_reached() {
     )
     .unwrap();
 
-    assert_eq!(surface.source_report.sample_id, "p05-dice-owner-guarded-chain");
+    assert_eq!(
+        surface.source_report.sample_id,
+        "p05-dice-owner-guarded-chain"
+    );
     assert_eq!(
         surface.surface_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(surface
-        .surface_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("stage-block"));
+    assert!(
+        surface
+            .surface_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("stage-block")
+    );
     assert!(surface.stage_lines.is_empty());
     assert_eq!(
         surface.compare_floor_refs,

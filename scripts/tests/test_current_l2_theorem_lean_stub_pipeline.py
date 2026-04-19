@@ -92,7 +92,7 @@ class TheoremLeanStubPipelineConformanceTests(unittest.TestCase):
                 "tool_family": "lean-first",
                 "subject_ref": "e2_try_fallback",
                 "obligation_kind": "rollback_cut_non_interference",
-                "source_text": "theorem e2_try_fallback__rollback_cut_non_interference : Prop := by\n  sorry\n",
+                "source_text": "theorem e2_try_fallback__rollback_cut_non_interference : True := by\n  sorry\n",
             }
         ]
 
@@ -114,7 +114,7 @@ class TheoremLeanStubPipelineConformanceTests(unittest.TestCase):
                 "tool_family": "lean-first",
                 "subject_ref": "e5_underdeclared_lineage",
                 "obligation_kind": "canonical_normalization_law",
-                "source_text": "theorem e5_underdeclared_lineage__canonical_normalization_law : Prop := by\n  sorry\n",
+                "source_text": "theorem e5_underdeclared_lineage__canonical_normalization_law : True := by\n  sorry\n",
             }
         ]
 

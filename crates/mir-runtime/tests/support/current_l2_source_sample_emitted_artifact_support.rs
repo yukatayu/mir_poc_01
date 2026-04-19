@@ -12,10 +12,10 @@ use mir_semantics::{
 mod current_l2_detached_bundle_support;
 #[path = "../../../mir-semantics/examples/support/current_l2_formal_hook_support.rs"]
 mod current_l2_formal_hook_support;
-#[path = "../../../mir-semantics/examples/support/current_l2_model_check_carrier_support.rs"]
-mod current_l2_model_check_carrier_support;
 #[path = "../../../mir-semantics/examples/support/current_l2_lean_theorem_stub_support.rs"]
 mod current_l2_lean_theorem_stub_support;
+#[path = "../../../mir-semantics/examples/support/current_l2_model_check_carrier_support.rs"]
+mod current_l2_model_check_carrier_support;
 #[path = "../../../mir-semantics/examples/support/current_l2_proof_notebook_review_unit_support.rs"]
 mod current_l2_proof_notebook_review_unit_support;
 #[path = "../../../mir-semantics/examples/support/current_l2_static_gate_support.rs"]
@@ -26,11 +26,11 @@ use current_l2_formal_hook_support::{
     ToolNeutralFormalContractRow, ToolNeutralFormalEvidenceRef, ToolNeutralFormalHookArtifact,
     build_formal_hook_from_detached_bundle_artifact, build_formal_hook_from_static_gate_artifact,
 };
-use current_l2_model_check_carrier_support::{
-    ModelCheckConcreteCarrierArtifact, build_model_check_concrete_carrier_artifacts,
-};
 use current_l2_lean_theorem_stub_support::{
     LeanTheoremStubArtifact, build_lean_theorem_stub_artifacts,
+};
+use current_l2_model_check_carrier_support::{
+    ModelCheckConcreteCarrierArtifact, build_model_check_concrete_carrier_artifacts,
 };
 use current_l2_proof_notebook_review_unit_support::{
     ProofNotebookReviewUnitArtifact, build_proof_notebook_review_unit_artifacts,
@@ -286,6 +286,47 @@ pub struct CurrentL2SourceSampleTheoremFinalPublicContractReopenThreshold {
 }
 
 #[derive(Debug)]
+pub struct CurrentL2SourceSampleTheoremPublicSeamCompression {
+    pub source_report: CurrentL2SourceSampleRunReport,
+    pub compression_status: CurrentL2EmittedArtifactRouteStatus,
+    pub compression_guard_reason: Option<String>,
+    pub actualization_subject_kind: Option<String>,
+    pub actualization_subject_ref: Option<String>,
+    pub repo_local_emitted_artifact_refs: Vec<String>,
+    pub result_object_route_refs: Vec<String>,
+    pub payload_preview_keep_refs: Vec<String>,
+    pub proof_object_schema_candidate_refs: Vec<String>,
+    pub prover_brand_candidate_refs: Vec<String>,
+    pub lean_stub_alignment_refs: Vec<String>,
+    pub public_seam_residual_refs: Vec<String>,
+    pub environment_stop_line_refs: Vec<String>,
+    pub compare_floor_refs: Vec<String>,
+    pub guard_refs: Vec<String>,
+    pub kept_later_refs: Vec<String>,
+}
+
+#[derive(Debug)]
+pub struct CurrentL2SourceSampleModelCheckPublicSeamCompression {
+    pub source_report: CurrentL2SourceSampleRunReport,
+    pub compression_status: CurrentL2EmittedArtifactRouteStatus,
+    pub compression_guard_reason: Option<String>,
+    pub actualization_subject_kind: Option<String>,
+    pub actualization_subject_ref: Option<String>,
+    pub repo_local_emitted_artifact_refs: Vec<String>,
+    pub checker_artifact_route_refs: Vec<String>,
+    pub migration_candidate_keep_refs: Vec<String>,
+    pub verifier_handoff_candidate_refs: Vec<String>,
+    pub tool_brand_candidate_refs: Vec<String>,
+    pub property_language_probe_refs: Vec<String>,
+    pub tool_seam_probe_refs: Vec<String>,
+    pub checker_boundary_probe_refs: Vec<String>,
+    pub public_seam_residual_refs: Vec<String>,
+    pub compare_floor_refs: Vec<String>,
+    pub guard_refs: Vec<String>,
+    pub kept_later_refs: Vec<String>,
+}
+
+#[derive(Debug)]
 pub struct CurrentL2SourceSampleModelCheckRowLocalPropertyActualAdoption {
     pub source_report: CurrentL2SourceSampleRunReport,
     pub actualization_status: CurrentL2EmittedArtifactRouteStatus,
@@ -489,6 +530,19 @@ pub struct CurrentL2SourceSampleStageBlockSurface {
 }
 
 #[derive(Debug)]
+pub struct CurrentL2SourceSampleOrderHandoffSerialScopeReserveSurface {
+    pub source_report: CurrentL2SourceSampleRunReport,
+    pub surface_status: CurrentL2EmittedArtifactRouteStatus,
+    pub surface_guard_reason: Option<String>,
+    pub profile_axis_refs: Vec<String>,
+    pub repo_local_emitted_artifact_refs: Vec<String>,
+    pub serial_scope_lines: Vec<String>,
+    pub compare_floor_refs: Vec<String>,
+    pub guard_refs: Vec<String>,
+    pub kept_later_refs: Vec<String>,
+}
+
+#[derive(Debug)]
 pub struct CurrentL2SourceSampleOrderHandoffSurfaceArtifactThreshold {
     pub source_report: CurrentL2SourceSampleRunReport,
     pub threshold_status: CurrentL2EmittedArtifactRouteStatus,
@@ -525,10 +579,26 @@ pub struct CurrentL2SourceSampleWitnessProviderEmittedContractCoupledLaterGate {
     pub coupled_status: CurrentL2EmittedArtifactRouteStatus,
     pub coupled_guard_reason: Option<String>,
     pub profile_axis_refs: Vec<String>,
+    pub repo_local_emitted_artifact_refs: Vec<String>,
     pub witness_contract_candidate_refs: Vec<String>,
     pub provider_contract_candidate_refs: Vec<String>,
     pub emitted_contract_candidate_refs: Vec<String>,
     pub coupled_default_refs: Vec<String>,
+    pub compare_floor_refs: Vec<String>,
+    pub guard_refs: Vec<String>,
+    pub kept_later_refs: Vec<String>,
+}
+
+#[derive(Debug)]
+pub struct CurrentL2SourceSampleWitnessProviderEmittedContractTraceAlignmentBridge {
+    pub source_report: CurrentL2SourceSampleRunReport,
+    pub alignment_status: CurrentL2EmittedArtifactRouteStatus,
+    pub alignment_guard_reason: Option<String>,
+    pub profile_axis_refs: Vec<String>,
+    pub repo_local_emitted_artifact_refs: Vec<String>,
+    pub route_pair_refs: Vec<String>,
+    pub emitted_contract_pair_refs: Vec<String>,
+    pub matched_pair_refs: Vec<String>,
     pub compare_floor_refs: Vec<String>,
     pub guard_refs: Vec<String>,
     pub kept_later_refs: Vec<String>,
@@ -623,6 +693,26 @@ pub struct CurrentL2SourceSampleOrderHandoffSourceWordingRouteActualAdoption {
     pub source_wording_route_refs: Vec<String>,
     pub emitted_artifact_candidate_keep_refs: Vec<String>,
     pub actual_adoption_default_refs: Vec<String>,
+    pub compare_floor_refs: Vec<String>,
+    pub guard_refs: Vec<String>,
+    pub kept_later_refs: Vec<String>,
+}
+
+#[derive(Debug)]
+pub struct CurrentL2SourceSampleOrderHandoffWitnessProviderPublicSeamCompression {
+    pub source_report: CurrentL2SourceSampleRunReport,
+    pub compression_status: CurrentL2EmittedArtifactRouteStatus,
+    pub compression_guard_reason: Option<String>,
+    pub profile_axis_refs: Vec<String>,
+    pub repo_local_emitted_artifact_refs: Vec<String>,
+    pub source_wording_route_refs: Vec<String>,
+    pub emitted_artifact_candidate_keep_refs: Vec<String>,
+    pub serial_scope_lines: Vec<String>,
+    pub witness_schema_route_refs: Vec<String>,
+    pub provider_receipt_route_refs: Vec<String>,
+    pub combined_public_contract_keep_refs: Vec<String>,
+    pub trace_alignment_pair_refs: Vec<String>,
+    pub public_seam_residual_refs: Vec<String>,
     pub compare_floor_refs: Vec<String>,
     pub guard_refs: Vec<String>,
     pub kept_later_refs: Vec<String>,
@@ -866,7 +956,9 @@ pub fn build_current_l2_source_sample_model_check_projection_prefloor(
         property_language_seam_refs: vec![
             "property_language_seam:current_l2.model_check.small_cluster.semantic".to_string(),
         ],
-        tool_binding_seam_refs: vec!["tool_binding_seam:current_l2.model_check.reserve".to_string()],
+        tool_binding_seam_refs: vec![
+            "tool_binding_seam:current_l2.model_check.reserve".to_string(),
+        ],
         guard_refs,
         excluded_family_refs: vec![
             "excluded_family:typed_reserve_cluster".to_string(),
@@ -921,10 +1013,8 @@ pub fn build_current_l2_source_sample_theorem_discharge_prefloor(
             )
         })
         .collect::<Vec<_>>();
-    let guard_refs = theorem_discharge_guard_refs(
-        formal_hook_status,
-        formal_hook_guard_reason.as_deref(),
-    );
+    let guard_refs =
+        theorem_discharge_guard_refs(formal_hook_status, formal_hook_guard_reason.as_deref());
 
     Ok(CurrentL2SourceSampleTheoremDischargePrefloor {
         source_report,
@@ -934,7 +1024,9 @@ pub fn build_current_l2_source_sample_theorem_discharge_prefloor(
         discharge_subject_ref,
         principal_review_unit_refs,
         discharge_entry_reserve_refs,
-        transport_seam_refs: vec!["transport_seam:current_l2.theorem.discharge.reserve".to_string()],
+        transport_seam_refs: vec![
+            "transport_seam:current_l2.theorem.discharge.reserve".to_string(),
+        ],
         public_contract_seam_refs: vec![
             "public_contract_seam:current_l2.theorem.notebook.reserve".to_string(),
         ],
@@ -1015,10 +1107,14 @@ pub fn build_current_l2_source_sample_theorem_discharge_actual_format_probe(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleTheoremDischargeActualFormatProbe, String> {
-    let prefloor =
-        build_current_l2_source_sample_theorem_discharge_prefloor(sample_argument, host_plan.clone())?;
-    let pilot =
-        build_current_l2_source_sample_theorem_first_pilot_actualization(sample_argument, host_plan)?;
+    let prefloor = build_current_l2_source_sample_theorem_discharge_prefloor(
+        sample_argument,
+        host_plan.clone(),
+    )?;
+    let pilot = build_current_l2_source_sample_theorem_first_pilot_actualization(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleTheoremDischargePrefloor {
         source_report,
@@ -1124,8 +1220,10 @@ pub fn build_current_l2_source_sample_theorem_prover_binding_preflight(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleTheoremProverBindingPreflight, String> {
-    let pilot =
-        build_current_l2_source_sample_theorem_first_pilot_actualization(sample_argument, host_plan)?;
+    let pilot = build_current_l2_source_sample_theorem_first_pilot_actualization(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleTheoremFirstPilotActualization {
         source_report,
@@ -1200,8 +1298,10 @@ pub fn build_current_l2_source_sample_theorem_lean_stub_pilot_actualization(
 ) -> Result<CurrentL2SourceSampleTheoremLeanStubPilotActualization, String> {
     let preview_route =
         build_current_l2_source_sample_preview_artifact_route(sample_argument, host_plan.clone())?;
-    let preflight =
-        build_current_l2_source_sample_theorem_prover_binding_preflight(sample_argument, host_plan)?;
+    let preflight = build_current_l2_source_sample_theorem_prover_binding_preflight(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSamplePreviewArtifactRoute {
         source_report: _,
@@ -1275,12 +1375,11 @@ pub fn build_current_l2_source_sample_theorem_lean_stub_pilot_actualization(
         principal_review_unit_refs,
         binding_preflight_manifest_refs,
         lean_stub_artifacts: lean_stub_artifacts.clone(),
-        pilot_binding_refs: theorem_lean_stub_pilot_binding_refs(
-            preflight_subject_ref.as_deref(),
-        ),
+        pilot_binding_refs: theorem_lean_stub_pilot_binding_refs(preflight_subject_ref.as_deref()),
         code_anchor_refs: theorem_lean_stub_pilot_code_anchor_refs(),
-        repo_local_emitted_artifact_refs:
-            theorem_lean_stub_pilot_repo_local_emitted_artifact_refs(&lean_stub_artifacts),
+        repo_local_emitted_artifact_refs: theorem_lean_stub_pilot_repo_local_emitted_artifact_refs(
+            &lean_stub_artifacts,
+        ),
         compare_floor_refs: theorem_lean_stub_pilot_compare_floor_refs(
             CurrentL2EmittedArtifactRouteStatus::Reached,
         ),
@@ -1297,8 +1396,10 @@ pub fn build_current_l2_source_sample_theorem_lean_stub_trace_alignment_bridge(
 ) -> Result<CurrentL2SourceSampleTheoremLeanStubTraceAlignmentBridge, String> {
     let preview_route =
         build_current_l2_source_sample_preview_artifact_route(sample_argument, host_plan.clone())?;
-    let pilot =
-        build_current_l2_source_sample_theorem_lean_stub_pilot_actualization(sample_argument, host_plan)?;
+    let pilot = build_current_l2_source_sample_theorem_lean_stub_pilot_actualization(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSamplePreviewArtifactRoute {
         source_report: _,
@@ -1392,13 +1493,14 @@ pub fn build_current_l2_source_sample_theorem_discharge_public_contract_threshol
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleTheoremDischargePublicContractThreshold, String> {
-    let probe =
-        build_current_l2_source_sample_theorem_discharge_actual_format_probe(
-            sample_argument,
-            host_plan.clone(),
-        )?;
-    let preflight =
-        build_current_l2_source_sample_theorem_prover_binding_preflight(sample_argument, host_plan)?;
+    let probe = build_current_l2_source_sample_theorem_discharge_actual_format_probe(
+        sample_argument,
+        host_plan.clone(),
+    )?;
+    let preflight = build_current_l2_source_sample_theorem_prover_binding_preflight(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleTheoremDischargeActualFormatProbe {
         source_report,
@@ -1454,58 +1556,62 @@ pub fn build_current_l2_source_sample_theorem_discharge_public_contract_threshol
             "current theorem discharge/public-contract threshold only actualizes reached theorem mixed-gate routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleTheoremDischargePublicContractThreshold {
+        return Ok(
+            CurrentL2SourceSampleTheoremDischargePublicContractThreshold {
+                source_report,
+                threshold_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                threshold_guard_reason: Some(guard_reason),
+                threshold_subject_kind: probe_subject_kind,
+                threshold_subject_ref: probe_subject_ref,
+                principal_review_unit_refs,
+                discharge_entry_reserve_refs,
+                symbolic_evidence_refs,
+                transport_preview_refs: Vec::new(),
+                public_contract_preview_refs: Vec::new(),
+                consumer_boundary_refs: Vec::new(),
+                binding_preflight_manifest_refs: Vec::new(),
+                adapter_boundary_refs: Vec::new(),
+                threshold_default_refs: Vec::new(),
+                repo_local_emitted_artifact_refs,
+                compare_floor_refs: theorem_contract_threshold_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                guard_refs: theorem_contract_threshold_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                kept_later_refs: theorem_contract_threshold_kept_later_refs(),
+            },
+        );
+    }
+
+    Ok(
+        CurrentL2SourceSampleTheoremDischargePublicContractThreshold {
             source_report,
-            threshold_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            threshold_guard_reason: Some(guard_reason),
+            threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            threshold_guard_reason: None,
             threshold_subject_kind: probe_subject_kind,
             threshold_subject_ref: probe_subject_ref,
             principal_review_unit_refs,
             discharge_entry_reserve_refs,
             symbolic_evidence_refs,
-            transport_preview_refs: Vec::new(),
-            public_contract_preview_refs: Vec::new(),
-            consumer_boundary_refs: Vec::new(),
-            binding_preflight_manifest_refs: Vec::new(),
-            adapter_boundary_refs: Vec::new(),
-            threshold_default_refs: Vec::new(),
+            transport_preview_refs,
+            public_contract_preview_refs,
+            consumer_boundary_refs,
+            binding_preflight_manifest_refs,
+            adapter_boundary_refs,
+            threshold_default_refs: theorem_contract_threshold_default_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
             repo_local_emitted_artifact_refs,
             compare_floor_refs: theorem_contract_threshold_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
             guard_refs: theorem_contract_threshold_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
             kept_later_refs: theorem_contract_threshold_kept_later_refs(),
-        });
-    }
-
-    Ok(CurrentL2SourceSampleTheoremDischargePublicContractThreshold {
-        source_report,
-        threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        threshold_guard_reason: None,
-        threshold_subject_kind: probe_subject_kind,
-        threshold_subject_ref: probe_subject_ref,
-        principal_review_unit_refs,
-        discharge_entry_reserve_refs,
-        symbolic_evidence_refs,
-        transport_preview_refs,
-        public_contract_preview_refs,
-        consumer_boundary_refs,
-        binding_preflight_manifest_refs,
-        adapter_boundary_refs,
-        threshold_default_refs: theorem_contract_threshold_default_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        repo_local_emitted_artifact_refs,
-        compare_floor_refs: theorem_contract_threshold_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        guard_refs: theorem_contract_threshold_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: theorem_contract_threshold_kept_later_refs(),
-    })
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_theorem_contract_shape_threshold(
@@ -1599,8 +1705,10 @@ pub fn build_current_l2_source_sample_theorem_transport_contract_coupled_later_g
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleTheoremTransportContractCoupledLaterGate, String> {
-    let threshold =
-        build_current_l2_source_sample_theorem_contract_shape_threshold(sample_argument, host_plan)?;
+    let threshold = build_current_l2_source_sample_theorem_contract_shape_threshold(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleTheoremContractShapeThreshold {
         source_report,
@@ -1628,59 +1736,65 @@ pub fn build_current_l2_source_sample_theorem_transport_contract_coupled_later_g
             "theorem transport/public-contract coupled later gate only actualizes reached theorem shape-threshold routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleTheoremTransportContractCoupledLaterGate {
-            source_report,
-            actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            actualization_guard_reason: Some(guard_reason),
-            actualization_subject_kind: threshold_subject_kind,
-            actualization_subject_ref: threshold_subject_ref,
-            transport_candidate_refs: Vec::new(),
-            public_contract_candidate_refs: Vec::new(),
-            coupled_default_refs: Vec::new(),
-            compare_floor_refs: theorem_transport_contract_coupled_later_gate_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            guard_refs: theorem_transport_contract_coupled_later_gate_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: theorem_transport_contract_coupled_later_gate_kept_later_refs(),
-        });
+        return Ok(
+            CurrentL2SourceSampleTheoremTransportContractCoupledLaterGate {
+                source_report,
+                actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                actualization_guard_reason: Some(guard_reason),
+                actualization_subject_kind: threshold_subject_kind,
+                actualization_subject_ref: threshold_subject_ref,
+                transport_candidate_refs: Vec::new(),
+                public_contract_candidate_refs: Vec::new(),
+                coupled_default_refs: Vec::new(),
+                compare_floor_refs:
+                    theorem_transport_contract_coupled_later_gate_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                    ),
+                guard_refs: theorem_transport_contract_coupled_later_gate_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                kept_later_refs: theorem_transport_contract_coupled_later_gate_kept_later_refs(),
+            },
+        );
     }
 
-    Ok(CurrentL2SourceSampleTheoremTransportContractCoupledLaterGate {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        actualization_subject_kind: threshold_subject_kind,
-        actualization_subject_ref: threshold_subject_ref.clone(),
-        transport_candidate_refs: theorem_transport_contract_coupled_later_gate_transport_refs(
-            threshold_subject_ref.as_deref(),
-        ),
-        public_contract_candidate_refs:
-            theorem_transport_contract_coupled_later_gate_public_contract_refs(
+    Ok(
+        CurrentL2SourceSampleTheoremTransportContractCoupledLaterGate {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            actualization_subject_kind: threshold_subject_kind,
+            actualization_subject_ref: threshold_subject_ref.clone(),
+            transport_candidate_refs: theorem_transport_contract_coupled_later_gate_transport_refs(
                 threshold_subject_ref.as_deref(),
             ),
-        coupled_default_refs: theorem_transport_contract_coupled_later_gate_default_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        compare_floor_refs: theorem_transport_contract_coupled_later_gate_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        guard_refs: theorem_transport_contract_coupled_later_gate_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: theorem_transport_contract_coupled_later_gate_kept_later_refs(),
-    })
+            public_contract_candidate_refs:
+                theorem_transport_contract_coupled_later_gate_public_contract_refs(
+                    threshold_subject_ref.as_deref(),
+                ),
+            coupled_default_refs: theorem_transport_contract_coupled_later_gate_default_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            compare_floor_refs: theorem_transport_contract_coupled_later_gate_compare_floor_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            guard_refs: theorem_transport_contract_coupled_later_gate_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            kept_later_refs: theorem_transport_contract_coupled_later_gate_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleTheoremReviewUnitTransportActualAdoption, String> {
-    let coupled_gate = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_argument,
-        host_plan.clone(),
-    )?;
+    let coupled_gate =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_argument,
+            host_plan.clone(),
+        )?;
     let threshold = build_current_l2_source_sample_theorem_discharge_public_contract_threshold(
         sample_argument,
         host_plan,
@@ -1732,57 +1846,62 @@ pub fn build_current_l2_source_sample_theorem_review_unit_transport_actual_adopt
             "current theorem review-unit transport actual adoption only actualizes reached theorem coupled-later routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleTheoremReviewUnitTransportActualAdoption {
-            source_report,
-            actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            actualization_guard_reason: Some(guard_reason),
-            actualization_subject_kind,
-            actualization_subject_ref,
-            transport_route_refs: Vec::new(),
-            notebook_contract_route_refs: Vec::new(),
-            external_binding_reserve_refs: Vec::new(),
-            actual_adoption_default_refs: Vec::new(),
-            repo_local_emitted_artifact_refs,
-            compare_floor_refs: theorem_review_unit_transport_actual_adoption_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            guard_refs: theorem_review_unit_transport_actual_adoption_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: theorem_review_unit_transport_actual_adoption_kept_later_refs(),
-        });
+        return Ok(
+            CurrentL2SourceSampleTheoremReviewUnitTransportActualAdoption {
+                source_report,
+                actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                actualization_guard_reason: Some(guard_reason),
+                actualization_subject_kind,
+                actualization_subject_ref,
+                transport_route_refs: Vec::new(),
+                notebook_contract_route_refs: Vec::new(),
+                external_binding_reserve_refs: Vec::new(),
+                actual_adoption_default_refs: Vec::new(),
+                repo_local_emitted_artifact_refs,
+                compare_floor_refs:
+                    theorem_review_unit_transport_actual_adoption_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                    ),
+                guard_refs: theorem_review_unit_transport_actual_adoption_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                kept_later_refs: theorem_review_unit_transport_actual_adoption_kept_later_refs(),
+            },
+        );
     }
 
-    Ok(CurrentL2SourceSampleTheoremReviewUnitTransportActualAdoption {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        actualization_subject_kind,
-        actualization_subject_ref: actualization_subject_ref.clone(),
-        transport_route_refs: theorem_review_unit_transport_actual_adoption_transport_refs(
-            actualization_subject_ref.as_deref(),
-        ),
-        notebook_contract_route_refs:
-            theorem_review_unit_transport_actual_adoption_notebook_contract_refs(
+    Ok(
+        CurrentL2SourceSampleTheoremReviewUnitTransportActualAdoption {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            actualization_subject_kind,
+            actualization_subject_ref: actualization_subject_ref.clone(),
+            transport_route_refs: theorem_review_unit_transport_actual_adoption_transport_refs(
                 actualization_subject_ref.as_deref(),
             ),
-        external_binding_reserve_refs:
-            theorem_review_unit_transport_actual_adoption_external_binding_reserve_refs(
+            notebook_contract_route_refs:
+                theorem_review_unit_transport_actual_adoption_notebook_contract_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            external_binding_reserve_refs:
+                theorem_review_unit_transport_actual_adoption_external_binding_reserve_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            actual_adoption_default_refs:
+                theorem_review_unit_transport_actual_adoption_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            repo_local_emitted_artifact_refs,
+            compare_floor_refs: theorem_review_unit_transport_actual_adoption_compare_floor_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        actual_adoption_default_refs:
-            theorem_review_unit_transport_actual_adoption_default_refs(
+            guard_refs: theorem_review_unit_transport_actual_adoption_guard_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        repo_local_emitted_artifact_refs,
-        compare_floor_refs: theorem_review_unit_transport_actual_adoption_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        guard_refs: theorem_review_unit_transport_actual_adoption_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: theorem_review_unit_transport_actual_adoption_kept_later_refs(),
-    })
+            kept_later_refs: theorem_review_unit_transport_actual_adoption_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_theorem_result_object_preview_actualization(
@@ -1822,57 +1941,61 @@ pub fn build_current_l2_source_sample_theorem_result_object_preview_actualizatio
             "current theorem result-object preview actualization only actualizes reached theorem review-unit adoption routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleTheoremResultObjectPreviewActualization {
-            source_report,
-            actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            actualization_guard_reason: Some(guard_reason),
-            actualization_subject_kind,
-            actualization_subject_ref,
-            result_object_route_refs: Vec::new(),
-            notebook_payload_preview_refs: Vec::new(),
-            proof_object_schema_reserve_refs: Vec::new(),
-            actual_adoption_default_refs: Vec::new(),
-            repo_local_emitted_artifact_refs,
-            compare_floor_refs: theorem_result_object_preview_actualization_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            guard_refs: theorem_result_object_preview_actualization_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: theorem_result_object_preview_actualization_kept_later_refs(),
-        });
+        return Ok(
+            CurrentL2SourceSampleTheoremResultObjectPreviewActualization {
+                source_report,
+                actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                actualization_guard_reason: Some(guard_reason),
+                actualization_subject_kind,
+                actualization_subject_ref,
+                result_object_route_refs: Vec::new(),
+                notebook_payload_preview_refs: Vec::new(),
+                proof_object_schema_reserve_refs: Vec::new(),
+                actual_adoption_default_refs: Vec::new(),
+                repo_local_emitted_artifact_refs,
+                compare_floor_refs: theorem_result_object_preview_actualization_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                guard_refs: theorem_result_object_preview_actualization_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                kept_later_refs: theorem_result_object_preview_actualization_kept_later_refs(),
+            },
+        );
     }
 
-    Ok(CurrentL2SourceSampleTheoremResultObjectPreviewActualization {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        actualization_subject_kind,
-        actualization_subject_ref: actualization_subject_ref.clone(),
-        result_object_route_refs: theorem_result_object_preview_actualization_result_object_refs(
-            actualization_subject_ref.as_deref(),
-        ),
-        notebook_payload_preview_refs:
-            theorem_result_object_preview_actualization_payload_preview_refs(
-                actualization_subject_ref.as_deref(),
-            ),
-        proof_object_schema_reserve_refs:
-            theorem_result_object_preview_actualization_proof_object_schema_reserve_refs(
+    Ok(
+        CurrentL2SourceSampleTheoremResultObjectPreviewActualization {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            actualization_subject_kind,
+            actualization_subject_ref: actualization_subject_ref.clone(),
+            result_object_route_refs:
+                theorem_result_object_preview_actualization_result_object_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            notebook_payload_preview_refs:
+                theorem_result_object_preview_actualization_payload_preview_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            proof_object_schema_reserve_refs:
+                theorem_result_object_preview_actualization_proof_object_schema_reserve_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            actual_adoption_default_refs: theorem_result_object_preview_actualization_default_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        actual_adoption_default_refs:
-            theorem_result_object_preview_actualization_default_refs(
+            repo_local_emitted_artifact_refs,
+            compare_floor_refs: theorem_result_object_preview_actualization_compare_floor_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        repo_local_emitted_artifact_refs,
-        compare_floor_refs: theorem_result_object_preview_actualization_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        guard_refs: theorem_result_object_preview_actualization_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: theorem_result_object_preview_actualization_kept_later_refs(),
-    })
+            guard_refs: theorem_result_object_preview_actualization_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            kept_later_refs: theorem_result_object_preview_actualization_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
@@ -2066,10 +2189,9 @@ pub fn build_current_l2_source_sample_theorem_result_payload_public_contract_cou
                     "compare_floor:current_l2.theorem_result_payload_public_contract.guard_only"
                         .to_string(),
                 ],
-                guard_refs:
-                    theorem_result_payload_public_contract_coupled_later_gate_guard_refs(
-                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-                    ),
+                guard_refs: theorem_result_payload_public_contract_coupled_later_gate_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
                 kept_later_refs:
                     theorem_result_payload_public_contract_coupled_later_gate_kept_later_refs(),
             },
@@ -2278,56 +2400,236 @@ pub fn build_current_l2_source_sample_theorem_final_public_contract_reopen_thres
             "current theorem final public contract reopen threshold only actualizes reached theorem result-object route and theorem proof-object/prover-brand routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleTheoremFinalPublicContractReopenThreshold {
+        return Ok(
+            CurrentL2SourceSampleTheoremFinalPublicContractReopenThreshold {
+                source_report,
+                threshold_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                threshold_guard_reason: Some(guard_reason),
+                actualization_subject_kind,
+                actualization_subject_ref,
+                result_object_route_refs: Vec::new(),
+                payload_preview_keep_refs: Vec::new(),
+                proof_object_schema_candidate_refs: Vec::new(),
+                prover_brand_candidate_refs: Vec::new(),
+                final_public_contract_reopen_sequence_refs: Vec::new(),
+                threshold_default_refs: Vec::new(),
+                repo_local_emitted_artifact_refs,
+                compare_floor_refs:
+                    theorem_final_public_contract_reopen_threshold_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                        result_object_compare_floor_refs,
+                    ),
+                guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                kept_later_refs: theorem_final_public_contract_reopen_threshold_kept_later_refs(),
+            },
+        );
+    }
+
+    Ok(
+        CurrentL2SourceSampleTheoremFinalPublicContractReopenThreshold {
             source_report,
-            threshold_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            threshold_guard_reason: Some(guard_reason),
+            threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            threshold_guard_reason: None,
             actualization_subject_kind,
-            actualization_subject_ref,
-            result_object_route_refs: Vec::new(),
-            payload_preview_keep_refs: Vec::new(),
-            proof_object_schema_candidate_refs: Vec::new(),
-            prover_brand_candidate_refs: Vec::new(),
-            final_public_contract_reopen_sequence_refs: Vec::new(),
-            threshold_default_refs: Vec::new(),
+            actualization_subject_ref: actualization_subject_ref.clone(),
+            result_object_route_refs,
+            payload_preview_keep_refs,
+            proof_object_schema_candidate_refs,
+            prover_brand_candidate_refs,
+            final_public_contract_reopen_sequence_refs:
+                theorem_final_public_contract_reopen_threshold_sequence_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            threshold_default_refs: theorem_final_public_contract_reopen_threshold_default_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
             repo_local_emitted_artifact_refs,
             compare_floor_refs: theorem_final_public_contract_reopen_threshold_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                CurrentL2EmittedArtifactRouteStatus::Reached,
                 result_object_compare_floor_refs,
             ),
             guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
             kept_later_refs: theorem_final_public_contract_reopen_threshold_kept_later_refs(),
-        });
-    }
+        },
+    )
+}
 
-    Ok(CurrentL2SourceSampleTheoremFinalPublicContractReopenThreshold {
+pub fn build_current_l2_source_sample_theorem_public_seam_compression(
+    sample_argument: &str,
+    host_plan: FixtureHostPlan,
+) -> Result<CurrentL2SourceSampleTheoremPublicSeamCompression, String> {
+    let threshold = build_current_l2_source_sample_theorem_final_public_contract_reopen_threshold(
+        sample_argument,
+        host_plan.clone(),
+    )?;
+    let lean_stub_bridge = build_current_l2_source_sample_theorem_lean_stub_trace_alignment_bridge(
+        sample_argument,
+        host_plan,
+    )?;
+
+    let CurrentL2SourceSampleTheoremFinalPublicContractReopenThreshold {
         source_report,
-        threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        threshold_guard_reason: None,
+        threshold_status,
+        threshold_guard_reason,
         actualization_subject_kind,
-        actualization_subject_ref: actualization_subject_ref.clone(),
+        actualization_subject_ref,
         result_object_route_refs,
         payload_preview_keep_refs,
         proof_object_schema_candidate_refs,
         prover_brand_candidate_refs,
-        final_public_contract_reopen_sequence_refs:
-            theorem_final_public_contract_reopen_threshold_sequence_refs(
-                actualization_subject_ref.as_deref(),
-            ),
-        threshold_default_refs: theorem_final_public_contract_reopen_threshold_default_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
+        final_public_contract_reopen_sequence_refs: _,
+        threshold_default_refs: _,
         repo_local_emitted_artifact_refs,
-        compare_floor_refs: theorem_final_public_contract_reopen_threshold_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-            result_object_compare_floor_refs,
-        ),
-        guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: theorem_final_public_contract_reopen_threshold_kept_later_refs(),
+        compare_floor_refs: threshold_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = threshold;
+
+    let CurrentL2SourceSampleTheoremLeanStubTraceAlignmentBridge {
+        source_report: bridge_source_report,
+        alignment_status,
+        alignment_guard_reason,
+        alignment_subject_kind,
+        alignment_subject_ref,
+        principal_review_unit_refs: _,
+        review_unit_pair_refs: _,
+        lean_stub_pair_refs: _,
+        matched_pair_refs,
+        repo_local_emitted_artifact_refs: bridge_repo_local_emitted_artifact_refs,
+        compare_floor_refs: bridge_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = lean_stub_bridge;
+
+    if threshold_status != CurrentL2EmittedArtifactRouteStatus::Reached
+        || alignment_status != CurrentL2EmittedArtifactRouteStatus::Reached
+    {
+        let guard_detail = threshold_guard_reason
+            .or(alignment_guard_reason)
+            .unwrap_or_else(|| {
+                format!(
+                    "theorem final public-contract threshold or Lean-stub bridge was not reached for `{}`",
+                    source_report.sample_id
+                )
+            });
+
+        return Ok(CurrentL2SourceSampleTheoremPublicSeamCompression {
+            source_report,
+            compression_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+            compression_guard_reason: Some(format!(
+                "current theorem public seam compression only actualizes reached theorem final-threshold + Lean-stub bridge floors: {guard_detail}"
+            )),
+            actualization_subject_kind,
+            actualization_subject_ref,
+            repo_local_emitted_artifact_refs: Vec::new(),
+            result_object_route_refs: Vec::new(),
+            payload_preview_keep_refs: Vec::new(),
+            proof_object_schema_candidate_refs: Vec::new(),
+            prover_brand_candidate_refs: Vec::new(),
+            lean_stub_alignment_refs: Vec::new(),
+            public_seam_residual_refs: Vec::new(),
+            environment_stop_line_refs: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.theorem_public_seam_compression.guard_only".to_string(),
+            ],
+            guard_refs: vec!["guard:theorem_public_seam_compression_not_reached".to_string()],
+            kept_later_refs: vec![
+                "kept_later:final_public_theorem_result_object".to_string(),
+                "kept_later:consumer_shaped_theorem_payload".to_string(),
+                "kept_later:concrete_theorem_prover_brand".to_string(),
+                "kept_later:proof_object_public_schema".to_string(),
+                "kept_later:final_public_verifier_contract".to_string(),
+                "kept_later:actual_lean_execution_with_concrete_toolchain".to_string(),
+            ],
+        });
+    }
+
+    if source_report.sample_id != bridge_source_report.sample_id
+        || actualization_subject_kind != alignment_subject_kind
+        || actualization_subject_ref != alignment_subject_ref
+    {
+        return Err(format!(
+            "theorem public seam compression expected aligned threshold/bridge subjects for `{}` but got threshold {:?}/{:?} and bridge {:?}/{:?}",
+            source_report.sample_id,
+            actualization_subject_kind,
+            actualization_subject_ref,
+            alignment_subject_kind,
+            alignment_subject_ref
+        ));
+    }
+
+    let subject_ref = actualization_subject_ref.as_deref().ok_or_else(|| {
+        format!(
+            "theorem public seam compression expected a subject ref for `{}`",
+            source_report.sample_id
+        )
+    })?;
+    let mut merged_repo_local_emitted_artifact_refs = repo_local_emitted_artifact_refs;
+    extend_unique_refs(
+        &mut merged_repo_local_emitted_artifact_refs,
+        bridge_repo_local_emitted_artifact_refs,
+    );
+    let mut compare_floor_refs = threshold_compare_floor_refs;
+    extend_unique_refs(&mut compare_floor_refs, bridge_compare_floor_refs);
+    extend_unique_refs(
+        &mut compare_floor_refs,
+        vec![
+            "compare_floor:current_l2.theorem_actual_lean_execution_availability_probe".to_string(),
+            "compare_floor:current_l2.theorem_public_seam_compression".to_string(),
+        ],
+    );
+
+    Ok(CurrentL2SourceSampleTheoremPublicSeamCompression {
+        source_report,
+        compression_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+        compression_guard_reason: None,
+        actualization_subject_kind,
+        actualization_subject_ref: Some(subject_ref.to_string()),
+        repo_local_emitted_artifact_refs: merged_repo_local_emitted_artifact_refs,
+        result_object_route_refs,
+        payload_preview_keep_refs,
+        proof_object_schema_candidate_refs,
+        prover_brand_candidate_refs,
+        lean_stub_alignment_refs: matched_pair_refs,
+        public_seam_residual_refs: vec![
+            format!("theorem_public_seam_residual:{subject_ref}:result_object_and_payload_first"),
+            format!(
+                "theorem_public_seam_residual:{subject_ref}:prover_brand_and_proof_schema_second"
+            ),
+            format!(
+                "theorem_public_seam_residual:{subject_ref}:final_public_verifier_contract_third"
+            ),
+            format!(
+                "theorem_public_seam_residual:{subject_ref}:actual_lean_execution_environment_conditional"
+            ),
+        ],
+        environment_stop_line_refs: vec![
+            "environment_probe:current_l2.theorem_actual_lean_execution_availability_probe"
+                .to_string(),
+            "environment_stop_line:actual_lean_execution_requires_local_toolchain".to_string(),
+            "environment_stop_line:lean_stub_bridge_kept_until_local_toolchain_available"
+                .to_string(),
+        ],
+        compare_floor_refs,
+        guard_refs: vec![
+            "guard:theorem_result_object_payload_pair_first".to_string(),
+            "guard:theorem_prover_brand_proof_schema_pair_second".to_string(),
+            "guard:final_public_verifier_contract_third".to_string(),
+            "guard:actual_lean_execution_environment_conditional".to_string(),
+            "guard:lean_stub_bridge_kept_until_local_toolchain_available".to_string(),
+        ],
+        kept_later_refs: vec![
+            "kept_later:final_public_theorem_result_object".to_string(),
+            "kept_later:consumer_shaped_theorem_payload".to_string(),
+            "kept_later:concrete_theorem_prover_brand".to_string(),
+            "kept_later:proof_object_public_schema".to_string(),
+            "kept_later:final_public_verifier_contract".to_string(),
+            "kept_later:actual_lean_execution_with_concrete_toolchain".to_string(),
+        ],
     })
 }
 
@@ -2440,8 +2742,10 @@ pub fn build_current_l2_source_sample_model_check_property_tool_seam_probe(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleModelCheckPropertyToolSeamProbe, String> {
-    let second_line =
-        build_current_l2_source_sample_model_check_second_line_concretization(sample_argument, host_plan)?;
+    let second_line = build_current_l2_source_sample_model_check_second_line_concretization(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleModelCheckSecondLineConcretization {
         source_report,
@@ -2531,13 +2835,14 @@ pub fn build_current_l2_source_sample_model_check_property_tool_threshold(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleModelCheckPropertyToolThreshold, String> {
-    let second_line =
-        build_current_l2_source_sample_model_check_second_line_concretization(
-            sample_argument,
-            host_plan.clone(),
-        )?;
-    let probe =
-        build_current_l2_source_sample_model_check_property_tool_seam_probe(sample_argument, host_plan)?;
+    let second_line = build_current_l2_source_sample_model_check_second_line_concretization(
+        sample_argument,
+        host_plan.clone(),
+    )?;
+    let probe = build_current_l2_source_sample_model_check_property_tool_seam_probe(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleModelCheckSecondLineConcretization {
         source_report,
@@ -2657,11 +2962,10 @@ pub fn build_current_l2_source_sample_model_check_row_local_property_actual_adop
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleModelCheckRowLocalPropertyActualAdoption, String> {
-    let threshold =
-        build_current_l2_source_sample_model_check_property_tool_threshold(
-            sample_argument,
-            host_plan,
-        )?;
+    let threshold = build_current_l2_source_sample_model_check_property_tool_threshold(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleModelCheckPropertyToolThreshold {
         source_report,
@@ -2696,63 +3000,67 @@ pub fn build_current_l2_source_sample_model_check_row_local_property_actual_adop
             "current model-check row-local property actual adoption only actualizes reached model-check threshold routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleModelCheckRowLocalPropertyActualAdoption {
-            source_report,
-            actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            actualization_guard_reason: Some(guard_reason),
-            actualization_subject_kind: threshold_subject_kind,
-            actualization_subject_ref: threshold_subject_ref,
-            property_route_refs: Vec::new(),
-            checker_contract_route_refs: Vec::new(),
-            tool_binding_reserve_refs: Vec::new(),
-            actual_adoption_default_refs: Vec::new(),
-            repo_local_emitted_artifact_refs,
-            compare_floor_refs:
-                model_check_row_local_property_actual_adoption_compare_floor_refs(
+        return Ok(
+            CurrentL2SourceSampleModelCheckRowLocalPropertyActualAdoption {
+                source_report,
+                actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                actualization_guard_reason: Some(guard_reason),
+                actualization_subject_kind: threshold_subject_kind,
+                actualization_subject_ref: threshold_subject_ref,
+                property_route_refs: Vec::new(),
+                checker_contract_route_refs: Vec::new(),
+                tool_binding_reserve_refs: Vec::new(),
+                actual_adoption_default_refs: Vec::new(),
+                repo_local_emitted_artifact_refs,
+                compare_floor_refs:
+                    model_check_row_local_property_actual_adoption_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                    ),
+                excluded_family_refs: Vec::new(),
+                guard_refs: model_check_row_local_property_actual_adoption_guard_refs(
                     CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
                 ),
-            excluded_family_refs: Vec::new(),
-            guard_refs: model_check_row_local_property_actual_adoption_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: model_check_row_local_property_actual_adoption_kept_later_refs(),
-        });
+                kept_later_refs: model_check_row_local_property_actual_adoption_kept_later_refs(),
+            },
+        );
     }
 
-    Ok(CurrentL2SourceSampleModelCheckRowLocalPropertyActualAdoption {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        actualization_subject_kind: threshold_subject_kind,
-        actualization_subject_ref: threshold_subject_ref.clone(),
-        property_route_refs: model_check_row_local_property_actual_adoption_property_route_refs(
-            threshold_subject_ref.as_deref(),
-        ),
-        checker_contract_route_refs:
-            model_check_row_local_property_actual_adoption_checker_contract_route_refs(
+    Ok(
+        CurrentL2SourceSampleModelCheckRowLocalPropertyActualAdoption {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            actualization_subject_kind: threshold_subject_kind,
+            actualization_subject_ref: threshold_subject_ref.clone(),
+            property_route_refs: model_check_row_local_property_actual_adoption_property_route_refs(
                 threshold_subject_ref.as_deref(),
             ),
-        tool_binding_reserve_refs:
-            model_check_row_local_property_actual_adoption_tool_binding_reserve_refs(
+            checker_contract_route_refs:
+                model_check_row_local_property_actual_adoption_checker_contract_route_refs(
+                    threshold_subject_ref.as_deref(),
+                ),
+            tool_binding_reserve_refs:
+                model_check_row_local_property_actual_adoption_tool_binding_reserve_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            actual_adoption_default_refs:
+                model_check_row_local_property_actual_adoption_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            repo_local_emitted_artifact_refs,
+            compare_floor_refs: model_check_row_local_property_actual_adoption_compare_floor_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        actual_adoption_default_refs:
-            model_check_row_local_property_actual_adoption_default_refs(
+            excluded_family_refs:
+                model_check_row_local_property_actual_adoption_excluded_family_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            guard_refs: model_check_row_local_property_actual_adoption_guard_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        repo_local_emitted_artifact_refs,
-        compare_floor_refs: model_check_row_local_property_actual_adoption_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        excluded_family_refs:
-            model_check_row_local_property_actual_adoption_excluded_family_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-            ),
-        guard_refs: model_check_row_local_property_actual_adoption_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: model_check_row_local_property_actual_adoption_kept_later_refs(),
-    })
+            kept_later_refs: model_check_row_local_property_actual_adoption_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
@@ -2818,37 +3126,41 @@ pub fn build_current_l2_source_sample_model_check_public_checker_artifact_previe
         );
     }
 
-    Ok(CurrentL2SourceSampleModelCheckPublicCheckerArtifactPreviewActualization {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        actualization_subject_kind,
-        actualization_subject_ref: actualization_subject_ref.clone(),
-        checker_artifact_preview_refs:
-            model_check_public_checker_artifact_preview_actualization_preview_refs(
-                actualization_subject_ref.as_deref(),
-            ),
-        verifier_handoff_reserve_refs:
-            model_check_public_checker_artifact_preview_actualization_handoff_reserve_refs(
+    Ok(
+        CurrentL2SourceSampleModelCheckPublicCheckerArtifactPreviewActualization {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            actualization_subject_kind,
+            actualization_subject_ref: actualization_subject_ref.clone(),
+            checker_artifact_preview_refs:
+                model_check_public_checker_artifact_preview_actualization_preview_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            verifier_handoff_reserve_refs:
+                model_check_public_checker_artifact_preview_actualization_handoff_reserve_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            tool_binding_reserve_refs:
+                model_check_public_checker_artifact_preview_actualization_tool_binding_reserve_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            actual_adoption_default_refs:
+                model_check_public_checker_artifact_preview_actualization_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            repo_local_emitted_artifact_refs,
+            compare_floor_refs:
+                model_check_public_checker_artifact_preview_actualization_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            guard_refs: model_check_public_checker_artifact_preview_actualization_guard_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        tool_binding_reserve_refs:
-            model_check_public_checker_artifact_preview_actualization_tool_binding_reserve_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-            ),
-        actual_adoption_default_refs:
-            model_check_public_checker_artifact_preview_actualization_default_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-            ),
-        repo_local_emitted_artifact_refs,
-        compare_floor_refs: model_check_public_checker_artifact_preview_actualization_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        guard_refs: model_check_public_checker_artifact_preview_actualization_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: model_check_public_checker_artifact_preview_actualization_kept_later_refs(),
-    })
+            kept_later_refs:
+                model_check_public_checker_artifact_preview_actualization_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_model_check_tool_brand_verifier_handoff_coupled_later_gate(
@@ -2933,10 +3245,9 @@ pub fn build_current_l2_source_sample_model_check_tool_brand_verifier_handoff_co
                     model_check_tool_brand_verifier_handoff_coupled_later_gate_compare_floor_refs(
                         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
                     ),
-                guard_refs:
-                    model_check_tool_brand_verifier_handoff_coupled_later_gate_guard_refs(
-                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-                    ),
+                guard_refs: model_check_tool_brand_verifier_handoff_coupled_later_gate_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
                 kept_later_refs:
                     model_check_tool_brand_verifier_handoff_coupled_later_gate_kept_later_refs(),
             },
@@ -2976,8 +3287,7 @@ pub fn build_current_l2_source_sample_model_check_tool_brand_verifier_handoff_co
 pub fn build_current_l2_source_sample_model_check_public_checker_artifact_migration_coupled_later_gate(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
-) -> Result<CurrentL2SourceSampleModelCheckPublicCheckerArtifactMigrationCoupledLaterGate, String>
-{
+) -> Result<CurrentL2SourceSampleModelCheckPublicCheckerArtifactMigrationCoupledLaterGate, String> {
     let tool_handoff =
         build_current_l2_source_sample_model_check_tool_brand_verifier_handoff_coupled_later_gate(
             sample_argument,
@@ -3108,55 +3418,62 @@ pub fn build_current_l2_source_sample_model_check_checker_artifact_route_actual_
             "current model-check checker-artifact route actual adoption only actualizes reached model-check public-checker artifact / migration routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleModelCheckCheckerArtifactRouteActualAdoption {
-            source_report,
-            actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            actualization_guard_reason: Some(guard_reason),
-            actualization_subject_kind,
-            actualization_subject_ref,
-            checker_artifact_route_refs: Vec::new(),
-            migration_candidate_keep_refs: Vec::new(),
-            actual_adoption_default_refs: Vec::new(),
-            repo_local_emitted_artifact_refs,
-            compare_floor_refs: model_check_checker_artifact_route_actual_adoption_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-                artifact_migration_compare_floor_refs,
-            ),
-            guard_refs: model_check_checker_artifact_route_actual_adoption_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: model_check_checker_artifact_route_actual_adoption_kept_later_refs(),
-        });
+        return Ok(
+            CurrentL2SourceSampleModelCheckCheckerArtifactRouteActualAdoption {
+                source_report,
+                actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                actualization_guard_reason: Some(guard_reason),
+                actualization_subject_kind,
+                actualization_subject_ref,
+                checker_artifact_route_refs: Vec::new(),
+                migration_candidate_keep_refs: Vec::new(),
+                actual_adoption_default_refs: Vec::new(),
+                repo_local_emitted_artifact_refs,
+                compare_floor_refs:
+                    model_check_checker_artifact_route_actual_adoption_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                        artifact_migration_compare_floor_refs,
+                    ),
+                guard_refs: model_check_checker_artifact_route_actual_adoption_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                kept_later_refs: model_check_checker_artifact_route_actual_adoption_kept_later_refs(
+                ),
+            },
+        );
     }
 
-    Ok(CurrentL2SourceSampleModelCheckCheckerArtifactRouteActualAdoption {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        actualization_subject_kind,
-        actualization_subject_ref: actualization_subject_ref.clone(),
-        checker_artifact_route_refs:
-            model_check_checker_artifact_route_actual_adoption_route_refs(
-                actualization_subject_ref.as_deref(),
-            ),
-        migration_candidate_keep_refs:
-            model_check_checker_artifact_route_actual_adoption_migration_keep_refs(
-                actualization_subject_ref.as_deref(),
-            ),
-        actual_adoption_default_refs:
-            model_check_checker_artifact_route_actual_adoption_default_refs(
+    Ok(
+        CurrentL2SourceSampleModelCheckCheckerArtifactRouteActualAdoption {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            actualization_subject_kind,
+            actualization_subject_ref: actualization_subject_ref.clone(),
+            checker_artifact_route_refs:
+                model_check_checker_artifact_route_actual_adoption_route_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            migration_candidate_keep_refs:
+                model_check_checker_artifact_route_actual_adoption_migration_keep_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            actual_adoption_default_refs:
+                model_check_checker_artifact_route_actual_adoption_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            repo_local_emitted_artifact_refs,
+            compare_floor_refs:
+                model_check_checker_artifact_route_actual_adoption_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                    artifact_migration_compare_floor_refs,
+                ),
+            guard_refs: model_check_checker_artifact_route_actual_adoption_guard_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        repo_local_emitted_artifact_refs,
-        compare_floor_refs: model_check_checker_artifact_route_actual_adoption_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-            artifact_migration_compare_floor_refs,
-        ),
-        guard_refs: model_check_checker_artifact_route_actual_adoption_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: model_check_checker_artifact_route_actual_adoption_kept_later_refs(),
-    })
+            kept_later_refs: model_check_checker_artifact_route_actual_adoption_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_model_check_final_public_contract_reopen_threshold(
@@ -3219,57 +3536,238 @@ pub fn build_current_l2_source_sample_model_check_final_public_contract_reopen_t
             "current model-check final public contract reopen threshold only actualizes reached model-check checker-artifact route and tool-brand/verifier-handoff routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleModelCheckFinalPublicContractReopenThreshold {
+        return Ok(
+            CurrentL2SourceSampleModelCheckFinalPublicContractReopenThreshold {
+                source_report,
+                threshold_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                threshold_guard_reason: Some(guard_reason),
+                actualization_subject_kind,
+                actualization_subject_ref,
+                checker_artifact_route_refs: Vec::new(),
+                migration_candidate_keep_refs: Vec::new(),
+                verifier_handoff_candidate_refs: Vec::new(),
+                tool_brand_candidate_refs: Vec::new(),
+                final_public_contract_reopen_sequence_refs: Vec::new(),
+                threshold_default_refs: Vec::new(),
+                repo_local_emitted_artifact_refs,
+                compare_floor_refs:
+                    model_check_final_public_contract_reopen_threshold_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                        checker_artifact_compare_floor_refs,
+                    ),
+                guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
+                kept_later_refs: model_check_final_public_contract_reopen_threshold_kept_later_refs(
+                ),
+            },
+        );
+    }
+
+    Ok(
+        CurrentL2SourceSampleModelCheckFinalPublicContractReopenThreshold {
             source_report,
-            threshold_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            threshold_guard_reason: Some(guard_reason),
+            threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            threshold_guard_reason: None,
             actualization_subject_kind,
-            actualization_subject_ref,
-            checker_artifact_route_refs: Vec::new(),
-            migration_candidate_keep_refs: Vec::new(),
-            verifier_handoff_candidate_refs: Vec::new(),
-            tool_brand_candidate_refs: Vec::new(),
-            final_public_contract_reopen_sequence_refs: Vec::new(),
-            threshold_default_refs: Vec::new(),
+            actualization_subject_ref: actualization_subject_ref.clone(),
+            checker_artifact_route_refs,
+            migration_candidate_keep_refs,
+            verifier_handoff_candidate_refs,
+            tool_brand_candidate_refs,
+            final_public_contract_reopen_sequence_refs:
+                model_check_final_public_contract_reopen_threshold_sequence_refs(
+                    actualization_subject_ref.as_deref(),
+                ),
+            threshold_default_refs: model_check_final_public_contract_reopen_threshold_default_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
             repo_local_emitted_artifact_refs,
             compare_floor_refs:
                 model_check_final_public_contract_reopen_threshold_compare_floor_refs(
-                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
                     checker_artifact_compare_floor_refs,
                 ),
             guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
             kept_later_refs: model_check_final_public_contract_reopen_threshold_kept_later_refs(),
-        });
-    }
+        },
+    )
+}
 
-    Ok(CurrentL2SourceSampleModelCheckFinalPublicContractReopenThreshold {
+pub fn build_current_l2_source_sample_model_check_public_seam_compression(
+    sample_argument: &str,
+    host_plan: FixtureHostPlan,
+) -> Result<CurrentL2SourceSampleModelCheckPublicSeamCompression, String> {
+    let threshold = build_current_l2_source_sample_model_check_final_public_contract_reopen_threshold(
+        sample_argument,
+        host_plan.clone(),
+    )?;
+    let probe = build_current_l2_source_sample_model_check_property_tool_seam_probe(
+        sample_argument,
+        host_plan,
+    )?;
+
+    let CurrentL2SourceSampleModelCheckFinalPublicContractReopenThreshold {
         source_report,
-        threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        threshold_guard_reason: None,
+        threshold_status,
+        threshold_guard_reason,
         actualization_subject_kind,
-        actualization_subject_ref: actualization_subject_ref.clone(),
+        actualization_subject_ref,
         checker_artifact_route_refs,
         migration_candidate_keep_refs,
         verifier_handoff_candidate_refs,
         tool_brand_candidate_refs,
-        final_public_contract_reopen_sequence_refs:
-            model_check_final_public_contract_reopen_threshold_sequence_refs(
-                actualization_subject_ref.as_deref(),
-            ),
-        threshold_default_refs: model_check_final_public_contract_reopen_threshold_default_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
+        final_public_contract_reopen_sequence_refs: _,
+        threshold_default_refs: _,
         repo_local_emitted_artifact_refs,
-        compare_floor_refs: model_check_final_public_contract_reopen_threshold_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-            checker_artifact_compare_floor_refs,
-        ),
-        guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: model_check_final_public_contract_reopen_threshold_kept_later_refs(),
+        compare_floor_refs: threshold_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = threshold;
+
+    let CurrentL2SourceSampleModelCheckPropertyToolSeamProbe {
+        source_report: probe_source_report,
+        probe_status,
+        probe_guard_reason,
+        probe_subject_kind,
+        probe_subject_ref,
+        principal_machine_carrier_refs: _,
+        row_local_property_preview_refs: _,
+        secondary_projection_refs: _,
+        property_language_probe_refs,
+        tool_seam_probe_refs,
+        checker_boundary_probe_refs,
+        repo_local_emitted_artifact_refs: probe_repo_local_emitted_artifact_refs,
+        compare_floor_refs: probe_compare_floor_refs,
+        excluded_family_refs: _,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = probe;
+
+    if threshold_status != CurrentL2EmittedArtifactRouteStatus::Reached
+        || probe_status != CurrentL2EmittedArtifactRouteStatus::Reached
+    {
+        let guard_detail = threshold_guard_reason
+            .or(probe_guard_reason)
+            .unwrap_or_else(|| {
+                format!(
+                    "model-check final public-contract threshold or property/tool probe was not reached for `{}`",
+                    source_report.sample_id
+                )
+            });
+
+        return Ok(CurrentL2SourceSampleModelCheckPublicSeamCompression {
+            source_report,
+            compression_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+            compression_guard_reason: Some(format!(
+                "current model-check public seam compression only actualizes reached model-check final-threshold + property/tool probe floors: {guard_detail}"
+            )),
+            actualization_subject_kind,
+            actualization_subject_ref,
+            repo_local_emitted_artifact_refs: Vec::new(),
+            checker_artifact_route_refs: Vec::new(),
+            migration_candidate_keep_refs: Vec::new(),
+            verifier_handoff_candidate_refs: Vec::new(),
+            tool_brand_candidate_refs: Vec::new(),
+            property_language_probe_refs: Vec::new(),
+            tool_seam_probe_refs: Vec::new(),
+            checker_boundary_probe_refs: Vec::new(),
+            public_seam_residual_refs: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.model_check.public_seam_compression.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: vec!["guard:model_check_public_seam_compression_not_reached".to_string()],
+            kept_later_refs: vec![
+                "kept_later:first_settled_property_language".to_string(),
+                "kept_later:concrete_model_check_tool_brand".to_string(),
+                "kept_later:final_public_checker_artifact".to_string(),
+                "kept_later:actual_public_checker_migration".to_string(),
+                "kept_later:actual_emitted_verifier_handoff_artifact".to_string(),
+                "kept_later:production_checker_runtime_policy_contract".to_string(),
+                "kept_later:final_public_verifier_contract".to_string(),
+            ],
+        });
+    }
+
+    if source_report.sample_id != probe_source_report.sample_id
+        || actualization_subject_kind != probe_subject_kind
+        || actualization_subject_ref != probe_subject_ref
+    {
+        return Err(format!(
+            "model-check public seam compression expected aligned threshold/probe subjects for `{}` but got threshold {:?}/{:?} and probe {:?}/{:?}",
+            source_report.sample_id,
+            actualization_subject_kind,
+            actualization_subject_ref,
+            probe_subject_kind,
+            probe_subject_ref
+        ));
+    }
+
+    let subject_ref = actualization_subject_ref.as_deref().ok_or_else(|| {
+        format!(
+            "model-check public seam compression expected a subject ref for `{}`",
+            source_report.sample_id
+        )
+    })?;
+    let mut merged_repo_local_emitted_artifact_refs = repo_local_emitted_artifact_refs;
+    extend_unique_refs(
+        &mut merged_repo_local_emitted_artifact_refs,
+        probe_repo_local_emitted_artifact_refs,
+    );
+    let mut compare_floor_refs = threshold_compare_floor_refs;
+    extend_unique_refs(&mut compare_floor_refs, probe_compare_floor_refs);
+    extend_unique_refs(
+        &mut compare_floor_refs,
+        vec!["compare_floor:current_l2.model_check.public_seam_compression".to_string()],
+    );
+
+    Ok(CurrentL2SourceSampleModelCheckPublicSeamCompression {
+        source_report,
+        compression_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+        compression_guard_reason: None,
+        actualization_subject_kind,
+        actualization_subject_ref: Some(subject_ref.to_string()),
+        repo_local_emitted_artifact_refs: merged_repo_local_emitted_artifact_refs,
+        checker_artifact_route_refs,
+        migration_candidate_keep_refs,
+        verifier_handoff_candidate_refs,
+        tool_brand_candidate_refs,
+        property_language_probe_refs,
+        tool_seam_probe_refs,
+        checker_boundary_probe_refs,
+        public_seam_residual_refs: vec![
+            format!(
+                "model_check_public_seam_residual:{subject_ref}:property_language_and_tool_brand_first"
+            ),
+            format!(
+                "model_check_public_seam_residual:{subject_ref}:public_checker_artifact_and_migration_second"
+            ),
+            format!(
+                "model_check_public_seam_residual:{subject_ref}:verifier_handoff_and_runtime_policy_contract_third"
+            ),
+            format!(
+                "model_check_public_seam_residual:{subject_ref}:final_public_verifier_contract_fourth"
+            ),
+        ],
+        compare_floor_refs,
+        guard_refs: vec![
+            "guard:model_check_property_language_and_tool_brand_first".to_string(),
+            "guard:model_check_public_checker_artifact_and_migration_second".to_string(),
+            "guard:model_check_verifier_handoff_and_runtime_policy_contract_third".to_string(),
+            "guard:model_check_final_public_verifier_contract_fourth".to_string(),
+        ],
+        kept_later_refs: vec![
+            "kept_later:first_settled_property_language".to_string(),
+            "kept_later:concrete_model_check_tool_brand".to_string(),
+            "kept_later:final_public_checker_artifact".to_string(),
+            "kept_later:actual_public_checker_migration".to_string(),
+            "kept_later:actual_emitted_verifier_handoff_artifact".to_string(),
+            "kept_later:production_checker_runtime_policy_contract".to_string(),
+            "kept_later:final_public_verifier_contract".to_string(),
+        ],
     })
 }
 
@@ -3293,58 +3791,61 @@ pub fn build_current_l2_source_sample_authoritative_room_vertical_slice_actualiz
     let reached_authoritative_sample = matches!(
         sample_id.as_str(),
         "p07-dice-late-join-visible-history" | "p08-dice-stale-reconnect-refresh"
-    ) && formal_hook_status == CurrentL2EmittedArtifactRouteStatus::Reached;
+    ) && formal_hook_status
+        == CurrentL2EmittedArtifactRouteStatus::Reached;
 
     if !reached_authoritative_sample {
         let guard_detail = formal_hook_guard_reason.unwrap_or_else(|| {
-            format!(
-                "current default samples (`p07` / `p08`) were not reached for `{sample_id}`"
-            )
+            format!("current default samples (`p07` / `p08`) were not reached for `{sample_id}`")
         });
         let guard_reason = format!(
             "current authoritative-room vertical slice only actualizes reached current default samples (`p07` / `p08`): {guard_detail}"
         );
-        return Ok(CurrentL2SourceSampleAuthoritativeRoomVerticalSliceActualization {
-            source_report,
-            slice_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            slice_guard_reason: Some(guard_reason),
-            profile_axis_refs: Vec::new(),
-            relation_refs: Vec::new(),
-            authority_handoff_refs: Vec::new(),
-            runtime_evidence_refs: Vec::new(),
-            repo_local_emitted_artifact_refs: Vec::new(),
-            compare_floor_refs: vec![
-                "compare_floor:current_l2.authoritative_room.guard_only".to_string(),
-            ],
-            contrast_refs: vec!["contrast_target:append_friendly_notice_room".to_string()],
-            guard_refs: vec!["guard:room_default_slice_not_reached".to_string()],
-            kept_later_refs: authoritative_room_kept_later_refs(),
-        });
+        return Ok(
+            CurrentL2SourceSampleAuthoritativeRoomVerticalSliceActualization {
+                source_report,
+                slice_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                slice_guard_reason: Some(guard_reason),
+                profile_axis_refs: Vec::new(),
+                relation_refs: Vec::new(),
+                authority_handoff_refs: Vec::new(),
+                runtime_evidence_refs: Vec::new(),
+                repo_local_emitted_artifact_refs: Vec::new(),
+                compare_floor_refs: vec![
+                    "compare_floor:current_l2.authoritative_room.guard_only".to_string(),
+                ],
+                contrast_refs: vec!["contrast_target:append_friendly_notice_room".to_string()],
+                guard_refs: vec!["guard:room_default_slice_not_reached".to_string()],
+                kept_later_refs: authoritative_room_kept_later_refs(),
+            },
+        );
     }
 
     let runtime_evidence_refs = authoritative_room_runtime_evidence_refs(&source_report);
 
-    Ok(CurrentL2SourceSampleAuthoritativeRoomVerticalSliceActualization {
-        source_report,
-        slice_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        slice_guard_reason: None,
-        profile_axis_refs: authoritative_room_profile_axis_refs(&sample_id),
-        relation_refs: authoritative_room_relation_refs(&sample_id),
-        authority_handoff_refs: authoritative_room_handoff_refs(&sample_id),
-        runtime_evidence_refs,
-        repo_local_emitted_artifact_refs: authoritative_room_repo_local_emitted_artifact_refs(
-            &proof_notebook_review_units,
-            &model_check_concrete_carriers,
-        ),
-        compare_floor_refs: vec![
-            "compare_floor:current_l2.order_handoff.runner_cli".to_string(),
-            "compare_floor:current_l2.verifier_preview_alignment".to_string(),
-            "compare_floor:current_l2.authoritative_room.vertical_slice".to_string(),
-        ],
-        contrast_refs: vec!["contrast_target:append_friendly_notice_room".to_string()],
-        guard_refs: authoritative_room_guard_refs(&sample_id),
-        kept_later_refs: authoritative_room_kept_later_refs(),
-    })
+    Ok(
+        CurrentL2SourceSampleAuthoritativeRoomVerticalSliceActualization {
+            source_report,
+            slice_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            slice_guard_reason: None,
+            profile_axis_refs: authoritative_room_profile_axis_refs(&sample_id),
+            relation_refs: authoritative_room_relation_refs(&sample_id),
+            authority_handoff_refs: authoritative_room_handoff_refs(&sample_id),
+            runtime_evidence_refs,
+            repo_local_emitted_artifact_refs: authoritative_room_repo_local_emitted_artifact_refs(
+                &proof_notebook_review_units,
+                &model_check_concrete_carriers,
+            ),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.order_handoff.runner_cli".to_string(),
+                "compare_floor:current_l2.verifier_preview_alignment".to_string(),
+                "compare_floor:current_l2.authoritative_room.vertical_slice".to_string(),
+            ],
+            contrast_refs: vec!["contrast_target:append_friendly_notice_room".to_string()],
+            guard_refs: authoritative_room_guard_refs(&sample_id),
+            kept_later_refs: authoritative_room_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_auditable_authority_witness_strengthening(
@@ -3373,10 +3874,8 @@ pub fn build_current_l2_source_sample_auditable_authority_witness_strengthening(
     } = vertical_slice;
 
     let sample_id = source_report.sample_id.clone();
-    let reached_witness_sample = matches!(
-        sample_id.as_str(),
-        "p07-dice-late-join-visible-history"
-    ) && slice_status == CurrentL2EmittedArtifactRouteStatus::Reached;
+    let reached_witness_sample = matches!(sample_id.as_str(), "p07-dice-late-join-visible-history")
+        && slice_status == CurrentL2EmittedArtifactRouteStatus::Reached;
 
     if !reached_witness_sample {
         let guard_detail = match sample_id.as_str() {
@@ -3392,50 +3891,54 @@ pub fn build_current_l2_source_sample_auditable_authority_witness_strengthening(
         let guard_reason = format!(
             "current witness strengthening only actualizes reached witness-bearing authoritative draw samples (`p07`): {guard_detail}"
         );
-        return Ok(CurrentL2SourceSampleAuditableAuthorityWitnessStrengthening {
-            source_report,
-            strengthening_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            strengthening_guard_reason: Some(guard_reason),
-            fairness_claim_refs: Vec::new(),
-            witness_core_refs: Vec::new(),
-            witness_binding_refs: Vec::new(),
-            runtime_evidence_refs: Vec::new(),
-            repo_local_emitted_artifact_refs: Vec::new(),
-            compare_floor_refs: vec![
-                "compare_floor:current_l2.auditable_authority_witness.guard_only".to_string(),
-            ],
-            contrast_refs: auditable_authority_witness_contrast_refs(),
-            guard_refs: vec!["guard:witness_strengthening_not_reached".to_string()],
-            kept_later_refs: auditable_authority_witness_kept_later_refs(),
-        });
+        return Ok(
+            CurrentL2SourceSampleAuditableAuthorityWitnessStrengthening {
+                source_report,
+                strengthening_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                strengthening_guard_reason: Some(guard_reason),
+                fairness_claim_refs: Vec::new(),
+                witness_core_refs: Vec::new(),
+                witness_binding_refs: Vec::new(),
+                runtime_evidence_refs: Vec::new(),
+                repo_local_emitted_artifact_refs: Vec::new(),
+                compare_floor_refs: vec![
+                    "compare_floor:current_l2.auditable_authority_witness.guard_only".to_string(),
+                ],
+                contrast_refs: auditable_authority_witness_contrast_refs(),
+                guard_refs: vec!["guard:witness_strengthening_not_reached".to_string()],
+                kept_later_refs: auditable_authority_witness_kept_later_refs(),
+            },
+        );
     }
 
-    Ok(CurrentL2SourceSampleAuditableAuthorityWitnessStrengthening {
-        source_report,
-        strengthening_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        strengthening_guard_reason: None,
-        fairness_claim_refs: vec!["fairness_claim:auditable_authority_witness".to_string()],
-        witness_core_refs: vec![
-            "witness_field:witness_kind".to_string(),
-            "witness_field:action_ref".to_string(),
-            "witness_field:draw_slot".to_string(),
-            "witness_field:draw_result".to_string(),
-        ],
-        witness_binding_refs: auditable_authority_witness_binding_refs(&sample_id),
-        runtime_evidence_refs,
-        repo_local_emitted_artifact_refs,
-        compare_floor_refs: vec![
-            "compare_floor:current_l2.authoritative_room.vertical_slice".to_string(),
-            "compare_floor:current_l2.auditable_authority_witness.strengthening".to_string(),
-        ],
-        contrast_refs: auditable_authority_witness_contrast_refs(),
-        guard_refs: vec![
-            "guard:room_profile_claim_payload_split".to_string(),
-            "guard:minimal_witness_core_only".to_string(),
-            "guard:witness_bearing_authoritative_sample_reached".to_string(),
-        ],
-        kept_later_refs: auditable_authority_witness_kept_later_refs(),
-    })
+    Ok(
+        CurrentL2SourceSampleAuditableAuthorityWitnessStrengthening {
+            source_report,
+            strengthening_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            strengthening_guard_reason: None,
+            fairness_claim_refs: vec!["fairness_claim:auditable_authority_witness".to_string()],
+            witness_core_refs: vec![
+                "witness_field:witness_kind".to_string(),
+                "witness_field:action_ref".to_string(),
+                "witness_field:draw_slot".to_string(),
+                "witness_field:draw_result".to_string(),
+            ],
+            witness_binding_refs: auditable_authority_witness_binding_refs(&sample_id),
+            runtime_evidence_refs,
+            repo_local_emitted_artifact_refs,
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.authoritative_room.vertical_slice".to_string(),
+                "compare_floor:current_l2.auditable_authority_witness.strengthening".to_string(),
+            ],
+            contrast_refs: auditable_authority_witness_contrast_refs(),
+            guard_refs: vec![
+                "guard:room_profile_claim_payload_split".to_string(),
+                "guard:minimal_witness_core_only".to_string(),
+                "guard:witness_bearing_authoritative_sample_reached".to_string(),
+            ],
+            kept_later_refs: auditable_authority_witness_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_delegated_rng_service_practical_actualization(
@@ -3458,7 +3961,8 @@ pub fn build_current_l2_source_sample_delegated_rng_service_practical_actualizat
     let reached_delegated_provider_sample = matches!(
         sample_id.as_str(),
         "p09-dice-delegated-rng-provider-placement"
-    ) && formal_hook_status == CurrentL2EmittedArtifactRouteStatus::Reached;
+    ) && formal_hook_status
+        == CurrentL2EmittedArtifactRouteStatus::Reached;
 
     if !reached_delegated_provider_sample {
         let guard_detail = match sample_id.as_str() {
@@ -3474,51 +3978,55 @@ pub fn build_current_l2_source_sample_delegated_rng_service_practical_actualizat
         let guard_reason = format!(
             "current delegated provider package only actualizes reached delegated provider practical samples (`p09`): {guard_detail}"
         );
-        return Ok(CurrentL2SourceSampleDelegatedRngServicePracticalActualization {
-            source_report,
-            practical_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            practical_guard_reason: Some(guard_reason),
-            profile_axis_refs: Vec::new(),
-            provider_boundary_refs: Vec::new(),
-            optional_attachment_refs: Vec::new(),
-            runtime_evidence_refs: Vec::new(),
-            repo_local_emitted_artifact_refs: Vec::new(),
-            compare_floor_refs: vec![
-                "compare_floor:current_l2.delegated_rng_service.guard_only".to_string(),
-            ],
-            contrast_refs: delegated_rng_service_contrast_refs(),
-            guard_refs: vec!["guard:delegated_provider_slice_not_reached".to_string()],
-            kept_later_refs: delegated_rng_service_kept_later_refs(),
-        });
+        return Ok(
+            CurrentL2SourceSampleDelegatedRngServicePracticalActualization {
+                source_report,
+                practical_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                practical_guard_reason: Some(guard_reason),
+                profile_axis_refs: Vec::new(),
+                provider_boundary_refs: Vec::new(),
+                optional_attachment_refs: Vec::new(),
+                runtime_evidence_refs: Vec::new(),
+                repo_local_emitted_artifact_refs: Vec::new(),
+                compare_floor_refs: vec![
+                    "compare_floor:current_l2.delegated_rng_service.guard_only".to_string(),
+                ],
+                contrast_refs: delegated_rng_service_contrast_refs(),
+                guard_refs: vec!["guard:delegated_provider_slice_not_reached".to_string()],
+                kept_later_refs: delegated_rng_service_kept_later_refs(),
+            },
+        );
     }
 
     let runtime_evidence_refs = delegated_rng_service_runtime_evidence_refs(&source_report);
 
-    Ok(CurrentL2SourceSampleDelegatedRngServicePracticalActualization {
-        source_report,
-        practical_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        practical_guard_reason: None,
-        profile_axis_refs: delegated_rng_service_profile_axis_refs(),
-        provider_boundary_refs: delegated_rng_service_provider_boundary_refs(),
-        optional_attachment_refs: delegated_rng_service_optional_attachment_refs(),
-        runtime_evidence_refs,
-        repo_local_emitted_artifact_refs: authoritative_room_repo_local_emitted_artifact_refs(
-            &proof_notebook_review_units,
-            &model_check_concrete_carriers,
-        ),
-        compare_floor_refs: vec![
-            "compare_floor:current_l2.order_handoff.runner_cli".to_string(),
-            "compare_floor:current_l2.delegated_rng_service.practical".to_string(),
-        ],
-        contrast_refs: delegated_rng_service_contrast_refs(),
-        guard_refs: vec![
-            "guard:provider_placement_only".to_string(),
-            "guard:authority_keeps_commit".to_string(),
-            "guard:provider_receipt_optional".to_string(),
-            "guard:fairness_claim_not_collapsed_with_attestation".to_string(),
-        ],
-        kept_later_refs: delegated_rng_service_kept_later_refs(),
-    })
+    Ok(
+        CurrentL2SourceSampleDelegatedRngServicePracticalActualization {
+            source_report,
+            practical_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            practical_guard_reason: None,
+            profile_axis_refs: delegated_rng_service_profile_axis_refs(),
+            provider_boundary_refs: delegated_rng_service_provider_boundary_refs(),
+            optional_attachment_refs: delegated_rng_service_optional_attachment_refs(),
+            runtime_evidence_refs,
+            repo_local_emitted_artifact_refs: authoritative_room_repo_local_emitted_artifact_refs(
+                &proof_notebook_review_units,
+                &model_check_concrete_carriers,
+            ),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.order_handoff.runner_cli".to_string(),
+                "compare_floor:current_l2.delegated_rng_service.practical".to_string(),
+            ],
+            contrast_refs: delegated_rng_service_contrast_refs(),
+            guard_refs: vec![
+                "guard:provider_placement_only".to_string(),
+                "guard:authority_keeps_commit".to_string(),
+                "guard:provider_receipt_optional".to_string(),
+                "guard:fairness_claim_not_collapsed_with_attestation".to_string(),
+            ],
+            kept_later_refs: delegated_rng_service_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_witness_provider_artifact_public_shape_threshold(
@@ -3530,19 +4038,18 @@ pub fn build_current_l2_source_sample_witness_provider_artifact_public_shape_thr
             sample_argument,
             host_plan.clone(),
         )?;
-    let witness =
-        build_current_l2_source_sample_auditable_authority_witness_strengthening(
-            sample_argument,
-            host_plan.clone(),
-        )?;
-    let delegated =
-        build_current_l2_source_sample_delegated_rng_service_practical_actualization(
-            sample_argument,
-            host_plan,
-        )?;
+    let witness = build_current_l2_source_sample_auditable_authority_witness_strengthening(
+        sample_argument,
+        host_plan.clone(),
+    )?;
+    let delegated = build_current_l2_source_sample_delegated_rng_service_practical_actualization(
+        sample_argument,
+        host_plan,
+    )?;
 
     let sample_id = vertical_slice.source_report.sample_id.clone();
-    let threshold_status = if vertical_slice.slice_status == CurrentL2EmittedArtifactRouteStatus::Reached
+    let threshold_status = if vertical_slice.slice_status
+        == CurrentL2EmittedArtifactRouteStatus::Reached
         || witness.strengthening_status == CurrentL2EmittedArtifactRouteStatus::Reached
         || delegated.practical_status == CurrentL2EmittedArtifactRouteStatus::Reached
     {
@@ -3558,9 +4065,7 @@ pub fn build_current_l2_source_sample_witness_provider_artifact_public_shape_thr
             .or_else(|| witness.strengthening_guard_reason.clone())
             .or_else(|| delegated.practical_guard_reason.clone())
             .unwrap_or_else(|| {
-                format!(
-                    "witness/provider/artifact reserve route was not reached for `{sample_id}`"
-                )
+                format!("witness/provider/artifact reserve route was not reached for `{sample_id}`")
             });
         let guard_reason = format!(
             "current witness/provider/artifact public-shape threshold only actualizes reached reserve routes: {guard_detail}"
@@ -3586,41 +4091,39 @@ pub fn build_current_l2_source_sample_witness_provider_artifact_public_shape_thr
         );
     }
 
-    let profile_axis_refs = if delegated.practical_status == CurrentL2EmittedArtifactRouteStatus::Reached
-    {
-        delegated.profile_axis_refs.clone()
-    } else {
-        vertical_slice.profile_axis_refs.clone()
-    };
-    let witness_attachment_refs =
-        witness_provider_public_shape_witness_attachment_refs(&witness);
+    let profile_axis_refs =
+        if delegated.practical_status == CurrentL2EmittedArtifactRouteStatus::Reached {
+            delegated.profile_axis_refs.clone()
+        } else {
+            vertical_slice.profile_axis_refs.clone()
+        };
+    let witness_attachment_refs = witness_provider_public_shape_witness_attachment_refs(&witness);
     let provider_attachment_refs =
         witness_provider_public_shape_provider_attachment_refs(&delegated);
     let emitted_artifact_reserve_refs =
         witness_provider_public_shape_emitted_artifact_refs(&vertical_slice, &witness, &delegated);
-    let compare_floor_refs = witness_provider_public_shape_compare_floor_refs(
-        &vertical_slice,
-        &witness,
-        &delegated,
-    );
+    let compare_floor_refs =
+        witness_provider_public_shape_compare_floor_refs(&vertical_slice, &witness, &delegated);
     let source_report = vertical_slice.source_report;
 
-    Ok(CurrentL2SourceSampleWitnessProviderArtifactPublicShapeThreshold {
-        source_report,
-        threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        threshold_guard_reason: None,
-        profile_axis_refs,
-        witness_attachment_refs,
-        provider_attachment_refs,
-        emitted_artifact_reserve_refs,
-        threshold_default_refs: witness_provider_artifact_public_shape_threshold_default_refs(),
-        compare_floor_refs,
-        contrast_refs: witness_provider_artifact_public_shape_contrast_refs(),
-        guard_refs: witness_provider_artifact_public_shape_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: witness_provider_artifact_public_shape_kept_later_refs(),
-    })
+    Ok(
+        CurrentL2SourceSampleWitnessProviderArtifactPublicShapeThreshold {
+            source_report,
+            threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            threshold_guard_reason: None,
+            profile_axis_refs,
+            witness_attachment_refs,
+            provider_attachment_refs,
+            emitted_artifact_reserve_refs,
+            threshold_default_refs: witness_provider_artifact_public_shape_threshold_default_refs(),
+            compare_floor_refs,
+            contrast_refs: witness_provider_artifact_public_shape_contrast_refs(),
+            guard_refs: witness_provider_artifact_public_shape_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            kept_later_refs: witness_provider_artifact_public_shape_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_witness_provider_artifact_public_shape_actual_adoption(
@@ -3674,45 +4177,47 @@ pub fn build_current_l2_source_sample_witness_provider_artifact_public_shape_act
                         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
                         Vec::new(),
                     ),
-                guard_refs:
-                    witness_provider_artifact_public_shape_actual_adoption_guard_refs(
-                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-                    ),
+                guard_refs: witness_provider_artifact_public_shape_actual_adoption_guard_refs(
+                    CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                ),
                 kept_later_refs: witness_provider_artifact_public_shape_kept_later_refs(),
             },
         );
     }
 
     let sample_id = source_report.sample_id.clone();
-    Ok(CurrentL2SourceSampleWitnessProviderArtifactPublicShapeActualAdoption {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        profile_axis_refs,
-        witness_route_refs:
-            witness_provider_artifact_public_shape_actual_adoption_witness_route_refs(
-                &sample_id,
-                &witness_attachment_refs,
-            ),
-        provider_route_refs:
-            witness_provider_artifact_public_shape_actual_adoption_provider_route_refs(
-                &sample_id,
-                &provider_attachment_refs,
-            ),
-        repo_local_emitted_artifact_refs: emitted_artifact_reserve_refs,
-        actual_adoption_default_refs:
-            witness_provider_artifact_public_shape_actual_adoption_default_refs(
+    Ok(
+        CurrentL2SourceSampleWitnessProviderArtifactPublicShapeActualAdoption {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            profile_axis_refs,
+            witness_route_refs:
+                witness_provider_artifact_public_shape_actual_adoption_witness_route_refs(
+                    &sample_id,
+                    &witness_attachment_refs,
+                ),
+            provider_route_refs:
+                witness_provider_artifact_public_shape_actual_adoption_provider_route_refs(
+                    &sample_id,
+                    &provider_attachment_refs,
+                ),
+            repo_local_emitted_artifact_refs: emitted_artifact_reserve_refs,
+            actual_adoption_default_refs:
+                witness_provider_artifact_public_shape_actual_adoption_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            compare_floor_refs:
+                witness_provider_artifact_public_shape_actual_adoption_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                    compare_floor_refs,
+                ),
+            guard_refs: witness_provider_artifact_public_shape_actual_adoption_guard_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        compare_floor_refs: witness_provider_artifact_public_shape_actual_adoption_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-            compare_floor_refs,
-        ),
-        guard_refs: witness_provider_artifact_public_shape_actual_adoption_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: witness_provider_artifact_public_shape_kept_later_refs(),
-    })
+            kept_later_refs: witness_provider_artifact_public_shape_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_minimal_companion_surface(
@@ -3842,6 +4347,202 @@ pub fn build_current_l2_source_sample_stage_block_surface(
             "guard:helper_local_companion_only".to_string(),
         ],
         kept_later_refs: stage_block_surface_kept_later_refs(),
+    })
+}
+
+pub fn build_current_l2_source_sample_order_handoff_serial_scope_reserve_surface(
+    sample_argument: &str,
+    host_plan: FixtureHostPlan,
+) -> Result<CurrentL2SourceSampleOrderHandoffSerialScopeReserveSurface, String> {
+    let source_wording_route =
+        build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
+            sample_argument,
+            host_plan.clone(),
+        )?;
+    let delegated_practical =
+        build_current_l2_source_sample_delegated_rng_service_practical_actualization(
+            sample_argument,
+            host_plan.clone(),
+        )?;
+    let witness_provider_route =
+        build_current_l2_source_sample_witness_provider_route_actual_adoption(
+            sample_argument,
+            host_plan,
+        )?;
+
+    let CurrentL2SourceSampleOrderHandoffSourceWordingRouteActualAdoption {
+        source_report: route_source_report,
+        actualization_status: route_status,
+        actualization_guard_reason: route_guard_reason,
+        profile_axis_refs: route_profile_axis_refs,
+        repo_local_emitted_artifact_refs: route_repo_local_emitted_artifact_refs,
+        source_wording_route_refs: _,
+        emitted_artifact_candidate_keep_refs: _,
+        actual_adoption_default_refs: _,
+        compare_floor_refs: route_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = source_wording_route;
+
+    let CurrentL2SourceSampleDelegatedRngServicePracticalActualization {
+        source_report: delegated_source_report,
+        practical_status: delegated_status,
+        practical_guard_reason: delegated_guard_reason,
+        profile_axis_refs: delegated_profile_axis_refs,
+        provider_boundary_refs: _,
+        optional_attachment_refs: _,
+        runtime_evidence_refs: _,
+        repo_local_emitted_artifact_refs: delegated_repo_local_emitted_artifact_refs,
+        compare_floor_refs: delegated_compare_floor_refs,
+        contrast_refs: _,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = delegated_practical;
+
+    let CurrentL2SourceSampleWitnessProviderRouteActualAdoption {
+        source_report: _witness_route_source_report,
+        actualization_status: witness_route_status,
+        actualization_guard_reason: witness_route_guard_reason,
+        profile_axis_refs: witness_route_profile_axis_refs,
+        witness_route_actual_refs: _,
+        provider_route_actual_refs: _,
+        schema_candidate_keep_refs: _,
+        repo_local_emitted_artifact_refs: witness_route_repo_local_emitted_artifact_refs,
+        actual_adoption_default_refs: _,
+        compare_floor_refs: witness_route_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = witness_provider_route;
+
+    let sample_id = route_source_report.sample_id.clone();
+    let reached_status = match sample_id.as_str() {
+        "p07-dice-late-join-visible-history" | "p08-dice-stale-reconnect-refresh" => {
+            route_status == CurrentL2EmittedArtifactRouteStatus::Reached
+        }
+        "p09-dice-delegated-rng-provider-placement" => {
+            delegated_status == CurrentL2EmittedArtifactRouteStatus::Reached
+                && witness_route_status == CurrentL2EmittedArtifactRouteStatus::Reached
+        }
+        _ => false,
+    };
+
+    if !reached_status {
+        let source_report = match sample_id.as_str() {
+            "p09-dice-delegated-rng-provider-placement" => delegated_source_report,
+            _ => route_source_report,
+        };
+        let guard_detail = match sample_id.as_str() {
+            "p07-dice-late-join-visible-history" | "p08-dice-stale-reconnect-refresh" => {
+                route_guard_reason.unwrap_or_else(|| {
+                    format!(
+                        "sample `{sample_id}` did not reach the source-wording route actual adoption floor"
+                    )
+                })
+            }
+            "p09-dice-delegated-rng-provider-placement" => delegated_guard_reason
+                .or(witness_route_guard_reason)
+                .unwrap_or_else(|| {
+                    format!(
+                        "sample `{sample_id}` did not reach the delegated-provider practical and witness/provider route floors"
+                    )
+                }),
+            _ => route_guard_reason
+                .or(delegated_guard_reason)
+                .or(witness_route_guard_reason)
+                .unwrap_or_else(|| {
+                    format!(
+                        "sample `{sample_id}` did not reach the authoritative-room serial-scope reserve surface"
+                    )
+                }),
+        };
+        let guard_reason = format!(
+            "current serial-scope reserve surface only actualizes authoritative-room-specific reached routes (`p07` / `p08` / `p09`): {guard_detail}"
+        );
+
+        return Ok(CurrentL2SourceSampleOrderHandoffSerialScopeReserveSurface {
+            source_report,
+            surface_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+            surface_guard_reason: Some(guard_reason),
+            profile_axis_refs: Vec::new(),
+            repo_local_emitted_artifact_refs: Vec::new(),
+            serial_scope_lines: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: vec!["guard:serial_scope_reserve_surface_not_reached".to_string()],
+            kept_later_refs: order_handoff_serial_scope_reserve_surface_kept_later_refs(),
+        });
+    }
+
+    let (source_report, profile_axis_refs, repo_local_emitted_artifact_refs, compare_floor_refs) =
+        match sample_id.as_str() {
+            "p09-dice-delegated-rng-provider-placement" => {
+                let mut refs = delegated_compare_floor_refs;
+                for entry in witness_route_compare_floor_refs {
+                    if !refs.contains(&entry) {
+                        refs.push(entry);
+                    }
+                }
+                refs.push(
+                    "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface"
+                        .to_string(),
+                );
+                (
+                    delegated_source_report,
+                    delegated_profile_axis_refs,
+                    delegated_repo_local_emitted_artifact_refs,
+                    refs,
+                )
+            }
+            _ => {
+                let mut refs = route_compare_floor_refs;
+                if !refs.contains(
+                    &"compare_floor:current_l2.order_handoff.serial_scope_reserve_surface"
+                        .to_string(),
+                ) {
+                    refs.push(
+                        "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface"
+                            .to_string(),
+                    );
+                }
+                (
+                    route_source_report,
+                    route_profile_axis_refs,
+                    route_repo_local_emitted_artifact_refs,
+                    refs,
+                )
+            }
+        };
+
+    if sample_id == "p09-dice-delegated-rng-provider-placement"
+        && repo_local_emitted_artifact_refs != witness_route_repo_local_emitted_artifact_refs
+    {
+        return Err(format!(
+            "serial-scope reserve surface expected delegated provider emitted artifacts to align with witness/provider route for `{sample_id}`"
+        ));
+    }
+
+    if sample_id == "p09-dice-delegated-rng-provider-placement"
+        && profile_axis_refs != witness_route_profile_axis_refs
+    {
+        return Err(format!(
+            "serial-scope reserve surface expected delegated provider profile axes to align with witness/provider route for `{sample_id}`"
+        ));
+    }
+
+    Ok(CurrentL2SourceSampleOrderHandoffSerialScopeReserveSurface {
+        source_report,
+        surface_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+        surface_guard_reason: None,
+        profile_axis_refs,
+        repo_local_emitted_artifact_refs,
+        serial_scope_lines: order_handoff_serial_scope_reserve_surface_lines(&sample_id),
+        compare_floor_refs,
+        guard_refs: order_handoff_serial_scope_reserve_surface_guard_refs(
+            CurrentL2EmittedArtifactRouteStatus::Reached,
+        ),
+        kept_later_refs: order_handoff_serial_scope_reserve_surface_kept_later_refs(),
     })
 }
 
@@ -3982,11 +4683,10 @@ pub fn build_current_l2_source_sample_order_handoff_surface_actual_adoption(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleOrderHandoffSurfaceActualAdoption, String> {
-    let threshold =
-        build_current_l2_source_sample_order_handoff_surface_artifact_threshold(
-            sample_argument,
-            host_plan,
-        )?;
+    let threshold = build_current_l2_source_sample_order_handoff_surface_artifact_threshold(
+        sample_argument,
+        host_plan,
+    )?;
 
     let CurrentL2SourceSampleOrderHandoffSurfaceArtifactThreshold {
         source_report,
@@ -4116,6 +4816,7 @@ pub fn build_current_l2_source_sample_witness_provider_emitted_contract_coupled_
                 coupled_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
                 coupled_guard_reason: Some(guard_reason),
                 profile_axis_refs,
+                repo_local_emitted_artifact_refs: Vec::new(),
                 witness_contract_candidate_refs: Vec::new(),
                 provider_contract_candidate_refs: Vec::new(),
                 emitted_contract_candidate_refs: Vec::new(),
@@ -4135,42 +4836,186 @@ pub fn build_current_l2_source_sample_witness_provider_emitted_contract_coupled_
     }
 
     let sample_id = source_report.sample_id.clone();
-    Ok(CurrentL2SourceSampleWitnessProviderEmittedContractCoupledLaterGate {
+    let emitted_contract_candidate_refs =
+        witness_provider_emitted_contract_coupled_later_gate_emitted_refs(
+            &sample_id,
+            &repo_local_emitted_artifact_refs,
+        );
+    Ok(
+        CurrentL2SourceSampleWitnessProviderEmittedContractCoupledLaterGate {
+            source_report,
+            coupled_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            coupled_guard_reason: None,
+            profile_axis_refs,
+            repo_local_emitted_artifact_refs,
+            witness_contract_candidate_refs:
+                witness_provider_emitted_contract_coupled_later_gate_witness_refs(
+                    &sample_id,
+                    &witness_route_refs,
+                ),
+            provider_contract_candidate_refs:
+                witness_provider_emitted_contract_coupled_later_gate_provider_refs(
+                    &sample_id,
+                    &provider_route_refs,
+                ),
+            emitted_contract_candidate_refs,
+            coupled_default_refs: witness_provider_emitted_contract_coupled_later_gate_default_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            compare_floor_refs:
+                witness_provider_emitted_contract_coupled_later_gate_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                    compare_floor_refs,
+                    order_handoff_status,
+                ),
+            guard_refs: witness_provider_emitted_contract_coupled_later_gate_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            kept_later_refs: witness_provider_emitted_contract_coupled_later_gate_kept_later_refs(),
+        },
+    )
+}
+
+pub fn build_current_l2_source_sample_witness_provider_emitted_contract_trace_alignment_bridge(
+    sample_argument: &str,
+    host_plan: FixtureHostPlan,
+) -> Result<CurrentL2SourceSampleWitnessProviderEmittedContractTraceAlignmentBridge, String> {
+    let route_actual_adoption =
+        build_current_l2_source_sample_witness_provider_route_actual_adoption(
+            sample_argument,
+            host_plan.clone(),
+        )?;
+    let public_contract =
+        build_current_l2_source_sample_witness_provider_emitted_contract_coupled_later_gate(
+            sample_argument,
+            host_plan,
+        )?;
+
+    let CurrentL2SourceSampleWitnessProviderRouteActualAdoption {
         source_report,
-        coupled_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        coupled_guard_reason: None,
-        profile_axis_refs,
-        witness_contract_candidate_refs:
-            witness_provider_emitted_contract_coupled_later_gate_witness_refs(
-                &sample_id,
-                &witness_route_refs,
+        actualization_status: route_status,
+        actualization_guard_reason: route_guard_reason,
+        profile_axis_refs: route_profile_axis_refs,
+        witness_route_actual_refs: _,
+        provider_route_actual_refs: _,
+        schema_candidate_keep_refs: _,
+        repo_local_emitted_artifact_refs: route_repo_local_emitted_artifact_refs,
+        actual_adoption_default_refs: _,
+        compare_floor_refs: route_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = route_actual_adoption;
+
+    let CurrentL2SourceSampleWitnessProviderEmittedContractCoupledLaterGate {
+        source_report: coupled_source_report,
+        coupled_status,
+        coupled_guard_reason,
+        profile_axis_refs: coupled_profile_axis_refs,
+        repo_local_emitted_artifact_refs: coupled_repo_local_emitted_artifact_refs,
+        witness_contract_candidate_refs: _,
+        provider_contract_candidate_refs: _,
+        emitted_contract_candidate_refs,
+        coupled_default_refs: _,
+        compare_floor_refs: coupled_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = public_contract;
+
+    if route_status != CurrentL2EmittedArtifactRouteStatus::Reached
+        || coupled_status != CurrentL2EmittedArtifactRouteStatus::Reached
+    {
+        let guard_detail = route_guard_reason
+            .or(coupled_guard_reason)
+            .unwrap_or_else(|| {
+                format!(
+                    "witness/provider route actual adoption or emitted-contract coupled-later gate was not reached for `{}`",
+                    source_report.sample_id
+                )
+            });
+        let guard_reason = format!(
+            "current witness/provider emitted-contract trace alignment bridge only actualizes reached route and coupled-later floors: {guard_detail}"
+        );
+
+        return Ok(CurrentL2SourceSampleWitnessProviderEmittedContractTraceAlignmentBridge {
+            source_report,
+            alignment_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+            alignment_guard_reason: Some(guard_reason),
+            profile_axis_refs: Vec::new(),
+            repo_local_emitted_artifact_refs: Vec::new(),
+            route_pair_refs: Vec::new(),
+            emitted_contract_pair_refs: Vec::new(),
+            matched_pair_refs: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.witness_provider_emitted_contract.trace_alignment_bridge_guard_only"
+                    .to_string(),
+            ],
+            guard_refs: witness_provider_emitted_contract_trace_alignment_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
             ),
-        provider_contract_candidate_refs:
-            witness_provider_emitted_contract_coupled_later_gate_provider_refs(
-                &sample_id,
-                &provider_route_refs,
-            ),
-        emitted_contract_candidate_refs:
-            witness_provider_emitted_contract_coupled_later_gate_emitted_refs(
-                &sample_id,
-                &repo_local_emitted_artifact_refs,
-            ),
-        coupled_default_refs:
-            witness_provider_emitted_contract_coupled_later_gate_default_refs(
+            kept_later_refs:
+                witness_provider_emitted_contract_trace_alignment_kept_later_refs(),
+        });
+    }
+
+    if route_profile_axis_refs != coupled_profile_axis_refs {
+        return Err(format!(
+            "witness/provider emitted-contract trace alignment profile-axis drift for `{}`",
+            source_report.sample_id
+        ));
+    }
+
+    if route_repo_local_emitted_artifact_refs != coupled_repo_local_emitted_artifact_refs {
+        return Err(format!(
+            "witness/provider emitted-contract trace alignment repo-local emitted artifact drift for `{}`",
+            source_report.sample_id
+        ));
+    }
+
+    if source_report.sample_id != coupled_source_report.sample_id {
+        return Err(format!(
+            "witness/provider emitted-contract trace alignment sample mismatch: route=`{}`, coupled=`{}`",
+            source_report.sample_id, coupled_source_report.sample_id
+        ));
+    }
+
+    let sample_id = source_report.sample_id.clone();
+    let route_pair_refs = witness_provider_emitted_contract_trace_alignment_route_pair_refs(
+        &sample_id,
+        &route_repo_local_emitted_artifact_refs,
+    )?;
+    let emitted_contract_pair_refs =
+        witness_provider_emitted_contract_trace_alignment_emitted_pair_refs(
+            &sample_id,
+            &coupled_repo_local_emitted_artifact_refs,
+            &emitted_contract_candidate_refs,
+        )?;
+    let matched_pair_refs = witness_provider_emitted_contract_trace_alignment_matched_pair_refs(
+        &route_pair_refs,
+        &emitted_contract_pair_refs,
+    )?;
+
+    Ok(
+        CurrentL2SourceSampleWitnessProviderEmittedContractTraceAlignmentBridge {
+            source_report,
+            alignment_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            alignment_guard_reason: None,
+            profile_axis_refs: route_profile_axis_refs,
+            repo_local_emitted_artifact_refs: route_repo_local_emitted_artifact_refs,
+            route_pair_refs,
+            emitted_contract_pair_refs,
+            matched_pair_refs,
+            compare_floor_refs:
+                witness_provider_emitted_contract_trace_alignment_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                    route_compare_floor_refs,
+                    coupled_compare_floor_refs,
+                ),
+            guard_refs: witness_provider_emitted_contract_trace_alignment_guard_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        compare_floor_refs:
-            witness_provider_emitted_contract_coupled_later_gate_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-                compare_floor_refs,
-                order_handoff_status,
-            ),
-        guard_refs: witness_provider_emitted_contract_coupled_later_gate_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs:
-            witness_provider_emitted_contract_coupled_later_gate_kept_later_refs(),
-    })
+            kept_later_refs: witness_provider_emitted_contract_trace_alignment_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_witness_provider_public_schema_coupled_later_gate(
@@ -4188,6 +5033,7 @@ pub fn build_current_l2_source_sample_witness_provider_public_schema_coupled_lat
         coupled_status,
         coupled_guard_reason,
         profile_axis_refs,
+        repo_local_emitted_artifact_refs: _,
         witness_contract_candidate_refs,
         provider_contract_candidate_refs,
         emitted_contract_candidate_refs,
@@ -4208,60 +5054,66 @@ pub fn build_current_l2_source_sample_witness_provider_public_schema_coupled_lat
             "current witness/provider public-schema coupled later gate only actualizes reached witness/provider emitted-contract routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleWitnessProviderPublicSchemaCoupledLaterGate {
-            source_report,
-            coupled_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            coupled_guard_reason: Some(guard_reason),
-            profile_axis_refs,
-            witness_schema_candidate_refs: Vec::new(),
-            provider_receipt_candidate_refs: Vec::new(),
-            combined_public_contract_candidate_refs: Vec::new(),
-            coupled_default_refs: Vec::new(),
-            compare_floor_refs:
-                witness_provider_public_schema_coupled_later_gate_compare_floor_refs(
+        return Ok(
+            CurrentL2SourceSampleWitnessProviderPublicSchemaCoupledLaterGate {
+                source_report,
+                coupled_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                coupled_guard_reason: Some(guard_reason),
+                profile_axis_refs,
+                witness_schema_candidate_refs: Vec::new(),
+                provider_receipt_candidate_refs: Vec::new(),
+                combined_public_contract_candidate_refs: Vec::new(),
+                coupled_default_refs: Vec::new(),
+                compare_floor_refs:
+                    witness_provider_public_schema_coupled_later_gate_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                        public_contract_compare_floor_refs,
+                    ),
+                guard_refs: witness_provider_public_schema_coupled_later_gate_guard_refs(
                     CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-                    public_contract_compare_floor_refs,
                 ),
-            guard_refs: witness_provider_public_schema_coupled_later_gate_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: witness_provider_public_schema_coupled_later_gate_kept_later_refs(),
-        });
+                kept_later_refs: witness_provider_public_schema_coupled_later_gate_kept_later_refs(
+                ),
+            },
+        );
     }
 
     let sample_id = source_report.sample_id.clone();
-    Ok(CurrentL2SourceSampleWitnessProviderPublicSchemaCoupledLaterGate {
-        source_report,
-        coupled_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        coupled_guard_reason: None,
-        profile_axis_refs,
-        witness_schema_candidate_refs:
-            witness_provider_public_schema_coupled_later_gate_witness_schema_refs(
-                &sample_id,
-                &witness_contract_candidate_refs,
+    Ok(
+        CurrentL2SourceSampleWitnessProviderPublicSchemaCoupledLaterGate {
+            source_report,
+            coupled_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            coupled_guard_reason: None,
+            profile_axis_refs,
+            witness_schema_candidate_refs:
+                witness_provider_public_schema_coupled_later_gate_witness_schema_refs(
+                    &sample_id,
+                    &witness_contract_candidate_refs,
+                ),
+            provider_receipt_candidate_refs:
+                witness_provider_public_schema_coupled_later_gate_provider_receipt_refs(
+                    &sample_id,
+                    &provider_contract_candidate_refs,
+                ),
+            combined_public_contract_candidate_refs:
+                witness_provider_public_schema_coupled_later_gate_combined_contract_refs(
+                    &sample_id,
+                    &emitted_contract_candidate_refs,
+                ),
+            coupled_default_refs: witness_provider_public_schema_coupled_later_gate_default_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        provider_receipt_candidate_refs:
-            witness_provider_public_schema_coupled_later_gate_provider_receipt_refs(
-                &sample_id,
-                &provider_contract_candidate_refs,
+            compare_floor_refs:
+                witness_provider_public_schema_coupled_later_gate_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                    public_contract_compare_floor_refs,
+                ),
+            guard_refs: witness_provider_public_schema_coupled_later_gate_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        combined_public_contract_candidate_refs:
-            witness_provider_public_schema_coupled_later_gate_combined_contract_refs(
-                &sample_id,
-                &emitted_contract_candidate_refs,
-            ),
-        coupled_default_refs: witness_provider_public_schema_coupled_later_gate_default_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        compare_floor_refs: witness_provider_public_schema_coupled_later_gate_compare_floor_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-            public_contract_compare_floor_refs,
-        ),
-        guard_refs: witness_provider_public_schema_coupled_later_gate_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: witness_provider_public_schema_coupled_later_gate_kept_later_refs(),
-    })
+            kept_later_refs: witness_provider_public_schema_coupled_later_gate_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_witness_provider_route_actual_adoption(
@@ -4423,76 +5275,80 @@ pub fn build_current_l2_source_sample_witness_provider_schema_route_actual_adopt
     if route_status != CurrentL2EmittedArtifactRouteStatus::Reached
         || public_schema_status != CurrentL2EmittedArtifactRouteStatus::Reached
     {
-        let guard_detail = public_schema_guard_reason.or(route_guard_reason).unwrap_or_else(|| {
-            format!(
-                "witness/provider route + public-schema prior floors were not reached for `{}`",
-                source_report.sample_id
-            )
-        });
+        let guard_detail = public_schema_guard_reason
+            .or(route_guard_reason)
+            .unwrap_or_else(|| {
+                format!(
+                    "witness/provider route + public-schema prior floors were not reached for `{}`",
+                    source_report.sample_id
+                )
+            });
         let guard_reason = format!(
             "current witness/provider schema route actual adoption only actualizes reached witness/provider route + public-schema routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleWitnessProviderSchemaRouteActualAdoption {
-            source_report,
-            actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            actualization_guard_reason: Some(guard_reason),
-            profile_axis_refs,
-            repo_local_emitted_artifact_refs,
-            witness_schema_route_refs: Vec::new(),
-            provider_receipt_route_refs: Vec::new(),
-            combined_public_contract_keep_refs: Vec::new(),
-            actual_adoption_default_refs: Vec::new(),
-            compare_floor_refs:
-                witness_provider_schema_route_actual_adoption_compare_floor_refs(
+        return Ok(
+            CurrentL2SourceSampleWitnessProviderSchemaRouteActualAdoption {
+                source_report,
+                actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                actualization_guard_reason: Some(guard_reason),
+                profile_axis_refs,
+                repo_local_emitted_artifact_refs,
+                witness_schema_route_refs: Vec::new(),
+                provider_receipt_route_refs: Vec::new(),
+                combined_public_contract_keep_refs: Vec::new(),
+                actual_adoption_default_refs: Vec::new(),
+                compare_floor_refs:
+                    witness_provider_schema_route_actual_adoption_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                        route_compare_floor_refs,
+                    ),
+                guard_refs: witness_provider_schema_route_actual_adoption_guard_refs(
                     CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-                    route_compare_floor_refs,
                 ),
-            guard_refs: witness_provider_schema_route_actual_adoption_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: witness_provider_schema_route_actual_adoption_kept_later_refs(),
-        });
+                kept_later_refs: witness_provider_schema_route_actual_adoption_kept_later_refs(),
+            },
+        );
     }
 
     let sample_id = source_report.sample_id.clone();
-    Ok(CurrentL2SourceSampleWitnessProviderSchemaRouteActualAdoption {
-        source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        profile_axis_refs,
-        repo_local_emitted_artifact_refs,
-        witness_schema_route_refs:
-            witness_provider_schema_route_actual_adoption_witness_refs(
+    Ok(
+        CurrentL2SourceSampleWitnessProviderSchemaRouteActualAdoption {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            profile_axis_refs,
+            repo_local_emitted_artifact_refs,
+            witness_schema_route_refs: witness_provider_schema_route_actual_adoption_witness_refs(
                 &sample_id,
                 &witness_route_actual_refs,
                 &witness_schema_candidate_refs,
             ),
-        provider_receipt_route_refs:
-            witness_provider_schema_route_actual_adoption_provider_refs(
-                &sample_id,
-                &provider_route_actual_refs,
-                &provider_receipt_candidate_refs,
-            ),
-        combined_public_contract_keep_refs:
-            witness_provider_schema_route_actual_adoption_combined_keep_refs(
-                &sample_id,
-                &combined_public_contract_candidate_refs,
-            ),
-        actual_adoption_default_refs:
-            witness_provider_schema_route_actual_adoption_default_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-            ),
-        compare_floor_refs:
-            witness_provider_schema_route_actual_adoption_compare_floor_refs(
+            provider_receipt_route_refs:
+                witness_provider_schema_route_actual_adoption_provider_refs(
+                    &sample_id,
+                    &provider_route_actual_refs,
+                    &provider_receipt_candidate_refs,
+                ),
+            combined_public_contract_keep_refs:
+                witness_provider_schema_route_actual_adoption_combined_keep_refs(
+                    &sample_id,
+                    &combined_public_contract_candidate_refs,
+                ),
+            actual_adoption_default_refs:
+                witness_provider_schema_route_actual_adoption_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            compare_floor_refs: witness_provider_schema_route_actual_adoption_compare_floor_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
                 route_compare_floor_refs,
             ),
-        guard_refs: witness_provider_schema_route_actual_adoption_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: witness_provider_schema_route_actual_adoption_kept_later_refs(),
-    })
+            guard_refs: witness_provider_schema_route_actual_adoption_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            kept_later_refs: witness_provider_schema_route_actual_adoption_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_witness_provider_final_public_contract_reopen_threshold(
@@ -4530,6 +5386,7 @@ pub fn build_current_l2_source_sample_witness_provider_final_public_contract_reo
         coupled_status: emitted_contract_status,
         coupled_guard_reason: emitted_contract_guard_reason,
         profile_axis_refs: _,
+        repo_local_emitted_artifact_refs: _,
         witness_contract_candidate_refs: _,
         provider_contract_candidate_refs: _,
         emitted_contract_candidate_refs: _,
@@ -4574,49 +5431,52 @@ pub fn build_current_l2_source_sample_witness_provider_final_public_contract_reo
                 guard_refs: witness_provider_final_public_contract_reopen_threshold_guard_refs(
                     CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
                 ),
-                kept_later_refs: witness_provider_final_public_contract_reopen_threshold_kept_later_refs(),
+                kept_later_refs:
+                    witness_provider_final_public_contract_reopen_threshold_kept_later_refs(),
             },
         );
     }
 
     let sample_id = source_report.sample_id.clone();
-    Ok(CurrentL2SourceSampleWitnessProviderFinalPublicContractReopenThreshold {
-        source_report,
-        threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        threshold_guard_reason: None,
-        profile_axis_refs,
-        repo_local_emitted_artifact_refs,
-        witness_schema_route_refs: witness_schema_route_refs.clone(),
-        provider_receipt_route_refs: provider_receipt_route_refs.clone(),
-        combined_public_contract_keep_refs: combined_public_contract_keep_refs.clone(),
-        final_public_contract_reopen_sequence_refs:
-            witness_provider_final_public_contract_reopen_threshold_sequence_refs(
-                &sample_id,
-                &witness_schema_route_refs,
-                &provider_receipt_route_refs,
-                &combined_public_contract_keep_refs,
-            ),
-        threshold_default_refs:
-            witness_provider_final_public_contract_reopen_threshold_default_refs(
+    Ok(
+        CurrentL2SourceSampleWitnessProviderFinalPublicContractReopenThreshold {
+            source_report,
+            threshold_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            threshold_guard_reason: None,
+            profile_axis_refs,
+            repo_local_emitted_artifact_refs,
+            witness_schema_route_refs: witness_schema_route_refs.clone(),
+            provider_receipt_route_refs: provider_receipt_route_refs.clone(),
+            combined_public_contract_keep_refs: combined_public_contract_keep_refs.clone(),
+            final_public_contract_reopen_sequence_refs:
+                witness_provider_final_public_contract_reopen_threshold_sequence_refs(
+                    &sample_id,
+                    &witness_schema_route_refs,
+                    &provider_receipt_route_refs,
+                    &combined_public_contract_keep_refs,
+                ),
+            threshold_default_refs:
+                witness_provider_final_public_contract_reopen_threshold_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            compare_floor_refs:
+                witness_provider_final_public_contract_reopen_threshold_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                    schema_route_compare_floor_refs,
+                ),
+            guard_refs: witness_provider_final_public_contract_reopen_threshold_guard_refs(
                 CurrentL2EmittedArtifactRouteStatus::Reached,
             ),
-        compare_floor_refs:
-            witness_provider_final_public_contract_reopen_threshold_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-                schema_route_compare_floor_refs,
-            ),
-        guard_refs: witness_provider_final_public_contract_reopen_threshold_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: witness_provider_final_public_contract_reopen_threshold_kept_later_refs(),
-    })
+            kept_later_refs:
+                witness_provider_final_public_contract_reopen_threshold_kept_later_refs(),
+        },
+    )
 }
 
 pub fn build_current_l2_source_sample_order_handoff_source_wording_emitted_artifact_coupled_later_gate(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
-) -> Result<CurrentL2SourceSampleOrderHandoffSourceWordingEmittedArtifactCoupledLaterGate, String>
-{
+) -> Result<CurrentL2SourceSampleOrderHandoffSourceWordingEmittedArtifactCoupledLaterGate, String> {
     let surface_actual_adoption =
         build_current_l2_source_sample_order_handoff_surface_actual_adoption(
             sample_argument,
@@ -4647,6 +5507,7 @@ pub fn build_current_l2_source_sample_order_handoff_source_wording_emitted_artif
         coupled_status: witness_provider_status,
         coupled_guard_reason: witness_provider_guard_reason,
         profile_axis_refs: _,
+        repo_local_emitted_artifact_refs: _,
         witness_contract_candidate_refs: _,
         provider_contract_candidate_refs: _,
         emitted_contract_candidate_refs,
@@ -4725,10 +5586,9 @@ pub fn build_current_l2_source_sample_order_handoff_source_wording_emitted_artif
                     compare_floor_refs,
                     witness_provider_compare_floor_refs,
                 ),
-            guard_refs:
-                order_handoff_source_wording_emitted_artifact_coupled_later_gate_guard_refs(
-                    CurrentL2EmittedArtifactRouteStatus::Reached,
-                ),
+            guard_refs: order_handoff_source_wording_emitted_artifact_coupled_later_gate_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
             kept_later_refs:
                 order_handoff_source_wording_emitted_artifact_coupled_later_gate_kept_later_refs(),
         },
@@ -4781,70 +5641,328 @@ pub fn build_current_l2_source_sample_order_handoff_source_wording_route_actual_
     if surface_status != CurrentL2EmittedArtifactRouteStatus::Reached
         || coupled_status != CurrentL2EmittedArtifactRouteStatus::Reached
     {
-        let guard_detail = coupled_guard_reason.or(surface_guard_reason).unwrap_or_else(|| {
-            format!(
-                "order-handoff surface + source-wording prior floors were not reached for `{}`",
-                source_report.sample_id
-            )
-        });
+        let guard_detail = coupled_guard_reason
+            .or(surface_guard_reason)
+            .unwrap_or_else(|| {
+                format!(
+                    "order-handoff surface + source-wording prior floors were not reached for `{}`",
+                    source_report.sample_id
+                )
+            });
         let guard_reason = format!(
             "current order-handoff source wording route actual adoption only actualizes reached order-handoff surface + source-wording routes: {guard_detail}"
         );
 
-        return Ok(CurrentL2SourceSampleOrderHandoffSourceWordingRouteActualAdoption {
-            source_report,
-            actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            actualization_guard_reason: Some(guard_reason),
-            profile_axis_refs,
-            repo_local_emitted_artifact_refs,
-            source_wording_route_refs: Vec::new(),
-            emitted_artifact_candidate_keep_refs: Vec::new(),
-            actual_adoption_default_refs: Vec::new(),
-            compare_floor_refs:
-                order_handoff_source_wording_route_actual_adoption_compare_floor_refs(
+        return Ok(
+            CurrentL2SourceSampleOrderHandoffSourceWordingRouteActualAdoption {
+                source_report,
+                actualization_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                actualization_guard_reason: Some(guard_reason),
+                profile_axis_refs,
+                repo_local_emitted_artifact_refs,
+                source_wording_route_refs: Vec::new(),
+                emitted_artifact_candidate_keep_refs: Vec::new(),
+                actual_adoption_default_refs: Vec::new(),
+                compare_floor_refs:
+                    order_handoff_source_wording_route_actual_adoption_compare_floor_refs(
+                        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+                        coupled_compare_floor_refs,
+                    ),
+                guard_refs: order_handoff_source_wording_route_actual_adoption_guard_refs(
                     CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-                    coupled_compare_floor_refs,
                 ),
-            guard_refs: order_handoff_source_wording_route_actual_adoption_guard_refs(
-                CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
-            ),
-            kept_later_refs: order_handoff_source_wording_route_actual_adoption_kept_later_refs(),
-        });
+                kept_later_refs: order_handoff_source_wording_route_actual_adoption_kept_later_refs(
+                ),
+            },
+        );
     }
 
     let sample_id = source_report.sample_id.clone();
-    Ok(CurrentL2SourceSampleOrderHandoffSourceWordingRouteActualAdoption {
+    Ok(
+        CurrentL2SourceSampleOrderHandoffSourceWordingRouteActualAdoption {
+            source_report,
+            actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            actualization_guard_reason: None,
+            profile_axis_refs,
+            repo_local_emitted_artifact_refs,
+            source_wording_route_refs:
+                order_handoff_source_wording_route_actual_adoption_source_wording_refs(
+                    &sample_id,
+                    &principal_surface_lines,
+                    &secondary_surface_lines,
+                    &source_wording_candidate_refs,
+                ),
+            emitted_artifact_candidate_keep_refs:
+                order_handoff_source_wording_route_actual_adoption_emitted_keep_refs(
+                    &sample_id,
+                    &emitted_artifact_schema_candidate_refs,
+                ),
+            actual_adoption_default_refs:
+                order_handoff_source_wording_route_actual_adoption_default_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                ),
+            compare_floor_refs:
+                order_handoff_source_wording_route_actual_adoption_compare_floor_refs(
+                    CurrentL2EmittedArtifactRouteStatus::Reached,
+                    coupled_compare_floor_refs,
+                ),
+            guard_refs: order_handoff_source_wording_route_actual_adoption_guard_refs(
+                CurrentL2EmittedArtifactRouteStatus::Reached,
+            ),
+            kept_later_refs: order_handoff_source_wording_route_actual_adoption_kept_later_refs(),
+        },
+    )
+}
+
+pub fn build_current_l2_source_sample_order_handoff_witness_provider_public_seam_compression(
+    sample_argument: &str,
+    host_plan: FixtureHostPlan,
+) -> Result<CurrentL2SourceSampleOrderHandoffWitnessProviderPublicSeamCompression, String> {
+    let source_wording_route =
+        build_current_l2_source_sample_order_handoff_source_wording_route_actual_adoption(
+            sample_argument,
+            host_plan.clone(),
+        )?;
+    let serial_scope_reserve =
+        build_current_l2_source_sample_order_handoff_serial_scope_reserve_surface(
+            sample_argument,
+            host_plan.clone(),
+        )?;
+    let witness_trace_alignment =
+        build_current_l2_source_sample_witness_provider_emitted_contract_trace_alignment_bridge(
+            sample_argument,
+            host_plan.clone(),
+        )?;
+    let witness_final_threshold =
+        build_current_l2_source_sample_witness_provider_final_public_contract_reopen_threshold(
+            sample_argument,
+            host_plan,
+        )?;
+
+    let CurrentL2SourceSampleOrderHandoffSourceWordingRouteActualAdoption {
         source_report,
-        actualization_status: CurrentL2EmittedArtifactRouteStatus::Reached,
-        actualization_guard_reason: None,
-        profile_axis_refs,
-        repo_local_emitted_artifact_refs,
-        source_wording_route_refs:
-            order_handoff_source_wording_route_actual_adoption_source_wording_refs(
-                &sample_id,
-                &principal_surface_lines,
-                &secondary_surface_lines,
-                &source_wording_candidate_refs,
-            ),
-        emitted_artifact_candidate_keep_refs:
-            order_handoff_source_wording_route_actual_adoption_emitted_keep_refs(
-                &sample_id,
-                &emitted_artifact_schema_candidate_refs,
-            ),
-        actual_adoption_default_refs:
-            order_handoff_source_wording_route_actual_adoption_default_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-            ),
-        compare_floor_refs:
-            order_handoff_source_wording_route_actual_adoption_compare_floor_refs(
-                CurrentL2EmittedArtifactRouteStatus::Reached,
-                coupled_compare_floor_refs,
-            ),
-        guard_refs: order_handoff_source_wording_route_actual_adoption_guard_refs(
-            CurrentL2EmittedArtifactRouteStatus::Reached,
-        ),
-        kept_later_refs: order_handoff_source_wording_route_actual_adoption_kept_later_refs(),
-    })
+        actualization_status: route_status,
+        actualization_guard_reason: route_guard_reason,
+        profile_axis_refs: route_profile_axis_refs,
+        repo_local_emitted_artifact_refs: route_repo_local_emitted_artifact_refs,
+        source_wording_route_refs,
+        emitted_artifact_candidate_keep_refs,
+        actual_adoption_default_refs: _,
+        compare_floor_refs: route_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = source_wording_route;
+
+    let CurrentL2SourceSampleOrderHandoffSerialScopeReserveSurface {
+        source_report: serial_source_report,
+        surface_status: serial_status,
+        surface_guard_reason: serial_guard_reason,
+        profile_axis_refs: serial_profile_axis_refs,
+        repo_local_emitted_artifact_refs: serial_repo_local_emitted_artifact_refs,
+        serial_scope_lines,
+        compare_floor_refs: serial_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = serial_scope_reserve;
+
+    let CurrentL2SourceSampleWitnessProviderEmittedContractTraceAlignmentBridge {
+        source_report: trace_source_report,
+        alignment_status: trace_status,
+        alignment_guard_reason: trace_guard_reason,
+        profile_axis_refs: trace_profile_axis_refs,
+        repo_local_emitted_artifact_refs: trace_repo_local_emitted_artifact_refs,
+        route_pair_refs: _,
+        emitted_contract_pair_refs: _,
+        matched_pair_refs,
+        compare_floor_refs: trace_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = witness_trace_alignment;
+
+    let CurrentL2SourceSampleWitnessProviderFinalPublicContractReopenThreshold {
+        source_report: threshold_source_report,
+        threshold_status,
+        threshold_guard_reason,
+        profile_axis_refs: threshold_profile_axis_refs,
+        repo_local_emitted_artifact_refs: threshold_repo_local_emitted_artifact_refs,
+        witness_schema_route_refs,
+        provider_receipt_route_refs,
+        combined_public_contract_keep_refs,
+        final_public_contract_reopen_sequence_refs: _,
+        threshold_default_refs: _,
+        compare_floor_refs: threshold_compare_floor_refs,
+        guard_refs: _,
+        kept_later_refs: _,
+    } = witness_final_threshold;
+
+    if route_status != CurrentL2EmittedArtifactRouteStatus::Reached
+        || serial_status != CurrentL2EmittedArtifactRouteStatus::Reached
+        || trace_status != CurrentL2EmittedArtifactRouteStatus::Reached
+        || threshold_status != CurrentL2EmittedArtifactRouteStatus::Reached
+    {
+        let guard_detail = route_guard_reason
+            .or(serial_guard_reason)
+            .or(trace_guard_reason)
+            .or(threshold_guard_reason)
+            .unwrap_or_else(|| {
+                format!(
+                    "order-handoff route/serial or witness/provider bridge/threshold was not reached for `{}`",
+                    source_report.sample_id
+                )
+            });
+
+        return Ok(CurrentL2SourceSampleOrderHandoffWitnessProviderPublicSeamCompression {
+            source_report,
+            compression_status: CurrentL2EmittedArtifactRouteStatus::GuardedNotReached,
+            compression_guard_reason: Some(format!(
+                "current order-handoff/witness-provider public seam compression only actualizes reached route/reserve/bridge/threshold floors: {guard_detail}"
+            )),
+            profile_axis_refs: Vec::new(),
+            repo_local_emitted_artifact_refs: Vec::new(),
+            source_wording_route_refs: Vec::new(),
+            emitted_artifact_candidate_keep_refs: Vec::new(),
+            serial_scope_lines: Vec::new(),
+            witness_schema_route_refs: Vec::new(),
+            provider_receipt_route_refs: Vec::new(),
+            combined_public_contract_keep_refs: Vec::new(),
+            trace_alignment_pair_refs: Vec::new(),
+            public_seam_residual_refs: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.order_handoff_witness_provider_public_seam_compression.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: vec![
+                "guard:order_handoff_witness_provider_public_seam_compression_not_reached"
+                    .to_string(),
+            ],
+            kept_later_refs: vec![
+                "kept_later:final_parser_grammar".to_string(),
+                "kept_later:final_public_parser_checker_runtime_api".to_string(),
+                "kept_later:final_source_surface_handoff_wording".to_string(),
+                "kept_later:final_emitted_artifact_schema".to_string(),
+                "kept_later:final_public_witness_schema".to_string(),
+                "kept_later:final_public_provider_receipt_schema".to_string(),
+                "kept_later:delegated_provider_attestation".to_string(),
+                "kept_later:combined_provider_witness_public_contract".to_string(),
+                "kept_later:final_emitted_handoff_contract".to_string(),
+                "kept_later:authoritative_room_serial_scope_sugar".to_string(),
+                "kept_later:low_level_memory_order_source_surface".to_string(),
+                "kept_later:final_modal_foundation_adoption".to_string(),
+                "kept_later:exhaustive_shared_space_catalog".to_string(),
+            ],
+        });
+    }
+
+    if source_report.sample_id != serial_source_report.sample_id
+        || source_report.sample_id != trace_source_report.sample_id
+        || source_report.sample_id != threshold_source_report.sample_id
+    {
+        return Err(format!(
+            "order-handoff/witness-provider public seam compression expected aligned sample ids but got `{}`, `{}`, `{}`, `{}`",
+            source_report.sample_id,
+            serial_source_report.sample_id,
+            trace_source_report.sample_id,
+            threshold_source_report.sample_id
+        ));
+    }
+
+    let sample_id = source_report.sample_id.clone();
+    let mut profile_axis_refs = route_profile_axis_refs;
+    extend_unique_refs(&mut profile_axis_refs, serial_profile_axis_refs);
+    extend_unique_refs(&mut profile_axis_refs, trace_profile_axis_refs);
+    extend_unique_refs(&mut profile_axis_refs, threshold_profile_axis_refs);
+
+    let mut repo_local_emitted_artifact_refs = route_repo_local_emitted_artifact_refs;
+    extend_unique_refs(
+        &mut repo_local_emitted_artifact_refs,
+        serial_repo_local_emitted_artifact_refs,
+    );
+    extend_unique_refs(
+        &mut repo_local_emitted_artifact_refs,
+        trace_repo_local_emitted_artifact_refs,
+    );
+    extend_unique_refs(
+        &mut repo_local_emitted_artifact_refs,
+        threshold_repo_local_emitted_artifact_refs,
+    );
+
+    let mut compare_floor_refs = route_compare_floor_refs;
+    extend_unique_refs(&mut compare_floor_refs, serial_compare_floor_refs);
+    extend_unique_refs(&mut compare_floor_refs, trace_compare_floor_refs);
+    extend_unique_refs(&mut compare_floor_refs, threshold_compare_floor_refs);
+    extend_unique_refs(
+        &mut compare_floor_refs,
+        vec![
+            "compare_floor:current_l2.order_handoff_witness_provider_public_seam_compression"
+                .to_string(),
+        ],
+    );
+
+    Ok(
+        CurrentL2SourceSampleOrderHandoffWitnessProviderPublicSeamCompression {
+            source_report,
+            compression_status: CurrentL2EmittedArtifactRouteStatus::Reached,
+            compression_guard_reason: None,
+            profile_axis_refs,
+            repo_local_emitted_artifact_refs,
+            source_wording_route_refs,
+            emitted_artifact_candidate_keep_refs,
+            serial_scope_lines,
+            witness_schema_route_refs,
+            provider_receipt_route_refs,
+            combined_public_contract_keep_refs,
+            trace_alignment_pair_refs: matched_pair_refs,
+            public_seam_residual_refs: vec![
+                format!(
+                    "order_handoff_public_seam_residual:{sample_id}:final_source_surface_handoff_wording_later"
+                ),
+                format!(
+                    "order_handoff_public_seam_residual:{sample_id}:final_emitted_artifact_schema_later"
+                ),
+                format!("shared_space_public_seam_residual:{sample_id}:public_schema_pair_first"),
+                format!(
+                    "shared_space_public_seam_residual:{sample_id}:delegated_attestation_and_combined_contract_second"
+                ),
+                format!(
+                    "shared_space_public_seam_residual:{sample_id}:final_emitted_handoff_contract_third"
+                ),
+            ],
+            compare_floor_refs,
+            guard_refs: vec![
+                "guard:edge_row_vertical_continuation_principal".to_string(),
+                "guard:serial_scope_reserve_surface_only".to_string(),
+                "guard:witness_provider_trace_alignment_bridge".to_string(),
+                "guard:public_schema_pair_first".to_string(),
+                "guard:delegated_attestation_and_combined_contract_second".to_string(),
+                "guard:final_source_surface_handoff_wording_later".to_string(),
+                "guard:final_emitted_artifact_schema_later".to_string(),
+                "guard:final_emitted_handoff_contract_third".to_string(),
+            ],
+            kept_later_refs: vec![
+                "kept_later:final_parser_grammar".to_string(),
+                "kept_later:final_public_parser_checker_runtime_api".to_string(),
+                "kept_later:final_source_surface_handoff_wording".to_string(),
+                "kept_later:final_emitted_artifact_schema".to_string(),
+                "kept_later:final_public_witness_schema".to_string(),
+                "kept_later:final_public_provider_receipt_schema".to_string(),
+                "kept_later:delegated_provider_attestation".to_string(),
+                "kept_later:combined_provider_witness_public_contract".to_string(),
+                "kept_later:final_emitted_handoff_contract".to_string(),
+                "kept_later:authoritative_room_serial_scope_sugar".to_string(),
+                "kept_later:low_level_memory_order_source_surface".to_string(),
+                "kept_later:final_modal_foundation_adoption".to_string(),
+                "kept_later:exhaustive_shared_space_catalog".to_string(),
+            ],
+        },
+    )
+}
+
+fn extend_unique_refs(target: &mut Vec<String>, refs: Vec<String>) {
+    for reference in refs {
+        if !target.contains(&reference) {
+            target.push(reference);
+        }
+    }
 }
 
 fn build_formal_hook_for_source_sample(
@@ -4897,10 +6015,7 @@ fn build_preview_formal_hook_for_source_sample(
                         obligation_kind: "canonical_normalization_law".to_string(),
                         evidence_refs: vec![
                             sample_local_evidence_ref("fixture", subject_ref.clone()),
-                            sample_local_evidence_ref(
-                                "static_gate_artifact",
-                                subject_ref.clone(),
-                            ),
+                            sample_local_evidence_ref("static_gate_artifact", subject_ref.clone()),
                         ],
                     },
                     ToolNeutralFormalContractRow {
@@ -5031,9 +6146,7 @@ fn theorem_first_symbolic_evidence_refs(
     refs
 }
 
-fn theorem_first_compare_floor_refs(
-    status: CurrentL2EmittedArtifactRouteStatus,
-) -> Vec<String> {
+fn theorem_first_compare_floor_refs(status: CurrentL2EmittedArtifactRouteStatus) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
             "compare_floor:sample_local_preview_aligned_typed_artifact_route".to_string(),
@@ -5045,9 +6158,7 @@ fn theorem_first_compare_floor_refs(
     }
 }
 
-fn theorem_first_pilot_guard_refs(
-    status: CurrentL2EmittedArtifactRouteStatus,
-) -> Vec<String> {
+fn theorem_first_pilot_guard_refs(status: CurrentL2EmittedArtifactRouteStatus) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => {
             vec!["guard:notebook_consumer_threshold_ready".to_string()]
@@ -5117,9 +6228,9 @@ fn theorem_discharge_actual_format_compare_floor_refs(
             "compare_floor:current_l2.theorem_discharge_prefloor".to_string(),
             "compare_floor:current_l2.theorem_discharge.actual_format_probe".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.theorem_discharge.actual_format_guard_only".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["compare_floor:current_l2.theorem_discharge.actual_format_guard_only".to_string()]
+        }
     }
 }
 
@@ -5266,9 +6377,7 @@ fn theorem_lean_stub_pilot_compare_floor_refs(
     }
 }
 
-fn theorem_lean_stub_pilot_guard_refs(
-    status: CurrentL2EmittedArtifactRouteStatus,
-) -> Vec<String> {
+fn theorem_lean_stub_pilot_guard_refs(status: CurrentL2EmittedArtifactRouteStatus) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
             "guard:lean_first_nonproduction_stub_only".to_string(),
@@ -5401,9 +6510,9 @@ fn theorem_contract_threshold_compare_floor_refs(
             "compare_floor:current_l2.theorem_binding_preflight".to_string(),
             "compare_floor:current_l2.theorem_contract_threshold".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.theorem_contract_threshold_guard_only".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["compare_floor:current_l2.theorem_contract_threshold_guard_only".to_string()]
+        }
     }
 }
 
@@ -5437,12 +6546,8 @@ fn theorem_contract_shape_transport_refs(subject_ref: Option<&str>) -> Vec<Strin
         Some(subject_ref) => vec![
             format!("theorem_transport_shape:{subject_ref}:review_unit_refs_only"),
             format!("theorem_transport_shape:{subject_ref}:discharge_entry_refs_only"),
-            format!(
-                "theorem_transport_shape:{subject_ref}:brand_neutral_request_manifest_only"
-            ),
-            format!(
-                "theorem_transport_shape:{subject_ref}:repo_local_emitted_artifact_refs_first"
-            ),
+            format!("theorem_transport_shape:{subject_ref}:brand_neutral_request_manifest_only"),
+            format!("theorem_transport_shape:{subject_ref}:repo_local_emitted_artifact_refs_first"),
         ],
         None => Vec::new(),
     }
@@ -5484,9 +6589,9 @@ fn theorem_contract_shape_threshold_compare_floor_refs(
             "compare_floor:current_l2.theorem_contract_threshold".to_string(),
             "compare_floor:current_l2.theorem_contract_shape_threshold".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.theorem_contract_shape_threshold_guard_only".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["compare_floor:current_l2.theorem_contract_shape_threshold_guard_only".to_string()]
+        }
     }
 }
 
@@ -5547,9 +6652,7 @@ fn theorem_transport_contract_coupled_later_gate_public_contract_refs(
 ) -> Vec<String> {
     match subject_ref {
         Some(subject_ref) => vec![
-            format!(
-                "theorem_public_contract_candidate:{subject_ref}:notebook_consumer_adjacent"
-            ),
+            format!("theorem_public_contract_candidate:{subject_ref}:notebook_consumer_adjacent"),
             format!("theorem_public_contract_candidate:{subject_ref}:refs_only_reserve_schema"),
             format!(
                 "theorem_public_contract_candidate:{subject_ref}:brand_neutral_request_manifest_keep"
@@ -5583,8 +6686,7 @@ fn theorem_transport_contract_coupled_later_gate_compare_floor_refs(
             "compare_floor:current_l2.theorem_discharge.actual_format_probe".to_string(),
             "compare_floor:current_l2.theorem_contract_threshold".to_string(),
             "compare_floor:current_l2.theorem_contract_shape_threshold".to_string(),
-            "compare_floor:current_l2.theorem_transport_contract_coupled_later_gate"
-                .to_string(),
+            "compare_floor:current_l2.theorem_transport_contract_coupled_later_gate".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
             "compare_floor:current_l2.theorem_transport_contract_coupled_later_gate_guard_only"
@@ -5603,9 +6705,9 @@ fn theorem_transport_contract_coupled_later_gate_guard_refs(
             "guard:public_contract_not_yet_adopted".to_string(),
             "guard:proof_object_public_schema_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:theorem_transport_contract_coupled_later_gate_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:theorem_transport_contract_coupled_later_gate_not_reached".to_string()]
+        }
     }
 }
 
@@ -5685,12 +6787,11 @@ fn theorem_review_unit_transport_actual_adoption_compare_floor_refs(
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
             "compare_floor:current_l2.theorem_transport_contract.coupled_later_gate".to_string(),
             "compare_floor:current_l2.theorem_binding_preflight".to_string(),
-            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption"
-                .to_string(),
+            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.theorem_review_unit_transport.guard_only".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["compare_floor:current_l2.theorem_review_unit_transport.guard_only".to_string()]
+        }
     }
 }
 
@@ -5787,14 +6888,13 @@ fn theorem_result_object_preview_actualization_compare_floor_refs(
 ) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
-            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption"
-                .to_string(),
+            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption".to_string(),
             "compare_floor:current_l2.theorem_binding_preflight".to_string(),
             "compare_floor:current_l2.theorem_result_object_preview_actualization".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.theorem_result_object_preview.guard_only".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["compare_floor:current_l2.theorem_result_object_preview.guard_only".to_string()]
+        }
     }
 }
 
@@ -5848,9 +6948,7 @@ fn theorem_proof_object_schema_prover_brand_coupled_later_gate_prover_brand_cand
 ) -> Vec<String> {
     match subject_ref {
         Some(subject_ref) => vec![
-            format!(
-                "theorem_prover_brand_candidate:{subject_ref}:brand_neutral_preflight_anchor"
-            ),
+            format!("theorem_prover_brand_candidate:{subject_ref}:brand_neutral_preflight_anchor"),
             format!("theorem_prover_brand_candidate:{subject_ref}:adapter_boundary_refs_keep"),
             format!("theorem_prover_brand_candidate:{subject_ref}:concrete_brand_not_adopted"),
         ],
@@ -5927,7 +7025,9 @@ fn theorem_result_payload_public_contract_coupled_later_gate_result_object_candi
             format!(
                 "theorem_final_result_candidate:{subject_ref}:repo_local_emitted_artifact_refs_first"
             ),
-            format!("theorem_final_result_candidate:{subject_ref}:final_public_result_object_later"),
+            format!(
+                "theorem_final_result_candidate:{subject_ref}:final_public_result_object_later"
+            ),
         ],
         None => Vec::new(),
     }
@@ -5961,8 +7061,7 @@ fn theorem_result_payload_public_contract_coupled_later_gate_default_refs(
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
             "theorem_result_payload_default:notebook_consumer_object_first".to_string(),
-            "theorem_result_payload_default:consumer_shaped_payload_candidate_only"
-                .to_string(),
+            "theorem_result_payload_default:consumer_shaped_payload_candidate_only".to_string(),
             "theorem_result_payload_default:proof_object_schema_prover_brand_adjacent_keep"
                 .to_string(),
             "theorem_result_payload_default:final_public_verifier_contract_later".to_string(),
@@ -6000,9 +7099,9 @@ fn theorem_result_payload_public_contract_coupled_later_gate_guard_refs(
             "guard:proof_object_schema_prover_brand_adjacent_keep".to_string(),
             "guard:final_public_verifier_contract_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:theorem_result_payload_public_contract_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:theorem_result_payload_public_contract_not_reached".to_string()]
+        }
     }
 }
 
@@ -6019,9 +7118,7 @@ fn theorem_result_payload_public_contract_coupled_later_gate_kept_later_refs() -
 fn theorem_result_object_actual_adoption_route_refs(subject_ref: Option<&str>) -> Vec<String> {
     match subject_ref {
         Some(subject_ref) => vec![
-            format!(
-                "theorem_result_object_actual_route:{subject_ref}:review_unit_transport_first"
-            ),
+            format!("theorem_result_object_actual_route:{subject_ref}:review_unit_transport_first"),
             format!(
                 "theorem_result_object_actual_route:{subject_ref}:notebook_consumer_object_first"
             ),
@@ -6063,8 +7160,7 @@ fn theorem_result_object_actual_adoption_default_refs(
 ) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
-            "theorem_result_object_actual_adoption_default:review_unit_transport_first"
-                .to_string(),
+            "theorem_result_object_actual_adoption_default:review_unit_transport_first".to_string(),
             "theorem_result_object_actual_adoption_default:notebook_consumer_object_first"
                 .to_string(),
             "theorem_result_object_actual_adoption_default:consumer_shaped_payload_preview_keep"
@@ -6083,16 +7179,14 @@ fn theorem_result_object_actual_adoption_compare_floor_refs(
 ) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
-            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption"
-                .to_string(),
+            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption".to_string(),
             "compare_floor:current_l2.theorem_result_object_preview_actualization".to_string(),
             "compare_floor:current_l2.theorem_result_payload_public_contract.coupled_later_gate"
                 .to_string(),
             "compare_floor:current_l2.theorem_result_object_actual_adoption".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.theorem_result_object_actual_adoption.guard_only"
-                .to_string(),
+            "compare_floor:current_l2.theorem_result_object_actual_adoption.guard_only".to_string(),
         ],
     }
 }
@@ -6188,9 +7282,9 @@ fn theorem_final_public_contract_reopen_threshold_guard_refs(
             "guard:prover_brand_and_proof_schema_second".to_string(),
             "guard:final_public_verifier_contract_third".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:theorem_final_public_contract_reopen_threshold_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:theorem_final_public_contract_reopen_threshold_not_reached".to_string()]
+        }
     }
 }
 
@@ -6233,9 +7327,7 @@ fn model_check_second_line_property_preview_refs(
 fn model_check_second_line_request_preflight_refs(subject_ref: Option<&str>) -> Vec<String> {
     match subject_ref {
         Some(subject_ref) => vec![
-            format!(
-                "model_check_request_preflight:{subject_ref}:row_local_property_preview"
-            ),
+            format!("model_check_request_preflight:{subject_ref}:row_local_property_preview"),
             format!(
                 "model_check_request_preflight:{subject_ref}:small_cluster_semantic_projection"
             ),
@@ -6278,7 +7370,9 @@ fn model_check_second_line_compare_floor_refs(
             "compare_floor:current_l2.model_check.second_line_concretization".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            vec!["compare_floor:current_l2.model_check.second_line_guarded_preview_only".to_string()]
+            vec![
+                "compare_floor:current_l2.model_check.second_line_guarded_preview_only".to_string(),
+            ]
         }
     }
 }
@@ -6296,9 +7390,7 @@ fn model_check_second_line_excluded_family_refs(
     }
 }
 
-fn model_check_second_line_guard_refs(
-    status: CurrentL2EmittedArtifactRouteStatus,
-) -> Vec<String> {
+fn model_check_second_line_guard_refs(status: CurrentL2EmittedArtifactRouteStatus) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
             "guard:row_local_property_preview_only".to_string(),
@@ -6378,9 +7470,9 @@ fn model_check_property_tool_seam_compare_floor_refs(
             "compare_floor:current_l2.model_check.second_line_concretization".to_string(),
             "compare_floor:current_l2.model_check.property_tool_seam_probe".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.model_check.property_tool_seam_guard_only".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["compare_floor:current_l2.model_check.property_tool_seam_guard_only".to_string()]
+        }
     }
 }
 
@@ -6547,8 +7639,7 @@ fn model_check_row_local_property_actual_adoption_compare_floor_refs(
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
             "compare_floor:current_l2.model_check.property_tool_threshold".to_string(),
             "compare_floor:current_l2.model_check.second_line_concretization".to_string(),
-            "compare_floor:current_l2.model_check.row_local_property_actual_adoption"
-                .to_string(),
+            "compare_floor:current_l2.model_check.row_local_property_actual_adoption".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
             "compare_floor:current_l2.model_check.row_local_property_actual_adoption_guard_only"
@@ -6580,9 +7671,9 @@ fn model_check_row_local_property_actual_adoption_guard_refs(
             "guard:brand_neutral_tool_binding_reserve_keep".to_string(),
             "guard:public_checker_handoff_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:model_check_row_local_property_actual_adoption_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:model_check_row_local_property_actual_adoption_not_reached".to_string()]
+        }
     }
 }
 
@@ -6654,8 +7745,7 @@ fn model_check_public_checker_artifact_preview_actualization_default_refs(
             "model_check_public_checker_preview_default:verifier_handoff_reserve_keep".to_string(),
             "model_check_public_checker_preview_default:brand_neutral_tool_binding_reserve_keep"
                 .to_string(),
-            "model_check_public_checker_preview_default:runtime_policy_contract_later"
-                .to_string(),
+            "model_check_public_checker_preview_default:runtime_policy_contract_later".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => Vec::new(),
     }
@@ -6688,9 +7778,9 @@ fn model_check_public_checker_artifact_preview_actualization_guard_refs(
             "guard:brand_neutral_tool_binding_reserve_keep".to_string(),
             "guard:runtime_policy_contract_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:model_check_public_checker_artifact_preview_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:model_check_public_checker_artifact_preview_not_reached".to_string()]
+        }
     }
 }
 
@@ -6892,9 +7982,9 @@ fn model_check_public_checker_artifact_migration_coupled_later_gate_guard_refs(
             "guard:tool_brand_verifier_handoff_adjacent_keep".to_string(),
             "guard:final_public_verifier_contract_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:model_check_public_checker_artifact_migration_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:model_check_public_checker_artifact_migration_not_reached".to_string()]
+        }
     }
 }
 
@@ -7009,9 +8099,9 @@ fn model_check_checker_artifact_route_actual_adoption_guard_refs(
             "guard:migration_candidate_adjacent_keep".to_string(),
             "guard:final_public_checker_artifact_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:model_check_checker_artifact_route_actual_adoption_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:model_check_checker_artifact_route_actual_adoption_not_reached".to_string()]
+        }
     }
 }
 
@@ -7097,10 +8187,9 @@ fn model_check_final_public_contract_reopen_threshold_guard_refs(
             "guard:verifier_handoff_and_runtime_policy_contract_third".to_string(),
             "guard:final_public_verifier_contract_fourth".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:model_check_final_public_contract_reopen_threshold_not_reached"
-                .to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:model_check_final_public_contract_reopen_threshold_not_reached".to_string()]
+        }
     }
 }
 
@@ -7125,8 +8214,9 @@ fn authoritative_room_profile_axis_refs(sample_id: &str) -> Vec<String> {
     ];
 
     match sample_id {
-        "p07-dice-late-join-visible-history" => refs
-            .push("profile_axis:late_join:published_history_visible_as_past".to_string()),
+        "p07-dice-late-join-visible-history" => {
+            refs.push("profile_axis:late_join:published_history_visible_as_past".to_string())
+        }
         "p08-dice-stale-reconnect-refresh" => {
             refs.push("profile_axis:stale_reconnect:fail_then_refresh".to_string());
             refs.push("profile_axis:replay:stale_incompatible_replay_invalidated".to_string());
@@ -7190,7 +8280,12 @@ fn authoritative_room_runtime_evidence_refs(
 ) -> Vec<String> {
     let mut refs = Vec::new();
 
-    for event in &source_report.runtime_report.run_report.trace_audit_sink.events {
+    for event in &source_report
+        .runtime_report
+        .run_report
+        .trace_audit_sink
+        .events
+    {
         let formatted = format!("runtime_event:{}", event_kind_ref(event));
         if !refs.contains(&formatted) {
             refs.push(formatted);
@@ -7339,7 +8434,12 @@ fn delegated_rng_service_runtime_evidence_refs(
 ) -> Vec<String> {
     let mut refs = Vec::new();
 
-    for event in &source_report.runtime_report.run_report.trace_audit_sink.events {
+    for event in &source_report
+        .runtime_report
+        .run_report
+        .trace_audit_sink
+        .events
+    {
         let formatted = format!("runtime_event:{}", event_kind_ref(event));
         if !refs.contains(&formatted) {
             refs.push(formatted);
@@ -7436,7 +8536,9 @@ fn witness_provider_public_shape_compare_floor_refs(
     if delegated.practical_status == CurrentL2EmittedArtifactRouteStatus::Reached {
         refs.push("compare_floor:current_l2.delegated_rng_service.practical".to_string());
     }
-    refs.push("compare_floor:current_l2.witness_provider_artifact.public_shape_threshold".to_string());
+    refs.push(
+        "compare_floor:current_l2.witness_provider_artifact.public_shape_threshold".to_string(),
+    );
     refs
 }
 
@@ -7493,16 +8595,10 @@ fn witness_provider_artifact_public_shape_actual_adoption_witness_route_refs(
         Vec::new()
     } else {
         vec![
-            format!(
-                "witness_public_shape_route:{sample_id}:claim_payload_split_first"
-            ),
-            format!(
-                "witness_public_shape_route:{sample_id}:witness_attachment_refs_only"
-            ),
+            format!("witness_public_shape_route:{sample_id}:claim_payload_split_first"),
+            format!("witness_public_shape_route:{sample_id}:witness_attachment_refs_only"),
             format!("witness_public_shape_route:{sample_id}:symbolic_binding_ref_keep"),
-            format!(
-                "witness_public_shape_route:{sample_id}:combined_public_contract_later"
-            ),
+            format!("witness_public_shape_route:{sample_id}:combined_public_contract_later"),
         ]
     }
 }
@@ -7515,18 +8611,10 @@ fn witness_provider_artifact_public_shape_actual_adoption_provider_route_refs(
         Vec::new()
     } else {
         vec![
-            format!(
-                "provider_public_shape_route:{sample_id}:provider_attachment_refs_only"
-            ),
-            format!(
-                "provider_public_shape_route:{sample_id}:optional_provider_attachment_keep"
-            ),
-            format!(
-                "provider_public_shape_route:{sample_id}:delegated_provider_attestation_later"
-            ),
-            format!(
-                "provider_public_shape_route:{sample_id}:combined_public_contract_later"
-            ),
+            format!("provider_public_shape_route:{sample_id}:provider_attachment_refs_only"),
+            format!("provider_public_shape_route:{sample_id}:optional_provider_attachment_keep"),
+            format!("provider_public_shape_route:{sample_id}:delegated_provider_attestation_later"),
+            format!("provider_public_shape_route:{sample_id}:combined_public_contract_later"),
         ]
     }
 }
@@ -7541,8 +8629,7 @@ fn witness_provider_artifact_public_shape_actual_adoption_default_refs(
                 .to_string(),
             "public_shape_actual_adoption_default:optional_attachment_refs_only".to_string(),
             "public_shape_actual_adoption_default:combined_public_contract_later".to_string(),
-            "public_shape_actual_adoption_default:witness_provider_routes_noncollapsed"
-                .to_string(),
+            "public_shape_actual_adoption_default:witness_provider_routes_noncollapsed".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => Vec::new(),
     }
@@ -7578,9 +8665,9 @@ fn witness_provider_artifact_public_shape_actual_adoption_guard_refs(
             "guard:combined_public_contract_later".to_string(),
             "guard:witness_provider_routes_noncollapsed".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:witness_provider_artifact_actual_adoption_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:witness_provider_artifact_actual_adoption_not_reached".to_string()]
+        }
     }
 }
 
@@ -7658,6 +8745,67 @@ fn stage_block_surface_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn order_handoff_serial_scope_reserve_surface_lines(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p07-dice-late-join-visible-history" => vec![
+            "serial on dice_authority {".to_string(),
+            "  publish publish_roll_result@dice_state".to_string(),
+            "  handoff handoff_dice_authority@dice_state".to_string(),
+            "    requires witness(publish_roll_result@dice_state)".to_string(),
+            "  observe late_join_view@dice_state".to_string(),
+            "}".to_string(),
+        ],
+        "p08-dice-stale-reconnect-refresh" => vec![
+            "serial on dice_authority {".to_string(),
+            "  rollback stale_reconnect".to_string(),
+            "  refresh refresh_owner_snapshot@dice_state".to_string(),
+            "  invalidate stale_incompatible_replay@dice_state".to_string(),
+            "}".to_string(),
+        ],
+        "p09-dice-delegated-rng-provider-placement" => vec![
+            "serial on dice_authority {".to_string(),
+            "  fetch fetch_provider_roll@delegated_rng".to_string(),
+            "  publish publish_roll_result@dice_state".to_string(),
+            "  handoff handoff_dice_authority@dice_state".to_string(),
+            "}".to_string(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn order_handoff_serial_scope_reserve_surface_guard_refs(
+    status: CurrentL2EmittedArtifactRouteStatus,
+) -> Vec<String> {
+    match status {
+        CurrentL2EmittedArtifactRouteStatus::Reached => vec![
+            "guard:serial_scope_room_specific_reserve".to_string(),
+            "guard:principal_edge_row_surface_unchanged".to_string(),
+            "guard:helper_local_surface_only".to_string(),
+            "guard:final_source_surface_handoff_wording_later".to_string(),
+        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:serial_scope_reserve_surface_not_reached".to_string()]
+        }
+    }
+}
+
+fn order_handoff_serial_scope_reserve_surface_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:final_public_parser_checker_runtime_api".to_string(),
+        "kept_later:serial_scope_public_promotion".to_string(),
+        "kept_later:serial_scope_beyond_authoritative_room".to_string(),
+        "kept_later:final_source_surface_handoff_wording".to_string(),
+        "kept_later:final_emitted_artifact_schema".to_string(),
+        "kept_later:final_emitted_handoff_contract".to_string(),
+        "kept_later:final_public_witness_schema".to_string(),
+        "kept_later:final_public_provider_receipt_schema".to_string(),
+        "kept_later:combined_provider_witness_public_contract".to_string(),
+        "kept_later:low_level_memory_order_source_surface".to_string(),
+        "kept_later:final_modal_foundation_adoption".to_string(),
+    ]
+}
+
 fn order_handoff_surface_artifact_threshold_default_refs() -> Vec<String> {
     vec![
         "surface_threshold_default:edge_row_vertical_continuation_principal".to_string(),
@@ -7722,13 +8870,10 @@ fn order_handoff_surface_actual_adoption_default_refs(
 ) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => vec![
-            "surface_actual_adoption_default:edge_row_vertical_continuation_principal"
-                .to_string(),
-            "surface_actual_adoption_default:readable_high_level_relation_vocabulary"
-                .to_string(),
+            "surface_actual_adoption_default:edge_row_vertical_continuation_principal".to_string(),
+            "surface_actual_adoption_default:readable_high_level_relation_vocabulary".to_string(),
             "surface_actual_adoption_default:stage_block_secondary_keep".to_string(),
-            "surface_actual_adoption_default:repo_local_emitted_artifact_refs_first"
-                .to_string(),
+            "surface_actual_adoption_default:repo_local_emitted_artifact_refs_first".to_string(),
             "surface_actual_adoption_default:final_wording_later".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => Vec::new(),
@@ -7741,14 +8886,12 @@ fn order_handoff_surface_actual_adoption_compare_floor_refs(
 ) -> Vec<String> {
     match status {
         CurrentL2EmittedArtifactRouteStatus::Reached => {
-            threshold_compare_floor_refs.push(
-                "compare_floor:current_l2.order_handoff.surface_actual_adoption".to_string(),
-            );
+            threshold_compare_floor_refs
+                .push("compare_floor:current_l2.order_handoff.surface_actual_adoption".to_string());
             threshold_compare_floor_refs
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "compare_floor:current_l2.order_handoff.surface_actual_adoption_guard_only"
-                .to_string(),
+            "compare_floor:current_l2.order_handoff.surface_actual_adoption_guard_only".to_string(),
         ],
     }
 }
@@ -7764,9 +8907,9 @@ fn order_handoff_surface_actual_adoption_guard_refs(
             "guard:repo_local_emitted_artifact_refs_first".to_string(),
             "guard:final_wording_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:order_handoff_surface_actual_adoption_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:order_handoff_surface_actual_adoption_not_reached".to_string()]
+        }
     }
 }
 
@@ -7778,18 +8921,12 @@ fn witness_provider_emitted_contract_coupled_later_gate_witness_refs(
         Vec::new()
     } else {
         vec![
-            format!(
-                "witness_public_contract_candidate:{sample_id}:claim_payload_split_first"
-            ),
-            format!(
-                "witness_public_contract_candidate:{sample_id}:witness_route_noncollapsed"
-            ),
+            format!("witness_public_contract_candidate:{sample_id}:claim_payload_split_first"),
+            format!("witness_public_contract_candidate:{sample_id}:witness_route_noncollapsed"),
             format!(
                 "witness_public_contract_candidate:{sample_id}:final_public_witness_schema_later"
             ),
-            format!(
-                "witness_public_contract_candidate:{sample_id}:combined_public_contract_later"
-            ),
+            format!("witness_public_contract_candidate:{sample_id}:combined_public_contract_later"),
         ]
     }
 }
@@ -7805,9 +8942,7 @@ fn witness_provider_emitted_contract_coupled_later_gate_provider_refs(
             format!(
                 "provider_public_contract_candidate:{sample_id}:optional_provider_attachment_keep"
             ),
-            format!(
-                "provider_public_contract_candidate:{sample_id}:provider_route_noncollapsed"
-            ),
+            format!("provider_public_contract_candidate:{sample_id}:provider_route_noncollapsed"),
             format!(
                 "provider_public_contract_candidate:{sample_id}:delegated_provider_attestation_later"
             ),
@@ -7849,8 +8984,7 @@ fn witness_provider_emitted_contract_coupled_later_gate_default_refs(
                 .to_string(),
             "public_contract_coupled_later_default:witness_provider_routes_noncollapsed"
                 .to_string(),
-            "public_contract_coupled_later_default:combined_public_contract_later"
-                .to_string(),
+            "public_contract_coupled_later_default:combined_public_contract_later".to_string(),
             "public_contract_coupled_later_default:final_emitted_handoff_contract_later"
                 .to_string(),
         ],
@@ -7896,8 +9030,7 @@ fn witness_provider_emitted_contract_coupled_later_gate_guard_refs(
             "guard:final_emitted_handoff_contract_later".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:witness_provider_emitted_contract_coupled_later_gate_not_reached"
-                .to_string(),
+            "guard:witness_provider_emitted_contract_coupled_later_gate_not_reached".to_string(),
         ],
     }
 }
@@ -7910,6 +9043,112 @@ fn witness_provider_emitted_contract_coupled_later_gate_kept_later_refs() -> Vec
         "kept_later:combined_provider_witness_public_contract".to_string(),
         "kept_later:final_emitted_handoff_contract".to_string(),
         "kept_later:final_source_surface_handoff_wording".to_string(),
+        "kept_later:exhaustive_shared_space_catalog".to_string(),
+    ]
+}
+
+fn witness_provider_emitted_contract_trace_alignment_pair_ref(
+    sample_id: &str,
+    obligation_kind: &str,
+) -> String {
+    format!("witness_provider_emitted_contract_trace_alignment_pair:{sample_id}:{obligation_kind}")
+}
+
+fn witness_provider_emitted_contract_trace_alignment_route_pair_refs(
+    sample_id: &str,
+    repo_local_emitted_artifact_refs: &[String],
+) -> Result<Vec<String>, String> {
+    let mut refs = Vec::new();
+    for entry in repo_local_emitted_artifact_refs {
+        let Some((_, obligation_kind)) = entry.rsplit_once(':') else {
+            return Err(format!(
+                "witness/provider emitted-contract trace alignment could not parse obligation kind from repo-local emitted artifact ref `{entry}`"
+            ));
+        };
+        let pair =
+            witness_provider_emitted_contract_trace_alignment_pair_ref(sample_id, obligation_kind);
+        if !refs.contains(&pair) {
+            refs.push(pair);
+        }
+    }
+    refs.sort();
+    Ok(refs)
+}
+
+fn witness_provider_emitted_contract_trace_alignment_emitted_pair_refs(
+    sample_id: &str,
+    repo_local_emitted_artifact_refs: &[String],
+    emitted_contract_candidate_refs: &[String],
+) -> Result<Vec<String>, String> {
+    if emitted_contract_candidate_refs.is_empty() {
+        return Ok(Vec::new());
+    }
+    witness_provider_emitted_contract_trace_alignment_route_pair_refs(
+        sample_id,
+        repo_local_emitted_artifact_refs,
+    )
+}
+
+fn witness_provider_emitted_contract_trace_alignment_matched_pair_refs(
+    route_pair_refs: &[String],
+    emitted_contract_pair_refs: &[String],
+) -> Result<Vec<String>, String> {
+    if route_pair_refs != emitted_contract_pair_refs {
+        return Err(format!(
+            "witness/provider emitted-contract trace alignment pair drift: route_pair_refs={route_pair_refs:?}, emitted_contract_pair_refs={emitted_contract_pair_refs:?}"
+        ));
+    }
+    Ok(route_pair_refs.to_vec())
+}
+
+fn witness_provider_emitted_contract_trace_alignment_compare_floor_refs(
+    status: CurrentL2EmittedArtifactRouteStatus,
+    mut route_compare_floor_refs: Vec<String>,
+    coupled_compare_floor_refs: Vec<String>,
+) -> Vec<String> {
+    match status {
+        CurrentL2EmittedArtifactRouteStatus::Reached => {
+            for entry in coupled_compare_floor_refs {
+                if !route_compare_floor_refs.contains(&entry) {
+                    route_compare_floor_refs.push(entry);
+                }
+            }
+            route_compare_floor_refs.push(
+                "compare_floor:current_l2.witness_provider_emitted_contract.trace_alignment_bridge"
+                    .to_string(),
+            );
+            route_compare_floor_refs
+        }
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
+            "compare_floor:current_l2.witness_provider_emitted_contract.trace_alignment_bridge_guard_only"
+                .to_string(),
+        ],
+    }
+}
+
+fn witness_provider_emitted_contract_trace_alignment_guard_refs(
+    status: CurrentL2EmittedArtifactRouteStatus,
+) -> Vec<String> {
+    match status {
+        CurrentL2EmittedArtifactRouteStatus::Reached => vec![
+            "guard:repo_local_trace_alignment_only".to_string(),
+            "guard:no_final_public_contract_promotion".to_string(),
+            "guard:no_final_public_schema_promotion".to_string(),
+        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:witness_provider_emitted_contract_trace_alignment_not_reached".to_string()]
+        }
+    }
+}
+
+fn witness_provider_emitted_contract_trace_alignment_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:trace_alignment_beyond_representative_corpus".to_string(),
+        "kept_later:final_public_witness_schema".to_string(),
+        "kept_later:final_public_provider_receipt_schema".to_string(),
+        "kept_later:delegated_provider_attestation".to_string(),
+        "kept_later:combined_provider_witness_public_contract".to_string(),
+        "kept_later:final_emitted_handoff_contract".to_string(),
         "kept_later:exhaustive_shared_space_catalog".to_string(),
     ]
 }
@@ -8018,9 +9257,9 @@ fn witness_provider_public_schema_coupled_later_gate_guard_refs(
             "guard:final_emitted_handoff_contract_adjacent_keep".to_string(),
             "guard:exhaustive_shared_space_catalog_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:witness_provider_public_schema_coupled_later_gate_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:witness_provider_public_schema_coupled_later_gate_not_reached".to_string()]
+        }
     }
 }
 
@@ -8158,9 +9397,9 @@ fn witness_provider_route_actual_adoption_guard_refs(
             "guard:combined_public_contract_later".to_string(),
             "guard:final_emitted_handoff_contract_adjacent_keep".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:witness_provider_route_actual_adoption_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:witness_provider_route_actual_adoption_not_reached".to_string()]
+        }
     }
 }
 
@@ -8294,9 +9533,9 @@ fn witness_provider_schema_route_actual_adoption_guard_refs(
             "guard:combined_public_contract_candidate_keep".to_string(),
             "guard:final_emitted_handoff_contract_adjacent_keep".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:witness_provider_schema_route_actual_adoption_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:witness_provider_schema_route_actual_adoption_not_reached".to_string()]
+        }
     }
 }
 
@@ -8324,9 +9563,7 @@ fn witness_provider_final_public_contract_reopen_threshold_sequence_refs(
         Vec::new()
     } else {
         vec![
-            format!(
-                "witness_provider_final_contract_reopen:{sample_id}:public_schema_pair_first"
-            ),
+            format!("witness_provider_final_contract_reopen:{sample_id}:public_schema_pair_first"),
             format!(
                 "witness_provider_final_contract_reopen:{sample_id}:delegated_attestation_and_combined_contract_second"
             ),
@@ -8389,8 +9626,7 @@ fn witness_provider_final_public_contract_reopen_threshold_guard_refs(
             "guard:exhaustive_shared_space_catalog_later".to_string(),
         ],
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:witness_provider_final_public_contract_reopen_threshold_not_reached"
-                .to_string(),
+            "guard:witness_provider_final_public_contract_reopen_threshold_not_reached".to_string(),
         ],
     }
 }
@@ -8474,8 +9710,7 @@ fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_default_refs
             "source_wording_emitted_artifact_default:readable_high_level_relation_vocabulary"
                 .to_string(),
             "source_wording_emitted_artifact_default:stage_block_secondary_keep".to_string(),
-            "source_wording_emitted_artifact_default:thread_node_same_causal_language"
-                .to_string(),
+            "source_wording_emitted_artifact_default:thread_node_same_causal_language".to_string(),
             "source_wording_emitted_artifact_default:repo_local_emitted_artifact_refs_first"
                 .to_string(),
             "source_wording_emitted_artifact_default:final_public_wording_and_schema_later"
@@ -8524,9 +9759,9 @@ fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_guard_refs(
             "guard:final_source_surface_handoff_wording_later".to_string(),
             "guard:final_emitted_artifact_schema_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:order_handoff_source_wording_emitted_artifact_not_reached".to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:order_handoff_source_wording_emitted_artifact_not_reached".to_string()]
+        }
     }
 }
 
@@ -8657,10 +9892,9 @@ fn order_handoff_source_wording_route_actual_adoption_guard_refs(
             "guard:final_source_surface_handoff_wording_later".to_string(),
             "guard:final_emitted_artifact_schema_later".to_string(),
         ],
-        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => vec![
-            "guard:order_handoff_source_wording_route_actual_adoption_not_reached"
-                .to_string(),
-        ],
+        CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
+            vec!["guard:order_handoff_source_wording_route_actual_adoption_not_reached".to_string()]
+        }
     }
 }
 

@@ -232,7 +232,10 @@ fn current_l2_source_sample_runner_accepts_named_e5_sample() {
             .unwrap();
 
     assert_eq!(report.sample_id, "e5-underdeclared-lineage");
-    assert_eq!(report.sample_path, sample_path("e5-underdeclared-lineage.txt"));
+    assert_eq!(
+        report.sample_path,
+        sample_path("e5-underdeclared-lineage.txt")
+    );
     assert_eq!(
         report.runtime_report.checker_floor.static_gate.verdict,
         StaticGateVerdict::Underdeclared
@@ -426,7 +429,9 @@ fn current_l2_source_sample_runner_accepts_order_handoff_third_tranche_paths() {
             .final_place_store
             .get("observer_debug_text_output")
             .cloned(),
-        Some(vec!["late_join_view: player_c sees result+owner history".to_string(),])
+        Some(vec![
+            "late_join_view: player_c sees result+owner history".to_string(),
+        ])
     );
 
     let p08 = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
@@ -464,7 +469,9 @@ fn current_l2_source_sample_runner_accepts_order_handoff_third_tranche_paths() {
             .final_place_store
             .get("reconnect_debug_text_output")
             .cloned(),
-        Some(vec!["refresh_owner_snapshot: stale reconnect redirected".to_string(),])
+        Some(vec![
+            "refresh_owner_snapshot: stale reconnect redirected".to_string(),
+        ])
     );
     assert!(
         p08_report

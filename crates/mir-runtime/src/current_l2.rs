@@ -569,10 +569,27 @@ impl CurrentL2FixedSourceParser {
         let line = self.peek().expect("option line should exist").clone();
         let tokens: Vec<&str> = line.text.split_whitespace().collect();
         let (name, target, capability, lease, admit_slot) = match tokens.as_slice() {
-            ["option", name, "on", target, "capability", capability, "lease", lease] => {
-                (*name, (*target).to_string(), *capability, *lease, None)
-            }
-            ["option", _name, "on", _target, "capability", _capability, "lease", _lease, "admit"] => {
+            [
+                "option",
+                name,
+                "on",
+                target,
+                "capability",
+                capability,
+                "lease",
+                lease,
+            ] => (*name, (*target).to_string(), *capability, *lease, None),
+            [
+                "option",
+                _name,
+                "on",
+                _target,
+                "capability",
+                _capability,
+                "lease",
+                _lease,
+                "admit",
+            ] => {
                 return Err(self.line_error(line.line_no, "missing declaration-side admit payload"));
             }
             [
@@ -586,11 +603,32 @@ impl CurrentL2FixedSourceParser {
                 lease,
                 "admit",
                 admit_slot,
-            ] => (*name, (*target).to_string(), *capability, *lease, Some(*admit_slot)),
-            ["option", name, "on", "capability", capability, "lease", lease] => {
-                (*name, String::new(), *capability, *lease, None)
-            }
-            ["option", _name, "on", "capability", _capability, "lease", _lease, "admit"] => {
+            ] => (
+                *name,
+                (*target).to_string(),
+                *capability,
+                *lease,
+                Some(*admit_slot),
+            ),
+            [
+                "option",
+                name,
+                "on",
+                "capability",
+                capability,
+                "lease",
+                lease,
+            ] => (*name, String::new(), *capability, *lease, None),
+            [
+                "option",
+                _name,
+                "on",
+                "capability",
+                _capability,
+                "lease",
+                _lease,
+                "admit",
+            ] => {
                 return Err(self.line_error(line.line_no, "missing declaration-side admit payload"));
             }
             [
@@ -813,25 +851,24 @@ fn parse_source_fallback_edge(line: &str, previous: &str) -> Result<(ChainEdge, 
     let rest = line
         .strip_prefix("fallback ")
         .ok_or_else(|| format!("unsupported fallback row `{line}`"))?;
-    let (successor, lineage_assertion) = if let Some((successor_part, lineage_part)) =
-        rest.split_once(" @ lineage(")
-    {
-        let lineage_inner = lineage_part
-            .strip_suffix(')')
-            .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
-        let (lineage_pred, lineage_succ) = lineage_inner
-            .split_once(" -> ")
-            .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
-        (
-            successor_part.trim().to_string(),
-            Some(LineageAssertion {
-                predecessor: lineage_pred.trim().to_string(),
-                successor: lineage_succ.trim().to_string(),
-            }),
-        )
-    } else {
-        (rest.trim().to_string(), None)
-    };
+    let (successor, lineage_assertion) =
+        if let Some((successor_part, lineage_part)) = rest.split_once(" @ lineage(") {
+            let lineage_inner = lineage_part
+                .strip_suffix(')')
+                .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+            let (lineage_pred, lineage_succ) = lineage_inner
+                .split_once(" -> ")
+                .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+            (
+                successor_part.trim().to_string(),
+                Some(LineageAssertion {
+                    predecessor: lineage_pred.trim().to_string(),
+                    successor: lineage_succ.trim().to_string(),
+                }),
+            )
+        } else {
+            (rest.trim().to_string(), None)
+        };
 
     Ok((
         ChainEdge {

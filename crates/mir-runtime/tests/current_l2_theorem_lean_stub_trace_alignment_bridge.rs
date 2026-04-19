@@ -6,8 +6,7 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus,
-    CurrentL2SourceSampleTheoremLeanStubPilotActualization,
+    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleTheoremLeanStubPilotActualization,
     CurrentL2SourceSampleTheoremLeanStubTraceAlignmentBridge,
     build_current_l2_source_sample_theorem_lean_stub_pilot_actualization,
     build_current_l2_source_sample_theorem_lean_stub_trace_alignment_bridge,
@@ -103,11 +102,13 @@ fn assert_trace_alignment_matches_pilot(
             assert_eq!(bridge.matched_pair_refs, expected_pairs);
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(bridge
-                .alignment_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("trace alignment"));
+            assert!(
+                bridge
+                    .alignment_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("trace alignment")
+            );
             assert!(bridge.review_unit_pair_refs.is_empty());
             assert!(bridge.lean_stub_pair_refs.is_empty());
             assert!(bridge.matched_pair_refs.is_empty());
@@ -242,8 +243,7 @@ fn theorem_trace_alignment_bridge_reaches_late_join_runtime_prototype() {
 
 #[test]
 fn theorem_trace_alignment_bridge_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let pilot = build_current_l2_source_sample_theorem_lean_stub_pilot_actualization(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

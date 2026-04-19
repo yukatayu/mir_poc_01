@@ -54,7 +54,7 @@ full strong type system や production tool binding を immediate target にし�
 - typed marker family の current sample-visible corrected prototype tranche は `p06-typed-proof-owner-handoff` までで current cut を close 済みである。
 - order/handoff corrected prototype third tranche は `p07` late join visibility / `p08` stale reconnect refresh までで current cut を close 済みである。
 - corrected prototype tranche close は theory-lab solved を意味しない。
-  current queue reading は、`specs/examples/458...465` を compare-floor anchor、`specs/examples/466...469` を actual-adoption / near-end-closeout anchor、`specs/examples/470...474` を helper-local actualization / narrowing anchor、`specs/examples/475...510` を deeper-theory / reserve / second-line / theorem-model-check / shared-space / order-handoff mixed-gate actualization / actual-adoption anchor とする mixed-gate-only reading にある。
+  current queue reading は、`specs/examples/458...465` を compare-floor anchor、`specs/examples/466...469` を actual-adoption / near-end-closeout anchor、`specs/examples/470...474` を helper-local actualization / narrowing anchor、`specs/examples/475...519` を deeper-theory / reserve / second-line / theorem-model-check / shared-space / order-handoff / actual-execution actualization / actual-adoption anchor とする mixed-gate-only reading にある。
 - sample debugging 用の helper-local preview として、`debug_*` または `_debug_` を含み `_output` / `_pipe` で終わる target の record を CLI `debug_outputs` へ出してよい。
   ただしこれは final stdio / final host-I/O / final transcript schema を意味しない。
 - theorem/model-check bridge の current floorを sample-visible にする helper-local preview として、`formal_hook_status` / `subject_kind` / obligation list を CLI `verification_preview` へ出してよい。
@@ -308,7 +308,16 @@ current recommendation は、次の layered stack を separate responsibility �
    - theorem Lean-first non-production stub pilot actualization は `specs/examples/508` で close 済みである
    - theorem review-unit to Lean-stub repo-local artifact-conformance bridge は `specs/examples/509` で close 済みである
    - theorem Lean-stub representative trace-alignment bridge は `specs/examples/510` で close 済みである
-   - next package は order-handoff serial-scope reserve surface に置く
+   - order-handoff serial-scope reserve surface は `specs/examples/511` で close 済みである
+   - witness/provider emitted-contract representative trace-alignment bridge は `specs/examples/512` で close 済みである
+   - theorem actual Lean execution availability probe は `specs/examples/513` で close 済みである
+   - theorem public-seam compression は `specs/examples/514` で close 済みである
+   - order-handoff / witness-provider final public seam compression は `specs/examples/515` で close 済みである
+   - theorem toolchain probe / reopen manifest は `specs/examples/516` で close 済みである
+   - model-check public-seam compression は `specs/examples/517` で close 済みである
+   - theorem actual Lean execution narrow probe は `specs/examples/518` で close 済みである
+   - theorem actual Lean execution representative prototype widening は `specs/examples/519` で close 済みである
+   - next active line は actual Lean execution helper/CLI hardening と broader coverage、および later mixed gate に置く
    - theorem discharge transport / public-contract の実昇格は mixed gate に残す
    - preview-alignment pre-floor は `specs/examples/463` で close 済みである
    - theorem discharge pre-floor は `specs/examples/465` で close 済みである
@@ -586,8 +595,17 @@ refs-only reserve schema を first cut とし、consumer-shaped schema と sourc
 31. theorem final-public-contract reopen-threshold package `506` は close 済み
 32. model-check final-public-contract reopen-threshold package `507` は close 済み
 33. corrected runnable version の current floorは already reached
-34. current self-driven reopen package は reserve surface / optional execution probe package
-35. remaining actual-adoption topics は mixed gate
+34. order-handoff serial-scope reserve surface package `511` は close 済み
+35. witness/provider emitted-contract representative trace-alignment bridge package `512` は close 済み
+36. theorem actual Lean execution availability probe package `513` は close 済み
+37. theorem public-seam compression package `514` は close 済み
+38. order-handoff / witness-provider final public seam compression package `515` は close 済み
+39. theorem toolchain probe / reopen manifest package `516` は close 済み
+40. model-check public-seam compression package `517` は close 済み
+41. theorem actual Lean execution narrow probe package `518` は close 済み
+42. theorem actual Lean execution representative prototype widening package `519` は close 済み
+43. current active line は actual Lean execution helper/CLI hardening と broader coverage、および later mixed gate
+44. remaining actual-adoption topics は mixed gate
    - stronger typed surface promotion
    - final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract
    - first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker/runtime-policy contract / final public verifier contract
@@ -597,5 +615,5 @@ refs-only reserve schema を first cut とし、consumer-shaped schema と sourc
 ## current recommendation
 
 - theory-lab line は execution lane の「あとで」ではなく、adjacent program として扱う。
-- current snapshot では compare-floor、actual-adoption package、helper-local actualization package、surface narrowing、theorem-prover binding preflight、principal theory spine / Lean-first proof roadmap package、reserve strengthening actualization package、reserve practical actualization package、model-check second-line concretization package、theorem discharge/public-contract threshold package、model-check property/tool threshold package、witness/provider/artifact public-shape threshold package、order-handoff surface/artifact threshold package、witness/provider public-contract / emitted-contract coupled-later package、witness/provider public-schema coupled-later package、theorem result-object route actual-adoption package、theorem final-public-contract reopen-threshold package、model-check checker-artifact route actual-adoption package、model-check final-public-contract reopen-threshold package、witness/provider route actual-adoption package、order-handoff source-wording route actual-adoption package、witness/provider schema-route actual-adoption package、witness/provider final-public-contract reopen-threshold package は close 済みであり、corrected runnable version の current floorも reached である。remaining work は live queue none の later mixed gate / user-spec residual に残る。
+- current snapshot では compare-floor、actual-adoption package、helper-local actualization package、surface narrowing、theorem-prover binding preflight、principal theory spine / Lean-first proof roadmap package、reserve strengthening actualization package、reserve practical actualization package、model-check second-line concretization package、theorem discharge/public-contract threshold package、model-check property/tool threshold package、witness/provider/artifact public-shape threshold package、order-handoff surface/artifact threshold package、witness/provider public-contract / emitted-contract coupled-later package、witness/provider public-schema coupled-later package、theorem result-object route actual-adoption package、theorem final-public-contract reopen-threshold package、model-check checker-artifact route actual-adoption package、model-check final-public-contract reopen-threshold package、witness/provider route actual-adoption package、order-handoff source-wording route actual-adoption package、witness/provider schema-route actual-adoption package、witness/provider final-public-contract reopen-threshold package、order-handoff serial-scope reserve surface package、witness/provider emitted-contract representative trace-alignment bridge package、theorem actual Lean execution availability probe package、theorem toolchain probe / reopen manifest package、model-check public-seam compression package、theorem actual Lean execution narrow probe package、theorem actual Lean execution representative prototype widening package は close 済みであり、corrected runnable version の current floorも reached である。remaining work は live queue nonzero の actual Lean execution hardening と later mixed gate / user-spec residual に残る。
 - ただし accepted candidate を current executable / public surface へ直結させない。

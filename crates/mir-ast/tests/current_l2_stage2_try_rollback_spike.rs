@@ -1,9 +1,7 @@
 #[path = "support/current_l2_stage2_try_rollback_spike_support.rs"]
 mod current_l2_stage2_try_rollback_spike_support;
 
-use mir_ast::current_l2::{
-    parse_stage2_try_rollback_text,
-};
+use mir_ast::current_l2::parse_stage2_try_rollback_text;
 
 use current_l2_stage2_try_rollback_spike_support::{
     Stage2TryRollbackFindingRow, Stage2TryRollbackStructuralSummary,
@@ -74,10 +72,9 @@ fn stage2_try_rollback_spike_matches_e24_fixture_expectation() {
     let parsed =
         parse_stage2_try_rollback_text(E24_INPUT).expect("stage 2 spike should parse e24 input");
     let actual = summarize_stage2_try_rollback_findings(&parsed);
-    let expected = load_expected_try_rollback_expectation(
-        "e24-malformed-atomic-cut-fallback-placement.json",
-    )
-    .expect("expected e24 try/rollback expectation should load");
+    let expected =
+        load_expected_try_rollback_expectation("e24-malformed-atomic-cut-fallback-placement.json")
+            .expect("expected e24 try/rollback expectation should load");
 
     assert_eq!(actual, expected);
 }

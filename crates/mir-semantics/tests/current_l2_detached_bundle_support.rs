@@ -6,7 +6,7 @@ use mir_semantics::{load_bundle_from_fixture_path, run_bundle};
 mod current_l2_detached_bundle_support;
 
 use current_l2_detached_bundle_support::{
-    build_detached_bundle_artifact, NonAdmissibleMetadataArtifact,
+    NonAdmissibleMetadataArtifact, build_detached_bundle_artifact,
 };
 
 fn fixture_path(name: &str) -> PathBuf {
@@ -24,7 +24,10 @@ fn detached_bundle_support_preserves_runtime_fixture_core_and_context() {
     let artifact = build_detached_bundle_artifact(&bundle, &report);
 
     assert_eq!(artifact.bundle_context.fixture_id, "e3_option_admit_chain");
-    assert_eq!(artifact.bundle_context.fixture_path, path.display().to_string());
+    assert_eq!(
+        artifact.bundle_context.fixture_path,
+        path.display().to_string()
+    );
     assert_eq!(
         artifact.bundle_context.host_plan_path,
         Some(
@@ -51,7 +54,10 @@ fn detached_bundle_support_preserves_runtime_fixture_core_and_context() {
             subreason: "admit-miss".to_string(),
         }]
     );
-    assert_eq!(artifact.payload_core.narrative_explanations, Vec::<String>::new());
+    assert_eq!(
+        artifact.payload_core.narrative_explanations,
+        Vec::<String>::new()
+    );
     assert_eq!(
         artifact.detached_noncore.steps_executed,
         report.report.steps_executed
@@ -67,7 +73,10 @@ fn detached_bundle_support_preserves_static_only_fixture_split() {
     let artifact = build_detached_bundle_artifact(&bundle, &report);
 
     assert_eq!(artifact.bundle_context.fixture_id, "e4_malformed_lineage");
-    assert_eq!(artifact.bundle_context.fixture_path, path.display().to_string());
+    assert_eq!(
+        artifact.bundle_context.fixture_path,
+        path.display().to_string()
+    );
     assert_eq!(artifact.bundle_context.host_plan_path, None);
     assert_eq!(artifact.bundle_context.runtime_requirement, "static-only");
     assert_eq!(artifact.payload_core.static_verdict, "malformed");

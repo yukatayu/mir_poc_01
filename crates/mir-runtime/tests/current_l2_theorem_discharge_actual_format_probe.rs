@@ -75,7 +75,10 @@ fn assert_probe_matches_prefloor_and_pilot(
     assert_eq!(probe.probe_status, prefloor.discharge_status);
     assert_eq!(probe.probe_subject_kind, prefloor.discharge_subject_kind);
     assert_eq!(probe.probe_subject_ref, prefloor.discharge_subject_ref);
-    assert_eq!(probe.principal_review_unit_refs, prefloor.principal_review_unit_refs);
+    assert_eq!(
+        probe.principal_review_unit_refs,
+        prefloor.principal_review_unit_refs
+    );
     assert_eq!(
         probe.discharge_entry_reserve_refs,
         prefloor.discharge_entry_reserve_refs
@@ -133,11 +136,13 @@ fn assert_probe_matches_prefloor_and_pilot(
             assert!(probe.probe_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(probe
-                .probe_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("theorem discharge actual-format"));
+            assert!(
+                probe
+                    .probe_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("theorem discharge actual-format")
+            );
         }
     }
 }
@@ -241,8 +246,7 @@ fn theorem_discharge_actual_format_probe_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_discharge_actual_format_probe_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let prefloor = build_current_l2_source_sample_theorem_discharge_prefloor(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -277,8 +281,7 @@ fn theorem_discharge_actual_format_probe_reaches_order_handoff_runtime_prototype
 
 #[test]
 fn theorem_discharge_actual_format_probe_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let prefloor = build_current_l2_source_sample_theorem_discharge_prefloor(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

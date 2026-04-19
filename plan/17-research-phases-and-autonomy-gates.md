@@ -32,8 +32,8 @@
 | `Macro 2` | parser-free validation substrate | late | 中 | self-driven | helper/public drift が出る |
 | `Macro 3` | compile-ready minimal actualization | late | 中 | self-driven | support-only/public-candidate split が崩れる |
 | `Macro 4` | executable fixed-subset sample expansion | active on fixed authored/prototype floor | 重 | self-driven | new sample family が core semantics を押し広げる |
-| `Macro 5` | typed / theorem / model-check bridge | near-end actual-adoption closeout | 重 | self-driven up to narrow mixed gate | final public contract / full type calculus / concrete production binding が必要になる |
-| `Macro 6` | fabric / shared-space / runtime evolution | minimal working subset actual default | 重 | self-driven up to exhaustive-catalog gate | exhaustive catalog / stronger fairness profile が必要になる |
+| `Macro 5` | typed / theorem / model-check bridge | post-runnable actual-adoption floor fixed + residual-gate compression closed | 重 | self-driven up to narrow mixed gate | final public contract / full type calculus / concrete production binding が必要になる |
+| `Macro 6` | fabric / shared-space / runtime evolution | minimal working subset actual default + public-seam compression closed | 重 | self-driven up to exhaustive-catalog gate | exhaustive catalog / stronger fairness profile が必要になる |
 | `Macro 7` | toolchain / backend / host-facing integration | mixed with repo-local near-end success criteria | 重 | self-driven up to packaging / FFI gate | installed binary / packaging / external target が必要になる |
 | `Macro 8` | domain / application realization | first authoritative-room scenario selected | とても重い | mixed beyond first scenario | broader application target が必要になる |
 
@@ -43,8 +43,8 @@
   `Macro 4 active on fixed authored/prototype floor`
   （current-l2 authored sixteen と corrected prototype nonet は fixed 済みだが、sample corpus 自体は theory-line adequacy corpus として active に保つ）
 - theory-lab lane:
-  `Macro 5 post-runnable mixed-gate actualization floor fixed`
-  （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...510` deeper-theory / reserve / mixed-gate actualization / actual-adoption floor が揃った。corrected runnable version の current floorは already reached であり、current next queue は reserve surface / optional execution probe package にある）
+  `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed`
+  （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor は current mapped corpus で reached 済みであり、current next queue は actual Lean execution helper/CLI hardening と broader coverage、および later mixed gate にある）
 - reserve integration lane:
   `Macro 6 minimal working subset actual default / Macro 7 mixed`
   （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、exhaustive final catalog、installed-binary / packaging / FFI、broader host integration は still later に残る）
@@ -172,6 +172,15 @@
 - theorem Lean-first non-production stub pilot actualization は `specs/examples/508` で current helper-local theorem external-pilot floor に上がっている。
 - theorem review-unit to Lean-stub repo-local artifact-conformance bridge は `specs/examples/509` で current helper-local theorem second-stage conformance floor に上がっている。
 - theorem Lean-stub representative trace-alignment bridge は `specs/examples/510` で current helper-local theorem representative bridge floor に上がっている。
+- order-handoff serial-scope reserve surface は `specs/examples/511` で current helper-local order-handoff reserve-surface floor に上がっている。
+- witness/provider emitted-contract representative trace-alignment bridge は `specs/examples/512` で current helper-local shared-space representative bridge floor に上がっている。
+- theorem actual Lean execution availability probe は `specs/examples/513` で current theorem environment stop-line floor に上がっている。
+- theorem public-seam compression は `specs/examples/514` で current helper-local theorem residual-compression floor に上がっている。
+- order-handoff / witness-provider final public-seam compression は `specs/examples/515` で current helper-local Problem 2 / shared-space residual-compression floor に上がっている。
+- theorem toolchain probe / reopen manifest は `specs/examples/516` で current helper-local theorem toolchain-ready floor に上がっている。
+- model-check public-seam compression は `specs/examples/517` で current helper-local model-check residual-compression floor に上がっている。
+- theorem actual Lean execution narrow probe は `specs/examples/518` で current helper-local theorem representative-static actual-execution floor に上がっている。
+- theorem actual Lean execution representative prototype widening は `specs/examples/519` で current helper-local theorem representative-prototype actual-execution floor に上がっている。
 - theorem proof-object schema / prover-brand coupled later gate は `specs/examples/494` で current helper-local theorem mixed-gate actualization floor に上がっている。
 - model-check row-local property / checker-boundary actual adoption は `specs/examples/488` で current helper-local model-check actual adoption floor に上がっている。
 - model-check public-checker artifact preview / verifier-handoff reserve actualization は `specs/examples/492` で current helper-local model-check mixed-gate actualization floor に上がっている。
@@ -193,4 +202,4 @@
 - corrected prototype tranche close は、theory-lab solved や queue empty を意味しない。
 - `p06` / `p07` / `p08` / `p09` は sample-visible corrected prototype であり、final typed calculus / final source wording / final shared-space profile / final public provider contract を意味しない。
 - `p09` も sample-visible corrected prototype であり、final public provider receipt schema / delegated attestation を意味しない。
-- theory-lab line は repo 全体から見ると advanced line であり、current reading では actual-adoption / helper-local actualization / narrowing / reserve strengthening / reserve practical actualization / model-check second-line actualization / theorem discharge actual-format probe / model-check property-tool-seam probe / theorem discharge-public-contract threshold default / theorem contract shape threshold default / theorem transport/public-contract coupled later gate / theorem review-unit actual adoption / model-check-property-tool threshold default / model-check row-local property actual adoption / witness-provider-artifact public-shape threshold / actual adoption / witness-provider public-contract/emitted-contract coupled later gate / order-handoff surface threshold / actual adoption まで close 済みだが、remaining work は post-runnable later mixed gate / user-spec residual に残る。
+- theory-lab line は repo 全体から見ると advanced line であり、current reading では actual-adoption / helper-local actualization / narrowing / reserve strengthening / reserve practical actualization / model-check second-line actualization / theorem discharge actual-format probe / model-check property-tool-seam probe / theorem discharge-public-contract threshold default / theorem contract shape threshold default / theorem transport/public-contract coupled later gate / theorem review-unit actual adoption / model-check-property-tool threshold default / model-check row-local property actual adoption / witness-provider-artifact public-shape threshold / actual adoption / witness-provider public-contract/emitted-contract coupled later gate / order-handoff surface threshold / actual adoption / theorem public-seam compression / model-check public-seam compression / order-handoff-witness-provider public-seam compression / representative theorem quartet actual Lean execution まで close 済みだが、remaining work は post-runnable later mixed gate / actual-execution hardening / user-spec residual に残る。

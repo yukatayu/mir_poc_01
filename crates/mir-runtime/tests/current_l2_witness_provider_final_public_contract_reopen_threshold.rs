@@ -119,19 +119,20 @@ fn assert_final_public_contract_reopen_threshold(
             assert!(threshold.threshold_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(threshold
-                .threshold_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("final public contract reopen threshold"));
+            assert!(
+                threshold
+                    .threshold_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("final public contract reopen threshold")
+            );
         }
     }
 }
 
 #[test]
 fn witness_provider_final_public_contract_reopen_threshold_reaches_late_join_sample() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let schema_route_actual_adoption =
         build_current_l2_source_sample_witness_provider_schema_route_actual_adoption(
             sample_path.to_str().unwrap(),
@@ -184,8 +185,7 @@ fn witness_provider_final_public_contract_reopen_threshold_reaches_late_join_sam
 
 #[test]
 fn witness_provider_final_public_contract_reopen_threshold_reaches_stale_reconnect_sample() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let schema_route_actual_adoption =
         build_current_l2_source_sample_witness_provider_schema_route_actual_adoption(
             sample_path.to_str().unwrap(),
@@ -314,7 +314,9 @@ fn witness_provider_final_public_contract_reopen_threshold_keeps_guarded_chain_n
         &schema_route_actual_adoption,
         &emitted_contract_coupled_gate,
         &[],
-        &["compare_floor:current_l2.witness_provider_final_public_contract_reopen_threshold.guard_only"],
+        &[
+            "compare_floor:current_l2.witness_provider_final_public_contract_reopen_threshold.guard_only",
+        ],
         &["guard:witness_provider_final_public_contract_reopen_threshold_not_reached"],
     );
 }

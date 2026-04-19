@@ -173,8 +173,7 @@ fn delegated_rng_service_practical_actualization_reaches_provider_placement_samp
 
 #[test]
 fn delegated_rng_service_practical_actualization_keeps_authority_rng_baseline_as_guard_only() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let actualization =
         build_current_l2_source_sample_delegated_rng_service_practical_actualization(
             sample_path.to_str().unwrap(),
@@ -190,11 +189,13 @@ fn delegated_rng_service_practical_actualization_keeps_authority_rng_baseline_as
         actualization.practical_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(actualization
-        .practical_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("delegated provider"));
+    assert!(
+        actualization
+            .practical_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("delegated provider")
+    );
     assert!(actualization.profile_axis_refs.is_empty());
     assert!(actualization.provider_boundary_refs.is_empty());
     assert!(actualization.optional_attachment_refs.is_empty());
@@ -212,8 +213,7 @@ fn delegated_rng_service_practical_actualization_keeps_authority_rng_baseline_as
 
 #[test]
 fn delegated_rng_service_practical_actualization_keeps_stale_reconnect_baseline_as_guard_only() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let actualization =
         build_current_l2_source_sample_delegated_rng_service_practical_actualization(
             sample_path.to_str().unwrap(),
@@ -229,11 +229,13 @@ fn delegated_rng_service_practical_actualization_keeps_stale_reconnect_baseline_
         actualization.practical_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(actualization
-        .practical_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("delegated provider"));
+    assert!(
+        actualization
+            .practical_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("delegated provider")
+    );
     assert!(actualization.profile_axis_refs.is_empty());
     assert!(actualization.provider_boundary_refs.is_empty());
     assert!(actualization.optional_attachment_refs.is_empty());

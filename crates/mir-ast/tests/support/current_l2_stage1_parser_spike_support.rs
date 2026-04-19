@@ -1,8 +1,6 @@
 use std::{collections::BTreeMap, fs, path::PathBuf};
 
-use mir_ast::current_l2::{
-    Stage1ParsedChainDecl, Stage1ParsedOptionDecl,
-};
+use mir_ast::current_l2::{Stage1ParsedChainDecl, Stage1ParsedOptionDecl};
 use serde_json::Value;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -57,9 +55,7 @@ pub fn lower_stage1_option_decl_to_fixture_option(
     }
 }
 
-pub fn lower_stage1_chain_decl_to_fixture_chain(
-    chain: &Stage1ParsedChainDecl,
-) -> FixtureChainDecl {
+pub fn lower_stage1_chain_decl_to_fixture_chain(chain: &Stage1ParsedChainDecl) -> FixtureChainDecl {
     FixtureChainDecl {
         name: chain.name.clone(),
         head: chain.head.clone(),
@@ -153,10 +149,7 @@ fn capability_strengthens(from: &str, to: &str) -> bool {
     matches!((from, to), ("read", "write"))
 }
 
-fn collect_fixture_subset(
-    node: &Value,
-    subset: &mut Stage1FixtureSubset,
-) -> Result<(), String> {
+fn collect_fixture_subset(node: &Value, subset: &mut Stage1FixtureSubset) -> Result<(), String> {
     let kind = node
         .get("kind")
         .and_then(Value::as_str)
@@ -196,13 +189,7 @@ fn collect_fixture_subset(
                             successor: required_string(edge, "successor")?,
                             lineage_assertion: edge
                                 .get("lineage_assertion")
-                                .and_then(|value| {
-                                    if value.is_null() {
-                                        None
-                                    } else {
-                                        Some(value)
-                                    }
-                                })
+                                .and_then(|value| if value.is_null() { None } else { Some(value) })
                                 .map(|lineage| -> Result<FixtureLineageAssertion, String> {
                                     Ok(FixtureLineageAssertion {
                                         predecessor: required_string(lineage, "predecessor")?,

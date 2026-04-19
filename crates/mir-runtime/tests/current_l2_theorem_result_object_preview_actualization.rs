@@ -138,8 +138,7 @@ fn assert_result_object_preview_matches_review_unit_adoption(
         result_object_preview.actual_adoption_default_refs,
         match result_object_preview.actualization_status {
             CurrentL2EmittedArtifactRouteStatus::Reached => vec![
-                "theorem_result_object_preview_default:notebook_consumer_object_first"
-                    .to_string(),
+                "theorem_result_object_preview_default:notebook_consumer_object_first".to_string(),
                 "theorem_result_object_preview_default:consumer_shaped_payload_preview_only"
                     .to_string(),
                 "theorem_result_object_preview_default:proof_object_schema_reserve_keep"
@@ -179,27 +178,31 @@ fn assert_result_object_preview_matches_review_unit_adoption(
             assert!(result_object_preview.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(result_object_preview
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("theorem result-object preview actualization"));
+            assert!(
+                result_object_preview
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("theorem result-object preview actualization")
+            );
         }
     }
 }
 
 #[test]
 fn theorem_result_object_preview_actualization_reaches_static_underdeclared_sample() {
-    let review_unit_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
+    let review_unit_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
 
     assert_result_object_preview_matches_review_unit_adoption(
         &result_object_preview,
@@ -221,16 +224,18 @@ fn theorem_result_object_preview_actualization_reaches_static_underdeclared_samp
 #[test]
 fn theorem_result_object_preview_actualization_keeps_guarded_prototype_as_not_reached() {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let review_unit_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let review_unit_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_result_object_preview_matches_review_unit_adoption(
         &result_object_preview,
@@ -243,16 +248,18 @@ fn theorem_result_object_preview_actualization_keeps_guarded_prototype_as_not_re
 #[test]
 fn theorem_result_object_preview_actualization_reaches_typed_runtime_prototype() {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
-    let review_unit_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let review_unit_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_result_object_preview_matches_review_unit_adoption(
         &result_object_preview,
@@ -273,18 +280,19 @@ fn theorem_result_object_preview_actualization_reaches_typed_runtime_prototype()
 
 #[test]
 fn theorem_result_object_preview_actualization_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let review_unit_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let review_unit_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_result_object_preview_matches_review_unit_adoption(
         &result_object_preview,
@@ -306,16 +314,18 @@ fn theorem_result_object_preview_actualization_reaches_order_handoff_runtime_pro
 #[test]
 fn theorem_result_object_preview_actualization_reaches_stale_reconnect_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let review_unit_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let review_unit_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_result_object_preview_matches_review_unit_adoption(
         &result_object_preview,

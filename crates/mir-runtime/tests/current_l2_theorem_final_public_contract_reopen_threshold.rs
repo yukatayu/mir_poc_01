@@ -142,22 +142,25 @@ fn assert_final_public_contract_reopen_threshold(
             assert!(threshold.threshold_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(threshold
-                .threshold_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("theorem final public contract reopen threshold"));
+            assert!(
+                threshold
+                    .threshold_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("theorem final public contract reopen threshold")
+            );
         }
     }
 }
 
 #[test]
 fn theorem_final_public_contract_reopen_threshold_reaches_static_underdeclared_sample() {
-    let result_object_actual_adoption = build_current_l2_source_sample_theorem_result_object_actual_adoption(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
+    let result_object_actual_adoption =
+        build_current_l2_source_sample_theorem_result_object_actual_adoption(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
     let proof_object_schema_coupled_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             "e5-underdeclared-lineage",
@@ -192,11 +195,12 @@ fn theorem_final_public_contract_reopen_threshold_reaches_static_underdeclared_s
 #[test]
 fn theorem_final_public_contract_reopen_threshold_reaches_typed_runtime_prototype() {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
-    let result_object_actual_adoption = build_current_l2_source_sample_theorem_result_object_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let result_object_actual_adoption =
+        build_current_l2_source_sample_theorem_result_object_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_schema_coupled_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -230,13 +234,13 @@ fn theorem_final_public_contract_reopen_threshold_reaches_typed_runtime_prototyp
 
 #[test]
 fn theorem_final_public_contract_reopen_threshold_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let result_object_actual_adoption = build_current_l2_source_sample_theorem_result_object_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let result_object_actual_adoption =
+        build_current_l2_source_sample_theorem_result_object_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_schema_coupled_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -270,13 +274,13 @@ fn theorem_final_public_contract_reopen_threshold_reaches_order_handoff_runtime_
 
 #[test]
 fn theorem_final_public_contract_reopen_threshold_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let result_object_actual_adoption = build_current_l2_source_sample_theorem_result_object_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let result_object_actual_adoption =
+        build_current_l2_source_sample_theorem_result_object_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_schema_coupled_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -311,11 +315,12 @@ fn theorem_final_public_contract_reopen_threshold_reaches_stale_reconnect_runtim
 #[test]
 fn theorem_final_public_contract_reopen_threshold_keeps_guarded_prototype_as_not_reached() {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let result_object_actual_adoption = build_current_l2_source_sample_theorem_result_object_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let result_object_actual_adoption =
+        build_current_l2_source_sample_theorem_result_object_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_schema_coupled_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),

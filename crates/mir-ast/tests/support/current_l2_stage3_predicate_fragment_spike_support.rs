@@ -24,16 +24,18 @@ pub fn load_fixture_option_admit_fragment(
     let program = value
         .get("program")
         .ok_or_else(|| format!("fixture {} is missing `program`", path.display()))?;
-    let option_value = find_option_decl(program, option_name)?
-        .ok_or_else(|| format!("fixture {} is missing option `{option_name}`", path.display()))?;
-    let admit = option_value
-        .get("admit")
-        .ok_or_else(|| {
-            format!(
-                "fixture {} option `{option_name}` is missing `admit`",
-                path.display()
-            )
-        })?;
+    let option_value = find_option_decl(program, option_name)?.ok_or_else(|| {
+        format!(
+            "fixture {} is missing option `{option_name}`",
+            path.display()
+        )
+    })?;
+    let admit = option_value.get("admit").ok_or_else(|| {
+        format!(
+            "fixture {} option `{option_name}` is missing `admit`",
+            path.display()
+        )
+    })?;
 
     parse_fixture_predicate_fragment(admit)
 }
@@ -134,10 +136,7 @@ fn fixture_path(name: &str) -> PathBuf {
         .join(name)
 }
 
-fn find_option_decl<'a>(
-    value: &'a Value,
-    option_name: &str,
-) -> Result<Option<&'a Value>, String> {
+fn find_option_decl<'a>(value: &'a Value, option_name: &str) -> Result<Option<&'a Value>, String> {
     match value {
         Value::Object(map) => {
             if map.get("kind").and_then(Value::as_str) == Some("OptionDecl")

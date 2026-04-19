@@ -384,31 +384,25 @@ fn static_reason_code_from_reason(reason: &str) -> Option<StaticReasonCodeRow> {
             successor,
         });
     }
-    if let Some((predecessor, successor)) = parse_reason_pair(
-        reason,
-        "lineage assertion does not describe ",
-        " -> ",
-    ) {
+    if let Some((predecessor, successor)) =
+        parse_reason_pair(reason, "lineage assertion does not describe ", " -> ")
+    {
         return Some(StaticReasonCodeRow::LineageAssertionEdgeMismatch {
             predecessor,
             successor,
         });
     }
-    if let Some((predecessor, successor)) = parse_reason_pair(
-        reason,
-        "declared access target is missing for ",
-        " -> ",
-    ) {
+    if let Some((predecessor, successor)) =
+        parse_reason_pair(reason, "declared access target is missing for ", " -> ")
+    {
         return Some(StaticReasonCodeRow::DeclaredTargetMissing {
             predecessor,
             successor,
         });
     }
-    if let Some((predecessor, successor)) = parse_reason_pair(
-        reason,
-        "declared access target mismatch between ",
-        " and ",
-    ) {
+    if let Some((predecessor, successor)) =
+        parse_reason_pair(reason, "declared access target mismatch between ", " and ")
+    {
         return Some(StaticReasonCodeRow::DeclaredTargetMismatch {
             predecessor,
             successor,
@@ -422,21 +416,16 @@ fn static_reason_code_from_reason(reason: &str) -> Option<StaticReasonCodeRow> {
             to_capability,
         });
     }
-    if let Some((head, scope)) = parse_reason_pair(
-        reason,
-        "missing option declaration for chain head ",
-        " at ",
-    ) {
+    if let Some((head, scope)) =
+        parse_reason_pair(reason, "missing option declaration for chain head ", " at ")
+    {
         return Some(StaticReasonCodeRow::MissingChainHeadOption { head, scope });
     }
-    if let Some((option, scope)) =
-        parse_reason_pair(reason, "missing predecessor option ", " at ")
+    if let Some((option, scope)) = parse_reason_pair(reason, "missing predecessor option ", " at ")
     {
         return Some(StaticReasonCodeRow::MissingPredecessorOption { option, scope });
     }
-    if let Some((option, scope)) =
-        parse_reason_pair(reason, "missing successor option ", " at ")
-    {
+    if let Some((option, scope)) = parse_reason_pair(reason, "missing successor option ", " at ") {
         return Some(StaticReasonCodeRow::MissingSuccessorOption { option, scope });
     }
     None
@@ -1499,7 +1488,10 @@ fn collect_try_rollback_structural_reasons(
             Statement::PlaceBlock { body, .. } => {
                 collect_try_rollback_structural_reasons(body, in_fallback_body, reasons);
             }
-            Statement::TryFallback { body, fallback_body } => {
+            Statement::TryFallback {
+                body,
+                fallback_body,
+            } => {
                 if fallback_body.is_empty() {
                     reasons.push("try fallback body must not be empty".to_string());
                 }

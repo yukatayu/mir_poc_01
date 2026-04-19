@@ -53,18 +53,30 @@ fn assert_threshold_matches_probe_and_preflight(
         threshold.discharge_entry_reserve_refs,
         probe.discharge_entry_reserve_refs
     );
-    assert_eq!(threshold.symbolic_evidence_refs, probe.symbolic_evidence_refs);
-    assert_eq!(threshold.transport_preview_refs, probe.transport_preview_refs);
+    assert_eq!(
+        threshold.symbolic_evidence_refs,
+        probe.symbolic_evidence_refs
+    );
+    assert_eq!(
+        threshold.transport_preview_refs,
+        probe.transport_preview_refs
+    );
     assert_eq!(
         threshold.public_contract_preview_refs,
         probe.public_contract_preview_refs
     );
-    assert_eq!(threshold.consumer_boundary_refs, probe.consumer_boundary_refs);
+    assert_eq!(
+        threshold.consumer_boundary_refs,
+        probe.consumer_boundary_refs
+    );
     assert_eq!(
         threshold.binding_preflight_manifest_refs,
         preflight.binding_preflight_manifest_refs
     );
-    assert_eq!(threshold.adapter_boundary_refs, preflight.adapter_boundary_refs);
+    assert_eq!(
+        threshold.adapter_boundary_refs,
+        preflight.adapter_boundary_refs
+    );
     assert_eq!(
         threshold.threshold_default_refs,
         match threshold.threshold_status {
@@ -110,11 +122,13 @@ fn assert_threshold_matches_probe_and_preflight(
             assert!(threshold.threshold_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(threshold
-                .threshold_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("theorem discharge/public-contract threshold"));
+            assert!(
+                threshold
+                    .threshold_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("theorem discharge/public-contract threshold")
+            );
         }
     }
 }
@@ -222,8 +236,7 @@ fn theorem_contract_threshold_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_contract_threshold_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let probe = build_current_l2_source_sample_theorem_discharge_actual_format_probe(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -260,8 +273,7 @@ fn theorem_contract_threshold_reaches_order_handoff_runtime_prototype() {
 
 #[test]
 fn theorem_contract_threshold_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let probe = build_current_l2_source_sample_theorem_discharge_actual_format_probe(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

@@ -332,6 +332,70 @@ run_directory_named_profile
   - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
   を helper-local actual-adoption floor として test/support helper に置いてよい。
   - これは final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、final public verifier contract を意味しない。
+- current theorem public-seam compression cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `repo_local_emitted_artifact_refs`
+  - `result_object_route_refs`
+  - `payload_preview_keep_refs`
+  - `proof_object_schema_candidate_refs`
+  - `prover_brand_candidate_refs`
+  - `lean_stub_alignment_refs`
+  - `public_seam_residual_refs`
+  - `environment_stop_line_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local residual-compression floor として test/support helper に置いてよい。
+  - これは final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、actual Lean execution、final public verifier contract を意味しない。
+- current theorem toolchain probe / reopen-manifest cut では、
+  - `toolchain_status`
+  - `required_commands`
+  - `sample_stem`
+  - `reopen_condition_met`
+  - `sample_reopen_refs`
+  - `next_probe_refs`
+  を repo-local helper / CLI cut として script-side に置いてよい。
+  - これは actual Lean execution、public theorem contract、proof object public schema、final public verifier contract を意味しない。
+- current model-check public-seam compression cut では、
+  - `actualization_subject_kind` / `actualization_subject_ref`
+  - `property_route_refs`
+  - `checker_artifact_route_refs`
+  - `final_public_contract_reopen_sequence_refs`
+  - `public_seam_residual_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local residual-compression floor として test/support helper に置いてよい。
+  - これは first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract を意味しない。
+- current theorem actual Lean execution narrow-probe cut では、
+  - `sample_stem`
+  - `toolchain_status`
+  - `resolved_tool_versions`
+  - `repo_local_emitted_artifact_refs`
+  - `actual_execution_refs`
+  - `kept_later_refs`
+  を helper-local actual-execution floor として test/support helper に置いてよい。
+  - これは prototype-wide exhaustive actual Lean execution、public theorem contract、proof object public schema、final public verifier contract を意味しない。
+- current theorem actual Lean execution representative-prototype widening cut では、
+  - `sample_path`
+  - `pilot_status`
+  - `repo_local_emitted_artifact_refs`
+  - `actual_execution_refs`
+  - `compare_floor_refs`
+  - `kept_later_refs`
+  を helper-local actual-execution widening floor として runtime test/support helper に置いてよい。
+  - これは full theorem-relevant corpus actual Lean execution、Python helper / CLI orchestration unification、public theorem contract、proof object public schema、final public verifier contract を意味しない。
+- current order-handoff / witness-provider public-seam compression cut では、
+  - `profile_axis_refs`
+  - `repo_local_emitted_artifact_refs`
+  - `source_wording_route_refs`
+  - `emitted_artifact_candidate_keep_refs`
+  - `serial_scope_lines`
+  - `witness_schema_route_refs`
+  - `provider_receipt_route_refs`
+  - `combined_public_contract_keep_refs`
+  - `trace_alignment_pair_refs`
+  - `public_seam_residual_refs`
+  - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
+  を helper-local residual-compression floor として test/support helper に置いてよい。
+  - これは final parser grammar、final public parser/checker/runtime API、final source-surface handoff wording、final emitted-artifact schema、final public witness/provider/artifact contract、`serial` sugar public adoption、low-level exact source wording、final modal foundation adoption、exhaustive shared-space catalog を意味しない。
 - current theorem final-public-contract reopen-threshold cut では、
   - `actualization_subject_kind` / `actualization_subject_ref`
   - `result_object_route_refs`

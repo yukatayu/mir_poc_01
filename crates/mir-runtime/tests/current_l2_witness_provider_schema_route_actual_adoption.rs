@@ -125,24 +125,26 @@ fn assert_actual_adoption_matches_prior_floors(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("witness/provider schema route actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("witness/provider schema route actual adoption")
+            );
         }
     }
 }
 
 #[test]
 fn witness_provider_schema_route_actual_adoption_reaches_late_join_witness_sample() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let route_actual_adoption = build_current_l2_source_sample_witness_provider_route_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let route_actual_adoption =
+        build_current_l2_source_sample_witness_provider_route_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let public_schema_coupled_gate =
         build_current_l2_source_sample_witness_provider_public_schema_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -195,13 +197,13 @@ fn witness_provider_schema_route_actual_adoption_reaches_late_join_witness_sampl
 
 #[test]
 fn witness_provider_schema_route_actual_adoption_reaches_stale_reconnect_baseline() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let route_actual_adoption = build_current_l2_source_sample_witness_provider_route_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let route_actual_adoption =
+        build_current_l2_source_sample_witness_provider_route_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let public_schema_coupled_gate =
         build_current_l2_source_sample_witness_provider_public_schema_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -249,11 +251,12 @@ fn witness_provider_schema_route_actual_adoption_reaches_stale_reconnect_baselin
 fn witness_provider_schema_route_actual_adoption_reaches_delegated_provider_sample() {
     let sample_path =
         order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
-    let route_actual_adoption = build_current_l2_source_sample_witness_provider_route_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let route_actual_adoption =
+        build_current_l2_source_sample_witness_provider_route_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let public_schema_coupled_gate =
         build_current_l2_source_sample_witness_provider_public_schema_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -305,11 +308,12 @@ fn witness_provider_schema_route_actual_adoption_reaches_delegated_provider_samp
 #[test]
 fn witness_provider_schema_route_actual_adoption_keeps_guarded_chain_not_reached() {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let route_actual_adoption = build_current_l2_source_sample_witness_provider_route_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let route_actual_adoption =
+        build_current_l2_source_sample_witness_provider_route_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let public_schema_coupled_gate =
         build_current_l2_source_sample_witness_provider_public_schema_coupled_later_gate(
             sample_path.to_str().unwrap(),

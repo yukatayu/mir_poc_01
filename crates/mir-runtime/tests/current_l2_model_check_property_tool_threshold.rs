@@ -41,7 +41,10 @@ fn assert_threshold_matches_second_line_and_probe(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(threshold.threshold_status, second_line.concretization_status);
+    assert_eq!(
+        threshold.threshold_status,
+        second_line.concretization_status
+    );
     assert_eq!(threshold.threshold_status, probe.probe_status);
     assert_eq!(
         threshold.threshold_subject_kind,
@@ -72,7 +75,10 @@ fn assert_threshold_matches_second_line_and_probe(
         threshold.checker_boundary_probe_refs,
         probe.checker_boundary_probe_refs
     );
-    assert_eq!(threshold.request_preflight_refs, second_line.request_preflight_refs);
+    assert_eq!(
+        threshold.request_preflight_refs,
+        second_line.request_preflight_refs
+    );
     assert_eq!(
         threshold.public_checker_reserve_refs,
         second_line.public_checker_reserve_refs
@@ -135,11 +141,13 @@ fn assert_threshold_matches_second_line_and_probe(
             assert!(threshold.threshold_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(threshold
-                .threshold_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("model-check property/tool threshold"));
+            assert!(
+                threshold
+                    .threshold_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("model-check property/tool threshold")
+            );
         }
     }
 }
@@ -245,8 +253,7 @@ fn model_check_property_tool_threshold_reaches_typed_runtime_prototype() {
 
 #[test]
 fn model_check_property_tool_threshold_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let second_line = build_current_l2_source_sample_model_check_second_line_concretization(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -282,8 +289,7 @@ fn model_check_property_tool_threshold_reaches_order_handoff_runtime_prototype()
 
 #[test]
 fn model_check_property_tool_threshold_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let second_line = build_current_l2_source_sample_model_check_second_line_concretization(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

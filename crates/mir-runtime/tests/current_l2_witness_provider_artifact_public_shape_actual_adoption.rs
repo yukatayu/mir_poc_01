@@ -35,8 +35,14 @@ fn assert_actual_adoption_matches_threshold(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(actual_adoption.actualization_status, threshold.threshold_status);
-    assert_eq!(actual_adoption.profile_axis_refs, threshold.profile_axis_refs);
+    assert_eq!(
+        actual_adoption.actualization_status,
+        threshold.threshold_status
+    );
+    assert_eq!(
+        actual_adoption.profile_axis_refs,
+        threshold.profile_axis_refs
+    );
     assert_eq!(
         actual_adoption.repo_local_emitted_artifact_refs,
         threshold.emitted_artifact_reserve_refs
@@ -63,8 +69,7 @@ fn assert_actual_adoption_matches_threshold(
                 "public_shape_actual_adoption_default:repo_local_emitted_artifact_refs_first"
                     .to_string(),
                 "public_shape_actual_adoption_default:optional_attachment_refs_only".to_string(),
-                "public_shape_actual_adoption_default:combined_public_contract_later"
-                    .to_string(),
+                "public_shape_actual_adoption_default:combined_public_contract_later".to_string(),
                 "public_shape_actual_adoption_default:witness_provider_routes_noncollapsed"
                     .to_string(),
             ],
@@ -102,19 +107,20 @@ fn assert_actual_adoption_matches_threshold(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("witness/provider/artifact public-shape actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("witness/provider/artifact public-shape actual adoption")
+            );
         }
     }
 }
 
 #[test]
 fn witness_provider_artifact_actual_adoption_reaches_late_join_witness_sample() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let threshold =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_threshold(
             sample_path.to_str().unwrap(),
@@ -156,8 +162,7 @@ fn witness_provider_artifact_actual_adoption_reaches_late_join_witness_sample() 
 
 #[test]
 fn witness_provider_artifact_actual_adoption_reaches_stale_reconnect_baseline() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let threshold =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_threshold(
             sample_path.to_str().unwrap(),

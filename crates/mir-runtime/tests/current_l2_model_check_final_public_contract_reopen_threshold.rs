@@ -150,11 +150,13 @@ fn assert_final_public_contract_reopen_threshold(
             assert!(threshold.threshold_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(threshold
-                .threshold_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("model-check final public contract reopen threshold"));
+            assert!(
+                threshold
+                    .threshold_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("model-check final public contract reopen threshold")
+            );
         }
     }
 }
@@ -246,8 +248,7 @@ fn model_check_final_public_contract_reopen_threshold_reaches_typed_runtime_prot
 
 #[test]
 fn model_check_final_public_contract_reopen_threshold_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let checker_artifact_route_actual_adoption =
         build_current_l2_source_sample_model_check_checker_artifact_route_actual_adoption(
             sample_path.to_str().unwrap(),

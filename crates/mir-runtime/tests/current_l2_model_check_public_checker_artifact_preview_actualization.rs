@@ -149,22 +149,25 @@ fn assert_checker_artifact_preview_matches_row_local_adoption(
             assert!(artifact_preview.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(artifact_preview
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("model-check public-checker artifact preview actualization"));
+            assert!(
+                artifact_preview
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("model-check public-checker artifact preview actualization")
+            );
         }
     }
 }
 
 #[test]
 fn model_check_public_checker_artifact_preview_actualization_reaches_static_underdeclared_sample() {
-    let row_local_adoption = build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
+    let row_local_adoption =
+        build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
             "e5-underdeclared-lineage",
@@ -190,13 +193,15 @@ fn model_check_public_checker_artifact_preview_actualization_reaches_static_unde
 }
 
 #[test]
-fn model_check_public_checker_artifact_preview_actualization_keeps_guarded_prototype_as_not_reached() {
+fn model_check_public_checker_artifact_preview_actualization_keeps_guarded_prototype_as_not_reached()
+ {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let row_local_adoption = build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let row_local_adoption =
+        build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
             sample_path.to_str().unwrap(),
@@ -215,11 +220,12 @@ fn model_check_public_checker_artifact_preview_actualization_keeps_guarded_proto
 #[test]
 fn model_check_public_checker_artifact_preview_actualization_reaches_typed_runtime_prototype() {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
-    let row_local_adoption = build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let row_local_adoption =
+        build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
             sample_path.to_str().unwrap(),
@@ -245,14 +251,15 @@ fn model_check_public_checker_artifact_preview_actualization_reaches_typed_runti
 }
 
 #[test]
-fn model_check_public_checker_artifact_preview_actualization_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let row_local_adoption = build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+fn model_check_public_checker_artifact_preview_actualization_reaches_order_handoff_runtime_prototype()
+ {
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let row_local_adoption =
+        build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
             sample_path.to_str().unwrap(),
@@ -278,14 +285,16 @@ fn model_check_public_checker_artifact_preview_actualization_reaches_order_hando
 }
 
 #[test]
-fn model_check_public_checker_artifact_preview_actualization_reaches_delegated_provider_runtime_prototype() {
+fn model_check_public_checker_artifact_preview_actualization_reaches_delegated_provider_runtime_prototype()
+ {
     let sample_path =
         order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
-    let row_local_adoption = build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let row_local_adoption =
+        build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
             sample_path.to_str().unwrap(),

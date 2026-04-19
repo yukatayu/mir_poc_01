@@ -259,6 +259,20 @@
   - `docs/reports/0738-theorem-discharge-prefloor-and-public-contract-hardening.md`
   - `docs/reports/0739-faq-007-current-status-two-big-problems-and-last-mile-gates.md`
 
+## 2026-04-19 runnable-status audit and snapshot rewrite addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。
+  - `docs/reports/0789-commit-readiness-audit-and-checkpoint-commit.md`
+  - `docs/reports/0790-runnable-status-audit-and-snapshot-rewrite.md`
+  - `progress.md`
+  - `tasks.md`
+  - `specs/examples/466-current-l2-problem1-actual-adoption-package-and-theorem-first-pilot.md`
+  - `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - `specs/examples/468-current-l2-syntax-modality-convergence-and-current-recommendation.md`
+  - `specs/examples/469-current-l2-near-end-closeout-after-actual-adoption-defaults.md`
+  - `specs/examples/509-current-l2-theorem-review-unit-to-lean-stub-repo-local-artifact-conformance-bridge.md`
+  - `specs/examples/510-current-l2-theorem-lean-stub-representative-trace-alignment-bridge.md`
+
 ## 2026-04-18 actual-adoption package, actualization floor, and near-end closeout addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
@@ -3566,6 +3580,30 @@
   - `scripts/tests/test_current_l2_theorem_lean_stub_pipeline.py`
   - `scripts/tests/test_current_l2_source_sample_regression.py`
 
+## 2026-04-19 reserve-surface, witness/provider trace-alignment, and local Lean-availability addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/511-current-l2-order-handoff-serial-scope-reserve-surface.md`
+  - `specs/examples/512-current-l2-witness-provider-emitted-contract-representative-trace-alignment-bridge.md`
+  - `specs/examples/513-current-l2-theorem-actual-lean-execution-availability-probe.md`
+  - `docs/reports/0791-order-handoff-serial-scope-reserve-surface.md`
+  - `docs/reports/0792-witness-provider-emitted-contract-trace-alignment-bridge.md`
+  - `docs/reports/0793-theorem-actual-lean-execution-availability-probe.md`
+  - `crates/mir-runtime/tests/current_l2_order_handoff_serial_scope_reserve_surface.rs`
+  - `crates/mir-runtime/tests/current_l2_witness_provider_emitted_contract_trace_alignment_bridge.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 theorem/order-handoff public-seam compression addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/514-current-l2-theorem-public-seam-compression-after-local-lean-unavailable-probe.md`
+  - `specs/examples/515-current-l2-order-handoff-witness-provider-final-public-seam-compression-after-reserve-actualizations.md`
+  - `docs/reports/0794-theorem-public-seam-compression-after-local-lean-unavailable-probe.md`
+  - `docs/reports/0795-order-handoff-witness-provider-final-public-seam-compression-after-reserve-actualizations.md`
+  - `crates/mir-runtime/tests/current_l2_theorem_public_seam_compression.rs`
+  - `crates/mir-runtime/tests/current_l2_order_handoff_witness_provider_public_seam_compression.rs`
+  - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
 ## 2026-04-19 theorem Lean-stub representative trace-alignment bridge addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`samples/prototype/README.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
@@ -3574,3 +3612,21 @@
   - `docs/reports/0788-theorem-lean-stub-representative-trace-alignment-bridge.md`
   - `crates/mir-runtime/tests/current_l2_theorem_lean_stub_trace_alignment_bridge.rs`
   - `crates/mir-runtime/tests/support/current_l2_source_sample_emitted_artifact_support.rs`
+
+## 2026-04-19 theorem/model-check public-seam compression and actual-lean widening addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/09-helper-stack-and-responsibility-map.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/516-current-l2-theorem-actual-lean-execution-toolchain-probe-and-reopen-manifest.md`
+  - `specs/examples/517-current-l2-model-check-public-seam-compression-after-threshold-and-probe.md`
+  - `specs/examples/518-current-l2-theorem-actual-lean-execution-narrow-probe-after-global-toolchain-install.md`
+  - `specs/examples/519-current-l2-theorem-actual-lean-execution-representative-prototype-widening.md`
+  - `docs/reports/0796-theorem-toolchain-probe-and-reopen-manifest.md`
+  - `docs/reports/0797-model-check-public-seam-compression-after-threshold-and-probe.md`
+  - `docs/reports/0798-theorem-actual-lean-execution-narrow-probe-after-global-toolchain-install.md`
+  - `docs/reports/0799-actual-lean-prototype-widening-and-snapshot-sync.md`
+  - `scripts/current_l2_theorem_toolchain_probe.py`
+  - `scripts/tests/test_current_l2_theorem_toolchain_probe.py`
+  - `crates/mir-runtime/tests/current_l2_model_check_public_seam_compression.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
+  - `crates/mir-semantics/tests/current_l2_lean_theorem_stub_actual_probe.rs`
+  - `crates/mir-semantics/examples/support/current_l2_lean_theorem_stub_support.rs`

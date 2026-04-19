@@ -35,13 +35,16 @@ fn prototype_host_plan(sample_path: &Path) -> FixtureHostPlan {
 fn expected_manifest_refs(
     pilot: &CurrentL2SourceSampleTheoremFirstPilotActualization,
 ) -> Vec<String> {
-    pilot.principal_review_unit_refs
+    pilot
+        .principal_review_unit_refs
         .iter()
         .map(|entry| {
             let (_, subject_ref, obligation_kind) = entry
                 .split_once(':')
                 .and_then(|(_, rest)| rest.split_once(':'))
-                .map(|(subject_ref, obligation_kind)| ("proof_notebook_review_unit", subject_ref, obligation_kind))
+                .map(|(subject_ref, obligation_kind)| {
+                    ("proof_notebook_review_unit", subject_ref, obligation_kind)
+                })
                 .unwrap();
             format!("theorem_binding_preflight:{subject_ref}:{obligation_kind}")
         })
@@ -61,8 +64,14 @@ fn assert_preflight_matches_pilot(
         preflight.principal_review_unit_refs,
         pilot.principal_review_unit_refs
     );
-    assert_eq!(preflight.symbolic_evidence_refs, pilot.symbolic_evidence_refs);
-    assert_eq!(preflight.binding_preflight_manifest_refs, expected_manifest_refs(pilot));
+    assert_eq!(
+        preflight.symbolic_evidence_refs,
+        pilot.symbolic_evidence_refs
+    );
+    assert_eq!(
+        preflight.binding_preflight_manifest_refs,
+        expected_manifest_refs(pilot)
+    );
     assert_eq!(
         preflight.adapter_boundary_refs,
         match preflight.preflight_status {
@@ -103,11 +112,13 @@ fn assert_preflight_matches_pilot(
             assert!(preflight.preflight_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(preflight
-                .preflight_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("binding preflight"));
+            assert!(
+                preflight
+                    .preflight_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("binding preflight")
+            );
         }
     }
 }
@@ -191,8 +202,7 @@ fn theorem_binding_preflight_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_binding_preflight_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let pilot = build_current_l2_source_sample_theorem_first_pilot_actualization(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

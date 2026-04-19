@@ -103,7 +103,10 @@ fn static_gate_support_preserves_fixture_context_and_malformed_reasons() {
     let artifact = build_detached_static_gate_artifact(path.clone(), &fixture, &gate);
 
     assert_eq!(artifact.fixture_context.fixture_id, "e4_malformed_lineage");
-    assert_eq!(artifact.fixture_context.fixture_path, path.display().to_string());
+    assert_eq!(
+        artifact.fixture_context.fixture_path,
+        path.display().to_string()
+    );
     assert_eq!(artifact.checker_core.static_verdict, "malformed");
     assert!(
         artifact
@@ -157,16 +160,15 @@ fn static_gate_artifact_emits_reason_codes_for_stable_clusters() {
         .detached_noncore
         .expect("stable clusters should emit detached_noncore");
 
-    assert_eq!(
-        detached_noncore.reason_codes_scope,
-        "stable-clusters-only"
-    );
+    assert_eq!(detached_noncore.reason_codes_scope, "stable-clusters-only");
     assert_eq!(
         detached_noncore.reason_codes,
-        vec![mir_semantics::StaticReasonCodeRow::MissingLineageAssertion {
-            predecessor: "primary".to_string(),
-            successor: "mirror".to_string(),
-        }]
+        vec![
+            mir_semantics::StaticReasonCodeRow::MissingLineageAssertion {
+                predecessor: "primary".to_string(),
+                successor: "mirror".to_string(),
+            }
+        ]
     );
 }
 
@@ -214,8 +216,7 @@ fn static_gate_artifact_emits_reason_codes_for_target_and_capability_clusters() 
         }]
     );
 
-    let late_strengthening_path =
-        fixture_path("e20-malformed-late-capability-strengthening.json");
+    let late_strengthening_path = fixture_path("e20-malformed-late-capability-strengthening.json");
     let late_strengthening_fixture =
         load_fixture("e20-malformed-late-capability-strengthening.json");
     let late_strengthening_gate = static_gate_detailed(&late_strengthening_fixture);
@@ -265,8 +266,11 @@ fn static_gate_artifact_emits_reason_codes_for_missing_option_clusters() {
     let missing_head_fixture = load_fixture("e16-malformed-missing-chain-head-option.json");
     let missing_head_gate = static_gate_detailed(&missing_head_fixture);
 
-    let missing_head_artifact =
-        build_detached_static_gate_artifact(missing_head_path, &missing_head_fixture, &missing_head_gate);
+    let missing_head_artifact = build_detached_static_gate_artifact(
+        missing_head_path,
+        &missing_head_fixture,
+        &missing_head_gate,
+    );
 
     assert_eq!(
         missing_head_artifact
@@ -294,10 +298,12 @@ fn static_gate_artifact_emits_reason_codes_for_missing_option_clusters() {
             .detached_noncore
             .expect("missing predecessor cluster should emit detached_noncore")
             .reason_codes,
-        vec![mir_semantics::StaticReasonCodeRow::MissingPredecessorOption {
-            option: "ghost".to_string(),
-            scope: "root / session / profile_access".to_string(),
-        }]
+        vec![
+            mir_semantics::StaticReasonCodeRow::MissingPredecessorOption {
+                option: "ghost".to_string(),
+                scope: "root / session / profile_access".to_string(),
+            }
+        ]
     );
 
     let missing_successor_path = fixture_path("e18-malformed-missing-successor-option.json");
@@ -334,7 +340,10 @@ fn static_gate_artifact_omits_reason_codes_for_duplicate_declaration_clusters() 
         &duplicate_option_gate,
     );
 
-    assert_eq!(duplicate_option_artifact.checker_core.static_verdict, "malformed");
+    assert_eq!(
+        duplicate_option_artifact.checker_core.static_verdict,
+        "malformed"
+    );
     assert!(
         duplicate_option_artifact
             .checker_core
@@ -354,7 +363,10 @@ fn static_gate_artifact_omits_reason_codes_for_duplicate_declaration_clusters() 
         &duplicate_chain_gate,
     );
 
-    assert_eq!(duplicate_chain_artifact.checker_core.static_verdict, "malformed");
+    assert_eq!(
+        duplicate_chain_artifact.checker_core.static_verdict,
+        "malformed"
+    );
     assert!(
         duplicate_chain_artifact
             .checker_core

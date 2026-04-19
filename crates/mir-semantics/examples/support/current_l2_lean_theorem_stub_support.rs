@@ -113,7 +113,7 @@ module_name = {module_name}\n\
 namespace CurrentL2\n\n\
 -- goal: {goal_text}\n\
 {evidence_block}\n\
-theorem {theorem_name} : Prop := by\n\
+theorem {theorem_name} : True := by\n\
   sorry\n\n\
 end CurrentL2\n",
         subject_kind = review_unit.subject_kind,
@@ -142,7 +142,9 @@ fn validate_review_unit(review_unit: &ProofNotebookReviewUnitArtifact) -> Result
     Ok(())
 }
 
-fn clone_evidence_ref(evidence_ref: &ProofNotebookReviewUnitEvidenceRef) -> LeanTheoremStubEvidenceRef {
+fn clone_evidence_ref(
+    evidence_ref: &ProofNotebookReviewUnitEvidenceRef,
+) -> LeanTheoremStubEvidenceRef {
     LeanTheoremStubEvidenceRef {
         ref_kind: evidence_ref.ref_kind.clone(),
         ref_id: evidence_ref.ref_id.clone(),

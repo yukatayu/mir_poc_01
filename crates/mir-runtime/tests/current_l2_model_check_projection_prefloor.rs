@@ -32,9 +32,7 @@ fn prototype_host_plan(sample_path: &Path) -> FixtureHostPlan {
     load_host_plan_from_path(&prototype_host_plan_path(sample_path)).unwrap()
 }
 
-fn expected_carrier_refs(
-    route: &CurrentL2SourceSamplePreviewArtifactRoute,
-) -> Vec<String> {
+fn expected_carrier_refs(route: &CurrentL2SourceSamplePreviewArtifactRoute) -> Vec<String> {
     route
         .model_check_concrete_carriers
         .iter()
@@ -115,11 +113,13 @@ fn assert_prefloor_matches_preview_route(
             assert!(prefloor.projection_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(prefloor
-                .projection_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("runtime_try_cut_cluster"));
+            assert!(
+                prefloor
+                    .projection_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("runtime_try_cut_cluster")
+            );
         }
     }
 }
@@ -168,7 +168,8 @@ fn model_check_projection_prefloor_keeps_guarded_prototype_as_not_reached() {
 }
 
 #[test]
-fn model_check_projection_prefloor_reaches_typed_runtime_prototype_without_collapsing_theorem_or_typed_lines() {
+fn model_check_projection_prefloor_reaches_typed_runtime_prototype_without_collapsing_theorem_or_typed_lines()
+ {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),
@@ -191,8 +192,7 @@ fn model_check_projection_prefloor_reaches_typed_runtime_prototype_without_colla
 
 #[test]
 fn model_check_projection_prefloor_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -214,8 +214,7 @@ fn model_check_projection_prefloor_reaches_order_handoff_runtime_prototype() {
 
 #[test]
 fn model_check_projection_prefloor_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

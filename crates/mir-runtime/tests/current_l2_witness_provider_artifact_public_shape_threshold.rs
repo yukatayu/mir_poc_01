@@ -115,8 +115,7 @@ fn assert_threshold_reached(
 
 #[test]
 fn witness_provider_artifact_public_shape_threshold_reaches_late_join_witness_sample() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let threshold =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_threshold(
             sample_path.to_str().unwrap(),
@@ -159,8 +158,7 @@ fn witness_provider_artifact_public_shape_threshold_reaches_late_join_witness_sa
 
 #[test]
 fn witness_provider_artifact_public_shape_threshold_reaches_stale_reconnect_baseline() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let threshold =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_threshold(
             sample_path.to_str().unwrap(),
@@ -168,7 +166,10 @@ fn witness_provider_artifact_public_shape_threshold_reaches_stale_reconnect_base
         )
         .unwrap();
 
-    assert_eq!(threshold.source_report.sample_id, "p08-dice-stale-reconnect-refresh");
+    assert_eq!(
+        threshold.source_report.sample_id,
+        "p08-dice-stale-reconnect-refresh"
+    );
     assert_threshold_reached(
         &threshold,
         &[
@@ -243,16 +244,21 @@ fn witness_provider_artifact_public_shape_threshold_keeps_guarded_chain_not_reac
         )
         .unwrap();
 
-    assert_eq!(threshold.source_report.sample_id, "p05-dice-owner-guarded-chain");
+    assert_eq!(
+        threshold.source_report.sample_id,
+        "p05-dice-owner-guarded-chain"
+    );
     assert_eq!(
         threshold.threshold_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(threshold
-        .threshold_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("public-shape threshold"));
+    assert!(
+        threshold
+            .threshold_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("public-shape threshold")
+    );
     assert!(threshold.profile_axis_refs.is_empty());
     assert!(threshold.witness_attachment_refs.is_empty());
     assert!(threshold.provider_attachment_refs.is_empty());

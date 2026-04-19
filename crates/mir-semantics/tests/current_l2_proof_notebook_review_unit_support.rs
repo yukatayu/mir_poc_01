@@ -40,7 +40,10 @@ fn proof_notebook_review_unit_support_emits_runtime_review_unit() {
     let review_unit = &review_units[0];
     assert_eq!(review_unit.subject_kind, "runtime_try_cut_cluster");
     assert_eq!(review_unit.subject_ref, "e2_try_fallback");
-    assert_eq!(review_unit.row.obligation_kind, "rollback_cut_non_interference");
+    assert_eq!(
+        review_unit.row.obligation_kind,
+        "rollback_cut_non_interference"
+    );
     assert_eq!(
         review_unit.row.evidence_refs,
         vec![
@@ -80,9 +83,15 @@ fn proof_notebook_review_unit_support_emits_static_row_local_units() {
     assert_eq!(review_units.len(), 2);
     assert_eq!(review_units[0].subject_kind, "fixture_static_cluster");
     assert_eq!(review_units[0].subject_ref, "e5_underdeclared_lineage");
-    assert_eq!(review_units[0].row.obligation_kind, "canonical_normalization_law");
+    assert_eq!(
+        review_units[0].row.obligation_kind,
+        "canonical_normalization_law"
+    );
     assert!(
-        review_units[0].row.goal_text.contains("canonical normalization"),
+        review_units[0]
+            .row
+            .goal_text
+            .contains("canonical normalization"),
         "unexpected goal text: {}",
         review_units[0].row.goal_text
     );

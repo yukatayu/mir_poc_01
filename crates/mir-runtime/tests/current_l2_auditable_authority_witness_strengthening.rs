@@ -112,8 +112,7 @@ fn assert_strengthening(
 
 #[test]
 fn auditable_authority_witness_strengthening_reaches_late_join_authoritative_profile() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let strengthening = build_current_l2_source_sample_auditable_authority_witness_strengthening(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -164,24 +163,28 @@ fn auditable_authority_witness_strengthening_reaches_late_join_authoritative_pro
 
 #[test]
 fn auditable_authority_witness_strengthening_keeps_stale_reconnect_profile_guard_only() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let strengthening = build_current_l2_source_sample_auditable_authority_witness_strengthening(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
     )
     .unwrap();
 
-    assert_eq!(strengthening.source_report.sample_id, "p08-dice-stale-reconnect-refresh");
+    assert_eq!(
+        strengthening.source_report.sample_id,
+        "p08-dice-stale-reconnect-refresh"
+    );
     assert_eq!(
         strengthening.strengthening_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(strengthening
-        .strengthening_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("witness-bearing authoritative draw"));
+    assert!(
+        strengthening
+            .strengthening_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("witness-bearing authoritative draw")
+    );
     assert!(strengthening.fairness_claim_refs.is_empty());
     assert!(strengthening.witness_core_refs.is_empty());
     assert!(strengthening.witness_binding_refs.is_empty());
@@ -206,16 +209,21 @@ fn auditable_authority_witness_strengthening_keeps_guarded_chain_as_not_reached(
     )
     .unwrap();
 
-    assert_eq!(strengthening.source_report.sample_id, "p05-dice-owner-guarded-chain");
+    assert_eq!(
+        strengthening.source_report.sample_id,
+        "p05-dice-owner-guarded-chain"
+    );
     assert_eq!(
         strengthening.strengthening_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(strengthening
-        .strengthening_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("witness strengthening"));
+    assert!(
+        strengthening
+            .strengthening_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("witness strengthening")
+    );
     assert!(strengthening.fairness_claim_refs.is_empty());
     assert!(strengthening.witness_core_refs.is_empty());
     assert!(strengthening.witness_binding_refs.is_empty());

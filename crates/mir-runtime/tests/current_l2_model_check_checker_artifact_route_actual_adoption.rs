@@ -171,11 +171,13 @@ fn assert_actual_adoption_matches_prior_floors(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("model-check checker-artifact route actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("model-check checker-artifact route actual adoption")
+            );
         }
     }
 }
@@ -319,8 +321,7 @@ fn model_check_checker_artifact_route_actual_adoption_reaches_typed_runtime_prot
 
 #[test]
 fn model_check_checker_artifact_route_actual_adoption_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
             sample_path.to_str().unwrap(),

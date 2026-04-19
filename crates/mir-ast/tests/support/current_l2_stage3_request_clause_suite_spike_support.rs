@@ -18,15 +18,12 @@ pub fn extract_stage3_request_clause_suite(
     let head_index = find_first_head(&lines, "perform ")
         .ok_or_else(|| "missing perform request head".to_string())?;
     let head_indent = lines[head_index].indent;
-    let child_indent = lines
-        .iter()
-        .skip(head_index + 1)
-        .find_map(|line| {
-            if line.is_blank || line.indent <= head_indent {
-                return None;
-            }
-            Some(line.indent)
-        });
+    let child_indent = lines.iter().skip(head_index + 1).find_map(|line| {
+        if line.is_blank || line.indent <= head_indent {
+            return None;
+        }
+        Some(line.indent)
+    });
 
     let Some(child_indent) = child_indent else {
         return Ok(Stage3RequestClauseSuite {
@@ -59,7 +56,9 @@ pub fn extract_stage3_request_clause_suite(
         }
 
         if line.indent > child_indent {
-            return Err("unexpected nested continuation outside request-local clause block".to_string());
+            return Err(
+                "unexpected nested continuation outside request-local clause block".to_string(),
+            );
         }
 
         if line.indent < child_indent {
@@ -144,14 +143,12 @@ fn collect_source_lines(source: &str) -> Vec<SourceLine> {
 }
 
 fn find_first_head(lines: &[SourceLine], prefix: &str) -> Option<usize> {
-    lines.iter()
+    lines
+        .iter()
         .position(|line| !line.is_blank && line.text.starts_with(prefix))
 }
 
-fn extract_single_line_fragment(
-    text: &str,
-    clause_name: &str,
-) -> Result<Option<String>, String> {
+fn extract_single_line_fragment(text: &str, clause_name: &str) -> Result<Option<String>, String> {
     let prefix = format!("{clause_name} ");
     if !text.starts_with(&prefix) {
         return Ok(None);

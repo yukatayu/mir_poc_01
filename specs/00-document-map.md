@@ -1289,6 +1289,24 @@
   - theorem Lean-first non-production stub pilot の次段として、runtime/static representative source sample から formal hook / review unit / Lean stub artifact の pair alignment を repo-local helper と regression bundle に actualize しつつ、actual Lean tool execution / cross-tool public artifact contract / final public verifier contract は still later に残す補助文書。
 - `specs/examples/510-current-l2-theorem-lean-stub-representative-trace-alignment-bridge.md`
   - theorem repo-local artifact-conformance bridge の次段として、representative runtime/static/prototype corpus `e2 / e5 / p06 / p07 / p08` と guard-only `p05` を使う review unit / Lean stub pair alignment を helper-local runtime test に actualize しつつ、actual Lean tool execution / public theorem contract / final public verifier contract は still later に残す補助文書。
+- `specs/examples/511-current-l2-order-handoff-serial-scope-reserve-surface.md`
+  - order-handoff / delegated-provider practical line の次段として、authoritative-room-specific `serial on ...` sugar を principal source wording に上げず helper-local reserve surface として `p07 / p08 / p09` reached / `p05` guard-only で actualize する補助文書。
+- `specs/examples/512-current-l2-witness-provider-emitted-contract-representative-trace-alignment-bridge.md`
+  - witness/provider emitted-contract coupled-later gate の次段として、representative corpus `p07 / p08 / p09` と guard-only `p05` の route side / emitted-contract side pair alignment を helper-local runtime test に actualize しつつ、final public witness/provider contract 群は still later に残す補助文書。
+- `specs/examples/513-current-l2-theorem-actual-lean-execution-availability-probe.md`
+  - theorem Lean-stub representative trace-alignment bridge の次段として、local environment で actual Lean execution を再開できるかを `lean` / `lake` / `elan` availability probe で narrow に確認し、tool unavailable なら Lean-stub floor を current stop line に保つ補助文書。
+- `specs/examples/514-current-l2-theorem-public-seam-compression-after-local-lean-unavailable-probe.md`
+  - theorem final public-contract reopen threshold、Lean-stub representative trace-alignment bridge、actual Lean execution availability probe を 1 本に束ね、remaining theorem public seams を helper-local residual matrix に圧縮する補助文書。
+- `specs/examples/515-current-l2-order-handoff-witness-provider-final-public-seam-compression-after-reserve-actualizations.md`
+  - order-handoff source-wording route、`serial` reserve surface、witness/provider emitted-contract representative trace alignment、witness/provider final public-contract reopen threshold を 1 本に束ね、remaining Problem 2 / shared-space public seams を helper-local residual matrix に圧縮する補助文書。
+- `specs/examples/516-current-l2-theorem-actual-lean-execution-toolchain-probe-and-reopen-manifest.md`
+  - theorem public-seam compression 後の次段として、`lean` / `lake` / `elan` availability と sample-aware reopen plan を repo-local helper/CLI に actualize しつつ、actual Lean execution / public theorem contract / final public verifier contract は still later に残す補助文書。
+- `specs/examples/517-current-l2-model-check-public-seam-compression-after-threshold-and-probe.md`
+  - model-check property/tool seam probe、checker-artifact route、final public-contract reopen threshold を 1 本に束ね、remaining model-check public seams を helper-local residual matrix に圧縮する補助文書。
+- `specs/examples/518-current-l2-theorem-actual-lean-execution-narrow-probe-after-global-toolchain-install.md`
+  - theorem toolchain probe / reopen manifest の次段として、global `elan` stable install 後の representative static sample `e5` actual Lean execution と Lean-stub placeholder fix を helper-local actual-execution floor に actualize しつつ、prototype-wide execution や public theorem contract は still later に残す補助文書。
+- `specs/examples/519-current-l2-theorem-actual-lean-execution-representative-prototype-widening.md`
+  - theorem actual Lean execution narrow probe の次段として、representative prototype/runtime trio `p06 / p07 / p08` まで actual Lean execution を widen しつつ、Python helper / CLI orchestration unification や public theorem contract は still later に残す補助文書。
 
 これらの code anchor の current status / call chain / docs/tests/code boundary は `plan/07-parser-free-poc-stack.md` と `plan/09-helper-stack-and-responsibility-map.md` に整理する。
 

@@ -6,8 +6,7 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus,
-    CurrentL2SourceSampleModelCheckPropertyToolThreshold,
+    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleModelCheckPropertyToolThreshold,
     CurrentL2SourceSampleModelCheckRowLocalPropertyActualAdoption,
     build_current_l2_source_sample_model_check_property_tool_threshold,
     build_current_l2_source_sample_model_check_row_local_property_actual_adoption,
@@ -39,7 +38,10 @@ fn assert_actual_adoption_matches_threshold(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(actual_adoption.actualization_status, threshold.threshold_status);
+    assert_eq!(
+        actual_adoption.actualization_status,
+        threshold.threshold_status
+    );
     assert_eq!(
         actual_adoption.actualization_subject_kind,
         threshold.threshold_subject_kind
@@ -112,8 +114,7 @@ fn assert_actual_adoption_matches_threshold(
         match actual_adoption.actualization_status {
             CurrentL2EmittedArtifactRouteStatus::Reached => vec![
                 "model_check_actual_adoption_default:row_local_property_route_first".to_string(),
-                "model_check_actual_adoption_default:checker_boundary_contract_first"
-                    .to_string(),
+                "model_check_actual_adoption_default:checker_boundary_contract_first".to_string(),
                 "model_check_actual_adoption_default:brand_neutral_tool_binding_reserve_keep"
                     .to_string(),
                 "model_check_actual_adoption_default:public_checker_handoff_later".to_string(),
@@ -168,11 +169,13 @@ fn assert_actual_adoption_matches_threshold(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("model-check row-local property actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("model-check row-local property actual adoption")
+            );
         }
     }
 }
@@ -265,8 +268,7 @@ fn model_check_actual_adoption_reaches_typed_runtime_prototype() {
 
 #[test]
 fn model_check_actual_adoption_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let threshold = build_current_l2_source_sample_model_check_property_tool_threshold(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

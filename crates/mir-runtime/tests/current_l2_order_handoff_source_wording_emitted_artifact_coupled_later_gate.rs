@@ -112,8 +112,7 @@ fn assert_coupled_later_gate_matches_prior_floors(
                     .to_string(),
                 "source_wording_emitted_artifact_default:readable_high_level_relation_vocabulary"
                     .to_string(),
-                "source_wording_emitted_artifact_default:stage_block_secondary_keep"
-                    .to_string(),
+                "source_wording_emitted_artifact_default:stage_block_secondary_keep".to_string(),
                 "source_wording_emitted_artifact_default:thread_node_same_causal_language"
                     .to_string(),
                 "source_wording_emitted_artifact_default:repo_local_emitted_artifact_refs_first"
@@ -161,24 +160,26 @@ fn assert_coupled_later_gate_matches_prior_floors(
             assert!(coupled_gate.coupled_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(coupled_gate
-                .coupled_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("order-handoff source wording / emitted-artifact coupled later gate"));
+            assert!(
+                coupled_gate
+                    .coupled_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("order-handoff source wording / emitted-artifact coupled later gate")
+            );
         }
     }
 }
 
 #[test]
 fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_reaches_late_join_default() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let surface_actual_adoption = build_current_l2_source_sample_order_handoff_surface_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let surface_actual_adoption =
+        build_current_l2_source_sample_order_handoff_surface_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let witness_provider_coupled_gate =
         build_current_l2_source_sample_witness_provider_emitted_contract_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -219,15 +220,15 @@ fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_reaches_late
 }
 
 #[test]
-fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_reaches_stale_reconnect_default(
-) {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let surface_actual_adoption = build_current_l2_source_sample_order_handoff_surface_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_reaches_stale_reconnect_default()
+ {
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let surface_actual_adoption =
+        build_current_l2_source_sample_order_handoff_surface_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let witness_provider_coupled_gate =
         build_current_l2_source_sample_witness_provider_emitted_contract_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -267,14 +268,15 @@ fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_reaches_stal
 }
 
 #[test]
-fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_keeps_guarded_chain_not_reached(
-) {
+fn order_handoff_source_wording_emitted_artifact_coupled_later_gate_keeps_guarded_chain_not_reached()
+ {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let surface_actual_adoption = build_current_l2_source_sample_order_handoff_surface_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let surface_actual_adoption =
+        build_current_l2_source_sample_order_handoff_surface_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let witness_provider_coupled_gate =
         build_current_l2_source_sample_witness_provider_emitted_contract_coupled_later_gate(
             sample_path.to_str().unwrap(),

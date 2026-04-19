@@ -77,9 +77,7 @@ fn expected_request_preflight_refs(
 ) -> Vec<String> {
     match second_line.concretization_subject_ref.as_deref() {
         Some(subject_ref) => vec![
-            format!(
-                "model_check_request_preflight:{subject_ref}:row_local_property_preview"
-            ),
+            format!("model_check_request_preflight:{subject_ref}:row_local_property_preview"),
             format!(
                 "model_check_request_preflight:{subject_ref}:small_cluster_semantic_projection"
             ),
@@ -94,7 +92,10 @@ fn assert_second_line_matches_prefloor(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(second_line.concretization_status, prefloor.projection_status);
+    assert_eq!(
+        second_line.concretization_status,
+        prefloor.projection_status
+    );
     assert_eq!(
         second_line.concretization_subject_kind,
         prefloor.projection_subject_kind
@@ -178,11 +179,13 @@ fn assert_second_line_matches_prefloor(
             assert!(second_line.concretization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(second_line
-                .concretization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("model-check second line"));
+            assert!(
+                second_line
+                    .concretization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("model-check second line")
+            );
         }
     }
 }
@@ -268,8 +271,7 @@ fn model_check_second_line_concretization_reaches_typed_runtime_prototype() {
 
 #[test]
 fn model_check_second_line_concretization_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -298,8 +300,7 @@ fn model_check_second_line_concretization_reaches_order_handoff_runtime_prototyp
 
 #[test]
 fn model_check_second_line_concretization_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -327,7 +328,8 @@ fn model_check_second_line_concretization_reaches_stale_reconnect_runtime_protot
 }
 
 #[test]
-fn model_check_second_line_concretization_reaches_delegated_provider_runtime_prototype_without_collapsing_fairness_line() {
+fn model_check_second_line_concretization_reaches_delegated_provider_runtime_prototype_without_collapsing_fairness_line()
+ {
     let sample_path =
         order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
     let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(

@@ -1,15 +1,12 @@
 use std::path::PathBuf;
 
-use mir_semantics::{
-    BatchRunSummary, BundleExecutionFailure, FixtureRuntimeRequirement,
-};
+use mir_semantics::{BatchRunSummary, BundleExecutionFailure, FixtureRuntimeRequirement};
 
 #[path = "../examples/support/current_l2_detached_aggregate_support.rs"]
 mod current_l2_detached_aggregate_support;
 
 use current_l2_detached_aggregate_support::{
-    build_detached_aggregate_artifact, BundleFailureKindCountArtifact,
-    HostPlanCoverageFailureRef,
+    BundleFailureKindCountArtifact, HostPlanCoverageFailureRef, build_detached_aggregate_artifact,
 };
 
 fn coverage_failure(path: &str, fixture_id: &str) -> BundleExecutionFailure {
@@ -59,9 +56,8 @@ fn detached_aggregate_support_keeps_anchor_refs_and_typed_count() {
         artifact.detached_noncore.host_plan_coverage_failures[0],
         HostPlanCoverageFailureRef {
             fixture_id: "e3_option_admit_chain".to_string(),
-            fixture_path:
-                "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json"
-                    .to_string(),
+            fixture_path: "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json"
+                .to_string(),
             runtime_requirement: "runtime-with-host-plan",
         }
     );
@@ -97,6 +93,11 @@ fn detached_aggregate_support_omits_typed_rows_when_no_coverage_failure_exists()
         artifact.summary_core.bundle_failure_kind_counts_scope,
         "migrated-kinds-only"
     );
-    assert!(artifact.detached_noncore.host_plan_coverage_failures.is_empty());
+    assert!(
+        artifact
+            .detached_noncore
+            .host_plan_coverage_failures
+            .is_empty()
+    );
     assert!(artifact.summary_core.bundle_failure_kind_counts.is_empty());
 }

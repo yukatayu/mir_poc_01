@@ -127,19 +127,20 @@ fn assert_actual_adoption_matches_prior_floors(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("witness/provider route actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("witness/provider route actual adoption")
+            );
         }
     }
 }
 
 #[test]
 fn witness_provider_route_actual_adoption_reaches_late_join_witness_sample() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let public_shape_actual_adoption =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_actual_adoption(
             sample_path.to_str().unwrap(),
@@ -198,8 +199,7 @@ fn witness_provider_route_actual_adoption_reaches_late_join_witness_sample() {
 
 #[test]
 fn witness_provider_route_actual_adoption_reaches_stale_reconnect_baseline() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let public_shape_actual_adoption =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_actual_adoption(
             sample_path.to_str().unwrap(),

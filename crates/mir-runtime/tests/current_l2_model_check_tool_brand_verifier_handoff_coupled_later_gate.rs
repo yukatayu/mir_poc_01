@@ -139,11 +139,13 @@ fn assert_coupled_later_gate_matches_public_checker_preview(
             assert!(coupled_gate.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(coupled_gate
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("model-check tool-brand / verifier-handoff coupled later gate"));
+            assert!(
+                coupled_gate
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("model-check tool-brand / verifier-handoff coupled later gate")
+            );
         }
     }
 }
@@ -183,7 +185,7 @@ fn model_check_tool_brand_verifier_handoff_coupled_later_gate_reaches_static_und
 
 #[test]
 fn model_check_tool_brand_verifier_handoff_coupled_later_gate_keeps_guarded_prototype_as_not_reached()
-{
+ {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
@@ -207,8 +209,7 @@ fn model_check_tool_brand_verifier_handoff_coupled_later_gate_keeps_guarded_prot
 }
 
 #[test]
-fn model_check_tool_brand_verifier_handoff_coupled_later_gate_reaches_typed_runtime_prototype()
-{
+fn model_check_tool_brand_verifier_handoff_coupled_later_gate_reaches_typed_runtime_prototype() {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
@@ -242,9 +243,8 @@ fn model_check_tool_brand_verifier_handoff_coupled_later_gate_reaches_typed_runt
 
 #[test]
 fn model_check_tool_brand_verifier_handoff_coupled_later_gate_reaches_order_handoff_runtime_prototype()
-{
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+ {
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let artifact_preview =
         build_current_l2_source_sample_model_check_public_checker_artifact_preview_actualization(
             sample_path.to_str().unwrap(),
@@ -277,7 +277,7 @@ fn model_check_tool_brand_verifier_handoff_coupled_later_gate_reaches_order_hand
 
 #[test]
 fn model_check_tool_brand_verifier_handoff_coupled_later_gate_reaches_delegated_provider_runtime_prototype()
-{
+ {
     let sample_path =
         order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
     let artifact_preview =

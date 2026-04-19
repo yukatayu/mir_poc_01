@@ -157,11 +157,13 @@ fn assert_probe_matches_prefloor_and_second_line(
             assert!(probe.probe_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(probe
-                .probe_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("property/tool-seam"));
+            assert!(
+                probe
+                    .probe_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("property/tool-seam")
+            );
         }
     }
 }
@@ -265,8 +267,7 @@ fn model_check_property_tool_seam_probe_reaches_typed_runtime_prototype() {
 
 #[test]
 fn model_check_property_tool_seam_probe_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -301,8 +302,7 @@ fn model_check_property_tool_seam_probe_reaches_order_handoff_runtime_prototype(
 
 #[test]
 fn model_check_property_tool_seam_probe_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -336,7 +336,8 @@ fn model_check_property_tool_seam_probe_reaches_stale_reconnect_runtime_prototyp
 }
 
 #[test]
-fn model_check_property_tool_seam_probe_reaches_delegated_provider_runtime_prototype_without_collapsing_fairness_line() {
+fn model_check_property_tool_seam_probe_reaches_delegated_provider_runtime_prototype_without_collapsing_fairness_line()
+ {
     let sample_path =
         order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
     let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(

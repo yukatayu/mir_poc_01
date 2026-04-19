@@ -6,8 +6,7 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus,
-    CurrentL2SourceSampleTheoremContractShapeThreshold,
+    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleTheoremContractShapeThreshold,
     build_current_l2_source_sample_theorem_contract_shape_threshold,
 };
 
@@ -135,16 +134,21 @@ fn theorem_contract_shape_threshold_keeps_guarded_prototype_as_not_reached() {
     )
     .unwrap();
 
-    assert_eq!(threshold.source_report.sample_id, "p05-dice-owner-guarded-chain");
+    assert_eq!(
+        threshold.source_report.sample_id,
+        "p05-dice-owner-guarded-chain"
+    );
     assert_eq!(
         threshold.threshold_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(threshold
-        .threshold_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("theorem contract shape threshold"));
+    assert!(
+        threshold
+            .threshold_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("theorem contract shape threshold")
+    );
     assert!(threshold.transport_shape_refs.is_empty());
     assert!(threshold.public_contract_shape_refs.is_empty());
     assert!(threshold.threshold_default_refs.is_empty());
@@ -180,8 +184,7 @@ fn theorem_contract_shape_threshold_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_contract_shape_threshold_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let threshold = build_current_l2_source_sample_theorem_contract_shape_threshold(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -201,8 +204,7 @@ fn theorem_contract_shape_threshold_reaches_order_handoff_runtime_prototype() {
 
 #[test]
 fn theorem_contract_shape_threshold_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let threshold = build_current_l2_source_sample_theorem_contract_shape_threshold(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

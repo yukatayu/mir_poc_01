@@ -40,8 +40,8 @@
   typed / theorem / model-check / order / memory / syntax / modality を
   docs-first comparison と boundary planning で進める
 - current line:
-  `Macro 5 post-runnable mixed-gate actualization floor fixed + reopen package active`
-  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...510` deeper-theory / reserve / mixed-gate actualization / actual-adoption floor は close 済みである。corrected runnable version の current floorは already reached であり、next self-driven line は order-handoff serial-scope reserve surface / witness-provider trace alignment / theorem actual Lean execution availability probe と読む）
+  `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed`
+  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor は close 済みである。corrected runnable floor は current mapped corpus で reached 済みであり、theorem public-seam compression / model-check public-seam compression / order-handoff-witness-provider final public-seam compression / representative theorem quartet actual Lean execution も close 済み、next active line は actual Lean execution hardening / helper orchestration と later mixed/user-spec residual と読む）
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定した上で、post-runnable mixed-gate package を narrow に閉じる
 

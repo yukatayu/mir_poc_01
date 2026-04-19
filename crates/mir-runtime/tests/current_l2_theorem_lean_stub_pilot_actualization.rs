@@ -6,8 +6,7 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus,
-    CurrentL2SourceSampleTheoremLeanStubPilotActualization,
+    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleTheoremLeanStubPilotActualization,
     CurrentL2SourceSampleTheoremProverBindingPreflight,
     build_current_l2_source_sample_theorem_lean_stub_pilot_actualization,
     build_current_l2_source_sample_theorem_prover_binding_preflight,
@@ -115,11 +114,13 @@ fn assert_pilot_matches_preflight(
             }
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(pilot
-                .pilot_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("Lean stub"));
+            assert!(
+                pilot
+                    .pilot_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("Lean stub")
+            );
             assert!(pilot.lean_stub_artifacts.is_empty());
         }
     }
@@ -227,8 +228,7 @@ fn theorem_lean_stub_pilot_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_lean_stub_pilot_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let preflight = build_current_l2_source_sample_theorem_prover_binding_preflight(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -266,8 +266,7 @@ fn theorem_lean_stub_pilot_reaches_order_handoff_runtime_prototype() {
 
 #[test]
 fn theorem_lean_stub_pilot_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let preflight = build_current_l2_source_sample_theorem_prover_binding_preflight(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

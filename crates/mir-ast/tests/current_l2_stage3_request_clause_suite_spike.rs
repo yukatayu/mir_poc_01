@@ -1,19 +1,18 @@
 #[allow(dead_code)]
-#[path = "support/current_l2_stage3_request_clause_suite_spike_support.rs"]
-mod current_l2_stage3_request_clause_suite_spike_support;
-#[allow(dead_code)]
 #[path = "support/current_l2_stage3_predicate_fragment_spike_support.rs"]
 mod current_l2_stage3_predicate_fragment_spike_support;
+#[allow(dead_code)]
+#[path = "support/current_l2_stage3_request_clause_suite_spike_support.rs"]
+mod current_l2_stage3_request_clause_suite_spike_support;
 
 use mir_ast::current_l2::parse_stage3_minimal_predicate_fragment_text;
 
 use current_l2_stage3_predicate_fragment_spike_support::{
-    load_fixture_request_clause_fragment, load_fixture_request_contract_subset,
-    Stage3RequestContractSubset,
+    Stage3RequestContractSubset, load_fixture_request_clause_fragment,
+    load_fixture_request_contract_subset,
 };
 use current_l2_stage3_request_clause_suite_spike_support::{
-    extract_stage3_request_clause_suite,
-    Stage3RequestClauseSuite,
+    Stage3RequestClauseSuite, extract_stage3_request_clause_suite,
 };
 
 const SINGLE_LINE_REQUIRE_ENSURE_INPUT: &str = r#"
@@ -127,13 +126,9 @@ fn stage3_request_clause_suite_spike_matches_fixture_fragments_for_mixed_suite()
             .expect("ensure slot should be present"),
     )
     .expect("ensure fragment should parse");
-    let ensure_expected = load_fixture_request_clause_fragment(
-        "e10-perform-on-ensure-failure.json",
-        0,
-        "ensure",
-        0,
-    )
-    .expect("fixture ensure fragment should load");
+    let ensure_expected =
+        load_fixture_request_clause_fragment("e10-perform-on-ensure-failure.json", 0, "ensure", 0)
+            .expect("fixture ensure fragment should load");
 
     assert_eq!(require_actual, require_expected);
     assert_eq!(ensure_actual, ensure_expected);
@@ -239,9 +234,8 @@ fn stage3_request_clause_suite_spike_matches_fixture_contract_subset_for_perform
         .expect("suite spike should extract single-line require/ensure slots");
     let actual = parse_suite_contract_subset(&suite)
         .expect("suite spike should parse extracted slots into a contract subset");
-    let expected =
-        load_fixture_request_contract_subset("e10-perform-on-ensure-failure.json", 0)
-            .expect("fixture contract subset should load");
+    let expected = load_fixture_request_contract_subset("e10-perform-on-ensure-failure.json", 0)
+        .expect("fixture contract subset should load");
 
     assert_eq!(actual, expected);
 }

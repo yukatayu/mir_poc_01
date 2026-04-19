@@ -48,7 +48,10 @@ fn lean_theorem_stub_support_emits_runtime_stub() {
         "e2_try_fallback__rollback_cut_non_interference"
     );
     assert!(stub.source_text.contains("namespace CurrentL2"));
-    assert!(stub.source_text.contains("theorem e2_try_fallback__rollback_cut_non_interference"));
+    assert!(
+        stub.source_text
+            .contains("theorem e2_try_fallback__rollback_cut_non_interference")
+    );
     assert!(stub.source_text.contains("sorry"));
 }
 

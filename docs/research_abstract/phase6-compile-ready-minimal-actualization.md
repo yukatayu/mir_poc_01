@@ -51,8 +51,8 @@ Phase 6 はここで終わりではなく、
 - theory-lab lane
 - reserve integration lane
 を並走させる継続 phase として読む。
-current first-line integration queue 自体は close 済みだが、representative trace-alignment / reserve surface package を current reopen queue に戻している。corrected runnable version の current floorは reached である。
-- current principal self-driven reopen package は none である。
+current first-line integration queue 自体は close 済みであり、reserve surface / witness-provider trace alignment / local Lean availability probe / public-seam compression も close 済みである。corrected runnable version の current floor は reached である。
+- current principal self-driven line は representative theorem quartet actual execution 後の hardening を主軸に narrow 化している。
 - corrected prototype tranche close を theory-lab solved と読まない
 - verifier-boundary / typed-theorem-model-check line は `specs/examples/459` で current first-line integration close と読む
 - order / handoff line は `specs/examples/460` で current first-line integration close と読む
@@ -71,6 +71,10 @@ current first-line integration queue 自体は close 済みだが、representati
 - theorem result-object route actual adoption は `specs/examples/500` で同期済みと読む。
 - theorem final public-contract reopen threshold は `specs/examples/506` で同期済みと読む。
 - theorem Lean-first non-production stub pilot actualization、repo-local artifact-conformance bridge、representative trace-alignment bridge は `specs/examples/508`、`509`、`510` で同期済みと読む。
+- order-handoff serial-scope reserve surface、witness/provider emitted-contract representative trace-alignment bridge、theorem actual Lean execution availability probe は `specs/examples/511`、`512`、`513` で同期済みと読む。
+- theorem public-seam compression と order-handoff / witness-provider final public-seam compression は `specs/examples/514`、`515` で同期済みと読む。
+- theorem toolchain probe / reopen manifest、model-check public-seam compression、theorem actual Lean execution narrow probe は `specs/examples/516`、`517`、`518` で同期済みと読む。
+- theorem actual Lean execution representative prototype widening は `specs/examples/519` で同期済みと読む。
 - theorem proof-object schema / prover-brand coupled later gate は `specs/examples/494` で同期済みと読む。
 - model-check final public-contract reopen threshold は `specs/examples/507` で同期済みと読む。
 - model-check row-local property / checker-boundary actual adoption は `specs/examples/488` で同期済みと読む。

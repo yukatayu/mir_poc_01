@@ -35,7 +35,10 @@ fn assert_vertical_slice(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(slice.slice_status, CurrentL2EmittedArtifactRouteStatus::Reached);
+    assert_eq!(
+        slice.slice_status,
+        CurrentL2EmittedArtifactRouteStatus::Reached
+    );
     assert!(slice.slice_guard_reason.is_none());
     assert_eq!(
         slice.profile_axis_refs,
@@ -104,8 +107,7 @@ fn assert_vertical_slice(
 
 #[test]
 fn authoritative_room_vertical_slice_actualization_reaches_late_join_history_profile() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let slice = build_current_l2_source_sample_authoritative_room_vertical_slice_actualization(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -165,15 +167,17 @@ fn authoritative_room_vertical_slice_actualization_reaches_late_join_history_pro
 
 #[test]
 fn authoritative_room_vertical_slice_actualization_reaches_stale_reconnect_profile() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let slice = build_current_l2_source_sample_authoritative_room_vertical_slice_actualization(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
     )
     .unwrap();
 
-    assert_eq!(slice.source_report.sample_id, "p08-dice-stale-reconnect-refresh");
+    assert_eq!(
+        slice.source_report.sample_id,
+        "p08-dice-stale-reconnect-refresh"
+    );
     assert_vertical_slice(
         &slice,
         &[
@@ -230,16 +234,21 @@ fn authoritative_room_vertical_slice_actualization_keeps_guarded_chain_as_not_re
     )
     .unwrap();
 
-    assert_eq!(slice.source_report.sample_id, "p05-dice-owner-guarded-chain");
+    assert_eq!(
+        slice.source_report.sample_id,
+        "p05-dice-owner-guarded-chain"
+    );
     assert_eq!(
         slice.slice_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(slice
-        .slice_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("authoritative-room vertical slice"));
+    assert!(
+        slice
+            .slice_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("authoritative-room vertical slice")
+    );
     assert!(slice.profile_axis_refs.is_empty());
     assert!(slice.relation_refs.is_empty());
     assert!(slice.authority_handoff_refs.is_empty());

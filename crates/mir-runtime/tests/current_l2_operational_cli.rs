@@ -143,9 +143,11 @@ fn operational_cli_rejects_missing_host_plan_flag() {
     .unwrap_err();
 
     assert_eq!(error.exit_code(), 2);
-    assert!(error
-        .to_string()
-        .contains("missing --host-plan <path> and no adjacent host plan was found"));
+    assert!(
+        error
+            .to_string()
+            .contains("missing --host-plan <path> and no adjacent host plan was found")
+    );
     assert!(error.to_string().contains(
         "mir-current-l2 run-source-sample <sample-or-path> [--host-plan <path>] --format pretty|json"
     ));
@@ -261,10 +263,12 @@ fn operational_cli_json_reports_guarded_verification_preview_for_prototype_sampl
         value["verification_preview"]["proof_notebook_review_unit_obligations"],
         Value::Array(Vec::new())
     );
-    assert!(value["verification_preview"]["guard_reason"]
-        .as_str()
-        .unwrap()
-        .contains("rollback or atomic-cut evidence"));
+    assert!(
+        value["verification_preview"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("rollback or atomic-cut evidence")
+    );
     assert_eq!(
         value["artifact_preview"]["proof_notebook_review_units"],
         Value::Array(Vec::new())

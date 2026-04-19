@@ -1,14 +1,14 @@
 use std::{env, fs, path::PathBuf, process};
 
 #[allow(dead_code)]
-#[path = "support/current_l2_lean_theorem_stub_support.rs"]
-mod current_l2_lean_theorem_stub_support;
+#[path = "support/current_l2_detached_bundle_support.rs"]
+mod current_l2_detached_bundle_support;
 #[allow(dead_code)]
 #[path = "support/current_l2_formal_hook_support.rs"]
 mod current_l2_formal_hook_support;
 #[allow(dead_code)]
-#[path = "support/current_l2_detached_bundle_support.rs"]
-mod current_l2_detached_bundle_support;
+#[path = "support/current_l2_lean_theorem_stub_support.rs"]
+mod current_l2_lean_theorem_stub_support;
 #[allow(dead_code)]
 #[path = "support/current_l2_proof_notebook_review_unit_support.rs"]
 mod current_l2_proof_notebook_review_unit_support;

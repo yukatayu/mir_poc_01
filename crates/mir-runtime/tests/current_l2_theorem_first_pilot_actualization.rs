@@ -84,8 +84,14 @@ fn assert_pilot_matches_preview_route(
             .as_ref()
             .map(|artifact| artifact.subject_ref.clone())
     );
-    assert_eq!(pilot.principal_review_unit_refs, expected_review_unit_refs(route));
-    assert_eq!(pilot.symbolic_evidence_refs, expected_symbolic_evidence_refs(route));
+    assert_eq!(
+        pilot.principal_review_unit_refs,
+        expected_review_unit_refs(route)
+    );
+    assert_eq!(
+        pilot.symbolic_evidence_refs,
+        expected_symbolic_evidence_refs(route)
+    );
     assert_eq!(
         pilot.repo_local_emitted_artifact_refs,
         expected_repo_local_artifact_refs
@@ -122,11 +128,13 @@ fn assert_pilot_matches_preview_route(
             assert!(pilot.pilot_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(pilot
-                .pilot_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("runtime_try_cut_cluster"));
+            assert!(
+                pilot
+                    .pilot_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("runtime_try_cut_cluster")
+            );
         }
     }
 }
@@ -212,8 +220,7 @@ fn theorem_first_pilot_actualization_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_first_pilot_actualization_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -241,8 +248,7 @@ fn theorem_first_pilot_actualization_reaches_order_handoff_runtime_prototype() {
 
 #[test]
 fn theorem_first_pilot_actualization_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),

@@ -44,6 +44,10 @@ fn assert_coupled_later_gate_matches_public_shape_adoption(
         public_shape_adoption.profile_axis_refs
     );
     assert_eq!(
+        coupled_later_gate.repo_local_emitted_artifact_refs,
+        public_shape_adoption.repo_local_emitted_artifact_refs
+    );
+    assert_eq!(
         coupled_later_gate.witness_contract_candidate_refs,
         expected_witness_contract_candidate_refs
             .iter()
@@ -86,8 +90,7 @@ fn assert_coupled_later_gate_matches_public_shape_adoption(
                     .to_string(),
                 "public_contract_coupled_later_default:witness_provider_routes_noncollapsed"
                     .to_string(),
-                "public_contract_coupled_later_default:combined_public_contract_later"
-                    .to_string(),
+                "public_contract_coupled_later_default:combined_public_contract_later".to_string(),
                 "public_contract_coupled_later_default:final_emitted_handoff_contract_later"
                     .to_string(),
             ],
@@ -126,19 +129,20 @@ fn assert_coupled_later_gate_matches_public_shape_adoption(
             assert!(coupled_later_gate.coupled_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(coupled_later_gate
-                .coupled_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("witness/provider emitted-contract coupled later gate"));
+            assert!(
+                coupled_later_gate
+                    .coupled_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("witness/provider emitted-contract coupled later gate")
+            );
         }
     }
 }
 
 #[test]
 fn witness_provider_emitted_contract_coupled_later_gate_reaches_late_join_witness_sample() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let public_shape_adoption =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_actual_adoption(
             sample_path.to_str().unwrap(),
@@ -183,8 +187,7 @@ fn witness_provider_emitted_contract_coupled_later_gate_reaches_late_join_witnes
 
 #[test]
 fn witness_provider_emitted_contract_coupled_later_gate_reaches_stale_reconnect_baseline() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let public_shape_adoption =
         build_current_l2_source_sample_witness_provider_artifact_public_shape_actual_adoption(
             sample_path.to_str().unwrap(),

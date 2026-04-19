@@ -59,7 +59,8 @@ fn emitted_artifact_wiring_reaches_static_review_units_and_model_check_carriers(
 }
 
 #[test]
-fn emitted_artifact_wiring_reaches_underdeclared_lineage_static_review_units_and_model_check_carriers() {
+fn emitted_artifact_wiring_reaches_underdeclared_lineage_static_review_units_and_model_check_carriers()
+ {
     let route = build_current_l2_source_sample_emitted_artifact_route(
         "e5-underdeclared-lineage",
         FixtureHostPlan::default(),
@@ -80,7 +81,8 @@ fn emitted_artifact_wiring_reaches_underdeclared_lineage_static_review_units_and
 }
 
 #[test]
-fn emitted_artifact_wiring_reaches_underdeclared_target_static_review_units_and_model_check_carriers() {
+fn emitted_artifact_wiring_reaches_underdeclared_target_static_review_units_and_model_check_carriers()
+ {
     let route = build_current_l2_source_sample_emitted_artifact_route(
         "e12-underdeclared-target-missing",
         FixtureHostPlan::default(),
@@ -91,7 +93,10 @@ fn emitted_artifact_wiring_reaches_underdeclared_target_static_review_units_and_
         route.formal_hook_status,
         CurrentL2EmittedArtifactRouteStatus::Reached
     );
-    assert_eq!(route.source_report.sample_id, "e12-underdeclared-target-missing");
+    assert_eq!(
+        route.source_report.sample_id,
+        "e12-underdeclared-target-missing"
+    );
     assert_eq!(
         route.formal_hook_artifact.as_ref().unwrap().subject_kind,
         "fixture_static_cluster"

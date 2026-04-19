@@ -14,8 +14,8 @@
     `Macro 4 active on fixed authored/prototype floor`
     （authored sixteen と corrected prototype nonet は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
   - theory-lab lane:
-    `Macro 5 post-runnable mixed-gate actualization floor fixed`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...510` deeper-theory / reserve / mixed-gate actualization / actual-adoption floor が揃った。corrected runnable version の current floorは already reached であり、current principal self-driven queue は Package 46 以降へ narrow に戻したが、later mixed gate と user-spec residual は残る）
+    `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed`
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization / actual-adoption floor が揃った。corrected runnable version の current floor は already reached であり、Package 46〜54 は close 済み、current principal active line は actual Lean execution hardening / helper orchestration と later mixed gate / user-spec residual に narrow 化した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、packaging / FFI / exhaustive final catalog は still later に残る）
@@ -24,7 +24,10 @@
   - order/handoff family: `p01 / p02 / p04 / p05 / p07 / p08 / p09`
   - dynamic attach/detach family: `p03`
   - typed/theorem/model-check family: `p06`
-- current principal self-driven reopen package は none である。
+- current principal self-driven line は conditional residual に入った。
+  - actual-execution hardening: representative theorem quartet actual execution の後段 helper/CLI orchestration / broader coverage
+  - later mixed gate: final public theorem/model-check/order-handoff/shared-space seams
+  - user-spec residual: packaging / FFI / exhaustive final catalog / broader app target
 
 ## macro phase reading
 
@@ -35,8 +38,8 @@
 | `Macro 2` parser-free substrate | late | self-driven |
 | `Macro 3` compile-ready minimal actualization | late | self-driven |
 | `Macro 4` executable fixed-subset expansion | active on fixed authored/prototype floor | self-driven |
-| `Macro 5` typed / theorem / model-check / order-handoff line | near-end actual-adoption closeout | self-driven |
-| `Macro 6` shared-space / room-profile / runtime evolution | minimal working subset actual default | self-driven up to exhaustive catalog gate |
+| `Macro 5` typed / theorem / model-check / order-handoff line | post-runnable actual-adoption floor fixed + residual-gate compression closed | self-driven |
+| `Macro 6` shared-space / room-profile / runtime evolution | minimal working subset actual default + public-seam compression closed | self-driven up to exhaustive catalog gate |
 | `Macro 7` toolchain / backend / host-facing integration | mixed with repo-local near-end success criteria | self-driven up to packaging / FFI gate |
 | `Macro 8` domain / application realization | narrow authoritative-room scenario selected | mixed beyond first scenario |
 
@@ -121,6 +124,15 @@
 - theorem Lean-first non-production stub pilot actualization package は `specs/examples/508` を current external-theorem pilot anchor にする。
 - theorem review-unit to Lean-stub repo-local artifact-conformance bridge package は `specs/examples/509` を current theorem second-stage conformance anchor にする。
 - theorem Lean-stub representative trace-alignment bridge package は `specs/examples/510` を current theorem representative trace-alignment anchor にする。
+- order-handoff serial-scope reserve surface package は `specs/examples/511` を current reserve-surface anchor にする。
+- witness/provider emitted-contract representative trace-alignment bridge package は `specs/examples/512` を current shared-space representative trace-alignment anchor にする。
+- theorem actual Lean execution availability probe package は `specs/examples/513` を current local-environment stop-line anchor にする。
+- theorem public seam compression after local Lean-unavailable probe package は `specs/examples/514` を current theorem residual-matrix anchor にする。
+- order-handoff / witness-provider final public seam compression after reserve actualizations package は `specs/examples/515` を current Problem 2 / shared-space residual-matrix anchor にする。
+- theorem actual Lean execution toolchain probe and reopen manifest package は `specs/examples/516` を current toolchain-ready anchor にする。
+- model-check public seam compression after threshold and probe package は `specs/examples/517` を current model-check residual-matrix anchor にする。
+- theorem actual Lean execution narrow probe after global toolchain install package は `specs/examples/518` を current representative static actual-execution anchor にする。
+- theorem actual Lean execution representative prototype widening package は `specs/examples/519` を current representative prototype actual-execution anchor にする。
 - theorem proof-object schema / prover-brand coupled-later package は `specs/examples/494` を current anchor にする。
 - model-check public checker artifact / migration coupled-later package は `specs/examples/498` を current anchor にする。
 - model-check checker-artifact route actual adoption package は `specs/examples/501` を current anchor にする。
@@ -140,7 +152,7 @@
 - model-check property/tool-brand threshold default package は `specs/examples/482` を current anchor にする。
 - witness/provider/artifact public-shape threshold default package は `specs/examples/483` を current anchor にする。
 - order-handoff surface/artifact threshold default package は `specs/examples/484` を current anchor にする。
-- current self-driven queue は close 済みではなく、order-handoff serial-scope reserve surface / witness-provider trace alignment / theorem actual Lean execution availability probe を next reopen package に置く。final public witness schema / final public provider receipt schema / exhaustive final catalog は still later に残す。
+- theorem public-seam compression、model-check public-seam compression、order-handoff / witness-provider final public-seam compression、representative theorem quartet actual Lean execution は close 済みである。final public witness schema / final public provider receipt schema / exhaustive final catalog は still later に残す。
 
 ## biggest later gates
 

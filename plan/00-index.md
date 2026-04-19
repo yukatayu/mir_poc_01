@@ -51,8 +51,8 @@
 - 近接運用は 3 lane で読むのが自然である。
   - execution lane: `Macro 4 active on fixed authored/prototype floor`
     （current-l2 authored sixteen、corrected prototype nonet、runner / CLI / regression floor は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
-  - theory-lab lane: `Macro 5 post-runnable mixed-gate actualization floor fixed + reopen package active`
-    （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...510` deeper-theory / reserve / mixed-gate actualization / actual-adoption floor まで close 済みである。corrected runnable version の current floorは already reached であり、current principal self-driven queue は Package 46 以降へ narrow に戻したが、later mixed gate と user-spec residual は残る）
+  - theory-lab lane: `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed`
+    （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor まで close 済みである。corrected runnable floor は current mapped corpus で reached 済みであり、current remaining active line は actual Lean execution hardening / helper orchestration と later mixed/user-spec residual に narrow 化した）
   - reserve integration lane: `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （shared-space fairness / replay final operational profile は minimal working subset default まで current docs に上がったが、installed-binary / packaging success criteria と shared-space final catalog は mixed gate / user-spec-required に残る）
 - 型 / 定理証明 / モデル検査 / ordering は mainline に無理に混ぜず、detail-side research program として扱う。

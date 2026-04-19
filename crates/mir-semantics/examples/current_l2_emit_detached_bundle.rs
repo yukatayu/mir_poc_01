@@ -1,8 +1,6 @@
 use std::{env, fs, path::PathBuf, process};
 
-use mir_semantics::{
-    load_bundle_from_fixture_path, run_bundle,
-};
+use mir_semantics::{load_bundle_from_fixture_path, run_bundle};
 #[path = "support/current_l2_detached_bundle_support.rs"]
 mod current_l2_detached_bundle_support;
 

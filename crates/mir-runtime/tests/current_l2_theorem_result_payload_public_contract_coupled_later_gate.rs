@@ -46,7 +46,10 @@ fn assert_coupled_later_gate_matches_prior_floors(
         coupled_gate.actualization_status,
         result_object_preview.actualization_status
     );
-    assert_eq!(coupled_gate.actualization_status, proof_object_gate.actualization_status);
+    assert_eq!(
+        coupled_gate.actualization_status,
+        proof_object_gate.actualization_status
+    );
     assert_eq!(
         coupled_gate.actualization_subject_kind,
         result_object_preview.actualization_subject_kind
@@ -112,8 +115,7 @@ fn assert_coupled_later_gate_matches_prior_floors(
         match coupled_gate.actualization_status {
             CurrentL2EmittedArtifactRouteStatus::Reached => vec![
                 "theorem_result_payload_default:notebook_consumer_object_first".to_string(),
-                "theorem_result_payload_default:consumer_shaped_payload_candidate_only"
-                    .to_string(),
+                "theorem_result_payload_default:consumer_shaped_payload_candidate_only".to_string(),
                 "theorem_result_payload_default:proof_object_schema_prover_brand_adjacent_keep"
                     .to_string(),
                 "theorem_result_payload_default:final_public_verifier_contract_later".to_string(),
@@ -151,23 +153,25 @@ fn assert_coupled_later_gate_matches_prior_floors(
             assert!(coupled_gate.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(coupled_gate
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("theorem result/payload public-contract coupled later gate"));
+            assert!(
+                coupled_gate
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("theorem result/payload public-contract coupled later gate")
+            );
         }
     }
 }
 
 #[test]
-fn theorem_result_payload_public_contract_coupled_later_gate_reaches_static_underdeclared_sample()
-{
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
+fn theorem_result_payload_public_contract_coupled_later_gate_reaches_static_underdeclared_sample() {
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
     let proof_object_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             "e5-underdeclared-lineage",
@@ -202,13 +206,14 @@ fn theorem_result_payload_public_contract_coupled_later_gate_reaches_static_unde
 
 #[test]
 fn theorem_result_payload_public_contract_coupled_later_gate_keeps_guarded_prototype_as_not_reached()
-{
+ {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -234,11 +239,12 @@ fn theorem_result_payload_public_contract_coupled_later_gate_keeps_guarded_proto
 #[test]
 fn theorem_result_payload_public_contract_coupled_later_gate_reaches_typed_runtime_prototype() {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -273,14 +279,14 @@ fn theorem_result_payload_public_contract_coupled_later_gate_reaches_typed_runti
 
 #[test]
 fn theorem_result_payload_public_contract_coupled_later_gate_reaches_order_handoff_runtime_prototype()
-{
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+ {
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),
@@ -314,15 +320,15 @@ fn theorem_result_payload_public_contract_coupled_later_gate_reaches_order_hando
 }
 
 #[test]
-fn theorem_result_payload_public_contract_coupled_later_gate_reaches_stale_reconnect_runtime_prototype(
-) {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let result_object_preview = build_current_l2_source_sample_theorem_result_object_preview_actualization(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+fn theorem_result_payload_public_contract_coupled_later_gate_reaches_stale_reconnect_runtime_prototype()
+ {
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let result_object_preview =
+        build_current_l2_source_sample_theorem_result_object_preview_actualization(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
     let proof_object_gate =
         build_current_l2_source_sample_theorem_proof_object_schema_prover_brand_coupled_later_gate(
             sample_path.to_str().unwrap(),

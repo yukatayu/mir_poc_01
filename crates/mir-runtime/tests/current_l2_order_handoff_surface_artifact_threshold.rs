@@ -6,8 +6,7 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus,
-    CurrentL2SourceSampleOrderHandoffSurfaceArtifactThreshold,
+    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleOrderHandoffSurfaceArtifactThreshold,
     build_current_l2_source_sample_order_handoff_surface_artifact_threshold,
 };
 
@@ -81,8 +80,7 @@ fn assert_threshold_reached(
             "compare_floor:current_l2.authoritative_room.vertical_slice".to_string(),
             "compare_floor:current_l2.experimental_order_handoff_surface".to_string(),
             "compare_floor:current_l2.experimental_stage_block_surface".to_string(),
-            "compare_floor:current_l2.witness_provider_artifact.public_shape_threshold"
-                .to_string(),
+            "compare_floor:current_l2.witness_provider_artifact.public_shape_threshold".to_string(),
             "compare_floor:current_l2.order_handoff.surface_artifact_threshold".to_string(),
         ]
     );
@@ -122,8 +120,7 @@ fn assert_threshold_reached(
 
 #[test]
 fn order_handoff_surface_artifact_threshold_reaches_late_join_default() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let threshold = build_current_l2_source_sample_order_handoff_surface_artifact_threshold(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -175,15 +172,17 @@ fn order_handoff_surface_artifact_threshold_reaches_late_join_default() {
 
 #[test]
 fn order_handoff_surface_artifact_threshold_reaches_stale_reconnect_default() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let threshold = build_current_l2_source_sample_order_handoff_surface_artifact_threshold(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
     )
     .unwrap();
 
-    assert_eq!(threshold.source_report.sample_id, "p08-dice-stale-reconnect-refresh");
+    assert_eq!(
+        threshold.source_report.sample_id,
+        "p08-dice-stale-reconnect-refresh"
+    );
     assert_threshold_reached(
         &threshold,
         &[
@@ -232,16 +231,21 @@ fn order_handoff_surface_artifact_threshold_keeps_guarded_chain_not_reached() {
     )
     .unwrap();
 
-    assert_eq!(threshold.source_report.sample_id, "p05-dice-owner-guarded-chain");
+    assert_eq!(
+        threshold.source_report.sample_id,
+        "p05-dice-owner-guarded-chain"
+    );
     assert_eq!(
         threshold.threshold_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(threshold
-        .threshold_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("order-handoff surface/artifact threshold"));
+    assert!(
+        threshold
+            .threshold_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("order-handoff surface/artifact threshold")
+    );
     assert!(threshold.profile_axis_refs.is_empty());
     assert!(threshold.principal_surface_lines.is_empty());
     assert!(threshold.secondary_surface_lines.is_empty());
@@ -249,8 +253,10 @@ fn order_handoff_surface_artifact_threshold_keeps_guarded_chain_not_reached() {
     assert!(threshold.threshold_default_refs.is_empty());
     assert_eq!(
         threshold.compare_floor_refs,
-        vec!["compare_floor:current_l2.order_handoff.surface_artifact_threshold_guard_only"
-            .to_string()]
+        vec![
+            "compare_floor:current_l2.order_handoff.surface_artifact_threshold_guard_only"
+                .to_string()
+        ]
     );
     assert_eq!(
         threshold.guard_refs,

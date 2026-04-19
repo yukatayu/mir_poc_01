@@ -636,7 +636,8 @@ pub fn select_bundles_from_discovery(
         }
     }
 
-    if matches!(mode, SelectionMode::SingleFixture(_)) && bundles.is_empty() && failures.is_empty() {
+    if matches!(mode, SelectionMode::SingleFixture(_)) && bundles.is_empty() && failures.is_empty()
+    {
         return Err(InterpreterError::InvalidProgram(
             "selected fixture was not found".to_string(),
         ));
@@ -725,9 +726,9 @@ impl ProfileCatalog {
             .iter()
             .find(|spec| spec.alias == alias)
             .map(|spec| SelectionProfile::new(spec.alias, spec.build_request()))
-            .ok_or_else(|| InterpreterError::InvalidProgram(format!(
-                "unknown named profile alias: {alias}"
-            )))
+            .ok_or_else(|| {
+                InterpreterError::InvalidProgram(format!("unknown named profile alias: {alias}"))
+            })
     }
 }
 
@@ -865,10 +866,7 @@ fn bundle_matches_selection(bundle: &FixtureBundle, mode: &SelectionMode) -> boo
     }
 }
 
-fn failure_matches_selection(
-    failure: &BundleDiscoveryFailure,
-    mode: &SelectionMode,
-) -> bool {
+fn failure_matches_selection(failure: &BundleDiscoveryFailure, mode: &SelectionMode) -> bool {
     match mode {
         SelectionMode::RuntimeOnly => {
             failure.runtime_requirement.is_none()
@@ -1062,8 +1060,7 @@ impl FixtureHostStub {
     pub fn run_program(&self, program: Program) -> Result<RunReport, InterpreterError> {
         let mut predicate_oracle = PlannedPredicateOracle::new(self.plan.clone());
         let mut effect_oracle = PlannedEffectOracle::new(self.plan.clone());
-        let report =
-            run_program_to_completion(program, &mut predicate_oracle, &mut effect_oracle)?;
+        let report = run_program_to_completion(program, &mut predicate_oracle, &mut effect_oracle)?;
         if !predicate_oracle.violations.is_empty() || !effect_oracle.violations.is_empty() {
             return Err(InterpreterError::InvalidProgram(format!(
                 "host plan did not cover all oracle calls: predicate_violations={:?}, effect_violations={:?}",
@@ -1210,7 +1207,10 @@ mod tests {
     // tests under `tests/current_l2_minimal_interpreter.rs`.
     #[test]
     fn named_profile_catalog_aliases_are_derived_from_internal_specs() {
-        let aliases_from_specs: Vec<_> = named_profile_specs().iter().map(|spec| spec.alias).collect();
+        let aliases_from_specs: Vec<_> = named_profile_specs()
+            .iter()
+            .map(|spec| spec.alias)
+            .collect();
 
         assert_eq!(ProfileCatalog::aliases(), aliases_from_specs);
     }

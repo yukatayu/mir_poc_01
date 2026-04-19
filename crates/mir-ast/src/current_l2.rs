@@ -98,26 +98,39 @@ fn parse_option_decl(line: &str) -> Result<Stage1ParsedOptionDecl, String> {
         return Err("option-local admit is outside stage 1 accepted cluster".to_string());
     }
     match tokens.as_slice() {
-        ["option", name, "on", target, "capability", capability, "lease", lease] => {
-            Ok(Stage1ParsedOptionDecl {
-                name: (*name).to_string(),
-                target: (*target).to_string(),
-                capability: (*capability).to_string(),
-                decl_guard_slot: Stage1DeclGuardSlot {
-                    surface_text: (*lease).to_string(),
-                },
-            })
-        }
-        ["option", name, "on", "capability", capability, "lease", lease] => {
-            Ok(Stage1ParsedOptionDecl {
-                name: (*name).to_string(),
-                target: String::new(),
-                capability: (*capability).to_string(),
-                decl_guard_slot: Stage1DeclGuardSlot {
-                    surface_text: (*lease).to_string(),
-                },
-            })
-        }
+        [
+            "option",
+            name,
+            "on",
+            target,
+            "capability",
+            capability,
+            "lease",
+            lease,
+        ] => Ok(Stage1ParsedOptionDecl {
+            name: (*name).to_string(),
+            target: (*target).to_string(),
+            capability: (*capability).to_string(),
+            decl_guard_slot: Stage1DeclGuardSlot {
+                surface_text: (*lease).to_string(),
+            },
+        }),
+        [
+            "option",
+            name,
+            "on",
+            "capability",
+            capability,
+            "lease",
+            lease,
+        ] => Ok(Stage1ParsedOptionDecl {
+            name: (*name).to_string(),
+            target: String::new(),
+            capability: (*capability).to_string(),
+            decl_guard_slot: Stage1DeclGuardSlot {
+                surface_text: (*lease).to_string(),
+            },
+        }),
         _ => Err(format!("unsupported option declaration `{line}`")),
     }
 }
@@ -142,25 +155,24 @@ fn parse_fallback_edge(
     let rest = line
         .strip_prefix("fallback ")
         .ok_or_else(|| format!("unsupported fallback row `{line}`"))?;
-    let (successor, lineage_assertion) = if let Some((successor_part, lineage_part)) =
-        rest.split_once(" @ lineage(")
-    {
-        let lineage_inner = lineage_part
-            .strip_suffix(')')
-            .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
-        let (lineage_pred, lineage_succ) = lineage_inner
-            .split_once(" -> ")
-            .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
-        (
-            successor_part.trim().to_string(),
-            Some(Stage1ParsedLineageAssertion {
-                predecessor: lineage_pred.trim().to_string(),
-                successor: lineage_succ.trim().to_string(),
-            }),
-        )
-    } else {
-        (rest.trim().to_string(), None)
-    };
+    let (successor, lineage_assertion) =
+        if let Some((successor_part, lineage_part)) = rest.split_once(" @ lineage(") {
+            let lineage_inner = lineage_part
+                .strip_suffix(')')
+                .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+            let (lineage_pred, lineage_succ) = lineage_inner
+                .split_once(" -> ")
+                .ok_or_else(|| format!("unsupported lineage row `{line}`"))?;
+            (
+                successor_part.trim().to_string(),
+                Some(Stage1ParsedLineageAssertion {
+                    predecessor: lineage_pred.trim().to_string(),
+                    successor: lineage_succ.trim().to_string(),
+                }),
+            )
+        } else {
+            (rest.trim().to_string(), None)
+        };
 
     Ok((
         Stage1ParsedChainEdge {
@@ -398,20 +410,35 @@ pub fn parse_stage3_admit_slot_program_text(source: &str) -> Result<Stage3Parsed
 fn parse_stage3_option_decl(line: &str) -> Result<Stage3ParsedOptionDecl, String> {
     let tokens: Vec<&str> = line.split_whitespace().collect();
     match tokens.as_slice() {
-        ["option", name, "on", target, "capability", capability, "lease", lease] => {
-            Ok(Stage3ParsedOptionDecl {
-                name: (*name).to_string(),
-                target: (*target).to_string(),
-                capability: (*capability).to_string(),
-                decl_guard_slot: Stage1DeclGuardSlot {
-                    surface_text: (*lease).to_string(),
-                },
-                decl_admit_slot: None,
-            })
-        }
-        ["option", _name, "on", _target, "capability", _capability, "lease", _lease, "admit"] => {
-            Err("missing declaration-side admit slot payload".to_string())
-        }
+        [
+            "option",
+            name,
+            "on",
+            target,
+            "capability",
+            capability,
+            "lease",
+            lease,
+        ] => Ok(Stage3ParsedOptionDecl {
+            name: (*name).to_string(),
+            target: (*target).to_string(),
+            capability: (*capability).to_string(),
+            decl_guard_slot: Stage1DeclGuardSlot {
+                surface_text: (*lease).to_string(),
+            },
+            decl_admit_slot: None,
+        }),
+        [
+            "option",
+            _name,
+            "on",
+            _target,
+            "capability",
+            _capability,
+            "lease",
+            _lease,
+            "admit",
+        ] => Err("missing declaration-side admit slot payload".to_string()),
         [
             "option",
             name,
@@ -434,20 +461,33 @@ fn parse_stage3_option_decl(line: &str) -> Result<Stage3ParsedOptionDecl, String
                 surface_text: (*admit_slot).to_string(),
             }),
         }),
-        ["option", name, "on", "capability", capability, "lease", lease] => {
-            Ok(Stage3ParsedOptionDecl {
-                name: (*name).to_string(),
-                target: String::new(),
-                capability: (*capability).to_string(),
-                decl_guard_slot: Stage1DeclGuardSlot {
-                    surface_text: (*lease).to_string(),
-                },
-                decl_admit_slot: None,
-            })
-        }
-        ["option", _name, "on", "capability", _capability, "lease", _lease, "admit"] => {
-            Err("missing declaration-side admit slot payload".to_string())
-        }
+        [
+            "option",
+            name,
+            "on",
+            "capability",
+            capability,
+            "lease",
+            lease,
+        ] => Ok(Stage3ParsedOptionDecl {
+            name: (*name).to_string(),
+            target: String::new(),
+            capability: (*capability).to_string(),
+            decl_guard_slot: Stage1DeclGuardSlot {
+                surface_text: (*lease).to_string(),
+            },
+            decl_admit_slot: None,
+        }),
+        [
+            "option",
+            _name,
+            "on",
+            "capability",
+            _capability,
+            "lease",
+            _lease,
+            "admit",
+        ] => Err("missing declaration-side admit slot payload".to_string()),
         [
             "option",
             name,

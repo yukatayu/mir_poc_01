@@ -396,6 +396,53 @@ actual-adoption floor では、
   - guard-only contrast `p05`
   - helper-local pair-alignment runtime test
   - actual Lean tool execution / public theorem contract later
+- order-handoff serial-scope reserve surface:
+  `specs/examples/511`
+  - `p07 / p08 / p09` reached / `p05` guard-only
+  - authoritative-room-specific `serial on ...` reserve surface
+  - principal edge-row surface unchanged
+- witness/provider emitted-contract representative trace-alignment bridge:
+  `specs/examples/512`
+  - `p07 / p08 / p09` reached / `p05` guard-only
+  - route side / emitted-contract side pair alignment
+  - final public witness/provider contract later
+- theorem actual Lean execution availability probe:
+  `specs/examples/513`
+  - local `lean` / `lake` / `elan` availability probe
+  - tool unavailable なら Lean-stub floor keep
+  - actual Lean execution / public theorem contract later
+- theorem public seam compression after local Lean-unavailable probe:
+  `specs/examples/514`
+  - theorem final public-contract reopen threshold carry-over
+  - Lean-stub representative bridge carry-over
+  - actual Lean execution environment stop line
+  - remaining theorem public seam residual matrix
+- order-handoff / witness-provider final public seam compression after reserve actualizations:
+  `specs/examples/515`
+  - principal source wording route carry-over
+  - `serial` reserve surface carry-over
+  - witness/provider representative trace alignment carry-over
+  - shared-space final public-contract residual matrix
+- theorem actual Lean execution toolchain probe and reopen manifest:
+  `specs/examples/516`
+  - `lean` / `lake` / `elan` ready probe
+  - sample-aware reopen manifest
+  - actual Lean execution later
+- model-check public seam compression after threshold and probe:
+  `specs/examples/517`
+  - property/tool seam carry-over
+  - checker-artifact route carry-over
+  - model-check public-seam residual matrix
+- theorem actual Lean execution narrow probe after global toolchain install:
+  `specs/examples/518`
+  - official `elan` stable first
+  - representative static sample `e5` actual Lean execution
+  - placeholder-fix carry-over
+- theorem actual Lean execution representative prototype widening:
+  `specs/examples/519`
+  - representative prototype trio `p06 / p07 / p08` actual Lean execution
+  - runtime support cut first
+  - helper / CLI unification later
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

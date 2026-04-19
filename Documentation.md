@@ -24,8 +24,8 @@
     `Macro 4 active on fixed authored/prototype floor`
     （current-l2 authored sixteen と corrected prototype nonet は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
-    `Macro 5 post-runnable mixed-gate actualization floor fixed`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...509` deeper-theory / reserve / mixed-gate actualization / actual-adoption floor が揃った。corrected runnable version の current floorは already reached であり、current principal self-driven queue は Package 45 以降へ narrow に戻したが、later mixed gate と user-spec residual は残る）
+    `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed`
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor は current mapped corpus で reached 済みであり、theorem public seam compression、model-check public seam compression、order-handoff / witness-provider public seam compression、theorem toolchain probe/reopen manifest、representative theorem quartet `e5 / p06 / p07 / p08` に対する actual Lean execution まで actualize 済みである。current remaining active line は actual Lean execution hardening / helper orchestration と later mixed/user-spec residual に残る）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -220,6 +220,24 @@
   `specs/examples/509`
 - theorem Lean-stub representative trace-alignment bridge:
   `specs/examples/510`
+- order-handoff serial-scope reserve surface:
+  `specs/examples/511`
+- witness/provider emitted-contract representative trace-alignment bridge:
+  `specs/examples/512`
+- theorem actual Lean execution availability probe:
+  `specs/examples/513`
+- theorem public seam compression after local Lean-unavailable probe:
+  `specs/examples/514`
+- order-handoff / witness-provider final public seam compression after reserve actualizations:
+  `specs/examples/515`
+- theorem actual Lean execution toolchain probe and reopen manifest:
+  `specs/examples/516`
+- model-check public seam compression after threshold and probe:
+  `specs/examples/517`
+- theorem actual Lean execution narrow probe after global toolchain install:
+  `specs/examples/518`
+- theorem actual Lean execution representative prototype widening:
+  `specs/examples/519`
 - model-check checker-artifact route actual adoption:
   `specs/examples/501`
 - model-check final public-contract reopen threshold:
@@ -271,8 +289,11 @@
 
 ## current self-driven queue
 
-- live principal package は none
-  （`M1/M2/M3` threshold package と theorem/model-check/order-handoff/shared-space actual adoption package は close 済みだが、later mixed gate と user-spec residual はまだ残る）
+- current live line は、
+  - actual Lean execution の representative quartet から helper/CLI hardening と broader coverage への widening
+  - later mixed gate residual maintenance
+  - true user-spec residual
+  に narrow 化している。
 
 `specs/examples/466...503` は、
 actual adoption package、near-end closeout、helper-local actualization floor を source-backed に揃える current anchor である。

@@ -1,8 +1,6 @@
 use std::path::PathBuf;
 
-use mir_semantics::{
-    BatchRunSummary, BundleExecutionFailure, FixtureRuntimeRequirement,
-};
+use mir_semantics::{BatchRunSummary, BundleExecutionFailure, FixtureRuntimeRequirement};
 use serde::Serialize;
 
 #[derive(Debug, Serialize, PartialEq, Eq)]
@@ -90,9 +88,7 @@ fn runtime_requirement_name(value: FixtureRuntimeRequirement) -> &'static str {
     }
 }
 
-fn host_plan_coverage_failure_ref(
-    value: &BundleExecutionFailure,
-) -> HostPlanCoverageFailureRef {
+fn host_plan_coverage_failure_ref(value: &BundleExecutionFailure) -> HostPlanCoverageFailureRef {
     HostPlanCoverageFailureRef {
         fixture_id: value.fixture_id.clone(),
         fixture_path: value.fixture_path.display().to_string(),
@@ -100,9 +96,7 @@ fn host_plan_coverage_failure_ref(
     }
 }
 
-fn bundle_failure_kind_counts(
-    summary: &BatchRunSummary,
-) -> Vec<BundleFailureKindCountArtifact> {
+fn bundle_failure_kind_counts(summary: &BatchRunSummary) -> Vec<BundleFailureKindCountArtifact> {
     let mut rows = Vec::new();
     if !summary.host_plan_coverage_failures.is_empty() {
         rows.push(BundleFailureKindCountArtifact {

@@ -10,8 +10,9 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ## current reading
 
 - current execution line は `Macro 4 active on fixed authored/prototype floor` である。
-- current theory-lab line は `Macro 5 post-runnable mixed-gate actualization floor fixed + reopen package active` である。
-- current reserve integration line は `Macro 6 minimal working subset actual default / Macro 7 mixed + reserve reopen package active` である。
+- current theory-lab line は `Macro 5 post-runnable actual-adoption floor fixed + residual-gate compression closed` である。
+- current reserve integration line は `Macro 6 minimal working subset actual default / Macro 7 mixed + public-seam compression closed` である。
+- corrected runnable floor は current mapped corpus で already reached しており、next packages はその floor を作るためではなく reserve/mixed-gate narrowing のために置いている。
 - current defaults:
   - theorem-first external integration target
   - repo-local runnable CLI + tests + emitted artifacts + reproducible compare floor = near-end success
@@ -69,28 +70,24 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 | Package 43 | `docs/reports/0786` + `specs/examples/508` | theorem Lean-first non-production stub pilot actualization |
 | Package 44 | `docs/reports/0787` + `specs/examples/509` | theorem review-unit to Lean-stub repo-local artifact-conformance bridge |
 | Package 45 | `docs/reports/0788` + `specs/examples/510` | theorem Lean-stub representative trace-alignment bridge |
+| Package 46 | `docs/reports/0791` + `specs/examples/511` | order-handoff serial-scope reserve surface |
+| Package 47 | `docs/reports/0792` + `specs/examples/512` | witness/provider emitted-contract representative trace-alignment bridge |
+| Package 48 | `docs/reports/0793` + `specs/examples/513` | theorem actual Lean execution availability probe |
+| Package 49 | `docs/reports/0794` + `specs/examples/514` | theorem public seam compression after local Lean-unavailable probe |
+| Package 50 | `docs/reports/0795` + `specs/examples/515` | order-handoff / witness-provider final public seam compression after reserve actualizations |
+| Package 51 | `docs/reports/0796` + `specs/examples/516` | theorem actual Lean execution toolchain probe and reopen manifest |
+| Package 52 | `docs/reports/0797` + `specs/examples/517` | model-check public seam compression after threshold and probe |
+| Package 53 | `docs/reports/0798` + `specs/examples/518` | theorem actual Lean execution narrow probe after global toolchain install |
+| Package 54 | `docs/reports/0799` + `specs/examples/519` | theorem actual Lean execution representative prototype widening |
 
 ## ordered package list
 
 ### current self-driven reopen packages
 
-- Package 46
-  - lane: theory-lab
-  - macro: `Macro 5/6`
-  - topic: order-handoff serial-scope sugar reserve surface
-  - next gate: helper-local actualization / mixed gate
-- Package 47
-  - lane: reserve integration
-  - macro: `Macro 6/7`
-  - topic: witness/provider emitted-contract trace-alignment bridge
-  - next gate: helper-local actualization / mixed gate
-- Package 48
-  - lane: theory-lab
-  - macro: `Macro 5/7`
-  - topic: theorem actual Lean execution availability probe
-  - next gate: optional reserve / mixed gate
-- `M1/M2/M3` threshold package と theorem/model-check/order-handoff/shared-space actual adoption package 自体は close 済みである。
-- remaining work は reopen package、later mixed gate、true user-spec residual に分けて扱う。
+- unconditional reopen package は current near-end target では close 済みである。
+- `M1/M2/M3` threshold package、theorem/model-check/order-handoff/shared-space actual adoption package、Package 49〜50 は close 済みである。
+- Package 51〜54 により toolchain-ready、model-check public-seam compression、representative theorem quartet actual execution まで close 済みである。
+- remaining work は actual Lean execution helper/CLI hardening and broader coverage、later mixed gate、true user-spec residual に分けて扱う。
 
 ### later mixed-gate topics
 
@@ -109,7 +106,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 - `specs/examples/458...465` は integrator / compare floor として保持するが、current line の principal anchor は `466...469` に移った。
 - theorem-prover experimental binding preflight は close 済みであり、その後の reserve strengthening / practical lines も close 済みである。
 - principal theory spine / proof roadmap package、auditable-authority-witness strengthening actualization、delegated-rng-service practical actualization、model-check second-line concretization、theorem discharge actual-format probe、model-check property/tool-seam probe も close 済みである。
-- corrected runnable version floor は mapping 済み family では already reached であり、`M1/M2/M3`、order-handoff surface/artifact threshold、theorem/model-check/order-handoff/shared-space actual adoption、theorem result-object preview actualization、theorem result-object route actual adoption、theorem final public-contract reopen threshold、theorem Lean-first non-production stub pilot actualization、theorem review-unit to Lean-stub repo-local artifact-conformance bridge、theorem Lean-stub representative trace-alignment bridge、theorem proof-object schema/prover-brand coupled-later gate、model-check public-checker preview actualization、model-check tool-brand/verifier-handoff coupled-later gate、theorem result-object / payload public-contract coupled-later gate、model-check public-checker artifact / migration coupled-later gate、model-check checker-artifact route actual adoption、model-check final public-contract reopen threshold、witness/provider public-contract / emitted-contract coupled-later gate、witness/provider public-schema coupled-later gate、order-handoff source-wording / emitted-artifact coupled-later gate は close 済み、next self-driven order は Package 46 以降の reopen candidate に置く。
+- corrected runnable version floor は mapping 済み family では already reached であり、`M1/M2/M3`、order-handoff surface/artifact threshold、theorem/model-check/order-handoff/shared-space actual adoption、theorem result-object preview actualization、theorem result-object route actual adoption、theorem final public-contract reopen threshold、theorem Lean-first non-production stub pilot actualization、theorem review-unit to Lean-stub repo-local artifact-conformance bridge、theorem Lean-stub representative trace-alignment bridge、order-handoff serial-scope reserve surface、witness/provider emitted-contract representative trace-alignment bridge、theorem actual Lean execution availability probe、theorem public-seam compression、order-handoff / witness-provider final public-seam compression、theorem toolchain probe/reopen manifest、model-check public-seam compression、theorem actual Lean execution narrow probe、theorem actual Lean execution representative prototype widening、theorem proof-object schema/prover-brand coupled-later gate、model-check public-checker preview actualization、model-check tool-brand/verifier-handoff coupled-later gate、theorem result-object / payload public-contract coupled-later gate、model-check public-checker artifact / migration coupled-later gate、model-check checker-artifact route actual adoption、model-check final public-contract reopen threshold、witness/provider public-contract / emitted-contract coupled-later gate、witness/provider public-schema coupled-later gate、order-handoff source-wording / emitted-artifact coupled-later gate は close 済み、next active line は actual Lean execution helper/CLI hardening と broader coverage、および later mixed gate に置く。
 - authoritative-room default profile と append-friendly contrast room を shared-space current working subset に置く。
 - `auditable_authority_witness` と `delegated_rng_service` は close 済みの strengthening / practical actualization に移し、final public provider receipt / witness schema は mixed gate に残す。
 - final parser grammar、final public API、final public verifier contract、installed binary、exhaustive catalog は near-term line に入れない。

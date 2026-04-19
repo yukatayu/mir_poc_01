@@ -40,7 +40,10 @@ fn model_check_carrier_support_emits_runtime_row_local_case() {
     let carrier = &carriers[0];
     assert_eq!(carrier.subject_kind, "runtime_try_cut_cluster");
     assert_eq!(carrier.subject_ref, "e2_try_fallback");
-    assert_eq!(carrier.case.obligation_kind, "rollback_cut_non_interference");
+    assert_eq!(
+        carrier.case.obligation_kind,
+        "rollback_cut_non_interference"
+    );
     assert_eq!(
         carrier.case.evidence_refs,
         vec![
@@ -69,7 +72,10 @@ fn model_check_carrier_support_emits_static_row_local_cases() {
     assert_eq!(carriers.len(), 2);
     assert_eq!(carriers[0].subject_kind, "fixture_static_cluster");
     assert_eq!(carriers[0].subject_ref, "e5_underdeclared_lineage");
-    assert_eq!(carriers[0].case.obligation_kind, "canonical_normalization_law");
+    assert_eq!(
+        carriers[0].case.obligation_kind,
+        "canonical_normalization_law"
+    );
     assert_eq!(carriers[1].case.obligation_kind, "no_re_promotion");
 }
 

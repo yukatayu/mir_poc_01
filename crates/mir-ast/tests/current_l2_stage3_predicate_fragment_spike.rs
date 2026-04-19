@@ -1,13 +1,10 @@
 #[path = "support/current_l2_stage3_predicate_fragment_spike_support.rs"]
 mod current_l2_stage3_predicate_fragment_spike_support;
 
-use mir_ast::current_l2::{
-    Stage3PredicateFragment, parse_stage3_minimal_predicate_fragment_text,
-};
+use mir_ast::current_l2::{Stage3PredicateFragment, parse_stage3_minimal_predicate_fragment_text};
 
 use current_l2_stage3_predicate_fragment_spike_support::{
-    load_fixture_option_admit_fragment,
-    load_fixture_request_clause_fragment,
+    load_fixture_option_admit_fragment, load_fixture_request_clause_fragment,
 };
 
 const E3_OWNER_WRITER_ADMIT: &str = "owner_is(session_user)";
@@ -42,13 +39,9 @@ fn stage3_predicate_fragment_spike_matches_e3_delegated_writer_admit() {
 fn stage3_predicate_fragment_spike_matches_e10_request_local_require() {
     let actual = parse_stage3_minimal_predicate_fragment_text(E10_REQUIRE_FRAGMENT)
         .expect("predicate fragment spike should parse e10 require fragment");
-    let expected = load_fixture_request_clause_fragment(
-        "e10-perform-on-ensure-failure.json",
-        0,
-        "require",
-        0,
-    )
-    .expect("fixture request clause fragment should load");
+    let expected =
+        load_fixture_request_clause_fragment("e10-perform-on-ensure-failure.json", 0, "require", 0)
+            .expect("fixture request clause fragment should load");
 
     assert_eq!(actual, expected);
 }
@@ -83,9 +76,8 @@ fn stage3_predicate_fragment_spike_matches_e11_request_local_ensure() {
 fn stage3_predicate_fragment_spike_matches_grouped_and_fixture_fragment() {
     let actual = parse_stage3_minimal_predicate_fragment_text(E2_GROUPED_AND_FRAGMENT)
         .expect("predicate fragment spike should parse grouped and fragment");
-    let expected =
-        load_fixture_request_clause_fragment("e2-try-fallback.json", 1, "require", 0)
-            .expect("fixture and fragment should load");
+    let expected = load_fixture_request_clause_fragment("e2-try-fallback.json", 1, "require", 0)
+        .expect("fixture and fragment should load");
 
     assert_eq!(actual, expected);
 }

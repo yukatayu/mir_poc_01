@@ -63,19 +63,26 @@ fn expected_route_status(route: &CurrentL2SourceSamplePreviewArtifactRoute) -> &
 }
 
 fn expected_subject_kind(route: &CurrentL2SourceSamplePreviewArtifactRoute) -> Value {
-    route.formal_hook_artifact.as_ref().map_or(Value::Null, |artifact| {
-        Value::String(artifact.subject_kind.clone())
-    })
+    route
+        .formal_hook_artifact
+        .as_ref()
+        .map_or(Value::Null, |artifact| {
+            Value::String(artifact.subject_kind.clone())
+        })
 }
 
 fn expected_subject_ref(route: &CurrentL2SourceSamplePreviewArtifactRoute) -> Value {
-    route.formal_hook_artifact.as_ref().map_or(Value::Null, |artifact| {
-        Value::String(artifact.subject_ref.clone())
-    })
+    route
+        .formal_hook_artifact
+        .as_ref()
+        .map_or(Value::Null, |artifact| {
+            Value::String(artifact.subject_ref.clone())
+        })
 }
 
 fn preview_string_list(value: &Value) -> Vec<String> {
-    value.as_array()
+    value
+        .as_array()
         .unwrap()
         .iter()
         .map(|entry| entry.as_str().unwrap().to_string())
@@ -90,7 +97,9 @@ fn expected_proof_obligations(route: &CurrentL2SourceSamplePreviewArtifactRoute)
         .collect()
 }
 
-fn expected_model_check_obligations(route: &CurrentL2SourceSamplePreviewArtifactRoute) -> Vec<String> {
+fn expected_model_check_obligations(
+    route: &CurrentL2SourceSamplePreviewArtifactRoute,
+) -> Vec<String> {
     route
         .model_check_concrete_carriers
         .iter()
@@ -98,7 +107,9 @@ fn expected_model_check_obligations(route: &CurrentL2SourceSamplePreviewArtifact
         .collect()
 }
 
-fn expected_evidence_refs_from_proof_unit(route: &CurrentL2SourceSamplePreviewArtifactRoute) -> Vec<Vec<String>> {
+fn expected_evidence_refs_from_proof_unit(
+    route: &CurrentL2SourceSamplePreviewArtifactRoute,
+) -> Vec<Vec<String>> {
     route
         .proof_notebook_review_units
         .iter()
@@ -112,7 +123,9 @@ fn expected_evidence_refs_from_proof_unit(route: &CurrentL2SourceSamplePreviewAr
         .collect()
 }
 
-fn expected_evidence_refs_from_model_check_carrier(route: &CurrentL2SourceSamplePreviewArtifactRoute) -> Vec<Vec<String>> {
+fn expected_evidence_refs_from_model_check_carrier(
+    route: &CurrentL2SourceSamplePreviewArtifactRoute,
+) -> Vec<Vec<String>> {
     route
         .model_check_concrete_carriers
         .iter()
@@ -258,8 +271,7 @@ fn verifier_preview_alignment_matches_emitted_route_for_typed_runtime_prototype(
 
 #[test]
 fn verifier_preview_alignment_matches_emitted_route_for_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let preview_json = cli_json(sample_path.to_str().unwrap(), None);
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),
@@ -272,8 +284,7 @@ fn verifier_preview_alignment_matches_emitted_route_for_order_handoff_runtime_pr
 
 #[test]
 fn verifier_preview_alignment_matches_emitted_route_for_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let preview_json = cli_json(sample_path.to_str().unwrap(), None);
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),

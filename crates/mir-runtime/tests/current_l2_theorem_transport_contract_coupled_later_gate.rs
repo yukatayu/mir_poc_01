@@ -47,7 +47,9 @@ fn assert_coupled_later_gate_reached(
             format!("theorem_transport_candidate:{subject_ref}:review_unit_anchor"),
             format!("theorem_transport_candidate:{subject_ref}:discharge_entry_adjacent"),
             format!("theorem_transport_candidate:{subject_ref}:symbolic_evidence_refs_only"),
-            format!("theorem_transport_candidate:{subject_ref}:repo_local_emitted_artifact_refs_first"),
+            format!(
+                "theorem_transport_candidate:{subject_ref}:repo_local_emitted_artifact_refs_first"
+            ),
         ]
     );
     assert_eq!(
@@ -55,7 +57,9 @@ fn assert_coupled_later_gate_reached(
         vec![
             format!("theorem_public_contract_candidate:{subject_ref}:notebook_consumer_adjacent"),
             format!("theorem_public_contract_candidate:{subject_ref}:refs_only_reserve_schema"),
-            format!("theorem_public_contract_candidate:{subject_ref}:brand_neutral_request_manifest_keep"),
+            format!(
+                "theorem_public_contract_candidate:{subject_ref}:brand_neutral_request_manifest_keep"
+            ),
             format!("theorem_public_contract_candidate:{subject_ref}:consumer_payload_later"),
         ]
     );
@@ -75,8 +79,7 @@ fn assert_coupled_later_gate_reached(
             "compare_floor:current_l2.theorem_discharge.actual_format_probe".to_string(),
             "compare_floor:current_l2.theorem_contract_threshold".to_string(),
             "compare_floor:current_l2.theorem_contract_shape_threshold".to_string(),
-            "compare_floor:current_l2.theorem_transport_contract_coupled_later_gate"
-                .to_string(),
+            "compare_floor:current_l2.theorem_transport_contract_coupled_later_gate".to_string(),
         ]
     );
     assert_eq!(
@@ -104,11 +107,12 @@ fn assert_coupled_later_gate_reached(
 
 #[test]
 fn theorem_transport_contract_coupled_later_gate_reaches_static_underdeclared_sample() {
-    let actualization = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
+    let actualization =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
 
     assert_coupled_later_gate_reached(&actualization);
 }
@@ -116,11 +120,12 @@ fn theorem_transport_contract_coupled_later_gate_reaches_static_underdeclared_sa
 #[test]
 fn theorem_transport_contract_coupled_later_gate_keeps_guarded_prototype_as_not_reached() {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let actualization = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let actualization =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_eq!(
         actualization.source_report.sample_id,
@@ -130,11 +135,13 @@ fn theorem_transport_contract_coupled_later_gate_keeps_guarded_prototype_as_not_
         actualization.actualization_status,
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached
     );
-    assert!(actualization
-        .actualization_guard_reason
-        .as_ref()
-        .unwrap()
-        .contains("theorem transport/public-contract coupled later gate"));
+    assert!(
+        actualization
+            .actualization_guard_reason
+            .as_ref()
+            .unwrap()
+            .contains("theorem transport/public-contract coupled later gate")
+    );
     assert!(actualization.transport_candidate_refs.is_empty());
     assert!(actualization.public_contract_candidate_refs.is_empty());
     assert!(actualization.coupled_default_refs.is_empty());
@@ -154,37 +161,38 @@ fn theorem_transport_contract_coupled_later_gate_keeps_guarded_prototype_as_not_
 #[test]
 fn theorem_transport_contract_coupled_later_gate_reaches_typed_runtime_prototype() {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
-    let actualization = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let actualization =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_coupled_later_gate_reached(&actualization);
 }
 
 #[test]
 fn theorem_transport_contract_coupled_later_gate_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let actualization = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let actualization =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_coupled_later_gate_reached(&actualization);
 }
 
 #[test]
 fn theorem_transport_contract_coupled_later_gate_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let actualization = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let actualization =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_coupled_later_gate_reached(&actualization);
 }

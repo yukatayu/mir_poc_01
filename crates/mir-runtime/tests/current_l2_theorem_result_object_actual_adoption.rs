@@ -6,8 +6,7 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus,
-    CurrentL2SourceSampleTheoremResultObjectActualAdoption,
+    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleTheoremResultObjectActualAdoption,
     CurrentL2SourceSampleTheoremResultObjectPreviewActualization,
     CurrentL2SourceSampleTheoremResultPayloadPublicContractCoupledLaterGate,
     CurrentL2SourceSampleTheoremReviewUnitTransportActualAdoption,
@@ -165,11 +164,13 @@ fn assert_actual_adoption_matches_prior_floors(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("theorem result-object actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("theorem result-object actual adoption")
+            );
         }
     }
 }
@@ -260,8 +261,7 @@ fn theorem_result_object_actual_adoption_keeps_guarded_prototype_as_not_reached(
 
 #[test]
 fn theorem_result_object_actual_adoption_reaches_typed_runtime_prototype() {
-    let sample_path =
-        typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
+    let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
     let review_unit_actual_adoption =
         build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
             sample_path.to_str().unwrap(),
@@ -309,8 +309,7 @@ fn theorem_result_object_actual_adoption_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_result_object_actual_adoption_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let review_unit_actual_adoption =
         build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
             sample_path.to_str().unwrap(),
@@ -358,8 +357,7 @@ fn theorem_result_object_actual_adoption_reaches_order_handoff_runtime_prototype
 
 #[test]
 fn theorem_result_object_actual_adoption_reaches_stale_reconnect_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
+    let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     let review_unit_actual_adoption =
         build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
             sample_path.to_str().unwrap(),

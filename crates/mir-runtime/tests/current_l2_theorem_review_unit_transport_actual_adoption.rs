@@ -39,7 +39,10 @@ fn assert_actual_adoption_matches_coupled_floor(
     expected_compare_floor_refs: &[&str],
     expected_guard_refs: &[&str],
 ) {
-    assert_eq!(actual_adoption.actualization_status, coupled_gate.actualization_status);
+    assert_eq!(
+        actual_adoption.actualization_status,
+        coupled_gate.actualization_status
+    );
     assert_eq!(
         actual_adoption.actualization_subject_kind,
         coupled_gate.actualization_subject_kind
@@ -113,10 +116,8 @@ fn assert_actual_adoption_matches_coupled_floor(
             CurrentL2EmittedArtifactRouteStatus::Reached => vec![
                 "theorem_actual_adoption_default:review_unit_transport_first".to_string(),
                 "theorem_actual_adoption_default:notebook_consumer_contract_first".to_string(),
-                "theorem_actual_adoption_default:transport_contract_adjacent_distinct"
-                    .to_string(),
-                "theorem_actual_adoption_default:proof_object_public_schema_later"
-                    .to_string(),
+                "theorem_actual_adoption_default:transport_contract_adjacent_distinct".to_string(),
+                "theorem_actual_adoption_default:proof_object_public_schema_later".to_string(),
             ],
             CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => Vec::new(),
         }
@@ -151,27 +152,31 @@ fn assert_actual_adoption_matches_coupled_floor(
             assert!(actual_adoption.actualization_guard_reason.is_none());
         }
         CurrentL2EmittedArtifactRouteStatus::GuardedNotReached => {
-            assert!(actual_adoption
-                .actualization_guard_reason
-                .as_ref()
-                .unwrap()
-                .contains("theorem review-unit transport actual adoption"));
+            assert!(
+                actual_adoption
+                    .actualization_guard_reason
+                    .as_ref()
+                    .unwrap()
+                    .contains("theorem review-unit transport actual adoption")
+            );
         }
     }
 }
 
 #[test]
 fn theorem_review_unit_actual_adoption_reaches_static_underdeclared_sample() {
-    let coupled_gate = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
-    let actual_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        "e5-underdeclared-lineage",
-        FixtureHostPlan::default(),
-    )
-    .unwrap();
+    let coupled_gate =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            "e5-underdeclared-lineage",
+            FixtureHostPlan::default(),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_coupled_floor(
         &actual_adoption,
@@ -193,16 +198,18 @@ fn theorem_review_unit_actual_adoption_reaches_static_underdeclared_sample() {
 #[test]
 fn theorem_review_unit_actual_adoption_keeps_guarded_prototype_as_not_reached() {
     let sample_path = order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt");
-    let coupled_gate = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let actual_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let coupled_gate =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_coupled_floor(
         &actual_adoption,
@@ -215,16 +222,18 @@ fn theorem_review_unit_actual_adoption_keeps_guarded_prototype_as_not_reached() 
 #[test]
 fn theorem_review_unit_actual_adoption_reaches_typed_runtime_prototype() {
     let sample_path = typed_prototype_sample_path("p06-typed-proof-owner-handoff.txt");
-    let coupled_gate = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let actual_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let coupled_gate =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_coupled_floor(
         &actual_adoption,
@@ -245,18 +254,19 @@ fn theorem_review_unit_actual_adoption_reaches_typed_runtime_prototype() {
 
 #[test]
 fn theorem_review_unit_actual_adoption_reaches_order_handoff_runtime_prototype() {
-    let sample_path =
-        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
-    let coupled_gate = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let actual_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
+    let coupled_gate =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_coupled_floor(
         &actual_adoption,
@@ -278,16 +288,18 @@ fn theorem_review_unit_actual_adoption_reaches_order_handoff_runtime_prototype()
 #[test]
 fn theorem_review_unit_actual_adoption_reaches_stale_reconnect_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
-    let coupled_gate = build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
-    let actual_adoption = build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
-        sample_path.to_str().unwrap(),
-        prototype_host_plan(&sample_path),
-    )
-    .unwrap();
+    let coupled_gate =
+        build_current_l2_source_sample_theorem_transport_contract_coupled_later_gate(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_theorem_review_unit_transport_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
 
     assert_actual_adoption_matches_coupled_floor(
         &actual_adoption,
