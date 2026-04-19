@@ -251,6 +251,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPublicCheckerCommandSurfaceThresholdSummary,
     actual_shared_output_contract_threshold:
         CurrentL2OperationalCliActualSharedOutputContractThresholdSummary,
+    actual_public_checker_boundary_threshold:
+        CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -345,6 +347,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_public_checker_command_surface_threshold,
             );
+        let actual_public_checker_boundary_threshold =
+            CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary::from_source_report(
+                &report,
+                &actual_shared_output_contract_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -376,6 +383,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_public_checker_entry_criteria_threshold,
             actual_public_checker_command_surface_threshold,
             actual_shared_output_contract_threshold,
+            actual_public_checker_boundary_threshold,
         }
     }
 }
@@ -1964,6 +1972,101 @@ impl CurrentL2OperationalCliActualSharedOutputContractThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    boundary_kind: Option<&'static str>,
+    public_checker_command_surface_ref: Option<&'static str>,
+    shared_output_contract_ref: Option<&'static str>,
+    next_comparison_target_ref: Option<&'static str>,
+    deferred_surface_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_shared_output_contract_threshold:
+            &CurrentL2OperationalCliActualSharedOutputContractThresholdSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p10-typed-authorized-fingerprint-declassification"
+                | "p11-typed-unauthorized-fingerprint-release"
+                | "p12-typed-classified-fingerprint-publication-block"
+        ) && actual_shared_output_contract_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_shared_output_contract_threshold.compare_floor_refs.clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.public_checker_boundary".to_string());
+            compare_floor_refs.push(
+                "compare_floor:current_l2.checker.minimal_public_checker_boundary_threshold"
+                    .to_string(),
+            );
+
+            let mut evidence_refs = actual_shared_output_contract_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_public_checker_boundary_threshold".to_string(),
+            );
+            evidence_refs.push("source:docs_only_parser_front_checker_boundary".to_string());
+            evidence_refs.push("source:public_checker_boundary_ready_sketch".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind: "checker_adjacent_public_checker_boundary_threshold_manifest",
+                boundary_kind: Some("docs_only_parser_front_checker_boundary"),
+                public_checker_command_surface_ref: Some("public_checker_command_surface_ready_sketch"),
+                shared_output_contract_ref: Some("shared_output_contract_ready_sketch"),
+                next_comparison_target_ref: Some("verifier_handoff_surface_comparison"),
+                deferred_surface_refs: vec![
+                    "final_parser_grammar".to_string(),
+                    "query_token_and_checker_subject_public_naming".to_string(),
+                    "generic_shared_public_checker_entry".to_string(),
+                    "detached_loop_wrapper_path_line".to_string(),
+                    "verifier_handoff_surface".to_string(),
+                ],
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs: actual_public_checker_boundary_threshold_guard_refs(true),
+                kept_later_refs: actual_public_checker_boundary_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "checker_adjacent_public_checker_boundary_threshold_manifest",
+            boundary_kind: None,
+            public_checker_command_surface_ref: None,
+            shared_output_contract_ref: None,
+            next_comparison_target_ref: None,
+            deferred_surface_refs: vec![],
+            evidence_refs: vec![
+                format!("sample:{}", report.sample_id),
+                "helper_preview:actual_public_checker_boundary_threshold".to_string(),
+                "compare_floor:current_l2.checker.public_checker_boundary".to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.checker.public_checker_boundary.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_public_checker_boundary_threshold_guard_refs(false),
+            kept_later_refs: actual_public_checker_boundary_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual public checker boundary threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual shared output contract threshold reaches the checker-adjacent helper floor for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -2644,6 +2747,11 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_shared_output_contract_threshold(
         &mut output,
         &summary.actual_shared_output_contract_threshold,
+    );
+    writeln!(output, "actual_public_checker_boundary_threshold:").expect("write to string");
+    render_actual_public_checker_boundary_threshold(
+        &mut output,
+        &summary.actual_public_checker_boundary_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -3750,6 +3858,32 @@ fn actual_shared_output_contract_threshold_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn actual_public_checker_boundary_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:checker_adjacent_public_checker_boundary_threshold_only".to_string(),
+            "guard:verifier_handoff_surface_comparison_next".to_string(),
+            "guard:final_parser_grammar_later".to_string(),
+            "guard:generic_shared_public_checker_entry_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_public_checker_boundary_threshold_not_reached".to_string(),
+        ]
+    }
+}
+
+fn actual_public_checker_boundary_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:query_token_and_checker_subject_public_naming".to_string(),
+        "kept_later:generic_shared_public_checker_entry".to_string(),
+        "kept_later:detached_loop_wrapper_path_line".to_string(),
+        "kept_later:verifier_handoff_surface".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -4588,6 +4722,57 @@ fn render_actual_shared_output_contract_threshold(
     } else {
         writeln!(output, "  public_checker_payload_schema_ref: none")
             .expect("write to string");
+    }
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "deferred_surface_refs", &summary.deferred_surface_refs, 1);
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_public_checker_boundary_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(boundary_kind) = summary.boundary_kind {
+        writeln!(output, "  boundary_kind: {boundary_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  boundary_kind: none").expect("write to string");
+    }
+    if let Some(public_checker_command_surface_ref) = summary.public_checker_command_surface_ref {
+        writeln!(
+            output,
+            "  public_checker_command_surface_ref: {public_checker_command_surface_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  public_checker_command_surface_ref: none")
+            .expect("write to string");
+    }
+    if let Some(shared_output_contract_ref) = summary.shared_output_contract_ref {
+        writeln!(
+            output,
+            "  shared_output_contract_ref: {shared_output_contract_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  shared_output_contract_ref: none").expect("write to string");
     }
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(

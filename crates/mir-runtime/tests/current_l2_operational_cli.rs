@@ -416,6 +416,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_shared_output_contract_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -775,6 +779,26 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_shared_output_contract_threshold"]["public_checker_payload_schema_ref"],
         "public_checker_payload_schema_ready_sketch"
     );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["boundary_kind"],
+        "docs_only_parser_front_checker_boundary"
+    );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["public_checker_command_surface_ref"],
+        "public_checker_command_surface_ready_sketch"
+    );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["shared_output_contract_ref"],
+        "shared_output_contract_ready_sketch"
+    );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["next_comparison_target_ref"],
+        "verifier_handoff_surface_comparison"
+    );
 }
 
 #[test]
@@ -853,6 +877,19 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     ));
     assert!(output.contains(
         "next_comparison_target_ref: public_checker_boundary_comparison"
+    ));
+    assert!(output.contains("actual_public_checker_boundary_threshold:"));
+    assert!(output.contains(
+        "boundary_kind: docs_only_parser_front_checker_boundary"
+    ));
+    assert!(output.contains(
+        "public_checker_command_surface_ref: public_checker_command_surface_ready_sketch"
+    ));
+    assert!(output.contains(
+        "shared_output_contract_ref: shared_output_contract_ready_sketch"
+    ));
+    assert!(output.contains(
+        "next_comparison_target_ref: verifier_handoff_surface_comparison"
     ));
 }
 
@@ -976,5 +1013,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_shared_output_contract_threshold"]["next_comparison_target_ref"],
         "public_checker_boundary_comparison"
+    );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_public_checker_boundary_threshold"]["next_comparison_target_ref"],
+        "verifier_handoff_surface_comparison"
     );
 }
