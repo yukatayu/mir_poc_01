@@ -18,7 +18,8 @@ current meaning は、
 
 ## current scope
 
-- current authored source sample は `e1` / `e2` / `e3` / `e4` / `e14` / `e15` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` の authored fourteen に置く。
+- current initial cluster は `e1` / `e2` / `e3` / `e4` / `e21` / `e23` の 6 本に置く。
+- current authored source sample は `e1` / `e2` / `e3` / `e4` / `e5` / `e12` / `e14` / `e15` / `e16` / `e13` / `e19` / `e21` / `e22` / `e18` / `e20` / `e23` の authored sixteen に置く。
 - corrected runnable prototype sample は `samples/prototype/` に置き、この current authored inventory へ混ぜない。
 - exact rough stimulus preservation は `samples/not_implemented/` に置き、current parser / runner 対象にしない。
 - `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
@@ -61,7 +62,7 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e20-malformed-late-capability-strengthening ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
 
-helper は current authored fourteen を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
+helper は current authored sixteen を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
 
 ## current non-goals

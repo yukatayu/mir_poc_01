@@ -144,6 +144,17 @@ pub struct CurrentL2Phase6ParserSideFollowupPackageSequencingManifest {
     pub guard_refs: &'static [&'static str],
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest {
+    pub scope_kind: &'static str,
+    pub source_cluster_refs: &'static [&'static str],
+    pub directory_ref: &'static str,
+    pub file_layout_ref: &'static str,
+    pub file_extension_policy: &'static str,
+    pub sample_id_policy: &'static str,
+    pub non_goal_refs: &'static [&'static str],
+}
+
 const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_SEMANTIC_ENTRY_REFS: &[&str] = &[
     "static_gate_program_detailed",
     "direct_style_evaluator_from_program",
@@ -343,6 +354,38 @@ pub const CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_MANIFEST:
 pub fn current_l2_phase6_parser_side_followup_package_sequencing_manifest()
 -> &'static CurrentL2Phase6ParserSideFollowupPackageSequencingManifest {
     &CURRENT_L2_PHASE6_PARSER_SIDE_FOLLOWUP_PACKAGE_SEQUENCING_MANIFEST
+}
+
+const CURRENT_L2_FIXED_SUBSET_SOURCE_SAMPLE_CORPUS_SCOPE_SOURCE_CLUSTER_REFS: &[&str] = &[
+    "e1_place_atomic_cut",
+    "e2_try_fallback",
+    "e3_option_admit_chain",
+    "e4_malformed_lineage",
+    "e21_try_atomic_cut_frontier",
+    "e23_malformed_try_fallback_missing_fallback_body",
+];
+
+const CURRENT_L2_FIXED_SUBSET_SOURCE_SAMPLE_CORPUS_SCOPE_NON_GOAL_REFS: &[&str] = &[
+    "not_final_parser_grammar",
+    "not_fixture_reverse_generation",
+    "not_verdict_or_stage_in_filename",
+];
+
+pub const CURRENT_L2_FIXED_SUBSET_SOURCE_SAMPLE_CORPUS_SCOPE_AND_FILE_LAYOUT_MANIFEST:
+    CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest =
+    CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest {
+        scope_kind: "current_l2_fixed_subset_source_sample_corpus_scope",
+        source_cluster_refs: CURRENT_L2_FIXED_SUBSET_SOURCE_SAMPLE_CORPUS_SCOPE_SOURCE_CLUSTER_REFS,
+        directory_ref: "repo_root_samples_current_l2_directory",
+        file_layout_ref: "flat_one_file_per_sample_layout",
+        file_extension_policy: "neutral_text_dot_txt_until_final_grammar",
+        sample_id_policy: "fixture_stem_aligned_kebab_case_sample_id",
+        non_goal_refs: CURRENT_L2_FIXED_SUBSET_SOURCE_SAMPLE_CORPUS_SCOPE_NON_GOAL_REFS,
+    };
+
+pub fn current_l2_fixed_subset_source_sample_corpus_scope_and_file_layout_manifest()
+-> &'static CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest {
+    &CURRENT_L2_FIXED_SUBSET_SOURCE_SAMPLE_CORPUS_SCOPE_AND_FILE_LAYOUT_MANIFEST
 }
 
 pub fn current_l2_default_source_sample_directory() -> PathBuf {

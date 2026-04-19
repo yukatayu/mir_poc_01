@@ -69,6 +69,11 @@ first strong typing layer の principal target を
 ## practical reading
 
 - stronger typed surface promotion は still mixed gate に残す。
+- ここでいう principal target は、
+  **checker-adjacent な first strong typing layer の target**
+  を指す。
+  stronger typed surface を early に source principal へ昇格する、
+  という意味ではない。
 - ただし checker-adjacent principal を vague なままにせず、
   finite decidable fragment を first strong typing layer の current target として扱う。
 - IFC / taint / lifetime / capture / simple cost は
@@ -81,6 +86,21 @@ first strong typing layer の principal target を
 - sanitize removes taint only with proof/capability
 - remote call count `<= 0` check
 - lifetime / capture escape rejected
+
+## current evidence / next widening
+
+- current evidence として既にあるのは、
+  `p10-typed-authorized-fingerprint-declassification`、
+  `p11-typed-unauthorized-fingerprint-release`、
+  `p12-typed-classified-fingerprint-publication-block`
+  による IFC authority / label-flow trio である。
+- next widening target は、
+  上の 4 例を
+  checker-adjacent payload / static rejection / theorem-side reserve widening のどこへ乗せるかを
+  narrow package で詰めることにある。
+- したがって current default は、
+  finite decidable first layer を厚くする方向であり、
+  full dependent core や final public typed surface を先に採る方向ではない。
 
 ## stop line
 

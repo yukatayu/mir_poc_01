@@ -691,6 +691,12 @@ actual-adoption floor では、
   - `current_l2_shared_single_attachment_frame_manifest()`
   - `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` shared single attachment frame minimum mirror
   - Package 87 phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet close、Package 88 fixed-subset-source-sample-corpus-scope-and-file-layout ratchet next
+- fixed-subset source-sample corpus scope-and-file-layout threshold helper mirror:
+  `specs/examples/561`
+  - `CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest`
+  - `current_l2_fixed_subset_source_sample_corpus_scope_and_file_layout_manifest()`
+  - `scope_kind + source_cluster_refs + directory_ref + file_layout_ref + file_extension_policy + sample_id_policy + non_goal_refs` source-corpus minimum mirror
+  - Package 88 fixed-subset-source-sample-corpus-scope-and-file-layout ratchet close、Package 89 phase6 request-clause-suite publicization comparison next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

@@ -207,10 +207,12 @@ actual adoption / final contract / final surface / concrete tool binding を
    - actual adoption package として、current first typed attachment candidate は checker-adjacent semantic carrier principal に置き、source-visible structural marker family first、request / predicate / `try` cluster grouped reserve、`p06` corrected prototype bridge-floor evidenceまでを fixed 済みである。
    - stronger typed-surface promotion threshold framing も current docs に昇格済みである。
    - `specs/examples/557` により、first strong typing layer の principal target は full dependent core ではなく、finite poset / finite lattice / powerset lattice / region-lifetime preorder / finite capture set inclusion / simple numeric resource bound を含む finite decidable fragment に narrowed してよい。
+   - この principal target は checker-adjacent な first layer を指し、stronger typed surface を early に source principal へ昇格する判断とは切り分けて読む。
    - principal typing spine は `Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` を conceptual floor に置き、`Ψ` は index/mode/order theory、`Δ` は linear/capability context、`C` は constraints / residual obligations と読む。
    - IFC / taint / lifetime / capture / simple cost は same first strong typing layer 上の first-class target に置いてよい。
    - inference policy は local inference aggressive / public-module boundary annotation required / declassification・handoff・external effect annotation required を current default に置いてよい。
    - prove/check floor は finite index constraints に対する checker soundness、decidable fragment に対する limited completeness、first explicit-flow fragment に対する noninterference、selected resource model に対する cost soundness までを current first line に置いてよい。
+   - representative next widening target は、secret key cannot flow to `Public`、sanitize removes taint only with proof/capability、remote call count `<= 0` check、lifetime/capture escape rejected である。
    - 未決なのは、`family_refs[]` の exact namespace、shared attachment shape、stronger typed surface を experimental adoption に送る mixed gate、final public type syntax である。
 39. semantic-core theorem pilot の first lemma order / evidence floor / review-discharge stop line をどこまで固定するか。
    - source-backed な floor として、current first theorem pilot line は `canonical_normalization_law`、`no_re_promotion`、`rollback_cut_non_interference` の順、notebook-first review-unit first、symbolic-ref-only evidence floor、abstract discharge-entry reserve に置く。

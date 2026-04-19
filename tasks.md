@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 03:10 JST
+最終更新: 2026-04-20 03:34 JST
 
 ## この文書について
 
@@ -26,8 +26,10 @@
   finite decidable index fragment、`Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` conceptual spine、
   IFC / taint、capture / lifetime、simple cost を
   first strong typing layer の principal target に置く読みへ同期済みである。
+- ここでいう principal target は checker-adjacent first layer を指し、
+  stronger typed surface を early に source principal へ昇格する判断とは切り分けて読む。
 - したがって、remaining work の主眼は次に移っている。
-  - fixed-subset source-sample corpus の scope / directory / naming / non-goal minimum を narrow actualization する fixed-subset-source-sample-corpus-scope-and-file-layout ratchet
+  - request clause suite を multiline frame cut の上にどこまで publicize するかを比較する phase6-request-clause-suite publicization comparison
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -57,7 +59,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `88` fixed-subset-source-sample-corpus-scope-and-file-layout ratchet | Package 87 close の次段として、repo-root `samples/current-l2/` flat `.txt` layer の scope / directory / naming / non-goal minimum をどこまで actualize するか | `M` | `Macro 6/7` | source corpus を第 3 層として repo-root `samples/current-l2/` flat `.txt` layer に保ち、initial cluster / naming / non-goal だけを narrow actualization し、mapping matrix / actual sample content / parser-to-`Program` lowering は retained-later に残す | `scope_kind / source_cluster_refs / directory_ref / file_layout_ref / file_extension_policy / sample_id_policy / non_goal_refs` の narrow manifest か source-corpus policy anchor で Package 88 を閉じられる |
+| `89` phase6-request-clause-suite publicization comparison | Package 88 close 後の次段として、request-local `require` / `ensure` suite を multiline frame cut の上にどこまで publicize してよいか | `M` | `Macro 6/7` | shared single attachment frame と source-corpus scope/layout minimum を保ったまま、request clause suite compare floor を narrow に切り、perform head / span-rich diagnostics / final grammar は retained-later に残す | request clause suite の current first compare floor を source-backed に置き、perform head / diagnostics / final grammar へ premature に広げずに次 package を閉じられる |
 
 ## recently closed package note
 
@@ -527,15 +529,26 @@
 ### Package 88 — fixed-subset-source-sample-corpus-scope-and-file-layout ratchet
 
 - current reading:
-  next active line。repo-root `samples/current-l2/` flat `.txt` layer の scope / directory / naming / non-goal minimum を actualize し、representative / fixture / source の第 3 層として保つ。
+  close 済み。repo-root `samples/current-l2/` flat `.txt` layer の scope / directory / naming / non-goal minimum を `CurrentL2FixedSubsetSourceSampleCorpusScopeAndFileLayoutManifest` と source-corpus policy docs に actualize し、representative / fixture / source の第 3 層 minimum を source-backed に同期した。
 - evidence anchor:
   `specs/examples/315`
   `specs/examples/316`
+  `specs/examples/561`
 - stop line:
   representative / fixture / source mapping matrix
   actual sample file content
   parser-to-`Program` lowering
   bless / regression policy
+
+### Package 89 — phase6-request-clause-suite publicization comparison
+
+- current reading:
+  next active line。shared single attachment frame と source-corpus scope/layout minimum を保ったまま、request-local `require` / `ensure` suite をどこまで parser-side compare floor に上げるかを narrow に比較する。
+- stop line:
+  perform head final public parser API
+  span-rich diagnostics
+  final grammar
+  final public parser / checker / runtime surface
 
 ## research-discovery items
 
@@ -568,4 +581,4 @@
 
 ## next reopen order
 
-1. Package 88 で fixed-subset-source-sample-corpus-scope-and-file-layout ratchet を進める。
+1. Package 89 で phase6-request-clause-suite publicization comparison を進める。
