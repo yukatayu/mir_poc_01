@@ -157,6 +157,9 @@
 - `specs/examples/531-current-l2-near-end-closeout-sync-after-package58.md`
   - Package 59 の closeout sync として Package 58 close 後の queue / mixed gate / user-spec residual を再圧縮し、current self-driven queue を residual mixed-gate packages へ再構成する補助文書。
   - theory solved や final public implementation complete を固定するものではなく、Package 60 / 61 residual mixed-gate compression next line を読むための anchor である。
+- `specs/examples/532-current-l2-theorem-model-check-reopen-threshold-helper-mirror.md`
+  - Package 60 の closeout として theorem/model-check final public-contract reopen threshold を `run-source-sample` helper summary に narrow に mirror し、`p08` theorem reached / model-check guarded と `p09` theorem guarded / model-check reached の非対称を helper-local operational summary で保つ補助文書。
+  - final public theorem/model-check contract を固定するものではなく、Package 60 close と Package 61 order-handoff/shared-space residual mixed-gate compression next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

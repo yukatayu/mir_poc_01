@@ -353,6 +353,22 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         "runtime_try_cut_cluster"
     );
     assert_eq!(
+        value["theorem_final_public_contract_reopen_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["theorem_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][0],
+        "theorem_final_public_contract_reopen:p06-typed-proof-owner-handoff:result_object_and_payload_first"
+    );
+    assert_eq!(
+        value["model_check_final_public_contract_reopen_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][3],
+        "model_check_final_public_contract_reopen:p06-typed-proof-owner-handoff:final_public_verifier_contract_fourth"
+    );
+    assert_eq!(
         value["typed_checker_hint_preview"]["status"],
         "guarded_not_reached"
     );
@@ -375,6 +391,8 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains("observer_debug_text_output:"));
     assert!(output.contains("late_join_view: player_c sees result+owner history"));
     assert!(output.contains("subject_kind: runtime_try_cut_cluster"));
+    assert!(output.contains("theorem_final_public_contract_reopen_threshold:"));
+    assert!(output.contains("model_check_final_public_contract_reopen_threshold:"));
 }
 
 #[test]
@@ -415,11 +433,29 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
     );
     assert_eq!(value["theorem_result_object_preview"]["status"], "reached");
     assert_eq!(
+        value["theorem_final_public_contract_reopen_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["theorem_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][1],
+        "theorem_final_public_contract_reopen:p08-dice-stale-reconnect-refresh:prover_brand_and_proof_schema_second"
+    );
+    assert_eq!(
         value["model_check_public_checker_preview"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["model_check_final_public_contract_reopen_threshold"]["status"],
         "guarded_not_reached"
     );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("`e5` / `p06` / `p07` / `p09`")
+    );
+    assert!(
+        value["model_check_final_public_contract_reopen_threshold"]["guard_reason"]
             .as_str()
             .unwrap()
             .contains("`e5` / `p06` / `p07` / `p09`")
@@ -444,8 +480,20 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
         "guarded_not_reached"
     );
     assert_eq!(
+        value["theorem_final_public_contract_reopen_threshold"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
         value["model_check_public_checker_preview"]["status"],
         "reached"
+    );
+    assert_eq!(
+        value["model_check_final_public_contract_reopen_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][2],
+        "model_check_final_public_contract_reopen:p09-dice-delegated-rng-provider-placement:verifier_handoff_and_runtime_policy_contract_third"
     );
     assert_eq!(
         value["model_check_public_checker_preview"]["checker_artifact_preview_refs"][0],
@@ -454,6 +502,12 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
     assert_eq!(
         value["model_check_public_checker_preview"]["verifier_handoff_reserve_refs"][0],
         "model_check_verifier_handoff_reserve:public_checker_migration_later"
+    );
+    assert!(
+        value["theorem_final_public_contract_reopen_threshold"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("`e5` / `p06` / `p07` / `p08`")
     );
 }
 

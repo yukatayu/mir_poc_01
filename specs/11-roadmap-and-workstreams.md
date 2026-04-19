@@ -515,6 +515,13 @@ actual-adoption floor では、
   - residual mixed-gate packages `60 / 61`
   - true user-spec residual split keep
   - stale wording suppression after helper preview widening
+- theorem/model-check reopen-threshold helper mirror:
+  `specs/examples/532`
+  - theorem final public-contract reopen threshold helper mirror
+  - model-check final public-contract reopen threshold helper mirror
+  - `p08` theorem reached / model-check guarded
+  - `p09` theorem guarded / model-check reached
+  - Package 60 residual mixed-gate compression close
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

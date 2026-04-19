@@ -3791,3 +3791,14 @@
   - `specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`
   - `specs/examples/531-current-l2-near-end-closeout-sync-after-package58.md`
   - `docs/reports/0812-package59-near-end-closeout-sync-after-package58.md`
+
+## 2026-04-19 Package 60 theorem/model-check residual mixed-gate compression addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/506-current-l2-theorem-final-public-contract-reopen-threshold.md`
+  - `specs/examples/507-current-l2-model-check-final-public-contract-reopen-threshold.md`
+  - `specs/examples/530-current-l2-theorem-and-model-check-helper-preview-widening.md`
+  - `specs/examples/532-current-l2-theorem-model-check-reopen-threshold-helper-mirror.md`
+  - `docs/reports/0813-package60-theorem-model-check-residual-mixed-gate-compression.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 18:08 JST
+最終更新: 2026-04-19 18:41 JST
 
 ## この文書について
 
@@ -22,8 +22,9 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - helper / CLI hardening と broader theorem-side / diagnostics / order-handoff coverage
+  - order-handoff/shared-space residual mixed-gate compression
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
+  - strong typing / IFC beyond first checker fragment の helper-to-checker ratchet
   - packaging / FFI / broader app target の user-spec residual
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -41,9 +42,9 @@
   - generated current-L2 theorem stubs は `sorry` を含むため、artifact well-formedness / bridge alignment evidence として読む
 - theorem / model-check / order-handoff / shared-space current floor
   - theorem-side:
-    theorem-first pilot、binding preflight、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution
+    theorem-first pilot、binding preflight、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、reopen-threshold helper mirror
   - model-check side:
-    row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression
+    row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
   - order-handoff / shared-space side:
     authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、CLI `surface_preview`、late-join negative static stop `p13 / p14`
 
@@ -51,7 +52,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `60` theorem/model-check residual mixed-gate compression | theorem/model-check residual mixed gates をどの reopen order で narrow に残すか | `M` | `Macro 5/7` | helper-local actualization と representative sample floor を基点に、final public theorem/model-check contract 群の reopen 順だけを圧縮する | stale comparison debt を増やさず、current recommendation / retained later / stop line を sharpen できる |
 | `61` order-handoff/shared-space residual mixed-gate compression | source wording / emitted artifact / witness-provider public contract residual をどの reopen order で narrow に残すか | `M` | `Macro 5/6/7` | edge-row principal と route/schema actual adoption を維持したまま、Problem 2 residual を sharpen する | final public wording / contract を凍らせず reopen 順を圧縮できる |
 
 ## recently closed package note
@@ -109,6 +109,18 @@
   `plan/18`
   `plan/90`
 
+### Package 60 — theorem/model-check residual mixed-gate compression
+
+- current reading:
+  close 済み。theorem/model-check final public-contract reopen threshold を `run-source-sample` helper summary に mirror し、`p08` theorem reached / model-check guarded と `p09` theorem guarded / model-check reached の非対称を helper-local operational summary に actualize した。
+- evidence:
+  `specs/examples/532`
+  `docs/reports/0813`
+  `crates/mir-runtime/src/current_l2_cli.rs`
+  `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+- stop line:
+  final public theorem/model-check contract adoption、final public verifier contract adoption、concrete production prover/model-check binding には上げない
+
 ## research-discovery items
 
 | item | 何に影響するか | current recommendation |
@@ -123,7 +135,7 @@
 | topic | impact | current recommendation |
 |---|---|---|
 | final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract | theorem-first pilot | review-unit transport first、notebook-consumer object first、Lean-stub bridge current floor と representative Lean sample set actual Lean execution floor を維持し、final public theorem contract 群には上げない |
-| first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract | model-check line | row-local property route first、checker-artifact route first、public-seam compression keep を維持する |
+| first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract | model-check line | row-local property route first、checker-artifact route first、reopen-threshold helper mirror keep、public-seam compression keep を維持する |
 | final source-surface handoff wording / final emitted-artifact schema | order-handoff public surface | edge-row principal、stage-block secondary keep、thread/node same causal language keep、serial sugar reserve を維持する |
 | final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract | shared-space stronger public shape | claim/payload split first、route/schema route actual adoption、trace-alignment reserve を維持し、final public contract 群には上げない |
 | stronger typed-surface actual adoption | typed source principal | checker-adjacent principal + layered stack + IFC first-fragment docs を先に actualize する |
@@ -140,5 +152,4 @@
 
 ## next reopen order
 
-1. Package 60 で theorem/model-check residual mixed-gate compression を進める。
-2. Package 61 で order-handoff/shared-space residual mixed-gate compression を進める。
+1. Package 61 で order-handoff/shared-space residual mixed-gate compression を進める。

@@ -224,6 +224,10 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     theorem_result_object_preview: CurrentL2OperationalCliTheoremResultObjectPreviewSummary,
     model_check_public_checker_preview:
         CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary,
+    theorem_final_public_contract_reopen_threshold:
+        CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary,
+    model_check_final_public_contract_reopen_threshold:
+        CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary,
     typed_checker_hint_preview: CurrentL2OperationalCliTypedCheckerHintPreviewSummary,
 }
 
@@ -242,6 +246,16 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             );
         let model_check_public_checker_preview =
             CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary::from_source_report(
+                &report,
+                &verification_preview,
+            );
+        let theorem_final_public_contract_reopen_threshold =
+            CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary::from_source_report(
+                &report,
+                &verification_preview,
+            );
+        let model_check_final_public_contract_reopen_threshold =
+            CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary::from_source_report(
                 &report,
                 &verification_preview,
             );
@@ -267,6 +281,8 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             surface_preview,
             theorem_result_object_preview,
             model_check_public_checker_preview,
+            theorem_final_public_contract_reopen_threshold,
+            model_check_final_public_contract_reopen_threshold,
             typed_checker_hint_preview,
         }
     }
@@ -1027,6 +1043,192 @@ impl CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    subject_kind: Option<&'static str>,
+    subject_ref: Option<String>,
+    result_object_route_refs: Vec<String>,
+    payload_preview_keep_refs: Vec<String>,
+    proof_object_schema_candidate_refs: Vec<String>,
+    prover_brand_candidate_refs: Vec<String>,
+    final_public_contract_reopen_sequence_refs: Vec<String>,
+    threshold_default_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "e5-underdeclared-lineage"
+                | "p06-typed-proof-owner-handoff"
+                | "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+        ) && verification_preview.formal_hook_status == "reached";
+
+        if reached {
+            let subject_ref = verification_preview.subject_ref.clone();
+            return Self {
+                status: "reached",
+                threshold_kind: "helper_local_reopen_threshold_manifest",
+                subject_kind: verification_preview.subject_kind,
+                subject_ref: subject_ref.clone(),
+                result_object_route_refs: theorem_result_object_actual_route_refs(
+                    subject_ref.as_deref(),
+                ),
+                payload_preview_keep_refs: theorem_result_object_payload_preview_keep_refs(
+                    subject_ref.as_deref(),
+                ),
+                proof_object_schema_candidate_refs:
+                    theorem_proof_object_schema_candidate_refs(subject_ref.as_deref()),
+                prover_brand_candidate_refs: theorem_prover_brand_candidate_refs(
+                    subject_ref.as_deref(),
+                ),
+                final_public_contract_reopen_sequence_refs:
+                    theorem_final_public_contract_reopen_sequence_refs(subject_ref.as_deref()),
+                threshold_default_refs: theorem_final_public_contract_reopen_threshold_default_refs(),
+                evidence_refs: theorem_final_public_contract_reopen_threshold_evidence_refs(
+                    &report.sample_id,
+                ),
+                compare_floor_refs: theorem_final_public_contract_reopen_threshold_compare_floor_refs(
+                    true,
+                ),
+                guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(true),
+                kept_later_refs: theorem_final_public_contract_reopen_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "helper_local_reopen_threshold_manifest",
+            subject_kind: verification_preview.subject_kind,
+            subject_ref: verification_preview.subject_ref.clone(),
+            result_object_route_refs: Vec::new(),
+            payload_preview_keep_refs: Vec::new(),
+            proof_object_schema_candidate_refs: Vec::new(),
+            prover_brand_candidate_refs: Vec::new(),
+            final_public_contract_reopen_sequence_refs: Vec::new(),
+            threshold_default_refs: Vec::new(),
+            evidence_refs: theorem_final_public_contract_reopen_threshold_evidence_refs(
+                &report.sample_id,
+            ),
+            compare_floor_refs: theorem_final_public_contract_reopen_threshold_compare_floor_refs(
+                false,
+            ),
+            guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(false),
+            kept_later_refs: theorem_final_public_contract_reopen_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current theorem final public-contract reopen threshold only actualizes the representative theorem quartet (`e5` / `p06` / `p07` / `p08`) after verification preview reaches the formal-hook route for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    subject_kind: Option<&'static str>,
+    subject_ref: Option<String>,
+    checker_artifact_route_refs: Vec<String>,
+    migration_candidate_keep_refs: Vec<String>,
+    verifier_handoff_candidate_refs: Vec<String>,
+    tool_brand_candidate_refs: Vec<String>,
+    final_public_contract_reopen_sequence_refs: Vec<String>,
+    threshold_default_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "e5-underdeclared-lineage"
+                | "p06-typed-proof-owner-handoff"
+                | "p07-dice-late-join-visible-history"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && verification_preview.formal_hook_status == "reached";
+
+        if reached {
+            let subject_ref = verification_preview.subject_ref.clone();
+            return Self {
+                status: "reached",
+                threshold_kind: "helper_local_reopen_threshold_manifest",
+                subject_kind: verification_preview.subject_kind,
+                subject_ref: subject_ref.clone(),
+                checker_artifact_route_refs: model_check_checker_artifact_actual_route_refs(
+                    subject_ref.as_deref(),
+                ),
+                migration_candidate_keep_refs:
+                    model_check_checker_artifact_migration_keep_refs(subject_ref.as_deref()),
+                verifier_handoff_candidate_refs: model_check_verifier_handoff_candidate_refs(
+                    subject_ref.as_deref(),
+                ),
+                tool_brand_candidate_refs: model_check_tool_brand_candidate_refs(
+                    subject_ref.as_deref(),
+                ),
+                final_public_contract_reopen_sequence_refs:
+                    model_check_final_public_contract_reopen_sequence_refs(
+                        subject_ref.as_deref(),
+                    ),
+                threshold_default_refs:
+                    model_check_final_public_contract_reopen_threshold_default_refs(),
+                evidence_refs: model_check_final_public_contract_reopen_threshold_evidence_refs(
+                    &report.sample_id,
+                ),
+                compare_floor_refs:
+                    model_check_final_public_contract_reopen_threshold_compare_floor_refs(true),
+                guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(true),
+                kept_later_refs:
+                    model_check_final_public_contract_reopen_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "helper_local_reopen_threshold_manifest",
+            subject_kind: verification_preview.subject_kind,
+            subject_ref: verification_preview.subject_ref.clone(),
+            checker_artifact_route_refs: Vec::new(),
+            migration_candidate_keep_refs: Vec::new(),
+            verifier_handoff_candidate_refs: Vec::new(),
+            tool_brand_candidate_refs: Vec::new(),
+            final_public_contract_reopen_sequence_refs: Vec::new(),
+            threshold_default_refs: Vec::new(),
+            evidence_refs: model_check_final_public_contract_reopen_threshold_evidence_refs(
+                &report.sample_id,
+            ),
+            compare_floor_refs:
+                model_check_final_public_contract_reopen_threshold_compare_floor_refs(false),
+            guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(false),
+            kept_later_refs: model_check_final_public_contract_reopen_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current model-check final public-contract reopen threshold only actualizes the representative checker quartet (`e5` / `p06` / `p07` / `p09`) after verification preview reaches the formal-hook route for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliTypedReasonFamilyHintPreview {
     family_refs: Vec<String>,
     coverage_state: &'static str,
@@ -1205,6 +1407,17 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_model_check_public_checker_preview(
         &mut output,
         &summary.model_check_public_checker_preview,
+    );
+    writeln!(output, "theorem_final_public_contract_reopen_threshold:").expect("write to string");
+    render_theorem_final_public_contract_reopen_threshold(
+        &mut output,
+        &summary.theorem_final_public_contract_reopen_threshold,
+    );
+    writeln!(output, "model_check_final_public_contract_reopen_threshold:")
+        .expect("write to string");
+    render_model_check_final_public_contract_reopen_threshold(
+        &mut output,
+        &summary.model_check_final_public_contract_reopen_threshold,
     );
     writeln!(output, "typed_checker_hint_preview:").expect("write to string");
     render_typed_checker_hint_preview(&mut output, &summary.typed_checker_hint_preview);
@@ -1420,6 +1633,318 @@ fn model_check_public_checker_preview_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn theorem_final_public_contract_reopen_threshold_evidence_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "helper_preview:theorem_final_public_contract_reopen_threshold".to_string(),
+        "compare_floor:current_l2.theorem_final_public_contract_reopen_threshold".to_string(),
+    ]
+}
+
+fn theorem_result_object_actual_route_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!("theorem_result_object_actual_route:{subject_ref}:review_unit_transport_first"),
+            format!(
+                "theorem_result_object_actual_route:{subject_ref}:notebook_consumer_object_first"
+            ),
+            format!(
+                "theorem_result_object_actual_route:{subject_ref}:repo_local_emitted_artifact_refs_first"
+            ),
+            format!(
+                "theorem_result_object_actual_route:{subject_ref}:consumer_shaped_payload_preview_keep"
+            ),
+            format!(
+                "theorem_result_object_actual_route:{subject_ref}:proof_object_schema_prover_brand_later"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn theorem_result_object_payload_preview_keep_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "theorem_result_object_payload_preview_keep:{subject_ref}:notebook_consumer_first"
+            ),
+            format!(
+                "theorem_result_object_payload_preview_keep:{subject_ref}:consumer_shaped_payload_preview_only"
+            ),
+            format!(
+                "theorem_result_object_payload_preview_keep:{subject_ref}:payload_public_contract_later"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn theorem_proof_object_schema_candidate_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "theorem_proof_object_schema_candidate:{subject_ref}:result_object_preview_adjacent"
+            ),
+            format!(
+                "theorem_proof_object_schema_candidate:{subject_ref}:refs_only_public_schema_candidate"
+            ),
+            format!(
+                "theorem_proof_object_schema_candidate:{subject_ref}:public_contract_not_adopted"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn theorem_prover_brand_candidate_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!("theorem_prover_brand_candidate:{subject_ref}:brand_neutral_preflight_anchor"),
+            format!("theorem_prover_brand_candidate:{subject_ref}:adapter_boundary_refs_keep"),
+            format!("theorem_prover_brand_candidate:{subject_ref}:concrete_brand_not_adopted"),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn theorem_final_public_contract_reopen_sequence_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "theorem_final_public_contract_reopen:{subject_ref}:result_object_and_payload_first"
+            ),
+            format!(
+                "theorem_final_public_contract_reopen:{subject_ref}:prover_brand_and_proof_schema_second"
+            ),
+            format!(
+                "theorem_final_public_contract_reopen:{subject_ref}:final_public_verifier_contract_third"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn theorem_final_public_contract_reopen_threshold_default_refs() -> Vec<String> {
+    vec![
+        "theorem_final_public_contract_reopen_default:result_object_and_payload_first".to_string(),
+        "theorem_final_public_contract_reopen_default:prover_brand_and_proof_schema_second"
+            .to_string(),
+        "theorem_final_public_contract_reopen_default:final_public_verifier_contract_third"
+            .to_string(),
+    ]
+}
+
+fn theorem_final_public_contract_reopen_threshold_compare_floor_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption".to_string(),
+            "compare_floor:current_l2.theorem_result_object_preview_actualization".to_string(),
+            "compare_floor:current_l2.theorem_result_payload_public_contract.coupled_later_gate"
+                .to_string(),
+            "compare_floor:current_l2.theorem_result_object_actual_adoption".to_string(),
+            "compare_floor:current_l2.theorem_final_public_contract_reopen_threshold".to_string(),
+        ]
+    } else {
+        vec![
+            "compare_floor:current_l2.theorem_final_public_contract_reopen_threshold.guard_only"
+                .to_string(),
+        ]
+    }
+}
+
+fn theorem_final_public_contract_reopen_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:result_object_and_payload_first".to_string(),
+            "guard:prover_brand_and_proof_schema_second".to_string(),
+            "guard:final_public_verifier_contract_third".to_string(),
+        ]
+    } else {
+        vec!["guard:theorem_final_public_contract_reopen_threshold_not_reached".to_string()]
+    }
+}
+
+fn theorem_final_public_contract_reopen_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_public_theorem_result_object".to_string(),
+        "kept_later:consumer_shaped_theorem_payload".to_string(),
+        "kept_later:concrete_theorem_prover_brand".to_string(),
+        "kept_later:proof_object_public_schema".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
+fn model_check_final_public_contract_reopen_threshold_evidence_refs(
+    sample_id: &str,
+) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "helper_preview:model_check_final_public_contract_reopen_threshold".to_string(),
+        "compare_floor:current_l2.model_check.final_public_contract_reopen_threshold"
+            .to_string(),
+    ]
+}
+
+fn model_check_checker_artifact_actual_route_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "model_check_checker_artifact_actual_route:{subject_ref}:row_local_property_route_first"
+            ),
+            format!(
+                "model_check_checker_artifact_actual_route:{subject_ref}:checker_boundary_contract_anchor"
+            ),
+            format!(
+                "model_check_checker_artifact_actual_route:{subject_ref}:consumer_shaped_checker_artifact_candidate_only"
+            ),
+            format!(
+                "model_check_checker_artifact_actual_route:{subject_ref}:repo_local_emitted_artifact_refs_first"
+            ),
+            format!(
+                "model_check_checker_artifact_actual_route:{subject_ref}:final_public_checker_artifact_later"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn model_check_checker_artifact_migration_keep_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "model_check_checker_artifact_migration_keep:{subject_ref}:verifier_handoff_candidate_adjacent_keep"
+            ),
+            format!(
+                "model_check_checker_artifact_migration_keep:{subject_ref}:tool_brand_candidate_adjacent_keep"
+            ),
+            format!(
+                "model_check_checker_artifact_migration_keep:{subject_ref}:actual_public_checker_migration_candidate_only"
+            ),
+            format!(
+                "model_check_checker_artifact_migration_keep:{subject_ref}:runtime_policy_contract_later"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn model_check_verifier_handoff_candidate_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "model_check_verifier_handoff_candidate:{subject_ref}:public_checker_preview_adjacent"
+            ),
+            format!(
+                "model_check_verifier_handoff_candidate:{subject_ref}:emitted_handoff_artifact_candidate"
+            ),
+            format!(
+                "model_check_verifier_handoff_candidate:{subject_ref}:runtime_policy_contract_candidate"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn model_check_tool_brand_candidate_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "model_check_tool_brand_candidate:{subject_ref}:brand_neutral_request_manifest_keep"
+            ),
+            format!("model_check_tool_brand_candidate:{subject_ref}:concrete_tool_brand_candidate"),
+            format!(
+                "model_check_tool_brand_candidate:{subject_ref}:public_checker_artifact_not_adopted"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn model_check_final_public_contract_reopen_sequence_refs(
+    subject_ref: Option<&str>,
+) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "model_check_final_public_contract_reopen:{subject_ref}:property_language_and_tool_brand_first"
+            ),
+            format!(
+                "model_check_final_public_contract_reopen:{subject_ref}:public_checker_artifact_and_migration_second"
+            ),
+            format!(
+                "model_check_final_public_contract_reopen:{subject_ref}:verifier_handoff_and_runtime_policy_contract_third"
+            ),
+            format!(
+                "model_check_final_public_contract_reopen:{subject_ref}:final_public_verifier_contract_fourth"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn model_check_final_public_contract_reopen_threshold_default_refs() -> Vec<String> {
+    vec![
+        "model_check_final_public_contract_reopen_default:property_language_and_tool_brand_first"
+            .to_string(),
+        "model_check_final_public_contract_reopen_default:public_checker_artifact_and_migration_second"
+            .to_string(),
+        "model_check_final_public_contract_reopen_default:verifier_handoff_and_runtime_policy_contract_third"
+            .to_string(),
+        "model_check_final_public_contract_reopen_default:final_public_verifier_contract_fourth"
+            .to_string(),
+    ]
+}
+
+fn model_check_final_public_contract_reopen_threshold_compare_floor_refs(
+    reached: bool,
+) -> Vec<String> {
+    if reached {
+        vec![
+            "compare_floor:current_l2.model_check.public_checker_artifact_preview_actualization"
+                .to_string(),
+            "compare_floor:current_l2.model_check.property_tool_threshold".to_string(),
+            "compare_floor:current_l2.model_check.tool_brand_verifier_handoff_coupled_later_gate"
+                .to_string(),
+            "compare_floor:current_l2.model_check.public_checker_artifact_migration_coupled_later_gate"
+                .to_string(),
+            "compare_floor:current_l2.model_check.checker_artifact_route_actual_adoption"
+                .to_string(),
+            "compare_floor:current_l2.model_check.final_public_contract_reopen_threshold"
+                .to_string(),
+        ]
+    } else {
+        vec![
+            "compare_floor:current_l2.model_check.final_public_contract_reopen_threshold.guard_only"
+                .to_string(),
+        ]
+    }
+}
+
+fn model_check_final_public_contract_reopen_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:property_language_and_tool_brand_first".to_string(),
+            "guard:public_checker_artifact_and_migration_second".to_string(),
+            "guard:verifier_handoff_and_runtime_policy_contract_third".to_string(),
+            "guard:final_public_verifier_contract_fourth".to_string(),
+        ]
+    } else {
+        vec!["guard:model_check_final_public_contract_reopen_threshold_not_reached".to_string()]
+    }
+}
+
+fn model_check_final_public_contract_reopen_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:first_settled_property_language".to_string(),
+        "kept_later:concrete_model_check_tool_brand".to_string(),
+        "kept_later:final_public_checker_artifact".to_string(),
+        "kept_later:actual_public_checker_migration".to_string(),
+        "kept_later:actual_emitted_verifier_handoff_artifact".to_string(),
+        "kept_later:production_checker_runtime_policy_contract".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
 fn typed_checker_hint_guard_refs(reached: bool) -> Vec<String> {
     if reached {
         vec![
@@ -1557,6 +2082,132 @@ fn render_model_check_public_checker_preview(
     render_string_list(output, "guard_refs", &preview.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &preview.kept_later_refs, 1);
     if let Some(guard_reason) = &preview.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_theorem_final_public_contract_reopen_threshold(
+    output: &mut String,
+    threshold: &CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary,
+) {
+    writeln!(output, "  status: {}", threshold.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", threshold.threshold_kind).expect("write to string");
+    if let Some(subject_kind) = threshold.subject_kind {
+        writeln!(output, "  subject_kind: {subject_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_kind: none").expect("write to string");
+    }
+    if let Some(subject_ref) = &threshold.subject_ref {
+        writeln!(output, "  subject_ref: {subject_ref}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_ref: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "result_object_route_refs",
+        &threshold.result_object_route_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "payload_preview_keep_refs",
+        &threshold.payload_preview_keep_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "proof_object_schema_candidate_refs",
+        &threshold.proof_object_schema_candidate_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "prover_brand_candidate_refs",
+        &threshold.prover_brand_candidate_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "final_public_contract_reopen_sequence_refs",
+        &threshold.final_public_contract_reopen_sequence_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "threshold_default_refs",
+        &threshold.threshold_default_refs,
+        1,
+    );
+    render_string_list(output, "evidence_refs", &threshold.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &threshold.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &threshold.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &threshold.kept_later_refs, 1);
+    if let Some(guard_reason) = &threshold.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_model_check_final_public_contract_reopen_threshold(
+    output: &mut String,
+    threshold: &CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary,
+) {
+    writeln!(output, "  status: {}", threshold.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", threshold.threshold_kind).expect("write to string");
+    if let Some(subject_kind) = threshold.subject_kind {
+        writeln!(output, "  subject_kind: {subject_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_kind: none").expect("write to string");
+    }
+    if let Some(subject_ref) = &threshold.subject_ref {
+        writeln!(output, "  subject_ref: {subject_ref}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_ref: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "checker_artifact_route_refs",
+        &threshold.checker_artifact_route_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "migration_candidate_keep_refs",
+        &threshold.migration_candidate_keep_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "verifier_handoff_candidate_refs",
+        &threshold.verifier_handoff_candidate_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "tool_brand_candidate_refs",
+        &threshold.tool_brand_candidate_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "final_public_contract_reopen_sequence_refs",
+        &threshold.final_public_contract_reopen_sequence_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "threshold_default_refs",
+        &threshold.threshold_default_refs,
+        1,
+    );
+    render_string_list(output, "evidence_refs", &threshold.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &threshold.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &threshold.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &threshold.kept_later_refs, 1);
+    if let Some(guard_reason) = &threshold.guard_reason {
         writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
     } else {
         writeln!(output, "  guard_reason: none").expect("write to string");
