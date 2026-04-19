@@ -181,6 +181,9 @@
 - `specs/examples/539-current-l2-ifc-checker-payload-public-schema-sketch-threshold-helper-mirror.md`
   - Package 67 の closeout として `p10 / p11 / p12` source-side IFC trio の checker payload public-schema sketch threshold を `run-source-sample` helper summary に narrow に mirror し、`actual_checker_payload_family_ref + checker_payload_row_family_ref + checker_payload_row_detail_ref + checker_payload_row_body_ref + checker_payload_supported_kind_summary_ref` の 5 ref wrapper bridge を helper-local operational summary で保つ補助文書。
   - public checker API、final public checker artifact、final public verifier contract を固定するものではなく、Package 67 close と Package 68 checker payload public-checker-api sketch ratchet next line を読むための anchor である。
+- `specs/examples/540-current-l2-ifc-public-checker-api-sketch-threshold-helper-mirror.md`
+  - Package 68 の closeout として `p10 / p11 / p12` source-side IFC trio の public checker API sketch threshold を `run-source-sample` helper summary に narrow に mirror し、`checker_subject + public_checker_payload_schema_ref` の minimal API read relation を helper-local operational summary で保つ補助文書。
+  - public checker entry criteria、actual command surface、shared output contract、parser-front public checker boundary、final public verifier contract を固定するものではなく、Package 68 close と Package 69 public-checker entry-criteria ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
