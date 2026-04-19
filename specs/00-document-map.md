@@ -49,6 +49,16 @@
     「何を答えればどこまで自走できるか」
     を representative Lean sample set actual Lean execution floor まで含めて整理する。
   - 規範判断の正本ではないが、current status / completion-bound / self-drive-limit の確認入口として使ってよい。
+- `faq_010.md`
+  - 2026-04-20 時点の current explanation refresh であり、
+    `faq_009.md` 以後の actual progress を反映した上で、
+    「どこまで終わっているか」
+    「二大問題を completely solved / language implementation complete と読めるか」
+    「全体像に対して今どこにいるか」
+    「何が self-driven mixed gate で、何が true user-spec gate か」
+    「どこまでなら現実的に自走できるか」
+    を phase6 parser-side tranche actualization まで含めて整理する。
+  - 規範判断の正本ではないが、current status / implementation-bound / self-drive-limit の確認入口として使ってよい。
 - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
   - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
   - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。

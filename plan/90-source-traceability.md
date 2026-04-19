@@ -3612,6 +3612,35 @@
   - `docs/reports/0799-actual-lean-prototype-widening-and-snapshot-sync.md`
 - 今回の要点は、`faq_008.md` 以後の genuine progress として theorem/model-check/order-handoff/shared-space residual compression と representative Lean actual-execution floor を current explanation に取り込みつつ、「かなり進んでいる」「current mapped corpus の runnable floor は reached」「しかし final public language implementation complete ではない」「repo-local near-end success まではかなり自走しやすいが full final completion には still mixed gate / user-spec residual が残る」という current lineを明示した点である。
 
+### 2026-04-20 FAQ 010 current-status and phase6 parser-side refresh
+
+- `faq_010.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `progress.md`
+  - `tasks.md`
+  - `faq_009.md`
+  - `specs/10-open-questions.md`
+  - `specs/11-roadmap-and-workstreams.md`
+  - `specs/12-decision-register.md`
+  - `plan/01-status-at-a-glance.md`
+  - `plan/11-roadmap-near-term.md`
+  - `plan/17-research-phases-and-autonomy-gates.md`
+  - `specs/examples/552-current-l2-phase6-actual-parser-ast-carrier-first-tranche-threshold-helper-mirror.md`
+  - `specs/examples/553-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-threshold-helper-mirror.md`
+  - `specs/examples/554-current-l2-phase6-compile-ready-verification-and-formal-hook-threshold-helper-mirror.md`
+  - `specs/examples/555-current-l2-phase6-next-reopen-sequencing-threshold-helper-mirror.md`
+  - `specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md`
+  - `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
+  - `specs/examples/558-current-l2-phase6-reserve-formal-tool-binding-inventory-threshold-helper-mirror.md`
+  - `specs/examples/559-current-l2-phase6-parser-side-follow-up-package-sequencing-threshold-helper-mirror.md`
+  - `specs/examples/560-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-threshold-helper-mirror.md`
+  - `specs/examples/561-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-threshold-helper-mirror.md`
+  - `specs/examples/562-current-l2-phase6-request-clause-suite-publicization-threshold-helper-mirror.md`
+  - `specs/examples/563-current-l2-phase6-perform-head-structural-carrier-threshold-helper-mirror.md`
+  - `docs/reports/0844-package89-request-clause-suite-publicization.md`
+  - `docs/reports/0845-package90-perform-head-structural-carrier.md`
+  - `docs/reports/0846-faq010-current-status-and-phase6-parser-side-refresh.md`
+- 今回の要点は、`faq_009.md` 以後の genuine progress として representative Lean execution floor の先にある phase6 parser-side / checker-runtime-side narrow actualization を current explanation に取り込みつつ、「二大問題の current first line と helper-local actualization はかなり進んだが final public language implementation complete ではない」「repo-local near-end success に対してはかなり自走しやすいが、full final-public completion には still mixed gate / true user-spec gate が残る」という current lineを明示した点である。
+
 ### 2026-04-19 final-layer closeout handoff integration
 
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`docs/reports/0801-final-layer-closeout-handoff-integration.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。

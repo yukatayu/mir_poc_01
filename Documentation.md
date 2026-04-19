@@ -358,6 +358,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
    `faq_007.md`
    `faq_008.md`
    `faq_009.md`
+   `faq_010.md`
    `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
 
 ## 直近で特に重要な文書
@@ -367,7 +368,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
 - typed / theorem / model-check / ordering の adjacent package:
   `specs/examples/413...448`
 - current tranche / preview package:
-  `specs/examples/451...535`
+  `specs/examples/451...563`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:
@@ -381,6 +382,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
 - `faq_007.md` は 2026-04-18 時点の current explanation snapshot であり、「どこまで終わっているか」「二大問題は完全解決済みか」「何を答えればどこまで自走できるか」を整理する。
 - `faq_008.md` は 2026-04-18 時点の current explanation refresh であり、`faq_007.md` 以後の genuine progress、現状の finished / not finished / mixed gate / true user-spec gate、および「何を答えればどこまで自走できるか」の current limit を整理する。
 - `faq_009.md` は 2026-04-19 時点の current explanation refresh であり、representative Lean sample set actual Lean execution floor を含む最新 status を踏まえて、done / not done / overall ladder / remaining gate / self-drive bound を整理する。
+- `faq_010.md` は 2026-04-20 時点の current explanation refresh であり、`faq_009.md` 以後の Phase 6 parser-side tranche actualization を含む最新 status を踏まえて、二大問題の closeout 到達点、language implementation の current limit、remaining mixed gate / true user-spec gate、および「ここからどこまで自走できるか」の current bound を整理する。
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md` は 2026-04-19 時点の detailed closeout handoff であり、layered strong typing / IFC、Lean formal skeleton、first completion scope、reopened self-driven queue の current explanation source として使ってよい。
 - 規範判断の正本は常に `specs/` に残る。
 - `plan/` は long-lived repository memory であり、snapshot ではない。
