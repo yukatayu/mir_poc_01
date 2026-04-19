@@ -245,6 +245,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSummary,
     actual_public_checker_api_sketch_threshold:
         CurrentL2OperationalCliActualPublicCheckerApiSketchThresholdSummary,
+    actual_public_checker_entry_criteria_threshold:
+        CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -324,6 +326,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &verification_preview,
                 &actual_checker_payload_public_schema_sketch_threshold,
             );
+        let actual_public_checker_entry_criteria_threshold =
+            CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary::from_source_report(
+                &report,
+                &actual_public_checker_api_sketch_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -352,6 +359,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_checker_payload_supported_kind_summary_threshold,
             actual_checker_payload_public_schema_sketch_threshold,
             actual_public_checker_api_sketch_threshold,
+            actual_public_checker_entry_criteria_threshold,
         }
     }
 }
@@ -1618,6 +1626,122 @@ impl CurrentL2OperationalCliActualPublicCheckerApiSketchThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    public_checker_api_ref: Option<&'static str>,
+    entry_criteria_refs: Vec<String>,
+    family_facade_support_ref: Option<&'static str>,
+    family_facade_script_refs: Vec<String>,
+    smoke_command_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    deferred_boundary_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_public_checker_api_sketch_threshold:
+            &CurrentL2OperationalCliActualPublicCheckerApiSketchThresholdSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p10-typed-authorized-fingerprint-declassification"
+                | "p11-typed-unauthorized-fingerprint-release"
+                | "p12-typed-classified-fingerprint-publication-block"
+        ) && actual_public_checker_api_sketch_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_public_checker_api_sketch_threshold.compare_floor_refs.clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.public_checker_entry_criteria".to_string());
+            compare_floor_refs.push(
+                "compare_floor:current_l2.checker.minimal_public_checker_entry_criteria_threshold"
+                    .to_string(),
+            );
+
+            let mut evidence_refs =
+                actual_public_checker_api_sketch_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_public_checker_entry_criteria_threshold".to_string(),
+            );
+            evidence_refs.push("source:scripts/current_l2_family_checker_support.py".to_string());
+            evidence_refs.push("source:scripts/current_l2_same_lineage_checker.py".to_string());
+            evidence_refs.push("source:scripts/current_l2_missing_option_checker.py".to_string());
+            evidence_refs.push("source:scripts/current_l2_capability_checker.py".to_string());
+            evidence_refs.push("source:detached_loop_smoke_checker_family".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind: "checker_adjacent_public_checker_entry_criteria_threshold_manifest",
+                public_checker_api_ref: Some("public_checker_api_ready_sketch"),
+                entry_criteria_refs: vec![
+                    "public_checker_entry_criteria:minimal_api_fixed".to_string(),
+                    "public_checker_entry_criteria:command_surface_pressure_present".to_string(),
+                    "public_checker_entry_criteria:comparison_target_narrowed".to_string(),
+                    "public_checker_entry_criteria:heavier_boundary_deferred".to_string(),
+                ],
+                family_facade_support_ref: Some("scripts/current_l2_family_checker_support.py"),
+                family_facade_script_refs: vec![
+                    "scripts/current_l2_same_lineage_checker.py".to_string(),
+                    "scripts/current_l2_missing_option_checker.py".to_string(),
+                    "scripts/current_l2_capability_checker.py".to_string(),
+                ],
+                smoke_command_refs: vec![
+                    "smoke-same-lineage-checker".to_string(),
+                    "smoke-missing-option-checker".to_string(),
+                    "smoke-capability-checker".to_string(),
+                ],
+                next_comparison_target_ref: Some("public_checker_command_surface_comparison"),
+                deferred_boundary_refs: vec![
+                    "shared_output_contract".to_string(),
+                    "parser_front_public_checker_boundary".to_string(),
+                    "verifier_handoff_surface".to_string(),
+                ],
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs: actual_public_checker_entry_criteria_threshold_guard_refs(true),
+                kept_later_refs: actual_public_checker_entry_criteria_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "checker_adjacent_public_checker_entry_criteria_threshold_manifest",
+            public_checker_api_ref: None,
+            entry_criteria_refs: vec![],
+            family_facade_support_ref: None,
+            family_facade_script_refs: vec![],
+            smoke_command_refs: vec![],
+            next_comparison_target_ref: None,
+            deferred_boundary_refs: vec![],
+            evidence_refs: vec![
+                format!("sample:{}", report.sample_id),
+                "helper_preview:actual_public_checker_entry_criteria_threshold".to_string(),
+                "compare_floor:current_l2.checker.public_checker_entry_criteria".to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.checker.public_checker_entry_criteria.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_public_checker_entry_criteria_threshold_guard_refs(false),
+            kept_later_refs: actual_public_checker_entry_criteria_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual public checker entry-criteria threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual public checker API sketch threshold reaches the checker-adjacent helper floor for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -2281,6 +2405,12 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_public_checker_api_sketch_threshold(
         &mut output,
         &summary.actual_public_checker_api_sketch_threshold,
+    );
+    writeln!(output, "actual_public_checker_entry_criteria_threshold:")
+        .expect("write to string");
+    render_actual_public_checker_entry_criteria_threshold(
+        &mut output,
+        &summary.actual_public_checker_entry_criteria_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -3310,6 +3440,31 @@ fn actual_public_checker_api_sketch_threshold_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn actual_public_checker_entry_criteria_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:checker_adjacent_public_checker_entry_criteria_threshold_only".to_string(),
+            "guard:public_checker_command_surface_comparison_next".to_string(),
+            "guard:shared_output_contract_later".to_string(),
+            "guard:parser_front_public_checker_boundary_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_public_checker_entry_criteria_threshold_not_reached".to_string(),
+        ]
+    }
+}
+
+fn actual_public_checker_entry_criteria_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:public_checker_command_surface".to_string(),
+        "kept_later:shared_output_contract".to_string(),
+        "kept_later:parser_front_public_checker_boundary".to_string(),
+        "kept_later:verifier_handoff_surface".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -4018,6 +4173,48 @@ fn render_actual_public_checker_api_sketch_threshold(
         writeln!(output, "  public_checker_payload_schema_ref: none")
             .expect("write to string");
     }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_public_checker_entry_criteria_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(public_checker_api_ref) = summary.public_checker_api_ref {
+        writeln!(output, "  public_checker_api_ref: {public_checker_api_ref}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  public_checker_api_ref: none").expect("write to string");
+    }
+    render_string_list(output, "entry_criteria_refs", &summary.entry_criteria_refs, 1);
+    if let Some(family_facade_support_ref) = summary.family_facade_support_ref {
+        writeln!(output, "  family_facade_support_ref: {family_facade_support_ref}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  family_facade_support_ref: none").expect("write to string");
+    }
+    render_string_list(output, "family_facade_script_refs", &summary.family_facade_script_refs, 1);
+    render_string_list(output, "smoke_command_refs", &summary.smoke_command_refs, 1);
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "deferred_boundary_refs", &summary.deferred_boundary_refs, 1);
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);

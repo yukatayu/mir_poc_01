@@ -569,7 +569,13 @@ actual-adoption floor では、
   - `p10 / p11 / p12` source-side IFC trio
   - `actual_public_checker_api_sketch_threshold`
   - `checker_subject + public_checker_payload_schema_ref` minimal API read relation mirror
-  - Package 68 public-checker-api sketch ratchet close、Package 69 public-checker entry-criteria ratchet next
+  - Package 68 public-checker-api sketch ratchet close、Package 69 public-checker entry-criteria ratchet close
+- IFC public-checker-entry-criteria threshold helper mirror:
+  `specs/examples/541`
+  - `p10 / p11 / p12` source-side IFC trio
+  - `actual_public_checker_entry_criteria_threshold`
+  - `public_checker_api_ref + entry_criteria_refs + next_comparison_target_ref + deferred_boundary_refs` entry-criteria minimum mirror
+  - Package 69 public-checker entry-criteria ratchet close、Package 70 public-checker command-surface ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
