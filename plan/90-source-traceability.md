@@ -281,6 +281,17 @@
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
 
+## 2026-04-19 Package 66 IFC checker payload supported-kind-summary ratchet addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/271-current-l2-minimal-checker-payload-row-body-ready-checker-payload-supported-kind-summary-comparison.md`
+  - `specs/examples/272-current-l2-checker-payload-supported-kind-summary-ready-minimal-checker-payload-supported-kind-summary-threshold.md`
+  - `specs/examples/537-current-l2-ifc-checker-payload-row-body-threshold-helper-mirror.md`
+  - `specs/examples/538-current-l2-ifc-checker-payload-supported-kind-summary-threshold-helper-mirror.md`
+  - `docs/reports/0819-package66-ifc-checker-payload-supported-kind-summary-ratchet.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
 ## 2026-04-19 runnable-status audit and snapshot rewrite addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md` の今回更新分は、追加で次を主根拠にする。

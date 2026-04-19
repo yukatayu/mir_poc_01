@@ -392,6 +392,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_checker_payload_row_body_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_checker_payload_supported_kind_summary_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -638,6 +642,31 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_checker_payload_row_body_threshold"]["row_body"]["visibility_target_ref"],
         "room_members"
     );
+    assert_eq!(
+        value["actual_checker_payload_supported_kind_summary_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_supported_kind_summary_threshold"]["payload_row_family_ref"],
+        "actual_checker_payload_row_family"
+    );
+    assert_eq!(
+        value["actual_checker_payload_supported_kind_summary_threshold"]["supported_kind_scope"],
+        "stable_clusters_only"
+    );
+    assert_eq!(
+        value["actual_checker_payload_supported_kind_summary_threshold"]["supported_kind_refs"],
+        Value::Array(vec![
+            Value::String("missing_lineage_assertion".into()),
+            Value::String("lineage_assertion_edge_mismatch".into()),
+            Value::String("declared_target_missing".into()),
+            Value::String("declared_target_mismatch".into()),
+            Value::String("capability_strengthens".into()),
+            Value::String("missing_chain_head_option".into()),
+            Value::String("missing_predecessor_option".into()),
+            Value::String("missing_successor_option".into()),
+        ])
+    );
 }
 
 #[test]
@@ -677,6 +706,10 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("actual_checker_payload_row_body_threshold:"));
     assert!(output.contains("selected_option_ref: fingerprint_holder"));
     assert!(output.contains("visibility_target_ref: room_members"));
+    assert!(output.contains("actual_checker_payload_supported_kind_summary_threshold:"));
+    assert!(output.contains("supported_kind_scope: stable_clusters_only"));
+    assert!(output.contains("missing_lineage_assertion"));
+    assert!(output.contains("missing_successor_option"));
 }
 
 #[test]
@@ -751,5 +784,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_checker_payload_row_body_threshold"]["row_body"]["visibility_target_ref"],
         "public_board"
+    );
+    assert_eq!(
+        value["actual_checker_payload_supported_kind_summary_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_supported_kind_summary_threshold"]["supported_kind_scope"],
+        "stable_clusters_only"
     );
 }

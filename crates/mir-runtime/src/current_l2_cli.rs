@@ -239,6 +239,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualCheckerPayloadRowDetailThresholdSummary,
     actual_checker_payload_row_body_threshold:
         CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary,
+    actual_checker_payload_supported_kind_summary_threshold:
+        CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -302,6 +304,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_checker_payload_row_detail_threshold,
             );
+        let actual_checker_payload_supported_kind_summary_threshold =
+            CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSummary::from_source_report(
+                &report,
+                &actual_checker_payload_row_body_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -327,6 +334,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_checker_payload_row_family_threshold,
             actual_checker_payload_row_detail_threshold,
             actual_checker_payload_row_body_threshold,
+            actual_checker_payload_supported_kind_summary_threshold,
         }
     }
 }
@@ -1329,6 +1337,96 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    payload_row_family_ref: Option<&'static str>,
+    supported_kind_scope: Option<&'static str>,
+    supported_kind_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_checker_payload_row_body_threshold:
+            &CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p10-typed-authorized-fingerprint-declassification"
+                | "p11-typed-unauthorized-fingerprint-release"
+                | "p12-typed-classified-fingerprint-publication-block"
+        ) && actual_checker_payload_row_body_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_checker_payload_row_body_threshold.compare_floor_refs.clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.checker.checker_payload_supported_kind_summary"
+                    .to_string(),
+            );
+            compare_floor_refs.push(
+                "compare_floor:current_l2.checker.minimal_checker_payload_supported_kind_summary_threshold"
+                    .to_string(),
+            );
+
+            let mut evidence_refs = actual_checker_payload_row_body_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_checker_payload_supported_kind_summary_threshold"
+                    .to_string(),
+            );
+
+            return Self {
+                status: "reached",
+                threshold_kind: "checker_adjacent_supported_kind_summary_threshold_manifest",
+                payload_row_family_ref: Some("actual_checker_payload_row_family"),
+                supported_kind_scope: Some("stable_clusters_only"),
+                supported_kind_refs: actual_checker_payload_supported_kind_refs(),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs: actual_checker_payload_supported_kind_summary_threshold_guard_refs(
+                    true,
+                ),
+                kept_later_refs:
+                    actual_checker_payload_supported_kind_summary_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "checker_adjacent_supported_kind_summary_threshold_manifest",
+            payload_row_family_ref: None,
+            supported_kind_scope: None,
+            supported_kind_refs: Vec::new(),
+            evidence_refs: vec![
+                format!("sample:{}", report.sample_id),
+                "helper_preview:actual_checker_payload_supported_kind_summary_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.checker.checker_payload_supported_kind_summary"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.checker.checker_payload_supported_kind_summary.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_checker_payload_supported_kind_summary_threshold_guard_refs(false),
+            kept_later_refs:
+                actual_checker_payload_supported_kind_summary_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual checker payload supported-kind summary threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload row-body threshold reaches the checker-adjacent helper floor for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -1974,6 +2072,12 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_checker_payload_row_body_threshold(
         &mut output,
         &summary.actual_checker_payload_row_body_threshold,
+    );
+    writeln!(output, "actual_checker_payload_supported_kind_summary_threshold:")
+        .expect("write to string");
+    render_actual_checker_payload_supported_kind_summary_threshold(
+        &mut output,
+        &summary.actual_checker_payload_supported_kind_summary_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -2911,6 +3015,47 @@ fn actual_checker_payload_row_body_threshold_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn actual_checker_payload_supported_kind_refs() -> Vec<String> {
+    vec![
+        "missing_lineage_assertion".to_string(),
+        "lineage_assertion_edge_mismatch".to_string(),
+        "declared_target_missing".to_string(),
+        "declared_target_mismatch".to_string(),
+        "capability_strengthens".to_string(),
+        "missing_chain_head_option".to_string(),
+        "missing_predecessor_option".to_string(),
+        "missing_successor_option".to_string(),
+    ]
+}
+
+fn actual_checker_payload_supported_kind_summary_threshold_guard_refs(
+    reached: bool,
+) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:checker_adjacent_supported_kind_summary_threshold_only".to_string(),
+            "guard:checker_supported_kind_summary_docs_first_bridge".to_string(),
+            "guard:public_checker_payload_schema_later".to_string(),
+            "guard:final_public_checker_payload_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_checker_payload_supported_kind_summary_threshold_not_reached"
+                .to_string(),
+        ]
+    }
+}
+
+fn actual_checker_payload_supported_kind_summary_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:public_checker_payload_schema".to_string(),
+        "kept_later:final_public_checker_artifact".to_string(),
+        "kept_later:final_typed_source_principal".to_string(),
+        "kept_later:final_ifc_syntax".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -3492,6 +3637,36 @@ fn render_actual_checker_payload_row_body_threshold(
     } else {
         writeln!(output, "  row_body: none").expect("write to string");
     }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_checker_payload_supported_kind_summary_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(payload_row_family_ref) = summary.payload_row_family_ref {
+        writeln!(output, "  payload_row_family_ref: {payload_row_family_ref}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  payload_row_family_ref: none").expect("write to string");
+    }
+    if let Some(supported_kind_scope) = summary.supported_kind_scope {
+        writeln!(output, "  supported_kind_scope: {supported_kind_scope}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  supported_kind_scope: none").expect("write to string");
+    }
+    render_string_list(output, "supported_kind_refs", &summary.supported_kind_refs, 1);
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);

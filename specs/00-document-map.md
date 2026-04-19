@@ -175,6 +175,9 @@
 - `specs/examples/537-current-l2-ifc-checker-payload-row-body-threshold-helper-mirror.md`
   - Package 65 の closeout として `p10 / p11 / p12` source-side IFC trio の checker payload row-body threshold を `run-source-sample` helper summary に narrow に mirror し、`row_body = { selected_option_ref, visibility_target_ref }` の row-body bridge を helper-local operational summary で保つ補助文書。
   - supported kind summary、public checker payload schema、final public checker artifact、final public verifier contract を固定するものではなく、Package 65 close と Package 66 checker payload supported-kind-summary ratchet next line を読むための anchor である。
+- `specs/examples/538-current-l2-ifc-checker-payload-supported-kind-summary-threshold-helper-mirror.md`
+  - Package 66 の closeout として `p10 / p11 / p12` source-side IFC trio の checker payload supported-kind summary threshold を `run-source-sample` helper summary に narrow に mirror し、`payload_row_family_ref + supported_kind_scope + supported_kind_refs` の row-family keyed summary bridge を helper-local operational summary で保つ補助文書。
+  - public checker payload schema、final public checker artifact、public checker API、final public verifier contract を固定するものではなく、Package 66 close と Package 67 checker payload public-schema sketch ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

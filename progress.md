@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-19 20:04 JST
+最終更新: 2026-04-19 20:16 JST
 
 ## この文書について
 
@@ -15,8 +15,8 @@
   `Macro 4 active on fixed authored/prototype floor`
   （authored sixteen と corrected prototype set `p01...p14` は runnable floor に乗っており、sample corpus は adequacy corpus として active に保つ）
 - current theory-lab line:
-  `Macro 5 checker payload supported-kind-summary ratchet active after Package 65 close`
-  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530`、`531`、`532`、`533`、`534`、`535`、`536`、`537` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening、near-end closeout sync after Package 58、theorem/model-check reopen-threshold helper mirror、order-handoff/shared-space public-seam helper mirror、IFC actual-checker-payload-family threshold helper mirror、IFC checker-payload-row-family threshold helper mirror、IFC checker-payload-row-detail threshold helper mirror、IFC checker-payload-row-body threshold helper mirror は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper、snapshot / roadmap / traceability sync に actualize 済みである。current active closeout line は checker payload supported-kind-summary ratchet、later mixed-gate residual maintenance、true user-spec residual に narrowed した）
+  `Macro 5 checker payload public-schema sketch ratchet active after Package 66 close`
+  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530`、`531`、`532`、`533`、`534`、`535`、`536`、`537`、`538` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening、near-end closeout sync after Package 58、theorem/model-check reopen-threshold helper mirror、order-handoff/shared-space public-seam helper mirror、IFC actual-checker-payload-family threshold helper mirror、IFC checker-payload-row-family threshold helper mirror、IFC checker-payload-row-detail threshold helper mirror、IFC checker-payload-row-body threshold helper mirror、IFC checker-payload-supported-kind-summary threshold helper mirror は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper、snapshot / roadmap / traceability sync に actualize 済みである。current active closeout line は checker payload public-schema sketch ratchet、later mixed-gate residual maintenance、true user-spec residual に narrowed した）
 - current reserve integration line:
   `Macro 6 minimal working subset actual default / Macro 7 mixed`
   （authoritative room baseline、late join visible past、stale reconnect fail-then-refresh、witness/provider route-first line は current default に上がっているが、final public witness/provider/artifact contract、packaging、FFI、engine adapter、exhaustive catalog は still later に残る）
@@ -80,13 +80,13 @@
 | feature family | 現在地 | できていること | 次の意味ある一歩 |
 |---|---|---|---|
 | current-L2 runner / CLI | `S6` | authored sixteen、prototype set `p01...p14`、pretty/json CLI、regression floor、order-handoff `surface_preview`、order-handoff negative static stop | widened corpus は mixed gate か closeout package を 1 つ閉じる時だけ追加 |
-| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over、`p13 / p14` negative pair carry-over、result-object preview helper mirror、reopen-threshold helper mirror、checker payload family / row-family / row-detail / row-body helper mirror | checker payload supported-kind-summary ratchet と final public seam mixed gate maintenance |
-| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`samples/lean/current-l2/` committed representative sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14`、toolchain pin、export/sync helper | checker payload supported-kind-summary ratchet |
-| model-check line | `S6` on docs, `S4-S5` on implementation | row-local property route、checker-artifact route、reopen threshold、public-seam compression、public-checker preview helper mirror、reopen-threshold helper mirror、checker payload family / row-family / row-detail / row-body helper mirror | checker payload supported-kind-summary ratchet と final public seam mixed gate maintenance |
+| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over、`p13 / p14` negative pair carry-over、result-object preview helper mirror、reopen-threshold helper mirror、checker payload family / row-family / row-detail / row-body / supported-kind-summary helper mirror | checker payload public-schema sketch ratchet と final public seam mixed gate maintenance |
+| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`samples/lean/current-l2/` committed representative sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14`、toolchain pin、export/sync helper | checker payload public-schema sketch ratchet |
+| model-check line | `S6` on docs, `S4-S5` on implementation | row-local property route、checker-artifact route、reopen threshold、public-seam compression、public-checker preview helper mirror、reopen-threshold helper mirror、checker payload family / row-family / row-detail / row-body / supported-kind-summary helper mirror | checker payload public-schema sketch ratchet と final public seam mixed gate maintenance |
 | order / handoff line | `S6` | relation decomposition principal、surface actual adoption、source-wording route、stage-block secondary、serial-scope reserve surface、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static-stop pair | final source wording / emitted-artifact schema mixed gate maintenance |
 | shared-space minimal subset | `S6` | authoritative room baseline、vertical slice、witness/provider route/schema route、emitted-contract trace alignment、public-seam compression | final public contract mixed gate |
 | syntax / modality | `S6` on docs, `S3-S4` on implementation | semantic honesty principle、5 axes、partial basis keep、minimal companion + stage-block secondary | final foundation / final marker mixed gate へ行く前の source package hardening |
-| strong typing / IFC | `S6` on docs, `S5-S6` on implementation | layered stack、`LabelModel` / `Labeled` sketch、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、source-side IFC trio `p10 / p11 / p12`、sample-local `typed_checker_hint_preview`、sample-local `actual_checker_payload_family_threshold`、sample-local `actual_checker_payload_row_family_threshold`、sample-local `actual_checker_payload_row_detail_threshold`、sample-local `actual_checker_payload_row_body_threshold` | checker payload supported-kind-summary ratchet |
+| strong typing / IFC | `S6` on docs, `S5-S6` on implementation | layered stack、`LabelModel` / `Labeled` sketch、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、source-side IFC trio `p10 / p11 / p12`、sample-local `typed_checker_hint_preview`、sample-local `actual_checker_payload_family_threshold`、sample-local `actual_checker_payload_row_family_threshold`、sample-local `actual_checker_payload_row_detail_threshold`、sample-local `actual_checker_payload_row_body_threshold`、sample-local `actual_checker_payload_supported_kind_summary_threshold` | checker payload public-schema sketch ratchet |
 | proof spine / formalization | `S6` on docs, `S5` on implementation | multimodal dependent core direction、Lean-first roadmap、actual Lean execution representative sample floor、proof-skeleton first fragment | wider proof obligations と bridge-side helper/CLI hardening |
 | backend / packaging | `S2-S3` | repo-local CLI/tests/artifacts/compare floor | packaging / installed binary / FFI later |
 
@@ -101,7 +101,7 @@
 | corrected prototype line | 85% | 83% | 89% | 着手可能 |
 | Problem 1 typed / theorem / model-check | 95% | 92% | 84% | final public seams 以外は自走可能 |
 | Problem 2 order / handoff / room default | 89% | 87% | 66% | final public wording / contract 以外は自走可能 |
-| strong typing / IFC closeout | 90% | 84% | 69% | checker payload supported-kind-summary ratchet までは自走可能 |
+| strong typing / IFC closeout | 91% | 85% | 71% | checker payload public-schema sketch ratchet までは自走可能 |
 | proof spine / mechanization-ready core | 86% | 77% | 52% | Lean-first skeleton widening までは自走可能 |
 | shared-space minimal working subset | 73% | 67% | 49% | minimal subset strengthening までは自走可能 |
 | syntax / modality comparison | 81% | 79% | 27% | helper-local surface narrowing までは自走可能 |
@@ -117,7 +117,7 @@
 - current runnable / machine-check evidence:
   `p06 / p10 / p11 / p12`、verifier preview alignment pre-floor、theorem discharge pre-floor、model-check projection pre-floor、theorem-first pilot actualization、theorem binding preflight、theorem Lean-stub pilot、theorem artifact-conformance bridge、theorem representative trace-alignment bridge、theorem public-seam compression、theorem toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`samples/lean/current-l2/` committed corpus、`samples/lean/foundations/CurrentL2ProofSkeleton.lean`
 - current self-driven closeout package:
-  checker payload supported-kind-summary ratchet
+  checker payload public-schema sketch ratchet
 - remaining stop line:
   stronger typed-surface actual adoption、final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、final public verifier contract
 
@@ -145,8 +145,8 @@
 
 ## current self-driven queue
 
-- `Package 66` checker payload supported-kind-summary ratchet
-  - `actual_checker_payload_row_body_threshold` の次段として `payload_row_family_ref + supported_kind_scope + supported_kind_refs` を helper-local summary へ ratchet する
+- `Package 67` checker payload public-schema sketch ratchet
+  - `actual_checker_payload_supported_kind_summary_threshold` の次段として 5 ref wrapper の `public_checker_payload_schema_ready_sketch` を helper-local summary へ ratchet する
 
 ## recent log
 
@@ -173,3 +173,4 @@
 - 2026-04-19 19:33 JST — Package 63 として source-side IFC trio `p10 / p11 / p12` の `actual_checker_payload_row_family_threshold` を `run-source-sample` helper summary に actualize し、`specs/examples/535` を anchor に current live queue を Package 64 checker payload row-detail ratchet へ narrow に同期した。
 - 2026-04-19 19:55 JST — Package 64 として source-side IFC trio `p10 / p11 / p12` の `actual_checker_payload_row_detail_threshold` を `run-source-sample` helper summary に actualize し、`specs/examples/536` を anchor に current live queue を Package 65 checker payload row-body ratchet へ narrow に同期した。
 - 2026-04-19 20:04 JST — Package 65 として source-side IFC trio `p10 / p11 / p12` の `actual_checker_payload_row_body_threshold` を `run-source-sample` helper summary に actualize し、`specs/examples/537` を anchor に current live queue を Package 66 checker payload supported-kind-summary ratchet へ narrow に同期した。
+- 2026-04-19 20:16 JST — Package 66 として source-side IFC trio `p10 / p11 / p12` の `actual_checker_payload_supported_kind_summary_threshold` を `run-source-sample` helper summary に actualize し、`specs/examples/538` を anchor に current live queue を Package 67 checker payload public-schema sketch ratchet へ narrow に同期した。

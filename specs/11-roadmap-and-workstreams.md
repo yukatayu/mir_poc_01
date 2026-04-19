@@ -552,6 +552,12 @@ actual-adoption floor では、
   - `actual_checker_payload_row_body_threshold`
   - `row_body = { selected_option_ref, visibility_target_ref }` row-body helper mirror
   - Package 65 checker payload row-body ratchet close、Package 66 checker payload supported-kind-summary ratchet next
+- IFC checker-payload-supported-kind-summary threshold helper mirror:
+  `specs/examples/538`
+  - `p10 / p11 / p12` source-side IFC trio
+  - `actual_checker_payload_supported_kind_summary_threshold`
+  - `payload_row_family_ref + supported_kind_scope + supported_kind_refs` row-family keyed summary mirror
+  - Package 66 checker payload supported-kind-summary ratchet close、Package 67 checker payload public-schema sketch ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
