@@ -580,8 +580,9 @@ actual-adoption floor では、
   `specs/examples/542`
   - `p10 / p11 / p12` source-side IFC trio
   - `actual_public_checker_command_surface_threshold`
+  - `actual_shared_output_contract_threshold`
   - `command_surface_kind + family_facade_command_refs + public_checker_api_ref` command-surface minimum mirror
-  - Package 70 public-checker command-surface ratchet close、Package 71 shared-output-contract ratchet next
+  - Package 70 public-checker command-surface ratchet close、Package 71 shared-output-contract ratchet close、Package 72 public-checker-boundary ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
