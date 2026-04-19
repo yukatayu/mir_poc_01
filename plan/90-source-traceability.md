@@ -3771,3 +3771,15 @@
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
   - `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`
+
+## 2026-04-19 Package 58 theorem/model-check helper preview widening addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/491-current-l2-theorem-result-object-preview-and-proof-object-schema-reserve-actualization.md`
+  - `specs/examples/492-current-l2-model-check-public-checker-artifact-preview-and-verifier-handoff-reserve-actualization.md`
+  - `specs/examples/500-current-l2-theorem-result-object-route-actual-adoption.md`
+  - `specs/examples/501-current-l2-model-check-checker-artifact-route-actual-adoption.md`
+  - `specs/examples/530-current-l2-theorem-and-model-check-helper-preview-widening.md`
+  - `docs/reports/0811-package58-theorem-model-check-helper-preview-widening.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`

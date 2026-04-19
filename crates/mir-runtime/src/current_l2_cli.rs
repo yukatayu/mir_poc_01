@@ -221,6 +221,9 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
     artifact_preview: CurrentL2OperationalCliArtifactPreviewSummary,
     surface_preview: CurrentL2OperationalCliSurfacePreviewSummary,
+    theorem_result_object_preview: CurrentL2OperationalCliTheoremResultObjectPreviewSummary,
+    model_check_public_checker_preview:
+        CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary,
     typed_checker_hint_preview: CurrentL2OperationalCliTypedCheckerHintPreviewSummary,
 }
 
@@ -232,6 +235,16 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             CurrentL2OperationalCliArtifactPreviewSummary::from_source_report(&report);
         let surface_preview =
             CurrentL2OperationalCliSurfacePreviewSummary::from_source_report(&report);
+        let theorem_result_object_preview =
+            CurrentL2OperationalCliTheoremResultObjectPreviewSummary::from_source_report(
+                &report,
+                &verification_preview,
+            );
+        let model_check_public_checker_preview =
+            CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary::from_source_report(
+                &report,
+                &verification_preview,
+            );
         let typed_checker_hint_preview =
             CurrentL2OperationalCliTypedCheckerHintPreviewSummary::from_source_report(
                 &report,
@@ -252,6 +265,8 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             verification_preview,
             artifact_preview,
             surface_preview,
+            theorem_result_object_preview,
+            model_check_public_checker_preview,
             typed_checker_hint_preview,
         }
     }
@@ -561,11 +576,10 @@ impl CurrentL2OperationalCliSurfacePreviewSummary {
     fn from_source_report(report: &CurrentL2SourceSampleRunReport) -> Self {
         let verification_preview =
             CurrentL2OperationalCliVerificationPreviewSummary::from_source_report(report);
-        let minimal_companion =
-            CurrentL2OperationalCliSurfacePreviewSection::minimal_companion(
-                report,
-                &verification_preview,
-            );
+        let minimal_companion = CurrentL2OperationalCliSurfacePreviewSection::minimal_companion(
+            report,
+            &verification_preview,
+        );
         let stage_block_secondary =
             CurrentL2OperationalCliSurfacePreviewSection::stage_block_secondary(
                 report,
@@ -690,8 +704,7 @@ impl CurrentL2OperationalCliSurfacePreviewSection {
             let compare_floor_refs = match sample_id {
                 "p09-dice-delegated-rng-provider-placement" => vec![
                     "compare_floor:current_l2.delegated_rng_service.practical".to_string(),
-                    "compare_floor:current_l2.witness_provider_route_actual_adoption"
-                        .to_string(),
+                    "compare_floor:current_l2.witness_provider_route_actual_adoption".to_string(),
                     "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface"
                         .to_string(),
                 ],
@@ -712,12 +725,15 @@ impl CurrentL2OperationalCliSurfacePreviewSection {
             };
         }
 
-        let guard_detail = verification_preview.guard_reason.clone().unwrap_or_else(|| {
-            format!(
-                "sample `{}` did not reach the authoritative-room serial-scope reserve surface",
-                report.sample_id
-            )
-        });
+        let guard_detail = verification_preview
+            .guard_reason
+            .clone()
+            .unwrap_or_else(|| {
+                format!(
+                    "sample `{}` did not reach the authoritative-room serial-scope reserve surface",
+                    report.sample_id
+                )
+            });
         Self {
             status: "guarded_not_reached",
             guard_reason: Some(format!(
@@ -833,8 +849,7 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
                     ),
                     evidence_refs: typed_checker_hint_evidence_refs(&report.sample_id),
                     compare_floor_refs: vec![
-                        "compare_floor:current_l2.ifc.source_side_label_flow_negative"
-                            .to_string(),
+                        "compare_floor:current_l2.ifc.source_side_label_flow_negative".to_string(),
                         "compare_floor:current_l2.checker_cluster.typed_reason_family_hint"
                             .to_string(),
                         "compare_floor:current_l2.checker_cluster.typed_family_coverage_state"
@@ -853,8 +868,7 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
                 typed_reason_family_hint: None,
                 evidence_refs: Vec::new(),
                 compare_floor_refs: vec![
-                    "compare_floor:current_l2.ifc.sample_local_checker_hint_guard_only"
-                        .to_string(),
+                    "compare_floor:current_l2.ifc.sample_local_checker_hint_guard_only".to_string(),
                 ],
                 guard_refs: typed_checker_hint_guard_refs(false),
                 kept_later_refs: typed_checker_hint_kept_later_refs(),
@@ -863,6 +877,151 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
                     report.sample_id
                 )),
             },
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliTheoremResultObjectPreviewSummary {
+    status: &'static str,
+    preview_kind: &'static str,
+    subject_kind: Option<&'static str>,
+    subject_ref: Option<String>,
+    result_object_route_refs: Vec<String>,
+    notebook_payload_preview_refs: Vec<String>,
+    proof_object_schema_reserve_refs: Vec<String>,
+    actual_adoption_default_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliTheoremResultObjectPreviewSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "e5-underdeclared-lineage"
+                | "p06-typed-proof-owner-handoff"
+                | "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+        ) && verification_preview.formal_hook_status == "reached";
+
+        if reached {
+            let subject_ref = verification_preview.subject_ref.clone();
+            return Self {
+                status: "reached",
+                preview_kind: "helper_local_actualization_manifest",
+                subject_kind: verification_preview.subject_kind,
+                subject_ref: subject_ref.clone(),
+                result_object_route_refs: theorem_result_object_route_refs(subject_ref.as_deref()),
+                notebook_payload_preview_refs: theorem_result_payload_preview_refs(
+                    subject_ref.as_deref(),
+                ),
+                proof_object_schema_reserve_refs: theorem_result_proof_object_schema_reserve_refs(),
+                actual_adoption_default_refs: theorem_result_object_preview_default_refs(),
+                evidence_refs: theorem_result_object_preview_evidence_refs(&report.sample_id),
+                compare_floor_refs: theorem_result_object_preview_compare_floor_refs(true),
+                guard_refs: theorem_result_object_preview_guard_refs(true),
+                kept_later_refs: theorem_result_object_preview_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            preview_kind: "helper_local_actualization_manifest",
+            subject_kind: verification_preview.subject_kind,
+            subject_ref: verification_preview.subject_ref.clone(),
+            result_object_route_refs: Vec::new(),
+            notebook_payload_preview_refs: Vec::new(),
+            proof_object_schema_reserve_refs: Vec::new(),
+            actual_adoption_default_refs: Vec::new(),
+            evidence_refs: theorem_result_object_preview_evidence_refs(&report.sample_id),
+            compare_floor_refs: theorem_result_object_preview_compare_floor_refs(false),
+            guard_refs: theorem_result_object_preview_guard_refs(false),
+            kept_later_refs: theorem_result_object_preview_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current theorem result-object preview only actualizes the representative theorem quartet (`e5` / `p06` / `p07` / `p08`) after verification preview reaches the formal-hook route for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary {
+    status: &'static str,
+    preview_kind: &'static str,
+    subject_kind: Option<&'static str>,
+    subject_ref: Option<String>,
+    checker_artifact_preview_refs: Vec<String>,
+    verifier_handoff_reserve_refs: Vec<String>,
+    tool_binding_reserve_refs: Vec<String>,
+    actual_adoption_default_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "e5-underdeclared-lineage"
+                | "p06-typed-proof-owner-handoff"
+                | "p07-dice-late-join-visible-history"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && verification_preview.formal_hook_status == "reached";
+
+        if reached {
+            let subject_ref = verification_preview.subject_ref.clone();
+            return Self {
+                status: "reached",
+                preview_kind: "helper_local_actualization_manifest",
+                subject_kind: verification_preview.subject_kind,
+                subject_ref: subject_ref.clone(),
+                checker_artifact_preview_refs: model_check_public_checker_preview_refs(
+                    subject_ref.as_deref(),
+                ),
+                verifier_handoff_reserve_refs:
+                    model_check_public_checker_verifier_handoff_reserve_refs(),
+                tool_binding_reserve_refs: model_check_public_checker_tool_binding_reserve_refs(),
+                actual_adoption_default_refs: model_check_public_checker_preview_default_refs(),
+                evidence_refs: model_check_public_checker_preview_evidence_refs(&report.sample_id),
+                compare_floor_refs: model_check_public_checker_preview_compare_floor_refs(true),
+                guard_refs: model_check_public_checker_preview_guard_refs(true),
+                kept_later_refs: model_check_public_checker_preview_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            preview_kind: "helper_local_actualization_manifest",
+            subject_kind: verification_preview.subject_kind,
+            subject_ref: verification_preview.subject_ref.clone(),
+            checker_artifact_preview_refs: Vec::new(),
+            verifier_handoff_reserve_refs: Vec::new(),
+            tool_binding_reserve_refs: Vec::new(),
+            actual_adoption_default_refs: Vec::new(),
+            evidence_refs: model_check_public_checker_preview_evidence_refs(&report.sample_id),
+            compare_floor_refs: model_check_public_checker_preview_compare_floor_refs(false),
+            guard_refs: model_check_public_checker_preview_guard_refs(false),
+            kept_later_refs: model_check_public_checker_preview_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current model-check public-checker preview only actualizes the representative checker quartet (`e5` / `p06` / `p07` / `p09`) after verification preview reaches the formal-hook route for `{}`",
+                report.sample_id
+            )),
         }
     }
 }
@@ -1040,6 +1199,13 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         "serial_scope_reserve",
         &summary.surface_preview.serial_scope_reserve,
     );
+    writeln!(output, "theorem_result_object_preview:").expect("write to string");
+    render_theorem_result_object_preview(&mut output, &summary.theorem_result_object_preview);
+    writeln!(output, "model_check_public_checker_preview:").expect("write to string");
+    render_model_check_public_checker_preview(
+        &mut output,
+        &summary.model_check_public_checker_preview,
+    );
     writeln!(output, "typed_checker_hint_preview:").expect("write to string");
     render_typed_checker_hint_preview(&mut output, &summary.typed_checker_hint_preview);
     if summary.runtime.non_admissible_metadata.is_empty() {
@@ -1066,6 +1232,191 @@ fn typed_checker_hint_evidence_refs(sample_id: &str) -> Vec<String> {
         format!("sample:{sample_id}"),
         "lean_foundation:CurrentL2IfcSecretExamples.lean".to_string(),
         "helper_preview:typed_checker_hint_preview".to_string(),
+    ]
+}
+
+fn theorem_result_object_preview_evidence_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "helper_preview:theorem_result_object_preview".to_string(),
+        "compare_floor:current_l2.theorem_result_object_preview_actualization".to_string(),
+    ]
+}
+
+fn theorem_result_object_route_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!("theorem_result_object_route:{subject_ref}:notebook_consumer_object_first"),
+            format!("theorem_result_object_route:{subject_ref}:review_unit_anchor_bundle"),
+            format!(
+                "theorem_result_object_route:{subject_ref}:consumer_shaped_payload_preview_only"
+            ),
+            format!("theorem_result_object_route:{subject_ref}:repo_local_emitted_artifact_refs"),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn theorem_result_payload_preview_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!("theorem_result_payload_preview:{subject_ref}:notebook_consumer_first"),
+            format!("theorem_result_payload_preview:{subject_ref}:review_unit_reference_bundle"),
+            format!(
+                "theorem_result_payload_preview:{subject_ref}:consumer_shaped_payload_preview_only"
+            ),
+            format!(
+                "theorem_result_payload_preview:{subject_ref}:proof_object_public_schema_later"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn theorem_result_proof_object_schema_reserve_refs() -> Vec<String> {
+    vec![
+        "proof_object_schema_reserve:brand_neutral_binding_keep".to_string(),
+        "proof_object_schema_reserve:proof_object_public_schema_later".to_string(),
+        "proof_object_schema_reserve:final_public_verifier_contract_later".to_string(),
+    ]
+}
+
+fn theorem_result_object_preview_default_refs() -> Vec<String> {
+    vec![
+        "theorem_result_object_preview_default:notebook_consumer_object_first".to_string(),
+        "theorem_result_object_preview_default:consumer_shaped_payload_preview_only".to_string(),
+        "theorem_result_object_preview_default:proof_object_schema_reserve_keep".to_string(),
+        "theorem_result_object_preview_default:final_public_contract_later".to_string(),
+    ]
+}
+
+fn theorem_result_object_preview_compare_floor_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "compare_floor:current_l2.theorem_review_unit_transport_actual_adoption".to_string(),
+            "compare_floor:current_l2.theorem_binding_preflight".to_string(),
+            "compare_floor:current_l2.theorem_result_object_preview_actualization".to_string(),
+        ]
+    } else {
+        vec!["compare_floor:current_l2.theorem_result_object_preview.guard_only".to_string()]
+    }
+}
+
+fn theorem_result_object_preview_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:result_object_preview_actualization_only".to_string(),
+            "guard:consumer_shaped_payload_preview_only".to_string(),
+            "guard:proof_object_schema_reserve_keep".to_string(),
+            "guard:concrete_theorem_prover_brand_later".to_string(),
+        ]
+    } else {
+        vec!["guard:theorem_result_object_preview_not_reached".to_string()]
+    }
+}
+
+fn theorem_result_object_preview_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_public_theorem_result_object".to_string(),
+        "kept_later:consumer_shaped_theorem_payload".to_string(),
+        "kept_later:concrete_theorem_prover_brand".to_string(),
+        "kept_later:proof_object_public_schema".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
+fn model_check_public_checker_preview_evidence_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "helper_preview:model_check_public_checker_preview".to_string(),
+        "compare_floor:current_l2.model_check.public_checker_artifact_preview_actualization"
+            .to_string(),
+    ]
+}
+
+fn model_check_public_checker_preview_refs(subject_ref: Option<&str>) -> Vec<String> {
+    match subject_ref {
+        Some(subject_ref) => vec![
+            format!(
+                "model_check_public_checker_preview:{subject_ref}:consumer_shaped_artifact_preview_only"
+            ),
+            format!("model_check_public_checker_preview:{subject_ref}:checker_boundary_bundle"),
+            format!(
+                "model_check_public_checker_preview:{subject_ref}:row_local_property_route_bundle"
+            ),
+            format!(
+                "model_check_public_checker_preview:{subject_ref}:repo_local_emitted_artifact_refs"
+            ),
+        ],
+        None => Vec::new(),
+    }
+}
+
+fn model_check_public_checker_verifier_handoff_reserve_refs() -> Vec<String> {
+    vec![
+        "model_check_verifier_handoff_reserve:public_checker_migration_later".to_string(),
+        "model_check_verifier_handoff_reserve:emitted_handoff_artifact_later".to_string(),
+        "model_check_verifier_handoff_reserve:runtime_policy_contract_later".to_string(),
+    ]
+}
+
+fn model_check_public_checker_tool_binding_reserve_refs() -> Vec<String> {
+    vec![
+        "model_check_tool_binding_reserve:brand_neutral_request_manifest".to_string(),
+        "model_check_tool_binding_reserve:concrete_tool_brand_later".to_string(),
+        "model_check_tool_binding_reserve:runtime_policy_contract_later".to_string(),
+    ]
+}
+
+fn model_check_public_checker_preview_default_refs() -> Vec<String> {
+    vec![
+        "model_check_public_checker_preview_default:consumer_shaped_artifact_preview_only"
+            .to_string(),
+        "model_check_public_checker_preview_default:verifier_handoff_reserve_keep".to_string(),
+        "model_check_public_checker_preview_default:brand_neutral_tool_binding_reserve_keep"
+            .to_string(),
+        "model_check_public_checker_preview_default:runtime_policy_contract_later".to_string(),
+    ]
+}
+
+fn model_check_public_checker_preview_compare_floor_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "compare_floor:current_l2.model_check.row_local_property_actual_adoption".to_string(),
+            "compare_floor:current_l2.model_check.second_line_concretization".to_string(),
+            "compare_floor:current_l2.model_check.public_checker_artifact_preview_actualization"
+                .to_string(),
+        ]
+    } else {
+        vec![
+            "compare_floor:current_l2.model_check.public_checker_artifact_preview.guard_only"
+                .to_string(),
+        ]
+    }
+}
+
+fn model_check_public_checker_preview_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:public_checker_artifact_preview_actualization_only".to_string(),
+            "guard:verifier_handoff_reserve_keep".to_string(),
+            "guard:brand_neutral_tool_binding_reserve_keep".to_string(),
+            "guard:runtime_policy_contract_later".to_string(),
+        ]
+    } else {
+        vec!["guard:model_check_public_checker_artifact_preview_not_reached".to_string()]
+    }
+}
+
+fn model_check_public_checker_preview_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:first_settled_property_language".to_string(),
+        "kept_later:concrete_model_check_tool_brand".to_string(),
+        "kept_later:final_public_checker_artifact".to_string(),
+        "kept_later:actual_public_checker_migration".to_string(),
+        "kept_later:actual_emitted_verifier_handoff_artifact".to_string(),
+        "kept_later:production_checker_runtime_policy_contract".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
     ]
 }
 
@@ -1107,6 +1458,108 @@ fn render_obligation_list(output: &mut String, label: &str, values: &[&'static s
         for value in values {
             writeln!(output, "  - {value}").expect("write to string");
         }
+    }
+}
+
+fn render_theorem_result_object_preview(
+    output: &mut String,
+    preview: &CurrentL2OperationalCliTheoremResultObjectPreviewSummary,
+) {
+    writeln!(output, "  status: {}", preview.status).expect("write to string");
+    writeln!(output, "  preview_kind: {}", preview.preview_kind).expect("write to string");
+    if let Some(subject_kind) = preview.subject_kind {
+        writeln!(output, "  subject_kind: {subject_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_kind: none").expect("write to string");
+    }
+    if let Some(subject_ref) = &preview.subject_ref {
+        writeln!(output, "  subject_ref: {subject_ref}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_ref: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "result_object_route_refs",
+        &preview.result_object_route_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "notebook_payload_preview_refs",
+        &preview.notebook_payload_preview_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "proof_object_schema_reserve_refs",
+        &preview.proof_object_schema_reserve_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "actual_adoption_default_refs",
+        &preview.actual_adoption_default_refs,
+        1,
+    );
+    render_string_list(output, "evidence_refs", &preview.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &preview.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &preview.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &preview.kept_later_refs, 1);
+    if let Some(guard_reason) = &preview.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_model_check_public_checker_preview(
+    output: &mut String,
+    preview: &CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary,
+) {
+    writeln!(output, "  status: {}", preview.status).expect("write to string");
+    writeln!(output, "  preview_kind: {}", preview.preview_kind).expect("write to string");
+    if let Some(subject_kind) = preview.subject_kind {
+        writeln!(output, "  subject_kind: {subject_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_kind: none").expect("write to string");
+    }
+    if let Some(subject_ref) = &preview.subject_ref {
+        writeln!(output, "  subject_ref: {subject_ref}").expect("write to string");
+    } else {
+        writeln!(output, "  subject_ref: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "checker_artifact_preview_refs",
+        &preview.checker_artifact_preview_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "verifier_handoff_reserve_refs",
+        &preview.verifier_handoff_reserve_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "tool_binding_reserve_refs",
+        &preview.tool_binding_reserve_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "actual_adoption_default_refs",
+        &preview.actual_adoption_default_refs,
+        1,
+    );
+    render_string_list(output, "evidence_refs", &preview.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &preview.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &preview.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &preview.kept_later_refs, 1);
+    if let Some(guard_reason) = &preview.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
     }
 }
 
@@ -1280,12 +1733,15 @@ fn authoritative_room_vertical_slice_guard_reason(
     report: &CurrentL2SourceSampleRunReport,
     verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
 ) -> String {
-    let guard_detail = verification_preview.guard_reason.clone().unwrap_or_else(|| {
-        format!(
-            "current default samples (`p07` / `p08`) were not reached for `{}`",
-            report.sample_id
-        )
-    });
+    let guard_detail = verification_preview
+        .guard_reason
+        .clone()
+        .unwrap_or_else(|| {
+            format!(
+                "current default samples (`p07` / `p08`) were not reached for `{}`",
+                report.sample_id
+            )
+        });
     format!(
         "current authoritative-room vertical slice only actualizes reached current default samples (`p07` / `p08`): {guard_detail}"
     )

@@ -339,6 +339,19 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["artifact_preview"]["model_check_concrete_carriers"][0]["obligation_kind"],
         "rollback_cut_non_interference"
     );
+    assert_eq!(value["theorem_result_object_preview"]["status"], "reached");
+    assert_eq!(
+        value["theorem_result_object_preview"]["subject_kind"],
+        "runtime_try_cut_cluster"
+    );
+    assert_eq!(
+        value["model_check_public_checker_preview"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["model_check_public_checker_preview"]["subject_kind"],
+        "runtime_try_cut_cluster"
+    );
     assert_eq!(
         value["typed_checker_hint_preview"]["status"],
         "guarded_not_reached"
@@ -400,6 +413,48 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         value["artifact_preview"]["proof_notebook_review_units"][0]["obligation_kind"],
         "rollback_cut_non_interference"
     );
+    assert_eq!(value["theorem_result_object_preview"]["status"], "reached");
+    assert_eq!(
+        value["model_check_public_checker_preview"]["status"],
+        "guarded_not_reached"
+    );
+    assert!(
+        value["model_check_public_checker_preview"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("`e5` / `p06` / `p07` / `p09`")
+    );
+}
+
+#[test]
+fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated_rng_sample() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["theorem_result_object_preview"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["model_check_public_checker_preview"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["model_check_public_checker_preview"]["checker_artifact_preview_refs"][0],
+        "model_check_public_checker_preview:p09-dice-delegated-rng-provider-placement:consumer_shaped_artifact_preview_only"
+    );
+    assert_eq!(
+        value["model_check_public_checker_preview"]["verifier_handoff_reserve_refs"][0],
+        "model_check_verifier_handoff_reserve:public_checker_migration_later"
+    );
 }
 
 #[test]
@@ -415,10 +470,7 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
     .unwrap();
 
     let value: Value = serde_json::from_str(&output).unwrap();
-    assert_eq!(
-        value["typed_checker_hint_preview"]["status"],
-        "reached"
-    );
+    assert_eq!(value["typed_checker_hint_preview"]["status"], "reached");
     assert_eq!(
         value["typed_checker_hint_preview"]["cluster_kind"],
         "ifc_authority_release_cluster"
@@ -475,10 +527,7 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     .unwrap();
 
     let value: Value = serde_json::from_str(&output).unwrap();
-    assert_eq!(
-        value["typed_checker_hint_preview"]["status"],
-        "reached"
-    );
+    assert_eq!(value["typed_checker_hint_preview"]["status"], "reached");
     assert_eq!(
         value["typed_checker_hint_preview"]["cluster_kind"],
         "ifc_label_flow_cluster"

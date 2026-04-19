@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 17:42 JST
+最終更新: 2026-04-19 17:58 JST
 
 ## この文書について
 
@@ -51,8 +51,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative sample setからどう widen するか | `M` | `Macro 5/7` | first widening slice `p09` carry-over、order-handoff `surface_preview`、late-join negative static-stop pair `p13 / p14`、negative pair theorem-side Lean carry-over、IFC trio `typed_checker_hint_preview` narrow actualization は actualize 済みとし、export/sync helper と `samples/lean/` committed corpus を基点に、残る broader theorem-side / diagnostics widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、proof / IFC helper route を concretize する |
-| `59` near-end closeout sync | mixed gate / true user-spec residual をどこまで narrow に残すか | `S-M` | `Macro 5/6/7` | final public completion を凍らせず、closeout-ready snapshot に再圧縮する | `progress.md` / `tasks.md` / `plan/` / traceability が stale wording を残さない |
+| `59` near-end closeout sync | mixed gate / true user-spec residual をどこまで narrow に残すか | `S-M` | `Macro 5/6/7` | Package 58 close 後の helper-local actualization / residual gate reading を closeout-ready snapshot に再圧縮する | `progress.md` / `tasks.md` / `plan/` / traceability が stale wording を残さない |
 
 ## recently closed package note
 
@@ -90,9 +89,9 @@
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current reading:
-  actual Lean execution reached 後の next work は helper/CLI hardening と broader theorem-side / diagnostics / order-handoff corpus widening であり、first widening slice として `p09-dice-delegated-rng-provider-placement` carry-over、helper hardening slice として order-handoff CLI `surface_preview`、negative corpus tightening slice として `p13 / p14` late-join visibility static stop、theorem-side widening slice として `p13 / p14` representative Lean sample set carry-over、IFC helper widening slice として `p10 / p11 / p12` sample-local `typed_checker_hint_preview` actualization は actualize 済みである。
+  actual Lean execution reached 後の helper/CLI hardening と broader theorem-side / diagnostics / order-handoff corpus widening は close 済みである。`p09-dice-delegated-rng-provider-placement` carry-over、order-handoff CLI `surface_preview`、`p13 / p14` late-join visibility static stop、negative pair theorem-side Lean carry-over、`p10 / p11 / p12` sample-local `typed_checker_hint_preview`、theorem result-object preview helper mirror、model-check public-checker preview helper mirror まで actualize 済みと読む。
 - evidence:
-  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus、source-side IFC trio `p10 / p11 / p12`、`specs/examples/525`、`specs/examples/526`、`specs/examples/527`、`specs/examples/528`、`specs/examples/529`、`docs/reports/0806`、`docs/reports/0807`、`docs/reports/0808`、`docs/reports/0809`、`docs/reports/0810`、`p09-dice-delegated-rng-provider-placement`、`p13-dice-late-join-missing-publication-witness`、`p14-dice-late-join-handoff-before-publication`
+  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus、source-side IFC trio `p10 / p11 / p12`、`specs/examples/525`、`specs/examples/526`、`specs/examples/527`、`specs/examples/528`、`specs/examples/529`、`specs/examples/530`、`docs/reports/0806`、`docs/reports/0807`、`docs/reports/0808`、`docs/reports/0809`、`docs/reports/0810`、`docs/reports/0811`、`p09-dice-delegated-rng-provider-placement`、`p13-dice-late-join-missing-publication-witness`、`p14-dice-late-join-handoff-before-publication`
 - stop line:
   final public theorem contract / final parser grammar / packaging には上げない
 
@@ -134,5 +133,4 @@
 
 ## next reopen order
 
-1. Package 58 で IFC checker-hint narrow actualization の次段として broader theorem-side sample export または diagnostics widening beyond IFC trio を narrow package で進める。
-2. Package 59 で closeout-ready snapshot を再圧縮する。
+1. Package 59 で closeout-ready snapshot を再圧縮する。

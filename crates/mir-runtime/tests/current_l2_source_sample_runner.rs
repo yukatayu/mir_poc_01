@@ -446,7 +446,10 @@ fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths()
     ))
     .unwrap();
     let p11_report = run_current_l2_source_sample(p11.to_str().unwrap(), p11_host_plan).unwrap();
-    assert_eq!(p11_report.sample_id, "p11-typed-unauthorized-fingerprint-release");
+    assert_eq!(
+        p11_report.sample_id,
+        "p11-typed-unauthorized-fingerprint-release"
+    );
     assert_eq!(
         p11_report.runtime_report.checker_floor.static_gate.verdict,
         StaticGateVerdict::Valid
@@ -471,7 +474,9 @@ fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths()
             .final_place_store
             .get("fingerprint_state")
             .cloned(),
-        Some(vec!["derive_secret_fingerprint@fingerprint_holder".to_string(),])
+        Some(vec![
+            "derive_secret_fingerprint@fingerprint_holder".to_string(),
+        ])
     );
     assert_eq!(
         p11_report
@@ -480,7 +485,9 @@ fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths()
             .final_place_store
             .get("fingerprint_debug_text_output")
             .cloned(),
-        Some(vec!["derive_secret_fingerprint: secret_key -> classified".to_string(),])
+        Some(vec![
+            "derive_secret_fingerprint: secret_key -> classified".to_string(),
+        ])
     );
     assert!(
         p11_report
@@ -526,7 +533,9 @@ fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths()
             .final_place_store
             .get("fingerprint_state")
             .cloned(),
-        Some(vec!["derive_secret_fingerprint@classified_holder".to_string(),])
+        Some(vec![
+            "derive_secret_fingerprint@classified_holder".to_string(),
+        ])
     );
     assert_eq!(
         p12_report
@@ -535,7 +544,9 @@ fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths()
             .final_place_store
             .get("fingerprint_debug_text_output")
             .cloned(),
-        Some(vec!["derive_secret_fingerprint: secret_key -> classified".to_string(),])
+        Some(vec![
+            "derive_secret_fingerprint: secret_key -> classified".to_string(),
+        ])
     );
     assert!(
         p12_report

@@ -113,8 +113,7 @@ fn theorem_actual_lean_execution_reaches_unauthorized_ifc_runtime_prototype() {
         return;
     }
 
-    let sample_path =
-        typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
+    let sample_path = typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
     assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
 }
 
@@ -171,9 +170,8 @@ fn theorem_actual_lean_execution_reaches_missing_publication_witness_static_stop
         return;
     }
 
-    let sample_path = order_handoff_prototype_sample_path(
-        "p13-dice-late-join-missing-publication-witness.txt",
-    );
+    let sample_path =
+        order_handoff_prototype_sample_path("p13-dice-late-join-missing-publication-witness.txt");
     assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
 }
 
@@ -184,8 +182,7 @@ fn theorem_actual_lean_execution_reaches_handoff_before_publish_static_stop_prot
         return;
     }
 
-    let sample_path = order_handoff_prototype_sample_path(
-        "p14-dice-late-join-handoff-before-publication.txt",
-    );
+    let sample_path =
+        order_handoff_prototype_sample_path("p14-dice-late-join-handoff-before-publication.txt");
     assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
 }

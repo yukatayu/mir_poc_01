@@ -208,15 +208,16 @@ fn model_check_projection_prefloor_reaches_authorized_ifc_typed_runtime_prototyp
     assert_prefloor_matches_preview_route(
         &prefloor,
         &route,
-        &["small_cluster_projection:p10-typed-authorized-fingerprint-declassification:runtime_try_cut_local"],
+        &[
+            "small_cluster_projection:p10-typed-authorized-fingerprint-declassification:runtime_try_cut_local",
+        ],
         &["guard:rollback_or_atomic_cut_evidence_present"],
     );
 }
 
 #[test]
 fn model_check_projection_prefloor_reaches_unauthorized_ifc_typed_runtime_prototype() {
-    let sample_path =
-        typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
+    let sample_path = typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(
         sample_path.to_str().unwrap(),
         prototype_host_plan(&sample_path),
@@ -231,7 +232,9 @@ fn model_check_projection_prefloor_reaches_unauthorized_ifc_typed_runtime_protot
     assert_prefloor_matches_preview_route(
         &prefloor,
         &route,
-        &["small_cluster_projection:p11-typed-unauthorized-fingerprint-release:runtime_try_cut_local"],
+        &[
+            "small_cluster_projection:p11-typed-unauthorized-fingerprint-release:runtime_try_cut_local",
+        ],
         &["guard:rollback_or_atomic_cut_evidence_present"],
     );
 }
@@ -254,7 +257,9 @@ fn model_check_projection_prefloor_reaches_label_flow_negative_ifc_typed_runtime
     assert_prefloor_matches_preview_route(
         &prefloor,
         &route,
-        &["small_cluster_projection:p12-typed-classified-fingerprint-publication-block:runtime_try_cut_local"],
+        &[
+            "small_cluster_projection:p12-typed-classified-fingerprint-publication-block:runtime_try_cut_local",
+        ],
         &["guard:rollback_or_atomic_cut_evidence_present"],
     );
 }
@@ -299,7 +304,9 @@ fn model_check_projection_prefloor_reaches_delegated_rng_provider_runtime_protot
     assert_prefloor_matches_preview_route(
         &prefloor,
         &route,
-        &["small_cluster_projection:p09-dice-delegated-rng-provider-placement:runtime_try_cut_local"],
+        &[
+            "small_cluster_projection:p09-dice-delegated-rng-provider-placement:runtime_try_cut_local",
+        ],
         &["guard:rollback_or_atomic_cut_evidence_present"],
     );
 }

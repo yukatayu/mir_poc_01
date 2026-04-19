@@ -10,7 +10,8 @@ mod current_l2_source_sample_emitted_artifact_support;
 use current_l2_source_sample_emitted_artifact_support::{
     CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleMinimalCompanionSurface,
     CurrentL2SourceSampleOrderHandoffSerialScopeReserveSurface,
-    CurrentL2SourceSampleStageBlockSurface, build_current_l2_source_sample_minimal_companion_surface,
+    CurrentL2SourceSampleStageBlockSurface,
+    build_current_l2_source_sample_minimal_companion_surface,
     build_current_l2_source_sample_order_handoff_serial_scope_reserve_surface,
     build_current_l2_source_sample_stage_block_surface,
 };
@@ -74,8 +75,14 @@ fn assert_preview_entry(
         Some(reason) => assert_eq!(entry["guard_reason"], reason),
         None => assert!(entry["guard_reason"].is_null()),
     }
-    assert_eq!(preview_string_list(&entry[expected_lines_key]), expected_lines);
-    assert_eq!(preview_string_list(&entry["guard_refs"]), expected_guard_refs);
+    assert_eq!(
+        preview_string_list(&entry[expected_lines_key]),
+        expected_lines
+    );
+    assert_eq!(
+        preview_string_list(&entry["guard_refs"]),
+        expected_guard_refs
+    );
     assert_eq!(
         preview_string_list(&entry["kept_later_refs"]),
         expected_kept_later_refs
@@ -84,24 +91,21 @@ fn assert_preview_entry(
 
 fn assert_cli_surface_preview_matches_builders(sample_path: &Path) {
     let preview_json = cli_json(sample_path.to_str().unwrap(), None);
-    let minimal =
-        build_current_l2_source_sample_minimal_companion_surface(
-            sample_path.to_str().unwrap(),
-            prototype_host_plan(sample_path),
-        )
-        .unwrap();
-    let stage =
-        build_current_l2_source_sample_stage_block_surface(
-            sample_path.to_str().unwrap(),
-            prototype_host_plan(sample_path),
-        )
-        .unwrap();
-    let serial =
-        build_current_l2_source_sample_order_handoff_serial_scope_reserve_surface(
-            sample_path.to_str().unwrap(),
-            prototype_host_plan(sample_path),
-        )
-        .unwrap();
+    let minimal = build_current_l2_source_sample_minimal_companion_surface(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(sample_path),
+    )
+    .unwrap();
+    let stage = build_current_l2_source_sample_stage_block_surface(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(sample_path),
+    )
+    .unwrap();
+    let serial = build_current_l2_source_sample_order_handoff_serial_scope_reserve_surface(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(sample_path),
+    )
+    .unwrap();
 
     let CurrentL2SourceSampleMinimalCompanionSurface {
         surface_status,

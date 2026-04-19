@@ -299,9 +299,7 @@ fn collect_current_scope_order_handoff_late_join_reasons(
     let direct_ops = statements
         .iter()
         .filter_map(|statement| match statement {
-            Statement::PerformOn { op, .. } | Statement::PerformVia { op, .. } => {
-                Some(op.as_str())
-            }
+            Statement::PerformOn { op, .. } | Statement::PerformVia { op, .. } => Some(op.as_str()),
             Statement::PlaceBlock { .. }
             | Statement::OptionDecl { .. }
             | Statement::ChainDecl { .. }
@@ -334,20 +332,16 @@ fn collect_current_scope_order_handoff_late_join_reasons(
         .iter()
         .any(|op| *op == "publish_roll_result")
     {
-        gate.verdict = current_l2_escalate_static_gate_verdict(
-            gate.verdict,
-            StaticGateVerdict::Malformed,
-        );
+        gate.verdict =
+            current_l2_escalate_static_gate_verdict(gate.verdict, StaticGateVerdict::Malformed);
         gate.reasons.push(format!(
             "handoff appears before publish for late-join visibility at {scope_text}"
         ));
         return;
     }
 
-    gate.verdict = current_l2_escalate_static_gate_verdict(
-        gate.verdict,
-        StaticGateVerdict::Underdeclared,
-    );
+    gate.verdict =
+        current_l2_escalate_static_gate_verdict(gate.verdict, StaticGateVerdict::Underdeclared);
     gate.reasons.push(format!(
         "missing publication witness before handoff for late-join visibility at {scope_text}"
     ));

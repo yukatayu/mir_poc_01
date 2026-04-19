@@ -6,7 +6,8 @@ use mir_semantics::{FixtureHostPlan, load_host_plan_from_path};
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus, CurrentL2SourceSampleModelCheckFinalPublicContractReopenThreshold,
+    CurrentL2EmittedArtifactRouteStatus,
+    CurrentL2SourceSampleModelCheckFinalPublicContractReopenThreshold,
     CurrentL2SourceSampleModelCheckPropertyToolSeamProbe,
     CurrentL2SourceSampleModelCheckPublicSeamCompression,
     build_current_l2_source_sample_model_check_final_public_contract_reopen_threshold,
@@ -57,8 +58,14 @@ fn assert_model_check_public_seam_compression_matches_prior_floors(
         compression.actualization_subject_ref,
         threshold.actualization_subject_ref
     );
-    assert_eq!(compression.actualization_subject_kind, probe.probe_subject_kind);
-    assert_eq!(compression.actualization_subject_ref, probe.probe_subject_ref);
+    assert_eq!(
+        compression.actualization_subject_kind,
+        probe.probe_subject_kind
+    );
+    assert_eq!(
+        compression.actualization_subject_ref,
+        probe.probe_subject_ref
+    );
     assert_eq!(
         compression.checker_artifact_route_refs,
         threshold.checker_artifact_route_refs

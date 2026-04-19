@@ -502,6 +502,13 @@ actual-adoption floor では、
   - sample-local `typed_checker_hint_preview`
   - `family_refs[] + coverage_state` narrow mirror
   - Package 58 IFC helper widening after representative Lean sample set carry-over
+- theorem/model-check helper preview widening:
+  `specs/examples/530`
+  - theorem result-object preview helper mirror
+  - model-check public-checker preview helper mirror
+  - `p08` theorem reached / model-check guarded
+  - `p09` theorem guarded / model-check reached
+  - Package 58 diagnostics widening close after IFC checker-hint mirror
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

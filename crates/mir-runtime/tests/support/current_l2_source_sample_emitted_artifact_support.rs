@@ -3600,10 +3600,11 @@ pub fn build_current_l2_source_sample_model_check_public_seam_compression(
     sample_argument: &str,
     host_plan: FixtureHostPlan,
 ) -> Result<CurrentL2SourceSampleModelCheckPublicSeamCompression, String> {
-    let threshold = build_current_l2_source_sample_model_check_final_public_contract_reopen_threshold(
-        sample_argument,
-        host_plan.clone(),
-    )?;
+    let threshold =
+        build_current_l2_source_sample_model_check_final_public_contract_reopen_threshold(
+            sample_argument,
+            host_plan.clone(),
+        )?;
     let probe = build_current_l2_source_sample_model_check_property_tool_seam_probe(
         sample_argument,
         host_plan,

@@ -7,7 +7,8 @@ use serde::Serialize;
 mod current_l2_source_sample_emitted_artifact_support;
 
 use current_l2_source_sample_emitted_artifact_support::{
-    CurrentL2EmittedArtifactRouteStatus, build_current_l2_source_sample_theorem_lean_stub_pilot_actualization,
+    CurrentL2EmittedArtifactRouteStatus,
+    build_current_l2_source_sample_theorem_lean_stub_pilot_actualization,
 };
 
 #[derive(Debug, Serialize)]
@@ -108,8 +109,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
 
-    let actualization =
-        build_current_l2_source_sample_theorem_lean_stub_pilot_actualization(&sample_argument, host_plan)?;
+    let actualization = build_current_l2_source_sample_theorem_lean_stub_pilot_actualization(
+        &sample_argument,
+        host_plan,
+    )?;
 
     let payload = LeanBundlePayload {
         sample_argument,
