@@ -357,7 +357,8 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         "reached"
     );
     assert_eq!(
-        value["theorem_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][0],
+        value["theorem_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"]
+            [0],
         "theorem_final_public_contract_reopen:p06-typed-proof-owner-handoff:result_object_and_payload_first"
     );
     assert_eq!(
@@ -365,7 +366,8 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         "reached"
     );
     assert_eq!(
-        value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][3],
+        value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"]
+            [3],
         "model_check_final_public_contract_reopen:p06-typed-proof-owner-handoff:final_public_verifier_contract_fourth"
     );
     assert_eq!(
@@ -448,6 +450,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -470,12 +476,8 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains("theorem_final_public_contract_reopen_threshold:"));
     assert!(output.contains("model_check_final_public_contract_reopen_threshold:"));
     assert!(output.contains("order_handoff_witness_provider_public_seam_compression:"));
-    assert!(output.contains(
-        "actual_phase4_shared_space_self_driven_closeout_threshold:"
-    ));
-    assert!(output.contains(
-        "closeout_kind: shared_space_practical_boundary_checkpoint"
-    ));
+    assert!(output.contains("actual_phase4_shared_space_self_driven_closeout_threshold:"));
+    assert!(output.contains("closeout_kind: shared_space_practical_boundary_checkpoint"));
     assert!(output.contains("current_package_refs:"));
     assert!(output.contains("authoritative_room_baseline_ref"));
     assert!(output.contains("working_subset_catalog_ref"));
@@ -494,21 +496,15 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains(
         "next_comparison_target_ref: phase5_proof_protocol_runtime_policy_handoff_closeout_comparison"
     ));
-    assert!(output.contains(
-        "actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold:"
-    ));
-    assert!(output.contains(
-        "closeout_kind: proof_protocol_runtime_policy_handoff_stop_line"
-    ));
-    assert!(output.contains(
-        "verifier_handoff_surface_ref: minimal_verifier_handoff_surface"
-    ));
+    assert!(
+        output.contains("actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold:")
+    );
+    assert!(output.contains("closeout_kind: proof_protocol_runtime_policy_handoff_stop_line"));
+    assert!(output.contains("verifier_handoff_surface_ref: minimal_verifier_handoff_surface"));
     assert!(output.contains(
         "theorem_retained_bridge_stop_ref: retained_payload_body_materialization_theorem_export_handoff_transport_channel_body"
     ));
-    assert!(output.contains(
-        "boundary_inventory_ref: small_decidable_core_boundary_inventory"
-    ));
+    assert!(output.contains("boundary_inventory_ref: small_decidable_core_boundary_inventory"));
     assert!(output.contains("retained_later_refs:"));
     assert!(output.contains("actual_subject_row_materialization"));
     assert!(output.contains("boundary_specific_handoff_artifact_family"));
@@ -518,6 +514,24 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains("low_level_memory_order_family"));
     assert!(output.contains(
         "next_comparison_target_ref: phase6_actual_parser_ast_carrier_first_tranche_comparison"
+    ));
+    assert!(output.contains("actual_phase6_actual_parser_ast_carrier_first_tranche_threshold:"));
+    assert!(output.contains("carrier_kind: current_l2_nonproduction_parser_carrier"));
+    assert!(output.contains("accepted_surface_refs:"));
+    assert!(output.contains("stage1_option_decl_chain_surface"));
+    assert!(output.contains("stage2_try_fallback_structural_surface"));
+    assert!(output.contains("code_anchor_refs:"));
+    assert!(output.contains("mir_ast_current_l2_module"));
+    assert!(output.contains("stage1_stage2_parser_spike_tests"));
+    assert!(output.contains("retained_later_refs:"));
+    assert!(output.contains("stage3_admit_slot_surface"));
+    assert!(output.contains("stage3_request_clause_suite"));
+    assert!(output.contains("stage3_predicate_fragment"));
+    assert!(output.contains("perform_head_final_public_api"));
+    assert!(output.contains("span_rich_diagnostics"));
+    assert!(output.contains("final_grammar"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase6_actual_checker_runtime_skeleton_first_tranche_comparison"
     ));
 }
 
@@ -563,7 +577,8 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         "reached"
     );
     assert_eq!(
-        value["theorem_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][1],
+        value["theorem_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"]
+            [1],
         "theorem_final_public_contract_reopen:p08-dice-stale-reconnect-refresh:prover_brand_and_proof_schema_second"
     );
     assert_eq!(
@@ -579,7 +594,8 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         "reached"
     );
     assert_eq!(
-        value["order_handoff_witness_provider_public_seam_compression"]["public_seam_residual_refs"][0],
+        value["order_handoff_witness_provider_public_seam_compression"]["public_seam_residual_refs"]
+            [0],
         "order_handoff_public_seam_residual:p08-dice-stale-reconnect-refresh:final_source_surface_handoff_wording_later"
     );
     assert_eq!(
@@ -591,51 +607,63 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         "shared_space_practical_boundary_checkpoint"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][0],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"]
+            [0],
         "authoritative_room_baseline_ref"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][1],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"]
+            [1],
         "working_subset_catalog_ref"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][2],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"]
+            [2],
         "minimal_authority_witness_core_ref"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][3],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"]
+            [3],
         "authoritative_delegated_provider_cut_ref"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][4],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"]
+            [4],
         "control_plane_threshold_ref"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"][0],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"]
+            [0],
         "final_activation_overlay_catalog"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"][1],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"]
+            [1],
         "final_authority_auth_identity_admission_catalog"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"][2],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"]
+            [2],
         "final_consistency_fairness_catalog"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][0],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"]
+            [0],
         "append_friendly_optional_provider_attestation"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][1],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"]
+            [1],
         "control_plane_separated_carrier_actualization"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][2],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"]
+            [2],
         "distributed_fairness_protocol"
     );
     assert_eq!(
-        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][3],
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"]
+            [3],
         "final_operational_realization"
     );
     assert_eq!(
@@ -663,32 +691,100 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         "small_decidable_core_boundary_inventory"
     );
     assert_eq!(
-        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][0],
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"]
+            [0],
         "actual_subject_row_materialization"
     );
     assert_eq!(
-        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][1],
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"]
+            [1],
         "boundary_specific_handoff_artifact_family"
     );
     assert_eq!(
-        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][2],
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"]
+            [2],
         "actual_emitted_verifier_artifact"
     );
     assert_eq!(
-        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][3],
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"]
+            [3],
         "concrete_tool_binding"
     );
     assert_eq!(
-        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][4],
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"]
+            [4],
         "public_checker_migration"
     );
     assert_eq!(
-        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][5],
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"]
+            [5],
         "low_level_memory_order_family"
     );
     assert_eq!(
         value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["next_comparison_target_ref"],
         "phase6_actual_parser_ast_carrier_first_tranche_comparison"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["carrier_kind"],
+        "current_l2_nonproduction_parser_carrier"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["accepted_surface_refs"]
+            [0],
+        "stage1_option_decl_chain_surface"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["accepted_surface_refs"]
+            [1],
+        "stage2_try_fallback_structural_surface"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["code_anchor_refs"]
+            [0],
+        "mir_ast_current_l2_module"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["code_anchor_refs"]
+            [1],
+        "stage1_stage2_parser_spike_tests"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["retained_later_refs"]
+            [0],
+        "stage3_admit_slot_surface"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["retained_later_refs"]
+            [1],
+        "stage3_request_clause_suite"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["retained_later_refs"]
+            [2],
+        "stage3_predicate_fragment"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["retained_later_refs"]
+            [3],
+        "perform_head_final_public_api"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["retained_later_refs"]
+            [4],
+        "span_rich_diagnostics"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["retained_later_refs"]
+            [5],
+        "final_grammar"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["next_comparison_target_ref"],
+        "phase6_actual_checker_runtime_skeleton_first_tranche_comparison"
     );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]
@@ -754,7 +850,16 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
         "phase6_actual_parser_ast_carrier_first_tranche_comparison"
     );
     assert_eq!(
-        value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][2],
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"]["next_comparison_target_ref"],
+        "phase6_actual_checker_runtime_skeleton_first_tranche_comparison"
+    );
+    assert_eq!(
+        value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"]
+            [2],
         "model_check_final_public_contract_reopen:p09-dice-delegated-rng-provider-placement:verifier_handoff_and_runtime_policy_contract_third"
     );
     assert_eq!(
@@ -897,18 +1002,15 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         "reached"
     );
     assert_eq!(
-        value["actual_checker_payload_public_schema_sketch_threshold"]
-            ["actual_checker_payload_family_ref"],
+        value["actual_checker_payload_public_schema_sketch_threshold"]["actual_checker_payload_family_ref"],
         "actual_checker_payload_family"
     );
     assert_eq!(
-        value["actual_checker_payload_public_schema_sketch_threshold"]
-            ["checker_payload_row_family_ref"],
+        value["actual_checker_payload_public_schema_sketch_threshold"]["checker_payload_row_family_ref"],
         "actual_checker_payload_row_family"
     );
     assert_eq!(
-        value["actual_checker_payload_public_schema_sketch_threshold"]
-            ["checker_payload_row_detail_ref"],
+        value["actual_checker_payload_public_schema_sketch_threshold"]["checker_payload_row_detail_ref"],
         "actual_checker_payload_row_detail"
     );
     assert_eq!(
@@ -916,8 +1018,7 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         "actual_checker_payload_row_body"
     );
     assert_eq!(
-        value["actual_checker_payload_public_schema_sketch_threshold"]
-            ["checker_payload_supported_kind_summary_ref"],
+        value["actual_checker_payload_public_schema_sketch_threshold"]["checker_payload_supported_kind_summary_ref"],
         "actual_checker_payload_supported_kind_summary"
     );
     assert_eq!(
@@ -1239,9 +1340,7 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("payload_family_ref: actual_checker_payload_family"));
     assert!(output.contains("row_family_kind: checked_reason_code_rows"));
     assert!(output.contains("actual_checker_payload_row_detail_threshold:"));
-    assert!(output.contains(
-        "payload_row_family_ref: actual_checker_payload_row_family"
-    ));
+    assert!(output.contains("payload_row_family_ref: actual_checker_payload_row_family"));
     assert!(output.contains("row_source_ref: fixture_checked_reason_codes"));
     assert!(output.contains("row_reason_kind: authority_miss_negative"));
     assert!(output.contains("actual_checker_payload_row_body_threshold:"));
@@ -1252,105 +1351,70 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("missing_lineage_assertion"));
     assert!(output.contains("missing_successor_option"));
     assert!(output.contains("actual_checker_payload_public_schema_sketch_threshold:"));
-    assert!(output.contains(
-        "actual_checker_payload_family_ref: actual_checker_payload_family"
-    ));
+    assert!(output.contains("actual_checker_payload_family_ref: actual_checker_payload_family"));
     assert!(output.contains(
         "checker_payload_supported_kind_summary_ref: actual_checker_payload_supported_kind_summary"
     ));
     assert!(output.contains("actual_public_checker_api_sketch_threshold:"));
     assert!(output.contains("checker_subject: runtime_try_cut_cluster"));
-    assert!(output.contains(
-        "public_checker_payload_schema_ref: public_checker_payload_schema_ready_sketch"
-    ));
+    assert!(
+        output.contains(
+            "public_checker_payload_schema_ref: public_checker_payload_schema_ready_sketch"
+        )
+    );
     assert!(output.contains("actual_public_checker_entry_criteria_threshold:"));
     assert!(output.contains("public_checker_api_ref: public_checker_api_ready_sketch"));
-    assert!(output.contains(
-        "next_comparison_target_ref: public_checker_command_surface_comparison"
-    ));
+    assert!(
+        output.contains("next_comparison_target_ref: public_checker_command_surface_comparison")
+    );
     assert!(output.contains("smoke-same-lineage-checker"));
     assert!(output.contains("actual_public_checker_command_surface_threshold:"));
-    assert!(output.contains(
-        "command_surface_kind: family_facade_checker_commands"
-    ));
+    assert!(output.contains("command_surface_kind: family_facade_checker_commands"));
     assert!(output.contains("same_lineage_checker_command"));
     assert!(output.contains("public_checker_api_ref: public_checker_api_ready_sketch"));
     assert!(output.contains("actual_shared_output_contract_threshold:"));
-    assert!(output.contains(
-        "output_contract_kind: family_checker_row_compare_summary"
-    ));
+    assert!(output.contains("output_contract_kind: family_checker_row_compare_summary"));
     assert!(output.contains("checker_cluster_name: same_lineage_evidence_floor"));
     assert!(output.contains("checker_status: matched"));
-    assert!(output.contains(
-        "public_checker_payload_schema_ref: public_checker_payload_schema_ready_sketch"
-    ));
-    assert!(output.contains(
-        "next_comparison_target_ref: public_checker_boundary_comparison"
-    ));
+    assert!(
+        output.contains(
+            "public_checker_payload_schema_ref: public_checker_payload_schema_ready_sketch"
+        )
+    );
+    assert!(output.contains("next_comparison_target_ref: public_checker_boundary_comparison"));
     assert!(output.contains("actual_public_checker_boundary_threshold:"));
-    assert!(output.contains(
-        "boundary_kind: docs_only_parser_front_checker_boundary"
-    ));
+    assert!(output.contains("boundary_kind: docs_only_parser_front_checker_boundary"));
     assert!(output.contains(
         "public_checker_command_surface_ref: public_checker_command_surface_ready_sketch"
     ));
-    assert!(output.contains(
-        "shared_output_contract_ref: shared_output_contract_ready_sketch"
-    ));
-    assert!(output.contains(
-        "next_comparison_target_ref: verifier_handoff_surface_comparison"
-    ));
+    assert!(output.contains("shared_output_contract_ref: shared_output_contract_ready_sketch"));
+    assert!(output.contains("next_comparison_target_ref: verifier_handoff_surface_comparison"));
     assert!(output.contains("actual_verifier_handoff_surface_threshold:"));
-    assert!(output.contains(
-        "handoff_surface_kind: docs_only_mixed_row_bundle_verifier_surface"
-    ));
-    assert!(output.contains(
-        "public_checker_boundary_ref: public_checker_boundary_ready_sketch"
-    ));
-    assert!(output.contains(
-        "proof_obligation_matrix_ref: current_l2_proof_obligation_matrix"
-    ));
-    assert!(output.contains(
-        "handoff_artifact_mode: docs_only_mixed_row_bundle"
-    ));
-    assert!(output.contains(
-        "next_comparison_target_ref: minimal_parser_subset_freeze_comparison"
-    ));
+    assert!(output.contains("handoff_surface_kind: docs_only_mixed_row_bundle_verifier_surface"));
+    assert!(output.contains("public_checker_boundary_ref: public_checker_boundary_ready_sketch"));
+    assert!(output.contains("proof_obligation_matrix_ref: current_l2_proof_obligation_matrix"));
+    assert!(output.contains("handoff_artifact_mode: docs_only_mixed_row_bundle"));
+    assert!(output.contains("next_comparison_target_ref: minimal_parser_subset_freeze_comparison"));
     assert!(output.contains("actual_minimal_parser_subset_freeze_threshold:"));
-    assert!(output.contains(
-        "freeze_kind: stage1_stage2_structural_parser_floor"
-    ));
-    assert!(output.contains(
-        "accepted_cluster_refs:"
-    ));
-    assert!(output.contains(
-        "stage1_chain_declaration_structural_floor"
-    ));
-    assert!(output.contains(
-        "stage2_try_rollback_structural_floor"
-    ));
-    assert!(output.contains(
-        "reject_cluster_refs:"
-    ));
+    assert!(output.contains("freeze_kind: stage1_stage2_structural_parser_floor"));
+    assert!(output.contains("accepted_cluster_refs:"));
+    assert!(output.contains("stage1_chain_declaration_structural_floor"));
+    assert!(output.contains("stage2_try_rollback_structural_floor"));
+    assert!(output.contains("reject_cluster_refs:"));
     assert!(output.contains("missing_edge_local_lineage_metadata"));
     assert!(output.contains("missing_fallback_body"));
     assert!(output.contains("atomic_cut_fallback_placement"));
-    assert!(output.contains(
-        "retention_floor_refs:"
-    ));
+    assert!(output.contains("retention_floor_refs:"));
     assert!(output.contains("stage3_admit_slot_branch"));
     assert!(output.contains("stage3_request_clause_branch"));
     assert!(output.contains("stage3_predicate_fragment_branch"));
-    assert!(output.contains(
-        "next_comparison_target_ref: parser_to_checker_reconnect_freeze_comparison"
-    ));
+    assert!(
+        output
+            .contains("next_comparison_target_ref: parser_to_checker_reconnect_freeze_comparison")
+    );
     assert!(output.contains("actual_parser_to_checker_reconnect_freeze_threshold:"));
-    assert!(output.contains(
-        "reconnect_kind: stage1_stage2_checker_floor_bridge"
-    ));
-    assert!(output.contains(
-        "parser_subset_freeze_ref: minimal_parser_subset_freeze_ready_sketch"
-    ));
+    assert!(output.contains("reconnect_kind: stage1_stage2_checker_floor_bridge"));
+    assert!(output.contains("parser_subset_freeze_ref: minimal_parser_subset_freeze_ready_sketch"));
     assert!(output.contains("checker_floor_refs:"));
     assert!(output.contains("stage1_reconnect_summary_floor"));
     assert!(output.contains("stage2_try_rollback_structural_floor"));
@@ -1358,9 +1422,7 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("stage3_request_predicate_reconnect_line"));
     assert!(output.contains("stage1_direct_target_mismatch_redesign_line"));
     assert!(output.contains("runtime_contrast_e21_e22_line"));
-    assert!(output.contains(
-        "next_comparison_target_ref: phase1_semantics_closeout_comparison"
-    ));
+    assert!(output.contains("next_comparison_target_ref: phase1_semantics_closeout_comparison"));
     assert!(output.contains("actual_phase1_semantics_closeout_threshold:"));
     assert!(output.contains("closeout_kind: current_l2_semantics_closeout"));
     assert!(output.contains("core_semantics_refs:"));
@@ -1373,9 +1435,9 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("explicit_edge_row_family"));
     assert!(output.contains("a2_polished_first_choice"));
     assert!(output.contains("a1_companion_shorthand"));
-    assert!(output.contains(
-        "next_comparison_target_ref: phase2_parser_free_poc_closeout_comparison"
-    ));
+    assert!(
+        output.contains("next_comparison_target_ref: phase2_parser_free_poc_closeout_comparison")
+    );
     assert!(output.contains("actual_phase2_parser_free_poc_closeout_threshold:"));
     assert!(output.contains("closeout_kind: parser_free_companion_baseline"));
     assert!(output.contains("compile_gate_refs:"));

@@ -1011,6 +1011,8 @@
   - `specs/examples/300-current-l2-phase6-actual-parser-ast-carrier-first-tranche-ready-minimal-phase6-actual-parser-ast-carrier-first-tranche-threshold.md`
   - `specs/examples/301-current-l2-phase6-actual-parser-ast-carrier-first-tranche-ready-phase6-actual-checker-runtime-skeleton-first-tranche-comparison.md`
   - `specs/examples/302-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-ready-minimal-phase6-actual-checker-runtime-skeleton-first-tranche-threshold.md`
+  - `specs/examples/552-current-l2-phase6-actual-parser-ast-carrier-first-tranche-threshold-helper-mirror.md`
+  - `docs/reports/0833-package80-phase6-parser-ast-carrier-first-tranche-ratchet.md`
   - `crates/mir-semantics/src/lib.rs`
   - `crates/mir-semantics/src/harness.rs`
   - `crates/mir-runtime/src/current_l2.rs`

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 23:40 JST
+最終更新: 2026-04-20 00:20 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - `mir-ast` non-production carrier として stage 1 / stage 2 structural floor をどこまで actualize するかの phase6-actual-parser-ast-carrier-first-tranche ratchet
+  - `mir-semantics` program-level entry と `mir-runtime::current_l2` thin orchestrator をどこまで actualize するかの phase6-actual-checker-runtime-skeleton-first-tranche ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `80` phase6-actual-parser-ast-carrier-first-tranche ratchet | phase5 handoff closeout の次段として `mir-ast` non-production carrier をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | `mir_ast_current_l2_first_tranche = carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` current cut を helper-local threshold に留め、stage3 admit/request/predicate cluster、final parser API、span-rich diagnostics、final grammar を still later に残したまま phase6 parser first tranche を ratchet する | stage1/stage2 structural floor と crate-local code anchor を narrow に actualize しつつ、stage3/final public parser surface を later gate に残せる |
+| `81` phase6-actual-checker-runtime-skeleton-first-tranche ratchet | phase6 parser first tranche の次段として checker/runtime minimal path をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | `phase6_current_l2_checker_runtime_first_tranche = skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` current cut を helper-local threshold に留め、parser_to_program_lowering、stage3_request_predicate_reconnect、richer_host_interface、final_public_runtime_checker_api、formal_hook_concrete_tool_binding を still later に残したまま phase6 checker/runtime first tranche を ratchet する | semantic entry / runtime bridge / parser-bridge consistency guard を narrow に actualize しつつ、lowering/public/runtime/tool binding widen を later gate に残せる |
 
 ## recently closed package note
 
@@ -397,11 +397,11 @@
 ### Package 80 — phase6-actual-parser-ast-carrier-first-tranche ratchet
 
 - current reading:
-  next active line。`actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold` を stage3 admit/request/predicate cluster や final parser grammar に上げず、`carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` current cut の phase6 actual parser / AST carrier first tranche ready sketch まで narrow に ratchet する。
+  close 済み。`actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold` を stage3 admit/request/predicate cluster や final parser grammar に上げず、`carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` current cut の phase6 actual parser / AST carrier first tranche ready sketch を `mir-ast` manifest と `run-source-sample` helper summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/299`
   `specs/examples/300`
-  `specs/examples/551`
+  `specs/examples/552`
 - stop line:
   stage3 admit slot surface
   stage3 request clause suite
@@ -409,6 +409,21 @@
   perform head final public parser API
   span-rich diagnostics
   final grammar
+
+### Package 81 — phase6-actual-checker-runtime-skeleton-first-tranche ratchet
+
+- current reading:
+  next active line。`actual_phase6_actual_parser_ast_carrier_first_tranche_threshold` の次段として、`skeleton_kind + semantic_entry_refs + runtime_bridge_refs + parser_bridge_contract_refs + retained_later_refs` current cut の phase6 actual checker/runtime first tranche ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/301`
+  `specs/examples/302`
+  `specs/examples/552`
+- stop line:
+  parser_to_program_lowering
+  stage3_request_predicate_reconnect
+  richer_host_interface
+  final_public_runtime_checker_api
+  formal_hook_concrete_tool_binding
 
 ## research-discovery items
 
@@ -441,4 +456,4 @@
 
 ## next reopen order
 
-1. Package 80 で phase6-actual-parser-ast-carrier-first-tranche ratchet を進める。
+1. Package 81 で phase6-actual-checker-runtime-skeleton-first-tranche ratchet を進める。

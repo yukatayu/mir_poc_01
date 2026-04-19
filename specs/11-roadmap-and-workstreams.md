@@ -635,7 +635,13 @@ actual-adoption floor では、
   - `p07 / p08 / p09` source-side shared-space trio
   - `actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold`
   - `closeout_kind + verifier_handoff_surface_ref + theorem_retained_bridge_stop_ref + boundary_inventory_ref + retained_later_refs` handoff stop-line bundle mirror
-  - Package 79 phase5-proof-protocol-runtime-policy-handoff-closeout ratchet close、Package 80 phase6-actual-parser-ast-carrier-first-tranche ratchet next
+  - Package 79 phase5-proof-protocol-runtime-policy-handoff-closeout ratchet close、Package 80 phase6-actual-parser-ast-carrier-first-tranche ratchet close
+- phase6 parser / AST carrier first tranche threshold helper mirror:
+  `specs/examples/552`
+  - `p07 / p08 / p09` source-side shared-space trio
+  - `actual_phase6_actual_parser_ast_carrier_first_tranche_threshold`
+  - `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` parser first-tranche minimum mirror
+  - Package 80 phase6-actual-parser-ast-carrier-first-tranche ratchet close、Package 81 phase6-actual-checker-runtime-skeleton-first-tranche ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

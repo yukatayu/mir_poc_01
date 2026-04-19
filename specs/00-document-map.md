@@ -216,7 +216,10 @@
   - final public witness/provider/artifact contract、exhaustive shared-space final catalog、distributed fairness protocol、final operational realization を固定するものではなく、Package 78 close と Package 79 phase5-proof-protocol-runtime-policy-handoff-closeout ratchet next line を読むための anchor である。
 - `specs/examples/551-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold-helper-mirror.md`
   - Package 79 の closeout として `p07 / p08 / p09` source-side shared-space trio の phase5 proof/protocol/runtime-policy handoff closeout threshold を `run-source-sample` helper summary に narrow に mirror し、`closeout_kind + verifier_handoff_surface_ref + theorem_retained_bridge_stop_ref + boundary_inventory_ref + retained_later_refs` の handoff stop-line bundle を helper-local operational summary で保つ補助文書。
-  - actual subject row materialization、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete theorem / model-check tool binding、public checker migration、low-level memory-order family、final public verifier contract を固定するものではなく、Package 79 close と Package 80 phase6-actual-parser-ast-carrier-first-tranche ratchet next line を読むための anchor である。
+  - actual subject row materialization、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete theorem / model-check tool binding、public checker migration、low-level memory-order family、final public verifier contract を固定するものではなく、Package 79 close と Package 80 phase6-actual-parser-ast-carrier-first-tranche ratchet close を読むための anchor である。
+- `specs/examples/552-current-l2-phase6-actual-parser-ast-carrier-first-tranche-threshold-helper-mirror.md`
+  - Package 80 の closeout として `p07 / p08 / p09` source-side shared-space trio の phase6 parser / AST carrier first tranche threshold を `run-source-sample` helper summary に narrow に mirror し、`carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` の parser first-tranche minimum を helper-local operational summary で保つ補助文書。
+  - parser_to_program_lowering、stage3_request_predicate_reconnect、richer_host_interface、final public runtime/checker API、formal hook concrete tool binding を固定するものではなく、Package 80 close と Package 81 phase6-actual-checker-runtime-skeleton-first-tranche ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
@@ -699,6 +702,8 @@
   - current Phase 5 / Package 78 closeout として、source-side shared-space trio `p07 / p08 / p09` に `actual_phase4_shared_space_self_driven_closeout_threshold` を actualize し、shared-space closeout bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/551-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold-helper-mirror.md`
   - current Phase 5 / Package 79 closeout として、source-side shared-space trio `p07 / p08 / p09` に `actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold` を actualize し、phase5 handoff closeout bundle を helper-local operational summary に narrow に mirror する補助文書。
+- `specs/examples/552-current-l2-phase6-actual-parser-ast-carrier-first-tranche-threshold-helper-mirror.md`
+  - current Phase 5 / Package 80 closeout として、source-side shared-space trio `p07 / p08 / p09` に `actual_phase6_actual_parser_ast_carrier_first_tranche_threshold` を actualize し、phase6 parser first tranche bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

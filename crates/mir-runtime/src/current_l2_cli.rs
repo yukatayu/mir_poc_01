@@ -5,6 +5,7 @@ use std::{
     path::PathBuf,
 };
 
+use mir_ast::current_l2::current_l2_first_tranche_manifest;
 use serde::Serialize;
 
 use crate::current_l2::{
@@ -267,6 +268,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary,
     actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold:
         CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary,
+    actual_phase6_actual_parser_ast_carrier_first_tranche_threshold:
+        CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -401,6 +404,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_phase4_shared_space_self_driven_closeout_threshold,
             );
+        let actual_phase6_actual_parser_ast_carrier_first_tranche_threshold =
+            CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary::from_source_report(
+                &report,
+                &actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -440,6 +448,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_phase2_parser_free_poc_closeout_threshold,
             actual_phase4_shared_space_self_driven_closeout_threshold,
             actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
+            actual_phase6_actual_parser_ast_carrier_first_tranche_threshold,
         }
     }
 }
@@ -1086,18 +1095,16 @@ impl CurrentL2OperationalCliActualCheckerPayloadFamilyThresholdSummary {
 
         if reached {
             let mut compare_floor_refs = typed_checker_hint_preview.compare_floor_refs.clone();
-            compare_floor_refs.push(
-                "compare_floor:current_l2.checker.actual_checker_payload_family".to_string(),
-            );
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.actual_checker_payload_family".to_string());
             compare_floor_refs.push(
                 "compare_floor:current_l2.checker.minimal_checker_payload_family_threshold"
                     .to_string(),
             );
 
             let mut evidence_refs = typed_checker_hint_evidence_refs(&report.sample_id);
-            evidence_refs.push(
-                "helper_preview:actual_checker_payload_family_threshold".to_string(),
-            );
+            evidence_refs
+                .push("helper_preview:actual_checker_payload_family_threshold".to_string());
 
             return Self {
                 status: "reached",
@@ -1182,20 +1189,21 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowFamilyThresholdSummary {
         ) && actual_checker_payload_family_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_checker_payload_family_threshold.compare_floor_refs.clone();
-            compare_floor_refs.push(
-                "compare_floor:current_l2.checker.checker_payload_row_family".to_string(),
-            );
+            let mut compare_floor_refs = actual_checker_payload_family_threshold
+                .compare_floor_refs
+                .clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.checker_payload_row_family".to_string());
             compare_floor_refs.push(
                 "compare_floor:current_l2.checker.minimal_checker_payload_row_family_threshold"
                     .to_string(),
             );
 
-            let mut evidence_refs = actual_checker_payload_family_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_checker_payload_row_family_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_checker_payload_family_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_checker_payload_row_family_threshold".to_string());
 
             return Self {
                 status: "reached",
@@ -1274,35 +1282,36 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowDetailThresholdSummary {
         ) && actual_checker_payload_row_family_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_checker_payload_row_family_threshold.compare_floor_refs.clone();
-            compare_floor_refs.push(
-                "compare_floor:current_l2.checker.checker_payload_row_detail".to_string(),
-            );
+            let mut compare_floor_refs = actual_checker_payload_row_family_threshold
+                .compare_floor_refs
+                .clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.checker_payload_row_detail".to_string());
             compare_floor_refs.push(
                 "compare_floor:current_l2.checker.minimal_checker_payload_row_detail_threshold"
                     .to_string(),
             );
 
-            let mut evidence_refs = actual_checker_payload_row_family_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_checker_payload_row_detail_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_checker_payload_row_family_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_checker_payload_row_detail_threshold".to_string());
 
             return Self {
                 status: "reached",
                 threshold_kind: "checker_adjacent_row_detail_threshold_manifest",
                 cluster_kind: actual_checker_payload_row_family_threshold.cluster_kind,
                 case_label: actual_checker_payload_row_family_threshold.case_label,
-                family_refs: actual_checker_payload_row_family_threshold.family_refs.clone(),
+                family_refs: actual_checker_payload_row_family_threshold
+                    .family_refs
+                    .clone(),
                 coverage_state: actual_checker_payload_row_family_threshold.coverage_state,
                 payload_row_family_ref: Some("actual_checker_payload_row_family"),
                 row_source_ref: Some(actual_checker_payload_row_detail_source_ref(
                     &report.sample_id,
                 )),
-                row_reason_kind: actual_checker_payload_row_detail_reason_kind(
-                    &report.sample_id,
-                ),
+                row_reason_kind: actual_checker_payload_row_detail_reason_kind(&report.sample_id),
                 evidence_refs,
                 compare_floor_refs,
                 guard_refs: actual_checker_payload_row_detail_threshold_guard_refs(true),
@@ -1373,35 +1382,36 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary {
         ) && actual_checker_payload_row_detail_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_checker_payload_row_detail_threshold.compare_floor_refs.clone();
-            compare_floor_refs.push(
-                "compare_floor:current_l2.checker.checker_payload_row_body".to_string(),
-            );
+            let mut compare_floor_refs = actual_checker_payload_row_detail_threshold
+                .compare_floor_refs
+                .clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.checker_payload_row_body".to_string());
             compare_floor_refs.push(
                 "compare_floor:current_l2.checker.minimal_checker_payload_row_body_threshold"
                     .to_string(),
             );
 
-            let mut evidence_refs = actual_checker_payload_row_detail_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_checker_payload_row_body_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_checker_payload_row_detail_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_checker_payload_row_body_threshold".to_string());
 
             return Self {
                 status: "reached",
                 threshold_kind: "checker_adjacent_row_body_threshold_manifest",
                 cluster_kind: actual_checker_payload_row_detail_threshold.cluster_kind,
                 case_label: actual_checker_payload_row_detail_threshold.case_label,
-                family_refs: actual_checker_payload_row_detail_threshold.family_refs.clone(),
+                family_refs: actual_checker_payload_row_detail_threshold
+                    .family_refs
+                    .clone(),
                 coverage_state: actual_checker_payload_row_detail_threshold.coverage_state,
                 payload_row_family_ref: Some("actual_checker_payload_row_family"),
                 row_source_ref: Some(actual_checker_payload_row_detail_source_ref(
                     &report.sample_id,
                 )),
-                row_reason_kind: actual_checker_payload_row_detail_reason_kind(
-                    &report.sample_id,
-                ),
+                row_reason_kind: actual_checker_payload_row_detail_reason_kind(&report.sample_id),
                 row_body: actual_checker_payload_row_body_bundle(&report.sample_id),
                 evidence_refs,
                 compare_floor_refs,
@@ -1428,8 +1438,7 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary {
                 "compare_floor:current_l2.checker.checker_payload_row_body".to_string(),
             ],
             compare_floor_refs: vec![
-                "compare_floor:current_l2.checker.checker_payload_row_body.guard_only"
-                    .to_string(),
+                "compare_floor:current_l2.checker.checker_payload_row_body.guard_only".to_string(),
             ],
             guard_refs: actual_checker_payload_row_body_threshold_guard_refs(false),
             kept_later_refs: actual_checker_payload_row_body_threshold_kept_later_refs(),
@@ -1469,8 +1478,9 @@ impl CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSum
         ) && actual_checker_payload_row_body_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_checker_payload_row_body_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_checker_payload_row_body_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs.push(
                 "compare_floor:current_l2.checker.checker_payload_supported_kind_summary"
                     .to_string(),
@@ -1480,7 +1490,9 @@ impl CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSum
                     .to_string(),
             );
 
-            let mut evidence_refs = actual_checker_payload_row_body_threshold.evidence_refs.clone();
+            let mut evidence_refs = actual_checker_payload_row_body_threshold
+                .evidence_refs
+                .clone();
             evidence_refs.push(
                 "helper_preview:actual_checker_payload_supported_kind_summary_threshold"
                     .to_string(),
@@ -1558,11 +1570,13 @@ impl CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSumma
             "p10-typed-authorized-fingerprint-declassification"
                 | "p11-typed-unauthorized-fingerprint-release"
                 | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_supported_kind_summary_threshold.status == "reached";
+        ) && actual_checker_payload_supported_kind_summary_threshold.status
+            == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_checker_payload_supported_kind_summary_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_checker_payload_supported_kind_summary_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs
                 .push("compare_floor:current_l2.checker.public_checker_payload_schema".to_string());
             compare_floor_refs.push(
@@ -1570,17 +1584,16 @@ impl CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSumma
                     .to_string(),
             );
 
-            let mut evidence_refs =
-                actual_checker_payload_supported_kind_summary_threshold.evidence_refs.clone();
+            let mut evidence_refs = actual_checker_payload_supported_kind_summary_threshold
+                .evidence_refs
+                .clone();
             evidence_refs.push(
-                "helper_preview:actual_checker_payload_public_schema_sketch_threshold"
-                    .to_string(),
+                "helper_preview:actual_checker_payload_public_schema_sketch_threshold".to_string(),
             );
 
             return Self {
                 status: "reached",
-                threshold_kind:
-                    "checker_adjacent_public_checker_payload_schema_sketch_threshold_manifest",
+                threshold_kind: "checker_adjacent_public_checker_payload_schema_sketch_threshold_manifest",
                 actual_checker_payload_family_ref: Some("actual_checker_payload_family"),
                 checker_payload_row_family_ref: Some("actual_checker_payload_row_family"),
                 checker_payload_row_detail_ref: Some("actual_checker_payload_row_detail"),
@@ -1599,8 +1612,7 @@ impl CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSumma
 
         Self {
             status: "guarded_not_reached",
-            threshold_kind:
-                "checker_adjacent_public_checker_payload_schema_sketch_threshold_manifest",
+            threshold_kind: "checker_adjacent_public_checker_payload_schema_sketch_threshold_manifest",
             actual_checker_payload_family_ref: None,
             checker_payload_row_family_ref: None,
             checker_payload_row_detail_ref: None,
@@ -1608,8 +1620,7 @@ impl CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSumma
             checker_payload_supported_kind_summary_ref: None,
             evidence_refs: vec![
                 format!("sample:{}", report.sample_id),
-                "helper_preview:actual_checker_payload_public_schema_sketch_threshold"
-                    .to_string(),
+                "helper_preview:actual_checker_payload_public_schema_sketch_threshold".to_string(),
                 "compare_floor:current_l2.checker.public_checker_payload_schema".to_string(),
             ],
             compare_floor_refs: vec![
@@ -1617,8 +1628,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSumma
                     .to_string(),
             ],
             guard_refs: actual_checker_payload_public_schema_sketch_threshold_guard_refs(false),
-            kept_later_refs:
-                actual_checker_payload_public_schema_sketch_threshold_kept_later_refs(),
+            kept_later_refs: actual_checker_payload_public_schema_sketch_threshold_kept_later_refs(
+            ),
             guard_reason: Some(format!(
                 "current actual checker payload public-schema sketch threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload supported-kind summary threshold reaches the checker-adjacent helper floor for `{}`",
                 report.sample_id
@@ -1652,28 +1663,32 @@ impl CurrentL2OperationalCliActualPublicCheckerApiSketchThresholdSummary {
             "p10-typed-authorized-fingerprint-declassification"
                 | "p11-typed-unauthorized-fingerprint-release"
                 | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_public_schema_sketch_threshold.status == "reached";
+        ) && actual_checker_payload_public_schema_sketch_threshold.status
+            == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_checker_payload_public_schema_sketch_threshold.compare_floor_refs.clone();
-            compare_floor_refs.push("compare_floor:current_l2.checker.public_checker_api".to_string());
+            let mut compare_floor_refs = actual_checker_payload_public_schema_sketch_threshold
+                .compare_floor_refs
+                .clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.public_checker_api".to_string());
             compare_floor_refs.push(
-                "compare_floor:current_l2.checker.minimal_public_checker_api_threshold"
-                    .to_string(),
+                "compare_floor:current_l2.checker.minimal_public_checker_api_threshold".to_string(),
             );
 
-            let mut evidence_refs =
-                actual_checker_payload_public_schema_sketch_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_public_checker_api_sketch_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_checker_payload_public_schema_sketch_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_public_checker_api_sketch_threshold".to_string());
 
             return Self {
                 status: "reached",
                 threshold_kind: "checker_adjacent_public_checker_api_sketch_threshold_manifest",
                 checker_subject: verification_preview.subject_kind,
-                public_checker_payload_schema_ref: Some("public_checker_payload_schema_ready_sketch"),
+                public_checker_payload_schema_ref: Some(
+                    "public_checker_payload_schema_ready_sketch",
+                ),
                 evidence_refs,
                 compare_floor_refs,
                 guard_refs: actual_public_checker_api_sketch_threshold_guard_refs(true),
@@ -1737,8 +1752,9 @@ impl CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary {
         ) && actual_public_checker_api_sketch_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_public_checker_api_sketch_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_public_checker_api_sketch_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs
                 .push("compare_floor:current_l2.checker.public_checker_entry_criteria".to_string());
             compare_floor_refs.push(
@@ -1746,11 +1762,11 @@ impl CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary {
                     .to_string(),
             );
 
-            let mut evidence_refs =
-                actual_public_checker_api_sketch_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_public_checker_entry_criteria_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_public_checker_api_sketch_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_public_checker_entry_criteria_threshold".to_string());
             evidence_refs.push("source:scripts/current_l2_family_checker_support.py".to_string());
             evidence_refs.push("source:scripts/current_l2_same_lineage_checker.py".to_string());
             evidence_refs.push("source:scripts/current_l2_missing_option_checker.py".to_string());
@@ -1851,20 +1867,22 @@ impl CurrentL2OperationalCliActualPublicCheckerCommandSurfaceThresholdSummary {
         ) && actual_public_checker_entry_criteria_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_public_checker_entry_criteria_threshold.compare_floor_refs.clone();
-            compare_floor_refs
-                .push("compare_floor:current_l2.checker.public_checker_command_surface".to_string());
+            let mut compare_floor_refs = actual_public_checker_entry_criteria_threshold
+                .compare_floor_refs
+                .clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.checker.public_checker_command_surface".to_string(),
+            );
             compare_floor_refs.push(
                 "compare_floor:current_l2.checker.minimal_public_checker_command_surface_threshold"
                     .to_string(),
             );
 
-            let mut evidence_refs =
-                actual_public_checker_entry_criteria_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_public_checker_command_surface_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_public_checker_entry_criteria_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_public_checker_command_surface_threshold".to_string());
             evidence_refs.push("source:family_facade_checker_commands".to_string());
             evidence_refs.push("source:detached_loop_smoke_checker_family".to_string());
 
@@ -1954,8 +1972,9 @@ impl CurrentL2OperationalCliActualSharedOutputContractThresholdSummary {
         ) && actual_public_checker_command_surface_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_public_checker_command_surface_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_public_checker_command_surface_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs
                 .push("compare_floor:current_l2.checker.shared_output_contract".to_string());
             compare_floor_refs.push(
@@ -1963,11 +1982,11 @@ impl CurrentL2OperationalCliActualSharedOutputContractThresholdSummary {
                     .to_string(),
             );
 
-            let mut evidence_refs =
-                actual_public_checker_command_surface_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_shared_output_contract_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_public_checker_command_surface_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_shared_output_contract_threshold".to_string());
             evidence_refs.push("source:scripts/current_l2_family_checker_support.py".to_string());
             evidence_refs.push("source:family_checker_row_compare_summary".to_string());
             evidence_refs.push("source:scripts/current_l2_same_lineage_checker.py".to_string());
@@ -1979,7 +1998,9 @@ impl CurrentL2OperationalCliActualSharedOutputContractThresholdSummary {
                 output_contract_kind: Some("family_checker_row_compare_summary"),
                 checker_cluster_name: Some("same_lineage_evidence_floor"),
                 checker_status: Some("matched"),
-                public_checker_payload_schema_ref: Some("public_checker_payload_schema_ready_sketch"),
+                public_checker_payload_schema_ref: Some(
+                    "public_checker_payload_schema_ready_sketch",
+                ),
                 next_comparison_target_ref: Some("public_checker_boundary_comparison"),
                 deferred_surface_refs: vec![
                     "static_gate_artifact_path".to_string(),
@@ -2014,8 +2035,7 @@ impl CurrentL2OperationalCliActualSharedOutputContractThresholdSummary {
                 "compare_floor:current_l2.checker.shared_output_contract".to_string(),
             ],
             compare_floor_refs: vec![
-                "compare_floor:current_l2.checker.shared_output_contract.guard_only"
-                    .to_string(),
+                "compare_floor:current_l2.checker.shared_output_contract.guard_only".to_string(),
             ],
             guard_refs: actual_shared_output_contract_threshold_guard_refs(false),
             kept_later_refs: actual_shared_output_contract_threshold_kept_later_refs(),
@@ -2057,8 +2077,9 @@ impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
         ) && actual_shared_output_contract_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_shared_output_contract_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_shared_output_contract_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs
                 .push("compare_floor:current_l2.checker.public_checker_boundary".to_string());
             compare_floor_refs.push(
@@ -2066,10 +2087,11 @@ impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
                     .to_string(),
             );
 
-            let mut evidence_refs = actual_shared_output_contract_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_public_checker_boundary_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_shared_output_contract_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_public_checker_boundary_threshold".to_string());
             evidence_refs.push("source:docs_only_parser_front_checker_boundary".to_string());
             evidence_refs.push("source:public_checker_boundary_ready_sketch".to_string());
 
@@ -2077,7 +2099,9 @@ impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
                 status: "reached",
                 threshold_kind: "checker_adjacent_public_checker_boundary_threshold_manifest",
                 boundary_kind: Some("docs_only_parser_front_checker_boundary"),
-                public_checker_command_surface_ref: Some("public_checker_command_surface_ready_sketch"),
+                public_checker_command_surface_ref: Some(
+                    "public_checker_command_surface_ready_sketch",
+                ),
                 shared_output_contract_ref: Some("shared_output_contract_ready_sketch"),
                 next_comparison_target_ref: Some("verifier_handoff_surface_comparison"),
                 deferred_surface_refs: vec![
@@ -2109,8 +2133,7 @@ impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
                 "compare_floor:current_l2.checker.public_checker_boundary".to_string(),
             ],
             compare_floor_refs: vec![
-                "compare_floor:current_l2.checker.public_checker_boundary.guard_only"
-                    .to_string(),
+                "compare_floor:current_l2.checker.public_checker_boundary.guard_only".to_string(),
             ],
             guard_refs: actual_public_checker_boundary_threshold_guard_refs(false),
             kept_later_refs: actual_public_checker_boundary_threshold_kept_later_refs(),
@@ -2153,8 +2176,9 @@ impl CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
         ) && actual_public_checker_boundary_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_public_checker_boundary_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_public_checker_boundary_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs
                 .push("compare_floor:current_l2.checker.verifier_handoff_surface".to_string());
             compare_floor_refs.push(
@@ -2162,10 +2186,11 @@ impl CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
                     .to_string(),
             );
 
-            let mut evidence_refs = actual_public_checker_boundary_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_verifier_handoff_surface_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_public_checker_boundary_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_verifier_handoff_surface_threshold".to_string());
             evidence_refs.push("source:current_l2_proof_obligation_matrix".to_string());
             evidence_refs.push("source:docs_only_mixed_row_bundle_verifier_surface".to_string());
 
@@ -2212,8 +2237,7 @@ impl CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
                 "compare_floor:current_l2.checker.verifier_handoff_surface".to_string(),
             ],
             compare_floor_refs: vec![
-                "compare_floor:current_l2.checker.verifier_handoff_surface.guard_only"
-                    .to_string(),
+                "compare_floor:current_l2.checker.verifier_handoff_surface.guard_only".to_string(),
             ],
             guard_refs: actual_verifier_handoff_surface_threshold_guard_refs(false),
             kept_later_refs: actual_verifier_handoff_surface_threshold_kept_later_refs(),
@@ -2255,18 +2279,20 @@ impl CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary {
         ) && actual_verifier_handoff_surface_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_verifier_handoff_surface_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_verifier_handoff_surface_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs
                 .push("compare_floor:current_l2.parser.minimal_parser_subset_freeze".to_string());
             compare_floor_refs.push(
                 "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze".to_string(),
             );
 
-            let mut evidence_refs = actual_verifier_handoff_surface_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_minimal_parser_subset_freeze_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_verifier_handoff_surface_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_minimal_parser_subset_freeze_threshold".to_string());
             evidence_refs.push("source:stage1_stage2_structural_parser_floor".to_string());
             evidence_refs.push("source:minimal_parser_subset_freeze_ready_sketch".to_string());
 
@@ -2354,26 +2380,24 @@ impl CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary
         ) && actual_minimal_parser_subset_freeze_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_minimal_parser_subset_freeze_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_minimal_parser_subset_freeze_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs.push(
-                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze"
-                    .to_string(),
+                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze".to_string(),
             );
-            compare_floor_refs.push(
-                "compare_floor:current_l2.closeout.phase1_semantics_closeout".to_string(),
-            );
+            compare_floor_refs
+                .push("compare_floor:current_l2.closeout.phase1_semantics_closeout".to_string());
 
-            let mut evidence_refs =
-                actual_minimal_parser_subset_freeze_threshold.evidence_refs.clone();
+            let mut evidence_refs = actual_minimal_parser_subset_freeze_threshold
+                .evidence_refs
+                .clone();
             evidence_refs.push(
-                "helper_preview:actual_parser_to_checker_reconnect_freeze_threshold"
-                    .to_string(),
+                "helper_preview:actual_parser_to_checker_reconnect_freeze_threshold".to_string(),
             );
             evidence_refs.push("source:stage1_stage2_checker_floor_bridge".to_string());
-            evidence_refs.push(
-                "source:parser_to_checker_reconnect_freeze_ready_sketch".to_string(),
-            );
+            evidence_refs
+                .push("source:parser_to_checker_reconnect_freeze_ready_sketch".to_string());
 
             return Self {
                 status: "reached",
@@ -2409,10 +2433,8 @@ impl CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary
             next_comparison_target_ref: None,
             evidence_refs: vec![
                 format!("sample:{}", report.sample_id),
-                "helper_preview:actual_parser_to_checker_reconnect_freeze_threshold"
-                    .to_string(),
-                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze"
-                    .to_string(),
+                "helper_preview:actual_parser_to_checker_reconnect_freeze_threshold".to_string(),
+                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze".to_string(),
             ],
             compare_floor_refs: vec![
                 "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze.guard_only"
@@ -2458,19 +2480,20 @@ impl CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary {
         ) && actual_parser_to_checker_reconnect_freeze_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_parser_to_checker_reconnect_freeze_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_parser_to_checker_reconnect_freeze_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs
                 .push("compare_floor:current_l2.closeout.phase1_semantics_closeout".to_string());
             compare_floor_refs.push(
                 "compare_floor:current_l2.closeout.phase2_parser_free_poc_closeout".to_string(),
             );
 
-            let mut evidence_refs =
-                actual_parser_to_checker_reconnect_freeze_threshold.evidence_refs.clone();
-            evidence_refs.push(
-                "helper_preview:actual_phase1_semantics_closeout_threshold".to_string(),
-            );
+            let mut evidence_refs = actual_parser_to_checker_reconnect_freeze_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs
+                .push("helper_preview:actual_phase1_semantics_closeout_threshold".to_string());
             evidence_refs.push("source:phase1_semantics_closeout_ready_sketch".to_string());
             evidence_refs.push("source:explicit_edge_row_family".to_string());
 
@@ -2557,16 +2580,20 @@ impl CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary {
         ) && actual_phase1_semantics_closeout_threshold.status == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_phase1_semantics_closeout_threshold.compare_floor_refs.clone();
-            compare_floor_refs
-                .push("compare_floor:current_l2.closeout.phase2_parser_free_poc_closeout".to_string());
+            let mut compare_floor_refs = actual_phase1_semantics_closeout_threshold
+                .compare_floor_refs
+                .clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase2_parser_free_poc_closeout".to_string(),
+            );
             compare_floor_refs.push(
                 "compare_floor:current_l2.closeout.phase4_shared_space_self_driven_closeout"
                     .to_string(),
             );
 
-            let mut evidence_refs = actual_phase1_semantics_closeout_threshold.evidence_refs.clone();
+            let mut evidence_refs = actual_phase1_semantics_closeout_threshold
+                .evidence_refs
+                .clone();
             evidence_refs.push(
                 "helper_preview:actual_phase2_parser_free_poc_closeout_threshold".to_string(),
             );
@@ -2602,8 +2629,7 @@ impl CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary {
                 evidence_refs,
                 compare_floor_refs,
                 guard_refs: actual_phase2_parser_free_poc_closeout_threshold_guard_refs(true),
-                kept_later_refs:
-                    actual_phase2_parser_free_poc_closeout_threshold_kept_later_refs(),
+                kept_later_refs: actual_phase2_parser_free_poc_closeout_threshold_kept_later_refs(),
                 guard_reason: None,
             };
         }
@@ -2761,11 +2787,13 @@ impl CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseou
             "p07-dice-late-join-visible-history"
                 | "p08-dice-stale-reconnect-refresh"
                 | "p09-dice-delegated-rng-provider-placement"
-        ) && actual_phase4_shared_space_self_driven_closeout_threshold.status == "reached";
+        ) && actual_phase4_shared_space_self_driven_closeout_threshold.status
+            == "reached";
 
         if reached {
-            let mut compare_floor_refs =
-                actual_phase4_shared_space_self_driven_closeout_threshold.compare_floor_refs.clone();
+            let mut compare_floor_refs = actual_phase4_shared_space_self_driven_closeout_threshold
+                .compare_floor_refs
+                .clone();
             compare_floor_refs.push(
                 "compare_floor:current_l2.closeout.phase5_proof_protocol_runtime_policy_handoff_closeout"
                     .to_string(),
@@ -2775,8 +2803,9 @@ impl CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseou
                     .to_string(),
             );
 
-            let mut evidence_refs =
-                actual_phase4_shared_space_self_driven_closeout_threshold.evidence_refs.clone();
+            let mut evidence_refs = actual_phase4_shared_space_self_driven_closeout_threshold
+                .evidence_refs
+                .clone();
             evidence_refs.push(
                 "helper_preview:actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"
                     .to_string(),
@@ -2851,6 +2880,131 @@ impl CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseou
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    carrier_kind: Option<&'static str>,
+    accepted_surface_refs: Vec<String>,
+    code_anchor_refs: Vec<String>,
+    retained_later_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold:
+            &CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold
+            .status
+            == "reached";
+        let manifest = current_l2_first_tranche_manifest();
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold
+                    .compare_floor_refs
+                    .clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase6_actual_parser_ast_carrier_first_tranche"
+                    .to_string(),
+            );
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase6_actual_checker_runtime_skeleton_first_tranche"
+                    .to_string(),
+            );
+
+            let mut evidence_refs =
+                actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold
+                    .evidence_refs
+                    .clone();
+            evidence_refs.push(
+                "helper_preview:actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"
+                    .to_string(),
+            );
+            evidence_refs.push(
+                "source:phase6_actual_parser_ast_carrier_first_tranche_ready_sketch".to_string(),
+            );
+            evidence_refs.push("source:mir_ast_current_l2_first_tranche".to_string());
+            evidence_refs.push("code_anchor:mir_ast_current_l2_module".to_string());
+            evidence_refs.push("code_anchor:stage1_stage2_parser_spike_tests".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind: "phase6_actual_parser_ast_carrier_first_tranche_threshold_manifest",
+                carrier_kind: Some(manifest.carrier_kind),
+                accepted_surface_refs: manifest
+                    .accepted_surface_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                code_anchor_refs: manifest
+                    .code_anchor_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                retained_later_refs: manifest
+                    .retained_later_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                next_comparison_target_ref: Some(
+                    "phase6_actual_checker_runtime_skeleton_first_tranche_comparison",
+                ),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs:
+                    actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_guard_refs(true),
+                kept_later_refs:
+                    actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_kept_later_refs(
+                    ),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "phase6_actual_parser_ast_carrier_first_tranche_threshold_manifest",
+            carrier_kind: None,
+            accepted_surface_refs: vec![],
+            code_anchor_refs: vec![],
+            retained_later_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{sample_id}"),
+                "helper_preview:actual_phase6_actual_parser_ast_carrier_first_tranche_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.closeout.phase6_actual_parser_ast_carrier_first_tranche"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.closeout.phase6_actual_parser_ast_carrier_first_tranche.guard_only"
+                    .to_string(),
+            ],
+            guard_refs:
+                actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_guard_refs(false),
+            kept_later_refs:
+                actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual phase6 parser / AST carrier first tranche threshold only actualizes the representative shared-space trio (`p07` / `p08` / `p09`) after actual phase5 proof/protocol/runtime-policy handoff closeout threshold reaches the handoff stop line for `{sample_id}`"
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -2895,8 +3049,9 @@ impl CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSumm
                 source_wording_route_refs: order_handoff_source_wording_actual_route_refs(
                     sample_id,
                 ),
-                emitted_artifact_candidate_keep_refs:
-                    order_handoff_emitted_artifact_keep_refs(sample_id),
+                emitted_artifact_candidate_keep_refs: order_handoff_emitted_artifact_keep_refs(
+                    sample_id,
+                ),
                 serial_scope_lines: order_handoff_serial_scope_reserve_surface_lines(sample_id),
                 witness_schema_route_refs: witness_provider_schema_route_witness_refs(sample_id),
                 provider_receipt_route_refs: witness_provider_schema_route_provider_refs(sample_id),
@@ -2910,8 +3065,9 @@ impl CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSumm
                     sample_id,
                 ),
                 evidence_refs: order_handoff_witness_provider_public_seam_evidence_refs(sample_id),
-                compare_floor_refs:
-                    order_handoff_witness_provider_public_seam_compare_floor_refs(true),
+                compare_floor_refs: order_handoff_witness_provider_public_seam_compare_floor_refs(
+                    true,
+                ),
                 guard_refs: order_handoff_witness_provider_public_seam_guard_refs(true),
                 kept_later_refs: order_handoff_witness_provider_public_seam_kept_later_refs(),
                 guard_reason: None,
@@ -3137,20 +3293,21 @@ impl CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary {
                 payload_preview_keep_refs: theorem_result_object_payload_preview_keep_refs(
                     subject_ref.as_deref(),
                 ),
-                proof_object_schema_candidate_refs:
-                    theorem_proof_object_schema_candidate_refs(subject_ref.as_deref()),
+                proof_object_schema_candidate_refs: theorem_proof_object_schema_candidate_refs(
+                    subject_ref.as_deref(),
+                ),
                 prover_brand_candidate_refs: theorem_prover_brand_candidate_refs(
                     subject_ref.as_deref(),
                 ),
                 final_public_contract_reopen_sequence_refs:
                     theorem_final_public_contract_reopen_sequence_refs(subject_ref.as_deref()),
-                threshold_default_refs: theorem_final_public_contract_reopen_threshold_default_refs(),
+                threshold_default_refs: theorem_final_public_contract_reopen_threshold_default_refs(
+                ),
                 evidence_refs: theorem_final_public_contract_reopen_threshold_evidence_refs(
                     &report.sample_id,
                 ),
-                compare_floor_refs: theorem_final_public_contract_reopen_threshold_compare_floor_refs(
-                    true,
-                ),
+                compare_floor_refs:
+                    theorem_final_public_contract_reopen_threshold_compare_floor_refs(true),
                 guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(true),
                 kept_later_refs: theorem_final_public_contract_reopen_threshold_kept_later_refs(),
                 guard_reason: None,
@@ -3226,8 +3383,9 @@ impl CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary 
                 checker_artifact_route_refs: model_check_checker_artifact_actual_route_refs(
                     subject_ref.as_deref(),
                 ),
-                migration_candidate_keep_refs:
-                    model_check_checker_artifact_migration_keep_refs(subject_ref.as_deref()),
+                migration_candidate_keep_refs: model_check_checker_artifact_migration_keep_refs(
+                    subject_ref.as_deref(),
+                ),
                 verifier_handoff_candidate_refs: model_check_verifier_handoff_candidate_refs(
                     subject_ref.as_deref(),
                 ),
@@ -3235,9 +3393,7 @@ impl CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary 
                     subject_ref.as_deref(),
                 ),
                 final_public_contract_reopen_sequence_refs:
-                    model_check_final_public_contract_reopen_sequence_refs(
-                        subject_ref.as_deref(),
-                    ),
+                    model_check_final_public_contract_reopen_sequence_refs(subject_ref.as_deref()),
                 threshold_default_refs:
                     model_check_final_public_contract_reopen_threshold_default_refs(),
                 evidence_refs: model_check_final_public_contract_reopen_threshold_evidence_refs(
@@ -3246,8 +3402,8 @@ impl CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary 
                 compare_floor_refs:
                     model_check_final_public_contract_reopen_threshold_compare_floor_refs(true),
                 guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(true),
-                kept_later_refs:
-                    model_check_final_public_contract_reopen_threshold_kept_later_refs(),
+                kept_later_refs: model_check_final_public_contract_reopen_threshold_kept_later_refs(
+                ),
                 guard_reason: None,
             };
         }
@@ -3451,8 +3607,11 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         "serial_scope_reserve",
         &summary.surface_preview.serial_scope_reserve,
     );
-    writeln!(output, "order_handoff_witness_provider_public_seam_compression:")
-        .expect("write to string");
+    writeln!(
+        output,
+        "order_handoff_witness_provider_public_seam_compression:"
+    )
+    .expect("write to string");
     render_order_handoff_witness_provider_public_seam_compression(
         &mut output,
         &summary.order_handoff_witness_provider_public_seam_compression,
@@ -3469,8 +3628,11 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         &mut output,
         &summary.theorem_final_public_contract_reopen_threshold,
     );
-    writeln!(output, "model_check_final_public_contract_reopen_threshold:")
-        .expect("write to string");
+    writeln!(
+        output,
+        "model_check_final_public_contract_reopen_threshold:"
+    )
+    .expect("write to string");
     render_model_check_final_public_contract_reopen_threshold(
         &mut output,
         &summary.model_check_final_public_contract_reopen_threshold,
@@ -3497,32 +3659,35 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         &mut output,
         &summary.actual_checker_payload_row_body_threshold,
     );
-    writeln!(output, "actual_checker_payload_supported_kind_summary_threshold:")
-        .expect("write to string");
+    writeln!(
+        output,
+        "actual_checker_payload_supported_kind_summary_threshold:"
+    )
+    .expect("write to string");
     render_actual_checker_payload_supported_kind_summary_threshold(
         &mut output,
         &summary.actual_checker_payload_supported_kind_summary_threshold,
     );
-    writeln!(output, "actual_checker_payload_public_schema_sketch_threshold:")
-        .expect("write to string");
+    writeln!(
+        output,
+        "actual_checker_payload_public_schema_sketch_threshold:"
+    )
+    .expect("write to string");
     render_actual_checker_payload_public_schema_sketch_threshold(
         &mut output,
         &summary.actual_checker_payload_public_schema_sketch_threshold,
     );
-    writeln!(output, "actual_public_checker_api_sketch_threshold:")
-        .expect("write to string");
+    writeln!(output, "actual_public_checker_api_sketch_threshold:").expect("write to string");
     render_actual_public_checker_api_sketch_threshold(
         &mut output,
         &summary.actual_public_checker_api_sketch_threshold,
     );
-    writeln!(output, "actual_public_checker_entry_criteria_threshold:")
-        .expect("write to string");
+    writeln!(output, "actual_public_checker_entry_criteria_threshold:").expect("write to string");
     render_actual_public_checker_entry_criteria_threshold(
         &mut output,
         &summary.actual_public_checker_entry_criteria_threshold,
     );
-    writeln!(output, "actual_public_checker_command_surface_threshold:")
-        .expect("write to string");
+    writeln!(output, "actual_public_checker_command_surface_threshold:").expect("write to string");
     render_actual_public_checker_command_surface_threshold(
         &mut output,
         &summary.actual_public_checker_command_surface_threshold,
@@ -3547,26 +3712,30 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         &mut output,
         &summary.actual_minimal_parser_subset_freeze_threshold,
     );
-    writeln!(output, "actual_parser_to_checker_reconnect_freeze_threshold:")
-        .expect("write to string");
+    writeln!(
+        output,
+        "actual_parser_to_checker_reconnect_freeze_threshold:"
+    )
+    .expect("write to string");
     render_actual_parser_to_checker_reconnect_freeze_threshold(
         &mut output,
         &summary.actual_parser_to_checker_reconnect_freeze_threshold,
     );
-    writeln!(output, "actual_phase1_semantics_closeout_threshold:")
-        .expect("write to string");
+    writeln!(output, "actual_phase1_semantics_closeout_threshold:").expect("write to string");
     render_actual_phase1_semantics_closeout_threshold(
         &mut output,
         &summary.actual_phase1_semantics_closeout_threshold,
     );
-    writeln!(output, "actual_phase2_parser_free_poc_closeout_threshold:")
-        .expect("write to string");
+    writeln!(output, "actual_phase2_parser_free_poc_closeout_threshold:").expect("write to string");
     render_actual_phase2_parser_free_poc_closeout_threshold(
         &mut output,
         &summary.actual_phase2_parser_free_poc_closeout_threshold,
     );
-    writeln!(output, "actual_phase4_shared_space_self_driven_closeout_threshold:")
-        .expect("write to string");
+    writeln!(
+        output,
+        "actual_phase4_shared_space_self_driven_closeout_threshold:"
+    )
+    .expect("write to string");
     render_actual_phase4_shared_space_self_driven_closeout_threshold(
         &mut output,
         &summary.actual_phase4_shared_space_self_driven_closeout_threshold,
@@ -3579,6 +3748,15 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold(
         &mut output,
         &summary.actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
+    );
+    writeln!(
+        output,
+        "actual_phase6_actual_parser_ast_carrier_first_tranche_threshold:"
+    )
+    .expect("write to string");
+    render_actual_phase6_actual_parser_ast_carrier_first_tranche_threshold(
+        &mut output,
+        &summary.actual_phase6_actual_parser_ast_carrier_first_tranche_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -3853,9 +4031,7 @@ fn order_handoff_source_wording_actual_route_refs(sample_id: &str) -> Vec<String
         format!(
             "order_handoff_source_wording_actual_route:{sample_id}:readable_high_level_relation_vocabulary"
         ),
-        format!(
-            "order_handoff_source_wording_actual_route:{sample_id}:stage_block_secondary_keep"
-        ),
+        format!("order_handoff_source_wording_actual_route:{sample_id}:stage_block_secondary_keep"),
         format!(
             "order_handoff_source_wording_actual_route:{sample_id}:thread_node_same_causal_language"
         ),
@@ -3884,24 +4060,18 @@ fn order_handoff_emitted_artifact_keep_refs(sample_id: &str) -> Vec<String> {
 
 fn witness_provider_schema_route_witness_refs(sample_id: &str) -> Vec<String> {
     vec![
-        format!(
-            "witness_provider_schema_route_actual:{sample_id}:witness_schema_candidate_keep"
-        ),
+        format!("witness_provider_schema_route_actual:{sample_id}:witness_schema_candidate_keep"),
         format!("witness_provider_schema_route_actual:{sample_id}:witness_route_first"),
         format!(
             "witness_provider_schema_route_actual:{sample_id}:repo_local_emitted_artifact_refs_first"
         ),
-        format!(
-            "witness_provider_schema_route_actual:{sample_id}:combined_public_contract_later"
-        ),
+        format!("witness_provider_schema_route_actual:{sample_id}:combined_public_contract_later"),
     ]
 }
 
 fn witness_provider_schema_route_provider_refs(sample_id: &str) -> Vec<String> {
     vec![
-        format!(
-            "witness_provider_schema_route_actual:{sample_id}:provider_receipt_candidate_keep"
-        ),
+        format!("witness_provider_schema_route_actual:{sample_id}:provider_receipt_candidate_keep"),
         format!("witness_provider_schema_route_actual:{sample_id}:provider_route_first"),
         format!(
             "witness_provider_schema_route_actual:{sample_id}:repo_local_emitted_artifact_refs_first"
@@ -3909,9 +4079,7 @@ fn witness_provider_schema_route_provider_refs(sample_id: &str) -> Vec<String> {
         format!(
             "witness_provider_schema_route_actual:{sample_id}:delegated_provider_attestation_later"
         ),
-        format!(
-            "witness_provider_schema_route_actual:{sample_id}:combined_public_contract_later"
-        ),
+        format!("witness_provider_schema_route_actual:{sample_id}:combined_public_contract_later"),
     ]
 }
 
@@ -4006,10 +4174,7 @@ fn order_handoff_witness_provider_public_seam_guard_refs(reached: bool) -> Vec<S
             "guard:final_emitted_handoff_contract_third".to_string(),
         ]
     } else {
-        vec![
-            "guard:order_handoff_witness_provider_public_seam_compression_not_reached"
-                .to_string(),
-        ]
+        vec!["guard:order_handoff_witness_provider_public_seam_compression_not_reached".to_string()]
     }
 }
 
@@ -4178,8 +4343,7 @@ fn model_check_final_public_contract_reopen_threshold_evidence_refs(
     vec![
         format!("sample:{sample_id}"),
         "helper_preview:model_check_final_public_contract_reopen_threshold".to_string(),
-        "compare_floor:current_l2.model_check.final_public_contract_reopen_threshold"
-            .to_string(),
+        "compare_floor:current_l2.model_check.final_public_contract_reopen_threshold".to_string(),
     ]
 }
 
@@ -4432,9 +4596,7 @@ fn actual_checker_payload_row_detail_source_ref(_sample_id: &str) -> &'static st
 
 fn actual_checker_payload_row_detail_reason_kind(sample_id: &str) -> Option<&'static str> {
     match sample_id {
-        "p10-typed-authorized-fingerprint-declassification" => {
-            Some("authority_sensitive_success")
-        }
+        "p10-typed-authorized-fingerprint-declassification" => Some("authority_sensitive_success"),
         "p11-typed-unauthorized-fingerprint-release" => Some("authority_miss_negative"),
         "p12-typed-classified-fingerprint-publication-block" => {
             Some("classified_to_public_negative")
@@ -4541,8 +4703,7 @@ fn actual_checker_payload_supported_kind_summary_threshold_guard_refs(
         ]
     } else {
         vec![
-            "guard:actual_checker_payload_supported_kind_summary_threshold_not_reached"
-                .to_string(),
+            "guard:actual_checker_payload_supported_kind_summary_threshold_not_reached".to_string(),
         ]
     }
 }
@@ -4566,10 +4727,7 @@ fn actual_checker_payload_public_schema_sketch_threshold_guard_refs(reached: boo
             "guard:final_public_checker_payload_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_checker_payload_public_schema_sketch_threshold_not_reached"
-                .to_string(),
-        ]
+        vec!["guard:actual_checker_payload_public_schema_sketch_threshold_not_reached".to_string()]
     }
 }
 
@@ -4592,9 +4750,7 @@ fn actual_public_checker_api_sketch_threshold_guard_refs(reached: bool) -> Vec<S
             "guard:shared_output_contract_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_public_checker_api_sketch_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_public_checker_api_sketch_threshold_not_reached".to_string()]
     }
 }
 
@@ -4617,9 +4773,7 @@ fn actual_public_checker_entry_criteria_threshold_guard_refs(reached: bool) -> V
             "guard:parser_front_public_checker_boundary_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_public_checker_entry_criteria_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_public_checker_entry_criteria_threshold_not_reached".to_string()]
     }
 }
 
@@ -4642,9 +4796,7 @@ fn actual_public_checker_command_surface_threshold_guard_refs(reached: bool) -> 
             "guard:generic_shared_public_checker_entry_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_public_checker_command_surface_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_public_checker_command_surface_threshold_not_reached".to_string()]
     }
 }
 
@@ -4668,9 +4820,7 @@ fn actual_shared_output_contract_threshold_guard_refs(reached: bool) -> Vec<Stri
             "guard:row_snippet_textual_rendering_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_shared_output_contract_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_shared_output_contract_threshold_not_reached".to_string()]
     }
 }
 
@@ -4694,9 +4844,7 @@ fn actual_public_checker_boundary_threshold_guard_refs(reached: bool) -> Vec<Str
             "guard:generic_shared_public_checker_entry_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_public_checker_boundary_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_public_checker_boundary_threshold_not_reached".to_string()]
     }
 }
 
@@ -4720,9 +4868,7 @@ fn actual_verifier_handoff_surface_threshold_guard_refs(reached: bool) -> Vec<St
             "guard:dedicated_handoff_artifact_family_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_verifier_handoff_surface_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_verifier_handoff_surface_threshold_not_reached".to_string()]
     }
 }
 
@@ -4747,9 +4893,7 @@ fn actual_minimal_parser_subset_freeze_threshold_guard_refs(reached: bool) -> Ve
             "guard:final_parser_grammar_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_minimal_parser_subset_freeze_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_minimal_parser_subset_freeze_threshold_not_reached".to_string()]
     }
 }
 
@@ -4775,9 +4919,7 @@ fn actual_parser_to_checker_reconnect_freeze_threshold_guard_refs(reached: bool)
             "guard:runtime_proof_boundary_actualization_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_parser_to_checker_reconnect_freeze_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_parser_to_checker_reconnect_freeze_threshold_not_reached".to_string()]
     }
 }
 
@@ -4802,9 +4944,7 @@ fn actual_phase1_semantics_closeout_threshold_guard_refs(reached: bool) -> Vec<S
             "guard:final_type_system_and_schema_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_phase1_semantics_closeout_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_phase1_semantics_closeout_threshold_not_reached".to_string()]
     }
 }
 
@@ -4828,9 +4968,7 @@ fn actual_phase2_parser_free_poc_closeout_threshold_guard_refs(reached: bool) ->
             "guard:retention_and_public_exporter_policy_later".to_string(),
         ]
     } else {
-        vec![
-            "guard:actual_phase2_parser_free_poc_closeout_threshold_not_reached".to_string(),
-        ]
+        vec!["guard:actual_phase2_parser_free_poc_closeout_threshold_not_reached".to_string()]
     }
 }
 
@@ -4942,6 +5080,36 @@ fn actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_kept_l
         "kept_later:public_checker_migration".to_string(),
         "kept_later:low_level_memory_order_family".to_string(),
     ]
+}
+
+fn actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_guard_refs(
+    reached: bool,
+) -> Vec<String> {
+    let mut refs = vec![
+        "guard:actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_required"
+            .to_string(),
+    ];
+    if reached {
+        refs.push(
+            "guard:phase6_actual_checker_runtime_skeleton_first_tranche_comparison_next"
+                .to_string(),
+        );
+    } else {
+        refs.push(
+            "guard:actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_not_reached"
+                .to_string(),
+        );
+    }
+    refs
+}
+
+fn actual_phase6_actual_parser_ast_carrier_first_tranche_threshold_kept_later_refs() -> Vec<String>
+{
+    current_l2_first_tranche_manifest()
+        .retained_later_refs
+        .iter()
+        .map(|item| (*item).to_string())
+        .collect()
 }
 
 fn display_path(path: &PathBuf) -> String {
@@ -5117,7 +5285,12 @@ fn render_theorem_final_public_contract_reopen_threshold(
         1,
     );
     render_string_list(output, "evidence_refs", &threshold.evidence_refs, 1);
-    render_string_list(output, "compare_floor_refs", &threshold.compare_floor_refs, 1);
+    render_string_list(
+        output,
+        "compare_floor_refs",
+        &threshold.compare_floor_refs,
+        1,
+    );
     render_string_list(output, "guard_refs", &threshold.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &threshold.kept_later_refs, 1);
     if let Some(guard_reason) = &threshold.guard_reason {
@@ -5132,9 +5305,18 @@ fn render_order_handoff_witness_provider_public_seam_compression(
     compression: &CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary,
 ) {
     writeln!(output, "  status: {}", compression.status).expect("write to string");
-    writeln!(output, "  compression_kind: {}", compression.compression_kind)
-        .expect("write to string");
-    render_string_list(output, "profile_axis_refs", &compression.profile_axis_refs, 1);
+    writeln!(
+        output,
+        "  compression_kind: {}",
+        compression.compression_kind
+    )
+    .expect("write to string");
+    render_string_list(
+        output,
+        "profile_axis_refs",
+        &compression.profile_axis_refs,
+        1,
+    );
     render_string_list(
         output,
         "repo_local_emitted_artifact_refs",
@@ -5190,7 +5372,12 @@ fn render_order_handoff_witness_provider_public_seam_compression(
         1,
     );
     render_string_list(output, "evidence_refs", &compression.evidence_refs, 1);
-    render_string_list(output, "compare_floor_refs", &compression.compare_floor_refs, 1);
+    render_string_list(
+        output,
+        "compare_floor_refs",
+        &compression.compare_floor_refs,
+        1,
+    );
     render_string_list(output, "guard_refs", &compression.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &compression.kept_later_refs, 1);
     if let Some(guard_reason) = &compression.guard_reason {
@@ -5253,7 +5440,12 @@ fn render_model_check_final_public_contract_reopen_threshold(
         1,
     );
     render_string_list(output, "evidence_refs", &threshold.evidence_refs, 1);
-    render_string_list(output, "compare_floor_refs", &threshold.compare_floor_refs, 1);
+    render_string_list(
+        output,
+        "compare_floor_refs",
+        &threshold.compare_floor_refs,
+        1,
+    );
     render_string_list(output, "guard_refs", &threshold.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &threshold.kept_later_refs, 1);
     if let Some(guard_reason) = &threshold.guard_reason {
@@ -5373,8 +5565,7 @@ fn render_actual_checker_payload_family_threshold(
         writeln!(output, "  coverage_state: none").expect("write to string");
     }
     if let Some(payload_family_kind) = summary.payload_family_kind {
-        writeln!(output, "  payload_family_kind: {payload_family_kind}")
-            .expect("write to string");
+        writeln!(output, "  payload_family_kind: {payload_family_kind}").expect("write to string");
     } else {
         writeln!(output, "  payload_family_kind: none").expect("write to string");
     }
@@ -5554,7 +5745,12 @@ fn render_actual_checker_payload_supported_kind_summary_threshold(
     } else {
         writeln!(output, "  supported_kind_scope: none").expect("write to string");
     }
-    render_string_list(output, "supported_kind_refs", &summary.supported_kind_refs, 1);
+    render_string_list(
+        output,
+        "supported_kind_refs",
+        &summary.supported_kind_refs,
+        1,
+    );
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);
@@ -5649,8 +5845,7 @@ fn render_actual_public_checker_api_sketch_threshold(
         )
         .expect("write to string");
     } else {
-        writeln!(output, "  public_checker_payload_schema_ref: none")
-            .expect("write to string");
+        writeln!(output, "  public_checker_payload_schema_ref: none").expect("write to string");
     }
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
@@ -5675,14 +5870,27 @@ fn render_actual_public_checker_entry_criteria_threshold(
     } else {
         writeln!(output, "  public_checker_api_ref: none").expect("write to string");
     }
-    render_string_list(output, "entry_criteria_refs", &summary.entry_criteria_refs, 1);
+    render_string_list(
+        output,
+        "entry_criteria_refs",
+        &summary.entry_criteria_refs,
+        1,
+    );
     if let Some(family_facade_support_ref) = summary.family_facade_support_ref {
-        writeln!(output, "  family_facade_support_ref: {family_facade_support_ref}")
-            .expect("write to string");
+        writeln!(
+            output,
+            "  family_facade_support_ref: {family_facade_support_ref}"
+        )
+        .expect("write to string");
     } else {
         writeln!(output, "  family_facade_support_ref: none").expect("write to string");
     }
-    render_string_list(output, "family_facade_script_refs", &summary.family_facade_script_refs, 1);
+    render_string_list(
+        output,
+        "family_facade_script_refs",
+        &summary.family_facade_script_refs,
+        1,
+    );
     render_string_list(output, "smoke_command_refs", &summary.smoke_command_refs, 1);
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
@@ -5693,7 +5901,12 @@ fn render_actual_public_checker_entry_criteria_threshold(
     } else {
         writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
     }
-    render_string_list(output, "deferred_boundary_refs", &summary.deferred_boundary_refs, 1);
+    render_string_list(
+        output,
+        "deferred_boundary_refs",
+        &summary.deferred_boundary_refs,
+        1,
+    );
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);
@@ -5738,7 +5951,12 @@ fn render_actual_public_checker_command_surface_threshold(
     } else {
         writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
     }
-    render_string_list(output, "deferred_surface_refs", &summary.deferred_surface_refs, 1);
+    render_string_list(
+        output,
+        "deferred_surface_refs",
+        &summary.deferred_surface_refs,
+        1,
+    );
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);
@@ -5780,8 +5998,7 @@ fn render_actual_shared_output_contract_threshold(
         )
         .expect("write to string");
     } else {
-        writeln!(output, "  public_checker_payload_schema_ref: none")
-            .expect("write to string");
+        writeln!(output, "  public_checker_payload_schema_ref: none").expect("write to string");
     }
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
@@ -5792,7 +6009,12 @@ fn render_actual_shared_output_contract_threshold(
     } else {
         writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
     }
-    render_string_list(output, "deferred_surface_refs", &summary.deferred_surface_refs, 1);
+    render_string_list(
+        output,
+        "deferred_surface_refs",
+        &summary.deferred_surface_refs,
+        1,
+    );
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);
@@ -5822,8 +6044,7 @@ fn render_actual_public_checker_boundary_threshold(
         )
         .expect("write to string");
     } else {
-        writeln!(output, "  public_checker_command_surface_ref: none")
-            .expect("write to string");
+        writeln!(output, "  public_checker_command_surface_ref: none").expect("write to string");
     }
     if let Some(shared_output_contract_ref) = summary.shared_output_contract_ref {
         writeln!(
@@ -5843,7 +6064,12 @@ fn render_actual_public_checker_boundary_threshold(
     } else {
         writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
     }
-    render_string_list(output, "deferred_surface_refs", &summary.deferred_surface_refs, 1);
+    render_string_list(
+        output,
+        "deferred_surface_refs",
+        &summary.deferred_surface_refs,
+        1,
+    );
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);
@@ -5900,7 +6126,12 @@ fn render_actual_verifier_handoff_surface_threshold(
     } else {
         writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
     }
-    render_string_list(output, "deferred_surface_refs", &summary.deferred_surface_refs, 1);
+    render_string_list(
+        output,
+        "deferred_surface_refs",
+        &summary.deferred_surface_refs,
+        1,
+    );
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);
@@ -5923,9 +6154,24 @@ fn render_actual_minimal_parser_subset_freeze_threshold(
     } else {
         writeln!(output, "  freeze_kind: none").expect("write to string");
     }
-    render_string_list(output, "accepted_cluster_refs", &summary.accepted_cluster_refs, 1);
-    render_string_list(output, "reject_cluster_refs", &summary.reject_cluster_refs, 1);
-    render_string_list(output, "retention_floor_refs", &summary.retention_floor_refs, 1);
+    render_string_list(
+        output,
+        "accepted_cluster_refs",
+        &summary.accepted_cluster_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "reject_cluster_refs",
+        &summary.reject_cluster_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "retention_floor_refs",
+        &summary.retention_floor_refs,
+        1,
+    );
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,
@@ -5958,13 +6204,21 @@ fn render_actual_parser_to_checker_reconnect_freeze_threshold(
         writeln!(output, "  reconnect_kind: none").expect("write to string");
     }
     if let Some(parser_subset_freeze_ref) = summary.parser_subset_freeze_ref {
-        writeln!(output, "  parser_subset_freeze_ref: {parser_subset_freeze_ref}")
-            .expect("write to string");
+        writeln!(
+            output,
+            "  parser_subset_freeze_ref: {parser_subset_freeze_ref}"
+        )
+        .expect("write to string");
     } else {
         writeln!(output, "  parser_subset_freeze_ref: none").expect("write to string");
     }
     render_string_list(output, "checker_floor_refs", &summary.checker_floor_refs, 1);
-    render_string_list(output, "retained_helper_refs", &summary.retained_helper_refs, 1);
+    render_string_list(
+        output,
+        "retained_helper_refs",
+        &summary.retained_helper_refs,
+        1,
+    );
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,
@@ -5996,9 +6250,24 @@ fn render_actual_phase1_semantics_closeout_threshold(
     } else {
         writeln!(output, "  closeout_kind: none").expect("write to string");
     }
-    render_string_list(output, "core_semantics_refs", &summary.core_semantics_refs, 1);
-    render_string_list(output, "invariant_bridge_refs", &summary.invariant_bridge_refs, 1);
-    render_string_list(output, "notation_status_refs", &summary.notation_status_refs, 1);
+    render_string_list(
+        output,
+        "core_semantics_refs",
+        &summary.core_semantics_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "invariant_bridge_refs",
+        &summary.invariant_bridge_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "notation_status_refs",
+        &summary.notation_status_refs,
+        1,
+    );
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,
@@ -6031,7 +6300,12 @@ fn render_actual_phase2_parser_free_poc_closeout_threshold(
         writeln!(output, "  closeout_kind: none").expect("write to string");
     }
     render_string_list(output, "compile_gate_refs", &summary.compile_gate_refs, 1);
-    render_string_list(output, "helper_boundary_refs", &summary.helper_boundary_refs, 1);
+    render_string_list(
+        output,
+        "helper_boundary_refs",
+        &summary.helper_boundary_refs,
+        1,
+    );
     render_string_list(
         output,
         "detached_loop_policy_refs",
@@ -6069,14 +6343,24 @@ fn render_actual_phase4_shared_space_self_driven_closeout_threshold(
     } else {
         writeln!(output, "  closeout_kind: none").expect("write to string");
     }
-    render_string_list(output, "current_package_refs", &summary.current_package_refs, 1);
+    render_string_list(
+        output,
+        "current_package_refs",
+        &summary.current_package_refs,
+        1,
+    );
     render_string_list(
         output,
         "user_spec_required_catalog_refs",
         &summary.user_spec_required_catalog_refs,
         1,
     );
-    render_string_list(output, "retained_later_refs", &summary.retained_later_refs, 1);
+    render_string_list(
+        output,
+        "retained_later_refs",
+        &summary.retained_later_refs,
+        1,
+    );
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,
@@ -6133,7 +6417,56 @@ fn render_actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold
     } else {
         writeln!(output, "  boundary_inventory_ref: none").expect("write to string");
     }
-    render_string_list(output, "retained_later_refs", &summary.retained_later_refs, 1);
+    render_string_list(
+        output,
+        "retained_later_refs",
+        &summary.retained_later_refs,
+        1,
+    );
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_phase6_actual_parser_ast_carrier_first_tranche_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(carrier_kind) = summary.carrier_kind {
+        writeln!(output, "  carrier_kind: {carrier_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  carrier_kind: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "accepted_surface_refs",
+        &summary.accepted_surface_refs,
+        1,
+    );
+    render_string_list(output, "code_anchor_refs", &summary.code_anchor_refs, 1);
+    render_string_list(
+        output,
+        "retained_later_refs",
+        &summary.retained_later_refs,
+        1,
+    );
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,

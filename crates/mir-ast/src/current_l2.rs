@@ -3,6 +3,45 @@
 //! This module intentionally exposes only the stage 1 declaration/lineage subset and
 //! the stage 2 try/fallback structural subset that were frozen in the Phase 3/6 docs.
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2FirstTrancheManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_FIRST_TRANCHE_ACCEPTED_SURFACE_REFS: &[&str] = &[
+    "stage1_option_decl_chain_surface",
+    "stage2_try_fallback_structural_surface",
+];
+
+const CURRENT_L2_FIRST_TRANCHE_CODE_ANCHOR_REFS: &[&str] = &[
+    "mir_ast_current_l2_module",
+    "stage1_stage2_parser_spike_tests",
+];
+
+const CURRENT_L2_FIRST_TRANCHE_RETAINED_LATER_REFS: &[&str] = &[
+    "stage3_admit_slot_surface",
+    "stage3_request_clause_suite",
+    "stage3_predicate_fragment",
+    "perform_head_final_public_api",
+    "span_rich_diagnostics",
+    "final_grammar",
+];
+
+pub const CURRENT_L2_FIRST_TRANCHE_MANIFEST: CurrentL2FirstTrancheManifest =
+    CurrentL2FirstTrancheManifest {
+        carrier_kind: "current_l2_nonproduction_parser_carrier",
+        accepted_surface_refs: CURRENT_L2_FIRST_TRANCHE_ACCEPTED_SURFACE_REFS,
+        code_anchor_refs: CURRENT_L2_FIRST_TRANCHE_CODE_ANCHOR_REFS,
+        retained_later_refs: CURRENT_L2_FIRST_TRANCHE_RETAINED_LATER_REFS,
+    };
+
+pub fn current_l2_first_tranche_manifest() -> &'static CurrentL2FirstTrancheManifest {
+    &CURRENT_L2_FIRST_TRANCHE_MANIFEST
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Stage1DeclGuardSlot {
     pub surface_text: String,
@@ -336,6 +375,8 @@ pub struct Stage3ParsedProgram {
     pub chains: Vec<Stage3ParsedChainDecl>,
 }
 
+/// Retained-later stage 3 helper. This is comparison / bridge evidence, not the
+/// current Phase 6 parser first tranche.
 pub fn parse_stage3_admit_slot_program_text(source: &str) -> Result<Stage3ParsedProgram, String> {
     let mut options = Vec::new();
     let mut chains = Vec::new();
@@ -520,6 +561,7 @@ struct Stage3SourceLine {
     is_blank: bool,
 }
 
+/// Retained-later stage 3 helper for multiline attachment extraction.
 pub fn extract_stage3_option_admit_multiline_fragment_text(source: &str) -> Result<String, String> {
     let lines = collect_stage3_source_lines(source);
     let head_index = find_first_stage3_head(&lines, "option ")
@@ -528,6 +570,7 @@ pub fn extract_stage3_option_admit_multiline_fragment_text(source: &str) -> Resu
     extract_stage3_multiline_clause_from_head(&lines, head_index, "admit")
 }
 
+/// Retained-later stage 3 helper for request-clause attachment extraction.
 pub fn extract_stage3_request_clause_multiline_fragment_text(
     source: &str,
     clause_name: &str,
@@ -679,6 +722,7 @@ enum Stage3PredicateToken {
     Comma,
 }
 
+/// Retained-later stage 3 helper for narrow predicate fragments.
 pub fn parse_stage3_minimal_predicate_fragment_text(
     source: &str,
 ) -> Result<Stage3PredicateFragment, String> {
