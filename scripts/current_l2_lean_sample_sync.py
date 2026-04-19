@@ -131,6 +131,21 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
                 "stale reconnect handling を current order/handoff line で見る representative runtime prototype として読む。"
             ),
         ),
+        CurrentL2ExportSpec(
+            sample_id="p09-dice-delegated-rng-provider-placement",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.host-plan.json",
+            summary="delegated RNG provider placement を表す authoritative-room prototype。",
+            rationale=(
+                "current broader coverage package で、provider placement と authority placement を "
+                "分けた order-handoff / shared-space practical line を representative sample set に "
+                "carry over する prototype として読む。"
+            ),
+        ),
     ]
 
 

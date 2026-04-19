@@ -9,7 +9,7 @@ repo-local かつ inspectable な形で保存する。
   - 実際に小さな証明を含む self-contained Lean file を置く
   - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、proof-skeleton / obligation-shape first fragment である
 - `current-l2/`
-  - 現在の current-L2 定理ブリッジから representative sample set `e5-underdeclared-lineage, p06-typed-proof-owner-handoff, p10-typed-authorized-fingerprint-declassification, p11-typed-unauthorized-fingerprint-release, p12-typed-classified-fingerprint-publication-block, p07-dice-late-join-visible-history, p08-dice-stale-reconnect-refresh` 向けに生成された Lean theorem stub を置く
+  - 現在の current-L2 定理ブリッジから representative sample set `e5-underdeclared-lineage, p06-typed-proof-owner-handoff, p10-typed-authorized-fingerprint-declassification, p11-typed-unauthorized-fingerprint-release, p12-typed-classified-fingerprint-publication-block, p07-dice-late-join-visible-history, p08-dice-stale-reconnect-refresh, p09-dice-delegated-rng-provider-placement` 向けに生成された Lean theorem stub を置く
   - これらの file は Lean に受理されるが、まだ `sorry` を含む
 
 ## 読み方

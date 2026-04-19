@@ -1,9 +1,9 @@
-# p07-dice-late-join-visible-history
+# p09-dice-delegated-rng-provider-placement
 
 ## 要約
 
-- 公開済み history を過去として見せる late join の authoritative-room prototype。
-- late-join semantics を current order/handoff line で見る representative runtime prototype として読む。
+- delegated RNG provider placement を表す authoritative-room prototype。
+- current broader coverage package で、provider placement と authority placement を 分けた order-handoff / shared-space practical line を representative sample set に carry over する prototype として読む。
 
 ## この Lean ファイルが意味すること
 

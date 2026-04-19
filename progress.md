@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-19 16:32 JST
+最終更新: 2026-04-19 16:38 JST
 
 ## この文書について
 
@@ -16,7 +16,7 @@
   （authored sixteen と corrected prototype set `p01...p12` は runnable floor に乗っており、sample corpus は adequacy corpus として active に保つ）
 - current theory-lab line:
   `Macro 5 final-layer closeout packages active`
-  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative は `samples/lean/` committed corpus と source-side prototype corpus に actualize 済みである。current active closeout line は helper/CLI hardening and broader coverage、near-end closeout sync、later mixed/user-spec residual に narrowed した）
+  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524`、`525` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over は `samples/lean/` committed corpus と source-side prototype corpus に actualize 済みである。current active closeout line は helper/CLI hardening and broader coverage、near-end closeout sync、later mixed/user-spec residual に narrowed した）
 - current reserve integration line:
   `Macro 6 minimal working subset actual default / Macro 7 mixed`
   （authoritative room baseline、late join visible past、stale reconnect fail-then-refresh、witness/provider route-first line は current default に上がっているが、final public witness/provider/artifact contract、packaging、FFI、engine adapter、exhaustive catalog は still later に残る）
@@ -55,10 +55,10 @@
   - `python3 scripts/validate_docs.py`
 - current execution / comparison floor の practical meaning は次である。
   - source sample runner / CLI は current authored sixteen と prototype floor を通す。
-  - theorem-side は notebook-first / Lean-stub non-production bridge / representative trace-alignment / public-seam compression / toolchain probe / representative Lean sample set actual Lean execution まで repo-local actualization 済みである。
+  - theorem-side は notebook-first / Lean-stub non-production bridge / representative trace-alignment / public-seam compression / toolchain probe / representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over まで repo-local actualization 済みである。
   - Lean sample corpus は repo 内に committed され、generated stub と actual small proof の強さを読み分けられる。
   - model-check side は row-local property route / checker-artifact route / final public-contract reopen threshold / public-seam compression まで repo-local actualization 済みである。
-  - order-handoff / authoritative-room side は vertical slice、minimal companion surface、stage-block secondary surface、witness/provider route line まで repo-local actualization 済みである。
+  - order-handoff / authoritative-room side は vertical slice、minimal companion surface、stage-block secondary surface、witness/provider route line、delegated provider placement representative carry-over まで repo-local actualization 済みである。
 
 ## macro phase map
 
@@ -79,8 +79,8 @@
 | feature family | 現在地 | できていること | 次の意味ある一歩 |
 |---|---|---|---|
 | current-L2 runner / CLI | `S6` | authored sixteen、prototype set `p01...p12`、pretty/json CLI、regression floor | widened corpus は mixed gate か closeout package を 1 つ閉じる時だけ追加 |
-| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution | helper/CLI hardening と broader theorem-side widening |
-| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`samples/lean/current-l2/` committed representative sample set、toolchain pin、export/sync helper | source-side checker integration と broader theorem-side sample export |
+| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over | helper/CLI hardening と broader theorem-side widening |
+| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`samples/lean/current-l2/` committed representative sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09`、toolchain pin、export/sync helper | source-side checker integration と broader theorem-side sample export |
 | model-check line | `S6` on docs, `S4-S5` on implementation | row-local property route、checker-artifact route、reopen threshold、public-seam compression | first settled property language / tool brand mixed gate と negative corpus widening |
 | order / handoff line | `S6` | relation decomposition principal、surface actual adoption、source-wording route、stage-block secondary、serial-scope reserve surface、public-seam compression | final source wording / emitted-artifact schema mixed gate と negative corpus tightening |
 | shared-space minimal subset | `S6` | authoritative room baseline、vertical slice、witness/provider route/schema route、emitted-contract trace alignment、public-seam compression | final public contract mixed gate |
@@ -145,7 +145,7 @@
 ## current self-driven queue
 
 - `Package 58` helper / CLI hardening and broader coverage
-  - `samples/lean/` corpus と export/sync helper を基点に、broader theorem-side / IFC / order-handoff widening と helper/CLI hardening を narrow package で進める
+  - first widening slice `p09` carry-over は actualize 済みであり、`samples/lean/` corpus と export/sync helper を基点に、残る broader theorem-side / IFC / order-handoff widening と helper/CLI hardening を narrow package で進める
 - `Package 59` near-end closeout sync
   - mixed gate / user-spec residual を再圧縮し、snapshot / roadmap / traceability を同期する
 
@@ -161,3 +161,4 @@
 - 2026-04-19 15:32 JST — `CurrentL2IfcSecretExamples.lean` と `samples/lean/` 日本語 explanation sync を actualize し、`specs/examples/522` と snapshot / roadmap / traceability を Package 56 の narrowed reading に更新した。
 - 2026-04-19 16:10 JST — Package 56 として `p10 / p11` source-side IFC authority corrected prototype pair と representative Lean sample set widening を actualize し、`specs/examples/523`、`samples/lean/` committed corpus、snapshot / roadmap / traceability を current checker-adjacent IFC first-fragment 読みに同期した。
 - 2026-04-19 16:32 JST — Package 56 の remaining line として `p12` source-side IFC label-flow negative を actualize し、representative Lean sample set を `e5 / p06 / p10 / p11 / p12 / p07 / p08` へ widen した上で、`specs/examples/524` と snapshot / roadmap / traceability を Package 56 close / Package 58 next 読みに更新した。
+- 2026-04-19 16:38 JST — Package 58 の first widening slice として `p09-dice-delegated-rng-provider-placement` を representative Lean sample set / verifier preview / model-check projection / theorem actual Lean execution に carry over し、`specs/examples/525` と snapshot / roadmap を broader-coverage start 読みに更新した。

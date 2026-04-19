@@ -24,6 +24,7 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
                 "p12-typed-classified-fingerprint-publication-block",
                 "p07-dice-late-join-visible-history",
                 "p08-dice-stale-reconnect-refresh",
+                "p09-dice-delegated-rng-provider-placement",
             },
         )
 

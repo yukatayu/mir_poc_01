@@ -3704,3 +3704,20 @@
   - `crates/mir-runtime/examples/current_l2_emit_theorem_lean_bundle.rs`
   - `scripts/current_l2_lean_sample_sync.py`
   - `scripts/tests/test_current_l2_lean_sample_sync.py`
+
+## 2026-04-19 Package 58 delegated-RNG representative carry-over addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`samples/lean/README.md`、`samples/lean/manifest.json` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - `specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`
+  - `specs/examples/525-current-l2-delegated-rng-provider-placement-representative-lean-sample-set-carryover.md`
+  - `docs/reports/0806-package58-delegated-rng-provider-carryover.md`
+  - `samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.txt`
+  - `samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.host-plan.json`
+  - `samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.lean`
+  - `samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.bundle.json`
+  - `crates/mir-runtime/tests/current_l2_verifier_preview_alignment.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_projection_prefloor.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
+  - `scripts/current_l2_lean_sample_sync.py`
+  - `scripts/tests/test_current_l2_lean_sample_sync.py`

@@ -337,3 +337,17 @@ fn verifier_preview_alignment_matches_emitted_route_for_stale_reconnect_runtime_
 
     assert_cli_preview_matches_preview_route(&preview_json, &route);
 }
+
+#[test]
+fn verifier_preview_alignment_matches_emitted_route_for_delegated_rng_provider_runtime_prototype() {
+    let sample_path =
+        order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
+    let preview_json = cli_json(sample_path.to_str().unwrap(), None);
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_cli_preview_matches_preview_route(&preview_json, &route);
+}

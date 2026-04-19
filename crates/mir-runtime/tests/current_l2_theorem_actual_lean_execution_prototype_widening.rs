@@ -151,3 +151,15 @@ fn theorem_actual_lean_execution_reaches_stale_reconnect_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt");
     assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
 }
+
+#[test]
+fn theorem_actual_lean_execution_reaches_delegated_rng_provider_runtime_prototype() {
+    if !lean_available() {
+        eprintln!("lean unavailable; skipping actual prototype widening probe");
+        return;
+    }
+
+    let sample_path =
+        order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt");
+    assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
+}

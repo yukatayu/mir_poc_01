@@ -476,6 +476,11 @@ actual-adoption floor では、
   - `p12` source-side label-flow negative
   - verifier preview / model-check projection / theorem Lean actualization representative set widening
   - Package 56 closeout、helper/CLI hardening next
+- delegated RNG provider placement representative carry-over:
+  `specs/examples/525`
+  - `p09` delegated RNG provider placement
+  - representative Lean sample set carry-over
+  - helper/CLI hardening と broader coverage widening の first slice
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

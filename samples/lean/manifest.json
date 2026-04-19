@@ -161,6 +161,23 @@
         "stderr": "",
         "returncode": 0
       }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p09-dice-delegated-rng-provider-placement",
+      "lean_path": "samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.lean",
+      "explanation_path": "samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/README.md",
+      "bundle_path": "samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p09_dice_delegated_rng_provider_placement__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
     }
   ]
 }
