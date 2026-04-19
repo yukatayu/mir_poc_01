@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 20:16 JST
+最終更新: 2026-04-19 20:34 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - strong typing / IFC beyond first checker fragment の checker payload public-schema sketch ratchet
+  - strong typing / IFC beyond first checker fragment の checker payload public-checker-api sketch ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `67` checker payload public-schema sketch ratchet | checker payload supported-kind summary threshold の次段として public checker payload schema sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | checker-adjacent principal と IFC first-fragment を維持したまま、5 ref wrapper の public schema sketch を helper-local threshold まで ratchet する | final public checker artifact / final public verifier contract を凍らせず、helper preview を public schema sketch まで整理できる |
+| `68` checker payload public-checker-api sketch ratchet | checker payload public-schema sketch threshold の次段として public checker API sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | checker-adjacent principal と IFC first-fragment を維持したまま、`checker_subject + public_checker_payload_schema_ref` の read relation を helper-local threshold まで ratchet する | actual command surface / shared output contract / final public verifier contract を凍らせず、helper preview を public checker API sketch まで整理できる |
 
 ## recently closed package note
 
@@ -201,14 +201,28 @@
 ### Package 67 — checker payload public-schema sketch ratchet
 
 - current reading:
-  next active line。`actual_checker_payload_supported_kind_summary_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload public schema sketch まで narrow に ratchet する。
+  close 済み。`actual_checker_payload_supported_kind_summary_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload public schema sketch まで narrow に ratchet し、`actual_checker_payload_public_schema_sketch_threshold` を 5 ref wrapper current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/273`
   `specs/examples/274`
   `specs/examples/538`
+  `specs/examples/539`
 - stop line:
   public checker API
   final public checker artifact
+  final public verifier contract
+
+### Package 68 — checker payload public-checker-api sketch ratchet
+
+- current reading:
+  next active line。`actual_checker_payload_public_schema_sketch_threshold` を actual command surface や final public verifier contract に上げず、checker payload public checker API sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/275`
+  `specs/examples/276`
+  `specs/examples/539`
+- stop line:
+  actual command surface
+  shared output contract
   final public verifier contract
 
 ## research-discovery items
@@ -242,4 +256,4 @@
 
 ## next reopen order
 
-1. Package 67 で checker payload public-schema sketch ratchet を進める。
+1. Package 68 で checker payload public-checker-api sketch ratchet を進める。

@@ -396,6 +396,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_checker_payload_supported_kind_summary_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -667,6 +671,34 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
             Value::String("missing_successor_option".into()),
         ])
     );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]
+            ["actual_checker_payload_family_ref"],
+        "actual_checker_payload_family"
+    );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]
+            ["checker_payload_row_family_ref"],
+        "actual_checker_payload_row_family"
+    );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]
+            ["checker_payload_row_detail_ref"],
+        "actual_checker_payload_row_detail"
+    );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]["checker_payload_row_body_ref"],
+        "actual_checker_payload_row_body"
+    );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]
+            ["checker_payload_supported_kind_summary_ref"],
+        "actual_checker_payload_supported_kind_summary"
+    );
 }
 
 #[test]
@@ -710,6 +742,13 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     assert!(output.contains("supported_kind_scope: stable_clusters_only"));
     assert!(output.contains("missing_lineage_assertion"));
     assert!(output.contains("missing_successor_option"));
+    assert!(output.contains("actual_checker_payload_public_schema_sketch_threshold:"));
+    assert!(output.contains(
+        "actual_checker_payload_family_ref: actual_checker_payload_family"
+    ));
+    assert!(output.contains(
+        "checker_payload_supported_kind_summary_ref: actual_checker_payload_supported_kind_summary"
+    ));
 }
 
 #[test]
@@ -792,5 +831,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_checker_payload_supported_kind_summary_threshold"]["supported_kind_scope"],
         "stable_clusters_only"
+    );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_checker_payload_public_schema_sketch_threshold"]["checker_payload_row_body_ref"],
+        "actual_checker_payload_row_body"
     );
 }
