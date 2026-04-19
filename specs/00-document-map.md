@@ -139,6 +139,9 @@
 - `specs/examples/525-current-l2-delegated-rng-provider-placement-representative-lean-sample-set-carryover.md`
   - Package 58 の first widening slice として `p09` delegated RNG provider placement を representative Lean sample set へ carry over し、broader order-handoff / provider-placement coverage を helper-local evidence として整理する補助文書。
   - final public provider receipt schema や final witness/provider/artifact contract を固定するものではなく、broader coverage carry-over と helper/CLI hardening next line を読むための anchor である。
+- `specs/examples/526-current-l2-order-handoff-helper-cli-surface-preview-actualization.md`
+  - Package 58 の helper / CLI hardening として `run-source-sample` summary に `surface_preview` を actualize し、principal companion / stage-block secondary / serial reserve の sample-local preview を整理する補助文書。
+  - final grammar や final public parser / checker / runtime API や final source wording を固定するものではなく、helper-local surface preview と remaining negative-corpus hardening next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

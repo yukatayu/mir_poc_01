@@ -220,6 +220,7 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     runtime: CurrentL2OperationalCliRuntimeSummary,
     verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
     artifact_preview: CurrentL2OperationalCliArtifactPreviewSummary,
+    surface_preview: CurrentL2OperationalCliSurfacePreviewSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -228,6 +229,8 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             CurrentL2OperationalCliVerificationPreviewSummary::from_source_report(&report);
         let artifact_preview =
             CurrentL2OperationalCliArtifactPreviewSummary::from_source_report(&report);
+        let surface_preview =
+            CurrentL2OperationalCliSurfacePreviewSummary::from_source_report(&report);
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -242,6 +245,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             ),
             verification_preview,
             artifact_preview,
+            surface_preview,
         }
     }
 }
@@ -540,6 +544,190 @@ struct CurrentL2OperationalCliModelCheckCarrierPreview {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliSurfacePreviewSummary {
+    minimal_companion: CurrentL2OperationalCliSurfacePreviewSection,
+    stage_block_secondary: CurrentL2OperationalCliSurfacePreviewSection,
+    serial_scope_reserve: CurrentL2OperationalCliSurfacePreviewSection,
+}
+
+impl CurrentL2OperationalCliSurfacePreviewSummary {
+    fn from_source_report(report: &CurrentL2SourceSampleRunReport) -> Self {
+        let verification_preview =
+            CurrentL2OperationalCliVerificationPreviewSummary::from_source_report(report);
+        let minimal_companion =
+            CurrentL2OperationalCliSurfacePreviewSection::minimal_companion(
+                report,
+                &verification_preview,
+            );
+        let stage_block_secondary =
+            CurrentL2OperationalCliSurfacePreviewSection::stage_block_secondary(
+                report,
+                &verification_preview,
+            );
+        let serial_scope_reserve =
+            CurrentL2OperationalCliSurfacePreviewSection::serial_scope_reserve(
+                report,
+                &verification_preview,
+            );
+        Self {
+            minimal_companion,
+            stage_block_secondary,
+            serial_scope_reserve,
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliSurfacePreviewSection {
+    status: &'static str,
+    guard_reason: Option<String>,
+    lines: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+}
+
+impl CurrentL2OperationalCliSurfacePreviewSection {
+    fn minimal_companion(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        if authoritative_room_default_sample_reached(report, verification_preview) {
+            return Self {
+                status: "reached",
+                guard_reason: None,
+                lines: minimal_companion_lines(&report.sample_id),
+                compare_floor_refs: vec![
+                    "compare_floor:current_l2.authoritative_room.vertical_slice".to_string(),
+                    "compare_floor:current_l2.experimental_order_handoff_surface".to_string(),
+                ],
+                guard_refs: vec![
+                    "guard:semantic_honesty_first".to_string(),
+                    "guard:helper_local_companion_only".to_string(),
+                ],
+                kept_later_refs: minimal_companion_kept_later_refs(),
+            };
+        }
+
+        let guard_detail =
+            authoritative_room_vertical_slice_guard_reason(report, verification_preview);
+        Self {
+            status: "guarded_not_reached",
+            guard_reason: Some(format!(
+                "current minimal companion surface only actualizes reached authoritative-room defaults: {guard_detail}"
+            )),
+            lines: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.experimental_order_handoff_guard_only".to_string(),
+            ],
+            guard_refs: vec!["guard:companion_surface_not_reached".to_string()],
+            kept_later_refs: minimal_companion_kept_later_refs(),
+        }
+    }
+
+    fn stage_block_secondary(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        if authoritative_room_default_sample_reached(report, verification_preview) {
+            return Self {
+                status: "reached",
+                guard_reason: None,
+                lines: stage_block_surface_lines(&report.sample_id),
+                compare_floor_refs: vec![
+                    "compare_floor:current_l2.experimental_order_handoff_surface".to_string(),
+                    "compare_floor:current_l2.experimental_stage_block_surface".to_string(),
+                ],
+                guard_refs: vec![
+                    "guard:stage_block_secondary_candidate".to_string(),
+                    "guard:helper_local_companion_only".to_string(),
+                ],
+                kept_later_refs: stage_block_surface_kept_later_refs(),
+            };
+        }
+
+        let guard_detail =
+            authoritative_room_vertical_slice_guard_reason(report, verification_preview);
+        Self {
+            status: "guarded_not_reached",
+            guard_reason: Some(format!(
+                "current stage-block secondary surface only actualizes reached authoritative-room defaults: {guard_detail}"
+            )),
+            lines: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.experimental_stage_block_guard_only".to_string(),
+            ],
+            guard_refs: vec!["guard:stage_block_surface_not_reached".to_string()],
+            kept_later_refs: stage_block_surface_kept_later_refs(),
+        }
+    }
+
+    fn serial_scope_reserve(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = match sample_id {
+            "p07-dice-late-join-visible-history" | "p08-dice-stale-reconnect-refresh" => {
+                authoritative_room_default_sample_reached(report, verification_preview)
+            }
+            "p09-dice-delegated-rng-provider-placement" => {
+                verification_preview.formal_hook_status == "reached"
+                    && report.runtime_report.run_report.terminal_outcome
+                        == Some(TerminalOutcome::Success)
+            }
+            _ => false,
+        };
+
+        if reached {
+            let compare_floor_refs = match sample_id {
+                "p09-dice-delegated-rng-provider-placement" => vec![
+                    "compare_floor:current_l2.delegated_rng_service.practical".to_string(),
+                    "compare_floor:current_l2.witness_provider_route_actual_adoption"
+                        .to_string(),
+                    "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface"
+                        .to_string(),
+                ],
+                _ => vec![
+                    "compare_floor:current_l2.order_handoff.source_wording_route_actual_adoption"
+                        .to_string(),
+                    "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface"
+                        .to_string(),
+                ],
+            };
+            return Self {
+                status: "reached",
+                guard_reason: None,
+                lines: order_handoff_serial_scope_reserve_surface_lines(sample_id),
+                compare_floor_refs,
+                guard_refs: order_handoff_serial_scope_reserve_surface_guard_refs(true),
+                kept_later_refs: order_handoff_serial_scope_reserve_surface_kept_later_refs(),
+            };
+        }
+
+        let guard_detail = verification_preview.guard_reason.clone().unwrap_or_else(|| {
+            format!(
+                "sample `{}` did not reach the authoritative-room serial-scope reserve surface",
+                report.sample_id
+            )
+        });
+        Self {
+            status: "guarded_not_reached",
+            guard_reason: Some(format!(
+                "current serial-scope reserve surface only actualizes authoritative-room-specific reached routes (`p07` / `p08` / `p09`): {guard_detail}"
+            )),
+            lines: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: order_handoff_serial_scope_reserve_surface_guard_refs(false),
+            kept_later_refs: order_handoff_serial_scope_reserve_surface_kept_later_refs(),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliNonAdmissibleMetadata {
     option_ref: String,
     subreason: &'static str,
@@ -690,6 +878,22 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         &mut output,
         &summary.artifact_preview.model_check_concrete_carriers,
     );
+    writeln!(output, "surface_preview:").expect("write to string");
+    render_surface_preview_section(
+        &mut output,
+        "minimal_companion",
+        &summary.surface_preview.minimal_companion,
+    );
+    render_surface_preview_section(
+        &mut output,
+        "stage_block_secondary",
+        &summary.surface_preview.stage_block_secondary,
+    );
+    render_surface_preview_section(
+        &mut output,
+        "serial_scope_reserve",
+        &summary.surface_preview.serial_scope_reserve,
+    );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
     } else {
@@ -776,6 +980,36 @@ fn render_model_check_carriers(
     }
 }
 
+fn render_surface_preview_section(
+    output: &mut String,
+    label: &str,
+    section: &CurrentL2OperationalCliSurfacePreviewSection,
+) {
+    writeln!(output, "  {label}:").expect("write to string");
+    writeln!(output, "    status: {}", section.status).expect("write to string");
+    if let Some(guard_reason) = &section.guard_reason {
+        writeln!(output, "    guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "    guard_reason: none").expect("write to string");
+    }
+    render_surface_string_list(output, "lines", &section.lines);
+    render_surface_string_list(output, "compare_floor_refs", &section.compare_floor_refs);
+    render_surface_string_list(output, "guard_refs", &section.guard_refs);
+    render_surface_string_list(output, "kept_later_refs", &section.kept_later_refs);
+}
+
+fn render_surface_string_list(output: &mut String, label: &str, values: &[String]) {
+    if values.is_empty() {
+        writeln!(output, "    {label}: []").expect("write to string");
+        return;
+    }
+
+    writeln!(output, "    {label}:").expect("write to string");
+    for value in values {
+        writeln!(output, "    - {value}").expect("write to string");
+    }
+}
+
 fn static_gate_verdict_name(verdict: StaticGateVerdict) -> &'static str {
     match verdict {
         StaticGateVerdict::Valid => "valid",
@@ -800,6 +1034,163 @@ fn event_kind_name(event: EventKind) -> &'static str {
         EventKind::AtomicCut => "atomic-cut",
         EventKind::Reject => "Reject",
     }
+}
+
+fn authoritative_room_default_sample_reached(
+    report: &CurrentL2SourceSampleRunReport,
+    verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+) -> bool {
+    matches!(
+        report.sample_id.as_str(),
+        "p07-dice-late-join-visible-history" | "p08-dice-stale-reconnect-refresh"
+    ) && verification_preview.formal_hook_status == "reached"
+}
+
+fn authoritative_room_vertical_slice_guard_reason(
+    report: &CurrentL2SourceSampleRunReport,
+    verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+) -> String {
+    let guard_detail = verification_preview.guard_reason.clone().unwrap_or_else(|| {
+        format!(
+            "current default samples (`p07` / `p08`) were not reached for `{}`",
+            report.sample_id
+        )
+    });
+    format!(
+        "current authoritative-room vertical slice only actualizes reached current default samples (`p07` / `p08`): {guard_detail}"
+    )
+}
+
+fn minimal_companion_lines(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p07-dice-late-join-visible-history" => vec![
+            "profile authoritative_room_default".to_string(),
+            "activation authority-ack".to_string(),
+            "authority single_room_authority".to_string(),
+            "consistency authoritative_serial_transition".to_string(),
+            "rng authority_rng".to_string(),
+            "publication publish_roll_result@dice_state".to_string(),
+            "handoff handoff_dice_authority@dice_state".to_string(),
+            "late_join published_history_visible_as_past".to_string(),
+        ],
+        "p08-dice-stale-reconnect-refresh" => vec![
+            "profile authoritative_room_default".to_string(),
+            "activation authority-ack".to_string(),
+            "authority single_room_authority".to_string(),
+            "consistency authoritative_serial_transition".to_string(),
+            "rng authority_rng".to_string(),
+            "rollback stale_reconnect".to_string(),
+            "refresh refresh_owner_snapshot@dice_state".to_string(),
+            "replay stale_incompatible_replay_invalidated".to_string(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn minimal_companion_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:final_public_parser_checker_runtime_api".to_string(),
+        "kept_later:low_level_memory_order_source_surface".to_string(),
+        "kept_later:final_modal_foundation_adoption".to_string(),
+    ]
+}
+
+fn stage_block_surface_lines(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p07-dice-late-join-visible-history" => vec![
+            "transition handoff_turn(dice_owner = player_a)".to_string(),
+            "stage publish:".to_string(),
+            "  publish publish_roll_result@dice_state".to_string(),
+            "stage handoff:".to_string(),
+            "  handoff handoff_dice_authority@dice_state".to_string(),
+            "    after publish(publish_roll_result@dice_state)".to_string(),
+            "    requires witness(publish_roll_result@dice_state)".to_string(),
+            "stage observe:".to_string(),
+            "  observe late_join_view@dice_state".to_string(),
+            "    after handoff(handoff_dice_authority@dice_state)".to_string(),
+        ],
+        "p08-dice-stale-reconnect-refresh" => vec![
+            "transition reconnect_refresh(dice_owner = player_a)".to_string(),
+            "stage rollback:".to_string(),
+            "  rollback stale_reconnect".to_string(),
+            "stage refresh:".to_string(),
+            "  refresh refresh_owner_snapshot@dice_state".to_string(),
+            "    after rollback(stale_reconnect)".to_string(),
+            "stage replay:".to_string(),
+            "  invalidate stale_incompatible_replay@dice_state".to_string(),
+            "    after refresh(refresh_owner_snapshot@dice_state)".to_string(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn stage_block_surface_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:final_public_parser_checker_runtime_api".to_string(),
+        "kept_later:authoritative_room_serial_scope_sugar".to_string(),
+        "kept_later:low_level_memory_order_source_surface".to_string(),
+        "kept_later:final_modal_foundation_adoption".to_string(),
+    ]
+}
+
+fn order_handoff_serial_scope_reserve_surface_lines(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p07-dice-late-join-visible-history" => vec![
+            "serial on dice_authority {".to_string(),
+            "  publish publish_roll_result@dice_state".to_string(),
+            "  handoff handoff_dice_authority@dice_state".to_string(),
+            "    requires witness(publish_roll_result@dice_state)".to_string(),
+            "  observe late_join_view@dice_state".to_string(),
+            "}".to_string(),
+        ],
+        "p08-dice-stale-reconnect-refresh" => vec![
+            "serial on dice_authority {".to_string(),
+            "  rollback stale_reconnect".to_string(),
+            "  refresh refresh_owner_snapshot@dice_state".to_string(),
+            "  invalidate stale_incompatible_replay@dice_state".to_string(),
+            "}".to_string(),
+        ],
+        "p09-dice-delegated-rng-provider-placement" => vec![
+            "serial on dice_authority {".to_string(),
+            "  fetch fetch_provider_roll@delegated_rng".to_string(),
+            "  publish publish_roll_result@dice_state".to_string(),
+            "  handoff handoff_dice_authority@dice_state".to_string(),
+            "}".to_string(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn order_handoff_serial_scope_reserve_surface_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:serial_scope_room_specific_reserve".to_string(),
+            "guard:principal_edge_row_surface_unchanged".to_string(),
+            "guard:helper_local_surface_only".to_string(),
+            "guard:final_source_surface_handoff_wording_later".to_string(),
+        ]
+    } else {
+        vec!["guard:serial_scope_reserve_surface_not_reached".to_string()]
+    }
+}
+
+fn order_handoff_serial_scope_reserve_surface_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:final_public_parser_checker_runtime_api".to_string(),
+        "kept_later:serial_scope_public_promotion".to_string(),
+        "kept_later:serial_scope_beyond_authoritative_room".to_string(),
+        "kept_later:final_source_surface_handoff_wording".to_string(),
+        "kept_later:final_emitted_artifact_schema".to_string(),
+        "kept_later:final_emitted_handoff_contract".to_string(),
+        "kept_later:final_public_witness_schema".to_string(),
+        "kept_later:final_public_provider_receipt_schema".to_string(),
+        "kept_later:combined_provider_witness_public_contract".to_string(),
+        "kept_later:low_level_memory_order_source_surface".to_string(),
+        "kept_later:final_modal_foundation_adoption".to_string(),
+    ]
 }
 
 fn non_admissible_subreason_name(subreason: NonAdmissibleSubreason) -> &'static str {

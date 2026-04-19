@@ -10,6 +10,12 @@
   これは helper-local convenience であり、final host-I/O / shell contract ではない。
 - theorem / model-check bridge の current floor では、CLI が `verification_preview` と helper-local `artifact_preview` を出してよい。
   これは final public verifier contract や final emitted artifact schema を意味しない。
+- order-handoff helper hardening の current floor では、CLI が `surface_preview` として
+  - `minimal_companion`
+  - `stage_block_secondary`
+  - `serial_scope_reserve`
+  を出してよい。
+  これは final parser grammar や final public parser / checker / runtime API や final source wording を意味しない。
 
 ## current subdirectories
 

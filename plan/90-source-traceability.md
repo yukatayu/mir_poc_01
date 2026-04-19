@@ -3721,3 +3721,15 @@
   - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
   - `scripts/current_l2_lean_sample_sync.py`
   - `scripts/tests/test_current_l2_lean_sample_sync.py`
+
+## 2026-04-19 Package 58 order-handoff helper-CLI surface-preview addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`samples/prototype/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/472-current-l2-minimal-companion-experimental-order-handoff-surface.md`
+  - `specs/examples/473-current-l2-order-handoff-surface-narrowing-and-stage-block-secondary-candidate.md`
+  - `specs/examples/511-current-l2-order-handoff-serial-scope-reserve-surface.md`
+  - `specs/examples/526-current-l2-order-handoff-helper-cli-surface-preview-actualization.md`
+  - `docs/reports/0807-package58-order-handoff-surface-preview-cli.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_order_handoff_surface_preview_cli.rs`
+  - `crates/mir-runtime/examples/mir_current_l2.rs`

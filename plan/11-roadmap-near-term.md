@@ -36,6 +36,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 | `56 source pair` | `docs/reports/0804` + `specs/examples/523` | source-side IFC explicit authority pair、representative Lean sample set widening、Package 56 source-side evidence close |
 | `56 label-flow close` | `docs/reports/0805` + `specs/examples/524` | source-side IFC label-flow negative、representative Lean sample set widening、Package 56 actual package close |
 | `58 first widening slice` | `docs/reports/0806` + `specs/examples/525` | delegated RNG provider placement carry-over、representative Lean sample set widening、Package 58 started |
+| `58 helper/CLI surface` | `docs/reports/0807` + `specs/examples/526` | order-handoff helper CLI `surface_preview`、`p07 / p08 / p09` reached/guarded actualization、Package 58 helper hardening first slice |
 
 ## active self-driven packages
 
@@ -85,9 +86,9 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current source:
-  `specs/examples/516...525`
+  `specs/examples/516...526`
 - current recommendation:
-  actual Lean execution floor と committed `samples/lean/` corpus を helper / CLI hardening、broader theorem-side / IFC / order-handoff negative corpus wideningに使う。first widening slice として `p09-dice-delegated-rng-provider-placement` を representative Lean sample set へ carry over してよい。
+  actual Lean execution floor と committed `samples/lean/` corpus を helper / CLI hardening、broader theorem-side / IFC / order-handoff negative corpus wideningに使う。first widening slice として `p09-dice-delegated-rng-provider-placement` を representative Lean sample set へ carry over し、helper/CLI hardening first slice として `run-source-sample` `surface_preview` を actualize してよい。
 - promotion rule:
   widened corpus は mixed gate を 1 つ閉じるか、formal skeleton package を concretize する場合だけ足す。
 - stop line:

@@ -481,6 +481,11 @@ actual-adoption floor では、
   - `p09` delegated RNG provider placement
   - representative Lean sample set carry-over
   - helper/CLI hardening と broader coverage widening の first slice
+- order-handoff helper CLI surface preview actualization:
+  `specs/examples/526`
+  - `run-source-sample` helper-local `surface_preview`
+  - `p07 / p08 / p09` principal/secondary/reserve reached/guarded actualization
+  - Package 58 helper/CLI hardening first slice
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

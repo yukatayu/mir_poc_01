@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 16:38 JST
+最終更新: 2026-04-19 16:58 JST
 
 ## この文書について
 
@@ -45,7 +45,7 @@
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression
   - order-handoff / shared-space side:
-    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression
+    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、CLI `surface_preview`
 
 ## ordered self-driven packages
 
@@ -90,9 +90,9 @@
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current reading:
-  actual Lean execution reached 後の next work は helper/CLI hardening と broader theorem-side / IFC / order-handoff corpus widening であり、first widening slice として `p09-dice-delegated-rng-provider-placement` carry-over は actualize 済みである。
+  actual Lean execution reached 後の next work は helper/CLI hardening と broader theorem-side / IFC / order-handoff corpus widening であり、first widening slice として `p09-dice-delegated-rng-provider-placement` carry-over、helper hardening slice として order-handoff CLI `surface_preview` は actualize 済みである。
 - evidence:
-  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus、source-side IFC trio `p10 / p11 / p12`、`specs/examples/525`、`docs/reports/0806`、`p09-dice-delegated-rng-provider-placement`
+  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus、source-side IFC trio `p10 / p11 / p12`、`specs/examples/525`、`specs/examples/526`、`docs/reports/0806`、`docs/reports/0807`、`p09-dice-delegated-rng-provider-placement`
 - stop line:
   final public theorem contract / final parser grammar / packaging には上げない
 
@@ -134,5 +134,5 @@
 
 ## next reopen order
 
-1. Package 58 で `p09` carry-over の次段として `samples/lean/` を使う broader coverage / helper hardening を narrow package で進める。
+1. Package 58 で CLI `surface_preview` の次段として order-handoff negative corpus tightening か broader theorem-side widening を narrow package で進める。
 2. Package 59 で closeout-ready snapshot を再圧縮する。
