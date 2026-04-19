@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 23:18 JST
+最終更新: 2026-04-19 23:40 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - verifier handoff surface / theorem retained bridge stop line / boundary inventory / retained later refs の phase5-proof-protocol-runtime-policy-handoff-closeout ratchet
+  - `mir-ast` non-production carrier として stage 1 / stage 2 structural floor をどこまで actualize するかの phase6-actual-parser-ast-carrier-first-tranche ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `79` phase5-proof-protocol-runtime-policy-handoff-closeout ratchet | phase4 shared-space self-driven closeout の次段として proof / protocol / runtime-policy handoff closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | verifier handoff surface + theorem retained bridge stop ref + boundary inventory ref + retained-later refs を current cut に留めたまま、actual subject row materialization、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete theorem/model-check tool binding、public checker migration、low-level memory-order family を still later に残して phase5 handoff closeout ready sketch を helper-local threshold まで ratchet する | phase5 closeout bundle を narrow に actualize しつつ、actual externalization pressure と low-level family reopen を later gate に残せる |
+| `80` phase6-actual-parser-ast-carrier-first-tranche ratchet | phase5 handoff closeout の次段として `mir-ast` non-production carrier をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | `mir_ast_current_l2_first_tranche = carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` current cut を helper-local threshold に留め、stage3 admit/request/predicate cluster、final parser API、span-rich diagnostics、final grammar を still later に残したまま phase6 parser first tranche を ratchet する | stage1/stage2 structural floor と crate-local code anchor を narrow に actualize しつつ、stage3/final public parser surface を later gate に残せる |
 
 ## recently closed package note
 
@@ -382,16 +382,33 @@
 ### Package 79 — phase5-proof-protocol-runtime-policy-handoff-closeout ratchet
 
 - current reading:
-  next active line。`actual_phase4_shared_space_self_driven_closeout_threshold` を actual subject row materialization や boundary-specific handoff artifact family に上げず、phase5 proof / protocol / runtime-policy handoff closeout ready sketch まで narrow に ratchet する。
+  close 済み。`actual_phase4_shared_space_self_driven_closeout_threshold` を actual subject row materialization や boundary-specific handoff artifact family に上げず、phase5 proof / protocol / runtime-policy handoff closeout ready sketch まで narrow に ratchet し、`actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold` を `closeout_kind + verifier_handoff_surface_ref + theorem_retained_bridge_stop_ref + boundary_inventory_ref + retained_later_refs` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/297`
   `specs/examples/298`
   `specs/examples/550`
+  `specs/examples/551`
 - stop line:
   actual subject row materialization
   boundary-specific handoff artifact family
   actual emitted verifier artifact
   concrete theorem / model-check tool binding
+
+### Package 80 — phase6-actual-parser-ast-carrier-first-tranche ratchet
+
+- current reading:
+  next active line。`actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold` を stage3 admit/request/predicate cluster や final parser grammar に上げず、`carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` current cut の phase6 actual parser / AST carrier first tranche ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/299`
+  `specs/examples/300`
+  `specs/examples/551`
+- stop line:
+  stage3 admit slot surface
+  stage3 request clause suite
+  stage3 predicate fragment
+  perform head final public parser API
+  span-rich diagnostics
+  final grammar
 
 ## research-discovery items
 
@@ -424,4 +441,4 @@
 
 ## next reopen order
 
-1. Package 79 で phase5-proof-protocol-runtime-policy-handoff-closeout ratchet を進める。
+1. Package 80 で phase6-actual-parser-ast-carrier-first-tranche ratchet を進める。

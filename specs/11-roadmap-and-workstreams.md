@@ -629,7 +629,13 @@ actual-adoption floor では、
   - `p07 / p08 / p09` source-side shared-space trio
   - `actual_phase4_shared_space_self_driven_closeout_threshold`
   - `closeout_kind + current_package_refs + user_spec_required_catalog_refs + retained_later_refs` shared-space practical boundary checkpoint mirror
-  - Package 78 phase4-shared-space-self-driven-closeout ratchet close、Package 79 phase5-proof-protocol-runtime-policy-handoff-closeout ratchet next
+  - Package 78 phase4-shared-space-self-driven-closeout ratchet close、Package 79 phase5-proof-protocol-runtime-policy-handoff-closeout ratchet close
+- phase5 proof/protocol/runtime-policy handoff closeout threshold helper mirror:
+  `specs/examples/551`
+  - `p07 / p08 / p09` source-side shared-space trio
+  - `actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold`
+  - `closeout_kind + verifier_handoff_surface_ref + theorem_retained_bridge_stop_ref + boundary_inventory_ref + retained_later_refs` handoff stop-line bundle mirror
+  - Package 79 phase5-proof-protocol-runtime-policy-handoff-closeout ratchet close、Package 80 phase6-actual-parser-ast-carrier-first-tranche ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

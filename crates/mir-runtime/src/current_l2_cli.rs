@@ -265,6 +265,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary,
     actual_phase4_shared_space_self_driven_closeout_threshold:
         CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary,
+    actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold:
+        CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -394,6 +396,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &surface_preview,
             );
+        let actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold =
+            CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary::from_source_report(
+                &report,
+                &actual_phase4_shared_space_self_driven_closeout_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -432,6 +439,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_phase1_semantics_closeout_threshold,
             actual_phase2_parser_free_poc_closeout_threshold,
             actual_phase4_shared_space_self_driven_closeout_threshold,
+            actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
         }
     }
 }
@@ -2724,6 +2732,125 @@ impl CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSu
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary
+{
+    status: &'static str,
+    threshold_kind: &'static str,
+    closeout_kind: Option<&'static str>,
+    verifier_handoff_surface_ref: Option<&'static str>,
+    theorem_retained_bridge_stop_ref: Option<&'static str>,
+    boundary_inventory_ref: Option<&'static str>,
+    retained_later_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_phase4_shared_space_self_driven_closeout_threshold:
+            &CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && actual_phase4_shared_space_self_driven_closeout_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_phase4_shared_space_self_driven_closeout_threshold.compare_floor_refs.clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase5_proof_protocol_runtime_policy_handoff_closeout"
+                    .to_string(),
+            );
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase6_actual_parser_ast_carrier_first_tranche"
+                    .to_string(),
+            );
+
+            let mut evidence_refs =
+                actual_phase4_shared_space_self_driven_closeout_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"
+                    .to_string(),
+            );
+            evidence_refs.push("source:phase5_handoff_closeout_ready_sketch".to_string());
+            evidence_refs.push("source:minimal_verifier_handoff_surface".to_string());
+            evidence_refs.push(
+                "source:retained_payload_body_materialization_theorem_export_handoff_transport_channel_body"
+                    .to_string(),
+            );
+            evidence_refs.push("source:small_decidable_core_boundary_inventory".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind:
+                    "phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_manifest",
+                closeout_kind: Some("proof_protocol_runtime_policy_handoff_stop_line"),
+                verifier_handoff_surface_ref: Some("minimal_verifier_handoff_surface"),
+                theorem_retained_bridge_stop_ref: Some(
+                    "retained_payload_body_materialization_theorem_export_handoff_transport_channel_body",
+                ),
+                boundary_inventory_ref: Some("small_decidable_core_boundary_inventory"),
+                retained_later_refs:
+                    actual_phase5_proof_protocol_runtime_policy_handoff_closeout_retained_later_refs(),
+                next_comparison_target_ref: Some(
+                    "phase6_actual_parser_ast_carrier_first_tranche_comparison",
+                ),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs:
+                    actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_guard_refs(
+                        true,
+                    ),
+                kept_later_refs:
+                    actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind:
+                "phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_manifest",
+            closeout_kind: None,
+            verifier_handoff_surface_ref: None,
+            theorem_retained_bridge_stop_ref: None,
+            boundary_inventory_ref: None,
+            retained_later_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{sample_id}"),
+                "helper_preview:actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.closeout.phase5_proof_protocol_runtime_policy_handoff_closeout"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.closeout.phase5_proof_protocol_runtime_policy_handoff_closeout.guard_only"
+                    .to_string(),
+            ],
+            guard_refs:
+                actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_guard_refs(
+                    false,
+                ),
+            kept_later_refs:
+                actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual phase5 proof/protocol/runtime-policy handoff closeout threshold only actualizes the representative shared-space trio (`p07` / `p08` / `p09`) after actual phase4 shared-space self-driven closeout threshold reaches the shared-space practical boundary checkpoint for `{sample_id}`"
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -3443,6 +3570,15 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_phase4_shared_space_self_driven_closeout_threshold(
         &mut output,
         &summary.actual_phase4_shared_space_self_driven_closeout_threshold,
+    );
+    writeln!(
+        output,
+        "actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold:"
+    )
+    .expect("write to string");
+    render_actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold(
+        &mut output,
+        &summary.actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -4764,6 +4900,50 @@ fn actual_phase4_shared_space_self_driven_closeout_threshold_kept_later_refs() -
     ]
 }
 
+fn actual_phase5_proof_protocol_runtime_policy_handoff_closeout_retained_later_refs() -> Vec<String>
+{
+    vec![
+        "actual_subject_row_materialization".to_string(),
+        "boundary_specific_handoff_artifact_family".to_string(),
+        "actual_emitted_verifier_artifact".to_string(),
+        "concrete_tool_binding".to_string(),
+        "public_checker_migration".to_string(),
+        "low_level_memory_order_family".to_string(),
+    ]
+}
+
+fn actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_guard_refs(
+    reached: bool,
+) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_only"
+                .to_string(),
+            "guard:phase6_actual_parser_ast_carrier_first_tranche_comparison_next".to_string(),
+            "guard:actual_subject_row_and_artifact_family_later".to_string(),
+            "guard:tool_binding_public_checker_migration_and_low_level_memory_order_later"
+                .to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_not_reached"
+                .to_string(),
+        ]
+    }
+}
+
+fn actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold_kept_later_refs()
+-> Vec<String> {
+    vec![
+        "kept_later:actual_subject_row_materialization".to_string(),
+        "kept_later:boundary_specific_handoff_artifact_family".to_string(),
+        "kept_later:actual_emitted_verifier_artifact".to_string(),
+        "kept_later:concrete_tool_binding".to_string(),
+        "kept_later:public_checker_migration".to_string(),
+        "kept_later:low_level_memory_order_family".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -5896,6 +6076,63 @@ fn render_actual_phase4_shared_space_self_driven_closeout_threshold(
         &summary.user_spec_required_catalog_refs,
         1,
     );
+    render_string_list(output, "retained_later_refs", &summary.retained_later_refs, 1);
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold(
+    output: &mut String,
+    summary:
+        &CurrentL2OperationalCliActualPhase5ProofProtocolRuntimePolicyHandoffCloseoutThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(closeout_kind) = summary.closeout_kind {
+        writeln!(output, "  closeout_kind: {closeout_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  closeout_kind: none").expect("write to string");
+    }
+    if let Some(verifier_handoff_surface_ref) = summary.verifier_handoff_surface_ref {
+        writeln!(
+            output,
+            "  verifier_handoff_surface_ref: {verifier_handoff_surface_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  verifier_handoff_surface_ref: none").expect("write to string");
+    }
+    if let Some(theorem_retained_bridge_stop_ref) = summary.theorem_retained_bridge_stop_ref {
+        writeln!(
+            output,
+            "  theorem_retained_bridge_stop_ref: {theorem_retained_bridge_stop_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  theorem_retained_bridge_stop_ref: none").expect("write to string");
+    }
+    if let Some(boundary_inventory_ref) = summary.boundary_inventory_ref {
+        writeln!(output, "  boundary_inventory_ref: {boundary_inventory_ref}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  boundary_inventory_ref: none").expect("write to string");
+    }
     render_string_list(output, "retained_later_refs", &summary.retained_later_refs, 1);
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(

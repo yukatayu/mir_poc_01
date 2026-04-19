@@ -444,6 +444,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_phase4_shared_space_self_driven_closeout_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -489,6 +493,31 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains("final_operational_realization"));
     assert!(output.contains(
         "next_comparison_target_ref: phase5_proof_protocol_runtime_policy_handoff_closeout_comparison"
+    ));
+    assert!(output.contains(
+        "actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold:"
+    ));
+    assert!(output.contains(
+        "closeout_kind: proof_protocol_runtime_policy_handoff_stop_line"
+    ));
+    assert!(output.contains(
+        "verifier_handoff_surface_ref: minimal_verifier_handoff_surface"
+    ));
+    assert!(output.contains(
+        "theorem_retained_bridge_stop_ref: retained_payload_body_materialization_theorem_export_handoff_transport_channel_body"
+    ));
+    assert!(output.contains(
+        "boundary_inventory_ref: small_decidable_core_boundary_inventory"
+    ));
+    assert!(output.contains("retained_later_refs:"));
+    assert!(output.contains("actual_subject_row_materialization"));
+    assert!(output.contains("boundary_specific_handoff_artifact_family"));
+    assert!(output.contains("actual_emitted_verifier_artifact"));
+    assert!(output.contains("concrete_tool_binding"));
+    assert!(output.contains("public_checker_migration"));
+    assert!(output.contains("low_level_memory_order_family"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase6_actual_parser_ast_carrier_first_tranche_comparison"
     ));
 }
 
@@ -613,6 +642,54 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         value["actual_phase4_shared_space_self_driven_closeout_threshold"]["next_comparison_target_ref"],
         "phase5_proof_protocol_runtime_policy_handoff_closeout_comparison"
     );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["closeout_kind"],
+        "proof_protocol_runtime_policy_handoff_stop_line"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["verifier_handoff_surface_ref"],
+        "minimal_verifier_handoff_surface"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["theorem_retained_bridge_stop_ref"],
+        "retained_payload_body_materialization_theorem_export_handoff_transport_channel_body"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["boundary_inventory_ref"],
+        "small_decidable_core_boundary_inventory"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][0],
+        "actual_subject_row_materialization"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][1],
+        "boundary_specific_handoff_artifact_family"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][2],
+        "actual_emitted_verifier_artifact"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][3],
+        "concrete_tool_binding"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][4],
+        "public_checker_migration"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["retained_later_refs"][5],
+        "low_level_memory_order_family"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["next_comparison_target_ref"],
+        "phase6_actual_parser_ast_carrier_first_tranche_comparison"
+    );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]
             .as_str()
@@ -667,6 +744,14 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
     assert_eq!(
         value["actual_phase4_shared_space_self_driven_closeout_threshold"]["next_comparison_target_ref"],
         "phase5_proof_protocol_runtime_policy_handoff_closeout_comparison"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold"]["next_comparison_target_ref"],
+        "phase6_actual_parser_ast_carrier_first_tranche_comparison"
     );
     assert_eq!(
         value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][2],
