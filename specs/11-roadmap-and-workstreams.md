@@ -599,7 +599,13 @@ actual-adoption floor では、
   - `p10 / p11 / p12` source-side IFC trio
   - `actual_verifier_handoff_surface_threshold`
   - `handoff_surface_kind + public_checker_boundary_ref + proof_obligation_matrix_ref + handoff_artifact_mode` verifier-handoff-surface minimum mirror
-  - Package 73 verifier-handoff-surface ratchet close、Package 74 minimal-parser-subset-freeze ratchet next
+  - Package 73 verifier-handoff-surface ratchet close、Package 74 minimal-parser-subset-freeze ratchet close
+- IFC minimal-parser-subset-freeze threshold helper mirror:
+  `specs/examples/546`
+  - `p10 / p11 / p12` source-side IFC trio
+  - `actual_minimal_parser_subset_freeze_threshold`
+  - `freeze_kind + accepted_cluster_refs + reject_cluster_refs + retention_floor_refs` parser first-tranche minimum mirror
+  - Package 74 minimal-parser-subset-freeze ratchet close、Package 75 parser-to-checker-reconnect-freeze ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

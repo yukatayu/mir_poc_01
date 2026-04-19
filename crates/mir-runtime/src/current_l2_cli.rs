@@ -255,6 +255,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary,
     actual_verifier_handoff_surface_threshold:
         CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary,
+    actual_minimal_parser_subset_freeze_threshold:
+        CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -359,6 +361,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_public_checker_boundary_threshold,
             );
+        let actual_minimal_parser_subset_freeze_threshold =
+            CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary::from_source_report(
+                &report,
+                &actual_verifier_handoff_surface_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -392,6 +399,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_shared_output_contract_threshold,
             actual_public_checker_boundary_threshold,
             actual_verifier_handoff_surface_threshold,
+            actual_minimal_parser_subset_freeze_threshold,
         }
     }
 }
@@ -2178,6 +2186,105 @@ impl CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    freeze_kind: Option<&'static str>,
+    accepted_cluster_refs: Vec<String>,
+    reject_cluster_refs: Vec<String>,
+    retention_floor_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_verifier_handoff_surface_threshold:
+            &CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p10-typed-authorized-fingerprint-declassification"
+                | "p11-typed-unauthorized-fingerprint-release"
+                | "p12-typed-classified-fingerprint-publication-block"
+        ) && actual_verifier_handoff_surface_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_verifier_handoff_surface_threshold.compare_floor_refs.clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.parser.minimal_parser_subset_freeze".to_string());
+            compare_floor_refs.push(
+                "compare_floor:current_l2.parser.parser_to_checker_reconnect_freeze".to_string(),
+            );
+
+            let mut evidence_refs = actual_verifier_handoff_surface_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_minimal_parser_subset_freeze_threshold".to_string(),
+            );
+            evidence_refs.push("source:stage1_stage2_structural_parser_floor".to_string());
+            evidence_refs.push("source:minimal_parser_subset_freeze_ready_sketch".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind: "parser_front_minimal_parser_subset_freeze_threshold_manifest",
+                freeze_kind: Some("stage1_stage2_structural_parser_floor"),
+                accepted_cluster_refs: vec![
+                    "stage1_chain_declaration_structural_floor".to_string(),
+                    "stage2_try_rollback_structural_floor".to_string(),
+                ],
+                reject_cluster_refs: vec![
+                    "missing_edge_local_lineage_metadata".to_string(),
+                    "missing_fallback_body".to_string(),
+                    "atomic_cut_fallback_placement".to_string(),
+                ],
+                retention_floor_refs: vec![
+                    "stage3_admit_slot_branch".to_string(),
+                    "stage3_request_clause_branch".to_string(),
+                    "stage3_predicate_fragment_branch".to_string(),
+                ],
+                next_comparison_target_ref: Some("parser_to_checker_reconnect_freeze_comparison"),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs: actual_minimal_parser_subset_freeze_threshold_guard_refs(true),
+                kept_later_refs: actual_minimal_parser_subset_freeze_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "parser_front_minimal_parser_subset_freeze_threshold_manifest",
+            freeze_kind: None,
+            accepted_cluster_refs: vec![],
+            reject_cluster_refs: vec![],
+            retention_floor_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{}", report.sample_id),
+                "helper_preview:actual_minimal_parser_subset_freeze_threshold".to_string(),
+                "compare_floor:current_l2.parser.minimal_parser_subset_freeze".to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.parser.minimal_parser_subset_freeze.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_minimal_parser_subset_freeze_threshold_guard_refs(false),
+            kept_later_refs: actual_minimal_parser_subset_freeze_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual minimal parser subset freeze threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual verifier handoff surface threshold reaches the helper-local docs-only bridge floor for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -2868,6 +2975,11 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_verifier_handoff_surface_threshold(
         &mut output,
         &summary.actual_verifier_handoff_surface_threshold,
+    );
+    writeln!(output, "actual_minimal_parser_subset_freeze_threshold:").expect("write to string");
+    render_actual_minimal_parser_subset_freeze_threshold(
+        &mut output,
+        &summary.actual_minimal_parser_subset_freeze_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -4027,6 +4139,34 @@ fn actual_verifier_handoff_surface_threshold_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn actual_minimal_parser_subset_freeze_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:parser_front_minimal_parser_subset_freeze_threshold_only".to_string(),
+            "guard:parser_to_checker_reconnect_freeze_comparison_next".to_string(),
+            "guard:stage3_request_admit_predicate_retained_later".to_string(),
+            "guard:final_parser_grammar_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_minimal_parser_subset_freeze_threshold_not_reached".to_string(),
+        ]
+    }
+}
+
+fn actual_minimal_parser_subset_freeze_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:stage3_admit_slot_branch".to_string(),
+        "kept_later:stage3_request_clause_branch".to_string(),
+        "kept_later:stage3_predicate_fragment_branch".to_string(),
+        "kept_later:public_parser_api".to_string(),
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:parser_to_checker_reconnect_freeze".to_string(),
+        "kept_later:final_public_parser_checker_api".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -4984,6 +5124,40 @@ fn render_actual_verifier_handoff_surface_threshold(
         writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
     }
     render_string_list(output, "deferred_surface_refs", &summary.deferred_surface_refs, 1);
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_minimal_parser_subset_freeze_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(freeze_kind) = summary.freeze_kind {
+        writeln!(output, "  freeze_kind: {freeze_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  freeze_kind: none").expect("write to string");
+    }
+    render_string_list(output, "accepted_cluster_refs", &summary.accepted_cluster_refs, 1);
+    render_string_list(output, "reject_cluster_refs", &summary.reject_cluster_refs, 1);
+    render_string_list(output, "retention_floor_refs", &summary.retention_floor_refs, 1);
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
     render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
     render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &summary.guard_refs, 1);

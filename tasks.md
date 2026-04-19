@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 22:06 JST
+最終更新: 2026-04-19 22:18 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - strong typing / IFC beyond first checker fragment の minimal-parser-subset-freeze ratchet
+  - strong typing / IFC beyond first checker fragment の parser-to-checker-reconnect-freeze ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `74` minimal-parser-subset-freeze ratchet | verifier-handoff-surface threshold の次段として minimal parser subset freeze ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | stage 1 + stage 2 structural floor accepted cluster を current cut に留めたまま、stage 3 admit/request/predicate branches、final parser grammar、parser-to-checker reconnect、final public parser/checker API を still later に残して minimal parser subset freeze ready sketch を helper-local threshold まで ratchet する | accepted cluster / reject cluster / retention floor を helper-local summary に narrow に固定し、next reopen target を parser-to-checker reconnect freeze comparison に保てる |
+| `75` parser-to-checker-reconnect-freeze ratchet | minimal-parser-subset-freeze threshold の次段として parser-to-checker reconnect freeze ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | stage 1 summary + stage 2 structural contract + retained helper refs を current cut に留めたまま、final parser grammar、public parser/checker API、final public verifier contract を still later に残して parser-to-checker reconnect freeze ready sketch を helper-local threshold まで ratchet する | parser floor と checker floor の reconnect bundle を narrow に actualize しつつ、final parser/public contract 群を later mixed gate に残せる |
 
 ## recently closed package note
 
@@ -308,14 +308,28 @@
 ### Package 74 — minimal-parser-subset-freeze ratchet
 
 - current reading:
-  next active line。`actual_verifier_handoff_surface_threshold` を final parser grammar や parser-to-checker reconnect freeze に上げず、minimal parser subset freeze ready sketch まで narrow に ratchet する。
+  close 済み。`actual_verifier_handoff_surface_threshold` を final parser grammar や parser-to-checker reconnect freeze に上げず、minimal parser subset freeze ready sketch まで narrow に ratchet し、`actual_minimal_parser_subset_freeze_threshold` を `freeze_kind + accepted_cluster_refs + reject_cluster_refs + retention_floor_refs` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/287`
   `specs/examples/288`
   `specs/examples/545`
+  `specs/examples/546`
 - stop line:
   final parser grammar
   parser-to-checker reconnect freeze
+  final public parser/checker API
+  final public verifier contract
+
+### Package 75 — parser-to-checker-reconnect-freeze ratchet
+
+- current reading:
+  next active line。`actual_minimal_parser_subset_freeze_threshold` を final parser grammar や final public parser/checker API に上げず、parser-to-checker reconnect freeze ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/289`
+  `specs/examples/290`
+  `specs/examples/546`
+- stop line:
+  final parser grammar
   final public parser/checker API
   final public verifier contract
 
@@ -350,4 +364,4 @@
 
 ## next reopen order
 
-1. Package 74 で minimal-parser-subset-freeze ratchet を進める。
+1. Package 75 で parser-to-checker-reconnect-freeze ratchet を進める。

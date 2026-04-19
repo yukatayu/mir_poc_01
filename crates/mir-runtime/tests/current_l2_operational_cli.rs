@@ -424,6 +424,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_verifier_handoff_surface_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -827,6 +831,50 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_verifier_handoff_surface_threshold"]["next_comparison_target_ref"],
         "minimal_parser_subset_freeze_comparison"
     );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["freeze_kind"],
+        "stage1_stage2_structural_parser_floor"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["accepted_cluster_refs"][0],
+        "stage1_chain_declaration_structural_floor"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["accepted_cluster_refs"][1],
+        "stage2_try_rollback_structural_floor"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["reject_cluster_refs"][0],
+        "missing_edge_local_lineage_metadata"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["reject_cluster_refs"][1],
+        "missing_fallback_body"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["reject_cluster_refs"][2],
+        "atomic_cut_fallback_placement"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["retention_floor_refs"][0],
+        "stage3_admit_slot_branch"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["retention_floor_refs"][1],
+        "stage3_request_clause_branch"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["retention_floor_refs"][2],
+        "stage3_predicate_fragment_branch"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["next_comparison_target_ref"],
+        "parser_to_checker_reconnect_freeze_comparison"
+    );
 }
 
 #[test]
@@ -934,6 +982,34 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     ));
     assert!(output.contains(
         "next_comparison_target_ref: minimal_parser_subset_freeze_comparison"
+    ));
+    assert!(output.contains("actual_minimal_parser_subset_freeze_threshold:"));
+    assert!(output.contains(
+        "freeze_kind: stage1_stage2_structural_parser_floor"
+    ));
+    assert!(output.contains(
+        "accepted_cluster_refs:"
+    ));
+    assert!(output.contains(
+        "stage1_chain_declaration_structural_floor"
+    ));
+    assert!(output.contains(
+        "stage2_try_rollback_structural_floor"
+    ));
+    assert!(output.contains(
+        "reject_cluster_refs:"
+    ));
+    assert!(output.contains("missing_edge_local_lineage_metadata"));
+    assert!(output.contains("missing_fallback_body"));
+    assert!(output.contains("atomic_cut_fallback_placement"));
+    assert!(output.contains(
+        "retention_floor_refs:"
+    ));
+    assert!(output.contains("stage3_admit_slot_branch"));
+    assert!(output.contains("stage3_request_clause_branch"));
+    assert!(output.contains("stage3_predicate_fragment_branch"));
+    assert!(output.contains(
+        "next_comparison_target_ref: parser_to_checker_reconnect_freeze_comparison"
     ));
 }
 
@@ -1073,5 +1149,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_verifier_handoff_surface_threshold"]["next_comparison_target_ref"],
         "minimal_parser_subset_freeze_comparison"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_minimal_parser_subset_freeze_threshold"]["next_comparison_target_ref"],
+        "parser_to_checker_reconnect_freeze_comparison"
     );
 }
