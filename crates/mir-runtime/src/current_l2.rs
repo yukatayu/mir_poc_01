@@ -126,6 +126,15 @@ pub struct CurrentL2Phase6NextReopenSequencingManifest {
     pub guard_refs: &'static [&'static str],
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2Phase6ReserveFormalToolBindingInventoryManifest {
+    pub inventory_kind: &'static str,
+    pub fixed_entry_criteria_refs: &'static [&'static str],
+    pub first_reserve_ref: &'static str,
+    pub second_reserve_ref: &'static str,
+    pub guard_refs: &'static [&'static str],
+}
+
 const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_SEMANTIC_ENTRY_REFS: &[&str] = &[
     "static_gate_program_detailed",
     "direct_style_evaluator_from_program",
@@ -258,6 +267,36 @@ pub const CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_MANIFEST:
 pub fn current_l2_phase6_next_reopen_sequencing_manifest()
 -> &'static CurrentL2Phase6NextReopenSequencingManifest {
     &CURRENT_L2_PHASE6_NEXT_REOPEN_SEQUENCING_MANIFEST
+}
+
+const CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_FIXED_ENTRY_CRITERIA_REFS: &[&str] =
+    &[
+        "phase5_handoff_closeout",
+        "phase6_compile_ready_formal_hook",
+        "phase6_parser_second_tranche_first_package",
+    ];
+
+const CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_GUARD_REFS: &[&str] = &[
+    "keep_tool_neutral_formal_hook_as_current_entry_criteria",
+    "keep_parser_followup_package_as_current_mainline",
+    "avoid_dual_tool_choice_single_package",
+    "avoid_public_checker_runtime_surface_backpressure",
+];
+
+pub const CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_MANIFEST:
+    CurrentL2Phase6ReserveFormalToolBindingInventoryManifest =
+    CurrentL2Phase6ReserveFormalToolBindingInventoryManifest {
+        inventory_kind: "phase6_postclose_formal_reserve_inventory",
+        fixed_entry_criteria_refs:
+            CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_FIXED_ENTRY_CRITERIA_REFS,
+        first_reserve_ref: "theorem_first_notebook_pressure_concrete_tool_binding_route",
+        second_reserve_ref: "model_check_protocol_property_concrete_tool_binding_route",
+        guard_refs: CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_GUARD_REFS,
+    };
+
+pub fn current_l2_phase6_reserve_formal_tool_binding_inventory_manifest()
+-> &'static CurrentL2Phase6ReserveFormalToolBindingInventoryManifest {
+    &CURRENT_L2_PHASE6_RESERVE_FORMAL_TOOL_BINDING_INVENTORY_MANIFEST
 }
 
 pub fn current_l2_default_source_sample_directory() -> PathBuf {

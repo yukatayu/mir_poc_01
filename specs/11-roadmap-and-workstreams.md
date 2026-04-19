@@ -670,7 +670,15 @@ actual-adoption floor では、
   `specs/examples/557`
   - `Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C`
   - finite decidable index fragment / IFC / capture / lifetime / simple cost principal target
+  - local inference aggressive / public-module boundary annotation required / declassification・handoff・external effect annotation required
+  - finite index soundness / limited completeness / explicit-flow noninterference / selected resource model cost soundness
   - stronger typed surface promotion は still mixed gate
+- phase6 reserve formal tool binding inventory threshold helper mirror:
+  `specs/examples/558`
+  - `CurrentL2Phase6ReserveFormalToolBindingInventoryManifest`
+  - `current_l2_phase6_reserve_formal_tool_binding_inventory_manifest()`
+  - `inventory_kind + fixed_entry_criteria_refs + first_reserve_ref + second_reserve_ref + minimum_guard_refs + next_comparison_target_ref + kept_later_refs` reserve inventory minimum mirror
+  - Package 85 phase6-reserve-formal-tool-binding-inventory ratchet close、Package 86 phase6-parser-side-follow-up-package-sequencing ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

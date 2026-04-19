@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 01:49 JST
+最終更新: 2026-04-20 02:23 JST
 
 ## この文書について
 
@@ -27,7 +27,7 @@
   IFC / taint、capture / lifetime、simple cost を
   first strong typing layer の principal target に置く読みへ同期済みである。
 - したがって、remaining work の主眼は次に移っている。
-  - theorem-first reserve / model-check second reserve / parser-side mainline keep をどこまで narrow に actualize するかの phase6-reserve-formal-tool-binding-inventory ratchet
+  - shared single attachment frame を next parser-side package に固定し、request clause suite / perform head / source-sample path を deferred reopen として押し戻すかの phase6-parser-side-follow-up-package-sequencing ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -57,7 +57,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `85` phase6-reserve-formal-tool-binding-inventory ratchet | phase6 parser second-tranche first package close の次段として theorem-first reserve / model-check second reserve / parser-side mainline keep をどこまで narrow に actualize するか | `M` | `Macro 6/7` | theorem-first を first reserve、model-check を second reserve に置き、tool-neutral formal hook を entry criteria に維持しつつ parser-side follow-up package を current mainline に残す | inventory_kind / fixed_entry_criteria_refs / first_reserve_ref / second_reserve_ref / guard_refs を narrow に actualize しつつ、concrete tool choice と parser-side follow-up widening を later gate に残せる |
+| `86` phase6-parser-side-follow-up-package-sequencing ratchet | phase6 reserve formal tool binding inventory close の次段として shared single attachment frame を next parser-side package に置き、request clause suite / perform head / source-sample path をどう deferred reopen に押し戻すか | `M` | `Macro 6/7` | shared single attachment frame を next package に置き、request clause suite / perform head / richer diagnostics / final grammar / source-sample path は later に残す | sequencing_kind / fixed_entry_criteria_refs / selected_next_package_ref / deferred_reopen_refs / guard_refs を narrow に actualize しつつ、actual code widening は Package 87 以降に押し戻せる |
 
 ## recently closed package note
 
@@ -480,16 +480,34 @@
 ### Package 85 — phase6-reserve-formal-tool-binding-inventory ratchet
 
 - current reading:
-  next active line。`CurrentL2SecondTrancheManifest` の次段として、theorem-first reserve / model-check second reserve / tool-neutral formal-hook keep / parser-side mainline keep を helper-local manifest と snapshot docs へ narrow に actualize する。
+  close 済み。`CurrentL2SecondTrancheManifest` の次段として、theorem-first reserve / model-check second reserve / tool-neutral formal-hook keep / parser-side mainline keep を helper-local manifest と snapshot docs へ narrow に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/309`
   `specs/examples/310`
   `specs/examples/556`
+  `specs/examples/558`
 - stop line:
   concrete_theorem_tool_name
   concrete_model_check_tool_name
   actual_ci_artifact_retention_policy
   parser_side_followup_package_selection
+  final_public_parser_checker_runtime_surface
+
+### Package 86 — phase6-parser-side-follow-up-package-sequencing ratchet
+
+- current reading:
+  next active line。Package 85 close 後の次段として、shared single attachment frame を next parser-side package に固定し、request clause suite / perform head / source-sample path を deferred reopen として helper-local manifest と snapshot docs に narrow に actualize する。
+- evidence anchor:
+  `specs/examples/311`
+  `specs/examples/312`
+  `specs/examples/558`
+  `specs/examples/96`
+  `specs/examples/97`
+- stop line:
+  shared_single_attachment_frame_actual_code_shape
+  request_clause_suite_publicization
+  perform_head_final_public_parser_api
+  source_sample_corpus_scope
   final_public_parser_checker_runtime_surface
 
 ## research-discovery items
@@ -523,4 +541,4 @@
 
 ## next reopen order
 
-1. Package 85 で phase6-reserve-formal-tool-binding-inventory ratchet を進める。
+1. Package 86 で phase6-parser-side-follow-up-package-sequencing ratchet を進める。

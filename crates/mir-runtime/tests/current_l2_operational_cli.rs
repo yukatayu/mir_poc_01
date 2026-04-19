@@ -630,6 +630,28 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
             "next_comparison_target_ref: phase6_parser_second_tranche_attached_slot_and_predicate_fragment_first_package_comparison"
         )
     );
+    assert!(output.contains("actual_phase6_reserve_formal_tool_binding_inventory_threshold:"));
+    assert!(output.contains("inventory_kind: phase6_postclose_formal_reserve_inventory"));
+    assert!(output.contains("fixed_entry_criteria_refs:"));
+    assert!(output.contains("phase5_handoff_closeout"));
+    assert!(output.contains("phase6_compile_ready_formal_hook"));
+    assert!(output.contains("phase6_parser_second_tranche_first_package"));
+    assert!(output.contains(
+        "first_reserve_ref: theorem_first_notebook_pressure_concrete_tool_binding_route"
+    ));
+    assert!(
+        output.contains(
+            "second_reserve_ref: model_check_protocol_property_concrete_tool_binding_route"
+        )
+    );
+    assert!(output.contains("minimum_guard_refs:"));
+    assert!(output.contains("keep_tool_neutral_formal_hook_as_current_entry_criteria"));
+    assert!(output.contains("keep_parser_followup_package_as_current_mainline"));
+    assert!(output.contains("avoid_dual_tool_choice_single_package"));
+    assert!(output.contains("avoid_public_checker_runtime_surface_backpressure"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase6_parser_side_follow_up_package_sequencing_comparison"
+    ));
 }
 
 #[test]
@@ -1149,6 +1171,61 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
     assert_eq!(
         value["actual_phase6_next_reopen_sequencing_threshold"]["next_comparison_target_ref"],
         "phase6_parser_second_tranche_attached_slot_and_predicate_fragment_first_package_comparison"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["inventory_kind"],
+        "phase6_postclose_formal_reserve_inventory"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["fixed_entry_criteria_refs"]
+            [0],
+        "phase5_handoff_closeout"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["fixed_entry_criteria_refs"]
+            [1],
+        "phase6_compile_ready_formal_hook"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["fixed_entry_criteria_refs"]
+            [2],
+        "phase6_parser_second_tranche_first_package"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["first_reserve_ref"],
+        "theorem_first_notebook_pressure_concrete_tool_binding_route"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["second_reserve_ref"],
+        "model_check_protocol_property_concrete_tool_binding_route"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["minimum_guard_refs"]
+            [0],
+        "keep_tool_neutral_formal_hook_as_current_entry_criteria"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["minimum_guard_refs"]
+            [1],
+        "keep_parser_followup_package_as_current_mainline"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["minimum_guard_refs"]
+            [2],
+        "avoid_dual_tool_choice_single_package"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["minimum_guard_refs"]
+            [3],
+        "avoid_public_checker_runtime_surface_backpressure"
+    );
+    assert_eq!(
+        value["actual_phase6_reserve_formal_tool_binding_inventory_threshold"]["next_comparison_target_ref"],
+        "phase6_parser_side_follow_up_package_sequencing_comparison"
     );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]

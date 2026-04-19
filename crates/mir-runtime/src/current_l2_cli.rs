@@ -14,8 +14,9 @@ use crate::current_l2::{
     CurrentL2TryRollbackStructuralSummary, CurrentL2TryRollbackStructuralVerdict,
     current_l2_checker_runtime_first_tranche_manifest,
     current_l2_compile_ready_verification_and_formal_hook_manifest,
-    current_l2_phase6_next_reopen_sequencing_manifest, resolve_current_l2_source_sample_path,
-    run_current_l2_source_sample,
+    current_l2_phase6_next_reopen_sequencing_manifest,
+    current_l2_phase6_reserve_formal_tool_binding_inventory_manifest,
+    resolve_current_l2_source_sample_path, run_current_l2_source_sample,
 };
 use mir_semantics::{
     EventKind, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome, load_host_plan_from_path,
@@ -279,6 +280,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPhase6CompileReadyVerificationAndFormalHookThresholdSummary,
     actual_phase6_next_reopen_sequencing_threshold:
         CurrentL2OperationalCliActualPhase6NextReopenSequencingThresholdSummary,
+    actual_phase6_reserve_formal_tool_binding_inventory_threshold:
+        CurrentL2OperationalCliActualPhase6ReserveFormalToolBindingInventoryThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -433,6 +436,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_phase6_compile_ready_verification_and_formal_hook_threshold,
             );
+        let actual_phase6_reserve_formal_tool_binding_inventory_threshold =
+            CurrentL2OperationalCliActualPhase6ReserveFormalToolBindingInventoryThresholdSummary::from_source_report(
+                &report,
+                &actual_phase6_next_reopen_sequencing_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -476,6 +484,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold,
             actual_phase6_compile_ready_verification_and_formal_hook_threshold,
             actual_phase6_next_reopen_sequencing_threshold,
+            actual_phase6_reserve_formal_tool_binding_inventory_threshold,
         }
     }
 }
@@ -3206,6 +3215,23 @@ struct CurrentL2OperationalCliActualPhase6NextReopenSequencingThresholdSummary {
     guard_reason: Option<String>,
 }
 
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPhase6ReserveFormalToolBindingInventoryThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    inventory_kind: Option<&'static str>,
+    fixed_entry_criteria_refs: Vec<String>,
+    first_reserve_ref: Option<&'static str>,
+    second_reserve_ref: Option<&'static str>,
+    minimum_guard_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
 impl CurrentL2OperationalCliActualPhase6CompileReadyVerificationAndFormalHookThresholdSummary {
     fn from_source_report(
         report: &CurrentL2SourceSampleRunReport,
@@ -3445,6 +3471,105 @@ impl CurrentL2OperationalCliActualPhase6NextReopenSequencingThresholdSummary {
             kept_later_refs: actual_phase6_next_reopen_sequencing_threshold_kept_later_refs(),
             guard_reason: Some(format!(
                 "current actual phase6 next-reopen sequencing threshold only actualizes the representative shared-space trio (`p07` / `p08` / `p09`) after actual phase6 compile-ready verification / formal hook threshold reaches the compile-ready minimum for `{sample_id}`"
+            )),
+        }
+    }
+}
+
+impl CurrentL2OperationalCliActualPhase6ReserveFormalToolBindingInventoryThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_phase6_next_reopen_sequencing_threshold:
+            &CurrentL2OperationalCliActualPhase6NextReopenSequencingThresholdSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && actual_phase6_next_reopen_sequencing_threshold.status == "reached";
+        let manifest = current_l2_phase6_reserve_formal_tool_binding_inventory_manifest();
+
+        if reached {
+            let mut compare_floor_refs = actual_phase6_next_reopen_sequencing_threshold
+                .compare_floor_refs
+                .clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase6_reserve_formal_tool_binding_inventory"
+                    .to_string(),
+            );
+
+            let mut evidence_refs = actual_phase6_next_reopen_sequencing_threshold
+                .evidence_refs
+                .clone();
+            evidence_refs.push(
+                "helper_preview:actual_phase6_reserve_formal_tool_binding_inventory_threshold"
+                    .to_string(),
+            );
+            evidence_refs.push(
+                "source:phase6_reserve_formal_tool_binding_inventory_current_first_choice"
+                    .to_string(),
+            );
+            evidence_refs
+                .push("source:phase6_reserve_formal_tool_binding_inventory_minimum".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind: "phase6_reserve_formal_tool_binding_inventory_threshold_manifest",
+                inventory_kind: Some(manifest.inventory_kind),
+                fixed_entry_criteria_refs: manifest
+                    .fixed_entry_criteria_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                first_reserve_ref: Some(manifest.first_reserve_ref),
+                second_reserve_ref: Some(manifest.second_reserve_ref),
+                minimum_guard_refs: manifest
+                    .guard_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                next_comparison_target_ref: Some(
+                    "phase6_parser_side_follow_up_package_sequencing_comparison",
+                ),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs:
+                    actual_phase6_reserve_formal_tool_binding_inventory_threshold_guard_refs(true),
+                kept_later_refs:
+                    actual_phase6_reserve_formal_tool_binding_inventory_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "phase6_reserve_formal_tool_binding_inventory_threshold_manifest",
+            inventory_kind: None,
+            fixed_entry_criteria_refs: vec![],
+            first_reserve_ref: None,
+            second_reserve_ref: None,
+            minimum_guard_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{sample_id}"),
+                "helper_preview:actual_phase6_reserve_formal_tool_binding_inventory_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.closeout.phase6_reserve_formal_tool_binding_inventory"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.closeout.phase6_reserve_formal_tool_binding_inventory.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_phase6_reserve_formal_tool_binding_inventory_threshold_guard_refs(
+                false,
+            ),
+            kept_later_refs:
+                actual_phase6_reserve_formal_tool_binding_inventory_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual phase6 reserve formal tool binding inventory threshold only actualizes the representative shared-space trio (`p07` / `p08` / `p09`) after actual phase6 next-reopen sequencing threshold reaches the sequencing minimum for `{sample_id}`"
             )),
         }
     }
@@ -4226,6 +4351,15 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_phase6_next_reopen_sequencing_threshold(
         &mut output,
         &summary.actual_phase6_next_reopen_sequencing_threshold,
+    );
+    writeln!(
+        output,
+        "actual_phase6_reserve_formal_tool_binding_inventory_threshold:"
+    )
+    .expect("write to string");
+    render_actual_phase6_reserve_formal_tool_binding_inventory_threshold(
+        &mut output,
+        &summary.actual_phase6_reserve_formal_tool_binding_inventory_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -5660,6 +5794,34 @@ fn actual_phase6_next_reopen_sequencing_threshold_kept_later_refs() -> Vec<Strin
         "concrete_theorem_tool_binding".to_string(),
         "concrete_model_check_tool_binding".to_string(),
         "final_public_surface".to_string(),
+    ]
+}
+
+fn actual_phase6_reserve_formal_tool_binding_inventory_threshold_guard_refs(
+    reached: bool,
+) -> Vec<String> {
+    let mut refs =
+        vec!["guard:actual_phase6_next_reopen_sequencing_threshold_required".to_string()];
+    if reached {
+        refs.push(
+            "guard:phase6_parser_side_follow_up_package_sequencing_comparison_next".to_string(),
+        );
+    } else {
+        refs.push(
+            "guard:actual_phase6_reserve_formal_tool_binding_inventory_threshold_not_reached"
+                .to_string(),
+        );
+    }
+    refs
+}
+
+fn actual_phase6_reserve_formal_tool_binding_inventory_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "concrete_theorem_tool_name".to_string(),
+        "concrete_model_check_tool_name".to_string(),
+        "actual_ci_artifact_retention_policy".to_string(),
+        "parser_side_followup_package_selection".to_string(),
+        "final_public_parser_checker_runtime_surface".to_string(),
     ]
 }
 
@@ -7205,6 +7367,54 @@ fn render_actual_phase6_next_reopen_sequencing_threshold(
         &summary.deferred_reopen_refs,
         1,
     );
+    render_string_list(output, "minimum_guard_refs", &summary.minimum_guard_refs, 1);
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_phase6_reserve_formal_tool_binding_inventory_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualPhase6ReserveFormalToolBindingInventoryThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(inventory_kind) = summary.inventory_kind {
+        writeln!(output, "  inventory_kind: {inventory_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  inventory_kind: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "fixed_entry_criteria_refs",
+        &summary.fixed_entry_criteria_refs,
+        1,
+    );
+    if let Some(first_reserve_ref) = summary.first_reserve_ref {
+        writeln!(output, "  first_reserve_ref: {first_reserve_ref}").expect("write to string");
+    } else {
+        writeln!(output, "  first_reserve_ref: none").expect("write to string");
+    }
+    if let Some(second_reserve_ref) = summary.second_reserve_ref {
+        writeln!(output, "  second_reserve_ref: {second_reserve_ref}").expect("write to string");
+    } else {
+        writeln!(output, "  second_reserve_ref: none").expect("write to string");
+    }
     render_string_list(output, "minimum_guard_refs", &summary.minimum_guard_refs, 1);
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
