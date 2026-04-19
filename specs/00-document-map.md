@@ -195,7 +195,10 @@
   - detached loop wrapper path line の public surface 昇格、row snippet textual rendering の public contract 化、generic shared public checker entry、parser-front public checker boundary、emitted verifier handoff surface、final public verifier contract を固定するものではなく、Package 71 close と Package 72 public-checker-boundary ratchet close を読むための anchor である。
 - `specs/examples/544-current-l2-ifc-public-checker-boundary-threshold-helper-mirror.md`
   - Package 72 の closeout として `p10 / p11 / p12` source-side IFC trio の public-checker-boundary threshold を `run-source-sample` helper summary に narrow に mirror し、`boundary_kind + public_checker_command_surface_ref + shared_output_contract_ref` の public-checker-boundary minimum を helper-local operational summary で保つ補助文書。
-  - final parser grammar、query token / `checker_subject` public naming、generic shared public checker entry、detached loop wrapper path line の public surface 昇格、verifier handoff surface、final public verifier contract を固定するものではなく、Package 72 close と Package 73 verifier-handoff-surface ratchet next line を読むための anchor である。
+  - final parser grammar、query token / `checker_subject` public naming、generic shared public checker entry、detached loop wrapper path line の public surface 昇格、verifier handoff surface、final public verifier contract を固定するものではなく、Package 72 close と Package 73 verifier-handoff-surface ratchet close を読むための anchor である。
+- `specs/examples/545-current-l2-ifc-verifier-handoff-surface-threshold-helper-mirror.md`
+  - Package 73 の closeout として `p10 / p11 / p12` source-side IFC trio の verifier-handoff-surface threshold を `run-source-sample` helper summary に narrow に mirror し、`handoff_surface_kind + public_checker_boundary_ref + proof_obligation_matrix_ref + handoff_artifact_mode` の verifier-handoff-surface minimum を helper-local operational summary で保つ補助文書。
+  - actual emitted verifier handoff artifact、theorem / protocol / runtime-policy dedicated handoff artifact family、final parser grammar、query token / shared generic entry、final public verifier contract を固定するものではなく、Package 73 close と Package 74 minimal-parser-subset-freeze ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
@@ -664,6 +667,8 @@
   - current Phase 5 / Package 71 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_shared_output_contract_threshold` を actualize し、shared family checker support の representative summary line を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/544-current-l2-ifc-public-checker-boundary-threshold-helper-mirror.md`
   - current Phase 5 / Package 72 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_public_checker_boundary_threshold` を actualize し、docs-only parser-front boundary bundle を helper-local operational summary に narrow に mirror する補助文書。
+- `specs/examples/545-current-l2-ifc-verifier-handoff-surface-threshold-helper-mirror.md`
+  - current Phase 5 / Package 73 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_verifier_handoff_surface_threshold` を actualize し、docs-only mixed-row verifier-handoff bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

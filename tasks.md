@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 21:44 JST
+最終更新: 2026-04-19 22:06 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - strong typing / IFC beyond first checker fragment の verifier-handoff-surface ratchet
+  - strong typing / IFC beyond first checker fragment の minimal-parser-subset-freeze ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `73` verifier-handoff-surface ratchet | public-checker-boundary threshold の次段として verifier handoff surface ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | docs-only mixed-row bridge を current cut に留めたまま、actual emitted verifier handoff artifact / theorem-protocol-runtime dedicated split / final parser grammar を still later に残して verifier-handoff-surface ready sketch を helper-local threshold まで ratchet する | actual emitted verifier handoff artifact を凍らせず、next reopen target を minimal-parser-subset-freeze comparison に narrow に保てる |
+| `74` minimal-parser-subset-freeze ratchet | verifier-handoff-surface threshold の次段として minimal parser subset freeze ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | stage 1 + stage 2 structural floor accepted cluster を current cut に留めたまま、stage 3 admit/request/predicate branches、final parser grammar、parser-to-checker reconnect、final public parser/checker API を still later に残して minimal parser subset freeze ready sketch を helper-local threshold まで ratchet する | accepted cluster / reject cluster / retention floor を helper-local summary に narrow に固定し、next reopen target を parser-to-checker reconnect freeze comparison に保てる |
 
 ## recently closed package note
 
@@ -293,15 +293,30 @@
 ### Package 73 — verifier-handoff-surface ratchet
 
 - current reading:
-  next active line。`actual_public_checker_boundary_threshold` を actual emitted verifier handoff artifact や theorem / protocol / runtime-policy dedicated split に上げず、verifier-handoff-surface ready sketch まで narrow に ratchet する。
+  close 済み。`actual_public_checker_boundary_threshold` を actual emitted verifier handoff artifact や theorem / protocol / runtime-policy dedicated split に上げず、verifier-handoff-surface ready sketch まで narrow に ratchet し、`actual_verifier_handoff_surface_threshold` を `handoff_surface_kind + public_checker_boundary_ref + proof_obligation_matrix_ref + handoff_artifact_mode` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/285`
   `specs/examples/286`
   `specs/examples/544`
+  `specs/examples/545`
 - stop line:
   actual emitted verifier handoff artifact
   theorem / protocol / runtime-policy dedicated contract
   final parser grammar
+  final public verifier contract
+
+### Package 74 — minimal-parser-subset-freeze ratchet
+
+- current reading:
+  next active line。`actual_verifier_handoff_surface_threshold` を final parser grammar や parser-to-checker reconnect freeze に上げず、minimal parser subset freeze ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/287`
+  `specs/examples/288`
+  `specs/examples/545`
+- stop line:
+  final parser grammar
+  parser-to-checker reconnect freeze
+  final public parser/checker API
   final public verifier contract
 
 ## research-discovery items
@@ -335,4 +350,4 @@
 
 ## next reopen order
 
-1. Package 73 で verifier-handoff-surface ratchet を進める。
+1. Package 74 で minimal-parser-subset-freeze ratchet を進める。

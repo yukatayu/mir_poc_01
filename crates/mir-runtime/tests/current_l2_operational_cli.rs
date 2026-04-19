@@ -420,6 +420,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_public_checker_boundary_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -799,6 +803,30 @@ fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
         value["actual_public_checker_boundary_threshold"]["next_comparison_target_ref"],
         "verifier_handoff_surface_comparison"
     );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["handoff_surface_kind"],
+        "docs_only_mixed_row_bundle_verifier_surface"
+    );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["public_checker_boundary_ref"],
+        "public_checker_boundary_ready_sketch"
+    );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["proof_obligation_matrix_ref"],
+        "current_l2_proof_obligation_matrix"
+    );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["handoff_artifact_mode"],
+        "docs_only_mixed_row_bundle"
+    );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["next_comparison_target_ref"],
+        "minimal_parser_subset_freeze_comparison"
+    );
 }
 
 #[test]
@@ -890,6 +918,22 @@ fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
     ));
     assert!(output.contains(
         "next_comparison_target_ref: verifier_handoff_surface_comparison"
+    ));
+    assert!(output.contains("actual_verifier_handoff_surface_threshold:"));
+    assert!(output.contains(
+        "handoff_surface_kind: docs_only_mixed_row_bundle_verifier_surface"
+    ));
+    assert!(output.contains(
+        "public_checker_boundary_ref: public_checker_boundary_ready_sketch"
+    ));
+    assert!(output.contains(
+        "proof_obligation_matrix_ref: current_l2_proof_obligation_matrix"
+    ));
+    assert!(output.contains(
+        "handoff_artifact_mode: docs_only_mixed_row_bundle"
+    ));
+    assert!(output.contains(
+        "next_comparison_target_ref: minimal_parser_subset_freeze_comparison"
     ));
 }
 
@@ -1021,5 +1065,13 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
     assert_eq!(
         value["actual_public_checker_boundary_threshold"]["next_comparison_target_ref"],
         "verifier_handoff_surface_comparison"
+    );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_verifier_handoff_surface_threshold"]["next_comparison_target_ref"],
+        "minimal_parser_subset_freeze_comparison"
     );
 }

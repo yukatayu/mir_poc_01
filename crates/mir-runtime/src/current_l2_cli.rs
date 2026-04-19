@@ -253,6 +253,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualSharedOutputContractThresholdSummary,
     actual_public_checker_boundary_threshold:
         CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary,
+    actual_verifier_handoff_surface_threshold:
+        CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -352,6 +354,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_shared_output_contract_threshold,
             );
+        let actual_verifier_handoff_surface_threshold =
+            CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary::from_source_report(
+                &report,
+                &actual_public_checker_boundary_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -384,6 +391,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_public_checker_command_surface_threshold,
             actual_shared_output_contract_threshold,
             actual_public_checker_boundary_threshold,
+            actual_verifier_handoff_surface_threshold,
         }
     }
 }
@@ -2067,6 +2075,109 @@ impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    handoff_surface_kind: Option<&'static str>,
+    public_checker_boundary_ref: Option<&'static str>,
+    proof_obligation_matrix_ref: Option<&'static str>,
+    handoff_artifact_mode: Option<&'static str>,
+    next_comparison_target_ref: Option<&'static str>,
+    deferred_surface_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_public_checker_boundary_threshold:
+            &CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p10-typed-authorized-fingerprint-declassification"
+                | "p11-typed-unauthorized-fingerprint-release"
+                | "p12-typed-classified-fingerprint-publication-block"
+        ) && actual_public_checker_boundary_threshold.status == "reached";
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_public_checker_boundary_threshold.compare_floor_refs.clone();
+            compare_floor_refs
+                .push("compare_floor:current_l2.checker.verifier_handoff_surface".to_string());
+            compare_floor_refs.push(
+                "compare_floor:current_l2.checker.minimal_verifier_handoff_surface_threshold"
+                    .to_string(),
+            );
+
+            let mut evidence_refs = actual_public_checker_boundary_threshold.evidence_refs.clone();
+            evidence_refs.push(
+                "helper_preview:actual_verifier_handoff_surface_threshold".to_string(),
+            );
+            evidence_refs.push("source:current_l2_proof_obligation_matrix".to_string());
+            evidence_refs.push("source:docs_only_mixed_row_bundle_verifier_surface".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind: "checker_adjacent_verifier_handoff_surface_threshold_manifest",
+                handoff_surface_kind: Some("docs_only_mixed_row_bundle_verifier_surface"),
+                public_checker_boundary_ref: Some("public_checker_boundary_ready_sketch"),
+                proof_obligation_matrix_ref: Some("current_l2_proof_obligation_matrix"),
+                handoff_artifact_mode: Some("docs_only_mixed_row_bundle"),
+                next_comparison_target_ref: Some("minimal_parser_subset_freeze_comparison"),
+                deferred_surface_refs: vec![
+                    "subject_kind".to_string(),
+                    "subject_ref".to_string(),
+                    "proof_obligation_rows".to_string(),
+                    "theorem_handoff_artifact_ref".to_string(),
+                    "protocol_handoff_artifact_ref".to_string(),
+                    "runtime_policy_handoff_artifact_ref".to_string(),
+                    "actual_emitted_verifier_handoff_artifact".to_string(),
+                    "tool_specific_schema_and_actual_emitter_policy".to_string(),
+                    "final_parser_grammar".to_string(),
+                    "query_token_and_shared_generic_entry".to_string(),
+                ],
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs: actual_verifier_handoff_surface_threshold_guard_refs(true),
+                kept_later_refs: actual_verifier_handoff_surface_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "checker_adjacent_verifier_handoff_surface_threshold_manifest",
+            handoff_surface_kind: None,
+            public_checker_boundary_ref: None,
+            proof_obligation_matrix_ref: None,
+            handoff_artifact_mode: None,
+            next_comparison_target_ref: None,
+            deferred_surface_refs: vec![],
+            evidence_refs: vec![
+                format!("sample:{}", report.sample_id),
+                "helper_preview:actual_verifier_handoff_surface_threshold".to_string(),
+                "compare_floor:current_l2.checker.verifier_handoff_surface".to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.checker.verifier_handoff_surface.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_verifier_handoff_surface_threshold_guard_refs(false),
+            kept_later_refs: actual_verifier_handoff_surface_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual verifier handoff surface threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual public checker boundary threshold reaches the checker-adjacent helper floor for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -2752,6 +2863,11 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_public_checker_boundary_threshold(
         &mut output,
         &summary.actual_public_checker_boundary_threshold,
+    );
+    writeln!(output, "actual_verifier_handoff_surface_threshold:").expect("write to string");
+    render_actual_verifier_handoff_surface_threshold(
+        &mut output,
+        &summary.actual_verifier_handoff_surface_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -3884,6 +4000,33 @@ fn actual_public_checker_boundary_threshold_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn actual_verifier_handoff_surface_threshold_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:checker_adjacent_verifier_handoff_surface_threshold_only".to_string(),
+            "guard:minimal_parser_subset_freeze_comparison_next".to_string(),
+            "guard:actual_emitted_verifier_handoff_artifact_later".to_string(),
+            "guard:dedicated_handoff_artifact_family_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_verifier_handoff_surface_threshold_not_reached".to_string(),
+        ]
+    }
+}
+
+fn actual_verifier_handoff_surface_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:subject_rows".to_string(),
+        "kept_later:theorem_protocol_runtime_dedicated_handoff_artifact_family".to_string(),
+        "kept_later:actual_emitted_verifier_handoff_artifact".to_string(),
+        "kept_later:tool_specific_schema_and_actual_emitter_policy".to_string(),
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:query_token_and_shared_generic_entry".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -4773,6 +4916,63 @@ fn render_actual_public_checker_boundary_threshold(
         .expect("write to string");
     } else {
         writeln!(output, "  shared_output_contract_ref: none").expect("write to string");
+    }
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "deferred_surface_refs", &summary.deferred_surface_refs, 1);
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_verifier_handoff_surface_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(handoff_surface_kind) = summary.handoff_surface_kind {
+        writeln!(output, "  handoff_surface_kind: {handoff_surface_kind}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  handoff_surface_kind: none").expect("write to string");
+    }
+    if let Some(public_checker_boundary_ref) = summary.public_checker_boundary_ref {
+        writeln!(
+            output,
+            "  public_checker_boundary_ref: {public_checker_boundary_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  public_checker_boundary_ref: none").expect("write to string");
+    }
+    if let Some(proof_obligation_matrix_ref) = summary.proof_obligation_matrix_ref {
+        writeln!(
+            output,
+            "  proof_obligation_matrix_ref: {proof_obligation_matrix_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  proof_obligation_matrix_ref: none").expect("write to string");
+    }
+    if let Some(handoff_artifact_mode) = summary.handoff_artifact_mode {
+        writeln!(output, "  handoff_artifact_mode: {handoff_artifact_mode}")
+            .expect("write to string");
+    } else {
+        writeln!(output, "  handoff_artifact_mode: none").expect("write to string");
     }
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
