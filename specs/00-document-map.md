@@ -147,7 +147,10 @@
   - final grammar や final source wording や final emitted-handoff contract を固定するものではなく、authoritative-room negative pair current cut と remaining broader theorem-side widening next line を読むための anchor である。
 - `specs/examples/528-current-l2-order-handoff-negative-pair-representative-lean-sample-set-carryover.md`
   - Package 58 の broader theorem-side widening として `p13 / p14` late-join visibility negative pair を representative Lean sample set / committed Lean corpus に carry over し、static rejection cluster の Lean bridge artifact を inspectable に整理する補助文書。
-  - final theorem contract や final proof-object schema や final parser/public API を固定するものではなく、order-handoff negative pair carry-over と remaining IFC helper widening next line を読むための anchor である。
+  - final theorem contract や final proof-object schema や final parser/public API を固定するものではなく、order-handoff negative pair carry-over と remaining broader theorem-side / diagnostics widening next line を読むための anchor である。
+- `specs/examples/529-current-l2-ifc-typed-checker-hint-preview-actualization.md`
+  - Package 58 の IFC helper widening として `p10 / p11 / p12` source-side IFC trio を sample-local `typed_checker_hint_preview` に actualize し、`family_refs[] + coverage_state` を helper-local operational CLI へ narrow に mirror する補助文書。
+  - final public checker artifact や final public verifier contract や final typed source principal を固定するものではなく、current IFC trio checker-hint mirror と remaining broader theorem-side / diagnostics widening next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

@@ -496,6 +496,12 @@ actual-adoption floor では、
   - `p13 / p14` late-join visibility negative pair
   - representative Lean sample set / committed Lean corpus carry-over
   - Package 58 broader theorem-side widening after static-stop actualization
+- IFC typed checker-hint preview actualization:
+  `specs/examples/529`
+  - `p10 / p11 / p12` source-side IFC trio
+  - sample-local `typed_checker_hint_preview`
+  - `family_refs[] + coverage_state` narrow mirror
+  - Package 58 IFC helper widening after representative Lean sample set carry-over
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

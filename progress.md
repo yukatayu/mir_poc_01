@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-19 17:24 JST
+最終更新: 2026-04-19 17:42 JST
 
 ## この文書について
 
@@ -16,7 +16,7 @@
   （authored sixteen と corrected prototype set `p01...p14` は runnable floor に乗っており、sample corpus は adequacy corpus として active に保つ）
 - current theory-lab line:
   `Macro 5 final-layer closeout packages active`
-  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524`、`525`、`526`、`527`、`528` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper に actualize 済みである。current active closeout line は helper/CLI hardening and broader coverage、near-end closeout sync、later mixed/user-spec residual に narrowed した）
+  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper に actualize 済みである。current active closeout line は broader theorem-side / diagnostics widening、near-end closeout sync、later mixed/user-spec residual に narrowed した）
 - current reserve integration line:
   `Macro 6 minimal working subset actual default / Macro 7 mixed`
   （authoritative room baseline、late join visible past、stale reconnect fail-then-refresh、witness/provider route-first line は current default に上がっているが、final public witness/provider/artifact contract、packaging、FFI、engine adapter、exhaustive catalog は still later に残る）
@@ -85,7 +85,7 @@
 | order / handoff line | `S6` | relation decomposition principal、surface actual adoption、source-wording route、stage-block secondary、serial-scope reserve surface、public-seam compression、CLI `surface_preview`、late-join negative static-stop pair | final source wording / emitted-artifact schema mixed gate と remaining residual compression |
 | shared-space minimal subset | `S6` | authoritative room baseline、vertical slice、witness/provider route/schema route、emitted-contract trace alignment、public-seam compression | final public contract mixed gate |
 | syntax / modality | `S6` on docs, `S3-S4` on implementation | semantic honesty principle、5 axes、partial basis keep、minimal companion + stage-block secondary | final foundation / final marker mixed gate へ行く前の source package hardening |
-| strong typing / IFC | `S6` on docs, `S5` on implementation | layered stack、`LabelModel` / `Labeled` sketch、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、source-side IFC trio `p10 / p11 / p12` | checker-hint / diagnostics mirror と broader theorem-side sample export |
+| strong typing / IFC | `S6` on docs, `S5-S6` on implementation | layered stack、`LabelModel` / `Labeled` sketch、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、source-side IFC trio `p10 / p11 / p12`、sample-local `typed_checker_hint_preview` | broader theorem-side sample export と diagnostics widening beyond IFC trio |
 | proof spine / formalization | `S6` on docs, `S5` on implementation | multimodal dependent core direction、Lean-first roadmap、actual Lean execution representative sample floor、proof-skeleton first fragment | wider proof obligations と bridge-side helper/CLI hardening |
 | backend / packaging | `S2-S3` | repo-local CLI/tests/artifacts/compare floor | packaging / installed binary / FFI later |
 
@@ -100,7 +100,7 @@
 | corrected prototype line | 85% | 83% | 89% | 着手可能 |
 | Problem 1 typed / theorem / model-check | 95% | 92% | 84% | final public seams 以外は自走可能 |
 | Problem 2 order / handoff / room default | 89% | 87% | 66% | final public wording / contract 以外は自走可能 |
-| strong typing / IFC closeout | 85% | 78% | 56% | checker-hint / diagnostics mirror までは自走可能 |
+| strong typing / IFC closeout | 87% | 80% | 61% | broader theorem-side export と diagnostics widening beyond IFC trio までは自走可能 |
 | proof spine / mechanization-ready core | 86% | 77% | 52% | Lean-first skeleton widening までは自走可能 |
 | shared-space minimal working subset | 73% | 67% | 49% | minimal subset strengthening までは自走可能 |
 | syntax / modality comparison | 81% | 79% | 27% | helper-local surface narrowing までは自走可能 |
@@ -116,7 +116,7 @@
 - current runnable / machine-check evidence:
   `p06 / p10 / p11 / p12`、verifier preview alignment pre-floor、theorem discharge pre-floor、model-check projection pre-floor、theorem-first pilot actualization、theorem binding preflight、theorem Lean-stub pilot、theorem artifact-conformance bridge、theorem representative trace-alignment bridge、theorem public-seam compression、theorem toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`samples/lean/current-l2/` committed corpus、`samples/lean/foundations/CurrentL2ProofSkeleton.lean`
 - current self-driven closeout package:
-  helper/CLI hardening、broader theorem/model-check negative corpus、later mixed gate compression
+  broader theorem/model-check export、diagnostics widening beyond IFC trio、later mixed gate compression
 - remaining stop line:
   stronger typed-surface actual adoption、final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、final public verifier contract
 
@@ -127,7 +127,7 @@
 - current runnable / machine-check evidence:
   `p07 / p08 / p09 / p13 / p14`、authoritative-room vertical slice、witness/provider route actual adoption、witness/provider schema route actual adoption、witness/provider emitted-contract trace alignment bridge、order-handoff surface actual adoption、order-handoff source-wording route actual adoption、order-handoff serial-scope reserve surface、order-handoff / witness-provider public-seam compression、order-handoff helper CLI `surface_preview` actualization、order-handoff negative static-stop actualization、auditable-authority-witness strengthening actualization、delegated-rng-service practical actualization
 - current self-driven closeout package:
-  broader theorem-side / IFC helper widening、source principal edge-row family hardening、mixed gate residual compression
+  broader theorem-side / diagnostics widening、source principal edge-row family hardening、mixed gate residual compression
 - remaining stop line:
   final source-surface handoff wording、final emitted-artifact / emitted-handoff schema、final public witness/provider/artifact contract、stronger fairness / replay profile、exhaustive shared-space catalog
 
@@ -145,7 +145,7 @@
 ## current self-driven queue
 
 - `Package 58` helper / CLI hardening and broader coverage
-  - first widening slice `p09` carry-over、order-handoff helper CLI `surface_preview` actualization、order-handoff negative static-stop pair `p13 / p14` actualization、negative pair theorem-side Lean carry-over は済みであり、`samples/lean/` corpus と export/sync helper を基点に、残る broader theorem-side / IFC widening と helper/CLI hardening を narrow package で進める
+  - first widening slice `p09` carry-over、order-handoff helper CLI `surface_preview` actualization、order-handoff negative static-stop pair `p13 / p14` actualization、negative pair theorem-side Lean carry-over、IFC trio `typed_checker_hint_preview` narrow actualization は済みであり、`samples/lean/` corpus と export/sync helper を基点に、残る broader theorem-side / diagnostics widening を narrow package で進める
 - `Package 59` near-end closeout sync
   - mixed gate / user-spec residual を再圧縮し、snapshot / roadmap / traceability を同期する
 
@@ -165,3 +165,4 @@
 - 2026-04-19 17:05 JST — Package 58 の helper / CLI hardening として `run-source-sample` に order-handoff `surface_preview` を追加し、`p07 / p08 / p09` の companion / stage / serial reserve reached/guarded を `specs/examples/526` と snapshot / roadmap に同期した。
 - 2026-04-19 17:07 JST — Package 58 の order-handoff negative corpus tightening として `p13 / p14` late-join visibility drift pair を helper-local static stop に actualize し、`specs/examples/527` と snapshot / roadmap を remaining broader theorem-side widening 読みに更新した。
 - 2026-04-19 17:24 JST — Package 58 の broader theorem-side widening として `p13 / p14` late-join visibility negative pair を representative Lean sample set / committed Lean corpus に carry over し、`specs/examples/528` と snapshot / roadmap / traceability を helper/CLI hardening + IFC helper widening next 読みに更新した。
+- 2026-04-19 17:42 JST — Package 58 の IFC helper widening として `run-source-sample` に `typed_checker_hint_preview` を追加し、`p10 / p11 / p12` の `family_refs[] + coverage_state` mirror を `specs/examples/529` と snapshot / roadmap / traceability に同期した。

@@ -3757,3 +3757,17 @@
   - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
   - `samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/`
   - `samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/`
+
+## 2026-04-19 Package 58 IFC typed checker-hint preview addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/259-current-l2-checker-cluster-fixture-evidence-attachment-ready-typed-reason-family-hint-threshold.md`
+  - `specs/examples/260-current-l2-typed-reason-family-hint-ready-checker-cluster-hint-bundle-shape-comparison.md`
+  - `specs/examples/261-current-l2-checker-cluster-hint-bundle-shape-ready-typed-family-coverage-state-threshold.md`
+  - `specs/examples/523-current-l2-source-side-ifc-authority-prototype-pair-and-representative-lean-sample-set-widening.md`
+  - `specs/examples/524-current-l2-ifc-label-flow-negative-prototype-closeout-and-representative-lean-sample-set-widening.md`
+  - `specs/examples/529-current-l2-ifc-typed-checker-hint-preview-actualization.md`
+  - `docs/reports/0810-package58-ifc-checker-hint-preview-actualization.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`

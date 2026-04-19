@@ -339,6 +339,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["artifact_preview"]["model_check_concrete_carriers"][0]["obligation_kind"],
         "rollback_cut_non_interference"
     );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -395,5 +399,103 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
     assert_eq!(
         value["artifact_preview"]["proof_notebook_review_units"][0]["obligation_kind"],
         "rollback_cut_non_interference"
+    );
+}
+
+#[test]
+fn operational_cli_json_reports_ifc_authority_success_checker_hint_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        typed_prototype_sample_path("p10-typed-authorized-fingerprint-declassification.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["typed_checker_hint_preview"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["cluster_kind"],
+        "ifc_authority_release_cluster"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["case_label"],
+        "authority_sensitive_success"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["typed_reason_family_hint"]["family_refs"],
+        Value::Array(vec![
+            Value::String("ifc_label_model_family".into()),
+            Value::String("explicit_authority_declassification_family".into()),
+        ])
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["typed_reason_family_hint"]["coverage_state"],
+        "partial_cluster"
+    );
+}
+
+#[test]
+fn operational_cli_pretty_reports_ifc_authority_miss_checker_hint_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("typed_checker_hint_preview:"));
+    assert!(output.contains("status: reached"));
+    assert!(output.contains("cluster_kind: ifc_authority_release_cluster"));
+    assert!(output.contains("case_label: authority_miss_negative"));
+    assert!(output.contains("family_refs:"));
+    assert!(output.contains("ifc_label_model_family"));
+    assert!(output.contains("explicit_authority_declassification_family"));
+    assert!(output.contains("coverage_state: partial_cluster"));
+}
+
+#[test]
+fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        typed_prototype_sample_path("p12-typed-classified-fingerprint-publication-block.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["typed_checker_hint_preview"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["cluster_kind"],
+        "ifc_label_flow_cluster"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["case_label"],
+        "classified_to_public_negative"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["typed_reason_family_hint"]["family_refs"],
+        Value::Array(vec![
+            Value::String("ifc_label_model_family".into()),
+            Value::String("classified_public_label_flow_family".into()),
+        ])
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["typed_reason_family_hint"]["coverage_state"],
+        "full_cluster"
     );
 }

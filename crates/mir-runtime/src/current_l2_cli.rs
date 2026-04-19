@@ -221,6 +221,7 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
     artifact_preview: CurrentL2OperationalCliArtifactPreviewSummary,
     surface_preview: CurrentL2OperationalCliSurfacePreviewSummary,
+    typed_checker_hint_preview: CurrentL2OperationalCliTypedCheckerHintPreviewSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -231,6 +232,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             CurrentL2OperationalCliArtifactPreviewSummary::from_source_report(&report);
         let surface_preview =
             CurrentL2OperationalCliSurfacePreviewSummary::from_source_report(&report);
+        let typed_checker_hint_preview =
+            CurrentL2OperationalCliTypedCheckerHintPreviewSummary::from_source_report(
+                &report,
+                &verification_preview,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -246,6 +252,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             verification_preview,
             artifact_preview,
             surface_preview,
+            typed_checker_hint_preview,
         }
     }
 }
@@ -728,6 +735,145 @@ impl CurrentL2OperationalCliSurfacePreviewSection {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
+    status: &'static str,
+    preview_kind: &'static str,
+    cluster_kind: Option<&'static str>,
+    case_label: Option<&'static str>,
+    typed_reason_family_hint: Option<CurrentL2OperationalCliTypedReasonFamilyHintPreview>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+    ) -> Self {
+        match report.sample_id.as_str() {
+            "p10-typed-authorized-fingerprint-declassification"
+                if verification_preview.formal_hook_status == "reached" =>
+            {
+                Self {
+                    status: "reached",
+                    preview_kind: "sample_local_helper_preview",
+                    cluster_kind: Some("ifc_authority_release_cluster"),
+                    case_label: Some("authority_sensitive_success"),
+                    typed_reason_family_hint: Some(
+                        CurrentL2OperationalCliTypedReasonFamilyHintPreview {
+                            family_refs: vec![
+                                "ifc_label_model_family".to_string(),
+                                "explicit_authority_declassification_family".to_string(),
+                            ],
+                            coverage_state: "partial_cluster",
+                        },
+                    ),
+                    evidence_refs: typed_checker_hint_evidence_refs(&report.sample_id),
+                    compare_floor_refs: vec![
+                        "compare_floor:current_l2.ifc.source_side_authority_pair".to_string(),
+                        "compare_floor:current_l2.checker_cluster.typed_reason_family_hint"
+                            .to_string(),
+                        "compare_floor:current_l2.checker_cluster.typed_family_coverage_state"
+                            .to_string(),
+                    ],
+                    guard_refs: typed_checker_hint_guard_refs(true),
+                    kept_later_refs: typed_checker_hint_kept_later_refs(),
+                    guard_reason: None,
+                }
+            }
+            "p11-typed-unauthorized-fingerprint-release"
+                if verification_preview.formal_hook_status == "reached" =>
+            {
+                Self {
+                    status: "reached",
+                    preview_kind: "sample_local_helper_preview",
+                    cluster_kind: Some("ifc_authority_release_cluster"),
+                    case_label: Some("authority_miss_negative"),
+                    typed_reason_family_hint: Some(
+                        CurrentL2OperationalCliTypedReasonFamilyHintPreview {
+                            family_refs: vec![
+                                "ifc_label_model_family".to_string(),
+                                "explicit_authority_declassification_family".to_string(),
+                            ],
+                            coverage_state: "partial_cluster",
+                        },
+                    ),
+                    evidence_refs: typed_checker_hint_evidence_refs(&report.sample_id),
+                    compare_floor_refs: vec![
+                        "compare_floor:current_l2.ifc.source_side_authority_pair".to_string(),
+                        "compare_floor:current_l2.checker_cluster.typed_reason_family_hint"
+                            .to_string(),
+                        "compare_floor:current_l2.checker_cluster.typed_family_coverage_state"
+                            .to_string(),
+                    ],
+                    guard_refs: typed_checker_hint_guard_refs(true),
+                    kept_later_refs: typed_checker_hint_kept_later_refs(),
+                    guard_reason: None,
+                }
+            }
+            "p12-typed-classified-fingerprint-publication-block"
+                if verification_preview.formal_hook_status == "reached" =>
+            {
+                Self {
+                    status: "reached",
+                    preview_kind: "sample_local_helper_preview",
+                    cluster_kind: Some("ifc_label_flow_cluster"),
+                    case_label: Some("classified_to_public_negative"),
+                    typed_reason_family_hint: Some(
+                        CurrentL2OperationalCliTypedReasonFamilyHintPreview {
+                            family_refs: vec![
+                                "ifc_label_model_family".to_string(),
+                                "classified_public_label_flow_family".to_string(),
+                            ],
+                            coverage_state: "full_cluster",
+                        },
+                    ),
+                    evidence_refs: typed_checker_hint_evidence_refs(&report.sample_id),
+                    compare_floor_refs: vec![
+                        "compare_floor:current_l2.ifc.source_side_label_flow_negative"
+                            .to_string(),
+                        "compare_floor:current_l2.checker_cluster.typed_reason_family_hint"
+                            .to_string(),
+                        "compare_floor:current_l2.checker_cluster.typed_family_coverage_state"
+                            .to_string(),
+                    ],
+                    guard_refs: typed_checker_hint_guard_refs(true),
+                    kept_later_refs: typed_checker_hint_kept_later_refs(),
+                    guard_reason: None,
+                }
+            }
+            _ => Self {
+                status: "guarded_not_reached",
+                preview_kind: "sample_local_helper_preview",
+                cluster_kind: None,
+                case_label: None,
+                typed_reason_family_hint: None,
+                evidence_refs: Vec::new(),
+                compare_floor_refs: vec![
+                    "compare_floor:current_l2.ifc.sample_local_checker_hint_guard_only"
+                        .to_string(),
+                ],
+                guard_refs: typed_checker_hint_guard_refs(false),
+                kept_later_refs: typed_checker_hint_kept_later_refs(),
+                guard_reason: Some(format!(
+                    "current typed checker-hint preview only actualizes the sample-local IFC trio (`p10` / `p11` / `p12`) after verification preview reaches runtime try-cut evidence for `{}`",
+                    report.sample_id
+                )),
+            },
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliTypedReasonFamilyHintPreview {
+    family_refs: Vec<String>,
+    coverage_state: &'static str,
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliNonAdmissibleMetadata {
     option_ref: String,
     subreason: &'static str,
@@ -894,6 +1040,8 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         "serial_scope_reserve",
         &summary.surface_preview.serial_scope_reserve,
     );
+    writeln!(output, "typed_checker_hint_preview:").expect("write to string");
+    render_typed_checker_hint_preview(&mut output, &summary.typed_checker_hint_preview);
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
     } else {
@@ -911,6 +1059,37 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     }
 
     output.trim_end().to_string()
+}
+
+fn typed_checker_hint_evidence_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "lean_foundation:CurrentL2IfcSecretExamples.lean".to_string(),
+        "helper_preview:typed_checker_hint_preview".to_string(),
+    ]
+}
+
+fn typed_checker_hint_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:sample_local_helper_preview_only".to_string(),
+            "guard:checker_adjacent_principal".to_string(),
+            "guard:stronger_typed_surface_not_principal".to_string(),
+            "guard:final_public_checker_payload_later".to_string(),
+        ]
+    } else {
+        vec!["guard:typed_checker_hint_preview_not_reached".to_string()]
+    }
+}
+
+fn typed_checker_hint_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_typed_source_principal".to_string(),
+        "kept_later:final_ifc_syntax".to_string(),
+        "kept_later:actual_checker_payload_family".to_string(),
+        "kept_later:checker_supported_kind_summary".to_string(),
+        "kept_later:final_public_verifier_contract".to_string(),
+    ]
 }
 
 fn display_path(path: &PathBuf) -> String {
@@ -980,6 +1159,44 @@ fn render_model_check_carriers(
     }
 }
 
+fn render_typed_checker_hint_preview(
+    output: &mut String,
+    preview: &CurrentL2OperationalCliTypedCheckerHintPreviewSummary,
+) {
+    writeln!(output, "  status: {}", preview.status).expect("write to string");
+    writeln!(output, "  preview_kind: {}", preview.preview_kind).expect("write to string");
+    if let Some(cluster_kind) = preview.cluster_kind {
+        writeln!(output, "  cluster_kind: {cluster_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  cluster_kind: none").expect("write to string");
+    }
+    if let Some(case_label) = preview.case_label {
+        writeln!(output, "  case_label: {case_label}").expect("write to string");
+    } else {
+        writeln!(output, "  case_label: none").expect("write to string");
+    }
+    match &preview.typed_reason_family_hint {
+        Some(hint) => {
+            writeln!(output, "  typed_reason_family_hint:").expect("write to string");
+            render_string_list(output, "family_refs", &hint.family_refs, 2);
+            writeln!(output, "    coverage_state: {}", hint.coverage_state)
+                .expect("write to string");
+        }
+        None => {
+            writeln!(output, "  typed_reason_family_hint: none").expect("write to string");
+        }
+    }
+    render_string_list(output, "evidence_refs", &preview.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &preview.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &preview.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &preview.kept_later_refs, 1);
+    if let Some(guard_reason) = &preview.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
 fn render_surface_preview_section(
     output: &mut String,
     label: &str,
@@ -1007,6 +1224,19 @@ fn render_surface_string_list(output: &mut String, label: &str, values: &[String
     writeln!(output, "    {label}:").expect("write to string");
     for value in values {
         writeln!(output, "    - {value}").expect("write to string");
+    }
+}
+
+fn render_string_list(output: &mut String, label: &str, values: &[String], base_indent: usize) {
+    let indent = "  ".repeat(base_indent);
+    if values.is_empty() {
+        writeln!(output, "{indent}{label}: []").expect("write to string");
+        return;
+    }
+
+    writeln!(output, "{indent}{label}:").expect("write to string");
+    for value in values {
+        writeln!(output, "{indent}- {value}").expect("write to string");
     }
 }
 
