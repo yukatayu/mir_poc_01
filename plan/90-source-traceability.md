@@ -295,6 +295,20 @@
   - `crates/mir-runtime/tests/current_l2_next_reopen_sequencing_manifest.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
 
+## 2026-04-20 Phase 6 shared single attachment frame first-package helper mirror addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/313-current-l2-phase6-parser-side-follow-up-package-sequencing-ready-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-comparison.md`
+  - `specs/examples/314-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-ready-minimal-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-threshold.md`
+  - `specs/examples/315-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-ready-fixed-subset-source-sample-corpus-scope-and-file-layout-comparison.md`
+  - `specs/examples/316-current-l2-fixed-subset-source-sample-corpus-scope-and-file-layout-ready-minimal-fixed-subset-source-sample-corpus-scope-and-file-layout-threshold.md`
+  - `specs/examples/560-current-l2-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-threshold-helper-mirror.md`
+  - `docs/reports/0842-package87-phase6-parser-second-tranche-shared-single-attachment-frame-first-package-ratchet.md`
+  - `crates/mir-ast/src/current_l2.rs`
+  - `crates/mir-ast/src/lib.rs`
+  - `crates/mir-ast/tests/current_l2_shared_single_attachment_frame_manifest.rs`
+  - `crates/mir-ast/tests/current_l2_stage3_multiline_attachment_spike.rs`
+
 ## 2026-04-18 FAQ 007 current-status and last-mile-gate addendum
 
 - `faq_007.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。

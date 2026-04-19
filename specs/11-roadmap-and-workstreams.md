@@ -685,6 +685,12 @@ actual-adoption floor では、
   - `current_l2_phase6_parser_side_followup_package_sequencing_manifest()`
   - `sequencing_kind + fixed_entry_criteria_refs + selected_next_package_ref + deferred_reopen_refs + minimum_guard_refs + next_comparison_target_ref + kept_later_refs` sequencing minimum mirror
   - Package 86 phase6-parser-side-follow-up-package-sequencing ratchet close、Package 87 phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet next
+- phase6 parser second-tranche shared single attachment frame first-package threshold helper mirror:
+  `specs/examples/560`
+  - `CurrentL2SharedSingleAttachmentFrameManifest`
+  - `current_l2_shared_single_attachment_frame_manifest()`
+  - `carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` shared single attachment frame minimum mirror
+  - Package 87 phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet close、Package 88 fixed-subset-source-sample-corpus-scope-and-file-layout ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

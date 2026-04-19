@@ -15,6 +15,12 @@ A narrow second tranche is also fixed for:
 - stage 3 declaration-side admit attached slot
 - stage 3 minimal predicate fragment
 
+The next parser-side follow-up package is fixed as:
+- stage 3 shared single attachment frame
+  - option-local `admit:` multiline extraction
+  - request-local `require:` / `ensure:` multiline extraction
+  - existing predicate fragment parser reuse
+
 These stage 3 parsers are non-production reopen-package carriers, not a final
 public parser API.
 

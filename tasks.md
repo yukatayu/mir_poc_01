@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 02:35 JST
+最終更新: 2026-04-20 03:10 JST
 
 ## この文書について
 
@@ -27,7 +27,7 @@
   IFC / taint、capture / lifetime、simple cost を
   first strong typing layer の principal target に置く読みへ同期済みである。
 - したがって、remaining work の主眼は次に移っている。
-  - shared single attachment frame を multiline extraction bridge + existing predicate fragment parser reuse の narrow code cut で `mir_ast::current_l2` へ actualize する phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet
+  - fixed-subset source-sample corpus の scope / directory / naming / non-goal minimum を narrow actualization する fixed-subset-source-sample-corpus-scope-and-file-layout ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -57,7 +57,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `87` phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet | Package 86 close の次段として、shared single attachment frame を multiline extraction bridge + existing predicate fragment parser reuse の narrow code cut で `mir_ast::current_l2` へどこまで actualize するか | `M` | `Macro 6/7` | multiline extraction bridge だけを crate surface へ actualize し、request clause suite / perform head / richer diagnostics / source-sample path は retained-later に残す | `carrier_kind / accepted_surface_refs / code_anchor_refs / retained_later_refs` の narrow manifest と stage3 multiline anchor tests で Package 87 を閉じられる |
+| `88` fixed-subset-source-sample-corpus-scope-and-file-layout ratchet | Package 87 close の次段として、repo-root `samples/current-l2/` flat `.txt` layer の scope / directory / naming / non-goal minimum をどこまで actualize するか | `M` | `Macro 6/7` | source corpus を第 3 層として repo-root `samples/current-l2/` flat `.txt` layer に保ち、initial cluster / naming / non-goal だけを narrow actualization し、mapping matrix / actual sample content / parser-to-`Program` lowering は retained-later に残す | `scope_kind / source_cluster_refs / directory_ref / file_layout_ref / file_extension_policy / sample_id_policy / non_goal_refs` の narrow manifest か source-corpus policy anchor で Package 88 を閉じられる |
 
 ## recently closed package note
 
@@ -512,16 +512,30 @@
 ### Package 87 — phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet
 
 - current reading:
-  next active line。shared single attachment frame を multiline extraction bridge + existing predicate fragment parser reuse の narrow code cut で `mir_ast::current_l2` へ actualize し、request clause suite / perform head / source-sample path を retained-later に残す。
+  close 済み。shared single attachment frame の multiline extraction bridge minimum を `CurrentL2SharedSingleAttachmentFrameManifest` と stage3 multiline attachment spike 群へ actualize し、request clause suite / perform head / source-sample path は retained-later に残す。
 - evidence anchor:
   `specs/examples/313`
   `specs/examples/314`
-  `specs/examples/559`
+  `specs/examples/560`
+  `docs/reports/0842`
 - stop line:
   request clause suite publicization
   perform head final public parser API
   source-sample corpus scope / file layout
   final public parser / checker / runtime surface
+
+### Package 88 — fixed-subset-source-sample-corpus-scope-and-file-layout ratchet
+
+- current reading:
+  next active line。repo-root `samples/current-l2/` flat `.txt` layer の scope / directory / naming / non-goal minimum を actualize し、representative / fixture / source の第 3 層として保つ。
+- evidence anchor:
+  `specs/examples/315`
+  `specs/examples/316`
+- stop line:
+  representative / fixture / source mapping matrix
+  actual sample file content
+  parser-to-`Program` lowering
+  bless / regression policy
 
 ## research-discovery items
 
@@ -554,4 +568,4 @@
 
 ## next reopen order
 
-1. Package 87 で phase6-parser-second-tranche-shared-single-attachment-frame-first-package ratchet を進める。
+1. Package 88 で fixed-subset-source-sample-corpus-scope-and-file-layout ratchet を進める。

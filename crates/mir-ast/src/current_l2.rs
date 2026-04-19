@@ -83,6 +83,47 @@ pub fn current_l2_second_tranche_manifest() -> &'static CurrentL2SecondTrancheMa
     &CURRENT_L2_SECOND_TRANCHE_MANIFEST
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2SharedSingleAttachmentFrameManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_ACCEPTED_SURFACE_REFS: &[&str] = &[
+    "stage3_option_admit_multiline_extraction_surface",
+    "stage3_request_clause_multiline_extraction_surface",
+    "stage3_minimal_predicate_fragment_surface",
+];
+
+const CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_CODE_ANCHOR_REFS: &[&str] = &[
+    "mir_ast_current_l2_module",
+    "mir_ast_crate_surface_note",
+    "stage3_multiline_attachment_tests",
+];
+
+const CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_RETAINED_LATER_REFS: &[&str] = &[
+    "request_clause_suite_publicization",
+    "perform_head_final_public_parser_api",
+    "span_rich_diagnostics",
+    "final_grammar",
+    "fixed_subset_source_sample_corpus_scope_and_file_layout",
+];
+
+pub const CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_MANIFEST:
+    CurrentL2SharedSingleAttachmentFrameManifest = CurrentL2SharedSingleAttachmentFrameManifest {
+    carrier_kind: "current_l2_nonproduction_parser_followup_carrier",
+    accepted_surface_refs: CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_ACCEPTED_SURFACE_REFS,
+    code_anchor_refs: CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_CODE_ANCHOR_REFS,
+    retained_later_refs: CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_RETAINED_LATER_REFS,
+};
+
+pub fn current_l2_shared_single_attachment_frame_manifest()
+-> &'static CurrentL2SharedSingleAttachmentFrameManifest {
+    &CURRENT_L2_SHARED_SINGLE_ATTACHMENT_FRAME_MANIFEST
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Stage1DeclGuardSlot {
     pub surface_text: String,
