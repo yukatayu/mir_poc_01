@@ -1,11 +1,11 @@
 # CurrentL2LabelModel.lean
 
-## Summary
+## 要約
 
-- Two-point IFC label model with explicit authority-sensitive declassification lemmas.
+- 明示的 authority-sensitive declassification lemma を持つ two-point IFC label model。
 
-## Why This File Exists
+## このファイルを置く理由
 
-- This file is the first actual Lean fragment for Package 56. It does not expose final source syntax; it pins the minimal label semantics and authority-sensitive facts that the checker-adjacent IFC line relies on.
-- Unlike the generated current-L2 sample stubs, this file contains actual small proofs rather than `sorry`.
-- It is still helper-local and non-production. The goal is to pin the first mechanization-ready core, not to freeze the final public type system or verifier contract.
+- Package 56 の最初の actual Lean fragment である。final source syntax は出さず、checker-adjacent IFC line が依拠する 最小 label semantics と authority-sensitive fact を固定する。
+- 生成された current-L2 sample stub と違い、このファイルは `sorry` ではなく実際に小さな証明を含む。
+- ただし依然として helper-local / non-production cut に留める。目的は first mechanization-ready core を固定することであり、final public type system や verifier contract を凍らせることではない。

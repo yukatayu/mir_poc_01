@@ -41,7 +41,7 @@
   docs-first comparison と boundary planning で進める
 - current line:
   `Macro 5 final-layer closeout packages active`
-  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor は close 済みである。corrected runnable floor と representative theorem quartet actual Lean execution は reached 済みであり、`specs/examples/520` と `521` により next active line は layered strong typing / IFC first-fragment、helper / CLI hardening and broader coverage、later mixed/user-spec residual と読み、Lean formal skeleton / proof obligations first slice は committed `samples/lean/` corpus に actualize 済みと読む）
+  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor は close 済みである。corrected runnable floor と representative theorem quartet actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522` により next active line は layered strong typing / IFC first-fragment、helper / CLI hardening and broader coverage、later mixed/user-spec residual と読み、Lean formal skeleton / proof obligations first slice と IFC secret valid/invalid concrete example は committed `samples/lean/` corpus に actualize 済みと読む）
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定した上で、post-runnable closeout package と mixed-gate package を narrow に閉じる
 

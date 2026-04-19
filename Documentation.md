@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype nonet は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative theorem quartet `e5 / p06 / p07 / p08` actual Lean execution は reached 済みであり、`specs/examples/520` と `521` により current remaining active line は layered strong typing / IFC first-fragment、helper/CLI hardening and broader coverage、later mixed/user-spec residual として読み直し、Lean formal skeleton / proof obligations first slice は `samples/lean/` committed corpus に actualize 済みと読む）
+    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative theorem quartet `e5 / p06 / p07 / p08` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522` により current remaining active line は layered strong typing / IFC first-fragment、helper/CLI hardening and broader coverage、later mixed/user-spec residual として読み直し、Lean formal skeleton / proof obligations first slice と IFC secret valid/invalid concrete example は `samples/lean/` committed corpus に actualize 済みと読む）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -67,7 +67,7 @@
 - repo-local Lean sample corpus:
   `samples/lean/foundations/` に actual small proof fragment、`samples/lean/current-l2/` に representative theorem quartet generated stub corpus、`samples/lean/manifest.json` に verification summary を置く current cut がある
   - generated current-L2 theorem stub は `sorry` を含むため、artifact well-formedness / bridge alignment evidence として読む
-  - `foundations/` は IFC / proof-skeleton first fragment の actual small proof として読む
+  - `foundations/` は IFC label model、secret-key valid/invalid concrete example、proof-skeleton first fragment の actual small proof として読む
 - auditable-authority-witness strengthening actualization:
   `p07` reached、`p08/p05` guard-only の minimal witness core を final public witness schema に上げず、helper-local strengthening manifest に actualize する current cut がある
 - delegated-rng-service practical actualization:

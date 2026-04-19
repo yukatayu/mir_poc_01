@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 14:45 JST
+最終更新: 2026-04-19 15:32 JST
 
 ## この文書について
 
@@ -18,6 +18,7 @@
 - representative theorem quartet `e5 / p06 / p07 / p08` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
 - `samples/lean/foundations/` には
   - `CurrentL2LabelModel.lean`
+  - `CurrentL2IfcSecretExamples.lean`
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
@@ -51,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `56` layered strong typing / IFC first-fragment | strong typing / IFC をどこまで current checker/theorem split に入れるか | `M` | `Macro 5` | checker-adjacent principal + layered stack + `CurrentL2LabelModel.lean` first fragment の上に、secret-key valid/invalid と explicit authority sample family を足す | source-side corpus / docs / tests が揃い、Problem 1 closeout debt を 1 段狭める |
+| `56` layered strong typing / IFC first-fragment | strong typing / IFC をどこまで current checker/theorem split に入れるか | `M` | `Macro 5` | checker-adjacent principal + layered stack + `CurrentL2LabelModel.lean` / `CurrentL2IfcSecretExamples.lean` を維持しつつ、explicit authority source-side sample family と label-flow negative を足す | source-side corpus / docs / tests が揃い、Problem 1 closeout debt を 1 段狭める |
 | `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative quartet からどう widen するか | `M` | `Macro 5/7` | export/sync helper と `samples/lean/` committed corpus を基点に、broader theorem-side / IFC / order-handoff widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、IFC / proof package を concretize する |
 | `59` near-end closeout sync | mixed gate / true user-spec residual をどこまで narrow に残すか | `S-M` | `Macro 5/6/7` | final public completion を凍らせず、closeout-ready snapshot に再圧縮する | `progress.md` / `tasks.md` / `plan/` / traceability が stale wording を残さない |
 
@@ -77,9 +78,9 @@
 - current reading:
   stronger typed surface は early source principal に上げず、checker-adjacent principal + layered stack に保つ。
 - actualized floor:
-  `CurrentL2LabelModel.lean` により two-point label model / explicit authority-sensitive declassification reading は Lean-side actual fragment として固定済み。
+  `CurrentL2LabelModel.lean` と `CurrentL2IfcSecretExamples.lean` により two-point label model / secret-key valid-invalid / explicit authority-sensitive declassification reading は Lean-side actual fragment として固定済み。
 - target corpus:
-  secret-key valid/invalid、explicit declassification authority、label-flow negative
+  explicit declassification authority の source-side sample family、label-flow negative、checker-fragment corpus integration
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -128,6 +129,6 @@
 
 ## next reopen order
 
-1. Package 56 の source-side corpus を 1 つ actualize する。
+1. Package 56 の source-side explicit authority / label-flow corpus を 1 つ actualize する。
 2. Package 58 で `samples/lean/` を使う broader coverage / helper hardening を narrow package で進める。
 3. Package 59 で closeout-ready snapshot を再圧縮する。

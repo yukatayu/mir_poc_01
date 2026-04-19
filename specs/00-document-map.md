@@ -127,6 +127,9 @@
 - `specs/examples/521-current-l2-lean-sample-corpus-and-first-foundations.md`
   - `samples/lean/` を current repo-local Lean evidence bucket として固定し、actual small proof fragment と generated theorem stub corpus の読み分け、Package 56/57 の first actual fragment を整理する補助文書。
   - final theorem discharge や final public theorem contract を固定するものではなく、helper-local mechanization floor と committed Lean sample corpus を読むための anchor である。
+- `specs/examples/522-current-l2-ifc-secret-valid-invalid-foundation-and-japanese-lean-corpus-sync.md`
+  - Package 56 の reopened IFC line を `CurrentL2IfcSecretExamples.lean` まで進め、secret-key valid/invalid concrete example と日本語 Lean corpus explanation sync を current mechanization-ready floor として整理する補助文書。
+  - final typed source principal や final IFC syntax を固定するものではなく、helper-local IFC concrete example と sample-facing wording sync を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

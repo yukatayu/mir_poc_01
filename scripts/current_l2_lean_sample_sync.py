@@ -42,10 +42,10 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
             sample_id="e5-underdeclared-lineage",
             sample_argument="e5-underdeclared-lineage",
             host_plan_path=None,
-            summary="Static underdeclared omission sample with two representative proof obligations.",
+            summary="代表的な 2 本の proof obligation を持つ static underdeclared omission sample。",
             rationale=(
-                "This is the narrow static-side anchor for current theorem review-unit and "
-                "Lean-stub generation."
+                "current theorem review-unit と Lean stub 生成を結ぶ、"
+                "最小の static-side anchor として読む。"
             ),
         ),
         CurrentL2ExportSpec(
@@ -56,10 +56,10 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
             ),
             host_plan_path=REPO_ROOT
             / "samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.host-plan.json",
-            summary="Typed/theorem bridge prototype for proof-owner handoff.",
+            summary="proof owner handoff を表す typed/theorem bridge prototype。",
             rationale=(
-                "This is the current typed/theorem representative prototype. It stays bridge-floor "
-                "evidence rather than the final strong typed calculus."
+                "current typed/theorem representative prototype であり、"
+                "final strong typed calculus ではなく bridge-floor evidence に留める。"
             ),
         ),
         CurrentL2ExportSpec(
@@ -70,9 +70,9 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
             ),
             host_plan_path=REPO_ROOT
             / "samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.host-plan.json",
-            summary="Authoritative-room prototype for late join with visible published history.",
+            summary="公開済み history を過去として見せる late join の authoritative-room prototype。",
             rationale=(
-                "This is the order/handoff representative runtime prototype for late-join semantics."
+                "late-join semantics を current order/handoff line で見る representative runtime prototype として読む。"
             ),
         ),
         CurrentL2ExportSpec(
@@ -83,9 +83,9 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
             ),
             host_plan_path=REPO_ROOT
             / "samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.host-plan.json",
-            summary="Authoritative-room prototype for stale reconnect fail-then-refresh.",
+            summary="stale reconnect を fail-then-refresh で扱う authoritative-room prototype。",
             rationale=(
-                "This is the order/handoff representative runtime prototype for stale reconnect handling."
+                "stale reconnect handling を current order/handoff line で見る representative runtime prototype として読む。"
             ),
         ),
     ]
@@ -95,11 +95,11 @@ def foundation_specs() -> list[FoundationSpec]:
     return [
         FoundationSpec(
             filename="CurrentL2LabelModel.lean",
-            summary="Two-point IFC label model with explicit authority-sensitive declassification lemmas.",
+            summary="明示的 authority-sensitive declassification lemma を持つ two-point IFC label model。",
             explanation=(
-                "This file is the first actual Lean fragment for Package 56. It does not expose final "
-                "source syntax; it pins the minimal label semantics and authority-sensitive facts that the "
-                "checker-adjacent IFC line relies on."
+                "Package 56 の最初の actual Lean fragment である。"
+                "final source syntax は出さず、checker-adjacent IFC line が依拠する "
+                "最小 label semantics と authority-sensitive fact を固定する。"
             ),
             source_text="""/-!
 current-l2 first IFC / label-model fragment
@@ -163,12 +163,94 @@ end CurrentL2
 """,
         ),
         FoundationSpec(
-            filename="CurrentL2ProofSkeleton.lean",
-            summary="Mechanization-ready proof-obligation skeleton for review-unit to Lean-stub alignment.",
+            filename="CurrentL2IfcSecretExamples.lean",
+            summary="secret-key valid/invalid と explicit authority declassification を固定する IFC concrete example 集。",
             explanation=(
-                "This file is the first actual Lean fragment for Package 57. It proves structural facts "
-                "about the repo-local review-unit to Lean-stub bridge. It does not claim the domain "
-                "obligations are solved; it fixes the shape of the mechanization-ready carrier."
+                "Package 56 の first-fragment を label model の定義だけで止めず、"
+                "secret-key valid/invalid と explicit authority declassification を "
+                "mechanization-ready な concrete example として置く。"
+            ),
+            source_text="""/-!
+current-l2 IFC secret examples fragment
+
+This file keeps the first concrete IFC examples for Package 56 in one self-contained
+Lean artifact. The goal is not the final public typed surface. The goal is to make the
+secret-key valid/invalid reading executable at the proof-fragment level.
+-/
+
+namespace CurrentL2IfcSecretExamples
+
+inductive SecurityLabel where
+  | low
+  | high
+deriving DecidableEq, Repr
+
+open SecurityLabel
+
+def flowsTo : SecurityLabel → SecurityLabel → Prop
+  | low, _ => True
+  | high, high => True
+  | high, low => False
+
+def CanDeclassify (hasAuthority : Bool) (fromLabel toLabel : SecurityLabel) : Prop :=
+  hasAuthority = true ∨ flowsTo fromLabel toLabel
+
+structure Labeled (label : SecurityLabel) (α : Type) where
+  value : α
+
+abbrev SecretKey := Labeled high String
+abbrev SecretFingerprint := Labeled high String
+abbrev PublicFingerprint := Labeled low String
+
+def fingerprint (key : SecretKey) : SecretFingerprint :=
+  { value := "fp:" ++ key.value }
+
+def declassify
+    (hasAuthority : Bool)
+    {fromLabel toLabel : SecurityLabel}
+    (_proof : CanDeclassify hasAuthority fromLabel toLabel)
+    (value : Labeled fromLabel α) :
+    Labeled toLabel α :=
+  { value := value.value }
+
+theorem no_secret_release_without_authority :
+    ¬ CanDeclassify false high low := by
+  simp [CanDeclassify, flowsTo]
+
+theorem authorized_secret_release_is_available :
+    CanDeclassify true high low := by
+  simp [CanDeclassify]
+
+def liveSecretKey : SecretKey :=
+  { value := "sk_live" }
+
+def authorizedPublicFingerprint : PublicFingerprint :=
+  declassify true authorized_secret_release_is_available (fingerprint liveSecretKey)
+
+theorem authorized_public_fingerprint_keeps_payload :
+    authorizedPublicFingerprint.value = "fp:sk_live" := by
+  rfl
+
+theorem invalid_release_has_no_authority_proof :
+    ¬ ∃ _proof : CanDeclassify false high low, True := by
+  intro h
+  rcases h with ⟨proof, _⟩
+  exact no_secret_release_without_authority proof
+
+theorem valid_release_has_authority_proof :
+    ∃ _proof : CanDeclassify true high low, True := by
+  exact ⟨authorized_secret_release_is_available, trivial⟩
+
+end CurrentL2IfcSecretExamples
+""",
+        ),
+        FoundationSpec(
+            filename="CurrentL2ProofSkeleton.lean",
+            summary="review-unit と Lean-stub の整合を固定する mechanization-ready proof-obligation skeleton。",
+            explanation=(
+                "Package 57 の最初の actual Lean fragment である。"
+                "repo-local review-unit to Lean-stub bridge の構造的 fact を証明し、"
+                "domain obligation が解けたとは主張せず mechanization-ready carrier の shape を固定する。"
             ),
             source_text="""/-!
 current-l2 first proof-skeleton fragment
@@ -252,38 +334,38 @@ end CurrentL2
 def build_current_l2_explanation(spec: CurrentL2ExportSpec) -> str:
     return f"""# {spec.sample_id}
 
-## Summary
+## 要約
 
 - {spec.summary}
 - {spec.rationale}
 
-## What This Lean File Means
+## この Lean ファイルが意味すること
 
-- This file is generated from the repo-local theorem bridge and was accepted by `lean`.
-- The generated theorem bodies still contain `sorry`, so the current guarantee is **artifact well-formedness and bridge alignment**, not full mathematical discharge.
-- In concrete terms, the repo has verified that the review-unit to Lean-stub route produces syntactically valid Lean text for this sample and that the sample stays on the current theorem-first bridge floor.
-- This is **not the final public theorem contract** and not the final proof-object schema.
+- この Lean ファイルは repo-local theorem bridge から生成されたもので、`lean` に受理される。
+- 生成された theorem body にはまだ `sorry` が残るため、現時点の保証は **artifact well-formedness and bridge alignment** であり、完全な mathematical discharge ではない。
+- 具体的には、review-unit から Lean stub への route がこの sample に対して構文的に正しい Lean text を出し、sample が current theorem-first bridge floor に留まっていることを repo が確認した。
+- これは最終的な public theorem contract でも final proof-object schema でもない。
 
-## Why It Is Still Useful
+## それでも保持する理由
 
-- It preserves an inspectable snapshot of the actual Lean text attached to the current sample.
-- It makes the current proof obligations concrete enough to compare across `e5`, `p06`, `p07`, and `p08`.
-- It keeps the distinction between "Lean accepted the generated file" and "the domain theorem is fully proved" explicit.
+- current sample に結び付いた actual Lean text を inspectable snapshot として保持できる。
+- `e5`、`p06`、`p07`、`p08` のあいだで current proof obligation を具体物として比較できる。
+- 「Lean が生成ファイルを受理した」ことと「domain theorem が fully proved である」ことを明示的に分けたままにできる。
 """
 
 
 def build_foundation_explanation(spec: FoundationSpec) -> str:
     return f"""# {spec.filename}
 
-## Summary
+## 要約
 
 - {spec.summary}
 
-## Why This File Exists
+## このファイルを置く理由
 
 - {spec.explanation}
-- Unlike the generated current-L2 sample stubs, this file contains actual small proofs rather than `sorry`.
-- It is still helper-local and non-production. The goal is to pin the first mechanization-ready core, not to freeze the final public type system or verifier contract.
+- 生成された current-L2 sample stub と違い、このファイルは `sorry` ではなく実際に小さな証明を含む。
+- ただし依然として helper-local / non-production cut に留める。目的は first mechanization-ready core を固定することであり、final public type system や verifier contract を凍らせることではない。
 """
 
 
@@ -291,32 +373,33 @@ def build_top_level_readme() -> str:
     current_ids = ", ".join(spec.sample_id for spec in current_l2_export_specs())
     return f"""# samples/lean
 
-This directory records what the repo currently validates with Lean in a repo-local, inspectable form.
+このディレクトリは、repo が現在 Lean でどこまで検証しているかを、
+repo-local かつ inspectable な形で保存する。
 
-## Layout
+## 構成
 
 - `foundations/`
-  - small self-contained Lean files with actual proofs
-  - current focus: IFC / label-model first fragment and proof-skeleton / obligation-shape first fragment
+  - 実際に小さな証明を含む self-contained Lean file を置く
+  - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、proof-skeleton / obligation-shape first fragment である
 - `current-l2/`
-  - generated Lean theorem stubs for the representative theorem quartet: {current_ids}
-  - these files are accepted by Lean but still contain `sorry`
+  - 現在の current-L2 定理ブリッジから representative theorem quartet `{current_ids}` 向けに生成された Lean theorem stub を置く
+  - これらの file は Lean に受理されるが、まだ `sorry` を含む
 
-## Reading Rule
+## 読み方
 
-- `foundations/` shows the **mechanization-ready core** that is already precise enough to prove small facts.
-- `current-l2/` shows the **actual emitted theorem bridge surface** that the repo generates for representative samples.
-- The generated current-L2 stubs demonstrate artifact alignment and Lean acceptance, not completed theorem discharge.
+- `foundations/` は、すでに小さな fact を証明できる **mechanization-ready core** を示す。
+- `current-l2/` は、repo が representative sample から生成する **actual emitted theorem bridge surface** を示す。
+- generated current-L2 stub は artifact alignment と Lean acceptance を示すのであって、completed theorem discharge を示すものではない。
 
-## Rebuild
+## 再生成
 
-Run:
+次を実行する:
 
 ```bash
 python3 scripts/current_l2_lean_sample_sync.py
 ```
 
-This regenerates the committed Lean sample corpus and verifies it with `lean`.
+これにより committed Lean sample corpus を再生成し、`lean` で検証する。
 """
 
 
@@ -488,8 +571,8 @@ def sync_samples() -> dict[str, object]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Regenerate the committed Lean sample corpus for the current L2 theorem bridge "
-            "and first IFC/proof-skeleton fragments."
+            "current L2 theorem bridge と first IFC / proof-skeleton / secret-example fragments "
+            "に対する committed Lean sample corpus を再生成する。"
         )
     )
     return parser.parse_args()

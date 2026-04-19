@@ -1,19 +1,19 @@
 # p08-dice-stale-reconnect-refresh
 
-## Summary
+## 要約
 
-- Authoritative-room prototype for stale reconnect fail-then-refresh.
-- This is the order/handoff representative runtime prototype for stale reconnect handling.
+- stale reconnect を fail-then-refresh で扱う authoritative-room prototype。
+- stale reconnect handling を current order/handoff line で見る representative runtime prototype として読む。
 
-## What This Lean File Means
+## この Lean ファイルが意味すること
 
-- This file is generated from the repo-local theorem bridge and was accepted by `lean`.
-- The generated theorem bodies still contain `sorry`, so the current guarantee is **artifact well-formedness and bridge alignment**, not full mathematical discharge.
-- In concrete terms, the repo has verified that the review-unit to Lean-stub route produces syntactically valid Lean text for this sample and that the sample stays on the current theorem-first bridge floor.
-- This is **not the final public theorem contract** and not the final proof-object schema.
+- この Lean ファイルは repo-local theorem bridge から生成されたもので、`lean` に受理される。
+- 生成された theorem body にはまだ `sorry` が残るため、現時点の保証は **artifact well-formedness and bridge alignment** であり、完全な mathematical discharge ではない。
+- 具体的には、review-unit から Lean stub への route がこの sample に対して構文的に正しい Lean text を出し、sample が current theorem-first bridge floor に留まっていることを repo が確認した。
+- これは最終的な public theorem contract でも final proof-object schema でもない。
 
-## Why It Is Still Useful
+## それでも保持する理由
 
-- It preserves an inspectable snapshot of the actual Lean text attached to the current sample.
-- It makes the current proof obligations concrete enough to compare across `e5`, `p06`, `p07`, and `p08`.
-- It keeps the distinction between "Lean accepted the generated file" and "the domain theorem is fully proved" explicit.
+- current sample に結び付いた actual Lean text を inspectable snapshot として保持できる。
+- `e5`、`p06`、`p07`、`p08` のあいだで current proof obligation を具体物として比較できる。
+- 「Lean が生成ファイルを受理した」ことと「domain theorem が fully proved である」ことを明示的に分けたままにできる。

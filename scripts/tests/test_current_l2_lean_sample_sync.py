@@ -32,6 +32,7 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             filenames,
             {
                 "CurrentL2LabelModel.lean",
+                "CurrentL2IfcSecretExamples.lean",
                 "CurrentL2ProofSkeleton.lean",
             },
         )
@@ -47,7 +48,27 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
 
         self.assertIn("sorry", explanation)
         self.assertIn("artifact well-formedness", explanation)
-        self.assertIn("not the final public theorem contract", explanation)
+        self.assertIn("これは最終的な public theorem contract", explanation)
+        self.assertIn("この Lean ファイルは", explanation)
+
+    def test_foundation_explanation_is_written_in_japanese(self) -> None:
+        spec = next(
+            spec
+            for spec in sync.foundation_specs()
+            if spec.filename == "CurrentL2LabelModel.lean"
+        )
+
+        explanation = sync.build_foundation_explanation(spec)
+
+        self.assertIn("このファイル", explanation)
+        self.assertIn("実際に小さな証明", explanation)
+
+    def test_top_level_readme_is_written_in_japanese(self) -> None:
+        readme = sync.build_top_level_readme()
+
+        self.assertIn("このディレクトリ", readme)
+        self.assertIn("現在の current-L2 定理ブリッジ", readme)
+        self.assertIn("実際に小さな証明", readme)
 
 
 if __name__ == "__main__":

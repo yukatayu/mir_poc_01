@@ -1,28 +1,29 @@
 # samples/lean
 
-This directory records what the repo currently validates with Lean in a repo-local, inspectable form.
+このディレクトリは、repo が現在 Lean でどこまで検証しているかを、
+repo-local かつ inspectable な形で保存する。
 
-## Layout
+## 構成
 
 - `foundations/`
-  - small self-contained Lean files with actual proofs
-  - current focus: IFC / label-model first fragment and proof-skeleton / obligation-shape first fragment
+  - 実際に小さな証明を含む self-contained Lean file を置く
+  - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、proof-skeleton / obligation-shape first fragment である
 - `current-l2/`
-  - generated Lean theorem stubs for the representative theorem quartet: e5-underdeclared-lineage, p06-typed-proof-owner-handoff, p07-dice-late-join-visible-history, p08-dice-stale-reconnect-refresh
-  - these files are accepted by Lean but still contain `sorry`
+  - 現在の current-L2 定理ブリッジから representative theorem quartet `e5-underdeclared-lineage, p06-typed-proof-owner-handoff, p07-dice-late-join-visible-history, p08-dice-stale-reconnect-refresh` 向けに生成された Lean theorem stub を置く
+  - これらの file は Lean に受理されるが、まだ `sorry` を含む
 
-## Reading Rule
+## 読み方
 
-- `foundations/` shows the **mechanization-ready core** that is already precise enough to prove small facts.
-- `current-l2/` shows the **actual emitted theorem bridge surface** that the repo generates for representative samples.
-- The generated current-L2 stubs demonstrate artifact alignment and Lean acceptance, not completed theorem discharge.
+- `foundations/` は、すでに小さな fact を証明できる **mechanization-ready core** を示す。
+- `current-l2/` は、repo が representative sample から生成する **actual emitted theorem bridge surface** を示す。
+- generated current-L2 stub は artifact alignment と Lean acceptance を示すのであって、completed theorem discharge を示すものではない。
 
-## Rebuild
+## 再生成
 
-Run:
+次を実行する:
 
 ```bash
 python3 scripts/current_l2_lean_sample_sync.py
 ```
 
-This regenerates the committed Lean sample corpus and verifies it with `lean`.
+これにより committed Lean sample corpus を再生成し、`lean` で検証する。

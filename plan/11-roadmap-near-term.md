@@ -32,6 +32,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 | `51...54` | `docs/reports/0796...0799` + `specs/examples/516...519` | toolchain probe / reopen manifest、model-check public-seam compression、representative theorem quartet actual Lean execution |
 | `55` | `docs/reports/0801` + `specs/examples/520` | final-layer closeout defaults and reopened self-driven queue |
 | `57 first slice` | `docs/reports/0802` + `specs/examples/521` | committed Lean sample corpus、IFC first fragment、proof-skeleton / proof-obligation first foundations |
+| `56 concrete slice` | `docs/reports/0803` + `specs/examples/522` | IFC secret valid/invalid concrete example、`samples/lean/` 日本語 explanation sync、Package 56 narrowed queue |
 
 ## active self-driven packages
 
@@ -49,12 +50,13 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
   `specs/examples/475`
   `specs/examples/520`
   `specs/examples/521`
+  `specs/examples/522`
 - current recommendation:
-  checker-adjacent principal + layered stack を維持し、stronger typed surface early principal promotion はしない。`CurrentL2LabelModel.lean` により Lean-side first fragment は actualize 済みと読む。
+  checker-adjacent principal + layered stack を維持し、stronger typed surface early principal promotion はしない。`CurrentL2LabelModel.lean` と `CurrentL2IfcSecretExamples.lean` により Lean-side first fragment と secret valid/invalid concrete example は actualize 済みと読む。
 - target corpus:
   `p06-typed-proof-owner-handoff`
-  secret-key / label-flow valid-invalid
-  explicit declassification authority
+  explicit declassification authority の source-side sample family
+  label-flow negative
 - stop line:
   final typed source principal
   final IFC syntax
@@ -78,7 +80,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current source:
-  `specs/examples/516...521`
+  `specs/examples/516...522`
 - current recommendation:
   actual Lean execution floor と committed `samples/lean/` corpus を helper / CLI hardening、broader theorem-side / IFC / order-handoff negative corpus wideningに使う。
 - promotion rule:

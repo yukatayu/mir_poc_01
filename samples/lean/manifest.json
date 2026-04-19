@@ -16,6 +16,19 @@
     },
     {
       "kind": "foundation",
+      "filename": "CurrentL2IfcSecretExamples.lean",
+      "lean_path": "samples/lean/foundations/CurrentL2IfcSecretExamples.lean",
+      "explanation_path": "samples/lean/foundations/CurrentL2IfcSecretExamples.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "foundation",
       "filename": "CurrentL2ProofSkeleton.lean",
       "lean_path": "samples/lean/foundations/CurrentL2ProofSkeleton.lean",
       "explanation_path": "samples/lean/foundations/CurrentL2ProofSkeleton.md",

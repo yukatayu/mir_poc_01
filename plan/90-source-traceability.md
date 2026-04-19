@@ -3661,10 +3661,13 @@
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
   - `specs/examples/521-current-l2-lean-sample-corpus-and-first-foundations.md`
+  - `specs/examples/522-current-l2-ifc-secret-valid-invalid-foundation-and-japanese-lean-corpus-sync.md`
   - `docs/reports/0802-lean-sample-corpus-and-ifc-first-fragment.md`
+  - `docs/reports/0803-package56-ifc-prototype-and-japanese-sample-docs.md`
   - `samples/lean/README.md`
   - `samples/lean/manifest.json`
   - `samples/lean/foundations/CurrentL2LabelModel.lean`
+  - `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`
   - `samples/lean/foundations/CurrentL2ProofSkeleton.lean`
   - `samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean`
   - `samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean`

@@ -461,6 +461,11 @@ actual-adoption floor では、
   - `samples/lean/current-l2/` representative theorem quartet generated stub corpus
   - `current_l2_emit_theorem_lean_bundle` + `current_l2_lean_sample_sync.py`
   - generated stub = artifact well-formedness / bridge alignment, not final discharge
+- IFC secret valid/invalid foundation and Japanese Lean corpus sync:
+  `specs/examples/522`
+  - `CurrentL2IfcSecretExamples.lean` actualize
+  - secret-key valid/invalid + explicit authority declassification concrete example
+  - `samples/lean/` explanation wording を日本語で同期
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
