@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-19 17:58 JST
+最終更新: 2026-04-19 18:08 JST
 
 ## この文書について
 
@@ -15,8 +15,8 @@
   `Macro 4 active on fixed authored/prototype floor`
   （authored sixteen と corrected prototype set `p01...p14` は runnable floor に乗っており、sample corpus は adequacy corpus として active に保つ）
 - current theory-lab line:
-  `Macro 5 final-layer closeout packages active`
-  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper に actualize 済みである。current active closeout line は near-end closeout sync と later mixed/user-spec residual に narrowed した）
+  `Macro 5 residual mixed-gate compression packages active`
+  （`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper theory / reserve / mixed-gate / actual-execution actualization floor は揃っている。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530`、`531` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening、near-end closeout sync after Package 58 は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper、snapshot / roadmap / traceability sync に actualize 済みである。current active closeout line は residual mixed-gate compression と later true user-spec residual に narrowed した）
 - current reserve integration line:
   `Macro 6 minimal working subset actual default / Macro 7 mixed`
   （authoritative room baseline、late join visible past、stale reconnect fail-then-refresh、witness/provider route-first line は current default に上がっているが、final public witness/provider/artifact contract、packaging、FFI、engine adapter、exhaustive catalog は still later に残る）
@@ -79,13 +79,13 @@
 | feature family | 現在地 | できていること | 次の意味ある一歩 |
 |---|---|---|---|
 | current-L2 runner / CLI | `S6` | authored sixteen、prototype set `p01...p14`、pretty/json CLI、regression floor、order-handoff `surface_preview`、order-handoff negative static stop | widened corpus は mixed gate か closeout package を 1 つ閉じる時だけ追加 |
-| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over、`p13 / p14` negative pair carry-over、result-object preview helper mirror | near-end closeout sync と theorem residual compression |
-| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`samples/lean/current-l2/` committed representative sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14`、toolchain pin、export/sync helper | near-end closeout sync と theorem residual compression |
-| model-check line | `S6` on docs, `S4-S5` on implementation | row-local property route、checker-artifact route、reopen threshold、public-seam compression、public-checker preview helper mirror | first settled property language / tool brand mixed gate と residual compression |
+| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over、`p13 / p14` negative pair carry-over、result-object preview helper mirror | theorem/model-check residual compression |
+| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`samples/lean/current-l2/` committed representative sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14`、toolchain pin、export/sync helper | theorem/model-check residual compression |
+| model-check line | `S6` on docs, `S4-S5` on implementation | row-local property route、checker-artifact route、reopen threshold、public-seam compression、public-checker preview helper mirror | theorem/model-check residual compression |
 | order / handoff line | `S6` | relation decomposition principal、surface actual adoption、source-wording route、stage-block secondary、serial-scope reserve surface、public-seam compression、CLI `surface_preview`、late-join negative static-stop pair | final source wording / emitted-artifact schema mixed gate と remaining residual compression |
 | shared-space minimal subset | `S6` | authoritative room baseline、vertical slice、witness/provider route/schema route、emitted-contract trace alignment、public-seam compression | final public contract mixed gate |
 | syntax / modality | `S6` on docs, `S3-S4` on implementation | semantic honesty principle、5 axes、partial basis keep、minimal companion + stage-block secondary | final foundation / final marker mixed gate へ行く前の source package hardening |
-| strong typing / IFC | `S6` on docs, `S5-S6` on implementation | layered stack、`LabelModel` / `Labeled` sketch、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、source-side IFC trio `p10 / p11 / p12`、sample-local `typed_checker_hint_preview` | near-end closeout sync と mixed gate compression |
+| strong typing / IFC | `S6` on docs, `S5-S6` on implementation | layered stack、`LabelModel` / `Labeled` sketch、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、source-side IFC trio `p10 / p11 / p12`、sample-local `typed_checker_hint_preview` | theorem/model-check residual compression |
 | proof spine / formalization | `S6` on docs, `S5` on implementation | multimodal dependent core direction、Lean-first roadmap、actual Lean execution representative sample floor、proof-skeleton first fragment | wider proof obligations と bridge-side helper/CLI hardening |
 | backend / packaging | `S2-S3` | repo-local CLI/tests/artifacts/compare floor | packaging / installed binary / FFI later |
 
@@ -100,7 +100,7 @@
 | corrected prototype line | 85% | 83% | 89% | 着手可能 |
 | Problem 1 typed / theorem / model-check | 95% | 92% | 84% | final public seams 以外は自走可能 |
 | Problem 2 order / handoff / room default | 89% | 87% | 66% | final public wording / contract 以外は自走可能 |
-| strong typing / IFC closeout | 88% | 82% | 65% | near-end closeout sync と mixed gate compression までは自走可能 |
+| strong typing / IFC closeout | 88% | 82% | 65% | theorem/model-check residual compression までは自走可能 |
 | proof spine / mechanization-ready core | 86% | 77% | 52% | Lean-first skeleton widening までは自走可能 |
 | shared-space minimal working subset | 73% | 67% | 49% | minimal subset strengthening までは自走可能 |
 | syntax / modality comparison | 81% | 79% | 27% | helper-local surface narrowing までは自走可能 |
@@ -116,7 +116,7 @@
 - current runnable / machine-check evidence:
   `p06 / p10 / p11 / p12`、verifier preview alignment pre-floor、theorem discharge pre-floor、model-check projection pre-floor、theorem-first pilot actualization、theorem binding preflight、theorem Lean-stub pilot、theorem artifact-conformance bridge、theorem representative trace-alignment bridge、theorem public-seam compression、theorem toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`samples/lean/current-l2/` committed corpus、`samples/lean/foundations/CurrentL2ProofSkeleton.lean`
 - current self-driven closeout package:
-  near-end closeout sync、theorem/model-check residual compression
+  theorem/model-check residual compression
 - remaining stop line:
   stronger typed-surface actual adoption、final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、final public verifier contract
 
@@ -127,7 +127,7 @@
 - current runnable / machine-check evidence:
   `p07 / p08 / p09 / p13 / p14`、authoritative-room vertical slice、witness/provider route actual adoption、witness/provider schema route actual adoption、witness/provider emitted-contract trace alignment bridge、order-handoff surface actual adoption、order-handoff source-wording route actual adoption、order-handoff serial-scope reserve surface、order-handoff / witness-provider public-seam compression、order-handoff helper CLI `surface_preview` actualization、order-handoff negative static-stop actualization、auditable-authority-witness strengthening actualization、delegated-rng-service practical actualization
 - current self-driven closeout package:
-  near-end closeout sync、source principal edge-row family hardening、mixed gate residual compression
+  order-handoff/shared-space residual compression、source principal edge-row family hardening
 - remaining stop line:
   final source-surface handoff wording、final emitted-artifact / emitted-handoff schema、final public witness/provider/artifact contract、stronger fairness / replay profile、exhaustive shared-space catalog
 
@@ -144,8 +144,10 @@
 
 ## current self-driven queue
 
-- `Package 59` near-end closeout sync
-  - Package 58 で delegated RNG carry-over、order-handoff helper CLI `surface_preview`、late-join negative static-stop pair `p13 / p14`、negative pair theorem-side Lean carry-over、IFC trio `typed_checker_hint_preview`、theorem/model-check helper preview widening まで actualize したため、mixed gate / user-spec residual を再圧縮し、snapshot / roadmap / traceability を同期する
+- `Package 60` theorem/model-check residual mixed-gate compression
+  - theorem result object / payload public-contract / prover-brand / proof-schema / final public verifier contract と、model-check property language / tool-brand / checker-artifact / migration / verifier-handoff / final public verifier contract の reopen order を sharpen する
+- `Package 61` order-handoff/shared-space residual mixed-gate compression
+  - final source wording / emitted-artifact schema / witness-provider public contract / fairness-replay residual order を sharpen する
 
 ## recent log
 
@@ -165,3 +167,4 @@
 - 2026-04-19 17:24 JST — Package 58 の broader theorem-side widening として `p13 / p14` late-join visibility negative pair を representative Lean sample set / committed Lean corpus に carry over し、`specs/examples/528` と snapshot / roadmap / traceability を helper/CLI hardening + IFC helper widening next 読みに更新した。
 - 2026-04-19 17:42 JST — Package 58 の IFC helper widening として `run-source-sample` に `typed_checker_hint_preview` を追加し、`p10 / p11 / p12` の `family_refs[] + coverage_state` mirror を `specs/examples/529` と snapshot / roadmap / traceability に同期した。
 - 2026-04-19 17:58 JST — Package 58 の remaining diagnostics widening として `run-source-sample` に theorem result-object preview と model-check public-checker preview を追加し、`p08` theorem reached / model-check guarded、`p09` theorem guarded / model-check reached の non-collapse を `specs/examples/530` と snapshot / roadmap / traceability に同期した。
+- 2026-04-19 18:08 JST — Package 59 の near-end closeout sync として queue / mixed gate / user-spec residual を再圧縮し、`specs/examples/531` を anchor に Package 60/61 residual mixed-gate packages へ current self-driven queue を組み直した。

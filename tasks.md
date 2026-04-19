@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 17:58 JST
+最終更新: 2026-04-19 18:08 JST
 
 ## この文書について
 
@@ -51,7 +51,8 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `59` near-end closeout sync | mixed gate / true user-spec residual をどこまで narrow に残すか | `S-M` | `Macro 5/6/7` | Package 58 close 後の helper-local actualization / residual gate reading を closeout-ready snapshot に再圧縮する | `progress.md` / `tasks.md` / `plan/` / traceability が stale wording を残さない |
+| `60` theorem/model-check residual mixed-gate compression | theorem/model-check residual mixed gates をどの reopen order で narrow に残すか | `M` | `Macro 5/7` | helper-local actualization と representative sample floor を基点に、final public theorem/model-check contract 群の reopen 順だけを圧縮する | stale comparison debt を増やさず、current recommendation / retained later / stop line を sharpen できる |
+| `61` order-handoff/shared-space residual mixed-gate compression | source wording / emitted artifact / witness-provider public contract residual をどの reopen order で narrow に残すか | `M` | `Macro 5/6/7` | edge-row principal と route/schema actual adoption を維持したまま、Problem 2 residual を sharpen する | final public wording / contract を凍らせず reopen 順を圧縮できる |
 
 ## recently closed package note
 
@@ -98,9 +99,15 @@
 ### Package 59 — near-end closeout sync
 
 - current reading:
-  final public seams と true user-spec residual を narrow に残し、theory solved と誤読されない snapshot にする。
+  close 済み。Package 58 close 後の helper-local actualization / residual gate reading を snapshot / roadmap / traceability に同期し、queue を residual mixed-gate packages へ再構成した。
 - evidence:
-  `progress.md`、`plan/11`、`plan/17`、`plan/18`、`plan/90`
+  `specs/examples/531`
+  `docs/reports/0812`
+  `progress.md`
+  `plan/11`
+  `plan/17`
+  `plan/18`
+  `plan/90`
 
 ## research-discovery items
 
@@ -133,4 +140,5 @@
 
 ## next reopen order
 
-1. Package 59 で closeout-ready snapshot を再圧縮する。
+1. Package 60 で theorem/model-check residual mixed-gate compression を進める。
+2. Package 61 で order-handoff/shared-space residual mixed-gate compression を進める。

@@ -509,6 +509,12 @@ actual-adoption floor では、
   - `p08` theorem reached / model-check guarded
   - `p09` theorem guarded / model-check reached
   - Package 58 diagnostics widening close after IFC checker-hint mirror
+- near-end closeout sync after Package 58:
+  `specs/examples/531`
+  - Package 58 close 後の queue reconstruction
+  - residual mixed-gate packages `60 / 61`
+  - true user-spec residual split keep
+  - stale wording suppression after helper preview widening
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
