@@ -211,6 +211,9 @@
 - `specs/examples/549-current-l2-ifc-phase2-parser-free-poc-closeout-threshold-helper-mirror.md`
   - Package 77 の closeout として `p10 / p11 / p12` source-side IFC trio の phase2-parser-free-poc-closeout threshold を `run-source-sample` helper summary に narrow に mirror し、`closeout_kind + compile_gate_refs + helper_boundary_refs + detached_loop_policy_refs` の parser-free closeout minimum を helper-local operational summary で保つ補助文書。
   - reference update / bless workflow、final retention/path policy、public exporter API、production host interface を固定するものではなく、Package 77 close と Package 78 phase4-shared-space-self-driven-closeout ratchet next line を読むための anchor である。
+- `specs/examples/550-current-l2-phase4-shared-space-self-driven-closeout-threshold-helper-mirror.md`
+  - Package 78 の closeout として `p07 / p08 / p09` source-side shared-space trio の phase4 shared-space self-driven closeout threshold を `run-source-sample` helper summary に narrow に mirror し、`closeout_kind + current_package_refs + user_spec_required_catalog_refs + retained_later_refs` の shared-space practical boundary checkpoint を helper-local operational summary で保つ補助文書。
+  - final public witness/provider/artifact contract、exhaustive shared-space final catalog、distributed fairness protocol、final operational realization を固定するものではなく、Package 78 close と Package 79 phase5-proof-protocol-runtime-policy-handoff-closeout ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
@@ -689,6 +692,8 @@
   - current Phase 5 / Package 76 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_phase1_semantics_closeout_threshold` を actualize し、core semantics + invariant bridge + notation status bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/549-current-l2-ifc-phase2-parser-free-poc-closeout-threshold-helper-mirror.md`
   - current Phase 5 / Package 77 closeout として、source-side IFC trio `p10 / p11 / p12` に `actual_phase2_parser_free_poc_closeout_threshold` を actualize し、parser-free closeout bundle を helper-local operational summary に narrow に mirror する補助文書。
+- `specs/examples/550-current-l2-phase4-shared-space-self-driven-closeout-threshold-helper-mirror.md`
+  - current Phase 5 / Package 78 closeout として、source-side shared-space trio `p07 / p08 / p09` に `actual_phase4_shared_space_self_driven_closeout_threshold` を actualize し、shared-space closeout bundle を helper-local operational summary に narrow に mirror する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

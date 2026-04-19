@@ -263,6 +263,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary,
     actual_phase2_parser_free_poc_closeout_threshold:
         CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary,
+    actual_phase4_shared_space_self_driven_closeout_threshold:
+        CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -387,6 +389,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_phase1_semantics_closeout_threshold,
             );
+        let actual_phase4_shared_space_self_driven_closeout_threshold =
+            CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary::from_source_report(
+                &report,
+                &surface_preview,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -424,6 +431,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_parser_to_checker_reconnect_freeze_threshold,
             actual_phase1_semantics_closeout_threshold,
             actual_phase2_parser_free_poc_closeout_threshold,
+            actual_phase4_shared_space_self_driven_closeout_threshold,
         }
     }
 }
@@ -2620,6 +2628,102 @@ impl CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    closeout_kind: Option<&'static str>,
+    current_package_refs: Vec<String>,
+    user_spec_required_catalog_refs: Vec<String>,
+    retained_later_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        surface_preview: &CurrentL2OperationalCliSurfacePreviewSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && surface_preview.serial_scope_reserve.status == "reached";
+
+        if reached {
+            return Self {
+                status: "reached",
+                threshold_kind: "phase4_shared_space_self_driven_closeout_threshold_manifest",
+                closeout_kind: Some("shared_space_practical_boundary_checkpoint"),
+                current_package_refs:
+                    actual_phase4_shared_space_self_driven_closeout_current_package_refs(),
+                user_spec_required_catalog_refs:
+                    actual_phase4_shared_space_self_driven_closeout_user_spec_required_catalog_refs(),
+                retained_later_refs:
+                    actual_phase4_shared_space_self_driven_closeout_retained_later_refs(),
+                next_comparison_target_ref: Some(
+                    "phase5_proof_protocol_runtime_policy_handoff_closeout_comparison",
+                ),
+                evidence_refs: vec![
+                    format!("sample:{sample_id}"),
+                    "helper_preview:actual_phase4_shared_space_self_driven_closeout_threshold"
+                        .to_string(),
+                    "source:phase4_shared_space_closeout_ready_sketch".to_string(),
+                    "source:authoritative_room_baseline_ref".to_string(),
+                    "source:control_plane_threshold_ref".to_string(),
+                ],
+                compare_floor_refs: vec![
+                    "compare_floor:current_l2.closeout.phase4_shared_space_self_driven_closeout"
+                        .to_string(),
+                    "compare_floor:current_l2.closeout.phase5_proof_protocol_runtime_policy_handoff_closeout"
+                        .to_string(),
+                ],
+                guard_refs:
+                    actual_phase4_shared_space_self_driven_closeout_threshold_guard_refs(true),
+                kept_later_refs:
+                    actual_phase4_shared_space_self_driven_closeout_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "phase4_shared_space_self_driven_closeout_threshold_manifest",
+            closeout_kind: None,
+            current_package_refs: vec![],
+            user_spec_required_catalog_refs: vec![],
+            retained_later_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{sample_id}"),
+                "helper_preview:actual_phase4_shared_space_self_driven_closeout_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.closeout.phase4_shared_space_self_driven_closeout"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.closeout.phase4_shared_space_self_driven_closeout.guard_only"
+                    .to_string(),
+            ],
+            guard_refs: actual_phase4_shared_space_self_driven_closeout_threshold_guard_refs(
+                false,
+            ),
+            kept_later_refs:
+                actual_phase4_shared_space_self_driven_closeout_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual phase4 shared-space self-driven closeout threshold only actualizes the representative shared-space trio (`p07` / `p08` / `p09`) after the helper-local serial-scope reserve surface reaches the authoritative-room/delegated-provider floor for `{sample_id}`"
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -3333,6 +3437,12 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_phase2_parser_free_poc_closeout_threshold(
         &mut output,
         &summary.actual_phase2_parser_free_poc_closeout_threshold,
+    );
+    writeln!(output, "actual_phase4_shared_space_self_driven_closeout_threshold:")
+        .expect("write to string");
+    render_actual_phase4_shared_space_self_driven_closeout_threshold(
+        &mut output,
+        &summary.actual_phase4_shared_space_self_driven_closeout_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -4597,6 +4707,63 @@ fn actual_phase2_parser_free_poc_closeout_threshold_kept_later_refs() -> Vec<Str
     ]
 }
 
+fn actual_phase4_shared_space_self_driven_closeout_current_package_refs() -> Vec<String> {
+    vec![
+        "authoritative_room_baseline_ref".to_string(),
+        "working_subset_catalog_ref".to_string(),
+        "minimal_authority_witness_core_ref".to_string(),
+        "authoritative_delegated_provider_cut_ref".to_string(),
+        "control_plane_threshold_ref".to_string(),
+    ]
+}
+
+fn actual_phase4_shared_space_self_driven_closeout_user_spec_required_catalog_refs() -> Vec<String>
+{
+    vec![
+        "final_activation_overlay_catalog".to_string(),
+        "final_authority_auth_identity_admission_catalog".to_string(),
+        "final_consistency_fairness_catalog".to_string(),
+    ]
+}
+
+fn actual_phase4_shared_space_self_driven_closeout_retained_later_refs() -> Vec<String> {
+    vec![
+        "append_friendly_optional_provider_attestation".to_string(),
+        "control_plane_separated_carrier_actualization".to_string(),
+        "distributed_fairness_protocol".to_string(),
+        "final_operational_realization".to_string(),
+    ]
+}
+
+fn actual_phase4_shared_space_self_driven_closeout_threshold_guard_refs(
+    reached: bool,
+) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:phase4_shared_space_self_driven_closeout_threshold_only".to_string(),
+            "guard:phase5_proof_protocol_runtime_policy_handoff_closeout_comparison_next"
+                .to_string(),
+            "guard:user_spec_required_final_catalog_later".to_string(),
+            "guard:distributed_fairness_protocol_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:actual_phase4_shared_space_self_driven_closeout_threshold_not_reached"
+                .to_string(),
+        ]
+    }
+}
+
+fn actual_phase4_shared_space_self_driven_closeout_threshold_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_public_witness_provider_artifact_contract".to_string(),
+        "kept_later:exhaustive_shared_space_catalog".to_string(),
+        "kept_later:control_plane_separated_carrier_actualization".to_string(),
+        "kept_later:distributed_fairness_protocol".to_string(),
+        "kept_later:final_operational_realization".to_string(),
+    ]
+}
+
 fn display_path(path: &PathBuf) -> String {
     fs::canonicalize(path)
         .unwrap_or_else(|_| path.clone())
@@ -5691,6 +5858,45 @@ fn render_actual_phase2_parser_free_poc_closeout_threshold(
         &summary.detached_loop_policy_refs,
         1,
     );
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_phase4_shared_space_self_driven_closeout_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualPhase4SharedSpaceSelfDrivenCloseoutThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    if let Some(closeout_kind) = summary.closeout_kind {
+        writeln!(output, "  closeout_kind: {closeout_kind}").expect("write to string");
+    } else {
+        writeln!(output, "  closeout_kind: none").expect("write to string");
+    }
+    render_string_list(output, "current_package_refs", &summary.current_package_refs, 1);
+    render_string_list(
+        output,
+        "user_spec_required_catalog_refs",
+        &summary.user_spec_required_catalog_refs,
+        1,
+    );
+    render_string_list(output, "retained_later_refs", &summary.retained_later_refs, 1);
     if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
         writeln!(
             output,

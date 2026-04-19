@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 22:59 JST
+最終更新: 2026-04-19 23:18 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - current package refs / final catalog residual / retained later refs の phase4-shared-space-self-driven-closeout ratchet
+  - verifier handoff surface / theorem retained bridge stop line / boundary inventory / retained later refs の phase5-proof-protocol-runtime-policy-handoff-closeout ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `78` phase4-shared-space-self-driven-closeout ratchet | phase2 parser-free PoC closeout の次段として shared-space self-driven closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/6` | current package refs + user-spec-required final catalog refs + retained-later refs を current cut に留めたまま、final activation/authority/auth/identity/admission/consistency/fairness catalog、control-plane separated carrier actualization、distributed fairness protocol、final operational realization を still later に残して phase4 shared-space self-driven closeout ready sketch を helper-local threshold まで ratchet する | shared-space closeout bundle を narrow に actualize しつつ、user-spec-required catalog と stronger fairness finalization を later gate に残せる |
+| `79` phase5-proof-protocol-runtime-policy-handoff-closeout ratchet | phase4 shared-space self-driven closeout の次段として proof / protocol / runtime-policy handoff closeout ready sketch をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | verifier handoff surface + theorem retained bridge stop ref + boundary inventory ref + retained-later refs を current cut に留めたまま、actual subject row materialization、boundary-specific handoff artifact family、actual emitted verifier artifact、concrete theorem/model-check tool binding、public checker migration、low-level memory-order family を still later に残して phase5 handoff closeout ready sketch を helper-local threshold まで ratchet する | phase5 closeout bundle を narrow に actualize しつつ、actual externalization pressure と low-level family reopen を later gate に残せる |
 
 ## recently closed package note
 
@@ -367,16 +367,31 @@
 ### Package 78 — phase4-shared-space-self-driven-closeout ratchet
 
 - current reading:
-  next active line。`actual_phase2_parser_free_poc_closeout_threshold` を final activation / authority / auth / identity / admission / consistency / fairness catalog に上げず、phase4 shared-space self-driven closeout ready sketch まで narrow に ratchet する。
+  close 済み。`actual_phase2_parser_free_poc_closeout_threshold` を final activation / authority / auth / identity / admission / consistency / fairness catalog に上げず、phase4 shared-space self-driven closeout ready sketch まで narrow に ratchet し、`actual_phase4_shared_space_self_driven_closeout_threshold` を `closeout_kind + current_package_refs + user_spec_required_catalog_refs + retained_later_refs` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/295`
   `specs/examples/296`
   `specs/examples/549`
+  `specs/examples/550`
 - stop line:
   final activation overlay catalog
   final authority / auth / identity / admission catalog
   final consistency / fairness catalog
   final operational realization
+
+### Package 79 — phase5-proof-protocol-runtime-policy-handoff-closeout ratchet
+
+- current reading:
+  next active line。`actual_phase4_shared_space_self_driven_closeout_threshold` を actual subject row materialization や boundary-specific handoff artifact family に上げず、phase5 proof / protocol / runtime-policy handoff closeout ready sketch まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/297`
+  `specs/examples/298`
+  `specs/examples/550`
+- stop line:
+  actual subject row materialization
+  boundary-specific handoff artifact family
+  actual emitted verifier artifact
+  concrete theorem / model-check tool binding
 
 ## research-discovery items
 
@@ -409,4 +424,4 @@
 
 ## next reopen order
 
-1. Package 78 で phase4-shared-space-self-driven-closeout ratchet を進める。
+1. Package 79 で phase5-proof-protocol-runtime-policy-handoff-closeout ratchet を進める。

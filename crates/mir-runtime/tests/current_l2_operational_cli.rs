@@ -440,6 +440,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_phase2_parser_free_poc_closeout_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -462,6 +466,30 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains("theorem_final_public_contract_reopen_threshold:"));
     assert!(output.contains("model_check_final_public_contract_reopen_threshold:"));
     assert!(output.contains("order_handoff_witness_provider_public_seam_compression:"));
+    assert!(output.contains(
+        "actual_phase4_shared_space_self_driven_closeout_threshold:"
+    ));
+    assert!(output.contains(
+        "closeout_kind: shared_space_practical_boundary_checkpoint"
+    ));
+    assert!(output.contains("current_package_refs:"));
+    assert!(output.contains("authoritative_room_baseline_ref"));
+    assert!(output.contains("working_subset_catalog_ref"));
+    assert!(output.contains("minimal_authority_witness_core_ref"));
+    assert!(output.contains("authoritative_delegated_provider_cut_ref"));
+    assert!(output.contains("control_plane_threshold_ref"));
+    assert!(output.contains("user_spec_required_catalog_refs:"));
+    assert!(output.contains("final_activation_overlay_catalog"));
+    assert!(output.contains("final_authority_auth_identity_admission_catalog"));
+    assert!(output.contains("final_consistency_fairness_catalog"));
+    assert!(output.contains("retained_later_refs:"));
+    assert!(output.contains("append_friendly_optional_provider_attestation"));
+    assert!(output.contains("control_plane_separated_carrier_actualization"));
+    assert!(output.contains("distributed_fairness_protocol"));
+    assert!(output.contains("final_operational_realization"));
+    assert!(output.contains(
+        "next_comparison_target_ref: phase5_proof_protocol_runtime_policy_handoff_closeout_comparison"
+    ));
 }
 
 #[test]
@@ -525,6 +553,66 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         value["order_handoff_witness_provider_public_seam_compression"]["public_seam_residual_refs"][0],
         "order_handoff_public_seam_residual:p08-dice-stale-reconnect-refresh:final_source_surface_handoff_wording_later"
     );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["closeout_kind"],
+        "shared_space_practical_boundary_checkpoint"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][0],
+        "authoritative_room_baseline_ref"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][1],
+        "working_subset_catalog_ref"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][2],
+        "minimal_authority_witness_core_ref"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][3],
+        "authoritative_delegated_provider_cut_ref"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["current_package_refs"][4],
+        "control_plane_threshold_ref"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"][0],
+        "final_activation_overlay_catalog"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"][1],
+        "final_authority_auth_identity_admission_catalog"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["user_spec_required_catalog_refs"][2],
+        "final_consistency_fairness_catalog"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][0],
+        "append_friendly_optional_provider_attestation"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][1],
+        "control_plane_separated_carrier_actualization"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][2],
+        "distributed_fairness_protocol"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["retained_later_refs"][3],
+        "final_operational_realization"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["next_comparison_target_ref"],
+        "phase5_proof_protocol_runtime_policy_handoff_closeout_comparison"
+    );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]
             .as_str()
@@ -571,6 +659,14 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
     assert_eq!(
         value["order_handoff_witness_provider_public_seam_compression"]["status"],
         "guarded_not_reached"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase4_shared_space_self_driven_closeout_threshold"]["next_comparison_target_ref"],
+        "phase5_proof_protocol_runtime_policy_handoff_closeout_comparison"
     );
     assert_eq!(
         value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"][2],
