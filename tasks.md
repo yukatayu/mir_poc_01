@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 19:17 JST
+最終更新: 2026-04-19 19:33 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - strong typing / IFC beyond first checker fragment の checker payload row-family ratchet
+  - strong typing / IFC beyond first checker fragment の checker payload row-detail ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `63` checker payload row-family ratchet | sample-local actual checker payload family threshold を checker payload row family へどこまで近づけるか | `M` | `Macro 5/7` | checker-adjacent principal と IFC first-fragment を維持したまま、`p10 / p11 / p12` を `payload_family_ref + row_family_kind` まで ratchet する | final public checker artifact / final public verifier contract を凍らせず、helper preview を checker payload row family まで整理できる |
+| `64` checker payload row-detail ratchet | sample-local checker payload row-family threshold を checker payload row detail へどこまで近づけるか | `M` | `Macro 5/7` | checker-adjacent principal と IFC first-fragment を維持したまま、`p10 / p11 / p12` を `payload_row_family_ref + row_source_ref + row_reason_kind` まで ratchet する | final public checker artifact / final public verifier contract を凍らせず、helper preview を checker payload row detail まで整理できる |
 
 ## recently closed package note
 
@@ -149,13 +149,25 @@
 ### Package 63 — checker payload row-family ratchet
 
 - current reading:
-  next active line。`actual_checker_payload_family_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload row family まで narrow に ratchet する。
+  close 済み。`actual_checker_payload_family_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload row family まで narrow に ratchet し、`actual_checker_payload_row_family_threshold` を `payload_family_ref + row_family_kind` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/265`
   `specs/examples/266`
   `specs/examples/534`
+  `specs/examples/535`
 - stop line:
   supported kind detail、actual checker row payload、final public checker artifact、final public verifier contract には上げない
+
+### Package 64 — checker payload row-detail ratchet
+
+- current reading:
+  next active line。`actual_checker_payload_row_family_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload row detail まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/267`
+  `specs/examples/268`
+  `specs/examples/535`
+- stop line:
+  actual checker row body、final public checker artifact、final public verifier contract には上げない
 
 ## research-discovery items
 
@@ -188,4 +200,4 @@
 
 ## next reopen order
 
-1. Package 63 で checker payload row-family ratchet を進める。
+1. Package 64 で checker payload row-detail ratchet を進める。

@@ -534,6 +534,12 @@ actual-adoption floor では、
   - `actual_checker_payload_family_threshold`
   - `payload_family_kind + source_refs` checker-adjacent helper mirror
   - Package 62 helper-to-checker ratchet close、Package 63 checker payload row-family ratchet next
+- IFC checker-payload-row-family threshold helper mirror:
+  `specs/examples/535`
+  - `p10 / p11 / p12` source-side IFC trio
+  - `actual_checker_payload_row_family_threshold`
+  - `payload_family_ref + row_family_kind` row grouping helper mirror
+  - Package 63 checker payload row-family ratchet close、Package 64 checker payload row-detail ratchet next
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
