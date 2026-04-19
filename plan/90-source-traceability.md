@@ -3317,7 +3317,7 @@
   - `plan/17-research-phases-and-autonomy-gates.md`
   - `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
   - `docs/reports/0799-actual-lean-prototype-widening-and-snapshot-sync.md`
-- 今回の要点は、`faq_008.md` 以後の genuine progress として theorem/model-check/order-handoff/shared-space residual compression と representative theorem quartet actual Lean execution floor を current explanation に取り込みつつ、「かなり進んでいる」「current mapped corpus の runnable floor は reached」「しかし final public language implementation complete ではない」「repo-local near-end success まではかなり自走しやすいが full final completion には still mixed gate / user-spec residual が残る」という current lineを明示した点である。
+- 今回の要点は、`faq_008.md` 以後の genuine progress として theorem/model-check/order-handoff/shared-space residual compression と representative Lean actual-execution floor を current explanation に取り込みつつ、「かなり進んでいる」「current mapped corpus の runnable floor は reached」「しかし final public language implementation complete ではない」「repo-local near-end success まではかなり自走しやすいが full final completion には still mixed gate / user-spec residual が残る」という current lineを明示した点である。
 
 ### 2026-04-19 final-layer closeout handoff integration
 
@@ -3326,7 +3326,20 @@
   - `specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md`
   - `specs/examples/519-current-l2-theorem-actual-lean-execution-representative-prototype-widening.md`
   - `docs/reports/0799-actual-lean-prototype-widening-and-snapshot-sync.md`
-- 今回の要点は、representative theorem quartet actual Lean execution floor 到達後の self-driven queue を「actual Lean hardening only」へ過度に narrow 化せず、layered strong typing / IFC first-fragment、Lean formal skeleton / proof obligations、helper/CLI hardening and broader coverage、near-end closeout sync を含む final-layer closeout packages として current repo に戻した点である。これは final public language completion を意味せず、execution floor reached と adoption/closeout debt を切り分けるための current reading である。
+- 今回の要点は、representative Lean actual-execution floor 到達後の self-driven queue を「actual Lean hardening only」へ過度に narrow 化せず、layered strong typing / IFC first-fragment、Lean formal skeleton / proof obligations、helper/CLI hardening and broader coverage、near-end closeout sync を含む final-layer closeout packages として current repo に戻した点である。これは final public language completion を意味せず、execution floor reached と adoption/closeout debt を切り分けるための current reading である。
+
+### 2026-04-19 Package 56 source-side IFC authority pair addendum
+
+- `docs/reports/0804-package56-source-side-ifc-authority-samples.md`、`specs/examples/523-current-l2-source-side-ifc-authority-prototype-pair-and-representative-lean-sample-set-widening.md`、`samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt`、`samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.host-plan.json`、`samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.txt`、`samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.host-plan.json`、`samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/`、`samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/`、`samples/prototype/README.md`、`samples/lean/README.md`、`samples/lean/manifest.json`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt`
+  - `samples/lean/foundations/CurrentL2LabelModel.lean`
+  - `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_verifier_preview_alignment.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_projection_prefloor.rs`
+  - `crates/mir-runtime/tests/current_l2_theorem_actual_lean_execution_prototype_widening.rs`
+  - `scripts/current_l2_lean_sample_sync.py`
+- 今回の要点は、Lean-side IFC first fragment を保ったまま `p10 / p11` source-side explicit authority pair を corrected prototype / verifier preview / model-check projection / theorem Lean actualization representative set に actualize し、Package 56 の current live queue を「explicit authority sample family」から「label-flow negative / checker-fragment integration」へ narrowed した点である。これは final typed source principal や final IFC syntax や final public verifier contract を意味しない。
 ## 2026-04-18 model-check property-language / tool-brand threshold default addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`docs/research_abstract/README.md`、`docs/research_abstract/phase6-compile-ready-minimal-actualization.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。

@@ -63,6 +63,34 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
             ),
         ),
         CurrentL2ExportSpec(
+            sample_id="p10-typed-authorized-fingerprint-declassification",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.host-plan.json",
+            summary="authority あり declassification を表す typed/IFC prototype。",
+            rationale=(
+                "current checker-adjacent IFC line で、authority-sensitive release が "
+                "success 側にどう映るかを見る representative prototype として読む。"
+            ),
+        ),
+        CurrentL2ExportSpec(
+            sample_id="p11-typed-unauthorized-fingerprint-release",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.host-plan.json",
+            summary="authority なし release を explicit failure で止める typed/IFC prototype。",
+            rationale=(
+                "current checker-adjacent IFC line で、holder と release authority を "
+                "分けた negative evidence を sample-visible に保つ representative prototype として読む。"
+            ),
+        ),
+        CurrentL2ExportSpec(
             sample_id="p07-dice-late-join-visible-history",
             sample_argument=str(
                 REPO_ROOT
@@ -332,6 +360,7 @@ end CurrentL2
 
 
 def build_current_l2_explanation(spec: CurrentL2ExportSpec) -> str:
+    current_ids = " / ".join(export_spec.sample_id for export_spec in current_l2_export_specs())
     return f"""# {spec.sample_id}
 
 ## 要約
@@ -349,7 +378,7 @@ def build_current_l2_explanation(spec: CurrentL2ExportSpec) -> str:
 ## それでも保持する理由
 
 - current sample に結び付いた actual Lean text を inspectable snapshot として保持できる。
-- `e5`、`p06`、`p07`、`p08` のあいだで current proof obligation を具体物として比較できる。
+- `{current_ids}` のあいだで current proof obligation を具体物として比較できる。
 - 「Lean が生成ファイルを受理した」ことと「domain theorem が fully proved である」ことを明示的に分けたままにできる。
 """
 
@@ -382,7 +411,7 @@ repo-local かつ inspectable な形で保存する。
   - 実際に小さな証明を含む self-contained Lean file を置く
   - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、proof-skeleton / obligation-shape first fragment である
 - `current-l2/`
-  - 現在の current-L2 定理ブリッジから representative theorem quartet `{current_ids}` 向けに生成された Lean theorem stub を置く
+  - 現在の current-L2 定理ブリッジから representative sample set `{current_ids}` 向けに生成された Lean theorem stub を置く
   - これらの file は Lean に受理されるが、まだ `sorry` を含む
 
 ## 読み方

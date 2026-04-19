@@ -1,9 +1,9 @@
-# p07-dice-late-join-visible-history
+# p11-typed-unauthorized-fingerprint-release
 
 ## 要約
 
-- 公開済み history を過去として見せる late join の authoritative-room prototype。
-- late-join semantics を current order/handoff line で見る representative runtime prototype として読む。
+- authority なし release を explicit failure で止める typed/IFC prototype。
+- current checker-adjacent IFC line で、holder と release authority を 分けた negative evidence を sample-visible に保つ representative prototype として読む。
 
 ## この Lean ファイルが意味すること
 

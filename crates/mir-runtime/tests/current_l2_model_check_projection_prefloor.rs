@@ -191,6 +191,52 @@ fn model_check_projection_prefloor_reaches_typed_runtime_prototype_without_colla
 }
 
 #[test]
+fn model_check_projection_prefloor_reaches_authorized_ifc_typed_runtime_prototype() {
+    let sample_path =
+        typed_prototype_sample_path("p10-typed-authorized-fingerprint-declassification.txt");
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_prefloor_matches_preview_route(
+        &prefloor,
+        &route,
+        &["small_cluster_projection:p10-typed-authorized-fingerprint-declassification:runtime_try_cut_local"],
+        &["guard:rollback_or_atomic_cut_evidence_present"],
+    );
+}
+
+#[test]
+fn model_check_projection_prefloor_reaches_unauthorized_ifc_typed_runtime_prototype() {
+    let sample_path =
+        typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_prefloor_matches_preview_route(
+        &prefloor,
+        &route,
+        &["small_cluster_projection:p11-typed-unauthorized-fingerprint-release:runtime_try_cut_local"],
+        &["guard:rollback_or_atomic_cut_evidence_present"],
+    );
+}
+
+#[test]
 fn model_check_projection_prefloor_reaches_order_handoff_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(

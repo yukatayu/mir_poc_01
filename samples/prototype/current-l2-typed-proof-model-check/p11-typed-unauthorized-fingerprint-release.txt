@@ -1,0 +1,22 @@
+# release authority を持たない holder が fingerprint を publish しようとして止まる current L2 typed/IFC prototype。
+place root {
+  place room {
+    place verifier_boundary {
+      option fingerprint_holder on fingerprint_state capability write lease live admit fingerprint_holder(player_a)
+      option delegated_release on fingerprint_state capability write lease live admit delegate_granted(player_a)
+
+      chain fingerprint_release_ref = fingerprint_holder
+      fallback delegated_release @ lineage(fingerprint_holder -> delegated_release)
+
+      perform derive_secret_fingerprint via fingerprint_release_ref
+        require write
+        ensure fingerprint_bound(secret_key)
+
+      atomic_cut
+
+      perform publish_without_authority via fingerprint_release_ref
+        require write
+        ensure fingerprint_visible(room_members)
+    }
+  }
+}

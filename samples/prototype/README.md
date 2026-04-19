@@ -20,6 +20,7 @@
 - `current-l2-typed-proof-model-check/`
   - `admit` / `require` / `ensure` を持つ typed marker family が helper-local verifier preview にどう映るかを比較する corrected prototype
   - `p06-typed-proof-owner-handoff` は sample-visible corrected prototype であり、final typed calculus / final public verifier contract / settled property language ではない
+  - `p10-typed-authorized-fingerprint-declassification` と `p11-typed-unauthorized-fingerprint-release` は、explicit authority declassification success/failure を source-side で比較する corrected prototype であり、final typed source principal / final IFC syntax / final public verifier contract ではない
 - `current-l2-dynamic-attach-detach/`
   - attach / detach の corrected prototype
 

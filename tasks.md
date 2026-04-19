@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 15:32 JST
+最終更新: 2026-04-19 16:16 JST
 
 ## この文書について
 
@@ -12,10 +12,10 @@
 
 - current mapped corpus では、
   - authored sixteen
-  - corrected prototype nonet
+  - corrected prototype set `p01...p11`
   - runner / CLI / regression / helper-local compare floor
   が already runnable である。
-- representative theorem quartet `e5 / p06 / p07 / p08` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
+- representative Lean sample set `e5 / p06 / p10 / p11 / p07 / p08` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
 - `samples/lean/foundations/` には
   - `CurrentL2LabelModel.lean`
   - `CurrentL2IfcSecretExamples.lean`
@@ -33,16 +33,16 @@
 - `samples/current-l2/`
   - authored sixteen は inventory / runner / verification ladder / emitted artifact wiring / regression helper に乗っている
 - `samples/prototype/`
-  - corrected prototype nonet は explicit path + adjacent host-plan sidecar で runnable
+  - corrected prototype set `p01...p11` は explicit path + adjacent host-plan sidecar で runnable
   - helper-local `debug_outputs` / `verification_preview` / `artifact_preview` を見せる current cut がある
 - `samples/lean/`
   - `foundations/` は actual small proof fragment
-  - `current-l2/` は representative theorem quartet generated stub corpus
+  - `current-l2/` は representative Lean sample set generated stub corpus
   - `manifest.json` は Lean verification summary
   - generated current-L2 theorem stubs は `sorry` を含むため、artifact well-formedness / bridge alignment evidence として読む
 - theorem / model-check / order-handoff / shared-space current floor
   - theorem-side:
-    theorem-first pilot、binding preflight、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative theorem quartet actual Lean execution
+    theorem-first pilot、binding preflight、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression
   - order-handoff / shared-space side:
@@ -52,8 +52,8 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `56` layered strong typing / IFC first-fragment | strong typing / IFC をどこまで current checker/theorem split に入れるか | `M` | `Macro 5` | checker-adjacent principal + layered stack + `CurrentL2LabelModel.lean` / `CurrentL2IfcSecretExamples.lean` を維持しつつ、explicit authority source-side sample family と label-flow negative を足す | source-side corpus / docs / tests が揃い、Problem 1 closeout debt を 1 段狭める |
-| `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative quartet からどう widen するか | `M` | `Macro 5/7` | export/sync helper と `samples/lean/` committed corpus を基点に、broader theorem-side / IFC / order-handoff widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、IFC / proof package を concretize する |
+| `56` layered strong typing / IFC first-fragment | strong typing / IFC をどこまで current checker/theorem split に入れるか | `M` | `Macro 5` | checker-adjacent principal + layered stack + `CurrentL2LabelModel.lean` / `CurrentL2IfcSecretExamples.lean` / `p10` / `p11` を維持しつつ、label-flow negative と checker-fragment integration を足す | source-side corpus / docs / tests が揃い、Problem 1 closeout debt を 1 段狭める |
+| `58` helper / CLI hardening and broader coverage | actual Lean execution floor と committed Lean corpus を representative sample set からどう widen するか | `M` | `Macro 5/7` | export/sync helper と `samples/lean/` committed corpus を基点に、broader theorem-side / IFC / order-handoff widening を narrow package で進める | widened corpus が mixed gate を 1 つ閉じるか、IFC / proof package を concretize する |
 | `59` near-end closeout sync | mixed gate / true user-spec residual をどこまで narrow に残すか | `S-M` | `Macro 5/6/7` | final public completion を凍らせず、closeout-ready snapshot に再圧縮する | `progress.md` / `tasks.md` / `plan/` / traceability が stale wording を残さない |
 
 ## recently closed package note
@@ -78,16 +78,16 @@
 - current reading:
   stronger typed surface は early source principal に上げず、checker-adjacent principal + layered stack に保つ。
 - actualized floor:
-  `CurrentL2LabelModel.lean` と `CurrentL2IfcSecretExamples.lean` により two-point label model / secret-key valid-invalid / explicit authority-sensitive declassification reading は Lean-side actual fragment として固定済み。
+  `CurrentL2LabelModel.lean` と `CurrentL2IfcSecretExamples.lean` により two-point label model / secret-key valid-invalid / explicit authority-sensitive declassification reading は Lean-side actual fragment として固定済みであり、`p10 / p11` により source-side explicit authority pair も corrected prototype として固定済み。
 - target corpus:
-  explicit declassification authority の source-side sample family、label-flow negative、checker-fragment corpus integration
+  `p06-typed-proof-owner-handoff`、`p10-typed-authorized-fingerprint-declassification`、`p11-typed-unauthorized-fingerprint-release`、label-flow negative、checker-fragment corpus integration
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current reading:
   actual Lean execution reached 後の next work は helper/CLI hardening と broader theorem-side / IFC / order-handoff corpus widening である。
 - evidence:
-  toolchain probe / reopen manifest、representative quartet actual Lean execution、`samples/lean/` committed corpus
+  toolchain probe / reopen manifest、representative sample set actual Lean execution、`samples/lean/` committed corpus
 - stop line:
   final public theorem contract / final parser grammar / packaging には上げない
 
@@ -111,7 +111,7 @@
 
 | topic | impact | current recommendation |
 |---|---|---|
-| final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract | theorem-first pilot | review-unit transport first、notebook-consumer object first、Lean-stub bridge current floor と representative theorem quartet actual Lean execution floor を維持し、final public theorem contract 群には上げない |
+| final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract | theorem-first pilot | review-unit transport first、notebook-consumer object first、Lean-stub bridge current floor と representative Lean sample set actual Lean execution floor を維持し、final public theorem contract 群には上げない |
 | first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract | model-check line | row-local property route first、checker-artifact route first、public-seam compression keep を維持する |
 | final source-surface handoff wording / final emitted-artifact schema | order-handoff public surface | edge-row principal、stage-block secondary keep、thread/node same causal language keep、serial sugar reserve を維持する |
 | final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract | shared-space stronger public shape | claim/payload split first、route/schema route actual adoption、trace-alignment reserve を維持し、final public contract 群には上げない |
@@ -129,6 +129,6 @@
 
 ## next reopen order
 
-1. Package 56 の source-side explicit authority / label-flow corpus を 1 つ actualize する。
+1. Package 56 の label-flow negative / checker-fragment corpus を 1 つ actualize する。
 2. Package 58 で `samples/lean/` を使う broader coverage / helper hardening を narrow package で進める。
 3. Package 59 で closeout-ready snapshot を再圧縮する。

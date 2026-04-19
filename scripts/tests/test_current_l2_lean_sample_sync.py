@@ -19,6 +19,8 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             {
                 "e5-underdeclared-lineage",
                 "p06-typed-proof-owner-handoff",
+                "p10-typed-authorized-fingerprint-declassification",
+                "p11-typed-unauthorized-fingerprint-release",
                 "p07-dice-late-join-visible-history",
                 "p08-dice-stale-reconnect-refresh",
             },

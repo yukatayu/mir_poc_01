@@ -79,6 +79,40 @@
     },
     {
       "kind": "current-l2",
+      "sample_id": "p10-typed-authorized-fingerprint-declassification",
+      "lean_path": "samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/p10-typed-authorized-fingerprint-declassification.lean",
+      "explanation_path": "samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/README.md",
+      "bundle_path": "samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/p10-typed-authorized-fingerprint-declassification.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p10_typed_authorized_fingerprint_declassification__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/p10-typed-authorized-fingerprint-declassification.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p11-typed-unauthorized-fingerprint-release",
+      "lean_path": "samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/p11-typed-unauthorized-fingerprint-release.lean",
+      "explanation_path": "samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/README.md",
+      "bundle_path": "samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/p11-typed-unauthorized-fingerprint-release.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p11_typed_unauthorized_fingerprint_release__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/p11-typed-unauthorized-fingerprint-release.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
       "sample_id": "p07-dice-late-join-visible-history",
       "lean_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.lean",
       "explanation_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/README.md",

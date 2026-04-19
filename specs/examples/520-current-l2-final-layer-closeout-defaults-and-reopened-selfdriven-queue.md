@@ -187,7 +187,7 @@ current queue は empty ではなく、次の final-layer closeout packages に 
 
 | package | question | current first line | adequacy corpus / evidence | stop line |
 |---|---|---|---|---|
-| `55` final-layer closeout integration | representative theorem quartet actual Lean execution 以後の theory line をどこで再始動するか | `520` を current package anchor にして closeout queue を戻す | `faq_009`、`475`、`519`、handoff 2026-04-19 | final public completion に飛ばない |
+| `55` final-layer closeout integration | representative Lean actual-execution floor 以後の theory line をどこで再始動するか | `520` を current package anchor にして closeout queue を戻す | `faq_009`、`475`、`519`、handoff 2026-04-19 | final public completion に飛ばない |
 | `56` layered strong typing / IFC first-fragment | strong typing / IFC をどこまで first checker fragment と docs corpus に入れるか | checker-adjacent principal + layered stack + `LabelModel` / `Labeled` / explicit authority | `p06`、secret-key valid/invalid sample family、negative corpus | stronger typed surface final principal / final IFC syntax は later |
 | `57` Lean formal skeleton / proof obligations | mechanization-ready core をどこまで formal skeleton に落とすか | Lean-first staged roadmap | `e5 / p06 / p07 / p08` actual Lean execution floor、artifact conformance bridge、trace alignment | concrete production prover binding / final proof object contract は later |
 | `58` helper / CLI hardening and broader theorem-side coverage | actual Lean execution floor を representative quartet からどう widen するか | helper/CLI hardening + broader theorem/IFC/order-handoff corpus | existing cargo/CLI regression + widened negative corpus | final public theorem contract には上げない |
@@ -215,12 +215,12 @@ current queue reopening は、execution floor 未到達を意味しない。
 already reached / machine-checked evidence として、少なくとも次がある。
 
 - authored sixteen runner / CLI / regression floor
-- corrected prototype nonet
+- corrected prototype set `p01...p11`
 - theorem public-seam compression
 - model-check public-seam compression
 - order-handoff / witness-provider final public-seam compression
 - theorem toolchain probe / reopen manifest
-- representative theorem quartet `e5 / p06 / p07 / p08` actual Lean execution
+- representative Lean sample set `e5 / p06 / p10 / p11 / p07 / p08` actual Lean execution
 
 したがって reopened queue は
 **execution floor を作るためではなく、final-layer closeout debt を減らすため**

@@ -1,0 +1,22 @@
+# declassify authority がある場合だけ fingerprint を公開できる current L2 typed/IFC prototype。
+place root {
+  place room {
+    place verifier_boundary {
+      option release_authority on fingerprint_state capability write lease live admit declassify_authority(player_a)
+      option observer_only on fingerprint_state capability write lease live admit observer_role(player_a)
+
+      chain fingerprint_release_ref = release_authority
+      fallback observer_only @ lineage(release_authority -> observer_only)
+
+      perform derive_secret_fingerprint via fingerprint_release_ref
+        require write
+        ensure fingerprint_bound(secret_key)
+
+      atomic_cut
+
+      perform publish_declassified_fingerprint via fingerprint_release_ref
+        require write
+        ensure fingerprint_visible(room_members)
+    }
+  }
+}

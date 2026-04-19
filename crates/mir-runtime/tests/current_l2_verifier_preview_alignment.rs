@@ -270,6 +270,34 @@ fn verifier_preview_alignment_matches_emitted_route_for_typed_runtime_prototype(
 }
 
 #[test]
+fn verifier_preview_alignment_matches_emitted_route_for_authorized_ifc_typed_runtime_prototype() {
+    let sample_path =
+        typed_prototype_sample_path("p10-typed-authorized-fingerprint-declassification.txt");
+    let preview_json = cli_json(sample_path.to_str().unwrap(), None);
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_cli_preview_matches_preview_route(&preview_json, &route);
+}
+
+#[test]
+fn verifier_preview_alignment_matches_emitted_route_for_unauthorized_ifc_typed_runtime_prototype() {
+    let sample_path =
+        typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
+    let preview_json = cli_json(sample_path.to_str().unwrap(), None);
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_cli_preview_matches_preview_route(&preview_json, &route);
+}
+
+#[test]
 fn verifier_preview_alignment_matches_emitted_route_for_order_handoff_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let preview_json = cli_json(sample_path.to_str().unwrap(), None);

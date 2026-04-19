@@ -95,6 +95,30 @@ fn theorem_actual_lean_execution_reaches_typed_runtime_prototype() {
 }
 
 #[test]
+fn theorem_actual_lean_execution_reaches_authorized_ifc_runtime_prototype() {
+    if !lean_available() {
+        eprintln!("lean unavailable; skipping actual prototype widening probe");
+        return;
+    }
+
+    let sample_path =
+        typed_prototype_sample_path("p10-typed-authorized-fingerprint-declassification.txt");
+    assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
+}
+
+#[test]
+fn theorem_actual_lean_execution_reaches_unauthorized_ifc_runtime_prototype() {
+    if !lean_available() {
+        eprintln!("lean unavailable; skipping actual prototype widening probe");
+        return;
+    }
+
+    let sample_path =
+        typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
+    assert_runtime_prototype_passes_actual_lean_execution(&sample_path);
+}
+
+#[test]
 fn theorem_actual_lean_execution_reaches_late_join_runtime_prototype() {
     if !lean_available() {
         eprintln!("lean unavailable; skipping actual prototype widening probe");

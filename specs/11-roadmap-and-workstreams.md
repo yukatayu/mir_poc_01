@@ -451,14 +451,14 @@ actual-adoption floor では、
   - helper / CLI unification later
 - final-layer closeout queue reconstruction:
   `specs/examples/520`
-  - representative theorem quartet actual Lean execution 後の self-driven queue は empty ではない
+  - representative Lean sample set actual Lean execution 後の self-driven queue は empty ではない
   - layered strong typing / IFC first-fragment
   - Lean formal skeleton / proof obligations
   - broader negative corpus / helper hardening / near-end closeout sync
 - Lean sample corpus and first foundations:
   `specs/examples/521`
   - `samples/lean/foundations/` actual small proof fragment
-  - `samples/lean/current-l2/` representative theorem quartet generated stub corpus
+  - `samples/lean/current-l2/` representative Lean sample set generated stub corpus
   - `current_l2_emit_theorem_lean_bundle` + `current_l2_lean_sample_sync.py`
   - generated stub = artifact well-formedness / bridge alignment, not final discharge
 - IFC secret valid/invalid foundation and Japanese Lean corpus sync:
@@ -466,6 +466,16 @@ actual-adoption floor では、
   - `CurrentL2IfcSecretExamples.lean` actualize
   - secret-key valid/invalid + explicit authority declassification concrete example
   - `samples/lean/` explanation wording を日本語で同期
+- source-side IFC authority prototype pair and Lean corpus widening:
+  `specs/examples/523`
+  - `p10 / p11` source-side explicit authority pair
+  - representative Lean sample set widening
+  - stronger typed source principal は still later
+- source-side IFC authority prototype pair and Lean corpus widening:
+  `specs/examples/523`
+  - `p10 / p11` source-side explicit authority pair
+  - verifier preview / model-check projection / theorem Lean actualization representative set widening
+  - final typed source principal には上げず、checker-adjacent IFC package に留める
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

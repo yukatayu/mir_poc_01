@@ -47,13 +47,13 @@
     「二大問題を completely solved / language implementation complete と読めるか」
     「全体像に対して今どこにいるか」
     「何を答えればどこまで自走できるか」
-    を representative theorem quartet actual Lean execution floor まで含めて整理する。
+    を representative Lean sample set actual Lean execution floor まで含めて整理する。
   - 規範判断の正本ではないが、current status / completion-bound / self-drive-limit の確認入口として使ってよい。
 - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
   - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
   - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
-  - 2026-04-19 時点の detailed closeout handoff であり、representative theorem quartet actual Lean execution 後の reopened self-driven queue、layered strong typing / IFC first-fragment、Lean formal skeleton、first completion scope を current explanation source として補強する。
+  - 2026-04-19 時点の detailed closeout handoff であり、representative Lean sample set actual Lean execution 後の reopened self-driven queue、layered strong typing / IFC first-fragment、Lean formal skeleton、first completion scope を current explanation source として補強する。
   - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
 
 ## 規範的な読書順
@@ -130,6 +130,9 @@
 - `specs/examples/522-current-l2-ifc-secret-valid-invalid-foundation-and-japanese-lean-corpus-sync.md`
   - Package 56 の reopened IFC line を `CurrentL2IfcSecretExamples.lean` まで進め、secret-key valid/invalid concrete example と日本語 Lean corpus explanation sync を current mechanization-ready floor として整理する補助文書。
   - final typed source principal や final IFC syntax を固定するものではなく、helper-local IFC concrete example と sample-facing wording sync を読むための anchor である。
+- `specs/examples/523-current-l2-source-side-ifc-authority-prototype-pair-and-representative-lean-sample-set-widening.md`
+  - Package 56 の source-side explicit authority line を `p10 / p11` corrected prototype pair まで進め、verifier preview / model-check projection / theorem Lean actualization representative set widening を current checker-adjacent IFC floor として整理する補助文書。
+  - final typed source principal や final IFC syntax や final public verifier contract を固定するものではなく、source-side IFC evidence pair と representative Lean sample set widening を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

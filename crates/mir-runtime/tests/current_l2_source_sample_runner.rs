@@ -388,6 +388,112 @@ fn current_l2_source_sample_runner_accepts_typed_bridge_prototype_path() {
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths() {
+    let p10 = typed_prototype_sample_path("p10-typed-authorized-fingerprint-declassification.txt");
+    let p10_host_plan = load_host_plan_from_path(&typed_prototype_sample_path(
+        "p10-typed-authorized-fingerprint-declassification.host-plan.json",
+    ))
+    .unwrap();
+    let p10_report = run_current_l2_source_sample(p10.to_str().unwrap(), p10_host_plan).unwrap();
+    assert_eq!(
+        p10_report.sample_id,
+        "p10-typed-authorized-fingerprint-declassification"
+    );
+    assert_eq!(
+        p10_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert_eq!(
+        p10_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Success)
+    );
+    assert_eq!(
+        p10_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformSuccess,
+        ]
+    );
+    assert_eq!(
+        p10_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("fingerprint_state")
+            .cloned(),
+        Some(vec![
+            "derive_secret_fingerprint@release_authority".to_string(),
+            "publish_declassified_fingerprint@release_authority".to_string(),
+        ])
+    );
+    assert_eq!(
+        p10_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("fingerprint_debug_text_output")
+            .cloned(),
+        Some(vec![
+            "derive_secret_fingerprint: secret_key -> classified".to_string(),
+            "publish_declassified_fingerprint: authority release -> visible".to_string(),
+        ])
+    );
+
+    let p11 = typed_prototype_sample_path("p11-typed-unauthorized-fingerprint-release.txt");
+    let p11_host_plan = load_host_plan_from_path(&typed_prototype_sample_path(
+        "p11-typed-unauthorized-fingerprint-release.host-plan.json",
+    ))
+    .unwrap();
+    let p11_report = run_current_l2_source_sample(p11.to_str().unwrap(), p11_host_plan).unwrap();
+    assert_eq!(p11_report.sample_id, "p11-typed-unauthorized-fingerprint-release");
+    assert_eq!(
+        p11_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert_eq!(
+        p11_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Reject)
+    );
+    assert_eq!(
+        p11_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformFailure,
+            EventKind::Reject,
+        ]
+    );
+    assert_eq!(
+        p11_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("fingerprint_state")
+            .cloned(),
+        Some(vec!["derive_secret_fingerprint@fingerprint_holder".to_string(),])
+    );
+    assert_eq!(
+        p11_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("fingerprint_debug_text_output")
+            .cloned(),
+        Some(vec!["derive_secret_fingerprint: secret_key -> classified".to_string(),])
+    );
+    assert!(
+        p11_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .values()
+            .flatten()
+            .all(|record| !record.contains("publish_without_authority"))
+    );
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_order_handoff_third_tranche_paths() {
     let p07 = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let p07_host_plan = load_host_plan_from_path(&order_handoff_prototype_sample_path(

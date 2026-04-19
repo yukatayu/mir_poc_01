@@ -1,0 +1,112 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "option-admit",
+      "op": "derive_secret_fingerprint",
+      "option_ref": "release_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "derive_secret_fingerprint",
+      "option_ref": "observer_only",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "publish_declassified_fingerprint",
+      "option_ref": "release_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "publish_declassified_fingerprint",
+      "option_ref": "observer_only",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "release_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "release_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "publish_declassified_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "release_authority",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "publish_declassified_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "release_authority",
+      "verdict": "satisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "selected_option_ref": "release_authority",
+      "selected_target": "fingerprint_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "fingerprint_state",
+              "record": "derive_secret_fingerprint@release_authority"
+            },
+            {
+              "kind": "append-record",
+              "target": "fingerprint_debug_text_output",
+              "record": "derive_secret_fingerprint: secret_key -> classified"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "publish_declassified_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "selected_option_ref": "release_authority",
+      "selected_target": "fingerprint_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "fingerprint_state",
+              "record": "publish_declassified_fingerprint@release_authority"
+            },
+            {
+              "kind": "append-record",
+              "target": "fingerprint_debug_text_output",
+              "record": "publish_declassified_fingerprint: authority release -> visible"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

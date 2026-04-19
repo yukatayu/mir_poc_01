@@ -1,0 +1,80 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "option-admit",
+      "op": "derive_secret_fingerprint",
+      "option_ref": "fingerprint_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "derive_secret_fingerprint",
+      "option_ref": "delegated_release",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "publish_without_authority",
+      "option_ref": "fingerprint_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "publish_without_authority",
+      "option_ref": "delegated_release",
+      "verdict": "unsatisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "fingerprint_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "fingerprint_holder",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "publish_without_authority",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "option_ref": "fingerprint_holder",
+      "verdict": "unsatisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "derive_secret_fingerprint",
+      "mode": "via",
+      "chain_ref": "fingerprint_release_ref",
+      "selected_option_ref": "fingerprint_holder",
+      "selected_target": "fingerprint_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "fingerprint_state",
+              "record": "derive_secret_fingerprint@fingerprint_holder"
+            },
+            {
+              "kind": "append-record",
+              "target": "fingerprint_debug_text_output",
+              "record": "derive_secret_fingerprint: secret_key -> classified"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}
