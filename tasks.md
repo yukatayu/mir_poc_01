@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 18:41 JST
+最終更新: 2026-04-19 18:58 JST
 
 ## この文書について
 
@@ -22,9 +22,9 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - order-handoff/shared-space residual mixed-gate compression
-  - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - strong typing / IFC beyond first checker fragment の helper-to-checker ratchet
+  - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
+  - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -46,13 +46,13 @@
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
   - order-handoff / shared-space side:
-    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、CLI `surface_preview`、late-join negative static stop `p13 / p14`
+    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`
 
 ## ordered self-driven packages
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `61` order-handoff/shared-space residual mixed-gate compression | source wording / emitted artifact / witness-provider public contract residual をどの reopen order で narrow に残すか | `M` | `Macro 5/6/7` | edge-row principal と route/schema actual adoption を維持したまま、Problem 2 residual を sharpen する | final public wording / contract を凍らせず reopen 順を圧縮できる |
+| `62` typed/IFC helper-to-checker ratchet | sample-local `typed_checker_hint_preview` を actual checker payload family へどこまで近づけるか | `M` | `Macro 5/7` | checker-adjacent principal と IFC first-fragment を維持したまま、`p10 / p11 / p12` を checker payload threshold へ ratchet する | final typed source principal / final public verifier contract を凍らせず、helper preview を checker-adjacent payload family まで整理できる |
 
 ## recently closed package note
 
@@ -121,6 +121,30 @@
 - stop line:
   final public theorem/model-check contract adoption、final public verifier contract adoption、concrete production prover/model-check binding には上げない
 
+### Package 61 — order-handoff/shared-space residual mixed-gate compression
+
+- current reading:
+  close 済み。order-handoff source wording residual / emitted-artifact residual / witness-provider public-seam residual を `run-source-sample` helper summary に mirror し、`p07 / p08` reached・`p09` guard の current cut を helper-local operational summary に actualize した。
+- evidence:
+  `specs/examples/533`
+  `docs/reports/0814`
+  `crates/mir-runtime/src/current_l2_cli.rs`
+  `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+- stop line:
+  final source wording adoption、final public witness/provider/artifact contract adoption、final parser/public API adoption には上げない
+
+### Package 62 — typed/IFC helper-to-checker ratchet
+
+- current reading:
+  next active line。`typed_checker_hint_preview` を final typed source principal や final public verifier contract に上げず、checker-adjacent payload threshold まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/522`
+  `specs/examples/523`
+  `specs/examples/524`
+  `specs/examples/529`
+- stop line:
+  final typed source principal、final IFC syntax、final public checker artifact、final public verifier contract には上げない
+
 ## research-discovery items
 
 | item | 何に影響するか | current recommendation |
@@ -152,4 +176,4 @@
 
 ## next reopen order
 
-1. Package 61 で order-handoff/shared-space residual mixed-gate compression を進める。
+1. Package 62 で typed/IFC helper-to-checker ratchet を進める。

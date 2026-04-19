@@ -221,6 +221,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
     artifact_preview: CurrentL2OperationalCliArtifactPreviewSummary,
     surface_preview: CurrentL2OperationalCliSurfacePreviewSummary,
+    order_handoff_witness_provider_public_seam_compression:
+        CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary,
     theorem_result_object_preview: CurrentL2OperationalCliTheoremResultObjectPreviewSummary,
     model_check_public_checker_preview:
         CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary,
@@ -239,6 +241,13 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             CurrentL2OperationalCliArtifactPreviewSummary::from_source_report(&report);
         let surface_preview =
             CurrentL2OperationalCliSurfacePreviewSummary::from_source_report(&report);
+        let order_handoff_witness_provider_public_seam_compression =
+            CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary::from_source_report(
+                &report,
+                &verification_preview,
+                &artifact_preview,
+                &surface_preview,
+            );
         let theorem_result_object_preview =
             CurrentL2OperationalCliTheoremResultObjectPreviewSummary::from_source_report(
                 &report,
@@ -279,6 +288,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             verification_preview,
             artifact_preview,
             surface_preview,
+            order_handoff_witness_provider_public_seam_compression,
             theorem_result_object_preview,
             model_check_public_checker_preview,
             theorem_final_public_contract_reopen_threshold,
@@ -898,6 +908,103 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
+    status: &'static str,
+    compression_kind: &'static str,
+    profile_axis_refs: Vec<String>,
+    repo_local_emitted_artifact_refs: Vec<String>,
+    source_wording_route_refs: Vec<String>,
+    emitted_artifact_candidate_keep_refs: Vec<String>,
+    serial_scope_lines: Vec<String>,
+    witness_schema_route_refs: Vec<String>,
+    provider_receipt_route_refs: Vec<String>,
+    combined_public_contract_keep_refs: Vec<String>,
+    trace_alignment_pair_refs: Vec<String>,
+    public_seam_residual_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+        artifact_preview: &CurrentL2OperationalCliArtifactPreviewSummary,
+        _surface_preview: &CurrentL2OperationalCliSurfacePreviewSummary,
+    ) -> Self {
+        let reached = matches!(
+            report.sample_id.as_str(),
+            "p07-dice-late-join-visible-history" | "p08-dice-stale-reconnect-refresh"
+        ) && verification_preview.formal_hook_status == "reached";
+
+        if reached {
+            let sample_id = report.sample_id.as_str();
+            let repo_local_emitted_artifact_refs =
+                order_handoff_repo_local_emitted_artifact_refs(artifact_preview);
+            return Self {
+                status: "reached",
+                compression_kind: "helper_local_public_seam_manifest",
+                profile_axis_refs: authoritative_room_profile_axis_refs(sample_id),
+                repo_local_emitted_artifact_refs,
+                source_wording_route_refs: order_handoff_source_wording_actual_route_refs(
+                    sample_id,
+                ),
+                emitted_artifact_candidate_keep_refs:
+                    order_handoff_emitted_artifact_keep_refs(sample_id),
+                serial_scope_lines: order_handoff_serial_scope_reserve_surface_lines(sample_id),
+                witness_schema_route_refs: witness_provider_schema_route_witness_refs(sample_id),
+                provider_receipt_route_refs: witness_provider_schema_route_provider_refs(sample_id),
+                combined_public_contract_keep_refs:
+                    witness_provider_combined_public_contract_keep_refs(sample_id),
+                trace_alignment_pair_refs: witness_provider_trace_alignment_pair_refs(
+                    sample_id,
+                    artifact_preview,
+                ),
+                public_seam_residual_refs: order_handoff_witness_provider_public_seam_residual_refs(
+                    sample_id,
+                ),
+                evidence_refs: order_handoff_witness_provider_public_seam_evidence_refs(sample_id),
+                compare_floor_refs:
+                    order_handoff_witness_provider_public_seam_compare_floor_refs(true),
+                guard_refs: order_handoff_witness_provider_public_seam_guard_refs(true),
+                kept_later_refs: order_handoff_witness_provider_public_seam_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            compression_kind: "helper_local_public_seam_manifest",
+            profile_axis_refs: Vec::new(),
+            repo_local_emitted_artifact_refs: Vec::new(),
+            source_wording_route_refs: Vec::new(),
+            emitted_artifact_candidate_keep_refs: Vec::new(),
+            serial_scope_lines: Vec::new(),
+            witness_schema_route_refs: Vec::new(),
+            provider_receipt_route_refs: Vec::new(),
+            combined_public_contract_keep_refs: Vec::new(),
+            trace_alignment_pair_refs: Vec::new(),
+            public_seam_residual_refs: Vec::new(),
+            evidence_refs: order_handoff_witness_provider_public_seam_evidence_refs(
+                &report.sample_id,
+            ),
+            compare_floor_refs: order_handoff_witness_provider_public_seam_compare_floor_refs(
+                false,
+            ),
+            guard_refs: order_handoff_witness_provider_public_seam_guard_refs(false),
+            kept_later_refs: order_handoff_witness_provider_public_seam_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current order-handoff/witness-provider public seam compression only actualizes the representative authoritative-room pair (`p07` / `p08`) after route/reserve/bridge/threshold floors align for `{}`",
+                report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliTheoremResultObjectPreviewSummary {
     status: &'static str,
     preview_kind: &'static str,
@@ -1401,6 +1508,12 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         "serial_scope_reserve",
         &summary.surface_preview.serial_scope_reserve,
     );
+    writeln!(output, "order_handoff_witness_provider_public_seam_compression:")
+        .expect("write to string");
+    render_order_handoff_witness_provider_public_seam_compression(
+        &mut output,
+        &summary.order_handoff_witness_provider_public_seam_compression,
+    );
     writeln!(output, "theorem_result_object_preview:").expect("write to string");
     render_theorem_result_object_preview(&mut output, &summary.theorem_result_object_preview);
     writeln!(output, "model_check_public_checker_preview:").expect("write to string");
@@ -1630,6 +1743,245 @@ fn model_check_public_checker_preview_kept_later_refs() -> Vec<String> {
         "kept_later:actual_emitted_verifier_handoff_artifact".to_string(),
         "kept_later:production_checker_runtime_policy_contract".to_string(),
         "kept_later:final_public_verifier_contract".to_string(),
+    ]
+}
+
+fn order_handoff_witness_provider_public_seam_evidence_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "helper_preview:order_handoff_witness_provider_public_seam_compression".to_string(),
+        "compare_floor:current_l2.order_handoff_witness_provider_public_seam_compression"
+            .to_string(),
+    ]
+}
+
+fn authoritative_room_profile_axis_refs(sample_id: &str) -> Vec<String> {
+    let mut refs = vec![
+        "profile_axis:activation:authority-ack".to_string(),
+        "profile_axis:authority_placement:single_room_authority".to_string(),
+        "profile_axis:consistency_mode:authoritative_serial_transition".to_string(),
+        "profile_axis:rng_source:authority_rng".to_string(),
+    ];
+
+    match sample_id {
+        "p07-dice-late-join-visible-history" => {
+            refs.push("profile_axis:late_join:published_history_visible_as_past".to_string())
+        }
+        "p08-dice-stale-reconnect-refresh" => {
+            refs.push("profile_axis:stale_reconnect:fail_then_refresh".to_string());
+            refs.push("profile_axis:replay:stale_incompatible_replay_invalidated".to_string());
+        }
+        _ => {}
+    }
+
+    refs.push("profile_axis:fairness_claim:no_distributed_fairness_theorem_required".to_string());
+    refs
+}
+
+fn order_handoff_repo_local_emitted_artifact_refs(
+    artifact_preview: &CurrentL2OperationalCliArtifactPreviewSummary,
+) -> Vec<String> {
+    let mut refs = Vec::new();
+    for unit in &artifact_preview.proof_notebook_review_units {
+        for evidence_ref in &unit.evidence_refs {
+            if !refs.contains(evidence_ref) {
+                refs.push(evidence_ref.clone());
+            }
+        }
+    }
+    for carrier in &artifact_preview.model_check_concrete_carriers {
+        for evidence_ref in &carrier.evidence_refs {
+            if !refs.contains(evidence_ref) {
+                refs.push(evidence_ref.clone());
+            }
+        }
+    }
+    refs
+}
+
+fn order_handoff_source_wording_actual_route_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!(
+            "order_handoff_source_wording_actual_route:{sample_id}:edge_row_vertical_continuation_principal"
+        ),
+        format!(
+            "order_handoff_source_wording_actual_route:{sample_id}:readable_high_level_relation_vocabulary"
+        ),
+        format!(
+            "order_handoff_source_wording_actual_route:{sample_id}:stage_block_secondary_keep"
+        ),
+        format!(
+            "order_handoff_source_wording_actual_route:{sample_id}:thread_node_same_causal_language"
+        ),
+        format!(
+            "order_handoff_source_wording_actual_route:{sample_id}:final_source_surface_handoff_wording_later"
+        ),
+    ]
+}
+
+fn order_handoff_emitted_artifact_keep_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!(
+            "order_handoff_emitted_artifact_keep:{sample_id}:repo_local_emitted_artifact_refs_first"
+        ),
+        format!(
+            "order_handoff_emitted_artifact_keep:{sample_id}:source_surface_actual_adoption_adjacent"
+        ),
+        format!(
+            "order_handoff_emitted_artifact_keep:{sample_id}:witness_provider_contract_adjacent_not_collapsed"
+        ),
+        format!(
+            "order_handoff_emitted_artifact_keep:{sample_id}:final_emitted_artifact_schema_later"
+        ),
+    ]
+}
+
+fn witness_provider_schema_route_witness_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!(
+            "witness_provider_schema_route_actual:{sample_id}:witness_schema_candidate_keep"
+        ),
+        format!("witness_provider_schema_route_actual:{sample_id}:witness_route_first"),
+        format!(
+            "witness_provider_schema_route_actual:{sample_id}:repo_local_emitted_artifact_refs_first"
+        ),
+        format!(
+            "witness_provider_schema_route_actual:{sample_id}:combined_public_contract_later"
+        ),
+    ]
+}
+
+fn witness_provider_schema_route_provider_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!(
+            "witness_provider_schema_route_actual:{sample_id}:provider_receipt_candidate_keep"
+        ),
+        format!("witness_provider_schema_route_actual:{sample_id}:provider_route_first"),
+        format!(
+            "witness_provider_schema_route_actual:{sample_id}:repo_local_emitted_artifact_refs_first"
+        ),
+        format!(
+            "witness_provider_schema_route_actual:{sample_id}:delegated_provider_attestation_later"
+        ),
+        format!(
+            "witness_provider_schema_route_actual:{sample_id}:combined_public_contract_later"
+        ),
+    ]
+}
+
+fn witness_provider_combined_public_contract_keep_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!(
+            "witness_provider_combined_contract_keep:{sample_id}:combined_public_contract_candidate_only"
+        ),
+        format!(
+            "witness_provider_combined_contract_keep:{sample_id}:final_emitted_handoff_contract_adjacent_keep"
+        ),
+    ]
+}
+
+fn witness_provider_trace_alignment_pair_refs(
+    sample_id: &str,
+    artifact_preview: &CurrentL2OperationalCliArtifactPreviewSummary,
+) -> Vec<String> {
+    let mut obligation_kinds = Vec::new();
+    for unit in &artifact_preview.proof_notebook_review_units {
+        let obligation_kind = unit.obligation_kind.to_string();
+        if !obligation_kinds.contains(&obligation_kind) {
+            obligation_kinds.push(obligation_kind);
+        }
+    }
+    for carrier in &artifact_preview.model_check_concrete_carriers {
+        let obligation_kind = carrier.obligation_kind.to_string();
+        if !obligation_kinds.contains(&obligation_kind) {
+            obligation_kinds.push(obligation_kind);
+        }
+    }
+    obligation_kinds.sort();
+    obligation_kinds
+        .into_iter()
+        .map(|obligation_kind| {
+            format!(
+                "witness_provider_emitted_contract_trace_alignment_pair:{sample_id}:{obligation_kind}"
+            )
+        })
+        .collect()
+}
+
+fn order_handoff_witness_provider_public_seam_residual_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!(
+            "order_handoff_public_seam_residual:{sample_id}:final_source_surface_handoff_wording_later"
+        ),
+        format!(
+            "order_handoff_public_seam_residual:{sample_id}:final_emitted_artifact_schema_later"
+        ),
+        format!("shared_space_public_seam_residual:{sample_id}:public_schema_pair_first"),
+        format!(
+            "shared_space_public_seam_residual:{sample_id}:delegated_attestation_and_combined_contract_second"
+        ),
+        format!(
+            "shared_space_public_seam_residual:{sample_id}:final_emitted_handoff_contract_third"
+        ),
+    ]
+}
+
+fn order_handoff_witness_provider_public_seam_compare_floor_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "compare_floor:current_l2.order_handoff.source_wording_route_actual_adoption"
+                .to_string(),
+            "compare_floor:current_l2.order_handoff.serial_scope_reserve_surface".to_string(),
+            "compare_floor:current_l2.witness_provider_emitted_contract_trace_alignment_bridge"
+                .to_string(),
+            "compare_floor:current_l2.witness_provider_final_public_contract_reopen_threshold"
+                .to_string(),
+            "compare_floor:current_l2.order_handoff_witness_provider_public_seam_compression"
+                .to_string(),
+        ]
+    } else {
+        vec![
+            "compare_floor:current_l2.order_handoff_witness_provider_public_seam_compression.guard_only"
+                .to_string(),
+        ]
+    }
+}
+
+fn order_handoff_witness_provider_public_seam_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:edge_row_vertical_continuation_principal".to_string(),
+            "guard:serial_scope_reserve_surface_only".to_string(),
+            "guard:witness_provider_trace_alignment_bridge".to_string(),
+            "guard:public_schema_pair_first".to_string(),
+            "guard:delegated_attestation_and_combined_contract_second".to_string(),
+            "guard:final_source_surface_handoff_wording_later".to_string(),
+            "guard:final_emitted_artifact_schema_later".to_string(),
+            "guard:final_emitted_handoff_contract_third".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:order_handoff_witness_provider_public_seam_compression_not_reached"
+                .to_string(),
+        ]
+    }
+}
+
+fn order_handoff_witness_provider_public_seam_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:final_public_parser_checker_runtime_api".to_string(),
+        "kept_later:final_source_surface_handoff_wording".to_string(),
+        "kept_later:final_emitted_artifact_schema".to_string(),
+        "kept_later:final_public_witness_schema".to_string(),
+        "kept_later:final_public_provider_receipt_schema".to_string(),
+        "kept_later:delegated_provider_attestation".to_string(),
+        "kept_later:combined_provider_witness_public_contract".to_string(),
+        "kept_later:final_emitted_handoff_contract".to_string(),
+        "kept_later:authoritative_room_serial_scope_sugar".to_string(),
+        "kept_later:low_level_memory_order_source_surface".to_string(),
+        "kept_later:final_modal_foundation_adoption".to_string(),
+        "kept_later:exhaustive_shared_space_catalog".to_string(),
     ]
 }
 
@@ -2145,6 +2497,79 @@ fn render_theorem_final_public_contract_reopen_threshold(
     render_string_list(output, "guard_refs", &threshold.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &threshold.kept_later_refs, 1);
     if let Some(guard_reason) = &threshold.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_order_handoff_witness_provider_public_seam_compression(
+    output: &mut String,
+    compression: &CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary,
+) {
+    writeln!(output, "  status: {}", compression.status).expect("write to string");
+    writeln!(output, "  compression_kind: {}", compression.compression_kind)
+        .expect("write to string");
+    render_string_list(output, "profile_axis_refs", &compression.profile_axis_refs, 1);
+    render_string_list(
+        output,
+        "repo_local_emitted_artifact_refs",
+        &compression.repo_local_emitted_artifact_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "source_wording_route_refs",
+        &compression.source_wording_route_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "emitted_artifact_candidate_keep_refs",
+        &compression.emitted_artifact_candidate_keep_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "serial_scope_lines",
+        &compression.serial_scope_lines,
+        1,
+    );
+    render_string_list(
+        output,
+        "witness_schema_route_refs",
+        &compression.witness_schema_route_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "provider_receipt_route_refs",
+        &compression.provider_receipt_route_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "combined_public_contract_keep_refs",
+        &compression.combined_public_contract_keep_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "trace_alignment_pair_refs",
+        &compression.trace_alignment_pair_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "public_seam_residual_refs",
+        &compression.public_seam_residual_refs,
+        1,
+    );
+    render_string_list(output, "evidence_refs", &compression.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &compression.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &compression.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &compression.kept_later_refs, 1);
+    if let Some(guard_reason) = &compression.guard_reason {
         writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
     } else {
         writeln!(output, "  guard_reason: none").expect("write to string");

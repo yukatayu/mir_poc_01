@@ -160,6 +160,9 @@
 - `specs/examples/532-current-l2-theorem-model-check-reopen-threshold-helper-mirror.md`
   - Package 60 の closeout として theorem/model-check final public-contract reopen threshold を `run-source-sample` helper summary に narrow に mirror し、`p08` theorem reached / model-check guarded と `p09` theorem guarded / model-check reached の非対称を helper-local operational summary で保つ補助文書。
   - final public theorem/model-check contract を固定するものではなく、Package 60 close と Package 61 order-handoff/shared-space residual mixed-gate compression next line を読むための anchor である。
+- `specs/examples/533-current-l2-order-handoff-witness-provider-public-seam-helper-mirror.md`
+  - Package 61 の closeout として order-handoff / witness-provider public seam compression を `run-source-sample` helper summary に narrow に mirror し、`p07 / p08` reached と `p09` guard-only の current cut を helper-local operational summary で保つ補助文書。
+  - final source wording、final public witness/provider/artifact contract、final parser/public API を固定するものではなく、Package 61 close と Package 62 typed/IFC helper-to-checker ratchet next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。

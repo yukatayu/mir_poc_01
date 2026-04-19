@@ -3802,3 +3802,14 @@
   - `docs/reports/0813-package60-theorem-model-check-residual-mixed-gate-compression.md`
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
+## 2026-04-19 Package 61 order-handoff/shared-space residual mixed-gate compression addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/505-current-l2-witness-provider-final-public-contract-reopen-threshold.md`
+  - `specs/examples/515-current-l2-order-handoff-witness-provider-final-public-seam-compression-after-reserve-actualizations.md`
+  - `specs/examples/526-current-l2-order-handoff-helper-cli-surface-preview-actualization.md`
+  - `specs/examples/533-current-l2-order-handoff-witness-provider-public-seam-helper-mirror.md`
+  - `docs/reports/0814-package61-order-handoff-shared-space-residual-mixed-gate-compression.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`

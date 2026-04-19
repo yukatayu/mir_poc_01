@@ -522,6 +522,12 @@ actual-adoption floor では、
   - `p08` theorem reached / model-check guarded
   - `p09` theorem guarded / model-check reached
   - Package 60 residual mixed-gate compression close
+- order-handoff/shared-space public-seam helper mirror:
+  `specs/examples/533`
+  - order-handoff / witness-provider public seam helper mirror
+  - `p07 / p08` reached / `p09` guard-only
+  - source wording / emitted artifact / witness-provider residual compressed keep
+  - Package 61 residual mixed-gate compression close
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
