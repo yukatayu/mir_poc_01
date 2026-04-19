@@ -103,6 +103,20 @@ pub struct CurrentL2CheckerRuntimeFirstTrancheManifest {
     pub retained_later_refs: &'static [&'static str],
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2CompileReadyVerificationAndFormalHookManifest {
+    pub verification_gate_refs: &'static [&'static str],
+    pub smoke_gate_refs: &'static [&'static str],
+    pub formal_hook_artifact_kind_ref: &'static str,
+    pub formal_hook_subject_kind_refs: &'static [&'static str],
+    pub formal_hook_contract_row_core_refs: &'static [&'static str],
+    pub formal_hook_evidence_ref_family_refs: &'static [&'static str],
+    pub formal_hook_obligation_kind_refs: &'static [&'static str],
+    pub source_artifact_refs: &'static [&'static str],
+    pub validation_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
 const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_SEMANTIC_ENTRY_REFS: &[&str] = &[
     "static_gate_program_detailed",
     "direct_style_evaluator_from_program",
@@ -141,6 +155,69 @@ pub const CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_MANIFEST:
 pub fn current_l2_checker_runtime_first_tranche_manifest()
 -> &'static CurrentL2CheckerRuntimeFirstTrancheManifest {
     &CURRENT_L2_CHECKER_RUNTIME_FIRST_TRANCHE_MANIFEST
+}
+
+const CURRENT_L2_COMPILE_READY_VERIFICATION_GATE_REFS: &[&str] = &[
+    "cargo_test_mir_ast",
+    "cargo_test_mir_runtime",
+    "cargo_test_mir_semantics_current_l2_minimal_interpreter",
+    "cargo_test_mir_semantics_current_l2_static_gate_support",
+    "cargo_test_mir_semantics_current_l2_detached_bundle_support",
+    "cargo_test_mir_semantics_current_l2_formal_hook_support",
+    "python_unittest_current_l2_static_and_detached_loop",
+];
+
+const CURRENT_L2_COMPILE_READY_SMOKE_GATE_REFS: &[&str] =
+    &["smoke_formal_hook_static", "smoke_formal_hook_runtime"];
+
+const CURRENT_L2_COMPILE_READY_FORMAL_HOOK_SUBJECT_KIND_REFS: &[&str] =
+    &["fixture_static_cluster", "runtime_try_cut_cluster"];
+
+const CURRENT_L2_COMPILE_READY_FORMAL_HOOK_CONTRACT_ROW_CORE_REFS: &[&str] =
+    &["obligation_kind", "evidence_refs"];
+
+const CURRENT_L2_COMPILE_READY_FORMAL_HOOK_EVIDENCE_REF_FAMILY_REFS: &[&str] =
+    &["ref_kind", "ref_id"];
+
+const CURRENT_L2_COMPILE_READY_FORMAL_HOOK_OBLIGATION_KIND_REFS: &[&str] = &[
+    "canonical_normalization_law",
+    "no_re_promotion",
+    "rollback_cut_non_interference",
+];
+
+const CURRENT_L2_COMPILE_READY_SOURCE_ARTIFACT_REFS: &[&str] =
+    &["detached_static_gate_artifact", "detached_bundle_artifact"];
+
+const CURRENT_L2_COMPILE_READY_VALIDATION_REFS: &[&str] =
+    &["input_schema_version_guard", "input_artifact_kind_guard"];
+
+const CURRENT_L2_COMPILE_READY_RETAINED_LATER_REFS: &[&str] = &[
+    "concrete_theorem_tool_binding",
+    "concrete_model_check_tool_binding",
+    "parser_second_tranche_widen",
+    "final_public_surface",
+];
+
+pub const CURRENT_L2_COMPILE_READY_VERIFICATION_AND_FORMAL_HOOK_MANIFEST:
+    CurrentL2CompileReadyVerificationAndFormalHookManifest =
+    CurrentL2CompileReadyVerificationAndFormalHookManifest {
+        verification_gate_refs: CURRENT_L2_COMPILE_READY_VERIFICATION_GATE_REFS,
+        smoke_gate_refs: CURRENT_L2_COMPILE_READY_SMOKE_GATE_REFS,
+        formal_hook_artifact_kind_ref: "current_l2_tool_neutral_formal_hook",
+        formal_hook_subject_kind_refs: CURRENT_L2_COMPILE_READY_FORMAL_HOOK_SUBJECT_KIND_REFS,
+        formal_hook_contract_row_core_refs:
+            CURRENT_L2_COMPILE_READY_FORMAL_HOOK_CONTRACT_ROW_CORE_REFS,
+        formal_hook_evidence_ref_family_refs:
+            CURRENT_L2_COMPILE_READY_FORMAL_HOOK_EVIDENCE_REF_FAMILY_REFS,
+        formal_hook_obligation_kind_refs: CURRENT_L2_COMPILE_READY_FORMAL_HOOK_OBLIGATION_KIND_REFS,
+        source_artifact_refs: CURRENT_L2_COMPILE_READY_SOURCE_ARTIFACT_REFS,
+        validation_refs: CURRENT_L2_COMPILE_READY_VALIDATION_REFS,
+        retained_later_refs: CURRENT_L2_COMPILE_READY_RETAINED_LATER_REFS,
+    };
+
+pub fn current_l2_compile_ready_verification_and_formal_hook_manifest()
+-> &'static CurrentL2CompileReadyVerificationAndFormalHookManifest {
+    &CURRENT_L2_COMPILE_READY_VERIFICATION_AND_FORMAL_HOOK_MANIFEST
 }
 
 pub fn current_l2_default_source_sample_directory() -> PathBuf {

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 00:31 JST
+最終更新: 2026-04-20 01:08 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - selected cargo / smoke gate と tool-neutral formal hook shape をどこまで actualize するかの phase6-compile-ready-verification-and-formal-hook ratchet
+  - parser second tranche first / theorem-first reserve / model-check second reserve の sequencing minimum をどこまで actualize するかの phase6-next-reopen-sequencing ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `82` phase6-compile-ready-verification-and-formal-hook ratchet | phase6 checker/runtime first tranche の次段として compile-ready checkpoint をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | selected cargo / smoke gate と tool-neutral formal hook shape を narrow に actualize しつつ、parser_to_program_lowering、formal_hook concrete tool binding、final_public_runtime_checker_api を still later に残したまま compile-ready verification / formal hook first tranche を ratchet する | compile-ready gate / validation refs / formal-hook shape を narrow に actualize しつつ、tool binding と public runtime surface widen を later gate に残せる |
+| `83` phase6-next-reopen-sequencing ratchet | phase6 compile-ready checkpoint close の次段として parser second tranche first / theorem-first reserve / model-check second reserve の sequencing minimum をどこまで helper-local threshold に actualize するか | `M` | `Macro 6/7` | tool-neutral formal hook を entry criteria に維持したまま、parser second tranche attached-slot / predicate fragment first を current recommendation に上げ、theorem/model-check concrete tool binding は reserve path に残す | sequencing_kind / fixed_entry_criteria_refs / selected_first_reopen_ref / deferred_reopen_refs / guard_refs を narrow に actualize しつつ、parser/public widen と concrete tool binding を later gate に残せる |
 
 ## recently closed package note
 
@@ -428,17 +428,32 @@
 ### Package 82 — phase6-compile-ready-verification-and-formal-hook ratchet
 
 - current reading:
-  next active line。`actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold` の次段として、selected cargo / smoke gate と tool-neutral formal hook shape を current cut に留めた phase6 compile-ready verification / formal-hook ready sketch まで narrow に ratchet する。
+  close 済み。`actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold` の次段として、selected cargo / smoke gate と tool-neutral formal hook shape を current cut に留めた phase6 compile-ready verification / formal-hook ready sketch を helper-local summary と code anchor に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/303`
   `specs/examples/304`
-  `specs/examples/553`
+  `specs/examples/554`
 - stop line:
-  parser_to_program_lowering
-  concrete_formal_hook_tool_binding
-  richer_host_interface
-  final_public_runtime_checker_api
+  concrete_theorem_tool_binding
+  concrete_model_check_tool_binding
+  parser_second_tranche_widen
+  final_public_surface
   final_public_verifier_contract
+
+### Package 83 — phase6-next-reopen-sequencing ratchet
+
+- current reading:
+  next active line。`actual_phase6_compile_ready_verification_and_formal_hook_threshold` の次段として、parser second tranche first / theorem-first reserve / model-check second reserve の sequencing minimum を helper-local threshold に留めた phase6 next-reopen line まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/305`
+  `specs/examples/306`
+  `specs/examples/554`
+- stop line:
+  request_clause_suite_bulk_widen
+  perform_head_final_public_api
+  concrete_theorem_tool_binding
+  concrete_model_check_tool_binding
+  final_public_surface
 
 ## research-discovery items
 
@@ -471,4 +486,4 @@
 
 ## next reopen order
 
-1. Package 82 で phase6-compile-ready-verification-and-formal-hook ratchet を進める。
+1. Package 83 で phase6-next-reopen-sequencing ratchet を進める。

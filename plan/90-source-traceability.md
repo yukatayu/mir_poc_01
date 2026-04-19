@@ -233,6 +233,21 @@
   - `crates/mir-runtime/tests/current_l2_checker_runtime_first_tranche_manifest.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
 
+## 2026-04-20 Phase 6 compile-ready verification / formal hook helper mirror addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/303-current-l2-phase6-actual-checker-runtime-skeleton-first-tranche-ready-phase6-compile-ready-verification-and-formal-hook-comparison.md`
+  - `specs/examples/304-current-l2-phase6-compile-ready-verification-and-formal-hook-ready-minimal-phase6-compile-ready-verification-and-formal-hook-threshold.md`
+  - `specs/examples/554-current-l2-phase6-compile-ready-verification-and-formal-hook-threshold-helper-mirror.md`
+  - `docs/reports/0835-package82-phase6-compile-ready-verification-and-formal-hook-ratchet.md`
+  - `crates/mir-semantics/examples/current_l2_emit_formal_hook.rs`
+  - `crates/mir-semantics/tests/current_l2_formal_hook_support.rs`
+  - `scripts/current_l2_detached_loop.py`
+  - `crates/mir-runtime/src/current_l2.rs`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_compile_ready_formal_hook_manifest.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
 ## 2026-04-18 FAQ 007 current-status and last-mile-gate addendum
 
 - `faq_007.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。

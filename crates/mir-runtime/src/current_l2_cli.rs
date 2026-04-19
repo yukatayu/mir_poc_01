@@ -12,8 +12,9 @@ use crate::current_l2::{
     CurrentL2RuntimeSkeletonReport, CurrentL2SourceSampleRunReport,
     CurrentL2TryRollbackStructuralFindingKind, CurrentL2TryRollbackStructuralSubjectKind,
     CurrentL2TryRollbackStructuralSummary, CurrentL2TryRollbackStructuralVerdict,
-    current_l2_checker_runtime_first_tranche_manifest, resolve_current_l2_source_sample_path,
-    run_current_l2_source_sample,
+    current_l2_checker_runtime_first_tranche_manifest,
+    current_l2_compile_ready_verification_and_formal_hook_manifest,
+    resolve_current_l2_source_sample_path, run_current_l2_source_sample,
 };
 use mir_semantics::{
     EventKind, NonAdmissibleSubreason, StaticGateVerdict, TerminalOutcome, load_host_plan_from_path,
@@ -273,6 +274,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
         CurrentL2OperationalCliActualPhase6ActualParserAstCarrierFirstTrancheThresholdSummary,
     actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold:
         CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTrancheThresholdSummary,
+    actual_phase6_compile_ready_verification_and_formal_hook_threshold:
+        CurrentL2OperationalCliActualPhase6CompileReadyVerificationAndFormalHookThresholdSummary,
 }
 
 impl CurrentL2OperationalCliRunSourceSampleSummary {
@@ -417,6 +420,11 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
                 &report,
                 &actual_phase6_actual_parser_ast_carrier_first_tranche_threshold,
             );
+        let actual_phase6_compile_ready_verification_and_formal_hook_threshold =
+            CurrentL2OperationalCliActualPhase6CompileReadyVerificationAndFormalHookThresholdSummary::from_source_report(
+                &report,
+                &actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold,
+            );
         Self {
             shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
             command: RUN_SOURCE_SAMPLE_COMMAND,
@@ -458,6 +466,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_phase5_proof_protocol_runtime_policy_handoff_closeout_threshold,
             actual_phase6_actual_parser_ast_carrier_first_tranche_threshold,
             actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold,
+            actual_phase6_compile_ready_verification_and_formal_hook_threshold,
         }
     }
 }
@@ -3150,6 +3159,173 @@ impl CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTranche
 }
 
 #[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliActualPhase6CompileReadyVerificationAndFormalHookThresholdSummary {
+    status: &'static str,
+    threshold_kind: &'static str,
+    verification_gate_refs: Vec<String>,
+    smoke_gate_refs: Vec<String>,
+    formal_hook_artifact_kind_ref: Option<&'static str>,
+    formal_hook_subject_kind_refs: Vec<String>,
+    formal_hook_contract_row_core_refs: Vec<String>,
+    formal_hook_evidence_ref_family_refs: Vec<String>,
+    formal_hook_obligation_kind_refs: Vec<String>,
+    source_artifact_refs: Vec<String>,
+    validation_refs: Vec<String>,
+    retained_later_refs: Vec<String>,
+    next_comparison_target_ref: Option<&'static str>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliActualPhase6CompileReadyVerificationAndFormalHookThresholdSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold:
+            &CurrentL2OperationalCliActualPhase6ActualCheckerRuntimeSkeletonFirstTrancheThresholdSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold
+            .status
+            == "reached";
+        let manifest = current_l2_compile_ready_verification_and_formal_hook_manifest();
+
+        if reached {
+            let mut compare_floor_refs =
+                actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold
+                    .compare_floor_refs
+                    .clone();
+            compare_floor_refs.push(
+                "compare_floor:current_l2.closeout.phase6_next_reopen_sequencing".to_string(),
+            );
+
+            let mut evidence_refs =
+                actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold
+                    .evidence_refs
+                    .clone();
+            evidence_refs.push(
+                "helper_preview:actual_phase6_compile_ready_verification_and_formal_hook_threshold"
+                    .to_string(),
+            );
+            evidence_refs.push(
+                "source:phase6_compile_ready_verification_and_formal_hook_ready_sketch".to_string(),
+            );
+            evidence_refs.push(
+                "source:phase6_compile_ready_verification_and_formal_hook_minimum".to_string(),
+            );
+            evidence_refs.push("code_anchor:current_l2_emit_formal_hook_example".to_string());
+            evidence_refs.push("code_anchor:current_l2_formal_hook_support_tests".to_string());
+            evidence_refs.push("code_anchor:current_l2_detached_loop_smoke_family".to_string());
+
+            return Self {
+                status: "reached",
+                threshold_kind:
+                    "phase6_compile_ready_verification_and_formal_hook_threshold_manifest",
+                verification_gate_refs: manifest
+                    .verification_gate_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                smoke_gate_refs: manifest
+                    .smoke_gate_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                formal_hook_artifact_kind_ref: Some(manifest.formal_hook_artifact_kind_ref),
+                formal_hook_subject_kind_refs: manifest
+                    .formal_hook_subject_kind_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                formal_hook_contract_row_core_refs: manifest
+                    .formal_hook_contract_row_core_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                formal_hook_evidence_ref_family_refs: manifest
+                    .formal_hook_evidence_ref_family_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                formal_hook_obligation_kind_refs: manifest
+                    .formal_hook_obligation_kind_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                source_artifact_refs: manifest
+                    .source_artifact_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                validation_refs: manifest
+                    .validation_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                retained_later_refs: manifest
+                    .retained_later_refs
+                    .iter()
+                    .map(|item| (*item).to_string())
+                    .collect(),
+                next_comparison_target_ref: Some("phase6_next_reopen_sequencing_comparison"),
+                evidence_refs,
+                compare_floor_refs,
+                guard_refs:
+                    actual_phase6_compile_ready_verification_and_formal_hook_threshold_guard_refs(
+                        true,
+                    ),
+                kept_later_refs:
+                    actual_phase6_compile_ready_verification_and_formal_hook_threshold_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            threshold_kind: "phase6_compile_ready_verification_and_formal_hook_threshold_manifest",
+            verification_gate_refs: vec![],
+            smoke_gate_refs: vec![],
+            formal_hook_artifact_kind_ref: None,
+            formal_hook_subject_kind_refs: vec![],
+            formal_hook_contract_row_core_refs: vec![],
+            formal_hook_evidence_ref_family_refs: vec![],
+            formal_hook_obligation_kind_refs: vec![],
+            source_artifact_refs: vec![],
+            validation_refs: vec![],
+            retained_later_refs: vec![],
+            next_comparison_target_ref: None,
+            evidence_refs: vec![
+                format!("sample:{sample_id}"),
+                "helper_preview:actual_phase6_compile_ready_verification_and_formal_hook_threshold"
+                    .to_string(),
+                "compare_floor:current_l2.closeout.phase6_compile_ready_verification_and_formal_hook"
+                    .to_string(),
+            ],
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.closeout.phase6_compile_ready_verification_and_formal_hook.guard_only"
+                    .to_string(),
+            ],
+            guard_refs:
+                actual_phase6_compile_ready_verification_and_formal_hook_threshold_guard_refs(
+                    false,
+                ),
+            kept_later_refs:
+                actual_phase6_compile_ready_verification_and_formal_hook_threshold_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current actual phase6 compile-ready verification / formal hook threshold only actualizes the representative shared-space trio (`p07` / `p08` / `p09`) after actual phase6 checker/runtime skeleton first tranche threshold reaches the checker/runtime first-tranche minimum for `{sample_id}`"
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary {
     status: &'static str,
     compression_kind: &'static str,
@@ -3911,6 +4087,15 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     render_actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold(
         &mut output,
         &summary.actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold,
+    );
+    writeln!(
+        output,
+        "actual_phase6_compile_ready_verification_and_formal_hook_threshold:"
+    )
+    .expect("write to string");
+    render_actual_phase6_compile_ready_verification_and_formal_hook_threshold(
+        &mut output,
+        &summary.actual_phase6_compile_ready_verification_and_formal_hook_threshold,
     );
     if summary.runtime.non_admissible_metadata.is_empty() {
         writeln!(output, "non_admissible_metadata: []").expect("write to string");
@@ -5289,6 +5474,33 @@ fn actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_guard_r
 fn actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_kept_later_refs()
 -> Vec<String> {
     current_l2_checker_runtime_first_tranche_manifest()
+        .retained_later_refs
+        .iter()
+        .map(|item| (*item).to_string())
+        .collect()
+}
+
+fn actual_phase6_compile_ready_verification_and_formal_hook_threshold_guard_refs(
+    reached: bool,
+) -> Vec<String> {
+    let mut refs = vec![
+        "guard:actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold_required"
+            .to_string(),
+    ];
+    if reached {
+        refs.push("guard:phase6_next_reopen_sequencing_comparison_next".to_string());
+    } else {
+        refs.push(
+            "guard:actual_phase6_compile_ready_verification_and_formal_hook_threshold_not_reached"
+                .to_string(),
+        );
+    }
+    refs
+}
+
+fn actual_phase6_compile_ready_verification_and_formal_hook_threshold_kept_later_refs()
+-> Vec<String> {
+    current_l2_compile_ready_verification_and_formal_hook_manifest()
         .retained_later_refs
         .iter()
         .map(|item| (*item).to_string())
@@ -6700,6 +6912,85 @@ fn render_actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold(
         &summary.parser_bridge_contract_refs,
         1,
     );
+    render_string_list(
+        output,
+        "retained_later_refs",
+        &summary.retained_later_refs,
+        1,
+    );
+    if let Some(next_comparison_target_ref) = summary.next_comparison_target_ref {
+        writeln!(
+            output,
+            "  next_comparison_target_ref: {next_comparison_target_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  next_comparison_target_ref: none").expect("write to string");
+    }
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_actual_phase6_compile_ready_verification_and_formal_hook_threshold(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliActualPhase6CompileReadyVerificationAndFormalHookThresholdSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  threshold_kind: {}", summary.threshold_kind).expect("write to string");
+    render_string_list(
+        output,
+        "verification_gate_refs",
+        &summary.verification_gate_refs,
+        1,
+    );
+    render_string_list(output, "smoke_gate_refs", &summary.smoke_gate_refs, 1);
+    if let Some(formal_hook_artifact_kind_ref) = summary.formal_hook_artifact_kind_ref {
+        writeln!(
+            output,
+            "  formal_hook_artifact_kind_ref: {formal_hook_artifact_kind_ref}"
+        )
+        .expect("write to string");
+    } else {
+        writeln!(output, "  formal_hook_artifact_kind_ref: none").expect("write to string");
+    }
+    render_string_list(
+        output,
+        "formal_hook_subject_kind_refs",
+        &summary.formal_hook_subject_kind_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "formal_hook_contract_row_core_refs",
+        &summary.formal_hook_contract_row_core_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "formal_hook_evidence_ref_family_refs",
+        &summary.formal_hook_evidence_ref_family_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "formal_hook_obligation_kind_refs",
+        &summary.formal_hook_obligation_kind_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "source_artifact_refs",
+        &summary.source_artifact_refs,
+        1,
+    );
+    render_string_list(output, "validation_refs", &summary.validation_refs, 1);
     render_string_list(
         output,
         "retained_later_refs",

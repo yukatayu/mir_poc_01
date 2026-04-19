@@ -458,6 +458,10 @@ fn operational_cli_json_pins_typed_bridge_prototype_preview() {
         value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["status"],
         "guarded_not_reached"
     );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["status"],
+        "guarded_not_reached"
+    );
 }
 
 #[test]
@@ -561,6 +565,46 @@ fn operational_cli_pretty_reports_late_join_order_handoff_prototype() {
     assert!(output.contains(
         "next_comparison_target_ref: phase6_compile_ready_verification_and_formal_hook_comparison"
     ));
+    assert!(output.contains("actual_phase6_compile_ready_verification_and_formal_hook_threshold:"));
+    assert!(output.contains("formal_hook_artifact_kind_ref: current_l2_tool_neutral_formal_hook"));
+    assert!(output.contains("verification_gate_refs:"));
+    assert!(output.contains("cargo_test_mir_ast"));
+    assert!(output.contains("cargo_test_mir_runtime"));
+    assert!(output.contains("cargo_test_mir_semantics_current_l2_minimal_interpreter"));
+    assert!(output.contains("cargo_test_mir_semantics_current_l2_static_gate_support"));
+    assert!(output.contains("cargo_test_mir_semantics_current_l2_detached_bundle_support"));
+    assert!(output.contains("cargo_test_mir_semantics_current_l2_formal_hook_support"));
+    assert!(output.contains("python_unittest_current_l2_static_and_detached_loop"));
+    assert!(output.contains("smoke_gate_refs:"));
+    assert!(output.contains("smoke_formal_hook_static"));
+    assert!(output.contains("smoke_formal_hook_runtime"));
+    assert!(output.contains("formal_hook_subject_kind_refs:"));
+    assert!(output.contains("fixture_static_cluster"));
+    assert!(output.contains("runtime_try_cut_cluster"));
+    assert!(output.contains("formal_hook_contract_row_core_refs:"));
+    assert!(output.contains("obligation_kind"));
+    assert!(output.contains("evidence_refs"));
+    assert!(output.contains("formal_hook_evidence_ref_family_refs:"));
+    assert!(output.contains("ref_kind"));
+    assert!(output.contains("ref_id"));
+    assert!(output.contains("formal_hook_obligation_kind_refs:"));
+    assert!(output.contains("canonical_normalization_law"));
+    assert!(output.contains("no_re_promotion"));
+    assert!(output.contains("rollback_cut_non_interference"));
+    assert!(output.contains("source_artifact_refs:"));
+    assert!(output.contains("detached_static_gate_artifact"));
+    assert!(output.contains("detached_bundle_artifact"));
+    assert!(output.contains("validation_refs:"));
+    assert!(output.contains("input_schema_version_guard"));
+    assert!(output.contains("input_artifact_kind_guard"));
+    assert!(output.contains("retained_later_refs:"));
+    assert!(output.contains("concrete_theorem_tool_binding"));
+    assert!(output.contains("concrete_model_check_tool_binding"));
+    assert!(output.contains("parser_second_tranche_widen"));
+    assert!(output.contains("final_public_surface"));
+    assert!(
+        output.contains("next_comparison_target_ref: phase6_next_reopen_sequencing_comparison")
+    );
 }
 
 #[test]
@@ -891,6 +935,148 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
         value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["next_comparison_target_ref"],
         "phase6_compile_ready_verification_and_formal_hook_comparison"
     );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_artifact_kind_ref"],
+        "current_l2_tool_neutral_formal_hook"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["verification_gate_refs"]
+            [0],
+        "cargo_test_mir_ast"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["verification_gate_refs"]
+            [1],
+        "cargo_test_mir_runtime"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["verification_gate_refs"]
+            [2],
+        "cargo_test_mir_semantics_current_l2_minimal_interpreter"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["verification_gate_refs"]
+            [3],
+        "cargo_test_mir_semantics_current_l2_static_gate_support"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["verification_gate_refs"]
+            [4],
+        "cargo_test_mir_semantics_current_l2_detached_bundle_support"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["verification_gate_refs"]
+            [5],
+        "cargo_test_mir_semantics_current_l2_formal_hook_support"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["verification_gate_refs"]
+            [6],
+        "python_unittest_current_l2_static_and_detached_loop"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["smoke_gate_refs"]
+            [0],
+        "smoke_formal_hook_static"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["smoke_gate_refs"]
+            [1],
+        "smoke_formal_hook_runtime"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_subject_kind_refs"]
+            [0],
+        "fixture_static_cluster"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_subject_kind_refs"]
+            [1],
+        "runtime_try_cut_cluster"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_contract_row_core_refs"]
+            [0],
+        "obligation_kind"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_contract_row_core_refs"]
+            [1],
+        "evidence_refs"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_evidence_ref_family_refs"]
+            [0],
+        "ref_kind"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_evidence_ref_family_refs"]
+            [1],
+        "ref_id"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_obligation_kind_refs"]
+            [0],
+        "canonical_normalization_law"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_obligation_kind_refs"]
+            [1],
+        "no_re_promotion"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["formal_hook_obligation_kind_refs"]
+            [2],
+        "rollback_cut_non_interference"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["source_artifact_refs"]
+            [0],
+        "detached_static_gate_artifact"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["source_artifact_refs"]
+            [1],
+        "detached_bundle_artifact"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["validation_refs"]
+            [0],
+        "input_schema_version_guard"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["validation_refs"]
+            [1],
+        "input_artifact_kind_guard"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["retained_later_refs"]
+            [0],
+        "concrete_theorem_tool_binding"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["retained_later_refs"]
+            [1],
+        "concrete_model_check_tool_binding"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["retained_later_refs"]
+            [2],
+        "parser_second_tranche_widen"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["retained_later_refs"]
+            [3],
+        "final_public_surface"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["next_comparison_target_ref"],
+        "phase6_next_reopen_sequencing_comparison"
+    );
     assert!(
         value["model_check_public_checker_preview"]["guard_reason"]
             .as_str()
@@ -969,6 +1155,14 @@ fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated
     assert_eq!(
         value["actual_phase6_actual_checker_runtime_skeleton_first_tranche_threshold"]["next_comparison_target_ref"],
         "phase6_compile_ready_verification_and_formal_hook_comparison"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase6_compile_ready_verification_and_formal_hook_threshold"]["next_comparison_target_ref"],
+        "phase6_next_reopen_sequencing_comparison"
     );
     assert_eq!(
         value["model_check_final_public_contract_reopen_threshold"]["final_public_contract_reopen_sequence_refs"]
