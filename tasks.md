@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-19 19:55 JST
+最終更新: 2026-04-19 20:04 JST
 
 ## この文書について
 
@@ -22,7 +22,7 @@
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - したがって、remaining work の主眼は次に移っている。
-  - strong typing / IFC beyond first checker fragment の checker payload row-body ratchet
+  - strong typing / IFC beyond first checker fragment の checker payload supported-kind-summary ratchet
   - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
   - order-handoff/shared-space residual public-seam maintenance
   - packaging / FFI / broader app target の user-spec residual
@@ -52,7 +52,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `65` checker payload row-body ratchet | sample-local checker payload row-detail threshold を checker payload row body へどこまで近づけるか | `M` | `Macro 5/7` | checker-adjacent principal と IFC first-fragment を維持したまま、`p10 / p11 / p12` を row-body helper-local threshold まで ratchet する | final public checker artifact / final public verifier contract を凍らせず、helper preview を checker payload row body まで整理できる |
+| `66` checker payload supported-kind-summary ratchet | checker payload row-body threshold の次段として supported kind summary をどこまで helper-local summary に近づけるか | `M` | `Macro 5/7` | checker-adjacent principal と IFC first-fragment を維持したまま、`payload_row_family_ref + supported_kind_scope + supported_kind_refs` を helper-local threshold まで ratchet する | final public checker artifact / final public verifier contract を凍らせず、helper preview を supported kind summary まで整理できる |
 
 ## recently closed package note
 
@@ -173,13 +173,27 @@
 ### Package 65 — checker payload row-body ratchet
 
 - current reading:
-  next active line。`actual_checker_payload_row_detail_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload row body まで narrow に ratchet する。
+  close 済み。`actual_checker_payload_row_detail_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload row body まで narrow に ratchet し、`actual_checker_payload_row_body_threshold` を `payload_row_family_ref + row_source_ref + row_reason_kind + row_body` current cut で helper-local operational summary に actualize 済みと読む。
 - evidence anchor:
   `specs/examples/269`
   `specs/examples/270`
   `specs/examples/536`
+  `specs/examples/537`
 - stop line:
   supported kind detail
+  final public checker artifact
+  final public verifier contract
+
+### Package 66 — checker payload supported-kind-summary ratchet
+
+- current reading:
+  next active line。`actual_checker_payload_row_body_threshold` を final public checker artifact や final public verifier contract に上げず、checker payload supported kind summary まで narrow に ratchet する。
+- evidence anchor:
+  `specs/examples/271`
+  `specs/examples/272`
+  `specs/examples/537`
+- stop line:
+  public checker payload schema
   final public checker artifact
   final public verifier contract
 
@@ -214,4 +228,4 @@
 
 ## next reopen order
 
-1. Package 65 で checker payload row-body ratchet を進める。
+1. Package 66 で checker payload supported-kind-summary ratchet を進める。
