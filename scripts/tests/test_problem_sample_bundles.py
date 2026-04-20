@@ -12,6 +12,7 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("二大問題", text)
         self.assertIn("problem1-typed-theorem-model-check.md", text)
         self.assertIn("problem2-order-handoff-shared-space.md", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py smoke-all", text)
 
     def test_problem1_bundle_doc_mentions_representative_paths_and_commands(self) -> None:
         text = (

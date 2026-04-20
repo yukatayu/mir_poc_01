@@ -24,4 +24,7 @@
 
 - まず各 bundle doc を読む。
 - 次に guide 内の `run-source-sample` / `bundle problem1|problem2` / `mapping` command を順に使う。
+- 問題 1 / 問題 2 をまとめて手早く確認したいときは
+  `python3 scripts/current_l2_guided_samples.py smoke-all`
+  を使う。
 - deeper theory や final public contract ではなく、current first line がどの sample で machine-check されているかを確かめる入口として使う。

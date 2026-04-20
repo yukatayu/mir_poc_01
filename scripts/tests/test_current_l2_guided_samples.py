@@ -522,6 +522,55 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         runner.assert_called_once()
 
+    def test_problem_smoke_aggregate_rows_track_both_problems(self) -> None:
+        completed = mock.Mock(returncode=0, stdout="", stderr="")
+
+        def fake_runner(command: list[str], cwd: Path, check: bool, capture_output: bool, text: bool):
+            self.assertEqual(cwd, guided.REPO_ROOT)
+            self.assertFalse(check)
+            self.assertTrue(capture_output)
+            self.assertTrue(text)
+            return completed
+
+        rows = guided.build_problem_smoke_aggregate_rows(
+            guided.problem_specs(),
+            runner=fake_runner,
+        )
+
+        self.assertEqual([row.problem_id for row in rows], ["problem1", "problem2"])
+        self.assertEqual(rows[0].status, "passed")
+        self.assertEqual(rows[0].step_count, 5)
+        self.assertEqual(rows[0].successful_steps, 5)
+        self.assertIsNone(rows[0].failed_step)
+        self.assertEqual(
+            rows[0].smoke_command,
+            "python3 scripts/current_l2_guided_samples.py smoke problem1",
+        )
+        self.assertEqual(
+            rows[1].sample_bundle_doc,
+            "samples/problem-bundles/problem2-order-handoff-shared-space.md",
+        )
+        self.assertEqual(rows[1].primary_samples, ["p07-dice-late-join-visible-history", "p08-dice-stale-reconnect-refresh"])
+
+    def test_main_smoke_all_command_uses_aggregate_renderer(self) -> None:
+        fake_text = "representative problem bundle aggregate smoke summary\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem_smoke_aggregate_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["smoke-all"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any(
+                "representative problem bundle aggregate smoke summary" in call.args[0]
+                for call in write.mock_calls
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

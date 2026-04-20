@@ -147,6 +147,20 @@ class ProblemSmokeStep:
     command: list[str]
 
 
+@dataclass(frozen=True)
+class ProblemSmokeAggregateRow:
+    problem_id: str
+    title: str
+    status: str
+    step_count: int
+    successful_steps: int
+    failed_step: str | None
+    smoke_command: str
+    sample_bundle_doc: str
+    primary_samples: list[str]
+    step_labels: list[str]
+
+
 def problem_specs() -> dict[str, ProblemSpec]:
     typed_root = REPO_ROOT / "samples" / "prototype" / "current-l2-typed-proof-model-check"
     order_root = REPO_ROOT / "samples" / "prototype" / "current-l2-order-handoff"
@@ -654,15 +668,128 @@ def build_problem_smoke_steps(spec: ProblemSpec) -> list[ProblemSmokeStep]:
     return steps
 
 
-def run_problem_smoke(spec: ProblemSpec) -> int:
-    for step in build_problem_smoke_steps(spec):
-        print(f"== {step.label} ==", flush=True)
-        print(f"$ {' '.join(step.command)}", flush=True)
-        completed = subprocess.run(step.command, cwd=REPO_ROOT, check=False)
+def execute_problem_smoke_steps(
+    spec: ProblemSpec,
+    *,
+    runner: Callable[..., subprocess.CompletedProcess[str]] = subprocess.run,
+    verbose: bool,
+    capture_output: bool,
+) -> tuple[list[ProblemSmokeStep], int, str | None, subprocess.CompletedProcess[str] | None]:
+    steps = build_problem_smoke_steps(spec)
+    successful_steps = 0
+
+    for step in steps:
+        if verbose:
+            print(f"== {step.label} ==", flush=True)
+            print(f"$ {' '.join(step.command)}", flush=True)
+        completed = runner(
+            step.command,
+            cwd=REPO_ROOT,
+            check=False,
+            capture_output=capture_output,
+            text=capture_output,
+        )
         if completed.returncode != 0:
-            return completed.returncode
-        print("", flush=True)
+            if verbose and capture_output:
+                if completed.stdout:
+                    print(
+                        completed.stdout,
+                        end="" if completed.stdout.endswith("\n") else "\n",
+                    )
+                if completed.stderr:
+                    print(
+                        completed.stderr,
+                        file=sys.stderr,
+                        end="" if completed.stderr.endswith("\n") else "\n",
+                    )
+            return steps, successful_steps, step.label, completed
+        successful_steps += 1
+        if verbose:
+            print("", flush=True)
+
+    return steps, successful_steps, None, None
+
+
+def run_problem_smoke(spec: ProblemSpec) -> int:
+    _, _, _, failure = execute_problem_smoke_steps(
+        spec,
+        verbose=True,
+        capture_output=False,
+    )
+    if failure is not None:
+        return failure.returncode
     return 0
+
+
+def build_problem_smoke_aggregate_rows(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    runner: Callable[..., subprocess.CompletedProcess[str]] = subprocess.run,
+) -> list[ProblemSmokeAggregateRow]:
+    rows: list[ProblemSmokeAggregateRow] = []
+    for problem_id in sorted(specs.keys()):
+        spec = specs[problem_id]
+        steps, successful_steps, failed_step, failure = execute_problem_smoke_steps(
+            spec,
+            runner=runner,
+            verbose=False,
+            capture_output=True,
+        )
+        rows.append(
+            ProblemSmokeAggregateRow(
+                problem_id=spec.problem_id,
+                title=PROBLEM_BUNDLE_TITLES[spec.problem_id],
+                status="passed" if failure is None else "failed",
+                step_count=len(steps),
+                successful_steps=successful_steps if failure is not None else len(steps),
+                failed_step=failed_step,
+                smoke_command=f"python3 scripts/current_l2_guided_samples.py smoke {spec.problem_id}",
+                sample_bundle_doc=PROBLEM_SAMPLE_BUNDLE_DOCS[spec.problem_id],
+                primary_samples=[sample.sample_id for sample in spec.samples if sample.primary],
+                step_labels=[step.label for step in steps],
+            )
+        )
+    return rows
+
+
+def render_problem_smoke_aggregate(rows: list[ProblemSmokeAggregateRow]) -> str:
+    lines = [
+        "representative problem bundle aggregate smoke summary",
+        "",
+        "Problem 1 / Problem 2 の representative smoke 実行結果を compact に俯瞰するための repo-local summary。",
+        "",
+    ]
+    for row in rows:
+        lines.append(
+            f"- {row.problem_id}: {row.status} ({row.successful_steps}/{row.step_count} steps)"
+        )
+        lines.append(f"  title: {row.title}")
+        lines.append(f"  smoke command: {row.smoke_command}")
+        lines.append(f"  sample bundle doc: {row.sample_bundle_doc}")
+        lines.append(f"  primary samples: {', '.join(row.primary_samples)}")
+        lines.append(f"  steps: {', '.join(row.step_labels)}")
+        if row.failed_step is not None:
+            lines.append(f"  failed step: {row.failed_step}")
+        lines.append("")
+    lines.extend(
+        [
+            "current recommendation:",
+            "- `smoke problem1` / `smoke problem2` 自体は残しつつ、aggregate 側は compact status 読みだけに留める。",
+            "- exhaustive workflow automation、aggregate CI contract、final public CLI / tutorial surface には上げない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem_smoke_aggregate_from_runtime(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+) -> str:
+    rows = build_problem_smoke_aggregate_rows(specs)
+    if output_format == "json":
+        return json.dumps([asdict(row) for row in rows], ensure_ascii=False, indent=2)
+    return render_problem_smoke_aggregate(rows)
 
 
 def load_sample_report(sample: GuidedSample) -> dict:
@@ -1037,6 +1164,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     smoke_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
 
+    smoke_all_parser = subparsers.add_parser(
+        "smoke-all",
+        help="Problem 1 / Problem 2 の representative smoke をまとめて実行し compact summary を出す",
+    )
+    smoke_all_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     return parser.parse_args(argv)
 
 
@@ -1055,6 +1188,10 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(manifest, ensure_ascii=False, indent=2))
             return 0
         print(render_parser_companion_mapping())
+        return 0
+
+    if args.subcommand == "smoke-all":
+        print(render_problem_smoke_aggregate_from_runtime(specs, output_format=args.format))
         return 0
 
     spec = specs[args.problem_id]
