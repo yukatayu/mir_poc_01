@@ -128,7 +128,15 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
             "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
             text,
         )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness",
+            text,
+        )
         self.assertIn("target/current-l2-guided/problem2-scenario-bundle", text)
+        self.assertIn(
+            "target/current-l2-guided/reserve-packages/auditable-authority-witness",
+            text,
+        )
         self.assertIn(
             "final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract",
             text,

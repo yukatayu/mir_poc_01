@@ -489,6 +489,169 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             any("Problem 1 theorem-first emitted artifact loop" in call.args[0] for call in write.mock_calls)
         )
 
+    def test_auditable_authority_witness_emit_text_mentions_output_dir_command_and_samples(self) -> None:
+        output_dir = (
+            guided.REPO_ROOT
+            / "target"
+            / "guided-sample-tests"
+            / "reserve-packages"
+            / "auditable-authority-witness"
+        )
+        rows = [
+            guided.ReservePackageEmitRow(
+                sample_id="p07-dice-late-join-visible-history",
+                reading="witness-strengthening reached",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "auditable-authority-witness/p07-dice-late-join-visible-history.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="success",
+                reserve_detail="witness+model-check",
+                witness_strengthening_status="reached",
+                first_line_status="reached",
+                reserve_lane_status="reached",
+            ),
+            guided.ReservePackageEmitRow(
+                sample_id="p08-dice-stale-reconnect-refresh",
+                reading="guard-only non-witness-bearing contrast",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "auditable-authority-witness/p08-dice-stale-reconnect-refresh.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="success",
+                reserve_detail="model-check",
+                witness_strengthening_status="guarded_not_reached",
+                first_line_status="reached",
+                reserve_lane_status="reached",
+            ),
+            guided.ReservePackageEmitRow(
+                sample_id="p05-dice-owner-guarded-chain",
+                reading="guard-only pre-default comparison",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "auditable-authority-witness/p05-dice-owner-guarded-chain.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="success",
+                reserve_detail="guarded",
+                witness_strengthening_status="guarded_not_reached",
+                first_line_status="guarded",
+                reserve_lane_status="guarded",
+            ),
+        ]
+
+        text = guided.render_auditable_authority_witness_emit(
+            rows,
+            output_dir=output_dir,
+        )
+
+        self.assertIn("auditable authority witness reserve package", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness",
+            text,
+        )
+        self.assertIn("package-summary.md", text)
+        self.assertIn("witness_kind", text)
+        self.assertIn("p07-dice-late-join-visible-history", text)
+        self.assertIn("p08-dice-stale-reconnect-refresh", text)
+        self.assertIn("p05-dice-owner-guarded-chain", text)
+        self.assertIn("final public witness schema", text)
+
+    def test_auditable_authority_witness_emit_manifest_writes_summary_files(self) -> None:
+        output_dir = (
+            guided.REPO_ROOT
+            / "target"
+            / "guided-sample-tests"
+            / "reserve-packages"
+            / "auditable-authority-witness-index"
+        )
+
+        def fake_emitter(sample_id: str, output_path: guided.Path) -> dict[str, object]:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text("{\"ok\": true}", encoding="utf-8")
+            if sample_id == "p07-dice-late-join-visible-history":
+                lane_status = "reached"
+                witness_status = "reached"
+                reserve_detail = "witness+model-check"
+                first_line_status = "reached"
+            elif sample_id == "p08-dice-stale-reconnect-refresh":
+                lane_status = "reached"
+                witness_status = "guarded_not_reached"
+                reserve_detail = "model-check"
+                first_line_status = "reached"
+            else:
+                lane_status = "guarded_not_reached"
+                witness_status = "guarded_not_reached"
+                reserve_detail = "guarded"
+                first_line_status = "guarded_not_reached"
+            return {
+                "checker_floor": {"static_gate": {"verdict": "valid"}},
+                "runtime": {"terminal_outcome": "success"},
+                "authoritative_room_first_scenario_actual_adoption": {
+                    "status": first_line_status,
+                },
+                "authoritative_room_reserve_strengthening_lane": {
+                    "status": lane_status,
+                    "witness_strengthening_status": witness_status,
+                    "delegated_rng_service_status": "guarded_not_reached",
+                    "model_check_second_line_status": "reached"
+                    if reserve_detail != "guarded"
+                    else "guarded_not_reached",
+                },
+            }
+
+        manifest = guided.build_auditable_authority_witness_emit_manifest(
+            output_dir=output_dir,
+            emitter=fake_emitter,
+        )
+
+        summary_md = output_dir / "package-summary.md"
+        summary_json = output_dir / "package-summary.json"
+        self.assertEqual(manifest["package_id"], "auditable-authority-witness")
+        self.assertEqual(
+            manifest["package_summary_markdown"],
+            guided.display_path(summary_md),
+        )
+        self.assertEqual(
+            manifest["package_summary_json"],
+            guided.display_path(summary_json),
+        )
+        self.assertTrue(summary_md.is_file())
+        self.assertTrue(summary_json.is_file())
+        self.assertIn("auditable authority witness reserve package", summary_md.read_text(encoding="utf-8"))
+        payload = guided.json.loads(summary_json.read_text(encoding="utf-8"))
+        self.assertEqual(payload["room_profile_claim"], "fairness_claim = auditable_authority_witness")
+        self.assertEqual(
+            payload["witness_core_fields"],
+            ["witness_kind", "action_ref", "draw_slot", "draw_result"],
+        )
+        self.assertEqual(
+            [row["sample_id"] for row in payload["rows"]],
+            [
+                "p07-dice-late-join-visible-history",
+                "p08-dice-stale-reconnect-refresh",
+                "p05-dice-owner-guarded-chain",
+            ],
+        )
+
+    def test_main_emit_reserve_auditable_authority_witness_uses_runtime_renderer(self) -> None:
+        fake_text = "auditable authority witness reserve package\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_auditable_authority_witness_emit_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["emit-reserve", "auditable-authority-witness"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("auditable authority witness reserve package" in call.args[0] for call in write.mock_calls)
+        )
+
     def test_problem2_residual_bundle_summarizes_first_line_reserve_and_negative(self) -> None:
         spec = guided.problem_specs()["problem2"]
 
@@ -1226,6 +1389,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("auditable-authority-witness", text)
         self.assertIn("delegated-rng-service", text)
         self.assertIn("model-check-second-line", text)
+        self.assertIn("emit-reserve auditable-authority-witness", text)
         self.assertIn("emit-theorem problem1", text)
         self.assertIn("emit-scenario problem2", text)
         self.assertIn("closeout", text)

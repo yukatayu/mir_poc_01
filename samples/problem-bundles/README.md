@@ -17,6 +17,7 @@
   - supporting sample `p10 / p11 / p12 / p15 / p16`
 - [Problem 2 order / handoff / shared-space](./problem2-order-handoff-shared-space.md)
   - representative pair `p07 / p08`
+  - witness strengthening contrast `p05`
   - reserve route `p09`
   - negative pair `p13 / p14`
 
@@ -35,6 +36,9 @@
   を使う。
 - Problem 2 の authoritative-room runnable scenario loop を repo-local output dir に materialize したいときは
   `python3 scripts/current_l2_guided_samples.py emit-scenario problem2`
+  を使う。
+- Problem 2 の `auditable_authority_witness` reserve package を単独で materialize したいときは
+  `python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness`
   を使う。
 - doc 側と helper 側の quickstart が揃っているかを narrow に確認したいときは
   `python3 scripts/current_l2_guided_samples.py quickstart-parity`

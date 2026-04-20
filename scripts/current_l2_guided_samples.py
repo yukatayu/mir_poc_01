@@ -92,10 +92,44 @@ PROBLEM2_SCENARIO_EMIT_SAMPLE_IDS = (
     "p14-dice-late-join-handoff-before-publication",
 )
 
+AUDITABLE_AUTHORITY_WITNESS_EMIT_SAMPLE_IDS = (
+    "p07-dice-late-join-visible-history",
+    "p08-dice-stale-reconnect-refresh",
+    "p05-dice-owner-guarded-chain",
+)
+
 PROBLEM1_THEOREM_EMIT_STOP_LINE = (
     "final public theorem contract",
     "concrete theorem prover brand",
     "final public verifier contract",
+)
+
+AUDITABLE_AUTHORITY_WITNESS_EMIT_STOP_LINE = (
+    "final public witness schema",
+    "final public provider receipt schema",
+    "final public witness/provider/artifact contract",
+    "delegated_rng_service practical package",
+    "distributed fairness theorem",
+)
+
+AUDITABLE_AUTHORITY_WITNESS_WITNESS_CORE_FIELDS = (
+    "witness_kind",
+    "action_ref",
+    "draw_slot",
+    "draw_result",
+)
+
+AUDITABLE_AUTHORITY_WITNESS_BINDING_REFS = (
+    "witness_binding:witness_kind:authority_draw_witness",
+    "witness_binding:action_ref:handoff_dice_authority@dice_state",
+    "witness_binding:draw_slot:primary",
+    "witness_binding:draw_result_binding:publish_roll_result@dice_state",
+)
+
+AUDITABLE_AUTHORITY_WITNESS_ANCHOR_REFS = (
+    "specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md",
+    "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
+    "specs/examples/610-current-l2-auditable-authority-witness-reserve-package-summary-index-actualization.md",
 )
 
 PARSER_COMPANION_MAPPING_BUNDLE_ANCHORS = {
@@ -232,6 +266,19 @@ class ProblemScenarioEmitRow:
     reserve_lane_status: str
 
 
+@dataclass(frozen=True)
+class ReservePackageEmitRow:
+    sample_id: str
+    reading: str
+    output_path: str
+    static_gate: str
+    terminal_outcome: str
+    reserve_detail: str
+    witness_strengthening_status: str
+    first_line_status: str
+    reserve_lane_status: str
+
+
 GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
     "shared-space exhaustive final catalog beyond minimal working subset",
     "installed-binary / packaging / FFI / engine adapter / host integration target",
@@ -354,6 +401,7 @@ RESERVE_INTEGRATION_PACKAGES = (
         "title": "auditable authority witness",
         "summary": "minimal witness core strengthening を final public witness schema に上げずに保つ",
         "entry_commands": (
+            "python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness",
             "python3 scripts/current_l2_guided_samples.py matrix problem2",
             "python3 scripts/current_l2_guided_samples.py bundle problem2",
             "python3 scripts/current_l2_guided_samples.py closeout",
@@ -361,6 +409,7 @@ RESERVE_INTEGRATION_PACKAGES = (
         "anchor_refs": (
             "specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md",
             "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
+            "specs/examples/610-current-l2-auditable-authority-witness-reserve-package-summary-index-actualization.md",
             "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
         ),
     },
@@ -1107,7 +1156,20 @@ def default_problem2_scenario_emit_output_dir() -> Path:
 
 
 def problem2_scenario_emit_command(sample_id: str) -> list[str]:
-    sample_argument = relative_path(guided_sample_by_id(sample_id).sample_path)
+    try:
+        sample_path = guided_sample_by_id(sample_id).sample_path
+    except KeyError:
+        if sample_id == "p05-dice-owner-guarded-chain":
+            sample_path = (
+                REPO_ROOT
+                / "samples"
+                / "prototype"
+                / "current-l2-order-handoff"
+                / "p05-dice-owner-guarded-chain.txt"
+            )
+        else:
+            raise
+    sample_argument = relative_path(sample_path)
     return [
         "cargo",
         "run",
@@ -1260,6 +1322,190 @@ def render_problem2_scenario_emit_from_runtime(
         return json.dumps(manifest, ensure_ascii=False, indent=2)
     rows = [ProblemScenarioEmitRow(**row) for row in manifest["rows"]]
     return render_problem2_scenario_emit(spec, rows, output_dir=output_dir)
+
+
+def supported_emit_reserve_package_ids() -> tuple[str, ...]:
+    return ("auditable-authority-witness",)
+
+
+def default_emit_reserve_output_dir(package_id: str) -> Path:
+    return REPO_ROOT / "target" / "current-l2-guided" / "reserve-packages" / package_id
+
+
+def reserve_package_summary_markdown_path(output_dir: Path) -> Path:
+    return output_dir / "package-summary.md"
+
+
+def reserve_package_summary_json_path(output_dir: Path) -> Path:
+    return output_dir / "package-summary.json"
+
+
+def auditable_authority_witness_emit_reading(
+    sample_id: str,
+    report: Mapping[str, object],
+) -> str:
+    witness_status = helper_plain_status(report, "authoritative_room_reserve_strengthening_lane")
+    witness_detail = problem2_reserve_detail(report)
+    if sample_id == "p07-dice-late-join-visible-history" and witness_detail == "witness+model-check":
+        return "witness-strengthening reached"
+    if sample_id == "p08-dice-stale-reconnect-refresh":
+        return "guard-only non-witness-bearing contrast"
+    if sample_id == "p05-dice-owner-guarded-chain":
+        return "guard-only pre-default comparison"
+    if witness_status == "reached":
+        return "reserve strengthening reached"
+    return "guarded"
+
+
+def build_auditable_authority_witness_emit_rows(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_problem2_scenario_payload,
+) -> list[ReservePackageEmitRow]:
+    rows: list[ReservePackageEmitRow] = []
+    for sample_id in AUDITABLE_AUTHORITY_WITNESS_EMIT_SAMPLE_IDS:
+        output_path = output_dir / f"{sample_id}.run.json"
+        report = emitter(sample_id, output_path)
+        lane = report.get("authoritative_room_reserve_strengthening_lane")
+        witness_strengthening_status = "missing"
+        if isinstance(lane, Mapping):
+            raw_status = lane.get("witness_strengthening_status")
+            if isinstance(raw_status, str):
+                witness_strengthening_status = raw_status
+        rows.append(
+            ReservePackageEmitRow(
+                sample_id=sample_id,
+                reading=auditable_authority_witness_emit_reading(sample_id, report),
+                output_path=display_path(output_path),
+                static_gate=checker_static_gate_verdict(report),
+                terminal_outcome=terminal_outcome_text(report),
+                reserve_detail=problem2_reserve_detail(report),
+                witness_strengthening_status=witness_strengthening_status,
+                first_line_status=helper_plain_status(
+                    report, "authoritative_room_first_scenario_actual_adoption"
+                ),
+                reserve_lane_status=helper_plain_status(
+                    report, "authoritative_room_reserve_strengthening_lane"
+                ),
+            )
+        )
+    return rows
+
+
+def build_auditable_authority_witness_emit_manifest(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_problem2_scenario_payload,
+) -> dict[str, object]:
+    rows = build_auditable_authority_witness_emit_rows(output_dir=output_dir, emitter=emitter)
+    manifest = {
+        "package_id": "auditable-authority-witness",
+        "title": "auditable authority witness reserve package",
+        "current_reading": (
+            "`p07 / p08 / p05` を repo-local output dir に materialize し、"
+            "`auditable_authority_witness` の minimal witness core strengthening を"
+            " representative reached / guard-only contrast の 3 本で再確認する helper-local command。"
+            " final public witness schema ではない。"
+        ),
+        "command": "python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness",
+        "sample_bundle_doc": PROBLEM_SAMPLE_BUNDLE_DOCS["problem2"],
+        "output_dir": display_path(output_dir),
+        "room_profile_claim": "fairness_claim = auditable_authority_witness",
+        "witness_core_fields": list(AUDITABLE_AUTHORITY_WITNESS_WITNESS_CORE_FIELDS),
+        "witness_binding_refs": list(AUDITABLE_AUTHORITY_WITNESS_BINDING_REFS),
+        "anchor_refs": list(AUDITABLE_AUTHORITY_WITNESS_ANCHOR_REFS),
+        "rows": [asdict(row) for row in rows],
+        "stop_line": list(AUDITABLE_AUTHORITY_WITNESS_EMIT_STOP_LINE),
+    }
+    output_dir.mkdir(parents=True, exist_ok=True)
+    summary_md_path = reserve_package_summary_markdown_path(output_dir)
+    summary_json_path = reserve_package_summary_json_path(output_dir)
+    manifest["package_summary_markdown"] = display_path(summary_md_path)
+    manifest["package_summary_json"] = display_path(summary_json_path)
+    summary_json_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    summary_md_path.write_text(
+        render_auditable_authority_witness_emit(rows, output_dir=output_dir),
+        encoding="utf-8",
+    )
+    return manifest
+
+
+def render_auditable_authority_witness_emit(
+    rows: list[ReservePackageEmitRow],
+    *,
+    output_dir: Path,
+) -> str:
+    lines = [
+        "auditable authority witness reserve package",
+        "",
+        "`auditable_authority_witness` の minimal witness core strengthening を `p07 / p08 / p05` で再確認する repo-local reserve helper。",
+        "",
+        f"sample bundle doc: {PROBLEM_SAMPLE_BUNDLE_DOCS['problem2']}",
+        "command: python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness",
+        f"output dir: {display_path(output_dir)}",
+        f"package summary markdown: {display_path(reserve_package_summary_markdown_path(output_dir))}",
+        f"package summary json: {display_path(reserve_package_summary_json_path(output_dir))}",
+        "room profile claim: fairness_claim = auditable_authority_witness",
+        "",
+        "witness core fields:",
+    ]
+    for field_name in AUDITABLE_AUTHORITY_WITNESS_WITNESS_CORE_FIELDS:
+        lines.append(f"- {field_name}")
+    lines.extend(
+        [
+            "",
+            "witness binding refs:",
+        ]
+    )
+    for ref in AUDITABLE_AUTHORITY_WITNESS_BINDING_REFS:
+        lines.append(f"- {ref}")
+    lines.append("")
+    for row in rows:
+        lines.append(f"- {row.sample_id}: {row.reading}")
+        lines.append(f"  output: {row.output_path}")
+        lines.append(f"  static_gate: {row.static_gate}")
+        lines.append(f"  terminal_outcome: {row.terminal_outcome}")
+        lines.append(f"  reserve_detail: {row.reserve_detail}")
+        lines.append(f"  witness_strengthening_status: {row.witness_strengthening_status}")
+        lines.append(f"  first_line_status: {row.first_line_status}")
+        lines.append(f"  reserve_lane_status: {row.reserve_lane_status}")
+        lines.append("")
+    lines.append("stop line:")
+    for item in AUDITABLE_AUTHORITY_WITNESS_EMIT_STOP_LINE:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "anchor refs:",
+        ]
+    )
+    for ref in AUDITABLE_AUTHORITY_WITNESS_ANCHOR_REFS:
+        lines.append(f"- {ref}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- `p07` reached、`p08 / p05` guard-only の strengthening cut を repo-local summary に materialize する narrow helper である。",
+            "- final public witness schema、provider receipt schema、delegated RNG practical package には上げない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_auditable_authority_witness_emit_from_runtime(
+    *,
+    output_format: str,
+    output_dir: Path | None = None,
+) -> str:
+    output_dir = output_dir or default_emit_reserve_output_dir("auditable-authority-witness")
+    manifest = build_auditable_authority_witness_emit_manifest(output_dir=output_dir)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    rows = [ReservePackageEmitRow(**row) for row in manifest["rows"]]
+    return render_auditable_authority_witness_emit(rows, output_dir=output_dir)
 
 
 def parser_companion_inspector_command(
@@ -3261,6 +3507,20 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         default=default_problem2_scenario_emit_output_dir(),
     )
 
+    emit_reserve_parser = subparsers.add_parser(
+        "emit-reserve",
+        help="reserve integration package の representative helper summary を repo-local output dir に materialize する",
+    )
+    emit_reserve_parser.add_argument(
+        "package_id",
+        choices=supported_emit_reserve_package_ids(),
+    )
+    emit_reserve_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+    emit_reserve_parser.add_argument(
+        "--output-dir",
+        type=Path,
+    )
+
     quickstart_parser = subparsers.add_parser(
         "quickstart",
         help="representative sample bundle の最短 4 ステップを helper-side summary として表示する",
@@ -3407,6 +3667,25 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 0
         except KeyError as error:
+            print(str(error), file=sys.stderr)
+            return 1
+
+    if args.subcommand == "emit-reserve":
+        try:
+            output_dir = args.output_dir
+            if output_dir is None:
+                output_dir = default_emit_reserve_output_dir(args.package_id)
+            if args.package_id == "auditable-authority-witness":
+                print(
+                    render_auditable_authority_witness_emit_from_runtime(
+                        output_format=args.format,
+                        output_dir=output_dir,
+                    )
+                )
+                return 0
+            print(f"unsupported reserve package `{args.package_id}`", file=sys.stderr)
+            return 1
+        except RuntimeError as error:
             print(str(error), file=sys.stderr)
             return 1
 

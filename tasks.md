@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 19:45 JST
+最終更新: 2026-04-20 21:12 JST
 
 ## この文書について
 
@@ -58,13 +58,12 @@
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
   - order-handoff / shared-space side:
-    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、authoritative-room first scenario helper summary actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`、`emit-scenario problem2` repo-local runnable scenario loop
+    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、authoritative-room first scenario helper summary actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`、`emit-scenario problem2` repo-local runnable scenario loop、`emit-reserve auditable-authority-witness` repo-local reserve-package summary index
 
 ## ordered self-driven packages
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `auditable-authority-witness` | authoritative-room strengthening line を final public witness schema に上げずに narrow actualization する | `M` | `Macro 6` | minimal witness core strengthening を reserve package として保つ | authoritative-room baseline と witness strengthening の差分が helper / docs / scenario loop で追える |
 | `delegated-rng-service` | provider placement practical line を first actual default の後段で narrow actualization する | `M` | `Macro 6` | delegated RNG service は practical reserve package として進める | authority placement と provider placement の差分が helper / docs / scenario loop で追える |
 | `model-check-second-line` | row-local property carrier second-line を public checker finalization と切り離したまま narrow actualization する | `M` | `Macro 5/6` | model-check second line は theorem-first pilot と分けて reserve reopen する | property carrier / tool seam / public seam residual が problem1 lane と干渉せず追える |
 
@@ -658,6 +657,36 @@
   concrete host / engine target adoption
   exhaustive shared-space catalog adoption
 
+### Package 136 — theorem-first external pilot summary index actualization
+
+- current reading:
+  close 済み。`emit-theorem problem1` を theorem-first external pilot の単独 entrypoint に保ったまま、`pilot-summary.md` / `pilot-summary.json` を repo-local output dir に actualize し、`p06 / p07 / p08` representative theorem line の external-consumer index を 1 本に圧縮した。
+- current recommendation:
+  theorem-first external pilot は reserve package のまま保ち、final public theorem contract や concrete prover brand ではなく notebook-first summary index として扱う。
+- evidence:
+  `specs/examples/609`
+  `docs/reports/0889`
+  `python3 scripts/current_l2_guided_samples.py emit-theorem problem1`
+- stop line:
+  final public theorem contract
+  proof object public schema
+  concrete theorem prover production binding
+
+### Package 137 — auditable-authority-witness reserve package summary index actualization
+
+- current reading:
+  close 済み。`emit-reserve auditable-authority-witness` を reserve package の単独 entrypoint に actualize し、`p07` reached / `p08` non-witness-bearing contrast / `p05` pre-default comparison を `package-summary.md` / `package-summary.json` と run-source-sample JSON 群へ materialize した。
+- current recommendation:
+  `emit-scenario problem2` は Problem 2 全体の runnable scenario loop、`emit-reserve auditable-authority-witness` は witness strengthening package 単独の reopen entrypoint として読み分ける。claim / payload split first と minimal witness core を保ったまま、final public witness schema には上げない。
+- evidence:
+  `specs/examples/610`
+  `docs/reports/0890`
+  `python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness`
+- stop line:
+  final public witness schema
+  final public provider receipt schema
+  final public witness/provider/artifact contract
+
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current reading:
@@ -1154,6 +1183,6 @@
 
 ## next reopen order
 
-1. `reserve` helper の reopen order に沿って `auditable_authority_witness` / `delegated_rng_service` / model-check second-line を順に narrow reopen する。theorem-first external pilot は emitted summary index まで close 済みである。
+1. `reserve` helper の reopen order に沿って `delegated_rng_service` / model-check second-line を順に narrow reopen する。theorem-first external pilot と `auditable_authority_witness` は emitted summary index まで close 済みである。
 2. later mixed gate は `residuals` / `reopen-map` / `lane ...` を入口に、problem-local seam ごとに narrow reopen する。
 3. true user-spec residual は `hold-line` helper を入口に explicit hold line として保ち、user target が明示された時だけ reopen する。
