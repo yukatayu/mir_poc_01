@@ -843,6 +843,8 @@
   - current Phase 6 / Package 122 closeout として、`reopen-map problem1|problem2` helper public surface から stale な `next split packages` 表示を外し、split-package closeout と remaining mixed gate を再同期する補助文書。
 - `specs/examples/596-current-l2-remaining-residual-lane-summary-actualization.md`
   - current Phase 6 / Package 123 closeout として、`residuals` helper と sample bundle doc 側の residual lane entrypoint を actualize し、remaining mixed gate と true user-spec residual を next reopen order 付きで圧縮する補助文書。
+- `specs/examples/597-current-l2-problem1-final-public-seam-lane-helper-actualization.md`
+  - current Phase 6 / Package 124 closeout として、`lane problem1-final-public-seams` helper と Problem 1 bundle doc 側の lane entrypoint を actualize し、Problem 1 final-public-seam lane の component order / stop line を独立 lane として narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

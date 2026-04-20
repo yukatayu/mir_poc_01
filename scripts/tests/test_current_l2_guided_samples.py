@@ -889,6 +889,54 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             any("current-l2 remaining residual lane summary" in call.args[0] for call in write.mock_calls)
         )
 
+    def test_problem1_final_public_seam_lane_text_mentions_component_order_and_stop_line(self) -> None:
+        text = guided.render_residual_lane_from_runtime(
+            "problem1-final-public-seams",
+            output_format="pretty",
+        )
+
+        self.assertIn("problem1-final-public-seams", text)
+        self.assertIn("component order:", text)
+        self.assertIn("typed source principal split", text)
+        self.assertIn("theorem public-contract split", text)
+        self.assertIn("model-check public-contract split", text)
+        self.assertIn("final public verifier contract", text)
+
+    def test_problem1_final_public_seam_lane_json_contains_component_order(self) -> None:
+        rendered = guided.render_residual_lane_from_runtime(
+            "problem1-final-public-seams",
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["lane_id"], "problem1-final-public-seams")
+        self.assertEqual(
+            payload["component_order"],
+            [
+                "typed source principal split",
+                "theorem public-contract split",
+                "model-check public-contract split",
+            ],
+        )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py bundle problem1",
+            payload["entry_commands"],
+        )
+
+    def test_main_lane_command_uses_renderer(self) -> None:
+        fake_text = "problem1-final-public-seams\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_residual_lane_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["lane", "problem1-final-public-seams"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(any("problem1-final-public-seams" in call.args[0] for call in write.mock_calls))
+
     def test_problem1_typed_split_text_mentions_supporting_samples_and_kept_separate(self) -> None:
         text = guided.render_problem_split_package_from_runtime(
             "problem1",

@@ -200,6 +200,40 @@ REMAINING_RESIDUAL_LANE_ORDER = (
     "syntax-modality-final-marker",
 )
 
+RESIDUAL_LANE_COMPONENT_ORDER = {
+    "problem1-final-public-seams": (
+        "typed source principal split",
+        "theorem public-contract split",
+        "model-check public-contract split",
+    ),
+    "problem2-final-public-seams": (
+        "source wording / emitted schema split",
+        "witness-provider public-shape split",
+    ),
+    "syntax-modality-final-marker": (
+        "final modal foundation / final source marker",
+    ),
+}
+
+RESIDUAL_LANE_STOP_LINES = {
+    "problem1-final-public-seams": (
+        "final typed source principal",
+        "final public theorem contract",
+        "final public checker artifact",
+        "final public verifier contract",
+    ),
+    "problem2-final-public-seams": (
+        "final source-surface handoff wording",
+        "final public witness/provider/artifact contract",
+        "exhaustive shared-space catalog",
+    ),
+    "syntax-modality-final-marker": (
+        "final modal foundation adoption",
+        "final source marker adoption",
+        "final parser grammar",
+    ),
+}
+
 
 PROBLEM_REOPEN_ANCHOR_REFS = {
     "problem1": (
@@ -1247,6 +1281,89 @@ def render_remaining_residual_lane_summary_from_runtime(
     return render_remaining_residual_lane_summary(specs)
 
 
+def residual_lane_ids() -> tuple[str, ...]:
+    return REMAINING_RESIDUAL_LANE_ORDER
+
+
+def build_residual_lane_manifest(
+    lane_id: str,
+    specs: Mapping[str, ProblemSpec],
+) -> dict[str, object]:
+    manifest = build_remaining_residual_lane_manifest(specs)
+    try:
+        lane = next(item for item in manifest["mixed_gate_lanes"] if item["lane_id"] == lane_id)
+    except StopIteration as error:
+        raise KeyError(f"residual lane `{lane_id}` is not defined") from error
+
+    return {
+        "lane_id": lane["lane_id"],
+        "summary": lane["summary"],
+        "focus": list(lane["focus"]),
+        "entry_commands": list(lane["entry_commands"]),
+        "component_order": list(RESIDUAL_LANE_COMPONENT_ORDER[lane_id]),
+        "stop_line": list(RESIDUAL_LANE_STOP_LINES[lane_id]),
+        "anchor_refs": list(lane["anchor_refs"]),
+    }
+
+
+def render_residual_lane(lane_id: str, specs: Mapping[str, ProblemSpec]) -> str:
+    manifest = build_residual_lane_manifest(lane_id, specs)
+    lines = [
+        str(manifest["lane_id"]),
+        "",
+        str(manifest["summary"]),
+        "",
+        "focus:",
+    ]
+    for item in manifest["focus"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "entry commands:",
+        ]
+    )
+    for command in manifest["entry_commands"]:
+        lines.append(f"- {command}")
+    lines.extend(
+        [
+            "",
+            "component order:",
+        ]
+    )
+    for item in manifest["component_order"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "stop line:",
+        ]
+    )
+    for item in manifest["stop_line"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "anchor refs:",
+        ]
+    )
+    for ref in manifest["anchor_refs"]:
+        lines.append(f"- {ref}")
+    return "\n".join(lines)
+
+
+def render_residual_lane_from_runtime(
+    lane_id: str,
+    *,
+    output_format: str,
+) -> str:
+    specs = problem_specs()
+    manifest = build_residual_lane_manifest(lane_id, specs)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_residual_lane(lane_id, specs)
+
+
 def problem_split_package_ids() -> tuple[str, ...]:
     return tuple(
         sorted(
@@ -2093,6 +2210,13 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     residuals_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    lane_parser = subparsers.add_parser(
+        "lane",
+        help="remaining residual lane を 1 本ずつ表示する",
+    )
+    lane_parser.add_argument("lane_id", choices=residual_lane_ids())
+    lane_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     split_parser = subparsers.add_parser(
         "split",
         help="next split package を problem ごとの narrow helper summary で表示する",
@@ -2156,6 +2280,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.subcommand == "residuals":
         print(render_remaining_residual_lane_summary_from_runtime(specs, output_format=args.format))
         return 0
+
+    if args.subcommand == "lane":
+        try:
+            print(render_residual_lane_from_runtime(args.lane_id, output_format=args.format))
+            return 0
+        except KeyError as error:
+            print(str(error), file=sys.stderr)
+            return 1
 
     if args.subcommand == "split":
         try:

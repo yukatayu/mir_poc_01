@@ -35,6 +35,10 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("見るべき結果", text)
         self.assertIn("現在の mixed gate 再開点", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py residuals", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams",
+            text,
+        )
         self.assertIn("split package status", text)
         self.assertIn("typed source principal split", text)
         self.assertIn("theorem public-contract split", text)
