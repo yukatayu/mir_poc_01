@@ -1,0 +1,69 @@
+{
+  "sample_argument": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt",
+  "sample_id": "p15-typed-capture-escape-rejected",
+  "sample_path": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt",
+  "pilot_status": "reached",
+  "pilot_guard_reason": null,
+  "pilot_subject_kind": "runtime_try_cut_cluster",
+  "pilot_subject_ref": "p15-typed-capture-escape-rejected",
+  "principal_review_unit_refs": [
+    "proof_notebook_review_unit:p15-typed-capture-escape-rejected:rollback_cut_non_interference"
+  ],
+  "binding_preflight_manifest_refs": [
+    "theorem_binding_preflight:p15-typed-capture-escape-rejected:rollback_cut_non_interference"
+  ],
+  "pilot_binding_refs": [
+    "theorem_lean_stub_pilot:p15-typed-capture-escape-rejected:lean_first_principal",
+    "theorem_lean_stub_pilot:p15-typed-capture-escape-rejected:review_unit_input_only",
+    "theorem_lean_stub_pilot:p15-typed-capture-escape-rejected:nonproduction_stub_only",
+    "theorem_lean_stub_pilot:p15-typed-capture-escape-rejected:rocq_iris_fallback_retained"
+  ],
+  "code_anchor_refs": [
+    "code_anchor:current_l2_proof_notebook_review_unit_support",
+    "code_anchor:current_l2_lean_theorem_stub_support",
+    "code_anchor:current_l2_emit_lean_theorem_stub"
+  ],
+  "repo_local_emitted_artifact_refs": [
+    "repo_local_emitted_artifact:lean_theorem_stub:p15-typed-capture-escape-rejected:rollback_cut_non_interference"
+  ],
+  "compare_floor_refs": [
+    "compare_floor:current_l2.theorem_binding_preflight",
+    "compare_floor:current_l2.theorem_lean_stub_pilot_actualization"
+  ],
+  "guard_refs": [
+    "guard:lean_first_nonproduction_stub_only",
+    "guard:review_unit_principal_input",
+    "guard:no_public_theorem_contract_promotion"
+  ],
+  "kept_later_refs": [
+    "kept_later:actual_lean_tool_execution",
+    "kept_later:actual_discharge_transport",
+    "kept_later:public_theorem_contract",
+    "kept_later:proof_object_public_schema",
+    "kept_later:final_public_verifier_contract",
+    "kept_later:rocq_iris_fallback"
+  ],
+  "lean_stub_artifacts": [
+    {
+      "schema_version": "draft-current-l2-lean-theorem-stub-v0",
+      "artifact_kind": "current-l2-lean-theorem-stub",
+      "tool_family": "lean-first",
+      "module_name": "CurrentL2.P15TypedCaptureEscapeRejected",
+      "theorem_name": "p15_typed_capture_escape_rejected__rollback_cut_non_interference",
+      "subject_kind": "runtime_try_cut_cluster",
+      "subject_ref": "p15-typed-capture-escape-rejected",
+      "obligation_kind": "rollback_cut_non_interference",
+      "evidence_refs": [
+        {
+          "ref_kind": "fixture",
+          "ref_id": "p15-typed-capture-escape-rejected"
+        },
+        {
+          "ref_kind": "runtime_cluster",
+          "ref_id": "p15-typed-capture-escape-rejected"
+        }
+      ],
+      "source_text": "/- current-l2 Lean-first theorem stub (non-production)\nsubject_kind = runtime_try_cut_cluster\nsubject_ref = p15-typed-capture-escape-rejected\nobligation_kind = rollback_cut_non_interference\nmodule_name = CurrentL2.P15TypedCaptureEscapeRejected\n-/\nnamespace CurrentL2\n\n-- goal: Review that rollback / atomic-cut evidence does not interfere with surviving runtime behavior for `p15-typed-capture-escape-rejected`.\n-- evidence fixture:p15-typed-capture-escape-rejected\n-- evidence runtime_cluster:p15-typed-capture-escape-rejected\ntheorem p15_typed_capture_escape_rejected__rollback_cut_non_interference : True := by\nsorry\n\nend CurrentL2\n"
+    }
+  ]
+}

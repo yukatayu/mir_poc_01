@@ -1,9 +1,9 @@
-# p07-dice-late-join-visible-history
+# p15-typed-capture-escape-rejected
 
 ## 要約
 
-- 公開済み history を過去として見せる late join の authoritative-room prototype。
-- late-join semantics を current order/handoff line で見る representative runtime prototype として読む。
+- capture / lifetime escape を reject path で止める finite-index first-layer prototype。
+- current checker-adjacent strong typing line で、capture set constraint と lifetime preorder が publish 境界を越える escape を止める first negative evidence を theorem-side representative sample set に carry over する prototype として読む。
 
 ## この Lean ファイルが意味すること
 

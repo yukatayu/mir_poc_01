@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 10:24 JST
+最終更新: 2026-04-20 11:02 JST
 
 ## この文書について
 
@@ -15,11 +15,13 @@
   - corrected prototype set `p01...p16`
   - runner / CLI / regression / helper-local compare floor
   が already runnable である。
-- representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
+- representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
 - source-side finite-index first layer は `p10 / p11 / p12 / p15 / p16` まで corrected prototype と helper-local checker summary に actualize 済みである。
+- Lean-first formal skeleton hardening は close 済みであり、`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` generated stub corpus の役割差を `CurrentL2FiniteIndexFirstLayer.lean` と representative generated theorem stub corpus `p15 / p16` widening まで source-backed に同期した。
 - `samples/lean/foundations/` には
   - `CurrentL2LabelModel.lean`
   - `CurrentL2IfcSecretExamples.lean`
+  - `CurrentL2FiniteIndexFirstLayer.lean`
   - `CurrentL2ProofSkeleton.lean`
   の actual small proof fragment が入った。
 - Problem 1 current first line は、
@@ -33,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 93 Lean-first formal skeleton hardening
   - Package 94 theorem-first and model-check second-line carrier
   - Package 95 order/handoff source surface and artifacts
   - Package 96 authoritative-room first scenario
@@ -66,7 +67,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `93` Lean-first formal skeleton hardening | first strong typing layer と current proof obligations を Lean-first skeleton / sample explanation に繋ぎ直す | `M` | `Macro 5` | `samples/lean/foundations/` と generated current-L2 corpus の役割差を保ち、first theorem placeholders を explanation 付きで固定する | actual small proof / generated stub / docs reading が一致し、Package 94 の bridge work を受けられる |
 | `94` theorem-first and model-check second-line carrier | theorem-first bridge と model-check second-line carrier を current samples / artifacts / previews へ narrow に同期する | `M` | `Macro 5/7` | notebook-first theorem line、row-local model-check carrier、brand-neutral reserve を維持する | theorem/model-check preview と stop line が current samples 上で drift なく読める |
 | `95` order/handoff source surface and artifacts | explicit edge-row principal / stage-block secondary / reserve serial sugar を current artifacts と negative corpus に揃える | `M` | `Macro 5/6` | low-level exact surface を source principal に戻さず、edge-row principal を保つ | valid / missing witness / handoff-before-publication / stage-block pair が current docs / helper / sample で一貫する |
 | `96` authoritative-room first scenario | authoritative-room first default profile を current CLI / tests / artifacts / examples で tighten する | `M` | `Macro 6` | authority-ack / single room authority / authoritative serial transition / authority_rng / visible past / fail-then-refresh を first line に保つ | first room default profile の representative run と negative pair が drift なく読める |
@@ -141,37 +141,29 @@
   final public verifier contract
   Lean generated corpus widening
 
-## active package notes
-
-### Package 92 — first strong typing finite-index layer
-
-- current reading:
-  close 済み。next active line ではない。
-- target corpus:
-  `p06`
-  `p10`
-  `p11`
-  `p12`
-  `p15`
-  `p16`
-- stop line:
-  stronger typed source principal
-  final typed calculus
-  final public verifier contract
-
 ### Package 93 — Lean-first formal skeleton hardening
 
 - current reading:
-  current active line。`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` generated stub corpus の役割差を崩さず、first theorem placeholder 群と日本語 explanation を tighten する。
-- stop line:
+  close 済み。`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` generated stub corpus の役割差を保ったまま、`CurrentL2FiniteIndexFirstLayer.lean` と representative generated theorem stub corpus `p15 / p16` widening を actualize し、Package 92 の finite-index first layer と theorem-side placeholder 群を drift なく日本語 explanation に同期した。
+- close evidence:
+  `specs/examples/567`
+  `samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean`
+  `samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.md`
+  `samples/lean/current-l2/p15-typed-capture-escape-rejected/`
+  `samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/`
+  `scripts/current_l2_lean_sample_sync.py`
+  `scripts/tests/test_current_l2_lean_sample_sync.py`
+- kept later:
   production prover binding
   final proof object public contract
   final public verifier contract
 
+## active package notes
+
 ### Package 94 — theorem-first and model-check second-line carrier
 
 - current reading:
-  theorem-first notebook line と row-local model-check carrier を current strong typing / Lean / sample floor に narrow に再接続する。Lean-first experimental binding と brand-neutral model-check reserve を維持する。
+  current active line。theorem-first notebook line と row-local model-check carrier を current strong typing / Lean / sample floor に narrow に再接続する。Lean-first experimental binding と brand-neutral model-check reserve を維持する。
 - stop line:
   final public theorem result object
   concrete theorem/model-check production binding
@@ -708,9 +700,7 @@
 
 ## next reopen order
 
-1. Package 92 で finite-index strong typing first layer を static carrier / sample / docs に actualize する。
-2. Package 93 で Lean-first formal skeleton と日本語 explanation の drift を閉じる。
-3. Package 94 で theorem-first / model-check second-line bridge を narrow に同期する。
-4. Package 95 と 96 で order/handoff source surface と authoritative-room first scenario を tighten する。
-5. Package 97 で reserve strengthening を first completion line から切り分ける。
-6. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。
+1. Package 94 で theorem-first / model-check second-line bridge を narrow に同期する。
+2. Package 95 と 96 で order/handoff source surface と authoritative-room first scenario を tighten する。
+3. Package 97 で reserve strengthening を first completion line から切り分ける。
+4. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。

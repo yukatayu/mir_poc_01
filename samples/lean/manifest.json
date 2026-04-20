@@ -29,6 +29,19 @@
     },
     {
       "kind": "foundation",
+      "filename": "CurrentL2FiniteIndexFirstLayer.lean",
+      "lean_path": "samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean",
+      "explanation_path": "samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "foundation",
       "filename": "CurrentL2ProofSkeleton.lean",
       "lean_path": "samples/lean/foundations/CurrentL2ProofSkeleton.lean",
       "explanation_path": "samples/lean/foundations/CurrentL2ProofSkeleton.md",
@@ -124,6 +137,40 @@
       "verification": {
         "success": true,
         "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p15-typed-capture-escape-rejected",
+      "lean_path": "samples/lean/current-l2/p15-typed-capture-escape-rejected/p15-typed-capture-escape-rejected.lean",
+      "explanation_path": "samples/lean/current-l2/p15-typed-capture-escape-rejected/README.md",
+      "bundle_path": "samples/lean/current-l2/p15-typed-capture-escape-rejected/p15-typed-capture-escape-rejected.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p15_typed_capture_escape_rejected__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p15-typed-capture-escape-rejected/p15-typed-capture-escape-rejected.lean:12:8: warning: declaration uses `sorry`\n",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "current-l2",
+      "sample_id": "p16-typed-remote-call-budget-exceeded",
+      "lean_path": "samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/p16-typed-remote-call-budget-exceeded.lean",
+      "explanation_path": "samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/README.md",
+      "bundle_path": "samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/p16-typed-remote-call-budget-exceeded.bundle.json",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "p16_typed_remote_call_budget_exceeded__rollback_cut_non_interference"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/p16-typed-remote-call-budget-exceeded.lean:12:8: warning: declaration uses `sorry`\n",
         "stderr": "",
         "returncode": 0
       }

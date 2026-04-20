@@ -3677,6 +3677,16 @@
 
 - 今回の要点は、Package 92 を compare-floor に留めず、first strong typing layer finite-index default を `p15` capture/lifetime negative と `p16` simple cost negative まで widened し、source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16` を helper-local checker summary / verifier preview alignment / model-check projection pre-floor / current queue sync へ actualize した点である。これは stronger typed source principal、final typed calculus、final public checker payload schema、final public verifier contract を意味せず、checker-adjacent first layer の current execution-side widening である。
 
+## 2026-04-20 Package 93 Lean-first formal skeleton hardening addendum
+
+- `specs/examples/567-current-l2-lean-first-formal-skeleton-hardening-after-finite-index-widening.md`、`docs/reports/0850-package93-lean-first-formal-skeleton-hardening.md`、`scripts/current_l2_lean_sample_sync.py`、`scripts/tests/test_current_l2_lean_sample_sync.py`、`samples/lean/README.md`、`samples/lean/manifest.json`、`samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean`、`samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.md`、`samples/lean/current-l2/p15-typed-capture-escape-rejected/`、`samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/`、`Documentation.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`tasks.md`、`progress.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/521-current-l2-theorem-lean-first-formal-skeleton-and-proof-obligation-package.md`
+  - `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
+  - `specs/examples/566-current-l2-finite-index-first-layer-capture-lifetime-cost-actualization.md`
+  - `specs/examples/567-current-l2-lean-first-formal-skeleton-hardening-after-finite-index-widening.md`
+  - `docs/reports/0849-package92-finite-index-strong-typing-actualization.md`
+- 今回の要点は、Package 93 を compare-floor に留めず、`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` の generated theorem stub corpus の役割差を `CurrentL2FiniteIndexFirstLayer.lean` と representative generated theorem stub corpus `p15 / p16` widening まで source-backed に actualize し、current live queue を Package 94...98 へ進めた点である。これは production prover binding、final proof object public contract、final public verifier contract を意味せず、Lean-first formal skeleton の repo-local hardening である。
+
 ### 2026-04-19 final-layer closeout handoff integration
 
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`docs/reports/0801-final-layer-closeout-handoff-integration.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。

@@ -1,0 +1,69 @@
+{
+  "sample_argument": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt",
+  "sample_id": "p16-typed-remote-call-budget-exceeded",
+  "sample_path": "/home/yukatayu/dev/mir_poc_01/samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt",
+  "pilot_status": "reached",
+  "pilot_guard_reason": null,
+  "pilot_subject_kind": "runtime_try_cut_cluster",
+  "pilot_subject_ref": "p16-typed-remote-call-budget-exceeded",
+  "principal_review_unit_refs": [
+    "proof_notebook_review_unit:p16-typed-remote-call-budget-exceeded:rollback_cut_non_interference"
+  ],
+  "binding_preflight_manifest_refs": [
+    "theorem_binding_preflight:p16-typed-remote-call-budget-exceeded:rollback_cut_non_interference"
+  ],
+  "pilot_binding_refs": [
+    "theorem_lean_stub_pilot:p16-typed-remote-call-budget-exceeded:lean_first_principal",
+    "theorem_lean_stub_pilot:p16-typed-remote-call-budget-exceeded:review_unit_input_only",
+    "theorem_lean_stub_pilot:p16-typed-remote-call-budget-exceeded:nonproduction_stub_only",
+    "theorem_lean_stub_pilot:p16-typed-remote-call-budget-exceeded:rocq_iris_fallback_retained"
+  ],
+  "code_anchor_refs": [
+    "code_anchor:current_l2_proof_notebook_review_unit_support",
+    "code_anchor:current_l2_lean_theorem_stub_support",
+    "code_anchor:current_l2_emit_lean_theorem_stub"
+  ],
+  "repo_local_emitted_artifact_refs": [
+    "repo_local_emitted_artifact:lean_theorem_stub:p16-typed-remote-call-budget-exceeded:rollback_cut_non_interference"
+  ],
+  "compare_floor_refs": [
+    "compare_floor:current_l2.theorem_binding_preflight",
+    "compare_floor:current_l2.theorem_lean_stub_pilot_actualization"
+  ],
+  "guard_refs": [
+    "guard:lean_first_nonproduction_stub_only",
+    "guard:review_unit_principal_input",
+    "guard:no_public_theorem_contract_promotion"
+  ],
+  "kept_later_refs": [
+    "kept_later:actual_lean_tool_execution",
+    "kept_later:actual_discharge_transport",
+    "kept_later:public_theorem_contract",
+    "kept_later:proof_object_public_schema",
+    "kept_later:final_public_verifier_contract",
+    "kept_later:rocq_iris_fallback"
+  ],
+  "lean_stub_artifacts": [
+    {
+      "schema_version": "draft-current-l2-lean-theorem-stub-v0",
+      "artifact_kind": "current-l2-lean-theorem-stub",
+      "tool_family": "lean-first",
+      "module_name": "CurrentL2.P16TypedRemoteCallBudgetExceeded",
+      "theorem_name": "p16_typed_remote_call_budget_exceeded__rollback_cut_non_interference",
+      "subject_kind": "runtime_try_cut_cluster",
+      "subject_ref": "p16-typed-remote-call-budget-exceeded",
+      "obligation_kind": "rollback_cut_non_interference",
+      "evidence_refs": [
+        {
+          "ref_kind": "fixture",
+          "ref_id": "p16-typed-remote-call-budget-exceeded"
+        },
+        {
+          "ref_kind": "runtime_cluster",
+          "ref_id": "p16-typed-remote-call-budget-exceeded"
+        }
+      ],
+      "source_text": "/- current-l2 Lean-first theorem stub (non-production)\nsubject_kind = runtime_try_cut_cluster\nsubject_ref = p16-typed-remote-call-budget-exceeded\nobligation_kind = rollback_cut_non_interference\nmodule_name = CurrentL2.P16TypedRemoteCallBudgetExceeded\n-/\nnamespace CurrentL2\n\n-- goal: Review that rollback / atomic-cut evidence does not interfere with surviving runtime behavior for `p16-typed-remote-call-budget-exceeded`.\n-- evidence fixture:p16-typed-remote-call-budget-exceeded\n-- evidence runtime_cluster:p16-typed-remote-call-budget-exceeded\ntheorem p16_typed_remote_call_budget_exceeded__rollback_cut_non_interference : True := by\nsorry\n\nend CurrentL2\n"
+    }
+  ]
+}

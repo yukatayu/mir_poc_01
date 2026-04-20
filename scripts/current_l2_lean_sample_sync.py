@@ -106,6 +106,36 @@ def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
             ),
         ),
         CurrentL2ExportSpec(
+            sample_id="p15-typed-capture-escape-rejected",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.host-plan.json",
+            summary="capture / lifetime escape を reject path で止める finite-index first-layer prototype。",
+            rationale=(
+                "current checker-adjacent strong typing line で、capture set constraint と "
+                "lifetime preorder が publish 境界を越える escape を止める first negative evidence を "
+                "theorem-side representative sample set に carry over する prototype として読む。"
+            ),
+        ),
+        CurrentL2ExportSpec(
+            sample_id="p16-typed-remote-call-budget-exceeded",
+            sample_argument=str(
+                REPO_ROOT
+                / "samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt"
+            ),
+            host_plan_path=REPO_ROOT
+            / "samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.host-plan.json",
+            summary="simple cost bound 超過を reject path で止める finite-index first-layer prototype。",
+            rationale=(
+                "current checker-adjacent strong typing line で、external effect budget と "
+                "simple cost bound が zero-budget 以後の remote call を止める first negative evidence を "
+                "theorem-side representative sample set に carry over する prototype として読む。"
+            ),
+        ),
+        CurrentL2ExportSpec(
             sample_id="p07-dice-late-join-visible-history",
             sample_argument=str(
                 REPO_ROOT
@@ -334,6 +364,88 @@ end CurrentL2IfcSecretExamples
 """,
         ),
         FoundationSpec(
+            filename="CurrentL2FiniteIndexFirstLayer.lean",
+            summary="finite-index first layer の capture/lifetime/cost を固定する小さな proof fragment。",
+            explanation=(
+                "Package 93 の Lean-first hardening として、finite decidable index fragment を "
+                "IFC だけでなく capture / lifetime / simple cost まで小さな自己完結 proof として置く。"
+                "ここでは final typed calculus を与えず、first strong typing sample set を支える "
+                "最小 preorder / subset / budget fact だけを mechanization-ready に固定する。"
+            ),
+            source_text="""/-!
+current-l2 finite-index first-layer fragment
+
+This file keeps the smallest self-contained Lean facts for the finite-index first layer:
+capture-set inclusion, lifetime preorder, and simple remote-call budget.
+It is not the final public typed calculus.
+-/
+
+namespace CurrentL2FiniteIndexFirstLayer
+
+inductive Lifetime where
+  | step
+  | session
+deriving DecidableEq, Repr
+
+open Lifetime
+
+def outlives : Lifetime → Lifetime → Prop
+  | session, _ => True
+  | step, step => True
+  | step, session => False
+
+theorem outlives_refl (lifetime : Lifetime) : outlives lifetime lifetime := by
+  cases lifetime <;> simp [outlives]
+
+theorem session_outlives_step : outlives session step := by
+  simp [outlives]
+
+theorem step_does_not_outlive_session : ¬ outlives step session := by
+  simp [outlives]
+
+inductive Capability where
+  | roomHistory
+  | ephemeralToken
+deriving DecidableEq, Repr
+
+open Capability
+
+abbrev CaptureSet := Capability → Bool
+
+def captureSubset (lhs rhs : CaptureSet) : Prop :=
+  ∀ capability, lhs capability = true → rhs capability = true
+
+def emptyCapture : CaptureSet := fun _ => false
+
+def ephemeralOnly : CaptureSet
+  | ephemeralToken => true
+  | roomHistory => false
+
+theorem capture_subset_refl (captures : CaptureSet) : captureSubset captures captures := by
+  intro capability h
+  exact h
+
+theorem ephemeral_only_not_subset_of_empty :
+    ¬ captureSubset ephemeralOnly emptyCapture := by
+  intro h
+  have hToken := h ephemeralToken rfl
+  simp [emptyCapture] at hToken
+
+def remoteCallAllowed (remainingCalls : Nat) : Prop :=
+  0 < remainingCalls
+
+theorem zero_budget_rejects_remote_call :
+    ¬ remoteCallAllowed 0 := by
+  simp [remoteCallAllowed]
+
+theorem positive_budget_allows_remote_call :
+    remoteCallAllowed 1 := by
+  simp [remoteCallAllowed]
+
+end CurrentL2FiniteIndexFirstLayer
+""",
+        ),
+        FoundationSpec(
             filename="CurrentL2ProofSkeleton.lean",
             summary="review-unit と Lean-stub の整合を固定する mechanization-ready proof-obligation skeleton。",
             explanation=(
@@ -470,7 +582,7 @@ repo-local かつ inspectable な形で保存する。
 
 - `foundations/`
   - 実際に小さな証明を含む self-contained Lean file を置く
-  - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、proof-skeleton / obligation-shape first fragment である
+  - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、finite-index first-layer capture / lifetime / simple cost fragment、proof-skeleton / obligation-shape first fragment である
 - `current-l2/`
   - 現在の current-L2 定理ブリッジから representative sample set `{current_ids}` 向けに生成された Lean theorem stub を置く
   - これらの file は Lean に受理されるが、まだ `sorry` を含む

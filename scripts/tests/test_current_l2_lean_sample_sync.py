@@ -22,6 +22,8 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
                 "p10-typed-authorized-fingerprint-declassification",
                 "p11-typed-unauthorized-fingerprint-release",
                 "p12-typed-classified-fingerprint-publication-block",
+                "p15-typed-capture-escape-rejected",
+                "p16-typed-remote-call-budget-exceeded",
                 "p07-dice-late-join-visible-history",
                 "p08-dice-stale-reconnect-refresh",
                 "p09-dice-delegated-rng-provider-placement",
@@ -39,6 +41,7 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             {
                 "CurrentL2LabelModel.lean",
                 "CurrentL2IfcSecretExamples.lean",
+                "CurrentL2FiniteIndexFirstLayer.lean",
                 "CurrentL2ProofSkeleton.lean",
             },
         )

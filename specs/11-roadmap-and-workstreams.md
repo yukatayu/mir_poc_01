@@ -271,6 +271,12 @@ actual-adoption floor では、
   - Lean formal skeleton / proof obligations
   - first completion scope
   - reopened self-driven closeout package order
+- Lean-first formal skeleton hardening after finite-index widening:
+  `specs/examples/567`
+  - `samples/lean/foundations/` = actual small proof fragment
+  - `samples/lean/current-l2/` = generated theorem stub corpus
+  - `p15 / p16` representative generated corpus widening
+  - Package 93 close と Package 94...98 current queue
 - reserve strengthening actualization:
   `specs/examples/476`
   - `auditable_authority_witness` minimal witness core actualization
@@ -732,6 +738,12 @@ actual-adoption floor では、
   - source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16`
   - helper-local checker summary / verifier preview alignment / model-check projection widening
   - Package 92 close 後は Package 93 Lean-first formal skeleton hardening、Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout の once-through sequence へ進む
+- Lean-first formal skeleton hardening after finite-index widening:
+  `specs/examples/567`
+  - `CurrentL2FiniteIndexFirstLayer.lean`
+  - representative generated theorem stub corpus `p15 / p16` widening
+  - foundation と generated stub の役割差
+  - Package 93 close 後の current active queue は Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
