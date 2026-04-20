@@ -881,6 +881,10 @@ actual-adoption floor では、
   `specs/examples/597`
   - `lane problem1-final-public-seams` helper と Problem 1 bundle doc 側の lane entrypoint を actualize し、Problem 1 mixed gate を typed / theorem / model-check reopen order と stop line 付きの独立 lane として読んでよい
   - Package 124 close 後の current active queue は Package 125 Problem 2 final-public-seam lane、Package 126 syntax-modality final-marker lane と later mixed/user-spec residual である
+- Problem 2 final-public-seam lane helper actualization:
+  `specs/examples/598`
+  - `lane problem2-final-public-seams` helper と Problem 2 bundle doc 側の lane entrypoint を actualize し、Problem 2 mixed gate を source wording / witness-provider reopen order と stop line 付きの独立 lane として読んでよい
+  - Package 125 close 後の current active queue は Package 126 syntax-modality final-marker lane と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

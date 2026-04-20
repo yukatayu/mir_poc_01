@@ -923,6 +923,38 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             payload["entry_commands"],
         )
 
+    def test_problem2_final_public_seam_lane_text_mentions_component_order_and_stop_line(self) -> None:
+        text = guided.render_residual_lane_from_runtime(
+            "problem2-final-public-seams",
+            output_format="pretty",
+        )
+
+        self.assertIn("problem2-final-public-seams", text)
+        self.assertIn("component order:", text)
+        self.assertIn("source wording / emitted schema split", text)
+        self.assertIn("witness-provider public-shape split", text)
+        self.assertIn("final public witness/provider/artifact contract", text)
+
+    def test_problem2_final_public_seam_lane_json_contains_component_order(self) -> None:
+        rendered = guided.render_residual_lane_from_runtime(
+            "problem2-final-public-seams",
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["lane_id"], "problem2-final-public-seams")
+        self.assertEqual(
+            payload["component_order"],
+            [
+                "source wording / emitted schema split",
+                "witness-provider public-shape split",
+            ],
+        )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py bundle problem2",
+            payload["entry_commands"],
+        )
+
     def test_main_lane_command_uses_renderer(self) -> None:
         fake_text = "problem1-final-public-seams\n..."
 

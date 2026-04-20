@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 18:01 JST
+最終更新: 2026-04-20 18:08 JST
 
 ## この文書について
 
@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 125 Problem 2 final-public-seam lane follow-up
   - Package 126 syntax-modality final-marker lane follow-up
   を先頭に追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
@@ -64,7 +63,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `125` Problem 2 final-public-seam lane follow-up | Problem 2 mixed gate を final wording / witness-provider public-shape cluster として further narrow に扱う | `S-M` | `Macro 5/6` | `reopen-map problem2` / `matrix problem2` / `bundle problem2` を主 anchor に、final wording / public-shape の reopen order を詰める | Problem 2 mixed gate lane が helper / docs / snapshot で同じ順序に見える |
 | `126` syntax-modality final-marker lane follow-up | final modal foundation / source marker を problem-local final public seam と user-spec residual から切り分けたまま圧縮する | `S` | `Macro 5` | `residuals` helper と syntax/modality docs を主 anchor に、final marker line を later mixed gate として整える | syntax/modality lane が Problem 1 / Problem 2 / user-spec residual と混ざらず読める |
 
 ## recently closed package note
@@ -507,9 +505,9 @@
 ### Package 125 — Problem 2 final-public-seam lane follow-up
 
 - current reading:
-  next active bundle。Problem 2 mixed gate を final wording / witness-provider public-shape の reopen order として further narrow に扱う。
+  close 済み。Problem 2 mixed gate を final wording / witness-provider public-shape の reopen order として further narrow に扱い、`lane problem2-final-public-seams` で独立 lane として読めるようにした。
 - current recommendation:
-  `reopen-map problem2`、`matrix problem2`、`bundle problem2`、`residuals` を主 anchor に、Problem 2 final public seam lane を syntax/modality と true user-spec residual から切り分ける。
+  `reopen-map problem2`、`matrix problem2`、`bundle problem2`、`residuals`、`lane problem2-final-public-seams` を主 anchor に、Problem 2 final public seam lane を syntax/modality と true user-spec residual から切り分ける。
 - stop line:
   final source-surface handoff wording
   final public witness/provider/artifact contract
@@ -1022,5 +1020,4 @@
 
 ## next reopen order
 
-1. Package 125 で Problem 2 final-public-seam lane を further narrow に扱う。
-2. Package 126 で syntax-modality final-marker lane を Problem-local seam と user-spec residual から切り分けて保つ。
+1. Package 126 で syntax-modality final-marker lane を Problem-local seam と user-spec residual から切り分けて保つ。
