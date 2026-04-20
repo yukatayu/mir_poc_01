@@ -213,6 +213,145 @@ PROBLEM_REOPEN_ANCHOR_REFS = {
     ),
 }
 
+PROBLEM_SPLIT_PACKAGE_DETAILS = {
+    "problem1": {
+        "typed-source-principal": {
+            "package_name": "typed source principal split",
+            "summary": (
+                "checker-adjacent principal / structural marker first / finite decidable index fragment first "
+                "を保ったまま、typed source principal residual だけを theorem/model-check residual から切り離して読む。"
+            ),
+            "supporting_samples": (
+                "p10-typed-authorized-fingerprint-declassification",
+                "p11-typed-unauthorized-fingerprint-release",
+                "p12-typed-classified-fingerprint-publication-block",
+                "p15-typed-capture-escape-rejected",
+                "p16-typed-remote-call-budget-exceeded",
+            ),
+            "kept_separate": (
+                "theorem public-contract split",
+                "model-check public-contract split",
+            ),
+            "stop_line": (
+                "final typed source principal",
+                "final typed calculus",
+                "final public verifier contract",
+            ),
+            "anchor_refs": (
+                "specs/examples/566-current-l2-first-strong-typing-finite-index-layer-actualization.md",
+                "specs/examples/567-current-l2-lean-first-formal-skeleton-hardening-after-finite-index-widening.md",
+                "specs/examples/573-current-l2-problem1-public-seam-residual-bundle-matrix.md",
+                "specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md",
+                "docs/reports/0849-package92-first-strong-typing-finite-index-layer.md",
+                "docs/reports/0850-package93-lean-first-formal-skeleton-hardening.md",
+                "docs/reports/0869-package115-116-representative-problem-split-package-map-refresh.md",
+            ),
+        },
+        "theorem-public-contract": {
+            "package_name": "theorem public-contract split",
+            "summary": (
+                "review-unit transport first / notebook-consumer object first を保ったまま、theorem public-contract residual を typed residual と model-check residual から切り離して読む。"
+            ),
+            "supporting_samples": ("p06-typed-proof-owner-handoff",),
+            "kept_separate": (
+                "typed source principal split",
+                "model-check public-contract split",
+            ),
+            "stop_line": (
+                "final public theorem contract",
+                "concrete theorem prover brand",
+                "final public verifier contract",
+            ),
+            "anchor_refs": (
+                "specs/examples/575-current-l2-problem1-theorem-first-pilot-bundle-actualization.md",
+                "specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md",
+                "docs/reports/0857-package101-102-problem-bundles.md",
+                "docs/reports/0869-package115-116-representative-problem-split-package-map-refresh.md",
+            ),
+        },
+        "model-check-public-contract": {
+            "package_name": "model-check public-contract split",
+            "summary": (
+                "row-local property route first / checker-artifact route first を保ったまま、model-check public-contract residual を typed residual と theorem residual から切り離して読む。"
+            ),
+            "supporting_samples": (
+                "p06-typed-proof-owner-handoff",
+                "p10-typed-authorized-fingerprint-declassification",
+                "p11-typed-unauthorized-fingerprint-release",
+                "p12-typed-classified-fingerprint-publication-block",
+                "p15-typed-capture-escape-rejected",
+                "p16-typed-remote-call-budget-exceeded",
+            ),
+            "kept_separate": (
+                "typed source principal split",
+                "theorem public-contract split",
+            ),
+            "stop_line": (
+                "first settled property language",
+                "final public checker artifact",
+                "final public verifier contract",
+            ),
+            "anchor_refs": (
+                "specs/examples/573-current-l2-problem1-public-seam-residual-bundle-matrix.md",
+                "specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md",
+                "docs/reports/0856-package99-100-problem-residual-bundle-matrices.md",
+                "docs/reports/0869-package115-116-representative-problem-split-package-map-refresh.md",
+            ),
+        },
+    },
+    "problem2": {
+        "source-wording-emitted-schema": {
+            "package_name": "source wording / emitted schema split",
+            "summary": (
+                "edge-row principal / stage-block secondary / serial reserve を保ったまま、source wording residual と emitted schema residual を witness-provider public shape residual から切り離して読む。"
+            ),
+            "supporting_samples": (
+                "p07-dice-late-join-visible-history",
+                "p08-dice-stale-reconnect-refresh",
+                "p13-dice-late-join-missing-publication-witness",
+                "p14-dice-late-join-handoff-before-publication",
+            ),
+            "kept_separate": ("witness-provider public-shape split",),
+            "stop_line": (
+                "final source-surface handoff wording",
+                "final emitted-artifact schema",
+                "final public parser / checker / runtime API",
+            ),
+            "anchor_refs": (
+                "specs/examples/569-current-l2-order-handoff-source-surface-artifact-route-tightening.md",
+                "specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md",
+                "docs/reports/0852-package95-order-handoff-source-surface-artifact-tightening.md",
+                "docs/reports/0869-package115-116-representative-problem-split-package-map-refresh.md",
+            ),
+        },
+        "witness-provider-public-shape": {
+            "package_name": "witness-provider public-shape split",
+            "summary": (
+                "claim/payload split first / route-schema split first を保ったまま、witness/provider public-shape residual を source wording residual から切り離して読む。"
+            ),
+            "supporting_samples": (
+                "p07-dice-late-join-visible-history",
+                "p08-dice-stale-reconnect-refresh",
+                "p09-dice-delegated-rng-provider-placement",
+                "p13-dice-late-join-missing-publication-witness",
+                "p14-dice-late-join-handoff-before-publication",
+            ),
+            "kept_separate": ("source wording / emitted schema split",),
+            "stop_line": (
+                "final public witness/provider/artifact contract",
+                "stronger fairness / replay profile",
+                "exhaustive shared-space catalog",
+            ),
+            "anchor_refs": (
+                "specs/examples/574-current-l2-problem2-public-shape-residual-bundle-matrix.md",
+                "specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md",
+                "docs/reports/0856-package99-100-problem-residual-bundle-matrices.md",
+                "docs/reports/0869-package115-116-representative-problem-split-package-map-refresh.md",
+            ),
+        },
+    },
+}
+
 
 def problem_specs() -> dict[str, ProblemSpec]:
     typed_root = REPO_ROOT / "samples" / "prototype" / "current-l2-typed-proof-model-check"
@@ -972,6 +1111,108 @@ def render_problem_reopen_map_from_runtime(
     return render_problem_reopen_map(specs)
 
 
+def problem_split_package_ids() -> tuple[str, ...]:
+    return tuple(
+        sorted(
+            split_id
+            for packages in PROBLEM_SPLIT_PACKAGE_DETAILS.values()
+            for split_id in packages.keys()
+        )
+    )
+
+
+def build_problem_split_package_manifest(problem_id: str, split_id: str) -> dict[str, object]:
+    package_details = PROBLEM_SPLIT_PACKAGE_DETAILS.get(problem_id, {}).get(split_id)
+    if package_details is None:
+        raise KeyError(f"split package `{split_id}` is not defined for `{problem_id}`")
+
+    spec = problem_specs()[problem_id]
+    reopen_row = build_problem_reopen_row(spec)
+    split_package = next(
+        item
+        for item in reopen_row.split_packages
+        if item["package_name"] == package_details["package_name"]
+    )
+
+    return {
+        "package_id": split_id,
+        "package_name": package_details["package_name"],
+        "problem_id": problem_id,
+        "problem_title": spec.title,
+        "sample_bundle_doc": PROBLEM_SAMPLE_BUNDLE_DOCS[problem_id],
+        "summary": package_details["summary"],
+        "representative_samples": list(reopen_row.representative_samples),
+        "supporting_samples": list(package_details["supporting_samples"]),
+        "commands": list(split_package["commands"]),
+        "reading": split_package["reading"],
+        "current_floor": list(reopen_row.current_floor),
+        "kept_separate": list(package_details["kept_separate"]),
+        "stop_line": list(package_details["stop_line"]),
+        "anchor_refs": list(package_details["anchor_refs"]),
+    }
+
+
+def render_problem_split_package(problem_id: str, split_id: str) -> str:
+    manifest = build_problem_split_package_manifest(problem_id, split_id)
+    lines = [
+        str(manifest["package_name"]),
+        "",
+        str(manifest["summary"]),
+        "",
+        f"problem: {manifest['problem_title']}",
+        f"sample bundle doc: {manifest['sample_bundle_doc']}",
+        f"representative samples: {', '.join(manifest['representative_samples'])}",
+        f"supporting samples: {', '.join(manifest['supporting_samples'])}",
+        "",
+        "primary commands:",
+    ]
+    for command in manifest["commands"]:
+        lines.append(f"- {command}")
+    lines.extend(
+        [
+            "",
+            f"reading: {manifest['reading']}",
+            "",
+            "current floor:",
+        ]
+    )
+    for item in manifest["current_floor"]:
+        lines.append(f"- {item}")
+    lines.append("")
+    lines.append("kept separate:")
+    for item in manifest["kept_separate"]:
+        lines.append(f"- {item}")
+    lines.append("")
+    lines.append("anchor refs:")
+    for item in manifest["anchor_refs"]:
+        lines.append(f"- {item}")
+    lines.append("")
+    lines.append("stop line:")
+    for item in manifest["stop_line"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- current split package helper であり、final public source principal や final public verifier contract を意味しない。",
+            "- split package を independent に読むための narrow helper/doc cut に留める。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem_split_package_from_runtime(
+    problem_id: str,
+    split_id: str,
+    *,
+    output_format: str,
+) -> str:
+    manifest = build_problem_split_package_manifest(problem_id, split_id)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_problem_split_package(problem_id, split_id)
+
+
 def build_problem_quickstart_parity_rows(
     specs: Mapping[str, ProblemSpec],
     *,
@@ -1710,6 +1951,14 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     reopen_map_parser.add_argument("problem_id", nargs="?", choices=sorted(problem_specs().keys()))
     reopen_map_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    split_parser = subparsers.add_parser(
+        "split",
+        help="next split package を problem ごとの narrow helper summary で表示する",
+    )
+    split_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
+    split_parser.add_argument("split_id", choices=problem_split_package_ids())
+    split_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     mapping_parser = subparsers.add_parser(
         "mapping",
         help="parser companion representative slice の mapping matrix を表示する",
@@ -1761,6 +2010,20 @@ def main(argv: list[str] | None = None) -> int:
         selected_specs = specs if args.problem_id is None else {args.problem_id: specs[args.problem_id]}
         print(render_problem_reopen_map_from_runtime(selected_specs, output_format=args.format))
         return 0
+
+    if args.subcommand == "split":
+        try:
+            print(
+                render_problem_split_package_from_runtime(
+                    args.problem_id,
+                    args.split_id,
+                    output_format=args.format,
+                )
+            )
+            return 0
+        except KeyError as error:
+            print(str(error), file=sys.stderr)
+            return 1
 
     spec = specs[args.problem_id]
     if args.subcommand == "quickstart":

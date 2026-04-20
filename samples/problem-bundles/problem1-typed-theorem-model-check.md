@@ -146,12 +146,12 @@ full dependent type、general theorem proving in compiler、final public checker
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、packaging / host integration / upper-layer application target をまとめて見直す。
 
-## 次の split package
+## split package status
 
 - `typed source principal split`
-  - `python3 scripts/current_l2_guided_samples.py matrix problem1`
+  - close 済み。`python3 scripts/current_l2_guided_samples.py split problem1 typed-source-principal`
     から入り、`p06` representative と `p10 / p11 / p12 / p15 / p16` 補助 sample の役割差を保ったまま
-    typed source principal の reopen point だけを切り出す。
+    typed source principal の reopen point だけを独立 package として読める。
 - `theorem public-contract split`
   - `python3 scripts/current_l2_guided_samples.py bundle problem1`
     と `samples/lean/current-l2/p06-typed-proof-owner-handoff/`
@@ -161,6 +161,21 @@ full dependent type、general theorem proving in compiler、final public checker
     と `python3 scripts/current_l2_guided_samples.py bundle problem1`
     を合わせて見て、row-local property route first / checker-artifact route first を保ったまま
     model-check public-contract residual を切り出す。
+
+## typed source principal split の入口
+
+```bash
+python3 scripts/current_l2_guided_samples.py split problem1 typed-source-principal
+```
+
+見るべき結果:
+
+- `p06` representative と `p10 / p11 / p12 / p15 / p16` 補助 sample が、
+  typed source principal residual の supporting set としてまとまって見える。
+- `theorem public-contract split` と `model-check public-contract split` が
+  kept separate として表示され、typed residual だけを narrow に読む current cut を確認できる。
+- stop line が `final typed source principal` / `final typed calculus` /
+  `final public verifier contract` に留まり、theorem/model-check の public contract と混ざらないことを確認できる。
 
 ## stop line
 

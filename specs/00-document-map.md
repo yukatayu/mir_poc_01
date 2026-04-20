@@ -829,6 +829,8 @@
   - current Phase 6 / Package 114 closeout として、`reopen-map` helper と sample bundle doc 側の `現在の mixed gate 再開点` section を actualize し、representative sample floor の後でどの mixed gate をどの command から reopen するかを揃える補助文書。
 - `specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md`
   - current Phase 6 / Package 115 / 116 closeout として、`reopen-map problem1|problem2` と sample bundle doc 側の `次の split package` section を actualize し、Problem 1 / Problem 2 の remaining mixed gate を次の separate package 名まで narrow に戻す補助文書。
+- `specs/examples/590-current-l2-problem1-typed-source-principal-split-helper-actualization.md`
+  - current Phase 6 / Package 117 closeout として、`split problem1 typed-source-principal` helper と Problem 1 bundle doc 側の typed split entrypoint を actualize し、Problem 1 typed residual を theorem/model-check residual から切り離して narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

@@ -33,10 +33,15 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke problem1", text)
         self.assertIn("見るべき結果", text)
         self.assertIn("現在の mixed gate 再開点", text)
-        self.assertIn("次の split package", text)
+        self.assertIn("split package status", text)
         self.assertIn("typed source principal split", text)
         self.assertIn("theorem public-contract split", text)
         self.assertIn("model-check public-contract split", text)
+        self.assertIn("typed source principal split の入口", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py split problem1 typed-source-principal",
+            text,
+        )
         self.assertIn("stronger typed-surface actual adoption", text)
         self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)

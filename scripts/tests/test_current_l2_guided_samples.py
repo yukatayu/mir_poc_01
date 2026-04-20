@@ -833,6 +833,55 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("source wording / emitted schema split", text)
         self.assertIn("witness-provider public-shape split", text)
 
+    def test_problem1_typed_split_text_mentions_supporting_samples_and_kept_separate(self) -> None:
+        text = guided.render_problem_split_package_from_runtime(
+            "problem1",
+            "typed-source-principal",
+            output_format="pretty",
+        )
+
+        self.assertIn("typed source principal split", text)
+        self.assertIn("p06-typed-proof-owner-handoff", text)
+        self.assertIn("p10-typed-authorized-fingerprint-declassification", text)
+        self.assertIn("p15-typed-capture-escape-rejected", text)
+        self.assertIn("kept separate:", text)
+        self.assertIn("theorem public-contract split", text)
+        self.assertIn("model-check public-contract split", text)
+        self.assertIn("final typed source principal", text)
+
+    def test_problem1_typed_split_json_contains_expected_manifest(self) -> None:
+        rendered = guided.render_problem_split_package_from_runtime(
+            "problem1",
+            "typed-source-principal",
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["package_id"], "typed-source-principal")
+        self.assertEqual(payload["package_name"], "typed source principal split")
+        self.assertEqual(payload["problem_id"], "problem1")
+        self.assertIn("p06-typed-proof-owner-handoff", payload["representative_samples"])
+        self.assertIn("p16-typed-remote-call-budget-exceeded", payload["supporting_samples"])
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py matrix problem1",
+            payload["commands"][0],
+        )
+        self.assertIn("theorem public-contract split", payload["kept_separate"])
+
+    def test_main_split_command_uses_split_renderer(self) -> None:
+        fake_text = "typed source principal split\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem_split_package_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["split", "problem1", "typed-source-principal"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(any("typed source principal split" in call.args[0] for call in write.mock_calls))
+
     def test_main_smoke_all_command_uses_aggregate_renderer(self) -> None:
         fake_text = "representative problem bundle aggregate smoke summary\n..."
 
