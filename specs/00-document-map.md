@@ -67,7 +67,7 @@
   - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
 - `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
   - 2026-04-20 時点の repo-local once-through completion handoff であり、FAQ 10 以後の parser-side closeout / finite-index strong typing / Lean-first theorem skeleton / model-check second-line / order-handoff helper-local source surface / authoritative-room first scenario / docs closeout sequenceを 1 本の staged package 列として整理する。
-  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569`、`570`、`571`、`572`、`573`、`574`、`575`、`576`、`577`、`578`、`579`、`580` 以後の once-through closeout reading と residual / bundle / parser-side actualization 群の current explanation source として使ってよい。
+  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569`、`570`、`571`、`572`、`573`、`574`、`575`、`576`、`577`、`578`、`579`、`580`、`581` 以後の once-through closeout reading と residual / bundle / parser-side actualization 群の current explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -811,6 +811,8 @@
   - current Phase 6 / Package 105 closeout として、`Stage3RequestHeadClauseBundle` の representative parse result を repo-local JSON / pretty inspector command に actualize し、parser-side carrier の readable inspection cut を固定する補助文書。
 - `specs/examples/580-current-l2-parser-side-representative-mapping-matrix-actualization.md`
   - current Phase 6 / Package 106 closeout として、`p06 / p07 / p08` representative slice の original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report 対応を `mapping` helper と sample README table に actualize し、parser-side tranche の readable mapping cut を固定する補助文書。
+- `specs/examples/581-current-l2-explained-representative-problem-sample-bundles.md`
+  - current Phase 6 / Package 107 closeout として、二大問題の representative sample を `samples/problem-bundles/` の簡潔な日本語 guide と `bundle problem1|problem2` helper の `sample_bundle_doc` に actualize し、`samples/` 側の explained bundle 導線を固定する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

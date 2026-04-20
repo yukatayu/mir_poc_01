@@ -1,0 +1,87 @@
+# Problem 1 sample bundle
+
+## この bundle の目的
+
+- Problem 1 の current first line である
+  checker-adjacent first layer / notebook-first theorem line / row-local model-check carrier first
+  を、representative sample `p06` を中心に確認する。
+- full dependent core や final public verifier contract までをここで確定するものではない。
+
+## まず見るサンプル
+
+### `p06-typed-proof-owner-handoff`
+
+- current representative sample:
+  `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt`
+- parser companion:
+  `samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt`
+- Lean artifact:
+  `samples/lean/current-l2/p06-typed-proof-owner-handoff/`
+
+この sample では次を同時に見る。
+
+- typed marker family は source principal ではなく checker-adjacent preview に留める
+- theorem line は notebook-first / review-unit first に留める
+- model-check line は row-local carrier first に留める
+
+## 実行の順番
+
+1. representative sample をそのまま流す
+
+```bash
+cargo run -q -p mir-runtime --example mir_current_l2 -- \
+  run-source-sample \
+  samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt \
+  --format pretty
+```
+
+2. representative と residual bridge-floor をまとめて見る
+
+```bash
+python3 scripts/current_l2_guided_samples.py matrix problem1
+```
+
+3. docs / Lean artifact / anchor spec-report まで一本道で辿る
+
+```bash
+python3 scripts/current_l2_guided_samples.py bundle problem1
+```
+
+4. parser-side companion / mapping まで同じ読みに揃える
+
+```bash
+python3 scripts/current_l2_guided_samples.py mapping
+```
+
+## 補助サンプル
+
+- `p10-typed-authorized-fingerprint-declassification`
+  - authority 付き declassification success
+- `p11-typed-unauthorized-fingerprint-release`
+  - authority 欠如 negative
+- `p12-typed-classified-fingerprint-publication-block`
+  - label-flow mismatch negative
+- `p15-typed-capture-escape-rejected`
+  - capture / lifetime negative
+- `p16-typed-remote-call-budget-exceeded`
+  - simple cost negative
+
+これらは representative `p06` を補う corrected prototype であり、
+full dependent type、general theorem proving in compiler、final public checker artifact までは意味しない。
+
+## 読み方の要点
+
+- `verification_preview`
+  - theorem / model-check bridge の helper-local preview
+- `artifact_preview`
+  - proof notebook review unit と row-local model-check carrier の emitted artifact preview
+- `typed_checker_hint_preview`
+  - checker-adjacent finite-index first layer の current cut
+
+## stop line
+
+- stronger typed source principal promotion
+- final public theorem result object
+- consumer-shaped theorem payload public contract
+- final public checker artifact
+- final public verifier contract

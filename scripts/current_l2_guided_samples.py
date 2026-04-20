@@ -72,6 +72,11 @@ PROBLEM_BUNDLE_STOP_LINES = {
     ),
 }
 
+PROBLEM_SAMPLE_BUNDLE_DOCS = {
+    "problem1": "samples/problem-bundles/problem1-typed-theorem-model-check.md",
+    "problem2": "samples/problem-bundles/problem2-order-handoff-shared-space.md",
+}
+
 PARSER_COMPANION_MAPPING_BUNDLE_ANCHORS = {
     "problem1": "specs/examples/575-current-l2-problem1-theorem-first-pilot-bundle-actualization.md",
     "problem2": "specs/examples/576-current-l2-problem2-authoritative-room-scenario-bundle-actualization.md",
@@ -436,6 +441,7 @@ def build_problem_bundle_manifest(spec: ProblemSpec) -> dict[str, object]:
         "title": PROBLEM_BUNDLE_TITLES[spec.problem_id],
         "current_reading": PROBLEM_BUNDLE_READINGS[spec.problem_id],
         "summary": spec.summary,
+        "sample_bundle_doc": PROBLEM_SAMPLE_BUNDLE_DOCS[spec.problem_id],
         "commands": bundle_commands(spec),
         "primary_samples": [
             {
@@ -470,6 +476,8 @@ def render_problem_bundle(spec: ProblemSpec) -> str:
         str(manifest["current_reading"]),
         "",
         str(manifest["summary"]),
+        "",
+        f"sample bundle doc: {manifest['sample_bundle_doc']}",
         "",
         "おすすめの追い方:",
     ]

@@ -8,6 +8,7 @@
 - machine-readable fixture corpus (`crates/mir-ast/tests/fixtures/current-l2/`) でもない。
 - fixed subset の syntax-backed regression / lowering / runner / verification ladder に進むための第 3 層である。
 - corrected runnable prototype は `samples/prototype/`、exact rough stimulus preservation は `samples/not_implemented/` に分ける。
+- 二大問題の representative sample を簡潔な日本語 guide で辿る入口は `samples/problem-bundles/` に置く。
 
 ## current policy
 

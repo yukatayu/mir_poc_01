@@ -208,6 +208,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("p06-typed-proof-owner-handoff", text)
         self.assertIn("samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean", text)
         self.assertIn("samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt", text)
+        self.assertIn("samples/problem-bundles/problem1-typed-theorem-model-check.md", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py matrix problem1", text)
         self.assertIn("specs/examples/508-current-l2-theorem-lean-first-nonproduction-stub-pilot-actualization.md", text)
         self.assertIn("final public theorem contract", text)
@@ -224,6 +225,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.bundle.json", text)
         self.assertIn("samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt", text)
         self.assertIn("samples/prototype/current-l2-parser-companion/p08-dice-stale-reconnect-refresh.request.txt", text)
+        self.assertIn("samples/problem-bundles/problem2-order-handoff-shared-space.md", text)
         self.assertIn("specs/examples/570-current-l2-authoritative-room-first-scenario-helper-summary-tightening.md", text)
         self.assertIn("final public witness schema", text)
 

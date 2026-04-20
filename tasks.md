@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 14:19 JST
+最終更新: 2026-04-20 14:30 JST
 
 ## この文書について
 
@@ -35,7 +35,7 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 107 explained representative problem sample bundles
+  - Package 108 representative problem bundle smoke runner
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +63,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `107` explained representative problem sample bundles | 二大問題それぞれの representative sample を `samples/` 側で簡潔な日本語解説付き bundle として辿れるようにする | `S-M` | `Macro 6/7` | runner / Lean artifact / parser companion / guided helper の 4 本を `samples/` guide から同じ読みで辿れる explained bundle を actualize する | Problem 1 / Problem 2 の explained bundle README が `samples/` 導線と helper / Lean / parser-side line を drift なく接続する |
+| `108` representative problem bundle smoke runner | representative sample bundle guide に書いた主要 command 群を repo-local helper でまとめて smoke 実行できるようにする | `S-M` | `Macro 6/7` | guide / helper / runnable evidence の 3 点が drift しない最小 smoke command を actualize する | Problem 1 / Problem 2 の representative smoke helper が runner / bundle / mapping / parser-side inspection の最小導線を 1 本で再現する |
 
 ## recently closed package note
 
@@ -307,13 +307,24 @@
 ### Package 107 — explained representative problem sample bundles
 
 - current reading:
-  next active bundle。二大問題それぞれの representative sample を `samples/` 側で簡潔な日本語解説付き bundle として戻し、runner / Lean artifact / parser companion / guided helper の 4 本を README から辿れるようにする。
+  close 済み。二大問題それぞれの representative sample を `samples/problem-bundles/` の簡潔な日本語 guide と `bundle problem1|problem2` の `sample_bundle_doc` へ actualize し、runner / Lean artifact / parser companion / guided helper の 4 本を README から辿れるようにした。
 - current recommendation:
   Problem 1 は `p06`、Problem 2 は `p07 / p08` を中心にし、current first line の意味と stop line を過剰に広げずに explained bundle を actualize する。
 - stop line:
   exhaustive tutorial expansion
   final public parser / checker / runtime API
   exhaustive shared-space catalog
+
+### Package 108 — representative problem bundle smoke runner
+
+- current reading:
+  next active bundle。Problem 1 / Problem 2 の representative sample bundle guide に書いた主要 command 群を repo-local helper でまとめて smoke 実行し、guide / helper / runnable evidence の 3 点が drift していないことを 1 本の command surface で確認できるようにする。
+- current recommendation:
+  representative sample と current helper-local cut に限定し、bundle guide 全文の自動化や exhaustive workflow 化までは広げない。
+- stop line:
+  exhaustive workflow automation
+  final public CLI / tutorial surface
+  final public parser / checker / runtime API
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -811,5 +822,5 @@
 
 ## next reopen order
 
-1. Package 107 で Problem 1 / Problem 2 の explained representative sample bundle を `samples/` 側へ actualize する。
+1. Package 108 で Problem 1 / Problem 2 の representative sample bundle smoke runner を actualize する。
 2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

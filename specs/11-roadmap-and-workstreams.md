@@ -813,6 +813,10 @@ actual-adoption floor では、
   `specs/examples/580`
   - `p06 / p07 / p08` representative slice の original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report 対応を `mapping` helper と sample README table に actualize してよい
   - Package 106 close 後の current active queue は Package 107 explained representative problem sample bundles と later mixed/user-spec residual である
+- explained representative problem sample bundles:
+  `specs/examples/581`
+  - 二大問題の representative sample を `samples/problem-bundles/` の簡潔な日本語 guide と `bundle problem1|problem2` helper の `sample_bundle_doc` に actualize してよい
+  - Package 107 close 後の current active queue は Package 108 representative problem bundle smoke runner と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

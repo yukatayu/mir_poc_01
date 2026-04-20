@@ -17,6 +17,13 @@
   を出してよい。
   これは final parser grammar や final public parser / checker / runtime API や final source wording を意味しない。
 
+## 二大問題の explained bundle
+
+- `samples/problem-bundles/problem1-typed-theorem-model-check.md`
+  - `p06` を中心に、Problem 1 の representative sample / parser companion / Lean artifact / helper command を簡潔な日本語で辿る bundle
+- `samples/problem-bundles/problem2-order-handoff-shared-space.md`
+  - `p07 / p08` を中心に、Problem 2 の representative pair / reserve / negative sample / parser companion / Lean artifact / helper command を簡潔な日本語で辿る bundle
+
 ## current subdirectories
 
 - `current-l2-order-handoff/`

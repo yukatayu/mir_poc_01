@@ -4331,3 +4331,15 @@
   - `docs/reports/0860-package106-parser-companion-mapping-matrix.md`
   - `scripts/current_l2_guided_samples.py`
   - `scripts/tests/test_current_l2_guided_samples.py`
+
+## 2026-04-20 Package 107 explained representative problem sample bundles addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`samples/current-l2/README.md`、`samples/prototype/README.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/581-current-l2-explained-representative-problem-sample-bundles.md`
+  - `docs/reports/0861-package107-explained-representative-problem-sample-bundles.md`
+  - `samples/problem-bundles/README.md`
+  - `samples/problem-bundles/problem1-typed-theorem-model-check.md`
+  - `samples/problem-bundles/problem2-order-handoff-shared-space.md`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`
+  - `scripts/tests/test_problem_sample_bundles.py`
