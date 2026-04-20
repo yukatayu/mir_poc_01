@@ -15,6 +15,7 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke-all", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart problem1", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py emit-theorem problem1", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py emit-scenario problem2", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart-parity", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py reopen-map", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py residuals", text)
@@ -121,6 +122,12 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
             "python3 scripts/current_l2_guided_samples.py split problem2 witness-provider-public-shape",
             text,
         )
+        self.assertIn("emit-scenario problem2", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+            text,
+        )
+        self.assertIn("target/current-l2-guided/problem2-scenario-bundle", text)
         self.assertIn(
             "final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract",
             text,

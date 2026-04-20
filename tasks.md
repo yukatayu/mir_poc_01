@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 19:02 JST
+最終更新: 2026-04-20 19:17 JST
 
 ## この文書について
 
@@ -35,7 +35,9 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 129 authoritative-room runnable scenario hardening
+  - Package 130 Problem 1 executable residual reopen sync
+  - Package 131 Problem 2 executable residual reopen sync
+  - Package 132 repo-local once-through closeout sync after executable loops
   を先頭に追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -57,13 +59,15 @@
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
   - order-handoff / shared-space side:
-    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、authoritative-room first scenario helper summary actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`
+    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、authoritative-room first scenario helper summary actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`、`emit-scenario problem2` repo-local runnable scenario loop
 
 ## ordered self-driven packages
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `129` authoritative-room runnable scenario hardening | authoritative-room first scenario を smoke / emitted artifact / negative pair 付き runnable slice として tighten する | `M` | `Macro 6/7` | `p07 / p08 / p09 / p13 / p14` を対象に、final public wording と contract を凍らせず runner / smoke / artifact loop を harden する | authoritative-room first scenario が reserve / negative pair と一緒に runnable scenario bundle として再確認できる |
+| `130` Problem 1 executable residual reopen sync | typed / theorem / model-check の current executable loop を final-public-seam lane に結び直す | `S` | `Macro 5/7` | `check-source-sample`、`emit-theorem problem1`、`lane problem1-final-public-seams` を current executable reopen order として docs / helper に再同期する | Problem 1 residual mixed gate が executable evidence 付き reopen order として再確認できる |
+| `131` Problem 2 executable residual reopen sync | order / handoff / witness-provider の current executable loop を final-public-seam lane に結び直す | `S` | `Macro 6/7` | `emit-scenario problem2`、`lane problem2-final-public-seams`、`residuals` を current executable reopen order として docs / helper に再同期する | Problem 2 residual mixed gate が executable evidence 付き reopen order として再確認できる |
+| `132` repo-local once-through closeout sync after executable loops | executable loop 群を踏まえた near-end closeout snapshot を stale wording なしで再構成する | `M` | `Macro 5/6/7` | Package 127...131 の executable loop を current completion reading に接続し、mixed gate / true user-spec residual / reserve integration lane を再圧縮する | queue drift が消え、remaining work が mixed / user-spec / reserve integration に分かれて読める |
 
 ## recently closed package note
 
@@ -568,13 +572,47 @@
 ### Package 129 — authoritative-room runnable scenario hardening
 
 - current reading:
-  authoritative-room first scenario default を representative / reserve / negative pair 付き runnable scenario bundle として tighten し、order-handoff current first line を smoke / emitted artifact / refresh behavior で再確認する。
+  close 済み。authoritative-room first scenario default を representative / reserve / negative pair 付き runnable scenario bundle として tighten し、`emit-scenario problem2` により order-handoff current first line を repo-local output dir へ materialize できるようにした。
 - current recommendation:
-  `p07 / p08 / p09 / p13 / p14` を scenario bundle としてまとめ、final source wording / final public witness-provider contract を凍らせずに runner / smoke / artifact loop を harden する。
+  `p07 / p08 / p09 / p13 / p14` を scenario bundle としてまとめ、final source wording / final public witness-provider contract を凍らせずに runner / smoke / artifact loop を harden する line は close 済みである。
 - stop line:
   final source-surface handoff wording
   final public witness/provider/artifact contract
   exhaustive shared-space catalog
+
+### Package 130 — Problem 1 executable residual reopen sync
+
+- current reading:
+  `check-source-sample` executable slice、`emit-theorem problem1` emitted-artifact loop、`lane problem1-final-public-seams` reopen lane を 1 本の executable residual reopen order として揃え直す。
+- current recommendation:
+  typed source principal / theorem public-contract / model-check public-contract の mixed gate 自体は増やさず、Problem 1 側は current executable loop を使って reopen order の drift suppression に集中する。
+- stop line:
+  final typed source principal
+  final public theorem contract
+  final public checker artifact
+  final public verifier contract
+
+### Package 131 — Problem 2 executable residual reopen sync
+
+- current reading:
+  `emit-scenario problem2` repo-local runnable loop、`lane problem2-final-public-seams` reopen lane、`residuals` global residual summary を 1 本の executable residual reopen order として揃え直す。
+- current recommendation:
+  source wording / emitted schema と witness-provider public-shape の mixed gate 自体は増やさず、Problem 2 側は current executable loop を使って reopen order の drift suppression に集中する。
+- stop line:
+  final source-surface handoff wording
+  final public witness/provider/artifact contract
+  exhaustive shared-space catalog
+
+### Package 132 — repo-local once-through closeout sync after executable loops
+
+- current reading:
+  Package 127...131 で揃った executable loop 群を踏まえて、remaining mixed gate / true user-spec residual / reserve integration lane を stale wording なしで再圧縮する。
+- current recommendation:
+  comparison doc を増やす前に、repo-local near-end completion reading と remaining mixed/user-spec split を最新 evidence に合わせて固める。
+- stop line:
+  final public language completion claim
+  packaging / installed binary / FFI / engine adapter adoption
+  exhaustive shared-space catalog adoption
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -1072,5 +1110,6 @@
 
 ## next reopen order
 
-1. Package 129 で authoritative-room runnable scenario hardening を `p07 / p08 / p09 / p13 / p14` scenario bundle に沿って actualize する。
-2. その後、later mixed/user-spec residual を current executable loop を壊さない順で narrow に reopen する。
+1. Package 130 で Problem 1 executable loop と final-public-seam lane の reopen order を再同期する。
+2. Package 131 で Problem 2 executable loop と final-public-seam lane の reopen order を再同期する。
+3. Package 132 で executable loop 後の closeout snapshot を stale wording なしで再圧縮する。

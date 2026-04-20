@@ -853,6 +853,8 @@
   - current Phase 6 / Package 127 closeout として、`check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として narrow に読む補助文書。
 - `specs/examples/601-current-l2-theorem-first-emitted-artifact-loop-hardening.md`
   - current Phase 6 / Package 128 closeout として、`emit-theorem problem1` helper と Problem 1 bundle doc 側の emitted-artifact step を actualize し、representative theorem line `p06 / p07 / p08` を repo-local output dir に materialize する emitted-artifact loop として narrow に読む補助文書。
+- `specs/examples/602-current-l2-authoritative-room-runnable-scenario-loop-hardening.md`
+  - current Phase 6 / Package 129 closeout として、`emit-scenario problem2` helper と Problem 2 bundle doc 側の runnable-scenario step を actualize し、representative pair `p07 / p08`、reserve route `p09`、negative pair `p13 / p14` を repo-local output dir に materialize する scenario loop として narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

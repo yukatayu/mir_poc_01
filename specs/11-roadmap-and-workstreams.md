@@ -897,6 +897,10 @@ actual-adoption floor では、
   `specs/examples/601`
   - `emit-theorem problem1` helper と Problem 1 bundle doc 側の emitted-artifact step を actualize し、`p06 / p07 / p08` representative theorem line を repo-local output dir へ materialize する emitted-artifact loop として読んでよい
   - Package 128 close 後の current active queue は Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
+- authoritative-room runnable scenario loop hardening:
+  `specs/examples/602`
+  - `emit-scenario problem2` helper と Problem 2 bundle doc 側の runnable-scenario step を actualize し、representative pair `p07 / p08`、reserve route `p09`、negative pair `p13 / p14` を repo-local output dir へ materialize する scenario loop として読んでよい
+  - Package 129 close 後の current active queue は Package 130...132 executable residual reopen / closeout sync と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

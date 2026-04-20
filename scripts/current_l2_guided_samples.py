@@ -84,6 +84,14 @@ PROBLEM1_THEOREM_EMIT_SAMPLE_IDS = (
     "p08-dice-stale-reconnect-refresh",
 )
 
+PROBLEM2_SCENARIO_EMIT_SAMPLE_IDS = (
+    "p07-dice-late-join-visible-history",
+    "p08-dice-stale-reconnect-refresh",
+    "p09-dice-delegated-rng-provider-placement",
+    "p13-dice-late-join-missing-publication-witness",
+    "p14-dice-late-join-handoff-before-publication",
+)
+
 PROBLEM1_THEOREM_EMIT_STOP_LINE = (
     "final public theorem contract",
     "concrete theorem prover brand",
@@ -211,6 +219,17 @@ class ProblemTheoremEmitRow:
     principal_review_unit_ref_count: int
     repo_local_emitted_artifact_ref_count: int
     compare_floor_ref_count: int
+
+
+@dataclass(frozen=True)
+class ProblemScenarioEmitRow:
+    sample_id: str
+    reading: str
+    output_path: str
+    static_gate: str
+    terminal_outcome: str
+    first_line_status: str
+    reserve_lane_status: str
 
 
 GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
@@ -679,6 +698,8 @@ def bundle_commands(spec: ProblemSpec) -> tuple[str, ...]:
     ]
     if spec.problem_id == "problem1":
         commands.append("python3 scripts/current_l2_guided_samples.py emit-theorem problem1")
+    if spec.problem_id == "problem2":
+        commands.append("python3 scripts/current_l2_guided_samples.py emit-scenario problem2")
     commands.extend(
         [
             "python3 scripts/current_l2_guided_samples.py mapping",
@@ -867,6 +888,166 @@ def render_problem1_theorem_emit_from_runtime(
         for row in manifest["rows"]
     ]
     return render_problem1_theorem_emit(spec, rows, output_dir=output_dir)
+
+
+def default_problem2_scenario_emit_output_dir() -> Path:
+    return REPO_ROOT / "target" / "current-l2-guided" / "problem2-scenario-bundle"
+
+
+def problem2_scenario_emit_command(sample_id: str) -> list[str]:
+    sample_argument = relative_path(guided_sample_by_id(sample_id).sample_path)
+    return [
+        "cargo",
+        "run",
+        "-q",
+        "-p",
+        "mir-runtime",
+        "--example",
+        "mir_current_l2",
+        "--",
+        "run-source-sample",
+        sample_argument,
+        "--format",
+        "json",
+    ]
+
+
+def emit_problem2_scenario_payload(
+    sample_id: str,
+    output_path: Path,
+    *,
+    runner: Callable[..., subprocess.CompletedProcess[str]] = subprocess.run,
+) -> Mapping[str, object]:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    command = problem2_scenario_emit_command(sample_id)
+    completed = runner(
+        command,
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"emit-scenario `{sample_id}` failed with exit code {completed.returncode}: "
+            f"{compact_text_for_summary((completed.stderr or completed.stdout or '').strip())}"
+        )
+    output_path.write_text(completed.stdout, encoding="utf-8")
+    return json.loads(completed.stdout)
+
+
+def terminal_outcome_text(report: Mapping[str, object]) -> str:
+    runtime = report.get("runtime")
+    if not isinstance(runtime, Mapping):
+        return "missing"
+    outcome = runtime.get("terminal_outcome")
+    if outcome is None:
+        return "none"
+    if isinstance(outcome, str):
+        return outcome.lower()
+    return "missing"
+
+
+def build_problem2_scenario_emit_rows(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_problem2_scenario_payload,
+) -> list[ProblemScenarioEmitRow]:
+    rows: list[ProblemScenarioEmitRow] = []
+    for sample_id in PROBLEM2_SCENARIO_EMIT_SAMPLE_IDS:
+        output_path = output_dir / f"{sample_id}.run.json"
+        report = emitter(sample_id, output_path)
+        rows.append(
+            ProblemScenarioEmitRow(
+                sample_id=sample_id,
+                reading=problem2_residual_reading(report),
+                output_path=display_path(output_path),
+                static_gate=checker_static_gate_verdict(report),
+                terminal_outcome=terminal_outcome_text(report),
+                first_line_status=helper_plain_status(
+                    report, "authoritative_room_first_scenario_actual_adoption"
+                ),
+                reserve_lane_status=helper_plain_status(
+                    report, "authoritative_room_reserve_strengthening_lane"
+                ),
+            )
+        )
+    return rows
+
+
+def build_problem2_scenario_emit_manifest(
+    spec: ProblemSpec,
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_problem2_scenario_payload,
+) -> dict[str, object]:
+    rows = build_problem2_scenario_emit_rows(output_dir=output_dir, emitter=emitter)
+    return {
+        "problem_id": spec.problem_id,
+        "title": "Problem 2 authoritative-room runnable scenario loop",
+        "current_reading": (
+            "`run-source-sample --format json` を representative / reserve / negative pair "
+            "`p07 / p08 / p09 / p13 / p14` に対して repo-local output dir へ materialize し、"
+            "authoritative-room first scenario current default を runnable scenario bundle として再確認する "
+            "helper-local command。final public witness/provider/artifact contract ではない。"
+        ),
+        "command": "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+        "output_dir": display_path(output_dir),
+        "rows": [asdict(row) for row in rows],
+        "stop_line": list(PROBLEM_BUNDLE_STOP_LINES["problem2"]),
+    }
+
+
+def render_problem2_scenario_emit(
+    spec: ProblemSpec,
+    rows: list[ProblemScenarioEmitRow],
+    *,
+    output_dir: Path,
+) -> str:
+    lines = [
+        "Problem 2 authoritative-room runnable scenario loop",
+        "",
+        "Problem 2 first-line / reserve / negative pair を repo-local output dir に materialize し、authoritative-room current default を runnable scenario bundle として再確認する helper。",
+        "",
+        f"sample bundle doc: {PROBLEM_SAMPLE_BUNDLE_DOCS[spec.problem_id]}",
+        "command: python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+        f"output dir: {display_path(output_dir)}",
+        "",
+    ]
+    for row in rows:
+        lines.append(f"- {row.sample_id}: {row.reading}")
+        lines.append(f"  output: {row.output_path}")
+        lines.append(f"  static_gate: {row.static_gate}")
+        lines.append(f"  terminal_outcome: {row.terminal_outcome}")
+        lines.append(f"  first_line_status: {row.first_line_status}")
+        lines.append(f"  reserve_lane_status: {row.reserve_lane_status}")
+        lines.append("")
+    lines.append("stop line:")
+    for item in PROBLEM_BUNDLE_STOP_LINES["problem2"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- `p07 / p08` representative pair、`p09` reserve route、`p13 / p14` negative pair を同じ output dir に materialize する narrow helper である。",
+            "- final source wording、final public witness/provider/artifact contract、exhaustive shared-space catalog には上げない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem2_scenario_emit_from_runtime(
+    spec: ProblemSpec,
+    *,
+    output_format: str,
+    output_dir: Path | None = None,
+) -> str:
+    output_dir = output_dir or default_problem2_scenario_emit_output_dir()
+    manifest = build_problem2_scenario_emit_manifest(spec, output_dir=output_dir)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    rows = [ProblemScenarioEmitRow(**row) for row in manifest["rows"]]
+    return render_problem2_scenario_emit(spec, rows, output_dir=output_dir)
 
 
 def parser_companion_inspector_command(
@@ -2494,6 +2675,18 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         default=default_problem1_theorem_emit_output_dir(),
     )
 
+    emit_scenario_parser = subparsers.add_parser(
+        "emit-scenario",
+        help="Problem 2 authoritative-room current default を repo-local output dir に materialize する",
+    )
+    emit_scenario_parser.add_argument("problem_id", choices=("problem2",))
+    emit_scenario_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+    emit_scenario_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=default_problem2_scenario_emit_output_dir(),
+    )
+
     quickstart_parser = subparsers.add_parser(
         "quickstart",
         help="representative sample bundle の最短 4 ステップを helper-side summary として表示する",
@@ -2648,6 +2841,20 @@ def main(argv: list[str] | None = None) -> int:
         try:
             print(
                 render_problem1_theorem_emit_from_runtime(
+                    spec,
+                    output_format=args.format,
+                    output_dir=args.output_dir,
+                )
+            )
+            return 0
+        except RuntimeError as error:
+            print(str(error), file=sys.stderr)
+            return 1
+
+    if args.subcommand == "emit-scenario":
+        try:
+            print(
+                render_problem2_scenario_emit_from_runtime(
                     spec,
                     output_format=args.format,
                     output_dir=args.output_dir,

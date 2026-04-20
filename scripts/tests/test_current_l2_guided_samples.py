@@ -228,6 +228,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt", text)
         self.assertIn("samples/prototype/current-l2-parser-companion/p08-dice-stale-reconnect-refresh.request.txt", text)
         self.assertIn("samples/problem-bundles/problem2-order-handoff-shared-space.md", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py emit-scenario problem2", text)
         self.assertIn("specs/examples/570-current-l2-authoritative-room-first-scenario-helper-summary-tightening.md", text)
         self.assertIn("final public witness schema", text)
 
@@ -241,6 +242,103 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(
             any("Problem 2 authoritative-room scenario bundle" in call.args[0] for call in write.mock_calls)
+        )
+
+    def test_problem2_scenario_emit_rows_track_representative_reserve_and_negative(self) -> None:
+        output_dir = guided.REPO_ROOT / "target" / "guided-sample-tests" / "problem2-scenario-bundle"
+
+        def fake_emitter(sample_id: str, output_path: Path) -> dict[str, object]:
+            payload = {
+                "checker_floor": {"static_gate": {"verdict": "valid"}},
+                "runtime": {"terminal_outcome": "Success"},
+                "order_handoff_source_surface_artifact_actual_adoption": {"status": "reached"},
+                "authoritative_room_first_scenario_actual_adoption": {"status": "reached"},
+                "order_handoff_witness_provider_public_seam_compression": {"status": "reached"},
+                "authoritative_room_reserve_strengthening_lane": {"status": "guarded_not_reached"},
+            }
+            if sample_id == "p09-dice-delegated-rng-provider-placement":
+                payload["authoritative_room_first_scenario_actual_adoption"] = {"status": "guarded_not_reached"}
+                payload["authoritative_room_reserve_strengthening_lane"] = {
+                    "status": "reached",
+                    "delegated_rng_service_status": "reached",
+                    "model_check_second_line_status": "reached",
+                }
+            if sample_id.startswith("p13") or sample_id.startswith("p14"):
+                payload["checker_floor"] = {"static_gate": {"verdict": "underdeclared"}}
+                payload["runtime"] = {"terminal_outcome": None}
+                payload["authoritative_room_first_scenario_actual_adoption"] = {"status": "guarded_not_reached"}
+            return payload
+
+        rows = guided.build_problem2_scenario_emit_rows(output_dir=output_dir, emitter=fake_emitter)
+
+        self.assertEqual(rows[0].sample_id, "p07-dice-late-join-visible-history")
+        self.assertEqual(rows[0].reading, "first-line representative")
+        self.assertEqual(rows[2].sample_id, "p09-dice-delegated-rng-provider-placement")
+        self.assertEqual(rows[2].reading, "reserve practical route")
+        self.assertEqual(rows[3].reading, "negative static-stop")
+        self.assertIn("target/guided-sample-tests/problem2-scenario-bundle", rows[4].output_path)
+
+    def test_problem2_scenario_emit_command_uses_prototype_sample_path(self) -> None:
+        command = guided.problem2_scenario_emit_command(
+            "p07-dice-late-join-visible-history",
+        )
+
+        self.assertEqual(
+            command[9],
+            "samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt",
+        )
+        self.assertEqual(command[-2:], ["--format", "json"])
+
+    def test_problem2_scenario_emit_text_mentions_output_dir_command_and_samples(self) -> None:
+        output_dir = guided.REPO_ROOT / "target" / "guided-sample-tests" / "problem2-scenario-bundle"
+        rows = [
+            guided.ProblemScenarioEmitRow(
+                sample_id="p07-dice-late-join-visible-history",
+                reading="first-line representative",
+                output_path="target/guided-sample-tests/problem2-scenario-bundle/p07-dice-late-join-visible-history.run.json",
+                static_gate="valid",
+                terminal_outcome="success",
+                first_line_status="reached",
+                reserve_lane_status="guarded",
+            ),
+            guided.ProblemScenarioEmitRow(
+                sample_id="p09-dice-delegated-rng-provider-placement",
+                reading="reserve practical route",
+                output_path="target/guided-sample-tests/problem2-scenario-bundle/p09-dice-delegated-rng-provider-placement.run.json",
+                static_gate="valid",
+                terminal_outcome="success",
+                first_line_status="guarded",
+                reserve_lane_status="reached",
+            ),
+        ]
+
+        text = guided.render_problem2_scenario_emit(
+            guided.problem_specs()["problem2"],
+            rows,
+            output_dir=output_dir,
+        )
+
+        self.assertIn("Problem 2 authoritative-room runnable scenario loop", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py emit-scenario problem2", text)
+        self.assertIn("target/guided-sample-tests/problem2-scenario-bundle", text)
+        self.assertIn("p07-dice-late-join-visible-history", text)
+        self.assertIn("p09-dice-delegated-rng-provider-placement", text)
+        self.assertIn("final public witness/provider/artifact contract", text)
+
+    def test_main_emit_scenario_problem2_uses_runtime_renderer(self) -> None:
+        fake_text = "Problem 2 authoritative-room runnable scenario loop\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem2_scenario_emit_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["emit-scenario", "problem2"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("Problem 2 authoritative-room runnable scenario loop" in call.args[0] for call in write.mock_calls)
         )
 
     def test_problem1_theorem_emit_rows_track_representative_and_support_pair(self) -> None:

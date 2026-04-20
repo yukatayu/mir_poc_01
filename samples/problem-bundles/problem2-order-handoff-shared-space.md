@@ -102,19 +102,35 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
   --format pretty
 ```
 
-2. representative / reserve / negative pair をまとめて見る
+2. runnable scenario loop を repo-local output dir に materialize する
+
+```bash
+python3 scripts/current_l2_guided_samples.py emit-scenario problem2
+```
+
+見るべき結果:
+
+- `target/current-l2-guided/problem2-scenario-bundle` 配下に、
+  `p07 / p08 / p09 / p13 / p14` の run-source-sample JSON が出る。
+- `p07 / p08` は first-line representative、
+  `p09` は reserve practical route、
+  `p13 / p14` は negative static-stop として並んで見える。
+- final source wording や final public witness/provider/artifact contract には上げず、
+  authoritative-room current default の runnable scenario loop として current cut を確認できる。
+
+3. representative / reserve / negative pair をまとめて見る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py matrix problem2
 ```
 
-3. docs / Lean artifact / anchor spec-report まで一本道で辿る
+4. docs / Lean artifact / anchor spec-report まで一本道で辿る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py bundle problem2
 ```
 
-4. parser-side companion / mapping まで同じ読みに揃える
+5. parser-side companion / mapping まで同じ読みに揃える
 
 ```bash
 python3 scripts/current_l2_guided_samples.py mapping
