@@ -651,6 +651,45 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             )
         )
 
+    def test_problem1_quickstart_text_mentions_four_steps_and_expected_results(self) -> None:
+        spec = guided.problem_specs()["problem1"]
+
+        text = guided.render_problem_quickstart(spec)
+
+        self.assertIn("Problem 1", text)
+        self.assertIn("quickstart", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py smoke problem1", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py matrix problem1", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)
+        self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
+        self.assertIn("見るべき結果", text)
+
+    def test_problem2_quickstart_json_contains_expected_steps(self) -> None:
+        spec = guided.problem_specs()["problem2"]
+
+        rendered = guided.render_problem_quickstart_from_runtime(spec, output_format="json")
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["problem_id"], "problem2")
+        self.assertEqual(len(payload["steps"]), 4)
+        self.assertEqual(payload["steps"][0]["command"], "python3 scripts/current_l2_guided_samples.py smoke problem2")
+        self.assertIn("representative pair", payload["steps"][1]["expected_results"][0])
+        self.assertIn("current_l2_inspect_request_head_clause_bundle", payload["steps"][3]["command"])
+
+    def test_main_quickstart_command_uses_quickstart_renderer(self) -> None:
+        fake_text = "Problem 1 quickstart\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem_quickstart_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["quickstart", "problem1"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(any("Problem 1 quickstart" in call.args[0] for call in write.mock_calls))
+
     def test_main_smoke_all_command_uses_aggregate_renderer(self) -> None:
         fake_text = "representative problem bundle aggregate smoke summary\n..."
 

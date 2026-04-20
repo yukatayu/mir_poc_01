@@ -833,6 +833,10 @@ actual-adoption floor では、
   `specs/examples/585`
   - `samples/problem-bundles/problem1|problem2` に `最短 quickstart` と `見るべき結果` を actualize し、representative sample guide を doc 単体でも読める quickstart bundle に harden してよい
   - Package 111 close 後の current active queue は Package 112 representative problem quickstart CLI mirror と later mixed/user-spec residual である
+- representative problem quickstart CLI mirror actualization:
+  `specs/examples/586`
+  - `quickstart problem1|problem2` helper を actualize し、bundle doc 側の representative 4-step quickstart を helper-side summary にも mirror してよい
+  - Package 112 close 後の current active queue は Package 113 representative problem quickstart parity checks と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

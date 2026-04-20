@@ -4376,3 +4376,12 @@
   - `specs/examples/585-current-l2-representative-problem-bundle-quickstart-walkthrough-hardening.md`
   - `docs/reports/0865-package111-representative-problem-bundle-quickstart-walkthrough-hardening.md`
   - `scripts/tests/test_problem_sample_bundles.py`
+
+## 2026-04-20 Package 112 representative problem quickstart CLI mirror addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`samples/problem-bundles/README.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/586-current-l2-representative-problem-quickstart-cli-mirror-actualization.md`
+  - `docs/reports/0866-package112-representative-problem-quickstart-cli-mirror.md`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`
+  - `scripts/tests/test_problem_sample_bundles.py`

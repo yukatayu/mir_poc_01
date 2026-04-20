@@ -67,7 +67,7 @@
   - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
 - `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
   - 2026-04-20 時点の repo-local once-through completion handoff であり、FAQ 10 以後の parser-side closeout / finite-index strong typing / Lean-first theorem skeleton / model-check second-line / order-handoff helper-local source surface / authoritative-room first scenario / docs closeout sequenceを 1 本の staged package 列として整理する。
-  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569`、`570`、`571`、`572`、`573`、`574`、`575`、`576`、`577`、`578`、`579`、`580`、`581`、`582`、`583`、`584`、`585` 以後の once-through closeout reading と residual / bundle / parser-side / smoke actualization 群の current explanation source として使ってよい。
+  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569`、`570`、`571`、`572`、`573`、`574`、`575`、`576`、`577`、`578`、`579`、`580`、`581`、`582`、`583`、`584`、`585`、`586` 以後の once-through closeout reading と residual / bundle / parser-side / smoke actualization 群の current explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -821,6 +821,8 @@
   - current Phase 6 / Package 110 closeout として、`smoke-all` helper に failure-focused diagnostics を actualize し、aggregate failure 時に failed step / command / return code / output excerpt を compact に surfacing する補助文書。
 - `specs/examples/585-current-l2-representative-problem-bundle-quickstart-walkthrough-hardening.md`
   - current Phase 6 / Package 111 closeout として、`samples/problem-bundles/problem1|problem2` に `最短 quickstart` と `見るべき結果` を actualize し、representative sample guide を doc 単体でも読める quickstart bundle に harden する補助文書。
+- `specs/examples/586-current-l2-representative-problem-quickstart-cli-mirror-actualization.md`
+  - current Phase 6 / Package 112 closeout として、`quickstart problem1|problem2` helper を actualize し、bundle doc 側の representative 4-step quickstart を helper-side summary にも mirror する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

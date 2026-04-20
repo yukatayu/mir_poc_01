@@ -165,6 +165,13 @@ class ProblemSmokeAggregateRow:
     failed_output_excerpt: str | None = None
 
 
+@dataclass(frozen=True)
+class ProblemQuickstartStep:
+    title: str
+    command: str
+    expected_results: tuple[str, ...]
+
+
 def problem_specs() -> dict[str, ProblemSpec]:
     typed_root = REPO_ROOT / "samples" / "prototype" / "current-l2-typed-proof-model-check"
     order_root = REPO_ROOT / "samples" / "prototype" / "current-l2-order-handoff"
@@ -383,6 +390,10 @@ def representative_parser_companion_rows() -> tuple[tuple[str, GuidedSample], ..
     return tuple(rows)
 
 
+def primary_sample(spec: ProblemSpec) -> GuidedSample:
+    return next(sample for sample in spec.samples if sample.primary)
+
+
 def build_parser_companion_mapping_manifest() -> dict[str, object]:
     rows = []
     for problem_id, sample in representative_parser_companion_rows():
@@ -563,6 +574,136 @@ def render_problem_bundle(spec: ProblemSpec) -> str:
         ]
     )
     return "\n".join(lines)
+
+
+def build_problem_quickstart_steps(spec: ProblemSpec) -> tuple[ProblemQuickstartStep, ...]:
+    first_primary = primary_sample(spec)
+
+    if spec.problem_id == "problem1":
+        return (
+            ProblemQuickstartStep(
+                title="`smoke problem1` で representative line を一度に確認する",
+                command="python3 scripts/current_l2_guided_samples.py smoke problem1",
+                expected_results=(
+                    "`p06` の runtime / `matrix problem1` / `bundle problem1` / parser companion inspector / `mapping` が順に通る。",
+                    "representative sample bundle の主要 command 群が drift していないことを 1 本で確認できる。",
+                ),
+            ),
+            ProblemQuickstartStep(
+                title="`matrix problem1` で representative と補助 sample の役割差を見る",
+                command="python3 scripts/current_l2_guided_samples.py matrix problem1",
+                expected_results=(
+                    "`p06` が public-seam representative として先頭に出る。",
+                    "`p10 / p11 / p12 / p15 / p16` は checker-adjacent bridge-floor 補助 sample として残る。",
+                ),
+            ),
+            ProblemQuickstartStep(
+                title="`bundle problem1` で docs / Lean artifact / anchor spec-report まで一本道で辿る",
+                command="python3 scripts/current_l2_guided_samples.py bundle problem1",
+                expected_results=(
+                    "representative sample path、Lean artifact path、parser companion path、anchor spec / report が 1 画面で読める。",
+                    "final public theorem contract や final public verifier contract に上げていない stop line も同時に確認できる。",
+                ),
+            ),
+            ProblemQuickstartStep(
+                title="parser companion inspector で request/head/clause bundle を直接見る",
+                command=parser_companion_inspector_command(first_primary, output_format="pretty"),
+                expected_results=(
+                    "`p06` companion surface が repo-local parser-side carrier に戻っていることが分かる。",
+                    "surface を final grammar に昇格せず、thin experimental companion として保っている current cut を追える。",
+                ),
+            ),
+        )
+
+    return (
+        ProblemQuickstartStep(
+            title="`smoke problem2` で representative pair を一度に確認する",
+            command="python3 scripts/current_l2_guided_samples.py smoke problem2",
+            expected_results=(
+                "`p07 / p08` の runtime / `matrix problem2` / `bundle problem2` / parser companion inspector / `mapping` が順に通る。",
+                "authoritative-room first completion line の representative pair が drift していないことを 1 本で確認できる。",
+            ),
+        ),
+        ProblemQuickstartStep(
+            title="`matrix problem2` で representative / reserve / negative pair を分けて読む",
+            command="python3 scripts/current_l2_guided_samples.py matrix problem2",
+            expected_results=(
+                "`p07 / p08` が first-line representative pair として見える。",
+                "`p09` が delegated RNG practical reserve route、`p13 / p14` が negative static-stop pair として分かれて見える。",
+            ),
+        ),
+        ProblemQuickstartStep(
+            title="`bundle problem2` で docs / Lean artifact / anchor spec-report まで一本道で辿る",
+            command="python3 scripts/current_l2_guided_samples.py bundle problem2",
+            expected_results=(
+                "representative pair、reserve route、negative pair、Lean artifact、anchor spec / report が 1 画面で読める。",
+                "final public witness/provider/artifact contract や exhaustive shared-space catalog をまだ確定していない stop line も確認できる。",
+            ),
+        ),
+        ProblemQuickstartStep(
+            title="parser companion inspector で order-handoff companion surface を直接見る",
+            command=parser_companion_inspector_command(first_primary, output_format="pretty"),
+            expected_results=(
+                "edge-row principal / stage-block secondary の companion surface が parser-side carrier に戻っていることが分かる。",
+                "final source wording を凍らせず、thin experimental companion として保っている current cut を追える。",
+            ),
+        ),
+    )
+
+
+def build_problem_quickstart_manifest(spec: ProblemSpec) -> dict[str, object]:
+    steps = build_problem_quickstart_steps(spec)
+    return {
+        "problem_id": spec.problem_id,
+        "title": f"{PROBLEM_BUNDLE_TITLES[spec.problem_id]} quickstart",
+        "sample_bundle_doc": PROBLEM_SAMPLE_BUNDLE_DOCS[spec.problem_id],
+        "current_reading": (
+            "representative sample を見る最短 4 ステップを helper-side summary に mirror した "
+            "repo-local quickstart。final public tutorial surface ではない。"
+        ),
+        "steps": [
+            {
+                "title": step.title,
+                "command": step.command,
+                "expected_results": list(step.expected_results),
+            }
+            for step in steps
+        ],
+    }
+
+
+def render_problem_quickstart(spec: ProblemSpec) -> str:
+    manifest = build_problem_quickstart_manifest(spec)
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+        f"sample bundle doc: {manifest['sample_bundle_doc']}",
+        "",
+    ]
+    for index, step in enumerate(manifest["steps"], start=1):
+        lines.append(f"{index}. {step['title']}")
+        lines.append(f"   command: {step['command']}")
+        lines.append("   見るべき結果:")
+        for item in step["expected_results"]:
+            lines.append(f"   - {item}")
+        lines.append("")
+    lines.extend(
+        [
+            "注意:",
+            "- current helper summary は representative 4 ステップだけに留め、exhaustive tutorial には広げない。",
+            "- final public CLI / tutorial surface、final public parser / checker / runtime API を意味しない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem_quickstart_from_runtime(spec: ProblemSpec, *, output_format: str) -> str:
+    manifest = build_problem_quickstart_manifest(spec)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_problem_quickstart(spec)
 
 
 def render_problem_guide(spec: ProblemSpec) -> str:
@@ -1202,6 +1343,13 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     bundle_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
     bundle_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    quickstart_parser = subparsers.add_parser(
+        "quickstart",
+        help="representative sample bundle の最短 4 ステップを helper-side summary として表示する",
+    )
+    quickstart_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
+    quickstart_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     mapping_parser = subparsers.add_parser(
         "mapping",
         help="parser companion representative slice の mapping matrix を表示する",
@@ -1246,6 +1394,10 @@ def main(argv: list[str] | None = None) -> int:
         return exit_code
 
     spec = specs[args.problem_id]
+    if args.subcommand == "quickstart":
+        print(render_problem_quickstart_from_runtime(spec, output_format=args.format))
+        return 0
+
     if args.subcommand == "show":
         print(render_problem_guide(spec))
         return 0
