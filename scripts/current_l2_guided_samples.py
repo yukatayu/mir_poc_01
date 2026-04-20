@@ -1469,23 +1469,23 @@ def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
             "p08-dice-stale-reconnect-refresh",
         ),
         current_floor=(
-            "quickstart / smoke / matrix / bundle / parser companion inspector まで drift suppression 済み。",
+            "quickstart / smoke / matrix / bundle / parser companion inspector / emit-scenario problem2 まで drift suppression 済み。",
             "relation decomposition principal、authoritative-room first default、reserve lane split の current cut を representative pair から追える。",
         ),
         entry_commands=(
             "python3 scripts/current_l2_guided_samples.py quickstart problem2",
-            "python3 scripts/current_l2_guided_samples.py matrix problem2",
-            "python3 scripts/current_l2_guided_samples.py bundle problem2",
-            "python3 scripts/current_l2_guided_samples.py smoke problem2",
+            "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+            "python3 scripts/current_l2_guided_samples.py lane problem2-final-public-seams",
+            "python3 scripts/current_l2_guided_samples.py residuals",
         ),
         mixed_gates=(
             "final source-surface handoff wording / final emitted-artifact schema",
             "final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract",
         ),
         reopen_guidance=(
-            "`matrix problem2` で `p07 / p08` representative pair、`p09` reserve route、`p13 / p14` negative static-stop pair の分担を再確認する。",
-            "`bundle problem2` と parser companion inspector を合わせて見て、edge-row principal / stage-block secondary のまま final source wording や emitted schema を凍らせない current cut を保つ。",
-            "shared-space stronger public shape は claim / payload split first を保ったまま、final public witness/provider 契約へは上げずに stop line と user-spec residual を切り分ける。",
+            "`emit-scenario problem2` で `p07 / p08` representative pair、`p09` reserve route、`p13 / p14` negative static-stop pair の current split を repo-local output dir まで含めて再確認する。",
+            "`lane problem2-final-public-seams` と `bundle problem2` / parser companion inspector を合わせて見て、edge-row principal / stage-block secondary のまま final source wording や emitted schema を凍らせない current cut を保つ。",
+            "`residuals` と `matrix problem2` を合わせて見て、shared-space stronger public shape を final public witness/provider 契約へ上げずに stop line と user-spec residual を切り分ける。",
         ),
         closed_split_packages=(
             "source wording / emitted schema split",
@@ -1650,9 +1650,9 @@ def build_remaining_residual_lane_manifest(specs: Mapping[str, ProblemSpec]) -> 
             ),
             "focus": list(problem2_row.mixed_gates),
             "entry_commands": [
+                "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
                 "python3 scripts/current_l2_guided_samples.py reopen-map problem2",
-                "python3 scripts/current_l2_guided_samples.py matrix problem2",
-                "python3 scripts/current_l2_guided_samples.py bundle problem2",
+                "python3 scripts/current_l2_guided_samples.py residuals",
             ],
             "anchor_refs": list(problem2_row.anchor_refs)
             + [

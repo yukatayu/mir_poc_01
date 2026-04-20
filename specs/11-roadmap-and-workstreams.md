@@ -905,6 +905,10 @@ actual-adoption floor では、
   `specs/examples/603`
   - `reopen-map problem1`、`lane problem1-final-public-seams`、Problem 1 bundle doc を executable evidence 側へ再同期し、`check-source-sample` → `emit-theorem problem1` → lane summary の reopen order を actualize してよい
   - Package 130 close 後の current active queue は Package 131...132 executable residual reopen / closeout sync と later mixed/user-spec residual である
+- Problem 2 executable residual reopen sync:
+  `specs/examples/604`
+  - `reopen-map problem2`、`lane problem2-final-public-seams`、`residuals`、Problem 2 bundle doc を executable scenario loop 側へ再同期し、`emit-scenario problem2` → lane summary → residual summary の reopen order を actualize してよい
+  - Package 131 close 後の current active queue は Package 132 after-loop closeout sync と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

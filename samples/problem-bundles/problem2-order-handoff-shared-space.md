@@ -173,6 +173,10 @@ distributed fairness theorem や exhaustive shared-space catalog を要求しな
 - compressed residual lane は
   `python3 scripts/current_l2_guided_samples.py residuals`
   から、Problem 2 mixed gate lane と true user-spec residual の切り分けを 1 枚で見直す。
+- executable residual reopen を helper summary でまとめて見たいときは
+  `python3 scripts/current_l2_guided_samples.py reopen-map problem2`
+  から入り、`emit-scenario problem2` → `lane problem2-final-public-seams` → `residuals`
+  の current reopen order を見る。
 - Problem 2 final-public-seam lane を個別に追いたいときは
   `python3 scripts/current_l2_guided_samples.py lane problem2-final-public-seams`
   から、source wording / emitted schema と witness-provider public-shape の reopen order を見る。
