@@ -849,6 +849,8 @@
   - current Phase 6 / Package 125 closeout として、`lane problem2-final-public-seams` helper と Problem 2 bundle doc 側の lane entrypoint を actualize し、Problem 2 final-public-seam lane の component order / stop line を独立 lane として narrow に読む補助文書。
 - `specs/examples/599-current-l2-syntax-modality-final-marker-lane-helper-actualization.md`
   - current Phase 6 / Package 126 closeout として、`lane syntax-modality-final-marker` helper と sample bundle index / syntax-modality docs を actualize し、final modal foundation / final source marker mixed gate を retained family / separation boundary 付きの独立 lane として narrow に読む補助文書。
+- `specs/examples/600-current-l2-typed-checker-first-executable-slice-actualization.md`
+  - current Phase 6 / Package 127 closeout として、`check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

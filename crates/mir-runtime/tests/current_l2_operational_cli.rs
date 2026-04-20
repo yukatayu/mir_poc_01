@@ -240,6 +240,76 @@ fn operational_cli_json_reports_static_verification_preview_for_prototype_sample
 }
 
 #[test]
+fn operational_cli_pretty_checks_typed_sample_with_focused_checker_slice() {
+    let output = run_current_l2_operational_cli([
+        "check-source-sample",
+        typed_prototype_sample_path("p10-typed-authorized-fingerprint-declassification.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("shell: mir-current-l2"));
+    assert!(output.contains("command: check-source-sample"));
+    assert!(output.contains("sample: p10-typed-authorized-fingerprint-declassification"));
+    assert!(output.contains("cluster_kind: ifc_authority_release_cluster"));
+    assert!(output.contains("case_label: authority_sensitive_success"));
+    assert!(output.contains("typed_checker_hint_status: reached"));
+    assert!(output.contains("actual_checker_payload_family_threshold_status: reached"));
+    assert!(output.contains("selected_option_ref: release_authority"));
+}
+
+#[test]
+fn operational_cli_json_reports_typed_checker_slice_for_capture_negative() {
+    let output = run_current_l2_operational_cli([
+        "check-source-sample",
+        typed_prototype_sample_path("p15-typed-capture-escape-rejected.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(value["command"], "check-source-sample");
+    assert_eq!(value["sample"], "p15-typed-capture-escape-rejected");
+    assert_eq!(
+        value["typed_sample_manifest"]["cluster_kind"],
+        "capture_lifetime_cluster"
+    );
+    assert_eq!(
+        value["typed_sample_manifest"]["case_label"],
+        "capture_escape_negative"
+    );
+    assert_eq!(value["static_gate_verdict"], "valid");
+    assert_eq!(value["terminal_outcome"], "Reject");
+    assert_eq!(value["typed_checker_hint_preview"]["status"], "reached");
+    assert_eq!(
+        value["actual_checker_payload_row_body_threshold"]["row_body"]["selected_option_ref"],
+        "session_owner"
+    );
+}
+
+#[test]
+fn operational_cli_rejects_typed_checker_command_for_non_typed_sample() {
+    let error = run_current_l2_operational_cli([
+        "check-source-sample",
+        "e2-try-fallback",
+        "--host-plan",
+        host_plan_path("e2-try-fallback.json").to_str().unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap_err();
+
+    assert_eq!(error.exit_code(), 1);
+    assert!(error.to_string().contains("only supports the first strong typing sample set"));
+}
+
+#[test]
 fn operational_cli_json_reports_guarded_verification_preview_for_prototype_sample() {
     let output = run_current_l2_operational_cli([
         "run-source-sample",

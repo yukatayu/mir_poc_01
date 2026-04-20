@@ -889,6 +889,10 @@ actual-adoption floor では、
   `specs/examples/599`
   - `lane syntax-modality-final-marker` helper と sample bundle index / syntax-modality docs を actualize し、syntax / modality mixed gate を current recommendation / retained families / separation boundary 付きの独立 lane として読んでよい
   - Package 126 close 後の current active queue は Package 127 typed-checker first executable slice、Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
+- typed-checker first executable slice actualization:
+  `specs/examples/600`
+  - `check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として読んでよい
+  - Package 127 close 後の current active queue は Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

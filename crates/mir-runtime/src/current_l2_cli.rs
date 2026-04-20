@@ -25,6 +25,7 @@ use mir_semantics::{
 
 pub const CURRENT_L2_OPERATIONAL_SHELL_NAME: &str = "mir-current-l2";
 const RUN_SOURCE_SAMPLE_COMMAND: &str = "run-source-sample";
+const CHECK_SOURCE_SAMPLE_COMMAND: &str = "check-source-sample";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CurrentL2OperationalCliError {
@@ -76,7 +77,7 @@ struct CurrentL2RunSourceSampleCommand {
 
 pub fn current_l2_operational_cli_usage() -> String {
     format!(
-        "usage: {CURRENT_L2_OPERATIONAL_SHELL_NAME} {RUN_SOURCE_SAMPLE_COMMAND} <sample-or-path> [--host-plan <path>] --format pretty|json"
+        "usage: {CURRENT_L2_OPERATIONAL_SHELL_NAME} {RUN_SOURCE_SAMPLE_COMMAND} <sample-or-path> [--host-plan <path>] --format pretty|json\n       {CURRENT_L2_OPERATIONAL_SHELL_NAME} {CHECK_SOURCE_SAMPLE_COMMAND} <sample-or-path> [--host-plan <path>] --format pretty|json"
     )
 }
 
@@ -92,11 +93,13 @@ where
 
     match parse_current_l2_operational_cli(args)? {
         CurrentL2CliCommand::RunSourceSample(command) => run_source_sample_command(command),
+        CurrentL2CliCommand::CheckSourceSample(command) => run_check_source_sample_command(command),
     }
 }
 
 enum CurrentL2CliCommand {
     RunSourceSample(CurrentL2RunSourceSampleCommand),
+    CheckSourceSample(CurrentL2RunSourceSampleCommand),
 }
 
 fn parse_current_l2_operational_cli(
@@ -110,6 +113,9 @@ fn parse_current_l2_operational_cli(
 
     match command.as_str() {
         RUN_SOURCE_SAMPLE_COMMAND => Ok(CurrentL2CliCommand::RunSourceSample(
+            parse_run_source_sample_command(rest)?,
+        )),
+        CHECK_SOURCE_SAMPLE_COMMAND => Ok(CurrentL2CliCommand::CheckSourceSample(
             parse_run_source_sample_command(rest)?,
         )),
         other => Err(CurrentL2OperationalCliError::usage(format!(
@@ -185,10 +191,41 @@ fn parse_output_format(
 fn run_source_sample_command(
     command: CurrentL2RunSourceSampleCommand,
 ) -> Result<String, CurrentL2OperationalCliError> {
+    let (host_plan_path, report) = load_source_sample_report(&command)?;
+    let summary =
+        CurrentL2OperationalCliRunSourceSampleSummary::from_report(&host_plan_path, report);
+
+    match command.format {
+        CurrentL2CliOutputFormat::Pretty => Ok(render_pretty_summary(&summary)),
+        CurrentL2CliOutputFormat::Json => serde_json::to_string_pretty(&summary)
+            .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string())),
+    }
+}
+
+fn run_check_source_sample_command(
+    command: CurrentL2RunSourceSampleCommand,
+) -> Result<String, CurrentL2OperationalCliError> {
+    let (host_plan_path, report) = load_source_sample_report(&command)?;
+    let summary = CurrentL2OperationalCliCheckSourceSampleSummary::from_report(
+        &host_plan_path,
+        report,
+    )?;
+
+    match command.format {
+        CurrentL2CliOutputFormat::Pretty => Ok(render_typed_checker_summary(&summary)),
+        CurrentL2CliOutputFormat::Json => serde_json::to_string_pretty(&summary)
+            .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string())),
+    }
+}
+
+fn load_source_sample_report(
+    command: &CurrentL2RunSourceSampleCommand,
+) -> Result<(PathBuf, CurrentL2SourceSampleRunReport), CurrentL2OperationalCliError> {
     let sample_path = resolve_current_l2_source_sample_path(&command.sample)
         .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string()))?;
     let host_plan_path = command
         .host_plan_path
+        .clone()
         .unwrap_or_else(|| sample_path.with_extension("host-plan.json"));
     if !host_plan_path.is_file() {
         return Err(CurrentL2OperationalCliError::usage(format!(
@@ -205,14 +242,7 @@ fn run_source_sample_command(
     let report =
         run_current_l2_source_sample(sample_path.to_str().unwrap_or(&command.sample), host_plan)
             .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string()))?;
-    let summary =
-        CurrentL2OperationalCliRunSourceSampleSummary::from_report(&host_plan_path, report);
-
-    match command.format {
-        CurrentL2CliOutputFormat::Pretty => Ok(render_pretty_summary(&summary)),
-        CurrentL2CliOutputFormat::Json => serde_json::to_string_pretty(&summary)
-            .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string())),
-    }
+    Ok((host_plan_path, report))
 }
 
 #[derive(Debug, Serialize)]
@@ -522,6 +552,124 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             actual_phase6_reserve_formal_tool_binding_inventory_threshold,
             actual_phase6_parser_side_followup_package_sequencing_threshold,
         }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliTypedSampleManifestSummary {
+    cluster_kind: &'static str,
+    case_label: &'static str,
+    family_refs: Vec<String>,
+    coverage_state: &'static str,
+    primary_compare_floor_ref: &'static str,
+    foundation_evidence_ref: &'static str,
+    selected_option_ref: &'static str,
+    visibility_target_ref: &'static str,
+}
+
+impl CurrentL2OperationalCliTypedSampleManifestSummary {
+    fn from_manifest(manifest: CurrentL2FirstStrongTypingSampleManifest) -> Self {
+        Self {
+            cluster_kind: manifest.cluster_kind,
+            case_label: manifest.case_label,
+            family_refs: manifest
+                .family_refs
+                .iter()
+                .map(|item| (*item).to_string())
+                .collect(),
+            coverage_state: manifest.coverage_state,
+            primary_compare_floor_ref: manifest.primary_compare_floor_ref,
+            foundation_evidence_ref: manifest.foundation_evidence_ref,
+            selected_option_ref: manifest.selected_option_ref,
+            visibility_target_ref: manifest.visibility_target_ref,
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliCheckSourceSampleSummary {
+    shell: &'static str,
+    command: &'static str,
+    sample: String,
+    sample_path: String,
+    host_plan_path: String,
+    static_gate_verdict: &'static str,
+    terminal_outcome: Option<&'static str>,
+    typed_sample_manifest: CurrentL2OperationalCliTypedSampleManifestSummary,
+    typed_checker_hint_preview: CurrentL2OperationalCliTypedCheckerHintPreviewSummary,
+    actual_checker_payload_family_threshold:
+        CurrentL2OperationalCliActualCheckerPayloadFamilyThresholdSummary,
+    actual_checker_payload_row_detail_threshold:
+        CurrentL2OperationalCliActualCheckerPayloadRowDetailThresholdSummary,
+    actual_checker_payload_row_body_threshold:
+        CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary,
+}
+
+impl CurrentL2OperationalCliCheckSourceSampleSummary {
+    fn from_report(
+        host_plan_path: &PathBuf,
+        report: CurrentL2SourceSampleRunReport,
+    ) -> Result<Self, CurrentL2OperationalCliError> {
+        let typed_manifest =
+            current_l2_first_strong_typing_sample_manifest(report.sample_id.as_str()).ok_or_else(
+                || {
+                    CurrentL2OperationalCliError::execution(format!(
+                        "`{CHECK_SOURCE_SAMPLE_COMMAND}` only supports the first strong typing sample set (`p10` / `p11` / `p12` / `p15` / `p16`); got `{}`",
+                        report.sample_id
+                    ))
+                },
+            )?;
+        let verification_preview =
+            CurrentL2OperationalCliVerificationPreviewSummary::from_source_report(&report);
+        let typed_checker_hint_preview =
+            CurrentL2OperationalCliTypedCheckerHintPreviewSummary::from_source_report(
+                &report,
+                &verification_preview,
+            );
+        let actual_checker_payload_family_threshold =
+            CurrentL2OperationalCliActualCheckerPayloadFamilyThresholdSummary::from_source_report(
+                &report,
+                &verification_preview,
+                &typed_checker_hint_preview,
+            );
+        let actual_checker_payload_row_family_threshold =
+            CurrentL2OperationalCliActualCheckerPayloadRowFamilyThresholdSummary::from_source_report(
+                &report,
+                &actual_checker_payload_family_threshold,
+            );
+        let actual_checker_payload_row_detail_threshold =
+            CurrentL2OperationalCliActualCheckerPayloadRowDetailThresholdSummary::from_source_report(
+                &report,
+                &actual_checker_payload_row_family_threshold,
+            );
+        let actual_checker_payload_row_body_threshold =
+            CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary::from_source_report(
+                &report,
+                &actual_checker_payload_row_detail_threshold,
+            );
+
+        Ok(Self {
+            shell: CURRENT_L2_OPERATIONAL_SHELL_NAME,
+            command: CHECK_SOURCE_SAMPLE_COMMAND,
+            sample: report.sample_id.clone(),
+            sample_path: report.sample_path.display().to_string(),
+            host_plan_path: host_plan_path.display().to_string(),
+            static_gate_verdict: static_gate_verdict_name(
+                report.runtime_report.checker_floor.static_gate.verdict,
+            ),
+            terminal_outcome: report
+                .runtime_report
+                .run_report
+                .terminal_outcome
+                .map(terminal_outcome_name),
+            typed_sample_manifest: CurrentL2OperationalCliTypedSampleManifestSummary::from_manifest(
+                typed_manifest,
+            ),
+            typed_checker_hint_preview,
+            actual_checker_payload_family_threshold,
+            actual_checker_payload_row_detail_threshold,
+            actual_checker_payload_row_body_threshold,
+        })
     }
 }
 
@@ -4863,6 +5011,105 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     }
 
     output.trim_end().to_string()
+}
+
+fn render_typed_checker_summary(
+    summary: &CurrentL2OperationalCliCheckSourceSampleSummary,
+) -> String {
+    let mut output = String::new();
+    writeln!(output, "shell: {}", summary.shell).expect("write to string");
+    writeln!(output, "command: {}", summary.command).expect("write to string");
+    writeln!(output, "sample: {}", summary.sample).expect("write to string");
+    writeln!(output, "sample_path: {}", summary.sample_path).expect("write to string");
+    writeln!(output, "host_plan_path: {}", summary.host_plan_path).expect("write to string");
+    writeln!(output, "static_gate_verdict: {}", summary.static_gate_verdict)
+        .expect("write to string");
+    writeln!(
+        output,
+        "terminal_outcome: {}",
+        summary.terminal_outcome.unwrap_or("none")
+    )
+    .expect("write to string");
+    writeln!(output, "typed_sample_manifest:").expect("write to string");
+    writeln!(
+        output,
+        "  cluster_kind: {}",
+        summary.typed_sample_manifest.cluster_kind
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  case_label: {}",
+        summary.typed_sample_manifest.case_label
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  coverage_state: {}",
+        summary.typed_sample_manifest.coverage_state
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  primary_compare_floor_ref: {}",
+        summary.typed_sample_manifest.primary_compare_floor_ref
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  foundation_evidence_ref: {}",
+        summary.typed_sample_manifest.foundation_evidence_ref
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  selected_option_ref: {}",
+        summary.typed_sample_manifest.selected_option_ref
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  visibility_target_ref: {}",
+        summary.typed_sample_manifest.visibility_target_ref
+    )
+    .expect("write to string");
+    writeln!(output, "  family_refs:").expect("write to string");
+    for family_ref in &summary.typed_sample_manifest.family_refs {
+        writeln!(output, "    - {family_ref}").expect("write to string");
+    }
+    writeln!(
+        output,
+        "typed_checker_hint_status: {}",
+        summary.typed_checker_hint_preview.status
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "actual_checker_payload_family_threshold_status: {}",
+        summary.actual_checker_payload_family_threshold.status
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "actual_checker_payload_row_detail_threshold_status: {}",
+        summary.actual_checker_payload_row_detail_threshold.status
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "actual_checker_payload_row_body_threshold_status: {}",
+        summary.actual_checker_payload_row_body_threshold.status
+    )
+    .expect("write to string");
+    if let Some(row_body) = &summary.actual_checker_payload_row_body_threshold.row_body {
+        writeln!(output, "actual_checker_payload_row_body:").expect("write to string");
+        for (key, value) in row_body {
+            writeln!(output, "  {key}: {value}").expect("write to string");
+        }
+    } else {
+        writeln!(output, "actual_checker_payload_row_body: none").expect("write to string");
+    }
+    output
 }
 
 fn typed_checker_hint_evidence_refs(sample_id: &str) -> Vec<String> {

@@ -85,19 +85,35 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
   --format pretty
 ```
 
-2. representative と residual bridge-floor をまとめて見る
+2. typed sample 用の focused checker slice を確認する
+
+```bash
+cargo run -q -p mir-runtime --example mir_current_l2 -- \
+  check-source-sample \
+  samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt \
+  --format pretty
+```
+
+見るべき結果:
+
+- `check-source-sample` は `p10 / p11 / p12 / p15 / p16` first strong typing sample set だけを対象に、
+  cluster / case / family / row-body までを focused checker summary として返す。
+- final public verifier contract や final typed calculus には上げず、
+  checker-adjacent executable slice として current first line を読み直せる。
+
+3. representative と residual bridge-floor をまとめて見る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py matrix problem1
 ```
 
-3. docs / Lean artifact / anchor spec-report まで一本道で辿る
+4. docs / Lean artifact / anchor spec-report まで一本道で辿る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py bundle problem1
 ```
 
-4. parser-side companion / mapping まで同じ読みに揃える
+5. parser-side companion / mapping まで同じ読みに揃える
 
 ```bash
 python3 scripts/current_l2_guided_samples.py mapping

@@ -62,6 +62,11 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
             "python3 scripts/current_l2_guided_samples.py split problem1 model-check-public-contract",
             text,
         )
+        self.assertIn("check-source-sample", text)
+        self.assertIn(
+            "cargo run -q -p mir-runtime --example mir_current_l2 -- \\",
+            text,
+        )
         self.assertIn("stronger typed-surface actual adoption", text)
         self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)

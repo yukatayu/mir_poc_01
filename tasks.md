@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 18:35 JST
+最終更新: 2026-04-20 18:54 JST
 
 ## この文書について
 
@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 127 typed-checker first executable slice
   - Package 128 theorem-first emitted-artifact hardening
   - Package 129 authoritative-room runnable scenario hardening
   を先頭に追う。
@@ -65,7 +64,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `127` typed-checker first executable slice | finite decidable index fragment / IFC / capture / lifetime / simple cost の current first line を checker-adjacent executable slice に下ろす | `M` | `Macro 5/7` | `p10 / p11 / p12 / p15 / p16` を対象に、final public verifier contract を凍らせず first executable checker slice を作る | representative typed sample set が helper preview だけでなく executable checker slice でも読める |
 | `128` theorem-first emitted-artifact hardening | theorem-first pilot を emitted artifact / Lean bundle / representative sample loop として tighten する | `M` | `Macro 5/7` | `p06 / p07 / p08` を中心に、notebook-first / brand-neutral のまま emitted artifact loop を harden する | theorem-first pilot が docs-only bridge ではなく executable artifact loop として再確認できる |
 | `129` authoritative-room runnable scenario hardening | authoritative-room first scenario を smoke / emitted artifact / negative pair 付き runnable slice として tighten する | `M` | `Macro 6/7` | `p07 / p08 / p09 / p13 / p14` を対象に、final public wording と contract を凍らせず runner / smoke / artifact loop を harden する | authoritative-room first scenario が reserve / negative pair と一緒に runnable scenario bundle として再確認できる |
 
@@ -538,9 +536,15 @@
 ### Package 127 — typed-checker first executable slice
 
 - current reading:
-  next active bundle。finite decidable index fragment / IFC / capture / lifetime / simple cost の current first lineを、helper-local checker summary から checker-adjacent executable slice へ ratchet する。
+  close 済み。`check-source-sample` focused checker command を actualize し、finite decidable index fragment / IFC / capture / lifetime / simple cost の current first lineを checker-adjacent executable slice として読めるようにした。
 - current recommendation:
   `p10 / p11 / p12 / p15 / p16` source-side sample setを first executable checker slice の adequacy corpus に使い、`Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` conceptual spine と final public verifier contract を混ぜない。
+- close evidence:
+  `specs/examples/600`
+  `docs/reports/0880`
+  `crates/mir-runtime/src/current_l2_cli.rs`
+  `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  `samples/problem-bundles/problem1-typed-theorem-model-check.md`
 - stop line:
   final typed source principal
   final IFC syntax
@@ -1064,6 +1068,5 @@
 
 ## next reopen order
 
-1. Package 127 で typed-checker first executable slice を `p10 / p11 / p12 / p15 / p16` adequacy corpus に沿って actualize する。
-2. Package 128 で theorem-first emitted-artifact hardening を `p06 / p07 / p08` representative loop に沿って actualize する。
-3. Package 129 で authoritative-room runnable scenario hardening を `p07 / p08 / p09 / p13 / p14` scenario bundle に沿って actualize する。
+1. Package 128 で theorem-first emitted-artifact hardening を `p06 / p07 / p08` representative loop に沿って actualize する。
+2. Package 129 で authoritative-room runnable scenario hardening を `p07 / p08 / p09 / p13 / p14` scenario bundle に沿って actualize する。
