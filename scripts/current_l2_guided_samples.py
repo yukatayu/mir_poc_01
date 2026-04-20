@@ -14,6 +14,7 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
+FAILURE_EXCERPT_LIMIT = 240
 
 
 PROBLEM_BUNDLE_TITLES = {
@@ -159,6 +160,9 @@ class ProblemSmokeAggregateRow:
     sample_bundle_doc: str
     primary_samples: list[str]
     step_labels: list[str]
+    failed_command: str | None = None
+    failed_return_code: int | None = None
+    failed_output_excerpt: str | None = None
 
 
 def problem_specs() -> dict[str, ProblemSpec]:
@@ -710,6 +714,27 @@ def execute_problem_smoke_steps(
     return steps, successful_steps, None, None
 
 
+def compact_text_for_summary(text: str, *, limit: int = FAILURE_EXCERPT_LIMIT) -> str:
+    compact = " ".join(text.split())
+    if len(compact) <= limit:
+        return compact
+    return compact[: limit - 3].rstrip() + "..."
+
+
+def failure_output_excerpt(failure: subprocess.CompletedProcess[str] | None) -> str | None:
+    if failure is None:
+        return None
+
+    fragments: list[str] = []
+    if isinstance(failure.stderr, str) and failure.stderr.strip():
+        fragments.append(f"stderr: {compact_text_for_summary(failure.stderr)}")
+    if isinstance(failure.stdout, str) and failure.stdout.strip():
+        fragments.append(f"stdout: {compact_text_for_summary(failure.stdout)}")
+    if not fragments:
+        return None
+    return compact_text_for_summary(" | ".join(fragments))
+
+
 def run_problem_smoke(spec: ProblemSpec) -> int:
     _, _, _, failure = execute_problem_smoke_steps(
         spec,
@@ -747,6 +772,9 @@ def build_problem_smoke_aggregate_rows(
                 sample_bundle_doc=PROBLEM_SAMPLE_BUNDLE_DOCS[spec.problem_id],
                 primary_samples=[sample.sample_id for sample in spec.samples if sample.primary],
                 step_labels=[step.label for step in steps],
+                failed_command=" ".join(steps[successful_steps].command) if failure is not None else None,
+                failed_return_code=failure.returncode if failure is not None else None,
+                failed_output_excerpt=failure_output_excerpt(failure),
             )
         )
     return rows
@@ -770,6 +798,12 @@ def render_problem_smoke_aggregate(rows: list[ProblemSmokeAggregateRow]) -> str:
         lines.append(f"  steps: {', '.join(row.step_labels)}")
         if row.failed_step is not None:
             lines.append(f"  failed step: {row.failed_step}")
+        if row.failed_command is not None:
+            lines.append(f"  failed command: {row.failed_command}")
+        if row.failed_return_code is not None:
+            lines.append(f"  failed return code: {row.failed_return_code}")
+        if row.failed_output_excerpt is not None:
+            lines.append(f"  failure excerpt: {row.failed_output_excerpt}")
         lines.append("")
     lines.extend(
         [
@@ -786,10 +820,26 @@ def render_problem_smoke_aggregate_from_runtime(
     *,
     output_format: str,
 ) -> str:
-    rows = build_problem_smoke_aggregate_rows(specs)
+    _, rendered = run_problem_smoke_aggregate(specs, output_format=output_format)
+    return rendered
+
+
+def aggregate_smoke_exit_code(rows: list[ProblemSmokeAggregateRow]) -> int:
+    return 1 if any(row.status != "passed" for row in rows) else 0
+
+
+def run_problem_smoke_aggregate(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+    runner: Callable[..., subprocess.CompletedProcess[str]] = subprocess.run,
+) -> tuple[int, str]:
+    rows = build_problem_smoke_aggregate_rows(specs, runner=runner)
     if output_format == "json":
-        return json.dumps([asdict(row) for row in rows], ensure_ascii=False, indent=2)
-    return render_problem_smoke_aggregate(rows)
+        rendered = json.dumps([asdict(row) for row in rows], ensure_ascii=False, indent=2)
+    else:
+        rendered = render_problem_smoke_aggregate(rows)
+    return aggregate_smoke_exit_code(rows), rendered
 
 
 def load_sample_report(sample: GuidedSample) -> dict:
@@ -1191,8 +1241,9 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.subcommand == "smoke-all":
-        print(render_problem_smoke_aggregate_from_runtime(specs, output_format=args.format))
-        return 0
+        exit_code, rendered = run_problem_smoke_aggregate(specs, output_format=args.format)
+        print(rendered)
+        return exit_code
 
     spec = specs[args.problem_id]
     if args.subcommand == "show":

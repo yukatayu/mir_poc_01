@@ -27,4 +27,6 @@
 - 問題 1 / 問題 2 をまとめて手早く確認したいときは
   `python3 scripts/current_l2_guided_samples.py smoke-all`
   を使う。
+- `smoke-all` は失敗時に `failed step` / 終了コード / 出力断片を compact に返し、
+  command 自体も非ゼロ終了で止まるので、repo-local regression の入口として使いやすい。
 - deeper theory や final public contract ではなく、current first line がどの sample で machine-check されているかを確かめる入口として使う。

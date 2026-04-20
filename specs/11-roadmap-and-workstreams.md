@@ -825,6 +825,10 @@ actual-adoption floor では、
   `specs/examples/583`
   - `smoke-all` helper を actualize し、Problem 1 / Problem 2 の representative smoke 成否と step inventory を 1 コマンドで compact に俯瞰してよい
   - Package 109 close 後の current active queue は Package 110 representative problem bundle failure-focused smoke diagnostics と later mixed/user-spec residual である
+- representative problem bundle failure-focused smoke diagnostics actualization:
+  `specs/examples/584`
+  - `smoke-all` helper に failure-focused diagnostics を actualize し、aggregate failure 時に failed step / command / return code / output excerpt を compact に surfacing してよい
+  - Package 110 close 後の current active queue は Package 111 representative problem bundle quickstart walkthrough hardening と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 14:46 JST
+最終更新: 2026-04-20 14:59 JST
 
 ## この文書について
 
@@ -35,7 +35,7 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 110 representative problem bundle failure-focused smoke diagnostics
+  - Package 111 representative problem bundle quickstart walkthrough hardening
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +63,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `110` representative problem bundle failure-focused smoke diagnostics | `smoke-all` failure 時に failed step と captured output を compact に追える diagnostics を追加する | `S-M` | `Macro 6/7` | aggregate smoke が失敗しても compact summary を壊さず failing point を追えるようにする | representative verification loop の failure recovery が読みやすくなる |
+| `111` representative problem bundle quickstart walkthrough hardening | `samples/problem-bundles/problem1|problem2` に smoke / matrix / bundle / parser companion の mini walkthrough と expected reading を揃える | `S` | `Macro 6/7` | representative sample guide から「まず何を実行し、何を確認するか」を 1 画面で読めるようにする | sample bundle docs が quickstart として単独でも読める |
 
 ## recently closed package note
 
@@ -340,12 +340,23 @@
 ### Package 110 — representative problem bundle failure-focused smoke diagnostics
 
 - current reading:
-  next active bundle。`smoke-all` failure 時に failed step と captured output を compact に追える diagnostics を足し、aggregate summary が失敗時にも verification entrypoint として使えるようにする。
+  close 済み。`smoke-all` failure 時に failed step / command / return code / output excerpt を compact に追える diagnostics を actualize し、aggregate summary が失敗時にも verification entrypoint として使えるようにした。
 - current recommendation:
-  success 側の compact summary は維持し、failure 時だけ failing step / command / captured output を narrow に surfacing する。
+  success 側の compact summary は維持し、failure 時だけ failing step / command / return code / output excerpt を narrow に surfacing する。
 - stop line:
   exhaustive workflow automation
   aggregate CI contract
+  final public CLI / tutorial surface
+
+### Package 111 — representative problem bundle quickstart walkthrough hardening
+
+- current reading:
+  next active bundle。`samples/problem-bundles/problem1|problem2` に smoke / matrix / bundle / parser companion の mini walkthrough と expected reading を揃え、代表サンプル導線を doc 単体でも分かりやすくする。
+- current recommendation:
+  current helper と sample bundle doc をずらさず、最短 4 ステップで「何を実行し、何を見ればよいか」を示す。
+- stop line:
+  exhaustive tutorial surface
+  exhaustive sample catalog
   final public CLI / tutorial surface
 
 ### Package 58 — helper / CLI hardening and broader coverage
@@ -844,5 +855,5 @@
 
 ## next reopen order
 
-1. Package 110 で `smoke-all` failure 時の failed step / captured output diagnostics を actualize する。
+1. Package 111 で `samples/problem-bundles/problem1|problem2` の quickstart walkthrough と expected reading を harden する。
 2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

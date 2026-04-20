@@ -1,3 +1,4 @@
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -552,13 +553,111 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         )
         self.assertEqual(rows[1].primary_samples, ["p07-dice-late-join-visible-history", "p08-dice-stale-reconnect-refresh"])
 
+    def test_problem_smoke_aggregate_rows_capture_failure_diagnostics(self) -> None:
+        def fake_runner(command: list[str], cwd: Path, check: bool, capture_output: bool, text: bool):
+            self.assertEqual(cwd, guided.REPO_ROOT)
+            self.assertFalse(check)
+            self.assertTrue(capture_output)
+            self.assertTrue(text)
+            if command[:4] == [
+                "python3",
+                "scripts/current_l2_guided_samples.py",
+                "bundle",
+                "problem1",
+            ]:
+                return subprocess.CompletedProcess(
+                    args=command,
+                    returncode=7,
+                    stdout="bundle note: missing witness artifact\nsecond line",
+                    stderr="error: simulated bundle drift\ntry refresh",
+                )
+            return subprocess.CompletedProcess(
+                args=command,
+                returncode=0,
+                stdout="",
+                stderr="",
+            )
+
+        rows = guided.build_problem_smoke_aggregate_rows(
+            guided.problem_specs(),
+            runner=fake_runner,
+        )
+
+        self.assertEqual(rows[0].status, "failed")
+        self.assertEqual(rows[0].successful_steps, 2)
+        self.assertEqual(rows[0].failed_step, "bundle:problem1")
+        self.assertEqual(
+            rows[0].failed_command,
+            "python3 scripts/current_l2_guided_samples.py bundle problem1 --format json",
+        )
+        self.assertEqual(rows[0].failed_return_code, 7)
+        self.assertIn("stderr: error: simulated bundle drift try refresh", rows[0].failed_output_excerpt)
+        self.assertIn(
+            "stdout: bundle note: missing witness artifact second line",
+            rows[0].failed_output_excerpt,
+        )
+        self.assertEqual(rows[1].status, "passed")
+        self.assertIsNone(rows[1].failed_output_excerpt)
+
+    def test_render_problem_smoke_aggregate_mentions_failure_diagnostics(self) -> None:
+        text = guided.render_problem_smoke_aggregate(
+            [
+                guided.ProblemSmokeAggregateRow(
+                    problem_id="problem1",
+                    title="Problem 1 theorem-first pilot bundle",
+                    status="failed",
+                    step_count=5,
+                    successful_steps=2,
+                    failed_step="bundle:problem1",
+                    smoke_command="python3 scripts/current_l2_guided_samples.py smoke problem1",
+                    sample_bundle_doc="samples/problem-bundles/problem1-typed-theorem-model-check.md",
+                    primary_samples=["p06-typed-proof-owner-handoff"],
+                    step_labels=[
+                        "runtime:p06-typed-proof-owner-handoff",
+                        "matrix:problem1",
+                        "bundle:problem1",
+                    ],
+                    failed_command="python3 scripts/current_l2_guided_samples.py bundle problem1 --format json",
+                    failed_return_code=7,
+                    failed_output_excerpt="stderr: error: simulated bundle drift try refresh",
+                )
+            ]
+        )
+
+        self.assertIn("failed step: bundle:problem1", text)
+        self.assertIn(
+            "failed command: python3 scripts/current_l2_guided_samples.py bundle problem1 --format json",
+            text,
+        )
+        self.assertIn("failed return code: 7", text)
+        self.assertIn("failure excerpt: stderr: error: simulated bundle drift try refresh", text)
+
+    def test_main_smoke_all_command_returns_nonzero_when_any_problem_fails(self) -> None:
+        fake_text = "representative problem bundle aggregate smoke summary\n..."
+
+        with mock.patch.object(
+            guided,
+            "run_problem_smoke_aggregate",
+            return_value=(1, fake_text),
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["smoke-all"])
+
+        self.assertEqual(exit_code, 1)
+        self.assertTrue(
+            any(
+                "representative problem bundle aggregate smoke summary" in call.args[0]
+                for call in write.mock_calls
+            )
+        )
+
     def test_main_smoke_all_command_uses_aggregate_renderer(self) -> None:
         fake_text = "representative problem bundle aggregate smoke summary\n..."
 
         with mock.patch.object(
             guided,
-            "render_problem_smoke_aggregate_from_runtime",
-            return_value=fake_text,
+            "run_problem_smoke_aggregate",
+            return_value=(0, fake_text),
         ):
             with mock.patch("sys.stdout.write") as write:
                 exit_code = guided.main(["smoke-all"])
