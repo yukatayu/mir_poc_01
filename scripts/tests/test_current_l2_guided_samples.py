@@ -453,6 +453,75 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             any("parser companion representative mapping" in call.args[0] for call in write.mock_calls)
         )
 
+    def test_problem1_smoke_steps_cover_runtime_bundle_matrix_mapping_and_inspector(self) -> None:
+        steps = guided.build_problem_smoke_steps(guided.problem_specs()["problem1"])
+
+        self.assertEqual(
+            [step.label for step in steps],
+            [
+                "runtime:p06-typed-proof-owner-handoff",
+                "matrix:problem1",
+                "bundle:problem1",
+                "inspector:p06-typed-proof-owner-handoff",
+                "mapping",
+            ],
+        )
+        self.assertEqual(
+            steps[0].command[-3:],
+            [
+                "samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt",
+                "--format",
+                "pretty",
+            ],
+        )
+        self.assertEqual(
+            steps[3].command,
+            [
+                "cargo",
+                "run",
+                "-q",
+                "-p",
+                "mir-ast",
+                "--example",
+                "current_l2_inspect_request_head_clause_bundle",
+                "--",
+                "samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt",
+                "--format",
+                "json",
+            ],
+        )
+
+    def test_problem2_smoke_steps_cover_pair_bundle_matrix_inspector_and_mapping(self) -> None:
+        steps = guided.build_problem_smoke_steps(guided.problem_specs()["problem2"])
+
+        self.assertEqual(
+            [step.label for step in steps],
+            [
+                "runtime:p07-dice-late-join-visible-history",
+                "runtime:p08-dice-stale-reconnect-refresh",
+                "matrix:problem2",
+                "bundle:problem2",
+                "inspector:p07-dice-late-join-visible-history",
+                "inspector:p08-dice-stale-reconnect-refresh",
+                "mapping",
+            ],
+        )
+        self.assertEqual(
+            steps[4].command[-3:],
+            [
+                "samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt",
+                "--format",
+                "json",
+            ],
+        )
+
+    def test_main_smoke_command_uses_smoke_runner(self) -> None:
+        with mock.patch.object(guided, "run_problem_smoke", return_value=0) as runner:
+            exit_code = guided.main(["smoke", "problem2"])
+
+        self.assertEqual(exit_code, 0)
+        runner.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()

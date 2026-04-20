@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 14:30 JST
+最終更新: 2026-04-20 14:34 JST
 
 ## この文書について
 
@@ -35,7 +35,7 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 108 representative problem bundle smoke runner
+  - Package 109 representative problem bundle aggregate smoke summary
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +63,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `108` representative problem bundle smoke runner | representative sample bundle guide に書いた主要 command 群を repo-local helper でまとめて smoke 実行できるようにする | `S-M` | `Macro 6/7` | guide / helper / runnable evidence の 3 点が drift しない最小 smoke command を actualize する | Problem 1 / Problem 2 の representative smoke helper が runner / bundle / mapping / parser-side inspection の最小導線を 1 本で再現する |
+| `109` representative problem bundle aggregate smoke summary | `smoke problem1` / `smoke problem2` の結果をまとめて compact に俯瞰できる repo-local summary helper を追加する | `S-M` | `Macro 6/7` | representative 2 問題の smoke 成否と最小 step inventory を 1 コマンドで読めるようにする | representative 問題 bundle の verification 入口が 1 本にまとまる |
 
 ## recently closed package note
 
@@ -318,13 +318,24 @@
 ### Package 108 — representative problem bundle smoke runner
 
 - current reading:
-  next active bundle。Problem 1 / Problem 2 の representative sample bundle guide に書いた主要 command 群を repo-local helper でまとめて smoke 実行し、guide / helper / runnable evidence の 3 点が drift していないことを 1 本の command surface で確認できるようにする。
+  close 済み。Problem 1 / Problem 2 の representative sample bundle guide に書いた主要 command 群を `smoke problem1|problem2` helper で順に実行し、guide / helper / runnable evidence の 3 点が drift していないことを 1 本の command surface で確認できるようにした。
 - current recommendation:
   representative sample と current helper-local cut に限定し、bundle guide 全文の自動化や exhaustive workflow 化までは広げない。
 - stop line:
   exhaustive workflow automation
   final public CLI / tutorial surface
   final public parser / checker / runtime API
+
+### Package 109 — representative problem bundle aggregate smoke summary
+
+- current reading:
+  next active bundle。`smoke problem1` / `smoke problem2` の上に、representative 2 問題の smoke 成否と step inventory をまとめて compact に読める repo-local summary helper を actualize する。
+- current recommendation:
+  long raw output の再整形ではなく、per-problem smoke route を壊さずに aggregate summary だけを追加する。
+- stop line:
+  exhaustive workflow automation
+  aggregate CI contract
+  final public CLI / tutorial surface
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -822,5 +833,5 @@
 
 ## next reopen order
 
-1. Package 108 で Problem 1 / Problem 2 の representative sample bundle smoke runner を actualize する。
+1. Package 109 で Problem 1 / Problem 2 の representative smoke をまとめて読める aggregate smoke summary helper を actualize する。
 2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

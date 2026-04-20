@@ -817,6 +817,10 @@ actual-adoption floor では、
   `specs/examples/581`
   - 二大問題の representative sample を `samples/problem-bundles/` の簡潔な日本語 guide と `bundle problem1|problem2` helper の `sample_bundle_doc` に actualize してよい
   - Package 107 close 後の current active queue は Package 108 representative problem bundle smoke runner と later mixed/user-spec residual である
+- representative problem bundle smoke runner actualization:
+  `specs/examples/582`
+  - `smoke problem1|problem2` helper を actualize し、representative sample bundle guide の主要 command 群を repo-local helper から順に再現してよい
+  - Package 108 close 後の current active queue は Package 109 representative problem bundle aggregate smoke summary と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

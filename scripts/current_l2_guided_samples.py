@@ -141,6 +141,12 @@ class Problem2ResidualRow:
     residual_reading: str
 
 
+@dataclass(frozen=True)
+class ProblemSmokeStep:
+    label: str
+    command: list[str]
+
+
 def problem_specs() -> dict[str, ProblemSpec]:
     typed_root = REPO_ROOT / "samples" / "prototype" / "current-l2-typed-proof-model-check"
     order_root = REPO_ROOT / "samples" / "prototype" / "current-l2-order-handoff"
@@ -345,12 +351,8 @@ def parser_companion_inspector_command(
     *,
     output_format: str = "pretty",
 ) -> str:
-    companion = parser_companion_path(sample)
-    if companion is None:
-        raise ValueError(f"sample `{sample.sample_id}` does not have a parser companion path")
-    return (
-        "cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- "
-        f"{companion} --format {output_format}"
+    return " ".join(
+        parser_companion_inspector_command_argv(sample, output_format=output_format)
     )
 
 
@@ -468,6 +470,29 @@ def build_problem_bundle_manifest(spec: ProblemSpec) -> dict[str, object]:
     }
 
 
+def parser_companion_inspector_command_argv(
+    sample: GuidedSample,
+    *,
+    output_format: str = "json",
+) -> list[str]:
+    companion = parser_companion_path(sample)
+    if companion is None:
+        raise ValueError(f"sample `{sample.sample_id}` does not have a parser companion path")
+    return [
+        "cargo",
+        "run",
+        "-q",
+        "-p",
+        "mir-ast",
+        "--example",
+        "current_l2_inspect_request_head_clause_bundle",
+        "--",
+        companion,
+        "--format",
+        output_format,
+    ]
+
+
 def render_problem_bundle(spec: ProblemSpec) -> str:
     manifest = build_problem_bundle_manifest(spec)
     lines = [
@@ -568,6 +593,75 @@ def run_problem(spec: ProblemSpec, *, output_format: str, include_all: bool) -> 
             return completed.returncode
         print("", flush=True)
 
+    return 0
+
+
+def build_problem_smoke_steps(spec: ProblemSpec) -> list[ProblemSmokeStep]:
+    primary_samples = [sample for sample in spec.samples if sample.primary]
+    steps: list[ProblemSmokeStep] = [
+        ProblemSmokeStep(
+            label=f"runtime:{sample.sample_id}",
+            command=build_single_run_command(sample, output_format="pretty"),
+        )
+        for sample in primary_samples
+    ]
+    steps.append(
+        ProblemSmokeStep(
+            label=f"matrix:{spec.problem_id}",
+            command=[
+                "python3",
+                "scripts/current_l2_guided_samples.py",
+                "matrix",
+                spec.problem_id,
+                "--format",
+                "json",
+            ],
+        )
+    )
+    steps.append(
+        ProblemSmokeStep(
+            label=f"bundle:{spec.problem_id}",
+            command=[
+                "python3",
+                "scripts/current_l2_guided_samples.py",
+                "bundle",
+                spec.problem_id,
+                "--format",
+                "json",
+            ],
+        )
+    )
+    steps.extend(
+        ProblemSmokeStep(
+            label=f"inspector:{sample.sample_id}",
+            command=parser_companion_inspector_command_argv(sample, output_format="json"),
+        )
+        for sample in primary_samples
+        if parser_companion_path(sample) is not None
+    )
+    steps.append(
+        ProblemSmokeStep(
+            label="mapping",
+            command=[
+                "python3",
+                "scripts/current_l2_guided_samples.py",
+                "mapping",
+                "--format",
+                "json",
+            ],
+        )
+    )
+    return steps
+
+
+def run_problem_smoke(spec: ProblemSpec) -> int:
+    for step in build_problem_smoke_steps(spec):
+        print(f"== {step.label} ==", flush=True)
+        print(f"$ {' '.join(step.command)}", flush=True)
+        completed = subprocess.run(step.command, cwd=REPO_ROOT, check=False)
+        if completed.returncode != 0:
+            return completed.returncode
+        print("", flush=True)
     return 0
 
 
@@ -937,6 +1031,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     mapping_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    smoke_parser = subparsers.add_parser(
+        "smoke",
+        help="representative problem bundle guide に書いた主要 command 群を smoke 実行する",
+    )
+    smoke_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
+
     return parser.parse_args(argv)
 
 
@@ -961,6 +1061,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.subcommand == "show":
         print(render_problem_guide(spec))
         return 0
+
+    if args.subcommand == "smoke":
+        return run_problem_smoke(spec)
 
     if args.subcommand == "matrix":
         try:
