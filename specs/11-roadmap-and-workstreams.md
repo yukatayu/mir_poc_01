@@ -775,6 +775,11 @@ actual-adoption floor では、
   - first completion line は `p07 / p08` representative pair に保つ
   - `auditable_authority_witness`、`delegated_rng_service`、model-check second line は reserve lane の separate status として helper summary に actualize してよい
   - Package 97 close 後の current active queue は Package 98 documentation/report closeout のみである
+- guided problem sample entrypoints and runner:
+  `specs/examples/572`
+  - Problem 1 / Problem 2 の representative sample entrypoint は `samples/` README と repo-local helper runner に actualize してよい
+  - sample guide は Japanese explanation first / existing corrected prototype reuse / non-production helper runner cut に留める
+  - Package 98 close 後の current active queue は Package 99 theorem/model-check public-seam residual bundle と Package 100 witness/provider/public-shape residual bundle である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

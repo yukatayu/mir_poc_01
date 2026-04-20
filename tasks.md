@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 12:22 JST
+最終更新: 2026-04-20 12:47 JST
 
 ## この文書について
 
@@ -35,7 +35,8 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 98 docs/report closeout
+  - Package 99 theorem/model-check public-seam residual bundle
+  - Package 100 witness/provider/public-shape residual bundle
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +64,8 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `98` documentation/report closeout | once-through sequence を docs / plan / progress / tasks / reports / traceability に閉じ、二大問題それぞれの簡潔な解説付き sample を `samples/` に追加する | `S` | `Macro 0/5` | comparison debt ではなく adoption debt closeout として整理する | queue drift が消え、remaining mixed gate / true user-spec gate / reserve integration が narrow に分かれ、二大問題の current first line を sample でも追える |
+| `99` theorem/model-check public-seam residual bundle | theorem result-object / model-check public-checker / final public-contract reopen threshold の residual mixed gate を representative sample bundle 単位で narrow に整理する | `M` | `Macro 5/7` | `p06 / p10 / p11 / p12 / p15 / p16` の guide と helper summary を public seam 残件の inventory に使い、comparison debt を増やさず residual mixed gate を圧縮する | Problem 1 residual mixed gate が representative sample bundle 単位で追え、next reopen が 1 段 narrow になる |
+| `100` witness/provider/public-shape residual bundle | final public witness/provider/artifact contract mixed gate を representative sample bundle 単位で narrow に整理する | `M` | `Macro 6/7` | `p07 / p08 / p09 / p13 / p14` の guide と helper summary を public-shape residual inventory に使い、first completion line と reserve line の boundary を崩さず残件を圧縮する | Problem 2 residual mixed gate が representative sample bundle 単位で追え、exhaustive catalog/user-spec residual と切り分けられる |
 
 ## recently closed package note
 
@@ -201,10 +203,42 @@
 ### Package 98 — documentation/report closeout
 
 - current reading:
-  once-through sequence の closeout。`specs/` / `plan/` / `progress.md` / `tasks.md` / `Documentation.md` / `docs/reports/` / `plan/90` を stale wording なしで同期し、二大問題それぞれの current first line を簡潔な日本語解説付き sample として `samples/` に追加する。
+  close 済み。`specs/` / `plan/` / `progress.md` / `tasks.md` / `Documentation.md` / `docs/reports/` / `plan/90` を stale wording なしで同期し、二大問題それぞれの current first line を `samples/prototype/.../README.md` と `scripts/current_l2_guided_samples.py` による簡潔な日本語 guide として actualize した。
+- close evidence:
+  `specs/examples/572`
+  `docs/reports/0855`
+  `samples/prototype/current-l2-typed-proof-model-check/README.md`
+  `samples/prototype/current-l2-order-handoff/README.md`
+  `scripts/current_l2_guided_samples.py`
+  `scripts/tests/test_current_l2_guided_samples.py`
 - stop line:
   final public language completion claim
   packaging / FFI / engine adapter adoption
+
+### Package 99 — theorem/model-check public-seam residual bundle
+
+- current reading:
+  next active bundle。Problem 1 current first line 自体は close 済みなので、ここでは representative sample bundle `p06 / p10 / p11 / p12 / p15 / p16` と existing helper summary を使い、theorem result-object / model-check public-checker / final public-contract reopen threshold の residual mixed gate だけを narrow に整理する。
+- current recommendation:
+  sample corpus や theorem/model-check compare floor を増やさず、guided sample `problem1` と existing `bridge_floor_refs` / `verification_preview` / `artifact_preview` / `typed_checker_hint_preview` を入口にして、public seam 残件の reopen 順を整理する。
+- stop line:
+  final public theorem result object
+  consumer-shaped theorem payload public contract
+  concrete theorem/model-check tool binding
+  final public checker artifact
+  final public verifier contract
+
+### Package 100 — witness/provider/public-shape residual bundle
+
+- current reading:
+  next active bundle。Problem 2 current first line と reserve strengthening lane 自体は close 済みなので、ここでは representative sample bundle `p07 / p08 / p09 / p13 / p14` と existing helper summary を使い、final public witness/provider/artifact contract mixed gate だけを narrow に整理する。
+- current recommendation:
+  sample corpus を増やさず、guided sample `problem2` と existing `surface_preview` / `authoritative_room_first_scenario_actual_adoption` / `authoritative_room_reserve_strengthening_lane` を入口にして、claim/payload split first の current cutを保ったまま public-shape residual を圧縮する。
+- stop line:
+  final public witness schema
+  final public provider receipt schema
+  final emitted-handoff contract
+  exhaustive shared-space catalog
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -702,5 +736,6 @@
 
 ## next reopen order
 
-1. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。
-2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。
+1. Package 99 で theorem/model-check public-seam residual bundle を representative sample bundle 単位に整理する。
+2. Package 100 で witness/provider/public-shape residual bundle を representative sample bundle 単位に整理する。
+3. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-20 12:22 JST
+最終更新: 2026-04-20 12:47 JST
 
 ## この文書について
 
@@ -16,7 +16,7 @@
   （authored sixteen と corrected prototype set `p01...p16` は runnable floor に乗っており、sample corpus は adequacy corpus として active に保つ）
 - current theory-lab line:
   `Macro 5 repo-local once-through near-end packages active after FAQ10 handoff integration`
-  （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...571` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening が actualize 済みである。current active once-through sequence は Package 98 docs/report closeout であり、later mixed-gate residual maintenance と true user-spec residual はその後段に残す）
+  （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...572` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint and runner が actualize 済みである。current active line は Package 99 theorem/model-check public-seam residual bundle と Package 100 witness/provider/public-shape residual bundle であり、later mixed-gate residual maintenance と true user-spec residual はその後段に残す）
 - current reserve integration line:
   `Macro 6 minimal working subset actual default / Macro 7 mixed`
   （authoritative room baseline、late join visible past、stale reconnect fail-then-refresh、witness/provider route-first line は current default に上がっているが、final public witness/provider/artifact contract、packaging、FFI、engine adapter、exhaustive catalog は still later に残る）
@@ -46,6 +46,10 @@
 ## implementation / execution comparison status
 
 - fresh validation evidence として、current snapshot は少なくとも次に支えられている。
+  - `python3 -m unittest scripts.tests.test_current_l2_guided_samples`
+  - `python3 scripts/current_l2_guided_samples.py list`
+  - `python3 scripts/current_l2_guided_samples.py show problem1`
+  - `python3 scripts/current_l2_guided_samples.py run problem1 --format pretty`
   - `python3 -m unittest scripts.tests.test_current_l2_lean_sample_sync`
   - `python3 scripts/current_l2_lean_sample_sync.py`
   - `cargo run -p mir-runtime --example current_l2_emit_theorem_lean_bundle -- e5-underdeclared-lineage --output ...`
@@ -80,14 +84,14 @@
 | feature family | 現在地 | できていること | 次の意味ある一歩 |
 |---|---|---|---|
 | current-L2 runner / CLI | `S6` | authored sixteen、prototype set `p01...p16`、pretty/json CLI、regression floor、order-handoff `surface_preview`、order-handoff negative static stop | widened corpus は mixed gate か closeout package を 1 つ閉じる時だけ追加 |
-| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over、`p13 / p14` negative pair carry-over、result-object preview helper mirror、reopen-threshold helper mirror、`p10 / p11 / p12 / p15 / p16` guarded helper summary の `bridge_floor_refs`、checker-adjacent / Lean-first theorem bridge floor 可視化 | Package 97 close。theorem public seam は representative quartet のまま保ち、Package 98 で closeout を揃える |
-| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`CurrentL2FiniteIndexFirstLayer.lean`、`samples/lean/current-l2/` committed representative sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14`、toolchain pin、export/sync helper | Package 97 close。次は Package 98 の docs / sample closeout |
+| theorem-side pilot | `S6` | review-unit first、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`p09` broader-coverage carry-over、`p13 / p14` negative pair carry-over、result-object preview helper mirror、reopen-threshold helper mirror、`p10 / p11 / p12 / p15 / p16` guarded helper summary の `bridge_floor_refs`、checker-adjacent / Lean-first theorem bridge floor 可視化、guided sample entrypoint `problem1` | Package 98 close。次は Package 99 で theorem/model-check public seam residual を representative sample bundle 単位に narrow に揃える |
+| Lean sample corpus | `S6` on repo-local evidence | `samples/lean/foundations/` actual small proof fragment、`CurrentL2IfcSecretExamples.lean`、`CurrentL2FiniteIndexFirstLayer.lean`、`samples/lean/current-l2/` committed representative sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14`、toolchain pin、export/sync helper、guided sample README からの参照導線 | Package 98 close。次は residual bundle 側で corpus を増やさず public seam 残件だけを narrow に追う |
 | model-check line | `S6` on docs, `S5-S6` on implementation | row-local property route、checker-artifact route、reopen threshold、public-seam compression、public-checker preview helper mirror、reopen-threshold helper mirror、`p10 / p11 / p12 / p15 / p16` の second-line concretization / row-local actual adoption reached、guarded helper summary の `bridge_floor_refs`、authoritative-room reserve strengthening lane tightening | Package 97 close。row-local carrier widening を保ちつつ public-checker seam は representative quartet に留める |
-| order / handoff line | `S6` | relation decomposition principal、surface actual adoption、source-wording route、stage-block secondary、serial-scope reserve surface、public-seam compression、public-seam helper mirror、CLI `surface_preview`、source-surface / artifact route actual adoption、late-join negative static-stop pair、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening | Package 97 close。次は Package 98 の docs / sample closeout |
+| order / handoff line | `S6` | relation decomposition principal、surface actual adoption、source-wording route、stage-block secondary、serial-scope reserve surface、public-seam compression、public-seam helper mirror、CLI `surface_preview`、source-surface / artifact route actual adoption、late-join negative static-stop pair、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided sample entrypoint `problem2` | Package 98 close。次は Package 100 で witness/provider/public-shape residual を representative sample bundle 単位に narrow に揃える |
 | shared-space minimal subset | `S6` | authoritative room baseline、vertical slice、witness/provider route/schema route、emitted-contract trace alignment、public-seam compression | final public contract mixed gate |
 | syntax / modality | `S6` on docs, `S3-S4` on implementation | semantic honesty principle、5 axes、partial basis keep、minimal companion + stage-block secondary | final foundation / final marker mixed gate へ行く前の source package hardening |
-| strong typing / IFC | `S6` on docs, `S6` on implementation | layered stack、finite decidable index fragment、`Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` conceptual spine、checker-adjacent first-layer target keep、`LabelModel` / `Labeled` sketch、local inference aggressive + boundary/declassification/handoff annotation default、finite-index soundness / limited completeness / explicit-flow noninterference / selected resource-model cost soundness floor、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、`CurrentL2FiniteIndexFirstLayer.lean`、source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16`、sample-local `typed_checker_hint_preview` と theorem/model-check bridge floor reconnect | Package 97 close。次は Package 98 の closeout と sample 解説追加 |
-| proof spine / formalization | `S6` on docs, `S5-S6` on implementation | multimodal dependent core direction、Lean-first roadmap、actual Lean execution representative sample floor、proof-skeleton first fragment、finite-index first-layer small proof fragment、theorem bridge-floor reconnect | Package 97 close。final public theorem contract にはまだ上げず、Package 98 で closeout を揃える |
+| strong typing / IFC | `S6` on docs, `S6` on implementation | layered stack、finite decidable index fragment、`Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` conceptual spine、checker-adjacent first-layer target keep、`LabelModel` / `Labeled` sketch、local inference aggressive + boundary/declassification/handoff annotation default、finite-index soundness / limited completeness / explicit-flow noninterference / selected resource-model cost soundness floor、`CurrentL2LabelModel.lean`、`CurrentL2IfcSecretExamples.lean`、`CurrentL2FiniteIndexFirstLayer.lean`、source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16`、sample-local `typed_checker_hint_preview` と theorem/model-check bridge floor reconnect、guided sample `problem1` | Package 98 close。次は Package 99 の residual bundle で public seam 残件だけを narrow に揃える |
+| proof spine / formalization | `S6` on docs, `S5-S6` on implementation | multimodal dependent core direction、Lean-first roadmap、actual Lean execution representative sample floor、proof-skeleton first fragment、finite-index first-layer small proof fragment、theorem bridge-floor reconnect、guided sample から representative entrypoint を辿れる導線 | Package 98 close。final public theorem contract にはまだ上げず、Package 99 で residual seam を整理する |
 | backend / packaging | `S2-S3` | repo-local CLI/tests/artifacts/compare floor | packaging / installed binary / FFI later |
 
 ## layer / track progress
@@ -117,7 +121,7 @@
 - current runnable / machine-check evidence:
   `p06 / p10 / p11 / p12 / p15 / p16`、verifier preview alignment pre-floor、theorem discharge pre-floor、model-check projection pre-floor、theorem-first pilot actualization、theorem binding preflight、theorem Lean-stub pilot、theorem artifact-conformance bridge、theorem representative trace-alignment bridge、theorem public-seam compression、theorem toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、`samples/lean/current-l2/` committed corpus、`samples/lean/foundations/CurrentL2ProofSkeleton.lean`、`samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean`
 - current self-driven closeout package:
-  Package 92 finite-index strong typing、Package 93 Lean-first formal skeleton、Package 94 theorem/model-check bridge reconnect は close 済みであり、Problem 1 の残件は reserve line と docs closeout に narrow 化した
+  Package 92 finite-index strong typing、Package 93 Lean-first formal skeleton、Package 94 theorem/model-check bridge reconnect、Package 98 guided sample entrypoint closeout は close 済みであり、Problem 1 の残件は Package 99 theorem/model-check public-seam residual bundle に narrow 化した
 - remaining stop line:
   stronger typed-surface actual adoption、final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、final public verifier contract
 
@@ -128,7 +132,7 @@
 - current runnable / machine-check evidence:
   `p07 / p08 / p09 / p13 / p14`、authoritative-room vertical slice、witness/provider route actual adoption、witness/provider schema route actual adoption、witness/provider emitted-contract trace alignment bridge、order-handoff surface actual adoption、order-handoff source-wording route actual adoption、order-handoff serial-scope reserve surface、order-handoff / witness-provider public-seam compression、order-handoff/shared-space public-seam helper mirror、order-handoff helper CLI `surface_preview` actualization、order-handoff negative static-stop actualization、auditable-authority-witness strengthening actualization、delegated-rng-service practical actualization
 - current self-driven closeout package:
-  Package 97 close により、authoritative-room first scenario と reserve strengthening lane の両方が helper summary まで同期済みであり、next hardening line は Package 98 docs/report closeout である
+  Package 97 authoritative-room reserve strengthening と Package 98 guided sample entrypoint closeout により、authoritative-room first scenario と reserve strengthening lane の両方が helper summary と sample guide まで同期済みであり、next hardening line は Package 100 witness/provider/public-shape residual bundle である
 - remaining stop line:
   final source-surface handoff wording、final emitted-artifact / emitted-handoff schema、final public witness/provider/artifact contract、stronger fairness / replay profile、exhaustive shared-space catalog
 
@@ -139,14 +143,16 @@
 - current helper evidence:
   minimal companion / experimental order-handoff surface、stage-block secondary order-handoff surface
 - current self-driven closeout package:
-  Package 97 close により、explicit edge-row principal / stage-block secondary の source package hardeningは authoritative-room reserve strengthening lane summary まで接続済みであり、次は Package 98 で modal markers remain non-final の reading を保ったまま closeout する
+  Package 97 authoritative-room reserve strengthening と Package 98 guided sample entrypoint closeout により、explicit edge-row principal / stage-block secondary の source package hardeningは authoritative-room reserve strengthening lane summary と sample guide まで接続済みであり、remaining work は modal markers remain non-final の reading を保ったまま residual mixed gate に narrow 化した
 - remaining stop line:
   final parser grammar、final source marker、final modal foundation adoption
 
 ## current self-driven queue
 
-- `Package 98` documentation/report closeout
-  - docs / plan / progress / tasks / reports / traceability を once-through sequence に同期し、二大問題それぞれの簡潔な日本語解説付き sample を `samples/` に追加する
+- `Package 99` theorem/model-check public-seam residual bundle
+  - theorem result-object / model-check public-checker / final public-contract reopen threshold を representative sample bundle 単位で narrow に整理する
+- `Package 100` witness/provider/public-shape residual bundle
+  - final public witness/provider/artifact contract mixed gate を representative sample bundle 単位で narrow に整理する
 
 ## recent log
 
@@ -209,3 +215,4 @@
 - 2026-04-20 11:43 JST — Package 95 として `order_handoff_source_surface_artifact_actual_adoption` helper summary を actualize し、`p07 / p08` reached pair、`p09` serial-scope practical route guard、`p13 / p14` negative static-stop pair を source surface / artifact reading に同期した。`cargo test -p mir-runtime --test current_l2_order_handoff_negative_static_stop -- --nocapture`、`cargo test -p mir-runtime --test current_l2_operational_cli`、`run-source-sample p13 / p14 --format json` を通したうえで、`specs/examples/569` と `docs/reports/0852` を anchor に current live queue を Package 96 先頭へ同期した。
 - 2026-04-20 12:03 JST — Package 96 として `authoritative_room_first_scenario_actual_adoption` helper summary を actualize し、`p07 / p08` reached representative pair、`p09` delegated RNG reserve route、`p13 / p14` late-join negative static-stop pair を authoritative-room first scenario reading に同期した。`cargo test -p mir-runtime --test current_l2_operational_cli 'authoritative_room_first_scenario' -- --nocapture`、`run-source-sample p07 --format json`、`run-source-sample p09 --format json` を通したうえで、`specs/examples/570` と `docs/reports/0853` を anchor に current live queue を Package 97 先頭へ同期した。
 - 2026-04-20 12:22 JST — Package 97 として `authoritative_room_reserve_strengthening_lane` helper summary を actualize し、`p07` witness + model-check、`p08` model-check、`p09` delegated RNG + model-check、`p05` guard-only を reserve lane boundary refs 付きで同期した。`cargo test -p mir-runtime --test current_l2_authoritative_room_vertical_slice_actualization --test current_l2_auditable_authority_witness_strengthening --test current_l2_delegated_rng_service_practical_actualization --test current_l2_model_check_second_line_concretization --test current_l2_operational_cli`、`run-source-sample p09 --format json` を通したうえで、`specs/examples/571` と `docs/reports/0854` を anchor に current live queue を Package 98 先頭へ同期した。
+- 2026-04-20 12:47 JST — Package 98 として `samples/prototype/.../README.md` と `scripts/current_l2_guided_samples.py` を追加し、Problem 1 / Problem 2 の representative sample entrypoint を日本語 guide と repo-local helper runner に actualize した。`python3 -m unittest scripts.tests.test_current_l2_guided_samples`、`python3 scripts/current_l2_guided_samples.py list`、`python3 scripts/current_l2_guided_samples.py show problem1`、`python3 scripts/current_l2_guided_samples.py run problem1 --format pretty`、`python3 scripts/validate_docs.py` を通したうえで、`specs/examples/572` と `docs/reports/0855` を anchor に current live queue を Package 99 / 100 residual bundle へ同期した。

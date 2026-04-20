@@ -1,4 +1,4 @@
-# prototype samples
+# prototype サンプル
 
 この directory は、**機能 family 自体は比較検討中だが、current L2 parser / runner で修正 prototype を回して挙動比較したい** sample を置く。
 
@@ -21,11 +21,13 @@
 
 - `current-l2-order-handoff/`
   - `atomic_cut` / publication / handoff / room-local serial transition / static-stop / guarded chain / late join / stale reconnect refresh の corrected prototype
+  - `README.md` に、Problem 2 の representative sample と reserve / negative sample の読み方を日本語でまとめた
   - `p07-dice-late-join-visible-history` と `p08-dice-stale-reconnect-refresh` は、order/handoff current first line を sample-visible にする corrected prototype であり、final source wording / final replay profile ではない
   - `p09-dice-delegated-rng-provider-placement` は、`delegated_rng_service` provider placement を narrow prototype として actualize する corrected prototype であり、final provider receipt schema / delegated provider attestation ではない
   - `p13-dice-late-join-missing-publication-witness` と `p14-dice-late-join-handoff-before-publication` は、late-join visibility line の helper-local negative static-stop pair であり、final parser grammar / final source wording / final emitted-handoff contract ではない
 - `current-l2-typed-proof-model-check/`
   - `admit` / `require` / `ensure` を持つ typed marker family が helper-local verifier preview にどう映るかを比較する corrected prototype
+  - `README.md` に、Problem 1 の representative sample と補助 sample の読み方を日本語でまとめた
   - `p06-typed-proof-owner-handoff` は sample-visible corrected prototype であり、final typed calculus / final public verifier contract / settled property language ではない
   - `p10-typed-authorized-fingerprint-declassification` と `p11-typed-unauthorized-fingerprint-release` は、explicit authority declassification success/failure を source-side で比較する corrected prototype であり、final typed source principal / final IFC syntax / final public verifier contract ではない
   - `p12-typed-classified-fingerprint-publication-block` は、authority 欠如ではなく label-flow mismatch によって public publication が止まることを source-side で比較する corrected prototype であり、final typed source principal / final IFC syntax / final public verifier contract ではない

@@ -70,12 +70,14 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 | `95 order-handoff source surface / artifact tightening` | `docs/reports/0852` + `specs/examples/569` | edge-row principal / stage-block secondary / repo-local emitted artifact refs first / `p09` reserve / `p13 / p14` negative pair を `run-source-sample` helper summary に actualize し、Package 95 close |
 | `96 authoritative-room first scenario tightening` | `docs/reports/0853` + `specs/examples/570` | authoritative-room first default profile の representative reached pair `p07 / p08`、delegated RNG reserve `p09`、late-join negative static-stop pair `p13 / p14` を `run-source-sample` helper summary に actualize し、Package 96 close |
 | `97 authoritative-room reserve strengthening lane tightening` | `docs/reports/0854` + `specs/examples/571` | `auditable_authority_witness`、`delegated_rng_service`、model-check second line を `run-source-sample` helper summary の reserve lane に separate status のまま actualize し、Package 97 close |
+| `98 guided problem sample entrypoints and runner` | `docs/reports/0855` + `specs/examples/572` | Problem 1 / Problem 2 の representative sample entrypoint を `samples/` README と `scripts/current_l2_guided_samples.py` に actualize し、Package 98 close |
 
 ## active self-driven packages
 
 | 順番 | package | macro | question | rough weight | current exit signal |
 |---|---|---|---|---|---|
-| 1 | `98` documentation/report closeout | `Macro 0/5` | once-through sequence を docs / plan / progress / tasks / traceability に閉じ、二大問題それぞれの簡潔な日本語解説付き sample を `samples/` に追加する | `S` | queue drift が消え、remaining mixed gate / true user-spec residual だけが残り、二大問題の current first line を sample でも追える |
+| 1 | `99` theorem/model-check public-seam residual bundle | `Macro 5/7` | theorem result-object / model-check public-checker / final public-contract reopen threshold を sample-facing residual bundle として narrow に整理する | `M` | Problem 1 residual mixed gate が representative sample bundle 単位で追える |
+| 2 | `100` witness/provider/public-shape residual bundle | `Macro 6/7` | final public witness/provider/artifact contract mixed gate を sample-facing residual bundle として narrow に整理する | `M` | Problem 2 residual mixed gate が representative sample bundle 単位で追える |
 
 ## package detail
 
@@ -706,11 +708,40 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
   `progress.md`
   `tasks.md`
   `plan/90-source-traceability.md`
+  `specs/examples/572`
 - current recommendation:
-  once-through sequence を stale wording なしで同期し、remaining mixed gate / true user-spec residual / reserve integration を narrow に分ける。
+  close 済み。once-through sequence を stale wording なしで同期し、二大問題それぞれの簡潔な日本語解説付き sample guide と repo-local helper runner を `samples/` / `scripts/` に actualize した。
 - stop line:
   final public language completion claim
   packaging / FFI / engine adapter adoption
+
+### Package 99 — theorem/model-check public-seam residual bundle
+
+- current source:
+  `specs/examples/497`
+  `specs/examples/498`
+  `specs/examples/506`
+  `specs/examples/507`
+- current recommendation:
+  `p06 / p10 / p15 / p16` を representative sample bundle に保ち、theorem result-object / model-check public-checker / final public-contract reopen threshold を sample-facing residual bundle として narrow に整理する。
+- stop line:
+  final public theorem result object
+  final public checker artifact
+  final public verifier contract
+
+### Package 100 — witness/provider/public-shape residual bundle
+
+- current source:
+  `specs/examples/483`
+  `specs/examples/493`
+  `specs/examples/499`
+  `specs/examples/505`
+- current recommendation:
+  `p07 / p08 / p09 / p13 / p14` を representative sample bundle に保ち、witness/provider/public-shape residual mixed gate を sample-facing residual bundle として narrow に整理する。
+- stop line:
+  final public witness schema
+  final public provider receipt schema
+  combined public contract
 
 ## later mixed-gate topics
 
@@ -728,7 +759,7 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 - comparison debt より adoption debt を優先する。
 - `specs/examples/458...465` は integrator / compare floor として保持するが、current line の principal anchor は `466...469`、`475`、`520` に移った。
 - representative Lean sample set actual Lean execution reached は current queue zero を意味しない。
-- current self-driven queue は queue zero ではなく、Package 98 の once-through closeout と later mixed/user-spec residual を含む。
+- current self-driven queue は queue zero ではなく、Package 99 / 100 residual bundle と later mixed/user-spec residual を含む。
 - authoritative-room default profile と append-friendly contrast room を shared-space current working subset に置く。
 - `auditable_authority_witness` と `delegated_rng_service` は close 済み strengthening / practical actualization に移し、final public provider receipt / witness schema は mixed gate に残す。
 - final parser grammar、final public API、final public verifier contract、installed binary、exhaustive catalog は near-term line に入れない。

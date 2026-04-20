@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p16` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...571` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 98 documentation/report closeout、later mixed-gate residual maintenance、true user-spec residual に narrowed した）
+    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...572` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint and runner が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 99 theorem/model-check public-seam residual bundle、Package 100 witness/provider/public-shape residual bundle、true user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -313,7 +313,8 @@
 ## current self-driven queue
 
 - current live line は、
-  - Package 98 documentation/report closeout
+  - Package 99 theorem/model-check public-seam residual bundle
+  - Package 100 witness/provider/public-shape residual bundle
   - committed `samples/lean/` corpus と helper-local CLI summary を基点にした residual public-seam maintenance
   - later mixed gate residual maintenance
   - true user-spec residual
@@ -382,10 +383,11 @@ Package 94 close として theorem public seam を premature に widen せず、
 - `faq_009.md` は 2026-04-19 時点の current explanation refresh であり、representative Lean sample set actual Lean execution floor を含む最新 status を踏まえて、done / not done / overall ladder / remaining gate / self-drive bound を整理する。
 - `faq_010.md` は 2026-04-20 時点の current explanation refresh であり、`faq_009.md` 以後の Phase 6 parser-side tranche actualization を含む最新 status を踏まえて、二大問題の closeout 到達点、language implementation の current limit、remaining mixed gate / true user-spec gate、および「ここからどこまで自走できるか」の current bound を整理する。
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md` は 2026-04-19 時点の detailed closeout handoff であり、layered strong typing / IFC、Lean formal skeleton、first completion scope、reopened self-driven queue の current explanation source として使ってよい。
-- `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md` は 2026-04-20 時点の repo-local once-through completion handoff であり、Package 91/92 actualization と、その後ろに置く Package 93...98 の staged self-driven sequence を current explanation source として使ってよい。current repo reading では Package 97 close 後の active queue は Package 98 に narrowed したと読む。
+- `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md` は 2026-04-20 時点の repo-local once-through completion handoff であり、Package 91/92 actualization と、その後ろに置く Package 93...98 の staged self-driven sequence を current explanation source として使ってよい。current repo reading では Package 98 close 後の active queue は residual bundle 群に移ったと読む。
 - `specs/examples/569` は Package 95 closeout として、edge-row principal / stage-block secondary / repo-local emitted artifact reading / delegated RNG reserve / late-join negative pair を `run-source-sample` helper summary に actualize した current source-backed route tightening note である。
 - `specs/examples/570` は Package 96 closeout として、authoritative-room first default profile の representative reached pair `p07 / p08`、delegated RNG reserve `p09`、late-join negative static-stop pair `p13 / p14` を `run-source-sample` helper summary の `authoritative_room_first_scenario_actual_adoption` に actualize した current source-backed tightening note である。
 - `specs/examples/571` は Package 97 closeout として、`auditable_authority_witness`、`delegated_rng_service`、model-check second line を `run-source-sample` helper summary の `authoritative_room_reserve_strengthening_lane` に separate status のまま actualize し、first completion line と reserve package 群の boundary を current source-backed に同期した note である。
+- `specs/examples/572` は Package 98 closeout として、Problem 1 / Problem 2 の representative sample entrypoint を `samples/` README と `scripts/current_l2_guided_samples.py` に actualize し、guided sample reading を repo-local helper cut に留めた current source-backed note である。
 - 規範判断の正本は常に `specs/` に残る。
 - `plan/` は long-lived repository memory であり、snapshot ではない。
 - `progress.md` と `tasks.md` は current queue と remaining gate を mirror する薄い snapshot として保つ。

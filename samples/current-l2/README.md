@@ -1,4 +1,4 @@
-# current-l2 source samples
+# current-l2 source サンプル
 
 この directory は、current L2 fixed subset の **source text sample corpus** を置く repo-root layer である。
 
