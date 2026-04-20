@@ -34,6 +34,15 @@ python3 scripts/current_l2_guided_samples.py matrix problem1
 - `p06` は theorem/model-check public seam preview / reopen threshold が reached の representative sample として出る。
 - `p10 / p11 / p12 / p15 / p16` は `typed_checker_hint_preview` が reached、theorem/model-check public seam は `bridge-only(...)` の residual bundle として出る。
 
+bundle として docs / Lean artifact / residual matrix まで一本道で見る例:
+
+```bash
+python3 scripts/current_l2_guided_samples.py bundle problem1
+```
+
+- `p06` の prototype、`samples/lean/current-l2/p06-typed-proof-owner-handoff/`、anchor になる spec/report を 1 画面で辿れる。
+- `p10 / p11 / p12 / p15 / p16` は補助サンプルとして同じ bundle 内で Lean artifact と一緒に確認できる。
+
 ## あわせて見る補助サンプル
 
 ### `p10-typed-authorized-fingerprint-declassification`

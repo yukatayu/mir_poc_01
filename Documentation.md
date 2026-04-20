@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p16` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...574` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 101 theorem-first pilot bundle、Package 102 authoritative-room scenario bundle、true user-spec residual に narrowed した）
+    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...576` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix / problem bundle actualization が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 103 parser-side companion surface bundle、Package 104 parser-side bundle-to-helper bridge、true user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -313,8 +313,8 @@
 ## current self-driven queue
 
 - current live line は、
-  - Package 101 theorem-first pilot bundle
-  - Package 102 authoritative-room scenario bundle
+  - Package 103 parser-side companion surface bundle
+  - Package 104 parser-side bundle-to-helper bridge
   - committed `samples/lean/` corpus と helper-local CLI summary を基点にした residual public-seam maintenance
   - later mixed gate residual maintenance
   - true user-spec residual
@@ -390,6 +390,8 @@ Package 94 close として theorem public seam を premature に widen せず、
 - `specs/examples/572` は Package 98 closeout として、Problem 1 / Problem 2 の representative sample entrypoint を `samples/` README と `scripts/current_l2_guided_samples.py` に actualize し、guided sample reading を repo-local helper cut に留めた current source-backed note である。
 - `specs/examples/573` は Package 99 closeout として、Problem 1 representative bundle `p06 / p10 / p11 / p12 / p15 / p16` の theorem/model-check public-seam residual を `matrix problem1` helper に actualize し、`p06` representative と first strong typing quintet の bridge-floor bundle を drift なく読めるようにした current source-backed note である。
 - `specs/examples/574` は Package 100 closeout として、Problem 2 representative bundle `p07 / p08 / p09 / p13 / p14` の public-shape residual を `matrix problem2` helper に actualize し、first-line representative / reserve practical route / negative static-stop pair を drift なく読めるようにした current source-backed note である。
+- `specs/examples/575` は Package 101 closeout として、Problem 1 を `bundle problem1` helper と `samples/lean/current-l2/` representative artifact、anchor spec / report まで一本道で辿れる theorem-first pilot bundle に actualize した current source-backed note である。
+- `specs/examples/576` は Package 102 closeout として、Problem 2 を `bundle problem2` helper と representative pair / reserve / negative pair の Lean artifact、anchor spec / report まで一本道で辿れる authoritative-room scenario bundle に actualize した current source-backed note である。
 - 規範判断の正本は常に `specs/` に残る。
 - `plan/` は long-lived repository memory であり、snapshot ではない。
 - `progress.md` と `tasks.md` は current queue と remaining gate を mirror する薄い snapshot として保つ。

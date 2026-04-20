@@ -199,6 +199,43 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(any("Problem 1 residual bundle" in call.args[0] for call in write.mock_calls))
 
+    def test_problem1_bundle_text_mentions_commands_lean_and_doc_refs(self) -> None:
+        spec = guided.problem_specs()["problem1"]
+
+        text = guided.render_problem_bundle(spec)
+
+        self.assertIn("Problem 1 theorem-first pilot bundle", text)
+        self.assertIn("p06-typed-proof-owner-handoff", text)
+        self.assertIn("samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py matrix problem1", text)
+        self.assertIn("specs/examples/508-current-l2-theorem-lean-first-nonproduction-stub-pilot-actualization.md", text)
+        self.assertIn("final public theorem contract", text)
+
+    def test_problem2_bundle_text_mentions_representative_reserve_negative_and_doc_refs(self) -> None:
+        spec = guided.problem_specs()["problem2"]
+
+        text = guided.render_problem_bundle(spec)
+
+        self.assertIn("Problem 2 authoritative-room scenario bundle", text)
+        self.assertIn("p07-dice-late-join-visible-history", text)
+        self.assertIn("p09-dice-delegated-rng-provider-placement", text)
+        self.assertIn("p13-dice-late-join-missing-publication-witness", text)
+        self.assertIn("samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.bundle.json", text)
+        self.assertIn("specs/examples/570-current-l2-authoritative-room-first-scenario-helper-summary-tightening.md", text)
+        self.assertIn("final public witness schema", text)
+
+    def test_main_bundle_command_uses_bundle_renderer(self) -> None:
+        fake_text = "Problem 2 authoritative-room scenario bundle\n..."
+
+        with mock.patch.object(guided, "render_problem_bundle", return_value=fake_text):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["bundle", "problem2"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("Problem 2 authoritative-room scenario bundle" in call.args[0] for call in write.mock_calls)
+        )
+
     def test_problem2_residual_bundle_summarizes_first_line_reserve_and_negative(self) -> None:
         spec = guided.problem_specs()["problem2"]
 

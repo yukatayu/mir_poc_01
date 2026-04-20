@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 13:12 JST
+最終更新: 2026-04-20 13:31 JST
 
 ## この文書について
 
@@ -35,8 +35,8 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 101 theorem-first pilot bundle
-  - Package 102 authoritative-room scenario bundle
+  - Package 103 parser-side companion surface bundle
+  - Package 104 parser-side bundle-to-helper bridge
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -64,8 +64,8 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `101` theorem-first pilot bundle | theorem-first external integration target を repo-local emitted artifact / Lean sample corpus / guided helper の一本道にまとめる | `M` | `Macro 5/7` | `problem1` guide、`matrix problem1`、`samples/lean/current-l2/`、repo-local theorem artifact refs を 1 本の pilot bundle として整理し、comparison debt を増やさず theorem-first pilot の使い方を固める | Problem 1 sample から theorem-first pilot artifact 群まで一本道で辿れ、final public theorem contract later の stop line を保てる |
-| `102` authoritative-room scenario bundle | first application target を representative pair / reserve route / negative pair / artifact route まで一本道にまとめる | `M` | `Macro 6/7` | `problem2` guide、`matrix problem2`、authoritative-room helper summary、reserve lane、negative pair を 1 本の scenario bundle として整理し、first completion line と reserve line の boundary を崩さず実用 bundle を固める | Problem 2 sample から first line / reserve / negative / artifact route まで一本道で辿れ、final public witness/provider/artifact contract later の stop line を保てる |
+| `103` parser-side companion surface bundle | representative sample line を thin experimental surface / non-production parser-side carrier まで narrow に actualize する | `M` | `Macro 6/7` | `p06` と `p07 / p08` representative slice を final grammar へ上げずに companion surface / parser-side carrier へ戻し、current bundle docs と drift なく結び直す | representative companion text が parser-side carrier に入り、current bundle docs と drift なく結び付く |
+| `104` parser-side bundle-to-helper bridge | parser-side carrier から guided helper / current sample reading への thin bridge を actualize する | `M` | `Macro 6/7` | parser-side carrier を `bundle problem1 / problem2`、guided sample、helper summary へ thin bridge し、representative slice が docs / helper / parser-side carrier の 3 点で一本道になる minimum を作る | representative parser-side slice が helper summary / guided bundle と一本道で辿れる |
 
 ## recently closed package note
 
@@ -243,9 +243,9 @@
 ### Package 101 — theorem-first pilot bundle
 
 - current reading:
-  next active bundle。Problem 1 residual matrix まで close 済みなので、次は guided sample `problem1`、`matrix problem1`、`samples/lean/current-l2/`、repo-local theorem artifact refs を 1 本の theorem-first pilot bundle として束ねる。
+  close 済み。Problem 1 residual matrix まで close 済みの line を、`bundle problem1` helper、`samples/lean/current-l2/` representative artifact、anchor spec / report まで束ねる repo-local theorem-first pilot bundle として actualize した。
 - current recommendation:
-  final public theorem contract や concrete prover brand を採らず、repo-local emitted artifact / Lean sample corpus / command path の bundle 化だけを進める。
+  final public theorem contract や concrete prover brand を採らず、repo-local emitted artifact / Lean sample corpus / command path の bundle 化に留める。
 - stop line:
   final public theorem result object
   concrete theorem prover brand
@@ -254,13 +254,35 @@
 ### Package 102 — authoritative-room scenario bundle
 
 - current reading:
-  next active bundle。Problem 2 residual matrix まで close 済みなので、次は guided sample `problem2`、`matrix problem2`、authoritative-room first scenario helper summary、reserve lane、negative pair を 1 本の scenario bundle として束ねる。
+  close 済み。Problem 2 residual matrix まで close 済みの line を、`bundle problem2` helper、representative pair / reserve / negative pair の Lean artifact、anchor spec / report まで束ねる repo-local scenario bundle として actualize した。
 - current recommendation:
-  final public witness/provider/artifact contract を採らず、repo-local scenario reading / artifact route / reserve split を一本道で読める bundle 化だけを進める。
+  final public witness/provider/artifact contract を採らず、repo-local scenario reading / artifact route / reserve split を一本道で読める bundle 化に留める。
 - stop line:
   final public witness schema
   final public provider receipt schema
   exhaustive shared-space catalog
+
+### Package 103 — parser-side companion surface bundle
+
+- current reading:
+  next active bundle。`bundle problem1 / problem2` まで close 済みなので、次は `p06` と `p07 / p08` representative slice を thin experimental companion surface / non-production parser-side carrier へ戻す。
+- current recommendation:
+  final grammar や final public parser/checker/runtime API を採らず、existing parser-side non-production carrier と representative bundle docs を結ぶ minimum companion surface だけを進める。
+- stop line:
+  final grammar
+  final public parser / checker / runtime API
+  final public theorem / witness-provider contract
+
+### Package 104 — parser-side bundle-to-helper bridge
+
+- current reading:
+  next active bundle。parser-side carrier を current `bundle problem1 / problem2`、guided sample、helper summary へ thin bridge し、representative slice が docs / helper / parser-side carrier の 3 点で一本道になる minimum を作る。
+- current recommendation:
+  full `Program` lowering や final public API を採らず、representative slice を helper-local summary / guide へ戻す thin bridge だけを進める。
+- stop line:
+  final public parser / checker / runtime API
+  full `Program` lowering
+  final public verifier contract
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -758,6 +780,6 @@
 
 ## next reopen order
 
-1. Package 101 で theorem-first pilot bundle を repo-local emitted artifact / Lean sample corpus / helper command までまとめる。
-2. Package 102 で authoritative-room scenario bundle を representative pair / reserve / negative / artifact route までまとめる。
+1. Package 103 で parser-side companion surface bundle を representative theorem/order-handoff slice へ actualize する。
+2. Package 104 で parser-side carrier を current helper / bundle / summary へ thin bridge する。
 3. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

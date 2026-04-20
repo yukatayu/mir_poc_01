@@ -789,6 +789,14 @@ actual-adoption floor では、
   - `p07 / p08 / p09 / p13 / p14` representative bundle を `matrix problem2` helper に actualize してよい
   - first-line representative / reserve practical route / negative static-stop pair を current readable cut に留める
   - Package 100 close 後の current active queue は Package 101 theorem-first pilot bundle と Package 102 authoritative-room scenario bundle である
+- Problem 1 theorem-first pilot bundle actualization:
+  `specs/examples/575`
+  - `p06 / p10 / p11 / p12 / p15 / p16` representative bundle を `bundle problem1` helper、`samples/lean/current-l2/` representative artifact、anchor spec / report まで actualize してよい
+  - theorem-first pilot line を docs / helper / Lean artifact まで一本道で辿れる current readable cut に留める
+- Problem 2 authoritative-room scenario bundle actualization:
+  `specs/examples/576`
+  - `p07 / p08 / p09 / p13 / p14` representative bundle を `bundle problem2` helper、representative pair / reserve / negative pair の Lean artifact、anchor spec / report まで actualize してよい
+  - Package 102 close 後の current active queue は Package 103 parser-side companion surface bundle と Package 104 parser-side bundle-to-helper bridge である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

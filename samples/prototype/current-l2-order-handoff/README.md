@@ -51,6 +51,15 @@ python3 scripts/current_l2_guided_samples.py matrix problem2
 - `p09` は delegated RNG practical reserve route として出る。
 - `p13 / p14` は negative static-stop pair として出る。
 
+bundle として docs / Lean artifact / reserve lane / negative pair まで一本道で見る例:
+
+```bash
+python3 scripts/current_l2_guided_samples.py bundle problem2
+```
+
+- `p07 / p08` の prototype と `samples/lean/current-l2/` 側の対応 artifact、anchor になる spec/report を 1 画面で辿れる。
+- `p09` の reserve route と `p13 / p14` の negative pair も同じ bundle 内で確認できる。
+
 ## reserve / negative として見るサンプル
 
 ### `p09-dice-delegated-rng-provider-placement`

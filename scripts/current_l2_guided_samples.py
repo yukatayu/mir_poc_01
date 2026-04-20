@@ -16,6 +16,63 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 
 
+PROBLEM_BUNDLE_TITLES = {
+    "problem1": "Problem 1 theorem-first pilot bundle",
+    "problem2": "Problem 2 authoritative-room scenario bundle",
+}
+
+PROBLEM_BUNDLE_READINGS = {
+    "problem1": (
+        "Problem 1 の current first line を、guided sample、residual matrix、Lean sample corpus、"
+        "repo-local emitted artifact refs まで一本道で辿るための helper-local bundle。"
+    ),
+    "problem2": (
+        "Problem 2 の current first line / reserve lane / negative static-stop pair を、guided sample、"
+        "residual matrix、authoritative-room helper summary、Lean artifact まで一本道で辿るための helper-local bundle。"
+    ),
+}
+
+PROBLEM_BUNDLE_DOC_REFS = {
+    "problem1": (
+        "specs/examples/466-current-l2-problem1-actual-adoption-package-and-theorem-first-pilot.md",
+        "specs/examples/508-current-l2-theorem-lean-first-nonproduction-stub-pilot-actualization.md",
+        "specs/examples/509-current-l2-theorem-review-unit-to-lean-stub-repo-local-artifact-conformance-bridge.md",
+        "specs/examples/568-current-l2-theorem-model-check-bridge-carrier-reconnect-after-finite-index-widening.md",
+        "specs/examples/572-current-l2-guided-problem-sample-entrypoints-and-runner.md",
+        "specs/examples/573-current-l2-problem1-public-seam-residual-bundle-matrix.md",
+        "docs/reports/0851-package94-theorem-model-check-bridge-carrier-reconnect.md",
+        "docs/reports/0855-package98-guided-problem-sample-entrypoints-and-runner.md",
+        "docs/reports/0856-package99-100-problem-residual-bundle-matrices.md",
+    ),
+    "problem2": (
+        "specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md",
+        "specs/examples/569-current-l2-order-handoff-source-surface-artifact-route-tightening.md",
+        "specs/examples/570-current-l2-authoritative-room-first-scenario-helper-summary-tightening.md",
+        "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
+        "specs/examples/572-current-l2-guided-problem-sample-entrypoints-and-runner.md",
+        "specs/examples/574-current-l2-problem2-public-shape-residual-bundle-matrix.md",
+        "docs/reports/0853-package96-authoritative-room-first-scenario-tightening.md",
+        "docs/reports/0854-package97-authoritative-room-reserve-strengthening-lane-tightening.md",
+        "docs/reports/0855-package98-guided-problem-sample-entrypoints-and-runner.md",
+        "docs/reports/0856-package99-100-problem-residual-bundle-matrices.md",
+    ),
+}
+
+PROBLEM_BUNDLE_STOP_LINES = {
+    "problem1": (
+        "final public theorem contract",
+        "concrete theorem prover brand",
+        "final public verifier contract",
+    ),
+    "problem2": (
+        "final public witness schema",
+        "final public provider receipt schema",
+        "final public witness/provider/artifact contract",
+        "exhaustive shared-space catalog",
+    ),
+}
+
+
 @dataclass(frozen=True)
 class GuidedSample:
     sample_id: str
@@ -195,7 +252,7 @@ def build_run_commands(
             "mir_current_l2",
             "--",
             "run-source-sample",
-            str(sample.sample_path),
+            relative_path(sample.sample_path),
             "--format",
             output_format,
         ]
@@ -214,10 +271,115 @@ def build_single_run_command(sample: GuidedSample, *, output_format: str) -> lis
         "mir_current_l2",
         "--",
         "run-source-sample",
-        str(sample.sample_path),
+        relative_path(sample.sample_path),
         "--format",
         output_format,
     ]
+
+
+def relative_path(path: Path) -> str:
+    return str(path.relative_to(REPO_ROOT))
+
+
+def lean_artifact_paths(sample: GuidedSample) -> tuple[str, ...]:
+    lean_dir = REPO_ROOT / "samples" / "lean" / "current-l2" / sample.sample_id
+    candidates = (
+        lean_dir / "README.md",
+        lean_dir / f"{sample.sample_id}.lean",
+        lean_dir / f"{sample.sample_id}.bundle.json",
+    )
+    return tuple(relative_path(path) for path in candidates if path.exists())
+
+
+def bundle_commands(spec: ProblemSpec) -> tuple[str, ...]:
+    primary = next(sample for sample in spec.samples if sample.primary)
+    return (
+        f"python3 scripts/current_l2_guided_samples.py show {spec.problem_id}",
+        " ".join(build_single_run_command(primary, output_format="pretty")),
+        f"python3 scripts/current_l2_guided_samples.py matrix {spec.problem_id}",
+        f"python3 scripts/current_l2_guided_samples.py run {spec.problem_id} --all --format json",
+    )
+
+
+def build_problem_bundle_manifest(spec: ProblemSpec) -> dict[str, object]:
+    primary_samples = [sample for sample in spec.samples if sample.primary]
+    support_samples = [sample for sample in spec.samples if not sample.primary]
+
+    return {
+        "problem_id": spec.problem_id,
+        "title": PROBLEM_BUNDLE_TITLES[spec.problem_id],
+        "current_reading": PROBLEM_BUNDLE_READINGS[spec.problem_id],
+        "summary": spec.summary,
+        "commands": bundle_commands(spec),
+        "primary_samples": [
+            {
+                "sample_id": sample.sample_id,
+                "prototype_path": relative_path(sample.sample_path),
+                "summary": sample.summary,
+                "lean_artifacts": lean_artifact_paths(sample),
+            }
+            for sample in primary_samples
+        ],
+        "support_samples": [
+            {
+                "sample_id": sample.sample_id,
+                "prototype_path": relative_path(sample.sample_path),
+                "summary": sample.summary,
+                "lean_artifacts": lean_artifact_paths(sample),
+            }
+            for sample in support_samples
+        ],
+        "doc_refs": PROBLEM_BUNDLE_DOC_REFS[spec.problem_id],
+        "stop_line": PROBLEM_BUNDLE_STOP_LINES[spec.problem_id],
+    }
+
+
+def render_problem_bundle(spec: ProblemSpec) -> str:
+    manifest = build_problem_bundle_manifest(spec)
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+        str(manifest["summary"]),
+        "",
+        "おすすめの追い方:",
+    ]
+
+    for index, command in enumerate(manifest["commands"], start=1):
+        lines.append(f"{index}. {command}")
+
+    lines.extend(["", "代表サンプルと Lean artifact:"])
+    for sample in manifest["primary_samples"]:
+        lines.append(f"- {sample['sample_id']}: {sample['summary']}")
+        lines.append(f"  prototype: {sample['prototype_path']}")
+        for artifact in sample["lean_artifacts"]:
+            lines.append(f"  lean artifact: {artifact}")
+
+    lines.extend(["", "補助サンプル:"])
+    for sample in manifest["support_samples"]:
+        lines.append(f"- {sample['sample_id']}: {sample['summary']}")
+        lines.append(f"  prototype: {sample['prototype_path']}")
+        for artifact in sample["lean_artifacts"]:
+            lines.append(f"  lean artifact: {artifact}")
+
+    lines.extend(["", "anchor docs / reports:"])
+    for doc_ref in manifest["doc_refs"]:
+        lines.append(f"- {doc_ref}")
+
+    lines.extend(["", "stop line:"])
+    for item in manifest["stop_line"]:
+        lines.append(f"- {item}")
+
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- これは repo-local / helper-local bundle であり、final public contract や final public grammar を意味しない。",
+            "- representative sample から docs / reports / Lean artifact を一本道で辿るための案内に留める。",
+        ]
+    )
+    return "\n".join(lines)
 
 
 def render_problem_guide(spec: ProblemSpec) -> str:
@@ -622,6 +784,13 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     matrix_parser.add_argument("problem_id", choices=("problem1", "problem2"))
     matrix_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    bundle_parser = subparsers.add_parser(
+        "bundle",
+        help="guided problem を docs / Lean artifact / residual matrix まで一本道で案内する",
+    )
+    bundle_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
+    bundle_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     return parser.parse_args(argv)
 
 
@@ -649,6 +818,14 @@ def main(argv: list[str] | None = None) -> int:
         except RuntimeError as error:
             print(str(error), file=sys.stderr)
             return 1
+
+    if args.subcommand == "bundle":
+        manifest = build_problem_bundle_manifest(spec)
+        if args.format == "json":
+            print(json.dumps(manifest, ensure_ascii=False, indent=2))
+            return 0
+        print(render_problem_bundle(spec))
+        return 0
 
     return run_problem(spec, output_format=args.format, include_all=args.all)
 
