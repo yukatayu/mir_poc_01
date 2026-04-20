@@ -1,95 +1,101 @@
-# Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform — 初期ワークスペース
+# Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform
 
-このリポジトリは、大規模な研究開発プログラムのための**仕様先行（specification-first）の初期ワークスペース**である。
-保持された文脈がない agent でも、少数の文書を順番に読めばプロジェクト構造を復元できるよう、意図的に構成されている。
+このリポジトリは、4 つの関連システムを **specification-first** に整理しながら、
+current-L2 の非 production 実装と検証サンプルを積み上げている研究用ワークスペースである。
 
-## このワークスペースの目的
+- **Mir**: 因果、contract、effect、ownership、lifetime、安全な進化を扱う意味論コア
+- **Mirrorea**: 論理名、routing、overlay insertion、audit を扱う fabric / runtime 層
+- **PrismCascade**: media processing 用の独立 kernel
+- **Typed-Effect Wiring Platform**: inspectable / routable な effect integration 層
 
-このリポジトリは、密接に関係しつつも意図的に分離されている四つのシステムの作業開始点である。
+この 4 つは密接に関係するが、repo では **意図的に separable** に扱う。
 
-1. **Mir** — 因果、contract、effect、ownership、lifetime、安全な進化を扱う言語・意味論コア。
-2. **Mirrorea** — 論理名、compatibility-preserving overlay insertion、patching、routing、audit、動的再構成のための fabric / runtime 層。
-3. **PrismCascade** — 動画・音声編集と live pipeline のための独立した media-processing kernel。
-4. **Typed-Effect Wiring Platform** — container/service と legacy system integration のための、routable で inspectable な effect 層。
+## 現在の立ち位置
 
-## 現在の段階
+この repo は **完成済み製品** でも **final public language implementation** でもない。
+一方で、単なる docs-only skeleton でもない。
 
-このリポジトリは**実装完了済み**でも**MVP コードベース**でもない。
-現在は、次の作業を進めるための構造化された出発点である。
+2026-04-21 時点の実務的な読みは次のとおり。
 
-- 仕様の精密化
-- 不変条件の証明または反証
-- 小規模な proof of concept の構築
-- 各タスク後の詳細レポート作成
+- current-L2 authored sixteen と corrected prototype set `p01 ... p16` は runnable
+- Problem 1 の current first line
+  - typed / IFC sample
+  - theorem-first emitted artifact loop
+  - model-check second-line reserve summary
+  は repo-local helper / CLI / Lean foundation 付きで確認できる
+- Problem 2 の current first line
+  - order / handoff / authoritative-room representative pair
+  - reserve strengthening lane
+  - negative static-stop pair
+  は runnable scenario loop まで確認できる
+- Lean は 2 層ある
+  - `samples/lean/foundations/`: actual small proof fragment
+  - `samples/lean/current-l2/`: Lean が受理する generated stub corpus
 
-ただし current repo には、単なる placeholder 以上の **non-production actual path** がすでにある。
-特に current L2 では、
+ただし、次は **まだ done ではない**。
 
-- parser-free PoC
-- `mir-ast` / `mir-semantics` / `mir-runtime` の narrow compile-ready path
-- fixed-subset source sample の runnable ladder
+- final public parser / checker / runtime API
+- full strong typed surface
+- concrete theorem prover binding
+- concrete model-check tool binding
+- final public verifier contract
+- low-level `memory_order` exact source surface
+- final source wording / witness-provider public contract
+- packaging / installed binary / FFI / engine adapter
 
-まで到達している。
-
-## 人間と agent の必読順
+## 先に読む順序
 
 1. `AGENTS.md`
 2. `Documentation.md`
-3. `specs/00-document-map.md`
-4. `specs/01-charter-and-decision-levels.md`
-5. `specs/02-system-overview.md`
-6. `specs/03-layer-model.md`
-7. `specs/09-invariants-and-constraints.md`
-8. その後、必要な subsystem spec に入る
-   - `specs/04-mir-core.md`
-   - `specs/05-mirrorea-fabric.md`
-   - `specs/06-prismcascade-positioning.md`
-   - `specs/07-typed-effects-wiring-platform.md`
-   - `specs/08-cross-system-relations.md`
-9. 未解決事項は `specs/10-open-questions.md`
-10. 実装や研究の順序は `specs/11-roadmap-and-workstreams.md`
-11. 既存判断は `specs/12-decision-register.md`
-12. 自走 task と current blocker の current snapshot を見たいときは `tasks.md`
+3. `progress.md`
+4. `specs/00-document-map.md`
+5. `specs/01-charter-and-decision-levels.md`
+6. `specs/02-system-overview.md`
+7. `specs/03-layer-model.md`
+8. `specs/09-invariants-and-constraints.md`
+9. 必要に応じて subsystem spec
+10. current task map は `tasks.md`
+11. long-lived repository memory は `plan/00-index.md` と `plan/01-status-at-a-glance.md`
 
-文書マップ、用語方針、相互参照の基準は `specs/00-document-map.md` を参照すること。
-current status / progress / remaining steps を見たいときは `progress.md`、repo 全体の研究 phase / autonomy gate を見たいときは `plan/17-research-phases-and-autonomy-gates.md` を読むこと。
+## まず確かめるコマンド
 
-## 作業スタイル
+全体の representative bundle を一度に見る:
 
-すべての non-trivial task は、`docs/reports/` 配下に**新しい markdown report** を生成すること。
-report は `python scripts/new_report.py --slug <short-name>` でテンプレートから作成する。
+```bash
+python3 scripts/current_l2_guided_samples.py smoke-all --format json
+```
 
-## リポジトリ構成
+Problem 1 の typed / theorem / model-check current cut を見る:
 
-- `specs/` — 正本となる仕様書と設計文書
-- `tasks.md` — 自走 task と current blocker をまとめた current task map
-- `docs/reports/` — 時系列の作業レポート
-- `docs/research_abstract/` — phase ごとの本質的な研究成果を短く辿るための要約
-- `docs/diagrams/` — Mermaid ソース図
-- `agents/` — プロジェクトローカルの agent 向けガイダンス / 設定ファイル
-- `scripts/` — レポート / docs validation に加えて、detached-loop、source-sample regression、compare helper、scaffold を含む repo-local helper 群
-- `crates/` — Rust workspace。Mir current-L2 line には non-production parser / semantics / runtime / formal-hook actualization があり、その他の subsystem crate はまだ skeleton が多い
+```bash
+python3 scripts/current_l2_guided_samples.py bundle problem1
+python3 scripts/current_l2_guided_samples.py emit-theorem problem1
+python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line
+```
 
-## 実装言語選択の現状
+Problem 2 の order / handoff current cut を見る:
 
-現時点の推奨は次のとおりである。
+```bash
+python3 scripts/current_l2_guided_samples.py bundle problem2
+python3 scripts/current_l2_guided_samples.py emit-scenario problem2
+```
 
-- core implementation と runtime kernel には **Rust**
-- 必要になった場合の可視化には **Web-based visualization**（例: TypeScript / HTML / SVG / WebGL）
-- 将来の game engine integration には **C ABI / engine adapters**
-  - ただし current roadmap では、これは immediate mainline ではなく、docs-first の host-facing I/O / adapter boundary を切った後段 gate に置く。
+Lean foundation を見る:
 
-これは**推奨される実装方針**であり、アーキテクチャ上の法ではない。
-実装ガイダンスは `specs/11-roadmap-and-workstreams.md` を参照すること。
+```bash
+source "$HOME/.elan/env" && lean samples/lean/foundations/CurrentL2IfcSecretExamples.lean
+source "$HOME/.elan/env" && lean samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean
+```
 
-## 現在の環境メモ
+## 作業ルール
 
-初期 scaffold 自体は Python のみが使える環境で起こされたが、current repo では Python と `cargo` の両方を使った local validation が運用に入っている。
-したがって、current state の build / test / helper verification は report に記録された実行 evidence を正本として読むこと。
+- non-trivial task ごとに `docs/reports/` 配下へ **新しい report** を作る
+- 規範判断の正本は `specs/`
+- current snapshot は `Documentation.md` / `progress.md` / `tasks.md`
+- `plan/` は snapshot ではなく repository memory
 
-現時点の自然な読みは、
+report 作成:
 
-- **core execution / parser / checker / runtime / formal handoff は Rust-heavy**
-- **repo-local orchestration / regression / report / docs validation は Python helper を併用**
-
-であり、単純な「全部 Rust へ寄せる / 全部 Python に残す」という二択ではない。
+```bash
+python3 scripts/new_report.py --slug <short-name>
+```
