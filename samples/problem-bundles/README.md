@@ -59,6 +59,9 @@
   mixed gate lane として見たいときは
   `python3 scripts/current_l2_guided_samples.py lane parser-side-residual`
   を使う。
+- true user-spec residual を explicit hold line として見たいときは
+  `python3 scripts/current_l2_guided_samples.py hold-line`
+  を使う。
 - syntax / modality の final marker lane だけを個別に見直したいときは
   `python3 scripts/current_l2_guided_samples.py lane syntax-modality-final-marker`
   を使う。

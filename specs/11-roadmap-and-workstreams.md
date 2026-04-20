@@ -921,6 +921,10 @@ actual-adoption floor では、
   `specs/examples/607`
   - `lane parser-side-residual` を actualize し、parser companion surface / parser-side tranche / final parser-checker-runtime API residual を `residuals` / `closeout` / `reserve` と切り分けた mixed gate lane として actualize してよい
   - Package 134 close 後の current active queue は Package 135 true user-spec residual freeze sync と later mixed/user-spec residual である
+- true user-spec hold line freeze sync:
+  `specs/examples/608`
+  - `hold-line` helper を actualize し、true user-spec residual を explicit hold line として `closeout` / `reserve` / snapshot docs から separate に読めるようにしてよい
+  - Package 135 close 後の closeout 用 numbered queue は closed 状態となり、next reopen line は reserve integration / later mixed gate / user-spec hold line である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

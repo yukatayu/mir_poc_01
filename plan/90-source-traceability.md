@@ -4568,3 +4568,11 @@
   - `docs/reports/0887-package134-parser-side-residual-lane-helper-actualization.md`
   - `scripts/current_l2_guided_samples.py`
   - `scripts/tests/test_current_l2_guided_samples.py`
+
+## 2026-04-20 Package 135 true user-spec hold line freeze sync addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`samples/problem-bundles/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/608-current-l2-true-user-spec-hold-line-freeze-sync.md`
+  - `docs/reports/0888-package135-true-user-spec-hold-line-freeze-sync.md`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`

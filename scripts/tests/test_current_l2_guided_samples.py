@@ -1115,6 +1115,8 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("problem1-final-public-seams", text)
         self.assertIn("problem2-final-public-seams", text)
         self.assertIn("parser-side-residual", text)
+        self.assertIn("hold-line", text)
+        self.assertIn("(none; closeout numbered queue closed)", text)
         self.assertIn("true user-spec residuals:", text)
         self.assertIn("final public verifier contract", text)
 
@@ -1141,9 +1143,10 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
             payload["executable_entry_commands"],
         )
+        self.assertEqual(payload["next_self_driven_packages"], [])
         self.assertEqual(
-            [row["package_id"] for row in payload["next_self_driven_packages"]],
-            ["135"],
+            payload["true_user_spec_hold_line_command"],
+            "python3 scripts/current_l2_guided_samples.py hold-line",
         )
         self.assertIn(
             "installed-binary / packaging / FFI / engine adapter / host integration target",
@@ -1180,6 +1183,11 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("emit-theorem problem1", text)
         self.assertIn("emit-scenario problem2", text)
         self.assertIn("closeout", text)
+        self.assertIn("hold-line", text)
+        self.assertIn(
+            "(none; reserve reopen order is available, but closeout queue is closed)",
+            text,
+        )
 
     def test_reserve_integration_summary_json_contains_package_ids_and_next_queue(self) -> None:
         rendered = guided.render_reserve_integration_summary_from_runtime(
@@ -1201,7 +1209,11 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
                 "model-check-second-line",
             ],
         )
-        self.assertEqual(payload["next_queue"], ["135"])
+        self.assertEqual(payload["next_queue"], [])
+        self.assertEqual(
+            payload["true_user_spec_hold_line_command"],
+            "python3 scripts/current_l2_guided_samples.py hold-line",
+        )
         self.assertIn(
             "packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target",
             payload["stop_line"],
@@ -1222,6 +1234,72 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertTrue(
             any(
                 "current-l2 reserve integration entrypoint summary" in call.args[0]
+                for call in write.mock_calls
+            )
+        )
+
+    def test_true_user_spec_hold_line_text_mentions_defaults_and_reopen_triggers(self) -> None:
+        text = guided.render_true_user_spec_hold_line_summary_from_runtime(
+            guided.problem_specs(),
+            output_format="pretty",
+        )
+
+        self.assertIn("current-l2 true user-spec hold line summary", text)
+        self.assertIn("repo-local near-end success defaults:", text)
+        self.assertIn("true user-spec residuals:", text)
+        self.assertIn("reopen triggers:", text)
+        self.assertIn(
+            "repo-local runnable CLI + tests + emitted artifacts + reproducible compare floor",
+            text,
+        )
+        self.assertIn(
+            "user が distribution / embedding / host target を指定したとき",
+            text,
+        )
+
+    def test_true_user_spec_hold_line_json_contains_items_and_hold_command(self) -> None:
+        rendered = guided.render_true_user_spec_hold_line_summary_from_runtime(
+            guided.problem_specs(),
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(
+            payload["manifest_kind"],
+            "current_l2_true_user_spec_hold_line_summary",
+        )
+        self.assertEqual(
+            payload["hold_line_command"],
+            "python3 scripts/current_l2_guided_samples.py hold-line",
+        )
+        self.assertEqual(
+            [row["residual_id"] for row in payload["residual_rows"]],
+            [
+                "shared-space-catalog",
+                "packaging-and-host-integration",
+                "upper-layer-application-target",
+            ],
+        )
+        self.assertIn(
+            "authoritative-room minimal working subset first",
+            payload["repo_local_near_end_success_defaults"],
+        )
+
+    def test_main_hold_line_command_uses_renderer(self) -> None:
+        fake_text = "current-l2 true user-spec hold line summary\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_true_user_spec_hold_line_summary_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["hold-line"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any(
+                "current-l2 true user-spec hold line summary" in call.args[0]
                 for call in write.mock_calls
             )
         )

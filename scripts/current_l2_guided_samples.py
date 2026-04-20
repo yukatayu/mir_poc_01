@@ -238,6 +238,52 @@ GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
     "upper-layer application target beyond authoritative-room first scenario",
 )
 
+TRUE_USER_SPEC_HOLD_LINE_COMMAND = "python3 scripts/current_l2_guided_samples.py hold-line"
+
+TRUE_USER_SPEC_HOLD_DEFAULTS = (
+    "repo-local runnable CLI + tests + emitted artifacts + reproducible compare floor",
+    "authoritative-room minimal working subset first",
+    "theorem-first external integration target first / model-check second",
+)
+
+TRUE_USER_SPEC_HOLD_REOPEN_TRIGGERS = (
+    "user が exhaustive shared-space catalog を要求したとき",
+    "user が distribution / embedding / host target を指定したとき",
+    "user が authoritative-room first scenario beyond の concrete app target を指定したとき",
+)
+
+TRUE_USER_SPEC_HOLD_ROWS = (
+    {
+        "residual_id": "shared-space-catalog",
+        "summary": "shared-space exhaustive final catalog beyond minimal working subset",
+        "current_default": (
+            "authoritative room baseline / append-friendly contrast room / fairness-replay default profile "
+            "までを fixed subset とし、exhaustive catalog は hold line に残す"
+        ),
+        "reopen_trigger": "user が room-profile catalog の scope 拡張を明示したとき",
+    },
+    {
+        "residual_id": "packaging-and-host-integration",
+        "summary": "installed-binary / packaging / FFI / engine adapter / host integration target",
+        "current_default": (
+            "repo-local runnable CLI + tests + emitted artifacts + reproducible compare floor を near-end success "
+            "とし、distribution / embedding は hold line に残す"
+        ),
+        "reopen_trigger": "user が distribution / embedding / host target を指定したとき",
+    },
+    {
+        "residual_id": "upper-layer-application-target",
+        "summary": "upper-layer application target beyond authoritative-room first scenario",
+        "current_default": (
+            "authoritative shared-space turn-based room を first app target とし、broader app target は "
+            "hold line に残す"
+        ),
+        "reopen_trigger": (
+            "user が authoritative-room first scenario を超える concrete application target を指定したとき"
+        ),
+    },
+)
+
 ONCE_THROUGH_CLOSEOUT_CURRENT_FIRST_LINES = (
     {
         "line_id": "problem1",
@@ -276,16 +322,7 @@ ONCE_THROUGH_CLOSEOUT_EXECUTABLE_ENTRY_COMMANDS = (
     "python3 scripts/current_l2_guided_samples.py residuals",
 )
 
-ONCE_THROUGH_CLOSEOUT_NEXT_SELF_DRIVEN_PACKAGES = (
-    {
-        "package_id": "135",
-        "title": "true user-spec residual freeze sync",
-        "summary": (
-            "packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target "
-            "を true user-spec residual として固定する"
-        ),
-    },
-)
+ONCE_THROUGH_CLOSEOUT_NEXT_SELF_DRIVEN_PACKAGES = ()
 
 ONCE_THROUGH_CLOSEOUT_STOP_LINE = (
     "final public parser / checker / runtime API",
@@ -1955,6 +1992,7 @@ def build_once_through_closeout_manifest(specs: Mapping[str, ProblemSpec]) -> di
             }
             for row in ONCE_THROUGH_CLOSEOUT_NEXT_SELF_DRIVEN_PACKAGES
         ],
+        "true_user_spec_hold_line_command": TRUE_USER_SPEC_HOLD_LINE_COMMAND,
         "true_user_spec_residuals": list(GLOBAL_TRUE_USER_SPEC_RESIDUALS),
         "stop_line": list(ONCE_THROUGH_CLOSEOUT_STOP_LINE),
         "anchor_refs": [
@@ -1962,6 +2000,7 @@ def build_once_through_closeout_manifest(specs: Mapping[str, ProblemSpec]) -> di
             "specs/examples/604-current-l2-problem2-executable-residual-reopen-sync.md",
             "specs/examples/606-current-l2-reserve-integration-entrypoint-summary-sync.md",
             "specs/examples/607-current-l2-parser-side-residual-lane-helper-actualization.md",
+            "specs/examples/608-current-l2-true-user-spec-hold-line-freeze-sync.md",
             "specs/examples/596-current-l2-remaining-residual-lane-summary-actualization.md",
             "specs/examples/597-current-l2-problem1-final-public-seam-lane-helper-actualization.md",
             "specs/examples/598-current-l2-problem2-final-public-seam-lane-helper-actualization.md",
@@ -2003,11 +2042,17 @@ def render_once_through_closeout_summary(specs: Mapping[str, ProblemSpec]) -> st
             "next self-driven packages:",
         ]
     )
-    for row in manifest["next_self_driven_packages"]:
-        lines.append(f"- {row['package_id']}: {row['title']}")
-        lines.append(f"  {row['summary']}")
+    if manifest["next_self_driven_packages"]:
+        for row in manifest["next_self_driven_packages"]:
+            lines.append(f"- {row['package_id']}: {row['title']}")
+            lines.append(f"  {row['summary']}")
+    else:
+        lines.append("- (none; closeout numbered queue closed)")
     lines.extend(
         [
+            "",
+            "true user-spec hold line command:",
+            f"- {manifest['true_user_spec_hold_line_command']}",
             "",
             "true user-spec residuals:",
         ]
@@ -2072,7 +2117,8 @@ def build_reserve_integration_summary_manifest(specs: Mapping[str, ProblemSpec])
             }
             for row in RESERVE_INTEGRATION_PACKAGES
         ],
-        "next_queue": ["135"],
+        "next_queue": [],
+        "true_user_spec_hold_line_command": TRUE_USER_SPEC_HOLD_LINE_COMMAND,
         "stop_line": list(RESERVE_INTEGRATION_STOP_LINE),
     }
 
@@ -2096,9 +2142,15 @@ def render_reserve_integration_summary(specs: Mapping[str, ProblemSpec]) -> str:
         for ref in row["anchor_refs"]:
             lines.append(f"    - {ref}")
         lines.append("")
+    lines.append("true user-spec hold line command:")
+    lines.append(f"- {manifest['true_user_spec_hold_line_command']}")
+    lines.append("")
     lines.append("next queue:")
-    for item in manifest["next_queue"]:
-        lines.append(f"- {item}")
+    if manifest["next_queue"]:
+        for item in manifest["next_queue"]:
+            lines.append(f"- {item}")
+    else:
+        lines.append("- (none; reserve reopen order is available, but closeout queue is closed)")
     lines.extend(
         [
             "",
@@ -2127,6 +2179,112 @@ def render_reserve_integration_summary_from_runtime(
     if output_format == "json":
         return json.dumps(manifest, ensure_ascii=False, indent=2)
     return render_reserve_integration_summary(specs)
+
+
+def build_true_user_spec_hold_line_manifest() -> dict[str, object]:
+    return {
+        "manifest_kind": "current_l2_true_user_spec_hold_line_summary",
+        "title": "current-l2 true user-spec hold line summary",
+        "current_reading": (
+            "repo-local once-through closeout 後も true user-spec residual を explicit hold line として固定し、"
+            "mixed gate / reserve integration / current runnable floor と混ぜずに読む helper-local summary。"
+        ),
+        "hold_line_command": TRUE_USER_SPEC_HOLD_LINE_COMMAND,
+        "repo_local_near_end_success_defaults": list(TRUE_USER_SPEC_HOLD_DEFAULTS),
+        "residual_rows": [
+            {
+                "residual_id": row["residual_id"],
+                "summary": row["summary"],
+                "current_default": row["current_default"],
+                "reopen_trigger": row["reopen_trigger"],
+            }
+            for row in TRUE_USER_SPEC_HOLD_ROWS
+        ],
+        "reopen_triggers": list(TRUE_USER_SPEC_HOLD_REOPEN_TRIGGERS),
+        "kept_separate_from": [
+            "problem-local mixed gate lanes",
+            "reserve integration packages",
+            "repo-local executable current first lines",
+        ],
+        "anchor_refs": [
+            "specs/examples/469-current-l2-near-end-closeout-after-actual-adoption-defaults.md",
+            "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
+            "specs/examples/606-current-l2-reserve-integration-entrypoint-summary-sync.md",
+            "specs/examples/607-current-l2-parser-side-residual-lane-helper-actualization.md",
+            "specs/examples/608-current-l2-true-user-spec-hold-line-freeze-sync.md",
+        ],
+    }
+
+
+def render_true_user_spec_hold_line_summary() -> str:
+    manifest = build_true_user_spec_hold_line_manifest()
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+        "hold-line command:",
+        f"- {manifest['hold_line_command']}",
+        "",
+        "repo-local near-end success defaults:",
+    ]
+    for item in manifest["repo_local_near_end_success_defaults"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "true user-spec residuals:",
+        ]
+    )
+    for row in manifest["residual_rows"]:
+        lines.append(f"- {row['residual_id']}: {row['summary']}")
+        lines.append(f"  current default: {row['current_default']}")
+        lines.append(f"  reopen trigger: {row['reopen_trigger']}")
+    lines.extend(
+        [
+            "",
+            "reopen triggers:",
+        ]
+    )
+    for item in manifest["reopen_triggers"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "kept separate from:",
+        ]
+    )
+    for item in manifest["kept_separate_from"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "anchor refs:",
+        ]
+    )
+    for ref in manifest["anchor_refs"]:
+        lines.append(f"- {ref}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- current helper-local hold line であり、final public parser / checker / runtime API や final public verifier contract の確定を意味しない。",
+            "- repo-local near-end success と user-spec residual を混ぜないための explicit hold summary に留める。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_true_user_spec_hold_line_summary_from_runtime(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+) -> str:
+    _ = specs
+    manifest = build_true_user_spec_hold_line_manifest()
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_true_user_spec_hold_line_summary()
 
 
 def residual_lane_ids() -> tuple[str, ...]:
@@ -3116,6 +3274,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     reserve_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    hold_line_parser = subparsers.add_parser(
+        "hold-line",
+        help="true user-spec residual の explicit hold line を表示する",
+    )
+    hold_line_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     lane_parser = subparsers.add_parser(
         "lane",
         help="remaining residual lane を 1 本ずつ表示する",
@@ -3193,6 +3357,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.subcommand == "reserve":
         print(render_reserve_integration_summary_from_runtime(specs, output_format=args.format))
+        return 0
+
+    if args.subcommand == "hold-line":
+        print(render_true_user_spec_hold_line_summary_from_runtime(specs, output_format=args.format))
         return 0
 
     if args.subcommand == "lane":
