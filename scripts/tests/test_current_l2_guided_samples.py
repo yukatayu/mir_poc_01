@@ -933,7 +933,8 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         text = guided.render_problem_reopen_map(guided.problem_specs())
 
         self.assertIn("representative problem mixed-gate reopen map", text)
-        self.assertIn("python3 scripts/current_l2_guided_samples.py matrix problem1", text)
+        self.assertIn("check-source-sample", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py emit-theorem problem1", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem2", text)
         self.assertIn("stronger typed-surface actual adoption", text)
         self.assertIn("final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract", text)
@@ -949,6 +950,8 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(payload["map_kind"], "current_l2_representative_problem_mixed_gate_reopen_map")
         self.assertEqual([row["problem_id"] for row in payload["problem_rows"]], ["problem1", "problem2"])
         self.assertIn("quickstart problem1", payload["problem_rows"][0]["entry_commands"][0])
+        self.assertIn("check-source-sample", payload["problem_rows"][0]["entry_commands"][1])
+        self.assertIn("emit-theorem problem1", payload["problem_rows"][0]["entry_commands"][2])
         self.assertIn("bundle problem2", payload["problem_rows"][1]["entry_commands"][2])
         self.assertIn(
             "upper-layer application target beyond authoritative-room first scenario",
@@ -1119,10 +1122,8 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
                 "model-check public-contract split",
             ],
         )
-        self.assertIn(
-            "python3 scripts/current_l2_guided_samples.py bundle problem1",
-            payload["entry_commands"],
-        )
+        self.assertTrue(any("emit-theorem problem1" in command for command in payload["entry_commands"]))
+        self.assertTrue(any("check-source-sample" in command for command in payload["entry_commands"]))
 
     def test_problem2_final_public_seam_lane_text_mentions_component_order_and_stop_line(self) -> None:
         text = guided.render_residual_lane_from_runtime(

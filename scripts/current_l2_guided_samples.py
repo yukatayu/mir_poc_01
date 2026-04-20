@@ -1393,14 +1393,20 @@ def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
             sample_bundle_doc=PROBLEM_SAMPLE_BUNDLE_DOCS["problem1"],
             representative_samples=("p06-typed-proof-owner-handoff",),
             current_floor=(
-                "quickstart / smoke / matrix / bundle / parser companion inspector まで drift suppression 済み。",
+                "quickstart / smoke / matrix / bundle / parser companion inspector / check-source-sample / emit-theorem problem1 まで drift suppression 済み。",
                 "checker-adjacent first layer、notebook-first theorem line、row-local model-check carrier first の current cut を representative sample から追える。",
             ),
             entry_commands=(
                 "python3 scripts/current_l2_guided_samples.py quickstart problem1",
-                "python3 scripts/current_l2_guided_samples.py matrix problem1",
-                "python3 scripts/current_l2_guided_samples.py bundle problem1",
-                "python3 scripts/current_l2_guided_samples.py smoke problem1",
+                (
+                    "cargo run -q -p mir-runtime --example mir_current_l2 -- "
+                    "check-source-sample "
+                    "samples/prototype/current-l2-typed-proof-model-check/"
+                    "p10-typed-authorized-fingerprint-declassification.txt "
+                    "--format pretty"
+                ),
+                "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
+                "python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams",
             ),
             mixed_gates=(
                 "stronger typed-surface actual adoption",
@@ -1408,9 +1414,9 @@ def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
                 "first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract",
             ),
             reopen_guidance=(
-                "`matrix problem1` で `p06` と `p10 / p11 / p12 / p15 / p16` の役割差を見て、typed source principal を premature に上げない current cut を保つ。",
-                "`bundle problem1` と `samples/lean/current-l2/p06-typed-proof-owner-handoff/` を起点に、theorem-first pilot artifact と notebook-first transport floor を確認する。",
-                "parser companion inspector と `bundle problem1` を合わせて見て、row-local model-check carrier / thin experimental companion の範囲を越えて final public checker 契約へ飛ばないことを確認する。",
+                "`check-source-sample` で `p10 / p11 / p12 / p15 / p16` の checker-adjacent executable slice を見て、typed source principal を premature に上げない current cut を保つ。",
+                "`emit-theorem problem1` と `samples/lean/current-l2/p06-typed-proof-owner-handoff/` を起点に、theorem-first pilot artifact と notebook-first transport floor を確認する。",
+                "`lane problem1-final-public-seams` と `matrix problem1` / `bundle problem1` を合わせて見て、model-check carrier first のまま final public checker 契約へ飛ばないことを確認する。",
             ),
             closed_split_packages=(
                 "typed source principal split",
@@ -1619,9 +1625,15 @@ def build_remaining_residual_lane_manifest(specs: Mapping[str, ProblemSpec]) -> 
             ),
             "focus": list(problem1_row.mixed_gates),
             "entry_commands": [
+                (
+                    "cargo run -q -p mir-runtime --example mir_current_l2 -- "
+                    "check-source-sample "
+                    "samples/prototype/current-l2-typed-proof-model-check/"
+                    "p10-typed-authorized-fingerprint-declassification.txt "
+                    "--format pretty"
+                ),
+                "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
                 "python3 scripts/current_l2_guided_samples.py reopen-map problem1",
-                "python3 scripts/current_l2_guided_samples.py matrix problem1",
-                "python3 scripts/current_l2_guided_samples.py bundle problem1",
             ],
             "anchor_refs": list(problem1_row.anchor_refs)
             + [

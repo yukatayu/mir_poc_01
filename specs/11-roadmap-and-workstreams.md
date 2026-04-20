@@ -901,6 +901,10 @@ actual-adoption floor では、
   `specs/examples/602`
   - `emit-scenario problem2` helper と Problem 2 bundle doc 側の runnable-scenario step を actualize し、representative pair `p07 / p08`、reserve route `p09`、negative pair `p13 / p14` を repo-local output dir へ materialize する scenario loop として読んでよい
   - Package 129 close 後の current active queue は Package 130...132 executable residual reopen / closeout sync と later mixed/user-spec residual である
+- Problem 1 executable residual reopen sync:
+  `specs/examples/603`
+  - `reopen-map problem1`、`lane problem1-final-public-seams`、Problem 1 bundle doc を executable evidence 側へ再同期し、`check-source-sample` → `emit-theorem problem1` → lane summary の reopen order を actualize してよい
+  - Package 130 close 後の current active queue は Package 131...132 executable residual reopen / closeout sync と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

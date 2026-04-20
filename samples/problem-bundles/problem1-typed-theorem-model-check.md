@@ -176,6 +176,10 @@ full dependent type、general theorem proving in compiler、final public checker
 - compressed residual lane は
   `python3 scripts/current_l2_guided_samples.py residuals`
   から、Problem 1 mixed gate lane と true user-spec residual の切り分けを 1 枚で見直す。
+- executable residual reopen を helper summary でまとめて見たいときは
+  `python3 scripts/current_l2_guided_samples.py reopen-map problem1`
+  から入り、`check-source-sample` → `emit-theorem problem1` → `lane problem1-final-public-seams`
+  の current reopen order を見る。
 - Problem 1 final-public-seam lane を個別に追いたいときは
   `python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams`
   から、typed source principal / theorem public-contract / model-check public-contract の reopen order を見る。

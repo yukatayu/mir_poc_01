@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 19:17 JST
+最終更新: 2026-04-20 19:27 JST
 
 ## この文書について
 
@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 130 Problem 1 executable residual reopen sync
   - Package 131 Problem 2 executable residual reopen sync
   - Package 132 repo-local once-through closeout sync after executable loops
   を先頭に追う。
@@ -65,7 +64,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `130` Problem 1 executable residual reopen sync | typed / theorem / model-check の current executable loop を final-public-seam lane に結び直す | `S` | `Macro 5/7` | `check-source-sample`、`emit-theorem problem1`、`lane problem1-final-public-seams` を current executable reopen order として docs / helper に再同期する | Problem 1 residual mixed gate が executable evidence 付き reopen order として再確認できる |
 | `131` Problem 2 executable residual reopen sync | order / handoff / witness-provider の current executable loop を final-public-seam lane に結び直す | `S` | `Macro 6/7` | `emit-scenario problem2`、`lane problem2-final-public-seams`、`residuals` を current executable reopen order として docs / helper に再同期する | Problem 2 residual mixed gate が executable evidence 付き reopen order として再確認できる |
 | `132` repo-local once-through closeout sync after executable loops | executable loop 群を踏まえた near-end closeout snapshot を stale wording なしで再構成する | `M` | `Macro 5/6/7` | Package 127...131 の executable loop を current completion reading に接続し、mixed gate / true user-spec residual / reserve integration lane を再圧縮する | queue drift が消え、remaining work が mixed / user-spec / reserve integration に分かれて読める |
 
@@ -583,9 +581,9 @@
 ### Package 130 — Problem 1 executable residual reopen sync
 
 - current reading:
-  `check-source-sample` executable slice、`emit-theorem problem1` emitted-artifact loop、`lane problem1-final-public-seams` reopen lane を 1 本の executable residual reopen order として揃え直す。
+  close 済み。`check-source-sample` executable slice、`emit-theorem problem1` emitted-artifact loop、`lane problem1-final-public-seams` reopen lane を 1 本の executable residual reopen order として揃え直した。
 - current recommendation:
-  typed source principal / theorem public-contract / model-check public-contract の mixed gate 自体は増やさず、Problem 1 側は current executable loop を使って reopen order の drift suppression に集中する。
+  typed source principal / theorem public-contract / model-check public-contract の mixed gate 自体は増やさず、Problem 1 側は current executable loop を使って reopen order の drift suppression に集中する line は close 済みである。
 - stop line:
   final typed source principal
   final public theorem contract
@@ -1110,6 +1108,5 @@
 
 ## next reopen order
 
-1. Package 130 で Problem 1 executable loop と final-public-seam lane の reopen order を再同期する。
-2. Package 131 で Problem 2 executable loop と final-public-seam lane の reopen order を再同期する。
-3. Package 132 で executable loop 後の closeout snapshot を stale wording なしで再圧縮する。
+1. Package 131 で Problem 2 executable loop と final-public-seam lane の reopen order を再同期する。
+2. Package 132 で executable loop 後の closeout snapshot を stale wording なしで再圧縮する。
