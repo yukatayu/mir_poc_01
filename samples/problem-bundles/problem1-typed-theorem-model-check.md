@@ -153,9 +153,9 @@ full dependent type、general theorem proving in compiler、final public checker
     から入り、`p06` representative と `p10 / p11 / p12 / p15 / p16` 補助 sample の役割差を保ったまま
     typed source principal の reopen point だけを独立 package として読める。
 - `theorem public-contract split`
-  - `python3 scripts/current_l2_guided_samples.py bundle problem1`
-    と `samples/lean/current-l2/p06-typed-proof-owner-handoff/`
-    から入り、review-unit first / notebook-consumer first のまま theorem public-contract residual を切り出す。
+  - close 済み。`python3 scripts/current_l2_guided_samples.py split problem1 theorem-public-contract`
+    から入り、review-unit first / notebook-consumer first のまま theorem public-contract residual を
+    typed residual と model-check residual から切り離して読める。
 - `model-check public-contract split`
   - `python3 scripts/current_l2_guided_samples.py matrix problem1`
     と `python3 scripts/current_l2_guided_samples.py bundle problem1`
@@ -176,6 +176,21 @@ python3 scripts/current_l2_guided_samples.py split problem1 typed-source-princip
   kept separate として表示され、typed residual だけを narrow に読む current cut を確認できる。
 - stop line が `final typed source principal` / `final typed calculus` /
   `final public verifier contract` に留まり、theorem/model-check の public contract と混ざらないことを確認できる。
+
+## theorem public-contract split の入口
+
+```bash
+python3 scripts/current_l2_guided_samples.py split problem1 theorem-public-contract
+```
+
+見るべき結果:
+
+- `p06` representative と Lean artifact / theorem-first pilot bundle 導線が、
+  theorem public-contract residual の入口としてまとまって見える。
+- `typed source principal split` と `model-check public-contract split` が
+  kept separate として表示され、theorem residual だけを narrow に読む current cut を確認できる。
+- stop line が `final public theorem contract` / `concrete theorem prover brand` /
+  `final public verifier contract` に留まり、typed source principal や model-check 側の residual と混ざらないことを確認できる。
 
 ## stop line
 

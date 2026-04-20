@@ -42,6 +42,11 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
             "python3 scripts/current_l2_guided_samples.py split problem1 typed-source-principal",
             text,
         )
+        self.assertIn("theorem public-contract split の入口", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py split problem1 theorem-public-contract",
+            text,
+        )
         self.assertIn("stronger typed-surface actual adoption", text)
         self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)

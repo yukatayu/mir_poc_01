@@ -853,6 +853,10 @@ actual-adoption floor では、
   `specs/examples/590`
   - `split problem1 typed-source-principal` helper と sample bundle doc 側の typed split entrypoint を actualize し、Problem 1 typed residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
   - Package 117 close 後の current active queue は Package 118 Problem 1 theorem public-contract split、Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
+- Problem 1 theorem public-contract split helper actualization:
+  `specs/examples/591`
+  - `split problem1 theorem-public-contract` helper と sample bundle doc 側の theorem split entrypoint を actualize し、Problem 1 theorem public-contract residual だけを representative `p06` と theorem-first pilot / Lean artifact 導線付きで narrow に読んでよい
+  - Package 118 close 後の current active queue は Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

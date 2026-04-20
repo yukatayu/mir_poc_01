@@ -868,6 +868,40 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         )
         self.assertIn("theorem public-contract split", payload["kept_separate"])
 
+    def test_problem1_theorem_split_text_mentions_bundle_command_and_kept_separate(self) -> None:
+        text = guided.render_problem_split_package_from_runtime(
+            "problem1",
+            "theorem-public-contract",
+            output_format="pretty",
+        )
+
+        self.assertIn("theorem public-contract split", text)
+        self.assertIn("p06-typed-proof-owner-handoff", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)
+        self.assertIn("typed source principal split", text)
+        self.assertIn("model-check public-contract split", text)
+        self.assertIn("final public theorem contract", text)
+
+    def test_problem1_theorem_split_json_contains_expected_manifest(self) -> None:
+        rendered = guided.render_problem_split_package_from_runtime(
+            "problem1",
+            "theorem-public-contract",
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["package_id"], "theorem-public-contract")
+        self.assertEqual(payload["package_name"], "theorem public-contract split")
+        self.assertEqual(payload["problem_id"], "problem1")
+        self.assertEqual(payload["representative_samples"], ["p06-typed-proof-owner-handoff"])
+        self.assertEqual(payload["supporting_samples"], ["p06-typed-proof-owner-handoff"])
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py bundle problem1",
+            payload["commands"][0],
+        )
+        self.assertIn("typed source principal split", payload["kept_separate"])
+        self.assertIn("model-check public-contract split", payload["kept_separate"])
+
     def test_main_split_command_uses_split_renderer(self) -> None:
         fake_text = "typed source principal split\n..."
 
