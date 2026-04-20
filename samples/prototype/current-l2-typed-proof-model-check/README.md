@@ -25,6 +25,15 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
   --format pretty
 ```
 
+matrix で representative と residual bridge-floor をまとめて見る例:
+
+```bash
+python3 scripts/current_l2_guided_samples.py matrix problem1
+```
+
+- `p06` は theorem/model-check public seam preview / reopen threshold が reached の representative sample として出る。
+- `p10 / p11 / p12 / p15 / p16` は `typed_checker_hint_preview` が reached、theorem/model-check public seam は `bridge-only(...)` の residual bundle として出る。
+
 ## あわせて見る補助サンプル
 
 ### `p10-typed-authorized-fingerprint-declassification`
@@ -55,6 +64,8 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
   - proof notebook review unit と model-check concrete carrier の repo-local emitted artifact preview を示す。
 - `typed_checker_hint_preview`
   - checker-adjacent first layer の current cut を示す。
+- `python3 scripts/current_l2_guided_samples.py matrix problem1`
+  - representative public-seam sample と checker-adjacent bridge-floor sample を 1 表で見せる。
 
 ## 注意
 

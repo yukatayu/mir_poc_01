@@ -41,6 +41,16 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
   --format pretty
 ```
 
+matrix で first line / reserve / negative pair をまとめて見る例:
+
+```bash
+python3 scripts/current_l2_guided_samples.py matrix problem2
+```
+
+- `p07 / p08` は first-line representative として出る。
+- `p09` は delegated RNG practical reserve route として出る。
+- `p13 / p14` は negative static-stop pair として出る。
+
 ## reserve / negative として見るサンプル
 
 ### `p09-dice-delegated-rng-provider-placement`
@@ -64,6 +74,8 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
   - representative reached pair / reserve route / negative pair の current reading を示す。
 - `authoritative_room_reserve_strengthening_lane`
   - witness strengthening / delegated RNG practical route / model-check second line を separate status のまま示す。
+- `python3 scripts/current_l2_guided_samples.py matrix problem2`
+  - first line / reserve lane / public-shape residual / negative static-stop pair を 1 表で見せる。
 
 ## 注意
 

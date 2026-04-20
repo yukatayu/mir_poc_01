@@ -67,7 +67,7 @@
   - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
 - `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
   - 2026-04-20 時点の repo-local once-through completion handoff であり、FAQ 10 以後の parser-side closeout / finite-index strong typing / Lean-first theorem skeleton / model-check second-line / order-handoff helper-local source surface / authoritative-room first scenario / docs closeout sequenceを 1 本の staged package 列として整理する。
-  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569`、`570`、`571`、`572` 以後の once-through closeout reading と residual bundle 群の current explanation source として使ってよい。
+  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569`、`570`、`571`、`572`、`573`、`574` 以後の once-through closeout reading と residual bundle 群の current explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -795,6 +795,10 @@
   - current Phase 5 / Package 97 closeout として、`auditable_authority_witness`、`delegated_rng_service`、model-check second line を `run-source-sample` helper summary の `authoritative_room_reserve_strengthening_lane` に separate status のまま actualize し、current live queue を Package 98 へ narrow に進める補助文書。
 - `specs/examples/572-current-l2-guided-problem-sample-entrypoints-and-runner.md`
   - current Phase 5 / Package 98 closeout として、Problem 1 / Problem 2 の representative sample entrypoint を `samples/` README と `scripts/current_l2_guided_samples.py` に actualize し、current live queue を residual bundle 群へ戻す補助文書。
+- `specs/examples/573-current-l2-problem1-public-seam-residual-bundle-matrix.md`
+  - current Phase 5 / Package 99 closeout として、Problem 1 representative bundle `p06 / p10 / p11 / p12 / p15 / p16` の theorem/model-check public-seam residual を `matrix problem1` helper に actualize し、`p06` representative と first strong typing quintet の bridge-floor bundle を drift なく読めるようにする補助文書。
+- `specs/examples/574-current-l2-problem2-public-shape-residual-bundle-matrix.md`
+  - current Phase 6 / Package 100 closeout として、Problem 2 representative bundle `p07 / p08 / p09 / p13 / p14` の public-shape residual を `matrix problem2` helper に actualize し、first-line representative / reserve practical route / negative static-stop pair を drift なく読めるようにする補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

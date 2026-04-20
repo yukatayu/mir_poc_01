@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 12:47 JST
+最終更新: 2026-04-20 13:12 JST
 
 ## この文書について
 
@@ -35,8 +35,8 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 99 theorem/model-check public-seam residual bundle
-  - Package 100 witness/provider/public-shape residual bundle
+  - Package 101 theorem-first pilot bundle
+  - Package 102 authoritative-room scenario bundle
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -64,8 +64,8 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `99` theorem/model-check public-seam residual bundle | theorem result-object / model-check public-checker / final public-contract reopen threshold の residual mixed gate を representative sample bundle 単位で narrow に整理する | `M` | `Macro 5/7` | `p06 / p10 / p11 / p12 / p15 / p16` の guide と helper summary を public seam 残件の inventory に使い、comparison debt を増やさず residual mixed gate を圧縮する | Problem 1 residual mixed gate が representative sample bundle 単位で追え、next reopen が 1 段 narrow になる |
-| `100` witness/provider/public-shape residual bundle | final public witness/provider/artifact contract mixed gate を representative sample bundle 単位で narrow に整理する | `M` | `Macro 6/7` | `p07 / p08 / p09 / p13 / p14` の guide と helper summary を public-shape residual inventory に使い、first completion line と reserve line の boundary を崩さず残件を圧縮する | Problem 2 residual mixed gate が representative sample bundle 単位で追え、exhaustive catalog/user-spec residual と切り分けられる |
+| `101` theorem-first pilot bundle | theorem-first external integration target を repo-local emitted artifact / Lean sample corpus / guided helper の一本道にまとめる | `M` | `Macro 5/7` | `problem1` guide、`matrix problem1`、`samples/lean/current-l2/`、repo-local theorem artifact refs を 1 本の pilot bundle として整理し、comparison debt を増やさず theorem-first pilot の使い方を固める | Problem 1 sample から theorem-first pilot artifact 群まで一本道で辿れ、final public theorem contract later の stop line を保てる |
+| `102` authoritative-room scenario bundle | first application target を representative pair / reserve route / negative pair / artifact route まで一本道にまとめる | `M` | `Macro 6/7` | `problem2` guide、`matrix problem2`、authoritative-room helper summary、reserve lane、negative pair を 1 本の scenario bundle として整理し、first completion line と reserve line の boundary を崩さず実用 bundle を固める | Problem 2 sample から first line / reserve / negative / artifact route まで一本道で辿れ、final public witness/provider/artifact contract later の stop line を保てる |
 
 ## recently closed package note
 
@@ -218,9 +218,9 @@
 ### Package 99 — theorem/model-check public-seam residual bundle
 
 - current reading:
-  next active bundle。Problem 1 current first line 自体は close 済みなので、ここでは representative sample bundle `p06 / p10 / p11 / p12 / p15 / p16` と existing helper summary を使い、theorem result-object / model-check public-checker / final public-contract reopen threshold の residual mixed gate だけを narrow に整理する。
+  close 済み。Problem 1 current first line 自体は close 済みのまま、representative sample bundle `p06 / p10 / p11 / p12 / p15 / p16` と existing helper summary を使い、theorem result-object / model-check public-checker / final public-contract reopen threshold の residual mixed gate を `matrix problem1` helper と README で narrow に整理した。
 - current recommendation:
-  sample corpus や theorem/model-check compare floor を増やさず、guided sample `problem1` と existing `bridge_floor_refs` / `verification_preview` / `artifact_preview` / `typed_checker_hint_preview` を入口にして、public seam 残件の reopen 順を整理する。
+  sample corpus や theorem/model-check compare floor を増やさず、guided sample `problem1`、existing `bridge_floor_refs` / `verification_preview` / `artifact_preview` / `typed_checker_hint_preview`、`matrix problem1` を入口にして、public seam 残件の reopen 順を readable に保つ。
 - stop line:
   final public theorem result object
   consumer-shaped theorem payload public contract
@@ -231,13 +231,35 @@
 ### Package 100 — witness/provider/public-shape residual bundle
 
 - current reading:
-  next active bundle。Problem 2 current first line と reserve strengthening lane 自体は close 済みなので、ここでは representative sample bundle `p07 / p08 / p09 / p13 / p14` と existing helper summary を使い、final public witness/provider/artifact contract mixed gate だけを narrow に整理する。
+  close 済み。Problem 2 current first line と reserve strengthening lane 自体は close 済みのまま、representative sample bundle `p07 / p08 / p09 / p13 / p14` と existing helper summary を使い、final public witness/provider/artifact contract mixed gate を `matrix problem2` helper と README で narrow に整理した。
 - current recommendation:
-  sample corpus を増やさず、guided sample `problem2` と existing `surface_preview` / `authoritative_room_first_scenario_actual_adoption` / `authoritative_room_reserve_strengthening_lane` を入口にして、claim/payload split first の current cutを保ったまま public-shape residual を圧縮する。
+  sample corpus を増やさず、guided sample `problem2`、existing `surface_preview` / `authoritative_room_first_scenario_actual_adoption` / `authoritative_room_reserve_strengthening_lane`、`matrix problem2` を入口にして、claim/payload split first の current cutを保ったまま public-shape residual を圧縮する。
 - stop line:
   final public witness schema
   final public provider receipt schema
   final emitted-handoff contract
+  exhaustive shared-space catalog
+
+### Package 101 — theorem-first pilot bundle
+
+- current reading:
+  next active bundle。Problem 1 residual matrix まで close 済みなので、次は guided sample `problem1`、`matrix problem1`、`samples/lean/current-l2/`、repo-local theorem artifact refs を 1 本の theorem-first pilot bundle として束ねる。
+- current recommendation:
+  final public theorem contract や concrete prover brand を採らず、repo-local emitted artifact / Lean sample corpus / command path の bundle 化だけを進める。
+- stop line:
+  final public theorem result object
+  concrete theorem prover brand
+  final public verifier contract
+
+### Package 102 — authoritative-room scenario bundle
+
+- current reading:
+  next active bundle。Problem 2 residual matrix まで close 済みなので、次は guided sample `problem2`、`matrix problem2`、authoritative-room first scenario helper summary、reserve lane、negative pair を 1 本の scenario bundle として束ねる。
+- current recommendation:
+  final public witness/provider/artifact contract を採らず、repo-local scenario reading / artifact route / reserve split を一本道で読める bundle 化だけを進める。
+- stop line:
+  final public witness schema
+  final public provider receipt schema
   exhaustive shared-space catalog
 
 ### Package 58 — helper / CLI hardening and broader coverage
@@ -736,6 +758,6 @@
 
 ## next reopen order
 
-1. Package 99 で theorem/model-check public-seam residual bundle を representative sample bundle 単位に整理する。
-2. Package 100 で witness/provider/public-shape residual bundle を representative sample bundle 単位に整理する。
+1. Package 101 で theorem-first pilot bundle を repo-local emitted artifact / Lean sample corpus / helper command までまとめる。
+2. Package 102 で authoritative-room scenario bundle を representative pair / reserve / negative / artifact route までまとめる。
 3. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

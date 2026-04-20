@@ -4278,3 +4278,16 @@
   - `docs/reports/0854-package97-authoritative-room-reserve-strengthening-lane-tightening.md`
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
+## 2026-04-20 Package 99/100 residual bundle matrix addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`samples/prototype/current-l2-typed-proof-model-check/README.md`、`samples/prototype/current-l2-order-handoff/README.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/568-current-l2-theorem-model-check-bridge-carrier-reconnect-after-finite-index-widening.md`
+  - `specs/examples/570-current-l2-authoritative-room-first-scenario-helper-summary-tightening.md`
+  - `specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md`
+  - `specs/examples/572-current-l2-guided-problem-sample-entrypoints-and-runner.md`
+  - `specs/examples/573-current-l2-problem1-public-seam-residual-bundle-matrix.md`
+  - `specs/examples/574-current-l2-problem2-public-shape-residual-bundle-matrix.md`
+  - `docs/reports/0856-package99-100-problem-residual-bundle-matrices.md`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`

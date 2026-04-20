@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import subprocess
 import sys
+from collections.abc import Callable, Mapping
+from dataclasses import asdict
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -29,6 +32,31 @@ class ProblemSpec:
     summary: str
     focus_points: tuple[str, ...]
     samples: tuple[GuidedSample, ...]
+
+
+@dataclass(frozen=True)
+class Problem1ResidualRow:
+    sample_id: str
+    primary: bool
+    typed_hint: str
+    theorem_preview: str
+    theorem_reopen: str
+    model_check_preview: str
+    model_check_reopen: str
+    residual_reading: str
+
+
+@dataclass(frozen=True)
+class Problem2ResidualRow:
+    sample_id: str
+    primary: bool
+    static_gate: str
+    surface: str
+    first_line: str
+    public_seam: str
+    reserve_lane: str
+    reserve_detail: str
+    residual_reading: str
 
 
 def problem_specs() -> dict[str, ProblemSpec]:
@@ -175,6 +203,23 @@ def build_run_commands(
     ]
 
 
+def build_single_run_command(sample: GuidedSample, *, output_format: str) -> list[str]:
+    return [
+        "cargo",
+        "run",
+        "-q",
+        "-p",
+        "mir-runtime",
+        "--example",
+        "mir_current_l2",
+        "--",
+        "run-source-sample",
+        str(sample.sample_path),
+        "--format",
+        output_format,
+    ]
+
+
 def render_problem_guide(spec: ProblemSpec) -> str:
     lines = [
         spec.title,
@@ -224,6 +269,332 @@ def run_problem(spec: ProblemSpec, *, output_format: str, include_all: bool) -> 
     return 0
 
 
+def load_sample_report(sample: GuidedSample) -> dict:
+    completed = subprocess.run(
+        build_single_run_command(sample, output_format="json"),
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"sample `{sample.sample_id}` failed with exit code {completed.returncode}:\n{completed.stderr}"
+        )
+    return json.loads(completed.stdout)
+
+
+def helper_status(report: Mapping[str, object], key: str) -> str:
+    preview = report.get(key)
+    if not isinstance(preview, Mapping):
+        return "missing"
+
+    status = preview.get("status")
+    if status == "reached":
+        return "reached"
+    if status == "guarded_not_reached":
+        bridge_floor_refs = preview.get("bridge_floor_refs")
+        if isinstance(bridge_floor_refs, list) and bridge_floor_refs:
+            return f"bridge-only({len(bridge_floor_refs)})"
+        return "guarded"
+    if isinstance(status, str):
+        return status
+    return "missing"
+
+
+def helper_plain_status(report: Mapping[str, object], key: str) -> str:
+    preview = report.get(key)
+    if not isinstance(preview, Mapping):
+        return "missing"
+
+    status = preview.get("status")
+    if isinstance(status, str):
+        if status == "guarded_not_reached":
+            return "guarded"
+        return status
+    return "missing"
+
+
+def problem1_residual_reading(report: Mapping[str, object]) -> str:
+    theorem_preview = helper_status(report, "theorem_result_object_preview")
+    theorem_reopen = helper_status(report, "theorem_final_public_contract_reopen_threshold")
+    model_preview = helper_status(report, "model_check_public_checker_preview")
+    model_reopen = helper_status(report, "model_check_final_public_contract_reopen_threshold")
+    typed_hint = helper_status(report, "typed_checker_hint_preview")
+    verification_preview = report.get("verification_preview")
+    formal_hook_status = None
+    if isinstance(verification_preview, Mapping):
+        formal_hook_status = verification_preview.get("formal_hook_status")
+
+    if (
+        theorem_preview == "reached"
+        and theorem_reopen == "reached"
+        and model_preview == "reached"
+        and model_reopen == "reached"
+    ):
+        return "public-seam representative"
+    if typed_hint == "reached" and formal_hook_status == "reached":
+        return "checker-adjacent bridge-floor"
+    if formal_hook_status == "reached":
+        return "formal-hook bridge-floor"
+    return "guarded"
+
+
+def build_problem1_residual_rows(
+    spec: ProblemSpec,
+    *,
+    loader: Callable[[GuidedSample], Mapping[str, object]] = load_sample_report,
+) -> list[Problem1ResidualRow]:
+    rows: list[Problem1ResidualRow] = []
+    for sample in spec.samples:
+        report = loader(sample)
+        rows.append(
+            Problem1ResidualRow(
+                sample_id=sample.sample_id,
+                primary=sample.primary,
+                typed_hint=helper_status(report, "typed_checker_hint_preview"),
+                theorem_preview=helper_status(report, "theorem_result_object_preview"),
+                theorem_reopen=helper_status(
+                    report, "theorem_final_public_contract_reopen_threshold"
+                ),
+                model_check_preview=helper_status(report, "model_check_public_checker_preview"),
+                model_check_reopen=helper_status(
+                    report, "model_check_final_public_contract_reopen_threshold"
+                ),
+                residual_reading=problem1_residual_reading(report),
+            )
+        )
+    return rows
+
+
+def checker_static_gate_verdict(report: Mapping[str, object]) -> str:
+    checker_floor = report.get("checker_floor")
+    if not isinstance(checker_floor, Mapping):
+        return "missing"
+    static_gate = checker_floor.get("static_gate")
+    if not isinstance(static_gate, Mapping):
+        return "missing"
+    verdict = static_gate.get("verdict")
+    if isinstance(verdict, str):
+        return verdict
+    return "missing"
+
+
+def problem2_reserve_detail(report: Mapping[str, object]) -> str:
+    lane = report.get("authoritative_room_reserve_strengthening_lane")
+    if not isinstance(lane, Mapping):
+        return "missing"
+
+    parts: list[str] = []
+    if lane.get("witness_strengthening_status") == "reached":
+        parts.append("witness")
+    if lane.get("delegated_rng_service_status") == "reached":
+        parts.append("delegated-rng")
+    if lane.get("model_check_second_line_status") == "reached":
+        parts.append("model-check")
+    if parts:
+        return "+".join(parts)
+    if lane.get("status") == "guarded_not_reached":
+        return "guarded"
+    return "missing"
+
+
+def problem2_residual_reading(report: Mapping[str, object]) -> str:
+    static_gate = checker_static_gate_verdict(report)
+    first_line = helper_plain_status(report, "authoritative_room_first_scenario_actual_adoption")
+    reserve_lane = helper_plain_status(report, "authoritative_room_reserve_strengthening_lane")
+    reserve_detail = problem2_reserve_detail(report)
+
+    if static_gate in {"underdeclared", "malformed"}:
+        return "negative static-stop"
+    if first_line == "reached":
+        return "first-line representative"
+    if reserve_lane == "reached" and reserve_detail == "delegated-rng+model-check":
+        return "reserve practical route"
+    if reserve_lane == "reached":
+        return "reserve strengthening route"
+    return "guarded"
+
+
+def build_problem2_residual_rows(
+    spec: ProblemSpec,
+    *,
+    loader: Callable[[GuidedSample], Mapping[str, object]] = load_sample_report,
+) -> list[Problem2ResidualRow]:
+    rows: list[Problem2ResidualRow] = []
+    for sample in spec.samples:
+        report = loader(sample)
+        rows.append(
+            Problem2ResidualRow(
+                sample_id=sample.sample_id,
+                primary=sample.primary,
+                static_gate=checker_static_gate_verdict(report),
+                surface=helper_plain_status(
+                    report, "order_handoff_source_surface_artifact_actual_adoption"
+                ),
+                first_line=helper_plain_status(
+                    report, "authoritative_room_first_scenario_actual_adoption"
+                ),
+                public_seam=helper_plain_status(
+                    report, "order_handoff_witness_provider_public_seam_compression"
+                ),
+                reserve_lane=helper_plain_status(
+                    report, "authoritative_room_reserve_strengthening_lane"
+                ),
+                reserve_detail=problem2_reserve_detail(report),
+                residual_reading=problem2_residual_reading(report),
+            )
+        )
+    return rows
+
+
+def render_problem1_residual_matrix(
+    spec: ProblemSpec,
+    rows: list[Problem1ResidualRow],
+) -> str:
+    headers = [
+        "sample",
+        "typed hint",
+        "theorem preview",
+        "theorem reopen",
+        "model-check preview",
+        "model-check reopen",
+        "reading",
+    ]
+    table_rows = [
+        [
+            row.sample_id + (" [primary]" if row.primary else ""),
+            row.typed_hint,
+            row.theorem_preview,
+            row.theorem_reopen,
+            row.model_check_preview,
+            row.model_check_reopen,
+            row.residual_reading,
+        ]
+        for row in rows
+    ]
+
+    widths = [len(header) for header in headers]
+    for row in table_rows:
+        for index, cell in enumerate(row):
+            widths[index] = max(widths[index], len(cell))
+
+    def render_row(cells: list[str]) -> str:
+        return " | ".join(
+            cell.ljust(widths[index]) for index, cell in enumerate(cells)
+        )
+
+    lines = [
+        "Problem 1 residual bundle",
+        "",
+        spec.summary,
+        "",
+        render_row(headers),
+        render_row(["-" * width for width in widths]),
+    ]
+    lines.extend(render_row(row) for row in table_rows)
+    lines.extend(
+        [
+            "",
+            "読み方:",
+            "- `reached` は representative public-seam preview / reopen threshold がその sample で actualize していることを示す。",
+            "- `bridge-only(n)` は final public seam 自体は guarded のまま、bridge floor が `n` 個の ref で sample-visible になっていることを示す。",
+            "- `typed hint` は checker-adjacent first layer の到達度であり、theorem/model-check public seam そのものではない。",
+            "",
+            "current recommendation:",
+            "- `p06` を Problem 1 public-seam representative とし、`p10 / p11 / p12 / p15 / p16` は checker-adjacent / Lean-first theorem bridge / row-local model-check bridge の residual bundle として読む。",
+            "- stronger typed surface、final public theorem result object、final public checker artifact、final public verifier contract はこの matrix でも still later に留める。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem2_residual_matrix(
+    spec: ProblemSpec,
+    rows: list[Problem2ResidualRow],
+) -> str:
+    headers = [
+        "sample",
+        "static gate",
+        "surface",
+        "first line",
+        "public seam",
+        "reserve lane",
+        "reserve detail",
+        "reading",
+    ]
+    table_rows = [
+        [
+            row.sample_id + (" [primary]" if row.primary else ""),
+            row.static_gate,
+            row.surface,
+            row.first_line,
+            row.public_seam,
+            row.reserve_lane,
+            row.reserve_detail,
+            row.residual_reading,
+        ]
+        for row in rows
+    ]
+
+    widths = [len(header) for header in headers]
+    for row in table_rows:
+        for index, cell in enumerate(row):
+            widths[index] = max(widths[index], len(cell))
+
+    def render_row(cells: list[str]) -> str:
+        return " | ".join(
+            cell.ljust(widths[index]) for index, cell in enumerate(cells)
+        )
+
+    lines = [
+        "Problem 2 residual bundle",
+        "",
+        spec.summary,
+        "",
+        render_row(headers),
+        render_row(["-" * width for width in widths]),
+    ]
+    lines.extend(render_row(row) for row in table_rows)
+    lines.extend(
+        [
+            "",
+            "読み方:",
+            "- `first line = reached` は authoritative-room first completion pair (`p07 / p08`) の current default がその sample で actualize していることを示す。",
+            "- `reserve lane = reached` は witness strengthening / delegated RNG / model-check second line の reserve package がその sample で見えていることを示す。",
+            "- `public seam` は final public witness/provider/artifact contract ではなく、helper-local residual compression の到達度だけを示す。",
+            "- `static gate` が `underdeclared` または `malformed` の行は negative static-stop pair として読む。",
+            "",
+            "current recommendation:",
+            "- `p07 / p08` を first-line representative とし、`p09` は delegated RNG practical reserve route、`p13 / p14` は negative static-stop pair として読む。",
+            "- final public witness schema、final public provider receipt schema、final emitted-handoff contract、exhaustive shared-space catalog はこの matrix でも still later に留める。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem1_residual_matrix_from_runtime(
+    spec: ProblemSpec,
+    *,
+    output_format: str,
+) -> str:
+    rows = build_problem1_residual_rows(spec)
+    if output_format == "json":
+        return json.dumps([asdict(row) for row in rows], ensure_ascii=False, indent=2)
+    return render_problem1_residual_matrix(spec, rows)
+
+
+def render_problem2_residual_matrix_from_runtime(
+    spec: ProblemSpec,
+    *,
+    output_format: str,
+) -> str:
+    rows = build_problem2_residual_rows(spec)
+    if output_format == "json":
+        return json.dumps([asdict(row) for row in rows], ensure_ascii=False, indent=2)
+    return render_problem2_residual_matrix(spec, rows)
+
+
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Problem 1 / Problem 2 の guided sample を repo-local command と一緒に案内する helper。"
@@ -244,6 +615,13 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="primary sample だけでなく reserve / negative sample まで流す",
     )
 
+    matrix_parser = subparsers.add_parser(
+        "matrix",
+        help="guided problem の residual bundle を sample 単位で表示する",
+    )
+    matrix_parser.add_argument("problem_id", choices=("problem1", "problem2"))
+    matrix_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     return parser.parse_args(argv)
 
 
@@ -260,6 +638,17 @@ def main(argv: list[str] | None = None) -> int:
     if args.subcommand == "show":
         print(render_problem_guide(spec))
         return 0
+
+    if args.subcommand == "matrix":
+        try:
+            if args.problem_id == "problem1":
+                print(render_problem1_residual_matrix_from_runtime(spec, output_format=args.format))
+                return 0
+            print(render_problem2_residual_matrix_from_runtime(spec, output_format=args.format))
+            return 0
+        except RuntimeError as error:
+            print(str(error), file=sys.stderr)
+            return 1
 
     return run_problem(spec, output_format=args.format, include_all=args.all)
 
