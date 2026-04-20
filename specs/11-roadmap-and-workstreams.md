@@ -869,6 +869,10 @@ actual-adoption floor では、
   `specs/examples/594`
   - `split problem2 witness-provider-public-shape` helper と sample bundle doc 側の witness-provider split entrypoint を actualize し、Problem 2 witness/provider public-shape residual だけを representative/reserve/negative supporting set と kept-separate residual 付きで narrow に読んでよい
   - Package 121 close 後の current active queue は split-package closeout 後の residual public-seam maintenance と later mixed/user-spec residual である
+- representative problem reopen-map split closeout sync:
+  `specs/examples/595`
+  - `reopen-map problem1|problem2` helper public surface から stale な `next split packages` 表示を外し、`split package closeout` と remaining mixed gate を helper public surface に actualize してよい
+  - Package 122 close 後の current active queue は remaining mixed-gate compression と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

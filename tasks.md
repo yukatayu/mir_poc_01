@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 17:24 JST
+最終更新: 2026-04-20 17:40 JST
 
 ## この文書について
 
@@ -35,9 +35,8 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 122 residual public-seam maintenance sync
   - Package 123 remaining mixed-gate compression after split closeout
-  を first package 群として追う。
+  を first package として追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
 ## current executable floor
@@ -64,7 +63,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `122` residual public-seam maintenance sync | split-package closeout 後の remaining public seam reading を docs / helper / queue snapshot で再同期する | `S-M` | `Macro 5/6` | reopened compare debt を増やさず、residual public seam を helper / sample bundle / roadmap snapshot で narrow に揃える | residual public-seam maintenance が 1 本の active line として読める |
 | `123` remaining mixed-gate compression after split closeout | remaining mixed gate と true user-spec residual を compare debt を増やさず narrow に圧縮する | `S-M` | `Macro 5/6/7` | theorem/model-check/witness-provider/final wording の residual mixed gate と true user-spec residual を再分離する | mixed gate / user-spec residual の境界が queue drift なく読める |
 
 ## recently closed package note
@@ -474,9 +472,9 @@
 ### Package 122 — residual public-seam maintenance sync
 
 - current reading:
-  next active bundle。split-package closeout 後の remaining public seam を reopened compare floor に戻さず、helper mirror / sample bundle / roadmap snapshot / queue 読みを narrow に再同期する。
+  close 済み。`reopen-map problem1|problem2` helper public surface から stale な `next split packages` 表示を外し、`split package closeout` と remaining mixed gate を helper public surface に再同期した。
 - current recommendation:
-  `bundle problem1|problem2` / `reopen-map` / split helper 読みを current closeout 後の residual public seam に合わせて再圧縮し、helper / docs / queue snapshot の drift を潰す。
+  `reopen-map` public surface では split helper queue を見せず、split package closeout と remaining mixed gate を helper public surface から読めるようにする。
 - stop line:
   final public wording / contract adoption
   final public parser / checker / runtime API
@@ -989,6 +987,6 @@
 
 ## next reopen order
 
-1. Package 122 で split-package closeout 後の residual public-seam maintenance を helper / docs / queue snapshot に再同期する。
-2. Package 123 で remaining mixed gate と true user-spec residual を narrow に圧縮し直す。
-3. final public seams / packaging / exhaustive catalog 側の reopen line だけを separate lane として残す。
+1. Package 123 で remaining mixed gate と true user-spec residual を narrow に圧縮し直す。
+2. final public seams / packaging / exhaustive catalog 側の reopen line だけを separate lane として残す。
+3. split-package closeout 後の helper / docs / queue snapshot drift を再発させない。

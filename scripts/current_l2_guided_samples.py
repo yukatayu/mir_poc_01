@@ -182,6 +182,7 @@ class ProblemReopenRow:
     entry_commands: tuple[str, ...]
     mixed_gates: tuple[str, ...]
     reopen_guidance: tuple[str, ...]
+    closed_split_packages: tuple[str, ...]
     split_packages: tuple[dict[str, object], ...]
     stop_line: tuple[str, ...]
     anchor_refs: tuple[str, ...]
@@ -914,6 +915,11 @@ def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
                 "`bundle problem1` と `samples/lean/current-l2/p06-typed-proof-owner-handoff/` を起点に、theorem-first pilot artifact と notebook-first transport floor を確認する。",
                 "parser companion inspector と `bundle problem1` を合わせて見て、row-local model-check carrier / thin experimental companion の範囲を越えて final public checker 契約へ飛ばないことを確認する。",
             ),
+            closed_split_packages=(
+                "typed source principal split",
+                "theorem public-contract split",
+                "model-check public-contract split",
+            ),
             split_packages=(
                 {
                     "package_name": "typed source principal split",
@@ -978,6 +984,10 @@ def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
             "`bundle problem2` と parser companion inspector を合わせて見て、edge-row principal / stage-block secondary のまま final source wording や emitted schema を凍らせない current cut を保つ。",
             "shared-space stronger public shape は claim / payload split first を保ったまま、final public witness/provider 契約へは上げずに stop line と user-spec residual を切り分ける。",
         ),
+        closed_split_packages=(
+            "source wording / emitted schema split",
+            "witness-provider public-shape split",
+        ),
         split_packages=(
             {
                 "package_name": "source wording / emitted schema split",
@@ -1026,15 +1036,7 @@ def build_problem_reopen_map_manifest(specs: Mapping[str, ProblemSpec]) -> dict[
                 "entry_commands": list(row.entry_commands),
                 "mixed_gates": list(row.mixed_gates),
                 "reopen_guidance": list(row.reopen_guidance),
-                "split_packages": [
-                    {
-                        "package_name": item["package_name"],
-                        "focus": item["focus"],
-                        "commands": list(item["commands"]),
-                        "reading": item["reading"],
-                    }
-                    for item in row.split_packages
-                ],
+                "closed_split_packages": list(row.closed_split_packages),
                 "stop_line": list(row.stop_line),
                 "anchor_refs": list(row.anchor_refs),
             }
@@ -1069,14 +1071,10 @@ def render_problem_reopen_map(specs: Mapping[str, ProblemSpec]) -> str:
         lines.append("  reopen guidance:")
         for item in row["reopen_guidance"]:
             lines.append(f"    - {item}")
-        if row["split_packages"]:
-            lines.append("  next split packages:")
-            for item in row["split_packages"]:
-                lines.append(f"    - {item['package_name']}")
-                lines.append(f"      focus: {item['focus']}")
-                for command in item["commands"]:
-                    lines.append(f"      command: {command}")
-                lines.append(f"      reading: {item['reading']}")
+        if row["closed_split_packages"]:
+            lines.append("  split package closeout:")
+            for item in row["closed_split_packages"]:
+                lines.append(f"    - {item}")
         lines.append("  anchor refs:")
         for ref in row["anchor_refs"]:
             lines.append(f"    - {ref}")
