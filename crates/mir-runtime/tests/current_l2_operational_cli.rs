@@ -1455,6 +1455,266 @@ fn operational_cli_pretty_reports_order_handoff_source_surface_artifact_route() 
 }
 
 #[test]
+fn operational_cli_json_reports_authoritative_room_first_scenario_for_late_join() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["profile_axis_refs"][0],
+        "profile_axis:activation:authority-ack"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["relation_refs"][1],
+        "relation_family:publication_order"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["authority_handoff_refs"][2],
+        "authority_handoff:stage_sequence:publish_then_handoff"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["runtime_evidence_refs"][4],
+        "debug_output:observer_debug_text_output:late_join_view: player_c sees result+owner history"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["contrast_refs"][0],
+        "contrast_target:append_friendly_notice_room"
+    );
+}
+
+#[test]
+fn operational_cli_json_keeps_authoritative_room_first_scenario_delegated_rng_on_reserve_route() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["reserve_route_refs"][0],
+        "reserve_route:delegated_rng_service_practical:p09-dice-delegated-rng-provider-placement"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["negative_static_stop_refs"],
+        Value::Array(vec![])
+    );
+    assert!(
+        value["authoritative_room_first_scenario_actual_adoption"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("delegated RNG placement")
+    );
+}
+
+#[test]
+fn operational_cli_json_reports_authoritative_room_first_scenario_negative_static_stop() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p14-dice-late-join-handoff-before-publication.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["negative_static_stop_refs"][0],
+        "negative_static_stop:p14-dice-late-join-handoff-before-publication:handoff_before_publish_for_late_join_visibility"
+    );
+    assert_eq!(
+        value["authoritative_room_first_scenario_actual_adoption"]["negative_static_stop_refs"][1],
+        "negative_static_stop:p14-dice-late-join-handoff-before-publication:publish_then_handoff_then_observe_order_required"
+    );
+    assert!(
+        value["authoritative_room_first_scenario_actual_adoption"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("handoff-before-publish")
+    );
+}
+
+#[test]
+fn operational_cli_pretty_reports_authoritative_room_first_scenario() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("authoritative_room_first_scenario_actual_adoption:"));
+    assert!(output.contains("relation_refs:"));
+    assert!(output.contains("relation_family:observation_order"));
+    assert!(output.contains("runtime_evidence_refs:"));
+    assert!(output.contains("debug_output:reconnect_debug_text_output:refresh_owner_snapshot: stale reconnect redirected"));
+    assert!(output.contains("contrast_refs:"));
+    assert!(output.contains("append_friendly_notice_room"));
+}
+
+#[test]
+fn operational_cli_json_reports_authoritative_room_reserve_strengthening_lane_for_witness_sample() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["witness_strengthening_status"],
+        "reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["delegated_rng_service_status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["model_check_second_line_status"],
+        "reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["witness_strengthening_refs"][0],
+        "fairness_claim:auditable_authority_witness"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["model_check_second_line_refs"][0],
+        "property_preview:row_local:p07-dice-late-join-visible-history:canonical_normalization_law"
+    );
+}
+
+#[test]
+fn operational_cli_json_reports_authoritative_room_reserve_strengthening_lane_for_delegated_rng_sample()
+ {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["delegated_rng_service_status"],
+        "reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["delegated_rng_service_refs"][0],
+        "profile_axis:rng_source:delegated_rng_service"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["model_check_second_line_status"],
+        "reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["first_line_boundary_refs"][0],
+        "first_line_boundary:representative_pair_kept_at_p07_p08"
+    );
+}
+
+#[test]
+fn operational_cli_json_keeps_authoritative_room_reserve_strengthening_lane_guard_only_for_guarded_chain()
+ {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p05-dice-owner-guarded-chain.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["witness_strengthening_status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["delegated_rng_service_status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["authoritative_room_reserve_strengthening_lane"]["model_check_second_line_status"],
+        "guarded_not_reached"
+    );
+    assert!(
+        value["authoritative_room_reserve_strengthening_lane"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("representative reserve strengthening sample set")
+    );
+}
+
+#[test]
+fn operational_cli_pretty_reports_authoritative_room_reserve_strengthening_lane() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("authoritative_room_reserve_strengthening_lane:"));
+    assert!(output.contains("model_check_second_line_refs:"));
+    assert!(output.contains(
+        "property_preview:row_local:p08-dice-stale-reconnect-refresh:canonical_normalization_law"
+    ));
+    assert!(output.contains("reserve_boundary_refs:"));
+    assert!(output.contains("model_check_second_line_not_room_profile"));
+}
+
+#[test]
 fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated_rng_sample() {
     let output = run_current_l2_operational_cli([
         "run-source-sample",

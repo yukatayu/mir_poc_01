@@ -764,6 +764,17 @@ actual-adoption floor では、
   - `p09` serial-scope practical route keep
   - `p13 / p14` negative static-stop pair keep
   - Package 95 close 後の current active queue は Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
+- authoritative-room first scenario helper-summary tightening:
+  `specs/examples/570`
+  - authoritative-room first default profile の representative reached pair は `p07 / p08` に保つ
+  - `p09` delegated RNG placement は reserve practical route に保つ
+  - `p13 / p14` late-join negative static-stop pair は visible に保つ
+  - Package 96 close 後の current active queue は Package 97 reserve strengthening、Package 98 documentation/report closeout である
+- authoritative-room reserve strengthening lane tightening:
+  `specs/examples/571`
+  - first completion line は `p07 / p08` representative pair に保つ
+  - `auditable_authority_witness`、`delegated_rng_service`、model-check second line は reserve lane の separate status として helper summary に actualize してよい
+  - Package 97 close 後の current active queue は Package 98 documentation/report closeout のみである
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

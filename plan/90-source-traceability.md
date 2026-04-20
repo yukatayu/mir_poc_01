@@ -4245,3 +4245,26 @@
   - `docs/reports/0852-package95-order-handoff-source-surface-artifact-tightening.md`
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
+## 2026-04-20 Package 96 authoritative-room first scenario tightening addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md`
+  - `specs/examples/471-current-l2-authoritative-room-vertical-slice-emitted-artifact-ratchet.md`
+  - `specs/examples/569-current-l2-order-handoff-source-surface-artifact-route-tightening.md`
+  - `specs/examples/570-current-l2-authoritative-room-first-scenario-helper-summary-tightening.md`
+  - `docs/reports/0853-package96-authoritative-room-first-scenario-tightening.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+
+## 2026-04-20 Package 97 authoritative-room reserve strengthening lane tightening addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md`
+  - `specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md`
+  - `specs/examples/478-current-l2-model-check-second-line-concretization.md`
+  - `specs/examples/570-current-l2-authoritative-room-first-scenario-helper-summary-tightening.md`
+  - `specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md`
+  - `docs/reports/0854-package97-authoritative-room-reserve-strengthening-lane-tightening.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`

@@ -227,6 +227,10 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
     artifact_preview: CurrentL2OperationalCliArtifactPreviewSummary,
     surface_preview: CurrentL2OperationalCliSurfacePreviewSummary,
+    authoritative_room_first_scenario_actual_adoption:
+        CurrentL2OperationalCliAuthoritativeRoomFirstScenarioActualAdoptionSummary,
+    authoritative_room_reserve_strengthening_lane:
+        CurrentL2OperationalCliAuthoritativeRoomReserveStrengtheningLaneSummary,
     order_handoff_source_surface_artifact_actual_adoption:
         CurrentL2OperationalCliOrderHandoffSourceSurfaceArtifactActualAdoptionSummary,
     order_handoff_witness_provider_public_seam_compression:
@@ -297,6 +301,18 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             CurrentL2OperationalCliArtifactPreviewSummary::from_source_report(&report);
         let surface_preview =
             CurrentL2OperationalCliSurfacePreviewSummary::from_source_report(&report);
+        let authoritative_room_first_scenario_actual_adoption =
+            CurrentL2OperationalCliAuthoritativeRoomFirstScenarioActualAdoptionSummary::from_source_report(
+                &report,
+                &verification_preview,
+                &artifact_preview,
+            );
+        let authoritative_room_reserve_strengthening_lane =
+            CurrentL2OperationalCliAuthoritativeRoomReserveStrengtheningLaneSummary::from_source_report(
+                &report,
+                &verification_preview,
+                &artifact_preview,
+            );
         let order_handoff_source_surface_artifact_actual_adoption =
             CurrentL2OperationalCliOrderHandoffSourceSurfaceArtifactActualAdoptionSummary::from_source_report(
                 &report,
@@ -472,6 +488,8 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             verification_preview,
             artifact_preview,
             surface_preview,
+            authoritative_room_first_scenario_actual_adoption,
+            authoritative_room_reserve_strengthening_lane,
             order_handoff_source_surface_artifact_actual_adoption,
             order_handoff_witness_provider_public_seam_compression,
             theorem_result_object_preview,
@@ -1147,6 +1165,203 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
                 "current typed checker-hint preview only actualizes the sample-local {} after verification preview reaches runtime try-cut evidence for `{}`",
                 current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliAuthoritativeRoomReserveStrengtheningLaneSummary {
+    status: &'static str,
+    lane_kind: &'static str,
+    witness_strengthening_status: &'static str,
+    delegated_rng_service_status: &'static str,
+    model_check_second_line_status: &'static str,
+    witness_strengthening_refs: Vec<String>,
+    delegated_rng_service_refs: Vec<String>,
+    model_check_second_line_refs: Vec<String>,
+    first_line_boundary_refs: Vec<String>,
+    reserve_boundary_refs: Vec<String>,
+    repo_local_emitted_artifact_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliAuthoritativeRoomReserveStrengtheningLaneSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+        artifact_preview: &CurrentL2OperationalCliArtifactPreviewSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let witness_reached =
+            authoritative_room_default_sample_reached(report, verification_preview)
+                && sample_id == "p07-dice-late-join-visible-history";
+        let delegated_reached = sample_id == "p09-dice-delegated-rng-provider-placement"
+            && verification_preview.formal_hook_status == "reached"
+            && report.runtime_report.run_report.terminal_outcome == Some(TerminalOutcome::Success);
+        let model_check_reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history"
+                | "p08-dice-stale-reconnect-refresh"
+                | "p09-dice-delegated-rng-provider-placement"
+        ) && verification_preview.formal_hook_status == "reached"
+            && report.runtime_report.run_report.terminal_outcome == Some(TerminalOutcome::Success);
+        let lane_reached = witness_reached || delegated_reached || model_check_reached;
+
+        Self {
+            status: if lane_reached {
+                "reached"
+            } else {
+                "guarded_not_reached"
+            },
+            lane_kind: "helper_local_reserve_strengthening_lane_manifest",
+            witness_strengthening_status: if witness_reached {
+                "reached"
+            } else {
+                "guarded_not_reached"
+            },
+            delegated_rng_service_status: if delegated_reached {
+                "reached"
+            } else {
+                "guarded_not_reached"
+            },
+            model_check_second_line_status: if model_check_reached {
+                "reached"
+            } else {
+                "guarded_not_reached"
+            },
+            witness_strengthening_refs: authoritative_room_reserve_strengthening_witness_refs(
+                sample_id,
+                witness_reached,
+            ),
+            delegated_rng_service_refs: authoritative_room_reserve_strengthening_delegated_rng_refs(
+                sample_id,
+                delegated_reached,
+            ),
+            model_check_second_line_refs: authoritative_room_reserve_strengthening_model_check_refs(
+                sample_id,
+                model_check_reached,
+            ),
+            first_line_boundary_refs:
+                authoritative_room_reserve_strengthening_first_line_boundary_refs(sample_id),
+            reserve_boundary_refs: authoritative_room_reserve_strengthening_boundary_refs(),
+            repo_local_emitted_artifact_refs: if lane_reached {
+                order_handoff_repo_local_emitted_artifact_refs(sample_id, artifact_preview)
+            } else {
+                Vec::new()
+            },
+            compare_floor_refs: authoritative_room_reserve_strengthening_compare_floor_refs(
+                sample_id,
+                witness_reached,
+                delegated_reached,
+                model_check_reached,
+            ),
+            guard_refs: authoritative_room_reserve_strengthening_guard_refs(
+                witness_reached,
+                delegated_reached,
+                model_check_reached,
+            ),
+            kept_later_refs: authoritative_room_reserve_strengthening_kept_later_refs(),
+            guard_reason: if lane_reached {
+                None
+            } else {
+                Some(authoritative_room_reserve_strengthening_guard_reason(
+                    report.sample_id.as_str(),
+                ))
+            },
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliAuthoritativeRoomFirstScenarioActualAdoptionSummary {
+    status: &'static str,
+    adoption_kind: &'static str,
+    profile_axis_refs: Vec<String>,
+    relation_refs: Vec<String>,
+    authority_handoff_refs: Vec<String>,
+    runtime_evidence_refs: Vec<String>,
+    repo_local_emitted_artifact_refs: Vec<String>,
+    reserve_route_refs: Vec<String>,
+    negative_static_stop_refs: Vec<String>,
+    contrast_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliAuthoritativeRoomFirstScenarioActualAdoptionSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+        artifact_preview: &CurrentL2OperationalCliArtifactPreviewSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        if authoritative_room_default_sample_reached(report, verification_preview) {
+            return Self {
+                status: "reached",
+                adoption_kind: "helper_local_authoritative_room_first_scenario_manifest",
+                profile_axis_refs: authoritative_room_profile_axis_refs(sample_id),
+                relation_refs: authoritative_room_first_scenario_relation_refs(sample_id),
+                authority_handoff_refs: authoritative_room_first_scenario_handoff_refs(sample_id),
+                runtime_evidence_refs: authoritative_room_first_scenario_runtime_evidence_refs(
+                    report,
+                ),
+                repo_local_emitted_artifact_refs: order_handoff_repo_local_emitted_artifact_refs(
+                    sample_id,
+                    artifact_preview,
+                ),
+                reserve_route_refs: Vec::new(),
+                negative_static_stop_refs: Vec::new(),
+                contrast_refs: authoritative_room_first_scenario_contrast_refs(),
+                evidence_refs: authoritative_room_first_scenario_evidence_refs(sample_id),
+                compare_floor_refs: authoritative_room_first_scenario_compare_floor_refs(
+                    sample_id, true,
+                ),
+                guard_refs: authoritative_room_first_scenario_guard_refs(sample_id, true),
+                kept_later_refs: authoritative_room_first_scenario_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        let negative_static_stop_refs =
+            order_handoff_source_surface_artifact_negative_static_stop_refs(sample_id);
+        let reserve_route_refs = authoritative_room_first_scenario_reserve_route_refs(sample_id);
+        let repo_local_emitted_artifact_refs = if verification_preview.formal_hook_status
+            == "reached"
+            || !negative_static_stop_refs.is_empty()
+            || !reserve_route_refs.is_empty()
+        {
+            order_handoff_repo_local_emitted_artifact_refs(sample_id, artifact_preview)
+        } else {
+            Vec::new()
+        };
+
+        Self {
+            status: "guarded_not_reached",
+            adoption_kind: "helper_local_authoritative_room_first_scenario_manifest",
+            profile_axis_refs: Vec::new(),
+            relation_refs: Vec::new(),
+            authority_handoff_refs: Vec::new(),
+            runtime_evidence_refs: Vec::new(),
+            repo_local_emitted_artifact_refs,
+            reserve_route_refs,
+            negative_static_stop_refs,
+            contrast_refs: authoritative_room_first_scenario_contrast_refs(),
+            evidence_refs: authoritative_room_first_scenario_evidence_refs(sample_id),
+            compare_floor_refs: authoritative_room_first_scenario_compare_floor_refs(
+                sample_id, false,
+            ),
+            guard_refs: authoritative_room_first_scenario_guard_refs(sample_id, false),
+            kept_later_refs: authoritative_room_first_scenario_kept_later_refs(),
+            guard_reason: Some(authoritative_room_first_scenario_guard_reason(
+                report,
+                verification_preview,
             )),
         }
     }
@@ -4419,6 +4634,17 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
         "serial_scope_reserve",
         &summary.surface_preview.serial_scope_reserve,
     );
+    writeln!(output, "authoritative_room_first_scenario_actual_adoption:")
+        .expect("write to string");
+    render_authoritative_room_first_scenario_actual_adoption(
+        &mut output,
+        &summary.authoritative_room_first_scenario_actual_adoption,
+    );
+    writeln!(output, "authoritative_room_reserve_strengthening_lane:").expect("write to string");
+    render_authoritative_room_reserve_strengthening_lane(
+        &mut output,
+        &summary.authoritative_room_reserve_strengthening_lane,
+    );
     writeln!(
         output,
         "order_handoff_source_surface_artifact_actual_adoption:"
@@ -4960,6 +5186,355 @@ fn authoritative_room_profile_axis_refs(sample_id: &str) -> Vec<String> {
 
     refs.push("profile_axis:fairness_claim:no_distributed_fairness_theorem_required".to_string());
     refs
+}
+
+fn authoritative_room_first_scenario_relation_refs(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p07-dice-late-join-visible-history" => vec![
+            "relation_family:program_order".to_string(),
+            "relation_family:publication_order".to_string(),
+            "relation_family:observation_order".to_string(),
+            "relation_family:witness_order".to_string(),
+            "relation_family:finalization_order".to_string(),
+            "relation_family:scoped_happens_before".to_string(),
+        ],
+        "p08-dice-stale-reconnect-refresh" => vec![
+            "relation_family:program_order".to_string(),
+            "relation_family:observation_order".to_string(),
+            "relation_family:witness_order".to_string(),
+            "relation_family:finalization_order".to_string(),
+            "relation_family:scoped_happens_before".to_string(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn authoritative_room_first_scenario_handoff_refs(sample_id: &str) -> Vec<String> {
+    let mut refs = vec![
+        "authority_handoff:owner_slot:single_room_authority".to_string(),
+        "authority_handoff:stage_family:authoritative_serial_transition".to_string(),
+        "authority_handoff:payload_ref:dice_state".to_string(),
+    ];
+
+    match sample_id {
+        "p07-dice-late-join-visible-history" => {
+            refs.insert(
+                2,
+                "authority_handoff:stage_sequence:publish_then_handoff".to_string(),
+            );
+        }
+        "p08-dice-stale-reconnect-refresh" => {
+            refs.insert(
+                2,
+                "authority_handoff:stage_sequence:fail_then_refresh".to_string(),
+            );
+        }
+        _ => {}
+    }
+
+    refs
+}
+
+fn authoritative_room_first_scenario_runtime_evidence_refs(
+    report: &CurrentL2SourceSampleRunReport,
+) -> Vec<String> {
+    let mut refs = Vec::new();
+
+    for event in &report.runtime_report.run_report.trace_audit_sink.events {
+        let formatted = format!(
+            "runtime_event:{}",
+            authoritative_room_first_scenario_event_kind_ref(event)
+        );
+        if !refs.contains(&formatted) {
+            refs.push(formatted);
+        }
+    }
+
+    match report.sample_id.as_str() {
+        "p07-dice-late-join-visible-history" => {
+            authoritative_room_first_scenario_extend_place_records(
+                &mut refs,
+                &report.runtime_report.run_report.final_place_store,
+                "dice_state",
+            );
+            authoritative_room_first_scenario_extend_place_records(
+                &mut refs,
+                &report.runtime_report.run_report.final_place_store,
+                "observer_debug_text_output",
+            );
+        }
+        "p08-dice-stale-reconnect-refresh" => {
+            authoritative_room_first_scenario_extend_place_records(
+                &mut refs,
+                &report.runtime_report.run_report.final_place_store,
+                "dice_state",
+            );
+            authoritative_room_first_scenario_extend_place_records(
+                &mut refs,
+                &report.runtime_report.run_report.final_place_store,
+                "reconnect_debug_text_output",
+            );
+        }
+        _ => {}
+    }
+
+    refs
+}
+
+fn authoritative_room_first_scenario_reserve_route_refs(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p09-dice-delegated-rng-provider-placement" => vec![
+            format!("reserve_route:delegated_rng_service_practical:{sample_id}"),
+            format!("reserve_route:serial_scope_reserve_surface:{sample_id}"),
+            format!("reserve_route:witness_provider_route_actual_adoption:{sample_id}"),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn authoritative_room_first_scenario_contrast_refs() -> Vec<String> {
+    vec!["contrast_target:append_friendly_notice_room".to_string()]
+}
+
+fn authoritative_room_first_scenario_evidence_refs(sample_id: &str) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "helper_preview:authoritative_room_first_scenario_actual_adoption".to_string(),
+        "compare_floor:current_l2.authoritative_room.first_scenario_actual_adoption".to_string(),
+    ]
+}
+
+fn authoritative_room_first_scenario_compare_floor_refs(
+    sample_id: &str,
+    reached: bool,
+) -> Vec<String> {
+    if reached {
+        return vec![
+            "compare_floor:current_l2.authoritative_room.vertical_slice".to_string(),
+            "compare_floor:current_l2.order_handoff.source_surface_artifact_actual_adoption"
+                .to_string(),
+            "compare_floor:current_l2.closeout.phase4_shared_space_self_driven_closeout"
+                .to_string(),
+            "compare_floor:current_l2.authoritative_room.first_scenario_actual_adoption"
+                .to_string(),
+        ];
+    }
+
+    if sample_id == "p09-dice-delegated-rng-provider-placement" {
+        return vec![
+            "compare_floor:current_l2.delegated_rng_service.practical".to_string(),
+            "compare_floor:current_l2.closeout.phase4_shared_space_self_driven_closeout"
+                .to_string(),
+            "compare_floor:current_l2.authoritative_room.first_scenario_actual_adoption.guard_only"
+                .to_string(),
+        ];
+    }
+
+    if matches!(
+        sample_id,
+        "p13-dice-late-join-missing-publication-witness"
+            | "p14-dice-late-join-handoff-before-publication"
+    ) {
+        return vec![
+            "compare_floor:current_l2.order_handoff.negative_static_stop_actualization".to_string(),
+            "compare_floor:current_l2.authoritative_room.first_scenario_actual_adoption.guard_only"
+                .to_string(),
+        ];
+    }
+
+    vec![
+        "compare_floor:current_l2.authoritative_room.guard_only".to_string(),
+        "compare_floor:current_l2.authoritative_room.first_scenario_actual_adoption.guard_only"
+            .to_string(),
+    ]
+}
+
+fn authoritative_room_first_scenario_guard_refs(sample_id: &str, reached: bool) -> Vec<String> {
+    if reached {
+        let mut refs = vec![
+            "guard:authoritative_room_first_default_profile".to_string(),
+            "guard:representative_first_scenario_pair".to_string(),
+            "guard:no_distributed_fairness_theorem_required".to_string(),
+            "guard:minimal_working_subset_only".to_string(),
+        ];
+        match sample_id {
+            "p07-dice-late-join-visible-history" => {
+                refs.push("guard:late_join_history_visible_as_past".to_string());
+            }
+            "p08-dice-stale-reconnect-refresh" => {
+                refs.push("guard:stale_reconnect_fail_then_refresh".to_string());
+                refs.push("guard:stale_replay_invalidated_not_merged".to_string());
+            }
+            _ => {}
+        }
+        return refs;
+    }
+
+    match sample_id {
+        "p09-dice-delegated-rng-provider-placement" => vec![
+            "guard:delegated_rng_service_practical_reserve".to_string(),
+            "guard:first_scenario_pair_unchanged".to_string(),
+        ],
+        "p13-dice-late-join-missing-publication-witness"
+        | "p14-dice-late-join-handoff-before-publication" => vec![
+            "guard:late_join_negative_static_stop".to_string(),
+            "guard:first_scenario_pair_unchanged".to_string(),
+        ],
+        _ => vec!["guard:authoritative_room_first_scenario_not_reached".to_string()],
+    }
+}
+
+fn authoritative_room_first_scenario_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:auditable_authority_witness".to_string(),
+        "kept_later:delegated_rng_service".to_string(),
+        "kept_later:distributed_randomness_provider".to_string(),
+        "kept_later:final_emitted_handoff_contract".to_string(),
+        "kept_later:exhaustive_shared_space_catalog".to_string(),
+        "kept_later:final_consistency_fairness_catalog".to_string(),
+    ]
+}
+
+fn authoritative_room_reserve_strengthening_witness_refs(
+    sample_id: &str,
+    reached: bool,
+) -> Vec<String> {
+    if !reached {
+        return Vec::new();
+    }
+
+    vec![
+        "fairness_claim:auditable_authority_witness".to_string(),
+        "witness_field:witness_kind".to_string(),
+        "witness_field:action_ref".to_string(),
+        "witness_field:draw_slot".to_string(),
+        "witness_field:draw_result".to_string(),
+        format!("witness_binding:{sample_id}:authority_draw_witness"),
+    ]
+}
+
+fn authoritative_room_reserve_strengthening_delegated_rng_refs(
+    sample_id: &str,
+    reached: bool,
+) -> Vec<String> {
+    if !reached {
+        return Vec::new();
+    }
+
+    vec![
+        "profile_axis:rng_source:delegated_rng_service".to_string(),
+        "provider_boundary:placement:delegated_rng_service".to_string(),
+        "provider_boundary:authority_keeps_commit".to_string(),
+        "optional_attachment:provider_draw_ref".to_string(),
+        format!("provider_sample:{sample_id}:delegated_rng_draw_route"),
+    ]
+}
+
+fn authoritative_room_reserve_strengthening_model_check_refs(
+    sample_id: &str,
+    reached: bool,
+) -> Vec<String> {
+    if !reached {
+        return Vec::new();
+    }
+
+    vec![
+        format!("property_preview:row_local:{sample_id}:canonical_normalization_law"),
+        format!("property_preview:row_local:{sample_id}:no_re_promotion"),
+        format!("model_check_request_preflight:{sample_id}:row_local_property_preview"),
+        format!("model_check_request_preflight:{sample_id}:small_cluster_semantic_projection"),
+        "public_checker_second_reserve:boundary".to_string(),
+    ]
+}
+
+fn authoritative_room_reserve_strengthening_first_line_boundary_refs(
+    sample_id: &str,
+) -> Vec<String> {
+    let mut refs = vec![
+        "first_line_boundary:representative_pair_kept_at_p07_p08".to_string(),
+        "first_line_boundary:authoritative_room_default_profile_stays_principal".to_string(),
+        "first_line_boundary:authority_rng_default_profile_unchanged".to_string(),
+    ];
+
+    if sample_id == "p09-dice-delegated-rng-provider-placement" {
+        refs.push("first_line_boundary:delegated_rng_not_promoted_into_default_pair".to_string());
+    }
+
+    refs
+}
+
+fn authoritative_room_reserve_strengthening_boundary_refs() -> Vec<String> {
+    vec![
+        "reserve_boundary:auditable_authority_witness_second_strengthening".to_string(),
+        "reserve_boundary:delegated_rng_service_second_practical".to_string(),
+        "reserve_boundary:model_check_second_line_not_room_profile".to_string(),
+        "reserve_boundary:public_checker_contract_kept_later".to_string(),
+        "reserve_boundary:witness_provider_combined_public_contract_later".to_string(),
+    ]
+}
+
+fn authoritative_room_reserve_strengthening_compare_floor_refs(
+    sample_id: &str,
+    witness_reached: bool,
+    delegated_reached: bool,
+    model_check_reached: bool,
+) -> Vec<String> {
+    let mut refs = Vec::new();
+
+    if witness_reached {
+        refs.push("compare_floor:current_l2.auditable_authority_witness.strengthening".to_string());
+    }
+    if delegated_reached {
+        refs.push("compare_floor:current_l2.delegated_rng_service.practical".to_string());
+    }
+    if model_check_reached {
+        refs.push("compare_floor:current_l2.model_check.second_line_concretization".to_string());
+    }
+    if refs.is_empty() {
+        refs.push("compare_floor:current_l2.reserve_strengthening_lane.guard_only".to_string());
+    }
+    refs.push(format!(
+        "compare_floor:current_l2.reserve_strengthening_lane:{sample_id}"
+    ));
+
+    refs
+}
+
+fn authoritative_room_reserve_strengthening_guard_refs(
+    witness_reached: bool,
+    delegated_reached: bool,
+    model_check_reached: bool,
+) -> Vec<String> {
+    if witness_reached || delegated_reached || model_check_reached {
+        return vec![
+            "guard:first_line_boundary_preserved".to_string(),
+            "guard:reserve_components_kept_separate".to_string(),
+            "guard:model_check_second_line_not_room_profile".to_string(),
+            "guard:witness_provider_public_contract_later".to_string(),
+        ];
+    }
+
+    vec![
+        "guard:representative_reserve_strengthening_sample_set".to_string(),
+        "guard:first_line_pair_unchanged".to_string(),
+    ]
+}
+
+fn authoritative_room_reserve_strengthening_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:combined_witness_provider_public_contract".to_string(),
+        "kept_later:final_public_witness_schema".to_string(),
+        "kept_later:final_public_provider_receipt_schema".to_string(),
+        "kept_later:concrete_model_check_tool_brand".to_string(),
+        "kept_later:actual_public_checker_migration".to_string(),
+        "kept_later:distributed_fairness_theorem".to_string(),
+    ]
+}
+
+fn authoritative_room_reserve_strengthening_guard_reason(sample_id: &str) -> String {
+    format!(
+        "current authoritative-room reserve strengthening lane only actualizes the representative reserve strengthening sample set (`p07` witness, `p08` reconnect-model-check, `p09` delegated RNG); `{sample_id}` stays guard-only until one of those reserve routes is actually exercised"
+    )
 }
 
 fn order_handoff_source_surface_artifact_actual_adoption_evidence_refs(
@@ -6608,6 +7183,121 @@ fn render_order_handoff_source_surface_artifact_actual_adoption(
     }
 }
 
+fn render_authoritative_room_first_scenario_actual_adoption(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliAuthoritativeRoomFirstScenarioActualAdoptionSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  adoption_kind: {}", summary.adoption_kind).expect("write to string");
+    render_string_list(output, "profile_axis_refs", &summary.profile_axis_refs, 1);
+    render_string_list(output, "relation_refs", &summary.relation_refs, 1);
+    render_string_list(
+        output,
+        "authority_handoff_refs",
+        &summary.authority_handoff_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "runtime_evidence_refs",
+        &summary.runtime_evidence_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "repo_local_emitted_artifact_refs",
+        &summary.repo_local_emitted_artifact_refs,
+        1,
+    );
+    render_string_list(output, "reserve_route_refs", &summary.reserve_route_refs, 1);
+    render_string_list(
+        output,
+        "negative_static_stop_refs",
+        &summary.negative_static_stop_refs,
+        1,
+    );
+    render_string_list(output, "contrast_refs", &summary.contrast_refs, 1);
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_authoritative_room_reserve_strengthening_lane(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliAuthoritativeRoomReserveStrengtheningLaneSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  lane_kind: {}", summary.lane_kind).expect("write to string");
+    writeln!(
+        output,
+        "  witness_strengthening_status: {}",
+        summary.witness_strengthening_status
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  delegated_rng_service_status: {}",
+        summary.delegated_rng_service_status
+    )
+    .expect("write to string");
+    writeln!(
+        output,
+        "  model_check_second_line_status: {}",
+        summary.model_check_second_line_status
+    )
+    .expect("write to string");
+    render_string_list(
+        output,
+        "witness_strengthening_refs",
+        &summary.witness_strengthening_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "delegated_rng_service_refs",
+        &summary.delegated_rng_service_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "model_check_second_line_refs",
+        &summary.model_check_second_line_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "first_line_boundary_refs",
+        &summary.first_line_boundary_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "reserve_boundary_refs",
+        &summary.reserve_boundary_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "repo_local_emitted_artifact_refs",
+        &summary.repo_local_emitted_artifact_refs,
+        1,
+    );
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
 fn render_model_check_final_public_contract_reopen_threshold(
     output: &mut String,
     threshold: &CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary,
@@ -8059,6 +8749,36 @@ fn render_string_map(
     }
 }
 
+fn authoritative_room_first_scenario_event_kind_ref(event: &EventKind) -> &'static str {
+    match event {
+        EventKind::PerformSuccess => "perform-success",
+        EventKind::PerformFailure => "perform-failure",
+        EventKind::Rollback => "rollback",
+        EventKind::AtomicCut => "atomic-cut",
+        EventKind::Reject => "reject",
+    }
+}
+
+fn authoritative_room_first_scenario_extend_place_records(
+    refs: &mut Vec<String>,
+    place_store: &BTreeMap<String, Vec<String>>,
+    key: &str,
+) {
+    if let Some(records) = place_store.get(key) {
+        for record in records {
+            let prefix = if key.contains("debug") {
+                format!("debug_output:{key}:")
+            } else {
+                format!("place_record:{key}:")
+            };
+            let formatted = format!("{prefix}{record}");
+            if !refs.contains(&formatted) {
+                refs.push(formatted);
+            }
+        }
+    }
+}
+
 fn static_gate_verdict_name(verdict: StaticGateVerdict) -> &'static str {
     match verdict {
         StaticGateVerdict::Valid => "valid",
@@ -8111,6 +8831,48 @@ fn authoritative_room_vertical_slice_guard_reason(
     format!(
         "current authoritative-room vertical slice only actualizes reached current default samples (`p07` / `p08`): {guard_detail}"
     )
+}
+
+fn authoritative_room_first_scenario_guard_reason(
+    report: &CurrentL2SourceSampleRunReport,
+    verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+) -> String {
+    let sample_id = report.sample_id.as_str();
+    if sample_id == "p09-dice-delegated-rng-provider-placement" {
+        return format!(
+            "current authoritative-room first scenario keeps delegated RNG placement on the practical reserve route and does not promote it into the representative default pair (`p07` / `p08`) for `{sample_id}`"
+        );
+    }
+
+    if sample_id == "p13-dice-late-join-missing-publication-witness" {
+        let reason = report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .reasons
+            .first()
+            .cloned()
+            .unwrap_or_else(|| "missing publication witness before handoff".to_string());
+        return format!(
+            "current authoritative-room first scenario keeps the late-join negative pair helper-local and guarded for `{sample_id}`: missing publication witness before handoff; {reason}"
+        );
+    }
+
+    if sample_id == "p14-dice-late-join-handoff-before-publication" {
+        let reason = report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .reasons
+            .first()
+            .cloned()
+            .unwrap_or_else(|| "handoff-before-publish breaks late-join visibility".to_string());
+        return format!(
+            "current authoritative-room first scenario keeps the late-join negative pair helper-local and guarded for `{sample_id}`: handoff-before-publish breaks late-join visibility; {reason}"
+        );
+    }
+
+    authoritative_room_vertical_slice_guard_reason(report, verification_preview)
 }
 
 fn minimal_companion_lines(sample_id: &str) -> Vec<String> {

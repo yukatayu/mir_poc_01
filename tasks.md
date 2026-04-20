@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 11:43 JST
+最終更新: 2026-04-20 12:22 JST
 
 ## この文書について
 
@@ -35,8 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 96 authoritative-room first scenario
-  - Package 97 reserve strengthening
   - Package 98 docs/report closeout
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
@@ -59,14 +57,12 @@
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
   - order-handoff / shared-space side:
-    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`
+    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、authoritative-room first scenario helper summary actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`
 
 ## ordered self-driven packages
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `96` authoritative-room first scenario | authoritative-room first default profile を current CLI / tests / artifacts / examples で tighten する | `M` | `Macro 6` | authority-ack / single room authority / authoritative serial transition / authority_rng / visible past / fail-then-refresh を first line に保つ | first room default profile の representative run と negative pair が drift なく読める |
-| `97` reserve strengthening | `auditable_authority_witness`、`delegated_rng_service`、model-check second-line concretization を reserve strengthening lane として narrow に整理する | `M` | `Macro 6/7` | first completion line を壊さず、second package 群を reserve に置く | reserve line と first-line completion の境界が docs / plan / tasks / progress で明確になる |
 | `98` documentation/report closeout | once-through sequence を docs / plan / progress / tasks / reports / traceability に閉じ、二大問題それぞれの簡潔な解説付き sample を `samples/` に追加する | `S` | `Macro 0/5` | comparison debt ではなく adoption debt closeout として整理する | queue drift が消え、remaining mixed gate / true user-spec gate / reserve integration が narrow に分かれ、二大問題の current first line を sample でも追える |
 
 ## recently closed package note
@@ -187,7 +183,7 @@
 ### Package 96 — authoritative-room first scenario
 
 - current reading:
-  authority-ack / single room authority / authoritative serial transition / authority_rng / late join visible past / stale reconnect fail-then-refresh / replay invalidation を first room default profile として representative run / artifact / docs に揃える。
+  close 済み。authority-ack / single room authority / authoritative serial transition / authority_rng / late join visible past / stale reconnect fail-then-refresh / replay invalidation を first room default profile として representative run / artifact / docs に揃え、`authoritative_room_first_scenario_actual_adoption` helper summary に `p07 / p08` reached、`p09` reserve、`p13 / p14` negative pair を同期した。
 - stop line:
   distributed fairness theorem
   exhaustive shared-space catalog
@@ -196,7 +192,7 @@
 ### Package 97 — reserve strengthening
 
 - current reading:
-  first completion line を壊さずに、`auditable_authority_witness`、`delegated_rng_service`、model-check second-line concretization を reserve strengthening lane として narrow に切り分ける。
+  close 済み。first completion line を壊さずに、`auditable_authority_witness`、`delegated_rng_service`、model-check second-line concretization を reserve strengthening lane として narrow に切り分け、`authoritative_room_reserve_strengthening_lane` helper summary に `p07` witness + model-check、`p08` model-check、`p09` delegated RNG + model-check、`p05` guard-only を同期した。
 - stop line:
   final public witness/provider schema
   distributed randomness provider adoption
@@ -706,6 +702,5 @@
 
 ## next reopen order
 
-1. Package 96 で authoritative-room first scenario を tighten する。
-2. Package 97 で reserve strengthening を first completion line から切り分ける。
-3. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。
+1. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。
+2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。
