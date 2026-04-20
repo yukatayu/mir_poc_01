@@ -13,6 +13,7 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("problem1-typed-theorem-model-check.md", text)
         self.assertIn("problem2-order-handoff-shared-space.md", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke-all", text)
+        self.assertIn("最短 quickstart", text)
         self.assertIn("failed step", text)
         self.assertIn("非ゼロ", text)
 
@@ -25,6 +26,10 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         self.assertIn("p06-typed-proof-owner-handoff", text)
+        self.assertIn("最短 quickstart", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py smoke problem1", text)
+        self.assertIn("見るべき結果", text)
+        self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)
         self.assertIn(
             "samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt",
@@ -48,6 +53,10 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("p08-dice-stale-reconnect-refresh", text)
         self.assertIn("p09-dice-delegated-rng-provider-placement", text)
         self.assertIn("p13-dice-late-join-missing-publication-witness", text)
+        self.assertIn("最短 quickstart", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py smoke problem2", text)
+        self.assertIn("見るべき結果", text)
+        self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem2", text)
         self.assertIn(
             "samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt",

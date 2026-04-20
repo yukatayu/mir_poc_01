@@ -829,6 +829,10 @@ actual-adoption floor では、
   `specs/examples/584`
   - `smoke-all` helper に failure-focused diagnostics を actualize し、aggregate failure 時に failed step / command / return code / output excerpt を compact に surfacing してよい
   - Package 110 close 後の current active queue は Package 111 representative problem bundle quickstart walkthrough hardening と later mixed/user-spec residual である
+- representative problem bundle quickstart walkthrough hardening:
+  `specs/examples/585`
+  - `samples/problem-bundles/problem1|problem2` に `最短 quickstart` と `見るべき結果` を actualize し、representative sample guide を doc 単体でも読める quickstart bundle に harden してよい
+  - Package 111 close 後の current active queue は Package 112 representative problem quickstart CLI mirror と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

@@ -23,6 +23,8 @@
 ## current recommendation
 
 - まず各 bundle doc を読む。
+- 各 bundle doc の冒頭にある `最短 quickstart` を使うと、
+  `smoke` → `matrix` → `bundle` → parser companion inspector の 4 段で representative sample の見方を確認できる。
 - 次に guide 内の `run-source-sample` / `bundle problem1|problem2` / `mapping` command を順に使う。
 - 問題 1 / 問題 2 をまとめて手早く確認したいときは
   `python3 scripts/current_l2_guided_samples.py smoke-all`

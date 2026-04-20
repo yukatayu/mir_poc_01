@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 14:59 JST
+最終更新: 2026-04-20 15:11 JST
 
 ## この文書について
 
@@ -35,7 +35,7 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 111 representative problem bundle quickstart walkthrough hardening
+  - Package 112 representative problem quickstart CLI mirror
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +63,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `111` representative problem bundle quickstart walkthrough hardening | `samples/problem-bundles/problem1|problem2` に smoke / matrix / bundle / parser companion の mini walkthrough と expected reading を揃える | `S` | `Macro 6/7` | representative sample guide から「まず何を実行し、何を確認するか」を 1 画面で読めるようにする | sample bundle docs が quickstart として単独でも読める |
+| `112` representative problem quickstart CLI mirror | bundle doc に置いた 4 段 quickstart を `scripts/current_l2_guided_samples.py` からも problem ごとに表示できるようにする | `S-M` | `Macro 6/7` | sample-side quickstart と helper-side summary の読みを一致させる | sample bundle docs と helper command の quickstart が同じ導線を返す |
 
 ## recently closed package note
 
@@ -351,13 +351,24 @@
 ### Package 111 — representative problem bundle quickstart walkthrough hardening
 
 - current reading:
-  next active bundle。`samples/problem-bundles/problem1|problem2` に smoke / matrix / bundle / parser companion の mini walkthrough と expected reading を揃え、代表サンプル導線を doc 単体でも分かりやすくする。
+  close 済み。`samples/problem-bundles/problem1|problem2` に `最短 quickstart` と `見るべき結果` を actualize し、代表サンプル導線を doc 単体でも分かりやすくした。
 - current recommendation:
   current helper と sample bundle doc をずらさず、最短 4 ステップで「何を実行し、何を見ればよいか」を示す。
 - stop line:
   exhaustive tutorial surface
   exhaustive sample catalog
   final public CLI / tutorial surface
+
+### Package 112 — representative problem quickstart CLI mirror
+
+- current reading:
+  next active bundle。bundle doc 側に置いた 4 段 quickstart を `scripts/current_l2_guided_samples.py` からも problem ごとに表示できるようにし、sample-side quickstart と helper-side summary を一致させる。
+- current recommendation:
+  doc を読まなくても first 4 steps を helper から見られるようにするが、final public tutorial surface には上げない。
+- stop line:
+  exhaustive tutorial surface
+  final public CLI / tutorial surface
+  final public parser / checker / runtime API
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -855,5 +866,5 @@
 
 ## next reopen order
 
-1. Package 111 で `samples/problem-bundles/problem1|problem2` の quickstart walkthrough と expected reading を harden する。
+1. Package 112 で bundle doc に置いた 4 段 quickstart を `scripts/current_l2_guided_samples.py` の helper summary に mirror する。
 2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

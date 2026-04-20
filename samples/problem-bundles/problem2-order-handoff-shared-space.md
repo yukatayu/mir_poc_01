@@ -34,6 +34,56 @@
 - late join は published history を past として見る
 - stale reconnect は fail then refresh として扱う
 
+## 最短 quickstart
+
+### 1. `smoke problem2` で representative pair を一度に確認する
+
+```bash
+python3 scripts/current_l2_guided_samples.py smoke problem2
+```
+
+見るべき結果:
+
+- `p07` / `p08` の runtime / `matrix problem2` / `bundle problem2` /
+  parser companion inspector / `mapping` が順に通る。
+- authoritative-room first completion line の representative pair が drift していないことを 1 本で確認できる。
+
+### 2. `matrix problem2` で representative / reserve / negative pair を分けて読む
+
+```bash
+python3 scripts/current_l2_guided_samples.py matrix problem2
+```
+
+見るべき結果:
+
+- `p07 / p08` が first-line representative として見える。
+- `p09` が delegated RNG practical reserve route、
+  `p13 / p14` が negative static-stop pair として分かれて見える。
+
+### 3. `bundle problem2` で docs / Lean artifact / anchor spec-report まで一本道で辿る
+
+```bash
+python3 scripts/current_l2_guided_samples.py bundle problem2
+```
+
+見るべき結果:
+
+- representative pair、reserve route、negative pair、Lean artifact、anchor spec / report が 1 画面で読める。
+- final public witness/provider/artifact contract や exhaustive shared-space catalog をまだ確定していない stop line も確認できる。
+
+### 4. parser companion inspector で order-handoff companion surface を直接見る
+
+```bash
+cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- \
+  samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt \
+  --format pretty
+```
+
+見るべき結果:
+
+- edge-row principal / stage-block secondary の companion surface が parser-side carrier に戻っていることが分かる。
+- final source wording を凍らせず、thin experimental companion として保っている current cut を追える。
+
 ## 実行の順番
 
 1. representative pair をそのまま流す

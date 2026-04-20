@@ -24,6 +24,56 @@
 - theorem line は notebook-first / review-unit first に留める
 - model-check line は row-local carrier first に留める
 
+## 最短 quickstart
+
+### 1. `smoke problem1` で representative line を一度に確認する
+
+```bash
+python3 scripts/current_l2_guided_samples.py smoke problem1
+```
+
+見るべき結果:
+
+- `p06` の runtime / `matrix problem1` / `bundle problem1` / parser companion inspector / `mapping`
+  がこの順に通る。
+- representative sample bundle の主要 command 群が drift していないことを 1 本で確認できる。
+
+### 2. `matrix problem1` で representative と補助 sample の役割差を見る
+
+```bash
+python3 scripts/current_l2_guided_samples.py matrix problem1
+```
+
+見るべき結果:
+
+- `p06` が public-seam representative として先頭に出る。
+- `p10 / p11 / p12 / p15 / p16` は checker-adjacent bridge-floor 補助 sample として残る。
+
+### 3. `bundle problem1` で docs / Lean artifact / anchor spec-report まで一本道で辿る
+
+```bash
+python3 scripts/current_l2_guided_samples.py bundle problem1
+```
+
+見るべき結果:
+
+- representative sample path、Lean artifact path、parser companion path、
+  anchor spec / report が 1 画面で読める。
+- final public theorem contract や final public verifier contract には上げていない stop line も同時に確認できる。
+
+### 4. parser companion inspector で request/head/clause bundle を直接見る
+
+```bash
+cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- \
+  samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt \
+  --format pretty
+```
+
+見るべき結果:
+
+- `p06` companion surface が repo-local parser-side carrier に戻っていることが分かる。
+- surface を final grammar に昇格せず、thin experimental companion として保っている current cut を追える。
+
 ## 実行の順番
 
 1. representative sample をそのまま流す
