@@ -805,6 +805,10 @@ actual-adoption floor では、
   `specs/examples/578`
   - `bundle problem1 / problem2` helper に `parser_companion_path` を actualize してよい
   - Package 104 close 後の current active queue は Package 105 parser companion inspector と Package 106 parser companion mapping matrix である
+- parser-side request-head / clause-bundle inspector actualization:
+  `specs/examples/579`
+  - `Stage3RequestHeadClauseBundle` の representative parse result を repo-local JSON / pretty inspector command に actualize してよい
+  - Package 105 close 後の current active queue は Package 106 parser companion mapping matrix である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

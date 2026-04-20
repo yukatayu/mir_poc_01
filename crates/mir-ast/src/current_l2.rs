@@ -265,6 +265,54 @@ pub struct Stage3RequestHeadClauseBundle {
     pub attachment_frame_kind: Stage3RequestAttachmentFrameKind,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2RequestHeadClauseBundleInspectorManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_ACCEPTED_SURFACE_REFS: &[&str] =
+    &["stage3_request_head_clause_bundle_inspector"];
+
+const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_CODE_ANCHOR_REFS: &[&str] = &[
+    "mir_ast_current_l2_module",
+    "stage3_request_head_clause_bundle_inspector_tests",
+];
+
+const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_RETAINED_LATER_REFS: &[&str] = &[
+    "final_public_parser_checker_runtime_surface",
+    "full_program_lowering",
+    "span_rich_diagnostics",
+    "final_grammar",
+];
+
+pub const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_MANIFEST:
+    CurrentL2RequestHeadClauseBundleInspectorManifest =
+    CurrentL2RequestHeadClauseBundleInspectorManifest {
+        carrier_kind: "current_l2_nonproduction_request_head_clause_bundle_inspector",
+        accepted_surface_refs:
+            CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_ACCEPTED_SURFACE_REFS,
+        code_anchor_refs: CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_CODE_ANCHOR_REFS,
+        retained_later_refs: CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_RETAINED_LATER_REFS,
+    };
+
+pub fn current_l2_request_head_clause_bundle_inspector_manifest()
+-> &'static CurrentL2RequestHeadClauseBundleInspectorManifest {
+    &CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_INSPECTOR_MANIFEST
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CurrentL2RequestHeadClauseBundleInspection {
+    pub op: String,
+    pub target_kind: &'static str,
+    pub target_ref: String,
+    pub require_fragment_text: Option<String>,
+    pub ensure_fragment_text: Option<String>,
+    pub attachment_frame_kind: &'static str,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Stage1DeclGuardSlot {
     pub surface_text: String,
@@ -951,6 +999,73 @@ pub fn parse_stage3_request_head_clause_bundle_text(
     })
 }
 
+pub fn inspect_stage3_request_head_clause_bundle(
+    bundle: &Stage3RequestHeadClauseBundle,
+) -> CurrentL2RequestHeadClauseBundleInspection {
+    let (target_kind, target_ref) = match &bundle.perform_head.target_ref {
+        Stage3PerformTargetRef::On(target) => ("on", target.as_str()),
+        Stage3PerformTargetRef::Via(chain_ref) => ("via", chain_ref.as_str()),
+    };
+    let attachment_frame_kind = match bundle.attachment_frame_kind {
+        Stage3RequestAttachmentFrameKind::RequestLocalTwoSlotSuite => "request_local_two_slot_suite",
+    };
+
+    CurrentL2RequestHeadClauseBundleInspection {
+        op: bundle.perform_head.op.clone(),
+        target_kind,
+        target_ref: target_ref.to_string(),
+        require_fragment_text: bundle.clause_suite.require_fragment_text.clone(),
+        ensure_fragment_text: bundle.clause_suite.ensure_fragment_text.clone(),
+        attachment_frame_kind,
+    }
+}
+
+pub fn render_current_l2_request_head_clause_bundle_inspection_json(
+    inspection: &CurrentL2RequestHeadClauseBundleInspection,
+) -> String {
+    format!(
+        concat!(
+            "{{\n",
+            "  \"op\": {},\n",
+            "  \"target_kind\": {},\n",
+            "  \"target_ref\": {},\n",
+            "  \"require_fragment_text\": {},\n",
+            "  \"ensure_fragment_text\": {},\n",
+            "  \"attachment_frame_kind\": {}\n",
+            "}}"
+        ),
+        render_json_string(&inspection.op),
+        render_json_string(inspection.target_kind),
+        render_json_string(&inspection.target_ref),
+        render_json_optional_string(inspection.require_fragment_text.as_deref()),
+        render_json_optional_string(inspection.ensure_fragment_text.as_deref()),
+        render_json_string(inspection.attachment_frame_kind),
+    )
+}
+
+pub fn render_current_l2_request_head_clause_bundle_inspection_pretty(
+    inspection: &CurrentL2RequestHeadClauseBundleInspection,
+) -> String {
+    format!(
+        concat!(
+            "op: {}\n",
+            "target: {} {}\n",
+            "require: {}\n",
+            "ensure: {}\n",
+            "attachment: {}"
+        ),
+        inspection.op,
+        inspection.target_kind,
+        inspection.target_ref,
+        inspection
+            .require_fragment_text
+            .as_deref()
+            .unwrap_or("(none)"),
+        inspection.ensure_fragment_text.as_deref().unwrap_or("(none)"),
+        inspection.attachment_frame_kind,
+    )
+}
+
 fn collect_stage3_source_lines(source: &str) -> Vec<Stage3SourceLine> {
     source
         .lines()
@@ -963,6 +1078,24 @@ fn collect_stage3_source_lines(source: &str) -> Vec<Stage3SourceLine> {
             }
         })
         .collect()
+}
+
+fn render_json_optional_string(value: Option<&str>) -> String {
+    match value {
+        Some(value) => render_json_string(value),
+        None => "null".to_string(),
+    }
+}
+
+fn render_json_string(value: &str) -> String {
+    format!("\"{}\"", escape_json_string(value))
+}
+
+fn escape_json_string(value: &str) -> String {
+    value
+        .replace('\\', "\\\\")
+        .replace('"', "\\\"")
+        .replace('\n', "\\n")
 }
 
 fn find_first_stage3_head(lines: &[Stage3SourceLine], prefix: &str) -> Option<usize> {

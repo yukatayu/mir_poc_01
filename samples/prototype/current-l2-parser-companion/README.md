@@ -40,6 +40,14 @@
 cargo test -p mir-ast --test current_l2_stage3_request_head_clause_bundle_sample_bundle
 ```
 
+- parse result 自体を repo-local inspector で見る:
+
+```bash
+cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- \
+  samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt \
+  --format json
+```
+
 - companion sample 自体は meaning-preserving な最小 reader aid であり、final grammar の草案ではない。
 
 ## original sample との対応

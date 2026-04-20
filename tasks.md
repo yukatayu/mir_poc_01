@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 13:40 JST
+最終更新: 2026-04-20 13:56 JST
 
 ## この文書について
 
@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 105 parser companion inspector
   - Package 106 parser companion mapping matrix
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
@@ -64,7 +63,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `105` parser companion inspector | representative parser companion sample の parse result を final parser API にせず repo-local inspector として inspectable にする | `M` | `Macro 6/7` | `p06 / p07 / p08` companion sample の parse result を JSON / pretty summary と focused test で visible にし、parser-side carrier を docs-only で終わらせない | representative slice の parse result を repo-local command から再現できる |
 | `106` parser companion mapping matrix | original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report の対応を drift なく readable にする | `S-M` | `Macro 6/7` | bundle helper だけに依存せず、representative slice の mapping を docs / helper / traceability で同じ読みへ揃える | representative slice の mapping matrix が docs / helper / traceability の 3 点で一致する |
 
 ## recently closed package note
@@ -287,7 +285,7 @@
 ### Package 105 — parser companion inspector
 
 - current reading:
-  next active bundle。`p06 / p07 / p08` companion sample 自体は parse できるので、次は parse result を repo-local JSON / pretty summary で inspectable にし、parser-side carrier を docs-only で終わらせない。
+  close 済み。`p06 / p07 / p08` companion sample の parse result を repo-local JSON / pretty summary で inspectable にし、parser-side carrier を docs-only で終わらせない current cut を `mir-ast` example と focused test に actualize した。
 - current recommendation:
   final public parser API や full `Program` lowering を採らず、representative slice 専用の small inspector command / example / helper と focused test に留める。
 - stop line:
@@ -802,6 +800,5 @@
 
 ## next reopen order
 
-1. Package 105 で parser companion parse result の repo-local inspector を representative theorem/order-handoff slice へ actualize する。
-2. Package 106 で original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report の mapping matrix を docs / helper / traceability へ actualize する。
-3. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。
+1. Package 106 で original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report の mapping matrix を docs / helper / traceability へ actualize する。
+2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

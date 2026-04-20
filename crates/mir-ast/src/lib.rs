@@ -32,6 +32,10 @@ The next parser-side follow-up package is fixed as:
   - `Stage3RequestHeadClauseBundle`
   - `RequestLocalTwoSlotSuite`
   - perform head / request clause suite parser reuse
+- request-head / clause bundle repo-local inspector
+  - representative parser companion sample の parse result inspection
+  - JSON / pretty output
+  - non-production example command only
 
 These stage 3 parsers are non-production reopen-package carriers, not a final
 public parser API.
