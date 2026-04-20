@@ -4619,3 +4619,17 @@
   - `specs/examples/611-current-l2-delegated-rng-service-reserve-package-summary-index-actualization.md`
   - `docs/reports/0892-faq011-current-status-and-last-mile-gates.md`
 - 今回の要点は、`faq_010.md` 以後の genuine progress として reserve package summary index actualization を current explanation に取り込みつつ、「二大問題の current first line と first completion line はかなり close しているが、final public language implementation complete ではない」「repo-local near-end target に対してはかなり強く自走できるが、full final-public completion には still mixed gate / true user-spec gate が残る」という current lineを FAQ 11 として明示した点である。
+
+## 2026-04-20 repo-local near-end completion handoff integration after FAQ 011
+
+- `sub-agent-pro/codex_repo_local_near_end_completion_handoff_after_faq011_2026-04-20.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `faq_011.md`
+  - `specs/examples/605-current-l2-once-through-closeout-summary-sync.md`
+  - `specs/examples/606-current-l2-reserve-integration-entrypoint-summary-sync.md`
+  - `specs/examples/607-current-l2-parser-side-residual-lane-helper-actualization.md`
+  - `specs/examples/608-current-l2-true-user-spec-hold-line-freeze-sync.md`
+  - `specs/examples/609-current-l2-theorem-first-external-pilot-summary-index-actualization.md`
+  - `specs/examples/610-current-l2-auditable-authority-witness-reserve-package-summary-index-actualization.md`
+  - `specs/examples/611-current-l2-delegated-rng-service-reserve-package-summary-index-actualization.md`
+  - `docs/reports/0893-repo-local-near-end-completion-handoff-integration-after-faq011.md`
+- 今回の要点は、新 handoff を規範判断へ昇格させず current explanation delta として統合しつつ、current active self-driven package を `model-check-second-line` に同期し、reserve integration reopen / later mixed gate reopen / true user-spec hold line を later reopen bands として読み直した点である。repo-local near-end completion を final-public completion と混同しない current snapshot を `Documentation.md` / `progress.md` / `tasks.md` / `plan/01` / `plan/11` / `plan/17` / `plan/18` に揃えた。

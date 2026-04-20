@@ -77,6 +77,9 @@
 - `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
   - 2026-04-20 時点の repo-local once-through completion handoff であり、FAQ 10 以後の parser-side closeout / finite-index strong typing / Lean-first theorem skeleton / model-check second-line / order-handoff helper-local source surface / authoritative-room first scenario / docs closeout sequenceを 1 本の staged package 列として整理する。
   - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569`、`570`、`571`、`572`、`573`、`574`、`575`、`576`、`577`、`578`、`579`、`580`、`581`、`582`、`583`、`584`、`585`、`586`、`587`、`588`、`589` 以後の once-through closeout reading と residual / bundle / parser-side / smoke actualization 群の current explanation source として使ってよい。
+- `sub-agent-pro/codex_repo_local_near_end_completion_handoff_after_faq011_2026-04-20.md`
+  - 2026-04-20 時点の repo-local near-end completion handoff であり、FAQ 11 以後の reserve package summary index actualization、active self-driven package の `model-check-second-line` への narrow 化、repo-local near-end completion と final-public residual の切り分けを current explanation source として整理する。
+  - 規範判断の正本ではないが、`specs/examples/605`、`606`、`607`、`608`、`609`、`610`、`611` 以後の closeout / reserve / parser-side residual / hold-line / reserve-package summary index 群を読むときの explanation source として使ってよい。
 
 ## 規範的な読書順
 

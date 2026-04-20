@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 21:32 JST
+最終更新: 2026-04-20 22:51 JST
 
 ## この文書について
 
@@ -32,12 +32,13 @@
 - ここでいう principal target は checker-adjacent first layer を指し、
   stronger typed surface を early に source principal へ昇格する判断とは切り分けて読む。
 - したがって、remaining work の主眼は
-  **repo-local once-through near-end completion**
+  **repo-local near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
   - closeout 用 numbered queue closed
-  - reserve integration reopen / later mixed gate reopen / true user-spec hold line
-  を先頭に追う。
+  - active self-driven package = `model-check-second-line`
+  - reserve integration reopen / later mixed gate reopen / true user-spec hold line は later reopen bands
+  と読むのが current handoff まで含めた最も歪みの少ない reading である。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
 ## current executable floor

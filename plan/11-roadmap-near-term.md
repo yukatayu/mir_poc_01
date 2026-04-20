@@ -10,9 +10,10 @@ execution lane、theory-lab lane、reserve integration lane は分けて書く�
 ## current reading
 
 - current execution line は `Macro 4 active on fixed authored/prototype floor` である。
-- current theory-lab line は `Macro 5 final-layer closeout packages active` である。
+- current theory-lab line は `Macro 5 repo-local near-end completion closeout active after FAQ11 handoff integration` である。
 - current reserve integration line は `Macro 6 minimal working subset actual default / Macro 7 mixed` である。
 - corrected runnable floor は current mapped corpus で already reached しており、next packages はその floor を作るためではなく closeout / mixed-gate narrowing のために置いている。
+- current active self-driven package は `model-check-second-line` である。reserve integration reopen / later mixed gate reopen / true user-spec hold line は later reopen bands として保持する。
 - current defaults:
   - theorem-first external integration target
   - first strong typing layer = finite decidable index fragment + IFC / taint + capture / lifetime + simple cost
