@@ -157,10 +157,9 @@ full dependent type、general theorem proving in compiler、final public checker
     から入り、review-unit first / notebook-consumer first のまま theorem public-contract residual を
     typed residual と model-check residual から切り離して読める。
 - `model-check public-contract split`
-  - `python3 scripts/current_l2_guided_samples.py matrix problem1`
-    と `python3 scripts/current_l2_guided_samples.py bundle problem1`
-    を合わせて見て、row-local property route first / checker-artifact route first を保ったまま
-    model-check public-contract residual を切り出す。
+  - close 済み。`python3 scripts/current_l2_guided_samples.py split problem1 model-check-public-contract`
+    から入り、row-local property route first / checker-artifact route first を保ったまま
+    model-check public-contract residual を typed residual と theorem residual から切り離して読める。
 
 ## typed source principal split の入口
 
@@ -191,6 +190,21 @@ python3 scripts/current_l2_guided_samples.py split problem1 theorem-public-contr
   kept separate として表示され、theorem residual だけを narrow に読む current cut を確認できる。
 - stop line が `final public theorem contract` / `concrete theorem prover brand` /
   `final public verifier contract` に留まり、typed source principal や model-check 側の residual と混ざらないことを確認できる。
+
+## model-check public-contract split の入口
+
+```bash
+python3 scripts/current_l2_guided_samples.py split problem1 model-check-public-contract
+```
+
+見るべき結果:
+
+- `p06` representative と `p10 / p11 / p12 / p15 / p16` 補助 sample の組が、
+  model-check public-contract residual の row-local carrier 入口としてまとまって見える。
+- `typed source principal split` と `theorem public-contract split` が
+  kept separate として表示され、model-check residual だけを narrow に読む current cut を確認できる。
+- stop line が `first settled property language` / `final public checker artifact` /
+  `final public verifier contract` に留まり、typed / theorem 側の residual と混ざらないことを確認できる。
 
 ## stop line
 

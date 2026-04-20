@@ -833,6 +833,8 @@
   - current Phase 6 / Package 117 closeout として、`split problem1 typed-source-principal` helper と Problem 1 bundle doc 側の typed split entrypoint を actualize し、Problem 1 typed residual を theorem/model-check residual から切り離して narrow に読む補助文書。
 - `specs/examples/591-current-l2-problem1-theorem-public-contract-split-helper-actualization.md`
   - current Phase 6 / Package 118 closeout として、`split problem1 theorem-public-contract` helper と Problem 1 bundle doc 側の theorem split entrypoint を actualize し、Problem 1 theorem public-contract residual を typed / model-check residual から切り離して narrow に読む補助文書。
+- `specs/examples/592-current-l2-problem1-model-check-public-contract-split-helper-actualization.md`
+  - current Phase 6 / Package 119 closeout として、`split problem1 model-check-public-contract` helper と Problem 1 bundle doc 側の model-check split entrypoint を actualize し、Problem 1 model-check public-contract residual を typed / theorem residual から切り離して narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

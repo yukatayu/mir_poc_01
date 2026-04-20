@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 16:44 JST
+最終更新: 2026-04-20 16:59 JST
 
 ## この文書について
 
@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 119 Problem 1 model-check public-contract split
   - Package 120 Problem 2 source wording / emitted schema split
   - Package 121 Problem 2 witness-provider public-shape split
   に分けて追う。
@@ -65,7 +64,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `119` Problem 1 model-check public-contract split | Problem 1 model-check public-contract residual を typed / theorem residual から切り離して narrow にする | `S-M` | `Macro 5/7` | row-local property route first / checker-artifact route first を保ったまま model-check reopen point を独立 package に戻す | model-check public-contract residual が独立 package として読める |
 | `120` Problem 2 source wording / emitted schema split | Problem 2 source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow にする | `S-M` | `Macro 5/6` | edge-row principal / stage-block secondary を保ったまま source wording reopen point を独立 package に戻す | source wording / emitted schema residual が独立 package として読める |
 | `121` Problem 2 witness-provider public-shape split | Problem 2 witness/provider public-shape residual を source wording residual から切り離して narrow にする | `S-M` | `Macro 5/6` | claim/payload split first / route-schema split first を保ったまま witness-provider reopen point を独立 package に戻す | witness-provider public-shape residual が独立 package として読める |
 
@@ -443,9 +441,9 @@
 ### Package 119 — Problem 1 model-check public-contract split
 
 - current reading:
-  next active bundle。row-local property route first / checker-artifact route first / reopen-threshold helper mirror keep を保ったまま、model-check public-contract residual を typed / theorem residual から切り離して narrow にする。
+  close 済み。row-local property route first / checker-artifact route first / reopen-threshold helper mirror keep を保ったまま、model-check public-contract residual を typed / theorem residual から切り離して narrow に読む helper/doc cut を actualize した。
 - current recommendation:
-  model-check residual は `matrix problem1` と `bundle problem1` の row-local carrier 導線を主 anchor にし、property/tool seam の mixed gate を theorem residual と混ぜない。
+  model-check residual は `split problem1 model-check-public-contract` と `matrix problem1` / `bundle problem1` の row-local carrier 導線を主 anchor にし、property/tool seam の mixed gate を theorem residual と混ぜない。
 - stop line:
   first settled property language
   final public checker artifact
@@ -969,6 +967,6 @@
 
 ## next reopen order
 
-1. Package 119 で Problem 1 model-check public-contract residual を separate package として narrow にする。
-2. Package 120 / 121 で Problem 2 source wording residual と witness-provider public-shape residual を separate package として narrow にする。
-3. residual public-seam maintenance と later mixed/user-spec residual を Package 119...121 close 後に再同期する。
+1. Package 120 / 121 で Problem 2 source wording residual と witness-provider public-shape residual を separate package として narrow にする。
+2. residual public-seam maintenance と later mixed/user-spec residual を Package 120 / 121 close 後に再同期する。
+3. Problem 1 split-trio closeout 後の remaining mixed gate を final public seams / theorem-model-check-verifier contract 側にだけ圧縮する。
