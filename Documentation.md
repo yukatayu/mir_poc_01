@@ -356,6 +356,7 @@ Problem 1 / Problem 2 representative bundle hardening、split helper 群、resid
    `faq_008.md`
    `faq_009.md`
    `faq_010.md`
+   `faq_011.md`
    `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
    `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
 
@@ -381,6 +382,7 @@ Problem 1 / Problem 2 representative bundle hardening、split helper 群、resid
 - `faq_008.md` は 2026-04-18 時点の current explanation refresh であり、`faq_007.md` 以後の genuine progress、現状の finished / not finished / mixed gate / true user-spec gate、および「何を答えればどこまで自走できるか」の current limit を整理する。
 - `faq_009.md` は 2026-04-19 時点の current explanation refresh であり、representative Lean sample set actual Lean execution floor を含む最新 status を踏まえて、done / not done / overall ladder / remaining gate / self-drive bound を整理する。
 - `faq_010.md` は 2026-04-20 時点の current explanation refresh であり、`faq_009.md` 以後の Phase 6 parser-side tranche actualization を含む最新 status を踏まえて、二大問題の closeout 到達点、language implementation の current limit、remaining mixed gate / true user-spec gate、および「ここからどこまで自走できるか」の current bound を整理する。
+- `faq_011.md` は 2026-04-20 時点の current explanation refresh であり、`faq_010.md` 以後の reserve package summary index actualization を含む最新 status を踏まえて、二大問題の actual completion bound、repo-local near-end と final-public residual の切り分け、および「何を答えればどこまで自走できるか」の current bound を整理する。
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md` は 2026-04-19 時点の detailed closeout handoff であり、layered strong typing / IFC、Lean formal skeleton、first completion scope、reopened self-driven queue の current explanation source として使ってよい。
 - `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md` は 2026-04-20 時点の repo-local once-through completion handoff であり、Package 91/92 actualization と、その後ろに置く Package 93...98 の staged self-driven sequence を current explanation source として使ってよい。current repo reading では Package 98 close 後の active queue は residual bundle 群に移ったと読む。
 - `specs/examples/569` は Package 95 closeout として、edge-row principal / stage-block secondary / repo-local emitted artifact reading / delegated RNG reserve / late-join negative pair を `run-source-sample` helper summary に actualize した current source-backed route tightening note である。

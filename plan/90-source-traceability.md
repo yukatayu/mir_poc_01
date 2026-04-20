@@ -4603,3 +4603,19 @@
   - `scripts/current_l2_guided_samples.py`
   - `scripts/tests/test_current_l2_guided_samples.py`
   - `scripts/tests/test_problem_sample_bundles.py`
+
+## 2026-04-20 FAQ 011 current-status and last-mile gates refresh
+
+- `faq_011.md`、`Documentation.md`、`specs/00-document-map.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `progress.md`
+  - `tasks.md`
+  - `faq_010.md`
+  - `plan/01-status-at-a-glance.md`
+  - `plan/11-roadmap-near-term.md`
+  - `plan/17-research-phases-and-autonomy-gates.md`
+  - `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
+  - `specs/examples/609-current-l2-theorem-first-external-pilot-summary-index-actualization.md`
+  - `specs/examples/610-current-l2-auditable-authority-witness-reserve-package-summary-index-actualization.md`
+  - `specs/examples/611-current-l2-delegated-rng-service-reserve-package-summary-index-actualization.md`
+  - `docs/reports/0892-faq011-current-status-and-last-mile-gates.md`
+- 今回の要点は、`faq_010.md` 以後の genuine progress として reserve package summary index actualization を current explanation に取り込みつつ、「二大問題の current first line と first completion line はかなり close しているが、final public language implementation complete ではない」「repo-local near-end target に対してはかなり強く自走できるが、full final-public completion には still mixed gate / true user-spec gate が残る」という current lineを FAQ 11 として明示した点である。
