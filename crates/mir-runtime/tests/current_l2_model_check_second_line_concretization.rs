@@ -270,6 +270,64 @@ fn model_check_second_line_concretization_reaches_typed_runtime_prototype() {
 }
 
 #[test]
+fn model_check_second_line_concretization_reaches_capture_escape_typed_runtime_prototype() {
+    let sample_path = typed_prototype_sample_path("p15-typed-capture-escape-rejected.txt");
+    let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let second_line = build_current_l2_source_sample_model_check_second_line_concretization(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_second_line_matches_prefloor(
+        &second_line,
+        &prefloor,
+        &[
+            "compare_floor:current_l2.model_check_projection_prefloor",
+            "compare_floor:current_l2.model_check.second_line_concretization",
+        ],
+        &[
+            "guard:row_local_property_preview_only",
+            "guard:brand_neutral_model_check_request_only",
+            "guard:keep_public_checker_chain_docs_only",
+        ],
+    );
+}
+
+#[test]
+fn model_check_second_line_concretization_reaches_cost_bound_typed_runtime_prototype() {
+    let sample_path = typed_prototype_sample_path("p16-typed-remote-call-budget-exceeded.txt");
+    let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let second_line = build_current_l2_source_sample_model_check_second_line_concretization(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_second_line_matches_prefloor(
+        &second_line,
+        &prefloor,
+        &[
+            "compare_floor:current_l2.model_check_projection_prefloor",
+            "compare_floor:current_l2.model_check.second_line_concretization",
+        ],
+        &[
+            "guard:row_local_property_preview_only",
+            "guard:brand_neutral_model_check_request_only",
+            "guard:keep_public_checker_chain_docs_only",
+        ],
+    );
+}
+
+#[test]
 fn model_check_second_line_concretization_reaches_order_handoff_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(

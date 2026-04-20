@@ -267,6 +267,70 @@ fn model_check_actual_adoption_reaches_typed_runtime_prototype() {
 }
 
 #[test]
+fn model_check_actual_adoption_reaches_capture_escape_typed_runtime_prototype() {
+    let sample_path = typed_prototype_sample_path("p15-typed-capture-escape-rejected.txt");
+    let threshold = build_current_l2_source_sample_model_check_property_tool_threshold(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+
+    assert_actual_adoption_matches_threshold(
+        &actual_adoption,
+        &threshold,
+        &[
+            "compare_floor:current_l2.model_check.property_tool_threshold",
+            "compare_floor:current_l2.model_check.second_line_concretization",
+            "compare_floor:current_l2.model_check.row_local_property_actual_adoption",
+        ],
+        &[
+            "guard:row_local_property_actual_adoption_only",
+            "guard:checker_boundary_contract_actual_adoption_only",
+            "guard:brand_neutral_tool_binding_reserve_keep",
+            "guard:public_checker_handoff_later",
+        ],
+    );
+}
+
+#[test]
+fn model_check_actual_adoption_reaches_cost_bound_typed_runtime_prototype() {
+    let sample_path = typed_prototype_sample_path("p16-typed-remote-call-budget-exceeded.txt");
+    let threshold = build_current_l2_source_sample_model_check_property_tool_threshold(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let actual_adoption =
+        build_current_l2_source_sample_model_check_row_local_property_actual_adoption(
+            sample_path.to_str().unwrap(),
+            prototype_host_plan(&sample_path),
+        )
+        .unwrap();
+
+    assert_actual_adoption_matches_threshold(
+        &actual_adoption,
+        &threshold,
+        &[
+            "compare_floor:current_l2.model_check.property_tool_threshold",
+            "compare_floor:current_l2.model_check.second_line_concretization",
+            "compare_floor:current_l2.model_check.row_local_property_actual_adoption",
+        ],
+        &[
+            "guard:row_local_property_actual_adoption_only",
+            "guard:checker_boundary_contract_actual_adoption_only",
+            "guard:brand_neutral_tool_binding_reserve_keep",
+            "guard:public_checker_handoff_later",
+        ],
+    );
+}
+
+#[test]
 fn model_check_actual_adoption_reaches_order_handoff_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let threshold = build_current_l2_source_sample_model_check_property_tool_threshold(

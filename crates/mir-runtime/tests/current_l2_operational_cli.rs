@@ -2215,6 +2215,38 @@ fn operational_cli_json_reports_capture_escape_checker_hint_preview() {
         "partial_cluster"
     );
     assert_eq!(
+        value["theorem_result_object_preview"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["theorem_result_object_preview"]["bridge_floor_refs"][5],
+        "theorem_lean_stub_pilot:p15-typed-capture-escape-rejected:lean_first_principal"
+    );
+    assert!(
+        value["theorem_result_object_preview"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("checker-adjacent / Lean-first theorem bridge floors")
+    );
+    assert_eq!(
+        value["model_check_public_checker_preview"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["model_check_public_checker_preview"]["bridge_floor_refs"][6],
+        "model_check_property_route:p15-typed-capture-escape-rejected:row_local_preview_bundle"
+    );
+    assert!(
+        value["model_check_public_checker_preview"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("row-local carrier / property-tool bridge floors")
+    );
+    assert_eq!(
+        value["model_check_final_public_contract_reopen_threshold"]["bridge_floor_refs"][7],
+        "model_check_checker_contract_route:p15-typed-capture-escape-rejected:checker_boundary_contract_anchor"
+    );
+    assert_eq!(
         value["actual_checker_payload_row_detail_threshold"]["row_reason_kind"],
         "capture_escape_negative"
     );
@@ -2262,4 +2294,15 @@ fn operational_cli_pretty_reports_cost_bound_checker_hint_preview() {
     assert!(output.contains("actual_public_checker_api_sketch_threshold:"));
     assert!(output.contains("actual_phase2_parser_free_poc_closeout_threshold:"));
     assert!(output.contains("closeout_kind: parser_free_companion_baseline"));
+    assert!(output.contains("theorem_result_object_preview:"));
+    assert!(output.contains("bridge_floor_refs:"));
+    assert!(output.contains(
+        "theorem_lean_stub_pilot:p16-typed-remote-call-budget-exceeded:lean_first_principal"
+    ));
+    assert!(output.contains(
+        "model_check_property_route:p16-typed-remote-call-budget-exceeded:row_local_preview_bundle"
+    ));
+    assert!(output.contains(
+        "current first strong typing sample stays on reached row-local carrier / property-tool bridge floors"
+    ));
 }

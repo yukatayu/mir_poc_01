@@ -3802,6 +3802,7 @@ struct CurrentL2OperationalCliTheoremResultObjectPreviewSummary {
     proof_object_schema_reserve_refs: Vec<String>,
     actual_adoption_default_refs: Vec<String>,
     evidence_refs: Vec<String>,
+    bridge_floor_refs: Vec<String>,
     compare_floor_refs: Vec<String>,
     guard_refs: Vec<String>,
     kept_later_refs: Vec<String>,
@@ -3835,6 +3836,7 @@ impl CurrentL2OperationalCliTheoremResultObjectPreviewSummary {
                 proof_object_schema_reserve_refs: theorem_result_proof_object_schema_reserve_refs(),
                 actual_adoption_default_refs: theorem_result_object_preview_default_refs(),
                 evidence_refs: theorem_result_object_preview_evidence_refs(&report.sample_id),
+                bridge_floor_refs: Vec::new(),
                 compare_floor_refs: theorem_result_object_preview_compare_floor_refs(true),
                 guard_refs: theorem_result_object_preview_guard_refs(true),
                 kept_later_refs: theorem_result_object_preview_kept_later_refs(),
@@ -3842,6 +3844,7 @@ impl CurrentL2OperationalCliTheoremResultObjectPreviewSummary {
             };
         }
 
+        let bridge_floor_refs = theorem_guard_bridge_floor_refs(&report.sample_id);
         Self {
             status: "guarded_not_reached",
             preview_kind: "helper_local_actualization_manifest",
@@ -3852,12 +3855,12 @@ impl CurrentL2OperationalCliTheoremResultObjectPreviewSummary {
             proof_object_schema_reserve_refs: Vec::new(),
             actual_adoption_default_refs: Vec::new(),
             evidence_refs: theorem_result_object_preview_evidence_refs(&report.sample_id),
+            bridge_floor_refs,
             compare_floor_refs: theorem_result_object_preview_compare_floor_refs(false),
             guard_refs: theorem_result_object_preview_guard_refs(false),
             kept_later_refs: theorem_result_object_preview_kept_later_refs(),
-            guard_reason: Some(format!(
-                "current theorem result-object preview only actualizes the representative theorem quartet (`e5` / `p06` / `p07` / `p08`) after verification preview reaches the formal-hook route for `{}`",
-                report.sample_id
+            guard_reason: Some(theorem_result_object_preview_guard_reason(
+                &report.sample_id,
             )),
         }
     }
@@ -3874,6 +3877,7 @@ struct CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary {
     tool_binding_reserve_refs: Vec<String>,
     actual_adoption_default_refs: Vec<String>,
     evidence_refs: Vec<String>,
+    bridge_floor_refs: Vec<String>,
     compare_floor_refs: Vec<String>,
     guard_refs: Vec<String>,
     kept_later_refs: Vec<String>,
@@ -3908,6 +3912,7 @@ impl CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary {
                 tool_binding_reserve_refs: model_check_public_checker_tool_binding_reserve_refs(),
                 actual_adoption_default_refs: model_check_public_checker_preview_default_refs(),
                 evidence_refs: model_check_public_checker_preview_evidence_refs(&report.sample_id),
+                bridge_floor_refs: Vec::new(),
                 compare_floor_refs: model_check_public_checker_preview_compare_floor_refs(true),
                 guard_refs: model_check_public_checker_preview_guard_refs(true),
                 kept_later_refs: model_check_public_checker_preview_kept_later_refs(),
@@ -3915,6 +3920,10 @@ impl CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary {
             };
         }
 
+        let bridge_floor_refs = model_check_guard_bridge_floor_refs(
+            verification_preview.subject_ref.as_deref(),
+            &report.sample_id,
+        );
         Self {
             status: "guarded_not_reached",
             preview_kind: "helper_local_actualization_manifest",
@@ -3925,12 +3934,12 @@ impl CurrentL2OperationalCliModelCheckPublicCheckerPreviewSummary {
             tool_binding_reserve_refs: Vec::new(),
             actual_adoption_default_refs: Vec::new(),
             evidence_refs: model_check_public_checker_preview_evidence_refs(&report.sample_id),
+            bridge_floor_refs,
             compare_floor_refs: model_check_public_checker_preview_compare_floor_refs(false),
             guard_refs: model_check_public_checker_preview_guard_refs(false),
             kept_later_refs: model_check_public_checker_preview_kept_later_refs(),
-            guard_reason: Some(format!(
-                "current model-check public-checker preview only actualizes the representative checker quartet (`e5` / `p06` / `p07` / `p09`) after verification preview reaches the formal-hook route for `{}`",
-                report.sample_id
+            guard_reason: Some(model_check_public_checker_preview_guard_reason(
+                &report.sample_id,
             )),
         }
     }
@@ -3949,6 +3958,7 @@ struct CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary {
     final_public_contract_reopen_sequence_refs: Vec<String>,
     threshold_default_refs: Vec<String>,
     evidence_refs: Vec<String>,
+    bridge_floor_refs: Vec<String>,
     compare_floor_refs: Vec<String>,
     guard_refs: Vec<String>,
     kept_later_refs: Vec<String>,
@@ -3994,6 +4004,7 @@ impl CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary {
                 evidence_refs: theorem_final_public_contract_reopen_threshold_evidence_refs(
                     &report.sample_id,
                 ),
+                bridge_floor_refs: Vec::new(),
                 compare_floor_refs:
                     theorem_final_public_contract_reopen_threshold_compare_floor_refs(true),
                 guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(true),
@@ -4002,6 +4013,7 @@ impl CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary {
             };
         }
 
+        let bridge_floor_refs = theorem_guard_bridge_floor_refs(&report.sample_id);
         Self {
             status: "guarded_not_reached",
             threshold_kind: "helper_local_reopen_threshold_manifest",
@@ -4016,14 +4028,14 @@ impl CurrentL2OperationalCliTheoremFinalPublicContractReopenThresholdSummary {
             evidence_refs: theorem_final_public_contract_reopen_threshold_evidence_refs(
                 &report.sample_id,
             ),
+            bridge_floor_refs,
             compare_floor_refs: theorem_final_public_contract_reopen_threshold_compare_floor_refs(
                 false,
             ),
             guard_refs: theorem_final_public_contract_reopen_threshold_guard_refs(false),
             kept_later_refs: theorem_final_public_contract_reopen_threshold_kept_later_refs(),
-            guard_reason: Some(format!(
-                "current theorem final public-contract reopen threshold only actualizes the representative theorem quartet (`e5` / `p06` / `p07` / `p08`) after verification preview reaches the formal-hook route for `{}`",
-                report.sample_id
+            guard_reason: Some(theorem_final_public_contract_reopen_threshold_guard_reason(
+                &report.sample_id,
             )),
         }
     }
@@ -4042,6 +4054,7 @@ struct CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummar
     final_public_contract_reopen_sequence_refs: Vec<String>,
     threshold_default_refs: Vec<String>,
     evidence_refs: Vec<String>,
+    bridge_floor_refs: Vec<String>,
     compare_floor_refs: Vec<String>,
     guard_refs: Vec<String>,
     kept_later_refs: Vec<String>,
@@ -4087,6 +4100,7 @@ impl CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary 
                 evidence_refs: model_check_final_public_contract_reopen_threshold_evidence_refs(
                     &report.sample_id,
                 ),
+                bridge_floor_refs: Vec::new(),
                 compare_floor_refs:
                     model_check_final_public_contract_reopen_threshold_compare_floor_refs(true),
                 guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(true),
@@ -4096,6 +4110,10 @@ impl CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary 
             };
         }
 
+        let bridge_floor_refs = model_check_guard_bridge_floor_refs(
+            verification_preview.subject_ref.as_deref(),
+            &report.sample_id,
+        );
         Self {
             status: "guarded_not_reached",
             threshold_kind: "helper_local_reopen_threshold_manifest",
@@ -4110,14 +4128,14 @@ impl CurrentL2OperationalCliModelCheckFinalPublicContractReopenThresholdSummary 
             evidence_refs: model_check_final_public_contract_reopen_threshold_evidence_refs(
                 &report.sample_id,
             ),
+            bridge_floor_refs,
             compare_floor_refs:
                 model_check_final_public_contract_reopen_threshold_compare_floor_refs(false),
             guard_refs: model_check_final_public_contract_reopen_threshold_guard_refs(false),
             kept_later_refs: model_check_final_public_contract_reopen_threshold_kept_later_refs(),
-            guard_reason: Some(format!(
-                "current model-check final public-contract reopen threshold only actualizes the representative checker quartet (`e5` / `p06` / `p07` / `p09`) after verification preview reaches the formal-hook route for `{}`",
-                report.sample_id
-            )),
+            guard_reason: Some(
+                model_check_final_public_contract_reopen_threshold_guard_reason(&report.sample_id),
+            ),
         }
     }
 }
@@ -4516,6 +4534,100 @@ fn typed_checker_hint_evidence_refs(sample_id: &str) -> Vec<String> {
         foundation_evidence_ref.to_string(),
         "helper_preview:typed_checker_hint_preview".to_string(),
     ]
+}
+
+fn theorem_guard_bridge_floor_refs(sample_id: &str) -> Vec<String> {
+    let Some(manifest) = current_l2_first_strong_typing_sample_manifest(sample_id) else {
+        return Vec::new();
+    };
+
+    vec![
+        manifest.foundation_evidence_ref.to_string(),
+        manifest.primary_compare_floor_ref.to_string(),
+        "helper_preview:typed_checker_hint_preview".to_string(),
+        format!("proof_notebook_review_unit:{sample_id}:rollback_cut_non_interference"),
+        format!("theorem_binding_preflight:{sample_id}:rollback_cut_non_interference"),
+        format!("theorem_lean_stub_pilot:{sample_id}:lean_first_principal"),
+        format!(
+            "repo_local_emitted_artifact:lean_theorem_stub:{sample_id}:rollback_cut_non_interference"
+        ),
+    ]
+}
+
+fn theorem_result_object_preview_guard_reason(sample_id: &str) -> String {
+    let base = format!(
+        "current theorem result-object preview only actualizes the representative theorem quartet (`e5` / `p06` / `p07` / `p08`) after verification preview reaches the formal-hook route for `{sample_id}`"
+    );
+
+    if current_l2_first_strong_typing_sample_reached(sample_id) {
+        format!(
+            "{base}; current first strong typing sample stays on checker-adjacent / Lean-first theorem bridge floors until theorem result-object preview itself is widened"
+        )
+    } else {
+        base
+    }
+}
+
+fn model_check_guard_bridge_floor_refs(subject_ref: Option<&str>, sample_id: &str) -> Vec<String> {
+    let Some(manifest) = current_l2_first_strong_typing_sample_manifest(sample_id) else {
+        return Vec::new();
+    };
+    let subject_ref = subject_ref.unwrap_or(sample_id);
+
+    vec![
+        manifest.primary_compare_floor_ref.to_string(),
+        "helper_preview:typed_checker_hint_preview".to_string(),
+        "compare_floor:current_l2.model_check_projection_prefloor".to_string(),
+        "compare_floor:current_l2.model_check.second_line_concretization".to_string(),
+        format!("small_cluster_projection:{subject_ref}:runtime_try_cut_local"),
+        format!("model_check_request_preflight:{subject_ref}:row_local_property_preview"),
+        format!("model_check_property_route:{subject_ref}:row_local_preview_bundle"),
+        format!(
+            "model_check_checker_contract_route:{subject_ref}:checker_boundary_contract_anchor"
+        ),
+    ]
+}
+
+fn model_check_public_checker_preview_guard_reason(sample_id: &str) -> String {
+    let base = format!(
+        "current model-check public-checker preview only actualizes the representative checker quartet (`e5` / `p06` / `p07` / `p09`) after verification preview reaches the formal-hook route for `{sample_id}`"
+    );
+
+    if current_l2_first_strong_typing_sample_reached(sample_id) {
+        format!(
+            "{base}; current first strong typing sample stays on reached row-local carrier / property-tool bridge floors until public-checker preview itself is widened"
+        )
+    } else {
+        base
+    }
+}
+
+fn theorem_final_public_contract_reopen_threshold_guard_reason(sample_id: &str) -> String {
+    let base = format!(
+        "current theorem final public-contract reopen threshold only actualizes the representative theorem quartet (`e5` / `p06` / `p07` / `p08`) after verification preview reaches the formal-hook route for `{sample_id}`"
+    );
+
+    if current_l2_first_strong_typing_sample_reached(sample_id) {
+        format!(
+            "{base}; current first strong typing sample stays on checker-adjacent / Lean-first theorem bridge floors before theorem public-seam reopen is widened"
+        )
+    } else {
+        base
+    }
+}
+
+fn model_check_final_public_contract_reopen_threshold_guard_reason(sample_id: &str) -> String {
+    let base = format!(
+        "current model-check final public-contract reopen threshold only actualizes the representative checker quartet (`e5` / `p06` / `p07` / `p09`) after verification preview reaches the formal-hook route for `{sample_id}`"
+    );
+
+    if current_l2_first_strong_typing_sample_reached(sample_id) {
+        format!(
+            "{base}; current first strong typing sample stays on reached row-local carrier / property-tool bridge floors before model-check public-contract reopen is widened"
+        )
+    } else {
+        base
+    }
 }
 
 fn theorem_result_object_preview_evidence_refs(sample_id: &str) -> Vec<String> {
@@ -6030,6 +6142,7 @@ fn render_theorem_result_object_preview(
         1,
     );
     render_string_list(output, "evidence_refs", &preview.evidence_refs, 1);
+    render_string_list(output, "bridge_floor_refs", &preview.bridge_floor_refs, 1);
     render_string_list(output, "compare_floor_refs", &preview.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &preview.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &preview.kept_later_refs, 1);
@@ -6081,6 +6194,7 @@ fn render_model_check_public_checker_preview(
         1,
     );
     render_string_list(output, "evidence_refs", &preview.evidence_refs, 1);
+    render_string_list(output, "bridge_floor_refs", &preview.bridge_floor_refs, 1);
     render_string_list(output, "compare_floor_refs", &preview.compare_floor_refs, 1);
     render_string_list(output, "guard_refs", &preview.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &preview.kept_later_refs, 1);
@@ -6144,6 +6258,7 @@ fn render_theorem_final_public_contract_reopen_threshold(
         1,
     );
     render_string_list(output, "evidence_refs", &threshold.evidence_refs, 1);
+    render_string_list(output, "bridge_floor_refs", &threshold.bridge_floor_refs, 1);
     render_string_list(
         output,
         "compare_floor_refs",
@@ -6299,6 +6414,7 @@ fn render_model_check_final_public_contract_reopen_threshold(
         1,
     );
     render_string_list(output, "evidence_refs", &threshold.evidence_refs, 1);
+    render_string_list(output, "bridge_floor_refs", &threshold.bridge_floor_refs, 1);
     render_string_list(
         output,
         "compare_floor_refs",

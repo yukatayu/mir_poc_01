@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p16` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...465` compare floor、`466...469` actual adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor が揃った。corrected runnable floor と representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530`、`531`、`532`、`533`、`534`、`535`、`536`、`537`、`538`、`539`、`540`、`541`、`542`、`543`、`544`、`545`、`546`、`547`、`548`、`549`、`550`、`551`、`552`、`553`、`554`、`555`、`556`、`557`、`558`、`559`、`560`、`561`、`562`、`563`、`564`、`565`、`566`、`567` により Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening、near-end closeout sync after Package 58、theorem/model-check reopen-threshold helper mirror、order-handoff/shared-space public-seam helper mirror、IFC actual-checker-payload-family threshold helper mirror、IFC checker-payload-row-family threshold helper mirror、IFC checker-payload-row-detail threshold helper mirror、IFC checker-payload-row-body threshold helper mirror、IFC checker-payload-supported-kind-summary threshold helper mirror、IFC checker-payload-public-schema-sketch threshold helper mirror、IFC public-checker-api sketch threshold helper mirror、IFC public-checker entry-criteria threshold helper mirror、IFC public-checker command-surface threshold helper mirror、IFC shared-output-contract threshold helper mirror、IFC public-checker-boundary threshold helper mirror、IFC verifier-handoff-surface threshold helper mirror、IFC minimal-parser-subset-freeze threshold helper mirror、IFC parser-to-checker-reconnect-freeze threshold helper mirror、IFC phase1-semantics-closeout threshold helper mirror、IFC phase2-parser-free-poc-closeout threshold helper mirror、Phase 4 shared-space self-driven closeout threshold helper mirror、Phase 5 proof/protocol/runtime-policy handoff closeout threshold helper mirror、Phase 6 parser / AST carrier first tranche threshold helper mirror、Phase 6 checker/runtime first tranche threshold helper mirror、Phase 6 compile-ready verification / formal hook threshold helper mirror、Phase 6 next-reopen sequencing threshold helper mirror、Phase 6 parser second tranche attached-slot / predicate fragment first-package threshold helper mirror、first strong typing layer finite-index spine default、phase6 reserve formal tool binding inventory threshold helper mirror、phase6 parser-side follow-up package sequencing threshold helper mirror、phase6 parser second-tranche shared single attachment frame first-package threshold helper mirror、fixed-subset source-sample corpus scope-and-file-layout threshold helper mirror、phase6 request-clause-suite publicization threshold helper mirror、phase6 perform-head structural carrier threshold helper mirror、phase6 perform-head-request-clause-bundle compare floor、phase6 perform-head-request-clause-bundle thin-wrapper helper mirror、finite-index first-layer capture / lifetime / cost actualization、Lean-first formal skeleton hardening after finite-index widening は `samples/lean/` committed corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper、snapshot / roadmap / traceability sync に actualize 済みと読む。current remaining active line は Package 94 theorem-first and model-check second-line carrier を先頭にした once-through sequence、later mixed-gate residual maintenance、true user-spec residual に narrowed した）
+    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...568` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 95 order/handoff source surface and artifacts を先頭にした once-through sequence、later mixed-gate residual maintenance、true user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -313,7 +313,6 @@
 ## current self-driven queue
 
 - current live line は、
-  - Package 94 theorem-first and model-check second-line carrier
   - Package 95 order/handoff source surface and artifacts
   - Package 96 authoritative-room first scenario
   - Package 97 reserve strengthening
@@ -327,6 +326,8 @@
 actual adoption package、near-end closeout、helper-local actualization floor を source-backed に揃える current anchor である。
 `specs/examples/556...567` は、
 phase6 parser second-tranche first-package close、first strong typing layer finite-index spine default、phase6 reserve formal tool binding inventory closeout、phase6 parser-side follow-up package sequencing closeout、phase6 shared single attachment frame first-package closeout、fixed-subset source-sample corpus scope-and-file-layout closeout、request clause suite publicization closeout、perform head structural carrier closeout、perform-head-request-clause-bundle-attachment compare floor、perform-head-request-clause-bundle thin-wrapper helper actualization、finite-index first-layer capture / lifetime / cost actualization、Lean-first formal skeleton hardening after finite-index widening を source-backed に同期する current anchor である。
+`specs/examples/568` は、
+Package 94 close として theorem public seam を premature に widen せず、model-check second-line / row-local carrier widening と theorem/model-check helper-local `bridge_floor_refs` reconnect を source-backed に同期する current anchor である。
 
 ## まだ OPEN のもの
 
@@ -368,7 +369,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
 - typed / theorem / model-check / ordering の adjacent package:
   `specs/examples/413...448`
 - current tranche / preview package:
-  `specs/examples/451...567`
+  `specs/examples/451...568`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:
@@ -384,7 +385,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
 - `faq_009.md` は 2026-04-19 時点の current explanation refresh であり、representative Lean sample set actual Lean execution floor を含む最新 status を踏まえて、done / not done / overall ladder / remaining gate / self-drive bound を整理する。
 - `faq_010.md` は 2026-04-20 時点の current explanation refresh であり、`faq_009.md` 以後の Phase 6 parser-side tranche actualization を含む最新 status を踏まえて、二大問題の closeout 到達点、language implementation の current limit、remaining mixed gate / true user-spec gate、および「ここからどこまで自走できるか」の current bound を整理する。
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md` は 2026-04-19 時点の detailed closeout handoff であり、layered strong typing / IFC、Lean formal skeleton、first completion scope、reopened self-driven queue の current explanation source として使ってよい。
-- `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md` は 2026-04-20 時点の repo-local once-through completion handoff であり、Package 91/92 actualization と、その後ろに置く Package 93...98 の staged self-driven sequence を current explanation source として使ってよい。current repo reading では Package 93 close 後の active queue は Package 94...98 に進んだと読む。
+- `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md` は 2026-04-20 時点の repo-local once-through completion handoff であり、Package 91/92 actualization と、その後ろに置く Package 93...98 の staged self-driven sequence を current explanation source として使ってよい。current repo reading では Package 94 close 後の active queue は Package 95...98 に進んだと読む。
 - 規範判断の正本は常に `specs/` に残る。
 - `plan/` は long-lived repository memory であり、snapshot ではない。
 - `progress.md` と `tasks.md` は current queue と remaining gate を mirror する薄い snapshot として保つ。

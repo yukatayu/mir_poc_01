@@ -277,6 +277,12 @@ actual-adoption floor では、
   - `samples/lean/current-l2/` = generated theorem stub corpus
   - `p15 / p16` representative generated corpus widening
   - Package 93 close と Package 94...98 current queue
+- theorem/model-check bridge carrier reconnect after finite-index widening:
+  `specs/examples/568`
+  - theorem public seam quartet keep
+  - model-check second-line / row-local carrier widening
+  - helper-local `bridge_floor_refs` reconnect
+  - Package 94 close と Package 95...98 current queue
 - reserve strengthening actualization:
   `specs/examples/476`
   - `auditable_authority_witness` minimal witness core actualization
@@ -744,6 +750,12 @@ actual-adoption floor では、
   - representative generated theorem stub corpus `p15 / p16` widening
   - foundation と generated stub の役割差
   - Package 93 close 後の current active queue は Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
+- theorem/model-check bridge carrier reconnect after finite-index widening:
+  `specs/examples/568`
+  - theorem public seam reached quartet は `e5 / p06 / p07 / p08` の representative cut に保つ
+  - model-check second-line / row-local property actual adoption は `p10 / p11 / p12 / p15 / p16` まで widened してよい
+  - helper-local CLI summary は guarded case に `bridge_floor_refs` を出してよい
+  - Package 94 close 後の current active queue は Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

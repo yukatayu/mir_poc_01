@@ -218,6 +218,16 @@
   - `specs/examples/430-current-l2-malformed-duplicate-cluster-later-reopen-comparison.md`
   - `docs/reports/0706-theory-lab-reserve-hardening-and-duplicate-next-cut.md`
 
+## 2026-04-20 Package 94 theorem/model-check bridge reconnect addendum
+
+- `Documentation.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`progress.md`、`tasks.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/568-current-l2-theorem-model-check-bridge-carrier-reconnect-after-finite-index-widening.md`
+  - `docs/reports/0851-package94-theorem-model-check-bridge-carrier-reconnect.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_second_line_concretization.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_row_local_property_actual_adoption.rs`
+
 ## 2026-04-20 Phase 6 checker/runtime first tranche helper mirror addendum
 
 - `Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
