@@ -809,6 +809,10 @@ actual-adoption floor では、
   `specs/examples/579`
   - `Stage3RequestHeadClauseBundle` の representative parse result を repo-local JSON / pretty inspector command に actualize してよい
   - Package 105 close 後の current active queue は Package 106 parser companion mapping matrix である
+- parser-side representative mapping matrix actualization:
+  `specs/examples/580`
+  - `p06 / p07 / p08` representative slice の original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report 対応を `mapping` helper と sample README table に actualize してよい
+  - Package 106 close 後の current active queue は Package 107 explained representative problem sample bundles と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

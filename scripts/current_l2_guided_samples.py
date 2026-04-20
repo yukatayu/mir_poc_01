@@ -72,6 +72,26 @@ PROBLEM_BUNDLE_STOP_LINES = {
     ),
 }
 
+PARSER_COMPANION_MAPPING_BUNDLE_ANCHORS = {
+    "problem1": "specs/examples/575-current-l2-problem1-theorem-first-pilot-bundle-actualization.md",
+    "problem2": "specs/examples/576-current-l2-problem2-authoritative-room-scenario-bundle-actualization.md",
+}
+
+PARSER_COMPANION_MAPPING_SHARED_ANCHORS = (
+    "specs/examples/577-current-l2-parser-side-companion-surface-bundle-actualization.md",
+    "specs/examples/578-current-l2-parser-side-bundle-to-helper-bridge-actualization.md",
+    "specs/examples/579-current-l2-parser-side-request-head-clause-bundle-inspector-actualization.md",
+    "docs/reports/0857-package101-102-problem-bundles.md",
+    "docs/reports/0858-package103-104-parser-side-companion-and-bridge.md",
+    "docs/reports/0859-package105-parser-companion-inspector.md",
+)
+
+PARSER_COMPANION_MAPPING_STOP_LINE = (
+    "exhaustive sample catalog",
+    "final public tutorial surface",
+    "final public parser / checker / runtime API",
+)
+
 
 @dataclass(frozen=True)
 class GuidedSample:
@@ -310,8 +330,101 @@ def bundle_commands(spec: ProblemSpec) -> tuple[str, ...]:
         f"python3 scripts/current_l2_guided_samples.py show {spec.problem_id}",
         " ".join(build_single_run_command(primary, output_format="pretty")),
         f"python3 scripts/current_l2_guided_samples.py matrix {spec.problem_id}",
+        "python3 scripts/current_l2_guided_samples.py mapping",
         f"python3 scripts/current_l2_guided_samples.py run {spec.problem_id} --all --format json",
     )
+
+
+def parser_companion_inspector_command(
+    sample: GuidedSample,
+    *,
+    output_format: str = "pretty",
+) -> str:
+    companion = parser_companion_path(sample)
+    if companion is None:
+        raise ValueError(f"sample `{sample.sample_id}` does not have a parser companion path")
+    return (
+        "cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- "
+        f"{companion} --format {output_format}"
+    )
+
+
+def representative_parser_companion_rows() -> tuple[tuple[str, GuidedSample], ...]:
+    rows: list[tuple[str, GuidedSample]] = []
+    for problem_id, spec in problem_specs().items():
+        for sample in spec.samples:
+            if sample.primary and parser_companion_path(sample) is not None:
+                rows.append((problem_id, sample))
+    return tuple(rows)
+
+
+def build_parser_companion_mapping_manifest() -> dict[str, object]:
+    rows = []
+    for problem_id, sample in representative_parser_companion_rows():
+        rows.append(
+            {
+                "sample_id": sample.sample_id,
+                "problem_id": problem_id,
+                "prototype_path": relative_path(sample.sample_path),
+                "parser_companion_path": parser_companion_path(sample),
+                "guided_bundle_command": f"python3 scripts/current_l2_guided_samples.py bundle {problem_id}",
+                "guided_matrix_command": f"python3 scripts/current_l2_guided_samples.py matrix {problem_id}",
+                "inspector_command": parser_companion_inspector_command(sample),
+                "lean_artifacts": lean_artifact_paths(sample),
+                "anchor_refs": (
+                    PARSER_COMPANION_MAPPING_BUNDLE_ANCHORS[problem_id],
+                    *PARSER_COMPANION_MAPPING_SHARED_ANCHORS,
+                ),
+            }
+        )
+    return {
+        "mapping_kind": "current_l2_parser_companion_representative_mapping",
+        "title": "parser companion representative mapping",
+        "current_reading": (
+            "representative slice `p06 / p07 / p08` を original prototype / parser companion / "
+            "guided bundle / Lean artifact / anchor spec-report の 5 層で読み直すための helper-local matrix。"
+        ),
+        "rows": rows,
+        "stop_line": PARSER_COMPANION_MAPPING_STOP_LINE,
+    }
+
+
+def render_parser_companion_mapping() -> str:
+    manifest = build_parser_companion_mapping_manifest()
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+    ]
+
+    for row in manifest["rows"]:
+        lines.append(f"- {row['sample_id']} ({row['problem_id']})")
+        lines.append(f"  original prototype: {row['prototype_path']}")
+        lines.append(f"  parser companion: {row['parser_companion_path']}")
+        lines.append(f"  guided bundle: {row['guided_bundle_command']}")
+        lines.append(f"  guided matrix: {row['guided_matrix_command']}")
+        lines.append(f"  inspector: {row['inspector_command']}")
+        for artifact in row["lean_artifacts"]:
+            lines.append(f"  Lean artifact: {artifact}")
+        lines.append("  anchor refs:")
+        for anchor in row["anchor_refs"]:
+            lines.append(f"    - {anchor}")
+        lines.append("")
+
+    lines.append("stop line:")
+    for item in manifest["stop_line"]:
+        lines.append(f"- {item}")
+
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- representative slice だけを対象にした mapping であり、exhaustive sample catalog ではない。",
+            "- final public parser / checker / runtime API や final public tutorial surface を意味しない。",
+        ]
+    )
+    return "\n".join(lines)
 
 
 def build_problem_bundle_manifest(spec: ProblemSpec) -> dict[str, object]:
@@ -810,6 +923,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     bundle_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
     bundle_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    mapping_parser = subparsers.add_parser(
+        "mapping",
+        help="parser companion representative slice の mapping matrix を表示する",
+    )
+    mapping_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     return parser.parse_args(argv)
 
 
@@ -820,6 +939,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.subcommand == "list":
         for problem_id, spec in specs.items():
             print(f"{problem_id}: {spec.summary}")
+        return 0
+
+    if args.subcommand == "mapping":
+        manifest = build_parser_companion_mapping_manifest()
+        if args.format == "json":
+            print(json.dumps(manifest, ensure_ascii=False, indent=2))
+            return 0
+        print(render_parser_companion_mapping())
         return 0
 
     spec = specs[args.problem_id]

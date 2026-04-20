@@ -357,6 +357,100 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("first-line representative", text)
         self.assertIn("delegated-rng+model-check", text)
 
+    def test_parser_companion_mapping_manifest_tracks_representative_slice(self) -> None:
+        manifest = guided.build_parser_companion_mapping_manifest()
+
+        self.assertEqual(
+            manifest["mapping_kind"],
+            "current_l2_parser_companion_representative_mapping",
+        )
+        rows = manifest["rows"]
+        self.assertEqual(
+            [row["sample_id"] for row in rows],
+            [
+                "p06-typed-proof-owner-handoff",
+                "p07-dice-late-join-visible-history",
+                "p08-dice-stale-reconnect-refresh",
+            ],
+        )
+
+        first = rows[0]
+        self.assertEqual(first["problem_id"], "problem1")
+        self.assertEqual(
+            first["prototype_path"],
+            "samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt",
+        )
+        self.assertEqual(
+            first["parser_companion_path"],
+            "samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt",
+        )
+        self.assertEqual(
+            first["guided_bundle_command"],
+            "python3 scripts/current_l2_guided_samples.py bundle problem1",
+        )
+        self.assertEqual(
+            first["guided_matrix_command"],
+            "python3 scripts/current_l2_guided_samples.py matrix problem1",
+        )
+        self.assertEqual(
+            first["inspector_command"],
+            "cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt --format pretty",
+        )
+        self.assertIn(
+            "samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean",
+            first["lean_artifacts"],
+        )
+        self.assertIn(
+            "specs/examples/575-current-l2-problem1-theorem-first-pilot-bundle-actualization.md",
+            first["anchor_refs"],
+        )
+        self.assertIn(
+            "specs/examples/579-current-l2-parser-side-request-head-clause-bundle-inspector-actualization.md",
+            first["anchor_refs"],
+        )
+
+        second = rows[1]
+        self.assertEqual(second["problem_id"], "problem2")
+        self.assertIn(
+            "specs/examples/576-current-l2-problem2-authoritative-room-scenario-bundle-actualization.md",
+            second["anchor_refs"],
+        )
+
+    def test_render_parser_companion_mapping_mentions_all_layers(self) -> None:
+        text = guided.render_parser_companion_mapping()
+
+        self.assertIn("parser companion representative mapping", text)
+        self.assertIn("p06-typed-proof-owner-handoff", text)
+        self.assertIn("p07-dice-late-join-visible-history", text)
+        self.assertIn("p08-dice-stale-reconnect-refresh", text)
+        self.assertIn("original prototype", text)
+        self.assertIn("parser companion", text)
+        self.assertIn("guided bundle", text)
+        self.assertIn("guided matrix", text)
+        self.assertIn("Lean artifact", text)
+        self.assertIn("anchor refs", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py bundle problem2",
+            text,
+        )
+        self.assertIn(
+            "cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- samples/prototype/current-l2-parser-companion/p08-dice-stale-reconnect-refresh.request.txt --format pretty",
+            text,
+        )
+        self.assertIn("exhaustive sample catalog", text)
+
+    def test_main_mapping_command_uses_mapping_renderer(self) -> None:
+        fake_text = "parser companion representative mapping\n..."
+
+        with mock.patch.object(guided, "render_parser_companion_mapping", return_value=fake_text):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["mapping"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("parser companion representative mapping" in call.args[0] for call in write.mock_calls)
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

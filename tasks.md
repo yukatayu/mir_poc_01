@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 13:56 JST
+最終更新: 2026-04-20 14:19 JST
 
 ## この文書について
 
@@ -35,7 +35,7 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 106 parser companion mapping matrix
+  - Package 107 explained representative problem sample bundles
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +63,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `106` parser companion mapping matrix | original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report の対応を drift なく readable にする | `S-M` | `Macro 6/7` | bundle helper だけに依存せず、representative slice の mapping を docs / helper / traceability で同じ読みへ揃える | representative slice の mapping matrix が docs / helper / traceability の 3 点で一致する |
+| `107` explained representative problem sample bundles | 二大問題それぞれの representative sample を `samples/` 側で簡潔な日本語解説付き bundle として辿れるようにする | `S-M` | `Macro 6/7` | runner / Lean artifact / parser companion / guided helper の 4 本を `samples/` guide から同じ読みで辿れる explained bundle を actualize する | Problem 1 / Problem 2 の explained bundle README が `samples/` 導線と helper / Lean / parser-side line を drift なく接続する |
 
 ## recently closed package note
 
@@ -296,13 +296,24 @@
 ### Package 106 — parser companion mapping matrix
 
 - current reading:
-  next active bundle。parser companion path は bundle helper へ入ったので、次は original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report の mapping を docs / helper / traceability で drift なく readable にする。
+  close 済み。parser companion path は bundle helper へ入ったので、representative slice の original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report 対応を `mapping` helper と sample README table に actualize した。
 - current recommendation:
   representative slice だけを対象に matrix を actualize し、reserve / negative line の exhaustive widening は still later に残す。
 - stop line:
   exhaustive sample catalog
   final public tutorial surface
   final public parser / checker / runtime API
+
+### Package 107 — explained representative problem sample bundles
+
+- current reading:
+  next active bundle。二大問題それぞれの representative sample を `samples/` 側で簡潔な日本語解説付き bundle として戻し、runner / Lean artifact / parser companion / guided helper の 4 本を README から辿れるようにする。
+- current recommendation:
+  Problem 1 は `p06`、Problem 2 は `p07 / p08` を中心にし、current first line の意味と stop line を過剰に広げずに explained bundle を actualize する。
+- stop line:
+  exhaustive tutorial expansion
+  final public parser / checker / runtime API
+  exhaustive shared-space catalog
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -800,5 +811,5 @@
 
 ## next reopen order
 
-1. Package 106 で original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report の mapping matrix を docs / helper / traceability へ actualize する。
+1. Package 107 で Problem 1 / Problem 2 の explained representative sample bundle を `samples/` 側へ actualize する。
 2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

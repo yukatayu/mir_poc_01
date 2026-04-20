@@ -48,6 +48,12 @@ cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle 
   --format json
 ```
 
+- original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report の対応をまとめて見る:
+
+```bash
+python3 scripts/current_l2_guided_samples.py mapping
+```
+
 - companion sample 自体は meaning-preserving な最小 reader aid であり、final grammar の草案ではない。
 
 ## original sample との対応
@@ -58,3 +64,13 @@ cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle 
   - original: `samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt`
 - `p08-dice-stale-reconnect-refresh.request.txt`
   - original: `samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt`
+
+## representative mapping
+
+| representative sample | original prototype | parser companion | guided bundle | Lean artifact | anchor |
+|---|---|---|---|---|---|
+| `p06-typed-proof-owner-handoff` | `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt` | `samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt` | `python3 scripts/current_l2_guided_samples.py bundle problem1` | `samples/lean/current-l2/p06-typed-proof-owner-handoff/` | `specs/examples/575` / `577` / `578` / `579` |
+| `p07-dice-late-join-visible-history` | `samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt` | `samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt` | `python3 scripts/current_l2_guided_samples.py bundle problem2` | `samples/lean/current-l2/p07-dice-late-join-visible-history/` | `specs/examples/576` / `577` / `578` / `579` |
+| `p08-dice-stale-reconnect-refresh` | `samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt` | `samples/prototype/current-l2-parser-companion/p08-dice-stale-reconnect-refresh.request.txt` | `python3 scripts/current_l2_guided_samples.py bundle problem2` | `samples/lean/current-l2/p08-dice-stale-reconnect-refresh/` | `specs/examples/576` / `577` / `578` / `579` |
+
+- この表は representative slice の current cut だけをまとめたものであり、reserve / negative sample や exhaustive catalog まで広げるものではない。

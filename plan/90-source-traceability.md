@@ -4323,3 +4323,11 @@
   - `crates/mir-ast/src/lib.rs`
   - `crates/mir-ast/examples/current_l2_inspect_request_head_clause_bundle.rs`
   - `crates/mir-ast/tests/current_l2_request_head_clause_bundle_inspector_manifest.rs`
+
+## 2026-04-20 Package 106 parser companion representative mapping matrix addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`samples/prototype/current-l2-parser-companion/README.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/580-current-l2-parser-side-representative-mapping-matrix-actualization.md`
+  - `docs/reports/0860-package106-parser-companion-mapping-matrix.md`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`

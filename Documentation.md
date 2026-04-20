@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p16` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...579` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix / problem bundle actualization / parser-side companion and bridge / parser-side inspector が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 106 parser companion mapping matrix、true user-spec residual に narrowed した）
+    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...580` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix / problem bundle actualization / parser-side companion and bridge / parser-side inspector / parser-side representative mapping matrix が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 107 explained representative problem sample bundles、true user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -313,7 +313,7 @@
 ## current self-driven queue
 
 - current live line は、
-  - Package 106 parser companion mapping matrix
+  - Package 107 explained representative problem sample bundles
   - committed `samples/lean/` corpus と helper-local CLI summary を基点にした residual public-seam maintenance
   - later mixed gate residual maintenance
   - true user-spec residual
@@ -394,6 +394,7 @@ Package 94 close として theorem public seam を premature に widen せず、
 - `specs/examples/577` は Package 103 closeout として、`p06 / p07 / p08` representative slice を `samples/prototype/current-l2-parser-companion/` と `mir-ast` parse test で actualize し、thin experimental companion surface を parser-side carrier に戻した current source-backed note である。
 - `specs/examples/578` は Package 104 closeout として、`bundle problem1 / problem2` helper に parser companion path を actualize し、original prototype / parser companion / Lean artifact を一本道で辿れる bridge を作った current source-backed note である。
 - `specs/examples/579` は Package 105 closeout として、`Stage3RequestHeadClauseBundle` の representative parse result を repo-local JSON / pretty inspector command に actualize し、parser-side carrier を docs-only で終わらせない current source-backed note である。
+- `specs/examples/580` は Package 106 closeout として、`p06 / p07 / p08` representative slice の original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report 対応を `mapping` helper と sample README table に actualize し、parser-side tranche の readable mapping cut を固定した current source-backed note である。
 - 規範判断の正本は常に `specs/` に残る。
 - `plan/` は long-lived repository memory であり、snapshot ではない。
 - `progress.md` と `tasks.md` は current queue と remaining gate を mirror する薄い snapshot として保つ。
