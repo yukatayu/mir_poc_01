@@ -969,6 +969,40 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         )
         self.assertIn("witness-provider public-shape split", payload["kept_separate"])
 
+    def test_problem2_witness_provider_split_text_mentions_matrix_bundle_and_kept_separate(self) -> None:
+        text = guided.render_problem_split_package_from_runtime(
+            "problem2",
+            "witness-provider-public-shape",
+            output_format="pretty",
+        )
+
+        self.assertIn("witness-provider public-shape split", text)
+        self.assertIn("p07-dice-late-join-visible-history", text)
+        self.assertIn("p09-dice-delegated-rng-provider-placement", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py matrix problem2", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem2", text)
+        self.assertIn("source wording / emitted schema split", text)
+        self.assertIn("final public witness/provider/artifact contract", text)
+
+    def test_problem2_witness_provider_split_json_contains_expected_manifest(self) -> None:
+        rendered = guided.render_problem_split_package_from_runtime(
+            "problem2",
+            "witness-provider-public-shape",
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["package_id"], "witness-provider-public-shape")
+        self.assertEqual(payload["package_name"], "witness-provider public-shape split")
+        self.assertEqual(payload["problem_id"], "problem2")
+        self.assertIn("p07-dice-late-join-visible-history", payload["representative_samples"])
+        self.assertIn("p09-dice-delegated-rng-provider-placement", payload["supporting_samples"])
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py matrix problem2",
+            payload["commands"][0],
+        )
+        self.assertIn("source wording / emitted schema split", payload["kept_separate"])
+
     def test_main_split_command_uses_split_renderer(self) -> None:
         fake_text = "typed source principal split\n..."
 

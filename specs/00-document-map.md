@@ -837,6 +837,8 @@
   - current Phase 6 / Package 119 closeout として、`split problem1 model-check-public-contract` helper と Problem 1 bundle doc 側の model-check split entrypoint を actualize し、Problem 1 model-check public-contract residual を typed / theorem residual から切り離して narrow に読む補助文書。
 - `specs/examples/593-current-l2-problem2-source-wording-emitted-schema-split-helper-actualization.md`
   - current Phase 6 / Package 120 closeout として、`split problem2 source-wording-emitted-schema` helper と Problem 2 bundle doc 側の source wording split entrypoint を actualize し、Problem 2 source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow に読む補助文書。
+- `specs/examples/594-current-l2-problem2-witness-provider-public-shape-split-helper-actualization.md`
+  - current Phase 6 / Package 121 closeout として、`split problem2 witness-provider-public-shape` helper と Problem 2 bundle doc 側の witness-provider split entrypoint を actualize し、Problem 2 witness/provider public-shape residual を source wording / emitted schema residual から切り離して narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

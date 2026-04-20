@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 17:13 JST
+最終更新: 2026-04-20 17:24 JST
 
 ## この文書について
 
@@ -35,8 +35,9 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 121 Problem 2 witness-provider public-shape split
-  を first package として追う。
+  - Package 122 residual public-seam maintenance sync
+  - Package 123 remaining mixed-gate compression after split closeout
+  を first package 群として追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
 ## current executable floor
@@ -63,7 +64,8 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `121` Problem 2 witness-provider public-shape split | Problem 2 witness/provider public-shape residual を source wording residual から切り離して narrow にする | `S-M` | `Macro 5/6` | claim/payload split first / route-schema split first を保ったまま witness-provider reopen point を独立 package に戻す | witness-provider public-shape residual が独立 package として読める |
+| `122` residual public-seam maintenance sync | split-package closeout 後の remaining public seam reading を docs / helper / queue snapshot で再同期する | `S-M` | `Macro 5/6` | reopened compare debt を増やさず、residual public seam を helper / sample bundle / roadmap snapshot で narrow に揃える | residual public-seam maintenance が 1 本の active line として読める |
+| `123` remaining mixed-gate compression after split closeout | remaining mixed gate と true user-spec residual を compare debt を増やさず narrow に圧縮する | `S-M` | `Macro 5/6/7` | theorem/model-check/witness-provider/final wording の residual mixed gate と true user-spec residual を再分離する | mixed gate / user-spec residual の境界が queue drift なく読める |
 
 ## recently closed package note
 
@@ -461,12 +463,34 @@
 ### Package 121 — Problem 2 witness-provider public-shape split
 
 - current reading:
-  next active bundle。claim/payload split first / route-schema split first / representative pair keep を保ったまま、witness-provider public-shape residual を source wording residual から切り離して narrow にする。
+  close 済み。claim/payload split first / route-schema split first / representative pair keep を保ったまま、witness-provider public-shape residual を source wording residual から切り離して narrow に読む helper/doc cut を actualize した。
 - current recommendation:
-  witness-provider residual は `matrix problem2` / `bundle problem2` / reserve lane の current split を主 anchor にし、source wording residual と混ぜない。
+  witness-provider residual は `split problem2 witness-provider-public-shape` と `matrix problem2` / `bundle problem2` / reserve lane の current split を主 anchor にし、source wording residual と混ぜない。
 - stop line:
   final public witness/provider/artifact contract
   stronger fairness / replay profile
+  exhaustive shared-space catalog
+
+### Package 122 — residual public-seam maintenance sync
+
+- current reading:
+  next active bundle。split-package closeout 後の remaining public seam を reopened compare floor に戻さず、helper mirror / sample bundle / roadmap snapshot / queue 読みを narrow に再同期する。
+- current recommendation:
+  `bundle problem1|problem2` / `reopen-map` / split helper 読みを current closeout 後の residual public seam に合わせて再圧縮し、helper / docs / queue snapshot の drift を潰す。
+- stop line:
+  final public wording / contract adoption
+  final public parser / checker / runtime API
+  exhaustive shared-space catalog
+
+### Package 123 — remaining mixed-gate compression after split closeout
+
+- current reading:
+  next active bundle。remaining mixed gate を theorem/model-check/witness-provider/final wording の final public seam 側へ圧縮し、true user-spec residual とは再度混ぜない。
+- current recommendation:
+  final public contract 群と user-spec residual を separate lane として再配置し、queue drift を再発させない。
+- stop line:
+  final public theorem/model-check/witness-provider contract
+  packaging / FFI / engine adapter
   exhaustive shared-space catalog
 
 ### Package 58 — helper / CLI hardening and broader coverage
@@ -965,6 +989,6 @@
 
 ## next reopen order
 
-1. Package 121 で Problem 2 witness-provider public-shape residual を separate package として narrow にする。
-2. residual public-seam maintenance と later mixed/user-spec residual を Package 121 close 後に再同期する。
-3. Problem 1 split-trio と Problem 2 source-wording split closeout 後の remaining mixed gate を final public seams / theorem-model-check-verifier contract 側にだけ圧縮する。
+1. Package 122 で split-package closeout 後の residual public-seam maintenance を helper / docs / queue snapshot に再同期する。
+2. Package 123 で remaining mixed gate と true user-spec residual を narrow に圧縮し直す。
+3. final public seams / packaging / exhaustive catalog 側の reopen line だけを separate lane として残す。

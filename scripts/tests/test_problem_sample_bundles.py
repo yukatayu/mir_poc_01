@@ -85,8 +85,13 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("source wording / emitted schema split", text)
         self.assertIn("witness-provider public-shape split", text)
         self.assertIn("source wording / emitted schema split の入口", text)
+        self.assertIn("witness-provider public-shape split の入口", text)
         self.assertIn(
             "python3 scripts/current_l2_guided_samples.py split problem2 source-wording-emitted-schema",
+            text,
+        )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py split problem2 witness-provider-public-shape",
             text,
         )
         self.assertIn(
