@@ -15,6 +15,7 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke-all", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart problem1", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart-parity", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py reopen-map", text)
         self.assertIn("最短 quickstart", text)
         self.assertIn("failed step", text)
         self.assertIn("非ゼロ", text)
@@ -31,6 +32,8 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("最短 quickstart", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke problem1", text)
         self.assertIn("見るべき結果", text)
+        self.assertIn("現在の mixed gate 再開点", text)
+        self.assertIn("stronger typed-surface actual adoption", text)
         self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)
         self.assertIn(
@@ -58,6 +61,11 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("最短 quickstart", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke problem2", text)
         self.assertIn("見るべき結果", text)
+        self.assertIn("現在の mixed gate 再開点", text)
+        self.assertIn(
+            "final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract",
+            text,
+        )
         self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem2", text)
         self.assertIn(

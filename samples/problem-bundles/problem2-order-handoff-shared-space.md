@@ -141,6 +141,23 @@ distributed fairness theorem や exhaustive shared-space catalog を要求しな
 - `authoritative_room_reserve_strengthening_lane`
   - witness strengthening / delegated RNG / model-check second line の separate status
 
+## 現在の mixed gate 再開点
+
+- `final source-surface handoff wording / final emitted-artifact schema`
+  - `python3 scripts/current_l2_guided_samples.py bundle problem2`
+    と parser companion inspector を合わせて見て、
+    edge-row principal / stage-block secondary のまま final source wording と emitted schema を凍らせない current cut を再確認する。
+- `final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract`
+  - `python3 scripts/current_l2_guided_samples.py matrix problem2`
+    で representative / reserve / negative pair の分担を見直しつつ、
+    `python3 scripts/current_l2_guided_samples.py bundle problem2`
+    で claim / payload split first の current reading を辿る。
+- stronger fairness / replay profile は current first completion line の必須条件ではなく、
+  representative pair `p07 / p08` と reserve route `p09` の current split を保ったまま later reserve line に残す。
+- global true user-spec residual は
+  `python3 scripts/current_l2_guided_samples.py reopen-map`
+  から、exhaustive shared-space catalog / packaging / upper-layer target をまとめて見直す。
+
 ## stop line
 
 - final source-surface handoff wording

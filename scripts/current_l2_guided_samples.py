@@ -172,6 +172,47 @@ class ProblemQuickstartStep:
     expected_results: tuple[str, ...]
 
 
+@dataclass(frozen=True)
+class ProblemReopenRow:
+    problem_id: str
+    title: str
+    sample_bundle_doc: str
+    representative_samples: tuple[str, ...]
+    current_floor: tuple[str, ...]
+    entry_commands: tuple[str, ...]
+    mixed_gates: tuple[str, ...]
+    reopen_guidance: tuple[str, ...]
+    stop_line: tuple[str, ...]
+    anchor_refs: tuple[str, ...]
+
+
+GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
+    "shared-space exhaustive final catalog beyond minimal working subset",
+    "installed-binary / packaging / FFI / engine adapter / host integration target",
+    "upper-layer application target beyond authoritative-room first scenario",
+)
+
+
+PROBLEM_REOPEN_ANCHOR_REFS = {
+    "problem1": (
+        "specs/examples/573-current-l2-problem1-public-seam-residual-bundle-matrix.md",
+        "specs/examples/575-current-l2-problem1-theorem-first-pilot-bundle-actualization.md",
+        "specs/examples/587-current-l2-representative-problem-quickstart-parity-checks-actualization.md",
+        "docs/reports/0856-package99-100-problem-residual-bundle-matrices.md",
+        "docs/reports/0857-package101-102-problem-bundles.md",
+        "docs/reports/0867-package113-representative-problem-quickstart-parity-checks.md",
+    ),
+    "problem2": (
+        "specs/examples/574-current-l2-problem2-public-shape-residual-bundle-matrix.md",
+        "specs/examples/576-current-l2-problem2-authoritative-room-scenario-bundle-actualization.md",
+        "specs/examples/587-current-l2-representative-problem-quickstart-parity-checks-actualization.md",
+        "docs/reports/0856-package99-100-problem-residual-bundle-matrices.md",
+        "docs/reports/0857-package101-102-problem-bundles.md",
+        "docs/reports/0867-package113-representative-problem-quickstart-parity-checks.md",
+    ),
+}
+
+
 def problem_specs() -> dict[str, ProblemSpec]:
     typed_root = REPO_ROOT / "samples" / "prototype" / "current-l2-typed-proof-model-check"
     order_root = REPO_ROOT / "samples" / "prototype" / "current-l2-order-handoff"
@@ -704,6 +745,157 @@ def render_problem_quickstart_from_runtime(spec: ProblemSpec, *, output_format: 
     if output_format == "json":
         return json.dumps(manifest, ensure_ascii=False, indent=2)
     return render_problem_quickstart(spec)
+
+
+def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
+    if spec.problem_id == "problem1":
+        return ProblemReopenRow(
+            problem_id="problem1",
+            title="Problem 1 mixed-gate reopen map",
+            sample_bundle_doc=PROBLEM_SAMPLE_BUNDLE_DOCS["problem1"],
+            representative_samples=("p06-typed-proof-owner-handoff",),
+            current_floor=(
+                "quickstart / smoke / matrix / bundle / parser companion inspector まで drift suppression 済み。",
+                "checker-adjacent first layer、notebook-first theorem line、row-local model-check carrier first の current cut を representative sample から追える。",
+            ),
+            entry_commands=(
+                "python3 scripts/current_l2_guided_samples.py quickstart problem1",
+                "python3 scripts/current_l2_guided_samples.py matrix problem1",
+                "python3 scripts/current_l2_guided_samples.py bundle problem1",
+                "python3 scripts/current_l2_guided_samples.py smoke problem1",
+            ),
+            mixed_gates=(
+                "stronger typed-surface actual adoption",
+                "final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract",
+                "first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract",
+            ),
+            reopen_guidance=(
+                "`matrix problem1` で `p06` と `p10 / p11 / p12 / p15 / p16` の役割差を見て、typed source principal を premature に上げない current cut を保つ。",
+                "`bundle problem1` と `samples/lean/current-l2/p06-typed-proof-owner-handoff/` を起点に、theorem-first pilot artifact と notebook-first transport floor を確認する。",
+                "parser companion inspector と `bundle problem1` を合わせて見て、row-local model-check carrier / thin experimental companion の範囲を越えて final public checker 契約へ飛ばないことを確認する。",
+            ),
+            stop_line=PROBLEM_BUNDLE_STOP_LINES["problem1"],
+            anchor_refs=PROBLEM_REOPEN_ANCHOR_REFS["problem1"],
+        )
+
+    return ProblemReopenRow(
+        problem_id="problem2",
+        title="Problem 2 mixed-gate reopen map",
+        sample_bundle_doc=PROBLEM_SAMPLE_BUNDLE_DOCS["problem2"],
+        representative_samples=(
+            "p07-dice-late-join-visible-history",
+            "p08-dice-stale-reconnect-refresh",
+        ),
+        current_floor=(
+            "quickstart / smoke / matrix / bundle / parser companion inspector まで drift suppression 済み。",
+            "relation decomposition principal、authoritative-room first default、reserve lane split の current cut を representative pair から追える。",
+        ),
+        entry_commands=(
+            "python3 scripts/current_l2_guided_samples.py quickstart problem2",
+            "python3 scripts/current_l2_guided_samples.py matrix problem2",
+            "python3 scripts/current_l2_guided_samples.py bundle problem2",
+            "python3 scripts/current_l2_guided_samples.py smoke problem2",
+        ),
+        mixed_gates=(
+            "final source-surface handoff wording / final emitted-artifact schema",
+            "final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract",
+        ),
+        reopen_guidance=(
+            "`matrix problem2` で `p07 / p08` representative pair、`p09` reserve route、`p13 / p14` negative static-stop pair の分担を再確認する。",
+            "`bundle problem2` と parser companion inspector を合わせて見て、edge-row principal / stage-block secondary のまま final source wording や emitted schema を凍らせない current cut を保つ。",
+            "shared-space stronger public shape は claim / payload split first を保ったまま、final public witness/provider 契約へは上げずに stop line と user-spec residual を切り分ける。",
+        ),
+        stop_line=PROBLEM_BUNDLE_STOP_LINES["problem2"],
+        anchor_refs=PROBLEM_REOPEN_ANCHOR_REFS["problem2"],
+    )
+
+
+def build_problem_reopen_map_manifest(specs: Mapping[str, ProblemSpec]) -> dict[str, object]:
+    rows = [build_problem_reopen_row(specs[problem_id]) for problem_id in sorted(specs.keys())]
+    return {
+        "map_kind": "current_l2_representative_problem_mixed_gate_reopen_map",
+        "title": "representative problem mixed-gate reopen map",
+        "current_reading": (
+            "representative sample の quickstart / matrix / bundle / smoke floor を踏まえて、"
+            "Problem 1 / Problem 2 の remaining mixed gate と true user-spec residual を "
+            "entry command 付きで読み直す helper-local map。"
+        ),
+        "problem_rows": [
+            {
+                "problem_id": row.problem_id,
+                "title": row.title,
+                "sample_bundle_doc": row.sample_bundle_doc,
+                "representative_samples": list(row.representative_samples),
+                "current_floor": list(row.current_floor),
+                "entry_commands": list(row.entry_commands),
+                "mixed_gates": list(row.mixed_gates),
+                "reopen_guidance": list(row.reopen_guidance),
+                "stop_line": list(row.stop_line),
+                "anchor_refs": list(row.anchor_refs),
+            }
+            for row in rows
+        ],
+        "true_user_spec_residuals": list(GLOBAL_TRUE_USER_SPEC_RESIDUALS),
+    }
+
+
+def render_problem_reopen_map(specs: Mapping[str, ProblemSpec]) -> str:
+    manifest = build_problem_reopen_map_manifest(specs)
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+    ]
+
+    for row in manifest["problem_rows"]:
+        lines.append(f"- {row['problem_id']}: {row['title']}")
+        lines.append(f"  sample bundle doc: {row['sample_bundle_doc']}")
+        lines.append(f"  representative samples: {', '.join(row['representative_samples'])}")
+        lines.append("  current floor:")
+        for item in row["current_floor"]:
+            lines.append(f"    - {item}")
+        lines.append("  entry commands:")
+        for command in row["entry_commands"]:
+            lines.append(f"    - {command}")
+        lines.append("  remaining mixed gates:")
+        for gate in row["mixed_gates"]:
+            lines.append(f"    - {gate}")
+        lines.append("  reopen guidance:")
+        for item in row["reopen_guidance"]:
+            lines.append(f"    - {item}")
+        lines.append("  anchor refs:")
+        for ref in row["anchor_refs"]:
+            lines.append(f"    - {ref}")
+        lines.append("  stop line:")
+        for item in row["stop_line"]:
+            lines.append(f"    - {item}")
+        lines.append("")
+
+    lines.append("global true user-spec residuals:")
+    for item in manifest["true_user_spec_residuals"]:
+        lines.append(f"- {item}")
+
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- current repo-local helper map であり、final public tutorial surface や final public parser / checker / runtime API を意味しない。",
+            "- representative problem bundle から next reopen point を読みやすくする current cut に留める。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem_reopen_map_from_runtime(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+) -> str:
+    manifest = build_problem_reopen_map_manifest(specs)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_problem_reopen_map(specs)
 
 
 def build_problem_quickstart_parity_rows(
@@ -1437,6 +1629,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     quickstart_parity_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    reopen_map_parser = subparsers.add_parser(
+        "reopen-map",
+        help="Problem 1 / Problem 2 の mixed-gate reopen point を aggregate summary で表示する",
+    )
+    reopen_map_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     mapping_parser = subparsers.add_parser(
         "mapping",
         help="parser companion representative slice の mapping matrix を表示する",
@@ -1482,6 +1680,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.subcommand == "quickstart-parity":
         print(render_problem_quickstart_parity_from_runtime(specs, output_format=args.format))
+        return 0
+
+    if args.subcommand == "reopen-map":
+        print(render_problem_reopen_map_from_runtime(specs, output_format=args.format))
         return 0
 
     spec = specs[args.problem_id]

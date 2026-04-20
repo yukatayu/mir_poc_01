@@ -728,6 +728,46 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(any("representative problem quickstart parity" in call.args[0] for call in write.mock_calls))
 
+    def test_problem_reopen_map_text_mentions_problem_specific_reopen_points(self) -> None:
+        text = guided.render_problem_reopen_map(guided.problem_specs())
+
+        self.assertIn("representative problem mixed-gate reopen map", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py matrix problem1", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem2", text)
+        self.assertIn("stronger typed-surface actual adoption", text)
+        self.assertIn("final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract", text)
+        self.assertIn("installed-binary / packaging / FFI / engine adapter / host integration target", text)
+
+    def test_problem_reopen_map_json_contains_problem_rows_and_global_user_spec_residuals(self) -> None:
+        rendered = guided.render_problem_reopen_map_from_runtime(
+            guided.problem_specs(),
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["map_kind"], "current_l2_representative_problem_mixed_gate_reopen_map")
+        self.assertEqual([row["problem_id"] for row in payload["problem_rows"]], ["problem1", "problem2"])
+        self.assertIn("quickstart problem1", payload["problem_rows"][0]["entry_commands"][0])
+        self.assertIn("bundle problem2", payload["problem_rows"][1]["entry_commands"][2])
+        self.assertIn(
+            "upper-layer application target beyond authoritative-room first scenario",
+            payload["true_user_spec_residuals"],
+        )
+
+    def test_main_reopen_map_command_uses_renderer(self) -> None:
+        fake_text = "representative problem mixed-gate reopen map\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem_reopen_map_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["reopen-map"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(any("representative problem mixed-gate reopen map" in call.args[0] for call in write.mock_calls))
+
     def test_main_smoke_all_command_uses_aggregate_renderer(self) -> None:
         fake_text = "representative problem bundle aggregate smoke summary\n..."
 

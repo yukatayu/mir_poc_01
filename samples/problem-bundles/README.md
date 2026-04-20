@@ -33,6 +33,10 @@
 - doc 側と helper 側の quickstart が揃っているかを narrow に確認したいときは
   `python3 scripts/current_l2_guided_samples.py quickstart-parity`
   を使う。
+- representative sample floor を踏まえて、どの mixed gate をどの command から再開するかを
+  まとめて見たいときは
+  `python3 scripts/current_l2_guided_samples.py reopen-map`
+  を使う。
 - 次に guide 内の `run-source-sample` / `bundle problem1|problem2` / `mapping` command を順に使う。
 - 問題 1 / 問題 2 をまとめて手早く確認したいときは
   `python3 scripts/current_l2_guided_samples.py smoke-all`

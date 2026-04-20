@@ -841,6 +841,10 @@ actual-adoption floor では、
   `specs/examples/587`
   - `quickstart-parity` helper を actualize し、sample bundle doc と helper-side quickstart mirror の 4-step parity を focused に確認してよい
   - Package 113 close 後の current active queue は Package 114 representative problem mixed-gate reopen map refresh と later mixed/user-spec residual である
+- representative problem mixed-gate reopen map refresh:
+  `specs/examples/588`
+  - `reopen-map` helper と sample bundle doc 側の `現在の mixed gate 再開点` section を actualize し、Problem 1 / Problem 2 の remaining mixed gate と global true user-spec residual を entry command 付きで読み直してよい
+  - Package 114 close 後の current active queue は Package 115 Problem 1 theorem/model-check mixed-gate split refresh、Package 116 Problem 2 order-handoff/public-shape mixed-gate split refresh と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 15:40 JST
+最終更新: 2026-04-20 16:10 JST
 
 ## この文書について
 
@@ -35,7 +35,8 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 114 representative problem mixed-gate reopen map refresh
+  - Package 115 Problem 1 theorem/model-check mixed-gate split refresh
+  - Package 116 Problem 2 order-handoff/public-shape mixed-gate split refresh
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +64,8 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `114` representative problem mixed-gate reopen map refresh | representative entrypoint floor を踏まえて Problem 1 / Problem 2 の mixed-gate reopen point を quickstart / bundle / matrix / smoke 現況に合わせて短く再整理する | `S-M` | `Macro 6/7` | current runnable floor と remaining mixed gate の境界を sample entrypoint から読みやすくする | sample bundle / helper / snapshot / roadmap から reopen point と self-driven next line が揃って読める |
+| `115` Problem 1 theorem/model-check mixed-gate split refresh | Problem 1 remaining mixed gate を typed source principal / theorem public-contract / model-check public-contract の 3 本へ split する | `S-M` | `Macro 5/7` | Problem 1 reopen order と next package を narrow に読めるようにする | Problem 1 mixed gate が separate package に落ちる |
+| `116` Problem 2 order-handoff/public-shape mixed-gate split refresh | Problem 2 remaining mixed gate を source wording / emitted schema と witness-provider public shape の 2 本へ split する | `S-M` | `Macro 5/6` | Problem 2 reopen order と next package を narrow に読めるようにする | Problem 2 mixed gate が separate package に落ちる |
 
 ## recently closed package note
 
@@ -384,12 +386,34 @@
 ### Package 114 — representative problem mixed-gate reopen map refresh
 
 - current reading:
-  next active bundle。representative entrypoint floor を踏まえて Problem 1 / Problem 2 の mixed-gate reopen point を quickstart / bundle / matrix / smoke 現況に合わせて短く再整理する。
+  close 済み。representative entrypoint floor を踏まえて Problem 1 / Problem 2 の mixed-gate reopen point を quickstart / bundle / matrix / smoke 現況に合わせて短く再整理し、`reopen-map` helper と sample bundle doc 側の `現在の mixed gate 再開点` section で problem-local mixed gate と global true user-spec residual を分けて読めるようにした。
 - current recommendation:
   current runnable floor と remaining mixed gate の境界を sample bundle / helper / snapshot / roadmap で同じ読みへ揃え、queue drift を起こしにくくする。
 - stop line:
   final public theorem/model-check/witness-provider contract
   final public CLI / tutorial surface
+  final public parser / checker / runtime API
+
+### Package 115 — Problem 1 theorem/model-check mixed-gate split refresh
+
+- current reading:
+  next active bundle。reopen-map で aggregate に見える Problem 1 remaining mixed gate を、typed source principal / theorem public-contract / model-check public-contract の separate package へ split する。
+- current recommendation:
+  Problem 1 の mixed gate を 1 枚の reopen map で止めず、次 package が typed / theorem / model-check のどこに掛かるかを narrow に戻す。
+- stop line:
+  final public theorem contract
+  final public model-check contract
+  final public verifier contract
+
+### Package 116 — Problem 2 order-handoff/public-shape mixed-gate split refresh
+
+- current reading:
+  next active bundle。reopen-map で aggregate に見える Problem 2 remaining mixed gate を、source wording / emitted schema と witness-provider public shape の separate package へ split する。
+- current recommendation:
+  Problem 2 の mixed gate を 1 枚の reopen map で止めず、source wording 側と shared-space public shape 側の reopen point を narrow に戻す。
+- stop line:
+  final public witness/provider/artifact contract
+  exhaustive shared-space catalog
   final public parser / checker / runtime API
 
 ### Package 58 — helper / CLI hardening and broader coverage
@@ -888,5 +912,6 @@
 
 ## next reopen order
 
-1. Package 114 で representative entrypoint floor に即した mixed-gate reopen map を actualize する。
-2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。
+1. Package 115 で Problem 1 theorem/model-check mixed gate を typed / theorem / model-check package へ split する。
+2. Package 116 で Problem 2 order-handoff/public-shape mixed gate を source wording / witness-provider package へ split する。
+3. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

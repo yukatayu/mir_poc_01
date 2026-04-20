@@ -128,6 +128,24 @@ full dependent type、general theorem proving in compiler、final public checker
 - `typed_checker_hint_preview`
   - checker-adjacent finite-index first layer の current cut
 
+## 現在の mixed gate 再開点
+
+- `stronger typed-surface actual adoption`
+  - `python3 scripts/current_l2_guided_samples.py matrix problem1`
+    で `p06` と `p10 / p11 / p12 / p15 / p16` の役割差を見て、
+    typed source principal を premature に上げない current cut を再確認する。
+- `final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract`
+  - `python3 scripts/current_l2_guided_samples.py bundle problem1`
+    と `samples/lean/current-l2/p06-typed-proof-owner-handoff/`
+    を起点に、theorem-first pilot artifact と notebook-first transport floor を辿る。
+- `first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract`
+  - `python3 scripts/current_l2_guided_samples.py matrix problem1`
+    と `python3 scripts/current_l2_guided_samples.py bundle problem1`
+    を合わせて見て、row-local carrier first の current cut を越えて final public checker 契約へ飛ばないことを確認する。
+- global true user-spec residual は
+  `python3 scripts/current_l2_guided_samples.py reopen-map`
+  から、packaging / host integration / upper-layer application target をまとめて見直す。
+
 ## stop line
 
 - stronger typed source principal promotion
