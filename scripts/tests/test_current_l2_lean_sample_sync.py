@@ -72,6 +72,23 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         self.assertIn("このファイル", explanation)
         self.assertIn("実際に小さな証明", explanation)
 
+    def test_label_model_and_proof_skeleton_specs_include_beginner_friendly_concrete_facts(
+        self,
+    ) -> None:
+        label_spec = next(
+            spec
+            for spec in sync.foundation_specs()
+            if spec.filename == "CurrentL2LabelModel.lean"
+        )
+        skeleton_spec = next(
+            spec
+            for spec in sync.foundation_specs()
+            if spec.filename == "CurrentL2ProofSkeleton.lean"
+        )
+
+        self.assertIn("theorem low_flows_to_any", label_spec.source_text)
+        self.assertIn("theorem e5_second_stub_obligation", skeleton_spec.source_text)
+
     def test_ifc_foundation_spec_carries_valid_invalid_reusable_facts(self) -> None:
         spec = next(
             spec

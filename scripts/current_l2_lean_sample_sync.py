@@ -253,6 +253,9 @@ def CanDeclassify (hasAuthority : Bool) (fromLabel toLabel : SecurityLabel) : Pr
 theorem flowsTo_refl (label : SecurityLabel) : flowsTo label label := by
   cases label <;> simp [flowsTo]
 
+theorem low_flows_to_any (label : SecurityLabel) : flowsTo low label := by
+  cases label <;> simp [flowsTo]
+
 theorem flowsTo_trans
     {a b c : SecurityLabel}
     (hab : flowsTo a b)
@@ -637,6 +640,12 @@ theorem e5_emission_preserves_count :
 theorem e5_first_stub_subject :
     match emitStubs e5ReviewUnits with
     | stub :: _ => stub.subjectRef = "e5-underdeclared-lineage"
+    | _ => False := by
+  simp [emitStubs, e5ReviewUnits, mkLeanStub]
+
+theorem e5_second_stub_obligation :
+    match emitStubs e5ReviewUnits with
+    | _ :: stub :: _ => stub.obligationKind = noRePromotion
     | _ => False := by
   simp [emitStubs, e5ReviewUnits, mkLeanStub]
 

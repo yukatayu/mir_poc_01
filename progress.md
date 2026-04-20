@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-21 01:21 JST
+最終更新: 2026-04-21 01:36 JST
 
 ## この文書について
 
@@ -75,11 +75,13 @@
   - foundation files success
   - current-l2 generated stubs success with `warning: declaration uses 'sorry'`
 - `python3 -m unittest scripts/tests/test_current_l2_lean_sample_sync.py`
-  - `Ran 8 tests ... OK`
+  - `Ran 9 tests ... OK`
 - `docs/research_abstract/static_analysis_01.md`
   - Problem 1 の beginner guide を追加
 - `docs/research_abstract/order_01.md`
   - Problem 2 の beginner guide を追加
+- `docs/research_abstract/lean_01.md`
+  - Lean foundation / generated stub / 入出力の読み方に絞った beginner guide を追加
 
 ## macro phase map
 
@@ -153,3 +155,4 @@
 
 - 2026-04-21 00:48 JST — Problem 1 / Problem 2 representative bundle、typed rejection pair、order-handoff negative pair、Lean foundation、generated Lean stub corpus を再実行し、summary docs を `repo-local near-end` と `final public stop line` を分けた記述へ全面更新した。
 - 2026-04-21 01:21 JST — Lean foundation に reusable lemma 群を追加して `python3 scripts/current_l2_lean_sample_sync.py` と unit test を通し、Problem 1 / Problem 2 の beginner 向け guide `docs/research_abstract/static_analysis_01.md` / `order_01.md` を追加した。
+- 2026-04-21 01:36 JST — Lean beginner guide `docs/research_abstract/lean_01.md` を追加し、label-model / proof-skeleton の補題を少量補強したうえで Lean 実行・standalone success/error 例・unit test・docs validation を再確認した。

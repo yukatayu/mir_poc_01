@@ -71,4 +71,10 @@ theorem e5_first_stub_subject :
     | _ => False := by
   simp [emitStubs, e5ReviewUnits, mkLeanStub]
 
+theorem e5_second_stub_obligation :
+    match emitStubs e5ReviewUnits with
+    | _ :: stub :: _ => stub.obligationKind = noRePromotion
+    | _ => False := by
+  simp [emitStubs, e5ReviewUnits, mkLeanStub]
+
 end CurrentL2

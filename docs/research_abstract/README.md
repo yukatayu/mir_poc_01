@@ -39,6 +39,8 @@
 
 ## topic guide
 
+- `lean_01.md`
+  - Lean で今何を証明しているか、どう実行するか、出力をどう読むかをまとめた入門ガイド
 - `static_analysis_01.md`
   - Problem 1 の typed / theorem / model-check と Lean foundation を、実行順に追う入門ガイド
 - `order_01.md`

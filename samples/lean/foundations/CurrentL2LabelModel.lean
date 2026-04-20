@@ -31,6 +31,9 @@ def CanDeclassify (hasAuthority : Bool) (fromLabel toLabel : SecurityLabel) : Pr
 theorem flowsTo_refl (label : SecurityLabel) : flowsTo label label := by
   cases label <;> simp [flowsTo]
 
+theorem low_flows_to_any (label : SecurityLabel) : flowsTo low label := by
+  cases label <;> simp [flowsTo]
+
 theorem flowsTo_trans
     {a b c : SecurityLabel}
     (hab : flowsTo a b)
