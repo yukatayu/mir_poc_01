@@ -265,6 +265,50 @@ fn model_check_projection_prefloor_reaches_label_flow_negative_ifc_typed_runtime
 }
 
 #[test]
+fn model_check_projection_prefloor_reaches_capture_escape_typed_runtime_prototype() {
+    let sample_path = typed_prototype_sample_path("p15-typed-capture-escape-rejected.txt");
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_prefloor_matches_preview_route(
+        &prefloor,
+        &route,
+        &["small_cluster_projection:p15-typed-capture-escape-rejected:runtime_try_cut_local"],
+        &["guard:rollback_or_atomic_cut_evidence_present"],
+    );
+}
+
+#[test]
+fn model_check_projection_prefloor_reaches_cost_bound_typed_runtime_prototype() {
+    let sample_path = typed_prototype_sample_path("p16-typed-remote-call-budget-exceeded.txt");
+    let route = build_current_l2_source_sample_preview_artifact_route(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+    let prefloor = build_current_l2_source_sample_model_check_projection_prefloor(
+        sample_path.to_str().unwrap(),
+        prototype_host_plan(&sample_path),
+    )
+    .unwrap();
+
+    assert_prefloor_matches_preview_route(
+        &prefloor,
+        &route,
+        &["small_cluster_projection:p16-typed-remote-call-budget-exceeded:runtime_try_cut_local"],
+        &["guard:rollback_or_atomic_cut_evidence_present"],
+    );
+}
+
+#[test]
 fn model_check_projection_prefloor_reaches_order_handoff_runtime_prototype() {
     let sample_path = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let route = build_current_l2_source_sample_preview_artifact_route(

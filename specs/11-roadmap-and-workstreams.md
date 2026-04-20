@@ -725,6 +725,13 @@ actual-adoption floor では、
   - `Stage3RequestHeadClauseBundle`
   - `parse_stage3_request_head_clause_bundle_text()`
   - Package 91 helper-local actualization close 後は Package 92 first strong typing finite-index layer、Package 93 Lean-first formal skeleton hardening、Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout の once-through sequence へ進む
+- finite-index first-layer capture / lifetime / cost actualization:
+  `specs/examples/566`
+  - `p15-typed-capture-escape-rejected`
+  - `p16-typed-remote-call-budget-exceeded`
+  - source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16`
+  - helper-local checker summary / verifier preview alignment / model-check projection widening
+  - Package 92 close 後は Package 93 Lean-first formal skeleton hardening、Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout の once-through sequence へ進む
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

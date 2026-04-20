@@ -1,0 +1,68 @@
+{
+  "schema_version": "current-l2-host-plan-v0",
+  "predicate_rules": [
+    {
+      "site": "option-admit",
+      "op": "reserve_remote_call_budget",
+      "option_ref": "quota_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "option-admit",
+      "op": "invoke_remote_call_without_budget",
+      "option_ref": "quota_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "reserve_remote_call_budget",
+      "mode": "via",
+      "chain_ref": "remote_budget_ref",
+      "option_ref": "quota_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-ensure",
+      "op": "reserve_remote_call_budget",
+      "mode": "via",
+      "chain_ref": "remote_budget_ref",
+      "option_ref": "quota_owner",
+      "verdict": "satisfied"
+    },
+    {
+      "site": "request-require",
+      "op": "invoke_remote_call_without_budget",
+      "mode": "via",
+      "chain_ref": "remote_budget_ref",
+      "option_ref": "quota_owner",
+      "verdict": "unsatisfied"
+    }
+  ],
+  "effect_rules": [
+    {
+      "op": "reserve_remote_call_budget",
+      "mode": "via",
+      "chain_ref": "remote_budget_ref",
+      "selected_option_ref": "quota_owner",
+      "selected_target": "quota_state",
+      "verdict": {
+        "kind": "success",
+        "commit": {
+          "mutations": [
+            {
+              "kind": "append-record",
+              "target": "quota_state",
+              "record": "reserve_remote_call_budget@quota_owner"
+            },
+            {
+              "kind": "append-record",
+              "target": "quota_debug_text_output",
+              "record": "reserve_remote_call_budget: remote_calls <= 0"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "trace_expectation_override": {}
+}

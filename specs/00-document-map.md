@@ -67,7 +67,7 @@
   - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
 - `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
   - 2026-04-20 時点の repo-local once-through completion handoff であり、FAQ 10 以後の parser-side closeout / finite-index strong typing / Lean-first theorem skeleton / model-check second-line / order-handoff helper-local source surface / authoritative-room first scenario / docs closeout sequenceを 1 本の staged package 列として整理する。
-  - 規範判断の正本ではないが、`specs/examples/564` と `565` 以後の once-through closeout reading と Package 92...98 の current explanation source として使ってよい。
+  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566` 以後の once-through closeout reading と Package 93...98 の current explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -781,6 +781,8 @@
   - current Phase 5 / Package 91 compare floor として、request clause suite publicization と `perform` head structural carrier の separate minimum cut を保ったまま `Stage3RequestHeadClauseBundle` thin wrapper current first choice を source-backed に整理し、Package 92...98 once-through closeout sequence の entry package を与える補助文書。
 - `specs/examples/565-current-l2-phase6-perform-head-request-clause-bundle-thin-wrapper-threshold-helper-mirror.md`
   - current Phase 5 / Package 91 closeout として、`Stage3RequestHeadClauseBundle` thin wrapper first を `CurrentL2RequestHeadClauseBundleManifest`、`Stage3RequestAttachmentFrameKind`、`parse_stage3_request_head_clause_bundle_text()` に actualize し、Package 92...98 once-through closeout sequence の live entry を Package 92 へ進める補助文書。
+- `specs/examples/566-current-l2-finite-index-first-layer-capture-lifetime-cost-actualization.md`
+  - current Phase 5 / Package 92 closeout として、first strong typing layer finite-index default を `p15` capture/lifetime negative と `p16` simple cost negative まで widened し、source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16` を helper-local checker summary と current queue sync に actualize する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

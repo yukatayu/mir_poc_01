@@ -976,6 +976,99 @@ impl CurrentL2OperationalCliSurfacePreviewSection {
     }
 }
 
+#[derive(Clone, Copy)]
+struct CurrentL2FirstStrongTypingSampleManifest {
+    cluster_kind: &'static str,
+    case_label: &'static str,
+    family_refs: &'static [&'static str],
+    coverage_state: &'static str,
+    primary_compare_floor_ref: &'static str,
+    foundation_evidence_ref: &'static str,
+    selected_option_ref: &'static str,
+    visibility_target_ref: &'static str,
+}
+
+fn current_l2_first_strong_typing_sample_manifest(
+    sample_id: &str,
+) -> Option<CurrentL2FirstStrongTypingSampleManifest> {
+    match sample_id {
+        "p10-typed-authorized-fingerprint-declassification" => {
+            Some(CurrentL2FirstStrongTypingSampleManifest {
+                cluster_kind: "ifc_authority_release_cluster",
+                case_label: "authority_sensitive_success",
+                family_refs: &[
+                    "ifc_label_model_family",
+                    "explicit_authority_declassification_family",
+                ],
+                coverage_state: "partial_cluster",
+                primary_compare_floor_ref: "compare_floor:current_l2.ifc.source_side_authority_pair",
+                foundation_evidence_ref: "lean_foundation:CurrentL2IfcSecretExamples.lean",
+                selected_option_ref: "release_authority",
+                visibility_target_ref: "room_members",
+            })
+        }
+        "p11-typed-unauthorized-fingerprint-release" => {
+            Some(CurrentL2FirstStrongTypingSampleManifest {
+                cluster_kind: "ifc_authority_release_cluster",
+                case_label: "authority_miss_negative",
+                family_refs: &[
+                    "ifc_label_model_family",
+                    "explicit_authority_declassification_family",
+                ],
+                coverage_state: "partial_cluster",
+                primary_compare_floor_ref: "compare_floor:current_l2.ifc.source_side_authority_pair",
+                foundation_evidence_ref: "lean_foundation:CurrentL2IfcSecretExamples.lean",
+                selected_option_ref: "fingerprint_holder",
+                visibility_target_ref: "room_members",
+            })
+        }
+        "p12-typed-classified-fingerprint-publication-block" => {
+            Some(CurrentL2FirstStrongTypingSampleManifest {
+                cluster_kind: "ifc_label_flow_cluster",
+                case_label: "classified_to_public_negative",
+                family_refs: &[
+                    "ifc_label_model_family",
+                    "classified_public_label_flow_family",
+                ],
+                coverage_state: "full_cluster",
+                primary_compare_floor_ref: "compare_floor:current_l2.ifc.source_side_label_flow_negative",
+                foundation_evidence_ref: "lean_foundation:CurrentL2IfcSecretExamples.lean",
+                selected_option_ref: "classified_holder",
+                visibility_target_ref: "public_board",
+            })
+        }
+        "p15-typed-capture-escape-rejected" => Some(CurrentL2FirstStrongTypingSampleManifest {
+            cluster_kind: "capture_lifetime_cluster",
+            case_label: "capture_escape_negative",
+            family_refs: &["capture_set_constraint_family", "lifetime_preorder_family"],
+            coverage_state: "partial_cluster",
+            primary_compare_floor_ref: "compare_floor:current_l2.typed.capture_lifetime_escape_negative",
+            foundation_evidence_ref: "spec_example:current_l2_first_strong_typing_layer_finite_index_spine_default",
+            selected_option_ref: "session_owner",
+            visibility_target_ref: "room_members",
+        }),
+        "p16-typed-remote-call-budget-exceeded" => Some(CurrentL2FirstStrongTypingSampleManifest {
+            cluster_kind: "simple_cost_bound_cluster",
+            case_label: "remote_call_budget_negative",
+            family_refs: &["simple_cost_bound_family", "external_effect_budget_family"],
+            coverage_state: "partial_cluster",
+            primary_compare_floor_ref: "compare_floor:current_l2.typed.simple_cost_bound_negative",
+            foundation_evidence_ref: "spec_example:current_l2_first_strong_typing_layer_finite_index_spine_default",
+            selected_option_ref: "quota_owner",
+            visibility_target_ref: "remote_api_gateway",
+        }),
+        _ => None,
+    }
+}
+
+fn current_l2_first_strong_typing_sample_reached(sample_id: &str) -> bool {
+    current_l2_first_strong_typing_sample_manifest(sample_id).is_some()
+}
+
+fn current_l2_first_strong_typing_sample_guard_label() -> &'static str {
+    "first strong typing sample set (`p10` / `p11` / `p12` / `p15` / `p16`)"
+}
+
 #[derive(Debug, Serialize)]
 struct CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
     status: &'static str,
@@ -995,27 +1088,28 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
         report: &CurrentL2SourceSampleRunReport,
         verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
     ) -> Self {
-        match report.sample_id.as_str() {
-            "p10-typed-authorized-fingerprint-declassification"
-                if verification_preview.formal_hook_status == "reached" =>
+        if verification_preview.formal_hook_status == "reached" {
+            if let Some(manifest) =
+                current_l2_first_strong_typing_sample_manifest(report.sample_id.as_str())
             {
-                Self {
+                return Self {
                     status: "reached",
                     preview_kind: "sample_local_helper_preview",
-                    cluster_kind: Some("ifc_authority_release_cluster"),
-                    case_label: Some("authority_sensitive_success"),
+                    cluster_kind: Some(manifest.cluster_kind),
+                    case_label: Some(manifest.case_label),
                     typed_reason_family_hint: Some(
                         CurrentL2OperationalCliTypedReasonFamilyHintPreview {
-                            family_refs: vec![
-                                "ifc_label_model_family".to_string(),
-                                "explicit_authority_declassification_family".to_string(),
-                            ],
-                            coverage_state: "partial_cluster",
+                            family_refs: manifest
+                                .family_refs
+                                .iter()
+                                .map(|family_ref| (*family_ref).to_string())
+                                .collect(),
+                            coverage_state: manifest.coverage_state,
                         },
                     ),
                     evidence_refs: typed_checker_hint_evidence_refs(&report.sample_id),
                     compare_floor_refs: vec![
-                        "compare_floor:current_l2.ifc.source_side_authority_pair".to_string(),
+                        manifest.primary_compare_floor_ref.to_string(),
                         "compare_floor:current_l2.checker_cluster.typed_reason_family_hint"
                             .to_string(),
                         "compare_floor:current_l2.checker_cluster.typed_family_coverage_state"
@@ -1024,85 +1118,27 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
                     guard_refs: typed_checker_hint_guard_refs(true),
                     kept_later_refs: typed_checker_hint_kept_later_refs(),
                     guard_reason: None,
-                }
+                };
             }
-            "p11-typed-unauthorized-fingerprint-release"
-                if verification_preview.formal_hook_status == "reached" =>
-            {
-                Self {
-                    status: "reached",
-                    preview_kind: "sample_local_helper_preview",
-                    cluster_kind: Some("ifc_authority_release_cluster"),
-                    case_label: Some("authority_miss_negative"),
-                    typed_reason_family_hint: Some(
-                        CurrentL2OperationalCliTypedReasonFamilyHintPreview {
-                            family_refs: vec![
-                                "ifc_label_model_family".to_string(),
-                                "explicit_authority_declassification_family".to_string(),
-                            ],
-                            coverage_state: "partial_cluster",
-                        },
-                    ),
-                    evidence_refs: typed_checker_hint_evidence_refs(&report.sample_id),
-                    compare_floor_refs: vec![
-                        "compare_floor:current_l2.ifc.source_side_authority_pair".to_string(),
-                        "compare_floor:current_l2.checker_cluster.typed_reason_family_hint"
-                            .to_string(),
-                        "compare_floor:current_l2.checker_cluster.typed_family_coverage_state"
-                            .to_string(),
-                    ],
-                    guard_refs: typed_checker_hint_guard_refs(true),
-                    kept_later_refs: typed_checker_hint_kept_later_refs(),
-                    guard_reason: None,
-                }
-            }
-            "p12-typed-classified-fingerprint-publication-block"
-                if verification_preview.formal_hook_status == "reached" =>
-            {
-                Self {
-                    status: "reached",
-                    preview_kind: "sample_local_helper_preview",
-                    cluster_kind: Some("ifc_label_flow_cluster"),
-                    case_label: Some("classified_to_public_negative"),
-                    typed_reason_family_hint: Some(
-                        CurrentL2OperationalCliTypedReasonFamilyHintPreview {
-                            family_refs: vec![
-                                "ifc_label_model_family".to_string(),
-                                "classified_public_label_flow_family".to_string(),
-                            ],
-                            coverage_state: "full_cluster",
-                        },
-                    ),
-                    evidence_refs: typed_checker_hint_evidence_refs(&report.sample_id),
-                    compare_floor_refs: vec![
-                        "compare_floor:current_l2.ifc.source_side_label_flow_negative".to_string(),
-                        "compare_floor:current_l2.checker_cluster.typed_reason_family_hint"
-                            .to_string(),
-                        "compare_floor:current_l2.checker_cluster.typed_family_coverage_state"
-                            .to_string(),
-                    ],
-                    guard_refs: typed_checker_hint_guard_refs(true),
-                    kept_later_refs: typed_checker_hint_kept_later_refs(),
-                    guard_reason: None,
-                }
-            }
-            _ => Self {
-                status: "guarded_not_reached",
-                preview_kind: "sample_local_helper_preview",
-                cluster_kind: None,
-                case_label: None,
-                typed_reason_family_hint: None,
-                evidence_refs: Vec::new(),
-                compare_floor_refs: vec![
-                    "compare_floor:current_l2.ifc.sample_local_checker_hint_guard_only".to_string(),
-                ],
-                guard_refs: typed_checker_hint_guard_refs(false),
-                kept_later_refs: typed_checker_hint_kept_later_refs(),
-                guard_reason: Some(format!(
-                    "current typed checker-hint preview only actualizes the sample-local IFC trio (`p10` / `p11` / `p12`) after verification preview reaches runtime try-cut evidence for `{}`",
-                    report.sample_id
-                )),
-            },
+        }
+
+        Self {
+            status: "guarded_not_reached",
+            preview_kind: "sample_local_helper_preview",
+            cluster_kind: None,
+            case_label: None,
+            typed_reason_family_hint: None,
+            evidence_refs: Vec::new(),
+            compare_floor_refs: vec![
+                "compare_floor:current_l2.typed.sample_local_checker_hint_guard_only".to_string(),
+            ],
+            guard_refs: typed_checker_hint_guard_refs(false),
+            kept_later_refs: typed_checker_hint_kept_later_refs(),
+            guard_reason: Some(format!(
+                "current typed checker-hint preview only actualizes the sample-local {} after verification preview reaches runtime try-cut evidence for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
+                report.sample_id
+            )),
         }
     }
 }
@@ -1130,12 +1166,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadFamilyThresholdSummary {
         verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
         typed_checker_hint_preview: &CurrentL2OperationalCliTypedCheckerHintPreviewSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && verification_preview.formal_hook_status == "reached"
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && verification_preview.formal_hook_status == "reached"
             && typed_checker_hint_preview.status == "reached";
 
         if reached {
@@ -1196,7 +1228,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadFamilyThresholdSummary {
             guard_refs: actual_checker_payload_family_threshold_guard_refs(false),
             kept_later_refs: actual_checker_payload_family_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual checker payload family threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after typed checker-hint preview reaches the checker-adjacent helper floor for `{}`",
+                "current actual checker payload family threshold only actualizes the {} after typed checker-hint preview reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1226,12 +1259,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowFamilyThresholdSummary {
         actual_checker_payload_family_threshold:
             &CurrentL2OperationalCliActualCheckerPayloadFamilyThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_family_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_checker_payload_family_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_checker_payload_family_threshold
@@ -1288,7 +1317,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowFamilyThresholdSummary {
             guard_refs: actual_checker_payload_row_family_threshold_guard_refs(false),
             kept_later_refs: actual_checker_payload_row_family_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual checker payload row-family threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload family threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual checker payload row-family threshold only actualizes the {} after actual checker payload family threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1319,12 +1349,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowDetailThresholdSummary {
         actual_checker_payload_row_family_threshold:
             &CurrentL2OperationalCliActualCheckerPayloadRowFamilyThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_row_family_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_checker_payload_row_family_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_checker_payload_row_family_threshold
@@ -1387,7 +1413,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowDetailThresholdSummary {
             guard_refs: actual_checker_payload_row_detail_threshold_guard_refs(false),
             kept_later_refs: actual_checker_payload_row_detail_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual checker payload row-detail threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload row-family threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual checker payload row-detail threshold only actualizes the {} after actual checker payload row-family threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1419,12 +1446,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary {
         actual_checker_payload_row_detail_threshold:
             &CurrentL2OperationalCliActualCheckerPayloadRowDetailThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_row_detail_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_checker_payload_row_detail_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_checker_payload_row_detail_threshold
@@ -1488,7 +1511,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary {
             guard_refs: actual_checker_payload_row_body_threshold_guard_refs(false),
             kept_later_refs: actual_checker_payload_row_body_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual checker payload row-body threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload row-detail threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual checker payload row-body threshold only actualizes the {} after actual checker payload row-detail threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1515,12 +1539,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSum
         actual_checker_payload_row_body_threshold:
             &CurrentL2OperationalCliActualCheckerPayloadRowBodyThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_row_body_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_checker_payload_row_body_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_checker_payload_row_body_threshold
@@ -1581,7 +1601,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSum
             kept_later_refs:
                 actual_checker_payload_supported_kind_summary_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual checker payload supported-kind summary threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload row-body threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual checker payload supported-kind summary threshold only actualizes the {} after actual checker payload row-body threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1610,13 +1631,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSumma
         actual_checker_payload_supported_kind_summary_threshold:
             &CurrentL2OperationalCliActualCheckerPayloadSupportedKindSummaryThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_supported_kind_summary_threshold.status
-            == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_checker_payload_supported_kind_summary_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_checker_payload_supported_kind_summary_threshold
@@ -1676,7 +1692,8 @@ impl CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSumma
             kept_later_refs: actual_checker_payload_public_schema_sketch_threshold_kept_later_refs(
             ),
             guard_reason: Some(format!(
-                "current actual checker payload public-schema sketch threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload supported-kind summary threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual checker payload public-schema sketch threshold only actualizes the {} after actual checker payload supported-kind summary threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1703,13 +1720,8 @@ impl CurrentL2OperationalCliActualPublicCheckerApiSketchThresholdSummary {
         actual_checker_payload_public_schema_sketch_threshold:
             &CurrentL2OperationalCliActualCheckerPayloadPublicSchemaSketchThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_checker_payload_public_schema_sketch_threshold.status
-            == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_checker_payload_public_schema_sketch_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_checker_payload_public_schema_sketch_threshold
@@ -1758,7 +1770,8 @@ impl CurrentL2OperationalCliActualPublicCheckerApiSketchThresholdSummary {
             guard_refs: actual_public_checker_api_sketch_threshold_guard_refs(false),
             kept_later_refs: actual_public_checker_api_sketch_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual public checker API sketch threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual checker payload public-schema sketch threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual public checker API sketch threshold only actualizes the {} after actual checker payload public-schema sketch threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1789,12 +1802,8 @@ impl CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary {
         actual_public_checker_api_sketch_threshold:
             &CurrentL2OperationalCliActualPublicCheckerApiSketchThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_public_checker_api_sketch_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_public_checker_api_sketch_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_public_checker_api_sketch_threshold
@@ -1875,7 +1884,8 @@ impl CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary {
             guard_refs: actual_public_checker_entry_criteria_threshold_guard_refs(false),
             kept_later_refs: actual_public_checker_entry_criteria_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual public checker entry-criteria threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual public checker API sketch threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual public checker entry-criteria threshold only actualizes the {} after actual public checker API sketch threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -1904,12 +1914,8 @@ impl CurrentL2OperationalCliActualPublicCheckerCommandSurfaceThresholdSummary {
         actual_public_checker_entry_criteria_threshold:
             &CurrentL2OperationalCliActualPublicCheckerEntryCriteriaThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_public_checker_entry_criteria_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_public_checker_entry_criteria_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_public_checker_entry_criteria_threshold
@@ -1979,7 +1985,8 @@ impl CurrentL2OperationalCliActualPublicCheckerCommandSurfaceThresholdSummary {
             guard_refs: actual_public_checker_command_surface_threshold_guard_refs(false),
             kept_later_refs: actual_public_checker_command_surface_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual public checker command-surface threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual public checker entry-criteria threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual public checker command-surface threshold only actualizes the {} after actual public checker entry-criteria threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -2009,12 +2016,8 @@ impl CurrentL2OperationalCliActualSharedOutputContractThresholdSummary {
         actual_public_checker_command_surface_threshold:
             &CurrentL2OperationalCliActualPublicCheckerCommandSurfaceThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_public_checker_command_surface_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_public_checker_command_surface_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_public_checker_command_surface_threshold
@@ -2085,7 +2088,8 @@ impl CurrentL2OperationalCliActualSharedOutputContractThresholdSummary {
             guard_refs: actual_shared_output_contract_threshold_guard_refs(false),
             kept_later_refs: actual_shared_output_contract_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual shared output contract threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual public checker command-surface threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual shared output contract threshold only actualizes the {} after actual public checker command-surface threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -2114,12 +2118,8 @@ impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
         actual_shared_output_contract_threshold:
             &CurrentL2OperationalCliActualSharedOutputContractThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_shared_output_contract_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_shared_output_contract_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_shared_output_contract_threshold
@@ -2183,7 +2183,8 @@ impl CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary {
             guard_refs: actual_public_checker_boundary_threshold_guard_refs(false),
             kept_later_refs: actual_public_checker_boundary_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual public checker boundary threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual shared output contract threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual public checker boundary threshold only actualizes the {} after actual shared output contract threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -2213,12 +2214,8 @@ impl CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
         actual_public_checker_boundary_threshold:
             &CurrentL2OperationalCliActualPublicCheckerBoundaryThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_public_checker_boundary_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_public_checker_boundary_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_public_checker_boundary_threshold
@@ -2287,7 +2284,8 @@ impl CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary {
             guard_refs: actual_verifier_handoff_surface_threshold_guard_refs(false),
             kept_later_refs: actual_verifier_handoff_surface_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual verifier handoff surface threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual public checker boundary threshold reaches the checker-adjacent helper floor for `{}`",
+                "current actual verifier handoff surface threshold only actualizes the {} after actual public checker boundary threshold reaches the checker-adjacent helper floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -2316,12 +2314,8 @@ impl CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary {
         actual_verifier_handoff_surface_threshold:
             &CurrentL2OperationalCliActualVerifierHandoffSurfaceThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_verifier_handoff_surface_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_verifier_handoff_surface_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_verifier_handoff_surface_threshold
@@ -2388,7 +2382,8 @@ impl CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary {
             guard_refs: actual_minimal_parser_subset_freeze_threshold_guard_refs(false),
             kept_later_refs: actual_minimal_parser_subset_freeze_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual minimal parser subset freeze threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual verifier handoff surface threshold reaches the helper-local docs-only bridge floor for `{}`",
+                "current actual minimal parser subset freeze threshold only actualizes the {} after actual verifier handoff surface threshold reaches the helper-local docs-only bridge floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -2417,12 +2412,8 @@ impl CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary
         actual_minimal_parser_subset_freeze_threshold:
             &CurrentL2OperationalCliActualMinimalParserSubsetFreezeThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_minimal_parser_subset_freeze_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_minimal_parser_subset_freeze_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_minimal_parser_subset_freeze_threshold
@@ -2488,7 +2479,8 @@ impl CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary
             guard_refs: actual_parser_to_checker_reconnect_freeze_threshold_guard_refs(false),
             kept_later_refs: actual_parser_to_checker_reconnect_freeze_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual parser-to-checker reconnect freeze threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual minimal parser subset freeze threshold reaches the stage1+stage2 parser floor for `{}`",
+                "current actual parser-to-checker reconnect freeze threshold only actualizes the {} after actual minimal parser subset freeze threshold reaches the stage1+stage2 parser floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -2517,12 +2509,8 @@ impl CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary {
         actual_parser_to_checker_reconnect_freeze_threshold:
             &CurrentL2OperationalCliActualParserToCheckerReconnectFreezeThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_parser_to_checker_reconnect_freeze_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_parser_to_checker_reconnect_freeze_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_parser_to_checker_reconnect_freeze_threshold
@@ -2588,7 +2576,8 @@ impl CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary {
             guard_refs: actual_phase1_semantics_closeout_threshold_guard_refs(false),
             kept_later_refs: actual_phase1_semantics_closeout_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual phase1 semantics closeout threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual parser-to-checker reconnect freeze threshold reaches the checker-floor bridge for `{}`",
+                "current actual phase1 semantics closeout threshold only actualizes the {} after actual parser-to-checker reconnect freeze threshold reaches the checker-floor bridge for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -2617,12 +2606,8 @@ impl CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary {
         actual_phase1_semantics_closeout_threshold:
             &CurrentL2OperationalCliActualPhase1SemanticsCloseoutThresholdSummary,
     ) -> Self {
-        let reached = matches!(
-            report.sample_id.as_str(),
-            "p10-typed-authorized-fingerprint-declassification"
-                | "p11-typed-unauthorized-fingerprint-release"
-                | "p12-typed-classified-fingerprint-publication-block"
-        ) && actual_phase1_semantics_closeout_threshold.status == "reached";
+        let reached = current_l2_first_strong_typing_sample_reached(report.sample_id.as_str())
+            && actual_phase1_semantics_closeout_threshold.status == "reached";
 
         if reached {
             let mut compare_floor_refs = actual_phase1_semantics_closeout_threshold
@@ -2699,7 +2684,8 @@ impl CurrentL2OperationalCliActualPhase2ParserFreePocCloseoutThresholdSummary {
             guard_refs: actual_phase2_parser_free_poc_closeout_threshold_guard_refs(false),
             kept_later_refs: actual_phase2_parser_free_poc_closeout_threshold_kept_later_refs(),
             guard_reason: Some(format!(
-                "current actual phase2 parser-free PoC closeout threshold only actualizes the IFC trio (`p10` / `p11` / `p12`) after actual phase1 semantics closeout threshold reaches the semantics closeout floor for `{}`",
+                "current actual phase2 parser-free PoC closeout threshold only actualizes the {} after actual phase1 semantics closeout threshold reaches the semantics closeout floor for `{}`",
+                current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
         }
@@ -4521,9 +4507,13 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
 }
 
 fn typed_checker_hint_evidence_refs(sample_id: &str) -> Vec<String> {
+    let foundation_evidence_ref = current_l2_first_strong_typing_sample_manifest(sample_id)
+        .map(|manifest| manifest.foundation_evidence_ref)
+        .unwrap_or("spec_example:current_l2_first_strong_typing_layer_finite_index_spine_default");
+
     vec![
         format!("sample:{sample_id}"),
-        "lean_foundation:CurrentL2IfcSecretExamples.lean".to_string(),
+        foundation_evidence_ref.to_string(),
         "helper_preview:typed_checker_hint_preview".to_string(),
     ]
 }
@@ -5266,6 +5256,7 @@ fn typed_checker_hint_guard_refs(reached: bool) -> Vec<String> {
 fn typed_checker_hint_kept_later_refs() -> Vec<String> {
     vec![
         "kept_later:final_typed_source_principal".to_string(),
+        "kept_later:final_finite_index_surface".to_string(),
         "kept_later:final_ifc_syntax".to_string(),
         "kept_later:actual_checker_payload_family".to_string(),
         "kept_later:checker_supported_kind_summary".to_string(),
@@ -5338,14 +5329,7 @@ fn actual_checker_payload_row_detail_source_ref(_sample_id: &str) -> &'static st
 }
 
 fn actual_checker_payload_row_detail_reason_kind(sample_id: &str) -> Option<&'static str> {
-    match sample_id {
-        "p10-typed-authorized-fingerprint-declassification" => Some("authority_sensitive_success"),
-        "p11-typed-unauthorized-fingerprint-release" => Some("authority_miss_negative"),
-        "p12-typed-classified-fingerprint-publication-block" => {
-            Some("classified_to_public_negative")
-        }
-        _ => None,
-    }
+    current_l2_first_strong_typing_sample_manifest(sample_id).map(|manifest| manifest.case_label)
 }
 
 fn actual_checker_payload_row_detail_threshold_guard_refs(reached: bool) -> Vec<String> {
@@ -5374,25 +5358,16 @@ fn actual_checker_payload_row_detail_threshold_kept_later_refs() -> Vec<String> 
 }
 
 fn actual_checker_payload_row_body_bundle(sample_id: &str) -> Option<BTreeMap<String, String>> {
-    let (selected_option_ref, visibility_target_ref) = match sample_id {
-        "p10-typed-authorized-fingerprint-declassification" => {
-            ("release_authority", "room_members")
-        }
-        "p11-typed-unauthorized-fingerprint-release" => ("fingerprint_holder", "room_members"),
-        "p12-typed-classified-fingerprint-publication-block" => {
-            ("classified_holder", "public_board")
-        }
-        _ => return None,
-    };
+    let manifest = current_l2_first_strong_typing_sample_manifest(sample_id)?;
 
     Some(BTreeMap::from([
         (
             "selected_option_ref".to_string(),
-            selected_option_ref.to_string(),
+            manifest.selected_option_ref.to_string(),
         ),
         (
             "visibility_target_ref".to_string(),
-            visibility_target_ref.to_string(),
+            manifest.visibility_target_ref.to_string(),
         ),
     ]))
 }

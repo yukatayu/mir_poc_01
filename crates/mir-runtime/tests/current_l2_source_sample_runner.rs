@@ -560,6 +560,122 @@ fn current_l2_source_sample_runner_accepts_ifc_authority_typed_prototype_paths()
 }
 
 #[test]
+fn current_l2_source_sample_runner_accepts_capture_and_cost_typed_prototype_paths() {
+    let p15 = typed_prototype_sample_path("p15-typed-capture-escape-rejected.txt");
+    let p15_host_plan = load_host_plan_from_path(&typed_prototype_sample_path(
+        "p15-typed-capture-escape-rejected.host-plan.json",
+    ))
+    .unwrap();
+    let p15_report = run_current_l2_source_sample(p15.to_str().unwrap(), p15_host_plan).unwrap();
+    assert_eq!(p15_report.sample_id, "p15-typed-capture-escape-rejected");
+    assert_eq!(
+        p15_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert_eq!(
+        p15_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Reject)
+    );
+    assert_eq!(
+        p15_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformFailure,
+            EventKind::Reject,
+        ]
+    );
+    assert_eq!(
+        p15_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("session_state")
+            .cloned(),
+        Some(vec![
+            "derive_ephemeral_session_token@session_owner".to_string(),
+        ])
+    );
+    assert_eq!(
+        p15_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("session_debug_text_output")
+            .cloned(),
+        Some(vec![
+            "derive_ephemeral_session_token: session_token -> scoped".to_string(),
+        ])
+    );
+    assert!(
+        p15_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .values()
+            .flatten()
+            .all(|record| !record.contains("publish_captured_session_token"))
+    );
+
+    let p16 = typed_prototype_sample_path("p16-typed-remote-call-budget-exceeded.txt");
+    let p16_host_plan = load_host_plan_from_path(&typed_prototype_sample_path(
+        "p16-typed-remote-call-budget-exceeded.host-plan.json",
+    ))
+    .unwrap();
+    let p16_report = run_current_l2_source_sample(p16.to_str().unwrap(), p16_host_plan).unwrap();
+    assert_eq!(
+        p16_report.sample_id,
+        "p16-typed-remote-call-budget-exceeded"
+    );
+    assert_eq!(
+        p16_report.runtime_report.checker_floor.static_gate.verdict,
+        StaticGateVerdict::Valid
+    );
+    assert_eq!(
+        p16_report.runtime_report.run_report.terminal_outcome,
+        Some(TerminalOutcome::Reject)
+    );
+    assert_eq!(
+        p16_report.runtime_report.run_report.trace_audit_sink.events,
+        vec![
+            EventKind::PerformSuccess,
+            EventKind::AtomicCut,
+            EventKind::PerformFailure,
+            EventKind::Reject,
+        ]
+    );
+    assert_eq!(
+        p16_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("quota_state")
+            .cloned(),
+        Some(vec!["reserve_remote_call_budget@quota_owner".to_string(),])
+    );
+    assert_eq!(
+        p16_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .get("quota_debug_text_output")
+            .cloned(),
+        Some(vec![
+            "reserve_remote_call_budget: remote_calls <= 0".to_string(),
+        ])
+    );
+    assert!(
+        p16_report
+            .runtime_report
+            .run_report
+            .final_place_store
+            .values()
+            .flatten()
+            .all(|record| !record.contains("invoke_remote_call_without_budget"))
+    );
+}
+
+#[test]
 fn current_l2_source_sample_runner_accepts_order_handoff_third_tranche_paths() {
     let p07 = order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt");
     let p07_host_plan = load_host_plan_from_path(&order_handoff_prototype_sample_path(

@@ -1,0 +1,21 @@
+# remote call budget が 0 のまま追加 call を試みて止まる current L2 typed/simple-cost prototype。
+place root {
+  place room {
+    place verifier_boundary {
+      option quota_owner on quota_state capability write lease live admit quota_owner(player_a)
+      option audit_observer on quota_state capability write lease live admit observer_role(player_b)
+
+      chain remote_budget_ref = quota_owner
+
+      perform reserve_remote_call_budget via remote_budget_ref
+        require write
+        ensure remote_call_budget_remaining(zero_budget)
+
+      atomic_cut
+
+      perform invoke_remote_call_without_budget via remote_budget_ref
+        require write
+        ensure remote_api_visible(remote_api_gateway)
+    }
+  }
+}

@@ -29,6 +29,8 @@
   - `p06-typed-proof-owner-handoff` は sample-visible corrected prototype であり、final typed calculus / final public verifier contract / settled property language ではない
   - `p10-typed-authorized-fingerprint-declassification` と `p11-typed-unauthorized-fingerprint-release` は、explicit authority declassification success/failure を source-side で比較する corrected prototype であり、final typed source principal / final IFC syntax / final public verifier contract ではない
   - `p12-typed-classified-fingerprint-publication-block` は、authority 欠如ではなく label-flow mismatch によって public publication が止まることを source-side で比較する corrected prototype であり、final typed source principal / final IFC syntax / final public verifier contract ではない
+  - `p15-typed-capture-escape-rejected` は、capture / lifetime line の first negative を source-side で比較する corrected prototype であり、final typed source principal / final capture syntax / final public verifier contract ではない
+  - `p16-typed-remote-call-budget-exceeded` は、simple cost line の first negative を source-side で比較する corrected prototype であり、final typed source principal / final cost syntax / final public verifier contract ではない
 - `current-l2-dynamic-attach-detach/`
   - attach / detach の corrected prototype
 

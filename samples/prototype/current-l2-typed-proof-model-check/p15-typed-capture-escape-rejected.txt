@@ -1,0 +1,21 @@
+# ephemeral token を capture scope の外へ publish しようとして止まる current L2 typed/capture-lifetime prototype。
+place root {
+  place room {
+    place verifier_boundary {
+      option session_owner on session_state capability write lease live admit session_owner(player_a)
+      option audit_observer on session_state capability write lease live admit observer_role(player_b)
+
+      chain session_ref = session_owner
+
+      perform derive_ephemeral_session_token via session_ref
+        require write
+        ensure session_token_bound(ephemeral_scope)
+
+      atomic_cut
+
+      perform publish_captured_session_token via session_ref
+        require write
+        ensure session_token_visible(room_members)
+    }
+  }
+}

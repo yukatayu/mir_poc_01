@@ -3659,6 +3659,24 @@
   - `specs/examples/564-current-l2-phase6-perform-head-request-clause-bundle-attachment-comparison.md`
 - 今回の要点は、Package 91 を compare floor のまま残さず、`Stage3RequestHeadClauseBundle` thin wrapper first を helper-local non-production parser carrier として actualize し、current live queue を Package 92 first strong typing finite-index layer 先頭へ進めた点である。これは final parser grammar や final public parser/checker/runtime surface を意味せず、perform head / request clause suite separate minimum を保った thin wrapper actualization である。
 
+## 2026-04-20 Package 92 finite-index first-layer actualization addendum
+
+- `specs/examples/566-current-l2-finite-index-first-layer-capture-lifetime-cost-actualization.md`、`docs/reports/0849-package92-finite-index-strong-typing-actualization.md`、`crates/mir-runtime/src/current_l2_cli.rs`、`crates/mir-runtime/tests/current_l2_source_sample_runner.rs`、`crates/mir-runtime/tests/current_l2_verifier_preview_alignment.rs`、`crates/mir-runtime/tests/current_l2_model_check_projection_prefloor.rs`、`crates/mir-runtime/tests/current_l2_operational_cli.rs`、`samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt`、`samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.host-plan.json`、`samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt`、`samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.host-plan.json`、`samples/prototype/README.md`、`Documentation.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`tasks.md`、`progress.md`、`plan/01-status-at-a-glance.md`、`plan/08-representative-programs-and-fixtures.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
+  - `specs/examples/566-current-l2-finite-index-first-layer-capture-lifetime-cost-actualization.md`
+  - `docs/reports/0849-package92-finite-index-strong-typing-actualization.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  - `crates/mir-runtime/tests/current_l2_verifier_preview_alignment.rs`
+  - `crates/mir-runtime/tests/current_l2_model_check_projection_prefloor.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+  - `samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt`
+  - `samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.host-plan.json`
+  - `samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt`
+  - `samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.host-plan.json`
+
+- 今回の要点は、Package 92 を compare-floor に留めず、first strong typing layer finite-index default を `p15` capture/lifetime negative と `p16` simple cost negative まで widened し、source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16` を helper-local checker summary / verifier preview alignment / model-check projection pre-floor / current queue sync へ actualize した点である。これは stronger typed source principal、final typed calculus、final public checker payload schema、final public verifier contract を意味せず、checker-adjacent first layer の current execution-side widening である。
+
 ### 2026-04-19 final-layer closeout handoff integration
 
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`docs/reports/0801-final-layer-closeout-handoff-integration.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。

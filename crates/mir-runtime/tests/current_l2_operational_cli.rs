@@ -2180,3 +2180,86 @@ fn operational_cli_json_reports_ifc_label_flow_checker_hint_preview() {
         "phase4_shared_space_self_driven_closeout_comparison"
     );
 }
+
+#[test]
+fn operational_cli_json_reports_capture_escape_checker_hint_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        typed_prototype_sample_path("p15-typed-capture-escape-rejected.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(value["typed_checker_hint_preview"]["status"], "reached");
+    assert_eq!(
+        value["typed_checker_hint_preview"]["cluster_kind"],
+        "capture_lifetime_cluster"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["case_label"],
+        "capture_escape_negative"
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["typed_reason_family_hint"]["family_refs"],
+        Value::Array(vec![
+            Value::String("capture_set_constraint_family".into()),
+            Value::String("lifetime_preorder_family".into()),
+        ])
+    );
+    assert_eq!(
+        value["typed_checker_hint_preview"]["typed_reason_family_hint"]["coverage_state"],
+        "partial_cluster"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_detail_threshold"]["row_reason_kind"],
+        "capture_escape_negative"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_body_threshold"]["row_body"]["selected_option_ref"],
+        "session_owner"
+    );
+    assert_eq!(
+        value["actual_checker_payload_row_body_threshold"]["row_body"]["visibility_target_ref"],
+        "room_members"
+    );
+    assert_eq!(
+        value["actual_public_checker_api_sketch_threshold"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["actual_phase2_parser_free_poc_closeout_threshold"]["status"],
+        "reached"
+    );
+}
+
+#[test]
+fn operational_cli_pretty_reports_cost_bound_checker_hint_preview() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        typed_prototype_sample_path("p16-typed-remote-call-budget-exceeded.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("typed_checker_hint_preview:"));
+    assert!(output.contains("status: reached"));
+    assert!(output.contains("cluster_kind: simple_cost_bound_cluster"));
+    assert!(output.contains("case_label: remote_call_budget_negative"));
+    assert!(output.contains("simple_cost_bound_family"));
+    assert!(output.contains("external_effect_budget_family"));
+    assert!(output.contains("actual_checker_payload_row_detail_threshold:"));
+    assert!(output.contains("row_reason_kind: remote_call_budget_negative"));
+    assert!(output.contains("actual_checker_payload_row_body_threshold:"));
+    assert!(output.contains("selected_option_ref: quota_owner"));
+    assert!(output.contains("visibility_target_ref: remote_api_gateway"));
+    assert!(output.contains("actual_public_checker_api_sketch_threshold:"));
+    assert!(output.contains("actual_phase2_parser_free_poc_closeout_threshold:"));
+    assert!(output.contains("closeout_kind: parser_free_companion_baseline"));
+}

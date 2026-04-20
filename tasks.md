@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 09:51 JST
+最終更新: 2026-04-20 10:24 JST
 
 ## この文書について
 
@@ -12,10 +12,11 @@
 
 - current mapped corpus では、
   - authored sixteen
-  - corrected prototype set `p01...p14`
+  - corrected prototype set `p01...p16`
   - runner / CLI / regression / helper-local compare floor
   が already runnable である。
 - representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p07 / p08 / p09 / p13 / p14` は actual Lean execution reached であり、`samples/lean/current-l2/` に committed corpus として保存済みである。
+- source-side finite-index first layer は `p10 / p11 / p12 / p15 / p16` まで corrected prototype と helper-local checker summary に actualize 済みである。
 - `samples/lean/foundations/` には
   - `CurrentL2LabelModel.lean`
   - `CurrentL2IfcSecretExamples.lean`
@@ -32,7 +33,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 92 finite-index strong typing first layer
   - Package 93 Lean-first formal skeleton hardening
   - Package 94 theorem-first and model-check second-line carrier
   - Package 95 order/handoff source surface and artifacts
@@ -47,7 +47,7 @@
 - `samples/current-l2/`
   - authored sixteen は inventory / runner / verification ladder / emitted artifact wiring / regression helper に乗っている
 - `samples/prototype/`
-  - corrected prototype set `p01...p14` は explicit path + adjacent host-plan sidecar で runnable
+  - corrected prototype set `p01...p16` は explicit path + adjacent host-plan sidecar で runnable
   - helper-local `debug_outputs` / `verification_preview` / `artifact_preview` を見せる current cut がある
 - `samples/lean/`
   - `foundations/` は actual small proof fragment
@@ -66,7 +66,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `92` first strong typing finite-index layer | finite decidable index fragment を current sample に対して static carrier / sample / docs まで実装する | `L` | `Macro 5` | checker-adjacent principal を維持し、IFC / capture / lifetime / simple cost first layer を thin static carrier で actualize する | valid/invalid sample 群と docs default が drift なく揃い、stronger typed surface を still non-principal に保てる |
 | `93` Lean-first formal skeleton hardening | first strong typing layer と current proof obligations を Lean-first skeleton / sample explanation に繋ぎ直す | `M` | `Macro 5` | `samples/lean/foundations/` と generated current-L2 corpus の役割差を保ち、first theorem placeholders を explanation 付きで固定する | actual small proof / generated stub / docs reading が一致し、Package 94 の bridge work を受けられる |
 | `94` theorem-first and model-check second-line carrier | theorem-first bridge と model-check second-line carrier を current samples / artifacts / previews へ narrow に同期する | `M` | `Macro 5/7` | notebook-first theorem line、row-local model-check carrier、brand-neutral reserve を維持する | theorem/model-check preview と stop line が current samples 上で drift なく読める |
 | `95` order/handoff source surface and artifacts | explicit edge-row principal / stage-block secondary / reserve serial sugar を current artifacts と negative corpus に揃える | `M` | `Macro 5/6` | low-level exact surface を source principal に戻さず、edge-row principal を保つ | valid / missing witness / handoff-before-publication / stage-block pair が current docs / helper / sample で一貫する |
@@ -122,19 +121,39 @@
   final public parser / checker / runtime surface
   full `Program` lowering
 
+### Package 92 — first strong typing finite-index layer
+
+- current reading:
+  close 済み。finite decidable index fragment の checker-adjacent first layer を `p10 / p11 / p12 / p15 / p16` source-side sample set まで widen し、capture / lifetime negative と simple cost negative を prototype / helper-local checker summary / docs に actualize した。
+- close evidence:
+  `specs/examples/557`
+  `specs/examples/566`
+  `samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt`
+  `samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt`
+  `crates/mir-runtime/src/current_l2_cli.rs`
+  `crates/mir-runtime/tests/current_l2_source_sample_runner.rs`
+  `crates/mir-runtime/tests/current_l2_verifier_preview_alignment.rs`
+  `crates/mir-runtime/tests/current_l2_model_check_projection_prefloor.rs`
+  `crates/mir-runtime/tests/current_l2_operational_cli.rs`
+- kept later:
+  stronger typed source principal
+  final typed calculus
+  final public verifier contract
+  Lean generated corpus widening
+
 ## active package notes
 
 ### Package 92 — first strong typing finite-index layer
 
 - current reading:
-  current active line。finite decidable index fragment を checker-adjacent first layer として actualize し、IFC / capture / lifetime / simple cost sample 群を static carrier へ繋ぐ。
+  close 済み。next active line ではない。
 - target corpus:
   `p06`
   `p10`
   `p11`
   `p12`
-  capture escape rejected sample
-  cost bound exceeded sample
+  `p15`
+  `p16`
 - stop line:
   stronger typed source principal
   final typed calculus
@@ -143,7 +162,7 @@
 ### Package 93 — Lean-first formal skeleton hardening
 
 - current reading:
-  Package 92 に追随して、`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` generated stub corpus の役割差を崩さず、first theorem placeholder 群と日本語 explanation を tighten する。
+  current active line。`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` generated stub corpus の役割差を崩さず、first theorem placeholder 群と日本語 explanation を tighten する。
 - stop line:
   production prover binding
   final proof object public contract
