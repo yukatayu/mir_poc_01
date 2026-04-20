@@ -827,6 +827,68 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("source wording / emitted schema split", text)
         self.assertIn("witness-provider public-shape split", text)
 
+    def test_remaining_residual_lane_summary_text_mentions_mixed_gate_lanes_and_user_spec_residuals(self) -> None:
+        text = guided.render_remaining_residual_lane_summary(guided.problem_specs())
+
+        self.assertIn("current-l2 remaining residual lane summary", text)
+        self.assertIn("remaining mixed-gate lanes:", text)
+        self.assertIn("problem1-final-public-seams", text)
+        self.assertIn("problem2-final-public-seams", text)
+        self.assertIn("syntax-modality-final-marker", text)
+        self.assertIn("true user-spec residuals:", text)
+        self.assertIn(
+            "installed-binary / packaging / FFI / engine adapter / host integration target",
+            text,
+        )
+
+    def test_remaining_residual_lane_summary_json_separates_mixed_gate_lanes_and_user_spec_residuals(self) -> None:
+        rendered = guided.render_remaining_residual_lane_summary_from_runtime(
+            guided.problem_specs(),
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(
+            payload["manifest_kind"],
+            "current_l2_remaining_residual_lane_summary",
+        )
+        self.assertEqual(
+            [lane["lane_id"] for lane in payload["mixed_gate_lanes"]],
+            [
+                "problem1-final-public-seams",
+                "problem2-final-public-seams",
+                "syntax-modality-final-marker",
+            ],
+        )
+        self.assertIn(
+            "upper-layer application target beyond authoritative-room first scenario",
+            payload["true_user_spec_residuals"],
+        )
+        self.assertEqual(
+            payload["recommended_order"],
+            [
+                "problem1-final-public-seams",
+                "problem2-final-public-seams",
+                "syntax-modality-final-marker",
+            ],
+        )
+
+    def test_main_residuals_command_uses_renderer(self) -> None:
+        fake_text = "current-l2 remaining residual lane summary\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_remaining_residual_lane_summary_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["residuals"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("current-l2 remaining residual lane summary" in call.args[0] for call in write.mock_calls)
+        )
+
     def test_problem1_typed_split_text_mentions_supporting_samples_and_kept_separate(self) -> None:
         text = guided.render_problem_split_package_from_runtime(
             "problem1",

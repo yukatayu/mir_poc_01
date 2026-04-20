@@ -37,6 +37,10 @@
   まとめて見たいときは
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   を使う。
+- split closeout 後の remaining mixed gate と true user-spec residual を
+  1 枚で圧縮して見たいときは
+  `python3 scripts/current_l2_guided_samples.py residuals`
+  を使う。
 - 次に guide 内の `run-source-sample` / `bundle problem1|problem2` / `mapping` command を順に使う。
 - 問題 1 / 問題 2 をまとめて手早く確認したいときは
   `python3 scripts/current_l2_guided_samples.py smoke-all`

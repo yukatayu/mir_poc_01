@@ -154,6 +154,9 @@ distributed fairness theorem や exhaustive shared-space catalog を要求しな
     で claim / payload split first の current reading を辿る。
 - stronger fairness / replay profile は current first completion line の必須条件ではなく、
   representative pair `p07 / p08` と reserve route `p09` の current split を保ったまま later reserve line に残す。
+- compressed residual lane は
+  `python3 scripts/current_l2_guided_samples.py residuals`
+  から、Problem 2 mixed gate lane と true user-spec residual の切り分けを 1 枚で見直す。
 - global true user-spec residual は
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、exhaustive shared-space catalog / packaging / upper-layer target をまとめて見直す。

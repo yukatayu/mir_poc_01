@@ -841,6 +841,8 @@
   - current Phase 6 / Package 121 closeout として、`split problem2 witness-provider-public-shape` helper と Problem 2 bundle doc 側の witness-provider split entrypoint を actualize し、Problem 2 witness/provider public-shape residual を source wording / emitted schema residual から切り離して narrow に読む補助文書。
 - `specs/examples/595-current-l2-representative-problem-reopen-map-split-closeout-sync.md`
   - current Phase 6 / Package 122 closeout として、`reopen-map problem1|problem2` helper public surface から stale な `next split packages` 表示を外し、split-package closeout と remaining mixed gate を再同期する補助文書。
+- `specs/examples/596-current-l2-remaining-residual-lane-summary-actualization.md`
+  - current Phase 6 / Package 123 closeout として、`residuals` helper と sample bundle doc 側の residual lane entrypoint を actualize し、remaining mixed gate と true user-spec residual を next reopen order 付きで圧縮する補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

@@ -194,6 +194,12 @@ GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
     "upper-layer application target beyond authoritative-room first scenario",
 )
 
+REMAINING_RESIDUAL_LANE_ORDER = (
+    "problem1-final-public-seams",
+    "problem2-final-public-seams",
+    "syntax-modality-final-marker",
+)
+
 
 PROBLEM_REOPEN_ANCHOR_REFS = {
     "problem1": (
@@ -1109,6 +1115,138 @@ def render_problem_reopen_map_from_runtime(
     return render_problem_reopen_map(specs)
 
 
+def build_remaining_residual_lane_manifest(specs: Mapping[str, ProblemSpec]) -> dict[str, object]:
+    problem1_row = build_problem_reopen_row(specs["problem1"])
+    problem2_row = build_problem_reopen_row(specs["problem2"])
+
+    mixed_gate_lanes = [
+        {
+            "lane_id": "problem1-final-public-seams",
+            "summary": (
+                "Problem 1 remaining mixed gate を typed / theorem / model-check public seam cluster "
+                "として圧縮し、true user-spec residual と混ぜずに読む。"
+            ),
+            "focus": list(problem1_row.mixed_gates),
+            "entry_commands": [
+                "python3 scripts/current_l2_guided_samples.py reopen-map problem1",
+                "python3 scripts/current_l2_guided_samples.py matrix problem1",
+                "python3 scripts/current_l2_guided_samples.py bundle problem1",
+            ],
+            "anchor_refs": list(problem1_row.anchor_refs)
+            + [
+                "specs/examples/590-current-l2-problem1-typed-source-principal-split-helper-actualization.md",
+                "specs/examples/591-current-l2-problem1-theorem-public-contract-split-helper-actualization.md",
+                "specs/examples/592-current-l2-problem1-model-check-public-contract-split-helper-actualization.md",
+            ],
+        },
+        {
+            "lane_id": "problem2-final-public-seams",
+            "summary": (
+                "Problem 2 remaining mixed gate を final wording / witness-provider public-shape cluster "
+                "として圧縮し、true user-spec residual と混ぜずに読む。"
+            ),
+            "focus": list(problem2_row.mixed_gates),
+            "entry_commands": [
+                "python3 scripts/current_l2_guided_samples.py reopen-map problem2",
+                "python3 scripts/current_l2_guided_samples.py matrix problem2",
+                "python3 scripts/current_l2_guided_samples.py bundle problem2",
+            ],
+            "anchor_refs": list(problem2_row.anchor_refs)
+            + [
+                "specs/examples/593-current-l2-problem2-source-wording-emitted-schema-split-helper-actualization.md",
+                "specs/examples/594-current-l2-problem2-witness-provider-public-shape-split-helper-actualization.md",
+            ],
+        },
+        {
+            "lane_id": "syntax-modality-final-marker",
+            "summary": (
+                "syntax / modality line の final modal foundation / source marker を later mixed gate "
+                "として keep し、problem-local final public seam と user-spec residual から切り分ける。"
+            ),
+            "focus": [
+                "final modal foundation / final source marker",
+            ],
+            "entry_commands": [
+                "python3 scripts/current_l2_guided_samples.py reopen-map",
+                "python3 scripts/current_l2_guided_samples.py bundle problem1",
+                "python3 scripts/current_l2_guided_samples.py bundle problem2",
+            ],
+            "anchor_refs": [
+                "specs/10-open-questions.md",
+                "plan/06-surface-notation-status.md",
+                "plan/13-heavy-future-workstreams.md",
+            ],
+        },
+    ]
+
+    return {
+        "manifest_kind": "current_l2_remaining_residual_lane_summary",
+        "title": "current-l2 remaining residual lane summary",
+        "current_reading": (
+            "split package closeout 後に残る mixed gate と true user-spec residual を、"
+            "next reopen order 付きで圧縮して読む helper-local summary。"
+        ),
+        "mixed_gate_lanes": mixed_gate_lanes,
+        "true_user_spec_residuals": list(GLOBAL_TRUE_USER_SPEC_RESIDUALS),
+        "recommended_order": list(REMAINING_RESIDUAL_LANE_ORDER),
+    }
+
+
+def render_remaining_residual_lane_summary(specs: Mapping[str, ProblemSpec]) -> str:
+    manifest = build_remaining_residual_lane_manifest(specs)
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+        "remaining mixed-gate lanes:",
+    ]
+
+    for lane in manifest["mixed_gate_lanes"]:
+        lines.append(f"- {lane['lane_id']}")
+        lines.append(f"  summary: {lane['summary']}")
+        lines.append("  focus:")
+        for item in lane["focus"]:
+            lines.append(f"    - {item}")
+        lines.append("  entry commands:")
+        for command in lane["entry_commands"]:
+            lines.append(f"    - {command}")
+        lines.append("  anchor refs:")
+        for ref in lane["anchor_refs"]:
+            lines.append(f"    - {ref}")
+        lines.append("")
+
+    lines.append("recommended order:")
+    for lane_id in manifest["recommended_order"]:
+        lines.append(f"- {lane_id}")
+
+    lines.append("")
+    lines.append("true user-spec residuals:")
+    for item in manifest["true_user_spec_residuals"]:
+        lines.append(f"- {item}")
+
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- current helper-local summary であり、final public parser / checker / runtime API や final public verifier contract を意味しない。",
+            "- representative problem reopen-map と sample bundle から next reopen order を短く読み直す current cut に留める。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_remaining_residual_lane_summary_from_runtime(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+) -> str:
+    manifest = build_remaining_residual_lane_manifest(specs)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_remaining_residual_lane_summary(specs)
+
+
 def problem_split_package_ids() -> tuple[str, ...]:
     return tuple(
         sorted(
@@ -1949,6 +2087,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     reopen_map_parser.add_argument("problem_id", nargs="?", choices=sorted(problem_specs().keys()))
     reopen_map_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    residuals_parser = subparsers.add_parser(
+        "residuals",
+        help="remaining mixed gate と true user-spec residual を圧縮表示する",
+    )
+    residuals_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     split_parser = subparsers.add_parser(
         "split",
         help="next split package を problem ごとの narrow helper summary で表示する",
@@ -2007,6 +2151,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.subcommand == "reopen-map":
         selected_specs = specs if args.problem_id is None else {args.problem_id: specs[args.problem_id]}
         print(render_problem_reopen_map_from_runtime(selected_specs, output_format=args.format))
+        return 0
+
+    if args.subcommand == "residuals":
+        print(render_remaining_residual_lane_summary_from_runtime(specs, output_format=args.format))
         return 0
 
     if args.subcommand == "split":

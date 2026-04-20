@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 17:40 JST
+最終更新: 2026-04-20 17:53 JST
 
 ## この文書について
 
@@ -35,8 +35,10 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 123 remaining mixed-gate compression after split closeout
-  を first package として追う。
+  - Package 124 Problem 1 final-public-seam lane follow-up
+  - Package 125 Problem 2 final-public-seam lane follow-up
+  - Package 126 syntax-modality final-marker lane follow-up
+  を先頭に追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
 ## current executable floor
@@ -63,7 +65,9 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `123` remaining mixed-gate compression after split closeout | remaining mixed gate と true user-spec residual を compare debt を増やさず narrow に圧縮する | `S-M` | `Macro 5/6/7` | theorem/model-check/witness-provider/final wording の residual mixed gate と true user-spec residual を再分離する | mixed gate / user-spec residual の境界が queue drift なく読める |
+| `124` Problem 1 final-public-seam lane follow-up | Problem 1 mixed gate を typed / theorem / model-check public seam cluster として further narrow に扱う | `S-M` | `Macro 5/7` | `reopen-map problem1` / `matrix problem1` / `bundle problem1` を主 anchor に、typed/theorem/model-check final public seam の reopen order を詰める | Problem 1 mixed gate lane が helper / docs / snapshot で同じ順序に見える |
+| `125` Problem 2 final-public-seam lane follow-up | Problem 2 mixed gate を final wording / witness-provider public-shape cluster として further narrow に扱う | `S-M` | `Macro 5/6` | `reopen-map problem2` / `matrix problem2` / `bundle problem2` を主 anchor に、final wording / public-shape の reopen order を詰める | Problem 2 mixed gate lane が helper / docs / snapshot で同じ順序に見える |
+| `126` syntax-modality final-marker lane follow-up | final modal foundation / source marker を problem-local final public seam と user-spec residual から切り分けたまま圧縮する | `S` | `Macro 5` | `residuals` helper と syntax/modality docs を主 anchor に、final marker line を later mixed gate として整える | syntax/modality lane が Problem 1 / Problem 2 / user-spec residual と混ざらず読める |
 
 ## recently closed package note
 
@@ -483,13 +487,46 @@
 ### Package 123 — remaining mixed-gate compression after split closeout
 
 - current reading:
-  next active bundle。remaining mixed gate を theorem/model-check/witness-provider/final wording の final public seam 側へ圧縮し、true user-spec residual とは再度混ぜない。
+  close 済み。`residuals` helper と sample bundle doc 側の residual lane entrypoint を actualize し、remaining mixed gate を `problem1-final-public-seams` / `problem2-final-public-seams` / `syntax-modality-final-marker` lane に圧縮した。
 - current recommendation:
   final public contract 群と user-spec residual を separate lane として再配置し、queue drift を再発させない。
 - stop line:
   final public theorem/model-check/witness-provider contract
   packaging / FFI / engine adapter
   exhaustive shared-space catalog
+
+### Package 124 — Problem 1 final-public-seam lane follow-up
+
+- current reading:
+  next active bundle。Problem 1 mixed gate を typed source principal / theorem public contract / model-check public contract の reopen order として further narrow に扱う。
+- current recommendation:
+  `reopen-map problem1`、`matrix problem1`、`bundle problem1`、`residuals` を主 anchor に、Problem 1 final public seam lane を syntax/modality と true user-spec residual から切り分ける。
+- stop line:
+  final public theorem contract
+  final public checker artifact
+  final public verifier contract
+
+### Package 125 — Problem 2 final-public-seam lane follow-up
+
+- current reading:
+  next active bundle。Problem 2 mixed gate を final wording / witness-provider public-shape の reopen order として further narrow に扱う。
+- current recommendation:
+  `reopen-map problem2`、`matrix problem2`、`bundle problem2`、`residuals` を主 anchor に、Problem 2 final public seam lane を syntax/modality と true user-spec residual から切り分ける。
+- stop line:
+  final source-surface handoff wording
+  final public witness/provider/artifact contract
+  exhaustive shared-space catalog
+
+### Package 126 — syntax-modality final-marker lane follow-up
+
+- current reading:
+  next active bundle。final modal foundation / source marker を Problem 1 / Problem 2 final public seam と true user-spec residual から切り分けたまま、later mixed gate として圧縮する。
+- current recommendation:
+  `residuals` helper と syntax/modality docs を主 anchor に、partial basis + stronger family keep を維持したまま final marker line を narrow に保つ。
+- stop line:
+  final modal foundation adoption
+  final source marker adoption
+  final parser grammar
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -987,6 +1024,6 @@
 
 ## next reopen order
 
-1. Package 123 で remaining mixed gate と true user-spec residual を narrow に圧縮し直す。
-2. final public seams / packaging / exhaustive catalog 側の reopen line だけを separate lane として残す。
-3. split-package closeout 後の helper / docs / queue snapshot drift を再発させない。
+1. Package 124 で Problem 1 final-public-seam lane を further narrow に扱う。
+2. Package 125 で Problem 2 final-public-seam lane を further narrow に扱う。
+3. Package 126 で syntax-modality final-marker lane を Problem-local seam と user-spec residual から切り分けて保つ。

@@ -142,6 +142,9 @@ full dependent type、general theorem proving in compiler、final public checker
   - `python3 scripts/current_l2_guided_samples.py matrix problem1`
     と `python3 scripts/current_l2_guided_samples.py bundle problem1`
     を合わせて見て、row-local carrier first の current cut を越えて final public checker 契約へ飛ばないことを確認する。
+- compressed residual lane は
+  `python3 scripts/current_l2_guided_samples.py residuals`
+  から、Problem 1 mixed gate lane と true user-spec residual の切り分けを 1 枚で見直す。
 - global true user-spec residual は
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、packaging / host integration / upper-layer application target をまとめて見直す。
