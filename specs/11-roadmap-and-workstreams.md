@@ -917,6 +917,10 @@ actual-adoption floor では、
   `specs/examples/606`
   - `reserve` helper を actualize し、theorem-first external pilot / `auditable_authority_witness` / `delegated_rng_service` / model-check second-line reserve を once-through closeout summary 後の next reopen line として actualize してよい
   - Package 133 close 後の current active queue は Package 134 parser-side residual closeout sync / Package 135 true user-spec residual freeze sync と later mixed/user-spec residual である
+- parser-side residual lane helper actualization:
+  `specs/examples/607`
+  - `lane parser-side-residual` を actualize し、parser companion surface / parser-side tranche / final parser-checker-runtime API residual を `residuals` / `closeout` / `reserve` と切り分けた mixed gate lane として actualize してよい
+  - Package 134 close 後の current active queue は Package 135 true user-spec residual freeze sync と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

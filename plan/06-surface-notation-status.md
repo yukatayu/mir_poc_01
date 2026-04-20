@@ -232,6 +232,17 @@ current L2 では、final grammar を先に決めずに、
   - problem-local seam separation
   - true user-spec residual separation
   を helper-local lane として読める
+- `python3 scripts/current_l2_guided_samples.py lane parser-side-residual`
+  により、parser companion surface / parser-side tranche / final parser-checker-runtime API residual は
+  - representative slice-only companion keep
+  - non-production parser-side carrier keep
+  - final parser public API later keep
+  を current recommendation として見せ、
+  - parser companion surface bundle
+  - bundle-to-helper bridge
+  - request-head / clause-bundle inspector
+  - representative mapping matrix
+  を helper-local mixed-gate lane として読める
 
 ### OPEN
 

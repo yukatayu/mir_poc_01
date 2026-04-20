@@ -278,14 +278,6 @@ ONCE_THROUGH_CLOSEOUT_EXECUTABLE_ENTRY_COMMANDS = (
 
 ONCE_THROUGH_CLOSEOUT_NEXT_SELF_DRIVEN_PACKAGES = (
     {
-        "package_id": "134",
-        "title": "parser-side residual closeout sync",
-        "summary": (
-            "companion surface / parser-side tranche / final parser-checker-runtime API residual を "
-            "closeout queue と混ぜずに保つ"
-        ),
-    },
-    {
         "package_id": "135",
         "title": "true user-spec residual freeze sync",
         "summary": (
@@ -376,6 +368,7 @@ RESERVE_INTEGRATION_STOP_LINE = (
 REMAINING_RESIDUAL_LANE_ORDER = (
     "problem1-final-public-seams",
     "problem2-final-public-seams",
+    "parser-side-residual",
     "syntax-modality-final-marker",
 )
 
@@ -389,6 +382,12 @@ RESIDUAL_LANE_COMPONENT_ORDER = {
         "source wording / emitted schema split",
         "witness-provider public-shape split",
     ),
+    "parser-side-residual": (
+        "parser companion surface bundle",
+        "bundle-to-helper bridge",
+        "request-head / clause-bundle inspector",
+        "representative mapping matrix",
+    ),
     "syntax-modality-final-marker": (
         "final modal foundation / final source marker",
     ),
@@ -400,6 +399,9 @@ RESIDUAL_LANE_CURRENT_RECOMMENDATIONS = {
     ),
     "problem2-final-public-seams": (
         "relation decomposition principal keep + witness/provider public-shape later keep"
+    ),
+    "parser-side-residual": (
+        "representative companion keep + parser-side carrier keep + final parser public API later keep"
     ),
     "syntax-modality-final-marker": (
         "partial basis keep + stronger family keep + readable source marker keep"
@@ -415,6 +417,10 @@ RESIDUAL_LANE_RETAINED_FAMILIES = {
         "edge-row principal keep",
         "stage-block secondary / serial reserve keep",
     ),
+    "parser-side-residual": (
+        "representative slice-only companion keep",
+        "non-production parser-side carrier keep",
+    ),
     "syntax-modality-final-marker": (
         "lambda_circle_box partial basis keep",
         "guarded / MDTT / MTT / Fitch-style stronger family keep",
@@ -428,6 +434,10 @@ RESIDUAL_LANE_SEPARATION_BOUNDARIES = {
     ),
     "problem2-final-public-seams": (
         "problem-local seam separation",
+        "true user-spec residual separation",
+    ),
+    "parser-side-residual": (
+        "mixed-gate lane separation",
         "true user-spec residual separation",
     ),
     "syntax-modality-final-marker": (
@@ -447,6 +457,11 @@ RESIDUAL_LANE_STOP_LINES = {
         "final source-surface handoff wording",
         "final public witness/provider/artifact contract",
         "exhaustive shared-space catalog",
+    ),
+    "parser-side-residual": (
+        "final parser grammar",
+        "final public parser / checker / runtime API",
+        "public tutorial surface adoption",
     ),
     "syntax-modality-final-marker": (
         "final modal foundation adoption",
@@ -1750,6 +1765,7 @@ def render_problem_reopen_map_from_runtime(
 def build_remaining_residual_lane_manifest(specs: Mapping[str, ProblemSpec]) -> dict[str, object]:
     problem1_row = build_problem_reopen_row(specs["problem1"])
     problem2_row = build_problem_reopen_row(specs["problem2"])
+    problem1_primary = specs["problem1"].samples[0]
 
     mixed_gate_lanes = [
         {
@@ -1793,6 +1809,33 @@ def build_remaining_residual_lane_manifest(specs: Mapping[str, ProblemSpec]) -> 
             + [
                 "specs/examples/593-current-l2-problem2-source-wording-emitted-schema-split-helper-actualization.md",
                 "specs/examples/594-current-l2-problem2-witness-provider-public-shape-split-helper-actualization.md",
+            ],
+        },
+        {
+            "lane_id": "parser-side-residual",
+            "summary": (
+                "parser companion surface / parser-side tranche / final parser-checker-runtime API residual を "
+                "repo-local closeout line と切り分けた mixed gate lane として読む。"
+            ),
+            "focus": [
+                "representative companion slice only",
+                "non-production parser-side carrier",
+                "final parser / checker / runtime API residual",
+            ],
+            "entry_commands": [
+                "python3 scripts/current_l2_guided_samples.py bundle problem1",
+                parser_companion_inspector_command(problem1_primary, output_format="pretty"),
+                "python3 scripts/current_l2_guided_samples.py mapping",
+                "python3 scripts/current_l2_guided_samples.py closeout",
+            ],
+            "anchor_refs": [
+                "specs/examples/564-current-l2-phase6-perform-head-request-clause-bundle-attachment-comparison.md",
+                "specs/examples/565-current-l2-phase6-perform-head-request-clause-bundle-thin-wrapper-threshold-helper-mirror.md",
+                "specs/examples/577-current-l2-parser-side-companion-surface-bundle-actualization.md",
+                "specs/examples/578-current-l2-parser-side-bundle-to-helper-bridge-actualization.md",
+                "specs/examples/579-current-l2-parser-side-request-head-clause-bundle-inspector-actualization.md",
+                "specs/examples/580-current-l2-parser-side-representative-mapping-matrix-actualization.md",
+                "plan/06-surface-notation-status.md",
             ],
         },
         {
@@ -1918,6 +1961,7 @@ def build_once_through_closeout_manifest(specs: Mapping[str, ProblemSpec]) -> di
             "specs/examples/603-current-l2-problem1-executable-residual-reopen-sync.md",
             "specs/examples/604-current-l2-problem2-executable-residual-reopen-sync.md",
             "specs/examples/606-current-l2-reserve-integration-entrypoint-summary-sync.md",
+            "specs/examples/607-current-l2-parser-side-residual-lane-helper-actualization.md",
             "specs/examples/596-current-l2-remaining-residual-lane-summary-actualization.md",
             "specs/examples/597-current-l2-problem1-final-public-seam-lane-helper-actualization.md",
             "specs/examples/598-current-l2-problem2-final-public-seam-lane-helper-actualization.md",
@@ -2028,7 +2072,7 @@ def build_reserve_integration_summary_manifest(specs: Mapping[str, ProblemSpec])
             }
             for row in RESERVE_INTEGRATION_PACKAGES
         ],
-        "next_queue": ["134", "135"],
+        "next_queue": ["135"],
         "stop_line": list(RESERVE_INTEGRATION_STOP_LINE),
     }
 

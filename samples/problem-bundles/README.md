@@ -55,6 +55,10 @@
   closeout 後の next reopen line として見たいときは
   `python3 scripts/current_l2_guided_samples.py reserve`
   を使う。
+- parser companion surface / parser-side tranche / final parser-checker-runtime API residual を、
+  mixed gate lane として見たいときは
+  `python3 scripts/current_l2_guided_samples.py lane parser-side-residual`
+  を使う。
 - syntax / modality の final marker lane だけを個別に見直したいときは
   `python3 scripts/current_l2_guided_samples.py lane syntax-modality-final-marker`
   を使う。

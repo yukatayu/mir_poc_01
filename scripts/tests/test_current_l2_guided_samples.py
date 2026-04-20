@@ -1038,6 +1038,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("remaining mixed-gate lanes:", text)
         self.assertIn("problem1-final-public-seams", text)
         self.assertIn("problem2-final-public-seams", text)
+        self.assertIn("parser-side-residual", text)
         self.assertIn("syntax-modality-final-marker", text)
         self.assertIn("true user-spec residuals:", text)
         self.assertIn(
@@ -1061,6 +1062,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             [
                 "problem1-final-public-seams",
                 "problem2-final-public-seams",
+                "parser-side-residual",
                 "syntax-modality-final-marker",
             ],
         )
@@ -1073,6 +1075,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             [
                 "problem1-final-public-seams",
                 "problem2-final-public-seams",
+                "parser-side-residual",
                 "syntax-modality-final-marker",
             ],
         )
@@ -1111,6 +1114,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("mixed-gate lanes:", text)
         self.assertIn("problem1-final-public-seams", text)
         self.assertIn("problem2-final-public-seams", text)
+        self.assertIn("parser-side-residual", text)
         self.assertIn("true user-spec residuals:", text)
         self.assertIn("final public verifier contract", text)
 
@@ -1139,7 +1143,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         )
         self.assertEqual(
             [row["package_id"] for row in payload["next_self_driven_packages"]],
-            ["134", "135"],
+            ["135"],
         )
         self.assertIn(
             "installed-binary / packaging / FFI / engine adapter / host integration target",
@@ -1197,7 +1201,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
                 "model-check-second-line",
             ],
         )
-        self.assertEqual(payload["next_queue"], ["134", "135"])
+        self.assertEqual(payload["next_queue"], ["135"])
         self.assertIn(
             "packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target",
             payload["stop_line"],
@@ -1283,6 +1287,40 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         )
         self.assertTrue(any("emit-scenario problem2" in command for command in payload["entry_commands"]))
         self.assertTrue(any("residuals" in command for command in payload["entry_commands"]))
+
+    def test_parser_side_residual_lane_text_mentions_component_order_and_stop_line(self) -> None:
+        text = guided.render_residual_lane_from_runtime(
+            "parser-side-residual",
+            output_format="pretty",
+        )
+
+        self.assertIn("parser-side-residual", text)
+        self.assertIn("component order:", text)
+        self.assertIn("parser companion surface bundle", text)
+        self.assertIn("request-head / clause-bundle inspector", text)
+        self.assertIn("final public parser / checker / runtime API", text)
+
+    def test_parser_side_residual_lane_json_contains_component_order(self) -> None:
+        rendered = guided.render_residual_lane_from_runtime(
+            "parser-side-residual",
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["lane_id"], "parser-side-residual")
+        self.assertEqual(
+            payload["component_order"],
+            [
+                "parser companion surface bundle",
+                "bundle-to-helper bridge",
+                "request-head / clause-bundle inspector",
+                "representative mapping matrix",
+            ],
+        )
+        self.assertTrue(any("mapping" in command for command in payload["entry_commands"]))
+        self.assertTrue(
+            any("current_l2_inspect_request_head_clause_bundle" in command for command in payload["entry_commands"])
+        )
 
     def test_syntax_modality_final_marker_lane_text_mentions_recommendation_and_retained_families(
         self,

@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 134 parser-side residual closeout sync
   - Package 135 true user-spec residual freeze sync
   - later mixed / user-spec residual reopen
   を先頭に追う。
@@ -65,7 +64,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `134` parser-side residual closeout sync | parser-side companion / tranche residual を repo-local closeout line と分離して保つ | `M` | `Macro 5/7` | companion surface / parser-side tranche / final parser-checker-runtime API residual を closeout queue と混ぜずに圧縮する | parser-side residual が mixed gate として独立に読める |
 | `135` true user-spec residual freeze sync | true user-spec residual を self-driven queue から明示的に切り離す | `S` | `Macro 7/8` | packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target を explicit hold line に固定する | user-spec residual が reserve / mixed gate から分離して読める |
 
 ## recently closed package note
@@ -631,9 +629,13 @@
 ### Package 134 — parser-side residual closeout sync
 
 - current reading:
-  parser companion surface、parser-side tranche、final parser/checker/runtime API residual を repo-local once-through closeout line と混ぜないように再圧縮する。
+  close 済み。parser companion surface、parser-side tranche、final parser/checker/runtime API residual を `lane parser-side-residual` と `residuals` / `closeout` / `reserve` に再同期し、repo-local once-through closeout line と混ぜない mixed gate lane として固定した。
 - current recommendation:
   parser-side helper / mapping / inspector の current non-production cut は保ったまま、final parser grammar / final public parser-checker-runtime API を later mixed gate に残す。
+- evidence:
+  `specs/examples/607`
+  `docs/reports/0887`
+  `python3 scripts/current_l2_guided_samples.py lane parser-side-residual`
 - stop line:
   final parser grammar
   final public parser / checker / runtime API
@@ -1146,6 +1148,5 @@
 
 ## next reopen order
 
-1. Package 134 で parser-side residual を once-through closeout line と切り分ける。
-2. Package 135 で true user-spec residual を explicit hold line に固定する。
-3. later mixed / user-spec residual は Package 134 / 135 close 後に narrow reopen する。
+1. Package 135 で true user-spec residual を explicit hold line に固定する。
+2. later mixed / user-spec residual は Package 135 close 後に narrow reopen する。
