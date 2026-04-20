@@ -51,6 +51,10 @@
   1 枚で見たいときは
   `python3 scripts/current_l2_guided_samples.py closeout`
   を使う。
+- theorem-first external pilot / `auditable_authority_witness` / `delegated_rng_service` / model-check second-line reserve を、
+  closeout 後の next reopen line として見たいときは
+  `python3 scripts/current_l2_guided_samples.py reserve`
+  を使う。
 - syntax / modality の final marker lane だけを個別に見直したいときは
   `python3 scripts/current_l2_guided_samples.py lane syntax-modality-final-marker`
   を使う。

@@ -913,6 +913,10 @@ actual-adoption floor では、
   `specs/examples/605`
   - `closeout` helper を actualize し、Package 127...131 executable loop 後の current first line / mixed-gate lane / true user-spec residual / next self-driven queue を 1 枚の helper-local summary に actualize してよい
   - Package 132 close 後の current active queue は Package 133 reserve integration entrypoint sync / Package 134 parser-side residual closeout sync / Package 135 true user-spec residual freeze sync である
+- reserve integration entrypoint summary sync:
+  `specs/examples/606`
+  - `reserve` helper を actualize し、theorem-first external pilot / `auditable_authority_witness` / `delegated_rng_service` / model-check second-line reserve を once-through closeout summary 後の next reopen line として actualize してよい
+  - Package 133 close 後の current active queue は Package 134 parser-side residual closeout sync / Package 135 true user-spec residual freeze sync と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

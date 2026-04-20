@@ -35,9 +35,9 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 133 reserve integration entrypoint sync
   - Package 134 parser-side residual closeout sync
   - Package 135 true user-spec residual freeze sync
+  - later mixed / user-spec residual reopen
   を先頭に追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -65,7 +65,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `133` reserve integration entrypoint sync | reserve integration lane を executable closeout summary 後の next reopen point として再構成する | `M` | `Macro 5/6/7` | theorem-first external pilot / auditable_authority_witness / delegated_rng_service / model-check second-line reserve を reopen order と stop line 付きで helper/doc に保つ | reserve integration lane が final public contract 群と混ざらずに読める |
 | `134` parser-side residual closeout sync | parser-side companion / tranche residual を repo-local closeout line と分離して保つ | `M` | `Macro 5/7` | companion surface / parser-side tranche / final parser-checker-runtime API residual を closeout queue と混ぜずに圧縮する | parser-side residual が mixed gate として独立に読める |
 | `135` true user-spec residual freeze sync | true user-spec residual を self-driven queue から明示的に切り離す | `S` | `Macro 7/8` | packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target を explicit hold line に固定する | user-spec residual が reserve / mixed gate から分離して読める |
 
@@ -617,9 +616,13 @@
 ### Package 133 — reserve integration entrypoint sync
 
 - current reading:
-  theorem-first external pilot、`auditable_authority_witness`、`delegated_rng_service`、model-check second-line reserve を、Problem 1 / Problem 2 closeout helper 後の next reopen order として保つ。
+  close 済み。theorem-first external pilot、`auditable_authority_witness`、`delegated_rng_service`、model-check second-line reserve を、Problem 1 / Problem 2 closeout helper 後の next reopen order として helper / docs / snapshot に再同期した。
 - current recommendation:
   reserve package を final public contract 群へ premature に上げず、current default room profile / theorem-first pilot と両立する reserve lane として narrow に圧縮する。
+- evidence:
+  `specs/examples/606`
+  `docs/reports/0886`
+  `python3 scripts/current_l2_guided_samples.py reserve`
 - stop line:
   final public theorem contract
   final public witness/provider/artifact contract
@@ -1143,6 +1146,6 @@
 
 ## next reopen order
 
-1. Package 133 で reserve integration lane の reopen order を固める。
-2. Package 134 で parser-side residual を once-through closeout line と切り分ける。
-3. Package 135 で true user-spec residual を explicit hold line に固定する。
+1. Package 134 で parser-side residual を once-through closeout line と切り分ける。
+2. Package 135 で true user-spec residual を explicit hold line に固定する。
+3. later mixed / user-spec residual は Package 134 / 135 close 後に narrow reopen する。

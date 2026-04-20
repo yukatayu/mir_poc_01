@@ -1139,7 +1139,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         )
         self.assertEqual(
             [row["package_id"] for row in payload["next_self_driven_packages"]],
-            ["133", "134", "135"],
+            ["134", "135"],
         )
         self.assertIn(
             "installed-binary / packaging / FFI / engine adapter / host integration target",
@@ -1160,6 +1160,66 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(
             any("current-l2 once-through closeout summary" in call.args[0] for call in write.mock_calls)
+        )
+
+    def test_reserve_integration_summary_text_mentions_four_reserve_lanes(self) -> None:
+        text = guided.render_reserve_integration_summary_from_runtime(
+            guided.problem_specs(),
+            output_format="pretty",
+        )
+
+        self.assertIn("current-l2 reserve integration entrypoint summary", text)
+        self.assertIn("theorem-first-external-pilot", text)
+        self.assertIn("auditable-authority-witness", text)
+        self.assertIn("delegated-rng-service", text)
+        self.assertIn("model-check-second-line", text)
+        self.assertIn("emit-theorem problem1", text)
+        self.assertIn("emit-scenario problem2", text)
+        self.assertIn("closeout", text)
+
+    def test_reserve_integration_summary_json_contains_package_ids_and_next_queue(self) -> None:
+        rendered = guided.render_reserve_integration_summary_from_runtime(
+            guided.problem_specs(),
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(
+            payload["manifest_kind"],
+            "current_l2_reserve_integration_entrypoint_summary",
+        )
+        self.assertEqual(
+            [row["package_id"] for row in payload["reserve_packages"]],
+            [
+                "theorem-first-external-pilot",
+                "auditable-authority-witness",
+                "delegated-rng-service",
+                "model-check-second-line",
+            ],
+        )
+        self.assertEqual(payload["next_queue"], ["134", "135"])
+        self.assertIn(
+            "packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target",
+            payload["stop_line"],
+        )
+
+    def test_main_reserve_command_uses_renderer(self) -> None:
+        fake_text = "current-l2 reserve integration entrypoint summary\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_reserve_integration_summary_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["reserve"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any(
+                "current-l2 reserve integration entrypoint summary" in call.args[0]
+                for call in write.mock_calls
+            )
         )
 
     def test_problem1_final_public_seam_lane_text_mentions_component_order_and_stop_line(self) -> None:

@@ -278,14 +278,6 @@ ONCE_THROUGH_CLOSEOUT_EXECUTABLE_ENTRY_COMMANDS = (
 
 ONCE_THROUGH_CLOSEOUT_NEXT_SELF_DRIVEN_PACKAGES = (
     {
-        "package_id": "133",
-        "title": "reserve integration entrypoint sync",
-        "summary": (
-            "theorem-first external pilot / auditable_authority_witness / delegated_rng_service / "
-            "model-check second-line reserve を reopen order 付きで保つ"
-        ),
-    },
-    {
         "package_id": "134",
         "title": "parser-side residual closeout sync",
         "summary": (
@@ -309,6 +301,76 @@ ONCE_THROUGH_CLOSEOUT_STOP_LINE = (
     "final public witness/provider/artifact contract",
     "exhaustive shared-space catalog",
     "installed-binary / packaging / FFI / engine adapter / host integration target",
+)
+
+RESERVE_INTEGRATION_PACKAGES = (
+    {
+        "package_id": "theorem-first-external-pilot",
+        "title": "theorem-first external pilot",
+        "summary": "notebook-first theorem pilot を external integration target first として保つ",
+        "entry_commands": (
+            "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
+            "python3 scripts/current_l2_guided_samples.py bundle problem1",
+            "python3 scripts/current_l2_guided_samples.py closeout",
+        ),
+        "anchor_refs": (
+            "specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md",
+            "specs/examples/603-current-l2-problem1-executable-residual-reopen-sync.md",
+            "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
+        ),
+    },
+    {
+        "package_id": "auditable-authority-witness",
+        "title": "auditable authority witness",
+        "summary": "minimal witness core strengthening を final public witness schema に上げずに保つ",
+        "entry_commands": (
+            "python3 scripts/current_l2_guided_samples.py matrix problem2",
+            "python3 scripts/current_l2_guided_samples.py bundle problem2",
+            "python3 scripts/current_l2_guided_samples.py closeout",
+        ),
+        "anchor_refs": (
+            "specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md",
+            "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
+            "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
+        ),
+    },
+    {
+        "package_id": "delegated-rng-service",
+        "title": "delegated RNG service",
+        "summary": "provider placement practical line を witness/provider final public contract と分離して保つ",
+        "entry_commands": (
+            "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+            "python3 scripts/current_l2_guided_samples.py matrix problem2",
+            "python3 scripts/current_l2_guided_samples.py closeout",
+        ),
+        "anchor_refs": (
+            "specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md",
+            "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
+            "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
+        ),
+    },
+    {
+        "package_id": "model-check-second-line",
+        "title": "model-check second line",
+        "summary": "row-local property carrier second-line を tool brand / public checker finalization と分離して保つ",
+        "entry_commands": (
+            "python3 scripts/current_l2_guided_samples.py matrix problem1",
+            "python3 scripts/current_l2_guided_samples.py bundle problem1",
+            "python3 scripts/current_l2_guided_samples.py closeout",
+        ),
+        "anchor_refs": (
+            "specs/examples/478-current-l2-model-check-second-line-concretization.md",
+            "specs/examples/568-current-l2-theorem-model-check-bridge-carrier-reconnect-after-finite-index-widening.md",
+            "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
+        ),
+    },
+)
+
+RESERVE_INTEGRATION_STOP_LINE = (
+    "final public theorem contract / proof object public schema / final public verifier contract",
+    "final public witness/provider/artifact contract",
+    "concrete theorem/model-check production binding",
+    "packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target",
 )
 
 REMAINING_RESIDUAL_LANE_ORDER = (
@@ -1855,6 +1917,7 @@ def build_once_through_closeout_manifest(specs: Mapping[str, ProblemSpec]) -> di
         "anchor_refs": [
             "specs/examples/603-current-l2-problem1-executable-residual-reopen-sync.md",
             "specs/examples/604-current-l2-problem2-executable-residual-reopen-sync.md",
+            "specs/examples/606-current-l2-reserve-integration-entrypoint-summary-sync.md",
             "specs/examples/596-current-l2-remaining-residual-lane-summary-actualization.md",
             "specs/examples/597-current-l2-problem1-final-public-seam-lane-helper-actualization.md",
             "specs/examples/598-current-l2-problem2-final-public-seam-lane-helper-actualization.md",
@@ -1943,6 +2006,83 @@ def render_once_through_closeout_summary_from_runtime(
     if output_format == "json":
         return json.dumps(manifest, ensure_ascii=False, indent=2)
     return render_once_through_closeout_summary(specs)
+
+
+def build_reserve_integration_summary_manifest(specs: Mapping[str, ProblemSpec]) -> dict[str, object]:
+    _ = specs
+    return {
+        "manifest_kind": "current_l2_reserve_integration_entrypoint_summary",
+        "title": "current-l2 reserve integration entrypoint summary",
+        "current_reading": (
+            "once-through closeout summary 後の next reopen line として、theorem-first external pilot / "
+            "auditable_authority_witness / delegated_rng_service / model-check second-line reserve を "
+            "final public contract 群と切り分けて読む helper-local summary。"
+        ),
+        "reserve_packages": [
+            {
+                "package_id": row["package_id"],
+                "title": row["title"],
+                "summary": row["summary"],
+                "entry_commands": list(row["entry_commands"]),
+                "anchor_refs": list(row["anchor_refs"]),
+            }
+            for row in RESERVE_INTEGRATION_PACKAGES
+        ],
+        "next_queue": ["134", "135"],
+        "stop_line": list(RESERVE_INTEGRATION_STOP_LINE),
+    }
+
+
+def render_reserve_integration_summary(specs: Mapping[str, ProblemSpec]) -> str:
+    manifest = build_reserve_integration_summary_manifest(specs)
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+        "reserve packages:",
+    ]
+    for row in manifest["reserve_packages"]:
+        lines.append(f"- {row['package_id']}: {row['title']}")
+        lines.append(f"  {row['summary']}")
+        lines.append("  entry commands:")
+        for command in row["entry_commands"]:
+            lines.append(f"    - {command}")
+        lines.append("  anchor refs:")
+        for ref in row["anchor_refs"]:
+            lines.append(f"    - {ref}")
+        lines.append("")
+    lines.append("next queue:")
+    for item in manifest["next_queue"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "stop line:",
+        ]
+    )
+    for item in manifest["stop_line"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- current helper-local reserve summary であり、final public theorem/model-check/witness-provider contract や packaging target の確定を意味しない。",
+            "- closeout helper の次に reserve lane を reopen する入口としてだけ使う。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_reserve_integration_summary_from_runtime(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+) -> str:
+    manifest = build_reserve_integration_summary_manifest(specs)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_reserve_integration_summary(specs)
 
 
 def residual_lane_ids() -> tuple[str, ...]:
@@ -2926,6 +3066,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     closeout_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    reserve_parser = subparsers.add_parser(
+        "reserve",
+        help="reserve integration lane の current entrypoint を圧縮表示する",
+    )
+    reserve_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     lane_parser = subparsers.add_parser(
         "lane",
         help="remaining residual lane を 1 本ずつ表示する",
@@ -2999,6 +3145,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.subcommand == "closeout":
         print(render_once_through_closeout_summary_from_runtime(specs, output_format=args.format))
+        return 0
+
+    if args.subcommand == "reserve":
+        print(render_reserve_integration_summary_from_runtime(specs, output_format=args.format))
         return 0
 
     if args.subcommand == "lane":
