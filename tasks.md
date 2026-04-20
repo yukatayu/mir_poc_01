@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 16:59 JST
+最終更新: 2026-04-20 17:13 JST
 
 ## この文書について
 
@@ -35,9 +35,8 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 120 Problem 2 source wording / emitted schema split
   - Package 121 Problem 2 witness-provider public-shape split
-  に分けて追う。
+  を first package として追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
 ## current executable floor
@@ -64,7 +63,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `120` Problem 2 source wording / emitted schema split | Problem 2 source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow にする | `S-M` | `Macro 5/6` | edge-row principal / stage-block secondary を保ったまま source wording reopen point を独立 package に戻す | source wording / emitted schema residual が独立 package として読める |
 | `121` Problem 2 witness-provider public-shape split | Problem 2 witness/provider public-shape residual を source wording residual から切り離して narrow にする | `S-M` | `Macro 5/6` | claim/payload split first / route-schema split first を保ったまま witness-provider reopen point を独立 package に戻す | witness-provider public-shape residual が独立 package として読める |
 
 ## recently closed package note
@@ -452,9 +450,9 @@
 ### Package 120 — Problem 2 source wording / emitted schema split
 
 - current reading:
-  next active bundle。edge-row principal / stage-block secondary / serial reserve keep を保ったまま、source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow にする。
+  close 済み。edge-row principal / stage-block secondary / serial reserve keep を保ったまま、source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow に読む helper/doc cut を actualize した。
 - current recommendation:
-  source wording residual は parser companion / bundle problem2 / surface preview を主 anchor にし、shared-space public-shape residual と混ぜない。
+  source wording residual は `split problem2 source-wording-emitted-schema` と parser companion / `bundle problem2` / surface preview を主 anchor にし、shared-space public-shape residual と混ぜない。
 - stop line:
   final source-surface handoff wording
   final emitted-artifact schema
@@ -967,6 +965,6 @@
 
 ## next reopen order
 
-1. Package 120 / 121 で Problem 2 source wording residual と witness-provider public-shape residual を separate package として narrow にする。
-2. residual public-seam maintenance と later mixed/user-spec residual を Package 120 / 121 close 後に再同期する。
-3. Problem 1 split-trio closeout 後の remaining mixed gate を final public seams / theorem-model-check-verifier contract 側にだけ圧縮する。
+1. Package 121 で Problem 2 witness-provider public-shape residual を separate package として narrow にする。
+2. residual public-seam maintenance と later mixed/user-spec residual を Package 121 close 後に再同期する。
+3. Problem 1 split-trio と Problem 2 source-wording split closeout 後の remaining mixed gate を final public seams / theorem-model-check-verifier contract 側にだけ圧縮する。

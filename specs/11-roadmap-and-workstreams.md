@@ -861,6 +861,10 @@ actual-adoption floor では、
   `specs/examples/592`
   - `split problem1 model-check-public-contract` helper と sample bundle doc 側の model-check split entrypoint を actualize し、Problem 1 model-check public-contract residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
   - Package 119 close 後の current active queue は Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
+- Problem 2 source wording / emitted schema split helper actualization:
+  `specs/examples/593`
+  - `split problem2 source-wording-emitted-schema` helper と sample bundle doc 側の source wording split entrypoint を actualize し、Problem 2 source wording / emitted schema residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
+  - Package 120 close 後の current active queue は Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

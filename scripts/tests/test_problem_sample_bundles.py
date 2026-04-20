@@ -81,9 +81,14 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke problem2", text)
         self.assertIn("見るべき結果", text)
         self.assertIn("現在の mixed gate 再開点", text)
-        self.assertIn("次の split package", text)
+        self.assertIn("split package status", text)
         self.assertIn("source wording / emitted schema split", text)
         self.assertIn("witness-provider public-shape split", text)
+        self.assertIn("source wording / emitted schema split の入口", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py split problem2 source-wording-emitted-schema",
+            text,
+        )
         self.assertIn(
             "final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract",
             text,

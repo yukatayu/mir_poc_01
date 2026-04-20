@@ -158,17 +158,34 @@ distributed fairness theorem や exhaustive shared-space catalog を要求しな
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、exhaustive shared-space catalog / packaging / upper-layer target をまとめて見直す。
 
-## 次の split package
+## split package status
 
 - `source wording / emitted schema split`
-  - `python3 scripts/current_l2_guided_samples.py bundle problem2`
-    から入り、edge-row principal / stage-block secondary を保ったまま
-    source wording / emitted schema residual を witness-provider public shape から切り出す。
+  - close 済み。`python3 scripts/current_l2_guided_samples.py split problem2 source-wording-emitted-schema`
+    から入り、edge-row principal / stage-block secondary / serial reserve を保ったまま
+    source wording / emitted schema residual を witness-provider public-shape residual から切り離して読める。
 - `witness-provider public-shape split`
-  - `python3 scripts/current_l2_guided_samples.py matrix problem2`
+  - next active。`python3 scripts/current_l2_guided_samples.py matrix problem2`
     と `python3 scripts/current_l2_guided_samples.py bundle problem2`
     から入り、representative / reserve / negative pair の current split を保ったまま
     shared-space public-shape residual を切り出す。
+
+## source wording / emitted schema split の入口
+
+```bash
+python3 scripts/current_l2_guided_samples.py split problem2 source-wording-emitted-schema
+```
+
+見るべき結果:
+
+- `p07 / p08` representative pair と `p13 / p14` negative pair が、
+  source wording / emitted schema residual の representative / supporting set としてまとまって見える。
+- `witness-provider public-shape split` が kept separate として表示され、
+  source wording / emitted schema residual だけを narrow に読む current cut を確認できる。
+- stop line が `final source-surface handoff wording` /
+  `final emitted-artifact schema` /
+  `final public parser / checker / runtime API`
+  に留まり、witness/provider public-shape residual と混ざらないことを確認できる。
 
 ## stop line
 
