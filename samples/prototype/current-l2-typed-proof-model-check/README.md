@@ -44,6 +44,18 @@ python3 scripts/current_l2_guided_samples.py bundle problem1
 - `samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt` も同じ bundle から辿れ、parser-side companion surface の first slice を確認できる。
 - `p10 / p11 / p12 / p15 / p16` は補助サンプルとして同じ bundle 内で Lean artifact と一緒に確認できる。
 
+reserve package として model-check second line の positive / negative pair をまとめて materialize する例:
+
+```bash
+python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line
+```
+
+- `target/current-l2-guided/reserve-packages/model-check-second-line/` に
+  `p06 / p10 / p11 / p12 / p15 / p16` の JSON と `package-summary.md|json` が出る。
+- `p06` の representative bridge と、
+  `p11 / p12 / p15 / p16` rejection pair が同じ summary で確認できる。
+- final public checker artifact ではなく、row-local property carrier second-line の narrow reopen helper として読む。
+
 ## あわせて見る補助サンプル
 
 ### `p10-typed-authorized-fingerprint-declassification`
@@ -76,6 +88,8 @@ python3 scripts/current_l2_guided_samples.py bundle problem1
   - checker-adjacent first layer の current cut を示す。
 - `python3 scripts/current_l2_guided_samples.py matrix problem1`
   - representative public-seam sample と checker-adjacent bridge-floor sample を 1 表で見せる。
+- `python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line`
+  - representative bridge、positive carrier、bad pattern rejection を repo-local summary index に materialize する。
 
 ## 注意
 

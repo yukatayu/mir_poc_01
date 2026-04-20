@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 22:51 JST
+最終更新: 2026-04-20 23:32 JST
 
 ## この文書について
 
@@ -36,7 +36,10 @@
   として整理し直すのが自然である。
   current self-driven sequence は、
   - closeout 用 numbered queue closed
-  - active self-driven package = `model-check-second-line`
+  - reserve package summary index 4 本
+    （`emit-theorem problem1`、`emit-reserve auditable-authority-witness`、
+    `emit-reserve delegated-rng-service`、`emit-reserve model-check-second-line`）
+    まで actualize 済み
   - reserve integration reopen / later mixed gate reopen / true user-spec hold line は later reopen bands
   と読むのが current handoff まで含めた最も歪みの少ない reading である。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
@@ -57,15 +60,15 @@
   - theorem-side:
     theorem-first pilot、binding preflight、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、reopen-threshold helper mirror、`emit-theorem problem1` repo-local emitted-artifact loop
   - model-check side:
-    row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
+    row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror、`emit-reserve model-check-second-line` repo-local reserve-package summary index
   - order-handoff / shared-space side:
     authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、authoritative-room first scenario helper summary actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`、`emit-scenario problem2` repo-local runnable scenario loop、`emit-reserve auditable-authority-witness` / `emit-reserve delegated-rng-service` repo-local reserve-package summary index
 
 ## ordered self-driven packages
 
-| package | question | package weight | macro phase | current recommendation | promotion criteria |
-|---|---|---|---|---|---|
-| `model-check-second-line` | row-local property carrier second-line を public checker finalization と切り離したまま narrow actualization する | `M` | `Macro 5/6` | model-check second line は theorem-first pilot と分けて reserve reopen する | property carrier / tool seam / public seam residual が problem1 lane と干渉せず追える |
+- current numbered self-driven queue は closed である。
+- reserve reopen entrypoint は 4 本とも summary index まで actualize 済みであり、
+  next reopen は mixed gate / true user-spec residual 側で読む。
 
 ## recently closed package note
 
@@ -702,6 +705,23 @@
   delegated provider attestation public contract
   final public witness/provider/artifact contract
 
+### Package 139 — model-check-second-line reserve package summary index actualization
+
+- current reading:
+  close 済み。`emit-reserve model-check-second-line` を reserve package の単独 entrypoint に actualize し、`p06` representative theorem-model-check bridge / `p10` positive carrier / `p11 / p12 / p15 / p16` rejection pair を `package-summary.md` / `package-summary.json` と run-source-sample JSON 群へ materialize した。
+- current recommendation:
+  `matrix problem1` と `bundle problem1` は Problem 1 全体の residual / doc bundle 読み、`emit-reserve model-check-second-line` は row-local property carrier second-line の reopen entrypoint として読み分ける。theorem-first pilot と checker-adjacent finite-index slice を collapse せず、bad pattern rejection を repo-local summary index に留めたまま final public checker artifact には上げない。
+- evidence:
+  `specs/examples/612`
+  `docs/reports/0894`
+  `python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line`
+- stop line:
+  first settled property language
+  concrete model-check tool brand
+  final public checker artifact
+  actual public checker migration
+  final public verifier contract
+
 ### Package 58 — helper / CLI hardening and broader coverage
 
 - current reading:
@@ -1198,6 +1218,6 @@
 
 ## next reopen order
 
-1. `reserve` helper の reopen order に沿って model-check second-line を narrow reopen する。theorem-first external pilot、`auditable_authority_witness`、`delegated_rng_service` は emitted summary index まで close 済みである。
-2. later mixed gate は `residuals` / `reopen-map` / `lane ...` を入口に、problem-local seam ごとに narrow reopen する。
+1. `reserve` helper の reopen order と reserve package summary index を入口に、theorem-first external pilot / `auditable_authority_witness` / `delegated_rng_service` / model-check second line を narrow reopen する。4 本とも emitted summary index まで close 済みである。
+2. later mixed gate は `residuals` / `reopen-map` / `lane ...` を入口に、problem-local seam ごとに narrow reopen する。reserve package summary index 群は reopen 入口として維持し、final public seam と混ぜない。
 3. true user-spec residual は `hold-line` helper を入口に explicit hold line として保ち、user target が明示された時だけ reopen する。

@@ -816,6 +816,159 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             any("delegated RNG service reserve package" in call.args[0] for call in write.mock_calls)
         )
 
+    def test_supported_emit_reserve_package_ids_include_model_check_second_line(self) -> None:
+        self.assertEqual(
+            guided.supported_emit_reserve_package_ids(),
+            (
+                "auditable-authority-witness",
+                "delegated-rng-service",
+                "model-check-second-line",
+            ),
+        )
+
+    def test_model_check_second_line_emit_text_mentions_output_dir_command_and_samples(self) -> None:
+        output_dir = (
+            guided.REPO_ROOT
+            / "target"
+            / "guided-sample-tests"
+            / "reserve-packages"
+            / "model-check-second-line"
+        )
+        rows = [
+            guided.ModelCheckSecondLineEmitRow(
+                sample_id="p06-typed-proof-owner-handoff",
+                reading="representative theorem-model-check bridge",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "model-check-second-line/p06-typed-proof-owner-handoff.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="success",
+                typed_hint_status="guarded",
+                theorem_preview_status="reached",
+                model_check_preview_status="reached",
+                model_check_reopen_status="reached",
+            ),
+            guided.ModelCheckSecondLineEmitRow(
+                sample_id="p11-typed-unauthorized-fingerprint-release",
+                reading="authority miss rejection",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "model-check-second-line/p11-typed-unauthorized-fingerprint-release.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="reject",
+                typed_hint_status="reached",
+                theorem_preview_status="bridge-only(2)",
+                model_check_preview_status="bridge-only(3)",
+                model_check_reopen_status="bridge-only(1)",
+            ),
+        ]
+
+        text = guided.render_model_check_second_line_emit(rows, output_dir=output_dir)
+
+        self.assertIn("model-check second-line reserve package", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line",
+            text,
+        )
+        self.assertIn("row-local property carrier first", text)
+        self.assertIn("p06-typed-proof-owner-handoff", text)
+        self.assertIn("p11-typed-unauthorized-fingerprint-release", text)
+        self.assertIn("final public checker artifact", text)
+
+    def test_model_check_second_line_emit_manifest_writes_summary_files(self) -> None:
+        output_dir = (
+            guided.REPO_ROOT
+            / "target"
+            / "guided-sample-tests"
+            / "reserve-packages"
+            / "model-check-second-line-index"
+        )
+
+        def fake_emitter(sample_id: str, output_path: guided.Path) -> dict[str, object]:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text("{\"ok\": true}", encoding="utf-8")
+            if sample_id == "p06-typed-proof-owner-handoff":
+                return {
+                    "checker_floor": {"static_gate": {"verdict": "valid"}},
+                    "runtime": {"terminal_outcome": "success"},
+                    "typed_checker_hint_preview": {"status": "guarded_not_reached"},
+                    "theorem_result_object_preview": {"status": "reached", "bridge_floor_refs": []},
+                    "model_check_public_checker_preview": {"status": "reached", "bridge_floor_refs": []},
+                    "model_check_final_public_contract_reopen_threshold": {
+                        "status": "reached",
+                        "bridge_floor_refs": [],
+                    },
+                }
+            return {
+                "checker_floor": {"static_gate": {"verdict": "valid"}},
+                "runtime": {"terminal_outcome": "reject"},
+                "typed_checker_hint_preview": {"status": "reached"},
+                "theorem_result_object_preview": {
+                    "status": "guarded_not_reached",
+                    "bridge_floor_refs": ["bridge:theorem:a", "bridge:theorem:b"],
+                },
+                "model_check_public_checker_preview": {
+                    "status": "guarded_not_reached",
+                    "bridge_floor_refs": [
+                        "bridge:model:a",
+                        "bridge:model:b",
+                        "bridge:model:c",
+                    ],
+                },
+                "model_check_final_public_contract_reopen_threshold": {
+                    "status": "guarded_not_reached",
+                    "bridge_floor_refs": ["bridge:reopen:a"],
+                },
+            }
+
+        manifest = guided.build_model_check_second_line_emit_manifest(
+            output_dir=output_dir,
+            emitter=fake_emitter,
+        )
+
+        summary_md = output_dir / "package-summary.md"
+        summary_json = output_dir / "package-summary.json"
+        self.assertEqual(manifest["package_id"], "model-check-second-line")
+        self.assertEqual(manifest["package_summary_markdown"], guided.display_path(summary_md))
+        self.assertEqual(manifest["package_summary_json"], guided.display_path(summary_json))
+        self.assertTrue(summary_md.is_file())
+        self.assertTrue(summary_json.is_file())
+        self.assertIn("model-check second-line reserve package", summary_md.read_text(encoding="utf-8"))
+        payload = guided.json.loads(summary_json.read_text(encoding="utf-8"))
+        self.assertEqual(
+            payload["current_route"],
+            "model_check = row-local property carrier first / public checker artifact later",
+        )
+        self.assertEqual(
+            [row["sample_id"] for row in payload["rows"]],
+            [
+                "p06-typed-proof-owner-handoff",
+                "p10-typed-authorized-fingerprint-declassification",
+                "p11-typed-unauthorized-fingerprint-release",
+                "p12-typed-classified-fingerprint-publication-block",
+                "p15-typed-capture-escape-rejected",
+                "p16-typed-remote-call-budget-exceeded",
+            ],
+        )
+
+    def test_main_emit_reserve_model_check_second_line_uses_runtime_renderer(self) -> None:
+        fake_text = "model-check second-line reserve package\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_model_check_second_line_emit_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["emit-reserve", "model-check-second-line"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("model-check second-line reserve package" in call.args[0] for call in write.mock_calls)
+        )
+
     def test_problem2_residual_bundle_summarizes_first_line_reserve_and_negative(self) -> None:
         spec = guided.problem_specs()["problem2"]
 
@@ -1555,6 +1708,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("model-check-second-line", text)
         self.assertIn("emit-reserve auditable-authority-witness", text)
         self.assertIn("emit-reserve delegated-rng-service", text)
+        self.assertIn("emit-reserve model-check-second-line", text)
         self.assertIn("emit-theorem problem1", text)
         self.assertIn("closeout", text)
         self.assertIn("hold-line", text)

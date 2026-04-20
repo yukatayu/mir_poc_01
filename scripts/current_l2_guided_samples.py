@@ -84,6 +84,15 @@ PROBLEM1_THEOREM_EMIT_SAMPLE_IDS = (
     "p08-dice-stale-reconnect-refresh",
 )
 
+MODEL_CHECK_SECOND_LINE_EMIT_SAMPLE_IDS = (
+    "p06-typed-proof-owner-handoff",
+    "p10-typed-authorized-fingerprint-declassification",
+    "p11-typed-unauthorized-fingerprint-release",
+    "p12-typed-classified-fingerprint-publication-block",
+    "p15-typed-capture-escape-rejected",
+    "p16-typed-remote-call-budget-exceeded",
+)
+
 PROBLEM2_SCENARIO_EMIT_SAMPLE_IDS = (
     "p07-dice-late-join-visible-history",
     "p08-dice-stale-reconnect-refresh",
@@ -107,6 +116,15 @@ DELEGATED_RNG_SERVICE_EMIT_SAMPLE_IDS = (
 PROBLEM1_THEOREM_EMIT_STOP_LINE = (
     "final public theorem contract",
     "concrete theorem prover brand",
+    "final public verifier contract",
+)
+
+MODEL_CHECK_SECOND_LINE_EMIT_STOP_LINE = (
+    "first settled property language",
+    "concrete model-check tool brand",
+    "final public checker artifact",
+    "actual public checker migration",
+    "production checker/runtime-policy contract",
     "final public verifier contract",
 )
 
@@ -164,6 +182,12 @@ DELEGATED_RNG_SERVICE_ANCHOR_REFS = (
     "specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md",
     "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
     "specs/examples/611-current-l2-delegated-rng-service-reserve-package-summary-index-actualization.md",
+)
+
+MODEL_CHECK_SECOND_LINE_ANCHOR_REFS = (
+    "specs/examples/478-current-l2-model-check-second-line-concretization.md",
+    "specs/examples/568-current-l2-theorem-model-check-bridge-carrier-reconnect-after-finite-index-widening.md",
+    "specs/examples/612-current-l2-model-check-second-line-reserve-package-summary-index-actualization.md",
 )
 
 PARSER_COMPANION_MAPPING_BUNDLE_ANCHORS = {
@@ -326,6 +350,19 @@ class DelegatedRngServiceEmitRow:
     reserve_lane_status: str
 
 
+@dataclass(frozen=True)
+class ModelCheckSecondLineEmitRow:
+    sample_id: str
+    reading: str
+    output_path: str
+    static_gate: str
+    terminal_outcome: str
+    typed_hint_status: str
+    theorem_preview_status: str
+    model_check_preview_status: str
+    model_check_reopen_status: str
+
+
 GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
     "shared-space exhaustive final catalog beyond minimal working subset",
     "installed-binary / packaging / FFI / engine adapter / host integration target",
@@ -482,6 +519,7 @@ RESERVE_INTEGRATION_PACKAGES = (
         "title": "model-check second line",
         "summary": "row-local property carrier second-line を tool brand / public checker finalization と分離して保つ",
         "entry_commands": (
+            "python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line",
             "python3 scripts/current_l2_guided_samples.py matrix problem1",
             "python3 scripts/current_l2_guided_samples.py bundle problem1",
             "python3 scripts/current_l2_guided_samples.py closeout",
@@ -489,6 +527,7 @@ RESERVE_INTEGRATION_PACKAGES = (
         "anchor_refs": (
             "specs/examples/478-current-l2-model-check-second-line-concretization.md",
             "specs/examples/568-current-l2-theorem-model-check-bridge-carrier-reconnect-after-finite-index-widening.md",
+            "specs/examples/612-current-l2-model-check-second-line-reserve-package-summary-index-actualization.md",
             "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
         ),
     },
@@ -1200,6 +1239,192 @@ def render_problem1_theorem_emit_from_runtime(
     return render_problem1_theorem_emit(spec, rows, output_dir=output_dir)
 
 
+def model_check_second_line_emit_reading(
+    sample_id: str,
+    report: Mapping[str, object],
+) -> str:
+    terminal_outcome = terminal_outcome_text(report)
+    if sample_id == "p06-typed-proof-owner-handoff":
+        return "representative theorem-model-check bridge"
+    if sample_id == "p10-typed-authorized-fingerprint-declassification":
+        return "authority release positive carrier"
+    if sample_id == "p11-typed-unauthorized-fingerprint-release":
+        return "authority miss rejection"
+    if sample_id == "p12-typed-classified-fingerprint-publication-block":
+        return "label-flow rejection"
+    if sample_id == "p15-typed-capture-escape-rejected":
+        return "capture/lifetime rejection"
+    if sample_id == "p16-typed-remote-call-budget-exceeded":
+        return "simple cost rejection"
+    if terminal_outcome == "reject":
+        return "typed/model-check rejection"
+    return problem1_residual_reading(report)
+
+
+def emit_model_check_second_line_payload(
+    sample_id: str,
+    output_path: Path,
+    *,
+    runner: Callable[..., subprocess.CompletedProcess[str]] = subprocess.run,
+) -> Mapping[str, object]:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    sample = guided_sample_by_id(sample_id)
+    command = build_single_run_command(sample, output_format="json")
+    completed = runner(
+        command,
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"emit-reserve model-check-second-line `{sample_id}` failed with exit code "
+            f"{completed.returncode}: "
+            f"{compact_text_for_summary((completed.stderr or completed.stdout or '').strip())}"
+        )
+    output_path.write_text(completed.stdout, encoding="utf-8")
+    return json.loads(completed.stdout)
+
+
+def build_model_check_second_line_emit_rows(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_model_check_second_line_payload,
+) -> list[ModelCheckSecondLineEmitRow]:
+    rows: list[ModelCheckSecondLineEmitRow] = []
+    for sample_id in MODEL_CHECK_SECOND_LINE_EMIT_SAMPLE_IDS:
+        output_path = output_dir / f"{sample_id}.run.json"
+        report = emitter(sample_id, output_path)
+        rows.append(
+            ModelCheckSecondLineEmitRow(
+                sample_id=sample_id,
+                reading=model_check_second_line_emit_reading(sample_id, report),
+                output_path=display_path(output_path),
+                static_gate=checker_static_gate_verdict(report),
+                terminal_outcome=terminal_outcome_text(report),
+                typed_hint_status=helper_status(report, "typed_checker_hint_preview"),
+                theorem_preview_status=helper_status(report, "theorem_result_object_preview"),
+                model_check_preview_status=helper_status(
+                    report, "model_check_public_checker_preview"
+                ),
+                model_check_reopen_status=helper_status(
+                    report, "model_check_final_public_contract_reopen_threshold"
+                ),
+            )
+        )
+    return rows
+
+
+def build_model_check_second_line_emit_manifest(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_model_check_second_line_payload,
+) -> dict[str, object]:
+    rows = build_model_check_second_line_emit_rows(output_dir=output_dir, emitter=emitter)
+    manifest = {
+        "package_id": "model-check-second-line",
+        "title": "model-check second-line reserve package",
+        "current_reading": (
+            "`run-source-sample --format json` を `p06 / p10 / p11 / p12 / p15 / p16` に対して "
+            "repo-local output dir へ materialize し、row-local property carrier second-line を "
+            "representative bridge / positive carrier / rejection pair の 6 本で再確認する helper-local command。"
+            " final public checker artifact ではない。"
+        ),
+        "command": "python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line",
+        "sample_bundle_doc": PROBLEM_SAMPLE_BUNDLE_DOCS["problem1"],
+        "output_dir": display_path(output_dir),
+        "current_route": "model_check = row-local property carrier first / public checker artifact later",
+        "kept_separate_from": [
+            "final public theorem result object",
+            "first settled property language",
+            "concrete model-check tool brand",
+            "final public checker artifact",
+            "final public verifier contract",
+        ],
+        "anchor_refs": list(MODEL_CHECK_SECOND_LINE_ANCHOR_REFS),
+        "rows": [asdict(row) for row in rows],
+        "stop_line": list(MODEL_CHECK_SECOND_LINE_EMIT_STOP_LINE),
+    }
+    output_dir.mkdir(parents=True, exist_ok=True)
+    summary_md_path = reserve_package_summary_markdown_path(output_dir)
+    summary_json_path = reserve_package_summary_json_path(output_dir)
+    manifest["package_summary_markdown"] = display_path(summary_md_path)
+    manifest["package_summary_json"] = display_path(summary_json_path)
+    summary_json_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    summary_md_path.write_text(
+        render_model_check_second_line_emit(rows, output_dir=output_dir),
+        encoding="utf-8",
+    )
+    return manifest
+
+
+def render_model_check_second_line_emit(
+    rows: list[ModelCheckSecondLineEmitRow],
+    *,
+    output_dir: Path,
+) -> str:
+    lines = [
+        "model-check second-line reserve package",
+        "",
+        "`row-local property carrier second-line` を `p06 / p10 / p11 / p12 / p15 / p16` で再確認する repo-local reserve helper。",
+        "",
+        f"sample bundle doc: {PROBLEM_SAMPLE_BUNDLE_DOCS['problem1']}",
+        "command: python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line",
+        f"output dir: {display_path(output_dir)}",
+        f"package summary markdown: {display_path(reserve_package_summary_markdown_path(output_dir))}",
+        f"package summary json: {display_path(reserve_package_summary_json_path(output_dir))}",
+        "current route: model_check = row-local property carrier first / public checker artifact later",
+        "",
+    ]
+    for row in rows:
+        lines.append(f"- {row.sample_id}: {row.reading}")
+        lines.append(f"  output: {row.output_path}")
+        lines.append(f"  static_gate: {row.static_gate}")
+        lines.append(f"  terminal_outcome: {row.terminal_outcome}")
+        lines.append(f"  typed_hint_status: {row.typed_hint_status}")
+        lines.append(f"  theorem_preview_status: {row.theorem_preview_status}")
+        lines.append(f"  model_check_preview_status: {row.model_check_preview_status}")
+        lines.append(f"  model_check_reopen_status: {row.model_check_reopen_status}")
+        lines.append("")
+    lines.append("stop line:")
+    for item in MODEL_CHECK_SECOND_LINE_EMIT_STOP_LINE:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "anchor refs:",
+        ]
+    )
+    for ref in MODEL_CHECK_SECOND_LINE_ANCHOR_REFS:
+        lines.append(f"- {ref}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- `p06` は theorem-first bridge representative、`p10` は positive carrier、`p11 / p12 / p15 / p16` は bad pattern rejection を repo-local summary に materialize する narrow helper である。",
+            "- final public checker artifact、concrete model-check tool brand、first settled property language、final public verifier contract には上げない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_model_check_second_line_emit_from_runtime(
+    *,
+    output_format: str,
+    output_dir: Path | None = None,
+) -> str:
+    output_dir = output_dir or default_emit_reserve_output_dir("model-check-second-line")
+    manifest = build_model_check_second_line_emit_manifest(output_dir=output_dir)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    rows = [ModelCheckSecondLineEmitRow(**row) for row in manifest["rows"]]
+    return render_model_check_second_line_emit(rows, output_dir=output_dir)
+
+
 def default_problem2_scenario_emit_output_dir() -> Path:
     return REPO_ROOT / "target" / "current-l2-guided" / "problem2-scenario-bundle"
 
@@ -1374,7 +1599,11 @@ def render_problem2_scenario_emit_from_runtime(
 
 
 def supported_emit_reserve_package_ids() -> tuple[str, ...]:
-    return ("auditable-authority-witness", "delegated-rng-service")
+    return (
+        "auditable-authority-witness",
+        "delegated-rng-service",
+        "model-check-second-line",
+    )
 
 
 def default_emit_reserve_output_dir(package_id: str) -> Path:
@@ -3905,6 +4134,14 @@ def main(argv: list[str] | None = None) -> int:
             if args.package_id == "delegated-rng-service":
                 print(
                     render_delegated_rng_service_emit_from_runtime(
+                        output_format=args.format,
+                        output_dir=output_dir,
+                    )
+                )
+                return 0
+            if args.package_id == "model-check-second-line":
+                print(
+                    render_model_check_second_line_emit_from_runtime(
                         output_format=args.format,
                         output_dir=output_dir,
                     )

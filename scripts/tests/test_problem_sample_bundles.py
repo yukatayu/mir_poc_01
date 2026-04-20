@@ -74,6 +74,15 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
             "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
             text,
         )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line",
+            text,
+        )
+        self.assertIn("bad pattern rejection", text)
+        self.assertIn(
+            "target/current-l2-guided/reserve-packages/model-check-second-line",
+            text,
+        )
         self.assertIn("target/current-l2-guided/problem1-theorem-pilot", text)
         self.assertIn("pilot-summary.md", text)
         self.assertIn("stronger typed-surface actual adoption", text)

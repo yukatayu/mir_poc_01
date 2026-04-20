@@ -118,19 +118,39 @@ python3 scripts/current_l2_guided_samples.py emit-theorem problem1
 - final public theorem contract や concrete theorem prover brand には上げず、
   repo-local emitted artifact loop として current cut を確認できる。
 
-4. representative と residual bridge-floor をまとめて見る
+4. model-check second-line reserve package を単独で materialize する
+
+```bash
+python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line
+```
+
+見るべき結果:
+
+- `target/current-l2-guided/reserve-packages/model-check-second-line` 配下に、
+  `p06 / p10 / p11 / p12 / p15 / p16` の run-source-sample JSON が出る。
+- `package-summary.md` / `package-summary.json` に、
+  `p06` representative bridge、
+  `p10` positive carrier、
+  `p11 / p12 / p15 / p16` rejection pair が整理される。
+- bad pattern rejection が `terminal_outcome = reject` と
+  `model_check_preview_status = bridge-only(...)`
+  の形で自動的に見える。
+- final public checker artifact や concrete model-check tool brand には上げず、
+  row-local property carrier second-line の helper-local reserve package として確認できる。
+
+5. representative と residual bridge-floor をまとめて見る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py matrix problem1
 ```
 
-5. docs / Lean artifact / anchor spec-report まで一本道で辿る
+6. docs / Lean artifact / anchor spec-report まで一本道で辿る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py bundle problem1
 ```
 
-6. parser-side companion / mapping まで同じ読みに揃える
+7. parser-side companion / mapping まで同じ読みに揃える
 
 ```bash
 python3 scripts/current_l2_guided_samples.py mapping
@@ -160,6 +180,9 @@ full dependent type、general theorem proving in compiler、final public checker
   - proof notebook review unit と row-local model-check carrier の emitted artifact preview
 - `typed_checker_hint_preview`
   - checker-adjacent finite-index first layer の current cut
+- `emit-reserve model-check-second-line`
+  - `p06` の representative bridge と `p11 / p12 / p15 / p16` rejection pair を、
+    repo-local output dir と summary index にまとめる narrow reopen entrypoint
 
 ## 現在の mixed gate 再開点
 
@@ -174,6 +197,7 @@ full dependent type、general theorem proving in compiler、final public checker
 - `first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract`
   - `python3 scripts/current_l2_guided_samples.py matrix problem1`
     と `python3 scripts/current_l2_guided_samples.py bundle problem1`
+    と `python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line`
     を合わせて見て、row-local carrier first の current cut を越えて final public checker 契約へ飛ばないことを確認する。
 - compressed residual lane は
   `python3 scripts/current_l2_guided_samples.py residuals`
