@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 04:12 JST
+最終更新: 2026-04-20 09:26 JST
 
 ## この文書について
 
@@ -28,11 +28,19 @@
   first strong typing layer の principal target に置く読みへ同期済みである。
 - ここでいう principal target は checker-adjacent first layer を指し、
   stronger typed surface を early に source principal へ昇格する判断とは切り分けて読む。
-- したがって、remaining work の主眼は次に移っている。
-  - perform head structural carrier と request clause suite carrier をどこで narrow に束ねるかを比較する phase6-perform-head-request-clause-bundle-attachment comparison
-  - final public theorem/model-check/order-handoff/shared-space contract の mixed gate
-  - order-handoff/shared-space residual public-seam maintenance
-  - packaging / FFI / broader app target の user-spec residual
+- したがって、remaining work の主眼は
+  **repo-local once-through near-end completion**
+  として整理し直すのが自然である。
+  current self-driven sequence は、
+  - Package 91 perform-head / request-clause bundle attachment comparison
+  - Package 92 finite-index strong typing first layer
+  - Package 93 Lean-first formal skeleton hardening
+  - Package 94 theorem-first and model-check second-line carrier
+  - Package 95 order/handoff source surface and artifacts
+  - Package 96 authoritative-room first scenario
+  - Package 97 reserve strengthening
+  - Package 98 docs/report closeout
+  に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
 ## current executable floor
@@ -59,7 +67,14 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `91` phase6-perform-head-request-clause-bundle-attachment comparison | Package 90 close 後の次段として、perform head structural carrier と request clause suite carrier をどの combined carrier で narrow に束ねるか | `M` | `Macro 6/7` | perform head / request clause suite の separate carrier actualization を entry criteria にし、combined carrier minimum だけを選び、span-rich diagnostics / final grammar は retained-later に残す | combined carrier の current first compare floor を source-backed に置き、diagnostics / final grammar / final public API と混線させずに次 package を閉じられる |
+| `91` phase6-perform-head-request-clause-bundle-attachment comparison | perform head structural carrier と request clause suite carrier をどの combined carrier で narrow に束ねるか | `M` | `Macro 3/5` | `Stage3RequestHeadClauseBundle` thin wrapper first を current compare floor に置き、flatten/generic attachment は retained alternative に残す | combined carrier の current first compare floor を source-backed に置き、span-rich diagnostics / final grammar / final public API と混線させずに閉じられる |
+| `92` first strong typing finite-index layer | finite decidable index fragment を current sample に対して static carrier / sample / docs まで実装する | `L` | `Macro 5` | checker-adjacent principal を維持し、IFC / capture / lifetime / simple cost first layer を thin static carrier で actualize する | valid/invalid sample 群と docs default が drift なく揃い、stronger typed surface を still non-principal に保てる |
+| `93` Lean-first formal skeleton hardening | first strong typing layer と current proof obligations を Lean-first skeleton / sample explanation に繋ぎ直す | `M` | `Macro 5` | `samples/lean/foundations/` と generated current-L2 corpus の役割差を保ち、first theorem placeholders を explanation 付きで固定する | actual small proof / generated stub / docs reading が一致し、Package 94 の bridge work を受けられる |
+| `94` theorem-first and model-check second-line carrier | theorem-first bridge と model-check second-line carrier を current samples / artifacts / previews へ narrow に同期する | `M` | `Macro 5/7` | notebook-first theorem line、row-local model-check carrier、brand-neutral reserve を維持する | theorem/model-check preview と stop line が current samples 上で drift なく読める |
+| `95` order/handoff source surface and artifacts | explicit edge-row principal / stage-block secondary / reserve serial sugar を current artifacts と negative corpus に揃える | `M` | `Macro 5/6` | low-level exact surface を source principal に戻さず、edge-row principal を保つ | valid / missing witness / handoff-before-publication / stage-block pair が current docs / helper / sample で一貫する |
+| `96` authoritative-room first scenario | authoritative-room first default profile を current CLI / tests / artifacts / examples で tighten する | `M` | `Macro 6` | authority-ack / single room authority / authoritative serial transition / authority_rng / visible past / fail-then-refresh を first line に保つ | first room default profile の representative run と negative pair が drift なく読める |
+| `97` reserve strengthening | `auditable_authority_witness`、`delegated_rng_service`、model-check second-line concretization を reserve strengthening lane として narrow に整理する | `M` | `Macro 6/7` | first completion line を壊さず、second package 群を reserve に置く | reserve line と first-line completion の境界が docs / plan / tasks / progress で明確になる |
+| `98` documentation/report closeout | once-through sequence を docs / plan / progress / tasks / reports / traceability に閉じる | `S` | `Macro 0/5` | comparison debt ではなく adoption debt closeout として整理する | queue drift が消え、remaining mixed gate / true user-spec gate / reserve integration が narrow に分かれる |
 
 ## recently closed package note
 
@@ -94,6 +109,93 @@
   stronger typed source principal、checker-hint / diagnostics widening beyond IFC trio、actual checker payload family、final typed calculus、final IFC syntax、final public verifier contract
 
 ## active package notes
+
+### Package 91 — phase6-perform-head-request-clause-bundle-attachment comparison
+
+- current reading:
+  next active line。Package 89/90 の separate carrier minimum を保ったまま、`Stage3RequestHeadClauseBundle { perform_head, clause_suite, attachment_frame_kind }` thin wrapper first を current compare floor に置く。
+- current first choice:
+  request-local fixed two-slot suite を `perform` head へ collapse させず、flatten ではなく thin bundle として束ねる。
+- evidence anchor:
+  `specs/examples/562`
+  `specs/examples/563`
+  `specs/examples/564`
+  `crates/mir-ast/tests/current_l2_request_clause_suite_manifest.rs`
+  `crates/mir-ast/tests/current_l2_perform_head_manifest.rs`
+- stop line:
+  span-rich diagnostics
+  final grammar
+  final public parser / checker / runtime surface
+  full `Program` lowering
+
+### Package 92 — first strong typing finite-index layer
+
+- current reading:
+  Package 91 close 後の first strong-typing implementation line。finite decidable index fragment を checker-adjacent first layer として actualize し、IFC / capture / lifetime / simple cost sample 群を static carrier へ繋ぐ。
+- target corpus:
+  `p06`
+  `p10`
+  `p11`
+  `p12`
+  capture escape rejected sample
+  cost bound exceeded sample
+- stop line:
+  stronger typed source principal
+  final typed calculus
+  final public verifier contract
+
+### Package 93 — Lean-first formal skeleton hardening
+
+- current reading:
+  Package 92 に追随して、`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` generated stub corpus の役割差を崩さず、first theorem placeholder 群と日本語 explanation を tighten する。
+- stop line:
+  production prover binding
+  final proof object public contract
+  final public verifier contract
+
+### Package 94 — theorem-first and model-check second-line carrier
+
+- current reading:
+  theorem-first notebook line と row-local model-check carrier を current strong typing / Lean / sample floor に narrow に再接続する。Lean-first experimental binding と brand-neutral model-check reserve を維持する。
+- stop line:
+  final public theorem result object
+  concrete theorem/model-check production binding
+  final public verifier contract
+
+### Package 95 — order/handoff source surface and artifacts
+
+- current reading:
+  explicit edge-row principal、stage-block secondary、`serial on ...` reserve を current helper-local artifact / negative corpus / CLI surface に揃える。
+- stop line:
+  final source wording
+  low-level exact source surface
+  final emitted-handoff contract
+
+### Package 96 — authoritative-room first scenario
+
+- current reading:
+  authority-ack / single room authority / authoritative serial transition / authority_rng / late join visible past / stale reconnect fail-then-refresh / replay invalidation を first room default profile として representative run / artifact / docs に揃える。
+- stop line:
+  distributed fairness theorem
+  exhaustive shared-space catalog
+  final public witness/provider/artifact contract
+
+### Package 97 — reserve strengthening
+
+- current reading:
+  first completion line を壊さずに、`auditable_authority_witness`、`delegated_rng_service`、model-check second-line concretization を reserve strengthening lane として narrow に切り分ける。
+- stop line:
+  final public witness/provider schema
+  distributed randomness provider adoption
+  final public checker artifact
+
+### Package 98 — documentation/report closeout
+
+- current reading:
+  once-through sequence の closeout。`specs/` / `plan/` / `progress.md` / `tasks.md` / `Documentation.md` / `docs/reports/` / `plan/90` を stale wording なしで同期する。
+- stop line:
+  final public language completion claim
+  packaging / FFI / engine adapter adoption
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -550,21 +652,12 @@
   final grammar
   final public parser / checker / runtime surface
 
-### Package 90 — phase6-perform-head-final-public-parser-API comparison
+### Package 90 — phase6-perform-head structural carrier actualization
 
 - current reading:
   close 済み。request clause suite bridge を current entry criteria に保ったまま、`perform` head の owner / op / target-or-via shape を `CurrentL2PerformHeadManifest`、`Stage3PerformTargetRef`、`Stage3PerformHead`、`parse_stage3_perform_head_text()` に actualize し、crate-local non-production parser carrier として inspectable にした。
 - stop line:
   request clause suite bundle attachment
-  span-rich diagnostics
-  final grammar
-  final public parser / checker / runtime surface
-
-### Package 91 — phase6-perform-head-request-clause-bundle-attachment comparison
-
-- current reading:
-  next active line。perform head structural carrier と request clause suite carrier を current entry criteria に保ったまま、どの combined carrier で narrow に束ねるかを比較する。
-- stop line:
   span-rich diagnostics
   final grammar
   final public parser / checker / runtime surface
@@ -600,4 +693,10 @@
 
 ## next reopen order
 
-1. Package 91 で phase6-perform-head-request-clause-bundle-attachment comparison を進める。
+1. Package 91 で perform-head / request-clause bundle attachment compare floor を閉じる。
+2. Package 92 で finite-index strong typing first layer を static carrier / sample / docs に actualize する。
+3. Package 93 で Lean-first formal skeleton と日本語 explanation の drift を閉じる。
+4. Package 94 で theorem-first / model-check second-line bridge を narrow に同期する。
+5. Package 95 と 96 で order/handoff source surface と authoritative-room first scenario を tighten する。
+6. Package 97 で reserve strengthening を first completion line から切り分ける。
+7. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。

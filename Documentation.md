@@ -312,13 +312,14 @@
 ## current self-driven queue
 
 - current live line は、
-  - theorem/model-check reopen-threshold helper mirror actualization
-  - order-handoff/shared-space public-seam helper mirror closeout
-  - phase6-reserve-formal-tool-binding-inventory ratchet closeout
-  - fixed-subset-source-sample-corpus-scope-and-file-layout ratchet closeout
-  - phase6 request-clause-suite publicization closeout
-  - phase6 perform-head structural carrier closeout
-  - phase6 perform-head-request-clause-bundle-attachment comparison
+  - Package 91 phase6 perform-head-request-clause-bundle-attachment comparison
+  - Package 92 first strong typing finite-index layer
+  - Package 93 Lean-first formal skeleton hardening
+  - Package 94 theorem-first and model-check second-line carrier
+  - Package 95 order/handoff source surface and artifacts
+  - Package 96 authoritative-room first scenario
+  - Package 97 reserve strengthening
+  - Package 98 documentation/report closeout
   - committed `samples/lean/` corpus と helper-local CLI summary を基点にした residual public-seam maintenance
   - later mixed gate residual maintenance
   - true user-spec residual
@@ -326,8 +327,8 @@
 
 `specs/examples/466...555` は、
 actual adoption package、near-end closeout、helper-local actualization floor を source-backed に揃える current anchor である。
-`specs/examples/556...560` は、
-phase6 parser second-tranche first-package close、first strong typing layer finite-index spine default、phase6 reserve formal tool binding inventory closeout、phase6 parser-side follow-up package sequencing closeout、phase6 shared single attachment frame first-package closeout を source-backed に同期する current anchor である。
+`specs/examples/556...564` は、
+phase6 parser second-tranche first-package close、first strong typing layer finite-index spine default、phase6 reserve formal tool binding inventory closeout、phase6 parser-side follow-up package sequencing closeout、phase6 shared single attachment frame first-package closeout、fixed-subset source-sample corpus scope-and-file-layout closeout、request clause suite publicization closeout、perform head structural carrier closeout、perform-head-request-clause-bundle-attachment compare floor を source-backed に同期する current anchor である。
 
 ## まだ OPEN のもの
 
@@ -360,6 +361,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
    `faq_009.md`
    `faq_010.md`
    `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
+   `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
 
 ## 直近で特に重要な文書
 
@@ -368,7 +370,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
 - typed / theorem / model-check / ordering の adjacent package:
   `specs/examples/413...448`
 - current tranche / preview package:
-  `specs/examples/451...563`
+  `specs/examples/451...564`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:
@@ -384,6 +386,7 @@ phase6 parser second-tranche first-package close、first strong typing layer fin
 - `faq_009.md` は 2026-04-19 時点の current explanation refresh であり、representative Lean sample set actual Lean execution floor を含む最新 status を踏まえて、done / not done / overall ladder / remaining gate / self-drive bound を整理する。
 - `faq_010.md` は 2026-04-20 時点の current explanation refresh であり、`faq_009.md` 以後の Phase 6 parser-side tranche actualization を含む最新 status を踏まえて、二大問題の closeout 到達点、language implementation の current limit、remaining mixed gate / true user-spec gate、および「ここからどこまで自走できるか」の current bound を整理する。
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md` は 2026-04-19 時点の detailed closeout handoff であり、layered strong typing / IFC、Lean formal skeleton、first completion scope、reopened self-driven queue の current explanation source として使ってよい。
+- `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md` は 2026-04-20 時点の repo-local once-through completion handoff であり、Package 91 compare floor と、その後ろに置く Package 92...98 の staged self-driven sequence を current explanation source として使ってよい。
 - 規範判断の正本は常に `specs/` に残る。
 - `plan/` は long-lived repository memory であり、snapshot ではない。
 - `progress.md` と `tasks.md` は current queue と remaining gate を mirror する薄い snapshot として保つ。

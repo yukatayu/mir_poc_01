@@ -65,6 +65,9 @@
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
   - 2026-04-19 時点の detailed closeout handoff であり、representative Lean sample set actual Lean execution 後の reopened self-driven queue、layered strong typing / IFC first-fragment、Lean formal skeleton、first completion scope を current explanation source として補強する。
   - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
+- `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
+  - 2026-04-20 時点の repo-local once-through completion handoff であり、FAQ 10 以後の parser-side closeout / finite-index strong typing / Lean-first theorem skeleton / model-check second-line / order-handoff helper-local source surface / authoritative-room first scenario / docs closeout sequenceを 1 本の staged package 列として整理する。
+  - 規範判断の正本ではないが、`specs/examples/564` 以後の once-through closeout reading と Package 91...98 の current explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -262,6 +265,9 @@
 - `specs/examples/563-current-l2-phase6-perform-head-structural-carrier-threshold-helper-mirror.md`
   - Package 90 の closeout として `perform` head owner / op / target-or-via shape を crate-local non-production parser carrier に narrow に mirror し、`carrier_kind + accepted_surface_refs + code_anchor_refs + retained_later_refs` と `Stage3PerformHead { op, target_ref = On(target) | Via(chain_ref) }` の current cut を保つ補助文書。
   - request clause suite bundle attachment、span-rich diagnostics、final grammar、final public parser/checker/runtime surface を固定するものではなく、Package 90 close と Package 91 perform-head-request-clause-bundle-attachment comparison next line を読むための anchor である。
+- `specs/examples/564-current-l2-phase6-perform-head-request-clause-bundle-attachment-comparison.md`
+  - Package 91 の compare floor として request clause suite と `perform` head の separate carrier minimum を壊さずに thin bundle shape をどう置くかを比較し、`Stage3RequestHeadClauseBundle { perform_head, clause_suite, attachment_frame_kind }` current first choice と retained alternatives を整理する補助文書。
+  - final grammar、final public parser/checker/runtime surface、full `Program` lowering を固定するものではなく、Package 91 close と Package 92 first strong typing finite-index layer next line を読むための anchor である。
 - `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md`
   - current L2 parser-free PoC の trace / audit 結果を detached artifact として外へ出すとき、何を exact-compare core に残し、何を detached non-core とし、何を human-facing explanation に残すかを整理する補助文書。
   - production serialization format や richer host interface を固定せず、docs-only minimal schema だけを与える。
@@ -768,6 +774,8 @@
   - current Phase 5 / Package 89 closeout として、request-local fixed two-slot suite bridge を `CurrentL2RequestClauseSuiteManifest`、`Stage3RequestClauseSuite`、`parse_stage3_request_clause_suite_text()` に actualize し、crate-local parser follow-up bundle を narrow に mirror する補助文書。
 - `specs/examples/563-current-l2-phase6-perform-head-structural-carrier-threshold-helper-mirror.md`
   - current Phase 5 / Package 90 closeout として、`perform` head owner / op / target-or-via shape を `CurrentL2PerformHeadManifest`、`Stage3PerformTargetRef`、`Stage3PerformHead`、`parse_stage3_perform_head_text()` に actualize し、crate-local parser follow-up bundle を narrow に mirror する補助文書。
+- `specs/examples/564-current-l2-phase6-perform-head-request-clause-bundle-attachment-comparison.md`
+  - current Phase 5 / Package 91 compare floor として、request clause suite publicization と `perform` head structural carrier の separate minimum cut を保ったまま `Stage3RequestHeadClauseBundle` thin wrapper current first choice を source-backed に整理し、Package 92...98 once-through closeout sequence の entry package を与える補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

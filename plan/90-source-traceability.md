@@ -3641,6 +3641,16 @@
   - `docs/reports/0846-faq010-current-status-and-phase6-parser-side-refresh.md`
 - 今回の要点は、`faq_009.md` 以後の genuine progress として representative Lean execution floor の先にある phase6 parser-side / checker-runtime-side narrow actualization を current explanation に取り込みつつ、「二大問題の current first line と helper-local actualization はかなり進んだが final public language implementation complete ではない」「repo-local near-end success に対してはかなり自走しやすいが、full final-public completion には still mixed gate / true user-spec gate が残る」という current lineを明示した点である。
 
+### 2026-04-20 once-through completion handoff integration
+
+- `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`、`specs/examples/564-current-l2-phase6-perform-head-request-clause-bundle-attachment-comparison.md`、`docs/reports/0847-once-through-completion-handoff-integration.md`、`Documentation.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`tasks.md`、`progress.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md` の今回更新分は、追加で次を主根拠にする。
+  - `faq_010.md`
+  - `specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md`
+  - `specs/examples/562-current-l2-phase6-request-clause-suite-publicization-threshold-helper-mirror.md`
+  - `specs/examples/563-current-l2-phase6-perform-head-structural-carrier-threshold-helper-mirror.md`
+  - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
+- 今回の要点は、FAQ 10 後の最新 handoff を current explanation source として取り込み、`Package 91 only` へ過度に narrow 化していた queue reading を `Package 91...98` の repo-local once-through near-end sequence へ戻しつつ、`specs/examples/564` を Package 91 compare-floor anchor として追加した点である。これは final public language completion を意味せず、phase6 parser-side closeout と finite-index strong typing / Lean-first skeleton / theorem-first / order-handoff / authoritative-room / docs closeout を staged self-driven package として追えるようにした current memory sync である。
+
 ### 2026-04-19 final-layer closeout handoff integration
 
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`docs/reports/0801-final-layer-closeout-handoff-integration.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。
