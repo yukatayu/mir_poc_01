@@ -933,6 +933,10 @@ actual-adoption floor では、
   `specs/examples/610`
   - `emit-reserve auditable-authority-witness` と `target/current-l2-guided/reserve-packages/auditable-authority-witness/package-summary.md|json` を actualize し、`p07` reached / `p08` contrast / `p05` comparison を reserve package 単独の repo-local summary index に圧縮してよい
   - current next reopen line は `delegated_rng_service` / model-check second-line / later mixed gate / user-spec hold line である
+- delegated-rng-service reserve package summary index actualization:
+  `specs/examples/611`
+  - `emit-reserve delegated-rng-service` と `target/current-l2-guided/reserve-packages/delegated-rng-service/package-summary.md|json` を actualize し、`p09` reached / `p07` authority-rng baseline contrast / `p08` reconnect contrast を reserve package 単独の repo-local summary index に圧縮してよい
+  - current next reopen line は model-check second-line / later mixed gate / user-spec hold line である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

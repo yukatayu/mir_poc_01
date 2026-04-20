@@ -132,9 +132,17 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
             "python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness",
             text,
         )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service",
+            text,
+        )
         self.assertIn("target/current-l2-guided/problem2-scenario-bundle", text)
         self.assertIn(
             "target/current-l2-guided/reserve-packages/auditable-authority-witness",
+            text,
+        )
+        self.assertIn(
+            "target/current-l2-guided/reserve-packages/delegated-rng-service",
             text,
         )
         self.assertIn(

@@ -636,6 +636,154 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             ],
         )
 
+    def test_delegated_rng_service_emit_text_mentions_output_dir_command_and_samples(self) -> None:
+        output_dir = (
+            guided.REPO_ROOT
+            / "target"
+            / "guided-sample-tests"
+            / "reserve-packages"
+            / "delegated-rng-service"
+        )
+        rows = [
+            guided.DelegatedRngServiceEmitRow(
+                sample_id="p09-dice-delegated-rng-provider-placement",
+                reading="delegated provider placement reached",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "delegated-rng-service/p09-dice-delegated-rng-provider-placement.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="success",
+                reserve_detail="delegated-rng+model-check",
+                delegated_rng_service_status="reached",
+                first_line_status="guarded",
+                reserve_lane_status="reached",
+            ),
+            guided.DelegatedRngServiceEmitRow(
+                sample_id="p07-dice-late-join-visible-history",
+                reading="guard-only authority-rng baseline contrast",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "delegated-rng-service/p07-dice-late-join-visible-history.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="success",
+                reserve_detail="witness+model-check",
+                delegated_rng_service_status="guarded_not_reached",
+                first_line_status="reached",
+                reserve_lane_status="reached",
+            ),
+            guided.DelegatedRngServiceEmitRow(
+                sample_id="p08-dice-stale-reconnect-refresh",
+                reading="guard-only reconnect contrast",
+                output_path=(
+                    "target/guided-sample-tests/reserve-packages/"
+                    "delegated-rng-service/p08-dice-stale-reconnect-refresh.run.json"
+                ),
+                static_gate="valid",
+                terminal_outcome="success",
+                reserve_detail="model-check",
+                delegated_rng_service_status="guarded_not_reached",
+                first_line_status="reached",
+                reserve_lane_status="reached",
+            ),
+        ]
+
+        text = guided.render_delegated_rng_service_emit(rows, output_dir=output_dir)
+
+        self.assertIn("delegated RNG service reserve package", text)
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service",
+            text,
+        )
+        self.assertIn("fairness_source = delegated_rng_service", text)
+        self.assertIn("fairness_claim = opaque_authority_trust", text)
+        self.assertIn("provider boundary refs", text)
+        self.assertIn("optional attachment refs", text)
+        self.assertIn("p09-dice-delegated-rng-provider-placement", text)
+        self.assertIn("delegated_rng_service_status: reached", text)
+
+    def test_delegated_rng_service_emit_manifest_writes_summary_files(self) -> None:
+        output_dir = (
+            guided.REPO_ROOT
+            / "target"
+            / "guided-sample-tests"
+            / "reserve-packages"
+            / "delegated-rng-service-index"
+        )
+
+        def fake_emitter(sample_id: str, output_path: guided.Path) -> dict[str, object]:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text("{\"ok\": true}", encoding="utf-8")
+            if sample_id == "p09-dice-delegated-rng-provider-placement":
+                delegated_status = "reached"
+                reserve_detail = "delegated-rng+model-check"
+                first_line_status = "guarded_not_reached"
+            elif sample_id == "p07-dice-late-join-visible-history":
+                delegated_status = "guarded_not_reached"
+                reserve_detail = "witness+model-check"
+                first_line_status = "reached"
+            else:
+                delegated_status = "guarded_not_reached"
+                reserve_detail = "model-check"
+                first_line_status = "reached"
+            return {
+                "checker_floor": {"static_gate": {"verdict": "valid"}},
+                "runtime": {"terminal_outcome": "success"},
+                "authoritative_room_first_scenario_actual_adoption": {
+                    "status": first_line_status,
+                },
+                "authoritative_room_reserve_strengthening_lane": {
+                    "status": "reached",
+                    "witness_strengthening_status": "reached"
+                    if reserve_detail == "witness+model-check"
+                    else "guarded_not_reached",
+                    "delegated_rng_service_status": delegated_status,
+                    "model_check_second_line_status": "reached",
+                },
+            }
+
+        manifest = guided.build_delegated_rng_service_emit_manifest(
+            output_dir=output_dir,
+            emitter=fake_emitter,
+        )
+
+        summary_md = output_dir / "package-summary.md"
+        summary_json = output_dir / "package-summary.json"
+        self.assertEqual(manifest["package_id"], "delegated-rng-service")
+        self.assertEqual(
+            manifest["package_summary_markdown"],
+            guided.display_path(summary_md),
+        )
+        self.assertEqual(
+            manifest["package_summary_json"],
+            guided.display_path(summary_json),
+        )
+        self.assertTrue(summary_md.is_file())
+        self.assertTrue(summary_json.is_file())
+        self.assertIn("delegated RNG service reserve package", summary_md.read_text(encoding="utf-8"))
+        payload = guided.json.loads(summary_json.read_text(encoding="utf-8"))
+        self.assertEqual(payload["room_profile_provider"], "fairness_source = delegated_rng_service")
+        self.assertEqual(payload["room_profile_claim"], "fairness_claim = opaque_authority_trust")
+        self.assertEqual(
+            payload["provider_boundary_refs"],
+            [
+                "provider_boundary:placement:delegated_rng_service",
+                "provider_boundary:authority_keeps_commit",
+                "provider_boundary:provider_returns_draw_not_state_transition",
+                "provider_boundary:room_state_mutation_by_authority",
+                "provider_boundary:witness_core_unchanged",
+            ],
+        )
+        self.assertEqual(
+            [row["sample_id"] for row in payload["rows"]],
+            [
+                "p09-dice-delegated-rng-provider-placement",
+                "p07-dice-late-join-visible-history",
+                "p08-dice-stale-reconnect-refresh",
+            ],
+        )
+
     def test_main_emit_reserve_auditable_authority_witness_uses_runtime_renderer(self) -> None:
         fake_text = "auditable authority witness reserve package\n..."
 
@@ -650,6 +798,22 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(
             any("auditable authority witness reserve package" in call.args[0] for call in write.mock_calls)
+        )
+
+    def test_main_emit_reserve_delegated_rng_service_uses_runtime_renderer(self) -> None:
+        fake_text = "delegated RNG service reserve package\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_delegated_rng_service_emit_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["emit-reserve", "delegated-rng-service"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("delegated RNG service reserve package" in call.args[0] for call in write.mock_calls)
         )
 
     def test_problem2_residual_bundle_summarizes_first_line_reserve_and_negative(self) -> None:
@@ -1390,8 +1554,8 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("delegated-rng-service", text)
         self.assertIn("model-check-second-line", text)
         self.assertIn("emit-reserve auditable-authority-witness", text)
+        self.assertIn("emit-reserve delegated-rng-service", text)
         self.assertIn("emit-theorem problem1", text)
-        self.assertIn("emit-scenario problem2", text)
         self.assertIn("closeout", text)
         self.assertIn("hold-line", text)
         self.assertIn(

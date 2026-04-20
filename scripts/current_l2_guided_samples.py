@@ -98,6 +98,12 @@ AUDITABLE_AUTHORITY_WITNESS_EMIT_SAMPLE_IDS = (
     "p05-dice-owner-guarded-chain",
 )
 
+DELEGATED_RNG_SERVICE_EMIT_SAMPLE_IDS = (
+    "p09-dice-delegated-rng-provider-placement",
+    "p07-dice-late-join-visible-history",
+    "p08-dice-stale-reconnect-refresh",
+)
+
 PROBLEM1_THEOREM_EMIT_STOP_LINE = (
     "final public theorem contract",
     "concrete theorem prover brand",
@@ -110,6 +116,15 @@ AUDITABLE_AUTHORITY_WITNESS_EMIT_STOP_LINE = (
     "final public witness/provider/artifact contract",
     "delegated_rng_service practical package",
     "distributed fairness theorem",
+)
+
+DELEGATED_RNG_SERVICE_EMIT_STOP_LINE = (
+    "final public provider receipt schema",
+    "delegated provider attestation public contract",
+    "delegated_rng_service + auditable_authority_witness combined public contract",
+    "distributed_randomness_provider",
+    "control-plane separated carrier",
+    "exhaustive shared-space catalog",
 )
 
 AUDITABLE_AUTHORITY_WITNESS_WITNESS_CORE_FIELDS = (
@@ -130,6 +145,25 @@ AUDITABLE_AUTHORITY_WITNESS_ANCHOR_REFS = (
     "specs/examples/476-current-l2-auditable-authority-witness-strengthening-actualization.md",
     "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
     "specs/examples/610-current-l2-auditable-authority-witness-reserve-package-summary-index-actualization.md",
+)
+
+DELEGATED_RNG_SERVICE_PROVIDER_BOUNDARY_REFS = (
+    "provider_boundary:placement:delegated_rng_service",
+    "provider_boundary:authority_keeps_commit",
+    "provider_boundary:provider_returns_draw_not_state_transition",
+    "provider_boundary:room_state_mutation_by_authority",
+    "provider_boundary:witness_core_unchanged",
+)
+
+DELEGATED_RNG_SERVICE_OPTIONAL_ATTACHMENT_REFS = (
+    "optional_attachment:provider_draw_ref",
+    "optional_attachment:provider_receipt_ref",
+)
+
+DELEGATED_RNG_SERVICE_ANCHOR_REFS = (
+    "specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md",
+    "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
+    "specs/examples/611-current-l2-delegated-rng-service-reserve-package-summary-index-actualization.md",
 )
 
 PARSER_COMPANION_MAPPING_BUNDLE_ANCHORS = {
@@ -279,6 +313,19 @@ class ReservePackageEmitRow:
     reserve_lane_status: str
 
 
+@dataclass(frozen=True)
+class DelegatedRngServiceEmitRow:
+    sample_id: str
+    reading: str
+    output_path: str
+    static_gate: str
+    terminal_outcome: str
+    reserve_detail: str
+    delegated_rng_service_status: str
+    first_line_status: str
+    reserve_lane_status: str
+
+
 GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
     "shared-space exhaustive final catalog beyond minimal working subset",
     "installed-binary / packaging / FFI / engine adapter / host integration target",
@@ -418,13 +465,15 @@ RESERVE_INTEGRATION_PACKAGES = (
         "title": "delegated RNG service",
         "summary": "provider placement practical line を witness/provider final public contract と分離して保つ",
         "entry_commands": (
-            "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+            "python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service",
             "python3 scripts/current_l2_guided_samples.py matrix problem2",
+            "python3 scripts/current_l2_guided_samples.py bundle problem2",
             "python3 scripts/current_l2_guided_samples.py closeout",
         ),
         "anchor_refs": (
             "specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md",
             "specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md",
+            "specs/examples/611-current-l2-delegated-rng-service-reserve-package-summary-index-actualization.md",
             "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
         ),
     },
@@ -1325,7 +1374,7 @@ def render_problem2_scenario_emit_from_runtime(
 
 
 def supported_emit_reserve_package_ids() -> tuple[str, ...]:
-    return ("auditable-authority-witness",)
+    return ("auditable-authority-witness", "delegated-rng-service")
 
 
 def default_emit_reserve_output_dir(package_id: str) -> Path:
@@ -1506,6 +1555,176 @@ def render_auditable_authority_witness_emit_from_runtime(
         return json.dumps(manifest, ensure_ascii=False, indent=2)
     rows = [ReservePackageEmitRow(**row) for row in manifest["rows"]]
     return render_auditable_authority_witness_emit(rows, output_dir=output_dir)
+
+
+def delegated_rng_service_emit_reading(
+    sample_id: str,
+    report: Mapping[str, object],
+) -> str:
+    delegated_status = helper_plain_status(report, "authoritative_room_reserve_strengthening_lane")
+    reserve_detail = problem2_reserve_detail(report)
+    if sample_id == "p09-dice-delegated-rng-provider-placement" and reserve_detail == "delegated-rng+model-check":
+        return "delegated provider placement reached"
+    if sample_id == "p07-dice-late-join-visible-history":
+        return "guard-only authority-rng baseline contrast"
+    if sample_id == "p08-dice-stale-reconnect-refresh":
+        return "guard-only reconnect contrast"
+    if delegated_status == "reached":
+        return "delegated RNG reserve reached"
+    return "guarded"
+
+
+def build_delegated_rng_service_emit_rows(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_problem2_scenario_payload,
+) -> list[DelegatedRngServiceEmitRow]:
+    rows: list[DelegatedRngServiceEmitRow] = []
+    for sample_id in DELEGATED_RNG_SERVICE_EMIT_SAMPLE_IDS:
+        output_path = output_dir / f"{sample_id}.run.json"
+        report = emitter(sample_id, output_path)
+        lane = report.get("authoritative_room_reserve_strengthening_lane")
+        delegated_rng_service_status = "missing"
+        if isinstance(lane, Mapping):
+            raw_status = lane.get("delegated_rng_service_status")
+            if isinstance(raw_status, str):
+                delegated_rng_service_status = raw_status
+        rows.append(
+            DelegatedRngServiceEmitRow(
+                sample_id=sample_id,
+                reading=delegated_rng_service_emit_reading(sample_id, report),
+                output_path=display_path(output_path),
+                static_gate=checker_static_gate_verdict(report),
+                terminal_outcome=terminal_outcome_text(report),
+                reserve_detail=problem2_reserve_detail(report),
+                delegated_rng_service_status=delegated_rng_service_status,
+                first_line_status=helper_plain_status(
+                    report, "authoritative_room_first_scenario_actual_adoption"
+                ),
+                reserve_lane_status=helper_plain_status(
+                    report, "authoritative_room_reserve_strengthening_lane"
+                ),
+            )
+        )
+    return rows
+
+
+def build_delegated_rng_service_emit_manifest(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_problem2_scenario_payload,
+) -> dict[str, object]:
+    rows = build_delegated_rng_service_emit_rows(output_dir=output_dir, emitter=emitter)
+    manifest = {
+        "package_id": "delegated-rng-service",
+        "title": "delegated RNG service reserve package",
+        "current_reading": (
+            "`p09 / p07 / p08` を repo-local output dir に materialize し、"
+            "`delegated_rng_service` provider placement practical line を "
+            "reached / guard-only contrast の 3 本で再確認する helper-local command。"
+            " final public provider receipt schema ではない。"
+        ),
+        "command": "python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service",
+        "sample_bundle_doc": PROBLEM_SAMPLE_BUNDLE_DOCS["problem2"],
+        "output_dir": display_path(output_dir),
+        "room_profile_provider": "fairness_source = delegated_rng_service",
+        "room_profile_claim": "fairness_claim = opaque_authority_trust",
+        "provider_boundary_refs": list(DELEGATED_RNG_SERVICE_PROVIDER_BOUNDARY_REFS),
+        "optional_attachment_refs": list(DELEGATED_RNG_SERVICE_OPTIONAL_ATTACHMENT_REFS),
+        "anchor_refs": list(DELEGATED_RNG_SERVICE_ANCHOR_REFS),
+        "rows": [asdict(row) for row in rows],
+        "stop_line": list(DELEGATED_RNG_SERVICE_EMIT_STOP_LINE),
+    }
+    output_dir.mkdir(parents=True, exist_ok=True)
+    summary_md_path = reserve_package_summary_markdown_path(output_dir)
+    summary_json_path = reserve_package_summary_json_path(output_dir)
+    manifest["package_summary_markdown"] = display_path(summary_md_path)
+    manifest["package_summary_json"] = display_path(summary_json_path)
+    summary_json_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    summary_md_path.write_text(
+        render_delegated_rng_service_emit(rows, output_dir=output_dir),
+        encoding="utf-8",
+    )
+    return manifest
+
+
+def render_delegated_rng_service_emit(
+    rows: list[DelegatedRngServiceEmitRow],
+    *,
+    output_dir: Path,
+) -> str:
+    lines = [
+        "delegated RNG service reserve package",
+        "",
+        "`delegated_rng_service` provider placement practical line を `p09 / p07 / p08` で再確認する repo-local reserve helper。",
+        "",
+        f"sample bundle doc: {PROBLEM_SAMPLE_BUNDLE_DOCS['problem2']}",
+        "command: python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service",
+        f"output dir: {display_path(output_dir)}",
+        f"package summary markdown: {display_path(reserve_package_summary_markdown_path(output_dir))}",
+        f"package summary json: {display_path(reserve_package_summary_json_path(output_dir))}",
+        "room profile provider: fairness_source = delegated_rng_service",
+        "room profile claim: fairness_claim = opaque_authority_trust",
+        "",
+        "provider boundary refs:",
+    ]
+    for ref in DELEGATED_RNG_SERVICE_PROVIDER_BOUNDARY_REFS:
+        lines.append(f"- {ref}")
+    lines.extend(
+        [
+            "",
+            "optional attachment refs:",
+        ]
+    )
+    for ref in DELEGATED_RNG_SERVICE_OPTIONAL_ATTACHMENT_REFS:
+        lines.append(f"- {ref}")
+    lines.append("")
+    for row in rows:
+        lines.append(f"- {row.sample_id}: {row.reading}")
+        lines.append(f"  output: {row.output_path}")
+        lines.append(f"  static_gate: {row.static_gate}")
+        lines.append(f"  terminal_outcome: {row.terminal_outcome}")
+        lines.append(f"  reserve_detail: {row.reserve_detail}")
+        lines.append(f"  delegated_rng_service_status: {row.delegated_rng_service_status}")
+        lines.append(f"  first_line_status: {row.first_line_status}")
+        lines.append(f"  reserve_lane_status: {row.reserve_lane_status}")
+        lines.append("")
+    lines.append("stop line:")
+    for item in DELEGATED_RNG_SERVICE_EMIT_STOP_LINE:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "anchor refs:",
+        ]
+    )
+    for ref in DELEGATED_RNG_SERVICE_ANCHOR_REFS:
+        lines.append(f"- {ref}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- `p09` reached、`p07 / p08` guard-only の provider placement cut を repo-local summary に materialize する narrow helper である。",
+            "- final public provider receipt schema、delegated provider attestation public contract、combined witness/provider public contract には上げない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_delegated_rng_service_emit_from_runtime(
+    *,
+    output_format: str,
+    output_dir: Path | None = None,
+) -> str:
+    output_dir = output_dir or default_emit_reserve_output_dir("delegated-rng-service")
+    manifest = build_delegated_rng_service_emit_manifest(output_dir=output_dir)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    rows = [DelegatedRngServiceEmitRow(**row) for row in manifest["rows"]]
+    return render_delegated_rng_service_emit(rows, output_dir=output_dir)
 
 
 def parser_companion_inspector_command(
@@ -3678,6 +3897,14 @@ def main(argv: list[str] | None = None) -> int:
             if args.package_id == "auditable-authority-witness":
                 print(
                     render_auditable_authority_witness_emit_from_runtime(
+                        output_format=args.format,
+                        output_dir=output_dir,
+                    )
+                )
+                return 0
+            if args.package_id == "delegated-rng-service":
+                print(
+                    render_delegated_rng_service_emit_from_runtime(
                         output_format=args.format,
                         output_dir=output_dir,
                     )

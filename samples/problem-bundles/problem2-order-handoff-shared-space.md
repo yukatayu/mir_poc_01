@@ -135,19 +135,36 @@ python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-wi
 - room profile claim と witness payload を collapse せず、
   minimal witness core strengthening を helper-local reserve package に留めている current cut を確認できる。
 
-4. representative / reserve / negative pair をまとめて見る
+4. `delegated_rng_service` reserve package を単独で materialize する
+
+```bash
+python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service
+```
+
+見るべき結果:
+
+- `target/current-l2-guided/reserve-packages/delegated-rng-service` 配下に、
+  `p09 / p07 / p08` の run-source-sample JSON と
+  `package-summary.md` / `package-summary.json` が出る。
+- `p09` は delegated provider placement reached、
+  `p07` は authority-rng baseline contrast、
+  `p08` は reconnect contrast として分かれて見える。
+- provider placement と authority commit owner を collapse せず、
+  optional attachment first の practical reserve package に留めている current cut を確認できる。
+
+5. representative / reserve / negative pair をまとめて見る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py matrix problem2
 ```
 
-5. docs / Lean artifact / anchor spec-report まで一本道で辿る
+6. docs / Lean artifact / anchor spec-report まで一本道で辿る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py bundle problem2
 ```
 
-6. parser-side companion / mapping まで同じ読みに揃える
+7. parser-side companion / mapping まで同じ読みに揃える
 
 ```bash
 python3 scripts/current_l2_guided_samples.py mapping
@@ -158,7 +175,7 @@ python3 scripts/current_l2_guided_samples.py mapping
 - `p05-dice-owner-guarded-chain`
   - auditable-authority-witness pre-default guard-only comparison
 - `p09-dice-delegated-rng-provider-placement`
-  - delegated RNG practical reserve route
+  - delegated RNG practical reserve route / delegated-rng-service package representative
 - `p13-dice-late-join-missing-publication-witness`
   - publication witness 欠如 negative
 - `p14-dice-late-join-handoff-before-publication`

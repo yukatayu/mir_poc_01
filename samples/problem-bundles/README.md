@@ -40,6 +40,9 @@
 - Problem 2 の `auditable_authority_witness` reserve package を単独で materialize したいときは
   `python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness`
   を使う。
+- Problem 2 の `delegated_rng_service` reserve package を単独で materialize したいときは
+  `python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service`
+  を使う。
 - doc 側と helper 側の quickstart が揃っているかを narrow に確認したいときは
   `python3 scripts/current_l2_guided_samples.py quickstart-parity`
   を使う。
