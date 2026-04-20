@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 09:26 JST
+最終更新: 2026-04-20 09:51 JST
 
 ## この文書について
 
@@ -32,7 +32,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 91 perform-head / request-clause bundle attachment comparison
   - Package 92 finite-index strong typing first layer
   - Package 93 Lean-first formal skeleton hardening
   - Package 94 theorem-first and model-check second-line carrier
@@ -67,7 +66,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `91` phase6-perform-head-request-clause-bundle-attachment comparison | perform head structural carrier と request clause suite carrier をどの combined carrier で narrow に束ねるか | `M` | `Macro 3/5` | `Stage3RequestHeadClauseBundle` thin wrapper first を current compare floor に置き、flatten/generic attachment は retained alternative に残す | combined carrier の current first compare floor を source-backed に置き、span-rich diagnostics / final grammar / final public API と混線させずに閉じられる |
 | `92` first strong typing finite-index layer | finite decidable index fragment を current sample に対して static carrier / sample / docs まで実装する | `L` | `Macro 5` | checker-adjacent principal を維持し、IFC / capture / lifetime / simple cost first layer を thin static carrier で actualize する | valid/invalid sample 群と docs default が drift なく揃い、stronger typed surface を still non-principal に保てる |
 | `93` Lean-first formal skeleton hardening | first strong typing layer と current proof obligations を Lean-first skeleton / sample explanation に繋ぎ直す | `M` | `Macro 5` | `samples/lean/foundations/` と generated current-L2 corpus の役割差を保ち、first theorem placeholders を explanation 付きで固定する | actual small proof / generated stub / docs reading が一致し、Package 94 の bridge work を受けられる |
 | `94` theorem-first and model-check second-line carrier | theorem-first bridge と model-check second-line carrier を current samples / artifacts / previews へ narrow に同期する | `M` | `Macro 5/7` | notebook-first theorem line、row-local model-check carrier、brand-neutral reserve を維持する | theorem/model-check preview と stop line が current samples 上で drift なく読める |
@@ -108,30 +106,28 @@
 - kept later:
   stronger typed source principal、checker-hint / diagnostics widening beyond IFC trio、actual checker payload family、final typed calculus、final IFC syntax、final public verifier contract
 
-## active package notes
-
 ### Package 91 — phase6-perform-head-request-clause-bundle-attachment comparison
 
 - current reading:
-  next active line。Package 89/90 の separate carrier minimum を保ったまま、`Stage3RequestHeadClauseBundle { perform_head, clause_suite, attachment_frame_kind }` thin wrapper first を current compare floor に置く。
-- current first choice:
-  request-local fixed two-slot suite を `perform` head へ collapse させず、flatten ではなく thin bundle として束ねる。
-- evidence anchor:
-  `specs/examples/562`
-  `specs/examples/563`
+  close 済み。Package 89 / 90 の separate carrier minimum を保ったまま、`Stage3RequestHeadClauseBundle { perform_head, clause_suite, attachment_frame_kind }` thin wrapper first を `CurrentL2RequestHeadClauseBundleManifest`、`Stage3RequestAttachmentFrameKind`、`parse_stage3_request_head_clause_bundle_text()` に actualize した。
+- close evidence:
   `specs/examples/564`
-  `crates/mir-ast/tests/current_l2_request_clause_suite_manifest.rs`
-  `crates/mir-ast/tests/current_l2_perform_head_manifest.rs`
-- stop line:
+  `specs/examples/565`
+  `crates/mir-ast/src/current_l2.rs`
+  `crates/mir-ast/tests/current_l2_request_head_clause_bundle_manifest.rs`
+  `crates/mir-ast/tests/current_l2_stage3_request_head_clause_bundle_spike.rs`
+- kept later:
   span-rich diagnostics
   final grammar
   final public parser / checker / runtime surface
   full `Program` lowering
 
+## active package notes
+
 ### Package 92 — first strong typing finite-index layer
 
 - current reading:
-  Package 91 close 後の first strong-typing implementation line。finite decidable index fragment を checker-adjacent first layer として actualize し、IFC / capture / lifetime / simple cost sample 群を static carrier へ繋ぐ。
+  current active line。finite decidable index fragment を checker-adjacent first layer として actualize し、IFC / capture / lifetime / simple cost sample 群を static carrier へ繋ぐ。
 - target corpus:
   `p06`
   `p10`
@@ -693,10 +689,9 @@
 
 ## next reopen order
 
-1. Package 91 で perform-head / request-clause bundle attachment compare floor を閉じる。
-2. Package 92 で finite-index strong typing first layer を static carrier / sample / docs に actualize する。
-3. Package 93 で Lean-first formal skeleton と日本語 explanation の drift を閉じる。
-4. Package 94 で theorem-first / model-check second-line bridge を narrow に同期する。
-5. Package 95 と 96 で order/handoff source surface と authoritative-room first scenario を tighten する。
-6. Package 97 で reserve strengthening を first completion line から切り分ける。
-7. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。
+1. Package 92 で finite-index strong typing first layer を static carrier / sample / docs に actualize する。
+2. Package 93 で Lean-first formal skeleton と日本語 explanation の drift を閉じる。
+3. Package 94 で theorem-first / model-check second-line bridge を narrow に同期する。
+4. Package 95 と 96 で order/handoff source surface と authoritative-room first scenario を tighten する。
+5. Package 97 で reserve strengthening を first completion line から切り分ける。
+6. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。

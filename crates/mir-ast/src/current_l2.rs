@@ -202,6 +202,45 @@ pub fn current_l2_perform_head_manifest() -> &'static CurrentL2PerformHeadManife
     &CURRENT_L2_PERFORM_HEAD_MANIFEST
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CurrentL2RequestHeadClauseBundleManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_ACCEPTED_SURFACE_REFS: &[&str] = &[
+    "stage3_perform_on_head_surface",
+    "stage3_perform_via_head_surface",
+    "stage3_request_clause_suite_surface",
+];
+
+const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_CODE_ANCHOR_REFS: &[&str] = &[
+    "mir_ast_current_l2_module",
+    "stage3_request_head_clause_bundle_tests",
+];
+
+const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_RETAINED_LATER_REFS: &[&str] = &[
+    "span_rich_diagnostics",
+    "final_grammar",
+    "final_public_parser_checker_runtime_surface",
+    "full_program_lowering",
+];
+
+pub const CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_MANIFEST: CurrentL2RequestHeadClauseBundleManifest =
+    CurrentL2RequestHeadClauseBundleManifest {
+        carrier_kind: "current_l2_nonproduction_request_head_clause_bundle",
+        accepted_surface_refs: CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_ACCEPTED_SURFACE_REFS,
+        code_anchor_refs: CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_CODE_ANCHOR_REFS,
+        retained_later_refs: CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_RETAINED_LATER_REFS,
+    };
+
+pub fn current_l2_request_head_clause_bundle_manifest()
+-> &'static CurrentL2RequestHeadClauseBundleManifest {
+    &CURRENT_L2_REQUEST_HEAD_CLAUSE_BUNDLE_MANIFEST
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Stage3PerformTargetRef {
     On(String),
@@ -212,6 +251,18 @@ pub enum Stage3PerformTargetRef {
 pub struct Stage3PerformHead {
     pub op: String,
     pub target_ref: Stage3PerformTargetRef,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Stage3RequestAttachmentFrameKind {
+    RequestLocalTwoSlotSuite,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Stage3RequestHeadClauseBundle {
+    pub perform_head: Stage3PerformHead,
+    pub clause_suite: Stage3RequestClauseSuite,
+    pub attachment_frame_kind: Stage3RequestAttachmentFrameKind,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -884,6 +935,20 @@ pub fn parse_stage3_perform_head_text(source: &str) -> Result<Stage3PerformHead,
         .ok_or_else(|| "missing perform request head".to_string())?;
 
     parse_stage3_perform_head_line(&lines[head_index].text)
+}
+
+/// Non-production stage 3 helper for thin perform-head / request-clause bundle attachment.
+pub fn parse_stage3_request_head_clause_bundle_text(
+    source: &str,
+) -> Result<Stage3RequestHeadClauseBundle, String> {
+    let perform_head = parse_stage3_perform_head_text(source)?;
+    let clause_suite = parse_stage3_request_clause_suite_text(source)?;
+
+    Ok(Stage3RequestHeadClauseBundle {
+        perform_head,
+        clause_suite,
+        attachment_frame_kind: Stage3RequestAttachmentFrameKind::RequestLocalTwoSlotSuite,
+    })
 }
 
 fn collect_stage3_source_lines(source: &str) -> Vec<Stage3SourceLine> {

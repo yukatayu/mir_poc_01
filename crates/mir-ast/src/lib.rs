@@ -27,12 +27,16 @@ The next parser-side follow-up package is fixed as:
 - stage 3 perform head structural carrier
   - `op`
   - `On(target)` / `Via(chain_ref)`
-  - request clause suite bundle attachment remains later
+  - request clause suite bundle attachment reuse
+- stage 3 perform-head / request-clause thin bundle attachment
+  - `Stage3RequestHeadClauseBundle`
+  - `RequestLocalTwoSlotSuite`
+  - perform head / request clause suite parser reuse
 
 These stage 3 parsers are non-production reopen-package carriers, not a final
 public parser API.
 
-Perform head bundle attachment, span-rich diagnostics, and final grammar remain
+Span-rich diagnostics, final grammar, and full public parser integration remain
 later work.
 "#]
 

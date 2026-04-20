@@ -717,7 +717,14 @@ actual-adoption floor では、
   - `Stage3RequestHeadClauseBundle { perform_head, clause_suite, attachment_frame_kind }` thin wrapper first
   - perform head / request clause suite separate minimum cut keep
   - retained alternatives = flatten into head / generic attachment frame
-  - Package 91 compare floor close 後は Package 92 first strong typing finite-index layer、Package 93 Lean-first formal skeleton hardening、Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout の once-through sequence へ進む
+- phase6 perform-head-request-clause-bundle thin-wrapper helper mirror:
+  `specs/examples/565`
+  - `CurrentL2RequestHeadClauseBundleManifest`
+  - `current_l2_request_head_clause_bundle_manifest()`
+  - `Stage3RequestAttachmentFrameKind`
+  - `Stage3RequestHeadClauseBundle`
+  - `parse_stage3_request_head_clause_bundle_text()`
+  - Package 91 helper-local actualization close 後は Package 92 first strong typing finite-index layer、Package 93 Lean-first formal skeleton hardening、Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout の once-through sequence へ進む
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

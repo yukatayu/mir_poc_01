@@ -3651,6 +3651,14 @@
   - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`
 - 今回の要点は、FAQ 10 後の最新 handoff を current explanation source として取り込み、`Package 91 only` へ過度に narrow 化していた queue reading を `Package 91...98` の repo-local once-through near-end sequence へ戻しつつ、`specs/examples/564` を Package 91 compare-floor anchor として追加した点である。これは final public language completion を意味せず、phase6 parser-side closeout と finite-index strong typing / Lean-first skeleton / theorem-first / order-handoff / authoritative-room / docs closeout を staged self-driven package として追えるようにした current memory sync である。
 
+## 2026-04-20 Package 91 thin-wrapper actualization addendum
+
+- `specs/examples/565-current-l2-phase6-perform-head-request-clause-bundle-thin-wrapper-threshold-helper-mirror.md`、`docs/reports/0848-phase6-request-head-clause-bundle-actualization.md`、`crates/mir-ast/src/current_l2.rs`、`crates/mir-ast/src/lib.rs`、`crates/mir-ast/tests/current_l2_request_head_clause_bundle_manifest.rs`、`crates/mir-ast/tests/current_l2_stage3_request_head_clause_bundle_spike.rs`、`Documentation.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`tasks.md`、`progress.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/562-current-l2-phase6-request-clause-suite-publicization-threshold-helper-mirror.md`
+  - `specs/examples/563-current-l2-phase6-perform-head-structural-carrier-threshold-helper-mirror.md`
+  - `specs/examples/564-current-l2-phase6-perform-head-request-clause-bundle-attachment-comparison.md`
+- 今回の要点は、Package 91 を compare floor のまま残さず、`Stage3RequestHeadClauseBundle` thin wrapper first を helper-local non-production parser carrier として actualize し、current live queue を Package 92 first strong typing finite-index layer 先頭へ進めた点である。これは final parser grammar や final public parser/checker/runtime surface を意味せず、perform head / request clause suite separate minimum を保った thin wrapper actualization である。
+
 ### 2026-04-19 final-layer closeout handoff integration
 
 - `sub-agent-pro/codex_final_layer_closeout_handoff_2026-04-19.md`、`specs/examples/520-current-l2-final-layer-closeout-defaults-and-reopened-selfdriven-queue.md`、`docs/reports/0801-final-layer-closeout-handoff-integration.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/00-index.md`、`plan/01-status-at-a-glance.md`、`plan/10-roadmap-overall.md`、`plan/11-roadmap-near-term.md`、`plan/12-open-problems-and-risks.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md` の今回更新分は、追加で次を主根拠にする。
