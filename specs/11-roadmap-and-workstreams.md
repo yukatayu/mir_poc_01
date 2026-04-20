@@ -909,6 +909,10 @@ actual-adoption floor では、
   `specs/examples/604`
   - `reopen-map problem2`、`lane problem2-final-public-seams`、`residuals`、Problem 2 bundle doc を executable scenario loop 側へ再同期し、`emit-scenario problem2` → lane summary → residual summary の reopen order を actualize してよい
   - Package 131 close 後の current active queue は Package 132 after-loop closeout sync と later mixed/user-spec residual である
+- once-through closeout summary sync:
+  `specs/examples/605`
+  - `closeout` helper を actualize し、Package 127...131 executable loop 後の current first line / mixed-gate lane / true user-spec residual / next self-driven queue を 1 枚の helper-local summary に actualize してよい
+  - Package 132 close 後の current active queue は Package 133 reserve integration entrypoint sync / Package 134 parser-side residual closeout sync / Package 135 true user-spec residual freeze sync である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

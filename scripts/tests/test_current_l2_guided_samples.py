@@ -1093,6 +1093,75 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             any("current-l2 remaining residual lane summary" in call.args[0] for call in write.mock_calls)
         )
 
+    def test_once_through_closeout_summary_text_mentions_first_lines_and_residual_boundaries(
+        self,
+    ) -> None:
+        text = guided.render_once_through_closeout_summary_from_runtime(
+            guided.problem_specs(),
+            output_format="pretty",
+        )
+
+        self.assertIn("current-l2 once-through closeout summary", text)
+        self.assertIn("current first lines:", text)
+        self.assertIn("problem1", text)
+        self.assertIn("problem2", text)
+        self.assertIn("syntax-modality", text)
+        self.assertIn("emit-theorem problem1", text)
+        self.assertIn("emit-scenario problem2", text)
+        self.assertIn("mixed-gate lanes:", text)
+        self.assertIn("problem1-final-public-seams", text)
+        self.assertIn("problem2-final-public-seams", text)
+        self.assertIn("true user-spec residuals:", text)
+        self.assertIn("final public verifier contract", text)
+
+    def test_once_through_closeout_summary_json_contains_next_packages(self) -> None:
+        rendered = guided.render_once_through_closeout_summary_from_runtime(
+            guided.problem_specs(),
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(
+            payload["manifest_kind"],
+            "current_l2_once_through_closeout_summary",
+        )
+        self.assertEqual(
+            [row["line_id"] for row in payload["current_first_lines"]],
+            ["problem1", "problem2", "syntax-modality"],
+        )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
+            payload["executable_entry_commands"],
+        )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+            payload["executable_entry_commands"],
+        )
+        self.assertEqual(
+            [row["package_id"] for row in payload["next_self_driven_packages"]],
+            ["133", "134", "135"],
+        )
+        self.assertIn(
+            "installed-binary / packaging / FFI / engine adapter / host integration target",
+            payload["true_user_spec_residuals"],
+        )
+
+    def test_main_closeout_command_uses_renderer(self) -> None:
+        fake_text = "current-l2 once-through closeout summary\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_once_through_closeout_summary_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["closeout"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("current-l2 once-through closeout summary" in call.args[0] for call in write.mock_calls)
+        )
+
     def test_problem1_final_public_seam_lane_text_mentions_component_order_and_stop_line(self) -> None:
         text = guided.render_residual_lane_from_runtime(
             "problem1-final-public-seams",

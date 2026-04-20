@@ -47,6 +47,10 @@
   1 枚で圧縮して見たいときは
   `python3 scripts/current_l2_guided_samples.py residuals`
   を使う。
+- executable loop 群を踏まえた current first line / mixed-gate lane / true user-spec residual / next self-driven queue を
+  1 枚で見たいときは
+  `python3 scripts/current_l2_guided_samples.py closeout`
+  を使う。
 - syntax / modality の final marker lane だけを個別に見直したいときは
   `python3 scripts/current_l2_guided_samples.py lane syntax-modality-final-marker`
   を使う。

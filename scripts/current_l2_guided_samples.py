@@ -238,6 +238,79 @@ GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
     "upper-layer application target beyond authoritative-room first scenario",
 )
 
+ONCE_THROUGH_CLOSEOUT_CURRENT_FIRST_LINES = (
+    {
+        "line_id": "problem1",
+        "summary": (
+            "checker-adjacent first strong typing layer / theorem-first notebook-first transport / "
+            "row-local model-check carrier first"
+        ),
+    },
+    {
+        "line_id": "problem2",
+        "summary": (
+            "relation decomposition principal / authoritative-room first default / "
+            "witness-provider public shape later keep"
+        ),
+    },
+    {
+        "line_id": "syntax-modality",
+        "summary": (
+            "semantic honesty first / lambda_circle_box partial basis keep / "
+            "guarded・MDTT・MTT・Fitch-style stronger family keep"
+        ),
+    },
+)
+
+ONCE_THROUGH_CLOSEOUT_EXECUTABLE_ENTRY_COMMANDS = (
+    (
+        "cargo run -q -p mir-runtime --example mir_current_l2 -- "
+        "check-source-sample "
+        "samples/prototype/current-l2-typed-proof-model-check/"
+        "p10-typed-authorized-fingerprint-declassification.txt "
+        "--format pretty"
+    ),
+    "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
+    "python3 scripts/current_l2_guided_samples.py emit-scenario problem2",
+    "python3 scripts/current_l2_guided_samples.py reopen-map",
+    "python3 scripts/current_l2_guided_samples.py residuals",
+)
+
+ONCE_THROUGH_CLOSEOUT_NEXT_SELF_DRIVEN_PACKAGES = (
+    {
+        "package_id": "133",
+        "title": "reserve integration entrypoint sync",
+        "summary": (
+            "theorem-first external pilot / auditable_authority_witness / delegated_rng_service / "
+            "model-check second-line reserve を reopen order 付きで保つ"
+        ),
+    },
+    {
+        "package_id": "134",
+        "title": "parser-side residual closeout sync",
+        "summary": (
+            "companion surface / parser-side tranche / final parser-checker-runtime API residual を "
+            "closeout queue と混ぜずに保つ"
+        ),
+    },
+    {
+        "package_id": "135",
+        "title": "true user-spec residual freeze sync",
+        "summary": (
+            "packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target "
+            "を true user-spec residual として固定する"
+        ),
+    },
+)
+
+ONCE_THROUGH_CLOSEOUT_STOP_LINE = (
+    "final public parser / checker / runtime API",
+    "final public verifier contract",
+    "final public witness/provider/artifact contract",
+    "exhaustive shared-space catalog",
+    "installed-binary / packaging / FFI / engine adapter / host integration target",
+)
+
 REMAINING_RESIDUAL_LANE_ORDER = (
     "problem1-final-public-seams",
     "problem2-final-public-seams",
@@ -1750,6 +1823,128 @@ def render_remaining_residual_lane_summary_from_runtime(
     return render_remaining_residual_lane_summary(specs)
 
 
+def build_once_through_closeout_manifest(specs: Mapping[str, ProblemSpec]) -> dict[str, object]:
+    residual_manifest = build_remaining_residual_lane_manifest(specs)
+    return {
+        "manifest_kind": "current_l2_once_through_closeout_summary",
+        "title": "current-l2 once-through closeout summary",
+        "current_reading": (
+            "Package 127...131 で揃えた executable loop 群を踏まえて、repo-local once-through near-end "
+            "completion reading と remaining mixed gate / true user-spec residual を 1 つの helper-local "
+            "summary に再圧縮して読む。"
+        ),
+        "current_first_lines": [
+            {
+                "line_id": row["line_id"],
+                "summary": row["summary"],
+            }
+            for row in ONCE_THROUGH_CLOSEOUT_CURRENT_FIRST_LINES
+        ],
+        "executable_entry_commands": list(ONCE_THROUGH_CLOSEOUT_EXECUTABLE_ENTRY_COMMANDS),
+        "mixed_gate_lanes": list(residual_manifest["recommended_order"]),
+        "next_self_driven_packages": [
+            {
+                "package_id": row["package_id"],
+                "title": row["title"],
+                "summary": row["summary"],
+            }
+            for row in ONCE_THROUGH_CLOSEOUT_NEXT_SELF_DRIVEN_PACKAGES
+        ],
+        "true_user_spec_residuals": list(GLOBAL_TRUE_USER_SPEC_RESIDUALS),
+        "stop_line": list(ONCE_THROUGH_CLOSEOUT_STOP_LINE),
+        "anchor_refs": [
+            "specs/examples/603-current-l2-problem1-executable-residual-reopen-sync.md",
+            "specs/examples/604-current-l2-problem2-executable-residual-reopen-sync.md",
+            "specs/examples/596-current-l2-remaining-residual-lane-summary-actualization.md",
+            "specs/examples/597-current-l2-problem1-final-public-seam-lane-helper-actualization.md",
+            "specs/examples/598-current-l2-problem2-final-public-seam-lane-helper-actualization.md",
+            "specs/examples/599-current-l2-syntax-modality-final-marker-lane-helper-actualization.md",
+        ],
+    }
+
+
+def render_once_through_closeout_summary(specs: Mapping[str, ProblemSpec]) -> str:
+    manifest = build_once_through_closeout_manifest(specs)
+    lines = [
+        str(manifest["title"]),
+        "",
+        str(manifest["current_reading"]),
+        "",
+        "current first lines:",
+    ]
+    for row in manifest["current_first_lines"]:
+        lines.append(f"- {row['line_id']}: {row['summary']}")
+    lines.extend(
+        [
+            "",
+            "executable entry commands:",
+        ]
+    )
+    for command in manifest["executable_entry_commands"]:
+        lines.append(f"- {command}")
+    lines.extend(
+        [
+            "",
+            "mixed-gate lanes:",
+        ]
+    )
+    for lane_id in manifest["mixed_gate_lanes"]:
+        lines.append(f"- {lane_id}")
+    lines.extend(
+        [
+            "",
+            "next self-driven packages:",
+        ]
+    )
+    for row in manifest["next_self_driven_packages"]:
+        lines.append(f"- {row['package_id']}: {row['title']}")
+        lines.append(f"  {row['summary']}")
+    lines.extend(
+        [
+            "",
+            "true user-spec residuals:",
+        ]
+    )
+    for item in manifest["true_user_spec_residuals"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "stop line:",
+        ]
+    )
+    for item in manifest["stop_line"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "anchor refs:",
+        ]
+    )
+    for ref in manifest["anchor_refs"]:
+        lines.append(f"- {ref}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- current helper-local closeout summary であり、final public parser / checker / runtime API や final public verifier contract の確定を意味しない。",
+            "- executable loop を揃えた後の near-end reading を短く保つための summary であり、mixed gate や true user-spec residual を消去しない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_once_through_closeout_summary_from_runtime(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+) -> str:
+    manifest = build_once_through_closeout_manifest(specs)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    return render_once_through_closeout_summary(specs)
+
+
 def residual_lane_ids() -> tuple[str, ...]:
     return REMAINING_RESIDUAL_LANE_ORDER
 
@@ -2725,6 +2920,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     residuals_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    closeout_parser = subparsers.add_parser(
+        "closeout",
+        help="once-through closeout の current reading を executable loop 起点で圧縮表示する",
+    )
+    closeout_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     lane_parser = subparsers.add_parser(
         "lane",
         help="remaining residual lane を 1 本ずつ表示する",
@@ -2794,6 +2995,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.subcommand == "residuals":
         print(render_remaining_residual_lane_summary_from_runtime(specs, output_format=args.format))
+        return 0
+
+    if args.subcommand == "closeout":
+        print(render_once_through_closeout_summary_from_runtime(specs, output_format=args.format))
         return 0
 
     if args.subcommand == "lane":

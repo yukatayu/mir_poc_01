@@ -859,6 +859,8 @@
   - current Phase 6 / Package 130 closeout として、`reopen-map problem1`、`lane problem1-final-public-seams`、Problem 1 bundle doc を executable evidence 側へ再同期し、`check-source-sample` → `emit-theorem problem1` → lane summary の reopen order を narrow に読む補助文書。
 - `specs/examples/604-current-l2-problem2-executable-residual-reopen-sync.md`
   - current Phase 6 / Package 131 closeout として、`reopen-map problem2`、`lane problem2-final-public-seams`、`residuals`、Problem 2 bundle doc を executable scenario loop 側へ再同期し、`emit-scenario problem2` → lane summary → residual summary の reopen order を narrow に読む補助文書。
+- `specs/examples/605-current-l2-once-through-closeout-summary-sync.md`
+  - current Phase 6 / Package 132 closeout として、`closeout` helper を actualize し、Package 127...131 executable loop 後の current first line / mixed-gate lane / true user-spec residual / next self-driven queue を helper-local once-through summary として narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

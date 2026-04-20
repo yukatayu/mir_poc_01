@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 19:34 JST
+最終更新: 2026-04-20 19:45 JST
 
 ## この文書について
 
@@ -35,7 +35,9 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 132 repo-local once-through closeout sync after executable loops
+  - Package 133 reserve integration entrypoint sync
+  - Package 134 parser-side residual closeout sync
+  - Package 135 true user-spec residual freeze sync
   を先頭に追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +65,9 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `132` repo-local once-through closeout sync after executable loops | executable loop 群を踏まえた near-end closeout snapshot を stale wording なしで再構成する | `M` | `Macro 5/6/7` | Package 127...131 の executable loop を current completion reading に接続し、mixed gate / true user-spec residual / reserve integration lane を再圧縮する | queue drift が消え、remaining work が mixed / user-spec / reserve integration に分かれて読める |
+| `133` reserve integration entrypoint sync | reserve integration lane を executable closeout summary 後の next reopen point として再構成する | `M` | `Macro 5/6/7` | theorem-first external pilot / auditable_authority_witness / delegated_rng_service / model-check second-line reserve を reopen order と stop line 付きで helper/doc に保つ | reserve integration lane が final public contract 群と混ざらずに読める |
+| `134` parser-side residual closeout sync | parser-side companion / tranche residual を repo-local closeout line と分離して保つ | `M` | `Macro 5/7` | companion surface / parser-side tranche / final parser-checker-runtime API residual を closeout queue と混ぜずに圧縮する | parser-side residual が mixed gate として独立に読める |
+| `135` true user-spec residual freeze sync | true user-spec residual を self-driven queue から明示的に切り離す | `S` | `Macro 7/8` | packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer app target を explicit hold line に固定する | user-spec residual が reserve / mixed gate から分離して読める |
 
 ## recently closed package note
 
@@ -602,12 +606,45 @@
 ### Package 132 — repo-local once-through closeout sync after executable loops
 
 - current reading:
-  Package 127...131 で揃った executable loop 群を踏まえて、remaining mixed gate / true user-spec residual / reserve integration lane を stale wording なしで再圧縮する。
+  close 済み。Package 127...131 で揃った executable loop 群を踏まえて、`closeout` helper と snapshot docs に current first line / mixed-gate lane / true user-spec residual / next self-driven queue を再圧縮した。
 - current recommendation:
-  comparison doc を増やす前に、repo-local near-end completion reading と remaining mixed/user-spec split を最新 evidence に合わせて固める。
+  `closeout` helper を current once-through reading の単一入口にし、次の queue は reserve integration / parser-side residual / true user-spec residual freeze へ分離する。
 - stop line:
   final public language completion claim
   packaging / installed binary / FFI / engine adapter adoption
+  exhaustive shared-space catalog adoption
+
+### Package 133 — reserve integration entrypoint sync
+
+- current reading:
+  theorem-first external pilot、`auditable_authority_witness`、`delegated_rng_service`、model-check second-line reserve を、Problem 1 / Problem 2 closeout helper 後の next reopen order として保つ。
+- current recommendation:
+  reserve package を final public contract 群へ premature に上げず、current default room profile / theorem-first pilot と両立する reserve lane として narrow に圧縮する。
+- stop line:
+  final public theorem contract
+  final public witness/provider/artifact contract
+  concrete theorem/model-check production binding
+
+### Package 134 — parser-side residual closeout sync
+
+- current reading:
+  parser companion surface、parser-side tranche、final parser/checker/runtime API residual を repo-local once-through closeout line と混ぜないように再圧縮する。
+- current recommendation:
+  parser-side helper / mapping / inspector の current non-production cut は保ったまま、final parser grammar / final public parser-checker-runtime API を later mixed gate に残す。
+- stop line:
+  final parser grammar
+  final public parser / checker / runtime API
+  public tutorial surface adoption
+
+### Package 135 — true user-spec residual freeze sync
+
+- current reading:
+  packaging / FFI / engine adapter / exhaustive shared-space catalog / upper-layer application target を、self-driven queue から分離した true user-spec residual として固定する。
+- current recommendation:
+  repo-local near-end success を壊さずに、user が決めるべき残件だけを explicit hold line に集約する。
+- stop line:
+  installed binary / packaging adoption
+  concrete host / engine target adoption
   exhaustive shared-space catalog adoption
 
 ### Package 58 — helper / CLI hardening and broader coverage
@@ -1106,4 +1143,6 @@
 
 ## next reopen order
 
-1. Package 132 で executable loop 後の closeout snapshot を stale wording なしで再圧縮する。
+1. Package 133 で reserve integration lane の reopen order を固める。
+2. Package 134 で parser-side residual を once-through closeout line と切り分ける。
+3. Package 135 で true user-spec residual を explicit hold line に固定する。
