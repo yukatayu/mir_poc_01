@@ -845,6 +845,10 @@ actual-adoption floor では、
   `specs/examples/588`
   - `reopen-map` helper と sample bundle doc 側の `現在の mixed gate 再開点` section を actualize し、Problem 1 / Problem 2 の remaining mixed gate と global true user-spec residual を entry command 付きで読み直してよい
   - Package 114 close 後の current active queue は Package 115 Problem 1 theorem/model-check mixed-gate split refresh、Package 116 Problem 2 order-handoff/public-shape mixed-gate split refresh と later mixed/user-spec residual である
+- representative problem split-package map refresh:
+  `specs/examples/589`
+  - `reopen-map problem1|problem2` と sample bundle doc 側の `次の split package` section を actualize し、Problem 1 / Problem 2 の remaining mixed gate を next separate package 名まで narrow に戻してよい
+  - Package 115 / 116 close 後の current active queue は Package 117 Problem 1 typed source principal split、Package 118 Problem 1 theorem public-contract split、Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

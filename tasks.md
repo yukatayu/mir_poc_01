@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 16:10 JST
+最終更新: 2026-04-20 16:18 JST
 
 ## この文書について
 
@@ -35,8 +35,11 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 115 Problem 1 theorem/model-check mixed-gate split refresh
-  - Package 116 Problem 2 order-handoff/public-shape mixed-gate split refresh
+  - Package 117 Problem 1 typed source principal split
+  - Package 118 Problem 1 theorem public-contract split
+  - Package 119 Problem 1 model-check public-contract split
+  - Package 120 Problem 2 source wording / emitted schema split
+  - Package 121 Problem 2 witness-provider public-shape split
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -64,8 +67,11 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `115` Problem 1 theorem/model-check mixed-gate split refresh | Problem 1 remaining mixed gate を typed source principal / theorem public-contract / model-check public-contract の 3 本へ split する | `S-M` | `Macro 5/7` | Problem 1 reopen order と next package を narrow に読めるようにする | Problem 1 mixed gate が separate package に落ちる |
-| `116` Problem 2 order-handoff/public-shape mixed-gate split refresh | Problem 2 remaining mixed gate を source wording / emitted schema と witness-provider public shape の 2 本へ split する | `S-M` | `Macro 5/6` | Problem 2 reopen order と next package を narrow に読めるようにする | Problem 2 mixed gate が separate package に落ちる |
+| `117` Problem 1 typed source principal split | Problem 1 typed residual を theorem/model-check public-contract residual から切り離して narrow にする | `S-M` | `Macro 5/7` | checker-adjacent principal / structural marker first を保ったまま typed reopen point を独立 package に戻す | typed source principal residual が独立 package として読める |
+| `118` Problem 1 theorem public-contract split | Problem 1 theorem public-contract residual を typed / model-check residual から切り離して narrow にする | `S-M` | `Macro 5/7` | review-unit transport first / notebook-consumer object first を保ったまま theorem reopen point を独立 package に戻す | theorem public-contract residual が独立 package として読める |
+| `119` Problem 1 model-check public-contract split | Problem 1 model-check public-contract residual を typed / theorem residual から切り離して narrow にする | `S-M` | `Macro 5/7` | row-local property route first / checker-artifact route first を保ったまま model-check reopen point を独立 package に戻す | model-check public-contract residual が独立 package として読める |
+| `120` Problem 2 source wording / emitted schema split | Problem 2 source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow にする | `S-M` | `Macro 5/6` | edge-row principal / stage-block secondary を保ったまま source wording reopen point を独立 package に戻す | source wording / emitted schema residual が独立 package として読める |
+| `121` Problem 2 witness-provider public-shape split | Problem 2 witness/provider public-shape residual を source wording residual から切り離して narrow にする | `S-M` | `Macro 5/6` | claim/payload split first / route-schema split first を保ったまま witness-provider reopen point を独立 package に戻す | witness-provider public-shape residual が独立 package として読める |
 
 ## recently closed package note
 
@@ -397,7 +403,7 @@
 ### Package 115 — Problem 1 theorem/model-check mixed-gate split refresh
 
 - current reading:
-  next active bundle。reopen-map で aggregate に見える Problem 1 remaining mixed gate を、typed source principal / theorem public-contract / model-check public-contract の separate package へ split する。
+  close 済み。reopen-map で aggregate に見える Problem 1 remaining mixed gate を、typed source principal / theorem public-contract / model-check public-contract の separate package へ split した。
 - current recommendation:
   Problem 1 の mixed gate を 1 枚の reopen map で止めず、次 package が typed / theorem / model-check のどこに掛かるかを narrow に戻す。
 - stop line:
@@ -408,13 +414,68 @@
 ### Package 116 — Problem 2 order-handoff/public-shape mixed-gate split refresh
 
 - current reading:
-  next active bundle。reopen-map で aggregate に見える Problem 2 remaining mixed gate を、source wording / emitted schema と witness-provider public shape の separate package へ split する。
+  close 済み。reopen-map で aggregate に見える Problem 2 remaining mixed gate を、source wording / emitted schema と witness-provider public shape の separate package へ split した。
 - current recommendation:
   Problem 2 の mixed gate を 1 枚の reopen map で止めず、source wording 側と shared-space public shape 側の reopen point を narrow に戻す。
 - stop line:
   final public witness/provider/artifact contract
   exhaustive shared-space catalog
   final public parser / checker / runtime API
+
+### Package 117 — Problem 1 typed source principal split
+
+- current reading:
+  next active bundle。checker-adjacent principal / structural marker first / finite decidable index fragment first を保ったまま、typed source principal residual を theorem/model-check public-contract residual から切り離して narrow にする。
+- current recommendation:
+  `p06` representative と `p10 / p11 / p12 / p15 / p16` 補助 sample の役割差を保ち、typed residual だけを reopen する。
+- stop line:
+  final typed source principal
+  final typed calculus
+  final public verifier contract
+
+### Package 118 — Problem 1 theorem public-contract split
+
+- current reading:
+  next active bundle。review-unit transport first / notebook-consumer object first / theorem-first pilot keep を保ったまま、theorem public-contract residual を typed / model-check residual から切り離して narrow にする。
+- current recommendation:
+  theorem public-contract residual は `bundle problem1` と Lean artifact 導線を主 anchor にし、typed source principal residual や model-check residual と混ぜない。
+- stop line:
+  final public theorem contract
+  concrete theorem prover brand
+  final public verifier contract
+
+### Package 119 — Problem 1 model-check public-contract split
+
+- current reading:
+  next active bundle。row-local property route first / checker-artifact route first / reopen-threshold helper mirror keep を保ったまま、model-check public-contract residual を typed / theorem residual から切り離して narrow にする。
+- current recommendation:
+  model-check residual は `matrix problem1` と `bundle problem1` の row-local carrier 導線を主 anchor にし、property/tool seam の mixed gate を theorem residual と混ぜない。
+- stop line:
+  first settled property language
+  final public checker artifact
+  final public verifier contract
+
+### Package 120 — Problem 2 source wording / emitted schema split
+
+- current reading:
+  next active bundle。edge-row principal / stage-block secondary / serial reserve keep を保ったまま、source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow にする。
+- current recommendation:
+  source wording residual は parser companion / bundle problem2 / surface preview を主 anchor にし、shared-space public-shape residual と混ぜない。
+- stop line:
+  final source-surface handoff wording
+  final emitted-artifact schema
+  final public parser / checker / runtime API
+
+### Package 121 — Problem 2 witness-provider public-shape split
+
+- current reading:
+  next active bundle。claim/payload split first / route-schema split first / representative pair keep を保ったまま、witness-provider public-shape residual を source wording residual から切り離して narrow にする。
+- current recommendation:
+  witness-provider residual は `matrix problem2` / `bundle problem2` / reserve lane の current split を主 anchor にし、source wording residual と混ぜない。
+- stop line:
+  final public witness/provider/artifact contract
+  stronger fairness / replay profile
+  exhaustive shared-space catalog
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -912,6 +973,6 @@
 
 ## next reopen order
 
-1. Package 115 で Problem 1 theorem/model-check mixed gate を typed / theorem / model-check package へ split する。
-2. Package 116 で Problem 2 order-handoff/public-shape mixed gate を source wording / witness-provider package へ split する。
-3. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。
+1. Package 117 で Problem 1 typed source principal residual を独立 package として narrow にする。
+2. Package 118 / 119 で Problem 1 theorem / model-check public-contract residual を separate package として narrow にする。
+3. Package 120 / 121 で Problem 2 source wording residual と witness-provider public-shape residual を separate package として narrow にする。

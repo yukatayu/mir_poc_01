@@ -182,6 +182,7 @@ class ProblemReopenRow:
     entry_commands: tuple[str, ...]
     mixed_gates: tuple[str, ...]
     reopen_guidance: tuple[str, ...]
+    split_packages: tuple[dict[str, object], ...]
     stop_line: tuple[str, ...]
     anchor_refs: tuple[str, ...]
 
@@ -774,6 +775,39 @@ def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
                 "`bundle problem1` と `samples/lean/current-l2/p06-typed-proof-owner-handoff/` を起点に、theorem-first pilot artifact と notebook-first transport floor を確認する。",
                 "parser companion inspector と `bundle problem1` を合わせて見て、row-local model-check carrier / thin experimental companion の範囲を越えて final public checker 契約へ飛ばないことを確認する。",
             ),
+            split_packages=(
+                {
+                    "package_name": "typed source principal split",
+                    "focus": "stronger typed-surface actual adoption",
+                    "commands": (
+                        "python3 scripts/current_l2_guided_samples.py matrix problem1",
+                    ),
+                    "reading": (
+                        "`p06` representative と `p10 / p11 / p12 / p15 / p16` bridge-floor 補助 sample の役割差を保ち、typed source principal を premature に上げない current cut を切り出す。"
+                    ),
+                },
+                {
+                    "package_name": "theorem public-contract split",
+                    "focus": "final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract",
+                    "commands": (
+                        "python3 scripts/current_l2_guided_samples.py bundle problem1",
+                    ),
+                    "reading": (
+                        "review-unit first / notebook-consumer first のまま、theorem-first pilot artifact と Lean sample corpus から final public theorem contract residual を切り出す。"
+                    ),
+                },
+                {
+                    "package_name": "model-check public-contract split",
+                    "focus": "first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract",
+                    "commands": (
+                        "python3 scripts/current_l2_guided_samples.py matrix problem1",
+                        "python3 scripts/current_l2_guided_samples.py bundle problem1",
+                    ),
+                    "reading": (
+                        "row-local property route first / checker-artifact route first を保ったまま、model-check public-contract residual を theorem residual から分けて切り出す。"
+                    ),
+                },
+            ),
             stop_line=PROBLEM_BUNDLE_STOP_LINES["problem1"],
             anchor_refs=PROBLEM_REOPEN_ANCHOR_REFS["problem1"],
         )
@@ -805,6 +839,29 @@ def build_problem_reopen_row(spec: ProblemSpec) -> ProblemReopenRow:
             "`bundle problem2` と parser companion inspector を合わせて見て、edge-row principal / stage-block secondary のまま final source wording や emitted schema を凍らせない current cut を保つ。",
             "shared-space stronger public shape は claim / payload split first を保ったまま、final public witness/provider 契約へは上げずに stop line と user-spec residual を切り分ける。",
         ),
+        split_packages=(
+            {
+                "package_name": "source wording / emitted schema split",
+                "focus": "final source-surface handoff wording / final emitted-artifact schema",
+                "commands": (
+                    "python3 scripts/current_l2_guided_samples.py bundle problem2",
+                ),
+                "reading": (
+                    "edge-row principal / stage-block secondary を保ったまま、source wording と emitted schema residual を witness-provider public shape から分けて切り出す。"
+                ),
+            },
+            {
+                "package_name": "witness-provider public-shape split",
+                "focus": "final public witness schema / provider receipt schema / combined public contract / emitted-handoff contract",
+                "commands": (
+                    "python3 scripts/current_l2_guided_samples.py matrix problem2",
+                    "python3 scripts/current_l2_guided_samples.py bundle problem2",
+                ),
+                "reading": (
+                    "representative / reserve / negative pair の current split を保ったまま、claim / payload split first の shared-space public-shape residual を切り出す。"
+                ),
+            },
+        ),
         stop_line=PROBLEM_BUNDLE_STOP_LINES["problem2"],
         anchor_refs=PROBLEM_REOPEN_ANCHOR_REFS["problem2"],
     )
@@ -830,6 +887,15 @@ def build_problem_reopen_map_manifest(specs: Mapping[str, ProblemSpec]) -> dict[
                 "entry_commands": list(row.entry_commands),
                 "mixed_gates": list(row.mixed_gates),
                 "reopen_guidance": list(row.reopen_guidance),
+                "split_packages": [
+                    {
+                        "package_name": item["package_name"],
+                        "focus": item["focus"],
+                        "commands": list(item["commands"]),
+                        "reading": item["reading"],
+                    }
+                    for item in row.split_packages
+                ],
                 "stop_line": list(row.stop_line),
                 "anchor_refs": list(row.anchor_refs),
             }
@@ -864,6 +930,14 @@ def render_problem_reopen_map(specs: Mapping[str, ProblemSpec]) -> str:
         lines.append("  reopen guidance:")
         for item in row["reopen_guidance"]:
             lines.append(f"    - {item}")
+        if row["split_packages"]:
+            lines.append("  next split packages:")
+            for item in row["split_packages"]:
+                lines.append(f"    - {item['package_name']}")
+                lines.append(f"      focus: {item['focus']}")
+                for command in item["commands"]:
+                    lines.append(f"      command: {command}")
+                lines.append(f"      reading: {item['reading']}")
         lines.append("  anchor refs:")
         for ref in row["anchor_refs"]:
             lines.append(f"    - {ref}")
@@ -1633,6 +1707,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         "reopen-map",
         help="Problem 1 / Problem 2 の mixed-gate reopen point を aggregate summary で表示する",
     )
+    reopen_map_parser.add_argument("problem_id", nargs="?", choices=sorted(problem_specs().keys()))
     reopen_map_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
     mapping_parser = subparsers.add_parser(
@@ -1683,7 +1758,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.subcommand == "reopen-map":
-        print(render_problem_reopen_map_from_runtime(specs, output_format=args.format))
+        selected_specs = specs if args.problem_id is None else {args.problem_id: specs[args.problem_id]}
+        print(render_problem_reopen_map_from_runtime(selected_specs, output_format=args.format))
         return 0
 
     spec = specs[args.problem_id]

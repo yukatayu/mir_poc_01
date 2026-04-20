@@ -768,6 +768,71 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(any("representative problem mixed-gate reopen map" in call.args[0] for call in write.mock_calls))
 
+    def test_problem1_reopen_map_json_contains_three_split_packages(self) -> None:
+        rendered = guided.render_problem_reopen_map_from_runtime(
+            {"problem1": guided.problem_specs()["problem1"]},
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual([row["problem_id"] for row in payload["problem_rows"]], ["problem1"])
+        self.assertEqual(len(payload["problem_rows"][0]["split_packages"]), 3)
+        self.assertEqual(
+            payload["problem_rows"][0]["split_packages"][0]["package_name"],
+            "typed source principal split",
+        )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py matrix problem1",
+            payload["problem_rows"][0]["split_packages"][0]["commands"][0],
+        )
+
+    def test_problem1_reopen_map_text_mentions_split_packages(self) -> None:
+        text = guided.render_problem_reopen_map({"problem1": guided.problem_specs()["problem1"]})
+
+        self.assertIn("next split packages:", text)
+        self.assertIn("typed source principal split", text)
+        self.assertIn("theorem public-contract split", text)
+        self.assertIn("model-check public-contract split", text)
+
+    def test_main_reopen_map_command_accepts_problem_id(self) -> None:
+        fake_text = "problem1 reopen map\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem_reopen_map_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["reopen-map", "problem1"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(any("problem1 reopen map" in call.args[0] for call in write.mock_calls))
+
+    def test_problem2_reopen_map_json_contains_two_split_packages(self) -> None:
+        rendered = guided.render_problem_reopen_map_from_runtime(
+            {"problem2": guided.problem_specs()["problem2"]},
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual([row["problem_id"] for row in payload["problem_rows"]], ["problem2"])
+        self.assertEqual(len(payload["problem_rows"][0]["split_packages"]), 2)
+        self.assertEqual(
+            payload["problem_rows"][0]["split_packages"][0]["package_name"],
+            "source wording / emitted schema split",
+        )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py bundle problem2",
+            payload["problem_rows"][0]["split_packages"][0]["commands"][0],
+        )
+
+    def test_problem2_reopen_map_text_mentions_split_packages(self) -> None:
+        text = guided.render_problem_reopen_map({"problem2": guided.problem_specs()["problem2"]})
+
+        self.assertIn("next split packages:", text)
+        self.assertIn("source wording / emitted schema split", text)
+        self.assertIn("witness-provider public-shape split", text)
+
     def test_main_smoke_all_command_uses_aggregate_renderer(self) -> None:
         fake_text = "representative problem bundle aggregate smoke summary\n..."
 

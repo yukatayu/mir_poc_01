@@ -158,6 +158,18 @@ distributed fairness theorem や exhaustive shared-space catalog を要求しな
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、exhaustive shared-space catalog / packaging / upper-layer target をまとめて見直す。
 
+## 次の split package
+
+- `source wording / emitted schema split`
+  - `python3 scripts/current_l2_guided_samples.py bundle problem2`
+    から入り、edge-row principal / stage-block secondary を保ったまま
+    source wording / emitted schema residual を witness-provider public shape から切り出す。
+- `witness-provider public-shape split`
+  - `python3 scripts/current_l2_guided_samples.py matrix problem2`
+    と `python3 scripts/current_l2_guided_samples.py bundle problem2`
+    から入り、representative / reserve / negative pair の current split を保ったまま
+    shared-space public-shape residual を切り出す。
+
 ## stop line
 
 - final source-surface handoff wording

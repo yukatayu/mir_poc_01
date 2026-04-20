@@ -146,6 +146,22 @@ full dependent type、general theorem proving in compiler、final public checker
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、packaging / host integration / upper-layer application target をまとめて見直す。
 
+## 次の split package
+
+- `typed source principal split`
+  - `python3 scripts/current_l2_guided_samples.py matrix problem1`
+    から入り、`p06` representative と `p10 / p11 / p12 / p15 / p16` 補助 sample の役割差を保ったまま
+    typed source principal の reopen point だけを切り出す。
+- `theorem public-contract split`
+  - `python3 scripts/current_l2_guided_samples.py bundle problem1`
+    と `samples/lean/current-l2/p06-typed-proof-owner-handoff/`
+    から入り、review-unit first / notebook-consumer first のまま theorem public-contract residual を切り出す。
+- `model-check public-contract split`
+  - `python3 scripts/current_l2_guided_samples.py matrix problem1`
+    と `python3 scripts/current_l2_guided_samples.py bundle problem1`
+    を合わせて見て、row-local property route first / checker-artifact route first を保ったまま
+    model-check public-contract residual を切り出す。
+
 ## stop line
 
 - stronger typed source principal promotion
