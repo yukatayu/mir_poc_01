@@ -797,6 +797,14 @@ actual-adoption floor では、
   `specs/examples/576`
   - `p07 / p08 / p09 / p13 / p14` representative bundle を `bundle problem2` helper、representative pair / reserve / negative pair の Lean artifact、anchor spec / report まで actualize してよい
   - Package 102 close 後の current active queue は Package 103 parser-side companion surface bundle と Package 104 parser-side bundle-to-helper bridge である
+- parser-side companion surface bundle actualization:
+  `specs/examples/577`
+  - `p06 / p07 / p08` representative slice を `samples/prototype/current-l2-parser-companion/` と `Stage3RequestHeadClauseBundle` parse test へ actualize してよい
+  - thin experimental companion surface は helper-local / non-production reader aid に留める
+- parser-side bundle-to-helper bridge actualization:
+  `specs/examples/578`
+  - `bundle problem1 / problem2` helper に `parser_companion_path` を actualize してよい
+  - Package 104 close 後の current active queue は Package 105 parser companion inspector と Package 106 parser companion mapping matrix である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

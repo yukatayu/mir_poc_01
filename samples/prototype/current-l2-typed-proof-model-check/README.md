@@ -41,6 +41,7 @@ python3 scripts/current_l2_guided_samples.py bundle problem1
 ```
 
 - `p06` の prototype、`samples/lean/current-l2/p06-typed-proof-owner-handoff/`、anchor になる spec/report を 1 画面で辿れる。
+- `samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt` も同じ bundle から辿れ、parser-side companion surface の first slice を確認できる。
 - `p10 / p11 / p12 / p15 / p16` は補助サンプルとして同じ bundle 内で Lean artifact と一緒に確認できる。
 
 ## あわせて見る補助サンプル

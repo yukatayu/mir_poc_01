@@ -1,0 +1,3 @@
+perform publish_visible_history on authoritative_room
+  require authority_ack
+  ensure history_visible_as_past

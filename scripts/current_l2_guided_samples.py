@@ -291,6 +291,19 @@ def lean_artifact_paths(sample: GuidedSample) -> tuple[str, ...]:
     return tuple(relative_path(path) for path in candidates if path.exists())
 
 
+def parser_companion_path(sample: GuidedSample) -> str | None:
+    companion = (
+        REPO_ROOT
+        / "samples"
+        / "prototype"
+        / "current-l2-parser-companion"
+        / f"{sample.sample_id}.request.txt"
+    )
+    if companion.exists():
+        return relative_path(companion)
+    return None
+
+
 def bundle_commands(spec: ProblemSpec) -> tuple[str, ...]:
     primary = next(sample for sample in spec.samples if sample.primary)
     return (
@@ -315,6 +328,7 @@ def build_problem_bundle_manifest(spec: ProblemSpec) -> dict[str, object]:
             {
                 "sample_id": sample.sample_id,
                 "prototype_path": relative_path(sample.sample_path),
+                "parser_companion_path": parser_companion_path(sample),
                 "summary": sample.summary,
                 "lean_artifacts": lean_artifact_paths(sample),
             }
@@ -324,6 +338,7 @@ def build_problem_bundle_manifest(spec: ProblemSpec) -> dict[str, object]:
             {
                 "sample_id": sample.sample_id,
                 "prototype_path": relative_path(sample.sample_path),
+                "parser_companion_path": parser_companion_path(sample),
                 "summary": sample.summary,
                 "lean_artifacts": lean_artifact_paths(sample),
             }
@@ -353,6 +368,8 @@ def render_problem_bundle(spec: ProblemSpec) -> str:
     for sample in manifest["primary_samples"]:
         lines.append(f"- {sample['sample_id']}: {sample['summary']}")
         lines.append(f"  prototype: {sample['prototype_path']}")
+        if sample["parser_companion_path"] is not None:
+            lines.append(f"  parser companion: {sample['parser_companion_path']}")
         for artifact in sample["lean_artifacts"]:
             lines.append(f"  lean artifact: {artifact}")
 
@@ -360,6 +377,8 @@ def render_problem_bundle(spec: ProblemSpec) -> str:
     for sample in manifest["support_samples"]:
         lines.append(f"- {sample['sample_id']}: {sample['summary']}")
         lines.append(f"  prototype: {sample['prototype_path']}")
+        if sample["parser_companion_path"] is not None:
+            lines.append(f"  parser companion: {sample['parser_companion_path']}")
         for artifact in sample["lean_artifacts"]:
             lines.append(f"  lean artifact: {artifact}")
 

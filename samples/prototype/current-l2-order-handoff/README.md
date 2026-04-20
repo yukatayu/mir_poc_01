@@ -58,6 +58,7 @@ python3 scripts/current_l2_guided_samples.py bundle problem2
 ```
 
 - `p07 / p08` の prototype と `samples/lean/current-l2/` 側の対応 artifact、anchor になる spec/report を 1 画面で辿れる。
+- `samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt` と `p08-dice-stale-reconnect-refresh.request.txt` も同じ bundle から辿れ、parser-side companion surface の representative pair を確認できる。
 - `p09` の reserve route と `p13 / p14` の negative pair も同じ bundle 内で確認できる。
 
 ## reserve / negative として見るサンプル

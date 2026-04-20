@@ -1,0 +1,3 @@
+perform refresh_stale_session via authoritative_room
+  require stale_session
+  ensure refreshed_before_rejoin

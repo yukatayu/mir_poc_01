@@ -4300,3 +4300,16 @@
   - `docs/reports/0857-package101-102-problem-bundle-actualization.md`
   - `scripts/current_l2_guided_samples.py`
   - `scripts/tests/test_current_l2_guided_samples.py`
+
+## 2026-04-20 Package 103/104 parser-side companion and bridge addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/16-shared-space-membership-and-example-boundary.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`samples/prototype/current-l2-typed-proof-model-check/README.md`、`samples/prototype/current-l2-order-handoff/README.md`、`samples/prototype/current-l2-parser-companion/README.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/577-current-l2-parser-side-companion-surface-bundle-actualization.md`
+  - `specs/examples/578-current-l2-parser-side-bundle-to-helper-bridge-actualization.md`
+  - `docs/reports/0858-package103-104-parser-side-companion-and-bridge.md`
+  - `crates/mir-ast/tests/current_l2_stage3_request_head_clause_bundle_sample_bundle.rs`
+  - `samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt`
+  - `samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt`
+  - `samples/prototype/current-l2-parser-companion/p08-dice-stale-reconnect-refresh.request.txt`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`
