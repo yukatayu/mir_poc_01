@@ -4510,3 +4510,12 @@
   - `crates/mir-runtime/src/current_l2_cli.rs`
   - `crates/mir-runtime/tests/current_l2_operational_cli.rs`
   - `scripts/tests/test_problem_sample_bundles.py`
+
+## 2026-04-20 Package 128 theorem-first emitted-artifact hardening addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`samples/problem-bundles/problem1-typed-theorem-model-check.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/601-current-l2-theorem-first-emitted-artifact-loop-hardening.md`
+  - `docs/reports/0881-package128-theorem-first-emitted-artifact-hardening.md`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`
+  - `scripts/tests/test_problem_sample_bundles.py`

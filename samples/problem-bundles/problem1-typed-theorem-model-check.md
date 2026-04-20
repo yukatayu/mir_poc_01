@@ -101,19 +101,34 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
 - final public verifier contract や final typed calculus には上げず、
   checker-adjacent executable slice として current first line を読み直せる。
 
-3. representative と residual bridge-floor をまとめて見る
+3. theorem-first emitted artifact loop を repo-local output dir に materialize する
+
+```bash
+python3 scripts/current_l2_guided_samples.py emit-theorem problem1
+```
+
+見るべき結果:
+
+- `target/current-l2-guided/problem1-theorem-pilot` 配下に、
+  `p06 / p07 / p08` representative theorem line の Lean bundle JSON が出る。
+- `p06` は representative theorem-first sample、
+  `p07 / p08` は theorem-reached support sample として読める。
+- final public theorem contract や concrete theorem prover brand には上げず、
+  repo-local emitted artifact loop として current cut を確認できる。
+
+4. representative と residual bridge-floor をまとめて見る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py matrix problem1
 ```
 
-4. docs / Lean artifact / anchor spec-report まで一本道で辿る
+5. docs / Lean artifact / anchor spec-report まで一本道で辿る
 
 ```bash
 python3 scripts/current_l2_guided_samples.py bundle problem1
 ```
 
-5. parser-side companion / mapping まで同じ読みに揃える
+6. parser-side companion / mapping まで同じ読みに揃える
 
 ```bash
 python3 scripts/current_l2_guided_samples.py mapping

@@ -30,6 +30,9 @@
   または
   `python3 scripts/current_l2_guided_samples.py quickstart problem2`
   を使う。
+- Problem 1 の theorem-first emitted-artifact loop を repo-local output dir に materialize したいときは
+  `python3 scripts/current_l2_guided_samples.py emit-theorem problem1`
+  を使う。
 - doc 側と helper 側の quickstart が揃っているかを narrow に確認したいときは
   `python3 scripts/current_l2_guided_samples.py quickstart-parity`
   を使う。

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 18:54 JST
+最終更新: 2026-04-20 19:02 JST
 
 ## この文書について
 
@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 128 theorem-first emitted-artifact hardening
   - Package 129 authoritative-room runnable scenario hardening
   を先頭に追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
@@ -54,7 +53,7 @@
   - generated current-L2 theorem stubs は `sorry` を含むため、artifact well-formedness / bridge alignment evidence として読む
 - theorem / model-check / order-handoff / shared-space current floor
   - theorem-side:
-    theorem-first pilot、binding preflight、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、reopen-threshold helper mirror
+    theorem-first pilot、binding preflight、Lean-stub pilot、artifact-conformance bridge、representative trace alignment、public-seam compression、toolchain probe/reopen manifest、representative Lean sample set actual Lean execution、reopen-threshold helper mirror、`emit-theorem problem1` repo-local emitted-artifact loop
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
   - order-handoff / shared-space side:
@@ -64,7 +63,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `128` theorem-first emitted-artifact hardening | theorem-first pilot を emitted artifact / Lean bundle / representative sample loop として tighten する | `M` | `Macro 5/7` | `p06 / p07 / p08` を中心に、notebook-first / brand-neutral のまま emitted artifact loop を harden する | theorem-first pilot が docs-only bridge ではなく executable artifact loop として再確認できる |
 | `129` authoritative-room runnable scenario hardening | authoritative-room first scenario を smoke / emitted artifact / negative pair 付き runnable slice として tighten する | `M` | `Macro 6/7` | `p07 / p08 / p09 / p13 / p14` を対象に、final public wording と contract を凍らせず runner / smoke / artifact loop を harden する | authoritative-room first scenario が reserve / negative pair と一緒に runnable scenario bundle として再確認できる |
 
 ## recently closed package note
@@ -553,9 +551,15 @@
 ### Package 128 — theorem-first emitted-artifact hardening
 
 - current reading:
-  theorem-first pilot を representative `p06 / p07 / p08` emitted artifact loop として tighten し、notebook-first / brand-neutral の current cut を executable evidence で保つ。
+  close 済み。`emit-theorem problem1` helper により、theorem-first pilot を representative `p06 / p07 / p08` emitted artifact loop として tighten し、notebook-first / brand-neutral の current cut を executable evidence で保てるようにした。
 - current recommendation:
-  theorem public contract や concrete prover brand を凍らせず、repo-local emitted artifact / Lean bundle / representative sample loop の hardening を先に進める。
+  theorem public contract や concrete prover brand を凍らせず、repo-local emitted artifact / Lean bundle / representative sample loop の hardening を先に進める current cut を維持する。
+- close evidence:
+  `specs/examples/601`
+  `docs/reports/0881`
+  `scripts/current_l2_guided_samples.py`
+  `scripts/tests/test_current_l2_guided_samples.py`
+  `samples/problem-bundles/problem1-typed-theorem-model-check.md`
 - stop line:
   final public theorem contract
   concrete theorem prover brand
@@ -1068,5 +1072,5 @@
 
 ## next reopen order
 
-1. Package 128 で theorem-first emitted-artifact hardening を `p06 / p07 / p08` representative loop に沿って actualize する。
-2. Package 129 で authoritative-room runnable scenario hardening を `p07 / p08 / p09 / p13 / p14` scenario bundle に沿って actualize する。
+1. Package 129 で authoritative-room runnable scenario hardening を `p07 / p08 / p09 / p13 / p14` scenario bundle に沿って actualize する。
+2. その後、later mixed/user-spec residual を current executable loop を壊さない順で narrow に reopen する。

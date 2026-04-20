@@ -78,6 +78,18 @@ PROBLEM_SAMPLE_BUNDLE_DOCS = {
     "problem2": "samples/problem-bundles/problem2-order-handoff-shared-space.md",
 }
 
+PROBLEM1_THEOREM_EMIT_SAMPLE_IDS = (
+    "p06-typed-proof-owner-handoff",
+    "p07-dice-late-join-visible-history",
+    "p08-dice-stale-reconnect-refresh",
+)
+
+PROBLEM1_THEOREM_EMIT_STOP_LINE = (
+    "final public theorem contract",
+    "concrete theorem prover brand",
+    "final public verifier contract",
+)
+
 PARSER_COMPANION_MAPPING_BUNDLE_ANCHORS = {
     "problem1": "specs/examples/575-current-l2-problem1-theorem-first-pilot-bundle-actualization.md",
     "problem2": "specs/examples/576-current-l2-problem2-authoritative-room-scenario-bundle-actualization.md",
@@ -186,6 +198,19 @@ class ProblemReopenRow:
     split_packages: tuple[dict[str, object], ...]
     stop_line: tuple[str, ...]
     anchor_refs: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class ProblemTheoremEmitRow:
+    sample_id: str
+    reading: str
+    output_path: str
+    pilot_status: str
+    pilot_subject_ref: str | None
+    lean_stub_artifact_count: int
+    principal_review_unit_ref_count: int
+    repo_local_emitted_artifact_ref_count: int
+    compare_floor_ref_count: int
 
 
 GLOBAL_TRUE_USER_SPEC_RESIDUALS = (
@@ -601,6 +626,13 @@ def relative_path(path: Path) -> str:
     return str(path.relative_to(REPO_ROOT))
 
 
+def display_path(path: Path) -> str:
+    try:
+        return relative_path(path)
+    except ValueError:
+        return str(path)
+
+
 def lean_artifact_paths(sample: GuidedSample) -> tuple[str, ...]:
     lean_dir = REPO_ROOT / "samples" / "lean" / "current-l2" / sample.sample_id
     candidates = (
@@ -624,15 +656,217 @@ def parser_companion_path(sample: GuidedSample) -> str | None:
     return None
 
 
+def all_guided_samples() -> tuple[GuidedSample, ...]:
+    rows: list[GuidedSample] = []
+    for spec in problem_specs().values():
+        rows.extend(spec.samples)
+    return tuple(rows)
+
+
+def guided_sample_by_id(sample_id: str) -> GuidedSample:
+    for sample in all_guided_samples():
+        if sample.sample_id == sample_id:
+            return sample
+    raise KeyError(f"unknown guided sample `{sample_id}`")
+
+
 def bundle_commands(spec: ProblemSpec) -> tuple[str, ...]:
     primary = next(sample for sample in spec.samples if sample.primary)
-    return (
+    commands = [
         f"python3 scripts/current_l2_guided_samples.py show {spec.problem_id}",
         " ".join(build_single_run_command(primary, output_format="pretty")),
         f"python3 scripts/current_l2_guided_samples.py matrix {spec.problem_id}",
-        "python3 scripts/current_l2_guided_samples.py mapping",
-        f"python3 scripts/current_l2_guided_samples.py run {spec.problem_id} --all --format json",
+    ]
+    if spec.problem_id == "problem1":
+        commands.append("python3 scripts/current_l2_guided_samples.py emit-theorem problem1")
+    commands.extend(
+        [
+            "python3 scripts/current_l2_guided_samples.py mapping",
+            f"python3 scripts/current_l2_guided_samples.py run {spec.problem_id} --all --format json",
+        ]
     )
+    return tuple(commands)
+
+
+def default_problem1_theorem_emit_output_dir() -> Path:
+    return REPO_ROOT / "target" / "current-l2-guided" / "problem1-theorem-pilot"
+
+
+def problem1_theorem_emit_reading(sample_id: str) -> str:
+    if sample_id == "p06-typed-proof-owner-handoff":
+        return "representative theorem-first sample"
+    return "theorem-reached support sample"
+
+
+def problem1_theorem_emit_command(
+    sample_id: str,
+    output_path: Path,
+) -> list[str]:
+    sample = guided_sample_by_id(sample_id)
+    sample_argument = relative_path(sample.sample_path)
+    host_plan_argument = relative_path(sample.sample_path.with_suffix(".host-plan.json"))
+    return [
+        "cargo",
+        "run",
+        "-q",
+        "-p",
+        "mir-runtime",
+        "--example",
+        "current_l2_emit_theorem_lean_bundle",
+        "--",
+        sample_argument,
+        "--host-plan",
+        host_plan_argument,
+        "--output",
+        str(output_path),
+    ]
+
+
+def emit_theorem_bundle_payload(
+    sample_id: str,
+    output_path: Path,
+    *,
+    runner: Callable[..., subprocess.CompletedProcess[str]] = subprocess.run,
+) -> Mapping[str, object]:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    command = problem1_theorem_emit_command(sample_id, output_path)
+    completed = runner(
+        command,
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"emit-theorem `{sample_id}` failed with exit code {completed.returncode}: "
+            f"{compact_text_for_summary((completed.stderr or completed.stdout or '').strip())}"
+        )
+    if not output_path.is_file():
+        raise RuntimeError(f"emit-theorem `{sample_id}` did not create {display_path(output_path)}")
+    return json.loads(output_path.read_text(encoding="utf-8"))
+
+
+def build_problem1_theorem_emit_rows(
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_theorem_bundle_payload,
+) -> list[ProblemTheoremEmitRow]:
+    rows: list[ProblemTheoremEmitRow] = []
+    for sample_id in PROBLEM1_THEOREM_EMIT_SAMPLE_IDS:
+        output_path = output_dir / f"{sample_id}.lean-bundle.json"
+        payload = emitter(sample_id, output_path)
+        lean_stub_artifacts = payload.get("lean_stub_artifacts")
+        principal_review_unit_refs = payload.get("principal_review_unit_refs")
+        repo_local_emitted_artifact_refs = payload.get("repo_local_emitted_artifact_refs")
+        compare_floor_refs = payload.get("compare_floor_refs")
+        pilot_subject_ref = payload.get("pilot_subject_ref")
+        pilot_status = payload.get("pilot_status")
+        rows.append(
+            ProblemTheoremEmitRow(
+                sample_id=sample_id,
+                reading=problem1_theorem_emit_reading(sample_id),
+                output_path=display_path(output_path),
+                pilot_status=pilot_status if isinstance(pilot_status, str) else "missing",
+                pilot_subject_ref=pilot_subject_ref if isinstance(pilot_subject_ref, str) else None,
+                lean_stub_artifact_count=len(lean_stub_artifacts)
+                if isinstance(lean_stub_artifacts, list)
+                else 0,
+                principal_review_unit_ref_count=len(principal_review_unit_refs)
+                if isinstance(principal_review_unit_refs, list)
+                else 0,
+                repo_local_emitted_artifact_ref_count=len(repo_local_emitted_artifact_refs)
+                if isinstance(repo_local_emitted_artifact_refs, list)
+                else 0,
+                compare_floor_ref_count=len(compare_floor_refs)
+                if isinstance(compare_floor_refs, list)
+                else 0,
+            )
+        )
+    return rows
+
+
+def build_problem1_theorem_emit_manifest(
+    spec: ProblemSpec,
+    *,
+    output_dir: Path,
+    emitter: Callable[[str, Path], Mapping[str, object]] = emit_theorem_bundle_payload,
+) -> dict[str, object]:
+    rows = build_problem1_theorem_emit_rows(output_dir=output_dir, emitter=emitter)
+    return {
+        "problem_id": spec.problem_id,
+        "title": "Problem 1 theorem-first emitted artifact loop",
+        "current_reading": (
+            "`current_l2_emit_theorem_lean_bundle` を `p06 / p07 / p08` representative theorem line に対して"
+            " repo-local output dir へ materialize し、theorem-first pilot を executable artifact loop として"
+            " 再確認する helper-local command。final public theorem contract ではない。"
+        ),
+        "command": "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
+        "output_dir": display_path(output_dir),
+        "rows": [asdict(row) for row in rows],
+        "stop_line": list(PROBLEM1_THEOREM_EMIT_STOP_LINE),
+    }
+
+
+def render_problem1_theorem_emit(
+    spec: ProblemSpec,
+    rows: list[ProblemTheoremEmitRow],
+    *,
+    output_dir: Path,
+) -> str:
+    lines = [
+        "Problem 1 theorem-first emitted artifact loop",
+        "",
+        "Problem 1 theorem-first pilot を emitted artifact / Lean bundle / representative sample loop として再確認する repo-local helper。",
+        "",
+        f"sample bundle doc: {PROBLEM_SAMPLE_BUNDLE_DOCS[spec.problem_id]}",
+        "command: python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
+        f"output dir: {display_path(output_dir)}",
+        "",
+    ]
+    for row in rows:
+        lines.append(f"- {row.sample_id}: {row.reading}")
+        lines.append(f"  output: {row.output_path}")
+        lines.append(f"  pilot_status: {row.pilot_status}")
+        if row.pilot_subject_ref is not None:
+            lines.append(f"  pilot_subject_ref: {row.pilot_subject_ref}")
+        lines.append(f"  lean_stub_artifact_count: {row.lean_stub_artifact_count}")
+        lines.append(
+            "  ref_counts: "
+            f"review={row.principal_review_unit_ref_count}, "
+            f"emitted={row.repo_local_emitted_artifact_ref_count}, "
+            f"compare={row.compare_floor_ref_count}"
+        )
+        lines.append("")
+    lines.append("stop line:")
+    for item in PROBLEM1_THEOREM_EMIT_STOP_LINE:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "注意:",
+            "- `p06` を representative theorem-first sample、`p07 / p08` を theorem-reached support pair として materialize する narrow helper である。",
+            "- final public theorem contract、concrete theorem prover brand、final public verifier contract には上げない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem1_theorem_emit_from_runtime(
+    spec: ProblemSpec,
+    *,
+    output_format: str,
+    output_dir: Path | None = None,
+) -> str:
+    output_dir = output_dir or default_problem1_theorem_emit_output_dir()
+    manifest = build_problem1_theorem_emit_manifest(spec, output_dir=output_dir)
+    if output_format == "json":
+        return json.dumps(manifest, ensure_ascii=False, indent=2)
+    rows = [
+        ProblemTheoremEmitRow(**row)
+        for row in manifest["rows"]
+    ]
+    return render_problem1_theorem_emit(spec, rows, output_dir=output_dir)
 
 
 def parser_companion_inspector_command(
@@ -2248,6 +2482,18 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     bundle_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
     bundle_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    emit_theorem_parser = subparsers.add_parser(
+        "emit-theorem",
+        help="Problem 1 theorem-first pilot の emitted artifact loop を repo-local output dir に materialize する",
+    )
+    emit_theorem_parser.add_argument("problem_id", choices=("problem1",))
+    emit_theorem_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+    emit_theorem_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=default_problem1_theorem_emit_output_dir(),
+    )
+
     quickstart_parser = subparsers.add_parser(
         "quickstart",
         help="representative sample bundle の最短 4 ステップを helper-side summary として表示する",
@@ -2397,6 +2643,20 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         print(render_problem_bundle(spec))
         return 0
+
+    if args.subcommand == "emit-theorem":
+        try:
+            print(
+                render_problem1_theorem_emit_from_runtime(
+                    spec,
+                    output_format=args.format,
+                    output_dir=args.output_dir,
+                )
+            )
+            return 0
+        except RuntimeError as error:
+            print(str(error), file=sys.stderr)
+            return 1
 
     return run_problem(spec, output_format=args.format, include_all=args.all)
 

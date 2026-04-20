@@ -211,6 +211,7 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt", text)
         self.assertIn("samples/problem-bundles/problem1-typed-theorem-model-check.md", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py matrix problem1", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py emit-theorem problem1", text)
         self.assertIn("specs/examples/508-current-l2-theorem-lean-first-nonproduction-stub-pilot-actualization.md", text)
         self.assertIn("final public theorem contract", text)
 
@@ -240,6 +241,108 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(
             any("Problem 2 authoritative-room scenario bundle" in call.args[0] for call in write.mock_calls)
+        )
+
+    def test_problem1_theorem_emit_rows_track_representative_and_support_pair(self) -> None:
+        output_dir = guided.REPO_ROOT / "target" / "guided-sample-tests" / "problem1-theorem-pilot"
+
+        def fake_emitter(sample_id: str, output_path: Path) -> dict[str, object]:
+            return {
+                "sample_id": sample_id,
+                "pilot_status": "reached",
+                "pilot_subject_ref": f"fixture:{sample_id}",
+                "lean_stub_artifacts": [{"theorem_name": "demo"}],
+                "principal_review_unit_refs": [f"review:{sample_id}"],
+                "repo_local_emitted_artifact_refs": [f"artifact:{sample_id}"],
+                "compare_floor_refs": [f"compare:{sample_id}"],
+            }
+
+        rows = guided.build_problem1_theorem_emit_rows(output_dir=output_dir, emitter=fake_emitter)
+
+        self.assertEqual(
+            [row.sample_id for row in rows],
+            [
+                "p06-typed-proof-owner-handoff",
+                "p07-dice-late-join-visible-history",
+                "p08-dice-stale-reconnect-refresh",
+            ],
+        )
+        self.assertEqual(rows[0].reading, "representative theorem-first sample")
+        self.assertEqual(rows[1].reading, "theorem-reached support sample")
+        self.assertEqual(rows[2].pilot_status, "reached")
+        self.assertEqual(rows[0].lean_stub_artifact_count, 1)
+        self.assertIn("target/guided-sample-tests/problem1-theorem-pilot", rows[0].output_path)
+
+    def test_problem1_theorem_emit_command_uses_prototype_sample_path(self) -> None:
+        command = guided.problem1_theorem_emit_command(
+            "p06-typed-proof-owner-handoff",
+            guided.REPO_ROOT / "target" / "guided-sample-tests" / "p06.bundle.json",
+        )
+
+        self.assertEqual(
+            command[8],
+            "samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt",
+        )
+        self.assertIn("--host-plan", command)
+        self.assertIn(
+            "samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.host-plan.json",
+            command,
+        )
+
+    def test_problem1_theorem_emit_text_mentions_output_dir_command_and_samples(self) -> None:
+        output_dir = guided.REPO_ROOT / "target" / "guided-sample-tests" / "problem1-theorem-pilot"
+        rows = [
+            guided.ProblemTheoremEmitRow(
+                sample_id="p06-typed-proof-owner-handoff",
+                reading="representative theorem-first sample",
+                output_path="target/guided-sample-tests/problem1-theorem-pilot/p06-typed-proof-owner-handoff.lean-bundle.json",
+                pilot_status="reached",
+                pilot_subject_ref="fixture:p06",
+                lean_stub_artifact_count=2,
+                principal_review_unit_ref_count=2,
+                repo_local_emitted_artifact_ref_count=1,
+                compare_floor_ref_count=2,
+            ),
+            guided.ProblemTheoremEmitRow(
+                sample_id="p07-dice-late-join-visible-history",
+                reading="theorem-reached support sample",
+                output_path="target/guided-sample-tests/problem1-theorem-pilot/p07-dice-late-join-visible-history.lean-bundle.json",
+                pilot_status="reached",
+                pilot_subject_ref="fixture:p07",
+                lean_stub_artifact_count=1,
+                principal_review_unit_ref_count=1,
+                repo_local_emitted_artifact_ref_count=1,
+                compare_floor_ref_count=1,
+            ),
+        ]
+
+        text = guided.render_problem1_theorem_emit(
+            guided.problem_specs()["problem1"],
+            rows,
+            output_dir=output_dir,
+        )
+
+        self.assertIn("Problem 1 theorem-first emitted artifact loop", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py emit-theorem problem1", text)
+        self.assertIn("target/guided-sample-tests/problem1-theorem-pilot", text)
+        self.assertIn("p06-typed-proof-owner-handoff", text)
+        self.assertIn("p07-dice-late-join-visible-history", text)
+        self.assertIn("final public theorem contract", text)
+
+    def test_main_emit_theorem_problem1_uses_runtime_renderer(self) -> None:
+        fake_text = "Problem 1 theorem-first emitted artifact loop\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem1_theorem_emit_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["emit-theorem", "problem1"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(
+            any("Problem 1 theorem-first emitted artifact loop" in call.args[0] for call in write.mock_calls)
         )
 
     def test_problem2_residual_bundle_summarizes_first_line_reserve_and_negative(self) -> None:

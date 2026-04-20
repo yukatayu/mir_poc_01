@@ -893,6 +893,10 @@ actual-adoption floor では、
   `specs/examples/600`
   - `check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として読んでよい
   - Package 127 close 後の current active queue は Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
+- theorem-first emitted-artifact loop hardening:
+  `specs/examples/601`
+  - `emit-theorem problem1` helper と Problem 1 bundle doc 側の emitted-artifact step を actualize し、`p06 / p07 / p08` representative theorem line を repo-local output dir へ materialize する emitted-artifact loop として読んでよい
+  - Package 128 close 後の current active queue は Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

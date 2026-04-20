@@ -14,6 +14,7 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("problem2-order-handoff-shared-space.md", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke-all", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart problem1", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py emit-theorem problem1", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart-parity", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py reopen-map", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py residuals", text)
@@ -63,10 +64,16 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
             text,
         )
         self.assertIn("check-source-sample", text)
+        self.assertIn("emit-theorem problem1", text)
         self.assertIn(
             "cargo run -q -p mir-runtime --example mir_current_l2 -- \\",
             text,
         )
+        self.assertIn(
+            "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
+            text,
+        )
+        self.assertIn("target/current-l2-guided/problem1-theorem-pilot", text)
         self.assertIn("stronger typed-surface actual adoption", text)
         self.assertIn("current_l2_inspect_request_head_clause_bundle", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", text)
