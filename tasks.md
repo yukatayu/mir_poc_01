@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 11:27 JST
+最終更新: 2026-04-20 11:43 JST
 
 ## この文書について
 
@@ -35,7 +35,6 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 95 order/handoff source surface and artifacts
   - Package 96 authoritative-room first scenario
   - Package 97 reserve strengthening
   - Package 98 docs/report closeout
@@ -60,16 +59,15 @@
   - model-check side:
     row-local property route、checker-artifact route、final public-contract reopen threshold、public-seam compression、reopen-threshold helper mirror
   - order-handoff / shared-space side:
-    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`
+    authoritative-room vertical slice、surface actual adoption、source-wording route actual adoption、source-surface / artifact route actual adoption、serial-scope reserve surface、witness/provider route/schema route actual adoption、emitted-contract trace alignment bridge、public-seam compression、public-seam helper mirror、CLI `surface_preview`、late-join negative static stop `p13 / p14`
 
 ## ordered self-driven packages
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `95` order/handoff source surface and artifacts | explicit edge-row principal / stage-block secondary / reserve serial sugar を current artifacts と negative corpus に揃える | `M` | `Macro 5/6` | low-level exact surface を source principal に戻さず、edge-row principal を保つ | valid / missing witness / handoff-before-publication / stage-block pair が current docs / helper / sample で一貫する |
 | `96` authoritative-room first scenario | authoritative-room first default profile を current CLI / tests / artifacts / examples で tighten する | `M` | `Macro 6` | authority-ack / single room authority / authoritative serial transition / authority_rng / visible past / fail-then-refresh を first line に保つ | first room default profile の representative run と negative pair が drift なく読める |
 | `97` reserve strengthening | `auditable_authority_witness`、`delegated_rng_service`、model-check second-line concretization を reserve strengthening lane として narrow に整理する | `M` | `Macro 6/7` | first completion line を壊さず、second package 群を reserve に置く | reserve line と first-line completion の境界が docs / plan / tasks / progress で明確になる |
-| `98` documentation/report closeout | once-through sequence を docs / plan / progress / tasks / reports / traceability に閉じる | `S` | `Macro 0/5` | comparison debt ではなく adoption debt closeout として整理する | queue drift が消え、remaining mixed gate / true user-spec gate / reserve integration が narrow に分かれる |
+| `98` documentation/report closeout | once-through sequence を docs / plan / progress / tasks / reports / traceability に閉じ、二大問題それぞれの簡潔な解説付き sample を `samples/` に追加する | `S` | `Macro 0/5` | comparison debt ではなく adoption debt closeout として整理する | queue drift が消え、remaining mixed gate / true user-spec gate / reserve integration が narrow に分かれ、二大問題の current first line を sample でも追える |
 
 ## recently closed package note
 
@@ -180,7 +178,7 @@
 ### Package 95 — order/handoff source surface and artifacts
 
 - current reading:
-  explicit edge-row principal、stage-block secondary、`serial on ...` reserve を current helper-local artifact / negative corpus / CLI surface に揃える。
+  close 済み。explicit edge-row principal、stage-block secondary、repo-local emitted artifact reading、`serial on ...` reserve、late-join negative pair `p13 / p14` を `run-source-sample` helper summary に揃えた。
 - stop line:
   final source wording
   low-level exact source surface
@@ -207,7 +205,7 @@
 ### Package 98 — documentation/report closeout
 
 - current reading:
-  once-through sequence の closeout。`specs/` / `plan/` / `progress.md` / `tasks.md` / `Documentation.md` / `docs/reports/` / `plan/90` を stale wording なしで同期する。
+  once-through sequence の closeout。`specs/` / `plan/` / `progress.md` / `tasks.md` / `Documentation.md` / `docs/reports/` / `plan/90` を stale wording なしで同期し、二大問題それぞれの current first line を簡潔な日本語解説付き sample として `samples/` に追加する。
 - stop line:
   final public language completion claim
   packaging / FFI / engine adapter adoption
@@ -708,6 +706,6 @@
 
 ## next reopen order
 
-1. Package 95 と 96 で order/handoff source surface と authoritative-room first scenario を tighten する。
+1. Package 96 で authoritative-room first scenario を tighten する。
 2. Package 97 で reserve strengthening を first completion line から切り分ける。
 3. Package 98 で docs / plan / tasks / progress / traceability を closeout し、remaining mixed gate / true user-spec residual のみを残す。

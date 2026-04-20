@@ -15,7 +15,7 @@
     （authored sixteen と corrected prototype set `p01...p16` は fixed 済みであり、sample corpus は adequacy corpus として active に保つ）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...568` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect が順に actualize 済みである。current principal active line は Package 94 close を踏まえた Package 95...98 once-through near-end sequence と読む）
+    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...569` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening が順に actualize 済みである。current principal active line は Package 95 close を踏まえた Package 96...98 once-through near-end sequence と読む）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、packaging / FFI / exhaustive final catalog は still later に残る）

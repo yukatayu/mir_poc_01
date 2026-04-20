@@ -227,6 +227,8 @@ struct CurrentL2OperationalCliRunSourceSampleSummary {
     verification_preview: CurrentL2OperationalCliVerificationPreviewSummary,
     artifact_preview: CurrentL2OperationalCliArtifactPreviewSummary,
     surface_preview: CurrentL2OperationalCliSurfacePreviewSummary,
+    order_handoff_source_surface_artifact_actual_adoption:
+        CurrentL2OperationalCliOrderHandoffSourceSurfaceArtifactActualAdoptionSummary,
     order_handoff_witness_provider_public_seam_compression:
         CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary,
     theorem_result_object_preview: CurrentL2OperationalCliTheoremResultObjectPreviewSummary,
@@ -295,6 +297,12 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             CurrentL2OperationalCliArtifactPreviewSummary::from_source_report(&report);
         let surface_preview =
             CurrentL2OperationalCliSurfacePreviewSummary::from_source_report(&report);
+        let order_handoff_source_surface_artifact_actual_adoption =
+            CurrentL2OperationalCliOrderHandoffSourceSurfaceArtifactActualAdoptionSummary::from_source_report(
+                &report,
+                &verification_preview,
+                &artifact_preview,
+            );
         let order_handoff_witness_provider_public_seam_compression =
             CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSummary::from_source_report(
                 &report,
@@ -464,6 +472,7 @@ impl CurrentL2OperationalCliRunSourceSampleSummary {
             verification_preview,
             artifact_preview,
             surface_preview,
+            order_handoff_source_surface_artifact_actual_adoption,
             order_handoff_witness_provider_public_seam_compression,
             theorem_result_object_preview,
             model_check_public_checker_preview,
@@ -1139,6 +1148,103 @@ impl CurrentL2OperationalCliTypedCheckerHintPreviewSummary {
                 current_l2_first_strong_typing_sample_guard_label(),
                 report.sample_id
             )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CurrentL2OperationalCliOrderHandoffSourceSurfaceArtifactActualAdoptionSummary {
+    status: &'static str,
+    adoption_kind: &'static str,
+    profile_axis_refs: Vec<String>,
+    principal_surface_lines: Vec<String>,
+    secondary_surface_lines: Vec<String>,
+    repo_local_emitted_artifact_refs: Vec<String>,
+    source_wording_route_refs: Vec<String>,
+    emitted_artifact_candidate_keep_refs: Vec<String>,
+    negative_static_stop_refs: Vec<String>,
+    evidence_refs: Vec<String>,
+    compare_floor_refs: Vec<String>,
+    guard_refs: Vec<String>,
+    kept_later_refs: Vec<String>,
+    guard_reason: Option<String>,
+}
+
+impl CurrentL2OperationalCliOrderHandoffSourceSurfaceArtifactActualAdoptionSummary {
+    fn from_source_report(
+        report: &CurrentL2SourceSampleRunReport,
+        verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+        artifact_preview: &CurrentL2OperationalCliArtifactPreviewSummary,
+    ) -> Self {
+        let sample_id = report.sample_id.as_str();
+        let reached = matches!(
+            sample_id,
+            "p07-dice-late-join-visible-history" | "p08-dice-stale-reconnect-refresh"
+        ) && verification_preview.formal_hook_status == "reached";
+
+        if reached {
+            return Self {
+                status: "reached",
+                adoption_kind: "helper_local_source_surface_artifact_route_manifest",
+                profile_axis_refs: authoritative_room_profile_axis_refs(sample_id),
+                principal_surface_lines: order_handoff_edge_row_principal_surface_lines(sample_id),
+                secondary_surface_lines: order_handoff_stage_block_secondary_lines(sample_id),
+                repo_local_emitted_artifact_refs: order_handoff_repo_local_emitted_artifact_refs(
+                    sample_id,
+                    artifact_preview,
+                ),
+                source_wording_route_refs: order_handoff_source_wording_actual_route_refs(
+                    sample_id,
+                ),
+                emitted_artifact_candidate_keep_refs: order_handoff_emitted_artifact_keep_refs(
+                    sample_id,
+                ),
+                negative_static_stop_refs: Vec::new(),
+                evidence_refs: order_handoff_source_surface_artifact_actual_adoption_evidence_refs(
+                    sample_id,
+                ),
+                compare_floor_refs:
+                    order_handoff_source_surface_artifact_actual_adoption_compare_floor_refs(
+                        sample_id, true,
+                    ),
+                guard_refs: order_handoff_source_surface_artifact_actual_adoption_guard_refs(true),
+                kept_later_refs:
+                    order_handoff_source_surface_artifact_actual_adoption_kept_later_refs(),
+                guard_reason: None,
+            };
+        }
+
+        let negative_static_stop_refs =
+            order_handoff_source_surface_artifact_negative_static_stop_refs(sample_id);
+        let repo_local_emitted_artifact_refs = if negative_static_stop_refs.is_empty() {
+            Vec::new()
+        } else {
+            order_handoff_repo_local_emitted_artifact_refs(sample_id, artifact_preview)
+        };
+        let guard_reason =
+            order_handoff_source_surface_artifact_guard_reason(report, verification_preview);
+
+        Self {
+            status: "guarded_not_reached",
+            adoption_kind: "helper_local_source_surface_artifact_route_manifest",
+            profile_axis_refs: Vec::new(),
+            principal_surface_lines: Vec::new(),
+            secondary_surface_lines: Vec::new(),
+            repo_local_emitted_artifact_refs,
+            source_wording_route_refs: Vec::new(),
+            emitted_artifact_candidate_keep_refs: Vec::new(),
+            negative_static_stop_refs,
+            evidence_refs: order_handoff_source_surface_artifact_actual_adoption_evidence_refs(
+                sample_id,
+            ),
+            compare_floor_refs:
+                order_handoff_source_surface_artifact_actual_adoption_compare_floor_refs(
+                    sample_id, false,
+                ),
+            guard_refs: order_handoff_source_surface_artifact_actual_adoption_guard_refs(false),
+            kept_later_refs: order_handoff_source_surface_artifact_actual_adoption_kept_later_refs(
+            ),
+            guard_reason: Some(guard_reason),
         }
     }
 }
@@ -3728,7 +3834,7 @@ impl CurrentL2OperationalCliOrderHandoffWitnessProviderPublicSeamCompressionSumm
         if reached {
             let sample_id = report.sample_id.as_str();
             let repo_local_emitted_artifact_refs =
-                order_handoff_repo_local_emitted_artifact_refs(artifact_preview);
+                order_handoff_repo_local_emitted_artifact_refs(sample_id, artifact_preview);
             return Self {
                 status: "reached",
                 compression_kind: "helper_local_public_seam_manifest",
@@ -4315,6 +4421,15 @@ fn render_pretty_summary(summary: &CurrentL2OperationalCliRunSourceSampleSummary
     );
     writeln!(
         output,
+        "order_handoff_source_surface_artifact_actual_adoption:"
+    )
+    .expect("write to string");
+    render_order_handoff_source_surface_artifact_actual_adoption(
+        &mut output,
+        &summary.order_handoff_source_surface_artifact_actual_adoption,
+    );
+    writeln!(
+        output,
         "order_handoff_witness_provider_public_seam_compression:"
     )
     .expect("write to string");
@@ -4847,25 +4962,103 @@ fn authoritative_room_profile_axis_refs(sample_id: &str) -> Vec<String> {
     refs
 }
 
+fn order_handoff_source_surface_artifact_actual_adoption_evidence_refs(
+    sample_id: &str,
+) -> Vec<String> {
+    vec![
+        format!("sample:{sample_id}"),
+        "helper_preview:order_handoff_source_surface_artifact_actual_adoption".to_string(),
+        "compare_floor:current_l2.order_handoff.source_surface_artifact_actual_adoption"
+            .to_string(),
+    ]
+}
+
 fn order_handoff_repo_local_emitted_artifact_refs(
+    sample_id: &str,
     artifact_preview: &CurrentL2OperationalCliArtifactPreviewSummary,
 ) -> Vec<String> {
     let mut refs = Vec::new();
     for unit in &artifact_preview.proof_notebook_review_units {
-        for evidence_ref in &unit.evidence_refs {
-            if !refs.contains(evidence_ref) {
-                refs.push(evidence_ref.clone());
-            }
+        let artifact_ref = format!(
+            "repo_local_emitted_artifact:proof_notebook_review_unit:{sample_id}:{}",
+            unit.obligation_kind
+        );
+        if !refs.contains(&artifact_ref) {
+            refs.push(artifact_ref);
         }
     }
     for carrier in &artifact_preview.model_check_concrete_carriers {
-        for evidence_ref in &carrier.evidence_refs {
-            if !refs.contains(evidence_ref) {
-                refs.push(evidence_ref.clone());
-            }
+        let artifact_ref = format!(
+            "repo_local_emitted_artifact:model_check_concrete_carrier:{sample_id}:{}",
+            carrier.obligation_kind
+        );
+        if !refs.contains(&artifact_ref) {
+            refs.push(artifact_ref);
         }
     }
     refs
+}
+
+fn order_handoff_source_surface_artifact_actual_adoption_compare_floor_refs(
+    sample_id: &str,
+    reached: bool,
+) -> Vec<String> {
+    if reached {
+        vec![
+            "compare_floor:current_l2.order_handoff.surface_actual_adoption".to_string(),
+            "compare_floor:current_l2.order_handoff.source_wording_route_actual_adoption"
+                .to_string(),
+            "compare_floor:current_l2.order_handoff.source_surface_artifact_actual_adoption"
+                .to_string(),
+        ]
+    } else if matches!(
+        sample_id,
+        "p13-dice-late-join-missing-publication-witness"
+            | "p14-dice-late-join-handoff-before-publication"
+    ) {
+        vec![
+            "compare_floor:current_l2.order_handoff.negative_static_stop_actualization"
+                .to_string(),
+            "compare_floor:current_l2.order_handoff.source_surface_artifact_actual_adoption.guard_only"
+                .to_string(),
+        ]
+    } else {
+        vec![
+            "compare_floor:current_l2.order_handoff.source_surface_artifact_actual_adoption.guard_only"
+                .to_string(),
+        ]
+    }
+}
+
+fn order_handoff_source_surface_artifact_actual_adoption_guard_refs(reached: bool) -> Vec<String> {
+    if reached {
+        vec![
+            "guard:edge_row_vertical_continuation_principal".to_string(),
+            "guard:stage_block_secondary_keep".to_string(),
+            "guard:repo_local_emitted_artifact_refs_first".to_string(),
+            "guard:final_source_surface_handoff_wording_later".to_string(),
+            "guard:final_emitted_artifact_schema_later".to_string(),
+        ]
+    } else {
+        vec![
+            "guard:source_surface_artifact_actual_adoption_not_reached".to_string(),
+            "guard:negative_static_stop_pair_kept_helper_local".to_string(),
+        ]
+    }
+}
+
+fn order_handoff_source_surface_artifact_actual_adoption_kept_later_refs() -> Vec<String> {
+    vec![
+        "kept_later:final_parser_grammar".to_string(),
+        "kept_later:final_public_parser_checker_runtime_api".to_string(),
+        "kept_later:final_source_surface_handoff_wording".to_string(),
+        "kept_later:final_emitted_artifact_schema".to_string(),
+        "kept_later:final_emitted_handoff_contract".to_string(),
+        "kept_later:final_public_witness_schema".to_string(),
+        "kept_later:authoritative_room_serial_scope_sugar".to_string(),
+        "kept_later:low_level_memory_order_source_surface".to_string(),
+        "kept_later:final_modal_foundation_adoption".to_string(),
+    ]
 }
 
 fn order_handoff_source_wording_actual_route_refs(sample_id: &str) -> Vec<String> {
@@ -6355,6 +6548,60 @@ fn render_order_handoff_witness_provider_public_seam_compression(
     render_string_list(output, "guard_refs", &compression.guard_refs, 1);
     render_string_list(output, "kept_later_refs", &compression.kept_later_refs, 1);
     if let Some(guard_reason) = &compression.guard_reason {
+        writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
+    } else {
+        writeln!(output, "  guard_reason: none").expect("write to string");
+    }
+}
+
+fn render_order_handoff_source_surface_artifact_actual_adoption(
+    output: &mut String,
+    summary: &CurrentL2OperationalCliOrderHandoffSourceSurfaceArtifactActualAdoptionSummary,
+) {
+    writeln!(output, "  status: {}", summary.status).expect("write to string");
+    writeln!(output, "  adoption_kind: {}", summary.adoption_kind).expect("write to string");
+    render_string_list(output, "profile_axis_refs", &summary.profile_axis_refs, 1);
+    render_string_list(
+        output,
+        "principal_surface_lines",
+        &summary.principal_surface_lines,
+        1,
+    );
+    render_string_list(
+        output,
+        "secondary_surface_lines",
+        &summary.secondary_surface_lines,
+        1,
+    );
+    render_string_list(
+        output,
+        "repo_local_emitted_artifact_refs",
+        &summary.repo_local_emitted_artifact_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "source_wording_route_refs",
+        &summary.source_wording_route_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "emitted_artifact_candidate_keep_refs",
+        &summary.emitted_artifact_candidate_keep_refs,
+        1,
+    );
+    render_string_list(
+        output,
+        "negative_static_stop_refs",
+        &summary.negative_static_stop_refs,
+        1,
+    );
+    render_string_list(output, "evidence_refs", &summary.evidence_refs, 1);
+    render_string_list(output, "compare_floor_refs", &summary.compare_floor_refs, 1);
+    render_string_list(output, "guard_refs", &summary.guard_refs, 1);
+    render_string_list(output, "kept_later_refs", &summary.kept_later_refs, 1);
+    if let Some(guard_reason) = &summary.guard_reason {
         writeln!(output, "  guard_reason: {guard_reason}").expect("write to string");
     } else {
         writeln!(output, "  guard_reason: none").expect("write to string");
@@ -7901,6 +8148,34 @@ fn minimal_companion_kept_later_refs() -> Vec<String> {
     ]
 }
 
+fn order_handoff_edge_row_principal_surface_lines(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p07-dice-late-join-visible-history" => vec![
+            "publish publish_roll_result@dice_state".to_string(),
+            "handoff handoff_dice_authority@dice_state".to_string(),
+            "  after publish(publish_roll_result@dice_state)".to_string(),
+            "  requires witness(publish_roll_result@dice_state)".to_string(),
+            "observe late_join_view@dice_state".to_string(),
+            "  after handoff(handoff_dice_authority@dice_state)".to_string(),
+        ],
+        "p08-dice-stale-reconnect-refresh" => vec![
+            "rollback stale_reconnect".to_string(),
+            "refresh refresh_owner_snapshot@dice_state".to_string(),
+            "  after rollback(stale_reconnect)".to_string(),
+            "invalidate stale_incompatible_replay@dice_state".to_string(),
+            "  after refresh(refresh_owner_snapshot@dice_state)".to_string(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn order_handoff_stage_block_secondary_lines(sample_id: &str) -> Vec<String> {
+    stage_block_surface_lines(sample_id)
+        .into_iter()
+        .skip(1)
+        .collect()
+}
+
 fn stage_block_surface_lines(sample_id: &str) -> Vec<String> {
     match sample_id {
         "p07-dice-late-join-visible-history" => vec![
@@ -7966,6 +8241,58 @@ fn order_handoff_serial_scope_reserve_surface_lines(sample_id: &str) -> Vec<Stri
         ],
         _ => Vec::new(),
     }
+}
+
+fn order_handoff_source_surface_artifact_negative_static_stop_refs(sample_id: &str) -> Vec<String> {
+    match sample_id {
+        "p13-dice-late-join-missing-publication-witness" => vec![
+            "negative_static_stop:p13-dice-late-join-missing-publication-witness:publish_witness_required_before_handoff".to_string(),
+            "negative_static_stop:p13-dice-late-join-missing-publication-witness:publish_then_handoff_then_observe_order_required".to_string(),
+        ],
+        "p14-dice-late-join-handoff-before-publication" => vec![
+            "negative_static_stop:p14-dice-late-join-handoff-before-publication:handoff_before_publish_for_late_join_visibility".to_string(),
+            "negative_static_stop:p14-dice-late-join-handoff-before-publication:publish_then_handoff_then_observe_order_required".to_string(),
+        ],
+        _ => Vec::new(),
+    }
+}
+
+fn order_handoff_source_surface_artifact_guard_reason(
+    report: &CurrentL2SourceSampleRunReport,
+    verification_preview: &CurrentL2OperationalCliVerificationPreviewSummary,
+) -> String {
+    let sample_id = report.sample_id.as_str();
+    if matches!(
+        sample_id,
+        "p13-dice-late-join-missing-publication-witness"
+            | "p14-dice-late-join-handoff-before-publication"
+    ) {
+        let reason = report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .reasons
+            .first()
+            .cloned()
+            .unwrap_or_else(|| {
+                format!("late-join visibility negative pair remained rejected for `{sample_id}`")
+            });
+        return format!(
+            "current order-handoff source surface / emitted-artifact actual adoption keeps the late-join negative pair helper-local and guarded for `{sample_id}`: {reason}"
+        );
+    }
+
+    if sample_id == "p09-dice-delegated-rng-provider-placement" {
+        return format!(
+            "current order-handoff source surface / emitted-artifact actual adoption keeps delegated RNG placement on the serial-scope practical route and does not promote it into the representative principal pair (`p07` / `p08`) for `{sample_id}`"
+        );
+    }
+
+    verification_preview.guard_reason.clone().unwrap_or_else(|| {
+        format!(
+            "current order-handoff source surface / emitted-artifact actual adoption only actualizes the representative authoritative-room pair (`p07` / `p08`) for `{sample_id}`"
+        )
+    })
 }
 
 fn order_handoff_serial_scope_reserve_surface_guard_refs(reached: bool) -> Vec<String> {

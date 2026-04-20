@@ -4232,3 +4232,16 @@
   - `crates/mir-ast/tests/current_l2_perform_head_manifest.rs`
   - `crates/mir-ast/tests/current_l2_stage3_perform_head_spike.rs`
   - `crates/mir-ast/tests/support/current_l2_stage3_predicate_fragment_spike_support.rs`
+
+## 2026-04-20 Package 95 order-handoff source-surface / artifact route tightening addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/11-roadmap-near-term.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/490-current-l2-order-handoff-surface-actual-adoption.md`
+  - `specs/examples/503-current-l2-order-handoff-source-wording-route-actual-adoption.md`
+  - `specs/examples/526-current-l2-order-handoff-helper-cli-surface-preview-actualization.md`
+  - `specs/examples/527-current-l2-order-handoff-negative-static-stop-actualization.md`
+  - `specs/examples/533-current-l2-order-handoff-witness-provider-public-seam-helper-mirror.md`
+  - `specs/examples/569-current-l2-order-handoff-source-surface-artifact-route-tightening.md`
+  - `docs/reports/0852-package95-order-handoff-source-surface-artifact-tightening.md`
+  - `crates/mir-runtime/src/current_l2_cli.rs`
+  - `crates/mir-runtime/tests/current_l2_operational_cli.rs`

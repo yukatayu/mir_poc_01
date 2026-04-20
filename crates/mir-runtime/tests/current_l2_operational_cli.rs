@@ -1326,6 +1326,135 @@ fn operational_cli_json_reports_stale_reconnect_refresh_prototype() {
 }
 
 #[test]
+fn operational_cli_json_reports_order_handoff_source_surface_artifact_route_for_late_join() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p07-dice-late-join-visible-history.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["status"],
+        "reached"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["principal_surface_lines"]
+            [0],
+        "publish publish_roll_result@dice_state"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["principal_surface_lines"]
+            [2],
+        "  after publish(publish_roll_result@dice_state)"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["secondary_surface_lines"]
+            [0],
+        "stage publish:"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["repo_local_emitted_artifact_refs"]
+            [0],
+        "repo_local_emitted_artifact:proof_notebook_review_unit:p07-dice-late-join-visible-history:rollback_cut_non_interference"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["source_wording_route_refs"]
+            [0],
+        "order_handoff_source_wording_actual_route:p07-dice-late-join-visible-history:edge_row_vertical_continuation_principal"
+    );
+}
+
+#[test]
+fn operational_cli_json_reports_order_handoff_negative_pair_surface_guard() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p13-dice-late-join-missing-publication-witness.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["negative_static_stop_refs"]
+            [0],
+        "negative_static_stop:p13-dice-late-join-missing-publication-witness:publish_witness_required_before_handoff"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["negative_static_stop_refs"]
+            [1],
+        "negative_static_stop:p13-dice-late-join-missing-publication-witness:publish_then_handoff_then_observe_order_required"
+    );
+    assert!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("missing publication witness before handoff")
+    );
+}
+
+#[test]
+fn operational_cli_json_keeps_delegated_rng_sample_on_serial_scope_practical_route() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p09-dice-delegated-rng-provider-placement.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "json",
+    ])
+    .unwrap();
+
+    let value: Value = serde_json::from_str(&output).unwrap();
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["status"],
+        "guarded_not_reached"
+    );
+    assert_eq!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["negative_static_stop_refs"],
+        Value::Array(vec![])
+    );
+    assert!(
+        value["order_handoff_source_surface_artifact_actual_adoption"]["guard_reason"]
+            .as_str()
+            .unwrap()
+            .contains("serial-scope practical route")
+    );
+}
+
+#[test]
+fn operational_cli_pretty_reports_order_handoff_source_surface_artifact_route() {
+    let output = run_current_l2_operational_cli([
+        "run-source-sample",
+        order_handoff_prototype_sample_path("p08-dice-stale-reconnect-refresh.txt")
+            .to_str()
+            .unwrap(),
+        "--format",
+        "pretty",
+    ])
+    .unwrap();
+
+    assert!(output.contains("order_handoff_source_surface_artifact_actual_adoption:"));
+    assert!(output.contains("principal_surface_lines:"));
+    assert!(output.contains("rollback stale_reconnect"));
+    assert!(output.contains("  after rollback(stale_reconnect)"));
+    assert!(output.contains("secondary_surface_lines:"));
+    assert!(output.contains("stage rollback:"));
+    assert!(output.contains("emitted_artifact_candidate_keep_refs:"));
+}
+
+#[test]
 fn operational_cli_json_reports_model_check_public_checker_preview_for_delegated_rng_sample() {
     let output = run_current_l2_operational_cli([
         "run-source-sample",

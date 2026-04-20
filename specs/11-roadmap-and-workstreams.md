@@ -756,6 +756,14 @@ actual-adoption floor では、
   - model-check second-line / row-local property actual adoption は `p10 / p11 / p12 / p15 / p16` まで widened してよい
   - helper-local CLI summary は guarded case に `bridge_floor_refs` を出してよい
   - Package 94 close 後の current active queue は Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
+- order-handoff source surface / artifact route tightening:
+  `specs/examples/569`
+  - edge-row / vertical continuation principal
+  - stage-block secondary keep
+  - repo-local emitted artifact refs first
+  - `p09` serial-scope practical route keep
+  - `p13 / p14` negative static-stop pair keep
+  - Package 95 close 後の current active queue は Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

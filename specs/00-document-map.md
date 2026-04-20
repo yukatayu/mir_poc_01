@@ -67,7 +67,7 @@
   - 規範判断の正本ではないが、`specs/examples/520` 以後の final-layer closeout package を読むときの explanation source として使ってよい。
 - `sub-agent-pro/codex_once_completion_handoff_after_faq010_2026-04-20.md`
   - 2026-04-20 時点の repo-local once-through completion handoff であり、FAQ 10 以後の parser-side closeout / finite-index strong typing / Lean-first theorem skeleton / model-check second-line / order-handoff helper-local source surface / authoritative-room first scenario / docs closeout sequenceを 1 本の staged package 列として整理する。
-  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568` 以後の once-through closeout reading と Package 95...98 の current explanation source として使ってよい。
+  - 規範判断の正本ではないが、`specs/examples/564`、`565`、`566`、`567`、`568`、`569` 以後の once-through closeout reading と Package 96...98 の current explanation source として使ってよい。
 
 ## 規範的な読書順
 
@@ -787,6 +787,8 @@
   - current Phase 5 / Package 93 closeout として、`samples/lean/foundations/` の actual small proof fragment と `samples/lean/current-l2/` の generated stub corpus の役割差を保ったまま、`CurrentL2FiniteIndexFirstLayer.lean` と representative generated sample set `p15 / p16` widening を source-backed に actualize し、current live queue を Package 94...98 へ進める補助文書。
 - `specs/examples/568-current-l2-theorem-model-check-bridge-carrier-reconnect-after-finite-index-widening.md`
   - current Phase 5 / Package 94 closeout として、theorem public seam の representative quartet を premature に widen せず、source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16` を theorem/model-check helper-local `bridge_floor_refs` と model-check second-line / row-local carrier widening に reconnect し、current live queue を Package 95...98 へ進める補助文書。
+- `specs/examples/569-current-l2-order-handoff-source-surface-artifact-route-tightening.md`
+  - current Phase 5 / Package 95 closeout として、explicit edge-row principal / stage-block secondary / repo-local emitted artifact reading / delegated RNG reserve / late-join negative pairを `run-source-sample` helper summary に actualize し、current live queue を Package 96...98 へ進める補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`
