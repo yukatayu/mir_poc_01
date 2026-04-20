@@ -423,9 +423,55 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertIn("Problem 1 theorem-first emitted artifact loop", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py emit-theorem problem1", text)
         self.assertIn("target/guided-sample-tests/problem1-theorem-pilot", text)
+        self.assertIn("pilot-summary.md", text)
         self.assertIn("p06-typed-proof-owner-handoff", text)
         self.assertIn("p07-dice-late-join-visible-history", text)
         self.assertIn("final public theorem contract", text)
+
+    def test_problem1_theorem_emit_manifest_writes_pilot_index_files(self) -> None:
+        output_dir = guided.REPO_ROOT / "target" / "guided-sample-tests" / "problem1-theorem-pilot-index"
+
+        def fake_emitter(sample_id: str, output_path: guided.Path) -> dict[str, object]:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text("{\"ok\": true}", encoding="utf-8")
+            return {
+                "pilot_status": "reached",
+                "pilot_subject_ref": f"fixture:{sample_id}",
+                "lean_stub_artifacts": [f"lean:{sample_id}"],
+                "principal_review_unit_refs": [f"review:{sample_id}"],
+                "repo_local_emitted_artifact_refs": [f"artifact:{sample_id}"],
+                "compare_floor_refs": [f"compare:{sample_id}"],
+            }
+
+        manifest = guided.build_problem1_theorem_emit_manifest(
+            guided.problem_specs()["problem1"],
+            output_dir=output_dir,
+            emitter=fake_emitter,
+        )
+
+        summary_md = output_dir / "pilot-summary.md"
+        summary_json = output_dir / "pilot-summary.json"
+        self.assertEqual(
+            manifest["pilot_notebook_index_markdown"],
+            guided.display_path(summary_md),
+        )
+        self.assertEqual(
+            manifest["pilot_notebook_index_json"],
+            guided.display_path(summary_json),
+        )
+        self.assertTrue(summary_md.is_file())
+        self.assertTrue(summary_json.is_file())
+        self.assertIn("Problem 1 theorem-first emitted artifact loop", summary_md.read_text(encoding="utf-8"))
+        payload = guided.json.loads(summary_json.read_text(encoding="utf-8"))
+        self.assertEqual(payload["problem_id"], "problem1")
+        self.assertEqual(
+            [row["sample_id"] for row in payload["rows"]],
+            [
+                "p06-typed-proof-owner-handoff",
+                "p07-dice-late-join-visible-history",
+                "p08-dice-stale-reconnect-refresh",
+            ],
+        )
 
     def test_main_emit_theorem_problem1_uses_runtime_renderer(self) -> None:
         fake_text = "Problem 1 theorem-first emitted artifact loop\n..."

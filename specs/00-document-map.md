@@ -867,6 +867,8 @@
   - current Phase 6 / Package 134 closeout として、`lane parser-side-residual` を actualize し、parser companion surface / parser-side tranche / final parser-checker-runtime API residual を helper-local mixed-gate lane として narrow に読む補助文書。
 - `specs/examples/608-current-l2-true-user-spec-hold-line-freeze-sync.md`
   - current Phase 6 / Package 135 closeout として、`hold-line` helper を actualize し、true user-spec residual を helper-local explicit hold line として narrow に読む補助文書。
+- `specs/examples/609-current-l2-theorem-first-external-pilot-summary-index-actualization.md`
+  - current Phase 6 / reserve package closeout として、`emit-theorem problem1` output dir に `pilot-summary.md` / `pilot-summary.json` を actualize し、theorem-first external pilot を notebook-first summary index として narrow に読む補助文書。
 - `specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md`
   - Phase 5 checker-side line の次段として、minimal shared output contract の後に public checker boundary comparison をどの docs-only parser-front cut から始めるべきかを比較する補助文書。
 - `specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md`

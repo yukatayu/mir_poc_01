@@ -346,6 +346,7 @@ RESERVE_INTEGRATION_PACKAGES = (
             "specs/examples/470-current-l2-theorem-first-experimental-pilot-actualization.md",
             "specs/examples/603-current-l2-problem1-executable-residual-reopen-sync.md",
             "specs/examples/605-current-l2-once-through-closeout-summary-sync.md",
+            "specs/examples/609-current-l2-theorem-first-external-pilot-summary-index-actualization.md",
         ),
     },
     {
@@ -994,6 +995,14 @@ def build_problem1_theorem_emit_rows(
     return rows
 
 
+def problem1_theorem_emit_index_markdown_path(output_dir: Path) -> Path:
+    return output_dir / "pilot-summary.md"
+
+
+def problem1_theorem_emit_index_json_path(output_dir: Path) -> Path:
+    return output_dir / "pilot-summary.json"
+
+
 def build_problem1_theorem_emit_manifest(
     spec: ProblemSpec,
     *,
@@ -1001,19 +1010,33 @@ def build_problem1_theorem_emit_manifest(
     emitter: Callable[[str, Path], Mapping[str, object]] = emit_theorem_bundle_payload,
 ) -> dict[str, object]:
     rows = build_problem1_theorem_emit_rows(output_dir=output_dir, emitter=emitter)
-    return {
+    manifest = {
         "problem_id": spec.problem_id,
         "title": "Problem 1 theorem-first emitted artifact loop",
         "current_reading": (
             "`current_l2_emit_theorem_lean_bundle` を `p06 / p07 / p08` representative theorem line に対して"
             " repo-local output dir へ materialize し、theorem-first pilot を executable artifact loop として"
-            " 再確認する helper-local command。final public theorem contract ではない。"
+            "再確認する helper-local command。final public theorem contract ではない。"
         ),
         "command": "python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
         "output_dir": display_path(output_dir),
         "rows": [asdict(row) for row in rows],
         "stop_line": list(PROBLEM1_THEOREM_EMIT_STOP_LINE),
     }
+    output_dir.mkdir(parents=True, exist_ok=True)
+    summary_json_path = problem1_theorem_emit_index_json_path(output_dir)
+    summary_md_path = problem1_theorem_emit_index_markdown_path(output_dir)
+    manifest["pilot_notebook_index_markdown"] = display_path(summary_md_path)
+    manifest["pilot_notebook_index_json"] = display_path(summary_json_path)
+    summary_json_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    summary_md_path.write_text(
+        render_problem1_theorem_emit(spec, rows, output_dir=output_dir),
+        encoding="utf-8",
+    )
+    return manifest
 
 
 def render_problem1_theorem_emit(
@@ -1030,6 +1053,8 @@ def render_problem1_theorem_emit(
         f"sample bundle doc: {PROBLEM_SAMPLE_BUNDLE_DOCS[spec.problem_id]}",
         "command: python3 scripts/current_l2_guided_samples.py emit-theorem problem1",
         f"output dir: {display_path(output_dir)}",
+        f"pilot summary markdown: {display_path(problem1_theorem_emit_index_markdown_path(output_dir))}",
+        f"pilot summary json: {display_path(problem1_theorem_emit_index_json_path(output_dir))}",
         "",
     ]
     for row in rows:

@@ -64,7 +64,6 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `theorem-first-external-pilot` | theorem-first external integration target を repo-local emitted-artifact loop の次段で narrow actualization する | `M` | `Macro 6/7` | notebook-first theorem pilot を external integration target first として進める | emitted artifact / notebook-first pilot / reopen threshold が reserve lane から問題なく辿れる |
 | `auditable-authority-witness` | authoritative-room strengthening line を final public witness schema に上げずに narrow actualization する | `M` | `Macro 6` | minimal witness core strengthening を reserve package として保つ | authoritative-room baseline と witness strengthening の差分が helper / docs / scenario loop で追える |
 | `delegated-rng-service` | provider placement practical line を first actual default の後段で narrow actualization する | `M` | `Macro 6` | delegated RNG service は practical reserve package として進める | authority placement と provider placement の差分が helper / docs / scenario loop で追える |
 | `model-check-second-line` | row-local property carrier second-line を public checker finalization と切り離したまま narrow actualization する | `M` | `Macro 5/6` | model-check second line は theorem-first pilot と分けて reserve reopen する | property carrier / tool seam / public seam residual が problem1 lane と干渉せず追える |
@@ -1155,6 +1154,6 @@
 
 ## next reopen order
 
-1. `reserve` helper の reopen order に沿って theorem-first external pilot / `auditable_authority_witness` / `delegated_rng_service` / model-check second-line を順に narrow reopen する。
+1. `reserve` helper の reopen order に沿って `auditable_authority_witness` / `delegated_rng_service` / model-check second-line を順に narrow reopen する。theorem-first external pilot は emitted summary index まで close 済みである。
 2. later mixed gate は `residuals` / `reopen-map` / `lane ...` を入口に、problem-local seam ごとに narrow reopen する。
 3. true user-spec residual は `hold-line` helper を入口に explicit hold line として保ち、user target が明示された時だけ reopen する。

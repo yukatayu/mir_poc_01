@@ -111,6 +111,8 @@ python3 scripts/current_l2_guided_samples.py emit-theorem problem1
 
 - `target/current-l2-guided/problem1-theorem-pilot` 配下に、
   `p06 / p07 / p08` representative theorem line の Lean bundle JSON が出る。
+- 同じ directory に `pilot-summary.md` / `pilot-summary.json` が出て、
+  notebook-first theorem pilot の index としてまとめて読み直せる。
 - `p06` は representative theorem-first sample、
   `p07 / p08` は theorem-reached support sample として読める。
 - final public theorem contract や concrete theorem prover brand には上げず、

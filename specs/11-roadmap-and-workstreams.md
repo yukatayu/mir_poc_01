@@ -925,6 +925,10 @@ actual-adoption floor では、
   `specs/examples/608`
   - `hold-line` helper を actualize し、true user-spec residual を explicit hold line として `closeout` / `reserve` / snapshot docs から separate に読めるようにしてよい
   - Package 135 close 後の closeout 用 numbered queue は closed 状態となり、next reopen line は reserve integration / later mixed gate / user-spec hold line である
+- theorem-first external pilot summary index actualization:
+  `specs/examples/609`
+  - `emit-theorem problem1` output dir に `pilot-summary.md` / `pilot-summary.json` を actualize し、theorem-first external pilot を notebook-first summary index まで進めてよい
+  - current next reopen line は `auditable_authority_witness` / `delegated_rng_service` / model-check second-line / later mixed gate / user-spec hold line である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
