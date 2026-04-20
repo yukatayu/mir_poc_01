@@ -223,6 +223,15 @@ current L2 では、final grammar を先に決めずに、
 - A2 を polished first choice
 - A1 を shorthand として許容
 - A2 の rollout は representative examples の chain-heavy code block まで
+- `python3 scripts/current_l2_guided_samples.py lane syntax-modality-final-marker`
+  により、syntax / modality residual lane は
+  - `partial basis keep + stronger family keep + readable source marker keep`
+  を current recommendation として見せ、
+  - `lambda_circle_box` partial basis keep
+  - guarded / MDTT / MTT / Fitch-style stronger family keep
+  - problem-local seam separation
+  - true user-spec residual separation
+  を helper-local lane として読める
 
 ### OPEN
 

@@ -955,6 +955,51 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
             payload["entry_commands"],
         )
 
+    def test_syntax_modality_final_marker_lane_text_mentions_recommendation_and_retained_families(
+        self,
+    ) -> None:
+        text = guided.render_residual_lane_from_runtime(
+            "syntax-modality-final-marker",
+            output_format="pretty",
+        )
+
+        self.assertIn("syntax-modality-final-marker", text)
+        self.assertIn("current recommendation:", text)
+        self.assertIn("lambda_circle_box partial basis keep", text)
+        self.assertIn("guarded / MDTT / MTT / Fitch-style stronger family keep", text)
+        self.assertIn("problem-local seam separation", text)
+        self.assertIn("true user-spec residual separation", text)
+        self.assertIn("final parser grammar", text)
+
+    def test_syntax_modality_final_marker_lane_json_contains_recommendation_and_separation(
+        self,
+    ) -> None:
+        rendered = guided.render_residual_lane_from_runtime(
+            "syntax-modality-final-marker",
+            output_format="json",
+        )
+        payload = guided.json.loads(rendered)
+
+        self.assertEqual(payload["lane_id"], "syntax-modality-final-marker")
+        self.assertEqual(
+            payload["current_recommendation"],
+            "partial basis keep + stronger family keep + readable source marker keep",
+        )
+        self.assertEqual(
+            payload["retained_families"],
+            [
+                "lambda_circle_box partial basis keep",
+                "guarded / MDTT / MTT / Fitch-style stronger family keep",
+            ],
+        )
+        self.assertEqual(
+            payload["separation_boundary"],
+            [
+                "problem-local seam separation",
+                "true user-spec residual separation",
+            ],
+        )
+
     def test_main_lane_command_uses_renderer(self) -> None:
         fake_text = "problem1-final-public-seams\n..."
 

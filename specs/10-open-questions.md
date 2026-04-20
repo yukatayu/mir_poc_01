@@ -195,6 +195,11 @@ actual adoption / final contract / final surface / concrete tool binding を
 35. modal foundation の最終候補をどこへ置くか。
    - `lambda-circle-box` / `next` + `always` line は current partial basis candidate に留め、guarded lambda-calculus、MDTT/MTT cluster、Fitch-style multimodal family を stronger candidate family として retained する current recommendationは fixed 済みである。
    - syntax / modality current recommendation note により、5 軸 comparison、threshold-gated parallel keep、boundary-pressure trigger を含む current first line / retained alternatives / stop line は 1 本に再統合済みである。
+   - `specs/examples/599` により、`lane syntax-modality-final-marker` helper は
+     `partial basis keep + stronger family keep + readable source marker keep`
+     を current recommendation とし、
+     `lambda_circle_box` partial basis keep と guarded / MDTT / MTT / Fitch-style stronger family keep を
+     problem-local seam / true user-spec residual から切り分けて読める helper-local lane に actualize 済みである。
    - 未決なのは、stronger family をどの mixed gate で further reduction するか、また final foundation adoption / final source marker をどの package で判断するかである。
 36. order / handoff line の property-to-boundary matrix をどこまで current docs に昇格させるか。
    - source-backed な floor として、`core_static_checker` / `theorem_prover_boundary` / `protocol_verifier_boundary` / `runtime_policy_boundary` の 4-way split と property-to-boundary matrix 自体は current docs に昇格済みである。

@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p16` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...598` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix / problem bundle actualization / parser-side companion and bridge / parser-side inspector / parser-side representative mapping matrix / explained representative problem sample bundles / representative problem bundle smoke runner / representative problem bundle aggregate smoke summary / representative problem bundle failure-focused smoke diagnostics / representative problem bundle quickstart walkthrough hardening / representative problem quickstart CLI mirror / representative problem quickstart parity checks / representative problem mixed-gate reopen map refresh / representative problem split-package map refresh / Problem 1 typed source principal split helper actualization / Problem 1 theorem public-contract split helper actualization / Problem 1 model-check public-contract split helper actualization / Problem 2 source wording / emitted schema split helper actualization / Problem 2 witness-provider public-shape split helper actualization / representative problem reopen-map split closeout sync / remaining residual lane summary actualization / Problem 1 final-public-seam lane helper actualization / Problem 2 final-public-seam lane helper actualization が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 126 residual lane follow-up / later mixed-user-spec residual に narrowed した）
+    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...599` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix / problem bundle actualization / parser-side companion and bridge / parser-side inspector / parser-side representative mapping matrix / explained representative problem sample bundles / representative problem bundle smoke runner / representative problem bundle aggregate smoke summary / representative problem bundle failure-focused smoke diagnostics / representative problem bundle quickstart walkthrough hardening / representative problem quickstart CLI mirror / representative problem quickstart parity checks / representative problem mixed-gate reopen map refresh / representative problem split-package map refresh / Problem 1 typed source principal split helper actualization / Problem 1 theorem public-contract split helper actualization / Problem 1 model-check public-contract split helper actualization / Problem 2 source wording / emitted schema split helper actualization / Problem 2 witness-provider public-shape split helper actualization / representative problem reopen-map split closeout sync / remaining residual lane summary actualization / Problem 1 final-public-seam lane helper actualization / Problem 2 final-public-seam lane helper actualization / syntax-modality final-marker lane helper actualization が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 127...129 implementation reopen sequence / later mixed-user-spec residual に移った）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -313,16 +313,19 @@
 ## current self-driven queue
 
 - current live line は、
+  - Package 127 typed-checker first executable slice
+  - Package 128 theorem-first emitted-artifact hardening
+  - Package 129 authoritative-room runnable scenario hardening
   - later mixed gate residual maintenance
   - true user-spec residual
-  に narrow 化している。
+  に移っている。
 
 `specs/examples/466...555` は、
 actual adoption package、near-end closeout、helper-local actualization floor を source-backed に揃える current anchor である。
 `specs/examples/556...567` は、
 phase6 parser second-tranche first-package close、first strong typing layer finite-index spine default、phase6 reserve formal tool binding inventory closeout、phase6 parser-side follow-up package sequencing closeout、phase6 shared single attachment frame first-package closeout、fixed-subset source-sample corpus scope-and-file-layout closeout、request clause suite publicization closeout、perform head structural carrier closeout、perform-head-request-clause-bundle-attachment compare floor、perform-head-request-clause-bundle thin-wrapper helper actualization、finite-index first-layer capture / lifetime / cost actualization、Lean-first formal skeleton hardening after finite-index widening を source-backed に同期する current anchor である。
-`specs/examples/568` は、
-Package 94 close として theorem public seam を premature に widen せず、model-check second-line / row-local carrier widening と theorem/model-check helper-local `bridge_floor_refs` reconnect を source-backed に同期する current anchor である。
+`specs/examples/568...599` は、
+Problem 1 / Problem 2 representative bundle hardening、split helper 群、residual lane summary、final-public-seam lane helper 群、syntax-modality final-marker lane helper までを source-backed に同期する current anchor である。
 
 ## まだ OPEN のもの
 

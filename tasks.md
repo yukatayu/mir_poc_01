@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 18:08 JST
+最終更新: 2026-04-20 18:35 JST
 
 ## この文書について
 
@@ -35,7 +35,9 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 126 syntax-modality final-marker lane follow-up
+  - Package 127 typed-checker first executable slice
+  - Package 128 theorem-first emitted-artifact hardening
+  - Package 129 authoritative-room runnable scenario hardening
   を先頭に追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +65,9 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `126` syntax-modality final-marker lane follow-up | final modal foundation / source marker を problem-local final public seam と user-spec residual から切り分けたまま圧縮する | `S` | `Macro 5` | `residuals` helper と syntax/modality docs を主 anchor に、final marker line を later mixed gate として整える | syntax/modality lane が Problem 1 / Problem 2 / user-spec residual と混ざらず読める |
+| `127` typed-checker first executable slice | finite decidable index fragment / IFC / capture / lifetime / simple cost の current first line を checker-adjacent executable slice に下ろす | `M` | `Macro 5/7` | `p10 / p11 / p12 / p15 / p16` を対象に、final public verifier contract を凍らせず first executable checker slice を作る | representative typed sample set が helper preview だけでなく executable checker slice でも読める |
+| `128` theorem-first emitted-artifact hardening | theorem-first pilot を emitted artifact / Lean bundle / representative sample loop として tighten する | `M` | `Macro 5/7` | `p06 / p07 / p08` を中心に、notebook-first / brand-neutral のまま emitted artifact loop を harden する | theorem-first pilot が docs-only bridge ではなく executable artifact loop として再確認できる |
+| `129` authoritative-room runnable scenario hardening | authoritative-room first scenario を smoke / emitted artifact / negative pair 付き runnable slice として tighten する | `M` | `Macro 6/7` | `p07 / p08 / p09 / p13 / p14` を対象に、final public wording と contract を凍らせず runner / smoke / artifact loop を harden する | authoritative-room first scenario が reserve / negative pair と一緒に runnable scenario bundle として再確認できる |
 
 ## recently closed package note
 
@@ -516,13 +520,53 @@
 ### Package 126 — syntax-modality final-marker lane follow-up
 
 - current reading:
-  next active bundle。final modal foundation / source marker を Problem 1 / Problem 2 final public seam と true user-spec residual から切り分けたまま、later mixed gate として圧縮する。
+  close 済み。`lane syntax-modality-final-marker` helper と sample bundle index / syntax-modality docs を actualize し、final modal foundation / source marker mixed gate を current recommendation / retained families / separation boundary 付きの独立 lane として読めるようにした。
 - current recommendation:
-  `residuals` helper と syntax/modality docs を主 anchor に、partial basis + stronger family keep を維持したまま final marker line を narrow に保つ。
+  `residuals` helper と `lane syntax-modality-final-marker` を主 anchor に、partial basis + stronger family keep + readable source marker keep を維持したまま final marker line を narrow に保つ。
+- close evidence:
+  `specs/examples/599`
+  `docs/reports/0879`
+  `samples/problem-bundles/README.md`
+  `scripts/current_l2_guided_samples.py`
+  `scripts/tests/test_current_l2_guided_samples.py`
+  `scripts/tests/test_problem_sample_bundles.py`
 - stop line:
   final modal foundation adoption
   final source marker adoption
   final parser grammar
+
+### Package 127 — typed-checker first executable slice
+
+- current reading:
+  next active bundle。finite decidable index fragment / IFC / capture / lifetime / simple cost の current first lineを、helper-local checker summary から checker-adjacent executable slice へ ratchet する。
+- current recommendation:
+  `p10 / p11 / p12 / p15 / p16` source-side sample setを first executable checker slice の adequacy corpus に使い、`Ψ ; Γ ; Δ ⊢ e : A @ m ! ε ▷ C` conceptual spine と final public verifier contract を混ぜない。
+- stop line:
+  final typed source principal
+  final IFC syntax
+  final public verifier contract
+
+### Package 128 — theorem-first emitted-artifact hardening
+
+- current reading:
+  theorem-first pilot を representative `p06 / p07 / p08` emitted artifact loop として tighten し、notebook-first / brand-neutral の current cut を executable evidence で保つ。
+- current recommendation:
+  theorem public contract や concrete prover brand を凍らせず、repo-local emitted artifact / Lean bundle / representative sample loop の hardening を先に進める。
+- stop line:
+  final public theorem contract
+  concrete theorem prover brand
+  final public verifier contract
+
+### Package 129 — authoritative-room runnable scenario hardening
+
+- current reading:
+  authoritative-room first scenario default を representative / reserve / negative pair 付き runnable scenario bundle として tighten し、order-handoff current first line を smoke / emitted artifact / refresh behavior で再確認する。
+- current recommendation:
+  `p07 / p08 / p09 / p13 / p14` を scenario bundle としてまとめ、final source wording / final public witness-provider contract を凍らせずに runner / smoke / artifact loop を harden する。
+- stop line:
+  final source-surface handoff wording
+  final public witness/provider/artifact contract
+  exhaustive shared-space catalog
 
 ### Package 58 — helper / CLI hardening and broader coverage
 
@@ -1020,4 +1064,6 @@
 
 ## next reopen order
 
-1. Package 126 で syntax-modality final-marker lane を Problem-local seam と user-spec residual から切り分けて保つ。
+1. Package 127 で typed-checker first executable slice を `p10 / p11 / p12 / p15 / p16` adequacy corpus に沿って actualize する。
+2. Package 128 で theorem-first emitted-artifact hardening を `p06 / p07 / p08` representative loop に沿って actualize する。
+3. Package 129 で authoritative-room runnable scenario hardening を `p07 / p08 / p09 / p13 / p14` scenario bundle に沿って actualize する。

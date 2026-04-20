@@ -215,6 +215,48 @@ RESIDUAL_LANE_COMPONENT_ORDER = {
     ),
 }
 
+RESIDUAL_LANE_CURRENT_RECOMMENDATIONS = {
+    "problem1-final-public-seams": (
+        "checker-adjacent principal keep + theorem-first/model-check-second residual keep"
+    ),
+    "problem2-final-public-seams": (
+        "relation decomposition principal keep + witness/provider public-shape later keep"
+    ),
+    "syntax-modality-final-marker": (
+        "partial basis keep + stronger family keep + readable source marker keep"
+    ),
+}
+
+RESIDUAL_LANE_RETAINED_FAMILIES = {
+    "problem1-final-public-seams": (
+        "checker-adjacent structural marker keep",
+        "notebook-first theorem / row-local model-check keep",
+    ),
+    "problem2-final-public-seams": (
+        "edge-row principal keep",
+        "stage-block secondary / serial reserve keep",
+    ),
+    "syntax-modality-final-marker": (
+        "lambda_circle_box partial basis keep",
+        "guarded / MDTT / MTT / Fitch-style stronger family keep",
+    ),
+}
+
+RESIDUAL_LANE_SEPARATION_BOUNDARIES = {
+    "problem1-final-public-seams": (
+        "problem-local seam separation",
+        "true user-spec residual separation",
+    ),
+    "problem2-final-public-seams": (
+        "problem-local seam separation",
+        "true user-spec residual separation",
+    ),
+    "syntax-modality-final-marker": (
+        "problem-local seam separation",
+        "true user-spec residual separation",
+    ),
+}
+
 RESIDUAL_LANE_STOP_LINES = {
     "problem1-final-public-seams": (
         "final typed source principal",
@@ -1300,6 +1342,9 @@ def build_residual_lane_manifest(
         "summary": lane["summary"],
         "focus": list(lane["focus"]),
         "entry_commands": list(lane["entry_commands"]),
+        "current_recommendation": RESIDUAL_LANE_CURRENT_RECOMMENDATIONS[lane_id],
+        "retained_families": list(RESIDUAL_LANE_RETAINED_FAMILIES[lane_id]),
+        "separation_boundary": list(RESIDUAL_LANE_SEPARATION_BOUNDARIES[lane_id]),
         "component_order": list(RESIDUAL_LANE_COMPONENT_ORDER[lane_id]),
         "stop_line": list(RESIDUAL_LANE_STOP_LINES[lane_id]),
         "anchor_refs": list(lane["anchor_refs"]),
@@ -1325,6 +1370,25 @@ def render_residual_lane(lane_id: str, specs: Mapping[str, ProblemSpec]) -> str:
     )
     for command in manifest["entry_commands"]:
         lines.append(f"- {command}")
+    lines.extend(
+        [
+            "",
+            "current recommendation:",
+            f"- {manifest['current_recommendation']}",
+            "",
+            "retained families:",
+        ]
+    )
+    for item in manifest["retained_families"]:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "separation boundary:",
+        ]
+    )
+    for item in manifest["separation_boundary"]:
+        lines.append(f"- {item}")
     lines.extend(
         [
             "",

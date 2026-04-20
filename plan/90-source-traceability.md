@@ -4492,3 +4492,12 @@
   - `scripts/current_l2_guided_samples.py`
   - `scripts/tests/test_current_l2_guided_samples.py`
   - `scripts/tests/test_problem_sample_bundles.py`
+
+## 2026-04-20 Package 126 syntax-modality final-marker lane helper addendum
+
+- `Documentation.md`、`progress.md`、`tasks.md`、`plan/01-status-at-a-glance.md`、`plan/06-surface-notation-status.md`、`plan/11-roadmap-near-term.md`、`plan/13-heavy-future-workstreams.md`、`plan/17-research-phases-and-autonomy-gates.md`、`plan/18-type-proof-modelcheck-and-ordering-research-program.md`、`plan/90-source-traceability.md`、`specs/00-document-map.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`samples/problem-bundles/README.md` の今回更新分は、追加で次を主根拠にする。
+  - `specs/examples/599-current-l2-syntax-modality-final-marker-lane-helper-actualization.md`
+  - `docs/reports/0879-package126-syntax-modality-final-marker-lane-helper.md`
+  - `scripts/current_l2_guided_samples.py`
+  - `scripts/tests/test_current_l2_guided_samples.py`
+  - `scripts/tests/test_problem_sample_bundles.py`
