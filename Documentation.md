@@ -25,7 +25,7 @@
     （current-l2 authored sixteen と corrected prototype set `p01...p16` は fixed 済みだが、sample corpus 自体は theory-line の adequacy corpus として active に使う）
   - theory-lab lane:
     `Macro 5 final-layer closeout packages active`
-    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...586` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix / problem bundle actualization / parser-side companion and bridge / parser-side inspector / parser-side representative mapping matrix / explained representative problem sample bundles / representative problem bundle smoke runner / representative problem bundle aggregate smoke summary / representative problem bundle failure-focused smoke diagnostics / representative problem bundle quickstart walkthrough hardening / representative problem quickstart CLI mirror が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 113 representative problem quickstart parity checks、true user-spec residual に narrowed した）
+    （`specs/examples/458...519` で compare / actual-adoption / helper-local / deeper-theory floor が揃い、`520...587` で final-layer closeout defaults、Lean first slice、IFC / finite-index widening、parser-side tranche、theorem/model-check bridge reconnect、order-handoff source surface / artifact route tightening、authoritative-room first scenario helper summary tightening、authoritative-room reserve strengthening lane tightening、guided problem sample entrypoint / residual bundle matrix / problem bundle actualization / parser-side companion and bridge / parser-side inspector / parser-side representative mapping matrix / explained representative problem sample bundles / representative problem bundle smoke runner / representative problem bundle aggregate smoke summary / representative problem bundle failure-focused smoke diagnostics / representative problem bundle quickstart walkthrough hardening / representative problem quickstart CLI mirror / representative problem quickstart parity checks が順に actualize 済みである。representative Lean sample set `e5 / p06 / p10 / p11 / p12 / p15 / p16 / p07 / p08 / p09 / p13 / p14` actual Lean execution も reached 済みであり、current remaining active line は Package 114 representative problem mixed-gate reopen map refresh、true user-spec residual に narrowed した）
   - reserve integration lane:
     `Macro 6 minimal working subset actual default / Macro 7 mixed`
     （authoritative room minimal working subset と repo-local near-end success criteria は current default に上がったが、installed-binary / packaging / FFI / engine adapter / exhaustive shared-space catalog は still later に残る）
@@ -313,7 +313,7 @@
 ## current self-driven queue
 
 - current live line は、
-  - Package 113 representative problem quickstart parity checks
+  - Package 114 representative problem mixed-gate reopen map refresh
   - committed `samples/lean/` corpus と helper-local CLI summary を基点にした residual public-seam maintenance
   - later mixed gate residual maintenance
   - true user-spec residual
@@ -366,7 +366,7 @@ Package 94 close として theorem public seam を premature に widen せず、
 - typed / theorem / model-check / ordering の adjacent package:
   `specs/examples/413...448`
 - current tranche / preview package:
-  `specs/examples/451...586`
+  `specs/examples/451...587`
 - current near-term order:
   `plan/11-roadmap-near-term.md`
 - theory-lab の detail:
@@ -401,6 +401,7 @@ Package 94 close として theorem public seam を premature に widen せず、
 - `specs/examples/584` は Package 110 closeout として、`smoke-all` に failure-focused diagnostics を actualize し、failed step / command / return code / output excerpt を compact に surfacing しつつ aggregate failure を non-zero exit に戻した current source-backed note である。
 - `specs/examples/585` は Package 111 closeout として、`samples/problem-bundles/problem1|problem2` に `最短 quickstart` と `見るべき結果` を actualize し、representative sample guide を doc 単体でも読める quickstart bundle に harden した current source-backed note である。
 - `specs/examples/586` は Package 112 closeout として、`quickstart problem1|problem2` helper を actualize し、bundle doc 側の representative 4-step quickstart を helper-side summary にも mirror した current source-backed note である。
+- `specs/examples/587` は Package 113 closeout として、`quickstart-parity` helper を actualize し、sample bundle doc と helper-side quickstart mirror の 4-step parity を focused に確認できるようにした current source-backed note である。
 - 規範判断の正本は常に `specs/` に残る。
 - `plan/` は long-lived repository memory であり、snapshot ではない。
 - `progress.md` と `tasks.md` は current queue と remaining gate を mirror する薄い snapshot として保つ。

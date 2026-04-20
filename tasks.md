@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-20 15:22 JST
+最終更新: 2026-04-20 15:40 JST
 
 ## この文書について
 
@@ -35,7 +35,7 @@
   **repo-local once-through near-end completion**
   として整理し直すのが自然である。
   current self-driven sequence は、
-  - Package 113 representative problem quickstart parity checks
+  - Package 114 representative problem mixed-gate reopen map refresh
   に分けて追う。
 - exact rough stimulus は `samples/not_implemented/` preservation bucket に残し、corrected runnable version と混同しない。
 
@@ -63,7 +63,7 @@
 
 | package | question | package weight | macro phase | current recommendation | promotion criteria |
 |---|---|---|---|---|---|
-| `113` representative problem quickstart parity checks | sample bundle doc と `quickstart problem1|problem2` helper が同じ 4-step 導線を保っていることを focused test / helper で確認する | `S-M` | `Macro 6/7` | doc-side と helper-side の quickstart drift を早めに拾えるようにする | sample bundle docs と helper summary の quickstart がずれにくくなる |
+| `114` representative problem mixed-gate reopen map refresh | representative entrypoint floor を踏まえて Problem 1 / Problem 2 の mixed-gate reopen point を quickstart / bundle / matrix / smoke 現況に合わせて短く再整理する | `S-M` | `Macro 6/7` | current runnable floor と remaining mixed gate の境界を sample entrypoint から読みやすくする | sample bundle / helper / snapshot / roadmap から reopen point と self-driven next line が揃って読める |
 
 ## recently closed package note
 
@@ -373,11 +373,22 @@
 ### Package 113 — representative problem quickstart parity checks
 
 - current reading:
-  next active bundle。sample bundle doc と `quickstart problem1|problem2` helper が同じ 4-step 導線を保っていることを focused test / helper で確認し、doc-side と helper-side の quickstart drift を早めに拾う。
+  close 済み。sample bundle doc と `quickstart problem1|problem2` helper が同じ 4-step 導線を保っていることを focused test / helper で確認し、doc-side と helper-side の quickstart drift を早めに拾えるようにした。
 - current recommendation:
   representative 4-step quickstart だけを対象にした narrow parity check に留め、exhaustive tutorial validation には広げない。
 - stop line:
   exhaustive tutorial surface
+  final public CLI / tutorial surface
+  final public parser / checker / runtime API
+
+### Package 114 — representative problem mixed-gate reopen map refresh
+
+- current reading:
+  next active bundle。representative entrypoint floor を踏まえて Problem 1 / Problem 2 の mixed-gate reopen point を quickstart / bundle / matrix / smoke 現況に合わせて短く再整理する。
+- current recommendation:
+  current runnable floor と remaining mixed gate の境界を sample bundle / helper / snapshot / roadmap で同じ読みへ揃え、queue drift を起こしにくくする。
+- stop line:
+  final public theorem/model-check/witness-provider contract
   final public CLI / tutorial surface
   final public parser / checker / runtime API
 
@@ -877,5 +888,5 @@
 
 ## next reopen order
 
-1. Package 113 で sample bundle doc と `quickstart problem1|problem2` helper の 4-step parity check を actualize する。
+1. Package 114 で representative entrypoint floor に即した mixed-gate reopen map を actualize する。
 2. その後は mixed gate / true user-spec residual を reopen point ごとに narrow package へ戻す。

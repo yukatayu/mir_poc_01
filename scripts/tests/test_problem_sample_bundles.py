@@ -14,6 +14,7 @@ class ProblemSampleBundleDocsTests(unittest.TestCase):
         self.assertIn("problem2-order-handoff-shared-space.md", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py smoke-all", text)
         self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart problem1", text)
+        self.assertIn("python3 scripts/current_l2_guided_samples.py quickstart-parity", text)
         self.assertIn("最短 quickstart", text)
         self.assertIn("failed step", text)
         self.assertIn("非ゼロ", text)

@@ -837,6 +837,10 @@ actual-adoption floor では、
   `specs/examples/586`
   - `quickstart problem1|problem2` helper を actualize し、bundle doc 側の representative 4-step quickstart を helper-side summary にも mirror してよい
   - Package 112 close 後の current active queue は Package 113 representative problem quickstart parity checks と later mixed/user-spec residual である
+- representative problem quickstart parity checks actualization:
+  `specs/examples/587`
+  - `quickstart-parity` helper を actualize し、sample bundle doc と helper-side quickstart mirror の 4-step parity を focused に確認してよい
+  - Package 113 close 後の current active queue は Package 114 representative problem mixed-gate reopen map refresh と later mixed/user-spec residual である
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only

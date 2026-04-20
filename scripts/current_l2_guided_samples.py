@@ -706,6 +706,83 @@ def render_problem_quickstart_from_runtime(spec: ProblemSpec, *, output_format: 
     return render_problem_quickstart(spec)
 
 
+def build_problem_quickstart_parity_rows(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    doc_loader: Callable[[str], str] | None = None,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for problem_id in sorted(specs.keys()):
+        spec = specs[problem_id]
+        doc_path = PROBLEM_SAMPLE_BUNDLE_DOCS[problem_id]
+        if doc_loader is None:
+            text = (REPO_ROOT / doc_path).read_text(encoding="utf-8")
+        else:
+            text = doc_loader(doc_path)
+        normalized_text = normalize_shell_text_for_search(text)
+        steps = build_problem_quickstart_steps(spec)
+        missing_titles = [step.title for step in steps if step.title not in text]
+        missing_commands = [
+            step.command
+            for step in steps
+            if normalize_shell_text_for_search(step.command) not in normalized_text
+        ]
+        rows.append(
+            {
+                "problem_id": problem_id,
+                "sample_bundle_doc": doc_path,
+                "status": "synced" if not missing_titles and not missing_commands else "mismatch",
+                "missing_titles": missing_titles,
+                "missing_commands": missing_commands,
+            }
+        )
+    return rows
+
+
+def render_problem_quickstart_parity(rows: list[dict[str, object]]) -> str:
+    lines = [
+        "representative problem quickstart parity",
+        "",
+        "sample bundle doc と quickstart helper の 4-step 導線が揃っているかを narrow に見る repo-local check。",
+        "",
+    ]
+    for row in rows:
+        lines.append(f"- {row['problem_id']}: {row['status']}")
+        lines.append(f"  sample bundle doc: {row['sample_bundle_doc']}")
+        missing_titles = row["missing_titles"]
+        missing_commands = row["missing_commands"]
+        if missing_titles:
+            lines.append("  missing titles:")
+            for item in missing_titles:
+                lines.append(f"    - {item}")
+        if missing_commands:
+            lines.append("  missing commands:")
+            for item in missing_commands:
+                lines.append(f"    - {item}")
+        if not missing_titles and not missing_commands:
+            lines.append("  parity: quickstart title / command line ともに synced")
+        lines.append("")
+    lines.extend(
+        [
+            "注意:",
+            "- representative 4-step quickstart だけを対象にした narrow parity check であり、exhaustive tutorial validation ではない。",
+            "- final public CLI / tutorial surface や final public parser / checker / runtime API を意味しない。",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def render_problem_quickstart_parity_from_runtime(
+    specs: Mapping[str, ProblemSpec],
+    *,
+    output_format: str,
+) -> str:
+    rows = build_problem_quickstart_parity_rows(specs)
+    if output_format == "json":
+        return json.dumps(rows, ensure_ascii=False, indent=2)
+    return render_problem_quickstart_parity(rows)
+
+
 def render_problem_guide(spec: ProblemSpec) -> str:
     lines = [
         spec.title,
@@ -860,6 +937,10 @@ def compact_text_for_summary(text: str, *, limit: int = FAILURE_EXCERPT_LIMIT) -
     if len(compact) <= limit:
         return compact
     return compact[: limit - 3].rstrip() + "..."
+
+
+def normalize_shell_text_for_search(text: str) -> str:
+    return " ".join(text.replace("\\\n", " ").split())
 
 
 def failure_output_excerpt(failure: subprocess.CompletedProcess[str] | None) -> str | None:
@@ -1350,6 +1431,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     quickstart_parser.add_argument("problem_id", choices=sorted(problem_specs().keys()))
     quickstart_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
 
+    quickstart_parity_parser = subparsers.add_parser(
+        "quickstart-parity",
+        help="sample bundle doc と quickstart helper の 4-step parity を表示する",
+    )
+    quickstart_parity_parser.add_argument("--format", choices=("pretty", "json"), default="pretty")
+
     mapping_parser = subparsers.add_parser(
         "mapping",
         help="parser companion representative slice の mapping matrix を表示する",
@@ -1392,6 +1479,10 @@ def main(argv: list[str] | None = None) -> int:
         exit_code, rendered = run_problem_smoke_aggregate(specs, output_format=args.format)
         print(rendered)
         return exit_code
+
+    if args.subcommand == "quickstart-parity":
+        print(render_problem_quickstart_parity_from_runtime(specs, output_format=args.format))
+        return 0
 
     spec = specs[args.problem_id]
     if args.subcommand == "quickstart":

@@ -690,6 +690,44 @@ class CurrentL2GuidedSamplesTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertTrue(any("Problem 1 quickstart" in call.args[0] for call in write.mock_calls))
 
+    def test_problem_quickstart_parity_rows_report_synced_docs(self) -> None:
+        rows = guided.build_problem_quickstart_parity_rows(guided.problem_specs())
+
+        self.assertEqual([row["problem_id"] for row in rows], ["problem1", "problem2"])
+        self.assertTrue(all(row["status"] == "synced" for row in rows))
+        self.assertTrue(all(not row["missing_titles"] for row in rows))
+        self.assertTrue(all(not row["missing_commands"] for row in rows))
+
+    def test_problem_quickstart_parity_rows_report_missing_items(self) -> None:
+        def fake_loader(path: str) -> str:
+            if path.endswith("problem1-typed-theorem-model-check.md"):
+                return "python3 scripts/current_l2_guided_samples.py smoke problem1\n"
+            return "ok"
+
+        rows = guided.build_problem_quickstart_parity_rows(
+            guided.problem_specs(),
+            doc_loader=fake_loader,
+        )
+
+        self.assertEqual(rows[0]["status"], "mismatch")
+        self.assertIn("`matrix problem1` で representative と補助 sample の役割差を見る", rows[0]["missing_titles"])
+        self.assertIn("python3 scripts/current_l2_guided_samples.py bundle problem1", rows[0]["missing_commands"])
+        self.assertEqual(rows[1]["status"], "mismatch")
+
+    def test_main_quickstart_parity_command_uses_renderer(self) -> None:
+        fake_text = "representative problem quickstart parity\n..."
+
+        with mock.patch.object(
+            guided,
+            "render_problem_quickstart_parity_from_runtime",
+            return_value=fake_text,
+        ):
+            with mock.patch("sys.stdout.write") as write:
+                exit_code = guided.main(["quickstart-parity"])
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(any("representative problem quickstart parity" in call.args[0] for call in write.mock_calls))
+
     def test_main_smoke_all_command_uses_aggregate_renderer(self) -> None:
         fake_text = "representative problem bundle aggregate smoke summary\n..."
 
