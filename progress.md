@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-21 00:48 JST
+最終更新: 2026-04-21 01:21 JST
 
 ## この文書について
 
@@ -74,6 +74,12 @@
 - `source "$HOME/.elan/env" && python3 scripts/current_l2_lean_sample_sync.py`
   - foundation files success
   - current-l2 generated stubs success with `warning: declaration uses 'sorry'`
+- `python3 -m unittest scripts/tests/test_current_l2_lean_sample_sync.py`
+  - `Ran 8 tests ... OK`
+- `docs/research_abstract/static_analysis_01.md`
+  - Problem 1 の beginner guide を追加
+- `docs/research_abstract/order_01.md`
+  - Problem 2 の beginner guide を追加
 
 ## macro phase map
 
@@ -99,7 +105,7 @@
 | model-check second line | `S6` repo-local | reserve summary index、rejection pair surfacing | settled property language / checker artifact |
 | order / handoff | `S6` | `p07 / p08` representative pair、`surface_preview`、`emit-scenario problem2` | low-level `memory_order` exact surface / final wording |
 | shared-space reserve | `S5-S6` | witness strengthening、delegated RNG reserve package | final witness/provider public contract |
-| Lean foundations | `S6` | self-contained small proofs | final mechanized public theory |
+| Lean foundations | `S6` | self-contained small proofs、reusable lemma groups、guide-aligned explanations | final mechanized public theory |
 | backend / packaging | `S2-S3` | repo-local CLI / artifacts / helper loop | installed binary / FFI / engine adapter |
 
 ## layer / track progress
@@ -146,3 +152,4 @@
 ## recent log
 
 - 2026-04-21 00:48 JST — Problem 1 / Problem 2 representative bundle、typed rejection pair、order-handoff negative pair、Lean foundation、generated Lean stub corpus を再実行し、summary docs を `repo-local near-end` と `final public stop line` を分けた記述へ全面更新した。
+- 2026-04-21 01:21 JST — Lean foundation に reusable lemma 群を追加して `python3 scripts/current_l2_lean_sample_sync.py` と unit test を通し、Problem 1 / Problem 2 の beginner 向け guide `docs/research_abstract/static_analysis_01.md` / `order_01.md` を追加した。

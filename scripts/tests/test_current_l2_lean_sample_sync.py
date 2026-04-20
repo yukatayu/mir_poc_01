@@ -72,12 +72,54 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         self.assertIn("このファイル", explanation)
         self.assertIn("実際に小さな証明", explanation)
 
+    def test_ifc_foundation_spec_carries_valid_invalid_reusable_facts(self) -> None:
+        spec = next(
+            spec
+            for spec in sync.foundation_specs()
+            if spec.filename == "CurrentL2IfcSecretExamples.lean"
+        )
+
+        self.assertIn("theorem declassify_preserves_value", spec.source_text)
+        self.assertIn(
+            "theorem low_to_low_release_without_authority_is_available", spec.source_text
+        )
+        self.assertIn(
+            "theorem unauthorized_live_fingerprint_release_is_impossible",
+            spec.source_text,
+        )
+
+    def test_finite_index_foundation_spec_carries_reusable_first_layer_facts(self) -> None:
+        spec = next(
+            spec
+            for spec in sync.foundation_specs()
+            if spec.filename == "CurrentL2FiniteIndexFirstLayer.lean"
+        )
+
+        self.assertIn("theorem outlives_trans", spec.source_text)
+        self.assertIn("theorem capture_subset_trans", spec.source_text)
+        self.assertIn("def spendRemoteCall", spec.source_text)
+        self.assertIn("theorem single_budget_is_exhausted_after_one_call", spec.source_text)
+
+    def test_foundation_explanation_calls_out_valid_and_invalid_patterns(self) -> None:
+        spec = next(
+            spec
+            for spec in sync.foundation_specs()
+            if spec.filename == "CurrentL2IfcSecretExamples.lean"
+        )
+
+        explanation = sync.build_foundation_explanation(spec)
+
+        self.assertIn("valid pattern がなぜ通るか", explanation)
+        self.assertIn("invalid pattern がなぜ witness を持てないか", explanation)
+
     def test_top_level_readme_is_written_in_japanese(self) -> None:
         readme = sync.build_top_level_readme()
 
         self.assertIn("このディレクトリ", readme)
         self.assertIn("現在の current-L2 定理ブリッジ", readme)
         self.assertIn("実際に小さな証明", readme)
+        self.assertIn("valid pattern がなぜ通るか", readme)
+        self.assertIn("invalid pattern がなぜ不可能か", readme)
 
 
 if __name__ == "__main__":

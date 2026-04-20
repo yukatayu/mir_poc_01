@@ -15,6 +15,7 @@ repo-local かつ inspectable な形で保存する。
 ## 読み方
 
 - `foundations/` は、すでに小さな fact を証明できる **mechanization-ready core** を示す。
+- foundations 側では、valid pattern がなぜ通るか、invalid pattern がなぜ不可能かを、再利用しやすい小さな補題と concrete example で残す。
 - `current-l2/` は、repo が representative sample から生成する **actual emitted theorem bridge surface** を示す。
 - generated current-L2 stub は artifact alignment と Lean acceptance を示すのであって、completed theorem discharge を示すものではない。
 

@@ -36,3 +36,10 @@
 1. phase の役割を知りたいときは各 abstract を読む。
 2. current status は `progress.md` と `tasks.md` を見る。
 3. 規範の根拠が必要になったら `specs/` に戻る。
+
+## topic guide
+
+- `static_analysis_01.md`
+  - Problem 1 の typed / theorem / model-check と Lean foundation を、実行順に追う入門ガイド
+- `order_01.md`
+  - Problem 2 の order / handoff / authoritative-room を、success / reserve / static-stop の順に追う入門ガイド

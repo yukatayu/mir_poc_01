@@ -283,11 +283,16 @@ end CurrentL2
         ),
         FoundationSpec(
             filename="CurrentL2IfcSecretExamples.lean",
-            summary="secret-key valid/invalid と explicit authority declassification を固定する IFC concrete example 集。",
+            summary=(
+                "secret-key valid/invalid と explicit authority declassification を、"
+                "valid/invalid witness 付きで固定する IFC concrete example 集。"
+            ),
             explanation=(
                 "Package 56 の first-fragment を label model の定義だけで止めず、"
                 "secret-key valid/invalid と explicit authority declassification を "
                 "mechanization-ready な concrete example として置く。"
+                "valid pattern がなぜ通るか、invalid pattern がなぜ witness を持てないかを、"
+                "payload preservation lemma と concrete witness で読めるようにする。"
             ),
             source_text="""/-!
 current-l2 IFC secret examples fragment
@@ -332,6 +337,14 @@ def declassify
     Labeled toLabel α :=
   { value := value.value }
 
+theorem declassify_preserves_value
+    (hasAuthority : Bool)
+    {fromLabel toLabel : SecurityLabel}
+    (proof : CanDeclassify hasAuthority fromLabel toLabel)
+    (value : Labeled fromLabel α) :
+    (declassify hasAuthority proof value).value = value.value := by
+  rfl
+
 theorem no_secret_release_without_authority :
     ¬ CanDeclassify false high low := by
   simp [CanDeclassify, flowsTo]
@@ -340,15 +353,41 @@ theorem authorized_secret_release_is_available :
     CanDeclassify true high low := by
   simp [CanDeclassify]
 
+theorem low_to_low_release_without_authority_is_available :
+    CanDeclassify false low low := by
+  simp [CanDeclassify, flowsTo]
+
+def publicAuditNote : Labeled low String :=
+  { value := "audit-ok" }
+
+def unchangedPublicAuditNote : Labeled low String :=
+  declassify false low_to_low_release_without_authority_is_available publicAuditNote
+
+theorem unchanged_public_audit_note_keeps_payload :
+    unchangedPublicAuditNote.value = "audit-ok" := by
+  simpa [unchangedPublicAuditNote, publicAuditNote] using
+    declassify_preserves_value
+      false
+      low_to_low_release_without_authority_is_available
+      publicAuditNote
+
 def liveSecretKey : SecretKey :=
   { value := "sk_live" }
+
+theorem fingerprint_keeps_secret_payload :
+    (fingerprint liveSecretKey).value = "fp:sk_live" := by
+  rfl
 
 def authorizedPublicFingerprint : PublicFingerprint :=
   declassify true authorized_secret_release_is_available (fingerprint liveSecretKey)
 
 theorem authorized_public_fingerprint_keeps_payload :
     authorizedPublicFingerprint.value = "fp:sk_live" := by
-  rfl
+  simpa [authorizedPublicFingerprint, fingerprint, liveSecretKey] using
+    declassify_preserves_value
+      true
+      authorized_secret_release_is_available
+      (fingerprint liveSecretKey)
 
 theorem invalid_release_has_no_authority_proof :
     ¬ ∃ _proof : CanDeclassify false high low, True := by
@@ -360,17 +399,39 @@ theorem valid_release_has_authority_proof :
     ∃ _proof : CanDeclassify true high low, True := by
   exact ⟨authorized_secret_release_is_available, trivial⟩
 
+theorem authorized_live_fingerprint_release_has_witness :
+    ∃ proof : CanDeclassify true high low,
+      (declassify true proof (fingerprint liveSecretKey)).value = "fp:sk_live" := by
+  refine ⟨authorized_secret_release_is_available, ?_⟩
+  simpa [fingerprint, liveSecretKey] using
+    declassify_preserves_value
+      true
+      authorized_secret_release_is_available
+      (fingerprint liveSecretKey)
+
+theorem unauthorized_live_fingerprint_release_is_impossible :
+    ¬ ∃ proof : CanDeclassify false high low,
+      (declassify false proof (fingerprint liveSecretKey)).value = "fp:sk_live" := by
+  intro h
+  rcases h with ⟨proof, _⟩
+  exact no_secret_release_without_authority proof
+
 end CurrentL2IfcSecretExamples
 """,
         ),
         FoundationSpec(
             filename="CurrentL2FiniteIndexFirstLayer.lean",
-            summary="finite-index first layer の capture/lifetime/cost を固定する小さな proof fragment。",
+            summary=(
+                "finite-index first layer の capture/lifetime/cost を、"
+                "reusable lemma 付きで固定する小さな proof fragment。"
+            ),
             explanation=(
                 "Package 93 の Lean-first hardening として、finite decidable index fragment を "
                 "IFC だけでなく capture / lifetime / simple cost まで小さな自己完結 proof として置く。"
                 "ここでは final typed calculus を与えず、first strong typing sample set を支える "
                 "最小 preorder / subset / budget fact だけを mechanization-ready に固定する。"
+                "capture escape と zero-budget follow-up がなぜ止まるかを、"
+                "transitivity / subset / budget-step lemma まで含めて sample-facing に残す。"
             ),
             source_text="""/-!
 current-l2 finite-index first-layer fragment
@@ -403,6 +464,13 @@ theorem session_outlives_step : outlives session step := by
 theorem step_does_not_outlive_session : ¬ outlives step session := by
   simp [outlives]
 
+theorem outlives_trans
+    {a b c : Lifetime}
+    (hab : outlives a b)
+    (hbc : outlives b c) :
+    outlives a c := by
+  cases a <;> cases b <;> cases c <;> simp [outlives] at hab hbc ⊢
+
 inductive Capability where
   | roomHistory
   | ephemeralToken
@@ -417,13 +485,37 @@ def captureSubset (lhs rhs : CaptureSet) : Prop :=
 
 def emptyCapture : CaptureSet := fun _ => false
 
+def fullCapture : CaptureSet := fun _ => true
+
 def ephemeralOnly : CaptureSet
   | ephemeralToken => true
   | roomHistory => false
 
+def roomHistoryOnly : CaptureSet
+  | roomHistory => true
+  | ephemeralToken => false
+
 theorem capture_subset_refl (captures : CaptureSet) : captureSubset captures captures := by
   intro capability h
   exact h
+
+theorem empty_capture_subset (captures : CaptureSet) :
+    captureSubset emptyCapture captures := by
+  intro capability h
+  simp [emptyCapture] at h
+
+theorem capture_subset_trans
+    {capturesA capturesB capturesC : CaptureSet}
+    (hab : captureSubset capturesA capturesB)
+    (hbc : captureSubset capturesB capturesC) :
+    captureSubset capturesA capturesC := by
+  intro capability h
+  exact hbc capability (hab capability h)
+
+theorem ephemeral_only_subset_of_full_capture :
+    captureSubset ephemeralOnly fullCapture := by
+  intro capability h
+  simp [fullCapture]
 
 theorem ephemeral_only_not_subset_of_empty :
     ¬ captureSubset ephemeralOnly emptyCapture := by
@@ -431,8 +523,18 @@ theorem ephemeral_only_not_subset_of_empty :
   have hToken := h ephemeralToken rfl
   simp [emptyCapture] at hToken
 
+theorem room_history_only_not_subset_of_ephemeral_only :
+    ¬ captureSubset roomHistoryOnly ephemeralOnly := by
+  intro h
+  have hHistory := h roomHistory rfl
+  simp [ephemeralOnly] at hHistory
+
 def remoteCallAllowed (remainingCalls : Nat) : Prop :=
   0 < remainingCalls
+
+def spendRemoteCall : Nat → Nat
+  | 0 => 0
+  | remainingCalls + 1 => remainingCalls
 
 theorem zero_budget_rejects_remote_call :
     ¬ remoteCallAllowed 0 := by
@@ -441,6 +543,18 @@ theorem zero_budget_rejects_remote_call :
 theorem positive_budget_allows_remote_call :
     remoteCallAllowed 1 := by
   simp [remoteCallAllowed]
+
+theorem succ_budget_allows_remote_call (remainingCalls : Nat) :
+    remoteCallAllowed (Nat.succ remainingCalls) := by
+  simp [remoteCallAllowed]
+
+theorem single_budget_is_exhausted_after_one_call :
+    ¬ remoteCallAllowed (spendRemoteCall 1) := by
+  simp [spendRemoteCall, remoteCallAllowed]
+
+theorem two_budget_still_allows_after_one_call :
+    remoteCallAllowed (spendRemoteCall 2) := by
+  simp [spendRemoteCall, remoteCallAllowed]
 
 end CurrentL2FiniteIndexFirstLayer
 """,
@@ -566,6 +680,7 @@ def build_foundation_explanation(spec: FoundationSpec) -> str:
 ## このファイルを置く理由
 
 - {spec.explanation}
+- valid pattern がなぜ通るか、invalid pattern がなぜ witness を持てないかを、sample-facing に追いやすい小さな補題と example で固定する。
 - 生成された current-L2 sample stub と違い、このファイルは `sorry` ではなく実際に小さな証明を含む。
 - ただし依然として helper-local / non-production cut に留める。目的は first mechanization-ready core を固定することであり、final public type system や verifier contract を凍らせることではない。
 """
@@ -590,6 +705,7 @@ repo-local かつ inspectable な形で保存する。
 ## 読み方
 
 - `foundations/` は、すでに小さな fact を証明できる **mechanization-ready core** を示す。
+- foundations 側では、valid pattern がなぜ通るか、invalid pattern がなぜ不可能かを、再利用しやすい小さな補題と concrete example で残す。
 - `current-l2/` は、repo が representative sample から生成する **actual emitted theorem bridge surface** を示す。
 - generated current-L2 stub は artifact alignment と Lean acceptance を示すのであって、completed theorem discharge を示すものではない。
 
