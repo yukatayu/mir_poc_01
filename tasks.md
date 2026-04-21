@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-21 00:48 JST
+最終更新: 2026-04-21 13:46 JST
 
 ## この文書について
 
@@ -206,5 +206,7 @@
    Macro 6 mixed-gate front half
 4. parser-side residual lane
    Macro 3 / 7 reserve path
-5. user-spec hold line beyond repo-local near-end
+5. reserve package hardening
+   Macro 5 / 6 reserve integration。first line と later mixed gate の間の帯域を読みやすく保つ
+6. user-spec hold line beyond repo-local near-end
    Macro 7 / 8。ここから先は user 決定が濃くなる
