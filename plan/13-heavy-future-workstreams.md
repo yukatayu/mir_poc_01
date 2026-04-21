@@ -61,6 +61,9 @@ detail-side で今まさに詰める線は `plan/18` と `specs/examples/458...4
   final activation / authority / auth / consistency / fairness catalog と concrete protocol profile
 - なぜ heavy か:
   user specification と operational policy の影響が大きいため
+- current recommendation:
+  authoritative-room first default、witness-provider reserve strengthening、negative static-stop pair までは current line に残すが、
+  portal / multi-world / replay / rejoin / quorum / fairness catalog の finalization は stressor family としてここに留める。
 
 ### 7. raw external integration
 
@@ -75,6 +78,29 @@ detail-side で今まさに詰める線は `plan/18` と `specs/examples/458...4
   synchronized shared-space、collaborative editing、virtual-world 系などの concrete app
 - なぜ heavy か:
   acceptance criteria と evaluation target が user 依存だから
+- current recommendation:
+  benchmark family catalog として
+  federated learning、intermittent IoT、distributed build、mixed-QoS shared-space、auditable ledger、lease-based swarm control
+  を保持してよいが、これは committed product line ではなく evaluation family として扱う。
+
+### 9. operational trust / audit / registry / observability
+
+- 主題:
+  trust tier policy、no-upcast operational enforcement、key rotation / revocation、audit chain、label/type registry、debugger / trace UX
+- なぜ heavy か:
+  Mir current-L2、shared-space、packaging、host governance をまたいで境界を固定しやすく、premature freeze の反動が大きいため
+- current recommendation:
+  current mainline では boundary vocabulary と risk inventory だけを保持し、registry / standardization / operational policy finalization はここに残す。
+
+### 10. dynamic evolution / lifetime finalization / revocation interaction
+
+- 主題:
+  `fallback` / `lease` / `patch` / `gc_epoch` / revocation の協調、runtime migration、finalization choreography、lifecycle-safe hot evolution
+- なぜ heavy か:
+  semantics / runtime / operational policy をまたぎ、local cut と cross-node finalization を 1 つの primitive に誤圧縮しやすいため
+- current recommendation:
+  current mainline では monotone ownership / lifetime invariant と reserve package inventory だけを保持し、
+  concrete migration / finalization / revocation choreography の finalization はここに残す。
 
 ## theoretical reading pack inventory
 
@@ -107,4 +133,5 @@ detail-side で今まさに詰める線は `plan/18` と `specs/examples/458...4
 - `plan/18` にある typed / theorem / model-check / ordering / syntax / modality の detailed program は、compare-floor から actual adoption package、helper-local actualization、principal theory spine / Lean-first proof roadmap package、final-layer closeout defaults、Lean sample corpus and first foundations package までは close 済みである。layered strong typing / IFC first-fragment は current self-driven closeout package に残し、Lean formal skeleton / proof obligations は first slice actualization 済みとしてその先の widening のみ heavy line から外す。
 - low-level memory-order family は retained-later reference family として保持しつつ、
   higher-level family comparison を先に進める。
+- historical recovery で回収した requirement は、scenario family / stressor family / governance concern としてここに残し、current numbered queue や settled surface へは戻さない。
 - この文書の線は、boundary / pilot / adequacy corpus が固まっても mainline に混ぜない。

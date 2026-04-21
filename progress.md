@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-21 09:59 JST
+最終更新: 2026-04-21 13:11 JST
 
 ## この文書について
 
@@ -20,6 +20,9 @@
 - reserve integration lane:
   `Macro 6 minimal working subset default / Macro 7 mixed`
   authoritative-room default と reserve package summary はあるが、final public contract と packaging は later
+- historical recovery:
+  `旧資料_参考_ChatGPT_03_sync_v3/` の回収価値がある論点は `plan/10` / `plan/12` / `plan/13` / `plan/18` に owner 別で再配置済み
+  current numbered self-driven queue は reopen していない
 
 ## practical reading
 
@@ -164,3 +167,4 @@
 - 2026-04-21 01:36 JST — Lean beginner guide `docs/research_abstract/lean_01.md` を追加し、label-model / proof-skeleton の補題を少量補強したうえで Lean 実行・standalone success/error 例・unit test・docs validation を再確認した。
 - 2026-04-21 09:30 JST — `static_analysis_01_detail.md` / `order_01_detail.md` / `lean_01_detail.md` を追加し、Problem 1 / Problem 2 / Lean foundation のコード全文・行単位解説・再現コマンド・出力の読み方を standalone な詳細版として整理した。
 - 2026-04-21 09:56 JST — reviewer 指摘を取り込み、`docs/research_abstract/README.md` の stale snapshot を現行 status に合わせ、report `0898` を repo ルール準拠の章立てと exact command / output excerpt に修正した。
+- 2026-04-21 13:11 JST — 旧 `sync_v3` 資料の回収価値がある論点を `plan/10` / `plan/12` / `plan/13` / `plan/18` に owner 別で再配置し、historical scope-collapse と requirement amnesia を避ける方針を明示した。current numbered self-driven queue は reopen していない。

@@ -72,6 +72,16 @@
 | `Macro 7` | toolchain / backend / host-facing integration | mixed | shell / facade / packaging boundary を final target profileから分離できる |
 | `Macro 8` | domain / application realization | application-specific target not started | first target profile が user と合意される |
 
+## historical sync_v3 recovery policy
+
+- `旧資料_参考_ChatGPT_03_sync_v3/` は、current mainline の numbered reopen queue として扱わない。
+- 旧資料から回収するものは、fixed surface / concrete stack / monolithic product roadmap ではなく、
+  retained concern / stressor family / gate memory として owner 別に再配置する。
+- solver / projection / artifact-trace scaling、historical requirement amnesia、monolithic reimport risk は `plan/12` で管理する。
+- portal / multi-world / operational trust / audit / registry / observability / benchmark family は `plan/13` heavy line に置く。
+- typed / theorem / model-check / ordering 側の proof-promotion memory、finite decidable first fragment、non-adoption boundary は `plan/18` で管理する。
+- old fixed EBNF、old bundled `atomic_cut` / `durable_cut` / `barrier` surface、tool brand fixed、Stage `0...4` / `1.0` product roadmap は current repo にそのまま戻さない。
+
 ## current recommendation
 
 - Lane A は narrow actualization を維持する。
@@ -79,6 +89,7 @@
 - Lane B は mainline の「ついで」ではなく、separable な research program として前進させる。
 - Lane B の narrow mixed-gate pre-floor では、preview summary、model-check projection helper、theorem discharge helper を final public contract や settled property language にせず compare floor を厚くしてよい。
 - Lane C は thin facade と shell concern の boundary hardening、および mixed-gate boundary の明確化に留める。
+- historical recovery は owner split を通して行い、old line を numbered queue や settled surface として再昇格させない。
 - old `Phase 7 = FutureWork` の巨大 bucket は再導入しない。
 
 ## まだ急がないもの
