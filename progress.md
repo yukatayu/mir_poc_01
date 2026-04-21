@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-21 09:30 JST
+最終更新: 2026-04-21 09:59 JST
 
 ## この文書について
 
@@ -163,3 +163,4 @@
 - 2026-04-21 01:21 JST — Lean foundation に reusable lemma 群を追加して `python3 scripts/current_l2_lean_sample_sync.py` と unit test を通し、Problem 1 / Problem 2 の beginner 向け guide `docs/research_abstract/static_analysis_01.md` / `order_01.md` を追加した。
 - 2026-04-21 01:36 JST — Lean beginner guide `docs/research_abstract/lean_01.md` を追加し、label-model / proof-skeleton の補題を少量補強したうえで Lean 実行・standalone success/error 例・unit test・docs validation を再確認した。
 - 2026-04-21 09:30 JST — `static_analysis_01_detail.md` / `order_01_detail.md` / `lean_01_detail.md` を追加し、Problem 1 / Problem 2 / Lean foundation のコード全文・行単位解説・再現コマンド・出力の読み方を standalone な詳細版として整理した。
+- 2026-04-21 09:56 JST — reviewer 指摘を取り込み、`docs/research_abstract/README.md` の stale snapshot を現行 status に合わせ、report `0898` を repo ルール準拠の章立てと exact command / output excerpt に修正した。

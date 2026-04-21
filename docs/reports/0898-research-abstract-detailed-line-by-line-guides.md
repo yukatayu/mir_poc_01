@@ -12,7 +12,15 @@
 - `docs/research_abstract/lean_01_detail.md` を新規追加し、`lean_01.md` で紹介している Lean foundation / generated stub / 最小 success-error 例を、コード全文・行単位解説・再現コマンド・出力の読み方つきで standalone に整理する。
 - 上記 3 本を README / progress から辿れる状態にし、実行コマンドと出力が current workspace で再現できることを fresh に確認する。
 
-## 2. Inputs consulted
+## 2. Scope and assumptions
+
+- 規範判断の正本は `specs/` であり、今回の task では規範変更を行わない。
+- current-L2 の `repo-local near-end` reading を、user-facing な detailed guide として展開する。
+- `samples/` 配下の sample source / Lean source は説明対象であり、今回の task では変更しない。
+- generated Lean stub は acceptance / bridge alignment の evidence として扱い、completed theorem discharge とは主張しない。
+- `plan/` と `tasks.md` は今回の task では status memory / task map として参照のみとし、更新不要と判断する。
+
+## 3. Documents consulted
 
 - `README.md`
 - `Documentation.md`
@@ -39,7 +47,7 @@
 - `samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean`
 - `samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean`
 
-## 3. Actions taken
+## 4. Actions taken
 
 - repo-scoped Discord baseline を `begin` で記録した。
 - AGENTS.md の順序に従って README / Documentation / progress / specs / plan / current research abstracts を読み、今回の task が user-facing documentation hardening であり、規範変更ではないことを確認した。
@@ -51,19 +59,15 @@
 - `progress.md` の最終更新時刻、evidence bullets、layer/track progress、recent log を更新した。
 - `plan/` は今回の task では update 不要と判断した。
 - `tasks.md` は今回の task では update 不要と判断した。
+- 変更ファイル:
+  - 追加: `docs/research_abstract/static_analysis_01_detail.md`
+  - 追加: `docs/research_abstract/order_01_detail.md`
+  - 追加: `docs/research_abstract/lean_01_detail.md`
+  - 更新: `docs/research_abstract/README.md`
+  - 更新: `progress.md`
+  - 更新: `docs/reports/0898-research-abstract-detailed-line-by-line-guides.md`
 
-## 4. Files changed
-
-- 追加:
-  - `docs/research_abstract/static_analysis_01_detail.md`
-  - `docs/research_abstract/order_01_detail.md`
-  - `docs/research_abstract/lean_01_detail.md`
-- 更新:
-  - `docs/research_abstract/README.md`
-  - `progress.md`
-  - `docs/reports/0898-research-abstract-detailed-line-by-line-guides.md`
-
-## 5. Commands run and exact outputs
+## 5. Evidence / outputs / test results
 
 - resource checks:
   - `df -h .`
@@ -80,24 +84,33 @@
     - `pilot_status: reached`
     - `lean_stub_artifact_count: 1`
   - `python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line`
-    - `p10 ... terminal_outcome: success`
-    - `p11 / p12 / p15 / p16 ... terminal_outcome: reject`
+    - `p10-typed-authorized-fingerprint-declassification: authority release positive carrier`
+    - `static_gate: valid`
+    - `terminal_outcome: success`
+    - `p11-typed-unauthorized-fingerprint-release: authority miss rejection`
+    - `terminal_outcome: reject`
+    - `p12-typed-classified-fingerprint-publication-block: label-flow rejection`
+    - `terminal_outcome: reject`
+    - `p15-typed-capture-escape-rejected: capture/lifetime rejection`
+    - `terminal_outcome: reject`
+    - `p16-typed-remote-call-budget-exceeded: simple cost rejection`
+    - `terminal_outcome: reject`
 - Problem 1 sample runs:
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample ...p10... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt --format pretty`
     - `static_gate_verdict: valid`
     - `terminal_outcome: success`
     - `typed_checker_hint_status: reached`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample ...p11... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.txt --format pretty`
     - `static_gate_verdict: valid`
     - `terminal_outcome: Reject`
     - `typed_checker_hint_status: reached`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample ...p12... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.txt --format pretty`
     - `static_gate_verdict: valid`
     - `terminal_outcome: Reject`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample ...p15... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt --format pretty`
     - `static_gate_verdict: valid`
     - `terminal_outcome: Reject`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample ...p16... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt --format pretty`
     - `static_gate_verdict: valid`
     - `terminal_outcome: Reject`
 - Problem 2 helper:
@@ -112,31 +125,31 @@
   - `python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service`
     - `p09 delegated_rng_service_status: reached`
 - Problem 2 sample runs:
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample ...p07... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt --format pretty`
     - `static_gate: valid`
     - `entered_evaluation: true`
     - `terminal_outcome: success`
     - `steps_executed: 9`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample ...p08... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt --format pretty`
     - `static_gate: valid`
     - `terminal_outcome: success`
     - `steps_executed: 7`
     - `formal_hook_status: reached`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample ...p09... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.txt --format pretty`
     - `static_gate: valid`
     - `entered_evaluation: true`
     - `terminal_outcome: success`
     - `steps_executed: 11`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample ...p13... --format pretty`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.txt --format pretty`
     - `static_gate: underdeclared`
     - `entered_evaluation: false`
     - `steps_executed: 0`
-    - `missing publication witness before handoff ...`
-  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample ...p14... --format pretty`
+    - `missing publication witness before handoff for late-join visibility at root / room / dice_authority`
+  - `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.txt --format pretty`
     - `static_gate: malformed`
     - `entered_evaluation: false`
     - `steps_executed: 0`
-    - `handoff appears before publish ...`
+    - `handoff appears before publish for late-join visibility at root / room / dice_authority`
 - Lean:
   - `source "$HOME/.elan/env" && lean --version`
     - `Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)`
@@ -158,7 +171,7 @@
   - `cargo --version`
     - `cargo 1.93.0 (083ac5135 2025-12-15)`
 
-## 6. Evidence / findings
+## 6. What changed in understanding
 
 - Problem 1 / Problem 2 / Lean それぞれについて、概要版だけでは「どの行が何を宣言しているか」が読みにくい、という user 指摘に対し、detail docs で source code 全文と行単位説明を付けることで入口の不透明さを解消できた。
 - Problem 1 では、authority miss / label-flow mismatch / capture-lifetime / simple cost という rejection 理由が互いに別であることを、sample ごとに分けて説明できるようになった。
@@ -167,18 +180,12 @@
 - `docs/research_abstract/README.md` から detail docs を直接辿れるようにした。
 - `progress.md` に user-facing documentation hardening の進捗を反映した。
 
-## 7. Changes in understanding
-
-- 今回の task では規範判断そのものは変えていない。変えたのは「既にある current reading を、初学者が追える粒度まで展開する」部分である。
-- Problem 1 の本質説明では、foundation proof と generated stub を明確に分けて書かないと、`Lean に通る artifact` と `本当に証明済みの補題` が混ざって読まれやすい。
-- Problem 2 の説明では、`publication witness` を独立構文と誤読されないように、「publish の先行と helper / checker rule から読める根拠」として説明するのが重要だと分かった。
-
-## 8. Open questions
+## 7. Open questions
 
 - なし。今回スコープでは docs hardening を完了した。
 - `plan/` 更新不要。
 - `tasks.md` 更新不要。
 
-## 9. Suggested next prompt
+## 8. Suggested next prompt
 
 - `static_analysis_01_detail.md` / `order_01_detail.md` / `lean_01_detail.md` を読んだ上で、さらに「この節の説明をもっと短くしてほしい」「この sample の出力全文も別 appendix に欲しい」といった粒度調整を依頼してください。
