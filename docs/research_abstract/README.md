@@ -41,7 +41,13 @@
 
 - `lean_01.md`
   - Lean で今何を証明しているか、どう実行するか、出力をどう読むかをまとめた入門ガイド
+- `lean_01_detail.md`
+  - `lean_01.md` で紹介した Lean foundation / generated stub / 最小 success/error 例を、コード全文と行単位解説つきで読み下す詳細版
 - `static_analysis_01.md`
   - Problem 1 の typed / theorem / model-check と Lean foundation を、実行順に追う入門ガイド
+- `static_analysis_01_detail.md`
+  - `static_analysis_01.md` で紹介した Problem 1 sample 群と Lean foundation を、コード全文と行単位解説つきで読み下す詳細版
 - `order_01.md`
   - Problem 2 の order / handoff / authoritative-room を、success / reserve / static-stop の順に追う入門ガイド
+- `order_01_detail.md`
+  - `order_01.md` で紹介した Problem 2 sample 群と reserve helper を、コード全文と行単位解説つきで読み下す詳細版

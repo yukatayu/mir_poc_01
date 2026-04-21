@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-21 01:36 JST
+最終更新: 2026-04-21 09:30 JST
 
 ## この文書について
 
@@ -82,6 +82,12 @@
   - Problem 2 の beginner guide を追加
 - `docs/research_abstract/lean_01.md`
   - Lean foundation / generated stub / 入出力の読み方に絞った beginner guide を追加
+- `docs/research_abstract/static_analysis_01_detail.md`
+  - Problem 1 sample と Lean foundation をコード全文・行単位解説つきで詳説する detailed guide を追加
+- `docs/research_abstract/order_01_detail.md`
+  - Problem 2 sample と reserve helper をコード全文・行単位解説つきで詳説する detailed guide を追加
+- `docs/research_abstract/lean_01_detail.md`
+  - Lean foundation / generated stub / 最小 success-error 例をコード全文・行単位解説つきで詳説する detailed guide を追加
 
 ## macro phase map
 
@@ -114,13 +120,13 @@
 
 | layer / track | 論理仕様 | ユーザ向け仕様 | 実装 / 運用 | 着手性 |
 |---|---:|---:|---:|---|
-| semantic kernel | 92% | 86% | 76% | 着手可能 |
-| parser-free substrate | 89% | 79% | 87% | 着手可能 |
-| compile-ready minimal actualization | 85% | 75% | 85% | 着手可能 |
-| fixed-subset source sample line | 86% | 83% | 89% | 着手可能 |
-| Problem 1 typed / theorem / model-check | 95% | 92% | 87% | final public seam 以外は自走可能 |
-| Problem 2 order / handoff / room default | 89% | 88% | 73% | final public wording / contract 以外は自走可能 |
-| Lean foundations / proof spine | 86% | 78% | 58% | repo-local mechanization までは自走可能 |
+| semantic kernel | 92% | 87% | 76% | 着手可能 |
+| parser-free substrate | 89% | 80% | 87% | 着手可能 |
+| compile-ready minimal actualization | 85% | 76% | 85% | 着手可能 |
+| fixed-subset source sample line | 86% | 86% | 89% | 着手可能 |
+| Problem 1 typed / theorem / model-check | 95% | 95% | 87% | final public seam 以外は自走可能 |
+| Problem 2 order / handoff / room default | 89% | 93% | 73% | final public wording / contract 以外は自走可能 |
+| Lean foundations / proof spine | 86% | 90% | 58% | repo-local mechanization までは自走可能 |
 | backend / packaging | 37% | 32% | 31% | repo-local まで |
 
 ## twin peaks
@@ -156,3 +162,4 @@
 - 2026-04-21 00:48 JST — Problem 1 / Problem 2 representative bundle、typed rejection pair、order-handoff negative pair、Lean foundation、generated Lean stub corpus を再実行し、summary docs を `repo-local near-end` と `final public stop line` を分けた記述へ全面更新した。
 - 2026-04-21 01:21 JST — Lean foundation に reusable lemma 群を追加して `python3 scripts/current_l2_lean_sample_sync.py` と unit test を通し、Problem 1 / Problem 2 の beginner 向け guide `docs/research_abstract/static_analysis_01.md` / `order_01.md` を追加した。
 - 2026-04-21 01:36 JST — Lean beginner guide `docs/research_abstract/lean_01.md` を追加し、label-model / proof-skeleton の補題を少量補強したうえで Lean 実行・standalone success/error 例・unit test・docs validation を再確認した。
+- 2026-04-21 09:30 JST — `static_analysis_01_detail.md` / `order_01_detail.md` / `lean_01_detail.md` を追加し、Problem 1 / Problem 2 / Lean foundation のコード全文・行単位解説・再現コマンド・出力の読み方を standalone な詳細版として整理した。
