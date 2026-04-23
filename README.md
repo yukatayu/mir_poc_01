@@ -21,6 +21,8 @@
 - authority hierarchy / security label hierarchy / capture / region / cost は **user-defined finite theory**
 - order / handoff は `publication_order`、`witness_order`、`scoped_happens_before` などの高水準関係で扱う
 - mutex / weak-memory / broken mutex は **model-check second line**
+- Sugoroku world vertical slice は `samples/clean-near-end/sugoroku-world/`
+  と `scripts/sugoroku_world_samples.py` で repo-local に実行可能
 - Lean 側は
   - `samples/lean/foundations/` の小さな実証明
   - `samples/lean/clean-near-end/` の generated theorem stub
@@ -102,6 +104,16 @@ python3 scripts/clean_near_end_samples.py run modal --format json
 python3 scripts/clean_near_end_samples.py matrix --format json
 ```
 
+Sugoroku world runtime attachment vertical slice:
+
+```bash
+python3 scripts/sugoroku_world_samples.py list
+python3 scripts/sugoroku_world_samples.py check-all
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
+python3 scripts/sugoroku_world_samples.py model-check
+python3 scripts/sugoroku_world_samples.py closeout --format json
+```
+
 Lean foundations と generated stub の同期:
 
 ```bash
@@ -138,6 +150,8 @@ python3 scripts/current_l2_lean_sample_sync.py
 
 - active sample:
   `samples/clean-near-end/`
+- active Sugoroku world vertical slice:
+  `samples/clean-near-end/sugoroku-world/`
 - active Lean material:
   `samples/lean/`
 - historical archive:

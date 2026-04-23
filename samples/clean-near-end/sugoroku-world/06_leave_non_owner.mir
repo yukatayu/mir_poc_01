@@ -1,0 +1,16 @@
+module CleanNearEnd.SugorokuLeaveNonOwner
+
+use CleanNearEnd.SugorokuLateJoin
+
+transition carol_leaves by Carol at ParticipantPlace[Carol] {
+  requires active_member(WorldMembers, Carol)
+
+  stage leave:
+    mark_inactive WorldMembers Carol
+      increments membership_epoch
+      increments member_incarnation(Carol)
+
+  stage invalidate:
+    invalidate_pending_actions actor Carol
+      reason member_left
+}

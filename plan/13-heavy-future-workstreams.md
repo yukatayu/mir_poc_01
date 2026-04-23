@@ -25,7 +25,13 @@
 ### 5. exhaustive shared-space catalog
 
 - authoritative-room minimal subset は current line
+- Sugoroku world vertical slice は repo-local logical multi-place sample
 - portal / multi-world / quorum / fairness catalog は heavy
+
+### 5b. Mirrorea lifecycle / real transport
+
+- runtime attach は current repo-local line
+- detach implementation、real network transport、multi-server consensus、durable distributed commit は heavy
 
 ### 6. packaging / host integration
 

@@ -31,12 +31,14 @@
 - order/handoff relation family の docs-first hardening
 - model-check second-line corpus maintenance
 - snapshot / traceability maintenance
+- Sugoroku world logical multi-place sample hardening
 
 ## mixed gate の line
 
 - final typed source principal
 - final theorem/model-check public contract
 - final witness/provider/emitted-artifact public contract
+- real network / consensus / durable commit for Sugoroku-like runtime attachment
 - final parser/public checker/runtime/verifier surface
 - packaging / installed binary
 

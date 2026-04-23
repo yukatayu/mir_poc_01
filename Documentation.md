@@ -38,6 +38,9 @@ active canonical sample は `samples/clean-near-end/` です。
   Peterson / broken mutex による second-line verification
 - `modal/`
   `stable` / `later` / `published(room)` / `witnessed(...)` の current mode line
+- `sugoroku-world/`
+  empty world server へ SugorokuGame を runtime attach する Mir / Mirrorea vertical slice。
+  これは separate helper `scripts/sugoroku_world_samples.py` で実行する repo-local logical multi-place emulator です。
 
 旧 active sample line は active path から外し、archive に退避しています。
 
@@ -164,6 +167,17 @@ python3 scripts/clean_near_end_samples.py run modal --format json
 python3 scripts/clean_near_end_samples.py matrix --format json
 ```
 
+Sugoroku world vertical slice:
+
+```bash
+python3 scripts/sugoroku_world_samples.py list
+python3 scripts/sugoroku_world_samples.py check-all
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
+python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
+python3 scripts/sugoroku_world_samples.py model-check
+python3 scripts/sugoroku_world_samples.py closeout --format json
+```
+
 Lean:
 
 ```bash
@@ -198,6 +212,8 @@ python3 scripts/validate_docs.py
   `stable` / `later` / `published(room)` / `witnessed(...)` を stage ごとに読む手順
 - `docs/research_abstract/hands_on_lean.md`
   Lean foundation proof と generated theorem stub の違いを確認する手順
+- `docs/research_abstract/hands_on_sugoroku_00_overview.md`
+  Sugoroku world runtime attachment vertical slice の初心者向け入口
 - 各 `_detail.md`
   full sample code と actual output
 

@@ -19,6 +19,7 @@
 - `order-handoff/`
 - `model-check/`
 - `modal/`
+- `sugoroku-world/`
 
 ## built-in と user-defined の境界
 
@@ -36,4 +37,15 @@ python3 scripts/clean_near_end_samples.py run model-check --format json
 python3 scripts/clean_near_end_samples.py run modal --format json
 python3 scripts/clean_near_end_samples.py matrix --format json
 python3 scripts/clean_near_end_samples.py closeout --format json
+```
+
+Sugoroku world vertical slice は別 helper で実行します。
+
+```bash
+python3 scripts/sugoroku_world_samples.py list
+python3 scripts/sugoroku_world_samples.py check-all
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
+python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
+python3 scripts/sugoroku_world_samples.py model-check
+python3 scripts/sugoroku_world_samples.py closeout --format json
 ```

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-23 08:57 JST
+最終更新: 2026-04-23 14:32 JST
 
 ## この文書について
 
@@ -15,7 +15,7 @@
 - theory / proof lane:
   `Macro 5` は finite-index typing / order-handoff / model-check second line / Lean foundation の repo-local alpha floor に到達
 - reserve integration lane:
-  `Macro 6` 以降は minimal working subset を維持しつつ、public-seam residual と user-spec residual を分離中
+  `Macro 6` 以降は Sugoroku world logical multi-place vertical slice まで repo-local に進み、public-seam residual と user-spec residual を分離中
 
 ## 現在の一言での読み
 
@@ -31,6 +31,7 @@
 - concrete theorem / model-check production binding
 - final public witness / provider / emitted-artifact contract
 - packaging / installed binary / FFI / engine adapter
+- real network / multi-server consensus / durable distributed commit for attached world objects
 
 ## 3 軸 progress
 
@@ -40,7 +41,7 @@
 | order / handoff / cut family | 92% | 95% | 80% | high-level relation line は動くが、public wording と contract は残る |
 | theorem / model-check boundary | 95% | 94% | 89% | repo-local bridge は強いが、production binding は未完 |
 | Lean foundations / proof spine | 89% | 92% | 69% | small proof fragment はあるが、full discharge ではない |
-| Mirrorea / shared-space boundary | 78% | 75% | 59% | minimal subset は読めるが、final catalog は未定 |
+| Mirrorea / shared-space boundary | 82% | 80% | 66% | Sugoroku logical multi-place vertical slice は動くが、real network / consensus / durable commit は未定 |
 
 ## macro phase map
 
@@ -52,7 +53,7 @@
 | `Macro 3` | compile-ready minimal actualization | late | 84% | public parser/API 以外は着手可能 |
 | `Macro 4` | executable sample floor | active clean suite | 98% | 着手可能 |
 | `Macro 5` | typed / theorem / model-check bridge | repo-local alpha-ready current layer | 97% | public seam 以外は自走可能 |
-| `Macro 6` | shared-space / fabric boundary | minimal working subset default | 79% | final catalog 以外は自走可能 |
+| `Macro 6` | shared-space / fabric boundary | Sugoroku logical multi-place sample added | 84% | real network / consensus 以外は自走可能 |
 | `Macro 7` | toolchain / backend / host integration | mixed | 57% | repo-local まで |
 | `Macro 8` | application realization | early | 18% | 要仕様確認 |
 
@@ -65,7 +66,7 @@
 | order / handoff | `S6` | witness / publication / handoff relation family、negative sample も整備 | final source wording と public artifact contract |
 | model-check second line | `S5-S6` | Peterson SC pass、relaxed CE、broken mutex CE | concrete external tool binding |
 | Lean foundations / proof spine | `S6` | small actual proof fragment、generated stub corpus | full domain discharge と public proof contract |
-| shared-space / fabric | `S4-S5` | minimal authoritative-room 読みを維持 | exhaustive final catalog と operational realization |
+| shared-space / fabric | `S5-S6` | Sugoroku world attach / membership / witness / handoff / leave / reset model-check が runnable | real network、consensus、durable commit、detach lifecycle |
 
 ## 着手可能 / 要仕様確認 / 後段依存
 
@@ -91,6 +92,10 @@
   `python3 scripts/clean_near_end_samples.py run modal --format json`
 - Lean sync:
   `python3 scripts/current_l2_lean_sample_sync.py`
+- Sugoroku world vertical slice:
+  `python3 scripts/sugoroku_world_samples.py check-all`
+  `python3 scripts/sugoroku_world_samples.py model-check`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
 - docs validation:
   `python3 scripts/validate_docs.py`
 
@@ -100,3 +105,4 @@
 - 2026-04-23 00:07 JST — stale reference を active lane から除去し、guided sample / clean suite / Lean sync / docs validation を fresh 実行して alpha-ready 判定の evidence を固定した。
 - 2026-04-23 08:43 JST — active suite family output、closeout、Lean manifest を基準に、README / Documentation / progress / tasks / research_abstract を日本語で全面刷新する作業に着手した。
 - 2026-04-23 08:57 JST — `research_abstract` を summary / `_detail` 構成に再編し、typing / order-model / modal / Lean の actual sample code、actual output、built-in / user-defined 境界を文書化したうえで、active docs に対する stale-reference scan と docs validation を通した。
+- 2026-04-23 14:32 JST — Sugoroku world runtime attachment vertical slice を追加し、single-process logical multi-place emulator、10 sample、CLI、model-check、hands-on docs を実装・検証した。

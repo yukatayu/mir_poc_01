@@ -52,6 +52,15 @@
   `stable`、`later`、`published(room)`、`witnessed(...)` の mode reading。
 - `hands_on_lean.md`
   Lean foundation proof と generated theorem stub の読み分け。
+- `hands_on_sugoroku_00_overview.md`
+  empty world server へ SugorokuGame を runtime attach する vertical slice の全体像。
+- `hands_on_sugoroku_01_world_bootstrap.md`
+- `hands_on_sugoroku_02_runtime_attach.md`
+- `hands_on_sugoroku_03_admin_start_reset.md`
+- `hands_on_sugoroku_04_roll_publish_handoff.md`
+- `hands_on_sugoroku_05_join_leave.md`
+- `hands_on_sugoroku_06_model_check.md`
+- `hands_on_sugoroku_detail.md`
 
 ## current reading の要点
 
@@ -63,6 +72,7 @@
 - order / handoff は high-level relation family で読む
 - mutex / weak-memory family は model-check second line に置く
 - Lean は small proof foundations と generated stub corpus に分かれる
+- Sugoroku world vertical slice は single OS process logical multi-place emulator として動く
 
 次はまだ deferred です。
 

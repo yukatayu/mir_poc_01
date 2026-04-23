@@ -1,0 +1,34 @@
+module CleanNearEnd.SugorokuRollPublishHandoff
+
+use CleanNearEnd.SugorokuAdminStartReset
+
+effect roll_dice {
+  output draw : Nat
+  ensures 1 <= draw
+  ensures draw <= 6
+  cost <= { cpu_steps: 10, remote_calls: 0 }
+}
+
+transition take_turn_alice by Alice at SugorokuGamePlace#1 {
+  requires phase(SugorokuGame#1) = GamePhase.Running
+  requires dice_owner(SugorokuGame#1) = Alice
+  requires active_member(WorldMembers, Alice)
+
+  stage roll:
+    draw <- perform roll_dice via authority_rng
+      ensure 1 <= draw
+      ensure draw <= 6
+
+  stage publish:
+    publish roll_result(SugorokuGame#1, Alice, draw)
+      to SugorokuGame#1.published_history
+      produces witness draw_pub
+
+  stage handoff:
+    next <- next_active_after(Alice, turn_order(SugorokuGame#1))
+
+    handoff dice_owner Alice -> next
+      after publish(roll_result(SugorokuGame#1, Alice, draw))
+      requires witness(draw_pub)
+      ensure dice_owner(SugorokuGame#1) = next
+}

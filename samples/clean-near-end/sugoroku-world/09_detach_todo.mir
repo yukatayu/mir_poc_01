@@ -1,0 +1,15 @@
+module CleanNearEnd.SugorokuDetachTodo
+
+use CleanNearEnd.SugorokuRuntimeAttach
+
+transition request_detach_game by Server at WorldServerPlace {
+  requires authority(Server) >= GameAuthority.Server
+
+  stage request:
+    request_detach SugorokuGame#1
+      reason "server requested game removal"
+
+  stage todo_lifecycle:
+    todo detach_game_from_world
+      reason "Mirrorea lifecycle operation; not part of first Sugoroku domain sample"
+}

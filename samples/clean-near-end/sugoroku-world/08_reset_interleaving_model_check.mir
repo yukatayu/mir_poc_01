@@ -1,0 +1,32 @@
+model SugorokuResetInterleaving {
+  actor Admin = Alice
+  actor Owner = Bob
+
+  state game_epoch : Nat = 1
+  state phase : GamePhase = Running
+  state dice_owner : Principal = Bob
+  state pending_handoff : Bool = false
+
+  process OwnerRoll {
+    require dice_owner = Owner
+    action roll
+    action publish
+    pending_handoff <- true
+    action handoff_to_next
+  }
+
+  process AdminReset {
+    require authority(Admin) >= GameAuthority.Admin
+    action reset
+    game_epoch <- game_epoch + 1
+    pending_handoff <- false
+    dice_owner <- Alice
+  }
+
+  property no_old_epoch_handoff_after_reset:
+    never (
+      pending_handoff_from_epoch(1)
+      and game_epoch = 2
+      and commit_handoff_from_epoch(1)
+    )
+}

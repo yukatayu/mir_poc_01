@@ -1,0 +1,23 @@
+module CleanNearEnd.SugorokuAdminStartReset
+
+use CleanNearEnd.SugorokuRuntimeAttach
+
+transition start_game by Alice at SugorokuGamePlace#1 {
+  requires authority(Alice) >= GameAuthority.Admin
+  requires phase(SugorokuGame#1) = GamePhase.Attached
+
+  stage start:
+    set_phase SugorokuGame#1 GamePhase.Running
+
+  stage publish_start:
+    publish game_started(SugorokuGame#1, game_epoch(SugorokuGame#1))
+      to SugorokuGame#1.published_history
+      produces witness game_started_witness
+}
+
+transition bad_reset_by_bob by Bob at SugorokuGamePlace#1 {
+  requires authority(Bob) >= GameAuthority.Admin
+
+  stage reset:
+    reset_game SugorokuGame#1
+}

@@ -1,0 +1,72 @@
+module CleanNearEnd.SugorokuWorldBootstrap
+
+// GameAuthority is user-defined.
+// It is not a built-in privilege hierarchy.
+index theory GameAuthority {
+  element Player
+  element Admin
+  element Server
+
+  order Player <= Admin
+  order Admin <= Server
+
+  law finite_preorder
+}
+
+// GamePhase is also user-defined for this sample.
+index theory GamePhase {
+  element Attached
+  element Running
+  element Paused
+  element Detached
+
+  law finite_set
+}
+
+index theory MembershipStatus {
+  element Active
+  element Inactive
+  element Pending
+
+  law finite_set
+}
+
+// Principals are actors.
+// They are not Places.
+principal Server : GameAuthority.Server
+principal Alice  : GameAuthority.Player
+principal Bob    : GameAuthority.Player
+principal Carol  : GameAuthority.Player
+
+// The world contains Places.
+// ParticipantPlace[Alice] is a logical place associated with Alice.
+// This emulates a separate process/thread/node without real networking.
+world EmptyWorld {
+  place WorldServerPlace
+
+  place ParticipantPlace[Alice]
+  place ParticipantPlace[Bob]
+  place ParticipantPlace[Carol]
+
+  membership_registry WorldMembers {
+    epoch 0
+
+    member Alice {
+      place ParticipantPlace[Alice]
+      status Active
+      incarnation 0
+    }
+
+    member Bob {
+      place ParticipantPlace[Bob]
+      status Active
+      incarnation 0
+    }
+
+    member Carol {
+      place ParticipantPlace[Carol]
+      status Active
+      incarnation 0
+    }
+  }
+}

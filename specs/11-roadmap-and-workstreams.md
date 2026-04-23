@@ -71,6 +71,7 @@ mainline actualization と docs-first research package が並走してよい。
 - 少なくとも 1 つの小さな synchronized shared-space 例
 - 1 つの小さな virtual-world または collaborative editing 例
 - 1 つの小さな route / overlay insertion 例
+- 2026-04-23 current cut では、Sugoroku world runtime attachment vertical slice が repo-local logical multi-place virtual-world sample として追加された。
 
 ## cross-cutting docs-first theory packages
 

@@ -11,6 +11,8 @@
 - active order/handoff examples は `samples/clean-near-end/order-handoff/`
 - mutex / weak-memory / broken mutex は `samples/clean-near-end/model-check/`
   に分ける
+- Sugoroku world runtime attachment example は `samples/clean-near-end/sugoroku-world/`
+  に置き、single OS process logical multi-place emulator として扱う
 - delegated RNG practical route は sample-visible にしてよいが、
   provider/public contract finalization を意味しない
 
@@ -20,6 +22,7 @@
 - ただし lowering / transport / failure / durability / policy は分ける
 - authoritative room を shared-space 全体の exhaustive default と同一視しない
 - `atomic_cut` を room-level durable commit にしない
+- Sugoroku の `Place` は participant ではなく、state / queue / authority / visibility compartment を持つ logical execution locus として読む
 
 ## still later
 
@@ -27,3 +30,5 @@
 - final witness/provider public contract
 - final replay taxonomy
 - distributed fairness theorem
+- real network transport / multi-server consensus / durable distributed commit
+- detach lifecycle implementation

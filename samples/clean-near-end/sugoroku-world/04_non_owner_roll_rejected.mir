@@ -1,0 +1,12 @@
+module CleanNearEnd.SugorokuNonOwnerRollRejected
+
+use CleanNearEnd.SugorokuRollPublishHandoff
+
+transition bad_roll_by_carol by Carol at SugorokuGamePlace#1 {
+  requires phase(SugorokuGame#1) = GamePhase.Running
+  requires dice_owner(SugorokuGame#1) = Carol
+  requires active_member(WorldMembers, Carol)
+
+  stage roll:
+    draw <- perform roll_dice via authority_rng
+}

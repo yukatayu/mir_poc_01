@@ -1,0 +1,24 @@
+module CleanNearEnd.SugorokuLateJoin
+
+use CleanNearEnd.SugorokuRollPublishHandoff
+
+principal Dave : GameAuthority.Player
+
+transition dave_joins_world by Server at WorldServerPlace {
+  requires authority(Server) >= GameAuthority.Server
+
+  stage add_member:
+    add_member WorldMembers Dave
+      place ParticipantPlace[Dave]
+      status Active
+      increments membership_epoch
+
+  stage observe_game:
+    Dave observes SugorokuGame#1.published_history
+      after add_member(WorldMembers, Dave)
+      ensure visible_to(Dave, SugorokuGame#1.published_history)
+
+  stage turn_policy:
+    mark_pending_player SugorokuGame#1 Dave
+      reason "late joiner sees history but is not automatically inserted into turn_order"
+}

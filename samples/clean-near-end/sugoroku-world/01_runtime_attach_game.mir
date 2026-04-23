@@ -1,0 +1,44 @@
+module CleanNearEnd.SugorokuRuntimeAttach
+
+use CleanNearEnd.SugorokuWorldBootstrap
+
+// SugorokuGame is a game package.
+// The package may be checked before runtime.
+// Attachment happens at runtime.
+game package SugorokuGame {
+  requires membership_registry WorldMembers
+  requires authority(Server) >= GameAuthority.Server
+
+  state SugorokuState {
+    game_epoch : Nat
+    phase : GamePhase
+    admin : Principal
+    turn_order : List[Principal]
+    dice_owner : Option[Principal]
+    published_rolls : List[RollRecord]
+  }
+}
+
+// Runtime transition.
+// This is not compile-time inclusion.
+transition attach_sugoroku_game by Server at WorldServerPlace {
+  stage load_package:
+    package <- load_game_package SugorokuGame
+      ensure package.checked = true
+
+  stage attach:
+    game <- attach package to EmptyWorld
+      import membership from WorldMembers
+      produces place SugorokuGamePlace#1
+      produces component SugorokuGame#1
+
+  stage appoint_admin:
+    appoint Alice as GameAuthority.Admin
+      for SugorokuGame#1
+      requires authority(Server) >= GameAuthority.Server
+
+  stage initialize:
+    initialize_turn_order SugorokuGame#1 [Alice, Bob, Carol]
+    set_dice_owner SugorokuGame#1 Alice
+    set_phase SugorokuGame#1 GamePhase.Attached
+}

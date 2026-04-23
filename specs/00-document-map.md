@@ -21,6 +21,7 @@
   - current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の summary に加え、clean near-end typing / order-model / modal / Lean の summary と `_detail` を置く。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
+  - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
   - hands-on 文書は規範判断を追加しない。sample code、helper output、既存 specs / plan / reports の current reading を分かりやすく説明する導線である。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を

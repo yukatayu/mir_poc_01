@@ -1,0 +1,27 @@
+module CleanNearEnd.SugorokuOwnerLeaveReassign
+
+use CleanNearEnd.SugorokuRollPublishHandoff
+
+transition owner_bob_leaves by Bob at ParticipantPlace[Bob] {
+  requires dice_owner(SugorokuGame#1) = Bob
+  requires active_member(WorldMembers, Bob)
+
+  stage leave:
+    mark_inactive WorldMembers Bob
+      increments membership_epoch
+      increments member_incarnation(Bob)
+      produces witness membership_updated
+
+  stage reassign_owner:
+    next <- next_active_after(Bob, turn_order(SugorokuGame#1))
+
+    if next exists {
+      handoff dice_owner Bob -> next
+        after leave(Bob)
+        requires witness(membership_updated)
+        ensure dice_owner(SugorokuGame#1) = next
+    } else {
+      clear_dice_owner SugorokuGame#1
+      set_phase SugorokuGame#1 GamePhase.Paused
+    }
+}

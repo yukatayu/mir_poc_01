@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-23 08:57 JST
+最終更新: 2026-04-23 14:32 JST
 
 ## この文書について
 
@@ -15,6 +15,7 @@
 - order / handoff は high-level relation family として runnable
 - mutex / weak-memory line は model-check second line として runnable
 - Lean foundations と generated clean stub corpus は runnable
+- Sugoroku world runtime attachment vertical slice は repo-local logical multi-place emulator として runnable
 - 現在の主な残課題は **public-seam residual** と **true user-spec residual** の切り分けです
 
 ## current executable floor
@@ -41,6 +42,17 @@
 - modal:
   `01_stage_stable_later_minimal`
   `02_published_witnessed_mode_bridge`
+- sugoroku-world:
+  `00_world_bootstrap`
+  `01_runtime_attach_game`
+  `02_admin_start_reset`
+  `03_roll_publish_handoff`
+  `04_non_owner_roll_rejected`
+  `05_late_join_history_visible`
+  `06_leave_non_owner`
+  `07_owner_leave_reassign`
+  `08_reset_interleaving_model_check`
+  `09_detach_todo`
 
 ### Helper entrypoints
 
@@ -52,6 +64,9 @@
 - `python3 scripts/clean_near_end_samples.py run modal --format json`
 - `python3 scripts/clean_near_end_samples.py matrix --format json`
 - `python3 scripts/current_l2_lean_sample_sync.py`
+- `python3 scripts/sugoroku_world_samples.py check-all`
+- `python3 scripts/sugoroku_world_samples.py model-check`
+- `python3 scripts/sugoroku_world_samples.py closeout --format json`
 
 ## 自走可能な task package
 
@@ -120,6 +135,19 @@
 - current recommendation:
   active path と archive path を常に対で書き、old line を current line と混ぜない
 
+### 6. Sugoroku vertical-slice hardening
+
+- phase:
+  `Macro 6` / `Macro 8` repo-local helper line
+- 目的:
+  single-process logical multi-place emulator を維持しつつ、detach lifecycle / emitted artifact / trace export の次段を狭める
+- 何に効くか:
+  Mirrorea shared-space / runtime attachment line を、real network へ進む前に sample-visible に保てる
+- rough estimate:
+  中
+- current recommendation:
+  real network や consensus へ急がず、まず detach TODO boundary と trace/debug output を固める
+
 ## research を通して見つけること
 
 ### low-level `memory_order` family の扱い
@@ -145,6 +173,19 @@
   - concrete tool brand と public checker surface を導入する
 - current recommendation:
   まだ bridge / reserve floor に留める
+
+### Sugoroku real transport / lifecycle expansion
+
+- 概要:
+  logical multi-place Sugoroku emulator を real network / detach lifecycle / durable evidence へ広げるか
+- 何に影響するか:
+  Mirrorea runtime lifecycle、transport、audit、durability、public API
+- 主要な選択肢:
+  - single-process logical emulator を維持して trace/export を先に固める
+  - detach lifecycle を repo-local operation として実装する
+  - real network / multi-server consensus へ進む
+- current recommendation:
+  detach lifecycle と trace/export を先に narrow に進め、real network は後段に残す
 
 ## user が決める必要があること
 

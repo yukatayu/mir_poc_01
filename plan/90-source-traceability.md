@@ -14,7 +14,7 @@
 | `plan/11-roadmap-near-term.md` | `progress.md`、`tasks.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`docs/reports/0904-*` |
 | `plan/12-open-problems-and-risks.md` | `specs/09-invariants-and-constraints.md`、`specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`specs/12-decision-register.md`、`docs/reports/0904-*` |
 | `plan/13-heavy-future-workstreams.md` | `specs/10-open-questions.md`、`specs/11-roadmap-and-workstreams.md`、`Documentation.md` |
-| `plan/16-shared-space-membership-and-example-boundary.md` | `specs/03-layer-model.md`、`specs/05-mirrorea-fabric.md`、`samples/clean-near-end/order-handoff/`、`samples/clean-near-end/model-check/`、`docs/reports/0904-*` |
+| `plan/16-shared-space-membership-and-example-boundary.md` | `specs/03-layer-model.md`、`specs/05-mirrorea-fabric.md`、`samples/clean-near-end/order-handoff/`、`samples/clean-near-end/model-check/`、`samples/clean-near-end/sugoroku-world/`、`docs/reports/0904-*`、`docs/reports/0909-*` |
 | `plan/17-research-phases-and-autonomy-gates.md` | `progress.md`、`tasks.md`、`plan/11-roadmap-near-term.md`、`docs/reports/0904-*` |
 
 ## historical note

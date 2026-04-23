@@ -1,0 +1,121 @@
+from __future__ import annotations
+
+import json
+import sys
+import unittest
+from io import StringIO
+from pathlib import Path
+from unittest import mock
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+import sugoroku_world_samples
+
+
+class SugorokuWorldSamplesTests(unittest.TestCase):
+    def test_list_contains_required_vertical_slice_samples(self) -> None:
+        samples = sugoroku_world_samples.list_samples()
+        sample_ids = [sample["sample_id"] for sample in samples]
+
+        self.assertEqual(
+            sample_ids,
+            [
+                "00_world_bootstrap",
+                "01_runtime_attach_game",
+                "02_admin_start_reset",
+                "03_roll_publish_handoff",
+                "04_non_owner_roll_rejected",
+                "05_late_join_history_visible",
+                "06_leave_non_owner",
+                "07_owner_leave_reassign",
+                "08_reset_interleaving_model_check",
+                "09_detach_todo",
+            ],
+        )
+
+    def test_world_bootstrap_builds_logical_places_and_members(self) -> None:
+        result = sugoroku_world_samples.run_sample("00_world_bootstrap")
+
+        self.assertEqual(result["static_verdict"], "valid")
+        self.assertEqual(result["world"], "EmptyWorld")
+        self.assertEqual(result["membership_epoch"], 0)
+        self.assertEqual(result["active_members"], ["Alice", "Bob", "Carol"])
+        self.assertIn("WorldServerPlace", result["places"])
+        self.assertIn("ParticipantPlace[Alice]", result["places"])
+
+    def test_runtime_attach_appoints_alice_admin_and_game_place(self) -> None:
+        result = sugoroku_world_samples.run_sample("01_runtime_attach_game")
+
+        self.assertEqual(result["terminal_outcome"], "success")
+        self.assertEqual(result["game"]["game_place"], "SugorokuGamePlace#1")
+        self.assertEqual(result["game"]["admin"], "Alice")
+        self.assertEqual(result["game"]["phase"], "Attached")
+        self.assertEqual(result["game"]["dice_owner"], "Alice")
+
+    def test_roll_publish_handoff_moves_dice_owner_to_bob(self) -> None:
+        result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
+
+        self.assertEqual(result["terminal_outcome"], "success")
+        self.assertEqual(result["game"]["dice_owner"], "Bob")
+        self.assertEqual(result["roll"]["roller"], "Alice")
+        self.assertEqual(result["roll"]["published_witness"], "draw_pub#1")
+        self.assertIn("roll_is_published_before_handoff", result["properties_passed"])
+
+    def test_non_owner_roll_is_rejected(self) -> None:
+        result = sugoroku_world_samples.run_sample("04_non_owner_roll_rejected")
+
+        self.assertEqual(result["static_or_runtime_verdict"], "reject")
+        self.assertEqual(result["reason_family"], "dice_owner_requirement_failed")
+        self.assertEqual(result["required"], "dice_owner(SugorokuGame#1) = Carol")
+        self.assertEqual(result["actual"], "Bob")
+
+    def test_late_join_sees_history_but_is_pending(self) -> None:
+        result = sugoroku_world_samples.run_sample("05_late_join_history_visible")
+
+        self.assertEqual(result["terminal_outcome"], "success")
+        self.assertTrue(result["membership_epoch_incremented"])
+        self.assertTrue(result["Dave"]["active"])
+        self.assertTrue(result["Dave"]["published_history_visible"])
+        self.assertFalse(result["Dave"]["in_turn_order"])
+        self.assertTrue(result["Dave"]["pending_player"])
+
+    def test_model_check_reports_required_properties(self) -> None:
+        result = sugoroku_world_samples.model_check()
+
+        self.assertEqual(result["model_check_result"], "pass")
+        self.assertIn("no_double_dice_owner", result["properties"])
+        self.assertIn("reset_invalidates_pending_actions", result["properties"])
+        self.assertIn("admin_reset_does_not_interleave_with_roll_commit_badly", result["properties"])
+        self.assertEqual(result["broken_variant"]["model_check_result"], "counterexample")
+
+    def test_check_all_covers_static_runtime_and_model_checks(self) -> None:
+        result = sugoroku_world_samples.check_all()
+
+        self.assertEqual(result["sample_count"], 10)
+        self.assertEqual(result["failed"], [])
+        self.assertIn("admin-only start/reset", result["static_checks"])
+        self.assertIn("handoff requires publish witness", result["runtime_guards"])
+        self.assertIn("detach_rejects_domain_actions", result["model_check_properties"])
+
+    def test_closeout_records_limitations(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertIn("PlaceRuntime", result["runtime_components"])
+        self.assertIn("samples/clean-near-end/sugoroku-world", result["active_sample_root"])
+        self.assertIn("no real network yet", result["limitations"])
+        self.assertIn("detach is TODO lifecycle boundary", result["limitations"])
+
+    def test_cli_run_json_prints_json_payload(self) -> None:
+        buffer = StringIO()
+        with mock.patch("sys.stdout", buffer):
+            exit_code = sugoroku_world_samples.main(
+                ["run", "00_world_bootstrap", "--format", "json"]
+            )
+
+        self.assertEqual(exit_code, 0)
+        payload = json.loads(buffer.getvalue())
+        self.assertEqual(payload["sample"], "00_world_bootstrap")
+
+
+if __name__ == "__main__":
+    unittest.main()

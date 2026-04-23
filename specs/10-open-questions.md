@@ -169,6 +169,13 @@
 - mutex / weak-memory family は model-check second line に置く。
 - pre-clean-near-end `p..` prototype chain は historical evidence として残るが、active canonical sample ではない。
 
+### 2026-04-23 Sugoroku world vertical-slice addendum
+
+- `samples/clean-near-end/sugoroku-world/` は、empty world server に SugorokuGame を runtime attach する repo-local active sample family である。
+- `scripts/sugoroku_world_samples.py` は、single OS process 内の logical multi-place emulator として、WorldServerPlace、ParticipantPlace、SugorokuGamePlace、membership epoch、witness、handoff、reset model-check を実行する。
+- これは real network、multi-server consensus、durable distributed commit、final parser grammar、final public API を固定しない。
+- current open question は、logical multi-place emulator を Mirrorea lifecycle / distributed transport / durable evidence へどの順番で広げるかである。
+
 ### current integration reading
 
 `specs/examples/458`、`459`、`460`、`461`、`462` までの current reading では、
