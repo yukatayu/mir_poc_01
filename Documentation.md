@@ -44,6 +44,15 @@ active canonical sample は `samples/clean-near-end/` です。
 
 旧 active sample line は active path から外し、archive に退避しています。
 
+### 1.1 Sample highlighter
+
+repo 直下の `mir_hilight.html` は、current active `.mir` sample を読むための単一 HTML viewer です。
+ブラウザだけで動き、外部 asset は読みません。標準 theme は Solarized Dark で、VS Code Dark、GitHub Light / Dark、Dracula、Monokai などへ切り替えられます。
+行番号、スマホ対応、予約語 highlight、sample 内で宣言された user-defined symbol の別色 highlight を備えています。
+
+これは final public parser / checker / verifier ではありません。
+文法、active sample path、reserved keyword、定義宣言形が変わった場合は、`mir_hilight.html` の embedded samples、syntax token list、symbol extraction rule、関連 docs / tests を同じ task で更新してください。
+
 ### 2. first strong typing layer
 
 current typing judgment の読みは、概ね次の形です。

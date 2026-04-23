@@ -106,3 +106,4 @@
 - 2026-04-23 08:43 JST — active suite family output、closeout、Lean manifest を基準に、README / Documentation / progress / tasks / research_abstract を日本語で全面刷新する作業に着手した。
 - 2026-04-23 08:57 JST — `research_abstract` を summary / `_detail` 構成に再編し、typing / order-model / modal / Lean の actual sample code、actual output、built-in / user-defined 境界を文書化したうえで、active docs に対する stale-reference scan と docs validation を通した。
 - 2026-04-23 14:32 JST — Sugoroku world runtime attachment vertical slice を追加し、single-process logical multi-place emulator、10 sample、CLI、model-check、hands-on docs を実装・検証した。
+- 2026-04-23 22:54 JST — `mir_hilight.html` を repo root に追加し、active `.mir` sample 全体を single-file browser viewer で Solarized Dark 標準 highlight、theme 切替、行番号、スマホ対応として読めるようにした。

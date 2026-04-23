@@ -114,6 +114,20 @@ python3 scripts/sugoroku_world_samples.py model-check
 python3 scripts/sugoroku_world_samples.py closeout --format json
 ```
 
+sample code viewer:
+
+```text
+mir_hilight.html
+```
+
+`mir_hilight.html` は repo 直下の単一 HTML です。ブラウザで開くと
+`samples/clean-near-end/**/*.mir` の current active sample を Solarized Dark
+標準で表示し、行番号、スマホ対応、theme 切替、予約語と sample 内定義名の
+別色 highlight を確認できます。final parser / checker ではなく readable viewer
+です。文法、active sample path、reserved keyword、定義宣言形が変わった場合は、
+HTML 内の embedded samples / syntax token list / symbol extraction rule と docs
+を同じ task で更新してください。
+
 Lean foundations と generated stub の同期:
 
 ```bash

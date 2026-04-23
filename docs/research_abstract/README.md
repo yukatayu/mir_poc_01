@@ -62,6 +62,16 @@
 - `hands_on_sugoroku_06_model_check.md`
 - `hands_on_sugoroku_detail.md`
 
+## sample highlighter
+
+- repo root の `mir_hilight.html`
+  active `.mir` sample を Solarized Dark 標準の syntax highlight で読むための単一 HTML viewer です。
+  ブラウザだけで動き、外部 asset は使いません。
+  theme 切替、行番号、スマホ対応、予約語と user-defined symbol の別色 highlight を備えます。
+
+この viewer は final public parser / checker ではありません。
+文法、active sample path、reserved keyword、定義宣言形が変わったら、HTML 内の embedded samples、syntax token list、symbol extraction rule、docs、test を同じ task で更新してください。
+
 ## current reading の要点
 
 2026-04-23 時点では、次が active line です。
