@@ -37,6 +37,22 @@
 - `clean_near_end_modal_01_detail.md`
 - `clean_near_end_lean_01_detail.md`
 
+## 初心者向け hands-on
+
+次の文書は、実際にコマンドを実行しながら clean near-end suite を読むための長めの入門です。
+各文書は、キーワード、built-in / user-defined の境界、sample code の行ごとの意味、実行結果の読み方を説明します。
+
+- `hands_on_typing.md`
+  finite-index typing、authority、label、capture、cost の実行前検査。
+- `hands_on_order_model.md`
+  publication / witness / handoff と `memory_order` 再解釈。
+- `hands_on_model_checking.md`
+  Peterson、relaxed memory、broken mutex を model-check second line として確認する手順。
+- `hands_on_modal.md`
+  `stable`、`later`、`published(room)`、`witnessed(...)` の mode reading。
+- `hands_on_lean.md`
+  Lean foundation proof と generated theorem stub の読み分け。
+
 ## current reading の要点
 
 2026-04-23 時点では、次が active line です。

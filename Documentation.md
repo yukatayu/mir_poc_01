@@ -188,6 +188,16 @@ python3 scripts/validate_docs.py
   modal / stage / witnessed bridge の current reading
 - `docs/research_abstract/clean_near_end_lean_01.md`
   Lean foundations と generated stub の current reading
+- `docs/research_abstract/hands_on_typing.md`
+  clean near-end typing をコマンド実行、sample code、output から読む初心者向け手順
+- `docs/research_abstract/hands_on_order_model.md`
+  publication / witness / handoff と `memory_order` 再解釈を手で確認する手順
+- `docs/research_abstract/hands_on_model_checking.md`
+  Peterson / relaxed memory / broken mutex を model-check second line として確認する手順
+- `docs/research_abstract/hands_on_modal.md`
+  `stable` / `later` / `published(room)` / `witnessed(...)` を stage ごとに読む手順
+- `docs/research_abstract/hands_on_lean.md`
+  Lean foundation proof と generated theorem stub の違いを確認する手順
 - 各 `_detail.md`
   full sample code と actual output
 
