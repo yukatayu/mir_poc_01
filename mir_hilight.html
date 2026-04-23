@@ -201,7 +201,8 @@
 
     input,
     select,
-    button {
+    button,
+    textarea {
       width: 100%;
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -268,6 +269,54 @@
     .legend { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 0.82rem; }
     .chip { border: 1px solid var(--line); border-radius: 999px; padding: 4px 8px; background: var(--bg-panel); }
 
+    .custom-panel {
+      display: grid;
+      gap: 12px;
+      padding: 14px 18px 16px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg-panel) 70%, transparent);
+    }
+
+    .custom-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .custom-head h3 {
+      margin: 0;
+      color: var(--fg);
+      font-size: 1rem;
+    }
+
+    .custom-head p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .custom-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      min-width: min(100%, 28rem);
+    }
+
+    .custom-actions button {
+      width: auto;
+      min-width: 8.5rem;
+    }
+
+    textarea {
+      min-height: 10rem;
+      resize: vertical;
+      font-family: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      tab-size: 2;
+    }
+
     .code-wrap { overflow: auto; background: var(--bg-panel); }
     pre { margin: 0; min-width: max-content; padding: 10px 0; font-family: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Consolas, monospace; font-size: 0.91rem; line-height: 1.55; tab-size: 2; }
 
@@ -300,6 +349,8 @@
       aside { position: static; max-height: none; }
       .sample-list { max-height: 16rem; }
       .viewer-head { align-items: flex-start; flex-direction: column; }
+      .custom-head { align-items: stretch; flex-direction: column; }
+      .custom-actions button { width: 100%; }
       .code-line { grid-template-columns: 3.4rem 1fr; }
       .line-number { padding-right: 10px; }
       .line-code { padding: 0 12px; }
@@ -356,6 +407,20 @@
           <span class="chip"><span class="tok-type">type-like</span></span>
           <span class="chip"><span class="tok-comment">comment</span></span>
         </div>
+      </div>
+      <div class="custom-panel" aria-label="custom source panel">
+        <div class="custom-head">
+          <div>
+            <h3>Custom source</h3>
+            <p>ここに Mir 風のコードを貼ると、下の preview に同じ highlighter で表示します。入力内容はブラウザ内だけで扱います。</p>
+          </div>
+          <div class="custom-actions">
+            <button id="load-current" type="button">Load current sample</button>
+            <button id="render-custom" type="button">Highlight custom code</button>
+            <button id="clear-custom" type="button">Clear</button>
+          </div>
+        </div>
+        <textarea id="custom-source" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="module Scratch.Example&#10;&#10;transition demo {&#10;  stage run:&#10;    value <- perform something()&#10;}"></textarea>
       </div>
       <div class="code-wrap">
         <pre id="code" aria-label="highlighted Mir source"></pre>
@@ -633,7 +698,7 @@
       }).join('');
     }
 
-    const state = { currentIndex: 0, filter: '' };
+    const state = { currentIndex: 0, filter: '', mode: 'sample' };
     const sampleList = document.getElementById('sample-list');
     const code = document.getElementById('code');
     const summary = document.getElementById('summary');
@@ -642,6 +707,10 @@
     const filterInput = document.getElementById('filter');
     const themeSelect = document.getElementById('theme');
     const copyPathButton = document.getElementById('copy-path');
+    const customSource = document.getElementById('custom-source');
+    const renderCustomButton = document.getElementById('render-custom');
+    const loadCurrentButton = document.getElementById('load-current');
+    const clearCustomButton = document.getElementById('clear-custom');
 
     function filteredSamples() {
       const query = state.filter.trim().toLowerCase();
@@ -655,7 +724,7 @@
       const rows = filteredSamples();
       summary.textContent = `${rows.length} / ${samples.length} active .mir samples`;
       sampleList.innerHTML = rows.map(({ sample, index }) => `
-        <button class="sample-button" type="button" data-index="${index}" aria-current="${index === state.currentIndex}">
+        <button class="sample-button" type="button" data-index="${index}" aria-current="${state.mode === 'sample' && index === state.currentIndex}">
           <strong>${escapeHtml(sample.name)}</strong>
           <small>${escapeHtml(sample.path)}</small>
         </button>
@@ -664,9 +733,18 @@
 
     function renderCurrentSample() {
       const sample = samples[state.currentIndex] || samples[0];
+      state.mode = 'sample';
       sampleTitle.textContent = sample.name;
       samplePath.textContent = sample.path;
       code.innerHTML = highlightMir(sample.source);
+      renderSampleList();
+    }
+
+    function renderCustomSource() {
+      state.mode = 'custom';
+      sampleTitle.textContent = 'Custom code';
+      samplePath.textContent = 'browser-local custom source';
+      code.innerHTML = highlightMir(customSource.value);
       renderSampleList();
     }
 
@@ -702,6 +780,24 @@
       } catch (_error) {
         copyPathButton.textContent = sample.path;
       }
+    });
+
+    renderCustomButton.addEventListener('click', renderCustomSource);
+
+    loadCurrentButton.addEventListener('click', () => {
+      const sample = samples[state.currentIndex] || samples[0];
+      customSource.value = sample.source;
+      renderCustomSource();
+    });
+
+    clearCustomButton.addEventListener('click', () => {
+      customSource.value = '';
+      renderCustomSource();
+      customSource.focus();
+    });
+
+    customSource.addEventListener('input', () => {
+      if (state.mode === 'custom') renderCustomSource();
     });
 
     renderCurrentSample();

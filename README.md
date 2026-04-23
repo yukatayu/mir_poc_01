@@ -123,8 +123,10 @@ mir_hilight.html
 `mir_hilight.html` は repo 直下の単一 HTML です。ブラウザで開くと
 `samples/clean-near-end/**/*.mir` の current active sample を Solarized Dark
 標準で表示し、行番号、スマホ対応、theme 切替、予約語と sample 内定義名の
-別色 highlight を確認できます。final parser / checker ではなく readable viewer
-です。文法、active sample path、reserved keyword、定義宣言形が変わった場合は、
+別色 highlight を確認できます。custom source panel に任意の Mir 風コードを貼ると、
+同じ highlighter で browser-local preview できます。CSS は外部 framework ではなく
+HTML 内の hand-written original CSS です。final parser / checker ではなく readable viewer
+です。文法、active sample path、reserved keyword、定義宣言形、custom input UI が変わった場合は、
 HTML 内の embedded samples / syntax token list / symbol extraction rule と docs
 を同じ task で更新してください。
 

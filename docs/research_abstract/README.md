@@ -67,10 +67,11 @@
 - repo root の `mir_hilight.html`
   active `.mir` sample を Solarized Dark 標準の syntax highlight で読むための単一 HTML viewer です。
   ブラウザだけで動き、外部 asset は使いません。
-  theme 切替、行番号、スマホ対応、予約語と user-defined symbol の別色 highlight を備えます。
+  theme 切替、行番号、スマホ対応、予約語と user-defined symbol の別色 highlight、browser-local custom source input を備えます。
+  CSS は外部 framework ではなく、HTML 内の hand-written original CSS です。
 
 この viewer は final public parser / checker ではありません。
-文法、active sample path、reserved keyword、定義宣言形が変わったら、HTML 内の embedded samples、syntax token list、symbol extraction rule、docs、test を同じ task で更新してください。
+文法、active sample path、reserved keyword、定義宣言形、custom input UI が変わったら、HTML 内の embedded samples、syntax token list、symbol extraction rule、docs、test を同じ task で更新してください。
 
 ## current reading の要点
 

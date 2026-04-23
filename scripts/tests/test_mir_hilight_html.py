@@ -46,6 +46,17 @@ class MirHilightHtmlTests(unittest.TestCase):
         self.assertIn("dracula", themes)
         self.assertIn("monokai", themes)
 
+    def test_supports_custom_code_input(self):
+        html = HTML_PATH.read_text(encoding="utf-8")
+
+        self.assertIn('id="custom-source"', html)
+        self.assertIn('id="render-custom"', html)
+        self.assertIn('id="load-current"', html)
+        self.assertIn('id="clear-custom"', html)
+        self.assertIn("renderCustomSource", html)
+        self.assertIn("custom source", html)
+        self.assertIn("highlightMir(customSource.value)", html)
+
     def test_documents_update_timing_for_grammar_changes(self):
         html = HTML_PATH.read_text(encoding="utf-8")
 
