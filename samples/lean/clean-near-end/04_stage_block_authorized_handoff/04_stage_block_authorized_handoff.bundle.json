@@ -1,0 +1,5 @@
+{
+  "sample_id": "04_stage_block_authorized_handoff",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/04_stage_block_authorized_handoff.mir",
+  "theorem_name": "s04_stage_block_authorized_handoff__alpha_ready_subject"
+}

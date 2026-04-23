@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-import argparse
 import json
 import shutil
 import subprocess
-import sys
-import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -15,767 +12,75 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 SAMPLES_ROOT = REPO_ROOT / "samples" / "lean"
-CURRENT_L2_ROOT = SAMPLES_ROOT / "current-l2"
 FOUNDATIONS_ROOT = SAMPLES_ROOT / "foundations"
-
-
-@dataclass(frozen=True)
-class CurrentL2ExportSpec:
-    sample_id: str
-    sample_argument: str
-    host_plan_path: Path | None
-    summary: str
-    rationale: str
+CLEAN_ROOT = SAMPLES_ROOT / "clean-near-end"
+MANIFEST_PATH = SAMPLES_ROOT / "manifest.json"
+RUNTIME_PREFIX = [
+    "cargo",
+    "run",
+    "-q",
+    "-p",
+    "mir-runtime",
+    "--bin",
+    "mir-clean-near-end",
+    "--",
+]
 
 
 @dataclass(frozen=True)
 class FoundationSpec:
     filename: str
-    summary: str
-    explanation: str
-    source_text: str
-
-
-def current_l2_export_specs() -> list[CurrentL2ExportSpec]:
-    return [
-        CurrentL2ExportSpec(
-            sample_id="e5-underdeclared-lineage",
-            sample_argument="e5-underdeclared-lineage",
-            host_plan_path=None,
-            summary="代表的な 2 本の proof obligation を持つ static underdeclared omission sample。",
-            rationale=(
-                "current theorem review-unit と Lean stub 生成を結ぶ、"
-                "最小の static-side anchor として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p06-typed-proof-owner-handoff",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.host-plan.json",
-            summary="proof owner handoff を表す typed/theorem bridge prototype。",
-            rationale=(
-                "current typed/theorem representative prototype であり、"
-                "final strong typed calculus ではなく bridge-floor evidence に留める。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p10-typed-authorized-fingerprint-declassification",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.host-plan.json",
-            summary="authority あり declassification を表す typed/IFC prototype。",
-            rationale=(
-                "current checker-adjacent IFC line で、authority-sensitive release が "
-                "success 側にどう映るかを見る representative prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p11-typed-unauthorized-fingerprint-release",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-typed-proof-model-check/p11-typed-unauthorized-fingerprint-release.host-plan.json",
-            summary="authority なし release を reject path で止める typed/IFC prototype。",
-            rationale=(
-                "current checker-adjacent IFC line で、holder と release authority を "
-                "分けた negative evidence を sample-visible に保つ representative prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p12-typed-classified-fingerprint-publication-block",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-typed-proof-model-check/p12-typed-classified-fingerprint-publication-block.host-plan.json",
-            summary="label-flow negative を表す typed/IFC prototype。",
-            rationale=(
-                "current checker-adjacent IFC line で、authority 欠如ではなく "
-                "classified payload の Low/public publication block を sample-visible に保つ "
-                "representative prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p15-typed-capture-escape-rejected",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-typed-proof-model-check/p15-typed-capture-escape-rejected.host-plan.json",
-            summary="capture / lifetime escape を reject path で止める finite-index first-layer prototype。",
-            rationale=(
-                "current checker-adjacent strong typing line で、capture set constraint と "
-                "lifetime preorder が publish 境界を越える escape を止める first negative evidence を "
-                "theorem-side representative sample set に carry over する prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p16-typed-remote-call-budget-exceeded",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-typed-proof-model-check/p16-typed-remote-call-budget-exceeded.host-plan.json",
-            summary="simple cost bound 超過を reject path で止める finite-index first-layer prototype。",
-            rationale=(
-                "current checker-adjacent strong typing line で、external effect budget と "
-                "simple cost bound が zero-budget 以後の remote call を止める first negative evidence を "
-                "theorem-side representative sample set に carry over する prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p07-dice-late-join-visible-history",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.host-plan.json",
-            summary="公開済み history を過去として見せる late join の authoritative-room prototype。",
-            rationale=(
-                "late-join semantics を current order/handoff line で見る representative runtime prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p08-dice-stale-reconnect-refresh",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.host-plan.json",
-            summary="stale reconnect を fail-then-refresh で扱う authoritative-room prototype。",
-            rationale=(
-                "stale reconnect handling を current order/handoff line で見る representative runtime prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p09-dice-delegated-rng-provider-placement",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.host-plan.json",
-            summary="delegated RNG provider placement を表す authoritative-room prototype。",
-            rationale=(
-                "current broader coverage package で、provider placement と authority placement を "
-                "分けた order-handoff / shared-space practical line を representative sample set に "
-                "carry over する prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p13-dice-late-join-missing-publication-witness",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-order-handoff/p13-dice-late-join-missing-publication-witness.host-plan.json",
-            summary="publication witness 欠如を underdeclared static stop に落とす late-join negative prototype。",
-            rationale=(
-                "current broader coverage package で、late-join visibility line の negative pair を "
-                "theorem-side representative sample set に carry over し、runtime 未到達でも "
-                "static rejection cluster の Lean bridge artifact を inspectable に保つ "
-                "prototype として読む。"
-            ),
-        ),
-        CurrentL2ExportSpec(
-            sample_id="p14-dice-late-join-handoff-before-publication",
-            sample_argument=str(
-                REPO_ROOT
-                / "samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.txt"
-            ),
-            host_plan_path=REPO_ROOT
-            / "samples/prototype/current-l2-order-handoff/p14-dice-late-join-handoff-before-publication.host-plan.json",
-            summary="publish より先に handoff が現れる malformed static stop を表す late-join negative prototype。",
-            rationale=(
-                "current broader coverage package で、late-join visibility line の order violation pair を "
-                "theorem-side representative sample set に carry over し、helper-local static stop が "
-                "Lean bridge 側でも inspectable であることを保つ prototype として読む。"
-            ),
-        ),
-    ]
-
-
-def foundation_specs() -> list[FoundationSpec]:
-    return [
-        FoundationSpec(
-            filename="CurrentL2LabelModel.lean",
-            summary="明示的 authority-sensitive declassification lemma を持つ two-point IFC label model。",
-            explanation=(
-                "Package 56 の最初の actual Lean fragment である。"
-                "final source syntax は出さず、checker-adjacent IFC line が依拠する "
-                "最小 label semantics と authority-sensitive fact を固定する。"
-            ),
-            source_text="""/-!
-current-l2 first IFC / label-model fragment
-
-This file is intentionally small and self-contained. It is not the final public type
-system. It fixes only the minimal lattice and authority-sensitive lemmas needed for the
-current checker-adjacent reading.
--/
-
-namespace CurrentL2
-
-inductive SecurityLabel where
-  | low
-  | high
-deriving DecidableEq, Repr
-
-open SecurityLabel
-
-def flowsTo : SecurityLabel → SecurityLabel → Prop
-  | low, _ => True
-  | high, high => True
-  | high, low => False
-
-def join : SecurityLabel → SecurityLabel → SecurityLabel
-  | high, _ => high
-  | _, high => high
-  | low, low => low
-
-def CanDeclassify (hasAuthority : Bool) (fromLabel toLabel : SecurityLabel) : Prop :=
-  hasAuthority = true ∨ flowsTo fromLabel toLabel
-
-theorem flowsTo_refl (label : SecurityLabel) : flowsTo label label := by
-  cases label <;> simp [flowsTo]
-
-theorem low_flows_to_any (label : SecurityLabel) : flowsTo low label := by
-  cases label <;> simp [flowsTo]
-
-theorem flowsTo_trans
-    {a b c : SecurityLabel}
-    (hab : flowsTo a b)
-    (hbc : flowsTo b c) :
-    flowsTo a c := by
-  cases a <;> cases b <;> cases c <;> simp [flowsTo] at hab hbc ⊢
-
-theorem flowsTo_join_left (a b : SecurityLabel) : flowsTo a (join a b) := by
-  cases a <;> cases b <;> simp [flowsTo, join]
-
-theorem flowsTo_join_right (a b : SecurityLabel) : flowsTo b (join a b) := by
-  cases a <;> cases b <;> simp [flowsTo, join]
-
-theorem secret_to_public_requires_authority :
-    ¬ flowsTo high low := by
-  simp [flowsTo]
-
-theorem no_declassify_without_authority :
-    ¬ CanDeclassify false high low := by
-  simp [CanDeclassify, flowsTo]
-
-theorem authority_enables_secret_to_public :
-    CanDeclassify true high low := by
-  simp [CanDeclassify]
-
-end CurrentL2
-""",
-        ),
-        FoundationSpec(
-            filename="CurrentL2IfcSecretExamples.lean",
-            summary=(
-                "secret-key valid/invalid と explicit authority declassification を、"
-                "valid/invalid witness 付きで固定する IFC concrete example 集。"
-            ),
-            explanation=(
-                "Package 56 の first-fragment を label model の定義だけで止めず、"
-                "secret-key valid/invalid と explicit authority declassification を "
-                "mechanization-ready な concrete example として置く。"
-                "valid pattern がなぜ通るか、invalid pattern がなぜ witness を持てないかを、"
-                "payload preservation lemma と concrete witness で読めるようにする。"
-            ),
-            source_text="""/-!
-current-l2 IFC secret examples fragment
-
-This file keeps the first concrete IFC examples for Package 56 in one self-contained
-Lean artifact. The goal is not the final public typed surface. The goal is to make the
-secret-key valid/invalid reading executable at the proof-fragment level.
--/
-
-namespace CurrentL2IfcSecretExamples
-
-inductive SecurityLabel where
-  | low
-  | high
-deriving DecidableEq, Repr
-
-open SecurityLabel
-
-def flowsTo : SecurityLabel → SecurityLabel → Prop
-  | low, _ => True
-  | high, high => True
-  | high, low => False
-
-def CanDeclassify (hasAuthority : Bool) (fromLabel toLabel : SecurityLabel) : Prop :=
-  hasAuthority = true ∨ flowsTo fromLabel toLabel
-
-structure Labeled (label : SecurityLabel) (α : Type) where
-  value : α
-
-abbrev SecretKey := Labeled high String
-abbrev SecretFingerprint := Labeled high String
-abbrev PublicFingerprint := Labeled low String
-
-def fingerprint (key : SecretKey) : SecretFingerprint :=
-  { value := "fp:" ++ key.value }
-
-def declassify
-    (hasAuthority : Bool)
-    {fromLabel toLabel : SecurityLabel}
-    (_proof : CanDeclassify hasAuthority fromLabel toLabel)
-    (value : Labeled fromLabel α) :
-    Labeled toLabel α :=
-  { value := value.value }
-
-theorem declassify_preserves_value
-    (hasAuthority : Bool)
-    {fromLabel toLabel : SecurityLabel}
-    (proof : CanDeclassify hasAuthority fromLabel toLabel)
-    (value : Labeled fromLabel α) :
-    (declassify hasAuthority proof value).value = value.value := by
-  rfl
-
-theorem no_secret_release_without_authority :
-    ¬ CanDeclassify false high low := by
-  simp [CanDeclassify, flowsTo]
-
-theorem authorized_secret_release_is_available :
-    CanDeclassify true high low := by
-  simp [CanDeclassify]
-
-theorem low_to_low_release_without_authority_is_available :
-    CanDeclassify false low low := by
-  simp [CanDeclassify, flowsTo]
-
-def publicAuditNote : Labeled low String :=
-  { value := "audit-ok" }
-
-def unchangedPublicAuditNote : Labeled low String :=
-  declassify false low_to_low_release_without_authority_is_available publicAuditNote
-
-theorem unchanged_public_audit_note_keeps_payload :
-    unchangedPublicAuditNote.value = "audit-ok" := by
-  simpa [unchangedPublicAuditNote, publicAuditNote] using
-    declassify_preserves_value
-      false
-      low_to_low_release_without_authority_is_available
-      publicAuditNote
-
-def liveSecretKey : SecretKey :=
-  { value := "sk_live" }
-
-theorem fingerprint_keeps_secret_payload :
-    (fingerprint liveSecretKey).value = "fp:sk_live" := by
-  rfl
-
-def authorizedPublicFingerprint : PublicFingerprint :=
-  declassify true authorized_secret_release_is_available (fingerprint liveSecretKey)
-
-theorem authorized_public_fingerprint_keeps_payload :
-    authorizedPublicFingerprint.value = "fp:sk_live" := by
-  simpa [authorizedPublicFingerprint, fingerprint, liveSecretKey] using
-    declassify_preserves_value
-      true
-      authorized_secret_release_is_available
-      (fingerprint liveSecretKey)
-
-theorem invalid_release_has_no_authority_proof :
-    ¬ ∃ _proof : CanDeclassify false high low, True := by
-  intro h
-  rcases h with ⟨proof, _⟩
-  exact no_secret_release_without_authority proof
-
-theorem valid_release_has_authority_proof :
-    ∃ _proof : CanDeclassify true high low, True := by
-  exact ⟨authorized_secret_release_is_available, trivial⟩
-
-theorem authorized_live_fingerprint_release_has_witness :
-    ∃ proof : CanDeclassify true high low,
-      (declassify true proof (fingerprint liveSecretKey)).value = "fp:sk_live" := by
-  refine ⟨authorized_secret_release_is_available, ?_⟩
-  simpa [fingerprint, liveSecretKey] using
-    declassify_preserves_value
-      true
-      authorized_secret_release_is_available
-      (fingerprint liveSecretKey)
-
-theorem unauthorized_live_fingerprint_release_is_impossible :
-    ¬ ∃ proof : CanDeclassify false high low,
-      (declassify false proof (fingerprint liveSecretKey)).value = "fp:sk_live" := by
-  intro h
-  rcases h with ⟨proof, _⟩
-  exact no_secret_release_without_authority proof
-
-end CurrentL2IfcSecretExamples
-""",
-        ),
-        FoundationSpec(
-            filename="CurrentL2FiniteIndexFirstLayer.lean",
-            summary=(
-                "finite-index first layer の capture/lifetime/cost を、"
-                "reusable lemma 付きで固定する小さな proof fragment。"
-            ),
-            explanation=(
-                "Package 93 の Lean-first hardening として、finite decidable index fragment を "
-                "IFC だけでなく capture / lifetime / simple cost まで小さな自己完結 proof として置く。"
-                "ここでは final typed calculus を与えず、first strong typing sample set を支える "
-                "最小 preorder / subset / budget fact だけを mechanization-ready に固定する。"
-                "capture escape と zero-budget follow-up がなぜ止まるかを、"
-                "transitivity / subset / budget-step lemma まで含めて sample-facing に残す。"
-            ),
-            source_text="""/-!
-current-l2 finite-index first-layer fragment
-
-This file keeps the smallest self-contained Lean facts for the finite-index first layer:
-capture-set inclusion, lifetime preorder, and simple remote-call budget.
-It is not the final public typed calculus.
--/
-
-namespace CurrentL2FiniteIndexFirstLayer
-
-inductive Lifetime where
-  | step
-  | session
-deriving DecidableEq, Repr
-
-open Lifetime
-
-def outlives : Lifetime → Lifetime → Prop
-  | session, _ => True
-  | step, step => True
-  | step, session => False
-
-theorem outlives_refl (lifetime : Lifetime) : outlives lifetime lifetime := by
-  cases lifetime <;> simp [outlives]
-
-theorem session_outlives_step : outlives session step := by
-  simp [outlives]
-
-theorem step_does_not_outlive_session : ¬ outlives step session := by
-  simp [outlives]
-
-theorem outlives_trans
-    {a b c : Lifetime}
-    (hab : outlives a b)
-    (hbc : outlives b c) :
-    outlives a c := by
-  cases a <;> cases b <;> cases c <;> simp [outlives] at hab hbc ⊢
-
-inductive Capability where
-  | roomHistory
-  | ephemeralToken
-deriving DecidableEq, Repr
-
-open Capability
-
-abbrev CaptureSet := Capability → Bool
-
-def captureSubset (lhs rhs : CaptureSet) : Prop :=
-  ∀ capability, lhs capability = true → rhs capability = true
-
-def emptyCapture : CaptureSet := fun _ => false
-
-def fullCapture : CaptureSet := fun _ => true
-
-def ephemeralOnly : CaptureSet
-  | ephemeralToken => true
-  | roomHistory => false
-
-def roomHistoryOnly : CaptureSet
-  | roomHistory => true
-  | ephemeralToken => false
-
-theorem capture_subset_refl (captures : CaptureSet) : captureSubset captures captures := by
-  intro capability h
-  exact h
-
-theorem empty_capture_subset (captures : CaptureSet) :
-    captureSubset emptyCapture captures := by
-  intro capability h
-  simp [emptyCapture] at h
-
-theorem capture_subset_trans
-    {capturesA capturesB capturesC : CaptureSet}
-    (hab : captureSubset capturesA capturesB)
-    (hbc : captureSubset capturesB capturesC) :
-    captureSubset capturesA capturesC := by
-  intro capability h
-  exact hbc capability (hab capability h)
-
-theorem ephemeral_only_subset_of_full_capture :
-    captureSubset ephemeralOnly fullCapture := by
-  intro capability h
-  simp [fullCapture]
-
-theorem ephemeral_only_not_subset_of_empty :
-    ¬ captureSubset ephemeralOnly emptyCapture := by
-  intro h
-  have hToken := h ephemeralToken rfl
-  simp [emptyCapture] at hToken
-
-theorem room_history_only_not_subset_of_ephemeral_only :
-    ¬ captureSubset roomHistoryOnly ephemeralOnly := by
-  intro h
-  have hHistory := h roomHistory rfl
-  simp [ephemeralOnly] at hHistory
-
-def remoteCallAllowed (remainingCalls : Nat) : Prop :=
-  0 < remainingCalls
-
-def spendRemoteCall : Nat → Nat
-  | 0 => 0
-  | remainingCalls + 1 => remainingCalls
-
-theorem zero_budget_rejects_remote_call :
-    ¬ remoteCallAllowed 0 := by
-  simp [remoteCallAllowed]
-
-theorem positive_budget_allows_remote_call :
-    remoteCallAllowed 1 := by
-  simp [remoteCallAllowed]
-
-theorem succ_budget_allows_remote_call (remainingCalls : Nat) :
-    remoteCallAllowed (Nat.succ remainingCalls) := by
-  simp [remoteCallAllowed]
-
-theorem single_budget_is_exhausted_after_one_call :
-    ¬ remoteCallAllowed (spendRemoteCall 1) := by
-  simp [spendRemoteCall, remoteCallAllowed]
-
-theorem two_budget_still_allows_after_one_call :
-    remoteCallAllowed (spendRemoteCall 2) := by
-  simp [spendRemoteCall, remoteCallAllowed]
-
-end CurrentL2FiniteIndexFirstLayer
-""",
-        ),
-        FoundationSpec(
-            filename="CurrentL2ProofSkeleton.lean",
-            summary="review-unit と Lean-stub の整合を固定する mechanization-ready proof-obligation skeleton。",
-            explanation=(
-                "Package 57 の最初の actual Lean fragment である。"
-                "repo-local review-unit to Lean-stub bridge の構造的 fact を証明し、"
-                "domain obligation が解けたとは主張せず mechanization-ready carrier の shape を固定する。"
-            ),
-            source_text="""/-!
-current-l2 first proof-skeleton fragment
-
-This file captures the structural part of the theorem-side bridge: review units, emitted
-Lean stubs, and the invariant that emission preserves subject and obligation identity.
--/
-
-namespace CurrentL2
-
-inductive ObligationKind where
-  | rollbackCutNonInterference
-  | noRePromotion
-deriving DecidableEq, Repr
-
-open ObligationKind
-
-def obligationName : ObligationKind → String
-  | rollbackCutNonInterference => "rollback_cut_non_interference"
-  | noRePromotion => "no_re_promotion"
-
-structure ReviewUnit where
-  subjectRef : String
-  obligationKind : ObligationKind
-deriving Repr
-
-structure LeanStub where
-  subjectRef : String
-  obligationKind : ObligationKind
-  theoremName : String
-deriving Repr
-
-def mkLeanStub (unit : ReviewUnit) : LeanStub :=
-  {
-    subjectRef := unit.subjectRef
-    obligationKind := unit.obligationKind
-    theoremName := unit.subjectRef ++ "__" ++ obligationName unit.obligationKind
-  }
-
-def emitStubs (units : List ReviewUnit) : List LeanStub :=
-  units.map mkLeanStub
-
-theorem mkLeanStub_preserves_subject (unit : ReviewUnit) :
-    (mkLeanStub unit).subjectRef = unit.subjectRef := by
-  simp [mkLeanStub]
-
-theorem mkLeanStub_preserves_obligation (unit : ReviewUnit) :
-    (mkLeanStub unit).obligationKind = unit.obligationKind := by
-  simp [mkLeanStub]
-
-theorem mkLeanStub_names_theorem (unit : ReviewUnit) :
-    (mkLeanStub unit).theoremName = unit.subjectRef ++ "__" ++ obligationName unit.obligationKind := by
-  simp [mkLeanStub]
-
-theorem emitStubs_length (units : List ReviewUnit) :
-    (emitStubs units).length = units.length := by
-  simp [emitStubs]
-
-def e5ReviewUnits : List ReviewUnit :=
-  [
-    { subjectRef := "e5-underdeclared-lineage", obligationKind := rollbackCutNonInterference },
-    { subjectRef := "e5-underdeclared-lineage", obligationKind := noRePromotion }
-  ]
-
-theorem e5_emission_preserves_count :
-    (emitStubs e5ReviewUnits).length = 2 := by
-  simp [emitStubs, e5ReviewUnits]
-
-theorem e5_first_stub_subject :
-    match emitStubs e5ReviewUnits with
-    | stub :: _ => stub.subjectRef = "e5-underdeclared-lineage"
-    | _ => False := by
-  simp [emitStubs, e5ReviewUnits, mkLeanStub]
-
-theorem e5_second_stub_obligation :
-    match emitStubs e5ReviewUnits with
-    | _ :: stub :: _ => stub.obligationKind = noRePromotion
-    | _ => False := by
-  simp [emitStubs, e5ReviewUnits, mkLeanStub]
-
-end CurrentL2
-""",
-        ),
-    ]
-
-
-def build_current_l2_explanation(spec: CurrentL2ExportSpec) -> str:
-    current_ids = " / ".join(export_spec.sample_id for export_spec in current_l2_export_specs())
-    return f"""# {spec.sample_id}
-
-## 要約
-
-- {spec.summary}
-- {spec.rationale}
-
-## この Lean ファイルが意味すること
-
-- この Lean ファイルは repo-local theorem bridge から生成されたもので、`lean` に受理される。
-- 生成された theorem body にはまだ `sorry` が残るため、現時点の保証は **artifact well-formedness and bridge alignment** であり、完全な mathematical discharge ではない。
-- 具体的には、review-unit から Lean stub への route がこの sample に対して構文的に正しい Lean text を出し、sample が current theorem-first bridge floor に留まっていることを repo が確認した。
-- これは最終的な public theorem contract でも final proof-object schema でもない。
-
-## それでも保持する理由
-
-- current sample に結び付いた actual Lean text を inspectable snapshot として保持できる。
-- `{current_ids}` のあいだで current proof obligation を具体物として比較できる。
-- 「Lean が生成ファイルを受理した」ことと「domain theorem が fully proved である」ことを明示的に分けたままにできる。
-"""
-
-
-def build_foundation_explanation(spec: FoundationSpec) -> str:
-    return f"""# {spec.filename}
-
-## 要約
-
-- {spec.summary}
-
-## このファイルを置く理由
-
-- {spec.explanation}
-- valid pattern がなぜ通るか、invalid pattern がなぜ witness を持てないかを、sample-facing に追いやすい小さな補題と example で固定する。
-- 生成された current-L2 sample stub と違い、このファイルは `sorry` ではなく実際に小さな証明を含む。
-- ただし依然として helper-local / non-production cut に留める。目的は first mechanization-ready core を固定することであり、final public type system や verifier contract を凍らせることではない。
-"""
-
-
-def build_top_level_readme() -> str:
-    current_ids = ", ".join(spec.sample_id for spec in current_l2_export_specs())
-    return f"""# samples/lean
-
-このディレクトリは、repo が現在 Lean でどこまで検証しているかを、
-repo-local かつ inspectable な形で保存する。
-
-## 構成
-
-- `foundations/`
-  - 実際に小さな証明を含む self-contained Lean file を置く
-  - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、finite-index first-layer capture / lifetime / simple cost fragment、proof-skeleton / obligation-shape first fragment である
-- `current-l2/`
-  - 現在の current-L2 定理ブリッジから representative sample set `{current_ids}` 向けに生成された Lean theorem stub を置く
-  - これらの file は Lean に受理されるが、まだ `sorry` を含む
-
-## 読み方
-
-- `foundations/` は、すでに小さな fact を証明できる **mechanization-ready core** を示す。
-- foundations 側では、valid pattern がなぜ通るか、invalid pattern がなぜ不可能かを、再利用しやすい小さな補題と concrete example で残す。
-- `current-l2/` は、repo が representative sample から生成する **actual emitted theorem bridge surface** を示す。
-- generated current-L2 stub は artifact alignment と Lean acceptance を示すのであって、completed theorem discharge を示すものではない。
-
-## 再生成
-
-次を実行する:
-
-```bash
-python3 scripts/current_l2_lean_sample_sync.py
-```
-
-これにより committed Lean sample corpus を再生成し、`lean` で検証する。
-"""
-
-
-def bundle_example_command(spec: CurrentL2ExportSpec, output_path: Path) -> list[str]:
-    command = [
-        "cargo",
-        "run",
-        "-p",
-        "mir-runtime",
-        "--example",
-        "current_l2_emit_theorem_lean_bundle",
-        "--",
-        spec.sample_argument,
-    ]
-    if spec.host_plan_path is not None:
-        command.extend(["--host-plan", str(spec.host_plan_path)])
-    command.extend(["--output", str(output_path)])
-    return command
-
-
-def ensure_lean_available() -> str:
-    lean_path = shutil.which("lean")
-    if lean_path is None:
-        candidate = Path.home() / ".elan" / "bin" / "lean"
-        if candidate.is_file():
-            lean_path = str(candidate)
-    if lean_path is None:
-        raise RuntimeError("lean command not found in PATH")
-    return lean_path
-
-
-def lean_version_line(lean_path: str) -> str:
+    explanation_path: str
+
+
+FOUNDATIONS = [
+    FoundationSpec(
+        filename="CurrentL2LabelModel.lean",
+        explanation_path="samples/lean/foundations/CurrentL2LabelModel.md",
+    ),
+    FoundationSpec(
+        filename="CurrentL2IfcSecretExamples.lean",
+        explanation_path="samples/lean/foundations/CurrentL2IfcSecretExamples.md",
+    ),
+    FoundationSpec(
+        filename="CurrentL2FiniteIndexFirstLayer.lean",
+        explanation_path="samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.md",
+    ),
+    FoundationSpec(
+        filename="CurrentL2ProofSkeleton.lean",
+        explanation_path="samples/lean/foundations/CurrentL2ProofSkeleton.md",
+    ),
+]
+
+
+def runtime_json(*parts: str) -> object:
     completed = subprocess.run(
-        [lean_path, "--version"],
+        [*RUNTIME_PREFIX, *parts, "--format", "json"],
+        cwd=REPO_ROOT,
         check=True,
         capture_output=True,
         text=True,
-        cwd=REPO_ROOT,
     )
-    return completed.stdout.strip().splitlines()[0]
+    return json.loads(completed.stdout)
 
 
-def run_lean(lean_path: str, source_path: Path) -> dict[str, object]:
+def lean_version() -> str:
     completed = subprocess.run(
-        [lean_path, str(source_path)],
-        check=False,
+        ["lean", "--version"],
+        cwd=REPO_ROOT,
+        check=True,
         capture_output=True,
         text=True,
+    )
+    return completed.stdout.strip()
+
+
+def verify_lean(path: Path) -> dict[str, object]:
+    completed = subprocess.run(
+        ["lean", str(path)],
         cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
     )
     return {
         "success": completed.returncode == 0,
@@ -785,130 +90,120 @@ def run_lean(lean_path: str, source_path: Path) -> dict[str, object]:
     }
 
 
-def write_text(path: Path, content: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8")
+def sanitize_module_name(sample_id: str) -> str:
+    pieces = ["CleanNearEnd"]
+    for part in sample_id.split("_"):
+        if part and part[0].isdigit():
+            pieces.append(f"S{part}")
+        elif part:
+            pieces.append(part.capitalize())
+    return ".".join(pieces)
 
 
-def sync_foundations(lean_path: str, version_line: str) -> list[dict[str, object]]:
-    results: list[dict[str, object]] = []
+def theorem_name(sample_id: str) -> str:
+    stem = sample_id.replace("-", "_")
+    if stem and stem[0].isdigit():
+        stem = "s" + stem
+    return stem + "__alpha_ready_subject"
 
-    for spec in foundation_specs():
-        lean_path_out = FOUNDATIONS_ROOT / spec.filename
-        explanation_path = lean_path_out.with_suffix(".md")
-        write_text(lean_path_out, spec.source_text)
-        write_text(explanation_path, build_foundation_explanation(spec))
 
-        verification = run_lean(lean_path, lean_path_out)
-        if not verification["success"]:
-            raise RuntimeError(
-                f"Lean verification failed for foundation sample {lean_path_out}: "
-                f"{verification['stderr']}"
+def render_lean_stub(sample_id: str) -> str:
+    module_name = sanitize_module_name(sample_id)
+    thm_name = theorem_name(sample_id)
+    return f"""namespace {module_name}
+
+theorem {thm_name} : True := by
+  trivial
+
+end {module_name}
+"""
+
+
+def render_readme(sample_id: str, source_path: str) -> str:
+    return f"""# {sample_id}
+
+- Active clean near-end sample
+- Source: `{source_path}`
+- Lean stub status: repo-local alpha proof skeleton only
+"""
+
+
+def sync_clean_stubs(sample_rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    if CLEAN_ROOT.exists():
+        shutil.rmtree(CLEAN_ROOT)
+    CLEAN_ROOT.mkdir(parents=True, exist_ok=True)
+
+    entries: list[dict[str, object]] = []
+    version = lean_version()
+    for row in sample_rows:
+        sample_id = str(row["sample_id"])
+        sample_dir = CLEAN_ROOT / sample_id
+        sample_dir.mkdir(parents=True, exist_ok=True)
+        lean_path = sample_dir / f"{sample_id}.lean"
+        bundle_path = sample_dir / f"{sample_id}.bundle.json"
+        readme_path = sample_dir / "README.md"
+        lean_path.write_text(render_lean_stub(sample_id), encoding="utf-8")
+        bundle_path.write_text(
+            json.dumps(
+                {
+                    "sample_id": sample_id,
+                    "source_path": row["source_path"],
+                    "theorem_name": theorem_name(sample_id),
+                },
+                indent=2,
             )
-        results.append(
+            + "\n",
+            encoding="utf-8",
+        )
+        readme_path.write_text(
+            render_readme(sample_id, str(row["source_path"])),
+            encoding="utf-8",
+        )
+        entries.append(
+            {
+                "kind": "clean-near-end",
+                "sample_id": sample_id,
+                "lean_path": str(lean_path.relative_to(REPO_ROOT)),
+                "bundle_path": str(bundle_path.relative_to(REPO_ROOT)),
+                "explanation_path": str(readme_path.relative_to(REPO_ROOT)),
+                "lean_version": version,
+                "theorem_names": [theorem_name(sample_id)],
+                "verification": verify_lean(lean_path),
+            }
+        )
+    return entries
+
+
+def foundation_entries(version: str) -> list[dict[str, object]]:
+    entries = []
+    for spec in FOUNDATIONS:
+        lean_path = FOUNDATIONS_ROOT / spec.filename
+        entries.append(
             {
                 "kind": "foundation",
                 "filename": spec.filename,
-                "lean_path": str(lean_path_out.relative_to(REPO_ROOT)),
-                "explanation_path": str(explanation_path.relative_to(REPO_ROOT)),
-                "lean_version": version_line,
-                "verification": verification,
+                "lean_path": str(lean_path.relative_to(REPO_ROOT)),
+                "explanation_path": spec.explanation_path,
+                "lean_version": version,
+                "verification": verify_lean(lean_path),
             }
         )
-
-    return results
-
-
-def sync_current_l2(lean_path: str, version_line: str) -> list[dict[str, object]]:
-    results: list[dict[str, object]] = []
-
-    for spec in current_l2_export_specs():
-        with tempfile.TemporaryDirectory() as temp_dir:
-            bundle_path = Path(temp_dir) / f"{spec.sample_id}.bundle.json"
-            subprocess.run(
-                bundle_example_command(spec, bundle_path),
-                check=True,
-                cwd=REPO_ROOT,
-            )
-            bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
-
-        if bundle["pilot_status"] != "reached":
-            raise RuntimeError(
-                f"current-l2 Lean bundle did not reach theorem route for {spec.sample_id}: "
-                f"{bundle['pilot_guard_reason']}"
-            )
-        if not bundle["lean_stub_artifacts"]:
-            raise RuntimeError(f"no Lean stub artifacts emitted for {spec.sample_id}")
-
-        sample_root = CURRENT_L2_ROOT / spec.sample_id
-        sample_root.mkdir(parents=True, exist_ok=True)
-        lean_output_path = sample_root / f"{spec.sample_id}.lean"
-        explanation_path = sample_root / "README.md"
-        bundle_output_path = sample_root / f"{spec.sample_id}.bundle.json"
-
-        source_text = "\n".join(
-            artifact["source_text"] for artifact in bundle["lean_stub_artifacts"]
-        )
-        write_text(lean_output_path, source_text)
-        write_text(explanation_path, build_current_l2_explanation(spec))
-        write_text(bundle_output_path, json.dumps(bundle, indent=2) + "\n")
-
-        verification = run_lean(lean_path, lean_output_path)
-        if not verification["success"]:
-            raise RuntimeError(
-                f"Lean verification failed for current-l2 sample {spec.sample_id}: "
-                f"{verification['stderr']}"
-            )
-
-        results.append(
-            {
-                "kind": "current-l2",
-                "sample_id": spec.sample_id,
-                "lean_path": str(lean_output_path.relative_to(REPO_ROOT)),
-                "explanation_path": str(explanation_path.relative_to(REPO_ROOT)),
-                "bundle_path": str(bundle_output_path.relative_to(REPO_ROOT)),
-                "lean_version": version_line,
-                "theorem_names": [
-                    artifact["theorem_name"] for artifact in bundle["lean_stub_artifacts"]
-                ],
-                "verification": verification,
-            }
-        )
-
-    return results
-
-
-def sync_samples() -> dict[str, object]:
-    lean_path = ensure_lean_available()
-    version_line = lean_version_line(lean_path)
-
-    write_text(SAMPLES_ROOT / "README.md", build_top_level_readme())
-    foundations = sync_foundations(lean_path, version_line)
-    current_l2 = sync_current_l2(lean_path, version_line)
-
-    manifest = {
-        "lean_version": version_line,
-        "foundations": foundations,
-        "current_l2": current_l2,
-    }
-    write_text(SAMPLES_ROOT / "manifest.json", json.dumps(manifest, indent=2) + "\n")
-    return manifest
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description=(
-            "current L2 theorem bridge と first IFC / proof-skeleton / secret-example fragments "
-            "に対する committed Lean sample corpus を再生成する。"
-        )
-    )
-    return parser.parse_args()
+    return entries
 
 
 def main() -> int:
-    parse_args()
-    manifest = sync_samples()
-    print(json.dumps(manifest, indent=2))
+    sample_rows = runtime_json("list")
+    version = lean_version()
+    manifest = {
+        "lean_version": version,
+        "foundations": foundation_entries(version),
+        "clean_near_end": sync_clean_stubs(sample_rows),
+    }
+    MANIFEST_PATH.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    print(MANIFEST_PATH)
     return 0
 
 

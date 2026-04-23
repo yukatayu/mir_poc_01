@@ -155,8 +155,19 @@
 28. synchronized web browsing モデル。
 29. Mir-based GUI プログラミング基盤。
 30. 以前の prototype diagram を最終的な Mir syntax / semantics にどう対応づけるか。
+    - 2026-04-22 以後の current active reading では、pre-clean-near-end prototype diagram を direct に active sample surface と同一視しない。
+    - current active sample surface は `samples/clean-near-end/` と `samples/lean/clean-near-end/` を first anchor に読む。
 
 ## order / handoff / syntax / modality 理論線
+
+### 2026-04-22 clean near-end addendum
+
+- current active sample root は `samples/clean-near-end/` である。
+- first strong typing line は finite decidable index fragment を principal に置く。
+- authority / label / capture / lifetime / cost は builtin ではなく user-defined finite theory として扱う。
+- order / handoff current line は high-level relation family を principal に置き、low-level `memory_order` exact surface は retained-later reference family に留める。
+- mutex / weak-memory family は model-check second line に置く。
+- pre-clean-near-end `p..` prototype chain は historical evidence として残るが、active canonical sample ではない。
 
 ### current integration reading
 

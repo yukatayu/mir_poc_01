@@ -1,0 +1,17 @@
+module CleanNearEnd.StageStableLaterMinimal
+
+stable config : GameConfig
+
+transition staged_roll {
+  stage prepare:
+    cfg <- use stable config
+
+  stage roll:
+    draw <- perform roll_dice(cfg)
+      produces value draw @ later
+
+  stage publish:
+    publish draw
+      requires value draw @ later
+      produces witness draw_pub
+}

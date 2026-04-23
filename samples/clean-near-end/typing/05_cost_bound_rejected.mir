@@ -1,0 +1,16 @@
+module CleanNearEnd.CostBoundRejected
+
+use CleanNearEnd.IndexTheories
+
+effect fetch_remote_bonus
+  output bonus : Bonus
+  effect remote_call
+  cost <= { remote_calls: 1, cpu_steps: 20, writes: 0 }
+
+fn move_without_remote_budget(player : Player)
+  -> Board
+  cost <= { remote_calls: 0, cpu_steps: 100, writes: 0 } {
+  bonus <- perform fetch_remote_bonus()
+  require remote_calls: 0
+  return apply_bonus(player, bonus)
+}

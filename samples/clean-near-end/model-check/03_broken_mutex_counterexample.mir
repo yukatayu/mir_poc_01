@@ -1,0 +1,26 @@
+module CleanNearEnd.BrokenMutexCounterexample
+
+model BrokenMutex {
+  actor A
+  actor B
+
+  shared flag[A] : Bool = false
+  shared flag[B] : Bool = false
+
+  process A {
+    if flag[B] == false
+    flag[A] <- true
+    critical A
+    flag[A] <- false
+  }
+
+  process B {
+    if flag[A] == false
+    flag[B] <- true
+    critical B
+    flag[B] <- false
+  }
+
+  property mutual_exclusion:
+    never (in_critical(A) and in_critical(B))
+}

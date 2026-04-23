@@ -1,0 +1,25 @@
+module CleanNearEnd.AuthorizedRollPublishHandoff
+
+use CleanNearEnd.IndexTheories
+
+principal Alice : FingerprintAuthority.Admin
+principal Bob   : FingerprintAuthority.Holder
+
+resource dice_owner : Player
+  authority_scope room
+  lifetime Session
+
+transition handoff_turn(owner = Alice) {
+  stage roll:
+    draw <- perform roll_dice via authority_rng
+
+  stage publish:
+    publish draw
+      scope room
+      produces witness draw_pub
+
+  stage handoff:
+    handoff dice_owner Alice -> Bob
+      after publish(draw)
+      requires witness(draw_pub)
+}

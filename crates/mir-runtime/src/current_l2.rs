@@ -392,10 +392,6 @@ pub fn current_l2_default_source_sample_directory() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../samples/current-l2")
 }
 
-pub fn current_l2_default_prototype_sample_root() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../samples/prototype")
-}
-
 fn current_l2_runner_accepted_sample_paths() -> Vec<PathBuf> {
     let root = current_l2_default_source_sample_directory();
     [
@@ -440,9 +436,6 @@ pub fn resolve_current_l2_source_sample_path(
                 return Ok(normalized_direct);
             }
         }
-        if current_l2_is_allowed_prototype_sample_path(&normalized_direct)? {
-            return Ok(normalized_direct);
-        }
         return Err(InterpreterError::InvalidProgram(format!(
             "source sample path is outside the current accepted sample set: {}",
             direct_path.display()
@@ -472,13 +465,6 @@ fn canonicalize_existing_source_sample_path(path: &Path) -> Result<PathBuf, Inte
             path.display()
         ))
     })
-}
-
-fn current_l2_is_allowed_prototype_sample_path(path: &Path) -> Result<bool, InterpreterError> {
-    let prototype_root =
-        canonicalize_existing_source_sample_path(&current_l2_default_prototype_sample_root())?;
-    Ok(path.starts_with(&prototype_root)
-        && path.extension().and_then(|ext| ext.to_str()) == Some("txt"))
 }
 
 pub fn run_current_l2_source_sample(
@@ -549,119 +535,7 @@ pub fn run_current_l2_runtime_skeleton(
 }
 
 fn current_l2_source_static_gate_program_detailed(program: &Program) -> StaticGateResult {
-    let mut gate = static_gate_program_detailed(program);
-    let mut scope = Vec::new();
-    collect_order_handoff_late_join_static_stop_reasons(&program.body, &mut scope, &mut gate);
-    gate
-}
-
-fn collect_order_handoff_late_join_static_stop_reasons(
-    statements: &[Statement],
-    scope: &mut Vec<String>,
-    gate: &mut StaticGateResult,
-) {
-    collect_current_scope_order_handoff_late_join_reasons(statements, scope, gate);
-
-    for statement in statements {
-        match statement {
-            Statement::PlaceBlock { place, body } => {
-                scope.push(place.clone());
-                collect_order_handoff_late_join_static_stop_reasons(body, scope, gate);
-                scope.pop();
-            }
-            Statement::TryFallback {
-                body,
-                fallback_body,
-            } => {
-                collect_order_handoff_late_join_static_stop_reasons(body, scope, gate);
-                collect_order_handoff_late_join_static_stop_reasons(fallback_body, scope, gate);
-            }
-            Statement::PerformOn { .. }
-            | Statement::PerformVia { .. }
-            | Statement::OptionDecl { .. }
-            | Statement::ChainDecl { .. }
-            | Statement::AtomicCut => {}
-        }
-    }
-}
-
-fn collect_current_scope_order_handoff_late_join_reasons(
-    statements: &[Statement],
-    scope: &[String],
-    gate: &mut StaticGateResult,
-) {
-    let direct_ops = statements
-        .iter()
-        .filter_map(|statement| match statement {
-            Statement::PerformOn { op, .. } | Statement::PerformVia { op, .. } => Some(op.as_str()),
-            Statement::PlaceBlock { .. }
-            | Statement::OptionDecl { .. }
-            | Statement::ChainDecl { .. }
-            | Statement::TryFallback { .. }
-            | Statement::AtomicCut => None,
-        })
-        .collect::<Vec<_>>();
-
-    let Some(observe_idx) = direct_ops
-        .iter()
-        .position(|op| *op == "observe_late_join_view")
-    else {
-        return;
-    };
-    let Some(handoff_idx) = direct_ops[..observe_idx]
-        .iter()
-        .rposition(|op| *op == "handoff_dice_authority")
-    else {
-        return;
-    };
-    if direct_ops[..handoff_idx]
-        .iter()
-        .any(|op| *op == "publish_roll_result")
-    {
-        return;
-    }
-
-    let scope_text = current_l2_display_scope(scope);
-    if direct_ops[handoff_idx + 1..]
-        .iter()
-        .any(|op| *op == "publish_roll_result")
-    {
-        gate.verdict =
-            current_l2_escalate_static_gate_verdict(gate.verdict, StaticGateVerdict::Malformed);
-        gate.reasons.push(format!(
-            "handoff appears before publish for late-join visibility at {scope_text}"
-        ));
-        return;
-    }
-
-    gate.verdict =
-        current_l2_escalate_static_gate_verdict(gate.verdict, StaticGateVerdict::Underdeclared);
-    gate.reasons.push(format!(
-        "missing publication witness before handoff for late-join visibility at {scope_text}"
-    ));
-}
-
-fn current_l2_escalate_static_gate_verdict(
-    current: StaticGateVerdict,
-    incoming: StaticGateVerdict,
-) -> StaticGateVerdict {
-    match (current, incoming) {
-        (StaticGateVerdict::Malformed, _) | (_, StaticGateVerdict::Malformed) => {
-            StaticGateVerdict::Malformed
-        }
-        (StaticGateVerdict::Underdeclared, _) | (_, StaticGateVerdict::Underdeclared) => {
-            StaticGateVerdict::Underdeclared
-        }
-        _ => StaticGateVerdict::Valid,
-    }
-}
-
-fn current_l2_display_scope(scope: &[String]) -> String {
-    if scope.is_empty() {
-        "<root>".to_string()
-    } else {
-        scope.join(" / ")
-    }
+    static_gate_program_detailed(program)
 }
 
 pub fn lower_current_l2_fixed_source_text(

@@ -1,30 +1,34 @@
 # samples/lean
 
-このディレクトリは、repo が現在 Lean でどこまで検証しているかを、
-repo-local かつ inspectable な形で保存する。
+このディレクトリは、repo が Lean でどこまで mechanization を進めているかを **repo-local かつ inspectable** に保存するための場所です。
 
-## 構成
+## layout
 
 - `foundations/`
-  - 実際に小さな証明を含む self-contained Lean file を置く
-  - 現在の主眼は IFC / label-model first fragment、secret valid/invalid concrete example、finite-index first-layer capture / lifetime / simple cost fragment、proof-skeleton / obligation-shape first fragment である
-- `current-l2/`
-  - 現在の current-L2 定理ブリッジから representative sample set `e5-underdeclared-lineage, p06-typed-proof-owner-handoff, p10-typed-authorized-fingerprint-declassification, p11-typed-unauthorized-fingerprint-release, p12-typed-classified-fingerprint-publication-block, p15-typed-capture-escape-rejected, p16-typed-remote-call-budget-exceeded, p07-dice-late-join-visible-history, p08-dice-stale-reconnect-refresh, p09-dice-delegated-rng-provider-placement, p13-dice-late-join-missing-publication-witness, p14-dice-late-join-handoff-before-publication` 向けに生成された Lean theorem stub を置く
-  - これらの file は Lean に受理されるが、まだ `sorry` を含む
+  - small actual proof fragment
+  - finite-index first layer、IFC example、proof skeleton の最小 mechanization を置く
+- `clean-near-end/`
+  - active clean sample suite から生成した theorem stub
+  - Lean は通るが、full domain discharge を意味しない
+- `manifest.json`
+  - foundations と generated stub corpus の verification result
+- `old/2026-04-22-pre-clean-near-end/`
+  - pre-clean-near-end corpus の archive
 
-## 読み方
+## current reading
 
-- `foundations/` は、すでに小さな fact を証明できる **mechanization-ready core** を示す。
-- foundations 側では、valid pattern がなぜ通るか、invalid pattern がなぜ不可能かを、再利用しやすい小さな補題と concrete example で残す。
-- `current-l2/` は、repo が representative sample から生成する **actual emitted theorem bridge surface** を示す。
-- generated current-L2 stub は artifact alignment と Lean acceptance を示すのであって、completed theorem discharge を示すものではない。
+- foundations は actual proof fragment
+- generated stub は proof bridge の足場
+- old corpus は historical appendix
 
-## 再生成
-
-次を実行する:
+## 実行コマンド
 
 ```bash
 python3 scripts/current_l2_lean_sample_sync.py
 ```
 
-これにより committed Lean sample corpus を再生成し、`lean` で検証する。
+## 境界
+
+- Lean built-in として repo が使うのは Lean 自体の構文と基本型
+- security label、authority-sensitive predicate、capture / lifetime / cost model、review-unit / stub 構造は foundation file の user-defined definition
+- final public theorem contract や full discharge をここで確定したわけではない

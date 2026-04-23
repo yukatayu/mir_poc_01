@@ -1,0 +1,5 @@
+{
+  "sample_id": "06_auditable_authority_witness",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/06_auditable_authority_witness.mir",
+  "theorem_name": "s06_auditable_authority_witness__alpha_ready_subject"
+}

@@ -16,9 +16,10 @@
   - append で履歴を積まず、現況に合わせて全体を書き直す snapshot として扱う。
   - 規範判断の正本ではない。根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
 - `docs/research_abstract/`
-  - phase ごとの本質的な研究成果だけを短く辿るための condensed summary である。
+  - current research line を日本語で短く読み返すための summary / detail 集である。
   - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
-  - current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の condensed summary がある。
+  - current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の summary に加え、clean near-end typing / order-model / modal / Lean の summary と `_detail` を置く。
+  - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を
     「promotion / stop-line / contract concretization」
@@ -68,6 +69,18 @@
     「何を答えればどこまで自走できるか」
     を reserve package summary index actualization 後の last-mile gate まで含めて整理する。
   - 規範判断の正本ではないが、current status / near-end bound / final-public residual の確認入口として使ってよい。
+- `faq_012.md`
+  - 2026-04-23 時点の current explanation refresh であり、
+    `faq_011.md` 以後の clean near-end alpha closeout を反映した上で、
+    「どこまで何が終わっているか」
+    「二大問題
+    （Problem 1 = 型システム / 定理証明 / モデル検査、
+    Problem 2 = `memory_order` 再解釈の実装）
+    を、theory / implementation / public syntax まで含めて completely solved と読めるか」
+    「全体像に対して今どこにいるか」
+    「そこへ持っていくために何の判断と情報が要るか」
+    を repo-local alpha-ready current layer と final public completion の差まで含めて整理する。
+  - 規範判断の正本ではないが、current alpha status / two-big-problems completion bound / mixed gate / true user-spec gate の確認入口として使ってよい。
 - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
   - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
   - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。
@@ -420,6 +433,15 @@
   - `atomic_cut` を local cut の最小核に留めたまま、higher-level async-control family を language core へ押し込まない current first choice を整理する。
 - `specs/examples/451-current-l2-runnable-prototype-and-not-implemented-sample-buckets.md`
   - `samples/current-l2/`、`samples/prototype/`、`samples/not_implemented/` の current bucket policy と、corrected runnable prototype / exact rough stimulus preservation の current cut を整理する補助文書。
+  - 2026-04-22 以後は historical bucket policy として読む。
+- `samples/clean-near-end/`
+  - 2026-04-22 以後の active clean sample suite。
+  - `typing/`、`order-handoff/`、`model-check/`、`modal/` の current alpha layer を置く。
+- `samples/old/2026-04-22-pre-clean-near-end/`
+  - pre-clean-near-end prototype / rough stimulus / old problem-bundle archive。
+  - historical comparison 用であり active path ではない。
+- `samples/lean/clean-near-end/`
+  - active clean sample suite から生成した Lean theorem stub corpus。
 - `specs/examples/452-current-l2-debug-output-preview-helper-cut.md`
   - current sample debugging のための `debug_outputs` preview cut を、final host-I/O / FFI / stdio と混同しないよう整理する補助文書。
 - `specs/examples/453-current-l2-sample-verification-preview-and-prototype-second-tranche.md`

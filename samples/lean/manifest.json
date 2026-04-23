@@ -54,210 +54,275 @@
       }
     }
   ],
-  "current_l2": [
+  "clean_near_end": [
     {
-      "kind": "current-l2",
-      "sample_id": "e5-underdeclared-lineage",
-      "lean_path": "samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean",
-      "explanation_path": "samples/lean/current-l2/e5-underdeclared-lineage/README.md",
-      "bundle_path": "samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "01_authorized_declassification",
+      "lean_path": "samples/lean/clean-near-end/01_authorized_declassification/01_authorized_declassification.lean",
+      "bundle_path": "samples/lean/clean-near-end/01_authorized_declassification/01_authorized_declassification.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/01_authorized_declassification/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "e5_underdeclared_lineage__canonical_normalization_law",
-        "e5_underdeclared_lineage__no_re_promotion"
+        "s01_authorized_declassification__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean:12:8: warning: declaration uses `sorry`\n/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean:27:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p06-typed-proof-owner-handoff",
-      "lean_path": "samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean",
-      "explanation_path": "samples/lean/current-l2/p06-typed-proof-owner-handoff/README.md",
-      "bundle_path": "samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "02_unauthorized_declassification_rejected",
+      "lean_path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/02_unauthorized_declassification_rejected.lean",
+      "bundle_path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/02_unauthorized_declassification_rejected.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p06_typed_proof_owner_handoff__rollback_cut_non_interference"
+        "s02_unauthorized_declassification_rejected__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p10-typed-authorized-fingerprint-declassification",
-      "lean_path": "samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/p10-typed-authorized-fingerprint-declassification.lean",
-      "explanation_path": "samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/README.md",
-      "bundle_path": "samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/p10-typed-authorized-fingerprint-declassification.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "03_label_flow_rejected",
+      "lean_path": "samples/lean/clean-near-end/03_label_flow_rejected/03_label_flow_rejected.lean",
+      "bundle_path": "samples/lean/clean-near-end/03_label_flow_rejected/03_label_flow_rejected.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/03_label_flow_rejected/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p10_typed_authorized_fingerprint_declassification__rollback_cut_non_interference"
+        "s03_label_flow_rejected__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p10-typed-authorized-fingerprint-declassification/p10-typed-authorized-fingerprint-declassification.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p11-typed-unauthorized-fingerprint-release",
-      "lean_path": "samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/p11-typed-unauthorized-fingerprint-release.lean",
-      "explanation_path": "samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/README.md",
-      "bundle_path": "samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/p11-typed-unauthorized-fingerprint-release.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "04_capture_escape_rejected",
+      "lean_path": "samples/lean/clean-near-end/04_capture_escape_rejected/04_capture_escape_rejected.lean",
+      "bundle_path": "samples/lean/clean-near-end/04_capture_escape_rejected/04_capture_escape_rejected.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/04_capture_escape_rejected/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p11_typed_unauthorized_fingerprint_release__rollback_cut_non_interference"
+        "s04_capture_escape_rejected__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p11-typed-unauthorized-fingerprint-release/p11-typed-unauthorized-fingerprint-release.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p12-typed-classified-fingerprint-publication-block",
-      "lean_path": "samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.lean",
-      "explanation_path": "samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/README.md",
-      "bundle_path": "samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "05_cost_bound_rejected",
+      "lean_path": "samples/lean/clean-near-end/05_cost_bound_rejected/05_cost_bound_rejected.lean",
+      "bundle_path": "samples/lean/clean-near-end/05_cost_bound_rejected/05_cost_bound_rejected.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/05_cost_bound_rejected/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p12_typed_classified_fingerprint_publication_block__rollback_cut_non_interference"
+        "s05_cost_bound_rejected__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p15-typed-capture-escape-rejected",
-      "lean_path": "samples/lean/current-l2/p15-typed-capture-escape-rejected/p15-typed-capture-escape-rejected.lean",
-      "explanation_path": "samples/lean/current-l2/p15-typed-capture-escape-rejected/README.md",
-      "bundle_path": "samples/lean/current-l2/p15-typed-capture-escape-rejected/p15-typed-capture-escape-rejected.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "01_authorized_roll_publish_handoff",
+      "lean_path": "samples/lean/clean-near-end/01_authorized_roll_publish_handoff/01_authorized_roll_publish_handoff.lean",
+      "bundle_path": "samples/lean/clean-near-end/01_authorized_roll_publish_handoff/01_authorized_roll_publish_handoff.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/01_authorized_roll_publish_handoff/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p15_typed_capture_escape_rejected__rollback_cut_non_interference"
+        "s01_authorized_roll_publish_handoff__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p15-typed-capture-escape-rejected/p15-typed-capture-escape-rejected.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p16-typed-remote-call-budget-exceeded",
-      "lean_path": "samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/p16-typed-remote-call-budget-exceeded.lean",
-      "explanation_path": "samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/README.md",
-      "bundle_path": "samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/p16-typed-remote-call-budget-exceeded.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "02_missing_witness_rejected",
+      "lean_path": "samples/lean/clean-near-end/02_missing_witness_rejected/02_missing_witness_rejected.lean",
+      "bundle_path": "samples/lean/clean-near-end/02_missing_witness_rejected/02_missing_witness_rejected.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/02_missing_witness_rejected/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p16_typed_remote_call_budget_exceeded__rollback_cut_non_interference"
+        "s02_missing_witness_rejected__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p16-typed-remote-call-budget-exceeded/p16-typed-remote-call-budget-exceeded.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p07-dice-late-join-visible-history",
-      "lean_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.lean",
-      "explanation_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/README.md",
-      "bundle_path": "samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "03_handoff_before_publication_rejected",
+      "lean_path": "samples/lean/clean-near-end/03_handoff_before_publication_rejected/03_handoff_before_publication_rejected.lean",
+      "bundle_path": "samples/lean/clean-near-end/03_handoff_before_publication_rejected/03_handoff_before_publication_rejected.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/03_handoff_before_publication_rejected/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p07_dice_late_join_visible_history__rollback_cut_non_interference"
+        "s03_handoff_before_publication_rejected__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p08-dice-stale-reconnect-refresh",
-      "lean_path": "samples/lean/current-l2/p08-dice-stale-reconnect-refresh/p08-dice-stale-reconnect-refresh.lean",
-      "explanation_path": "samples/lean/current-l2/p08-dice-stale-reconnect-refresh/README.md",
-      "bundle_path": "samples/lean/current-l2/p08-dice-stale-reconnect-refresh/p08-dice-stale-reconnect-refresh.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "04_stage_block_authorized_handoff",
+      "lean_path": "samples/lean/clean-near-end/04_stage_block_authorized_handoff/04_stage_block_authorized_handoff.lean",
+      "bundle_path": "samples/lean/clean-near-end/04_stage_block_authorized_handoff/04_stage_block_authorized_handoff.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/04_stage_block_authorized_handoff/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p08_dice_stale_reconnect_refresh__rollback_cut_non_interference"
+        "s04_stage_block_authorized_handoff__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p08-dice-stale-reconnect-refresh/p08-dice-stale-reconnect-refresh.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p09-dice-delegated-rng-provider-placement",
-      "lean_path": "samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.lean",
-      "explanation_path": "samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/README.md",
-      "bundle_path": "samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "05_delegated_rng_service",
+      "lean_path": "samples/lean/clean-near-end/05_delegated_rng_service/05_delegated_rng_service.lean",
+      "bundle_path": "samples/lean/clean-near-end/05_delegated_rng_service/05_delegated_rng_service.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/05_delegated_rng_service/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p09_dice_delegated_rng_provider_placement__rollback_cut_non_interference"
+        "s05_delegated_rng_service__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.lean:12:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p13-dice-late-join-missing-publication-witness",
-      "lean_path": "samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.lean",
-      "explanation_path": "samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/README.md",
-      "bundle_path": "samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "06_auditable_authority_witness",
+      "lean_path": "samples/lean/clean-near-end/06_auditable_authority_witness/06_auditable_authority_witness.lean",
+      "bundle_path": "samples/lean/clean-near-end/06_auditable_authority_witness/06_auditable_authority_witness.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/06_auditable_authority_witness/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p13_dice_late_join_missing_publication_witness__canonical_normalization_law",
-        "p13_dice_late_join_missing_publication_witness__no_re_promotion"
+        "s06_auditable_authority_witness__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.lean:12:8: warning: declaration uses `sorry`\n/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.lean:27:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }
     },
     {
-      "kind": "current-l2",
-      "sample_id": "p14-dice-late-join-handoff-before-publication",
-      "lean_path": "samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.lean",
-      "explanation_path": "samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/README.md",
-      "bundle_path": "samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.bundle.json",
+      "kind": "clean-near-end",
+      "sample_id": "01_peterson_sc_pass",
+      "lean_path": "samples/lean/clean-near-end/01_peterson_sc_pass/01_peterson_sc_pass.lean",
+      "bundle_path": "samples/lean/clean-near-end/01_peterson_sc_pass/01_peterson_sc_pass.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/01_peterson_sc_pass/README.md",
       "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
       "theorem_names": [
-        "p14_dice_late_join_handoff_before_publication__canonical_normalization_law",
-        "p14_dice_late_join_handoff_before_publication__no_re_promotion"
+        "s01_peterson_sc_pass__alpha_ready_subject"
       ],
       "verification": {
         "success": true,
-        "stdout": "/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.lean:12:8: warning: declaration uses `sorry`\n/home/yukatayu/dev/mir_poc_01/samples/lean/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.lean:27:8: warning: declaration uses `sorry`\n",
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "clean-near-end",
+      "sample_id": "02_peterson_relaxed_counterexample",
+      "lean_path": "samples/lean/clean-near-end/02_peterson_relaxed_counterexample/02_peterson_relaxed_counterexample.lean",
+      "bundle_path": "samples/lean/clean-near-end/02_peterson_relaxed_counterexample/02_peterson_relaxed_counterexample.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/02_peterson_relaxed_counterexample/README.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "s02_peterson_relaxed_counterexample__alpha_ready_subject"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "clean-near-end",
+      "sample_id": "03_broken_mutex_counterexample",
+      "lean_path": "samples/lean/clean-near-end/03_broken_mutex_counterexample/03_broken_mutex_counterexample.lean",
+      "bundle_path": "samples/lean/clean-near-end/03_broken_mutex_counterexample/03_broken_mutex_counterexample.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/03_broken_mutex_counterexample/README.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "s03_broken_mutex_counterexample__alpha_ready_subject"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "clean-near-end",
+      "sample_id": "01_stage_stable_later_minimal",
+      "lean_path": "samples/lean/clean-near-end/01_stage_stable_later_minimal/01_stage_stable_later_minimal.lean",
+      "bundle_path": "samples/lean/clean-near-end/01_stage_stable_later_minimal/01_stage_stable_later_minimal.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/01_stage_stable_later_minimal/README.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "s01_stage_stable_later_minimal__alpha_ready_subject"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      }
+    },
+    {
+      "kind": "clean-near-end",
+      "sample_id": "02_published_witnessed_mode_bridge",
+      "lean_path": "samples/lean/clean-near-end/02_published_witnessed_mode_bridge/02_published_witnessed_mode_bridge.lean",
+      "bundle_path": "samples/lean/clean-near-end/02_published_witnessed_mode_bridge/02_published_witnessed_mode_bridge.bundle.json",
+      "explanation_path": "samples/lean/clean-near-end/02_published_witnessed_mode_bridge/README.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "theorem_names": [
+        "s02_published_witnessed_mode_bridge__alpha_ready_subject"
+      ],
+      "verification": {
+        "success": true,
+        "stdout": "",
         "stderr": "",
         "returncode": 0
       }

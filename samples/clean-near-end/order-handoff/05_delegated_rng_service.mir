@@ -1,0 +1,25 @@
+module CleanNearEnd.DelegatedRngService
+
+use CleanNearEnd.IndexTheories
+
+principal Alice : FingerprintAuthority.Admin
+principal Bob   : FingerprintAuthority.Holder
+
+effect delegated_rng_roll
+  output draw : DiceDraw
+  output provider_receipt : DelegatedRngReceipt
+  effect rng
+
+transition delegated_rng_turn(owner = Alice) {
+  stage provider:
+    draw <- perform delegated_rng_roll()
+      produces witness provider_receipt
+
+  stage publish:
+    publish draw
+      scope room
+
+  stage handoff:
+    handoff dice_owner Alice -> Bob
+      requires witness(provider_receipt)
+}

@@ -1,33 +1,40 @@
-# Phase 0 要約 — repository memory と decision boundary
+# Phase 0: repository memory と decision boundary
 
-## この phase の役割
+## この phase の意味
 
-Phase 0 は、Mir の semantics を増やす phase ではなく、**長期研究を壊さずに積み上げるための repo 構造を固定する phase** である。
+Phase 0 は、この repo が **仕様・経緯・証跡をどこに置くか** を固定する層です。
+agent が毎回ゼロから始めても current state を読み違えないように、文書構造そのものを correctness の一部として扱います。
 
-## 固まった current reading
+## 2026-04-23 時点で固まっていること
 
-- `specs/` を規範正本に置く。
-- `plan/` を長期の repository memory に置く。
-- `docs/reports/` を task 単位の証跡に置く。
-- `progress.md` と `tasks.md` は thin snapshot に保つ。
-- `L0/L1/L2/L3` の decision level を崩さない。
-- open / comparison / future を既成事実にしない。
+- 規範判断の正本は `specs/`
+- 長期の repository memory は `plan/`
+- current snapshot は `Documentation.md` / `progress.md` / `tasks.md`
+- 詳細な実行証跡は `docs/reports/`
+- active sample line は `samples/clean-near-end/`
+- old sample line は archive に分離済み
 
-## source-backed evidence
+## この phase が current layer にどう効いているか
 
-- `AGENTS.md`
-- `specs/01-charter-and-decision-levels.md`
-- `specs/12-decision-register.md`
-- report numbering / traceability / snapshot update policy
+clean near-end alpha floor は、実装だけではなく文書の読み筋まで含めて再現可能である必要があります。
+そのため Phase 0 では、
 
-## まだここで決めていないこと
+- active path
+- archive path
+- normative / memory / snapshot / evidence の分担
 
-- Mir の final syntax
-- full type system
-- shared-space final catalog
-- public API / backend / upper-layer app target
+を崩さないことが実装の前提になります。
 
-## 次へ渡したもの
+## まだ残ること
 
-以後の phase はすべて、Phase 0 の boundary を前提にして進む。
-この phase があるため、agent が context を失っても `specs/` / `plan/` / `reports/` を読み直せば研究状態を復元できる。
+- public release 向けの external doc set をどう切るか
+- final public API 文書の粒度をどこまで repo 内で持つか
+- packaging / installed surface を docs にどう昇格させるか
+
+## まず参照する文書
+
+- `README.md`
+- `Documentation.md`
+- `progress.md`
+- `tasks.md`
+- `specs/00-document-map.md`

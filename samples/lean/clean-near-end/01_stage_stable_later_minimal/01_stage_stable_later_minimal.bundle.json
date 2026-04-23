@@ -1,0 +1,5 @@
+{
+  "sample_id": "01_stage_stable_later_minimal",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/modal/01_stage_stable_later_minimal.mir",
+  "theorem_name": "s01_stage_stable_later_minimal__alpha_ready_subject"
+}

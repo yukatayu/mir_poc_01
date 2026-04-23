@@ -1,0 +1,31 @@
+module CleanNearEnd.PetersonScPass
+
+model PetersonSC {
+  actor A
+  actor B
+
+  shared flag[A] : Bool = false
+  shared flag[B] : Bool = false
+  shared turn : Actor = A
+
+  process A {
+    flag[A] <- true
+    turn <- B
+    wait while flag[B] == true and turn == B
+    critical A
+    flag[A] <- false
+  }
+
+  process B {
+    flag[B] <- true
+    turn <- A
+    wait while flag[A] == true and turn == A
+    critical B
+    flag[B] <- false
+  }
+
+  memory_model sequential_consistency
+
+  property mutual_exclusion:
+    never (in_critical(A) and in_critical(B))
+}

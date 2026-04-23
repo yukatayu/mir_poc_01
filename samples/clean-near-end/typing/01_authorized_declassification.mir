@@ -1,0 +1,34 @@
+module CleanNearEnd.AuthorizedDeclassification
+
+use CleanNearEnd.IndexTheories
+
+principal Alice : FingerprintAuthority.Releaser
+
+resource secret_key : PrivateKey
+  label SecurityLabel.KeyMaterial
+  capture SecretKeyStore
+  lifetime Session
+
+resource public_board : Board
+  label SecurityLabel.Public
+  lifetime Session
+
+transition release_fingerprint(actor = Alice) {
+  stage derive:
+    fp_secret <- perform derive_fingerprint(secret_key)
+      ensure label(fp_secret) = SecurityLabel.KeyMaterial
+
+  stage declassify:
+    fp_public <- declassify fp_secret
+      from SecurityLabel.KeyMaterial
+      to SecurityLabel.Public
+      using FingerprintReleasePolicy
+      requires authority(Alice) >= FingerprintAuthority.Releaser
+
+  stage publish:
+    receipt <- perform publish_fingerprint(fp_public)
+      to public_board
+      after declassify(fp_public)
+      requires witness(fp_public)
+      ensure label(fp_public) = SecurityLabel.Public
+}

@@ -1,0 +1,5 @@
+{
+  "sample_id": "05_cost_bound_rejected",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/05_cost_bound_rejected.mir",
+  "theorem_name": "s05_cost_bound_rejected__alpha_ready_subject"
+}

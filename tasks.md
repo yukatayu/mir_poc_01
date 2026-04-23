@@ -1,212 +1,175 @@
 # tasks
 
-最終更新: 2026-04-21 13:46 JST
+最終更新: 2026-04-23 08:57 JST
 
 ## この文書について
 
-- この文書は repo 全体の **current task map** である。
-- 規範判断の正本は `specs/`、長期参照は `plan/`、詳細経緯は `docs/reports/` に置く。
-- `tasks.md` は履歴ではなく snapshot である。
+- この文書は repo 全体の **current task map** です。
+- 規範判断の正本は `specs/`、長期比較は `plan/`、詳細証跡は `docs/reports/` に置きます。
+- append-only の履歴ではなく、現況に合わせて毎回全体を書き直す snapshot として扱います。
 
 ## current status at task level
 
-- current-L2 authored sixteen と corrected prototype set `p01 ... p16` は runnable
-- Problem 1 representative bundle は executable
-  - typed success / rejection pair
-  - theorem-first emitted artifact loop
-  - model-check second-line reserve summary
-  - Lean foundation / generated stub acceptance
-- Problem 2 representative bundle は executable
-  - representative pair `p07 / p08`
-  - reserve route `p09`
-  - negative static-stop pair `p13 / p14`
-  - witness / delegated RNG reserve summary
-- numbered self-driven queue は closed
-- 現在の次段は **mixed gate reopen** と **true user-spec residual** をどう切るかである
+- active clean near-end suite は runnable
+- first strong typing layer は finite-index fragment として runnable
+- order / handoff は high-level relation family として runnable
+- mutex / weak-memory line は model-check second line として runnable
+- Lean foundations と generated clean stub corpus は runnable
+- 現在の主な残課題は **public-seam residual** と **true user-spec residual** の切り分けです
 
 ## current executable floor
 
-### Problem 1
+### Active clean near-end suite
 
-- primary:
-  `p06-typed-proof-owner-handoff`
-- supporting typed set:
-  `p10 / p11 / p12 / p15 / p16`
-- helper entrypoints:
-  - `python3 scripts/current_l2_guided_samples.py bundle problem1`
-  - `python3 scripts/current_l2_guided_samples.py emit-theorem problem1`
-  - `python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line`
-- Lean:
-  - `samples/lean/foundations/CurrentL2IfcSecretExamples.lean`
-  - `samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean`
-  - `samples/lean/current-l2/`
+- typing:
+  `01_authorized_declassification`
+  `02_unauthorized_declassification_rejected`
+  `03_label_flow_rejected`
+  `04_capture_escape_rejected`
+  `05_cost_bound_rejected`
+- order / handoff:
+  `01_authorized_roll_publish_handoff`
+  `02_missing_witness_rejected`
+  `03_handoff_before_publication_rejected`
+  `04_stage_block_authorized_handoff`
+  `05_delegated_rng_service`
+  `06_auditable_authority_witness`
+- model-check:
+  `01_peterson_sc_pass`
+  `02_peterson_relaxed_counterexample`
+  `03_broken_mutex_counterexample`
+- modal:
+  `01_stage_stable_later_minimal`
+  `02_published_witnessed_mode_bridge`
 
-### Problem 2
+### Helper entrypoints
 
-- representative pair:
-  `p07 / p08`
-- reserve / negative:
-  `p09 / p13 / p14`
-- helper entrypoints:
-  - `python3 scripts/current_l2_guided_samples.py bundle problem2`
-  - `python3 scripts/current_l2_guided_samples.py emit-scenario problem2`
-  - `python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness`
-  - `python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service`
+- `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+- `python3 scripts/current_l2_guided_samples.py closeout --format json`
+- `python3 scripts/clean_near_end_samples.py run typing --format json`
+- `python3 scripts/clean_near_end_samples.py run order-handoff --format json`
+- `python3 scripts/clean_near_end_samples.py run model-check --format json`
+- `python3 scripts/clean_near_end_samples.py run modal --format json`
+- `python3 scripts/clean_near_end_samples.py matrix --format json`
+- `python3 scripts/current_l2_lean_sample_sync.py`
 
 ## 自走可能な task package
 
-### 1. Problem 1 final-public-seam reopen
+### 1. public parser / checker / runtime seam の narrowing
 
 - phase:
-  Macro 5 mixed-gate reopen
+  `Macro 3` / `Macro 7` mixed gate
 - 目的:
-  typed residual、theorem public-contract residual、model-check public-contract residual の reopen order を narrow に保ったまま整理する
-- 入口:
-  `python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams`
+  repo-local helper surface と final public surface の境界を、実装と docs の両方でさらに明確にする
 - 何に効くか:
-  Problem 1 を `repo-local near-end` から `final public seam decision` 手前まで綺麗に分解して読める
+  alpha-ready と final public completion の誤読を減らせる
 - rough estimate:
   中
 - current recommendation:
-  sample corpus を増やさず、existing bundle / matrix / reserve helper を使う
+  active clean suite を維持しつつ、public parser/API 以外の residual を先に整理する
 
-### 2. Problem 2 final-public-seam reopen
+### 2. Problem 1 public-seam residual の整理
 
 - phase:
-  Macro 6 mixed-gate reopen
+  `Macro 5` mixed gate
 - 目的:
-  source wording / emitted schema と witness-provider public-shape を分けたまま整理する
-- 入口:
-  `python3 scripts/current_l2_guided_samples.py lane problem2-final-public-seams`
+  finite-index typing、theorem handoff、model-check boundary を final public contract 手前まで整える
 - 何に効くか:
-  authoritative-room first line を壊さずに final public contract 残件だけを見直せる
+  checker payload / theorem result / verifier handoff の境界がさらに明確になる
 - rough estimate:
   中
 - current recommendation:
-  `p07 / p08 / p09 / p13 / p14` の役割差を崩さない
+  full dependent type や production prover binding に踏み込まず、repo-local bridge の contract を狭める
 
-### 3. parser-side residual lane
+### 3. Problem 2 public-shape residual の整理
 
 - phase:
-  Macro 3 / Macro 7 mixed-gate reopen
+  `Macro 6` mixed gate
 - 目的:
-  parser companion surface、request/head/clause bundle carrier、public parser API 残件を narrow に読む
-- 入口:
-  `python3 scripts/current_l2_guided_samples.py lane parser-side-residual`
+  `memory_order` 再解釈 line、witness / provider / emitted-artifact の public shape residual を整理する
 - 何に効くか:
-  current parser-side carrier を final grammar claim と混ぜない
+  high-level relation family を source principal に保ちつつ、low-level backend family の位置づけを明確にできる
 - rough estimate:
   中
 - current recommendation:
-  stage3 carrier と current guided bundle の対応を保つ
+  `memory_order_*` exact source syntax を導入せず、relation-first line を維持したまま boundary を狭める
 
-### 4. reserve package hardening
+### 4. Lean proof hardening
 
 - phase:
-  Macro 5 / Macro 6 reserve integration
+  `Macro 5` maintenance / mixed gate
 - 目的:
-  theorem-first external pilot、auditable-authority-witness、delegated-rng-service、model-check second-line を reserve package として磨く
-- 入口:
-  `python3 scripts/current_l2_guided_samples.py reserve`
+  foundations と generated stub の役割差を保ったまま、小さな actual proof fragment を増やす
 - 何に効くか:
-  first line と later mixed gate の間の帯域を読みやすく保てる
+  theorem side の mechanization evidence を強められる
 - rough estimate:
   小〜中
 - current recommendation:
-  final public contract claim に踏み込まず summary index を改善する
+  generated stub 全面解消を一気に狙わず、foundation 側の再利用可能 lemma を増やす
 
-### 5. summary / traceability maintenance
+### 5. docs / traceability maintenance
 
 - phase:
-  Macro 0 maintenance
+  `Macro 0` maintenance
 - 目的:
-  `README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`plan/01` を stale wording なしで保つ
-- 入口:
-  `python3 scripts/validate_docs.py`
+  README / Documentation / progress / tasks / research_abstract / report 間の drift を抑える
 - 何に効くか:
-  agent が current state を誤読しにくくなる
+  agent / human が current state を誤読しにくくなる
 - rough estimate:
   小
 - current recommendation:
-  representative command と stop line を必ず対で書く
+  active path と archive path を常に対で書き、old line を current line と混ぜない
 
 ## research を通して見つけること
 
-### low-level `memory_order` reinterpretation
+### low-level `memory_order` family の扱い
 
 - 概要:
-  低レベル `memory_order` family を current public line に採るかどうか
-- 影響:
-  Problem 2 wording、artifact contract、shared-space reasoning
+  low-level memory order family を source principal に上げるか、それとも backend/reference family に留めるか
+- 何に影響するか:
+  order / handoff wording、runtime policy、artifact contract、model-check explanation
 - 主要な選択肢:
-  - order / handoff high-level line を維持する
+  - high-level relation family を principal のまま維持する
   - low-level exact surface を別 layer として reopen する
 - current recommendation:
-  今は retained-later のままにする
+  今は relation-first line を維持する
 
 ### concrete theorem / model-check tool binding
 
 - 概要:
-  theorem/model-check を concrete tool contract に進めるか
-- 影響:
-  Problem 1 public seam、artifact schema、verifier contract
+  repo-local bridge を concrete public tool binding に進めるか
+- 何に影響するか:
+  verifier handoff、artifact schema、public contract、CI
 - 主要な選択肢:
-  - Lean-first bridge / reserve summary を維持する
-  - concrete tool brand と public checker artifact を導入する
+  - Lean-first / tool-neutral bridge を維持する
+  - concrete tool brand と public checker surface を導入する
 - current recommendation:
   まだ bridge / reserve floor に留める
 
-### final public verifier contract
-
-- 概要:
-  helper preview / reserve summary を final shared verifier contract に統合するか
-- 影響:
-  Problem 1、Problem 2、parser-side、formal hook 全体
-- 主要な選択肢:
-  - tool-neutral formal-hook floor を維持
-  - final public verifier contract を定義
-- current recommendation:
-  まだ later
-
 ## user が決める必要があること
-
-### broader application target
-
-- 概要:
-  repo の次の大きな適用先をどこに置くか
-- 影響:
-  Macro 8、host integration、packaging、acceptance criteria
-- 主要な選択肢:
-  - authoritative-room first scenario の延長
-  - Typed-Effect / host integration 側の具体化
-  - Prism / 上位アプリ側の具体化
-- current recommendation:
-  目的と保証範囲を user 側で先に固定したい
 
 ### packaging / installed binary / FFI
 
 - 概要:
-  repo-local helper floor から配布可能 surface へ進むか
-- 影響:
-  Macro 7、CI、artifact retention、host-facing contract
+  repo-local helper floor を配布可能 surface に進めるか
+- 何に影響するか:
+  Macro 7、artifact retention、host-facing contract、CI
 - 主要な選択肢:
-  - repo-local helper floor を維持
+  - repo-local helper floor を維持する
   - installed binary / packaging を first-class target にする
-  - FFI / engine adapter を先に切る
+  - FFI / engine adapter を先に設計する
 - current recommendation:
-  まだ repo-local floor を維持
+  まだ repo-local floor を維持する
 
-## rough next order
+### broader application target
 
-1. summary / traceability maintenance
-   Macro 0 maintenance。短く終わるが drift 防止効果が高い
-2. Problem 1 final-public-seam reopen
-   Macro 5 mixed-gate front half
-3. Problem 2 final-public-seam reopen
-   Macro 6 mixed-gate front half
-4. parser-side residual lane
-   Macro 3 / 7 reserve path
-5. reserve package hardening
-   Macro 5 / 6 reserve integration。first line と later mixed gate の間の帯域を読みやすく保つ
-6. user-spec hold line beyond repo-local near-end
-   Macro 7 / 8。ここから先は user 決定が濃くなる
+- 概要:
+  次の concrete target を authoritative-room 延長、Typed-Effect integration、Prism / 上位アプリのどこに置くか
+- 何に影響するか:
+  Macro 8、acceptance criteria、non-functional requirement
+- 主要な選択肢:
+  - authoritative-room extension
+  - Typed-Effect / host integration
+  - Prism / higher application
+- current recommendation:
+  目的と保証範囲を user 側で先に固定したい

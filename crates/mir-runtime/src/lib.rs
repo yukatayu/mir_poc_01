@@ -9,6 +9,7 @@ evaluation lives in `mir-semantics`, and this crate only wires the compile path
 between them.
 "#]
 
+pub mod clean_near_end;
 pub mod current_l2;
 pub mod current_l2_cli;
 

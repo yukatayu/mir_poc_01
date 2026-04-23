@@ -1,0 +1,5 @@
+{
+  "sample_id": "02_unauthorized_declassification_rejected",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/02_unauthorized_declassification_rejected.mir",
+  "theorem_name": "s02_unauthorized_declassification_rejected__alpha_ready_subject"
+}

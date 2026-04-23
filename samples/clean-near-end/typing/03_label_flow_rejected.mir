@@ -1,0 +1,24 @@
+module CleanNearEnd.LabelFlowRejected
+
+use CleanNearEnd.IndexTheories
+
+principal Alice : FingerprintAuthority.Releaser
+
+resource fp_secret : Fingerprint
+  label SecurityLabel.KeyMaterial
+  lifetime Session
+
+resource public_board : Board
+  label SecurityLabel.Public
+  lifetime Session
+
+transition bad_publish_without_declassify(actor = Alice) {
+  stage derive:
+    keep fp_secret
+      ensure label(fp_secret) = SecurityLabel.KeyMaterial
+
+  stage publish:
+    receipt <- perform publish_fingerprint(fp_secret)
+      to public_board
+      requires SecurityLabel.KeyMaterial <= SecurityLabel.Public
+}

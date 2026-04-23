@@ -1,0 +1,15 @@
+module CleanNearEnd.PublishedWitnessedModeBridge
+
+transition published_to_witnessed_bridge {
+  stage publish:
+    publish draw
+      scope room
+      produces witness draw_pub
+      produces value draw @ published(room)
+
+  stage bridge:
+    bridge draw
+      from published(room)
+      to witnessed(draw_pub)
+      requires witness(draw_pub)
+}

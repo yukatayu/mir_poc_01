@@ -1,30 +1,37 @@
-# Phase 2 要約 — parser-free PoC と detached validation loop
+# Phase 2: parser-free PoC と detached validation loop
 
-## この phase の役割
+## この phase の意味
 
-Phase 2 は、Phase 1 の semantics を **parser をまだ固定せずに回せる parser-free validation substrate** へ落とす phaseである。
+Phase 2 は、final parser を作る前に **sample / helper / validation loop を回せる状態** を作る層です。
+repo が今どこまで動くかを、parser-free な helper と fixture-friendly な command で確認できるようにします。
 
-## 固まった current reading
+## 2026-04-23 時点で固まっていること
 
-- fixture / host-plan / interpreter / compare helper を narrow に分ける。
-- detached artifact は compare 用の helper 出力であり、言語コアの public surface ではない。
-- parser-free loop は
-  `fixture -> run_bundle -> detached artifact -> compare`
-  の ratchet として保つ。
+- `scripts/current_l2_guided_samples.py` による suite-level smoke / closeout
+- `scripts/clean_near_end_samples.py` による family-level run / matrix / closeout
+- `scripts/current_l2_lean_sample_sync.py` による Lean foundations / generated stub の同期
+- `python3 scripts/validate_docs.py` による docs scaffold check
 
-## source-backed evidence
+## この phase が current layer にどう効いているか
 
-- `mir-semantics` current L2 minimal interpreter
-- detached bundle / aggregate / static-gate helper
-- regression / smoke / compare helper 群
+repo-local alpha floor は、この detached validation loop があることで再確認可能です。
+つまり、final parser がまだなくても、
 
-## まだここで決めていないこと
+- active sample が何本あるか
+- 各 sample が valid / malformed / counterexample のどれか
+- Lean foundation が同期しているか
 
-- public exporter API
-- final storage / retention policy
-- richer host interface
-- typed / theorem / model-check concrete binding
+を repo 内で確かめられます。
 
-## 次へ渡したもの
+## まだ残ること
 
-compile-ready actualization と syntax-backed source sample lane は、この parser-free loop を壊さずに上へ積む。
+- final parser / AST carrier を detached loop とどう reconnect するか
+- public checker / runtime API に helper command をどう昇格させるか
+- external verifier / model-check tool との concrete binding
+
+## 関連する summary / detail
+
+- `clean_near_end_typing_01_detail.md`
+- `clean_near_end_order_model_01_detail.md`
+- `clean_near_end_modal_01_detail.md`
+- `clean_near_end_lean_01_detail.md`

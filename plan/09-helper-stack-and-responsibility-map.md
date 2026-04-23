@@ -5,6 +5,12 @@
 current L2 parser-free PoC では、helper layer が増えるほど docs / tests / code の mirror drift が起きやすい。
 ここでは helper ごとの public behavior、thin delegation、tests の literal expectation、docs mirror の境界を揃える。
 
+2026-04-22 note:
+pre-clean-near-end helper note は historical memory としてのみ扱う。
+current active helper surface は `scripts/clean_near_end_samples.py`、
+`scripts/current_l2_guided_samples.py` の compatibility wrapper、
+`crates/mir-runtime/src/clean_near_end.rs` を first anchor に読む。
+
 ## helper stack の中心関数
 
 特に重要なのは次の stack である。
@@ -28,9 +34,9 @@ run_directory_named_profile
 - public operational CLI concrete shell actualization の current cut は、上の naming を current-L2 scoped Rust concrete shell concern として actualize しつつ、delegated entry / report は `run_current_l2_source_sample` / `CurrentL2SourceSampleRunReport` に据え置く。
 - public operational CLI packaging の current cut は、上の actual shell concern を installed binary fact と読まないための mixed-gate boundary に留め、installed-binary promotion、final `mir` top-level hierarchy、final host/input contract、packaging success criteria は mixed gate に残す。
 - `resolve_current_l2_source_sample_path`、accepted-set hard-coding、repo-local Python orchestration helper は excluded bucket に残す。
-- prototype sample explicit-path acceptance は support cut に含めてよい。
-  - current boundary は `samples/prototype/` 以下の `.txt` direct path に限る。
-  - current authored sixteen stem inventory とは分けて扱う。
+- clean near-end sample explicit-path acceptance は support cut に含めてよい。
+  - current boundary は `samples/clean-near-end/` 以下の `.mir` direct path と family-relative stem に限る。
+  - archive 配下は historical comparison only であり、active helper inventory には含めない。
 - operational CLI の current convenience cut では、adjacent `.host-plan.json` sidecar が sample path の隣にあれば `--host-plan` を省略してよい。
   - これは current sample debugging / comparison convenience であり、installed-binary promotion や final host contract を意味しない。
 - current sample debugging の helper-local preview cut では、final place store のうち
@@ -49,8 +55,8 @@ run_directory_named_profile
   を `verification_preview` として見せてよい。
   - これは final public verifier contract を意味しない。
 - current order-handoff negative static-stop cut では、
-  - late-join visibility line に対する `publish -> handoff -> observe` 前提を helper-local current-L2 source sample runner 側でのみ判定してよい。
-  - `p13` missing publication witness は underdeclared static stop、`p14` handoff-before-publish は malformed static stop として sample-local negative corpus に actualize してよい。
+  - clean near-end handoff line に対する `publish -> witness -> handoff -> observe` 前提を helper-local current sample runner 側でのみ判定してよい。
+  - `02_missing_witness_rejected` は witness 不足、`03_handoff_before_publication_rejected` は publication 前 handoff として sample-local negative corpus に actualize してよい。
   - これは final parser grammar、final source wording、final emitted handoff contract を意味しない。
 - current sample-visible artifact preview cut では、
   - proof notebook review unit の `obligation_kind` / `goal_text` / symbolic `evidence_refs`

@@ -1,0 +1,5 @@
+{
+  "sample_id": "01_authorized_roll_publish_handoff",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/01_authorized_roll_publish_handoff.mir",
+  "theorem_name": "s01_authorized_roll_publish_handoff__alpha_ready_subject"
+}

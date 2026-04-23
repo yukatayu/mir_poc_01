@@ -1,0 +1,22 @@
+module CleanNearEnd.UnauthorizedDeclassificationRejected
+
+use CleanNearEnd.IndexTheories
+
+principal Bob : FingerprintAuthority.Observer
+
+resource secret_key : PrivateKey
+  label SecurityLabel.KeyMaterial
+  capture SecretKeyStore
+  lifetime Session
+
+transition bad_release(actor = Bob) {
+  stage derive:
+    fp_secret <- perform derive_fingerprint(secret_key)
+
+  stage declassify:
+    fp_public <- declassify fp_secret
+      from SecurityLabel.KeyMaterial
+      to SecurityLabel.Public
+      using FingerprintReleasePolicy
+      requires authority(Bob) >= FingerprintAuthority.Releaser
+}

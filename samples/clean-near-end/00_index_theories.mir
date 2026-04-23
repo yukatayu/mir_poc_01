@@ -1,0 +1,59 @@
+module CleanNearEnd.IndexTheories
+
+index theory SecurityLabel {
+  element Public
+  element UserSecret
+  element KeyMaterial
+
+  order Public <= UserSecret
+  order UserSecret <= KeyMaterial
+
+  join
+  meet
+  law finite_lattice
+}
+
+index theory FingerprintAuthority {
+  element Observer
+  element Holder
+  element Releaser
+  element Admin
+
+  order Observer <= Holder
+  order Holder <= Releaser
+  order Releaser <= Admin
+
+  law finite_preorder
+}
+
+index theory CaptureScope {
+  element RoomHistory
+  element EphemeralToken
+  element SecretKeyStore
+
+  law finite_powerset
+}
+
+index theory Region {
+  element Step
+  element Turn
+  element Session
+
+  order Step <= Turn
+  order Turn <= Session
+
+  law finite_preorder
+}
+
+index theory CostBudget {
+  counter cpu_steps
+  counter remote_calls
+  counter writes
+
+  law pointwise_natural_bound
+}
+
+policy FingerprintReleasePolicy {
+  permit declassify SecurityLabel.KeyMaterial -> SecurityLabel.Public
+    requires authority >= FingerprintAuthority.Releaser
+}

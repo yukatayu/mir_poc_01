@@ -1,0 +1,5 @@
+{
+  "sample_id": "02_published_witnessed_mode_bridge",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/modal/02_published_witnessed_mode_bridge.mir",
+  "theorem_name": "s02_published_witnessed_mode_bridge__alpha_ready_subject"
+}

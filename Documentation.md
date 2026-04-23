@@ -2,188 +2,195 @@
 
 ## この文書の役割
 
-この文書は、repo 全体の **短い current snapshot** を日本語で読むための入口である。
+この文書は、repo 全体の **current snapshot を短く正確に読む入口** です。
 
 - 規範判断の正本は `specs/`
-- 進捗 snapshot は `progress.md`
-- current task map は `tasks.md`
-- 長期参照用の repository memory は `plan/`
-- 詳細経緯と実行証跡は `docs/reports/`
+- 長期の repository memory は `plan/`
+- 現在の進捗 snapshot は `progress.md`
+- 現在の task map は `tasks.md`
+- 実行証跡と詳細経緯は `docs/reports/`
 
-## まず何の repo か
+## まず repo をどう読むべきか
 
-この repo は、次の 4 系統を **分離可能なまま** 設計・検証する specification-first research repo である。
+この repo は、Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform を **意図的に separable** に保った研究用 workspace です。
+2026-04-23 時点の主眼は、そのうち Mir current-L2 の repo-local alpha-ready current layer にあります。
 
-- **Mir**: 計算の意味、因果、contract、effect、ownership、lifetime、安全な進化
-- **Mirrorea**: logical naming、routing、overlay insertion、audit、dynamic reconfiguration
-- **PrismCascade**: media domain の独立 kernel
-- **Typed-Effect Wiring Platform**: service / container / legacy integration の inspectable effect layer
+この layer で重要なのは、次の 2 つを混同しないことです。
 
-current 主眼は Mir current-L2 line にあり、他の subsystem は boundary を保ちながら扱う。
+- **repo-local alpha-ready current layer**
+  repo 内の sample、helper、Lean foundation、report まで含めて動かせる現行の足場
+- **final public product**
+  final parser grammar、public checker/runtime/verifier API、packaging、external contract まで含む最終形
 
-## 現在の正確な読み
+現在 reachable なのは前者であり、後者ではありません。
 
-この repo は **done** ではない。
-ただし、current-L2 の runnable / inspectable floor はかなり厚い。
+## current active line
 
-2026-04-21 時点で、少なくとも次は repo 内で再確認できる。
+### 1. Clean near-end sample suite
 
-- authored sixteen と corrected prototype set `p01 ... p16`
-- Rust runtime / CLI による sample 実行
-- helper-local verification preview / artifact preview
-- Problem 1 の typed / theorem / model-check representative bundle
-- Problem 2 の order / handoff / authoritative-room representative bundle
-- Lean foundation の self-contained proof fragment
-- representative sample 由来の generated Lean stub corpus
+active canonical sample は `samples/clean-near-end/` です。
 
-重要なのは、**「repo-local near-end まで来ている」** と
-**「final public contract まで終わった」** を分けることだ。
+- `typing/`
+  finite-index first strong typing layer
+- `order-handoff/`
+  publication / witness / handoff relation family
+- `model-check/`
+  Peterson / broken mutex による second-line verification
+- `modal/`
+  `stable` / `later` / `published(room)` / `witnessed(...)` の current mode line
 
-## 実際に動いているもの
+旧 active sample line は active path から外し、archive に退避しています。
 
-### Problem 1
+### 2. first strong typing layer
 
-current first line は次である。
+current typing judgment の読みは、概ね次の形です。
 
-- checker-adjacent first strong typing layer
-- notebook-first theorem line
-- row-local model-check carrier first
+```text
+Σ ; Ψ ; Γ ; Δ ⊢ e : A @ μ ! ε ⇝ C ; O
+```
 
-repo で直接確かめられる代表サンプル:
+- `Σ`
+  user-defined index theory、policy、有限 preorder / lattice / powerset / bound
+- `Ψ`
+  mode / stage / place / visibility / witness / durability の環境
+- `Γ`
+  unrestricted context
+- `Δ`
+  linear / affine / capability context
+- `A`
+  ordinary type
+- `μ`
+  mode
+- `ε`
+  effect row
+- `C`
+  finite decidable constraint
+- `O`
+  first decidable fragment の外側へ残す residual obligation
 
-- `p06-typed-proof-owner-handoff`
-  - typed / theorem / model-check bridge の representative
-- `p10-typed-authorized-fingerprint-declassification`
-  - authority あり declassification success
-- `p11-typed-unauthorized-fingerprint-release`
-  - authority 欠如 rejection
-- `p12-typed-classified-fingerprint-publication-block`
-  - label-flow mismatch rejection
-- `p15-typed-capture-escape-rejected`
-  - capture / lifetime rejection
-- `p16-typed-remote-call-budget-exceeded`
-  - simple cost rejection
+ここで強調すべき点は、domain predicate を magical builtin にしていないことです。
 
-Lean 側は 2 層で読む。
+- authority hierarchy は user-defined finite preorder
+- security label hierarchy は user-defined finite lattice
+- capture は finite capture set
+- lifetime / region は finite preorder
+- cost は simple decidable bound
+
+### 3. order / handoff と `memory_order` 再解釈
+
+current active source line は、低レベル `memory_order_release` などを source principal に据えていません。
+代わりに次の高水準関係を principal にしています。
+
+- `program_order`
+- `dependency_order`
+- `publication_order`
+- `observation_order`
+- `witness_order`
+- `finalization_order`
+- `scoped_happens_before`
+
+`atomic_cut` も global mutex や global fence ではなく、**local finalization / rollback frontier** として扱います。
+
+### 4. model-check second line
+
+mutex / weak-memory family は static typing first line に押し込めず、**model-check second line** として分離しています。
+
+- `01_peterson_sc_pass`
+  sequential consistency では mutual exclusion が保たれる
+- `02_peterson_relaxed_counterexample`
+  publication / observation edge が欠けると counterexample が出る
+- `03_broken_mutex_counterexample`
+  古典的 broken mutex は interleaving / visibility の問題として second line で捉える
+
+### 5. Lean
+
+Lean material は 2 段です。
 
 - `samples/lean/foundations/`
-  - `CurrentL2IfcSecretExamples.lean`
-  - `CurrentL2FiniteIndexFirstLayer.lean`
-  - `CurrentL2LabelModel.lean`
-  - `CurrentL2ProofSkeleton.lean`
-  これらは actual small proof fragment で、Lean で通る
-- `samples/lean/current-l2/`
-  - representative sample から生成した theorem stub
-  - Lean は受理するが `sorry` を含む
-  - したがって、意味は **artifact well-formedness / bridge alignment** であって、
-    completed theorem discharge ではない
+  小さな actual proof fragment
+- `samples/lean/clean-near-end/`
+  active sample suite から生成した theorem stub 群
 
-### Problem 2
+重要なのは、generated stub は **proof completion の完了宣言ではない** ことです。
+repo は Lean を current layer の mechanization spine として使っていますが、全 sample の domain proof が discharge 済みとは言っていません。
 
-current first line は次である。
+## built-in と user-defined の境界
 
-- relation decomposition principal
-- authoritative-room first default
-- reserve strengthening lane split
-- negative static-stop pair
+current helper / sample line で built-in vocabulary に入るのは、repo が closeout で明示している最小の構文語です。
 
-repo で直接確かめられる代表サンプル:
+- `module`
+- `index`
+- `policy`
+- `principal`
+- `resource`
+- `effect`
+- `place`
+- `option`
+- `chain`
+- `fallback`
+- `lineage`
+- `perform`
+- `via`
+- `require`
+- `ensure`
+- `atomic_cut`
+- `transition`
+- `stage`
+- `publish`
+- `observe`
+- `handoff`
+- `witness`
+- `model`
+- `property`
 
-- `p07-dice-late-join-visible-history`
-  - representative success
-- `p08-dice-stale-reconnect-refresh`
-  - representative success
-- `p09-dice-delegated-rng-provider-placement`
-  - delegated RNG reserve route
-- `p13-dice-late-join-missing-publication-witness`
-  - publication witness 欠如で static stop
-- `p14-dice-late-join-handoff-before-publication`
-  - publish より先に handoff が現れて static stop
+それ以外の security label 名、authority 名、capture capability 名、region 名、cost counter 名、witness field 名は user-defined です。
 
-ここでの practical line は **order / handoff / authoritative-room** である。
-low-level `memory_order` exact surface は current public line には上げていない。
+## 現在すぐ動く確認コマンド
 
-## まだ done ではないもの
-
-次は current docs で明示的に stop line として残す。
-
-- final public parser grammar
-- final public parser / checker / runtime API
-- stronger typed source principal
-- final public theorem result object
-- consumer-shaped theorem payload public contract
-- concrete theorem prover brand
-- first settled property language
-- concrete model-check tool brand
-- final public checker artifact
-- actual public checker migration
-- final public verifier contract
-- low-level `memory_order` exact reinterpretation / exact source surface
-- final source-surface handoff wording
-- final public witness schema / provider receipt schema / combined contract
-- packaging / installed binary / FFI / engine adapter
-
-## すぐに確認できる入口
-
-### representative bundle 全体
+suite 全体:
 
 ```bash
 python3 scripts/current_l2_guided_samples.py smoke-all --format json
+python3 scripts/current_l2_guided_samples.py closeout --format json
 ```
 
-### Problem 1
+family ごと:
 
 ```bash
-python3 scripts/current_l2_guided_samples.py show problem1
-python3 scripts/current_l2_guided_samples.py bundle problem1
-python3 scripts/current_l2_guided_samples.py emit-theorem problem1
-python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line
+python3 scripts/clean_near_end_samples.py run typing --format json
+python3 scripts/clean_near_end_samples.py run order-handoff --format json
+python3 scripts/clean_near_end_samples.py run model-check --format json
+python3 scripts/clean_near_end_samples.py run modal --format json
+python3 scripts/clean_near_end_samples.py matrix --format json
 ```
 
-### Problem 2
+Lean:
 
 ```bash
-python3 scripts/current_l2_guided_samples.py show problem2
-python3 scripts/current_l2_guided_samples.py bundle problem2
-python3 scripts/current_l2_guided_samples.py emit-scenario problem2
-python3 scripts/current_l2_guided_samples.py emit-reserve auditable-authority-witness
-python3 scripts/current_l2_guided_samples.py emit-reserve delegated-rng-service
+python3 scripts/current_l2_lean_sample_sync.py
 ```
 
-### Lean foundation
+docs:
 
 ```bash
-source "$HOME/.elan/env" && lean samples/lean/foundations/CurrentL2IfcSecretExamples.lean
-source "$HOME/.elan/env" && lean samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean
-source "$HOME/.elan/env" && python3 scripts/current_l2_lean_sample_sync.py
+python3 scripts/validate_docs.py
 ```
 
-## 読み進め方
+## どこを見ると理解しやすいか
 
-1. `specs/00-document-map.md`
-   - 文書マップと各文書の役割
-2. `specs/01-charter-and-decision-levels.md`
-   - L0 / L1 / L2 / L3 の区別
-3. `specs/02-system-overview.md`
-   - 4 系統の役割
-4. `specs/03-layer-model.md`
-   - レイヤー境界
-5. `specs/09-invariants-and-constraints.md`
-   - 守るべき不変条件
-6. `progress.md`
-   - どこまで来ているか
-7. `tasks.md`
-   - 今どこから再開するのが自然か
-8. `plan/01-status-at-a-glance.md`
-   - 長期参照寄りの status memory
+- `docs/research_abstract/README.md`
+  日本語の簡潔な全体像
+- `docs/research_abstract/clean_near_end_typing_01.md`
+  finite-index typing の要点
+- `docs/research_abstract/clean_near_end_order_model_01.md`
+  order / handoff と model-check second line の関係
+- `docs/research_abstract/clean_near_end_modal_01.md`
+  modal / stage / witnessed bridge の current reading
+- `docs/research_abstract/clean_near_end_lean_01.md`
+  Lean foundations と generated stub の current reading
+- 各 `_detail.md`
+  full sample code と actual output
 
-## この文書で意図的に省いたこと
+## この文書で意図的に省いていること
 
-この文書では、旧 FAQ 群や package 番号の細かい列挙は省いた。
-細かな経緯が必要なら `docs/reports/` と `specs/examples/` を辿る。
-
-この文書の主眼は、次の 3 点だけを短く保つことである。
-
-- 今、何が実際に動くか
-- それは何を意味し、何をまだ意味しないか
-- どの command から再確認すればよいか
+この文書は current snapshot の入口なので、pre-clean-near-end の古い sample line や古い proposal chain の詳細はここでは再説明しません。必要な場合は archive、`plan/90-source-traceability.md`、`docs/reports/` を参照してください。

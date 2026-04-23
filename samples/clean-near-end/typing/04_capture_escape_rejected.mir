@@ -1,0 +1,21 @@
+module CleanNearEnd.CaptureEscapeRejected
+
+use CleanNearEnd.IndexTheories
+
+resource token : SessionToken
+  capture EphemeralToken
+  lifetime Step
+
+fn make_public_closure(token : SessionToken @ capture(EphemeralToken))
+  -> Fn[Unit -> Unit] @ capture(RoomHistory) {
+  return fn () {
+    use token
+  }
+}
+
+transition bad_capture_escape {
+  stage closure:
+    f <- make_public_closure(token)
+      requires {EphemeralToken} <= {RoomHistory}
+      requires Region.Session <= Region.Step
+}

@@ -1,0 +1,5 @@
+{
+  "sample_id": "01_peterson_sc_pass",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/model-check/01_peterson_sc_pass.mir",
+  "theorem_name": "s01_peterson_sc_pass__alpha_ready_subject"
+}

@@ -1041,6 +1041,25 @@ actual adoption package の直後に mixed gate を narrow に保つための co
 
 は引き続き mixed gate に残す。
 
+## 2026-04-22 clean near-end closeout addendum
+
+この addendum より前に出てくる `p..` / `samples/prototype/...` package chain は、
+pre-clean-near-end historical roadmap memory として読む。
+current active roadmap の sample principal はこの addendum が上書きする。
+
+- current active sample root は `samples/clean-near-end/` に切り替える。
+- pre-clean-near-end `samples/prototype/` / `samples/not_implemented/` / old problem-bundle path は archive に移し、active path から外す。
+- current alpha layer は次を principal bundle として読む。
+  - clean typing 5 本
+  - clean order-handoff 6 本
+  - clean model-check 3 本
+  - clean modal 2 本
+- first strong typing line は user-defined finite preorder / lattice / powerset / preorder / simple cost bound を用いる finite decidable index fragment に固定する。
+- order / handoff line は high-level relation family を source principal に置き、low-level `memory_order` exact token は retained-later reference family に残す。
+- mutex / weak-memory / broken mutex family は model-check second line に固定する。
+- Lean line は `samples/lean/foundations/` と `samples/lean/clean-near-end/` の 2 層を current principal に置く。
+- repo-local alpha-ready current layer は reached だが、final public parser/checker/runtime/verifier API、final public contract family、packaging は still later に残す。
+
 ## 推奨される phase 順序
 
 1. Workstream A

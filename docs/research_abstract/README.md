@@ -1,53 +1,63 @@
 # research_abstract
 
-この directory は、repo 全体の研究を **phase ごとに短く読み返すための condensed summary** である。
+このディレクトリは、repo の current reading を **日本語で短く読み返すための概要集** です。
 
-- 正本は `specs/` と `plan/` である。
-- ここでは、phase ごとに
-  - 何をしようとしたか
-  - 何が current reading として固まったか
-  - 何が source-backed evidence か
-  - 何をまだ決めていないか
-  - 次へ何を渡したか
-  だけを簡潔に書く。
-- comparison の細部、open option の列挙、report chain の完全追跡は `specs/`、`plan/`、`docs/reports/`、`plan/90-source-traceability.md` を参照する。
+- 規範判断の正本は `specs/`
+- 長期の repository memory は `plan/`
+- 実行証跡と変更履歴は `docs/reports/`
+- ここは current state を素早くつかむための summary / detail です
 
-## current global reading
+## 読み方
 
-- `Macro 4` は fixed authored/prototype floor の上で active である。
-- `Macro 5` は post-runnable actual-adoption floor fixed + residual-gate compression closed の line である。
-  current reading では compare floor、actual adoption floor、helper-local actualization / narrowing floor、deeper-theory / reserve / mixed-gate / actual-execution actualization floor まで close 済みであり、current self-driven queue は narrow だが nonzero で、remaining work は final-public seam の reopen、parser-side residual、packaging / host integration、user-spec residual に寄っている。
-- `Macro 6` は minimal working subset actual default、`Macro 7` は mixed である。
-- `Macro 8` は application / domain realization であり、user specification が要る。
+このディレクトリは 2 層に分かれています。
 
-## いま reader がここで把握すべきこと
+- summary:
+  各 phase / family の位置づけを短く説明する文書
+- `_detail.md`:
+  実際に実行した sample code 全文、共有前提、actual output、built-in / user-defined の境界を明示する文書
 
-- semantics / invariants / boundary はかなり固まっている。
-- runnable path も既にある。
-  - authored current-L2 sample sixteen
-  - corrected runnable prototype set `p01 ... p16`
-  - exact rough stimulus preservation bucket
-- corrected runnable version の current floorは already reached である。
-- current self-driven queue は final-public seam / parser-side residual / packaging / user-spec residual に向けて narrow 化している。
-- ただし final parser grammar、final public API、concrete theorem / model-check tool binding、shared-space final catalog はまだ open である。
+## まず読む summary
 
-## 使い方
+- `phase0-repository-memory-and-decision-boundary.md`
+- `phase1-current-l2-semantics-stabilization.md`
+- `phase2-parser-free-poc-and-detached-validation-loop.md`
+- `phase3-parser-boundary-and-first-checker-cut.md`
+- `phase4-shared-space-membership-and-practical-room-boundary.md`
+- `phase5-small-decidable-core-and-proof-boundary.md`
+- `phase6-compile-ready-minimal-actualization.md`
+- `clean_near_end_typing_01.md`
+- `clean_near_end_order_model_01.md`
+- `clean_near_end_modal_01.md`
+- `clean_near_end_lean_01.md`
 
-1. phase の役割を知りたいときは各 abstract を読む。
-2. current status は `progress.md` と `tasks.md` を見る。
-3. 規範の根拠が必要になったら `specs/` に戻る。
+## sample / proof の full detail
 
-## topic guide
+- `clean_near_end_typing_01_detail.md`
+- `clean_near_end_order_model_01_detail.md`
+- `clean_near_end_modal_01_detail.md`
+- `clean_near_end_lean_01_detail.md`
 
-- `lean_01.md`
-  - Lean で今何を証明しているか、どう実行するか、出力をどう読むかをまとめた入門ガイド
-- `lean_01_detail.md`
-  - `lean_01.md` で紹介した Lean foundation / generated stub / 最小 success/error 例を、コード全文と行単位解説つきで読み下す詳細版
-- `static_analysis_01.md`
-  - Problem 1 の typed / theorem / model-check と Lean foundation を、実行順に追う入門ガイド
-- `static_analysis_01_detail.md`
-  - `static_analysis_01.md` で紹介した Problem 1 sample 群と Lean foundation を、コード全文と行単位解説つきで読み下す詳細版
-- `order_01.md`
-  - Problem 2 の order / handoff / authoritative-room を、success / reserve / static-stop の順に追う入門ガイド
-- `order_01_detail.md`
-  - `order_01.md` で紹介した Problem 2 sample 群と reserve helper を、コード全文と行単位解説つきで読み下す詳細版
+## current reading の要点
+
+2026-04-23 時点では、次が active line です。
+
+- active canonical sample は `samples/clean-near-end/`
+- first strong typing layer は finite decidable index fragment
+- authority / label / capture / region / cost は user-defined finite theory
+- order / handoff は high-level relation family で読む
+- mutex / weak-memory family は model-check second line に置く
+- Lean は small proof foundations と generated stub corpus に分かれる
+
+次はまだ deferred です。
+
+- final public parser grammar
+- final public parser / checker / runtime / verifier API
+- full dependent type theory
+- concrete theorem / model-check production binding
+- final public witness / provider / emitted-artifact contract
+- packaging / installed binary / FFI / engine adapter
+
+## historical material
+
+pre-clean-near-end の古い summary は `docs/research_abstract/old/2026-04-22-pre-clean-near-end/` に退避しています。
+archive は比較用の履歴であり、current active path ではありません。

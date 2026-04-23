@@ -1,0 +1,36 @@
+module CleanNearEnd.AuditableAuthorityWitness
+
+use CleanNearEnd.IndexTheories
+
+principal Alice : FingerprintAuthority.Admin
+principal Bob   : FingerprintAuthority.Holder
+
+record AuthorityDrawWitness {
+  witness_kind : Text
+  action_ref : Text
+  draw_slot : Text
+  draw_result : DiceDraw
+}
+
+transition audited_handoff(owner = Alice) {
+  stage roll:
+    draw <- perform roll_dice via authority_rng
+
+  stage publish:
+    publish draw
+      scope room
+      produces witness draw_pub
+
+  stage handoff:
+    handoff dice_owner Alice -> Bob
+      requires witness(draw_pub)
+
+  stage audit:
+    note AuthorityDrawWitness {
+      witness_kind = "authority_draw"
+      action_ref = "handoff_dice_owner"
+      draw_slot = "primary"
+      draw_result = draw
+    }
+      requires witness(draw_pub)
+}

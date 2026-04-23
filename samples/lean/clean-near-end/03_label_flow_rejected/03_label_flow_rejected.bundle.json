@@ -1,0 +1,5 @@
+{
+  "sample_id": "03_label_flow_rejected",
+  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/03_label_flow_rejected.mir",
+  "theorem_name": "s03_label_flow_rejected__alpha_ready_subject"
+}

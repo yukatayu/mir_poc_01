@@ -1,101 +1,148 @@
 # Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform
 
-このリポジトリは、4 つの関連システムを **specification-first** に整理しながら、
-current-L2 の非 production 実装と検証サンプルを積み上げている研究用ワークスペースである。
+この repository は、4 系統を分離可能なまま扱う **specification-first research repo** です。
 
-- **Mir**: 因果、contract、effect、ownership、lifetime、安全な進化を扱う意味論コア
-- **Mirrorea**: 論理名、routing、overlay insertion、audit を扱う fabric / runtime 層
-- **PrismCascade**: media processing 用の独立 kernel
-- **Typed-Effect Wiring Platform**: inspectable / routable な effect integration 層
+- **Mir**
+  因果、effect、ownership、lifetime、contract、安全な進化を扱う意味論コア
+- **Mirrorea**
+  logical naming、routing、overlay insertion、audit、dynamic reconfiguration を扱う fabric/runtime 層
+- **PrismCascade**
+  media domain の独立 kernel
+- **Typed-Effect Wiring Platform**
+  inspectable / routable な effect integration 層
 
-この 4 つは密接に関係するが、repo では **意図的に separable** に扱う。
+2026-04-23 時点で repo が主として検証しているのは、Mir current-L2 の **repo-local alpha-ready current layer** です。
+これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
 
-## 現在の立ち位置
+## 現在の到達点
 
-この repo は **完成済み製品** でも **final public language implementation** でもない。
-一方で、単なる docs-only skeleton でもない。
+- active sample suite は `samples/clean-near-end/`
+- first strong typing layer は **finite decidable index fragment**
+- authority hierarchy / security label hierarchy / capture / region / cost は **user-defined finite theory**
+- order / handoff は `publication_order`、`witness_order`、`scoped_happens_before` などの高水準関係で扱う
+- mutex / weak-memory / broken mutex は **model-check second line**
+- Lean 側は
+  - `samples/lean/foundations/` の小さな実証明
+  - `samples/lean/clean-near-end/` の generated theorem stub
+  に分かれている
 
-2026-04-21 時点の実務的な読みは次のとおり。
+## 明示的にまだ完了していないもの
 
-- current-L2 authored sixteen と corrected prototype set `p01 ... p16` は runnable
-- Problem 1 の current first line
-  - typed / IFC sample
-  - theorem-first emitted artifact loop
-  - model-check second-line reserve summary
-  は repo-local helper / CLI / Lean foundation 付きで確認できる
-- Problem 2 の current first line
-  - order / handoff / authoritative-room representative pair
-  - reserve strengthening lane
-  - negative static-stop pair
-  は runnable scenario loop まで確認できる
-- Lean は 2 層ある
-  - `samples/lean/foundations/`: actual small proof fragment
-  - `samples/lean/current-l2/`: Lean が受理する generated stub corpus
-
-ただし、次は **まだ done ではない**。
-
-- final public parser / checker / runtime API
-- full strong typed surface
-- concrete theorem prover binding
-- concrete model-check tool binding
-- final public verifier contract
-- low-level `memory_order` exact source surface
-- final source wording / witness-provider public contract
+- final public parser grammar
+- final public parser / checker / runtime / verifier API
+- full dependent type theory
+- concrete theorem prover / model-checker への production binding
+- low-level `memory_order_*` を source principal syntax としてどう公開するか
+- final public witness / provider / emitted-artifact contract
 - packaging / installed binary / FFI / engine adapter
 
-## 先に読む順序
+## 何が built-in で、何が user-defined か
+
+current clean near-end layer では、次を built-in vocabulary として扱います。
+
+- `module`
+- `index`
+- `policy`
+- `principal`
+- `resource`
+- `effect`
+- `place`
+- `option`
+- `chain`
+- `fallback`
+- `lineage`
+- `perform`
+- `via`
+- `require`
+- `ensure`
+- `atomic_cut`
+- `transition`
+- `stage`
+- `publish`
+- `observe`
+- `handoff`
+- `witness`
+- `model`
+- `property`
+
+一方で、次のような domain vocabulary は built-in ではありません。
+
+- `SecurityLabel`
+- `FingerprintAuthority`
+- `CaptureScope`
+- `Region`
+- `CostBudget`
+- `FingerprintReleasePolicy`
+- `Public`
+- `KeyMaterial`
+- `Observer`
+- `Releaser`
+- `Admin`
+- `RoomHistory`
+- `EphemeralToken`
+
+つまり、旧来の権限専用 predicate 名を magical builtin として言語が暗黙に持つのではなく、sample 側が有限理論として宣言し、その上で checker / helper が読む構成です。
+
+## まず実行するコマンド
+
+active clean near-end suite の確認:
+
+```bash
+python3 scripts/current_l2_guided_samples.py smoke-all --format json
+python3 scripts/current_l2_guided_samples.py closeout --format json
+```
+
+family ごとの確認:
+
+```bash
+python3 scripts/clean_near_end_samples.py run typing --format json
+python3 scripts/clean_near_end_samples.py run order-handoff --format json
+python3 scripts/clean_near_end_samples.py run model-check --format json
+python3 scripts/clean_near_end_samples.py run modal --format json
+python3 scripts/clean_near_end_samples.py matrix --format json
+```
+
+Lean foundations と generated stub の同期:
+
+```bash
+python3 scripts/current_l2_lean_sample_sync.py
+```
+
+## 読み始める順序
 
 1. `AGENTS.md`
 2. `Documentation.md`
 3. `progress.md`
-4. `specs/00-document-map.md`
-5. `specs/01-charter-and-decision-levels.md`
-6. `specs/02-system-overview.md`
-7. `specs/03-layer-model.md`
-8. `specs/09-invariants-and-constraints.md`
-9. 必要に応じて subsystem spec
-10. current task map は `tasks.md`
-11. long-lived repository memory は `plan/00-index.md` と `plan/01-status-at-a-glance.md`
+4. `tasks.md`
+5. `specs/00-document-map.md`
+6. `specs/01-charter-and-decision-levels.md`
+7. `specs/02-system-overview.md`
+8. `specs/03-layer-model.md`
+9. `specs/09-invariants-and-constraints.md`
+10. 必要な subsystem spec と `plan/00-index.md`
 
-## まず確かめるコマンド
+## いま参照すべき docs
 
-全体の representative bundle を一度に見る:
+- `Documentation.md`
+  現在の repo を短く読むための入口
+- `progress.md`
+  現在地、rough progress、recent log
+- `tasks.md`
+  自走可能な package と mixed gate / user-spec gate の整理
+- `docs/research_abstract/README.md`
+  日本語での短い研究概要と `_detail` への導線
+- `docs/reports/`
+  実行証跡と変更履歴
 
-```bash
-python3 scripts/current_l2_guided_samples.py smoke-all --format json
-```
+## active path と archive path
 
-Problem 1 の typed / theorem / model-check current cut を見る:
+- active sample:
+  `samples/clean-near-end/`
+- active Lean material:
+  `samples/lean/`
+- historical archive:
+  `samples/old/2026-04-22-pre-clean-near-end/`
+  と
+  `samples/lean/old/2026-04-22-pre-clean-near-end/`
 
-```bash
-python3 scripts/current_l2_guided_samples.py bundle problem1
-python3 scripts/current_l2_guided_samples.py emit-theorem problem1
-python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line
-```
-
-Problem 2 の order / handoff current cut を見る:
-
-```bash
-python3 scripts/current_l2_guided_samples.py bundle problem2
-python3 scripts/current_l2_guided_samples.py emit-scenario problem2
-```
-
-Lean foundation を見る:
-
-```bash
-source "$HOME/.elan/env" && lean samples/lean/foundations/CurrentL2IfcSecretExamples.lean
-source "$HOME/.elan/env" && lean samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean
-```
-
-## 作業ルール
-
-- non-trivial task ごとに `docs/reports/` 配下へ **新しい report** を作る
-- 規範判断の正本は `specs/`
-- current snapshot は `Documentation.md` / `progress.md` / `tasks.md`
-- `plan/` は snapshot ではなく repository memory
-
-report 作成:
-
-```bash
-python3 scripts/new_report.py --slug <short-name>
-```
+archive は比較用の履歴です。active canonical sample としては扱いません。
