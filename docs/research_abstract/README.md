@@ -26,6 +26,7 @@
 - `phase5-small-decidable-core-and-proof-boundary.md`
 - `phase6-compile-ready-minimal-actualization.md`
 - `mirrorea_future_axis_01.md`
+- `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`
 - `clean_near_end_modal_01.md`

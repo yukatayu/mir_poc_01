@@ -56,6 +56,13 @@ real network transport や final public runtime API ではありません。
 effect / transition / witness / relation / property の `TermSignature` inventory を helper-local に確認できます。
 これは current `TermSignature` first cut の evidence であり、final public visualization protocol ではありません。
 
+### `layers`
+
+`SUG-03` と `SUG-05..07` の副読本です。`run 03_roll_publish_handoff --debug layers` や
+membership sample を使うと、current helper が `verification`、`runtime_trace`、`membership` を
+どの current layer として読んでいるかを確認できます。これも helper-local first cut であり、
+final public layer law schema ではありません。
+
 これらは helper-local debug output であり、final public visualization protocol ではありません。
 
 ## 4. phase ごとの読み分け

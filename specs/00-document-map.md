@@ -8,6 +8,7 @@
   - `specs/` と `docs/reports/` と code anchor を横断して、現況、roadmap、helper stack、fixture catalog、open problems、maintenance rule を長期参照しやすく整理した人間向け repository memory である。
   - 規範判断の正本ではない。意味論や decision の正本は `specs/` に残る。
   - current repo の現在地や PoC 検証基盤の call chain を素早く掴みたい場合は `plan/00-index.md` から読む。
+  - `plan/19-repository-map-and-taxonomy.md` は、repo の current layer-aware map、sample/script taxonomy、staged migration plan を repository memory として整理する文書である。
 - `progress.md`
   - rough progress snapshot、current mainline、phase / autonomy gate の mirror である。
   - 規範判断の正本ではない。status / remaining step / current phase を素早く掴みたいときに先に読む。
@@ -18,6 +19,12 @@
 - `samples_progress.md`
   - phase / layer ごとの runnable sample、unit validation、E2E、debug / visualization、report、build / storage 環境を一覧する dashboard である。
   - 規範判断の正本ではない。sample / helper / tests / reports の current evidence を current status として圧縮した文書である。
+- `samples/README.md`
+  - active clean suite、base current-L2 corpus、Lean mechanization evidence、planned skeleton family、prototype reference、archive、generated sample artifact reserve の current taxonomy を短く示す。
+  - 規範判断の正本ではない。path の current role を reader / agent が見失わないための front-door 文書である。
+- `scripts/README.md`
+  - active runner、repo-local helper、detached/export helper、storage/env、tests の current taxonomy を短く示す。
+  - 規範判断の正本ではない。script path の current role と staged reorg plan を reader / agent に示す front-door 文書である。
 - `docs/research_abstract/`
   - current research line を日本語で短く読み返すための summary / detail 集である。
   - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。

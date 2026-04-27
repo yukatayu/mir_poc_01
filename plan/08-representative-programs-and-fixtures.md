@@ -2,24 +2,27 @@
 
 ## representative stack
 
-current repo では sample 表現を少なくとも次の 4 層に分ける。
+current repo では sample 表現を少なくとも次の 5 層に分ける。
 
 1. `samples/current-l2/`
    - base fixed-subset source corpus
 2. `samples/clean-near-end/`
    - active clean sample suite
-3. fixture corpus
+3. `samples/not_implemented/`
+   - planned skeleton family
+4. fixture corpus
    - machine-readable detached/static/interpreter validation
-4. archive
+5. archive
    - `samples/old/2026-04-22-pre-clean-near-end/`
    - `samples/lean/old/2026-04-22-pre-clean-near-end/`
 
 ## active sample policy
 
 - active canonical sample root は `samples/clean-near-end/`
-- family は `typing` / `order-handoff` / `model-check` / `modal`
+- family は `typing` / `order-handoff` / `model-check` / `modal` / `sugoroku-world`
 - current suite sizeは 16 本
 - generated Lean stub は `samples/lean/clean-near-end/`
+- `samples/clean-near-end/sugoroku-world/` 10 本が current Mirrorea vertical-slice family である
 
 ## base source corpus policy
 
@@ -29,9 +32,16 @@ current repo では sample 表現を少なくとも次の 4 層に分ける。
 
 ## archive policy
 
-- old prototype / not_implemented / problem-bundle / old Lean corpus は archive に移す
+- old prototype / problem-bundle / old Lean corpus は archive に移す
+- `samples/not_implemented/` は archive ではなく planned skeleton family として維持する
+- `samples/generated/` は non-Lean generated sample artifact の reserve として空けておく
 - old `p..` sample は active language sample ではない
 - historical comparison が必要なときだけ archive を参照する
+
+## planned skeleton policy
+
+- `samples/not_implemented/avatar-fairy-follow/` は phase 8 representative family の docs-first skeleton であり、active runnable helper ではない
+- planned skeleton は `samples_progress.md` で `10%` 以下の row として追い、active closeout evidence と混同しない
 
 ## active suite families
 

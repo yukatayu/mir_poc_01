@@ -24,7 +24,10 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         }
         "run-family" => {
             let family = args.get(1).ok_or("missing family")?;
-            print_output(format, &run_clean_near_end_family(CleanSampleFamily::parse(family)?)?)?;
+            print_output(
+                format,
+                &run_clean_near_end_family(CleanSampleFamily::parse(family)?)?,
+            )?;
         }
         "matrix" => print_output(format, &build_clean_near_end_matrix()?)?,
         "closeout" => print_output(format, &build_clean_near_end_closeout()?)?,

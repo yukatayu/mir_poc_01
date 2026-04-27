@@ -52,8 +52,10 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - current representative sample は Sugoroku world runtime attachment vertical slice で、次の representative sample 候補は avatar fairy follow slice です。
   ただし current active sample ではなく、phase 8 planned skeleton family は `samples/not_implemented/avatar-fairy-follow/` にあります。
 - `TermSignature registry / debug output` の first cut は close してあり、Sugoroku helper の `--debug signatures` と clean near-end report / closeout inventory に helper-local / report-local carrier を追加しました。
-- next queue は、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
+- `LayerSignature system` の first cut も close してあり、Sugoroku helper の `--debug layers` と clean near-end report / closeout の `layer_signatures` inventory を追加しました。
+- next queue は、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external boundary / adapter、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
+- repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
 
 reader-facing な要約は `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。これは roadmap summary であり、規範正本ではありません。
 
@@ -180,6 +182,10 @@ python3 scripts/current_l2_lean_sample_sync.py
   自走可能な package と mixed gate / user-spec gate の整理
 - `samples_progress.md`
   phase / layer ごとの runnable sample、E2E、debug surface、build / storage 環境の dashboard
+- `samples/README.md`
+  active / base corpus / planned / prototype / archive / generated sample の置き場所
+- `scripts/README.md`
+  active runner、repo-local helper、detached loop、storage/env script の current taxonomy
 - `docs/research_abstract/README.md`
   日本語での短い研究概要と `_detail` への導線
 - `docs/reports/`

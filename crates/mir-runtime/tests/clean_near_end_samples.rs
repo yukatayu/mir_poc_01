@@ -60,7 +60,10 @@ fn clean_sample_cost_bound_rejected() {
 fn clean_sample_handoff_requires_witness() {
     let report = run_clean_near_end_sample("02_missing_witness_rejected").unwrap();
     assert_eq!(report.static_verdict.as_deref(), Some("malformed"));
-    assert_eq!(report.reason_family.as_deref(), Some("missing_handoff_witness"));
+    assert_eq!(
+        report.reason_family.as_deref(),
+        Some("missing_handoff_witness")
+    );
     assert!(report
         .constraints_failed
         .contains(&"requires witness(draw_pub)".to_string()));
@@ -80,7 +83,10 @@ fn clean_sample_handoff_before_publication_rejected() {
 fn clean_model_peterson_sc_passes() {
     let report = run_clean_near_end_sample("01_peterson_sc_pass").unwrap();
     assert_eq!(report.model_check_result.as_deref(), Some("pass"));
-    assert_eq!(report.checked_under.as_deref(), Some("sequential_consistency"));
+    assert_eq!(
+        report.checked_under.as_deref(),
+        Some("sequential_consistency")
+    );
 }
 
 #[test]
@@ -139,6 +145,66 @@ fn clean_sample_delegated_rng_service_emits_term_signatures() {
 }
 
 #[test]
+fn clean_sample_delegated_rng_service_emits_transport_layer_signature() {
+    let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
+    let layer = report
+        .layer_signatures
+        .iter()
+        .find(|layer| layer.name == "transport_provider_boundary")
+        .expect("transport layer signature");
+    assert!(layer
+        .requires
+        .contains(&"runtime_service:delegated_rng_roll".to_string()));
+    assert!(layer
+        .provides
+        .contains(&"evidence:provider_receipt".to_string()));
+    assert!(layer
+        .checks
+        .contains(&"requires witness(provider_receipt)".to_string()));
+    assert!(layer.laws.contains(&"no_hidden_effect".to_string()));
+}
+
+#[test]
+fn clean_sample_authority_witness_emits_auth_layer_signature() {
+    let report = run_clean_near_end_sample("06_auditable_authority_witness").unwrap();
+    let layer = report
+        .layer_signatures
+        .iter()
+        .find(|layer| layer.name == "auth_authority_witness")
+        .expect("auth layer signature");
+    assert!(layer
+        .provides
+        .contains(&"evidence:AuthorityDrawWitness".to_string()));
+    assert!(layer
+        .emits
+        .contains(&"debug_trace:audit(draw_pub)".to_string()));
+    assert!(layer.laws.contains(&"evidence_preservation".to_string()));
+    assert!(layer.laws.contains(&"no_hidden_authority".to_string()));
+}
+
+#[test]
+fn clean_model_check_sample_emits_verification_layer_signature() {
+    let report = run_clean_near_end_sample("01_peterson_sc_pass").unwrap();
+    let layer = report
+        .layer_signatures
+        .iter()
+        .find(|layer| layer.name == "verification_model_check")
+        .expect("verification layer signature");
+    assert!(layer
+        .requires
+        .contains(&"property:mutual_exclusion".to_string()));
+    assert!(layer
+        .checks
+        .contains(&"checked_under:sequential_consistency".to_string()));
+    assert!(layer
+        .provides
+        .contains(&"evidence:model_check_result".to_string()));
+    assert!(layer
+        .laws
+        .contains(&"residual_obligations_are_explicit".to_string()));
+}
+
+#[test]
 fn clean_near_end_closeout_records_signature_inventory() {
     let closeout = build_clean_near_end_closeout().unwrap();
     assert!(closeout.signature_kinds.contains(&"effect".to_string()));
@@ -146,4 +212,38 @@ fn clean_near_end_closeout_records_signature_inventory() {
     assert!(closeout
         .reserved_signature_kinds
         .contains(&"adapter".to_string()));
+}
+
+#[test]
+fn clean_near_end_closeout_records_layer_signature_inventory() {
+    let closeout = build_clean_near_end_closeout().unwrap();
+    assert_eq!(
+        closeout.layer_signature_lanes,
+        vec![
+            "requires".to_string(),
+            "provides".to_string(),
+            "transforms".to_string(),
+            "checks".to_string(),
+            "emits".to_string(),
+            "laws".to_string(),
+        ]
+    );
+    assert!(closeout
+        .layer_signatures
+        .iter()
+        .any(|layer| layer.name == "transport_provider_boundary"));
+    assert!(closeout
+        .layer_signatures
+        .iter()
+        .any(|layer| layer.name == "auth_authority_witness"));
+    assert!(closeout
+        .layer_signatures
+        .iter()
+        .any(|layer| layer.name == "verification_model_check"));
+    assert!(closeout
+        .reserved_layer_signature_names
+        .contains(&"visualization_redacted_debug_view".to_string()));
+    assert!(closeout
+        .reserved_layer_signature_names
+        .contains(&"typed_telemetry_emitter".to_string()));
 }

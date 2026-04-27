@@ -7,8 +7,10 @@
 - representative prose (`specs/examples/00...01`) でもない。
 - machine-readable fixture corpus (`crates/mir-ast/tests/fixtures/current-l2/`) でもない。
 - fixed subset の syntax-backed regression / lowering / runner / verification ladder に進むための第 3 層である。
-- corrected runnable prototype は `samples/prototype/`、exact rough stimulus preservation は `samples/not_implemented/` に分ける。
-- 二大問題の representative sample を簡潔な日本語 guide で辿る入口は `samples/problem-bundles/` に置く。
+- active canonical executable suite は `samples/clean-near-end/` に置く。
+- planned skeleton family は `samples/not_implemented/` に置く。
+- historical prototype / compatibility anchor は `samples/prototype/` と `samples/old/` に残す。
+- 日本語の reader-facing summary と hands-on は `docs/research_abstract/` に置く。
 
 ## current policy
 

@@ -19,6 +19,7 @@
 | place / participant / world conflation | sample / docs | NEW | participant、Place、world sugar が core primitive として固定される | `Place` distinction と world-sugar note を README / Documentation / plan に残す |
 | goal drift via local optimization | roadmap | NEW | Sugoroku 現行 floor を Mirrorea full runtime 完了と誤読する | project axis と stop line を progress / tasks / docs に明記する |
 | sample-progress inflation | dashboard / reporting | NEW | runnable sample や validation の裏付けなしに `%` を上げる | `samples_progress.md` の `%` と report / validation command を結びつける |
+| repository taxonomy drift | docs / structure | NEW | sample/script/crate taxonomy が drift し、active/planned/generated/archive が混ざる | `plan/19`、`samples/README.md`、`scripts/README.md`、no-risk-first staged migration を維持する |
 | root-disk exhaustion | storage / VPS | NEW | `target/`、LLVM、generated artifact が root を圧迫する | external workdir policy、storage audit、cleanup script を先に入れる |
 | unsafe detachable cleanup | storage / ops | NEW | cleanup script が repo source や report を消す | `--confirm` 必須、known disposable dir 限定、detach_prepare non-destructive |
 | shared-space profile collapse | shared-space | OPEN | authoritative-room default を exhaustive catalog と誤読する | minimal working subset と final catalog を分ける |

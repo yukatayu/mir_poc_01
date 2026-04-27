@@ -345,6 +345,10 @@ actual adoption / final contract / final surface / concrete tool binding を
    - `specs/examples/475` により、proof formalization は Lean-first を current recommendation に置き、Rocq/Coq + Iris line は runtime concurrency / separation-logic pressure が強まった場合の fallback family として retained する reading に上がった。
    - current package で fixed したのは、semantic-core relation library first、repo-local review-unit/Lean-stub artifact-conformance bridge second、room/fabric concurrency later という staged roadmap であって、concrete production prover binding や final public proof artifact contract ではない。
    - 未決なのは、prototype-wide exhaustive trace alignment、actual theorem discharge transport、proof object public contract、cross-tool public artifact-conformance contract、fallback trigger をどこで concretize するかである。
+49. repository layer map と staged physical migration をどこで final package structure と区別して扱うか。
+   - current repo では `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` により、Mir substrate / verification substrate / Mirrorea runtime / adapters / visualization / samples / docs を conceptual lane として分ける current reading は置ける。
+   - ただし、これは flat workspace / flat script root を壊さない docs-first taxonomy であり、crate rename / module move / public API move / command-path move / final installed package layout を fixed したわけではない。
+   - 未決なのは、sample roots、script roots、future crate split、root cleanup、docs subtree split をどの順で staged physical migration に進めるか、および wrapper / alias をどこまで先に置くかである。
 48. final-layer closeout queue をどこまで actual package として戻すか。
    - `specs/examples/520` と `531` により、current queue は
      - layered strong typing / IFC first-fragment

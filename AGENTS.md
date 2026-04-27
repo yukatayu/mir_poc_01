@@ -70,6 +70,18 @@ Do not:
 - treat visualization as untyped debug leak
 - freeze final grammar or public APIs prematurely
 
+## Repository organization discipline
+
+- Keep Mir core, verification, Mirrorea runtime, adapters / host boundary, visualization, samples, and docs conceptually separate even when the current filesystem layout is still flat.
+- Active executable samples must stay in documented active roots. Current active roots are `samples/clean-near-end/` for the clean suite, `samples/current-l2/` for the base source corpus, and `samples/lean/` for mechanization evidence.
+- Planned skeleton families are not active samples. Keep them explicitly marked as planned and do not silently promote them into the active path.
+- Historical samples should be archived rather than silently deleted.
+- Generated artifacts must not be confused with source samples. If a generated artifact is committed for bridge evidence, say so explicitly in the touched docs.
+- Sample or script taxonomy changes should update `samples/README.md`, `scripts/README.md`, and `samples_progress.md` in the same task.
+- Every non-trivial restructuring requires a new report.
+- No thick fake E2E wrappers: E2E samples must compose real layers and produce state / effect / witness / debug evidence.
+- Heavy build artifacts must use the configured external workdir rather than repo root when that policy already exists.
+
 ## Reporting policy
 
 Every report should contain, in this order:

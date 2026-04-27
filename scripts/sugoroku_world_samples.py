@@ -133,6 +133,28 @@ class TermSignature:
         }
 
 
+@dataclass(frozen=True)
+class LayerSignature:
+    layer: str
+    requires: list[str]
+    provides: list[str]
+    transforms: list[str]
+    checks: list[str]
+    emits: list[str]
+    laws: list[str]
+
+    def to_json(self) -> dict[str, Any]:
+        return {
+            "layer": self.layer,
+            "requires": list(self.requires),
+            "provides": list(self.provides),
+            "transforms": list(self.transforms),
+            "checks": list(self.checks),
+            "emits": list(self.emits),
+            "laws": list(self.laws),
+        }
+
+
 @dataclass
 class MessageQueue:
     place_id: str
@@ -500,8 +522,81 @@ def _term_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, s
     return [signature.to_json() for signature in signatures]
 
 
+def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, Any]]:
+    signatures: list[LayerSignature] = []
+    if sample_id == "03_roll_publish_handoff":
+        roll = result.get("roll") or {}
+        witness_name = roll.get("published_witness", "draw_pub#1")
+        signatures.extend(
+            [
+                LayerSignature(
+                    layer="verification",
+                    requires=["publication_order", f"witness({witness_name})"],
+                    provides=list(result.get("properties_passed", [])),
+                    transforms=[],
+                    checks=["publish_before_handoff", "active_handoff_target"],
+                    emits=["term_signatures", "verification"],
+                    laws=[
+                        "evidence_preservation",
+                        "no_hidden_handoff_without_witness",
+                    ],
+                ),
+                LayerSignature(
+                    layer="runtime_trace",
+                    requires=["sample_transition(take_turn_alice)"],
+                    provides=["human_readable_turn_trace"],
+                    transforms=[
+                        "dice_owner:Alice->Bob",
+                        f"published_roll:{roll.get('roll_id', 'roll#1')}",
+                    ],
+                    checks=["single_process_logical_multi_place"],
+                    emits=["turn_trace", "summary"],
+                    laws=["helper_output_is_evidence_oriented"],
+                ),
+            ]
+        )
+    if sample_id == "05_late_join_history_visible":
+        signatures.append(
+            LayerSignature(
+                layer="membership",
+                requires=["membership_epoch", "member_incarnation"],
+                provides=["late_join_history_visibility", "pending_member_boundary"],
+                transforms=["member_join:Dave", "pending_insert:Dave"],
+                checks=["active_pending_distinction", "published_history_visible_after_join"],
+                emits=["membership"],
+                laws=["membership_epoch_monotone", "stale_action_rejection"],
+            )
+        )
+    if sample_id == "06_leave_non_owner":
+        signatures.append(
+            LayerSignature(
+                layer="membership",
+                requires=["membership_epoch", "member_incarnation"],
+                provides=["leave_invalidation"],
+                transforms=["member_leave:Carol", "incarnation_increment:Carol"],
+                checks=["stale_action_rejected_after_leave"],
+                emits=["membership"],
+                laws=["membership_epoch_monotone", "stale_action_rejection"],
+            )
+        )
+    if sample_id == "07_owner_leave_reassign":
+        signatures.append(
+            LayerSignature(
+                layer="membership",
+                requires=["membership_epoch", "member_incarnation"],
+                provides=["owner_reassignment_continuity"],
+                transforms=["owner_leave:Bob", "dice_owner:Bob->Carol"],
+                checks=["reassigned_owner_is_active"],
+                emits=["membership", "summary"],
+                laws=["membership_epoch_monotone", "active_owner_continuity"],
+            )
+        )
+    return [signature.to_json() for signature in signatures]
+
+
 def _finalize_result(sample_id: str, result: dict[str, Any]) -> dict[str, Any]:
     result["term_signatures"] = _term_signatures(sample_id, result)
+    result["layer_signatures"] = _layer_signatures(sample_id, result)
     return result
 
 
@@ -938,6 +1033,13 @@ def closeout() -> dict[str, Any]:
             for row in run_sample(sample["sample_id"])["term_signatures"]
         }
     )
+    layer_signature_kinds = sorted(
+        {
+            row["layer"]
+            for sample in SAMPLE_ROWS
+            for row in run_sample(sample["sample_id"])["layer_signatures"]
+        }
+    )
     return {
         "active_sample_root": str(SAMPLE_ROOT),
         "sample_count": len(SAMPLE_ROWS),
@@ -965,12 +1067,22 @@ def closeout() -> dict[str, Any]:
         "model_check_properties": list(MODEL_CHECK_PROPERTIES),
         "signature_kinds": signature_kinds,
         "reserved_signature_kinds": ["message", "adapter", "layer"],
+        "layer_signature_kinds": layer_signature_kinds,
+        "reserved_layer_signature_kinds": [
+            "auth",
+            "transport",
+            "telemetry",
+            "projection",
+            "hot-plug",
+            "visualization",
+        ],
         "debug_output_modes": [
             "--debug summary",
             "--debug turn-trace",
             "--debug membership",
             "--debug verification",
             "--debug signatures",
+            "--debug layers",
             "--format json",
         ],
         "limitations": list(LIMITATIONS),
@@ -1065,6 +1177,19 @@ def _format_signatures(result: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _format_layers(result: dict[str, Any]) -> str:
+    lines = ["LAYER SIGNATURES"]
+    for row in result.get("layer_signatures", []):
+        lines.append(f"  - {row['layer']}")
+        for key in ("requires", "provides", "transforms", "checks", "emits", "laws"):
+            values = row.get(key) or []
+            pretty = ", ".join(values) if values else "none"
+            lines.append(f"      {key}: {pretty}")
+    if len(lines) == 1:
+        lines.append("  - none")
+    return "\n".join(lines)
+
+
 def format_pretty(payload: Any, *, debug: str | None = None) -> str:
     if isinstance(payload, list):
         return "\n".join(f"{row['sample_id']}: {row['summary']}" for row in payload)
@@ -1080,6 +1205,8 @@ def format_pretty(payload: Any, *, debug: str | None = None) -> str:
         return _format_verification(payload)
     if debug == "signatures":
         return _format_signatures(payload)
+    if debug == "layers":
+        return _format_layers(payload)
     sample = payload.get("sample")
     if sample == "00_world_bootstrap":
         return _format_world_summary(payload)
@@ -1146,7 +1273,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("sample")
     run_parser.add_argument(
         "--debug",
-        choices=["summary", "turn-trace", "membership", "verification", "signatures"],
+        choices=["summary", "turn-trace", "membership", "verification", "signatures", "layers"],
         default=None,
     )
     run_parser.add_argument("--format", choices=["pretty", "json"], default="pretty")

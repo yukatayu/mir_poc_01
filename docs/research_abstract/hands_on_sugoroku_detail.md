@@ -397,6 +397,7 @@ ActionRecord
 - `debug summary`: world/game の短い状態表示です。
 - `debug turn-trace`: turn の event trace です。
 - `debug signatures`: effect / transition / witness / relation / property の `TermSignature` inventory です。
+- `debug layers`: `verification` / `runtime_trace` / `membership` の `LayerSignature` inventory です。
 - `debug membership`: membership registry の表示です。
 - `debug verification`: static/runtime/model-check の確認項目です。
 
@@ -416,6 +417,7 @@ python3 scripts/sugoroku_world_samples.py run 00_world_bootstrap
 python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 python3 scripts/sugoroku_world_samples.py model-check
 python3 scripts/sugoroku_world_samples.py closeout
@@ -443,6 +445,16 @@ TERM SIGNATURES
   - witness: draw_pub#1 [runtime_witness]
   - relation: publication_order [derived_relation]
   - property: owner_only_rolls [validation_property]
+```
+
+`--debug layers` は次のような helper-local inventory を出します。
+
+```text
+LAYER SIGNATURES
+  - verification
+      requires: publication_order, witness(draw_pub#1)
+  - runtime_trace
+      requires: sample_transition(take_turn_alice)
 ```
 
 ## json output
@@ -483,3 +495,4 @@ TERM SIGNATURES
 - final parser grammar remains deferred。
 - final public API remains deferred。
 - `--debug signatures` は helper-local evidence view であり、final public signature schema / visualization protocol ではない。
+- `--debug layers` も helper-local evidence view であり、final public layer law schema ではない。

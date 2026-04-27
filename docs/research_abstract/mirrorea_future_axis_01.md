@@ -30,6 +30,16 @@ Mirrorea full runtime、final public API、real network、final auth stack、fin
 
 を追加し、helper-local / report-local の evidence carrier を先に actualize しています。
 
+さらに `LayerSignature system` の first cut も close しました。
+
+- Sugoroku helper に `--debug layers`
+- clean near-end report / closeout に `layer_signatures`
+
+を追加し、helper-local current layer と runtime report-local lane を
+どちらも `requires / provides / transforms / checks / emits / laws` で読めるようにしました。
+ただし helper と runtime で current layer 名はまだ揃えていません。これは first cut であり、
+final public layer law schema を意味しません。
+
 ## 主軸
 
 守るべき project axis は次です。
@@ -162,6 +172,7 @@ object attach/follow lifecycle を representative に検証する予定です。
 3. TermSignature registry
    - close 済み。helper-local / report-local first cut まで actualize。
 4. LayerSignature system
+   - close 済み。helper-local current layer と runtime report-local lane の first cut まで actualize。
 5. MessageEnvelope / Auth seam
 6. VisualizationProtocol
 7. Sugoroku vertical slice hardening

@@ -100,7 +100,10 @@ impl FinitePreorder {
         orders: impl IntoIterator<Item = (impl Into<String>, impl Into<String>)>,
     ) -> Self {
         let name = name.into();
-        let elements = elements.into_iter().map(Into::into).collect::<BTreeSet<_>>();
+        let elements = elements
+            .into_iter()
+            .map(Into::into)
+            .collect::<BTreeSet<_>>();
         let mut closure = BTreeSet::new();
         for element in &elements {
             closure.insert((element.clone(), element.clone()));
@@ -152,7 +155,10 @@ pub struct FinitePowerset {
 }
 
 impl FinitePowerset {
-    pub fn new(name: impl Into<String>, elements: impl IntoIterator<Item = impl Into<String>>) -> Self {
+    pub fn new(
+        name: impl Into<String>,
+        elements: impl IntoIterator<Item = impl Into<String>>,
+    ) -> Self {
         Self {
             name: name.into(),
             elements: elements.into_iter().map(Into::into).collect(),
@@ -348,7 +354,10 @@ impl ConstraintSolver {
         );
         capture_theories.insert(
             "CaptureScope".to_string(),
-            FinitePowerset::new("CaptureScope", ["RoomHistory", "EphemeralToken", "SecretKeyStore"]),
+            FinitePowerset::new(
+                "CaptureScope",
+                ["RoomHistory", "EphemeralToken", "SecretKeyStore"],
+            ),
         );
         region_theories.insert(
             "Region".to_string(),
@@ -430,7 +439,11 @@ impl ConstraintSolver {
         }
     }
 
-    fn solve_one(&self, sample: &CleanNearEndSampleSpec, constraint: &Constraint) -> ConstraintVerdict {
+    fn solve_one(
+        &self,
+        sample: &CleanNearEndSampleSpec,
+        constraint: &Constraint,
+    ) -> ConstraintVerdict {
         match &constraint.evaluation {
             ConstraintEvaluation::LabelFlow {
                 theory,
@@ -440,7 +453,13 @@ impl ConstraintSolver {
                 .label_theories
                 .get(theory)
                 .and_then(|theory| theory.preorder.leq(lower, upper))
-                .map(|value| if value { ConstraintVerdict::Valid } else { ConstraintVerdict::Invalid })
+                .map(|value| {
+                    if value {
+                        ConstraintVerdict::Valid
+                    } else {
+                        ConstraintVerdict::Invalid
+                    }
+                })
                 .unwrap_or(ConstraintVerdict::Residual),
             ConstraintEvaluation::AuthorityGe {
                 principal,
@@ -456,14 +475,26 @@ impl ConstraintSolver {
                 self.authority_theories
                     .get(theory)
                     .and_then(|theory| theory.leq(required, actual))
-                    .map(|value| if value { ConstraintVerdict::Valid } else { ConstraintVerdict::Invalid })
+                    .map(|value| {
+                        if value {
+                            ConstraintVerdict::Valid
+                        } else {
+                            ConstraintVerdict::Invalid
+                        }
+                    })
                     .unwrap_or(ConstraintVerdict::Residual)
             }
             ConstraintEvaluation::CaptureSubset { theory, lhs, rhs } => self
                 .capture_theories
                 .get(theory)
                 .and_then(|theory| theory.subset(lhs, rhs))
-                .map(|value| if value { ConstraintVerdict::Valid } else { ConstraintVerdict::Invalid })
+                .map(|value| {
+                    if value {
+                        ConstraintVerdict::Valid
+                    } else {
+                        ConstraintVerdict::Invalid
+                    }
+                })
                 .unwrap_or(ConstraintVerdict::Residual),
             ConstraintEvaluation::RegionOutlives {
                 theory,
@@ -473,7 +504,13 @@ impl ConstraintSolver {
                 .region_theories
                 .get(theory)
                 .and_then(|theory| theory.preorder.leq(shorter, longer))
-                .map(|value| if value { ConstraintVerdict::Valid } else { ConstraintVerdict::Invalid })
+                .map(|value| {
+                    if value {
+                        ConstraintVerdict::Valid
+                    } else {
+                        ConstraintVerdict::Invalid
+                    }
+                })
                 .unwrap_or(ConstraintVerdict::Residual),
             ConstraintEvaluation::CostLeq { lhs, rhs } => {
                 if lhs.leq(rhs) {
@@ -500,7 +537,8 @@ impl ConstraintSolver {
                 let Some(actual_producer) = order.produced_witnesses.get(witness) else {
                     return ConstraintVerdict::Invalid;
                 };
-                if actual_producer == producer_stage && order.precedes(producer_stage, consumer_stage)
+                if actual_producer == producer_stage
+                    && order.precedes(producer_stage, consumer_stage)
                 {
                     ConstraintVerdict::Valid
                 } else {
@@ -628,6 +666,7 @@ struct CleanNearEndSampleSpec {
     checked_under: Option<String>,
     explanation: Option<String>,
     required_source_tokens: Vec<String>,
+    layer_signatures: Vec<LayerSignature>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -643,6 +682,17 @@ pub struct TermSignature {
     pub kind: String,
     pub name: String,
     pub evidence_role: String,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct LayerSignature {
+    pub name: String,
+    pub requires: Vec<String>,
+    pub provides: Vec<String>,
+    pub transforms: Vec<String>,
+    pub checks: Vec<String>,
+    pub emits: Vec<String>,
+    pub laws: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -671,6 +721,7 @@ pub struct CleanNearEndSampleReport {
     pub current_owner: Option<String>,
     pub visible_history: Vec<String>,
     pub term_signatures: Vec<TermSignature>,
+    pub layer_signatures: Vec<LayerSignature>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -694,6 +745,9 @@ pub struct CleanNearEndCloseout {
     pub lean_roots: Vec<String>,
     pub signature_kinds: Vec<String>,
     pub reserved_signature_kinds: Vec<String>,
+    pub layer_signatures: Vec<LayerSignature>,
+    pub layer_signature_lanes: Vec<String>,
+    pub reserved_layer_signature_names: Vec<String>,
 }
 
 fn extract_declared_name(line: &str, prefix: &str) -> Option<String> {
@@ -749,6 +803,51 @@ fn push_term_signature(
     }
 }
 
+fn layer_signature(
+    name: &str,
+    requires: &[&str],
+    provides: &[&str],
+    transforms: &[&str],
+    checks: &[&str],
+    emits: &[&str],
+    laws: &[&str],
+) -> LayerSignature {
+    let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
+    LayerSignature {
+        name: name.to_string(),
+        requires: collect(requires),
+        provides: collect(provides),
+        transforms: collect(transforms),
+        checks: collect(checks),
+        emits: collect(emits),
+        laws: collect(laws),
+    }
+}
+
+fn layer_signature_lanes() -> Vec<String> {
+    [
+        "requires",
+        "provides",
+        "transforms",
+        "checks",
+        "emits",
+        "laws",
+    ]
+    .into_iter()
+    .map(|lane| lane.to_string())
+    .collect()
+}
+
+fn reserved_layer_signature_names() -> Vec<String> {
+    [
+        "visualization_redacted_debug_view",
+        "typed_telemetry_emitter",
+    ]
+    .into_iter()
+    .map(|name| name.to_string())
+    .collect()
+}
+
 fn term_signatures_for_spec(spec: &CleanNearEndSampleSpec, source: &str) -> Vec<TermSignature> {
     let mut signatures = Vec::new();
     let mut seen = BTreeSet::new();
@@ -764,22 +863,10 @@ fn term_signatures_for_spec(spec: &CleanNearEndSampleSpec, source: &str) -> Vec<
             );
         }
         if let Some(name) = extract_declared_name(line, "effect ") {
-            push_term_signature(
-                &mut signatures,
-                &mut seen,
-                "effect",
-                name,
-                "source_decl",
-            );
+            push_term_signature(&mut signatures, &mut seen, "effect", name, "source_decl");
         }
         if let Some(name) = extract_after_marker(line, "produces witness ") {
-            push_term_signature(
-                &mut signatures,
-                &mut seen,
-                "witness",
-                name,
-                "source_decl",
-            );
+            push_term_signature(&mut signatures, &mut seen, "witness", name, "source_decl");
         }
     }
 
@@ -877,6 +964,16 @@ fn closeout_signature_kinds() -> Result<Vec<String>, CleanNearEndError> {
         }
     }
     Ok(kinds.into_iter().collect())
+}
+
+fn closeout_layer_signatures() -> Vec<LayerSignature> {
+    let mut signatures = BTreeMap::new();
+    for spec in clean_near_end_sample_specs() {
+        for layer in spec.layer_signatures {
+            signatures.entry(layer.name.clone()).or_insert(layer);
+        }
+    }
+    signatures.into_values().collect()
 }
 
 pub fn clean_near_end_samples_root() -> PathBuf {
@@ -1096,7 +1193,10 @@ fn typing_sample(
         source_relpath: source_relpath.to_string(),
         summary: summary.to_string(),
         built_in_terms: built_in_vocabulary(),
-        user_defined_terms: user_defined_terms.iter().map(|value| (*value).to_string()).collect(),
+        user_defined_terms: user_defined_terms
+            .iter()
+            .map(|value| (*value).to_string())
+            .collect(),
         principals,
         constraints,
         reason_family: reason_family.map(str::to_string),
@@ -1116,6 +1216,7 @@ fn typing_sample(
             .iter()
             .map(|value| (*value).to_string())
             .collect(),
+        layer_signatures: Vec::new(),
     }
 }
 
@@ -1388,6 +1489,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
                 "draw_pub".to_string(),
                 "handoff dice_owner Alice -> Bob".to_string(),
             ],
+            layer_signatures: Vec::new(),
         },
         CleanNearEndSampleSpec {
             id: "02_missing_witness_rejected".to_string(),
@@ -1425,6 +1527,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
             checked_under: None,
             explanation: None,
             required_source_tokens: vec!["after publish(draw)".to_string()],
+            layer_signatures: Vec::new(),
         },
         CleanNearEndSampleSpec {
             id: "03_handoff_before_publication_rejected".to_string(),
@@ -1464,6 +1567,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
             checked_under: None,
             explanation: None,
             required_source_tokens: vec!["requires witness(draw_pub)".to_string()],
+            layer_signatures: Vec::new(),
         },
         CleanNearEndSampleSpec {
             id: "04_stage_block_authorized_handoff".to_string(),
@@ -1538,6 +1642,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
             checked_under: None,
             explanation: None,
             required_source_tokens: vec!["stage block".to_string(), "draw_pub".to_string()],
+            layer_signatures: Vec::new(),
         },
         CleanNearEndSampleSpec {
             id: "05_delegated_rng_service".to_string(),
@@ -1626,6 +1731,33 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
                 "delegated_rng_service stays on a provider boundary and leaves room mutation to the authority holder.".to_string(),
             ),
             required_source_tokens: vec!["provider_receipt".to_string(), "delegated_rng_roll".to_string()],
+            layer_signatures: vec![layer_signature(
+                "transport_provider_boundary",
+                &[
+                    "runtime_service:delegated_rng_roll",
+                    "input_signature:witness(provider_receipt)",
+                    "mode_assumption:provider_boundary",
+                ],
+                &[
+                    "evidence:provider_receipt",
+                    "effect:rng",
+                    "adapter:provider_boundary",
+                ],
+                &[
+                    "term_signatures -> provider_receipt evidence",
+                    "provider result -> authority handoff input",
+                ],
+                &[
+                    "requires witness(provider_receipt)",
+                    "effect row { rng, witness } <= { rng, witness, publish }",
+                ],
+                &["witness:provider_receipt", "debug_trace:provider_roll(receipt)"],
+                &[
+                    "no_hidden_effect",
+                    "evidence_preservation",
+                    "residual_obligations_are_explicit",
+                ],
+            )],
         },
         CleanNearEndSampleSpec {
             id: "06_auditable_authority_witness".to_string(),
@@ -1691,6 +1823,30 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
                 "The witness core fields are declared by the sample package, not by the language runtime.".to_string(),
             ),
             required_source_tokens: vec!["witness_kind".to_string(), "draw_pub".to_string()],
+            layer_signatures: vec![layer_signature(
+                "auth_authority_witness",
+                &[
+                    "input_signature:witness(draw_pub)",
+                    "runtime_service:audit(draw_pub)",
+                    "mode_assumption:authority_handoff_trace",
+                ],
+                &[
+                    "evidence:AuthorityDrawWitness",
+                    "view:audit_trace",
+                    "signatures:witness_core_fields",
+                ],
+                &[
+                    "witness payload -> audit evidence",
+                    "visible history -> authority trace view",
+                ],
+                &["requires witness(draw_pub)"],
+                &["debug_trace:audit(draw_pub)", "witness:draw_pub"],
+                &[
+                    "no_hidden_authority",
+                    "evidence_preservation",
+                    "visualization_respects_labels",
+                ],
+            )],
         },
     ];
 
@@ -1719,6 +1875,25 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
             checked_under: Some("sequential_consistency".to_string()),
             explanation: None,
             required_source_tokens: vec!["sequential_consistency".to_string()],
+            layer_signatures: vec![layer_signature(
+                "verification_model_check",
+                &[
+                    "property:mutual_exclusion",
+                    "runtime_service:model_check",
+                    "mode_assumption:second_line_verification",
+                ],
+                &["evidence:model_check_result", "view:counterexample_shape"],
+                &["runtime events -> verification evidence"],
+                &[
+                    "checked_under:sequential_consistency",
+                    "property:mutual_exclusion",
+                ],
+                &["verification_result:pass"],
+                &[
+                    "residual_obligations_are_explicit",
+                    "evidence_preservation",
+                ],
+            )],
         },
         CleanNearEndSampleSpec {
             id: "02_peterson_relaxed_counterexample".to_string(),
@@ -1746,6 +1921,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
             checked_under: Some("relaxed_without_publication_observation_edges".to_string()),
             explanation: None,
             required_source_tokens: vec!["relaxed_without_publication_observation_edges".to_string()],
+            layer_signatures: Vec::new(),
         },
         CleanNearEndSampleSpec {
             id: "03_broken_mutex_counterexample".to_string(),
@@ -1772,6 +1948,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
                 "interleaving or visibility permits both actors to enter critical section".to_string(),
             ),
             required_source_tokens: vec!["BrokenMutex".to_string(), "critical A".to_string()],
+            layer_signatures: Vec::new(),
         },
         CleanNearEndSampleSpec {
             id: "01_stage_stable_later_minimal".to_string(),
@@ -1816,6 +1993,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
             checked_under: None,
             explanation: None,
             required_source_tokens: vec!["stable config".to_string(), "later".to_string()],
+            layer_signatures: Vec::new(),
         },
         CleanNearEndSampleSpec {
             id: "02_published_witnessed_mode_bridge".to_string(),
@@ -1881,6 +2059,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
             checked_under: None,
             explanation: None,
             required_source_tokens: vec!["published(room)".to_string(), "witnessed(draw_pub)".to_string()],
+            layer_signatures: Vec::new(),
         },
     ]);
 
@@ -1889,11 +2068,16 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
 
 fn canonicalize_if_exists(path: &Path) -> Result<PathBuf, CleanNearEndError> {
     fs::canonicalize(path).map_err(|error| {
-        CleanNearEndError::new(format!("failed to canonicalize {}: {error}", path.display()))
+        CleanNearEndError::new(format!(
+            "failed to canonicalize {}: {error}",
+            path.display()
+        ))
     })
 }
 
-fn resolve_clean_near_end_sample_spec(sample_argument: &str) -> Result<CleanNearEndSampleSpec, CleanNearEndError> {
+fn resolve_clean_near_end_sample_spec(
+    sample_argument: &str,
+) -> Result<CleanNearEndSampleSpec, CleanNearEndError> {
     let trimmed = sample_argument.trim();
     if trimmed.is_empty() {
         return Err(CleanNearEndError::new("sample argument must not be empty"));
@@ -1941,7 +2125,10 @@ fn resolve_clean_near_end_sample_spec(sample_argument: &str) -> Result<CleanNear
     )))
 }
 
-fn validate_source_shape(spec: &CleanNearEndSampleSpec, source: &str) -> Result<(), CleanNearEndError> {
+fn validate_source_shape(
+    spec: &CleanNearEndSampleSpec,
+    source: &str,
+) -> Result<(), CleanNearEndError> {
     for token in &spec.required_source_tokens {
         if !source.contains(token) {
             return Err(CleanNearEndError::new(format!(
@@ -2030,6 +2217,7 @@ pub fn run_clean_near_end_sample(
         current_owner: spec.current_owner.clone(),
         visible_history: spec.visible_history.clone(),
         term_signatures: term_signatures_for_spec(&spec, &source),
+        layer_signatures: spec.layer_signatures.clone(),
     };
 
     match spec.family {
@@ -2092,7 +2280,9 @@ pub fn build_clean_near_end_matrix() -> Result<CleanNearEndMatrix, CleanNearEndE
 
     let samples = list_clean_near_end_samples();
     for sample in &samples {
-        *families.entry(sample.family.as_str().to_string()).or_insert(0) += 1;
+        *families
+            .entry(sample.family.as_str().to_string())
+            .or_insert(0) += 1;
         let report = run_clean_near_end_sample(&sample.sample_id)?;
         match sample.family {
             CleanSampleFamily::ModelCheck => match report.model_check_result.as_deref() {
@@ -2150,6 +2340,9 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
             "adapter".to_string(),
             "layer".to_string(),
         ],
+        layer_signatures: closeout_layer_signatures(),
+        layer_signature_lanes: layer_signature_lanes(),
+        reserved_layer_signature_names: reserved_layer_signature_names(),
     })
 }
 
@@ -2393,7 +2586,10 @@ fn peterson_step_relaxed(
             PetersonPc::Start => {
                 next.actual_flag_a = true;
                 next.pc_a = PetersonPc::SetTurn;
-                Some((next, "A writes flag[A] but B has not observed it".to_string()))
+                Some((
+                    next,
+                    "A writes flag[A] but B has not observed it".to_string(),
+                ))
             }
             PetersonPc::SetTurn => {
                 next.actual_turn = Actor::B;
@@ -2425,7 +2621,10 @@ fn peterson_step_relaxed(
             PetersonPc::Start => {
                 next.actual_flag_b = true;
                 next.pc_b = PetersonPc::SetTurn;
-                Some((next, "B writes flag[B] but A has not observed it".to_string()))
+                Some((
+                    next,
+                    "B writes flag[B] but A has not observed it".to_string(),
+                ))
             }
             PetersonPc::SetTurn => {
                 next.actual_turn = Actor::A;
@@ -2498,10 +2697,7 @@ fn broken_mutex_outcome() -> ModelCheckOutcome {
     }
 }
 
-fn broken_mutex_step(
-    state: &BrokenMutexState,
-    actor: Actor,
-) -> Option<(BrokenMutexState, String)> {
+fn broken_mutex_step(state: &BrokenMutexState, actor: Actor) -> Option<(BrokenMutexState, String)> {
     let mut next = state.clone();
     match actor {
         Actor::A => match state.pc_a {

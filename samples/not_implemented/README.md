@@ -4,12 +4,11 @@
 
 - exact token / macro / syntax を preservation 目的で残す。
 - current repo では parse / run しない。
-- current runnable analogue や corrected prototype がある場合は `samples/prototype/` または `samples/current-l2/` から辿る。
+- current runnable analogue がある場合は `samples/clean-near-end/` または `samples/current-l2/` から辿る。
+- historical prototype anchor が必要な場合だけ `samples/prototype/current-l2-dynamic-attach-detach/` を参照する。
 
 ## current subdirectories
 
-- `order-handoff/`
-  - rough syntax A〜D の exact preservation
 - `avatar-fairy-follow/`
   - phase 8 planned skeleton family
   - current parser / runner では扱わない

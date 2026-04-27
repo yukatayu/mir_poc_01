@@ -1049,7 +1049,8 @@ pre-clean-near-end historical roadmap memory として読む。
 current active roadmap の sample principal はこの addendum が上書きする。
 
 - current active sample root は `samples/clean-near-end/` に切り替える。
-- pre-clean-near-end `samples/prototype/` / `samples/not_implemented/` / old problem-bundle path は archive に移し、active path から外す。
+- pre-clean-near-end `samples/prototype/` / old problem-bundle path は archive に移し、active path から外す。
+- `samples/not_implemented/` は archive ではなく planned skeleton family として維持し、active runnable path としては扱わない。
 - current alpha layer は次を principal bundle として読む。
   - clean typing 5 本
   - clean order-handoff 6 本
@@ -1150,7 +1151,19 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Sugoroku sample progress alignment` は docs / dashboard package として close し、`samples_progress.md` と `samples/clean-near-end/sugoroku-world/README.md` で `SUG-00..09` の purpose / command / debug surface / stop line を reader-facing に揃えた。
 - `Avatar fairy follow sample plan` は docs-first package として close し、phase 8 planned skeleton family を `samples/not_implemented/avatar-fairy-follow/` に切り出した。
 - `TermSignature registry / debug output` は helper-local / report-local package として close し、Sugoroku `--debug signatures` と clean near-end report / closeout inventory を actualize した。
-- current promoted next package は `LayerSignature system` である。
+- `LayerSignature system` は helper-local / report-local package として close し、Sugoroku `--debug layers` と clean near-end `layer_signatures` inventory を actualize した。
+- current promoted next package は `MessageEnvelope / Auth seam` である。
+
+## 2026-04-27 repository-structure staging addendum
+
+current repo は flat workspace / flat script root を維持したまま、layer-aware な読みを docs-first に固定してよい。
+ただし、これは final public package structure を freeze する判断ではない。
+
+- current repo map は `plan/19-repository-map-and-taxonomy.md` を repository memory 正本とし、`samples/README.md` と `scripts/README.md` を reader-facing taxonomy anchor に置く。
+- current principle は **low-risk docs / taxonomy hardening first** であり、crate rename / module move / public API move / command-path move は stop line の外に残す。
+- active sample は `samples/clean-near-end/`、base current-L2 corpus は `samples/current-l2/`、planned skeleton は `samples/not_implemented/`、prototype / archive / generated reserve は別 roots に分けて読む。
+- `samples/generated/` は non-Lean generated sample artifact の reserve として保持し、heavy disposable artifact は external workdir を優先する。
+- root cleanup、script rebucket、crate split は staged migration plan と wrapper strategy があるときだけ進める。
 
 ## 推奨される phase 順序
 

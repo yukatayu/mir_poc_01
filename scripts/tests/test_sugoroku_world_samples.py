@@ -136,6 +136,43 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("message", result["reserved_signature_kinds"])
         self.assertIn("adapter", result["reserved_signature_kinds"])
 
+    def test_roll_publish_handoff_exposes_layer_signatures(self) -> None:
+        result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
+
+        layers = {row["layer"]: row for row in result["layer_signatures"]}
+        self.assertIn("verification", layers)
+        self.assertIn("runtime_trace", layers)
+        self.assertIn("publication_order", layers["verification"]["requires"])
+        self.assertIn("term_signatures", layers["verification"]["emits"])
+        self.assertIn("dice_owner:Alice->Bob", layers["runtime_trace"]["transforms"])
+
+    def test_membership_sample_exposes_membership_layer(self) -> None:
+        result = sugoroku_world_samples.run_sample("05_late_join_history_visible")
+
+        layers = {row["layer"]: row for row in result["layer_signatures"]}
+        self.assertIn("membership", layers)
+        self.assertIn("membership_epoch", layers["membership"]["requires"])
+        self.assertIn("membership", layers["membership"]["emits"])
+
+    def test_layers_debug_prints_layer_inventory(self) -> None:
+        pretty = sugoroku_world_samples.format_pretty(
+            sugoroku_world_samples.run_sample("03_roll_publish_handoff"),
+            debug="layers",
+        )
+
+        self.assertIn("LAYER SIGNATURES", pretty)
+        self.assertIn("verification", pretty)
+        self.assertIn("runtime_trace", pretty)
+        self.assertIn("requires: publication_order", pretty)
+
+    def test_closeout_records_layer_debug_mode(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertIn("--debug layers", result["debug_output_modes"])
+        self.assertIn("verification", result["layer_signature_kinds"])
+        self.assertIn("membership", result["layer_signature_kinds"])
+        self.assertIn("auth", result["reserved_layer_signature_kinds"])
+
     def test_cli_run_json_prints_json_payload(self) -> None:
         buffer = StringIO()
         with mock.patch("sys.stdout", buffer):

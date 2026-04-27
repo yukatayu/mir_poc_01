@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 15:59 JST
+最終更新: 2026-04-27 17:03 JST
 
 ## この文書について
 
@@ -21,8 +21,10 @@
 - `Sugoroku sample progress alignment` は `docs/reports/0916-*` で close 済み
 - `Avatar fairy follow sample plan` は `docs/reports/0917-*` で close 済み
 - `TermSignature registry / debug output` は `docs/reports/0918-*` で close し、Sugoroku `--debug signatures` と clean near-end report/closeout inventory を追加した
-- current promoted next line は **`LayerSignature system`**
-- next semantic carrier package は **`MessageEnvelope / Auth seam`**
+- `LayerSignature system` は `docs/reports/0919-*` で close し、Sugoroku helper の `verification` / `runtime_trace` / `membership` layer inventory と、clean near-end report-local `transport_provider_boundary` / `auth_authority_witness` / `verification_model_check` carrier を追加した
+- repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
+- current promoted next line は **`MessageEnvelope / Auth seam`**
+- next semantic carrier package は **`VisualizationProtocol`**
 
 ## current executable floor
 
@@ -86,7 +88,10 @@
 - `python3 scripts/sugoroku_world_samples.py check-all`
 - `python3 scripts/sugoroku_world_samples.py model-check`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures`
+- `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
+- `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+- `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
 - `bash scripts/storage/setup_mirrorea_workdisk_root.sh --plan`
 - `bash scripts/env/mirrorea_storage_env.sh`
 - `bash scripts/storage/detach_prepare.sh`
@@ -94,26 +99,12 @@
 
 ## 自走可能な task package
 
-### Package 1. LayerSignature system
-
-- phase / stage:
-  `Macro 6`, `S1 -> S2`
-- objective:
-  auth / verification / visualization / transport / telemetry を typed layer として合成し、law surface を明示する
-- expected deliverables:
-  `LayerSignature`、requires / provides / transforms / checks / emits / laws の整理、docs、examples
-- validation command:
-  `python3 scripts/current_l2_guided_samples.py closeout --format json`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、snapshot 同期、layer law と stop line の明記
-- stop line:
-  final public plugin API、tool-brand 固定、production verifier binding は行わない
-
-### Package 2. MessageEnvelope / Auth seam
+### Package 1. MessageEnvelope / Auth seam
 
 - phase / stage:
   `Macro 6`, `S2 -> S3`
+- rough estimate:
+  `0.5-1 package`
 - objective:
   transport、authentication、authorization、membership、capability、witness を分けた envelope carrier を置く
 - expected deliverables:
@@ -126,10 +117,12 @@
 - stop line:
   production auth protocol、federation、real socket transport は固定しない
 
-### Package 3. VisualizationProtocol first implementation
+### Package 2. VisualizationProtocol first implementation
 
 - phase / stage:
   `Macro 6`, `S2 -> S3`
+- rough estimate:
+  `0.5-1 package`
 - objective:
   static view / runtime trace / redaction-aware debug output / typed telemetry をまとめる
 - expected deliverables:
@@ -142,10 +135,12 @@
 - stop line:
   final public visualization protocol、retention policy、multi-tenant telemetry service は固定しない
 
-### Package 4. Typed external boundary / adapter sample plan
+### Package 3. Typed external boundary / adapter sample plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
+- rough estimate:
+  `0.5 package`
 - objective:
   phase 9 `EXT-01..05` representative sample と adapter failure / debug label restriction line を sample-first に整理する
 - expected deliverables:
@@ -158,10 +153,12 @@
 - stop line:
   concrete browser/network/VR adapter 実装は固定しない
 
-### Package 5. Projection / placement plan
+### Package 4. Projection / placement plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
+- rough estimate:
+  `0.5 package`
 - objective:
   system-wide source から server / participant / adapter / visualizer へ projection する validity line を整理する
 - expected deliverables:
@@ -173,10 +170,12 @@
 - stop line:
   generated public backend、placement optimizer、final operational scheduler は実装しない
 
-### Package 6. Hot-plug Patch / AttachPoint
+### Package 5. Hot-plug Patch / AttachPoint
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
+- rough estimate:
+  `1 package`
 - objective:
   `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration contract の最小設計を置く
 - expected deliverables:
@@ -188,10 +187,12 @@
 - stop line:
   distributed activation / rollback、durable state migration、production attach/detach API は固定しない
 
-### Package 7. Network transport plan
+### Package 6. Network transport plan
 
 - phase / stage:
   `Macro 6 -> Macro 7`, `S0 -> S1`
+- rough estimate:
+  `0.5 package`
 - objective:
   local queue -> two-process loopback -> explicit transport failure の docs-first sample ladder を切る
 - expected deliverables:
@@ -204,10 +205,12 @@
 - stop line:
   production transport 実装や public deployment contract は固定しない
 
-### Package 8. Compiler/backend/LLVM preparation guardrail
+### Package 7. Compiler/backend/LLVM preparation guardrail
 
 - phase / stage:
   `Macro 7`, `S0 -> S1`
+- rough estimate:
+  `0.5-1 package`
 - objective:
   small VPS 上で LLVM / build artifact / cache を root に溜めない guardrail を先に固める
 - expected deliverables:
@@ -225,7 +228,7 @@
 ## research を通して見つけること
 
 - `TermSignature` の最小粒度と residual obligation surface
-- `LayerSignature` law surface のどこまでを runtime / theorem / visualization に配るか
+- `LayerSignature` first cut の helper/runtime naming をどこまで共有 law surface に寄せるか
 - avatar fairy helper surface を Sugoroku helper extension と専用 helper のどちらに置くか
 - projection / placement validity report の最小 shape
 - `AttachPoint` compatibility と detach lifecycle の最小 contract
