@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-04-27 10:19 JST
+Last updated: 2026-04-27 13:14 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、phase/sample/progress/storage foundation を追加する
 Current active packages: `0913` foundation closeout synced; next `Sugoroku sample progress alignment`, `Avatar fairy follow sample plan`, `TermSignature registry / debug output`
 
@@ -31,6 +31,7 @@ Current active packages: `0913` foundation closeout synced; next `Sugoroku sampl
 | Item | Status | Path | Notes |
 |---|---|---|---|
 | External workdir | not mounted | `/mnt/mirrorea-work` | `vdb` device is visible but no filesystem/mountpoint is active |
+| Root setup helper | ready | `scripts/storage/setup_mirrorea_workdisk_root.sh` | prepares GPT + ext4 + `/mnt/mirrorea-work` + UUID `fstab`; requires root and was not executed in this session |
 | Cargo target | repo/root risk | `target/` | current `target/` uses about `5.2G`; external redirect script added in this task |
 | Storage env script | yes | `scripts/env/mirrorea_storage_env.sh` | exports safe default paths and refuses `--ensure-dirs` on unmounted default unless overridden |
 | LLVM build | not started | `/mnt/mirrorea-work/llvm/{src,build,install}` | policy/path only; no LLVM artifact committed |

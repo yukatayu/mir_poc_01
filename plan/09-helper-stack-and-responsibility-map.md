@@ -16,6 +16,9 @@ current non-production detached artifact default は引き続き `target/current
 small VPS で root disk pressure が強い場合は external workdir 側へ redirect できるよう、
 path policy、cleanup policy、reporting policy を明示的に保つ。
 helper 本体に final storage policy を埋め込まず、script / env layer で override できる形を優先する。
+root-only actual mount / partition / `fstab` 永続化は helper 本体に埋め込まず、
+`scripts/storage/setup_mirrorea_workdisk_root.sh` のような明示的 root setup helper に分離し、
+device 誤選択や stale mountpoint entry を safety check で先に止める。
 
 ## helper stack の中心関数
 

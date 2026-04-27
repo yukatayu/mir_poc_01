@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 10:14 JST
+最終更新: 2026-04-27 13:14 JST
 
 ## この文書について
 
@@ -74,6 +74,7 @@
 - `python3 scripts/sugoroku_world_samples.py check-all`
 - `python3 scripts/sugoroku_world_samples.py model-check`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
+- `bash scripts/storage/setup_mirrorea_workdisk_root.sh --plan`
 - `bash scripts/env/mirrorea_storage_env.sh`
 - `bash scripts/storage/detach_prepare.sh`
 - `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
