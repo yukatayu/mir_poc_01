@@ -107,6 +107,7 @@
 - `Projection / placement` の docs-first plan も close 済みであり、`plan/20-projection-and-placement-roadmap.md` と `docs/research_abstract/projection_placement_plan_01.md` を current anchor にする
 - `HotPlug Patch / AttachPoint` の helper-local executable widening も close 済みであり、`plan/21-hotplug-attachpoint-roadmap.md`、`docs/research_abstract/hotplug_attachpoint_plan_01.md`、Sugoroku helper の `hotplug_lifecycle` / `--debug hotplug` を current anchor にする
 - `Network transport` の docs-first plan も close 済みであり、`plan/22-network-transport-roadmap.md` と `docs/research_abstract/network_transport_plan_01.md` を current anchor にする
+- `Network transport helper-local canaries` も close 済みであり、`scripts/network_transport_samples.py`、`samples/clean-near-end/network-transport/README.md`、`../hands_on/network_transport_canaries_01.md` を current executable anchor にする
 - `Compiler/backend/LLVM preparation` guardrail も close 済みであり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` と `docs/research_abstract/compiler_backend_llvm_preparation_01.md` を current anchor にする
 - `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
 - avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で active representative slice を持つ

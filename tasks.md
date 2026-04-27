@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 20:07 JST
+最終更新: 2026-04-27 20:27 JST
 
 ## この文書について
 
@@ -33,9 +33,10 @@
 - `hands-on docs / closeout` は `docs/reports/0928-*` で close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current landing page として追加した
 - `Network transport executable widening` は `docs/reports/0929-*` で close し、helper-local `NET-01` loopback preview、`--transport loopback_socket`、loopback parity test を追加した
 - `Avatar fairy follow representative slice` は `docs/reports/0930-*` で close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、residual planned `FAIRY-02` / `FAIRY-05`、helper-local debug surface を追加した
+- `Network transport helper-local canaries` は `docs/reports/0932-*` で close し、`scripts/network_transport_samples.py`、active landing page `samples/clean-near-end/network-transport/README.md`、`NET-02..05` process-boundary / reconnect / typed failure / redacted route trace canary を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Network transport NET-02..05`**
-- next reopen point は **`Avatar fairy follow residual widening`**
+- current promoted next line は **`Avatar fairy follow residual widening`**
+- next reopen point は **`cross-package sweep`**
 
 ## current executable floor
 
@@ -112,6 +113,13 @@
 - `python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json`
 - `python3 -m unittest scripts.tests.test_avatar_follow_samples`
 - `python3 scripts/avatar_follow_samples.py closeout --format json`
+- `python3 scripts/network_transport_samples.py check-all --format json`
+- `python3 scripts/network_transport_samples.py run NET-02 --debug route-trace --format json`
+- `python3 scripts/network_transport_samples.py run NET-03 --debug reconnect --format json`
+- `python3 scripts/network_transport_samples.py run NET-04 --debug failures --format json`
+- `python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json`
+- `python3 -m unittest scripts.tests.test_network_transport_samples`
+- `python3 scripts/network_transport_samples.py closeout --format json`
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
 - `cargo test -p mir-runtime --test clean_near_end_samples`
@@ -123,24 +131,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Network transport `NET-02..05`
-
-- phase / stage:
-  `Macro 7`, `S1 -> S2`
-- rough estimate:
-  `1 package`
-- objective:
-  `plan/22` の two-process / reconnect / typed failure / route trace widening を後段 helper / process harness へ渡す
-- expected deliverables:
-  `NET-02` process-boundary canary、`NET-03` epoch guard、`NET-04` failure family、`NET-05` redacted route trace plan
-- validation command:
-  `python3 scripts/sugoroku_world_samples.py check-all --transport loopback_socket --format json`
-- report requirement:
-  新しい report、transport widening invariant、process-boundary stop line、auth/transport separation evidence を明記する
-- stop line:
-  production transport、public deployment contract、cryptographic session protocol は固定しない
-
-### Package 2. Avatar fairy follow residual widening
+### Package 1. Avatar fairy follow residual widening
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -156,6 +147,23 @@
   新しい report、representative slice と residual planned family の境界を明記する
 - stop line:
   final game/runtime API や production avatar stack は固定しない
+
+### Package 2. Cross-package sweep
+
+- phase / stage:
+  `Macro 7`, `S2`
+- rough estimate:
+  `1 package`
+- objective:
+  transport / avatar / hot-plug / dashboard / next queue を current snapshot として揃え、次の promoted line を recut する
+- expected deliverables:
+  progress / tasks / samples dashboard / hands-on closeout / next promoted line sync
+- validation command:
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、snapshot recut と remaining mixed gate を明記する
+- stop line:
+  final public milestone や product completion は主張しない
 
 ## research を通して見つけること
 

@@ -29,6 +29,7 @@
   - `typed-external-boundary/` は phase 9 planned family
   - `network-transport/` は phase 13 planned family
 - `clean-near-end/avatar-follow/` は phase 8 active representative slice
+- `clean-near-end/network-transport/` は phase 13 active helper-local canary landing page
 - `prototype/` は historical anchor / compatibility reference であり、active canonical path ではない
 - `old/` は archive
 - `generated/` は future reserve path であり、source sample を置かない
@@ -40,6 +41,7 @@ python3 scripts/current_l2_guided_samples.py smoke-all --format json
 python3 scripts/clean_near_end_samples.py smoke-all --format json
 python3 scripts/sugoroku_world_samples.py check-all
 python3 scripts/avatar_follow_samples.py check-all --format json
+python3 scripts/network_transport_samples.py check-all --format json
 ```
 
 ## move policy

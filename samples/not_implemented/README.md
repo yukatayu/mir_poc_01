@@ -19,5 +19,6 @@
   - provider boundary / local queue / typed failure / debug label restriction の docs-first path
 - `network-transport/`
   - phase 13 planned skeleton family
-  - current parser / runner では扱わない
+  - current parser / runner では扱わない future source/backlog path
+  - active helper-local canary は `samples/clean-near-end/network-transport/` と `scripts/network_transport_samples.py`
   - local queue / provider boundary current anchor から loopback / reconnect / failure matrix へ widening する docs-first path

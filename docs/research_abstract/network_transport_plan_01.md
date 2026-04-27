@@ -3,7 +3,7 @@
 ## 目的
 
 Mirrorea の transport widening を、`local_queue` baseline から
-loopback / reconnect / typed failure へ安全に広げるための docs-first current plan です。
+loopback / process boundary / reconnect / typed failure / redacted route trace へ安全に広げるための docs-first current plan です。
 
 ## current anchors
 
@@ -12,7 +12,10 @@ loopback / reconnect / typed failure へ安全に広げるための docs-first c
 - `03_roll_publish_handoff` の local-queue / loopback envelope
 - `04_non_owner_roll_rejected` の reject-path parity
 - `05_late_join_history_visible` の membership freshness
+- `06_leave_non_owner` の stale epoch / incarnation reject
+- `09_detach_todo` の detach-after-send reject
 - clean near-end `05_delegated_rng_service` の `provider_boundary`
+- `scripts/network_transport_samples.py` の helper-local canary
 
 ## current rule
 
@@ -29,8 +32,19 @@ loopback / reconnect / typed failure へ安全に広げるための docs-first c
 - `NET-04` typed transport failure / timeout / queue-full
 - `NET-05` redacted route trace / observer-safe network debug
 
-2026-04-27 current cut では、`NET-01` を helper-local `--transport loopback_socket` preview として actualize しました。
-same-process emulator のまま envelope field / reject path parity だけを確認し、real socket / reconnect / typed failure はまだ後段です。
+2026-04-27 current cut では、`NET-01` を helper-local `--transport loopback_socket` preview として actualizeし、
+さらに `scripts/network_transport_samples.py` で `NET-02..05` helper-local canary を actualize しました。
+
+- `NET-02`
+  subprocess JSON bridge による process-boundary route trace
+- `NET-03`
+  stale `membership_epoch` / `member_incarnation` reconnect reject
+- `NET-04`
+  timeout / queue-full / route-not-found / detach-after-send の typed failure matrix
+- `NET-05`
+  observer-safe redacted route trace
+
+ただし、これは real socket / cryptographic session / durable replay ではありません。
 
 ## stop line
 

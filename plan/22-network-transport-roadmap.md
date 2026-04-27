@@ -27,6 +27,10 @@ final socket / broker choice、cryptographic session protocol、multi-server con
 - `samples/clean-near-end/sugoroku-world/09_detach_todo.mir`
   - detached-domain-action reject path
   - transport widening does not erase lifecycle stop line
+- `samples/clean-near-end/network-transport/README.md`
+  - active helper-local landing page for `NET-02..05`
+- `scripts/network_transport_samples.py`
+  - subprocess JSON bridge / reconnect guard / typed failure / redacted route trace helper-local canary
 - `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir`
   - runtime report-local `provider_boundary`
   - typed external boundary receipt path
@@ -49,6 +53,7 @@ final socket / broker choice、cryptographic session protocol、multi-server con
 3. reconnect / retry は hidden success にせず、failure / replay / stale-epoch rejection を explicit に保つ
 4. visualization / telemetry は route trace を出せても、label / authority / redaction を崩さない
 5. helper-local loopback preview を final public transport ABI と誤読させない
+6. `NET-03..05` helper-local canary は widening の evidence surface であり、real transport success を主張しない
 
 ## minimal widening ladder
 
@@ -59,10 +64,16 @@ final socket / broker choice、cryptographic session protocol、multi-server con
    - helper-local `NET-01` canary として `SUG-01` attach、`SUG-03` publish/handoff、`SUG-04` reject path、`check-all --transport loopback_socket` を actualize 済み
 3. `two_process_loopback`
    - process boundary をまたぐ attach / publish / handoff path
+   - 2026-04-27 current cut では `scripts/network_transport_samples.py run NET-02` として helper-local subprocess JSON bridge canary を actualize 済み
 4. `reconnect_epoch_guard`
    - reconnect 後も membership freshness を失わない path
+   - 2026-04-27 current cut では `scripts/network_transport_samples.py run NET-03` として stale epoch / incarnation reject canary を actualize 済み
 5. `typed_transport_failure`
    - timeout / queue-full / route-not-found / detach-after-send を explicit failure family で返す path
+   - 2026-04-27 current cut では `scripts/network_transport_samples.py run NET-04` として helper-local typed failure matrix を actualize 済み
+6. `observer_safe_route_trace`
+   - route trace / telemetry を authority / redaction 付き observer-safe view で返す path
+   - 2026-04-27 current cut では `scripts/network_transport_samples.py run NET-05` として redacted route trace canary を actualize 済み
 
 ## stop line
 
@@ -83,5 +94,6 @@ final socket / broker choice、cryptographic session protocol、multi-server con
 ## next relation
 
 `NET-01` helper-local loopback preview は actualize 済みである。
-current promoted package は network transport 自身の `NET-02..05` widening であり、
-`NET-01` helper-local preview を floor にしたまま two-process / reconnect / typed failure / redacted route trace を後段 canary として残す。
+`NET-02..05` も helper-local canary として actualize 済みであり、
+`NET-01` preview を floor にしたまま subprocess JSON bridge / stale reconnect reject / typed transport failure / redacted route trace を current evidence surface に加えた。
+ただし、real socket / broker / session / durable replay は still later である。

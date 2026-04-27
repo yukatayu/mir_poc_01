@@ -13,6 +13,8 @@
   - 2026-04-27 時点の current phase closeout と、今すぐ実行する確認コマンド、remaining mixed gate、next queue
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
+- `network_transport_canaries_01.md`
+  - phase 13 helper-local canary の最短入口
 
 ## 既存の長い入門文書
 
@@ -26,3 +28,4 @@
 - `../research_abstract/hands_on_sugoroku_00_overview.md`
 - `../research_abstract/hands_on_sugoroku_sample_matrix.md`
 - `../research_abstract/hands_on_sugoroku_detail.md`
+- `network_transport_canaries_01.md`

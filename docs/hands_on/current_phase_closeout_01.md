@@ -16,6 +16,7 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/current_l2_guided_samples.py closeout --format json
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
+python3 scripts/network_transport_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
 ```
@@ -25,6 +26,10 @@ bash scripts/env/mirrorea_storage_env.sh
 ```bash
 python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
+python3 scripts/network_transport_samples.py run NET-02 --debug route-trace --format json
+python3 scripts/network_transport_samples.py run NET-03 --debug reconnect --format json
+python3 scripts/network_transport_samples.py run NET-04 --debug failures --format json
+python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json
 python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json
 python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json
 python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json
@@ -39,7 +44,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 
 - active clean near-end suite と Sugoroku world / avatar fairy follow representative slice が current runnable floor にあること
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`VisualizationProtocol` の helper-local / report-local first cut が current line に同期されていること
-- `Network transport` の `NET-01` helper-local loopback preview が actualize 済みであり、same-process emulator のまま attach / envelope / reject parity を確認できること
+- `Network transport` の `NET-01` helper-local loopback preview と `NET-02..05` helper-local canary が actualize 済みであり、same-process parity、subprocess JSON bridge、stale reconnect reject、typed failure family、observer-safe redacted route trace を current evidence surface として確認できること
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view を envelope-derived evidence として確認できること
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
@@ -75,7 +80,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 ## remaining mixed gate
 
 - final public auth / visualization / projection / hot-plug surface
-- `NET-02..05` の network transport widening
+- transport canary から real socket / session / durable replay への widening
 - detach lifecycle / `AttachPoint` residual contract
 - avatar fairy follow residual widening (`FAIRY-02`, `FAIRY-05`)
 - actual LLVM artifact と backend choice
@@ -89,13 +94,14 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `Network transport` `NET-02..05`
-2. `Avatar fairy follow` residual widening
+1. `Avatar fairy follow` residual widening
+2. cross-package sweep
 
 ## 関連文書
 
 - `../research_abstract/mirrorea_future_axis_01.md`
 - `../research_abstract/network_transport_plan_01.md`
+- `network_transport_canaries_01.md`
 - `../research_abstract/avatar_fairy_follow_plan_01.md`
 - `avatar_fairy_follow_representative_slice_01.md`
 - `../research_abstract/compiler_backend_llvm_preparation_01.md`

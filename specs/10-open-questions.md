@@ -167,6 +167,9 @@
      - 2026-04-27 時点で phase 13 planned family `NET-01..05` は docs-first に actualize した。
        `local_queue` / `provider_boundary` current anchor、loopback / reconnect / typed failure / redacted route trace という working sample ID と、
        `plan/22-network-transport-roadmap.md` の widening invariant までは current line に上げてよい。
+       また、helper-local executable canary として `scripts/network_transport_samples.py` に
+       `NET-02` subprocess JSON bridge、`NET-03` stale reconnect reject、`NET-04` typed failure matrix、
+       `NET-05` observer-safe route trace を actualize してよい。
      - 未決なのは exact transport seam name、final public transport ABI、session/signature protocol、multi-server consensus である。
   6. hot-plug `Patch Req Prov Δ` / `AttachPoint` の最小 surface と compatibility check をどこまで current line に上げるか。
      activation cut、migration contract、detach lifecycle の exact shape は未決定である。

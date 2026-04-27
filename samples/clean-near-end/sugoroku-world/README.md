@@ -67,6 +67,8 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
     `SUG-09` は intentionally not a completion claim であり、detach を visible stop line として残します。
 - `PH13 network transport`
   - `SUG-01`, `SUG-03`, `SUG-04` は `--transport loopback_socket` を付けると helper-local `NET-01` parity canary になる。
+    `NET-02..05` の process-boundary / reconnect / typed failure / route trace は `../network-transport/README.md` と
+    `scripts/network_transport_samples.py` 側で読む。
 
 ## Important debug surfaces
 

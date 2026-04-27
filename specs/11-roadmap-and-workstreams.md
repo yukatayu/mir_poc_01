@@ -1165,8 +1165,9 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Compiler/backend/LLVM preparation` は docs-first + non-destructive-probe package として close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、LLVM path readiness を current snapshot に actualize した。
 - `hands-on docs / closeout` は close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current closeout landing page として actualize した。
 - `Network transport executable widening` は helper-local package として close し、`NET-01` loopback preview、`--transport loopback_socket`、attach / handoff / reject parity、reserved runtime seam inventory assertion を current snapshot に actualize した。
+- `Network transport helper-local canaries` は helper-local package として close し、`scripts/network_transport_samples.py`、active landing page `samples/clean-near-end/network-transport/README.md`、`NET-02` subprocess JSON bridge、`NET-03` stale reconnect reject、`NET-04` typed failure matrix、`NET-05` observer-safe route trace を current snapshot に actualize した。
 - `Avatar fairy follow representative slice` は helper-local package として close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、residual planned family `FAIRY-02` / `FAIRY-05`、hands-on landing page を current snapshot に actualize した。
-- current promoted next package は `Network transport` `NET-02..05` である。
+- current promoted next package は `Avatar fairy follow` residual widening である。
 
 ## 2026-04-27 repository-structure staging addendum
 

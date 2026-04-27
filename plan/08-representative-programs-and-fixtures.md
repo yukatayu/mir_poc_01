@@ -19,11 +19,12 @@ current repo では sample 表現を少なくとも次の 5 層に分ける。
 ## active sample policy
 
 - active canonical sample root は `samples/clean-near-end/`
-- family は `typing` / `order-handoff` / `model-check` / `modal` / `sugoroku-world` / `avatar-follow`
+- family は `typing` / `order-handoff` / `model-check` / `modal` / `sugoroku-world` / `avatar-follow` / `network-transport`
 - current suite sizeは 20 本
 - generated Lean stub は `samples/lean/clean-near-end/`
 - `samples/clean-near-end/sugoroku-world/` 10 本が current Mirrorea vertical-slice family である
 - `samples/clean-near-end/avatar-follow/` 4 本が current phase 8 representative-slice family である
+- `samples/clean-near-end/network-transport/` は current phase 13 helper-local canary landing page であり、source は主に Sugoroku family を再利用する
 
 ## base source corpus policy
 
@@ -42,6 +43,7 @@ current repo では sample 表現を少なくとも次の 5 層に分ける。
 ## planned skeleton policy
 
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、`FAIRY-02` と `FAIRY-05` を active representative slice の外側に残す
+- `samples/not_implemented/network-transport/` は phase 13 future source/backlog family であり、active helper-local canary とは別に残す
 - planned skeleton は `samples_progress.md` で `10%` 以下の row として追い、active closeout evidence と混同しない
 
 ## active suite families
