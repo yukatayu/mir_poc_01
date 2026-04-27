@@ -55,7 +55,8 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `LayerSignature system` の first cut も close してあり、Sugoroku helper の `--debug layers` と clean near-end report / closeout の `layer_signatures` inventory を追加しました。
 - `MessageEnvelope / Auth seam` の first cut も close してあり、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report / closeout の `MessageEnvelope` inventory で、transport / auth / membership / capability / witness split を helper-local / report-local に actualize しました。
   current baseline は `auth none` で、`session_token` / `signature` は reserve です。
-- next queue は、`VisualizationProtocol`、typed external boundary / adapter、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
+- `VisualizationProtocol` の first cut も close してあり、Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end report / closeout の report-local `VisualizationView` / `TelemetryRow` inventory で、label / authority / redaction を持つ typed visualization / telemetry line を actualize しました。
+- next queue は、typed external boundary / adapter、projection / placement、hot-plug patch / `AttachPoint`、network transport plan の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
 

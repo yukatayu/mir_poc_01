@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 17:41 JST
+最終更新: 2026-04-27 18:04 JST
 
 ## この文書について
 
@@ -23,9 +23,10 @@
 - `TermSignature registry / debug output` は `docs/reports/0918-*` で close し、Sugoroku `--debug signatures` と clean near-end report/closeout inventory を追加した
 - `LayerSignature system` は `docs/reports/0919-*` で close し、Sugoroku helper の `verification` / `runtime_trace` / `membership` layer inventory と、clean near-end report-local `transport_provider_boundary` / `auth_authority_witness` / `verification_model_check` carrier を追加した
 - `MessageEnvelope / Auth seam` は `docs/reports/0921-*` で close し、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report-local `MessageEnvelope` inventory を追加した
+- `VisualizationProtocol` は `docs/reports/0922-*` で close し、Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end report-local `VisualizationView` / `TelemetryRow` inventory を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`VisualizationProtocol`**
-- next docs-first package は **`Typed external boundary / adapter`**
+- current promoted next line は **`Typed external boundary / adapter`**
+- next docs-first package は **`Projection / placement`**
 
 ## current executable floor
 
@@ -90,6 +91,7 @@
 - `python3 scripts/sugoroku_world_samples.py model-check`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes`
+- `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers`
 - `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
@@ -104,25 +106,7 @@
 
 ## 自走可能な task package
 
-### Package 1. VisualizationProtocol first implementation
-
-- phase / stage:
-  `Macro 6`, `S2 -> S3`
-- rough estimate:
-  `0.5-1 package`
-- objective:
-  static view / runtime trace / redaction-aware debug output / typed telemetry をまとめる
-- expected deliverables:
-  static snapshot view、runtime trace view、membership / witness timeline、redaction policy、docs
-- validation command:
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json`
-  `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership`
-- report requirement:
-  新しい report、helper-local debug output と final public viewer の区別を明記する
-- stop line:
-  final public visualization protocol、retention policy、multi-tenant telemetry service は固定しない
-
-### Package 2. Typed external boundary / adapter sample plan
+### Package 1. Typed external boundary / adapter sample plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -140,7 +124,7 @@
 - stop line:
   concrete browser/network/VR adapter 実装は固定しない
 
-### Package 3. Projection / placement plan
+### Package 2. Projection / placement plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -148,6 +132,24 @@
   `0.5 package`
 - objective:
   system-wide source から server / participant / adapter / visualizer へ projection する validity line を整理する
+- expected deliverables:
+  projection validity checklist、place split plan、docs
+- validation command:
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、system-wide source と place-specific program の区別を明記する
+- stop line:
+  final public projection IR や optimizer は固定しない
+
+### Package 3. HotPlug Patch / AttachPoint
+
+- phase / stage:
+  `Macro 6`, `S1 -> S2`
+- rough estimate:
+  `0.5-1 package`
+- objective:
+  `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration stop line を docs-first に切る
 - expected deliverables:
   projection doc、validity checklist、place split examples、必要なら helper-local report
 - validation command:

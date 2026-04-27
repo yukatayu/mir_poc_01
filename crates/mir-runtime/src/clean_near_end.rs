@@ -731,6 +731,27 @@ pub struct MessageEnvelope {
 }
 
 #[derive(Debug, Clone, Serialize)]
+pub struct VisualizationView {
+    pub view_name: String,
+    pub layer_signature_refs: Vec<String>,
+    pub message_envelope_refs: Vec<String>,
+    pub focus_subjects: Vec<String>,
+    pub redaction_rules: Vec<String>,
+    pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct TelemetryRow {
+    pub row_name: String,
+    pub channel: String,
+    pub layer_signature_refs: Vec<String>,
+    pub message_envelope_refs: Vec<String>,
+    pub measurement: String,
+    pub value: String,
+    pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
 pub struct CleanNearEndSampleReport {
     pub sample: String,
     pub family: CleanSampleFamily,
@@ -758,6 +779,8 @@ pub struct CleanNearEndSampleReport {
     pub term_signatures: Vec<TermSignature>,
     pub layer_signatures: Vec<LayerSignature>,
     pub message_envelopes: Vec<MessageEnvelope>,
+    pub visualization_views: Vec<VisualizationView>,
+    pub telemetry_rows: Vec<TelemetryRow>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -786,6 +809,13 @@ pub struct CleanNearEndCloseout {
     pub reserved_auth_evidence_kinds: Vec<String>,
     pub transport_seams: Vec<String>,
     pub reserved_transport_seams: Vec<String>,
+    pub visualization_views: Vec<VisualizationView>,
+    pub visualization_view_lanes: Vec<String>,
+    pub reserved_visualization_view_names: Vec<String>,
+    pub telemetry_rows: Vec<TelemetryRow>,
+    pub telemetry_row_lanes: Vec<String>,
+    pub telemetry_channels: Vec<String>,
+    pub reserved_telemetry_channels: Vec<String>,
     pub layer_signatures: Vec<LayerSignature>,
     pub layer_signature_lanes: Vec<String>,
     pub reserved_layer_signature_names: Vec<String>,
@@ -917,6 +947,46 @@ fn message_envelope(
     }
 }
 
+fn visualization_view(
+    view_name: &str,
+    layer_signature_refs: &[String],
+    message_envelope_refs: &[String],
+    focus_subjects: &[&str],
+    redaction_rules: &[&str],
+    notes: &[&str],
+) -> VisualizationView {
+    let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
+    VisualizationView {
+        view_name: view_name.to_string(),
+        layer_signature_refs: layer_signature_refs.to_vec(),
+        message_envelope_refs: message_envelope_refs.to_vec(),
+        focus_subjects: collect(focus_subjects),
+        redaction_rules: collect(redaction_rules),
+        notes: collect(notes),
+    }
+}
+
+fn telemetry_row(
+    row_name: &str,
+    channel: &str,
+    layer_signature_refs: &[String],
+    message_envelope_refs: &[String],
+    measurement: &str,
+    value: &str,
+    notes: &[&str],
+) -> TelemetryRow {
+    let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
+    TelemetryRow {
+        row_name: row_name.to_string(),
+        channel: channel.to_string(),
+        layer_signature_refs: layer_signature_refs.to_vec(),
+        message_envelope_refs: message_envelope_refs.to_vec(),
+        measurement: measurement.to_string(),
+        value: value.to_string(),
+        notes: collect(notes),
+    }
+}
+
 fn layer_signature_lanes() -> Vec<String> {
     [
         "requires",
@@ -925,6 +995,35 @@ fn layer_signature_lanes() -> Vec<String> {
         "checks",
         "emits",
         "laws",
+    ]
+    .into_iter()
+    .map(|lane| lane.to_string())
+    .collect()
+}
+
+fn visualization_view_lanes() -> Vec<String> {
+    [
+        "view_name",
+        "layer_signature_refs",
+        "message_envelope_refs",
+        "focus_subjects",
+        "redaction_rules",
+        "notes",
+    ]
+    .into_iter()
+    .map(|lane| lane.to_string())
+    .collect()
+}
+
+fn telemetry_row_lanes() -> Vec<String> {
+    [
+        "row_name",
+        "channel",
+        "layer_signature_refs",
+        "message_envelope_refs",
+        "measurement",
+        "value",
+        "notes",
     ]
     .into_iter()
     .map(|lane| lane.to_string())
@@ -962,6 +1061,20 @@ fn reserved_layer_signature_names() -> Vec<String> {
     .into_iter()
     .map(|name| name.to_string())
     .collect()
+}
+
+fn reserved_visualization_view_names() -> Vec<String> {
+    ["cross_place_projection", "label_authority_redaction_grid"]
+        .into_iter()
+        .map(|name| name.to_string())
+        .collect()
+}
+
+fn reserved_telemetry_channels() -> Vec<String> {
+    ["typed_effect_adapter", "attach_point_activation"]
+        .into_iter()
+        .map(|name| name.to_string())
+        .collect()
 }
 
 fn term_signatures_for_spec(spec: &CleanNearEndSampleSpec, source: &str) -> Vec<TermSignature> {
@@ -1092,6 +1205,37 @@ fn closeout_layer_signatures() -> Vec<LayerSignature> {
     signatures.into_values().collect()
 }
 
+fn closeout_visualization_views() -> Vec<VisualizationView> {
+    let mut views = BTreeMap::new();
+    for spec in clean_near_end_sample_specs() {
+        let message_envelopes = message_envelopes_for_spec(&spec);
+        for view in visualization_views_for_spec(&spec, &spec.layer_signatures, &message_envelopes)
+        {
+            views.entry(view.view_name.clone()).or_insert(view);
+        }
+    }
+    views.into_values().collect()
+}
+
+fn closeout_telemetry_rows() -> Vec<TelemetryRow> {
+    let mut rows = BTreeMap::new();
+    for spec in clean_near_end_sample_specs() {
+        let message_envelopes = message_envelopes_for_spec(&spec);
+        for row in telemetry_rows_for_spec(&spec, &spec.layer_signatures, &message_envelopes) {
+            rows.entry(row.row_name.clone()).or_insert(row);
+        }
+    }
+    rows.into_values().collect()
+}
+
+fn closeout_telemetry_channels(rows: &[TelemetryRow]) -> Vec<String> {
+    rows.iter()
+        .map(|row| row.channel.clone())
+        .collect::<BTreeSet<_>>()
+        .into_iter()
+        .collect()
+}
+
 fn message_envelopes_for_spec(spec: &CleanNearEndSampleSpec) -> Vec<MessageEnvelope> {
     match spec.id.as_str() {
         "05_delegated_rng_service" => vec![
@@ -1163,6 +1307,89 @@ fn message_envelopes_for_spec(spec: &CleanNearEndSampleSpec) -> Vec<MessageEnvel
             &[
                 "authority witness is evidence, not authentication",
                 "visualization stays downstream of witness production",
+            ],
+        )],
+        _ => Vec::new(),
+    }
+}
+
+fn visualization_views_for_spec(
+    spec: &CleanNearEndSampleSpec,
+    layer_signatures: &[LayerSignature],
+    message_envelopes: &[MessageEnvelope],
+) -> Vec<VisualizationView> {
+    let layer_signature_refs = layer_signatures
+        .iter()
+        .map(|layer| layer.name.clone())
+        .collect::<Vec<_>>();
+    let message_envelope_refs = message_envelopes
+        .iter()
+        .map(|envelope| envelope.envelope_id.clone())
+        .collect::<Vec<_>>();
+
+    match spec.id.as_str() {
+        "05_delegated_rng_service" => vec![visualization_view(
+            "provider_boundary_redacted_flow",
+            &layer_signature_refs,
+            &message_envelope_refs,
+            &["effect:delegated_rng_roll", "witness:provider_receipt"],
+            &[
+                "auth_evidence:none_baseline",
+                "witness_payload:named_reference_only",
+            ],
+            &[
+                "report-local view over current layer/message inventory",
+                "transport and witness remain separate lanes",
+            ],
+        )],
+        "06_auditable_authority_witness" => vec![visualization_view(
+            "authority_trace_redacted_view",
+            &layer_signature_refs,
+            &message_envelope_refs,
+            &["witness:draw_pub", "view:audit_trace"],
+            &[
+                "auth_evidence:none_baseline",
+                "label_guard:visualization_respects_labels",
+            ],
+            &[
+                "authority witness is evidence, not authentication",
+                "visualization stays downstream of witness production",
+            ],
+        )],
+        _ => Vec::new(),
+    }
+}
+
+fn telemetry_rows_for_spec(
+    spec: &CleanNearEndSampleSpec,
+    layer_signatures: &[LayerSignature],
+    _message_envelopes: &[MessageEnvelope],
+) -> Vec<TelemetryRow> {
+    let layer_signature_refs = layer_signatures
+        .iter()
+        .map(|layer| layer.name.clone())
+        .collect::<Vec<_>>();
+
+    match spec.id.as_str() {
+        "05_delegated_rng_service" => vec![telemetry_row(
+            "provider_boundary_dispatch",
+            "provider_boundary",
+            &layer_signature_refs,
+            &["provider_request#1".to_string()],
+            "dispatch_outcome",
+            "accepted",
+            &["typed effect request observed without freezing adapter contract"],
+        )],
+        "06_auditable_authority_witness" => vec![telemetry_row(
+            "audit_trace_dispatch",
+            "audit_trace_boundary",
+            &layer_signature_refs,
+            &["audit_trace_request#1".to_string()],
+            "dispatch_outcome",
+            "accepted",
+            &[
+                "visualization stays downstream of witness production",
+                "report-local audit flow telemetry only",
             ],
         )],
         _ => Vec::new(),
@@ -2376,6 +2603,10 @@ pub fn run_clean_near_end_sample(
 
     let solver = ConstraintSolver::new(&spec);
     let solved = solver.solve(&spec, &spec.constraints);
+    let message_envelopes = message_envelopes_for_spec(&spec);
+    let visualization_views =
+        visualization_views_for_spec(&spec, &spec.layer_signatures, &message_envelopes);
+    let telemetry_rows = telemetry_rows_for_spec(&spec, &spec.layer_signatures, &message_envelopes);
 
     let mut report = CleanNearEndSampleReport {
         sample: spec.id.clone(),
@@ -2411,7 +2642,9 @@ pub fn run_clean_near_end_sample(
         visible_history: spec.visible_history.clone(),
         term_signatures: term_signatures_for_spec(&spec, &source),
         layer_signatures: spec.layer_signatures.clone(),
-        message_envelopes: message_envelopes_for_spec(&spec),
+        message_envelopes,
+        visualization_views,
+        telemetry_rows,
     };
 
     match spec.family {
@@ -2511,6 +2744,9 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
             .push(sample.sample_id);
     }
     let signature_kinds = closeout_signature_kinds()?;
+    let visualization_views = closeout_visualization_views();
+    let telemetry_rows = closeout_telemetry_rows();
+    let telemetry_channels = closeout_telemetry_channels(&telemetry_rows);
     Ok(CleanNearEndCloseout {
         active_sample_root: clean_near_end_samples_root().display().to_string(),
         archive_sample_root: clean_near_end_archive_root().display().to_string(),
@@ -2536,18 +2772,19 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
         ],
         message_envelope_lanes: message_envelope_lanes(),
         auth_evidence_kinds: vec!["none".to_string()],
-        reserved_auth_evidence_kinds: vec![
-            "session_token".to_string(),
-            "signature".to_string(),
-        ],
+        reserved_auth_evidence_kinds: vec!["session_token".to_string(), "signature".to_string()],
         transport_seams: vec![
             "provider_boundary".to_string(),
             "audit_trace_boundary".to_string(),
         ],
-        reserved_transport_seams: vec![
-            "loopback_socket".to_string(),
-            "network_link".to_string(),
-        ],
+        reserved_transport_seams: vec!["loopback_socket".to_string(), "network_link".to_string()],
+        visualization_views,
+        visualization_view_lanes: visualization_view_lanes(),
+        reserved_visualization_view_names: reserved_visualization_view_names(),
+        telemetry_rows,
+        telemetry_row_lanes: telemetry_row_lanes(),
+        telemetry_channels,
+        reserved_telemetry_channels: reserved_telemetry_channels(),
         layer_signatures: closeout_layer_signatures(),
         layer_signature_lanes: layer_signature_lanes(),
         reserved_layer_signature_names: reserved_layer_signature_names(),

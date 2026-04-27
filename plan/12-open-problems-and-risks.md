@@ -30,6 +30,7 @@
 - `TermSignature` first cut の exact granularity、reserved kind の扱い、`LayerSignature` law surface
 - `MessageEnvelope` / `AuthEvidence` / transport insertion seam の final public shape
 - visualization / telemetry security の label / authority / redaction / retention model
+  - helper-local / report-local first cut は `0922` で actualize したが、final public viewer contract と retention は未決のまま残す
 - projection / placement validity report と world-sugar boundary
 - `Patch Req Prov Δ` / `AttachPoint` / activation cut / migration contract
 - avatar fairy follow helper surface、debug mode、active promotion条件

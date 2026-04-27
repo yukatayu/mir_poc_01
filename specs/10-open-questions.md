@@ -146,6 +146,12 @@
      - 未決なのは final public `AuthEvidence` kind、session / signature protocol、real network transport への widening である。
   4. visualization / telemetry security をどこまで typed effect として固定するか。
      static view / runtime view / label / authority / redaction / retention をどの layer へ置くか。
+     - 2026-04-27 時点で helper-local / report-local first cut は actualize した。
+       Sugoroku helper `visualization_views` / `telemetry_rows` / `--debug visualization` と、
+       clean near-end report / closeout の `VisualizationView` / `TelemetryRow` inventory までは
+       current line に上げてよい。
+     - 未決なのは final public visualization schema、retention policy、multi-tenant telemetry service、
+       cross-place projection viewer である。
   5. projection / placement mobility をどこまで docs-first に固定するか。
      system-wide source から server / participant / adapter / visualizer へ projection するときの validity report と stop line をどう表すか。
   6. hot-plug `Patch Req Prov Δ` / `AttachPoint` の最小 surface と compatibility check をどこまで current line に上げるか。

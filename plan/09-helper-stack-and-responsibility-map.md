@@ -71,6 +71,13 @@ run_directory_named_profile
   - clean near-end closeout `message_envelope_lanes` / `auth_evidence_kinds` / `transport_seams`
   を helper-local / report-local evidence inventory として見せてよい。
   - これは final public message schema、final public auth protocol、final public transport contract を意味しない。
+- current sample-visible visualization / telemetry cut では、
+  - Sugoroku helper `run_sample()` payload の `visualization_views` / `telemetry_rows`
+  - Sugoroku `--debug visualization`
+  - clean near-end `CleanNearEndSampleReport.visualization_views` / `telemetry_rows`
+  - clean near-end closeout `visualization_views` / `telemetry_rows`
+  を helper-local / report-local evidence inventory として見せてよい。
+  - これは final public visualization protocol、final public telemetry schema、retention policy、multi-tenant viewer contract を意味しない。
 - current sample-visible verifier preview cut では、
   - `formal_hook_status`
   - `subject_kind`

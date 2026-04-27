@@ -82,6 +82,9 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
 - `layers`
   - `LayerSignature` first cut の helper-local inventory view です。current helper では `verification`、
     `runtime_trace`、`membership` layer だけを active に見せ、`auth` / `transport` / `telemetry` などは reserve に留めます。
+- `visualization`
+  - `VisualizationProtocol` first cut の helper-local inventory view です。`visualization_views` と
+    `telemetry_rows` を label / authority / redaction 付きで並べ、helper-local evidence view だと明示します。
 
 These helper-local outputs are evidence-oriented debug views. They are not the final public visualization protocol.
 
@@ -91,5 +94,6 @@ These helper-local outputs are evidence-oriented debug views. They are not the f
 - `docs/research_abstract/hands_on_sugoroku_sample_matrix.md`
 - `docs/research_abstract/hands_on_sugoroku_detail.md`
 - `docs/research_abstract/hands_on_sugoroku_07_message_envelope_auth.md`
+- `docs/research_abstract/hands_on_sugoroku_08_visualization_protocol.md`
 - `docs/reports/0909-sugoroku-world-runtime-attachment-vertical-slice.md`
 - `docs/reports/0916-sugoroku-sample-progress-alignment.md`

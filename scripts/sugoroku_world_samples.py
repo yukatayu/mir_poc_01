@@ -229,6 +229,54 @@ class MessageEnvelope:
         }
 
 
+@dataclass(frozen=True)
+class TelemetryRow:
+    row_id: str
+    row_kind: str
+    label: str
+    authority: str
+    redaction: str
+    source_refs: list[str]
+    fields: dict[str, Any]
+    notes: list[str] = field(default_factory=list)
+
+    def to_json(self) -> dict[str, Any]:
+        return {
+            "row_id": self.row_id,
+            "row_kind": self.row_kind,
+            "label": self.label,
+            "authority": self.authority,
+            "redaction": self.redaction,
+            "source_refs": list(self.source_refs),
+            "fields": dict(self.fields),
+            "notes": list(self.notes),
+        }
+
+
+@dataclass(frozen=True)
+class VisualizationView:
+    view_id: str
+    view_kind: str
+    label: str
+    authority: str
+    redaction: str
+    source_refs: list[str]
+    summary: dict[str, Any]
+    notes: list[str] = field(default_factory=list)
+
+    def to_json(self) -> dict[str, Any]:
+        return {
+            "view_id": self.view_id,
+            "view_kind": self.view_kind,
+            "label": self.label,
+            "authority": self.authority,
+            "redaction": self.redaction,
+            "source_refs": list(self.source_refs),
+            "summary": dict(self.summary),
+            "notes": list(self.notes),
+        }
+
+
 @dataclass
 class MessageQueue:
     place_id: str
@@ -1034,12 +1082,240 @@ def _message_envelopes(
     return [envelope.to_json() for envelope in envelopes]
 
 
+def _telemetry_rows(
+    sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None
+) -> list[TelemetryRow]:
+    rows: list[TelemetryRow] = []
+    if sample_id == "03_roll_publish_handoff":
+        membership_epoch = runtime.registry.membership_epoch if runtime is not None else 0
+        envelopes = {
+            row["envelope_id"]: row for row in result.get("message_envelopes", [])
+        }
+        roll_request = envelopes.get("roll_request#1", {})
+        handoff_notice = envelopes.get("handoff_notice#1", {})
+        rows.extend(
+            [
+                TelemetryRow(
+                    row_id="roll_request#1",
+                    row_kind="message_dispatch",
+                    label="helper:game-transition",
+                    authority="InspectLocalQueue(SugorokuGame#1)",
+                    redaction="omit_auth_evidence_payload",
+                    source_refs=["message_envelopes[roll_request#1]", "turn_trace", "roll"],
+                    fields={
+                        "place": roll_request.get("to_place", "SugorokuGamePlace#1"),
+                        "membership_epoch": roll_request.get(
+                            "membership_epoch", membership_epoch
+                        ),
+                        "dispatch_outcome": roll_request.get(
+                            "dispatch_outcome", "accepted"
+                        ),
+                        "payload_ref": roll_request.get("payload_ref", "take_turn_alice"),
+                    },
+                    notes=[
+                        "helper-local local-queue dispatch summary",
+                        "derived from current message_envelopes payload",
+                    ],
+                ),
+                TelemetryRow(
+                    row_id="handoff_notice#1",
+                    row_kind="published_roll",
+                    label="helper:published-history",
+                    authority="ObservePublishedHistory(SugorokuGame#1)",
+                    redaction="published_history_only",
+                    source_refs=["message_envelopes[handoff_notice#1]", "roll", "turn_trace"],
+                    fields={
+                        "place": handoff_notice.get("to_place", "ParticipantPlace[Bob]"),
+                        "membership_epoch": handoff_notice.get(
+                            "membership_epoch", membership_epoch
+                        ),
+                        "dispatch_outcome": handoff_notice.get(
+                            "dispatch_outcome", "accepted"
+                        ),
+                        "witness_count": len(handoff_notice.get("witness_refs") or []),
+                        "next_owner": result.get("game", {}).get("dice_owner"),
+                    },
+                    notes=[
+                        "helper-local published-history telemetry row",
+                        "derived from current message_envelopes payload",
+                    ],
+                ),
+            ]
+        )
+    if sample_id == "05_late_join_history_visible":
+        membership_epoch = result.get("membership_epoch")
+        visible_rolls = (result.get("Dave") or {}).get("visible_rolls", [])
+        rows.extend(
+            [
+                TelemetryRow(
+                    row_id="late_join_membership#1",
+                    row_kind="membership_update",
+                    label="helper:membership",
+                    authority="ObserveMembership(WorldMembers)",
+                    redaction="pending_turn_order_only",
+                    source_refs=["membership", "Dave.pending_player"],
+                    fields={
+                        "place": "WorldServerPlace",
+                        "membership_epoch": membership_epoch,
+                        "pending_players": ["Dave"],
+                    },
+                    notes=[
+                        "helper-local membership telemetry row",
+                        "late join increments membership registry",
+                    ],
+                ),
+                TelemetryRow(
+                    row_id="late_join_history#1",
+                    row_kind="history_visibility",
+                    label="helper:published-history",
+                    authority="ObservePublishedHistory(SugorokuGame#1)",
+                    redaction="published_history_only",
+                    source_refs=["Dave.visible_rolls", "membership"],
+                    fields={
+                        "place": "ParticipantPlace[Dave]",
+                        "membership_epoch": membership_epoch,
+                        "visible_roll_count": len(visible_rolls),
+                    },
+                    notes=[
+                        "helper-local published-history telemetry row",
+                        "pending player sees published history only",
+                    ],
+                ),
+            ]
+        )
+    if sample_id == "08_reset_interleaving_model_check":
+        rows.append(
+            TelemetryRow(
+                row_id="reset_model_check#1",
+                row_kind="model_check_summary",
+                label="helper:verification",
+                authority="ObserveVerificationSummary(SugorokuGame#1)",
+                redaction="counterexample_shape_summary_only",
+                source_refs=["model_check", "verification"],
+                fields={
+                    "property": "no_old_epoch_handoff_after_reset",
+                    "result": result.get("model_check_result"),
+                },
+                notes=["second-line verification summary"],
+            )
+        )
+    return rows
+
+
+def _visualization_views(
+    sample_id: str,
+    result: dict[str, Any],
+    telemetry_rows: list[TelemetryRow],
+) -> list[dict[str, Any]]:
+    views: list[VisualizationView] = []
+    if sample_id == "03_roll_publish_handoff":
+        views.extend(
+            [
+                VisualizationView(
+                    view_id="turn_timeline",
+                    view_kind="turn_timeline",
+                    label="helper:published-history",
+                    authority="ObservePublishedHistory(SugorokuGame#1)",
+                    redaction="published_history_only",
+                    source_refs=["roll", "turn_trace", "game", "message_envelopes"],
+                    summary={
+                        "published_witness": result.get("roll", {}).get("published_witness", "draw_pub#1"),
+                        "next_owner": result.get("game", {}).get("dice_owner"),
+                        "telemetry_refs": [row.row_id for row in telemetry_rows],
+                    },
+                    notes=[
+                        "helper-local visualization first cut",
+                        "summary-style state snapshot for the active game",
+                    ],
+                ),
+                VisualizationView(
+                    view_id="message_route",
+                    view_kind="message_route",
+                    label="helper:transport-audit",
+                    authority="InspectLocalQueue(SugorokuGame#1)",
+                    redaction="omit_auth_evidence_payload",
+                    source_refs=["message_envelopes", "turn_trace"],
+                    summary={
+                        "envelope_ids": [row["envelope_id"] for row in result.get("message_envelopes", [])],
+                        "dispatch_outcomes": [
+                            row["dispatch_outcome"]
+                            for row in result.get("message_envelopes", [])
+                        ],
+                        "telemetry_refs": [row.row_id for row in telemetry_rows[:1]],
+                    },
+                    notes=[
+                        "helper-local visualization first cut",
+                        "publish -> witness -> handoff evidence trace",
+                    ],
+                ),
+                VisualizationView(
+                    view_id="verification_summary",
+                    view_kind="verification_summary",
+                    label="helper:verification",
+                    authority="ObserveVerificationSummary(SugorokuGame#1)",
+                    redaction="verification_summary_only",
+                    source_refs=["verification", "properties_passed"],
+                    summary={
+                        "properties_passed": list(result.get("properties_passed", [])),
+                        "telemetry_refs": [row.row_id for row in telemetry_rows[1:]],
+                    },
+                    notes=[
+                        "helper-local visualization first cut",
+                        "no final public viewer contract implied",
+                    ],
+                ),
+            ]
+        )
+    if sample_id == "05_late_join_history_visible":
+        visible_rolls = (result.get("Dave") or {}).get("visible_rolls", [])
+        views.append(
+            VisualizationView(
+                view_id="membership_snapshot",
+                view_kind="membership_snapshot",
+                label="helper:membership",
+                authority="ObserveMembership(WorldMembers)",
+                redaction="pending_turn_order_only",
+                source_refs=["membership", "Dave.visible_rolls"],
+                summary={
+                    "pending_players": ["Dave"],
+                    "visible_roll_count": len(visible_rolls),
+                    "telemetry_refs": [row.row_id for row in telemetry_rows],
+                },
+                notes=[
+                    "helper-local visualization first cut",
+                    "active/pending distinction remains visible",
+                ],
+            )
+        )
+    if sample_id == "08_reset_interleaving_model_check":
+        views.append(
+            VisualizationView(
+                view_id="verification_summary",
+                view_kind="verification_summary",
+                label="helper:verification",
+                authority="ObserveVerificationSummary(SugorokuGame#1)",
+                redaction="counterexample_shape_summary_only",
+                source_refs=["model_check", "verification"],
+                summary={
+                    "property": "no_old_epoch_handoff_after_reset",
+                    "result": result.get("model_check_result"),
+                    "telemetry_refs": [row.row_id for row in telemetry_rows],
+                },
+                notes=["model-check summary for helper-local verification view"],
+            )
+        )
+    return [view.to_json() for view in views]
+
+
 def _finalize_result(
     sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None = None
 ) -> dict[str, Any]:
     result["term_signatures"] = _term_signatures(sample_id, result)
     result["layer_signatures"] = _layer_signatures(sample_id, result)
     result["message_envelopes"] = _message_envelopes(sample_id, result, runtime)
+    telemetry_rows = _telemetry_rows(sample_id, result, runtime)
+    result["telemetry_rows"] = [row.to_json() for row in telemetry_rows]
+    result["visualization_views"] = _visualization_views(sample_id, result, telemetry_rows)
     return result
 
 
@@ -1483,6 +1759,16 @@ def closeout() -> dict[str, Any]:
             for row in run_sample(sample["sample_id"])["layer_signatures"]
         }
     )
+    visualization_views = [
+        row
+        for sample in SAMPLE_ROWS
+        for row in run_sample(sample["sample_id"])["visualization_views"]
+    ]
+    telemetry_rows = [
+        row
+        for sample in SAMPLE_ROWS
+        for row in run_sample(sample["sample_id"])["telemetry_rows"]
+    ]
     return {
         "active_sample_root": str(SAMPLE_ROOT),
         "sample_count": len(SAMPLE_ROWS),
@@ -1531,6 +1817,23 @@ def closeout() -> dict[str, Any]:
         "reserved_auth_evidence_modes": ["session_token", "signature"],
         "transport_seams": ["local_queue"],
         "reserved_transport_seams": ["loopback_socket", "network_link"],
+        "visualization_views": visualization_views,
+        "visualization_view_kinds": sorted(
+            {row["view_kind"] for row in visualization_views}
+        ),
+        "reserved_visualization_view_kinds": [
+            "place_graph",
+            "effect_route_graph",
+            "projection_view",
+        ],
+        "telemetry_rows": telemetry_rows,
+        "telemetry_row_kinds": sorted({row["row_kind"] for row in telemetry_rows}),
+        "redaction_policy_names": sorted(
+            {
+                row["redaction"]
+                for row in [*visualization_views, *telemetry_rows]
+            }
+        ),
         "layer_signature_kinds": layer_signature_kinds,
         "reserved_layer_signature_kinds": [
             "auth",
@@ -1547,6 +1850,7 @@ def closeout() -> dict[str, Any]:
             "--debug verification",
             "--debug signatures",
             "--debug envelopes",
+            "--debug visualization",
             "--debug layers",
             "--format json",
         ],
@@ -1684,6 +1988,32 @@ def _format_layers(result: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _format_visualization(result: dict[str, Any]) -> str:
+    lines = ["VISUALIZATION"]
+    for row in result.get("visualization_views", []):
+        lines.append(
+            f"  - {row['view_id']} kind={row['view_kind']} label={row['label']} authority={row['authority']} redaction={row['redaction']}"
+        )
+        lines.append(f"      source_refs: {', '.join(row.get('source_refs') or []) or 'none'}")
+        summary = row.get("summary") or {}
+        if summary:
+            rendered = ", ".join(f"{key}={value}" for key, value in summary.items())
+            lines.append(f"      summary: {rendered}")
+    lines.append("TELEMETRY")
+    for row in result.get("telemetry_rows", []):
+        lines.append(
+            f"  - {row['row_id']} kind={row['row_kind']} label={row['label']} authority={row['authority']} redaction={row['redaction']}"
+        )
+        lines.append(f"      source_refs: {', '.join(row.get('source_refs') or []) or 'none'}")
+        fields = row.get("fields") or {}
+        if fields:
+            rendered = ", ".join(f"{key}={value}" for key, value in fields.items())
+            lines.append(f"      fields: {rendered}")
+    if len(lines) == 2:
+        lines.append("  - none")
+    return "\n".join(lines)
+
+
 def format_pretty(payload: Any, *, debug: str | None = None) -> str:
     if isinstance(payload, list):
         return "\n".join(f"{row['sample_id']}: {row['summary']}" for row in payload)
@@ -1701,6 +2031,8 @@ def format_pretty(payload: Any, *, debug: str | None = None) -> str:
         return _format_signatures(payload)
     if debug == "envelopes":
         return _format_envelopes(payload)
+    if debug == "visualization":
+        return _format_visualization(payload)
     if debug == "layers":
         return _format_layers(payload)
     sample = payload.get("sample")
@@ -1776,6 +2108,7 @@ def build_parser() -> argparse.ArgumentParser:
             "verification",
             "signatures",
             "envelopes",
+            "visualization",
             "layers",
         ],
         default=None,

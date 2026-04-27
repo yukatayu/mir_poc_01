@@ -224,6 +224,91 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("session_token", result["reserved_auth_evidence_modes"])
         self.assertIn("local_queue", result["transport_seams"])
 
+    def test_roll_publish_handoff_exposes_visualization_and_telemetry(self) -> None:
+        result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
+
+        views = {row["view_id"]: row for row in result["visualization_views"]}
+        self.assertIn("turn_timeline", views)
+        self.assertIn("message_route", views)
+        self.assertEqual(views["turn_timeline"]["view_kind"], "turn_timeline")
+        self.assertEqual(views["turn_timeline"]["label"], "helper:published-history")
+        self.assertEqual(
+            views["turn_timeline"]["authority"],
+            "ObservePublishedHistory(SugorokuGame#1)",
+        )
+        self.assertEqual(
+            views["turn_timeline"]["redaction"], "published_history_only"
+        )
+        self.assertIn("roll", views["turn_timeline"]["source_refs"])
+        self.assertEqual(
+            views["turn_timeline"]["summary"]["published_witness"], "draw_pub#1"
+        )
+        self.assertEqual(views["turn_timeline"]["summary"]["next_owner"], "Bob")
+
+        telemetry = {row["row_id"]: row for row in result["telemetry_rows"]}
+        self.assertIn("roll_request#1", telemetry)
+        self.assertIn("handoff_notice#1", telemetry)
+        self.assertEqual(telemetry["roll_request#1"]["row_kind"], "message_dispatch")
+        self.assertEqual(
+            telemetry["roll_request#1"]["label"], "helper:game-transition"
+        )
+        self.assertEqual(
+            telemetry["roll_request#1"]["authority"],
+            "InspectLocalQueue(SugorokuGame#1)",
+        )
+        self.assertEqual(
+            telemetry["roll_request#1"]["redaction"], "omit_auth_evidence_payload"
+        )
+        self.assertEqual(
+            telemetry["handoff_notice#1"]["fields"]["dispatch_outcome"], "accepted"
+        )
+        self.assertEqual(
+            telemetry["handoff_notice#1"]["fields"]["witness_count"], 1
+        )
+
+    def test_late_join_visualization_marks_membership_redaction_boundary(self) -> None:
+        result = sugoroku_world_samples.run_sample("05_late_join_history_visible")
+
+        views = {row["view_id"]: row for row in result["visualization_views"]}
+        self.assertIn("membership_snapshot", views)
+        self.assertEqual(views["membership_snapshot"]["label"], "helper:membership")
+        self.assertEqual(
+            views["membership_snapshot"]["authority"],
+            "ObserveMembership(WorldMembers)",
+        )
+        self.assertEqual(
+            views["membership_snapshot"]["redaction"], "pending_turn_order_only"
+        )
+        self.assertEqual(
+            views["membership_snapshot"]["summary"]["pending_players"], ["Dave"]
+        )
+        self.assertEqual(
+            views["membership_snapshot"]["summary"]["visible_roll_count"], 1
+        )
+
+    def test_visualization_debug_prints_views_and_telemetry(self) -> None:
+        pretty = sugoroku_world_samples.format_pretty(
+            sugoroku_world_samples.run_sample("03_roll_publish_handoff"),
+            debug="visualization",
+        )
+
+        self.assertIn("VISUALIZATION", pretty)
+        self.assertIn("turn_timeline", pretty)
+        self.assertIn("label=helper:published-history", pretty)
+        self.assertIn("authority=ObservePublishedHistory(SugorokuGame#1)", pretty)
+        self.assertIn("TELEMETRY", pretty)
+        self.assertIn("roll_request#1", pretty)
+        self.assertIn("redaction=omit_auth_evidence_payload", pretty)
+
+    def test_closeout_records_visualization_debug_mode(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertIn("--debug visualization", result["debug_output_modes"])
+        self.assertIn("turn_timeline", result["visualization_view_kinds"])
+        self.assertIn("message_route", result["visualization_view_kinds"])
+        self.assertIn("message_dispatch", result["telemetry_row_kinds"])
+        self.assertIn("published_roll", result["telemetry_row_kinds"])
+
     def test_cli_run_json_prints_json_payload(self) -> None:
         buffer = StringIO()
         with mock.patch("sys.stdout", buffer):

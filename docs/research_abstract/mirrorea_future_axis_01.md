@@ -41,6 +41,7 @@ Mirrorea full runtime、final public API、real network、final auth stack、fin
 final public layer law schema を意味しません。
 
 さらに `MessageEnvelope / Auth seam` の first cut も close しました。
+さらに `VisualizationProtocol` の first cut も close しました。
 
 - Sugoroku helper に `message_envelopes` と `--debug envelopes`
 - clean near-end report / closeout に `MessageEnvelope` inventory
@@ -187,6 +188,7 @@ object attach/follow lifecycle を representative に検証する予定です。
 5. MessageEnvelope / Auth seam
    - close 済み。helper-local / report-local first cut まで actualize。
 6. VisualizationProtocol
+   - helper-local / report-local first cut は close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を追加した。
 7. Sugoroku vertical slice hardening
 8. Avatar fairy follow slice
 9. Projection / placement plan

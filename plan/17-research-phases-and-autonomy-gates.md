@@ -25,7 +25,7 @@
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` で layer-aware repo map を docs-first に固定
 - Mirrorea future lane:
-  `Macro 6` package 1 audit / package 2 AGENTS close の後に foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output` と `LayerSignature system` close を差し込み、next semantic carrier package を `MessageEnvelope / Auth seam` と読む
+  `Macro 6` package 1 audit / package 2 AGENTS close の後に foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol` close を差し込み、next semantic carrier package を typed external boundary / adapter と読む
 - reserve / mixed lane:
   `Macro 6 / 7` final public seam、real transport、packaging residual
 

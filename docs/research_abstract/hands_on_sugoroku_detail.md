@@ -509,3 +509,4 @@ MESSAGE ENVELOPES
 - `--debug signatures` は helper-local evidence view であり、final public signature schema / visualization protocol ではない。
 - `--debug envelopes` も helper-local evidence view であり、final public message schema / auth protocol ではない。
 - `--debug layers` も helper-local evidence view であり、final public layer law schema ではない。
+- `--debug visualization` も helper-local evidence view であり、final public viewer / telemetry contract ではない。
