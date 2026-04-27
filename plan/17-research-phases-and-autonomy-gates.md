@@ -25,7 +25,10 @@
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` で layer-aware repo map を docs-first に固定
 - Mirrorea future lane:
-  `Macro 6` package 1 audit / package 2 AGENTS close の後に foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external boundary / adapter docs-first plan、projection / placement、hot-plug docs-first plan、network transport docs-first plan、hands-on closeout、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep、`FAIRY-05` residual reacquire design review closeout、typed external synthetic preview helper widening、projection / placement executable widening を close し、next promoted package を Typed external boundary residual planned family review と読む
+  `Macro 6` では `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external boundary / adapter docs-first plan、projection / placement、hot-plug docs-first plan、network transport docs-first plan、hands-on closeout、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep、`FAIRY-05` residual reacquire design review closeout、typed external synthetic preview helper widening、projection / placement executable widening を close 済みと読む
+  - next promoted package は `P2` Typed external boundary residual planned family review
+  - next reopen point は `P3` Projection / placement residual emitted-program gate
+  - `P4-P9` は carrier / representative-slice hardening、`P10-P17` は first real implementation tranche、`P18` は final mixed gate
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

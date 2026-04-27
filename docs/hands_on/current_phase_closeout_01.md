@@ -76,14 +76,26 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 - active sample:
   `samples/clean-near-end/`
+- active base source corpus:
+  `samples/current-l2/`
+- active proof evidence:
+  `samples/lean/`
 - planned sample:
   `samples/not_implemented/`
 - prototype / historical:
   `samples/prototype/` と `samples/old/`
+- generated artifact reserve:
+  `samples/generated/`
+- helper-local preview:
+  script の `--debug` 出力、detached artifact、report-local inventory
 - dashboard:
   `samples_progress.md`
 - next queue:
   `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md`
+- final public API:
+  まだ deferred
+- deferred mixed gate:
+  parser/public API、auth/public contract、visualization/public contract、projection/public API、hot-plug/public API
 
 ## remaining mixed gate
 
@@ -102,8 +114,11 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. Typed external boundary residual planned family review
-2. Projection / placement residual emitted-program gate
+1. `P2` Typed external boundary residual planned family review
+2. `P3` Projection / placement residual emitted-program gate
+
+`P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
+後続の full queue は `tasks.md` と `progress.md` の current snapshot を参照してください。
 
 ## 関連文書
 

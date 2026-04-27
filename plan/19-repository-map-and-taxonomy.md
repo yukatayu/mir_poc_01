@@ -79,8 +79,6 @@ current recommendation:
 
 - `samples/clean-near-end/`
   active canonical executable suite
-  - `typed-external-boundary/`
-    phase 9 planned source family。current repo では synthetic preview helper がこの source stub family を参照する
 - `samples/current-l2/`
   base current-L2 source corpus
 - `samples/lean/`
@@ -90,6 +88,8 @@ current recommendation:
 
 - `samples/not_implemented/`
   planned skeleton family
+  - `typed-external-boundary/`
+    phase 9 planned source family。current repo では synthetic preview helper がこの source stub family を参照する
 - `samples/prototype/`
   historical prototype / compatibility anchor
 - `samples/old/`

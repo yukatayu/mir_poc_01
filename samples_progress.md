@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 23:26 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: promoted Typed external boundary residual planned family review、reopen Projection / placement residual emitted-program gate
+Last updated: 2026-04-28 03:27 JST
+Current repo-local focus: handoff 由来の future-plan integration / next package queue stabilization を close し、clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま `P2` typed external residual review と `P3` projection emitted-program gate を次段に揃える
+Current active packages: `P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate
 
 ## Legend
 
@@ -38,17 +38,17 @@ Progress:
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-27 23:26 JST | `0913`, `0920`, `0943` | source hierarchy と report discipline の current floor |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 03:27 JST | `0913`, `0920`, `0943`, `0945` | source hierarchy と report discipline の current floor |
 | `PH1` | Mir core | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | final parser / public API deferred |
-| `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | public shell / packaging deferred |
-| `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-27 19:56 JST | `0909`, `0916`, `0931` | runtime attach floor + helper-local attachpoint compatibility / activation evidence |
-| `SUG-03` | Sugoroku runtime | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-04-27 23:24 JST | `0909`, `0916`, `0918`, `0919`, `0942` | roll -> publish -> witness -> handoff。projection / visualization debug lane の基準点 |
-| `SUG-05` | shared-space membership | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | active runnable E2E | 90 | positive | 2026-04-27 15:59 JST | `0909`, `0916`, `0919` | membership timeline anchor |
-| `SUG-08` | theorem / model-check boundary | `samples/clean-near-end/sugoroku-world/08_reset_interleaving_model_check.mir` | active runnable E2E | 90 | positive | 2026-04-27 15:21 JST | `0909`, `0916` | reset safety bridge |
+| `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 03:27 JST | `0904`, `0913`, `0945` | public shell / packaging deferred |
+| `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-28 03:27 JST | `0909`, `0916`, `0931`, `0945` | runtime attach floor + helper-local attachpoint compatibility / activation evidence |
+| `SUG-03` | Sugoroku runtime | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-04-28 03:27 JST | `0909`, `0916`, `0918`, `0919`, `0942`, `0945` | roll -> publish -> witness -> handoff。projection / visualization debug lane の基準点 |
+| `SUG-05` | shared-space membership | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | active runnable E2E | 90 | positive | 2026-04-28 03:27 JST | `0909`, `0916`, `0919`, `0945` | membership timeline anchor |
+| `SUG-08` | theorem / model-check boundary | `samples/clean-near-end/sugoroku-world/08_reset_interleaving_model_check.mir` | active runnable E2E | 90 | positive | 2026-04-28 03:27 JST | `0909`, `0916`, `0945` | reset safety bridge |
 | `SUG-09` | hot-plug preview | `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | active TODO boundary | 75 | explicit TODO + rejection evidence | 2026-04-27 19:56 JST | `0909`, `0916`, `0925`, `0931` | completion evidence ではなく stop line |
-| `FAIRY-01` | avatar follow | `samples/clean-near-end/avatar-follow/01_follow_remote_head_with_local_fallback.mir` | active representative canary | 90 | positive | 2026-04-27 19:35 JST | `0917`, `0930` | visible remote head follow with explicit local fallback lineage |
-| `FAIRY-02` | avatar follow | `samples/clean-near-end/avatar-follow/02_remote_head_not_visible_falls_back_to_local.mir` | active representative canary | 90 | positive + fallback | 2026-04-27 20:55 JST | `0917`, `0930`, `0933` | visibility loss falls back locally and does not claim transport recovery |
-| `FAIRY-06` | avatar follow | `samples/clean-near-end/avatar-follow/06_model_check_no_detached_anchor_observed.mir` | active representative canary | 90 | verification | 2026-04-27 19:35 JST | `0917`, `0930` | detached-anchor safety verification bridge |
+| `FAIRY-01` | avatar follow | `samples/clean-near-end/avatar-follow/01_follow_remote_head_with_local_fallback.mir` | active representative canary | 90 | positive | 2026-04-28 03:27 JST | `0917`, `0930`, `0945` | visible remote head follow with explicit local fallback lineage |
+| `FAIRY-02` | avatar follow | `samples/clean-near-end/avatar-follow/02_remote_head_not_visible_falls_back_to_local.mir` | active representative canary | 90 | positive + fallback | 2026-04-28 03:27 JST | `0917`, `0930`, `0933`, `0945` | visibility loss falls back locally and does not claim transport recovery |
+| `FAIRY-06` | avatar follow | `samples/clean-near-end/avatar-follow/06_model_check_no_detached_anchor_observed.mir` | active representative canary | 90 | verification | 2026-04-28 03:27 JST | `0917`, `0930`, `0945` | detached-anchor safety verification bridge |
 | `AUTH-01` | auth seam | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local envelope carrier | 90 | positive + negative | 2026-04-27 23:24 JST | `0921`, `0941` | local queue baseline with `auth none`, membership freshness, capability refs, witness refs |
 | `VIS-01` | visualization | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local view/telemetry carrier | 90 | positive | 2026-04-27 23:24 JST | `0922`, `0942` | label / authority / redaction を持つ evidence-oriented view |
 | `PRJ-01` | projection / placement | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local projection preview | 75 | positive | 2026-04-27 23:24 JST | `0924`, `0942` | `projection_view` で system source から place split と observer view refs を visible にする。final emitted place program ではない |
@@ -62,18 +62,18 @@ Progress:
 | `PH3` | parser / checker cut | `crates/mir-ast/tests/*stage*`, `samples/current-l2/` | crate test surface | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | parser grammar freeze deferred |
 | `PH4` | shared-space membership / room boundary | `samples/clean-near-end/sugoroku-world/`, `plan/16-shared-space-membership-and-example-boundary.md` | runnable room boundary | 90 | positive + negative | 2026-04-27 19:56 JST | `0909`, `0916` | late join / leave / owner reassign / history visibility が current anchor |
 | `PH5` | theorem / model-check boundary | `samples/clean-near-end/{typing,model-check}`, `samples/lean/` | active bridge family | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | proof/model-check public contract absent |
-| `PH7` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/`, `scripts/sugoroku_world_samples.py` | active vertical slice | 90 | positive + negative | 2026-04-27 19:56 JST | `0909`, `0916`, `0931` | attach / handoff / witness / reset model-check / detach TODO boundary |
-| `PH8` | avatar follow | `samples/clean-near-end/avatar-follow/`, `samples/not_implemented/avatar-fairy-follow/` | widened active representative slice + residual planned family | 90 | positive + negative + verification | 2026-04-27 20:55 JST | `0917`, `0930`, `0933`, `0939` | active canary は `FAIRY-01/02/03/04/06`、residual planned family は `FAIRY-05` |
+| `PH7` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/`, `scripts/sugoroku_world_samples.py` | active vertical slice | 90 | positive + negative | 2026-04-28 03:27 JST | `0909`, `0916`, `0931`, `0945` | attach / handoff / witness / reset model-check / detach TODO boundary |
+| `PH8` | avatar follow | `samples/clean-near-end/avatar-follow/`, `samples/not_implemented/avatar-fairy-follow/` | widened active representative slice + residual planned family | 90 | positive + negative + verification | 2026-04-28 03:27 JST | `0917`, `0930`, `0933`, `0939`, `0945` | active canary は `FAIRY-01/02/03/04/06`、residual planned family は `FAIRY-05` |
 | `FAIRY-05` | avatar follow | `samples/not_implemented/avatar-fairy-follow/FAIRY-05_reacquire_after_return.md` | planned family | 10 | target only | 2026-04-27 21:38 JST | `0939` | explicit state timeline / anchor switch evidence が reopen 条件。carrier bundling は `UNRESOLVED` |
-| `PH9` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview subset + residual planned family | 75 | positive + negative | 2026-04-27 23:24 JST | `0923`, `0941` | phase 9 `.mir` direct semantic execution ではなく helper self-consistency + anchor comparison |
+| `PH9` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview subset + residual planned family | 75 | positive + negative | 2026-04-28 03:27 JST | `0923`, `0941`, `0945` | phase 9 `.mir` direct semantic execution ではなく helper self-consistency + anchor comparison |
 | `EXT-01/02/05` | typed external boundary | `samples/not_implemented/typed-external-boundary/` | residual planned family | 10 | target only | 2026-04-27 21:55 JST | `0923`, `0941` | final host-facing contract は mixed gate |
-| `EXT-03/04` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper subset | 75 | positive + negative | 2026-04-27 23:24 JST | `0941` | typed adapter failure lane、envelope split、redacted visualization lane |
+| `EXT-03/04` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper subset | 75 | positive + negative | 2026-04-28 03:27 JST | `0941`, `0945` | typed adapter failure lane、envelope split、redacted visualization lane |
 | `PH10` | MessageEnvelope / auth seam | Sugoroku helper、clean near-end runtime report | helper-local + report-local carrier | 90 | positive + negative | 2026-04-27 23:24 JST | `0921` | transport / auth / membership / capability / witness を collapse しない baseline |
 | `PH11` | TermSignature / LayerSignature | Sugoroku helper、clean near-end runtime report | helper-local + report-local inventory | 90 | positive | 2026-04-27 15:59 JST | `0918`, `0919` | final shared law schema ではない first cut |
 | `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/hands_on/projection_placement_views_01.md` | helper/report-local preview floor | 75 | positive | 2026-04-27 23:24 JST | `0924`, `0942` | preview floor only。final emitted program / optimizer / equivalence checker は deferred |
-| `PH13` | network transport | `scripts/network_transport_samples.py`, `samples/not_implemented/network-transport/` | helper-local canary family + planned source family | 75 | positive + negative | 2026-04-27 20:27 JST | `0926`, `0929`, `0932` | local queue / loopback / reconnect / typed failure / redacted route trace |
-| `NET-01` | network transport | `scripts/sugoroku_world_samples.py --transport loopback_socket` | helper-local loopback preview | 75 | positive + negative | 2026-04-27 20:27 JST | `0929`, `0932` | same-process parity preview |
-| `NET-02..05` | network transport | `scripts/network_transport_samples.py` | helper-local canary family | 75 | positive + negative | 2026-04-27 20:27 JST | `0932` | subprocess JSON bridge / stale reconnect reject / typed failure / redacted route trace |
+| `PH13` | network transport | `scripts/network_transport_samples.py`, `samples/not_implemented/network-transport/` | helper-local canary family + planned source family | 75 | positive + negative | 2026-04-28 03:27 JST | `0926`, `0929`, `0932`, `0945` | local queue / loopback / reconnect / typed failure / redacted route trace |
+| `NET-01` | network transport | `scripts/sugoroku_world_samples.py --transport loopback_socket` | helper-local loopback preview | 75 | positive + negative | 2026-04-28 03:27 JST | `0929`, `0932`, `0945` | same-process parity preview |
+| `NET-02..05` | network transport | `scripts/network_transport_samples.py` | helper-local canary family | 75 | positive + negative | 2026-04-28 03:27 JST | `0932`, `0945` | subprocess JSON bridge / stale reconnect reject / typed failure / redacted route trace |
 | `PH14` | hot-plug package | `plan/21-hotplug-attachpoint-roadmap.md`, `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | helper-local lifecycle canary + docs-first gate | 75 | positive + negative | 2026-04-27 19:56 JST | `0925`, `0931` | real migration / rollback / attachpoint runtime remain deferred |
 | `PH15` | visualization / IDE | Sugoroku helper views、runtime report-local views | helper-local + report-local first cut | 90 | positive | 2026-04-27 23:24 JST | `0922` | final public viewer contract は deferred |
 | `PH16` | compiler / backend / LLVM preparation | `/mnt/mirrorea-work`, `scripts/env/mirrorea_storage_env.sh`, `plan/23-compiler-backend-llvm-guardrail-roadmap.md` | storage / backend guardrail | 75 | operational positive | 2026-04-27 18:48 JST | `0913`, `0915`, `0927` | actual LLVM build / backend choice is still later |
@@ -82,11 +82,11 @@ Progress:
 
 | E2E ID | Scope | Path / command | Progress | What it proves | Last result |
 |---|---|---|---:|---|---|
-| `E2E-CLEAN-SUITE` | current-L2 -> clean near-end | `python3 scripts/current_l2_guided_samples.py closeout --format json` | 90 | current-L2 / clean suite floor が still green | pass 2026-04-27 18:55 JST |
-| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-27 21:10 JST |
-| `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar slice の active floor | pass 2026-04-27 20:55 JST |
-| `E2E-TYPED-EXTERNAL-TARGET` | source stub -> adapter preview -> anchor comparison | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper self-consistency + anchor comparison の current floor。phase 9 `.mir` direct execution ではない | pass 2026-04-27 23:18 JST |
-| `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-27 20:27 JST |
+| `E2E-CLEAN-SUITE` | current-L2 -> clean near-end | `python3 scripts/clean_near_end_samples.py closeout` | 90 | active clean near-end suite の positive / negative floor と closeout snapshot が still green | pass 2026-04-28 03:27 JST |
+| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-28 03:27 JST |
+| `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar slice の active floor | pass 2026-04-28 03:27 JST |
+| `E2E-TYPED-EXTERNAL-TARGET` | source stub -> adapter preview -> anchor comparison | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper self-consistency + anchor comparison の current floor。phase 9 `.mir` direct execution ではない | pass 2026-04-28 03:27 JST |
+| `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-28 03:27 JST |
 | `E2E-PROJECTION-TARGET` | system source -> emitted place program -> equivalent trace | future target: current `PRJ-01` / `PRJ-02` preview floor + later emitted-program runner | 10 | compositional projection E2E は still later。current package で actualize したのは helper/report-local preview floor だけ | target only |
 
 ## Build / storage environment
@@ -112,12 +112,21 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-28 03:27 JST | `python3 scripts/check_source_hierarchy.py` | pass | handoff mirror 後も required source hierarchy is intact |
+| 2026-04-28 03:27 JST | `python3 scripts/validate_docs.py` | pass | front-door docs / snapshot docs / report scaffold が current line と整合 |
+| 2026-04-28 03:27 JST | `python3 scripts/clean_near_end_samples.py smoke-all` | pass | active clean suite の smoke floor は green |
+| 2026-04-28 03:27 JST | `python3 scripts/clean_near_end_samples.py closeout` | pass | active clean suite の closeout snapshot は green |
+| 2026-04-28 03:27 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | Sugoroku world vertical slice の runnable floor を再確認 |
+| 2026-04-28 03:27 JST | `python3 scripts/avatar_follow_samples.py closeout --format json` | pass | avatar representative slice と residual `FAIRY-05` separation は current queue と一致 |
+| 2026-04-28 03:27 JST | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | pass | typed external synthetic preview subset / residual planned family split は維持された |
+| 2026-04-28 03:27 JST | `python3 scripts/network_transport_samples.py closeout --format json` | pass | helper-local transport canary family は green |
+| 2026-04-28 03:27 JST | `cargo test -p mir-ast` | pass | current-L2 / AST layer の crate test floor は green。support test warning のみ |
+| 2026-04-28 03:27 JST | `cargo test -p mir-runtime` | pass | clean near-end runtime / CLI / sample support を含む crate floor は green |
+| 2026-04-28 03:27 JST | `cargo test -p mir-semantics` | pass | Lean actual probe と model-check / proof notebook support を含む semantics floor は green |
+| 2026-04-28 03:27 JST | `git diff --check` | pass | whitespace-clean after handoff integration sync |
 | 2026-04-27 23:24 JST | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | pass | phase 9 current reading は synthetic preview helper + anchor comparison のまま |
 | 2026-04-27 23:24 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` | pass | `projection_view` は helper-local preview floor のまま |
 | 2026-04-27 23:24 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | `cross_place_projection` inventory は current report-local preview と一致 |
-| 2026-04-27 23:26 JST | `python3 scripts/check_source_hierarchy.py` | pass | required source hierarchy is intact after `0943` report add |
-| 2026-04-27 23:26 JST | `python3 scripts/validate_docs.py` | pass | docs scaffold is complete after snapshot cleanup and report add |
-| 2026-04-27 23:26 JST | `git diff --check` | pass | whitespace-clean after final docs sync |
 | 2026-04-27 22:52 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples` | pass | helper-side projection view test included |
 | 2026-04-27 22:52 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime-side `cross_place_projection` inventory test included |
 | 2026-04-27 21:55 JST | `python3 scripts/typed_external_boundary_samples.py check-all --format json` | pass | `EXT-03` / `EXT-04` helper subset current floor is green |

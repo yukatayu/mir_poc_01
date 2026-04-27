@@ -171,16 +171,20 @@ python3 scripts/current_l2_lean_sample_sync.py
 
 ## 読み始める順序
 
-1. `AGENTS.md`
-2. `Documentation.md`
-3. `progress.md`
-4. `tasks.md`
-5. `specs/00-document-map.md`
-6. `specs/01-charter-and-decision-levels.md`
-7. `specs/02-system-overview.md`
-8. `specs/03-layer-model.md`
-9. `specs/09-invariants-and-constraints.md`
-10. 必要な subsystem spec と `plan/00-index.md`
+この README の次は、原則として次の順で読みます。
+
+1. `Documentation.md`
+2. current status / roadmap / remaining steps を扱う task なら `progress.md` と `tasks.md`
+3. phase recut / roadmap rewrite / progress/tasks reorganization を扱う task なら `.docs/progress-task-axes.md`
+4. `specs/00-document-map.md`
+5. `specs/01-charter-and-decision-levels.md`
+6. `specs/02-system-overview.md`
+7. `specs/03-layer-model.md`
+8. `specs/09-invariants-and-constraints.md`
+9. 必要な subsystem spec と `plan/00-index.md`
+
+task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、その handoff を user 指示順で先に読みます。
+ただし handoff は規範正本ではなく、必要な内容は `specs/` / `plan/` / docs / report へ mirror して扱います。
 
 ## いま参照すべき docs
 
@@ -211,13 +215,23 @@ python3 scripts/current_l2_lean_sample_sync.py
 
 - active sample:
   `samples/clean-near-end/`
+- active base current-L2 corpus:
+  `samples/current-l2/`
 - active Sugoroku world vertical slice:
   `samples/clean-near-end/sugoroku-world/`
 - active Lean material:
   `samples/lean/`
+- planned skeleton family:
+  `samples/not_implemented/`
+- prototype / compatibility anchor:
+  `samples/prototype/`
 - historical archive:
   `samples/old/2026-04-22-pre-clean-near-end/`
   と
   `samples/lean/old/2026-04-22-pre-clean-near-end/`
+- generated artifact reserve:
+  `samples/generated/`
 
-archive は比較用の履歴です。active canonical sample としては扱いません。
+`samples/not_implemented/` は archive ではなく planned family です。
+archive は比較用の履歴であり、active canonical sample としては扱いません。
+generated artifact reserve と helper-local preview は source sample と混同しません。

@@ -53,10 +53,20 @@
 - repo-local debug / trace / snapshot line は near-term
 - multi-tenant viewer policy、retention、redaction automation、public protocol hardening は heavy
 
+### 5g. effect substrate / host boundary at scale
+
+- effect-based OS-like substrate の current reading、typed external effect boundary、typed telemetry / visualization lane は near-term
+- standard I/O builtin、final host ABI、browser / console / overlay / VR concrete contract、adapter-family freeze は heavy
+
 ### 6. packaging / host integration
 
 - repo-local helper / CLI は current line
 - installed binary、FFI、engine adapter、host-runtime contract は heavy
+
+### 6b. storage / LLVM / backend provisioning at scale
+
+- `/mnt/mirrorea-work` guardrail、`target/` cutover、storage/env helper は near-term
+- actual LLVM build、backend choice、durable build cache policy、packaging image line は heavy
 
 ### 7. domain / application realization
 
@@ -67,4 +77,5 @@
 
 - current layer を heavy line に巻き戻さない
 - docs-first TermSignature / LayerSignature / MessageEnvelope / Visualization / Projection / HotPlug package は near-term に進めてよい
+- effect-based substrate reading は inner interpretation に留め、std I/O builtin や final host contract freeze を先回りしない
 - ただし production auth、real transport、public visualization API、deployment-grade migration は heavy workstream として切り離す

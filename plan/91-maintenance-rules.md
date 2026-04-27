@@ -52,14 +52,17 @@ current L2 / parser-free PoC / helper stack / roadmap task では、少なくと
 
 1. `README.md`
 2. `Documentation.md`
-3. `specs/00-document-map.md`
-4. `specs/01-charter-and-decision-levels.md`
-5. `specs/02-system-overview.md`
-6. `specs/03-layer-model.md`
-7. `specs/09-invariants-and-constraints.md`
-8. `plan/00-index.md`
-9. 関連する `plan/` 本文
-10. 必要な `specs/examples/`、report chain、code anchor
+3. current status / progress / remaining steps / roadmap task なら `progress.md`
+4. phase recut / roadmap rewrite / progress/tasks reorganization task なら `.docs/progress-task-axes.md`
+5. task が named `sub-agent-pro/*.md` handoff を指定した場合は、その handoff を user 指示順で先に読む
+6. `specs/00-document-map.md`
+7. `specs/01-charter-and-decision-levels.md`
+8. `specs/02-system-overview.md`
+9. `specs/03-layer-model.md`
+10. `specs/09-invariants-and-constraints.md`
+11. `plan/00-index.md`
+12. 関連する `plan/` 本文
+13. 必要な `specs/examples/`、report chain、code anchor
 
 ただし、**規範判断の正本は常に `specs/`** である。
 `plan/` はその現況整理と導線であり、規範文書を置き換えない。

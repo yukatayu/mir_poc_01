@@ -10,6 +10,20 @@
 4. typed-effect wiring platform が、container 化された、あるいはその他の opaque な software を routing layer でより inspectable・contract-aware・rewritable にできること。
 5. 上位システム（virtual reality social spaces、synchronized web views、collaborative editors、knowledge spaces、Reversed Library）を、その下位層を application-specific assumption に潰さずに構築できること。
 
+### Current operational axis
+
+この repo で shorthand として使う current operational axis は次である。
+
+```text
+正しい理論に基づき、
+正しく hot-plug でき、
+Place をまたいで実行・通信・検証・可視化できる
+仮想空間システムを作る。
+```
+
+これは Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform の separability を消す宣言ではない。
+どの層をどこまで正本化するかは、引き続き decision level と subsystem boundary に従う。
+
 ## Non-goals
 
 このプロジェクトは、現時点では次を目的としない。

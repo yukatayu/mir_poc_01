@@ -30,6 +30,8 @@
 - authentication を transport に潰さない
 - helper-local current cut では `auth none` baseline、`membership_epoch` / `member_incarnation` freshness、`witness_refs` separate lane を visible にしてよい
 - visualization / telemetry を untyped debug leak にしない
+- effect-based OS-like substrate という内側の解釈を使っても、standard I/O core built-in 化や subsystem collapse は行わない
+- verification / visualization / telemetry は `VerificationLayer` composition の current candidate として typed lane を保つ
 - standard I/O を Mir core primitive にせず、typed external boundary の planned familyは adapter / transport / auth / witness / visualization を separate lane として保つ
 - `atomic_cut` を room-level durable commit にしない
 - system-wide source から place-specific program へ projection できる性質を future line の invariant として保つ

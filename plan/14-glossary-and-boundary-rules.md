@@ -38,6 +38,50 @@
 - 分散 fabric / control plane 側の層
 - Mir と関連するが、current PoC の主眼そのものではない
 
+### Place
+
+- participant / principal そのものではない
+- state / queue / capability / visibility / observation frontier を持つ execution locus
+- system-wide source から place-specific program へ projection するときの基本単位
+
+### TermSignature
+
+- term / transition / effect / message / adapter をまたぐ signature inventory
+- current repo では helper-local / report-local evidence carrier
+- final public signature schema を意味しない
+
+### LayerSignature
+
+- auth / verification / visualization / transport / telemetry などの layer を
+  `requires / provides / transforms / checks / emits / laws` で読む current carrier
+- current repo では first cut の evidence-oriented naming に留める
+
+### VerificationLayer
+
+- finite-index checker、theorem bridge、model-check second line、runtime policy preview、
+  visualization / telemetry lane を typed layer composition として読む current explanation 語彙
+- hidden verifier builtin や final public verifier contract を意味しない
+
+### MessageEnvelope
+
+- transport insertion seam 上に見える message carrier
+- authentication / authorization / membership / capability / witness を collapse しない current split を支える
+
+### AuthEvidence
+
+- authentication に関する evidence carrier
+- current helper-local baseline は `auth none` だが、final public kind / session / signature protocol は未決
+
+### VisualizationProtocol
+
+- static view / runtime view / label / authority / redaction / telemetry を含む可視化 carrier の current explanation 語彙
+- helper-local preview と final public viewer contract を分けて読む
+
+### effect-based OS-like substrate
+
+- Mirrorea / adapter / visualization / telemetry の内側を説明するための current interpretation
+- standard I/O を Mir core primitive に戻したり、subsystem boundary を collapse したりする根拠にはしない
+
 ### PrismCascade
 
 - media graph kernel / optional project / side-track に近い比較対象
@@ -163,6 +207,8 @@
 | bundle | manifest | bundle は current helper 単位、manifest は future option |
 | profile | named alias | profile は request carrier、named alias はその上の薄い catalog |
 | docs mirror | code source of truth | docs は説明、code は implementation source、tests は public behavior coverage |
+| helper-local preview | final public API | preview は repo-local evidence floor、public API は final mixed gate |
+| generated artifact | source sample | generated artifact は bridge evidence または reserve、source sample ではない |
 
 ## boundary rule の短いまとめ
 

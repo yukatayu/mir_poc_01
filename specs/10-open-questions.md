@@ -138,6 +138,18 @@
      2026-04-27 時点で helper-local / report-local inventory は actualize したが、term / transition / effect / message / adapter のどこまでを正本 carrier に入れるか、reserved kind をどう扱うかは未決定である。
   2. `LayerSignature` system の law surface をどこまで current docs に上げるか。
      no hidden authority、no hidden data downgrade、evidence preservation、placement preservation をどう machine-check / theorem / runtime policy / visualization に配るか。
+  2a. `VerificationLayer` composition をどこまで explicit な named layer として扱うか。
+     finite-index checker、theorem bridge、model-check second line、runtime policy preview、visualization / telemetry lane を
+     1 つの typed composition として見せる価値は高いが、helper-local signature dump や report-local inventory を
+     final public verifier contract や hidden verifier builtin と誤読させてはならない。
+     - 2026-04-28 時点では `TermSignature` / `LayerSignature` / report-local inventory により first cut の evidence carrier は actualize してよい。
+     - 未決なのは exact composition law、public naming、machine-check と theorem / runtime policy / visualization の責務分担である。
+  2b. effect-based OS-like substrate という内側の解釈をどこまで docs-first に固定するか。
+     Mirrorea / adapter / visualization / telemetry の内側をそう読むこと自体は有用だが、
+     standard I/O を Mir core primitive に戻したり、Mir / Mirrorea / Typed-Effects Wiring Platform を 1 つの runtime へ潰したり、
+     authentication を transport に埋め込んだりする根拠にはしてはならない。
+     - 2026-04-28 時点では、これは内側の説明語彙としてのみ current line に上げてよい。
+     - 未決なのは、これを formal layer naming へ上げるか、説明用 prose に留めるかである。
   3. `MessageEnvelope` / `AuthEvidence` / transport insertion seam の最小 shape をどう置くか。
      auth を transport に潰さず、authorization / membership / capability / witness をどう separate に保つか。
      - 2026-04-27 時点で helper-local / report-local first cut は actualize した。

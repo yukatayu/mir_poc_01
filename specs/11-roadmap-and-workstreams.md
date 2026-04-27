@@ -1076,34 +1076,46 @@ current active floor は引き続き clean near-end suite と Sugoroku world ver
 
 ### recommended package order
 
-1. current-state audit
-   - source hierarchy、old/new sample、stale active reference、existing docs drift を洗い直す。
-2. AGENTS.md and reporting discipline
-   - source hierarchy、anti-shortcut、validation honesty、progress/tasks/report synchronization を更新する。
-3. TermSignature registry
-   - term / transition / effect / message / adapter をまたぐ signature carrier と debug dump を置く。
-4. LayerSignature system
-   - auth / verification / visualization / transport / telemetry を typed layer として合成する metadata と law surface を置く。
-5. MessageEnvelope / Auth seam
-   - transport / auth / membership / capability / witness を分けた envelope carrier を置く。
-6. VisualizationProtocol
-   - static view / runtime trace / label / authority / redaction を持つ visualization / telemetry surface を置く。
-7. Sugoroku vertical slice hardening
-   - membership registry、world sugar、join/leave/detach boundary、debug view を harden する。
-8. Avatar fairy follow slice
-   - `FollowAnchor`、visibility guard、fallback lineage、stale anchor rejection を representative sample にする。
-9. Projection / placement plan
-   - source-to-place projection、server / participant / adapter / visualizer split、validity report を整理する。
-10. Hot-plug Patch / AttachPoint
-    - `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration contract を整理する。
-11. Network transport
-    - `local_queue` baseline から loopback / reconnect / failure matrix へ widening する docs-first ladder を整理する。
-12. Compiler/backend/LLVM preparation
-    - external workdir、`CARGO_HOME`、LLVM path、cleanup safety、small-VPS guardrail を docs-first + non-destructive probe で整理する。
-13. hands-on docs
-    - 日本語で current sample / future queue / helper output / stop line を読み分ける docs を揃える。
-14. closeout
-    - docs / plan / progress / tasks / report を再同期し、validation と skip reason を固定する。
+P0. Current-state audit and source-hierarchy validation
+  - source hierarchy、old/new sample、stale active reference、existing docs drift を洗い直す。
+P1. Repository layer map and `samples_progress.md` stabilization
+  - repo taxonomy、active/planned/archive/generated boundary、dashboard discipline を current snapshot に同期する。
+P2. Typed external boundary residual planned family review
+  - `EXT-01` / `EXT-02` / `EXT-05` residual planned family と `EXT-03` / `EXT-04` synthetic preview subset の reopen 条件を整理する。
+P3. Projection / placement residual emitted-program gate
+  - helper/report-local preview floor と emitted place program / equivalence gate を分離する。
+P4. `TermSignature` registry hardening
+  - term / transition / effect / message / adapter をまたぐ signature carrier の naming / granularity を tighten する。
+P5. `LayerSignature` system hardening
+  - auth / verification / visualization / transport / telemetry を typed layer として合成する metadata / law surface を tighten する。
+P6. `MessageEnvelope` / `AuthEvidence` seam hardening
+  - transport / auth / authorization / membership / capability / witness を分けた envelope carrier を tighten する。
+P7. `VisualizationProtocol` + `VisualizationSecurity`
+  - static view / runtime trace / label / authority / redaction / telemetry retention の current line を tighten する。
+P8. Sugoroku runtime attach hardening
+  - membership registry、world sugar、join/leave/detach boundary、hot-plug lifecycle debug lane を harden する。
+P9. Avatar fairy follow hardening
+  - `FollowAnchor`、visibility guard、fallback lineage、stale anchor rejection、residual `FAIRY-05` gate を harden する。
+P10. `mirrorea-core` first real implementation tranche
+  - placeholder crate から first real runtime substrate へ進める。
+P11. logical multi-place runtime / emulator tranche
+  - current helper-local emulator を crate-side runtime substrate へ寄せる。
+P12. external adapter / host boundary tranche
+  - typed external boundary を host-facing adapter seam として tighten する。
+P13. network transport minimal alpha
+  - helper-local canary から real socket / session / replay minimal alpha へ widening する。
+P14. hot-plug `Patch` / `AttachPoint` package-manager tranche
+  - compatibility、activation、migration、rollback を package-manager concern として widen する。
+P15. projection/codegen first emitted server/client programs
+  - system-wide source から emitted place program への first actualization を行う。
+P16. visual debugger / viewer first public prototype
+  - typed visualization / telemetry を public prototype viewer へ widen する。
+P17. storage / LLVM / backend preparation
+  - external workdir、LLVM、backend target、cleanup safety を implementation-ready に寄せる。
+P18. public API / parser grammar gate
+  - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
+
+2026-04-28 時点で `P0` と `P1` は close し、next promoted package は `P2`、next reopen point は `P3` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 

@@ -123,8 +123,10 @@
 - `docs/reports/0933-*` で `Avatar fairy follow residual widening` を close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた
 - `docs/reports/0934-*` で `cross-package sweep` を close し、active evidence / planned family / mixed gate / next queue の current reading を recut した
 - `docs/reports/0939-*` で `FAIRY-05 residual reacquire design` を docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを固定した
+- `docs/reports/0945-mirrorea-next-stage-plan-integration.md` で next-stage future-plan integration / next package queue stabilization を close し、handoff 由来の project axis、source hierarchy、queue numbering、snapshot docs を current repo へ再同期した
 - phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
-- package 6 以降の closed chain は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout、`NET-01..05` helper-local transport canary、avatar representative slice widening、hot-plug helper-local lifecycle canary、cross-package sweep、`FAIRY-05` docs-first design closeout、typed external helper-local executable widening までである。current next line は projection / placement executable widening、その reopen point は typed external residual planned family review と読む
+- closed chain の current reading は、`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、phase 9 typed external docs-first / synthetic preview widening、phase 12 projection docs-first / preview widening、phase 13 transport canary、phase 14 hot-plug lifecycle canary、phase 16 backend/LLVM guardrail、phase 8 avatar representative slice / residual design closeout までである
+- current next line は `P2` Typed external boundary residual planned family review、その reopen point は `P3` Projection / placement residual emitted-program gate と読む
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line
@@ -142,6 +144,8 @@
 - active current layer、sample progress discipline、Mirrorea future-axis carrier queue を 1 本の “実装済み” line に潰さない
 - `world` は current Sugoroku sample では host/server-side sugar として読み、Mir core primitive として既成事実化しない
 - authentication / authorization / membership / capability / witness / visualization / telemetry を transport や debug leak に潰さない
+- effect-based OS-like substrate という内側の解釈を使っても、Mir core standard I/O primitive や subsystem collapse を既成事実化しない
+- `VerificationLayer` composition は typed layer composition の current reading に留め、hidden verifier builtin や final public verifier contract と混同しない
 - `auth none` baseline を final public auth protocol と混同せず、helper-local / report-local carrier の stop line を明記する
 - root disk 上の `target/` 膨張を放置せず、external workdir が使えるなら heavy disposable artifact をそこへ逃がす
 - old sample archive と current active sample の区別を、README / Documentation / progress / tasks / `samples_progress.md` / research_abstract で常に対にして書く

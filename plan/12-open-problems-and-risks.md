@@ -16,6 +16,8 @@
 | theorem / model-check overclaim | proof workflow | OPEN | generated stub / model-check carrier を production binding と誤読する | repo-local bridge と public contract を分ける |
 | auth-transport collapse | Mirrorea layering | 低下したが継続監視 | envelope / adapter 設計で authentication を transport に潰す | `MessageEnvelope / AuthEvidence` seam の helper-local / report-local first cut を維持し、final public widening を後段に残す |
 | visualization / telemetry leak | observability | NEW | debug output が label / authority / redaction を回避する | typed visualization / telemetry line を package 化する |
+| verification-layer overclaim | proof / runtime boundary | NEW | helper-local inventory を hidden verifier builtin や final public verifier contract と誤読する | `VerificationLayer` composition を typed layer composition の説明語彙に留め、law surface は明示的に open と書く |
+| effect-substrate collapse | architecture | NEW | effect-based OS-like substrate という内側の解釈から subsystem collapse や standard I/O built-in 化が滑り込む | internal interpretation と normative boundary を docs / plan / specs で分ける |
 | place / participant / world conflation | sample / docs | NEW | participant、Place、world sugar が core primitive として固定される | `Place` distinction と world-sugar note を README / Documentation / plan に残す |
 | goal drift via local optimization | roadmap | NEW | Sugoroku 現行 floor を Mirrorea full runtime 完了と誤読する | project axis と stop line を progress / tasks / docs に明記する |
 | sample-progress inflation | dashboard / reporting | NEW | runnable sample や validation の裏付けなしに `%` を上げる | `samples_progress.md` の `%` と report / validation command を結びつける |
@@ -28,6 +30,8 @@
 ## current open problems
 
 - `TermSignature` first cut の exact granularity、reserved kind の扱い、`LayerSignature` law surface
+- `VerificationLayer` composition の exact law surface と public naming
+- effect-based OS-like substrate という内側の解釈を prose のまま保つか、formal layer naming へ上げるか
 - `MessageEnvelope` / `AuthEvidence` / transport insertion seam の final public shape
 - visualization / telemetry security の label / authority / redaction / retention model
   - helper-local / report-local first cut は `0922` で actualize したが、final public viewer contract と retention は未決のまま残す

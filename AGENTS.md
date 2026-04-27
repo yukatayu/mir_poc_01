@@ -68,6 +68,8 @@ Do not:
 - add builtin primitives for domain predicates
 - collapse authentication into transport
 - treat visualization as untyped debug leak
+- claim final-public completion without evidence
+- create thick fake E2E wrappers
 - freeze final grammar or public APIs prematurely
 
 ## Repository organization discipline

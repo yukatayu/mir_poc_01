@@ -28,6 +28,8 @@ high-risk な script rebucket は wrapper / alias を先に用意できるまで
 phase 13 current cut では `scripts/network_transport_samples.py` が `scripts/sugoroku_world_samples.py` を child process JSON bridge として呼び、
 transport lane の process-boundary / reconnect / typed failure / redacted route trace canary を helper-local evidence surface に固定する。
 ここでの `NET-*` sample ID や helper JSON rows は final public transport ABI ではない。
+Mirrorea を effect-based OS-like substrate と読む current line は、typed external effect / visualization / telemetry / verification の route を helper-local に actualizeしてよいという意味に留める。
+この reading は Mir core primitive に standard I/O を builtin すること、external adapter boundary を core に collapse すること、helper-local preview を final public host ABI とみなすことを意味しない。
 
 ## helper stack の中心関数
 
@@ -107,6 +109,7 @@ run_directory_named_profile
   - model-check concrete carrier obligation list
   - `guard_reason`
   を `verification_preview` として見せてよい。
+  - `LayerSignature.requires / provides / checks / emits / laws` と `verification_preview` の対応を helper-local / report-local に並べ、current `VerificationLayer` composition を evidence-oriented に見せてよい。
   - これは final public verifier contract を意味しない。
 - current order-handoff negative static-stop cut では、
   - clean near-end handoff line に対する `publish -> witness -> handoff -> observe` 前提を helper-local current sample runner 側でのみ判定してよい。

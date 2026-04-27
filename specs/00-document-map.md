@@ -129,6 +129,9 @@
 - `sub-agent-pro/mirrorea_phase_samples_progress_storage_handoff_2026-04-24.md`
   - phase 0〜16 sample plan、E2E discipline、`samples_progress.md` format、100% rule、git discipline、storage audit、external workdir、detach-safe cleanup の long-form handoff として使ってよい。
   - 規範判断の正本ではないが、`specs/11`、`plan/`、`samples_progress.md`、`progress.md`、`tasks.md`、`AGENTS.md` へ mirror する説明 source である。
+- `sub-agent-pro/mirrorea_next_stage_full_plan_handoff_2026-04-27.md`
+  - Mirrorea next-stage planning、project axis、typed external boundary、`TermSignature` / `LayerSignature`、`MessageEnvelope` / `AuthEvidence` seam、`VerificationLayer` composition、projection / placement、hot-plug、storage discipline、next package queue の long-form handoff として使ってよい。
+  - 規範判断の正本ではないが、`specs/10`、`specs/11`、`plan/`、`progress.md`、`tasks.md`、`samples_progress.md`、`AGENTS.md` へ mirror する説明 source である。
 
 ## 規範的な読書順
 
