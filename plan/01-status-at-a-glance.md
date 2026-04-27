@@ -20,15 +20,21 @@
 ## current storage audit snapshot
 
 - root disk:
-  `/dev/vda2` 99G 中 27G free
+  `/dev/vda2` 99G 中 32G free
 - repo size:
   `5.3G`
 - `target/`:
-  `5.2G`
+  repo path は `/mnt/mirrorea-work/cargo-target` への symlink に切り替え済み
 - `.git/`:
   `66M`
 - extra storage:
-  `vdb` device は見えているが filesystem / mountpoint は未確認で、現時点では **not mounted**
+  `/dev/vdb1` ext4 `mirrorea-work` が `/mnt/mirrorea-work` に mounted
+  - UUID:
+    `a87650a8-e3e9-4977-8940-6c293a0ee23c`
+  - `/etc/fstab`:
+    UUID-based `defaults,nofail`
+  - current active cutover:
+    `target/` は SSD 側へ移送済み
 
 ## twin peaks の current state
 
@@ -78,6 +84,7 @@
 - `samples_progress.md` を current runnable dashboard として追加した
 - `scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh` を small-VPS safe default で置く
 - `docs/reports/0913-*` で phase-sample-progress-storage-foundation package を close する
+- `docs/reports/0915-*` で `/mnt/mirrorea-work` mount verification、`target/` SSD cutover、`cargo test -p mir-ast --no-run` の軽量確認を追加した
 - next reopen point は `Sugoroku sample progress alignment`
 
 ### Mirrorea future-axis carrier lane

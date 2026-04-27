@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 13:14 JST
+Last updated: 2026-04-27 13:22 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、phase/sample/progress/storage foundation を追加する
-Current active packages: `0913` foundation closeout synced; next `Sugoroku sample progress alignment`, `Avatar fairy follow sample plan`, `TermSignature registry / debug output`
+Current active packages: `0913` foundation closeout + `0915` storage mount verification synced; next `Sugoroku sample progress alignment`, `Avatar fairy follow sample plan`, `TermSignature registry / debug output`
 
 ## Summary
 
@@ -24,17 +24,17 @@ Current active packages: `0913` foundation closeout synced; next `Sugoroku sampl
 | Phase 13 Network transport | 1 | 0 | 0 | not yet | not yet | `0913` |
 | Phase 14 Hot-plug package / AttachPoint | 10 | 0 | 1 | not yet | lifecycle TODO only | `0909`, `0912`, `0913` |
 | Phase 15 Visualization / IDE | 50 | 1 | 0 | partial | `mir_hilight.html` + helper debug | `0910`, `0911`, `0913` |
-| Phase 16 Compiler/backend/LLVM preparation | 10 | 0 | 0 | not yet | storage location report only | `0913` |
+| Phase 16 Compiler/backend/LLVM preparation | 50 | 1 | 0 | partial | storage location report + mounted target path | `0913`, `0915` |
 
 ## Build/storage environment
 
 | Item | Status | Path | Notes |
 |---|---|---|---|
-| External workdir | not mounted | `/mnt/mirrorea-work` | `vdb` device is visible but no filesystem/mountpoint is active |
-| Root setup helper | ready | `scripts/storage/setup_mirrorea_workdisk_root.sh` | prepares GPT + ext4 + `/mnt/mirrorea-work` + UUID `fstab`; requires root and was not executed in this session |
-| Cargo target | repo/root risk | `target/` | current `target/` uses about `5.2G`; external redirect script added in this task |
+| External workdir | mounted | `/mnt/mirrorea-work` | `/dev/vdb1` ext4 `mirrorea-work`, UUID `a87650a8-e3e9-4977-8940-6c293a0ee23c`, mounted and backed by `fstab` |
+| Root setup helper | verified | `scripts/storage/setup_mirrorea_workdisk_root.sh` | GPT + ext4 + `/mnt/mirrorea-work` + UUID `fstab` path was used by user; script now also reloads systemd and fixes `llvm/` parent ownership for future runs |
+| Cargo target | externalized | `target/` -> `/mnt/mirrorea-work/cargo-target` | existing `5.2G` build artifact was moved to SSD and repo path is now a symlink |
 | Storage env script | yes | `scripts/env/mirrorea_storage_env.sh` | exports safe default paths and refuses `--ensure-dirs` on unmounted default unless overridden |
-| LLVM build | not started | `/mnt/mirrorea-work/llvm/{src,build,install}` | policy/path only; no LLVM artifact committed |
+| LLVM build | path ready | `/mnt/mirrorea-work/llvm/{src,build,install}` | no LLVM artifact yet, but writable leaf dirs are prepared on mounted storage |
 | Generated artifacts | policy only | `/mnt/mirrorea-work/generated-artifacts` | repo-local root should not become default heavy sink |
 | Detach prep script | yes | `scripts/storage/detach_prepare.sh` | non-destructive; prints status only |
 | Cleanup script | yes | `scripts/storage/cleanup_disposable_artifacts.sh` | requires `--confirm`; refuses unsafe unmounted default |
@@ -59,7 +59,7 @@ Current active packages: `0913` foundation closeout synced; next `Sugoroku sampl
 | PH13 | network transport | `spec only` | move logical Place runtime to separate process/transport | planned only | not yet | not yet | not yet | not yet | yes | 1 | not yet | no network transport sample exists | keep queue docs-first for now | `0913` |
 | PH14 | hot-plug package / AttachPoint | `samples/clean-near-end/sugoroku-world/09_detach_todo.mir`, `samples/prototype/current-l2-dynamic-attach-detach/` | safe runtime attach/detach compatibility line | `HOT-01 prototype / HOT-03..06 planned` | `python3 scripts/sugoroku_world_samples.py closeout --format json` | current detach TODO only | not yet | lifecycle TODO note | yes | 10 | 2026-04-27 10:14 JST | no compatibility checker or lifecycle runtime yet | move from TODO boundary to first design cut | `0909`, `0912`, `0913` |
 | PH15 | visualization / IDE | `mir_hilight.html`, `scripts/sugoroku_world_samples.py --debug *` | current viewer/debug surfaces before typed/redacted viewer | `VIS-01 current / VIS-02..08 planned` | browser/unit test not rerun in this task | helper debug output in Sugoroku runner | partial | highlighter + debug modes | yes | 50 | 2026-04-27 10:14 JST (helper debug only) | typed/redacted visualization absent | tie phase to TermSignature/VisualizationProtocol | `0910`, `0911`, `0913` |
-| PH16 | compiler/backend/LLVM preparation | `scripts/env/mirrorea_storage_env.sh`, `scripts/storage/*` | keep LLVM/build/cache off root when possible | `LLVM-01 planned / LLVM-03,04 policy-only` | shell script dry-run | detach/storage audit only | not yet | storage location report | yes | 10 | 2026-04-27 10:14 JST | external storage not mounted; no backend probe sample yet | mount policy first, then backend probe | `0913` |
+| PH16 | compiler/backend/LLVM preparation | `scripts/env/mirrorea_storage_env.sh`, `scripts/storage/*`, repo `target/` symlink | keep LLVM/build/cache off root when possible | `LLVM-01 current / LLVM-03,04 policy-only` | `bash scripts/storage/setup_mirrorea_workdisk_root.sh --plan`, `bash scripts/env/mirrorea_storage_env.sh`, `cargo test -p mir-ast --no-run` | actual mount + target cutover verification | mount -> symlinked target -> cargo no-run | storage location report + mounted target path | yes | 50 | 2026-04-27 13:20 JST | cargo registry cache / LLVM actual build not yet exercised | run backend probe or first LLVM package on mounted workdir | `0913`, `0915` |
 
 ## Phase plan details
 
@@ -87,7 +87,7 @@ Current active packages: `0913` foundation closeout synced; next `Sugoroku sampl
 
 | ID | Blocker | Affected samples | Owner | Next action |
 |---|---|---|---|---|
-| STOR-01 | extra storage `vdb` is attached but not mounted or formatted in a documented way | PH16, future heavy packages | repo maintainer + CodeX | keep policy/docs/scripts ready; do not cut over heavy artifacts yet |
+| STOR-01 | mounted workdir は使えるが、cargo registry cache / LLVM actual build はまだ mounted path で exercise していない | PH16, future heavy packages | CodeX | first backend / LLVM preparation package で mounted path actual probe を追加する |
 | SUG-01 | Sugoroku row is broad but not yet split into tighter per-sample dashboard entries | PH4, PH7 | CodeX | run alignment package and tighten row/report mapping |
 | FAIRY-01 | no active avatar fairy helper/sample family exists | PH8, PH14 | CodeX | promote a first active sample plan from current prototype anchor |
 | SIG-01 | no `--debug signatures` output exists yet | PH11, PH15 | CodeX | implement `TermSignature registry / debug output` package |
@@ -116,6 +116,13 @@ Current active packages: `0913` foundation closeout synced; next `Sugoroku sampl
 | 2026-04-27 10:14 JST | `cargo test -p mir-ast` | pass | crate tests and doctests passed earlier in this task; summarized at closeout |
 | 2026-04-27 10:14 JST | `cargo test -p mir-runtime` | pass | crate tests and doctests passed earlier in this task; summarized at closeout |
 | 2026-04-27 10:14 JST | `cargo test -p mir-semantics` | pass | semantics tests, support tests, and doctests passed earlier in this task; summarized at closeout |
+| 2026-04-27 13:20 JST | `lsblk -o NAME,PATH,SIZE,TYPE,FSTYPE,LABEL,UUID,MOUNTPOINT /dev/vdb` | pass | `/dev/vdb1` ext4 `mirrorea-work` is mounted at `/mnt/mirrorea-work` |
+| 2026-04-27 13:20 JST | `findmnt /mnt/mirrorea-work` | pass | active mount confirmed |
+| 2026-04-27 13:20 JST | `grep '/mnt/mirrorea-work' /etc/fstab` | pass | UUID-based `defaults,nofail` entry exists |
+| 2026-04-27 13:20 JST | `findmnt --verify --tab-file /etc/fstab` | pass with warning | parse ok; warning noted that current systemd session may need `daemon-reload` after fstab edit |
+| 2026-04-27 13:20 JST | `mv target /mnt/mirrorea-work/cargo-target && ln -s /mnt/mirrorea-work/cargo-target target` | pass | build artifacts moved off root disk; repo `target/` is now a symlink |
+| 2026-04-27 13:20 JST | `bash scripts/env/mirrorea_storage_env.sh` | pass | mounted flag is now `yes` |
+| 2026-04-27 13:20 JST | `cargo test -p mir-ast --no-run` | pass | cargo can use the externalized `target/` path |
 
 ## Historical / archived samples
 

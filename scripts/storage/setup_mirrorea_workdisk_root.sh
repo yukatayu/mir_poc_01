@@ -192,6 +192,10 @@ echo "[setup] backed up /etc/fstab -> $fstab_backup"
 fstab_line="UUID=$uuid $mountpoint ext4 defaults,nofail 0 2"
 printf '%s\n' "$fstab_line" >> /etc/fstab
 
+if command -v systemctl >/dev/null 2>&1; then
+  systemctl daemon-reload || true
+fi
+
 mount "$mountpoint"
 
 install -d -o "$owner_name" -g "$group_name" \
@@ -206,6 +210,7 @@ install -d -o "$owner_name" -g "$group_name" \
   "$mountpoint/logs"
 
 chown "$owner_name:$group_name" "$mountpoint"
+chown "$owner_name:$group_name" "$mountpoint/llvm"
 
 echo "[setup] mount complete"
 findmnt "$mountpoint"

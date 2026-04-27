@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 13:14 JST
+最終更新: 2026-04-27 13:22 JST
 
 ## この文書について
 
@@ -17,7 +17,7 @@
 - Lean foundations と generated clean stub corpus は runnable
 - Sugoroku world runtime attachment vertical slice は repo-local logical multi-place emulator として runnable
 - `samples_progress.md` は phase 0〜16 matrix と storage row を持つ current dashboard として追加済み
-- storage audit の current result は、root `/dev/vda2` 99G 中 27G free、repo `5.3G`、`target/` `5.2G`、extra device `vdb` visible but not mounted
+- storage audit の current result は、root `/dev/vda2` 99G 中 32G free、`/dev/vdb1` ext4 `mirrorea-work` が `/mnt/mirrorea-work` に mounted、repo `target/` は `/mnt/mirrorea-work/cargo-target` への symlink に切り替え済み
 - `phase-sample-progress-storage-foundation` package は `docs/reports/0913-*` で close 済み
 - current promoted next line は **`Sugoroku sample progress alignment`**
 - next semantic carrier package は **`TermSignature registry / debug output`**
@@ -248,13 +248,14 @@
 - objective:
   small VPS 上で LLVM / build artifact / cache を root に溜めない guardrail を先に固める
 - expected deliverables:
-  storage env hardening、backend probe plan、artifact location report
+  storage env hardening、backend probe plan、artifact location report、cargo registry cache / LLVM path actual probe
 - validation command:
+  `bash scripts/env/mirrorea_storage_env.sh`
   `bash scripts/storage/detach_prepare.sh`
   `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
   `python3 scripts/validate_docs.py`
 - report requirement:
-  新しい report、mounted/unmounted state と cutover条件を明記する
+  新しい report、mounted/unmounted state、actual probe、cutover条件を明記する
 - stop line:
   actual LLVM build や backend public contract は固定しない
 
