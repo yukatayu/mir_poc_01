@@ -32,6 +32,7 @@ Useful focused runs:
 ```bash
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug turn-trace
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification
 ```
@@ -70,6 +71,9 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
   - best view for join/leave, epoch, incarnation, and pending/active distinction.
 - `verification`
   - best view for model-check, stale witness invalidation, and reset safety statements.
+- `signatures`
+  - `TermSignature` first cut の helper-local inventory view です。effect / transition / witness / relation / property を
+    evidence-oriented に並べ、final public visualization protocol と混同しないための current debug surface です。
 
 These helper-local outputs are evidence-oriented debug views. They are not the final public visualization protocol.
 

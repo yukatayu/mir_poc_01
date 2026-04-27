@@ -23,7 +23,7 @@
 - sample/progress/storage lane:
   phase-sample-progress-storage-foundation close 後、`samples_progress.md` と external-workdir guardrail を current repository discipline に昇格
 - Mirrorea future lane:
-  `Macro 6` package 1 audit / package 2 AGENTS close の後に foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan を差し込み、next semantic carrier package を `TermSignature registry / debug output` と読む
+  `Macro 6` package 1 audit / package 2 AGENTS close の後に foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output` close を差し込み、next semantic carrier package を `LayerSignature system` と読む
 - reserve / mixed lane:
   `Macro 6 / 7` final public seam、real transport、packaging residual
 

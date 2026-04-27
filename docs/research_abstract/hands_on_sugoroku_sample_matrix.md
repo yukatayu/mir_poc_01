@@ -50,6 +50,12 @@ real network transport や final public runtime API ではありません。
 
 `SUG-08` の主出力です。static / runtime / model-check の 3 行をどう繋ぐかを見る最短経路です。
 
+### `signatures`
+
+`SUG-03` の副読本です。`run 03_roll_publish_handoff --debug signatures` を使うと、
+effect / transition / witness / relation / property の `TermSignature` inventory を helper-local に確認できます。
+これは current `TermSignature` first cut の evidence であり、final public visualization protocol ではありません。
+
 これらは helper-local debug output であり、final public visualization protocol ではありません。
 
 ## 4. phase ごとの読み分け

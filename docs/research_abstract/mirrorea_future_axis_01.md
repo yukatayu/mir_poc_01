@@ -23,6 +23,13 @@
 これらは **repo-local alpha-ready current layer** です。
 Mirrorea full runtime、final public API、real network、final auth stack、final visualization API まで完了したことを意味しません。
 
+同時に、Mirrorea future-axis 側では `TermSignature registry / debug output` の first cut を close しました。
+
+- Sugoroku helper に `--debug signatures`
+- clean near-end report / closeout に `term_signatures` と `signature_kinds`
+
+を追加し、helper-local / report-local の evidence carrier を先に actualize しています。
+
 ## 主軸
 
 守るべき project axis は次です。
@@ -153,6 +160,7 @@ object attach/follow lifecycle を representative に検証する予定です。
 1. current-state audit
 2. AGENTS.md and reporting discipline
 3. TermSignature registry
+   - close 済み。helper-local / report-local first cut まで actualize。
 4. LayerSignature system
 5. MessageEnvelope / Auth seam
 6. VisualizationProtocol

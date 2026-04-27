@@ -26,7 +26,7 @@
 
 ## current open problems
 
-- `TermSignature` / `LayerSignature` の exact carrier と law surface
+- `TermSignature` first cut の exact granularity、reserved kind の扱い、`LayerSignature` law surface
 - `MessageEnvelope` / `AuthEvidence` / transport insertion seam の最小 shape
 - visualization / telemetry security の label / authority / redaction / retention model
 - projection / placement validity report と world-sugar boundary

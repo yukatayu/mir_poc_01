@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 15:23 JST
+最終更新: 2026-04-27 15:59 JST
 
 ## この文書について
 
@@ -20,8 +20,9 @@
 - storage audit と external workdir cutover は `docs/reports/0913-*` と `0915-*` で close してあり、repo `target/` は `/mnt/mirrorea-work/cargo-target` への symlink で運用している
 - `Sugoroku sample progress alignment` は `docs/reports/0916-*` で close 済み
 - `Avatar fairy follow sample plan` は `docs/reports/0917-*` で close 済み
-- current promoted next line は **`TermSignature registry / debug output`**
-- next semantic carrier package は **`LayerSignature system`**
+- `TermSignature registry / debug output` は `docs/reports/0918-*` で close し、Sugoroku `--debug signatures` と clean near-end report/closeout inventory を追加した
+- current promoted next line は **`LayerSignature system`**
+- next semantic carrier package は **`MessageEnvelope / Auth seam`**
 
 ## current executable floor
 
@@ -84,6 +85,7 @@
 - `python3 scripts/current_l2_lean_sample_sync.py`
 - `python3 scripts/sugoroku_world_samples.py check-all`
 - `python3 scripts/sugoroku_world_samples.py model-check`
+- `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
 - `bash scripts/storage/setup_mirrorea_workdisk_root.sh --plan`
 - `bash scripts/env/mirrorea_storage_env.sh`
@@ -92,24 +94,7 @@
 
 ## 自走可能な task package
 
-### Package 1. TermSignature registry / debug output
-
-- phase / stage:
-  `Macro 6`, `S1 -> S2`
-- objective:
-  term / transition / effect / message / adapter を横断して、static checker / theorem / model-check / runtime guard / debug output / hot-plug compatibility が同じ signature carrier を参照できるようにする
-- expected deliverables:
-  `TermSignature`、`SignatureRegistry`、`--debug signatures` 相当の dump、docs、sample-facing explanation
-- validation command:
-  `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json`
-  package close までに `--debug signatures` 相当の entry
-- report requirement:
-  新しい report を追加し、`samples_progress.md` / `progress.md` / `tasks.md` を同じ task で更新する
-- stop line:
-  final public signature schema、generic public API、concrete network transport bindingは固定しない
-
-### Package 2. LayerSignature system
+### Package 1. LayerSignature system
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -125,7 +110,7 @@
 - stop line:
   final public plugin API、tool-brand 固定、production verifier binding は行わない
 
-### Package 3. MessageEnvelope / Auth seam
+### Package 2. MessageEnvelope / Auth seam
 
 - phase / stage:
   `Macro 6`, `S2 -> S3`
@@ -141,7 +126,7 @@
 - stop line:
   production auth protocol、federation、real socket transport は固定しない
 
-### Package 4. VisualizationProtocol first implementation
+### Package 3. VisualizationProtocol first implementation
 
 - phase / stage:
   `Macro 6`, `S2 -> S3`
@@ -157,7 +142,7 @@
 - stop line:
   final public visualization protocol、retention policy、multi-tenant telemetry service は固定しない
 
-### Package 5. Typed external boundary / adapter sample plan
+### Package 4. Typed external boundary / adapter sample plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -173,7 +158,7 @@
 - stop line:
   concrete browser/network/VR adapter 実装は固定しない
 
-### Package 6. Projection / placement plan
+### Package 5. Projection / placement plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -188,7 +173,7 @@
 - stop line:
   generated public backend、placement optimizer、final operational scheduler は実装しない
 
-### Package 7. Hot-plug Patch / AttachPoint
+### Package 6. Hot-plug Patch / AttachPoint
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -203,7 +188,7 @@
 - stop line:
   distributed activation / rollback、durable state migration、production attach/detach API は固定しない
 
-### Package 8. Network transport plan
+### Package 7. Network transport plan
 
 - phase / stage:
   `Macro 6 -> Macro 7`, `S0 -> S1`
@@ -219,7 +204,7 @@
 - stop line:
   production transport 実装や public deployment contract は固定しない
 
-### Package 9. Compiler/backend/LLVM preparation guardrail
+### Package 8. Compiler/backend/LLVM preparation guardrail
 
 - phase / stage:
   `Macro 7`, `S0 -> S1`
@@ -252,7 +237,7 @@
 - 概要:
   auth / visualization / projection / hot-plug をどこまで public API として固定するか
 - 影響:
-  package 3 以降の naming と stop line
+  package 2 以降の naming と stop line
 - 主要な選択肢:
   repo-local helper 優先のまま進める / early public-contract drafting を始める
 - current recommendation / 見解:

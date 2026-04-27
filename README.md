@@ -51,7 +51,8 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - visualization と telemetry も情報を外へ出す effect なので、label / authority / redaction を持つ typed layer として扱います。
 - current representative sample は Sugoroku world runtime attachment vertical slice で、次の representative sample 候補は avatar fairy follow slice です。
   ただし current active sample ではなく、phase 8 planned skeleton family は `samples/not_implemented/avatar-fairy-follow/` にあります。
-- next queue は、`TermSignature registry`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
+- `TermSignature registry / debug output` の first cut は close してあり、Sugoroku helper の `--debug signatures` と clean near-end report / closeout inventory に helper-local / report-local carrier を追加しました。
+- next queue は、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 
 reader-facing な要約は `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。これは roadmap summary であり、規範正本ではありません。
@@ -129,6 +130,7 @@ Sugoroku world runtime attachment vertical slice:
 python3 scripts/sugoroku_world_samples.py list
 python3 scripts/sugoroku_world_samples.py check-all
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
 python3 scripts/sugoroku_world_samples.py model-check
 python3 scripts/sugoroku_world_samples.py closeout --format json
 ```

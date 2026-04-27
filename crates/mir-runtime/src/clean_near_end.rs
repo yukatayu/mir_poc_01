@@ -638,6 +638,13 @@ pub struct CleanNearEndSampleSummary {
     pub summary: String,
 }
 
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct TermSignature {
+    pub kind: String,
+    pub name: String,
+    pub evidence_role: String,
+}
+
 #[derive(Debug, Clone, Serialize)]
 pub struct CleanNearEndSampleReport {
     pub sample: String,
@@ -663,6 +670,7 @@ pub struct CleanNearEndSampleReport {
     pub witness_core_fields: Vec<String>,
     pub current_owner: Option<String>,
     pub visible_history: Vec<String>,
+    pub term_signatures: Vec<TermSignature>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -684,6 +692,191 @@ pub struct CleanNearEndCloseout {
     pub families: BTreeMap<String, Vec<String>>,
     pub proof_samples: Vec<String>,
     pub lean_roots: Vec<String>,
+    pub signature_kinds: Vec<String>,
+    pub reserved_signature_kinds: Vec<String>,
+}
+
+fn extract_declared_name(line: &str, prefix: &str) -> Option<String> {
+    let stripped = line.trim_start();
+    if !stripped.starts_with(prefix) {
+        return None;
+    }
+    let remainder = stripped.strip_prefix(prefix)?.trim();
+    let mut token = remainder.split_whitespace().next()?.trim_end_matches('{');
+    if let Some((head, _)) = token.split_once('(') {
+        token = head;
+    }
+    if token.is_empty() {
+        None
+    } else {
+        Some(token.to_string())
+    }
+}
+
+fn extract_after_marker(line: &str, marker: &str) -> Option<String> {
+    let (_, remainder) = line.split_once(marker)?;
+    let token = remainder
+        .trim()
+        .split_whitespace()
+        .next()?
+        .trim_end_matches(',')
+        .trim_end_matches('{');
+    if token.is_empty() {
+        None
+    } else {
+        Some(token.to_string())
+    }
+}
+
+fn push_term_signature(
+    signatures: &mut Vec<TermSignature>,
+    seen: &mut BTreeSet<(String, String)>,
+    kind: &str,
+    name: impl Into<String>,
+    evidence_role: &str,
+) {
+    let name = name.into();
+    if name.is_empty() {
+        return;
+    }
+    let key = (kind.to_string(), name.clone());
+    if seen.insert(key.clone()) {
+        signatures.push(TermSignature {
+            kind: key.0,
+            name: key.1,
+            evidence_role: evidence_role.to_string(),
+        });
+    }
+}
+
+fn term_signatures_for_spec(spec: &CleanNearEndSampleSpec, source: &str) -> Vec<TermSignature> {
+    let mut signatures = Vec::new();
+    let mut seen = BTreeSet::new();
+
+    for line in source.lines() {
+        if let Some(name) = extract_declared_name(line, "transition ") {
+            push_term_signature(
+                &mut signatures,
+                &mut seen,
+                "transition",
+                name,
+                "source_decl",
+            );
+        }
+        if let Some(name) = extract_declared_name(line, "effect ") {
+            push_term_signature(
+                &mut signatures,
+                &mut seen,
+                "effect",
+                name,
+                "source_decl",
+            );
+        }
+        if let Some(name) = extract_after_marker(line, "produces witness ") {
+            push_term_signature(
+                &mut signatures,
+                &mut seen,
+                "witness",
+                name,
+                "source_decl",
+            );
+        }
+    }
+
+    if let Some(order_spec) = &spec.order_spec {
+        for witness in order_spec.produced_witnesses.keys() {
+            push_term_signature(
+                &mut signatures,
+                &mut seen,
+                "witness",
+                witness.clone(),
+                "order_produced_witness",
+            );
+        }
+        for relation in &order_spec.derived_relations {
+            push_term_signature(
+                &mut signatures,
+                &mut seen,
+                "relation",
+                relation.kind.clone(),
+                "derived_relation",
+            );
+        }
+    }
+
+    for constraint in &spec.constraints {
+        if let ConstraintEvaluation::EffectRowSubset { lhs, rhs } = &constraint.evaluation {
+            for effect_name in lhs.iter().chain(rhs.iter()) {
+                push_term_signature(
+                    &mut signatures,
+                    &mut seen,
+                    "effect",
+                    effect_name.clone(),
+                    "effect_row_constraint",
+                );
+            }
+        }
+    }
+
+    for field in &spec.witness_core_fields {
+        push_term_signature(
+            &mut signatures,
+            &mut seen,
+            "witness-field",
+            field.clone(),
+            "witness_core_field",
+        );
+    }
+
+    for event in &spec.visible_history {
+        push_term_signature(
+            &mut signatures,
+            &mut seen,
+            "history",
+            event.clone(),
+            "visible_history",
+        );
+    }
+
+    for obligation in &spec.proof_obligations {
+        push_term_signature(
+            &mut signatures,
+            &mut seen,
+            "proof-obligation",
+            obligation.obligation.clone(),
+            "proof_obligation",
+        );
+    }
+
+    if let Some(property) = &spec.property {
+        push_term_signature(
+            &mut signatures,
+            &mut seen,
+            "property",
+            property.clone(),
+            "sample_property",
+        );
+    }
+
+    signatures
+}
+
+fn closeout_signature_kinds() -> Result<Vec<String>, CleanNearEndError> {
+    let root = clean_near_end_samples_root();
+    let mut kinds = BTreeSet::new();
+    for spec in clean_near_end_sample_specs() {
+        let source_path = root.join(&spec.source_relpath);
+        let source = fs::read_to_string(&source_path).map_err(|error| {
+            CleanNearEndError::new(format!(
+                "failed to read clean near-end sample for closeout {}: {error}",
+                source_path.display()
+            ))
+        })?;
+        for signature in term_signatures_for_spec(&spec, &source) {
+            kinds.insert(signature.kind);
+        }
+    }
+    Ok(kinds.into_iter().collect())
 }
 
 pub fn clean_near_end_samples_root() -> PathBuf {
@@ -1836,6 +2029,7 @@ pub fn run_clean_near_end_sample(
         witness_core_fields: spec.witness_core_fields.clone(),
         current_owner: spec.current_owner.clone(),
         visible_history: spec.visible_history.clone(),
+        term_signatures: term_signatures_for_spec(&spec, &source),
     };
 
     match spec.family {
@@ -1924,7 +2118,7 @@ pub fn build_clean_near_end_matrix() -> Result<CleanNearEndMatrix, CleanNearEndE
     })
 }
 
-pub fn build_clean_near_end_closeout() -> CleanNearEndCloseout {
+pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNearEndError> {
     let mut families = BTreeMap::new();
     for sample in list_clean_near_end_samples() {
         families
@@ -1932,7 +2126,8 @@ pub fn build_clean_near_end_closeout() -> CleanNearEndCloseout {
             .or_insert_with(Vec::new)
             .push(sample.sample_id);
     }
-    CleanNearEndCloseout {
+    let signature_kinds = closeout_signature_kinds()?;
+    Ok(CleanNearEndCloseout {
         active_sample_root: clean_near_end_samples_root().display().to_string(),
         archive_sample_root: clean_near_end_archive_root().display().to_string(),
         built_in_vocabulary: built_in_vocabulary(),
@@ -1949,7 +2144,13 @@ pub fn build_clean_near_end_closeout() -> CleanNearEndCloseout {
                 .display()
                 .to_string(),
         ],
-    }
+        signature_kinds,
+        reserved_signature_kinds: vec![
+            "message".to_string(),
+            "adapter".to_string(),
+            "layer".to_string(),
+        ],
+    })
 }
 
 #[derive(Debug)]

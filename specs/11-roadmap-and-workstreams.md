@@ -1149,7 +1149,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 
 - `Sugoroku sample progress alignment` は docs / dashboard package として close し、`samples_progress.md` と `samples/clean-near-end/sugoroku-world/README.md` で `SUG-00..09` の purpose / command / debug surface / stop line を reader-facing に揃えた。
 - `Avatar fairy follow sample plan` は docs-first package として close し、phase 8 planned skeleton family を `samples/not_implemented/avatar-fairy-follow/` に切り出した。
-- current promoted next package は `TermSignature registry / debug output` である。
+- `TermSignature registry / debug output` は helper-local / report-local package として close し、Sugoroku `--debug signatures` と clean near-end report / closeout inventory を actualize した。
+- current promoted next package は `LayerSignature system` である。
 
 ## 推奨される phase 順序
 

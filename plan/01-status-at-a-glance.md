@@ -87,14 +87,15 @@
 - `docs/reports/0915-*` で `/mnt/mirrorea-work` mount verification、`target/` SSD cutover、`cargo test -p mir-ast --no-run` の軽量確認を追加した
 - `docs/reports/0916-*` で Sugoroku per-sample alignment と debug surface mapping を close した
 - `docs/reports/0917-*` で phase 8 avatar fairy follow skeleton family と prototype boundary を close した
-- next reopen point は `TermSignature registry / debug output`
+- `docs/reports/0918-*` で `TermSignature registry / debug output` を close し、Sugoroku `--debug signatures` と clean near-end report/closeout inventory を追加した
+- next reopen point は `LayerSignature system`
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation を先に入れた上で、next semantic carrier package を `TermSignature registry / debug output` と読む
+- current reading は、sample/storage foundation と `TermSignature` first cut を先に入れた上で、next semantic carrier package を `LayerSignature system` と読む
 - phase 8 representative sample 候補は `samples/not_implemented/avatar-fairy-follow/` に skeleton family を切り出したが、current active helper はまだない
 - package 4 以降は `LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint`、network transport plan、compiler/backend/LLVM prep guardrail
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`

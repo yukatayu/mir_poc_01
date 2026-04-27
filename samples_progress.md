@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 15:23 JST
+Last updated: 2026-04-27 15:59 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0916` Sugoroku sample progress alignment close、`0917` Avatar fairy follow sample plan close、next `TermSignature registry / debug output`, `LayerSignature system`, `MessageEnvelope / Auth seam`
+Current active packages: `0916` Sugoroku sample progress alignment close、`0917` Avatar fairy follow sample plan close、`0918` TermSignature registry / debug output close、next `LayerSignature system`, `MessageEnvelope / Auth seam`, `VisualizationProtocol`
 
 ## Summary
 
@@ -19,11 +19,11 @@ Current active packages: `0916` Sugoroku sample progress alignment close、`0917
 | Phase 8 Avatar fairy follow / fallback anchor | 10 | 0 | 0 | not yet | planned only | `0917` |
 | Phase 9 Typed external boundary / adapter | 1 | 0 | 0 | not yet | not yet | `0913` |
 | Phase 10 MessageEnvelope / authentication seam | 1 | 0 | 0 | not yet | not yet | `0912`, `0913` |
-| Phase 11 TermSignature / LayerSignature | 1 | 0 | 0 | not yet | not yet | `0912`, `0913` |
+| Phase 11 TermSignature / LayerSignature | 25 | 1 | 0 | partial | signature inventory / reserved kinds | `0912`, `0913`, `0918` |
 | Phase 12 Projection / placement | 1 | 0 | 0 | not yet | not yet | `0912`, `0913` |
 | Phase 13 Network transport | 1 | 0 | 0 | not yet | not yet | `0913` |
 | Phase 14 Hot-plug package / AttachPoint | 10 | 0 | 1 | not yet | lifecycle TODO only | `0909`, `0912`, `0913` |
-| Phase 15 Visualization / IDE | 50 | 1 | 0 | partial | `mir_hilight.html` + helper debug | `0910`, `0911`, `0913` |
+| Phase 15 Visualization / IDE | 55 | 1 | 0 | partial | `mir_hilight.html` + helper debug/signatures | `0910`, `0911`, `0913`, `0918` |
 | Phase 16 Compiler/backend/LLVM preparation | 50 | 1 | 0 | partial | storage location report + mounted target path | `0913`, `0915` |
 
 ## Build/storage environment
@@ -50,7 +50,7 @@ Current active packages: `0916` Sugoroku sample progress alignment close、`0917
 | `SUG-00` | 4 | `samples/clean-near-end/sugoroku-world/00_world_bootstrap.mir` | empty world and baseline membership | `python3 scripts/sugoroku_world_samples.py run 00_world_bootstrap --debug summary` | `summary` | success | 90 | 2026-04-27 15:21 JST via `check-all` | `0909`, `0916` | PH4 baseline |
 | `SUG-01` | 7 | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | runtime attach of `SugorokuGame#1` | `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug summary` | `summary` | success | 90 | 2026-04-27 15:21 JST via `check-all` | `0909`, `0916` | PH7 attach floor |
 | `SUG-02` | 4/7 | `samples/clean-near-end/sugoroku-world/02_admin_start_reset.mir` | admin-only start/reset control | `python3 scripts/sugoroku_world_samples.py run 02_admin_start_reset --debug summary` | `summary` | success | 90 | 2026-04-27 15:21 JST via `check-all` | `0909`, `0916` | control boundary |
-| `SUG-03` | 7 | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | roll -> publish -> witness -> handoff | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json` | `summary`, `turn-trace` | success | 90 | 2026-04-27 15:21 JST via focused run | `0909`, `0916` | core E2E row |
+| `SUG-03` | 7 | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | roll -> publish -> witness -> handoff | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json` | `summary`, `turn-trace`, `signatures` | success | 90 | 2026-04-27 15:59 JST via focused run | `0909`, `0916`, `0918` | core E2E row with signature inventory |
 | `SUG-04` | 4 | `samples/clean-near-end/sugoroku-world/04_non_owner_roll_rejected.mir` | reject wrong-owner roll | `python3 scripts/sugoroku_world_samples.py run 04_non_owner_roll_rejected --debug summary` | `summary` | rejection | 90 | 2026-04-27 15:21 JST via `check-all` | `0909`, `0916` | negative guard |
 | `SUG-05` | 4 | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | late join sees published history | `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership` | `membership` | success | 90 | 2026-04-27 15:21 JST via focused run | `0909`, `0916` | membership timeline anchor |
 | `SUG-06` | 4 | `samples/clean-near-end/sugoroku-world/06_leave_non_owner.mir` | leave increments epoch and invalidates stale actions | `python3 scripts/sugoroku_world_samples.py run 06_leave_non_owner --debug membership` | `membership` | success | 90 | 2026-04-27 15:21 JST via `check-all` | `0909`, `0916` | leave invalidation |
@@ -62,10 +62,10 @@ Current active packages: `0916` Sugoroku sample progress alignment close、`0917
 | `FAIRY-01..06` | 8 | `samples/not_implemented/avatar-fairy-follow/` | planned remote-head follow / fallback / rejection / model-check family | none yet | planned only | not yet | 10 | 2026-04-27 15:21 JST | `0917` | skeleton exists; no active helper/runner |
 | `PH9` | 9 | `spec only` | typed external boundary / adapter | none yet | not yet | not yet | 1 | not yet | `0913` | no sample/helper exists |
 | `PH10` | 10 | `spec only` | auth seam without transport collapse | none yet | not yet | not yet | 1 | not yet | `0912`, `0913` | no envelope carrier exists |
-| `PH11` | 11 | `spec only` | shared term/layer signatures | none yet | not yet | not yet | 1 | not yet | `0912`, `0913` | next promoted package |
+| `PH11` | 11 | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs` | shared term/layer signatures | `python3 -m unittest scripts.tests.test_sugoroku_world_samples`; `cargo test -p mir-runtime --test clean_near_end_samples` | signature inventory / reserved kinds | partial | 25 | 2026-04-27 15:59 JST | `0912`, `0913`, `0918` | `TermSignature` first cut active; next promoted package is `LayerSignature system` |
 | `PH12` | 12 | `spec only` | system source -> place projection | none yet | not yet | not yet | 1 | not yet | `0912`, `0913` | no helper exists |
 | `PH13` | 13 | `spec only` | separate-process / network transport | none yet | not yet | not yet | 1 | not yet | `0913` | no network transport sample exists |
-| `PH15` | 15 | `mir_hilight.html`, helper debug modes | viewer + helper debug preview | browser open or sample helper runs | helper debug output | partial | 50 | 2026-04-27 10:14 JST | `0910`, `0911`, `0913` | typed/redacted visualization absent |
+| `PH15` | 15 | `mir_hilight.html`, helper debug modes | viewer + helper debug preview | browser open or sample helper runs | helper debug output / signatures | partial | 55 | 2026-04-27 15:39 JST | `0910`, `0911`, `0913`, `0918` | typed/redacted visualization absent |
 | `PH16` | 16 | `scripts/env/mirrorea_storage_env.sh`, `scripts/storage/*`, repo `target/` symlink | keep heavy artifacts off root | `bash scripts/env/mirrorea_storage_env.sh` | storage location report | partial | 50 | 2026-04-27 13:20 JST | `0913`, `0915` | cargo registry cache / LLVM actual probe still open |
 
 ## Phase plan details
@@ -79,11 +79,11 @@ Current active packages: `0916` Sugoroku sample progress alignment close、`0917
 | 4 | shared-space membership / authoritative room baseline | `SUG-00`, `SUG-02`, `SUG-04`, `SUG-05`, `SUG-06`, `SUG-07` | Sugoroku membership checks | room change -> command -> history/reject trace | membership timeline | join/leave/reject family + report |
 | 5 | finite-index typing + theorem/model-check boundary | `P5-01..07`, `SUG-08` | semantics/proof support tests | source -> checker -> theorem/model-check artifact | verification preview / proof graph | positive/negative + proof/model-check bridge + report |
 | 6 | compile-ready minimal actualization | `P6-01..05` | cargo test trio | clean suite smoke-all | json/debug summary | closeout validation + docs/report |
-| 7 | Sugoroku runtime attach vertical slice | `SUG-01`, `SUG-03`, `SUG-07`, `SUG-08` | `check-all` | bootstrap -> attach -> start -> roll -> handoff -> join/leave -> reset | summary / turn-trace / membership / verification | closeout pass, docs/report, detach still explicit TODO |
+| 7 | Sugoroku runtime attach vertical slice | `SUG-01`, `SUG-03`, `SUG-07`, `SUG-08` | `check-all` | bootstrap -> attach -> start -> roll -> handoff -> join/leave -> reset | summary / turn-trace / membership / verification / signatures | closeout pass, docs/report, detach still explicit TODO |
 | 8 | avatar fairy follow / fallback anchor | `FAIRY-01..06` planned | future helper tests | attach -> follow -> fallback -> reject -> reacquire | anchor graph / fallback reason / verification | active helper + positive/negative + report |
 | 9 | typed external effect boundary / adapter | `EXT-01..05` planned | future adapter tests | request -> adapter -> typed receipt/failure | effect route graph | at least one adapter pass/fail sample + report |
 | 10 | auth seam without transport collapse | `AUTH-01..05` planned | future envelope/auth tests | envelope -> auth -> authz -> membership -> dispatch | message/auth/membership flow | no hidden auth collapse + samples/report |
-| 11 | shared term/layer signatures | `SIG-01..05` planned | future signature tests | source -> signatures -> layer composition | signature table / residual list | signature dump + docs/report |
+| 11 | shared term/layer signatures | `SIG-01..05` planned | current Python/Rust signature tests + future layer tests | source -> signatures -> layer composition | signature table / residual list / reserved kinds | `TermSignature` dump + `LayerSignature` docs/report |
 | 12 | projection / placement | `PROJ-01..05` planned | future projection checks | system source -> projected stubs -> same trace | source/place mapping | projection checklist + examples + report |
 | 13 | network transport | `NET-01..05` planned | future transport tests | server + participant process run a turn | network timeline / telemetry | explicit typed envelope exchange + report |
 | 14 | hot-plug package / `AttachPoint` | `HOT-01..06` planned plus `SUG-09` | future compatibility tests | manifest -> attach -> activate -> lifecycle trace | compatibility / activation view | compatibility/design cut + report |
@@ -96,7 +96,7 @@ Current active packages: `0916` Sugoroku sample progress alignment close、`0917
 |---|---|---|---|---|
 | `DETACH-01` | detach lifecycle is still an explicit TODO boundary | `SUG-09`, future `HOT-*` | CodeX | keep it visible until `AttachPoint` package exists |
 | `FAIRY-01` | phase 8 now has skeleton files but still no active helper / runner | `FAIRY-01..06` | CodeX | promote helper contract after `TermSignature` / `LayerSignature` direction is clearer |
-| `SIG-01` | no `--debug signatures` surface exists yet | `PH11`, `PH15` | CodeX | implement `TermSignature registry / debug output` |
+| `LAYER-01` | `LayerSignature` law surface と typed composition metadata がまだ無い | `PH11`, `PH15` | CodeX | implement `LayerSignature system` |
 | `NET-01` | no separate-process/network transport sample exists | `PH13` | mixed gate | wait for envelope/auth seam and projection line |
 | `STOR-01` | mounted workdir exists but cargo registry cache / LLVM actual probe is not yet exercised | `PH16` | CodeX | run first backend / LLVM preparation package on `/mnt/mirrorea-work` |
 
@@ -113,6 +113,14 @@ Current active packages: `0916` Sugoroku sample progress alignment close、`0917
 | 2026-04-27 15:21 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug turn-trace` | pass | publish -> handoff trace readable |
 | 2026-04-27 15:21 JST | `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership` | pass | membership epoch and active/pending distinction visible |
 | 2026-04-27 15:21 JST | `python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification` | pass | static/runtime/model-check lines readable |
+| 2026-04-27 15:59 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures` | pass | `source_decl` と `sample_transition` の provenance を両方確認できる |
+| 2026-04-27 15:59 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples` | pass | Sugoroku provenance と closeout reserved kinds confirmed |
+| 2026-04-27 15:59 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | clean near-end `TermSignature` report / closeout inventory confirmed |
+| 2026-04-27 15:59 JST | `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | pass | clean near-end JSON emits `term_signatures`; closeout emits `signature_kinds` |
+| 2026-04-27 15:59 JST | `cargo test -p mir-runtime` | pass | broader runtime regression after reviewer-driven fixes |
+| 2026-04-27 15:59 JST | `python3 scripts/check_source_hierarchy.py` | pass | required `23`, missing `0` |
+| 2026-04-27 15:59 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 916 numbered report(s).` |
+| 2026-04-27 15:59 JST | `git diff --check` | pass | current package diff is whitespace-clean |
 | 2026-04-27 15:21 JST | `python3 scripts/current_l2_guided_samples.py run-source-sample samples/prototype/current-l2-dynamic-attach-detach/p03-avatar-controller-attach-detach.txt --host-plan samples/prototype/current-l2-dynamic-attach-detach/p03-avatar-controller-attach-detach.host-plan.json --format json` | expected fail | retired compatibility path; confirms prototype is not active runnable surface |
 | 2026-04-27 15:23 JST | `python3 scripts/check_source_hierarchy.py` | pass | required `23`, missing `0` |
 | 2026-04-27 15:23 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 915 numbered report(s).` |

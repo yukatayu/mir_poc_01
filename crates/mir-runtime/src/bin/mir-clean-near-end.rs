@@ -27,7 +27,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             print_output(format, &run_clean_near_end_family(CleanSampleFamily::parse(family)?)?)?;
         }
         "matrix" => print_output(format, &build_clean_near_end_matrix()?)?,
-        "closeout" => print_output(format, &build_clean_near_end_closeout())?,
+        "closeout" => print_output(format, &build_clean_near_end_closeout()?)?,
         other => return Err(format!("unknown command `{other}`").into()),
     }
     Ok(())

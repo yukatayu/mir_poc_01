@@ -54,6 +54,13 @@ run_directory_named_profile
   - `_debug_` を含み `_pipe` で終わる target
   target を `debug_outputs` として見せてよい。
   - これは final stdio / final host-I/O / final transcript schema を意味しない。
+- current sample-visible signature inventory cut では、
+  - Sugoroku helper `run_sample()` payload の `term_signatures`
+  - Sugoroku `--debug signatures`
+  - clean near-end `CleanNearEndSampleReport.term_signatures`
+  - clean near-end closeout `signature_kinds` / `reserved_signature_kinds`
+  を helper-local / report-local evidence inventory として見せてよい。
+  - これは final public signature schema、final public message contract、final public adapter contract を意味しない。
 - current sample-visible verifier preview cut では、
   - `formal_hook_status`
   - `subject_kind`

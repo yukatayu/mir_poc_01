@@ -119,6 +119,20 @@ LIMITATIONS = [
 ]
 
 
+@dataclass(frozen=True)
+class TermSignature:
+    kind: str
+    name: str
+    evidence_role: str
+
+    def to_json(self) -> dict[str, str]:
+        return {
+            "kind": self.kind,
+            "name": self.name,
+            "evidence_role": self.evidence_role,
+        }
+
+
 @dataclass
 class MessageQueue:
     place_id: str
@@ -362,6 +376,135 @@ def _sample_row(sample_id: str) -> dict[str, str]:
     raise ValueError(f"unknown sugoroku sample: {sample_id}")
 
 
+def _capture_decl_name(line: str, prefix: str) -> str | None:
+    stripped = line.strip()
+    if not stripped.startswith(prefix):
+        return None
+    remainder = stripped.removeprefix(prefix).strip()
+    if not remainder:
+        return None
+    token = remainder.split(None, 1)[0]
+    token = token.rstrip("{")
+    if "(" in token:
+        token = token.split("(", 1)[0]
+    return token or None
+
+
+def _capture_after_marker(line: str, marker: str) -> str | None:
+    if marker not in line:
+        return None
+    remainder = line.split(marker, 1)[1].strip()
+    if not remainder:
+        return None
+    token = remainder.split(None, 1)[0]
+    return token.rstrip("{,") or None
+
+
+def _append_term_signature(
+    signatures: list[TermSignature],
+    seen: set[tuple[str, str, str]],
+    *,
+    kind: str,
+    name: str,
+    evidence_role: str,
+) -> None:
+    key = (kind, name, evidence_role)
+    if name and key not in seen:
+        signatures.append(TermSignature(kind=kind, name=name, evidence_role=evidence_role))
+        seen.add(key)
+
+
+def _source_term_signatures(sample_id: str) -> list[TermSignature]:
+    source = _source_path(sample_id).read_text(encoding="utf-8")
+    signatures: list[TermSignature] = []
+    seen: set[tuple[str, str, str]] = set()
+    for line in source.splitlines():
+        transition_name = _capture_decl_name(line, "transition ")
+        if transition_name is not None:
+            _append_term_signature(
+                signatures,
+                seen,
+                kind="transition",
+                name=transition_name,
+                evidence_role="source_decl",
+            )
+        effect_name = _capture_decl_name(line, "effect ")
+        if effect_name is not None:
+            _append_term_signature(
+                signatures,
+                seen,
+                kind="effect",
+                name=effect_name,
+                evidence_role="source_decl",
+            )
+        witness_name = _capture_after_marker(line, "produces witness ")
+        if witness_name is not None:
+            _append_term_signature(
+                signatures,
+                seen,
+                kind="witness",
+                name=witness_name,
+                evidence_role="source_decl",
+            )
+    return signatures
+
+
+def _term_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, str]]:
+    signatures = list(_source_term_signatures(sample_id))
+    seen = {(row.kind, row.name, row.evidence_role) for row in signatures}
+    for transition in result.get("transitions", []):
+        if name := transition.get("transition"):
+            _append_term_signature(
+                signatures,
+                seen,
+                kind="transition",
+                name=name,
+                evidence_role="sample_transition",
+            )
+    if isinstance(result.get("roll"), dict):
+        witness_name = result["roll"].get("published_witness")
+        if witness_name:
+            _append_term_signature(
+                signatures,
+                seen,
+                kind="witness",
+                name=witness_name,
+                evidence_role="runtime_witness",
+            )
+    if isinstance(result.get("used_witness"), str):
+        _append_term_signature(
+            signatures,
+            seen,
+            kind="witness",
+            name=result["used_witness"],
+            evidence_role="runtime_witness",
+        )
+    for relation in result.get("relations", []):
+        if isinstance(relation, list) and relation:
+            relation_name = relation[0]
+            _append_term_signature(
+                signatures,
+                seen,
+                kind="relation",
+                name=relation_name,
+                evidence_role="derived_relation",
+            )
+    for property_name in result.get("properties_passed", []):
+        _append_term_signature(
+            signatures,
+            seen,
+            kind="property",
+            name=property_name,
+            evidence_role="validation_property",
+        )
+    return [signature.to_json() for signature in signatures]
+
+
+def _finalize_result(sample_id: str, result: dict[str, Any]) -> dict[str, Any]:
+    result["term_signatures"] = _term_signatures(sample_id, result)
+    return result
+
+
 def list_samples() -> list[dict[str, str]]:
     return [
         {
@@ -524,7 +667,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "place_model": "logical multi-place emulator in one OS process",
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "01_runtime_attach_game":
         runtime = _runtime_after_attach()
         result = _base_result(sample_id)
@@ -538,7 +681,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": _require_game(runtime).snapshot(),
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "02_admin_start_reset":
         runtime = _runtime_running()
         result = _base_result(sample_id)
@@ -567,7 +710,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": _require_game(runtime).snapshot(),
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "03_roll_publish_handoff":
         runtime = _runtime_after_alice_turn()
         game = _require_game(runtime)
@@ -576,6 +719,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
             {
                 "static_verdict": "valid",
                 "terminal_outcome": "success",
+                "transitions": [{"transition": "take_turn_alice"}],
                 "roll": game.published_rolls[-1].to_json(),
                 "game": game.snapshot(),
                 "relations": [
@@ -593,7 +737,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "turn_trace": list(runtime.turn_trace),
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "04_non_owner_roll_rejected":
         runtime = _runtime_after_alice_turn()
         result = _base_result(sample_id)
@@ -610,7 +754,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 ],
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "05_late_join_history_visible":
         runtime = _runtime_after_alice_turn()
         runtime.add_place("ParticipantPlace[Dave]", "ParticipantPlace")
@@ -636,7 +780,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "properties_passed": ["late_join_sees_published_history"],
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "06_leave_non_owner":
         runtime = _runtime_after_alice_turn()
         runtime.registry.mark_inactive("Carol")
@@ -666,7 +810,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "properties_passed": ["stale_action_after_leave_is_rejected"],
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "07_owner_leave_reassign":
         runtime = _runtime_after_alice_turn()
         runtime.registry.mark_inactive("Carol")
@@ -696,11 +840,11 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": game.snapshot(),
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "08_reset_interleaving_model_check":
         result = _base_result(sample_id)
         result.update(model_check())
-        return result
+        return _finalize_result(sample_id, result)
     if sample_id == "09_detach_todo":
         runtime = _runtime_after_attach()
         game = _require_game(runtime)
@@ -719,7 +863,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": game.snapshot(),
             }
         )
-        return result
+        return _finalize_result(sample_id, result)
     raise AssertionError(f"unhandled sample {sample_id}")
 
 
@@ -787,6 +931,13 @@ def check_all() -> dict[str, Any]:
 
 
 def closeout() -> dict[str, Any]:
+    signature_kinds = sorted(
+        {
+            row["kind"]
+            for sample in SAMPLE_ROWS
+            for row in run_sample(sample["sample_id"])["term_signatures"]
+        }
+    )
     return {
         "active_sample_root": str(SAMPLE_ROOT),
         "sample_count": len(SAMPLE_ROWS),
@@ -812,11 +963,14 @@ def closeout() -> dict[str, Any]:
         "static_checks": list(STATIC_CHECKS),
         "runtime_guards": list(RUNTIME_GUARDS),
         "model_check_properties": list(MODEL_CHECK_PROPERTIES),
+        "signature_kinds": signature_kinds,
+        "reserved_signature_kinds": ["message", "adapter", "layer"],
         "debug_output_modes": [
             "--debug summary",
             "--debug turn-trace",
             "--debug membership",
             "--debug verification",
+            "--debug signatures",
             "--format json",
         ],
         "limitations": list(LIMITATIONS),
@@ -900,6 +1054,17 @@ def _format_verification(result: dict[str, Any]) -> str:
     )
 
 
+def _format_signatures(result: dict[str, Any]) -> str:
+    lines = ["TERM SIGNATURES"]
+    for row in result.get("term_signatures", []):
+        evidence_role = row.get("evidence_role")
+        suffix = f" [{evidence_role}]" if evidence_role else ""
+        lines.append(f"  - {row['kind']}: {row['name']}{suffix}")
+    if len(lines) == 1:
+        lines.append("  - none")
+    return "\n".join(lines)
+
+
 def format_pretty(payload: Any, *, debug: str | None = None) -> str:
     if isinstance(payload, list):
         return "\n".join(f"{row['sample_id']}: {row['summary']}" for row in payload)
@@ -913,6 +1078,8 @@ def format_pretty(payload: Any, *, debug: str | None = None) -> str:
         return _format_membership(payload)
     if debug == "verification":
         return _format_verification(payload)
+    if debug == "signatures":
+        return _format_signatures(payload)
     sample = payload.get("sample")
     if sample == "00_world_bootstrap":
         return _format_world_summary(payload)
@@ -979,7 +1146,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("sample")
     run_parser.add_argument(
         "--debug",
-        choices=["summary", "turn-trace", "membership", "verification"],
+        choices=["summary", "turn-trace", "membership", "verification", "signatures"],
         default=None,
     )
     run_parser.add_argument("--format", choices=["pretty", "json"], default="pretty")

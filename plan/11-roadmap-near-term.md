@@ -6,31 +6,30 @@
 - near-term line は 1 本ではなく、`sample/progress/storage discipline` と `Mirrorea future-axis carrier implementation` の 2 track で読む
 - `docs/reports/0912-*` は future-axis audit / AGENTS closeout、`docs/reports/0913-*` は phase-sample-progress-storage-foundation closeout を表す
 - `docs/reports/0916-*` は Sugoroku per-sample alignment closeout、`docs/reports/0917-*` は avatar fairy follow sample-plan closeout を表す
-- current promoted next package は `TermSignature registry / debug output`
-- next semantic carrier package は `LayerSignature system`
+- `docs/reports/0918-*` は `TermSignature registry / debug output` closeout を表す
+- current promoted next package は `LayerSignature system`
+- next semantic carrier package は `MessageEnvelope / Auth seam`
 
 ## current promoted queue
 
-1. `TermSignature registry / debug output`
-   - term / transition / effect / message / adapter をまたぐ signature carrier と Sugoroku debug dump を追加する
-2. `LayerSignature system`
+1. `LayerSignature system`
    - auth / verification / visualization / transport / telemetry を typed layer として合成する metadata と law surface を整理する
-3. `MessageEnvelope / Auth seam`
+2. `MessageEnvelope / Auth seam`
    - transport、auth、membership、capability、witness を分けた envelope carrier を置く
-4. `VisualizationProtocol` first implementation
+3. `VisualizationProtocol` first implementation
    - static / runtime view、label / authority / redaction、typed telemetry の first cut を置く
-5. `Typed external boundary / adapter` sample plan
+4. `Typed external boundary / adapter` sample plan
    - phase 9 representative sample、adapter failure、debug label restriction を sample-first に整理する
-6. `Projection / placement plan`
+5. `Projection / placement plan`
    - system-wide source から server / participant / adapter / visualizer へ projection する validity line を整理する
-7. `Hot-plug Patch / AttachPoint`
+6. `Hot-plug Patch / AttachPoint`
    - `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration contract を整理する
-8. `Network transport` plan
+7. `Network transport` plan
    - separate-process / loopback / reconnect / transport failure explicit path を docs-first に置く
-9. `Compiler/backend/LLVM preparation` guardrail
+8. `Compiler/backend/LLVM preparation` guardrail
    - external workdir、cache placement、detach-safe cleanup、minimal probe を small VPS 前提で固める
-10. `hands-on docs / closeout`
-    - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation と skip reason を固定する
+9. `hands-on docs / closeout`
+   - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation と skip reason を固定する
 
 ## mixed gate
 

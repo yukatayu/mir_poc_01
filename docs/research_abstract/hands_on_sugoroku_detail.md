@@ -396,6 +396,7 @@ ActionRecord
 - `model-check property`: 実行順序の組み合わせに対して守りたい性質です。
 - `debug summary`: world/game の短い状態表示です。
 - `debug turn-trace`: turn の event trace です。
+- `debug signatures`: effect / transition / witness / relation / property の `TermSignature` inventory です。
 - `debug membership`: membership registry の表示です。
 - `debug verification`: static/runtime/model-check の確認項目です。
 
@@ -414,6 +415,7 @@ python3 scripts/sugoroku_world_samples.py check-all
 python3 scripts/sugoroku_world_samples.py run 00_world_bootstrap
 python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 python3 scripts/sugoroku_world_samples.py model-check
 python3 scripts/sugoroku_world_samples.py closeout
@@ -428,6 +430,19 @@ WORLD EmptyWorld
   inactive: none
   attached:
     SugorokuGame#1 phase=Running epoch=0 admin=Alice dice_owner=Bob
+```
+
+`--debug signatures` は次のような helper-local inventory を出します。
+
+```text
+TERM SIGNATURES
+  - effect: roll_dice [source_decl]
+  - transition: take_turn_alice [source_decl]
+  - transition: take_turn_alice [sample_transition]
+  - witness: draw_pub [source_decl]
+  - witness: draw_pub#1 [runtime_witness]
+  - relation: publication_order [derived_relation]
+  - property: owner_only_rolls [validation_property]
 ```
 
 ## json output
@@ -467,3 +482,4 @@ WORLD EmptyWorld
 - detach is TODO lifecycle boundary。
 - final parser grammar remains deferred。
 - final public API remains deferred。
+- `--debug signatures` は helper-local evidence view であり、final public signature schema / visualization protocol ではない。

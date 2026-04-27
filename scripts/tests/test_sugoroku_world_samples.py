@@ -105,6 +105,37 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("no real network yet", result["limitations"])
         self.assertIn("detach is TODO lifecycle boundary", result["limitations"])
 
+    def test_roll_publish_handoff_exposes_term_signatures(self) -> None:
+        result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
+
+        signatures = {
+            (row["kind"], row["name"], row["evidence_role"])
+            for row in result["term_signatures"]
+        }
+        self.assertIn(("transition", "take_turn_alice", "source_decl"), signatures)
+        self.assertIn(("transition", "take_turn_alice", "sample_transition"), signatures)
+        self.assertIn(("effect", "roll_dice", "source_decl"), signatures)
+        self.assertIn(("witness", "draw_pub#1", "runtime_witness"), signatures)
+        self.assertIn(("relation", "publication_order", "derived_relation"), signatures)
+
+    def test_signatures_debug_prints_signature_inventory(self) -> None:
+        pretty = sugoroku_world_samples.format_pretty(
+            sugoroku_world_samples.run_sample("03_roll_publish_handoff"),
+            debug="signatures",
+        )
+
+        self.assertIn("TERM SIGNATURES", pretty)
+        self.assertIn("transition: take_turn_alice [source_decl]", pretty)
+        self.assertIn("transition: take_turn_alice [sample_transition]", pretty)
+        self.assertIn("effect: roll_dice", pretty)
+
+    def test_closeout_records_signature_debug_mode(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertIn("--debug signatures", result["debug_output_modes"])
+        self.assertIn("message", result["reserved_signature_kinds"])
+        self.assertIn("adapter", result["reserved_signature_kinds"])
+
     def test_cli_run_json_prints_json_payload(self) -> None:
         buffer = StringIO()
         with mock.patch("sys.stdout", buffer):

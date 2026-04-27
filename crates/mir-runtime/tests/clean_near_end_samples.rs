@@ -1,4 +1,6 @@
-use mir_runtime::clean_near_end::{build_clean_near_end_matrix, run_clean_near_end_sample};
+use mir_runtime::clean_near_end::{
+    build_clean_near_end_closeout, build_clean_near_end_matrix, run_clean_near_end_sample,
+};
 
 #[test]
 fn clean_sample_authorized_declassification_passes() {
@@ -117,4 +119,31 @@ fn clean_near_end_matrix_counts_all_families() {
     assert_eq!(matrix.families["order-handoff"], 6);
     assert_eq!(matrix.families["model-check"], 3);
     assert_eq!(matrix.families["modal"], 2);
+}
+
+#[test]
+fn clean_sample_delegated_rng_service_emits_term_signatures() {
+    let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
+    assert!(report
+        .term_signatures
+        .iter()
+        .any(|signature| signature.kind == "effect" && signature.name == "rng"));
+    assert!(report
+        .term_signatures
+        .iter()
+        .any(|signature| signature.kind == "witness" && signature.name == "provider_receipt"));
+    assert!(report
+        .term_signatures
+        .iter()
+        .any(|signature| signature.kind == "relation" && signature.name == "publication_order"));
+}
+
+#[test]
+fn clean_near_end_closeout_records_signature_inventory() {
+    let closeout = build_clean_near_end_closeout().unwrap();
+    assert!(closeout.signature_kinds.contains(&"effect".to_string()));
+    assert!(closeout.signature_kinds.contains(&"witness".to_string()));
+    assert!(closeout
+        .reserved_signature_kinds
+        .contains(&"adapter".to_string()));
 }

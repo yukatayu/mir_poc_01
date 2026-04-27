@@ -134,8 +134,8 @@
 - current Sugoroku sample に出てくる `world` は host/server-side sugar として読む方向であり、Mir core primitive として固定するかどうかは未決定である。
 - standard I/O を Mir core primitive にせず、typed external effect adapter で外界接続を扱う方向は current line だが、exact surface syntax / schema / host contract は未決定である。
 - next open cluster は次である。
-  1. `TermSignature` registry をどの粒度で持つか。
-     term / transition / effect / message / adapter のどこまでを正本 carrier に入れ、既存 emitted artifact / trace / debug output とどう接続するか。
+  1. `TermSignature` first cut の exact granularity をどこまで current sample report に露出するか。
+     2026-04-27 時点で helper-local / report-local inventory は actualize したが、term / transition / effect / message / adapter のどこまでを正本 carrier に入れるか、reserved kind をどう扱うかは未決定である。
   2. `LayerSignature` system の law surface をどこまで current docs に上げるか。
      no hidden authority、no hidden data downgrade、evidence preservation、placement preservation をどう machine-check / theorem / runtime policy / visualization に配るか。
   3. `MessageEnvelope` / `AuthEvidence` / transport insertion seam の最小 shape をどう置くか。
