@@ -117,11 +117,12 @@
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep を先に入れた上で、next promoted package を `FAIRY-05` residual reacquire design と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review を先に入れた上で、next promoted package を Typed external boundary / adapter executable widening と読む
 - `docs/reports/0933-*` で `Avatar fairy follow residual widening` を close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた
 - `docs/reports/0934-*` で `cross-package sweep` を close し、active evidence / planned family / mixed gate / next queue の current reading を recut した
+- `docs/reports/0939-*` で `FAIRY-05 residual reacquire design` を docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを固定した
 - phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
-- package 6 以降の closed chain は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout、`NET-01..05` helper-local transport canary、avatar representative slice widening、hot-plug helper-local lifecycle canary、cross-package sweep までである。current next line は `FAIRY-05` residual reacquire design、その reopen point は typed external boundary / adapter executable widening と読む
+- package 6 以降の closed chain は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout、`NET-01..05` helper-local transport canary、avatar representative slice widening、hot-plug helper-local lifecycle canary、cross-package sweep、`FAIRY-05` docs-first design closeout までである。current next line は typed external boundary / adapter executable widening、その reopen point は projection / placement executable widening と読む
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

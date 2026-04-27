@@ -40,6 +40,8 @@
 - actual LLVM build / backend choice / packaging success criteria
   - guardrail と non-destructive probe は `0927` / `plan/23` で actualize したが、actual LLVM artifact、final backend choice、installed-binary / FFI / engine adapter success criteria は未決のまま残す
 - avatar fairy follow residual `FAIRY-05` を active helper に取り込むか
+  - docs-first では explicit state timeline / anchor switch evidence gate だけを固定し、
+    visibility-return witness の carrier bundling と runnable widening の価値は未決
 - final parser grammar
 - final parser / checker / runtime / verifier API
 - final theorem result / checker artifact / verifier contract

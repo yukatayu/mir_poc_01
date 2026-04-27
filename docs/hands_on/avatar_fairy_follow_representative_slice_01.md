@@ -1,6 +1,8 @@
 # avatar_fairy_follow_representative_slice_01
 
-phase 8 `avatar fairy follow / fallback anchor` の current runnable floor を最短で追うための page です。
+legacy phase 8 sample-family label `avatar fairy follow / fallback anchor` の current runnable floor を最短で追うための page です。
+
+current macro-phase reading は `Macro 6 reserve` です。
 
 ## run
 
@@ -35,6 +37,7 @@ python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_o
 - real transport / auth / session semantics
 - hot-plug / `AttachPoint` lifecycle implementation
 - production engine / host integration
+- `FAIRY-05` reacquire-after-return の runnable widening
 
 ## active vs planned vs historical
 
@@ -46,3 +49,14 @@ python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_o
   `samples/prototype/current-l2-dynamic-attach-detach/`
 
 `FAIRY-05` だけが residual planned family に残っています。混同しないことが重要です。
+
+current repo-local reading では、`FAIRY-05` を active helper に昇格させる前に、
+explicit state timeline / anchor switch evidence が要る、という gate だけを固定しています。
+
+- `UNRESOLVED`: visibility-return witness をどの carrier に載せるか
+- `UNRESOLVED`: helper-local CLI/debug surface の exact name
+- current working assumption:
+  candidate label として `state_timeline` / `anchor_switch` を使ってよい
+
+これは planning-only です。final public visualization API や final public avatar runtime
+surface として固定したものではありません。

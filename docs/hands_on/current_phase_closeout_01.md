@@ -82,6 +82,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - final public auth / visualization / projection / hot-plug surface
 - transport canary から real socket / session / durable replay への widening
 - detach lifecycle / `AttachPoint` residual contract
+- `FAIRY-05` runnable widening decision
 - actual LLVM artifact と backend choice
 
 ## remaining true user-spec gate
@@ -93,8 +94,8 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `FAIRY-05` residual reacquire design
-2. Typed external boundary / adapter executable widening
+1. Typed external boundary / adapter executable widening
+2. Projection / placement executable widening
 
 ## 関連文書
 

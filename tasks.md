@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 21:19 JST
+最終更新: 2026-04-27 21:38 JST
 
 ## この文書について
 
@@ -36,9 +36,10 @@
 - `Network transport helper-local canaries` は `docs/reports/0932-*` で close し、`scripts/network_transport_samples.py`、active landing page `samples/clean-near-end/network-transport/README.md`、`NET-02..05` process-boundary / reconnect / typed failure / redacted route trace canary を追加した
 - `Avatar fairy follow residual widening` は `docs/reports/0933-*` で close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、phase 8 residual planned family を `FAIRY-05` だけに縮めた
 - `cross-package sweep` は `docs/reports/0934-*` で close し、active evidence / planned family / mixed gate の current reading を recut した
+- `FAIRY-05 residual reacquire design` は `docs/reports/0939-*` で close し、sample 自体は planned のままに保ちつつ、explicit state timeline / anchor switch evidence requirement と exact carrier bundling `UNRESOLVED` を docs-first に固定した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`FAIRY-05` residual reacquire design**
-- next reopen point は **`Typed external boundary / adapter executable widening`**
+- current promoted next line は **Typed external boundary / adapter executable widening**
+- next reopen point は **Projection / placement executable widening**
 
 ## current executable floor
 
@@ -86,6 +87,7 @@
 
 - `samples/not_implemented/avatar-fairy-follow/`
   - `FAIRY-05` target reacquire after return
+    - docs-first reopen-gate review は close 済みだが、exact carrier bundling は `UNRESOLVED`
 - `samples/not_implemented/typed-external-boundary/`
   - `EXT-01..05` docs-first adapter ladder
 - `samples/not_implemented/network-transport/`
@@ -138,24 +140,7 @@
 
 ## 自走可能な task package
 
-### Package 1. `FAIRY-05` residual reacquire design
-
-- phase / stage:
-  `Macro 6`, `reserve`
-- rough estimate:
-  `1 package`
-- objective:
-  `FAIRY-05` reacquire-after-return を reopen するなら必要な state-timeline / anchor-switch debug carrier を先に固定する
-- expected deliverables:
-  reopen 条件、state timeline view、anchor switch evidence の plan
-- validation command:
-  `python3 scripts/avatar_follow_samples.py closeout --format json`
-- report requirement:
-  新しい report、reopen 条件と stop line を明記する
-- stop line:
-  final game/runtime API や production avatar stack は固定しない
-
-### Package 2. Typed external boundary / adapter executable widening
+### Package 1. Typed external boundary / adapter executable widening
 
 - phase / stage:
   `Macro 6`, `reserve`
@@ -171,6 +156,23 @@
   新しい report、typed external boundary と transport/auth split を明記する
 - stop line:
   host-specific public adapter API や production binding は固定しない
+
+### Package 2. Projection / placement executable widening
+
+- phase / stage:
+  `Macro 6`, `reserve`
+- rough estimate:
+  `1 package`
+- objective:
+  docs-first validity checklist を helper-local evidence floor にどこまで actualize するかを切る
+- expected deliverables:
+  system-wide source / place-specific projection trace の minimal helper-local cut
+- validation command:
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、projection validity と stop line を明記する
+- stop line:
+  final projection IR / optimizer / equivalence checker は固定しない
 
 ## research を通して見つけること
 

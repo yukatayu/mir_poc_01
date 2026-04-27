@@ -2,8 +2,10 @@
 
 ## purpose
 
-phase 8 `avatar fairy follow / fallback anchor` を、historical prototype と docs-first skeleton だけでなく、
+legacy phase 8 sample-family label `avatar fairy follow / fallback anchor` を、historical prototype と docs-first skeleton だけでなく、
 repo-local helper canary として追える current repository memory を置く。
+
+current macro-phase reading は `Macro 6 reserve` である。
 
 ## current status
 
@@ -46,7 +48,35 @@ The following remain planned under `samples/not_implemented/avatar-fairy-follow/
 - `FAIRY-05`
   reacquire-after-return
 
-They stay planned until there is clear value in widening the active helper beyond the current representative slice.
+They stay planned until the reopen gate below is justified for the active helper.
+
+## unresolved carrier choice for `FAIRY-05`
+
+If `FAIRY-05` is ever promoted into `scripts/avatar_follow_samples.py`, the
+current repo-local gate is only that explicit state timeline / anchor switch
+evidence must exist.
+
+- `UNRESOLVED`: whether visibility-return witness is carried as a timeline
+  event, anchor-switch event, witness event, or typed bundle
+- `UNRESOLVED`: helper-local CLI/debug surface exact naming
+- current working assumption:
+  candidate labels `state_timeline` / `anchor_switch` are acceptable as
+  planning-only names
+
+These names are planning-only helper-local carrier labels. They are not final
+public visualization or runtime API names.
+
+## reopen gate for runnable widening
+
+Do not reopen `FAIRY-05` as runnable widening unless all of the following are
+worth carrying in the same package:
+
+- one positive reacquire-after-return sample
+- one negative/rejection companion for missing return witness or stale
+  membership evidence
+- helper-local evidence that shows the switch order explicitly
+- docs / report / snapshot sync that keeps active / planned / mixed-gate
+  boundaries readable
 
 ## validation floor
 
@@ -68,3 +98,5 @@ Do not claim:
 - production game / world / engine adapter
 
 This package is a repo-local representative slice only.
+`FAIRY-05` design fixation does not by itself promote the sample to active
+helper status.

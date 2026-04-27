@@ -22,15 +22,16 @@
 - `docs/reports/0932-*` は `Network transport helper-local canaries` closeout を表し、`scripts/network_transport_samples.py`、active landing page、`NET-02..05` executable canary を current line に actualize した
 - `docs/reports/0933-*` は `Avatar fairy follow residual widening` closeout を表し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、phase 8 residual planned family を `FAIRY-05` だけに縮めた
 - `docs/reports/0934-*` は `cross-package sweep` closeout を表し、active evidence / planned family / mixed gate / next queue を `FAIRY-05` promoted line と typed external reopen point に recut した
-- current promoted next package は `FAIRY-05` residual reacquire design
-- next reopen point は `Typed external boundary / adapter executable widening`
+- `docs/reports/0939-*` は `FAIRY-05 residual reacquire design` docs-first closeout を表し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current line に actualize した
+- current promoted next package は Typed external boundary / adapter executable widening
+- next reopen point は Projection / placement executable widening
 
 ## current promoted queue
 
-1. `FAIRY-05` residual reacquire design
-   - state-timeline / anchor-switch carrier が必要かを見極め、reopen 条件だけを固定する
-2. Typed external boundary / adapter executable widening
+1. Typed external boundary / adapter executable widening
    - `EXT-01..05` planned ladder から dedicated helper cut を切る
+2. Projection / placement executable widening
+   - validity report / projection trace の helper-local evidence floor を切る
 
 ## mixed gate
 

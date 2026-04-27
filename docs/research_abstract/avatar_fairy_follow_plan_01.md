@@ -1,7 +1,9 @@
 # avatar_fairy_follow_current_slice_01
 
-この文書は、phase 8 `avatar fairy follow / fallback anchor` の
+この文書は、legacy phase 8 sample-family label `avatar fairy follow / fallback anchor` の
 current representative slice と residual planned family を reader-facing に説明する summary です。
+
+current macro-phase reading は `Macro 6 reserve` です。
 
 規範判断の正本は `specs/` であり、ここは current plan と sample 境界の説明だけを行います。
 
@@ -35,7 +37,7 @@ avatar fairy follow は、そのための小さく practical な題材です。
 | `FAIRY-03` | `samples/clean-near-end/avatar-follow/03_...` | active fallback-after-reject canary | membership + fallback reason |
 | `FAIRY-04` | `samples/clean-near-end/avatar-follow/04_...` | active rejection canary | static rejection / lineage mismatch |
 | `FAIRY-06` | `samples/clean-near-end/avatar-follow/06_...` | active verification canary | verification / model-check |
-| `FAIRY-05` | `samples/not_implemented/avatar-fairy-follow/05_...` | residual planned reacquire widening | state timeline / anchor switch |
+| `FAIRY-05` | `samples/not_implemented/avatar-fairy-follow/05_...` | residual planned reacquire widening | explicit state timeline / anchor switch evidence; witness bundling unresolved |
 
 ## 4. sample family で見たい性質
 
@@ -61,6 +63,21 @@ avatar fairy follow は、そのための小さく practical な題材です。
 - `FAIRY-05` reacquire-after-return を active へ昇格するか
 - membership / anchor / witness / visualization をどこまで同じ carrier に乗せるか
 - future hot-plug / projection / transport widening とどこで接続するか
+
+ただし、2026-04-27 の current repo-local reading では、
+`FAIRY-05` を reopen する前に explicit state timeline / anchor switch evidence が必要、
+という gate だけを先に固定します。
+
+- `UNRESOLVED`: visibility-return witness を timeline event / anchor-switch event /
+  witness event / typed bundle のどれとして carry するか
+- `UNRESOLVED`: helper-local CLI/debug surface の exact name
+- current working assumption:
+  candidate label として `state_timeline` / `anchor_switch` を使ってよい
+
+これは helper-local planning surface の話であり、final public visualization API ではありません。
+また、runnable widening に進むなら、positive case だけでなく
+「visibility return witness が無い」「membership evidence が stale」
+といった rejection companion も同じ package で持つ必要があります。
 
 このため、phase 8 全体としてはまだ widening 余地があります。
 current helper cut は widened representative slice であり、family 全体完成を意味しません。

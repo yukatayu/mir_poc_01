@@ -204,6 +204,9 @@ avatar fairy follow では、`scripts/avatar_follow_samples.py` と
 `samples/clean-near-end/avatar-follow/` によって、
 `FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06` を widened active representative slice として追えます。
 `FAIRY-05` だけが residual planned family に残ります。
+2026-04-27 の docs-first fixation では、これを reopen する前に explicit state
+timeline / anchor switch evidence が要ることだけを要件に置きます。
+visibility-return witness をどの carrier に載せるかは `UNRESOLVED` のままです。
 
 ## 文書の読み分け
 
@@ -242,10 +245,10 @@ avatar fairy follow では、`scripts/avatar_follow_samples.py` と
 
 現在の promoted queue は次です。
 
-1. `FAIRY-05` residual reacquire design
-   - state-timeline / anchor-switch carrier が本当に必要かを判断する
-2. Typed external boundary / adapter executable widening
+1. Typed external boundary / adapter executable widening
    - `EXT-01..05` ladder から最小の dedicated adapter helper cut を actualize する
+2. Projection / placement executable widening
+   - validity report を helper-local evidence としてどこまで actualize するかを切る
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 

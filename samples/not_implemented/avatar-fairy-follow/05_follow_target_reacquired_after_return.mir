@@ -1,7 +1,14 @@
-# FAIRY-05 planned phase 8 skeleton.
+# FAIRY-05 planned legacy phase 8 sample-family skeleton.
 # Not an active runnable sample.
 # Goal: after a temporary fallback to the local anchor, the fairy can
 # reacquire the remote target when visibility returns.
+# Before promotion, the current repo-local plan requires helper-local
+# evidence for:
+# - state_timeline
+# - anchor_switch
+# The visibility-return witness should appear inside timeline witness refs
+# before the switch occurs. These names are planning-only carrier labels,
+# not final public API.
 
 module PlannedMirrorea.AvatarFairyReacquireRemoteTarget
 
@@ -21,6 +28,9 @@ place SharedWorld {
         observe remote_head_anchor
           from RemoteAvatarPlace#A.visible_stream
           requires witness(remote_head_returned)
+        # Future helper-local evidence must show that the visibility-return
+        # witness was observed before switch_back, without claiming hidden
+        # transport/session recovery.
 
       stage switch_back:
         ensure attached_anchor(FairyPlace#1) = remote_head_anchor
