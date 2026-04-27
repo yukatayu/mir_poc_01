@@ -154,10 +154,12 @@
        cross-place projection viewer である。
   5. projection / placement mobility をどこまで docs-first に固定するか。
      system-wide source から server / participant / adapter / visualizer へ projection するときの validity report と stop line をどう表すか。
-     - 2026-04-27 時点で docs-first plan は actualize した。
+     - 2026-04-27 時点で helper/report-local preview floor までは actualize した。
        `plan/20-projection-and-placement-roadmap.md` により、system-wide source / place-specific program distinction、
-       server / participant / adapter / visualizer split、validity checklist、stop line までは current line に上げてよい。
-     - 未決なのは final projection IR、generator、optimizer、equivalence checker である。
+       server / participant / adapter / visualizer split、validity checklist、helper/report-local preview floor、stop line までは current line に上げてよい。
+       Sugoroku helper `projection_view` と clean near-end runtime report-local `cross_place_projection` により、
+       place split と provider placement inventory を evidence-oriented に読む current floor も actualize してよい。
+     - 未決なのは final projection IR、generator、optimizer、equivalence checker、emitted place program public contract である。
   5a. typed external boundary / adapter sample ladder をどこまで docs-first に固定するか。
      - 2026-04-27 時点で phase 9 planned family `EXT-01..05` は docs-first に actualize した。
        `LogText` / world overlay / local queue / typed failure / debug label restriction という working sample ID と、

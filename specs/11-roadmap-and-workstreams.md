@@ -1170,7 +1170,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Avatar fairy follow representative slice` は helper-local package として close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、initial residual planned family `FAIRY-02` / `FAIRY-05`、hands-on landing page を current snapshot に actualize した。
 - `Avatar fairy follow residual widening` は helper-local package として close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた。
 - `FAIRY-05 residual reacquire design` は docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current snapshot に actualize した。
-- current promoted next package は Projection / placement executable widening である。
+- `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
+- current promoted next package は Typed external boundary residual planned family review である。
 
 ## 2026-04-27 repository-structure staging addendum
 

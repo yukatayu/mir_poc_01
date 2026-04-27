@@ -24,15 +24,16 @@
 - `docs/reports/0934-*` は `cross-package sweep` closeout を表し、active evidence / planned family / mixed gate / next queue を `FAIRY-05` promoted line と typed external reopen point に recut した
 - `docs/reports/0939-*` は `FAIRY-05 residual reacquire design` docs-first closeout を表し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current line に actualize した
 - `docs/reports/0941-*` は `Typed external boundary executable widening` closeout を表し、`EXT-03` / `EXT-04` thin synthetic preview helper cut と residual planned family `EXT-01` / `EXT-02` / `EXT-05` を current line に actualize した
-- current promoted next package は Projection / placement executable widening
-- next reopen point は Typed external boundary residual planned family review
+- `docs/reports/0942-*` は `Projection / placement executable widening` closeout を表し、Sugoroku helper `projection_view` / `--debug projection` と clean near-end runtime report-local `cross_place_projection` を current line に actualize した
+- current promoted next package は Typed external boundary residual planned family review
+- next reopen point は Projection / placement residual emitted-program gate
 
 ## current promoted queue
 
-1. Projection / placement executable widening
-   - validity report / projection trace の helper-local evidence floor を切る
-2. Typed external boundary residual planned family review
+1. Typed external boundary residual planned family review
    - `EXT-01` / `EXT-02` / `EXT-05` を projection / visualization / host-schema pressure と照らして reopen する
+2. Projection / placement residual emitted-program gate
+   - helper/report-local preview floor と final emitted program family を混同しない residual gate を切る
 
 ## mixed gate
 

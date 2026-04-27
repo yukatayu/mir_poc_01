@@ -1064,7 +1064,7 @@ fn reserved_layer_signature_names() -> Vec<String> {
 }
 
 fn reserved_visualization_view_names() -> Vec<String> {
-    ["cross_place_projection", "label_authority_redaction_grid"]
+    ["label_authority_redaction_grid"]
         .into_iter()
         .map(|name| name.to_string())
         .collect()
@@ -1328,20 +1328,40 @@ fn visualization_views_for_spec(
         .collect::<Vec<_>>();
 
     match spec.id.as_str() {
-        "05_delegated_rng_service" => vec![visualization_view(
-            "provider_boundary_redacted_flow",
-            &layer_signature_refs,
-            &message_envelope_refs,
-            &["effect:delegated_rng_roll", "witness:provider_receipt"],
-            &[
-                "auth_evidence:none_baseline",
-                "witness_payload:named_reference_only",
-            ],
-            &[
-                "report-local view over current layer/message inventory",
-                "transport and witness remain separate lanes",
-            ],
-        )],
+        "05_delegated_rng_service" => vec![
+            visualization_view(
+                "provider_boundary_redacted_flow",
+                &layer_signature_refs,
+                &message_envelope_refs,
+                &["effect:delegated_rng_roll", "witness:provider_receipt"],
+                &[
+                    "auth_evidence:none_baseline",
+                    "witness_payload:named_reference_only",
+                ],
+                &[
+                    "report-local view over current layer/message inventory",
+                    "transport and witness remain separate lanes",
+                ],
+            ),
+            visualization_view(
+                "cross_place_projection",
+                &layer_signature_refs,
+                &message_envelope_refs,
+                &[
+                    "projection:provider_boundary_draw_route",
+                    "authority_place:ParticipantPlace[Alice]",
+                    "place:ParticipantPlace[Alice]",
+                    "place:ProviderPlace[AuthorityRng]",
+                    "witness:provider_receipt",
+                ],
+                &["projection_summary_only", "auth_evidence:none_baseline"],
+                &[
+                    "report-local projection preview over current layer/message inventory",
+                    "authority placement stays distinct from provider placement",
+                    "not a final emitted place-specific program",
+                ],
+            ),
+        ],
         "06_auditable_authority_witness" => vec![visualization_view(
             "authority_trace_redacted_view",
             &layer_signature_refs,

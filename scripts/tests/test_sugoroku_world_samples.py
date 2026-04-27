@@ -365,6 +365,7 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         views = {row["view_id"]: row for row in result["visualization_views"]}
         self.assertIn("turn_timeline", views)
         self.assertIn("message_route", views)
+        self.assertIn("projection_view", views)
         self.assertEqual(views["turn_timeline"]["view_kind"], "turn_timeline")
         self.assertEqual(views["turn_timeline"]["label"], "helper:published-history")
         self.assertEqual(
@@ -379,6 +380,31 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
             views["turn_timeline"]["summary"]["published_witness"], "draw_pub#1"
         )
         self.assertEqual(views["turn_timeline"]["summary"]["next_owner"], "Bob")
+        self.assertEqual(views["projection_view"]["view_kind"], "projection_view")
+        self.assertEqual(views["projection_view"]["label"], "helper:projection")
+        self.assertEqual(
+            views["projection_view"]["authority"],
+            "InspectProjection(SugorokuWorldSource#1)",
+        )
+        self.assertEqual(
+            views["projection_view"]["redaction"], "projection_summary_only"
+        )
+        self.assertEqual(
+            views["projection_view"]["summary"]["authority_place"],
+            "SugorokuGamePlace#1",
+        )
+        self.assertIn(
+            "ParticipantPlace[Alice]",
+            views["projection_view"]["summary"]["participant_places"],
+        )
+        self.assertEqual(
+            views["projection_view"]["summary"]["adapter_transport"],
+            "local_queue",
+        )
+        self.assertIn(
+            "message_route",
+            views["projection_view"]["summary"]["observer_views"],
+        )
 
         telemetry = {row["row_id"]: row for row in result["telemetry_rows"]}
         self.assertIn("roll_request#1", telemetry)
@@ -435,14 +461,29 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("roll_request#1", pretty)
         self.assertIn("redaction=omit_auth_evidence_payload", pretty)
 
+    def test_projection_debug_prints_projection_view(self) -> None:
+        pretty = sugoroku_world_samples.format_pretty(
+            sugoroku_world_samples.run_sample("03_roll_publish_handoff"),
+            debug="projection",
+        )
+
+        self.assertIn("PROJECTION", pretty)
+        self.assertIn("projection_view", pretty)
+        self.assertIn("SugorokuWorldSource#1", pretty)
+        self.assertIn("SugorokuGamePlace#1", pretty)
+        self.assertIn("local_queue", pretty)
+
     def test_closeout_records_visualization_debug_mode(self) -> None:
         result = sugoroku_world_samples.closeout()
 
         self.assertIn("--debug visualization", result["debug_output_modes"])
+        self.assertIn("--debug projection", result["debug_output_modes"])
         self.assertIn("turn_timeline", result["visualization_view_kinds"])
         self.assertIn("message_route", result["visualization_view_kinds"])
+        self.assertIn("projection_view", result["visualization_view_kinds"])
         self.assertIn("message_dispatch", result["telemetry_row_kinds"])
         self.assertIn("published_roll", result["telemetry_row_kinds"])
+        self.assertIn("place_graph", result["reserved_visualization_view_kinds"])
 
     def test_cli_run_json_prints_json_payload(self) -> None:
         buffer = StringIO()

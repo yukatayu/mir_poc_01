@@ -15,6 +15,8 @@
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`
   - phase 9 synthetic preview helper の最短入口
+- `projection_placement_views_01.md`
+  - phase 12 helper/report-local projection preview の最短入口
 - `network_transport_canaries_01.md`
   - phase 13 helper-local canary の最短入口
 

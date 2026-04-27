@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 22:23 JST
+最終更新: 2026-04-27 22:52 JST
 
 ## この文書について
 
@@ -38,9 +38,10 @@
 - `cross-package sweep` は `docs/reports/0934-*` で close し、active evidence / planned family / mixed gate の current reading を recut した
 - `FAIRY-05 residual reacquire design` は `docs/reports/0939-*` で close し、sample 自体は planned のままに保ちつつ、explicit state timeline / anchor switch evidence requirement と exact carrier bundling `UNRESOLVED` を docs-first に固定した
 - `Typed external boundary executable widening` は `docs/reports/0941-*` で close し、`scripts/typed_external_boundary_samples.py`、synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05`、`plan/25-typed-external-boundary-executable-roadmap.md` を current line に同期した。current validation は helper self-consistency と anchor comparison であり、phase 9 `.mir` の direct semantic execution ではない
+- `Projection / placement executable widening` は `docs/reports/0942-*` で close し、Sugoroku helper `projection_view` / `--debug projection` と clean near-end runtime report-local `cross_place_projection` により、system-wide source から place split / observer view refs / provider placement inventory を読む helper/report-local preview floor を actualize した。final emitted place program / optimizer / equivalence checker は still later である
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **Projection / placement executable widening**
-- next reopen point は **Typed external boundary residual planned family review**
+- current promoted next line は **Typed external boundary residual planned family review**
+- next reopen point は **Projection / placement residual emitted-program gate**
 
 ## current executable floor
 
@@ -112,6 +113,7 @@
 - `python3 scripts/sugoroku_world_samples.py model-check`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes`
+- `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers`
 - `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug`
@@ -148,24 +150,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Projection / placement executable widening
-
-- phase / stage:
-  `Macro 6`, `reserve`
-- rough estimate:
-  `1 package`
-- objective:
-  docs-first validity checklist を helper-local evidence floor にどこまで actualize するかを切る
-- expected deliverables:
-  system-wide source / place-specific projection trace の minimal helper-local cut
-- validation command:
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、projection validity と stop line を明記する
-- stop line:
-  final projection IR / optimizer / equivalence checker は固定しない
-
-### Package 2. Typed external boundary residual planned family review
+### Package 1. Typed external boundary residual planned family review
 
 - phase / stage:
   `Macro 6`, `reserve`
@@ -183,6 +168,25 @@
   新しい report、scenario label / host schema / visualization gate の分離を明記する
 - stop line:
   console / overlay / viewer contract を final public API として固定しない
+
+### Package 2. Projection / placement residual emitted-program gate
+
+- phase / stage:
+  `Macro 6`, `reserve`
+- rough estimate:
+  `1 package`
+- objective:
+  helper/report-local preview floor の次に残る emitted program / optimizer / equivalence gate を docs-first に切り出す
+- expected deliverables:
+  projection preview と final placement artifact family を混同しない reopen criterion
+- validation command:
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、preview floor と emitted-program stop line の分離を明記する
+- stop line:
+  final projection IR / optimizer / equivalence checker / deployment planner は固定しない
 
 ## research を通して見つけること
 

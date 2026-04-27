@@ -36,6 +36,7 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transpor
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug turn-trace
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification
@@ -48,7 +49,7 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
 | `SUG-00` | `00_world_bootstrap.mir` | empty world, initial membership, no game yet | PH4 baseline | `summary` | success |
 | `SUG-01` | `01_runtime_attach_game.mir` | runtime attach of `SugorokuGame#1` | PH7 attach floor | `summary`, `hotplug` | success |
 | `SUG-02` | `02_admin_start_reset.mir` | admin-only start/reset control | PH4 + PH7 control boundary | `summary` | success |
-| `SUG-03` | `03_roll_publish_handoff.mir` | roll -> publish -> witness -> handoff | PH7 core E2E | `summary`, `turn-trace` | success |
+| `SUG-03` | `03_roll_publish_handoff.mir` | roll -> publish -> witness -> handoff | PH7 core E2E + PH12 preview anchor | `summary`, `turn-trace`, `projection` | success |
 | `SUG-04` | `04_non_owner_roll_rejected.mir` | stale or wrong owner action rejection | PH4 authority guard | `summary` | rejection |
 | `SUG-05` | `05_late_join_history_visible.mir` | late join sees published history | PH4 membership timeline | `membership` | success |
 | `SUG-06` | `06_leave_non_owner.mir` | leave increments membership epoch | PH4 leave invalidation | `membership` | success |
@@ -93,6 +94,11 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
 - `visualization`
   - `VisualizationProtocol` first cut の helper-local inventory view です。`visualization_views` と
     `telemetry_rows` を label / authority / redaction 付きで並べ、helper-local evidence view だと明示します。
+- `projection`
+  - `Projection / placement` executable widening の helper-local preview view です。
+    `projection_view` により、`SugorokuWorldSource#1` から `WorldServerPlace` / `SugorokuGamePlace#1` /
+    `ParticipantPlace[*]`、membership frontier、observer view refs、`local_queue` seam を
+    evidence-oriented に並べます。final emitted place program ではありません。
 - `hotplug`
   - `HotPlug Patch / AttachPoint` executable widening の helper-local lifecycle view です。
     `AttachPoint[SugorokuGame#1]`、compatibility、activation cut、post-detach rejection、migration deferred を

@@ -3,13 +3,34 @@
 ## 目的
 
 Mirrorea の source を、あとで place-specific program へ safely projection できるようにするための
-docs-first current plan です。
+current plan と helper/report-local preview floor の summary です。
 
 ## current rule
 
 - source principal を server/client に早期固定しない
 - `Place` を participant と同一視しない
 - adapter / visualizer path でも auth / witness / visualization / telemetry を separate lane に保つ
+
+## current preview floor
+
+2026-04-27 時点では、docs-first に留まらず、次の preview floor を actualize しています。
+
+- Sugoroku helper:
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
+  - `projection_view`
+  - `SugorokuWorldSource#1`
+  - `WorldServerPlace` / `SugorokuGamePlace#1` / `ParticipantPlace[*]`
+  - membership frontier
+  - observer view refs
+- clean near-end runtime report-local inventory:
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  - `cross_place_projection`
+  - authority placement と provider placement の分離
+  - message envelope refs
+  - redaction rule refs
+
+これは final emitted place program ではありません。
+projection validity を collapse せずに preview する current floor です。
 
 ## current place split
 
@@ -36,5 +57,6 @@ docs-first current plan です。
 
 ## 関連
 
+- `docs/hands_on/projection_placement_views_01.md`
 - `plan/20-projection-and-placement-roadmap.md`
 - `docs/reports/0924-projection-placement-plan.md`

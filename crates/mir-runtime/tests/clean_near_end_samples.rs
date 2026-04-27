@@ -279,6 +279,40 @@ fn clean_sample_delegated_rng_service_emits_visualization_view() {
 }
 
 #[test]
+fn clean_sample_delegated_rng_service_emits_projection_view() {
+    let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
+    let view = report
+        .visualization_views
+        .iter()
+        .find(|view| view.view_name == "cross_place_projection")
+        .expect("cross place projection view");
+    assert!(
+        view.layer_signature_refs
+            .contains(&"transport_provider_boundary".to_string())
+    );
+    assert!(
+        view.message_envelope_refs
+            .contains(&"provider_request#1".to_string())
+    );
+    assert!(
+        view.focus_subjects
+            .contains(&"projection:provider_boundary_draw_route".to_string())
+    );
+    assert!(
+        view.focus_subjects
+            .contains(&"authority_place:ParticipantPlace[Alice]".to_string())
+    );
+    assert!(
+        view.focus_subjects
+            .contains(&"place:ProviderPlace[AuthorityRng]".to_string())
+    );
+    assert!(
+        view.redaction_rules
+            .contains(&"projection_summary_only".to_string())
+    );
+}
+
+#[test]
 fn clean_sample_authority_witness_emits_telemetry_row() {
     let report = run_clean_near_end_sample("06_auditable_authority_witness").unwrap();
     let row = report
@@ -422,13 +456,19 @@ fn clean_near_end_closeout_records_visualization_and_telemetry_inventory() {
     );
     assert!(
         closeout
+            .visualization_views
+            .iter()
+            .any(|view| view.view_name == "cross_place_projection")
+    );
+    assert!(
+        closeout
             .visualization_view_lanes
             .contains(&"message_envelope_refs".to_string())
     );
     assert!(
         closeout
             .reserved_visualization_view_names
-            .contains(&"cross_place_projection".to_string())
+            .contains(&"label_authority_redaction_grid".to_string())
     );
     assert!(
         closeout

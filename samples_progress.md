@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 22:23 JST
+Last updated: 2026-04-27 22:52 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: promoted Projection / placement executable widening、reopen Typed external boundary residual planned family review
+Current active packages: promoted Typed external boundary residual planned family review、reopen Projection / placement residual emitted-program gate
 
 ## Legend
 
@@ -31,7 +31,7 @@ Progress:
 | External adapters | 75 | synthetic preview helper + residual planned family | `EXT-03` / `EXT-04` synthetic preview subset を維持しつつ `EXT-01` / `EXT-02` / `EXT-05` residual reopen gate を保つ | `python3 scripts/typed_external_boundary_samples.py closeout --format json` |
 | Network transport | 75 | helper-local canary family | `NET-01..05` helper-local canary を維持しつつ real socket / session / durable replay を deferred に保つ | `python3 scripts/network_transport_samples.py check-all --format json` |
 | Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持しつつ future executable widening に備える | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
-| Projection / placement | 10 | docs-first plan | `plan/20` の validity checklist と stop line を維持しつつ future transport / hot-plug widening に備える | `python3 scripts/validate_docs.py` |
+| Projection / placement | 75 | helper-local + report-local preview floor | `projection_view` と `cross_place_projection` を維持しつつ final emitted program / equivalence gate を deferred に保つ | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` |
 | Hot-plug package | 75 | helper-local lifecycle canary | `hotplug_lifecycle` / `--debug hotplug` / attach-detach telemetry を維持しつつ real migration / rollback を deferred に保つ | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json` |
 
 ## Active sample matrix
@@ -66,6 +66,8 @@ Progress:
 | `VIS-02` | visualization | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | helper-local membership view | 90 | positive | 2026-04-27 18:04 JST | `0922` | membership timeline stays redacted and published-history-only |
 | `VIS-03` | visualization | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | runtime report-local view | 90 | positive | 2026-04-27 18:04 JST | `0922` | provider-boundary view stays downstream of layer/message inventory |
 | `VIS-04` | visualization | `samples/clean-near-end/order-handoff/06_auditable_authority_witness.mir` | runtime report-local telemetry | 90 | positive | 2026-04-27 18:04 JST | `0922` | authority witness remains evidence, not auth |
+| `PRJ-01` | projection / placement | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local projection preview | 75 | positive | 2026-04-27 22:52 JST | `0924`, `0942` | `projection_view` で `SugorokuWorldSource#1` から `WorldServerPlace` / `SugorokuGamePlace#1` / `ParticipantPlace[*]` split、membership frontier、observer view refs を visible にする。final emitted place program ではない |
+| `PRJ-02` | projection / placement | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | report-local provider placement preview | 75 | positive | 2026-04-27 22:52 JST | `0924`, `0942` | `cross_place_projection` で authority placement と provider placement を分けた projection inventory を visible にする。helper-local network execution ではない |
 | `FAIRY-01` | avatar follow | `samples/clean-near-end/avatar-follow/01_follow_remote_head_with_local_fallback.mir` | active representative canary | 90 | positive | 2026-04-27 19:35 JST | `0917`, `0930` | visible remote head follow with explicit local fallback lineage |
 | `FAIRY-02` | avatar follow | `samples/clean-near-end/avatar-follow/02_remote_head_not_visible_falls_back_to_local.mir` | active representative canary | 90 | positive + fallback | 2026-04-27 20:55 JST | `0917`, `0930`, `0933` | visibility loss falls back locally without claiming transport recovery |
 | `FAIRY-03` | avatar follow | `samples/clean-near-end/avatar-follow/03_remote_avatar_leaves_falls_back_to_local.mir` | active representative canary | 90 | negative + fallback | 2026-04-27 19:35 JST | `0917`, `0930` | leave invalidates stale anchor and falls back locally |
@@ -84,7 +86,7 @@ Progress:
 | `EXT-03` | typed external boundary | `samples/not_implemented/typed-external-boundary/03_send_room_message_local_queue.mir`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper lane | 75 | synthetic positive | 2026-04-27 22:21 JST | `0923`, `0941` | helper self-consistency preview only。scenario label は helper-local working name であり、phase 9 `.mir` の direct semantic execution や final effect 名ではない |
 | `EXT-04` | typed external boundary | `samples/not_implemented/typed-external-boundary/04_adapter_failure_typed_result.mir`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper lane | 75 | synthetic negative + typed failure | 2026-04-27 22:21 JST | `0923`, `0941` | helper self-consistency preview only。typed adapter failure lane は explicit だが、phase 9 `.mir` の direct semantic execution ではない |
 | `EXT-05` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | debug visualization label restriction; no untyped leak |
-| `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/research_abstract/projection_placement_plan_01.md` | docs-first row | 10 | planned | 2026-04-27 18:15 JST | `0912`, `0913`, `0920`, `0924` | source-to-place validity checklist、place split、stop line を固定 |
+| `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/hands_on/projection_placement_views_01.md`, `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir`, `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | helper/report preview row | 75 | positive | 2026-04-27 22:52 JST | `0912`, `0913`, `0920`, `0924`, `0942` | `projection_view` と `cross_place_projection` により source-to-place validity checklist の current evidence floor を actualize。final emitted program / optimizer / equivalence checker は deferred |
 | `PH13` | network transport | `plan/22-network-transport-roadmap.md`, `samples/clean-near-end/network-transport/README.md`, `scripts/network_transport_samples.py` | helper-local canary family | 75 | positive + negative + typed failure | 2026-04-27 20:27 JST | `0913`, `0920`, `0926`, `0929`, `0932` | `NET-01..05` は current helper-local canary; real socket / public ABI は still later |
 | `NET-01` | network transport | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir`, `03_roll_publish_handoff.mir`, `04_non_owner_roll_rejected.mir` | helper-local loopback preview | 90 | positive + negative | 2026-04-27 18:58 JST | `0926`, `0929` | `--transport loopback_socket` で attach / handoff / reject parity を same-process emulator 上で確認 |
 | `NET-02` | network transport | `samples/clean-near-end/network-transport/README.md`, `scripts/network_transport_samples.py` | helper-local process-boundary canary | 90 | positive | 2026-04-27 20:27 JST | `0932` | subprocess JSON bridge で `attach_request#1` / `roll_request#1` / `handoff_notice#1` と witness lane を維持 |
@@ -110,7 +112,7 @@ Progress:
 | `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 90 | helper-local envelope carrier keeps auth / membership / capability / witness separate | pass 2026-04-27 17:46 JST |
 | `E2E-VIS-TRACE` | source -> runtime trace -> visualization view -> telemetry row | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | 90 | helper-local typed/redacted visualization first cut | pass 2026-04-27 18:04 JST |
 | `E2E-HOTPLUG-ATTACH` | patch -> compatibility -> attach -> activate -> detach request -> post-detach rejection | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json` | 90 | helper-local `hotplug_lifecycle` keeps attachpoint compatibility / activation cut / detach request / post-detach rejection visible without claiming final ABI | pass 2026-04-27 19:56 JST |
-| `E2E-PROJECTION` | system source -> place-specific projection -> equivalent trace | `plan/20-projection-and-placement-roadmap.md` | 10 | docs-first validity checklist fixed; executable projection helper is not yet present | plan fixed 2026-04-27 18:15 JST |
+| `E2E-PROJECTION-TARGET` | system source -> emitted place program -> equivalent trace | future target: current `PRJ-01` / `PRJ-02` preview floor + later emitted-program runner | 10 | compositional projection E2E は still later。current package で actualize したのは helper/report-local preview floor だけであり、full emitted-program / equivalence line ではない | target only; current preview validation passed 2026-04-27 22:52 JST |
 
 ## Build/storage environment
 
@@ -135,6 +137,7 @@ Progress:
 | final public visualization contract / retention / multi-tenant telemetry が未決 | visualization | medium | mixed gate | keep helper/report-local first cut only and reopen after adapter / projection packages |
 | final public `AuthEvidence` kind と real transport widening が未決 | auth / transport | medium | mixed gate | keep helper-local `auth none` baseline and reopen with adapter / network packages |
 | transport canary is helper-local only; real socket / session / durable replay remain absent | network transport | medium | mixed gate | keep `NET-01..05` as evidence surface only and reopen real transport later |
+| final public projection IR / emitted place program / equivalence checker が未決 | projection / placement | medium | mixed gate | keep `projection_view` / `cross_place_projection` as evidence-oriented preview only and reopen after typed external / transport pressure clarifies |
 | actual LLVM artifact / backend choice / packaging contract はまだ absent | backend / storage | low | CodeX | keep `plan/23` guardrail fixed and reopen only when a real LLVM/build package is promoted |
 | final public adapter contract / host schema scope が未決 | external adapters | medium | mixed gate | keep `EXT-03` / `EXT-04` synthetic preview subset only and reopen `EXT-01` / `EXT-02` / `EXT-05` after projection / visualization pressure clarifies |
 | repository taxonomy drift can reintroduce active/planned/generated confusion | docs / structure | medium | CodeX | keep `plan/19`, `samples/README.md`, `scripts/README.md`, `0920` report in sync |
@@ -143,6 +146,14 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 22:52 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples` | pass | helper-side projection view test included; 35 tests green |
+| 2026-04-27 22:52 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime-side `cross_place_projection` inventory test included and `authority_place:ParticipantPlace[Alice]` subject is asserted |
+| 2026-04-27 22:52 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` | pass | helper-local `projection_view` shows system source, place split, observer view refs, membership frontier |
+| 2026-04-27 22:52 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | pass | visualization view still preserves projection-related place split without claiming final viewer API |
+| 2026-04-27 22:52 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | runtime report-local `cross_place_projection` keeps explicit `authority_place:ParticipantPlace[Alice]` distinct from `place:ProviderPlace[AuthorityRng]` |
+| 2026-04-27 22:52 JST | `python3 scripts/check_source_hierarchy.py` | pass | `0942` report added; required `23`, present `23`, missing `0` |
+| 2026-04-27 22:52 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 940 numbered report(s).` |
+| 2026-04-27 22:52 JST | `git diff --check` | pass | whitespace-clean after `0942` report and reviewer-follow-up sync |
 | 2026-04-27 21:55 JST | `python3 -m unittest scripts.tests.test_typed_external_boundary_samples` | pass | dedicated typed external helper test suite; 10 tests green |
 | 2026-04-27 22:21 JST | `python3 scripts/typed_external_boundary_samples.py check-all --format json` | pass | synthetic preview subset `EXT-03` / `EXT-04`; residual planned `EXT-01` / `EXT-02` / `EXT-05`; helper self-consistency only |
 | 2026-04-27 22:21 JST | `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json` | pass | envelope id / auth none / membership freshness / capability / witness split visible in synthetic preview helper |

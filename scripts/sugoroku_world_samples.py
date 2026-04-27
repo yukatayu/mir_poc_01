@@ -1517,6 +1517,44 @@ def _visualization_views(
                         "no final public viewer contract implied",
                     ],
                 ),
+                VisualizationView(
+                    view_id="projection_view",
+                    view_kind="projection_view",
+                    label="helper:projection",
+                    authority="InspectProjection(SugorokuWorldSource#1)",
+                    redaction="projection_summary_only",
+                    source_refs=["game", "message_envelopes", "turn_trace", "telemetry_rows"],
+                    summary={
+                        "system_source": "SugorokuWorldSource#1",
+                        "server_places": ["WorldServerPlace", "SugorokuGamePlace#1"],
+                        "authority_place": "SugorokuGamePlace#1",
+                        "participant_places": [
+                            "ParticipantPlace[Alice]",
+                            "ParticipantPlace[Bob]",
+                            "ParticipantPlace[Carol]",
+                        ],
+                        "adapter_transport": result.get("transport_seam", "local_queue"),
+                        "observer_views": [
+                            "turn_timeline",
+                            "message_route",
+                            "verification_summary",
+                        ],
+                        "membership_frontier": {
+                            "membership_epoch": result.get("roll", {}).get(
+                                "membership_epoch", 0
+                            ),
+                            "active_players": list(
+                                result.get("game", {}).get("active_players", [])
+                            ),
+                        },
+                        "telemetry_refs": [row.row_id for row in telemetry_rows],
+                    },
+                    notes=[
+                        "helper-local projection preview over existing carriers",
+                        "place split stays distinct from participant/principal identity",
+                        "not a final emitted place-specific program",
+                    ],
+                ),
             ]
         )
     if sample_id == "05_late_join_history_visible":
@@ -2127,7 +2165,6 @@ def closeout() -> dict[str, Any]:
         "reserved_visualization_view_kinds": [
             "place_graph",
             "effect_route_graph",
-            "projection_view",
         ],
         "telemetry_rows": telemetry_rows,
         "telemetry_row_kinds": sorted({row["row_kind"] for row in telemetry_rows}),
@@ -2153,6 +2190,7 @@ def closeout() -> dict[str, Any]:
             "--debug signatures",
             "--debug envelopes",
             "--debug visualization",
+            "--debug projection",
             "--debug layers",
             "--debug hotplug",
             "--format json",
@@ -2317,6 +2355,44 @@ def _format_visualization(result: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _format_projection(result: dict[str, Any]) -> str:
+    lines = ["PROJECTION"]
+    views = [
+        row for row in result.get("visualization_views", []) if row["view_kind"] == "projection_view"
+    ]
+    if not views:
+        lines.append("  - none")
+        return "\n".join(lines)
+    for row in views:
+        lines.append(
+            f"  - {row['view_id']} label={row['label']} authority={row['authority']} redaction={row['redaction']}"
+        )
+        summary = row.get("summary") or {}
+        lines.append(f"      system_source: {summary.get('system_source', 'unknown')}")
+        lines.append(
+            f"      authority_place: {summary.get('authority_place', 'unknown')}"
+        )
+        lines.append(
+            f"      server_places: {', '.join(summary.get('server_places') or []) or 'none'}"
+        )
+        lines.append(
+            f"      participant_places: {', '.join(summary.get('participant_places') or []) or 'none'}"
+        )
+        lines.append(
+            f"      adapter_transport: {summary.get('adapter_transport', 'unknown')}"
+        )
+        lines.append(
+            f"      observer_views: {', '.join(summary.get('observer_views') or []) or 'none'}"
+        )
+        frontier = summary.get("membership_frontier") or {}
+        lines.append(
+            "      membership_frontier: "
+            f"epoch={frontier.get('membership_epoch', 'unknown')} "
+            f"active={', '.join(frontier.get('active_players') or []) or 'none'}"
+        )
+    return "\n".join(lines)
+
+
 def _format_hotplug(result: dict[str, Any]) -> str:
     lifecycle = result.get("hotplug_lifecycle") or {}
     if not lifecycle:
@@ -2367,6 +2443,8 @@ def format_pretty(payload: Any, *, debug: str | None = None) -> str:
         return _format_envelopes(payload)
     if debug == "visualization":
         return _format_visualization(payload)
+    if debug == "projection":
+        return _format_projection(payload)
     if debug == "layers":
         return _format_layers(payload)
     if debug == "hotplug":
@@ -2445,6 +2523,7 @@ def build_parser() -> argparse.ArgumentParser:
             "signatures",
             "envelopes",
             "visualization",
+            "projection",
             "layers",
             "hotplug",
         ],
