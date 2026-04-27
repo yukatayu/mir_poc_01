@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 10:14 JST
+Last updated: 2026-04-27 10:19 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、phase/sample/progress/storage foundation を追加する
-Current active packages: phase-sample-progress-storage-foundation closeout; next `Sugoroku sample progress alignment`, `Avatar fairy follow sample plan`, `TermSignature registry / debug output`
+Current active packages: `0913` foundation closeout synced; next `Sugoroku sample progress alignment`, `Avatar fairy follow sample plan`, `TermSignature registry / debug output`
 
 ## Summary
 
@@ -42,7 +42,7 @@ Current active packages: phase-sample-progress-storage-foundation closeout; next
 
 | ID | Layer | Sample path | Purpose | Positive/Negative | Unit | Integration | E2E | Visualization | Docs | % | Last validation | Blocker | Next step | Report |
 |---|---|---|---|---|---|---|---|---|---|---:|---|---|---|---|
-| PH0 | repository memory / decision boundary | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | source hierarchy, report path, dashboard sync | `P0-01,P0-03 / P0-02` | `python3 scripts/check_source_hierarchy.py` | `python3 scripts/validate_docs.py` | specs -> plan -> snapshot -> report path | dashboard table | yes | 90 | 2026-04-27 10:14 JST | 100% needs commit/push | keep dashboard/report rows in sync | `0913` |
+| PH0 | repository memory / decision boundary | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | source hierarchy, report path, dashboard sync | `P0-01,P0-03 / P0-02` | `python3 scripts/check_source_hierarchy.py` | `python3 scripts/validate_docs.py` | specs -> plan -> snapshot -> report path | dashboard table | yes | 90 | 2026-04-27 10:19 JST | 100% needs commit/push | keep dashboard/report rows in sync | `0913` |
 | PH1 | Mir current L2 semantics | `samples/current-l2/` | guarded option chain, fallback, lineage, `atomic_cut` | `MIR-01 / MIR-02..05` | `cargo test -p mir-ast`, `cargo test -p mir-runtime` | `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | source -> runtime -> trace summary | pretty/json trace, detached artifacts | yes | 90 | 2026-04-27 10:14 JST | final public parser/API deferred | keep sample IDs and rejection reasons stable | `0904`, `0913` |
 | PH2 | parser-free PoC / detached loop | `samples/current-l2/`, `scripts/current_l2_detached_loop.py` | fixture -> run bundle -> detached artifact -> compare | `P2-01,P2-03 / P2-02,P2-04` | `cargo test -p mir-semantics` | current source regression + detached support tests | fixture -> interpreter -> artifact -> compare | detached artifact summary | yes | 75 | 2026-04-27 10:14 JST (partial) | no fresh detached-loop CLI run in this task yet | run dedicated detached-loop smoke in follow-up | `0904`, `0913` |
 | PH3 | parser boundary / first checker cut | `crates/mir-ast/tests/*stage*`, `samples/current-l2/` | parse option/chain/request clause bundle and reject malformed cases | `P3-01..04 / P3-05` | `cargo test -p mir-ast` | `cargo test -p mir-runtime` | source sample -> AST -> checker -> runtime preview | AST/test surface | yes | 90 | 2026-04-27 10:14 JST | final parser grammar deferred | keep narrow parser cut explicit | `0904`, `0913` |
@@ -103,7 +103,7 @@ Current active packages: phase-sample-progress-storage-foundation closeout; next
 | 2026-04-27 09:13 JST | `du -sh .` | pass | repo about `5.3G` |
 | 2026-04-27 09:13 JST | `du -sh target .git .cargo .lake` | partial | `target` `5.2G`, `.git` `66M`, `.cargo` and `.lake` missing |
 | 2026-04-27 10:14 JST | `python3 scripts/check_source_hierarchy.py` | pass | hierarchy / report / dashboard path are present |
-| 2026-04-27 10:14 JST | `python3 scripts/validate_docs.py` | pass | `Found 910 numbered report(s).` before this report was added |
+| 2026-04-27 10:19 JST | `python3 scripts/validate_docs.py` | pass | `Found 911 numbered report(s).` after `0913` was added |
 | 2026-04-27 10:14 JST | `bash scripts/env/mirrorea_storage_env.sh` | pass | safe default paths exported; mounted flag is `no` |
 | 2026-04-27 10:14 JST | `bash scripts/storage/detach_prepare.sh` | pass | non-destructive storage audit printed current root / mount / git state |
 | 2026-04-27 10:14 JST | `bash scripts/storage/cleanup_disposable_artifacts.sh --list` | pass | candidate disposable paths listed only; no deletion |

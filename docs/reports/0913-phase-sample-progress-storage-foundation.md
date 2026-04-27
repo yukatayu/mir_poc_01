@@ -170,9 +170,15 @@
 
 ### Git commit / push status
 
-- report authoring時点では **pending**
-- final task close で `git commit --no-gpg-sign` と push を行う必要がある
-- `100%` claim はその後でなければ使わない
+- committed:
+  - `git commit --no-gpg-sign -m "docs: sync mirrorea future axis and sample storage"`
+  - commit: `cf5134c`
+- pushed:
+  - `git push origin main`
+  - remote: `origin/main`
+- local note:
+  - `sub-agent-pro/mirrorea_phase_samples_progress_storage_handoff_2026-04-24.md` は working directive のため untracked のまま残し、repo 正本へ mirror した成果物だけを push した
+- `100%` claim は per-phase current scope にしか使わず、本 task は foundation closeout として扱う
 
 ## Evidence / outputs / test results
 
@@ -212,7 +218,7 @@ cargo test -p mir-semantics
   - pass
 - `python3 scripts/validate_docs.py`
   - pass
-  - report count was `910` before this report file was added
+  - report count is now `911`
 - `bash scripts/env/mirrorea_storage_env.sh`
   - pass
   - `MIRROREA_WORKDIR_MOUNTED=no`
