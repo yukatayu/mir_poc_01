@@ -128,6 +128,26 @@
 13. scaling のどこまでが Mirrorea に属し、どこからが external orchestration に属するか。
 14. Mir-1 で定義された later cut vocabulary、特に `durable_cut` を Mirrorea がどの operational boundary から引き受けるか。現在の最小理解では、Mirrorea は durable commit guarantee、aggregate success / failure event の意味、scope rule 自体の意味づけは行わず、storage / replication / distributed finalization / member observation の収集と相関 / aggregate event と audit representation の実現責務だけを負う。さらに `all_of` aggregate evidence についても、Mir-1 が固定するのは full coverage 条件だけであり、per-place evidence reference の表現、圧縮、共有形式は Mirrorea の裁量に残す。`all_of` aggregate failure audit についても同様であり、justification source、missing coverage snapshot、`reason_ref` 相当の参照表現をどう ID 化・直列化・配置するかは Mirrorea の裁量に残す。snapshot 基準時点より前の中間状態を保存するか、複数 snapshot を保持するか、どの圧縮表現を使うかも Mirrorea の裁量に残す。scope rule profile についても、Mirrorea が独自 profile を意味語彙として追加することはせず、Mir-1 が意味づけた `all_of` などの profile について同じ aggregate success / failure 観測を保つ形で実現するだけに留まる。未決定なのは、その実現に必要な最小 protocol surface、evidence の具象形式、将来 profile 拡張時の相互運用条件である。
 
+### 2026-04-27 Mirrorea future-runtime addendum
+
+- `Place` は process / machine / node / virtual thread / authority compartment / observation frontierを一般化した execution locus として読む。participant / principal と同一視しない。
+- current Sugoroku sample に出てくる `world` は host/server-side sugar として読む方向であり、Mir core primitive として固定するかどうかは未決定である。
+- standard I/O を Mir core primitive にせず、typed external effect adapter で外界接続を扱う方向は current line だが、exact surface syntax / schema / host contract は未決定である。
+- next open cluster は次である。
+  1. `TermSignature` registry をどの粒度で持つか。
+     term / transition / effect / message / adapter のどこまでを正本 carrier に入れ、既存 emitted artifact / trace / debug output とどう接続するか。
+  2. `LayerSignature` system の law surface をどこまで current docs に上げるか。
+     no hidden authority、no hidden data downgrade、evidence preservation、placement preservation をどう machine-check / theorem / runtime policy / visualization に配るか。
+  3. `MessageEnvelope` / `AuthEvidence` / transport insertion seam の最小 shape をどう置くか。
+     auth を transport に潰さず、authorization / membership / capability / witness をどう separate に保つか。
+  4. visualization / telemetry security をどこまで typed effect として固定するか。
+     static view / runtime view / label / authority / redaction / retention をどの layer へ置くか。
+  5. projection / placement mobility をどこまで docs-first に固定するか。
+     system-wide source から server / participant / adapter / visualizer へ projection するときの validity report と stop line をどう表すか。
+  6. hot-plug `Patch Req Prov Δ` / `AttachPoint` の最小 surface と compatibility check をどこまで current line に上げるか。
+     activation cut、migration contract、detach lifecycle の exact shape は未決定である。
+  7. avatar fairy follow vertical slice を next representative sample にするとき、`FollowAnchor`、visibility guard、fallback lineage、stale anchor rejection をどの minimal sample family に切るか。
+
 ## PrismCascade
 
 15. Mir / Mirrorea との正確な integration surface。

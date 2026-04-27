@@ -10,6 +10,10 @@
 
 の観点で整理する。
 
+近接の self-driven package queue は `plan/11-roadmap-near-term.md` と `tasks.md` を正とする。
+この文書は macro-level の lane / gate / historical recovery 読みを保つための repository memory であり、
+package 3 以降の Mirrorea future-axis 近接順序をここで上書きしない。
+
 ## current overall reading
 
 現在の repo は、次の 3 つを同時に持つ。

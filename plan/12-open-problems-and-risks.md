@@ -8,29 +8,43 @@
 
 | 項目 | 種別 | current 状態 | リスク | current 対応 |
 |---|---|---|---|---|
-| public surface hidden promotion | helper / public API | 継続中 | repo-local helper を final public surface と誤読する | clean suite と final public API を明示的に分ける |
-| old sample drift re-entry | docs / sample policy | 低下したが継続監視 | old `p..` chain が active path に戻る | archive 分離と migration note を維持 |
-| low-level memory-order premature import | semantics | OPEN | source principal が C++/ISA vocabulary に引きずられる | high-level relation family を principal に保つ |
+| public surface hidden promotion | helper / public API | 継続中 | repo-local helper を final public surface と誤読する | clean suite / future-axis queue / final public API を明示的に分ける |
+| old sample drift re-entry | docs / sample policy | 低下したが継続監視 | old line が active path に戻る | archive 分離と stale-reference scan を維持 |
+| low-level memory-order premature import | semantics | OPEN | source principal が C++ / ISA vocabulary に引きずられる | high-level relation family を principal に保つ |
 | cut-family conflation | semantics | OPEN | `atomic_cut` を global mutex / durable commit と誤読する | local finalization nucleus に固定 |
 | typed overclaim | type / proof | OPEN | finite-index first layer を full dependent core と誤読する | first fragment と still-later line を分ける |
-| theorem/model-check overclaim | proof workflow | OPEN | generated stubs / model-check carrier を production binding と誤読する | repo-local bridge と public contract を分ける |
-| solver / artifact blow-up | tooling | OPEN | constraint / artifact / trace volume が急増する | finite first fragment と helper-local threshold を維持 |
+| theorem / model-check overclaim | proof workflow | OPEN | generated stub / model-check carrier を production binding と誤読する | repo-local bridge と public contract を分ける |
+| auth-transport collapse | Mirrorea layering | NEW | envelope / adapter 設計で authentication を transport に潰す | `MessageEnvelope / AuthEvidence` seam を separate package にする |
+| visualization / telemetry leak | observability | NEW | debug output が label / authority / redaction を回避する | typed visualization / telemetry line を package 化する |
+| place / participant / world conflation | sample / docs | NEW | participant、Place、world sugar が core primitive として固定される | `Place` distinction と world-sugar note を README / Documentation / plan に残す |
+| goal drift via local optimization | roadmap | NEW | Sugoroku 現行 floor を Mirrorea full runtime 完了と誤読する | project axis と stop line を progress / tasks / docs に明記する |
+| sample-progress inflation | dashboard / reporting | NEW | runnable sample や validation の裏付けなしに `%` を上げる | `samples_progress.md` の `%` と report / validation command を結びつける |
+| root-disk exhaustion | storage / VPS | NEW | `target/`、LLVM、generated artifact が root を圧迫する | external workdir policy、storage audit、cleanup script を先に入れる |
+| unsafe detachable cleanup | storage / ops | NEW | cleanup script が repo source や report を消す | `--confirm` 必須、known disposable dir 限定、detach_prepare non-destructive |
 | shared-space profile collapse | shared-space | OPEN | authoritative-room default を exhaustive catalog と誤読する | minimal working subset と final catalog を分ける |
-| sugoroku vertical-slice overclaim | Mirrorea / application sample | NEW | single-process logical multi-place emulator を real network / consensus 実装と誤読する | limitations と closeout で no network / no consensus / no durable commit を明記する |
+| sugoroku vertical-slice overclaim | Mirrorea / application sample | 継続監視 | single-process logical multi-place emulator を real network / consensus と誤読する | no network / no consensus / no durable commit を closeout で明記する |
 
 ## current open problems
 
+- `TermSignature` / `LayerSignature` の exact carrier と law surface
+- `MessageEnvelope` / `AuthEvidence` / transport insertion seam の最小 shape
+- visualization / telemetry security の label / authority / redaction / retention model
+- projection / placement validity report と world-sugar boundary
+- `Patch Req Prov Δ` / `AttachPoint` / activation cut / migration contract
+- avatar fairy follow sample family の exact minimal surface
+- `vdb` extra storage の filesystem / mount policy と `/mnt/mirrorea-work` への actual cutover timing
+- detached artifact root を repo-local `target/` default から external workdir へどう ratchet するか
 - final parser grammar
-- final parser/checker/runtime/verifier API
+- final parser / checker / runtime / verifier API
 - final theorem result / checker artifact / verifier contract
-- concrete theorem/model-check tool binding
-- final witness/provider/emitted-artifact public contract
+- concrete theorem / model-check tool binding
+- final witness / provider / emitted-artifact public contract
 - exhaustive shared-space catalog
-- Sugoroku detach lifecycle implementation
-- packaging / installed binary / FFI
+- real network transport / durable distributed commit / multi-server consensus / detach lifecycle
+- packaging / installed binary / FFI / engine adapter
 
 ## historical note
 
 pre-clean-near-end prototype chain 由来の detailed package risk は
 historical memory として `specs/examples/` と archive 側に残す。
-current active risk register は clean near-end current layer に対して読む。
+current active risk register は clean near-end current layer と Mirrorea future-axis queue に対して読む。

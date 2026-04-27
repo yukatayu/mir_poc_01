@@ -9,6 +9,8 @@ The repository therefore treats documentation structure as part of the project's
    - Start with `README.md`, then `Documentation.md`, then the ordered specs in `specs/00...03`, then `specs/09`, then the subsystem-specific document you need.
    - If the task asks about **current status / progress / remaining steps / roadmap**, also read `progress.md` after `Documentation.md`.
    - If the task asks about **phase recut / roadmap rewrite / progress/tasks reorganization**, also read `.docs/progress-task-axes.md` after `progress.md`.
+   - If the user or task names a specific `sub-agent-pro/*.md` handoff, read that handoff in the user-specified order before continuing the standard repository sequence.
+  - Keep the source hierarchy explicit: `specs/` = 規範正本, `plan/` = repository memory, `docs/reports/` = 作業証跡, `progress.md` / `tasks.md` = current snapshot, `samples_progress.md` = runnable sample dashboard, `.docs/` / `docs/` = reader-facing or policy docs, `sub-agent-pro/` = working directive / handoff であり規範正本ではない。
    - `progress.md` is a rough status snapshot, not a normative source. Normative judgments remain in `specs/` and long-term repository memory remains in `plan/`.
 
 2. **Do not invent requirements**
@@ -47,8 +49,26 @@ The repository therefore treats documentation structure as part of the project's
 - The current stage is **still architecture and semantics**, not broad implementation.
 - Performance-sensitive kernels (for example PrismCascade runtime) must not be casually folded into Mir runtime semantics.
 - Dynamic evolution must respect the project's design principle of **safe downstream addition** unless an explicit subsystem spec says otherwise.
+- preserve project axis:
+  **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
+- standard I/O は Mir core primitive ではない。外界接続は typed effect / adapter boundary 側に残し、spec が無いのに core built-in へ押し込まないこと。
+- authentication / authorization / membership / capability / witness を transport に潰さないこと。
+- visualization / telemetry を untyped debug leak として扱わず、情報を外へ出す effect として label / authority / redaction を意識すること。
+- final public completion と repo-local alpha / current-layer closeout を混同しないこと。
 - long-running research では、PoC 実装・実行・回帰確認と、formal boundary / proof obligation / invariant wording の整理を並走させること。
 - implementation を進めるときも、portability / observability / step execution / graph export hook は replaceable layer として意識し、CPU 固定や単一 debug mode を早く既成事実化しないこと。
+
+## Anti-shortcut rule
+
+Do not:
+
+- reduce scope silently
+- skip validation and claim success
+- keep stale active references unnoticed
+- add builtin primitives for domain predicates
+- collapse authentication into transport
+- treat visualization as untyped debug leak
+- freeze final grammar or public APIs prematurely
 
 ## Reporting policy
 
@@ -70,7 +90,14 @@ Every report should contain, in this order:
 - If you change a normative statement, add an explicit note to the report.
 - `Documentation.md` should stay concise and current.
 - Keep diagrams in Mermaid source (`docs/diagrams/*.mmd`).
+- active current sample / historical old sample / helper-local debug output / final public API / deferred mixed gate を混同しない。touch した docs に stale active reference があれば同じ task で整理すること。
+- validation を実行していない場合は成功扱いしない。未実行理由を report と final answer に明記すること。
+- debug / visualization output は evidence-oriented に扱い、helper-local preview を final public interface として書かないこと。
 - long-running research task では、heavy command や generated artifact を増やす前に `df -h .` と `free -h` 相当で資源状況を確認すること。
+- samples, reports, progress dashboard を更新する task では `samples_progress.md` の更新要否も必ず確認すること。
+- E2E は自然な layer composition から作ること。内部関数を順に呼ぶだけの thick fake wrapper で達成扱いしないこと。
+- small VPS では root disk を build cache / LLVM / generated artifact で圧迫しない。heavy disposable artifact は configured external workdir を優先し、未マウント時は root に勝手な大容量 directory を作らないこと。
+- detach / cleanup script は repo source を消さず、明示確認なしに削除しないこと。
 - commit では対話的な GPG prompt を避けるため、`git commit --no-gpg-sign` を使うこと。
 - user が明示的に止めない限り、commit ごとに push すること。
 
@@ -144,6 +171,24 @@ Every report should contain, in this order:
 - `shared-space docs-first boundary fixed` と `shared-space operational realization / final catalog open` を混ぜないこと。
 - `progress.md` の更新が不要な場合でも、report に **`progress.md 更新不要`** と明記すること。
 
+## samples_progress.md 維持ルール
+
+- `samples_progress.md` は phase / layer ごとの runnable sample 状態を一覧する progress dashboard として扱う。
+- append-only の作業ログにせず、table と current status を update-in-place で保つこと。
+- 進捗%は evidence-backed にすること。最低でも sample path、validation command、blocker のどれかに紐づけること。
+- `100%` は、その current scope において implementation、positive/negative sample、debug/visualization、docs、report、tests、progress update、git commit/push まで完了したときだけ使うこと。
+- conceptual-only row は `25%` を超えないこと。
+- runnable sample、validation command、debug surface、blocker が変わった task では、同じ task の中で `samples_progress.md` を更新すること。
+- 更新不要な場合でも、report に **`samples_progress.md 更新不要`** と明記すること。
+
+## storage / build artifact discipline
+
+- heavy build artifact、LLVM source/build/install、generated artifact、temp、logs は detachable / cleanup 可能な external workdir を優先すること。
+- external workdir の default 候補は `/mnt/mirrorea-work` だが、mount / filesystem / actual capacity を `lsblk -f` と `findmnt` で確認する前に前提化しないこと。
+- repo source、committed docs、report だけを detachable storage に置かないこと。
+- storage audit を伴う task では `df -h`、`lsblk -f`、`findmnt`、`du -sh .`、`du -sh target .git .cargo .lake` の結果を report に残すこと。
+- cleanup は known disposable directory に限り、`--confirm` のような explicit confirmation を要求すること。
+
 ## tasks.md 維持ルール
 
 - `tasks.md` は repo 全体の **current task map** であり、`progress.md` より少し具体的に
@@ -178,6 +223,7 @@ Every report should contain, in this order:
 
 - task はできるだけ内部で閉じる。中途で user に何度も返さない。
 - ただし、user が連続 task の自走を依頼している場合は、task package の close ごとに brief intermediate report を返し、次に進む package を短く明示すること。
+- task package close ごとに、`progress.md`、`tasks.md`、`docs/reports/` を同じ task の中で同期すること。
 - user 入力なしで次へ進めるときは、package close 後も止まらずそのまま続行すること。
 - user 入力が必要になったとき、または user が依頼したスコープを完了したときだけ、その turn の final `complete` を送って止まること。
 - self-check、focused diff review、local validation を先に行う。
@@ -194,3 +240,4 @@ Every report should contain, in this order:
 - Expand unfamiliar abbreviations on first use.
 - Separate **what is decided** from **what is proposed**.
 - Avoid metaphor when the technical statement can be written directly.
+- 日本語文書は reader-friendly であることより先に正確であることを優先し、規範 / repository memory / historical report / current sample / old sample / helper-local output / deferred gate を明示的に書き分ける。

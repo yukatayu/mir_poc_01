@@ -17,6 +17,7 @@
 ## 現在の到達点
 
 - active sample suite は `samples/clean-near-end/`
+- runnable sample dashboard は `samples_progress.md`
 - first strong typing layer は **finite decidable index fragment**
 - authority hierarchy / security label hierarchy / capture / region / cost は **user-defined finite theory**
 - order / handoff は `publication_order`、`witness_order`、`scoped_happens_before` などの高水準関係で扱う
@@ -37,6 +38,22 @@
 - low-level `memory_order_*` を source principal syntax としてどう公開するか
 - final public witness / provider / emitted-artifact contract
 - packaging / installed binary / FFI / engine adapter
+
+## Mirrorea の次軸
+
+current repo の次の promoted line は、Mirrorea future-axis の docs-first / repo-local integration です。
+
+- 主軸は
+  **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
+  を崩さないことにあります。
+- standard I/O は Mir core primitive ではなく、external world とは typed effect adapter で接続する方向です。
+- authentication は transport そのものに埋め込まず、authorization / membership / capability / witness と分けて扱います。
+- visualization と telemetry も情報を外へ出す effect なので、label / authority / redaction を持つ typed layer として扱います。
+- current representative sample は Sugoroku world runtime attachment vertical slice で、次の representative sample 候補は avatar fairy follow slice です。
+- next queue は、`TermSignature registry`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
+- phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
+
+reader-facing な要約は `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。これは roadmap summary であり、規範正本ではありません。
 
 ## 何が built-in で、何が user-defined か
 
@@ -90,6 +107,7 @@ current clean near-end layer では、次を built-in vocabulary として扱い
 active clean near-end suite の確認:
 
 ```bash
+python3 scripts/check_source_hierarchy.py
 python3 scripts/current_l2_guided_samples.py smoke-all --format json
 python3 scripts/current_l2_guided_samples.py closeout --format json
 ```
@@ -157,6 +175,8 @@ python3 scripts/current_l2_lean_sample_sync.py
   現在地、rough progress、recent log
 - `tasks.md`
   自走可能な package と mixed gate / user-spec gate の整理
+- `samples_progress.md`
+  phase / layer ごとの runnable sample、E2E、debug surface、build / storage 環境の dashboard
 - `docs/research_abstract/README.md`
   日本語での短い研究概要と `_detail` への導線
 - `docs/reports/`

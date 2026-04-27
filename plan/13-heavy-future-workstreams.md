@@ -33,10 +33,30 @@
 - runtime attach は current repo-local line
 - detach implementation、real network transport、multi-server consensus、durable distributed commit は heavy
 
+### 5c. production auth / membership / witness stack
+
+- docs-first auth seam と membership epoch / incarnation line は near-term
+- session token、signature、attestation、revocation、federation、durable witness retention は heavy
+
+### 5d. projection / placement at scale
+
+- docs-first projection / placement plan は near-term
+- generated multi-place programs、placement optimization、real adapter synthesis、multi-view consistency は heavy
+
+### 5e. hot-plug compatibility / migration at deployment scale
+
+- `Patch` / `AttachPoint` design は near-term
+- cross-version migration、durable state upgrade、distributed activation / rollback policy は heavy
+
+### 5f. visualization / telemetry security at scale
+
+- repo-local debug / trace / snapshot line は near-term
+- multi-tenant viewer policy、retention、redaction automation、public protocol hardening は heavy
+
 ### 6. packaging / host integration
 
 - repo-local helper / CLI は current line
-- installed binary、FFI、engine adapter は heavy
+- installed binary、FFI、engine adapter、host-runtime contract は heavy
 
 ### 7. domain / application realization
 
@@ -46,5 +66,5 @@
 ## current recommendation
 
 - current layer を heavy line に巻き戻さない
-- clean near-end suite が示す alpha-ready current layer と
-  final public product family を明確に分離する
+- docs-first TermSignature / LayerSignature / MessageEnvelope / Visualization / Projection / HotPlug package は near-term に進めてよい
+- ただし production auth、real transport、public visualization API、deployment-grade migration は heavy workstream として切り離す

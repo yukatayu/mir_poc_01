@@ -8,6 +8,7 @@
 - 長期の repository memory は `plan/`
 - 現在の進捗 snapshot は `progress.md`
 - 現在の task map は `tasks.md`
+- runnable sample dashboard は `samples_progress.md`
 - 実行証跡と詳細経緯は `docs/reports/`
 
 ## まず repo をどう読むべきか
@@ -44,7 +45,19 @@ active canonical sample は `samples/clean-near-end/` です。
 
 旧 active sample line は active path から外し、archive に退避しています。
 
-### 1.1 Sample highlighter
+### 1.1 Mirrorea future integration line
+
+current sample floor の次に進む promoted line は、Mirrorea future-axis の整理と repo-local actualization です。
+
+- `Place` は participant と同一ではなく、state / queue / capability / visibility / observation frontier を持つ execution locus として読みます。
+- Sugoroku sample に出てくる `world` は current sample surface の host/server-side sugar として読み、Mir core primitive だと固定しません。
+- standard I/O は Mir core に入れず、external world とは typed external effect adapter で接続する方向です。
+- auth / membership / capability / witness / visualization / telemetry は transport や debug hack に潰さず、typed layer として合成する予定です。
+- 次の package は `TermSignature registry`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint` です。
+
+この line の reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md` に置きます。そこは roadmap summary であり、規範判断の正本ではありません。
+
+### 1.2 Sample highlighter
 
 repo 直下の `mir_hilight.html` は、current active `.mir` sample を読むための単一 HTML viewer です。
 ブラウザだけで動き、外部 asset は読みません。標準 theme は Solarized Dark で、VS Code Dark、GitHub Light / Dark、Dracula、Monokai などへ切り替えられます。
@@ -53,6 +66,14 @@ CSS は外部 framework ではなく、HTML 内に直接書いた hand-written o
 
 これは final public parser / checker / verifier ではありません。
 文法、active sample path、reserved keyword、定義宣言形、custom input UI が変わった場合は、`mir_hilight.html` の embedded samples、syntax token list、symbol extraction rule、関連 docs / tests を同じ task で更新してください。
+
+### 1.3 Samples progress and storage foundation
+
+`samples_progress.md` は、phase / layer ごとの runnable sample、unit validation、E2E、debug / visualization、blocker、report、build / storage 環境を一覧する dashboard です。
+
+- progress% は runnable sample と validation に紐づけて更新します。
+- `100%` は implementation、positive/negative sample、debug/visualization、docs、report、tests、git commit/push まで揃った current scope に限ります。
+- build / storage では root disk を既成事実化せず、heavy disposable artifact は external workdir を優先します。
 
 ### 2. first strong typing layer
 
@@ -197,6 +218,7 @@ python3 scripts/current_l2_lean_sample_sync.py
 docs:
 
 ```bash
+python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 ```
 
@@ -204,6 +226,8 @@ python3 scripts/validate_docs.py
 
 - `docs/research_abstract/README.md`
   日本語の簡潔な全体像
+- `samples_progress.md`
+  phase / layer ごとの runnable sample、E2E、debug surface、build / storage 環境の dashboard
 - `docs/research_abstract/clean_near_end_typing_01.md`
   finite-index typing の要点
 - `docs/research_abstract/clean_near_end_order_model_01.md`

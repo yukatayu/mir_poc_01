@@ -11,6 +11,12 @@ current active helper surface は `scripts/clean_near_end_samples.py`、
 `scripts/current_l2_guided_samples.py` の compatibility wrapper、
 `crates/mir-runtime/src/clean_near_end.rs` を first anchor に読む。
 
+2026-04-27 note:
+current non-production detached artifact default は引き続き `target/current-l2-detached/` に残すが、
+small VPS で root disk pressure が強い場合は external workdir 側へ redirect できるよう、
+path policy、cleanup policy、reporting policy を明示的に保つ。
+helper 本体に final storage policy を埋め込まず、script / env layer で override できる形を優先する。
+
 ## helper stack の中心関数
 
 特に重要なのは次の stack である。

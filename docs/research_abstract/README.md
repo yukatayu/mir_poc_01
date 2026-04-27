@@ -25,6 +25,7 @@
 - `phase4-shared-space-membership-and-practical-room-boundary.md`
 - `phase5-small-decidable-core-and-proof-boundary.md`
 - `phase6-compile-ready-minimal-actualization.md`
+- `mirrorea_future_axis_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`
 - `clean_near_end_modal_01.md`
@@ -84,6 +85,8 @@
 - mutex / weak-memory family は model-check second line に置く
 - Lean は small proof foundations と generated stub corpus に分かれる
 - Sugoroku world vertical slice は single OS process logical multi-place emulator として動く
+- 次の promoted line は Mirrorea future-axis であり、typed external effect boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を docs-first / repo-local queue として整理する
+- avatar fairy follow は next representative slice 候補であり、current active sample ではまだない
 
 次はまだ deferred です。
 
@@ -93,6 +96,7 @@
 - concrete theorem / model-check production binding
 - final public witness / provider / emitted-artifact contract
 - packaging / installed binary / FFI / engine adapter
+- final public auth / visualization / projection / hot-plug API
 
 ## historical material
 

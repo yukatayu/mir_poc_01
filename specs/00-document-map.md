@@ -15,10 +15,14 @@
   - current self-driven task package と、方針決定が必要な current blocker / open question を読みやすく整理した current task map である。
   - append で履歴を積まず、現況に合わせて全体を書き直す snapshot として扱う。
   - 規範判断の正本ではない。根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
+- `samples_progress.md`
+  - phase / layer ごとの runnable sample、unit validation、E2E、debug / visualization、report、build / storage 環境を一覧する dashboard である。
+  - 規範判断の正本ではない。sample / helper / tests / reports の current evidence を current status として圧縮した文書である。
 - `docs/research_abstract/`
   - current research line を日本語で短く読み返すための summary / detail 集である。
   - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
   - current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の summary に加え、clean near-end typing / order-model / modal / Lean の summary と `_detail` を置く。
+  - `mirrorea_future_axis_01.md` は、Mirrorea future-axis の current queue と stop line を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -84,6 +88,9 @@
     「そこへ持っていくために何の判断と情報が要るか」
     を repo-local alpha-ready current layer と final public completion の差まで含めて整理する。
   - 規範判断の正本ではないが、current alpha status / two-big-problems completion bound / mixed gate / true user-spec gate の確認入口として使ってよい。
+- `sub-agent-pro/*.md`
+  - task が specific handoff を名指しした場合は、その handoff を user 指示順で先に読む。
+  - ただし handoff 自体は規範正本ではない。必要な内容は `specs/`、`plan/`、`docs/`、`docs/reports/` へ mirror する。
 - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
   - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
   - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。
@@ -96,6 +103,18 @@
 - `sub-agent-pro/codex_repo_local_near_end_completion_handoff_after_faq011_2026-04-20.md`
   - 2026-04-20 時点の repo-local near-end completion handoff であり、FAQ 11 以後の reserve package summary index actualization、active self-driven package の `model-check-second-line` への narrow 化、repo-local near-end completion と final-public residual の切り分けを current explanation source として整理する。
   - 規範判断の正本ではないが、`specs/examples/605`、`606`、`607`、`608`、`609`、`610`、`611` 以後の closeout / reserve / parser-side residual / hold-line / reserve-package summary index 群を読むときの explanation source として使ってよい。
+- `sub-agent-pro/codex_clean_mir_near_end_completion_with_new_samples_2026-04-22.md`
+  - clean near-end active suite、finite-index first strong typing、order / handoff、model-check second line の current explanation source として使ってよい。
+  - 規範判断の正本ではないが、active sample root / built-in vs user-defined / still-later line を読み直す入口になる。
+- `sub-agent-pro/codex_sugoroku_runtime_attachment_handoff_2026-04-23.md`
+  - Sugoroku world runtime attachment vertical slice の current explanation source として使ってよい。
+  - 規範判断の正本ではないが、Place distinction、membership epoch/incarnation、runtime attach sample family を読む入口になる。
+- `sub-agent-pro/mirrorea_future_plan_full_handoff_2026-04-24.md`
+  - Mirrorea future-axis、typed external effect boundary、auth seam、visualization / telemetry、projection / placement、hot-plug、avatar fairy follow future queue の long-form handoff として使ってよい。
+  - 規範判断の正本ではないが、`specs/10` / `specs/11` / `plan/` / `progress.md` / `tasks.md` へ mirror する説明 source である。
+- `sub-agent-pro/mirrorea_phase_samples_progress_storage_handoff_2026-04-24.md`
+  - phase 0〜16 sample plan、E2E discipline、`samples_progress.md` format、100% rule、git discipline、storage audit、external workdir、detach-safe cleanup の long-form handoff として使ってよい。
+  - 規範判断の正本ではないが、`specs/11`、`plan/`、`samples_progress.md`、`progress.md`、`tasks.md`、`AGENTS.md` へ mirror する説明 source である。
 
 ## 規範的な読書順
 
