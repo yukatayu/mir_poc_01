@@ -348,6 +348,9 @@ reason:
 - whitespace / diff hygiene:
   - `git diff --check`
   - pass
+- git commit / push status:
+  - main closeout commit は作成済み
+  - main closeout commit は `origin/main` へ push 済み
 - missing helper:
   - `python3 scripts/avatar_follow_samples.py closeout`
   - missing
