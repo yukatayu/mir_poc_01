@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 19:17 JST
+Last updated: 2026-04-27 19:46 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、`0926` Network transport close、`0927` Compiler/backend/LLVM prep close、`0928` hands-on closeout close、`0929` network transport loopback preview close、next `Avatar reopen`, `HotPlug executable widening`, `NET-02..05`
+Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、`0926` Network transport close、`0927` Compiler/backend/LLVM prep close、`0928` hands-on closeout close、`0929` network transport loopback preview close、`0930` avatar representative slice close、next `HotPlug executable widening`, `NET-02..05`, `Avatar residual widening`
 
 ## Legend
 
@@ -27,7 +27,7 @@ Progress:
 | Model-check | 90 | active clean suite | mutex / weak-memory second line と Sugoroku reset safety | `python3 scripts/clean_near_end_samples.py run model-check --format json` |
 | Lean / theorem | 89 | active proof bridge | committed Lean bridge と repo-local stub alignment を維持 | `python3 scripts/current_l2_lean_sample_sync.py` |
 | Sugoroku runtime | 90 | active vertical slice | attach / membership / handoff / reset model-check + debug lanes | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
-| Avatar follow | 10 | planned skeleton only | phase 8 helper contract と active promotion条件を切る | none yet |
+| Avatar follow | 75 | active representative slice + residual planned family | active helper canary を維持しつつ `FAIRY-02` / `FAIRY-05` を residual widening として残す | `python3 scripts/avatar_follow_samples.py closeout --format json` |
 | External adapters | 10 | planned skeleton | phase 9 `EXT-01..05` ladder を provider-boundary evidence に結び直す | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` |
 | Network transport | 50 | helper-local `NET-01` canary | `loopback_socket` attach / envelope / reject parity を維持しつつ `NET-02..05` を後段へ残す | `python3 scripts/sugoroku_world_samples.py check-all --transport loopback_socket --format json` |
 | Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持しつつ future executable widening に備える | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
@@ -65,12 +65,18 @@ Progress:
 | `VIS-02` | visualization | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | helper-local membership view | 90 | positive | 2026-04-27 18:04 JST | `0922` | membership timeline stays redacted and published-history-only |
 | `VIS-03` | visualization | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | runtime report-local view | 90 | positive | 2026-04-27 18:04 JST | `0922` | provider-boundary view stays downstream of layer/message inventory |
 | `VIS-04` | visualization | `samples/clean-near-end/order-handoff/06_auditable_authority_witness.mir` | runtime report-local telemetry | 90 | positive | 2026-04-27 18:04 JST | `0922` | authority witness remains evidence, not auth |
+| `FAIRY-01` | avatar follow | `samples/clean-near-end/avatar-follow/01_follow_remote_head_with_local_fallback.mir` | active representative canary | 90 | positive | 2026-04-27 19:35 JST | `0917`, `0930` | visible remote head follow with explicit local fallback lineage |
+| `FAIRY-03` | avatar follow | `samples/clean-near-end/avatar-follow/03_remote_avatar_leaves_falls_back_to_local.mir` | active representative canary | 90 | negative + fallback | 2026-04-27 19:35 JST | `0917`, `0930` | leave invalidates stale anchor and falls back locally |
+| `FAIRY-04` | avatar follow | `samples/clean-near-end/avatar-follow/04_invalid_cross_anchor_chain_rejected.mir` | active representative canary | 90 | negative | 2026-04-27 19:35 JST | `0917`, `0930` | invalid cross-anchor lineage stays explicit rejection |
+| `FAIRY-06` | avatar follow | `samples/clean-near-end/avatar-follow/06_model_check_no_detached_anchor_observed.mir` | active representative canary | 90 | verification | 2026-04-27 19:35 JST | `0917`, `0930` | detached-anchor safety verification bridge |
 
 ## Base corpus / planned / spec-only matrix
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `FAIRY-01..06` | avatar follow | `samples/not_implemented/avatar-fairy-follow/` | planned skeleton | 10 | not yet | 2026-04-27 15:21 JST | `0917` | skeleton exists; no helper / runner yet |
+| `PH8` | avatar follow | `samples/clean-near-end/avatar-follow/`, `samples/not_implemented/avatar-fairy-follow/`, `scripts/avatar_follow_samples.py` | active representative slice + residual planned family | 75 | positive + negative + verification | 2026-04-27 19:35 JST | `0917`, `0930` | active canary は `FAIRY-01` / `03` / `04` / `06`; `FAIRY-02` / `05` は residual planned family |
+| `FAIRY-02` | avatar follow | `samples/not_implemented/avatar-fairy-follow/02_remote_head_not_visible_falls_back_to_local.mir` | residual planned skeleton | 10 | not yet | 2026-04-27 15:21 JST | `0917`, `0930` | visibility-loss-only fallback remains planned |
+| `FAIRY-05` | avatar follow | `samples/not_implemented/avatar-fairy-follow/05_follow_target_reacquired_after_return.mir` | residual planned skeleton | 10 | not yet | 2026-04-27 15:21 JST | `0917`, `0930` | reacquire-after-return remains planned |
 | `PH9` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | planned docs-first row | 10 | planned | 2026-04-27 18:10 JST | `0913`, `0920`, `0923` | stdio を core primitive にしない boundary、provider boundary / local queue を evidence anchor に使う |
 | `PH10` | MessageEnvelope / auth seam | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs` | helper-local / report-local first cut | 90 | positive + negative | 2026-04-27 17:46 JST | `0912`, `0913`, `0920`, `0921` | `auth none` baseline、local queue / provider boundary、public auth contract deferred |
 | `EXT-01` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `LogText` adapter local console; exact host schema open |
@@ -93,7 +99,7 @@ Progress:
 | `E2E-SUG-HISTORY` | membership -> late join -> published history visibility | `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership` | 90 | epoch / active-pending / published-history visibility line | pass 2026-04-27 15:59 JST |
 | `E2E-SUG-RESET` | runtime attach -> reset -> stale handoff invalidation | `python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification` | 90 | reset safety と model-check second line の bridge | pass 2026-04-27 15:21 JST |
 | `E2E-TERM-LAYER-INV` | source sample -> helper/runtime inventory | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures` and `--debug layers` | 90 | helper-local `TermSignature` / `LayerSignature` inventory floor | pass 2026-04-27 15:59 JST |
-| `E2E-AVATAR-FALLBACK` | attach -> follow -> fallback -> reject -> reacquire | planned | 10 | planned phase 8 route only | not yet |
+| `E2E-AVATAR-FALLBACK` | follow -> fallback -> reject -> verification | `python3 scripts/avatar_follow_samples.py check-all --format json` | 90 | representative slice keeps follow / fallback / stale-anchor rejection / detached-anchor safety visible in one helper family | pass 2026-04-27 19:35 JST |
 | `E2E-ADAPTER-BOUNDARY` | source -> adapter -> typed effect receipt/failure | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` and `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 10 | current evidence anchor for provider-boundary / local-queue phase 9 ladder | plan fixed 2026-04-27 18:10 JST |
 | `E2E-NET-LOOPBACK` | local queue -> loopback attach / handoff / reject parity | `python3 scripts/sugoroku_world_samples.py check-all --transport loopback_socket --format json` | 90 | helper-local loopback preview keeps envelope / reject parity across current Sugoroku family | pass 2026-04-27 18:58 JST |
 | `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 90 | helper-local envelope carrier keeps auth / membership / capability / witness separate | pass 2026-04-27 17:46 JST |
@@ -120,7 +126,7 @@ Progress:
 | Blocker | Layer | Severity | Owner | Next action |
 |---|---|---|---|---|
 | detach lifecycle is still an explicit TODO boundary | hot-plug | medium | CodeX | keep `SUG-09` visible until executable AttachPoint / migration helper exists |
-| phase 8 has skeleton files but still no active helper / runner | avatar follow | medium | CodeX | promote helper contract after `MessageEnvelope` / `Visualization` direction is clearer |
+| avatar follow residual family remains planned | avatar follow | low | CodeX | decide later whether `FAIRY-02` / `FAIRY-05` need separate widening beyond representative slice |
 | final public visualization contract / retention / multi-tenant telemetry が未決 | visualization | medium | mixed gate | keep helper/report-local first cut only and reopen after adapter / projection packages |
 | final public `AuthEvidence` kind と real transport widening が未決 | auth / transport | medium | mixed gate | keep helper-local `auth none` baseline and reopen with adapter / network packages |
 | no two-process / reconnect / typed-failure transport sample exists | network transport | medium | mixed gate | keep `NET-01` helper-local preview as floor and reopen `NET-02..05` later |
@@ -131,6 +137,12 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 19:35 JST | `python3 -m unittest scripts.tests.test_avatar_follow_samples` | pass | dedicated avatar helper test suite |
+| 2026-04-27 19:35 JST | `python3 scripts/avatar_follow_samples.py check-all --format json` | pass | `FAIRY-01` / `03` / `04` / `06` representative slice all green |
+| 2026-04-27 19:35 JST | `python3 scripts/avatar_follow_samples.py closeout --format json` | pass | active sample IDs, planned residual IDs, debug modes, model-check property visible |
+| 2026-04-27 19:46 JST | `python3 scripts/check_source_hierarchy.py` | pass | avatar representative slice sync kept required `23/23` paths present after reviewer follow-up |
+| 2026-04-27 19:46 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 928 numbered report(s).` |
+| 2026-04-27 19:46 JST | `git diff --check` | pass | whitespace-clean after `0930` reviewer follow-up sync |
 | 2026-04-27 19:17 JST | `python3 scripts/check_source_hierarchy.py` | pass | `Network transport executable widening` final sync kept required `23/23` paths present |
 | 2026-04-27 19:17 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 927 numbered report(s).` |
 | 2026-04-27 19:17 JST | `git diff --check` | pass | whitespace-clean after `0929` final sync |

@@ -15,6 +15,7 @@
 python3 scripts/check_source_hierarchy.py
 python3 scripts/current_l2_guided_samples.py closeout --format json
 python3 scripts/sugoroku_world_samples.py closeout --format json
+python3 scripts/avatar_follow_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
 ```
@@ -24,6 +25,9 @@ bash scripts/env/mirrorea_storage_env.sh
 ```bash
 python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
+python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json
+python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json
+python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json
@@ -32,9 +36,10 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 
 ## これで確認できること
 
-- active clean near-end suite と Sugoroku world vertical slice が current runnable floor にあること
+- active clean near-end suite と Sugoroku world / avatar fairy follow representative slice が current runnable floor にあること
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`VisualizationProtocol` の helper-local / report-local first cut が current line に同期されていること
 - `Network transport` の `NET-01` helper-local loopback preview が actualize 済みであり、same-process emulator のまま attach / envelope / reject parity を確認できること
+- phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
 - typed visualization / telemetry line が label / authority / redaction を意識した evidence carrier として置かれていること
 - external workdir と `CARGO_TARGET_DIR` / `CARGO_HOME` binding により、small-VPS 前提の backend/LLVM guardrail が current snapshot に入っていること
@@ -69,8 +74,8 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 - final public auth / visualization / projection / hot-plug surface
 - `NET-02..05` の network transport widening
-- avatar fairy follow representative slice の active helper / validation surface
 - detach lifecycle / `AttachPoint` executable contract
+- avatar fairy follow residual widening (`FAIRY-02`, `FAIRY-05`)
 - actual LLVM artifact と backend choice
 
 ## remaining true user-spec gate
@@ -82,15 +87,16 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `Avatar fairy follow` representative slice
-2. `HotPlug Patch / AttachPoint` executable widening
-3. `Network transport` `NET-02..05`
+1. `HotPlug Patch / AttachPoint` executable widening
+2. `Network transport` `NET-02..05`
+3. `Avatar fairy follow` residual widening
 
 ## 関連文書
 
 - `../research_abstract/mirrorea_future_axis_01.md`
 - `../research_abstract/network_transport_plan_01.md`
 - `../research_abstract/avatar_fairy_follow_plan_01.md`
+- `avatar_fairy_follow_representative_slice_01.md`
 - `../research_abstract/compiler_backend_llvm_preparation_01.md`
 - `../../plan/19-repository-map-and-taxonomy.md`
 - `../../samples_progress.md`

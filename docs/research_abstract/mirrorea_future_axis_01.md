@@ -192,13 +192,16 @@ current closeout を実行コマンド付きで追う landing page は `docs/han
 ### current
 
 - Sugoroku world runtime attachment vertical slice
+- avatar fairy follow representative slice
 
-### next candidate
+### residual candidate
 
-- avatar fairy follow vertical slice
+- avatar fairy follow residual widening
 
-avatar fairy follow では、`FollowAnchor`、visibility guard、local fallback、stale anchor rejection、
-object attach/follow lifecycle を representative に検証する予定です。
+avatar fairy follow では、`scripts/avatar_follow_samples.py` と
+`samples/clean-near-end/avatar-follow/` によって、
+`FAIRY-01` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06` を active representative slice として追えます。
+`FAIRY-02` と `FAIRY-05` は residual planned family に残します。
 
 ## 文書の読み分け
 
@@ -237,12 +240,12 @@ object attach/follow lifecycle を representative に検証する予定です。
 
 現在の promoted queue は次です。
 
-1. `Avatar fairy follow` representative slice
-   - `samples/not_implemented/avatar-fairy-follow/` の skeleton family を active helper / validation line へ昇格できるかを検討する後段 package
-2. `HotPlug Patch / AttachPoint` executable widening
+1. `HotPlug Patch / AttachPoint` executable widening
    - `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する後段 package
-3. `Network transport` `NET-02..05`
+2. `Network transport` `NET-02..05`
    - two-process / reconnect / typed failure / route trace widening を後段 package として残す
+3. `Avatar fairy follow` residual widening
+   - `FAIRY-02` visibility-loss-only fallback と `FAIRY-05` reacquire-after-return を representative slice の外側で widen する
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 

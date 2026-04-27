@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 19:17 JST
+最終更新: 2026-04-27 19:46 JST
 
 ## この文書について
 
@@ -16,7 +16,7 @@
 - mutex / weak-memory line は model-check second line として runnable
 - Lean foundations と generated clean stub corpus は runnable
 - Sugoroku world runtime attachment vertical slice は repo-local logical multi-place emulator として runnable
-- `samples_progress.md` は phase 0〜16 matrix と storage row に加え、Sugoroku per-sample alignment と phase 8 avatar skeleton line を持つ current dashboard になった
+- `samples_progress.md` は phase 0〜16 matrix と storage row に加え、Sugoroku per-sample alignment と phase 8 avatar representative slice row を持つ current dashboard になった
 - storage audit と external workdir cutover は `docs/reports/0913-*` と `0915-*` で close してあり、repo `target/` は `/mnt/mirrorea-work/cargo-target` への symlink で運用している
 - `Sugoroku sample progress alignment` は `docs/reports/0916-*` で close 済み
 - `Avatar fairy follow sample plan` は `docs/reports/0917-*` で close 済み
@@ -31,9 +31,10 @@
 - `Compiler/backend/LLVM preparation` は `docs/reports/0927-*` で close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe floor を追加した
 - `hands-on docs / closeout` は `docs/reports/0928-*` で close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current landing page として追加した
 - `Network transport executable widening` は `docs/reports/0929-*` で close し、helper-local `NET-01` loopback preview、`--transport loopback_socket`、loopback parity test を追加した
+- `Avatar fairy follow representative slice` は `docs/reports/0930-*` で close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、residual planned `FAIRY-02` / `FAIRY-05`、helper-local debug surface を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Avatar fairy follow representative slice`**
-- next reopen point は **`HotPlug Patch / AttachPoint executable widening`**
+- current promoted next line は **`HotPlug Patch / AttachPoint executable widening`**
+- next reopen point は **`Network transport NET-02..05`**
 
 ## current executable floor
 
@@ -70,16 +71,17 @@
   `07_owner_leave_reassign`
   `08_reset_interleaving_model_check`
   `09_detach_todo`
+- avatar-follow:
+  `01_follow_remote_head_with_local_fallback`
+  `03_remote_avatar_leaves_falls_back_to_local`
+  `04_invalid_cross_anchor_chain_rejected`
+  `06_model_check_no_detached_anchor_observed`
 
 ### Planned but not active sample family
 
 - `samples/not_implemented/avatar-fairy-follow/`
-  - `FAIRY-01` remote head follow with local fallback
   - `FAIRY-02` visibility-loss fallback
-  - `FAIRY-03` leave-triggered stale-anchor rejection
-  - `FAIRY-04` invalid cross-anchor rejection
   - `FAIRY-05` target reacquire after return
-  - `FAIRY-06` detached-anchor safety model-check
 
 ### Helper entrypoints
 
@@ -102,6 +104,12 @@
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers`
 - `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
+- `python3 scripts/avatar_follow_samples.py check-all --format json`
+- `python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json`
+- `python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json`
+- `python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json`
+- `python3 -m unittest scripts.tests.test_avatar_follow_samples`
+- `python3 scripts/avatar_follow_samples.py closeout --format json`
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
 - `cargo test -p mir-runtime --test clean_near_end_samples`
@@ -113,24 +121,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Avatar fairy follow representative slice
-
-- phase / stage:
-  `Macro 7`, `S1 -> S2`
-- rough estimate:
-  `1 package`
-- objective:
-  phase 8 skeleton family を active helper / validation line へ昇格できるかを判断する
-- expected deliverables:
-  helper contract、debug mode、promotion condition、必要なら first canary
-- validation command:
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、follow / fallback / stale-anchor rejection の current carrier を明記する
-- stop line:
-  final game/runtime API や production avatar stack は固定しない
-
-### Package 2. HotPlug Patch / AttachPoint executable widening
+### Package 1. HotPlug Patch / AttachPoint executable widening
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -148,7 +139,7 @@
 - stop line:
   final migration runtime、production hot-patch engine、public attachpoint ABI は固定しない
 
-### Package 3. Network transport `NET-02..05`
+### Package 2. Network transport `NET-02..05`
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -165,12 +156,29 @@
 - stop line:
   production transport、public deployment contract、cryptographic session protocol は固定しない
 
+### Package 3. Avatar fairy follow residual widening
+
+- phase / stage:
+  `Macro 7`, `S1 -> S2`
+- rough estimate:
+  `1 package`
+- objective:
+  `FAIRY-02` visibility-loss fallback と `FAIRY-05` reacquire-after-return を representative slice の外側で widen するか判断する
+- expected deliverables:
+  residual planned family の active promotion条件再評価、必要なら追加 canary
+- validation command:
+  `python3 scripts/avatar_follow_samples.py closeout --format json`
+- report requirement:
+  新しい report、representative slice と residual planned family の境界を明記する
+- stop line:
+  final game/runtime API や production avatar stack は固定しない
+
 ## research を通して見つけること
 
 - `TermSignature` の最小粒度と residual obligation surface
 - `LayerSignature` first cut の helper/runtime naming をどこまで共有 law surface に寄せるか
 - `VisualizationProtocol` の最小 view kind / telemetry row / redaction wording
-- avatar fairy helper surface を Sugoroku helper extension と専用 helper のどちらに置くか
+- avatar follow residual family をどこまで active helper に取り込むか
 - projection / placement validity report の最小 shape
 - `AttachPoint` compatibility と detach lifecycle の最小 contract
 

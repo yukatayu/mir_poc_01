@@ -39,7 +39,7 @@
   - docs-first plan は `0926` / `plan/22` で actualize したが、final transport ABI / session protocol / multi-server consensus / durable commit は未決のまま残す
 - actual LLVM build / backend choice / packaging success criteria
   - guardrail と non-destructive probe は `0927` / `plan/23` で actualize したが、actual LLVM artifact、final backend choice、installed-binary / FFI / engine adapter success criteria は未決のまま残す
-- avatar fairy follow helper surface、debug mode、active promotion条件
+- avatar fairy follow residual widening (`FAIRY-02`, `FAIRY-05`) を active helper に取り込むか
 - final parser grammar
 - final parser / checker / runtime / verifier API
 - final theorem result / checker artifact / verifier contract

@@ -76,6 +76,7 @@
 - `hands_on_sugoroku_detail.md`
 - `hands_on_sugoroku_sample_matrix.md`
 - `avatar_fairy_follow_plan_01.md`
+- `../hands_on/avatar_fairy_follow_representative_slice_01.md`
 
 ## sample highlighter
 
@@ -108,8 +109,8 @@
 - `Network transport` の docs-first plan も close 済みであり、`plan/22-network-transport-roadmap.md` と `docs/research_abstract/network_transport_plan_01.md` を current anchor にする
 - `Compiler/backend/LLVM preparation` guardrail も close 済みであり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` と `docs/research_abstract/compiler_backend_llvm_preparation_01.md` を current anchor にする
 - `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
-- avatar fairy follow は next representative slice 候補であり、current active sample ではまだない
-- `samples/not_implemented/avatar-fairy-follow/` は phase 8 planned skeleton family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
+- avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で active representative slice を持つ
+- `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
 
 次はまだ deferred です。
 

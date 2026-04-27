@@ -1,10 +1,15 @@
-# avatar-fairy-follow planned samples
+# avatar-fairy-follow residual planned samples
 
-This directory is a planned phase 8 sample family.
+This directory keeps the residual planned phase 8 sample family.
 
-- It is not an active runnable sample family.
+- It is not the active runnable sample family.
 - It is not parsed by the current clean near-end runner.
-- It exists to keep the future representative slice explicit without over-claiming implementation.
+- It exists to keep the remaining future widening explicit without over-claiming implementation.
+
+The current active representative slice is:
+
+- `samples/clean-near-end/avatar-follow/`
+- `python3 scripts/avatar_follow_samples.py ...`
 
 ## Historical anchor
 
@@ -14,25 +19,28 @@ The historical prototype anchor is:
 
 That prototype is useful as planning evidence, but it is not the current active sample surface.
 
-## Planned sample IDs
+## Residual planned sample IDs
 
 | ID | File | Goal | Expected future view |
 |---|---|---|---|
-| `FAIRY-01` | `01_follow_remote_head_with_local_fallback.mir` | follow remote head when visible | follow summary / anchor graph |
 | `FAIRY-02` | `02_remote_head_not_visible_falls_back_to_local.mir` | visibility loss causes fallback | fallback reason / visibility |
-| `FAIRY-03` | `03_remote_avatar_leaves_falls_back_to_local.mir` | leave causes stale-anchor reject and fallback | membership / fallback |
-| `FAIRY-04` | `04_invalid_cross_anchor_chain_rejected.mir` | reject invalid cross-anchor chain | static rejection / lineage mismatch |
 | `FAIRY-05` | `05_follow_target_reacquired_after_return.mir` | reacquire remote target after return | state timeline / anchor switch |
-| `FAIRY-06` | `06_model_check_no_detached_anchor_observed.mir` | verification sample for detached-anchor safety | verification view |
 
-## Promotion rule
+Promoted active canaries already live under `samples/clean-near-end/avatar-follow/`:
 
-This family should not be marked active until all of the following exist:
+- `FAIRY-01`
+- `FAIRY-03`
+- `FAIRY-04`
+- `FAIRY-06`
+
+## Residual promotion rule
+
+This residual family should not be marked active until all of the following exist:
 
 - a chosen helper command surface
 - at least one positive runnable sample
 - at least one negative/rejection runnable sample
 - a named debug/visualization output surface
-- report-backed validation evidence
+- report-backed validation evidence for the widened scope
 
-Until then, this directory stays under `samples/not_implemented/`.
+Until then, these residual samples stay under `samples/not_implemented/`.

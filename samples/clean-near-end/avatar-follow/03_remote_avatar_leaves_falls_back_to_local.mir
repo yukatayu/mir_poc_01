@@ -1,9 +1,7 @@
-# FAIRY-03 planned phase 8 skeleton.
-# Not an active runnable sample.
-# Goal: a remote avatar leave invalidates the old remote anchor and the
-# fairy falls back to a local anchor with explicit membership evidence.
+# FAIRY-03 active current canary.
+# Goal: leave invalidates a remote anchor, rejects stale follow, and falls back to local.
 
-module PlannedMirrorea.AvatarFairyFallbackAfterLeave
+module CurrentMirrorea.AvatarFairyFallbackAfterLeave
 
 place SharedWorld {
   transition remote_avatar_leave by WorldAdmin at WorldServerPlace#1 {

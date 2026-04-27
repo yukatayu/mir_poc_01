@@ -1,0 +1,53 @@
+# avatar-follow representative slice
+
+This directory is the active clean near-end representative slice for phase 8 `avatar fairy follow / fallback anchor`.
+
+It demonstrates:
+
+- remote-head follow with explicit local fallback lineage
+- leave-triggered stale-anchor rejection
+- invalid cross-anchor lineage rejection without hidden repair
+- detached-anchor safety as a model-check-oriented canary
+
+This is a helper-local runnable slice. It is not final public runtime API, final public visualization protocol, or a production avatar stack.
+
+## How to run
+
+```bash
+python3 scripts/avatar_follow_samples.py list
+python3 scripts/avatar_follow_samples.py check-all --format json
+python3 scripts/avatar_follow_samples.py closeout --format json
+```
+
+Useful focused runs:
+
+```bash
+python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json
+python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json
+python3 scripts/avatar_follow_samples.py run 04_invalid_cross_anchor_chain_rejected --format json
+python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json
+```
+
+## Sample matrix
+
+| ID | Sample | Main point | Preferred debug | Expected outcome |
+|---|---|---|---|---|
+| `FAIRY-01` | `01_follow_remote_head_with_local_fallback.mir` | visible remote head follow with explicit fallback lineage | `anchors` | success |
+| `FAIRY-03` | `03_remote_avatar_leaves_falls_back_to_local.mir` | leave invalidates stale anchor and falls back locally | `membership` | fallback after reject |
+| `FAIRY-04` | `04_invalid_cross_anchor_chain_rejected.mir` | invalid cross-anchor chain is rejected without hidden repair | `summary` | rejection |
+| `FAIRY-06` | `06_model_check_no_detached_anchor_observed.mir` | detached anchor safety canary | `verification` | model-check pass |
+
+`FAIRY-02` and `FAIRY-05` remain planned under `samples/not_implemented/avatar-fairy-follow/`.
+
+## Debug surfaces
+
+- `summary`
+  - short human-readable result summary.
+- `anchors`
+  - attached/fallback/rejected anchor inventory and lineage edges.
+- `membership`
+  - membership-epoch and leave/fallback timeline.
+- `verification`
+  - model-check property and verification log.
+
+These outputs are helper-local evidence surfaces. They are not the final public visualization or transport contract.

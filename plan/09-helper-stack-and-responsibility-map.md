@@ -9,6 +9,8 @@ current L2 parser-free PoC では、helper layer が増えるほど docs / tests
 pre-clean-near-end helper note は historical memory としてのみ扱う。
 current active helper surface は `scripts/clean_near_end_samples.py`、
 `scripts/current_l2_guided_samples.py` の compatibility wrapper、
+`scripts/sugoroku_world_samples.py`、
+`scripts/avatar_follow_samples.py`、
 `crates/mir-runtime/src/clean_near_end.rs` を first anchor に読む。
 
 2026-04-27 note:
@@ -78,6 +80,12 @@ run_directory_named_profile
   - clean near-end closeout `visualization_views` / `telemetry_rows`
   を helper-local / report-local evidence inventory として見せてよい。
   - これは final public visualization protocol、final public telemetry schema、retention policy、multi-tenant viewer contract を意味しない。
+- current avatar-follow helper cut では、
+  - `scripts/avatar_follow_samples.py`
+  - `samples/clean-near-end/avatar-follow/`
+  - `docs/hands_on/avatar_fairy_follow_representative_slice_01.md`
+  を phase 8 representative-slice helper-local evidence surface として見せてよい。
+  - これは final public avatar runtime API、final visualization protocol、real transport / auth / session semantics、hot-plug implementation を意味しない。
 - current typed external boundary docs-first cut では、
   - `samples/not_implemented/typed-external-boundary/`
   - clean near-end `05_delegated_rng_service` の `provider_boundary`

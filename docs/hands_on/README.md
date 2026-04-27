@@ -11,6 +11,8 @@
 
 - `current_phase_closeout_01.md`
   - 2026-04-27 時点の current phase closeout と、今すぐ実行する確認コマンド、remaining mixed gate、next queue
+- `avatar_fairy_follow_representative_slice_01.md`
+  - phase 8 current runnable slice の最短入口
 
 ## 既存の長い入門文書
 

@@ -1,9 +1,7 @@
-# FAIRY-06 planned phase 8 skeleton.
-# Not an active runnable sample.
-# Goal: keep a verification-oriented sample that states detached anchors
-# must not remain observable after fallback / leave transitions.
+# FAIRY-06 active current canary.
+# Goal: detached anchors must not remain observable after fallback / leave transitions.
 
-module PlannedMirrorea.AvatarFairyDetachedAnchorSafety
+module CurrentMirrorea.AvatarFairyDetachedAnchorSafety
 
 place SharedWorld {
   model avatar_anchor_visibility {

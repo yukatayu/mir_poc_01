@@ -1,9 +1,7 @@
-# FAIRY-04 planned phase 8 skeleton.
-# Not an active runnable sample.
-# Goal: reject a cross-anchor chain that does not preserve declared
-# lineage or visibility authority.
+# FAIRY-04 active current canary.
+# Goal: reject an invalid cross-anchor chain without hidden repair.
 
-module PlannedMirrorea.AvatarFairyInvalidCrossAnchorRejected
+module CurrentMirrorea.AvatarFairyInvalidCrossAnchorRejected
 
 place SharedWorld {
   place FairyPlace#1 {

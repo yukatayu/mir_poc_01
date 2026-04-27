@@ -1,9 +1,7 @@
-# FAIRY-01 planned phase 8 skeleton.
-# Not an active runnable sample.
-# Goal: a fairy anchor follows a remote head anchor while it is visible,
-# and keeps an explicit local fallback lineage.
+# FAIRY-01 active current canary.
+# Goal: follow a visible remote head anchor while keeping explicit local fallback lineage.
 
-module PlannedMirrorea.AvatarFairyFollowRemoteHead
+module CurrentMirrorea.AvatarFairyFollowRemoteHead
 
 place SharedWorld {
   place RemoteAvatarPlace#A {
