@@ -170,9 +170,9 @@
      - 未決なのは exact transport seam name、final public transport ABI、session/signature protocol、multi-server consensus である。
   6. hot-plug `Patch Req Prov Δ` / `AttachPoint` の最小 surface と compatibility check をどこまで current line に上げるか。
      activation cut、migration contract、detach lifecycle の exact shape は未決定である。
-     - 2026-04-27 時点で docs-first plan は actualize した。
+     - 2026-04-27 時点で docs-first plan と helper-local executable widening は actualize した。
        `plan/21-hotplug-attachpoint-roadmap.md` により、compatibility checklist、activation cut、migration stop line、
-       `SUG-01` attach と `SUG-09` detach TODO boundary までは current line に上げてよい。
+       `SUG-01` attach / `SUG-09` detach TODO boundary、`hotplug_lifecycle` / `--debug hotplug` / `detach_request#1` auth-none canary までは current line に上げてよい。
      - 未決なのは final hot-plug ABI、rollback、durable state migration engine である。
   7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-02` visibility-loss-only fallback と `FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。
      - 2026-04-27 時点で active representative slice は `FAIRY-01` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06`、residual planned family は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-02` / `FAIRY-05` に固定した。

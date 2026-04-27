@@ -60,5 +60,5 @@ actual LLVM checkout/build、final backend choice、packaging success criteria �
 
 ## next relation
 
-current next promoted package は `hands-on docs / closeout` である。
-backend guardrail を current snapshot に固定した後、reader-facing closeout と remaining mixed gate 整理へ渡す。
+backend guardrail を current snapshot に固定した後、reader-facing closeout と remaining mixed gate 整理へ渡した。
+current snapshot では backend guardrail 自体は close 済みであり、next promoted package は network / avatar residual lane 側にある。

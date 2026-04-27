@@ -211,6 +211,82 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
             envelope["notes"],
         )
 
+    def test_runtime_attach_exposes_hotplug_lifecycle_summary(self) -> None:
+        result = sugoroku_world_samples.run_sample("01_runtime_attach_game")
+
+        lifecycle = result["hotplug_lifecycle"]
+        self.assertEqual(lifecycle["attachpoint_id"], "AttachPoint[SugorokuGame#1]")
+        self.assertEqual(lifecycle["lifecycle_state"], "attached_active")
+        self.assertEqual(lifecycle["compatibility"]["result"], "compatible")
+        self.assertEqual(
+            lifecycle["activation_cut"]["request_envelope"], "attach_request#1"
+        )
+        self.assertEqual(
+            lifecycle["migration_contract"]["status"], "not_started"
+        )
+
+    def test_detach_todo_exposes_hotplug_detach_boundary(self) -> None:
+        result = sugoroku_world_samples.run_sample("09_detach_todo")
+
+        lifecycle = result["hotplug_lifecycle"]
+        self.assertEqual(lifecycle["attachpoint_id"], "AttachPoint[SugorokuGame#1]")
+        self.assertEqual(lifecycle["lifecycle_state"], "detached_todo_boundary")
+        self.assertEqual(
+            lifecycle["detach_boundary"]["post_detach_action"]["verdict"], "reject"
+        )
+        self.assertIn(
+            "phase(SugorokuGame#1) != GamePhase.Detached",
+            lifecycle["detach_boundary"]["guards"],
+        )
+        self.assertEqual(lifecycle["migration_contract"]["status"], "deferred")
+
+    def test_detach_todo_keeps_hotplug_summary_grounded_in_message_envelopes(self) -> None:
+        result = sugoroku_world_samples.run_sample("09_detach_todo")
+
+        envelopes = {row["envelope_id"]: row for row in result["message_envelopes"]}
+        self.assertIn("detach_request#1", envelopes)
+        self.assertIn("detached_roll_request#1", envelopes)
+        self.assertEqual(envelopes["detach_request#1"]["dispatch_outcome"], "accepted")
+        self.assertEqual(envelopes["detach_request#1"]["auth_evidence"], None)
+        self.assertIn(
+            "DetachComponent(SugorokuGamePackage)",
+            envelopes["detach_request#1"]["capability_requirements"],
+        )
+        self.assertIn(
+            "authority(Server) >= GameAuthority.Server",
+            envelopes["detach_request#1"]["authorization_checks"],
+        )
+        self.assertEqual(
+            envelopes["detached_roll_request#1"]["dispatch_outcome"], "rejected"
+        )
+        self.assertEqual(
+            result["hotplug_lifecycle"]["activation_cut"]["request_envelope"],
+            "detach_request#1",
+        )
+
+    def test_hotplug_debug_prints_lifecycle_inventory(self) -> None:
+        pretty = sugoroku_world_samples.format_pretty(
+            sugoroku_world_samples.run_sample("09_detach_todo"),
+            debug="hotplug",
+        )
+
+        self.assertIn("HOT-PLUG LIFECYCLE", pretty)
+        self.assertIn("AttachPoint[SugorokuGame#1]", pretty)
+        self.assertIn("state=detached_todo_boundary", pretty)
+        self.assertIn("post_detach_action: reject", pretty)
+
+    def test_closeout_records_hotplug_debug_mode_and_layer(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertIn("--debug hotplug", result["debug_output_modes"])
+        self.assertIn("hot-plug", result["layer_signature_kinds"])
+        self.assertNotIn("hot-plug", result["reserved_layer_signature_kinds"])
+        self.assertIn("attached_active", result["hotplug_lifecycle_states"])
+        self.assertIn("detached_todo_boundary", result["hotplug_lifecycle_states"])
+        self.assertIn("hotplug_activation", result["telemetry_row_kinds"])
+        self.assertIn("hotplug_detach", result["telemetry_row_kinds"])
+        self.assertIn("hotplug_lifecycle", result["visualization_view_kinds"])
+
     def test_roll_publish_handoff_loopback_transport_preserves_envelope_parity(self) -> None:
         result = sugoroku_world_samples.run_sample(
             "03_roll_publish_handoff", transport="loopback_socket"

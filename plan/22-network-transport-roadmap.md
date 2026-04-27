@@ -83,5 +83,5 @@ final socket / broker choice、cryptographic session protocol、multi-server con
 ## next relation
 
 `NET-01` helper-local loopback preview は actualize 済みである。
-current next promoted package は `Avatar fairy follow` representative slice reopen であり、
-network transport は `NET-02..05` widening を後段 package に残す。
+current promoted package は network transport 自身の `NET-02..05` widening であり、
+`NET-01` helper-local preview を floor にしたまま two-process / reconnect / typed failure / redacted route trace を後段 canary として残す。

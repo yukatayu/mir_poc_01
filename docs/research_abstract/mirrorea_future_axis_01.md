@@ -152,6 +152,8 @@ Mirrorea の中心は runtime hot-plug です。
 
 2026-04-27 時点では、`plan/21-hotplug-attachpoint-roadmap.md` に
 compatibility checklist、activation cut、migration stop line、`SUG-01` attach と `SUG-09` detach TODO boundary を置いてあります。
+さらに helper-local executable widening として、Sugoroku helper の `hotplug_lifecycle`、
+`--debug hotplug`、`detach_request#1` auth-none envelope canary、attach-detach telemetry / visualization current view も actualize しました。
 storage detach script は operational cleanup concern であり、この runtime hot-plug lifecycle そのものではありません。
 
 ### network transport
@@ -240,11 +242,9 @@ avatar fairy follow では、`scripts/avatar_follow_samples.py` と
 
 現在の promoted queue は次です。
 
-1. `HotPlug Patch / AttachPoint` executable widening
-   - `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する後段 package
-2. `Network transport` `NET-02..05`
+1. `Network transport` `NET-02..05`
    - two-process / reconnect / typed failure / route trace widening を後段 package として残す
-3. `Avatar fairy follow` residual widening
+2. `Avatar fairy follow` residual widening
    - `FAIRY-02` visibility-loss-only fallback と `FAIRY-05` reacquire-after-return を representative slice の外側で widen する
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。

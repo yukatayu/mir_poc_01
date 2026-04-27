@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 19:46 JST
+最終更新: 2026-04-27 20:07 JST
 
 ## この文書について
 
@@ -27,14 +27,15 @@
 - `Typed external boundary / adapter` は `docs/reports/0923-*` で close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、provider boundary / local queue / typed failure / debug label restriction の current evidence anchor を docs-first に固定した
 - `Projection / placement` は `docs/reports/0924-*` で close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction、place split、validity checklist、stop line を追加した
 - `HotPlug Patch / AttachPoint` は `docs/reports/0925-*` で close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を追加した
+- `HotPlug Patch / AttachPoint executable widening` は `docs/reports/0931-*` で close し、Sugoroku helper の `hotplug_lifecycle` / `--debug hotplug` / `hot-plug` layer inventory、attach / detach telemetry / visualization を current line に actualize した
 - `Network transport` は `docs/reports/0926-*` で close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` に loopback / reconnect / failure matrix の docs-first ladder を追加した
 - `Compiler/backend/LLVM preparation` は `docs/reports/0927-*` で close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe floor を追加した
 - `hands-on docs / closeout` は `docs/reports/0928-*` で close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current landing page として追加した
 - `Network transport executable widening` は `docs/reports/0929-*` で close し、helper-local `NET-01` loopback preview、`--transport loopback_socket`、loopback parity test を追加した
 - `Avatar fairy follow representative slice` は `docs/reports/0930-*` で close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、residual planned `FAIRY-02` / `FAIRY-05`、helper-local debug surface を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`HotPlug Patch / AttachPoint executable widening`**
-- next reopen point は **`Network transport NET-02..05`**
+- current promoted next line は **`Network transport NET-02..05`**
+- next reopen point は **`Avatar fairy follow residual widening`**
 
 ## current executable floor
 
@@ -102,6 +103,7 @@
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers`
+- `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug`
 - `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
 - `python3 scripts/avatar_follow_samples.py check-all --format json`
@@ -121,25 +123,7 @@
 
 ## 自走可能な task package
 
-### Package 1. HotPlug Patch / AttachPoint executable widening
-
-- phase / stage:
-  `Macro 7`, `S1 -> S2`
-- rough estimate:
-  `1 package`
-- objective:
-  `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する
-- expected deliverables:
-  attachpoint compatibility summary、detach TODO canary、runtime/sample evidence
-- validation command:
-  `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --format json`
-  `python3 scripts/sugoroku_world_samples.py check-all`
-- report requirement:
-  新しい report、runtime hot-plug と storage detach の非同一性、stop line、current executable boundary を明記する
-- stop line:
-  final migration runtime、production hot-patch engine、public attachpoint ABI は固定しない
-
-### Package 2. Network transport `NET-02..05`
+### Package 1. Network transport `NET-02..05`
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -156,7 +140,7 @@
 - stop line:
   production transport、public deployment contract、cryptographic session protocol は固定しない
 
-### Package 3. Avatar fairy follow residual widening
+### Package 2. Avatar fairy follow residual widening
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`

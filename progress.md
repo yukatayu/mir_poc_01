@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-27 19:46 JST
+最終更新: 2026-04-27 20:07 JST
 
 ## この文書について
 
@@ -28,7 +28,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` が current layer-aware repo map と staged migration 読みを与える
 - Mirrorea future lane:
-  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice を close し、next promoted package を `HotPlug Patch / AttachPoint` executable widening と読む
+  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice、hot-plug executable widening を close し、next promoted package を `Network transport` `NET-02..05` と読む
 - reserve integration lane:
   real transport、final public contract、packaging、final public auth / visualization / projection / hot-plug surface は still later
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 2026-04-27 時点の repo は、
 **clean near-end current layer と Sugoroku world / avatar follow representative slice を runnable floor として維持しつつ、
 phase/sample/progress/storage foundation を runnable dashboard に押し上げ、
-hot-plug executable widening へ進む**
+hot-plug helper-local lifecycle canary を actualize したうえで transport widening へ進む**
 段階です。
 
 ただし、次はまだ終わっていません。
@@ -57,10 +57,10 @@ hot-plug executable widening へ進む**
 | order / handoff / cut family | 92% | 95% | 80% | high-level relation line は動くが、public wording と contract は残る |
 | theorem / model-check boundary | 95% | 94% | 89% | repo-local bridge は強いが、production binding は未完 |
 | Lean foundations / proof spine | 89% | 92% | 69% | small proof fragment はあるが、full discharge ではない |
-| Sugoroku world / current shared-space sample | 84% | 86% | 70% | runnable vertical slice と per-sample dashboard は揃ったが、real transport / durable commit は未着手 |
+| Sugoroku world / current shared-space sample | 85% | 87% | 73% | runnable vertical slice、per-sample dashboard、hot-plug helper-local lifecycle canary は揃ったが、real transport / durable commit は未着手 |
 | samples progress dashboard | 86% | 92% | 73% | phase 0〜16 matrix に加え、Sugoroku per-sample row と avatar representative slice row まで reader-facing に整理した |
 | storage / external workdir guardrail | 72% | 83% | 76% | mount / `target/` cutover / `CARGO_HOME` probe / LLVM path readiness は入ったが、actual LLVM build はまだ |
-| Mirrorea future axis | 76% | 89% | 53% | `NET-01` helper-local loopback preview と avatar representative slice まで actualize し、next は `HotPlug Patch / AttachPoint` executable widening |
+| Mirrorea future axis | 78% | 90% | 57% | `NET-01` helper-local loopback preview、avatar representative slice、hot-plug helper-local lifecycle canary を actualize し、next は `Network transport` `NET-02..05` |
 
 ## macro phase map
 
@@ -90,14 +90,14 @@ hot-plug executable widening へ進む**
 | repository structure / taxonomy | `S3-S4` | layer-aware repo map、sample/script taxonomy docs、no-risk-first staged migration plan | risky crate/path move をしないまま staged physical migration 条件を固める |
 | storage / detachable workdir guardrail | `S5` | audit、env script、detach prepare、cleanup script、mounted workdir、`target/` cutover、`CARGO_HOME` probe、LLVM path readiness | actual LLVM build、backend choice、broader generated-artifact policy |
 | typed external effect / adapter boundary | `S3-S4` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / loopback preview current anchor | dedicated adapter helper / `NET-02..05` widening |
-| layer composition / auth / visualization / projection / hot-plug | `S4-S5` | package queue、stop line、phase 8 representative slice、`TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 12 projection validity checklist、phase 14 hot-plug compatibility stop line、phase 13 transport widening invariant を actualize | AttachPoint actualization と executable transport widening |
+| layer composition / auth / visualization / projection / hot-plug | `S5` | package queue、stop line、phase 8 representative slice、`TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 12 projection validity checklist、phase 14 hot-plug helper-local lifecycle canary、phase 13 transport widening invariant を actualize | executable transport widening と real attachpoint / migration residual |
 
 ## 着手可能 / 要仕様確認 / 後段依存
 
 | 項目 | 状態 | 理由 |
 |---|---|---|
-| `HotPlug Patch / AttachPoint` widening | 着手可能 | `SUG-01` attach と `SUG-09` detach TODO boundary、avatar representative slice、`NET-01` preview が揃っており narrow canary を切りやすい |
-| `Network transport` `NET-02..05` | 後段依存 | `NET-01` helper-local preview は入ったが、two-process / reconnect / typed failure は後段 widening に残す |
+| `HotPlug Patch / AttachPoint` residual widening | 後段依存 | helper-local lifecycle canary は入ったが、real attachpoint / migration / rollback は mixed gate に残す |
+| `Network transport` `NET-02..05` | 着手可能 | `NET-01` helper-local preview と hot-plug lifecycle carrier が揃い、two-process / reconnect / typed failure widening に入れる |
 | `Avatar fairy follow` residual widening | 後段依存 | `FAIRY-02` / `FAIRY-05` は representative slice 外の residual planned family として残す |
 | `Projection / placement` widening | 後段依存 | final projection IR、generator、optimizer、equivalence checker は mixed gate に残す |
 | `Typed external boundary / adapter` widening | 後段依存 | final host schema、browser/network/VR adapter 実装、public adapter API は mixed gate に残す |
@@ -168,3 +168,4 @@ hot-plug executable widening へ進む**
 - 2026-04-27 18:57 JST — `hands-on docs / closeout` として `docs/hands_on/README.md`、`docs/hands_on/current_phase_closeout_01.md`、root docs / `plan/19` / snapshot 文書 / report を同期し、current runnable floor、remaining mixed gate、remaining true user-spec gate、next queue を reader-facing に再整理した。validation は `check_source_hierarchy.py`、`validate_docs.py`、current-L2 closeout、Sugoroku closeout、runtime closeout、`git diff --check` を採る。
 - 2026-04-27 18:58 JST — `Network transport executable widening` として `scripts/sugoroku_world_samples.py` に `--transport loopback_socket` を追加し、`NET-01` helper-local loopback preview、attach / handoff / reject parity、`check-all --transport loopback_socket`、runtime reserved seam inventory assertion、docs / snapshot / report を同期した。validation は Python unittest、focused Sugoroku loopback run、runtime sample / test、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採る。
 - 2026-04-27 19:46 JST — `Avatar fairy follow representative slice` として `scripts/avatar_follow_samples.py`、`samples/clean-near-end/avatar-follow/`、`plan/24-avatar-follow-representative-slice-roadmap.md`、`docs/hands_on/avatar_fairy_follow_representative_slice_01.md`、snapshot docs / report を同期し、`FAIRY-01` / `03` / `04` / `06` active canary、residual planned `FAIRY-02` / `05`、dedicated helper surface、debug modes を固定した。validation は avatar unittest、focused avatar run、avatar closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、reviewer 指摘で露出した residual-taxonomy drift と stale wording も同 package で解消した。
+- 2026-04-27 20:03 JST — `HotPlug Patch / AttachPoint executable widening` として Sugoroku helper に `hotplug_lifecycle`、`--debug hotplug`、`hot-plug` layer inventory、attach / detach telemetry-view、`detach_request#1` auth-none envelope canary を揃え、snapshot docs / `plan/21` / specs / report を同期した。validation は Python unittest、focused hot-plug run、Sugoroku closeout、`check-all` local/loopback、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `Network transport` `NET-02..05` に進めた。

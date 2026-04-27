@@ -363,6 +363,21 @@ transition request_detach_game by Server at WorldServerPlace {
 }
 ```
 
+current helper-local canary では、`09_detach_todo` に対して次を evidence-oriented に読めます。
+
+- `detach_request#1`
+  - `WorldServerPlace -> SugorokuGamePlace#1`
+  - `DetachComponent(SugorokuGamePackage)`
+  - `auth none`
+  - membership snapshot imported before visible detach state
+- `detached_roll_request#1`
+  - detach 後 domain action rejection
+  - `phase(SugorokuGame#1) != GamePhase.Detached`
+- `hotplug_lifecycle`
+  - helper-local derived summary
+  - compatibility / activation cut / post-detach rejection / migration deferred
+  - authoritative seam は `MessageEnvelope` であり、public `AttachPoint` ABI ではない
+
 runner の主要 component は次です。
 
 ```python

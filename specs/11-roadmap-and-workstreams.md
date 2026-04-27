@@ -1160,13 +1160,13 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
 - `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
 - `Projection / placement` は docs-first package として close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction と validity checklist を actualize した。
-- `HotPlug Patch / AttachPoint` は docs-first package として close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を actualize した。
+- `HotPlug Patch / AttachPoint` は docs-first package と helper-local executable widening を close し、`plan/21-hotplug-attachpoint-roadmap.md` と Sugoroku helper の `hotplug_lifecycle` / `--debug hotplug` / `detach_request#1` canary に compatibility / activation / migration stop line を actualize した。
 - `Network transport` は docs-first package として close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `NET-01..05` を current snapshot に actualize した。
 - `Compiler/backend/LLVM preparation` は docs-first + non-destructive-probe package として close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、LLVM path readiness を current snapshot に actualize した。
 - `hands-on docs / closeout` は close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current closeout landing page として actualize した。
 - `Network transport executable widening` は helper-local package として close し、`NET-01` loopback preview、`--transport loopback_socket`、attach / handoff / reject parity、reserved runtime seam inventory assertion を current snapshot に actualize した。
 - `Avatar fairy follow representative slice` は helper-local package として close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、residual planned family `FAIRY-02` / `FAIRY-05`、hands-on landing page を current snapshot に actualize した。
-- current promoted next package は `HotPlug Patch / AttachPoint` executable widening である。
+- current promoted next package は `Network transport` `NET-02..05` である。
 
 ## 2026-04-27 repository-structure staging addendum
 

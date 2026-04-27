@@ -647,8 +647,109 @@ def _term_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, s
     return [signature.to_json() for signature in signatures]
 
 
+def _hotplug_lifecycle(
+    sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None
+) -> dict[str, Any] | None:
+    if sample_id == "01_runtime_attach_game":
+        membership_epoch = 0
+        if runtime is not None:
+            membership_epoch = runtime.registry.membership_epoch
+        return {
+            "attachpoint_id": "AttachPoint[SugorokuGame#1]",
+            "patch_id": "SugorokuGamePackage@runtime",
+            "lifecycle_state": "attached_active",
+            "compatibility": {
+                "result": "compatible",
+                "required_authority": "GameAuthority.Server",
+                "required_capabilities": ["AttachComponent(SugorokuGamePackage)"],
+                "membership_freshness": f"membership_epoch={membership_epoch} imported intact",
+                "package_checked": bool(result.get("package_checked")),
+            },
+            "activation_cut": {
+                "request_envelope": "attach_request#1",
+                "preconditions": [
+                    "authority(Server) >= GameAuthority.Server",
+                    "package.checked = true",
+                    "membership snapshot imported before visible state mutation",
+                ],
+                "visible_state_frontier": [
+                    "SugorokuGamePlace#1 allocated",
+                    "admin=Alice",
+                    "phase=Attached",
+                ],
+            },
+            "migration_contract": {
+                "status": "not_started",
+                "notes": [
+                    "repo-local attach only",
+                    "durable migration engine deferred",
+                ],
+            },
+        }
+    if sample_id == "09_detach_todo":
+        return {
+            "attachpoint_id": "AttachPoint[SugorokuGame#1]",
+            "patch_id": "SugorokuGamePackage@runtime",
+            "lifecycle_state": "detached_todo_boundary",
+            "compatibility": {
+                "result": "detach_requested",
+                "required_authority": "GameAuthority.Server",
+                "required_capabilities": ["DetachComponent(SugorokuGamePackage)"],
+                "membership_freshness": "membership snapshot still required before detach cut",
+                "package_checked": True,
+            },
+            "activation_cut": {
+                "request_envelope": "detach_request#1",
+                "preconditions": [
+                    "compatibility / authorization checks remain explicit",
+                    "domain-visible state changes happen after lifecycle cut",
+                ],
+                "visible_state_frontier": [
+                    "phase=Detached",
+                    "domain actions rejected or todo_deferred",
+                ],
+            },
+            "detach_boundary": {
+                "request_transition": "request_detach_game",
+                "guards": ["phase(SugorokuGame#1) != GamePhase.Detached"],
+                "post_detach_action": dict(result.get("domain_action_after_detach") or {}),
+                "notes": [
+                    "detach remains a Mirrorea lifecycle boundary",
+                    "runtime domain action stays rejected after detach",
+                ],
+            },
+            "migration_contract": {
+                "status": "deferred",
+                "notes": [
+                    "rollback protocol not fixed",
+                    "durable migration engine not implemented",
+                ],
+            },
+        }
+    return None
+
+
 def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, Any]]:
     signatures: list[LayerSignature] = []
+    if sample_id == "01_runtime_attach_game":
+        signatures.append(
+            LayerSignature(
+                layer="hot-plug",
+                requires=[
+                    "authority(Server) >= GameAuthority.Server",
+                    "package.checked",
+                    "membership_epoch",
+                ],
+                provides=["attachpoint_compatibility", "activation_cut"],
+                transforms=["world:EmptyWorld->SugorokuGame#1 attached"],
+                checks=["compatible_before_visible_attach"],
+                emits=["hotplug_lifecycle", "summary"],
+                laws=[
+                    "activation_requires_compatibility",
+                    "attach_detach_lifecycle_explicit",
+                ],
+            )
+        )
     if sample_id == "03_roll_publish_handoff":
         roll = result.get("roll") or {}
         witness_name = roll.get("published_witness", "draw_pub#1")
@@ -714,6 +815,25 @@ def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, 
                 checks=["reassigned_owner_is_active"],
                 emits=["membership", "summary"],
                 laws=["membership_epoch_monotone", "active_owner_continuity"],
+            )
+        )
+    if sample_id == "09_detach_todo":
+        signatures.append(
+            LayerSignature(
+                layer="hot-plug",
+                requires=[
+                    "authority(Server) >= GameAuthority.Server",
+                    "membership_epoch",
+                    "detach_request",
+                ],
+                provides=["detach_boundary", "post_detach_rejection"],
+                transforms=["phase:Attached->Detached"],
+                checks=["domain_action_rejected_after_detach"],
+                emits=["hotplug_lifecycle", "verification"],
+                laws=[
+                    "activation_requires_compatibility",
+                    "attach_detach_lifecycle_explicit",
+                ],
             )
         )
     return [signature.to_json() for signature in signatures]
@@ -1069,28 +1189,54 @@ def _message_envelopes(
             ]
         )
     if sample_id == "09_detach_todo":
-        envelopes.append(
-            MessageEnvelope(
-                envelope_id="detached_roll_request#1",
-                from_place="ParticipantPlace[Alice]",
-                to_place=game_place,
-                transport=transport,
-                payload_kind="transition",
-                payload_ref="detached_domain_action",
-                principal_claim=_principal_claim(
-                    "Alice",
-                    claimed_authority="GameAuthority.Player",
-                    claimed_capabilities=["DiceOwner(Alice)"],
+        envelopes.extend(
+            [
+                MessageEnvelope(
+                    envelope_id="detach_request#1",
+                    from_place=world_place,
+                    to_place=game_place,
+                    transport=transport,
+                    payload_kind="runtime_detach",
+                    payload_ref="request_detach_game",
+                    principal_claim=_principal_claim(
+                        "Server",
+                        claimed_authority="GameAuthority.Server",
+                        claimed_capabilities=["DetachComponent(SugorokuGamePackage)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=0,
+                    capability_requirements=["DetachComponent(SugorokuGamePackage)"],
+                    authorization_checks=[
+                        "authority(Server) >= GameAuthority.Server",
+                        "membership snapshot imported before visible detach state",
+                    ],
+                    witness_refs=[],
+                    dispatch_outcome="accepted",
+                    notes=["repo-local auth none baseline", "detach lifecycle request only"],
                 ),
-                auth_evidence=None,
-                membership_epoch=runtime.registry.membership_epoch,
-                member_incarnation=_member_incarnation(runtime, "Alice"),
-                capability_requirements=["DiceOwner(Alice)"],
-                authorization_checks=["phase(SugorokuGame#1) != GamePhase.Detached"],
-                witness_refs=[],
-                dispatch_outcome="rejected",
-                notes=["deferred to Mirrorea lifecycle layer"],
-            )
+                MessageEnvelope(
+                    envelope_id="detached_roll_request#1",
+                    from_place="ParticipantPlace[Alice]",
+                    to_place=game_place,
+                    transport=transport,
+                    payload_kind="transition",
+                    payload_ref="detached_domain_action",
+                    principal_claim=_principal_claim(
+                        "Alice",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["DiceOwner(Alice)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Alice"),
+                    capability_requirements=["DiceOwner(Alice)"],
+                    authorization_checks=["phase(SugorokuGame#1) != GamePhase.Detached"],
+                    witness_refs=[],
+                    dispatch_outcome="rejected",
+                    notes=["deferred to Mirrorea lifecycle layer"],
+                ),
+            ]
         )
 
     if transport == "loopback_socket":
@@ -1122,6 +1268,28 @@ def _telemetry_rows(
     sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None
 ) -> list[TelemetryRow]:
     rows: list[TelemetryRow] = []
+    if sample_id == "01_runtime_attach_game":
+        lifecycle = result.get("hotplug_lifecycle") or {}
+        compatibility = lifecycle.get("compatibility") or {}
+        activation_cut = lifecycle.get("activation_cut") or {}
+        rows.append(
+            TelemetryRow(
+                row_id="attach_activation#1",
+                row_kind="hotplug_activation",
+                label="helper:hotplug",
+                authority="InspectAttachLifecycle(AttachPoint[SugorokuGame#1])",
+                redaction="lifecycle_summary_only",
+                source_refs=["hotplug_lifecycle", "message_envelopes[attach_request#1]"],
+                fields={
+                    "state": lifecycle.get("lifecycle_state", "attached_active"),
+                    "compatibility": compatibility.get("result", "compatible"),
+                    "request_envelope": activation_cut.get(
+                        "request_envelope", "attach_request#1"
+                    ),
+                },
+                notes=["helper-local hot-plug activation summary"],
+            )
+        )
     if sample_id == "03_roll_publish_handoff":
         membership_epoch = runtime.registry.membership_epoch if runtime is not None else 0
         envelopes = {
@@ -1235,6 +1403,36 @@ def _telemetry_rows(
                 notes=["second-line verification summary"],
             )
         )
+    if sample_id == "09_detach_todo":
+        lifecycle = result.get("hotplug_lifecycle") or {}
+        detach_boundary = lifecycle.get("detach_boundary") or {}
+        rows.append(
+            TelemetryRow(
+                row_id="detach_boundary#1",
+                row_kind="hotplug_detach",
+                label="helper:hotplug",
+                authority="InspectAttachLifecycle(AttachPoint[SugorokuGame#1])",
+                redaction="lifecycle_summary_only",
+                source_refs=[
+                    "hotplug_lifecycle",
+                    "message_envelopes[detach_request#1]",
+                    "message_envelopes[detached_roll_request#1]",
+                ],
+                fields={
+                    "state": lifecycle.get("lifecycle_state", "detached_todo_boundary"),
+                    "request_envelope": (
+                        lifecycle.get("activation_cut") or {}
+                    ).get("request_envelope", "detach_request#1"),
+                    "post_detach_verdict": (
+                        detach_boundary.get("post_detach_action") or {}
+                    ).get("verdict", "reject"),
+                    "request_transition": detach_boundary.get(
+                        "request_transition", "request_detach_game"
+                    ),
+                },
+                notes=["helper-local post-detach rejection summary"],
+            )
+        )
     return rows
 
 
@@ -1244,6 +1442,25 @@ def _visualization_views(
     telemetry_rows: list[TelemetryRow],
 ) -> list[dict[str, Any]]:
     views: list[VisualizationView] = []
+    if sample_id == "01_runtime_attach_game":
+        lifecycle = result.get("hotplug_lifecycle") or {}
+        compatibility = lifecycle.get("compatibility") or {}
+        views.append(
+            VisualizationView(
+                view_id="attach_lifecycle",
+                view_kind="hotplug_lifecycle",
+                label="helper:hotplug",
+                authority="InspectAttachLifecycle(AttachPoint[SugorokuGame#1])",
+                redaction="lifecycle_summary_only",
+                source_refs=["hotplug_lifecycle", "message_envelopes", "summary"],
+                summary={
+                    "state": lifecycle.get("lifecycle_state", "attached_active"),
+                    "compatibility": compatibility.get("result", "compatible"),
+                    "telemetry_refs": [row.row_id for row in telemetry_rows],
+                },
+                notes=["helper-local attach lifecycle visualization"],
+            )
+        )
     if sample_id == "03_roll_publish_handoff":
         views.extend(
             [
@@ -1340,6 +1557,35 @@ def _visualization_views(
                 notes=["model-check summary for helper-local verification view"],
             )
         )
+    if sample_id == "09_detach_todo":
+        lifecycle = result.get("hotplug_lifecycle") or {}
+        detach_boundary = lifecycle.get("detach_boundary") or {}
+        views.append(
+            VisualizationView(
+                view_id="detach_lifecycle",
+                view_kind="hotplug_lifecycle",
+                label="helper:hotplug",
+                authority="InspectAttachLifecycle(AttachPoint[SugorokuGame#1])",
+                redaction="lifecycle_summary_only",
+                source_refs=[
+                    "hotplug_lifecycle",
+                    "message_envelopes[detach_request#1]",
+                    "message_envelopes[detached_roll_request#1]",
+                    "verification",
+                ],
+                summary={
+                    "state": lifecycle.get("lifecycle_state", "detached_todo_boundary"),
+                    "request_envelope": (
+                        lifecycle.get("activation_cut") or {}
+                    ).get("request_envelope", "detach_request#1"),
+                    "post_detach_verdict": (
+                        detach_boundary.get("post_detach_action") or {}
+                    ).get("verdict", "reject"),
+                    "telemetry_refs": [row.row_id for row in telemetry_rows],
+                },
+                notes=["helper-local detach lifecycle visualization"],
+            )
+        )
     return [view.to_json() for view in views]
 
 
@@ -1351,6 +1597,9 @@ def _finalize_result(
     transport: str,
 ) -> dict[str, Any]:
     result["term_signatures"] = _term_signatures(sample_id, result)
+    hotplug_lifecycle = _hotplug_lifecycle(sample_id, result, runtime)
+    if hotplug_lifecycle is not None:
+        result["hotplug_lifecycle"] = hotplug_lifecycle
     result["layer_signatures"] = _layer_signatures(sample_id, result)
     result["message_envelopes"] = _message_envelopes(
         sample_id, result, runtime, transport=transport
@@ -1863,6 +2112,14 @@ def closeout() -> dict[str, Any]:
         "reserved_auth_evidence_modes": ["session_token", "signature"],
         "transport_seams": list(ACTIVE_TRANSPORT_SEAMS),
         "reserved_transport_seams": list(RESERVED_TRANSPORT_SEAMS),
+        "hotplug_lifecycle_states": sorted(
+            {
+                row["hotplug_lifecycle"]["lifecycle_state"]
+                for sample in SAMPLE_ROWS
+                for row in [run_sample(sample["sample_id"])]
+                if "hotplug_lifecycle" in row
+            }
+        ),
         "visualization_views": visualization_views,
         "visualization_view_kinds": sorted(
             {row["view_kind"] for row in visualization_views}
@@ -1886,7 +2143,6 @@ def closeout() -> dict[str, Any]:
             "transport",
             "telemetry",
             "projection",
-            "hot-plug",
             "visualization",
         ],
         "debug_output_modes": [
@@ -1898,6 +2154,7 @@ def closeout() -> dict[str, Any]:
             "--debug envelopes",
             "--debug visualization",
             "--debug layers",
+            "--debug hotplug",
             "--format json",
         ],
         "limitations": list(LIMITATIONS),
@@ -2060,6 +2317,37 @@ def _format_visualization(result: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _format_hotplug(result: dict[str, Any]) -> str:
+    lifecycle = result.get("hotplug_lifecycle") or {}
+    if not lifecycle:
+        return "HOT-PLUG LIFECYCLE\n  - none"
+    lines = [
+        "HOT-PLUG LIFECYCLE",
+        f"  attachpoint: {lifecycle.get('attachpoint_id', '?')}",
+        f"  patch: {lifecycle.get('patch_id', '?')}",
+        f"  state={lifecycle.get('lifecycle_state', '?')}",
+    ]
+    compatibility = lifecycle.get("compatibility") or {}
+    lines.append(
+        f"  compatibility: result={compatibility.get('result', '?')} authority={compatibility.get('required_authority', '?')}"
+    )
+    activation_cut = lifecycle.get("activation_cut") or {}
+    lines.append(
+        f"  activation_cut: request_envelope={activation_cut.get('request_envelope', '?')}"
+    )
+    detach_boundary = lifecycle.get("detach_boundary") or {}
+    if detach_boundary:
+        guards = ", ".join(detach_boundary.get("guards") or []) or "none"
+        post_detach = detach_boundary.get("post_detach_action") or {}
+        lines.append(f"  guards: {guards}")
+        lines.append(
+            f"  post_detach_action: {post_detach.get('verdict', '?')} ({post_detach.get('reason_family', '?')})"
+        )
+    migration = lifecycle.get("migration_contract") or {}
+    lines.append(f"  migration_status: {migration.get('status', '?')}")
+    return "\n".join(lines)
+
+
 def format_pretty(payload: Any, *, debug: str | None = None) -> str:
     if isinstance(payload, list):
         return "\n".join(f"{row['sample_id']}: {row['summary']}" for row in payload)
@@ -2081,6 +2369,8 @@ def format_pretty(payload: Any, *, debug: str | None = None) -> str:
         return _format_visualization(payload)
     if debug == "layers":
         return _format_layers(payload)
+    if debug == "hotplug":
+        return _format_hotplug(payload)
     sample = payload.get("sample")
     if sample == "00_world_bootstrap":
         return _format_world_summary(payload)
@@ -2156,6 +2446,7 @@ def build_parser() -> argparse.ArgumentParser:
             "envelopes",
             "visualization",
             "layers",
+            "hotplug",
         ],
         default=None,
     )

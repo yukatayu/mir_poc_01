@@ -32,6 +32,7 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug si
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json
+python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json
 ```
 
 ## これで確認できること
@@ -39,6 +40,7 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 - active clean near-end suite と Sugoroku world / avatar fairy follow representative slice が current runnable floor にあること
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`VisualizationProtocol` の helper-local / report-local first cut が current line に同期されていること
 - `Network transport` の `NET-01` helper-local loopback preview が actualize 済みであり、same-process emulator のまま attach / envelope / reject parity を確認できること
+- `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view を envelope-derived evidence として確認できること
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
 - typed visualization / telemetry line が label / authority / redaction を意識した evidence carrier として置かれていること
@@ -74,7 +76,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 - final public auth / visualization / projection / hot-plug surface
 - `NET-02..05` の network transport widening
-- detach lifecycle / `AttachPoint` executable contract
+- detach lifecycle / `AttachPoint` residual contract
 - avatar fairy follow residual widening (`FAIRY-02`, `FAIRY-05`)
 - actual LLVM artifact と backend choice
 
@@ -87,9 +89,8 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `HotPlug Patch / AttachPoint` executable widening
-2. `Network transport` `NET-02..05`
-3. `Avatar fairy follow` residual widening
+1. `Network transport` `NET-02..05`
+2. `Avatar fairy follow` residual widening
 
 ## 関連文書
 
