@@ -31,6 +31,7 @@
 - standard I/O を Mir core primitive にせず、typed external boundary の planned familyは adapter / transport / auth / witness / visualization を separate lane として保つ
 - `atomic_cut` を room-level durable commit にしない
 - system-wide source から place-specific program へ projection できる性質を future line の invariant として保つ
+- current docs-first plan は `plan/20-projection-and-placement-roadmap.md` に置き、generator / optimizer / equivalence checker は still later に残す
 
 ## still later
 

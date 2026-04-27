@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 18:10 JST
+最終更新: 2026-04-27 18:15 JST
 
 ## この文書について
 
@@ -25,9 +25,10 @@
 - `MessageEnvelope / Auth seam` は `docs/reports/0921-*` で close し、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report-local `MessageEnvelope` inventory を追加した
 - `VisualizationProtocol` は `docs/reports/0922-*` で close し、Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end report-local `VisualizationView` / `TelemetryRow` inventory を追加した
 - `Typed external boundary / adapter` は `docs/reports/0923-*` で close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、provider boundary / local queue / typed failure / debug label restriction の current evidence anchor を docs-first に固定した
+- `Projection / placement` は `docs/reports/0924-*` で close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction、place split、validity checklist、stop line を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Projection / placement`**
-- next docs-first package は **`HotPlug Patch / AttachPoint`**
+- current promoted next line は **`HotPlug Patch / AttachPoint`**
+- next docs-first package は **`Network transport`**
 
 ## current executable floor
 
@@ -107,25 +108,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Projection / placement plan
-
-- phase / stage:
-  `Macro 6`, `S1 -> S2`
-- rough estimate:
-  `0.5 package`
-- objective:
-  system-wide source から server / participant / adapter / visualizer へ projection する validity line を整理する
-- expected deliverables:
-  projection validity checklist、place split plan、docs
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、system-wide source と place-specific program の区別を明記する
-- stop line:
-  final public projection IR や optimizer は固定しない
-
-### Package 2. HotPlug Patch / AttachPoint
+### Package 1. HotPlug Patch / AttachPoint
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -143,14 +126,32 @@
 - stop line:
   final public hot-plug package ABI や migration engine は固定しない
 
-### Package 3. Network transport plan
+### Package 2. Network transport plan
+
+- phase / stage:
+  `Macro 6`, `S1 -> S2`
+- rough estimate:
+  `0.5 package`
+- objective:
+  separate-process / loopback / reconnect / transport failure explicit path を docs-first に置く
+- expected deliverables:
+  transport failure matrix、loopback/reconnect line、docs
+- validation command:
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、transport widening と auth/adapter split の stop line を明記する
+- stop line:
+  concrete socket / broker / final network ABI は固定しない
+
+### Package 3. Compiler/backend/LLVM preparation
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
 - rough estimate:
   `0.5-1 package`
 - objective:
-  separate-process / loopback / reconnect / transport failure explicit path を docs-first に置く
+  external workdir、cache placement、detach-safe cleanup、minimal probe を small VPS 前提で固める
 - expected deliverables:
   projection doc、validity checklist、place split examples、必要なら helper-local report
 - validation command:

@@ -43,6 +43,7 @@ final public layer law schema を意味しません。
 さらに `MessageEnvelope / Auth seam` の first cut も close しました。
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
+さらに `Projection / placement` の docs-first plan も close しました。
 
 - Sugoroku helper に `message_envelopes` と `--debug envelopes`
 - clean near-end report / closeout に `MessageEnvelope` inventory
@@ -129,6 +130,9 @@ helper-local / report-local first cut では `MessageEnvelope` carrier で trans
 - visualizer path
 
 のどれかに source principal を早期固定しないことが重要です。
+
+2026-04-27 時点では、`plan/20-projection-and-placement-roadmap.md` に
+system-wide source / place-specific program distinction、place split、validity checklist、stop line を置いてあります。
 
 ### hot-plug
 

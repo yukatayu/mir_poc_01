@@ -26,6 +26,7 @@
 - `phase5-small-decidable-core-and-proof-boundary.md`
 - `phase6-compile-ready-minimal-actualization.md`
 - `mirrorea_future_axis_01.md`
+- `projection_placement_plan_01.md`
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`
@@ -63,6 +64,7 @@
 - `hands_on_sugoroku_05_join_leave.md`
 - `hands_on_sugoroku_06_model_check.md`
 - `hands_on_sugoroku_07_message_envelope_auth.md`
+- `hands_on_sugoroku_08_visualization_protocol.md`
 - `hands_on_sugoroku_detail.md`
 - `hands_on_sugoroku_sample_matrix.md`
 - `avatar_fairy_follow_plan_01.md`
@@ -93,6 +95,7 @@
 - `MessageEnvelope / Auth seam` の first cut は close 済みであり、current helper/report-local carrier は `auth none` baseline を explicit に見せる
 - `VisualizationProtocol` の first cut も close 済みであり、current helper/report-local carrier は label / authority / redaction を持つ typed visualization / telemetry line を explicit に見せる
 - `Typed external boundary / adapter` の docs-first sample plan も close 済みであり、phase 9 `EXT-01..05` planned family は `samples/not_implemented/typed-external-boundary/` を参照する
+- `Projection / placement` の docs-first plan も close 済みであり、`plan/20-projection-and-placement-roadmap.md` と `docs/research_abstract/projection_placement_plan_01.md` を current anchor にする
 - avatar fairy follow は next representative slice 候補であり、current active sample ではまだない
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 planned skeleton family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
 

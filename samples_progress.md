@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 18:10 JST
+Last updated: 2026-04-27 18:15 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、next `Projection / placement`, `HotPlug Patch / AttachPoint`, `Network transport`
+Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、next `HotPlug Patch / AttachPoint`, `Network transport`, `Compiler/backend/LLVM prep`
 
 ## Legend
 
@@ -30,7 +30,7 @@ Progress:
 | Avatar follow | 10 | planned skeleton only | phase 8 helper contract と active promotion条件を切る | none yet |
 | External adapters | 10 | planned skeleton | phase 9 `EXT-01..05` ladder を provider-boundary evidence に結び直す | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` |
 | Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持しつつ package 3 へ渡す | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
-| Projection / placement | 1 | spec-only | source-to-place validity checklist を起こす | `python3 scripts/validate_docs.py` |
+| Projection / placement | 10 | docs-first plan | `plan/20` の validity checklist と stop line を維持しつつ hot-plug package へ渡す | `python3 scripts/validate_docs.py` |
 | Hot-plug package | 10 | TODO boundary visible | `SUG-09` を stop line として保持し `AttachPoint` package を待つ | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug summary` |
 
 ## Active sample matrix
@@ -77,7 +77,7 @@ Progress:
 | `EXT-03` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `SendRoomMessage` local queue; message route stays separate from auth |
 | `EXT-04` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | adapter failure typed result; transport failure remains explicit |
 | `EXT-05` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | debug visualization label restriction; no untyped leak |
-| `PH12` | projection / placement | spec only | planned docs-first row | 1 | not yet | not yet | `0912`, `0913`, `0920` | source-to-place validity checklist remains future work |
+| `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/research_abstract/projection_placement_plan_01.md` | docs-first row | 10 | planned | 2026-04-27 18:15 JST | `0912`, `0913`, `0920`, `0924` | source-to-place validity checklist、place split、stop line を固定 |
 | `PH13` | network transport | spec only | planned docs-first row | 1 | not yet | not yet | `0913`, `0920` | no separate-process sample exists |
 | `PH15` | visualization / IDE | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs`, `mir_hilight.html` | helper-local / report-local first cut | 90 | positive | 2026-04-27 18:04 JST | `0910`, `0911`, `0913`, `0918`, `0920`, `0922` | typed/redacted visualization actualized; final public viewer and retention remain deferred |
 | `PH16` | compiler/backend/LLVM prep | `scripts/env/mirrorea_storage_env.sh`, `scripts/storage/*` | ops guardrail | 50 | partial | 2026-04-27 13:20 JST | `0913`, `0915`, `0920` | cargo registry cache / LLVM actual probe still open |
@@ -96,7 +96,7 @@ Progress:
 | `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 90 | helper-local envelope carrier keeps auth / membership / capability / witness separate | pass 2026-04-27 17:46 JST |
 | `E2E-VIS-TRACE` | source -> runtime trace -> visualization view -> telemetry row | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | 90 | helper-local typed/redacted visualization first cut | pass 2026-04-27 18:04 JST |
 | `E2E-HOTPLUG-ATTACH` | patch -> compatibility -> attach -> activate | planned | 10 | planned phase 14 route only | not yet |
-| `E2E-PROJECTION` | system source -> place-specific projection -> equivalent trace | planned | 1 | planned phase 12 route only | not yet |
+| `E2E-PROJECTION` | system source -> place-specific projection -> equivalent trace | `plan/20-projection-and-placement-roadmap.md` | 10 | docs-first validity checklist fixed; executable projection helper is not yet present | plan fixed 2026-04-27 18:15 JST |
 
 ## Build/storage environment
 
@@ -127,6 +127,10 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 18:15 JST | `python3 scripts/check_source_hierarchy.py` | pass | projection docs-first package did not introduce hierarchy drift |
+| 2026-04-27 18:15 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 922 numbered report(s).` |
+| 2026-04-27 18:15 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | provider boundary remains current projection evidence anchor |
+| 2026-04-27 18:15 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | pass | place split remains visible on helper-local visualization view |
 | 2026-04-27 18:10 JST | `python3 scripts/check_source_hierarchy.py` | pass | planned phase 9 sample root added without hierarchy drift |
 | 2026-04-27 18:10 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 921 numbered report(s).` |
 | 2026-04-27 18:10 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | provider boundary remains current phase 9 evidence anchor |
