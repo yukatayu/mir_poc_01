@@ -10,3 +10,7 @@
 
 - `order-handoff/`
   - rough syntax A〜D の exact preservation
+- `avatar-fairy-follow/`
+  - phase 8 planned skeleton family
+  - current parser / runner では扱わない
+  - historical prototype anchor と future active helper surface を切り分けるための planning path

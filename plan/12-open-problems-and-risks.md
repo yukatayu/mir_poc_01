@@ -31,8 +31,7 @@
 - visualization / telemetry security の label / authority / redaction / retention model
 - projection / placement validity report と world-sugar boundary
 - `Patch Req Prov Δ` / `AttachPoint` / activation cut / migration contract
-- avatar fairy follow sample family の exact minimal surface
-- `vdb` extra storage の filesystem / mount policy と `/mnt/mirrorea-work` への actual cutover timing
+- avatar fairy follow helper surface、debug mode、active promotion条件
 - detached artifact root を repo-local `target/` default から external workdir へどう ratchet するか
 - final parser grammar
 - final parser / checker / runtime / verifier API

@@ -50,6 +50,7 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - authentication は transport そのものに埋め込まず、authorization / membership / capability / witness と分けて扱います。
 - visualization と telemetry も情報を外へ出す effect なので、label / authority / redaction を持つ typed layer として扱います。
 - current representative sample は Sugoroku world runtime attachment vertical slice で、次の representative sample 候補は avatar fairy follow slice です。
+  ただし current active sample ではなく、phase 8 planned skeleton family は `samples/not_implemented/avatar-fairy-follow/` にあります。
 - next queue は、`TermSignature registry`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 

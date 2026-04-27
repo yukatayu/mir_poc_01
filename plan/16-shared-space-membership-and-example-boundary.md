@@ -17,6 +17,7 @@
   に置き、single OS process logical multi-place emulator として扱う
 - Sugoroku 側の participant set は fixed literal principal だけでなく `MembershipRegistry` から読む line を current reading に置く
 - next representative sample 候補は avatar fairy follow slice であり、まだ active canonical sample ではない
+- phase 8 planned skeleton family は `samples/not_implemented/avatar-fairy-follow/` に置き、historical prototype anchor は `samples/prototype/current-l2-dynamic-attach-detach/` に残す
 
 ## current judgment
 
@@ -34,7 +35,7 @@
 - final witness / provider public contract
 - final replay taxonomy
 - distributed fairness theorem
-- avatar fairy follow actual sample family
+- avatar fairy follow helper promotion
 - real network transport / multi-server consensus / durable distributed commit
 - projection generator / placement optimizer
 - detach lifecycle implementation

@@ -1145,6 +1145,12 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 15. visualization / IDE
 16. compiler / backend / LLVM preparation
 
+### 2026-04-27 near-term package close note
+
+- `Sugoroku sample progress alignment` は docs / dashboard package として close し、`samples_progress.md` と `samples/clean-near-end/sugoroku-world/README.md` で `SUG-00..09` の purpose / command / debug surface / stop line を reader-facing に揃えた。
+- `Avatar fairy follow sample plan` は docs-first package として close し、phase 8 planned skeleton family を `samples/not_implemented/avatar-fairy-follow/` に切り出した。
+- current promoted next package は `TermSignature registry / debug output` である。
+
 ## 推奨される phase 順序
 
 1. Workstream A

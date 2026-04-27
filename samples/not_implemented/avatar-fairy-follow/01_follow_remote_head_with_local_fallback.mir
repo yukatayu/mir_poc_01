@@ -1,0 +1,33 @@
+# FAIRY-01 planned phase 8 skeleton.
+# Not an active runnable sample.
+# Goal: a fairy anchor follows a remote head anchor while it is visible,
+# and keeps an explicit local fallback lineage.
+
+module PlannedMirrorea.AvatarFairyFollowRemoteHead
+
+place SharedWorld {
+  place RemoteAvatarPlace#A {
+    publish head_pose(remote_head_anchor, pose_remote)
+      to RemoteAvatarPlace#A.visible_stream
+      produces witness remote_head_seen
+  }
+
+  place FairyPlace#1 {
+    transition follow_remote_head by FairyController at FairyPlace#1 {
+      requires visible_anchor(remote_head_anchor)
+
+      stage acquire_remote:
+        observe remote_head_anchor
+          from RemoteAvatarPlace#A.visible_stream
+          requires witness(remote_head_seen)
+
+      stage establish_lineage:
+        lineage follow_anchor -> remote_head_anchor
+        fallback remote_head_anchor -> local_head_anchor
+
+      stage commit_follow:
+        ensure attached_anchor(FairyPlace#1) = remote_head_anchor
+        ensure fallback_anchor(FairyPlace#1) = local_head_anchor
+    }
+  }
+}

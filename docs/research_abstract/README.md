@@ -62,6 +62,8 @@
 - `hands_on_sugoroku_05_join_leave.md`
 - `hands_on_sugoroku_06_model_check.md`
 - `hands_on_sugoroku_detail.md`
+- `hands_on_sugoroku_sample_matrix.md`
+- `avatar_fairy_follow_plan_01.md`
 
 ## sample highlighter
 
@@ -76,7 +78,7 @@
 
 ## current reading の要点
 
-2026-04-23 時点では、次が active line です。
+2026-04-27 時点では、次が active line です。
 
 - active canonical sample は `samples/clean-near-end/`
 - first strong typing layer は finite decidable index fragment
@@ -87,6 +89,7 @@
 - Sugoroku world vertical slice は single OS process logical multi-place emulator として動く
 - 次の promoted line は Mirrorea future-axis であり、typed external effect boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を docs-first / repo-local queue として整理する
 - avatar fairy follow は next representative slice 候補であり、current active sample ではまだない
+- `samples/not_implemented/avatar-fairy-follow/` は phase 8 planned skeleton family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
 
 次はまだ deferred です。
 

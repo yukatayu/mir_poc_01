@@ -1,0 +1,27 @@
+# FAIRY-02 planned phase 8 skeleton.
+# Not an active runnable sample.
+# Goal: when the remote head anchor is not visible, the fairy falls back
+# to a local anchor without claiming transport-level failure recovery.
+
+module PlannedMirrorea.AvatarFairyFallbackOnVisibilityLoss
+
+place SharedWorld {
+  place FairyPlace#1 {
+    transition fallback_to_local_head by FairyController at FairyPlace#1 {
+      requires not visible_anchor(remote_head_anchor)
+      requires local_anchor_available(local_head_anchor)
+
+      stage explain_fallback:
+        publish fallback_reason(remote_head_anchor, VisibilityLost)
+          to FairyPlace#1.debug_history
+          produces witness visibility_fallback
+
+      stage switch_anchor:
+        fallback remote_head_anchor -> local_head_anchor
+          requires witness(visibility_fallback)
+
+      stage commit_follow:
+        ensure attached_anchor(FairyPlace#1) = local_head_anchor
+    }
+  }
+}

@@ -1,0 +1,30 @@
+# FAIRY-05 planned phase 8 skeleton.
+# Not an active runnable sample.
+# Goal: after a temporary fallback to the local anchor, the fairy can
+# reacquire the remote target when visibility returns.
+
+module PlannedMirrorea.AvatarFairyReacquireRemoteTarget
+
+place SharedWorld {
+  place RemoteAvatarPlace#A {
+    publish head_pose(remote_head_anchor, pose_remote_returned)
+      to RemoteAvatarPlace#A.visible_stream
+      produces witness remote_head_returned
+  }
+
+  place FairyPlace#1 {
+    transition reacquire_remote_head by FairyController at FairyPlace#1 {
+      requires attached_anchor(FairyPlace#1) = local_head_anchor
+      requires visible_anchor(remote_head_anchor)
+
+      stage observe_return:
+        observe remote_head_anchor
+          from RemoteAvatarPlace#A.visible_stream
+          requires witness(remote_head_returned)
+
+      stage switch_back:
+        ensure attached_anchor(FairyPlace#1) = remote_head_anchor
+        ensure previous_anchor(FairyPlace#1) = local_head_anchor
+    }
+  }
+}

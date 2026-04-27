@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 13:22 JST
+最終更新: 2026-04-27 15:23 JST
 
 ## この文書について
 
@@ -16,11 +16,12 @@
 - mutex / weak-memory line は model-check second line として runnable
 - Lean foundations と generated clean stub corpus は runnable
 - Sugoroku world runtime attachment vertical slice は repo-local logical multi-place emulator として runnable
-- `samples_progress.md` は phase 0〜16 matrix と storage row を持つ current dashboard として追加済み
-- storage audit の current result は、root `/dev/vda2` 99G 中 32G free、`/dev/vdb1` ext4 `mirrorea-work` が `/mnt/mirrorea-work` に mounted、repo `target/` は `/mnt/mirrorea-work/cargo-target` への symlink に切り替え済み
-- `phase-sample-progress-storage-foundation` package は `docs/reports/0913-*` で close 済み
-- current promoted next line は **`Sugoroku sample progress alignment`**
-- next semantic carrier package は **`TermSignature registry / debug output`**
+- `samples_progress.md` は phase 0〜16 matrix と storage row に加え、Sugoroku per-sample alignment と phase 8 avatar skeleton line を持つ current dashboard になった
+- storage audit と external workdir cutover は `docs/reports/0913-*` と `0915-*` で close してあり、repo `target/` は `/mnt/mirrorea-work/cargo-target` への symlink で運用している
+- `Sugoroku sample progress alignment` は `docs/reports/0916-*` で close 済み
+- `Avatar fairy follow sample plan` は `docs/reports/0917-*` で close 済み
+- current promoted next line は **`TermSignature registry / debug output`**
+- next semantic carrier package は **`LayerSignature system`**
 
 ## current executable floor
 
@@ -58,6 +59,16 @@
   `08_reset_interleaving_model_check`
   `09_detach_todo`
 
+### Planned but not active sample family
+
+- `samples/not_implemented/avatar-fairy-follow/`
+  - `FAIRY-01` remote head follow with local fallback
+  - `FAIRY-02` visibility-loss fallback
+  - `FAIRY-03` leave-triggered stale-anchor rejection
+  - `FAIRY-04` invalid cross-anchor rejection
+  - `FAIRY-05` target reacquire after return
+  - `FAIRY-06` detached-anchor safety model-check
+
 ### Helper entrypoints
 
 - `python3 scripts/check_source_hierarchy.py`
@@ -81,57 +92,24 @@
 
 ## 自走可能な task package
 
-### Package 1. Sugoroku sample progress alignment
-
-- phase / stage:
-  `Macro 0 + Macro 6`, `S5-S6 maintenance`
-- objective:
-  `samples_progress.md` の phase 4 / 7 row を Sugoroku helper の actual command / debug surface / report reference と tighter に揃える
-- expected deliverables:
-  per-sample or finer-grained Sugoroku row split、`summary` / `membership` / `verification` debug surface の row 反映、closeout evidence refresh
-- validation command:
-  `python3 scripts/sugoroku_world_samples.py check-all`
-  `python3 scripts/sugoroku_world_samples.py closeout --format json`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、`samples_progress.md` / `progress.md` / `tasks.md` 同期
-- stop line:
-  real network、consensus、durable distributed commit、final detach lifecycle は固定しない
-
-### Package 2. Avatar fairy follow sample plan
-
-- phase / stage:
-  `Macro 6`, `S0 -> S1`
-- objective:
-  phase 8 representative sample family、helper surface、negative case、prototype anchor を current active plan として固める
-- expected deliverables:
-  `FAIRY-01..06` sample plan、active/historical boundary note、必要なら sample skeleton path decision
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、prototype sample と active sample の境界を明記
-- stop line:
-  final avatar API、engine binding、real network avatar sync は固定しない
-
-### Package 3. TermSignature registry / debug output
+### Package 1. TermSignature registry / debug output
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
 - objective:
   term / transition / effect / message / adapter を横断して、static checker / theorem / model-check / runtime guard / debug output / hot-plug compatibility が同じ signature carrier を参照できるようにする
 - expected deliverables:
-  `TermSignature`、`SignatureRegistry`、signature dump、docs、sample-facing explanation
+  `TermSignature`、`SignatureRegistry`、`--debug signatures` 相当の dump、docs、sample-facing explanation
 - validation command:
   `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json`
-  に加え、package close までに `--debug signatures` 相当の entry
+  package close までに `--debug signatures` 相当の entry
 - report requirement:
   新しい report を追加し、`samples_progress.md` / `progress.md` / `tasks.md` を同じ task で更新する
 - stop line:
   final public signature schema、generic public API、concrete network transport bindingは固定しない
 
-### Package 4. LayerSignature system
+### Package 2. LayerSignature system
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -147,7 +125,7 @@
 - stop line:
   final public plugin API、tool-brand 固定、production verifier binding は行わない
 
-### Package 5. MessageEnvelope / Auth seam
+### Package 3. MessageEnvelope / Auth seam
 
 - phase / stage:
   `Macro 6`, `S2 -> S3`
@@ -163,7 +141,7 @@
 - stop line:
   production auth protocol、federation、real socket transport は固定しない
 
-### Package 6. VisualizationProtocol first implementation
+### Package 4. VisualizationProtocol first implementation
 
 - phase / stage:
   `Macro 6`, `S2 -> S3`
@@ -179,7 +157,7 @@
 - stop line:
   final public visualization protocol、retention policy、multi-tenant telemetry service は固定しない
 
-### Package 7. Typed external boundary / adapter sample plan
+### Package 5. Typed external boundary / adapter sample plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -195,7 +173,7 @@
 - stop line:
   concrete browser/network/VR adapter 実装は固定しない
 
-### Package 8. Projection / placement plan
+### Package 6. Projection / placement plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -210,7 +188,7 @@
 - stop line:
   generated public backend、placement optimizer、final operational scheduler は実装しない
 
-### Package 9. Hot-plug Patch / AttachPoint
+### Package 7. Hot-plug Patch / AttachPoint
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -225,7 +203,7 @@
 - stop line:
   distributed activation / rollback、durable state migration、production attach/detach API は固定しない
 
-### Package 10. Network transport plan
+### Package 8. Network transport plan
 
 - phase / stage:
   `Macro 6 -> Macro 7`, `S0 -> S1`
@@ -241,7 +219,7 @@
 - stop line:
   production transport 実装や public deployment contract は固定しない
 
-### Package 11. Compiler/backend/LLVM preparation guardrail
+### Package 9. Compiler/backend/LLVM preparation guardrail
 
 - phase / stage:
   `Macro 7`, `S0 -> S1`
@@ -259,90 +237,34 @@
 - stop line:
   actual LLVM build や backend public contract は固定しない
 
-### Package 12. Hands-on docs / closeout
-
-- phase / stage:
-  `Macro 0-6` closeout
-- objective:
-  docs / specs / plan / `samples_progress.md` / progress / tasks / report / validation evidence を再同期し、残 gate を圧縮して示す
-- expected deliverables:
-  closeout report、snapshot refresh、remaining mixed gate と true user-spec gate の整理
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-  `python3 scripts/clean_near_end_samples.py smoke-all --format json`
-  `python3 scripts/sugoroku_world_samples.py closeout --format json`
-  `cargo test -p mir-ast`
-  `cargo test -p mir-runtime`
-  `cargo test -p mir-semantics`
-  に、当時点で追加された helper closeout command を足す
-- report requirement:
-  新しい report、exact validation result と skip reason を残す
-- stop line:
-  final public completion、production-ready、all theory solved とは書かない
-
 ## research を通して見つけること
 
-### phase/sample percentage calibration
-
-- 概要:
-  phase row を coarse 1 行で持つか、sample family ごとに細分化するか
-- 何に影響するか:
-  `samples_progress.md` の保守性、100% 過剰申告リスク、report granularity
-- 主要な選択肢:
-  - phase row を維持して representative sample を cell に持つ
-  - Sugoroku / current-L2 から先に finer row へ割る
-- current recommendation:
-  Sugoroku alignment package で phase 4 / 7 を先に finer row へ寄せる
-
-### detached artifact relocation strategy
-
-- 概要:
-  `target/current-l2-detached/` default を external workdir へどう ratchet するか
-- 何に影響するか:
-  small VPS root pressure、report path stability、helper CLI default
-- 主要な選択肢:
-  - default は repo-local のまま、heavy run だけ override
-  - env script で global redirect を入れる
-- current recommendation:
-  まず override path と cleanup policy を固め、default 切替は later
-
-### LayerSignature law / composition order
-
-- 概要:
-  no hidden authority / no hidden downgrade / evidence preservation / placement preservation を、どの layer order で最も自然に保てるか
-- 何に影響するか:
-  TermSignature、viewer、auth seam、theorem / model-check handoff
-- 主要な選択肢:
-  - layer metadata だけ先に置く
-  - helper-local canary implementation まで同時に入れる
-- current recommendation:
-  先に metadata / law / docs を固め、canary implementation は narrow に足す
+- `TermSignature` の最小粒度と residual obligation surface
+- `LayerSignature` law surface のどこまでを runtime / theorem / visualization に配るか
+- avatar fairy helper surface を Sugoroku helper extension と専用 helper のどちらに置くか
+- projection / placement validity report の最小 shape
+- `AttachPoint` compatibility と detach lifecycle の最小 contract
 
 ## user が決める必要があること
 
-### final public host / packaging target
+### Blocker 1. final public contract の固定範囲
 
 - 概要:
-  repo-local helper floor を installed binary / host-facing contract に進めるか
-- 何に影響するか:
-  Macro 7、artifact retention、CI、engine / host integration
+  auth / visualization / projection / hot-plug をどこまで public API として固定するか
+- 影響:
+  package 3 以降の naming と stop line
 - 主要な選択肢:
-  - repo-local helper floor を維持する
-  - packaging / installed binary を first-class target にする
-  - FFI / engine adapter を先に設計する
-- current recommendation:
-  まだ repo-local floor を維持する
+  repo-local helper 優先のまま進める / early public-contract drafting を始める
+- current recommendation / 見解:
+  まだ repo-local helper と docs-first carrier に留め、public contract は mixed gate に残す
 
-### exhaustive shared-space / product target
+### Blocker 2. packaging / FFI / host integration target
 
 - 概要:
-  authoritative-room minimal subset の次に、どの shared-space catalog / application target を first-class にするか
-- 何に影響するか:
-  Macro 6-8、auth policy、projection scope、public API、non-functional requirement
+  installed binary、FFI、engine adapter、deployment contract の最終受け皿
+- 影響:
+  Macro 7 以降の acceptance criteria
 - 主要な選択肢:
-  - minimal subset を維持し、future-axis package を先に閉じる
-  - exhaustive shared-space catalog を先に固定する
-  - broader product target を先に固定する
-- current recommendation:
-  まず future-axis package を self-driven で進め、catalog / product target は user specification を待つ
+  CLI / library / engine-adapter / hybrid
+- current recommendation / 見解:
+  current task では固定せず、backend / LLVM preparation の後に user-spec gate として reopen する

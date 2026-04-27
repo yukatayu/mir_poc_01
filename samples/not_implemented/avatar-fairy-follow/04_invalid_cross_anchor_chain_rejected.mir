@@ -1,0 +1,19 @@
+# FAIRY-04 planned phase 8 skeleton.
+# Not an active runnable sample.
+# Goal: reject a cross-anchor chain that does not preserve declared
+# lineage or visibility authority.
+
+module PlannedMirrorea.AvatarFairyInvalidCrossAnchorRejected
+
+place SharedWorld {
+  place FairyPlace#1 {
+    transition reject_invalid_anchor_chain by FairyController at FairyPlace#1 {
+      requires declared_lineage(remote_hand_anchor -> local_head_anchor)
+      requires not compatible_anchor_kind(remote_hand_anchor, local_head_anchor)
+
+      stage reject_chain:
+        ensure rejection_reason = InvalidCrossAnchorLineage
+        ensure no_hidden_repair = true
+    }
+  }
+}

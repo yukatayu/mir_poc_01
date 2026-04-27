@@ -1,0 +1,27 @@
+# FAIRY-03 planned phase 8 skeleton.
+# Not an active runnable sample.
+# Goal: a remote avatar leave invalidates the old remote anchor and the
+# fairy falls back to a local anchor with explicit membership evidence.
+
+module PlannedMirrorea.AvatarFairyFallbackAfterLeave
+
+place SharedWorld {
+  transition remote_avatar_leave by WorldAdmin at WorldServerPlace#1 {
+    ensure membership_epoch(AvatarRoom) = next_epoch
+    ensure inactive_member(AvatarRoom, RemoteAvatar)
+  }
+
+  place FairyPlace#1 {
+    transition reject_stale_remote_anchor by FairyController at FairyPlace#1 {
+      requires inactive_member(AvatarRoom, RemoteAvatar)
+      requires stale_anchor(remote_head_anchor, next_epoch)
+
+      stage reject_remote:
+        ensure rejected_anchor(remote_head_anchor) = StaleMembershipEpoch
+
+      stage fallback_local:
+        fallback remote_head_anchor -> local_head_anchor
+        ensure attached_anchor(FairyPlace#1) = local_head_anchor
+    }
+  }
+}
