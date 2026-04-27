@@ -22,6 +22,8 @@ bash scripts/env/mirrorea_storage_env.sh
 ## 追加で見る debug lane
 
 ```bash
+python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json
@@ -32,6 +34,7 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 
 - active clean near-end suite と Sugoroku world vertical slice が current runnable floor にあること
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`VisualizationProtocol` の helper-local / report-local first cut が current line に同期されていること
+- `Network transport` の `NET-01` helper-local loopback preview が actualize 済みであり、same-process emulator のまま attach / envelope / reject parity を確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
 - typed visualization / telemetry line が label / authority / redaction を意識した evidence carrier として置かれていること
 - external workdir と `CARGO_TARGET_DIR` / `CARGO_HOME` binding により、small-VPS 前提の backend/LLVM guardrail が current snapshot に入っていること
@@ -65,7 +68,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 ## remaining mixed gate
 
 - final public auth / visualization / projection / hot-plug surface
-- network transport widening の executable cut
+- `NET-02..05` の network transport widening
 - avatar fairy follow representative slice の active helper / validation surface
 - detach lifecycle / `AttachPoint` executable contract
 - actual LLVM artifact と backend choice
@@ -79,9 +82,9 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `Network transport` executable widening
-2. `Avatar fairy follow` representative slice
-3. `HotPlug Patch / AttachPoint` executable widening
+1. `Avatar fairy follow` representative slice
+2. `HotPlug Patch / AttachPoint` executable widening
+3. `Network transport` `NET-02..05`
 
 ## 関連文書
 

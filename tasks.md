@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 18:57 JST
+最終更新: 2026-04-27 19:17 JST
 
 ## この文書について
 
@@ -30,9 +30,10 @@
 - `Network transport` は `docs/reports/0926-*` で close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` に loopback / reconnect / failure matrix の docs-first ladder を追加した
 - `Compiler/backend/LLVM preparation` は `docs/reports/0927-*` で close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe floor を追加した
 - `hands-on docs / closeout` は `docs/reports/0928-*` で close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current landing page として追加した
+- `Network transport executable widening` は `docs/reports/0929-*` で close し、helper-local `NET-01` loopback preview、`--transport loopback_socket`、loopback parity test を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Network transport executable widening`**
-- next reopen point は **`Avatar fairy follow representative slice`**
+- current promoted next line は **`Avatar fairy follow representative slice`**
+- next reopen point は **`HotPlug Patch / AttachPoint executable widening`**
 
 ## current executable floor
 
@@ -112,25 +113,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Network transport executable widening
-
-- phase / stage:
-  `Macro 7`, `S1 -> S2`
-- rough estimate:
-  `1 package`
-- objective:
-  `plan/22` の loopback / reconnect / failure matrix を helper / runtime widening へ渡す
-- expected deliverables:
-  loopback canary、reconnect epoch guard、typed transport failure canary
-- validation command:
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json`
-  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
-- report requirement:
-  新しい report、loopback widening と auth/transport separation evidence を明記する
-- stop line:
-  production transport、public deployment contract、cryptographic session protocol は固定しない
-
-### Package 2. Avatar fairy follow representative slice
+### Package 1. Avatar fairy follow representative slice
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -147,7 +130,7 @@
 - stop line:
   final game/runtime API や production avatar stack は固定しない
 
-### Package 3. HotPlug Patch / AttachPoint executable widening
+### Package 2. HotPlug Patch / AttachPoint executable widening
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -164,6 +147,23 @@
   新しい report、runtime hot-plug と storage detach の非同一性、stop line、current executable boundary を明記する
 - stop line:
   final migration runtime、production hot-patch engine、public attachpoint ABI は固定しない
+
+### Package 3. Network transport `NET-02..05`
+
+- phase / stage:
+  `Macro 7`, `S1 -> S2`
+- rough estimate:
+  `1 package`
+- objective:
+  `plan/22` の two-process / reconnect / typed failure / route trace widening を後段 helper / process harness へ渡す
+- expected deliverables:
+  `NET-02` process-boundary canary、`NET-03` epoch guard、`NET-04` failure family、`NET-05` redacted route trace plan
+- validation command:
+  `python3 scripts/sugoroku_world_samples.py check-all --transport loopback_socket --format json`
+- report requirement:
+  新しい report、transport widening invariant、process-boundary stop line、auth/transport separation evidence を明記する
+- stop line:
+  production transport、public deployment contract、cryptographic session protocol は固定しない
 
 ## research を通して見つけること
 

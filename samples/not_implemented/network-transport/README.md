@@ -2,7 +2,7 @@
 
 この directory は phase 13 `Network transport` の **planned skeleton family** です。
 
-- current parser / runner ではまだ扱いません。
+- `NET-01` だけは helper-local preview として current runner で扱います。
 - final public transport ABI、real socket / broker 実装、cryptographic session protocol を意味しません。
 - current repo では、Sugoroku helper の `local_queue` envelope と clean near-end `provider_boundary` を
   docs-first evidence anchor として使います。
@@ -21,6 +21,10 @@
 ## current evidence anchors
 
 ```bash
+python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 04_non_owner_roll_rejected --transport loopback_socket --format json
+python3 scripts/sugoroku_world_samples.py check-all --transport loopback_socket --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json
@@ -29,7 +33,8 @@ cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_
 ## intended reading
 
 - `NET-01`
-  current `local_queue` envelope から loopback transport seam へ widening する最小線
+  current `local_queue` envelope から `loopback_socket` helper-local preview へ widening する最小線。
+  current cut では same-process emulator のまま envelope field / reject path parity だけを確認する。
 - `NET-02`
   process boundary をまたいでも publish / witness / handoff の順序と evidence path を崩さない線
 - `NET-03`

@@ -31,6 +31,8 @@ Useful focused runs:
 
 ```bash
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json
+python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug turn-trace
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes
@@ -62,6 +64,8 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
   - `SUG-01`, `SUG-03`, `SUG-07`, `SUG-08` show the current repo-local vertical slice.
 - `PH14 hot-plug / detach`
   - `SUG-09` is intentionally not a completion claim. It keeps detach as a visible stop line.
+- `PH13 network transport`
+  - `SUG-01`, `SUG-03`, `SUG-04` は `--transport loopback_socket` を付けると helper-local `NET-01` parity canary になる。
 
 ## Important debug surfaces
 
@@ -79,6 +83,7 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
 - `envelopes`
   - `MessageEnvelope` / `AuthEvidence` / `PrincipalClaim` first cut の helper-local inventory view です。
     current cut では `auth none` baseline を explicit に見せ、transport / membership / capability / witness を separate lane のまま読めます。
+    `--transport loopback_socket` は same-process preview only であり、real socket transport を意味しません。
 - `layers`
   - `LayerSignature` first cut の helper-local inventory view です。current helper では `verification`、
     `runtime_trace`、`membership` layer だけを active に見せ、`auth` / `transport` / `telemetry` などは reserve に留めます。

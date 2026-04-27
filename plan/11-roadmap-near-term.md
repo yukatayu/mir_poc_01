@@ -16,17 +16,18 @@
 - `docs/reports/0926-*` は `Network transport` docs-first plan closeout を表す
 - `docs/reports/0927-*` は `Compiler/backend/LLVM preparation` guardrail closeout を表す
 - `docs/reports/0928-*` は `hands-on docs / closeout` closeout を表す
-- current promoted next package は `Network transport` executable widening
-- next reopen point は `Avatar fairy follow` representative slice reopen
+- `docs/reports/0929-*` は `Network transport executable widening` closeout を表し、helper-local `NET-01` loopback preview を current line に actualize した
+- current promoted next package は `Avatar fairy follow` representative slice reopen
+- next reopen point は `HotPlug Patch / AttachPoint` executable widening
 
 ## current promoted queue
 
-1. `Network transport` executable widening
-   - `plan/22` の loopback / reconnect / failure matrix を helper / runtime widening へ渡す
-2. `Avatar fairy follow` representative slice reopen
+1. `Avatar fairy follow` representative slice reopen
    - phase 8 skeleton family を active helper / validation line へ昇格できるかを判断する
-3. `HotPlug Patch / AttachPoint` executable widening
+2. `HotPlug Patch / AttachPoint` executable widening
    - `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する
+3. `Network transport` `NET-02..05`
+   - two-process / reconnect / typed failure / route trace widening を後段 package に残す
 
 ## mixed gate
 

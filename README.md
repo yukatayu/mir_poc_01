@@ -59,9 +59,9 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `Typed external boundary / adapter` の docs-first sample plan も close してあり、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、provider boundary / local queue / typed failure / debug label restriction を current evidence anchor に結び直しました。
 - `Projection / placement` の docs-first plan も close してあり、`plan/20-projection-and-placement-roadmap.md` で system-wide source と place-specific program の validity checklist を固定しました。
 - `HotPlug Patch / AttachPoint` の docs-first plan も close してあり、`plan/21-hotplug-attachpoint-roadmap.md` で compatibility / activation / migration stop line を固定しました。
-- `Network transport` の docs-first plan も close してあり、`plan/22-network-transport-roadmap.md` で local queue / provider boundary current anchor、loopback / reconnect / failure matrix、stop line を固定しました。
+- `Network transport` の docs-first plan も close してあり、`plan/22-network-transport-roadmap.md` で local queue / provider boundary current anchor、loopback / reconnect / failure matrix、stop line を固定しました。さらに `NET-01` helper-local loopback preview も actualize し、`--transport loopback_socket` で same-process envelope parity を確認できます。
 - `Compiler/backend/LLVM preparation` guardrail も close してあり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` で external workdir、`CARGO_HOME`、LLVM path、cleanup safety、stop line を固定しました。
-- `hands-on docs / closeout` も close し、next queue は executable transport / avatar reopen / hot-plug executable widening の順で進めます。
+- `hands-on docs / closeout` も close し、`NET-01` helper-local loopback preview まで actualize したので、next queue は avatar reopen / hot-plug executable widening / transport `NET-02..05` の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
 - current closeout を実行コマンド付きで読む最短入口は `docs/hands_on/current_phase_closeout_01.md` です。

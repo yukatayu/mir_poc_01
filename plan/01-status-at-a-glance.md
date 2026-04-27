@@ -105,17 +105,18 @@
 - `docs/reports/0926-*` で `Network transport` docs-first plan を close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` を追加した
 - `docs/reports/0927-*` で `Compiler/backend/LLVM preparation` guardrail を close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe evidence を追加した
 - `docs/reports/0928-*` で `hands-on docs / closeout` を close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を追加した
+- `docs/reports/0929-*` で `Network transport executable widening` を close し、helper-local `NET-01` loopback preview、transport seam parameter、loopback parity test を追加した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next reopen point は `Network transport` executable widening
+- next reopen point は `Avatar fairy follow` representative slice reopen
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug docs-first plan、phase 13 network transport docs-first plan、phase 16 backend/LLVM guardrail、hands-on closeout landing page を先に入れた上で、next promoted package を `Network transport` executable widening と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug docs-first plan、phase 13 `NET-01` helper-local loopback preview、phase 16 backend/LLVM guardrail、hands-on closeout landing page を先に入れた上で、next promoted package を `Avatar fairy follow` representative slice reopen と読む
 - phase 8 representative sample 候補は `samples/not_implemented/avatar-fairy-follow/` に skeleton family を切り出したが、current active helper はまだない
-- package 6 以降は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout、その後の executable widening
+- package 6 以降は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout、`NET-01` helper-local preview、その後の avatar / hot-plug / `NET-02..05`
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

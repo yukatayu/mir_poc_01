@@ -404,6 +404,11 @@ fn clean_near_end_closeout_records_message_envelope_inventory() {
             .transport_seams
             .contains(&"provider_boundary".to_string())
     );
+    assert!(
+        closeout
+            .reserved_transport_seams
+            .contains(&"loopback_socket".to_string())
+    );
 }
 
 #[test]

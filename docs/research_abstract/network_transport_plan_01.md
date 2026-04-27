@@ -9,7 +9,8 @@ loopback / reconnect / typed failure へ安全に広げるための docs-first c
 
 - Sugoroku helper `message_envelopes`
 - `01_runtime_attach_game` の `attach_request#1`
-- `03_roll_publish_handoff` の local-queue envelope
+- `03_roll_publish_handoff` の local-queue / loopback envelope
+- `04_non_owner_roll_rejected` の reject-path parity
 - `05_late_join_history_visible` の membership freshness
 - clean near-end `05_delegated_rng_service` の `provider_boundary`
 
@@ -27,6 +28,9 @@ loopback / reconnect / typed failure へ安全に広げるための docs-first c
 - `NET-03` reconnect with membership epoch guard
 - `NET-04` typed transport failure / timeout / queue-full
 - `NET-05` redacted route trace / observer-safe network debug
+
+2026-04-27 current cut では、`NET-01` を helper-local `--transport loopback_socket` preview として actualize しました。
+same-process emulator のまま envelope field / reject path parity だけを確認し、real socket / reconnect / typed failure はまだ後段です。
 
 ## stop line
 

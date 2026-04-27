@@ -118,6 +118,9 @@ LIMITATIONS = [
     "final public API remains deferred",
 ]
 
+ACTIVE_TRANSPORT_SEAMS = ["local_queue", "loopback_socket"]
+RESERVED_TRANSPORT_SEAMS = ["network_link"]
+
 
 @dataclass(frozen=True)
 class TermSignature:
@@ -737,14 +740,25 @@ def _member_incarnation(runtime: PlaceRuntime, principal: str) -> int:
     return record.incarnation
 
 
+def _transport_preview_note(transport: str) -> str:
+    if transport == "local_queue":
+        return "effect dispatch still stays inside local queue emulator"
+    if transport == "loopback_socket":
+        return "helper-local loopback preview only; same-process envelope parity"
+    raise ValueError(f"unsupported transport seam {transport}")
+
+
 def _message_envelopes(
-    sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None
+    sample_id: str,
+    result: dict[str, Any],
+    runtime: PlaceRuntime | None,
+    *,
+    transport: str,
 ) -> list[dict[str, Any]]:
     if runtime is None:
         return []
 
     envelopes: list[MessageEnvelope] = []
-    local_transport = "local_queue"
     world_place = runtime.world.server_place if runtime.world is not None else "WorldServerPlace"
     game_place = runtime.game.game_place if runtime.game is not None else "SugorokuGamePlace#1"
 
@@ -754,7 +768,7 @@ def _message_envelopes(
                 envelope_id="attach_request#1",
                 from_place=world_place,
                 to_place=game_place,
-                transport=local_transport,
+                transport=transport,
                 payload_kind="runtime_attach",
                 payload_ref="attach_sugoroku_game",
                 principal_claim=_principal_claim(
@@ -782,7 +796,7 @@ def _message_envelopes(
                     envelope_id="start_request#1",
                     from_place="ParticipantPlace[Alice]",
                     to_place=game_place,
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="transition",
                     payload_ref="start_game",
                     principal_claim=_principal_claim(
@@ -806,7 +820,7 @@ def _message_envelopes(
                     envelope_id="bad_reset_request#1",
                     from_place="ParticipantPlace[Bob]",
                     to_place=game_place,
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="transition",
                     payload_ref="bad_reset_by_bob",
                     principal_claim=_principal_claim(
@@ -834,7 +848,7 @@ def _message_envelopes(
                     envelope_id="roll_request#1",
                     from_place="ParticipantPlace[Alice]",
                     to_place=game_place,
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="transition",
                     payload_ref="take_turn_alice",
                     principal_claim=_principal_claim(
@@ -852,13 +866,13 @@ def _message_envelopes(
                     ],
                     witness_refs=[],
                     dispatch_outcome="accepted",
-                    notes=["effect dispatch still stays inside local queue emulator"],
+                    notes=[_transport_preview_note(transport)],
                 ),
                 MessageEnvelope(
                     envelope_id="handoff_notice#1",
                     from_place=game_place,
                     to_place="ParticipantPlace[Bob]",
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="published_event",
                     payload_ref=f"handoff_from_roll:{roll_id}",
                     principal_claim=_principal_claim(
@@ -886,7 +900,7 @@ def _message_envelopes(
                 envelope_id="bad_roll_request#1",
                 from_place="ParticipantPlace[Carol]",
                 to_place=game_place,
-                transport=local_transport,
+                transport=transport,
                 payload_kind="transition",
                 payload_ref="bad_roll_by_carol",
                 principal_claim=_principal_claim(
@@ -914,7 +928,7 @@ def _message_envelopes(
                     envelope_id="join_request#1",
                     from_place=world_place,
                     to_place=world_place,
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="membership_update",
                     payload_ref="dave_joins_world",
                     principal_claim=_principal_claim(
@@ -935,7 +949,7 @@ def _message_envelopes(
                     envelope_id="history_replay#1",
                     from_place=game_place,
                     to_place="ParticipantPlace[Dave]",
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="published_history_view",
                     payload_ref="late_join_history_visible",
                     principal_claim=_principal_claim(
@@ -964,7 +978,7 @@ def _message_envelopes(
                     envelope_id="leave_request#1",
                     from_place="ParticipantPlace[Carol]",
                     to_place=world_place,
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="membership_update",
                     payload_ref="carol_leaves_world",
                     principal_claim=_principal_claim(
@@ -985,7 +999,7 @@ def _message_envelopes(
                     envelope_id="stale_roll_after_leave#1",
                     from_place="ParticipantPlace[Carol]",
                     to_place=game_place,
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="transition",
                     payload_ref="stale_roll",
                     principal_claim=_principal_claim(
@@ -1014,7 +1028,7 @@ def _message_envelopes(
                     envelope_id="owner_leave_request#1",
                     from_place="ParticipantPlace[Bob]",
                     to_place=world_place,
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="membership_update",
                     payload_ref="bob_leaves_world",
                     principal_claim=_principal_claim(
@@ -1035,7 +1049,7 @@ def _message_envelopes(
                     envelope_id="owner_reassign_notice#1",
                     from_place=game_place,
                     to_place="ParticipantPlace[Alice]",
-                    transport=local_transport,
+                    transport=transport,
                     payload_kind="ownership_reassignment",
                     payload_ref="owner_leave_reassign",
                     principal_claim=_principal_claim(
@@ -1060,7 +1074,7 @@ def _message_envelopes(
                 envelope_id="detached_roll_request#1",
                 from_place="ParticipantPlace[Alice]",
                 to_place=game_place,
-                transport=local_transport,
+                transport=transport,
                 payload_kind="transition",
                 payload_ref="detached_domain_action",
                 principal_claim=_principal_claim(
@@ -1078,6 +1092,28 @@ def _message_envelopes(
                 notes=["deferred to Mirrorea lifecycle layer"],
             )
         )
+
+    if transport == "loopback_socket":
+        envelopes = [
+            MessageEnvelope(
+                envelope_id=envelope.envelope_id,
+                from_place=envelope.from_place,
+                to_place=envelope.to_place,
+                transport=envelope.transport,
+                payload_kind=envelope.payload_kind,
+                payload_ref=envelope.payload_ref,
+                principal_claim=envelope.principal_claim,
+                auth_evidence=envelope.auth_evidence,
+                membership_epoch=envelope.membership_epoch,
+                member_incarnation=envelope.member_incarnation,
+                capability_requirements=envelope.capability_requirements,
+                authorization_checks=envelope.authorization_checks,
+                witness_refs=envelope.witness_refs,
+                dispatch_outcome=envelope.dispatch_outcome,
+                notes=[*envelope.notes, _transport_preview_note(transport)],
+            )
+            for envelope in envelopes
+        ]
 
     return [envelope.to_json() for envelope in envelopes]
 
@@ -1308,11 +1344,17 @@ def _visualization_views(
 
 
 def _finalize_result(
-    sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None = None
+    sample_id: str,
+    result: dict[str, Any],
+    runtime: PlaceRuntime | None = None,
+    *,
+    transport: str,
 ) -> dict[str, Any]:
     result["term_signatures"] = _term_signatures(sample_id, result)
     result["layer_signatures"] = _layer_signatures(sample_id, result)
-    result["message_envelopes"] = _message_envelopes(sample_id, result, runtime)
+    result["message_envelopes"] = _message_envelopes(
+        sample_id, result, runtime, transport=transport
+    )
     telemetry_rows = _telemetry_rows(sample_id, result, runtime)
     result["telemetry_rows"] = [row.to_json() for row in telemetry_rows]
     result["visualization_views"] = _visualization_views(sample_id, result, telemetry_rows)
@@ -1456,19 +1498,22 @@ def _runtime_after_alice_turn() -> PlaceRuntime:
     return runtime
 
 
-def _base_result(sample_id: str) -> dict[str, Any]:
+def _base_result(sample_id: str, transport: str) -> dict[str, Any]:
     return {
         "sample": sample_id,
         "family": "sugoroku-world",
         "source_path": str(_source_path(sample_id)),
+        "transport_seam": transport,
     }
 
 
-def run_sample(sample_id: str) -> dict[str, Any]:
+def run_sample(sample_id: str, *, transport: str = "local_queue") -> dict[str, Any]:
     _sample_row(sample_id)
+    if transport not in ACTIVE_TRANSPORT_SEAMS:
+        raise ValueError(f"unsupported transport seam {transport}")
     if sample_id == "00_world_bootstrap":
         runtime = bootstrap_world()
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "valid",
@@ -1481,10 +1526,10 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "place_model": "logical multi-place emulator in one OS process",
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "01_runtime_attach_game":
         runtime = _runtime_after_attach()
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "valid",
@@ -1495,10 +1540,10 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": _require_game(runtime).snapshot(),
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "02_admin_start_reset":
         runtime = _runtime_running()
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "mixed",
@@ -1524,11 +1569,11 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": _require_game(runtime).snapshot(),
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "03_roll_publish_handoff":
         runtime = _runtime_after_alice_turn()
         game = _require_game(runtime)
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "valid",
@@ -1551,10 +1596,10 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "turn_trace": list(runtime.turn_trace),
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "04_non_owner_roll_rejected":
         runtime = _runtime_after_alice_turn()
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_or_runtime_verdict": "reject",
@@ -1568,7 +1613,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 ],
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "05_late_join_history_visible":
         runtime = _runtime_after_alice_turn()
         runtime.add_place("ParticipantPlace[Dave]", "ParticipantPlace")
@@ -1576,7 +1621,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
         game = _require_game(runtime)
         game.pending_players.add("Dave")
         runtime.verification_log.append("Dave observes published history after membership add")
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "valid",
@@ -1594,7 +1639,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "properties_passed": ["late_join_sees_published_history"],
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "06_leave_non_owner":
         runtime = _runtime_after_alice_turn()
         runtime.registry.mark_inactive("Carol")
@@ -1610,7 +1655,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
             invalidated_reason="member_left",
         )
         game.pending_actions[action.action_id] = action
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "valid",
@@ -1624,7 +1669,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "properties_passed": ["stale_action_after_leave_is_rejected"],
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "07_owner_leave_reassign":
         runtime = _runtime_after_alice_turn()
         runtime.registry.mark_inactive("Carol")
@@ -1638,7 +1683,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
             game.phase = "Paused"
         else:
             game.dice_owner = next_owner
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "valid",
@@ -1654,16 +1699,16 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": game.snapshot(),
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     if sample_id == "08_reset_interleaving_model_check":
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(model_check())
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, transport=transport)
     if sample_id == "09_detach_todo":
         runtime = _runtime_after_attach()
         game = _require_game(runtime)
         game.phase = "Detached"
-        result = _base_result(sample_id)
+        result = _base_result(sample_id, transport)
         result.update(
             {
                 "static_verdict": "valid",
@@ -1677,7 +1722,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": game.snapshot(),
             }
         )
-        return _finalize_result(sample_id, result, runtime)
+        return _finalize_result(sample_id, result, runtime, transport=transport)
     raise AssertionError(f"unhandled sample {sample_id}")
 
 
@@ -1723,7 +1768,7 @@ def model_check() -> dict[str, Any]:
     }
 
 
-def check_all() -> dict[str, Any]:
+def check_all(*, transport: str = "local_queue") -> dict[str, Any]:
     failed: list[dict[str, str]] = []
     for row in SAMPLE_ROWS:
         path = _source_path(row["sample_id"])
@@ -1731,13 +1776,14 @@ def check_all() -> dict[str, Any]:
             failed.append({"sample": row["sample_id"], "reason": "missing_source"})
             continue
         try:
-            run_sample(row["sample_id"])
+            run_sample(row["sample_id"], transport=transport)
         except Exception as error:  # pragma: no cover - surfaced in command output.
             failed.append({"sample": row["sample_id"], "reason": str(error)})
     return {
         "sample_count": len(SAMPLE_ROWS),
         "passed": [row["sample_id"] for row in SAMPLE_ROWS if not any(f["sample"] == row["sample_id"] for f in failed)],
         "failed": failed,
+        "transport_seam": transport,
         "static_checks": list(STATIC_CHECKS),
         "runtime_guards": list(RUNTIME_GUARDS),
         "model_check_properties": list(MODEL_CHECK_PROPERTIES),
@@ -1815,8 +1861,8 @@ def closeout() -> dict[str, Any]:
         ],
         "auth_evidence_modes": ["none"],
         "reserved_auth_evidence_modes": ["session_token", "signature"],
-        "transport_seams": ["local_queue"],
-        "reserved_transport_seams": ["loopback_socket", "network_link"],
+        "transport_seams": list(ACTIVE_TRANSPORT_SEAMS),
+        "reserved_transport_seams": list(RESERVED_TRANSPORT_SEAMS),
         "visualization_views": visualization_views,
         "visualization_view_kinds": sorted(
             {row["view_kind"] for row in visualization_views}
@@ -2113,9 +2159,15 @@ def build_parser() -> argparse.ArgumentParser:
         ],
         default=None,
     )
+    run_parser.add_argument(
+        "--transport", choices=ACTIVE_TRANSPORT_SEAMS, default="local_queue"
+    )
     run_parser.add_argument("--format", choices=["pretty", "json"], default="pretty")
 
     check = sub.add_parser("check-all")
+    check.add_argument(
+        "--transport", choices=ACTIVE_TRANSPORT_SEAMS, default="local_queue"
+    )
     check.add_argument("--format", choices=["pretty", "json"], default="pretty")
 
     model = sub.add_parser("model-check")
@@ -2131,9 +2183,13 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "list":
         _print_payload(list_samples(), args.format)
     elif args.command == "run":
-        _print_payload(run_sample(args.sample), args.format, debug=args.debug)
+        _print_payload(
+            run_sample(args.sample, transport=args.transport),
+            args.format,
+            debug=args.debug,
+        )
     elif args.command == "check-all":
-        _print_payload(check_all(), args.format)
+        _print_payload(check_all(transport=args.transport), args.format)
     elif args.command == "model-check":
         _print_payload(model_check(), args.format)
     elif args.command == "closeout":

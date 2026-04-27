@@ -193,6 +193,43 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
             envelopes["handoff_notice#1"]["principal_claim"]["principal"], "Alice"
         )
 
+    def test_runtime_attach_loopback_transport_preserves_attach_request_parity(self) -> None:
+        result = sugoroku_world_samples.run_sample(
+            "01_runtime_attach_game", transport="loopback_socket"
+        )
+
+        self.assertEqual(result["transport_seam"], "loopback_socket")
+        self.assertEqual(len(result["message_envelopes"]), 1)
+        envelope = result["message_envelopes"][0]
+        self.assertEqual(envelope["envelope_id"], "attach_request#1")
+        self.assertEqual(envelope["transport"], "loopback_socket")
+        self.assertEqual(envelope["auth_evidence"], None)
+        self.assertEqual(envelope["membership_epoch"], 0)
+        self.assertEqual(envelope["witness_refs"], [])
+        self.assertIn(
+            "helper-local loopback preview only; same-process envelope parity",
+            envelope["notes"],
+        )
+
+    def test_roll_publish_handoff_loopback_transport_preserves_envelope_parity(self) -> None:
+        result = sugoroku_world_samples.run_sample(
+            "03_roll_publish_handoff", transport="loopback_socket"
+        )
+
+        envelopes = {row["envelope_id"]: row for row in result["message_envelopes"]}
+        self.assertEqual(result["transport_seam"], "loopback_socket")
+        self.assertEqual(envelopes["roll_request#1"]["transport"], "loopback_socket")
+        self.assertEqual(envelopes["roll_request#1"]["auth_evidence"], None)
+        self.assertEqual(envelopes["roll_request#1"]["membership_epoch"], 0)
+        self.assertIn(
+            "helper-local loopback preview only; same-process envelope parity",
+            envelopes["roll_request#1"]["notes"],
+        )
+        self.assertEqual(
+            envelopes["handoff_notice#1"]["witness_refs"],
+            ["draw_pub#1"],
+        )
+
     def test_non_owner_rejection_exposes_envelope_reject_path(self) -> None:
         result = sugoroku_world_samples.run_sample("04_non_owner_roll_rejected")
 
@@ -204,6 +241,20 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
             envelope["authorization_checks"],
         )
         self.assertIn("actual current owner is Bob", envelope["notes"])
+
+    def test_non_owner_rejection_loopback_transport_keeps_reject_path(self) -> None:
+        result = sugoroku_world_samples.run_sample(
+            "04_non_owner_roll_rejected", transport="loopback_socket"
+        )
+
+        self.assertEqual(len(result["message_envelopes"]), 1)
+        envelope = result["message_envelopes"][0]
+        self.assertEqual(envelope["transport"], "loopback_socket")
+        self.assertEqual(envelope["dispatch_outcome"], "rejected")
+        self.assertIn(
+            "helper-local loopback preview only; same-process envelope parity",
+            envelope["notes"],
+        )
 
     def test_envelopes_debug_prints_message_envelope_inventory(self) -> None:
         pretty = sugoroku_world_samples.format_pretty(
@@ -223,6 +274,14 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("none", result["auth_evidence_modes"])
         self.assertIn("session_token", result["reserved_auth_evidence_modes"])
         self.assertIn("local_queue", result["transport_seams"])
+        self.assertIn("loopback_socket", result["transport_seams"])
+        self.assertEqual(result["reserved_transport_seams"], ["network_link"])
+
+    def test_check_all_supports_loopback_transport_preview(self) -> None:
+        result = sugoroku_world_samples.check_all(transport="loopback_socket")
+
+        self.assertEqual(result["transport_seam"], "loopback_socket")
+        self.assertEqual(result["failed"], [])
 
     def test_roll_publish_handoff_exposes_visualization_and_telemetry(self) -> None:
         result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")

@@ -14,10 +14,13 @@ final socket / broker choice、cryptographic session protocol、multi-server con
 - `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir`
   - `attach_request#1`
   - `local_queue`
+  - helper-local `loopback_socket` preview
 - `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir`
   - `roll_request#1`
   - `handoff_notice#1`
   - helper-local `message_envelopes`
+- `samples/clean-near-end/sugoroku-world/04_non_owner_roll_rejected.mir`
+  - helper-local reject-path parity on `loopback_socket`
 - `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir`
   - membership freshness
   - late join / published history path
@@ -53,6 +56,7 @@ final socket / broker choice、cryptographic session protocol、multi-server con
    - same-process logical multi-place current floor
 2. `loopback_socket` parity
    - same envelope fields / same rejection family / same witness references
+   - helper-local `NET-01` canary として `SUG-01` attach、`SUG-03` publish/handoff、`SUG-04` reject path、`check-all --transport loopback_socket` を actualize 済み
 3. `two_process_loopback`
    - process boundary をまたぐ attach / publish / handoff path
 4. `reconnect_epoch_guard`
@@ -78,5 +82,6 @@ final socket / broker choice、cryptographic session protocol、multi-server con
 
 ## next relation
 
-current next promoted package は `Compiler/backend/LLVM preparation` である。
-network transport は docs-first ladder を先に固定し、実 transport helper / runtime widening は後段 package に残す。
+`NET-01` helper-local loopback preview は actualize 済みである。
+current next promoted package は `Avatar fairy follow` representative slice reopen であり、
+network transport は `NET-02..05` widening を後段 package に残す。

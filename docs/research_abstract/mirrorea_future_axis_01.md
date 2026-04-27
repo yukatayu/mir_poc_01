@@ -165,7 +165,9 @@ transport widening は `local_queue` baseline をそのまま final public trans
 - redacted route trace
 
 2026-04-27 時点では、`plan/22-network-transport-roadmap.md` に
-current anchor、`NET-01..05` planned family、transport widening invariant、stop line を置いてあります。
+current anchor、`NET-01..05` ladder、transport widening invariant、stop line を置いてあります。
+`NET-01` だけは helper-local `--transport loopback_socket` preview として actualize し、
+same-process emulator のまま envelope field / reject path parity を確認できます。
 ここでも transport と auth / membership / capability / witness / visualization を collapse しません。
 
 ### compiler/backend/LLVM preparation
@@ -235,12 +237,12 @@ object attach/follow lifecycle を representative に検証する予定です。
 
 現在の promoted queue は次です。
 
-1. `Network transport` executable widening
-   - `plan/22` を helper / runtime / loopback proof-of-concept へ widen する後段 package
-2. `Avatar fairy follow` representative slice
+1. `Avatar fairy follow` representative slice
    - `samples/not_implemented/avatar-fairy-follow/` の skeleton family を active helper / validation line へ昇格できるかを検討する後段 package
-3. `HotPlug Patch / AttachPoint` executable widening
+2. `HotPlug Patch / AttachPoint` executable widening
    - `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する後段 package
+3. `Network transport` `NET-02..05`
+   - two-process / reconnect / typed failure / route trace widening を後段 package として残す
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 
