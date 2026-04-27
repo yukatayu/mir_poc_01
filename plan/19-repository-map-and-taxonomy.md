@@ -137,6 +137,8 @@ current recommendation:
 
 - `docs/research_abstract/`
   summary / detail / hands-on
+- `docs/hands_on/`
+  current closeout landing page。詳細な hands-on 本体は当面 `docs/research_abstract/` に残す
 - `docs/diagrams/`
   Mermaid source
 - `docs/reports/`
@@ -144,11 +146,11 @@ current recommendation:
 
 future candidate:
 
-- `docs/hands_on/`
 - `docs/history/`
 - `docs/visualizer_notes/`
 
 ただし、今は大移動せず、existing `docs/research_abstract/` を current reader-facing root として維持する。
+`docs/hands_on/` は landing page だけ actualize し、既存詳細文書の物理移動は later とする。
 
 ## target layer-aware map
 
@@ -230,7 +232,7 @@ current task では move しない。
 ## open questions
 
 - final physical crate/package layout をどこまで Mir / Mirrorea / adapters / visualization に split するか
-- `docs/research_abstract/` hands-on を `docs/hands_on/` へ移すべきか
+- `docs/research_abstract/` 内の詳細 hands-on を `docs/hands_on/` へどこまで移すべきか
 - archive docs の stale link をどこまで rewrite するか
 - generated sample artifact を `samples/generated/` と external workdir でどう分担するか
 

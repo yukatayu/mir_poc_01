@@ -15,17 +15,18 @@
 - `docs/reports/0925-*` は `HotPlug Patch / AttachPoint` docs-first plan closeout を表す
 - `docs/reports/0926-*` は `Network transport` docs-first plan closeout を表す
 - `docs/reports/0927-*` は `Compiler/backend/LLVM preparation` guardrail closeout を表す
-- current promoted next package は `hands-on docs / closeout`
-- next docs-first package は `Network transport` executable widening
+- `docs/reports/0928-*` は `hands-on docs / closeout` closeout を表す
+- current promoted next package は `Network transport` executable widening
+- next reopen point は `Avatar fairy follow` representative slice reopen
 
 ## current promoted queue
 
-1. `hands-on docs / closeout`
-   - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation と skip reason を固定する
-2. `Network transport` executable widening
+1. `Network transport` executable widening
    - `plan/22` の loopback / reconnect / failure matrix を helper / runtime widening へ渡す
-3. `Avatar fairy follow` representative slice reopen
+2. `Avatar fairy follow` representative slice reopen
    - phase 8 skeleton family を active helper / validation line へ昇格できるかを判断する
+3. `HotPlug Patch / AttachPoint` executable widening
+   - `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する
 
 ## mixed gate
 

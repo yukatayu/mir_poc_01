@@ -6,6 +6,7 @@
 - 長期の repository memory は `plan/`
 - 実行証跡と変更履歴は `docs/reports/`
 - ここは current state を素早くつかむための summary / detail です
+- 実行コマンド付きの landing page は `../hands_on/README.md` と `../hands_on/current_phase_closeout_01.md` を参照してください
 
 ## 読み方
 
@@ -26,7 +27,9 @@
 - `phase5-small-decidable-core-and-proof-boundary.md`
 - `phase6-compile-ready-minimal-actualization.md`
 - `mirrorea_future_axis_01.md`
+- `typed_external_boundary_adapter_plan_01.md`
 - `projection_placement_plan_01.md`
+- `hotplug_attachpoint_plan_01.md`
 - `network_transport_plan_01.md`
 - `compiler_backend_llvm_preparation_01.md`
 - `repository_layer_structure_01.md`
@@ -43,6 +46,9 @@
 - `clean_near_end_lean_01_detail.md`
 
 ## 初心者向け hands-on
+
+現在の landing page だけを先に見たい場合は `../hands_on/README.md` を参照してください。
+既存の長い入門文書は、まだこのディレクトリに残しています。
 
 次の文書は、実際にコマンドを実行しながら clean near-end suite を読むための長めの入門です。
 各文書は、キーワード、built-in / user-defined の境界、sample code の行ごとの意味、実行結果の読み方を説明します。
@@ -101,6 +107,7 @@
 - `HotPlug Patch / AttachPoint` の docs-first plan も close 済みであり、`plan/21-hotplug-attachpoint-roadmap.md` と `docs/research_abstract/hotplug_attachpoint_plan_01.md` を current anchor にする
 - `Network transport` の docs-first plan も close 済みであり、`plan/22-network-transport-roadmap.md` と `docs/research_abstract/network_transport_plan_01.md` を current anchor にする
 - `Compiler/backend/LLVM preparation` guardrail も close 済みであり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` と `docs/research_abstract/compiler_backend_llvm_preparation_01.md` を current anchor にする
+- `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
 - avatar fairy follow は next representative slice 候補であり、current active sample ではまだない
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 planned skeleton family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
 

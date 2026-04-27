@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 18:48 JST
+最終更新: 2026-04-27 18:57 JST
 
 ## この文書について
 
@@ -29,9 +29,10 @@
 - `HotPlug Patch / AttachPoint` は `docs/reports/0925-*` で close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を追加した
 - `Network transport` は `docs/reports/0926-*` で close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` に loopback / reconnect / failure matrix の docs-first ladder を追加した
 - `Compiler/backend/LLVM preparation` は `docs/reports/0927-*` で close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe floor を追加した
+- `hands-on docs / closeout` は `docs/reports/0928-*` で close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current landing page として追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Hands-on docs / closeout`**
-- next docs-first package は **`Network transport executable widening`**
+- current promoted next line は **`Network transport executable widening`**
+- next reopen point は **`Avatar fairy follow representative slice`**
 
 ## current executable floor
 
@@ -111,25 +112,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Hands-on docs / closeout
-
-- phase / stage:
-  `Macro 6 -> Macro 7`, `S1 -> S2`
-- rough estimate:
-  `0.5-1 package`
-- objective:
-  日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation / skip reason / commit/push evidence を固定する
-- expected deliverables:
-  current future-axis closeout guide、phase/sample summary、remaining mixed gate の整理
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、current phase closeout と remaining mixed gate を明記する
-- stop line:
-  generated public backend、placement optimizer、final operational scheduler は実装しない
-
-### Package 2. Network transport executable widening
+### Package 1. Network transport executable widening
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -147,7 +130,7 @@
 - stop line:
   production transport、public deployment contract、cryptographic session protocol は固定しない
 
-### Package 3. Avatar fairy follow representative slice
+### Package 2. Avatar fairy follow representative slice
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -163,6 +146,24 @@
   新しい report、follow / fallback / stale-anchor rejection の current carrier を明記する
 - stop line:
   final game/runtime API や production avatar stack は固定しない
+
+### Package 3. HotPlug Patch / AttachPoint executable widening
+
+- phase / stage:
+  `Macro 7`, `S1 -> S2`
+- rough estimate:
+  `1 package`
+- objective:
+  `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する
+- expected deliverables:
+  attachpoint compatibility summary、detach TODO canary、runtime/sample evidence
+- validation command:
+  `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --format json`
+  `python3 scripts/sugoroku_world_samples.py check-all`
+- report requirement:
+  新しい report、runtime hot-plug と storage detach の非同一性、stop line、current executable boundary を明記する
+- stop line:
+  final migration runtime、production hot-patch engine、public attachpoint ABI は固定しない
 
 ## research を通して見つけること
 

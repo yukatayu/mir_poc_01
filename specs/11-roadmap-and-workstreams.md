@@ -1163,7 +1163,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `HotPlug Patch / AttachPoint` は docs-first package として close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を actualize した。
 - `Network transport` は docs-first package として close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `NET-01..05` を current snapshot に actualize した。
 - `Compiler/backend/LLVM preparation` は docs-first + non-destructive-probe package として close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、LLVM path readiness を current snapshot に actualize した。
-- current promoted next package は hands-on docs / closeout である。
+- `hands-on docs / closeout` は close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current closeout landing page として actualize した。
+- current promoted next package は `Network transport` executable widening である。
 
 ## 2026-04-27 repository-structure staging addendum
 

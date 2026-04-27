@@ -34,6 +34,10 @@
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
   - hands-on 文書は規範判断を追加しない。sample code、helper output、既存 specs / plan / reports の current reading を分かりやすく説明する導線である。
+- `docs/hands_on/`
+  - current runnable floor と remaining mixed gate を、短い command sequence 付きで読むための landing page である。
+  - `current_phase_closeout_01.md` は 2026-04-27 時点の current phase closeout guide であり、規範判断を追加せず current sample / helper / report / storage guardrail の読みを束ねる。
+  - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を
     「promotion / stop-line / contract concretization」

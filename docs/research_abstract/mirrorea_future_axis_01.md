@@ -47,6 +47,7 @@ final public layer law schema を意味しません。
 さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
 さらに `Network transport` の docs-first plan も close しました。
 さらに `Compiler/backend/LLVM preparation` guardrail も close しました。
+さらに `hands-on docs / closeout` も close しました。
 
 - Sugoroku helper に `message_envelopes` と `--debug envelopes`
 - clean near-end report / closeout に `MessageEnvelope` inventory
@@ -182,6 +183,8 @@ root disk を build cache や LLVM artifact で既成事実化しない guardrai
 current anchor、non-destructive probe floor、stop line を置いてあります。
 actual LLVM build、final backend choice、final packaging / FFI / engine adapter target はまだ fixed しません。
 
+current closeout を実行コマンド付きで追う landing page は `docs/hands_on/current_phase_closeout_01.md` です。
+
 ## representative slices
 
 ### current
@@ -232,12 +235,12 @@ object attach/follow lifecycle を representative に検証する予定です。
 
 現在の promoted queue は次です。
 
-1. `hands-on docs / closeout`
-   - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期する package
-2. `Network transport` executable widening
+1. `Network transport` executable widening
    - `plan/22` を helper / runtime / loopback proof-of-concept へ widen する後段 package
-3. `Avatar fairy follow` representative slice
+2. `Avatar fairy follow` representative slice
    - `samples/not_implemented/avatar-fairy-follow/` の skeleton family を active helper / validation line へ昇格できるかを検討する後段 package
+3. `HotPlug Patch / AttachPoint` executable widening
+   - `plan/21` の compatibility / activation / migration line を detach lifecycle canary へ widen する後段 package
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 

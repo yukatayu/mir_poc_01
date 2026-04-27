@@ -61,9 +61,10 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `HotPlug Patch / AttachPoint` の docs-first plan も close してあり、`plan/21-hotplug-attachpoint-roadmap.md` で compatibility / activation / migration stop line を固定しました。
 - `Network transport` の docs-first plan も close してあり、`plan/22-network-transport-roadmap.md` で local queue / provider boundary current anchor、loopback / reconnect / failure matrix、stop line を固定しました。
 - `Compiler/backend/LLVM preparation` guardrail も close してあり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` で external workdir、`CARGO_HOME`、LLVM path、cleanup safety、stop line を固定しました。
-- next queue は、hands-on closeout、その後の executable transport / avatar reopen の順で進めます。
+- `hands-on docs / closeout` も close し、next queue は executable transport / avatar reopen / hot-plug executable widening の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
+- current closeout を実行コマンド付きで読む最短入口は `docs/hands_on/current_phase_closeout_01.md` です。
 
 reader-facing な要約は `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。これは roadmap summary であり、規範正本ではありません。
 
@@ -197,6 +198,10 @@ python3 scripts/current_l2_lean_sample_sync.py
   active runner、repo-local helper、detached loop、storage/env script の current taxonomy
 - `docs/research_abstract/README.md`
   日本語での短い研究概要と `_detail` への導線
+- `docs/hands_on/README.md`
+  実行コマンド付きの hands-on landing page
+- `docs/hands_on/current_phase_closeout_01.md`
+  current phase closeout、remaining mixed gate、next queue
 - `docs/reports/`
   実行証跡と変更履歴
 

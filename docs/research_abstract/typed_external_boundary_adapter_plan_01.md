@@ -41,4 +41,5 @@ exact host schema / final adapter contract は `OPEN` のままです。
 
 ## 次
 
-次の promoted package は projection / placement です。
+この文書の current role は、phase 9 planned family と evidence anchor を保つことです。
+具体的な promoted queue は `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。

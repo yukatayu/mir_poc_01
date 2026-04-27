@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 18:48 JST
+Last updated: 2026-04-27 18:57 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、`0926` Network transport close、`0927` Compiler/backend/LLVM prep close、next `Hands-on closeout`, `Network transport executable widening`, `Avatar reopen`
+Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、`0926` Network transport close、`0927` Compiler/backend/LLVM prep close、`0928` hands-on closeout close、next `Network transport executable widening`, `Avatar reopen`, `HotPlug executable widening`
 
 ## Legend
 
@@ -130,6 +130,12 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 18:57 JST | `python3 scripts/check_source_hierarchy.py` | pass | hands-on closeout sync did not introduce hierarchy drift |
+| 2026-04-27 18:57 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 926 numbered report(s).` |
+| 2026-04-27 18:55 JST | `python3 scripts/current_l2_guided_samples.py closeout --format json` | pass | current-L2 closeout still matches built-in/user-defined boundary and report-local carrier inventory |
+| 2026-04-27 18:55 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | Sugoroku closeout still reports message envelopes / visualization / telemetry / layer signatures |
+| 2026-04-27 18:55 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | runtime closeout still reports message / visualization / layer carriers on clean near-end suite |
+| 2026-04-27 18:55 JST | `git diff --check` | pass | whitespace-clean after hands-on closeout sync |
 | 2026-04-27 18:48 JST | `python3 scripts/check_source_hierarchy.py` | pass | backend/LLVM guardrail sync did not introduce hierarchy drift |
 | 2026-04-27 18:48 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 925 numbered report(s).` |
 | 2026-04-27 18:48 JST | `bash scripts/env/mirrorea_storage_env.sh` | pass | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache` remains the intended external binding |

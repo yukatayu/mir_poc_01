@@ -63,6 +63,19 @@ membership sample を使うと、current helper が `verification`、`runtime_tr
 どの current layer として読んでいるかを確認できます。これも helper-local first cut であり、
 final public layer law schema ではありません。
 
+### `envelopes`
+
+`SUG-03` の transport/auth seam を見る副読本です。`run 03_roll_publish_handoff --debug envelopes` を使うと、
+`transport`、`auth_evidence`、`membership_epoch`、`member_incarnation`、`witness_refs` が
+`MessageEnvelope` lane としてどう分かれているかを確認できます。current baseline は `auth none` であり、
+session token / signature / real network transport を fixed した意味ではありません。
+
+### `visualization`
+
+`SUG-03` の typed visualization / telemetry を見る副読本です。`run 03_roll_publish_handoff --debug visualization`
+を使うと、`visualization_views`、`telemetry_rows`、`label`、`authority`、`redaction` の helper-local first cut を確認できます。
+これは typed evidence carrier であり、untyped debug leak や final public visualization API ではありません。
+
 これらは helper-local debug output であり、final public visualization protocol ではありません。
 
 ## 4. phase ごとの読み分け

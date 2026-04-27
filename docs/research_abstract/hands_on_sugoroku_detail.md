@@ -398,6 +398,7 @@ ActionRecord
 - `debug turn-trace`: turn の event trace です。
 - `debug signatures`: effect / transition / witness / relation / property の `TermSignature` inventory です。
 - `debug envelopes`: transport / auth / membership / capability / witness を分けて見る `MessageEnvelope` inventory です。
+- `debug visualization`: label / authority / redaction を持つ `visualization_views` / `telemetry_rows` inventory です。
 - `debug layers`: `verification` / `runtime_trace` / `membership` の `LayerSignature` inventory です。
 - `debug membership`: membership registry の表示です。
 - `debug verification`: static/runtime/model-check の確認項目です。
@@ -419,6 +420,7 @@ python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 python3 scripts/sugoroku_world_samples.py model-check
