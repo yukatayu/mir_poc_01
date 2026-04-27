@@ -96,6 +96,7 @@
 - `VisualizationProtocol` の first cut も close 済みであり、current helper/report-local carrier は label / authority / redaction を持つ typed visualization / telemetry line を explicit に見せる
 - `Typed external boundary / adapter` の docs-first sample plan も close 済みであり、phase 9 `EXT-01..05` planned family は `samples/not_implemented/typed-external-boundary/` を参照する
 - `Projection / placement` の docs-first plan も close 済みであり、`plan/20-projection-and-placement-roadmap.md` と `docs/research_abstract/projection_placement_plan_01.md` を current anchor にする
+- `HotPlug Patch / AttachPoint` の docs-first plan も close 済みであり、`plan/21-hotplug-attachpoint-roadmap.md` と `docs/research_abstract/hotplug_attachpoint_plan_01.md` を current anchor にする
 - avatar fairy follow は next representative slice 候補であり、current active sample ではまだない
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 planned skeleton family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
 

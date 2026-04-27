@@ -44,6 +44,7 @@ final public layer law schema を意味しません。
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Projection / placement` の docs-first plan も close しました。
+さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
 
 - Sugoroku helper に `message_envelopes` と `--debug envelopes`
 - clean near-end report / closeout に `MessageEnvelope` inventory
@@ -146,6 +147,10 @@ Mirrorea の中心は runtime hot-plug です。
 
 を今後の principal package として扱います。
 
+2026-04-27 時点では、`plan/21-hotplug-attachpoint-roadmap.md` に
+compatibility checklist、activation cut、migration stop line、`SUG-01` attach と `SUG-09` detach TODO boundary を置いてあります。
+storage detach script は operational cleanup concern であり、この runtime hot-plug lifecycle そのものではありません。
+
 ## representative slices
 
 ### current
@@ -182,29 +187,28 @@ object attach/follow lifecycle を representative に検証する予定です。
 
 ## next package queue
 
-次の promoted queue は次です。
+初期の audit / reporting discipline と、future-axis の first-cut package は次まで close 済みです。
 
-1. current-state audit
-2. AGENTS.md and reporting discipline
-3. TermSignature registry
-   - close 済み。helper-local / report-local first cut まで actualize。
-4. LayerSignature system
-   - close 済み。helper-local current layer と runtime report-local lane の first cut まで actualize。
-5. MessageEnvelope / Auth seam
-   - close 済み。helper-local / report-local first cut まで actualize。
-6. VisualizationProtocol
-   - helper-local / report-local first cut は close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を追加した。
-7. Typed external boundary / adapter
-   - phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、`provider_boundary` / `local_queue` の current evidence anchor と stop line を docs-first に固定した。
-7. Sugoroku vertical slice hardening
-8. Avatar fairy follow slice
-9. Projection / placement plan
-10. Hot-plug Patch / AttachPoint
-11. hands-on docs
-12. closeout
+- `TermSignature registry / debug output`
+- `LayerSignature system`
+- `MessageEnvelope / Auth seam`
+- `VisualizationProtocol`
+- `Typed external boundary / adapter` docs-first sample plan
+- `Projection / placement` docs-first plan
+- `HotPlug Patch / AttachPoint` docs-first plan
 
-このうち 1 と 2 は documentation / policy package です。
-3 以降は順に repo-local actualization へ進めます。
+現在の promoted queue は次です。
+
+1. `Network transport`
+   - local queue から separate-process / loopback / reconnect / failure matrix へ widening する docs-first package
+2. `Compiler/backend/LLVM preparation`
+   - external workdir、cache placement、detach-safe cleanup、small-VPS guardrail を整理する package
+3. `hands-on docs / closeout`
+   - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期する package
+4. `Avatar fairy follow` representative slice
+   - `samples/not_implemented/avatar-fairy-follow/` の skeleton family を active helper / validation line へ昇格できるかを検討する後段 package
+
+この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 
 ## stop line
 

@@ -32,6 +32,7 @@
 - `atomic_cut` を room-level durable commit にしない
 - system-wide source から place-specific program へ projection できる性質を future line の invariant として保つ
 - current docs-first plan は `plan/20-projection-and-placement-roadmap.md` に置き、generator / optimizer / equivalence checker は still later に残す
+- `SUG-01` attach と `SUG-09` detach TODO boundary は hot-plug docs-first plan の current anchor であり、storage detach script と混同しない
 
 ## still later
 

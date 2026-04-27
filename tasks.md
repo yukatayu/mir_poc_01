@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 18:15 JST
+最終更新: 2026-04-27 18:23 JST
 
 ## この文書について
 
@@ -26,9 +26,10 @@
 - `VisualizationProtocol` は `docs/reports/0922-*` で close し、Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end report-local `VisualizationView` / `TelemetryRow` inventory を追加した
 - `Typed external boundary / adapter` は `docs/reports/0923-*` で close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、provider boundary / local queue / typed failure / debug label restriction の current evidence anchor を docs-first に固定した
 - `Projection / placement` は `docs/reports/0924-*` で close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction、place split、validity checklist、stop line を追加した
+- `HotPlug Patch / AttachPoint` は `docs/reports/0925-*` で close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`HotPlug Patch / AttachPoint`**
-- next docs-first package は **`Network transport`**
+- current promoted next line は **`Network transport`**
+- next docs-first package は **`Compiler/backend/LLVM preparation`**
 
 ## current executable floor
 
@@ -108,25 +109,7 @@
 
 ## 自走可能な task package
 
-### Package 1. HotPlug Patch / AttachPoint
-
-- phase / stage:
-  `Macro 6`, `S1 -> S2`
-- rough estimate:
-  `0.5 package`
-- objective:
-  `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration stop line を docs-first に切る
-- expected deliverables:
-  patch/attach lifecycle plan、compatibility checklist、docs
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、hot-plug compatibility と detach lifecycle stop line を明記する
-- stop line:
-  final public hot-plug package ABI や migration engine は固定しない
-
-### Package 2. Network transport plan
+### Package 1. Network transport plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -144,14 +127,32 @@
 - stop line:
   concrete socket / broker / final network ABI は固定しない
 
-### Package 3. Compiler/backend/LLVM preparation
+### Package 2. Compiler/backend/LLVM preparation
+
+- phase / stage:
+  `Macro 6`, `S1 -> S2`
+- rough estimate:
+  `0.5 package`
+- objective:
+  external workdir、cache placement、detach-safe cleanup、minimal probe を small VPS 前提で固める
+- expected deliverables:
+  storage/backend guardrail docs、probe plan、closeout sync
+- validation command:
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、root-disk guardrail と detach-safe cleanup を明記する
+- stop line:
+  production backend / final LLVM pipeline は固定しない
+
+### Package 3. Hands-on docs / closeout
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
 - rough estimate:
   `0.5-1 package`
 - objective:
-  external workdir、cache placement、detach-safe cleanup、minimal probe を small VPS 前提で固める
+  日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation / skip reason / commit/push evidence を固定する
 - expected deliverables:
   projection doc、validity checklist、place split examples、必要なら helper-local report
 - validation command:
@@ -160,61 +161,6 @@
   新しい report、projection invariant と stop line を明記する
 - stop line:
   generated public backend、placement optimizer、final operational scheduler は実装しない
-
-### Package 4. Hot-plug Patch / AttachPoint
-
-- phase / stage:
-  `Macro 6`, `S1 -> S2`
-- rough estimate:
-  `1 package`
-- objective:
-  `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration contract の最小設計を置く
-- expected deliverables:
-  docs-first design、sample sketch、compatibility checklist、optional helper-local canary
-- validation command:
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、activation cut と migration stop line を明記する
-- stop line:
-  distributed activation / rollback、durable state migration、production attach/detach API は固定しない
-
-### Package 5. Network transport plan
-
-- phase / stage:
-  `Macro 6 -> Macro 7`, `S0 -> S1`
-- rough estimate:
-  `0.5 package`
-- objective:
-  local queue -> two-process loopback -> explicit transport failure の docs-first sample ladder を切る
-- expected deliverables:
-  `NET-01..05` plan、reconnect / membership epoch line、transport failure explicit reject path
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、logical emulator と network plan の boundary を明記する
-- stop line:
-  production transport 実装や public deployment contract は固定しない
-
-### Package 6. Compiler/backend/LLVM preparation guardrail
-
-- phase / stage:
-  `Macro 7`, `S0 -> S1`
-- rough estimate:
-  `0.5-1 package`
-- objective:
-  small VPS 上で LLVM / build artifact / cache を root に溜めない guardrail を先に固める
-- expected deliverables:
-  storage env hardening、backend probe plan、artifact location report、cargo registry cache / LLVM path actual probe
-- validation command:
-  `bash scripts/env/mirrorea_storage_env.sh`
-  `bash scripts/storage/detach_prepare.sh`
-  `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、mounted/unmounted state、actual probe、cutover条件を明記する
-- stop line:
-  actual LLVM build や backend public contract は固定しない
 
 ## research を通して見つけること
 

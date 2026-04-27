@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 18:15 JST
+Last updated: 2026-04-27 18:23 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、next `HotPlug Patch / AttachPoint`, `Network transport`, `Compiler/backend/LLVM prep`
+Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、next `Network transport`, `Compiler/backend/LLVM prep`, `Hands-on closeout`
 
 ## Legend
 
@@ -31,7 +31,7 @@ Progress:
 | External adapters | 10 | planned skeleton | phase 9 `EXT-01..05` ladder を provider-boundary evidence に結び直す | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` |
 | Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持しつつ package 3 へ渡す | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
 | Projection / placement | 10 | docs-first plan | `plan/20` の validity checklist と stop line を維持しつつ hot-plug package へ渡す | `python3 scripts/validate_docs.py` |
-| Hot-plug package | 10 | TODO boundary visible | `SUG-09` を stop line として保持し `AttachPoint` package を待つ | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug summary` |
+| Hot-plug package | 10 | docs-first plan + TODO boundary | `plan/21` の compatibility/activation/migration stop line を維持しつつ transport widening へ渡す | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --format json` |
 
 ## Active sample matrix
 
@@ -52,7 +52,7 @@ Progress:
 | `SUG-06` | shared-space membership | `samples/clean-near-end/sugoroku-world/06_leave_non_owner.mir` | active runnable | 90 | positive | 2026-04-27 15:21 JST | `0909`, `0916` | epoch invalidation |
 | `SUG-07` | shared-space membership | `samples/clean-near-end/sugoroku-world/07_owner_leave_reassign.mir` | active runnable | 90 | positive | 2026-04-27 15:21 JST | `0909`, `0916` | owner reassignment |
 | `SUG-08` | theorem / model-check boundary | `samples/clean-near-end/sugoroku-world/08_reset_interleaving_model_check.mir` | active runnable E2E | 90 | positive | 2026-04-27 15:21 JST | `0909`, `0916` | reset safety bridge |
-| `SUG-09` | hot-plug preview | `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | active TODO boundary | 10 | explicit TODO | 2026-04-27 15:21 JST | `0909`, `0916` | completion evidence ではなく stop line |
+| `SUG-09` | hot-plug preview | `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | active TODO boundary | 10 | explicit TODO | 2026-04-27 18:23 JST | `0909`, `0916`, `0925` | completion evidence ではなく stop line; `AttachPoint` package の current anchor |
 | `LAY-01` | LayerSignature | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local inventory | 90 | positive | 2026-04-27 15:59 JST | `0919` | `verification` / `runtime_trace` layer inventory |
 | `LAY-02` | LayerSignature | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | helper-local inventory | 90 | positive | 2026-04-27 15:59 JST | `0919` | `membership` layer inventory |
 | `LAY-03` | LayerSignature | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | runtime report inventory | 90 | positive | 2026-04-27 15:59 JST | `0919` | `transport_provider_boundary` lane |
@@ -95,7 +95,7 @@ Progress:
 | `E2E-ADAPTER-BOUNDARY` | source -> adapter -> typed effect receipt/failure | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` and `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 10 | current evidence anchor for provider-boundary / local-queue phase 9 ladder | plan fixed 2026-04-27 18:10 JST |
 | `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 90 | helper-local envelope carrier keeps auth / membership / capability / witness separate | pass 2026-04-27 17:46 JST |
 | `E2E-VIS-TRACE` | source -> runtime trace -> visualization view -> telemetry row | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | 90 | helper-local typed/redacted visualization first cut | pass 2026-04-27 18:04 JST |
-| `E2E-HOTPLUG-ATTACH` | patch -> compatibility -> attach -> activate | planned | 10 | planned phase 14 route only | not yet |
+| `E2E-HOTPLUG-ATTACH` | patch -> compatibility -> attach -> activate | `plan/21-hotplug-attachpoint-roadmap.md` | 10 | docs-first compatibility / activation / migration stop line fixed; executable helper is not yet present | plan fixed 2026-04-27 18:23 JST |
 | `E2E-PROJECTION` | system source -> place-specific projection -> equivalent trace | `plan/20-projection-and-placement-roadmap.md` | 10 | docs-first validity checklist fixed; executable projection helper is not yet present | plan fixed 2026-04-27 18:15 JST |
 
 ## Build/storage environment
@@ -115,7 +115,7 @@ Progress:
 
 | Blocker | Layer | Severity | Owner | Next action |
 |---|---|---|---|---|
-| detach lifecycle is still an explicit TODO boundary | hot-plug | medium | CodeX | keep `SUG-09` visible until `AttachPoint` package exists |
+| detach lifecycle is still an explicit TODO boundary | hot-plug | medium | CodeX | keep `SUG-09` visible until executable AttachPoint / migration helper exists |
 | phase 8 has skeleton files but still no active helper / runner | avatar follow | medium | CodeX | promote helper contract after `MessageEnvelope` / `Visualization` direction is clearer |
 | final public visualization contract / retention / multi-tenant telemetry が未決 | visualization | medium | mixed gate | keep helper/report-local first cut only and reopen after adapter / projection packages |
 | final public `AuthEvidence` kind と real transport widening が未決 | auth / transport | medium | mixed gate | keep helper-local `auth none` baseline and reopen with adapter / network packages |
@@ -127,6 +127,11 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 18:23 JST | `python3 scripts/check_source_hierarchy.py` | pass | hot-plug docs-first package did not introduce hierarchy drift |
+| 2026-04-27 18:23 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 923 numbered report(s).` |
+| 2026-04-27 18:23 JST | `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --format json` | pass | attach request / runtime attach envelope remain current hot-plug anchor |
+| 2026-04-27 18:23 JST | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --format json` | pass | detach TODO boundary remains explicit stop line, not completion evidence |
+| 2026-04-27 18:23 JST | `python3 scripts/sugoroku_world_samples.py check-all` | pass | all 10 Sugoroku samples remain green after hot-plug docs-first sync |
 | 2026-04-27 18:15 JST | `python3 scripts/check_source_hierarchy.py` | pass | projection docs-first package did not introduce hierarchy drift |
 | 2026-04-27 18:15 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 922 numbered report(s).` |
 | 2026-04-27 18:15 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | provider boundary remains current projection evidence anchor |

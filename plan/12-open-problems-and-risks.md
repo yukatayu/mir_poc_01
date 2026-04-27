@@ -34,6 +34,7 @@
 - projection / placement validity report と world-sugar boundary
   - docs-first plan は `0924` / `plan/20` で actualize したが、generator / optimizer / equivalence checker は未決のまま残す
 - `Patch Req Prov Δ` / `AttachPoint` / activation cut / migration contract
+  - docs-first plan は `0925` / `plan/21` で actualize したが、final ABI / rollback / durable migration engine は未決のまま残す
 - avatar fairy follow helper surface、debug mode、active promotion条件
 - detached artifact root を repo-local `target/` default から external workdir へどう ratchet するか
 - final parser grammar

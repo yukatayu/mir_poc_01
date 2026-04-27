@@ -165,6 +165,10 @@
      - 未決なのは exact host schema、final public adapter API、browser/network/VR family への割当である。
   6. hot-plug `Patch Req Prov Δ` / `AttachPoint` の最小 surface と compatibility check をどこまで current line に上げるか。
      activation cut、migration contract、detach lifecycle の exact shape は未決定である。
+     - 2026-04-27 時点で docs-first plan は actualize した。
+       `plan/21-hotplug-attachpoint-roadmap.md` により、compatibility checklist、activation cut、migration stop line、
+       `SUG-01` attach と `SUG-09` detach TODO boundary までは current line に上げてよい。
+     - 未決なのは final hot-plug ABI、rollback、durable state migration engine である。
   7. avatar fairy follow vertical slice を next representative sample にするとき、`FollowAnchor`、visibility guard、fallback lineage、stale anchor rejection をどの minimal helper surface に切るか。
      - 2026-04-27 時点で planned skeleton family の path と sample ID は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-01..06` に固定した。
      - 未決なのは active helper command、debug mode、promotion condition である。

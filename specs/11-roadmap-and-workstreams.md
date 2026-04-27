@@ -1156,7 +1156,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
 - `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
 - `Projection / placement` は docs-first package として close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction と validity checklist を actualize した。
-- current promoted next package は hot-plug patch / `AttachPoint` である。
+- `HotPlug Patch / AttachPoint` は docs-first package として close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を actualize した。
+- current promoted next package は network transport である。
 
 ## 2026-04-27 repository-structure staging addendum
 

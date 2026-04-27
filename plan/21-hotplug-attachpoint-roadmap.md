@@ -1,0 +1,67 @@
+# plan/21 — hot-plug patch / AttachPoint current roadmap
+
+## 目的
+
+Mirrorea future-axis の phase 14 `HotPlug Patch / AttachPoint` を、
+repo-local current layer で無理なく前進させるための docs-first roadmap を置く。
+
+ここで固定するのは、compatibility checklist、activation cut、migration stop line、
+attach / detach current anchor である。
+final hot-plug ABI、rollback、durable migration engine は固定しない。
+
+## current anchors
+
+- `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir`
+  - attach request
+  - runtime attach envelope
+- `samples/clean-near-end/sugoroku-world/09_detach_todo.mir`
+  - detach TODO boundary
+  - detached domain action rejection / `todo_deferred`
+- `scripts/sugoroku_world_samples.py`
+  - `attach_request#1`
+  - `detached_roll_request#1`
+
+## minimum concepts
+
+- `Patch`
+- `AttachPoint`
+- compatibility check
+- activation cut
+- migration contract
+
+## compatibility checklist
+
+1. required capabilities / witnesses が explicit か
+2. membership freshness を attach / detach lifecycle で保持できるか
+3. activation 前と activation 後の visible state frontier が分かれているか
+4. detach 後の domain action failure が explicit か
+5. visualization / telemetry が attach / detach lifecycle を誤読させないか
+
+## activation cut
+
+current docs-first line では、attach request と actual active state mutation の間に
+activation cut があると読む。
+requested だけでは active にならず、compatibility / authorization / migration precondition を通った後で active になる。
+
+## migration stop line
+
+current docs-first line では、detach / reattach を
+durable state migration completed と同一視しない。
+
+未決のもの:
+
+- final package ABI
+- rollback protocol
+- durable state migration engine
+- distributed activation ordering
+
+## important non-equivalence
+
+`scripts/storage/detach_prepare.sh` と
+`scripts/storage/cleanup_disposable_artifacts.sh` は storage / ops concern である。
+runtime hot-plug lifecycle の `detach` と同一ではない。
+
+## next relation
+
+current next promoted package は network transport である。
+hot-plug lifecycle を transport widening と分けたまま、reconnect / loopback / failure matrix を切る。
