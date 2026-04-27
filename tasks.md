@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 17:03 JST
+最終更新: 2026-04-27 17:41 JST
 
 ## この文書について
 
@@ -22,9 +22,10 @@
 - `Avatar fairy follow sample plan` は `docs/reports/0917-*` で close 済み
 - `TermSignature registry / debug output` は `docs/reports/0918-*` で close し、Sugoroku `--debug signatures` と clean near-end report/closeout inventory を追加した
 - `LayerSignature system` は `docs/reports/0919-*` で close し、Sugoroku helper の `verification` / `runtime_trace` / `membership` layer inventory と、clean near-end report-local `transport_provider_boundary` / `auth_authority_witness` / `verification_model_check` carrier を追加した
+- `MessageEnvelope / Auth seam` は `docs/reports/0921-*` で close し、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report-local `MessageEnvelope` inventory を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`MessageEnvelope / Auth seam`**
-- next semantic carrier package は **`VisualizationProtocol`**
+- current promoted next line は **`VisualizationProtocol`**
+- next docs-first package は **`Typed external boundary / adapter`**
 
 ## current executable floor
 
@@ -88,6 +89,7 @@
 - `python3 scripts/sugoroku_world_samples.py check-all`
 - `python3 scripts/sugoroku_world_samples.py model-check`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures`
+- `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes`
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
@@ -99,25 +101,7 @@
 
 ## 自走可能な task package
 
-### Package 1. MessageEnvelope / Auth seam
-
-- phase / stage:
-  `Macro 6`, `S2 -> S3`
-- rough estimate:
-  `0.5-1 package`
-- objective:
-  transport、authentication、authorization、membership、capability、witness を分けた envelope carrier を置く
-- expected deliverables:
-  `MessageEnvelope`、`AuthEvidence`、`PrincipalClaim`、membership epoch / incarnation carrier、transport adapter seam、docs
-- validation command:
-  `python3 scripts/sugoroku_world_samples.py check-all`
-  `python3 scripts/sugoroku_world_samples.py model-check`
-- report requirement:
-  新しい report、current none-auth baseline と future session / signature path の切り分けを記録する
-- stop line:
-  production auth protocol、federation、real socket transport は固定しない
-
-### Package 2. VisualizationProtocol first implementation
+### Package 1. VisualizationProtocol first implementation
 
 - phase / stage:
   `Macro 6`, `S2 -> S3`
@@ -135,7 +119,7 @@
 - stop line:
   final public visualization protocol、retention policy、multi-tenant telemetry service は固定しない
 
-### Package 3. Typed external boundary / adapter sample plan
+### Package 2. Typed external boundary / adapter sample plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -153,7 +137,7 @@
 - stop line:
   concrete browser/network/VR adapter 実装は固定しない
 
-### Package 4. Projection / placement plan
+### Package 3. Projection / placement plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -170,7 +154,7 @@
 - stop line:
   generated public backend、placement optimizer、final operational scheduler は実装しない
 
-### Package 5. Hot-plug Patch / AttachPoint
+### Package 4. Hot-plug Patch / AttachPoint
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -187,7 +171,7 @@
 - stop line:
   distributed activation / rollback、durable state migration、production attach/detach API は固定しない
 
-### Package 6. Network transport plan
+### Package 5. Network transport plan
 
 - phase / stage:
   `Macro 6 -> Macro 7`, `S0 -> S1`
@@ -205,7 +189,7 @@
 - stop line:
   production transport 実装や public deployment contract は固定しない
 
-### Package 7. Compiler/backend/LLVM preparation guardrail
+### Package 6. Compiler/backend/LLVM preparation guardrail
 
 - phase / stage:
   `Macro 7`, `S0 -> S1`
@@ -229,6 +213,7 @@
 
 - `TermSignature` の最小粒度と residual obligation surface
 - `LayerSignature` first cut の helper/runtime naming をどこまで共有 law surface に寄せるか
+- `VisualizationProtocol` の最小 view kind / telemetry row / redaction wording
 - avatar fairy helper surface を Sugoroku helper extension と専用 helper のどちらに置くか
 - projection / placement validity report の最小 shape
 - `AttachPoint` compatibility と detach lifecycle の最小 contract

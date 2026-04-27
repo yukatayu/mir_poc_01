@@ -155,6 +155,80 @@ class LayerSignature:
         }
 
 
+@dataclass(frozen=True)
+class PrincipalClaim:
+    principal: str
+    participant_place: str
+    claimed_authority: str
+    claimed_capabilities: list[str]
+
+    def to_json(self) -> dict[str, Any]:
+        return {
+            "principal": self.principal,
+            "participant_place": self.participant_place,
+            "claimed_authority": self.claimed_authority,
+            "claimed_capabilities": list(self.claimed_capabilities),
+        }
+
+
+@dataclass(frozen=True)
+class AuthEvidence:
+    kind: str
+    subject: str
+    issuer: str
+    bindings: list[str]
+    notes: list[str] = field(default_factory=list)
+
+    def to_json(self) -> dict[str, Any]:
+        return {
+            "kind": self.kind,
+            "subject": self.subject,
+            "issuer": self.issuer,
+            "bindings": list(self.bindings),
+            "notes": list(self.notes),
+        }
+
+
+@dataclass(frozen=True)
+class MessageEnvelope:
+    envelope_id: str
+    from_place: str
+    to_place: str
+    transport: str
+    payload_kind: str
+    payload_ref: str
+    principal_claim: PrincipalClaim
+    auth_evidence: AuthEvidence | None
+    membership_epoch: int
+    member_incarnation: int
+    capability_requirements: list[str]
+    authorization_checks: list[str]
+    witness_refs: list[str]
+    dispatch_outcome: str
+    notes: list[str] = field(default_factory=list)
+
+    def to_json(self) -> dict[str, Any]:
+        return {
+            "envelope_id": self.envelope_id,
+            "from_place": self.from_place,
+            "to_place": self.to_place,
+            "transport": self.transport,
+            "payload_kind": self.payload_kind,
+            "payload_ref": self.payload_ref,
+            "principal_claim": self.principal_claim.to_json(),
+            "auth_evidence": (
+                None if self.auth_evidence is None else self.auth_evidence.to_json()
+            ),
+            "membership_epoch": self.membership_epoch,
+            "member_incarnation": self.member_incarnation,
+            "capability_requirements": list(self.capability_requirements),
+            "authorization_checks": list(self.authorization_checks),
+            "witness_refs": list(self.witness_refs),
+            "dispatch_outcome": self.dispatch_outcome,
+            "notes": list(self.notes),
+        }
+
+
 @dataclass
 class MessageQueue:
     place_id: str
@@ -594,9 +668,378 @@ def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, 
     return [signature.to_json() for signature in signatures]
 
 
-def _finalize_result(sample_id: str, result: dict[str, Any]) -> dict[str, Any]:
+def _principal_claim(
+    principal: str,
+    *,
+    claimed_authority: str,
+    claimed_capabilities: list[str],
+) -> PrincipalClaim:
+    return PrincipalClaim(
+        principal=principal,
+        participant_place=f"ParticipantPlace[{principal}]",
+        claimed_authority=claimed_authority,
+        claimed_capabilities=claimed_capabilities,
+    )
+
+
+def _member_incarnation(runtime: PlaceRuntime, principal: str) -> int:
+    record = runtime.registry.members.get(principal)
+    if record is None:
+        return 0
+    return record.incarnation
+
+
+def _message_envelopes(
+    sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None
+) -> list[dict[str, Any]]:
+    if runtime is None:
+        return []
+
+    envelopes: list[MessageEnvelope] = []
+    local_transport = "local_queue"
+    world_place = runtime.world.server_place if runtime.world is not None else "WorldServerPlace"
+    game_place = runtime.game.game_place if runtime.game is not None else "SugorokuGamePlace#1"
+
+    if sample_id == "01_runtime_attach_game":
+        envelopes.append(
+            MessageEnvelope(
+                envelope_id="attach_request#1",
+                from_place=world_place,
+                to_place=game_place,
+                transport=local_transport,
+                payload_kind="runtime_attach",
+                payload_ref="attach_sugoroku_game",
+                principal_claim=_principal_claim(
+                    "Server",
+                    claimed_authority="GameAuthority.Server",
+                    claimed_capabilities=["AttachComponent(SugorokuGamePackage)"],
+                ),
+                auth_evidence=None,
+                membership_epoch=runtime.registry.membership_epoch,
+                member_incarnation=0,
+                capability_requirements=["AttachComponent(SugorokuGamePackage)"],
+                authorization_checks=[
+                    "authority(Server) >= GameAuthority.Server",
+                    "package.checked = true",
+                ],
+                witness_refs=[],
+                dispatch_outcome="accepted",
+                notes=["repo-local auth none baseline"],
+            )
+        )
+    if sample_id == "02_admin_start_reset":
+        envelopes.extend(
+            [
+                MessageEnvelope(
+                    envelope_id="start_request#1",
+                    from_place="ParticipantPlace[Alice]",
+                    to_place=game_place,
+                    transport=local_transport,
+                    payload_kind="transition",
+                    payload_ref="start_game",
+                    principal_claim=_principal_claim(
+                        "Alice",
+                        claimed_authority="GameAuthority.Admin",
+                        claimed_capabilities=["GameAdmin(SugorokuGame#1)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Alice"),
+                    capability_requirements=["GameAdmin(SugorokuGame#1)"],
+                    authorization_checks=[
+                        "authority(Alice) >= GameAuthority.Admin",
+                        "phase(SugorokuGame#1) = GamePhase.Attached",
+                    ],
+                    witness_refs=["game_started_witness"],
+                    dispatch_outcome="accepted",
+                    notes=["repo-local auth none baseline"],
+                ),
+                MessageEnvelope(
+                    envelope_id="bad_reset_request#1",
+                    from_place="ParticipantPlace[Bob]",
+                    to_place=game_place,
+                    transport=local_transport,
+                    payload_kind="transition",
+                    payload_ref="bad_reset_by_bob",
+                    principal_claim=_principal_claim(
+                        "Bob",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["ResetGame(SugorokuGame#1)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Bob"),
+                    capability_requirements=["ResetGame(SugorokuGame#1)"],
+                    authorization_checks=["authority(Bob) >= GameAuthority.Admin"],
+                    witness_refs=[],
+                    dispatch_outcome="rejected",
+                    notes=["rejected before runtime reset"],
+                ),
+            ]
+        )
+    if sample_id == "03_roll_publish_handoff":
+        witness_name = result.get("roll", {}).get("published_witness", "draw_pub#1")
+        roll_id = result.get("roll", {}).get("roll_id", "roll#1")
+        envelopes.extend(
+            [
+                MessageEnvelope(
+                    envelope_id="roll_request#1",
+                    from_place="ParticipantPlace[Alice]",
+                    to_place=game_place,
+                    transport=local_transport,
+                    payload_kind="transition",
+                    payload_ref="take_turn_alice",
+                    principal_claim=_principal_claim(
+                        "Alice",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["DiceOwner(Alice)", "ActiveParticipant(Alice)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Alice"),
+                    capability_requirements=["DiceOwner(Alice)", "ActiveParticipant(Alice)"],
+                    authorization_checks=[
+                        "phase(SugorokuGame#1) = GamePhase.Running",
+                        "dice_owner(SugorokuGame#1) = Alice",
+                    ],
+                    witness_refs=[],
+                    dispatch_outcome="accepted",
+                    notes=["effect dispatch still stays inside local queue emulator"],
+                ),
+                MessageEnvelope(
+                    envelope_id="handoff_notice#1",
+                    from_place=game_place,
+                    to_place="ParticipantPlace[Bob]",
+                    transport=local_transport,
+                    payload_kind="published_event",
+                    payload_ref=f"handoff_from_roll:{roll_id}",
+                    principal_claim=_principal_claim(
+                        "Alice",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["PublishRoll(Alice)", "HandoffDiceOwner(Alice->Bob)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Alice"),
+                    capability_requirements=["PublishRoll(Alice)", "HandoffDiceOwner(Alice->Bob)"],
+                    authorization_checks=[
+                        "handoff_target_is_active",
+                        f"requires witness({witness_name})",
+                    ],
+                    witness_refs=[witness_name],
+                    dispatch_outcome="accepted",
+                    notes=["authorization and witness remain separate lanes"],
+                ),
+            ]
+        )
+    if sample_id == "04_non_owner_roll_rejected":
+        envelopes.append(
+            MessageEnvelope(
+                envelope_id="bad_roll_request#1",
+                from_place="ParticipantPlace[Carol]",
+                to_place=game_place,
+                transport=local_transport,
+                payload_kind="transition",
+                payload_ref="bad_roll_by_carol",
+                principal_claim=_principal_claim(
+                    "Carol",
+                    claimed_authority="GameAuthority.Player",
+                    claimed_capabilities=["DiceOwner(Carol)", "ActiveParticipant(Carol)"],
+                ),
+                auth_evidence=None,
+                membership_epoch=runtime.registry.membership_epoch,
+                member_incarnation=_member_incarnation(runtime, "Carol"),
+                capability_requirements=["DiceOwner(Carol)", "ActiveParticipant(Carol)"],
+                authorization_checks=[
+                    "phase(SugorokuGame#1) = GamePhase.Running",
+                    "dice_owner(SugorokuGame#1) = Carol",
+                ],
+                witness_refs=[],
+                dispatch_outcome="rejected",
+                notes=[f"actual current owner is {result.get('actual', 'unknown')}"],
+            )
+        )
+    if sample_id == "05_late_join_history_visible":
+        envelopes.extend(
+            [
+                MessageEnvelope(
+                    envelope_id="join_request#1",
+                    from_place=world_place,
+                    to_place=world_place,
+                    transport=local_transport,
+                    payload_kind="membership_update",
+                    payload_ref="dave_joins_world",
+                    principal_claim=_principal_claim(
+                        "Server",
+                        claimed_authority="GameAuthority.Server",
+                        claimed_capabilities=["AddMember(WorldMembers, Dave)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=0,
+                    capability_requirements=["AddMember(WorldMembers, Dave)"],
+                    authorization_checks=["authority(Server) >= GameAuthority.Server"],
+                    witness_refs=[],
+                    dispatch_outcome="accepted",
+                    notes=["membership update stays distinct from game authority"],
+                ),
+                MessageEnvelope(
+                    envelope_id="history_replay#1",
+                    from_place=game_place,
+                    to_place="ParticipantPlace[Dave]",
+                    transport=local_transport,
+                    payload_kind="published_history_view",
+                    payload_ref="late_join_history_visible",
+                    principal_claim=_principal_claim(
+                        "Dave",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["ObservePublishedHistory(SugorokuGame#1)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Dave"),
+                    capability_requirements=["ObservePublishedHistory(SugorokuGame#1)"],
+                    authorization_checks=[
+                        "Dave active in membership registry",
+                        "published history is observer-visible",
+                    ],
+                    witness_refs=["draw_pub#1"],
+                    dispatch_outcome="accepted",
+                    notes=["late join does not imply immediate turn-order insertion"],
+                ),
+            ]
+        )
+    if sample_id == "06_leave_non_owner":
+        envelopes.extend(
+            [
+                MessageEnvelope(
+                    envelope_id="leave_request#1",
+                    from_place="ParticipantPlace[Carol]",
+                    to_place=world_place,
+                    transport=local_transport,
+                    payload_kind="membership_update",
+                    payload_ref="carol_leaves_world",
+                    principal_claim=_principal_claim(
+                        "Carol",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["LeaveWorldMembership(Carol)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Carol"),
+                    capability_requirements=["LeaveWorldMembership(Carol)"],
+                    authorization_checks=["Carol currently active in WorldMembers"],
+                    witness_refs=[],
+                    dispatch_outcome="accepted",
+                    notes=["leave increments membership epoch and incarnation"],
+                ),
+                MessageEnvelope(
+                    envelope_id="stale_roll_after_leave#1",
+                    from_place="ParticipantPlace[Carol]",
+                    to_place=game_place,
+                    transport=local_transport,
+                    payload_kind="transition",
+                    payload_ref="stale_roll",
+                    principal_claim=_principal_claim(
+                        "Carol",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["DiceOwner(Carol)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=0,
+                    member_incarnation=0,
+                    capability_requirements=["DiceOwner(Carol)"],
+                    authorization_checks=[
+                        "membership_epoch is current",
+                        "member_incarnation matches active record",
+                    ],
+                    witness_refs=[],
+                    dispatch_outcome="rejected",
+                    notes=["stale member incarnation invalidated"],
+                ),
+            ]
+        )
+    if sample_id == "07_owner_leave_reassign":
+        envelopes.extend(
+            [
+                MessageEnvelope(
+                    envelope_id="owner_leave_request#1",
+                    from_place="ParticipantPlace[Bob]",
+                    to_place=world_place,
+                    transport=local_transport,
+                    payload_kind="membership_update",
+                    payload_ref="bob_leaves_world",
+                    principal_claim=_principal_claim(
+                        "Bob",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["LeaveWorldMembership(Bob)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Bob"),
+                    capability_requirements=["LeaveWorldMembership(Bob)"],
+                    authorization_checks=["Bob currently active in WorldMembers"],
+                    witness_refs=["membership_updated"],
+                    dispatch_outcome="accepted",
+                    notes=["owner continuity handled after membership update"],
+                ),
+                MessageEnvelope(
+                    envelope_id="owner_reassign_notice#1",
+                    from_place=game_place,
+                    to_place="ParticipantPlace[Alice]",
+                    transport=local_transport,
+                    payload_kind="ownership_reassignment",
+                    payload_ref="owner_leave_reassign",
+                    principal_claim=_principal_claim(
+                        "Alice",
+                        claimed_authority="GameAuthority.Player",
+                        claimed_capabilities=["ReceiveDiceOwnership(Alice)"],
+                    ),
+                    auth_evidence=None,
+                    membership_epoch=runtime.registry.membership_epoch,
+                    member_incarnation=_member_incarnation(runtime, "Alice"),
+                    capability_requirements=["ReceiveDiceOwnership(Alice)"],
+                    authorization_checks=["new dice owner must remain active"],
+                    witness_refs=["membership_updated"],
+                    dispatch_outcome="accepted",
+                    notes=["ownership transfer happens after leave commit"],
+                ),
+            ]
+        )
+    if sample_id == "09_detach_todo":
+        envelopes.append(
+            MessageEnvelope(
+                envelope_id="detached_roll_request#1",
+                from_place="ParticipantPlace[Alice]",
+                to_place=game_place,
+                transport=local_transport,
+                payload_kind="transition",
+                payload_ref="detached_domain_action",
+                principal_claim=_principal_claim(
+                    "Alice",
+                    claimed_authority="GameAuthority.Player",
+                    claimed_capabilities=["DiceOwner(Alice)"],
+                ),
+                auth_evidence=None,
+                membership_epoch=runtime.registry.membership_epoch,
+                member_incarnation=_member_incarnation(runtime, "Alice"),
+                capability_requirements=["DiceOwner(Alice)"],
+                authorization_checks=["phase(SugorokuGame#1) != GamePhase.Detached"],
+                witness_refs=[],
+                dispatch_outcome="rejected",
+                notes=["deferred to Mirrorea lifecycle layer"],
+            )
+        )
+
+    return [envelope.to_json() for envelope in envelopes]
+
+
+def _finalize_result(
+    sample_id: str, result: dict[str, Any], runtime: PlaceRuntime | None = None
+) -> dict[str, Any]:
     result["term_signatures"] = _term_signatures(sample_id, result)
     result["layer_signatures"] = _layer_signatures(sample_id, result)
+    result["message_envelopes"] = _message_envelopes(sample_id, result, runtime)
     return result
 
 
@@ -762,7 +1205,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "place_model": "logical multi-place emulator in one OS process",
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "01_runtime_attach_game":
         runtime = _runtime_after_attach()
         result = _base_result(sample_id)
@@ -776,7 +1219,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": _require_game(runtime).snapshot(),
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "02_admin_start_reset":
         runtime = _runtime_running()
         result = _base_result(sample_id)
@@ -805,7 +1248,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": _require_game(runtime).snapshot(),
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "03_roll_publish_handoff":
         runtime = _runtime_after_alice_turn()
         game = _require_game(runtime)
@@ -832,7 +1275,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "turn_trace": list(runtime.turn_trace),
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "04_non_owner_roll_rejected":
         runtime = _runtime_after_alice_turn()
         result = _base_result(sample_id)
@@ -849,7 +1292,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 ],
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "05_late_join_history_visible":
         runtime = _runtime_after_alice_turn()
         runtime.add_place("ParticipantPlace[Dave]", "ParticipantPlace")
@@ -875,7 +1318,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "properties_passed": ["late_join_sees_published_history"],
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "06_leave_non_owner":
         runtime = _runtime_after_alice_turn()
         runtime.registry.mark_inactive("Carol")
@@ -905,7 +1348,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "properties_passed": ["stale_action_after_leave_is_rejected"],
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "07_owner_leave_reassign":
         runtime = _runtime_after_alice_turn()
         runtime.registry.mark_inactive("Carol")
@@ -935,7 +1378,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": game.snapshot(),
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     if sample_id == "08_reset_interleaving_model_check":
         result = _base_result(sample_id)
         result.update(model_check())
@@ -958,7 +1401,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "game": game.snapshot(),
             }
         )
-        return _finalize_result(sample_id, result)
+        return _finalize_result(sample_id, result, runtime)
     raise AssertionError(f"unhandled sample {sample_id}")
 
 
@@ -1067,6 +1510,27 @@ def closeout() -> dict[str, Any]:
         "model_check_properties": list(MODEL_CHECK_PROPERTIES),
         "signature_kinds": signature_kinds,
         "reserved_signature_kinds": ["message", "adapter", "layer"],
+        "message_envelope_lanes": [
+            "envelope_id",
+            "from_place",
+            "to_place",
+            "transport",
+            "payload_kind",
+            "payload_ref",
+            "principal_claim",
+            "auth_evidence",
+            "membership_epoch",
+            "member_incarnation",
+            "capability_requirements",
+            "authorization_checks",
+            "witness_refs",
+            "dispatch_outcome",
+            "notes",
+        ],
+        "auth_evidence_modes": ["none"],
+        "reserved_auth_evidence_modes": ["session_token", "signature"],
+        "transport_seams": ["local_queue"],
+        "reserved_transport_seams": ["loopback_socket", "network_link"],
         "layer_signature_kinds": layer_signature_kinds,
         "reserved_layer_signature_kinds": [
             "auth",
@@ -1082,6 +1546,7 @@ def closeout() -> dict[str, Any]:
             "--debug membership",
             "--debug verification",
             "--debug signatures",
+            "--debug envelopes",
             "--debug layers",
             "--format json",
         ],
@@ -1177,6 +1642,35 @@ def _format_signatures(result: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _format_envelopes(result: dict[str, Any]) -> str:
+    lines = ["MESSAGE ENVELOPES"]
+    for row in result.get("message_envelopes", []):
+        claim = row.get("principal_claim") or {}
+        auth = row.get("auth_evidence")
+        auth_kind = auth["kind"] if isinstance(auth, dict) else "none"
+        lines.append(
+            f"  - {row['envelope_id']} {row['from_place']} -> {row['to_place']} outcome={row['dispatch_outcome']}"
+        )
+        lines.append(
+            f"      payload: {row['payload_kind']}:{row['payload_ref']} transport={row['transport']}"
+        )
+        lines.append(
+            f"      principal: {claim.get('principal', '?')} authority={claim.get('claimed_authority', '?')} auth={auth_kind}"
+        )
+        lines.append(
+            f"      membership: epoch={row['membership_epoch']} incarnation={row['member_incarnation']}"
+        )
+        caps = ", ".join(row.get("capability_requirements") or []) or "none"
+        checks = ", ".join(row.get("authorization_checks") or []) or "none"
+        witnesses = ", ".join(row.get("witness_refs") or []) or "none"
+        lines.append(f"      capabilities: {caps}")
+        lines.append(f"      checks: {checks}")
+        lines.append(f"      witness_refs: {witnesses}")
+    if len(lines) == 1:
+        lines.append("  - none")
+    return "\n".join(lines)
+
+
 def _format_layers(result: dict[str, Any]) -> str:
     lines = ["LAYER SIGNATURES"]
     for row in result.get("layer_signatures", []):
@@ -1205,6 +1699,8 @@ def format_pretty(payload: Any, *, debug: str | None = None) -> str:
         return _format_verification(payload)
     if debug == "signatures":
         return _format_signatures(payload)
+    if debug == "envelopes":
+        return _format_envelopes(payload)
     if debug == "layers":
         return _format_layers(payload)
     sample = payload.get("sample")
@@ -1273,7 +1769,15 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("sample")
     run_parser.add_argument(
         "--debug",
-        choices=["summary", "turn-trace", "membership", "verification", "signatures", "layers"],
+        choices=[
+            "summary",
+            "turn-trace",
+            "membership",
+            "verification",
+            "signatures",
+            "envelopes",
+            "layers",
+        ],
         default=None,
     )
     run_parser.add_argument("--format", choices=["pretty", "json"], default="pretty")

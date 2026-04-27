@@ -25,6 +25,7 @@
 - ただし lowering / transport / failure / durability / policy は分ける
 - authoritative room を shared-space 全体の exhaustive default と同一視しない
 - authentication を transport に潰さない
+- helper-local current cut では `auth none` baseline、`membership_epoch` / `member_incarnation` freshness、`witness_refs` separate lane を visible にしてよい
 - visualization / telemetry を untyped debug leak にしない
 - `atomic_cut` を room-level durable commit にしない
 - system-wide source から place-specific program へ projection できる性質を future line の invariant として保つ

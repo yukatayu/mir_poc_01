@@ -33,6 +33,7 @@ Useful focused runs:
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug turn-trace
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification
@@ -75,6 +76,9 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
 - `signatures`
   - `TermSignature` first cut の helper-local inventory view です。effect / transition / witness / relation / property を
     evidence-oriented に並べ、final public visualization protocol と混同しないための current debug surface です。
+- `envelopes`
+  - `MessageEnvelope` / `AuthEvidence` / `PrincipalClaim` first cut の helper-local inventory view です。
+    current cut では `auth none` baseline を explicit に見せ、transport / membership / capability / witness を separate lane のまま読めます。
 - `layers`
   - `LayerSignature` first cut の helper-local inventory view です。current helper では `verification`、
     `runtime_trace`、`membership` layer だけを active に見せ、`auth` / `transport` / `telemetry` などは reserve に留めます。

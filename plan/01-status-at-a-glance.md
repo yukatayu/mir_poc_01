@@ -89,17 +89,18 @@
 - `docs/reports/0917-*` で phase 8 avatar fairy follow skeleton family と prototype boundary を close した
 - `docs/reports/0918-*` で `TermSignature registry / debug output` を close し、Sugoroku `--debug signatures` と clean near-end report/closeout inventory を追加した
 - `docs/reports/0919-*` で `LayerSignature system` を close し、helper-local / runtime report-local lane inventory を追加した
+- `docs/reports/0921-*` で `MessageEnvelope / Auth seam` を close し、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report-local `MessageEnvelope` inventory を追加した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next reopen point は `MessageEnvelope / Auth seam`
+- next reopen point は `VisualizationProtocol`
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` first cut を先に入れた上で、next semantic carrier package を `MessageEnvelope / Auth seam` と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` first cut を先に入れた上で、next semantic carrier package を `VisualizationProtocol` と読む
 - phase 8 representative sample 候補は `samples/not_implemented/avatar-fairy-follow/` に skeleton family を切り出したが、current active helper はまだない
-- package 5 以降は `MessageEnvelope / Auth seam`、`VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint`、network transport plan、compiler/backend/LLVM prep guardrail
+- package 6 以降は `VisualizationProtocol`、projection / placement、hot-plug patch / `AttachPoint`、network transport plan、compiler/backend/LLVM prep guardrail
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line
@@ -117,5 +118,6 @@
 - active current layer、sample progress discipline、Mirrorea future-axis carrier queue を 1 本の “実装済み” line に潰さない
 - `world` は current Sugoroku sample では host/server-side sugar として読み、Mir core primitive として既成事実化しない
 - authentication / authorization / membership / capability / witness / visualization / telemetry を transport や debug leak に潰さない
+- `auth none` baseline を final public auth protocol と混同せず、helper-local / report-local carrier の stop line を明記する
 - root disk 上の `target/` 膨張を放置せず、external workdir が使えるなら heavy disposable artifact をそこへ逃がす
 - old sample archive と current active sample の区別を、README / Documentation / progress / tasks / `samples_progress.md` / research_abstract で常に対にして書く

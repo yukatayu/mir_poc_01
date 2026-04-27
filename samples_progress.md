@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 17:03 JST
+Last updated: 2026-04-27 17:41 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、next `MessageEnvelope / Auth seam`, `VisualizationProtocol`, `Typed external boundary / adapter`
+Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、next `VisualizationProtocol`, `Typed external boundary / adapter`, `Projection / placement`
 
 ## Legend
 
@@ -58,6 +58,8 @@ Progress:
 | `LAY-03` | LayerSignature | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | runtime report inventory | 90 | positive | 2026-04-27 15:59 JST | `0919` | `transport_provider_boundary` lane |
 | `LAY-04` | LayerSignature | `samples/clean-near-end/order-handoff/06_auditable_authority_witness.mir` | runtime report inventory | 90 | positive | 2026-04-27 15:59 JST | `0919` | `auth_authority_witness` lane |
 | `LAY-05` | LayerSignature | `samples/clean-near-end/model-check/01_peterson_sc_pass.mir` | runtime report inventory | 90 | positive | 2026-04-27 15:59 JST | `0919` | `verification_model_check` lane |
+| `AUTH-01` | auth seam | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local envelope carrier | 75 | positive + negative | 2026-04-27 17:38 JST | `0921` | local queue baseline with `auth none`, membership freshness, capability refs, witness refs |
+| `AUTH-02` | auth seam | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | runtime report-local envelope carrier | 75 | positive | 2026-04-27 17:38 JST | `0921` | provider boundary envelope keeps transport / witness / auth split explicit |
 
 ## Base corpus / planned / spec-only matrix
 
@@ -65,7 +67,7 @@ Progress:
 |---|---|---|---|---:|---|---|---|---|
 | `FAIRY-01..06` | avatar follow | `samples/not_implemented/avatar-fairy-follow/` | planned skeleton | 10 | not yet | 2026-04-27 15:21 JST | `0917` | skeleton exists; no helper / runner yet |
 | `PH9` | typed external boundary | spec only | planned docs-first row | 1 | not yet | not yet | `0913`, `0920` | stdio を core primitive にしない boundary |
-| `PH10` | MessageEnvelope / auth seam | spec only | planned docs-first row | 1 | not yet | not yet | `0912`, `0913`, `0920` | auth / membership / witness split only; no carrier yet |
+| `PH10` | MessageEnvelope / auth seam | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs` | helper-local / report-local first cut | 75 | positive + negative | 2026-04-27 17:38 JST | `0912`, `0913`, `0920`, `0921` | `auth none` baseline、local queue / provider boundary、public auth contract deferred |
 | `PH12` | projection / placement | spec only | planned docs-first row | 1 | not yet | not yet | `0912`, `0913`, `0920` | source-to-place validity checklist remains future work |
 | `PH13` | network transport | spec only | planned docs-first row | 1 | not yet | not yet | `0913`, `0920` | no separate-process sample exists |
 | `PH15` | visualization / IDE | `mir_hilight.html`, helper debug modes | helper-local preview | 55 | partial | 2026-04-27 15:59 JST | `0910`, `0911`, `0913`, `0918`, `0920` | typed/redacted visualization not yet |
@@ -82,7 +84,7 @@ Progress:
 | `E2E-TERM-LAYER-INV` | source sample -> helper/runtime inventory | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures` and `--debug layers` | 90 | helper-local `TermSignature` / `LayerSignature` inventory floor | pass 2026-04-27 15:59 JST |
 | `E2E-AVATAR-FALLBACK` | attach -> follow -> fallback -> reject -> reacquire | planned | 10 | planned phase 8 route only | not yet |
 | `E2E-ADAPTER-BOUNDARY` | source -> adapter -> typed effect receipt/failure | planned | 1 | planned phase 9 route only | not yet |
-| `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | planned | 1 | planned phase 10 route only | not yet |
+| `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 75 | helper-local envelope carrier keeps auth / membership / capability / witness separate | pass 2026-04-27 17:38 JST |
 | `E2E-HOTPLUG-ATTACH` | patch -> compatibility -> attach -> activate | planned | 10 | planned phase 14 route only | not yet |
 | `E2E-PROJECTION` | system source -> place-specific projection -> equivalent trace | planned | 1 | planned phase 12 route only | not yet |
 
@@ -105,7 +107,7 @@ Progress:
 |---|---|---|---|---|
 | detach lifecycle is still an explicit TODO boundary | hot-plug | medium | CodeX | keep `SUG-09` visible until `AttachPoint` package exists |
 | phase 8 has skeleton files but still no active helper / runner | avatar follow | medium | CodeX | promote helper contract after `MessageEnvelope` / `Visualization` direction is clearer |
-| `MessageEnvelope / Auth seam` がまだ無く、auth / transport / membership / witness の分離は layer metadata 段階に留まる | auth / transport | high | CodeX | promote `MessageEnvelope / Auth seam` package |
+| final public `AuthEvidence` kind と real transport widening が未決 | auth / transport | medium | mixed gate | keep helper-local `auth none` baseline and reopen with Visualization / adapter / network packages |
 | no separate-process / network transport sample exists | network transport | medium | mixed gate | wait for envelope/auth seam and projection line |
 | mounted workdir exists but cargo registry cache / LLVM actual probe is not yet exercised | backend / storage | low | CodeX | run first backend / LLVM preparation package on `/mnt/mirrorea-work` |
 | repository taxonomy drift can reintroduce active/planned/generated confusion | docs / structure | medium | CodeX | keep `plan/19`, `samples/README.md`, `scripts/README.md`, `0920` report in sync |
@@ -114,6 +116,15 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 17:41 JST | `python3 scripts/check_source_hierarchy.py` | pass | required `23`, present `23`, missing `0` |
+| 2026-04-27 17:41 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 919 numbered report(s).` |
+| 2026-04-27 17:41 JST | `git diff --check` | pass | whitespace-clean after `0921` report and snapshot sync |
+| 2026-04-27 17:38 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime-side MessageEnvelope inventory tests included |
+| 2026-04-27 17:38 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | runtime report-local `message_envelopes` visible on provider boundary |
+| 2026-04-27 17:38 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | closeout emits `message_envelope_lanes`, `auth_evidence_kinds`, `transport_seams` |
+| 2026-04-27 17:38 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | pass | helper-local `message_envelopes` visible on local-queue baseline |
+| 2026-04-27 17:38 JST | `python3 scripts/sugoroku_world_samples.py check-all` | pass | 10 Sugoroku samples still pass with envelope carrier enabled |
+| 2026-04-27 17:38 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples` | pass | helper-side MessageEnvelope tests included |
 | 2026-04-27 17:03 JST | `python3 scripts/check_source_hierarchy.py` | pass | required `23`, present `23`, missing `0` |
 | 2026-04-27 17:03 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 918 numbered report(s).` |
 | 2026-04-27 17:03 JST | `git diff --check` | pass | report / snapshot sync after final reviewer fixes is whitespace-clean |

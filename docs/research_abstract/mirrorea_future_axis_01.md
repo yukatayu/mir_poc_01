@@ -40,6 +40,16 @@ Mirrorea full runtime、final public API、real network、final auth stack、fin
 ただし helper と runtime で current layer 名はまだ揃えていません。これは first cut であり、
 final public layer law schema を意味しません。
 
+さらに `MessageEnvelope / Auth seam` の first cut も close しました。
+
+- Sugoroku helper に `message_envelopes` と `--debug envelopes`
+- clean near-end report / closeout に `MessageEnvelope` inventory
+
+を追加し、current none-auth baseline のまま transport / auth / membership / capability / witness を
+separate lane で読めるようにしています。
+ここでの `auth none` は temporary repo-local baseline であり、session token / signature /
+federation protocol を fixed した意味ではありません。
+
 ## 主軸
 
 守るべき project axis は次です。
@@ -90,7 +100,8 @@ contract と effect を保った boundary です。
 - witness / audit
 
 current repo-local line では Sugoroku sample が membership epoch / incarnation / witness を先に示しており、
-future queue では `MessageEnvelope / Auth seam` として transport insertion seam を整理します。
+helper-local / report-local first cut では `MessageEnvelope` carrier で transport insertion seam を visible にしました。
+未決なのは final public `AuthEvidence` kind、real transport、session / signature schema です。
 
 ### visualization / telemetry
 
@@ -174,6 +185,7 @@ object attach/follow lifecycle を representative に検証する予定です。
 4. LayerSignature system
    - close 済み。helper-local current layer と runtime report-local lane の first cut まで actualize。
 5. MessageEnvelope / Auth seam
+   - close 済み。helper-local / report-local first cut まで actualize。
 6. VisualizationProtocol
 7. Sugoroku vertical slice hardening
 8. Avatar fairy follow slice

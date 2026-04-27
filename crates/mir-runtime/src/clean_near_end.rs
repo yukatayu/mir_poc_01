@@ -695,6 +695,41 @@ pub struct LayerSignature {
     pub laws: Vec<String>,
 }
 
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct PrincipalClaim {
+    pub principal: String,
+    pub participant_place: String,
+    pub claimed_authority: String,
+    pub claimed_capabilities: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct AuthEvidence {
+    pub kind: String,
+    pub subject: String,
+    pub issuer: String,
+    pub bindings: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct MessageEnvelope {
+    pub envelope_id: String,
+    pub from_place: String,
+    pub to_place: String,
+    pub transport: String,
+    pub payload_kind: String,
+    pub payload_ref: String,
+    pub principal_claim: PrincipalClaim,
+    pub auth_evidence: Option<AuthEvidence>,
+    pub membership_epoch: u64,
+    pub member_incarnation: u64,
+    pub capability_requirements: Vec<String>,
+    pub authorization_checks: Vec<String>,
+    pub witness_refs: Vec<String>,
+    pub dispatch_outcome: String,
+    pub notes: Vec<String>,
+}
+
 #[derive(Debug, Clone, Serialize)]
 pub struct CleanNearEndSampleReport {
     pub sample: String,
@@ -722,6 +757,7 @@ pub struct CleanNearEndSampleReport {
     pub visible_history: Vec<String>,
     pub term_signatures: Vec<TermSignature>,
     pub layer_signatures: Vec<LayerSignature>,
+    pub message_envelopes: Vec<MessageEnvelope>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -745,6 +781,11 @@ pub struct CleanNearEndCloseout {
     pub lean_roots: Vec<String>,
     pub signature_kinds: Vec<String>,
     pub reserved_signature_kinds: Vec<String>,
+    pub message_envelope_lanes: Vec<String>,
+    pub auth_evidence_kinds: Vec<String>,
+    pub reserved_auth_evidence_kinds: Vec<String>,
+    pub transport_seams: Vec<String>,
+    pub reserved_transport_seams: Vec<String>,
     pub layer_signatures: Vec<LayerSignature>,
     pub layer_signature_lanes: Vec<String>,
     pub reserved_layer_signature_names: Vec<String>,
@@ -824,6 +865,58 @@ fn layer_signature(
     }
 }
 
+fn principal_claim(
+    principal: &str,
+    claimed_authority: &str,
+    claimed_capabilities: &[&str],
+) -> PrincipalClaim {
+    PrincipalClaim {
+        principal: principal.to_string(),
+        participant_place: format!("ParticipantPlace[{principal}]"),
+        claimed_authority: claimed_authority.to_string(),
+        claimed_capabilities: claimed_capabilities
+            .iter()
+            .map(|value| (*value).to_string())
+            .collect(),
+    }
+}
+
+fn message_envelope(
+    envelope_id: &str,
+    from_place: &str,
+    to_place: &str,
+    transport: &str,
+    payload_kind: &str,
+    payload_ref: &str,
+    principal_claim: PrincipalClaim,
+    membership_epoch: u64,
+    member_incarnation: u64,
+    capability_requirements: &[&str],
+    authorization_checks: &[&str],
+    witness_refs: &[&str],
+    dispatch_outcome: &str,
+    notes: &[&str],
+) -> MessageEnvelope {
+    let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
+    MessageEnvelope {
+        envelope_id: envelope_id.to_string(),
+        from_place: from_place.to_string(),
+        to_place: to_place.to_string(),
+        transport: transport.to_string(),
+        payload_kind: payload_kind.to_string(),
+        payload_ref: payload_ref.to_string(),
+        principal_claim,
+        auth_evidence: None,
+        membership_epoch,
+        member_incarnation,
+        capability_requirements: collect(capability_requirements),
+        authorization_checks: collect(authorization_checks),
+        witness_refs: collect(witness_refs),
+        dispatch_outcome: dispatch_outcome.to_string(),
+        notes: collect(notes),
+    }
+}
+
 fn layer_signature_lanes() -> Vec<String> {
     [
         "requires",
@@ -832,6 +925,29 @@ fn layer_signature_lanes() -> Vec<String> {
         "checks",
         "emits",
         "laws",
+    ]
+    .into_iter()
+    .map(|lane| lane.to_string())
+    .collect()
+}
+
+fn message_envelope_lanes() -> Vec<String> {
+    [
+        "envelope_id",
+        "from_place",
+        "to_place",
+        "transport",
+        "payload_kind",
+        "payload_ref",
+        "principal_claim",
+        "auth_evidence",
+        "membership_epoch",
+        "member_incarnation",
+        "capability_requirements",
+        "authorization_checks",
+        "witness_refs",
+        "dispatch_outcome",
+        "notes",
     ]
     .into_iter()
     .map(|lane| lane.to_string())
@@ -974,6 +1090,83 @@ fn closeout_layer_signatures() -> Vec<LayerSignature> {
         }
     }
     signatures.into_values().collect()
+}
+
+fn message_envelopes_for_spec(spec: &CleanNearEndSampleSpec) -> Vec<MessageEnvelope> {
+    match spec.id.as_str() {
+        "05_delegated_rng_service" => vec![
+            message_envelope(
+                "provider_request#1",
+                "ParticipantPlace[Alice]",
+                "ProviderPlace[AuthorityRng]",
+                "provider_boundary",
+                "effect_request",
+                "delegated_rng_roll",
+                principal_claim(
+                    "Alice",
+                    "FingerprintAuthority.Releaser",
+                    &["RequestDelegatedRngRoll", "PublishProviderReceipt"],
+                ),
+                0,
+                0,
+                &["RequestDelegatedRngRoll", "PublishProviderReceipt"],
+                &[
+                    "effect row { rng, witness } <= { rng, witness, publish }",
+                    "requires witness(provider_receipt)",
+                ],
+                &["provider_receipt"],
+                "accepted",
+                &[
+                    "auth none baseline on repo-local provider boundary",
+                    "transport and witness remain separate lanes",
+                ],
+            ),
+            message_envelope(
+                "provider_receipt#1",
+                "ProviderPlace[AuthorityRng]",
+                "ParticipantPlace[Alice]",
+                "provider_boundary",
+                "witness_receipt",
+                "provider_receipt",
+                principal_claim(
+                    "Alice",
+                    "FingerprintAuthority.Releaser",
+                    &["ObserveProviderReceipt"],
+                ),
+                0,
+                0,
+                &["ObserveProviderReceipt"],
+                &["receipt stays distinct from later room mutation authority"],
+                &["provider_receipt"],
+                "accepted",
+                &["provider output is not itself room-state mutation"],
+            ),
+        ],
+        "06_auditable_authority_witness" => vec![message_envelope(
+            "audit_trace_request#1",
+            "ParticipantPlace[Alice]",
+            "AuditPlace[AuthorityTrace]",
+            "audit_trace_boundary",
+            "witness_trace",
+            "audit(draw_pub)",
+            principal_claim(
+                "Alice",
+                "FingerprintAuthority.Admin",
+                &["AuditAuthorityWitness", "ObserveAuthorityTrace"],
+            ),
+            0,
+            0,
+            &["AuditAuthorityWitness", "ObserveAuthorityTrace"],
+            &["requires witness(draw_pub)", "no_hidden_authority"],
+            &["draw_pub"],
+            "accepted",
+            &[
+                "authority witness is evidence, not authentication",
+                "visualization stays downstream of witness production",
+            ],
+        )],
+        _ => Vec::new(),
+    }
 }
 
 pub fn clean_near_end_samples_root() -> PathBuf {
@@ -2218,6 +2411,7 @@ pub fn run_clean_near_end_sample(
         visible_history: spec.visible_history.clone(),
         term_signatures: term_signatures_for_spec(&spec, &source),
         layer_signatures: spec.layer_signatures.clone(),
+        message_envelopes: message_envelopes_for_spec(&spec),
     };
 
     match spec.family {
@@ -2339,6 +2533,20 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
             "message".to_string(),
             "adapter".to_string(),
             "layer".to_string(),
+        ],
+        message_envelope_lanes: message_envelope_lanes(),
+        auth_evidence_kinds: vec!["none".to_string()],
+        reserved_auth_evidence_kinds: vec![
+            "session_token".to_string(),
+            "signature".to_string(),
+        ],
+        transport_seams: vec![
+            "provider_boundary".to_string(),
+            "audit_trace_boundary".to_string(),
+        ],
+        reserved_transport_seams: vec![
+            "loopback_socket".to_string(),
+            "network_link".to_string(),
         ],
         layer_signatures: closeout_layer_signatures(),
         layer_signature_lanes: layer_signature_lanes(),

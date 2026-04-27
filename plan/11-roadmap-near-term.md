@@ -8,26 +8,25 @@
 - `docs/reports/0916-*` は Sugoroku per-sample alignment closeout、`docs/reports/0917-*` は avatar fairy follow sample-plan closeout を表す
 - `docs/reports/0918-*` は `TermSignature registry / debug output` closeout を表す
 - `docs/reports/0919-*` は `LayerSignature system` first-cut closeout を表す
-- current promoted next package は `MessageEnvelope / Auth seam`
-- next semantic carrier package は `VisualizationProtocol`
+- `docs/reports/0921-*` は `MessageEnvelope / Auth seam` first-cut closeout を表す
+- current promoted next package は `VisualizationProtocol`
+- next docs-first package は `Typed external boundary / adapter` sample plan
 
 ## current promoted queue
 
-1. `MessageEnvelope / Auth seam`
-   - transport、auth、membership、capability、witness を分けた envelope carrier を置く
-2. `VisualizationProtocol` first implementation
+1. `VisualizationProtocol` first implementation
    - static / runtime view、label / authority / redaction、typed telemetry の first cut を置く
-3. `Typed external boundary / adapter` sample plan
+2. `Typed external boundary / adapter` sample plan
    - phase 9 representative sample、adapter failure、debug label restriction を sample-first に整理する
-4. `Projection / placement plan`
+3. `Projection / placement plan`
    - system-wide source から server / participant / adapter / visualizer へ projection する validity line を整理する
-5. `Hot-plug Patch / AttachPoint`
+4. `Hot-plug Patch / AttachPoint`
    - `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration contract を整理する
-6. `Network transport` plan
+5. `Network transport` plan
    - separate-process / loopback / reconnect / transport failure explicit path を docs-first に置く
-7. `Compiler/backend/LLVM preparation` guardrail
+6. `Compiler/backend/LLVM preparation` guardrail
    - external workdir、cache placement、detach-safe cleanup、minimal probe を small VPS 前提で固める
-8. `hands-on docs / closeout`
+7. `hands-on docs / closeout`
    - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation と skip reason を固定する
 
 ## mixed gate

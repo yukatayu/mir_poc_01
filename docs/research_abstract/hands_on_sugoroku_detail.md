@@ -397,6 +397,7 @@ ActionRecord
 - `debug summary`: world/game の短い状態表示です。
 - `debug turn-trace`: turn の event trace です。
 - `debug signatures`: effect / transition / witness / relation / property の `TermSignature` inventory です。
+- `debug envelopes`: transport / auth / membership / capability / witness を分けて見る `MessageEnvelope` inventory です。
 - `debug layers`: `verification` / `runtime_trace` / `membership` の `LayerSignature` inventory です。
 - `debug membership`: membership registry の表示です。
 - `debug verification`: static/runtime/model-check の確認項目です。
@@ -417,6 +418,7 @@ python3 scripts/sugoroku_world_samples.py run 00_world_bootstrap
 python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers
 python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
 python3 scripts/sugoroku_world_samples.py model-check
@@ -457,6 +459,16 @@ LAYER SIGNATURES
       requires: sample_transition(take_turn_alice)
 ```
 
+`--debug envelopes` は次のような helper-local inventory を出します。
+
+```text
+MESSAGE ENVELOPES
+  - roll_request#1 ParticipantPlace[Alice] -> SugorokuGamePlace#1 outcome=accepted
+      payload: transition:take_turn_alice transport=local_queue
+      principal: Alice authority=GameAuthority.Player auth=none
+      membership: epoch=0 incarnation=0
+```
+
 ## json output
 
 ```json
@@ -495,4 +507,5 @@ LAYER SIGNATURES
 - final parser grammar remains deferred。
 - final public API remains deferred。
 - `--debug signatures` は helper-local evidence view であり、final public signature schema / visualization protocol ではない。
+- `--debug envelopes` も helper-local evidence view であり、final public message schema / auth protocol ではない。
 - `--debug layers` も helper-local evidence view であり、final public layer law schema ではない。

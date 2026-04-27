@@ -1152,7 +1152,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Avatar fairy follow sample plan` は docs-first package として close し、phase 8 planned skeleton family を `samples/not_implemented/avatar-fairy-follow/` に切り出した。
 - `TermSignature registry / debug output` は helper-local / report-local package として close し、Sugoroku `--debug signatures` と clean near-end report / closeout inventory を actualize した。
 - `LayerSignature system` は helper-local / report-local package として close し、Sugoroku `--debug layers` と clean near-end `layer_signatures` inventory を actualize した。
-- current promoted next package は `MessageEnvelope / Auth seam` である。
+- `MessageEnvelope / Auth seam` は helper-local / report-local package として close し、Sugoroku `message_envelopes` / `--debug envelopes` と clean near-end `MessageEnvelope` inventory を actualize した。
+- current promoted next package は `VisualizationProtocol` である。
 
 ## 2026-04-27 repository-structure staging addendum
 

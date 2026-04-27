@@ -62,6 +62,7 @@
 - `hands_on_sugoroku_04_roll_publish_handoff.md`
 - `hands_on_sugoroku_05_join_leave.md`
 - `hands_on_sugoroku_06_model_check.md`
+- `hands_on_sugoroku_07_message_envelope_auth.md`
 - `hands_on_sugoroku_detail.md`
 - `hands_on_sugoroku_sample_matrix.md`
 - `avatar_fairy_follow_plan_01.md`
@@ -89,6 +90,7 @@
 - Lean は small proof foundations と generated stub corpus に分かれる
 - Sugoroku world vertical slice は single OS process logical multi-place emulator として動く
 - 次の promoted line は Mirrorea future-axis であり、typed external effect boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を docs-first / repo-local queue として整理する
+- `MessageEnvelope / Auth seam` の first cut は close 済みであり、current helper/report-local carrier は `auth none` baseline を explicit に見せる
 - avatar fairy follow は next representative slice 候補であり、current active sample ではまだない
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 planned skeleton family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
 

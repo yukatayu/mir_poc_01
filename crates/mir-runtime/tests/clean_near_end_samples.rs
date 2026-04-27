@@ -183,6 +183,40 @@ fn clean_sample_authority_witness_emits_auth_layer_signature() {
 }
 
 #[test]
+fn clean_sample_delegated_rng_service_emits_message_envelopes() {
+    let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
+    let envelope = report
+        .message_envelopes
+        .iter()
+        .find(|envelope| envelope.envelope_id == "provider_request#1")
+        .expect("provider request envelope");
+    assert_eq!(envelope.auth_evidence, None);
+    assert_eq!(envelope.transport, "provider_boundary");
+    assert!(envelope
+        .capability_requirements
+        .contains(&"RequestDelegatedRngRoll".to_string()));
+    assert!(envelope
+        .witness_refs
+        .contains(&"provider_receipt".to_string()));
+}
+
+#[test]
+fn clean_sample_authority_witness_emits_auth_envelope() {
+    let report = run_clean_near_end_sample("06_auditable_authority_witness").unwrap();
+    let envelope = report
+        .message_envelopes
+        .iter()
+        .find(|envelope| envelope.envelope_id == "audit_trace_request#1")
+        .expect("audit trace envelope");
+    assert_eq!(envelope.dispatch_outcome, "accepted");
+    assert_eq!(envelope.auth_evidence, None);
+    assert_eq!(envelope.principal_claim.principal, "Alice");
+    assert!(envelope
+        .authorization_checks
+        .contains(&"requires witness(draw_pub)".to_string()));
+}
+
+#[test]
 fn clean_model_check_sample_emits_verification_layer_signature() {
     let report = run_clean_near_end_sample("01_peterson_sc_pass").unwrap();
     let layer = report
@@ -246,4 +280,19 @@ fn clean_near_end_closeout_records_layer_signature_inventory() {
     assert!(closeout
         .reserved_layer_signature_names
         .contains(&"typed_telemetry_emitter".to_string()));
+}
+
+#[test]
+fn clean_near_end_closeout_records_message_envelope_inventory() {
+    let closeout = build_clean_near_end_closeout().unwrap();
+    assert!(closeout
+        .message_envelope_lanes
+        .contains(&"auth_evidence".to_string()));
+    assert!(closeout.auth_evidence_kinds.contains(&"none".to_string()));
+    assert!(closeout
+        .reserved_auth_evidence_kinds
+        .contains(&"session_token".to_string()));
+    assert!(closeout
+        .transport_seams
+        .contains(&"provider_boundary".to_string()));
 }

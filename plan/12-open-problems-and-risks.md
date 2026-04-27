@@ -14,7 +14,7 @@
 | cut-family conflation | semantics | OPEN | `atomic_cut` を global mutex / durable commit と誤読する | local finalization nucleus に固定 |
 | typed overclaim | type / proof | OPEN | finite-index first layer を full dependent core と誤読する | first fragment と still-later line を分ける |
 | theorem / model-check overclaim | proof workflow | OPEN | generated stub / model-check carrier を production binding と誤読する | repo-local bridge と public contract を分ける |
-| auth-transport collapse | Mirrorea layering | NEW | envelope / adapter 設計で authentication を transport に潰す | `MessageEnvelope / AuthEvidence` seam を separate package にする |
+| auth-transport collapse | Mirrorea layering | 低下したが継続監視 | envelope / adapter 設計で authentication を transport に潰す | `MessageEnvelope / AuthEvidence` seam の helper-local / report-local first cut を維持し、final public widening を後段に残す |
 | visualization / telemetry leak | observability | NEW | debug output が label / authority / redaction を回避する | typed visualization / telemetry line を package 化する |
 | place / participant / world conflation | sample / docs | NEW | participant、Place、world sugar が core primitive として固定される | `Place` distinction と world-sugar note を README / Documentation / plan に残す |
 | goal drift via local optimization | roadmap | NEW | Sugoroku 現行 floor を Mirrorea full runtime 完了と誤読する | project axis と stop line を progress / tasks / docs に明記する |
@@ -28,7 +28,7 @@
 ## current open problems
 
 - `TermSignature` first cut の exact granularity、reserved kind の扱い、`LayerSignature` law surface
-- `MessageEnvelope` / `AuthEvidence` / transport insertion seam の最小 shape
+- `MessageEnvelope` / `AuthEvidence` / transport insertion seam の final public shape
 - visualization / telemetry security の label / authority / redaction / retention model
 - projection / placement validity report と world-sugar boundary
 - `Patch Req Prov Δ` / `AttachPoint` / activation cut / migration contract

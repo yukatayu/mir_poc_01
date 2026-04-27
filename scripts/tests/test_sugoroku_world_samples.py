@@ -173,6 +173,57 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("membership", result["layer_signature_kinds"])
         self.assertIn("auth", result["reserved_layer_signature_kinds"])
 
+    def test_roll_publish_handoff_exposes_message_envelopes(self) -> None:
+        result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
+
+        envelopes = {row["envelope_id"]: row for row in result["message_envelopes"]}
+        self.assertIn("roll_request#1", envelopes)
+        self.assertIn("handoff_notice#1", envelopes)
+        self.assertEqual(envelopes["roll_request#1"]["auth_evidence"], None)
+        self.assertEqual(envelopes["roll_request#1"]["transport"], "local_queue")
+        self.assertIn(
+            "DiceOwner(Alice)",
+            envelopes["roll_request#1"]["capability_requirements"],
+        )
+        self.assertIn(
+            "draw_pub#1",
+            envelopes["handoff_notice#1"]["witness_refs"],
+        )
+        self.assertEqual(
+            envelopes["handoff_notice#1"]["principal_claim"]["principal"], "Alice"
+        )
+
+    def test_non_owner_rejection_exposes_envelope_reject_path(self) -> None:
+        result = sugoroku_world_samples.run_sample("04_non_owner_roll_rejected")
+
+        self.assertEqual(len(result["message_envelopes"]), 1)
+        envelope = result["message_envelopes"][0]
+        self.assertEqual(envelope["dispatch_outcome"], "rejected")
+        self.assertIn(
+            "dice_owner(SugorokuGame#1) = Carol",
+            envelope["authorization_checks"],
+        )
+        self.assertIn("actual current owner is Bob", envelope["notes"])
+
+    def test_envelopes_debug_prints_message_envelope_inventory(self) -> None:
+        pretty = sugoroku_world_samples.format_pretty(
+            sugoroku_world_samples.run_sample("03_roll_publish_handoff"),
+            debug="envelopes",
+        )
+
+        self.assertIn("MESSAGE ENVELOPES", pretty)
+        self.assertIn("roll_request#1", pretty)
+        self.assertIn("auth=none", pretty)
+        self.assertIn("witness_refs: draw_pub#1", pretty)
+
+    def test_closeout_records_message_envelope_debug_mode(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertIn("--debug envelopes", result["debug_output_modes"])
+        self.assertIn("none", result["auth_evidence_modes"])
+        self.assertIn("session_token", result["reserved_auth_evidence_modes"])
+        self.assertIn("local_queue", result["transport_seams"])
+
     def test_cli_run_json_prints_json_payload(self) -> None:
         buffer = StringIO()
         with mock.patch("sys.stdout", buffer):
