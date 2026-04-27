@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 21:00 JST
+Last updated: 2026-04-27 21:19 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、`0926` Network transport close、`0927` Compiler/backend/LLVM prep close、`0928` hands-on closeout close、`0929` network transport loopback preview close、`0930` avatar representative slice close、`0931` hot-plug executable widening close、`0932` network transport helper-local canaries close、`0933` avatar residual widening close、next `cross-package sweep`
+Current active packages: promoted `FAIRY-05 residual reacquire design`、reopen `Typed external boundary / adapter executable widening`
 
 ## Legend
 
@@ -143,6 +143,16 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 21:19 JST | `python3 scripts/check_source_hierarchy.py` | pass | final cross-package sweep sync still keeps required `23`, present `23`, missing `0` |
+| 2026-04-27 21:19 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 935 numbered report(s).` after `0934`..`0937` sync |
+| 2026-04-27 21:19 JST | `git diff --check` | pass | whitespace-clean after cross-package sweep final follow-up cleanup |
+| 2026-04-27 21:16 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 934 numbered report(s).` after `0934`/`0935` sync |
+| 2026-04-27 21:16 JST | `git diff --check` | pass | whitespace-clean after cross-package sweep follow-up cleanup |
+| 2026-04-27 21:10 JST | `python3 scripts/avatar_follow_samples.py closeout --format json` | pass | widened avatar slice / single residual `FAIRY-05` still visible |
+| 2026-04-27 21:10 JST | `python3 scripts/network_transport_samples.py closeout --format json` | pass | helper-local `NET-02..05` closeout still matches queue recut |
+| 2026-04-27 21:10 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | `hotplug_lifecycle` / `message_envelopes` / `visualization_views` stay visible |
+| 2026-04-27 21:10 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | clean near-end runtime closeout still matches report-local carrier inventory |
+| 2026-04-27 21:10 JST | `python3 scripts/check_source_hierarchy.py` | pass | required `23`, present `23`, missing `0` before final docs sync |
 | 2026-04-27 21:00 JST | `python3 scripts/check_source_hierarchy.py` | pass | reviewer follow-up after avatar taxonomy cleanup still keeps required `23`, present `23`, missing `0` |
 | 2026-04-27 21:00 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 931 numbered report(s).` after reviewer follow-up |
 | 2026-04-27 21:00 JST | `git diff --check` | pass | whitespace-clean after reviewer follow-up cleanup |

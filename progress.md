@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-27 21:00 JST
+最終更新: 2026-04-27 21:19 JST
 
 ## この文書について
 
@@ -28,7 +28,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` が current layer-aware repo map と staged migration 読みを与える
 - Mirrorea future lane:
-  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries を close し、next promoted package を cross-package sweep と読む
+  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep を close し、next promoted package を `FAIRY-05` residual reacquire design と読む
 - reserve integration lane:
   real transport、final public contract、packaging、final public auth / visualization / projection / hot-plug surface は still later
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 2026-04-27 時点の repo は、
 **clean near-end current layer と Sugoroku world / avatar follow widened representative slice を runnable floor として維持しつつ、
 phase/sample/progress/storage foundation を runnable dashboard に押し上げ、
-hot-plug helper-local lifecycle canary と transport helper-local canary に `FAIRY-02` visibility-loss fallback 昇格を接続し、次の cross-package sweep へ進む**
+active evidence / planned family / mixed gate を cross-package sweep で揃えた上で、次の `FAIRY-05` residual reacquire design へ進む**
 段階です。
 
 ただし、次はまだ終わっていません。
@@ -60,7 +60,7 @@ hot-plug helper-local lifecycle canary と transport helper-local canary に `FA
 | Sugoroku world / current shared-space sample | 85% | 87% | 73% | runnable vertical slice、per-sample dashboard、hot-plug helper-local lifecycle canary は揃ったが、real transport / durable commit は未着手 |
 | samples progress dashboard | 86% | 92% | 73% | phase 0〜16 matrix に加え、Sugoroku per-sample row と avatar representative slice row まで reader-facing に整理した |
 | storage / external workdir guardrail | 72% | 83% | 76% | mount / `target/` cutover / `CARGO_HOME` probe / LLVM path readiness は入ったが、actual LLVM build はまだ |
-| Mirrorea future axis | 80% | 92% | 62% | `NET-01..05` helper-local transport canary、avatar widened representative slice、hot-plug helper-local lifecycle canary を actualize し、next は cross-package sweep |
+| Mirrorea future axis | 80% | 92% | 63% | `NET-01..05` helper-local transport canary、avatar widened representative slice、hot-plug helper-local lifecycle canary、cross-package sweep を actualize し、next は `FAIRY-05` residual reacquire design |
 
 ## macro phase map
 
@@ -89,7 +89,7 @@ hot-plug helper-local lifecycle canary と transport helper-local canary に `FA
 | samples progress dashboard | `S4-S5` | phase 0〜16 matrix、Sugoroku per-sample alignment、avatar representative slice row、recent validation、storage row | future rows の helper actualization、phase 9 以降の sample ladder |
 | repository structure / taxonomy | `S3-S4` | layer-aware repo map、sample/script taxonomy docs、no-risk-first staged migration plan | risky crate/path move をしないまま staged physical migration 条件を固める |
 | storage / detachable workdir guardrail | `S5` | audit、env script、detach prepare、cleanup script、mounted workdir、`target/` cutover、`CARGO_HOME` probe、LLVM path readiness | actual LLVM build、backend choice、broader generated-artifact policy |
-| typed external effect / adapter boundary | `S3-S4` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / transport helper-local canary current anchor | dedicated adapter helper / cross-package sweep |
+| typed external effect / adapter boundary | `S3-S4` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / transport helper-local canary current anchor | dedicated adapter helper / `EXT-01..05` executable widening |
 | layer composition / auth / visualization / projection / hot-plug | `S5` | package queue、stop line、phase 8 representative slice、`TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 12 projection validity checklist、phase 14 hot-plug helper-local lifecycle canary、phase 13 transport widening invariant を actualize | executable transport widening と real attachpoint / migration residual |
 
 ## 着手可能 / 要仕様確認 / 後段依存
@@ -170,3 +170,4 @@ hot-plug helper-local lifecycle canary と transport helper-local canary に `FA
 - 2026-04-27 20:03 JST — `HotPlug Patch / AttachPoint executable widening` として Sugoroku helper に `hotplug_lifecycle`、`--debug hotplug`、`hot-plug` layer inventory、attach / detach telemetry-view、`detach_request#1` auth-none envelope canary を揃え、snapshot docs / `plan/21` / specs / report を同期した。validation は Python unittest、focused hot-plug run、Sugoroku closeout、`check-all` local/loopback、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `Network transport` `NET-02..05` に進めた。
 - 2026-04-27 20:27 JST — `Network transport helper-local canaries` として `scripts/network_transport_samples.py`、`samples/clean-near-end/network-transport/README.md`、`docs/hands_on/network_transport_canaries_01.md` を追加し、`NET-02` subprocess JSON bridge、`NET-03` stale reconnect reject、`NET-04` typed transport failure matrix、`NET-05` redacted route trace を helper-local evidence surface に actualize した。validation は dedicated unittest、focused transport runs、transport closeout、Sugoroku loopback floor、runtime provider-boundary anchor、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を avatar residual widening に進めた。
 - 2026-04-27 20:55 JST — `Avatar fairy follow residual widening` として `FAIRY-02` を `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` の active helper canary に昇格させ、`samples/not_implemented/avatar-fairy-follow/` を `FAIRY-05` の single residual planned family に縮めた。validation は avatar unittest、focused `FAIRY-02` / `FAIRY-06` run、avatar `check-all` / closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `cross-package sweep` に進めた。
+- 2026-04-27 21:19 JST — `cross-package sweep` として avatar / transport / hot-plug / dashboard / closeout landing page / next queue を recut し、active evidence / planned family / mixed gate を整理した。validation は avatar / transport / Sugoroku / runtime closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、reviewer follow-up reports `0935` / `0936` / `0937` の指摘も反映した上で、next promoted package を `FAIRY-05` residual reacquire design に確定した。

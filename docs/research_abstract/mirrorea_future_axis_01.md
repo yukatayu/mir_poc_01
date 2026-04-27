@@ -242,10 +242,10 @@ avatar fairy follow では、`scripts/avatar_follow_samples.py` と
 
 現在の promoted queue は次です。
 
-1. cross-package sweep
-   - transport / avatar / hot-plug / dashboard / report queue を current snapshot に揃える
-2. `FAIRY-05` residual reacquire design
+1. `FAIRY-05` residual reacquire design
    - state-timeline / anchor-switch carrier が本当に必要かを判断する
+2. Typed external boundary / adapter executable widening
+   - `EXT-01..05` ladder から最小の dedicated adapter helper cut を actualize する
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 
