@@ -1,12 +1,12 @@
 # progress
 
-最終更新: 2026-04-27 22:52 JST
+最終更新: 2026-04-27 23:26 JST
 
 ## この文書について
 
 - この文書は repo 全体の **rough progress snapshot** です。
 - 規範判断の正本は `specs/`、長期参照は `plan/`、runnable sample dashboard は `samples_progress.md`、詳細証跡は `docs/reports/` にあります。
-- 進捗率は **repo-local alpha-ready current layer**、**Mirrorea future-axis docs-first integration**、**phase/sample/progress/storage foundation** に scoped した rough estimate であり、final public completion を意味しません。
+- 進捗率は **repo-local alpha-ready current layer** と **Mirrorea future-axis docs-first / sample-first integration** に scoped した rough estimate であり、final public completion を意味しません。
 
 ## project axis
 
@@ -19,164 +19,93 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## current snapshot
 
-- execution lane:
-  `Macro 4` は active clean near-end suite と Sugoroku world vertical slice を中心に runnable
-- theory / proof lane:
-  `Macro 5` は finite-index typing / order-handoff / model-check second line / Lean foundation の repo-local alpha floor に到達
-- sample/progress/storage lane:
-  `samples_progress.md` は phase 0〜16 matrix、Sugoroku per-sample alignment、avatar widened representative slice row、mounted external workdir row、`CARGO_HOME` / LLVM probe row を current dashboard として持つ
-- repository-structure lane:
-  `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` が current layer-aware repo map と staged migration 読みを与える
-- Mirrorea future lane:
-  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep、`FAIRY-05` residual reacquire design review closeout、typed external synthetic preview helper widening、projection / placement executable widening を close し、next promoted package を Typed external boundary residual planned family review と読む
-- reserve integration lane:
-  real transport、final public contract、packaging、final public auth / visualization / projection / hot-plug surface は still later
+- active floor:
+  clean near-end suite、Sugoroku world vertical slice、avatar follow representative slice は runnable
+- future-axis floor:
+  `TermSignature`、`LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary までは actualize 済み
+- docs / planning floor:
+  `samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md`、`plan/19-repository-map-and-taxonomy.md` が current snapshot の入口として揃っている
+- current promoted next line:
+  Typed external boundary residual planned family review
+- next reopen point:
+  Projection / placement residual emitted-program gate
+- still later:
+  real transport、final public auth / visualization / projection / hot-plug API、packaging / FFI / engine adapter、actual LLVM build
 
 ## 現在の一言での読み
 
-2026-04-27 時点の repo は、
-**clean near-end current layer と Sugoroku world / avatar follow widened representative slice を runnable floor として維持しつつ、
-phase/sample/progress/storage foundation を runnable dashboard に押し上げ、
-active evidence / planned family / mixed gate を cross-package sweep と `FAIRY-05` docs-first design review closeout で揃え、phase 9 typed external boundary では planned source stub を読む `EXT-03` / `EXT-04` synthetic preview helper subset だけを evidence floor に保ちつつ、phase 12 projection / placement では Sugoroku helper `projection_view` と runtime report-local `cross_place_projection` により place split preview floor を actualize し、次の Typed external boundary residual planned family review へ進む**
-段階です。
-
-ただし、次はまだ終わっていません。
-
-- final public parser grammar
-- final public parser / checker / runtime / verifier API
-- final public theorem / model-check / witness-provider contract
-- final public auth / visualization / projection / hot-plug API
-- real network / multi-server consensus / durable distributed commit
-- packaging / installed binary / FFI / engine adapter
+2026-04-27 時点の repo は、**current-L2 と current shared-space sample の runnable floor を維持したまま、Mirrorea future-axis を helper-local / report-local preview と docs-first gate で段階 actualize し、次に phase 9 residual planned family review と phase 12 residual emitted-program gate を整理する段階**です。
 
 ## 3 軸 progress
 
 | layer / track | 論理仕様 | ユーザ向け仕様 | 実装 / 運用 | 現在の読み |
 |---|---:|---:|---:|---|
-| Mir core / current-L2 | 93% | 90% | 81% | finite-index current layer は強いが、public parser / API は未完 |
-| order / handoff / cut family | 92% | 95% | 80% | high-level relation line は動くが、public wording と contract は残る |
-| theorem / model-check boundary | 95% | 94% | 89% | repo-local bridge は強いが、production binding は未完 |
-| Lean foundations / proof spine | 89% | 92% | 69% | small proof fragment はあるが、full discharge ではない |
-| Sugoroku world / current shared-space sample | 85% | 87% | 73% | runnable vertical slice、per-sample dashboard、hot-plug helper-local lifecycle canary は揃ったが、real transport / durable commit は未着手 |
-| samples progress dashboard | 86% | 92% | 73% | phase 0〜16 matrix に加え、Sugoroku per-sample row と avatar representative slice row まで reader-facing に整理した |
-| storage / external workdir guardrail | 72% | 83% | 76% | mount / `target/` cutover / `CARGO_HOME` probe / LLVM path readiness は入ったが、actual LLVM build はまだ |
-| Mirrorea future axis | 82% | 94% | 67% | `NET-01..05` helper-local transport canary、avatar widened representative slice、hot-plug helper-local lifecycle canary、typed external synthetic preview helper widening、phase 12 `projection_view` / `cross_place_projection` preview floor、`FAIRY-05` docs-first design review を actualize し、next は Typed external boundary residual planned family review |
+| Mir core / current-L2 | 90% | 88% | 80% | finite-index current layer は強いが、final parser / public API は未完 |
+| order / handoff / cut family | 90% | 90% | 80% | high-level relation line は runnable。final source wording と public artifact contract は残る |
+| theorem / model-check boundary | 92% | 90% | 86% | repo-local bridge は強いが、concrete external binding は未完 |
+| Lean foundations / proof spine | 86% | 88% | 68% | small proof fragment と generated stub はあるが、full discharge ではない |
+| shared-space samples | 84% | 86% | 74% | Sugoroku / avatar の runnable floor はあるが、real transport / durable evidence は未着手 |
+| docs / dashboard / repository structure | 90% | 92% | 82% | front-door docs、snapshot docs、layer map、sample dashboard は current line に追随 |
+| Mirrorea future axis | 80% | 90% | 68% | helper-local / report-local preview は揃ったが、public contract と emitted artifact family は後段 |
+| storage / backend guardrail | 72% | 82% | 76% | external workdir と probe floor はあるが、actual LLVM build はまだ |
 
 ## macro phase map
 
 | Macro phase | 主眼 | 現在位置 | rough progress % | 自走可否 |
 |---|---|---:|---:|---|
-| `Macro 0` | repository memory / docs / traceability | samples dashboard + reports + storage discipline active | 98% | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | active | 98% | 着手可能 |
 | `Macro 1` | semantic kernel / invariant stabilization | late | 87% | 着手可能 |
 | `Macro 2` | parser-free validation substrate | late | 88% | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | late | 84% | public parser / API 以外は着手可能 |
 | `Macro 4` | executable sample floor | active clean suite | 98% | 着手可能 |
-| `Macro 5` | typed / theorem / model-check bridge | repo-local alpha-ready current layer | 97% | public seam 以外は自走可能 |
-| `Macro 6` | shared-space / fabric boundary | shared-space helper/report-local carrier を順に actualize 中 | 91% | production transport / final catalog 以外は自走可能 |
-| `Macro 7` | toolchain / backend / host integration | mounted workdir + probe floor | 72% | installed binary / backend choice 以外は段階的に自走可能 |
+| `Macro 5` | typed / theorem / model-check bridge | repo-local alpha-ready current layer | 96% | public seam 以外は自走可能 |
+| `Macro 6` | shared-space / fabric boundary | helper/report-local preview widening 中 | 90% | public contract / real transport 以外は自走可能 |
+| `Macro 7` | toolchain / backend / host integration | mounted workdir + guardrail | 72% | installed binary / backend choice 以外は段階的に自走可能 |
 | `Macro 8` | application realization | early | 22% | 要仕様確認 |
 
 ## feature family snapshot
 
 | feature family | 現在地 | できていること | まだ残ること |
 |---|---|---|---|
-| executable sample corpus | `S6` | active clean suite 16 本、family run、matrix、closeout | final public sample catalog |
-| finite-index typing | `S6` | authority / label / capture / region / cost finite theory | final typed source principal と public checker contract |
-| order / handoff | `S6` | witness / publication / handoff relation family、negative sample も整備 | final source wording と public artifact contract |
-| model-check second line | `S5-S6` | Peterson SC pass、relaxed CE、broken mutex CE | concrete external tool binding |
-| Lean foundations / proof spine | `S6` | small actual proof fragment、generated stub corpus | full domain discharge と public proof contract |
-| Sugoroku world / current shared-space sample | `S6` | runtime attach / membership / witness / handoff / leave / reset model-check が runnable、per-sample debug reading も整理済み | detach lifecycle、real transport、durable evidence |
-| samples progress dashboard | `S4-S5` | phase 0〜16 matrix、Sugoroku per-sample alignment、avatar representative slice row、recent validation、storage row | future rows の helper actualization、phase 9 以降の sample ladder |
-| repository structure / taxonomy | `S3-S4` | layer-aware repo map、sample/script taxonomy docs、no-risk-first staged migration plan | risky crate/path move をしないまま staged physical migration 条件を固める |
-| storage / detachable workdir guardrail | `S5` | audit、env script、detach prepare、cleanup script、mounted workdir、`target/` cutover、`CARGO_HOME` probe、LLVM path readiness | actual LLVM build、backend choice、broader generated-artifact policy |
-| typed external effect / adapter boundary | `S4-S5` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、synthetic preview subset `EXT-03` / `EXT-04`、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / transport helper-local canary current anchor | residual `EXT-01` / `EXT-02` / `EXT-05` reopen gate と final host-facing contract |
-| layer composition / auth / visualization / projection / hot-plug | `S5` | package queue、stop line、phase 8 representative slice、`TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 12 `projection_view` / `cross_place_projection` preview floor、phase 14 hot-plug helper-local lifecycle canary、phase 13 transport widening invariant を actualize | final emitted program / real transport / attachpoint migration residual |
+| executable sample corpus | `S6` | active clean suite、Sugoroku、avatar representative slice、dashboard | final public sample catalog |
+| finite-index typing / order-handoff | `S6` | authority / label / capture / region / cost finite theory、high-level relation family | final typed source principal と public checker / artifact contract |
+| theorem / model-check / Lean | `S5-S6` | model-check second line、small Lean proof fragment、generated stub corpus | full domain discharge と concrete external tool binding |
+| shared-space runtime samples | `S6` | attach / membership / handoff / follow / fallback / reset safety | detach lifecycle residual、real transport、durable evidence |
+| typed external / projection / hot-plug / transport preview | `S5` | typed external synthetic preview、projection preview、hot-plug lifecycle canary、`NET-01..05` helper-local canary | final host-facing contract、emitted program family、real migration / replay |
+| repository structure / dashboard | `S4-S5` | layer-aware repo map、sample/script taxonomy、front-door docs、snapshot docs | risky crate/path move をまだしていない |
+| storage / backend guardrail | `S5` | external workdir、`target/` cutover、`CARGO_HOME` probe、LLVM path readiness | actual LLVM build、backend choice、packaging target |
 
 ## 着手可能 / 要仕様確認 / 後段依存
 
 | 項目 | 状態 | 理由 |
 |---|---|---|
-| `HotPlug Patch / AttachPoint` residual widening | 後段依存 | helper-local lifecycle canary は入ったが、real attachpoint / migration / rollback は mixed gate に残す |
-| `Avatar fairy follow` residual `FAIRY-05` | 後段依存 | explicit state timeline / anchor switch evidence gate だけを docs-first で固定し、visibility-return witness の carrier bundling は `UNRESOLVED` のまま残した。runnable widening は still-later |
-| `Projection / placement` widening | 後段依存 | current helper/report-local preview floor は actualize したが、final projection IR、generator、optimizer、equivalence checker は mixed gate に残す |
-| `Typed external boundary` residual planned family | 着手可能 | current synthetic preview subset は actualize し終えたため、residual planned `EXT-01` / `EXT-02` / `EXT-05` の reopen criterion は user-spec gate を増やさず self-driven で整理できる |
-| `VisualizationProtocol` widening | 後段依存 | final public viewer contract、retention、multi-tenant telemetry は後段 mixed gate に残す |
-| final public auth / visualization / hot-plug API | 要仕様確認 | public contract と retention / ecosystem target が未定 |
+| Typed external boundary residual planned family review | 着手可能 | current synthetic preview subset は actualize 済みで、residual `EXT-01` / `EXT-02` / `EXT-05` の reopen 条件を docs-first に整理できる |
+| Projection / placement residual emitted-program gate | 後段依存 | preview floor は actualize 済みだが、emitted program / optimizer / equivalence line は mixed gate に残す |
+| `FAIRY-05` residual reacquire widening | 後段依存 | explicit state timeline / anchor switch evidence gate は固定済み。carrier bundling は `UNRESOLVED` |
+| `HotPlug Patch / AttachPoint` real migration | 後段依存 | helper-local lifecycle canary はあるが、migration / rollback contract は別 gate |
+| final public auth / visualization / projection / hot-plug API | 要仕様確認 | public contract と retention / ecosystem target が未定 |
 | packaging / FFI / broader application target | 要仕様確認 | distribution target と acceptance criteria が未定 |
 
 ## 再現性アンカー
 
-- docs / hierarchy:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- active suite smoke:
-  `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
-  `python3 scripts/clean_near_end_samples.py smoke-all --format json`
-- active suite closeout:
-  `python3 scripts/current_l2_guided_samples.py closeout --format json`
-- family run:
-  `python3 scripts/clean_near_end_samples.py run typing --format json`
-  `python3 scripts/clean_near_end_samples.py run order-handoff --format json`
-  `python3 scripts/clean_near_end_samples.py run model-check --format json`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
-  `python3 scripts/clean_near_end_samples.py run modal --format json`
-  `python3 scripts/typed_external_boundary_samples.py check-all --format json`
-  `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json`
-  `python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json`
-- Lean sync:
-  `python3 scripts/current_l2_lean_sample_sync.py`
-- Sugoroku world vertical slice:
-  `python3 scripts/sugoroku_world_samples.py check-all`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers`
-  `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership`
-  `python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification`
-  `python3 scripts/sugoroku_world_samples.py closeout --format json`
-  `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
-  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
-  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
-  `cargo test -p mir-runtime --test clean_near_end_samples`
-- diff hygiene:
-  `git diff --check`
-- storage:
-  `bash scripts/storage/setup_mirrorea_workdisk_root.sh --plan`
-  `bash scripts/env/mirrorea_storage_env.sh`
-  `bash scripts/storage/detach_prepare.sh`
-  `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
+- `python3 scripts/check_source_hierarchy.py`
+- `python3 scripts/validate_docs.py`
+- `python3 scripts/current_l2_guided_samples.py closeout --format json`
+- `python3 scripts/sugoroku_world_samples.py closeout --format json`
+- `python3 scripts/avatar_follow_samples.py closeout --format json`
+- `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+- `python3 scripts/network_transport_samples.py closeout --format json`
+- `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+- `git diff --check`
 
 ## recent log
 
-- 2026-04-22 23:53 JST — clean near-end active suite を `samples/clean-near-end/` に切り替え、finite-index typing・order/handoff・model-check second line・Lean sync・crate test・docs validation を再実行して repo-local alpha current layer を同期した。
-- 2026-04-23 00:07 JST — stale reference を active lane から除去し、guided sample / clean suite / Lean sync / docs validation を fresh 実行して alpha-ready 判定の evidence を固定した。
-- 2026-04-23 14:32 JST — Sugoroku world runtime attachment vertical slice を追加し、single-process logical multi-place emulator、10 sample、CLI、model-check、hands-on docs を実装・検証した。
-- 2026-04-23 22:54 JST — `mir_hilight.html` を repo root に追加し、active `.mir` sample 全体を single-file browser viewer で読めるようにした。
-- 2026-04-27 09:13 JST — Mirrorea future-axis handoff を docs / specs / plan / AGENTS / progress / tasks に統合し、package 1 audit と package 2 reporting discipline を close したうえで、docs validation、clean near-end smoke / closeout、Sugoroku closeout、crate tests を通し、next queue を `TermSignature registry` に昇格させた。
-- 2026-04-27 10:14 JST — phase 0〜16 runnable sample dashboard `samples_progress.md`、source hierarchy check、storage env / detach-safe cleanup script、current-L2 guided smoke / closeout、Sugoroku `check-all` / closeout を同期し、current near-term reading を `Sugoroku sample progress alignment` -> `Avatar fairy follow sample plan` -> `TermSignature registry / debug output` へ組み替えた。
-- 2026-04-27 13:20 JST — extra SSD `/dev/vdb1` を `/mnt/mirrorea-work` に mounted し、UUID-based `fstab` 永続化、`target/` SSD cutover、`cargo test -p mir-ast --no-run` を確認した。
-- 2026-04-27 15:21 JST — Sugoroku per-sample matrix と debug reading を `samples_progress.md` / sample README / hands-on doc に反映し、avatar fairy follow phase 8 skeleton family を `samples/not_implemented/avatar-fairy-follow/` と reader-facing doc に切り出し、`check-all` / focused debug run / docs validation を通して next promoted package を `TermSignature registry / debug output` に確定した。
-- 2026-04-27 15:39 JST — Sugoroku helper に `term_signatures` と `--debug signatures` を追加し、clean near-end Rust report / closeout に `TermSignature` inventory と reserved signature kinds を actualize したうえで、Python unittest、`cargo test -p mir-runtime --test clean_near_end_samples`、`python3 scripts/validate_docs.py`、`git diff --check` を通して next promoted package を `LayerSignature system` へ進めた。
-- 2026-04-27 15:51 JST — `TermSignature registry / debug output` の reader-facing docs / specs / plan / report を同期し、`current_l2_guided_samples.py smoke-all --format json`、Sugoroku `--debug signatures`、`cargo test -p mir-runtime`、`check_source_hierarchy.py`、`validate_docs.py` を fresh 実行して package close evidence を固めた。
-- 2026-04-27 15:59 JST — reviewer sub-agent の指摘に従って Sugoroku signature provenance、Rust closeout の source-read failure mode、`hands_on_sugoroku_detail.md` の snippet drift を修正し、Python unittest、`cargo test -p mir-runtime --test clean_near_end_samples`、`current_l2_guided_samples.py smoke-all --format json`、`cargo test -p mir-runtime`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を再実行して package close evidence を更新した。
-- 2026-04-27 17:03 JST — repo layer map / staged restructuring task で `plan/19`、`samples/README.md`、`scripts/README.md`、`samples_progress.md` required format、`docs/reports/0920-*` を同期し、`check_source_hierarchy.py`、`validate_docs.py`、full runtime / sample validation suite、reviewer re-check を通し、missing helper は `scripts/avatar_follow_samples.py` の未実装 1 件だけと確認した。
-- 2026-04-27 17:46 JST — pre-existing helper/runtime `MessageEnvelope / Auth seam` first cut を docs / spec / plan / snapshot / report へ同期し、Sugoroku `--debug envelopes`、Sugoroku `check-all`、Python unittest、runtime sample / closeout、`cargo test -p mir-runtime --test clean_near_end_samples`、`cargo test -p mir-runtime`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通して next promoted package を `VisualizationProtocol` へ進めた。
-- 2026-04-27 18:04 JST — `VisualizationProtocol` first cut として Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization`、clean near-end report / closeout の `VisualizationView` / `TelemetryRow` inventory、hands-on / plan / specs / snapshot を同期し、Python unittest、Sugoroku `check-all` / `--debug visualization` / closeout、runtime closeout、`cargo test -p mir-runtime --test clean_near_end_samples`、`cargo test -p mir-runtime`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通して next promoted package を typed external boundary / adapter へ進めた。
-- 2026-04-27 18:10 JST — `Typed external boundary / adapter` docs-first sample plan として phase 9 `EXT-01..05` planned family を `samples/not_implemented/typed-external-boundary/` に追加し、provider boundary / local queue / typed failure / debug label restriction の evidence anchor、validation、stop line を docs / plan / snapshot / report へ同期し、`check_source_hierarchy.py`、`validate_docs.py`、runtime `05_delegated_rng_service`、Sugoroku `--debug envelopes`、`git diff --check` を通して next promoted package を projection / placement に進めた。
-- 2026-04-27 18:15 JST — `Projection / placement` docs-first plan として `plan/20-projection-and-placement-roadmap.md` と reader-facing summary を追加し、system-wide source / place-specific program distinction、server / participant / adapter / visualizer split、projection validity checklist、stop line を docs / plan / snapshot / report へ同期し、`check_source_hierarchy.py`、`validate_docs.py`、Sugoroku `--debug visualization`、runtime `05_delegated_rng_service`、`git diff --check` を通して next promoted package を hot-plug patch / `AttachPoint` に進めた。
-- 2026-04-27 18:23 JST — `HotPlug Patch / AttachPoint` docs-first plan として `plan/21-hotplug-attachpoint-roadmap.md` と reader-facing summary を追加し、`SUG-01` attach / `SUG-09` detach TODO boundary、compatibility checklist、activation cut、migration stop line、storage detach との非同一性を docs / plan / snapshot / report へ同期した上で、`check_source_hierarchy.py`、`validate_docs.py`、Sugoroku `run 01` / `run 09` / `check-all`、`git diff --check` を通して next promoted package を network transport に進めた。
-- 2026-04-27 18:32 JST — `Network transport` docs-first plan として `plan/22-network-transport-roadmap.md`、phase 13 planned family `samples/not_implemented/network-transport/`、reader-facing summary を追加し、`local_queue` / `provider_boundary` current anchor、loopback / reconnect / typed failure / redacted route trace、stop line を docs / plan / snapshot / report へ同期した上で、`check_source_hierarchy.py`、`validate_docs.py`、Sugoroku `--debug envelopes` / `--debug membership`、runtime `05_delegated_rng_service`、`git diff --check` を通して next promoted package を compiler/backend/LLVM preparation に進めた。
-- 2026-04-27 18:48 JST — `Compiler/backend/LLVM preparation` guardrail として `plan/23-compiler-backend-llvm-guardrail-roadmap.md`、reader-facing summary、`CARGO_HOME` binding を追加し、`df -h .`、`free -h`、workdir mount / usage、env / detach / cleanup script、LLVM path readiness、`CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通して next promoted package を hands-on docs / closeout に進めた。
-- 2026-04-27 18:57 JST — `hands-on docs / closeout` として `docs/hands_on/README.md`、`docs/hands_on/current_phase_closeout_01.md`、root docs / `plan/19` / snapshot 文書 / report を同期し、current runnable floor、remaining mixed gate、remaining true user-spec gate、next queue を reader-facing に再整理した。validation は `check_source_hierarchy.py`、`validate_docs.py`、current-L2 closeout、Sugoroku closeout、runtime closeout、`git diff --check` を採る。
-- 2026-04-27 18:58 JST — `Network transport executable widening` として `scripts/sugoroku_world_samples.py` に `--transport loopback_socket` を追加し、`NET-01` helper-local loopback preview、attach / handoff / reject parity、`check-all --transport loopback_socket`、runtime reserved seam inventory assertion、docs / snapshot / report を同期した。validation は Python unittest、focused Sugoroku loopback run、runtime sample / test、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採る。
-- 2026-04-27 19:46 JST — `Avatar fairy follow representative slice` として `scripts/avatar_follow_samples.py`、`samples/clean-near-end/avatar-follow/`、`plan/24-avatar-follow-representative-slice-roadmap.md`、`docs/hands_on/avatar_fairy_follow_representative_slice_01.md`、snapshot docs / report を同期し、`FAIRY-01` / `03` / `04` / `06` active canary、residual planned `FAIRY-02` / `05`、dedicated helper surface、debug modes を固定した。validation は avatar unittest、focused avatar run、avatar closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、reviewer 指摘で露出した residual-taxonomy drift と stale wording も同 package で解消した。
-- 2026-04-27 20:03 JST — `HotPlug Patch / AttachPoint executable widening` として Sugoroku helper に `hotplug_lifecycle`、`--debug hotplug`、`hot-plug` layer inventory、attach / detach telemetry-view、`detach_request#1` auth-none envelope canary を揃え、snapshot docs / `plan/21` / specs / report を同期した。validation は Python unittest、focused hot-plug run、Sugoroku closeout、`check-all` local/loopback、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `Network transport` `NET-02..05` に進めた。
-- 2026-04-27 20:27 JST — `Network transport helper-local canaries` として `scripts/network_transport_samples.py`、`samples/clean-near-end/network-transport/README.md`、`docs/hands_on/network_transport_canaries_01.md` を追加し、`NET-02` subprocess JSON bridge、`NET-03` stale reconnect reject、`NET-04` typed transport failure matrix、`NET-05` redacted route trace を helper-local evidence surface に actualize した。validation は dedicated unittest、focused transport runs、transport closeout、Sugoroku loopback floor、runtime provider-boundary anchor、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を avatar residual widening に進めた。
-- 2026-04-27 20:55 JST — `Avatar fairy follow residual widening` として `FAIRY-02` を `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` の active helper canary に昇格させ、`samples/not_implemented/avatar-fairy-follow/` を `FAIRY-05` の single residual planned family に縮めた。validation は avatar unittest、focused `FAIRY-02` / `FAIRY-06` run、avatar `check-all` / closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `cross-package sweep` に進めた。
-- 2026-04-27 21:19 JST — `cross-package sweep` として avatar / transport / hot-plug / dashboard / closeout landing page / next queue を recut し、active evidence / planned family / mixed gate を整理した。validation は avatar / transport / Sugoroku / runtime closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、reviewer follow-up reports `0935` / `0936` / `0937` の指摘も反映した上で、next promoted package を `FAIRY-05` residual reacquire design に確定した。
-- 2026-04-27 21:38 JST — `FAIRY-05 residual reacquire design review` として sample は planned のままに保ちつつ、active evidence / next docs-first package / planned sample family を書き分け、legacy phase 8 label と `Macro 6 reserve` を併記し、explicit state timeline / anchor switch evidence gate と visibility-return witness carrier bundling `UNRESOLVED` を docs / plan / snapshot / report に同期した。validation は avatar `check-all` / closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、review-only rereview report `0940` でも no findings を確認した上で、next promoted package を Typed external boundary / adapter executable widening に戻した。
-- 2026-04-27 21:55 JST — `Typed external boundary executable widening` として `scripts/typed_external_boundary_samples.py`、planned source family `samples/not_implemented/typed-external-boundary/`、synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05`、`plan/25`、`docs/hands_on/typed_external_boundary_canaries_01.md` を同期した。validation は dedicated unittest、typed external `check-all` / focused debug run、provider-boundary / local-queue anchor run、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を Projection / placement executable widening に進めた。
-- 2026-04-27 22:21 JST — reviewer 指摘に従って phase 9 wording を recut し、`EXT-03` / `EXT-04` を active executable sample ではなく planned source stub を読む synthetic preview helper subset と明記した。`samples_progress.md` / `progress.md` / `tasks.md` / `plan/25` / `0941` report の validation 読みを helper self-consistency + provider-boundary / local-queue anchor comparison に揃え、phase 9 `.mir` の direct semantic execution や current E2E 達成を主張しない current snapshot に戻した。
-- 2026-04-27 22:23 JST — reviewer rereview で typed external boundary package の prior findings がすべて解消したことを確認した。local rerun では typed external helper unittest、`check-all` / `closeout` / focused debug run、provider-boundary / local-queue anchors、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` が pass し、current reading を synthetic preview helper + anchor comparison に固定した。
-- 2026-04-27 22:52 JST — `Projection / placement executable widening` として Sugoroku helper `projection_view` / `--debug projection` と clean near-end runtime report-local `cross_place_projection` を追加し、reviewer 指摘に従って `0942` report、explicit `authority_place:ParticipantPlace[Alice]` subject、future-target `E2E-PROJECTION-TARGET` wording を同期した。validation は Python unittest、`cargo test -p mir-runtime --test clean_near_end_samples`、focused projection/visualization run、runtime sample run、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を Typed external boundary residual planned family review に進めた。
+- 2026-04-27 23:26 JST — `README.md` / `Documentation.md` / `progress.md` / `tasks.md` / `samples_progress.md` を snapshot として圧縮・同期し、current next queue、front-door docs、recent validation の読みを current line に揃えた。`0943` report を追加した上で `check_source_hierarchy.py`、`validate_docs.py`、typed external closeout、focused projection run、runtime sample run、`git diff --check` を通した。
+- 2026-04-27 22:52 JST — `Projection / placement executable widening` として Sugoroku helper `projection_view` / `--debug projection` と clean near-end runtime report-local `cross_place_projection` を追加し、next promoted package を Typed external boundary residual planned family review に進めた。
+- 2026-04-27 22:21 JST — phase 9 wording を recut し、`EXT-03` / `EXT-04` を planned source stub を読む synthetic preview helper subset と明記した。
+- 2026-04-27 21:55 JST — `Typed external boundary executable widening` として `scripts/typed_external_boundary_samples.py`、synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05` を同期した。
+- 2026-04-27 21:38 JST — `FAIRY-05 residual reacquire design review` として sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と `UNRESOLVED` carrier bundling を docs-first に固定した。
+- 2026-04-27 20:55 JST — `Avatar fairy follow residual widening` として `FAIRY-02` を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた。
+- 2026-04-27 20:27 JST — `Network transport helper-local canaries` として `NET-02..05` を helper-local evidence surface に actualize した。
+- 2026-04-27 20:03 JST — `HotPlug Patch / AttachPoint executable widening` として `hotplug_lifecycle`、`--debug hotplug`、attach / detach telemetry-view を current line に actualize した。
+- 2026-04-27 19:46 JST — `Avatar fairy follow representative slice` として active avatar helper / sample root / debug surface を同期した。

@@ -11,7 +11,7 @@
 - **Typed-Effect Wiring Platform**
   inspectable / routable な effect integration 層
 
-2026-04-23 時点で repo が主として検証しているのは、Mir current-L2 の **repo-local alpha-ready current layer** です。
+2026-04-27 時点で repo が主として検証しているのは、Mir current-L2 の **repo-local alpha-ready current layer** です。
 これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
 
 ## 現在の到達点
@@ -61,7 +61,7 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `HotPlug Patch / AttachPoint` の executable widening も current line に入り、`scripts/sugoroku_world_samples.py` の `hotplug_lifecycle` / `--debug hotplug` / `hot-plug` layer inventory で compatibility / activation / post-detach rejection evidence を helper-local に確認できます。
 - `Network transport` の docs-first plan も close してあり、`plan/22-network-transport-roadmap.md` で local queue / provider boundary current anchor、loopback / reconnect / failure matrix、stop line を固定しました。さらに `NET-01` helper-local loopback preview に加えて、`scripts/network_transport_samples.py` による `NET-02..05` helper-local canary も actualize し、process-boundary JSON bridge、stale reconnect reject、typed transport failure family、observer-safe redacted route trace を current evidence surface として確認できます。
 - `Compiler/backend/LLVM preparation` guardrail も close してあり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` で external workdir、`CARGO_HOME`、LLVM path、cleanup safety、stop line を固定しました。
-- `hands-on docs / closeout` も close してあり、`NET-01` helper-local loopback preview、`NET-02..05` helper-local canary、avatar widened representative slice、hot-plug helper-local lifecycle canary、typed external boundary synthetic preview helper まで actualize しました。`cross-package sweep` 後に `FAIRY-05` residual reacquire design review を docs-first で閉じ、sample 自体は planned のままにしつつ、explicit state timeline / anchor switch evidence が要ることと exact carrier bundling が `UNRESOLVED` であることだけを固定し、そのうえで phase 9 executable widening は `EXT-03` / `EXT-04` working IDs を使う thin synthetic preview helper cut までに留めたので、current next queue は Projection / placement executable widening です。public avatar / visualization / adapter API を示唆するものではありません。
+- `hands-on docs / closeout` も close してあり、`NET-01` helper-local loopback preview、`NET-02..05` helper-local canary、avatar widened representative slice、hot-plug helper-local lifecycle canary、typed external boundary synthetic preview helper、projection / placement helper/report-local preview floor まで actualize しました。current next queue は Typed external boundary residual planned family review で、その次が Projection / placement residual emitted-program gate です。public avatar / visualization / adapter / projection API を示唆するものではありません。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
 - current closeout を実行コマンド付きで読む最短入口は `docs/hands_on/current_phase_closeout_01.md` です。
