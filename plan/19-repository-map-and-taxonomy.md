@@ -79,6 +79,8 @@ current recommendation:
 
 - `samples/clean-near-end/`
   active canonical executable suite
+  - `typed-external-boundary/`
+    phase 9 planned source family。current repo では synthetic preview helper がこの source stub family を参照する
 - `samples/current-l2/`
   base current-L2 source corpus
 - `samples/lean/`
@@ -110,6 +112,9 @@ current recommendation:
 - `scripts/clean_near_end_samples.py`
 - `scripts/current_l2_guided_samples.py`
 - `scripts/sugoroku_world_samples.py`
+- `scripts/avatar_follow_samples.py`
+- `scripts/typed_external_boundary_samples.py`
+- `scripts/network_transport_samples.py`
 
 ### current repo-local helper / detached loop / support
 

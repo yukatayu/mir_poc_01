@@ -5,7 +5,7 @@
 phase 9 `Typed external boundary / adapter` を、repo-local current layer で
 安全に前進させるための docs-first sample ladder を置きます。
 
-ここで固定するのは **planned sample ID / evidence anchor / stop line** です。
+ここで固定するのは **planned sample ID / synthetic preview helper subset / evidence anchor / stop line** です。
 final public adapter API や real transport 実装ではありません。
 
 ## current evidence anchors
@@ -32,14 +32,27 @@ final public adapter API や real transport 実装ではありません。
 これらは current repo の working sample ID です。
 exact host schema / final adapter contract は `OPEN` のままです。
 
+## current executable cut
+
+- synthetic preview helper subset は `EXT-03` / `EXT-04`
+- residual planned family は `EXT-01` / `EXT-02` / `EXT-05`
+- helper entrypoint:
+  `python3 scripts/typed_external_boundary_samples.py`
+- debug modes:
+  `summary`
+  `envelopes`
+  `visualization`
+  `failures`
+- scenario label は helper-local working name であり、final effect 名ではない
+
 ## current rule
 
 - standard I/O は Mir core primitive にしない
 - adapter boundary で external world へ接続する
-- transport / auth / membership / capability / witness / visualization を separate lane に保つ
+- effect boundary / transport / auth / membership / capability / witness / visualization を separate lane に保つ
 - adapter failure は typed result / explicit failure reason として表す
 
 ## 次
 
-この文書の current role は、phase 9 planned family と evidence anchor を保つことです。
+この文書の current role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、evidence anchor を保つことです。
 具体的な promoted queue は `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。

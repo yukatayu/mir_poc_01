@@ -162,7 +162,11 @@
      - 2026-04-27 時点で phase 9 planned family `EXT-01..05` は docs-first に actualize した。
        `LogText` / world overlay / local queue / typed failure / debug label restriction という working sample ID と、
        `provider_boundary` / `local_queue` の current evidence anchor までは current line に上げてよい。
-     - 未決なのは exact host schema、final public adapter API、browser/network/VR family への割当である。
+     - 2026-04-27 時点で helper-local synthetic preview widening として `EXT-03` / `EXT-04` は actualize してよい。
+       `scripts/typed_external_boundary_samples.py` による `envelopes` / `visualization` / `failures` preview、
+       effect boundary / transport envelope / auth evidence / witness refs の non-collapse、typed adapter failure lane までは current line に上げてよい。
+     - `EXT-01` / `EXT-02` / `EXT-05` は residual planned family に残してよい。
+     - 未決なのは exact host schema、final public adapter API、browser/network/VR family への割当、console / overlay / viewer contract の public surface である。
   5b. network transport widening ladder をどこまで docs-first に固定するか。
      - 2026-04-27 時点で phase 13 planned family `NET-01..05` は docs-first に actualize した。
        `local_queue` / `provider_boundary` current anchor、loopback / reconnect / typed failure / redacted route trace という working sample ID と、

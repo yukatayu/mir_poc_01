@@ -1,0 +1,23 @@
+# EXT-03 preview-planned phase 9 skeleton.
+# Helper-local synthetic preview uses this source stub, but it is not an active
+# executable sample in the current runtime.
+# Goal: route SendRoomMessage through a local queue adapter while keeping
+# effect boundary, transport envelope, auth evidence, and witness lanes separate.
+
+module PlannedMirrorea.TypedExternalBoundary.SendRoomMessageLocalQueue
+
+place SharedWorld {
+  place ParticipantPlace#A {
+    transition publish_room_notice by Alice at ParticipantPlace#A {
+      requires witness(room_notice_pub)
+
+      stage request_adapter_effect:
+        perform SendRoomMessage(room_notice#1)
+          via RoomMessageAdapter#local_queue
+
+      stage keep_publication_explicit:
+        ensure adapter_boundary(RoomMessageAdapter#local_queue) = local_queue
+        ensure typed_receipt(room_notice_visible#1)
+      }
+  }
+}

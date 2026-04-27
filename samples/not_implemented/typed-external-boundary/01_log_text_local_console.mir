@@ -1,0 +1,22 @@
+# EXT-01 residual planned phase 9 skeleton.
+# Not an active runnable sample.
+# Goal: route a local-console scenario label through a typed provider boundary
+# without misreading stdio as a Mir core primitive.
+
+module PlannedMirrorea.TypedExternalBoundary.LogTextLocalConsole
+
+place SharedWorld {
+  place ParticipantPlace#A {
+    transition publish_roll_summary by Alice at ParticipantPlace#A {
+      requires witness(provider_receipt)
+
+      stage request_adapter_effect:
+        perform LogText(roll_summary#1)
+          via ConsoleAdapter#local
+
+      stage defer_console_contract:
+        ensure adapter_boundary(ConsoleAdapter#local) = provider_boundary
+        ensure final_console_schema = OPEN
+      }
+  }
+}

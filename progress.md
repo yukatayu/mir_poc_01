@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-27 21:38 JST
+最終更新: 2026-04-27 22:23 JST
 
 ## この文書について
 
@@ -28,7 +28,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` が current layer-aware repo map と staged migration 読みを与える
 - Mirrorea future lane:
-  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep、`FAIRY-05` residual reacquire design review closeout を close し、next promoted package を Typed external boundary / adapter executable widening と読む
+  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep、`FAIRY-05` residual reacquire design review closeout、typed external synthetic preview helper widening を close し、next promoted package を Projection / placement executable widening と読む
 - reserve integration lane:
   real transport、final public contract、packaging、final public auth / visualization / projection / hot-plug surface は still later
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 2026-04-27 時点の repo は、
 **clean near-end current layer と Sugoroku world / avatar follow widened representative slice を runnable floor として維持しつつ、
 phase/sample/progress/storage foundation を runnable dashboard に押し上げ、
-active evidence / planned family / mixed gate を cross-package sweep と `FAIRY-05` docs-first design review closeout で揃えた上で、次の Typed external boundary / adapter executable widening へ進む**
+active evidence / planned family / mixed gate を cross-package sweep と `FAIRY-05` docs-first design review closeout で揃え、phase 9 typed external boundary では planned source stub を読む `EXT-03` / `EXT-04` synthetic preview helper subset だけを evidence floor に保った上で、次の Projection / placement executable widening へ進む**
 段階です。
 
 ただし、次はまだ終わっていません。
@@ -60,7 +60,7 @@ active evidence / planned family / mixed gate を cross-package sweep と `FAIRY
 | Sugoroku world / current shared-space sample | 85% | 87% | 73% | runnable vertical slice、per-sample dashboard、hot-plug helper-local lifecycle canary は揃ったが、real transport / durable commit は未着手 |
 | samples progress dashboard | 86% | 92% | 73% | phase 0〜16 matrix に加え、Sugoroku per-sample row と avatar representative slice row まで reader-facing に整理した |
 | storage / external workdir guardrail | 72% | 83% | 76% | mount / `target/` cutover / `CARGO_HOME` probe / LLVM path readiness は入ったが、actual LLVM build はまだ |
-| Mirrorea future axis | 80% | 93% | 63% | `NET-01..05` helper-local transport canary、avatar widened representative slice、hot-plug helper-local lifecycle canary、`FAIRY-05` docs-first design review を actualize し、next は Typed external boundary / adapter executable widening |
+| Mirrorea future axis | 81% | 94% | 66% | `NET-01..05` helper-local transport canary、avatar widened representative slice、hot-plug helper-local lifecycle canary、typed external synthetic preview helper widening、`FAIRY-05` docs-first design review を actualize し、next は Projection / placement executable widening |
 
 ## macro phase map
 
@@ -89,7 +89,7 @@ active evidence / planned family / mixed gate を cross-package sweep と `FAIRY
 | samples progress dashboard | `S4-S5` | phase 0〜16 matrix、Sugoroku per-sample alignment、avatar representative slice row、recent validation、storage row | future rows の helper actualization、phase 9 以降の sample ladder |
 | repository structure / taxonomy | `S3-S4` | layer-aware repo map、sample/script taxonomy docs、no-risk-first staged migration plan | risky crate/path move をしないまま staged physical migration 条件を固める |
 | storage / detachable workdir guardrail | `S5` | audit、env script、detach prepare、cleanup script、mounted workdir、`target/` cutover、`CARGO_HOME` probe、LLVM path readiness | actual LLVM build、backend choice、broader generated-artifact policy |
-| typed external effect / adapter boundary | `S3-S4` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / transport helper-local canary current anchor | dedicated adapter helper / `EXT-01..05` executable widening |
+| typed external effect / adapter boundary | `S4-S5` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、synthetic preview subset `EXT-03` / `EXT-04`、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / transport helper-local canary current anchor | residual `EXT-01` / `EXT-02` / `EXT-05` reopen gate と final host-facing contract |
 | layer composition / auth / visualization / projection / hot-plug | `S5` | package queue、stop line、phase 8 representative slice、`TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 12 projection validity checklist、phase 14 hot-plug helper-local lifecycle canary、phase 13 transport widening invariant を actualize | executable transport widening と real attachpoint / migration residual |
 
 ## 着手可能 / 要仕様確認 / 後段依存
@@ -99,7 +99,7 @@ active evidence / planned family / mixed gate を cross-package sweep と `FAIRY
 | `HotPlug Patch / AttachPoint` residual widening | 後段依存 | helper-local lifecycle canary は入ったが、real attachpoint / migration / rollback は mixed gate に残す |
 | `Avatar fairy follow` residual `FAIRY-05` | 後段依存 | explicit state timeline / anchor switch evidence gate だけを docs-first で固定し、visibility-return witness の carrier bundling は `UNRESOLVED` のまま残した。runnable widening は still-later |
 | `Projection / placement` widening | 後段依存 | final projection IR、generator、optimizer、equivalence checker は mixed gate に残す |
-| `Typed external boundary / adapter` widening | 後段依存 | final host schema、browser/network/VR adapter 実装、public adapter API は mixed gate に残す |
+| `Typed external boundary` residual planned family | 後段依存 | current synthetic preview subset は actualize したが、final host schema、browser/network/VR adapter 実装、public adapter API は mixed gate に残す |
 | `VisualizationProtocol` widening | 後段依存 | final public viewer contract、retention、multi-tenant telemetry は後段 mixed gate に残す |
 | final public auth / visualization / hot-plug API | 要仕様確認 | public contract と retention / ecosystem target が未定 |
 | packaging / FFI / broader application target | 要仕様確認 | distribution target と acceptance criteria が未定 |
@@ -120,6 +120,9 @@ active evidence / planned family / mixed gate を cross-package sweep と `FAIRY
   `python3 scripts/clean_near_end_samples.py run model-check --format json`
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
   `python3 scripts/clean_near_end_samples.py run modal --format json`
+  `python3 scripts/typed_external_boundary_samples.py check-all --format json`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json`
 - Lean sync:
   `python3 scripts/current_l2_lean_sample_sync.py`
 - Sugoroku world vertical slice:
@@ -172,3 +175,6 @@ active evidence / planned family / mixed gate を cross-package sweep と `FAIRY
 - 2026-04-27 20:55 JST — `Avatar fairy follow residual widening` として `FAIRY-02` を `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` の active helper canary に昇格させ、`samples/not_implemented/avatar-fairy-follow/` を `FAIRY-05` の single residual planned family に縮めた。validation は avatar unittest、focused `FAIRY-02` / `FAIRY-06` run、avatar `check-all` / closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `cross-package sweep` に進めた。
 - 2026-04-27 21:19 JST — `cross-package sweep` として avatar / transport / hot-plug / dashboard / closeout landing page / next queue を recut し、active evidence / planned family / mixed gate を整理した。validation は avatar / transport / Sugoroku / runtime closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、reviewer follow-up reports `0935` / `0936` / `0937` の指摘も反映した上で、next promoted package を `FAIRY-05` residual reacquire design に確定した。
 - 2026-04-27 21:38 JST — `FAIRY-05 residual reacquire design review` として sample は planned のままに保ちつつ、active evidence / next docs-first package / planned sample family を書き分け、legacy phase 8 label と `Macro 6 reserve` を併記し、explicit state timeline / anchor switch evidence gate と visibility-return witness carrier bundling `UNRESOLVED` を docs / plan / snapshot / report に同期した。validation は avatar `check-all` / closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、review-only rereview report `0940` でも no findings を確認した上で、next promoted package を Typed external boundary / adapter executable widening に戻した。
+- 2026-04-27 21:55 JST — `Typed external boundary executable widening` として `scripts/typed_external_boundary_samples.py`、planned source family `samples/not_implemented/typed-external-boundary/`、synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05`、`plan/25`、`docs/hands_on/typed_external_boundary_canaries_01.md` を同期した。validation は dedicated unittest、typed external `check-all` / focused debug run、provider-boundary / local-queue anchor run、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を Projection / placement executable widening に進めた。
+- 2026-04-27 22:21 JST — reviewer 指摘に従って phase 9 wording を recut し、`EXT-03` / `EXT-04` を active executable sample ではなく planned source stub を読む synthetic preview helper subset と明記した。`samples_progress.md` / `progress.md` / `tasks.md` / `plan/25` / `0941` report の validation 読みを helper self-consistency + provider-boundary / local-queue anchor comparison に揃え、phase 9 `.mir` の direct semantic execution や current E2E 達成を主張しない current snapshot に戻した。
+- 2026-04-27 22:23 JST — reviewer rereview で typed external boundary package の prior findings がすべて解消したことを確認した。local rerun では typed external helper unittest、`check-all` / `closeout` / focused debug run、provider-boundary / local-queue anchors、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` が pass し、current reading を synthetic preview helper + anchor comparison に固定した。

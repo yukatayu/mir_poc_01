@@ -37,6 +37,8 @@ current repo-local alpha を壊す crate rename / move は、まだ行いませ�
 
 - `samples/clean-near-end/`
   active canonical executable suite
+  - `typed-external-boundary/`
+    phase 9 planned source family。current repo では synthetic preview helper がこの source stub family を参照する
 - `samples/current-l2/`
   base current-L2 source corpus
 - `samples/lean/`
@@ -56,6 +58,9 @@ current repo-local alpha を壊す crate rename / move は、まだ行いませ�
   `clean_near_end_samples.py`
   `current_l2_guided_samples.py`
   `sugoroku_world_samples.py`
+  `avatar_follow_samples.py`
+  `typed_external_boundary_samples.py`
+  `network_transport_samples.py`
 - docs / hierarchy check:
   `check_source_hierarchy.py`
   `validate_docs.py`

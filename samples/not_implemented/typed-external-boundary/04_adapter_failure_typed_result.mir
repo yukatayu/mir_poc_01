@@ -1,0 +1,21 @@
+# EXT-04 preview-planned phase 9 skeleton.
+# Helper-local synthetic preview uses this source stub, but it is not an active
+# executable sample in the current runtime.
+# Goal: keep adapter failure as a typed result instead of collapsing it into
+# hidden retry or domain rejection.
+
+module PlannedMirrorea.TypedExternalBoundary.AdapterFailureTypedResult
+
+place SharedWorld {
+  place ParticipantPlace#A {
+    transition publish_backpressure_notice by Alice at ParticipantPlace#A {
+      stage request_adapter_effect:
+        perform SendRoomMessage(backpressure_notice#1)
+          via RoomMessageAdapter#local_queue
+
+      stage surface_typed_failure:
+        ensure typed_failure(AdapterQueueFull)
+        ensure domain_mutation_committed = false
+      }
+  }
+}

@@ -90,12 +90,15 @@ run_directory_named_profile
   - `docs/hands_on/avatar_fairy_follow_representative_slice_01.md`
   を phase 8 representative-slice helper-local evidence surface として見せてよい。
   - これは final public avatar runtime API、final visualization protocol、real transport / auth / session semantics、hot-plug implementation を意味しない。
-- current typed external boundary docs-first cut では、
+- current typed external boundary docs-first / synthetic preview split では、
   - `samples/not_implemented/typed-external-boundary/`
+  - `scripts/typed_external_boundary_samples.py`
   - clean near-end `05_delegated_rng_service` の `provider_boundary`
   - Sugoroku helper `local_queue` envelope / visualization inventory
   を phase 9 sample ladder の evidence anchor として参照してよい。
-  - これは final public adapter API、real browser/network/VR transport、final host schema を意味しない。
+  - current repo-local synthetic preview widening は `EXT-03` / `EXT-04` thin synthetic preview helper cut に留め、
+    `EXT-01` / `EXT-02` / `EXT-05` は residual planned family に残してよい。
+  - これは final public adapter API、real browser/network/VR transport、final host schema、final public console / overlay / viewer contract を意味しない。
 - current sample-visible verifier preview cut では、
   - `formal_hook_status`
   - `subject_kind`

@@ -13,6 +13,8 @@
   - 2026-04-27 時点の current phase closeout と、今すぐ実行する確認コマンド、remaining mixed gate、next queue
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
+- `typed_external_boundary_canaries_01.md`
+  - phase 9 synthetic preview helper の最短入口
 - `network_transport_canaries_01.md`
   - phase 13 helper-local canary の最短入口
 

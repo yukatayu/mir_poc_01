@@ -18,7 +18,8 @@
 - Sugoroku 側の participant set は fixed literal principal だけでなく `MembershipRegistry` から読む line を current reading に置く
 - avatar fairy follow representative slice は `samples/clean-near-end/avatar-follow/` に置き、active canonical sample として読む
 - phase 8 residual planned family は `samples/not_implemented/avatar-fairy-follow/` に置き、historical prototype anchor は `samples/prototype/current-l2-dynamic-attach-detach/` に残す
-- phase 9 planned family は `samples/not_implemented/typed-external-boundary/` に置き、current evidence anchor は `05_delegated_rng_service` の `provider_boundary` と Sugoroku helper の `local_queue` envelope / visualization carrier に結び直す
+- phase 9 planned source family は `samples/not_implemented/typed-external-boundary/` に置き、current synthetic preview helper subset は `EXT-03` / `EXT-04` に留める
+- phase 9 residual planned family は `samples/not_implemented/typed-external-boundary/` に置き、current evidence anchor は `05_delegated_rng_service` の `provider_boundary` と Sugoroku helper の `local_queue` envelope / visualization carrier に結び直す
 - phase 13 planned family は `samples/not_implemented/network-transport/` に置き、current evidence anchor は Sugoroku helper の `local_queue` envelope と clean near-end `provider_boundary` に結び直す
 
 ## current judgment

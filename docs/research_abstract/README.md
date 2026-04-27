@@ -77,6 +77,7 @@
 - `hands_on_sugoroku_sample_matrix.md`
 - `avatar_fairy_follow_plan_01.md`
 - `../hands_on/avatar_fairy_follow_representative_slice_01.md`
+- `../hands_on/typed_external_boundary_canaries_01.md`
 
 ## sample highlighter
 
@@ -104,6 +105,7 @@
 - `MessageEnvelope / Auth seam` の first cut は close 済みであり、current helper/report-local carrier は `auth none` baseline を explicit に見せる
 - `VisualizationProtocol` の first cut も close 済みであり、current helper/report-local carrier は label / authority / redaction を持つ typed visualization / telemetry line を explicit に見せる
 - `Typed external boundary / adapter` の docs-first sample plan も close 済みであり、phase 9 `EXT-01..05` planned family は `samples/not_implemented/typed-external-boundary/` を参照する
+- `Typed external boundary executable widening` も current line に入り、`scripts/typed_external_boundary_samples.py` と `samples/not_implemented/typed-external-boundary/` で `EXT-03` / `EXT-04` synthetic preview helper subset を確認できる
 - `Projection / placement` の docs-first plan も close 済みであり、`plan/20-projection-and-placement-roadmap.md` と `docs/research_abstract/projection_placement_plan_01.md` を current anchor にする
 - `HotPlug Patch / AttachPoint` の helper-local executable widening も close 済みであり、`plan/21-hotplug-attachpoint-roadmap.md`、`docs/research_abstract/hotplug_attachpoint_plan_01.md`、Sugoroku helper の `hotplug_lifecycle` / `--debug hotplug` を current anchor にする
 - `Network transport` の docs-first plan も close 済みであり、`plan/22-network-transport-roadmap.md` と `docs/research_abstract/network_transport_plan_01.md` を current anchor にする

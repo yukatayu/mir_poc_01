@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 21:38 JST
+最終更新: 2026-04-27 22:23 JST
 
 ## この文書について
 
@@ -37,9 +37,10 @@
 - `Avatar fairy follow residual widening` は `docs/reports/0933-*` で close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、phase 8 residual planned family を `FAIRY-05` だけに縮めた
 - `cross-package sweep` は `docs/reports/0934-*` で close し、active evidence / planned family / mixed gate の current reading を recut した
 - `FAIRY-05 residual reacquire design` は `docs/reports/0939-*` で close し、sample 自体は planned のままに保ちつつ、explicit state timeline / anchor switch evidence requirement と exact carrier bundling `UNRESOLVED` を docs-first に固定した
+- `Typed external boundary executable widening` は `docs/reports/0941-*` で close し、`scripts/typed_external_boundary_samples.py`、synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05`、`plan/25-typed-external-boundary-executable-roadmap.md` を current line に同期した。current validation は helper self-consistency と anchor comparison であり、phase 9 `.mir` の direct semantic execution ではない
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **Typed external boundary / adapter executable widening**
-- next reopen point は **Projection / placement executable widening**
+- current promoted next line は **Projection / placement executable widening**
+- next reopen point は **Typed external boundary residual planned family review**
 
 ## current executable floor
 
@@ -89,7 +90,8 @@
   - `FAIRY-05` target reacquire after return
     - docs-first reopen-gate review は close 済みだが、exact carrier bundling は `UNRESOLVED`
 - `samples/not_implemented/typed-external-boundary/`
-  - `EXT-01..05` docs-first adapter ladder
+  - `EXT-01` / `EXT-02` / `EXT-05` residual planned family
+  - `EXT-03` / `EXT-04` synthetic preview source stub family
 - `samples/not_implemented/network-transport/`
   - future source/backlog family for non-helper-local transport widening
 
@@ -129,6 +131,12 @@
 - `python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json`
 - `python3 -m unittest scripts.tests.test_network_transport_samples`
 - `python3 scripts/network_transport_samples.py closeout --format json`
+- `python3 scripts/typed_external_boundary_samples.py check-all --format json`
+- `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json`
+- `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug visualization --format json`
+- `python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json`
+- `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+- `python3 -m unittest scripts.tests.test_typed_external_boundary_samples`
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
 - `cargo test -p mir-runtime --test clean_near_end_samples`
@@ -140,24 +148,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Typed external boundary / adapter executable widening
-
-- phase / stage:
-  `Macro 6`, `reserve`
-- rough estimate:
-  `1 package`
-- objective:
-  `EXT-01..05` planned ladder のうち最小の dedicated adapter helper / debug carrier を actualize する
-- expected deliverables:
-  provider boundary / local queue evidence を崩さない executable helper cut
-- validation command:
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、typed external boundary と transport/auth split を明記する
-- stop line:
-  host-specific public adapter API や production binding は固定しない
-
-### Package 2. Projection / placement executable widening
+### Package 1. Projection / placement executable widening
 
 - phase / stage:
   `Macro 6`, `reserve`
@@ -173,6 +164,25 @@
   新しい report、projection validity と stop line を明記する
 - stop line:
   final projection IR / optimizer / equivalence checker は固定しない
+
+### Package 2. Typed external boundary residual planned family review
+
+- phase / stage:
+  `Macro 6`, `reserve`
+- rough estimate:
+  `1 package`
+- objective:
+  `EXT-01` / `EXT-02` / `EXT-05` の residual planned family と `EXT-03` / `EXT-04` synthetic preview subset を projection / visualization / host-schema pressure と照らして reopen 条件まで整理する
+- expected deliverables:
+  synthetic preview helper と final public host-facing gate を混同しない reopen criterion
+- validation command:
+  `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json`
+- report requirement:
+  新しい report、scenario label / host schema / visualization gate の分離を明記する
+- stop line:
+  console / overlay / viewer contract を final public API として固定しない
 
 ## research を通して見つけること
 
@@ -206,3 +216,14 @@
   CLI / library / engine-adapter / hybrid
 - current recommendation / 見解:
   current task では固定せず、backend / LLVM preparation の後に user-spec gate として reopen する
+
+### Blocker 3. final public adapter contract / host schema scope
+
+- 概要:
+  typed external helper-local canary からどの host-facing contract を public surface へ上げるか
+- 影響:
+  phase 9 residual planned family、projection / visualization lane、future adapter ABI
+- 主要な選択肢:
+  helper-local scenario label のまま進める / host schema draft を早めに起こす
+- current recommendation / 見解:
+  `EXT-03` / `EXT-04` synthetic preview subset を evidence floor に保ち、final public host-facing contract は mixed gate に残す

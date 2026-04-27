@@ -1,0 +1,22 @@
+# EXT-02 planned residual phase 9 skeleton.
+# Not an active runnable sample.
+# Goal: show floating world-overlay text while keeping host/world surface
+# separate from final public visualization and adapter contracts.
+
+module PlannedMirrorea.TypedExternalBoundary.ShowFloatingTextWorldOverlay
+
+place SharedWorld {
+  place ParticipantPlace#A {
+    transition show_overlay_notice by Alice at ParticipantPlace#A {
+      requires witness(overlay_notice_pub)
+
+      stage request_overlay_effect:
+        perform ShowFloatingText(overlay_notice#1)
+          via WorldOverlayAdapter#future
+
+      stage defer_host_contract:
+        ensure overlay_notice_visible#1
+        ensure final_host_schema = OPEN
+      }
+  }
+}

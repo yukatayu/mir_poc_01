@@ -37,6 +37,8 @@
   - docs-first plan は `0925` / `plan/21` で actualize したが、final ABI / rollback / durable migration engine は未決のまま残す
 - network transport widening / reconnect / failure matrix
   - docs-first plan は `0926` / `plan/22` で actualize したが、final transport ABI / session protocol / multi-server consensus / durable commit は未決のまま残す
+- typed external executable widening と final host-facing gate の分離
+  - helper-local synthetic preview cut は `0941` / `plan/25` で actualize したが、final public adapter API、console / overlay / viewer contract、browser / network / VR family split は未決のまま残す
 - actual LLVM build / backend choice / packaging success criteria
   - guardrail と non-destructive probe は `0927` / `plan/23` で actualize したが、actual LLVM artifact、final backend choice、installed-binary / FFI / engine adapter success criteria は未決のまま残す
 - avatar fairy follow residual `FAIRY-05` を active helper に取り込むか

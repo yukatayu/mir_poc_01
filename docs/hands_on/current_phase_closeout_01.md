@@ -16,6 +16,7 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/current_l2_guided_samples.py closeout --format json
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
+python3 scripts/typed_external_boundary_samples.py closeout --format json
 python3 scripts/network_transport_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
@@ -33,6 +34,9 @@ python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --fo
 python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json
 python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json
 python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json
+python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json
+python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug visualization --format json
+python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json
@@ -45,6 +49,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - active clean near-end suite と Sugoroku world / avatar fairy follow representative slice が current runnable floor にあること
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`VisualizationProtocol` の helper-local / report-local first cut が current line に同期されていること
 - `Network transport` の `NET-01` helper-local loopback preview と `NET-02..05` helper-local canary が actualize 済みであり、same-process parity、subprocess JSON bridge、stale reconnect reject、typed failure family、observer-safe redacted route trace を current evidence surface として確認できること
+- phase 9 typed external boundary の `EXT-03` / `EXT-04` synthetic preview helper subset が actualize 済みであり、effect boundary / transport envelope / auth evidence / witness refs の non-collapse と typed adapter failure lane を helper self-consistency + anchor comparison の current evidence surface として確認できること
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view を envelope-derived evidence として確認できること
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
@@ -94,8 +99,8 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. Typed external boundary / adapter executable widening
-2. Projection / placement executable widening
+1. Projection / placement executable widening
+2. Typed external boundary residual planned family review
 
 ## 関連文書
 
@@ -104,6 +109,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - `network_transport_canaries_01.md`
 - `../research_abstract/avatar_fairy_follow_plan_01.md`
 - `avatar_fairy_follow_representative_slice_01.md`
+- `typed_external_boundary_canaries_01.md`
 - `../research_abstract/compiler_backend_llvm_preparation_01.md`
 - `../../plan/19-repository-map-and-taxonomy.md`
 - `../../samples_progress.md`

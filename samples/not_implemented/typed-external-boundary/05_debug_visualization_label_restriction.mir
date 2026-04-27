@@ -1,0 +1,22 @@
+# EXT-05 residual planned phase 9 skeleton.
+# Not an active runnable sample.
+# Goal: preserve label / authority / redaction for visualization without
+# freezing a final viewer contract in the phase 9 helper cut.
+
+module PlannedMirrorea.TypedExternalBoundary.DebugVisualizationLabelRestriction
+
+place SharedWorld {
+  place ParticipantPlace#A {
+    transition inspect_private_debug_note by Alice at ParticipantPlace#A {
+      requires witness(debug_note_witness)
+
+      stage request_debug_view:
+        perform DebugShowLabelledText(private_debug_note#1)
+          via DebugAuditAdapter#future
+
+      stage defer_visualizer_contract:
+        ensure visualization_label(private_debug_note#1) = PrivateDebugNote
+        ensure final_visualization_schema = OPEN
+      }
+  }
+}

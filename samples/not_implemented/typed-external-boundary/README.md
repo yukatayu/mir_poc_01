@@ -1,13 +1,18 @@
 # typed-external-boundary planned family
 
-この directory は phase 9 `Typed external boundary / adapter` の **planned skeleton family** です。
+この directory は phase 9 `Typed external boundary / adapter` の **planned source family** です。
 
-- current parser / runner ではまだ扱いません。
+- current repo で runnable なのは
+  `scripts/typed_external_boundary_samples.py` による **synthetic preview helper subset**
+  `EXT-03` / `EXT-04` だけです。
+- その helper はこの directory の source stub を参照しますが、
+  current parser / runtime がこれらの `.mir` を直接 semantic execution しているわけではありません。
+- `EXT-01` / `EXT-02` / `EXT-05` は current parser / runner ではまだ扱いません。
 - final public adapter API、browser/network/VR host schema、real transport 実装を意味しません。
 - current repo では、`provider_boundary` と Sugoroku helper の `local_queue` carrier を
   docs-first evidence anchor として使います。
 
-## planned sample IDs
+## planned source family
 
 - `EXT-01` `LogText` adapter local console
 - `EXT-02` `ShowFloatingText` world overlay
@@ -15,8 +20,9 @@
 - `EXT-04` adapter failure typed result
 - `EXT-05` debug visualization label restriction
 
-これらの name は 2026-04-24 handoff に基づく **working sample ID** です。
-規範正本ではなく、exact host schema / final adapter contract はまだ `OPEN` です。
+これらの name は 2026-04-24 handoff に基づく **working sample ID / scenario label** です。
+final effect 名、exact host schema、final adapter contract はまだ `OPEN` です。
+effect boundary、transport envelope、auth evidence は collapse せずに分けて読みます。
 
 ## current evidence anchors
 
@@ -30,15 +36,29 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 ## intended reading
 
 - `EXT-01`
-  typed `LogText` effect を local console adapter に route する最小線
+  typed `LogText` scenario を local console adapter に route する最小線。
+  stdio builtin 誤読を避けるため、current phase 9 helper cut では residual planned に保つ。
 - `EXT-02`
   host/world overlay 側へ floating text を出すが、visualization label / authority / redaction を保つ線
 - `EXT-03`
-  room-level message publication を local queue の message carrier として扱う線
+  room-level message publication を local queue の message carrier として扱う線。
+  current synthetic preview helper subset の first positive lane。
 - `EXT-04`
-  adapter failure を typed result / explicit failure reason として返す線
+  adapter failure を typed result / explicit failure reason として返す線。
+  current synthetic preview helper subset の typed negative lane。
 - `EXT-05`
-  debug / visualization 出力でも label restriction を破らない線
+  debug / visualization 出力でも label restriction を破らない線。
+  current helper cut では `EXT-03` の visualization view に吸収し、standalone sample としては residual planned に保つ。
+
+## current synthetic preview subset
+
+- `EXT-03`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json`
+- `EXT-04`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json`
+
+この subset は helper self-consistency と evidence-shape preview を確認するための thin facade です。
+phase 9 `.mir` files の direct semantic execution ではありません。
 
 ## stop line
 

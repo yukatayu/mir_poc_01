@@ -1159,6 +1159,7 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `MessageEnvelope / Auth seam` は helper-local / report-local package として close し、Sugoroku `message_envelopes` / `--debug envelopes` と clean near-end `MessageEnvelope` inventory を actualize した。
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
 - `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
+- `Typed external boundary executable widening` は helper-local package として close し、`scripts/typed_external_boundary_samples.py`、`samples/not_implemented/typed-external-boundary/` を読む synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05`、`envelopes` / `visualization` / `failures` debug surface を current snapshot に actualize した。
 - `Projection / placement` は docs-first package として close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction と validity checklist を actualize した。
 - `HotPlug Patch / AttachPoint` は docs-first package と helper-local executable widening を close し、`plan/21-hotplug-attachpoint-roadmap.md` と Sugoroku helper の `hotplug_lifecycle` / `--debug hotplug` / `detach_request#1` canary に compatibility / activation / migration stop line を actualize した。
 - `Network transport` は docs-first package として close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `NET-01..05` を current snapshot に actualize した。
@@ -1169,7 +1170,7 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Avatar fairy follow representative slice` は helper-local package として close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、initial residual planned family `FAIRY-02` / `FAIRY-05`、hands-on landing page を current snapshot に actualize した。
 - `Avatar fairy follow residual widening` は helper-local package として close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた。
 - `FAIRY-05 residual reacquire design` は docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current snapshot に actualize した。
-- current promoted next package は Typed external boundary / adapter executable widening である。
+- current promoted next package は Projection / placement executable widening である。
 
 ## 2026-04-27 repository-structure staging addendum
 

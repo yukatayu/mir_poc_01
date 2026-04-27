@@ -26,7 +26,7 @@
 - `lean/clean-near-end/` は generated theorem stub だが、proof bridge evidence として committed されている
 - `not_implemented/` は planned skeleton であり、active sample ではない
   - `avatar-fairy-follow/` は phase 8 residual planned family
-  - `typed-external-boundary/` は phase 9 planned family
+  - `typed-external-boundary/` は phase 9 residual planned family
   - `network-transport/` は phase 13 planned family
 - `clean-near-end/avatar-follow/` は phase 8 active representative slice
 - `clean-near-end/network-transport/` は phase 13 active helper-local canary landing page
@@ -41,6 +41,7 @@ python3 scripts/current_l2_guided_samples.py smoke-all --format json
 python3 scripts/clean_near_end_samples.py smoke-all --format json
 python3 scripts/sugoroku_world_samples.py check-all
 python3 scripts/avatar_follow_samples.py check-all --format json
+python3 scripts/typed_external_boundary_samples.py check-all --format json
 python3 scripts/network_transport_samples.py check-all --format json
 ```
 

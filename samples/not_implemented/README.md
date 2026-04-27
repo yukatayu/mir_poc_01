@@ -16,6 +16,7 @@
 - `typed-external-boundary/`
   - phase 9 planned skeleton family
   - current parser / runner では扱わない
+  - `scripts/typed_external_boundary_samples.py` がこの source stub family を synthetic preview helper として参照する
   - provider boundary / local queue / typed failure / debug label restriction の docs-first path
 - `network-transport/`
   - phase 13 planned skeleton family

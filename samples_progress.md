@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 21:38 JST
+Last updated: 2026-04-27 22:23 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: promoted Typed external boundary / adapter executable widening、reopen Projection / placement executable widening
+Current active packages: promoted Projection / placement executable widening、reopen Typed external boundary residual planned family review
 
 ## Legend
 
@@ -28,7 +28,7 @@ Progress:
 | Lean / theorem | 89 | active proof bridge | committed Lean bridge と repo-local stub alignment を維持 | `python3 scripts/current_l2_lean_sample_sync.py` |
 | Sugoroku runtime | 90 | active vertical slice | attach / membership / handoff / reset model-check + hot-plug debug lane | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
 | Avatar follow | 90 | widened active representative slice + single residual planned family | active helper canary `FAIRY-01/02/03/04/06` を維持しつつ `FAIRY-05` は docs-first gate fixed / exact carrier bundling unresolved / runnable widening deferred として保つ | `python3 scripts/avatar_follow_samples.py closeout --format json` |
-| External adapters | 10 | planned skeleton | phase 9 `EXT-01..05` ladder を provider-boundary evidence に結び直す | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` |
+| External adapters | 75 | synthetic preview helper + residual planned family | `EXT-03` / `EXT-04` synthetic preview subset を維持しつつ `EXT-01` / `EXT-02` / `EXT-05` residual reopen gate を保つ | `python3 scripts/typed_external_boundary_samples.py closeout --format json` |
 | Network transport | 75 | helper-local canary family | `NET-01..05` helper-local canary を維持しつつ real socket / session / durable replay を deferred に保つ | `python3 scripts/network_transport_samples.py check-all --format json` |
 | Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持しつつ future executable widening に備える | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
 | Projection / placement | 10 | docs-first plan | `plan/20` の validity checklist と stop line を維持しつつ future transport / hot-plug widening に備える | `python3 scripts/validate_docs.py` |
@@ -71,19 +71,18 @@ Progress:
 | `FAIRY-03` | avatar follow | `samples/clean-near-end/avatar-follow/03_remote_avatar_leaves_falls_back_to_local.mir` | active representative canary | 90 | negative + fallback | 2026-04-27 19:35 JST | `0917`, `0930` | leave invalidates stale anchor and falls back locally |
 | `FAIRY-04` | avatar follow | `samples/clean-near-end/avatar-follow/04_invalid_cross_anchor_chain_rejected.mir` | active representative canary | 90 | negative | 2026-04-27 19:35 JST | `0917`, `0930` | invalid cross-anchor lineage stays explicit rejection |
 | `FAIRY-06` | avatar follow | `samples/clean-near-end/avatar-follow/06_model_check_no_detached_anchor_observed.mir` | active representative canary | 90 | verification | 2026-04-27 19:35 JST | `0917`, `0930` | detached-anchor safety verification bridge |
-
 ## Base corpus / planned / spec-only matrix
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
 | `PH8` | avatar follow | `samples/clean-near-end/avatar-follow/`, `samples/not_implemented/avatar-fairy-follow/`, `scripts/avatar_follow_samples.py` | widened active representative slice + residual planned family | 90 | positive + negative + verification | 2026-04-27 20:55 JST | `0917`, `0930`, `0933` | active canary は `FAIRY-01` / `02` / `03` / `04` / `06`; residual planned family は `FAIRY-05` のみ |
 | `FAIRY-05` | avatar follow | `samples/not_implemented/avatar-fairy-follow/05_follow_target_reacquired_after_return.mir` | residual planned skeleton | 10 | not yet | 2026-04-27 21:22 JST | `0917`, `0930`, `0939` | reacquire-after-return remains planned; explicit state timeline / anchor switch evidence gate fixed docs-first, exact witness bundling remains `UNRESOLVED` |
-| `PH9` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | planned docs-first row | 10 | planned | 2026-04-27 18:10 JST | `0913`, `0920`, `0923` | stdio を core primitive にしない boundary、provider boundary / local queue を evidence anchor に使う |
+| `PH9` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper + residual planned row | 75 | synthetic positive + synthetic negative + debug | 2026-04-27 22:21 JST | `0913`, `0920`, `0923`, `0941` | `EXT-03` / `EXT-04` は planned source stub を読む synthetic preview subset。current validation は helper self-consistency と anchor comparison であり、phase 9 `.mir` の direct semantic execution ではない |
 | `PH10` | MessageEnvelope / auth seam | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs` | helper-local / report-local first cut | 90 | positive + negative | 2026-04-27 17:46 JST | `0912`, `0913`, `0920`, `0921` | `auth none` baseline、local queue / provider boundary、public auth contract deferred |
 | `EXT-01` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `LogText` adapter local console; exact host schema open |
 | `EXT-02` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `ShowFloatingText` world overlay; visualization label line remains typed |
-| `EXT-03` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `SendRoomMessage` local queue; message route stays separate from auth |
-| `EXT-04` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | adapter failure typed result; transport failure remains explicit |
+| `EXT-03` | typed external boundary | `samples/not_implemented/typed-external-boundary/03_send_room_message_local_queue.mir`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper lane | 75 | synthetic positive | 2026-04-27 22:21 JST | `0923`, `0941` | helper self-consistency preview only。scenario label は helper-local working name であり、phase 9 `.mir` の direct semantic execution や final effect 名ではない |
+| `EXT-04` | typed external boundary | `samples/not_implemented/typed-external-boundary/04_adapter_failure_typed_result.mir`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper lane | 75 | synthetic negative + typed failure | 2026-04-27 22:21 JST | `0923`, `0941` | helper self-consistency preview only。typed adapter failure lane は explicit だが、phase 9 `.mir` の direct semantic execution ではない |
 | `EXT-05` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | debug visualization label restriction; no untyped leak |
 | `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/research_abstract/projection_placement_plan_01.md` | docs-first row | 10 | planned | 2026-04-27 18:15 JST | `0912`, `0913`, `0920`, `0924` | source-to-place validity checklist、place split、stop line を固定 |
 | `PH13` | network transport | `plan/22-network-transport-roadmap.md`, `samples/clean-near-end/network-transport/README.md`, `scripts/network_transport_samples.py` | helper-local canary family | 75 | positive + negative + typed failure | 2026-04-27 20:27 JST | `0913`, `0920`, `0926`, `0929`, `0932` | `NET-01..05` は current helper-local canary; real socket / public ABI は still later |
@@ -105,7 +104,7 @@ Progress:
 | `E2E-SUG-RESET` | runtime attach -> reset -> stale handoff invalidation | `python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification` | 90 | reset safety と model-check second line の bridge | pass 2026-04-27 15:21 JST |
 | `E2E-TERM-LAYER-INV` | source sample -> helper/runtime inventory | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures` and `--debug layers` | 90 | helper-local `TermSignature` / `LayerSignature` inventory floor | pass 2026-04-27 15:59 JST |
 | `E2E-AVATAR-FALLBACK` | follow -> fallback -> reject -> verification | `python3 scripts/avatar_follow_samples.py check-all --format json` | 90 | representative slice keeps follow / fallback / stale-anchor rejection / detached-anchor safety visible in one helper family | pass 2026-04-27 19:35 JST |
-| `E2E-ADAPTER-BOUNDARY` | source -> adapter -> typed effect receipt/failure | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` and `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 50 | current evidence anchor for provider-boundary / local-queue phase 9 ladder passes as a positive baseline | pass 2026-04-27 20:27 JST |
+| `E2E-ADAPTER-BOUNDARY` | source -> adapter lane -> typed effect receipt/failure | future target: `scripts/typed_external_boundary_samples.py` preview commands + `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` + `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 10 | compositional adapter E2E を later に作るとき、provider-boundary / local-queue anchor と synthetic preview subset をどこまで統合するかの target | planned target only; current validation is helper self-consistency plus anchor comparison |
 | `E2E-NET-LOOPBACK` | local queue -> loopback attach / handoff / reject parity | `python3 scripts/sugoroku_world_samples.py check-all --transport loopback_socket --format json` | 90 | helper-local loopback preview keeps envelope / reject parity across current Sugoroku family | pass 2026-04-27 20:27 JST |
 | `E2E-NET-PROCESS` | subprocess JSON bridge / reconnect guard / failure / route trace | `python3 scripts/network_transport_samples.py check-all --format json` | 90 | helper-local transport canary family keeps process-boundary / freshness / failure / redaction evidence explicit | pass 2026-04-27 20:27 JST |
 | `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 90 | helper-local envelope carrier keeps auth / membership / capability / witness separate | pass 2026-04-27 17:46 JST |
@@ -137,12 +136,18 @@ Progress:
 | final public `AuthEvidence` kind と real transport widening が未決 | auth / transport | medium | mixed gate | keep helper-local `auth none` baseline and reopen with adapter / network packages |
 | transport canary is helper-local only; real socket / session / durable replay remain absent | network transport | medium | mixed gate | keep `NET-01..05` as evidence surface only and reopen real transport later |
 | actual LLVM artifact / backend choice / packaging contract はまだ absent | backend / storage | low | CodeX | keep `plan/23` guardrail fixed and reopen only when a real LLVM/build package is promoted |
+| final public adapter contract / host schema scope が未決 | external adapters | medium | mixed gate | keep `EXT-03` / `EXT-04` synthetic preview subset only and reopen `EXT-01` / `EXT-02` / `EXT-05` after projection / visualization pressure clarifies |
 | repository taxonomy drift can reintroduce active/planned/generated confusion | docs / structure | medium | CodeX | keep `plan/19`, `samples/README.md`, `scripts/README.md`, `0920` report in sync |
 
 ## Recent validation
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 21:55 JST | `python3 -m unittest scripts.tests.test_typed_external_boundary_samples` | pass | dedicated typed external helper test suite; 10 tests green |
+| 2026-04-27 22:21 JST | `python3 scripts/typed_external_boundary_samples.py check-all --format json` | pass | synthetic preview subset `EXT-03` / `EXT-04`; residual planned `EXT-01` / `EXT-02` / `EXT-05`; helper self-consistency only |
+| 2026-04-27 22:21 JST | `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json` | pass | envelope id / auth none / membership freshness / capability / witness split visible in synthetic preview helper |
+| 2026-04-27 22:21 JST | `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug visualization --format json` | pass | label / authority / redaction preview visible in synthetic preview helper |
+| 2026-04-27 22:21 JST | `python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json` | pass | typed adapter failure family remains explicit in synthetic preview helper |
 | 2026-04-27 21:38 JST | `python3 scripts/check_source_hierarchy.py` | pass | reviewer re-check report `0940` added after `0939`; required `23`, present `23`, missing `0` |
 | 2026-04-27 21:38 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 938 numbered report(s).` after `0940` rereview report |
 | 2026-04-27 21:38 JST | `git diff --check` | pass | whitespace-clean after reviewer rereview follow-up |

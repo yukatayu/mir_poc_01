@@ -39,6 +39,7 @@
   - current runnable floor と remaining mixed gate を、短い command sequence 付きで読むための landing page である。
   - `current_phase_closeout_01.md` は 2026-04-27 時点の current phase closeout guide であり、規範判断を追加せず current sample / helper / report / storage guardrail の読みを束ねる。
   - `avatar_fairy_follow_representative_slice_01.md` は、phase 8 active representative slice を最短コマンドで追うための landing page である。
+  - `typed_external_boundary_canaries_01.md` は、phase 9 synthetic preview helper subset を最短コマンドで追うための landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を

@@ -12,6 +12,7 @@
 - `current_l2_guided_samples.py`
 - `sugoroku_world_samples.py`
 - `avatar_follow_samples.py`
+- `typed_external_boundary_samples.py`
 - `network_transport_samples.py`
 
 ### current-L2 helper / detached loop / support
