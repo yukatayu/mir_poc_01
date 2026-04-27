@@ -4,7 +4,7 @@ use serde::Serialize;
 
 use crate::{
     clean_near_end::{
-        clean_near_end_json_value, run_clean_near_end_sample, CleanNearEndSampleReport,
+        CleanNearEndSampleReport, clean_near_end_json_value, run_clean_near_end_sample,
     },
     current_l2::run_current_l2_source_sample,
 };
@@ -72,9 +72,7 @@ pub fn current_l2_operational_cli_usage() -> String {
     )
 }
 
-pub fn run_current_l2_operational_cli<I, S>(
-    args: I,
-) -> Result<String, CurrentL2OperationalCliError>
+pub fn run_current_l2_operational_cli<I, S>(args: I) -> Result<String, CurrentL2OperationalCliError>
 where
     I: IntoIterator<Item = S>,
     S: Into<String>,
@@ -144,7 +142,7 @@ fn parse_run_source_sample_command(
             other => {
                 return Err(CurrentL2OperationalCliError::usage(format!(
                     "unexpected argument `{other}`"
-                )))
+                )));
             }
         }
     }
@@ -244,7 +242,12 @@ fn load_current_l2_source_report(
         sample: source_report.sample_id,
         sample_path: source_report.sample_path.display().to_string(),
         host_plan_path: host_plan_path.display().to_string(),
-        static_verdict: match source_report.runtime_report.checker_floor.static_gate.verdict {
+        static_verdict: match source_report
+            .runtime_report
+            .checker_floor
+            .static_gate
+            .verdict
+        {
             StaticGateVerdict::Valid => "valid".to_string(),
             StaticGateVerdict::Malformed => "malformed".to_string(),
             StaticGateVerdict::Underdeclared => "underdeclared".to_string(),
@@ -304,7 +307,11 @@ fn render_current_l2_report(
             report.host_plan_path,
             report.static_verdict,
             report.runtime.entered_evaluation,
-            report.runtime.terminal_outcome.clone().unwrap_or_else(|| "null".to_string()),
+            report
+                .runtime
+                .terminal_outcome
+                .clone()
+                .unwrap_or_else(|| "null".to_string()),
             report.runtime.steps_executed,
             format_lines(&report.runtime.events),
         )),
@@ -326,15 +333,26 @@ fn render_clean_report(
             report.sample,
             report.family.as_str(),
             report.source_path,
-            report.static_verdict.clone().unwrap_or_else(|| "null".to_string()),
+            report
+                .static_verdict
+                .clone()
+                .unwrap_or_else(|| "null".to_string()),
             report.entered_evaluation,
-            report.terminal_outcome.clone().unwrap_or_else(|| "null".to_string()),
-            report.reason_family.clone().unwrap_or_else(|| "null".to_string()),
+            report
+                .terminal_outcome
+                .clone()
+                .unwrap_or_else(|| "null".to_string()),
+            report
+                .reason_family
+                .clone()
+                .unwrap_or_else(|| "null".to_string()),
             format_lines(&report.constraints_solved),
             format_lines(&report.constraints_failed),
         )),
-        CurrentL2CliOutputFormat::Json => serde_json::to_string_pretty(&clean_near_end_json_value(&report))
-            .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string())),
+        CurrentL2CliOutputFormat::Json => {
+            serde_json::to_string_pretty(&clean_near_end_json_value(&report))
+                .map_err(|error| CurrentL2OperationalCliError::execution(error.to_string()))
+        }
     }
 }
 

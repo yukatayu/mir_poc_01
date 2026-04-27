@@ -1,7 +1,9 @@
 use std::path::PathBuf;
 
 use mir_runtime::current_l2::run_current_l2_source_sample;
-use mir_semantics::{FixtureHostPlan, StaticGateVerdict, TerminalOutcome, load_bundle_from_fixture_path};
+use mir_semantics::{
+    FixtureHostPlan, StaticGateVerdict, TerminalOutcome, load_bundle_from_fixture_path,
+};
 
 fn fixture_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -32,8 +34,8 @@ fn current_l2_source_sample_runner_rejects_path_outside_fixed_subset() {
     let temp = std::env::temp_dir().join("outside-current-l2-sample.txt");
     std::fs::write(&temp, "place root {}").unwrap();
 
-    let error =
-        run_current_l2_source_sample(temp.to_str().unwrap(), FixtureHostPlan::default()).unwrap_err();
+    let error = run_current_l2_source_sample(temp.to_str().unwrap(), FixtureHostPlan::default())
+        .unwrap_err();
 
     assert!(
         error

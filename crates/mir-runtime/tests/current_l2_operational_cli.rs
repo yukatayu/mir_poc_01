@@ -65,7 +65,10 @@ fn operational_cli_json_reports_clean_rejection() {
     let value: Value = serde_json::from_str(&output).unwrap();
     assert_eq!(value["sample"], "02_unauthorized_declassification_rejected");
     assert_eq!(value["static_verdict"], "malformed");
-    assert_eq!(value["reason_family"], "authority_preorder_constraint_failed");
+    assert_eq!(
+        value["reason_family"],
+        "authority_preorder_constraint_failed"
+    );
     assert_eq!(value["entered_evaluation"], false);
 }
 

@@ -1,6 +1,6 @@
 use mir_runtime::clean_near_end::{
-    build_clean_near_end_closeout, build_clean_near_end_matrix, list_clean_near_end_samples,
-    run_clean_near_end_family, run_clean_near_end_sample, CleanSampleFamily,
+    CleanSampleFamily, build_clean_near_end_closeout, build_clean_near_end_matrix,
+    list_clean_near_end_samples, run_clean_near_end_family, run_clean_near_end_sample,
 };
 
 fn main() {
