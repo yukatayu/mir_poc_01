@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 18:32 JST
+最終更新: 2026-04-27 18:48 JST
 
 ## この文書について
 
@@ -28,9 +28,10 @@
 - `Projection / placement` は `docs/reports/0924-*` で close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction、place split、validity checklist、stop line を追加した
 - `HotPlug Patch / AttachPoint` は `docs/reports/0925-*` で close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を追加した
 - `Network transport` は `docs/reports/0926-*` で close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` に loopback / reconnect / failure matrix の docs-first ladder を追加した
+- `Compiler/backend/LLVM preparation` は `docs/reports/0927-*` で close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe floor を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Compiler/backend/LLVM preparation`**
-- next docs-first package は **`Hands-on docs / closeout`**
+- current promoted next line は **`Hands-on docs / closeout`**
+- next docs-first package は **`Network transport executable widening`**
 
 ## current executable floor
 
@@ -110,28 +111,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Compiler/backend/LLVM preparation
-
-- phase / stage:
-  `Macro 6 -> Macro 7`, `S1 -> S2`
-- rough estimate:
-  `0.5 package`
-- objective:
-  external workdir、cache placement、detach-safe cleanup、minimal probe を small VPS 前提で固める
-- expected deliverables:
-  storage/backend guardrail docs、probe plan、closeout sync
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-  `bash scripts/env/mirrorea_storage_env.sh`
-  `bash scripts/storage/detach_prepare.sh`
-  `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
-- report requirement:
-  新しい report、root-disk guardrail と detach-safe cleanup を明記する
-- stop line:
-  production backend / final LLVM pipeline は固定しない
-
-### Package 2. Hands-on docs / closeout
+### Package 1. Hands-on docs / closeout
 
 - phase / stage:
   `Macro 6 -> Macro 7`, `S1 -> S2`
@@ -140,15 +120,16 @@
 - objective:
   日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation / skip reason / commit/push evidence を固定する
 - expected deliverables:
-  current future-axis closeout guide、phase/sample summary、必要なら helper-local report
+  current future-axis closeout guide、phase/sample summary、remaining mixed gate の整理
 - validation command:
+  `python3 scripts/check_source_hierarchy.py`
   `python3 scripts/validate_docs.py`
 - report requirement:
   新しい report、current phase closeout と remaining mixed gate を明記する
 - stop line:
   generated public backend、placement optimizer、final operational scheduler は実装しない
 
-### Package 3. Network transport executable widening
+### Package 2. Network transport executable widening
 
 - phase / stage:
   `Macro 7`, `S1 -> S2`
@@ -165,6 +146,23 @@
   新しい report、loopback widening と auth/transport separation evidence を明記する
 - stop line:
   production transport、public deployment contract、cryptographic session protocol は固定しない
+
+### Package 3. Avatar fairy follow representative slice
+
+- phase / stage:
+  `Macro 7`, `S1 -> S2`
+- rough estimate:
+  `1 package`
+- objective:
+  phase 8 skeleton family を active helper / validation line へ昇格できるかを判断する
+- expected deliverables:
+  helper contract、debug mode、promotion condition、必要なら first canary
+- validation command:
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、follow / fallback / stale-anchor rejection の current carrier を明記する
+- stop line:
+  final game/runtime API や production avatar stack は固定しない
 
 ## research を通して見つけること
 

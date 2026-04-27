@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 18:32 JST
+Last updated: 2026-04-27 18:48 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、`0926` Network transport close、next `Compiler/backend/LLVM prep`, `Hands-on closeout`, `Network transport executable widening`
+Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、`0924` Projection / placement close、`0925` HotPlug Patch / AttachPoint close、`0926` Network transport close、`0927` Compiler/backend/LLVM prep close、next `Hands-on closeout`, `Network transport executable widening`, `Avatar reopen`
 
 ## Legend
 
@@ -81,7 +81,7 @@ Progress:
 | `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/research_abstract/projection_placement_plan_01.md` | docs-first row | 10 | planned | 2026-04-27 18:15 JST | `0912`, `0913`, `0920`, `0924` | source-to-place validity checklist、place split、stop line を固定 |
 | `PH13` | network transport | `plan/22-network-transport-roadmap.md`, `samples/not_implemented/network-transport/README.md` | docs-first row | 10 | planned | 2026-04-27 18:32 JST | `0913`, `0920`, `0926` | `NET-01..05` ladder、loopback / reconnect / typed failure / route trace stop line を固定 |
 | `PH15` | visualization / IDE | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs`, `mir_hilight.html` | helper-local / report-local first cut | 90 | positive | 2026-04-27 18:04 JST | `0910`, `0911`, `0913`, `0918`, `0920`, `0922` | typed/redacted visualization actualized; final public viewer and retention remain deferred |
-| `PH16` | compiler/backend/LLVM prep | `scripts/env/mirrorea_storage_env.sh`, `scripts/storage/*` | ops guardrail | 50 | partial | 2026-04-27 13:20 JST | `0913`, `0915`, `0920` | cargo registry cache / LLVM actual probe still open |
+| `PH16` | compiler/backend/LLVM prep | `scripts/env/mirrorea_storage_env.sh`, `scripts/storage/*`, `plan/23-compiler-backend-llvm-guardrail-roadmap.md` | ops guardrail | 75 | partial | 2026-04-27 18:48 JST | `0913`, `0915`, `0920`, `0927` | `CARGO_HOME` probe と LLVM path readiness は actualize; actual LLVM build はまだない |
 
 ## E2E samples
 
@@ -106,9 +106,10 @@ Progress:
 |---|---|---|---|
 | External workdir | mounted | `/mnt/mirrorea-work` | `/dev/vdb1` ext4 `mirrorea-work`, UUID `a87650a8-e3e9-4977-8940-6c293a0ee23c`, backed by `fstab` |
 | Root setup helper | verified | `scripts/storage/setup_mirrorea_workdisk_root.sh` | GPT + ext4 + `/mnt/mirrorea-work` + UUID `fstab`; current session で mount 済み |
-| Cargo target | externalized | `target/` -> `/mnt/mirrorea-work/cargo-target` | existing build artifact は SSD 側へ移送済み |
-| Storage env script | yes | `scripts/env/mirrorea_storage_env.sh` | mounted default を確認しつつ safe path を export |
-| LLVM build | path ready | `/mnt/mirrorea-work/llvm/{src,build,install}` | actual LLVM artifact はまだない |
+| Cargo target | externalized | `target/` -> `/mnt/mirrorea-work/cargo-target` | existing build artifact は SSD 側へ移送済み; current external usage `5.3G` |
+| Storage env script | yes | `scripts/env/mirrorea_storage_env.sh` | mounted default を確認しつつ safe path を exportし、`CARGO_HOME` も external workdir へ向ける |
+| Cargo registry cache probe | verified | `/mnt/mirrorea-work/cargo-registry-cache` | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` pass |
+| LLVM build | path ready | `/mnt/mirrorea-work/llvm/{src,build,install}` | directory existence は確認済み; actual LLVM artifact はまだない |
 | Generated artifacts | policy only | `/mnt/mirrorea-work/generated-artifacts` | heavy disposable artifact は root よりこちらを優先 |
 | Detach prep script | yes | `scripts/storage/detach_prepare.sh` | non-destructive; status print only |
 | Cleanup script | yes | `scripts/storage/cleanup_disposable_artifacts.sh` | requires `--confirm`; current default では safe guard 付き |
@@ -122,13 +123,27 @@ Progress:
 | final public visualization contract / retention / multi-tenant telemetry が未決 | visualization | medium | mixed gate | keep helper/report-local first cut only and reopen after adapter / projection packages |
 | final public `AuthEvidence` kind と real transport widening が未決 | auth / transport | medium | mixed gate | keep helper-local `auth none` baseline and reopen with adapter / network packages |
 | no executable loopback / separate-process transport sample exists | network transport | medium | mixed gate | keep `plan/22` / `NET-01..05` as docs-first floor until helper/runtime widening starts |
-| mounted workdir exists but cargo registry cache / LLVM actual probe is not yet exercised | backend / storage | low | CodeX | run first backend / LLVM preparation package on `/mnt/mirrorea-work` |
+| actual LLVM artifact / backend choice / packaging contract はまだ absent | backend / storage | low | CodeX | keep `plan/23` guardrail fixed and reopen only when a real LLVM/build package is promoted |
 | repository taxonomy drift can reintroduce active/planned/generated confusion | docs / structure | medium | CodeX | keep `plan/19`, `samples/README.md`, `scripts/README.md`, `0920` report in sync |
 
 ## Recent validation
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 18:48 JST | `python3 scripts/check_source_hierarchy.py` | pass | backend/LLVM guardrail sync did not introduce hierarchy drift |
+| 2026-04-27 18:48 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 925 numbered report(s).` |
+| 2026-04-27 18:48 JST | `bash scripts/env/mirrorea_storage_env.sh` | pass | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache` remains the intended external binding |
+| 2026-04-27 18:48 JST | `bash scripts/storage/detach_prepare.sh` | pass | non-destructive status and disposable-candidate inventory remained readable after guardrail sync |
+| 2026-04-27 18:48 JST | `bash scripts/storage/cleanup_disposable_artifacts.sh --list` | pass | delete still requires explicit confirmation |
+| 2026-04-27 18:48 JST | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` | pass | cargo registry cache path remained usable on external workdir |
+| 2026-04-27 18:48 JST | `git diff --check` | pass | whitespace-clean after backend/LLVM guardrail sync |
+| 2026-04-27 18:35 JST | `df -h / /mnt/mirrorea-work` | pass | root `32G` free, external workdir `181G` free |
+| 2026-04-27 18:35 JST | `findmnt /mnt/mirrorea-work` | pass | `/dev/vdb1` ext4 mount confirmed |
+| 2026-04-27 18:35 JST | `bash scripts/env/mirrorea_storage_env.sh` | pass | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache` exported |
+| 2026-04-27 18:35 JST | `bash scripts/storage/detach_prepare.sh` | pass | non-destructive status output and disposable candidates confirmed |
+| 2026-04-27 18:35 JST | `bash scripts/storage/cleanup_disposable_artifacts.sh --list` | pass | delete requires explicit confirmation |
+| 2026-04-27 18:35 JST | `ls -ld /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install` | pass | LLVM directories exist; artifact absent |
+| 2026-04-27 18:35 JST | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` | pass | cargo registry cache path is usable on external workdir |
 | 2026-04-27 18:32 JST | `python3 scripts/check_source_hierarchy.py` | pass | network transport docs-first package did not introduce hierarchy drift |
 | 2026-04-27 18:32 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 924 numbered report(s).` |
 | 2026-04-27 18:32 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | pass | local-queue envelope remains current phase 13 evidence anchor |

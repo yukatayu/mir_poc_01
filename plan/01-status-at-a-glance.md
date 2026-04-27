@@ -22,11 +22,17 @@
 - root disk:
   `/dev/vda2` 99G 中 32G free
 - repo size:
-  `5.3G`
+  `90M`
 - `target/`:
   repo path は `/mnt/mirrorea-work/cargo-target` への symlink に切り替え済み
+  - external usage:
+    `5.3G`
+- cargo registry cache:
+  `/mnt/mirrorea-work/cargo-registry-cache`
+  - current probe:
+    `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
 - `.git/`:
-  `66M`
+  `69M`
 - extra storage:
   `/dev/vdb1` ext4 `mirrorea-work` が `/mnt/mirrorea-work` に mounted
   - UUID:
@@ -35,6 +41,8 @@
     UUID-based `defaults,nofail`
   - current active cutover:
     `target/` は SSD 側へ移送済み
+  - LLVM path readiness:
+    `/mnt/mirrorea-work/llvm/{src,build,install}` は作成済み、actual artifact はまだない
 
 ## twin peaks の current state
 
@@ -95,17 +103,18 @@
 - `docs/reports/0924-*` で `Projection / placement` docs-first plan を close し、`plan/20-projection-and-placement-roadmap.md` を追加した
 - `docs/reports/0925-*` で `HotPlug Patch / AttachPoint` docs-first plan を close し、`plan/21-hotplug-attachpoint-roadmap.md` を追加した
 - `docs/reports/0926-*` で `Network transport` docs-first plan を close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` を追加した
+- `docs/reports/0927-*` で `Compiler/backend/LLVM preparation` guardrail を close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe evidence を追加した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next reopen point は compiler/backend/LLVM preparation
+- next reopen point は hands-on docs / closeout
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug docs-first plan、phase 13 network transport docs-first plan を先に入れた上で、next promoted package を compiler/backend/LLVM preparation と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug docs-first plan、phase 13 network transport docs-first plan、phase 16 backend/LLVM guardrail を先に入れた上で、next promoted package を hands-on docs / closeout と読む
 - phase 8 representative sample 候補は `samples/not_implemented/avatar-fairy-follow/` に skeleton family を切り出したが、current active helper はまだない
-- package 6 以降は network transport plan、compiler/backend/LLVM prep guardrail
+- package 6 以降は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

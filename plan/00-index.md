@@ -18,7 +18,7 @@
 5. current-L2 実装寄りなら `plan/04 ... plan/09`
 6. 全体計画なら `plan/10-roadmap-overall.md`
 7. 直近の research split は `plan/11-roadmap-near-term.md`
-8. projection / placement と hot-plug / transport の current roadmap は `plan/20`、`plan/21`、`plan/22`
+8. projection / placement と hot-plug / transport / backend guardrail の current roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`
 9. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
@@ -57,6 +57,7 @@
   `plan/20-projection-and-placement-roadmap.md`
   `plan/21-hotplug-attachpoint-roadmap.md`
   `plan/22-network-transport-roadmap.md`
+  `plan/23-compiler-backend-llvm-guardrail-roadmap.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

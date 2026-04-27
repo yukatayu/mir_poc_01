@@ -37,8 +37,9 @@
   - docs-first plan は `0925` / `plan/21` で actualize したが、final ABI / rollback / durable migration engine は未決のまま残す
 - network transport widening / reconnect / failure matrix
   - docs-first plan は `0926` / `plan/22` で actualize したが、final transport ABI / session protocol / multi-server consensus / durable commit は未決のまま残す
+- actual LLVM build / backend choice / packaging success criteria
+  - guardrail と non-destructive probe は `0927` / `plan/23` で actualize したが、actual LLVM artifact、final backend choice、installed-binary / FFI / engine adapter success criteria は未決のまま残す
 - avatar fairy follow helper surface、debug mode、active promotion条件
-- detached artifact root を repo-local `target/` default から external workdir へどう ratchet するか
 - final parser grammar
 - final parser / checker / runtime / verifier API
 - final theorem result / checker artifact / verifier contract

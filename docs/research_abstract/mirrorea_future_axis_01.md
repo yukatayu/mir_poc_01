@@ -46,6 +46,7 @@ final public layer law schema を意味しません。
 さらに `Projection / placement` の docs-first plan も close しました。
 さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
 さらに `Network transport` の docs-first plan も close しました。
+さらに `Compiler/backend/LLVM preparation` guardrail も close しました。
 
 - Sugoroku helper に `message_envelopes` と `--debug envelopes`
 - clean near-end report / closeout に `MessageEnvelope` inventory
@@ -166,6 +167,21 @@ transport widening は `local_queue` baseline をそのまま final public trans
 current anchor、`NET-01..05` planned family、transport widening invariant、stop line を置いてあります。
 ここでも transport と auth / membership / capability / witness / visualization を collapse しません。
 
+### compiler/backend/LLVM preparation
+
+toolchain / backend 側では、small VPS と detachable workdir を前提に、
+root disk を build cache や LLVM artifact で既成事実化しない guardrail を先に固定します。
+
+- external workdir
+- `CARGO_TARGET_DIR`
+- `CARGO_HOME`
+- LLVM path readiness
+- non-destructive cleanup
+
+2026-04-27 時点では、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` に
+current anchor、non-destructive probe floor、stop line を置いてあります。
+actual LLVM build、final backend choice、final packaging / FFI / engine adapter target はまだ fixed しません。
+
 ## representative slices
 
 ### current
@@ -212,17 +228,16 @@ object attach/follow lifecycle を representative に検証する予定です。
 - `Projection / placement` docs-first plan
 - `HotPlug Patch / AttachPoint` docs-first plan
 - `Network transport` docs-first plan
+- `Compiler/backend/LLVM preparation` guardrail
 
 現在の promoted queue は次です。
 
-1. `Compiler/backend/LLVM preparation`
-   - external workdir、cache placement、detach-safe cleanup、small-VPS guardrail を整理する package
-2. `hands-on docs / closeout`
+1. `hands-on docs / closeout`
    - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期する package
+2. `Network transport` executable widening
+   - `plan/22` を helper / runtime / loopback proof-of-concept へ widen する後段 package
 3. `Avatar fairy follow` representative slice
    - `samples/not_implemented/avatar-fairy-follow/` の skeleton family を active helper / validation line へ昇格できるかを検討する後段 package
-4. `Network transport` executable widening
-   - `plan/22` を helper / runtime / loopback proof-of-concept へ widen する後段 package
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 

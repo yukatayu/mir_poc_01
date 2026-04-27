@@ -60,7 +60,8 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `Projection / placement` の docs-first plan も close してあり、`plan/20-projection-and-placement-roadmap.md` で system-wide source と place-specific program の validity checklist を固定しました。
 - `HotPlug Patch / AttachPoint` の docs-first plan も close してあり、`plan/21-hotplug-attachpoint-roadmap.md` で compatibility / activation / migration stop line を固定しました。
 - `Network transport` の docs-first plan も close してあり、`plan/22-network-transport-roadmap.md` で local queue / provider boundary current anchor、loopback / reconnect / failure matrix、stop line を固定しました。
-- next queue は、compiler/backend/LLVM prep、hands-on closeout、その後の executable transport / avatar reopen の順で進めます。
+- `Compiler/backend/LLVM preparation` guardrail も close してあり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` で external workdir、`CARGO_HOME`、LLVM path、cleanup safety、stop line を固定しました。
+- next queue は、hands-on closeout、その後の executable transport / avatar reopen の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
 
