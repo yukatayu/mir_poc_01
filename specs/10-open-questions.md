@@ -177,9 +177,9 @@
        `plan/21-hotplug-attachpoint-roadmap.md` により、compatibility checklist、activation cut、migration stop line、
        `SUG-01` attach / `SUG-09` detach TODO boundary、`hotplug_lifecycle` / `--debug hotplug` / `detach_request#1` auth-none canary までは current line に上げてよい。
      - 未決なのは final hot-plug ABI、rollback、durable state migration engine である。
-  7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-02` visibility-loss-only fallback と `FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。
-     - 2026-04-27 時点で active representative slice は `FAIRY-01` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06`、residual planned family は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-02` / `FAIRY-05` に固定した。
-     - 未決なのは `FAIRY-02` / `FAIRY-05` を同じ helper で widen するか、future visualization / projection / hot-plug lane とどこで接続するかである。
+  7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。
+     - 2026-04-27 時点で active representative slice は `FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06`、residual planned family は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-05` に固定した。
+     - 未決なのは `FAIRY-05` を同じ helper で widen するか、state-timeline / anchor-switch carrier を helper-local に入れるか、future visualization / projection / hot-plug lane とどこで接続するかである。
 
 ## PrismCascade
 

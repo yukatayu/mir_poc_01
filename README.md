@@ -50,7 +50,7 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - authentication は transport そのものに埋め込まず、authorization / membership / capability / witness と分けて扱います。
 - visualization と telemetry も情報を外へ出す effect なので、label / authority / redaction を持つ typed layer として扱います。
 - current representative sample は Sugoroku world runtime attachment vertical slice と avatar fairy follow representative slice です。
-  avatar follow の active subset は `samples/clean-near-end/avatar-follow/` にあり、`FAIRY-02` / `FAIRY-05` だけが `samples/not_implemented/avatar-fairy-follow/` に residual planned family として残っています。
+  avatar follow の active subset は `samples/clean-near-end/avatar-follow/` にあり、`FAIRY-05` だけが `samples/not_implemented/avatar-fairy-follow/` に residual planned family として残っています。
 - `TermSignature registry / debug output` の first cut は close してあり、Sugoroku helper の `--debug signatures` と clean near-end report / closeout inventory に helper-local / report-local carrier を追加しました。
 - `LayerSignature system` の first cut も close してあり、Sugoroku helper の `--debug layers` と clean near-end report / closeout の `layer_signatures` inventory を追加しました。
 - `MessageEnvelope / Auth seam` の first cut も close してあり、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report / closeout の `MessageEnvelope` inventory で、transport / auth / membership / capability / witness split を helper-local / report-local に actualize しました。
@@ -61,7 +61,7 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `HotPlug Patch / AttachPoint` の executable widening も current line に入り、`scripts/sugoroku_world_samples.py` の `hotplug_lifecycle` / `--debug hotplug` / `hot-plug` layer inventory で compatibility / activation / post-detach rejection evidence を helper-local に確認できます。
 - `Network transport` の docs-first plan も close してあり、`plan/22-network-transport-roadmap.md` で local queue / provider boundary current anchor、loopback / reconnect / failure matrix、stop line を固定しました。さらに `NET-01` helper-local loopback preview に加えて、`scripts/network_transport_samples.py` による `NET-02..05` helper-local canary も actualize し、process-boundary JSON bridge、stale reconnect reject、typed transport failure family、observer-safe redacted route trace を current evidence surface として確認できます。
 - `Compiler/backend/LLVM preparation` guardrail も close してあり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` で external workdir、`CARGO_HOME`、LLVM path、cleanup safety、stop line を固定しました。
-- `hands-on docs / closeout` も close してあり、`NET-01` helper-local loopback preview、`NET-02..05` helper-local canary、avatar representative slice、hot-plug helper-local lifecycle canary まで actualize しました。current next queue は avatar residual widening、その後に cross-package sweep です。
+- `hands-on docs / closeout` も close してあり、`NET-01` helper-local loopback preview、`NET-02..05` helper-local canary、avatar widened representative slice、hot-plug helper-local lifecycle canary まで actualize しました。`FAIRY-02` visibility-loss fallback も active helper canary に昇格済みで、current next queue は cross-package sweep です。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
 - current closeout を実行コマンド付きで読む最短入口は `docs/hands_on/current_phase_closeout_01.md` です。

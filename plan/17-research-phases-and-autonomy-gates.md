@@ -25,7 +25,7 @@
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` で layer-aware repo map を docs-first に固定
 - Mirrorea future lane:
-  `Macro 6` package 1 audit / package 2 AGENTS close の後に foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external boundary / adapter、projection / placement、hot-plug docs-first plan、network transport docs-first plan、hands-on closeout、avatar representative slice、hot-plug executable widening、transport helper-local canaries を close し、next promoted package を `Avatar fairy follow` residual widening と読む
+  `Macro 6` package 1 audit / package 2 AGENTS close の後に foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external boundary / adapter、projection / placement、hot-plug docs-first plan、network transport docs-first plan、hands-on closeout、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries を close し、next promoted package を `cross-package sweep` と読む
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

@@ -110,8 +110,8 @@
 - `Network transport helper-local canaries` も close 済みであり、`scripts/network_transport_samples.py`、`samples/clean-near-end/network-transport/README.md`、`../hands_on/network_transport_canaries_01.md` を current executable anchor にする
 - `Compiler/backend/LLVM preparation` guardrail も close 済みであり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` と `docs/research_abstract/compiler_backend_llvm_preparation_01.md` を current anchor にする
 - `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
-- avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で active representative slice を持つ
-- `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、historical prototype と active helper の間をつなぐ reader-facing plan anchor である
+- avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で widened active representative slice を持つ
+- `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、現在は `FAIRY-05` reacquire-after-return だけを残す reader-facing plan anchor である
 
 次はまだ deferred です。
 

@@ -31,10 +31,10 @@ avatar fairy follow は、そのための小さく practical な題材です。
 | ID | Path | Role | Expected debug focus |
 |---|---|---|---|
 | `FAIRY-01` | `samples/clean-near-end/avatar-follow/01_...` | active positive canary | anchor graph / follow summary |
+| `FAIRY-02` | `samples/clean-near-end/avatar-follow/02_...` | active visibility-loss fallback canary | fallback reason / visibility |
 | `FAIRY-03` | `samples/clean-near-end/avatar-follow/03_...` | active fallback-after-reject canary | membership + fallback reason |
 | `FAIRY-04` | `samples/clean-near-end/avatar-follow/04_...` | active rejection canary | static rejection / lineage mismatch |
 | `FAIRY-06` | `samples/clean-near-end/avatar-follow/06_...` | active verification canary | verification / model-check |
-| `FAIRY-02` | `samples/not_implemented/avatar-fairy-follow/02_...` | residual planned fallback-only widening | fallback reason / visibility |
 | `FAIRY-05` | `samples/not_implemented/avatar-fairy-follow/05_...` | residual planned reacquire widening | state timeline / anchor switch |
 
 ## 4. sample family で見たい性質
@@ -58,13 +58,12 @@ avatar fairy follow は、そのための小さく practical な題材です。
 
 ## 6. まだ未決のこと
 
-- `FAIRY-02` visibility-loss-only fallback を active へ昇格するか
 - `FAIRY-05` reacquire-after-return を active へ昇格するか
 - membership / anchor / witness / visualization をどこまで同じ carrier に乗せるか
 - future hot-plug / projection / transport widening とどこで接続するか
 
 このため、phase 8 全体としてはまだ widening 余地があります。
-current helper cut は representative slice であり、family 全体完成を意味しません。
+current helper cut は widened representative slice であり、family 全体完成を意味しません。
 
 ## 7. historical prototype との関係
 
@@ -72,5 +71,5 @@ historical prototype は attach / detach の荒い発想を残すために有用
 ただし、そのまま current active sample surface ではありません。
 
 current repo の active line は `samples/clean-near-end/` であり、
-avatar fairy follow もその中に representative slice を持つようになりました。
-ただし residual family は依然として `samples/not_implemented/` に残ります。
+avatar fairy follow もその中に widened representative slice を持つようになりました。
+ただし `FAIRY-05` residual family は依然として `samples/not_implemented/` に残ります。

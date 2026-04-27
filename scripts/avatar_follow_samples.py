@@ -12,7 +12,6 @@ SAMPLE_DIR = ROOT / "samples" / "clean-near-end" / "avatar-follow"
 DEBUG_OUTPUT_MODES = ["summary", "anchors", "membership", "verification"]
 MODEL_CHECK_PROPERTIES = ["no_detached_anchor_observed"]
 PLANNED_SAMPLE_IDS = [
-    "02_remote_head_not_visible_falls_back_to_local",
     "05_follow_target_reacquired_after_return",
 ]
 ACTIVE_SAMPLE_ROWS = [
@@ -22,6 +21,13 @@ ACTIVE_SAMPLE_ROWS = [
         "kind": "positive",
         "focus": "follow_remote_head",
         "phase_reading": "PH8 representative slice",
+    },
+    {
+        "sample_id": "02_remote_head_not_visible_falls_back_to_local",
+        "source_name": "02_remote_head_not_visible_falls_back_to_local.mir",
+        "kind": "positive",
+        "focus": "visibility_loss_fallback",
+        "phase_reading": "PH8 visibility-loss fallback",
     },
     {
         "sample_id": "03_remote_avatar_leaves_falls_back_to_local",
@@ -139,6 +145,49 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "properties_passed": [
                     "fallback_lineage_is_explicit",
                     "remote_visibility_required_before_follow",
+                ],
+            }
+        )
+        return result
+    if sample_id == "02_remote_head_not_visible_falls_back_to_local":
+        anchor_state = {
+            "attached_anchor": "local_head_anchor",
+            "fallback_anchor": "local_head_anchor",
+            "visible_anchors": ["local_head_anchor"],
+            "rejected_anchors": {"remote_head_anchor": "VisibilityLost"},
+            "lineage": [
+                {
+                    "kind": "visibility_loss",
+                    "source": "remote_head_anchor",
+                    "target": "local_head_anchor",
+                },
+                {
+                    "kind": "fallback",
+                    "source": "remote_head_anchor",
+                    "target": "local_head_anchor",
+                },
+            ],
+        }
+        result = _base_result(sample_id)
+        result.update(
+            {
+                "static_verdict": "valid",
+                "terminal_outcome": "fallback_on_visibility_loss",
+                "active_place": "FairyPlace#1",
+                "remote_place": "RemoteAvatarPlace#A",
+                "anchor_state": anchor_state,
+                "anchor_graph": _anchor_graph(anchor_state),
+                "membership_epoch": 0,
+                "transport_recovery_claimed": False,
+                "fallback_reason": "VisibilityLost",
+                "verification_log": [
+                    "remote_head_anchor becomes not visible",
+                    "fallback_reason(remote_head_anchor, VisibilityLost) published before anchor switch",
+                    "transport recovery is not claimed",
+                ],
+                "properties_passed": [
+                    "visibility_loss_fallback_is_explicit",
+                    "local_fallback_requires_visibility_reason_witness",
                 ],
             }
         )
@@ -294,8 +343,8 @@ def closeout() -> dict[str, Any]:
         "planned_family_path": str(
             ROOT / "samples" / "not_implemented" / "avatar-fairy-follow"
         ),
-        "current_focus": "FAIRY-01 / FAIRY-03 / FAIRY-04 / FAIRY-06 representative slice",
-        "planned_remaining": "FAIRY-02 visibility-loss-only fallback and FAIRY-05 reacquire-after-return remain planned",
+        "current_focus": "FAIRY-01 / FAIRY-02 / FAIRY-03 / FAIRY-04 / FAIRY-06 active helper-local slice",
+        "planned_remaining": "FAIRY-05 reacquire-after-return remains planned",
     }
 
 

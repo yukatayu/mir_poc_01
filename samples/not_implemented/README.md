@@ -11,7 +11,7 @@
 
 - `avatar-fairy-follow/`
   - phase 8 residual planned skeleton family
-  - `FAIRY-02` と `FAIRY-05` を current active representative slice の外に残す planning path
+  - `FAIRY-05` を current widened representative slice の外に残す planning path
   - active helper は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py`
 - `typed-external-boundary/`
   - phase 9 planned skeleton family

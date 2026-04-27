@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-27 20:27 JST
+最終更新: 2026-04-27 21:00 JST
 
 ## この文書について
 
@@ -24,20 +24,20 @@ Place をまたいで実行・通信・検証・可視化できる
 - theory / proof lane:
   `Macro 5` は finite-index typing / order-handoff / model-check second line / Lean foundation の repo-local alpha floor に到達
 - sample/progress/storage lane:
-  `samples_progress.md` は phase 0〜16 matrix、Sugoroku per-sample alignment、avatar representative slice row、mounted external workdir row、`CARGO_HOME` / LLVM probe row を current dashboard として持つ
+  `samples_progress.md` は phase 0〜16 matrix、Sugoroku per-sample alignment、avatar widened representative slice row、mounted external workdir row、`CARGO_HOME` / LLVM probe row を current dashboard として持つ
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` が current layer-aware repo map と staged migration 読みを与える
 - Mirrorea future lane:
-  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice、hot-plug executable widening、transport helper-local canaries を close し、next promoted package を avatar residual widening と読む
+  `TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、`Typed external boundary / adapter` docs-first sample plan、`Projection / placement` docs-first plan、`HotPlug Patch / AttachPoint` docs-first plan、`Network transport` docs-first plan、`Compiler/backend/LLVM preparation` guardrail、`hands-on docs / closeout`、`NET-01` helper-local loopback preview、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries を close し、next promoted package を cross-package sweep と読む
 - reserve integration lane:
   real transport、final public contract、packaging、final public auth / visualization / projection / hot-plug surface は still later
 
 ## 現在の一言での読み
 
 2026-04-27 時点の repo は、
-**clean near-end current layer と Sugoroku world / avatar follow representative slice を runnable floor として維持しつつ、
+**clean near-end current layer と Sugoroku world / avatar follow widened representative slice を runnable floor として維持しつつ、
 phase/sample/progress/storage foundation を runnable dashboard に押し上げ、
-hot-plug helper-local lifecycle canary と transport helper-local canary を actualize したうえで avatar residual widening へ進む**
+hot-plug helper-local lifecycle canary と transport helper-local canary に `FAIRY-02` visibility-loss fallback 昇格を接続し、次の cross-package sweep へ進む**
 段階です。
 
 ただし、次はまだ終わっていません。
@@ -60,7 +60,7 @@ hot-plug helper-local lifecycle canary と transport helper-local canary を act
 | Sugoroku world / current shared-space sample | 85% | 87% | 73% | runnable vertical slice、per-sample dashboard、hot-plug helper-local lifecycle canary は揃ったが、real transport / durable commit は未着手 |
 | samples progress dashboard | 86% | 92% | 73% | phase 0〜16 matrix に加え、Sugoroku per-sample row と avatar representative slice row まで reader-facing に整理した |
 | storage / external workdir guardrail | 72% | 83% | 76% | mount / `target/` cutover / `CARGO_HOME` probe / LLVM path readiness は入ったが、actual LLVM build はまだ |
-| Mirrorea future axis | 80% | 91% | 60% | `NET-01..05` helper-local transport canary、avatar representative slice、hot-plug helper-local lifecycle canary を actualize し、next は avatar residual widening |
+| Mirrorea future axis | 80% | 92% | 62% | `NET-01..05` helper-local transport canary、avatar widened representative slice、hot-plug helper-local lifecycle canary を actualize し、next は cross-package sweep |
 
 ## macro phase map
 
@@ -89,7 +89,7 @@ hot-plug helper-local lifecycle canary と transport helper-local canary を act
 | samples progress dashboard | `S4-S5` | phase 0〜16 matrix、Sugoroku per-sample alignment、avatar representative slice row、recent validation、storage row | future rows の helper actualization、phase 9 以降の sample ladder |
 | repository structure / taxonomy | `S3-S4` | layer-aware repo map、sample/script taxonomy docs、no-risk-first staged migration plan | risky crate/path move をしないまま staged physical migration 条件を固める |
 | storage / detachable workdir guardrail | `S5` | audit、env script、detach prepare、cleanup script、mounted workdir、`target/` cutover、`CARGO_HOME` probe、LLVM path readiness | actual LLVM build、backend choice、broader generated-artifact policy |
-| typed external effect / adapter boundary | `S3-S4` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / transport helper-local canary current anchor | dedicated adapter helper / avatar residual widening |
+| typed external effect / adapter boundary | `S3-S4` | core-free I/O principle、phase 9 `EXT-01..05` sample ladder、phase 13 `NET-01..05` widening ladder、provider boundary / local queue / transport helper-local canary current anchor | dedicated adapter helper / cross-package sweep |
 | layer composition / auth / visualization / projection / hot-plug | `S5` | package queue、stop line、phase 8 representative slice、`TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 12 projection validity checklist、phase 14 hot-plug helper-local lifecycle canary、phase 13 transport widening invariant を actualize | executable transport widening と real attachpoint / migration residual |
 
 ## 着手可能 / 要仕様確認 / 後段依存
@@ -97,8 +97,7 @@ hot-plug helper-local lifecycle canary と transport helper-local canary を act
 | 項目 | 状態 | 理由 |
 |---|---|---|
 | `HotPlug Patch / AttachPoint` residual widening | 後段依存 | helper-local lifecycle canary は入ったが、real attachpoint / migration / rollback は mixed gate に残す |
-| `Avatar fairy follow` residual widening | 着手可能 | transport helper-local canary と hot-plug lifecycle carrier が揃い、phase 8 residual family の昇格判断に入れる |
-| `Avatar fairy follow` residual widening | 後段依存 | `FAIRY-02` / `FAIRY-05` は representative slice 外の residual planned family として残す |
+| `Avatar fairy follow` residual `FAIRY-05` | 後段依存 | `FAIRY-02` は active helper canary に昇格済みで、残る `FAIRY-05` には state-timeline / anchor-switch carrier が要る |
 | `Projection / placement` widening | 後段依存 | final projection IR、generator、optimizer、equivalence checker は mixed gate に残す |
 | `Typed external boundary / adapter` widening | 後段依存 | final host schema、browser/network/VR adapter 実装、public adapter API は mixed gate に残す |
 | `VisualizationProtocol` widening | 後段依存 | final public viewer contract、retention、multi-tenant telemetry は後段 mixed gate に残す |
@@ -170,3 +169,4 @@ hot-plug helper-local lifecycle canary と transport helper-local canary を act
 - 2026-04-27 19:46 JST — `Avatar fairy follow representative slice` として `scripts/avatar_follow_samples.py`、`samples/clean-near-end/avatar-follow/`、`plan/24-avatar-follow-representative-slice-roadmap.md`、`docs/hands_on/avatar_fairy_follow_representative_slice_01.md`、snapshot docs / report を同期し、`FAIRY-01` / `03` / `04` / `06` active canary、residual planned `FAIRY-02` / `05`、dedicated helper surface、debug modes を固定した。validation は avatar unittest、focused avatar run、avatar closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、reviewer 指摘で露出した residual-taxonomy drift と stale wording も同 package で解消した。
 - 2026-04-27 20:03 JST — `HotPlug Patch / AttachPoint executable widening` として Sugoroku helper に `hotplug_lifecycle`、`--debug hotplug`、`hot-plug` layer inventory、attach / detach telemetry-view、`detach_request#1` auth-none envelope canary を揃え、snapshot docs / `plan/21` / specs / report を同期した。validation は Python unittest、focused hot-plug run、Sugoroku closeout、`check-all` local/loopback、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `Network transport` `NET-02..05` に進めた。
 - 2026-04-27 20:27 JST — `Network transport helper-local canaries` として `scripts/network_transport_samples.py`、`samples/clean-near-end/network-transport/README.md`、`docs/hands_on/network_transport_canaries_01.md` を追加し、`NET-02` subprocess JSON bridge、`NET-03` stale reconnect reject、`NET-04` typed transport failure matrix、`NET-05` redacted route trace を helper-local evidence surface に actualize した。validation は dedicated unittest、focused transport runs、transport closeout、Sugoroku loopback floor、runtime provider-boundary anchor、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を avatar residual widening に進めた。
+- 2026-04-27 20:55 JST — `Avatar fairy follow residual widening` として `FAIRY-02` を `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` の active helper canary に昇格させ、`samples/not_implemented/avatar-fairy-follow/` を `FAIRY-05` の single residual planned family に縮めた。validation は avatar unittest、focused `FAIRY-02` / `FAIRY-06` run、avatar `check-all` / closeout、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を採り、next promoted package を `cross-package sweep` に進めた。

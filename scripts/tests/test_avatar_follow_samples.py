@@ -22,7 +22,6 @@ class AvatarFollowSamplesTests(unittest.TestCase):
         self.assertEqual(
             sample_names,
             [
-                "02_remote_head_not_visible_falls_back_to_local.mir",
                 "05_follow_target_reacquired_after_return.mir",
             ],
         )
@@ -35,10 +34,28 @@ class AvatarFollowSamplesTests(unittest.TestCase):
             sample_ids,
             [
                 "01_follow_remote_head_with_local_fallback",
+                "02_remote_head_not_visible_falls_back_to_local",
                 "03_remote_avatar_leaves_falls_back_to_local",
                 "04_invalid_cross_anchor_chain_rejected",
                 "06_model_check_no_detached_anchor_observed",
             ],
+        )
+
+    def test_visibility_loss_fallback_stays_local_without_transport_recovery_claim(self) -> None:
+        result = avatar_follow_samples.run_sample(
+            "02_remote_head_not_visible_falls_back_to_local"
+        )
+
+        self.assertEqual(result["terminal_outcome"], "fallback_on_visibility_loss")
+        self.assertEqual(result["membership_epoch"], 0)
+        self.assertEqual(result["anchor_state"]["attached_anchor"], "local_head_anchor")
+        self.assertEqual(
+            result["anchor_state"]["rejected_anchors"]["remote_head_anchor"],
+            "VisibilityLost",
+        )
+        self.assertFalse(result["transport_recovery_claimed"])
+        self.assertIn(
+            "visibility_loss_fallback_is_explicit", result["properties_passed"]
         )
 
     def test_follow_remote_head_establishes_explicit_fallback_lineage(self) -> None:
@@ -99,6 +116,20 @@ class AvatarFollowSamplesTests(unittest.TestCase):
             result["model_check"]["property"], "no_detached_anchor_observed"
         )
         self.assertEqual(result["model_check"]["verdict"], "pass")
+        self.assertEqual(result["anchor_state"]["attached_anchor"], "local_head_anchor")
+        self.assertEqual(result["anchor_state"]["fallback_anchor"], "local_head_anchor")
+        self.assertEqual(
+            result["anchor_state"]["rejected_anchors"]["remote_head_anchor"],
+            "Detached",
+        )
+        self.assertEqual(
+            result["verification_log"],
+            [
+                "detach_remote_anchor",
+                "fallback_to_local_anchor",
+                "observe_current_anchor",
+            ],
+        )
 
     def test_anchors_debug_prints_anchor_inventory(self) -> None:
         pretty = avatar_follow_samples.format_pretty(
@@ -115,16 +146,19 @@ class AvatarFollowSamplesTests(unittest.TestCase):
     def test_closeout_reports_debug_modes_and_planned_samples(self) -> None:
         result = avatar_follow_samples.closeout()
 
-        self.assertEqual(result["sample_count"], 4)
+        self.assertEqual(result["sample_count"], 5)
         self.assertIn("anchors", result["debug_output_modes"])
         self.assertIn("membership", result["debug_output_modes"])
         self.assertIn("verification", result["debug_output_modes"])
         self.assertEqual(
             result["planned_sample_ids"],
             [
-                "02_remote_head_not_visible_falls_back_to_local",
                 "05_follow_target_reacquired_after_return",
             ],
+        )
+        self.assertIn(
+            "02_remote_head_not_visible_falls_back_to_local",
+            result["active_sample_ids"],
         )
         self.assertIn(
             "no_detached_anchor_observed", result["model_check_properties"]

@@ -106,20 +106,21 @@
 - `docs/reports/0927-*` で `Compiler/backend/LLVM preparation` guardrail を close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe evidence を追加した
 - `docs/reports/0928-*` で `hands-on docs / closeout` を close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を追加した
 - `docs/reports/0929-*` で `Network transport executable widening` を close し、helper-local `NET-01` loopback preview、transport seam parameter、loopback parity test を追加した
-- `docs/reports/0930-*` で `Avatar fairy follow representative slice` を close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、residual planned `FAIRY-02` / `FAIRY-05`、hands-on landing page を追加した
+- `docs/reports/0930-*` で `Avatar fairy follow representative slice` を close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、initial residual planned `FAIRY-02` / `FAIRY-05`、hands-on landing page を追加した
 - `docs/reports/0931-*` で `HotPlug Patch / AttachPoint executable widening` を close し、Sugoroku helper の `hotplug_lifecycle`、`--debug hotplug`、attach / detach telemetry-view、`detach_request#1` auth-none envelope canary を追加した
 - `docs/reports/0932-*` で `Network transport helper-local canaries` を close し、`scripts/network_transport_samples.py`、active landing page `samples/clean-near-end/network-transport/README.md`、`NET-02..05` process-boundary / reconnect / typed failure / redacted route trace canary を追加した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next reopen point は `Avatar fairy follow` residual widening
+- next reopen point は `FAIRY-05` residual reacquire design
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice を先に入れた上で、next promoted package を `Avatar fairy follow` residual widening と読む
-- phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-02` / `FAIRY-05` だけを residual planned family に残す
-- package 6 以降は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout、`NET-01..05` helper-local transport canary、avatar representative slice、hot-plug helper-local lifecycle canary、その後の avatar residual widening / cross-package sweep
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening を先に入れた上で、next promoted package を `cross-package sweep` と読む
+- `docs/reports/0933-*` で `Avatar fairy follow residual widening` を close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた
+- phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
+- package 6 以降は network transport plan、compiler/backend/LLVM prep guardrail、hands-on closeout、`NET-01..05` helper-local transport canary、avatar representative slice widening、hot-plug helper-local lifecycle canary、その後の cross-package sweep / residual reopen
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

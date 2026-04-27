@@ -198,12 +198,12 @@ current closeout を実行コマンド付きで追う landing page は `docs/han
 
 ### residual candidate
 
-- avatar fairy follow residual widening
+- `FAIRY-05` reacquire-after-return widening
 
 avatar fairy follow では、`scripts/avatar_follow_samples.py` と
 `samples/clean-near-end/avatar-follow/` によって、
-`FAIRY-01` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06` を active representative slice として追えます。
-`FAIRY-02` と `FAIRY-05` は residual planned family に残します。
+`FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06` を widened active representative slice として追えます。
+`FAIRY-05` だけが residual planned family に残ります。
 
 ## 文書の読み分け
 
@@ -242,10 +242,10 @@ avatar fairy follow では、`scripts/avatar_follow_samples.py` と
 
 現在の promoted queue は次です。
 
-1. `Network transport` `NET-02..05`
-   - two-process / reconnect / typed failure / route trace widening を後段 package として残す
-2. `Avatar fairy follow` residual widening
-   - `FAIRY-02` visibility-loss-only fallback と `FAIRY-05` reacquire-after-return を representative slice の外側で widen する
+1. cross-package sweep
+   - transport / avatar / hot-plug / dashboard / report queue を current snapshot に揃える
+2. `FAIRY-05` residual reacquire design
+   - state-timeline / anchor-switch carrier が本当に必要かを判断する
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 

@@ -1,4 +1,4 @@
-# avatar-fairy-follow residual planned samples
+# avatar-fairy-follow residual planned sample
 
 This directory keeps the residual planned phase 8 sample family.
 
@@ -23,12 +23,12 @@ That prototype is useful as planning evidence, but it is not the current active 
 
 | ID | File | Goal | Expected future view |
 |---|---|---|---|
-| `FAIRY-02` | `02_remote_head_not_visible_falls_back_to_local.mir` | visibility loss causes fallback | fallback reason / visibility |
 | `FAIRY-05` | `05_follow_target_reacquired_after_return.mir` | reacquire remote target after return | state timeline / anchor switch |
 
 Promoted active canaries already live under `samples/clean-near-end/avatar-follow/`:
 
 - `FAIRY-01`
+- `FAIRY-02`
 - `FAIRY-03`
 - `FAIRY-04`
 - `FAIRY-06`

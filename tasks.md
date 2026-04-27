@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 20:27 JST
+最終更新: 2026-04-27 21:00 JST
 
 ## この文書について
 
@@ -16,7 +16,7 @@
 - mutex / weak-memory line は model-check second line として runnable
 - Lean foundations と generated clean stub corpus は runnable
 - Sugoroku world runtime attachment vertical slice は repo-local logical multi-place emulator として runnable
-- `samples_progress.md` は phase 0〜16 matrix と storage row に加え、Sugoroku per-sample alignment と phase 8 avatar representative slice row を持つ current dashboard になった
+- `samples_progress.md` は phase 0〜16 matrix と storage row に加え、Sugoroku per-sample alignment と phase 8 avatar widened representative slice row を持つ current dashboard になった
 - storage audit と external workdir cutover は `docs/reports/0913-*` と `0915-*` で close してあり、repo `target/` は `/mnt/mirrorea-work/cargo-target` への symlink で運用している
 - `Sugoroku sample progress alignment` は `docs/reports/0916-*` で close 済み
 - `Avatar fairy follow sample plan` は `docs/reports/0917-*` で close 済み
@@ -32,11 +32,12 @@
 - `Compiler/backend/LLVM preparation` は `docs/reports/0927-*` で close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe floor を追加した
 - `hands-on docs / closeout` は `docs/reports/0928-*` で close し、`docs/hands_on/README.md` と `docs/hands_on/current_phase_closeout_01.md` を current landing page として追加した
 - `Network transport executable widening` は `docs/reports/0929-*` で close し、helper-local `NET-01` loopback preview、`--transport loopback_socket`、loopback parity test を追加した
-- `Avatar fairy follow representative slice` は `docs/reports/0930-*` で close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、residual planned `FAIRY-02` / `FAIRY-05`、helper-local debug surface を追加した
+- `Avatar fairy follow representative slice` は `docs/reports/0930-*` で close し、`scripts/avatar_follow_samples.py`、active sample root `samples/clean-near-end/avatar-follow/`、initial residual planned `FAIRY-02` / `FAIRY-05`、helper-local debug surface を追加した
 - `Network transport helper-local canaries` は `docs/reports/0932-*` で close し、`scripts/network_transport_samples.py`、active landing page `samples/clean-near-end/network-transport/README.md`、`NET-02..05` process-boundary / reconnect / typed failure / redacted route trace canary を追加した
+- `Avatar fairy follow residual widening` は `docs/reports/0933-*` で close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、phase 8 residual planned family を `FAIRY-05` だけに縮めた
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Avatar fairy follow residual widening`**
-- next reopen point は **`cross-package sweep`**
+- current promoted next line は **`cross-package sweep`**
+- next reopen point は **`FAIRY-05` residual reacquire design**
 
 ## current executable floor
 
@@ -75,6 +76,7 @@
   `09_detach_todo`
 - avatar-follow:
   `01_follow_remote_head_with_local_fallback`
+  `02_remote_head_not_visible_falls_back_to_local`
   `03_remote_avatar_leaves_falls_back_to_local`
   `04_invalid_cross_anchor_chain_rejected`
   `06_model_check_no_detached_anchor_observed`
@@ -82,7 +84,6 @@
 ### Planned but not active sample family
 
 - `samples/not_implemented/avatar-fairy-follow/`
-  - `FAIRY-02` visibility-loss fallback
   - `FAIRY-05` target reacquire after return
 
 ### Helper entrypoints
@@ -109,6 +110,7 @@
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
 - `python3 scripts/avatar_follow_samples.py check-all --format json`
 - `python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json`
+- `python3 scripts/avatar_follow_samples.py run 02_remote_head_not_visible_falls_back_to_local --debug anchors --format json`
 - `python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json`
 - `python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json`
 - `python3 -m unittest scripts.tests.test_avatar_follow_samples`
@@ -131,24 +133,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Avatar fairy follow residual widening
-
-- phase / stage:
-  `Macro 7`, `S1 -> S2`
-- rough estimate:
-  `1 package`
-- objective:
-  `FAIRY-02` visibility-loss fallback と `FAIRY-05` reacquire-after-return を representative slice の外側で widen するか判断する
-- expected deliverables:
-  residual planned family の active promotion条件再評価、必要なら追加 canary
-- validation command:
-  `python3 scripts/avatar_follow_samples.py closeout --format json`
-- report requirement:
-  新しい report、representative slice と residual planned family の境界を明記する
-- stop line:
-  final game/runtime API や production avatar stack は固定しない
-
-### Package 2. Cross-package sweep
+### Package 1. Cross-package sweep
 
 - phase / stage:
   `Macro 7`, `S2`
@@ -165,12 +150,29 @@
 - stop line:
   final public milestone や product completion は主張しない
 
+### Package 2. `FAIRY-05` residual reacquire design
+
+- phase / stage:
+  `Macro 7`, `reserve`
+- rough estimate:
+  `1 package`
+- objective:
+  `FAIRY-05` reacquire-after-return を reopen するなら必要な state-timeline / anchor-switch debug carrier を先に固定する
+- expected deliverables:
+  reopen 条件、state timeline view、anchor switch evidence の plan
+- validation command:
+  `python3 scripts/avatar_follow_samples.py closeout --format json`
+- report requirement:
+  新しい report、reopen 条件と stop line を明記する
+- stop line:
+  final game/runtime API や production avatar stack は固定しない
+
 ## research を通して見つけること
 
 - `TermSignature` の最小粒度と residual obligation surface
 - `LayerSignature` first cut の helper/runtime naming をどこまで共有 law surface に寄せるか
 - `VisualizationProtocol` の最小 view kind / telemetry row / redaction wording
-- avatar follow residual family をどこまで active helper に取り込むか
+- avatar follow residual `FAIRY-05` をどこまで active helper に取り込むか
 - projection / placement validity report の最小 shape
 - `AttachPoint` compatibility と detach lifecycle の最小 contract
 

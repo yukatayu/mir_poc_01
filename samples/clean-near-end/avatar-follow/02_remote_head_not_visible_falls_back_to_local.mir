@@ -1,9 +1,6 @@
-# FAIRY-02 planned phase 8 skeleton.
-# Not an active runnable sample.
-# Goal: when the remote head anchor is not visible, the fairy falls back
-# to a local anchor without claiming transport-level failure recovery.
+# FAIRY-02 active helper-local canary.
 
-module PlannedMirrorea.AvatarFairyFallbackOnVisibilityLoss
+module CleanNearEnd.AvatarFairyFallbackOnVisibilityLoss
 
 place SharedWorld {
   place FairyPlace#1 {
@@ -22,6 +19,7 @@ place SharedWorld {
 
       stage commit_follow:
         ensure attached_anchor(FairyPlace#1) = local_head_anchor
+        ensure transport_recovery_claimed(FairyPlace#1) = false
     }
   }
 }

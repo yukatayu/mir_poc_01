@@ -42,7 +42,7 @@ current repo では sample 表現を少なくとも次の 5 層に分ける。
 
 ## planned skeleton policy
 
-- `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、`FAIRY-02` と `FAIRY-05` を active representative slice の外側に残す
+- `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、現在は `FAIRY-05` を active representative slice の外側に残す
 - `samples/not_implemented/network-transport/` は phase 13 future source/backlog family であり、active helper-local canary とは別に残す
 - planned skeleton は `samples_progress.md` で `10%` 以下の row として追い、active closeout evidence と混同しない
 
