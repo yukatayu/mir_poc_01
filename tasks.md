@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 18:23 JST
+最終更新: 2026-04-27 18:32 JST
 
 ## この文書について
 
@@ -27,9 +27,10 @@
 - `Typed external boundary / adapter` は `docs/reports/0923-*` で close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、provider boundary / local queue / typed failure / debug label restriction の current evidence anchor を docs-first に固定した
 - `Projection / placement` は `docs/reports/0924-*` で close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction、place split、validity checklist、stop line を追加した
 - `HotPlug Patch / AttachPoint` は `docs/reports/0925-*` で close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を追加した
+- `Network transport` は `docs/reports/0926-*` で close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` に loopback / reconnect / failure matrix の docs-first ladder を追加した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Network transport`**
-- next docs-first package は **`Compiler/backend/LLVM preparation`**
+- current promoted next line は **`Compiler/backend/LLVM preparation`**
+- next docs-first package は **`Hands-on docs / closeout`**
 
 ## current executable floor
 
@@ -109,28 +110,10 @@
 
 ## 自走可能な task package
 
-### Package 1. Network transport plan
+### Package 1. Compiler/backend/LLVM preparation
 
 - phase / stage:
-  `Macro 6`, `S1 -> S2`
-- rough estimate:
-  `0.5 package`
-- objective:
-  separate-process / loopback / reconnect / transport failure explicit path を docs-first に置く
-- expected deliverables:
-  transport failure matrix、loopback/reconnect line、docs
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、transport widening と auth/adapter split の stop line を明記する
-- stop line:
-  concrete socket / broker / final network ABI は固定しない
-
-### Package 2. Compiler/backend/LLVM preparation
-
-- phase / stage:
-  `Macro 6`, `S1 -> S2`
+  `Macro 6 -> Macro 7`, `S1 -> S2`
 - rough estimate:
   `0.5 package`
 - objective:
@@ -140,27 +123,48 @@
 - validation command:
   `python3 scripts/check_source_hierarchy.py`
   `python3 scripts/validate_docs.py`
+  `bash scripts/env/mirrorea_storage_env.sh`
+  `bash scripts/storage/detach_prepare.sh`
+  `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
 - report requirement:
   新しい report、root-disk guardrail と detach-safe cleanup を明記する
 - stop line:
   production backend / final LLVM pipeline は固定しない
 
-### Package 3. Hands-on docs / closeout
+### Package 2. Hands-on docs / closeout
 
 - phase / stage:
-  `Macro 6`, `S1 -> S2`
+  `Macro 6 -> Macro 7`, `S1 -> S2`
 - rough estimate:
   `0.5-1 package`
 - objective:
   日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation / skip reason / commit/push evidence を固定する
 - expected deliverables:
-  projection doc、validity checklist、place split examples、必要なら helper-local report
+  current future-axis closeout guide、phase/sample summary、必要なら helper-local report
 - validation command:
   `python3 scripts/validate_docs.py`
 - report requirement:
-  新しい report、projection invariant と stop line を明記する
+  新しい report、current phase closeout と remaining mixed gate を明記する
 - stop line:
   generated public backend、placement optimizer、final operational scheduler は実装しない
+
+### Package 3. Network transport executable widening
+
+- phase / stage:
+  `Macro 7`, `S1 -> S2`
+- rough estimate:
+  `1 package`
+- objective:
+  `plan/22` の loopback / reconnect / failure matrix を helper / runtime widening へ渡す
+- expected deliverables:
+  loopback canary、reconnect epoch guard、typed transport failure canary
+- validation command:
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+- report requirement:
+  新しい report、loopback widening と auth/transport separation evidence を明記する
+- stop line:
+  production transport、public deployment contract、cryptographic session protocol は固定しない
 
 ## research を通して見つけること
 

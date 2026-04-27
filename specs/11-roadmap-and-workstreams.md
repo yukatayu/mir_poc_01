@@ -1096,9 +1096,11 @@ current active floor は引き続き clean near-end suite と Sugoroku world ver
    - source-to-place projection、server / participant / adapter / visualizer split、validity report を整理する。
 10. Hot-plug Patch / AttachPoint
     - `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration contract を整理する。
-11. hands-on docs
+11. Network transport
+    - `local_queue` baseline から loopback / reconnect / failure matrix へ widening する docs-first ladder を整理する。
+12. hands-on docs
     - 日本語で current sample / future queue / helper output / stop line を読み分ける docs を揃える。
-12. closeout
+13. closeout
     - docs / plan / progress / tasks / report を再同期し、validation と skip reason を固定する。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
@@ -1157,7 +1159,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
 - `Projection / placement` は docs-first package として close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction と validity checklist を actualize した。
 - `HotPlug Patch / AttachPoint` は docs-first package として close し、`plan/21-hotplug-attachpoint-roadmap.md` に compatibility / activation / migration stop line を actualize した。
-- current promoted next package は network transport である。
+- `Network transport` は docs-first package として close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `NET-01..05` を current snapshot に actualize した。
+- current promoted next package は compiler/backend/LLVM preparation である。
 
 ## 2026-04-27 repository-structure staging addendum
 

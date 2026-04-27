@@ -63,5 +63,5 @@ runtime hot-plug lifecycle の `detach` と同一ではない。
 
 ## next relation
 
-current next promoted package は network transport である。
-hot-plug lifecycle を transport widening と分けたまま、reconnect / loopback / failure matrix を切る。
+transport widening は `plan/22-network-transport-roadmap.md` に切り出した。
+hot-plug lifecycle は transport widening と分けたまま保ち、current next promoted package は `Compiler/backend/LLVM preparation` である。

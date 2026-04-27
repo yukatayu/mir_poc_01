@@ -19,6 +19,7 @@
 - next representative sample 候補は avatar fairy follow slice であり、まだ active canonical sample ではない
 - phase 8 planned skeleton family は `samples/not_implemented/avatar-fairy-follow/` に置き、historical prototype anchor は `samples/prototype/current-l2-dynamic-attach-detach/` に残す
 - phase 9 planned family は `samples/not_implemented/typed-external-boundary/` に置き、current evidence anchor は `05_delegated_rng_service` の `provider_boundary` と Sugoroku helper の `local_queue` envelope / visualization carrier に結び直す
+- phase 13 planned family は `samples/not_implemented/network-transport/` に置き、current evidence anchor は Sugoroku helper の `local_queue` envelope と clean near-end `provider_boundary` に結び直す
 
 ## current judgment
 
@@ -33,6 +34,7 @@
 - system-wide source から place-specific program へ projection できる性質を future line の invariant として保つ
 - current docs-first plan は `plan/20-projection-and-placement-roadmap.md` に置き、generator / optimizer / equivalence checker は still later に残す
 - `SUG-01` attach と `SUG-09` detach TODO boundary は hot-plug docs-first plan の current anchor であり、storage detach script と混同しない
+- transport widening current plan は `plan/22-network-transport-roadmap.md` に置き、loopback / reconnect / failure matrix を helper-local baseline と分けて読む
 
 ## still later
 

@@ -27,6 +27,7 @@
 - `not_implemented/` は planned skeleton であり、active sample ではない
   - `avatar-fairy-follow/` は phase 8 planned family
   - `typed-external-boundary/` は phase 9 planned family
+  - `network-transport/` は phase 13 planned family
 - `prototype/` は historical anchor / compatibility reference であり、active canonical path ではない
 - `old/` は archive
 - `generated/` は future reserve path であり、source sample を置かない

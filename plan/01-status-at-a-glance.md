@@ -94,15 +94,16 @@
 - `docs/reports/0923-*` で `Typed external boundary / adapter` docs-first sample plan を close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置いた
 - `docs/reports/0924-*` で `Projection / placement` docs-first plan を close し、`plan/20-projection-and-placement-roadmap.md` を追加した
 - `docs/reports/0925-*` で `HotPlug Patch / AttachPoint` docs-first plan を close し、`plan/21-hotplug-attachpoint-roadmap.md` を追加した
+- `docs/reports/0926-*` で `Network transport` docs-first plan を close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` を追加した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next reopen point は network transport
+- next reopen point は compiler/backend/LLVM preparation
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug docs-first plan を先に入れた上で、next semantic carrier package を network transport と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan、phase 12 projection docs-first plan、phase 14 hot-plug docs-first plan、phase 13 network transport docs-first plan を先に入れた上で、next promoted package を compiler/backend/LLVM preparation と読む
 - phase 8 representative sample 候補は `samples/not_implemented/avatar-fairy-follow/` に skeleton family を切り出したが、current active helper はまだない
 - package 6 以降は network transport plan、compiler/backend/LLVM prep guardrail
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`

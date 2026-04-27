@@ -13,17 +13,18 @@
 - `docs/reports/0923-*` は `Typed external boundary / adapter` docs-first sample-plan closeout を表す
 - `docs/reports/0924-*` は `Projection / placement` docs-first plan closeout を表す
 - `docs/reports/0925-*` は `HotPlug Patch / AttachPoint` docs-first plan closeout を表す
-- current promoted next package は `Network transport`
-- next docs-first package は `Compiler/backend/LLVM preparation` guardrail
+- `docs/reports/0926-*` は `Network transport` docs-first plan closeout を表す
+- current promoted next package は `Compiler/backend/LLVM preparation` guardrail
+- next docs-first package は `hands-on docs / closeout`
 
 ## current promoted queue
 
-1. `Network transport` plan
-   - separate-process / loopback / reconnect / transport failure explicit path を docs-first に置く
-2. `Compiler/backend/LLVM preparation` guardrail
+1. `Compiler/backend/LLVM preparation` guardrail
    - external workdir、cache placement、detach-safe cleanup、minimal probe を small VPS 前提で固める
-3. `hands-on docs / closeout`
+2. `hands-on docs / closeout`
    - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期し、validation と skip reason を固定する
+3. `Network transport` executable widening
+   - `plan/22` の loopback / reconnect / failure matrix を helper / runtime widening へ渡す
 
 ## mixed gate
 

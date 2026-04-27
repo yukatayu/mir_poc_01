@@ -45,6 +45,7 @@ final public layer law schema を意味しません。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Projection / placement` の docs-first plan も close しました。
 さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
+さらに `Network transport` の docs-first plan も close しました。
 
 - Sugoroku helper に `message_envelopes` と `--debug envelopes`
 - clean near-end report / closeout に `MessageEnvelope` inventory
@@ -151,6 +152,20 @@ Mirrorea の中心は runtime hot-plug です。
 compatibility checklist、activation cut、migration stop line、`SUG-01` attach と `SUG-09` detach TODO boundary を置いてあります。
 storage detach script は operational cleanup concern であり、この runtime hot-plug lifecycle そのものではありません。
 
+### network transport
+
+transport widening は `local_queue` baseline をそのまま final public transport ABI にしないための docs-first line です。
+
+- loopback
+- reconnect
+- membership epoch / member incarnation guard
+- typed transport failure
+- redacted route trace
+
+2026-04-27 時点では、`plan/22-network-transport-roadmap.md` に
+current anchor、`NET-01..05` planned family、transport widening invariant、stop line を置いてあります。
+ここでも transport と auth / membership / capability / witness / visualization を collapse しません。
+
 ## representative slices
 
 ### current
@@ -196,17 +211,18 @@ object attach/follow lifecycle を representative に検証する予定です。
 - `Typed external boundary / adapter` docs-first sample plan
 - `Projection / placement` docs-first plan
 - `HotPlug Patch / AttachPoint` docs-first plan
+- `Network transport` docs-first plan
 
 現在の promoted queue は次です。
 
-1. `Network transport`
-   - local queue から separate-process / loopback / reconnect / failure matrix へ widening する docs-first package
-2. `Compiler/backend/LLVM preparation`
+1. `Compiler/backend/LLVM preparation`
    - external workdir、cache placement、detach-safe cleanup、small-VPS guardrail を整理する package
-3. `hands-on docs / closeout`
+2. `hands-on docs / closeout`
    - 日本語 docs、`samples_progress.md`、`progress.md`、`tasks.md`、reports を再同期する package
-4. `Avatar fairy follow` representative slice
+3. `Avatar fairy follow` representative slice
    - `samples/not_implemented/avatar-fairy-follow/` の skeleton family を active helper / validation line へ昇格できるかを検討する後段 package
+4. `Network transport` executable widening
+   - `plan/22` を helper / runtime / loopback proof-of-concept へ widen する後段 package
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。
 

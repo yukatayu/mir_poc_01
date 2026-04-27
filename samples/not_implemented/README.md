@@ -17,3 +17,7 @@
   - phase 9 planned skeleton family
   - current parser / runner では扱わない
   - provider boundary / local queue / typed failure / debug label restriction の docs-first path
+- `network-transport/`
+  - phase 13 planned skeleton family
+  - current parser / runner では扱わない
+  - local queue / provider boundary current anchor から loopback / reconnect / failure matrix へ widening する docs-first path

@@ -59,7 +59,8 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `Typed external boundary / adapter` の docs-first sample plan も close してあり、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、provider boundary / local queue / typed failure / debug label restriction を current evidence anchor に結び直しました。
 - `Projection / placement` の docs-first plan も close してあり、`plan/20-projection-and-placement-roadmap.md` で system-wide source と place-specific program の validity checklist を固定しました。
 - `HotPlug Patch / AttachPoint` の docs-first plan も close してあり、`plan/21-hotplug-attachpoint-roadmap.md` で compatibility / activation / migration stop line を固定しました。
-- next queue は、network transport plan、compiler/backend/LLVM prep、hands-on closeout の順で進めます。
+- `Network transport` の docs-first plan も close してあり、`plan/22-network-transport-roadmap.md` で local queue / provider boundary current anchor、loopback / reconnect / failure matrix、stop line を固定しました。
+- next queue は、compiler/backend/LLVM prep、hands-on closeout、その後の executable transport / avatar reopen の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。
 
