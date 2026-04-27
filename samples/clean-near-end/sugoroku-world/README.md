@@ -90,5 +90,6 @@ These helper-local outputs are evidence-oriented debug views. They are not the f
 - `docs/research_abstract/hands_on_sugoroku_00_overview.md`
 - `docs/research_abstract/hands_on_sugoroku_sample_matrix.md`
 - `docs/research_abstract/hands_on_sugoroku_detail.md`
+- `docs/research_abstract/hands_on_sugoroku_07_message_envelope_auth.md`
 - `docs/reports/0909-sugoroku-world-runtime-attachment-vertical-slice.md`
 - `docs/reports/0916-sugoroku-sample-progress-alignment.md`

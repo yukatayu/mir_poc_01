@@ -130,8 +130,12 @@ next representative slice 候補として avatar fairy follow skeleton family �
   `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership`
   `python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification`
   `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
   `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
   `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `cargo test -p mir-runtime --test clean_near_end_samples`
+- diff hygiene:
+  `git diff --check`
 - storage:
   `bash scripts/storage/setup_mirrorea_workdisk_root.sh --plan`
   `bash scripts/env/mirrorea_storage_env.sh`

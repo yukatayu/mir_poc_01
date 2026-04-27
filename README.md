@@ -54,6 +54,7 @@ current repo の次の promoted line は、Mirrorea future-axis の docs-first /
 - `TermSignature registry / debug output` の first cut は close してあり、Sugoroku helper の `--debug signatures` と clean near-end report / closeout inventory に helper-local / report-local carrier を追加しました。
 - `LayerSignature system` の first cut も close してあり、Sugoroku helper の `--debug layers` と clean near-end report / closeout の `layer_signatures` inventory を追加しました。
 - `MessageEnvelope / Auth seam` の first cut も close してあり、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report / closeout の `MessageEnvelope` inventory で、transport / auth / membership / capability / witness split を helper-local / report-local に actualize しました。
+  current baseline は `auth none` で、`session_token` / `signature` は reserve です。
 - next queue は、`VisualizationProtocol`、typed external boundary / adapter、projection / placement、hot-plug patch / `AttachPoint` の順で進めます。
 - phase 0〜16 の runnable sample / E2E / debug / storage 状態は `samples_progress.md` にまとめ、progress% は validation と report に基づいて更新します。
 - repo の layer-aware structure と staged migration plan は `plan/19-repository-map-and-taxonomy.md` にまとめています。sample taxonomy は `samples/README.md`、script taxonomy は `scripts/README.md` を参照してください。

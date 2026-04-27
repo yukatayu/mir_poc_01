@@ -12,6 +12,7 @@ helper-local / report-local first cut として visible にする。
 - current auth baseline は `auth none` とする。
 - final public `AuthEvidence` kind、session / signature protocol、real network transport はこの task で固定しない。
 - `samples/clean-near-end/sugoroku-world/` と `crates/mir-runtime` の current runnable path を壊さないことを優先する。
+- source hierarchy は `specs/` = 規範正本、`plan/` = repository memory、`docs/reports/` = 作業証跡、`progress.md` / `tasks.md` / `samples_progress.md` = current snapshot として明示したまま扱う。
 
 ## Documents consulted
 
