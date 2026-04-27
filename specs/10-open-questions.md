@@ -154,6 +154,11 @@
        cross-place projection viewer である。
   5. projection / placement mobility をどこまで docs-first に固定するか。
      system-wide source から server / participant / adapter / visualizer へ projection するときの validity report と stop line をどう表すか。
+  5a. typed external boundary / adapter sample ladder をどこまで docs-first に固定するか。
+     - 2026-04-27 時点で phase 9 planned family `EXT-01..05` は docs-first に actualize した。
+       `LogText` / world overlay / local queue / typed failure / debug label restriction という working sample ID と、
+       `provider_boundary` / `local_queue` の current evidence anchor までは current line に上げてよい。
+     - 未決なのは exact host schema、final public adapter API、browser/network/VR family への割当である。
   6. hot-plug `Patch Req Prov Δ` / `AttachPoint` の最小 surface と compatibility check をどこまで current line に上げるか。
      activation cut、migration contract、detach lifecycle の exact shape は未決定である。
   7. avatar fairy follow vertical slice を next representative sample にするとき、`FollowAnchor`、visibility guard、fallback lineage、stale anchor rejection をどの minimal helper surface に切るか。

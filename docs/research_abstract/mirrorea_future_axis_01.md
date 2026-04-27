@@ -42,6 +42,7 @@ final public layer law schema を意味しません。
 
 さらに `MessageEnvelope / Auth seam` の first cut も close しました。
 さらに `VisualizationProtocol` の first cut も close しました。
+さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 
 - Sugoroku helper に `message_envelopes` と `--debug envelopes`
 - clean near-end report / closeout に `MessageEnvelope` inventory
@@ -189,6 +190,8 @@ object attach/follow lifecycle を representative に検証する予定です。
    - close 済み。helper-local / report-local first cut まで actualize。
 6. VisualizationProtocol
    - helper-local / report-local first cut は close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を追加した。
+7. Typed external boundary / adapter
+   - phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、`provider_boundary` / `local_queue` の current evidence anchor と stop line を docs-first に固定した。
 7. Sugoroku vertical slice hardening
 8. Avatar fairy follow slice
 9. Projection / placement plan

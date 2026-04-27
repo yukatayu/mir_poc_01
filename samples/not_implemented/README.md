@@ -13,3 +13,7 @@
   - phase 8 planned skeleton family
   - current parser / runner では扱わない
   - historical prototype anchor と future active helper surface を切り分けるための planning path
+- `typed-external-boundary/`
+  - phase 9 planned skeleton family
+  - current parser / runner では扱わない
+  - provider boundary / local queue / typed failure / debug label restriction の docs-first path

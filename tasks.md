@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-27 18:04 JST
+最終更新: 2026-04-27 18:10 JST
 
 ## この文書について
 
@@ -24,9 +24,10 @@
 - `LayerSignature system` は `docs/reports/0919-*` で close し、Sugoroku helper の `verification` / `runtime_trace` / `membership` layer inventory と、clean near-end report-local `transport_provider_boundary` / `auth_authority_witness` / `verification_model_check` carrier を追加した
 - `MessageEnvelope / Auth seam` は `docs/reports/0921-*` で close し、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report-local `MessageEnvelope` inventory を追加した
 - `VisualizationProtocol` は `docs/reports/0922-*` で close し、Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end report-local `VisualizationView` / `TelemetryRow` inventory を追加した
+- `Typed external boundary / adapter` は `docs/reports/0923-*` で close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置き、provider boundary / local queue / typed failure / debug label restriction の current evidence anchor を docs-first に固定した
 - repository structure / layer-boundary staging は `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` に docs-first で切り出し、high-risk move はまだ行っていない
-- current promoted next line は **`Typed external boundary / adapter`**
-- next docs-first package は **`Projection / placement`**
+- current promoted next line は **`Projection / placement`**
+- next docs-first package は **`HotPlug Patch / AttachPoint`**
 
 ## current executable floor
 
@@ -106,25 +107,7 @@
 
 ## 自走可能な task package
 
-### Package 1. Typed external boundary / adapter sample plan
-
-- phase / stage:
-  `Macro 6`, `S1 -> S2`
-- rough estimate:
-  `0.5 package`
-- objective:
-  phase 9 `EXT-01..05` representative sample と adapter failure / debug label restriction line を sample-first に整理する
-- expected deliverables:
-  sample plan、command plan、debug route plan、docs
-- validation command:
-  `python3 scripts/check_source_hierarchy.py`
-  `python3 scripts/validate_docs.py`
-- report requirement:
-  新しい report、stdio 非採用と typed adapter path の boundary を明記する
-- stop line:
-  concrete browser/network/VR adapter 実装は固定しない
-
-### Package 2. Projection / placement plan
+### Package 1. Projection / placement plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
@@ -142,14 +125,32 @@
 - stop line:
   final public projection IR や optimizer は固定しない
 
-### Package 3. HotPlug Patch / AttachPoint
+### Package 2. HotPlug Patch / AttachPoint
+
+- phase / stage:
+  `Macro 6`, `S1 -> S2`
+- rough estimate:
+  `0.5 package`
+- objective:
+  `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration stop line を docs-first に切る
+- expected deliverables:
+  patch/attach lifecycle plan、compatibility checklist、docs
+- validation command:
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+- report requirement:
+  新しい report、hot-plug compatibility と detach lifecycle stop line を明記する
+- stop line:
+  final public hot-plug package ABI や migration engine は固定しない
+
+### Package 3. Network transport plan
 
 - phase / stage:
   `Macro 6`, `S1 -> S2`
 - rough estimate:
   `0.5-1 package`
 - objective:
-  `Patch Req Prov Δ`、`AttachPoint`、compatibility / activation / migration stop line を docs-first に切る
+  separate-process / loopback / reconnect / transport failure explicit path を docs-first に置く
 - expected deliverables:
   projection doc、validity checklist、place split examples、必要なら helper-local report
 - validation command:

@@ -1154,7 +1154,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `LayerSignature system` は helper-local / report-local package として close し、Sugoroku `--debug layers` と clean near-end `layer_signatures` inventory を actualize した。
 - `MessageEnvelope / Auth seam` は helper-local / report-local package として close し、Sugoroku `message_envelopes` / `--debug envelopes` と clean near-end `MessageEnvelope` inventory を actualize した。
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
-- current promoted next package は typed external boundary / adapter である。
+- `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
+- current promoted next package は projection / placement である。
 
 ## 2026-04-27 repository-structure staging addendum
 

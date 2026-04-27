@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-27 18:04 JST
+Last updated: 2026-04-27 18:10 JST
 Current repo-local focus: clean near-end current layer と Sugoroku world vertical slice を runnable floor として維持しつつ、Mirrorea future-axis を sample-first / docs-first に段階 actualize する
-Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、next `Typed external boundary / adapter`, `Projection / placement`, `HotPlug Patch / AttachPoint`
+Current active packages: `0919` LayerSignature system close、`0920` repository layer map and staged restructuring close、`0921` MessageEnvelope / Auth seam close、`0922` VisualizationProtocol close、`0923` Typed external boundary / adapter close、next `Projection / placement`, `HotPlug Patch / AttachPoint`, `Network transport`
 
 ## Legend
 
@@ -28,7 +28,7 @@ Progress:
 | Lean / theorem | 89 | active proof bridge | committed Lean bridge と repo-local stub alignment を維持 | `python3 scripts/current_l2_lean_sample_sync.py` |
 | Sugoroku runtime | 90 | active vertical slice | attach / membership / handoff / reset model-check + debug lanes | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
 | Avatar follow | 10 | planned skeleton only | phase 8 helper contract と active promotion条件を切る | none yet |
-| External adapters | 1 | spec-only | phase 9 representative sample ladder を docs-first 化 | `python3 scripts/validate_docs.py` |
+| External adapters | 10 | planned skeleton | phase 9 `EXT-01..05` ladder を provider-boundary evidence に結び直す | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` |
 | Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持しつつ package 3 へ渡す | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
 | Projection / placement | 1 | spec-only | source-to-place validity checklist を起こす | `python3 scripts/validate_docs.py` |
 | Hot-plug package | 10 | TODO boundary visible | `SUG-09` を stop line として保持し `AttachPoint` package を待つ | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug summary` |
@@ -70,8 +70,13 @@ Progress:
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
 | `FAIRY-01..06` | avatar follow | `samples/not_implemented/avatar-fairy-follow/` | planned skeleton | 10 | not yet | 2026-04-27 15:21 JST | `0917` | skeleton exists; no helper / runner yet |
-| `PH9` | typed external boundary | spec only | planned docs-first row | 1 | not yet | not yet | `0913`, `0920` | stdio を core primitive にしない boundary |
+| `PH9` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | planned docs-first row | 10 | planned | 2026-04-27 18:10 JST | `0913`, `0920`, `0923` | stdio を core primitive にしない boundary、provider boundary / local queue を evidence anchor に使う |
 | `PH10` | MessageEnvelope / auth seam | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs` | helper-local / report-local first cut | 90 | positive + negative | 2026-04-27 17:46 JST | `0912`, `0913`, `0920`, `0921` | `auth none` baseline、local queue / provider boundary、public auth contract deferred |
+| `EXT-01` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `LogText` adapter local console; exact host schema open |
+| `EXT-02` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `ShowFloatingText` world overlay; visualization label line remains typed |
+| `EXT-03` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | `SendRoomMessage` local queue; message route stays separate from auth |
+| `EXT-04` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | adapter failure typed result; transport failure remains explicit |
+| `EXT-05` | typed external boundary | `samples/not_implemented/typed-external-boundary/README.md` | planned skeleton | 10 | not yet | 2026-04-27 18:10 JST | `0923` | debug visualization label restriction; no untyped leak |
 | `PH12` | projection / placement | spec only | planned docs-first row | 1 | not yet | not yet | `0912`, `0913`, `0920` | source-to-place validity checklist remains future work |
 | `PH13` | network transport | spec only | planned docs-first row | 1 | not yet | not yet | `0913`, `0920` | no separate-process sample exists |
 | `PH15` | visualization / IDE | `scripts/sugoroku_world_samples.py`, `crates/mir-runtime/src/clean_near_end.rs`, `mir_hilight.html` | helper-local / report-local first cut | 90 | positive | 2026-04-27 18:04 JST | `0910`, `0911`, `0913`, `0918`, `0920`, `0922` | typed/redacted visualization actualized; final public viewer and retention remain deferred |
@@ -87,7 +92,7 @@ Progress:
 | `E2E-SUG-RESET` | runtime attach -> reset -> stale handoff invalidation | `python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check --debug verification` | 90 | reset safety と model-check second line の bridge | pass 2026-04-27 15:21 JST |
 | `E2E-TERM-LAYER-INV` | source sample -> helper/runtime inventory | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures` and `--debug layers` | 90 | helper-local `TermSignature` / `LayerSignature` inventory floor | pass 2026-04-27 15:59 JST |
 | `E2E-AVATAR-FALLBACK` | attach -> follow -> fallback -> reject -> reacquire | planned | 10 | planned phase 8 route only | not yet |
-| `E2E-ADAPTER-BOUNDARY` | source -> adapter -> typed effect receipt/failure | planned | 1 | planned phase 9 route only | not yet |
+| `E2E-ADAPTER-BOUNDARY` | source -> adapter -> typed effect receipt/failure | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` and `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 10 | current evidence anchor for provider-boundary / local-queue phase 9 ladder | plan fixed 2026-04-27 18:10 JST |
 | `E2E-MSG-AUTH` | envelope -> auth -> authz -> membership -> dispatch | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | 90 | helper-local envelope carrier keeps auth / membership / capability / witness separate | pass 2026-04-27 17:46 JST |
 | `E2E-VIS-TRACE` | source -> runtime trace -> visualization view -> telemetry row | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | 90 | helper-local typed/redacted visualization first cut | pass 2026-04-27 18:04 JST |
 | `E2E-HOTPLUG-ATTACH` | patch -> compatibility -> attach -> activate | planned | 10 | planned phase 14 route only | not yet |
@@ -122,6 +127,10 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-27 18:10 JST | `python3 scripts/check_source_hierarchy.py` | pass | planned phase 9 sample root added without hierarchy drift |
+| 2026-04-27 18:10 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 921 numbered report(s).` |
+| 2026-04-27 18:10 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | provider boundary remains current phase 9 evidence anchor |
+| 2026-04-27 18:10 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json` | pass | local-queue envelope remains current phase 9 evidence anchor |
 | 2026-04-27 18:04 JST | `python3 scripts/check_source_hierarchy.py` | pass | required `23`, present `23`, missing `0` |
 | 2026-04-27 18:04 JST | `python3 scripts/validate_docs.py` | pass | `Documentation scaffold looks complete.`, `Found 920 numbered report(s).` |
 | 2026-04-27 18:04 JST | `git diff --check` | pass | whitespace-clean after visualization sync |

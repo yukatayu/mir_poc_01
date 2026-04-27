@@ -25,6 +25,8 @@
 - `current-l2/` は active clean suite を支える base source corpus
 - `lean/clean-near-end/` は generated theorem stub だが、proof bridge evidence として committed されている
 - `not_implemented/` は planned skeleton であり、active sample ではない
+  - `avatar-fairy-follow/` は phase 8 planned family
+  - `typed-external-boundary/` は phase 9 planned family
 - `prototype/` は historical anchor / compatibility reference であり、active canonical path ではない
 - `old/` は archive
 - `generated/` は future reserve path であり、source sample を置かない

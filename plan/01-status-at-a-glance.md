@@ -91,17 +91,18 @@
 - `docs/reports/0919-*` で `LayerSignature system` を close し、helper-local / runtime report-local lane inventory を追加した
 - `docs/reports/0921-*` で `MessageEnvelope / Auth seam` を close し、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report-local `MessageEnvelope` inventory を追加した
 - `docs/reports/0922-*` で `VisualizationProtocol` を close し、Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end report-local `VisualizationView` / `TelemetryRow` inventory を追加した
+- `docs/reports/0923-*` で `Typed external boundary / adapter` docs-first sample plan を close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置いた
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next reopen point は typed external boundary / adapter
+- next reopen point は projection / placement
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut を先に入れた上で、next semantic carrier package を typed external boundary / adapter と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan を先に入れた上で、next semantic carrier package を projection / placement と読む
 - phase 8 representative sample 候補は `samples/not_implemented/avatar-fairy-follow/` に skeleton family を切り出したが、current active helper はまだない
-- package 6 以降は typed external boundary / adapter、projection / placement、hot-plug patch / `AttachPoint`、network transport plan、compiler/backend/LLVM prep guardrail
+- package 6 以降は projection / placement、hot-plug patch / `AttachPoint`、network transport plan、compiler/backend/LLVM prep guardrail
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

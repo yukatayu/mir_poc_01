@@ -78,6 +78,12 @@ run_directory_named_profile
   - clean near-end closeout `visualization_views` / `telemetry_rows`
   を helper-local / report-local evidence inventory として見せてよい。
   - これは final public visualization protocol、final public telemetry schema、retention policy、multi-tenant viewer contract を意味しない。
+- current typed external boundary docs-first cut では、
+  - `samples/not_implemented/typed-external-boundary/`
+  - clean near-end `05_delegated_rng_service` の `provider_boundary`
+  - Sugoroku helper `local_queue` envelope / visualization inventory
+  を phase 9 sample ladder の evidence anchor として参照してよい。
+  - これは final public adapter API、real browser/network/VR transport、final host schema を意味しない。
 - current sample-visible verifier preview cut では、
   - `formal_hook_status`
   - `subject_kind`

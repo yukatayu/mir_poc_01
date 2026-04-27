@@ -18,6 +18,7 @@
 - Sugoroku 側の participant set は fixed literal principal だけでなく `MembershipRegistry` から読む line を current reading に置く
 - next representative sample 候補は avatar fairy follow slice であり、まだ active canonical sample ではない
 - phase 8 planned skeleton family は `samples/not_implemented/avatar-fairy-follow/` に置き、historical prototype anchor は `samples/prototype/current-l2-dynamic-attach-detach/` に残す
+- phase 9 planned family は `samples/not_implemented/typed-external-boundary/` に置き、current evidence anchor は `05_delegated_rng_service` の `provider_boundary` と Sugoroku helper の `local_queue` envelope / visualization carrier に結び直す
 
 ## current judgment
 
@@ -27,6 +28,7 @@
 - authentication を transport に潰さない
 - helper-local current cut では `auth none` baseline、`membership_epoch` / `member_incarnation` freshness、`witness_refs` separate lane を visible にしてよい
 - visualization / telemetry を untyped debug leak にしない
+- standard I/O を Mir core primitive にせず、typed external boundary の planned familyは adapter / transport / auth / witness / visualization を separate lane として保つ
 - `atomic_cut` を room-level durable commit にしない
 - system-wide source から place-specific program へ projection できる性質を future line の invariant として保つ
 
