@@ -2,8 +2,8 @@
 
 ## 目的
 
-runtime hot-plug を、attach request / compatibility / activation / migration stop line に分けて読むための
-docs-first current plan です。
+runtime hot-plug を package-manager concern として、attach request / compatibility / activation /
+migration stop line に分けて読むための docs-first current plan です。
 
 ## current anchors
 
@@ -21,6 +21,7 @@ docs-first current plan です。
 - detach TODO boundary を durable migration complete と同一視しない
 - storage detach script と runtime detach lifecycle を混同しない
 - helper-local `hotplug_lifecycle` は `MessageEnvelope` 由来の evidence summary であり、public ABI ではない
+- current safest first cut は helper/test/docs closeout hardening に留め、runtime crate ownership や durable rollback を先取りしない
 
 ## compatibility checklist
 

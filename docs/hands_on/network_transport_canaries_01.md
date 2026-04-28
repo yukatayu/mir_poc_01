@@ -1,6 +1,6 @@
 # network transport canaries 01
 
-2026-04-27 current cut では、phase 13 `Network transport` を **helper-local executable canary** として追います。
+2026-04-28 current closeout では、phase 13 `Network transport` を **helper-local executable canary + process-boundary closeout** として追います。
 
 ここで確認するのは、
 
@@ -14,12 +14,32 @@
 ## まず実行するコマンド
 
 ```bash
+python3 scripts/network_transport_samples.py list
 python3 scripts/network_transport_samples.py run NET-02 --debug route-trace
 python3 scripts/network_transport_samples.py run NET-03 --debug reconnect
 python3 scripts/network_transport_samples.py run NET-04 --debug failures
 python3 scripts/network_transport_samples.py run NET-05 --debug route-trace
 python3 scripts/network_transport_samples.py check-all --format json
+python3 scripts/network_transport_samples.py closeout --format json
+python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 04_non_owner_roll_rejected --transport loopback_socket --format json
 ```
+
+## current closeout inventory
+
+- `transport_scope`
+  `helper_local_process_boundary`
+- `process_boundary_canaries`
+  `NET-02 / NET-03 / NET-04 / NET-05`
+- `loopback_parity_sources`
+  `01_runtime_attach_game / 03_roll_publish_handoff / 04_non_owner_roll_rejected`
+- `non_collapse_lanes`
+  `transport / auth / membership / capability / witness / visualization`
+- `kept_later_gates`
+  `real_socket_or_broker / crypto_session_protocol / durable_replay_commit / continuous_shared_runtime_state / final_public_transport_abi`
+- `validation_floor`
+  helper-local canaries plus `loopback_socket` Sugoroku parity。real socket / broker / session / replay runtime ではない。
 
 ## sample ごとの読み
 

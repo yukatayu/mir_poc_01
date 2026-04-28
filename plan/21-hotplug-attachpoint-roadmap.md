@@ -77,4 +77,4 @@ runtime hot-plug lifecycle の `detach` と同一ではない。
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。
 hot-plug lifecycle は transport widening と分けたまま保つ。
-`P8` close 後の current snapshot では、next promoted package は `P9` avatar fairy follow hardening、next reopen point は `P10` `mirrorea-core` first real implementation tranche である。
+`P13` current first-cut closeout 後の current snapshot では、next promoted package は `P14` hot-plug package-manager tranche であり、current safest first cut は helper/test/docs closeout hardening に留める。next reopen point は `P15` projection/codegen first emitted place-specific programs である。

@@ -45,6 +45,31 @@ LIMITATIONS = [
     "final public transport ABI remains deferred",
 ]
 
+NON_COLLAPSE_LANES = [
+    "transport",
+    "auth",
+    "membership",
+    "capability",
+    "witness",
+    "visualization",
+]
+
+PROCESS_BOUNDARY_CANARIES = ["NET-02", "NET-03", "NET-04", "NET-05"]
+
+LOOPBACK_PARITY_SOURCES = [
+    "01_runtime_attach_game",
+    "03_roll_publish_handoff",
+    "04_non_owner_roll_rejected",
+]
+
+KEPT_LATER_GATES = [
+    "real_socket_or_broker",
+    "crypto_session_protocol",
+    "durable_replay_commit",
+    "continuous_shared_runtime_state",
+    "final_public_transport_abi",
+]
+
 
 def _sample_row(sample_id: str) -> dict[str, str]:
     for row in SAMPLE_ROWS:
@@ -421,12 +446,20 @@ def closeout() -> dict[str, Any]:
         "samples": [row["sample_id"] for row in SAMPLE_ROWS],
         "transport_scope": "helper_local_process_boundary",
         "transport_seam": TRANSPORT_SEAM,
+        "process_boundary_canaries": list(PROCESS_BOUNDARY_CANARIES),
+        "loopback_parity_sources": list(LOOPBACK_PARITY_SOURCES),
         "depends_on_samples": [
             "01_runtime_attach_game",
             "03_roll_publish_handoff",
             "06_leave_non_owner",
             "09_detach_todo",
         ],
+        "non_collapse_lanes": list(NON_COLLAPSE_LANES),
+        "kept_later_gates": list(KEPT_LATER_GATES),
+        "validation_floor": (
+            "helper-local canaries plus loopback_socket Sugoroku parity; "
+            "not real socket/broker/session/replay runtime"
+        ),
         "debug_output_modes": [
             "--debug summary",
             "--debug route-trace",

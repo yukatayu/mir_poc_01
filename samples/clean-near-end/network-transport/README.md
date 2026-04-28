@@ -18,6 +18,9 @@ python3 scripts/network_transport_samples.py run NET-04 --debug failures --forma
 python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json
 python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/network_transport_samples.py closeout --format json
+python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 04_non_owner_roll_rejected --transport loopback_socket --format json
 ```
 
 ## current sample IDs
@@ -45,6 +48,15 @@ python3 scripts/network_transport_samples.py closeout --format json
   `scripts/network_transport_samples.py`
 - docs-first backlog:
   `samples/not_implemented/network-transport/`
+
+## current closeout inventory
+
+- helper closeout は `transport_scope = helper_local_process_boundary` を返す
+- helper closeout は `process_boundary_canaries = NET-02..05` を返す
+- helper closeout は `loopback_parity_sources = 01_runtime_attach_game / 03_roll_publish_handoff / 04_non_owner_roll_rejected` を返す
+- helper closeout は `non_collapse_lanes = transport / auth / membership / capability / witness / visualization` を返す
+- helper closeout は `kept_later_gates = real_socket_or_broker / crypto_session_protocol / durable_replay_commit / continuous_shared_runtime_state / final_public_transport_abi` を返す
+- helper closeout は `validation_floor` を返し、helper-local canaries + `loopback_socket` parity だけを current line として読む
 
 ## stop line
 

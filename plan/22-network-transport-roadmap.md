@@ -9,6 +9,17 @@ repo-local current layer で無理なく前進させるための docs-first road
 transport widening の invariant、stop line である。
 final socket / broker choice、cryptographic session protocol、multi-server consensus は固定しない。
 
+2026-04-28 P13 first-cut closeout note:
+current helper closeout に
+`transport_scope = helper_local_process_boundary`、
+`process_boundary_canaries = NET-02 / NET-03 / NET-04 / NET-05`、
+`loopback_parity_sources = 01_runtime_attach_game / 03_roll_publish_handoff / 04_non_owner_roll_rejected`、
+`non_collapse_lanes = transport / auth / membership / capability / witness / visualization`、
+`kept_later_gates = real_socket_or_broker / crypto_session_protocol / durable_replay_commit / continuous_shared_runtime_state / final_public_transport_abi`、
+`validation_floor`
+を actualize してよい。
+これは helper-local process-boundary closeout であり、real socket / broker / session / replay runtime actualization ではない。
+
 ## current anchors
 
 - `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir`
@@ -75,6 +86,18 @@ final socket / broker choice、cryptographic session protocol、multi-server con
    - route trace / telemetry を authority / redaction 付き observer-safe view で返す path
    - 2026-04-27 current cut では `scripts/network_transport_samples.py run NET-05` として redacted route trace canary を actualize 済み
 
+## current process-boundary closeout inventory
+
+- helper closeout は次を返してよい。
+  - `transport_scope`
+  - `process_boundary_canaries`
+  - `loopback_parity_sources`
+  - `non_collapse_lanes`
+  - `kept_later_gates`
+  - `validation_floor`
+- current reading は、`NET-01..05` helper-local canary を process-boundary closeout として束ね、
+  real transport runtime と誤読させない inventory を executable closeout に固定した、というところで止める。
+
 ## stop line
 
 - final socket / broker / QUIC / WebRTC choice
@@ -95,5 +118,5 @@ final socket / broker choice、cryptographic session protocol、multi-server con
 
 `NET-01` helper-local loopback preview は actualize 済みである。
 `NET-02..05` も helper-local canary として actualize 済みであり、
-`NET-01` preview を floor にしたまま subprocess JSON bridge / stale reconnect reject / typed transport failure / redacted route trace を current evidence surface に加えた。
+`P13` current first-cut closeout では `NET-01` preview を floor にしたまま subprocess JSON bridge / stale reconnect reject / typed transport failure / redacted route trace を current evidence surface と helper closeout inventory に固定した。
 ただし、real socket / broker / session / durable replay は still later である。

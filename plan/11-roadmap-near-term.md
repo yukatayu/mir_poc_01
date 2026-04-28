@@ -32,8 +32,15 @@
 - `docs/reports/0950-*` は `P4` `TermSignature` registry hardening closeout を表し、active kind family、helper/runtime `signature_scope` distinction、reserved kind split、provenance-preserving evidence-role inventory を current line に actualize した
 - `docs/reports/0952-*` は `P5` `LayerSignature` system hardening closeout を表し、helper/runtime `name` row key、`obligations` lane、`layer_signature_scope` distinction、representative/canonical inventory split を current line に actualize した
 - `docs/reports/0953-*` は `P6` `MessageEnvelope / AuthEvidence` seam hardening closeout を表し、helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes` を current line に actualize した
-- current promoted next package は `P7` `VisualizationProtocol / VisualizationSecurity` hardening
-- next reopen point は `P8` Sugoroku runtime attach hardening
+- `docs/reports/0954-*` は `P7` `VisualizationProtocol / VisualizationSecurity` hardening closeout を表し、helper/runtime security envelope、typed telemetry retention floor、NET-05 observer route trace fail-closed を current line に actualize した
+- `docs/reports/0955-*` は `P8` Sugoroku runtime attach hardening closeout を表し、MembershipRegistry source-of-truth、world sugar boundary、late-join/handoff boundary、hot-plug stop line を current line に actualize した
+- `docs/reports/0956-*` は `P9` avatar fairy follow hardening closeout を表し、helper closeout `planned_sample_paths` と `fairy05_reopen_gate` を current line に actualize した
+- `docs/reports/0957-*` / `0958-*` / `0959-*` は `P10` `mirrorea-core` first real implementation tranche closeout と review follow-up を表し、`LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation を `mirrorea-core` に actualize した
+- `docs/reports/0960-*` / `0961-*` / `0962-*` / `0963-*` / `0964-*` / `0965-*` は `P11` logical multi-place runtime tranche の current third cut と review follow-up を表し、`MembershipRegistry` / `PlaceCatalog` substrate、participant-place-kind-gated shell、principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を current line に actualize した
+- `docs/reports/0966-*` は `P12` external adapter / host boundary tranche の current first cut closeout を表し、helper closeout `host_boundary_scope` / `host_boundary_lanes` / `non_collapse_lanes` / `host_family_gates` / `host_boundary_inventory` を current line に actualize した
+- `docs/reports/0967-*` は `P13` network transport minimal alpha の current first-cut closeout を表し、helper closeout `transport_scope` / `process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` を current line に actualize した
+- current promoted next package は `P14` hot-plug package-manager tranche
+- next reopen point は `P15` projection/codegen first emitted place-specific programs
 
 ## stabilized queue
 
@@ -41,12 +48,12 @@
    - close 済み。stale active reference、source hierarchy、front-door docs drift を再確認する。
 2. `P1` Repository layer map and `samples_progress.md` stabilization
    - close 済み。repo taxonomy、active/planned/archive/generated boundary、dashboard discipline を再同期する。
-3. `P7` visualization security hardening
-   - `VisualizationProtocol / VisualizationSecurity`
-4. `P8-P9` representative slice hardening
-   - Sugoroku runtime attach と avatar fairy follow residual gate
-5. `P10-P17` first real implementation tranche
-   - `mirrorea-core`、logical multi-place runtime、external adapter、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
+3. `P2-P13` closeout chain
+   - typed external residual review、projection emitted-program gate、signature/layer/message/visualization hardening、Sugoroku / avatar hardening、`mirrorea-core`、logical multi-place runtime、external adapter、network `process_boundary` closeout までは current line に actualize 済み
+4. `P14` hot-plug package-manager tranche
+   - helper/test/docs closeout hardening として `hotplug_lifecycle` / attach-detach canary / package-manager inventory wording を current line に固定する
+5. `P15-P17` first real implementation tranche
+   - projection/codegen、viewer、storage/backend
 6. `P18` public API / parser grammar gate
    - final public freeze は最後の mixed gate に残す
 

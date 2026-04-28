@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 16:00 JST
+最終更新: 2026-04-28 16:29 JST
 
 ## この文書について
 
@@ -17,8 +17,8 @@
 - `P10` `mirrorea-core` first real implementation tranche は close 済みです。
 - `P11` logical multi-place runtime tranche の current third cut は close 済みで、`MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated shell の上に principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper まで actualize 済みです。
 - `P12` external adapter / host boundary tranche の current first cut は close 済みで、typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize 済みです。
-- current promoted next line は **`P13` network transport minimal alpha** で、その safest first cut は helper-local `process_boundary` closeout です。
-- next reopen point は **`P14` hot-plug package-manager tranche** です。
+- current promoted next line は **`P14` hot-plug package-manager tranche** で、その safest first cut は helper/test/docs closeout hardening です。
+- next reopen point は **`P15` projection/codegen first emitted place-specific programs** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -50,9 +50,9 @@
 | `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | placeholder -> first real minimal carrier core |
 | `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | started | multi-task | third cut actualized; non-blocking follow-up only |
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | helper-local host-boundary inventory first cut |
-| `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | promoted next | multi-task | helper-local process-boundary closeout |
-| `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | compatibility / migration / rollback |
-| `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | later | multi-task | preview floor -> emitted programs |
+| `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local process-boundary closeout inventory fixed |
+| `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | promoted next | multi-task | helper/test/docs closeout hardening for package-manager inventory |
+| `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | reopen next | multi-task | preview floor -> emitted programs |
 | `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | later | multi-task | typed visualization public prototype |
 | `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | later | 1-3 tasks | guardrail -> implementation-ready |
 | `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | final gate | user + repo dependent | final freeze remains last |
@@ -399,14 +399,14 @@
 ### P13. network transport minimal alpha
 
 - status:
-  promoted next。current safest first cut は helper-local `process_boundary` closeout であり、`mirrorea-core` transport runtime や real socket/broker を先に作るのではなく、`loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace を current validation floor と stop line に固定する。
+  close 済み。current safest first cut は helper-local `process_boundary` closeout であり、`mirrorea-core` transport runtime や real socket/broker を先に作るのではなく、`loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace を current validation floor と stop line に固定した。
 
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
   helper-local transport canary family を `process_boundary` closeout として tighten し、real transport line に入る前の最小 honest scope を固定する
 - deliverables:
-  `transport_scope = helper_local_process_boundary`、`loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace、non-collapse lane wording
+  `transport_scope = helper_local_process_boundary`、`process_boundary_canaries`、`loopback_parity_sources`、`loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace、`non_collapse_lanes`、`kept_later_gates`、`validation_floor`
 - validation command:
   `python3 scripts/network_transport_samples.py list`
   `python3 scripts/network_transport_samples.py run NET-02 --debug route-trace --format json`
@@ -428,21 +428,27 @@
 
 ### P14. hot-plug `Patch` / `AttachPoint` package-manager tranche
 
+- status:
+  promoted next。current safest first cut は helper/test/docs closeout hardening に留め、既存 `hotplug_lifecycle` / attach-detach canary / compatibility stop line を package-manager inventory surface として揃える。runtime crate 側の migration engine や durable rollback protocol はまだ進めない。
+
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
-  compatibility、activation、migration、rollback を package-manager concern として widen する
+  compatibility、activation、migration、rollback を package-manager concern として widen する前に、helper-local package-manager inventory surface と stop line を current docs / closeout / tests に揃える
 - deliverables:
-  attachpoint compatibility contract、migration stop line、rollback wording
+  `hotplug_lifecycle` package-manager inventory view、attachpoint compatibility contract、activation cut wording、explicit TODO detach boundary、migration stop line、rollback wording、historical/active/helper/final-public split
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json`
-  package-manager-specific command は `UNRESOLVED`
+  `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug hotplug --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
 - debug / visualization output:
-  `hotplug_lifecycle`
+  `hotplug_lifecycle`、attach/detach lifecycle rows、package-manager inventory wording
 - docs / report requirement:
-  新しい report、`samples_progress.md`、`plan/21`、relevant docs を同期する
+  新しい report、`samples_progress.md`、`plan/21`、hot-plug docs、snapshot docs を同期する
 - stop line:
-  deployment-grade migration / rollback / durable upgrade engine を premature に固定しない
+  runtime crate 側の migration engine、deployment-grade rollback、durable upgrade engine、final public hot-plug ABI を premature に固定しない
 
 ### P15. projection/codegen first emitted place-specific programs
 

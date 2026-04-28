@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut は close し、`P11` current third cut は actualize 済み、next promoted package は `P13`、next reopen point は `P14` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P14`、next reopen point は `P15` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 

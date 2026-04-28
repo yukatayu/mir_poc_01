@@ -133,6 +133,41 @@ class NetworkTransportSamplesTests(unittest.TestCase):
         self.assertIn("--debug failures", result["debug_output_modes"])
         self.assertIn("no real network socket yet", result["limitations"])
 
+    def test_closeout_records_process_boundary_scope_inventory(self) -> None:
+        result = network_transport_samples.closeout()
+
+        self.assertEqual(result["transport_scope"], "helper_local_process_boundary")
+        self.assertEqual(
+            result["process_boundary_canaries"],
+            ["NET-02", "NET-03", "NET-04", "NET-05"],
+        )
+        self.assertEqual(
+            result["loopback_parity_sources"],
+            [
+                "01_runtime_attach_game",
+                "03_roll_publish_handoff",
+                "04_non_owner_roll_rejected",
+            ],
+        )
+        self.assertEqual(
+            result["non_collapse_lanes"],
+            [
+                "transport",
+                "auth",
+                "membership",
+                "capability",
+                "witness",
+                "visualization",
+            ],
+        )
+        self.assertIn("real_socket_or_broker", result["kept_later_gates"])
+        self.assertIn("crypto_session_protocol", result["kept_later_gates"])
+        self.assertIn("durable_replay_commit", result["kept_later_gates"])
+        self.assertIn(
+            "helper-local canaries plus loopback_socket Sugoroku parity",
+            result["validation_floor"],
+        )
+
     def test_route_trace_debug_prints_redacted_rows(self) -> None:
         pretty = network_transport_samples.format_pretty(
             network_transport_samples.run_sample("NET-05"),
