@@ -89,7 +89,7 @@ run_directory_named_profile
   を helper-local / report-local evidence inventory として見せてよい。
   - current line では helper active medium inventory と runtime canonical seam inventory を分け、`transport_medium` / `transport_seam` / `emitter_principal` / `freshness_checks` を first-class lane に上げてよい。
   - `P10` `mirrorea-core` first real implementation tranche 後は、Rust 側の `LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation の ownership は `crates/mirrorea-core` に置き、`crates/mir-runtime/src/clean_near_end.rs` は current report-local assembly と closeout inventory を担う。
-  - `P11` first cut では、`MembershipRegistry` typed source-of-truth substrate と `PlaceCatalog` logical multi-place catalog substrate も `crates/mirrorea-core` に actualize してよい。
+  - `P11` current second cut では、`MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell` も `crates/mirrorea-core` に actualize してよい。
   - `WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / helper-local `turn_timeline` / `membership_snapshot` / `projection_view` / `hotplug_lifecycle` は kept-later であり、current cut では Rust core substrate に昇格させない。
   - これは final public message schema、final public auth protocol、final public transport contract を意味しない。
 - current sample-visible visualization / telemetry cut では、

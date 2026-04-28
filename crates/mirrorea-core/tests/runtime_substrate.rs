@@ -1,4 +1,4 @@
-use mirrorea_core::{MembershipRegistry, PlaceCatalog};
+use mirrorea_core::{LogicalPlaceRuntimeShell, MembershipRegistry, PlaceCatalog};
 
 #[test]
 fn membership_registry_tracks_epoch_and_typed_snapshot() {
@@ -123,4 +123,62 @@ fn place_catalog_accepts_identical_duplicate_and_rejects_kind_drift() {
     let snapshot = catalog.snapshot();
     assert_eq!(snapshot.places["WorldServerPlace"], "world_server");
     assert_eq!(snapshot.places["ParticipantPlace[Alice]"], "participant");
+}
+
+#[test]
+fn logical_place_runtime_shell_tracks_registered_places_and_membership() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .register_place("WorldServerPlace", "WorldServerPlace")
+        .expect("world server");
+    shell
+        .register_place("ParticipantPlace[Alice]", "ParticipantPlace")
+        .expect("Alice place");
+    shell
+        .register_place("ParticipantPlace[Bob]", "ParticipantPlace")
+        .expect("Bob place");
+    shell
+        .add_initial_member("Alice", "ParticipantPlace[Alice]")
+        .expect("initial Alice");
+    shell
+        .add_member("Bob", "ParticipantPlace[Bob]")
+        .expect("late join Bob");
+
+    let snapshot = shell.snapshot();
+    assert_eq!(
+        snapshot.place_catalog.places["WorldServerPlace"],
+        "WorldServerPlace"
+    );
+    assert_eq!(snapshot.membership.membership_epoch, 1);
+    assert_eq!(
+        snapshot.membership.members["Alice"].place,
+        "ParticipantPlace[Alice]"
+    );
+    assert_eq!(
+        snapshot.membership.members["Bob"].place,
+        "ParticipantPlace[Bob]"
+    );
+}
+
+#[test]
+fn logical_place_runtime_shell_rejects_member_place_not_in_catalog() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    let err = shell
+        .add_initial_member("Alice", "ParticipantPlace[Alice]")
+        .expect_err("missing place registration should fail");
+    assert!(err.to_string().contains("ParticipantPlace[Alice]"));
+}
+
+#[test]
+fn logical_place_runtime_shell_rejects_member_place_with_non_participant_kind() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .register_place("WorldServerPlace", "WorldServerPlace")
+        .expect("world server");
+
+    let err = shell
+        .add_initial_member("Alice", "WorldServerPlace")
+        .expect_err("member place kind should be participant-only");
+    assert!(err.to_string().contains("WorldServerPlace"));
+    assert!(err.to_string().contains("ParticipantPlace"));
 }

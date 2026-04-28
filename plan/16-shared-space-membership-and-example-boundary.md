@@ -18,7 +18,7 @@
   に置き、single OS process logical multi-place emulator として扱う
 - Sugoroku 側の participant set は fixed literal principal だけでなく `MembershipRegistry` から読む line を current reading に置く
 - current Sugoroku helper closeout では `membership_model.source_of_truth = MembershipRegistry` と `membership_model.late_join_handoff_boundary` を explicit に保ってよい
-- `P11` current first cut では `MembershipRegistry` typed source-of-truth substrate と `PlaceCatalog` を `crates/mirrorea-core` に actualize してよいが、`WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / event-timeline-view catalog は helper-local evidence surface または later tranche に残してよい
+- `P11` current second cut では `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog`、participant-place-kind-gated `LogicalPlaceRuntimeShell` を `crates/mirrorea-core` に actualize してよいが、`WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / event-timeline-view catalog は helper-local evidence surface または later tranche に残してよい
 - avatar fairy follow representative slice は `samples/clean-near-end/avatar-follow/` に置き、active canonical sample として読む
 - phase 8 residual planned family は `samples/not_implemented/avatar-fairy-follow/` に置き、historical prototype anchor は `samples/prototype/current-l2-dynamic-attach-detach/` に残す
 - phase 9 planned source family は `samples/not_implemented/typed-external-boundary/` に置き、current synthetic preview helper subset は `EXT-03` / `EXT-04` に留める

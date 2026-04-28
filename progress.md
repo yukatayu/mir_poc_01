@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-28 14:46 JST
+最終更新: 2026-04-28 15:06 JST
 
 ## この文書について
 
@@ -22,11 +22,11 @@ Place をまたいで実行・通信・検証・可視化できる
 - active floor:
   clean near-end suite、Sugoroku world vertical slice、avatar follow representative slice は runnable
 - future-axis floor:
-  `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、`mirrorea-core` minimal carrier ownership cut、`MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` first cut までは actualize 済み
+  `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、`mirrorea-core` minimal carrier ownership cut、`MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog`、participant-place-kind-gated `LogicalPlaceRuntimeShell` までは actualize 済み
 - integration floor:
-  `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` typed external residual planned family review、`P3` projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche を close し、`P11` logical multi-place runtime tranche は first cut として `MembershipRegistry` typed source-of-truth substrate と `PlaceCatalog` logical multi-place catalog substrate を actualize した。handoff 由来の queue numbering と source hierarchy 読み、typed external residual reopen matrix、projection validity report minimum、generated artifact reserve policy、current `signature_lanes` / `signature_scope` / `signature_evidence_roles` rule、current `LayerSignature` row schema / scope split / representative vs canonical inventory rule、`MessageEnvelope` medium/seam split、shared `AuthEvidence` lane inventory、view / telemetry security envelope、fail-closed observer route trace、MembershipRegistry source-of-truth wording、world sugar boundary、hot-plug stop line、`FAIRY-05` reopen gate と planned path inventory、`mirrorea-core` minimal carrier ownership cut を current repo へ mirror した
+  `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` typed external residual planned family review、`P3` projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche を close し、`P11` logical multi-place runtime tranche は current second cut として `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell` を actualize した。handoff 由来の queue numbering と source hierarchy 読み、typed external residual reopen matrix、projection validity report minimum、generated artifact reserve policy、current `signature_lanes` / `signature_scope` / `signature_evidence_roles` rule、current `LayerSignature` row schema / scope split / representative vs canonical inventory rule、`MessageEnvelope` medium/seam split、shared `AuthEvidence` lane inventory、view / telemetry security envelope、fail-closed observer route trace、MembershipRegistry source-of-truth wording、world sugar boundary、hot-plug stop line、`FAIRY-05` reopen gate と planned path inventory、`mirrorea-core` minimal carrier ownership cut を current repo へ mirror した
 - current promoted next line:
-  `P11` logical multi-place runtime tranche。current first cut は `MembershipRegistry` / `PlaceCatalog` substrate actualization
+  `P11` logical multi-place runtime tranche。current second cut は `MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated `LogicalPlaceRuntimeShell` を actualize したところ
 - next reopen point:
   `P12` external adapter / host boundary tranche
 - still later:
@@ -38,7 +38,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## 現在の一言での読み
 
-2026-04-28 時点の repo は、**current-L2 / shared-space sample の runnable floor を維持したまま、Mirrorea future-axis の future-plan integration、next package queue stabilization、`P2` typed external residual planned family review、`P3` projection emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche を close し、`P11` logical multi-place runtime tranche は `MembershipRegistry` / `PlaceCatalog` first cut を actualize している段階**です。
+2026-04-28 時点の repo は、**current-L2 / shared-space sample の runnable floor を維持したまま、Mirrorea future-axis の future-plan integration、next package queue stabilization、`P2` typed external residual planned family review、`P3` projection emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche を close し、`P11` logical multi-place runtime tranche は `MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated `LogicalPlaceRuntimeShell` まで actualize している段階**です。
 
 ## 3 軸 progress
 
@@ -50,7 +50,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | Lean foundations / proof spine | 86% | 88% | 68% | small proof fragment と generated stub はあるが、full discharge ではない |
 | shared-space samples | 84% | 87% | 75% | Sugoroku / avatar の runnable floor はあるが、real transport / durable evidence は未着手 |
 | docs / dashboard / repository structure | 93% | 94% | 86% | source hierarchy、queue numbering、taxonomy、dashboard semantics は current line に追随 |
-| Mirrorea future axis | 84% | 91% | 75% | helper-local / report-local preview に加え `mirrorea-core` minimal carrier ownership cut と `MembershipRegistry` / `PlaceCatalog` first cut まで actualize 済み。public contract と emitted artifact family は後段 |
+| Mirrorea future axis | 84% | 91% | 76% | helper-local / report-local preview に加え `mirrorea-core` minimal carrier ownership cut、`MembershipRegistry` / `PlaceCatalog` substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell` まで actualize 済み。public contract と emitted artifact family は後段 |
 | storage / backend guardrail | 72% | 83% | 76% | external workdir と probe floor はあるが、actual LLVM build はまだ |
 
 ## macro phase map
@@ -63,7 +63,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `Macro 3` | compile-ready minimal actualization | late | 84% | public parser / API 以外は着手可能 |
 | `Macro 4` | executable sample floor | active clean suite | 98% | 着手可能 |
 | `Macro 5` | typed / theorem / model-check bridge | repo-local alpha-ready current layer | 96% | public seam 以外は自走可能 |
-| `Macro 6` | shared-space / fabric boundary | `P11` first cut active | 97% | public contract / real transport 以外は自走可能 |
+| `Macro 6` | shared-space / fabric boundary | `P11` second cut active | 97% | public contract / real transport 以外は自走可能 |
 | `Macro 7` | toolchain / backend / host-facing integration | guardrail + implementation tranche待ち | 72% | installed binary / backend choice 以外は段階的に自走可能 |
 | `Macro 8` | application realization | early | 22% | 要仕様確認 |
 
@@ -95,7 +95,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `P8` Sugoroku runtime attach hardening | closed | MembershipRegistry source-of-truth、world sugar boundary、late-join/handoff boundary、hot-plug stop line を固定した | real network、consensus、durable distributed commit、rollback、final public runtime / hot-plug ABI を固定しない |
 | `P9` avatar fairy follow hardening | closed | helper closeout `FAIRY-05` reopen gate と planned path inventory を fixed した | `FAIRY-05` 自体は active 化しない |
 | `P10` `mirrorea-core` first real implementation tranche | closed | `LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation を `mirrorea-core` に actualize した | visualization / telemetry catalog、membership registry、projection object model、hot-plug runtime、final auth / transport ABI は kept-later |
-| `P11` logical multi-place runtime tranche | active | `MembershipRegistry` typed source-of-truth substrate と `PlaceCatalog` を `mirrorea-core` に actualize し、helper-local logical multi-place emulator の first cut を crate-side runtime substrate へ寄せる | `WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / real network / consensus / durable replay を先に claim しない |
+| `P11` logical multi-place runtime tranche | active | `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog`、participant-place-kind-gated `LogicalPlaceRuntimeShell` を `mirrorea-core` に actualize し、helper-local logical multi-place emulator の thin composition frontier を crate-side runtime substrate へ寄せる | `WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / real network / consensus / durable replay を先に claim しない |
 | `P12-P17` implementation tranche | later | external adapter / transport / hot-plug / projection / viewer / backend を段階的に widen する | `P11` ownership cut 前に責務を collapse しない |
 | `P18` public API / parser grammar gate | final mixed gate | final freeze 条件を定義する | prior packages 未成熟のまま public freeze しない |
 
@@ -112,8 +112,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | `P8` Sugoroku runtime attach hardening | close 済み | helper closeout に world sugar / MembershipRegistry / stop line carrier を追加し、attach / handoff / late-join / detach evidence gate を current line に固定した |
 | `P9` avatar fairy follow hardening | close 済み | helper closeout `FAIRY-05` reopen gate と planned path inventory を current line に固定した |
 | `P10` `mirrorea-core` first real implementation tranche | close 済み | `mirrorea-core` に minimal carrier ownership cut を actualize した |
-| `P11` logical multi-place runtime tranche | 着手中 | `MembershipRegistry` / `PlaceCatalog` first cut を actualize し、next は helper-local emulator の kept-later boundary を tighter にする |
-| `P12-P17` implementation tranche | 後段依存 | `P11` runtime substrate の first cut が先に要る |
+| `P11` logical multi-place runtime tranche | 着手中 | `MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated `LogicalPlaceRuntimeShell` を actualize し、next は helper-local emulator の kept-later boundary を tighter にする |
+| `P12-P17` implementation tranche | 後段依存 | `P11` runtime substrate の current shell cut が先に要る |
 | `P18` public API / parser grammar gate | 要仕様確認 | prior tranche の成熟と user 側の公開範囲判断が必要 |
 
 ## 再現性アンカー
@@ -133,6 +133,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-28 15:06 JST — `P11` logical multi-place runtime tranche の current second cut を harden し、`LogicalPlaceRuntimeShell` が membership mutation 先として registered place 全般ではなく `ParticipantPlace` kind だけを受け入れるようにした。review report `0961` の finding を受けて wrong-kind rejection test を追加し、`cargo test -p mirrorea-core`、`python3 scripts/sugoroku_world_samples.py closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通した上で、report `0962`、`README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、`plan/01` / `plan/09` / `plan/16` / `plan/17` / `plan/19`、`specs/11`、`docs/hands_on/current_phase_closeout_01.md`、`docs/research_abstract/mirrorea_future_axis_01.md` を participant-place-kind gate の current line に同期した。
 - 2026-04-28 14:46 JST — `P11` logical multi-place runtime tranche を start し、`crates/mirrorea-core` に `MembershipRegistry` typed source-of-truth substrate と `PlaceCatalog` logical multi-place catalog substrate を actualize した。review follow-up で `add_member` failure が phantom epoch advance を起こさないように修正し、`add_initial` を bootstrap-only に固定した。helper-specific `WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / event-timeline-view catalog は kept-later とし、`cargo test -p mirrorea-core` の RED から `MembershipRegistry` / `PlaceCatalog` API を追加して GREEN に戻した。`python3 scripts/sugoroku_world_samples.py closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` も通し、report `0960`、`README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、`plan/01` / `plan/09` / `plan/16` / `plan/17` / `plan/19`、`specs/11` を current P11 first cut line に同期した。
 - 2026-04-28 14:22 JST — `P10` `mirrorea-core` first real implementation tranche を close し、`crates/mirrorea-core` に `LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation を actualize した。review follow-up で legacy `transport` alias を compatibility-only field として `transport == transport_seam` invariant に固定し、runtime sample tests と front-door docs にも明示した。`mir-runtime` clean near-end report はその narrow carrier を利用する current ownership cut に寄せ、`README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、`specs/11`、`plan/01` / `plan/09` / `plan/17` / `plan/19`、`docs/hands_on/current_phase_closeout_01.md`、`docs/research_abstract/mirrorea_future_axis_01.md`、reports `0957` / `0958` / `0959` を同期した。`cargo test -p mirrorea-core`、`cargo test -p mir-runtime`、`python3 -m unittest scripts.tests.test_sugoroku_world_samples scripts.tests.test_avatar_follow_samples`、`python3 scripts/sugoroku_world_samples.py closeout --format json`、`cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通し、next promoted package を `P11`、next reopen point を `P12` に揃えた。
 - 2026-04-28 13:37 JST — `P9` avatar fairy follow hardening を close し、avatar helper closeout に `planned_sample_paths` と `fairy05_reopen_gate = { sample_status = planned_only, required_evidence = [...], carrier_choice = UNRESOLVED, planning_only_candidate_labels = state_timeline / anchor_switch }` を追加した。avatar helper unittest、`check-all`、avatar closeout、`01` / `02` anchors、`03` membership、`06` verification、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通し、report `0956` と snapshot docs を `P10` promoted / `P11` reopen next に同期した。

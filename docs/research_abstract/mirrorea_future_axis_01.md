@@ -46,6 +46,7 @@ helper closeout は `representative_slice` scope で `verification_handoff_witne
 
 さらに `P6` `MessageEnvelope / AuthEvidence` seam hardening も close しました。
 さらに `P10` `mirrorea-core` first real implementation tranche も close しました。
+さらに `P11` logical multi-place runtime tranche では、current second cut として `MembershipRegistry`、`PlaceCatalog`、participant-place-kind-gated `LogicalPlaceRuntimeShell` を `mirrorea-core` に actualize しました。
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Typed external boundary executable widening` も close しました。
@@ -309,7 +310,7 @@ future-axis の first-cut / widening package は次まで close 済みです。
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
 1. `P11` logical multi-place runtime tranche
-   - helper-local emulator を crate-side runtime substrate へ寄せる
+   - `MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated `LogicalPlaceRuntimeShell` の上で、helper-local emulator を crate-side runtime substrate へ寄せる
 2. `P12-P17` first real implementation tranche
    - external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
 3. `P18` public API / parser grammar gate

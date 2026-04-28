@@ -4,6 +4,8 @@ use serde::Serialize;
 
 use crate::error::{MirroreaCoreError, require_non_empty};
 
+const PARTICIPANT_PLACE_KIND: &str = "ParticipantPlace";
+
 #[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 pub struct MemberRecord {
     pub principal: String,
@@ -200,5 +202,72 @@ impl PlaceCatalog {
         PlaceCatalogSnapshot {
             places: self.places.clone(),
         }
+    }
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct LogicalPlaceRuntimeSnapshot {
+    pub place_catalog: PlaceCatalogSnapshot,
+    pub membership: MembershipSnapshot,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq, Default)]
+pub struct LogicalPlaceRuntimeShell {
+    place_catalog: PlaceCatalog,
+    membership: MembershipRegistry,
+}
+
+impl LogicalPlaceRuntimeShell {
+    pub fn register_place(&mut self, place_id: &str, kind: &str) -> Result<(), MirroreaCoreError> {
+        self.place_catalog.register(place_id, kind)
+    }
+
+    pub fn add_initial_member(
+        &mut self,
+        principal: &str,
+        participant_place: &str,
+    ) -> Result<(), MirroreaCoreError> {
+        self.ensure_registered_participant_place(participant_place)?;
+        self.membership.add_initial(principal, participant_place)
+    }
+
+    pub fn add_member(
+        &mut self,
+        principal: &str,
+        participant_place: &str,
+    ) -> Result<MemberRecord, MirroreaCoreError> {
+        self.ensure_registered_participant_place(participant_place)?;
+        self.membership.add_member(principal, participant_place)
+    }
+
+    pub fn mark_inactive_member(
+        &mut self,
+        principal: &str,
+    ) -> Result<MemberRecord, MirroreaCoreError> {
+        self.membership.mark_inactive(principal)
+    }
+
+    pub fn snapshot(&self) -> LogicalPlaceRuntimeSnapshot {
+        LogicalPlaceRuntimeSnapshot {
+            place_catalog: self.place_catalog.snapshot(),
+            membership: self.membership.snapshot(),
+        }
+    }
+
+    fn ensure_registered_participant_place(
+        &self,
+        participant_place: &str,
+    ) -> Result<(), MirroreaCoreError> {
+        let kind = self.place_catalog.kind_of(participant_place).ok_or_else(|| {
+            MirroreaCoreError::new(format!(
+                "LogicalPlaceRuntimeShell requires registered place `{participant_place}` before membership mutation"
+            ))
+        })?;
+        if kind != PARTICIPANT_PLACE_KIND {
+            return Err(MirroreaCoreError::new(format!(
+                "LogicalPlaceRuntimeShell requires `{participant_place}` to have kind `{PARTICIPANT_PLACE_KIND}` before membership mutation, found `{kind}`"
+            )));
+        }
+        Ok(())
     }
 }

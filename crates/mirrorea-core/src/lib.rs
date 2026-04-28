@@ -29,8 +29,8 @@ pub use fabric::{
 };
 pub use layer::{LayerSignature, insert_layer_signature, layer_signature_lanes};
 pub use runtime::{
-    MemberRecord, MemberSnapshot, MembershipRegistry, MembershipSnapshot, PlaceCatalog,
-    PlaceCatalogSnapshot,
+    LogicalPlaceRuntimeShell, LogicalPlaceRuntimeSnapshot, MemberRecord, MemberSnapshot,
+    MembershipRegistry, MembershipSnapshot, PlaceCatalog, PlaceCatalogSnapshot,
 };
 
 pub fn crate_name() -> &'static str {

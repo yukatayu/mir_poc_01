@@ -63,7 +63,7 @@
 | `mir-semantics` | Mir verification substrate | high |
 | `mir-runtime` | current runner / host-facing proof-of-concept boundary | high |
 | `mir-lsp` | visualization / editor-support placeholder | medium |
-| `mirrorea-core` | Mirrorea minimal carrier substrate (`LayerSignature` / `PrincipalClaim` / `AuthEvidence` / `MessageEnvelope` / `MembershipRegistry` / `PlaceCatalog`) | medium |
+| `mirrorea-core` | Mirrorea minimal carrier substrate (`LayerSignature` / `PrincipalClaim` / `AuthEvidence` / `MessageEnvelope` / `MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell`) | medium |
 | `mirrorea-control` | Mirrorea control-plane placeholder | medium |
 | `prism-meta` / `prism-core` / `prism-runtime` | PrismCascade separate lane placeholder | medium |
 | `engine-abi` | external adapter / host boundary placeholder | medium |
@@ -72,7 +72,7 @@
 current recommendation:
 
 - `mir-ast` / `mir-semantics` / `mir-runtime` は live chain なので、rename / rebucket しない
-- `mirrorea-core` は current ownership cut と `P11` first cut が入り始めたが、まだ final public crate shape ではないので rename / rebucket しない
+- `mirrorea-core` は current ownership cut と `P11` current second cut が入り始めたが、まだ final public crate shape ではないので rename / rebucket しない
 - `mirrorea-control` / `prism-*` / `engine-abi` は placeholder だが、名前自体が subsystem separation を表しているので、早い rename はしない
 - crate split / merge は docs-first lane で boundary が固まってから行う
 

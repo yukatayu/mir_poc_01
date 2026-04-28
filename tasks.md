@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 14:46 JST
+最終更新: 2026-04-28 15:06 JST
 
 ## この文書について
 
@@ -15,7 +15,7 @@
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
 - `P10` `mirrorea-core` first real implementation tranche は close 済みです。
-- current promoted next line は **`P11` logical multi-place runtime tranche** で、current first cut は `MembershipRegistry` / `PlaceCatalog` substrate actualization です。
+- current promoted next line は **`P11` logical multi-place runtime tranche** で、current second cut は `MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated `LogicalPlaceRuntimeShell` を actualize したところです。
 - next reopen point は **`P12` external adapter / host boundary tranche** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
@@ -46,7 +46,7 @@
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | closed | closed | MembershipRegistry source-of-truth / world sugar / hot-plug stop line fixed |
 | `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | closed | closed | helper closeout `FAIRY-05` reopen gate / planned path inventory fixed |
 | `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | placeholder -> first real minimal carrier core |
-| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | active | multi-task | membership source-of-truth + place catalog first cut |
+| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | active | multi-task | membership source-of-truth + place catalog + logical runtime shell second cut |
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | reopen next | multi-task | host-facing adapter seam |
 | `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper canary -> real transport alpha |
 | `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | compatibility / migration / rollback |
@@ -348,14 +348,14 @@
 ### P11. logical multi-place runtime tranche
 
 - status:
-  started。current first cut では `crates/mirrorea-core` に `MembershipRegistry` typed source-of-truth substrate と `PlaceCatalog` logical multi-place catalog substrate を actualize し、helper-local emulator 全体を丸ごと移す前に crate-side runtime substrate の non-domain frontier を切り出し始めた。
+  started。current second cut では `crates/mirrorea-core` に `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell` を actualize し、helper-local emulator 全体を丸ごと移す前に crate-side runtime substrate の thin composition frontier を切り出し始めた。
 
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
-  helper-local logical multi-place emulator を crate-side runtime substrate へ寄せる。ただし current first cut は `MembershipRegistry` / `PlaceCatalog` に絞り、helper-specific `WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` は kept-later に残す
+  helper-local logical multi-place emulator を crate-side runtime substrate へ寄せる。ただし current second cut でも domain runtime aggregate には広げず、`MembershipRegistry` / `PlaceCatalog` と participant-place-kind-gated thin composition に絞り、helper-specific `WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` は kept-later に残す
 - deliverables:
-  `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog、typed membership snapshot、explicit kept-later boundary
+  `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog、participant-place-kind-gated `LogicalPlaceRuntimeShell`、typed membership / runtime snapshot、explicit kept-later boundary
 - validation command:
   `cargo test -p mirrorea-core`
   `python3 scripts/sugoroku_world_samples.py closeout --format json`
@@ -363,7 +363,7 @@
   `python3 scripts/validate_docs.py`
   `git diff --check`
 - debug / visualization output:
-  helper closeout `place_model` / `membership_model` / `runtime_components`、helper-local `membership_snapshot`、crate-side `MembershipSnapshot` / `PlaceCatalogSnapshot`
+  helper closeout `place_model` / `membership_model` / `runtime_components`、helper-local `membership_snapshot`、crate-side `MembershipSnapshot` / `PlaceCatalogSnapshot` / `LogicalPlaceRuntimeSnapshot`
 - docs / report requirement:
   新しい report、`samples_progress.md`、runtime docs、`plan/16`、`plan/19` を同期する
 - stop line:
