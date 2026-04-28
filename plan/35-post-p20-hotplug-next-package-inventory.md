@@ -142,6 +142,10 @@ final public hot-plug ABI はここで actualize しない。
   `distributed activation ordering`
   `final public hot-plug ABI`
   として読む
+- current self-driven first recommendation は
+  `plan/36-post-p21-rollback-durable-migration-family.md`
+  を入口にした
+  `rollback / durable migration` family hardening と読む
 
 ## validation floor
 

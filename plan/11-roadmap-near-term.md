@@ -57,6 +57,7 @@
 - `docs/reports/0988-*` は `P19` `mirrorea-core` hot-plug request/verdict carrier tranche closeout を表し、`crates/mirrorea-core/src/fabric.rs` に engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を actualize した
 - `docs/reports/0992-*` は `R7` post-`P20` hot-plug next-package inventory closeout を表し、`plan/35` と companion docs により `P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として固定し、package-level reopen next は exact label 未固定のまま `rollback / durable migration`、`distributed activation ordering`、`final public hot-plug ABI` の later family に grouped して残した
 - `docs/reports/0993-*` は `P21` runtime-crate hot-plug completed-engine narrow cut closeout を表し、`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` による runtime-side engine-state progression narrow cut と、exact next label intentionally unfixed の grouped later-family reading を `plan/35` と snapshot / reader-facing docs に actualize した
+- `docs/reports/0994-*` は post-`P21` rollback / durable migration family first recommendation closeout を表し、`plan/36` と companion docs により exact label intentionally unfixed のまま first recommendation / second recommendation / third recommendation ordering を current roadmap に actualize した
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -98,6 +99,8 @@
    - close 済み。`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により、post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として固定した
 17. `P21` runtime-crate hot-plug completed-engine narrow cut
    - close 済み。`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` により、admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize した。rollback / durable migration / distributed activation ordering / final public hot-plug ABI は同じ tranche に混ぜない
+18. post-`P21` rollback / durable migration family
+   - current self-driven first recommendation。exact package label は intentionally unfixed のまま保ち、`plan/36-post-p21-rollback-durable-migration-family.md` で keep-one-family vs split-again criteria、`distributed activation ordering` second recommendation、`final public hot-plug ABI` third recommendation を docs-first に固定する
 
 ## mixed gate
 

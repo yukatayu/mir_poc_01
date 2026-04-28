@@ -38,11 +38,15 @@ python3 scripts/sugoroku_world_samples.py closeout --format json
 `R4` は helper output を増やす package ではありません。
 current helper floor をそのまま保ちつつ、
 何がまだ deferred かを docs-first に固定する package です。
-次の promoted line は `R5` runtime-crate hot-plug engine ownership cut です。
+historical next relation at `R4` close time は `R5` runtime-crate hot-plug engine ownership cut でした。
+current repo state では `P21` も close 済みであり、
+exact next label intentionally unfixed のまま
+`rollback / durable migration` family hardening を first recommendation として読みます。
 
 ## 関連
 
 - `../research_abstract/hotplug_real_migration_rollback_boundary_01.md`
 - `../../plan/32-hotplug-real-migration-rollback-boundary.md`
+- `post_p21_rollback_durable_migration_family_01.md`
 - `attachpoint_detach_minimal_contract_01.md`
 - `current_phase_closeout_01.md`

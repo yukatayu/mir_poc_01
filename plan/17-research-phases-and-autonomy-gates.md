@@ -41,6 +41,7 @@
   - `P15-P17` は first real implementation tranche closeout 済み
   - `P18` repo-side first cut も close 済みであり、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize 済み
   - `P21` runtime-crate hot-plug completed-engine narrow cut は close 済みであり、rollback / durable migration / distributed activation ordering / final public ABI の exact next label は intentionally unfixed の grouped later family として残す
+  - current self-driven first recommendation は `rollback / durable migration` family hardening であり、`distributed activation ordering` と final public ABI は後段に残す
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-29 03:08 JST
+最終更新: 2026-04-29 03:27 JST
 
 ## この文書について
 
@@ -25,7 +25,7 @@
 - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize 済みです。
 - `R7` post-`P20` hot-plug next-package inventory も close 済みであり、`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を current narrow 実装対象として固定済みです。
 - `P21` runtime-crate hot-plug completed-engine narrow cut も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に `HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` を actualize 済みです。
-- current promoted next exact label は **intentionally unfixed** です。`rollback / durable migration`、`distributed activation ordering`、`final public ABI` は later family の grouped reading に戻し、premature に collapse しません。
+- current promoted next exact label は **intentionally unfixed** です。current self-driven first recommendation は `rollback / durable migration` family hardening であり、`distributed activation ordering` は second recommendation、`final public ABI` は third recommendation に残します。
 - next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
@@ -75,6 +75,7 @@
 | `P20` `mir-runtime` hot-plug orchestration skeleton first tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | dedicated `HotPlugRuntimeSkeletonReport` と consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` により、`P19` carrier と existing substrate の上に thin runtime/report assembly を narrow に actualize した |
 | `R7` post-`P20` hot-plug next-package inventory | `Macro 8` prep | `S0 -> S2` | closed | closed | post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として固定した |
 | `P21` runtime-crate hot-plug completed-engine narrow cut | `Macro 6-7` | `S1 -> S4` | closed | closed | admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize した |
+| post-`P21` rollback / durable migration family | `Macro 8` prep | `S0 -> S2` | closed | closed | exact label intentionally unfixed のまま first recommendation family、split-again criteria、distributed activation ordering / public ABI との stop line を docs-first に固定した |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -862,6 +863,32 @@
   新しい report、`plan/35` と relevant roadmap / snapshot docs の同期
 - stop line:
   rollback protocol、durable migration / reattach semantics、distributed activation ordering、final public hot-plug ABI を同じ tranche に混ぜない
+
+### post-`P21` rollback / durable migration family
+
+- status:
+  close 済み。exact package label intentionally unfixed のまま、`rollback / durable migration` family を current self-driven first recommendation として固定し、`distributed activation ordering` を second recommendation、`final public hot-plug ABI` を post-`P18` mixed gate / `U1` hold line の third recommendation に残した。
+
+- macro phase / stage:
+  `Macro 8` prep, `S0 -> S2`
+- objective:
+  `P21` close 後の later family のうち `rollback / durable migration` を first recommendation として docs-first に harden し、keep-one-family vs split-again criteria を固定する
+- deliverables:
+  `plan/36`、reader-facing summary / landing page、snapshot / roadmap sync、report
+- validation command:
+  `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json`
+  `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `cargo test -p mir-runtime --test hotplug_runtime_skeleton`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
+- debug / visualization output:
+  `hotplug_lifecycle`、`migration_contract` honesty row、runtime-side engine-state progression over `HotPlugRuntimeEngineReport`
+- docs / report requirement:
+  新しい report、`plan/36`、`progress.md`、`tasks.md`、`samples_progress.md`、relevant roadmap / reader-facing docs の同期
+- stop line:
+  actual rollback protocol completion、actual durable migration engine completion、distributed activation ordering、final public hot-plug ABI を同じ package に collapse しない
 
 ## research を通して見つけること
 

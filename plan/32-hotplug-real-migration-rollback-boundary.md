@@ -87,6 +87,10 @@ helper schema の widening、runtime-crate engine 実装、final public ABI の�
 - `R5` closeout 後の owner split memory は
   `plan/33-runtime-crate-hotplug-engine-ownership-cut.md`
   を reader-facing current memory として参照する
+- current repo state では `P21` も close 済みであり、
+  post-`P21` later family の first recommendation は
+  `plan/36-post-p21-rollback-durable-migration-family.md`
+  を入口にした `rollback / durable migration` family hardening と読む
 
 ## validation floor
 
