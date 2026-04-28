@@ -265,17 +265,36 @@ fn clean_sample_delegated_rng_service_emits_message_envelopes() {
         .find(|envelope| envelope.envelope_id == "provider_request#1")
         .expect("provider request envelope");
     assert_eq!(envelope.auth_evidence, None);
-    assert_eq!(envelope.transport, "provider_boundary");
+    assert_eq!(envelope.transport_medium, None);
+    assert_eq!(envelope.transport_seam, "provider_boundary");
+    assert_eq!(
+        envelope.freshness_checks,
+        vec![
+            "membership_epoch matches request frontier".to_string(),
+            "member_incarnation matches live participant".to_string(),
+        ]
+    );
     assert!(
         envelope
             .capability_requirements
             .contains(&"RequestDelegatedRngRoll".to_string())
+    );
+    assert_ne!(
+        envelope.principal_claim.claimed_capabilities,
+        envelope.capability_requirements
     );
     assert!(
         envelope
             .witness_refs
             .contains(&"provider_receipt".to_string())
     );
+    let provider_receipt = report
+        .message_envelopes
+        .iter()
+        .find(|envelope| envelope.envelope_id == "provider_receipt#1")
+        .expect("provider receipt envelope");
+    assert_eq!(provider_receipt.emitter_principal, "AuthorityRng");
+    assert_eq!(provider_receipt.principal_claim.principal, "Alice");
 }
 
 #[test]
@@ -289,6 +308,8 @@ fn clean_sample_authority_witness_emits_auth_envelope() {
     assert_eq!(envelope.dispatch_outcome, "accepted");
     assert_eq!(envelope.auth_evidence, None);
     assert_eq!(envelope.principal_claim.principal, "Alice");
+    assert_eq!(envelope.transport_medium, None);
+    assert_eq!(envelope.transport_seam, "audit_trace_boundary");
     assert!(
         envelope
             .authorization_checks
@@ -507,10 +528,39 @@ fn clean_near_end_closeout_records_layer_signature_inventory() {
 #[test]
 fn clean_near_end_closeout_records_message_envelope_inventory() {
     let closeout = build_clean_near_end_closeout().unwrap();
+    assert_eq!(
+        closeout.message_envelope_scope,
+        "clean_near_end_canonical_inventory".to_string()
+    );
+    assert!(
+        closeout
+            .message_envelope_lanes
+            .contains(&"transport_medium".to_string())
+    );
+    assert!(
+        closeout
+            .message_envelope_lanes
+            .contains(&"transport_seam".to_string())
+    );
     assert!(
         closeout
             .message_envelope_lanes
             .contains(&"auth_evidence".to_string())
+    );
+    assert!(
+        closeout
+            .message_envelope_lanes
+            .contains(&"freshness_checks".to_string())
+    );
+    assert_eq!(
+        closeout.auth_evidence_lanes,
+        vec![
+            "kind".to_string(),
+            "subject".to_string(),
+            "issuer".to_string(),
+            "bindings".to_string(),
+            "notes".to_string(),
+        ]
     );
     assert!(closeout.auth_evidence_kinds.contains(&"none".to_string()));
     assert!(
@@ -523,9 +573,10 @@ fn clean_near_end_closeout_records_message_envelope_inventory() {
             .transport_seams
             .contains(&"provider_boundary".to_string())
     );
+    assert!(closeout.transport_mediums.is_empty());
     assert!(
         closeout
-            .reserved_transport_seams
+            .reserved_transport_mediums
             .contains(&"loopback_socket".to_string())
     );
 }

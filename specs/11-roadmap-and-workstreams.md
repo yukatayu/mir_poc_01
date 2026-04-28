@@ -1089,7 +1089,7 @@ P4. `TermSignature` registry hardening
 P5. `LayerSignature` system hardening
   - close 済み。helper/runtime `LayerSignature` row schema、`obligations` lane、scope split、representative/canonical inventory distinctionを tighten した。
 P6. `MessageEnvelope` / `AuthEvidence` seam hardening
-  - transport / auth / authorization / membership / capability / witness を分けた envelope carrier を tighten する。
+  - close 済み。helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes` を tighten した。
 P7. `VisualizationProtocol` + `VisualizationSecurity`
   - static view / runtime trace / label / authority / redaction / telemetry retention の current line を tighten する。
 P8. Sugoroku runtime attach hardening
@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5` は close し、next promoted package は `P6`、next reopen point は `P7` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6` は close し、next promoted package は `P7`、next reopen point は `P8` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1169,7 +1169,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `TermSignature registry / debug output` は helper-local / report-local package として close し、Sugoroku `--debug signatures` と clean near-end report / closeout inventory を actualize した。
 - `LayerSignature system` は helper-local / report-local package として close し、Sugoroku `--debug layers` と clean near-end `layer_signatures` inventory を actualize した。
 - `P5` `LayerSignature` system hardening では helper/runtime の row key を `name` に揃え、current carrier を `name / requires / provides / transforms / checks / emits / obligations / laws` に widen し、helper `representative_slice` inventory と runtime `clean_near_end_canonical_inventory` inventory の split を fixed した。
-- `MessageEnvelope / Auth seam` は helper-local / report-local package として close し、Sugoroku `message_envelopes` / `--debug envelopes` と clean near-end `MessageEnvelope` inventory を actualize した。
+- `MessageEnvelope / AuthEvidence` seam は helper-local / report-local package として close し、Sugoroku `message_envelopes` / `--debug envelopes` と clean near-end `MessageEnvelope` inventory を actualize した。
+- `P6` `MessageEnvelope / AuthEvidence` seam hardening では helper/runtime の `message_envelope_scope` を追加し、current carrier を `transport_medium / transport_seam / emitter_principal / freshness_checks / capability_requirements / authorization_checks / witness_refs` に widen し、shared `auth_evidence_lanes = kind / subject / issuer / bindings / notes` を fixed した。
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
 - `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
 - `Typed external boundary executable widening` は helper-local package として close し、`scripts/typed_external_boundary_samples.py`、`samples/not_implemented/typed-external-boundary/` を読む synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05`、`envelopes` / `visualization` / `failures` debug surface を current snapshot に actualize した。
@@ -1186,8 +1187,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
 - `Projection / placement residual emitted-program gate` は docs-first boundary package として close し、projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current line に actualize した。
 - `TermSignature` registry hardening は close し、current `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split を current line に actualize した。
-- current promoted next package は `MessageEnvelope / Auth seam` hardening であり、
-  next reopen point は `VisualizationProtocol / VisualizationSecurity` hardening である。
+- current promoted next package は `VisualizationProtocol / VisualizationSecurity` hardening であり、
+  next reopen point は `Sugoroku runtime attach hardening` である。
 
 ## 2026-04-27 repository-structure staging addendum
 

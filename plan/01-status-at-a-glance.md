@@ -98,6 +98,7 @@
 - `docs/reports/0918-*` で `TermSignature registry / debug output` を close し、Sugoroku `--debug signatures` と clean near-end report/closeout inventory を追加した
 - `docs/reports/0919-*` で `LayerSignature system` first cut を close し、helper-local / runtime report-local lane inventory を追加した
 - `docs/reports/0952-*` で `P5` `LayerSignature` system hardening を close し、helper/runtime `name` row key、`obligations` lane、`layer_signature_scope` distinction、representative/canonical inventory split を current line に actualize した
+- `docs/reports/0953-*` で `P6` `MessageEnvelope / AuthEvidence` seam hardening を close し、helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes` を current line に actualize した
 - `docs/reports/0921-*` で `MessageEnvelope / Auth seam` を close し、Sugoroku helper の `message_envelopes` / `--debug envelopes` と clean near-end report-local `MessageEnvelope` inventory を追加した
 - `docs/reports/0922-*` で `VisualizationProtocol` を close し、Sugoroku helper の `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end report-local `VisualizationView` / `TelemetryRow` inventory を追加した
 - `docs/reports/0923-*` で `Typed external boundary / adapter` docs-first sample plan を close し、phase 9 planned family `EXT-01..05` を `samples/not_implemented/typed-external-boundary/` に置いた
@@ -115,21 +116,21 @@
 - `docs/reports/0946-*` で `P2` Typed external boundary residual planned family review を close し、typed external helper の pretty `list` / `check-all` / `closeout` bug を修正した上で residual reopen matrix を current repo に actualize した
 - `docs/reports/0950-*` で `P4` `TermSignature` registry hardening を close し、helper / runtime closeout の `signature_lanes` / `signature_scope` / `signature_evidence_roles`、active kind family、reserved kind split を current repo に actualize した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next reopen point は `P7` `VisualizationProtocol / VisualizationSecurity` hardening
+- next reopen point は `P8` Sugoroku runtime attach hardening
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout を先に入れた上で、next promoted package を `P6` `MessageEnvelope / Auth seam` hardening と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout、`P6` `MessageEnvelope / AuthEvidence` seam hardening closeout を先に入れた上で、next promoted package を `P7` `VisualizationProtocol / VisualizationSecurity` hardening と読む
 - `docs/reports/0933-*` で `Avatar fairy follow residual widening` を close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた
 - `docs/reports/0934-*` で `cross-package sweep` を close し、active evidence / planned family / mixed gate / next queue の current reading を recut した
 - `docs/reports/0939-*` で `FAIRY-05 residual reacquire design` を docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを固定した
 - `docs/reports/0945-mirrorea-next-stage-plan-integration.md` で next-stage future-plan integration / next package queue stabilization を close し、handoff 由来の project axis、source hierarchy、queue numbering、snapshot docs を current repo へ再同期した
 - phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
 - closed chain の current reading は、`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、phase 9 typed external docs-first / synthetic preview widening、`P2` typed external residual reopen matrix closeout、phase 12 projection docs-first / preview widening、phase 13 transport canary、phase 14 hot-plug lifecycle canary、phase 16 backend/LLVM guardrail、phase 8 avatar representative slice / residual design closeout までである
-- current next line は `P6` `MessageEnvelope / Auth seam` hardening、その reopen point は `P7` `VisualizationProtocol / VisualizationSecurity` hardening と読む
+- current next line は `P7` `VisualizationProtocol / VisualizationSecurity` hardening、その reopen point は `P8` Sugoroku runtime attach hardening と読む
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

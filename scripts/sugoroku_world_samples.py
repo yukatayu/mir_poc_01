@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -210,22 +210,33 @@ class MessageEnvelope:
     authorization_checks: list[str]
     witness_refs: list[str]
     dispatch_outcome: str
+    transport_medium: str | None = None
+    transport_seam: str = ""
+    emitter_principal: str = ""
+    freshness_checks: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
 
     def to_json(self) -> dict[str, Any]:
+        transport_alias = self.transport_seam or self.transport
         return {
             "envelope_id": self.envelope_id,
             "from_place": self.from_place,
             "to_place": self.to_place,
-            "transport": self.transport,
+            "transport": transport_alias,
+            "transport_medium": (
+                transport_alias if self.transport_medium is None else self.transport_medium
+            ),
+            "transport_seam": self.transport_seam,
             "payload_kind": self.payload_kind,
             "payload_ref": self.payload_ref,
             "principal_claim": self.principal_claim.to_json(),
             "auth_evidence": (
                 None if self.auth_evidence is None else self.auth_evidence.to_json()
             ),
+            "emitter_principal": self.emitter_principal,
             "membership_epoch": self.membership_epoch,
             "member_incarnation": self.member_incarnation,
+            "freshness_checks": list(self.freshness_checks),
             "capability_requirements": list(self.capability_requirements),
             "authorization_checks": list(self.authorization_checks),
             "witness_refs": list(self.witness_refs),
@@ -917,6 +928,88 @@ def _transport_preview_note(transport: str) -> str:
     raise ValueError(f"unsupported transport seam {transport}")
 
 
+def _helper_transport_seam(envelope_id: str) -> str:
+    mapping = {
+        "attach_request#1": "attach_point_boundary",
+        "start_request#1": "admin_control_boundary",
+        "bad_reset_request#1": "admin_control_boundary",
+        "roll_request#1": "game_action_boundary",
+        "handoff_notice#1": "published_history_boundary",
+        "bad_roll_request#1": "game_action_boundary",
+        "join_request#1": "membership_registry_boundary",
+        "history_replay#1": "published_history_boundary",
+        "leave_request#1": "membership_registry_boundary",
+        "stale_roll_after_leave#1": "game_action_boundary",
+        "owner_leave_request#1": "membership_registry_boundary",
+        "owner_reassign_notice#1": "ownership_continuity_boundary",
+        "detach_request#1": "detach_point_boundary",
+        "detached_roll_request#1": "game_action_boundary",
+    }
+    return mapping.get(envelope_id, "repo_local_boundary")
+
+
+def _helper_claimed_capabilities(envelope: MessageEnvelope) -> list[str]:
+    overrides = {
+        "roll_request#1": [
+            "SubmitGameTransition(Alice)",
+            "ObservePublishedHistory(SugorokuGame#1)",
+        ],
+        "handoff_notice#1": [
+            "PublishRollResult(Alice)",
+            "SignalDiceOwnerHandoff(Alice->Bob)",
+        ],
+        "attach_request#1": ["ManageAttachPoint(SugorokuGame#1)"],
+    }
+    return overrides.get(
+        envelope.envelope_id, list(envelope.principal_claim.claimed_capabilities)
+    )
+
+
+def _helper_emitter_principal(envelope: MessageEnvelope) -> str:
+    overrides = {
+        "handoff_notice#1": "SugorokuGame#1",
+        "history_replay#1": "SugorokuGame#1",
+        "owner_reassign_notice#1": "SugorokuGame#1",
+    }
+    if envelope.envelope_id in overrides:
+        return overrides[envelope.envelope_id]
+    if envelope.from_place == "WorldServerPlace":
+        return "Server"
+    return envelope.principal_claim.principal
+
+
+def _helper_freshness_checks(envelope: MessageEnvelope) -> list[str]:
+    checks = ["membership_epoch matches active registry frontier"]
+    if envelope.principal_claim.principal != "Server":
+        checks.append("member_incarnation matches active member record")
+    return checks
+
+
+def _finalize_message_envelope(
+    envelope: MessageEnvelope, *, transport: str
+) -> MessageEnvelope:
+    transport_seam = _helper_transport_seam(envelope.envelope_id)
+    claim = replace(
+        envelope.principal_claim,
+        claimed_capabilities=_helper_claimed_capabilities(envelope),
+    )
+    authorization_checks = [
+        check
+        for check in envelope.authorization_checks
+        if check not in {"membership_epoch is current", "member_incarnation matches active record"}
+    ]
+    return replace(
+        envelope,
+        transport=transport_seam,
+        principal_claim=claim,
+        transport_medium=transport,
+        transport_seam=transport_seam,
+        emitter_principal=_helper_emitter_principal(envelope),
+        freshness_checks=_helper_freshness_checks(envelope),
+        authorization_checks=authorization_checks,
+    )
+
+
 def _message_envelopes(
     sample_id: str,
     result: dict[str, Any],
@@ -1310,7 +1403,7 @@ def _message_envelopes(
             for envelope in envelopes
         ]
 
-    return [envelope.to_json() for envelope in envelopes]
+    return [_finalize_message_envelope(envelope, transport=transport).to_json() for envelope in envelopes]
 
 
 def _telemetry_rows(
@@ -2183,27 +2276,43 @@ def closeout() -> dict[str, Any]:
         "signature_kinds": signature_kinds,
         "signature_evidence_roles": signature_evidence_roles,
         "reserved_signature_kinds": ["message", "adapter", "layer"],
+        "message_envelope_scope": "representative_slice",
         "message_envelope_lanes": [
             "envelope_id",
             "from_place",
             "to_place",
             "transport",
+            "transport_medium",
+            "transport_seam",
             "payload_kind",
             "payload_ref",
             "principal_claim",
             "auth_evidence",
+            "emitter_principal",
             "membership_epoch",
             "member_incarnation",
+            "freshness_checks",
             "capability_requirements",
             "authorization_checks",
             "witness_refs",
             "dispatch_outcome",
             "notes",
         ],
+        "auth_evidence_lanes": ["kind", "subject", "issuer", "bindings", "notes"],
+        "auth_evidence_kinds": ["none"],
+        "reserved_auth_evidence_kinds": ["session_token", "signature"],
         "auth_evidence_modes": ["none"],
         "reserved_auth_evidence_modes": ["session_token", "signature"],
-        "transport_seams": list(ACTIVE_TRANSPORT_SEAMS),
-        "reserved_transport_seams": list(RESERVED_TRANSPORT_SEAMS),
+        "transport_mediums": list(ACTIVE_TRANSPORT_SEAMS),
+        "reserved_transport_mediums": list(RESERVED_TRANSPORT_SEAMS),
+        "transport_seams": sorted(
+            {
+                row["transport_seam"]
+                for sample in SAMPLE_ROWS
+                for row in run_sample(sample["sample_id"]).get("message_envelopes", [])
+            }
+        ),
+        "reserved_transport_seams": ["provider_boundary", "audit_trace_boundary"],
         "hotplug_lifecycle_states": sorted(
             {
                 row["hotplug_lifecycle"]["lifecycle_state"]
@@ -2363,19 +2472,26 @@ def _format_envelopes(result: dict[str, Any]) -> str:
             f"  - {row['envelope_id']} {row['from_place']} -> {row['to_place']} outcome={row['dispatch_outcome']}"
         )
         lines.append(
-            f"      payload: {row['payload_kind']}:{row['payload_ref']} transport={row['transport']}"
+            "      payload: "
+            f"{row['payload_kind']}:{row['payload_ref']} "
+            f"transport_medium={row.get('transport_medium', row.get('transport', 'unknown'))} "
+            f"transport_seam={row.get('transport_seam', row.get('transport', 'unknown'))}"
         )
         lines.append(
-            f"      principal: {claim.get('principal', '?')} authority={claim.get('claimed_authority', '?')} auth={auth_kind}"
+            "      principal: "
+            f"{claim.get('principal', '?')} authority={claim.get('claimed_authority', '?')} "
+            f"emitter={row.get('emitter_principal', '?')} auth={auth_kind}"
         )
         lines.append(
             f"      membership: epoch={row['membership_epoch']} incarnation={row['member_incarnation']}"
         )
         caps = ", ".join(row.get("capability_requirements") or []) or "none"
         checks = ", ".join(row.get("authorization_checks") or []) or "none"
+        freshness = ", ".join(row.get("freshness_checks") or []) or "none"
         witnesses = ", ".join(row.get("witness_refs") or []) or "none"
         lines.append(f"      capabilities: {caps}")
         lines.append(f"      checks: {checks}")
+        lines.append(f"      freshness_checks: {freshness}")
         lines.append(f"      witness_refs: {witnesses}")
     if len(lines) == 1:
         lines.append("  - none")

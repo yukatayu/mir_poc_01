@@ -31,8 +31,9 @@
 - `docs/reports/0948-*` は `P3` Projection / placement residual emitted-program gate closeout を表し、projection validity report minimum、generated artifact reserve policy、`P15` handoff line を current docs に actualize した
 - `docs/reports/0950-*` は `P4` `TermSignature` registry hardening closeout を表し、active kind family、helper/runtime `signature_scope` distinction、reserved kind split、provenance-preserving evidence-role inventory を current line に actualize した
 - `docs/reports/0952-*` は `P5` `LayerSignature` system hardening closeout を表し、helper/runtime `name` row key、`obligations` lane、`layer_signature_scope` distinction、representative/canonical inventory split を current line に actualize した
-- current promoted next package は `P6` `MessageEnvelope / Auth seam` hardening
-- next reopen point は `P7` `VisualizationProtocol / VisualizationSecurity` hardening
+- `docs/reports/0953-*` は `P6` `MessageEnvelope / AuthEvidence` seam hardening closeout を表し、helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes` を current line に actualize した
+- current promoted next package は `P7` `VisualizationProtocol / VisualizationSecurity` hardening
+- next reopen point は `P8` Sugoroku runtime attach hardening
 
 ## stabilized queue
 
@@ -40,8 +41,8 @@
    - close 済み。stale active reference、source hierarchy、front-door docs drift を再確認する。
 2. `P1` Repository layer map and `samples_progress.md` stabilization
    - close 済み。repo taxonomy、active/planned/archive/generated boundary、dashboard discipline を再同期する。
-3. `P6-P7` carrier hardening
-   - `MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
+3. `P7` visualization security hardening
+   - `VisualizationProtocol / VisualizationSecurity`
 4. `P8-P9` representative slice hardening
    - Sugoroku runtime attach と avatar fairy follow residual gate
 5. `P10-P17` first real implementation tranche

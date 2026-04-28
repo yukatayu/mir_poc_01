@@ -154,10 +154,14 @@
      - 未決なのは、これを formal layer naming へ上げるか、説明用 prose に留めるかである。
   3. `MessageEnvelope` / `AuthEvidence` / transport insertion seam の最小 shape をどう置くか。
      auth を transport に潰さず、authorization / membership / capability / witness をどう separate に保つか。
-     - 2026-04-27 時点で helper-local / report-local first cut は actualize した。
-       `auth none` baseline、`membership_epoch` / `member_incarnation` freshness carrier、`witness_refs` separate lane、
-       local queue / provider boundary transport seam までは current line に上げてよい。
-     - 未決なのは final public `AuthEvidence` kind、session / signature protocol、real network transport への widening である。
+     - 2026-04-28 時点で `P6` `MessageEnvelope / AuthEvidence` seam hardening は current line に上げてよい。
+       helper `message_envelope_scope = representative_slice`、runtime `message_envelope_scope = clean_near_end_canonical_inventory`、
+       `transport_medium` / `transport_seam` split、`emitter_principal`、`freshness_checks`、
+       shared `auth_evidence_lanes = kind / subject / issuer / bindings / notes`、
+       helper active `transport_mediums = local_queue / loopback_socket`、runtime canonical `transport_seams = provider_boundary / audit_trace_boundary`
+       までは current line に上げてよい。
+     - 未決なのは final public `AuthEvidence` kind、session / signature protocol、real network transport への widening、
+       `witness_refs` role taxonomy である。
   4. visualization / telemetry security をどこまで typed effect として固定するか。
      static view / runtime view / label / authority / redaction / retention をどの layer へ置くか。
      - 2026-04-27 時点で helper-local / report-local first cut は actualize した。

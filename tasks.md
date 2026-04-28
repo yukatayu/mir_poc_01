@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 11:19 JST
+最終更新: 2026-04-28 12:18 JST
 
 ## この文書について
 
@@ -12,10 +12,10 @@
 
 - active clean near-end suite、Sugoroku world vertical slice、avatar follow representative slice は runnable です。
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
-- `TermSignature`、`LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
+- `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P6` `MessageEnvelope / Auth seam` hardening** です。
-- next reopen point は **`P7` `VisualizationProtocol / VisualizationSecurity` hardening** です。
+- current promoted next line は **`P7` `VisualizationProtocol / VisualizationSecurity` hardening** です。
+- next reopen point は **`P8` Sugoroku runtime attach hardening** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -40,8 +40,8 @@
 | `P3` projection residual emitted-program gate | `Macro 6` reserve | `S5 -> S6` | closed | closed | emitted-program boundary fixation |
 | `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | closed | ~1 task | current first-cut lanes / scope / reserved split fixed |
 | `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | closed | closed | row schema / obligations lane / scope split fixed |
-| `P6` MessageEnvelope/Auth seam hardening | `Macro 6` | `S4 -> S5` | next | ~1 task | first cut exists, public seam remains open |
-| `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | reopen next | ~1 task | first cut exists, viewer/security hardening remains |
+| `P6` MessageEnvelope/AuthEvidence seam hardening | `Macro 6` | `S4 -> S5` | closed | closed | medium/seam split、shared auth lane inventory、freshness lane fixed |
+| `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | next | ~1 task | first cut exists, viewer/security hardening remains |
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | representative runtime slice hardening |
 | `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | residual `FAIRY-05` gate remains |
 | `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | placeholder -> first real core |
@@ -196,21 +196,35 @@
 
 ### P6. `MessageEnvelope` / `AuthEvidence` seam hardening
 
+- status:
+  close 済み。helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes`、helper medium inventory / runtime seam inventory distinctionを fixed した。`session_token` / `signature`、final public transport ABI、`witness_refs` role taxonomy は deferred のまま残す。
+
 - macro phase / stage:
   `Macro 6`, `S4 -> S5`
 - objective:
   message/auth seam を tighten し、transport / auth / membership / capability / witness split を明確に保つ
 - deliverables:
-  current `AuthEvidence` baseline wording、transport insertion seam wording、public stop line
+  current `AuthEvidence` baseline wording、transport medium / seam wording、subject/emitter distinction、public stop line
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
   `python3 scripts/network_transport_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v`
+  `python3 -m unittest scripts.tests.test_network_transport_samples -v`
+  `cargo test -p mir-runtime --test clean_near_end_samples`
+  `cargo test -p mir-runtime`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
 - debug / visualization output:
-  `message_envelopes`、`auth_evidence_kinds`、`transport_seams`
+  `message_envelopes`、`message_envelope_scope`、`auth_evidence_lanes`、`auth_evidence_kinds`、`transport_mediums`、`transport_seams`
 - docs / report requirement:
   新しい report、`samples_progress.md`、`plan/09`、relevant docs を同期する
 - stop line:
-  session / signature protocol、final public auth schema、final public transport ABI を固定しない
+  session / signature protocol、final public auth schema、final public transport ABI、`witness_refs` role taxonomy を固定しない
 
 ### P7. `VisualizationProtocol` + `VisualizationSecurity`
 

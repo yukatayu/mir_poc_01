@@ -84,8 +84,10 @@ run_directory_named_profile
   - Sugoroku helper `run_sample()` payload の `message_envelopes`
   - Sugoroku `--debug envelopes`
   - clean near-end `CleanNearEndSampleReport.message_envelopes`
-  - clean near-end closeout `message_envelope_lanes` / `auth_evidence_kinds` / `transport_seams`
+  - helper closeout `message_envelope_scope` / `message_envelope_lanes` / `auth_evidence_lanes` / `auth_evidence_kinds` / `transport_mediums` / `transport_seams`
+  - clean near-end closeout `message_envelope_scope` / `message_envelope_lanes` / `auth_evidence_lanes` / `auth_evidence_kinds` / `transport_mediums` / `transport_seams`
   を helper-local / report-local evidence inventory として見せてよい。
+  - current line では helper active medium inventory と runtime canonical seam inventory を分け、`transport_medium` / `transport_seam` / `emitter_principal` / `freshness_checks` を first-class lane に上げてよい。
   - これは final public message schema、final public auth protocol、final public transport contract を意味しない。
 - current sample-visible visualization / telemetry cut では、
   - Sugoroku helper `run_sample()` payload の `visualization_views` / `telemetry_rows`

@@ -44,7 +44,7 @@ current line では `signature_lanes = kind/name/evidence_role`、helper closeou
 どちらも `name / requires / provides / transforms / checks / emits / obligations / laws` で読めるようにしました。
 helper closeout は `representative_slice` scope で `verification_handoff_witness` / `runtime_turn_trace` / `membership_*` / `hotplug_*` を持ち、runtime closeout は `clean_near_end_canonical_inventory` scope で `auth_authority_witness` / `transport_provider_boundary` / `verification_model_check` を持ちます。scope split は current repo memory であり、final public layer law schema を意味しません。
 
-さらに `MessageEnvelope / Auth seam` の first cut も close しました。
+さらに `P6` `MessageEnvelope / AuthEvidence` seam hardening も close しました。
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Typed external boundary executable widening` も close しました。
@@ -63,7 +63,8 @@ helper closeout は `representative_slice` scope で `verification_handoff_witne
   に synthetic preview subset `EXT-03` / `EXT-04`
 
 を追加し、current none-auth baseline のまま transport / auth / membership / capability / witness を
-separate lane で読めるようにしています。
+separate lane で読めるようにしています。2026-04-28 時点では helper/runtime `message_envelope_scope`、
+`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes = kind / subject / issuer / bindings / notes` まで current line に上げてよいです。
 ここでの `auth none` は temporary repo-local baseline であり、session token / signature /
 federation protocol を fixed した意味ではありません。
 
@@ -284,7 +285,7 @@ future-axis の first-cut / widening package は次まで close 済みです。
 
 - `TermSignature registry / debug output`
 - `LayerSignature system`
-- `MessageEnvelope / Auth seam`
+- `MessageEnvelope / AuthEvidence` seam
 - `VisualizationProtocol`
 - `Typed external boundary / adapter` docs-first sample plan
 - `Typed external boundary executable widening`
@@ -300,8 +301,10 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P6-P7` carrier hardening
-   - `MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
+1. `P7` visualization security hardening
+   - `VisualizationProtocol / VisualizationSecurity`
+2. `P8-P9` representative runtime hardening
+   - Sugoroku runtime attach、avatar fairy follow residual gate
 2. `P8-P9` representative slice hardening
    - Sugoroku runtime attach と avatar fairy follow residual gate
 3. `P10-P17` first real implementation tranche

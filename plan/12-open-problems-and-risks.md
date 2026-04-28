@@ -14,7 +14,7 @@
 | cut-family conflation | semantics | OPEN | `atomic_cut` を global mutex / durable commit と誤読する | local finalization nucleus に固定 |
 | typed overclaim | type / proof | OPEN | finite-index first layer を full dependent core と誤読する | first fragment と still-later line を分ける |
 | theorem / model-check overclaim | proof workflow | OPEN | generated stub / model-check carrier を production binding と誤読する | repo-local bridge と public contract を分ける |
-| auth-transport collapse | Mirrorea layering | 低下したが継続監視 | envelope / adapter 設計で authentication を transport に潰す | `MessageEnvelope / AuthEvidence` seam の helper-local / report-local first cut を維持し、final public widening を後段に残す |
+| auth-transport collapse | Mirrorea layering | 低下したが継続監視 | envelope / adapter 設計で authentication を transport に潰す | `P6` で helper medium / runtime seam split、shared `AuthEvidence` lane inventory、freshness lane を current line に actualize した上で、final public widening を後段に残す |
 | visualization / telemetry leak | observability | NEW | debug output が label / authority / redaction を回避する | typed visualization / telemetry line を package 化する |
 | verification-layer overclaim | proof / runtime boundary | 継続監視 | helper `verification_handoff_witness` と runtime `verification_model_check` の current emitted floor を hidden verifier builtin や final public verifier contract と誤読する | `VerificationLayer` composition を typed layer composition の current reading に留め、theorem bridge / runtime policy / visualization lane の widening threshold を別 package に残す |
 | effect-substrate collapse | architecture | NEW | effect-based OS-like substrate という内側の解釈から subsystem collapse や standard I/O built-in 化が滑り込む | internal interpretation と normative boundary を docs / plan / specs で分ける |
@@ -34,6 +34,7 @@
 - `VerificationLayer` composition の public naming と theorem bridge / runtime policy / visualization lane widening threshold
 - effect-based OS-like substrate という内側の解釈を prose のまま保つか、formal layer naming へ上げるか
 - `MessageEnvelope` / `AuthEvidence` / transport insertion seam の final public shape
+- `witness_refs` role taxonomy と subject/emitter/authentication binding の final split
 - visualization / telemetry security の label / authority / redaction / retention model
   - helper-local / report-local first cut は `0922` で actualize したが、final public viewer contract と retention は未決のまま残す
 - projection / placement validity report と world-sugar boundary

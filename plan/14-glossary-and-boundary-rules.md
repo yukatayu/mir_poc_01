@@ -70,11 +70,13 @@
 ### MessageEnvelope
 
 - transport insertion seam 上に見える message carrier
+- current line では `transport_medium` / `transport_seam` / `emitter_principal` / `freshness_checks` / `capability_requirements` / `authorization_checks` / `witness_refs` を持つ
 - authentication / authorization / membership / capability / witness を collapse しない current split を支える
 
 ### AuthEvidence
 
 - authentication に関する evidence carrier
+- current shared lane inventory は `kind / subject / issuer / bindings / notes`
 - current helper-local baseline は `auth none` だが、final public kind / session / signature protocol は未決
 
 ### VisualizationProtocol

@@ -246,9 +246,24 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("roll_request#1", envelopes)
         self.assertIn("handoff_notice#1", envelopes)
         self.assertEqual(envelopes["roll_request#1"]["auth_evidence"], None)
-        self.assertEqual(envelopes["roll_request#1"]["transport"], "local_queue")
+        self.assertEqual(envelopes["roll_request#1"]["transport"], "game_action_boundary")
+        self.assertEqual(envelopes["roll_request#1"]["transport_medium"], "local_queue")
+        self.assertEqual(
+            envelopes["roll_request#1"]["transport_seam"], "game_action_boundary"
+        )
+        self.assertEqual(
+            envelopes["roll_request#1"]["freshness_checks"],
+            [
+                "membership_epoch matches active registry frontier",
+                "member_incarnation matches active member record",
+            ],
+        )
         self.assertIn(
             "DiceOwner(Alice)",
+            envelopes["roll_request#1"]["capability_requirements"],
+        )
+        self.assertNotEqual(
+            envelopes["roll_request#1"]["principal_claim"]["claimed_capabilities"],
             envelopes["roll_request#1"]["capability_requirements"],
         )
         self.assertIn(
@@ -257,6 +272,12 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         )
         self.assertEqual(
             envelopes["handoff_notice#1"]["principal_claim"]["principal"], "Alice"
+        )
+        self.assertEqual(
+            envelopes["handoff_notice#1"]["transport"], "published_history_boundary"
+        )
+        self.assertEqual(
+            envelopes["handoff_notice#1"]["emitter_principal"], "SugorokuGame#1"
         )
 
     def test_runtime_attach_loopback_transport_preserves_attach_request_parity(self) -> None:
@@ -268,7 +289,9 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertEqual(len(result["message_envelopes"]), 1)
         envelope = result["message_envelopes"][0]
         self.assertEqual(envelope["envelope_id"], "attach_request#1")
-        self.assertEqual(envelope["transport"], "loopback_socket")
+        self.assertEqual(envelope["transport"], "attach_point_boundary")
+        self.assertEqual(envelope["transport_medium"], "loopback_socket")
+        self.assertEqual(envelope["transport_seam"], "attach_point_boundary")
         self.assertEqual(envelope["auth_evidence"], None)
         self.assertEqual(envelope["membership_epoch"], 0)
         self.assertEqual(envelope["witness_refs"], [])
@@ -364,7 +387,12 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
 
         envelopes = {row["envelope_id"]: row for row in result["message_envelopes"]}
         self.assertEqual(result["transport_seam"], "loopback_socket")
-        self.assertEqual(envelopes["roll_request#1"]["transport"], "loopback_socket")
+        self.assertEqual(
+            envelopes["roll_request#1"]["transport_medium"], "loopback_socket"
+        )
+        self.assertEqual(
+            envelopes["roll_request#1"]["transport_seam"], "game_action_boundary"
+        )
         self.assertEqual(envelopes["roll_request#1"]["auth_evidence"], None)
         self.assertEqual(envelopes["roll_request#1"]["membership_epoch"], 0)
         self.assertIn(
@@ -395,7 +423,7 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
 
         self.assertEqual(len(result["message_envelopes"]), 1)
         envelope = result["message_envelopes"][0]
-        self.assertEqual(envelope["transport"], "loopback_socket")
+        self.assertEqual(envelope["transport_medium"], "loopback_socket")
         self.assertEqual(envelope["dispatch_outcome"], "rejected")
         self.assertIn(
             "helper-local loopback preview only; same-process envelope parity",
@@ -417,11 +445,21 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         result = sugoroku_world_samples.closeout()
 
         self.assertIn("--debug envelopes", result["debug_output_modes"])
-        self.assertIn("none", result["auth_evidence_modes"])
-        self.assertIn("session_token", result["reserved_auth_evidence_modes"])
-        self.assertIn("local_queue", result["transport_seams"])
-        self.assertIn("loopback_socket", result["transport_seams"])
-        self.assertEqual(result["reserved_transport_seams"], ["network_link"])
+        self.assertEqual(
+            result["auth_evidence_lanes"],
+            ["kind", "subject", "issuer", "bindings", "notes"],
+        )
+        self.assertIn("none", result["auth_evidence_kinds"])
+        self.assertIn("session_token", result["reserved_auth_evidence_kinds"])
+        self.assertEqual(result["message_envelope_scope"], "representative_slice")
+        self.assertIn("transport_medium", result["message_envelope_lanes"])
+        self.assertIn("transport_seam", result["message_envelope_lanes"])
+        self.assertIn("freshness_checks", result["message_envelope_lanes"])
+        self.assertIn("local_queue", result["transport_mediums"])
+        self.assertIn("loopback_socket", result["transport_mediums"])
+        self.assertEqual(result["reserved_transport_mediums"], ["network_link"])
+        self.assertIn("game_action_boundary", result["transport_seams"])
+        self.assertIn("published_history_boundary", result["transport_seams"])
 
     def test_check_all_supports_loopback_transport_preview(self) -> None:
         result = sugoroku_world_samples.check_all(transport="loopback_socket")

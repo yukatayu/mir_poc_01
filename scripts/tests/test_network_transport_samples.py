@@ -31,6 +31,13 @@ class NetworkTransportSamplesTests(unittest.TestCase):
         self.assertEqual(attach_row["membership_epoch"], 0)
         self.assertEqual(attach_row["member_incarnation"], 0)
         self.assertEqual(attach_row["auth_mode"], "none")
+        self.assertEqual(attach_row["transport"], "attach_point_boundary")
+        self.assertEqual(attach_row["transport_medium"], "loopback_socket")
+        self.assertEqual(attach_row["transport_seam"], "attach_point_boundary")
+        self.assertEqual(
+            attach_row["freshness_checks"],
+            ["membership_epoch matches active registry frontier"],
+        )
         self.assertIn(
             "AttachComponent(SugorokuGamePackage)",
             attach_row["capability_requirements"],
@@ -94,6 +101,8 @@ class NetworkTransportSamplesTests(unittest.TestCase):
             self.assertNotIn("claimed_capabilities", row)
             self.assertIn("payload_kind", row)
             self.assertIn("dispatch_outcome", row)
+            self.assertIn("transport_medium", row)
+            self.assertIn("transport_seam", row)
 
     def test_check_all_covers_all_transport_canaries(self) -> None:
         result = network_transport_samples.check_all()

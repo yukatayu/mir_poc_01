@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 11:19 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P5` `LayerSignature` system hardening で current layer row schema / obligations lane / scope split を fixed し、`P6` `MessageEnvelope / Auth seam` hardening と `P7` `VisualizationProtocol / VisualizationSecurity` hardening を次段に揃える
-Current active packages: `P6` `MessageEnvelope / Auth seam` hardening
+Last updated: 2026-04-28 12:18 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P6` `MessageEnvelope / AuthEvidence` seam hardening で medium/seam split・shared auth lane inventory・freshness lane を fixed し、`P7` `VisualizationProtocol / VisualizationSecurity` hardening を次段に揃える
+Current active packages: `P7` `VisualizationProtocol / VisualizationSecurity` hardening
 
 ## Legend
 
@@ -68,7 +68,7 @@ Progress:
 | `PH9` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview subset + residual planned family | 75 | positive + negative | 2026-04-28 09:26 JST | `0923`, `0941`, `0945`, `0946` | phase 9 `.mir` direct semantic execution ではなく helper self-consistency + anchor comparison。residual reopen matrix は fixed |
 | `EXT-01/02/05` | typed external boundary | `samples/not_implemented/typed-external-boundary/` | residual planned family | 10 | target only | 2026-04-28 09:34 JST | `0923`, `0941`, `0946` | indirect anchor / reopen criterion / kept-later gate は fixed。final host-facing contract は mixed gate |
 | `EXT-03/04` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper subset | 75 | positive + negative | 2026-04-28 09:26 JST | `0941`, `0945`, `0946` | typed adapter failure lane、envelope split、redacted visualization lane |
-| `PH10` | MessageEnvelope / auth seam | Sugoroku helper、clean near-end runtime report | helper-local + report-local carrier | 90 | positive + negative | 2026-04-27 23:24 JST | `0921` | transport / auth / membership / capability / witness を collapse しない baseline |
+| `PH10` | MessageEnvelope / AuthEvidence seam | Sugoroku helper、clean near-end runtime report | helper-local + report-local carrier | 100 | positive + negative | 2026-04-28 12:18 JST | `0921`, `0953` | helper `message_envelope_scope = representative_slice`、runtime `message_envelope_scope = clean_near_end_canonical_inventory`、legacy `transport` alias は seam 意味へ正規化済みで、`transport_medium` / `transport_seam` / `emitter_principal` / `freshness_checks` / shared `auth_evidence_lanes` を fixed。final public auth schema / transport ABI / `witness_refs` role taxonomy ではない |
 | `PH11` | TermSignature / LayerSignature | Sugoroku helper、clean near-end runtime report | helper-local + report-local inventory | 100 | positive | 2026-04-28 11:19 JST | `0918`, `0919`, `0950`, `0952` | `TermSignature` は current `kind/name/evidence_role` lanes を固定済み。`LayerSignature` は current `name/requires/provides/transforms/checks/emits/obligations/laws` row schema、helper `representative_slice` inventory、runtime `clean_near_end_canonical_inventory` inventory、helper representative names `verification_handoff_witness` / `runtime_turn_trace` / `membership_*` / `hotplug_*`、runtime canonical names `auth_authority_witness` / `transport_provider_boundary` / `verification_model_check` を fixed。final shared law schema ではない |
 | `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/hands_on/projection_placement_views_01.md` | helper/report-local preview floor + docs-first emitted-program gate | 75 | positive | 2026-04-28 09:51 JST | `0924`, `0942`, `0948` | preview floor に加えて validity report minimum / generated artifact reserve policy / `P15` handoff line を fixed。actual emitted program family は deferred |
 | `PH13` | network transport | `scripts/network_transport_samples.py`, `samples/not_implemented/network-transport/` | helper-local canary family + planned source family | 75 | positive + negative | 2026-04-28 03:27 JST | `0926`, `0929`, `0932`, `0945` | local queue / loopback / reconnect / typed failure / redacted route trace |
@@ -83,10 +83,10 @@ Progress:
 | E2E ID | Scope | Path / command | Progress | What it proves | Last result |
 |---|---|---|---:|---|---|
 | `E2E-CLEAN-SUITE` | current-L2 -> clean near-end | `python3 scripts/clean_near_end_samples.py closeout` | 90 | active clean near-end suite の positive / negative floor と closeout snapshot が still green | pass 2026-04-28 03:27 JST |
-| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-28 11:19 JST |
+| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-28 12:18 JST |
 | `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar slice の active floor | pass 2026-04-28 03:27 JST |
 | `E2E-TYPED-EXTERNAL-TARGET` | source stub -> adapter preview -> anchor comparison | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper self-consistency + anchor comparison の current floor。phase 9 `.mir` direct execution ではない | pass 2026-04-28 09:26 JST |
-| `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-28 03:27 JST |
+| `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-28 12:18 JST |
 | `E2E-PROJECTION-TARGET` | system source -> emitted place program -> equivalent trace | future target: current `PRJ-01` / `PRJ-02` preview floor + later emitted-program runner | 10 | compositional projection E2E は still later。`P3` current package で actualize したのは preview floor と emitted-program gate の docs-first boundaryだけ | target only |
 
 ## Build / storage environment
@@ -112,10 +112,18 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
-| 2026-04-28 11:19 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v` | pass | helper closeout `LayerSignature` schema は `name/requires/provides/transforms/checks/emits/obligations/laws` と `representative_slice` scope を返す |
-| 2026-04-28 11:19 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime closeout `LayerSignature` schema は `name/.../obligations/laws` と `clean_near_end_canonical_inventory` scope を返す |
-| 2026-04-28 11:19 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | helper closeout は representative inventory `verification_handoff_witness` / `runtime_turn_trace` / `membership_*` / `hotplug_*` を返す |
-| 2026-04-28 11:19 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | runtime closeout は canonical inventory `auth_authority_witness` / `transport_provider_boundary` / `verification_model_check` を返す |
+| 2026-04-28 12:18 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v` | pass | helper envelope suite は legacy `transport` alias を seam 意味に正規化した上で `transport_medium` / `transport_seam` / `freshness_checks` を返す |
+| 2026-04-28 12:18 JST | `python3 -m unittest scripts.tests.test_network_transport_samples -v` | pass | process-boundary / observer-safe route trace でも legacy `transport` alias は seam 意味に揃う |
+| 2026-04-28 12:18 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | helper closeout は `message_envelope_scope = representative_slice`、shared `auth_evidence_lanes`、active medium inventory を返す |
+| 2026-04-28 12:18 JST | `python3 scripts/network_transport_samples.py closeout --format json` | pass | helper-local transport canary family は medium/seam split を維持したまま green |
+| 2026-04-28 12:18 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | runtime provider boundary envelope は `transport = transport_seam = provider_boundary`、`transport_medium = null` を返す |
+| 2026-04-28 12:18 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json` | pass | runtime audit boundary envelope は witness/auth distinction を保ったまま green |
+| 2026-04-28 12:18 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | runtime closeout は `message_envelope_scope = clean_near_end_canonical_inventory`、shared `auth_evidence_lanes`、canonical seam inventory を返す |
+| 2026-04-28 12:18 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime current package sample tests 26/26 green |
+| 2026-04-28 12:18 JST | `cargo test -p mir-runtime` | pass | runtime crate floor 全体は green |
+| 2026-04-28 12:18 JST | `python3 scripts/check_source_hierarchy.py` | pass | required hierarchy intact |
+| 2026-04-28 12:18 JST | `python3 scripts/validate_docs.py` | pass | snapshot/front-door docs は current line と整合 |
+| 2026-04-28 12:18 JST | `git diff --check` | pass | P6 closeout diff は whitespace-clean |
 | 2026-04-28 09:51 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` | pass | helper-local `projection_view` は preview-only のまま、place split / authority place / observer view refs を返す |
 | 2026-04-28 09:51 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | pass | projection gate close後も visualization lane が壊れていないことを確認 |
 | 2026-04-28 09:51 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | report-local `cross_place_projection` が authority/provider placement split を維持していることを確認 |
