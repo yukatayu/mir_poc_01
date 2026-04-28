@@ -40,7 +40,7 @@
   - `P16` visual debugger / viewer first public prototype の current first-cut closeout も close 済みであり、`scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を actualize 済み
   - `P15-P17` は first real implementation tranche closeout 済み
   - `P18` repo-side first cut も close 済みであり、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize 済み
-  - current promoted-next package は post-`P20` 時点で未昇格に保ち、completed engine / rollback / durable migration / distributed activation ordering / final public ABI を narrow current evidence なしに promotion しない
+  - `R7` close 後の current promoted-next package は `P21` runtime-crate hot-plug completed-engine narrow cut とし、rollback / durable migration / distributed activation ordering / final public ABI は grouped later family として残す
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

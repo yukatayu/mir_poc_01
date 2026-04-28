@@ -18,7 +18,7 @@
 5. current-L2 実装寄りなら `plan/04 ... plan/09`
 6. 全体計画なら `plan/10-roadmap-overall.md`
 7. 直近の research split は `plan/11-roadmap-near-term.md`
-8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory / `VerificationLayer` widening threshold / `AttachPoint` minimal contract / `FAIRY-05` carrier bundling / hot-plug real migration rollback boundary / runtime-crate hot-plug engine ownership cut / runtime-crate hot-plug carrier admission cut の current roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`、`plan/29`、`plan/30`、`plan/31`、`plan/32`、`plan/33`、`plan/34`
+8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory / `VerificationLayer` widening threshold / `AttachPoint` minimal contract / `FAIRY-05` carrier bundling / hot-plug real migration rollback boundary / runtime-crate hot-plug engine ownership cut / runtime-crate hot-plug carrier admission cut / post-`P20` next-package inventory の current roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`、`plan/29`、`plan/30`、`plan/31`、`plan/32`、`plan/33`、`plan/34`、`plan/35`
 9. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
@@ -69,6 +69,7 @@
   `plan/32-hotplug-real-migration-rollback-boundary.md`
   `plan/33-runtime-crate-hotplug-engine-ownership-cut.md`
   `plan/34-runtime-crate-hotplug-carrier-admission-cut.md`
+  `plan/35-post-p20-hotplug-next-package-inventory.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

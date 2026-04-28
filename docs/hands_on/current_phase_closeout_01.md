@@ -156,31 +156,34 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 ## next queue
 
 1. post-`P20` queue status
-   - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。current promoted-next package と package-level reopen next は未昇格に保ち、completed engine、rollback、durable migration、distributed activation ordering、final public ABI は narrow current evidence なしに昇格させない
+   - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。さらに `R7` post-`P20` hot-plug next-package inventory も close 済みであり、current promoted-next package は `P21` runtime-crate hot-plug completed-engine narrow cut に昇格した。package-level reopen next は exact label 未固定のまま `rollback / durable migration`、`distributed activation ordering`、`final public ABI` の later family に grouped して残す
 2. `P19` closeout memory
    - `crates/mirrorea-core/src/fabric.rs` の engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を current narrow Rust carrier floor として読む
    - helper-local lifecycle / sample-grounded attach-detach IDs / attach-detach view-telemetry IDs / rollback / migration / distributed activation ordering / final public ABI は kept-later に残した current closeout memory
 3. `R6` closeout memory
    - `runtime_crate_hotplug_carrier_admission_cut_01.md`、`../research_abstract/runtime_crate_hotplug_carrier_admission_cut_01.md`、`../../plan/34-runtime-crate-hotplug-carrier-admission-cut.md`
    - post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow にした current queue memory
-4. `R5` closeout memory
+4. `R7` closeout memory
+   - `post_p20_hotplug_next_package_inventory_01.md`、`../research_abstract/post_p20_hotplug_next_package_inventory_01.md`、`../../plan/35-post-p20-hotplug-next-package-inventory.md`
+   - post-`P20` kept-later lane を smallest plausible package cuts に分け、current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定した current queue memory
+5. `R5` closeout memory
    - `runtime_crate_hotplug_engine_ownership_cut_01.md`、`../research_abstract/runtime_crate_hotplug_engine_ownership_cut_01.md`、`../../plan/33-runtime-crate-hotplug-engine-ownership-cut.md`
    - helper-local preview、`mirrorea-core` generic carrier-substrate、`mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を current memory に残した
-5. `R4` closeout memory
+6. `R4` closeout memory
    - `hotplug_real_migration_rollback_boundary_01.md`、`../research_abstract/hotplug_real_migration_rollback_boundary_01.md`、`../../plan/32-hotplug-real-migration-rollback-boundary.md`
    - `activation_cut != distributed activation ordering`、`migration_contract row != protocol`、storage detach / network replay / runtime detach lifecycle 非同一視、runtime-crate engine / final public ABI kept-later boundary を current memory に残した
-6. `R3` closeout memory
+7. `R3` closeout memory
    - `fairy05_visibility_return_carrier_bundling_01.md`、`../research_abstract/fairy05_visibility_return_carrier_bundling_01.md`、`../../plan/31-fairy05-visibility-return-carrier-bundling.md`
    - helper closeout implementation inventory `carrier_choice = UNRESOLVED` を保ったまま、provisional recommendation `typed bundle over state_timeline + anchor_switch` と visibility-return witness の読みを current memory に残した
-7. `R2` closeout memory
+8. `R2` closeout memory
    - `attachpoint_detach_minimal_contract_01.md`、`../research_abstract/attachpoint_detach_minimal_contract_01.md`、`../../plan/30-attachpoint-detach-minimal-contract.md`
    - helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を current memory に残した
-8. `R1` closeout memory
+9. `R1` closeout memory
    - helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor と widening threshold matrix を current memory として残した
    - `verification_layer_widening_threshold_01.md`、`../research_abstract/verification_layer_widening_threshold_01.md`、`../../plan/29-verification-layer-widening-threshold.md`
-9. `U1` closeout memory
+10. `U1` closeout memory
    - `plan/28`、`post_p18_true_user_spec_hold_option_matrix_01.md`、`post_p18_true_user_spec_hold_01.md` に packaging shape / host target / first shipped public surface / final shared-space operational catalog breadth の option inventory と provisional recommendation を残した
-10. post-`P18` option-matrix landing page
+11. post-`P18` option-matrix landing page
    - `post_p18_true_user_spec_hold_01.md`、`../research_abstract/post_p18_true_user_spec_hold_option_matrix_01.md`、`../../plan/28-post-p18-true-user-spec-hold-option-matrix.md`
 
 `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout、`P18` public API / parser grammar gate の repo-side first-cut closeout は close 済みです。

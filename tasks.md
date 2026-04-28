@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-29 01:57 JST
+最終更新: 2026-04-29 02:26 JST
 
 ## この文書について
 
@@ -23,8 +23,9 @@
 - `R6` runtime-crate hot-plug carrier admission cut は close 済みです。
 - `P19` `mirrorea-core` hot-plug request/verdict carrier tranche も close 済みであり、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `crates/mirrorea-core/src/fabric.rs` に actualize 済みです。
 - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize 済みです。
-- current promoted next line は **未昇格** です。post-`P20` の actual runtime-crate hot-plug engine、rollback、durable migration、distributed activation ordering、final public ABI はまだ narrow package へ promotion していません。
-- package-level reopen next は **未昇格** です。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は引き続き later に残します。
+- `R7` post-`P20` hot-plug next-package inventory も close 済みであり、`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により post-`P20` kept-later lane を smallest plausible package cuts に分け、current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定済みです。
+- current promoted next line は **`P21` runtime-crate hot-plug completed-engine narrow cut** です。admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize します。
+- package-level reopen next は **exact label 未固定** です。`rollback / durable migration`、`distributed activation ordering`、`final public ABI` は引き続き later family に grouped して残します。
 - next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
@@ -72,6 +73,8 @@
 | `R6` runtime-crate hot-plug carrier admission cut | `Macro 8` prep | `S0 -> S2` | closed | closed | post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、`P19` / `P20` queue split を docs-first に固定した |
 | `P19` `mirrorea-core` hot-plug request/verdict carrier tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | engine-neutral `HotPlugRequest` / `HotPlugVerdict` と lane inventory を `mirrorea-core` に actualize し、helper-local lifecycle と engine actualization を kept-later に残した |
 | `P20` `mir-runtime` hot-plug orchestration skeleton first tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | dedicated `HotPlugRuntimeSkeletonReport` と consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` により、`P19` carrier と existing substrate の上に thin runtime/report assembly を narrow に actualize した |
+| `R7` post-`P20` hot-plug next-package inventory | `Macro 8` prep | `S0 -> S2` | closed | closed | post-`P20` kept-later lane を smallest plausible package cuts に分け、current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定した |
+| `P21` runtime-crate hot-plug completed-engine narrow cut | `Macro 6-7` | `S1 -> S4` | promoted next | ~1-2 tasks | admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize する |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -812,6 +815,53 @@
   新しい report、`plan/34` と relevant roadmap / snapshot docs の同期
 - stop line:
   completed engine、rollback protocol、durable migration engine、distributed activation ordering、final public hot-plug ABI を claim しない
+
+### R7. post-`P20` hot-plug next-package inventory
+
+- status:
+  close 済み。`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により、post-`P20` kept-later lane を smallest plausible package cuts に分け、current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定した。
+
+- macro phase / stage:
+  `Macro 8` prep, `S0 -> S2`
+- objective:
+  `P20` current closeout の先に残る hot-plug kept-later lane を docs-first に decomposition し、next promoted package と later-family grouping を固定する
+- deliverables:
+  `plan/35`、reader-facing summary / landing page、snapshot / roadmap sync、report
+- validation command:
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
+- debug / visualization output:
+  existing `hotplug_lifecycle` / `HotPlugRuntimeSkeletonReport` evidence を grounding にした package-cut matrix
+- docs / report requirement:
+  新しい report、`plan/35`、relevant front-door docs / snapshot docs / reader-facing docs の同期
+- stop line:
+  `P21` promoted-next を started / actualized と混同しない。exact later package labels を evidence なしに固定しない
+
+### P21. runtime-crate hot-plug completed-engine narrow cut
+
+- status:
+  promoted next。implementation 未着手。
+
+- macro phase / stage:
+  `Macro 6-7`, `S1 -> S4`
+- objective:
+  admitted request/verdict carrier と existing substrate の上に canonical runtime-side hot-plug engine state progression を narrow に actualize する
+- deliverables:
+  runtime-side engine/state carrier、request/verdict consumption path、state-transition tests、report、snapshot sync
+- validation command:
+  `cargo test -p mir-runtime --test hotplug_runtime_skeleton`
+  `cargo test -p mir-runtime`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
+- debug / visualization output:
+  engine-side lifecycle/state note over admitted request/verdict carrier + substrate snapshot
+- docs / report requirement:
+  新しい report、`plan/35` と relevant roadmap / snapshot docs の同期
+- stop line:
+  rollback protocol、durable migration / reattach semantics、distributed activation ordering、final public hot-plug ABI を同じ tranche に混ぜない
 
 ## research を通して見つけること
 

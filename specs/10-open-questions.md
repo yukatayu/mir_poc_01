@@ -262,7 +262,8 @@
        attach-detach view-telemetry IDs を Rust canonical carrier に上げず、
        verdict kind は narrow family `accepted / rejected / deferred` に留めてよい。
      - 未決なのは final hot-plug ABI、rollback、durable state migration engine である。
-     - `UNRESOLVED`: actual runtime-crate hot-plug engine actualization、engine-neutral request/verdict carrier の exact Rust symbol naming / final field schema、actual rollback protocol、actual durable migration engine、distributed activation ordering の exact contract、final public hot-plug ABI。
+     - current recommendation は、`R7` docs-first closeout により current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定し、exact later package label はまだ fixed せずに `rollback / durable migration`、`distributed activation ordering`、`final public hot-plug ABI` の later family に grouped して残すことである。
+     - `UNRESOLVED`: actual runtime-crate hot-plug completed-engine actualization、engine-neutral request/verdict carrier の exact Rust symbol naming / final field schema、actual rollback protocol、actual durable migration engine / reattach semantics、distributed activation ordering の exact contract、final public hot-plug ABI。
   7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。
      - 2026-04-27 時点で active representative slice は `FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06`、residual planned family は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-05` に固定した。
      - 2026-04-27 時点の docs-first fixation では、もし widen するなら explicit state timeline / anchor switch evidence が必要、という gate だけを current line に上げてよい。

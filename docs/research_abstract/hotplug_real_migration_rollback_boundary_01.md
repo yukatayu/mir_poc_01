@@ -45,7 +45,7 @@ helper floor は widening しません。
 `migration_contract` は protocol ではなく unresolved-state honesty lane として読みます。
 historical next relation at `R4` close time では、helper-local preview と crate-side runtime ownership を分ける
 `R5` runtime-crate hot-plug engine ownership cut を読むのが自然でした。
-current repo state では `R5` / `R6` / `P19` / `P20` も close 済みであり、post-`P20` の current promoted-next package は未昇格です。
+current repo state では `R5` / `R6` / `P19` / `P20` / `R7` も close 済みであり、current promoted-next package は `P21` runtime-crate hot-plug completed-engine narrow cut です。rollback / durable migration、distributed activation ordering、final public hot-plug ABI は grouped later family に残します。
 
 ## 関連
 

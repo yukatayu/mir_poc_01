@@ -184,20 +184,21 @@ fixed current reading:
   `attach_lifecycle / detach_lifecycle`
   `attach_activation#1 / detach_boundary#1`
   は preview ownership に残す
-- reusable carrier ownership は `mirrorea-core` 側の later tranche 候補として読み、
-  thin runtime/report assembly は `mir-runtime` 側のさらに後段の orchestration candidate として残す
-- current sequence は
-  `R6` ->
-  `P19` `mirrorea-core` hot-plug request/verdict carrier tranche ->
-  `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
-  と読む
+- reusable carrier ownership は current repo state では `P19` `mirrorea-core` current closeout として actualize 済みであり、
+  thin runtime/report assembly は `P20` `mir-runtime` current closeout として actualize 済みである
+- `R6 -> P19 -> P20` は historical queue relation として読む
+- current repo state では
+  `R7` post-`P20` hot-plug next-package inventory が
+  `P21` runtime-crate hot-plug completed-engine narrow cut
+  を promoted-next に固定した reading を参照する
 - request / verdict carrier を lifecycle engine、rollback protocol、
   durable migration engine、distributed activation ordering、final public ABI と混同しない
 
 reader-facing current memory は
 `plan/34-runtime-crate-hotplug-carrier-admission-cut.md`、
 `docs/research_abstract/runtime_crate_hotplug_carrier_admission_cut_01.md`、
-`docs/hands_on/runtime_crate_hotplug_carrier_admission_cut_01.md`
+`docs/hands_on/runtime_crate_hotplug_carrier_admission_cut_01.md`、
+`plan/35-post-p20-hotplug-next-package-inventory.md`
 を参照する。
 
 ## next relation

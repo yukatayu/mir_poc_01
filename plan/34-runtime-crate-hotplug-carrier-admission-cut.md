@@ -189,5 +189,7 @@ distributed activation ordering を carrier へ上げない。
 - completed engine、rollback protocol、durable migration、
   distributed activation ordering、final public hot-plug ABI は
   kept-later に残す。
-- `P20` close 後の current promoted-next package と
-  package-level reopen next は未昇格に保つ。
+- `P20` close 直後の promoted-next / reopen-next 未昇格 reading は historical に保ち、
+  current repo follow-on memory は
+  `plan/35-post-p20-hotplug-next-package-inventory.md`
+  の `R7` closeout を参照する。
