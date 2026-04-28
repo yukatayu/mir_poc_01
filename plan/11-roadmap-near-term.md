@@ -49,7 +49,8 @@
 - `docs/reports/0975-*` は `R1` `VerificationLayer` widening threshold inventory first cut を表し、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor と widening threshold matrix を `plan/29` と reader-facing docs に actualize した
 - `docs/reports/0976-*` は `R1` closeout trail と `R2` promoted-next sync を表し、research landing stale drift、`progress.md` recent log、`samples_progress.md` `PH0` row、report trail completion を current line に actualize した
 - `docs/reports/0977-*` は `R2` `AttachPoint` compatibility / detach minimal contract closeout を表し、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row、grounding anchor、kept-later migration / rollback gate を `plan/30` と reader-facing docs に actualize した
-- current promoted next line は `R3` `FAIRY-05` visibility-return carrier bundling
+- `docs/reports/0978-*` は `R3` `FAIRY-05` visibility-return carrier bundling closeout を表し、helper closeout implementation inventory `carrier_choice = UNRESOLVED` を保ったまま、carrier-choice matrix と provisional recommendation `typed bundle over state_timeline + anchor_switch` を `plan/31` と reader-facing docs に actualize した
+- current promoted next line は `R4` hot-plug real migration / rollback boundary
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -76,7 +77,9 @@
 9. `R2` `AttachPoint` compatibility / detach minimal contract
    - close 済み。helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を docs-first に固定した
 10. `R3` `FAIRY-05` visibility-return carrier bundling
-   - active。active representative slice を保ったまま residual planned family `FAIRY-05` の carrier choice を docs-first に整理する
+   - close 済み。helper closeout implementation inventory `carrier_choice = UNRESOLVED` を保ったまま、carrier-choice matrix と provisional recommendation `typed bundle over state_timeline + anchor_switch` を `plan/31` と reader-facing docs に固定した
+11. `R4` hot-plug real migration / rollback boundary
+   - active。`R2` current minimal contract row の先に残る real migration / rollback / runtime-crate hot-plug engine / distributed activation ordering を kept-later boundary として docs-first に整理する
 
 ## mixed gate
 

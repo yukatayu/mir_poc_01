@@ -64,3 +64,18 @@ planning-only inventory として visible にします。
 `state_timeline` / `anchor_switch` は planning-only candidate label であり、current debug mode ではありません。
 これは planning-only です。final public visualization API や final public avatar runtime
 surface として固定したものではありません。
+
+## current `R3` narrow line
+
+2026-04-28 の `R3` docs-first closeout では、
+helper closeout implementation inventory は `carrier_choice = UNRESOLVED` のまま残しつつ、
+repository memory 側の provisional recommendation を次へ narrow にしました。
+
+- timeline event だけでは switch frontier が弱い
+- anchor-switch event だけでは ordering / witness lineage が弱い
+- witness event だけでは helper-local evidence として抽象度が高い
+- current provisional recommendation は
+  typed bundle over `state_timeline` + `anchor_switch`
+
+visibility-return witness は standalone top-level carrier ではなく、
+timeline witness refs の内側に置く reading を current line に置きます。

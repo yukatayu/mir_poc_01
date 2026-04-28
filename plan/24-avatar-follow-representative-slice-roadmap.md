@@ -72,6 +72,33 @@ must all exist.
 These names are planning-only helper-local carrier labels. They are not final
 public visualization or runtime API names.
 
+## 2026-04-28 R3 closeout note
+
+`R3` では、helper closeout implementation inventory
+`carrier_choice = UNRESOLVED` はそのまま残しつつ、
+repository memory 側に provisional recommendation を追加した。
+
+current narrow line:
+
+- `timeline event` 単独では switch frontier が弱い
+- `anchor-switch event` 単独では ordering / witness lineage が弱い
+- `witness event` 単独では helper-local evidence として抽象度が高すぎる
+- current docs-first provisional recommendation は
+  `typed bundle over state_timeline + anchor_switch`
+  である
+- visibility-return witness は standalone top-level carrier ではなく、
+  timeline witness refs の内側に置く reading を current line に置く
+
+この recommendation は repo memory の narrow line であり、
+current helper closeout schema、current debug mode naming、final public avatar /
+visualization API を fix するものではない。
+
+reader-facing current memory は
+`plan/31-fairy05-visibility-return-carrier-bundling.md`、
+`docs/research_abstract/fairy05_visibility_return_carrier_bundling_01.md`、
+`docs/hands_on/fairy05_visibility_return_carrier_bundling_01.md`
+を参照する。
+
 ## reopen gate for runnable widening
 
 Do not reopen `FAIRY-05` as runnable widening unless all of the following are

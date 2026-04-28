@@ -217,6 +217,14 @@
   7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。
      - 2026-04-27 時点で active representative slice は `FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06`、residual planned family は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-05` に固定した。
      - 2026-04-27 時点の docs-first fixation では、もし widen するなら explicit state timeline / anchor switch evidence が必要、という gate だけを current line に上げてよい。
+     - 2026-04-28 時点で `R3` docs-first closeout として、
+       `plan/31-fairy05-visibility-return-carrier-bundling.md` により helper closeout implementation inventory
+       `carrier_choice = UNRESOLVED` を保ったまま、
+       candidate carrier `timeline event / anchor-switch event / witness event / typed bundle` の matrix、
+       current provisional recommendation `typed bundle over state_timeline + anchor_switch`、
+       visibility-return witness は timeline witness refs の内側に置く current reading、
+       `state_timeline` / `anchor_switch` は planning-only candidate labels であり current debug mode ではない、
+       という line までは current docs に上げてよい。
      - `UNRESOLVED`: visibility-return witness を timeline event / anchor-switch event / witness event / typed bundle のどれとして carry するか、helper-local CLI/debug surface の exact naming をどうするか。
      - current working assumption として、planning-only candidate label `state_timeline` / `anchor_switch` を使ってよい。ただしこれは final public visualization API ではない。
      - 未決なのは `FAIRY-05` を同じ helper で actualize するか、future visualization / projection / hot-plug lane とどこで接続するか、candidate carrier を別 helper に切る価値があるかである。

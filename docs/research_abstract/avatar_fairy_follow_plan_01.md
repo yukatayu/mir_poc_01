@@ -79,6 +79,26 @@ avatar fairy follow は、そのための小さく practical な題材です。
 「visibility return witness が無い」「membership evidence が stale」
 といった rejection companion も同じ package で持つ必要があります。
 
+## 6b. `R3` closeout memory
+
+2026-04-28 の `R3` docs-first closeout では、
+helper closeout implementation inventory `carrier_choice = UNRESOLVED` を変えずに、
+repository memory 側だけを次へ narrow にしました。
+
+- timeline event 単独:
+  ordering は見えるが switch frontier が弱い
+- anchor-switch event 単独:
+  switch frontier は見えるが ordering / witness lineage が弱い
+- witness event 単独:
+  witness は explicit だが helper-local evidence としては抽象度が高い
+- current provisional recommendation:
+  typed bundle over `state_timeline` + `anchor_switch`
+
+visibility-return witness は standalone carrier ではなく、
+timeline witness refs の内側に置く reading を current line に置きます。
+
+これは final public API ではなく、active helper closeout schema でもありません。
+
 このため、phase 8 全体としてはまだ widening 余地があります。
 current helper cut は widened representative slice であり、family 全体完成を意味しません。
 
