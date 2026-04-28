@@ -138,22 +138,24 @@ class TermSignature:
 
 @dataclass(frozen=True)
 class LayerSignature:
-    layer: str
+    name: str
     requires: list[str]
     provides: list[str]
     transforms: list[str]
     checks: list[str]
     emits: list[str]
+    obligations: list[str]
     laws: list[str]
 
     def to_json(self) -> dict[str, Any]:
         return {
-            "layer": self.layer,
+            "name": self.name,
             "requires": list(self.requires),
             "provides": list(self.provides),
             "transforms": list(self.transforms),
             "checks": list(self.checks),
             "emits": list(self.emits),
+            "obligations": list(self.obligations),
             "laws": list(self.laws),
         }
 
@@ -734,7 +736,7 @@ def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, 
     if sample_id == "01_runtime_attach_game":
         signatures.append(
             LayerSignature(
-                layer="hot-plug",
+                name="hotplug_activation_boundary",
                 requires=[
                     "authority(Server) >= GameAuthority.Server",
                     "package.checked",
@@ -744,9 +746,11 @@ def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, 
                 transforms=["world:EmptyWorld->SugorokuGame#1 attached"],
                 checks=["compatible_before_visible_attach"],
                 emits=["hotplug_lifecycle", "summary"],
+                obligations=["durable_migration_engine_deferred"],
                 laws=[
                     "activation_requires_compatibility",
                     "attach_detach_lifecycle_explicit",
+                    "residual_obligations_are_explicit",
                 ],
             )
         )
@@ -756,19 +760,21 @@ def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, 
         signatures.extend(
             [
                 LayerSignature(
-                    layer="verification",
+                    name="verification_handoff_witness",
                     requires=["publication_order", f"witness({witness_name})"],
                     provides=list(result.get("properties_passed", [])),
                     transforms=[],
                     checks=["publish_before_handoff", "active_handoff_target"],
                     emits=["term_signatures", "verification"],
+                    obligations=["handoff_witness_schema_remains_sample_defined"],
                     laws=[
                         "evidence_preservation",
                         "no_hidden_handoff_without_witness",
+                        "residual_obligations_are_explicit",
                     ],
                 ),
                 LayerSignature(
-                    layer="runtime_trace",
+                    name="runtime_turn_trace",
                     requires=["sample_transition(take_turn_alice)"],
                     provides=["human_readable_turn_trace"],
                     transforms=[
@@ -777,50 +783,69 @@ def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, 
                     ],
                     checks=["single_process_logical_multi_place"],
                     emits=["turn_trace", "summary"],
-                    laws=["helper_output_is_evidence_oriented"],
+                    obligations=["public_trace_export_contract_deferred"],
+                    laws=[
+                        "helper_output_is_evidence_oriented",
+                        "residual_obligations_are_explicit",
+                    ],
                 ),
             ]
         )
     if sample_id == "05_late_join_history_visible":
         signatures.append(
             LayerSignature(
-                layer="membership",
+                name="membership_late_join_boundary",
                 requires=["membership_epoch", "member_incarnation"],
                 provides=["late_join_history_visibility", "pending_member_boundary"],
                 transforms=["member_join:Dave", "pending_insert:Dave"],
                 checks=["active_pending_distinction", "published_history_visible_after_join"],
                 emits=["membership"],
-                laws=["membership_epoch_monotone", "stale_action_rejection"],
+                obligations=["late_join_turn_order_insertion_remains_explicit"],
+                laws=[
+                    "membership_epoch_monotone",
+                    "stale_action_rejection",
+                    "residual_obligations_are_explicit",
+                ],
             )
         )
     if sample_id == "06_leave_non_owner":
         signatures.append(
             LayerSignature(
-                layer="membership",
+                name="membership_leave_invalidation",
                 requires=["membership_epoch", "member_incarnation"],
                 provides=["leave_invalidation"],
                 transforms=["member_leave:Carol", "incarnation_increment:Carol"],
                 checks=["stale_action_rejected_after_leave"],
                 emits=["membership"],
-                laws=["membership_epoch_monotone", "stale_action_rejection"],
+                obligations=["stale_action_replay_contract_deferred"],
+                laws=[
+                    "membership_epoch_monotone",
+                    "stale_action_rejection",
+                    "residual_obligations_are_explicit",
+                ],
             )
         )
     if sample_id == "07_owner_leave_reassign":
         signatures.append(
             LayerSignature(
-                layer="membership",
+                name="membership_owner_reassignment",
                 requires=["membership_epoch", "member_incarnation"],
                 provides=["owner_reassignment_continuity"],
                 transforms=["owner_leave:Bob", "dice_owner:Bob->Carol"],
                 checks=["reassigned_owner_is_active"],
                 emits=["membership", "summary"],
-                laws=["membership_epoch_monotone", "active_owner_continuity"],
+                obligations=["owner_reassignment_fairness_deferred"],
+                laws=[
+                    "membership_epoch_monotone",
+                    "active_owner_continuity",
+                    "residual_obligations_are_explicit",
+                ],
             )
         )
     if sample_id == "09_detach_todo":
         signatures.append(
             LayerSignature(
-                layer="hot-plug",
+                name="hotplug_detach_boundary",
                 requires=[
                     "authority(Server) >= GameAuthority.Server",
                     "membership_epoch",
@@ -830,13 +855,37 @@ def _layer_signatures(sample_id: str, result: dict[str, Any]) -> list[dict[str, 
                 transforms=["phase:Attached->Detached"],
                 checks=["domain_action_rejected_after_detach"],
                 emits=["hotplug_lifecycle", "verification"],
+                obligations=["detach_replay_contract_deferred"],
                 laws=[
                     "activation_requires_compatibility",
                     "attach_detach_lifecycle_explicit",
+                    "residual_obligations_are_explicit",
                 ],
             )
         )
     return [signature.to_json() for signature in signatures]
+
+
+def _merge_closeout_layer_signature(
+    signatures: dict[str, dict[str, Any]], row: dict[str, Any]
+) -> None:
+    name = row["name"]
+    existing = signatures.get(name)
+    if existing is None:
+        signatures[name] = row
+        return
+    if existing != row:
+        raise ValueError(
+            f"conflicting LayerSignature closeout row for `{name}`: {existing!r} != {row!r}"
+        )
+
+
+def _closeout_layer_signatures() -> list[dict[str, Any]]:
+    signatures: dict[str, dict[str, Any]] = {}
+    for sample in SAMPLE_ROWS:
+        for row in run_sample(sample["sample_id"])["layer_signatures"]:
+            _merge_closeout_layer_signature(signatures, row)
+    return [signatures[name] for name in sorted(signatures)]
 
 
 def _principal_claim(
@@ -2092,13 +2141,8 @@ def closeout() -> dict[str, Any]:
             for row in run_sample(sample["sample_id"])["term_signatures"]
         }
     )
-    layer_signature_kinds = sorted(
-        {
-            row["layer"]
-            for sample in SAMPLE_ROWS
-            for row in run_sample(sample["sample_id"])["layer_signatures"]
-        }
-    )
+    layer_signatures = _closeout_layer_signatures()
+    layer_signature_names = [row["name"] for row in layer_signatures]
     visualization_views = [
         row
         for sample in SAMPLE_ROWS
@@ -2184,13 +2228,25 @@ def closeout() -> dict[str, Any]:
                 for row in [*visualization_views, *telemetry_rows]
             }
         ),
-        "layer_signature_kinds": layer_signature_kinds,
-        "reserved_layer_signature_kinds": [
-            "auth",
-            "transport",
-            "telemetry",
-            "projection",
-            "visualization",
+        "layer_signatures": layer_signatures,
+        "layer_signature_scope": "representative_slice",
+        "layer_signature_lanes": [
+            "name",
+            "requires",
+            "provides",
+            "transforms",
+            "checks",
+            "emits",
+            "obligations",
+            "laws",
+        ],
+        "layer_signature_names": layer_signature_names,
+        "reserved_layer_signature_names": [
+            "auth_authority_witness",
+            "transport_provider_boundary",
+            "verification_model_check",
+            "visualization_redacted_debug_view",
+            "typed_telemetry_emitter",
         ],
         "debug_output_modes": [
             "--debug summary",
@@ -2329,8 +2385,16 @@ def _format_envelopes(result: dict[str, Any]) -> str:
 def _format_layers(result: dict[str, Any]) -> str:
     lines = ["LAYER SIGNATURES"]
     for row in result.get("layer_signatures", []):
-        lines.append(f"  - {row['layer']}")
-        for key in ("requires", "provides", "transforms", "checks", "emits", "laws"):
+        lines.append(f"  - {row['name']}")
+        for key in (
+            "requires",
+            "provides",
+            "transforms",
+            "checks",
+            "emits",
+            "obligations",
+            "laws",
+        ):
             values = row.get(key) or []
             pretty = ", ".join(values) if values else "none"
             lines.append(f"      {key}: {pretty}")

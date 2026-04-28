@@ -55,13 +55,16 @@
 ### LayerSignature
 
 - auth / verification / visualization / transport / telemetry などの layer を
-  `requires / provides / transforms / checks / emits / laws` で読む current carrier
-- current repo では first cut の evidence-oriented naming に留める
+  `name / requires / provides / transforms / checks / emits / obligations / laws` で読む current carrier
+- helper closeout は `representative_slice` scope の representative inventory、clean near-end closeout は `clean_near_end_canonical_inventory` scope の canonical inventory を出す
+- current repo では helper representative name と runtime canonical name の split を明示的に残す
+- final public layer law schema や final public verifier contract を意味しない
 
 ### VerificationLayer
 
 - finite-index checker、theorem bridge、model-check second line、runtime policy preview、
   visualization / telemetry lane を typed layer composition として読む current explanation 語彙
+- current emitted floor は helper `verification_handoff_witness` と runtime `verification_model_check` を含む evidence carrier に留まり、theorem bridge / runtime policy / visualization lane の final naming は未決
 - hidden verifier builtin や final public verifier contract を意味しない
 
 ### MessageEnvelope

@@ -1087,7 +1087,7 @@ P3. Projection / placement residual emitted-program gate
 P4. `TermSignature` registry hardening
   - active kind family `effect / transition / witness / relation / property`、reserved `message / adapter / layer` split、provenance-preserving carrier lanes を tighten する。
 P5. `LayerSignature` system hardening
-  - auth / verification / visualization / transport / telemetry を typed layer として合成する metadata / law surface を tighten する。
+  - close 済み。helper/runtime `LayerSignature` row schema、`obligations` lane、scope split、representative/canonical inventory distinctionを tighten した。
 P6. `MessageEnvelope` / `AuthEvidence` seam hardening
   - transport / auth / authorization / membership / capability / witness を分けた envelope carrier を tighten する。
 P7. `VisualizationProtocol` + `VisualizationSecurity`
@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4` は close し、next promoted package は `P5`、next reopen point は `P6` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5` は close し、next promoted package は `P6`、next reopen point は `P7` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1168,6 +1168,7 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Avatar fairy follow sample plan` は docs-first package として close し、phase 8 planned skeleton family を `samples/not_implemented/avatar-fairy-follow/` に切り出した。
 - `TermSignature registry / debug output` は helper-local / report-local package として close し、Sugoroku `--debug signatures` と clean near-end report / closeout inventory を actualize した。
 - `LayerSignature system` は helper-local / report-local package として close し、Sugoroku `--debug layers` と clean near-end `layer_signatures` inventory を actualize した。
+- `P5` `LayerSignature` system hardening では helper/runtime の row key を `name` に揃え、current carrier を `name / requires / provides / transforms / checks / emits / obligations / laws` に widen し、helper `representative_slice` inventory と runtime `clean_near_end_canonical_inventory` inventory の split を fixed した。
 - `MessageEnvelope / Auth seam` は helper-local / report-local package として close し、Sugoroku `message_envelopes` / `--debug envelopes` と clean near-end `MessageEnvelope` inventory を actualize した。
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
 - `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
@@ -1185,7 +1186,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
 - `Projection / placement residual emitted-program gate` は docs-first boundary package として close し、projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current line に actualize した。
 - `TermSignature` registry hardening は close し、current `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split を current line に actualize した。
-- current promoted next package は `LayerSignature` system hardening である。
+- current promoted next package は `MessageEnvelope / Auth seam` hardening であり、
+  next reopen point は `VisualizationProtocol / VisualizationSecurity` hardening である。
 
 ## 2026-04-27 repository-structure staging addendum
 

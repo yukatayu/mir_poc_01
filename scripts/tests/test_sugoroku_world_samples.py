@@ -150,20 +150,24 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
     def test_roll_publish_handoff_exposes_layer_signatures(self) -> None:
         result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
 
-        layers = {row["layer"]: row for row in result["layer_signatures"]}
-        self.assertIn("verification", layers)
-        self.assertIn("runtime_trace", layers)
-        self.assertIn("publication_order", layers["verification"]["requires"])
-        self.assertIn("term_signatures", layers["verification"]["emits"])
-        self.assertIn("dice_owner:Alice->Bob", layers["runtime_trace"]["transforms"])
+        layers = {row["name"]: row for row in result["layer_signatures"]}
+        self.assertIn("verification_handoff_witness", layers)
+        self.assertIn("runtime_turn_trace", layers)
+        self.assertIn("publication_order", layers["verification_handoff_witness"]["requires"])
+        self.assertIn("term_signatures", layers["verification_handoff_witness"]["emits"])
+        self.assertIn(
+            "handoff_witness_schema_remains_sample_defined",
+            layers["verification_handoff_witness"]["obligations"],
+        )
+        self.assertIn("dice_owner:Alice->Bob", layers["runtime_turn_trace"]["transforms"])
 
     def test_membership_sample_exposes_membership_layer(self) -> None:
         result = sugoroku_world_samples.run_sample("05_late_join_history_visible")
 
-        layers = {row["layer"]: row for row in result["layer_signatures"]}
-        self.assertIn("membership", layers)
-        self.assertIn("membership_epoch", layers["membership"]["requires"])
-        self.assertIn("membership", layers["membership"]["emits"])
+        layers = {row["name"]: row for row in result["layer_signatures"]}
+        self.assertIn("membership_late_join_boundary", layers)
+        self.assertIn("membership_epoch", layers["membership_late_join_boundary"]["requires"])
+        self.assertIn("membership", layers["membership_late_join_boundary"]["emits"])
 
     def test_layers_debug_prints_layer_inventory(self) -> None:
         pretty = sugoroku_world_samples.format_pretty(
@@ -172,17 +176,68 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         )
 
         self.assertIn("LAYER SIGNATURES", pretty)
-        self.assertIn("verification", pretty)
-        self.assertIn("runtime_trace", pretty)
+        self.assertIn("verification_handoff_witness", pretty)
+        self.assertIn("runtime_turn_trace", pretty)
         self.assertIn("requires: publication_order", pretty)
+        self.assertIn(
+            "obligations: handoff_witness_schema_remains_sample_defined",
+            pretty,
+        )
 
     def test_closeout_records_layer_debug_mode(self) -> None:
         result = sugoroku_world_samples.closeout()
 
         self.assertIn("--debug layers", result["debug_output_modes"])
-        self.assertIn("verification", result["layer_signature_kinds"])
-        self.assertIn("membership", result["layer_signature_kinds"])
-        self.assertIn("auth", result["reserved_layer_signature_kinds"])
+        self.assertEqual(result["layer_signature_scope"], "representative_slice")
+        self.assertEqual(
+            result["layer_signature_lanes"],
+            [
+                "name",
+                "requires",
+                "provides",
+                "transforms",
+                "checks",
+                "emits",
+                "obligations",
+                "laws",
+            ],
+        )
+        self.assertIn("verification_handoff_witness", result["layer_signature_names"])
+        self.assertIn("membership_late_join_boundary", result["layer_signature_names"])
+        self.assertIn("auth_authority_witness", result["reserved_layer_signature_names"])
+        self.assertIn(
+            "transport_provider_boundary",
+            result["reserved_layer_signature_names"],
+        )
+
+    def test_closeout_layer_signature_merge_rejects_duplicate_name_drift(self) -> None:
+        inventory = {
+            "verification_handoff_witness": {
+                "name": "verification_handoff_witness",
+                "requires": ["publication_order"],
+                "provides": ["owner_only_rolls"],
+                "transforms": [],
+                "checks": ["publish_before_handoff"],
+                "emits": ["verification"],
+                "obligations": ["handoff_witness_schema_remains_sample_defined"],
+                "laws": ["evidence_preservation"],
+            }
+        }
+
+        with self.assertRaisesRegex(ValueError, "verification_handoff_witness"):
+            sugoroku_world_samples._merge_closeout_layer_signature(
+                inventory,
+                {
+                    "name": "verification_handoff_witness",
+                    "requires": ["publication_order"],
+                    "provides": ["owner_only_rolls"],
+                    "transforms": [],
+                    "checks": ["publish_before_handoff"],
+                    "emits": ["verification"],
+                    "obligations": ["different_obligation"],
+                    "laws": ["evidence_preservation"],
+                },
+            )
 
     def test_roll_publish_handoff_exposes_message_envelopes(self) -> None:
         result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
@@ -290,8 +345,12 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         result = sugoroku_world_samples.closeout()
 
         self.assertIn("--debug hotplug", result["debug_output_modes"])
-        self.assertIn("hot-plug", result["layer_signature_kinds"])
-        self.assertNotIn("hot-plug", result["reserved_layer_signature_kinds"])
+        self.assertIn("hotplug_activation_boundary", result["layer_signature_names"])
+        self.assertIn("hotplug_detach_boundary", result["layer_signature_names"])
+        self.assertNotIn(
+            "hotplug_activation_boundary",
+            result["reserved_layer_signature_names"],
+        )
         self.assertIn("attached_active", result["hotplug_lifecycle_states"])
         self.assertIn("detached_todo_boundary", result["hotplug_lifecycle_states"])
         self.assertIn("hotplug_activation", result["telemetry_row_kinds"])

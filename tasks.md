@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 09:57 JST
+最終更新: 2026-04-28 11:19 JST
 
 ## この文書について
 
@@ -14,8 +14,8 @@
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P5` `LayerSignature` system hardening** です。
-- next reopen point は **`P6` `MessageEnvelope / Auth seam` hardening** です。
+- current promoted next line は **`P6` `MessageEnvelope / Auth seam` hardening** です。
+- next reopen point は **`P7` `VisualizationProtocol / VisualizationSecurity` hardening** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -39,9 +39,9 @@
 | `P2` typed external residual review | `Macro 6` reserve | `S5 -> S6` | closed | closed | residual planned family review |
 | `P3` projection residual emitted-program gate | `Macro 6` reserve | `S5 -> S6` | closed | closed | emitted-program boundary fixation |
 | `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | closed | ~1 task | current first-cut lanes / scope / reserved split fixed |
-| `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | next | ~1 task | first cut exists, law surface remains |
-| `P6` MessageEnvelope/Auth seam hardening | `Macro 6` | `S4 -> S5` | reopen next | ~1 task | first cut exists, public seam remains open |
-| `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | queued | ~1 task | first cut exists, viewer/security hardening remains |
+| `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | closed | closed | row schema / obligations lane / scope split fixed |
+| `P6` MessageEnvelope/Auth seam hardening | `Macro 6` | `S4 -> S5` | next | ~1 task | first cut exists, public seam remains open |
+| `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | reopen next | ~1 task | first cut exists, viewer/security hardening remains |
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | representative runtime slice hardening |
 | `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | residual `FAIRY-05` gate remains |
 | `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | placeholder -> first real core |
@@ -170,19 +170,27 @@
 
 ### P5. `LayerSignature` system hardening
 
+- status:
+  close 済み。helper/runtime `LayerSignature` row key を `name` に揃え、`obligations` lane、helper/runtime `layer_signature_scope` distinction、helper representative inventory と runtime canonical inventory の split を front-door docs / plan / specs / closeout に固定した。
+
 - macro phase / stage:
   `Macro 6`, `S4 -> S5`
 - objective:
-  `requires / provides / transforms / checks / emits / laws` carrier の naming と law wording を tighten する
+  `name / requires / provides / transforms / checks / emits / obligations / laws` carrier の naming と law wording を tighten する
 - deliverables:
-  `LayerSignature` wording、`VerificationLayer` composition current reading、report-local mirror rule
+  `LayerSignature` wording、helper representative inventory / runtime canonical inventory distinction、`VerificationLayer` composition current reading、report-local mirror rule
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json`
   `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v`
+  `cargo test -p mir-runtime --test clean_near_end_samples`
 - debug / visualization output:
-  `layer_signatures`
+  `layer_signatures`、`layer_signature_scope`、`layer_signature_lanes`
 - docs / report requirement:
-  新しい report、`samples_progress.md`、`plan/09`、`plan/14`、relevant docs を同期する
+  新しい report、`samples_progress.md`、`plan/09`、`plan/14`、`specs/10`、relevant docs を同期する
 - stop line:
   final public layer law schema や hidden verifier builtin を既成事実化しない
 
@@ -425,7 +433,7 @@
 
 ## research を通して見つけること
 
-- `VerificationLayer` composition の exact law surface、machine-check / theorem / runtime policy / visualization の責務分担
+- `VerificationLayer` composition の public naming / widening threshold、machine-check / theorem / runtime policy / visualization をどの package で emitted layer に上げるか
 - effect-based OS-like substrate という内側の解釈を prose に留めるか、formal layer naming に上げるか
 - projection / placement validity report の最小 shapeと、generated artifact policy の最小 shape
 - `AttachPoint` compatibility と detach lifecycle の最小 contract

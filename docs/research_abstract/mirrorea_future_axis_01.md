@@ -35,15 +35,14 @@ Mirrorea full runtime、final public API、real network、final auth stack、fin
 current line では `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split まで fixed しました。
 これは final public signature schema や final public message / adapter contract を意味しません。
 
-さらに `LayerSignature system` の first cut も close しました。
+さらに `P5` `LayerSignature system` hardening も close しました。
 
 - Sugoroku helper に `--debug layers`
 - clean near-end report / closeout に `layer_signatures`
 
-を追加し、helper-local current layer と runtime report-local lane を
-どちらも `requires / provides / transforms / checks / emits / laws` で読めるようにしました。
-ただし helper と runtime で current layer 名はまだ揃えていません。これは first cut であり、
-final public layer law schema を意味しません。
+を追加し、helper-local representative inventory と runtime report-local canonical inventory を
+どちらも `name / requires / provides / transforms / checks / emits / obligations / laws` で読めるようにしました。
+helper closeout は `representative_slice` scope で `verification_handoff_witness` / `runtime_turn_trace` / `membership_*` / `hotplug_*` を持ち、runtime closeout は `clean_near_end_canonical_inventory` scope で `auth_authority_witness` / `transport_provider_boundary` / `verification_model_check` を持ちます。scope split は current repo memory であり、final public layer law schema を意味しません。
 
 さらに `MessageEnvelope / Auth seam` の first cut も close しました。
 さらに `VisualizationProtocol` の first cut も close しました。
@@ -150,7 +149,7 @@ performance telemetry も同様に information-bearing effect であり、typed 
 ### VerificationLayer composition
 
 `VerificationLayer` は、finite-index checker、theorem bridge、model-check second line、
-runtime policy preview、visualization / telemetry lane を typed layer として合成する current reading を指します。
+runtime policy preview、visualization / telemetry lane を typed layer として合成する current reading を指します。current emitted floor は helper `verification_handoff_witness` と runtime `verification_model_check` までです。
 
 - helper-local signature dump や report-local inventory は first cut の evidence carrier に留める
 - hidden verifier builtin や final public verifier contract を既成事実化しない
@@ -301,8 +300,8 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P5-P7` carrier hardening
-   - `LayerSignature`、`MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
+1. `P6-P7` carrier hardening
+   - `MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
 2. `P8-P9` representative slice hardening
    - Sugoroku runtime attach と avatar fairy follow residual gate
 3. `P10-P17` first real implementation tranche

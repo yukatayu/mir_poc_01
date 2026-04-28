@@ -138,13 +138,14 @@
      2026-04-28 時点で current repo-local hardening として、lanes を `kind` / `name` / `evidence_role` に留め、helper closeout を `representative_slice`、clean near-end closeout を `clean_near_end_canonical_inventory`、active kind family を `effect` / `transition` / `witness` / `relation` / `property`、reserved kind を `message` / `adapter` / `layer` に固定した。
      未決なのは、future full `TermSignature` shape をどの package で widen するか、reserved kind をどの dedicated carrier widening で解除するか、public schema にどこまで mirror するかである。
   2. `LayerSignature` system の law surface をどこまで current docs に上げるか。
-     no hidden authority、no hidden data downgrade、evidence preservation、placement preservation をどう machine-check / theorem / runtime policy / visualization に配るか。
+     2026-04-28 時点で current repo-local hardening として、row schema を `name` / `requires` / `provides` / `transforms` / `checks` / `emits` / `obligations` / `laws` に留め、helper closeout を `representative_slice`、clean near-end closeout を `clean_near_end_canonical_inventory`、helper representative inventory を `verification_handoff_witness` / `runtime_turn_trace` / `membership_*` / `hotplug_*`、runtime canonical inventory を `auth_authority_witness` / `transport_provider_boundary` / `verification_model_check` に固定した。
+     未決なのは、shared public law vocabulary、exact value-prefix grammar、scope split をどの package まで維持するかである。
   2a. `VerificationLayer` composition をどこまで explicit な named layer として扱うか。
      finite-index checker、theorem bridge、model-check second line、runtime policy preview、visualization / telemetry lane を
      1 つの typed composition として見せる価値は高いが、helper-local signature dump や report-local inventory を
      final public verifier contract や hidden verifier builtin と誤読させてはならない。
-     - 2026-04-28 時点では `TermSignature` / `LayerSignature` / report-local inventory により first cut の evidence carrier は actualize してよい。
-     - 未決なのは exact composition law、public naming、machine-check と theorem / runtime policy / visualization の責務分担である。
+     - 2026-04-28 時点では helper `verification_handoff_witness` と runtime `verification_model_check` を current emitted floor として actualize してよい。
+     - 未決なのは theorem bridge / runtime policy / visualization lane をどの widening package で emitted `LayerSignature` に上げるか、exact composition law、public naming である。
   2b. effect-based OS-like substrate という内側の解釈をどこまで docs-first に固定するか。
      Mirrorea / adapter / visualization / telemetry の内側をそう読むこと自体は有用だが、
      standard I/O を Mir core primitive に戻したり、Mir / Mirrorea / Typed-Effects Wiring Platform を 1 つの runtime へ潰したり、

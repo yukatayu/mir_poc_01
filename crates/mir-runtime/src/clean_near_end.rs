@@ -692,6 +692,7 @@ pub struct LayerSignature {
     pub transforms: Vec<String>,
     pub checks: Vec<String>,
     pub emits: Vec<String>,
+    pub obligations: Vec<String>,
     pub laws: Vec<String>,
 }
 
@@ -821,6 +822,7 @@ pub struct CleanNearEndCloseout {
     pub reserved_telemetry_channels: Vec<String>,
     pub layer_signatures: Vec<LayerSignature>,
     pub layer_signature_lanes: Vec<String>,
+    pub layer_signature_scope: String,
     pub reserved_layer_signature_names: Vec<String>,
 }
 
@@ -888,6 +890,7 @@ fn layer_signature(
     transforms: &[&str],
     checks: &[&str],
     emits: &[&str],
+    obligations: &[&str],
     laws: &[&str],
 ) -> LayerSignature {
     let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
@@ -898,6 +901,7 @@ fn layer_signature(
         transforms: collect(transforms),
         checks: collect(checks),
         emits: collect(emits),
+        obligations: collect(obligations),
         laws: collect(laws),
     }
 }
@@ -996,11 +1000,13 @@ fn telemetry_row(
 
 fn layer_signature_lanes() -> Vec<String> {
     [
+        "name",
         "requires",
         "provides",
         "transforms",
         "checks",
         "emits",
+        "obligations",
         "laws",
     ]
     .into_iter()
@@ -1197,14 +1203,31 @@ fn closeout_signature_evidence_roles() -> Result<Vec<String>, CleanNearEndError>
     Ok(roles.into_iter().collect())
 }
 
-fn closeout_layer_signatures() -> Vec<LayerSignature> {
+fn insert_closeout_layer_signature(
+    signatures: &mut BTreeMap<String, LayerSignature>,
+    layer: LayerSignature,
+) -> Result<(), CleanNearEndError> {
+    match signatures.get(&layer.name) {
+        None => {
+            signatures.insert(layer.name.clone(), layer);
+            Ok(())
+        }
+        Some(existing) if existing == &layer => Ok(()),
+        Some(existing) => Err(CleanNearEndError::new(format!(
+            "conflicting LayerSignature closeout row for `{}`: existing={existing:?} new={layer:?}",
+            layer.name
+        ))),
+    }
+}
+
+fn closeout_layer_signatures() -> Result<Vec<LayerSignature>, CleanNearEndError> {
     let mut signatures = BTreeMap::new();
     for spec in clean_near_end_sample_specs() {
         for layer in spec.layer_signatures {
-            signatures.entry(layer.name.clone()).or_insert(layer);
+            insert_closeout_layer_signature(&mut signatures, layer)?;
         }
     }
-    signatures.into_values().collect()
+    Ok(signatures.into_values().collect())
 }
 
 fn closeout_visualization_views() -> Vec<VisualizationView> {
@@ -2194,6 +2217,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
                     "effect row { rng, witness } <= { rng, witness, publish }",
                 ],
                 &["witness:provider_receipt", "debug_trace:provider_roll(receipt)"],
+                &["provider_returns_draw_not_room_commit"],
                 &[
                     "no_hidden_effect",
                     "evidence_preservation",
@@ -2283,10 +2307,12 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
                 ],
                 &["requires witness(draw_pub)"],
                 &["debug_trace:audit(draw_pub)", "witness:draw_pub"],
+                &["authority_witness_preserves_subject_identity"],
                 &[
                     "no_hidden_authority",
                     "evidence_preservation",
                     "visualization_respects_labels",
+                    "residual_obligations_are_explicit",
                 ],
             )],
         },
@@ -2331,6 +2357,7 @@ fn clean_near_end_sample_specs() -> Vec<CleanNearEndSampleSpec> {
                     "property:mutual_exclusion",
                 ],
                 &["verification_result:pass"],
+                &["peterson_sc_mutual_exclusion"],
                 &[
                     "residual_obligations_are_explicit",
                     "evidence_preservation",
@@ -2811,10 +2838,49 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
         telemetry_row_lanes: telemetry_row_lanes(),
         telemetry_channels,
         reserved_telemetry_channels: reserved_telemetry_channels(),
-        layer_signatures: closeout_layer_signatures(),
+        layer_signatures: closeout_layer_signatures()?,
         layer_signature_lanes: layer_signature_lanes(),
+        layer_signature_scope: "clean_near_end_canonical_inventory".to_string(),
         reserved_layer_signature_names: reserved_layer_signature_names(),
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{
+        insert_closeout_layer_signature, CleanNearEndError, LayerSignature,
+    };
+    use std::collections::BTreeMap;
+
+    fn sample_layer_signature(obligations: &[&str]) -> LayerSignature {
+        LayerSignature {
+            name: "verification_model_check".to_string(),
+            requires: vec!["property:mutual_exclusion".to_string()],
+            provides: vec!["evidence:model_check_result".to_string()],
+            transforms: vec!["runtime events -> verification evidence".to_string()],
+            checks: vec!["checked_under:sequential_consistency".to_string()],
+            emits: vec!["verification_result:pass".to_string()],
+            obligations: obligations.iter().map(|value| (*value).to_string()).collect(),
+            laws: vec!["residual_obligations_are_explicit".to_string()],
+        }
+    }
+
+    #[test]
+    fn closeout_layer_signature_merge_rejects_duplicate_name_drift() -> Result<(), CleanNearEndError>
+    {
+        let mut signatures = BTreeMap::new();
+        insert_closeout_layer_signature(
+            &mut signatures,
+            sample_layer_signature(&["peterson_sc_mutual_exclusion"]),
+        )?;
+        let err = insert_closeout_layer_signature(
+            &mut signatures,
+            sample_layer_signature(&["different_obligation"]),
+        )
+        .expect_err("duplicate name drift should fail");
+        assert!(err.to_string().contains("verification_model_check"));
+        Ok(())
+    }
 }
 
 #[derive(Debug)]

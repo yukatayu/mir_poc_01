@@ -221,6 +221,11 @@ fn clean_sample_delegated_rng_service_emits_transport_layer_signature() {
             .checks
             .contains(&"requires witness(provider_receipt)".to_string())
     );
+    assert!(
+        layer
+            .obligations
+            .contains(&"provider_returns_draw_not_room_commit".to_string())
+    );
     assert!(layer.laws.contains(&"no_hidden_effect".to_string()));
 }
 
@@ -241,6 +246,11 @@ fn clean_sample_authority_witness_emits_auth_layer_signature() {
         layer
             .emits
             .contains(&"debug_trace:audit(draw_pub)".to_string())
+    );
+    assert!(
+        layer
+            .obligations
+            .contains(&"authority_witness_preserves_subject_identity".to_string())
     );
     assert!(layer.laws.contains(&"evidence_preservation".to_string()));
     assert!(layer.laws.contains(&"no_hidden_authority".to_string()));
@@ -392,6 +402,11 @@ fn clean_model_check_sample_emits_verification_layer_signature() {
     );
     assert!(
         layer
+            .obligations
+            .contains(&"peterson_sc_mutual_exclusion".to_string())
+    );
+    assert!(
+        layer
             .laws
             .contains(&"residual_obligations_are_explicit".to_string())
     );
@@ -445,13 +460,19 @@ fn clean_near_end_closeout_records_layer_signature_inventory() {
     assert_eq!(
         closeout.layer_signature_lanes,
         vec![
+            "name".to_string(),
             "requires".to_string(),
             "provides".to_string(),
             "transforms".to_string(),
             "checks".to_string(),
             "emits".to_string(),
+            "obligations".to_string(),
             "laws".to_string(),
         ]
+    );
+    assert_eq!(
+        closeout.layer_signature_scope,
+        "clean_near_end_canonical_inventory".to_string()
     );
     assert!(
         closeout
