@@ -10,5 +10,6 @@ path = "src/lib.rs"
 [dependencies]
 mir-ast = { path = "../mir-ast" }
 mir-semantics = { path = "../mir-semantics" }
+mirrorea-core = { path = "../mirrorea-core" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

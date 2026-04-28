@@ -25,16 +25,16 @@
 - repository-structure lane:
   `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md`、`docs/research_abstract/repository_layer_structure_01.md` で layer-aware repo map を docs-first に固定
 - Mirrorea future lane:
-  `Macro 6` では `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external boundary / adapter docs-first plan、projection / placement、hot-plug docs-first plan、network transport docs-first plan、hands-on closeout、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep、`FAIRY-05` residual reacquire design review closeout、typed external synthetic preview helper widening、projection / placement executable widening、typed external residual reopen matrix closeout、projection residual emitted-program gate closeout を close 済みと読む
+  `Macro 6` では `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、foundation package、Sugoroku per-sample alignment、avatar fairy follow skeleton plan、`TermSignature registry / debug output`、`LayerSignature system`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external boundary / adapter docs-first plan、projection / placement、hot-plug docs-first plan、network transport docs-first plan、hands-on closeout、avatar representative slice widening、hot-plug executable widening、transport helper-local canaries、cross-package sweep、`FAIRY-05` residual reacquire design review closeout、typed external synthetic preview helper widening、projection / placement executable widening、typed external residual reopen matrix closeout、projection residual emitted-program gate closeout、`mirrorea-core` first real implementation tranche を close 済みと読む
   - `P4` `TermSignature` registry hardening までは close 済み
   - `P5` `LayerSignature` system hardening も close 済み
   - `P6` `MessageEnvelope / AuthEvidence` seam hardening も close 済み
   - `P7` `VisualizationProtocol / VisualizationSecurity` hardening も close 済み
   - `P8` Sugoroku runtime attach hardening も close 済み
   - `P9` avatar fairy follow hardening も close 済み
-  - next promoted package は `P10` `mirrorea-core` first real implementation tranche
-  - next reopen point は `P11` logical multi-place runtime tranche
-  - `P10-P17` は first real implementation tranche、`P18` は final mixed gate
+  - next promoted package は `P11` logical multi-place runtime tranche
+  - next reopen point は `P12` external adapter / host boundary tranche
+  - `P11-P17` は first real implementation tranche、`P18` は final mixed gate
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

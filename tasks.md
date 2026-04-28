@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 13:37 JST
+最終更新: 2026-04-28 14:22 JST
 
 ## この文書について
 
@@ -14,8 +14,9 @@
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P10` `mirrorea-core` first real implementation tranche** です。
-- next reopen point は **`P11` logical multi-place runtime tranche** です。
+- `P10` `mirrorea-core` first real implementation tranche は close 済みです。
+- current promoted next line は **`P11` logical multi-place runtime tranche** です。
+- next reopen point は **`P12` external adapter / host boundary tranche** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -44,9 +45,9 @@
 | `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | closed | closed | security envelope / typed telemetry / fail-closed route trace fixed |
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | closed | closed | MembershipRegistry source-of-truth / world sugar / hot-plug stop line fixed |
 | `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | closed | closed | helper closeout `FAIRY-05` reopen gate / planned path inventory fixed |
-| `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | next | multi-task | placeholder -> first real core |
-| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | reopen next | multi-task | helper emulator -> crate substrate |
-| `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | later | multi-task | host-facing adapter seam |
+| `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | placeholder -> first real minimal carrier core |
+| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | next | multi-task | helper emulator -> crate substrate |
+| `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | reopen next | multi-task | host-facing adapter seam |
 | `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper canary -> real transport alpha |
 | `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | compatibility / migration / rollback |
 | `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | later | multi-task | preview floor -> emitted programs |
@@ -318,6 +319,9 @@
 
 ### P10. `mirrorea-core` first real implementation tranche
 
+- status:
+  close 済み。`crates/mirrorea-core` に `LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation を actualize し、`mir-runtime` clean near-end report がそれを利用する current ownership cut を入れた。
+
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
@@ -325,13 +329,21 @@
 - deliverables:
   crate responsibility boundary、minimal core carrier、report-local invariants
 - validation command:
-  `UNRESOLVED`. first acceptable command candidate は `cargo test -p mirrorea-core`
+  `cargo test -p mirrorea-core`
+  `cargo test -p mir-runtime --test clean_near_end_samples`
+  `cargo test -p mir-runtime`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples scripts.tests.test_avatar_follow_samples`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
 - debug / visualization output:
-  `UNRESOLVED`. expected first surface は place graph / effect route graph / layer inventory
+  clean near-end closeout `layer_signature_lanes` / `message_envelope_lanes` / `auth_evidence_lanes`
 - docs / report requirement:
-  新しい report、`progress.md`、`tasks.md`、`samples_progress.md`、`plan/19` を同期する
+  新しい report、`progress.md`、`tasks.md`、`samples_progress.md`、`plan/09`、`plan/19` を同期する
 - stop line:
-  `mir-runtime` や helper script へ責務を無言で押し戻さない。public API freeze もしない
+  visualization / telemetry catalog、`MembershipRegistry`、projection object model、hot-plug runtime、final auth / transport ABI、public API freeze をここで固定しない
 
 ### P11. logical multi-place runtime tranche
 

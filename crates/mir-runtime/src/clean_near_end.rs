@@ -4,8 +4,13 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use mirrorea_core::{
+    auth_evidence_lanes, insert_layer_signature, layer_signature_lanes, message_envelope_lanes,
+};
 use serde::Serialize;
 use serde_json::json;
+
+pub use mirrorea_core::{AuthEvidence, LayerSignature, MessageEnvelope, PrincipalClaim};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CleanNearEndError {
@@ -684,58 +689,6 @@ pub struct TermSignature {
     pub evidence_role: String,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
-pub struct LayerSignature {
-    pub name: String,
-    pub requires: Vec<String>,
-    pub provides: Vec<String>,
-    pub transforms: Vec<String>,
-    pub checks: Vec<String>,
-    pub emits: Vec<String>,
-    pub obligations: Vec<String>,
-    pub laws: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
-pub struct PrincipalClaim {
-    pub principal: String,
-    pub participant_place: String,
-    pub claimed_authority: String,
-    pub claimed_capabilities: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
-pub struct AuthEvidence {
-    pub kind: String,
-    pub subject: String,
-    pub issuer: String,
-    pub bindings: Vec<String>,
-    pub notes: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
-pub struct MessageEnvelope {
-    pub envelope_id: String,
-    pub from_place: String,
-    pub to_place: String,
-    pub transport: String,
-    pub transport_medium: Option<String>,
-    pub transport_seam: String,
-    pub payload_kind: String,
-    pub payload_ref: String,
-    pub principal_claim: PrincipalClaim,
-    pub auth_evidence: Option<AuthEvidence>,
-    pub emitter_principal: String,
-    pub membership_epoch: u64,
-    pub member_incarnation: u64,
-    pub freshness_checks: Vec<String>,
-    pub capability_requirements: Vec<String>,
-    pub authorization_checks: Vec<String>,
-    pub witness_refs: Vec<String>,
-    pub dispatch_outcome: String,
-    pub notes: Vec<String>,
-}
-
 #[derive(Debug, Clone, Serialize)]
 pub struct VisualizationView {
     pub view_name: String,
@@ -892,11 +845,7 @@ fn push_term_signature(
     if name.is_empty() {
         return;
     }
-    let key = (
-        kind.to_string(),
-        name.clone(),
-        evidence_role.to_string(),
-    );
+    let key = (kind.to_string(), name.clone(), evidence_role.to_string());
     if seen.insert(key.clone()) {
         signatures.push(TermSignature {
             kind: key.0,
@@ -917,7 +866,7 @@ fn layer_signature(
     laws: &[&str],
 ) -> LayerSignature {
     let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
-    LayerSignature {
+    let layer = LayerSignature {
         name: name.to_string(),
         requires: collect(requires),
         provides: collect(provides),
@@ -926,7 +875,11 @@ fn layer_signature(
         emits: collect(emits),
         obligations: collect(obligations),
         laws: collect(laws),
-    }
+    };
+    layer
+        .validate()
+        .expect("clean near-end layer signatures should satisfy mirrorea-core invariants");
+    layer
 }
 
 fn principal_claim(
@@ -934,7 +887,7 @@ fn principal_claim(
     claimed_authority: &str,
     claimed_capabilities: &[&str],
 ) -> PrincipalClaim {
-    PrincipalClaim {
+    let claim = PrincipalClaim {
         principal: principal.to_string(),
         participant_place: format!("ParticipantPlace[{principal}]"),
         claimed_authority: claimed_authority.to_string(),
@@ -942,7 +895,11 @@ fn principal_claim(
             .iter()
             .map(|value| (*value).to_string())
             .collect(),
-    }
+    };
+    claim
+        .validate()
+        .expect("clean near-end principal claims should satisfy mirrorea-core invariants");
+    claim
 }
 
 fn message_envelope(
@@ -965,7 +922,7 @@ fn message_envelope(
     notes: &[&str],
 ) -> MessageEnvelope {
     let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
-    MessageEnvelope {
+    let envelope = MessageEnvelope {
         envelope_id: envelope_id.to_string(),
         from_place: from_place.to_string(),
         to_place: to_place.to_string(),
@@ -985,7 +942,11 @@ fn message_envelope(
         witness_refs: collect(witness_refs),
         dispatch_outcome: dispatch_outcome.to_string(),
         notes: collect(notes),
-    }
+    };
+    envelope
+        .validate()
+        .expect("clean near-end message envelopes should satisfy mirrorea-core invariants");
+    envelope
 }
 
 fn visualization_view(
@@ -1052,22 +1013,6 @@ fn telemetry_row(
     }
 }
 
-fn layer_signature_lanes() -> Vec<String> {
-    [
-        "name",
-        "requires",
-        "provides",
-        "transforms",
-        "checks",
-        "emits",
-        "obligations",
-        "laws",
-    ]
-    .into_iter()
-    .map(|lane| lane.to_string())
-    .collect()
-}
-
 fn visualization_view_lanes() -> Vec<String> {
     [
         "view_name",
@@ -1107,40 +1052,6 @@ fn telemetry_row_lanes() -> Vec<String> {
     .into_iter()
     .map(|lane| lane.to_string())
     .collect()
-}
-
-fn message_envelope_lanes() -> Vec<String> {
-    [
-        "envelope_id",
-        "from_place",
-        "to_place",
-        "transport",
-        "transport_medium",
-        "transport_seam",
-        "payload_kind",
-        "payload_ref",
-        "principal_claim",
-        "auth_evidence",
-        "emitter_principal",
-        "membership_epoch",
-        "member_incarnation",
-        "freshness_checks",
-        "capability_requirements",
-        "authorization_checks",
-        "witness_refs",
-        "dispatch_outcome",
-        "notes",
-    ]
-    .into_iter()
-    .map(|lane| lane.to_string())
-    .collect()
-}
-
-fn auth_evidence_lanes() -> Vec<String> {
-    ["kind", "subject", "issuer", "bindings", "notes"]
-        .into_iter()
-        .map(|lane| lane.to_string())
-        .collect()
 }
 
 fn signature_lanes() -> Vec<String> {
@@ -1297,17 +1208,7 @@ fn insert_closeout_layer_signature(
     signatures: &mut BTreeMap<String, LayerSignature>,
     layer: LayerSignature,
 ) -> Result<(), CleanNearEndError> {
-    match signatures.get(&layer.name) {
-        None => {
-            signatures.insert(layer.name.clone(), layer);
-            Ok(())
-        }
-        Some(existing) if existing == &layer => Ok(()),
-        Some(existing) => Err(CleanNearEndError::new(format!(
-            "conflicting LayerSignature closeout row for `{}`: existing={existing:?} new={layer:?}",
-            layer.name
-        ))),
-    }
+    insert_layer_signature(signatures, layer).map_err(|err| CleanNearEndError::new(err.to_string()))
 }
 
 fn closeout_layer_signatures() -> Result<Vec<LayerSignature>, CleanNearEndError> {
@@ -3018,9 +2919,7 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
 
 #[cfg(test)]
 mod tests {
-    use super::{
-        insert_closeout_layer_signature, CleanNearEndError, LayerSignature,
-    };
+    use super::{CleanNearEndError, LayerSignature, insert_closeout_layer_signature};
     use std::collections::BTreeMap;
 
     fn sample_layer_signature(obligations: &[&str]) -> LayerSignature {
@@ -3031,7 +2930,10 @@ mod tests {
             transforms: vec!["runtime events -> verification evidence".to_string()],
             checks: vec!["checked_under:sequential_consistency".to_string()],
             emits: vec!["verification_result:pass".to_string()],
-            obligations: obligations.iter().map(|value| (*value).to_string()).collect(),
+            obligations: obligations
+                .iter()
+                .map(|value| (*value).to_string())
+                .collect(),
             laws: vec!["residual_obligations_are_explicit".to_string()],
         }
     }

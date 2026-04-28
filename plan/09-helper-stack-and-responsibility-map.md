@@ -88,6 +88,7 @@ run_directory_named_profile
   - clean near-end closeout `message_envelope_scope` / `message_envelope_lanes` / `auth_evidence_lanes` / `auth_evidence_kinds` / `transport_mediums` / `transport_seams`
   を helper-local / report-local evidence inventory として見せてよい。
   - current line では helper active medium inventory と runtime canonical seam inventory を分け、`transport_medium` / `transport_seam` / `emitter_principal` / `freshness_checks` を first-class lane に上げてよい。
+  - `P10` `mirrorea-core` first real implementation tranche 後は、Rust 側の `LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation の ownership は `crates/mirrorea-core` に置き、`crates/mir-runtime/src/clean_near_end.rs` は current report-local assembly と closeout inventory を担う。
   - これは final public message schema、final public auth protocol、final public transport contract を意味しない。
 - current sample-visible visualization / telemetry cut では、
   - Sugoroku helper `run_sample()` payload の `visualization_views` / `telemetry_rows`

@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 13:37 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P9` avatar fairy follow hardening で `FAIRY-05` reopen gate / planned path inventory を fixed し、`P10` `mirrorea-core` first real implementation tranche へ進める
-Current active packages: `P10` `mirrorea-core` first real implementation tranche
+Last updated: 2026-04-28 14:22 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P10` `mirrorea-core` first real implementation tranche を close し、`LayerSignature` / `PrincipalClaim` / `AuthEvidence` / `MessageEnvelope` narrow carrier を core crate へ actualize した上で、`P11` logical multi-place runtime tranche の ownership cut 候補を調べ始める
+Current active packages: `P11` logical multi-place runtime tranche
 
 ## Legend
 
@@ -38,9 +38,9 @@ Progress:
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 13:37 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956` | source hierarchy と report discipline の current floor |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 14:22 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959` | source hierarchy と report discipline の current floor |
 | `PH1` | Mir core | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | final parser / public API deferred |
-| `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 03:27 JST | `0904`, `0913`, `0945` | public shell / packaging deferred |
+| `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 14:22 JST | `0904`, `0913`, `0945`, `0959` | public shell / packaging deferred。`P10` で `mirrorea-core` minimal carrier ownership cut と `transport == transport_seam` compatibility invariant が actualize 済み |
 | `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-28 13:09 JST | `0909`, `0916`, `0931`, `0945`, `0955` | runtime attach floor + helper-local attachpoint compatibility / activation evidence。current closeout では `world_surface` と `MembershipRegistry` source-of-truth の anchor にもなる |
 | `SUG-03` | Sugoroku runtime | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-04-28 13:09 JST | `0909`, `0916`, `0918`, `0919`, `0942`, `0945`, `0950`, `0952`, `0954`, `0955` | roll -> publish -> witness -> handoff。`TermSignature` / `LayerSignature` inventory、projection preview、visualization security envelope の基準点であり、current P8 close では handoff target activity boundary の anchor でもある |
 | `SUG-05` | shared-space membership | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | active runnable E2E | 90 | positive | 2026-04-28 13:09 JST | `0909`, `0916`, `0919`, `0945`, `0955` | membership timeline anchor。published history visible before turn-order insertion の closeout wording anchor |
@@ -115,6 +115,14 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-28 14:22 JST | `cargo test -p mirrorea-core` | pass | `mirrorea-core` carrier suite 7/7 green。`transport == transport_seam` compatibility-only alias invariant regression を追加 |
+| 2026-04-28 14:22 JST | `cargo test -p mir-runtime` | pass | runtime crate floor 全体 green。clean near-end 27/27、current-L2 runtime / lowering / verification ladder regression を含む |
+| 2026-04-28 14:22 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples scripts.tests.test_avatar_follow_samples` | pass | helper Sugoroku + avatar suites 52 tests green |
+| 2026-04-28 14:22 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | helper closeout は logical multi-place emulator / `MembershipRegistry` source-of-truth / representative `LayerSignature` inventory を current line のまま返す |
+| 2026-04-28 14:22 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | runtime closeout は canonical `message_envelope_lanes` / `auth_evidence_lanes` / `layer_signature_lanes` を `mirrorea-core` shape と整合させたまま返す |
+| 2026-04-28 14:22 JST | `python3 scripts/check_source_hierarchy.py` | pass | `P10` report / follow-up edits後も required hierarchy is intact |
+| 2026-04-28 14:22 JST | `python3 scripts/validate_docs.py` | pass | front-door / snapshot docs は `P10` close / `P11` next line と整合 |
+| 2026-04-28 14:22 JST | `git diff --check` | pass | `P10` closeout diff は whitespace-clean |
 | 2026-04-28 13:37 JST | `python3 -m unittest scripts.tests.test_avatar_follow_samples -v` | pass | helper avatar suite 13/13 green。`fairy05_reopen_gate`、`planned_sample_paths`、missing planned-path fail-fast regression を含む |
 | 2026-04-28 13:37 JST | `python3 scripts/avatar_follow_samples.py check-all --format json` | pass | active canaries 5/5 green |
 | 2026-04-28 13:37 JST | `python3 scripts/avatar_follow_samples.py closeout --format json` | pass | helper closeout は `planned_sample_paths` と `fairy05_reopen_gate` を返し、missing planned path は fail-fast する |

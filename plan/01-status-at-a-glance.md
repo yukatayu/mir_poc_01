@@ -6,7 +6,7 @@
 - current active sample suite は `samples/clean-near-end/`
 - Sugoroku world vertical slice は `samples/clean-near-end/sugoroku-world/` と `scripts/sugoroku_world_samples.py` で runnable
 - `samples_progress.md` は phase 0〜16 の runnable sample dashboard として current snapshot に入る
-- `crates/mirrorea-core` と `crates/mirrorea-control` は subsystem boundary を明示する placeholder skeleton であり、production logic はまだ入っていない
+- `crates/mirrorea-core` は subsystem boundary を明示する current minimal carrier crate であり、`LayerSignature` / `PrincipalClaim` / `AuthEvidence` / `MessageEnvelope` と lane inventory / invariant helper を持つ。`crates/mirrorea-control` は引き続き placeholder skeleton である
 - Mirrorea / PrismCascade / Typed-Effect Wiring Platform は separable track として扱う
 
 ## current executable floor
@@ -118,15 +118,15 @@
 - `docs/reports/0946-*` で `P2` Typed external boundary residual planned family review を close し、typed external helper の pretty `list` / `check-all` / `closeout` bug を修正した上で residual reopen matrix を current repo に actualize した
 - `docs/reports/0950-*` で `P4` `TermSignature` registry hardening を close し、helper / runtime closeout の `signature_lanes` / `signature_scope` / `signature_evidence_roles`、active kind family、reserved kind split を current repo に actualize した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
-- next promoted package は `P10` `mirrorea-core` first real implementation tranche
-- next reopen point は `P11` logical multi-place runtime tranche
+- next promoted package は `P11` logical multi-place runtime tranche
+- next reopen point は `P12` external adapter / host boundary tranche
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout、`P6` `MessageEnvelope / AuthEvidence` seam hardening closeout、`P7` `VisualizationProtocol / VisualizationSecurity` hardening closeout、`P8` Sugoroku runtime attach hardening closeout、`P9` avatar fairy follow hardening closeout を先に入れた上で、next promoted package を `P10` `mirrorea-core` first real implementation tranche と読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout、`P6` `MessageEnvelope / AuthEvidence` seam hardening closeout、`P7` `VisualizationProtocol / VisualizationSecurity` hardening closeout、`P8` Sugoroku runtime attach hardening closeout、`P9` avatar fairy follow hardening closeout、`P10` `mirrorea-core` first real implementation tranche closeout を先に入れた上で、next promoted package を `P11` logical multi-place runtime tranche と読む
 - `docs/reports/0933-*` で `Avatar fairy follow residual widening` を close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた
 - `docs/reports/0934-*` で `cross-package sweep` を close し、active evidence / planned family / mixed gate / next queue の current reading を recut した
 - `docs/reports/0939-*` で `FAIRY-05 residual reacquire design` を docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを固定した
@@ -134,7 +134,7 @@
 - `docs/reports/0945-mirrorea-next-stage-plan-integration.md` で next-stage future-plan integration / next package queue stabilization を close し、handoff 由来の project axis、source hierarchy、queue numbering、snapshot docs を current repo へ再同期した
 - phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
 - closed chain の current reading は、`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、phase 9 typed external docs-first / synthetic preview widening、`P2` typed external residual reopen matrix closeout、phase 12 projection docs-first / preview widening、phase 13 transport canary、phase 14 hot-plug lifecycle canary、phase 16 backend/LLVM guardrail、phase 8 avatar representative slice / residual design closeout までである
-- current next line は `P10` `mirrorea-core` first real implementation tranche、その reopen point は `P11` logical multi-place runtime tranche と読む
+- current next line は `P11` logical multi-place runtime tranche、その reopen point は `P12` external adapter / host boundary tranche と読む
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

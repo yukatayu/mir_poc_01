@@ -1,3 +1,5 @@
+use mirrorea_core::{auth_evidence_lanes, layer_signature_lanes, message_envelope_lanes};
+
 use mir_runtime::clean_near_end::{
     build_clean_near_end_closeout, build_clean_near_end_matrix, run_clean_near_end_sample,
 };
@@ -144,26 +146,16 @@ fn clean_near_end_matrix_counts_all_families() {
 #[test]
 fn clean_sample_delegated_rng_service_emits_term_signatures() {
     let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
-    assert!(
-        report
-            .term_signatures
-            .iter()
-            .any(|signature| {
-                signature.kind == "effect"
-                    && signature.name == "rng"
-                    && signature.evidence_role == "source_decl"
-            })
-    );
-    assert!(
-        report
-            .term_signatures
-            .iter()
-            .any(|signature| {
-                signature.kind == "effect"
-                    && signature.name == "rng"
-                    && signature.evidence_role == "effect_row_constraint"
-            })
-    );
+    assert!(report.term_signatures.iter().any(|signature| {
+        signature.kind == "effect"
+            && signature.name == "rng"
+            && signature.evidence_role == "source_decl"
+    }));
+    assert!(report.term_signatures.iter().any(|signature| {
+        signature.kind == "effect"
+            && signature.name == "rng"
+            && signature.evidence_role == "effect_row_constraint"
+    }));
     assert!(
         report
             .term_signatures
@@ -264,6 +256,7 @@ fn clean_sample_delegated_rng_service_emits_message_envelopes() {
         .iter()
         .find(|envelope| envelope.envelope_id == "provider_request#1")
         .expect("provider request envelope");
+    assert_eq!(envelope.transport, envelope.transport_seam);
     assert_eq!(envelope.auth_evidence, None);
     assert_eq!(envelope.transport_medium, None);
     assert_eq!(envelope.transport_seam, "provider_boundary");
@@ -293,6 +286,7 @@ fn clean_sample_delegated_rng_service_emits_message_envelopes() {
         .iter()
         .find(|envelope| envelope.envelope_id == "provider_receipt#1")
         .expect("provider receipt envelope");
+    assert_eq!(provider_receipt.transport, provider_receipt.transport_seam);
     assert_eq!(provider_receipt.emitter_principal, "AuthorityRng");
     assert_eq!(provider_receipt.principal_claim.principal, "Alice");
 }
@@ -305,6 +299,7 @@ fn clean_sample_authority_witness_emits_auth_envelope() {
         .iter()
         .find(|envelope| envelope.envelope_id == "audit_trace_request#1")
         .expect("audit trace envelope");
+    assert_eq!(envelope.transport, envelope.transport_seam);
     assert_eq!(envelope.dispatch_outcome, "accepted");
     assert_eq!(envelope.auth_evidence, None);
     assert_eq!(envelope.principal_claim.principal, "Alice");
@@ -399,7 +394,10 @@ fn clean_sample_authority_witness_emits_telemetry_row() {
         .expect("audit trace telemetry row");
     assert_eq!(row.row_kind, "message_dispatch");
     assert_eq!(row.label, "report:audit-trace");
-    assert_eq!(row.authority, "ObserveAuthorityTrace(AuditPlace[AuthorityTrace])");
+    assert_eq!(
+        row.authority,
+        "ObserveAuthorityTrace(AuditPlace[AuthorityTrace])"
+    );
     assert_eq!(row.redaction, "dispatch_outcome_only");
     assert_eq!(row.retention_scope, "report_local_inventory");
     assert_eq!(row.channel, "audit_trace_boundary");
@@ -600,6 +598,14 @@ fn clean_near_end_closeout_records_message_envelope_inventory() {
             .reserved_transport_mediums
             .contains(&"loopback_socket".to_string())
     );
+    assert_eq!(closeout.message_envelope_lanes, message_envelope_lanes());
+    assert_eq!(closeout.auth_evidence_lanes, auth_evidence_lanes());
+}
+
+#[test]
+fn clean_near_end_closeout_reuses_mirrorea_core_layer_inventory_shape() {
+    let closeout = build_clean_near_end_closeout().unwrap();
+    assert_eq!(closeout.layer_signature_lanes, layer_signature_lanes());
 }
 
 #[test]
