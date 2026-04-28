@@ -182,3 +182,90 @@ fn logical_place_runtime_shell_rejects_member_place_with_non_participant_kind() 
     assert!(err.to_string().contains("WorldServerPlace"));
     assert!(err.to_string().contains("ParticipantPlace"));
 }
+
+#[test]
+fn logical_place_runtime_shell_add_initial_participant_registers_place() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .register_place("WorldServerPlace", "WorldServerPlace")
+        .expect("world server");
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial participant");
+
+    let snapshot = shell.snapshot();
+    assert_eq!(
+        snapshot.place_catalog.places["ParticipantPlace[Alice]"],
+        "ParticipantPlace"
+    );
+    assert_eq!(snapshot.membership.membership_epoch, 0);
+    assert!(snapshot.membership.members["Alice"].active);
+}
+
+#[test]
+fn logical_place_runtime_shell_add_and_leave_participant_follow_membership_boundary() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial participant");
+
+    let joined = shell.add_participant("Bob").expect("late join Bob");
+    assert_eq!(joined.joined_at_epoch, 1);
+    assert!(joined.active);
+
+    let left = shell.leave_participant("Bob").expect("Bob leaves");
+    assert!(!left.active);
+    assert_eq!(left.incarnation, 1);
+    assert_eq!(left.left_at_epoch, Some(2));
+
+    let snapshot = shell.snapshot();
+    assert_eq!(
+        snapshot.place_catalog.places["ParticipantPlace[Bob]"],
+        "ParticipantPlace"
+    );
+    assert_eq!(snapshot.membership.membership_epoch, 2);
+    assert!(!snapshot.membership.members["Bob"].active);
+}
+
+#[test]
+fn logical_place_runtime_shell_participant_helpers_are_failure_atomic() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial participant");
+    shell.add_participant("Bob").expect("late join Bob");
+
+    let err = shell
+        .add_initial_participant("Carol")
+        .expect_err("bootstrap helper should fail after epoch advance");
+    assert!(err.to_string().contains("bootstrap-only"));
+
+    let snapshot = shell.snapshot();
+    assert!(
+        !snapshot
+            .place_catalog
+            .places
+            .contains_key("ParticipantPlace[Carol]")
+    );
+    assert!(!snapshot.membership.members.contains_key("Carol"));
+}
+
+#[test]
+fn logical_place_runtime_shell_rejects_duplicate_participant_without_epoch_drift() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial participant");
+
+    let err = shell
+        .add_participant("Alice")
+        .expect_err("duplicate principal should fail");
+    assert!(err.to_string().contains("already exists"));
+
+    let snapshot = shell.snapshot();
+    assert_eq!(snapshot.membership.membership_epoch, 0);
+    assert_eq!(
+        snapshot.place_catalog.places["ParticipantPlace[Alice]"],
+        "ParticipantPlace"
+    );
+}

@@ -63,7 +63,7 @@
 | `mir-semantics` | Mir verification substrate | high |
 | `mir-runtime` | current runner / host-facing proof-of-concept boundary | high |
 | `mir-lsp` | visualization / editor-support placeholder | medium |
-| `mirrorea-core` | Mirrorea minimal carrier substrate (`LayerSignature` / `PrincipalClaim` / `AuthEvidence` / `MessageEnvelope` / `MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell`) | medium |
+| `mirrorea-core` | Mirrorea minimal carrier substrate (`LayerSignature` / `PrincipalClaim` / `AuthEvidence` / `MessageEnvelope` / `MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell` / participant lifecycle parity helper) | medium |
 | `mirrorea-control` | Mirrorea control-plane placeholder | medium |
 | `prism-meta` / `prism-core` / `prism-runtime` | PrismCascade separate lane placeholder | medium |
 | `engine-abi` | external adapter / host boundary placeholder | medium |

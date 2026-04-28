@@ -222,6 +222,15 @@ impl LogicalPlaceRuntimeShell {
         self.place_catalog.register(place_id, kind)
     }
 
+    pub fn register_participant_place(
+        &mut self,
+        principal: &str,
+    ) -> Result<String, MirroreaCoreError> {
+        let participant_place = self.participant_place_for(principal)?;
+        self.register_place(&participant_place, PARTICIPANT_PLACE_KIND)?;
+        Ok(participant_place)
+    }
+
     pub fn add_initial_member(
         &mut self,
         principal: &str,
@@ -247,6 +256,31 @@ impl LogicalPlaceRuntimeShell {
         self.membership.mark_inactive(principal)
     }
 
+    pub fn add_initial_participant(&mut self, principal: &str) -> Result<(), MirroreaCoreError> {
+        self.with_registered_participant_place(
+            principal,
+            |membership, principal, participant_place| {
+                membership.add_initial(principal, participant_place)
+            },
+        )
+    }
+
+    pub fn add_participant(&mut self, principal: &str) -> Result<MemberRecord, MirroreaCoreError> {
+        self.with_registered_participant_place(
+            principal,
+            |membership, principal, participant_place| {
+                membership.add_member(principal, participant_place)
+            },
+        )
+    }
+
+    pub fn leave_participant(
+        &mut self,
+        principal: &str,
+    ) -> Result<MemberRecord, MirroreaCoreError> {
+        self.mark_inactive_member(principal)
+    }
+
     pub fn snapshot(&self) -> LogicalPlaceRuntimeSnapshot {
         LogicalPlaceRuntimeSnapshot {
             place_catalog: self.place_catalog.snapshot(),
@@ -269,5 +303,30 @@ impl LogicalPlaceRuntimeShell {
             )));
         }
         Ok(())
+    }
+
+    fn participant_place_for(&self, principal: &str) -> Result<String, MirroreaCoreError> {
+        require_non_empty("LogicalPlaceRuntimeShell", "principal", principal)?;
+        Ok(format!("ParticipantPlace[{principal}]"))
+    }
+
+    fn with_registered_participant_place<R>(
+        &mut self,
+        principal: &str,
+        mutate: impl FnOnce(&mut MembershipRegistry, &str, &str) -> Result<R, MirroreaCoreError>,
+    ) -> Result<R, MirroreaCoreError> {
+        let participant_place = self.participant_place_for(principal)?;
+        let existed = self.place_catalog.kind_of(&participant_place).is_some();
+        self.place_catalog
+            .register(&participant_place, PARTICIPANT_PLACE_KIND)?;
+        match mutate(&mut self.membership, principal, &participant_place) {
+            Ok(result) => Ok(result),
+            Err(err) => {
+                if !existed {
+                    self.place_catalog.places.remove(&participant_place);
+                }
+                Err(err)
+            }
+        }
     }
 }

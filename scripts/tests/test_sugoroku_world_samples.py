@@ -79,6 +79,25 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertFalse(result["Dave"]["in_turn_order"])
         self.assertTrue(result["Dave"]["pending_player"])
 
+    def test_non_owner_leave_invalidates_pending_actions(self) -> None:
+        result = sugoroku_world_samples.run_sample("06_leave_non_owner")
+
+        self.assertEqual(result["terminal_outcome"], "success")
+        self.assertEqual(result["member"], "Carol")
+        self.assertFalse(result["active_after"])
+        self.assertEqual(result["membership_epoch"], 1)
+        self.assertEqual(result["member_incarnation"], 1)
+        self.assertTrue(result["pending_actions_invalidated"])
+
+    def test_owner_leave_reassigns_to_next_active_member(self) -> None:
+        result = sugoroku_world_samples.run_sample("07_owner_leave_reassign")
+
+        self.assertEqual(result["terminal_outcome"], "success")
+        self.assertEqual(result["left_member"], "Bob")
+        self.assertEqual(result["new_dice_owner"], "Alice")
+        self.assertEqual(result["phase_after"], "Running")
+        self.assertEqual(result["membership_epoch"], 2)
+
     def test_model_check_reports_required_properties(self) -> None:
         result = sugoroku_world_samples.model_check()
 
@@ -199,6 +218,16 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("membership_late_join_boundary", layers)
         self.assertIn("membership_epoch", layers["membership_late_join_boundary"]["requires"])
         self.assertIn("membership", layers["membership_late_join_boundary"]["emits"])
+
+    def test_owner_leave_layer_signature_matches_actual_reassignment(self) -> None:
+        result = sugoroku_world_samples.run_sample("07_owner_leave_reassign")
+
+        layers = {row["name"]: row for row in result["layer_signatures"]}
+        self.assertIn("membership_owner_reassignment", layers)
+        self.assertIn(
+            f"dice_owner:Bob->{result['new_dice_owner']}",
+            layers["membership_owner_reassignment"]["transforms"],
+        )
 
     def test_layers_debug_prints_layer_inventory(self) -> None:
         pretty = sugoroku_world_samples.format_pretty(

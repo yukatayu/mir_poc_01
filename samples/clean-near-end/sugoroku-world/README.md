@@ -19,6 +19,21 @@ It demonstrates:
 
 This is not final public parser grammar and does not implement real networking, consensus, durable distributed commit, or final public runtime API.
 
+Current `P11` Rust ownership cut mirrors only the shell-backed membership/place frontier:
+
+- `MembershipRegistry`
+- `PlaceCatalog`
+- participant-place-kind-gated `LogicalPlaceRuntimeShell`
+- shell-backed bootstrap / join / leave parity helper
+
+The sample runner still owns the game-domain aftermath:
+
+- `pending_players`
+- published-history replay
+- pending action invalidation
+- owner reassignment
+- `turn_order`, `dice_owner`, `phase`
+
 ## How to run
 
 ```bash
