@@ -91,6 +91,13 @@ helper schema の widening、runtime-crate engine 実装、final public ABI の�
   post-`P21` later family の first recommendation は
   `plan/36-post-p21-rollback-durable-migration-family.md`
   を入口にした `rollback / durable migration` family hardening と読む
+- current repo state では
+  second recommendation も
+  `plan/37-post-p21-distributed-activation-ordering-family.md`
+  を入口にした docs-first hardening として close 済みである
+- current remaining third recommendation は
+  final public hot-plug ABI であり、
+  post-`P18` mixed gate / `U1` hold line に残す
 
 ## validation floor
 

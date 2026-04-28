@@ -40,8 +40,9 @@
   - `P16` visual debugger / viewer first public prototype の current first-cut closeout も close 済みであり、`scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を actualize 済み
   - `P15-P17` は first real implementation tranche closeout 済み
   - `P18` repo-side first cut も close 済みであり、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize 済み
-  - `P21` runtime-crate hot-plug completed-engine narrow cut は close 済みであり、rollback / durable migration / distributed activation ordering / final public ABI の exact next label は intentionally unfixed の grouped later family として残す
-  - current self-driven first recommendation は `rollback / durable migration` family hardening であり、`distributed activation ordering` と final public ABI は後段に残す
+  - `P21` runtime-crate hot-plug completed-engine narrow cut は close 済みであり、exact next label は intentionally unfixed のまま保つ
+  - `rollback / durable migration` family hardening は first recommendation close 済みであり、`distributed activation ordering` family hardening も second recommendation close 済みである
+  - current remaining third recommendation は final public hot-plug ABI であり、post-`P18` mixed gate / `U1` hold line の dependency を保ったまま後段に残す
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

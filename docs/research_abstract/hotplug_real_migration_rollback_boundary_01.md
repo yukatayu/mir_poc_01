@@ -45,15 +45,20 @@ helper floor は widening しません。
 `migration_contract` は protocol ではなく unresolved-state honesty lane として読みます。
 historical next relation at `R4` close time では、helper-local preview と crate-side runtime ownership を分ける
 `R5` runtime-crate hot-plug engine ownership cut を読むのが自然でした。
-current repo state では `R5` / `R6` / `P19` / `P20` / `R7` / `P21` も close 済みです。`R7` close time では `P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として読んでいましたが、現在は exact next label intentionally unfixed のまま rollback / durable migration、distributed activation ordering、final public hot-plug ABI を grouped later family に残します。
-current self-driven first recommendation は、
+current repo state では `R5` / `R6` / `P19` / `P20` / `R7` / `P21` も close 済みです。`R7` close time では `P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として読んでいましたが、現在は exact next label intentionally unfixed のまま later family を順序つきで読みます。
+current self-driven first recommendation は
 `../../plan/36-post-p21-rollback-durable-migration-family.md`
-を入口にした `rollback / durable migration` family hardening です。
+を入口にした `rollback / durable migration` family hardeningであり、
+current self-driven second recommendation は
+`../../plan/37-post-p21-distributed-activation-ordering-family.md`
+を入口にした `distributed activation ordering` family hardeningです。
+current remaining third recommendation は final public hot-plug ABI です。
 
 ## 関連
 
 - `../hands_on/hotplug_real_migration_rollback_boundary_01.md`
 - `../../plan/32-hotplug-real-migration-rollback-boundary.md`
 - `../../plan/36-post-p21-rollback-durable-migration-family.md`
+- `../../plan/37-post-p21-distributed-activation-ordering-family.md`
 - `attachpoint_detach_minimal_contract_01.md`
 - `hotplug_attachpoint_plan_01.md`

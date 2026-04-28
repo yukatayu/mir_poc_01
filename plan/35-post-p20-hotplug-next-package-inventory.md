@@ -147,6 +147,26 @@ final public hot-plug ABI はここで actualize しない。
   を入口にした
   `rollback / durable migration` family hardening と読む
 
+## current repo reading after docs-first later-family hardening
+
+- `plan/36-post-p21-rollback-durable-migration-family.md`
+  により、
+  `rollback / durable migration` family hardening は
+  first recommendation close 済みである
+- `plan/37-post-p21-distributed-activation-ordering-family.md`
+  により、
+  `distributed activation ordering` family hardening は
+  second recommendation close 済みである
+- current remaining third recommendation は
+  final public hot-plug ABI であり、
+  post-`P18` mixed gate / `U1` hold line の dependency を保つ
+- `R7` の grouped-later memory は historical recommendation として残すが、
+  current snapshot では
+  `rollback / durable migration`
+  `distributed activation ordering`
+  `final public hot-plug ABI`
+  を順序つき later-family reading として扱う
+
 ## validation floor
 
 - `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json`

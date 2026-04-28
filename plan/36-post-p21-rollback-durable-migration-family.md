@@ -89,6 +89,9 @@ later family のうち、
   と読む
 - `distributed activation ordering` は second recommendation とし、
   `activation_cut` widening criteria の package に残す
+- second recommendation family の current repository memory は
+  `plan/37-post-p21-distributed-activation-ordering-family.md`
+  を参照する
 - `final public hot-plug ABI` は third recommendation とし、
   post-`P18` mixed gate / `U1` hold line に残す
 - `AttachPoint` / `Patch` packaging identity は
@@ -120,3 +123,4 @@ later family のうち、
 - `plan/28-post-p18-true-user-spec-hold-option-matrix.md`
 - `plan/32-hotplug-real-migration-rollback-boundary.md`
 - `plan/35-post-p20-hotplug-next-package-inventory.md`
+- `plan/37-post-p21-distributed-activation-ordering-family.md`
