@@ -48,7 +48,8 @@
 - `docs/reports/0974-*` は `U1` post-`P18` true user-spec hold option matrix closeout を表し、`plan/28-post-p18-true-user-spec-hold-option-matrix.md`、reader-facing summary、landing page、snapshot blocker matrix により packaging / host target / shipped-surface / final-catalog breadth の option inventory を current line に actualize した
 - `docs/reports/0975-*` は `R1` `VerificationLayer` widening threshold inventory first cut を表し、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor と widening threshold matrix を `plan/29` と reader-facing docs に actualize した
 - `docs/reports/0976-*` は `R1` closeout trail と `R2` promoted-next sync を表し、research landing stale drift、`progress.md` recent log、`samples_progress.md` `PH0` row、report trail completion を current line に actualize した
-- current promoted next line は `R2` `AttachPoint` compatibility / detach minimal contract
+- `docs/reports/0977-*` は `R2` `AttachPoint` compatibility / detach minimal contract closeout を表し、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row、grounding anchor、kept-later migration / rollback gate を `plan/30` と reader-facing docs に actualize した
+- current promoted next line は `R3` `FAIRY-05` visibility-return carrier bundling
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -73,7 +74,9 @@
 8. `R1` `VerificationLayer` widening threshold inventory
    - close 済み。helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor、theorem / runtime-policy / visualization downstream stop line、`plan/29` current reading を fixed した
 9. `R2` `AttachPoint` compatibility / detach minimal contract
-   - active。helper-local `hotplug_lifecycle` / explicit detach TODO boundary を current evidence floor に保ったまま minimal contract row と kept-later migration / rollback gate を docs-first に整理する
+   - close 済み。helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を docs-first に固定した
+10. `R3` `FAIRY-05` visibility-return carrier bundling
+   - active。active representative slice を保ったまま residual planned family `FAIRY-05` の carrier choice を docs-first に整理する
 
 ## mixed gate
 

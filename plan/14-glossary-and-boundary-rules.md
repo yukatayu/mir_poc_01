@@ -80,6 +80,23 @@
 - current shared lane inventory は `kind / subject / issuer / bindings / notes`
 - current helper-local baseline は `auth none` だが、final public kind / session / signature protocol は未決
 
+### AttachPoint
+
+- `Patch` が attach / detach される lifecycle boundary を current repo で説明するための語
+- current docs-first line では package-manager concern として読み、
+  helper-local attach / detach evidence と final public hot-plug ABI を分けて扱う
+- runtime-crate hot-plug engine、rollback protocol、durable migration engine を
+  既成事実化する語ではない
+
+### hotplug_lifecycle
+
+- helper-local attach / detach current evidence を束ねる summary carrier
+- current lane inventory は
+  `attachpoint_id / patch_id / lifecycle_state / compatibility / activation_cut / detach_boundary / migration_contract`
+- `MessageEnvelope` 由来の evidence summary であり、final public hot-plug ABI ではない
+- grounding carrier は accepted / rejected `MessageEnvelope` と layer / view / telemetry anchor に残す
+- storage detach script と runtime detach lifecycle を同一視しない
+
 ### VisualizationProtocol
 
 - static view / runtime view / label / authority / redaction / retention / typed telemetry を含む可視化 carrier の current explanation 語彙

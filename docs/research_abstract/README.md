@@ -30,6 +30,7 @@
 - `public_api_parser_gate_plan_01.md`
 - `post_p18_true_user_spec_hold_option_matrix_01.md`
 - `verification_layer_widening_threshold_01.md`
+- `attachpoint_detach_minimal_contract_01.md`
 - `typed_external_boundary_adapter_plan_01.md`
 - `projection_placement_plan_01.md`
 - `hotplug_attachpoint_plan_01.md`
@@ -117,7 +118,8 @@
 - `P18` public API / parser grammar gate の repo-side first cut も close 済みであり、`plan/27-public-api-parser-gate-roadmap.md` と `public_api_parser_gate_plan_01.md` を current public-boundary inventory / mixed-gate split の anchor にする
 - post-`P18` true user-spec hold line は `post_p18_true_user_spec_hold_option_matrix_01.md` と `plan/28-post-p18-true-user-spec-hold-option-matrix.md` を入口にし、actual commitment は still later に残す
 - `R1` closeout memory は `verification_layer_widening_threshold_01.md` と `plan/29-verification-layer-widening-threshold.md` を入口にし、helper/runtime verification lane の current emitted floor と widening threshold matrix を reader-facing に残す
-- current promoted next line `R2` `AttachPoint` compatibility / detach minimal contract は `hotplug_attachpoint_plan_01.md` と `plan/21-hotplug-attachpoint-roadmap.md` を入口にし、helper-local `hotplug_lifecycle` / explicit detach TODO boundary を current evidence floor に保ったまま minimal contract row を docs-first に整理する
+- `R2` closeout memory は `attachpoint_detach_minimal_contract_01.md` と `plan/30-attachpoint-detach-minimal-contract.md` を入口にし、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を reader-facing に残す
+- current promoted next line `R3` `FAIRY-05` visibility-return carrier bundling は `avatar_fairy_follow_plan_01.md` と `plan/24-avatar-follow-representative-slice-roadmap.md` を入口にし、active representative slice を保ったまま residual planned family の carrier choice を docs-first に narrow にする
 - `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
 - avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で widened active representative slice を持つ
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、現在は `FAIRY-05` reacquire-after-return だけを残す reader-facing plan anchor である

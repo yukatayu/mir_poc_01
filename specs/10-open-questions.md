@@ -203,6 +203,16 @@
      - 2026-04-27 時点で docs-first plan と helper-local executable widening は actualize した。
        `plan/21-hotplug-attachpoint-roadmap.md` により、compatibility checklist、activation cut、migration stop line、
        `SUG-01` attach / `SUG-09` detach TODO boundary、`hotplug_lifecycle` / `--debug hotplug` / `detach_request#1` auth-none canary までは current line に上げてよい。
+     - 2026-04-28 時点で `R2` docs-first closeout として、
+       `plan/30-attachpoint-detach-minimal-contract.md` により helper-local `hotplug_lifecycle` を
+       `MessageEnvelope` 由来の evidence summary として固定し、
+       `compatibility / activation_cut / detach_boundary / migration_contract` の minimal contract row、
+       `attach_request#1 / detach_request#1 / detached_roll_request#1` grounding、
+       `attach_lifecycle / detach_lifecycle` view anchor、
+       `attach_activation#1 / detach_boundary#1` telemetry anchor、
+       storage detach != runtime detach lifecycle の non-equivalence、
+       kept-later gate `runtime_crate_hotplug_engine / rollback_protocol / durable_migration_engine / final_public_hotplug_abi`
+       までは current line に上げてよい。
      - 未決なのは final hot-plug ABI、rollback、durable state migration engine である。
   7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。
      - 2026-04-27 時点で active representative slice は `FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06`、residual planned family は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-05` に固定した。

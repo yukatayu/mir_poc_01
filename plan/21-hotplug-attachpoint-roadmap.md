@@ -88,6 +88,35 @@ current helper closeout に
 を actualize してよい。
 これは helper-local package-manager first-cut closeout であり、runtime crate hot-plug engine や completed migration actualization ではない。
 
+## 2026-04-28 R2 minimal-contract closeout note
+
+`R2` では、`P14` closeout inventory の上に
+`AttachPoint` current minimal contract row を narrow に整理した。
+
+fixed current reading:
+
+- helper-local `hotplug_lifecycle` は `MessageEnvelope` 由来の evidence summary であり、
+  final public hot-plug ABI ではない
+- current minimal contract row は
+  `compatibility / activation_cut / detach_boundary / migration_contract`
+  の 4 row に限る
+- `attachpoint_id` / `patch_id` は identity column として残し、
+  row を `attach_request#1` / `detach_request#1` / `detached_roll_request#1`、
+  `attach_lifecycle` / `detach_lifecycle`、
+  `attach_activation#1` / `detach_boundary#1` に grounded に読む
+- `attach_request#1` accepted は requested attach と active state mutation を分ける
+- `detached_roll_request#1` rejected は detach 後 domain action rejection の
+  explicit boundary evidence であり、completed rollback ではない
+- `migration_contract` row は current unresolved gate を evidence として残し、
+  `runtime_crate_hotplug_engine / rollback_protocol / durable_migration_engine / final_public_hotplug_abi`
+  は kept-later gate に残す
+
+reader-facing current memory は
+`plan/30-attachpoint-detach-minimal-contract.md`、
+`docs/research_abstract/attachpoint_detach_minimal_contract_01.md`、
+`docs/hands_on/attachpoint_detach_minimal_contract_01.md`
+を参照する。
+
 ## next relation
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。

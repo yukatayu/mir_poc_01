@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 21:07 JST
+最終更新: 2026-04-28 21:19 JST
 
 ## この文書について
 
@@ -20,7 +20,7 @@
 - `P15` projection/codegen first emitted place-specific programs の current first cut は close 済みで、`scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` によって committed generated bridge evidence / live-anchor alignment / `kept_later_gates` を current line に actualize 済みです。
 - `P16` visual debugger / viewer first public prototype の current first cut は close 済みで、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`kept_later_gates` によって typed public prototype inventory over helper/runtime surfaces を current line に actualize 済みです。
 - `P17` storage / LLVM / backend preparation の current first cut も close 済みで、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` によって external workdir / cleanup / LLVM staging ownership mismatch を non-destructive probe floor として current line に actualize 済みです。
-- current promoted next line は **`R2` `AttachPoint` compatibility / detach minimal contract** です。
+- current promoted next line は **`R3` `FAIRY-05` visibility-return carrier bundling** です。
 - next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
@@ -61,7 +61,8 @@
 | `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | closed (repo-side first cut) | closed for repo-side scope | freeze checklist / public-boundary inventory / hold-line split fixed; final freeze remains last |
 | `U1` post-`P18` true user-spec hold option matrix | `Macro 8` prep | `S0 -> S2` | closed | closed | packaging / host target / shipped-surface / final-catalog options を decision-ready に整理した |
 | `R1` `VerificationLayer` widening threshold inventory | `Macro 8` prep | `S0 -> S2` | closed | closed | helper/runtime verification lanes の widening threshold matrix と stop lineを docs-first に固定した |
-| `R2` `AttachPoint` compatibility / detach minimal contract | `Macro 8` prep | `S0 -> S2` | active (docs-first) | ~1 task | helper-local `hotplug_lifecycle` / explicit detach TODO boundary を current evidence floor に保ったまま、minimal contract row を narrow に整理する |
+| `R2` `AttachPoint` compatibility / detach minimal contract | `Macro 8` prep | `S0 -> S2` | closed | closed | helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を docs-first に固定した |
+| `R3` `FAIRY-05` visibility-return carrier bundling | `Macro 8` prep | `S0 -> S2` | active (docs-first) | ~1 task | active representative slice を保ったまま residual planned family `FAIRY-05` の carrier choice を narrow に整理する |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -624,7 +625,7 @@
 ### R2. `AttachPoint` compatibility / detach minimal contract
 
 - status:
-  active。`P14` helper-local package-manager first-cut closeout と `plan/21-hotplug-attachpoint-roadmap.md` の current memory を前提に、次は helper-local `hotplug_lifecycle` / explicit detach TODO boundary を current evidence floor に保ったまま、compatibility / activation_cut / detach_boundary / migration_contract の minimal contract row を docs-first に narrow に整理する。
+  close 済み。`P14` helper-local package-manager first-cut closeout と `plan/21-hotplug-attachpoint-roadmap.md` の current memory を前提に、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row、grounding envelope / view / telemetry anchor、kept-later migration / rollback gate を `plan/30` と reader-facing docs に固定した。
 
 - macro phase / stage:
   `Macro 8` prep, `S0 -> S2`
@@ -645,6 +646,34 @@
   新しい report、relevant `plan/` / docs / snapshot の同期
 - stop line:
   runtime crate hot-plug engine、rollback protocol、durable migration engine、final public hot-plug ABI、storage detach と runtime detach の collapse を premature に固定しない
+
+### R3. `FAIRY-05` visibility-return carrier bundling
+
+- status:
+  active。`P9` helper closeout `fairy05_reopen_gate` と `plan/24-avatar-follow-representative-slice-roadmap.md` の current memory を前提に、active representative slice を保ったまま residual planned family `FAIRY-05` の carrier choice を docs-first に narrow に整理する。
+
+- macro phase / stage:
+  `Macro 8` prep, `S0 -> S2`
+- objective:
+  explicit `state_timeline` / `anchor_switch` evidence requirement を保ったまま、visibility-return witness を timeline event / anchor-switch event / witness event / typed bundle のどこへ載せるかを narrow にし、sample 自体の active promotion と final public avatar / visualization API を増やさずに current carrier matrix を明文化する
+- deliverables:
+  carrier-choice matrix、active representative slice と residual planned family の boundary 再確認、planning-only candidate label と current helper debug surface の非同一視、reader-facing summary
+- validation command:
+  `python3 -m unittest scripts.tests.test_avatar_follow_samples`
+  `python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json`
+  `python3 scripts/avatar_follow_samples.py run 02_remote_head_not_visible_falls_back_to_local --debug anchors --format json`
+  `python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json`
+  `python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json`
+  `python3 scripts/avatar_follow_samples.py closeout --format json`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
+- debug / visualization output:
+  avatar helper `planned_sample_paths`、`fairy05_reopen_gate`、`--debug anchors`、`--debug membership`、`--debug verification`
+- docs / report requirement:
+  新しい report、relevant `plan/` / docs / snapshot の同期
+- stop line:
+  `FAIRY-05` を evidence なしに active runnable widening へ昇格させない。planning-only candidate label を current public debug mode と混同しない。final public avatar / visualization API や real transport / session / auth semantics へ飛ばない
 
 ## research を通して見つけること
 

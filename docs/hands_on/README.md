@@ -21,6 +21,8 @@
   - `U1` post-`P18` true user-spec hold option matrix の最短入口
 - `verification_layer_widening_threshold_01.md`
   - `R1` VerificationLayer widening-threshold inventory の最短入口
+- `attachpoint_detach_minimal_contract_01.md`
+  - `R2` AttachPoint compatibility / detach minimal contract の最短入口
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`
