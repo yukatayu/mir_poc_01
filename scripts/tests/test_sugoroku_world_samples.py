@@ -133,8 +133,19 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         result = sugoroku_world_samples.closeout()
 
         self.assertIn("--debug signatures", result["debug_output_modes"])
+        self.assertEqual(
+            result["signature_lanes"],
+            ["kind", "name", "evidence_role"],
+        )
+        self.assertEqual(result["signature_scope"], "representative_slice")
+        self.assertIn("source_decl", result["signature_evidence_roles"])
+        self.assertIn("sample_transition", result["signature_evidence_roles"])
+        self.assertIn("runtime_witness", result["signature_evidence_roles"])
+        self.assertIn("derived_relation", result["signature_evidence_roles"])
+        self.assertIn("validation_property", result["signature_evidence_roles"])
         self.assertIn("message", result["reserved_signature_kinds"])
         self.assertIn("adapter", result["reserved_signature_kinds"])
+        self.assertIn("layer", result["reserved_signature_kinds"])
 
     def test_roll_publish_handoff_exposes_layer_signatures(self) -> None:
         result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")

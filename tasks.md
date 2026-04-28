@@ -14,8 +14,8 @@
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P4` `TermSignature` registry hardening** です。
-- next reopen point は **`P5` `LayerSignature` system hardening** です。
+- current promoted next line は **`P5` `LayerSignature` system hardening** です。
+- next reopen point は **`P6` `MessageEnvelope / Auth seam` hardening** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -38,9 +38,9 @@
 | `P1` repo layer map / samples dashboard stabilization | `Macro 0` | `S6 -> S6` | closed | closed | taxonomy / dashboard synchronization |
 | `P2` typed external residual review | `Macro 6` reserve | `S5 -> S6` | closed | closed | residual planned family review |
 | `P3` projection residual emitted-program gate | `Macro 6` reserve | `S5 -> S6` | closed | closed | emitted-program boundary fixation |
-| `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | next | ~1 task | first cut exists, naming/law hardening remains |
-| `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | reopen next | ~1 task | first cut exists, law surface remains |
-| `P6` MessageEnvelope/Auth seam hardening | `Macro 6` | `S4 -> S5` | queued | ~1 task | first cut exists, public seam remains open |
+| `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | closed | ~1 task | current first-cut lanes / scope / reserved split fixed |
+| `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | next | ~1 task | first cut exists, law surface remains |
+| `P6` MessageEnvelope/Auth seam hardening | `Macro 6` | `S4 -> S5` | reopen next | ~1 task | first cut exists, public seam remains open |
 | `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | queued | ~1 task | first cut exists, viewer/security hardening remains |
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | representative runtime slice hardening |
 | `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | residual `FAIRY-05` gate remains |
@@ -154,16 +154,19 @@
 - objective:
   signature kind / granularity / reserved-kind wording を tighten し、helper/runtime/report naming drift を減らす
 - deliverables:
-  current signature inventory rule、reserved kind policy、report-local mirror rule
+  current `signature_lanes = kind/name/evidence_role`、helper `signature_scope = representative_slice`、clean near-end `signature_scope = clean_near_end_canonical_inventory`、current `signature_evidence_roles` inventory、reserved kind policy、report-local mirror rule
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
   `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v`
+  `cargo test -p mir-runtime --test clean_near_end_samples`
 - debug / visualization output:
-  `term_signatures`、`signature_kinds`、`reserved_signature_kinds`
+  `term_signatures`、`signature_lanes`、`signature_scope`、`signature_kinds`、`signature_evidence_roles`、`reserved_signature_kinds`
 - docs / report requirement:
-  新しい report、`samples_progress.md`、`plan/09`、relevant docs を同期する
+  新しい report、`samples_progress.md`、`plan/09`、`plan/14`、`specs/10`、relevant docs を同期する
 - stop line:
-  final public signature schema や final public message contract を既成事実化しない
+  final public signature schema や final public message / adapter contract を既成事実化しない
 
 ### P5. `LayerSignature` system hardening
 

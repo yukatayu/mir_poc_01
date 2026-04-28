@@ -1085,7 +1085,7 @@ P2. Typed external boundary residual planned family review
 P3. Projection / placement residual emitted-program gate
   - helper/report-local preview floor と emitted place program / equivalence gate を分離する。
 P4. `TermSignature` registry hardening
-  - term / transition / effect / message / adapter をまたぐ signature carrier の naming / granularity を tighten する。
+  - active kind family `effect / transition / witness / relation / property`、reserved `message / adapter / layer` split、provenance-preserving carrier lanes を tighten する。
 P5. `LayerSignature` system hardening
   - auth / verification / visualization / transport / telemetry を typed layer として合成する metadata / law surface を tighten する。
 P6. `MessageEnvelope` / `AuthEvidence` seam hardening
@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3` は close し、next promoted package は `P4`、next reopen point は `P5` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4` は close し、next promoted package は `P5`、next reopen point は `P6` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1184,7 +1184,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `FAIRY-05 residual reacquire design` は docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current snapshot に actualize した。
 - `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
 - `Projection / placement residual emitted-program gate` は docs-first boundary package として close し、projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current line に actualize した。
-- current promoted next package は `TermSignature` registry hardening である。
+- `TermSignature` registry hardening は close し、current `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split を current line に actualize した。
+- current promoted next package は `LayerSignature` system hardening である。
 
 ## 2026-04-27 repository-structure staging addendum
 

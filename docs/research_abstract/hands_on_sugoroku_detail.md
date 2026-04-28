@@ -411,7 +411,7 @@ ActionRecord
 - `model-check property`: 実行順序の組み合わせに対して守りたい性質です。
 - `debug summary`: world/game の短い状態表示です。
 - `debug turn-trace`: turn の event trace です。
-- `debug signatures`: effect / transition / witness / relation / property の `TermSignature` inventory です。
+- `debug signatures`: effect / transition / witness / relation / property の `TermSignature` inventory です。helper closeout では `representative_slice` scope の current evidence surface として読みます。
 - `debug envelopes`: transport / auth / membership / capability / witness を分けて見る `MessageEnvelope` inventory です。
 - `debug visualization`: label / authority / redaction を持つ `visualization_views` / `telemetry_rows` inventory です。
 - `debug layers`: `verification` / `runtime_trace` / `membership` の `LayerSignature` inventory です。

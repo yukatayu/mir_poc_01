@@ -2085,6 +2085,13 @@ def closeout() -> dict[str, Any]:
             for row in run_sample(sample["sample_id"])["term_signatures"]
         }
     )
+    signature_evidence_roles = sorted(
+        {
+            row["evidence_role"]
+            for sample in SAMPLE_ROWS
+            for row in run_sample(sample["sample_id"])["term_signatures"]
+        }
+    )
     layer_signature_kinds = sorted(
         {
             row["layer"]
@@ -2127,7 +2134,10 @@ def closeout() -> dict[str, Any]:
         "static_checks": list(STATIC_CHECKS),
         "runtime_guards": list(RUNTIME_GUARDS),
         "model_check_properties": list(MODEL_CHECK_PROPERTIES),
+        "signature_lanes": ["kind", "name", "evidence_role"],
+        "signature_scope": "representative_slice",
         "signature_kinds": signature_kinds,
+        "signature_evidence_roles": signature_evidence_roles,
         "reserved_signature_kinds": ["message", "adapter", "layer"],
         "message_envelope_lanes": [
             "envelope_id",

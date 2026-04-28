@@ -54,7 +54,8 @@ real network transport や final public runtime API ではありません。
 
 `SUG-03` の副読本です。`run 03_roll_publish_handoff --debug signatures` を使うと、
 effect / transition / witness / relation / property の `TermSignature` inventory を helper-local に確認できます。
-これは current `TermSignature` first cut の evidence であり、final public visualization protocol ではありません。
+これは current `TermSignature` first cut の evidence であり、helper closeout では `representative_slice` scope に留まります。
+final public signature schema や final public message / adapter contract ではありません。
 
 ### `layers`
 
@@ -84,7 +85,7 @@ compatibility、activation cut、`detach_request#1`、post-detach rejection、mi
 helper-local evidence surface として確認できます。authoritative seam は `MessageEnvelope` であり、
 final public hot-plug ABI ではありません。
 
-これらは helper-local debug output であり、final public visualization protocol ではありません。
+これらは helper-local debug output であり、final public signature / message / visualization contract ではありません。
 
 ## 4. phase ごとの読み分け
 

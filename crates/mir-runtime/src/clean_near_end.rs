@@ -802,7 +802,10 @@ pub struct CleanNearEndCloseout {
     pub families: BTreeMap<String, Vec<String>>,
     pub proof_samples: Vec<String>,
     pub lean_roots: Vec<String>,
+    pub signature_lanes: Vec<String>,
+    pub signature_scope: String,
     pub signature_kinds: Vec<String>,
+    pub signature_evidence_roles: Vec<String>,
     pub reserved_signature_kinds: Vec<String>,
     pub message_envelope_lanes: Vec<String>,
     pub auth_evidence_kinds: Vec<String>,
@@ -855,7 +858,7 @@ fn extract_after_marker(line: &str, marker: &str) -> Option<String> {
 
 fn push_term_signature(
     signatures: &mut Vec<TermSignature>,
-    seen: &mut BTreeSet<(String, String)>,
+    seen: &mut BTreeSet<(String, String, String)>,
     kind: &str,
     name: impl Into<String>,
     evidence_role: &str,
@@ -864,12 +867,16 @@ fn push_term_signature(
     if name.is_empty() {
         return;
     }
-    let key = (kind.to_string(), name.clone());
+    let key = (
+        kind.to_string(),
+        name.clone(),
+        evidence_role.to_string(),
+    );
     if seen.insert(key.clone()) {
         signatures.push(TermSignature {
             kind: key.0,
             name: key.1,
-            evidence_role: evidence_role.to_string(),
+            evidence_role: key.2,
         });
     }
 }
@@ -1053,6 +1060,13 @@ fn message_envelope_lanes() -> Vec<String> {
     .collect()
 }
 
+fn signature_lanes() -> Vec<String> {
+    ["kind", "name", "evidence_role"]
+        .into_iter()
+        .map(|lane| lane.to_string())
+        .collect()
+}
+
 fn reserved_layer_signature_names() -> Vec<String> {
     [
         "visualization_redacted_debug_view",
@@ -1134,36 +1148,6 @@ fn term_signatures_for_spec(spec: &CleanNearEndSampleSpec, source: &str) -> Vec<
         }
     }
 
-    for field in &spec.witness_core_fields {
-        push_term_signature(
-            &mut signatures,
-            &mut seen,
-            "witness-field",
-            field.clone(),
-            "witness_core_field",
-        );
-    }
-
-    for event in &spec.visible_history {
-        push_term_signature(
-            &mut signatures,
-            &mut seen,
-            "history",
-            event.clone(),
-            "visible_history",
-        );
-    }
-
-    for obligation in &spec.proof_obligations {
-        push_term_signature(
-            &mut signatures,
-            &mut seen,
-            "proof-obligation",
-            obligation.obligation.clone(),
-            "proof_obligation",
-        );
-    }
-
     if let Some(property) = &spec.property {
         push_term_signature(
             &mut signatures,
@@ -1193,6 +1177,24 @@ fn closeout_signature_kinds() -> Result<Vec<String>, CleanNearEndError> {
         }
     }
     Ok(kinds.into_iter().collect())
+}
+
+fn closeout_signature_evidence_roles() -> Result<Vec<String>, CleanNearEndError> {
+    let root = clean_near_end_samples_root();
+    let mut roles = BTreeSet::new();
+    for spec in clean_near_end_sample_specs() {
+        let source_path = root.join(&spec.source_relpath);
+        let source = fs::read_to_string(&source_path).map_err(|error| {
+            CleanNearEndError::new(format!(
+                "failed to read clean near-end sample for closeout {}: {error}",
+                source_path.display()
+            ))
+        })?;
+        for signature in term_signatures_for_spec(&spec, &source) {
+            roles.insert(signature.evidence_role);
+        }
+    }
+    Ok(roles.into_iter().collect())
 }
 
 fn closeout_layer_signatures() -> Vec<LayerSignature> {
@@ -2764,6 +2766,7 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
             .push(sample.sample_id);
     }
     let signature_kinds = closeout_signature_kinds()?;
+    let signature_evidence_roles = closeout_signature_evidence_roles()?;
     let visualization_views = closeout_visualization_views();
     let telemetry_rows = closeout_telemetry_rows();
     let telemetry_channels = closeout_telemetry_channels(&telemetry_rows);
@@ -2784,7 +2787,10 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
                 .display()
                 .to_string(),
         ],
+        signature_lanes: signature_lanes(),
+        signature_scope: "clean_near_end_canonical_inventory".to_string(),
         signature_kinds,
+        signature_evidence_roles,
         reserved_signature_kinds: vec![
             "message".to_string(),
             "adapter".to_string(),

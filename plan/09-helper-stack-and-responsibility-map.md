@@ -71,6 +71,14 @@ run_directory_named_profile
   - clean near-end `CleanNearEndSampleReport.term_signatures`
   - clean near-end closeout `signature_kinds` / `reserved_signature_kinds`
   を helper-local / report-local evidence inventory として見せてよい。
+  - current `TermSignature` registry hardening cut では、
+    - lanes は `kind` / `name` / `evidence_role`
+    - helper closeout scope は `representative_slice`
+    - clean near-end closeout scope は `clean_near_end_canonical_inventory`
+    - active kind family は `effect` / `transition` / `witness` / `relation` / `property`
+    - reserved kind は `message` / `adapter` / `layer`
+    と読んでよい。
+    - `history` / `witness-field` / `proof-obligation` は current runtime report の dedicated field として保ち、`TermSignature` active kind family へ混ぜない。
   - これは final public signature schema、final public message contract、final public adapter contract を意味しない。
 - current sample-visible message/auth seam cut では、
   - Sugoroku helper `run_sample()` payload の `message_envelopes`

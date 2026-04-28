@@ -25,12 +25,15 @@
 これらは **repo-local alpha-ready current layer** です。
 Mirrorea full runtime、final public API、real network、final auth stack、final visualization API まで完了したことを意味しません。
 
-同時に、Mirrorea future-axis 側では `TermSignature registry / debug output` の first cut を close しました。
+同時に、Mirrorea future-axis 側では `TermSignature registry / debug output` の first cut を close し、さらに `P4` `TermSignature` registry hardening も close しました。
 
 - Sugoroku helper に `--debug signatures`
 - clean near-end report / closeout に `term_signatures` と `signature_kinds`
+- helper / runtime closeout に `signature_lanes`、`signature_scope`、`signature_evidence_roles`
 
 を追加し、helper-local / report-local の evidence carrier を先に actualize しています。
+current line では `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split まで fixed しました。
+これは final public signature schema や final public message / adapter contract を意味しません。
 
 さらに `LayerSignature system` の first cut も close しました。
 
@@ -298,8 +301,8 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P4-P7` carrier hardening
-   - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
+1. `P5-P7` carrier hardening
+   - `LayerSignature`、`MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
 2. `P8-P9` representative slice hardening
    - Sugoroku runtime attach と avatar fairy follow residual gate
 3. `P10-P17` first real implementation tranche

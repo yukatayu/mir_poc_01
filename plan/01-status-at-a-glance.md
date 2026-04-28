@@ -112,6 +112,7 @@
 - `docs/reports/0931-*` で `HotPlug Patch / AttachPoint executable widening` を close し、Sugoroku helper の `hotplug_lifecycle`、`--debug hotplug`、attach / detach telemetry-view、`detach_request#1` auth-none envelope canary を追加した
 - `docs/reports/0932-*` で `Network transport helper-local canaries` を close し、`scripts/network_transport_samples.py`、active landing page `samples/clean-near-end/network-transport/README.md`、`NET-02..05` process-boundary / reconnect / typed failure / redacted route trace canary を追加した
 - `docs/reports/0946-*` で `P2` Typed external boundary residual planned family review を close し、typed external helper の pretty `list` / `check-all` / `closeout` bug を修正した上で residual reopen matrix を current repo に actualize した
+- `docs/reports/0950-*` で `P4` `TermSignature` registry hardening を close し、helper / runtime closeout の `signature_lanes` / `signature_scope` / `signature_evidence_roles`、active kind family、reserved kind split を current repo に actualize した
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
 - next reopen point は `LayerSignature system hardening`
 
@@ -127,7 +128,7 @@
 - `docs/reports/0945-mirrorea-next-stage-plan-integration.md` で next-stage future-plan integration / next package queue stabilization を close し、handoff 由来の project axis、source hierarchy、queue numbering、snapshot docs を current repo へ再同期した
 - phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
 - closed chain の current reading は、`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、phase 9 typed external docs-first / synthetic preview widening、`P2` typed external residual reopen matrix closeout、phase 12 projection docs-first / preview widening、phase 13 transport canary、phase 14 hot-plug lifecycle canary、phase 16 backend/LLVM guardrail、phase 8 avatar representative slice / residual design closeout までである
-- current next line は `P4` `TermSignature` registry hardening、その reopen point は `P5` `LayerSignature` system hardening と読む
+- current next line は `P5` `LayerSignature` system hardening、その reopen point は `P6` `MessageEnvelope / Auth seam` hardening と読む
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

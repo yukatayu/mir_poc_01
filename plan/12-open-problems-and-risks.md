@@ -29,7 +29,7 @@
 
 ## current open problems
 
-- `TermSignature` first cut の exact granularity、reserved kind の扱い、`LayerSignature` law surface
+- `TermSignature` future full schema の widening 条件と reserved `message` / `adapter` / `layer` kind の解除条件、`LayerSignature` law surface
 - `VerificationLayer` composition の exact law surface と public naming
 - effect-based OS-like substrate という内側の解釈を prose のまま保つか、formal layer naming へ上げるか
 - `MessageEnvelope` / `AuthEvidence` / transport insertion seam の final public shape

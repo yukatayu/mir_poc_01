@@ -135,7 +135,8 @@
 - standard I/O を Mir core primitive にせず、typed external effect adapter で外界接続を扱う方向は current line だが、exact surface syntax / schema / host contract は未決定である。
 - next open cluster は次である。
   1. `TermSignature` first cut の exact granularity をどこまで current sample report に露出するか。
-     2026-04-27 時点で helper-local / report-local inventory は actualize したが、term / transition / effect / message / adapter のどこまでを正本 carrier に入れるか、reserved kind をどう扱うかは未決定である。
+     2026-04-28 時点で current repo-local hardening として、lanes を `kind` / `name` / `evidence_role` に留め、helper closeout を `representative_slice`、clean near-end closeout を `clean_near_end_canonical_inventory`、active kind family を `effect` / `transition` / `witness` / `relation` / `property`、reserved kind を `message` / `adapter` / `layer` に固定した。
+     未決なのは、future full `TermSignature` shape をどの package で widen するか、reserved kind をどの dedicated carrier widening で解除するか、public schema にどこまで mirror するかである。
   2. `LayerSignature` system の law surface をどこまで current docs に上げるか。
      no hidden authority、no hidden data downgrade、evidence preservation、placement preservation をどう machine-check / theorem / runtime policy / visualization に配るか。
   2a. `VerificationLayer` composition をどこまで explicit な named layer として扱うか。

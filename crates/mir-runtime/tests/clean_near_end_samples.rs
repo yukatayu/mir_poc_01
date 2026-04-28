@@ -148,7 +148,21 @@ fn clean_sample_delegated_rng_service_emits_term_signatures() {
         report
             .term_signatures
             .iter()
-            .any(|signature| signature.kind == "effect" && signature.name == "rng")
+            .any(|signature| {
+                signature.kind == "effect"
+                    && signature.name == "rng"
+                    && signature.evidence_role == "source_decl"
+            })
+    );
+    assert!(
+        report
+            .term_signatures
+            .iter()
+            .any(|signature| {
+                signature.kind == "effect"
+                    && signature.name == "rng"
+                    && signature.evidence_role == "effect_row_constraint"
+            })
     );
     assert!(
         report
@@ -366,8 +380,38 @@ fn clean_model_check_sample_emits_verification_layer_signature() {
 #[test]
 fn clean_near_end_closeout_records_signature_inventory() {
     let closeout = build_clean_near_end_closeout().unwrap();
-    assert!(closeout.signature_kinds.contains(&"effect".to_string()));
-    assert!(closeout.signature_kinds.contains(&"witness".to_string()));
+    assert_eq!(
+        closeout.signature_lanes,
+        vec![
+            "kind".to_string(),
+            "name".to_string(),
+            "evidence_role".to_string(),
+        ]
+    );
+    assert_eq!(
+        closeout.signature_scope,
+        "clean_near_end_canonical_inventory".to_string()
+    );
+    assert!(
+        closeout.signature_kinds
+            == vec![
+                "effect".to_string(),
+                "property".to_string(),
+                "relation".to_string(),
+                "transition".to_string(),
+                "witness".to_string(),
+            ]
+    );
+    assert!(
+        closeout
+            .signature_evidence_roles
+            .contains(&"effect_row_constraint".to_string())
+    );
+    assert!(
+        closeout
+            .signature_evidence_roles
+            .contains(&"order_produced_witness".to_string())
+    );
     assert!(
         closeout
             .reserved_signature_kinds

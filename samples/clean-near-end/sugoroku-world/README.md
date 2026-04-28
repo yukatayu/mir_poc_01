@@ -83,7 +83,8 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
   - best view for model-check, stale witness invalidation, and reset safety statements.
 - `signatures`
   - `TermSignature` first cut の helper-local inventory view です。effect / transition / witness / relation / property を
-    evidence-oriented に並べ、final public visualization protocol と混同しないための current debug surface です。
+    evidence-oriented に並べ、current helper closeout では `representative_slice` scope として読みます。
+    final public signature schema や final public message / adapter contract と混同しないための current debug surface です。
 - `envelopes`
   - `MessageEnvelope` / `AuthEvidence` / `PrincipalClaim` first cut の helper-local inventory view です。
     current cut では `auth none` baseline を explicit に見せ、transport / membership / capability / witness を separate lane のまま読めます。
@@ -104,7 +105,7 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
     `AttachPoint[SugorokuGame#1]`、compatibility、activation cut、post-detach rejection、migration deferred を
     `message_envelopes` 由来の evidence として読みます。
 
-These helper-local outputs are evidence-oriented debug views. They are not the final public visualization protocol.
+These helper-local outputs are evidence-oriented debug views. They are not the final public signature / message / visualization contract.
 
 ## Related docs
 

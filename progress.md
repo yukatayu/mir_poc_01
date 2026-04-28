@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-28 09:57 JST
+最終更新: 2026-04-28 10:08 JST
 
 ## この文書について
 
@@ -24,13 +24,13 @@ Place をまたいで実行・通信・検証・可視化できる
 - future-axis floor:
   `TermSignature`、`LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary までは actualize 済み
 - integration floor:
-  `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` typed external residual planned family review、`P3` projection / placement residual emitted-program gate を close し、handoff 由来の queue numbering と source hierarchy 読み、typed external residual reopen matrix、projection validity report minimum、generated artifact reserve policy を current repo へ mirror した
+  `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` typed external residual planned family review、`P3` projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening を close し、handoff 由来の queue numbering と source hierarchy 読み、typed external residual reopen matrix、projection validity report minimum、generated artifact reserve policy、current `signature_lanes` / `signature_scope` / `signature_evidence_roles` rule を current repo へ mirror した
 - current promoted next line:
-  `P4` `TermSignature` registry hardening
-- next reopen point:
   `P5` `LayerSignature` system hardening
+- next reopen point:
+  `P6` `MessageEnvelope / Auth seam` hardening
 - still later:
-  `P5-P9` carrier / representative-slice hardening、`P10-P17` first real implementation tranche、`P18` public API / parser grammar gate
+  `P6-P9` carrier / representative-slice hardening、`P10-P17` first real implementation tranche、`P18` public API / parser grammar gate
 - architectural caution:
   effect-based OS-like substrate は内側の解釈に留め、Mir core standard I/O primitive や subsystem collapse を既成事実化しない
 - verification caution:
@@ -38,7 +38,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## 現在の一言での読み
 
-2026-04-28 時点の repo は、**current-L2 / shared-space sample の runnable floor を維持したまま、Mirrorea future-axis の future-plan integration、next package queue stabilization、`P2` typed external residual planned family review と `P3` projection emitted-program gate を close し、次に `P4` `TermSignature` hardening と `P5` `LayerSignature` hardening を整理する段階**です。
+2026-04-28 時点の repo は、**current-L2 / shared-space sample の runnable floor を維持したまま、Mirrorea future-axis の future-plan integration、next package queue stabilization、`P2` typed external residual planned family review、`P3` projection emitted-program gate、`P4` `TermSignature` registry hardening を close し、次に `P5` `LayerSignature` hardening と `P6` `MessageEnvelope / Auth seam` hardening を整理する段階**です。
 
 ## 3 軸 progress
 
@@ -63,7 +63,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `Macro 3` | compile-ready minimal actualization | late | 84% | public parser / API 以外は着手可能 |
 | `Macro 4` | executable sample floor | active clean suite | 98% | 着手可能 |
 | `Macro 5` | typed / theorem / model-check bridge | repo-local alpha-ready current layer | 96% | public seam 以外は自走可能 |
-| `Macro 6` | shared-space / fabric boundary | `P4` promoted + `P5` reopen待ち | 92% | public contract / real transport 以外は自走可能 |
+| `Macro 6` | shared-space / fabric boundary | `P5` promoted + `P6` reopen待ち | 92% | public contract / real transport 以外は自走可能 |
 | `Macro 7` | toolchain / backend / host-facing integration | guardrail + implementation tranche待ち | 72% | installed binary / backend choice 以外は段階的に自走可能 |
 | `Macro 8` | application realization | early | 22% | 要仕様確認 |
 
@@ -76,7 +76,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | theorem / model-check / Lean | `S5-S6` | model-check second line、small Lean proof fragment、generated stub corpus | full domain discharge と concrete external tool binding |
 | shared-space runtime samples | `S6` | attach / membership / handoff / follow / fallback / reset safety | detach lifecycle residual、real transport、durable evidence |
 | typed external / projection / hot-plug / transport preview | `S5-S6` | typed external synthetic preview、typed external residual reopen matrix、projection preview、projection validity report minimum、generated artifact reserve policy、hot-plug lifecycle canary、`NET-01..05` helper-local canary | final host-facing contract、actual emitted program family、real migration / replay |
-| verification / visualization composition | `S4-S5` | `TermSignature`、`LayerSignature`、report-local inventories、typed visualization / telemetry first cut | exact `VerificationLayer` law surface、public viewer / verifier contract |
+| verification / visualization composition | `S4-S5` | `TermSignature` current registry hardening、`LayerSignature`、report-local inventories、typed visualization / telemetry first cut | exact `VerificationLayer` law surface、public viewer / verifier contract |
 | repository structure / dashboard | `S6` | layer-aware repo map、sample/script taxonomy、front-door docs、snapshot docs | risky crate/path move をまだしていない |
 | storage / backend guardrail | `S5` | external workdir、`target/` cutover、`CARGO_HOME` probe、LLVM path readiness | actual LLVM build、backend choice、packaging target |
 
@@ -88,8 +88,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | `P1` layer map / samples dashboard stabilization | closed | taxonomy と dashboard semantics を揃える | planned/helper/final-public の混同を再導入しない |
 | `P2` typed external residual review | closed | `EXT-01/02/05` residual planned family の indirect anchor / reopen criterion / kept-later gate を固定した | final host schema / adapter API を固定しない |
 | `P3` projection emitted-program gate | closed | preview floor と emitted program family の boundary、validity report minimum、generated artifact reserve policy を固定する | actual emitted place-specific program family を claim しない |
-| `P4` TermSignature hardening | next | signature kind / granularity / reserved-kind wording を tighten する | helper-local inventory を public contract と誤読させない |
-| `P5-P7` carrier hardening | queued; `P5` reopen next | layer / envelope / visualization security を tighten する | helper-local inventory を public contract と誤読させない |
+| `P4` TermSignature hardening | closed | current `signature_lanes` / `signature_scope` / `signature_evidence_roles` rule と reserved kind split を fixed した | final public signature schema を claim しない |
+| `P5-P7` carrier hardening | queued; `P5` next / `P6` reopen next | layer / envelope / visualization security を tighten する | helper-local inventory を public contract と誤読させない |
 | `P8-P9` representative slice hardening | queued | Sugoroku / avatar residual gate を tighten する | real transport / final avatar API を claim しない |
 | `P10-P17` first real implementation tranche | later | placeholder / preview floor から実装 tranche へ進める | subsystem collapse や premature freeze をしない |
 | `P18` public API / parser grammar gate | final mixed gate | final freeze 条件を定義する | prior packages 未成熟のまま public freeze しない |
@@ -100,8 +100,8 @@ Place をまたいで実行・通信・検証・可視化できる
 |---|---|---|
 | `P2` Typed external boundary residual planned family review | close 済み | residual `EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate を docs-first に固定した |
 | `P3` Projection / placement residual emitted-program gate | close 済み | preview floor と later emitted-program family の boundary、validity report minimum、generated artifact reserve policy を docs-first に固定した |
-| `P4` `TermSignature` registry hardening | 着手可能 | current promoted next line であり、first cut 既存なので naming / law surface / stop line hardening を進められる |
-| `P5-P7` carrier hardening | 着手可能 | `P5` は next reopen point であり、first cut 既存なので naming / law surface / stop line hardening を進められる |
+| `P4` `TermSignature` registry hardening | close 済み | current `signature_lanes` / `signature_scope` / `signature_evidence_roles` rule を fixed し、helper-local representative slice と clean near-end canonical inventory を区別した |
+| `P5-P7` carrier hardening | 着手可能 | `P5` は current promoted next line、`P6` は next reopen point であり、first cut 既存なので naming / law surface / stop line hardening を進められる |
 | `P8-P9` representative slice hardening | 着手可能 | active representative slices はあり、residual gate を tightening できる |
 | `P10-P17` first real implementation tranche | 後段依存 | docs-first / helper-local preview が先行しているため、実装 tranche は stop line を保ちながら段階的に進める必要がある |
 | `P18` public API / parser grammar gate | 要仕様確認 | prior tranche の成熟と user 側の公開範囲判断が必要 |
@@ -123,6 +123,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-28 10:08 JST — `P4` `TermSignature` registry hardening を close し、Sugoroku helper closeout と clean near-end closeout に `signature_lanes = kind/name/evidence_role`、`signature_scope`、`signature_evidence_roles` を追加した。runtime 側では active `TermSignature` kind family を `effect / transition / witness / relation / property` に tighten し、`history` / `witness-field` / `proof-obligation` は dedicated field 側へ戻した上で provenance を `(kind, name, evidence_role)` で保持するようにした。front-door docs、snapshot docs、`plan/09`、`plan/14`、`specs/10` / `specs/11`、report `0950` に同期し、Sugoroku helper unittest、runtime sample test、Sugoroku / clean near-end closeout JSON、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通した。
 - 2026-04-28 09:57 JST — `P3` Projection / placement residual emitted-program gate を close し、projection validity report minimum、generated artifact reserve policy、`P15` handoff line、`P4` / `P5` queue promotionを `plan/20`、front-door docs、snapshot docs、`samples/generated/README.md`、reports `0947` / `0948` / `0949` に同期した。review follow-up で `P15` の `server/client` wording を `place-specific` に戻し、top-level closeout command set に generated reserve guard を追加した。projection preview / visualization、clean near-end `cross_place_projection`、Sugoroku / clean near-end closeout、helper unittest、runtime test、generated reserve inventory、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通した。
 - 2026-04-28 09:26 JST — `P2` Typed external boundary residual planned family review を close し、`scripts/typed_external_boundary_samples.py` の pretty `list` / `check-all` / `closeout` bug を修正した上で、helper closeout `residual_review_matrix`、`plan/25`、typed-external docs、`progress.md`、`tasks.md`、`samples_progress.md`、report `0946` を同期した。typed external helper/unit test、Sugoroku envelopes / visualization anchor、clean near-end `provider_boundary` anchor、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通した。
 - 2026-04-28 03:27 JST — `sub-agent-pro/mirrorea_next_stage_full_plan_handoff_2026-04-27.md` を repo current line に mirror する task を close し、front-door docs、`AGENTS.md`、`specs/10` / `specs/11`、relevant `plan/`、`progress.md`、`tasks.md`、`samples_progress.md`、report `0945` を再同期した。`check_source_hierarchy.py`、`validate_docs.py`、clean suite smoke/closeout、Sugoroku / avatar / typed external / transport closeout、`cargo test -p mir-{ast,runtime,semantics}`、`git diff --check` を通した。

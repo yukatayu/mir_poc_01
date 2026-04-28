@@ -46,9 +46,11 @@
 
 ### TermSignature
 
-- term / transition / effect / message / adapter をまたぐ signature inventory
+- current active kind family は `effect` / `transition` / `witness` / `relation` / `property` の signature inventory
+- `message` / `adapter` / `layer` は reserved kind として current `TermSignature` carrier の外に残す
 - current repo では helper-local / report-local evidence carrier
-- final public signature schema を意味しない
+- helper closeout は `representative_slice`、clean near-end closeout は `clean_near_end_canonical_inventory`
+- final public signature schema や final public message / adapter contract を意味しない
 
 ### LayerSignature
 
