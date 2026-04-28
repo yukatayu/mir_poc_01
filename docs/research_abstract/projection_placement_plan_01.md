@@ -28,6 +28,13 @@ current plan と helper/report-local preview floor の summary です。
   - authority placement と provider placement の分離
   - message envelope refs
   - redaction rule refs
+- projection/codegen current first cut:
+  `python3 scripts/projection_codegen_samples.py closeout --format json`
+  - `P15-GEN-01..04`
+  - `generated_bridge_artifact_inventory`
+  - `generated_reserve_inventory`
+  - `equivalence_review_categories`
+  - `validation_floor`
 
 これは final emitted place program ではありません。
 projection validity を collapse せずに preview する current floor です。
@@ -40,7 +47,7 @@ projection validity を collapse せずに preview する current floor です�
 - current preview floor は helper/report-local preview only
 - projection validity report の minimum contents は category 単位で固定する
 - generated place-specific program family は reserve path / external-workdir preference を保つ
-- actual emitted place-specific program family は `P15` へ handoff する
+- `P15` current first cut は committed generated bridge evidence only として close し、actual emitted executable family は kept-later gate に残す
 
 ## current place split
 
@@ -67,7 +74,9 @@ projection validity を collapse せずに preview する current floor です�
 
 ## generated artifact reserve
 
-- `samples/generated/` は future reserve path
+- `samples/generated/` は reserve path
+- current committed generated bridge evidence は `samples/generated/projection-placement/manifest.json`
+- これは generated artifact であり、source sample でも final emitted executable program でもない
 - source sample は置かない
 - heavy disposable emitted artifact は external workdir を優先する
 - committed generated artifact は generated / source distinction を明示した bridge evidence に限る

@@ -17,7 +17,7 @@
 - `old/`
   archive
 - `generated/`
-  future non-Lean generated sample artifact reserve
+  non-Lean generated sample artifact reserve + committed generated bridge evidence
 
 ## reading rules
 
@@ -32,8 +32,10 @@
 - `clean-near-end/network-transport/` は phase 13 active helper-local canary landing page
 - `prototype/` は historical anchor / compatibility reference であり、active canonical path ではない
 - `old/` は archive
-- `generated/` は future reserve path であり、source sample を置かない
-  - projection / placement の emitted place-specific program family も later package (`P15`) までは reserve 扱いに保つ
+- `generated/` は reserve path であり、source sample を置かない
+  - current committed generated bridge evidence は `samples/generated/projection-placement/manifest.json`
+  - これは generated artifact であり、source sample でも final emitted executable program でもない
+  - projection / placement の actual emitted executable family、optimizer、deployment planner は kept-later gate に残す
 
 ## current commands
 
@@ -44,6 +46,7 @@ python3 scripts/sugoroku_world_samples.py check-all
 python3 scripts/avatar_follow_samples.py check-all --format json
 python3 scripts/typed_external_boundary_samples.py check-all --format json
 python3 scripts/network_transport_samples.py check-all --format json
+python3 scripts/projection_codegen_samples.py check-all --format json
 ```
 
 ## move policy

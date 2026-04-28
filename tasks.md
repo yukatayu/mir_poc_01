@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 16:53 JST
+最終更新: 2026-04-28 17:19 JST
 
 ## この文書について
 
@@ -17,8 +17,9 @@
 - `P10` `mirrorea-core` first real implementation tranche は close 済みです。
 - `P11` logical multi-place runtime tranche の current third cut は close 済みで、`MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated shell の上に principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper まで actualize 済みです。
 - `P12` external adapter / host boundary tranche の current first cut は close 済みで、typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize 済みです。
-- current promoted next line は **`P15` projection/codegen first emitted place-specific programs** で、その safest first cut は helper/report/generated-reserve closeout hardening です。
-- next reopen point は **`P16` visual debugger / viewer first public prototype** です。
+- `P15` projection/codegen first emitted place-specific programs の current first cut は close 済みで、`scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` によって committed generated bridge evidence / live-anchor alignment / `kept_later_gates` を current line に actualize 済みです。
+- current promoted next line は **`P16` visual debugger / viewer first public prototype** です。
+- next reopen point は **`P17` storage / LLVM / backend preparation** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -30,7 +31,7 @@
 | Sugoroku world | `samples/clean-near-end/sugoroku-world/` + `scripts/sugoroku_world_samples.py` | attach / membership / handoff / reset model-check / hot-plug helper-local lifecycle canary |
 | avatar follow | `samples/clean-near-end/avatar-follow/` + `scripts/avatar_follow_samples.py` | `FAIRY-01/02/03/04/06` active、`FAIRY-05` は planned |
 | typed external / transport | `scripts/typed_external_boundary_samples.py`、`scripts/network_transport_samples.py` | helper-local synthetic preview / canary。typed external residual reopen matrix は fixed 済みだが、final public adapter / transport contract ではない |
-| projection / placement | Sugoroku `projection_view`、runtime `cross_place_projection` | helper-local / report-local preview floor。final emitted program ではない |
+| projection / placement | Sugoroku `projection_view`、runtime `cross_place_projection`、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json` | helper-local / report-local preview floor + committed generated bridge evidence。final emitted executable program ではない |
 | storage / backend guardrail | `/mnt/mirrorea-work`、`scripts/env/mirrorea_storage_env.sh` | root disk を既成事実化しない external workdir floor |
 
 ## ordered self-driven packages
@@ -52,9 +53,9 @@
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | helper-local host-boundary inventory first cut |
 | `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local process-boundary closeout inventory fixed |
 | `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local package-manager inventory fixed |
-| `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | promoted next | multi-task | preview floor -> emitted programs |
-| `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | reopen next | multi-task | typed visualization public prototype |
-| `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | later | 1-3 tasks | guardrail -> implementation-ready |
+| `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | preview floor -> committed generated bridge evidence + alignment surface |
+| `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | promoted next | multi-task | typed visualization public prototype |
+| `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | reopen next | 1-3 tasks | guardrail -> implementation-ready |
 | `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | final gate | user + repo dependent | final freeze remains last |
 
 ### P0. Current-state audit and source-hierarchy validation
@@ -132,7 +133,7 @@
 - objective:
   helper/report-local preview floor と emitted place program / optimizer / equivalence gate を docs-first に切り分ける
 - deliverables:
-  emitted-program stop line、projection validity report minimum、preview floor と generated place-specific program family の境界、actual emitted place-specific program family は `P15` に残す handoff line
+  emitted-program stop line、projection validity report minimum、preview floor と generated place-specific program family の境界、actual emitted executable family は `P3` の外へ handoff する historical line
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
@@ -452,29 +453,35 @@
 ### P15. projection/codegen first emitted place-specific programs
 
 - status:
-  promoted next。current safest first cut は helper/report/generated-reserve closeout hardening に留め、`projection_view` / `cross_place_projection` / generated reserve policy を emitted artifact minimum と review surface へ揃える。optimizer や deployment planner はまだ進めない。
+  close 済み。current safest first cut は helper/report/generated-reserve closeout hardening に留め、`projection_view` / `cross_place_projection` / generated reserve policy を committed generated bridge evidence、live-anchor alignment、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` へ揃えた。manifest bridge evidence only の stop line を保ち、optimizer や deployment planner はまだ進めていない。
 
 - macro phase / stage:
   `Macro 7`, `S1 -> S4`
 - objective:
-  preview floor から emitted place program への first actualization を行う
+  preview floor から projection/codegen current first cut を actualize し、generated reserve と live anchor の間に honest な bridge evidence surface を置く
 - deliverables:
-  emitted place-specific artifact minimum、equivalence review surface、generated place-specific program family actualization
+  `scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` artifact inventory、live-anchor alignment check、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor`
 - validation command:
-  pre-close guards:
-  `find samples/generated -maxdepth 3 -type f | sort`
+  `python3 -m unittest scripts.tests.test_projection_codegen_samples`
+  `python3 scripts/projection_codegen_samples.py list --format json`
+  `python3 scripts/projection_codegen_samples.py run P15-GEN-01 --format json`
+  `python3 scripts/projection_codegen_samples.py run P15-GEN-03 --format json`
+  `python3 scripts/projection_codegen_samples.py check-all --format json`
+  `python3 scripts/projection_codegen_samples.py closeout --format json`
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
   `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
-  package-close requirement:
-  tranche 自身が concrete emitted-program / equivalent-trace validation command を導入すること。reserve-path check と preview-floor command だけで close を claim しない。
+  `find samples/generated -maxdepth 3 -type f | sort`
 - debug / visualization output:
-  projection view、place graph、generated place-specific program inventory
+  `projection_view`、`cross_place_projection`、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`
 - docs / report requirement:
   新しい report、`samples_progress.md`、projection docs を同期する
 - stop line:
-  final optimizer / cross-place equivalence checker / deployment planner を freeze しない
+  manifest bridge evidence only を actual emitted executable family と混同しない。final projection IR / cross-place equivalence checker / optimizer / deployment planner / final public emitted-program ABI を freeze しない
 
 ### P16. visual debugger / viewer first public prototype
+
+- status:
+  promoted next。helper-local / report-local typed visualization inventory を public prototype boundary に widen するが、current `--debug visualization` を final public viewer API と呼ばない。
 
 - macro phase / stage:
   `Macro 7`, `S1 -> S4`
@@ -492,6 +499,9 @@
   helper-local preview をそのまま final public viewer API と呼ばない
 
 ### P17. storage / LLVM / backend preparation
+
+- status:
+  reopen next。external workdir / LLVM guardrail を implementation-ready staging に寄せるが、device rewrite や backend freeze はまだ行わない。
 
 - macro phase / stage:
   `Macro 7`, `S3 -> S5`

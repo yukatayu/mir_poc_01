@@ -50,7 +50,7 @@ helper closeout は `representative_slice` scope で `verification_handoff_witne
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Typed external boundary executable widening` も close しました。
-さらに `P12` external adapter / host boundary tranche の current first cut も close しており、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize しました。さらに `P13` network transport minimal alpha の current first-cut closeout も close しており、helper closeout に helper-local `process_boundary` inventory を actualize しました。さらに `P14` hot-plug package-manager tranche の current first-cut closeout も close しており、helper closeout に `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を含む helper-local package-manager inventory を actualize しました。current promoted next package は `P15` projection/codegen first emitted place-specific programs であり、safest first cut は helper/report/generated-reserve closeout hardening に留まります。
+さらに `P12` external adapter / host boundary tranche の current first cut も close しており、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize しました。さらに `P13` network transport minimal alpha の current first-cut closeout も close しており、helper closeout に helper-local `process_boundary` inventory を actualize しました。さらに `P14` hot-plug package-manager tranche の current first-cut closeout も close しており、helper closeout に `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を含む helper-local package-manager inventory を actualize しました。さらに `P15` projection/codegen first emitted place-specific programs の current first-cut closeout も close しており、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize しました。current promoted next package は `P16` visual debugger / viewer first public prototype であり、next reopen point は `P17` storage / LLVM / backend preparation です。
 さらに `Projection / placement` の docs-first plan も close しました。
 さらに `Projection / placement executable widening` も close しました。
 さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
@@ -179,7 +179,9 @@ system-wide source / place-specific program distinction、place split、validity
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
 
 で `projection_view` と `cross_place_projection` を読めます。
-ただし、これは final projection IR や emitted place program を意味しません。
+さらに `python3 scripts/projection_codegen_samples.py closeout --format json`
+で committed generated bridge evidence と live-anchor alignment surface を読めます。
+ただし、これは final projection IR や emitted executable place program を意味しません。
 
 ### hot-plug
 
@@ -308,12 +310,12 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P2` Typed external boundary residual planned family review は close 済みであり、
 `EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate は current docs / helper closeout に固定されています。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
-projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
+projection validity report minimum、generated artifact reserve policy、actual emitted executable family は `P15` family 以降へ残す handoff line を current docs に固定しています。current `P15` first cut で actualize したのは committed generated bridge evidence only です。
 
-1. `P15` projection/codegen first emitted place-specific programs
-   - safest first cut は helper/report/generated-reserve closeout hardening であり、`projection_view` / `cross_place_projection` / generated reserve inventory を current line に固定する
-2. `P16-P17` first real implementation tranche
-   - hot-plug package manager、projection/codegen、viewer、storage/backend
+1. `P16` visual debugger / viewer first public prototype
+   - helper/report-local typed visualization inventory を public prototype boundary へ widen する
+2. `P17` storage / LLVM / backend preparation
+   - external workdir / LLVM / cleanup safety を implementation-ready staging に寄せる
 3. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す
 

@@ -98,11 +98,12 @@ current recommendation:
 - `samples/old/`
   archive
 - `samples/generated/`
-  future non-Lean generated sample artifact reserve
+  non-Lean generated sample artifact reserve + committed generated bridge evidence
 
 ### important boundary
 
 - `samples/lean/clean-near-end/` は generated theorem stub だが、Lean bridge evidence として committed されている
+- `samples/generated/projection-placement/manifest.json` は committed generated bridge evidence であり、source sample でも final emitted executable program でもない
 - heavy disposable generated artifact は repo root ではなく external workdir を優先する
 - planned skeleton family は active sample として扱わない
 
@@ -118,6 +119,7 @@ current recommendation:
 - `scripts/avatar_follow_samples.py`
 - `scripts/typed_external_boundary_samples.py`
 - `scripts/network_transport_samples.py`
+- `scripts/projection_codegen_samples.py`
 
 ### current repo-local helper / detached loop / support
 
@@ -194,7 +196,7 @@ conceptual lanes:
 
 ### Stage 2 — taxonomy hardening without breaking commands
 
-- `samples/generated/` を generated sample artifact reserve として使い始める
+- `samples/generated/` を generated sample artifact reserve と committed generated bridge evidence path として使い始める
 - archive banner / archive link policy を整理する
 - script class の grouping を docs で明示し、必要なら wrapper 先行で再配置する
 

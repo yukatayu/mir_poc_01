@@ -1107,7 +1107,7 @@ P13. network transport minimal alpha
 P14. hot-plug `Patch` / `AttachPoint` package-manager tranche
   - current first-cut closeout は helper-local package-manager preview として close 済みであり、`compatibility`、`activation`、`migration`、`rollback` を package-manager concern として読みつつ、helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を current line に actualize した。runtime crate hot-plug engine、rollback protocol、durable migration engine、final public hot-plug ABI は kept-later gate に残す。
 P15. projection/codegen first emitted place-specific programs
-  - system-wide source から emitted place program への first actualization を行う。
+  - current first-cut closeout は committed generated bridge evidence only として close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize した。final emitted executable family、projection IR、optimizer、deployment planner、final public emitted-program ABI は kept-later gate に残す。
 P16. visual debugger / viewer first public prototype
   - typed visualization / telemetry を public prototype viewer へ widen する。
 P17. storage / LLVM / backend preparation
@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P15`、next reopen point は `P16` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P16`、next reopen point は `P17` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1188,7 +1188,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Avatar fairy follow residual widening` は helper-local package として close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた。
 - `FAIRY-05 residual reacquire design` は docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current snapshot に actualize した。
 - `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
-- `Projection / placement residual emitted-program gate` は docs-first boundary package として close し、projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current line に actualize した。
+- `Projection / placement residual emitted-program gate` は docs-first boundary package として close し、projection validity report minimum、generated artifact reserve policy、actual emitted executable family は `P3` の外へ handoff する historical line を current line に actualize した。
+- `P15` projection/codegen first emitted place-specific programs の current first-cut closeout は committed generated bridge evidence only として close し、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` alignment surface、`generated_reserve_inventory`、`validation_floor` を current line に actualize した。
 - `TermSignature` registry hardening は close し、current `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split を current line に actualize した。
 - historical note at 2026-04-27 close time:
   current promoted next package は `logical multi-place runtime tranche` であり、

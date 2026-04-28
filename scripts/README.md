@@ -14,6 +14,7 @@
 - `avatar_follow_samples.py`
 - `typed_external_boundary_samples.py`
 - `network_transport_samples.py`
+- `projection_codegen_samples.py`
 
 ### current-L2 helper / detached loop / support
 

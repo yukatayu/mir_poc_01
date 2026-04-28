@@ -18,6 +18,7 @@ python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
 python3 scripts/network_transport_samples.py closeout --format json
+python3 scripts/projection_codegen_samples.py closeout --format json
 cargo test -p mirrorea-core
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 find samples/generated -maxdepth 3 -type f | sort
@@ -43,6 +44,8 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug si
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json
+python3 scripts/projection_codegen_samples.py run P15-GEN-01 --format json
+python3 scripts/projection_codegen_samples.py run P15-GEN-03 --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json
 python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json
@@ -64,6 +67,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - `P2` residual planned family review が close 済みであり、`EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate が current docs / helper closeout に固定されていること
 - phase 12 projection / placement の helper/report-local preview floor が actualize 済みであり、`projection_view` と `cross_place_projection` によって system-wide source から authority place / participant place / adapter seam / observer view refs への split を current evidence surface として確認できること
 - `P3` projection / placement residual emitted-program gate が close 済みであり、projection validity report minimum、generated artifact reserve policy、`P15` handoff line が current docs に固定されていること
+- `P15` projection/codegen first emitted place-specific programs の current first-cut closeout が close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` が current docs / dashboard / report に固定されていること
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`attach_request#1` / `detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view と helper closeout `hotplug_scope` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` を envelope-derived evidence として確認できること
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
@@ -130,10 +134,10 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P15` projection/codegen first emitted place-specific programs
-2. `P16` visual debugger / viewer first public prototype
+1. `P16` visual debugger / viewer first public prototype
+2. `P17` storage / LLVM / backend preparation
 
-`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout は close 済みです。
+`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout は close 済みです。
 後続の full queue は `tasks.md` と `progress.md` の current snapshot を参照してください。
 
 ## 関連文書

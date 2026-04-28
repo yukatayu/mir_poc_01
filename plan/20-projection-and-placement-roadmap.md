@@ -73,7 +73,7 @@ current close 条件は、少なくとも次を docs-first に固定したとき
    final emitted place program ではないこと
 2. projection validity report の minimum contents
 3. generated place-specific program family の reserve policy
-4. actual emitted place-specific program family は `P15` で actualize すること
+4. actual emitted executable family は `P3` ではなく `P15` family 以降へ残すこと。current `P15` first cut では committed generated bridge evidence only を actualize すること
 
 したがって `P3 close` は emitted-program implementation closeout ではなく、
 **preview floor と later emitted-program family の boundary fixation** である。
@@ -115,12 +115,29 @@ current `P3` close で固定するのは **minimum report categories** だけで
 
 ## generated artifact reserve policy
 
-- `samples/generated/` は generated place-specific program family を含む future reserve path である。
+- `samples/generated/` は generated place-specific program family を含む reserve path であり、current repo では committed generated bridge evidence もここに置く。
 - source sample は `samples/generated/` に置かない。
 - heavy disposable emitted artifact は repo root ではなく external workdir を優先する。
 - committed generated artifact が必要な場合でも、
   generated であること、source sample ではないこと、どの source / report と結びつくかを明示する。
-- actual emitted place-specific program family の first actualization は `P15` に残す。
+- `P15` current first cut では `samples/generated/projection-placement/manifest.json` と live-anchor alignment helper を committed generated bridge evidence として actualize する。
+- actual emitted executable family、projection emitter、optimizer、deployment planner は kept-later gate に残す。
+
+## current P15 first-cut actualization
+
+- committed generated bridge evidence:
+  `samples/generated/projection-placement/manifest.json`
+- validation helper:
+  `scripts/projection_codegen_samples.py`
+- current artifact IDs:
+  `P15-GEN-01..04`
+- current closeout surface:
+  `generated_bridge_artifact_inventory`
+  `generated_reserve_inventory`
+  `equivalence_review_categories`
+  `validation_floor`
+- current stop line:
+  manifest bridge evidence only。final emitted executable program ではない。
 
 ## current command set
 
@@ -128,6 +145,10 @@ current `P3` close で固定するのは **minimum report categories** だけで
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json
+python3 scripts/projection_codegen_samples.py run P15-GEN-01 --format json
+python3 scripts/projection_codegen_samples.py run P15-GEN-03 --format json
+python3 scripts/projection_codegen_samples.py check-all --format json
+python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/sugoroku_world_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 find samples/generated -maxdepth 3 -type f | sort
@@ -136,6 +157,7 @@ find samples/generated -maxdepth 3 -type f | sort
 ## stop line
 
 - final projection IR
+- actual emitted executable family beyond manifest bridge
 - generated place-specific program emitter
 - placement optimizer
 - cross-place equivalence checker

@@ -1,0 +1,282 @@
+{
+  "manifest_version": 1,
+  "package_id": "P15-projection-codegen-first-cut",
+  "projection_scope": "generated_reserve_bridge_evidence",
+  "artifact_boundary": "committed manifest bridge evidence only; not a final emitted executable program",
+  "generated_reserve_inventory": [
+    {
+      "committed_files": [
+        "samples/generated/projection-placement/manifest.json"
+      ],
+      "materialization": "manifest_bridge_only",
+      "artifact_count": 4,
+      "notes": [
+        "committed generated artifact is manifest bridge evidence",
+        "no final emitted place-specific program is committed in this cut"
+      ]
+    }
+  ],
+  "equivalence_review_categories": [
+    "source_ref_alignment",
+    "place_split_alignment",
+    "authority_placement_alignment",
+    "membership_frontier_alignment",
+    "observer_view_alignment",
+    "adapter_transport_alignment",
+    "authority_provider_non_collapse",
+    "witness_path_alignment",
+    "report_local_boundary_alignment",
+    "preview_only_boundary"
+  ],
+  "kept_later_gates": [
+    "final_projection_ir",
+    "generated_place_program_emitter",
+    "placement_optimizer",
+    "cross_place_equivalence_checker",
+    "deployment_planner",
+    "final_public_emitted_program_abi"
+  ],
+  "validation_floor": [
+    "python3 scripts/projection_codegen_samples.py list --format json",
+    "python3 scripts/projection_codegen_samples.py run P15-GEN-01 --format json",
+    "python3 scripts/projection_codegen_samples.py run P15-GEN-03 --format json",
+    "python3 scripts/projection_codegen_samples.py check-all --format json",
+    "python3 scripts/projection_codegen_samples.py closeout --format json",
+    "python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json",
+    "cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json",
+    "find samples/generated -maxdepth 3 -type f | sort"
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "P15-GEN-01",
+      "artifact_label": "sugoroku_server_domain_bundle",
+      "artifact_kind": "generated_place_bundle_reserve",
+      "materialization": "manifest_bridge_only",
+      "anchor_kind": "sugoroku_projection_view",
+      "place_categories": [
+        "server_path",
+        "domain_runtime_path"
+      ],
+      "anchor_refs": [
+        "sugoroku:03_roll_publish_handoff.visualization_views[projection_view]",
+        "sugoroku:03_roll_publish_handoff.message_envelopes",
+        "sugoroku:03_roll_publish_handoff.telemetry_rows"
+      ],
+      "alignment_rules": [
+        {
+          "field": "system_source",
+          "kind": "equals",
+          "value": "SugorokuWorldSource#1",
+          "review_category": "source_ref_alignment"
+        },
+        {
+          "field": "server_places",
+          "kind": "contains",
+          "value": "WorldServerPlace",
+          "review_category": "place_split_alignment"
+        },
+        {
+          "field": "server_places",
+          "kind": "contains",
+          "value": "SugorokuGamePlace#1",
+          "review_category": "place_split_alignment"
+        },
+        {
+          "field": "authority_place",
+          "kind": "equals",
+          "value": "SugorokuGamePlace#1",
+          "review_category": "authority_placement_alignment"
+        },
+        {
+          "field": "adapter_transport",
+          "kind": "equals",
+          "value": "local_queue",
+          "review_category": "adapter_transport_alignment"
+        },
+        {
+          "field": "notes",
+          "kind": "contains",
+          "value": "not a final emitted place-specific program",
+          "review_category": "preview_only_boundary"
+        }
+      ]
+    },
+    {
+      "artifact_id": "P15-GEN-02",
+      "artifact_label": "sugoroku_participant_observer_bundle",
+      "artifact_kind": "generated_place_bundle_reserve",
+      "materialization": "manifest_bridge_only",
+      "anchor_kind": "sugoroku_projection_view",
+      "place_categories": [
+        "participant_path",
+        "visualizer_observer_path"
+      ],
+      "anchor_refs": [
+        "sugoroku:03_roll_publish_handoff.visualization_views[projection_view]",
+        "sugoroku:03_roll_publish_handoff.visualization_views[turn_timeline]",
+        "sugoroku:03_roll_publish_handoff.visualization_views[message_route]",
+        "sugoroku:03_roll_publish_handoff.visualization_views[verification_summary]"
+      ],
+      "alignment_rules": [
+        {
+          "field": "participant_places",
+          "kind": "contains_all",
+          "value": [
+            "ParticipantPlace[Alice]",
+            "ParticipantPlace[Bob]",
+            "ParticipantPlace[Carol]"
+          ],
+          "review_category": "place_split_alignment"
+        },
+        {
+          "field": "active_players",
+          "kind": "contains_all",
+          "value": [
+            "Alice",
+            "Bob",
+            "Carol"
+          ],
+          "review_category": "membership_frontier_alignment"
+        },
+        {
+          "field": "membership_epoch",
+          "kind": "equals",
+          "value": 0,
+          "review_category": "membership_frontier_alignment"
+        },
+        {
+          "field": "observer_views",
+          "kind": "contains_all",
+          "value": [
+            "turn_timeline",
+            "message_route",
+            "verification_summary"
+          ],
+          "review_category": "observer_view_alignment"
+        },
+        {
+          "field": "retention_scope",
+          "kind": "equals",
+          "value": "helper_local_ephemeral",
+          "review_category": "report_local_boundary_alignment"
+        },
+        {
+          "field": "notes",
+          "kind": "contains",
+          "value": "not a final emitted place-specific program",
+          "review_category": "preview_only_boundary"
+        }
+      ]
+    },
+    {
+      "artifact_id": "P15-GEN-03",
+      "artifact_label": "delegated_rng_authority_provider_bundle",
+      "artifact_kind": "generated_place_bundle_reserve",
+      "materialization": "manifest_bridge_only",
+      "anchor_kind": "clean_near_end_cross_place_projection",
+      "place_categories": [
+        "participant_path",
+        "external_adapter_path"
+      ],
+      "anchor_refs": [
+        "clean-near-end:05_delegated_rng_service.visualization_views[cross_place_projection]",
+        "clean-near-end:05_delegated_rng_service.message_envelopes[provider_request#1]",
+        "clean-near-end:05_delegated_rng_service.message_envelopes[provider_receipt#1]"
+      ],
+      "alignment_rules": [
+        {
+          "field": "system_source",
+          "kind": "equals",
+          "value": "DelegatedRngSource#1",
+          "review_category": "source_ref_alignment"
+        },
+        {
+          "field": "authority_place",
+          "kind": "equals",
+          "value": "ParticipantPlace[Alice]",
+          "review_category": "authority_provider_non_collapse"
+        },
+        {
+          "field": "place_refs",
+          "kind": "contains",
+          "value": "ParticipantPlace[Alice]",
+          "review_category": "authority_provider_non_collapse"
+        },
+        {
+          "field": "place_refs",
+          "kind": "contains",
+          "value": "ProviderPlace[AuthorityRng]",
+          "review_category": "authority_provider_non_collapse"
+        },
+        {
+          "field": "projection_refs",
+          "kind": "contains",
+          "value": "provider_boundary_draw_route",
+          "review_category": "place_split_alignment"
+        },
+        {
+          "field": "witness_refs",
+          "kind": "contains",
+          "value": "provider_receipt",
+          "review_category": "witness_path_alignment"
+        },
+        {
+          "field": "notes",
+          "kind": "contains",
+          "value": "not a final emitted place-specific program",
+          "review_category": "preview_only_boundary"
+        }
+      ]
+    },
+    {
+      "artifact_id": "P15-GEN-04",
+      "artifact_label": "delegated_rng_boundary_envelope_bundle",
+      "artifact_kind": "generated_place_bundle_reserve",
+      "materialization": "manifest_bridge_only",
+      "anchor_kind": "clean_near_end_cross_place_projection",
+      "place_categories": [
+        "external_adapter_path",
+        "report_local_projection_path"
+      ],
+      "anchor_refs": [
+        "clean-near-end:05_delegated_rng_service.visualization_views[cross_place_projection]",
+        "clean-near-end:05_delegated_rng_service.telemetry_rows[provider_boundary_dispatch]"
+      ],
+      "alignment_rules": [
+        {
+          "field": "message_envelope_refs",
+          "kind": "contains_all",
+          "value": [
+            "provider_request#1",
+            "provider_receipt#1"
+          ],
+          "review_category": "witness_path_alignment"
+        },
+        {
+          "field": "redaction_rules",
+          "kind": "contains",
+          "value": "projection_summary_only",
+          "review_category": "report_local_boundary_alignment"
+        },
+        {
+          "field": "redaction_rules",
+          "kind": "contains",
+          "value": "auth_evidence:none_baseline",
+          "review_category": "report_local_boundary_alignment"
+        },
+        {
+          "field": "retention_scope",
+          "kind": "equals",
+          "value": "report_local_inventory",
+          "review_category": "report_local_boundary_alignment"
+        },
+        {
+          "field": "notes",
+          "kind": "contains",
+          "value": "not a final emitted place-specific program",
+          "review_category": "preview_only_boundary"
+        }
+      ]
+    }
+  ]
+}

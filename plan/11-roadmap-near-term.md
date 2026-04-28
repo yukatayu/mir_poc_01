@@ -41,8 +41,9 @@
 - `docs/reports/0967-*` は `P13` network transport minimal alpha の current first-cut closeout を表し、helper closeout `transport_scope` / `process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` を current line に actualize した
 - `docs/reports/0968-*` は `P14` hot-plug package surface map を表し、existing helper/test/docs surface、smallest honest closeout additions、stale wording risks を inventory として残した
 - `docs/reports/0969-*` は `P14` hot-plug package-manager tranche の current first-cut closeout を表し、helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を current line に actualize した
-- current promoted next package は `P15` projection/codegen first emitted place-specific programs
-- next reopen point は `P16` visual debugger / viewer first public prototype
+- `docs/reports/0970-*` は `P15` projection/codegen first emitted place-specific programs の current first-cut closeout を表し、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize した
+- current promoted next package は `P16` visual debugger / viewer first public prototype
+- next reopen point は `P17` storage / LLVM / backend preparation
 
 ## stabilized queue
 
@@ -55,7 +56,8 @@
 4. `P14` hot-plug package-manager tranche
    - close 済み。helper/test/docs closeout hardening として `hotplug_lifecycle` / attach-detach canary / package-manager inventory wording を current line に固定した
 5. `P15-P17` first real implementation tranche
-   - projection/codegen、viewer、storage/backend
+   - `P15` current first cut は committed generated bridge evidence only として close 済み
+   - current promoted line は viewer、next reopen point は storage/backend
 6. `P18` public API / parser grammar gate
    - final public freeze は最後の mixed gate に残す
 
