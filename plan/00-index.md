@@ -18,7 +18,7 @@
 5. current-L2 実装寄りなら `plan/04 ... plan/09`
 6. 全体計画なら `plan/10-roadmap-overall.md`
 7. 直近の research split は `plan/11-roadmap-near-term.md`
-8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate の current roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`
+8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory の current roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`
 9. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
@@ -62,6 +62,7 @@
   `plan/25-typed-external-boundary-executable-roadmap.md`
   `plan/26-visual-debugger-viewer-roadmap.md`
   `plan/27-public-api-parser-gate-roadmap.md`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

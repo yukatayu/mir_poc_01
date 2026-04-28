@@ -46,8 +46,9 @@ current repo で close したのは、次の docs-first inventory です。
 
 repo-side framingの後でも、次は user choice が要ります。
 
-- packaging / installed binary
+- installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
+- first shipped public surface scope
 - broader application target
 - exhaustive shared-space operational catalog
 

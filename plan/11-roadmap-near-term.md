@@ -45,8 +45,9 @@
 - `docs/reports/0971-*` は `P16` visual debugger / viewer first public prototype の current first-cut closeout を表し、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を current line に actualize した
 - `docs/reports/0972-*` は `P17` storage / LLVM / backend preparation の current first-cut closeout を表し、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23` を通じて external workdir / cleanup / `llvm` owner-writable probe / non-writable cleanup guard を current line に actualize した
 - `docs/reports/0973-*` は `P18` public API / parser grammar gate の repo-side first-cut closeout を表し、`plan/27-public-api-parser-gate-roadmap.md`、`docs/research_abstract/public_api_parser_gate_plan_01.md`、`docs/hands_on/public_api_parser_gate_01.md` により freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize した
-- current promoted next line は post-`P18` true user-spec hold line
-- next reopen point は packaging / installed binary / FFI / engine adapter / final shared-space operational catalog の actual commitment
+- `docs/reports/0974-*` は `U1` post-`P18` true user-spec hold option matrix closeout を表し、`plan/28-post-p18-true-user-spec-hold-option-matrix.md`、reader-facing summary、landing page、snapshot blocker matrix により packaging / host target / shipped-surface / final-catalog breadth の option inventory を current line に actualize した
+- current promoted next line は `R1` `VerificationLayer` widening threshold inventory
+- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
 
@@ -62,9 +63,13 @@
    - `P15` current first cut は committed generated bridge evidence only として close 済み
    - `P16` current first cut は typed public prototype inventory only として close 済み
    - `P17` current first cut も storage/backend current first-cut closeout として close 済み
-   - public-freeze path の repo-side framingは `P18` で close し、next line は post-`P18` true user-spec hold line に移った
+   - public-freeze path の repo-side framingは `P18` で close し、`U1` で user-spec hold axes を option inventory に整理した
 6. `P18` public API / parser grammar gate
    - repo-side first cut は close 済み。final public freeze 自体は still later の mixed gate / user-spec hold line に残す
+7. `U1` post-`P18` true user-spec hold option matrix
+   - close 済み。packaging shape / host integration target / first shipped public surface / final shared-space operational catalog breadth を decision-ready inventory と provisional recommendation に整理した
+8. `R1` `VerificationLayer` widening threshold inventory
+   - active。helper `verification_handoff_witness` / runtime `verification_model_check` を current emitted floor に保ったまま widening threshold matrix を docs-first に整理する
 
 ## mixed gate
 
@@ -78,8 +83,9 @@
 
 ## true user-spec hold line
 
-- packaging / installed binary
+- installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
+- first shipped public surface scope
 - broader application target
 - exhaustive shared-space final catalog
 

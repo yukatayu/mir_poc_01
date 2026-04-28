@@ -40,11 +40,11 @@
   - `P16` visual debugger / viewer first public prototype の current first-cut closeout も close 済みであり、`scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を actualize 済み
   - `P15-P17` は first real implementation tranche closeout 済み
   - `P18` repo-side first cut も close 済みであり、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize 済み
-  - current promoted next line は post-`P18` true user-spec hold line
+  - current promoted next line は `R1` `VerificationLayer` widening threshold inventory
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:
-  `Macro 6 / 7` final public seam、real transport、packaging residual
+  `Macro 6 / 7` final public seam、real transport、installed binary / packaging adoption target、host integration target、first shipped public surface scope、final catalog residual
 
 ## self-driven でよい line
 
@@ -66,12 +66,13 @@
 - final public auth / visualization / projection / hot-plug surface
 - real network / consensus / durable commit for Sugoroku-like runtime attachment
 - final parser / public checker / runtime / verifier surface
-- packaging / installed binary
+- final production storage / packaging policy inventory
 
 ## user specification が必要な line
 
 - broader application target
 - exhaustive shared-space final catalog
+- installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
 
 ## historical note

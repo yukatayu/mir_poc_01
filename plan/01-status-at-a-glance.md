@@ -128,8 +128,8 @@
 - `P11` logical multi-place runtime tranche の current third cut は actualize 済みであり、`MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を置いた
 - `P12` external adapter / host boundary tranche の current first cut は close 済みであり、typed external helper subset / closeout に `host_boundary_scope` / `host_boundary_lanes` / `non_collapse_lanes` / `host_family_gates` / `host_boundary_inventory` を actualize 済みである
 - `docs/reports/0973-*` で `P18` public API / parser grammar gate の repo-side first-cut closeout を close し、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize した
-- current promoted next line は post-`P18` true user-spec hold line であり、packaging / installed binary / FFI / engine adapter / final shared-space operational catalog は repo-side framing後の user choice に残る
-- next reopen point は packaging / installed binary / FFI / engine adapter / final shared-space operational catalog の actual commitment であり、repo-side inventory だけでは閉じない
+- current promoted next line は `R1` `VerificationLayer` widening threshold inventory であり、`U1` で user-spec hold axes を option inventory に整理した後、helper `verification_handoff_witness` / runtime `verification_model_check` を current emitted floor に保ったまま widening threshold を docs-first に narrow する
+- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、repo-side inventory だけでは閉じない
 
 ### Mirrorea future-axis carrier lane
 
@@ -144,7 +144,7 @@
 - `docs/reports/0945-mirrorea-next-stage-plan-integration.md` で next-stage future-plan integration / next package queue stabilization を close し、handoff 由来の project axis、source hierarchy、queue numbering、snapshot docs を current repo へ再同期した
 - phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
 - closed chain の current reading は、`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、phase 9 typed external docs-first / synthetic preview widening、`P2` typed external residual reopen matrix closeout、phase 12 projection docs-first / preview widening、phase 13 transport canary、phase 14 hot-plug lifecycle canary、phase 16 backend/LLVM guardrail、phase 8 avatar representative slice / residual design closeout、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout、`P18` public API / parser grammar gate の repo-side first-cut closeout までである
-- current next line は post-`P18` true user-spec hold line であり、repo-side first cut で固定した freeze checklist / public-boundary inventory / mixed-gate separation を前提に、packaging / installed binary / FFI / engine adapter / final shared-space operational catalog の actual commitment を user choice として reopen すると読む
+- current next line は `R1` `VerificationLayer` widening threshold inventory であり、`U1` で整理した first shipped public surface の `two-step split` provisional recommendation と整合させながら、machine-check / theorem bridge / runtime policy / visualization-telemetry の widening threshold を docs-first に整理すると読む
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line
@@ -155,7 +155,9 @@
 - final public auth / visualization / projection / hot-plug API
 - full dependent type theory
 - real network / durable distributed commit / multi-server consensus
-- packaging / installed binary / FFI / engine adapter
+- installed binary / packaging adoption target
+- FFI / engine adapter / host integration target
+- first shipped public surface scope
 
 ## current recommendation
 
@@ -164,6 +166,7 @@
 - authentication / authorization / membership / capability / witness / visualization / telemetry を transport や debug leak に潰さない
 - effect-based OS-like substrate という内側の解釈を使っても、Mir core standard I/O primitive や subsystem collapse を既成事実化しない
 - `VerificationLayer` composition は helper `verification_handoff_witness` と runtime `verification_model_check` を current emitted floor とする typed layer composition の current reading に留め、hidden verifier builtin や final public verifier contract と混同しない
+- post-`P18` line では `library-first` ordering、`native-process-first` host target、minimal shared-space subset keep、core surface first / integration surface second の two-step split を provisional recommendation として並べてよいが、actual product target と final public ABI は user choice なしに fixed しない
 - `auth none` baseline を final public auth protocol と混同せず、helper-local / report-local carrier の stop line を明記する
 - root disk 上の `target/` 膨張を放置せず、external workdir が使えるなら heavy disposable artifact をそこへ逃がす
 - old sample archive と current active sample の区別を、README / Documentation / progress / tasks / `samples_progress.md` / research_abstract で常に対にして書く

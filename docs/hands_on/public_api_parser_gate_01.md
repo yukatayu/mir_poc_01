@@ -29,7 +29,7 @@ git diff --check
 - docs / plan / snapshot / dashboard が `P18` repo-side first cut に同期していること
 - parser / checker / runtime / verifier / viewer / adapter / projection / hot-plug / transport の
   current preview / prototype / inventory に qualifier が残っていること
-- post-`P18` true user-spec hold line が packaging / host target / final catalog に分離されていること
+- post-`P18` true user-spec hold line が installed binary / packaging adoption target、host target、first shipped public surface、final catalog に分離されていること
 
 ## これではまだ確認できないこと
 

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 19:52 JST
+最終更新: 2026-04-28 20:31 JST
 
 ## この文書について
 
@@ -20,8 +20,8 @@
 - `P15` projection/codegen first emitted place-specific programs の current first cut は close 済みで、`scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` によって committed generated bridge evidence / live-anchor alignment / `kept_later_gates` を current line に actualize 済みです。
 - `P16` visual debugger / viewer first public prototype の current first cut は close 済みで、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`kept_later_gates` によって typed public prototype inventory over helper/runtime surfaces を current line に actualize 済みです。
 - `P17` storage / LLVM / backend preparation の current first cut も close 済みで、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` によって external workdir / cleanup / LLVM staging ownership mismatch を non-destructive probe floor として current line に actualize 済みです。
-- current promoted next line は **post-`P18` true user-spec hold line** です。
-- next reopen point は **packaging / installed binary / FFI / engine adapter / final shared-space operational catalog の actual commitment** です。
+- current promoted next line は **`R1` `VerificationLayer` widening threshold inventory** です。
+- next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -59,6 +59,8 @@
 | `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | typed public prototype inventory over helper/runtime surfaces |
 | `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | closed (first cut) | closed | guardrail -> implementation-ready staging closeout |
 | `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | closed (repo-side first cut) | closed for repo-side scope | freeze checklist / public-boundary inventory / hold-line split fixed; final freeze remains last |
+| `U1` post-`P18` true user-spec hold option matrix | `Macro 8` prep | `S0 -> S2` | closed | closed | packaging / host target / shipped-surface / final-catalog options を decision-ready に整理した |
+| `R1` `VerificationLayer` widening threshold inventory | `Macro 8` prep | `S0 -> S2` | active (docs-first) | ~1 task | helper/runtime verification lanes の widening threshold を option inventory と stop line 付きで整理する |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -571,9 +573,55 @@
 - stop line:
   actual final parser grammar / public API / public verifier / public adapter / public viewer / installed-binary commitment を `P18` repo-side first cut と混同しない
 
+### U1. post-`P18` true user-spec hold option matrix
+
+- status:
+  close 済み。`P18` で閉じた repo-side framing の後に残る actual commitment を user choice として保ったまま、packaging shape / host integration target / first shipped public surface / final shared-space operational catalog breadth を option inventory と provisional recommendation 付きで整理した。
+
+- macro phase / stage:
+  `Macro 8` prep, `S0 -> S2`
+- objective:
+  user-spec gate へ入る前に、repo docs / plan / snapshot 上で choice axes と non-goal / stop line を揃える
+- deliverables:
+  `U1` option matrix、blocker refresh、mixed gate と user-spec gate の packaging split 明文化、reader-facing summary
+- validation command:
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
+- debug / visualization output:
+  `progress.md` / `tasks.md` / `samples_progress.md` 上の current focus と blocker matrix
+- docs / report requirement:
+  新しい report、`plan/28`、relevant `plan/` / docs / snapshot の同期
+- stop line:
+  option inventory task の名目で actual product target、final public parser / checker / runtime / verifier API、final public adapter / viewer / projection / hot-plug / transport ABI を勝手に freeze しない
+
+### R1. `VerificationLayer` widening threshold inventory
+
+- status:
+  active。`U1` で first shipped public surface scope を `two-step split` の provisional recommendation に揃えたので、次は core-side surface 側の narrowing として helper `verification_handoff_witness` / runtime `verification_model_check` を current emitted floor に保ったまま、machine-check / theorem bridge / runtime policy / visualization-telemetry の widening threshold を docs-first に整理する。
+
+- macro phase / stage:
+  `Macro 8` prep, `S0 -> S2`
+- objective:
+  current evidence carrier、emitted layer candidate、kept-later gate を `VerificationLayer` family で切り分け、public-freeze mixed gate と user-spec hold line を増やさずに core-side public-surface narrowing criteria を明文化する
+- deliverables:
+  widening threshold matrix、helper/runtime verification lane inventory の current reading、hidden verifier builtin / final public verifier contract / final public layer law schema を避ける stop line、reader-facing summary
+- validation command:
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `git diff --check`
+- debug / visualization output:
+  `--debug layers`、helper `verification_handoff_witness`、runtime `verification_model_check`、`layer_signatures`
+- docs / report requirement:
+  新しい report、relevant `plan/` / docs / snapshot の同期
+- stop line:
+  hidden verifier builtin、final public verifier contract、final public layer law schema、concrete external theorem / model-check binding を premature に固定しない
+
 ## research を通して見つけること
 
-- `VerificationLayer` composition の public naming / widening threshold、machine-check / theorem / runtime policy / visualization をどの package で emitted layer に上げるか
 - effect-based OS-like substrate という内側の解釈を prose に留めるか、formal layer naming に上げるか
 - projection / placement validity report の最小 shapeと、generated artifact policy の最小 shape
 - `AttachPoint` compatibility と detach lifecycle の最小 contract
@@ -601,7 +649,7 @@
 - 主要な選択肢:
   CLI / library / engine-adapter / hybrid
 - current recommendation / 見解:
-  current task では固定せず、backend / LLVM preparation と `P18` repo-side framingの後に user-spec gate として reopen する
+  library-first ordering を保ち、installed binary promotion は second gate として扱う。host target は browser / native process / engine / mixed の option matrix を明示した上で、current provisional bias は native-process-first とするが、actual adoption は user choice に残す
 
 ### Blocker 3. final shared-space operational catalog
 
@@ -613,3 +661,14 @@
   minimal subset を長く維持する / catalog drafting を早める
 - current recommendation / 見解:
   まず minimal subset と residual gate を保ち、final catalog は true user-spec gate に残す
+
+### Blocker 4. first shipped public surface scope
+
+- 概要:
+  final public ship を parser/checker/runtime/verifier first に切るか、adapter/viewer/projection/hot-plug first に切るか、two-step split にするか
+- 影響:
+  `P12`、`P15`、`P16`、`P18`
+- 主要な選択肢:
+  parser/checker/runtime/verifier first / adapter-viewer-projection-hot-plug first / two-step split
+- current recommendation / 見解:
+  packaging shape と host target が決まる前に 1 bucket へ潰さず、core library surface first と integration surface second の two-step split を provisional recommendation に置く
