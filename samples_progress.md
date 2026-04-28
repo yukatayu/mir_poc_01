@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 16:29 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P13` network transport minimal alpha の current first-cut closeout を保持し、その次の promoted line として `P14` hot-plug package-manager tranche を helper/test/docs closeout hardening に留めて package-manager inventory surface を tighten する
-Current active packages: `P14` hot-plug package-manager tranche (`promoted next`; safest first cut = helper/test/docs closeout hardening)
+Last updated: 2026-04-28 16:53 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P14` hot-plug package-manager tranche の current first-cut closeout を保持し、その次の promoted line として `P15` projection/codegen first emitted place-specific programs を helper/report/generated-reserve closeout hardening に留めて emitted artifact minimum を tighten する
+Current active packages: `P15` projection/codegen first emitted place-specific programs (`promoted next`; safest first cut = helper/report/generated-reserve closeout hardening)
 
 ## Legend
 
@@ -32,13 +32,13 @@ Progress:
 | Network transport | 100 | helper-local canary family + current first-cut closeout closed | `NET-01..05` helper-local canary に加えて helper closeout `transport_scope` / `process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` を固定し、real socket / durable replay は deferred に保つ | `python3 scripts/network_transport_samples.py closeout --format json` |
 | Visualization | 100 | helper-local + report-local security hardening closed | `visualization_views` / `telemetry_rows` / `retention_scope` / `source_refs` / fail-closed observer route trace を current floor として維持 | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
 | Projection / placement | 75 | helper-local + report-local preview floor + emitted-program gate closed | `projection_view` と `cross_place_projection` を維持しつつ validity report minimum / generated artifact reserve policy を docs-first に固定した | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` |
-| Hot-plug package | 75 | helper-local lifecycle canary | `hotplug_lifecycle` / `--debug hotplug` / attach-detach telemetry を維持しつつ real migration を deferred に保つ | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json` |
+| Hot-plug package | 100 | helper-local lifecycle canary + package-manager first-cut closeout closed | `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を closeout に固定しつつ real migration を deferred に保つ | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
 
 ## Active sample matrix
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 16:29 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967` | source hierarchy と report discipline の current floor |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 16:53 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967`, `0968`, `0969` | source hierarchy と report discipline の current floor |
 | `PH1` | Mir core | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | final parser / public API deferred |
 | `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 15:32 JST | `0904`, `0913`, `0945`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965` | public shell / packaging deferred。`P10` で `mirrorea-core` minimal carrier ownership cut と `transport == transport_seam` compatibility invariant、`P11` で `MembershipRegistry` / `PlaceCatalog` substrate、bootstrap/epoch guard、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper が actualize 済み |
 | `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-28 13:09 JST | `0909`, `0916`, `0931`, `0945`, `0955` | runtime attach floor + helper-local attachpoint compatibility / activation evidence。current closeout では `world_surface` と `MembershipRegistry` source-of-truth の anchor にもなる |
@@ -76,7 +76,7 @@ Progress:
 | `PH13` | network transport | `scripts/network_transport_samples.py`, `samples/not_implemented/network-transport/` | helper-local canary family + planned source family | 100 | positive + negative | 2026-04-28 16:29 JST | `0926`, `0929`, `0932`, `0945`, `0967` | local queue / loopback / reconnect / typed failure / redacted route trace に加え helper closeout `process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` を fixed。real transport alpha ではない |
 | `NET-01` | network transport | `scripts/sugoroku_world_samples.py --transport loopback_socket` | helper-local loopback preview | 90 | positive + negative | 2026-04-28 16:29 JST | `0929`, `0932`, `0945`, `0967` | same-process parity preview。`P13` current first-cut closeout では Sugoroku parity source の 1 つとして使う |
 | `NET-02..05` | network transport | `scripts/network_transport_samples.py` | helper-local canary family | 100 | positive + negative | 2026-04-28 16:29 JST | `0932`, `0945`, `0967` | subprocess JSON bridge / stale reconnect reject / typed failure / redacted route trace と closeout inventory を固定 |
-| `PH14` | hot-plug package | `plan/21-hotplug-attachpoint-roadmap.md`, `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | helper-local lifecycle canary + docs-first gate | 75 | positive + negative | 2026-04-28 13:09 JST | `0925`, `0931`, `0955` | next promoted line。first cut は helper/test/docs closeout hardening に留め、real migration / rollback / attachpoint runtime remain deferred |
+| `PH14` | hot-plug package | `plan/21-hotplug-attachpoint-roadmap.md`, `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | helper-local lifecycle canary + package-manager first-cut closeout | 100 | positive + negative | 2026-04-28 16:53 JST | `0925`, `0931`, `0955`, `0968`, `0969` | helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を fixed。real migration / rollback / attachpoint runtime remain deferred |
 | `PH15` | visualization / IDE | Sugoroku helper views、runtime report-local views | helper-local + report-local security hardening closed | 100 | positive | 2026-04-28 12:42 JST | `0922`, `0954` | helper/runtime security envelope、typed telemetry retention floor、NET-05 fail-closed route trace まで current scope close。final public viewer contract は deferred |
 | `PH16` | compiler / backend / LLVM preparation | `/mnt/mirrorea-work`, `scripts/env/mirrorea_storage_env.sh`, `plan/23-compiler-backend-llvm-guardrail-roadmap.md` | storage / backend guardrail | 75 | operational positive | 2026-04-27 18:48 JST | `0913`, `0915`, `0927` | actual LLVM build / backend choice is still later |
 
@@ -85,7 +85,7 @@ Progress:
 | E2E ID | Scope | Path / command | Progress | What it proves | Last result |
 |---|---|---|---:|---|---|
 | `E2E-CLEAN-SUITE` | current-L2 -> clean near-end | `python3 scripts/clean_near_end_samples.py closeout` | 90 | active clean near-end suite の positive / negative floor と closeout snapshot が still green | pass 2026-04-28 03:27 JST |
-| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-28 13:09 JST |
+| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-28 16:53 JST |
 | `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar slice の active floor | pass 2026-04-28 13:37 JST |
 | `E2E-TYPED-EXTERNAL-TARGET` | source stub -> adapter preview -> anchor comparison | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper self-consistency + anchor comparison の current floor。`P12` current first cut closeout では `host_boundary_inventory` / `host_family_gates` も返す。phase 9 `.mir` direct execution ではない | pass 2026-04-28 16:00 JST |
 | `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-28 12:42 JST |
@@ -115,6 +115,13 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-28 16:53 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples` | pass | helper Sugoroku suite 46/46 green。`hotplug_scope` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` regression を含む |
+| 2026-04-28 16:53 JST | `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json` | pass | attach lifecycle は `attach_request#1`、`AttachPoint[SugorokuGame#1]`、`attach_lifecycle`、`attach_activation#1` を current line に保つ |
+| 2026-04-28 16:53 JST | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json` | pass | detach lifecycle は `detach_request#1`、`detached_roll_request#1`、`detach_lifecycle`、`detach_boundary#1`、post-detach reject を current line に保つ |
+| 2026-04-28 16:53 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | helper closeout は `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を返す |
+| 2026-04-28 16:53 JST | `python3 scripts/check_source_hierarchy.py` | pass | report `0969` 追加後も required hierarchy is intact |
+| 2026-04-28 16:53 JST | `python3 scripts/validate_docs.py` | pass | docs scaffold is complete。report count は 967 |
+| 2026-04-28 16:53 JST | `git diff --check` | pass | `P14` closeout diff は whitespace-clean |
 | 2026-04-28 16:29 JST | `python3 -m unittest scripts.tests.test_network_transport_samples` | pass | helper network transport suite 11/11 green。`process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` regression を含む |
 | 2026-04-28 16:29 JST | `python3 scripts/network_transport_samples.py list` | pass | `NET-02..05` process-boundary canary family is present |
 | 2026-04-28 16:29 JST | `python3 scripts/network_transport_samples.py run NET-02 --debug route-trace --format json` | pass | `transport_scope = helper_local_process_boundary`、`bridge_kind = subprocess_json_bridge`、`attach_request#1` / `roll_request#1` / `handoff_notice#1` parity を再確認 |

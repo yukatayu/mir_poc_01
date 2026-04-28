@@ -48,6 +48,8 @@ Useful focused runs:
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json
 python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json
+python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug turn-trace
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes
@@ -80,7 +82,9 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
   - `SUG-01`, `SUG-03`, `SUG-07`, `SUG-08` show the current repo-local vertical slice.
 - `PH14 hot-plug / detach`
   - `SUG-01` と `SUG-09` で helper-local `hotplug_lifecycle` / `--debug hotplug` / attach-detach telemetry-view を読みます。
-    current promoted next line ではこれを package-manager first-cut inventory surface として読みます。
+    current first-cut closeout では helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` /
+    `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` /
+    `hotplug_kept_later_gates` / `hotplug_validation_floor` も package-manager inventory surface として読みます。
     `SUG-09` は intentionally not a completion claim であり、detach を visible stop line として残します。
     runtime crate 側の migration engine / rollback / final hot-plug ABI は deferred のままです。
 - `PH13 network transport`
@@ -108,7 +112,8 @@ python3 scripts/sugoroku_world_samples.py run 08_reset_interleaving_model_check 
     `--transport loopback_socket` は same-process preview only であり、real socket transport を意味しません。
 - `layers`
   - `LayerSignature` first cut の helper-local inventory view です。current helper では `verification`、
-    `runtime_trace`、`membership` layer だけを active に見せ、`auth` / `transport` / `telemetry` などは reserve に留めます。
+    `runtime_trace`、`membership` に加えて `hotplug_activation_boundary` と `hotplug_detach_boundary` も active に見せます。
+    `auth` / `transport` / `telemetry` などは reserve に留めます。
 - `visualization`
   - `VisualizationProtocol` first cut の helper-local inventory view です。`visualization_views` と
     `telemetry_rows` を label / authority / redaction 付きで並べ、helper-local evidence view だと明示します。
@@ -133,3 +138,4 @@ These helper-local outputs are evidence-oriented debug views. They are not the f
 - `docs/research_abstract/hands_on_sugoroku_08_visualization_protocol.md`
 - `docs/reports/0909-sugoroku-world-runtime-attachment-vertical-slice.md`
 - `docs/reports/0916-sugoroku-sample-progress-alignment.md`
+- `docs/reports/0969-p14-hotplug-package-manager-first-cut-closeout.md`

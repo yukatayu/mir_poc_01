@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 16:29 JST
+最終更新: 2026-04-28 16:53 JST
 
 ## この文書について
 
@@ -17,8 +17,8 @@
 - `P10` `mirrorea-core` first real implementation tranche は close 済みです。
 - `P11` logical multi-place runtime tranche の current third cut は close 済みで、`MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated shell の上に principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper まで actualize 済みです。
 - `P12` external adapter / host boundary tranche の current first cut は close 済みで、typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize 済みです。
-- current promoted next line は **`P14` hot-plug package-manager tranche** で、その safest first cut は helper/test/docs closeout hardening です。
-- next reopen point は **`P15` projection/codegen first emitted place-specific programs** です。
+- current promoted next line は **`P15` projection/codegen first emitted place-specific programs** で、その safest first cut は helper/report/generated-reserve closeout hardening です。
+- next reopen point は **`P16` visual debugger / viewer first public prototype** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -51,9 +51,9 @@
 | `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | started | multi-task | third cut actualized; non-blocking follow-up only |
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | helper-local host-boundary inventory first cut |
 | `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local process-boundary closeout inventory fixed |
-| `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | promoted next | multi-task | helper/test/docs closeout hardening for package-manager inventory |
-| `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | reopen next | multi-task | preview floor -> emitted programs |
-| `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | later | multi-task | typed visualization public prototype |
+| `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local package-manager inventory fixed |
+| `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | promoted next | multi-task | preview floor -> emitted programs |
+| `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | reopen next | multi-task | typed visualization public prototype |
 | `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | later | 1-3 tasks | guardrail -> implementation-ready |
 | `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | final gate | user + repo dependent | final freeze remains last |
 
@@ -429,18 +429,17 @@
 ### P14. hot-plug `Patch` / `AttachPoint` package-manager tranche
 
 - status:
-  promoted next。current safest first cut は helper/test/docs closeout hardening に留め、既存 `hotplug_lifecycle` / attach-detach canary / compatibility stop line を package-manager inventory surface として揃える。runtime crate 側の migration engine や durable rollback protocol はまだ進めない。
+  close 済み。current safest first cut は helper/test/docs closeout hardening に留め、既存 `hotplug_lifecycle` / attach-detach canary / compatibility stop line を package-manager inventory surface として揃えた。runtime crate 側の migration engine や durable rollback protocol はまだ進めていない。
 
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
   compatibility、activation、migration、rollback を package-manager concern として widen する前に、helper-local package-manager inventory surface と stop line を current docs / closeout / tests に揃える
 - deliverables:
-  `hotplug_lifecycle` package-manager inventory view、attachpoint compatibility contract、activation cut wording、explicit TODO detach boundary、migration stop line、rollback wording、historical/active/helper/final-public split
+  `hotplug_scope = helper_local_package_manager_preview`、`hotplug_anchor_samples`、`hotplug_package_concerns`、`hotplug_lifecycle_lanes`、`hotplug_anchor_envelopes`、`hotplug_view_ids`、`hotplug_telemetry_row_ids`、`hotplug_kept_later_gates`、`hotplug_validation_floor`、`hotplug_lifecycle` package-manager inventory view、attachpoint compatibility contract、activation cut wording、explicit TODO detach boundary、migration stop line、rollback wording、historical/active/helper/final-public split
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json`
   `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json`
-  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug hotplug --format json`
   `python3 scripts/sugoroku_world_samples.py closeout --format json`
   `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
 - debug / visualization output:
@@ -451,6 +450,9 @@
   runtime crate 側の migration engine、deployment-grade rollback、durable upgrade engine、final public hot-plug ABI を premature に固定しない
 
 ### P15. projection/codegen first emitted place-specific programs
+
+- status:
+  promoted next。current safest first cut は helper/report/generated-reserve closeout hardening に留め、`projection_view` / `cross_place_projection` / generated reserve policy を emitted artifact minimum と review surface へ揃える。optimizer や deployment planner はまだ進めない。
 
 - macro phase / stage:
   `Macro 7`, `S1 -> S4`

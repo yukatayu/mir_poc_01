@@ -120,6 +120,36 @@ LIMITATIONS = [
 
 ACTIVE_TRANSPORT_SEAMS = ["local_queue", "loopback_socket"]
 RESERVED_TRANSPORT_SEAMS = ["network_link"]
+HOTPLUG_ANCHOR_SAMPLES = ["01_runtime_attach_game", "09_detach_todo"]
+HOTPLUG_PACKAGE_CONCERNS = [
+    "attachpoint_compatibility",
+    "activation_cut",
+    "detach_boundary",
+    "migration_stop_line",
+    "rollback_protocol",
+]
+HOTPLUG_KEPT_LATER_GATES = [
+    "runtime_crate_hotplug_engine",
+    "rollback_protocol",
+    "durable_migration_engine",
+    "final_public_hotplug_abi",
+]
+HOTPLUG_LIFECYCLE_LANES = [
+    "attachpoint_id",
+    "patch_id",
+    "lifecycle_state",
+    "compatibility",
+    "activation_cut",
+    "detach_boundary",
+    "migration_contract",
+]
+HOTPLUG_ANCHOR_ENVELOPES = [
+    "attach_request#1",
+    "detach_request#1",
+    "detached_roll_request#1",
+]
+HOTPLUG_VIEW_IDS = ["attach_lifecycle", "detach_lifecycle"]
+HOTPLUG_TELEMETRY_ROW_IDS = ["attach_activation#1", "detach_boundary#1"]
 
 
 @dataclass(frozen=True)
@@ -2331,6 +2361,18 @@ def closeout() -> dict[str, Any]:
                 for row in [run_sample(sample["sample_id"])]
                 if "hotplug_lifecycle" in row
             }
+        ),
+        "hotplug_scope": "helper_local_package_manager_preview",
+        "hotplug_anchor_samples": list(HOTPLUG_ANCHOR_SAMPLES),
+        "hotplug_package_concerns": list(HOTPLUG_PACKAGE_CONCERNS),
+        "hotplug_kept_later_gates": list(HOTPLUG_KEPT_LATER_GATES),
+        "hotplug_lifecycle_lanes": list(HOTPLUG_LIFECYCLE_LANES),
+        "hotplug_anchor_envelopes": list(HOTPLUG_ANCHOR_ENVELOPES),
+        "hotplug_view_ids": list(HOTPLUG_VIEW_IDS),
+        "hotplug_telemetry_row_ids": list(HOTPLUG_TELEMETRY_ROW_IDS),
+        "hotplug_validation_floor": (
+            "helper-local attach/detach lifecycle evidence only; "
+            "not completed migration/rollback/runtime-crate ownership"
         ),
         "hotplug_stop_line": {
             "detach_boundary": "explicit_todo_boundary",

@@ -1103,9 +1103,9 @@ P11. logical multi-place runtime / emulator tranche
 P12. external adapter / host boundary tranche
   - current first cut close 済み。typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize し、helper-local host-facing adapter seam inventory を tighten した。`engine-abi` は placeholder のままに残す。
 P13. network transport minimal alpha
-  - current safest first cut は helper-local `process_boundary` closeout であり、`NET-01..05` canary の `loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace を current line に固定する。real socket / session / replay minimal alpha は kept-later gate に残す。
+  - current first-cut closeout は helper-local `process_boundary` closeout として close 済みであり、`NET-01..05` canary の `loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace、helper closeout `transport_scope` / `process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` を current line に固定した。real socket / session / replay minimal alpha は kept-later gate に残す。
 P14. hot-plug `Patch` / `AttachPoint` package-manager tranche
-  - compatibility、activation、migration、rollback を package-manager concern として widen する。
+  - current first-cut closeout は helper-local package-manager preview として close 済みであり、`compatibility`、`activation`、`migration`、`rollback` を package-manager concern として読みつつ、helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を current line に actualize した。runtime crate hot-plug engine、rollback protocol、durable migration engine、final public hot-plug ABI は kept-later gate に残す。
 P15. projection/codegen first emitted place-specific programs
   - system-wide source から emitted place program への first actualization を行う。
 P16. visual debugger / viewer first public prototype
@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P14`、next reopen point は `P15` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P15`、next reopen point は `P16` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 

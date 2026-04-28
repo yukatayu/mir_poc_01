@@ -35,9 +35,10 @@
   - `P11` logical multi-place runtime tranche の current third cut は actualize 済みであり、`MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を置いた
   - `P12` external adapter / host boundary tranche の current first cut は close 済みであり、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize 済み
   - `P13` network transport minimal alpha の current first-cut closeout は close 済みであり、helper closeout `transport_scope` / `process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` を actualize 済み
-  - current promoted next package は `P14` hot-plug package-manager tranche であり、current safest first cut は helper/test/docs closeout hardening
-  - next reopen point は `P15` projection/codegen first emitted place-specific programs
-  - `P14-P17` は first real implementation tranche、`P18` は final mixed gate
+  - `P14` hot-plug package-manager tranche の current first-cut closeout も close 済みであり、helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を actualize 済み
+  - current promoted next package は `P15` projection/codegen first emitted place-specific programs であり、current safest first cut は helper/report/generated-reserve closeout hardening
+  - next reopen point は `P16` visual debugger / viewer first public prototype
+  - `P15-P17` は first real implementation tranche、`P18` は final mixed gate
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

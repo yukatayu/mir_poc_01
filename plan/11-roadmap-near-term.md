@@ -39,8 +39,10 @@
 - `docs/reports/0960-*` / `0961-*` / `0962-*` / `0963-*` / `0964-*` / `0965-*` は `P11` logical multi-place runtime tranche の current third cut と review follow-up を表し、`MembershipRegistry` / `PlaceCatalog` substrate、participant-place-kind-gated shell、principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を current line に actualize した
 - `docs/reports/0966-*` は `P12` external adapter / host boundary tranche の current first cut closeout を表し、helper closeout `host_boundary_scope` / `host_boundary_lanes` / `non_collapse_lanes` / `host_family_gates` / `host_boundary_inventory` を current line に actualize した
 - `docs/reports/0967-*` は `P13` network transport minimal alpha の current first-cut closeout を表し、helper closeout `transport_scope` / `process_boundary_canaries` / `loopback_parity_sources` / `non_collapse_lanes` / `kept_later_gates` / `validation_floor` を current line に actualize した
-- current promoted next package は `P14` hot-plug package-manager tranche
-- next reopen point は `P15` projection/codegen first emitted place-specific programs
+- `docs/reports/0968-*` は `P14` hot-plug package surface map を表し、existing helper/test/docs surface、smallest honest closeout additions、stale wording risks を inventory として残した
+- `docs/reports/0969-*` は `P14` hot-plug package-manager tranche の current first-cut closeout を表し、helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を current line に actualize した
+- current promoted next package は `P15` projection/codegen first emitted place-specific programs
+- next reopen point は `P16` visual debugger / viewer first public prototype
 
 ## stabilized queue
 
@@ -51,7 +53,7 @@
 3. `P2-P13` closeout chain
    - typed external residual review、projection emitted-program gate、signature/layer/message/visualization hardening、Sugoroku / avatar hardening、`mirrorea-core`、logical multi-place runtime、external adapter、network `process_boundary` closeout までは current line に actualize 済み
 4. `P14` hot-plug package-manager tranche
-   - helper/test/docs closeout hardening として `hotplug_lifecycle` / attach-detach canary / package-manager inventory wording を current line に固定する
+   - close 済み。helper/test/docs closeout hardening として `hotplug_lifecycle` / attach-detach canary / package-manager inventory wording を current line に固定した
 5. `P15-P17` first real implementation tranche
    - projection/codegen、viewer、storage/backend
 6. `P18` public API / parser grammar gate

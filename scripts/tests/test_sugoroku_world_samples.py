@@ -155,6 +155,70 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertEqual(stop_line["durable_migration_engine"], "deferred")
         self.assertEqual(stop_line["final_public_hotplug_abi"], "deferred")
 
+    def test_closeout_records_hotplug_package_manager_inventory(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertEqual(
+            result["hotplug_scope"], "helper_local_package_manager_preview"
+        )
+        self.assertEqual(
+            result["hotplug_anchor_samples"],
+            ["01_runtime_attach_game", "09_detach_todo"],
+        )
+        self.assertEqual(
+            result["hotplug_package_concerns"],
+            [
+                "attachpoint_compatibility",
+                "activation_cut",
+                "detach_boundary",
+                "migration_stop_line",
+                "rollback_protocol",
+            ],
+        )
+        self.assertIn(
+            "runtime_crate_hotplug_engine", result["hotplug_kept_later_gates"]
+        )
+        self.assertIn("rollback_protocol", result["hotplug_kept_later_gates"])
+        self.assertIn(
+            "helper-local attach/detach lifecycle evidence",
+            result["hotplug_validation_floor"],
+        )
+
+    def test_closeout_records_hotplug_lifecycle_lanes(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertEqual(
+            result["hotplug_lifecycle_lanes"],
+            [
+                "attachpoint_id",
+                "patch_id",
+                "lifecycle_state",
+                "compatibility",
+                "activation_cut",
+                "detach_boundary",
+                "migration_contract",
+            ],
+        )
+
+    def test_closeout_records_hotplug_anchor_envelopes(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertEqual(
+            result["hotplug_anchor_envelopes"],
+            ["attach_request#1", "detach_request#1", "detached_roll_request#1"],
+        )
+
+    def test_closeout_records_hotplug_inventory_views_and_rows(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertEqual(
+            result["hotplug_view_ids"], ["attach_lifecycle", "detach_lifecycle"]
+        )
+        self.assertEqual(
+            result["hotplug_telemetry_row_ids"],
+            ["attach_activation#1", "detach_boundary#1"],
+        )
+
     def test_roll_publish_handoff_exposes_term_signatures(self) -> None:
         result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")
 

@@ -50,7 +50,7 @@ helper closeout は `representative_slice` scope で `verification_handoff_witne
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Typed external boundary executable widening` も close しました。
-さらに `P12` external adapter / host boundary tranche の current first cut も close しており、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize しました。さらに `P13` network transport minimal alpha の current first-cut closeout も close しており、helper closeout に helper-local `process_boundary` inventory を actualize しました。current promoted next package は `P14` hot-plug package-manager tranche であり、safest first cut は helper/test/docs closeout hardening に留まります。
+さらに `P12` external adapter / host boundary tranche の current first cut も close しており、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize しました。さらに `P13` network transport minimal alpha の current first-cut closeout も close しており、helper closeout に helper-local `process_boundary` inventory を actualize しました。さらに `P14` hot-plug package-manager tranche の current first-cut closeout も close しており、helper closeout に `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を含む helper-local package-manager inventory を actualize しました。current promoted next package は `P15` projection/codegen first emitted place-specific programs であり、safest first cut は helper/report/generated-reserve closeout hardening に留まります。
 さらに `Projection / placement` の docs-first plan も close しました。
 さらに `Projection / placement executable widening` も close しました。
 さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
@@ -310,9 +310,9 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P14` hot-plug package-manager tranche
-   - safest first cut は helper/test/docs closeout hardening であり、`hotplug_lifecycle` / attach-detach canary / package-manager inventory wording を current line に固定する
-2. `P15-P17` first real implementation tranche
+1. `P15` projection/codegen first emitted place-specific programs
+   - safest first cut は helper/report/generated-reserve closeout hardening であり、`projection_view` / `cross_place_projection` / generated reserve inventory を current line に固定する
+2. `P16-P17` first real implementation tranche
    - hot-plug package manager、projection/codegen、viewer、storage/backend
 3. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す

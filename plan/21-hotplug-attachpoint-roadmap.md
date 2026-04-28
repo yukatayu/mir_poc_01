@@ -73,8 +73,23 @@ current Sugoroku helper closeout では、
 `scripts/storage/cleanup_disposable_artifacts.sh` は storage / ops concern である。
 runtime hot-plug lifecycle の `detach` と同一ではない。
 
+## 2026-04-28 P14 first-cut closeout note
+
+current helper closeout に
+`hotplug_scope = helper_local_package_manager_preview`、
+`hotplug_anchor_samples = 01_runtime_attach_game / 09_detach_todo`、
+`hotplug_package_concerns = attachpoint_compatibility / activation_cut / detach_boundary / migration_stop_line / rollback_protocol`、
+`hotplug_lifecycle_lanes = attachpoint_id / patch_id / lifecycle_state / compatibility / activation_cut / detach_boundary / migration_contract`、
+`hotplug_anchor_envelopes = attach_request#1 / detach_request#1 / detached_roll_request#1`、
+`hotplug_view_ids = attach_lifecycle / detach_lifecycle`、
+`hotplug_telemetry_row_ids = attach_activation#1 / detach_boundary#1`、
+`hotplug_kept_later_gates = runtime_crate_hotplug_engine / rollback_protocol / durable_migration_engine / final_public_hotplug_abi`、
+`hotplug_validation_floor`
+を actualize してよい。
+これは helper-local package-manager first-cut closeout であり、runtime crate hot-plug engine や completed migration actualization ではない。
+
 ## next relation
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。
 hot-plug lifecycle は transport widening と分けたまま保つ。
-`P13` current first-cut closeout 後の current snapshot では、next promoted package は `P14` hot-plug package-manager tranche であり、current safest first cut は helper/test/docs closeout hardening に留める。next reopen point は `P15` projection/codegen first emitted place-specific programs である。
+`P14` current first-cut closeout 後の current snapshot では、next promoted package は `P15` projection/codegen first emitted place-specific programs であり、current safest first cut は helper/report/generated-reserve closeout hardening に留める。next reopen point は `P16` visual debugger / viewer first public prototype である。
