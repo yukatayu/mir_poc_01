@@ -179,6 +179,26 @@ fn clean_sample_delegated_rng_service_emits_term_signatures() {
 }
 
 #[test]
+fn clean_sample_delegated_rng_service_keeps_dedicated_signature_side_fields() {
+    let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
+    assert!(
+        report
+            .theorem_obligations
+            .contains(&"provider_returns_draw_not_room_commit".to_string())
+    );
+    assert!(
+        report
+            .witness_core_fields
+            .contains(&"draw_result".to_string())
+    );
+    assert!(
+        report
+            .visible_history
+            .contains(&"provider_roll(receipt)".to_string())
+    );
+}
+
+#[test]
 fn clean_sample_delegated_rng_service_emits_transport_layer_signature() {
     let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
     let layer = report

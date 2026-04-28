@@ -40,6 +40,33 @@ repo current line に同期する。
 - `crates/mir-runtime/tests/clean_near_end_samples.rs`
 - read-only explorer outputs from `Popper` and `Wegener`
 
+## Files changed
+
+- `scripts/sugoroku_world_samples.py`
+- `scripts/tests/test_sugoroku_world_samples.py`
+- `crates/mir-runtime/src/clean_near_end.rs`
+- `crates/mir-runtime/tests/clean_near_end_samples.rs`
+- `README.md`
+- `Documentation.md`
+- `progress.md`
+- `tasks.md`
+- `samples_progress.md`
+- `plan/01-status-at-a-glance.md`
+- `plan/09-helper-stack-and-responsibility-map.md`
+- `plan/11-roadmap-near-term.md`
+- `plan/12-open-problems-and-risks.md`
+- `plan/14-glossary-and-boundary-rules.md`
+- `plan/17-research-phases-and-autonomy-gates.md`
+- `plan/90-source-traceability.md`
+- `specs/10-open-questions.md`
+- `specs/11-roadmap-and-workstreams.md`
+- `docs/research_abstract/mirrorea_future_axis_01.md`
+- `docs/research_abstract/hands_on_sugoroku_sample_matrix.md`
+- `docs/research_abstract/hands_on_sugoroku_detail.md`
+- `docs/hands_on/current_phase_closeout_01.md`
+- `samples/clean-near-end/sugoroku-world/README.md`
+- this report
+
 ## Actions taken
 
 1. Compared Sugoroku helper `term_signatures` / `signature_kinds` with clean near-end runtime `term_signatures` / `signature_kinds`.
@@ -60,6 +87,10 @@ repo current line に同期する。
    - `P4` is closed
    - `P5` is current promoted next
    - `P6` is next reopen point
+6. Applied reviewer follow-up fixes:
+   - added a regression guard that `theorem_obligations`, `witness_core_fields`, and `visible_history` remain populated after narrowing runtime `TermSignature`
+   - fixed stale queue wording left in `plan/01-status-at-a-glance.md`
+   - added the explicit `Files changed` section required by `AGENTS.md`
 
 ## Evidence / outputs / test results
 
@@ -84,6 +115,10 @@ Results:
   - pass (`35/35`)
 - `cargo test -p mir-runtime --test clean_near_end_samples`
   - pass (`25/25`)
+- reviewer follow-up:
+  - added `clean_sample_delegated_rng_service_keeps_dedicated_signature_side_fields`
+  - reran `cargo test -p mir-runtime --test clean_near_end_samples`
+  - pass (`26/26`)
 - `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures --format json`
   - helper sample still emits instance/provenance-rich rows such as `sample_transition` and `runtime_witness`
 - `python3 scripts/sugoroku_world_samples.py closeout --format json`
