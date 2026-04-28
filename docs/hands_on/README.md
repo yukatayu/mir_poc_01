@@ -27,6 +27,8 @@
   - `R3` FAIRY-05 visibility-return carrier bundling の最短入口
 - `hotplug_real_migration_rollback_boundary_01.md`
   - `R4` hot-plug real migration / rollback boundary の最短入口
+- `runtime_crate_hotplug_engine_ownership_cut_01.md`
+  - `R5` runtime-crate hot-plug engine ownership cut の最短入口
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`

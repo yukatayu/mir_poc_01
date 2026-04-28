@@ -84,6 +84,9 @@ helper schema の widening、runtime-crate engine 実装、final public ABI の�
 - promoted next line after `R4` は
   `R5` runtime-crate hot-plug engine ownership cut とし、
   helper-local preview、crate-side carrier、runtime orchestration の owner split を narrow に整理する
+- `R5` closeout 後の owner split memory は
+  `plan/33-runtime-crate-hotplug-engine-ownership-cut.md`
+  を reader-facing current memory として参照する
 
 ## validation floor
 

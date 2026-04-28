@@ -51,7 +51,8 @@
 - `docs/reports/0977-*` は `R2` `AttachPoint` compatibility / detach minimal contract closeout を表し、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row、grounding anchor、kept-later migration / rollback gate を `plan/30` と reader-facing docs に actualize した
 - `docs/reports/0978-*` は `R3` `FAIRY-05` visibility-return carrier bundling closeout を表し、helper closeout implementation inventory `carrier_choice = UNRESOLVED` を保ったまま、carrier-choice matrix と provisional recommendation `typed bundle over state_timeline + anchor_switch` を `plan/31` と reader-facing docs に actualize した
 - `docs/reports/0979-*` は `R4` hot-plug real migration / rollback boundary closeout を表し、helper-local evidence floor を widening せずに kept-later hot-plug boundary matrix を `plan/32` と reader-facing docs に actualize した
-- current promoted next line は `R5` runtime-crate hot-plug engine ownership cut
+- `docs/reports/0982-*` は `R5` runtime-crate hot-plug engine ownership cut closeout を表し、helper-local preview / `mirrorea-core` generic carrier-substrate / `mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を `plan/33` と reader-facing docs に actualize した
+- current promoted next line は implementation-side runtime-crate hot-plug engine actualization remains later。`R5` owner split は docs-first に fixed 済みであり、exact package decomposition は OPEN のまま残す
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -82,7 +83,7 @@
 11. `R4` hot-plug real migration / rollback boundary
    - close 済み。helper-local evidence floor を widening せずに、real migration / rollback / runtime-crate hot-plug engine / distributed activation ordering を kept-later boundary として `plan/32` と reader-facing docs に固定した
 12. `R5` runtime-crate hot-plug engine ownership cut
-   - active。helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に整理し、engine actualization や final public ABI を claim しない
+   - close 済み。helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に固定し、helper `hotplug_lifecycle` / sample anchor IDs / `LogicalPlaceRuntimeShell` / thin runtime assembly の non-equivalence を current memory に残した
 
 ## mixed gate
 

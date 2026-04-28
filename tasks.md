@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 22:43 JST
+最終更新: 2026-04-28 23:23 JST
 
 ## この文書について
 
@@ -20,7 +20,7 @@
 - `P15` projection/codegen first emitted place-specific programs の current first cut は close 済みで、`scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` によって committed generated bridge evidence / live-anchor alignment / `kept_later_gates` を current line に actualize 済みです。
 - `P16` visual debugger / viewer first public prototype の current first cut は close 済みで、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`kept_later_gates` によって typed public prototype inventory over helper/runtime surfaces を current line に actualize 済みです。
 - `P17` storage / LLVM / backend preparation の current first cut も close 済みで、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` によって external workdir / cleanup / LLVM staging ownership mismatch を non-destructive probe floor として current line に actualize 済みです。
-- current promoted next line は **`R5` runtime-crate hot-plug engine ownership cut** です。
+- current promoted next line は **implementation-side runtime-crate hot-plug engine actualization remains later** です。`R5` で owner split は fixed したが、exact package decomposition はまだ OPEN です。
 - next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
@@ -64,7 +64,7 @@
 | `R2` `AttachPoint` compatibility / detach minimal contract | `Macro 8` prep | `S0 -> S2` | closed | closed | helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を docs-first に固定した |
 | `R3` `FAIRY-05` visibility-return carrier bundling | `Macro 8` prep | `S0 -> S2` | closed | closed | helper closeout implementation inventory を変えずに carrier-choice matrix と provisional recommendation を docs-first に固定した |
 | `R4` hot-plug real migration / rollback boundary | `Macro 8` prep | `S0 -> S2` | closed | closed | helper-local evidence floor を widening せずに kept-later hot-plug boundary matrix を docs-first に固定した |
-| `R5` runtime-crate hot-plug engine ownership cut | `Macro 8` prep | `S0 -> S2` | active (docs-first) | ~1 task | helper-local preview / crate-side carrier / runtime orchestration の owner split を narrow に整理する |
+| `R5` runtime-crate hot-plug engine ownership cut | `Macro 8` prep | `S0 -> S2` | closed | closed | helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に固定した |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -705,7 +705,7 @@
 ### R5. runtime-crate hot-plug engine ownership cut
 
 - status:
-  active。`R4` closeout memory を前提に、helper-local hot-plug evidence、crate-side carrier/runtime substrate、later runtime orchestration の owner split を docs-first に narrow に整理する。hot-plug engine actualization や final public ABI の固定はまだ行わない。
+  close 済み。`R4` closeout memory を前提に、helper-local hot-plug evidence、crate-side carrier/runtime substrate、later runtime orchestration の owner split を docs-first に narrow に固定した。hot-plug engine actualization や final public ABI の固定はまだ行わない。
 
 - macro phase / stage:
   `Macro 8` prep, `S0 -> S2`
@@ -728,6 +728,12 @@
   新しい report、`plan/21`、新設する `plan/33-runtime-crate-hotplug-engine-ownership-cut.md`、`README.md` / `Documentation.md` / `progress.md` / `tasks.md` / `docs/research_abstract/mirrorea_future_axis_01.md` / `docs/hands_on/current_phase_closeout_01.md` の同期。`samples_progress.md 更新不要` なら report に明記する
 - stop line:
   hot-plug engine を実装しない。`hotplug_lifecycle` や `LogicalPlaceRuntimeShell` を既成 engine と見なさない。rollback / migration / distributed activation ordering / final public ABI を同じ package で fixed にしない
+
+### post-`R5` current reading
+
+- no narrower docs-first package is promoted yet
+- next actual work is implementation-side runtime-crate hot-plug engine actualization
+- exact package decomposition は `OPEN QUESTION` であり、owner split fixed と engine actualization を同じ package に潰さない
 
 ## research を通して見つけること
 

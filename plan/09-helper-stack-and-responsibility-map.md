@@ -91,6 +91,12 @@ run_directory_named_profile
   - `P10` `mirrorea-core` first real implementation tranche 後は、Rust 側の `LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation の ownership は `crates/mirrorea-core` に置き、`crates/mir-runtime/src/clean_near_end.rs` は current report-local assembly と closeout inventory を担う。
   - `P11` current third cut では、`MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed `add_initial_participant` / `add_participant` / `leave_participant` parity helper も `crates/mirrorea-core` に actualize してよい。
   - `WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / helper-local `turn_timeline` / `membership_snapshot` / `projection_view` / `hotplug_lifecycle` は kept-later であり、current cut では Rust core substrate に昇格させない。
+  - `R5` ownership cut 後の current reading では、
+    - helper-local `hotplug_lifecycle` と sample-grounded `attach_request#1 / detach_request#1 / detached_roll_request#1` は Python preview ownership に残す
+    - `mirrorea-core` は generic `MessageEnvelope` / `PrincipalClaim` / `AuthEvidence` carrier と `MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell` substrate を owned current line に持つ
+    - `mir-runtime` は thin runtime/report assembly を担う later orchestration candidate であって、hot-plug engine owner ではない
+    と reader-facing に固定してよい。
+  - Python/Rust の carrier duplication は current owner split の incomplete migration evidence であり、Rust-side canonical move complete を意味しない。
   - これは final public message schema、final public auth protocol、final public transport contract を意味しない。
 - current sample-visible visualization / telemetry cut では、
   - Sugoroku helper `run_sample()` payload の `visualization_views` / `telemetry_rows`

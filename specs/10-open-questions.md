@@ -222,8 +222,16 @@
        runtime-crate engine / rollback protocol / durable migration / final public ABI / distributed activation ordering
        は kept-later boundary である、
        という line までは current docs に上げてよい。
+     - 2026-04-28 時点の `R5` docs-first closeout として、
+       `plan/33-runtime-crate-hotplug-engine-ownership-cut.md` により
+       helper-local `hotplug_lifecycle` / sample-grounded attach-detach anchor IDs は Python preview ownership に残る、
+       `mirrorea-core` は generic `MessageEnvelope` / `PrincipalClaim` / `AuthEvidence` carrier と
+       `MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell` substrate を owned current line に持つ、
+       `mir-runtime` は thin runtime/report assembly であって current hot-plug engine owner ではない、
+       Python/Rust carrier duplication は ownership migration complete を意味しない、
+       という line までは current docs に上げてよい。
      - 未決なのは final hot-plug ABI、rollback、durable state migration engine である。
-     - `UNRESOLVED`: runtime-crate hot-plug engine の exact ownership split、actual rollback protocol、actual durable migration engine、distributed activation ordering の exact contract、final public hot-plug ABI。
+     - `UNRESOLVED`: actual runtime-crate hot-plug engine actualization、hot-plug-specific Rust carrier introductionの要否、actual rollback protocol、actual durable migration engine、distributed activation ordering の exact contract、final public hot-plug ABI。
   7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。
      - 2026-04-27 時点で active representative slice は `FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06`、residual planned family は `samples/not_implemented/avatar-fairy-follow/` の `FAIRY-05` に固定した。
      - 2026-04-27 時点の docs-first fixation では、もし widen するなら explicit state timeline / anchor switch evidence が必要、という gate だけを current line に上げてよい。

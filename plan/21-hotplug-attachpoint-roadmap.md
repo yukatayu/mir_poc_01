@@ -141,6 +141,33 @@ reader-facing current memory は
 `docs/hands_on/hotplug_real_migration_rollback_boundary_01.md`
 を参照する。
 
+## 2026-04-28 R5 ownership-cut closeout note
+
+`R5` では、
+helper-local `hotplug_lifecycle` / anchor envelope IDs、
+`mirrorea-core` generic carrier / logical runtime substrate、
+`mir-runtime` thin runtime/report assembly
+の owner split を narrow に固定した。
+
+fixed current reading:
+
+- helper `hotplug_lifecycle`
+  != runtime-crate engine ownership
+- sample-grounded `attach_request#1 / detach_request#1 / detached_roll_request#1`
+  != Rust-side canonical hot-plug protocol family
+- `LogicalPlaceRuntimeShell`
+  != world/game/hot-plug engine
+- `mir-runtime`
+  != current hot-plug engine owner
+- Python/Rust carrier duplication
+  != ownership migration complete
+
+reader-facing current memory は
+`plan/33-runtime-crate-hotplug-engine-ownership-cut.md`、
+`docs/research_abstract/runtime_crate_hotplug_engine_ownership_cut_01.md`、
+`docs/hands_on/runtime_crate_hotplug_engine_ownership_cut_01.md`
+を参照する。
+
 ## next relation
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。

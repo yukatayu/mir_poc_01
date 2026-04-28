@@ -33,6 +33,7 @@
 - `attachpoint_detach_minimal_contract_01.md`
 - `fairy05_visibility_return_carrier_bundling_01.md`
 - `hotplug_real_migration_rollback_boundary_01.md`
+- `runtime_crate_hotplug_engine_ownership_cut_01.md`
 - `typed_external_boundary_adapter_plan_01.md`
 - `projection_placement_plan_01.md`
 - `hotplug_attachpoint_plan_01.md`
