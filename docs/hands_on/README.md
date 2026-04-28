@@ -25,6 +25,8 @@
   - `R2` AttachPoint compatibility / detach minimal contract の最短入口
 - `fairy05_visibility_return_carrier_bundling_01.md`
   - `R3` FAIRY-05 visibility-return carrier bundling の最短入口
+- `hotplug_real_migration_rollback_boundary_01.md`
+  - `R4` hot-plug real migration / rollback boundary の最短入口
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`

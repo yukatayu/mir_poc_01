@@ -50,7 +50,8 @@
 - `docs/reports/0976-*` は `R1` closeout trail と `R2` promoted-next sync を表し、research landing stale drift、`progress.md` recent log、`samples_progress.md` `PH0` row、report trail completion を current line に actualize した
 - `docs/reports/0977-*` は `R2` `AttachPoint` compatibility / detach minimal contract closeout を表し、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row、grounding anchor、kept-later migration / rollback gate を `plan/30` と reader-facing docs に actualize した
 - `docs/reports/0978-*` は `R3` `FAIRY-05` visibility-return carrier bundling closeout を表し、helper closeout implementation inventory `carrier_choice = UNRESOLVED` を保ったまま、carrier-choice matrix と provisional recommendation `typed bundle over state_timeline + anchor_switch` を `plan/31` と reader-facing docs に actualize した
-- current promoted next line は `R4` hot-plug real migration / rollback boundary
+- `docs/reports/0979-*` は `R4` hot-plug real migration / rollback boundary closeout を表し、helper-local evidence floor を widening せずに kept-later hot-plug boundary matrix を `plan/32` と reader-facing docs に actualize した
+- current promoted next line は `R5` runtime-crate hot-plug engine ownership cut
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -79,7 +80,9 @@
 10. `R3` `FAIRY-05` visibility-return carrier bundling
    - close 済み。helper closeout implementation inventory `carrier_choice = UNRESOLVED` を保ったまま、carrier-choice matrix と provisional recommendation `typed bundle over state_timeline + anchor_switch` を `plan/31` と reader-facing docs に固定した
 11. `R4` hot-plug real migration / rollback boundary
-   - active。`R2` current minimal contract row の先に残る real migration / rollback / runtime-crate hot-plug engine / distributed activation ordering を kept-later boundary として docs-first に整理する
+   - close 済み。helper-local evidence floor を widening せずに、real migration / rollback / runtime-crate hot-plug engine / distributed activation ordering を kept-later boundary として `plan/32` と reader-facing docs に固定した
+12. `R5` runtime-crate hot-plug engine ownership cut
+   - active。helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に整理し、engine actualization や final public ABI を claim しない
 
 ## mixed gate
 

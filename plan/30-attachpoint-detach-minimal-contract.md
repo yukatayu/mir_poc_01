@@ -139,4 +139,5 @@ current grounding carrier は `message_envelopes` であり、少なくとも次
 - current minimal contract row は helper-local evidence floor に留める
 - attach / detach wording を広げるときも、accepted/rejected `MessageEnvelope` seam を正本に残す
 - migration / rollback / final public ABI を、current helper-local lifecycle evidence に仮託して claim しない
-- `R2` closeout 後の promoted next line は、`FAIRY-05` carrier bundling を docs-first に narrow にする `R3` として読む
+- `R4` closeout 後の current boundary memory は `plan/32-hotplug-real-migration-rollback-boundary.md` を参照し、real migration / rollback / runtime-crate engine / distributed activation ordering は kept-later boundary として読む
+- promoted next line after `R4` は `R5` runtime-crate hot-plug engine ownership cut として読み、helper-local preview と crate-side runtime ownership split を narrow に整理する

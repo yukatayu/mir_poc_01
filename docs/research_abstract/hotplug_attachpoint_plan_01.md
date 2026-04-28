@@ -63,6 +63,24 @@ reader-facing current memory は
 `../../plan/30-attachpoint-detach-minimal-contract.md`
 を参照する。
 
+## `R4` closeout memory
+
+`R4` では、current minimal contract row の先に残る
+real migration / rollback / runtime-crate hot-plug engine /
+distributed activation ordering を
+current helper-local evidence がまだ証明していない kept-later boundary として整理しました。
+
+- `activation_cut` は distributed activation ordering ではない
+- `migration_contract` row は unresolved-state honesty lane であり protocol ではない
+- rejected `detached_roll_request#1` は completed rollback ではない
+- storage detach / network replay / runtime detach lifecycle は collapse しない
+
+reader-facing current memory は
+`hotplug_real_migration_rollback_boundary_01.md`、
+`../hands_on/hotplug_real_migration_rollback_boundary_01.md`、
+`../../plan/32-hotplug-real-migration-rollback-boundary.md`
+を参照する。
+
 ## compatibility checklist
 
 - required capability / witness

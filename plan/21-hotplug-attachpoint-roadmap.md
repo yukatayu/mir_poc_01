@@ -117,6 +117,30 @@ reader-facing current memory は
 `docs/hands_on/attachpoint_detach_minimal_contract_01.md`
 を参照する。
 
+## 2026-04-28 R4 kept-later boundary closeout note
+
+`R4` では、`R2` current minimal contract row の先に残る
+real migration / rollback / runtime-crate hot-plug engine /
+distributed activation ordering を、
+helper-local evidence floor と切り離した kept-later boundary として narrow に整理した。
+
+fixed current reading:
+
+- `activation_cut` は requested attach と active state mutation の split を示すが、
+  distributed activation ordering は示さない
+- `migration_contract` row は unresolved-state honesty lane であり、
+  protocol / schema ではない
+- rejected `detached_roll_request#1` は explicit boundary evidence であって、
+  completed rollback ではない
+- storage detach / network replay / runtime detach lifecycle は別 concern として残す
+- helper-local `hotplug_lifecycle` は runtime-crate ownership や final public ABI を示さない
+
+reader-facing current memory は
+`plan/32-hotplug-real-migration-rollback-boundary.md`、
+`docs/research_abstract/hotplug_real_migration_rollback_boundary_01.md`、
+`docs/hands_on/hotplug_real_migration_rollback_boundary_01.md`
+を参照する。
+
 ## next relation
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。
