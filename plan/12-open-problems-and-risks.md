@@ -24,6 +24,7 @@
 | repository taxonomy drift | docs / structure | NEW | sample/script/crate taxonomy が drift し、active/planned/generated/archive が混ざる | `plan/19`、`samples/README.md`、`scripts/README.md`、no-risk-first staged migration を維持する |
 | root-disk exhaustion | storage / VPS | NEW | `target/`、LLVM、generated artifact が root を圧迫する | external workdir policy、storage audit、cleanup script を先に入れる |
 | unsafe detachable cleanup | storage / ops | NEW | cleanup script が repo source や report を消す | `--confirm` 必須、known disposable dir 限定、detach_prepare non-destructive |
+| llvm staging parent ownership mismatch | storage / ops | NEW | `/mnt/mirrorea-work/llvm` parent が `root:root` のまま cleanup/recreate を行うと non-root helper が途中で詰まる | `P17` で owner/writable probe、`llvm/src` cleanup exclusion、parent non-writable 時の build/install cleanup guard を current line に actualize し、ownership repair は explicit setup path に残す |
 | shared-space profile collapse | shared-space | OPEN | authoritative-room default を exhaustive catalog と誤読する | minimal working subset と final catalog を分ける |
 | sugoroku vertical-slice overclaim | Mirrorea / application sample | 継続監視 | single-process logical multi-place emulator を real network / consensus と誤読する | no network / no consensus / no durable commit を closeout で明記する |
 
@@ -47,6 +48,8 @@
   - helper-local synthetic preview cut は `0941` / `plan/25` で actualize したが、final public adapter API、console / overlay / viewer contract、browser / network / VR family split は未決のまま残す
 - actual LLVM build / backend choice / packaging success criteria
   - guardrail と non-destructive probe は `0927` / `plan/23` で actualize したが、actual LLVM artifact、final backend choice、installed-binary / FFI / engine adapter success criteria は未決のまま残す
+- `/mnt/mirrorea-work/llvm` parent の ownership repair と source checkout lifecycle
+  - `P17` current first-cut closeout で owner/writable visibility と cleanup guard は actualize したが、root-owned parent の ownership repair、`llvm/src` checkout retention policy、source cleanup lifecycle は explicit setup / later package に残す
 - avatar fairy follow residual `FAIRY-05` を active helper に取り込むか
   - docs-first では explicit state timeline / anchor switch evidence gate だけを固定し、
     visibility-return witness の carrier bundling と runnable widening の価値は未決

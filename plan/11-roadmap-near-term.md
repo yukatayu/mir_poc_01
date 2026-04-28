@@ -43,8 +43,8 @@
 - `docs/reports/0969-*` は `P14` hot-plug package-manager tranche の current first-cut closeout を表し、helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を current line に actualize した
 - `docs/reports/0970-*` は `P15` projection/codegen first emitted place-specific programs の current first-cut closeout を表し、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize した
 - `docs/reports/0971-*` は `P16` visual debugger / viewer first public prototype の current first-cut closeout を表し、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を current line に actualize した
-- current promoted next package は `P17` storage / LLVM / backend preparation
-- next reopen point は `P18` public API / parser grammar gate
+- current promoted next package は `P18` public API / parser grammar gate
+- next reopen point は `P18` 後段の true user-spec hold line
 
 ## stabilized queue
 
@@ -59,7 +59,8 @@
 5. `P15-P17` first real implementation tranche
    - `P15` current first cut は committed generated bridge evidence only として close 済み
    - `P16` current first cut は typed public prototype inventory only として close 済み
-   - current promoted line は storage/backend、next reopen point は public freeze mixed gate
+   - `P17` current first cut も storage/backend current first-cut closeout として close 済み
+   - current promoted line は public freeze mixed gate、next reopen point は post-`P18` true user-spec hold line
 6. `P18` public API / parser grammar gate
    - final public freeze は最後の mixed gate に残す
 

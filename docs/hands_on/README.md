@@ -13,6 +13,8 @@
   - 2026-04-28 時点の current phase closeout と、今すぐ実行する確認コマンド、remaining mixed gate、next queue
 - `visual_debugger_viewer_01.md`
   - `P16` typed public prototype inventory の最短入口
+- `compiler_backend_llvm_preparation_01.md`
+  - `P17` storage / LLVM / backend preparation current first-cut closeout の最短入口
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`

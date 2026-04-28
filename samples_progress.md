@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 18:44 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P16` visual debugger / viewer first public prototype で fixed した typed public prototype inventory over helper/runtime surfaces を保ち、その次の promoted line として `P17` storage / LLVM / backend preparation を implementation-ready staging へ進める
-Current active packages: `P17` storage / LLVM / backend preparation (`promoted next`; `P18` public API / parser grammar gate が reopen next)
+Last updated: 2026-04-28 19:11 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor、viewer typed public prototype inventory、storage/backend current first-cut closeout を保ったまま、`P18` public API / parser grammar gate の repo-side freeze checklist / public-boundary inventory を mixed gate と true user-spec hold line に分けて整理する
+Current active packages: `P18` public API / parser grammar gate (`promoted next mixed gate`; packaging / installed binary / FFI / engine adapter / final shared-space operational catalog は post-`P18` true user-spec hold line)
 
 ## Legend
 
@@ -34,12 +34,13 @@ Progress:
 | Viewer prototype | 100 | typed public prototype inventory first-cut closeout closed | `scripts/visual_debugger_viewer_samples.py` により helper/runtime typed inventory を `viewer_panel_lanes` / `viewer_telemetry_lanes` へ正規化し、`P16-VIEW-01..05` と `kept_later_gates` を current floor に固定した | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | Projection / placement | 90 | helper-local + report-local preview floor + generated bridge first-cut closeout closed | `projection_view` と `cross_place_projection` を維持しつつ `scripts/projection_codegen_samples.py`、committed generated bridge manifest、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に固定した | `python3 scripts/projection_codegen_samples.py closeout --format json` |
 | Hot-plug package | 100 | helper-local lifecycle canary + package-manager first-cut closeout closed | `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を closeout に固定しつつ real migration を deferred に保つ | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
+| Storage / backend guardrail | 100 | external workdir / cleanup / LLVM staging current first-cut closeout closed | `scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23` を通じて owner/writable probe と cleanup guard を current line に固定した | `bash scripts/storage/detach_prepare.sh` |
 
 ## Active sample matrix
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 18:44 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967`, `0968`, `0969`, `0970`, `0971` | source hierarchy と report discipline の current floor |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 19:11 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967`, `0968`, `0969`, `0970`, `0971`, `0972` | source hierarchy と report discipline の current floor |
 | `PH1` | Mir core | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | final parser / public API deferred |
 | `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 15:32 JST | `0904`, `0913`, `0945`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965` | public shell / packaging deferred。`P10` で `mirrorea-core` minimal carrier ownership cut と `transport == transport_seam` compatibility invariant、`P11` で `MembershipRegistry` / `PlaceCatalog` substrate、bootstrap/epoch guard、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper が actualize 済み |
 | `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-28 13:09 JST | `0909`, `0916`, `0931`, `0945`, `0955` | runtime attach floor + helper-local attachpoint compatibility / activation evidence。current closeout では `world_surface` と `MembershipRegistry` source-of-truth の anchor にもなる |
@@ -81,7 +82,7 @@ Progress:
 | `NET-02..05` | network transport | `scripts/network_transport_samples.py` | helper-local canary family | 100 | positive + negative | 2026-04-28 16:29 JST | `0932`, `0945`, `0967` | subprocess JSON bridge / stale reconnect reject / typed failure / redacted route trace と closeout inventory を固定 |
 | `PH14` | hot-plug package | `plan/21-hotplug-attachpoint-roadmap.md`, `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | helper-local lifecycle canary + package-manager first-cut closeout | 100 | positive + negative | 2026-04-28 16:53 JST | `0925`, `0931`, `0955`, `0968`, `0969` | helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を fixed。real migration / rollback / attachpoint runtime remain deferred |
 | `PH15` | visualization / IDE | Sugoroku helper views、runtime report-local views、`scripts/visual_debugger_viewer_samples.py` | helper-local + report-local security hardening + typed public prototype inventory closed | 100 | positive | 2026-04-28 18:44 JST | `0922`, `0954`, `0971` | helper/runtime security envelope、typed telemetry retention floor、NET-05 fail-closed route trace、`P16-VIEW-01..05` typed public prototype inventory まで current scope close。duplicate helper panel-id は explicit canonicalization し、final public viewer contract は deferred |
-| `PH16` | compiler / backend / LLVM preparation | `/mnt/mirrorea-work`, `scripts/env/mirrorea_storage_env.sh`, `plan/23-compiler-backend-llvm-guardrail-roadmap.md` | storage / backend guardrail | 75 | operational positive | 2026-04-27 18:48 JST | `0913`, `0915`, `0927` | actual LLVM build / backend choice is still later |
+| `PH16` | compiler / backend / LLVM preparation | `/mnt/mirrorea-work`, `scripts/env/mirrorea_storage_env.sh`, `scripts/storage/detach_prepare.sh`, `plan/23-compiler-backend-llvm-guardrail-roadmap.md` | storage / backend guardrail current first-cut closeout | 100 | operational positive | 2026-04-28 19:09 JST | `0913`, `0915`, `0927`, `0972` | external workdir / cleanup / LLVM staging owner-writable probe と guard implementation / stop line は close 済み。cleanup refusal branch と actual LLVM build / backend choice / ownership repair は still later |
 
 ## E2E samples
 
@@ -101,7 +102,7 @@ Progress:
 |---|---|---|---|
 | external workdir `/mnt/mirrorea-work` | active | `findmnt /mnt/mirrorea-work` | `/dev/vdb1` ext4 mount、`target/` SSD cutover 済み |
 | cargo registry cache | active guardrail | `bash scripts/env/mirrorea_storage_env.sh` | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache` を intended binding にしている |
-| LLVM path readiness | guardrail only | `ls -ld /mnt/mirrorea-work/llvm/*` | directory はあるが actual LLVM build はまだ |
+| LLVM path readiness | current first-cut closeout | `ls -ld /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/*` | `llvm/src` / `build` / `install` は staging path。`/mnt/mirrorea-work/llvm` parent の owner/writable status を visible にし、routine helper は ownership repair を行わない |
 
 ## Current blockers
 
@@ -113,12 +114,21 @@ Progress:
 | `FAIRY-05` carrier bundling | avatar follow | medium | repo | explicit state timeline / anchor switch evidence を保ったまま `UNRESOLVED` を解く |
 | real migration / rollback | hot-plug | medium | repo | helper-local lifecycle canary の先に attachpoint migration contract を切り出す |
 | real socket / durable replay | network transport | high | repo + user | helper-local canary を維持しつつ production transport line は defer する |
-| actual LLVM build / backend choice | compiler / backend | medium | user + repo | guardrail を壊さず、later package で backend target を決める |
+| actual LLVM build / backend choice | compiler / backend | medium | user + repo | `P17` first-cut closeout は完了済み。guardrail を壊さず、backend target と actual build は post-`P18` line で決める |
 
 ## Recent validation
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-28 19:11 JST | `python3 scripts/check_source_hierarchy.py` | pass | report `0972` 追加後も required hierarchy is intact |
+| 2026-04-28 19:11 JST | `python3 scripts/validate_docs.py` | pass | docs scaffold is complete。numbered reports は 970 |
+| 2026-04-28 19:11 JST | `git diff --check` | pass | `P17` closeout diff は whitespace-clean |
+| 2026-04-28 19:09 JST | `bash scripts/env/mirrorea_storage_env.sh` | pass | `MIRROREA_WORKDIR` / `CARGO_HOME` / `MIRROREA_LLVM_*` を返し、`llvm` parent `root:root` と non-writable warning を visible にする |
+| 2026-04-28 19:09 JST | `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs` | pass | mounted workdir 下の required dirs を再確認 |
+| 2026-04-28 19:09 JST | `bash scripts/storage/detach_prepare.sh` | pass | repo `102M`、`.git` `80M`、external workdir `6.0G`、cargo target `5.9G`、`llvm` owner/writable status、`llvm/src` cleanup exclusion を出力 |
+| 2026-04-28 19:09 JST | `bash scripts/storage/cleanup_disposable_artifacts.sh --list` | pass | disposable candidate inventory と `llvm` root owner/writable status を出力し、`llvm/src` を除外する。refusal branch 自体は list-mode なので未実行 |
+| 2026-04-28 19:09 JST | `ls -ld target /mnt/mirrorea-work/cargo-target /mnt/mirrorea-work/cargo-registry-cache /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install` | pass | `target` symlink、`llvm` parent `root:root`、child staging dirs user-owned を再確認 |
+| 2026-04-28 19:09 JST | `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` | pass | external cargo cache / target binding で build probe は green。existing warnings only |
 | 2026-04-28 18:44 JST | `python3 -m unittest scripts.tests.test_visual_debugger_viewer_samples` | pass | viewer helper suite 8/8 green。duplicate `panel_id` canonicalization と live telemetry-kind aggregation regression を含む |
 | 2026-04-28 18:44 JST | `python3 scripts/visual_debugger_viewer_samples.py run P16-VIEW-02 --format json` | pass | helper closeout catalog bundle は duplicate `verification_summary` を `verification_summary@2` へ canonicalize し、silent shadowing を起こさない |
 | 2026-04-28 18:44 JST | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | pass | `actualized_telemetry_kinds` は live normalized bundles から `history_visibility` / `hotplug_activation` / `hotplug_detach` / `membership_update` / `message_dispatch` / `model_check_summary` / `published_roll` / `route_hop` / `typed_effect_request` / `typed_effect_receipt` を返す |

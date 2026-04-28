@@ -38,9 +38,9 @@
   - `P14` hot-plug package-manager tranche の current first-cut closeout も close 済みであり、helper closeout `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を actualize 済み
   - `P15` projection/codegen first emitted place-specific programs の current first-cut closeout も close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を actualize 済み
   - `P16` visual debugger / viewer first public prototype の current first-cut closeout も close 済みであり、`scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を actualize 済み
-  - current promoted next package は `P17` storage / LLVM / backend preparation
-  - next reopen point は `P18` public API / parser grammar gate
-  - `P15-P17` は first real implementation tranche、`P18` は final mixed gate
+  - current promoted next package は `P18` public API / parser grammar gate
+  - next reopen point は `P18` 後段の true user-spec hold line
+  - `P15-P17` は first real implementation tranche closeout 済み、`P18` は final mixed gate
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

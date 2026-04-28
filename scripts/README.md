@@ -27,7 +27,15 @@
 ### storage / env
 
 - `env/`
+- `env/mirrorea_storage_env.sh`
+  mounted external workdir 前提の env export surface。`MIRROREA_WORKDIR`、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM staging path、mount/ownership/writable status を返し、`--ensure-dirs` は unmounted default root への heavy dir 作成を拒否する
 - `storage/`
+- `storage/setup_mirrorea_workdisk_root.sh`
+  mount / fstab / symlink / ownership repair を伴う one-time root setup path。routine helper ではない
+- `storage/detach_prepare.sh`
+  non-destructive storage audit。disk / mount / repo usage / external workdir usage / LLVM staging dir ownership / disposable candidates を確認する
+- `storage/cleanup_disposable_artifacts.sh`
+  explicit `--confirm` 必須の disposable cleanup helper。known disposable dir だけを対象にし、`llvm/src` は意図的に対象外、`llvm` parent が non-writable な場合の build/install cleanup も拒否する
 
 ### tests
 

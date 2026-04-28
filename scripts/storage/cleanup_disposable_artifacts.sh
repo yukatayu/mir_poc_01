@@ -51,6 +51,17 @@ echo "[cleanup] workdir: $MIRROREA_WORKDIR"
 echo "[cleanup] mounted: $mounted"
 echo "[cleanup] candidates:"
 printf '  %s\n' "${candidates[@]}"
+llvm_root_owner=missing
+llvm_root_writable=no
+if [[ -d "$MIRROREA_WORKDIR/llvm" ]]; then
+  llvm_root_owner="$(stat -c '%U:%G' "$MIRROREA_WORKDIR/llvm" 2>/dev/null || echo unknown)"
+  if [[ -w "$MIRROREA_WORKDIR/llvm" ]]; then
+    llvm_root_writable=yes
+  fi
+fi
+echo "[cleanup] llvm root owner: $llvm_root_owner"
+echo "[cleanup] llvm root writable: $llvm_root_writable"
+echo "[cleanup] llvm source checkout intentionally excluded: $MIRROREA_LLVM_SRC_DIR"
 
 if [[ "$list_only" -eq 1 ]]; then
   exit 0
@@ -81,6 +92,11 @@ for candidate in "${candidates[@]}"; do
   if [[ ! -e "$candidate" ]]; then
     echo "[cleanup] skip missing: $candidate"
     continue
+  fi
+  if [[ ("$candidate" == "$MIRROREA_LLVM_BUILD_DIR" || "$candidate" == "$MIRROREA_LLVM_INSTALL_DIR") && "$llvm_root_writable" != yes ]]; then
+    echo "[cleanup] refusing llvm build/install cleanup while parent is not writable: $MIRROREA_WORKDIR/llvm ($llvm_root_owner)" >&2
+    echo "[cleanup] use the explicit root setup path or repair ownership before deleting staged llvm build/install directories" >&2
+    exit 2
   fi
   candidate_abs="$(readlink -f "$candidate")"
   case "$candidate_abs" in

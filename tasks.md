@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 18:44 JST
+最終更新: 2026-04-28 19:11 JST
 
 ## この文書について
 
@@ -19,8 +19,9 @@
 - `P12` external adapter / host boundary tranche の current first cut は close 済みで、typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize 済みです。
 - `P15` projection/codegen first emitted place-specific programs の current first cut は close 済みで、`scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` によって committed generated bridge evidence / live-anchor alignment / `kept_later_gates` を current line に actualize 済みです。
 - `P16` visual debugger / viewer first public prototype の current first cut は close 済みで、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`kept_later_gates` によって typed public prototype inventory over helper/runtime surfaces を current line に actualize 済みです。
-- current promoted next line は **`P17` storage / LLVM / backend preparation** です。
-- next reopen point は **`P18` public API / parser grammar gate** です。
+- `P17` storage / LLVM / backend preparation の current first cut も close 済みで、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` によって external workdir / cleanup / LLVM staging ownership mismatch を non-destructive probe floor として current line に actualize 済みです。
+- current promoted next line は **`P18` public API / parser grammar gate** です。
+- next reopen point は **`P18` 後段の true user-spec hold line** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -33,7 +34,7 @@
 | avatar follow | `samples/clean-near-end/avatar-follow/` + `scripts/avatar_follow_samples.py` | `FAIRY-01/02/03/04/06` active、`FAIRY-05` は planned |
 | typed external / transport | `scripts/typed_external_boundary_samples.py`、`scripts/network_transport_samples.py` | helper-local synthetic preview / canary。typed external residual reopen matrix は fixed 済みだが、final public adapter / transport contract ではない |
 | projection / placement | Sugoroku `projection_view`、runtime `cross_place_projection`、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json` | helper-local / report-local preview floor + committed generated bridge evidence。final emitted executable program ではない |
-| storage / backend guardrail | `/mnt/mirrorea-work`、`scripts/env/mirrorea_storage_env.sh` | root disk を既成事実化しない external workdir floor |
+| storage / backend guardrail | `/mnt/mirrorea-work`、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh` | root disk を既成事実化しない external workdir floor と `llvm` staging ownership mismatch visibility |
 
 ## ordered self-driven packages
 
@@ -56,8 +57,8 @@
 | `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local package-manager inventory fixed |
 | `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | preview floor -> committed generated bridge evidence + alignment surface |
 | `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | typed public prototype inventory over helper/runtime surfaces |
-| `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | promoted next | 1-3 tasks | guardrail -> implementation-ready |
-| `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | reopen next mixed gate | user + repo dependent | final freeze remains last |
+| `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | closed (first cut) | closed | guardrail -> implementation-ready staging closeout |
+| `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | promoted next mixed gate | 1-3 tasks + user hold | repo-side freeze checklist first; final freeze remains last |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -512,31 +513,39 @@
 ### P17. storage / LLVM / backend preparation
 
 - status:
-  promoted next。external workdir / LLVM guardrail を implementation-ready staging に寄せるが、device rewrite や backend freeze はまだ行わない。
+  close 済み。external workdir / LLVM guardrail を implementation-ready staging に寄せ、`llvm` owner/writable visibility、`llvm/src` cleanup exclusion、parent non-writable 時の `llvm/build` / `llvm/install` cleanup guard を current closeout line に固定した。device rewrite や backend freeze はまだ行わない。
 
 - macro phase / stage:
   `Macro 7`, `S3 -> S5`
 - objective:
   guardrail-only current line を implementation-ready な storage / LLVM / backend preparation に進める
 - deliverables:
-  external workdir policy、LLVM staging policy、cleanup safety、backend-prep stop line
+  external workdir policy、LLVM staging policy、cleanup safety、owner/writable probe、backend-prep stop line
 - validation command:
   `bash scripts/env/mirrorea_storage_env.sh`
+  `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`
   `bash scripts/storage/detach_prepare.sh`
+  `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
   `df -h`
+  `free -h`
   `lsblk -f`
   `findmnt`
+  `ls -ld target /mnt/mirrorea-work/cargo-target /mnt/mirrorea-work/cargo-registry-cache /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install`
+  `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
 - debug / visualization output:
-  storage audit evidence、workdir mount status
+  storage audit evidence、workdir mount status、LLVM owner/writable status、cleanup candidate inventory
 - docs / report requirement:
   新しい report、storage audit、`samples_progress.md`、relevant plan/docs を同期する
 - stop line:
-  device format、mount rewrite、destructive cleanup を無断で実行しない
+  device format、mount rewrite、destructive cleanup、root-owned llvm parent の ownership repair、actual LLVM build を無断で実行しない
 
 ### P18. public API / parser grammar gate
 
 - status:
-  reopen next mixed gate。`P17` の後で final public freeze 条件を定義するが、prior package 未成熟のまま public contract を固めない。
+  promoted next mixed gate。`P17` close 後に final public freeze 条件と repo-side public-boundary inventory を定義するが、prior package 未成熟のまま public contract を固めない。
 
 - macro phase / stage:
   `Macro 7` mixed gate, `S0 -> S3`
@@ -545,7 +554,7 @@
 - deliverables:
   final freeze checklist、mixed gate と true user-spec gate の切り分け
 - validation command:
-  `UNRESOLVED`. prior packages の closeout と user-spec gate の充足が前提
+  `UNRESOLVED`. prior packages の closeout と user-spec gate の充足が前提。repo-side first cut では freeze checklist / boundary inventory / residual hold-line consistency を確認する
 - debug / visualization output:
   final freeze checklist 自体。runtime debug lane は前段 package の成果を参照する
 - docs / report requirement:

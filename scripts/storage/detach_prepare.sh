@@ -33,6 +33,26 @@ else
   echo "[detach_prepare] external workdir missing: $MIRROREA_WORKDIR"
 fi
 
+echo "[detach_prepare] llvm staging dirs"
+ls -ld \
+  "$MIRROREA_WORKDIR/llvm" \
+  "$MIRROREA_LLVM_SRC_DIR" \
+  "$MIRROREA_LLVM_BUILD_DIR" \
+  "$MIRROREA_LLVM_INSTALL_DIR" 2>/dev/null || true
+if [[ -d "$MIRROREA_WORKDIR/llvm" ]]; then
+  llvm_root_owner="$(stat -c '%U:%G' "$MIRROREA_WORKDIR/llvm" 2>/dev/null || echo unknown)"
+  llvm_root_writable=no
+  if [[ -w "$MIRROREA_WORKDIR/llvm" ]]; then
+    llvm_root_writable=yes
+  fi
+  echo "[detach_prepare] llvm root owner: $llvm_root_owner"
+  echo "[detach_prepare] llvm root writable: $llvm_root_writable"
+  if [[ "$llvm_root_writable" != yes ]]; then
+    echo "[detach_prepare] note: llvm/build and llvm/install cleanup remains guarded until ownership is repaired or admin setup reruns"
+  fi
+  echo "[detach_prepare] llvm source checkout remains intentionally outside disposable cleanup: $MIRROREA_LLVM_SRC_DIR"
+fi
+
 echo "[detach_prepare] report/dashboard files still dirty"
 (cd "$REPO_ROOT" && git status --short -- progress.md tasks.md samples_progress.md docs/reports README.md Documentation.md 2>/dev/null || true)
 

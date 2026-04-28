@@ -24,17 +24,17 @@
 - root disk:
   `/dev/vda2` 99G 中 32G free
 - repo size:
-  `90M`
+  `102M`
 - `target/`:
   repo path は `/mnt/mirrorea-work/cargo-target` への symlink に切り替え済み
   - external usage:
-    `5.3G`
+    `5.9G`
 - cargo registry cache:
   `/mnt/mirrorea-work/cargo-registry-cache`
   - current probe:
     `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
 - `.git/`:
-  `69M`
+  `80M`
 - extra storage:
   `/dev/vdb1` ext4 `mirrorea-work` が `/mnt/mirrorea-work` に mounted
   - UUID:
@@ -45,6 +45,8 @@
     `target/` は SSD 側へ移送済み
   - LLVM path readiness:
     `/mnt/mirrorea-work/llvm/{src,build,install}` は作成済み、actual artifact はまだない
+  - live mismatch:
+    `/mnt/mirrorea-work/llvm` parent は `root:root` であり、routine helper は ownership repair を行わず、`llvm/src` cleanup exclusion と `llvm/build` / `llvm/install` cleanup guard だけを current line に固定する
 
 ## twin peaks の current state
 
@@ -111,6 +113,7 @@
 - `docs/reports/0942-*` で `Projection / placement executable widening` を close し、Sugoroku helper `projection_view` / `--debug projection` と clean near-end runtime report-local `cross_place_projection` を追加した
 - `docs/reports/0970-*` で `P15` projection/codegen first emitted place-specific programs の current first-cut closeout を close し、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize した
 - `docs/reports/0971-*` で `P16` visual debugger / viewer first public prototype の current first-cut closeout を close し、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`docs/hands_on/visual_debugger_viewer_01.md`、`docs/research_abstract/visual_debugger_viewer_plan_01.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を current line に actualize した
+- `docs/reports/0972-*` で `P17` storage / LLVM / backend preparation の current first-cut closeout を close し、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23` を通じて external workdir / cleanup / `llvm` owner-writable probe / non-writable cleanup guard を current line に actualize した
 - `docs/reports/0925-*` で `HotPlug Patch / AttachPoint` docs-first plan を close し、`plan/21-hotplug-attachpoint-roadmap.md` を追加した
 - `docs/reports/0926-*` で `Network transport` docs-first plan を close し、`plan/22-network-transport-roadmap.md` と phase 13 planned family `samples/not_implemented/network-transport/` を追加した
 - `docs/reports/0927-*` で `Compiler/backend/LLVM preparation` guardrail を close し、`plan/23-compiler-backend-llvm-guardrail-roadmap.md`、`CARGO_HOME` binding、non-destructive probe evidence を追加した
@@ -124,15 +127,15 @@
 - `plan/19-repository-map-and-taxonomy.md`、`samples/README.md`、`scripts/README.md` で current repo taxonomy と staged migration plan を docs-first に固定した
 - `P11` logical multi-place runtime tranche の current third cut は actualize 済みであり、`MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を置いた
 - `P12` external adapter / host boundary tranche の current first cut は close 済みであり、typed external helper subset / closeout に `host_boundary_scope` / `host_boundary_lanes` / `non_collapse_lanes` / `host_family_gates` / `host_boundary_inventory` を actualize 済みである
-- current promoted next package は `P17` storage / LLVM / backend preparation であり、current safest first cut は external workdir / LLVM / cleanup guardrail を implementation-ready staging に寄せつつ、device rewrite / destructive cleanup / backend freeze を混ぜないことである
-- next reopen point は `P18` public API / parser grammar gate
+- current promoted next package は `P18` public API / parser grammar gate であり、current safest first cut は repo-side freeze checklist / public-boundary inventory / mixed-gate separation を先に整理しつつ、final public contract や parser grammar を premature に固定しないことである
+- next reopen point は `P18` 後段の true user-spec hold line であり、packaging / installed binary / FFI / engine adapter / final shared-space operational catalog を mixed gate 後へ残す
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout、`P6` `MessageEnvelope / AuthEvidence` seam hardening closeout、`P7` `VisualizationProtocol / VisualizationSecurity` hardening closeout、`P8` Sugoroku runtime attach hardening closeout、`P9` avatar fairy follow hardening closeout、`P10` `mirrorea-core` first real implementation tranche closeout、`P11` logical multi-place runtime tranche の current third cut actualization、`P12` external adapter / host boundary tranche の current first cut closeout、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout を先に入れた上で、current promoted line を `P17` storage / LLVM / backend preparation へ進めると読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout、`P6` `MessageEnvelope / AuthEvidence` seam hardening closeout、`P7` `VisualizationProtocol / VisualizationSecurity` hardening closeout、`P8` Sugoroku runtime attach hardening closeout、`P9` avatar fairy follow hardening closeout、`P10` `mirrorea-core` first real implementation tranche closeout、`P11` logical multi-place runtime tranche の current third cut actualization、`P12` external adapter / host boundary tranche の current first cut closeout、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout を先に入れた上で、current promoted line を `P18` public API / parser grammar gate へ進めると読む
 - `docs/reports/0933-*` で `Avatar fairy follow residual widening` を close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた
 - `docs/reports/0934-*` で `cross-package sweep` を close し、active evidence / planned family / mixed gate / next queue の current reading を recut した
 - `docs/reports/0939-*` で `FAIRY-05 residual reacquire design` を docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを固定した
@@ -140,7 +143,7 @@
 - `docs/reports/0945-mirrorea-next-stage-plan-integration.md` で next-stage future-plan integration / next package queue stabilization を close し、handoff 由来の project axis、source hierarchy、queue numbering、snapshot docs を current repo へ再同期した
 - phase 8 active representative slice は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` に置き、`FAIRY-05` だけを residual planned family に残す
 - closed chain の current reading は、`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、phase 9 typed external docs-first / synthetic preview widening、`P2` typed external residual reopen matrix closeout、phase 12 projection docs-first / preview widening、phase 13 transport canary、phase 14 hot-plug lifecycle canary、phase 16 backend/LLVM guardrail、phase 8 avatar representative slice / residual design closeout、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout までである
-- current next line は `P17` storage / LLVM / backend preparation であり、safest first cut は external workdir / LLVM / cleanup guardrail を implementation-ready staging に寄せること、その reopen point は `P18` public API / parser grammar gate と読む
+- current next line は `P18` public API / parser grammar gate であり、safest first cut は repo-side freeze checklist / public-boundary inventory / mixed-gate separation を docs-first に整理すること、その reopen point は packaging / installed binary / FFI / engine adapter / final shared-space operational catalog などの true user-spec hold line と読む
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
 ## current stop line

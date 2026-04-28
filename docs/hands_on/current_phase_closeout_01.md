@@ -24,6 +24,12 @@ cargo test -p mirrorea-core
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 find samples/generated -maxdepth 3 -type f | sort
 bash scripts/env/mirrorea_storage_env.sh
+bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
+bash scripts/storage/detach_prepare.sh
+bash scripts/storage/cleanup_disposable_artifacts.sh --list
+free -h
+ls -ld target /mnt/mirrorea-work/cargo-target /mnt/mirrorea-work/cargo-registry-cache /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install
+CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run
 ```
 
 ## 追加で見る debug lane
@@ -74,12 +80,15 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - `P3` projection / placement residual emitted-program gate が close 済みであり、projection validity report minimum、generated artifact reserve policy、`P15` handoff line が current docs に固定されていること
 - `P15` projection/codegen first emitted place-specific programs の current first-cut closeout が close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` が current docs / dashboard / report に固定されていること
 - `P16` visual debugger / viewer first public prototype の current first-cut closeout が close 済みであり、`scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` が current docs / dashboard / report に固定されていること
+- `P17` storage / LLVM / backend preparation の current first-cut closeout が close 済みであり、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` を通じて external workdir / cleanup / LLVM staging ownership mismatch が non-destructive probe floor として current docs / dashboard / report に固定されていること
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`attach_request#1` / `detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view と helper closeout `hotplug_scope` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` を envelope-derived evidence として確認できること
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
 - typed visualization / telemetry line が label / authority / redaction / retention を意識した evidence carrier として置かれていること
 - NET-05 observer route trace が fail-closed であり、observer-safe debug output が principal / auth / freshness / authorization / raw witness refs を漏らさないこと
 - external workdir と `CARGO_TARGET_DIR` / `CARGO_HOME` binding により、small-VPS 前提の backend/LLVM guardrail が current snapshot に入っていること
+- `llvm/src` が disposable cleanup から外され、`/mnt/mirrorea-work/llvm` parent non-writable 時の `llvm/build` / `llvm/install` cleanup に guard 実装があること
+- ただし current non-destructive closeout で実際に通すのは list-mode と owner/writable visibility までであり、refusal branch 自体は stop line / code-path evidence として扱うこと
 
 ## これではまだ確認できないこと
 
@@ -141,10 +150,9 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P17` storage / LLVM / backend preparation
-2. `P18` public API / parser grammar gate
+1. `P18` public API / parser grammar gate
 
-`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout は close 済みです。
+`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout は close 済みです。
 後続の full queue は `tasks.md` と `progress.md` の current snapshot を参照してください。
 
 ## 関連文書
@@ -157,6 +165,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - `typed_external_boundary_canaries_01.md`
 - `projection_placement_views_01.md`
 - `visual_debugger_viewer_01.md`
+- `compiler_backend_llvm_preparation_01.md`
 - `../research_abstract/compiler_backend_llvm_preparation_01.md`
 - `../../plan/19-repository-map-and-taxonomy.md`
 - `../../samples_progress.md`

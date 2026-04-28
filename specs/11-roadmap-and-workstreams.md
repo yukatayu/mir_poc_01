@@ -1113,10 +1113,11 @@ P16. visual debugger / viewer first public prototype
   - current first-cut closeout では `scripts/visual_debugger_viewer_samples.py` に `P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`first_public_prototype_over_typed_inventories`、`typed public prototype inventory over helper/runtime surfaces; not a final public viewer API` boundary を actualize してよい。
 P17. storage / LLVM / backend preparation
   - external workdir、LLVM、backend target、cleanup safety を implementation-ready に寄せる。
+  - current first-cut closeout では `scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`plan/23`、`docs/hands_on/compiler_backend_llvm_preparation_01.md` を通じて owner/writable probe と cleanup guard を actualize してよい。actual LLVM build、ownership repair、backend freeze は kept-later に残す。
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P17`、next reopen point は `P18` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` / `P17` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P18`、next reopen point は `P18` 後段の true user-spec hold line である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
