@@ -1099,7 +1099,7 @@ P9. Avatar fairy follow hardening
 P10. `mirrorea-core` first real implementation tranche
   - close 済み。`LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation を `mirrorea-core` に actualize した。
 P11. logical multi-place runtime / emulator tranche
-  - current helper-local emulator を crate-side runtime substrate へ寄せる。
+  - started。current first cut では `MembershipRegistry` typed source-of-truth substrate と `PlaceCatalog` logical multi-place catalog substrate を `mirrorea-core` に actualize し、`WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / event-timeline-view catalog は kept-later に残す。
 P12. external adapter / host boundary tranche
   - typed external boundary を host-facing adapter seam として tighten する。
 P13. network transport minimal alpha

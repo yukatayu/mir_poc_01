@@ -32,7 +32,7 @@
   - `P7` `VisualizationProtocol / VisualizationSecurity` hardening も close 済み
   - `P8` Sugoroku runtime attach hardening も close 済み
   - `P9` avatar fairy follow hardening も close 済み
-  - next promoted package は `P11` logical multi-place runtime tranche
+  - current active package は `P11` logical multi-place runtime tranche であり、first cut は `MembershipRegistry` / `PlaceCatalog` substrate actualization
   - next reopen point は `P12` external adapter / host boundary tranche
   - `P11-P17` は first real implementation tranche、`P18` は final mixed gate
 - toolchain/backend lane:
