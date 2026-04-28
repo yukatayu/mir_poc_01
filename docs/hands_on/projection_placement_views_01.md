@@ -94,6 +94,7 @@ final emitted executable family や optimizer / deployment planner ではあり�
 
 - `../../plan/20-projection-and-placement-roadmap.md`
 - `../research_abstract/projection_placement_plan_01.md`
+- `visual_debugger_viewer_01.md`
 - `current_phase_closeout_01.md`
 - `../../docs/reports/0942-projection-placement-executable-widening.md`
 - `../../docs/reports/0970-p15-projection-codegen-generated-bridge-first-cut-closeout.md`

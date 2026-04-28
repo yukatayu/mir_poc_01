@@ -50,7 +50,7 @@ helper closeout は `representative_slice` scope で `verification_handoff_witne
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Typed external boundary executable widening` も close しました。
-さらに `P12` external adapter / host boundary tranche の current first cut も close しており、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize しました。さらに `P13` network transport minimal alpha の current first-cut closeout も close しており、helper closeout に helper-local `process_boundary` inventory を actualize しました。さらに `P14` hot-plug package-manager tranche の current first-cut closeout も close しており、helper closeout に `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を含む helper-local package-manager inventory を actualize しました。さらに `P15` projection/codegen first emitted place-specific programs の current first-cut closeout も close しており、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize しました。current promoted next package は `P16` visual debugger / viewer first public prototype であり、next reopen point は `P17` storage / LLVM / backend preparation です。
+さらに `P12` external adapter / host boundary tranche の current first cut も close しており、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize しました。さらに `P13` network transport minimal alpha の current first-cut closeout も close しており、helper closeout に helper-local `process_boundary` inventory を actualize しました。さらに `P14` hot-plug package-manager tranche の current first-cut closeout も close しており、helper closeout に `hotplug_scope` / `hotplug_anchor_samples` / `hotplug_package_concerns` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` / `hotplug_kept_later_gates` / `hotplug_validation_floor` を含む helper-local package-manager inventory を actualize しました。さらに `P15` projection/codegen first emitted place-specific programs の current first-cut closeout も close しており、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize しました。さらに `P16` visual debugger / viewer first public prototype の current first-cut closeout も close しており、`scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を current line に actualize しました。current promoted next package は `P17` storage / LLVM / backend preparation であり、next reopen point は `P18` public API / parser grammar gate です。
 さらに `Projection / placement` の docs-first plan も close しました。
 さらに `Projection / placement executable widening` も close しました。
 さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
@@ -150,6 +150,7 @@ helper-local / report-local first cut では `MessageEnvelope` carrier で trans
 
 `untyped debug leak` として出してよいものではありません。
 performance telemetry も同様に information-bearing effect であり、typed telemetry として扱います。current line では helper/runtime security envelope に `retention_scope` を持たせ、NET-05 observer route trace は fail-closed にしています。
+さらに `P16` current first-cut closeout では helper/runtime surface を `viewer_panel_lanes` / `viewer_telemetry_lanes` と `P16-VIEW-01..05` に正規化し、`typed public prototype inventory over helper/runtime surfaces; not a final public viewer API` を current stop line にしました。
 
 ### VerificationLayer composition
 
@@ -312,11 +313,9 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted executable family は `P15` family 以降へ残す handoff line を current docs に固定しています。current `P15` first cut で actualize したのは committed generated bridge evidence only です。
 
-1. `P16` visual debugger / viewer first public prototype
-   - helper/report-local typed visualization inventory を public prototype boundary へ widen する
-2. `P17` storage / LLVM / backend preparation
+1. `P17` storage / LLVM / backend preparation
    - external workdir / LLVM / cleanup safety を implementation-ready staging に寄せる
-3. `P18` public API / parser grammar gate
+2. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。

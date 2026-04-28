@@ -83,7 +83,14 @@
 
 - static view / runtime view / label / authority / redaction / retention / typed telemetry を含む可視化 carrier の current explanation 語彙
 - current line では helper/runtime security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を持たせ、observer-safe route trace は fail-closed に読む
+- `P16` current first-cut closeout では helper/runtime surface を `viewer_panel_lanes` / `viewer_telemetry_lanes` と `P16-VIEW-01..05` で typed public prototype inventory に正規化する
 - helper-local preview と final public viewer contract を分けて読む
+
+### visual debugger / viewer first public prototype
+
+- `first_public_prototype_over_typed_inventories` を scope 名とし、helper/runtime typed inventory を public-prototype shape へ正規化する current package
+- boundary wording は `typed public prototype inventory over helper/runtime surfaces; not a final public viewer API`
+- `mir_hilight.html`、helper-local pretty print、runtime canonical inventory、projection preview、host-boundary preview、route-trace canary をそのまま final public viewer contract と呼ばない
 
 ### effect-based OS-like substrate
 

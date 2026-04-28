@@ -1110,12 +1110,13 @@ P15. projection/codegen first emitted place-specific programs
   - current first-cut closeout は committed generated bridge evidence only として close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize した。final emitted executable family、projection IR、optimizer、deployment planner、final public emitted-program ABI は kept-later gate に残す。
 P16. visual debugger / viewer first public prototype
   - typed visualization / telemetry を public prototype viewer へ widen する。
+  - current first-cut closeout では `scripts/visual_debugger_viewer_samples.py` に `P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`first_public_prototype_over_typed_inventories`、`typed public prototype inventory over helper/runtime surfaces; not a final public viewer API` boundary を actualize してよい。
 P17. storage / LLVM / backend preparation
   - external workdir、LLVM、backend target、cleanup safety を implementation-ready に寄せる。
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P16`、next reopen point は `P17` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P17`、next reopen point は `P18` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1172,6 +1173,7 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `MessageEnvelope / AuthEvidence` seam は helper-local / report-local package として close し、Sugoroku `message_envelopes` / `--debug envelopes` と clean near-end `MessageEnvelope` inventory を actualize した。
 - `P6` `MessageEnvelope / AuthEvidence` seam hardening では helper/runtime の `message_envelope_scope` を追加し、current carrier を `transport_medium / transport_seam / emitter_principal / freshness_checks / capability_requirements / authorization_checks / witness_refs` に widen し、shared `auth_evidence_lanes = kind / subject / issuer / bindings / notes` を fixed した。
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
+- `P16` visual debugger / viewer first public prototype の current first-cut closeout は typed public prototype inventory package として close し、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を actualize した。
 - `P7` `VisualizationProtocol / VisualizationSecurity` hardening では helper/runtime の view / telemetry security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を追加し、typed telemetry を security boundary の内側に戻した。NET-05 observer route trace は fail-closed とし、raw trace fallback と分離した。
 - `P8` Sugoroku runtime attach hardening では Sugoroku helper closeout に `world_surface = host_server_side_sugar`、`membership_model.source_of_truth = MembershipRegistry`、`membership_model.late_join_handoff_boundary`、`hotplug_stop_line` を追加し、attach / membership / handoff / late join / detach TODO boundary の helper/test/docs contract を explicit にした。
 - `P9` avatar fairy follow hardening では avatar helper closeout に `planned_sample_paths` と `fairy05_reopen_gate = { sample_status = planned_only, required_evidence = [...], carrier_choice = UNRESOLVED, planning_only_candidate_labels = state_timeline / anchor_switch }` を追加し、active representative slice を保ったまま residual `FAIRY-05` gate の planning-only carrier を explicit にした。

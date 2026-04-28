@@ -36,7 +36,7 @@
 - `MessageEnvelope` / `AuthEvidence` / transport insertion seam の final public shape
 - `witness_refs` role taxonomy と subject/emitter/authentication binding の final split
 - visualization / telemetry security の label / authority / redaction / retention model
-  - helper-local / report-local first cut は `0922`、current security envelope hardening は `0954` で actualize したが、final public viewer contract と retention policy は未決のまま残す
+  - helper-local / report-local first cut は `0922`、current security envelope hardening は `0954`、typed public prototype inventory closeout は `0971` で actualize したが、final public viewer contract と retention policy は未決のまま残す
 - projection / placement validity report と world-sugar boundary
   - docs-first plan は `0924` / `plan/20` で actualize したが、generator / optimizer / equivalence checker は未決のまま残す
 - `Patch Req Prov Δ` / `AttachPoint` / activation cut / migration contract

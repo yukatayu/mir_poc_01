@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 17:19 JST
+最終更新: 2026-04-28 18:44 JST
 
 ## この文書について
 
@@ -18,8 +18,9 @@
 - `P11` logical multi-place runtime tranche の current third cut は close 済みで、`MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated shell の上に principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper まで actualize 済みです。
 - `P12` external adapter / host boundary tranche の current first cut は close 済みで、typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize 済みです。
 - `P15` projection/codegen first emitted place-specific programs の current first cut は close 済みで、`scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` によって committed generated bridge evidence / live-anchor alignment / `kept_later_gates` を current line に actualize 済みです。
-- current promoted next line は **`P16` visual debugger / viewer first public prototype** です。
-- next reopen point は **`P17` storage / LLVM / backend preparation** です。
+- `P16` visual debugger / viewer first public prototype の current first cut は close 済みで、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`kept_later_gates` によって typed public prototype inventory over helper/runtime surfaces を current line に actualize 済みです。
+- current promoted next line は **`P17` storage / LLVM / backend preparation** です。
+- next reopen point は **`P18` public API / parser grammar gate** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -49,14 +50,14 @@
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | closed | closed | MembershipRegistry source-of-truth / world sugar / hot-plug stop line fixed |
 | `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | closed | closed | helper closeout `FAIRY-05` reopen gate / planned path inventory fixed |
 | `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | placeholder -> first real minimal carrier core |
-| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | started | multi-task | third cut actualized; non-blocking follow-up only |
+| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | closed (third cut current scope) | closed | third cut actualized; non-blocking follow-up only |
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | helper-local host-boundary inventory first cut |
 | `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local process-boundary closeout inventory fixed |
 | `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | closed (first cut) | closed | helper-local package-manager inventory fixed |
 | `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | preview floor -> committed generated bridge evidence + alignment surface |
-| `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | promoted next | multi-task | typed visualization public prototype |
-| `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | reopen next | 1-3 tasks | guardrail -> implementation-ready |
-| `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | final gate | user + repo dependent | final freeze remains last |
+| `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | typed public prototype inventory over helper/runtime surfaces |
+| `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | promoted next | 1-3 tasks | guardrail -> implementation-ready |
+| `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | reopen next mixed gate | user + repo dependent | final freeze remains last |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -481,27 +482,37 @@
 ### P16. visual debugger / viewer first public prototype
 
 - status:
-  promoted next。helper-local / report-local typed visualization inventory を public prototype boundary に widen するが、current `--debug visualization` を final public viewer API と呼ばない。
+  close 済み。helper-local / report-local typed visualization inventory を `typed public prototype inventory over helper/runtime surfaces; not a final public viewer API` として widen し、`scripts/visual_debugger_viewer_samples.py` に `P16-VIEW-01..05`、`viewer_panel_lanes`、`viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` を actualize した。
 
 - macro phase / stage:
   `Macro 7`, `S1 -> S4`
 - objective:
   typed visualization / telemetry を public prototype viewer へ widen する
 - deliverables:
-  first public prototype boundary、viewer security wording、redaction policy draft
+  `scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05` typed bundle inventory、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`first_public_prototype_over_typed_inventories` scope、viewer security wording、redaction/retention stop line
 - validation command:
-  `UNRESOLVED`. current guard は `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
+  `python3 -m unittest scripts.tests.test_visual_debugger_viewer_samples`
+  `python3 scripts/visual_debugger_viewer_samples.py list --format json`
+  `python3 scripts/visual_debugger_viewer_samples.py run P16-VIEW-01 --format json`
+  `python3 scripts/visual_debugger_viewer_samples.py run P16-VIEW-03 --format json`
+  `python3 scripts/visual_debugger_viewer_samples.py run P16-VIEW-04 --format json`
+  `python3 scripts/visual_debugger_viewer_samples.py check-all --format json`
+  `python3 scripts/visual_debugger_viewer_samples.py closeout --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
+  `python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-03 --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
 - debug / visualization output:
-  TermSignature view、layer view、event/message/state/membership/witness/telemetry views
+  `turn_timeline`、`message_route`、`verification_summary`、`projection_view`、`membership_snapshot`、`hotplug_lifecycle`、`route_trace`、`audit_trace`、typed telemetry inventory
 - docs / report requirement:
   新しい report、`samples_progress.md`、viewer docs を同期する
 - stop line:
-  helper-local preview をそのまま final public viewer API と呼ばない
+  helper-local preview / runtime canonical inventory をそのまま final public viewer API、final public visualization schema、final public telemetry schema、Event DAG / place graph / effect route graph / proof obligation graph、production telemetry backend と呼ばない
 
 ### P17. storage / LLVM / backend preparation
 
 - status:
-  reopen next。external workdir / LLVM guardrail を implementation-ready staging に寄せるが、device rewrite や backend freeze はまだ行わない。
+  promoted next。external workdir / LLVM guardrail を implementation-ready staging に寄せるが、device rewrite や backend freeze はまだ行わない。
 
 - macro phase / stage:
   `Macro 7`, `S3 -> S5`
@@ -523,6 +534,9 @@
   device format、mount rewrite、destructive cleanup を無断で実行しない
 
 ### P18. public API / parser grammar gate
+
+- status:
+  reopen next mixed gate。`P17` の後で final public freeze 条件を定義するが、prior package 未成熟のまま public contract を固めない。
 
 - macro phase / stage:
   `Macro 7` mixed gate, `S0 -> S3`

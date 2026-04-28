@@ -100,3 +100,4 @@ cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_
 
 - `../../plan/25-typed-external-boundary-executable-roadmap.md`
 - `../../samples/not_implemented/typed-external-boundary/README.md`
+- `visual_debugger_viewer_01.md`

@@ -97,8 +97,10 @@ run_directory_named_profile
   - Sugoroku `--debug visualization`
   - clean near-end `CleanNearEndSampleReport.visualization_views` / `telemetry_rows`
   - clean near-end closeout `visualization_views` / `telemetry_rows`
+  - `scripts/visual_debugger_viewer_samples.py` の `P16-VIEW-01..05` typed public prototype inventory
   を helper-local / report-local evidence inventory として見せてよい。
   - current line では helper/runtime security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を持たせ、NET-05 observer route trace は fail-closed にしてよい。
+  - `P16` current first-cut closeout では helper/runtime surface を `viewer_panel_lanes` / `viewer_telemetry_lanes` に正規化し、current prototype scope `first_public_prototype_over_typed_inventories` と boundary wording `typed public prototype inventory over helper/runtime surfaces; not a final public viewer API` を current repo memory として置いてよい。
   - これは final public visualization protocol、final public telemetry schema、retention policy、multi-tenant viewer contract を意味しない。
 - current avatar-follow helper cut では、
   - `scripts/avatar_follow_samples.py`

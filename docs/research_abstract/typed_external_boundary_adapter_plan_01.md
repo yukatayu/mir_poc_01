@@ -71,4 +71,5 @@ exact host schema / final adapter contract は `OPEN` のままです。
 ## 次
 
 この文書の current role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、helper-local `host_boundary` preview inventory、evidence anchor、residual reopen criterion を保つことです。
+viewer pressure を current line で読むときは `docs/hands_on/visual_debugger_viewer_01.md` も参照してください。
 具体的な promoted queue は `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。

@@ -84,5 +84,6 @@ projection validity を collapse せずに preview する current floor です�
 ## 関連
 
 - `docs/hands_on/projection_placement_views_01.md`
+- `docs/hands_on/visual_debugger_viewer_01.md`
 - `plan/20-projection-and-placement-roadmap.md`
 - `docs/reports/0924-projection-placement-plan.md`

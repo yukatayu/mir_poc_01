@@ -26,6 +26,11 @@ Sugoroku helper では `visualization_views` と `telemetry_rows` を sample res
 clean near-end report / closeout では、runtime-rich な current sample に対して
 report-local `VisualizationView` / `TelemetryRow` inventory を返します。
 
+`P16` current first-cut closeout では、これら helper/runtime surface を
+`scripts/visual_debugger_viewer_samples.py` が `viewer_panel_lanes` /
+`viewer_telemetry_lanes` に正規化し、typed public prototype inventory として読む入口を追加しました。
+これは final public viewer API ではありません。
+
 ## 実行コマンド
 
 ```bash
@@ -72,4 +77,6 @@ separate lane で読み、auth / witness / visualization を潰しません。
 - `samples/clean-near-end/sugoroku-world/README.md`
 - `docs/research_abstract/hands_on_sugoroku_detail.md`
 - `docs/research_abstract/mirrorea_future_axis_01.md`
+- `docs/research_abstract/visual_debugger_viewer_plan_01.md`
+- `docs/hands_on/visual_debugger_viewer_01.md`
 - `docs/reports/0922-visualization-protocol-first-cut.md`

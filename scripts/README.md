@@ -15,6 +15,7 @@
 - `typed_external_boundary_samples.py`
 - `network_transport_samples.py`
 - `projection_codegen_samples.py`
+- `visual_debugger_viewer_samples.py`
 
 ### current-L2 helper / detached loop / support
 

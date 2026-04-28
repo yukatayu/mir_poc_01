@@ -33,6 +33,8 @@
   task 単位の証跡
 - `docs/research_abstract/`
   reader-facing summary / hands-on
+  - `visual_debugger_viewer_plan_01.md`
+    viewer prototype boundary の reader-facing summary
 
 ### code lanes
 
@@ -120,6 +122,7 @@ current recommendation:
 - `scripts/typed_external_boundary_samples.py`
 - `scripts/network_transport_samples.py`
 - `scripts/projection_codegen_samples.py`
+- `scripts/visual_debugger_viewer_samples.py`
 
 ### current repo-local helper / detached loop / support
 
@@ -149,6 +152,8 @@ current recommendation:
   summary / detail / hands-on
 - `docs/hands_on/`
   current closeout landing page。詳細な hands-on 本体は当面 `docs/research_abstract/` に残す
+  - `visual_debugger_viewer_01.md`
+    `P16` typed public prototype inventory landing page
 - `docs/diagrams/`
   Mermaid source
 - `docs/reports/`

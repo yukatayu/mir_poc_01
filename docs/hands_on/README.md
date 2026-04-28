@@ -10,7 +10,9 @@
 ## まず読む
 
 - `current_phase_closeout_01.md`
-  - 2026-04-27 時点の current phase closeout と、今すぐ実行する確認コマンド、remaining mixed gate、next queue
+  - 2026-04-28 時点の current phase closeout と、今すぐ実行する確認コマンド、remaining mixed gate、next queue
+- `visual_debugger_viewer_01.md`
+  - `P16` typed public prototype inventory の最短入口
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`
