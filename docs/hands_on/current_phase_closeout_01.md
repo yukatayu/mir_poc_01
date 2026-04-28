@@ -125,10 +125,10 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P8` Sugoroku runtime attach hardening
-2. `P9` avatar fairy follow hardening
+1. `P9` avatar fairy follow hardening
+2. `P10` `mirrorea-core` first real implementation tranche
 
-`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening は close 済みです。
+`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening は close 済みです。
 後続の full queue は `tasks.md` と `progress.md` の current snapshot を参照してください。
 
 ## 関連文書

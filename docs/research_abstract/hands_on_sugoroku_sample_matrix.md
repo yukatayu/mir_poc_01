@@ -22,15 +22,15 @@ real network transport や final public runtime API ではありません。
 | ID | 役割 | 最初に見るコマンド | 何が分かるか |
 |---|---|---|---|
 | `SUG-00` | world bootstrap | `run 00_world_bootstrap --debug summary` | 空 world と初期 membership |
-| `SUG-01` | runtime attach | `run 01_runtime_attach_game --debug hotplug` | game place が runtime attach され、attachpoint compatibility / activation が helper-local に読めること |
+| `SUG-01` | runtime attach | `run 01_runtime_attach_game --debug hotplug` | game place が runtime attach され、attachpoint compatibility / activation と imported membership frontier が helper-local に読めること。`world` sugar / `MembershipRegistry` source-of-truth anchor 自体は `closeout --format json` で確認する |
 | `SUG-02` | admin control | `run 02_admin_start_reset --debug summary` | admin-only start/reset |
-| `SUG-03` | turn E2E | `run 03_roll_publish_handoff --debug turn-trace` | roll -> publish -> witness -> handoff |
+| `SUG-03` | turn E2E | `run 03_roll_publish_handoff --debug turn-trace` | roll -> publish -> witness -> handoff。handoff target active membership boundary |
 | `SUG-04` | rejection | `run 04_non_owner_roll_rejected --debug summary` | wrong owner action rejection |
-| `SUG-05` | late join | `run 05_late_join_history_visible --debug membership` | late join と published history visibility |
+| `SUG-05` | late join | `run 05_late_join_history_visible --debug membership` | late join と published history visibility。turn-order insertion deferred boundary |
 | `SUG-06` | leave invalidation | `run 06_leave_non_owner --debug membership` | leave 後の epoch / incarnation 変化 |
 | `SUG-07` | owner leave continuity | `run 07_owner_leave_reassign --debug membership` | owner leave 時の reassignment |
 | `SUG-08` | verification bridge | `run 08_reset_interleaving_model_check --debug verification` | reset safety と stale handoff invalidation |
-| `SUG-09` | detach stop line | `run 09_detach_todo --debug hotplug` | `detach_request#1` と post-detach rejection を見せつつ、detach を完了扱いせず TODO として残す |
+| `SUG-09` | detach stop line | `run 09_detach_todo --debug hotplug` | `detach_request#1` と post-detach rejection を見せつつ、detach を completed migration ではなく explicit TODO stop line として残す |
 
 ## 3. 重要な debug 出力
 

@@ -53,6 +53,12 @@ current helper-local line では、この activation cut は `hotplug_lifecycle.
 
 current docs-first line では、detach / reattach を
 durable state migration completed と同一視しない。
+current Sugoroku helper closeout では、
+`hotplug_stop_line.detach_boundary = explicit_todo_boundary`、
+`rollback_protocol = deferred`、
+`durable_migration_engine = deferred`、
+`final_public_hotplug_abi = deferred`
+を helper closeout stop line として見せてよい。
 
 未決のもの:
 
@@ -71,4 +77,4 @@ runtime hot-plug lifecycle の `detach` と同一ではない。
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。
 hot-plug lifecycle は transport widening と分けたまま保つ。
-hot-plug executable widening を close した current snapshot では、next promoted package は `Network transport` `NET-02..05` である。
+`P8` close 後の current snapshot では、next promoted package は `P9` avatar fairy follow hardening、next reopen point は `P10` `mirrorea-core` first real implementation tranche である。

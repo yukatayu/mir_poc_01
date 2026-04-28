@@ -103,7 +103,38 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("PlaceRuntime", result["runtime_components"])
         self.assertIn("samples/clean-near-end/sugoroku-world", result["active_sample_root"])
         self.assertIn("no real network yet", result["limitations"])
-        self.assertIn("detach is TODO lifecycle boundary", result["limitations"])
+        self.assertIn(
+            "detach is an explicit TODO stop line, not completed migration",
+            result["limitations"],
+        )
+
+    def test_closeout_records_world_surface_as_host_side_sugar(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        self.assertEqual(
+            result["world_surface"]["surface_role"], "host_server_side_sugar"
+        )
+        self.assertEqual(result["world_surface"]["mir_core_status"], "not_a_primitive")
+        self.assertEqual(result["world_surface"]["authority_place"], "WorldServerPlace")
+
+    def test_closeout_records_membership_registry_as_source_of_truth(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        membership = result["membership_model"]
+        self.assertEqual(membership["source_of_truth"], "MembershipRegistry")
+        self.assertEqual(
+            membership["late_join_handoff_boundary"],
+            "handoff target must be active; published history visible before turn-order insertion",
+        )
+
+    def test_closeout_records_hotplug_stop_line(self) -> None:
+        result = sugoroku_world_samples.closeout()
+
+        stop_line = result["hotplug_stop_line"]
+        self.assertEqual(stop_line["detach_boundary"], "explicit_todo_boundary")
+        self.assertEqual(stop_line["rollback_protocol"], "deferred")
+        self.assertEqual(stop_line["durable_migration_engine"], "deferred")
+        self.assertEqual(stop_line["final_public_hotplug_abi"], "deferred")
 
     def test_roll_publish_handoff_exposes_term_signatures(self) -> None:
         result = sugoroku_world_samples.run_sample("03_roll_publish_handoff")

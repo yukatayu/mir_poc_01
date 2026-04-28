@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 12:42 JST
+最終更新: 2026-04-28 13:09 JST
 
 ## この文書について
 
@@ -14,8 +14,8 @@
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P8` Sugoroku runtime attach hardening** です。
-- next reopen point は **`P9` avatar fairy follow hardening** です。
+- current promoted next line は **`P9` avatar fairy follow hardening** です。
+- next reopen point は **`P10` `mirrorea-core` first real implementation tranche** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -42,9 +42,9 @@
 | `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | closed | closed | row schema / obligations lane / scope split fixed |
 | `P6` MessageEnvelope/AuthEvidence seam hardening | `Macro 6` | `S4 -> S5` | closed | closed | medium/seam split、shared auth lane inventory、freshness lane fixed |
 | `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | closed | closed | security envelope / typed telemetry / fail-closed route trace fixed |
-| `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | next | 1-2 tasks | representative runtime slice hardening |
-| `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | reopen next | 1-2 tasks | residual `FAIRY-05` gate remains |
-| `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | placeholder -> first real core |
+| `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | closed | closed | MembershipRegistry source-of-truth / world sugar / hot-plug stop line fixed |
+| `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | next | 1-2 tasks | residual `FAIRY-05` gate remains |
+| `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | reopen next | multi-task | placeholder -> first real core |
 | `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper emulator -> crate substrate |
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | later | multi-task | host-facing adapter seam |
 | `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper canary -> real transport alpha |
@@ -262,25 +262,35 @@
 ### P8. Sugoroku runtime attach hardening
 
 - status:
-  current promoted next line。attach / membership / handoff / late join / detach TODO boundary の representative runtime slice を、world sugar / membership registry / lifecycle stop line の wording まで含めて tighten する。
+  close 済み。Sugoroku helper closeout に `world_surface = host_server_side_sugar`、`membership_model.source_of_truth = MembershipRegistry`、`membership_model.late_join_handoff_boundary`、`hotplug_stop_line` を追加し、attach / membership / handoff / late join / detach TODO boundary の current helper/test/docs contract を tighten した。
 
 - macro phase / stage:
   `Macro 6`, `S5 -> S6`
 - objective:
   attach / membership / handoff / late join / detach TODO boundary を representative runtime slice として harden する
 - deliverables:
-  membership registry wording、world sugar boundary、detach lifecycle current stop line
+  membership registry wording、world sugar boundary、late-join/handoff boundary、detach lifecycle current stop line
 - validation command:
-  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json`
+  `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership --format json`
   `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
 - debug / visualization output:
-  `message_envelopes`、`hotplug_lifecycle`、attach-detach telemetry / visualization current view
+  `message_envelopes`、`membership`、`hotplug_lifecycle`、attach-detach telemetry / visualization current view
 - docs / report requirement:
-  新しい report、`samples_progress.md`、`plan/16`、relevant docs を同期する
+  新しい report、`samples_progress.md`、`progress.md`、`plan/16`、`plan/21`、relevant docs を同期する
 - stop line:
-  real network、consensus、durable distributed commit、final public runtime API を claim しない
+  real network、consensus、durable distributed commit、rollback protocol、durable migration engine、final public runtime / hot-plug ABI を claim しない
 
 ### P9. avatar fairy follow hardening
+
+- status:
+  current promoted next line。active representative slice を保ちながら residual `FAIRY-05` gate を整理する。
 
 - macro phase / stage:
   `Macro 6`, `S5 -> S6`

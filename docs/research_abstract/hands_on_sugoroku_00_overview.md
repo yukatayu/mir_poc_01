@@ -62,6 +62,8 @@ samples/clean-near-end/sugoroku-world/
 - `WorldServerPlace` は、world 全体の authority を持つ logical Place です。
 - `ParticipantPlace[Alice]` は、Alice に対応する logical Place です。Alice 自身ではありません。
 - `SugorokuGamePlace#1` は、runtime attach で作られる game object の Place です。
+- `world` は current companion surface の host/server-side sugar であり、Mir core primitive ではありません。
+- participant set の current source of truth は `MembershipRegistry` です。
 - `membership_epoch` は、join / leave が起きるたびに増える番号です。
 - `member_incarnation` は、同じ名前の参加者が古い action を commit しないための番号です。
 - `witness` は、publish が起きたことを後続 action が確認するための証拠です。
@@ -69,7 +71,7 @@ samples/clean-near-end/sugoroku-world/
 ## builtin / current companion syntax / user-defined
 
 current helper が認識する companion vocabulary には、`module`、`index theory`、`principal`、`world`、`place`、`transition`、`stage`、`publish`、`witness`、`handoff`、`model`、`property` があります。
-これは final public parser grammar ではありません。
+ここでの `world` は host/server-side sugar token に留まり、Mir core primitive を意味しません。これは final public parser grammar でもありません。
 
 user-defined な名前は、`GameAuthority`、`GamePhase`、`MembershipStatus`、`EmptyWorld`、`WorldMembers`、`SugorokuGame#1`、`Alice`、`Bob`、`Carol`、`Dave` です。
 これらは言語の魔法の組み込みではなく、sample が宣言します。
@@ -117,7 +119,6 @@ python3 scripts/sugoroku_world_samples.py closeout --format json
 - no real network yet。
 - no multi-server consensus。
 - no durable distributed commit。
-- detach is TODO lifecycle boundary。
+- detach is an explicit TODO stop line, not completed migration。
 - final parser grammar remains deferred。
 - final public API remains deferred。
-

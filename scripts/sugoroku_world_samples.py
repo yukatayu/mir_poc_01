@@ -113,7 +113,7 @@ LIMITATIONS = [
     "no real network yet",
     "no multi-server consensus",
     "no durable distributed commit",
-    "detach is TODO lifecycle boundary",
+    "detach is an explicit TODO stop line, not completed migration",
     "final parser grammar remains deferred",
     "final public API remains deferred",
 ]
@@ -2267,10 +2267,17 @@ def closeout() -> dict[str, Any]:
             ],
             "principals": ["Server", "Alice", "Bob", "Carol", "Dave"],
         },
+        "world_surface": {
+            "surface_role": "host_server_side_sugar",
+            "mir_core_status": "not_a_primitive",
+            "authority_place": "WorldServerPlace",
+        },
         "membership_model": {
             "membership_epoch": "increments on join/leave",
             "member_incarnation": "increments on leave to reject stale actions",
+            "source_of_truth": "MembershipRegistry",
             "late_join_policy": "published history visible, turn order insertion deferred",
+            "late_join_handoff_boundary": "handoff target must be active; published history visible before turn-order insertion",
         },
         "static_checks": list(STATIC_CHECKS),
         "runtime_guards": list(RUNTIME_GUARDS),
@@ -2325,6 +2332,12 @@ def closeout() -> dict[str, Any]:
                 if "hotplug_lifecycle" in row
             }
         ),
+        "hotplug_stop_line": {
+            "detach_boundary": "explicit_todo_boundary",
+            "rollback_protocol": "deferred",
+            "durable_migration_engine": "deferred",
+            "final_public_hotplug_abi": "deferred",
+        },
         "visualization_views": visualization_views,
         "visualization_view_kinds": sorted(
             {row["view_kind"] for row in visualization_views}

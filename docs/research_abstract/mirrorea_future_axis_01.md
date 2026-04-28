@@ -302,8 +302,8 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P8-P9` representative runtime hardening
-   - Sugoroku runtime attach、avatar fairy follow residual gate
+1. `P9` avatar fairy follow hardening
+   - active representative slice と residual `FAIRY-05` gate の同期
 2. `P10-P17` first real implementation tranche
    - `mirrorea-core`、logical multi-place runtime、external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
 3. `P18` public API / parser grammar gate

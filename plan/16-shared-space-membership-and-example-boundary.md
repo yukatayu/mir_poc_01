@@ -7,6 +7,7 @@
 - membership / authority / provider placement / witness requirement / replay / fairness は分けて扱う
 - `Place` は participant と同一ではなく、queue / state / capability / visibility / observation frontier を持つ execution locus として読む
 - current Sugoroku sample の `world` は host/server-side sugar として読み、Mir core primitive だと既成事実化しない
+- current Sugoroku helper closeout では `world_surface.surface_role = host_server_side_sugar`、`world_surface.mir_core_status = not_a_primitive` を explicit に保ってよい
 
 ## active example boundary
 
@@ -16,6 +17,7 @@
 - Sugoroku world runtime attachment example は `samples/clean-near-end/sugoroku-world/`
   に置き、single OS process logical multi-place emulator として扱う
 - Sugoroku 側の participant set は fixed literal principal だけでなく `MembershipRegistry` から読む line を current reading に置く
+- current Sugoroku helper closeout では `membership_model.source_of_truth = MembershipRegistry` と `membership_model.late_join_handoff_boundary` を explicit に保ってよい
 - avatar fairy follow representative slice は `samples/clean-near-end/avatar-follow/` に置き、active canonical sample として読む
 - phase 8 residual planned family は `samples/not_implemented/avatar-fairy-follow/` に置き、historical prototype anchor は `samples/prototype/current-l2-dynamic-attach-detach/` に残す
 - phase 9 planned source family は `samples/not_implemented/typed-external-boundary/` に置き、current synthetic preview helper subset は `EXT-03` / `EXT-04` に留める
@@ -37,6 +39,7 @@
 - system-wide source から place-specific program へ projection できる性質を future line の invariant として保つ
 - current docs-first plan は `plan/20-projection-and-placement-roadmap.md` に置き、generator / optimizer / equivalence checker は still later に残す
 - `SUG-01` attach と `SUG-09` detach TODO boundary は hot-plug docs-first plan の current anchor であり、storage detach script と混同しない
+- current Sugoroku helper closeout では `hotplug_stop_line.detach_boundary = explicit_todo_boundary`、`rollback_protocol = deferred`、`durable_migration_engine = deferred`、`final_public_hotplug_abi = deferred` を explicit に保ってよい
 - transport widening current plan は `plan/22-network-transport-roadmap.md` に置き、loopback / reconnect / failure matrix を helper-local baseline と分けて読む
 
 ## still later
