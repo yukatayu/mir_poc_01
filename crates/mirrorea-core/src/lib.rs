@@ -10,6 +10,8 @@ pure carrier shapes and invariant helpers for:
 - `PrincipalClaim`
 - `AuthEvidence`
 - `MessageEnvelope`
+- `HotPlugRequest`
+- `HotPlugVerdict`
 - `MembershipRegistry` typed source-of-truth substrate
 - `PlaceCatalog` logical multi-place catalog substrate
 
@@ -25,7 +27,8 @@ mod runtime;
 
 pub use error::MirroreaCoreError;
 pub use fabric::{
-    AuthEvidence, MessageEnvelope, PrincipalClaim, auth_evidence_lanes, message_envelope_lanes,
+    AuthEvidence, HotPlugRequest, HotPlugVerdict, MessageEnvelope, PrincipalClaim,
+    auth_evidence_lanes, hotplug_request_lanes, hotplug_verdict_lanes, message_envelope_lanes,
 };
 pub use layer::{LayerSignature, insert_layer_signature, layer_signature_lanes};
 pub use runtime::{

@@ -127,6 +127,94 @@ impl MessageEnvelope {
     }
 }
 
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct HotPlugRequest {
+    pub request_id: String,
+    pub attachpoint_ref: String,
+    pub patch_ref: String,
+    pub operation_kind: String,
+    pub requesting_principal: String,
+    pub requesting_participant_place: String,
+    pub message_envelope_ref: String,
+    pub auth_evidence_ref: Option<String>,
+    pub capability_refs: Vec<String>,
+    pub witness_refs: Vec<String>,
+    pub notes: Vec<String>,
+}
+
+impl HotPlugRequest {
+    pub fn validate(&self) -> Result<(), MirroreaCoreError> {
+        require_non_empty("HotPlugRequest", "request_id", &self.request_id)?;
+        require_non_empty("HotPlugRequest", "attachpoint_ref", &self.attachpoint_ref)?;
+        require_non_empty("HotPlugRequest", "patch_ref", &self.patch_ref)?;
+        require_non_empty("HotPlugRequest", "operation_kind", &self.operation_kind)?;
+        require_non_empty(
+            "HotPlugRequest",
+            "requesting_principal",
+            &self.requesting_principal,
+        )?;
+        require_non_empty(
+            "HotPlugRequest",
+            "requesting_participant_place",
+            &self.requesting_participant_place,
+        )?;
+        require_non_empty(
+            "HotPlugRequest",
+            "message_envelope_ref",
+            &self.message_envelope_ref,
+        )?;
+        if let Some(auth_evidence_ref) = &self.auth_evidence_ref {
+            require_non_empty("HotPlugRequest", "auth_evidence_ref", auth_evidence_ref)?;
+        }
+        require_non_empty_items("HotPlugRequest", "capability_refs", &self.capability_refs)?;
+        require_non_empty_items("HotPlugRequest", "witness_refs", &self.witness_refs)?;
+        require_non_empty_items("HotPlugRequest", "notes", &self.notes)?;
+        Ok(())
+    }
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct HotPlugVerdict {
+    pub request_ref: String,
+    pub verdict_kind: String,
+    pub compatibility_reason_refs: Vec<String>,
+    pub authorization_reason_refs: Vec<String>,
+    pub membership_freshness_reason_refs: Vec<String>,
+    pub notes: Vec<String>,
+}
+
+impl HotPlugVerdict {
+    pub fn validate(&self) -> Result<(), MirroreaCoreError> {
+        require_non_empty("HotPlugVerdict", "request_ref", &self.request_ref)?;
+        require_non_empty("HotPlugVerdict", "verdict_kind", &self.verdict_kind)?;
+        if !matches!(
+            self.verdict_kind.as_str(),
+            "accepted" | "rejected" | "deferred"
+        ) {
+            return Err(MirroreaCoreError::new(
+                "HotPlugVerdict field `verdict_kind` must be one of `accepted`, `rejected`, or `deferred`",
+            ));
+        }
+        require_non_empty_items(
+            "HotPlugVerdict",
+            "compatibility_reason_refs",
+            &self.compatibility_reason_refs,
+        )?;
+        require_non_empty_items(
+            "HotPlugVerdict",
+            "authorization_reason_refs",
+            &self.authorization_reason_refs,
+        )?;
+        require_non_empty_items(
+            "HotPlugVerdict",
+            "membership_freshness_reason_refs",
+            &self.membership_freshness_reason_refs,
+        )?;
+        require_non_empty_items("HotPlugVerdict", "notes", &self.notes)?;
+        Ok(())
+    }
+}
+
 pub fn message_envelope_lanes() -> Vec<String> {
     [
         "envelope_id",
@@ -159,4 +247,37 @@ pub fn auth_evidence_lanes() -> Vec<String> {
         .into_iter()
         .map(|lane| lane.to_string())
         .collect()
+}
+
+pub fn hotplug_request_lanes() -> Vec<String> {
+    [
+        "request_id",
+        "attachpoint_ref",
+        "patch_ref",
+        "operation_kind",
+        "requesting_principal",
+        "requesting_participant_place",
+        "message_envelope_ref",
+        "auth_evidence_ref",
+        "capability_refs",
+        "witness_refs",
+        "notes",
+    ]
+    .into_iter()
+    .map(|lane| lane.to_string())
+    .collect()
+}
+
+pub fn hotplug_verdict_lanes() -> Vec<String> {
+    [
+        "request_ref",
+        "verdict_kind",
+        "compatibility_reason_refs",
+        "authorization_reason_refs",
+        "membership_freshness_reason_refs",
+        "notes",
+    ]
+    .into_iter()
+    .map(|lane| lane.to_string())
+    .collect()
 }

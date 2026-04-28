@@ -146,3 +146,27 @@ distributed activation ordering を carrier へ上げない。
   `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
   と読む
 - `R2` / `R4` / `R5` closeout memory は引き続き前提として残す
+
+## 2026-04-29 P19 implementation note
+
+- `crates/mirrorea-core/src/fabric.rs` に
+  `HotPlugRequest` と `HotPlugVerdict`、
+  `hotplug_request_lanes()` と `hotplug_verdict_lanes()`
+  を actualize してよい。
+- current request-side lane は
+  `request_id / attachpoint_ref / patch_ref / operation_kind / requesting_principal / requesting_participant_place / message_envelope_ref / auth_evidence_ref / capability_refs / witness_refs / notes`
+  と読む。
+- current verdict-side lane は
+  `request_ref / verdict_kind / compatibility_reason_refs / authorization_reason_refs / membership_freshness_reason_refs / notes`
+  と読み、`verdict_kind` は current narrow family
+  `accepted / rejected / deferred`
+  に留める。
+- helper-local `hotplug_lifecycle`、
+  sample-grounded `attach_request#1 / detach_request#1 / detached_roll_request#1`、
+  helper view/telemetry IDs は Rust canonical carrier に上げない。
+- lifecycle state machine、rollback state、migration protocol/engine、
+  distributed activation ordering、final public seam naming、final public hot-plug ABI は
+  kept-later に残す。
+- `P19` close 後の current promoted next line は
+  `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
+  と読む。

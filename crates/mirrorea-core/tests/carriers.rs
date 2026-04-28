@@ -1,7 +1,8 @@
 use std::collections::BTreeMap;
 
 use mirrorea_core::{
-    AuthEvidence, LayerSignature, MessageEnvelope, PrincipalClaim, auth_evidence_lanes,
+    AuthEvidence, HotPlugRequest, HotPlugVerdict, LayerSignature, MessageEnvelope,
+    PrincipalClaim, auth_evidence_lanes, hotplug_request_lanes, hotplug_verdict_lanes,
     insert_layer_signature, layer_signature_lanes, message_envelope_lanes,
 };
 
@@ -64,6 +65,33 @@ fn sample_message_envelope() -> MessageEnvelope {
         witness_refs: vec!["provider_receipt".to_string()],
         dispatch_outcome: "accepted".to_string(),
         notes: vec!["helper-local preview only".to_string()],
+    }
+}
+
+fn sample_hotplug_request() -> HotPlugRequest {
+    HotPlugRequest {
+        request_id: "hotplug_request#canonical".to_string(),
+        attachpoint_ref: "AttachPoint[ExampleRoom#1]".to_string(),
+        patch_ref: "Patch[ExamplePackage@runtime]".to_string(),
+        operation_kind: "attach".to_string(),
+        requesting_principal: "ExampleAdmin".to_string(),
+        requesting_participant_place: "ParticipantPlace[ExampleAdmin]".to_string(),
+        message_envelope_ref: "hotplug_request_envelope#1".to_string(),
+        auth_evidence_ref: None,
+        capability_refs: vec!["AttachComponent(ExamplePackage)".to_string()],
+        witness_refs: Vec::new(),
+        notes: vec!["engine-neutral request carrier".to_string()],
+    }
+}
+
+fn sample_hotplug_verdict() -> HotPlugVerdict {
+    HotPlugVerdict {
+        request_ref: "hotplug_request#canonical".to_string(),
+        verdict_kind: "accepted".to_string(),
+        compatibility_reason_refs: vec!["attachpoint_compatible".to_string()],
+        authorization_reason_refs: vec!["request_authority_verified".to_string()],
+        membership_freshness_reason_refs: vec!["membership_frontier_verified".to_string()],
+        notes: vec!["engine-neutral verdict carrier".to_string()],
     }
 }
 
@@ -155,6 +183,37 @@ fn auth_and_message_lanes_match_current_shape() {
 }
 
 #[test]
+fn hotplug_carrier_lanes_match_current_shape() {
+    assert_eq!(
+        hotplug_request_lanes(),
+        vec![
+            "request_id".to_string(),
+            "attachpoint_ref".to_string(),
+            "patch_ref".to_string(),
+            "operation_kind".to_string(),
+            "requesting_principal".to_string(),
+            "requesting_participant_place".to_string(),
+            "message_envelope_ref".to_string(),
+            "auth_evidence_ref".to_string(),
+            "capability_refs".to_string(),
+            "witness_refs".to_string(),
+            "notes".to_string(),
+        ]
+    );
+    assert_eq!(
+        hotplug_verdict_lanes(),
+        vec![
+            "request_ref".to_string(),
+            "verdict_kind".to_string(),
+            "compatibility_reason_refs".to_string(),
+            "authorization_reason_refs".to_string(),
+            "membership_freshness_reason_refs".to_string(),
+            "notes".to_string(),
+        ]
+    );
+}
+
+#[test]
 fn message_envelope_validate_accepts_current_row_shape() {
     sample_message_envelope()
         .validate()
@@ -180,4 +239,38 @@ fn message_envelope_validate_rejects_transport_alias_drift() {
         .expect_err("transport alias drift should fail");
     assert!(err.to_string().contains("transport"));
     assert!(err.to_string().contains("transport_seam"));
+}
+
+#[test]
+fn hotplug_request_validate_accepts_current_row_shape() {
+    sample_hotplug_request()
+        .validate()
+        .expect("current hot-plug request shape should validate");
+}
+
+#[test]
+fn hotplug_request_validate_rejects_blank_message_envelope_ref() {
+    let mut request = sample_hotplug_request();
+    request.message_envelope_ref = " ".to_string();
+    let err = request
+        .validate()
+        .expect_err("blank message envelope ref should fail");
+    assert!(err.to_string().contains("message_envelope_ref"));
+}
+
+#[test]
+fn hotplug_verdict_validate_accepts_current_row_shape() {
+    sample_hotplug_verdict()
+        .validate()
+        .expect("current hot-plug verdict shape should validate");
+}
+
+#[test]
+fn hotplug_verdict_validate_rejects_unknown_verdict_kind() {
+    let mut verdict = sample_hotplug_verdict();
+    verdict.verdict_kind = "needs_runtime_engine".to_string();
+    let err = verdict
+        .validate()
+        .expect_err("unknown verdict kind should fail");
+    assert!(err.to_string().contains("verdict_kind"));
 }

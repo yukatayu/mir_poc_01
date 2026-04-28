@@ -53,7 +53,8 @@
 - `docs/reports/0979-*` は `R4` hot-plug real migration / rollback boundary closeout を表し、helper-local evidence floor を widening せずに kept-later hot-plug boundary matrix を `plan/32` と reader-facing docs に actualize した
 - `docs/reports/0982-*` は `R5` runtime-crate hot-plug engine ownership cut closeout を表し、helper-local preview / `mirrorea-core` generic carrier-substrate / `mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を `plan/33` と reader-facing docs に actualize した
 - `docs/reports/0986-*` は `R6` runtime-crate hot-plug carrier admission cut closeout を表し、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を `plan/34` と reader-facing docs に actualize した
-- current promoted next line は `P19` `mirrorea-core` hot-plug request/verdict carrier tranche。`R6` で queue narrowing は fixed したが、actual engine actualization は still later に残す
+- `docs/reports/0988-*` は `P19` `mirrorea-core` hot-plug request/verdict carrier tranche closeout を表し、`crates/mirrorea-core/src/fabric.rs` に engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を actualize した
+- current promoted next line は `P20` `mir-runtime` hot-plug orchestration skeleton first tranche。`P19` carrier と existing substrate の上で thin runtime/report assembly だけを narrow に置き、actual engine actualization は still later に残す
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -87,6 +88,8 @@
    - close 済み。helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に固定し、helper `hotplug_lifecycle` / sample anchor IDs / `LogicalPlaceRuntimeShell` / thin runtime assembly の non-equivalence を current memory に残した
 13. `R6` runtime-crate hot-plug carrier admission cut
    - close 済み。post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、helper-local preview / `mirrorea-core` reusable carrier / `mir-runtime` later orchestration の package split を docs-first に固定した
+14. `P19` `mirrorea-core` hot-plug request/verdict carrier tranche
+   - close 済み。engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `mirrorea-core` に actualize し、current promoted next line を `P20` に進めた
 
 ## mixed gate
 

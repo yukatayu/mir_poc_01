@@ -238,6 +238,15 @@
        reusable request/verdict carrier は `P19` `mirrorea-core` later tranche 候補、
        thin runtime/report assembly 上の orchestration skeleton は `P20` `mir-runtime` later tranche 候補
        という queue split までは current line に上げてよい。
+     - 2026-04-29 時点の `P19` current closeout として、
+       `crates/mirrorea-core/src/fabric.rs` に
+       engine-neutral `HotPlugRequest` / `HotPlugVerdict`
+       と lane inventory
+       `hotplug_request_lanes()` / `hotplug_verdict_lanes()`
+       を actualize してよい。
+       current line では helper-local `hotplug_lifecycle` / sample-grounded attach-detach anchor IDs /
+       attach-detach view-telemetry IDs を Rust canonical carrier に上げず、
+       verdict kind は narrow family `accepted / rejected / deferred` に留めてよい。
      - 未決なのは final hot-plug ABI、rollback、durable state migration engine である。
      - `UNRESOLVED`: actual runtime-crate hot-plug engine actualization、engine-neutral request/verdict carrier の exact Rust symbol naming / final field schema、actual rollback protocol、actual durable migration engine、distributed activation ordering の exact contract、final public hot-plug ABI。
   7. avatar fairy follow vertical slice の residual widening をどう切るか。current helper cut は `scripts/avatar_follow_samples.py` と active sample root `samples/clean-near-end/avatar-follow/` に置いたが、`FAIRY-05` reacquire-after-return を同じ helper へ取り込むかは未決である。

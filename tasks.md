@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-29 00:00 JST
+最終更新: 2026-04-29 00:41 JST
 
 ## この文書について
 
@@ -21,8 +21,9 @@
 - `P16` visual debugger / viewer first public prototype の current first cut は close 済みで、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`kept_later_gates` によって typed public prototype inventory over helper/runtime surfaces を current line に actualize 済みです。
 - `P17` storage / LLVM / backend preparation の current first cut も close 済みで、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` によって external workdir / cleanup / LLVM staging ownership mismatch を non-destructive probe floor として current line に actualize 済みです。
 - `R6` runtime-crate hot-plug carrier admission cut は close 済みです。
-- current promoted next line は **`P19` `mirrorea-core` hot-plug request/verdict carrier tranche** です。`R6` で first admissible Rust-side hot-plug-specific family と queue split は fixed しました。
-- package-level reopen next は **`P20` `mir-runtime` hot-plug orchestration skeleton first tranche** です。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は引き続き later に残します。
+- `P19` `mirrorea-core` hot-plug request/verdict carrier tranche も close 済みであり、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `crates/mirrorea-core/src/fabric.rs` に actualize 済みです。
+- current promoted next line は **`P20` `mir-runtime` hot-plug orchestration skeleton first tranche** です。`P19` carrier と existing substrate の上で thin runtime/report assembly だけを narrow に置きます。
+- package-level reopen next は **未昇格** です。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は引き続き later に残します。
 - next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
@@ -68,8 +69,8 @@
 | `R4` hot-plug real migration / rollback boundary | `Macro 8` prep | `S0 -> S2` | closed | closed | helper-local evidence floor を widening せずに kept-later hot-plug boundary matrix を docs-first に固定した |
 | `R5` runtime-crate hot-plug engine ownership cut | `Macro 8` prep | `S0 -> S2` | closed | closed | helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に固定した |
 | `R6` runtime-crate hot-plug carrier admission cut | `Macro 8` prep | `S0 -> S2` | closed | closed | post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、`P19` / `P20` queue split を docs-first に固定した |
-| `P19` `mirrorea-core` hot-plug request/verdict carrier tranche | `Macro 6-7` | `S1 -> S4` | promoted next | ~1-2 tasks | reusable engine-neutral request / verdict carrier ownership だけを `mirrorea-core` に actualize する next line |
-| `P20` `mir-runtime` hot-plug orchestration skeleton first tranche | `Macro 6-7` | `S1 -> S4` | reopen next | ~1-2 tasks | `P19` 後に thin runtime/report assembly 上の orchestration skeleton だけを actualize する later line |
+| `P19` `mirrorea-core` hot-plug request/verdict carrier tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | engine-neutral `HotPlugRequest` / `HotPlugVerdict` と lane inventory を `mirrorea-core` に actualize し、helper-local lifecycle と engine actualization を kept-later に残した |
+| `P20` `mir-runtime` hot-plug orchestration skeleton first tranche | `Macro 6-7` | `S1 -> S4` | promoted next | ~1-2 tasks | `P19` carrier と existing substrate の上に thin runtime/report assembly 上の orchestration skeleton だけを actualize する next line |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -763,6 +764,9 @@
 
 ### P19. `mirrorea-core` hot-plug request/verdict carrier tranche
 
+- status:
+  close 済み。`crates/mirrorea-core/src/fabric.rs` に engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を actualize し、`verdict_kind` は `accepted / rejected / deferred` の narrow family に留めた。
+
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
@@ -770,6 +774,8 @@
 - deliverables:
   request-side carrier、verdict-side carrier、tests、report、snapshot sync
 - validation command:
+  `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json`
+  `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json`
   `cargo test -p mirrorea-core`
   `python3 scripts/sugoroku_world_samples.py closeout --format json`
   `python3 scripts/check_source_hierarchy.py`
@@ -783,6 +789,9 @@
   lifecycle state machine、rollback state、migration protocol、final public seam naming を同じ tranche で actualize しない
 
 ### P20. `mir-runtime` hot-plug orchestration skeleton first tranche
+
+- status:
+  promoted next。`P19` carrier と existing substrate の上で thin runtime/report assembly だけを narrow に actualize する。
 
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`

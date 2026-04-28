@@ -84,6 +84,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`attach_request#1` / `detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view と helper closeout `hotplug_scope` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` を envelope-derived evidence として確認できること
 - `R5` runtime-crate hot-plug engine ownership cut が close 済みであり、helper-local preview / `mirrorea-core` generic carrier-substrate / `mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を current docs に固定したこと
 - `R6` runtime-crate hot-plug carrier admission cut が close 済みであり、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を current docs に固定したこと
+- `P19` `mirrorea-core` hot-plug request/verdict carrier tranche も close 済みであり、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `crates/mirrorea-core/src/fabric.rs` に actualize しつつ、helper-local lifecycle / sample-grounded IDs / attach-detach view-telemetry IDs / rollback / migration / distributed activation ordering / final public ABI を kept-later に残したこと
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
 - typed visualization / telemetry line が label / authority / redaction / retention を意識した evidence carrier として置かれていること
@@ -154,10 +155,11 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P19` `mirrorea-core` hot-plug request/verdict carrier tranche
-   - `R6` で first admissible Rust-side hot-plug-specific family は engine-neutral request / verdict carrier だけに narrow した。helper-local lifecycle や sample-grounded attach-detach IDs を Rust canonical engine family と混同せず、reusable carrier ownership だけを actualize する次 package として読む
-2. `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
-   - `P19` の later line として、thin runtime/report assembly 上の orchestration skeleton だけを扱う。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は同じ package で claim しない
+1. `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
+   - `P19` carrier の later line として、thin runtime/report assembly 上の orchestration skeleton だけを扱う。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は同じ package で claim しない
+2. `P19` closeout memory
+   - `crates/mirrorea-core/src/fabric.rs` の engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を current narrow Rust carrier floor として読む
+   - helper-local lifecycle / sample-grounded attach-detach IDs / attach-detach view-telemetry IDs / rollback / migration / distributed activation ordering / final public ABI は kept-later に残した current closeout memory
 3. `R6` closeout memory
    - `runtime_crate_hotplug_carrier_admission_cut_01.md`、`../research_abstract/runtime_crate_hotplug_carrier_admission_cut_01.md`、`../../plan/34-runtime-crate-hotplug-carrier-admission-cut.md`
    - post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow にした current queue memory
