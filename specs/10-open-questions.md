@@ -186,6 +186,7 @@
      - 2026-04-27 時点で helper-local synthetic preview widening として `EXT-03` / `EXT-04` は actualize してよい。
        `scripts/typed_external_boundary_samples.py` による `envelopes` / `visualization` / `failures` preview、
        effect boundary / transport envelope / auth evidence / witness refs の non-collapse、typed adapter failure lane までは current line に上げてよい。
+     - 2026-04-28 時点で `P12` current first cut として、typed external helper subset / closeout の `host_boundary_scope` / `host_boundary_lanes` / `non_collapse_lanes` / `host_family_gates` / `host_boundary_inventory` までは current line に上げてよい。
      - `EXT-01` / `EXT-02` / `EXT-05` は residual planned family に残してよい。
      - 未決なのは exact host schema、final public adapter API、browser/network/VR family への割当、console / overlay / viewer contract の public surface である。
   5b. network transport widening ladder をどこまで docs-first に固定するか。

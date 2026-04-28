@@ -42,6 +42,32 @@ class TypedExternalBoundarySamplesTests(unittest.TestCase):
         self.assertEqual(view["view_name"], "room_message_route")
         self.assertEqual(view["redaction"], "named_message_ref_only")
 
+    def test_ext_03_records_host_boundary_preview(self) -> None:
+        result = typed_external_boundary_samples.run_sample("EXT-03")
+
+        host = result["host_boundary"]
+        self.assertEqual(host["scope"], "helper_local_synthetic_preview")
+        self.assertEqual(host["adapter_entry"], "RoomMessageAdapter#local_queue")
+        self.assertEqual(host["request_lane"], "typed_effect_request")
+        self.assertEqual(host["receipt_lane"], "typed_effect_receipt")
+        self.assertEqual(host["failure_lane"], None)
+        self.assertEqual(host["visualization_lane"], "redacted_observer_view")
+        self.assertIn("transport", host["non_collapse_lanes"])
+        self.assertIn("witness", host["non_collapse_lanes"])
+
+    def test_ext_04_records_host_boundary_failure_lane(self) -> None:
+        result = typed_external_boundary_samples.run_sample("EXT-04")
+
+        host = result["host_boundary"]
+        self.assertEqual(host["scope"], "helper_local_synthetic_preview")
+        self.assertEqual(host["adapter_entry"], "RoomMessageAdapter#local_queue")
+        self.assertEqual(host["request_lane"], "typed_effect_request")
+        self.assertEqual(host["receipt_lane"], None)
+        self.assertEqual(host["failure_lane"], "typed_adapter_failure")
+        self.assertEqual(host["visualization_lane"], None)
+        self.assertIn("auth", host["non_collapse_lanes"])
+        self.assertIn("membership", host["non_collapse_lanes"])
+
     def test_check_all_passes(self) -> None:
         result = typed_external_boundary_samples.check_all()
         self.assertEqual(result["failed"], [])
@@ -70,6 +96,23 @@ class TypedExternalBoundarySamplesTests(unittest.TestCase):
         self.assertEqual(matrix[1]["current_anchor_kind"], "visualization_projection_bridge")
         self.assertEqual(matrix[2]["current_anchor_kind"], "visualization_redaction_lane")
         self.assertIn("final_host_schema", matrix[1]["kept_later_gates"])
+
+    def test_closeout_records_host_boundary_inventory(self) -> None:
+        result = typed_external_boundary_samples.closeout()
+
+        self.assertEqual(result["host_boundary_scope"], "helper_local_synthetic_preview")
+        self.assertEqual(
+            result["host_boundary_lanes"],
+            ["request", "receipt", "failure", "visualization"],
+        )
+        self.assertIn("transport", result["non_collapse_lanes"])
+        self.assertIn("browser_network_vr_host_family_split", result["host_family_gates"])
+
+        inventory = {row["sample_id"]: row for row in result["host_boundary_inventory"]}
+        self.assertEqual(inventory["EXT-03"]["receipt_lane"], "typed_effect_receipt")
+        self.assertEqual(inventory["EXT-03"]["visualization_lane"], "redacted_observer_view")
+        self.assertEqual(inventory["EXT-04"]["failure_lane"], "typed_adapter_failure")
+        self.assertEqual(inventory["EXT-04"]["receipt_lane"], None)
 
     def test_list_pretty_prints_preview_subset(self) -> None:
         pretty = typed_external_boundary_samples.format_pretty(

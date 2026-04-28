@@ -50,6 +50,7 @@ helper closeout は `representative_slice` scope で `verification_handoff_witne
 さらに `VisualizationProtocol` の first cut も close しました。
 さらに `Typed external boundary / adapter` の docs-first sample plan も close しました。
 さらに `Typed external boundary executable widening` も close しました。
+さらに `P12` external adapter / host boundary tranche の current first cut も close しており、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize しました。current promoted next package は `P13` network transport minimal alpha であり、safest first cut は helper-local `process_boundary` closeout に留まります。
 さらに `Projection / placement` の docs-first plan も close しました。
 さらに `Projection / placement executable widening` も close しました。
 さらに `HotPlug Patch / AttachPoint` の docs-first plan も close しました。
@@ -309,10 +310,10 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P11` logical multi-place runtime tranche
-   - `MembershipRegistry` / `PlaceCatalog` substrate、participant-place-kind-gated shell、principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper の上で、helper-local emulator を crate-side runtime substrate へ寄せる
-2. `P12-P17` first real implementation tranche
-   - external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
+1. `P13` network transport minimal alpha
+   - safest first cut は helper-local `process_boundary` closeout であり、`NET-01..05` canary の parity / reconnect reject / typed failure / redacted route trace を current line に固定する
+2. `P14-P17` first real implementation tranche
+   - hot-plug package manager、projection/codegen、viewer、storage/backend
 3. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す
 

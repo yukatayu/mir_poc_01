@@ -5,6 +5,7 @@
 - current repo で runnable なのは
   `scripts/typed_external_boundary_samples.py` による **synthetic preview helper subset**
   `EXT-03` / `EXT-04` だけです。
+  `P12` current first-cut closeout では、per-sample run が `host_boundary` split を返し、helper closeout が aggregate `host_boundary` preview inventory を返します。
 - その helper はこの directory の source stub を参照しますが、
   current parser / runtime がこれらの `.mir` を直接 semantic execution しているわけではありません。
 - `EXT-01` / `EXT-02` / `EXT-05` は current parser / runner ではまだ扱いません。
@@ -61,8 +62,16 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 
 - `EXT-03`
   `python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-03 --format json`
 - `EXT-04`
   `python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-04 --format json`
+
+helper closeout では、`host_boundary_scope = helper_local_synthetic_preview`、
+`host_boundary_lanes = request / receipt / failure / visualization`、
+`non_collapse_lanes = transport / auth / membership / capability / witness / visualization`、
+`host_family_gates = final_public_adapter_api / exact_host_schema / browser_network_vr_host_family_split`
+を evidence-oriented inventory として読めます。per-sample run result が返す aggregate field は `host_boundary` のみです。
 
 この subset は helper self-consistency と evidence-shape preview を確認するための thin facade です。
 phase 9 `.mir` files の direct semantic execution ではありません。

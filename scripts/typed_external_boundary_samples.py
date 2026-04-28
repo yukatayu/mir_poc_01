@@ -18,6 +18,21 @@ PREVIEW_SAMPLE_ROOT = PLANNED_SAMPLE_ROOT
 
 DEBUG_OUTPUT_MODES = ["summary", "envelopes", "visualization", "failures"]
 PLANNED_SAMPLE_IDS = ["EXT-01", "EXT-02", "EXT-05"]
+HOST_BOUNDARY_SCOPE = "helper_local_synthetic_preview"
+HOST_BOUNDARY_LANES = ["request", "receipt", "failure", "visualization"]
+NON_COLLAPSE_LANES = [
+    "transport",
+    "auth",
+    "membership",
+    "capability",
+    "witness",
+    "visualization",
+]
+HOST_FAMILY_GATES = [
+    "final_public_adapter_api",
+    "exact_host_schema",
+    "browser_network_vr_host_family_split",
+]
 
 SAMPLE_ROWS: list[dict[str, str]] = [
     {
@@ -112,6 +127,27 @@ LIMITATIONS = [
     "no production visualization service contract",
 ]
 
+HOST_BOUNDARY_PREVIEWS: dict[str, dict[str, Any]] = {
+    "EXT-03": {
+        "scope": HOST_BOUNDARY_SCOPE,
+        "adapter_entry": "RoomMessageAdapter#local_queue",
+        "request_lane": "typed_effect_request",
+        "receipt_lane": "typed_effect_receipt",
+        "failure_lane": None,
+        "visualization_lane": "redacted_observer_view",
+        "non_collapse_lanes": list(NON_COLLAPSE_LANES),
+    },
+    "EXT-04": {
+        "scope": HOST_BOUNDARY_SCOPE,
+        "adapter_entry": "RoomMessageAdapter#local_queue",
+        "request_lane": "typed_effect_request",
+        "receipt_lane": None,
+        "failure_lane": "typed_adapter_failure",
+        "visualization_lane": None,
+        "non_collapse_lanes": list(NON_COLLAPSE_LANES),
+    },
+}
+
 
 def _sample_row(sample_id: str) -> dict[str, str]:
     for row in SAMPLE_ROWS:
@@ -133,6 +169,10 @@ def _base_result(sample_id: str) -> dict[str, Any]:
         "kind": row["kind"],
         "focus": row["focus"],
     }
+
+
+def _host_boundary_preview(sample_id: str) -> dict[str, Any]:
+    return dict(HOST_BOUNDARY_PREVIEWS[sample_id])
 
 
 def _route_row(
@@ -256,6 +296,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                     "member_incarnation": 0,
                     "auth_evidence": None,
                 },
+                "host_boundary": _host_boundary_preview(sample_id),
                 "message_envelopes": message_envelopes,
                 "route_trace": message_envelopes,
                 "visualization_view": {
@@ -306,6 +347,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                 "terminal_outcome": "typed_failure",
                 "adapter_kind": "local_queue_room_message",
                 "transport_seam": "local_queue",
+                "host_boundary": _host_boundary_preview(sample_id),
                 "typed_failures": failure_rows,
                 "message_envelopes": [
                     _route_row(
@@ -405,6 +447,14 @@ def closeout() -> dict[str, Any]:
         "sample_count": len(SAMPLE_ROWS),
         "preview_sample_ids": [row["sample_id"] for row in SAMPLE_ROWS],
         "planned_sample_ids": list(PLANNED_SAMPLE_IDS),
+        "host_boundary_scope": HOST_BOUNDARY_SCOPE,
+        "host_boundary_lanes": list(HOST_BOUNDARY_LANES),
+        "non_collapse_lanes": list(NON_COLLAPSE_LANES),
+        "host_family_gates": list(HOST_FAMILY_GATES),
+        "host_boundary_inventory": [
+            {"sample_id": sample_id, **_host_boundary_preview(sample_id)}
+            for sample_id in [row["sample_id"] for row in SAMPLE_ROWS]
+        ],
         "residual_review_matrix": list(RESIDUAL_REVIEW_MATRIX),
         "debug_output_modes": list(DEBUG_OUTPUT_MODES),
         "preview_sample_root": str(PREVIEW_SAMPLE_ROOT),

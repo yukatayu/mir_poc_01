@@ -1101,9 +1101,9 @@ P10. `mirrorea-core` first real implementation tranche
 P11. logical multi-place runtime / emulator tranche
   - started。current third cut では `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell`、shell-backed `add_initial_participant` / `add_participant` / `leave_participant` parity helper を `mirrorea-core` に actualize し、`WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / event-timeline-view catalog は kept-later に残す。
 P12. external adapter / host boundary tranche
-  - typed external boundary を host-facing adapter seam として tighten する。
+  - current first cut close 済み。typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize し、helper-local host-facing adapter seam inventory を tighten した。`engine-abi` は placeholder のままに残す。
 P13. network transport minimal alpha
-  - helper-local canary から real socket / session / replay minimal alpha へ widening する。
+  - current safest first cut は helper-local `process_boundary` closeout であり、`NET-01..05` canary の `loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace を current line に固定する。real socket / session / replay minimal alpha は kept-later gate に残す。
 P14. hot-plug `Patch` / `AttachPoint` package-manager tranche
   - compatibility、activation、migration、rollback を package-manager concern として widen する。
 P15. projection/codegen first emitted place-specific programs
@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10` は close し、next promoted package は `P11`、next reopen point は `P12` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut は close し、`P11` current third cut は actualize 済み、next promoted package は `P13`、next reopen point は `P14` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1190,8 +1190,9 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
 - `Projection / placement residual emitted-program gate` は docs-first boundary package として close し、projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current line に actualize した。
 - `TermSignature` registry hardening は close し、current `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split を current line に actualize した。
-- current promoted next package は `logical multi-place runtime tranche` であり、
-  next reopen point は `external adapter / host boundary tranche` である。
+- historical note at 2026-04-27 close time:
+  current promoted next package は `logical multi-place runtime tranche` であり、
+  next reopen point は `external adapter / host boundary tranche` であった。
 
 ## 2026-04-27 repository-structure staging addendum
 

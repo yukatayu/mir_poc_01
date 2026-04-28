@@ -13,8 +13,10 @@
 
 ```bash
 python3 scripts/typed_external_boundary_samples.py list
+python3 scripts/typed_external_boundary_samples.py run EXT-03 --format json
 python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug envelopes --format json
 python3 scripts/typed_external_boundary_samples.py run EXT-03 --debug visualization --format json
+python3 scripts/typed_external_boundary_samples.py run EXT-04 --format json
 python3 scripts/typed_external_boundary_samples.py run EXT-04 --debug failures --format json
 python3 scripts/typed_external_boundary_samples.py check-all --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
@@ -26,9 +28,24 @@ python3 -m unittest scripts.tests.test_typed_external_boundary_samples
 - `EXT-03`
   local queue room-message synthetic preview lane。
   effect boundary、transport envelope、auth evidence、witness refs を collapse しない。
+  current `host_boundary` preview では `request_lane = typed_effect_request`、`receipt_lane = typed_effect_receipt`、`visualization_lane = redacted_observer_view` を返す。
 - `EXT-04`
   typed adapter failure synthetic preview lane。
   adapter failure を hidden retry や domain rejection に潰さない。
+  current `host_boundary` preview では `failure_lane = typed_adapter_failure` を返す。
+
+## current host-boundary preview inventory
+
+- `host_boundary_scope`
+  `helper_local_synthetic_preview`
+- `host_boundary_lanes`
+  `request / receipt / failure / visualization`
+- `non_collapse_lanes`
+  `transport / auth / membership / capability / witness / visualization`
+- `host_family_gates`
+  `final_public_adapter_api / exact_host_schema / browser_network_vr_host_family_split`
+
+per-sample `run EXT-03` / `run EXT-04` が返すのは `host_boundary` です。aggregate な `host_boundary_scope` / `host_boundary_lanes` / `host_family_gates` / `non_collapse_lanes` は helper closeout が返します。どちらも final public adapter ABI や exact host schema ではありません。
 
 ## residual planned family
 
@@ -65,6 +82,7 @@ cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_
 
 - standard I/O を Mir core primitive にせず、typed effect / adapter boundary に残す current reading
 - local queue lane で、effect boundary、transport envelope、auth evidence、witness refs を separate に保つ synthetic preview helper evidence
+- helper-local `host_boundary` preview inventory により request / receipt / failure / visualization split を explicit に保つ evidence
 - typed adapter failure を explicit result として返し、hidden retry や hidden repair をしない synthetic preview helper evidence
 - visualization も effect であり、label / authority / redaction を持つ synthetic preview helper evidence
 - `EXT-01` / `EXT-02` / `EXT-05` が residual planned family のままでも、どの indirect anchor に依存しているかは current repo で確認できること

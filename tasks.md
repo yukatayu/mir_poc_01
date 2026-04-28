@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 15:32 JST
+最終更新: 2026-04-28 16:00 JST
 
 ## この文書について
 
@@ -15,8 +15,10 @@
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
 - `P10` `mirrorea-core` first real implementation tranche は close 済みです。
-- current promoted next line は **`P11` logical multi-place runtime tranche** で、current third cut は `MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated shell の上に principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を actualize したところです。
-- next reopen point は **`P12` external adapter / host boundary tranche** です。
+- `P11` logical multi-place runtime tranche の current third cut は close 済みで、`MembershipRegistry` / `PlaceCatalog` substrate と participant-place-kind-gated shell の上に principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper まで actualize 済みです。
+- `P12` external adapter / host boundary tranche の current first cut は close 済みで、typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize 済みです。
+- current promoted next line は **`P13` network transport minimal alpha** で、その safest first cut は helper-local `process_boundary` closeout です。
+- next reopen point は **`P14` hot-plug package-manager tranche** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -46,9 +48,9 @@
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | closed | closed | MembershipRegistry source-of-truth / world sugar / hot-plug stop line fixed |
 | `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | closed | closed | helper closeout `FAIRY-05` reopen gate / planned path inventory fixed |
 | `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | placeholder -> first real minimal carrier core |
-| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | active | multi-task | membership source-of-truth + place catalog + shell-backed bootstrap/join/leave third cut |
-| `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | reopen next | multi-task | host-facing adapter seam |
-| `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper canary -> real transport alpha |
+| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | started | multi-task | third cut actualized; non-blocking follow-up only |
+| `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | helper-local host-boundary inventory first cut |
+| `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | promoted next | multi-task | helper-local process-boundary closeout |
 | `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | compatibility / migration / rollback |
 | `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | later | multi-task | preview floor -> emitted programs |
 | `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | later | multi-task | typed visualization public prototype |
@@ -371,38 +373,58 @@
 
 ### P12. external adapter / host boundary tranche
 
+- status:
+  close 済み。current first cut では typed external helper subset / closeout に `host_boundary_scope = helper_local_synthetic_preview`、`host_boundary_lanes = request / receipt / failure / visualization`、`non_collapse_lanes = transport / auth / membership / capability / witness / visualization`、`host_family_gates = final_public_adapter_api / exact_host_schema / browser_network_vr_host_family_split`、`host_boundary_inventory` を actualize した。`engine-abi` は placeholder のまま保ち、crate-side adapter ABI はまだ起動していない。
+
 - macro phase / stage:
   `Macro 7`, `S1 -> S4`
 - objective:
   typed external boundary を host-facing adapter seam として tighten する
 - deliverables:
-  adapter responsibility boundary、host boundary wording、carrier split
+  adapter responsibility boundary、host boundary wording、carrier split、helper-local `host_boundary` preview inventory、explicit non-collapse lane inventory
 - validation command:
-  `UNRESOLVED`. current anchor は `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+  `python3 -m unittest scripts.tests.test_typed_external_boundary_samples`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-03 --format json`
+  `python3 scripts/typed_external_boundary_samples.py run EXT-04 --format json`
+  `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
 - debug / visualization output:
-  `envelopes`、`visualization`、`failures`
+  `summary`、`envelopes`、`visualization`、`failures`、helper closeout `host_boundary_inventory`
 - docs / report requirement:
-  新しい report、`samples_progress.md`、adapter docs を同期する
+  新しい report、`samples_progress.md`、adapter docs、`plan/25`、snapshot docs を同期する
 - stop line:
-  final public adapter ABI、browser/network/VR family contract を premature に固定しない
+  final public adapter ABI、exact host schema、browser/network/VR family contract を premature に固定しない。`engine-abi` placeholder を current helper inventory task の名目で実装済み扱いしない
 
 ### P13. network transport minimal alpha
+
+- status:
+  promoted next。current safest first cut は helper-local `process_boundary` closeout であり、`mirrorea-core` transport runtime や real socket/broker を先に作るのではなく、`loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace を current validation floor と stop line に固定する。
 
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
-  helper-local canary から real socket / session / replay minimal alpha へ widening する
+  helper-local transport canary family を `process_boundary` closeout として tighten し、real transport line に入る前の最小 honest scope を固定する
 - deliverables:
-  minimal transport alpha、reconnect guard、failure classification
+  `transport_scope = helper_local_process_boundary`、`loopback_socket` parity、subprocess JSON bridge、stale epoch/incarnation reject、typed transport failure family、observer-safe redacted route trace、non-collapse lane wording
 - validation command:
+  `python3 scripts/network_transport_samples.py list`
+  `python3 scripts/network_transport_samples.py run NET-02 --debug route-trace --format json`
+  `python3 scripts/network_transport_samples.py run NET-03 --debug reconnect --format json`
+  `python3 scripts/network_transport_samples.py run NET-04 --debug failures --format json`
+  `python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json`
+  `python3 scripts/network_transport_samples.py check-all --format json`
   `python3 scripts/network_transport_samples.py closeout --format json`
-  additional real-socket command は `UNRESOLVED`
+  `python3 -m unittest scripts.tests.test_network_transport_samples`
+  `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --transport loopback_socket --debug envelopes --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --transport loopback_socket --debug envelopes --format json`
+  `python3 scripts/sugoroku_world_samples.py run 04_non_owner_roll_rejected --transport loopback_socket --format json`
 - debug / visualization output:
   `route-trace`、`reconnect`、`failures`
 - docs / report requirement:
-  新しい report、`samples_progress.md`、transport docs を同期する
+  新しい report、`samples_progress.md`、`plan/22`、transport docs、snapshot docs を同期する
 - stop line:
-  consensus、durable replay、multi-server production transport を claim しない
+  real socket/broker、crypto session、durable replay/commit、continuous shared runtime state across process、final public transport ABI、production telemetry/viewer contract を claim しない
 
 ### P14. hot-plug `Patch` / `AttachPoint` package-manager tranche
 

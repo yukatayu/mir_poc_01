@@ -72,8 +72,8 @@
 current recommendation:
 
 - `mir-ast` / `mir-semantics` / `mir-runtime` は live chain なので、rename / rebucket しない
-- `mirrorea-core` は current ownership cut と `P11` current second cut が入り始めたが、まだ final public crate shape ではないので rename / rebucket しない
-- `mirrorea-control` / `prism-*` / `engine-abi` は placeholder だが、名前自体が subsystem separation を表しているので、早い rename はしない
+- `mirrorea-core` は current ownership cut と `P11` current third cut が入り始めたが、まだ final public crate shape ではないので rename / rebucket しない
+- `mirrorea-control` / `prism-*` / `engine-abi` は placeholder だが、名前自体が subsystem separation を表しているので、早い rename はしない。`P12` current first-cut closeout は helper-local `host_boundary` preview inventory であり、crate-side adapter surface actualization ではない
 - crate split / merge は docs-first lane で boundary が固まってから行う
 
 ## sample taxonomy

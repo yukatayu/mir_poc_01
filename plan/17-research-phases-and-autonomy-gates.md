@@ -32,9 +32,11 @@
   - `P7` `VisualizationProtocol / VisualizationSecurity` hardening も close 済み
   - `P8` Sugoroku runtime attach hardening も close 済み
   - `P9` avatar fairy follow hardening も close 済み
-  - current active package は `P11` logical multi-place runtime tranche であり、current third cut は `MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を actualize したところ
-  - next reopen point は `P12` external adapter / host boundary tranche
-  - `P11-P17` は first real implementation tranche、`P18` は final mixed gate
+  - `P11` logical multi-place runtime tranche の current third cut は actualize 済みであり、`MembershipRegistry` / `PlaceCatalog` substrate の上に participant-place-kind-gated principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper を置いた
+  - `P12` external adapter / host boundary tranche の current first cut は close 済みであり、typed external helper subset / closeout に helper-local `host_boundary` preview inventory を actualize 済み
+  - current promoted next package は `P13` network transport minimal alpha であり、current safest first cut は helper-local `process_boundary` closeout
+  - next reopen point は `P14` hot-plug package-manager tranche
+  - `P12-P17` は first real implementation tranche、`P18` は final mixed gate
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

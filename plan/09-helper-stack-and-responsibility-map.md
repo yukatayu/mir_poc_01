@@ -114,6 +114,7 @@ run_directory_named_profile
   を phase 9 sample ladder の evidence anchor として参照してよい。
   - current repo-local synthetic preview widening は `EXT-03` / `EXT-04` thin synthetic preview helper cut に留め、
     `EXT-01` / `EXT-02` / `EXT-05` は residual planned family に残してよい。
+  - `P12` current first-cut closeout では helper subset / closeout に `host_boundary_scope = helper_local_synthetic_preview`、`host_boundary_lanes = request / receipt / failure / visualization`、`non_collapse_lanes = transport / auth / membership / capability / witness / visualization`、`host_family_gates = final_public_adapter_api / exact_host_schema / browser_network_vr_host_family_split`、`host_boundary_inventory` を actualize してよい。
   - これは final public adapter API、real browser/network/VR transport、final host schema、final public console / overlay / viewer contract を意味しない。
 - current sample-visible verifier preview cut では、
   - `formal_hook_status`

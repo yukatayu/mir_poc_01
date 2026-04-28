@@ -5,7 +5,7 @@
 phase 9 `Typed external boundary / adapter` を、repo-local current layer で
 安全に前進させるための docs-first sample ladder を置きます。
 
-ここで固定するのは **planned sample ID / synthetic preview helper subset / evidence anchor / stop line** です。
+ここで固定するのは **planned sample ID / synthetic preview helper subset / host-boundary preview inventory / evidence anchor / stop line** です。
 final public adapter API や real transport 実装ではありません。
 
 ## current evidence anchors
@@ -38,6 +38,13 @@ exact host schema / final adapter contract は `OPEN` のままです。
 - residual planned family は `EXT-01` / `EXT-02` / `EXT-05`
 - helper entrypoint:
   `python3 scripts/typed_external_boundary_samples.py`
+- `P12` current first-cut closeout では helper subset / closeout に
+  `host_boundary_scope = helper_local_synthetic_preview`、
+  `host_boundary_lanes = request / receipt / failure / visualization`、
+  `non_collapse_lanes = transport / auth / membership / capability / witness / visualization`、
+  `host_family_gates = final_public_adapter_api / exact_host_schema / browser_network_vr_host_family_split`、
+  `host_boundary_inventory`
+  を actualize してよい
 - debug modes:
   `summary`
   `envelopes`
@@ -50,6 +57,7 @@ exact host schema / final adapter contract は `OPEN` のままです。
 - standard I/O は Mir core primitive にしない
 - adapter boundary で external world へ接続する
 - effect boundary / transport / auth / membership / capability / witness / visualization を separate lane に保つ
+- helper-local `host_boundary` preview inventory により request / receipt / failure / visualization split を explicit に保つ
 - adapter failure は typed result / explicit failure reason として表す
 
 ## residual planned family matrix
@@ -62,5 +70,5 @@ exact host schema / final adapter contract は `OPEN` のままです。
 
 ## 次
 
-この文書の current role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、evidence anchor、residual reopen criterion を保つことです。
+この文書の current role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、helper-local `host_boundary` preview inventory、evidence anchor、residual reopen criterion を保つことです。
 具体的な promoted queue は `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。
