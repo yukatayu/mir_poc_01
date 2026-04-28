@@ -53,8 +53,9 @@
 - `docs/reports/0979-*` は `R4` hot-plug real migration / rollback boundary closeout を表し、helper-local evidence floor を widening せずに kept-later hot-plug boundary matrix を `plan/32` と reader-facing docs に actualize した
 - `docs/reports/0982-*` は `R5` runtime-crate hot-plug engine ownership cut closeout を表し、helper-local preview / `mirrorea-core` generic carrier-substrate / `mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を `plan/33` と reader-facing docs に actualize した
 - `docs/reports/0986-*` は `R6` runtime-crate hot-plug carrier admission cut closeout を表し、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を `plan/34` と reader-facing docs に actualize した
+- `docs/reports/0989-*` は `P20` `mir-runtime` hot-plug orchestration skeleton first tranche closeout を表し、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize し、`P19` carrier と existing substrate を thin runtime/report assembly として接続した
 - `docs/reports/0988-*` は `P19` `mirrorea-core` hot-plug request/verdict carrier tranche closeout を表し、`crates/mirrorea-core/src/fabric.rs` に engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を actualize した
-- current promoted next line は `P20` `mir-runtime` hot-plug orchestration skeleton first tranche。`P19` carrier と existing substrate の上で thin runtime/report assembly だけを narrow に置き、actual engine actualization は still later に残す
+- post-`P20` current promoted-next package と package-level reopen next は未昇格に保つ。completed engine、rollback、durable migration、distributed activation ordering、final public hot-plug ABI を narrow current evidence なしに昇格させない
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -87,9 +88,11 @@
 12. `R5` runtime-crate hot-plug engine ownership cut
    - close 済み。helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に固定し、helper `hotplug_lifecycle` / sample anchor IDs / `LogicalPlaceRuntimeShell` / thin runtime assembly の non-equivalence を current memory に残した
 13. `R6` runtime-crate hot-plug carrier admission cut
-   - close 済み。post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、helper-local preview / `mirrorea-core` reusable carrier / `mir-runtime` later orchestration の package split を docs-first に固定した
+   - close 済み。post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、helper-local preview / `mirrorea-core` reusable carrier / `mir-runtime` current-closeout orchestration skeleton の package split を docs-first に固定した
 14. `P19` `mirrorea-core` hot-plug request/verdict carrier tranche
-   - close 済み。engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `mirrorea-core` に actualize し、current promoted next line を `P20` に進めた
+   - close 済み。engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `mirrorea-core` に actualize し、historical close-time next line を `P20` へ進めた
+15. `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
+   - close 済み。`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize し、admitted request/verdict carrier と existing substrate の thin runtime/report assembly を current line に actualize した。completed engine、rollback、durable migration、distributed activation ordering、final public hot-plug ABI は kept-later に残す
 
 ## mixed gate
 

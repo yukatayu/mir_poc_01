@@ -128,6 +128,6 @@ Do not claim:
 
 ## current recommendation
 
-after `R3` closeout, the promoted next line should move to kept-later hot-plug
+historical next relation after `R3` closeout was to move toward kept-later hot-plug
 work around real migration / rollback boundary rather than looping on
 `FAIRY-05` wording again.

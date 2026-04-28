@@ -155,8 +155,8 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
-   - `P19` carrier の later line として、thin runtime/report assembly 上の orchestration skeleton だけを扱う。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は同じ package で claim しない
+1. post-`P20` queue status
+   - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。current promoted-next package と package-level reopen next は未昇格に保ち、completed engine、rollback、durable migration、distributed activation ordering、final public ABI は narrow current evidence なしに昇格させない
 2. `P19` closeout memory
    - `crates/mirrorea-core/src/fabric.rs` の engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を current narrow Rust carrier floor として読む
    - helper-local lifecycle / sample-grounded attach-detach IDs / attach-detach view-telemetry IDs / rollback / migration / distributed activation ordering / final public ABI は kept-later に残した current closeout memory

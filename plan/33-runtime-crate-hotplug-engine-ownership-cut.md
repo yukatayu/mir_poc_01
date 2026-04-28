@@ -128,8 +128,8 @@ distributed activation ordering、final public hot-plug ABI は固定しない�
 current reading:
 
 - helper-local lifecycle / sample-grounded IDs / attach-detach view-telemetry IDs は preview ownership に残す
-- reusable request / verdict carrier ownership は `P19` `mirrorea-core` later tranche 候補に送る
-- thin runtime/report assembly 上の orchestration skeleton は `P20` `mir-runtime` later tranche 候補に送る
+- reusable request / verdict carrier ownership は current repo state では `P19` `mirrorea-core` current closeout で actualize 済みである
+- thin runtime/report assembly 上の orchestration skeleton は current repo state では `P20` `mir-runtime` current closeout で actualize 済みである
 - rollback / durable migration / distributed activation ordering / final public ABI は依然 kept-later である
 
 reader-facing follow-on memory は

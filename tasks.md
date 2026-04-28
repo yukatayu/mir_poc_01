@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-29 00:41 JST
+最終更新: 2026-04-29 01:57 JST
 
 ## この文書について
 
@@ -22,7 +22,8 @@
 - `P17` storage / LLVM / backend preparation の current first cut も close 済みで、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` によって external workdir / cleanup / LLVM staging ownership mismatch を non-destructive probe floor として current line に actualize 済みです。
 - `R6` runtime-crate hot-plug carrier admission cut は close 済みです。
 - `P19` `mirrorea-core` hot-plug request/verdict carrier tranche も close 済みであり、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `crates/mirrorea-core/src/fabric.rs` に actualize 済みです。
-- current promoted next line は **`P20` `mir-runtime` hot-plug orchestration skeleton first tranche** です。`P19` carrier と existing substrate の上で thin runtime/report assembly だけを narrow に置きます。
+- `P20` `mir-runtime` hot-plug orchestration skeleton first tranche も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize 済みです。
+- current promoted next line は **未昇格** です。post-`P20` の actual runtime-crate hot-plug engine、rollback、durable migration、distributed activation ordering、final public ABI はまだ narrow package へ promotion していません。
 - package-level reopen next は **未昇格** です。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は引き続き later に残します。
 - next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
@@ -70,7 +71,7 @@
 | `R5` runtime-crate hot-plug engine ownership cut | `Macro 8` prep | `S0 -> S2` | closed | closed | helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に固定した |
 | `R6` runtime-crate hot-plug carrier admission cut | `Macro 8` prep | `S0 -> S2` | closed | closed | post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、`P19` / `P20` queue split を docs-first に固定した |
 | `P19` `mirrorea-core` hot-plug request/verdict carrier tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | engine-neutral `HotPlugRequest` / `HotPlugVerdict` と lane inventory を `mirrorea-core` に actualize し、helper-local lifecycle と engine actualization を kept-later に残した |
-| `P20` `mir-runtime` hot-plug orchestration skeleton first tranche | `Macro 6-7` | `S1 -> S4` | promoted next | ~1-2 tasks | `P19` carrier と existing substrate の上に thin runtime/report assembly 上の orchestration skeleton だけを actualize する next line |
+| `P20` `mir-runtime` hot-plug orchestration skeleton first tranche | `Macro 6-7` | `S1 -> S4` | closed | closed | dedicated `HotPlugRuntimeSkeletonReport` と consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` により、`P19` carrier と existing substrate の上に thin runtime/report assembly を narrow に actualize した |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -738,7 +739,7 @@
 ### R6. runtime-crate hot-plug carrier admission cut
 
 - status:
-  close 済み。`R5` closeout memory を前提に、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、`P19` `mirrorea-core` later tranche と `P20` `mir-runtime` later tranche の queue split を docs-first に固定した。
+  close 済み。`R5` closeout memory を前提に、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に限定し、`P19` `mirrorea-core` current closeout と `P20` `mir-runtime` current closeout へ進む queue split を docs-first に固定した。
 
 - macro phase / stage:
   `Macro 8` prep, `S0 -> S2`
@@ -791,14 +792,14 @@
 ### P20. `mir-runtime` hot-plug orchestration skeleton first tranche
 
 - status:
-  promoted next。`P19` carrier と existing substrate の上で thin runtime/report assembly だけを narrow に actualize する。
+  close 済み。`P19` carrier と existing substrate の上で thin runtime/report assembly だけを narrow に actualize し、dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を `mir-runtime` に置いた。
 
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
 - objective:
   `P19` carrier と existing substrate の上に、thin runtime/report assembly 側の hot-plug orchestration skeleton だけを narrow に置く
 - deliverables:
-  runtime/report assembly skeleton、tests、report、snapshot sync
+  dedicated runtime/report assembly skeleton module、tests、report、snapshot sync
 - validation command:
   `cargo test -p mir-runtime`
   `python3 scripts/sugoroku_world_samples.py closeout --format json`
@@ -806,7 +807,7 @@
   `python3 scripts/validate_docs.py`
   `git diff --check`
 - debug / visualization output:
-  runtime canonical inventory / report-local carrier note
+  runtime report-local carrier note over admitted request/verdict carrier + substrate snapshot
 - docs / report requirement:
   新しい report、`plan/34` と relevant roadmap / snapshot docs の同期
 - stop line:

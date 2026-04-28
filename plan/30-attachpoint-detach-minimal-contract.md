@@ -140,4 +140,4 @@ current grounding carrier は `message_envelopes` であり、少なくとも次
 - attach / detach wording を広げるときも、accepted/rejected `MessageEnvelope` seam を正本に残す
 - migration / rollback / final public ABI を、current helper-local lifecycle evidence に仮託して claim しない
 - `R4` closeout 後の current boundary memory は `plan/32-hotplug-real-migration-rollback-boundary.md` を参照し、real migration / rollback / runtime-crate engine / distributed activation ordering は kept-later boundary として読む
-- promoted next line after `R4` は `R5` runtime-crate hot-plug engine ownership cut として読み、helper-local preview と crate-side runtime ownership split を narrow に整理する
+- historical next relation after `R4` close では `R5` runtime-crate hot-plug engine ownership cut を読み、helper-local preview と crate-side runtime ownership split を narrow に整理した。current repo state では `R5` / `R6` / `P19` / `P20` も close 済みであり、post-`P20` の current promoted-next package は未昇格である

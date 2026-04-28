@@ -235,15 +235,29 @@
        post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow にしてよい。
        helper-local `hotplug_lifecycle` / sample-grounded attach-detach anchor IDs /
        attach-detach view-telemetry IDs は preview ownership に残し、
-       reusable request/verdict carrier は `P19` `mirrorea-core` later tranche 候補、
-       thin runtime/report assembly 上の orchestration skeleton は `P20` `mir-runtime` later tranche 候補
-       という queue split までは current line に上げてよい。
+       reusable request/verdict carrier は `P19` `mirrorea-core` current closeout で actualize 済み、
+       thin runtime/report assembly 上の orchestration skeleton は `P20` `mir-runtime` current closeout で actualize 済み、
+       その queue split までは current line に上げてよい。
      - 2026-04-29 時点の `P19` current closeout として、
        `crates/mirrorea-core/src/fabric.rs` に
        engine-neutral `HotPlugRequest` / `HotPlugVerdict`
        と lane inventory
        `hotplug_request_lanes()` / `hotplug_verdict_lanes()`
        を actualize してよい。
+     - 2026-04-29 時点の `P20` current closeout として、
+       `crates/mir-runtime/src/hotplug_runtime.rs` に
+       dedicated `HotPlugRuntimeSkeletonReport` と
+       consumer-side `assemble_hotplug_runtime_skeleton_report()`、
+       example `build_hotplug_runtime_skeleton_report()`
+       を actualize してよい。
+       ただしこれは admitted request/verdict carrier と
+       `LogicalPlaceRuntimeShell::snapshot()`
+       の thin runtime/report assembly に留める。
+       helper-local lifecycle IDs / sample-grounded attach-detach IDs /
+       attach-detach view-telemetry IDs は preview ownership に残し、
+       completed engine / rollback / durable migration /
+       distributed activation ordering / final public hot-plug ABI は
+       kept-later のまま保つ。
        current line では helper-local `hotplug_lifecycle` / sample-grounded attach-detach anchor IDs /
        attach-detach view-telemetry IDs を Rust canonical carrier に上げず、
        verdict kind は narrow family `accepted / rejected / deferred` に留めてよい。

@@ -95,7 +95,7 @@ run_directory_named_profile
   - `R5` ownership cut 後の current reading では、
     - helper-local `hotplug_lifecycle` と sample-grounded `attach_request#1 / detach_request#1 / detached_roll_request#1` は Python preview ownership に残す
     - `mirrorea-core` は generic `MessageEnvelope` / `PrincipalClaim` / `AuthEvidence` carrier と `MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell` substrate を owned current line に持つ
-    - `mir-runtime` は thin runtime/report assembly を担う later orchestration candidate であって、hot-plug engine owner ではない
+    - `mir-runtime` は thin runtime/report assembly を担う current closeout owner であり、`P20` では dedicated `HotPlugRuntimeSkeletonReport` / consumer-side `assemble_hotplug_runtime_skeleton_report()` / example `build_hotplug_runtime_skeleton_report()` を actualize した。ただし hot-plug engine owner ではない
     と reader-facing に固定してよい。
   - Python/Rust の carrier duplication は current owner split の incomplete migration evidence であり、Rust-side canonical move complete を意味しない。
   - これは final public message schema、final public auth protocol、final public transport contract を意味しない。

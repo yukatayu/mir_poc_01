@@ -72,9 +72,10 @@ helper-local debug pretty print や report-local inventory を
 - witness timeline / performance telemetry service / IDE embedding
 - `mir_hilight.html` の役割変更
 
-## next line
+## historical next line
 
-current `P16` current first cut を close したら、
-promoted next package は `P17` storage / LLVM / backend preparation です。
+`P16` current first cut close 時点では、
+promoted next package は `P17` storage / LLVM / backend preparation でした。
+current repo state では `P17` も close 済みであり、post-`P20` の current promoted-next package は未昇格です。
 
 `P18` final public API / parser grammar gate は引き続き later mixed gate に残します。

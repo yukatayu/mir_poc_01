@@ -81,7 +81,7 @@ helper schema の widening、runtime-crate engine 実装、final public ABI の�
   distributed activation ordering は kept-later boundary に残す
 - rollback / migration / runtime-crate engine / final public ABI を、
   current helper-local package-manager inventory に仮託して claim しない
-- promoted next line after `R4` は
+- historical next relation after `R4` close は
   `R5` runtime-crate hot-plug engine ownership cut とし、
   helper-local preview、crate-side carrier、runtime orchestration の owner split を narrow に整理する
 - `R5` closeout 後の owner split memory は

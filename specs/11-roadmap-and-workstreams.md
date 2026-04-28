@@ -1110,6 +1110,8 @@ R6. runtime-crate hot-plug carrier admission cut
   - close 済み。post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、helper-local lifecycle / sample-grounded IDs / attach-detach view-telemetry IDs を preview ownership に残したまま、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を current line に actualize した。actual engine state machine、rollback、durable migration、distributed activation ordering、final public hot-plug ABI は kept-later に残す。
 P19. `mirrorea-core` hot-plug request/verdict carrier tranche
   - current close 済み。`crates/mirrorea-core/src/fabric.rs` に engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を actualize し、`verdict_kind` は current narrow family `accepted / rejected / deferred` に留めた。helper-local lifecycle / sample-grounded IDs / attach-detach view-telemetry IDs は preview ownership に残し、lifecycle state machine、rollback、migration protocol/engine、distributed activation ordering、final public hot-plug ABI は kept-later に残す。
+P20. `mir-runtime` hot-plug orchestration skeleton first tranche
+  - current close 済み。`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize し、admitted request/verdict carrier と existing substrate の thin runtime/report assembly を current line に actualize した。helper-local lifecycle / sample-grounded IDs / attach-detach view-telemetry IDs は preview ownership に残し、completed engine、rollback、durable migration、distributed activation ordering、final public hot-plug ABI は kept-later に残す。
 P15. projection/codegen first emitted place-specific programs
   - current first-cut closeout は committed generated bridge evidence only として close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize した。final emitted executable family、projection IR、optimizer、deployment planner、final public emitted-program ABI は kept-later gate に残す。
 P16. visual debugger / viewer first public prototype
@@ -1122,7 +1124,7 @@ P18. public API / parser grammar gate
   - repo-side first cut は close 済みとし、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize してよい。
   - actual final parser grammar、actual final public parser / checker / runtime / verifier API、actual final public adapter / viewer / projection / hot-plug / transport ABI は still later に残す。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` / `P17` current first-cut closeout は close し、`P11` current third cut は actualize 済み、`P18` repo-side first cut も close 済みであり、next line は post-`P18` true user-spec hold line である。
+2026-04-29 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` / `P17` current first-cut closeout、`P19`、`P20` は close し、`P11` current third cut は actualize 済み、`P18` repo-side first cut も close 済みであり、current promoted-next package と package-level reopen next は未昇格である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1200,7 +1202,7 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `P15` projection/codegen first emitted place-specific programs の current first-cut closeout は committed generated bridge evidence only として close し、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` alignment surface、`generated_reserve_inventory`、`validation_floor` を current line に actualize した。
 - `TermSignature` registry hardening は close し、current `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split を current line に actualize した。
 - historical note at 2026-04-27 close time:
-  current promoted next package は `logical multi-place runtime tranche` であり、
+  close-time next package は `logical multi-place runtime tranche` であり、
   next reopen point は `external adapter / host boundary tranche` であった。
 
 ## 2026-04-27 repository-structure staging addendum

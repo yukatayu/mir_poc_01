@@ -43,8 +43,9 @@ detach 後の domain action rejection の explicitness、
 
 helper floor は widening しません。
 `migration_contract` は protocol ではなく unresolved-state honesty lane として読みます。
-`R4` の次は、helper-local preview と crate-side runtime ownership を分ける
-`R5` runtime-crate hot-plug engine ownership cut を promoted next line として読むのが current recommendation です。
+historical next relation at `R4` close time では、helper-local preview と crate-side runtime ownership を分ける
+`R5` runtime-crate hot-plug engine ownership cut を読むのが自然でした。
+current repo state では `R5` / `R6` / `P19` / `P20` も close 済みであり、post-`P20` の current promoted-next package は未昇格です。
 
 ## 関連
 
