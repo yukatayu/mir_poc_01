@@ -55,7 +55,8 @@
 - `docs/reports/0986-*` は `R6` runtime-crate hot-plug carrier admission cut closeout を表し、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を `plan/34` と reader-facing docs に actualize した
 - `docs/reports/0989-*` は `P20` `mir-runtime` hot-plug orchestration skeleton first tranche closeout を表し、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize し、`P19` carrier と existing substrate を thin runtime/report assembly として接続した
 - `docs/reports/0988-*` は `P19` `mirrorea-core` hot-plug request/verdict carrier tranche closeout を表し、`crates/mirrorea-core/src/fabric.rs` に engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を actualize した
-- `docs/reports/0992-*` は `R7` post-`P20` hot-plug next-package inventory closeout を表し、`plan/35` と companion docs により current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定し、package-level reopen next は exact label 未固定のまま `rollback / durable migration`、`distributed activation ordering`、`final public hot-plug ABI` の later family に grouped して残した
+- `docs/reports/0992-*` は `R7` post-`P20` hot-plug next-package inventory closeout を表し、`plan/35` と companion docs により `P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として固定し、package-level reopen next は exact label 未固定のまま `rollback / durable migration`、`distributed activation ordering`、`final public hot-plug ABI` の later family に grouped して残した
+- `docs/reports/0993-*` は `P21` runtime-crate hot-plug completed-engine narrow cut closeout を表し、`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` による runtime-side engine-state progression narrow cut と、exact next label intentionally unfixed の grouped later-family reading を `plan/35` と snapshot / reader-facing docs に actualize した
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -94,9 +95,9 @@
 15. `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
    - close 済み。`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize し、admitted request/verdict carrier と existing substrate の thin runtime/report assembly を current line に actualize した。completed engine、rollback、durable migration、distributed activation ordering、final public hot-plug ABI は kept-later に残す
 16. `R7` post-`P20` hot-plug next-package inventory
-   - close 済み。`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により、post-`P20` kept-later lane を smallest plausible package cuts に分け、current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定した
+   - close 済み。`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により、post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として固定した
 17. `P21` runtime-crate hot-plug completed-engine narrow cut
-   - promoted next。admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize する。rollback / durable migration / distributed activation ordering / final public hot-plug ABI は同じ tranche に混ぜない
+   - close 済み。`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` により、admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize した。rollback / durable migration / distributed activation ordering / final public hot-plug ABI は同じ tranche に混ぜない
 
 ## mixed gate
 

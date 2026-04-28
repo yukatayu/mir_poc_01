@@ -190,7 +190,7 @@ fixed current reading:
 - current repo state では
   `R7` post-`P20` hot-plug next-package inventory が
   `P21` runtime-crate hot-plug completed-engine narrow cut
-  を promoted-next に固定した reading を参照する
+  を next narrow 実装 line に固定し、現在は `P21` close 済み / exact next label intentionally unfixed の reading を参照する
 - request / verdict carrier を lifecycle engine、rollback protocol、
   durable migration engine、distributed activation ordering、final public ABI と混同しない
 

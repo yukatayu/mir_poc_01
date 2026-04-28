@@ -2,10 +2,10 @@
 
 ## この文書の役割
 
-この文書は、`R7` docs-first closeout を最短コマンドで確認する landing page です。
+この文書は、`R7` docs-first closeout memory と `P21` current closeout line を最短コマンドで確認する landing page です。
 
 - final public completion ではありません
-- `P21` を promoted-next にした reading だけを確認します
+- `P21` close と exact next label intentionally unfixed の current reading だけを確認します
 - rollback / migration / ordering / public ABI は引き続き later family に残します
 
 ## まず実行するコマンド
@@ -27,9 +27,12 @@ git diff --check
   admitted carrier + existing substrate の thin runtime/report assembly に留まること
 - helper-local `hotplug_lifecycle` / sample-grounded IDs が
   依然 preview ownership に残ること
-- current promoted-next package が
-  `P21` runtime-crate hot-plug completed-engine narrow cut
-  に recut されたこと
+- `P21` runtime-crate hot-plug completed-engine narrow cut が
+  current close 済みであること
+- `HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、
+  `assemble_hotplug_runtime_engine_report()`、
+  `build_hotplug_runtime_engine_report()`
+  により canonical runtime-side engine state progression が narrow に actualize されたこと
 - later family が
   `rollback / durable migration`
   `distributed activation ordering`
@@ -38,7 +41,6 @@ git diff --check
 
 ## これではまだ確認できないこと
 
-- actual `P21` implementation
 - rollback protocol completion
 - durable migration / reattach semantics completion
 - distributed activation ordering completion

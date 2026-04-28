@@ -87,9 +87,9 @@ final public hot-plug ABI はここで actualize しない。
 | later family `distributed activation ordering` | kept-later after `P21` | multi-place / multi-server attach activation ordering と durable activation commit を整理する | `activation_cut` から ordering family への widening criteria | rollback completion、final public ABI |
 | later family `final public hot-plug ABI` | post-`P18` mixed gate / true user-spec hold | public request/response/event schema と naming を actual product target に結び付ける | public boundary option inventory、freeze prerequisites | helper-local anchor naming の public 化、engine completion without evidence |
 
-## current recommendation
+## historical recommendation at `R7` close time
 
-- current promoted-next package は
+- `R7` close time の next narrow implementation line は
   **`P21` runtime-crate hot-plug completed-engine narrow cut**
   とする
 - `P21` は
@@ -109,6 +109,40 @@ final public hot-plug ABI はここで actualize しない。
 - final public hot-plug ABI は
   引き続き post-`P18` mixed gate / true user-spec hold の外へ出さない
 
+## 2026-04-29 actualization note
+
+- `P21` は current close 済みである
+- `crates/mir-runtime/src/hotplug_runtime.rs` には
+  `HotPlugRuntimeEngineState`、
+  `HotPlugRuntimeEngineReport`、
+  consumer-side `assemble_hotplug_runtime_engine_report()`、
+  example `build_hotplug_runtime_engine_report()`
+  を actualize 済みである
+- current narrow state family は
+  `attach_ready_for_activation_cut`
+  `attach_rejected_before_activation`
+  `attach_deferred_before_activation`
+  `detach_ready_for_boundary_cut`
+  `detach_rejected_before_boundary`
+  `detach_deferred_before_boundary`
+  の 6 case である
+- runtime-side engine state は
+  admitted request / verdict carrier と runtime snapshot から
+  `active_membership_epoch`、
+  flattened `reason_refs`、
+  requesting principal / participant place
+  を mirror する narrow projection として読む
+- helper-local sample IDs / view IDs / telemetry IDs は
+  引き続き preview ownership に残し、
+  runtime-side canonical state や public ABI に import しない
+- current package-level reopen next の exact label は
+  intentionally unfixed である
+- grouped later family は引き続き
+  `rollback / durable migration`
+  `distributed activation ordering`
+  `final public hot-plug ABI`
+  として読む
+
 ## validation floor
 
 - `python3 scripts/sugoroku_world_samples.py run 01_runtime_attach_game --debug hotplug --format json`
@@ -122,7 +156,8 @@ final public hot-plug ABI はここで actualize しない。
 
 ## stop line
 
-- `P21` promoted-next を actualized / started と混同しない
+- `R7` close time の next-line recommendation を `P21` close 後の current state と混同しない
+- `P21` close を runtime crate hot-plug broad completion と混同しない
 - `P21` で rollback / migration / distributed activation ordering / final public ABI を同時に claim しない
 - helper-local sample IDs / view IDs / telemetry IDs を runtime-side canonical state や public ABI に import しない
 - exact later package labels を evidence なしにでっち上げない

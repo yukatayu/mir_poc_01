@@ -12,13 +12,15 @@
 
 - `P20` close 後も remaining lane を vague な `later` に戻さず、
   smallest plausible package cuts に分けて読む
-- current promoted-next package は
-  **`P21` runtime-crate hot-plug completed-engine narrow cut**
-  とする
-- `P21` は
+- `P21` runtime-crate hot-plug completed-engine narrow cut は
+  current close 済みである
+- `P21` では
   admitted request / verdict carrier と existing runtime substrate の上に
-  canonical runtime-side engine state progression を narrow に置く package である
-- package-level reopen next の exact label はまだ fixed しないが、
+  `HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、
+  consumer-side `assemble_hotplug_runtime_engine_report()`、
+  example `build_hotplug_runtime_engine_report()` を置き、
+  canonical runtime-side engine state progression を narrow に actualize した
+- package-level reopen next の exact label は intentionally unfixed のままだが、
   later family は
   - `rollback / durable migration`
   - `distributed activation ordering`
@@ -27,7 +29,6 @@
 
 ## まだ fixed していないこと
 
-- actual `P21` implementation
 - rollback protocol completion
 - durable migration / reattach semantics completion
 - distributed activation ordering completion
@@ -47,6 +48,6 @@
 
 ## stop line
 
-- `P21` promoted-next を completed engine と読まない
+- `P21` close を runtime crate hot-plug broad completion と読まない
 - `rollback / durable migration` family を `P21` に混ぜない
 - helper-local anchor naming を public ABI と読まない

@@ -76,6 +76,6 @@ helper-local debug pretty print や report-local inventory を
 
 `P16` current first cut close 時点では、
 promoted next package は `P17` storage / LLVM / backend preparation でした。
-current repo state では `P17` も close 済みであり、post-`P20` の current promoted-next package は未昇格です。
+current repo state では `P17` も close 済みであり、その後 `R7` と `P21` も close 済みです。post-`P20` kept-later lane の exact next label は intentionally unfixed のまま later family grouping に戻しています。
 
 `P18` final public API / parser grammar gate は引き続き later mixed gate に残します。

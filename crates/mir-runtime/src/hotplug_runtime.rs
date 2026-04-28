@@ -1,9 +1,11 @@
-//! Non-production hot-plug runtime/report skeleton.
+//! Non-production hot-plug runtime/report narrow cut.
 //!
 //! This module consumes admitted `mirrorea-core` hot-plug carriers plus the thin
-//! logical runtime substrate. It does not actualize a completed hot-plug engine,
-//! rollback protocol, durable migration, distributed activation ordering, or a
-//! final public hot-plug ABI.
+//! logical runtime substrate. The current line includes a narrow runtime-side
+//! engine-state projection over that admitted carrier/substrate floor.
+//!
+//! It does not actualize rollback protocol, durable migration / reattach
+//! semantics, distributed activation ordering, or a final public hot-plug ABI.
 
 use mirrorea_core::{
     hotplug_request_lanes, hotplug_verdict_lanes, HotPlugRequest, HotPlugVerdict,
@@ -19,6 +21,28 @@ pub struct HotPlugRuntimeSkeletonReport {
     pub verdict: HotPlugVerdict,
     pub runtime_snapshot: LogicalPlaceRuntimeSnapshot,
     pub consumed_substrates: Vec<String>,
+    pub retained_later_refs: Vec<String>,
+    pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct HotPlugRuntimeEngineState {
+    pub state_kind: String,
+    pub request_ref: String,
+    pub operation_kind: String,
+    pub verdict_kind: String,
+    pub requesting_principal: String,
+    pub requesting_participant_place: String,
+    pub active_membership_epoch: u64,
+    pub reason_refs: Vec<String>,
+    pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct HotPlugRuntimeEngineReport {
+    pub engine_scope: String,
+    pub skeleton: HotPlugRuntimeSkeletonReport,
+    pub engine_state: HotPlugRuntimeEngineState,
     pub retained_later_refs: Vec<String>,
     pub notes: Vec<String>,
 }
@@ -100,8 +124,62 @@ pub fn assemble_hotplug_runtime_skeleton_report(
     })
 }
 
+pub fn assemble_hotplug_runtime_engine_report(
+    shell: &LogicalPlaceRuntimeShell,
+    request: HotPlugRequest,
+    verdict: HotPlugVerdict,
+) -> Result<HotPlugRuntimeEngineReport, MirroreaCoreError> {
+    let skeleton = assemble_hotplug_runtime_skeleton_report(shell, request, verdict)?;
+    let engine_state = HotPlugRuntimeEngineState {
+        state_kind: engine_state_kind(
+            &skeleton.request.operation_kind,
+            &skeleton.verdict.verdict_kind,
+        )?,
+        request_ref: skeleton.request.request_id.clone(),
+        operation_kind: skeleton.request.operation_kind.clone(),
+        verdict_kind: skeleton.verdict.verdict_kind.clone(),
+        requesting_principal: skeleton.request.requesting_principal.clone(),
+        requesting_participant_place: skeleton.request.requesting_participant_place.clone(),
+        active_membership_epoch: skeleton.runtime_snapshot.membership.membership_epoch,
+        reason_refs: [
+            skeleton.verdict.compatibility_reason_refs.clone(),
+            skeleton.verdict.authorization_reason_refs.clone(),
+            skeleton.verdict.membership_freshness_reason_refs.clone(),
+        ]
+        .concat(),
+        notes: vec![
+            "reason-to-state mapping over admitted request/verdict carrier only".to_string(),
+            "rollback / durable migration / distributed activation ordering remain later"
+                .to_string(),
+        ],
+    };
+
+    Ok(HotPlugRuntimeEngineReport {
+        engine_scope: "runtime_side_engine_state_progression_narrow".to_string(),
+        retained_later_refs: skeleton.retained_later_refs.clone(),
+        skeleton,
+        engine_state,
+        notes: vec![
+            "runtime-side engine state progression remains narrow and non-public".to_string(),
+            "helper-local lifecycle ids remain outside canonical runtime state".to_string(),
+        ],
+    })
+}
+
 pub fn build_hotplug_runtime_skeleton_report(
 ) -> Result<HotPlugRuntimeSkeletonReport, MirroreaCoreError> {
+    let (shell, request, verdict) = build_example_admitted_inputs()?;
+    assemble_hotplug_runtime_skeleton_report(&shell, request, verdict)
+}
+
+pub fn build_hotplug_runtime_engine_report() -> Result<HotPlugRuntimeEngineReport, MirroreaCoreError>
+{
+    let (shell, request, verdict) = build_example_admitted_inputs()?;
+    assemble_hotplug_runtime_engine_report(&shell, request, verdict)
+}
+
+fn build_example_admitted_inputs(
+) -> Result<(LogicalPlaceRuntimeShell, HotPlugRequest, HotPlugVerdict), MirroreaCoreError> {
     let mut shell = LogicalPlaceRuntimeShell::default();
     shell.register_place("AttachPoint[ExampleRoom#1]", "AttachPoint")?;
     shell.add_initial_participant("ExampleAdmin")?;
@@ -137,5 +215,22 @@ pub fn build_hotplug_runtime_skeleton_report(
         ],
     };
 
-    assemble_hotplug_runtime_skeleton_report(&shell, request, verdict)
+    Ok((shell, request, verdict))
+}
+
+fn engine_state_kind(
+    operation_kind: &str,
+    verdict_kind: &str,
+) -> Result<String, MirroreaCoreError> {
+    match (operation_kind, verdict_kind) {
+        ("attach", "accepted") => Ok("attach_ready_for_activation_cut".to_string()),
+        ("attach", "rejected") => Ok("attach_rejected_before_activation".to_string()),
+        ("attach", "deferred") => Ok("attach_deferred_before_activation".to_string()),
+        ("detach", "accepted") => Ok("detach_ready_for_boundary_cut".to_string()),
+        ("detach", "rejected") => Ok("detach_rejected_before_boundary".to_string()),
+        ("detach", "deferred") => Ok("detach_deferred_before_boundary".to_string()),
+        _ => Err(MirroreaCoreError::new(format!(
+            "hot-plug runtime engine report does not admit operation_kind `{operation_kind}` with verdict_kind `{verdict_kind}` in the current narrow cut"
+        ))),
+    }
 }

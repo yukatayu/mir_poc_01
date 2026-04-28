@@ -156,7 +156,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 ## next queue
 
 1. post-`P20` queue status
-   - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。さらに `R7` post-`P20` hot-plug next-package inventory も close 済みであり、current promoted-next package は `P21` runtime-crate hot-plug completed-engine narrow cut に昇格した。package-level reopen next は exact label 未固定のまま `rollback / durable migration`、`distributed activation ordering`、`final public ABI` の later family に grouped して残す
+   - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。さらに `R7` post-`P20` hot-plug next-package inventory も close 済みであり、`P21` runtime-crate hot-plug completed-engine narrow cut を next narrow line として固定した。現在は `P21` も close 済みであり、`HotPlugRuntimeEngineState`、`HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` を actualize した。package-level reopen next の exact label は intentionally unfixed のまま `rollback / durable migration`、`distributed activation ordering`、`final public ABI` の later family に grouped して残す
 2. `P19` closeout memory
    - `crates/mirrorea-core/src/fabric.rs` の engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を current narrow Rust carrier floor として読む
    - helper-local lifecycle / sample-grounded attach-detach IDs / attach-detach view-telemetry IDs / rollback / migration / distributed activation ordering / final public ABI は kept-later に残した current closeout memory
@@ -165,7 +165,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
    - post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow にした current queue memory
 4. `R7` closeout memory
    - `post_p20_hotplug_next_package_inventory_01.md`、`../research_abstract/post_p20_hotplug_next_package_inventory_01.md`、`../../plan/35-post-p20-hotplug-next-package-inventory.md`
-   - post-`P20` kept-later lane を smallest plausible package cuts に分け、current promoted-next package を `P21` runtime-crate hot-plug completed-engine narrow cut に固定した current queue memory
+   - post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を current narrow closeout memory に actualize した上で、exact next label intentionally unfixed の later-family grouping を残した current queue memory
 5. `R5` closeout memory
    - `runtime_crate_hotplug_engine_ownership_cut_01.md`、`../research_abstract/runtime_crate_hotplug_engine_ownership_cut_01.md`、`../../plan/33-runtime-crate-hotplug-engine-ownership-cut.md`
    - helper-local preview、`mirrorea-core` generic carrier-substrate、`mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を current memory に残した
