@@ -81,7 +81,8 @@
 
 ### VisualizationProtocol
 
-- static view / runtime view / label / authority / redaction / telemetry を含む可視化 carrier の current explanation 語彙
+- static view / runtime view / label / authority / redaction / retention / typed telemetry を含む可視化 carrier の current explanation 語彙
+- current line では helper/runtime security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を持たせ、observer-safe route trace は fail-closed に読む
 - helper-local preview と final public viewer contract を分けて読む
 
 ### effect-based OS-like substrate

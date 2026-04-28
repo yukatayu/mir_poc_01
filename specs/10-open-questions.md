@@ -164,10 +164,11 @@
        `witness_refs` role taxonomy である。
   4. visualization / telemetry security をどこまで typed effect として固定するか。
      static view / runtime view / label / authority / redaction / retention をどの layer へ置くか。
-     - 2026-04-27 時点で helper-local / report-local first cut は actualize した。
-       Sugoroku helper `visualization_views` / `telemetry_rows` / `--debug visualization` と、
-       clean near-end report / closeout の `VisualizationView` / `TelemetryRow` inventory までは
-       current line に上げてよい。
+     - 2026-04-28 時点で `P7` `VisualizationProtocol / VisualizationSecurity` hardening は current line に上げてよい。
+       Sugoroku helper と clean near-end runtime の両方で `label` / `authority` / `redaction` /
+       `retention_scope` / `source_refs` を持つ security envelope、typed telemetry carrier、
+       helper `helper_local_ephemeral` / runtime `report_local_inventory` retention floor、
+       NET-05 observer route trace fail-closed までは current line に上げてよい。
      - 未決なのは final public visualization schema、retention policy、multi-tenant telemetry service、
        cross-place projection viewer である。
   5. projection / placement mobility をどこまで docs-first に固定するか。

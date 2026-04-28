@@ -325,6 +325,14 @@ fn clean_sample_delegated_rng_service_emits_visualization_view() {
         .iter()
         .find(|view| view.view_name == "provider_boundary_redacted_flow")
         .expect("provider boundary visualization view");
+    assert_eq!(view.view_kind, "message_route");
+    assert_eq!(view.label, "report:provider-boundary");
+    assert_eq!(
+        view.authority,
+        "ObserveProviderBoundary(ProviderPlace[AuthorityRng])"
+    );
+    assert_eq!(view.redaction, "named_witness_only");
+    assert_eq!(view.retention_scope, "report_local_inventory");
     assert!(
         view.layer_signature_refs
             .contains(&"transport_provider_boundary".to_string())
@@ -340,6 +348,10 @@ fn clean_sample_delegated_rng_service_emits_visualization_view() {
     assert!(
         view.redaction_rules
             .contains(&"auth_evidence:none_baseline".to_string())
+    );
+    assert!(
+        view.source_refs
+            .contains(&"message_envelopes[provider_request#1]".to_string())
     );
 }
 
@@ -385,6 +397,11 @@ fn clean_sample_authority_witness_emits_telemetry_row() {
         .iter()
         .find(|row| row.row_name == "audit_trace_dispatch")
         .expect("audit trace telemetry row");
+    assert_eq!(row.row_kind, "message_dispatch");
+    assert_eq!(row.label, "report:audit-trace");
+    assert_eq!(row.authority, "ObserveAuthorityTrace(AuditPlace[AuthorityTrace])");
+    assert_eq!(row.redaction, "dispatch_outcome_only");
+    assert_eq!(row.retention_scope, "report_local_inventory");
     assert_eq!(row.channel, "audit_trace_boundary");
     assert!(
         row.layer_signature_refs
@@ -393,6 +410,10 @@ fn clean_sample_authority_witness_emits_telemetry_row() {
     assert!(
         row.message_envelope_refs
             .contains(&"audit_trace_request#1".to_string())
+    );
+    assert!(
+        row.source_refs
+            .contains(&"message_envelopes[audit_trace_request#1]".to_string())
     );
     assert_eq!(row.measurement, "dispatch_outcome");
     assert_eq!(row.value, "accepted");
@@ -599,18 +620,38 @@ fn clean_near_end_closeout_records_visualization_and_telemetry_inventory() {
     assert!(
         closeout
             .visualization_view_lanes
+            .contains(&"authority".to_string())
+    );
+    assert!(
+        closeout
+            .visualization_view_lanes
+            .contains(&"retention_scope".to_string())
+    );
+    assert!(
+        closeout
+            .visualization_view_lanes
             .contains(&"message_envelope_refs".to_string())
     );
     assert!(
         closeout
             .reserved_visualization_view_names
-            .contains(&"label_authority_redaction_grid".to_string())
+            .contains(&"label_authority_redaction_retention_grid".to_string())
     );
     assert!(
         closeout
             .telemetry_rows
             .iter()
             .any(|row| row.row_name == "audit_trace_dispatch")
+    );
+    assert!(
+        closeout
+            .telemetry_row_lanes
+            .contains(&"authority".to_string())
+    );
+    assert!(
+        closeout
+            .telemetry_row_lanes
+            .contains(&"retention_scope".to_string())
     );
     assert!(
         closeout

@@ -120,6 +120,9 @@ def _observer_route_trace_row(envelope: dict[str, Any], *, hop_index: int) -> di
         "transport_seam": envelope.get("transport_seam", envelope["transport"]),
         "payload_kind": envelope["payload_kind"],
         "dispatch_outcome": envelope["dispatch_outcome"],
+        "authority": "ObserveRouteTrace(NetworkTransportLane)",
+        "retention_scope": "helper_local_ephemeral",
+        "source_refs": [f"message_envelopes[{envelope['envelope_id']}]"],
         "witness_ref_count": len(envelope.get("witness_refs") or []),
         "redaction": "observer_safe_route_trace",
     }
@@ -359,6 +362,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
                     "label": "helper:transport-audit",
                     "authority": "ObserveRouteTrace(NetworkTransportLane)",
                     "redaction": "observer_safe_route_trace",
+                    "retention_scope": "helper_local_ephemeral",
                     "source_refs": [
                         "child:03_roll_publish_handoff:json",
                         "child:09_detach_todo:json",
@@ -453,15 +457,29 @@ def _format_summary(result: dict[str, Any]) -> str:
 
 
 def _format_route_trace(result: dict[str, Any]) -> str:
-    rows = result.get("observer_route_trace") or result.get("route_trace") or []
-    lines = ["ROUTE TRACE", f"  redaction={result.get('visualization_view', {}).get('redaction', 'none')}"]
+    observer_rows = result.get("observer_route_trace") or []
+    raw_rows = result.get("route_trace") or []
+    redaction = result.get("visualization_view", {}).get("redaction", "none")
+    lines = ["ROUTE TRACE", f"  redaction={redaction}"]
+    if observer_rows:
+        rows = observer_rows
+    elif redaction == "observer_safe_route_trace":
+        rows = []
+        lines.append("  - redacted observer rows unavailable")
+    else:
+        rows = raw_rows
     for row in rows:
         lines.append(
             f"  [{row['hop_index']}] {row['envelope_id']} {row['from_place']} -> {row['to_place']} payload={row['payload_kind']} outcome={row['dispatch_outcome']}"
         )
-        lines.append(
-            f"      principal={row.get('principal', '?')} authority={row.get('claimed_authority', '?')} auth={row.get('auth_mode', '?')} epoch/incarnation={row.get('membership_epoch', '?')}/{row.get('member_incarnation', '?')}"
-        )
+        if observer_rows:
+            lines.append(
+                f"      authority={row.get('authority', '?')} retention={row.get('retention_scope', '?')} witness_refs={row.get('witness_ref_count', '?')}"
+            )
+        else:
+            lines.append(
+                f"      principal={row.get('principal', '?')} authority={row.get('claimed_authority', '?')} auth={row.get('auth_mode', '?')} epoch/incarnation={row.get('membership_epoch', '?')}/{row.get('member_incarnation', '?')}"
+            )
     if len(lines) == 2:
         lines.append("  - none")
     return "\n".join(lines)

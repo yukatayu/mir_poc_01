@@ -142,10 +142,11 @@ helper-local / report-local first cut では `MessageEnvelope` carrier で trans
 - label
 - authority
 - redaction
+- retention
 - evidence-oriented rendering
 
 `untyped debug leak` として出してよいものではありません。
-performance telemetry も同様に information-bearing effect であり、typed telemetry として扱います。
+performance telemetry も同様に information-bearing effect であり、typed telemetry として扱います。current line では helper/runtime security envelope に `retention_scope` を持たせ、NET-05 observer route trace は fail-closed にしています。
 
 ### VerificationLayer composition
 
@@ -301,15 +302,11 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P7` visualization security hardening
-   - `VisualizationProtocol / VisualizationSecurity`
-2. `P8-P9` representative runtime hardening
+1. `P8-P9` representative runtime hardening
    - Sugoroku runtime attach、avatar fairy follow residual gate
-2. `P8-P9` representative slice hardening
-   - Sugoroku runtime attach と avatar fairy follow residual gate
-3. `P10-P17` first real implementation tranche
+2. `P10-P17` first real implementation tranche
    - `mirrorea-core`、logical multi-place runtime、external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
-4. `P18` public API / parser grammar gate
+3. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。

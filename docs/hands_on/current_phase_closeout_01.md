@@ -62,7 +62,8 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view を envelope-derived evidence として確認できること
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
-- typed visualization / telemetry line が label / authority / redaction を意識した evidence carrier として置かれていること
+- typed visualization / telemetry line が label / authority / redaction / retention を意識した evidence carrier として置かれていること
+- NET-05 observer route trace が fail-closed であり、observer-safe debug output が principal / auth / freshness / authorization / raw witness refs を漏らさないこと
 - external workdir と `CARGO_TARGET_DIR` / `CARGO_HOME` binding により、small-VPS 前提の backend/LLVM guardrail が current snapshot に入っていること
 
 ## これではまだ確認できないこと
@@ -124,10 +125,10 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P7` `VisualizationProtocol / VisualizationSecurity` hardening
-2. `P8` Sugoroku runtime attach hardening
+1. `P8` Sugoroku runtime attach hardening
+2. `P9` avatar fairy follow hardening
 
-`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening は close 済みです。
+`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening は close 済みです。
 後続の full queue は `tasks.md` と `progress.md` の current snapshot を参照してください。
 
 ## 関連文書

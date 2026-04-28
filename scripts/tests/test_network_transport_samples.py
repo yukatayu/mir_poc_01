@@ -95,12 +95,21 @@ class NetworkTransportSamplesTests(unittest.TestCase):
         self.assertEqual(view["view_kind"], "route_trace")
         self.assertEqual(view["redaction"], "observer_safe_route_trace")
         self.assertEqual(view["authority"], "ObserveRouteTrace(NetworkTransportLane)")
+        self.assertEqual(view["retention_scope"], "helper_local_ephemeral")
         self.assertGreaterEqual(len(result["observer_route_trace"]), 2)
         for row in result["observer_route_trace"]:
             self.assertNotIn("auth_evidence", row)
             self.assertNotIn("claimed_capabilities", row)
+            self.assertNotIn("principal", row)
+            self.assertNotIn("claimed_authority", row)
+            self.assertNotIn("auth_mode", row)
+            self.assertNotIn("freshness_checks", row)
+            self.assertNotIn("authorization_checks", row)
+            self.assertNotIn("witness_refs", row)
             self.assertIn("payload_kind", row)
             self.assertIn("dispatch_outcome", row)
+            self.assertIn("authority", row)
+            self.assertIn("retention_scope", row)
             self.assertIn("transport_medium", row)
             self.assertIn("transport_seam", row)
 
@@ -133,6 +142,19 @@ class NetworkTransportSamplesTests(unittest.TestCase):
         self.assertIn("ROUTE TRACE", pretty)
         self.assertIn("observer_safe_route_trace", pretty)
         self.assertIn("handoff_notice#1", pretty)
+        self.assertNotIn("principal=", pretty)
+        self.assertNotIn("auth=", pretty)
+
+    def test_route_trace_debug_fails_closed_when_observer_rows_are_missing(self) -> None:
+        result = network_transport_samples.run_sample("NET-05")
+        result.pop("observer_route_trace")
+
+        pretty = network_transport_samples.format_pretty(result, debug="route-trace")
+
+        self.assertIn("observer_safe_route_trace", pretty)
+        self.assertIn("redacted observer rows unavailable", pretty)
+        self.assertNotIn("principal=", pretty)
+        self.assertNotIn("auth=", pretty)
 
     def test_failures_debug_prints_typed_failure_rows(self) -> None:
         pretty = network_transport_samples.format_pretty(

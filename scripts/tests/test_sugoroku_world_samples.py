@@ -483,6 +483,9 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertEqual(
             views["turn_timeline"]["redaction"], "published_history_only"
         )
+        self.assertEqual(
+            views["turn_timeline"]["retention_scope"], "helper_local_ephemeral"
+        )
         self.assertIn("roll", views["turn_timeline"]["source_refs"])
         self.assertEqual(
             views["turn_timeline"]["summary"]["published_witness"], "draw_pub#1"
@@ -527,6 +530,13 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         )
         self.assertEqual(
             telemetry["roll_request#1"]["redaction"], "omit_auth_evidence_payload"
+        )
+        self.assertEqual(
+            telemetry["roll_request#1"]["retention_scope"], "helper_local_ephemeral"
+        )
+        self.assertIn(
+            "message_envelopes[roll_request#1]",
+            telemetry["roll_request#1"]["source_refs"],
         )
         self.assertEqual(
             telemetry["handoff_notice#1"]["fields"]["dispatch_outcome"], "accepted"
@@ -591,6 +601,7 @@ class SugorokuWorldSamplesTests(unittest.TestCase):
         self.assertIn("projection_view", result["visualization_view_kinds"])
         self.assertIn("message_dispatch", result["telemetry_row_kinds"])
         self.assertIn("published_roll", result["telemetry_row_kinds"])
+        self.assertIn("helper_local_ephemeral", result["retention_scope_names"])
         self.assertIn("place_graph", result["reserved_visualization_view_kinds"])
 
     def test_cli_run_json_prints_json_payload(self) -> None:

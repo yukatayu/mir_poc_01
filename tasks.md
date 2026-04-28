@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 12:18 JST
+最終更新: 2026-04-28 12:42 JST
 
 ## この文書について
 
@@ -14,8 +14,8 @@
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P7` `VisualizationProtocol / VisualizationSecurity` hardening** です。
-- next reopen point は **`P8` Sugoroku runtime attach hardening** です。
+- current promoted next line は **`P8` Sugoroku runtime attach hardening** です。
+- next reopen point は **`P9` avatar fairy follow hardening** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -41,9 +41,9 @@
 | `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | closed | ~1 task | current first-cut lanes / scope / reserved split fixed |
 | `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | closed | closed | row schema / obligations lane / scope split fixed |
 | `P6` MessageEnvelope/AuthEvidence seam hardening | `Macro 6` | `S4 -> S5` | closed | closed | medium/seam split、shared auth lane inventory、freshness lane fixed |
-| `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | next | ~1 task | first cut exists, viewer/security hardening remains |
-| `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | representative runtime slice hardening |
-| `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | residual `FAIRY-05` gate remains |
+| `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | closed | closed | security envelope / typed telemetry / fail-closed route trace fixed |
+| `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | next | 1-2 tasks | representative runtime slice hardening |
+| `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | reopen next | 1-2 tasks | residual `FAIRY-05` gate remains |
 | `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | placeholder -> first real core |
 | `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper emulator -> crate substrate |
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | later | multi-task | host-facing adapter seam |
@@ -228,23 +228,41 @@
 
 ### P7. `VisualizationProtocol` + `VisualizationSecurity`
 
+- status:
+  close 済み。Sugoroku helper と clean near-end runtime の view / telemetry security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を追加し、NET-05 observer route trace を fail-closed に固定した。typed telemetry は security boundary の内側に戻し、helper `helper_local_ephemeral` / runtime `report_local_inventory` retention floor を current line に actualize した。
+
 - macro phase / stage:
   `Macro 6-7`, `S4 -> S5`
 - objective:
   visualization / telemetry を typed effect として tighten し、label / authority / redaction / retention を整理する
 - deliverables:
-  current static/runtime view family、typed telemetry wording、security stop line
+  current static/runtime view family、typed telemetry wording、helper/runtime retention floor、observer-safe route-trace security stop line
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
   `python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `python3 scripts/network_transport_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v`
+  `python3 -m unittest scripts.tests.test_network_transport_samples -v`
+  `cargo test -p mir-runtime --test clean_near_end_samples`
+  `cargo test -p mir-runtime`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
 - debug / visualization output:
-  `visualization_views`、`telemetry_rows`、route-trace redaction
+  `visualization_views`、`telemetry_rows`、`retention_scope_names`、route-trace redaction
 - docs / report requirement:
-  新しい report、`samples_progress.md`、`plan/14`、relevant docs を同期する
+  新しい report、`samples_progress.md`、`progress.md`、`plan/14`、relevant docs を同期する
 - stop line:
   final public viewer contract、retention policy、multi-tenant telemetry service を固定しない
 
 ### P8. Sugoroku runtime attach hardening
+
+- status:
+  current promoted next line。attach / membership / handoff / late join / detach TODO boundary の representative runtime slice を、world sugar / membership registry / lifecycle stop line の wording まで含めて tighten する。
 
 - macro phase / stage:
   `Macro 6`, `S5 -> S6`

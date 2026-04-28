@@ -29,9 +29,10 @@
   - `P4` `TermSignature` registry hardening までは close 済み
   - `P5` `LayerSignature` system hardening も close 済み
   - `P6` `MessageEnvelope / AuthEvidence` seam hardening も close 済み
-  - next promoted package は `P7` `VisualizationProtocol / VisualizationSecurity` hardening
-  - next reopen point は `P8` Sugoroku runtime attach hardening
-  - `P7-P9` は carrier / representative-slice hardening、`P10-P17` は first real implementation tranche、`P18` は final mixed gate
+  - `P7` `VisualizationProtocol / VisualizationSecurity` hardening も close 済み
+  - next promoted package は `P8` Sugoroku runtime attach hardening
+  - next reopen point は `P9` avatar fairy follow hardening
+  - `P8-P9` は representative-slice hardening、`P10-P17` は first real implementation tranche、`P18` は final mixed gate
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

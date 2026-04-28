@@ -95,6 +95,7 @@ run_directory_named_profile
   - clean near-end `CleanNearEndSampleReport.visualization_views` / `telemetry_rows`
   - clean near-end closeout `visualization_views` / `telemetry_rows`
   を helper-local / report-local evidence inventory として見せてよい。
+  - current line では helper/runtime security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を持たせ、NET-05 observer route trace は fail-closed にしてよい。
   - これは final public visualization protocol、final public telemetry schema、retention policy、multi-tenant viewer contract を意味しない。
 - current avatar-follow helper cut では、
   - `scripts/avatar_follow_samples.py`

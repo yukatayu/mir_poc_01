@@ -15,7 +15,7 @@
 | typed overclaim | type / proof | OPEN | finite-index first layer を full dependent core と誤読する | first fragment と still-later line を分ける |
 | theorem / model-check overclaim | proof workflow | OPEN | generated stub / model-check carrier を production binding と誤読する | repo-local bridge と public contract を分ける |
 | auth-transport collapse | Mirrorea layering | 低下したが継続監視 | envelope / adapter 設計で authentication を transport に潰す | `P6` で helper medium / runtime seam split、shared `AuthEvidence` lane inventory、freshness lane を current line に actualize した上で、final public widening を後段に残す |
-| visualization / telemetry leak | observability | NEW | debug output が label / authority / redaction を回避する | typed visualization / telemetry line を package 化する |
+| visualization / telemetry leak | observability | 低下したが継続監視 | debug output が label / authority / redaction / retention を回避する | `P7` で helper/runtime security envelope と NET-05 fail-closed route trace を current line に actualize した上で、final public viewer / retention policy は後段に残す |
 | verification-layer overclaim | proof / runtime boundary | 継続監視 | helper `verification_handoff_witness` と runtime `verification_model_check` の current emitted floor を hidden verifier builtin や final public verifier contract と誤読する | `VerificationLayer` composition を typed layer composition の current reading に留め、theorem bridge / runtime policy / visualization lane の widening threshold を別 package に残す |
 | effect-substrate collapse | architecture | NEW | effect-based OS-like substrate という内側の解釈から subsystem collapse や standard I/O built-in 化が滑り込む | internal interpretation と normative boundary を docs / plan / specs で分ける |
 | place / participant / world conflation | sample / docs | NEW | participant、Place、world sugar が core primitive として固定される | `Place` distinction と world-sugar note を README / Documentation / plan に残す |
@@ -36,7 +36,7 @@
 - `MessageEnvelope` / `AuthEvidence` / transport insertion seam の final public shape
 - `witness_refs` role taxonomy と subject/emitter/authentication binding の final split
 - visualization / telemetry security の label / authority / redaction / retention model
-  - helper-local / report-local first cut は `0922` で actualize したが、final public viewer contract と retention は未決のまま残す
+  - helper-local / report-local first cut は `0922`、current security envelope hardening は `0954` で actualize したが、final public viewer contract と retention policy は未決のまま残す
 - projection / placement validity report と world-sugar boundary
   - docs-first plan は `0924` / `plan/20` で actualize したが、generator / optimizer / equivalence checker は未決のまま残す
 - `Patch Req Prov Δ` / `AttachPoint` / activation cut / migration contract

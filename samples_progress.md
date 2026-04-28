@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 12:18 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P6` `MessageEnvelope / AuthEvidence` seam hardening で medium/seam split・shared auth lane inventory・freshness lane を fixed し、`P7` `VisualizationProtocol / VisualizationSecurity` hardening を次段に揃える
-Current active packages: `P7` `VisualizationProtocol / VisualizationSecurity` hardening
+Last updated: 2026-04-28 12:42 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、`P7` `VisualizationProtocol / VisualizationSecurity` hardening で security envelope / typed telemetry / fail-closed observer route trace を fixed し、`P8` Sugoroku runtime attach hardening へ進める
+Current active packages: `P8` Sugoroku runtime attach hardening
 
 ## Legend
 
@@ -30,7 +30,7 @@ Progress:
 | Avatar follow | 90 | widened active representative slice + single residual planned family | `FAIRY-01/02/03/04/06` を維持しつつ `FAIRY-05` は docs-first gate fixed / runnable widening deferred に保つ | `python3 scripts/avatar_follow_samples.py closeout --format json` |
 | External adapters | 75 | synthetic preview helper + residual review closed | `EXT-03` / `EXT-04` synthetic preview subset を維持しつつ `EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen matrix を fixed 済みとして保つ | `python3 scripts/typed_external_boundary_samples.py closeout --format json` |
 | Network transport | 75 | helper-local canary family | `NET-01..05` helper-local canary を維持しつつ real socket / durable replay を deferred に保つ | `python3 scripts/network_transport_samples.py closeout --format json` |
-| Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持 | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
+| Visualization | 100 | helper-local + report-local security hardening closed | `visualization_views` / `telemetry_rows` / `retention_scope` / `source_refs` / fail-closed observer route trace を current floor として維持 | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
 | Projection / placement | 75 | helper-local + report-local preview floor + emitted-program gate closed | `projection_view` と `cross_place_projection` を維持しつつ validity report minimum / generated artifact reserve policy を docs-first に固定した | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` |
 | Hot-plug package | 75 | helper-local lifecycle canary | `hotplug_lifecycle` / `--debug hotplug` / attach-detach telemetry を維持しつつ real migration を deferred に保つ | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json` |
 
@@ -42,7 +42,7 @@ Progress:
 | `PH1` | Mir core | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | final parser / public API deferred |
 | `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 03:27 JST | `0904`, `0913`, `0945` | public shell / packaging deferred |
 | `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-28 03:27 JST | `0909`, `0916`, `0931`, `0945` | runtime attach floor + helper-local attachpoint compatibility / activation evidence |
-| `SUG-03` | Sugoroku runtime | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-04-28 11:19 JST | `0909`, `0916`, `0918`, `0919`, `0942`, `0945`, `0950`, `0952` | roll -> publish -> witness -> handoff。`TermSignature` と `LayerSignature` helper-local inventory、projection / visualization debug lane の基準点 |
+| `SUG-03` | Sugoroku runtime | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-04-28 12:42 JST | `0909`, `0916`, `0918`, `0919`, `0942`, `0945`, `0950`, `0952`, `0954` | roll -> publish -> witness -> handoff。`TermSignature` / `LayerSignature` inventory、projection preview、visualization security envelope の基準点 |
 | `SUG-05` | shared-space membership | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | active runnable E2E | 90 | positive | 2026-04-28 03:27 JST | `0909`, `0916`, `0919`, `0945` | membership timeline anchor |
 | `SUG-08` | theorem / model-check boundary | `samples/clean-near-end/sugoroku-world/08_reset_interleaving_model_check.mir` | active runnable E2E | 90 | positive | 2026-04-28 03:27 JST | `0909`, `0916`, `0945` | reset safety bridge |
 | `SUG-09` | hot-plug preview | `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | active TODO boundary | 75 | explicit TODO + rejection evidence | 2026-04-27 19:56 JST | `0909`, `0916`, `0925`, `0931` | completion evidence ではなく stop line |
@@ -50,7 +50,7 @@ Progress:
 | `FAIRY-02` | avatar follow | `samples/clean-near-end/avatar-follow/02_remote_head_not_visible_falls_back_to_local.mir` | active representative canary | 90 | positive + fallback | 2026-04-28 03:27 JST | `0917`, `0930`, `0933`, `0945` | visibility loss falls back locally and does not claim transport recovery |
 | `FAIRY-06` | avatar follow | `samples/clean-near-end/avatar-follow/06_model_check_no_detached_anchor_observed.mir` | active representative canary | 90 | verification | 2026-04-28 03:27 JST | `0917`, `0930`, `0945` | detached-anchor safety verification bridge |
 | `AUTH-01` | auth seam | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local envelope carrier | 90 | positive + negative | 2026-04-27 23:24 JST | `0921`, `0941` | local queue baseline with `auth none`, membership freshness, capability refs, witness refs |
-| `VIS-01` | visualization | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local view/telemetry carrier | 90 | positive | 2026-04-27 23:24 JST | `0922`, `0942` | label / authority / redaction を持つ evidence-oriented view |
+| `VIS-01` | visualization | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local view/telemetry carrier | 100 | positive | 2026-04-28 12:42 JST | `0922`, `0942`, `0954` | `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を持つ evidence-oriented view と typed telemetry。final public viewer contract ではない |
 | `PRJ-01` | projection / placement | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local projection preview | 75 | positive | 2026-04-28 09:51 JST | `0924`, `0942`, `0948` | `projection_view` で system source から place split と observer view refs を visible にする。final emitted place program ではない |
 | `PRJ-02` | projection / placement | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | report-local provider placement preview | 75 | positive | 2026-04-28 09:51 JST | `0924`, `0942`, `0948` | `cross_place_projection` で authority placement と provider placement を分けて visible にする |
 
@@ -75,7 +75,7 @@ Progress:
 | `NET-01` | network transport | `scripts/sugoroku_world_samples.py --transport loopback_socket` | helper-local loopback preview | 75 | positive + negative | 2026-04-28 03:27 JST | `0929`, `0932`, `0945` | same-process parity preview |
 | `NET-02..05` | network transport | `scripts/network_transport_samples.py` | helper-local canary family | 75 | positive + negative | 2026-04-28 03:27 JST | `0932`, `0945` | subprocess JSON bridge / stale reconnect reject / typed failure / redacted route trace |
 | `PH14` | hot-plug package | `plan/21-hotplug-attachpoint-roadmap.md`, `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | helper-local lifecycle canary + docs-first gate | 75 | positive + negative | 2026-04-27 19:56 JST | `0925`, `0931` | real migration / rollback / attachpoint runtime remain deferred |
-| `PH15` | visualization / IDE | Sugoroku helper views、runtime report-local views | helper-local + report-local first cut | 90 | positive | 2026-04-27 23:24 JST | `0922` | final public viewer contract は deferred |
+| `PH15` | visualization / IDE | Sugoroku helper views、runtime report-local views | helper-local + report-local security hardening closed | 100 | positive | 2026-04-28 12:42 JST | `0922`, `0954` | helper/runtime security envelope、typed telemetry retention floor、NET-05 fail-closed route trace まで current scope close。final public viewer contract は deferred |
 | `PH16` | compiler / backend / LLVM preparation | `/mnt/mirrorea-work`, `scripts/env/mirrorea_storage_env.sh`, `plan/23-compiler-backend-llvm-guardrail-roadmap.md` | storage / backend guardrail | 75 | operational positive | 2026-04-27 18:48 JST | `0913`, `0915`, `0927` | actual LLVM build / backend choice is still later |
 
 ## E2E samples
@@ -83,10 +83,10 @@ Progress:
 | E2E ID | Scope | Path / command | Progress | What it proves | Last result |
 |---|---|---|---:|---|---|
 | `E2E-CLEAN-SUITE` | current-L2 -> clean near-end | `python3 scripts/clean_near_end_samples.py closeout` | 90 | active clean near-end suite の positive / negative floor と closeout snapshot が still green | pass 2026-04-28 03:27 JST |
-| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-28 12:18 JST |
+| `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice の runnable floor | pass 2026-04-28 12:42 JST |
 | `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar slice の active floor | pass 2026-04-28 03:27 JST |
 | `E2E-TYPED-EXTERNAL-TARGET` | source stub -> adapter preview -> anchor comparison | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper self-consistency + anchor comparison の current floor。phase 9 `.mir` direct execution ではない | pass 2026-04-28 09:26 JST |
-| `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-28 12:18 JST |
+| `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-28 12:42 JST |
 | `E2E-PROJECTION-TARGET` | system source -> emitted place program -> equivalent trace | future target: current `PRJ-01` / `PRJ-02` preview floor + later emitted-program runner | 10 | compositional projection E2E は still later。`P3` current package で actualize したのは preview floor と emitted-program gate の docs-first boundaryだけ | target only |
 
 ## Build / storage environment
@@ -103,6 +103,7 @@ Progress:
 |---|---|---|---|---|
 | final public adapter / host schema scope | typed external boundary | high | user + repo | residual reopen matrix は fixed 済みとし、host-facing contract 本体は `P12` / `P18` に残す |
 | actual emitted program / cross-place equivalence checker family | projection / placement | high | repo | `P3` docs-first boundary は fixed 済みとし、`P15` で emitted family / generated artifact inventory / equivalence review surface を actualize する |
+| final public viewer contract / retention policy / multi-tenant telemetry service | visualization / telemetry | high | repo + user | `P7` current scope は close 済みとして保ち、public contract 自体は `P16` / `P18` に残す |
 | `FAIRY-05` carrier bundling | avatar follow | medium | repo | explicit state timeline / anchor switch evidence を保ったまま `UNRESOLVED` を解く |
 | real migration / rollback | hot-plug | medium | repo | helper-local lifecycle canary の先に attachpoint migration contract を切り出す |
 | real socket / durable replay | network transport | high | repo + user | helper-local canary を維持しつつ production transport line は defer する |
@@ -112,18 +113,20 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
-| 2026-04-28 12:18 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v` | pass | helper envelope suite は legacy `transport` alias を seam 意味に正規化した上で `transport_medium` / `transport_seam` / `freshness_checks` を返す |
-| 2026-04-28 12:18 JST | `python3 -m unittest scripts.tests.test_network_transport_samples -v` | pass | process-boundary / observer-safe route trace でも legacy `transport` alias は seam 意味に揃う |
-| 2026-04-28 12:18 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | helper closeout は `message_envelope_scope = representative_slice`、shared `auth_evidence_lanes`、active medium inventory を返す |
-| 2026-04-28 12:18 JST | `python3 scripts/network_transport_samples.py closeout --format json` | pass | helper-local transport canary family は medium/seam split を維持したまま green |
-| 2026-04-28 12:18 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | runtime provider boundary envelope は `transport = transport_seam = provider_boundary`、`transport_medium = null` を返す |
-| 2026-04-28 12:18 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json` | pass | runtime audit boundary envelope は witness/auth distinction を保ったまま green |
-| 2026-04-28 12:18 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | runtime closeout は `message_envelope_scope = clean_near_end_canonical_inventory`、shared `auth_evidence_lanes`、canonical seam inventory を返す |
-| 2026-04-28 12:18 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime current package sample tests 26/26 green |
-| 2026-04-28 12:18 JST | `cargo test -p mir-runtime` | pass | runtime crate floor 全体は green |
-| 2026-04-28 12:18 JST | `python3 scripts/check_source_hierarchy.py` | pass | required hierarchy intact |
-| 2026-04-28 12:18 JST | `python3 scripts/validate_docs.py` | pass | snapshot/front-door docs は current line と整合 |
-| 2026-04-28 12:18 JST | `git diff --check` | pass | P6 closeout diff は whitespace-clean |
+| 2026-04-28 12:42 JST | `python3 -m unittest scripts.tests.test_network_transport_samples -v` | pass | NET-05 fail-closed regression を含む helper transport suite 10/10 green |
+| 2026-04-28 12:42 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples -v` | pass | helper visualization / telemetry inventory と closeout retention scope regression を含む 36/36 green |
+| 2026-04-28 12:42 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | pass | helper-local view / telemetry carrier は `retention_scope = helper_local_ephemeral` と `source_refs` を返し、P7 security envelope floor を確認 |
+| 2026-04-28 12:42 JST | `python3 scripts/network_transport_samples.py run NET-05 --debug route-trace --format json` | pass | observer route trace は `authority` / `retention_scope` / `source_refs` を返しつつ principal/auth/freshness/witness raw detail を漏らさない |
+| 2026-04-28 12:42 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | helper closeout は `retention_scope_names = helper_local_ephemeral` を返し、visualization / telemetry security inventory を current line に揃える |
+| 2026-04-28 12:42 JST | `python3 scripts/network_transport_samples.py closeout --format json` | pass | helper-local transport canary family は fail-closed route trace を維持したまま green |
+| 2026-04-28 12:42 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | runtime provider-boundary view は `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を返す |
+| 2026-04-28 12:42 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json` | pass | runtime audit-trace view / telemetry row は typed telemetry security envelope を保ったまま green |
+| 2026-04-28 12:42 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | runtime closeout は `visualization_view_lanes` / `telemetry_row_lanes` / `retention_scope_names` を canonical inventory として返す |
+| 2026-04-28 12:42 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime current package sample tests 26/26 green、visualization / telemetry inventory regressions を含む |
+| 2026-04-28 12:42 JST | `cargo test -p mir-runtime` | pass | runtime crate floor 全体は green |
+| 2026-04-28 12:42 JST | `python3 scripts/check_source_hierarchy.py` | pass | required hierarchy intact |
+| 2026-04-28 12:42 JST | `python3 scripts/validate_docs.py` | pass | snapshot/front-door docs は P7 close / P8 next line と整合 |
+| 2026-04-28 12:42 JST | `git diff --check` | pass | P7 closeout diff は whitespace-clean |
 | 2026-04-28 09:51 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` | pass | helper-local `projection_view` は preview-only のまま、place split / authority place / observer view refs を返す |
 | 2026-04-28 09:51 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | pass | projection gate close後も visualization lane が壊れていないことを確認 |
 | 2026-04-28 09:51 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | report-local `cross_place_projection` が authority/provider placement split を維持していることを確認 |

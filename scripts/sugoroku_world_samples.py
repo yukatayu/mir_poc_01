@@ -254,6 +254,7 @@ class TelemetryRow:
     redaction: str
     source_refs: list[str]
     fields: dict[str, Any]
+    retention_scope: str = "helper_local_ephemeral"
     notes: list[str] = field(default_factory=list)
 
     def to_json(self) -> dict[str, Any]:
@@ -265,6 +266,7 @@ class TelemetryRow:
             "redaction": self.redaction,
             "source_refs": list(self.source_refs),
             "fields": dict(self.fields),
+            "retention_scope": self.retention_scope,
             "notes": list(self.notes),
         }
 
@@ -278,6 +280,7 @@ class VisualizationView:
     redaction: str
     source_refs: list[str]
     summary: dict[str, Any]
+    retention_scope: str = "helper_local_ephemeral"
     notes: list[str] = field(default_factory=list)
 
     def to_json(self) -> dict[str, Any]:
@@ -289,6 +292,7 @@ class VisualizationView:
             "redaction": self.redaction,
             "source_refs": list(self.source_refs),
             "summary": dict(self.summary),
+            "retention_scope": self.retention_scope,
             "notes": list(self.notes),
         }
 
@@ -2337,6 +2341,13 @@ def closeout() -> dict[str, Any]:
                 for row in [*visualization_views, *telemetry_rows]
             }
         ),
+        "retention_scope_names": sorted(
+            {
+                row["retention_scope"]
+                for row in [*visualization_views, *telemetry_rows]
+            }
+        ),
+        "reserved_retention_scope_names": ["report_local_inventory"],
         "layer_signatures": layer_signatures,
         "layer_signature_scope": "representative_slice",
         "layer_signature_lanes": [
@@ -2523,7 +2534,7 @@ def _format_visualization(result: dict[str, Any]) -> str:
     lines = ["VISUALIZATION"]
     for row in result.get("visualization_views", []):
         lines.append(
-            f"  - {row['view_id']} kind={row['view_kind']} label={row['label']} authority={row['authority']} redaction={row['redaction']}"
+            f"  - {row['view_id']} kind={row['view_kind']} label={row['label']} authority={row['authority']} redaction={row['redaction']} retention={row.get('retention_scope', 'unknown')}"
         )
         lines.append(f"      source_refs: {', '.join(row.get('source_refs') or []) or 'none'}")
         summary = row.get("summary") or {}
@@ -2533,7 +2544,7 @@ def _format_visualization(result: dict[str, Any]) -> str:
     lines.append("TELEMETRY")
     for row in result.get("telemetry_rows", []):
         lines.append(
-            f"  - {row['row_id']} kind={row['row_kind']} label={row['label']} authority={row['authority']} redaction={row['redaction']}"
+            f"  - {row['row_id']} kind={row['row_kind']} label={row['label']} authority={row['authority']} redaction={row['redaction']} retention={row.get('retention_scope', 'unknown')}"
         )
         lines.append(f"      source_refs: {', '.join(row.get('source_refs') or []) or 'none'}")
         fields = row.get("fields") or {}

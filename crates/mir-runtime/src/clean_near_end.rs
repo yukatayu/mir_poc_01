@@ -739,6 +739,12 @@ pub struct MessageEnvelope {
 #[derive(Debug, Clone, Serialize)]
 pub struct VisualizationView {
     pub view_name: String,
+    pub view_kind: String,
+    pub label: String,
+    pub authority: String,
+    pub redaction: String,
+    pub retention_scope: String,
+    pub source_refs: Vec<String>,
     pub layer_signature_refs: Vec<String>,
     pub message_envelope_refs: Vec<String>,
     pub focus_subjects: Vec<String>,
@@ -749,6 +755,12 @@ pub struct VisualizationView {
 #[derive(Debug, Clone, Serialize)]
 pub struct TelemetryRow {
     pub row_name: String,
+    pub row_kind: String,
+    pub label: String,
+    pub authority: String,
+    pub redaction: String,
+    pub retention_scope: String,
+    pub source_refs: Vec<String>,
     pub channel: String,
     pub layer_signature_refs: Vec<String>,
     pub message_envelope_refs: Vec<String>,
@@ -829,6 +841,8 @@ pub struct CleanNearEndCloseout {
     pub telemetry_row_lanes: Vec<String>,
     pub telemetry_channels: Vec<String>,
     pub reserved_telemetry_channels: Vec<String>,
+    pub retention_scope_names: Vec<String>,
+    pub reserved_retention_scope_names: Vec<String>,
     pub layer_signatures: Vec<LayerSignature>,
     pub layer_signature_lanes: Vec<String>,
     pub layer_signature_scope: String,
@@ -976,6 +990,12 @@ fn message_envelope(
 
 fn visualization_view(
     view_name: &str,
+    view_kind: &str,
+    label: &str,
+    authority: &str,
+    redaction: &str,
+    retention_scope: &str,
+    source_refs: &[&str],
     layer_signature_refs: &[String],
     message_envelope_refs: &[String],
     focus_subjects: &[&str],
@@ -985,6 +1005,12 @@ fn visualization_view(
     let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
     VisualizationView {
         view_name: view_name.to_string(),
+        view_kind: view_kind.to_string(),
+        label: label.to_string(),
+        authority: authority.to_string(),
+        redaction: redaction.to_string(),
+        retention_scope: retention_scope.to_string(),
+        source_refs: collect(source_refs),
         layer_signature_refs: layer_signature_refs.to_vec(),
         message_envelope_refs: message_envelope_refs.to_vec(),
         focus_subjects: collect(focus_subjects),
@@ -995,6 +1021,12 @@ fn visualization_view(
 
 fn telemetry_row(
     row_name: &str,
+    row_kind: &str,
+    label: &str,
+    authority: &str,
+    redaction: &str,
+    retention_scope: &str,
+    source_refs: &[&str],
     channel: &str,
     layer_signature_refs: &[String],
     message_envelope_refs: &[String],
@@ -1005,6 +1037,12 @@ fn telemetry_row(
     let collect = |values: &[&str]| values.iter().map(|value| (*value).to_string()).collect();
     TelemetryRow {
         row_name: row_name.to_string(),
+        row_kind: row_kind.to_string(),
+        label: label.to_string(),
+        authority: authority.to_string(),
+        redaction: redaction.to_string(),
+        retention_scope: retention_scope.to_string(),
+        source_refs: collect(source_refs),
         channel: channel.to_string(),
         layer_signature_refs: layer_signature_refs.to_vec(),
         message_envelope_refs: message_envelope_refs.to_vec(),
@@ -1033,6 +1071,12 @@ fn layer_signature_lanes() -> Vec<String> {
 fn visualization_view_lanes() -> Vec<String> {
     [
         "view_name",
+        "view_kind",
+        "label",
+        "authority",
+        "redaction",
+        "retention_scope",
+        "source_refs",
         "layer_signature_refs",
         "message_envelope_refs",
         "focus_subjects",
@@ -1047,6 +1091,12 @@ fn visualization_view_lanes() -> Vec<String> {
 fn telemetry_row_lanes() -> Vec<String> {
     [
         "row_name",
+        "row_kind",
+        "label",
+        "authority",
+        "redaction",
+        "retention_scope",
+        "source_refs",
         "channel",
         "layer_signature_refs",
         "message_envelope_refs",
@@ -1111,9 +1161,22 @@ fn reserved_layer_signature_names() -> Vec<String> {
 }
 
 fn reserved_visualization_view_names() -> Vec<String> {
-    ["label_authority_redaction_grid"]
+    ["label_authority_redaction_retention_grid"]
         .into_iter()
         .map(|name| name.to_string())
+        .collect()
+}
+
+fn retention_scope_names(
+    visualization_views: &[VisualizationView],
+    telemetry_rows: &[TelemetryRow],
+) -> Vec<String> {
+    visualization_views
+        .iter()
+        .map(|view| view.retention_scope.clone())
+        .chain(telemetry_rows.iter().map(|row| row.retention_scope.clone()))
+        .collect::<BTreeSet<_>>()
+        .into_iter()
         .collect()
 }
 
@@ -1401,6 +1464,16 @@ fn visualization_views_for_spec(
         "05_delegated_rng_service" => vec![
             visualization_view(
                 "provider_boundary_redacted_flow",
+                "message_route",
+                "report:provider-boundary",
+                "ObserveProviderBoundary(ProviderPlace[AuthorityRng])",
+                "named_witness_only",
+                "report_local_inventory",
+                &[
+                    "message_envelopes[provider_request#1]",
+                    "message_envelopes[provider_receipt#1]",
+                    "layer_signatures[transport_provider_boundary]",
+                ],
                 &layer_signature_refs,
                 &message_envelope_refs,
                 &["effect:delegated_rng_roll", "witness:provider_receipt"],
@@ -1415,6 +1488,16 @@ fn visualization_views_for_spec(
             ),
             visualization_view(
                 "cross_place_projection",
+                "projection_view",
+                "report:projection",
+                "InspectProjection(DelegatedRngSource#1)",
+                "projection_summary_only",
+                "report_local_inventory",
+                &[
+                    "message_envelopes[provider_request#1]",
+                    "message_envelopes[provider_receipt#1]",
+                    "layer_signatures[transport_provider_boundary]",
+                ],
                 &layer_signature_refs,
                 &message_envelope_refs,
                 &[
@@ -1434,6 +1517,15 @@ fn visualization_views_for_spec(
         ],
         "06_auditable_authority_witness" => vec![visualization_view(
             "authority_trace_redacted_view",
+            "audit_trace",
+            "report:audit-trace",
+            "ObserveAuthorityTrace(AuditPlace[AuthorityTrace])",
+            "authority_trace_summary_only",
+            "report_local_inventory",
+            &[
+                "message_envelopes[audit_trace_request#1]",
+                "layer_signatures[auth_authority_witness]",
+            ],
             &layer_signature_refs,
             &message_envelope_refs,
             &["witness:draw_pub", "view:audit_trace"],
@@ -1463,6 +1555,15 @@ fn telemetry_rows_for_spec(
     match spec.id.as_str() {
         "05_delegated_rng_service" => vec![telemetry_row(
             "provider_boundary_dispatch",
+            "message_dispatch",
+            "report:provider-boundary",
+            "ObserveProviderBoundary(ProviderPlace[AuthorityRng])",
+            "dispatch_outcome_only",
+            "report_local_inventory",
+            &[
+                "message_envelopes[provider_request#1]",
+                "layer_signatures[transport_provider_boundary]",
+            ],
             "provider_boundary",
             &layer_signature_refs,
             &["provider_request#1".to_string()],
@@ -1472,6 +1573,15 @@ fn telemetry_rows_for_spec(
         )],
         "06_auditable_authority_witness" => vec![telemetry_row(
             "audit_trace_dispatch",
+            "message_dispatch",
+            "report:audit-trace",
+            "ObserveAuthorityTrace(AuditPlace[AuthorityTrace])",
+            "dispatch_outcome_only",
+            "report_local_inventory",
+            &[
+                "message_envelopes[audit_trace_request#1]",
+                "layer_signatures[auth_authority_witness]",
+            ],
             "audit_trace_boundary",
             &layer_signature_refs,
             &["audit_trace_request#1".to_string()],
@@ -2842,6 +2952,7 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
     let visualization_views = closeout_visualization_views();
     let telemetry_rows = closeout_telemetry_rows();
     let telemetry_channels = closeout_telemetry_channels(&telemetry_rows);
+    let retention_scope_names = retention_scope_names(&visualization_views, &telemetry_rows);
     Ok(CleanNearEndCloseout {
         active_sample_root: clean_near_end_samples_root().display().to_string(),
         archive_sample_root: clean_near_end_archive_root().display().to_string(),
@@ -2896,6 +3007,8 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
         telemetry_row_lanes: telemetry_row_lanes(),
         telemetry_channels,
         reserved_telemetry_channels: reserved_telemetry_channels(),
+        retention_scope_names,
+        reserved_retention_scope_names: vec!["helper_local_ephemeral".to_string()],
         layer_signatures: closeout_layer_signatures()?,
         layer_signature_lanes: layer_signature_lanes(),
         layer_signature_scope: "clean_near_end_canonical_inventory".to_string(),
