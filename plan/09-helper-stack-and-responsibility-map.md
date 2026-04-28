@@ -128,6 +128,7 @@ run_directory_named_profile
   を `verification_preview` として見せてよい。
   - `LayerSignature.name / requires / provides / transforms / checks / emits / obligations / laws` と `verification_preview` の対応を helper-local / report-local に並べ、current `VerificationLayer` composition を evidence-oriented に見せてよい。
   - helper closeout は `representative_slice` scope で `verification_handoff_witness` / `runtime_turn_trace` / `membership_*` / `hotplug_*` を持ち、clean near-end closeout は `clean_near_end_canonical_inventory` scope で `auth_authority_witness` / `transport_provider_boundary` / `verification_model_check` を持つ。scope split は current repo memory として明示し、final public law schema と混同しない。
+  - `R1` current line では theorem bridge / runtime policy / visualization-telemetry を `verification_preview` や downstream consumer lane に残し、active emitted `LayerSignature` row へはまだ上げない。
   - これは final public verifier contract を意味しない。
 - current order-handoff negative static-stop cut では、
   - clean near-end handoff line に対する `publish -> witness -> handoff -> observe` 前提を helper-local current sample runner 側でのみ判定してよい。

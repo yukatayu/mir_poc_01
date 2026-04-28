@@ -46,7 +46,9 @@
 - `docs/reports/0972-*` は `P17` storage / LLVM / backend preparation の current first-cut closeout を表し、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23` を通じて external workdir / cleanup / `llvm` owner-writable probe / non-writable cleanup guard を current line に actualize した
 - `docs/reports/0973-*` は `P18` public API / parser grammar gate の repo-side first-cut closeout を表し、`plan/27-public-api-parser-gate-roadmap.md`、`docs/research_abstract/public_api_parser_gate_plan_01.md`、`docs/hands_on/public_api_parser_gate_01.md` により freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize した
 - `docs/reports/0974-*` は `U1` post-`P18` true user-spec hold option matrix closeout を表し、`plan/28-post-p18-true-user-spec-hold-option-matrix.md`、reader-facing summary、landing page、snapshot blocker matrix により packaging / host target / shipped-surface / final-catalog breadth の option inventory を current line に actualize した
-- current promoted next line は `R1` `VerificationLayer` widening threshold inventory
+- `docs/reports/0975-*` は `R1` `VerificationLayer` widening threshold inventory first cut を表し、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor と widening threshold matrix を `plan/29` と reader-facing docs に actualize した
+- `docs/reports/0976-*` は `R1` closeout trail と `R2` promoted-next sync を表し、research landing stale drift、`progress.md` recent log、`samples_progress.md` `PH0` row、report trail completion を current line に actualize した
+- current promoted next line は `R2` `AttachPoint` compatibility / detach minimal contract
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
 
 ## stabilized queue
@@ -69,7 +71,9 @@
 7. `U1` post-`P18` true user-spec hold option matrix
    - close 済み。packaging shape / host integration target / first shipped public surface / final shared-space operational catalog breadth を decision-ready inventory と provisional recommendation に整理した
 8. `R1` `VerificationLayer` widening threshold inventory
-   - active。helper `verification_handoff_witness` / runtime `verification_model_check` を current emitted floor に保ったまま widening threshold matrix を docs-first に整理する
+   - close 済み。helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor、theorem / runtime-policy / visualization downstream stop line、`plan/29` current reading を fixed した
+9. `R2` `AttachPoint` compatibility / detach minimal contract
+   - active。helper-local `hotplug_lifecycle` / explicit detach TODO boundary を current evidence floor に保ったまま minimal contract row と kept-later migration / rollback gate を docs-first に整理する
 
 ## mixed gate
 

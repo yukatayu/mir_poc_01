@@ -145,6 +145,7 @@
      1 つの typed composition として見せる価値は高いが、helper-local signature dump や report-local inventory を
      final public verifier contract や hidden verifier builtin と誤読させてはならない。
      - 2026-04-28 時点では helper `verification_handoff_witness` と runtime `verification_model_check` を current emitted floor として actualize してよい。
+     - `R1` docs-first line では `verification_summary` / `model_check_summary` / theorem bridge / runtime policy を downstream consumer または evidence carrier に残し、active emitted `LayerSignature` row へはまだ上げない。
      - 未決なのは theorem bridge / runtime policy / visualization lane をどの widening package で emitted `LayerSignature` に上げるか、exact composition law、public naming である。
   2b. effect-based OS-like substrate という内側の解釈をどこまで docs-first に固定するか。
      Mirrorea / adapter / visualization / telemetry の内側をそう読むこと自体は有用だが、

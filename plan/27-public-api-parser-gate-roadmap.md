@@ -43,6 +43,8 @@
 - current `VerificationLayer` reading は typed explanation / evidence carrier である
 - helper `verification_handoff_witness` と runtime `verification_model_check` は
   current emitted floor だが、final public verifier contract ではない
+- `R1` current line では theorem bridge / runtime policy / visualization-telemetry を
+  active emitted row に上げず、widening threshold inventory として別管理する
 - hidden verifier builtin を既成事実化しない
 
 ## repo-side freeze candidates

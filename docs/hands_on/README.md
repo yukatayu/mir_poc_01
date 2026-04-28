@@ -19,6 +19,8 @@
   - `P18` public API / parser grammar gate current first-cut closeout の最短入口
 - `post_p18_true_user_spec_hold_01.md`
   - `U1` post-`P18` true user-spec hold option matrix の最短入口
+- `verification_layer_widening_threshold_01.md`
+  - `R1` VerificationLayer widening-threshold inventory の最短入口
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`

@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 20:31 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor、viewer typed public prototype inventory、storage/backend current first-cut closeout、`U1` option-matrix closeout を保ったまま、`R1` `VerificationLayer` widening threshold inventory で core-side public-surface narrowing criteria を docs-first に揃える
-Current active packages: `R1` `VerificationLayer` widening threshold inventory (`U1` post-`P18` true user-spec hold option matrix は close 済み。actual commitment は still later のまま保ち、次は verification lane widening criteria だけを整理する)
+Last updated: 2026-04-28 21:07 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor、viewer typed public prototype inventory、storage/backend current first-cut closeout、`R1` verification threshold closeout を保ったまま、`R2` `AttachPoint` compatibility / detach minimal contract で helper-local lifecycle canary と final public hot-plug ABI の間にある minimal contract row を docs-first に揃える
+Current active packages: `R2` `AttachPoint` compatibility / detach minimal contract (`R1` `VerificationLayer` widening threshold inventory は close 済み。next は helper-local `hotplug_lifecycle` / explicit detach TODO boundary を current evidence floor に保ったまま minimal contract row を整理する)
 
 ## Legend
 
@@ -40,7 +40,7 @@ Progress:
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 20:31 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967`, `0968`, `0969`, `0970`, `0971`, `0972`, `0973`, `0974` | source hierarchy と report discipline の current floor |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 21:07 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967`, `0968`, `0969`, `0970`, `0971`, `0972`, `0973`, `0974`, `0975`, `0976` | source hierarchy と report discipline の current floor。`R1` closeout trail と `R2` promoted-next wording まで同期済み |
 | `PH1` | Mir core | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | final parser / public API deferred |
 | `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 15:32 JST | `0904`, `0913`, `0945`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965` | public shell / packaging deferred。`P10` で `mirrorea-core` minimal carrier ownership cut と `transport == transport_seam` compatibility invariant、`P11` で `MembershipRegistry` / `PlaceCatalog` substrate、bootstrap/epoch guard、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper が actualize 済み |
 | `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-28 13:09 JST | `0909`, `0916`, `0931`, `0945`, `0955` | runtime attach floor + helper-local attachpoint compatibility / activation evidence。current closeout では `world_surface` と `MembershipRegistry` source-of-truth の anchor にもなる |
@@ -114,7 +114,7 @@ Progress:
 | actual emitted executable family / optimizer / deployment planner beyond manifest bridge | projection / placement | high | repo | `P15` current first cut は committed generated bridge evidence only として close 済み。final emitted executable family と optimizer / planner は kept-later gate に残す |
 | final public viewer contract / retention policy / multi-tenant telemetry service | visualization / telemetry | high | repo + user | `P7` current scope と `P16` typed public prototype inventory は close 済みとして保ち、public contract 自体は post-`P18` line に残す |
 | first shipped public surface scope | public-freeze mixed gate | high | repo + user | parser/checker/runtime/verifier first か integration surface first かをまだ決めず、`U1` では two-step split provisional recommendation だけを docs-first に置く |
-| `VerificationLayer` widening threshold | theorem / model-check / runtime policy / visualization bridge | medium | repo | `R1` で helper `verification_handoff_witness` / runtime `verification_model_check` を current emitted floor に保ったまま widening threshold matrix と stop line を整理する |
+| `AttachPoint` minimal contract | hot-plug / detach lifecycle | medium | repo | `R2` で helper-local `hotplug_lifecycle` / explicit detach TODO boundary を current evidence floor に保ったまま minimal contract row と kept-later migration / rollback gate を整理する |
 | `FAIRY-05` carrier bundling | avatar follow | medium | repo | explicit state timeline / anchor switch evidence を保ったまま `UNRESOLVED` を解く |
 | real migration / rollback | hot-plug | medium | repo | helper-local lifecycle canary の先に attachpoint migration contract を切り出す |
 | real socket / durable replay | network transport | high | repo + user | helper-local canary を維持しつつ production transport line は defer する |
@@ -124,6 +124,12 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-28 21:07 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json` | pass | helper `verification_handoff_witness` row は `publication_order` / `witness(draw_pub#1)` requirement、`term_signatures` / `verification` emit、sample-defined witness obligation を current emitted floor のまま返す |
+| 2026-04-28 21:07 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | helper closeout は `layer_signature_scope = representative_slice`、`layer_signature_names` に `verification_handoff_witness`、`reserved_layer_signature_names` に `verification_model_check` を保ち、R1 widening threshold fixed 後も representative/canonical split を維持する |
+| 2026-04-28 21:07 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | runtime closeout は `layer_signature_scope = clean_near_end_canonical_inventory`、`verification_model_check` row、`property:mutual_exclusion` / `runtime_service:model_check` / `mode_assumption:second_line_verification` requirement、`peterson_sc_mutual_exclusion` obligation を canonical floor のまま返す |
+| 2026-04-28 21:07 JST | `python3 scripts/check_source_hierarchy.py` | pass | `R1` closeout memory / `R2` promoted-next wording / reports `0975` / `0976` 追加後も required hierarchy is intact |
+| 2026-04-28 21:07 JST | `python3 scripts/validate_docs.py` | pass | documentation scaffold is complete。numbered reports は 974 |
+| 2026-04-28 21:07 JST | `git diff --check` | pass | `R1` closeout / `R2` promoted-next / `0976` report diff は whitespace-clean |
 | 2026-04-28 20:31 JST | `python3 scripts/check_source_hierarchy.py` | pass | `U1` close / `R1` promoted-next wording / report `0974` 追加後も required hierarchy is intact |
 | 2026-04-28 20:31 JST | `python3 scripts/validate_docs.py` | pass | documentation scaffold is complete。numbered reports は 972 |
 | 2026-04-28 20:31 JST | `git diff --check` | pass | `U1` closeout / `R1` promoted-next diff は whitespace-clean |
