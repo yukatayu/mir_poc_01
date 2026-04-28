@@ -18,7 +18,7 @@
 5. current-L2 実装寄りなら `plan/04 ... plan/09`
 6. 全体計画なら `plan/10-roadmap-overall.md`
 7. 直近の research split は `plan/11-roadmap-near-term.md`
-8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory / `VerificationLayer` widening threshold / `AttachPoint` minimal contract / `FAIRY-05` carrier bundling / hot-plug real migration rollback boundary / runtime-crate hot-plug engine ownership cut / runtime-crate hot-plug carrier admission cut / post-`P20` next-package inventory / post-`P21` rollback-durable-migration first recommendation / post-`P21` distributed-activation-ordering second recommendation の current roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`、`plan/29`、`plan/30`、`plan/31`、`plan/32`、`plan/33`、`plan/34`、`plan/35`、`plan/36`、`plan/37`
+8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory / `VerificationLayer` widening threshold / `AttachPoint` minimal contract / `FAIRY-05` carrier bundling / hot-plug real migration rollback boundary / runtime-crate hot-plug engine ownership cut / runtime-crate hot-plug carrier admission cut / post-`P20` next-package inventory / post-`P21` rollback-durable-migration first recommendation / post-`P21` distributed-activation-ordering second recommendation / post-`P21` final-public-hotplug-ABI third recommendation の current roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`、`plan/29`、`plan/30`、`plan/31`、`plan/32`、`plan/33`、`plan/34`、`plan/35`、`plan/36`、`plan/37`、`plan/38`
 9. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
@@ -72,6 +72,7 @@
   `plan/35-post-p20-hotplug-next-package-inventory.md`
   `plan/36-post-p21-rollback-durable-migration-family.md`
   `plan/37-post-p21-distributed-activation-ordering-family.md`
+  `plan/38-post-p21-final-public-hotplug-abi-family.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

@@ -59,7 +59,9 @@
 - `docs/reports/0993-*` は `P21` runtime-crate hot-plug completed-engine narrow cut closeout を表し、`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` による runtime-side engine-state progression narrow cut と、exact next label intentionally unfixed の grouped later-family reading を `plan/35` と snapshot / reader-facing docs に actualize した
 - `docs/reports/0994-*` は post-`P21` rollback / durable migration family first recommendation closeout を表し、`plan/36` と companion docs により exact label intentionally unfixed のまま first recommendation / second recommendation / third recommendation ordering を current roadmap に actualize した
 - `docs/reports/0995-*` は post-`P21` distributed activation ordering family second recommendation closeout を表し、`plan/37` と companion docs により `activation_cut` widening criteria、durable activation commit / public ABI / transport-collapse stop line、current remaining third recommendation を current roadmap に actualize した
-- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment
+- `docs/reports/0996-*` は post-`P21` final public hot-plug ABI family の audit を表し、minimum sync set、stale wording、traceability break、freeze-prerequisite stop line を inventory として残した
+- `docs/reports/0997-*` は post-`P21` final public hot-plug ABI family third recommendation closeout を表し、`plan/38` と companion docs により `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、next open work = actual `U1` commitment を current roadmap に actualize した
+- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、third recommendation docs-first close の後に来る
 
 ## stabilized queue
 
@@ -103,7 +105,9 @@
 18. post-`P21` rollback / durable migration family
    - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/36-post-p21-rollback-durable-migration-family.md` で keep-one-family vs split-again criteria を fixed し、`distributed activation ordering` second recommendation と `final public hot-plug ABI` third recommendation を current line に残した
 19. post-`P21` distributed activation ordering family
-   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/37-post-p21-distributed-activation-ordering-family.md` で `activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、public ABI と transport-collapse stop line を docs-first に固定した。current remaining third recommendation は final public hot-plug ABI である
+   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/37-post-p21-distributed-activation-ordering-family.md` で `activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、public ABI と transport-collapse stop line を docs-first に固定した。third recommendation family の current repository memory は `plan/38` を参照する
+20. post-`P21` final public hot-plug ABI family
+   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/38-post-p21-final-public-hotplug-abi-family.md` で `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、`AttachPoint` / `Patch` packaging identity の preview-only line、next open work = actual `U1` commitment を docs-first に固定した
 
 ## mixed gate
 

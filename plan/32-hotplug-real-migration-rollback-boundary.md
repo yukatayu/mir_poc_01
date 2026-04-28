@@ -95,9 +95,10 @@ helper schema の widening、runtime-crate engine 実装、final public ABI の�
   second recommendation も
   `plan/37-post-p21-distributed-activation-ordering-family.md`
   を入口にした docs-first hardening として close 済みである
-- current remaining third recommendation は
+- third recommendation family の current repository memory は
   final public hot-plug ABI であり、
-  post-`P18` mixed gate / `U1` hold line に残す
+  `plan/38-post-p21-final-public-hotplug-abi-family.md`
+  を入口に読む
 
 ## validation floor
 

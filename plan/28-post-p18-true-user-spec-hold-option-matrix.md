@@ -16,7 +16,7 @@ repository memory である。
 - typed external boundary は `helper_local_synthetic_preview` と `host_boundary_inventory` までであり、exact host schema や final public adapter ABI ではない
 - projection / placement は committed generated bridge evidence までであり、final emitted executable family ではない
 - viewer は `typed public prototype inventory over helper/runtime surfaces; not a final public viewer API` までである
-- hot-plug は helper-local package-manager preview inventory までであり、runtime hot-plug engine / final ABI ではない
+- hot-plug は helper-local package-manager preview inventory と runtime-private request/verdict carrier / runtime-private engine-state actualization までであり、final public hot-plug ABI ではない
 - shared-space current subset は `Place != participant`、`world` host-side sugar、`MembershipRegistry` source of truth、`PlaceCatalog` と thin runtime shell までである
 
 ## axis 1. packaging shape / installed binary target
@@ -128,6 +128,7 @@ git diff --check
 - `typed public prototype inventory` を final public viewer API と呼ばない
 - committed generated bridge evidence を final emitted executable family と呼ばない
 - package-manager preview inventory を runtime hot-plug engine / final ABI と呼ばない
+- runtime-private request/verdict carrier や runtime-private engine-state naming を public ABI naming と呼ばない
 - `U1` option matrix を actual product decision と呼ばない
 
 ## related memory
@@ -138,3 +139,4 @@ git diff --check
 - `plan/17-research-phases-and-autonomy-gates.md`
 - `plan/25-typed-external-boundary-executable-roadmap.md`
 - `plan/27-public-api-parser-gate-roadmap.md`
+- `plan/38-post-p21-final-public-hotplug-abi-family.md`

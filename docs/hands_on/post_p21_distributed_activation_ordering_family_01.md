@@ -2,8 +2,8 @@
 
 ## この文書の役割
 
-この文書は、`P21` close 後に
-current self-driven second recommendation が
+この文書は、`P21` close 後の
+second recommendation closeout memory が
 `distributed activation ordering` family であることを、
 最短コマンドで読み返す landing page です。
 
@@ -29,7 +29,7 @@ git diff --check
 - `P21` close 後の runtime-side engine state progression narrow cut
 - `activation_cut` が still helper-local attach boundary に留まること
 - distributed activation ordering family が second recommendation として docs-first に切り出されたこと
-- current remaining third recommendation が final public hot-plug ABI であること
+- third recommendation family の current repository memory が final public hot-plug ABI であること
 
 ## これではまだ確認できないこと
 

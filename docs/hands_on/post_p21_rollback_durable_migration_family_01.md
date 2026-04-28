@@ -2,8 +2,8 @@
 
 ## この文書の役割
 
-この文書は、`P21` close 後に
-current self-driven first recommendation が
+この文書は、`P21` close 後の
+first recommendation closeout memory が
 `rollback / durable migration` family であることを、
 最短コマンドで読み返す landing page です。
 
@@ -28,7 +28,7 @@ git diff --check
 - `P21` close 後の runtime-side engine state progression narrow cut
 - `migration_contract` が still unresolved-state honesty lane に留まること
 - detach 後 reject が explicit boundary evidence であり、completed rollback ではないこと
-- current self-driven first recommendation が `rollback / durable migration` family であること
+- first recommendation closeout memory が `rollback / durable migration` family であること
 
 ## これではまだ確認できないこと
 

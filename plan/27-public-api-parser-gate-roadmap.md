@@ -113,6 +113,13 @@ current repo は次を boundary wording として先に固定してよい。
 - activation cut
 - explicit detach boundary / migration stop line
 - helper-local package-manager inventory
+- runtime-private `HotPlugRequest` / `HotPlugVerdict` carrier anchor
+- runtime-private `HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport` engine-state anchor
+- public request/response/event naming と `AttachPoint` / `Patch` package catalog naming の candidate inventory
+
+ここで fixed するのは
+`freeze prerequisite fixed; public ABI still unfrozen`
+という bridge line までである。
 
 これは final hot-plug ABI、rollback protocol、
 durable migration engine を意味しない。
@@ -218,3 +225,4 @@ git diff --check
 - `plan/23-compiler-backend-llvm-guardrail-roadmap.md`
 - `plan/25-typed-external-boundary-executable-roadmap.md`
 - `plan/26-visual-debugger-viewer-roadmap.md`
+- `plan/38-post-p21-final-public-hotplug-abi-family.md`

@@ -20,8 +20,9 @@
   multi-place / multi-server attach activation ordering、
   durable activation commit、
   visible active state frontier の widening criteria を指します
-- current remaining third recommendation は
+- third recommendation family の current repository memory は
   `final public hot-plug ABI` です
+  入口は `plan/38-post-p21-final-public-hotplug-abi-family.md` です
 
 ## ここでまだ fixed しないこと
 

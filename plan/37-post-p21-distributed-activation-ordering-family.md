@@ -94,13 +94,14 @@ later family のうち、
 - exact post-`P21` package label は intentionally unfixed のまま保つ
 - `rollback / durable migration` family hardening は
   first recommendation close 済みとして扱う
-- current self-driven second recommendation は
+- second recommendation closeout memory は
   **`distributed activation ordering` family hardening**
   と読む
-- current remaining third recommendation は
-  **`final public hot-plug ABI`**
-  であり、
-  post-`P18` mixed gate / `U1` hold line に残す
+- third recommendation family の current repository memory は
+  **`final public hot-plug ABI` family**
+  として
+  `plan/38-post-p21-final-public-hotplug-abi-family.md`
+  を参照する
 - `AttachPoint` / `Patch` packaging identity、
   helper-local sample IDs / view IDs / telemetry IDs、
   runtime-private state naming は
@@ -137,3 +138,4 @@ later family のうち、
 - `plan/32-hotplug-real-migration-rollback-boundary.md`
 - `plan/35-post-p20-hotplug-next-package-inventory.md`
 - `plan/36-post-p21-rollback-durable-migration-family.md`
+- `plan/38-post-p21-final-public-hotplug-abi-family.md`

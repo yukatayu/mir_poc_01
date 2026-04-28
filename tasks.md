@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-29 04:16 JST
+最終更新: 2026-04-29 04:47 JST
 
 ## この文書について
 
@@ -25,8 +25,8 @@
 - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize 済みです。
 - `R7` post-`P20` hot-plug next-package inventory も close 済みであり、`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を current narrow 実装対象として固定済みです。
 - `P21` runtime-crate hot-plug completed-engine narrow cut も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に `HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` を actualize 済みです。
-- current promoted next exact label は **intentionally unfixed** です。`rollback / durable migration` family hardening は first recommendation close 済み、`distributed activation ordering` family hardening も second recommendation close 済みであり、current remaining third recommendation は `final public ABI` です。
-- next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。
+- current promoted next exact label は **intentionally unfixed** のままですが、post-`P21` later family の first / second / third recommendation は docs-first close 済みです。third recommendation で fixed したのは `freeze prerequisite fixed; public ABI still unfrozen` までであり、actual final public ABI freeze はまだ行っていません。
+- next reopen point は **installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment** です。追加の self-driven post-`P21` docs-first family は残っていません。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -77,7 +77,7 @@
 | `P21` runtime-crate hot-plug completed-engine narrow cut | `Macro 6-7` | `S1 -> S4` | closed | closed | admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize した |
 | post-`P21` rollback / durable migration family | `Macro 8` prep | `S0 -> S2` | closed | closed | exact label intentionally unfixed のまま first recommendation family、split-again criteria、distributed activation ordering / public ABI との stop line を docs-first に固定した |
 | post-`P21` distributed activation ordering family | `Macro 8` prep | `S0 -> S2` | closed | closed | exact label intentionally unfixed のまま second recommendation family、`activation_cut` widening criteria、durable activation commit / public ABI / transport-collapse stop line を docs-first に固定した |
-| post-`P21` final public hot-plug ABI family | `Macro 8` mixed gate | `S0 -> S2` | open | ~1 task | current remaining third recommendation。post-`P18` mixed gate / `U1` hold line を保ちつつ helper-local / runtime-private naming を public ABI に premature に上げない |
+| post-`P21` final public hot-plug ABI family | `Macro 8` mixed gate | `S0 -> S2` | closed | closed | third recommendation close 済み。`freeze prerequisite fixed; public ABI still unfrozen` を fixed し、actual next open work を post-`P18` mixed gate / `U1` actual commitment に渡した |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -869,7 +869,7 @@
 ### post-`P21` rollback / durable migration family
 
 - status:
-  close 済み。exact package label intentionally unfixed のまま、`rollback / durable migration` family を current self-driven first recommendation として固定し、`distributed activation ordering` を second recommendation、`final public hot-plug ABI` を post-`P18` mixed gate / `U1` hold line の third recommendation に残した。
+  close 済み。exact package label intentionally unfixed のまま、`rollback / durable migration` family を first recommendation closeout memory として固定し、`distributed activation ordering` second recommendation と `final public hot-plug ABI` third recommendation への順序を docs-first に残した。
 
 - macro phase / stage:
   `Macro 8` prep, `S0 -> S2`
@@ -895,7 +895,7 @@
 ### post-`P21` distributed activation ordering family
 
 - status:
-  close 済み。exact package label intentionally unfixed のまま、`distributed activation ordering` family を current self-driven second recommendation として docs-first に harden し、`activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、transport-collapse stop line を固定した。current remaining third recommendation は final public hot-plug ABI である。
+  close 済み。exact package label intentionally unfixed のまま、`distributed activation ordering` family を second recommendation closeout memory として docs-first に harden し、`activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、transport-collapse stop line を固定した。third recommendation family の current repository memory は `plan/38` を参照する。
 
 - macro phase / stage:
   `Macro 8` prep, `S0 -> S2`
@@ -921,14 +921,14 @@
 ### post-`P21` final public hot-plug ABI family
 
 - status:
-  open。exact package label intentionally unfixed のまま、current remaining third recommendation として後段に残す。
+  close 済み。exact package label intentionally unfixed のまま、third recommendation family の docs-first close を `freeze prerequisite fixed; public ABI still unfrozen` で止めた。
 
 - macro phase / stage:
   `Macro 8` mixed gate, `S0 -> S2`
 - objective:
   helper-local / runtime-private naming と final public request/response/event / package catalog naming を分けたまま、public ABI freeze prerequisite を docs-first に harden する
 - deliverables:
-  `plan/27` / `plan/28` sync、snapshot sync、report
+  `plan/27` / `plan/28` / `plan/38` sync、`specs/11` sync、front-door docs / snapshot sync、report
 - validation command:
   `python3 scripts/sugoroku_world_samples.py closeout --format json`
   `cargo test -p mir-runtime --test hotplug_runtime_skeleton`
@@ -938,9 +938,9 @@
 - debug / visualization output:
   helper-local `hotplug_lifecycle` inventory と runtime-private `HotPlugRuntimeEngineReport` を public naming freeze なしで参照する boundary note
 - docs / report requirement:
-  新しい report、`plan/27` / `plan/28`、`progress.md`、`tasks.md`、`samples_progress.md` の同期
+  新しい report、`plan/27` / `plan/28` / `plan/38`、`specs/11`、`progress.md`、`tasks.md`、`samples_progress.md`、front-door docs の同期
 - stop line:
-  helper-local anchor naming や runtime-private state naming を public ABI に premature に import しない
+  helper-local anchor naming や runtime-private state naming を public ABI に premature に import しない。third recommendation docs-first close を actual final public ABI freeze と書かない
 
 ## research を通して見つけること
 

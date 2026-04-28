@@ -34,6 +34,7 @@
 - `fairy05_visibility_return_carrier_bundling_01.md`
 - `hotplug_real_migration_rollback_boundary_01.md`
 - `post_p21_rollback_durable_migration_family_01.md`
+- `post_p21_final_public_hotplug_abi_family_01.md`
 - `runtime_crate_hotplug_engine_ownership_cut_01.md`
 - `runtime_crate_hotplug_carrier_admission_cut_01.md`
 - `typed_external_boundary_adapter_plan_01.md`
@@ -101,7 +102,7 @@
 
 ## current reading の要点
 
-2026-04-28 時点では、次が active line です。
+2026-04-29 時点では、次が active line です。
 
 - active canonical sample は `samples/clean-near-end/`
 - first strong typing layer は finite decidable index fragment
@@ -129,7 +130,7 @@
 - `R6` runtime-crate hot-plug carrier admission cut は close 済みであり、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定した
 - `P19` `mirrorea-core` hot-plug request/verdict carrier tranche も close 済みであり、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `crates/mirrorea-core/src/fabric.rs` に actualize した
 - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche` と `P21` runtime-crate hot-plug completed-engine narrow cut も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport` / `HotPlugRuntimeEngineReport` と consumer-side `assemble_hotplug_runtime_skeleton_report()` / `assemble_hotplug_runtime_engine_report()`、example builders を actualize した
-- post-`P21` later-family docs-first hardening では、`plan/36-post-p21-rollback-durable-migration-family.md` を入口に `rollback / durable migration` family を first recommendation close 済みとし、`plan/37-post-p21-distributed-activation-ordering-family.md` を入口に `distributed activation ordering` family を second recommendation close 済みとした。current remaining third recommendation は final public hot-plug ABI である
+- post-`P21` later-family docs-first hardening では、`plan/36-post-p21-rollback-durable-migration-family.md` を入口に `rollback / durable migration` family を first recommendation close 済み、`plan/37-post-p21-distributed-activation-ordering-family.md` を入口に `distributed activation ordering` family を second recommendation close 済み、`plan/38-post-p21-final-public-hotplug-abi-family.md` を入口に `final public hot-plug ABI` family を third recommendation close 済みとした。third recommendation で fixed したのは `freeze prerequisite fixed; public ABI still unfrozen` までである
 - `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
 - avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で widened active representative slice を持つ
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、現在は `FAIRY-05` reacquire-after-return だけを残す reader-facing plan anchor である

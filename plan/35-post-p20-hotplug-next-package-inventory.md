@@ -142,7 +142,7 @@ final public hot-plug ABI はここで actualize しない。
   `distributed activation ordering`
   `final public hot-plug ABI`
   として読む
-- current self-driven first recommendation は
+- first recommendation closeout memory は
   `plan/36-post-p21-rollback-durable-migration-family.md`
   を入口にした
   `rollback / durable migration` family hardening と読む
@@ -157,9 +157,17 @@ final public hot-plug ABI はここで actualize しない。
   により、
   `distributed activation ordering` family hardening は
   second recommendation close 済みである
-- current remaining third recommendation は
-  final public hot-plug ABI であり、
-  post-`P18` mixed gate / `U1` hold line の dependency を保つ
+- `plan/38-post-p21-final-public-hotplug-abi-family.md`
+  により、
+  `final public hot-plug ABI` family hardening は
+  third recommendation close 済みである
+- current third recommendation docs-first close の definition は
+  `freeze prerequisite fixed; public ABI still unfrozen`
+  である
+- current next open work は
+  post-`P18` mixed gate / `U1` hold line にある
+  actual commitment であり、
+  追加の self-driven post-`P21` docs-first family ではない
 - `R7` の grouped-later memory は historical recommendation として残すが、
   current snapshot では
   `rollback / durable migration`

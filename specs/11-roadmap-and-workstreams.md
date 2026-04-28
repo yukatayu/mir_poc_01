@@ -1119,7 +1119,9 @@ P21. runtime-crate hot-plug completed-engine narrow cut
 post-`P21` rollback / durable migration family
   - current self-driven first recommendation。exact package label は intentionally unfixed のまま保ち、`rollback / durable migration` family を keep-one-family vs split-again criteria つきで docs-first に harden し、`distributed activation ordering` は second recommendation、`final public hot-plug ABI` は post-`P18` mixed gate / `U1` hold line の third recommendation に残す。
 post-`P21` distributed activation ordering family
-  - current self-driven second recommendation close 済み。exact package label は intentionally unfixed のまま保ち、`activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、transport-collapse stop line、public ABI deferred line を docs-first に harden した。current remaining third recommendation は final public hot-plug ABI である。
+  - current self-driven second recommendation close 済み。exact package label は intentionally unfixed のまま保ち、`activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、transport-collapse stop line、public ABI deferred line を docs-first に harden した。third recommendation family の current repository memory は `plan/38` を参照する。
+post-`P21` final public hot-plug ABI family
+  - current self-driven third recommendation close 済み。exact package label は intentionally unfixed のまま保ち、`freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、`AttachPoint` / `Patch` packaging identity preview-only line、next open work = actual `U1` commitment を docs-first に harden した。
 P15. projection/codegen first emitted place-specific programs
   - current first-cut closeout は committed generated bridge evidence only として close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` を current line に actualize した。final emitted executable family、projection IR、optimizer、deployment planner、final public emitted-program ABI は kept-later gate に残す。
 P16. visual debugger / viewer first public prototype
@@ -1132,7 +1134,7 @@ P18. public API / parser grammar gate
   - repo-side first cut は close 済みとし、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize してよい。
   - actual final parser grammar、actual final public parser / checker / runtime / verifier API、actual final public adapter / viewer / projection / hot-plug / transport ABI は still later に残す。
 
-2026-04-29 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` / `P17` current first-cut closeout、`P19`、`P20`、`P21`、`R7` は close し、`P11` current third cut は actualize 済み、`P18` repo-side first cut も close 済みであり、post-`P21` later family のうち first recommendation `rollback / durable migration` と second recommendation `distributed activation ordering` は docs-first close 済み、current remaining third recommendation は final public hot-plug ABI である。
+2026-04-29 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` / `P17` current first-cut closeout、`P19`、`P20`、`P21`、`R7` は close し、`P11` current third cut は actualize 済み、`P18` repo-side first cut も close 済みであり、post-`P21` later family の first / second / third recommendation は docs-first close 済みである。current next open work は actual `U1` commitment である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
