@@ -83,6 +83,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - `P17` storage / LLVM / backend preparation の current first-cut closeout が close 済みであり、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` を通じて external workdir / cleanup / LLVM staging ownership mismatch が non-destructive probe floor として current docs / dashboard / report に固定されていること
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`attach_request#1` / `detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view と helper closeout `hotplug_scope` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` を envelope-derived evidence として確認できること
 - `R5` runtime-crate hot-plug engine ownership cut が close 済みであり、helper-local preview / `mirrorea-core` generic carrier-substrate / `mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を current docs に固定したこと
+- `R6` runtime-crate hot-plug carrier admission cut が close 済みであり、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を current docs に固定したこと
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
 - typed visualization / telemetry line が label / authority / redaction / retention を意識した evidence carrier として置かれていること
@@ -153,26 +154,31 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. implementation-side runtime-crate hot-plug engine actualization remains later
-   - `R5` で owner split は fixed した。ここから先は engine actualization / rollback / durable migration / distributed activation ordering / final public ABI を別 line として扱う
-2. `R5` closeout memory
+1. `P19` `mirrorea-core` hot-plug request/verdict carrier tranche
+   - `R6` で first admissible Rust-side hot-plug-specific family は engine-neutral request / verdict carrier だけに narrow した。helper-local lifecycle や sample-grounded attach-detach IDs を Rust canonical engine family と混同せず、reusable carrier ownership だけを actualize する次 package として読む
+2. `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
+   - `P19` の later line として、thin runtime/report assembly 上の orchestration skeleton だけを扱う。completed engine、rollback、durable migration、distributed activation ordering、final public ABI は同じ package で claim しない
+3. `R6` closeout memory
+   - `runtime_crate_hotplug_carrier_admission_cut_01.md`、`../research_abstract/runtime_crate_hotplug_carrier_admission_cut_01.md`、`../../plan/34-runtime-crate-hotplug-carrier-admission-cut.md`
+   - post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow にした current queue memory
+4. `R5` closeout memory
    - `runtime_crate_hotplug_engine_ownership_cut_01.md`、`../research_abstract/runtime_crate_hotplug_engine_ownership_cut_01.md`、`../../plan/33-runtime-crate-hotplug-engine-ownership-cut.md`
    - helper-local preview、`mirrorea-core` generic carrier-substrate、`mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を current memory に残した
-3. `R4` closeout memory
+5. `R4` closeout memory
    - `hotplug_real_migration_rollback_boundary_01.md`、`../research_abstract/hotplug_real_migration_rollback_boundary_01.md`、`../../plan/32-hotplug-real-migration-rollback-boundary.md`
    - `activation_cut != distributed activation ordering`、`migration_contract row != protocol`、storage detach / network replay / runtime detach lifecycle 非同一視、runtime-crate engine / final public ABI kept-later boundary を current memory に残した
-4. `R3` closeout memory
+6. `R3` closeout memory
    - `fairy05_visibility_return_carrier_bundling_01.md`、`../research_abstract/fairy05_visibility_return_carrier_bundling_01.md`、`../../plan/31-fairy05-visibility-return-carrier-bundling.md`
    - helper closeout implementation inventory `carrier_choice = UNRESOLVED` を保ったまま、provisional recommendation `typed bundle over state_timeline + anchor_switch` と visibility-return witness の読みを current memory に残した
-5. `R2` closeout memory
+7. `R2` closeout memory
    - `attachpoint_detach_minimal_contract_01.md`、`../research_abstract/attachpoint_detach_minimal_contract_01.md`、`../../plan/30-attachpoint-detach-minimal-contract.md`
    - helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を current memory に残した
-6. `R1` closeout memory
+8. `R1` closeout memory
    - helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor と widening threshold matrix を current memory として残した
    - `verification_layer_widening_threshold_01.md`、`../research_abstract/verification_layer_widening_threshold_01.md`、`../../plan/29-verification-layer-widening-threshold.md`
-7. `U1` closeout memory
+9. `U1` closeout memory
    - `plan/28`、`post_p18_true_user_spec_hold_option_matrix_01.md`、`post_p18_true_user_spec_hold_01.md` に packaging shape / host target / first shipped public surface / final shared-space operational catalog breadth の option inventory と provisional recommendation を残した
-8. post-`P18` option-matrix landing page
+10. post-`P18` option-matrix landing page
    - `post_p18_true_user_spec_hold_01.md`、`../research_abstract/post_p18_true_user_spec_hold_option_matrix_01.md`、`../../plan/28-post-p18-true-user-spec-hold-option-matrix.md`
 
 `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout、`P18` public API / parser grammar gate の repo-side first-cut closeout は close 済みです。

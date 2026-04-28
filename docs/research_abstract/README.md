@@ -34,6 +34,7 @@
 - `fairy05_visibility_return_carrier_bundling_01.md`
 - `hotplug_real_migration_rollback_boundary_01.md`
 - `runtime_crate_hotplug_engine_ownership_cut_01.md`
+- `runtime_crate_hotplug_carrier_admission_cut_01.md`
 - `typed_external_boundary_adapter_plan_01.md`
 - `projection_placement_plan_01.md`
 - `hotplug_attachpoint_plan_01.md`
@@ -124,7 +125,8 @@
 - `R2` closeout memory は `attachpoint_detach_minimal_contract_01.md` と `plan/30-attachpoint-detach-minimal-contract.md` を入口にし、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を reader-facing に残す
 - `R3` closeout memory は `fairy05_visibility_return_carrier_bundling_01.md` と `plan/31-fairy05-visibility-return-carrier-bundling.md` を入口にし、`FAIRY-05` を active 化せずに typed bundle over `state_timeline` + `anchor_switch` という provisional recommendation を reader-facing に残す
 - `R4` closeout memory は `hotplug_real_migration_rollback_boundary_01.md` と `plan/32-hotplug-real-migration-rollback-boundary.md` を入口にし、real migration / rollback / runtime-crate hot-plug engine / distributed activation ordering を current helper-local evidence がまだ証明していない kept-later boundary として reader-facing に残す
-- current promoted next line `R5` runtime-crate hot-plug engine ownership cut は helper-local preview / crate-side carrier / runtime orchestration の owner split を docs-first に narrow にする
+- `R6` runtime-crate hot-plug carrier admission cut は close 済みであり、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定した
+- current promoted next line は `P19` `mirrorea-core` hot-plug request/verdict carrier tranche であり、`P20` `mir-runtime` hot-plug orchestration skeleton first tranche は reopen next に残す
 - `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
 - avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で widened active representative slice を持つ
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、現在は `FAIRY-05` reacquire-after-return だけを残す reader-facing plan anchor である

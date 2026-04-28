@@ -168,6 +168,38 @@ reader-facing current memory は
 `docs/hands_on/runtime_crate_hotplug_engine_ownership_cut_01.md`
 を参照する。
 
+## 2026-04-28 R6 carrier-admission closeout note
+
+`R6` では、`R5` owner split の次に
+**何が first admissible Rust-side hot-plug-specific family か**
+を narrow に整理した。
+
+fixed current reading:
+
+- first admissible Rust-side hot-plug-specific family は
+  engine-neutral request / verdict carrier に限る
+- helper-local
+  `hotplug_lifecycle`
+  `attach_request#1 / detach_request#1 / detached_roll_request#1`
+  `attach_lifecycle / detach_lifecycle`
+  `attach_activation#1 / detach_boundary#1`
+  は preview ownership に残す
+- reusable carrier ownership は `mirrorea-core` 側の later tranche 候補として読み、
+  thin runtime/report assembly は `mir-runtime` 側のさらに後段の orchestration candidate として残す
+- current sequence は
+  `R6` ->
+  `P19` `mirrorea-core` hot-plug request/verdict carrier tranche ->
+  `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
+  と読む
+- request / verdict carrier を lifecycle engine、rollback protocol、
+  durable migration engine、distributed activation ordering、final public ABI と混同しない
+
+reader-facing current memory は
+`plan/34-runtime-crate-hotplug-carrier-admission-cut.md`、
+`docs/research_abstract/runtime_crate_hotplug_carrier_admission_cut_01.md`、
+`docs/hands_on/runtime_crate_hotplug_carrier_admission_cut_01.md`
+を参照する。
+
 ## next relation
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。

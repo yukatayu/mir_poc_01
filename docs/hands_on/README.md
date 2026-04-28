@@ -29,6 +29,8 @@
   - `R4` hot-plug real migration / rollback boundary の最短入口
 - `runtime_crate_hotplug_engine_ownership_cut_01.md`
   - `R5` runtime-crate hot-plug engine ownership cut の最短入口
+- `runtime_crate_hotplug_carrier_admission_cut_01.md`
+  - `R6` runtime-crate hot-plug carrier admission cut の最短入口
 - `avatar_fairy_follow_representative_slice_01.md`
   - phase 8 current runnable slice の最短入口
 - `typed_external_boundary_canaries_01.md`
