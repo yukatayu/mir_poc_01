@@ -35,12 +35,31 @@ python3 -m unittest scripts.tests.test_typed_external_boundary_samples
 - `EXT-01`
   local console scenario。
   stdio builtin 誤読を避けるため residual planned に保つ。
+  current indirect anchor は clean near-end `05_delegated_rng_service` の `provider_boundary` である。
+  reopen 条件は、typed adapter request / receipt を `provider_boundary` anchor 上に載せても
+  Mir core standard I/O primitive と誤読されないことを `summary` / `envelopes` で示せること。
 - `EXT-02`
   world overlay scenario。
   projection / visualization split と結びつくため residual planned に保つ。
+  current indirect anchor は Sugoroku `visualization_views` / `telemetry_rows` と projection preview floor である。
+  reopen 条件は、label / authority / redaction を保った overlay route を final host family split なしで記述できること。
 - `EXT-05`
   standalone visualization restriction scenario。
   current helper cut では `EXT-03` の visualization view に吸収する。
+  current indirect anchor は `EXT-03` の `visualization_view` と Sugoroku `visualization_views` である。
+  reopen 条件は、standalone sample にすることで `EXT-03` では示せない redaction / authority case が増えること。
+
+## residual family の indirect anchors
+
+```bash
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json
+python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json
+cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json
+```
+
+この 4 本は residual family 自体の direct execution ではなく、`EXT-01` / `EXT-02` / `EXT-05` が
+依存する typed envelope / projection / visualization / provider-boundary anchor の current evidence です。
 
 ## これで確認できること
 
@@ -48,6 +67,7 @@ python3 -m unittest scripts.tests.test_typed_external_boundary_samples
 - local queue lane で、effect boundary、transport envelope、auth evidence、witness refs を separate に保つ synthetic preview helper evidence
 - typed adapter failure を explicit result として返し、hidden retry や hidden repair をしない synthetic preview helper evidence
 - visualization も effect であり、label / authority / redaction を持つ synthetic preview helper evidence
+- `EXT-01` / `EXT-02` / `EXT-05` が residual planned family のままでも、どの indirect anchor に依存しているかは current repo で確認できること
 
 ## これではまだ確認できないこと
 

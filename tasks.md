@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 03:27 JST
+最終更新: 2026-04-28 09:26 JST
 
 ## この文書について
 
@@ -13,8 +13,9 @@
 - active clean near-end suite、Sugoroku world vertical slice、avatar follow representative slice は runnable です。
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
-- current promoted next line は **`P2` Typed external boundary residual planned family review** です。
-- next reopen point は **`P3` Projection / placement residual emitted-program gate** です。
+- `P2` Typed external boundary residual planned family review は close 済みです。
+- current promoted next line は **`P3` Projection / placement residual emitted-program gate** です。
+- next reopen point は **`P4` `TermSignature` registry hardening** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -25,7 +26,7 @@
 | clean near-end suite | `samples/clean-near-end/{typing,order-handoff,model-check,modal}/` | finite-index typing、order / handoff、model-check second line、modal family が runnable |
 | Sugoroku world | `samples/clean-near-end/sugoroku-world/` + `scripts/sugoroku_world_samples.py` | attach / membership / handoff / reset model-check / hot-plug helper-local lifecycle canary |
 | avatar follow | `samples/clean-near-end/avatar-follow/` + `scripts/avatar_follow_samples.py` | `FAIRY-01/02/03/04/06` active、`FAIRY-05` は planned |
-| typed external / transport | `scripts/typed_external_boundary_samples.py`、`scripts/network_transport_samples.py` | helper-local synthetic preview / canary。final public adapter / transport contract ではない |
+| typed external / transport | `scripts/typed_external_boundary_samples.py`、`scripts/network_transport_samples.py` | helper-local synthetic preview / canary。typed external residual reopen matrix は fixed 済みだが、final public adapter / transport contract ではない |
 | projection / placement | Sugoroku `projection_view`、runtime `cross_place_projection` | helper-local / report-local preview floor。final emitted program ではない |
 | storage / backend guardrail | `/mnt/mirrorea-work`、`scripts/env/mirrorea_storage_env.sh` | root disk を既成事実化しない external workdir floor |
 
@@ -35,9 +36,9 @@
 |---|---|---|---|---|---|
 | `P0` current-state audit | `Macro 0` | `S6 -> S6` | closed | closed | source hierarchy / stale reference audit |
 | `P1` repo layer map / samples dashboard stabilization | `Macro 0` | `S6 -> S6` | closed | closed | taxonomy / dashboard synchronization |
-| `P2` typed external residual review | `Macro 6` reserve | `S5 -> S6` | next | 1-2 tasks | residual planned family review |
-| `P3` projection residual emitted-program gate | `Macro 6` reserve | `S5 -> S6` | reopen next | 1-2 tasks | emitted-program stop-line definition |
-| `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | queued | ~1 task | first cut exists, naming/law hardening remains |
+| `P2` typed external residual review | `Macro 6` reserve | `S5 -> S6` | closed | closed | residual planned family review |
+| `P3` projection residual emitted-program gate | `Macro 6` reserve | `S5 -> S6` | next | 1-2 tasks | emitted-program stop-line definition |
+| `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | reopen next | ~1 task | first cut exists, naming/law hardening remains |
 | `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | queued | ~1 task | first cut exists, law surface remains |
 | `P6` MessageEnvelope/Auth seam hardening | `Macro 6` | `S4 -> S5` | queued | ~1 task | first cut exists, public seam remains open |
 | `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | queued | ~1 task | first cut exists, viewer/security hardening remains |
@@ -93,24 +94,35 @@
 
 ### P2. Typed external boundary residual planned family review
 
+- status:
+  close 済み。`EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate を helper closeout と docs / plan / snapshot に固定した。
+
 - macro phase / stage:
   `Macro 6` reserve, `S5 -> S6`
 - objective:
-  `EXT-01` / `EXT-02` / `EXT-05` residual planned family と `EXT-03` / `EXT-04` synthetic preview subset を projection / visualization / host-schema pressure と照らして整理する
+  `EXT-01` / `EXT-02` / `EXT-05` residual planned family と `EXT-03` / `EXT-04` synthetic preview subset を projection / visualization / host-schema pressure と照らして整理し、residual reopen matrix を固定する
 - deliverables:
-  residual planned family の reopen criterion、host-facing stop line、synthetic preview helper と final public adapter contract の境界
+  residual planned family の reopen criterion、indirect anchor matrix、host-facing stop line、synthetic preview helper と final public adapter contract の境界
 - validation command:
+  `python3 scripts/typed_external_boundary_samples.py list`
+  `python3 scripts/typed_external_boundary_samples.py check-all`
+  `python3 scripts/typed_external_boundary_samples.py closeout`
   `python3 scripts/typed_external_boundary_samples.py closeout --format json`
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
   `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  `python3 -m unittest scripts.tests.test_typed_external_boundary_samples`
 - debug / visualization output:
-  `envelopes`、`visualization`、`failures`、clean near-end `provider_boundary`
+  `envelopes`、`visualization`、`failures`、clean near-end `provider_boundary`、helper closeout `residual_review_matrix`
 - docs / report requirement:
   新しい report、`progress.md`、`tasks.md`、`samples_progress.md`、`plan/25`、relevant docs を同期する
 - stop line:
   exact host schema、final public adapter API、console / overlay / viewer contract を premature に固定しない
 
 ### P3. Projection / placement residual emitted-program gate
+
+- status:
+  current promoted next line
 
 - macro phase / stage:
   `Macro 6` reserve, `S5 -> S6`

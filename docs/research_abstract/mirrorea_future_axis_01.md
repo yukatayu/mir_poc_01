@@ -11,7 +11,7 @@
 
 ## 現在地
 
-2026-04-27 時点で repo が実装済みの current line は次です。
+2026-04-28 時点で repo が実装済みの current line は次です。
 
 - clean near-end suite
 - current-L2 base source corpus
@@ -293,17 +293,18 @@ future-axis の first-cut / widening package は次まで close 済みです。
 
 現在の stabilized queue は次です。
 
-1. `P2` Typed external boundary residual planned family review
-   - `EXT-01` / `EXT-02` / `EXT-05` を projection / visualization / host-schema pressure と照らして reopen 条件まで整理する
-2. `P3` Projection / placement residual emitted-program gate
+`P2` Typed external boundary residual planned family review は close 済みであり、
+`EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate は current docs / helper closeout に固定されています。
+
+1. `P3` Projection / placement residual emitted-program gate
    - helper/report-local preview floor と final emitted-program family を混同しない residual gate を切る
-3. `P4-P7` carrier hardening
+2. `P4-P7` carrier hardening
    - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
-4. `P8-P9` representative slice hardening
+3. `P8-P9` representative slice hardening
    - Sugoroku runtime attach と avatar fairy follow residual gate
-5. `P10-P17` first real implementation tranche
+4. `P10-P17` first real implementation tranche
    - `mirrorea-core`、logical multi-place runtime、external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
-6. `P18` public API / parser grammar gate
+5. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。

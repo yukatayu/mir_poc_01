@@ -52,7 +52,15 @@ exact host schema / final adapter contract は `OPEN` のままです。
 - effect boundary / transport / auth / membership / capability / witness / visualization を separate lane に保つ
 - adapter failure は typed result / explicit failure reason として表す
 
+## residual planned family matrix
+
+| Sample | Current status | Current indirect anchor | Reopen condition | Kept-later gate |
+|---|---|---|---|---|
+| `EXT-01` | residual planned | clean near-end `provider_boundary` / `provider_boundary_dispatch` | typed adapter request / receipt を `provider_boundary` 上に載せても stdio builtin 誤読にならないことを `summary` / `envelopes` で示せる | `final_console_schema`, final public adapter API |
+| `EXT-02` | residual planned | Sugoroku `visualization_views` / `telemetry_rows` + projection preview floor | label / authority / redaction を保った overlay route を host family split なしで記述できる | `final_host_schema`, browser / network / VR family split, final projection public API |
+| `EXT-05` | residual planned | `EXT-03` `visualization_view` + Sugoroku `visualization_views` | standalone sample が `EXT-03` では示せない redaction / authority case を増やす | `final_visualization_schema`, public visualization service contract |
+
 ## 次
 
-この文書の current role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、evidence anchor を保つことです。
+この文書の current role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、evidence anchor、residual reopen criterion を保つことです。
 具体的な promoted queue は `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。

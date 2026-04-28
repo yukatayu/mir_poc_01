@@ -61,6 +61,39 @@ class TypedExternalBoundarySamplesTests(unittest.TestCase):
             result["preview_sample_root"],
         )
 
+    def test_closeout_records_residual_review_matrix(self) -> None:
+        result = typed_external_boundary_samples.closeout()
+
+        matrix = result["residual_review_matrix"]
+        self.assertEqual([row["sample_id"] for row in matrix], ["EXT-01", "EXT-02", "EXT-05"])
+        self.assertEqual(matrix[0]["current_anchor_kind"], "provider_boundary")
+        self.assertEqual(matrix[1]["current_anchor_kind"], "visualization_projection_bridge")
+        self.assertEqual(matrix[2]["current_anchor_kind"], "visualization_redaction_lane")
+        self.assertIn("final_host_schema", matrix[1]["kept_later_gates"])
+
+    def test_list_pretty_prints_preview_subset(self) -> None:
+        pretty = typed_external_boundary_samples.format_pretty(
+            typed_external_boundary_samples.list_samples()
+        )
+        self.assertIn("PREVIEW SAMPLES", pretty)
+        self.assertIn("EXT-03", pretty)
+        self.assertIn("EXT-04", pretty)
+
+    def test_check_all_pretty_prints_planned_family_summary(self) -> None:
+        pretty = typed_external_boundary_samples.format_pretty(
+            typed_external_boundary_samples.check_all()
+        )
+        self.assertIn("CHECK-ALL SUMMARY", pretty)
+        self.assertIn("planned residual: EXT-01, EXT-02, EXT-05", pretty)
+
+    def test_closeout_pretty_prints_residual_review_summary(self) -> None:
+        pretty = typed_external_boundary_samples.format_pretty(
+            typed_external_boundary_samples.closeout()
+        )
+        self.assertIn("CLOSEOUT SUMMARY", pretty)
+        self.assertIn("EXT-01 -> provider_boundary", pretty)
+        self.assertIn("EXT-05 -> visualization_redaction_lane", pretty)
+
     def test_envelopes_debug_prints_message_envelopes(self) -> None:
         pretty = typed_external_boundary_samples.format_pretty(
             typed_external_boundary_samples.run_sample("EXT-03"),

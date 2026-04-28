@@ -38,8 +38,13 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 - `EXT-01`
   typed `LogText` scenario を local console adapter に route する最小線。
   stdio builtin 誤読を避けるため、current phase 9 helper cut では residual planned に保つ。
+  current indirect anchor は clean near-end `provider_boundary` / `provider_boundary_dispatch` である。
+  reopen には、typed adapter request / receipt を `provider_boundary` 上に載せても
+  Mir core standard I/O primitive と誤読されないことを `summary` / `envelopes` で示す必要がある。
 - `EXT-02`
   host/world overlay 側へ floating text を出すが、visualization label / authority / redaction を保つ線
+  current indirect anchor は Sugoroku `visualization_views` / `telemetry_rows` と projection preview floor である。
+  reopen には、label / authority / redaction を保った overlay route を final host family split なしで記述できる必要がある。
 - `EXT-03`
   room-level message publication を local queue の message carrier として扱う線。
   current synthetic preview helper subset の first positive lane。
@@ -49,6 +54,8 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 - `EXT-05`
   debug / visualization 出力でも label restriction を破らない線。
   current helper cut では `EXT-03` の visualization view に吸収し、standalone sample としては residual planned に保つ。
+  current indirect anchor は `EXT-03` `visualization_view` と Sugoroku `visualization_views` である。
+  reopen には、standalone sample にすることで `EXT-03` では示せない redaction / authority case が増える必要がある。
 
 ## current synthetic preview subset
 

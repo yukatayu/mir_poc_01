@@ -34,6 +34,77 @@ SAMPLE_ROWS: list[dict[str, str]] = [
     },
 ]
 
+RESIDUAL_REVIEW_MATRIX: list[dict[str, Any]] = [
+    {
+        "sample_id": "EXT-01",
+        "scenario_label": "LogText",
+        "current_anchor_kind": "provider_boundary",
+        "current_anchor_refs": [
+            "clean-near-end:05_delegated_rng_service.provider_boundary",
+            "clean-near-end:05_delegated_rng_service.provider_boundary_dispatch",
+        ],
+        "why_still_planned": (
+            "console-shaped scenario can be misread as standard I/O builtin unless it stays "
+            "on an adapter/provider boundary"
+        ),
+        "reopen_criteria": [
+            "typed adapter request/receipt shape stays separate from Mir core primitive reading",
+            "provider_boundary anchor can carry console-side request/receipt evidence without fixing final console schema",
+        ],
+        "debug_surface": ["summary", "envelopes"],
+        "kept_later_gates": [
+            "final_console_schema",
+            "final_public_adapter_api",
+        ],
+    },
+    {
+        "sample_id": "EXT-02",
+        "scenario_label": "ShowFloatingText",
+        "current_anchor_kind": "visualization_projection_bridge",
+        "current_anchor_refs": [
+            "sugoroku:03_roll_publish_handoff.visualization_views",
+            "sugoroku:03_roll_publish_handoff.telemetry_rows",
+            "projection:helper_local_preview_floor",
+        ],
+        "why_still_planned": (
+            "overlay scenario sits on the seam between adapter effect and visualization/projection "
+            "lane, so the minimal bridge must be fixed before a standalone sample reopens"
+        ),
+        "reopen_criteria": [
+            "label/authority/redaction evidence is visible through the current visualization lane",
+            "overlay route can be described without fixing final host family split or emitted-program contract",
+        ],
+        "debug_surface": ["visualization", "summary"],
+        "kept_later_gates": [
+            "final_host_schema",
+            "browser_network_vr_host_family_split",
+            "final_projection_public_api",
+        ],
+    },
+    {
+        "sample_id": "EXT-05",
+        "scenario_label": "DebugShowLabelledText",
+        "current_anchor_kind": "visualization_redaction_lane",
+        "current_anchor_refs": [
+            "typed-external:EXT-03.visualization_view",
+            "sugoroku:03_roll_publish_handoff.visualization_views",
+        ],
+        "why_still_planned": (
+            "current helper cut absorbs label-restriction evidence into EXT-03, so a standalone "
+            "sample should only reopen if it adds distinct redaction/authority evidence"
+        ),
+        "reopen_criteria": [
+            "standalone sample would expose a redaction or authority case not already visible in EXT-03",
+            "visualization restriction can be shown without freezing final viewer or visualization service contract",
+        ],
+        "debug_surface": ["visualization"],
+        "kept_later_gates": [
+            "final_visualization_schema",
+            "public_visualization_service_contract",
+        ],
+    },
+]
+
 LIMITATIONS = [
     "no final public adapter API",
     "no browser/network/VR host schema",
@@ -334,14 +405,19 @@ def closeout() -> dict[str, Any]:
         "sample_count": len(SAMPLE_ROWS),
         "preview_sample_ids": [row["sample_id"] for row in SAMPLE_ROWS],
         "planned_sample_ids": list(PLANNED_SAMPLE_IDS),
+        "residual_review_matrix": list(RESIDUAL_REVIEW_MATRIX),
         "debug_output_modes": list(DEBUG_OUTPUT_MODES),
         "preview_sample_root": str(PREVIEW_SAMPLE_ROOT),
         "planned_family_path": str(PLANNED_SAMPLE_ROOT),
         "helper_script": str(Path(__file__).resolve()),
-        "current_focus": "EXT-03 / EXT-04 helper-local synthetic preview subset",
+        "current_focus": (
+            "EXT-03 / EXT-04 helper-local synthetic preview subset plus residual "
+            "reopen-criteria matrix for EXT-01 / EXT-02 / EXT-05"
+        ),
         "planned_remaining": (
             "EXT-01 local console, EXT-02 world overlay, and EXT-05 standalone "
-            "visualization scenario remain planned"
+            "visualization scenario remain planned; each now carries indirect "
+            "anchor and reopen criteria"
         ),
         "validation_floor": (
             "helper self-consistency plus provider-boundary/local-queue anchor comparison; "
@@ -352,6 +428,44 @@ def closeout() -> dict[str, Any]:
 
 
 def format_pretty(payload: Any, debug: str | None = None) -> str:
+    if isinstance(payload, list):
+        lines = ["PREVIEW SAMPLES"]
+        for row in payload:
+            lines.append(
+                f"- {row['sample_id']} [{row['kind']}] {row['focus']} -> {row['path']}"
+            )
+        return "\n".join(lines)
+    if "failed" in payload and "passed" in payload:
+        lines = ["CHECK-ALL SUMMARY"]
+        lines.append(f"- preview sample count: {payload['sample_count']}")
+        lines.append(f"- passed: {', '.join(payload['passed']) or '-'}")
+        lines.append(
+            f"- planned residual: {', '.join(payload['planned_sample_ids']) or '-'}"
+        )
+        if payload["failed"]:
+            lines.append(
+                "- failed: "
+                + ", ".join(
+                    f"{row['sample']} ({row['reason']})" for row in payload["failed"]
+                )
+            )
+        else:
+            lines.append("- failed: none")
+        return "\n".join(lines)
+    if "residual_review_matrix" in payload:
+        lines = ["CLOSEOUT SUMMARY"]
+        lines.append(
+            f"- preview subset: {', '.join(payload['preview_sample_ids']) or '-'}"
+        )
+        lines.append(
+            f"- residual planned: {', '.join(payload['planned_sample_ids']) or '-'}"
+        )
+        for row in payload["residual_review_matrix"]:
+            lines.append(
+                f"- {row['sample_id']} -> {row['current_anchor_kind']} "
+                f"(later: {', '.join(row['kept_later_gates'])})"
+            )
+        return "\n".join(lines)
     if debug == "envelopes":
         lines = ["MESSAGE ENVELOPES"]
         for row in payload.get("message_envelopes", payload.get("route_trace", [])):

@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0` と `P1` は close し、next promoted package は `P2`、next reopen point は `P3` である。
+2026-04-28 時点で `P0`、`P1`、`P2` は close し、next promoted package は `P3`、next reopen point は `P4` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1183,7 +1183,7 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Avatar fairy follow residual widening` は helper-local package として close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた。
 - `FAIRY-05 residual reacquire design` は docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current snapshot に actualize した。
 - `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
-- current promoted next package は Typed external boundary residual planned family review である。
+- current promoted next package は Projection / placement residual emitted-program gate である。
 
 ## 2026-04-27 repository-structure staging addendum
 

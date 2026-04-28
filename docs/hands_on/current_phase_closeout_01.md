@@ -2,7 +2,7 @@
 
 ## この文書の役割
 
-この文書は、2026-04-27 時点の **repo-local alpha current line** と
+この文書は、2026-04-28 時点の **repo-local alpha current line** と
 **Mirrorea future-axis docs-first line** を、実行コマンドと stop line 付きで短く確認するための hands-on closeout guide です。
 
 - final public completion ではありません
@@ -52,6 +52,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`VisualizationProtocol` の helper-local / report-local first cut が current line に同期されていること
 - `Network transport` の `NET-01` helper-local loopback preview と `NET-02..05` helper-local canary が actualize 済みであり、same-process parity、subprocess JSON bridge、stale reconnect reject、typed failure family、observer-safe redacted route trace を current evidence surface として確認できること
 - phase 9 typed external boundary の `EXT-03` / `EXT-04` synthetic preview helper subset が actualize 済みであり、effect boundary / transport envelope / auth evidence / witness refs の non-collapse と typed adapter failure lane を helper self-consistency + anchor comparison の current evidence surface として確認できること
+- `P2` residual planned family review が close 済みであり、`EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate が current docs / helper closeout に固定されていること
 - phase 12 projection / placement の helper/report-local preview floor が actualize 済みであり、`projection_view` と `cross_place_projection` によって system-wide source から authority place / participant place / adapter seam / observer view refs への split を current evidence surface として確認できること
 - `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view を envelope-derived evidence として確認できること
 - phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
@@ -64,6 +65,8 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - final public parser grammar
 - final public parser / checker / runtime / verifier API
 - final public `AuthEvidence` schema
+- final public adapter API / FFI
+- exact host schema
 - real network transport
 - final projection / placement public API
 - final hot-plug runtime lifecycle
@@ -95,11 +98,12 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - final public API:
   まだ deferred
 - deferred mixed gate:
-  parser/public API、auth/public contract、visualization/public contract、projection/public API、hot-plug/public API
+  parser/public API、auth/public contract、adapter/public contract、exact host schema、visualization/public contract、projection/public API、hot-plug/public API
 
 ## remaining mixed gate
 
 - final public auth / visualization / projection / hot-plug surface
+- final public adapter / exact host schema
 - transport canary から real socket / session / durable replay への widening
 - detach lifecycle / `AttachPoint` residual contract
 - `FAIRY-05` runnable widening decision
@@ -114,10 +118,10 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P2` Typed external boundary residual planned family review
-2. `P3` Projection / placement residual emitted-program gate
+1. `P3` Projection / placement residual emitted-program gate
+2. `P4` `TermSignature` registry hardening
 
-`P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
+`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review は close 済みです。
 後続の full queue は `tasks.md` と `progress.md` の current snapshot を参照してください。
 
 ## 関連文書
