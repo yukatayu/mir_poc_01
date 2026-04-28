@@ -295,16 +295,16 @@ future-axis の first-cut / widening package は次まで close 済みです。
 
 `P2` Typed external boundary residual planned family review は close 済みであり、
 `EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate は current docs / helper closeout に固定されています。
+`P3` Projection / placement residual emitted-program gate も close 済みであり、
+projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P3` Projection / placement residual emitted-program gate
-   - helper/report-local preview floor と final emitted-program family を混同しない residual gate を切る
-2. `P4-P7` carrier hardening
+1. `P4-P7` carrier hardening
    - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
-3. `P8-P9` representative slice hardening
+2. `P8-P9` representative slice hardening
    - Sugoroku runtime attach と avatar fairy follow residual gate
-4. `P10-P17` first real implementation tranche
+3. `P10-P17` first real implementation tranche
    - `mirrorea-core`、logical multi-place runtime、external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
-5. `P18` public API / parser grammar gate
+4. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す
 
 この queue は repo-local current reading であり、final public package structure や public API freeze を意味しません。

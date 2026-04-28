@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 09:26 JST
+最終更新: 2026-04-28 09:57 JST
 
 ## この文書について
 
@@ -14,8 +14,8 @@
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / Auth seam`、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P3` Projection / placement residual emitted-program gate** です。
-- next reopen point は **`P4` `TermSignature` registry hardening** です。
+- current promoted next line は **`P4` `TermSignature` registry hardening** です。
+- next reopen point は **`P5` `LayerSignature` system hardening** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -37,9 +37,9 @@
 | `P0` current-state audit | `Macro 0` | `S6 -> S6` | closed | closed | source hierarchy / stale reference audit |
 | `P1` repo layer map / samples dashboard stabilization | `Macro 0` | `S6 -> S6` | closed | closed | taxonomy / dashboard synchronization |
 | `P2` typed external residual review | `Macro 6` reserve | `S5 -> S6` | closed | closed | residual planned family review |
-| `P3` projection residual emitted-program gate | `Macro 6` reserve | `S5 -> S6` | next | 1-2 tasks | emitted-program stop-line definition |
-| `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | reopen next | ~1 task | first cut exists, naming/law hardening remains |
-| `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | queued | ~1 task | first cut exists, law surface remains |
+| `P3` projection residual emitted-program gate | `Macro 6` reserve | `S5 -> S6` | closed | closed | emitted-program boundary fixation |
+| `P4` TermSignature hardening | `Macro 6` | `S4 -> S5` | next | ~1 task | first cut exists, naming/law hardening remains |
+| `P5` LayerSignature hardening | `Macro 6` | `S4 -> S5` | reopen next | ~1 task | first cut exists, law surface remains |
 | `P6` MessageEnvelope/Auth seam hardening | `Macro 6` | `S4 -> S5` | queued | ~1 task | first cut exists, public seam remains open |
 | `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | queued | ~1 task | first cut exists, viewer/security hardening remains |
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | queued | 1-2 tasks | representative runtime slice hardening |
@@ -122,24 +122,30 @@
 ### P3. Projection / placement residual emitted-program gate
 
 - status:
-  current promoted next line
+  close 済み。helper/report-local preview floor と later emitted place-specific program family の boundary、projection validity report minimum、generated artifact reserve policy、`P15` handoff line を docs-first に固定した。
 
 - macro phase / stage:
   `Macro 6` reserve, `S5 -> S6`
 - objective:
   helper/report-local preview floor と emitted place program / optimizer / equivalence gate を docs-first に切り分ける
 - deliverables:
-  emitted-program stop line、validity report minimum、preview floor と generated artifact family の境界
+  emitted-program stop line、projection validity report minimum、preview floor と generated place-specific program family の境界、actual emitted place-specific program family は `P15` に残す handoff line
 - validation command:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json`
   `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `python3 -m unittest scripts.tests.test_sugoroku_world_samples`
+  `cargo test -p mir-runtime --test clean_near_end_samples`
+  `find samples/generated -maxdepth 3 -type f | sort`
   `python3 scripts/validate_docs.py`
 - debug / visualization output:
-  `projection_view`、`cross_place_projection`
+  `projection_view`、`cross_place_projection`、generated artifact reserve inventory
 - docs / report requirement:
-  新しい report、`progress.md`、`tasks.md`、`samples_progress.md`、`plan/20`、relevant docs を同期する
+  新しい report、`progress.md`、`tasks.md`、`samples_progress.md`、`plan/20`、`samples/generated/README.md`、relevant docs を同期する
 - stop line:
-  final projection IR、optimizer、equivalence checker、deployment planner を固定しない
+  final projection IR、actual emitted place-specific program family、optimizer、cross-place equivalence checker、deployment planner を固定しない
 
 ### P4. `TermSignature` registry hardening
 
@@ -337,22 +343,27 @@
 - stop line:
   deployment-grade migration / rollback / durable upgrade engine を premature に固定しない
 
-### P15. projection/codegen first emitted server/client programs
+### P15. projection/codegen first emitted place-specific programs
 
 - macro phase / stage:
   `Macro 7`, `S1 -> S4`
 - objective:
   preview floor から emitted place program への first actualization を行う
 - deliverables:
-  emitted server/client artifact minimum、equivalence review surface、generated artifact policy
+  emitted place-specific artifact minimum、equivalence review surface、generated place-specific program family actualization
 - validation command:
-  `UNRESOLVED`. current guard は `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
+  pre-close guards:
+  `find samples/generated -maxdepth 3 -type f | sort`
+  `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
+  package-close requirement:
+  tranche 自身が concrete emitted-program / equivalent-trace validation command を導入すること。reserve-path check と preview-floor command だけで close を claim しない。
 - debug / visualization output:
-  projection view、place graph、generated artifact inventory
+  projection view、place graph、generated place-specific program inventory
 - docs / report requirement:
   新しい report、`samples_progress.md`、projection docs を同期する
 - stop line:
-  final optimizer / equivalence checker / deployment planner を freeze しない
+  final optimizer / cross-place equivalence checker / deployment planner を freeze しない
 
 ### P16. visual debugger / viewer first public prototype
 

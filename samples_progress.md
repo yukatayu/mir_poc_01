@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 09:34 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、typed external residual reopen matrix を fixed し、`P3` projection emitted-program gate と `P4` `TermSignature` hardening を次段に揃える
-Current active packages: `P3` Projection / placement residual emitted-program gate
+Last updated: 2026-04-28 09:51 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor を維持したまま、projection validity report minimum / generated artifact reserve policy を fixed し、`P4` `TermSignature` hardening と `P5` `LayerSignature` hardening を次段に揃える
+Current active packages: `P4` `TermSignature` registry hardening
 
 ## Legend
 
@@ -31,7 +31,7 @@ Progress:
 | External adapters | 75 | synthetic preview helper + residual review closed | `EXT-03` / `EXT-04` synthetic preview subset を維持しつつ `EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen matrix を fixed 済みとして保つ | `python3 scripts/typed_external_boundary_samples.py closeout --format json` |
 | Network transport | 75 | helper-local canary family | `NET-01..05` helper-local canary を維持しつつ real socket / durable replay を deferred に保つ | `python3 scripts/network_transport_samples.py closeout --format json` |
 | Visualization | 90 | helper-local + report-local first cut | `visualization_views` / `telemetry_rows` / redaction naming を維持 | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` |
-| Projection / placement | 75 | helper-local + report-local preview floor | `projection_view` と `cross_place_projection` を維持しつつ emitted-program gate を docs-first に残す | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` |
+| Projection / placement | 75 | helper-local + report-local preview floor + emitted-program gate closed | `projection_view` と `cross_place_projection` を維持しつつ validity report minimum / generated artifact reserve policy を docs-first に固定した | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` |
 | Hot-plug package | 75 | helper-local lifecycle canary | `hotplug_lifecycle` / `--debug hotplug` / attach-detach telemetry を維持しつつ real migration を deferred に保つ | `python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --format json` |
 
 ## Active sample matrix
@@ -51,8 +51,8 @@ Progress:
 | `FAIRY-06` | avatar follow | `samples/clean-near-end/avatar-follow/06_model_check_no_detached_anchor_observed.mir` | active representative canary | 90 | verification | 2026-04-28 03:27 JST | `0917`, `0930`, `0945` | detached-anchor safety verification bridge |
 | `AUTH-01` | auth seam | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local envelope carrier | 90 | positive + negative | 2026-04-27 23:24 JST | `0921`, `0941` | local queue baseline with `auth none`, membership freshness, capability refs, witness refs |
 | `VIS-01` | visualization | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local view/telemetry carrier | 90 | positive | 2026-04-27 23:24 JST | `0922`, `0942` | label / authority / redaction を持つ evidence-oriented view |
-| `PRJ-01` | projection / placement | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local projection preview | 75 | positive | 2026-04-27 23:24 JST | `0924`, `0942` | `projection_view` で system source から place split と observer view refs を visible にする。final emitted place program ではない |
-| `PRJ-02` | projection / placement | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | report-local provider placement preview | 75 | positive | 2026-04-27 23:24 JST | `0924`, `0942` | `cross_place_projection` で authority placement と provider placement を分けて visible にする |
+| `PRJ-01` | projection / placement | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | helper-local projection preview | 75 | positive | 2026-04-28 09:51 JST | `0924`, `0942`, `0948` | `projection_view` で system source から place split と observer view refs を visible にする。final emitted place program ではない |
+| `PRJ-02` | projection / placement | `samples/clean-near-end/order-handoff/05_delegated_rng_service.mir` | report-local provider placement preview | 75 | positive | 2026-04-28 09:51 JST | `0924`, `0942`, `0948` | `cross_place_projection` で authority placement と provider placement を分けて visible にする |
 
 ## Base corpus / planned / spec-only matrix
 
@@ -70,7 +70,7 @@ Progress:
 | `EXT-03/04` | typed external boundary | `samples/not_implemented/typed-external-boundary/`, `scripts/typed_external_boundary_samples.py` | synthetic preview helper subset | 75 | positive + negative | 2026-04-28 09:26 JST | `0941`, `0945`, `0946` | typed adapter failure lane、envelope split、redacted visualization lane |
 | `PH10` | MessageEnvelope / auth seam | Sugoroku helper、clean near-end runtime report | helper-local + report-local carrier | 90 | positive + negative | 2026-04-27 23:24 JST | `0921` | transport / auth / membership / capability / witness を collapse しない baseline |
 | `PH11` | TermSignature / LayerSignature | Sugoroku helper、clean near-end runtime report | helper-local + report-local inventory | 90 | positive | 2026-04-27 15:59 JST | `0918`, `0919` | final shared law schema ではない first cut |
-| `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/hands_on/projection_placement_views_01.md` | helper/report-local preview floor | 75 | positive | 2026-04-27 23:24 JST | `0924`, `0942` | preview floor only。final emitted program / optimizer / equivalence checker は deferred |
+| `PH12` | projection / placement | `plan/20-projection-and-placement-roadmap.md`, `docs/hands_on/projection_placement_views_01.md` | helper/report-local preview floor + docs-first emitted-program gate | 75 | positive | 2026-04-28 09:51 JST | `0924`, `0942`, `0948` | preview floor に加えて validity report minimum / generated artifact reserve policy / `P15` handoff line を fixed。actual emitted program family は deferred |
 | `PH13` | network transport | `scripts/network_transport_samples.py`, `samples/not_implemented/network-transport/` | helper-local canary family + planned source family | 75 | positive + negative | 2026-04-28 03:27 JST | `0926`, `0929`, `0932`, `0945` | local queue / loopback / reconnect / typed failure / redacted route trace |
 | `NET-01` | network transport | `scripts/sugoroku_world_samples.py --transport loopback_socket` | helper-local loopback preview | 75 | positive + negative | 2026-04-28 03:27 JST | `0929`, `0932`, `0945` | same-process parity preview |
 | `NET-02..05` | network transport | `scripts/network_transport_samples.py` | helper-local canary family | 75 | positive + negative | 2026-04-28 03:27 JST | `0932`, `0945` | subprocess JSON bridge / stale reconnect reject / typed failure / redacted route trace |
@@ -87,7 +87,7 @@ Progress:
 | `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar slice の active floor | pass 2026-04-28 03:27 JST |
 | `E2E-TYPED-EXTERNAL-TARGET` | source stub -> adapter preview -> anchor comparison | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper self-consistency + anchor comparison の current floor。phase 9 `.mir` direct execution ではない | pass 2026-04-28 09:26 JST |
 | `E2E-TRANSPORT-CANARY` | loopback / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 75 | helper-local transport canary family | pass 2026-04-28 03:27 JST |
-| `E2E-PROJECTION-TARGET` | system source -> emitted place program -> equivalent trace | future target: current `PRJ-01` / `PRJ-02` preview floor + later emitted-program runner | 10 | compositional projection E2E は still later。current package で actualize したのは helper/report-local preview floor だけ | target only |
+| `E2E-PROJECTION-TARGET` | system source -> emitted place program -> equivalent trace | future target: current `PRJ-01` / `PRJ-02` preview floor + later emitted-program runner | 10 | compositional projection E2E は still later。`P3` current package で actualize したのは preview floor と emitted-program gate の docs-first boundaryだけ | target only |
 
 ## Build / storage environment
 
@@ -102,7 +102,7 @@ Progress:
 | Blocker | Layer | Severity | Owner | Next action |
 |---|---|---|---|---|
 | final public adapter / host schema scope | typed external boundary | high | user + repo | residual reopen matrix は fixed 済みとし、host-facing contract 本体は `P12` / `P18` に残す |
-| emitted program / equivalence checker gate | projection / placement | high | repo | helper/report preview と final artifact family を docs-first に切り分ける |
+| actual emitted program / cross-place equivalence checker family | projection / placement | high | repo | `P3` docs-first boundary は fixed 済みとし、`P15` で emitted family / generated artifact inventory / equivalence review surface を actualize する |
 | `FAIRY-05` carrier bundling | avatar follow | medium | repo | explicit state timeline / anchor switch evidence を保ったまま `UNRESOLVED` を解く |
 | real migration / rollback | hot-plug | medium | repo | helper-local lifecycle canary の先に attachpoint migration contract を切り出す |
 | real socket / durable replay | network transport | high | repo + user | helper-local canary を維持しつつ production transport line は defer する |
@@ -112,6 +112,17 @@ Progress:
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-28 09:51 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json` | pass | helper-local `projection_view` は preview-only のまま、place split / authority place / observer view refs を返す |
+| 2026-04-28 09:51 JST | `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json` | pass | projection gate close後も visualization lane が壊れていないことを確認 |
+| 2026-04-28 09:51 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | pass | report-local `cross_place_projection` が authority/provider placement split を維持していることを確認 |
+| 2026-04-28 09:51 JST | `python3 -m unittest scripts.tests.test_sugoroku_world_samples` | pass | helper-side projection preview regression guard を含めて green |
+| 2026-04-28 09:51 JST | `cargo test -p mir-runtime --test clean_near_end_samples` | pass | runtime-side `cross_place_projection` / layer inventory regression guard を含めて green |
+| 2026-04-28 09:51 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | Sugoroku closeout でも `projection_view` は preview-only carrier のまま |
+| 2026-04-28 09:51 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | clean near-end closeout でも `cross_place_projection` は report-local preview carrier のまま |
+| 2026-04-28 09:51 JST | `find samples/generated -maxdepth 3 -type f | sort` | pass | generated reserve path は `samples/generated/README.md` のみで、actual emitted artifact は未配置 |
+| 2026-04-28 09:51 JST | `python3 scripts/check_source_hierarchy.py` | pass | `P3` closeout 後も required source hierarchy is intact |
+| 2026-04-28 09:51 JST | `python3 scripts/validate_docs.py` | pass | `P3` queue promotion / generated reserve policy 追記後も docs scaffold は current line と整合 |
+| 2026-04-28 09:51 JST | `git diff --check` | pass | `P3` closeout docs/report edits後も whitespace-clean |
 | 2026-04-28 09:26 JST | `python3 -m unittest scripts.tests.test_typed_external_boundary_samples` | pass | pretty `list` / `check-all` / `closeout` と `residual_review_matrix` regression を含めて green |
 | 2026-04-28 09:26 JST | `python3 scripts/typed_external_boundary_samples.py list` | pass | default pretty `list` formatting bug を修正し、preview subset と residual family split を human-readable に確認 |
 | 2026-04-28 09:26 JST | `python3 scripts/typed_external_boundary_samples.py check-all` | pass | default pretty `check-all` formatting bug を修正し、`EXT-03` / `EXT-04` helper subset current floor を再確認 |

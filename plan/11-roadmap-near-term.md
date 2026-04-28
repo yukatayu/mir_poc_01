@@ -27,8 +27,10 @@
 - `docs/reports/0942-*` は `Projection / placement executable widening` closeout を表し、Sugoroku helper `projection_view` / `--debug projection` と clean near-end runtime report-local `cross_place_projection` を current line に actualize した
 - `docs/reports/0945-mirrorea-next-stage-plan-integration.md` は next-stage future-plan integration / next package queue stabilization closeout を表し、handoff 由来の queue numbering と source-hierarchy current reading を repo へ再同期した
 - `docs/reports/0946-*` は `P2` Typed external boundary residual planned family review closeout を表し、typed external residual reopen matrix と helper pretty command floor を current line に actualize した
-- current promoted next package は `P3` Projection / placement residual emitted-program gate
-- next reopen point は `P4` `TermSignature` registry hardening
+- `docs/reports/0947-*` は `P3` wording drift inspection を表し、queue precision と overclaim risk を inspection report として残した
+- `docs/reports/0948-*` は `P3` Projection / placement residual emitted-program gate closeout を表し、projection validity report minimum、generated artifact reserve policy、`P15` handoff line を current docs に actualize した
+- current promoted next package は `P4` `TermSignature` registry hardening
+- next reopen point は `P5` `LayerSignature` system hardening
 
 ## stabilized queue
 
@@ -36,15 +38,13 @@
    - close 済み。stale active reference、source hierarchy、front-door docs drift を再確認する。
 2. `P1` Repository layer map and `samples_progress.md` stabilization
    - close 済み。repo taxonomy、active/planned/archive/generated boundary、dashboard discipline を再同期する。
-3. `P3` Projection / placement residual emitted-program gate
-   - helper/report-local preview floor と final emitted program family を混同しない residual gate を切る。
-4. `P4-P7` carrier hardening
+3. `P4-P7` carrier hardening
    - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence`、`VisualizationProtocol / VisualizationSecurity`
-5. `P8-P9` representative slice hardening
+4. `P8-P9` representative slice hardening
    - Sugoroku runtime attach と avatar fairy follow residual gate
-6. `P10-P17` first real implementation tranche
+5. `P10-P17` first real implementation tranche
    - `mirrorea-core`、logical multi-place runtime、external adapter、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
-7. `P18` public API / parser grammar gate
+6. `P18` public API / parser grammar gate
    - final public freeze は最後の mixed gate に残す
 
 ## mixed gate

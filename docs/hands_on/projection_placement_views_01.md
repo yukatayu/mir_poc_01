@@ -15,6 +15,7 @@
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json
 python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug visualization --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json
+find samples/generated -maxdepth 3 -type f | sort
 ```
 
 ## 何を見るか
@@ -46,12 +47,19 @@ authority place / participant place / observer view refs を separate lane で�
 ここで見ているのは、projection を provider-boundary lane と結びつけても、
 transport / auth / witness / placement を 1 つの implicit carrier に潰していないことです。
 
+### generated artifact reserve
+
+`find samples/generated -maxdepth 3 -type f | sort` は、
+current repo が emitted place-specific program family をまだ committed sample として持っていないこと、
+`samples/generated/README.md` だけが reserve policy を示していることを確認するための current guard です。
+
 ## これで確認できること
 
 - helper-local preview でも `Place` の split を明示できること
 - projection / placement が visualization / envelope / membership frontier と接続して読めること
 - provider placement と authority placement を distinct に保てること
 - projection preview を final emitted place program と混同しない current stop line
+- generated place-specific program family が reserve path であり、actual emitted place-specific program family は later package だと読めること
 
 ## これではまだ確認できないこと
 

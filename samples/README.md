@@ -33,6 +33,7 @@
 - `prototype/` は historical anchor / compatibility reference であり、active canonical path ではない
 - `old/` は archive
 - `generated/` は future reserve path であり、source sample を置かない
+  - projection / placement の emitted place-specific program family も later package (`P15`) までは reserve 扱いに保つ
 
 ## current commands
 
