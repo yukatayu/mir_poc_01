@@ -1099,7 +1099,7 @@ P9. Avatar fairy follow hardening
 P10. `mirrorea-core` first real implementation tranche
   - close 済み。`LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation を `mirrorea-core` に actualize した。
 P11. logical multi-place runtime / emulator tranche
-  - started。current third cut では `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell`、shell-backed `add_initial_participant` / `add_participant` / `leave_participant` parity helper を `mirrorea-core` に actualize し、`WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / event-timeline-view catalog は kept-later に残す。
+  - current third cut は actualize 済みである。`MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell`、shell-backed `add_initial_participant` / `add_participant` / `leave_participant` parity helper を `mirrorea-core` に actualize し、`WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` / event-timeline-view catalog は kept-later に残す。
 P12. external adapter / host boundary tranche
   - current first cut close 済み。typed external helper subset / closeout に `host_boundary_scope`、`host_boundary_lanes`、`non_collapse_lanes`、`host_family_gates`、`host_boundary_inventory` を actualize し、helper-local host-facing adapter seam inventory を tighten した。`engine-abi` は placeholder のままに残す。
 P13. network transport minimal alpha
@@ -1115,9 +1115,10 @@ P17. storage / LLVM / backend preparation
   - external workdir、LLVM、backend target、cleanup safety を implementation-ready に寄せる。
   - current first-cut closeout では `scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`plan/23`、`docs/hands_on/compiler_backend_llvm_preparation_01.md` を通じて owner/writable probe と cleanup guard を actualize してよい。actual LLVM build、ownership repair、backend freeze は kept-later に残す。
 P18. public API / parser grammar gate
-  - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
+  - repo-side first cut は close 済みとし、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize してよい。
+  - actual final parser grammar、actual final public parser / checker / runtime / verifier API、actual final public adapter / viewer / projection / hot-plug / transport ABI は still later に残す。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` / `P17` current first-cut closeout は close し、`P11` current third cut は actualize 済み、next promoted package は `P18`、next reopen point は `P18` 後段の true user-spec hold line である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9`、`P10`、`P12` current first cut と `P13` / `P14` / `P15` / `P16` / `P17` current first-cut closeout は close し、`P11` current third cut は actualize 済み、`P18` repo-side first cut も close 済みであり、next line は post-`P18` true user-spec hold line である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 

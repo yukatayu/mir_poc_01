@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 19:11 JST
+最終更新: 2026-04-28 19:52 JST
 
 ## この文書について
 
@@ -20,8 +20,8 @@
 - `P15` projection/codegen first emitted place-specific programs の current first cut は close 済みで、`scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` によって committed generated bridge evidence / live-anchor alignment / `kept_later_gates` を current line に actualize 済みです。
 - `P16` visual debugger / viewer first public prototype の current first cut は close 済みで、`scripts/visual_debugger_viewer_samples.py`、`plan/26-visual-debugger-viewer-roadmap.md`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`kept_later_gates` によって typed public prototype inventory over helper/runtime surfaces を current line に actualize 済みです。
 - `P17` storage / LLVM / backend preparation の current first cut も close 済みで、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` によって external workdir / cleanup / LLVM staging ownership mismatch を non-destructive probe floor として current line に actualize 済みです。
-- current promoted next line は **`P18` public API / parser grammar gate** です。
-- next reopen point は **`P18` 後段の true user-spec hold line** です。
+- current promoted next line は **post-`P18` true user-spec hold line** です。
+- next reopen point は **packaging / installed binary / FFI / engine adapter / final shared-space operational catalog の actual commitment** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -58,7 +58,7 @@
 | `P15` projection/codegen emitted programs | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | preview floor -> committed generated bridge evidence + alignment surface |
 | `P16` visual debugger / viewer prototype | `Macro 7` | `S1 -> S4` | closed (first cut) | closed | typed public prototype inventory over helper/runtime surfaces |
 | `P17` storage / LLVM / backend preparation | `Macro 7` | `S3 -> S5` | closed (first cut) | closed | guardrail -> implementation-ready staging closeout |
-| `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | promoted next mixed gate | 1-3 tasks + user hold | repo-side freeze checklist first; final freeze remains last |
+| `P18` public API / parser grammar gate | `Macro 7` mixed gate | `S0 -> S3` | closed (repo-side first cut) | closed for repo-side scope | freeze checklist / public-boundary inventory / hold-line split fixed; final freeze remains last |
 
 ### P0. Current-state audit and source-hierarchy validation
 
@@ -353,7 +353,7 @@
 ### P11. logical multi-place runtime tranche
 
 - status:
-  started。current third cut では `crates/mirrorea-core` に `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed `add_initial_participant` / `add_participant` / `leave_participant` parity helper を actualize し、helper-local emulator 全体を丸ごと移す前に crate-side runtime substrate の thin composition frontier を切り出し始めた。
+  close 済み。current third cut では `crates/mirrorea-core` に `MembershipRegistry` typed source-of-truth substrate、`PlaceCatalog` logical multi-place catalog substrate、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed `add_initial_participant` / `add_participant` / `leave_participant` parity helper を actualize し、helper-local emulator 全体を丸ごと移す前に crate-side runtime substrate の thin composition frontier を切り出した。
 
 - macro phase / stage:
   `Macro 6-7`, `S1 -> S4`
@@ -545,22 +545,31 @@
 ### P18. public API / parser grammar gate
 
 - status:
-  promoted next mixed gate。`P17` close 後に final public freeze 条件と repo-side public-boundary inventory を定義するが、prior package 未成熟のまま public contract を固めない。
+  close 済み。repo-side first cut として final freeze checklist、public-boundary inventory、mixed gate と true user-spec hold line の分離を `plan/27-public-api-parser-gate-roadmap.md` と関連 snapshot docs に固定した。actual final parser grammar や actual final public API は still later に残す。
 
 - macro phase / stage:
   `Macro 7` mixed gate, `S0 -> S3`
 - objective:
-  final parser grammar、public API、public verifier / viewer / adapter contract の freeze 条件を定義する
+  final parser grammar、public API、public verifier / viewer / adapter contract を premature に freeze しないための repo-side checklist と boundary inventory を定義する
 - deliverables:
-  final freeze checklist、mixed gate と true user-spec gate の切り分け
+  final freeze checklist、public-boundary inventory、mixed gate と true user-spec gate の切り分け、preview/prototype/evidence qualifier の再確認
 - validation command:
-  `UNRESOLVED`. prior packages の closeout と user-spec gate の充足が前提。repo-side first cut では freeze checklist / boundary inventory / residual hold-line consistency を確認する
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+  `python3 scripts/network_transport_samples.py closeout --format json`
+  `python3 scripts/projection_codegen_samples.py closeout --format json`
+  `python3 scripts/visual_debugger_viewer_samples.py closeout --format json`
+  `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`
+  `bash scripts/env/mirrorea_storage_env.sh`
+  `git diff --check`
 - debug / visualization output:
   final freeze checklist 自体。runtime debug lane は前段 package の成果を参照する
 - docs / report requirement:
   新しい report、`progress.md`、`tasks.md`、`samples_progress.md`、relevant `specs/` / `plan/` を同期する
 - stop line:
-  `P10-P17` 未成熟のまま final parser / public API / public verifier を freeze しない
+  actual final parser grammar / public API / public verifier / public adapter / public viewer / installed-binary commitment を `P18` repo-side first cut と混同しない
 
 ## research を通して見つけること
 
@@ -581,7 +590,7 @@
 - 主要な選択肢:
   repo-local helper 優先のまま進める / early public-contract drafting を始める
 - current recommendation / 見解:
-  まだ repo-local helper と docs-first carrier に留め、public contract は mixed gate に残す
+  repo-side framingは `P18` で済ませたので、actual public contract commitment は post-`P18` user-spec hold line として扱う
 
 ### Blocker 2. packaging / FFI / host integration target
 
@@ -592,7 +601,7 @@
 - 主要な選択肢:
   CLI / library / engine-adapter / hybrid
 - current recommendation / 見解:
-  current task では固定せず、backend / LLVM preparation の後に user-spec gate として reopen する
+  current task では固定せず、backend / LLVM preparation と `P18` repo-side framingの後に user-spec gate として reopen する
 
 ### Blocker 3. final shared-space operational catalog
 

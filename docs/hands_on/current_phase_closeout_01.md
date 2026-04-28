@@ -133,6 +133,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## remaining mixed gate
 
+- final parser grammar / public parser / checker / runtime / verifier surface
 - final public auth / visualization / projection / hot-plug surface
 - final public adapter / exact host schema
 - final public viewer API / visualization schema / telemetry schema
@@ -150,9 +151,12 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 
 ## next queue
 
-1. `P18` public API / parser grammar gate
+1. post-`P18` true user-spec hold line
+   - packaging / installed binary / FFI / engine adapter / final shared-space operational catalog の actual commitment
+2. repo-side current inventory maintenance
+   - `plan/27-public-api-parser-gate-roadmap.md`、`../research_abstract/public_api_parser_gate_plan_01.md`、`public_api_parser_gate_01.md`
 
-`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout は close 済みです。
+`P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` Typed external boundary residual planned family review、`P3` Projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening、`P10` `mirrorea-core` first real implementation tranche、`P11` logical multi-place runtime tranche の current third cut、`P12` external adapter / host boundary tranche の current first cut、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout、`P18` public API / parser grammar gate の repo-side first-cut closeout は close 済みです。
 後続の full queue は `tasks.md` と `progress.md` の current snapshot を参照してください。
 
 ## 関連文書
@@ -166,6 +170,9 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - `projection_placement_views_01.md`
 - `visual_debugger_viewer_01.md`
 - `compiler_backend_llvm_preparation_01.md`
+- `public_api_parser_gate_01.md`
+- `../research_abstract/public_api_parser_gate_plan_01.md`
 - `../research_abstract/compiler_backend_llvm_preparation_01.md`
 - `../../plan/19-repository-map-and-taxonomy.md`
+- `../../plan/27-public-api-parser-gate-roadmap.md`
 - `../../samples_progress.md`

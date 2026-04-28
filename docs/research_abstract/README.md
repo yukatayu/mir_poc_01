@@ -27,6 +27,7 @@
 - `phase5-small-decidable-core-and-proof-boundary.md`
 - `phase6-compile-ready-minimal-actualization.md`
 - `mirrorea_future_axis_01.md`
+- `public_api_parser_gate_plan_01.md`
 - `typed_external_boundary_adapter_plan_01.md`
 - `projection_placement_plan_01.md`
 - `hotplug_attachpoint_plan_01.md`
@@ -92,7 +93,7 @@
 
 ## current reading の要点
 
-2026-04-27 時点では、次が active line です。
+2026-04-28 時点では、次が active line です。
 
 - active canonical sample は `samples/clean-near-end/`
 - first strong typing layer は finite decidable index fragment
@@ -111,6 +112,7 @@
 - `Network transport` の docs-first plan も close 済みであり、`plan/22-network-transport-roadmap.md` と `docs/research_abstract/network_transport_plan_01.md` を current anchor にする
 - `Network transport helper-local canaries` も close 済みであり、`scripts/network_transport_samples.py`、`samples/clean-near-end/network-transport/README.md`、`../hands_on/network_transport_canaries_01.md` を current executable anchor にする
 - `Compiler/backend/LLVM preparation` guardrail も close 済みであり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` と `docs/research_abstract/compiler_backend_llvm_preparation_01.md` を current anchor にする
+- `P18` public API / parser grammar gate の repo-side first cut も close 済みであり、`plan/27-public-api-parser-gate-roadmap.md` と `public_api_parser_gate_plan_01.md` を current public-boundary inventory / mixed-gate split の anchor にする
 - `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
 - avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で widened active representative slice を持つ
 - `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、現在は `FAIRY-05` reacquire-after-return だけを残す reader-facing plan anchor である
@@ -119,6 +121,7 @@
 
 - final public parser grammar
 - final public parser / checker / runtime / verifier API
+- final public adapter / transport / viewer / projection / hot-plug surface
 - full dependent type theory
 - concrete theorem / model-check production binding
 - final public witness / provider / emitted-artifact contract

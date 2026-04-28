@@ -9,6 +9,7 @@
   - 規範判断の正本ではない。意味論や decision の正本は `specs/` に残る。
   - current repo の現在地や PoC 検証基盤の call chain を素早く掴みたい場合は `plan/00-index.md` から読む。
   - `plan/19-repository-map-and-taxonomy.md` は、repo の current layer-aware map、sample/script taxonomy、staged migration plan を repository memory として整理する文書である。
+  - `plan/27-public-api-parser-gate-roadmap.md` は、`P18` public API / parser grammar gate の repo-side first-cut closeout を repository memory として整理する文書である。
 - `progress.md`
   - rough progress snapshot、current mainline、phase / autonomy gate の mirror である。
   - 規範判断の正本ではない。status / remaining step / current phase を素早く掴みたいときに先に読む。
@@ -30,6 +31,7 @@
   - 規範判断の正本ではない。quick recap 用であり、厳密な判断根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
   - current snapshot では、phase 0 / 1 / 2 / 3 / 4 / 5 / 6 の summary に加え、clean near-end typing / order-model / modal / Lean の summary と `_detail` を置く。
   - `mirrorea_future_axis_01.md` は、Mirrorea future-axis の current queue と stop line を reader-facing に短く読むための summary である。
+  - `public_api_parser_gate_plan_01.md` は、`P18` repo-side freeze checklist / public-boundary inventory / true user-spec hold line split を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -37,7 +39,8 @@
   - hands-on 文書は規範判断を追加しない。sample code、helper output、既存 specs / plan / reports の current reading を分かりやすく説明する導線である。
 - `docs/hands_on/`
   - current runnable floor と remaining mixed gate を、短い command sequence 付きで読むための landing page である。
-  - `current_phase_closeout_01.md` は 2026-04-27 時点の current phase closeout guide であり、規範判断を追加せず current sample / helper / report / storage guardrail の読みを束ねる。
+  - `current_phase_closeout_01.md` は 2026-04-28 時点の current phase closeout guide であり、規範判断を追加せず current sample / helper / report / storage guardrail の読みを束ねる。
+  - `public_api_parser_gate_01.md` は、`P18` repo-side first-cut closeout の最短 command path を reader-facing にまとめた landing page である。
   - `avatar_fairy_follow_representative_slice_01.md` は、phase 8 active representative slice を最短コマンドで追うための landing page である。
   - `typed_external_boundary_canaries_01.md` は、phase 9 synthetic preview helper subset を最短コマンドで追うための landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。

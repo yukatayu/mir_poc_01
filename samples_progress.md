@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-04-28 19:11 JST
-Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor、viewer typed public prototype inventory、storage/backend current first-cut closeout を保ったまま、`P18` public API / parser grammar gate の repo-side freeze checklist / public-boundary inventory を mixed gate と true user-spec hold line に分けて整理する
-Current active packages: `P18` public API / parser grammar gate (`promoted next mixed gate`; packaging / installed binary / FFI / engine adapter / final shared-space operational catalog は post-`P18` true user-spec hold line)
+Last updated: 2026-04-28 19:52 JST
+Current repo-local focus: clean near-end current layer と Sugoroku world / avatar follow representative slice の runnable floor、viewer typed public prototype inventory、storage/backend current first-cut closeout を保ったまま、`P18` repo-side first-cut closeout で fixed した freeze checklist / public-boundary inventory / hold-line split を維持し、post-`P18` true user-spec hold line を明示的に残す
+Current active packages: post-`P18` true user-spec hold line framing (`P18` repo-side first cut は close 済み。packaging / installed binary / FFI / engine adapter / final shared-space operational catalog は actual commitment 未着手)
 
 ## Legend
 
@@ -40,7 +40,7 @@ Progress:
 
 | Sample ID | Layer | Path | Kind | Progress | Positive/Negative | Last validation | Docs | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 19:11 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967`, `0968`, `0969`, `0970`, `0971`, `0972` | source hierarchy と report discipline の current floor |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-28 19:52 JST | `0913`, `0920`, `0943`, `0945`, `0955`, `0956`, `0957`, `0958`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965`, `0966`, `0967`, `0968`, `0969`, `0970`, `0971`, `0972`, `0973` | source hierarchy と report discipline の current floor |
 | `PH1` | Mir core | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-27 15:59 JST | `0904`, `0913` | final parser / public API deferred |
 | `PH6` | compile-ready minimal actualization | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-28 15:32 JST | `0904`, `0913`, `0945`, `0959`, `0960`, `0961`, `0962`, `0963`, `0964`, `0965` | public shell / packaging deferred。`P10` で `mirrorea-core` minimal carrier ownership cut と `transport == transport_seam` compatibility invariant、`P11` で `MembershipRegistry` / `PlaceCatalog` substrate、bootstrap/epoch guard、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed bootstrap / join / leave parity helper が actualize 済み |
 | `SUG-01` | Sugoroku runtime attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-28 13:09 JST | `0909`, `0916`, `0931`, `0945`, `0955` | runtime attach floor + helper-local attachpoint compatibility / activation evidence。current closeout では `world_surface` と `MembershipRegistry` source-of-truth の anchor にもなる |
@@ -108,18 +108,28 @@ Progress:
 
 | Blocker | Layer | Severity | Owner | Next action |
 |---|---|---|---|---|
-| final public adapter / host schema scope | typed external boundary | high | user + repo | residual reopen matrix は fixed 済みとし、host-facing contract 本体は `P18` に残す |
+| final parser / public verifier / public-boundary freeze scope | public-freeze mixed gate | high | repo + user | `P18` repo-side first cut は close 済み。helper-local threshold / prototype / inventory を final freeze evidence と混同せず、actual commitment は post-`P18` line に残す |
+| final public adapter / host schema scope | typed external boundary | high | user + repo | residual reopen matrix と `host_boundary_inventory` は fixed 済み。host-facing contract 本体は post-`P18` line に残す |
 | actual emitted executable family / optimizer / deployment planner beyond manifest bridge | projection / placement | high | repo | `P15` current first cut は committed generated bridge evidence only として close 済み。final emitted executable family と optimizer / planner は kept-later gate に残す |
-| final public viewer contract / retention policy / multi-tenant telemetry service | visualization / telemetry | high | repo + user | `P7` current scope は close 済みとして保ち、public contract 自体は `P18` に残す |
+| final public viewer contract / retention policy / multi-tenant telemetry service | visualization / telemetry | high | repo + user | `P7` current scope と `P16` typed public prototype inventory は close 済みとして保ち、public contract 自体は post-`P18` line に残す |
 | `FAIRY-05` carrier bundling | avatar follow | medium | repo | explicit state timeline / anchor switch evidence を保ったまま `UNRESOLVED` を解く |
 | real migration / rollback | hot-plug | medium | repo | helper-local lifecycle canary の先に attachpoint migration contract を切り出す |
 | real socket / durable replay | network transport | high | repo + user | helper-local canary を維持しつつ production transport line は defer する |
-| actual LLVM build / backend choice | compiler / backend | medium | user + repo | `P17` first-cut closeout は完了済み。guardrail を壊さず、backend target と actual build は post-`P18` line で決める |
+| actual LLVM build / backend choice | compiler / backend | medium | user + repo | `P17` first-cut closeout と `P18` inventory framingは完了済み。guardrail を壊さず、backend target と actual build は post-`P18` line で決める |
 
 ## Recent validation
 
 | Date | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-28 19:41 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | `message_envelope_scope = representative_slice`、`signature_lanes = kind / name / evidence_role`、`hotplug_scope = helper_local_package_manager_preview` を維持し、`P18` repo-side inventory の representative anchor として再確認 |
+| 2026-04-28 19:41 JST | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | pass | `host_boundary_scope = helper_local_synthetic_preview`、`host_boundary_lanes = request / receipt / failure / visualization`、residual reopen matrix を再確認し、final public adapter contract ではないことを current line に維持 |
+| 2026-04-28 19:41 JST | `python3 scripts/network_transport_samples.py closeout --format json` | pass | `transport_scope = helper_local_process_boundary` と `process_boundary_canaries = [NET-02, NET-03, NET-04, NET-05]` を維持し、transport non-collapse boundary を再確認 |
+| 2026-04-28 19:41 JST | `python3 scripts/projection_codegen_samples.py closeout --format json` | pass | `artifact_boundary = committed manifest bridge evidence only` と `generated_bridge_artifact_inventory` を維持し、final emitted executable program 未着手 line を再確認 |
+| 2026-04-28 19:41 JST | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | pass | `prototype_boundary = typed public prototype inventory over helper/runtime surfaces; not a final public viewer API` と `viewer_panel_lanes` / `viewer_telemetry_lanes` を再確認 |
+| 2026-04-28 19:41 JST | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json` | pass | canonical `message_envelope_scope = clean_near_end_canonical_inventory`、`transport_seams = provider_boundary / audit_trace_boundary`、`LayerSignature` / visualization / telemetry inventories を維持 |
+| 2026-04-28 19:52 JST | `python3 scripts/check_source_hierarchy.py` | pass | reviewer follow-up と `plan/11` chronology fix 後も required hierarchy is intact |
+| 2026-04-28 19:52 JST | `python3 scripts/validate_docs.py` | pass | docs scaffold is complete。numbered reports は 971 |
+| 2026-04-28 19:52 JST | `git diff --check` | pass | reviewer follow-up を含む `P18` repo-side first-cut closeout diff は whitespace-clean |
 | 2026-04-28 19:11 JST | `python3 scripts/check_source_hierarchy.py` | pass | report `0972` 追加後も required hierarchy is intact |
 | 2026-04-28 19:11 JST | `python3 scripts/validate_docs.py` | pass | docs scaffold is complete。numbered reports は 970 |
 | 2026-04-28 19:11 JST | `git diff --check` | pass | `P17` closeout diff は whitespace-clean |

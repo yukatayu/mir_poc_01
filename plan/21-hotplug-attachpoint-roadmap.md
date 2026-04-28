@@ -92,4 +92,7 @@ current helper closeout に
 
 transport widening は `plan/22-network-transport-roadmap.md` に切り出した。
 hot-plug lifecycle は transport widening と分けたまま保つ。
-`P14` current first-cut closeout 後の current snapshot では、next promoted package は `P15` projection/codegen first emitted place-specific programs であり、current safest first cut は helper/report/generated-reserve closeout hardening に留める。next reopen point は `P16` visual debugger / viewer first public prototype である。
+`P14 -> P15 -> P16 -> P17 -> P18` の repo-global queue 自体はすでに進んでいる。
+この文書では queue の正本を持たず、hot-plug 固有 memory だけを保持する。
+repo-global current line は `progress.md`、`tasks.md`、`plan/11-roadmap-near-term.md`、
+post-`P18` mixed-gate memory は `plan/27-public-api-parser-gate-roadmap.md` を参照する。

@@ -17,7 +17,12 @@
   既存 helper/runtime surface を **typed panel / typed telemetry** として
   public-prototype shape へ正規化すること
 - current public prototype helper は `scripts/visual_debugger_viewer_samples.py`
-- `P16` current first-cut closeout 自体は close 済みであり、current promoted next package は `P17` storage / LLVM / backend preparation、next reopen point は `P18` public API / parser grammar gate である
+- `P16` current first-cut closeout 自体は close 済みであり、
+  repo-global queue は `P17` / `P18` を経て
+  post-`P18` true user-spec hold line へ進んでいる。
+  この文書は viewer 固有 memory に留め、
+  repo-global queue 正本は `progress.md`、`tasks.md`、
+  `plan/27-public-api-parser-gate-roadmap.md` を参照する
 
 ## current input surfaces
 

@@ -209,6 +209,10 @@
      - `UNRESOLVED`: visibility-return witness を timeline event / anchor-switch event / witness event / typed bundle のどれとして carry するか、helper-local CLI/debug surface の exact naming をどうするか。
      - current working assumption として、planning-only candidate label `state_timeline` / `anchor_switch` を使ってよい。ただしこれは final public visualization API ではない。
      - 未決なのは `FAIRY-05` を同じ helper で actualize するか、future visualization / projection / hot-plug lane とどこで接続するか、candidate carrier を別 helper に切る価値があるかである。
+  8. `P18` public API / parser grammar gate で、repo-side inventory と actual final freeze の境界をどこまで current docs に固定するか。
+     - 2026-04-28 時点で repo-side first cut として、current `.mir` surface は companion notation であり final grammar ではないこと、parser-free PoC / helper / crate-local carrier は final public API ではないこと、viewer / adapter / projection / hot-plug / transport / auth の current inventory は qualifier 付き preview/prototype/evidence surface であること、mixed gate と true user-spec hold line の split までは current line に上げてよい。
+     - 2026-04-28 時点で `MessageEnvelope` / `AuthEvidence` lane inventory、viewer / telemetry security envelope、typed external `host_boundary` inventory、projection validity report minimum、hot-plug package-manager inventory、network `process_boundary` inventory、storage guardrail adjacency までは public-boundary inventory として current docs に上げてよい。
+     - 未決なのは、actual final parser grammar、actual final public parser / checker / runtime / verifier API、actual final public adapter / viewer / projection / hot-plug / transport ABI、exact host schema、actual backend choice、installed binary / FFI / engine adapter / final shared-space operational catalog である。
 
 ## PrismCascade
 

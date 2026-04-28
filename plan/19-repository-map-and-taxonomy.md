@@ -35,6 +35,8 @@
   reader-facing summary / hands-on
   - `visual_debugger_viewer_plan_01.md`
     viewer prototype boundary の reader-facing summary
+  - `public_api_parser_gate_plan_01.md`
+    `P18` public-boundary inventory / hold-line split の reader-facing summary
 
 ### code lanes
 
@@ -154,6 +156,8 @@ current recommendation:
   current closeout landing page。詳細な hands-on 本体は当面 `docs/research_abstract/` に残す
   - `visual_debugger_viewer_01.md`
     `P16` typed public prototype inventory landing page
+  - `public_api_parser_gate_01.md`
+    `P18` repo-side freeze checklist / hold-line split landing page
 - `docs/diagrams/`
   Mermaid source
 - `docs/reports/`
