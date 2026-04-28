@@ -1095,7 +1095,7 @@ P7. `VisualizationProtocol` + `VisualizationSecurity`
 P8. Sugoroku runtime attach hardening
   - close 済み。MembershipRegistry source-of-truth、world sugar boundary、late-join/handoff boundary、hot-plug stop line を harden した。
 P9. Avatar fairy follow hardening
-  - `FollowAnchor`、visibility guard、fallback lineage、stale anchor rejection、residual `FAIRY-05` gate を harden する。
+  - close 済み。helper closeout `planned_sample_paths`、`fairy05_reopen_gate`、residual `FAIRY-05` gate の planning-only carrier を harden した。
 P10. `mirrorea-core` first real implementation tranche
   - placeholder crate から first real runtime substrate へ進める。
 P11. logical multi-place runtime / emulator tranche
@@ -1115,7 +1115,7 @@ P17. storage / LLVM / backend preparation
 P18. public API / parser grammar gate
   - final parser grammar、public API、public verifier / viewer / adapter contract の freeze gate を最後に切る。
 
-2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8` は close し、next promoted package は `P9`、next reopen point は `P10` である。
+2026-04-28 時点で `P0`、`P1`、`P2`、`P3`、`P4`、`P5`、`P6`、`P7`、`P8`、`P9` は close し、next promoted package は `P10`、next reopen point は `P11` である。
 
 ## 2026-04-27 phase-sample-progress and storage foundation addendum
 
@@ -1174,6 +1174,7 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `VisualizationProtocol` は helper-local / report-local package として close し、Sugoroku `visualization_views` / `telemetry_rows` / `--debug visualization` と clean near-end `VisualizationView` / `TelemetryRow` inventory を actualize した。
 - `P7` `VisualizationProtocol / VisualizationSecurity` hardening では helper/runtime の view / telemetry security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を追加し、typed telemetry を security boundary の内側に戻した。NET-05 observer route trace は fail-closed とし、raw trace fallback と分離した。
 - `P8` Sugoroku runtime attach hardening では Sugoroku helper closeout に `world_surface = host_server_side_sugar`、`membership_model.source_of_truth = MembershipRegistry`、`membership_model.late_join_handoff_boundary`、`hotplug_stop_line` を追加し、attach / membership / handoff / late join / detach TODO boundary の helper/test/docs contract を explicit にした。
+- `P9` avatar fairy follow hardening では avatar helper closeout に `planned_sample_paths` と `fairy05_reopen_gate = { sample_status = planned_only, required_evidence = [...], carrier_choice = UNRESOLVED, planning_only_candidate_labels = state_timeline / anchor_switch }` を追加し、active representative slice を保ったまま residual `FAIRY-05` gate の planning-only carrier を explicit にした。
 - `Typed external boundary / adapter` は docs-first package として close し、phase 9 planned family `EXT-01..05` と provider-boundary / local-queue evidence anchor を current snapshot に actualize した。
 - `Typed external boundary executable widening` は helper-local package として close し、`scripts/typed_external_boundary_samples.py`、`samples/not_implemented/typed-external-boundary/` を読む synthetic preview subset `EXT-03` / `EXT-04`、residual planned family `EXT-01` / `EXT-02` / `EXT-05`、`envelopes` / `visualization` / `failures` debug surface を current snapshot に actualize した。
 - `Projection / placement` は docs-first package として close し、`plan/20-projection-and-placement-roadmap.md` に system-wide source / place-specific program distinction と validity checklist を actualize した。
@@ -1189,8 +1190,8 @@ external workdir が使える場合はそこへ heavy disposable artifact を置
 - `Projection / placement executable widening` は helper/report-local package として close し、Sugoroku helper `projection_view`、`--debug projection`、clean near-end runtime report-local `cross_place_projection` を current line に actualize した。
 - `Projection / placement residual emitted-program gate` は docs-first boundary package として close し、projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current line に actualize した。
 - `TermSignature` registry hardening は close し、current `signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split を current line に actualize した。
-- current promoted next package は `avatar fairy follow hardening` であり、
-  next reopen point は `mirrorea-core first real implementation tranche` である。
+- current promoted next package は `mirrorea-core first real implementation tranche` であり、
+  next reopen point は `logical multi-place runtime tranche` である。
 
 ## 2026-04-27 repository-structure staging addendum
 

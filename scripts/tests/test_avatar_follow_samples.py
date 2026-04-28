@@ -164,6 +164,52 @@ class AvatarFollowSamplesTests(unittest.TestCase):
             "no_detached_anchor_observed", result["model_check_properties"]
         )
 
+    def test_closeout_records_fairy05_reopen_gate(self) -> None:
+        result = avatar_follow_samples.closeout()
+
+        reopen_gate = result["fairy05_reopen_gate"]
+        self.assertEqual(reopen_gate["sample_status"], "planned_only")
+        self.assertEqual(reopen_gate["carrier_choice"], "UNRESOLVED")
+        self.assertEqual(
+            reopen_gate["planning_only_candidate_labels"],
+            ["state_timeline", "anchor_switch"],
+        )
+        self.assertEqual(
+            reopen_gate["required_evidence"],
+            [
+                "positive_reacquire_after_return_sample",
+                "negative_missing_return_witness_or_stale_membership_companion",
+                "state_timeline",
+                "anchor_switch",
+                "docs_report_snapshot_sync",
+            ],
+        )
+
+    def test_closeout_records_planned_sample_path_for_fairy05(self) -> None:
+        result = avatar_follow_samples.closeout()
+
+        self.assertEqual(
+            result["planned_sample_paths"],
+            [
+                str(
+                    Path(__file__).resolve().parents[2]
+                    / "samples"
+                    / "not_implemented"
+                    / "avatar-fairy-follow"
+                    / "05_follow_target_reacquired_after_return.mir"
+                )
+            ],
+        )
+
+    def test_closeout_rejects_missing_planned_sample_path(self) -> None:
+        original_dir = avatar_follow_samples.PLANNED_FAMILY_DIR
+        avatar_follow_samples.PLANNED_FAMILY_DIR = original_dir / "__missing__"
+        try:
+            with self.assertRaises(FileNotFoundError):
+                avatar_follow_samples.closeout()
+        finally:
+            avatar_follow_samples.PLANNED_FAMILY_DIR = original_dir
+
     def test_check_all_passes_for_promoted_avatar_slice(self) -> None:
         result = avatar_follow_samples.check_all()
 

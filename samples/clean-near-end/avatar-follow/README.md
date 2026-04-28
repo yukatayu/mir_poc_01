@@ -1,6 +1,6 @@
 # avatar-follow representative slice
 
-This directory is the active clean near-end representative slice for phase 8 `avatar fairy follow / fallback anchor`.
+This directory is the active clean near-end representative slice for legacy phase 8 sample-family label `avatar fairy follow / fallback anchor`, current `Macro 6 reserve`.
 
 It demonstrates:
 
@@ -41,6 +41,7 @@ python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_o
 | `FAIRY-06` | `06_model_check_no_detached_anchor_observed.mir` | detached anchor safety canary | `verification` | model-check pass |
 
 `FAIRY-05` remains planned under `samples/not_implemented/avatar-fairy-follow/`.
+Current helper closeout only exposes the planned path inventory and `fairy05_reopen_gate`; it does not promote `FAIRY-05` to runnable status.
 
 ## Debug surfaces
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-28 13:09 JST
+最終更新: 2026-04-28 13:37 JST
 
 ## この文書について
 
@@ -24,13 +24,13 @@ Place をまたいで実行・通信・検証・可視化できる
 - future-axis floor:
   `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary までは actualize 済み
 - integration floor:
-  `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` typed external residual planned family review、`P3` projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening を close し、handoff 由来の queue numbering と source hierarchy 読み、typed external residual reopen matrix、projection validity report minimum、generated artifact reserve policy、current `signature_lanes` / `signature_scope` / `signature_evidence_roles` rule、current `LayerSignature` row schema / scope split / representative vs canonical inventory rule、`MessageEnvelope` medium/seam split、shared `AuthEvidence` lane inventory、view / telemetry security envelope、fail-closed observer route trace、MembershipRegistry source-of-truth wording、world sugar boundary、hot-plug stop line を current repo へ mirror した
+  `P0` current-state audit、`P1` repository layer map / `samples_progress.md` stabilization、`P2` typed external residual planned family review、`P3` projection / placement residual emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening を close し、handoff 由来の queue numbering と source hierarchy 読み、typed external residual reopen matrix、projection validity report minimum、generated artifact reserve policy、current `signature_lanes` / `signature_scope` / `signature_evidence_roles` rule、current `LayerSignature` row schema / scope split / representative vs canonical inventory rule、`MessageEnvelope` medium/seam split、shared `AuthEvidence` lane inventory、view / telemetry security envelope、fail-closed observer route trace、MembershipRegistry source-of-truth wording、world sugar boundary、hot-plug stop line、`FAIRY-05` reopen gate と planned path inventory を current repo へ mirror した
 - current promoted next line:
-  `P9` avatar fairy follow hardening
-- next reopen point:
   `P10` `mirrorea-core` first real implementation tranche
+- next reopen point:
+  `P11` logical multi-place runtime tranche
 - still later:
-  `P10-P17` implementation tranche、`P18` public API / parser grammar gate
+  `P11-P17` implementation tranche、`P18` public API / parser grammar gate
 - architectural caution:
   effect-based OS-like substrate は内側の解釈に留め、Mir core standard I/O primitive や subsystem collapse を既成事実化しない
 - verification caution:
@@ -38,7 +38,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## 現在の一言での読み
 
-2026-04-28 時点の repo は、**current-L2 / shared-space sample の runnable floor を維持したまま、Mirrorea future-axis の future-plan integration、next package queue stabilization、`P2` typed external residual planned family review、`P3` projection emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening を close し、次に `P9` avatar fairy follow hardening と `P10` `mirrorea-core` first real implementation tranche を整理する段階**です。
+2026-04-28 時点の repo は、**current-L2 / shared-space sample の runnable floor を維持したまま、Mirrorea future-axis の future-plan integration、next package queue stabilization、`P2` typed external residual planned family review、`P3` projection emitted-program gate、`P4` `TermSignature` registry hardening、`P5` `LayerSignature` system hardening、`P6` `MessageEnvelope / AuthEvidence` seam hardening、`P7` `VisualizationProtocol / VisualizationSecurity` hardening、`P8` Sugoroku runtime attach hardening、`P9` avatar fairy follow hardening を close し、次に `P10` `mirrorea-core` first real implementation tranche と `P11` logical multi-place runtime tranche を整理する段階**です。
 
 ## 3 軸 progress
 
@@ -63,7 +63,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `Macro 3` | compile-ready minimal actualization | late | 84% | public parser / API 以外は着手可能 |
 | `Macro 4` | executable sample floor | active clean suite | 98% | 着手可能 |
 | `Macro 5` | typed / theorem / model-check bridge | repo-local alpha-ready current layer | 96% | public seam 以外は自走可能 |
-| `Macro 6` | shared-space / fabric boundary | `P9` promoted + `P10` reopen待ち | 95% | public contract / real transport 以外は自走可能 |
+| `Macro 6` | shared-space / fabric boundary | `P10` promoted + `P11` reopen待ち | 95% | public contract / real transport 以外は自走可能 |
 | `Macro 7` | toolchain / backend / host-facing integration | guardrail + implementation tranche待ち | 72% | installed binary / backend choice 以外は段階的に自走可能 |
 | `Macro 8` | application realization | early | 22% | 要仕様確認 |
 
@@ -74,7 +74,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | executable sample corpus | `S6` | active clean suite、Sugoroku、avatar representative slice、dashboard | final public sample catalog |
 | finite-index typing / order-handoff | `S6` | authority / label / capture / region / cost finite theory、high-level relation family | final typed source principal と public checker / artifact contract |
 | theorem / model-check / Lean | `S5-S6` | model-check second line、small Lean proof fragment、generated stub corpus | full domain discharge と concrete external tool binding |
-| shared-space runtime samples | `S6` | attach / membership / handoff / late join / follow / fallback / reset safety。P8 closeout で world sugar / MembershipRegistry / stop line wordingを明示 | detach lifecycle residual、real transport、durable evidence |
+| shared-space runtime samples | `S6` | attach / membership / handoff / late join / follow / fallback / reset safety。P8 closeout で world sugar / MembershipRegistry / stop line wording、P9 closeout で `FAIRY-05` reopen gate / planned path inventory を明示 | detach lifecycle residual、real transport、durable evidence |
 | typed external / projection / hot-plug / transport preview | `S5-S6` | typed external synthetic preview、typed external residual reopen matrix、projection preview、projection validity report minimum、generated artifact reserve policy、hot-plug lifecycle canary、`NET-01..05` helper-local canary | final host-facing contract、actual emitted program family、real migration / replay |
 | verification / visualization composition | `S5` | `TermSignature` current registry hardening、`LayerSignature` row schema / scope split / obligations lane、`MessageEnvelope` medium/seam split、shared `AuthEvidence` lane inventory、report-local inventories、typed visualization / telemetry security envelope と fail-closed route trace | exact public `VerificationLayer` law surface、public viewer / verifier contract |
 | repository structure / dashboard | `S6` | layer-aware repo map、sample/script taxonomy、front-door docs、snapshot docs | risky crate/path move をまだしていない |
@@ -93,8 +93,9 @@ Place をまたいで実行・通信・検証・可視化できる
 | `P6` MessageEnvelope/AuthEvidence hardening | closed | helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes` を fixed した | final public auth schema、final public transport ABI、`witness_refs` role taxonomy を claim しない |
 | `P7` visualization security hardening | closed | view / telemetry security envelope、typed telemetry retention floor、fail-closed observer route trace を固定した | final public viewer contract、retention policy、multi-tenant telemetry service を固定しない |
 | `P8` Sugoroku runtime attach hardening | closed | MembershipRegistry source-of-truth、world sugar boundary、late-join/handoff boundary、hot-plug stop line を固定した | real network、consensus、durable distributed commit、rollback、final public runtime / hot-plug ABI を固定しない |
-| `P9` avatar fairy follow hardening | queued; next | residual `FAIRY-05` gate を active representative slice と同期して tighten する | public avatar / visualization API を claim しない |
-| `P10-P17` first real implementation tranche | later | placeholder / preview floor から実装 tranche へ進める | subsystem collapse や premature freeze をしない |
+| `P9` avatar fairy follow hardening | closed | helper closeout `FAIRY-05` reopen gate と planned path inventory を fixed した | `FAIRY-05` 自体は active 化しない |
+| `P10` `mirrorea-core` first real implementation tranche | queued; next | placeholder / preview floor から first real core へ進める | subsystem collapse や premature freeze をしない |
+| `P11-P17` implementation tranche | later | logical multi-place runtime / adapter / transport / hot-plug / projection / viewer / backend を段階的に widen する | `P10` ownership cut 前に責務を collapse しない |
 | `P18` public API / parser grammar gate | final mixed gate | final freeze 条件を定義する | prior packages 未成熟のまま public freeze しない |
 
 ## 着手可能 / 要仕様確認 / 後段依存
@@ -108,8 +109,9 @@ Place をまたいで実行・通信・検証・可視化できる
 | `P6` `MessageEnvelope / AuthEvidence` seam hardening | close 済み | helper/runtime `message_envelope_scope`、medium/seam split、shared `AuthEvidence` lane inventory、freshness lane、subject/emitter distinction を fixed した |
 | `P7` visualization security hardening | close 済み | helper/runtime security envelope、typed telemetry、NET-05 fail-closed route trace を current line に固定した |
 | `P8` Sugoroku runtime attach hardening | close 済み | helper closeout に world sugar / MembershipRegistry / stop line carrier を追加し、attach / handoff / late-join / detach evidence gate を current line に固定した |
-| `P9` avatar fairy follow hardening | 着手可能 | active representative slice はあり、residual `FAIRY-05` gate を tightening できる |
-| `P10-P17` first real implementation tranche | 後段依存 | docs-first / helper-local preview が先行しているため、実装 tranche は stop line を保ちながら段階的に進める必要がある |
+| `P9` avatar fairy follow hardening | close 済み | helper closeout `FAIRY-05` reopen gate と planned path inventory を current line に固定した |
+| `P10` `mirrorea-core` first real implementation tranche | 着手可能 | helper-local preview と docs-first queue が揃っており、crate responsibility boundary から始められる |
+| `P11-P17` implementation tranche | 後段依存 | `P10` ownership cut と minimal core carrier が先に要る |
 | `P18` public API / parser grammar gate | 要仕様確認 | prior tranche の成熟と user 側の公開範囲判断が必要 |
 
 ## 再現性アンカー
@@ -129,6 +131,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-28 13:37 JST — `P9` avatar fairy follow hardening を close し、avatar helper closeout に `planned_sample_paths` と `fairy05_reopen_gate = { sample_status = planned_only, required_evidence = [...], carrier_choice = UNRESOLVED, planning_only_candidate_labels = state_timeline / anchor_switch }` を追加した。avatar helper unittest、`check-all`、avatar closeout、`01` / `02` anchors、`03` membership、`06` verification、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通し、report `0956` と snapshot docs を `P10` promoted / `P11` reopen next に同期した。
 - 2026-04-28 13:09 JST — `P8` Sugoroku runtime attach hardening を close し、Sugoroku helper closeout に `world_surface = host_server_side_sugar`、`membership_model.source_of_truth = MembershipRegistry`、`membership_model.late_join_handoff_boundary`、`hotplug_stop_line` を追加した。`01_runtime_attach_game --debug hotplug`、`03_roll_publish_handoff --debug envelopes`、`05_late_join_history_visible --debug membership`、`09_detach_todo --debug hotplug`、Sugoroku closeout、Sugoroku unittest、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通し、report `0955` と snapshot docs を `P9` promoted / `P10` reopen next に同期した。
 - 2026-04-28 12:42 JST — `P7` `VisualizationProtocol / VisualizationSecurity` hardening を close し、Sugoroku helper と clean near-end runtime の view / telemetry security envelope に `label` / `authority` / `redaction` / `retention_scope` / `source_refs` を追加した。NET-05 observer route trace は fail-closed に固定し、typed telemetry を security boundary の内側に戻した。Sugoroku / network helper closeout、clean near-end focused run / closeout、`cargo test -p mir-runtime --test clean_near_end_samples`、`cargo test -p mir-runtime`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通し、report `0954` と snapshot docs を `P8` promoted / `P9` reopen next に同期した。
 - 2026-04-28 12:18 JST — `P6` `MessageEnvelope / AuthEvidence` seam hardening を close し、helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes` を固定した。review follow-up で legacy `transport` alias を helper/runtime ともに seam 意味へ正規化し、snapshot docs の next reopen point を `P8` へ揃え、report `0953` に full validation evidence を追記した。helper/network unittest、Sugoroku / network closeout、clean near-end focused run / closeout、`cargo test -p mir-runtime --test clean_near_end_samples`、`cargo test -p mir-runtime`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通した。

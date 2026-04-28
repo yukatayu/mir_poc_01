@@ -13,6 +13,7 @@ current macro-phase reading は `Macro 6 reserve` である。
 - active helper surface は `scripts/avatar_follow_samples.py`
 - active sample IDs は `FAIRY-01`, `FAIRY-02`, `FAIRY-03`, `FAIRY-04`, `FAIRY-06`
 - residual planned IDs は `FAIRY-05`
+- helper closeout は `planned_sample_paths` と `fairy05_reopen_gate` を current repo-local gate inventory として返す
 - historical prototype anchor は `samples/prototype/current-l2-dynamic-attach-detach/p03-avatar-controller-attach-detach.*`
 
 ## active representative slice
@@ -41,6 +42,9 @@ debug modes are helper-local evidence views only:
 
 These are not the final public visualization or runtime API.
 
+helper closeout が返す `fairy05_reopen_gate` は planning-only gate inventory であり、
+`state_timeline` / `anchor_switch` は current debug mode ではなく planning-only candidate labels である。
+
 ## planned residual family
 
 The following remain planned under `samples/not_implemented/avatar-fairy-follow/`:
@@ -53,8 +57,10 @@ They stay planned until the reopen gate below is justified for the active helper
 ## unresolved carrier choice for `FAIRY-05`
 
 If `FAIRY-05` is ever promoted into `scripts/avatar_follow_samples.py`, the
-current repo-local gate is only that explicit state timeline / anchor switch
-evidence must exist.
+current repo-local gate is that a positive reacquire-after-return sample, a
+negative missing-return-witness or stale-membership companion, explicit
+`state_timeline` / `anchor_switch` evidence, and docs/report/snapshot sync
+must all exist.
 
 - `UNRESOLVED`: whether visibility-return witness is carried as a timeline
   event, anchor-switch event, witness event, or typed bundle

@@ -244,9 +244,14 @@ avatar fairy follow では、`scripts/avatar_follow_samples.py` と
 `samples/clean-near-end/avatar-follow/` によって、
 `FAIRY-01` / `FAIRY-02` / `FAIRY-03` / `FAIRY-04` / `FAIRY-06` を widened active representative slice として追えます。
 `FAIRY-05` だけが residual planned family に残ります。
-2026-04-27 の docs-first fixation では、これを reopen する前に explicit state
-timeline / anchor switch evidence が要ることだけを要件に置きます。
-visibility-return witness をどの carrier に載せるかは `UNRESOLVED` のままです。
+2026-04-27 の docs-first fixation では、`FAIRY-05` を planned family に留め、
+visibility-return witness をどの carrier に載せるかを `UNRESOLVED` のまま残しました。
+2026-04-28 の `P9` helper/test/docs hardening で、reopen 前に positive
+reacquire-after-return sample、negative missing-return-witness または stale-membership companion、
+explicit `state_timeline` / `anchor_switch` evidence、docs/report/snapshot sync が要ることを
+helper closeout / dashboard / snapshot docs に actualize しました。
+current helper closeout は `planned_sample_paths` と `fairy05_reopen_gate` を返し、
+この reopen gate を planning-only inventory として visible にします。
 
 ## 文書の読み分け
 
@@ -302,10 +307,10 @@ future-axis の first-cut / widening package は次まで close 済みです。
 `P3` Projection / placement residual emitted-program gate も close 済みであり、
 projection validity report minimum、generated artifact reserve policy、actual emitted place-specific program family は `P15` に残す handoff line を current docs に固定しています。
 
-1. `P9` avatar fairy follow hardening
-   - active representative slice と residual `FAIRY-05` gate の同期
-2. `P10-P17` first real implementation tranche
-   - `mirrorea-core`、logical multi-place runtime、external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
+1. `P10` `mirrorea-core` first real implementation tranche
+   - crate ownership cut、minimal core carrier、replaceable substrate boundary
+2. `P11-P17` first real implementation tranche
+   - logical multi-place runtime、external adapter boundary、network alpha、hot-plug package manager、projection/codegen、viewer、storage/backend
 3. `P18` public API / parser grammar gate
    - final public freeze は最後まで mixed gate に残す
 

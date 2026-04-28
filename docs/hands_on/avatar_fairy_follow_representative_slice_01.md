@@ -51,12 +51,16 @@ python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_o
 `FAIRY-05` だけが residual planned family に残っています。混同しないことが重要です。
 
 current repo-local reading では、`FAIRY-05` を active helper に昇格させる前に、
-explicit state timeline / anchor switch evidence が要る、という gate だけを固定しています。
+positive reacquire-after-return sample、negative missing-return-witness または stale-membership companion、
+explicit `state_timeline` / `anchor_switch` evidence、docs/report/snapshot sync が要る、という gate を固定しています。
+helper closeout は `planned_sample_paths` と `fairy05_reopen_gate` を返し、この gate を
+planning-only inventory として visible にします。
 
 - `UNRESOLVED`: visibility-return witness をどの carrier に載せるか
 - `UNRESOLVED`: helper-local CLI/debug surface の exact name
 - current working assumption:
   candidate label として `state_timeline` / `anchor_switch` を使ってよい
 
+`state_timeline` / `anchor_switch` は planning-only candidate label であり、current debug mode ではありません。
 これは planning-only です。final public visualization API や final public avatar runtime
 surface として固定したものではありません。

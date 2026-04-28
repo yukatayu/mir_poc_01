@@ -14,6 +14,19 @@ MODEL_CHECK_PROPERTIES = ["no_detached_anchor_observed"]
 PLANNED_SAMPLE_IDS = [
     "05_follow_target_reacquired_after_return",
 ]
+PLANNED_FAMILY_DIR = ROOT / "samples" / "not_implemented" / "avatar-fairy-follow"
+FAIRY05_REOPEN_GATE = {
+    "sample_status": "planned_only",
+    "required_evidence": [
+        "positive_reacquire_after_return_sample",
+        "negative_missing_return_witness_or_stale_membership_companion",
+        "state_timeline",
+        "anchor_switch",
+        "docs_report_snapshot_sync",
+    ],
+    "carrier_choice": "UNRESOLVED",
+    "planning_only_candidate_labels": ["state_timeline", "anchor_switch"],
+}
 ACTIVE_SAMPLE_ROWS = [
     {
         "sample_id": "01_follow_remote_head_with_local_fallback",
@@ -62,6 +75,20 @@ def _sample_row(sample_id: str) -> dict[str, str]:
 
 def _source_path(sample_id: str) -> Path:
     return SAMPLE_DIR / _sample_row(sample_id)["source_name"]
+
+
+def _planned_sample_path(sample_id: str) -> Path:
+    return PLANNED_FAMILY_DIR / f"{sample_id}.mir"
+
+
+def _planned_sample_paths() -> list[str]:
+    paths: list[str] = []
+    for sample_id in PLANNED_SAMPLE_IDS:
+        path = _planned_sample_path(sample_id)
+        if not path.exists():
+            raise FileNotFoundError(path)
+        paths.append(str(path))
+    return paths
 
 
 def _base_result(sample_id: str) -> dict[str, Any]:
@@ -333,18 +360,19 @@ def check_all() -> dict[str, Any]:
 
 
 def closeout() -> dict[str, Any]:
+    planned_sample_paths = _planned_sample_paths()
     return {
         "sample_count": len(ACTIVE_SAMPLE_ROWS),
         "active_sample_ids": [row["sample_id"] for row in ACTIVE_SAMPLE_ROWS],
         "planned_sample_ids": list(PLANNED_SAMPLE_IDS),
+        "planned_sample_paths": planned_sample_paths,
         "debug_output_modes": list(DEBUG_OUTPUT_MODES),
         "model_check_properties": list(MODEL_CHECK_PROPERTIES),
         "active_sample_paths": [str(_source_path(row["sample_id"])) for row in ACTIVE_SAMPLE_ROWS],
-        "planned_family_path": str(
-            ROOT / "samples" / "not_implemented" / "avatar-fairy-follow"
-        ),
+        "planned_family_path": str(PLANNED_FAMILY_DIR),
         "current_focus": "FAIRY-01 / FAIRY-02 / FAIRY-03 / FAIRY-04 / FAIRY-06 active helper-local slice",
         "planned_remaining": "FAIRY-05 reacquire-after-return remains planned",
+        "fairy05_reopen_gate": dict(FAIRY05_REOPEN_GATE),
     }
 
 

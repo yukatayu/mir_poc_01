@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-28 13:09 JST
+最終更新: 2026-04-28 13:37 JST
 
 ## この文書について
 
@@ -14,8 +14,8 @@
 - `P0` current-state audit と `P1` repository layer map / `samples_progress.md` stabilization は close 済みです。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope / AuthEvidence` seam、`VisualizationProtocol`、typed external synthetic preview helper、projection preview、hot-plug helper-local lifecycle canary、network transport helper-local canary、storage / LLVM guardrail は first cut / widening close 済みです。
 - `P2` Typed external boundary residual planned family review は close 済みです。
-- current promoted next line は **`P9` avatar fairy follow hardening** です。
-- next reopen point は **`P10` `mirrorea-core` first real implementation tranche** です。
+- current promoted next line は **`P10` `mirrorea-core` first real implementation tranche** です。
+- next reopen point は **`P11` logical multi-place runtime tranche** です。
 - current snapshot を短く追う入口は `progress.md`、`samples_progress.md`、`docs/hands_on/current_phase_closeout_01.md` です。
 
 ## current executable floor
@@ -43,9 +43,9 @@
 | `P6` MessageEnvelope/AuthEvidence seam hardening | `Macro 6` | `S4 -> S5` | closed | closed | medium/seam split、shared auth lane inventory、freshness lane fixed |
 | `P7` VisualizationProtocol/Security | `Macro 6-7` | `S4 -> S5` | closed | closed | security envelope / typed telemetry / fail-closed route trace fixed |
 | `P8` Sugoroku runtime attach hardening | `Macro 6` | `S5 -> S6` | closed | closed | MembershipRegistry source-of-truth / world sugar / hot-plug stop line fixed |
-| `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | next | 1-2 tasks | residual `FAIRY-05` gate remains |
-| `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | reopen next | multi-task | placeholder -> first real core |
-| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper emulator -> crate substrate |
+| `P9` avatar fairy follow hardening | `Macro 6` | `S5 -> S6` | closed | closed | helper closeout `FAIRY-05` reopen gate / planned path inventory fixed |
+| `P10` mirrorea-core first real implementation tranche | `Macro 6-7` | `S1 -> S4` | next | multi-task | placeholder -> first real core |
+| `P11` logical multi-place runtime tranche | `Macro 6-7` | `S1 -> S4` | reopen next | multi-task | helper emulator -> crate substrate |
 | `P12` external adapter / host boundary tranche | `Macro 7` | `S1 -> S4` | later | multi-task | host-facing adapter seam |
 | `P13` network transport minimal alpha | `Macro 6-7` | `S1 -> S4` | later | multi-task | helper canary -> real transport alpha |
 | `P14` hot-plug package-manager tranche | `Macro 6-7` | `S1 -> S4` | later | multi-task | compatibility / migration / rollback |
@@ -290,24 +290,31 @@
 ### P9. avatar fairy follow hardening
 
 - status:
-  current promoted next line。active representative slice を保ちながら residual `FAIRY-05` gate を整理する。
+  close 済み。avatar helper closeout に `planned_sample_paths` と `fairy05_reopen_gate = { sample_status = planned_only, required_evidence = [...], carrier_choice = UNRESOLVED, planning_only_candidate_labels = state_timeline / anchor_switch }` を追加し、active representative slice を保ったまま residual `FAIRY-05` gate を tighten した。
 
 - macro phase / stage:
   `Macro 6`, `S5 -> S6`
 - objective:
   active representative slice を保ちながら residual `FAIRY-05` gate を整理する
 - deliverables:
-  explicit state timeline / anchor switch evidence gate、carrier `UNRESOLVED` の current reading
+  explicit state timeline / anchor switch evidence gate、carrier `UNRESOLVED` の current reading、planned sample path inventory
 - validation command:
+  `python3 -m unittest scripts.tests.test_avatar_follow_samples -v`
+  `python3 scripts/avatar_follow_samples.py check-all --format json`
   `python3 scripts/avatar_follow_samples.py closeout --format json`
   `python3 scripts/avatar_follow_samples.py run 01_follow_remote_head_with_local_fallback --debug anchors --format json`
+  `python3 scripts/avatar_follow_samples.py run 02_remote_head_not_visible_falls_back_to_local --debug anchors --format json`
+  `python3 scripts/avatar_follow_samples.py run 03_remote_avatar_leaves_falls_back_to_local --debug membership --format json`
   `python3 scripts/avatar_follow_samples.py run 06_model_check_no_detached_anchor_observed --debug verification --format json`
+  `python3 scripts/check_source_hierarchy.py`
+  `python3 scripts/validate_docs.py`
+  `git diff --check`
 - debug / visualization output:
   `anchors`、`membership`、`verification`
 - docs / report requirement:
-  新しい report、`samples_progress.md`、`plan/24`、relevant docs を同期する
+  新しい report、`samples_progress.md`、`progress.md`、`plan/24`、relevant docs を同期する
 - stop line:
-  `FAIRY-05` を evidence なしに active 化しない。public avatar / visualization API へ飛ばない
+  `FAIRY-05` を evidence なしに active 化しない。public avatar / visualization API、real transport / session / auth semantics、`mirrorea-core` / Rust runtime へ飛ばない
 
 ### P10. `mirrorea-core` first real implementation tranche
 
