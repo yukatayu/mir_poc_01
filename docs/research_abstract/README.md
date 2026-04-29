@@ -34,6 +34,7 @@
 - `fairy05_visibility_return_carrier_bundling_01.md`
 - `hotplug_real_migration_rollback_boundary_01.md`
 - `post_p21_rollback_durable_migration_family_01.md`
+- `post_p21_distributed_activation_ordering_family_01.md`
 - `post_p21_final_public_hotplug_abi_family_01.md`
 - `runtime_crate_hotplug_engine_ownership_cut_01.md`
 - `runtime_crate_hotplug_carrier_admission_cut_01.md`

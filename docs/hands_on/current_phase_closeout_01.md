@@ -13,6 +13,7 @@
 
 ```bash
 python3 scripts/check_source_hierarchy.py
+python3 scripts/validate_docs.py
 python3 scripts/current_l2_guided_samples.py closeout --format json
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
@@ -20,8 +21,11 @@ python3 scripts/typed_external_boundary_samples.py closeout --format json
 python3 scripts/network_transport_samples.py closeout --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
+cargo fmt --check
 cargo test -p mirrorea-core
+cargo test -p mir-runtime --test hotplug_runtime_skeleton
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
+git diff --check
 find samples/generated -maxdepth 3 -type f | sort
 bash scripts/env/mirrorea_storage_env.sh
 bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
@@ -127,7 +131,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
   script の `--debug` 出力、detached artifact、report-local inventory
 - dashboard:
   `samples_progress.md`
-- next queue:
+- current task map / next open gate:
   `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md`
 - final public API:
   まだ deferred
@@ -153,9 +157,9 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - broader application target
 - final shared-space operational catalog
 
-## next queue
+## closeout memory and actual next open gate
 
-1. post-`P20` queue status
+1. post-`P20` / post-`P21` closeout memory
    - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。さらに `R7` post-`P20` hot-plug next-package inventory も close 済みであり、`P21` runtime-crate hot-plug completed-engine narrow cut を next narrow line として固定した。現在は `P21` も close 済みであり、`HotPlugRuntimeEngineState`、`HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` を actualize した。exact next label は intentionally unfixed のまま保ちつつ、`rollback / durable migration` family hardening を first recommendation close 済み、`distributed activation ordering` family hardening を second recommendation close 済み、`final public hot-plug ABI` family hardening を third recommendation close 済みとして docs-first に固定した。third recommendation で fixed したのは `freeze prerequisite fixed; public ABI still unfrozen` までであり、next open work は actual `U1` commitment に移る
 2. `P19` closeout memory
    - `crates/mirrorea-core/src/fabric.rs` の engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を current narrow Rust carrier floor として読む
