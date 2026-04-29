@@ -8,8 +8,8 @@
 //! semantics, distributed activation ordering, or a final public hot-plug ABI.
 
 use mirrorea_core::{
-    hotplug_request_lanes, hotplug_verdict_lanes, HotPlugRequest, HotPlugVerdict,
-    LogicalPlaceRuntimeShell, LogicalPlaceRuntimeSnapshot, MirroreaCoreError,
+    HotPlugRequest, HotPlugVerdict, LogicalPlaceRuntimeShell, LogicalPlaceRuntimeSnapshot,
+    MirroreaCoreError, hotplug_request_lanes, hotplug_verdict_lanes,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -166,8 +166,8 @@ pub fn assemble_hotplug_runtime_engine_report(
     })
 }
 
-pub fn build_hotplug_runtime_skeleton_report(
-) -> Result<HotPlugRuntimeSkeletonReport, MirroreaCoreError> {
+pub fn build_hotplug_runtime_skeleton_report()
+-> Result<HotPlugRuntimeSkeletonReport, MirroreaCoreError> {
     let (shell, request, verdict) = build_example_admitted_inputs()?;
     assemble_hotplug_runtime_skeleton_report(&shell, request, verdict)
 }
@@ -178,8 +178,8 @@ pub fn build_hotplug_runtime_engine_report() -> Result<HotPlugRuntimeEngineRepor
     assemble_hotplug_runtime_engine_report(&shell, request, verdict)
 }
 
-fn build_example_admitted_inputs(
-) -> Result<(LogicalPlaceRuntimeShell, HotPlugRequest, HotPlugVerdict), MirroreaCoreError> {
+fn build_example_admitted_inputs()
+-> Result<(LogicalPlaceRuntimeShell, HotPlugRequest, HotPlugVerdict), MirroreaCoreError> {
     let mut shell = LogicalPlaceRuntimeShell::default();
     shell.register_place("AttachPoint[ExampleRoom#1]", "AttachPoint")?;
     shell.add_initial_participant("ExampleAdmin")?;

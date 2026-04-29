@@ -1007,7 +1007,9 @@ pub fn inspect_stage3_request_head_clause_bundle(
         Stage3PerformTargetRef::Via(chain_ref) => ("via", chain_ref.as_str()),
     };
     let attachment_frame_kind = match bundle.attachment_frame_kind {
-        Stage3RequestAttachmentFrameKind::RequestLocalTwoSlotSuite => "request_local_two_slot_suite",
+        Stage3RequestAttachmentFrameKind::RequestLocalTwoSlotSuite => {
+            "request_local_two_slot_suite"
+        }
     };
 
     CurrentL2RequestHeadClauseBundleInspection {
@@ -1061,7 +1063,10 @@ pub fn render_current_l2_request_head_clause_bundle_inspection_pretty(
             .require_fragment_text
             .as_deref()
             .unwrap_or("(none)"),
-        inspection.ensure_fragment_text.as_deref().unwrap_or("(none)"),
+        inspection
+            .ensure_fragment_text
+            .as_deref()
+            .unwrap_or("(none)"),
         inspection.attachment_frame_kind,
     )
 }

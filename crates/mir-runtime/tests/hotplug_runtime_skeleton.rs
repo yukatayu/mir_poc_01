@@ -1,16 +1,16 @@
 use mir_runtime::hotplug_runtime::{
     assemble_hotplug_runtime_engine_report, assemble_hotplug_runtime_skeleton_report,
-    build_hotplug_runtime_engine_report,
-    build_hotplug_runtime_skeleton_report,
+    build_hotplug_runtime_engine_report, build_hotplug_runtime_skeleton_report,
 };
 use mirrorea_core::{
-    hotplug_request_lanes, hotplug_verdict_lanes, HotPlugRequest, HotPlugVerdict,
-    LogicalPlaceRuntimeShell,
+    HotPlugRequest, HotPlugVerdict, LogicalPlaceRuntimeShell, hotplug_request_lanes,
+    hotplug_verdict_lanes,
 };
 
 fn example_admitted_inputs() -> (LogicalPlaceRuntimeShell, HotPlugRequest, HotPlugVerdict) {
     let mut shell = LogicalPlaceRuntimeShell::default();
-    shell.register_place("AttachPoint[ExampleRoom#1]", "AttachPoint")
+    shell
+        .register_place("AttachPoint[ExampleRoom#1]", "AttachPoint")
         .unwrap();
     shell.add_initial_participant("ExampleAdmin").unwrap();
 
@@ -71,13 +71,17 @@ fn hotplug_runtime_skeleton_report_tracks_admitted_carriers_over_runtime_substra
             .get(&report.request.attachpoint_ref),
         Some(&"AttachPoint".to_string())
     );
-    assert!(report
-        .consumed_substrates
-        .contains(&"LogicalPlaceRuntimeShell".to_string()));
-    assert!(report.notes.contains(
-        &"consumer-side runtime/report assembly over admitted carriers and existing substrate"
-            .to_string()
-    ));
+    assert!(
+        report
+            .consumed_substrates
+            .contains(&"LogicalPlaceRuntimeShell".to_string())
+    );
+    assert!(
+        report.notes.contains(
+            &"consumer-side runtime/report assembly over admitted carriers and existing substrate"
+                .to_string()
+        )
+    );
 }
 
 #[test]
@@ -86,12 +90,16 @@ fn hotplug_runtime_skeleton_report_keeps_helper_preview_ids_and_engine_claims_ou
     assert_ne!(report.request.request_id, "attach_request#1");
     assert_ne!(report.request.message_envelope_ref, "attach_request#1");
     assert_ne!(report.request.request_id, "detach_request#1");
-    assert!(report
-        .retained_later_refs
-        .contains(&"helper_local_lifecycle_ids".to_string()));
-    assert!(report
-        .retained_later_refs
-        .contains(&"completed_engine".to_string()));
+    assert!(
+        report
+            .retained_later_refs
+            .contains(&"helper_local_lifecycle_ids".to_string())
+    );
+    assert!(
+        report
+            .retained_later_refs
+            .contains(&"completed_engine".to_string())
+    );
     assert!(report.notes.contains(
         &"no helper-local lifecycle ids imported as canonical runtime state".to_string()
     ));
@@ -129,9 +137,11 @@ fn hotplug_runtime_engine_report_maps_attach_accept_to_runtime_state() {
     );
     assert_eq!(report.engine_state.operation_kind, "attach".to_string());
     assert_eq!(report.engine_state.verdict_kind, "accepted".to_string());
-    assert!(report
-        .retained_later_refs
-        .contains(&"rollback_protocol".to_string()));
+    assert!(
+        report
+            .retained_later_refs
+            .contains(&"rollback_protocol".to_string())
+    );
     assert!(report.notes.contains(
         &"runtime-side engine state progression remains narrow and non-public".to_string()
     ));
@@ -153,12 +163,13 @@ fn hotplug_runtime_engine_report_maps_detach_deferred_to_boundary_state() {
         report.engine_state.state_kind,
         "detach_deferred_before_boundary".to_string()
     );
-    assert!(report
-        .retained_later_refs
-        .contains(&"durable_migration".to_string()));
+    assert!(
+        report
+            .retained_later_refs
+            .contains(&"durable_migration".to_string())
+    );
     assert!(report.engine_state.notes.contains(
-        &"rollback / durable migration / distributed activation ordering remain later"
-            .to_string()
+        &"rollback / durable migration / distributed activation ordering remain later".to_string()
     ));
 }
 
@@ -194,8 +205,10 @@ fn hotplug_runtime_engine_report_flattens_reason_refs_and_tracks_membership_epoc
         "attachpoint_registered".to_string(),
         "attachpoint_kind_ok".to_string(),
     ];
-    verdict.authorization_reason_refs =
-        vec!["attach_capability_present".to_string(), "admin_role_confirmed".to_string()];
+    verdict.authorization_reason_refs = vec![
+        "attach_capability_present".to_string(),
+        "admin_role_confirmed".to_string(),
+    ];
     verdict.membership_freshness_reason_refs = vec![
         "membership_frontier_verified".to_string(),
         "membership_epoch_current".to_string(),

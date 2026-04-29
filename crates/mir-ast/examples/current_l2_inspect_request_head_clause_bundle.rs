@@ -13,9 +13,7 @@ enum OutputFormat {
 }
 
 fn usage(program: &str) -> String {
-    format!(
-        "Usage: cargo run -q -p mir-ast --example {program} -- <path> [--format pretty|json]"
-    )
+    format!("Usage: cargo run -q -p mir-ast --example {program} -- <path> [--format pretty|json]")
 }
 
 fn parse_args() -> Result<(String, OutputFormat), String> {
@@ -34,19 +32,13 @@ fn parse_args() -> Result<(String, OutputFormat), String> {
                     "pretty" => OutputFormat::Pretty,
                     "json" => OutputFormat::Json,
                     _ => {
-                        return Err(format!(
-                            "unsupported format `{value}`\n{}",
-                            usage(program)
-                        ));
+                        return Err(format!("unsupported format `{value}`\n{}", usage(program)));
                     }
                 };
             }
             _ if path.is_none() => path = Some(arg),
             _ => {
-                return Err(format!(
-                    "unexpected argument `{arg}`\n{}",
-                    usage(program)
-                ));
+                return Err(format!("unexpected argument `{arg}`\n{}", usage(program)));
             }
         }
     }

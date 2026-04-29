@@ -1,9 +1,9 @@
 use std::collections::BTreeMap;
 
 use mirrorea_core::{
-    AuthEvidence, HotPlugRequest, HotPlugVerdict, LayerSignature, MessageEnvelope,
-    PrincipalClaim, auth_evidence_lanes, hotplug_request_lanes, hotplug_verdict_lanes,
-    insert_layer_signature, layer_signature_lanes, message_envelope_lanes,
+    AuthEvidence, HotPlugRequest, HotPlugVerdict, LayerSignature, MessageEnvelope, PrincipalClaim,
+    auth_evidence_lanes, hotplug_request_lanes, hotplug_verdict_lanes, insert_layer_signature,
+    layer_signature_lanes, message_envelope_lanes,
 };
 
 fn sample_layer_signature(obligations: &[&str]) -> LayerSignature {
