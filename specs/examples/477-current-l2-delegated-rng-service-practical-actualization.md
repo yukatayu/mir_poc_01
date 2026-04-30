@@ -53,6 +53,10 @@ current repo では、少なくとも次が source-backed である。
    - `p07 / p08` authoritative-room baseline evidence
    - `p09` delegated provider practical evidence
 
+historical `p07 / p08 / p09` labelsは compare-anchor memory として残るが、
+current active evidence は clean-near-end `05_delegated_rng_service` と
+adjacent order-handoff family、`570` の cooled authoritative-room replacement reading に置く。
+
 したがって current open problem は、
 `delegated_rng_service` を discovery することではなく、
 **provider placement をどこまで executable / helper-local actualization に上げるか**
@@ -75,14 +79,13 @@ current package では、次を採る。
 3. provider は draw を返すが、state transition を commit しない
 4. `provider_draw_ref` / `provider_receipt_ref` は optional attachment に留める
 5. `auditable_authority_witness` との combination は kept-later combination として retained し、provider placement と fairness strengthening を collapse しない
-6. actual runnable reached sample は `p09` に取り、`p07 / p08` baseline sample は guard-only contrast に残す
+6. historical package-memory compare floor では `p09` を reached anchor に取りつつ、current runnable evidence は clean-near-end `05_delegated_rng_service` に置き、`p07 / p08` baseline sample は historical guard-only contrast に残す
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
 | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | current clean near-end delegated-provider sample が旧 `p09` reached / `p07` `p08` guard-only の provider-placement reading を carry-over していることを再確認する |
-| `p09-dice-delegated-rng-provider-placement` | provider draw は delegated capability が返し、publish / handoff / commit は authority が保持する narrow prototype として使える |
 | `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family の runnable floor 自体は引き続き green である |
 | `python3 scripts/clean_near_end_samples.py closeout --format json` | authority baseline と witness strengthening line を separate に保ったまま provider placement line を追加できることを再確認する |
 
@@ -132,7 +135,7 @@ final public provider receipt schema ではない。
    - authority keeps commit を保つ
    - provider receipt / attestation を later attachment に残す
    に置くのが自然である。
-3. `p09` reached、`p07/p08` guard-only の組み合わせは semantically honest である。
+3. historical `p09` reached memory、`p07/p08` guard-only memory の組み合わせは semantically honest であり、current active evidence は clean-near-end `05` と adjacent order-handoff familyへ置く。
 4. `auditable_authority_witness` との combined public contract を先取りせず、provider placement と fairness strengthening を別 package に保つ。
 
 ## retained alternatives
@@ -156,10 +159,9 @@ current package は次で止める。
 
 ## next self-driven line
 
-current package を close した後の queue は引き続き nonzero である。
+historical package-local next line としては
+model-check second-line concretization が compare-anchor memory に残る。
 
-next self-driven line は、
-
-1. model-check second-line concretization
-
-に残すのが自然である。
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 の family-wide wording temperature alignment closeout 後に
+この package から追加の self-driven implementation line を promote しない。

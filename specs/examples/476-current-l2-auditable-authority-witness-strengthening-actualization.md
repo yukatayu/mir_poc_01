@@ -56,6 +56,10 @@ current repo では、少なくとも次が source-backed である。
    - room-profile claim と witness payload を collapse しない
    - helper-local actualization と final public contract を collapse しない
 
+historical `p07 / p08 / p05` labelsは compare-anchor memory として残るが、
+current active evidence は clean-near-end `06_auditable_authority_witness` と
+`01_authorized_roll_publish_handoff` を中心に読む。
+
 したがって current open problem は、
 `auditable_authority_witness` を discovery することではなく、
 **minimal witness core をどこまで helper-local actualization に上げるか**
@@ -69,9 +73,9 @@ current package では、次を採る。
    - `fairness_claim = auditable_authority_witness`
    を残す
 2. witness payload 自体は audit / receipt side に残す
-3. helper-local strengthening manifest は `p07` だけを reached sample に取る
-4. `p08` は authoritative-room default profile の evidence ではあるが、witness-bearing draw sample ではないので guard-only に残す
-5. `p05` は current default room profile 自体が reached しない guard-only sample に残す
+3. historical package-memory compare floor では `p07` を reached anchor に取りつつ、current runnable evidence は clean-near-end `06_auditable_authority_witness` に置く
+4. `p08` は authoritative-room default profile の evidence ではあるが、witness-bearing draw sample ではないので historical guard-only compare anchor に残す
+5. `p05` は current default room profile 自体が reached しない historical guard-only compare anchor に残す
 6. `draw_result` は current helper-local cut では
    final public scalar serialization ではなく
    action-bound symbolic binding ref として actualize してよい
@@ -81,7 +85,6 @@ current package では、次を採る。
 | evidence | current reading |
 |---|---|
 | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json` | current clean near-end witness-bearing sample が旧 `p07` reached / `p08` `p05` guard-only の strengthening reading を carry-over していることを再確認する |
-| `p07-dice-late-join-visible-history` | publication / handoff / late-join-visible-history に接続した witness-bearing authoritative sample として使える |
 | `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | witness strengthening が room-default vertical slice の上に乗っていることを再確認する |
 | `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family の runnable floor 自体は引き続き green である |
 
@@ -132,7 +135,7 @@ current sample evidence が explicit scalar receipt ではなく action-bound re
    - minimal witness core だけを actualize する
    - provider receipt / attestation を later attachment に残す
    に置くのが自然である。
-3. `p07` reached、`p08/p05` guard-only の組み合わせは semantically honest である。
+3. historical `p07` reached memory、`p08/p05` guard-only memory の組み合わせは semantically honest であり、current active evidence は clean-near-end `06` / `01` に置く。
 4. `draw_result` の helper-local actualization は symbolic binding ref で十分であり、final public scalar serialization を先取りしない。
 
 ## retained alternatives
@@ -156,11 +159,9 @@ current package は次で止める。
 
 ## next self-driven line
 
-current package を close した後の queue は引き続き nonzero である。
+historical package-local next line としては
+`delegated_rng_service` と model-check second-line concretization が compare-anchor memory に残る。
 
-next self-driven line は、
-
-1. `delegated_rng_service`
-2. model-check second-line concretization
-
-に残すのが自然である。
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 の family-wide wording temperature alignment closeout 後に
+この package から追加の self-driven implementation line を promote しない。
