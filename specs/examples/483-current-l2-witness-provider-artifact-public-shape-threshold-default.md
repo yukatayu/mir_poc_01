@@ -167,9 +167,10 @@ current package は次で止める。
 - final emitted handoff contract
 - exhaustive shared-space catalog
 
-## next line
+## historical package-local next line
 
-current self-driven queue はこの threshold package で principal line を close してよい。
+historical threshold-ladder memory では、
+この threshold package で principal line を close する読みが compare-anchor memory に残る。
 
 その後に残る line は、
 
@@ -179,3 +180,7 @@ current self-driven queue はこの threshold package で principal line を clo
 
 の later mixed gate と、
 packaging / exhaustive catalog / broader application target の user-spec residual である。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から principal line closeout を active queue authority として promote しない。

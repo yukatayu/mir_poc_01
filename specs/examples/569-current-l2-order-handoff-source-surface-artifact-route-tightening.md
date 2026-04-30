@@ -156,12 +156,17 @@ first pair `p07 / p08` と source-surface principal package を collapse しな�
 - authoritative-room `serial` sugar public promotion
 - final modal foundation adoption
 
-## next line
+## historical package-local next line
 
-current package を close した後の active queue は、
+historical closeout queue memory では、
+current package を close した後の follow-up package order が
 
 1. Package 96 authoritative-room first scenario
 2. Package 97 reserve strengthening
 3. Package 98 documentation/report closeout
 
-として読むのが自然である。
+として進む読みが compare-anchor memory に残る。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から `Package 96/97/98` follow-up order を promote しない。

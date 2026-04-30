@@ -180,14 +180,15 @@ current package は次で止める。
 - proof object public schema
 - final public verifier contract
 
-## next line
+## historical package-local next line
 
-`M1` threshold package を close した後の current self-driven line は、
+historical threshold-ladder memory では、
+`M1` threshold package を close した後の package-local follow-up line が
 
 1. `M2` model-check property-language / tool-brand threshold
 2. `M3` witness-provider-artifact public-shape threshold
 
-に移るのが自然である。
+に移る読みが compare-anchor memory に残る。
 
 theorem line 自体の later mixed gate は、
 
@@ -195,3 +196,7 @@ theorem line 自体の later mixed gate は、
 2. theorem result public object / proof object public schema
 
 として kept-later に残す。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から `M1 -> M2 -> M3` の package ladder を promote しない。

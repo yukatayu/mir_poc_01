@@ -181,13 +181,14 @@ current package は次で止める。
 - production checker / runtime-policy contract
 - final public verifier contract
 
-## next line
+## historical package-local next line
 
-`M2` threshold package を close した後の current self-driven line は、
+historical threshold-ladder memory では、
+`M2` threshold package を close した後の package-local follow-up line が
 
 1. `M3` witness-provider-artifact public-shape threshold
 
-に narrowed するのが自然である。
+に narrowed する読みが compare-anchor memory に残る。
 
 model-check line 自体の later mixed gate は、
 
@@ -195,3 +196,7 @@ model-check line 自体の later mixed gate は、
 2. actual public checker migration / emitted handoff artifact contract
 
 として kept-later に残す。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から `M2 -> M3` の package ladder を promote しない。

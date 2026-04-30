@@ -72,12 +72,17 @@ fixed_subset_source_sample_corpus_scope_and_file_layout = {
 - bless / regression policy の public contract 化
 - final parser / checker / runtime public surface
 
-## next line
+## historical package-local next reopen line
 
-next reopen line は、
+historical parser-side queue memory では、
+parser-side reopen route を
 **phase6 request-clause-suite publicization comparison**
-に置く。
+に置く読みが compare-anchor memory に残る。
 
 source-sample corpus scope / layout minimum を actualize したことで、
 parser-side next package は source path policy の曖昧さを減らした状態で
-request clause suite publicization を比較できる。
+request clause suite publicization を比較できるという historical rationale も保持してよい。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から parser-side reopen line を promote しない。
