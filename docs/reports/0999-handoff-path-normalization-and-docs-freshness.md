@@ -123,7 +123,8 @@ Proceed with the next maintenance package or with actual `U1` commitment. If mai
 
 ## Commit / push status
 
-- Pending at report authoring time. Commit / push will be recorded after diff review.
+- Initial package close commit: `dee1636 Normalize handoff path and sync docs`
+- `git push` succeeded: `main -> main`
 
 ## Sub-agent session close status
 
