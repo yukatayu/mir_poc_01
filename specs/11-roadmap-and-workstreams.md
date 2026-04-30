@@ -848,52 +848,52 @@ actual-adoption floor では、
   - Package 113 close 後の current active queue は Package 114 representative problem mixed-gate reopen map refresh と later mixed/user-spec residual である
 - representative problem mixed-gate reopen map refresh:
   `specs/examples/588`
-  - `reopen-map` helper と sample bundle doc 側の `現在の mixed gate 再開点` section を actualize し、Problem 1 / Problem 2 の remaining mixed gate と global true user-spec residual を entry command 付きで読み直してよい
-  - Package 114 close 後の current active queue は Package 115 Problem 1 theorem/model-check mixed-gate split refresh、Package 116 Problem 2 order-handoff/public-shape mixed-gate split refresh と later mixed/user-spec residual である
+  - historical `reopen-map` helper memory と archived sample bundle doc 側の `現在の mixed gate 再開点` memory を保持し、Problem 1 / Problem 2 の remaining mixed gate と global true user-spec residual を entry command 付きの historical reopen-map memory として読んでよい
+  - historical closeout queue memory では Package 114 close 後の next line を Package 115 Problem 1 theorem/model-check mixed-gate split refresh、Package 116 Problem 2 order-handoff/public-shape mixed-gate split refresh と later mixed/user-spec residual に置いていた
 - representative problem split-package map refresh:
   `specs/examples/589`
-  - `reopen-map problem1|problem2` と sample bundle doc 側の `次の split package` section を actualize し、Problem 1 / Problem 2 の remaining mixed gate を next separate package 名まで narrow に戻してよい
-  - Package 115 / 116 close 後の current active queue は Package 117 Problem 1 typed source principal split、Package 118 Problem 1 theorem public-contract split、Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
+  - historical `reopen-map problem1|problem2` helper memory と archived sample bundle doc 側の `次の split package` memory を保持し、Problem 1 / Problem 2 の remaining mixed gate を next separate package 名まで narrow に戻していた historical split-package map として読んでよい
+  - historical closeout queue memory では Package 115 / 116 close 後の next line を Package 117 Problem 1 typed source principal split、Package 118 Problem 1 theorem public-contract split、Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual に置いていた
 - Problem 1 typed source principal split helper actualization:
   `specs/examples/590`
-  - `split problem1 typed-source-principal` helper と sample bundle doc 側の typed split entrypoint を actualize し、Problem 1 typed residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
-  - Package 117 close 後の current active queue は Package 118 Problem 1 theorem public-contract split、Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
+  - historical `split problem1 typed-source-principal` helper memory と archived Problem 1 bundle doc 側の typed split entrypoint memory を保持し、Problem 1 typed residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
+  - historical closeout queue memory では Package 117 close 後の next line を Package 118 Problem 1 theorem public-contract split、Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual に置いていた
 - Problem 1 theorem public-contract split helper actualization:
   `specs/examples/591`
-  - `split problem1 theorem-public-contract` helper と sample bundle doc 側の theorem split entrypoint を actualize し、Problem 1 theorem public-contract residual だけを representative `p06` と theorem-first pilot / Lean artifact 導線付きで narrow に読んでよい
-  - Package 118 close 後の current active queue は Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
+  - historical `split problem1 theorem-public-contract` helper memory と archived Problem 1 bundle doc 側の theorem split entrypoint memory を保持し、Problem 1 theorem public-contract residual だけを representative `p06` と theorem-first pilot / Lean artifact 導線付きで narrow に読んでよい
+  - historical closeout queue memory では Package 118 close 後の next line を Package 119 Problem 1 model-check public-contract split、Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual に置いていた
 - Problem 1 model-check public-contract split helper actualization:
   `specs/examples/592`
-  - `split problem1 model-check-public-contract` helper と sample bundle doc 側の model-check split entrypoint を actualize し、Problem 1 model-check public-contract residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
-  - Package 119 close 後の current active queue は Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
+  - historical `split problem1 model-check-public-contract` helper memory と archived Problem 1 bundle doc 側の model-check split entrypoint memory を保持し、Problem 1 model-check public-contract residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
+  - historical closeout queue memory では Package 119 close 後の next line を Package 120 Problem 2 source wording / emitted schema split、Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual に置いていた
 - Problem 2 source wording / emitted schema split helper actualization:
   `specs/examples/593`
-  - `split problem2 source-wording-emitted-schema` helper と sample bundle doc 側の source wording split entrypoint を actualize し、Problem 2 source wording / emitted schema residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
-  - Package 120 close 後の current active queue は Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual である
+  - historical `split problem2 source-wording-emitted-schema` helper memory と archived Problem 2 bundle doc 側の source wording split entrypoint memory を保持し、Problem 2 source wording / emitted schema residual だけを representative/supporting sample set と kept-separate residual 付きで narrow に読んでよい
+  - historical closeout queue memory では Package 120 close 後の next line を Package 121 Problem 2 witness-provider public-shape split と later mixed/user-spec residual に置いていた
 - Problem 2 witness-provider public-shape split helper actualization:
   `specs/examples/594`
-  - `split problem2 witness-provider-public-shape` helper と sample bundle doc 側の witness-provider split entrypoint を actualize し、Problem 2 witness/provider public-shape residual だけを representative/reserve/negative supporting set と kept-separate residual 付きで narrow に読んでよい
-  - Package 121 close 後の current active queue は split-package closeout 後の residual public-seam maintenance と later mixed/user-spec residual である
+  - historical `split problem2 witness-provider-public-shape` helper memory と archived Problem 2 bundle doc 側の witness-provider split entrypoint memory を保持し、Problem 2 witness/provider public-shape residual だけを representative/reserve/negative supporting set と kept-separate residual 付きで narrow に読んでよい
+  - historical closeout queue memory では Package 121 close 後の next line を split-package closeout 後の residual public-seam maintenance と later mixed/user-spec residual に置いていた
 - representative problem reopen-map split closeout sync:
   `specs/examples/595`
-  - `reopen-map problem1|problem2` helper public surface から stale な `next split packages` 表示を外し、`split package closeout` と remaining mixed gate を helper public surface に actualize してよい
-  - Package 122 close 後の current active queue は remaining mixed-gate compression と later mixed/user-spec residual である
+  - historical `reopen-map problem1|problem2` helper memory から stale な `next split packages` 表示を外した `split package closeout` reading を保持し、remaining mixed gate を historical helper memory として読んでよい
+  - historical closeout queue memory では Package 122 close 後の next line を remaining mixed-gate compression と later mixed/user-spec residual に置いていた
 - remaining residual lane summary actualization:
   `specs/examples/596`
-  - `residuals` helper と sample bundle doc 側の residual lane entrypoint を actualize し、remaining mixed gate と true user-spec residual を next reopen order 付きで圧縮してよい
-  - Package 123 close 後の current active queue は Package 124 Problem 1 final-public-seam lane、Package 125 Problem 2 final-public-seam lane、Package 126 syntax-modality final-marker lane と later mixed/user-spec residual である
+  - historical `residuals` helper memory と archived sample bundle doc 側の residual lane entrypoint memory を保持し、remaining mixed gate と true user-spec residual を historical next reopen order 付きで圧縮してよい
+  - historical closeout queue memory では Package 123 close 後の next line を Package 124 Problem 1 final-public-seam lane、Package 125 Problem 2 final-public-seam lane、Package 126 syntax-modality final-marker lane と later mixed/user-spec residual に置いていた
 - Problem 1 final-public-seam lane helper actualization:
   `specs/examples/597`
-  - `lane problem1-final-public-seams` helper と Problem 1 bundle doc 側の lane entrypoint を actualize し、Problem 1 mixed gate を typed / theorem / model-check reopen order と stop line 付きの独立 lane として読んでよい
-  - Package 124 close 後の current active queue は Package 125 Problem 2 final-public-seam lane、Package 126 syntax-modality final-marker lane と later mixed/user-spec residual である
+  - historical `lane problem1-final-public-seams` helper memory と archived Problem 1 bundle doc 側の lane entrypoint memory を保持し、Problem 1 mixed gate を typed / theorem / model-check reopen order と stop line 付きの独立 lane として読んでよい
+  - historical closeout queue memory では Package 124 close 後の next line を Package 125 Problem 2 final-public-seam lane、Package 126 syntax-modality final-marker lane と later mixed/user-spec residual に置いていた
 - Problem 2 final-public-seam lane helper actualization:
   `specs/examples/598`
-  - `lane problem2-final-public-seams` helper と Problem 2 bundle doc 側の lane entrypoint を actualize し、Problem 2 mixed gate を source wording / witness-provider reopen order と stop line 付きの独立 lane として読んでよい
-  - Package 125 close 後の current active queue は Package 126 syntax-modality final-marker lane と later mixed/user-spec residual である
+  - historical `lane problem2-final-public-seams` helper memory と archived Problem 2 bundle doc 側の lane entrypoint memory を保持し、Problem 2 mixed gate を source wording / witness-provider reopen order と stop line 付きの独立 lane として読んでよい
+  - historical closeout queue memory では Package 125 close 後の next line を Package 126 syntax-modality final-marker lane と later mixed/user-spec residual に置いていた
 - syntax-modality final-marker lane helper actualization:
   `specs/examples/599`
-  - `lane syntax-modality-final-marker` helper と sample bundle index / syntax-modality docs を actualize し、syntax / modality mixed gate を current recommendation / retained families / separation boundary 付きの独立 lane として読んでよい
-  - Package 126 close 後の current active queue は Package 127 typed-checker first executable slice、Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
+  - historical `lane syntax-modality-final-marker` helper memory と archived sample bundle index / syntax-modality docs を保持し、syntax / modality mixed gate を current recommendation / retained families / separation boundary 付きの独立 lane として読んでよい
+  - historical closeout queue memory では Package 126 close 後の next line を Package 127 typed-checker first executable slice、Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual に置いていた
 - typed-checker first executable slice actualization:
   `specs/examples/600`
   - `check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として読んでよい

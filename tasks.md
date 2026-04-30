@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 20:29 JST
+最終更新: 2026-04-30 20:50 JST
 
 ## この文書について
 
@@ -21,6 +21,7 @@
 - `scripts/current_l2_guided_samples.py` は current active compatibility front door を `list / smoke-all / closeout` に絞っており、legacy bundle / lane / reserve / hold-line / emit-* helper command claims は stale docs cleanup の対象として package ごとに historical memory へ冷やしています。
 - 2026-04-30 の `current_l2_guided_samples.py` compatibility-front-door / current-first-line historical-anchor cooling も maintenance-only closeout であり、`specs/examples/606/607/608/612` と `specs/12 D-052/D-058/D-191..193` を `list / smoke-all / closeout` only の current wrapper reading と `p06` / reserve / residual / hold-line historical memory 読みに同期しただけで、new implementation queue は reopened していません。
 - 2026-04-30 の `current_l2_guided_samples.py` emit-family historical-memory cooling も maintenance-only closeout であり、`specs/examples/601/602/603/604/609/610/611` と `specs/12 D-186..189/D-194..196`、`specs/11`、`specs/00` を `list / smoke-all / closeout` only の current wrapper reading と emitted-artifact / reopen-order / summary-index historical helper memory 読みに同期しただけで、new implementation queue は reopened していません。remaining `reopen-map / lane / residuals` current-surface cooling は次の stale-docs maintenance package に残しています。
+- 2026-04-30 の `current_l2_guided_samples.py` reopen/split/lane/residual cluster cooling も maintenance-only closeout であり、`specs/examples/588..599` と `specs/12 D-173..184`、`specs/11`、`specs/00` を `list / smoke-all / closeout` only の current wrapper reading と archived problem-bundle / reopen-map / split / lane / residual historical helper memory 読みに同期しただけで、new implementation queue は reopened していません。remaining stale-helper line は `specs/examples/600` / `D-185` と older bundle / matrix / quickstart mirror に絞られています。
 - 2026-04-29 の uncommitted Rust formatting cleanup は `b213721` `Apply Rust formatting cleanup` として push 済みです。
 - 2026-04-30 の handoff path normalization / `sub-agent-pro` role sync / `plan/10` current-line cooling は maintenance-only closeout であり、新しい promoted implementation line は開いていません。
 - 2026-04-30 の `plan/02` / `plan/07` / `plan/09` temperature audit も maintenance-only closeout であり、repository memory の stale current-line wording を冷やしただけで、new implementation queue は reopened していません。

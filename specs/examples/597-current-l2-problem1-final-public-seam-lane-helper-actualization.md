@@ -2,28 +2,25 @@
 
 ## 位置づけ
 
-- current Phase 6 / Package 124 closeout。
+- historical Phase 6 / Package 124 closeout memory。
 - `residuals` summary の次段として
   `scripts/current_l2_guided_samples.py lane problem1-final-public-seams`
-  を actualize し、Problem 1 mixed gate の reopen order を独立 lane として読めるようにする。
+  を historical helper-local lane memory として記録し、Problem 1 mixed gate の reopen order を独立 lane として読んでいたことを残す。
 - final public theorem/model-check/verifier contract や final typed source principal を fixed する task ではない。
 
 ## この package で固定する current cut
 
 1. `python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams`
-   は Problem 1 final-public-seam lane の
-   - focus
-   - entry commands
-   - component order
-   - stop line
-   - anchor refs
-   を pretty summary で返してよい。
-2. `python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams --format json`
-   は `component_order` / `stop_line` / `anchor_refs`
-   を machine-readable に返してよい。
-3. Problem 1 sample bundle doc は `residuals` に加えて
-   `lane problem1-final-public-seams`
-   を案内し、Problem 1 lane と global residual lane summary を往復してよい。
+   は 2026-04-22 clean-sample migration 前の historical Problem 1 lane entrypoint として扱い、
+   current active compatibility front door には戻さない。
+2. current active compatibility front door は
+   `python3 scripts/current_l2_guided_samples.py list`
+   `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+   `python3 scripts/current_l2_guided_samples.py closeout --format json`
+   に置く。
+3. archived Problem 1 sample bundle doc memory は
+   `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/problem1-typed-theorem-model-check.md`
+   の lane entrypoint で保持してよい。
 
 ## current recommendation
 
@@ -31,23 +28,30 @@
   `residuals`
   だけで終わらせず、
   `lane problem1-final-public-seams`
-  で typed / theorem / model-check reopen order まで narrow に読む。
+  で typed / theorem / model-check reopen order まで narrow に読んでいた historical memory に留める。
 - current component order は
   - typed source principal split
   - theorem public-contract split
   - model-check public-contract split
   の順に置いてよい。
-- current cut は Problem 1 lane helper に留め、
+- historical `lane problem1-final-public-seams` helper は helper-local / non-production memory であり、
+  current active command surface には戻さない。
+- current cut は Problem 1 lane helper memory に留め、
   final public theorem/model-check/verifier contract には上げない。
 
 ## actualized evidence
 
-- helper:
+- retired helper commands today:
   - `python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams`
   - `python3 scripts/current_l2_guided_samples.py lane problem1-final-public-seams --format json`
-- tests:
+  - current repo では migration note + `supported compatibility commands: list, smoke-all, closeout` を返して exit 2 になる
+- historical helper tests:
   - `python3 -m unittest scripts.tests.test_current_l2_guided_samples`
   - `python3 -m unittest scripts.tests.test_problem_sample_bundles`
+- current compatibility commands:
+  - `python3 scripts/current_l2_guided_samples.py list`
+  - `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+  - `python3 scripts/current_l2_guided_samples.py closeout --format json`
 
 ## stop line
 

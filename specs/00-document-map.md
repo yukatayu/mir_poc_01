@@ -907,29 +907,29 @@
 - `specs/examples/587-current-l2-representative-problem-quickstart-parity-checks-actualization.md`
   - current Phase 6 / Package 113 closeout として、`quickstart-parity` helper を actualize し、sample bundle doc と helper-side quickstart mirror の 4-step parity を focused に確認する補助文書。
 - `specs/examples/588-current-l2-representative-problem-mixed-gate-reopen-map-refresh.md`
-  - current Phase 6 / Package 114 closeout として、`reopen-map` helper と sample bundle doc 側の `現在の mixed gate 再開点` section を actualize し、representative sample floor の後でどの mixed gate をどの command から reopen するかを揃える補助文書。
+  - historical Phase 6 / Package 114 closeout memory として、historical `reopen-map` helper memory と archived sample bundle doc 側の `現在の mixed gate 再開点` memory を保持し、representative sample floor の後でどの mixed gate をどの command から reopen していたかを揃える補助文書。
 - `specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md`
-  - current Phase 6 / Package 115 / 116 closeout として、`reopen-map problem1|problem2` と sample bundle doc 側の `次の split package` section を actualize し、Problem 1 / Problem 2 の remaining mixed gate を次の separate package 名まで narrow に戻す補助文書。
+  - historical Phase 6 / Package 115 / 116 closeout memory として、historical `reopen-map problem1|problem2` helper memory と archived sample bundle doc 側の `次の split package` memory を保持し、Problem 1 / Problem 2 の remaining mixed gate を次の separate package 名まで narrow に戻していた補助文書。
 - `specs/examples/590-current-l2-problem1-typed-source-principal-split-helper-actualization.md`
-  - current Phase 6 / Package 117 closeout として、`split problem1 typed-source-principal` helper と Problem 1 bundle doc 側の typed split entrypoint を actualize し、Problem 1 typed residual を theorem/model-check residual から切り離して narrow に読む補助文書。
+  - historical Phase 6 / Package 117 closeout memory として、historical `split problem1 typed-source-principal` helper memory と archived Problem 1 bundle doc 側の typed split entrypoint memory を保持し、Problem 1 typed residual を theorem/model-check residual から切り離して narrow に読んでいた補助文書。
 - `specs/examples/591-current-l2-problem1-theorem-public-contract-split-helper-actualization.md`
-  - current Phase 6 / Package 118 closeout として、`split problem1 theorem-public-contract` helper と Problem 1 bundle doc 側の theorem split entrypoint を actualize し、Problem 1 theorem public-contract residual を typed / model-check residual から切り離して narrow に読む補助文書。
+  - historical Phase 6 / Package 118 closeout memory として、historical `split problem1 theorem-public-contract` helper memory と archived Problem 1 bundle doc 側の theorem split entrypoint memory を保持し、Problem 1 theorem public-contract residual を typed / model-check residual から切り離して narrow に読んでいた補助文書。
 - `specs/examples/592-current-l2-problem1-model-check-public-contract-split-helper-actualization.md`
-  - current Phase 6 / Package 119 closeout として、`split problem1 model-check-public-contract` helper と Problem 1 bundle doc 側の model-check split entrypoint を actualize し、Problem 1 model-check public-contract residual を typed / theorem residual から切り離して narrow に読む補助文書。
+  - historical Phase 6 / Package 119 closeout memory として、historical `split problem1 model-check-public-contract` helper memory と archived Problem 1 bundle doc 側の model-check split entrypoint memory を保持し、Problem 1 model-check public-contract residual を typed / theorem residual から切り離して narrow に読んでいた補助文書。
 - `specs/examples/593-current-l2-problem2-source-wording-emitted-schema-split-helper-actualization.md`
-  - current Phase 6 / Package 120 closeout として、`split problem2 source-wording-emitted-schema` helper と Problem 2 bundle doc 側の source wording split entrypoint を actualize し、Problem 2 source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow に読む補助文書。
+  - historical Phase 6 / Package 120 closeout memory として、historical `split problem2 source-wording-emitted-schema` helper memory と archived Problem 2 bundle doc 側の source wording split entrypoint memory を保持し、Problem 2 source wording / emitted schema residual を witness-provider public-shape residual から切り離して narrow に読んでいた補助文書。
 - `specs/examples/594-current-l2-problem2-witness-provider-public-shape-split-helper-actualization.md`
-  - current Phase 6 / Package 121 closeout として、`split problem2 witness-provider-public-shape` helper と Problem 2 bundle doc 側の witness-provider split entrypoint を actualize し、Problem 2 witness/provider public-shape residual を source wording / emitted schema residual から切り離して narrow に読む補助文書。
+  - historical Phase 6 / Package 121 closeout memory として、historical `split problem2 witness-provider-public-shape` helper memory と archived Problem 2 bundle doc 側の witness-provider split entrypoint memory を保持し、Problem 2 witness/provider public-shape residual を source wording / emitted schema residual から切り離して narrow に読んでいた補助文書。
 - `specs/examples/595-current-l2-representative-problem-reopen-map-split-closeout-sync.md`
-  - current Phase 6 / Package 122 closeout として、`reopen-map problem1|problem2` helper public surface から stale な `next split packages` 表示を外し、split-package closeout と remaining mixed gate を再同期する補助文書。
+  - historical Phase 6 / Package 122 closeout memory として、historical `reopen-map problem1|problem2` helper memory から stale な `next split packages` 表示を外した split-package closeout reading を保持し、remaining mixed gate を再同期していた補助文書。
 - `specs/examples/596-current-l2-remaining-residual-lane-summary-actualization.md`
-  - current Phase 6 / Package 123 closeout として、`residuals` helper と sample bundle doc 側の residual lane entrypoint を actualize し、remaining mixed gate と true user-spec residual を next reopen order 付きで圧縮する補助文書。
+  - historical Phase 6 / Package 123 closeout memory として、historical `residuals` helper memory と archived sample bundle doc 側の residual lane entrypoint memory を保持し、remaining mixed gate と true user-spec residual を historical next reopen order 付きで圧縮していた補助文書。
 - `specs/examples/597-current-l2-problem1-final-public-seam-lane-helper-actualization.md`
-  - current Phase 6 / Package 124 closeout として、`lane problem1-final-public-seams` helper と Problem 1 bundle doc 側の lane entrypoint を actualize し、Problem 1 final-public-seam lane の component order / stop line を独立 lane として narrow に読む補助文書。
+  - historical Phase 6 / Package 124 closeout memory として、historical `lane problem1-final-public-seams` helper memory と archived Problem 1 bundle doc 側の lane entrypoint memory を保持し、Problem 1 final-public-seam lane の component order / stop line を独立 lane として narrow に読んでいた補助文書。
 - `specs/examples/598-current-l2-problem2-final-public-seam-lane-helper-actualization.md`
-  - current Phase 6 / Package 125 closeout として、`lane problem2-final-public-seams` helper と Problem 2 bundle doc 側の lane entrypoint を actualize し、Problem 2 final-public-seam lane の component order / stop line を独立 lane として narrow に読む補助文書。
+  - historical Phase 6 / Package 125 closeout memory として、historical `lane problem2-final-public-seams` helper memory と archived Problem 2 bundle doc 側の lane entrypoint memory を保持し、Problem 2 final-public-seam lane の component order / stop line を独立 lane として narrow に読んでいた補助文書。
 - `specs/examples/599-current-l2-syntax-modality-final-marker-lane-helper-actualization.md`
-  - current Phase 6 / Package 126 closeout として、`lane syntax-modality-final-marker` helper と sample bundle index / syntax-modality docs を actualize し、final modal foundation / final source marker mixed gate を retained family / separation boundary 付きの独立 lane として narrow に読む補助文書。
+  - historical Phase 6 / Package 126 closeout memory として、historical `lane syntax-modality-final-marker` helper memory と archived sample bundle index / syntax-modality docs を保持し、final modal foundation / final source marker mixed gate を retained family / separation boundary 付きの独立 lane として narrow に読んでいた補助文書。
 - `specs/examples/600-current-l2-typed-checker-first-executable-slice-actualization.md`
   - current Phase 6 / Package 127 closeout として、`check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として narrow に読む補助文書。
 - `specs/examples/601-current-l2-theorem-first-emitted-artifact-loop-hardening.md`
