@@ -81,17 +81,20 @@ current package では、次を採る。
 3. verifier-handoff side と tool-brand side は adjacent に読むが、collapse しない
 4. public-checker artifact preview keep は current compare floor として carry-over してよいが、
    final public checker artifact と同一視しない
-5. reached sample は `e5 / p06 / p07 / p09` に取り、`p05` は guard-only に残す
+5. reached floor は current clean-near-end model-check family
+   `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+   に取り、historical `e5 / p05 / p06 / p07 / p09` labels は current runnable target に使わない
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_model_check_tool_brand_verifier_handoff_coupled_later_gate` | `e5 / p06 / p07 / p09` reached、`p05` guard-only の coupled-later manifest を machine-check する |
-| `current_l2_model_check_public_checker_artifact_preview_actualization` | public-checker artifact preview keep と verifier-handoff reserve keep を compare floor として carry-over する |
-| `current_l2_model_check_property_tool_threshold` | brand-neutral request keep と tool-brand threshold default を compare floor として carry-over する |
-| `current_l2_model_check_row_local_property_actual_adoption` | row-local property route first / checker-boundary contract first を model-check source-backed floor として再確認する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime / static corpus の runnable floor 自体は引き続き green である |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | clean near-end model-check family の representative runtime inventory を読み、active coupled-later floor を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。public-checker artifact preview keep と verifier-handoff reserve keep judgment 自体は helper-local / doc-level に残る |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。brand-neutral request keep と tool-brand threshold default judgment 自体は helper-local / doc-level に残る |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。row-local property route first / checker-boundary contract first judgment と coupled-later judgment 自体は helper-local / doc-level に残る |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | active clean-near-end representative runtime / static corpus floor が compatibility front door から green であることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-current-l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json` | clean model-check sample を CLI-shaped current surface からも読めることを再確認する。ただし old helper manifest の 1:1 proof surface ではない |
 
 ## actualization shape
 
@@ -139,7 +142,7 @@ current helper-local cut では、tool-brand side を
    - tool-brand candidate only
    - final public contract later
    に置くのが自然である。
-3. `e5 / p06 / p07 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. historical package reading としての `e5 / p06 / p07 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。ただし current runnable floor は clean-near-end model-check family に置く。
 4. current package を first settled property language、concrete model-check tool brand adoption、final public checker artifact adoption、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract に昇格させない。
 
 ## retained alternatives

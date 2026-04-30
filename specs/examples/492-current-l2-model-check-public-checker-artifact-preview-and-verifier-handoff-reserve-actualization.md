@@ -87,16 +87,19 @@ current package では、次を採る。
    - runtime-policy contract later
    に置く
 4. public-checker artifact preview と verifier-handoff reserve は adjacent に読むが、collapse しない
-5. reached sample は `e5 / p06 / p07 / p09` に取り、`p05` は guard-only に残す
+5. reached floor は current clean-near-end model-check family
+   `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+   に取り、historical `e5 / p05 / p06 / p07 / p09` labels は current runnable target に使わない
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_model_check_public_checker_artifact_preview_actualization` | `e5 / p06 / p07 / p09` reached、`p05` guard-only の actualization manifest を machine-check する |
-| `current_l2_model_check_row_local_property_actual_adoption` | row-local property route first / checker-boundary contract first を compare floor として carry-over する |
-| `current_l2_model_check_second_line_concretization` | row-local property preview / request preflight / public-checker second reserve split を compare floor として carry-over する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime / static corpus の runnable floor 自体は引き続き green である |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | clean near-end model-check family の representative runtime inventory を読み、active public-checker-preview actualization floor を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。row-local property route first / checker-boundary contract first judgment 自体は helper-local / doc-level に残る |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。row-local property preview / request preflight / public-checker second reserve split judgment と actualization judgment 自体は helper-local / doc-level に残る |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | active clean-near-end representative runtime / static corpus floor が compatibility front door から green であることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-current-l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json` | clean model-check sample を CLI-shaped current surface からも読めることを再確認する。ただし old helper manifest の 1:1 proof surface ではない |
 
 ## actualization shape
 
@@ -146,7 +149,7 @@ current helper-local cut では、verifier-handoff reserve を
    - brand-neutral tool-binding reserve keep
    - runtime-policy contract later
    に置くのが自然である。
-3. `e5 / p06 / p07 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. historical package reading としての `e5 / p06 / p07 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。ただし current runnable floor は clean-near-end model-check family に置く。
 4. current package を final public checker artifact、actual public checker migration、final public verifier contract に昇格させない。
 
 ## retained alternatives

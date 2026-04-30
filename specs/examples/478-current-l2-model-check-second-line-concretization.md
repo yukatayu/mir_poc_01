@@ -62,10 +62,11 @@ current repo では、少なくとも次が source-backed である。
    - row-local `rollback_cut_non_interference`
    を current floor に置き、
    small-cluster semantic relation family を next reserve に置く
-5. actual runnable evidence
-   - `e5` static reached
-   - `p05` guarded not reached
-   - `p06 / p07 / p08 / p09` runtime reached
+5. historical package reading では
+   - `e5` static reached anchor
+   - `p05` guarded not reached anchor
+   - `p06 / p07 / p08 / p09` runtime reached anchors
+   を使っていたが、current runnable floor は clean-near-end model-check family へ置き換える
 
 したがって current open problem は、
 model-check line を discovery することではなく、
@@ -95,20 +96,22 @@ current package では、次を採る。
    - boundary
    - verifier handoff surface
    の second reserve refs として explicit に残す
-6. actual runnable reached sample は `e5 / p06 / p07 / p08 / p09` に取り、
-   `p05` は guard-only に残す
-7. `p09` でも provider / fairness family は excluded family に保ち、
+6. actual runnable reached floor は current clean-near-end model-check family
+   `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+   に取り、historical `e5 / p05 / p06 / p07 / p08 / p09` labels は current runnable target に使わない
+7. order-handoff side を adjacent に読む場合でも provider / fairness family は excluded family に保ち、
    model-check second line と shared-space stronger claim を collapse しない
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_model_check_second_line_concretization` | `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の second-line manifest を machine-check する |
-| `current_l2_model_check_projection_prefloor` | second-line actualization が projection pre-floor の上に乗っていることを再確認する |
-| `current_l2_theorem_prover_binding_preflight` | theorem-first line と model-check second line を sibling helper cut として保てることを再確認する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime / static corpus の runnable floor 自体は引き続き green である |
-| `p09-dice-delegated-rng-provider-placement` | delegated provider practical lineを actualize 済みでも、model-check second line は provider/fairness family を excluded に保てる |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | clean near-end model-check family の representative runtime inventory を読み、active second-line runtime floor を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。projection pre-floor relation 自体は helper-local / doc-level judgment に残り、closeout が直接 emitted するわけではない |
+| `python3 scripts/current_l2_lean_sample_sync.py` | theorem-first line と model-check second line を sibling adjacent cut として読むための proof-bridge sync anchor を与える。1:1 theorem-discharge target ではない |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | active clean-near-end representative runtime / static corpus floor が compatibility front door から green であることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-current-l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json` | clean model-check sample を CLI-shaped current surface からも読めることを再確認する。ただし old helper manifest の 1:1 proof surface ではない |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | delegated provider practical line が actualized 済みでも、model-check second line は provider / fairness family を excluded に保てることを読むための adjacent runtime evidence を与える |
 
 ## actualization shape
 
@@ -174,8 +177,8 @@ current helper-local cut では、public-checker side を
    - brand-neutral request preflight only
    - public-checker chain docs-only reserve
    に置くのが自然である。
-3. `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。
-4. `p09` reached でも provider receipt / fairness family を excluded に保つことで、
+3. historical package reading としての `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。ただし current runnable floor は clean-near-end model-check family に置く。
+4. adjacent order-handoff evidence として `05_delegated_rng_service` を読んでも provider receipt / fairness family を excluded に保つことで、
    Problem 2 stronger line と Problem 1 second line を collapse しない。
 
 ## retained alternatives

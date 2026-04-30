@@ -83,18 +83,21 @@ current package では、次を採る。
    - public checker contract later
    の boundary probe refs に分ける
 6. repo-local emitted artifact refs は second-line concretization と同じ floor に保つ
-7. reached sample は `e5 / p06 / p07 / p08 / p09` に取り、`p05` は guard-only に残す
+7. reached floor は current clean-near-end model-check family
+   `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+   に取り、historical `e5 / p05 / p06 / p07 / p08 / p09` labels は current runnable target に使わない
 8. theorem discharge actual-format、room protocol projection、provider receipt / fairness family は excluded family に保つ
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_model_check_property_tool_seam_probe` | `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の property-language / tool-seam probe manifest を machine-check する |
-| `current_l2_model_check_second_line_concretization` | property/tool-seam probe が second-line concretization の上に乗っていることを再確認する |
-| `current_l2_model_check_projection_prefloor` | row-local carrier / small-cluster projection reserve floor を維持していることを再確認する |
-| `current_l2_theorem_discharge_actual_format_probe` | theorem line と model-check line が sibling mixed-gate probe として保てることを再確認する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime / static corpus の runnable floor 自体は引き続き green である |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | clean near-end model-check family の representative runtime inventory を読み、active property-language / tool-seam probe floor を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。property/tool-seam probe と second-line concretization の relation 自体は helper-local / doc-level judgment に残る |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。row-local carrier / small-cluster projection reserve-floor judgment 自体は helper-local / doc-level に残り、closeout が直接 emitted するわけではない |
+| `python3 scripts/current_l2_lean_sample_sync.py` | theorem line と model-check line を sibling mixed-gate probe として読むための proof-bridge sync anchor を与える。1:1 theorem-discharge target ではない |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | active clean-near-end representative runtime / static corpus floor が compatibility front door から green であることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-current-l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json` | clean model-check sample を CLI-shaped current surface からも読めることを再確認する。ただし old helper manifest の 1:1 proof surface ではない |
 
 ## actualization shape
 
@@ -158,7 +161,7 @@ current helper-local cut では、checker boundary を
    - brand-neutral tool-seam probe only
    - checker-boundary probe only
    に置くのが自然である。
-3. `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. historical package reading としての `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。ただし current runnable floor は clean-near-end model-check family に置く。
 4. theorem discharge actual-format と property/tool-seam probe を sibling helper cut に保つことで、
    theorem line と model-check line の mixed gate を public contract 前で narrow に切り分けられる。
 

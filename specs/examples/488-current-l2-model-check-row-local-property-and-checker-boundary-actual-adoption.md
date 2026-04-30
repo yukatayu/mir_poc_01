@@ -86,17 +86,20 @@ current package では、次を採る。
    - runtime-policy contract later
    に置く
 4. property route と checker-boundary contract route は adjacent に読むが、collapse しない
-5. reached sample は `e5 / p06 / p07 / p08 / p09` に取り、`p05` は guard-only に残す
+5. reached floor は current clean-near-end model-check family
+   `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+   に取り、historical `e5 / p05 / p06 / p07 / p08 / p09` labels は current runnable target に使わない
 6. theorem discharge actual-format、room protocol projection、provider receipt / fairness family は excluded に保つ
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_model_check_row_local_property_actual_adoption` | `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の actual adoption manifest を machine-check する |
-| `current_l2_model_check_property_tool_threshold` | threshold default を actual adoption の compare floor として carry-over する |
-| `current_l2_model_check_second_line_concretization` | row-local property preview / request preflight / public-checker second reserve split を actual adoption に carry-over する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime / static corpus の runnable floor 自体は引き続き green である |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | clean near-end model-check family の representative runtime inventory を読み、active actual-adoption floor を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。threshold default compare-floor judgment 自体は helper-local / doc-level に残る |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。row-local property preview / request preflight / public-checker second reserve split judgment と actual-adoption judgment 自体は helper-local / doc-level に残る |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | active clean-near-end representative runtime / static corpus floor が compatibility front door から green であることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-current-l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json` | clean model-check sample を CLI-shaped current surface からも読めることを再確認する。ただし old helper manifest の 1:1 proof surface ではない |
 
 ## actualization shape
 
@@ -162,7 +165,7 @@ final public checker / verifier contract を意味しない。
    - brand-neutral tool binding reserve keep
    - theorem / shared-space stronger families non-collapse
    に置くのが自然である。
-3. `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. historical package reading としての `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。ただし current runnable floor は clean-near-end model-check family に置く。
 4. current package を first settled property language、concrete tool brand、final public verifier contract に昇格させない。
 
 ## retained alternatives
