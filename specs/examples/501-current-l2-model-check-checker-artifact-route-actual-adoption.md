@@ -81,16 +81,18 @@ current package では、次を採る。
    - actual public checker migration candidate only
    - runtime-policy contract later
    に置く
-3. reached sample は `e5 / p06 / p07 / p09` に取り、`p05` は guard-only に残す
+3. current live compare floor は current clean-near-end model-check family
+   `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+   に取り、historical `e5 / p06 / p07 / p09` compare anchors と `p05` guard-only reading は package-reading memory に留める
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_model_check_checker_artifact_route_actual_adoption` | `e5 / p06 / p07 / p09` reached、`p05` guard-only の actual-adoption manifest を machine-check する |
-| `current_l2_model_check_public_checker_artifact_migration_coupled_later_gate` | artifact/migration coupled-later gate を prior floor として carry-over する |
-| `current_l2_model_check_public_checker_artifact_preview_actualization` | consumer-shaped checker-artifact preview / verifier-handoff reserve keep を prior floor として carry-over する |
-| `current_l2_model_check_tool_brand_verifier_handoff_coupled_later_gate` | tool-brand / verifier-handoff adjacent keep を prior floor として carry-over する |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | clean near-end model-check family の representative runtime inventory を読み、checker-artifact route first / migration candidate adjacent keep の current actual-adoption floor を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。checker-artifact route / migration candidate keep judgment 自体は helper-local / doc-level に残り、closeout が直接 emitted するわけではない |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | active clean-near-end representative runtime / static corpus floor が compatibility front door から green であることを再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json` | clean model-check sample を CLI-shaped current surface からも読めることを再確認する。ただし helper-local actual-adoption manifest の 1:1 public surface ではない |
 
 ## actualization shape
 
@@ -141,7 +143,7 @@ current helper-local cut では、migration keep side を
    - consumer-shaped checker-artifact candidate only
    - migration candidate adjacent keep
    に置くのが自然である。
-3. `e5 / p06 / p07 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. historical package reading としての `e5 / p06 / p07 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。ただし current runnable floor は clean-near-end model-check family に置く。
 4. current package を first settled property language、concrete model-check tool brand、final public checker artifact、actual public checker migration、actual emitted verifier handoff artifact、production checker/runtime-policy contract、final public verifier contract に昇格させない。
 
 ## retained alternatives

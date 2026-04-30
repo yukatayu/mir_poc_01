@@ -74,16 +74,19 @@ current package では、次を採る。
 2. property/tool seam probe は carry-over し、
    property-language probe / tool-seam probe / checker-boundary probe を mixed gate anchor に残す
 3. checker-artifact route / verifier-handoff route / repo-local emitted artifact refs は threshold carry-over に置く
-4. representative reached sample は `e5 / p06 / p07 / p08 / p09`、guard-only は `p05` に取る
+4. current live compare floor は current clean-near-end model-check family
+   `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+   に取り、historical `e5 / p06 / p07 / p09` compare anchors と `p05` guard-only reading は package-reading memory に留める。`p08` は historical theorem/model-check mixed-helper asymmetry anchor 側に残し、この compression cut の reached floor には戻さない
 5. final public model-check contract adoption 群には上げない
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `build_current_l2_source_sample_model_check_public_seam_compression` | threshold + property/tool probe を束ね、remaining model-check public seam residual を helper-local に actualize する runtime support |
-| `current_l2_model_check_public_seam_compression` | `e5 / p06 / p07 / p08 / p09` reached、`p05` guard-only の model-check public-seam compression を machine-check する focused runtime test |
-| `model_check_public_seam_residual:*` refs | current model-check mixed gate を subject-local residual matrix として固定する repo-local ref family |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | clean near-end model-check family の representative runtime inventory を読み、property/tool probe・checker-artifact route・reopen threshold を carry-over した current public-seam compression floor を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | canonical runtime inventory と current emitted rows を与える。public-seam residual matrix judgment 自体は helper-local / doc-level に残り、closeout が直接 emitted するわけではない |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | active clean-near-end representative runtime / static corpus floor が compatibility front door から green であることを再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json` | clean model-check sample を CLI-shaped current surface からも読めることを再確認する。ただし helper-local public-seam compression manifest の 1:1 public surface ではない |
 
 ## current recommendation
 

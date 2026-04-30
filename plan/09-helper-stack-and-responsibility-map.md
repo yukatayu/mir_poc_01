@@ -853,10 +853,10 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - theorem Lean-first non-production stub pilot route
     - theorem-binding preflight を prior floor に保ったまま、review-unit first / Lean-first non-production stub only / repo-local emitted stub refs first を helper-local actualization floor に束ねる runtime test/support helper
   - theorem review-unit to Lean-stub repo-local artifact-conformance bridge
-    - representative authored source sample `e2 / e5` を formal-hook smoke / review-unit emit / Lean stub emit / pair conformance validation に束ね、regression helper へ接続する Python-side repo-local compare-floor helper
+    - representative authored source sample `e2` foundation anchor と live theorem subject `e5` を formal-hook smoke / review-unit emit / Lean stub emit / pair conformance validation に束ね、regression helper へ接続する Python-side repo-local compare-floor helper
   - theorem Lean-stub representative trace-alignment bridge
-    - current live bridge corpus `e2 / e5` と clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor を、review-unit side / Lean stub side の exact-match memory に束ねる runtime test/support helper
-    - historical `p05 / p06 / p07 / p08` widening は compare-floor memory に残し、current live runtime test と同一視しない
+    - live theorem subject `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、committed bridge floor `samples/lean/foundations` + `samples/lean/clean-near-end` を、review-unit side / Lean stub side の exact-match memory に束ねる runtime test/support helper
+    - `e2` は foundation/contrast anchor、historical `p05 / p06 / p07 / p08` widening は compare-floor memory に残し、current live runtime test と同一視しない
   - authoritative-room vertical-slice actualization route
     - `p07/p08` room-default profile、relation/handoff refs、runtime evidence refs、repo-local emitted artifact refs を final emitted schema に上げずに束ねる runtime test/support helper
   - minimal companion / experimental order-handoff surface route

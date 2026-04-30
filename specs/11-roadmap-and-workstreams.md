@@ -305,7 +305,7 @@ actual-adoption floor では、
   - row-local property preview
   - brand-neutral request preflight
   - public-checker second reserve split
-  - `e5 / p06 / p07 / p08 / p09` reached / `p05` guard-only
+  - live model-check floor = current clean-near-end model-check family、historical compare anchors = `e5 / p05 / p06 / p07 / p08 / p09`
 - theorem discharge / public-theorem-contract threshold default:
   `specs/examples/481`
   - review-unit first
@@ -352,14 +352,14 @@ actual-adoption floor では、
   - small-cluster semantic projection second
   - brand-neutral model-check request
   - public checker contract later
-  - `e5 / p06 / p07 / p08 / p09` reached / `p05` guard-only
+  - live model-check floor = current clean-near-end model-check family、historical compare anchors = `e5 / p05 / p06 / p07 / p08 / p09`
 - model-check row-local property / checker-boundary actual adoption:
   `specs/examples/488`
   - row-local property route first
   - checker-boundary contract first
   - brand-neutral tool-binding reserve keep
   - public checker handoff later
-  - `e5 / p06 / p07 / p08 / p09` reached / `p05` guard-only
+  - live model-check floor = current clean-near-end model-check family、historical compare anchors = `e5 / p05 / p06 / p07 / p08 / p09`
 - model-check public-checker artifact preview / verifier-handoff reserve actualization:
   `specs/examples/492`
   - consumer-shaped artifact preview only
@@ -370,7 +370,7 @@ actual-adoption floor では、
   - public-checker artifact preview keep
   - verifier-handoff candidate only
   - tool-brand candidate only
-  - `e5 / p06 / p07 / p09` reached / `p05` guard-only
+  - live model-check floor = current clean-near-end model-check family、historical compare anchors = `e5 / p05 / p06 / p07 / p09`
 - order-handoff source wording / emitted-artifact coupled later gate:
   `specs/examples/496`
   - edge-row principal
@@ -405,15 +405,16 @@ actual-adoption floor では、
   - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem review-unit to Lean-stub repo-local artifact-conformance bridge:
   `specs/examples/509`
-  - representative runtime/static source sample `e2 / e5`
+  - representative authored source sample `e2` foundation anchor + live theorem subject `e5`
   - formal hook / review unit / Lean stub pair alignment
   - regression-integrated reproducible compare floor
   - actual Lean tool execution / public theorem contract later
 - theorem Lean-stub representative trace-alignment bridge:
   `specs/examples/510`
-  - live bridge corpus `e2 / e5`
+  - live theorem subject = `e5`
   - clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor
-  - historical `p05 / p06 / p07 / p08` compare anchors
+  - committed bridge floor = `samples/lean/foundations` + `samples/lean/clean-near-end`
+  - `e2` は foundation/contrast anchor、historical `p05 / p06 / p07 / p08` は compare anchors
   - helper-local pair-alignment memory
   - actual Lean tool execution / public theorem contract later
 - order-handoff serial-scope reserve surface:
@@ -520,8 +521,9 @@ actual-adoption floor では、
   `specs/examples/530`
   - theorem result-object preview helper mirror
   - model-check public-checker preview helper mirror
-  - `p08` theorem reached / model-check guarded
-  - `p09` theorem guarded / model-check reached
+  - theorem side = live subject `e5` + clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor + historical `p05 / p06 / p07 / p08` compare anchors
+  - model-check side = current clean-near-end model-check family + historical `e5 / p05 / p06 / p07 / p09` compare anchors
+  - `p08 / p09` は historical mixed-helper asymmetry anchors
   - Package 58 diagnostics widening close after IFC checker-hint mirror
 - near-end closeout sync after Package 58:
   `specs/examples/531`
@@ -533,8 +535,9 @@ actual-adoption floor では、
   `specs/examples/532`
   - theorem final public-contract reopen threshold helper mirror
   - model-check final public-contract reopen threshold helper mirror
-  - `p08` theorem reached / model-check guarded
-  - `p09` theorem guarded / model-check reached
+  - theorem side = live subject `e5` + clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor + historical `p05 / p06 / p07 / p08` compare anchors
+  - model-check side = current clean-near-end model-check family + historical `e5 / p05 / p06 / p07 / p09` compare anchors
+  - `p08 / p09` は historical mixed-helper asymmetry anchors
   - Package 60 residual mixed-gate compression close
 - order-handoff/shared-space public-seam helper mirror:
   `specs/examples/533`
