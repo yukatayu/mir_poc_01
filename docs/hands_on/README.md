@@ -9,36 +9,23 @@
 
 ## まず読む
 
-- `current_phase_closeout_01.md`
-  - current phase closeout memory と、今すぐ実行する確認コマンド、remaining mixed gate、snapshot docs への入口
-- `visual_debugger_viewer_01.md`
-  - `P16` typed public prototype inventory の最短入口
-- `compiler_backend_llvm_preparation_01.md`
-  - `P17` storage / LLVM / backend preparation current first-cut closeout の最短入口
-- `public_api_parser_gate_01.md`
-  - `P18` public API / parser grammar gate current first-cut closeout の最短入口
-- `post_p18_true_user_spec_hold_01.md`
-  - `U1` post-`P18` true user-spec hold option matrix の最短入口
-- `verification_layer_widening_threshold_01.md`
-  - `R1` VerificationLayer widening-threshold inventory の最短入口
-- `attachpoint_detach_minimal_contract_01.md`
-  - `R2` AttachPoint compatibility / detach minimal contract の最短入口
-- `fairy05_visibility_return_carrier_bundling_01.md`
-  - `R3` FAIRY-05 visibility-return carrier bundling の最短入口
-- `hotplug_real_migration_rollback_boundary_01.md`
-  - `R4` hot-plug real migration / rollback boundary の最短入口
-- `runtime_crate_hotplug_engine_ownership_cut_01.md`
-  - `R5` runtime-crate hot-plug engine ownership cut の最短入口
-- `runtime_crate_hotplug_carrier_admission_cut_01.md`
-  - `R6` runtime-crate hot-plug carrier admission cut の最短入口
-- `avatar_fairy_follow_representative_slice_01.md`
-  - phase 8 current runnable slice の最短入口
-- `typed_external_boundary_canaries_01.md`
-  - phase 9 synthetic preview helper の最短入口
-- `projection_placement_views_01.md`
-  - phase 12 helper/report-local projection preview の最短入口
-- `network_transport_canaries_01.md`
-  - phase 13 helper-local canary の最短入口
+| document | role |
+|---|---|
+| `current_phase_closeout_01.md` | current runnable floor をコマンドで確認する入口。live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照する |
+| `visual_debugger_viewer_01.md` | typed viewer prototype inventory を final public viewer API と分けて読む入口 |
+| `compiler_backend_llvm_preparation_01.md` | storage / LLVM / backend guardrail を non-destructive probe として確認する入口 |
+| `public_api_parser_gate_01.md` | public API / parser grammar gate の mixed-gate split を読む入口 |
+| `post_p18_true_user_spec_hold_01.md` | `U1` option inventory と actual commitment hold line を読む入口 |
+| `verification_layer_widening_threshold_01.md` | `VerificationLayer` widening threshold を helper/runtime evidence floor と分けて読む入口 |
+| `attachpoint_detach_minimal_contract_01.md` | AttachPoint detach boundary と kept-later migration / rollback gate を読む入口 |
+| `fairy05_visibility_return_carrier_bundling_01.md` | `FAIRY-05` planned residualと carrier recommendation を読む入口 |
+| `hotplug_real_migration_rollback_boundary_01.md` | rollback / migration / distributed activation を completed protocol と混同しないための入口 |
+| `runtime_crate_hotplug_engine_ownership_cut_01.md` | helper preview、`mirrorea-core` carrier substrate、`mir-runtime` report assembly の owner split を読む入口 |
+| `runtime_crate_hotplug_carrier_admission_cut_01.md` | engine-neutral request / verdict carrier floor を読む入口 |
+| `avatar_fairy_follow_representative_slice_01.md` | avatar follow active representative slice を読む入口 |
+| `typed_external_boundary_canaries_01.md` | typed external `EXT-03/04` synthetic preview helper を読む入口 |
+| `projection_placement_views_01.md` | projection / placement helper and generated bridge evidence を読む入口 |
+| `network_transport_canaries_01.md` | network helper-local canary を production transport と分けて読む入口 |
 
 ## 既存の長い入門文書
 

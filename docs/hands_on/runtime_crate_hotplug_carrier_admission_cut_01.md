@@ -6,7 +6,7 @@
 
 - final public completion ではありません
 - helper-local preview を Rust-side engine completion と混同しません
-- current queue の narrow cut だけを確認します
+- request / verdict carrier boundary だけを確認します
 
 ## まず実行するコマンド
 
@@ -24,14 +24,13 @@ git diff --check
 ## これで確認できること
 
 - helper-local `hotplug_lifecycle` と attach/detach anchor IDs が
-  current attach/detach evidence summary であること
-- `mirrorea-core` が current Rust-side generic carrier / logical runtime substrate を持ち、
+  helper-local attach/detach evidence carrier であること
+- `mirrorea-core` が Rust-side generic carrier / logical runtime substrate を持ち、
   hot-plug engine をまだ持たないこと
 - `mir-runtime` が thin runtime/report assembly であり、
-  current hot-plug engine owner ではないこと
-- post-`R5` の narrower package sequence が
-  `R6` -> `P19` -> `P20`
-  に recut されたこと
+  completed hot-plug engine owner ではないこと
+- historical package sequencing / recut は `../../plan/34-runtime-crate-hotplug-carrier-admission-cut.md`
+  と `../../docs/reports/` を参照し、この page では request / verdict carrier boundary の確認だけを行うこと
 
 ## これではまだ確認できないこと
 

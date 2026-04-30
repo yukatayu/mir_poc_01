@@ -69,33 +69,14 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 
 ## これで確認できること
 
-- active clean near-end suite と Sugoroku world / avatar fairy follow representative slice が current runnable floor にあること
-- `TermSignature`、`LayerSignature`、`MessageEnvelope`、`VisualizationProtocol` の helper-local / report-local first cut と、`P6` close 後の current `AuthEvidence` lane inventory が current line に同期されていること
-- `P4` `TermSignature` registry hardening が close 済みであり、`signature_lanes = kind/name/evidence_role`、helper closeout `signature_scope = representative_slice`、clean near-end closeout `signature_scope = clean_near_end_canonical_inventory`、active kind family `effect / transition / witness / relation / property`、reserved `message` / `adapter` / `layer` split が current docs / closeout に固定されていること
-- `P5` `LayerSignature` system hardening が close 済みであり、helper/runtime の row key が `name` に揃い、`obligations` lane、helper closeout `layer_signature_scope = representative_slice`、runtime closeout `layer_signature_scope = clean_near_end_canonical_inventory`、helper representative inventory `verification_handoff_witness` / `runtime_turn_trace` / `membership_*` / `hotplug_*`、runtime canonical inventory `auth_authority_witness` / `transport_provider_boundary` / `verification_model_check` が current docs / closeout に固定されていること
-- `P6` `MessageEnvelope / AuthEvidence` seam hardening が close 済みであり、helper/runtime `message_envelope_scope`、`transport_medium` / `transport_seam`、`emitter_principal`、`freshness_checks`、shared `auth_evidence_lanes = kind / subject / issuer / bindings / notes`、helper medium inventory / runtime seam inventory distinction が current docs / closeout に固定されていること
-- `P10` `mirrorea-core` first real implementation tranche が close 済みであり、`LayerSignature`、`PrincipalClaim`、`AuthEvidence`、`MessageEnvelope`、lane inventory、duplicate-name merge helper、carrier validation が `crates/mirrorea-core` に actualize され、clean near-end closeout がそれを利用していること
-- `P11` logical multi-place runtime tranche の current third cut は actualize 済みであり、`MembershipRegistry`、`PlaceCatalog`、participant-place-kind-gated `LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` shell-backed `add_initial_participant` / `add_participant` / `leave_participant` parity helper が `crates/mirrorea-core` に actualize され、`WorldState` / `PlaceRuntime` / `MessageQueue` / `SugorokuState` は kept-later boundary に残っていること
-- `Network transport` の `NET-01` helper-local loopback preview と `NET-02..05` helper-local canary が actualize 済みであり、same-process parity、subprocess JSON bridge、stale reconnect reject、typed failure family、observer-safe redacted route trace を current evidence surface として確認できること
-- phase 9 typed external boundary の `EXT-03` / `EXT-04` synthetic preview helper subset が actualize 済みであり、effect boundary / transport envelope / auth evidence / witness refs の non-collapse と typed adapter failure lane を helper self-consistency + anchor comparison の current evidence surface として確認できること
-- `P12` external adapter / host boundary tranche の current first cut closeout により、typed external helper closeout が `host_boundary_scope = helper_local_synthetic_preview`、`host_boundary_lanes = request / receipt / failure / visualization`、`non_collapse_lanes = transport / auth / membership / capability / witness / visualization`、`host_family_gates = final_public_adapter_api / exact_host_schema / browser_network_vr_host_family_split`、`host_boundary_inventory` を返し、per-sample `EXT-03` / `EXT-04` run は `host_boundary` split を返すことを helper-local inventory として確認できること
-- `P2` residual planned family review が close 済みであり、`EXT-01` / `EXT-02` / `EXT-05` の indirect anchor / reopen criterion / kept-later gate が current docs / helper closeout に固定されていること
-- phase 12 projection / placement の helper/report-local preview floor が actualize 済みであり、`projection_view` と `cross_place_projection` によって system-wide source から authority place / participant place / adapter seam / observer view refs への split を current evidence surface として確認できること
-- `P3` projection / placement residual emitted-program gate が close 済みであり、projection validity report minimum、generated artifact reserve policy、`P15` handoff line が current docs に固定されていること
-- `P15` projection/codegen first emitted place-specific programs の current first-cut closeout が close 済みであり、`scripts/projection_codegen_samples.py`、`samples/generated/projection-placement/manifest.json`、`P15-GEN-01..04` committed generated bridge evidence、`generated_bridge_artifact_inventory`、`generated_reserve_inventory`、`equivalence_review_categories`、`validation_floor` が current docs / dashboard / report に固定されていること
-- `P16` visual debugger / viewer first public prototype の current first-cut closeout が close 済みであり、`scripts/visual_debugger_viewer_samples.py`、`P16-VIEW-01..05`、`viewer_panel_lanes` / `viewer_telemetry_lanes`、`actualized_panel_kinds`、`kept_later_gates` が current docs / dashboard / report に固定されていること
-- `P17` storage / LLVM / backend preparation の current first-cut closeout が close 済みであり、`scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh --list`、`docs/hands_on/compiler_backend_llvm_preparation_01.md`、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` を通じて external workdir / cleanup / LLVM staging ownership mismatch が non-destructive probe floor として current docs / dashboard / report に固定されていること
-- `HotPlug Patch / AttachPoint` の helper-local lifecycle canary が actualize 済みであり、`attach_request#1` / `detach_request#1` / `detached_roll_request#1` / `hotplug_lifecycle` / attach-detach telemetry-view と helper closeout `hotplug_scope` / `hotplug_lifecycle_lanes` / `hotplug_anchor_envelopes` / `hotplug_view_ids` / `hotplug_telemetry_row_ids` を envelope-derived evidence として確認できること
-- `R5` runtime-crate hot-plug engine ownership cut が close 済みであり、helper-local preview / `mirrorea-core` generic carrier-substrate / `mir-runtime` thin runtime-report assembly の owner split と Python/Rust duplication != ownership migration complete を current docs に固定したこと
-- `R6` runtime-crate hot-plug carrier admission cut が close 済みであり、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を current docs に固定したこと
-- `P19` `mirrorea-core` hot-plug request/verdict carrier tranche も close 済みであり、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `crates/mirrorea-core/src/fabric.rs` に actualize しつつ、helper-local lifecycle / sample-grounded IDs / attach-detach view-telemetry IDs / rollback / migration / distributed activation ordering / final public ABI を kept-later に残したこと
-- phase 8 avatar representative slice が actualize 済みであり、follow / fallback / stale-anchor rejection / detached-anchor safety を helper-local evidence surface で確認できること
-- `auth none` baseline のまま、transport / authentication / membership / capability / witness を collapse していないこと
-- typed visualization / telemetry line が label / authority / redaction / retention を意識した evidence carrier として置かれていること
-- NET-05 observer route trace が fail-closed であり、observer-safe debug output が principal / auth / freshness / authorization / raw witness refs を漏らさないこと
-- external workdir と `CARGO_TARGET_DIR` / `CARGO_HOME` binding により、small-VPS 前提の backend/LLVM guardrail が current snapshot に入っていること
-- `llvm/src` が disposable cleanup から外され、`/mnt/mirrorea-work/llvm` parent non-writable 時の `llvm/build` / `llvm/install` cleanup に guard 実装があること
-- ただし current non-destructive closeout で実際に通すのは list-mode と owner/writable visibility までであり、refusal branch 自体は stop line / code-path evidence として扱うこと
+- active clean near-end suite、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug Rust floor が current runnable または closeout-backed surface として確認できること。
+- `TermSignature`、`LayerSignature`、`MessageEnvelope`、`AuthEvidence`、`VisualizationProtocol` / telemetry envelope、helper `verification_handoff_witness`、runtime `verification_model_check` の current evidence carriers が helper-local / report-local inventory として読めること。
+- `mirrorea-core` の `MembershipRegistry`、`PlaceCatalog`、`LogicalPlaceRuntimeShell`、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と、`mir-runtime` の hot-plug skeleton / engine report が repo-local floor として確認できること。
+- typed external `EXT-03/04`、network `NET-02..05`、projection/codegen generated manifest bridge、viewer `P16-VIEW-01..05` は final public ABI / service / emitted executable ではなく、typed helper evidence として読めること。
+- `auth none` baseline のまま、transport / authentication / membership / capability / witness / visualization を collapse していないこと。
+- NET-05 observer route trace が fail-closed であり、observer-safe debug output が principal / auth / freshness / authorization / raw witness refs を漏らさないこと。
+- storage/backend guardrail が external workdir、`CARGO_TARGET_DIR` / `CARGO_HOME`、non-destructive cleanup list-mode、`llvm/src` exclusion、parent non-writable guard を current operational floorとして確認できること。
+- package-by-package history はこの guide では再列挙せず、`docs/reports/` と relevant `plan/` を正本として読むこと。
 
 ## これではまだ確認できないこと
 
@@ -135,10 +116,10 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
   `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md`
 - final public API:
   まだ deferred
-- deferred mixed gate:
+- deferred public/mixed-gate categories:
   parser/public API、auth/public contract、adapter/public contract、exact host schema、visualization/public contract、projection/public API、hot-plug/public API
 
-## remaining mixed gate
+## deferred public/mixed-gate categories
 
 - final parser grammar / public parser / checker / runtime / verifier surface
 - final public auth / visualization / projection / hot-plug surface
@@ -149,7 +130,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - `FAIRY-05` runnable reopen / final carrier naming beyond current provisional recommendation
 - actual LLVM artifact と backend choice
 
-## remaining true user-spec gate
+## `U1` decision categories
 
 - installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
@@ -178,7 +159,7 @@ current snapshot を読むときは、次だけ押さえれば十分です。
 
 - helper-local preview、generated bridge evidence、report-local inventory は final public API / emitted executable / production service contract ではありません。
 - `P0..P21` と post-`P21` docs-first trilogy は close 済みですが、この guide は closed package ledger を再列挙しません。
-- actual next reopen point は引き続き `U1` actual commitment です。
+- next reopen point はこの guide では固定せず、`progress.md` と `tasks.md` の current snapshot を参照します。report `1046` 作成時点の snapshot は `U1` actual commitment を指しています。
 
 ## 関連文書
 
