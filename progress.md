@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 16:33 JST
+最終更新: 2026-04-30 16:40 JST
 
 ## この文書について
 
@@ -42,6 +42,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - standard I/O は Mir core primitive ではありません。
 - `auth none` baseline は final auth design ではありません。
 - helper-local preview / report-local inventory / committed generated bridge evidence は final public API ではありません。projection/codegen current `equivalence` reading も review-category alignment inventory に留まり、cross-place equivalence checker / proof completion / final public emitted-program ABI ではありません。
+- current `VerificationLayer` emitted rows / previews / downstream consumers / emitted verifier handoff artifacts は separate current surfaces であり、それだけで final public verifier contract を意味しません。
 - runtime-private hot-plug request / verdict / engine-state names は final public hot-plug ABI names ではありません。
 - visualization / telemetry は untyped debug leak ではなく、label / authority / redaction / retention を持つ typed information-bearing effect として扱います。
 - `U1` option matrix は actual product decision ではなく、actual decision の入口です。
@@ -131,6 +132,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 16:40 JST — `VerificationLayer` public composition contract boundary docs-first inventory を行い、`plan/29` に emitted rows / evidence carriers / downstream consumers / kept-later contract carriers の split と、その current relation を追加した。supporting mirror として `plan/27` verification boundary と `docs/research_abstract/public_api_parser_gate_plan_01.md` も current split へ同期し、`progress.md` strict non-claims と `tasks.md` research-discovery line を sharpen した。`sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json`、`sugoroku_world_samples.py closeout --format json`、`cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:33 JST — `VerificationLayer` theorem/runtime boundary spec-memory alignment repair を行い、`plan/29` の unresolved wording を `specs/10` に合わせて separate-row vs composed-family と emitted verifier handoff artifact relation の問題に戻し、runtime-policy matrix row に phase5 handoff threshold memory anchor を足した。`progress.md` feature row の stale `emitted-row widening` wording は `widening contract` に冷やし、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:27 JST — `VerificationLayer` theorem-bridge / runtime-policy widening boundary docs-first inventory を行い、`plan/29` に proof notebook review unit / Lean bridge / theorem reopen-threshold memory と、phase5 handoff threshold / model-check planning memory / runtime-policy preview language を current non-emitted boundary anchor として追加した。`plan/14` glossary と `progress.md` feature row を同期し、`tasks.md` research-discovery line を theorem-bridge/runtime-policy widening relation まで明示化した。`sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json`、`sugoroku_world_samples.py closeout --format json`、`cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:21 JST — projection/codegen equivalence-evidence boundary docs-first inventory を行い、`plan/20` に current `equivalence` reading が committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まること、`P15-GEN-01..04` と `equivalence_review_categories` が current closeout surface であり、future cross-place equivalence checker / final public emitted-program ABI とは別 gate であることを追加した。reviewer 指摘に従って `progress.md` durable snapshot にも same stop line を鏡写しし、`projection_codegen_samples.py closeout --format json`、Sugoroku projection preview run、clean near-end `05_delegated_rng_service` run、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。

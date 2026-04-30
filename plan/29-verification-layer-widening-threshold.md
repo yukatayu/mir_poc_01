@@ -121,6 +121,35 @@ repository memory である。
   - the exact relation among `verification_model_check`, theorem result objects, emitted verifier handoff artifacts, and any future public verifier contract
 - this inventory is current repository memory only. It does not choose a widening package and does not freeze public naming.
 
+## current composition-contract boundary inventory
+
+- current `VerificationLayer` surfaces remain explicitly split.
+  - active emitted rows:
+    - helper `verification_handoff_witness`
+    - runtime `verification_model_check`
+  - evidence carriers / helper-local previews:
+    - `verification_preview`
+    - theorem bridge
+    - runtime policy preview
+  - downstream consumers:
+    - `verification_summary`
+    - `model_check_summary`
+    - viewer / telemetry prototype inventory
+  - kept-later contract carriers:
+    - actual emitted verifier handoff artifact
+    - production checker / runtime-policy contract
+    - final public verifier contract
+- current fixed relation among these surfaces:
+  - emitted rows may feed preview or downstream evidence, but emitted rows alone do not define a public verifier contract
+  - evidence carriers may summarize or stage future widening material, but they do not auto-promote into emitted rows
+  - downstream consumer lanes may expose verification evidence outward, but they are not `VerificationLayer` rows
+  - emitted verifier handoff artifacts and final public verifier contracts remain later gates beyond the current emitted floor
+- still unresolved before any public composition contract is fixed:
+  - which of these surfaces become part of the first frozen public verifier seam
+  - the exact naming and migration relation among emitted rows, theorem/model-check artifacts, and any emitted verifier handoff artifact
+  - how helper `representative_slice` and runtime `clean_near_end_canonical_inventory` map into any shared public verifier surface
+- this composition inventory is current repository memory only. It does not freeze a public verifier contract.
+
 ## widening threshold matrix
 
 | family | current carrier | current status | widen only when | kept-later / stop line |

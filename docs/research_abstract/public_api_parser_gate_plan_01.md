@@ -24,7 +24,7 @@ current repo で close したのは、次の docs-first inventory です。
 
 - current `.mir` surface は companion notation であり、final grammar ではない
 - `mir_hilight.html` は readable viewer であり、parser / checker / verifier ではない
-- `VerificationLayer` current reading は typed explanation / evidence carrier に留める
+- `VerificationLayer` current reading は typed explanation / evidence carrier に留め、emitted row / preview / downstream consumer / later handoff-contract の split を collapse しない
 - `MessageEnvelope` / `AuthEvidence` seam は current lane inventory として読む
 - visualization / telemetry は `label` / `authority` / `redaction` /
   `retention_scope` / `source_refs` を持つ typed effect として読む
