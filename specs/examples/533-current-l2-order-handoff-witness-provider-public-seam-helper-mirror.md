@@ -88,21 +88,26 @@ current package では、次を採る。
 2. `serial on ...` は helper-local reserve surface のまま carry-over する
 3. final public wording / final public witness-provider-artifact contract adoption には上げない
 
+historical `p07 / p08 / p09` labelsは helper-summary compare-anchor memory として残るが、
+current active evidence は Sugoroku late-join slices、`NET-03` reconnect canary、
+adjacent clean-near-end order-handoff familyへ分かれている。
+
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `cargo test -p mir-runtime --test current_l2_operational_cli` | `run-source-sample` JSON/pretty summary に order-handoff / witness-provider public seam helper mirror が現れることを machine-check する |
-| `p07` | order-handoff/witness-provider public seam helper mirror reached |
-| `p08` | order-handoff/witness-provider public seam helper mirror reached |
-| `p09` | serial reserve surface は reached だが、public seam helper mirror は guard-only |
+| `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json` | publication / handoff core floor が historical `p07` public-seam mirror reading の current replacement として runnable |
+| `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership --format json` | late-join visible-history floor が historical `p07` reading の current replacement として runnable |
+| `python3 scripts/network_transport_samples.py run NET-03 --debug reconnect --format json` | stale reconnect / no silent merge canary が historical `p08` reading の current replacement として runnable |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | adjacent current-L2 order-handoff floor を再確認できる。`05_delegated_rng_service` は witness/provider route の active adjacent evidence、`01` は reached floor、`02/03` は negative pair floor に当たる |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | compatibility front door から current corpus floor を再確認できる。`run-source-sample` helper summary naming 自体は repo-local helper memory に残る |
 
 ## current recommendation
 
 1. Problem 2 / shared-space residual mixed gate は、final public seams の docs reading を helper-local operational summary に mirror してよい。
 2. principal source wording は edge-row / vertical continuation に据え置く。
 3. `serial on ...` は authoritative-room-specific reserve surface のまま carry-over する。
-4. `p09` を reached に無理に押し広げず、`p07 / p08` reached・`p09` guard の current cut を保つのが semantically honest である。
+4. `p09` を reached に無理に押し広げず、historical `p07 / p08` reached memory・`p09` guard memory の current cut を保つのが semantically honest である。current active adjacent evidence は Sugoroku / `NET-03` / clean-near-end order-handoff familyへ分けて読む。
 5. `run-source-sample` helper summary へ出したからといって、final public wording や final public witness/provider/artifact contract を fixed したとは読まない。
 
 ## retained alternatives

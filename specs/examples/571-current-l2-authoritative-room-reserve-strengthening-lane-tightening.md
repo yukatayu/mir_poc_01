@@ -52,6 +52,10 @@ current repo では、少なくとも次が source-backed である。
    - first completion line と reserve package 群を collapse しない
    - room profile / public contract / checker migration を premature に widen しない
 
+historical `p07 / p08 / p09 / p05` labelsは helper-summary compare-anchor memory として残るが、
+first completion line / reserve lane / model-check second line の current active evidence は
+Sugoroku、`NET-03`、clean-near-end order-handoff family、clean-near-end model-check familyへ分かれている。
+
 したがって current open problem は、
 reserve package を discovery することではなく、
 **first completion line を壊さずに reserve package 群をどこまで operational helper summary に actualize してよいか**
@@ -90,11 +94,12 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_operational_cli` | `authoritative_room_reserve_strengthening_lane` を JSON / pretty の両方で inspect できる |
-| `p07-dice-late-join-visible-history` | witness strengthening reached + model-check second line reached の representative reserve sample |
-| `p08-dice-stale-reconnect-refresh` | reconnect default profile を保ったまま model-check second line only を reached にできる sample |
-| `p09-dice-delegated-rng-provider-placement` | delegated RNG practical route reached + model-check second line reached の representative reserve sample |
-| `p05-dice-owner-guarded-chain` | reserve strengthening lane 自体を widen しすぎない guard-only sample |
+| `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json` | first completion line boundary の publication / handoff core floor が current active replacement として runnable |
+| `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership --format json` | late-join visible-history floor が historical `p07` reserve-lane boundary memory の current replacement として runnable |
+| `python3 scripts/network_transport_samples.py run NET-03 --debug reconnect --format json` | reconnect default profile / stale epoch rejection canary が historical `p08` boundary memory の current replacement として runnable |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current active order-handoff family を再確認できる。`05_delegated_rng_service` は reserve practical route、`06_auditable_authority_witness` は witness-strengthening active adjacent evidence に当たる |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | current active model-check second-line family を再確認できる |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | compatibility front door から current corpus floor を再確認できる。`run-source-sample` helper summary naming 自体は repo-local helper memory に残る |
 
 ## actualization shape
 
@@ -154,7 +159,7 @@ current helper-local cut では、reserve lane boundary を
    - reserve 側の strengthening / practical / model-check second line を separate status のまま operational summary に actualize する
    - final public witness/provider/checker contract を先取りしない
    に置くのが自然である。
-3. `p07 / p08 / p09` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. `p07 / p08 / p09` reached、`p05` guard-only の helper-summary memory は semantically honest だが、current active replacement evidence は Sugoroku / `NET-03` / clean-near-end order-handoff / clean-near-end model-check familyへ分けて読む。
 4. current queue は zero ではなく、reserve strengthening lane close 後も docs/report closeout と later mixed gate residual が残る。
 
 ## retained alternatives
