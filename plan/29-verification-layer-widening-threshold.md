@@ -74,6 +74,23 @@ repository memory である。
   - visualization / telemetry downstream law families
 - this inventory is current repository memory only and does not claim a final public layer law schema
 
+## current naming-gate inventory
+
+- active emitted row names on the current floor:
+  - helper `verification_handoff_witness`
+  - runtime `verification_model_check`
+- evidence-carrier or downstream-consumer names that are intentionally not active emitted row names:
+  - helper-local `verification_preview`
+  - helper `verification_summary`
+  - helper `model_check_summary`
+  - theorem bridge
+  - runtime policy preview
+- not yet fixed as public/shared `VerificationLayer` names:
+  - theorem bridge / runtime policy / visualization lane public naming
+  - whether current emitted row names survive unchanged into any future public verifier surface
+  - the exact naming relation between emitted row names and downstream consumer names
+- this naming inventory is current repository memory only and does not claim a final public verifier contract
+
 ## widening threshold matrix
 
 | family | current carrier | current status | widen only when | kept-later / stop line |
