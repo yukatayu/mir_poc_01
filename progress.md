@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 00:03 JST
+最終更新: 2026-05-01 00:05 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 00:05 JST — `docs/research_abstract/README.md` の `current reading の要点` を family pointer index に圧縮し、package ledger を runnable floor / boundary reading / major family pointers / subsystem summaries / command landing へ置き換えた。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、research abstract index の role を front door / future-axis summary / hands-on landing と揃えた。
 - 2026-05-01 00:03 JST — `docs/research_abstract/mirrorea_future_axis_01.md` の residual warm wording を冷やし、`next docs-first line` / `close 済み major package` / hot-plug `latest line` phrasing を roadmap-memory family / current repository memory / current stop line wording に合わせた。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、reader-facing roadmap summary も current snapshot authority と role を揃えた。
 - 2026-04-30 23:59 JST — `README.md`、`Documentation.md`、`docs/hands_on/current_phase_closeout_01.md` の front-door mirror cooling を行い、live package-status narration を boundary bullets / current-surface summary / pointer block へ圧縮した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、front door / short snapshot / hands-on guide の role を `progress.md` / `tasks.md` / `plan/` / `docs/reports/` と再分離した。
 - 2026-04-30 23:48 JST — `tasks.md` の post-sweep validation rerun mirror を再同期し、stale `full validation rerun` / `still green` wording と stale timestamp を current `1041` report wording に合わせて修正した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、task-map snapshot authority を current closeout evidence に揃えた。

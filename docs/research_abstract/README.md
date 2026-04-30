@@ -105,36 +105,16 @@
 
 現在の active line は次です。
 
-- active canonical sample は `samples/clean-near-end/`
-- first strong typing layer は finite decidable index fragment
-- authority / label / capture / region / cost は user-defined finite theory
-- order / handoff は high-level relation family で読む
-- mutex / weak-memory family は model-check second line に置く
-- Lean は small proof foundations と generated stub corpus に分かれる
-- Sugoroku world vertical slice は single OS process logical multi-place emulator として動く
-- Mirrorea future-axis は current promoted line ではなく、typed external effect boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を reader-facing に整理した closed roadmap-memory familyである。live queue authority は `progress.md` / `tasks.md` を参照する
-- `MessageEnvelope / Auth seam` の first cut は close 済みであり、current helper/report-local carrier は `auth none` baseline を explicit に見せる
-- `VisualizationProtocol` の first cut も close 済みであり、current helper/report-local carrier は label / authority / redaction を持つ typed visualization / telemetry line を explicit に見せる
-- `Typed external boundary / adapter` の docs-first sample plan も close 済みであり、phase 9 `EXT-01..05` planned family は `samples/not_implemented/typed-external-boundary/` を参照する
-- `Typed external boundary executable widening` も current line に入り、`scripts/typed_external_boundary_samples.py` と `samples/not_implemented/typed-external-boundary/` で `EXT-03` / `EXT-04` synthetic preview helper subset を確認できる
-- `Projection / placement` の docs-first plan も close 済みであり、`plan/20-projection-and-placement-roadmap.md` と `docs/research_abstract/projection_placement_plan_01.md` を current anchor にする
-- `HotPlug Patch / AttachPoint` の helper-local executable widening も close 済みであり、`plan/21-hotplug-attachpoint-roadmap.md`、`docs/research_abstract/hotplug_attachpoint_plan_01.md`、Sugoroku helper の `hotplug_lifecycle` / `--debug hotplug` を current anchor にする
-- `Network transport` の docs-first plan も close 済みであり、`plan/22-network-transport-roadmap.md` と `docs/research_abstract/network_transport_plan_01.md` を current anchor にする
-- `Network transport helper-local canaries` も close 済みであり、`scripts/network_transport_samples.py`、`samples/clean-near-end/network-transport/README.md`、`../hands_on/network_transport_canaries_01.md` を current executable anchor にする
-- `Compiler/backend/LLVM preparation` guardrail も close 済みであり、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` と `docs/research_abstract/compiler_backend_llvm_preparation_01.md` を current anchor にする
-- `P18` public API / parser grammar gate の repo-side first cut も close 済みであり、`plan/27-public-api-parser-gate-roadmap.md` と `public_api_parser_gate_plan_01.md` を current public-boundary inventory / mixed-gate split の anchor にする
-- post-`P18` true user-spec hold line は `post_p18_true_user_spec_hold_option_matrix_01.md` と `plan/28-post-p18-true-user-spec-hold-option-matrix.md` を入口にし、actual commitment は still later に残す
-- `R1` closeout memory は `verification_layer_widening_threshold_01.md` と `plan/29-verification-layer-widening-threshold.md` を入口にし、helper/runtime verification lane の current emitted floor と widening threshold matrix を reader-facing に残す
-- `R2` closeout memory は `attachpoint_detach_minimal_contract_01.md` と `plan/30-attachpoint-detach-minimal-contract.md` を入口にし、helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を reader-facing に残す
-- `R3` closeout memory は `fairy05_visibility_return_carrier_bundling_01.md` と `plan/31-fairy05-visibility-return-carrier-bundling.md` を入口にし、`FAIRY-05` を active 化せずに typed bundle over `state_timeline` + `anchor_switch` という provisional recommendation を reader-facing に残す
-- historical `R4` closeout memory は `hotplug_real_migration_rollback_boundary_01.md` と `plan/32-hotplug-real-migration-rollback-boundary.md` を入口にし、real migration / rollback / runtime-crate hot-plug engine / distributed activation ordering を current helper-local evidence がまだ証明していない kept-later boundary として reader-facing に残す
-- `R6` runtime-crate hot-plug carrier admission cut は close 済みであり、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定した
-- `P19` `mirrorea-core` hot-plug request/verdict carrier tranche も close 済みであり、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を `crates/mirrorea-core/src/fabric.rs` に actualize した
-- `P20` `mir-runtime` hot-plug orchestration skeleton first tranche` と `P21` runtime-crate hot-plug completed-engine narrow cut も close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport` / `HotPlugRuntimeEngineReport` と consumer-side `assemble_hotplug_runtime_skeleton_report()` / `assemble_hotplug_runtime_engine_report()`、example builders を actualize した
-- post-`P21` later-family docs-first hardening では、`plan/36-post-p21-rollback-durable-migration-family.md` を入口に `rollback / durable migration` family を first recommendation close 済み、`plan/37-post-p21-distributed-activation-ordering-family.md` を入口に `distributed activation ordering` family を second recommendation close 済み、`plan/38-post-p21-final-public-hotplug-abi-family.md` を入口に `final public hot-plug ABI` family を third recommendation close 済みとした。third recommendation で fixed したのは `freeze prerequisite fixed; public ABI still unfrozen` までである
-- `hands-on docs / closeout` も close 済みであり、`docs/hands_on/current_phase_closeout_01.md` を current closeout landing page にする
-- avatar fairy follow は `samples/clean-near-end/avatar-follow/` と `scripts/avatar_follow_samples.py` で widened active representative slice を持つ
-- `samples/not_implemented/avatar-fairy-follow/` は phase 8 residual planned family であり、現在は `FAIRY-05` reacquire-after-return だけを残す reader-facing plan anchor である
+- runnable floor:
+  active canonical sample は `samples/clean-near-end/`、base source corpus は `samples/current-l2/`、Lean evidence は `samples/lean/` です。Sugoroku world、avatar follow representative slice、typed external `EXT-03/04` preview、network `NET-02..05` canary、projection/codegen bridge evidence、viewer prototype inventory、hot-plug Rust floor は runnable または closeout-backed です。
+- boundary reading:
+  Mirrorea future-axis は current promoted line ではなく、typed external boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を reader-facing に整理した roadmap-memory family です。live queue authority は `progress.md` / `tasks.md` に残します。
+- major family pointers:
+  overall future-axis summary は `mirrorea_future_axis_01.md`、post-`P18` true user-spec hold line は `post_p18_true_user_spec_hold_option_matrix_01.md`、verification / FAIRY-05 / hot-plug family memory は `verification_layer_widening_threshold_01.md`、`attachpoint_detach_minimal_contract_01.md`、`fairy05_visibility_return_carrier_bundling_01.md`、`hotplug_real_migration_rollback_boundary_01.md`、`runtime_crate_hotplug_engine_ownership_cut_01.md`、`runtime_crate_hotplug_carrier_admission_cut_01.md`、`post_p21_rollback_durable_migration_family_01.md`、`post_p21_distributed_activation_ordering_family_01.md`、`post_p21_final_public_hotplug_abi_family_01.md` を入口にします。
+- subsystem summaries:
+  typed external / adapter、projection / placement、hot-plug attachpoint、network transport、compiler/backend guardrail は、それぞれ `typed_external_boundary_adapter_plan_01.md`、`projection_placement_plan_01.md`、`hotplug_attachpoint_plan_01.md`、`network_transport_plan_01.md`、`compiler_backend_llvm_preparation_01.md` を current anchor にします。
+- command-oriented landing:
+  実行コマンド付きの closeout landing は `../hands_on/current_phase_closeout_01.md` です。avatar follow の planned residual は `samples/not_implemented/avatar-fairy-follow/` に残し、現在は `FAIRY-05` だけを reader-facing plan anchor にします。
 
 次はまだ deferred です。
 
