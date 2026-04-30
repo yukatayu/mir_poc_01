@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 15:57 JST
+最終更新: 2026-04-30 16:02 JST
 
 ## この文書について
 
@@ -131,6 +131,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 16:02 JST — `VerificationLayer` law surface docs-first inventory を行い、`plan/29` に current emitted law-family inventory を追加し、shared emitted laws が `evidence_preservation` / `residual_obligations_are_explicit`、helper-only emitted law が `no_hidden_handoff_without_witness` に留まること、theorem bridge / runtime policy / visualization law families は widening candidate のままであることを `plan/14` glossary mirror とともに固定した。front-door summary は既存 current reading で十分と判断し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:57 JST — stale-wording lint feasibility audit を行い、`scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` は structural/scaffold check のみを担っていること、naive lexical lint は `docs/reports/`、`specs/examples/`、`sub-agent-pro/`、`progress.md` recent log で false positive を多発させることを確認した。将来やるなら active-current docs 限定の standalone allowlisted pass に留めるべきと整理し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:47 JST — `remaining open gate` wording normalization を行い、`specs/11`、`plan/01`、`plan/11`、`plan/17`、`plan/35`、`plan/38`、`progress.md`、`docs/hands_on/post_p21_final_public_hotplug_abi_family_01.md` の `next open work` / `current next open work` lexical marker を current snapshot authority と historical snapshot wording に合わせて冷やした。`specs/00` と `specs/10` の dated anchor は historical closeout / handoff anchor と判断し維持した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:39 JST — docs sweep 後の full validation floor を rerun し、`check_source_hierarchy.py`、`validate_docs.py`、current-L2 / clean near-end / Sugoroku / avatar / typed external / network / projection / viewer closeouts、`current_l2_lean_sample_sync.py`、storage guardrail、`cargo test -p mir-ast`、`cargo test -p mirrorea-core`、`cargo test -p mir-runtime`、`cargo test -p mir-semantics`、`cargo fmt --check`、`git diff --check` が pass した。Lean manifest sync は path 出力のみで working tree clean を保ち、storage guardrail は `/mnt/mirrorea-work/llvm` parent non-writable の既知警告のみを再確認した。

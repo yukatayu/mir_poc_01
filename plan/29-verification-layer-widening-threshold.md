@@ -61,6 +61,19 @@ repository memory である。
     `residual_obligations_are_explicit`,
     `evidence_preservation`
 
+## current law-family inventory
+
+- shared emitted laws on the current `VerificationLayer` floor:
+  - `evidence_preservation`
+  - `residual_obligations_are_explicit`
+- helper-only emitted law on the current floor:
+  - `no_hidden_handoff_without_witness`
+- not yet emitted as active `VerificationLayer` laws:
+  - theorem bridge law families
+  - runtime policy / emitted verifier handoff artifact law families
+  - visualization / telemetry downstream law families
+- this inventory is current repository memory only and does not claim a final public layer law schema
+
 ## widening threshold matrix
 
 | family | current carrier | current status | widen only when | kept-later / stop line |

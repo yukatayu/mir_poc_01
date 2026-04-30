@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 15:57 JST
+最終更新: 2026-04-30 16:02 JST
 
 ## この文書について
 
@@ -29,6 +29,7 @@
 - 2026-04-30 の post-sweep full validation rerun も maintenance-only closeout であり、docs-only refresh 後の sample/helper/cargo/formatter floor が still green であることを再確認しただけで、new implementation queue は reopened していません。
 - 2026-04-30 の remaining-open-gate wording normalization も maintenance-only closeout であり、`specs/11` / `plan/` / `progress.md` / hands-on mirror の `next open work` lexical marker を current snapshot authority と dated snapshot wording に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の stale-wording lint feasibility audit では、allowlist なしの lexical lint は `docs/reports/` / `specs/examples/` / `sub-agent-pro/` / `progress.md` recent log に false positive を多発させるため不採用とし、将来やるなら active-current docs 限定の standalone allowlisted pass に留める boundary だけを確認しました。new implementation queue は reopened していません。
+- 2026-04-30 の `VerificationLayer` law surface docs-first inventory では、current emitted floor が helper `verification_handoff_witness` と runtime `verification_model_check` の 2 row に留まり、shared emitted laws が `evidence_preservation` / `residual_obligations_are_explicit`、helper-only emitted law が `no_hidden_handoff_without_witness` であること、theorem bridge / runtime policy / visualization law families は widening candidate のままであることを `plan/29` / `plan/14` に固定しました。new implementation queue は reopened していません。
 
 ## executable floor
 
@@ -137,7 +138,7 @@ These are safe to do without new product decisions.
 
 ## research-discovery items
 
-- exact public `VerificationLayer` law surface and composition contract.
+- exact public `VerificationLayer` law surface and composition contract beyond the current emitted floor (`verification_handoff_witness`, `verification_model_check`).
 - `FAIRY-05` final implementation carrier and negative companion shape.
 - projection equivalence evidence beyond committed generated bridge manifest.
 - rollback / durable migration engine state machine after `P21`.

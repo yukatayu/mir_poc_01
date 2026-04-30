@@ -65,6 +65,7 @@
 - finite-index checker、theorem bridge、model-check second line、runtime policy preview、
   visualization / telemetry lane を typed layer composition として読む current explanation 語彙
 - current emitted floor は helper `verification_handoff_witness` と runtime `verification_model_check` を含む evidence carrier に留まり、theorem bridge / runtime policy / visualization lane の final naming は未決
+- current emitted law floor は shared `evidence_preservation` / `residual_obligations_are_explicit` と helper-only `no_hidden_handoff_without_witness` に留まり、theorem bridge / runtime policy / visualization lane の law families は widening candidate に残す
 - `R1` current line では helper `verification_handoff_witness` / runtime `verification_model_check` だけを emitted floor に保ち、`verification_summary` / `model_check_summary` / theorem bridge / runtime policy は downstream consumer または evidence carrier に残す
 - hidden verifier builtin や final public verifier contract を意味しない
 
