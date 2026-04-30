@@ -2,7 +2,7 @@
 
 ## この文書の役割
 
-この文書は、2026-04-29 時点の **repo-local alpha current line** と
+この文書は、**repo-local alpha current line** と
 **Mirrorea future-axis docs-first line** を、実行コマンドと stop line 付きで短く確認するための hands-on closeout guide です。
 
 - final public completion ではありません
@@ -131,7 +131,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
   script の `--debug` 出力、detached artifact、report-local inventory
 - dashboard:
   `samples_progress.md`
-- current task map / next open gate:
+- current task map / current roadmap summary:
   `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md`
 - final public API:
   まだ deferred
@@ -157,19 +157,19 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - broader application target
 - final shared-space operational catalog
 
-## closeout memory and actual next open gate
+## closeout memory and current snapshot reading
 
 1. post-`P20` / post-`P21` closeout memory
-   - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。さらに `R7` post-`P20` hot-plug next-package inventory も close 済みであり、`P21` runtime-crate hot-plug completed-engine narrow cut を next narrow line として固定した。現在は `P21` も close 済みであり、`HotPlugRuntimeEngineState`、`HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` を actualize した。exact next label は intentionally unfixed のまま保ちつつ、`rollback / durable migration` family hardening を first recommendation close 済み、`distributed activation ordering` family hardening を second recommendation close 済み、`final public hot-plug ABI` family hardening を third recommendation close 済みとして docs-first に固定した。third recommendation で fixed したのは `freeze prerequisite fixed; public ABI still unfrozen` までであり、next open work は actual `U1` commitment に移る
+   - `P20` `mir-runtime` hot-plug orchestration skeleton first tranche は close 済みであり、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。さらに `R7` post-`P20` hot-plug next-package inventory も close 済みであり、`P21` runtime-crate hot-plug completed-engine narrow cut を historical next narrow line として固定した。現在は `P21` も close 済みであり、`HotPlugRuntimeEngineState`、`HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` を actualize した。exact next label は intentionally unfixed のまま保ちつつ、`rollback / durable migration` family hardening を first recommendation close 済み、`distributed activation ordering` family hardening を second recommendation close 済み、`final public hot-plug ABI` family hardening を third recommendation close 済みとして docs-first に固定した。third recommendation で fixed したのは `freeze prerequisite fixed; public ABI still unfrozen` までであり、current snapshot reading は actual `U1` commitment hold line に移っている
 2. `P19` closeout memory
    - `crates/mirrorea-core/src/fabric.rs` の engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を current narrow Rust carrier floor として読む
    - helper-local lifecycle / sample-grounded attach-detach IDs / attach-detach view-telemetry IDs / rollback / migration / distributed activation ordering / final public ABI は kept-later に残した current closeout memory
 3. `R6` closeout memory
    - `runtime_crate_hotplug_carrier_admission_cut_01.md`、`../research_abstract/runtime_crate_hotplug_carrier_admission_cut_01.md`、`../../plan/34-runtime-crate-hotplug-carrier-admission-cut.md`
-   - post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow にした current queue memory
+   - post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow にした closeout-time queue memory
 4. `R7` closeout memory
    - `post_p20_hotplug_next_package_inventory_01.md`、`../research_abstract/post_p20_hotplug_next_package_inventory_01.md`、`../../plan/35-post-p20-hotplug-next-package-inventory.md`
-   - post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を current narrow closeout memory に actualize した上で、exact next label intentionally unfixed の later-family reading を順序つきに保った current queue memory
+   - post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を current narrow closeout memory に actualize した上で、exact next label intentionally unfixed の later-family reading を順序つきに保った closeout-time queue memory
    - first recommendation closeout memory は `post_p21_rollback_durable_migration_family_01.md` と `../../plan/36-post-p21-rollback-durable-migration-family.md` を入口に読む
    - second recommendation closeout memory は `post_p21_distributed_activation_ordering_family_01.md` と `../../plan/37-post-p21-distributed-activation-ordering-family.md` を入口に読む
    - third recommendation closeout memory は `post_p21_final_public_hotplug_abi_family_01.md` と `../../plan/38-post-p21-final-public-hotplug-abi-family.md` を入口に読む

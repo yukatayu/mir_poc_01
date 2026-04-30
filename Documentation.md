@@ -48,7 +48,7 @@ base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evi
 
 ### 1.1 Mirrorea future integration line
 
-current sample floor の次に進む promoted line は、Mirrorea future-axis の整理と repo-local actualization です。
+Mirrorea future-axis は current sample floor の次の promoted line ではなく、整理済みの docs-first / repo-local actualization roadmap-memory family です。live queue authority は `progress.md` / `tasks.md` を参照してください。
 
 - `Place` は participant と同一ではなく、state / queue / capability / visibility / observation frontier を持つ execution locus として読みます。
 - Sugoroku sample に出てくる `world` は current sample surface の host/server-side sugar として読み、Mir core primitive だと固定しません。

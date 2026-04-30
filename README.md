@@ -44,7 +44,7 @@
 
 ## Mirrorea の次軸
 
-current repo の次の promoted line は、Mirrorea future-axis の docs-first / repo-local integration です。
+Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の closed roadmap-memory family です。live queue authority は `progress.md` / `tasks.md` を参照してください。
 
 - 主軸は
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**

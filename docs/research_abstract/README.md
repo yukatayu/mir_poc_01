@@ -112,7 +112,7 @@
 - mutex / weak-memory family は model-check second line に置く
 - Lean は small proof foundations と generated stub corpus に分かれる
 - Sugoroku world vertical slice は single OS process logical multi-place emulator として動く
-- 次の promoted line は Mirrorea future-axis であり、typed external effect boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を docs-first / repo-local queue として整理する
+- Mirrorea future-axis は current promoted line ではなく、typed external effect boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を reader-facing に整理した closed roadmap-memory familyである。live queue authority は `progress.md` / `tasks.md` を参照する
 - `MessageEnvelope / Auth seam` の first cut は close 済みであり、current helper/report-local carrier は `auth none` baseline を explicit に見せる
 - `VisualizationProtocol` の first cut も close 済みであり、current helper/report-local carrier は label / authority / redaction を持つ typed visualization / telemetry line を explicit に見せる
 - `Typed external boundary / adapter` の docs-first sample plan も close 済みであり、phase 9 `EXT-01..05` planned family は `samples/not_implemented/typed-external-boundary/` を参照する

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 15:18 JST
+最終更新: 2026-04-30 15:29 JST
 
 ## この文書について
 
@@ -23,6 +23,7 @@
 - 2026-04-30 の `plan/02` / `plan/07` / `plan/09` temperature audit も maintenance-only closeout であり、repository memory の stale current-line wording を冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の full validation rerun / `samples/README.md` + `scripts/README.md` + `samples_progress.md` front-door parity sync も maintenance-only closeout であり、current validation floor と sample/script taxonomy の説明を揃えただけで、new implementation queue は reopened していません。
 - 2026-04-30 の `plan/01` point-in-time disclaimer audit も maintenance-only closeout であり、repository memory の storage / queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
+- 2026-04-30 の `plan/11` / roadmap mirror point-in-time audit も maintenance-only closeout であり、near-term roadmap memory / front-door summary / hands-on landing の stale date / queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 
 ## executable floor
 

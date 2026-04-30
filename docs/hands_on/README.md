@@ -10,7 +10,7 @@
 ## まず読む
 
 - `current_phase_closeout_01.md`
-  - 2026-04-28 時点の current phase closeout と、今すぐ実行する確認コマンド、remaining mixed gate、next queue
+  - current phase closeout memory と、今すぐ実行する確認コマンド、remaining mixed gate、snapshot docs への入口
 - `visual_debugger_viewer_01.md`
   - `P16` typed public prototype inventory の最短入口
 - `compiler_backend_llvm_preparation_01.md`

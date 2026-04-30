@@ -1,5 +1,11 @@
 # plan/11 — 近接ロードマップ
 
+## この文書について
+
+- この文書は near-term roadmap の repository memory であり、current queue authority は `progress.md` / `tasks.md` に置く
+- ここに残す package chain / reopen wording は closeout memory と still-later boundary を読むためのもので、active maintenance line や fresh validation status は `progress.md` / `tasks.md` / `docs/reports/` で再確認する
+- reader-facing summary や hands-on mirror へ current line を反映するときも、この文書だけを live package pointer として読まない
+
 ## current reading
 
 - clean near-end active suite と Sugoroku world vertical slice は current runnable floor として維持する
@@ -61,9 +67,9 @@
 - `docs/reports/0995-*` は post-`P21` distributed activation ordering family second recommendation closeout を表し、`plan/37` と companion docs により `activation_cut` widening criteria、durable activation commit / public ABI / transport-collapse stop line、当時の third recommendation handoff を current roadmap に actualize した。現在の third recommendation closeout は `plan/38` と `docs/reports/0997-*` を参照する
 - `docs/reports/0996-*` は post-`P21` final public hot-plug ABI family の audit を表し、minimum sync set、stale wording、traceability break、freeze-prerequisite stop line を inventory として残した
 - `docs/reports/0997-*` は post-`P21` final public hot-plug ABI family third recommendation closeout を表し、`plan/38` と companion docs により `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、next open work = actual `U1` commitment を current roadmap に actualize した
-- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、third recommendation docs-first close の後に来る
+- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、third recommendation docs-first close の後に来る。current maintenance-only line かどうかの queue authority は `progress.md` / `tasks.md` に残す
 
-## stabilized queue
+## historical closeout chain
 
 1. `P0` Current-state audit and source-hierarchy validation
    - close 済み。stale active reference、source hierarchy、front-door docs drift を再確認する。
@@ -135,4 +141,4 @@ phase 7 / 8 が final public completion に上がったわけではない。
 
 pre-clean-near-end package chain、old `p..` tranche、old Problem 1 / Problem 2 residual reopen line は
 historical closeout memory として `specs/examples/` / archive / old reports に残す。
-near-term active reading の正本は clean near-end suite、Sugoroku vertical slice、`samples_progress.md`、Mirrorea future-axis queue である。
+near-term active reading の snapshot authority は clean near-end suite、Sugoroku vertical slice、`samples_progress.md`、`progress.md`、`tasks.md` を合わせて読む。
