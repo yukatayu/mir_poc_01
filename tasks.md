@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 23:35 JST
+最終更新: 2026-04-30 23:48 JST
 
 ## この文書について
 
@@ -31,7 +31,7 @@
 - 2026-04-30 の `plan/11` / roadmap mirror point-in-time audit も maintenance-only closeout であり、near-term roadmap memory / front-door summary / hands-on landing の stale date / queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の landing docs date-stamp audit も maintenance-only closeout であり、front-door current-line wording と `current_phase_closeout_01.md` 参照の stale queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の reader-facing detailed summary audit も maintenance-only closeout であり、`docs/research_abstract/` の residual `actual next open work` / stale date wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
-- 2026-04-30 の post-sweep full validation rerun も maintenance-only closeout であり、docs-only refresh 後の sample/helper/cargo/formatter floor が still green であることを再確認しただけで、new implementation queue は reopened していません。
+- 2026-04-30 の post-sweep validation rerun も maintenance-only closeout であり、docs-only refresh 後の sample/helper/cargo/formatter validation set を再確認しただけで、new implementation queue は reopened していません。
 - 2026-04-30 の remaining-open-gate wording normalization も maintenance-only closeout であり、`specs/11` / `plan/` / `progress.md` / hands-on mirror の `next open work` lexical marker を current snapshot authority と dated snapshot wording に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の stale-wording lint feasibility audit では、allowlist なしの lexical lint は `docs/reports/` / `specs/examples/` / `sub-agent-pro/` / `progress.md` recent log に false positive を多発させるため不採用とし、将来やるなら active-current docs 限定の standalone allowlisted pass に留める boundary だけを確認しました。new implementation queue は reopened していません。
 - 2026-04-30 の `VerificationLayer` law surface docs-first inventory では、current emitted floor が helper `verification_handoff_witness` と runtime `verification_model_check` の 2 row に留まり、shared emitted laws が `evidence_preservation` / `residual_obligations_are_explicit`、helper-only emitted law が `no_hidden_handoff_without_witness` であること、theorem bridge / runtime policy / visualization law families は widening candidate のままであることを `plan/29` / `plan/14` に固定しました。new implementation queue は reopened していません。
