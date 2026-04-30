@@ -493,8 +493,9 @@ actual-adoption floor では、
   - Package 56 closeout、helper/CLI hardening next
 - delegated RNG provider placement representative carry-over:
   `specs/examples/525`
-  - `p09` delegated RNG provider placement
-  - representative Lean sample set carry-over
+  - archived compare anchor `p09`
+  - current compare floor は clean-near-end `05_delegated_rng_service`
+  - active Lean front door は `samples/lean/clean-near-end/05_delegated_rng_service/`、archived old Lean appendix は `p09`
   - helper/CLI hardening と broader coverage widening の first slice
 - order-handoff helper CLI surface preview actualization:
   `specs/examples/526`
@@ -503,13 +504,13 @@ actual-adoption floor では、
   - Package 58 helper/CLI hardening first slice
 - order-handoff negative static-stop actualization:
   `specs/examples/527`
-  - `p13 / p14` late-join visibility negative pair
-  - helper-local source-sample runner static stop
+  - archived negative-pair anchor `p13 / p14`
+  - current compare floor は clean-near-end `02 / 03`
   - Package 58 order-handoff negative corpus tightening first pair
 - order-handoff negative pair representative Lean sample-set carry-over:
   `specs/examples/528`
-  - `p13 / p14` late-join visibility negative pair
-  - representative Lean sample set / committed Lean corpus carry-over
+  - archived carry-over anchor `p13 / p14`
+  - active Lean front door は clean-near-end `02 / 03`
   - Package 58 broader theorem-side widening after static-stop actualization
 - IFC typed checker-hint preview actualization:
   `specs/examples/529`
