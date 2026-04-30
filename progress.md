@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 16:08 JST
+最終更新: 2026-04-30 16:21 JST
 
 ## この文書について
 
@@ -29,7 +29,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Mirrorea carrier / runtime floor:
   `TermSignature`、`LayerSignature`、`MessageEnvelope` / `AuthEvidence`、typed visualization / telemetry envelope、`MembershipRegistry`、`PlaceCatalog`、`LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` helper、engine-neutral `HotPlugRequest` / `HotPlugVerdict`、runtime-side `HotPlugRuntimeSkeletonReport` / `HotPlugRuntimeEngineReport` まで actualize 済みです。
 - Preview / generated evidence floor:
-  typed external synthetic preview、network helper-local canary、projection preview、projection/codegen committed generated bridge evidence、viewer typed public prototype inventory、storage / LLVM guardrail が current scope close 済みです。
+  typed external synthetic preview、network helper-local canary、projection preview、projection/codegen committed generated bridge evidence、viewer typed public prototype inventory、storage / LLVM guardrail が current scope close 済みです。projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まり、checker / proof / final public emitted-program ABI は kept-later gate に残ります。
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
 - Current remaining open gate:
@@ -41,7 +41,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 - standard I/O は Mir core primitive ではありません。
 - `auth none` baseline は final auth design ではありません。
-- helper-local preview / report-local inventory / committed generated bridge evidence は final public API ではありません。
+- helper-local preview / report-local inventory / committed generated bridge evidence は final public API ではありません。projection/codegen current `equivalence` reading も review-category alignment inventory に留まり、cross-place equivalence checker / proof completion / final public emitted-program ABI ではありません。
 - runtime-private hot-plug request / verdict / engine-state names は final public hot-plug ABI names ではありません。
 - visualization / telemetry は untyped debug leak ではなく、label / authority / redaction / retention を持つ typed information-bearing effect として扱います。
 - `U1` option matrix は actual product decision ではなく、actual decision の入口です。
@@ -131,6 +131,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 16:21 JST — projection/codegen equivalence-evidence boundary docs-first inventory を行い、`plan/20` に current `equivalence` reading が committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まること、`P15-GEN-01..04` と `equivalence_review_categories` が current closeout surface であり、future cross-place equivalence checker / final public emitted-program ABI とは別 gate であることを追加した。reviewer 指摘に従って `progress.md` durable snapshot にも same stop line を鏡写しし、`projection_codegen_samples.py closeout --format json`、Sugoroku projection preview run、clean near-end `05_delegated_rng_service` run、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:08 JST — `FAIRY-05` reopen criteria docs-first inventory を行い、`plan/31` に current reopen-criteria inventory を追加して、same-package 必須条件を positive reacquire sample / negative companion / `state_timeline` + `anchor_switch` evidence / docs-report-snapshot sync に固定し、`carrier_choice`・helper-local naming・negative companion breadth・same-helper vs separate-helper boundary は未決のまま残した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:05 JST — `VerificationLayer` public naming gate docs-first inventory を行い、`plan/29` に current naming-gate inventory を追加して、active emitted names が helper `verification_handoff_witness` / runtime `verification_model_check` に留まり、`verification_preview` / `verification_summary` / `model_check_summary` / theorem bridge / runtime policy preview は evidence-carrier または downstream-consumer naming に残ることを `plan/14` glossary mirror とともに固定した。public/shared naming と emitted-row-to-consumer naming relation は未決のままとし、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:02 JST — `VerificationLayer` law surface docs-first inventory を行い、`plan/29` に current emitted law-family inventory を追加し、shared emitted laws が `evidence_preservation` / `residual_obligations_are_explicit`、helper-only emitted law が `no_hidden_handoff_without_witness` に留まること、theorem bridge / runtime policy / visualization law families は widening candidate のままであることを `plan/14` glossary mirror とともに固定した。front-door summary は既存 current reading で十分と判断し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。

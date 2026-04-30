@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 16:08 JST
+最終更新: 2026-04-30 16:21 JST
 
 ## この文書について
 
@@ -32,6 +32,7 @@
 - 2026-04-30 の `VerificationLayer` law surface docs-first inventory では、current emitted floor が helper `verification_handoff_witness` と runtime `verification_model_check` の 2 row に留まり、shared emitted laws が `evidence_preservation` / `residual_obligations_are_explicit`、helper-only emitted law が `no_hidden_handoff_without_witness` であること、theorem bridge / runtime policy / visualization law families は widening candidate のままであることを `plan/29` / `plan/14` に固定しました。new implementation queue は reopened していません。
 - 2026-04-30 の `VerificationLayer` public naming gate docs-first inventory では、active emitted names が helper `verification_handoff_witness` / runtime `verification_model_check` に留まり、`verification_preview` / `verification_summary` / `model_check_summary` / theorem bridge / runtime policy preview は evidence-carrier または downstream-consumer naming に残ること、public/shared naming と emitted-row-to-consumer naming relation は未決のままであることを `plan/29` / `plan/14` に固定しました。new implementation queue は reopened していません。
 - 2026-04-30 の `FAIRY-05` reopen criteria docs-first inventory では、same-package 必須条件を positive reacquire-after-return sample / negative companion / `state_timeline` + `anchor_switch` evidence / docs-report-snapshot sync に固定し、`carrier_choice`・helper-local naming・negative companion breadth・same-helper vs separate-helper boundary は未決のまま `plan/31` に残しました。new implementation queue は reopened していません。
+- 2026-04-30 の projection/codegen equivalence-evidence boundary docs-first inventory では、current `equivalence` reading が committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まり、`P15-GEN-01..04` / `equivalence_review_categories` は current closeout surface、future cross-place equivalence checker / final public emitted-program ABI は kept-later gate のままであることを `plan/20` に固定しました。new implementation queue は reopened していません。
 
 ## executable floor
 
@@ -142,7 +143,7 @@ These are safe to do without new product decisions.
 
 - exact public `VerificationLayer` law surface, public naming, and composition contract beyond the current emitted floor (`verification_handoff_witness`, `verification_model_check`).
 - `FAIRY-05` reopen criteria, final implementation carrier, and negative companion shape.
-- projection equivalence evidence beyond committed generated bridge manifest.
+- projection equivalence evidence boundary, future checker relation, and public emitted-program contract beyond committed generated bridge manifest.
 - rollback / durable migration engine state machine after `P21`.
 - distributed activation ordering evidence once multi-place / multi-server pressure is available.
 - production transport / replay design that preserves transport / auth / membership / capability / witness separation.

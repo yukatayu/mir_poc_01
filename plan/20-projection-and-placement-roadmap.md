@@ -139,6 +139,40 @@ current `P3` close で固定するのは **minimum report categories** だけで
 - current stop line:
   manifest bridge evidence only。final emitted executable program ではない。
 
+## current equivalence-evidence boundary
+
+- current `equivalence` reading は cross-place equivalence checker ではなく、
+  helper/report-local anchor と committed generated manifest の **review-category alignment inventory** に留まる。
+- current committed surface は次で閉じている。
+  - reserve path 上の committed generated bridge evidence:
+    `samples/generated/projection-placement/manifest.json`
+  - live-anchor alignment artifact IDs:
+    `P15-GEN-01..04`
+  - closeout categories:
+    `generated_bridge_artifact_inventory`
+    `generated_reserve_inventory`
+    `equivalence_review_categories`
+    `validation_floor`
+- current `equivalence_review_categories` は少なくとも次を separate に見る。
+  - `source_ref_alignment`
+  - `place_split_alignment`
+  - `authority_placement_alignment`
+  - `membership_frontier_alignment`
+  - `observer_view_alignment`
+  - `adapter_transport_alignment`
+  - `authority_provider_non_collapse`
+  - `witness_path_alignment`
+  - `report_local_boundary_alignment`
+  - `preview_only_boundary`
+- したがって current cut が主張しているのは、
+  system-wide source / place split / authority / membership / observer / adapter / witness / preview-only boundary を
+  committed manifest 上で evidence-oriented に review できることまでである。
+- これは final public emitted-program contract でも、
+  generated place-specific executable synthesis でも、
+  semantic equivalence proof / checker completion でもない。
+- 将来 widening するなら、review-category inventory と
+  future cross-place equivalence checker / final public emitted-program ABI の relation を別途固定する必要がある。
+
 ## current command set
 
 ```bash
