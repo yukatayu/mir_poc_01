@@ -65,20 +65,28 @@ current first line は次である。
 | fairness claim | no distributed fairness theorem required in first completion line |
 | contrast target | append-friendly notice room |
 
+historical `p07 / p08 / p09 / p13 / p14` labelsは compare-anchor memory として残るが、
+old `p07/p08` combined story を単独で再現する current sample は存在しない。
+current active evidence は Sugoroku late-join slices、`NET-03` reconnect canary、
+adjacent clean-near-end order-handoff checksへ分かれている。
+
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `cargo test -p mir-runtime --test current_l2_operational_cli 'authoritative_room_first_scenario' -- --nocapture` | helper summary が `p07/p08` reached、`p09` reserve、`p14` negative static stop、pretty summary の explanatory floorを machine-check する |
-| `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt --format json` | reached first scenario の profile / relation / handoff / runtime evidence / artifact refs を確認できる |
-| `cargo run -q -p mir-runtime --example mir_current_l2 -- run-source-sample samples/prototype/current-l2-order-handoff/p09-dice-delegated-rng-provider-placement.txt --format json` | delegated RNG placement が reserve route に留まり、representative default pair に昇格していないことを確認できる |
+| `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json` | publication / handoff core floor が current Sugoroku slice として runnable |
+| `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership --format json` | history-visible-as-past late-join floor が historical `p07` reading の current replacement として runnable |
+| `python3 scripts/network_transport_samples.py run NET-03 --debug reconnect --format json` | stale reconnect / membership-epoch guard canary が historical `p08` reading の current replacement として runnable |
+| `python3 scripts/network_transport_samples.py check-all --format json` | network canary family は green であり、old `p08` fail-then-refresh story は split replacement evidence として扱う |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | adjacent current-L2 order-handoff floor を再確認できる。`01` reached、`02/03` negative pair、`05` delegated RNG reserve practical route を current active familyとして読める |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | compatibility front door から current corpus floor を再確認できる。`run-source-sample` helper summary naming 自体は repo-local helper memory に残る |
 
 ## current recommendation
 
 1. authoritative-room first scenario は helper-local summary まで actualize してよい。
-2. reached line は `p07` / `p08` の representative pair に保つ。
-3. delegated RNG placement は `p09` の reserve practical route に残し、first default pair に昇格しない。
-4. late-join negative pair `p13` / `p14` は helper-local static stop として visible に保つ。
+2. reached line は `p07` / `p08` の representative pair memory に保つが、current runnable replacement evidence は Sugoroku `03/05`、`NET-03`、adjacent clean-near-end floorへ分けて読む。
+3. delegated RNG placement は `p09` の reserve practical route に残し、first default pair に昇格しない。current active adjacent evidence は clean-near-end `05_delegated_rng_service` に置く。
+4. late-join negative pair `p13` / `p14` は helper-local static stop として visible に保つ。current active adjacent evidence は clean-near-end `02/03` に置く。
 5. repo-local emitted artifact refs は first scenario summary に隣接させてよいが、final public contract には上げない。
 
 ## retained alternatives
@@ -91,8 +99,6 @@ current first line は次である。
 - distributed fairness theorem
 
 ## stop line
-
-current package は次で止める。
 
 - distributed fairness theorem
 - exhaustive shared-space catalog
