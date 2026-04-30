@@ -744,16 +744,17 @@ actual-adoption floor では、
   - Package 91 helper-local actualization close 後は Package 92 first strong typing finite-index layer、Package 93 Lean-first formal skeleton hardening、Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout の once-through sequence へ進む
 - finite-index first-layer capture / lifetime / cost actualization:
   `specs/examples/566`
-  - `p15-typed-capture-escape-rejected`
-  - `p16-typed-remote-call-budget-exceeded`
-  - source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16`
+  - historical prototype anchor `p15 / p16`
+  - current sample-side compare floor は clean-near-end typing `04 / 05`
+  - source-side first strong typing line は clean-near-end typing family と helper-local threshold keep に留める
   - helper-local checker summary / verifier preview alignment / model-check projection widening
-  - Package 92 close 後は Package 93 Lean-first formal skeleton hardening、Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout の once-through sequence へ進む
+  - historical queue anchor only。current queue authority は `progress.md` / `tasks.md` に置く
 - Lean-first formal skeleton hardening after finite-index widening:
   `specs/examples/567`
   - `CurrentL2FiniteIndexFirstLayer.lean`
-  - representative generated theorem stub corpus `p15 / p16` widening
-  - foundation と generated stub の役割差
+  - current generated stub front door は `samples/lean/clean-near-end/`
+  - `p15 / p16` widening は archived `samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/` appendix memory
+  - foundation / active generated stub / old appendix の役割差
   - historical queue anchor only。current queue authority は `progress.md` / `tasks.md` に置く
 - theorem/model-check bridge carrier reconnect after finite-index widening:
   `specs/examples/568`

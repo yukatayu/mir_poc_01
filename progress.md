@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 21:26 JST
+最終更新: 2026-04-30 21:49 JST
 
 ## この文書について
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。2026-04-29 には uncommitted Rust formatting cleanup を `b213721` として commit / push 済みです。
   `scripts/current_l2_guided_samples.py` の current active compatibility front door は `list / smoke-all / closeout` に限定され、legacy bundle / lane / reserve / hold-line / emit-* helper command claims は package ごとに historical memory へ冷やしています。
-  `specs/examples/572..582`、`585..587` と `specs/12 D-157..167/D-170..172`、`specs/11`、`specs/00`、archived `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/` は guided helper / bundle / matrix / quickstart cluster を historical helper memory / archived bundle memory に同期済みです。`specs/examples/583/584` と `specs/12 D-168/D-169` は surviving `smoke-all` compatibility wrapper、`specs/examples/579` と `specs/12 D-164` は archived parser-companion compare-floor inspection、`specs/examples/600` と `specs/12 D-185` は clean-near-end `check-source-sample` current surface に同期済みです。次の stale-docs line は、older pre-clean-near-end prototype / `samples/lean/current-l2` path をまだ current path のように書いている earlier example cluster の memory cooling です。
+  `specs/examples/572..582`、`585..587` と `specs/12 D-157..167/D-170..172`、`specs/11`、`specs/00`、archived `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/` は guided helper / bundle / matrix / quickstart cluster を historical helper memory / archived bundle memory に同期済みです。`specs/examples/583/584` と `specs/12 D-168/D-169` は surviving `smoke-all` compatibility wrapper、`specs/examples/579` と `specs/12 D-164` は archived parser-companion compare-floor inspection、`specs/examples/600` と `specs/12 D-185` は clean-near-end `check-source-sample` current surface に同期済みです。さらに `specs/examples/566/567` と `specs/12 D-151/D-152`、`specs/11`、`specs/00` は finite-index typing / Lean formal skeleton stale-path cluster を current clean-near-end compare floor + active `samples/lean/clean-near-end/` / archived prototype + archived `samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/` split に同期済みです。次の stale-docs line は、older IFC / order-handoff representative carry-over cluster `specs/examples/522..529` に残る pre-clean-near-end prototype / old Lean corpus wording の memory cooling です。
 
 ## strict non-claims
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 21:49 JST — finite-index typing / Lean formal skeleton stale-path cooling を行い、`specs/examples/566/567`、`specs/12 D-151/D-152`、`specs/11`、`specs/00` を current clean-near-end typing `04/05` compare floor、active `samples/lean/clean-near-end/` generated stub front door、archived pre-clean-near-end prototype / old Lean corpus appendix split に同期した。`clean_near_end_samples.py run typing --format json`、`current_l2_lean_sample_sync.py`、docs floor、targeted stale-path `rg`、`git diff --check` を pass し、残件を `specs/examples/522..529` representative carry-over cluster の stale wording へ圧縮した。
 - 2026-04-30 21:26 JST — guided helper / bundle / matrix / quickstart cluster cooling を行い、`specs/examples/572..582`、`585..587`、`600`、`specs/12 D-157..169/D-170..172/D-185`、`specs/11`、`specs/00`、archived `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/` を historical helper memory / archived bundle memory / clean-near-end `check-source-sample` current surface に同期した。retired `show` / `run` / `matrix` / `bundle` / `smoke problemX` / `quickstart*` negative evidence、surviving `smoke-all`、archived parser-companion inspector、clean-near-end `check-source-sample`、docs floor を取り直し、残件を earlier example cluster の pre-clean-near-end path memory cooling へ切り替えた。
 - 2026-04-30 20:50 JST — `current_l2_guided_samples.py` reopen/split/lane/residual cluster cooling を行い、`specs/examples/588..599`、`specs/12 D-173..184`、`specs/11`、`specs/00` を `list / smoke-all / closeout` only の current wrapper reading と archived problem-bundle / reopen-map / split / lane / residual historical helper memory 読みに同期した。`reopen-map` / `residuals` / `lane ...` / `split ...` failure evidence と docs floor を取り直し、残件を `specs/examples/600` / `D-185` と older bundle/quickstart/matrix mirrors へ圧縮した。
 - 2026-04-30 20:29 JST — `current_l2_guided_samples.py` emit-family historical-memory cooling を行い、`specs/examples/601/602/603/604/609/610/611`、`specs/12 D-186..189/D-194..196`、`specs/11`、`specs/00` を `list / smoke-all / closeout` only の current wrapper reading と emitted-artifact / reopen-order / summary-index historical helper memory 読みに同期した。retired `emit-theorem problem1` / `emit-scenario problem2` / `emit-reserve ...` failure evidence、`current_l2_guided_samples.py list`、`smoke-all --format json`、`closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
