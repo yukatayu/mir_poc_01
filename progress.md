@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 22:43 JST
+最終更新: 2026-04-30 22:52 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 22:52 JST — `tasks.md` stale maintenance wording cleanup を行い、`current_l2_guided_samples.py` emit-family historical-memory bullet に残っていた obsolete residual note を、same-day 20:50 JST の reopen/split/lane/residual cluster closeout と整合する wording へ修正した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、current task map の self-driven maintenance ordering を再同期した。
 - 2026-04-30 22:43 JST — `specs/examples/476/477` authority-witness / delegated-RNG family-wide wording temperature alignment を行い、historical `p07/p08/p05/p09` compare-anchor memory と current clean-near-end `06/01/05` + order-handoff family evidence を分離し、current actualization cut / package-local `next self-driven line` も current repo-level queue authority と collapse しない wording へ冷やした。clean-near-end `run-sample 06`、`run-sample 01`、`run-sample 05`、`clean_near_end_samples.py run order-handoff --format json`、`clean_near_end_samples.py closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、この family に current blocker となる maintenance line が残っていないことを再確認した。
 - 2026-04-30 22:32 JST — order-handoff / authoritative-room helper-summary parity audit を行い、`specs/examples/533/569/571` の historical `p07/p08/p09/p13/p14` sample labels を current runnable evidence と collapse しない wordingへ冷やした。Sugoroku `03/05`、network `NET-03`、clean-near-end order-handoff、clean-near-end model-check、`current_l2_guided_samples.py smoke-all`、targeted `rg`、docs floor、`git diff --check` を pass し、strict-minimum parity drift を回収した。
 - 2026-04-30 22:29 JST — authoritative-room helper-summary current-surface cooling を行い、`specs/examples/570` の old prototype-path current-evidence claim を current Sugoroku `03/05`、network `NET-03`、clean-near-end order-handoff family、`current_l2_guided_samples.py smoke-all` replacement evidence へ差し替えた。`clean_near_end_samples.py run order-handoff --format json`、`current_l2_guided_samples.py smoke-all --format json`、Sugoroku `03/05`、network `NET-03` と `check-all`、active-current docs 向け targeted `rg` zero match、docs floor、`git diff --check` を pass し、direct prototype-path drift を active-current docs から解消した。
