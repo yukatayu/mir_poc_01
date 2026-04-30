@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 13:27 JST
+最終更新: 2026-04-30 13:37 JST
 
 ## この文書について
 
@@ -129,6 +129,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 13:37 JST — `plan/02` / `plan/07` / `plan/09` の temperature audit を行い、subsystem positioning と helper/parser-side reopen wordingを current maintenance / `U1` gate 読みに合わせて同期した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 13:27 JST — 2026-04-30 current-line handoff の path を `sub-agent-pro/mir_poc_01_research_handoff_2026-04-30.md` へ正規化し、`sub-agent-pro/README.md` と `specs/00-document-map.md` の handoff 説明を同期した。`plan/10` の stale lane wording も current maintenance / `U1` gate 読みに合わせ、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を通した。
 - 2026-04-29 12:02 JST — docs freshness dashboard audit の full validation を rerun し、source hierarchy / docs scaffold / current-L2 / clean near-end / Sugoroku / avatar / typed external / network / projection / viewer / storage scripts / `mir-ast` / `mirrorea-core` / `mir-runtime` / `mir-semantics` / `cargo fmt --check` / `git diff --check` が pass した。`validate_docs.py` は report `0998` 作成後に 996 numbered reports を確認した。
 - 2026-04-29 11:50 JST — docs freshness audit を開始し、`progress.md` / `tasks.md` / `samples_progress.md` / `docs/research_abstract` を current snapshot として再圧縮する方針にした。uncommitted Rust formatting cleanup は先に `cargo fmt --check`、`cargo test -p mir-ast`、`cargo test -p mirrorea-core`、`cargo test -p mir-runtime --test hotplug_runtime_skeleton`、`cargo test -p mir-runtime --test clean_near_end_samples`、`git diff --check` で確認し、commit `b213721` として push 済み。

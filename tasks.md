@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 13:27 JST
+最終更新: 2026-04-30 13:37 JST
 
 ## この文書について
 
@@ -20,6 +20,7 @@
   stale docs cleanup、validation rerun、report creation、formatting cleanup、guardrail maintenance、regression repair。
 - 2026-04-29 の uncommitted Rust formatting cleanup は `b213721` `Apply Rust formatting cleanup` として push 済みです。
 - 2026-04-30 の handoff path normalization / `sub-agent-pro` role sync / `plan/10` current-line cooling は maintenance-only closeout であり、新しい promoted implementation line は開いていません。
+- 2026-04-30 の `plan/02` / `plan/07` / `plan/09` temperature audit も maintenance-only closeout であり、repository memory の stale current-line wording を冷やしただけで、new implementation queue は reopened していません。
 
 ## executable floor
 

@@ -4,6 +4,7 @@
 
 current L2 parser-free PoC では、helper layer が増えるほど docs / tests / code の mirror drift が起きやすい。
 ここでは helper ごとの public behavior、thin delegation、tests の literal expectation、docs mirror の境界を揃える。
+この文書の current / next / reopen wording は helper responsibility memory であり、`progress.md` / `tasks.md` が maintenance-only line を示す場合の queue authority ではない。
 
 2026-04-22 note:
 pre-clean-near-end helper note は historical memory としてのみ扱う。

@@ -11,13 +11,16 @@
 4. **PrismCascade**
 5. shared space / VRSNS / Reversed Library のような上位空間
 
+current queue authority は `progress.md` / `tasks.md` に置く。
+この文書の priority / positioning は subsystem の重みづけと repository memory を表すものであり、直近 package 順序そのものを固定しない。
+
 ## どれが主眼か
 
 | 層 | 位置づけ | 現在の優先度 |
 |---|---|---|
 | Mir | 主眼。意味論コア、effect / contract / ownership / lifetime / failure / safe evolution を扱う | 最優先 |
-| Mirrorea | Mir で定義された system を安全に実行・進化させる fabric | 次段。現在は大局設計中心 |
-| Typed-Effect Wiring Platform | operational effect boundary の観測・rewire 層 | 隣接層。Mir と密接だが別 project idea |
+| Mirrorea | Mir で定義された system を安全に実行・進化させる fabric | 次段。carrier / runtime narrow floor は actualize 済み、public / durable line は still later |
+| Typed-Effect Wiring Platform | operational effect boundary の観測・rewire 層 | 隣接層。helper preview / boundary inventory は actualize 済み、final host contract は still later |
 | PrismCascade | media-processing kernel。独立 kernel として扱う | optional / side-track 寄り |
 | shared space / VRSNS / Reversed Library | 上位アプリケーション・空間構想 | まだ遠い future |
 
@@ -32,10 +35,10 @@
 - host harness / sidecar / bundle / batch / selection / profile / catalog
 - fallback / `lease` / monotone degradation の regression fixtures
 
-### まだ大局設計・方針レベルに留まる部分
+### まだ kept-later / public-boundary level に留まる部分
 
-- Mirrorea fabric の実装
-- Typed-Effect Wiring Platform の concrete architecture
+- Mirrorea final public runtime / transport / durable migration / distributed ordering / public ABI
+- Typed-Effect Wiring Platform の final host schema / adapter ABI / multi-tenant operational contract
 - PrismCascade kernel の具体実装
 - shared space / VRSNS / Reversed Library の application 層
 
@@ -51,13 +54,16 @@
 
 - logical name、route rebinding、overlay insertion、audit、patch activation を扱う fabric である。
 - Mir を「どこで・どう route して・どう進化させるか」に関与する。
-- ただし現時点では PoC 実装よりも boundary と原則整理が中心である。
+- current repo では `mirrorea-core` carrier substrate、logical multi-place shell、hot-plug request / verdict、runtime-side P21 narrow floor まで repo-local に actualize 済みである。
+- ただし final public runtime / transport / durable migration / distributed ordering / public ABI は kept-later に残る。
 
 ### Typed-Effect Wiring Platform
 
 - effect boundary の inspectable / routable / contract-aware な operational layer である。
 - Mir そのものではなく、Mir と非 Mir system をつなぐ lower or adjacent layer として位置づく。
-- legacy integration や effect routing を扱うが、current repo ではまだ概念整理段階に近い。
+- legacy integration や effect routing を扱う。
+- current repo では typed external synthetic preview、network canary、projection/codegen bridge evidence、viewer typed prototype inventory まで repo-local に actualize 済みである。
+- ただし final host schema / adapter ABI / public viewer / telemetry service は kept-later に残る。
 
 ### PrismCascade
 
