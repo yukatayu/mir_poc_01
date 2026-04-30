@@ -103,7 +103,7 @@
 
 ## current reading の要点
 
-2026-04-29 時点では、次が active line です。
+現在の active line は次です。
 
 - active canonical sample は `samples/clean-near-end/`
 - first strong typing layer は finite decidable index fragment

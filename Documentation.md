@@ -14,7 +14,7 @@
 ## まず repo をどう読むべきか
 
 この repo は、Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform を **意図的に separable** に保った研究用 workspace です。
-2026-04-29 時点の主眼は、そのうち Mir current-L2 の repo-local alpha-ready current layer にあります。
+主眼は、そのうち Mir current-L2 の repo-local alpha-ready current layer にあります。
 
 この layer で重要なのは、次の 2 つを混同しないことです。
 
@@ -282,7 +282,7 @@ python3 scripts/validate_docs.py
 - `docs/hands_on/README.md`
   current runnable floor と remaining gate を短く辿る hands-on landing page
 - `docs/hands_on/current_phase_closeout_01.md`
-  2026-04-29 時点の current phase closeout guide
+  current phase closeout guide
 - `samples_progress.md`
   phase / layer ごとの runnable sample、E2E、debug surface、build / storage 環境の dashboard
 - `samples/README.md`

@@ -11,7 +11,7 @@
 - **Typed-Effect Wiring Platform**
   inspectable / routable な effect integration 層
 
-2026-04-29 時点で repo が主として検証しているのは、Mir current-L2 の **repo-local alpha-ready current layer** です。
+repo が主として検証しているのは、Mir current-L2 の **repo-local alpha-ready current layer** です。
 これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
 
 ## 現在の到達点
@@ -220,7 +220,7 @@ task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、そ
 - `docs/hands_on/README.md`
   実行コマンド付きの hands-on landing page
 - `docs/hands_on/current_phase_closeout_01.md`
-  current phase closeout、remaining mixed gate、next queue
+  current phase closeout memory、remaining mixed gate、snapshot docs への入口
 - `docs/hands_on/visual_debugger_viewer_01.md`
   `P16` typed public prototype inventory の最短入口
 - `docs/hands_on/network_transport_canaries_01.md`
