@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 20:07 JST
+最終更新: 2026-04-30 20:29 JST
 
 ## この文書について
 
@@ -20,6 +20,7 @@
   stale docs cleanup、validation rerun、report creation、formatting cleanup、guardrail maintenance、regression repair。
 - `scripts/current_l2_guided_samples.py` は current active compatibility front door を `list / smoke-all / closeout` に絞っており、legacy bundle / lane / reserve / hold-line / emit-* helper command claims は stale docs cleanup の対象として package ごとに historical memory へ冷やしています。
 - 2026-04-30 の `current_l2_guided_samples.py` compatibility-front-door / current-first-line historical-anchor cooling も maintenance-only closeout であり、`specs/examples/606/607/608/612` と `specs/12 D-052/D-058/D-191..193` を `list / smoke-all / closeout` only の current wrapper reading と `p06` / reserve / residual / hold-line historical memory 読みに同期しただけで、new implementation queue は reopened していません。
+- 2026-04-30 の `current_l2_guided_samples.py` emit-family historical-memory cooling も maintenance-only closeout であり、`specs/examples/601/602/603/604/609/610/611` と `specs/12 D-186..189/D-194..196`、`specs/11`、`specs/00` を `list / smoke-all / closeout` only の current wrapper reading と emitted-artifact / reopen-order / summary-index historical helper memory 読みに同期しただけで、new implementation queue は reopened していません。remaining `reopen-map / lane / residuals` current-surface cooling は次の stale-docs maintenance package に残しています。
 - 2026-04-29 の uncommitted Rust formatting cleanup は `b213721` `Apply Rust formatting cleanup` として push 済みです。
 - 2026-04-30 の handoff path normalization / `sub-agent-pro` role sync / `plan/10` current-line cooling は maintenance-only closeout であり、新しい promoted implementation line は開いていません。
 - 2026-04-30 の `plan/02` / `plan/07` / `plan/09` temperature audit も maintenance-only closeout であり、repository memory の stale current-line wording を冷やしただけで、new implementation queue は reopened していません。
@@ -102,6 +103,7 @@ These are safe to do without new product decisions.
 | Task | Objective | Validation | Report requirement | Stop line |
 |---|---|---|---|---|
 | docs freshness audit | keep `README.md`, `Documentation.md`, `progress.md`, `tasks.md`, `samples_progress.md`, research summaries, and traceability current | `check_source_hierarchy.py`, `validate_docs.py`, `git diff --check` | new `docs/reports/NNNN-*.md` | do not create new normative decisions in snapshot docs; do not use naive banned-phrase scans over `docs/reports/`, `specs/examples/`, `sub-agent-pro/`, or `progress.md` recent log |
+| guided helper retirement audit | keep `scripts/current_l2_guided_samples.py` docs mirror aligned with the live `list / smoke-all / closeout` front door | retired helper commands for negative evidence + `python3 scripts/current_l2_guided_samples.py list` + `smoke-all --format json` + `closeout --format json` + docs floor | report if touched docs change | do not re-promote `emit-*`, `reserve`, `hold-line`, `reopen-map`, `lane`, or `residuals` helper memories into active command claims without implementation evidence |
 | runnable dashboard refresh | keep sample status, validation timestamps, and blockers evidence-backed | relevant helper closeout commands | report + `samples_progress.md` | do not mark conceptual rows over 25% or use 100% without current-scope commit/push |
 | Rust formatting / regression repair | keep cargo formatting and focused test floors green | `cargo fmt --check`, affected `cargo test` commands | report if behavior or docs status changes | do not mix unrelated feature work into formatting cleanup |
 | storage guardrail check | keep external workdir and cleanup scripts safe on small VPS | `df -h`, `free -h`, `findmnt`, storage scripts | report with resource output | no destructive cleanup / mount / format without explicit confirmation |

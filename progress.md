@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 20:07 JST
+最終更新: 2026-04-30 20:29 JST
 
 ## この文書について
 
@@ -37,6 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。2026-04-29 には uncommitted Rust formatting cleanup を `b213721` として commit / push 済みです。
   `scripts/current_l2_guided_samples.py` の current active compatibility front door は `list / smoke-all / closeout` に限定され、legacy bundle / lane / reserve / hold-line / emit-* helper command claims は package ごとに historical memory へ冷やしています。
+  `specs/examples/601/602/603/604/609/610/611` と `specs/12 D-186..189/D-194..196` は historical helper memory / summary-index memory に同期済みで、remaining `reopen-map / lane / residuals` current-surface cooling は別 maintenance package として残しています。
 
 ## strict non-claims
 
@@ -133,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 20:29 JST — `current_l2_guided_samples.py` emit-family historical-memory cooling を行い、`specs/examples/601/602/603/604/609/610/611`、`specs/12 D-186..189/D-194..196`、`specs/11`、`specs/00` を `list / smoke-all / closeout` only の current wrapper reading と emitted-artifact / reopen-order / summary-index historical helper memory 読みに同期した。retired `emit-theorem problem1` / `emit-scenario problem2` / `emit-reserve ...` failure evidence、`current_l2_guided_samples.py list`、`smoke-all --format json`、`closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 20:07 JST — `current_l2_guided_samples.py` compatibility-front-door / current-first-line historical-anchor cooling を行い、`specs/examples/606/607/608/612` と `specs/12 D-052/D-058/D-191..193` を `list / smoke-all / closeout` only の current wrapper reading と `p06` / reserve / residual / hold-line historical memory 読みに同期した。`current_l2_guided_samples.py list`、`smoke-all --format json`、`closeout --format json`、`cargo test -q -p mir-runtime --test current_l2_operational_cli`、clean near-end `01_peterson_sc_pass` / `05_delegated_rng_service` source-sample checks、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 19:54 JST — model-check active evidence floor / theorem-model-check mixed helper mirror shorthand cooling を行い、`specs/examples/501/507/517/530/532`、`specs/11`、`specs/12`、`plan/09`、`samples_progress.md` の current reading を current clean-near-end model-check family live floor、live theorem subject `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、committed theorem bridge floor `samples/lean/foundations` + `samples/lean/clean-near-end`、historical `p08/p09` mixed-helper asymmetry anchor split へ同期した。historical `p08/p09` prototype は current accepted sample set へ戻さず、active validation は `python3 scripts/clean_near_end_samples.py run model-check --format json`、`python3 scripts/current_l2_guided_samples.py smoke-all --format json`、`python3 scripts/current_l2_lean_sample_sync.py`、`cargo test -q -p mir-runtime --test current_l2_operational_cli`、`cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json`、`cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 19:29 JST — theorem-side active evidence floor mirror sync を行い、`specs/examples/474/479/481/485/486/487/491/494/497/500/506/508/510/514/519/521`、`specs/11`、`specs/12`、`plan/09` の current reading を live subject `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、`samples/lean/foundations` + `samples/lean/clean-near-end` committed bridge floor、historical `p05 / p06 / p07 / p08` compare-anchor split に同期した。stale theorem next-queue wording は maintenance lane / `U1` reopen point reading へ冷やした。`cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder`、`cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support`、`cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe`、`cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json`、`python3 scripts/clean_near_end_samples.py closeout --format json` を pass した。

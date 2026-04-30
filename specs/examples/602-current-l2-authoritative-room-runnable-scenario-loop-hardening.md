@@ -2,34 +2,37 @@
 
 ## 位置づけ
 
-- current Phase 6 / Package 129 closeout。
+- historical Phase 6 / Package 129 closeout memory。
 - `specs/examples/570`、`571`、`576` と Package 128 の emitted-artifact loop hardening の次段として、
-  Problem 2 authoritative-room first scenario を repo-local output dir へ materialize する
-  `emit-scenario problem2`
-  helper を actualize する。
+  Problem 2 authoritative-room first scenario を repo-local output dir へ materialize していた
+  historical `emit-scenario problem2`
+  helper memory を記録する。
 - final source wording、final public witness/provider/artifact contract、exhaustive shared-space catalog を fixed する task ではない。
 
 ## この package で固定する current cut
 
 1. `python3 scripts/current_l2_guided_samples.py emit-scenario problem2`
-   は representative pair `p07 / p08`、reserve route `p09`、negative static-stop pair `p13 / p14`
-   の `run-source-sample --format json` output を
+   は 2026-04-22 clean-sample migration 前の historical helper-local scenario-loop entrypoint として扱い、
+   current active compatibility front door には戻さない。
+2. current active compatibility front door は
+   `python3 scripts/current_l2_guided_samples.py list`
+   `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+   `python3 scripts/current_l2_guided_samples.py closeout --format json`
+   に置く。
+3. historical scenario output dir は
    `target/current-l2-guided/problem2-scenario-bundle`
-   へ materialize してよい。
-2. `p07` と `p08` は first-line representative、
+   に固定する。
+4. `p07` と `p08` は first-line representative、
    `p09` は reserve practical route、
    `p13` と `p14` は negative static-stop
-   のまま同じ scenario loop に載せてよい。
-3. Problem 2 sample bundle doc は
-   `smoke problem2`
-   に加えて
-   `emit-scenario problem2`
-   を execution step として案内してよい。
+   のまま同じ historical scenario loop memory に載せてよい。
+5. Problem 2 sample bundle doc 側の `emit-scenario problem2` step は
+   historical helper memory として読む。
 
 ## current recommendation
 
 - authoritative-room first scenario は docs / matrix / bundle だけでなく、
-  repo-local output dir へ JSON を出す runnable scenario loop として保ってよい。
+  repo-local output dir へ JSON を出していた historical scenario loop memory として保ってよい。
 - current cut は
   - authoritative-room first default profile
   - representative pair `p07 / p08`
@@ -37,7 +40,7 @@
   - negative pair `p13 / p14`
   - repo-local output dir
   に留める。
-- `emit-scenario problem2` は helper-local / non-production command であり、
+- historical `emit-scenario problem2` は helper-local / non-production memory であり、
   final source wording、
   final public witness/provider/artifact contract、
   exhaustive shared-space catalog
@@ -45,12 +48,16 @@
 
 ## actualized evidence
 
-- helper tests:
+- historical helper tests:
   - `python3 -m unittest scripts.tests.test_current_l2_guided_samples`
   - `python3 -m unittest scripts.tests.test_problem_sample_bundles`
-- runtime commands:
+- historical helper commands:
   - `python3 scripts/current_l2_guided_samples.py emit-scenario problem2`
   - `python3 scripts/current_l2_guided_samples.py emit-scenario problem2 --format json`
+- current compatibility commands:
+  - `python3 scripts/current_l2_guided_samples.py list`
+  - `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+  - `python3 scripts/current_l2_guided_samples.py closeout --format json`
 
 ## stop line
 

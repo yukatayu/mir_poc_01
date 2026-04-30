@@ -900,27 +900,27 @@ actual-adoption floor では、
   - Package 127 close 後の current active queue は Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
 - theorem-first emitted-artifact loop hardening:
   `specs/examples/601`
-  - `emit-theorem problem1` helper と Problem 1 bundle doc 側の emitted-artifact step を actualize し、`p06 / p07 / p08` representative theorem line を repo-local output dir へ materialize する emitted-artifact loop として読んでよい
-  - Package 128 close 後の current active queue は Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
+  - historical `emit-theorem problem1` helper memory と Problem 1 bundle doc 側の emitted-artifact step memory を保持し、`p06 / p07 / p08` representative theorem line を repo-local output dir へ materialize していた historical emitted-artifact loop として読んでよい
+  - historical closeout queue memory では Package 128 close 後の next line を Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual に置いていた
 - authoritative-room runnable scenario loop hardening:
   `specs/examples/602`
-  - `emit-scenario problem2` helper と Problem 2 bundle doc 側の runnable-scenario step を actualize し、representative pair `p07 / p08`、reserve route `p09`、negative pair `p13 / p14` を repo-local output dir へ materialize する scenario loop として読んでよい
-  - Package 129 close 後の current active queue は Package 130...132 executable residual reopen / closeout sync と later mixed/user-spec residual である
+  - historical `emit-scenario problem2` helper memory と Problem 2 bundle doc 側の runnable-scenario step memory を保持し、representative pair `p07 / p08`、reserve route `p09`、negative pair `p13 / p14` を repo-local output dir へ materialize していた historical scenario loop として読んでよい
+  - historical closeout queue memory では Package 129 close 後の next line を Package 130...132 executable residual reopen / closeout sync と later mixed/user-spec residual に置いていた
 - Problem 1 executable residual reopen sync:
   `specs/examples/603`
-  - `reopen-map problem1`、`lane problem1-final-public-seams`、Problem 1 bundle doc を executable evidence 側へ再同期し、`check-source-sample` → `emit-theorem problem1` → lane summary の reopen order を actualize してよい
-  - Package 130 close 後の current active queue は Package 131...132 executable residual reopen / closeout sync と later mixed/user-spec residual である
+  - historical `emit-theorem problem1` reopen-order memory と `reopen-map problem1` / `lane problem1-final-public-seams` / Problem 1 bundle doc 側の historical doc memory を保持し、`check-source-sample` → `emit-theorem problem1` → lane summary の historical reopen order として読んでよい
+  - historical closeout queue memory では Package 130 close 後の next line を Package 131...132 executable residual reopen / closeout sync と later mixed/user-spec residual に置いていた
 - Problem 2 executable residual reopen sync:
   `specs/examples/604`
-  - `reopen-map problem2`、`lane problem2-final-public-seams`、`residuals`、Problem 2 bundle doc を executable scenario loop 側へ再同期し、`emit-scenario problem2` → lane summary → residual summary の reopen order を actualize してよい
-  - Package 131 close 後の current active queue は Package 132 after-loop closeout sync と later mixed/user-spec residual である
+  - historical `emit-scenario problem2` reopen-order memory と `reopen-map problem2` / `lane problem2-final-public-seams` / `residuals` / Problem 2 bundle doc 側の historical doc memory を保持し、`emit-scenario problem2` → lane summary → residual summary の historical reopen order として読んでよい
+  - historical closeout queue memory では Package 131 close 後の next line を Package 132 after-loop closeout sync と later mixed/user-spec residual に置いていた
 - once-through closeout summary sync:
   `specs/examples/605`
   - `closeout` helper を actualize し、Package 127...131 executable loop 後の current first line / mixed-gate lane / true user-spec residual / next self-driven queue を 1 枚の helper-local summary に actualize してよい
   - Package 132 close 後の current active queue は Package 133 reserve integration entrypoint sync / Package 134 parser-side residual closeout sync / Package 135 true user-spec residual freeze sync である
 - reserve integration entrypoint summary sync:
   `specs/examples/606`
-  - `reserve` helper を actualize し、theorem-first external pilot / `auditable_authority_witness` / `delegated_rng_service` / model-check second-line reserve を once-through closeout summary 後の next reopen line として actualize してよい
+  - historical `reserve` helper memory を保持し、theorem-first external pilot / `auditable_authority_witness` / `delegated_rng_service` / model-check second-line reserve を once-through closeout summary 後の historical reopen line として読んでよい
   - Package 133 close 後の current active queue は Package 134 parser-side residual closeout sync / Package 135 true user-spec residual freeze sync と later mixed/user-spec residual である
 - parser-side residual lane helper actualization:
   `specs/examples/607`
@@ -932,16 +932,16 @@ actual-adoption floor では、
   - Package 135 close 後の closeout 用 numbered queue は closed 状態となり、next reopen line は reserve integration / later mixed gate / user-spec hold line である
 - theorem-first external pilot summary index actualization:
   `specs/examples/609`
-  - `emit-theorem problem1` output dir に `pilot-summary.md` / `pilot-summary.json` を actualize し、theorem-first external pilot を notebook-first summary index まで進めてよい
-  - current next reopen line は `auditable_authority_witness` / `delegated_rng_service` / model-check second-line / later mixed gate / user-spec hold line である
+  - historical `emit-theorem problem1` output dir memory に `pilot-summary.md` / `pilot-summary.json` を保持し、theorem-first external pilot を notebook-first summary-index memory として読んでよい
+  - historical closeout queue memory では next reopen line を `auditable_authority_witness` / `delegated_rng_service` / model-check second-line / later mixed gate / user-spec hold line に置いていた。current queue authority は `progress.md` / `tasks.md` に残す
 - auditable-authority-witness reserve package summary index actualization:
   `specs/examples/610`
-  - `emit-reserve auditable-authority-witness` と `target/current-l2-guided/reserve-packages/auditable-authority-witness/package-summary.md|json` を actualize し、`p07` reached / `p08` contrast / `p05` comparison を reserve package 単独の repo-local summary index に圧縮してよい
-  - current next reopen line は `delegated_rng_service` / model-check second-line / later mixed gate / user-spec hold line である
+  - historical `emit-reserve auditable-authority-witness` と `target/current-l2-guided/reserve-packages/auditable-authority-witness/package-summary.md|json` memory を保持し、`p07` reached / `p08` contrast / `p05` comparison を reserve package 単独の repo-local summary-index memory に圧縮してよい
+  - historical closeout queue memory では next reopen line を `delegated_rng_service` / model-check second-line / later mixed gate / user-spec hold line に置いていた。current queue authority は `progress.md` / `tasks.md` に残す
 - delegated-rng-service reserve package summary index actualization:
   `specs/examples/611`
-  - `emit-reserve delegated-rng-service` と `target/current-l2-guided/reserve-packages/delegated-rng-service/package-summary.md|json` を actualize し、`p09` reached / `p07` authority-rng baseline contrast / `p08` reconnect contrast を reserve package 単独の repo-local summary index に圧縮してよい
-  - current next reopen line は model-check second-line / later mixed gate / user-spec hold line である
+  - historical `emit-reserve delegated-rng-service` と `target/current-l2-guided/reserve-packages/delegated-rng-service/package-summary.md|json` memory を保持し、`p09` reached / `p07` authority-rng baseline contrast / `p08` reconnect contrast を reserve package 単独の repo-local summary-index memory に圧縮してよい
+  - historical closeout queue memory では next reopen line を model-check second-line / later mixed gate / user-spec hold line に置いていた。current queue authority は `progress.md` / `tasks.md` に残す
 - model-check public checker artifact / migration coupled later gate:
   `specs/examples/498`
   - consumer-shaped artifact candidate only
