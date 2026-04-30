@@ -2,43 +2,43 @@
 
 ## 位置づけ
 
-- current Phase 6 / Package 113 closeout。
-- sample bundle doc と quickstart helper の representative 4-step 導線が揃っているかを
-  focused parity check として actualize する。
+- historical Phase 6 / Package 113 closeout memory。
+- `quickstart-parity` helper により
+  archived sample bundle doc と archived quickstart CLI mirror の parity を見ていた導線を、
+  historical quickstart-parity memory として記録する。
 - exhaustive tutorial validation、final public CLI / tutorial surface、
   final public parser / checker / runtime API を fixed する task ではない。
 
 ## この package で固定する current cut
 
 1. `python3 scripts/current_l2_guided_samples.py quickstart-parity`
-   は Problem 1 / Problem 2 の quickstart parity を pretty summary で返してよい。
-2. `python3 scripts/current_l2_guided_samples.py quickstart-parity --format json`
-   は `problem_id` / `sample_bundle_doc` / `status` / `missing_titles` / `missing_commands`
-   を machine-readable に返してよい。
-3. current cut は representative 4-step quickstart の title / command parity に留め、
-   exhaustive tutorial validation には広げない。
-4. `samples/problem-bundles/README.md`
-   は parity check command を sample bundle index から案内してよい。
+   は historical helper-local parity memory として扱い、
+   current active compatibility front door には戻さない。
+2. parity target は archived problem-bundle docs と archived quickstart memory に留める。
+3. current active compatibility front door は
+   `python3 scripts/current_l2_guided_samples.py list`
+   `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+   `python3 scripts/current_l2_guided_samples.py closeout --format json`
+   に置く。
 
 ## current recommendation
 
-- quickstart hardening と CLI mirror の次は、
-  drift suppression を focused parity check で支える。
-- mismatch があっても最初から large tutorial framework にせず、
-  representative 4-step entrypoint だけを narrow に見る。
-- current helper は repo-local verification cut に留め、
-  final public CLI / tutorial surface には上げない。
+- quickstart parity check は、
+  archived quickstart doc / helper mirror の drift suppression をしていた
+  historical memory として保ってよい。
+- helper command 自体は current active command surface に戻さない。
 
 ## actualized evidence
 
-- helper:
+- retired helper commands today:
   - `python3 scripts/current_l2_guided_samples.py quickstart-parity`
   - `python3 scripts/current_l2_guided_samples.py quickstart-parity --format json`
-- docs:
-  - `samples/problem-bundles/README.md`
-- tests:
-  - `python3 -m unittest scripts.tests.test_current_l2_guided_samples`
-  - `python3 -m unittest scripts.tests.test_problem_sample_bundles`
+  - current repo では migration note + `supported compatibility commands: list, smoke-all, closeout` を返して exit 2 になる
+- historical docs:
+  - `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/README.md`
+- current compatibility commands:
+  - `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+  - `python3 scripts/current_l2_guided_samples.py closeout --format json`
 
 ## stop line
 
@@ -48,6 +48,5 @@
 
 ## retained-later line
 
-- mixed-gate reopen-map refresh
+- reopen-map historical memory
 - broader sample catalog widening
-- final public onboarding flow

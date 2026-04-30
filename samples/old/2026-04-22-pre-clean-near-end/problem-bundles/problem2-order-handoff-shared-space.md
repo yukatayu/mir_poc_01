@@ -1,5 +1,11 @@
 # Problem 2 sample bundle
 
+> Archive note:
+> この文書は 2026-04-22 clean-near-end migration 前の historical bundle memory である。
+> 下の retired helper command 群は current active command surface ではない。
+> current active compatibility front door は `list / smoke-all / closeout`、
+> current live runtime / checker examples は clean-near-end `.mir` sample を使う。
+
 ## この bundle の目的
 
 - Problem 2 の current first line である
@@ -12,21 +18,21 @@
 
 ### `p07-dice-late-join-visible-history`
 
-- representative sample:
-  `samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt`
-- parser companion:
-  `samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt`
-- Lean artifact:
-  `samples/lean/current-l2/p07-dice-late-join-visible-history/`
+- archived representative sample:
+  `samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt`
+- archived parser companion:
+  `samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt`
+- archived Lean artifact:
+  `samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p07-dice-late-join-visible-history/`
 
 ### `p08-dice-stale-reconnect-refresh`
 
-- representative sample:
-  `samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt`
-- parser companion:
-  `samples/prototype/current-l2-parser-companion/p08-dice-stale-reconnect-refresh.request.txt`
-- Lean artifact:
-  `samples/lean/current-l2/p08-dice-stale-reconnect-refresh/`
+- archived representative sample:
+  `samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt`
+- archived parser companion:
+  `samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-parser-companion/p08-dice-stale-reconnect-refresh.request.txt`
+- archived Lean artifact:
+  `samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p08-dice-stale-reconnect-refresh/`
 
 この pair で次を確認する。
 
@@ -34,7 +40,7 @@
 - late join は published history を past として見る
 - stale reconnect は fail then refresh として扱う
 
-## 最短 quickstart
+## historical quickstart memory
 
 ### 1. `smoke problem2` で representative pair を一度に確認する
 
@@ -75,7 +81,7 @@ python3 scripts/current_l2_guided_samples.py bundle problem2
 
 ```bash
 cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- \
-  samples/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt \
+  samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-parser-companion/p07-dice-late-join-visible-history.request.txt \
   --format pretty
 ```
 
@@ -84,21 +90,21 @@ cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle 
 - edge-row principal / stage-block secondary の companion surface が parser-side carrier に戻っていることが分かる。
 - final source wording を凍らせず、thin experimental companion として保っている current cut を追える。
 
-## 実行の順番
+## historical execution memory
 
 1. representative pair をそのまま流す
 
 ```bash
 cargo run -q -p mir-runtime --example mir_current_l2 -- \
   run-source-sample \
-  samples/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt \
+  samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-order-handoff/p07-dice-late-join-visible-history.txt \
   --format pretty
 ```
 
 ```bash
 cargo run -q -p mir-runtime --example mir_current_l2 -- \
   run-source-sample \
-  samples/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt \
+  samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-order-handoff/p08-dice-stale-reconnect-refresh.txt \
   --format pretty
 ```
 
@@ -193,7 +199,7 @@ distributed fairness theorem や exhaustive shared-space catalog を要求しな
 - `authoritative_room_reserve_strengthening_lane`
   - witness strengthening / delegated RNG / model-check second line の separate status
 
-## 現在の mixed gate 再開点
+## historical mixed-gate reopen memory
 
 - `final source-surface handoff wording / final emitted-artifact schema`
   - `python3 scripts/current_l2_guided_samples.py bundle problem2`
@@ -220,7 +226,7 @@ distributed fairness theorem や exhaustive shared-space catalog を要求しな
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、exhaustive shared-space catalog / packaging / upper-layer target をまとめて見直す。
 
-## split package status
+## historical split package status
 
 - `source wording / emitted schema split`
   - close 済み。`python3 scripts/current_l2_guided_samples.py split problem2 source-wording-emitted-schema`

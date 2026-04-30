@@ -875,37 +875,37 @@
 - `specs/examples/571-current-l2-authoritative-room-reserve-strengthening-lane-tightening.md`
   - current Phase 5 / Package 97 closeout として、`auditable_authority_witness`、`delegated_rng_service`、model-check second line を `run-source-sample` helper summary の `authoritative_room_reserve_strengthening_lane` に separate status のまま actualize し、current live queue を Package 98 へ narrow に進める補助文書。
 - `specs/examples/572-current-l2-guided-problem-sample-entrypoints-and-runner.md`
-  - current Phase 5 / Package 98 closeout として、Problem 1 / Problem 2 の representative sample entrypoint を `samples/` README と `scripts/current_l2_guided_samples.py` に actualize し、current live queue を residual bundle 群へ戻す補助文書。
+  - historical Phase 5 / Package 98 closeout memory として、historical `show problem1|problem2` / `run problem1|problem2 [--all]` helper memory と archived prototype README memory を保持し、current active compatibility front door を `list / smoke-all / closeout` に冷やした補助文書。
 - `specs/examples/573-current-l2-problem1-public-seam-residual-bundle-matrix.md`
-  - current Phase 5 / Package 99 closeout として、Problem 1 representative bundle `p06 / p10 / p11 / p12 / p15 / p16` の theorem/model-check public-seam residual を `matrix problem1` helper に actualize し、`p06` representative と first strong typing quintet の bridge-floor bundle を drift なく読めるようにする補助文書。
+  - historical Phase 5 / Package 99 closeout memory として、historical `matrix problem1` helper memory と archived Problem 1 bundle doc memory に、`p06 / p10 / p11 / p12 / p15 / p16` residual-bundle split を保持した補助文書。
 - `specs/examples/574-current-l2-problem2-public-shape-residual-bundle-matrix.md`
-  - current Phase 6 / Package 100 closeout として、Problem 2 representative bundle `p07 / p08 / p09 / p13 / p14` の public-shape residual を `matrix problem2` helper に actualize し、first-line representative / reserve practical route / negative static-stop pair を drift なく読めるようにする補助文書。
+  - historical Phase 6 / Package 100 closeout memory として、historical `matrix problem2` helper memory と archived Problem 2 bundle doc memory に、`p07 / p08 / p09 / p13 / p14` residual-bundle split を保持した補助文書。
 - `specs/examples/575-current-l2-problem1-theorem-first-pilot-bundle-actualization.md`
-  - current Phase 5 / Package 101 closeout として、Problem 1 representative bundle `p06 / p10 / p11 / p12 / p15 / p16` を `bundle problem1` helper、`samples/lean/current-l2/` representative artifact、anchor spec / report まで一本道で辿れる theorem-first pilot bundle に actualize する補助文書。
+  - historical Phase 5 / Package 101 closeout memory として、historical `bundle problem1` helper memory と archived Problem 1 bundle doc / prototype README / Lean artifact memory を保持した補助文書。
 - `specs/examples/576-current-l2-problem2-authoritative-room-scenario-bundle-actualization.md`
-  - current Phase 6 / Package 102 closeout として、Problem 2 representative bundle `p07 / p08 / p09 / p13 / p14` を `bundle problem2` helper、representative pair / reserve / negative pair の Lean artifact、anchor spec / report まで一本道で辿れる authoritative-room scenario bundle に actualize する補助文書。
+  - historical Phase 6 / Package 102 closeout memory として、historical `bundle problem2` helper memory と archived Problem 2 bundle doc / prototype README / Lean artifact memory を保持した補助文書。
 - `specs/examples/577-current-l2-parser-side-companion-surface-bundle-actualization.md`
-  - current Phase 6 / Package 103 closeout として、`p06 / p07 / p08` representative slice を `samples/prototype/current-l2-parser-companion/` と `mir-ast` parse test により thin experimental companion surface bundle として actualize する補助文書。
+  - historical Phase 6 / Package 103 closeout memory として、archived parser-companion sample set `p06 / p07 / p08` と parse-test memory を保持した補助文書。
 - `specs/examples/578-current-l2-parser-side-bundle-to-helper-bridge-actualization.md`
-  - current Phase 6 / Package 104 closeout として、`bundle problem1 / problem2` helper に parser companion path を actualize し、original prototype / parser companion / Lean artifact を一本道で辿れる bridge を作る補助文書。
+  - historical Phase 6 / Package 104 closeout memory として、historical `bundle problem1 / problem2` helper memory に parser companion path を載せていた bridge memory を保持した補助文書。
 - `specs/examples/579-current-l2-parser-side-request-head-clause-bundle-inspector-actualization.md`
-  - current Phase 6 / Package 105 closeout として、`Stage3RequestHeadClauseBundle` の representative parse result を repo-local JSON / pretty inspector command に actualize し、parser-side carrier の readable inspection cut を固定する補助文書。
+  - current Phase 6 / archived compare-floor reading として、archived parser-companion sample `p06 / p07 / p08` の representative parse result を repo-local JSON / pretty inspector command で inspect する補助文書。
 - `specs/examples/580-current-l2-parser-side-representative-mapping-matrix-actualization.md`
-  - current Phase 6 / Package 106 closeout として、`p06 / p07 / p08` representative slice の original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report 対応を `mapping` helper と sample README table に actualize し、parser-side tranche の readable mapping cut を固定する補助文書。
+  - historical Phase 6 / Package 106 closeout memory として、historical `mapping` helper memory と archived parser-companion README / problem-bundle docs memory に、representative slice の cross-anchor mapping を保持した補助文書。
 - `specs/examples/581-current-l2-explained-representative-problem-sample-bundles.md`
-  - current Phase 6 / Package 107 closeout として、二大問題の representative sample を `samples/problem-bundles/` の簡潔な日本語 guide と `bundle problem1|problem2` helper の `sample_bundle_doc` に actualize し、`samples/` 側の explained bundle 導線を固定する補助文書。
+  - historical Phase 6 / Package 107 closeout memory として、archived `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/` guide memory と historical `bundle problem1|problem2` index memory を保持した補助文書。
 - `specs/examples/582-current-l2-representative-problem-bundle-smoke-runner-actualization.md`
-  - current Phase 6 / Package 108 closeout として、`smoke problem1|problem2` helper を actualize し、representative sample bundle guide の主要 command 群を repo-local helper から順に再現する補助文書。
+  - historical Phase 6 / Package 108 closeout memory として、historical `smoke problem1|problem2` helper memory を保持した補助文書。
 - `specs/examples/583-current-l2-representative-problem-bundle-aggregate-smoke-summary-actualization.md`
-  - current Phase 6 / Package 109 closeout として、`smoke-all` helper を actualize し、Problem 1 / Problem 2 の representative smoke 成否と step inventory を 1 コマンドで compact に俯瞰する補助文書。
+  - current Phase 6 / surviving compatibility wrapper として、`smoke-all` helper に active clean-near-end representative suite の compact verification summary を actualize した補助文書。
 - `specs/examples/584-current-l2-representative-problem-bundle-failure-focused-smoke-diagnostics-actualization.md`
-  - current Phase 6 / Package 110 closeout として、`smoke-all` helper に failure-focused diagnostics を actualize し、aggregate failure 時に failed step / command / return code / output excerpt を compact に surfacing する補助文書。
+  - current Phase 6 / surviving compatibility wrapper として、`smoke-all` helper に active clean-near-end representative suite 向けの failure-focused diagnostics を actualize した補助文書。
 - `specs/examples/585-current-l2-representative-problem-bundle-quickstart-walkthrough-hardening.md`
-  - current Phase 6 / Package 111 closeout として、`samples/problem-bundles/problem1|problem2` に `最短 quickstart` と `見るべき結果` を actualize し、representative sample guide を doc 単体でも読める quickstart bundle に harden する補助文書。
+  - historical Phase 6 / Package 111 closeout memory として、archived problem-bundle quickstart walkthrough memory を保持した補助文書。
 - `specs/examples/586-current-l2-representative-problem-quickstart-cli-mirror-actualization.md`
-  - current Phase 6 / Package 112 closeout として、`quickstart problem1|problem2` helper を actualize し、bundle doc 側の representative 4-step quickstart を helper-side summary にも mirror する補助文書。
+  - historical Phase 6 / Package 112 closeout memory として、historical `quickstart problem1|problem2` helper memory を保持した補助文書。
 - `specs/examples/587-current-l2-representative-problem-quickstart-parity-checks-actualization.md`
-  - current Phase 6 / Package 113 closeout として、`quickstart-parity` helper を actualize し、sample bundle doc と helper-side quickstart mirror の 4-step parity を focused に確認する補助文書。
+  - historical Phase 6 / Package 113 closeout memory として、historical `quickstart-parity` helper memory を保持した補助文書。
 - `specs/examples/588-current-l2-representative-problem-mixed-gate-reopen-map-refresh.md`
   - historical Phase 6 / Package 114 closeout memory として、historical `reopen-map` helper memory と archived sample bundle doc 側の `現在の mixed gate 再開点` memory を保持し、representative sample floor の後でどの mixed gate をどの command から reopen していたかを揃える補助文書。
 - `specs/examples/589-current-l2-representative-problem-split-package-map-refresh.md`
@@ -931,7 +931,7 @@
 - `specs/examples/599-current-l2-syntax-modality-final-marker-lane-helper-actualization.md`
   - historical Phase 6 / Package 126 closeout memory として、historical `lane syntax-modality-final-marker` helper memory と archived sample bundle index / syntax-modality docs を保持し、final modal foundation / final source marker mixed gate を retained family / separation boundary 付きの独立 lane として narrow に読んでいた補助文書。
 - `specs/examples/600-current-l2-typed-checker-first-executable-slice-actualization.md`
-  - current Phase 6 / Package 127 closeout として、`check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として narrow に読む補助文書。
+  - current Phase 6 / Package 127 closeout として、`check-source-sample` を active clean-near-end sample family `typing / order-handoff / model-check / modal` 向けの checker-shaped inspection command として残し、archived Problem 1 bundle quickstart 依存を外した補助文書。
 - `specs/examples/601-current-l2-theorem-first-emitted-artifact-loop-hardening.md`
   - historical Phase 6 / Package 128 closeout memory として、historical `emit-theorem problem1` helper memory と Problem 1 bundle doc 側の emitted-artifact step memory を保持し、representative theorem line `p06 / p07 / p08` を repo-local output dir に materialize していた emitted-artifact loop memory として narrow に読む補助文書。
 - `specs/examples/602-current-l2-authoritative-room-runnable-scenario-loop-hardening.md`

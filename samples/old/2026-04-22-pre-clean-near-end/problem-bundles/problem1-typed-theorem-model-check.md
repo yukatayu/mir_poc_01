@@ -1,5 +1,11 @@
 # Problem 1 sample bundle
 
+> Archive note:
+> この文書は 2026-04-22 clean-near-end migration 前の historical bundle memory である。
+> 下の retired helper command 群は current active command surface ではない。
+> current active compatibility front door は `list / smoke-all / closeout`、
+> current live `check-source-sample` example は clean-near-end `.mir` sample を使う。
+
 ## この bundle の目的
 
 - Problem 1 の current first line である
@@ -11,12 +17,12 @@
 
 ### `p06-typed-proof-owner-handoff`
 
-- current representative sample:
-  `samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt`
-- parser companion:
-  `samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt`
-- Lean artifact:
-  `samples/lean/current-l2/p06-typed-proof-owner-handoff/`
+- archived representative sample:
+  `samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt`
+- archived parser companion:
+  `samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt`
+- archived Lean artifact:
+  `samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p06-typed-proof-owner-handoff/`
 
 この sample では次を同時に見る。
 
@@ -24,7 +30,7 @@
 - theorem line は notebook-first / review-unit first に留める
 - model-check line は row-local carrier first に留める
 
-## 最短 quickstart
+## historical quickstart memory
 
 ### 1. `smoke problem1` で representative line を一度に確認する
 
@@ -65,7 +71,7 @@ python3 scripts/current_l2_guided_samples.py bundle problem1
 
 ```bash
 cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle -- \
-  samples/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt \
+  samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-parser-companion/p06-typed-proof-owner-handoff.request.txt \
   --format pretty
 ```
 
@@ -74,14 +80,14 @@ cargo run -q -p mir-ast --example current_l2_inspect_request_head_clause_bundle 
 - `p06` companion surface が repo-local parser-side carrier に戻っていることが分かる。
 - surface を final grammar に昇格せず、thin experimental companion として保っている current cut を追える。
 
-## 実行の順番
+## historical execution memory
 
 1. representative sample をそのまま流す
 
 ```bash
 cargo run -q -p mir-runtime --example mir_current_l2 -- \
   run-source-sample \
-  samples/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt \
+  samples/old/2026-04-22-pre-clean-near-end/prototype/current-l2-typed-proof-model-check/p06-typed-proof-owner-handoff.txt \
   --format pretty
 ```
 
@@ -90,14 +96,14 @@ cargo run -q -p mir-runtime --example mir_current_l2 -- \
 ```bash
 cargo run -q -p mir-runtime --example mir_current_l2 -- \
   check-source-sample \
-  samples/prototype/current-l2-typed-proof-model-check/p10-typed-authorized-fingerprint-declassification.txt \
+  samples/clean-near-end/typing/01_authorized_declassification.mir \
   --format pretty
 ```
 
 見るべき結果:
 
-- `check-source-sample` は `p10 / p11 / p12 / p15 / p16` first strong typing sample set だけを対象に、
-  cluster / case / family / row-body までを focused checker summary として返す。
+- current `check-source-sample` live example は clean-near-end accepted sample set を対象に、
+  `sample` / `family` / `static_verdict` / `terminal_outcome` / constraint rows を返す。
 - final public verifier contract や final typed calculus には上げず、
   checker-adjacent executable slice として current first line を読み直せる。
 
@@ -184,7 +190,7 @@ full dependent type、general theorem proving in compiler、final public checker
   - `p06` の representative bridge と `p11 / p12 / p15 / p16` rejection pair を、
     repo-local output dir と summary index にまとめる narrow reopen entrypoint
 
-## 現在の mixed gate 再開点
+## historical mixed-gate reopen memory
 
 - `stronger typed-surface actual adoption`
   - `python3 scripts/current_l2_guided_samples.py matrix problem1`
@@ -192,7 +198,7 @@ full dependent type、general theorem proving in compiler、final public checker
     typed source principal を premature に上げない current cut を再確認する。
 - `final public theorem result object / consumer-shaped theorem payload public contract / concrete theorem prover brand / proof object public schema / final public verifier contract`
   - `python3 scripts/current_l2_guided_samples.py bundle problem1`
-    と `samples/lean/current-l2/p06-typed-proof-owner-handoff/`
+    と `samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p06-typed-proof-owner-handoff/`
     を起点に、theorem-first pilot artifact と notebook-first transport floor を辿る。
 - `first settled property language / concrete model-check tool brand / final public checker artifact / actual public checker migration / actual emitted verifier handoff artifact / production checker-runtime-policy contract / final public verifier contract`
   - `python3 scripts/current_l2_guided_samples.py matrix problem1`
@@ -213,7 +219,7 @@ full dependent type、general theorem proving in compiler、final public checker
   `python3 scripts/current_l2_guided_samples.py reopen-map`
   から、packaging / host integration / upper-layer application target をまとめて見直す。
 
-## split package status
+## historical split package status
 
 - `typed source principal split`
   - close 済み。`python3 scripts/current_l2_guided_samples.py split problem1 typed-source-principal`

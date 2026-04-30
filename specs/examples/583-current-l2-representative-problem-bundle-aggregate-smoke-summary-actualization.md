@@ -2,41 +2,41 @@
 
 ## 位置づけ
 
-- current Phase 6 / Package 109 closeout。
-- `smoke problem1` / `smoke problem2` の representative smoke 実行結果を、
-  `smoke-all` で compact に俯瞰できる current cut を actualize する。
-- exhaustive workflow automation、aggregate CI contract、final public CLI を作る task ではない。
+- current compatibility-front-door floor。
+- `smoke-all` は retired `smoke problem1|problem2` aggregate ではなく、
+  active clean-near-end representative suite を compact に返す
+  surviving compatibility wrapper として残してよい。
+- final public CLI、aggregate CI contract、
+  final public parser / checker / runtime API を fixed する task ではない。
 
 ## この package で固定する current cut
 
 1. `python3 scripts/current_l2_guided_samples.py smoke-all`
-   を actualize し、Problem 1 / Problem 2 の smoke 成否と step inventory を
-   1 コマンドで compact に読めるようにする。
+   は current active compatibility front door として残し、
+   active clean-near-end representative runtime / static corpus floor を compact に返してよい。
 2. `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
-   を actualize し、repo-local verification summary を machine-readable に読めるようにする。
-3. `samples/problem-bundles/README.md`
-   に `smoke-all` を shortest aggregate entrypoint として追記し、
-   sample bundle index と helper command の読みを揃える。
+   は repo-local verification summary の machine-readable entrypoint として残してよい。
+3. archived problem-bundle docs は
+   aggregate helper の current dependency ではなく、
+   pre-clean-near-end closeout memory としてだけ参照する。
 
 ## current recommendation
 
-- per-problem `smoke` は残し、aggregate 側は compact status 読みだけに留める。
-- current package の価値は、
-  representative sample bundle verification の入口を 1 本に圧縮しつつ、
-  Problem 1 / Problem 2 の個別 smoke route を壊さないことにある。
-- aggregate summary は CI fixed surface ではなく、
-  repo-local once-through closeout line を追うための helper-local verification cut として読む。
+- `smoke-all` は surviving compatibility wrapper として保ち、
+  retired per-problem smoke / bundle / quickstart surface へは戻さない。
+- current value は
+  active clean-near-end suite の compact verification summary にあり、
+  archived bundle workflow の再生にはない。
 
 ## actualized evidence
 
-- helper:
+- current compatibility commands:
   - `python3 scripts/current_l2_guided_samples.py smoke-all`
   - `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
-- tests:
-  - `python3 -m unittest scripts.tests.test_current_l2_guided_samples`
-  - `python3 -m unittest scripts.tests.test_problem_sample_bundles`
-- sample docs:
-  - `samples/problem-bundles/README.md`
+  - `python3 scripts/current_l2_guided_samples.py list`
+  - `python3 scripts/current_l2_guided_samples.py closeout --format json`
+- historical docs:
+  - `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/README.md`
 
 ## stop line
 
@@ -47,6 +47,5 @@
 
 ## retained-later line
 
-- aggregate failure-focused diagnostics hardening
-- mixed gate に残る theorem/model-check / witness-provider public contract
+- failure-focused diagnostics hardening
 - final public onboarding / tutorial flow

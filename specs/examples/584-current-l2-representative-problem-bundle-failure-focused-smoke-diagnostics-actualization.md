@@ -2,48 +2,41 @@
 
 ## 位置づけ
 
-- current Phase 6 / Package 110 closeout。
-- `smoke-all` helper を compact summary のまま保ちつつ、
-  failure 時だけ failing point を narrow に surfacing する。
-- exhaustive workflow automation、aggregate CI contract、final public CLI、
-  final public parser / checker / runtime API を fixed する task ではない。
+- current compatibility-front-door floor。
+- `smoke-all` helper の failure diagnostics は、
+  active clean-near-end representative suite の aggregate failure を compact に surfacing する
+  current compatibility hardening として残してよい。
+- exhaustive workflow automation、aggregate CI contract、
+  final public CLI、final public parser / checker / runtime API を fixed する task ではない。
 
 ## この package で固定する current cut
 
 1. `python3 scripts/current_l2_guided_samples.py smoke-all`
-   は、Problem 1 / Problem 2 の representative smoke summary を維持しつつ、
-   failure 時に `failed step` / `failed command` / `failed return code` /
-   `failure excerpt` を compact に返してよい。
+   は active clean-near-end representative suite の aggregate summary を返し、
+   failure 時だけ `failed step` / `failed command` / `failed return code` / `failure excerpt`
+   を compact に返してよい。
 2. `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
-   は、aggregate diagnostics 用に
-   `failed_command` / `failed_return_code` / `failed_output_excerpt`
-   を machine-readable に返してよい。
-3. `smoke-all` 自体は aggregate failure を隠さず、
-   問題のどこかが failed のときは non-zero exit で止まってよい。
-4. `samples/problem-bundles/README.md`
-   は、aggregate smoke helper が failure diagnostics を返すことと、
-   repo-local regression entrypoint として使う読みを同期してよい。
+   は aggregate diagnostics 用の machine-readable summary として残してよい。
+3. archived problem-bundle docs は
+   diagnostics helper の current dependency ではなく、
+   pre-clean-near-end closeout memory としてだけ参照する。
 
 ## current recommendation
 
-- per-problem `smoke` と `smoke-all` の両方を残し、
-  current closeout line では `smoke-all` を
-  representative verification loop の shortest aggregate entrypoint として使う。
-- failure diagnostics は helper-local compact summary に留め、
-  long-form log retention、artifact bundling、installed-binary contract には広げない。
-- public tutorial や CI fixed surface へはまだ上げず、
-  repo-local once-through closeout line を見失わないための diagnostics hardening として読む。
+- failure-focused diagnostics は surviving `smoke-all` wrapper にだけ残し、
+  retired per-problem smoke / quickstart workflow を current command surface に戻さない。
+- current cut は compact failure surfacing に留め、
+  long-form artifact bundling や installed-binary contract には広げない。
 
 ## actualized evidence
 
-- helper:
+- current compatibility commands:
   - `python3 scripts/current_l2_guided_samples.py smoke-all`
   - `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
-- tests:
-  - `python3 -m unittest scripts.tests.test_current_l2_guided_samples`
-  - `python3 -m unittest scripts.tests.test_problem_sample_bundles`
-- sample docs:
-  - `samples/problem-bundles/README.md`
+  - `python3 scripts/current_l2_guided_samples.py list`
+  - `python3 scripts/current_l2_guided_samples.py closeout --format json`
+- historical docs:
+  - `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/README.md`
 
 ## stop line
 
@@ -55,6 +48,4 @@
 ## retained-later line
 
 - long-form failure log retention
-- artifact bundling / emitted failure receipt
 - final public onboarding / tutorial flow
-- final public theorem/model-check / witness-provider contract

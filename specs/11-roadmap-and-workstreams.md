@@ -782,70 +782,68 @@ actual-adoption floor では、
   - Package 97 close 後の current active queue は Package 98 documentation/report closeout のみである
 - guided problem sample entrypoints and runner:
   `specs/examples/572`
-  - Problem 1 / Problem 2 の representative sample entrypoint は `samples/` README と repo-local helper runner に actualize してよい
-  - sample guide は Japanese explanation first / existing corrected prototype reuse / non-production helper runner cut に留める
-  - Package 98 close 後の current active queue は Package 99 theorem/model-check public-seam residual bundle と Package 100 witness/provider/public-shape residual bundle である
+  - historical `show problem1|problem2` / `run problem1|problem2 [--all]` helper memory と archived prototype README memory を保持してよい
+  - current active compatibility front door は `list / smoke-all / closeout` に留める
 - Problem 1 public-seam residual bundle matrix:
   `specs/examples/573`
-  - `p06 / p10 / p11 / p12 / p15 / p16` representative bundle を `matrix problem1` helper に actualize してよい
-  - `p06` representative と first strong typing quintet の checker-adjacent bridge-floor bundle を current readable cut に留める
+  - historical `matrix problem1` memory と archived Problem 1 bundle doc memory を保持してよい
+  - `p06 / p10 / p11 / p12 / p15 / p16` supporting split は historical residual-matrix memory に留める
 - Problem 2 public-shape residual bundle matrix:
   `specs/examples/574`
-  - `p07 / p08 / p09 / p13 / p14` representative bundle を `matrix problem2` helper に actualize してよい
-  - first-line representative / reserve practical route / negative static-stop pair を current readable cut に留める
-  - Package 100 close 後の current active queue は Package 101 theorem-first pilot bundle と Package 102 authoritative-room scenario bundle である
+  - historical `matrix problem2` memory と archived Problem 2 bundle doc memory を保持してよい
+  - `p07 / p08 / p09 / p13 / p14` split は historical residual-matrix memory に留める
 - Problem 1 theorem-first pilot bundle actualization:
   `specs/examples/575`
-  - `p06 / p10 / p11 / p12 / p15 / p16` representative bundle を `bundle problem1` helper、`samples/lean/clean-near-end/` representative artifact、anchor spec / report まで actualize してよい
-  - theorem-first pilot line を docs / helper / Lean artifact まで一本道で辿れる current readable cut に留める
+  - historical `bundle problem1` memory と archived Problem 1 bundle doc / prototype README / Lean artifact memory を保持してよい
+  - theorem-first readable bundle は historical memory に留める
 - Problem 2 authoritative-room scenario bundle actualization:
   `specs/examples/576`
-  - `p07 / p08 / p09 / p13 / p14` representative bundle を `bundle problem2` helper、representative pair / reserve / negative pair の Lean artifact、anchor spec / report まで actualize してよい
-  - Package 102 close 後の current active queue は Package 103 parser-side companion surface bundle と Package 104 parser-side bundle-to-helper bridge である
+  - historical `bundle problem2` memory と archived Problem 2 bundle doc / prototype README / Lean artifact memory を保持してよい
+  - authoritative-room scenario bundle は historical memory に留める
 - parser-side companion surface bundle actualization:
   `specs/examples/577`
-  - `p06 / p07 / p08` representative slice を `samples/prototype/current-l2-parser-companion/` と `Stage3RequestHeadClauseBundle` parse test へ actualize してよい
-  - thin experimental companion surface は helper-local / non-production reader aid に留める
+  - archived parser-companion sample set `p06 / p07 / p08` と parse-test memory を保持してよい
+  - thin experimental companion surface は archived compare floor / non-production reader aid に留める
 - parser-side bundle-to-helper bridge actualization:
   `specs/examples/578`
-  - `bundle problem1 / problem2` helper に `parser_companion_path` を actualize してよい
-  - Package 104 close 後の current active queue は Package 105 parser companion inspector と Package 106 parser companion mapping matrix である
+  - historical `bundle problem1 / problem2` helper memory に `parser_companion_path` を載せていた bridge memory を保持してよい
+  - current active compatibility front door は `list / smoke-all / closeout` に留める
 - parser-side request-head / clause-bundle inspector actualization:
   `specs/examples/579`
-  - `Stage3RequestHeadClauseBundle` の representative parse result を repo-local JSON / pretty inspector command に actualize してよい
-  - Package 105 close 後の current active queue は Package 106 parser companion mapping matrix である
+  - archived parser-companion sample `p06 / p07 / p08` の representative parse result を repo-local JSON / pretty inspector command で inspect してよい
+  - current cut は archived compare-floor inspection に留める
 - parser-side representative mapping matrix actualization:
   `specs/examples/580`
-  - `p06 / p07 / p08` representative slice の original prototype / parser companion / guided bundle / Lean artifact / anchor spec-report 対応を `mapping` helper と sample README table に actualize してよい
-  - Package 106 close 後の current active queue は Package 107 explained representative problem sample bundles と later mixed/user-spec residual である
+  - historical `mapping` helper memory と archived parser-companion README / problem-bundle docs memory を保持してよい
+  - representative cross-anchor mapping は historical memory に留める
 - explained representative problem sample bundles:
   `specs/examples/581`
-  - 二大問題の representative sample を `samples/problem-bundles/` の簡潔な日本語 guide と `bundle problem1|problem2` helper の `sample_bundle_doc` に actualize してよい
-  - Package 107 close 後の current active queue は Package 108 representative problem bundle smoke runner と later mixed/user-spec residual である
+  - archived `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/` guide memory と historical `bundle problem1|problem2` index memory を保持してよい
+  - archived `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/` guide path や `bundle` helper は active surface に戻さない
 - representative problem bundle smoke runner actualization:
   `specs/examples/582`
-  - `smoke problem1|problem2` helper を actualize し、representative sample bundle guide の主要 command 群を repo-local helper から順に再現してよい
-  - Package 108 close 後の current active queue は Package 109 representative problem bundle aggregate smoke summary と later mixed/user-spec residual である
+  - historical `smoke problem1|problem2` memory を保持してよい
+  - current live compatibility helper は `smoke-all` のみを active command に残す
 - representative problem bundle aggregate smoke summary actualization:
   `specs/examples/583`
-  - `smoke-all` helper を actualize し、Problem 1 / Problem 2 の representative smoke 成否と step inventory を 1 コマンドで compact に俯瞰してよい
-  - Package 109 close 後の current active queue は Package 110 representative problem bundle failure-focused smoke diagnostics と later mixed/user-spec residual である
+  - `smoke-all` helper を surviving compatibility wrapper として残し、active clean-near-end representative suite の compact verification summary を返してよい
+  - retired per-problem smoke aggregate へは戻さない
 - representative problem bundle failure-focused smoke diagnostics actualization:
   `specs/examples/584`
-  - `smoke-all` helper に failure-focused diagnostics を actualize し、aggregate failure 時に failed step / command / return code / output excerpt を compact に surfacing してよい
-  - Package 110 close 後の current active queue は Package 111 representative problem bundle quickstart walkthrough hardening と later mixed/user-spec residual である
+  - `smoke-all` helper に active clean-near-end representative suite 向けの failure-focused diagnostics を残してよい
+  - current cut は compact failure surfacing に留める
 - representative problem bundle quickstart walkthrough hardening:
   `specs/examples/585`
-  - `samples/problem-bundles/problem1|problem2` に `最短 quickstart` と `見るべき結果` を actualize し、representative sample guide を doc 単体でも読める quickstart bundle に harden してよい
-  - Package 111 close 後の current active queue は Package 112 representative problem quickstart CLI mirror と later mixed/user-spec residual である
+  - archived problem-bundle quickstart walkthrough memory を保持してよい
+  - `smoke / matrix / bundle / parser companion inspector` quickstart は active surface に戻さない
 - representative problem quickstart CLI mirror actualization:
   `specs/examples/586`
-  - `quickstart problem1|problem2` helper を actualize し、bundle doc 側の representative 4-step quickstart を helper-side summary にも mirror してよい
-  - Package 112 close 後の current active queue は Package 113 representative problem quickstart parity checks と later mixed/user-spec residual である
+  - historical `quickstart problem1|problem2` helper memory を保持してよい
+  - current active compatibility front door は `list / smoke-all / closeout` に留める
 - representative problem quickstart parity checks actualization:
   `specs/examples/587`
-  - `quickstart-parity` helper を actualize し、sample bundle doc と helper-side quickstart mirror の 4-step parity を focused に確認してよい
-  - Package 113 close 後の current active queue は Package 114 representative problem mixed-gate reopen map refresh と later mixed/user-spec residual である
+  - historical `quickstart-parity` helper memory を保持してよい
+  - active command surface には戻さず、archived quickstart parity memory に留める
 - representative problem mixed-gate reopen map refresh:
   `specs/examples/588`
   - historical `reopen-map` helper memory と archived sample bundle doc 側の `現在の mixed gate 再開点` memory を保持し、Problem 1 / Problem 2 の remaining mixed gate と global true user-spec residual を entry command 付きの historical reopen-map memory として読んでよい
@@ -896,8 +894,8 @@ actual-adoption floor では、
   - historical closeout queue memory では Package 126 close 後の next line を Package 127 typed-checker first executable slice、Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual に置いていた
 - typed-checker first executable slice actualization:
   `specs/examples/600`
-  - `check-source-sample` focused checker command と Problem 1 bundle doc 側の quickstart 導線を actualize し、first strong typing sample set を checker-adjacent executable slice として読んでよい
-  - Package 127 close 後の current active queue は Package 128 theorem-first emitted-artifact hardening、Package 129 authoritative-room runnable scenario hardening と later mixed/user-spec residual である
+  - `check-source-sample` を active clean-near-end sample family `typing / order-handoff / model-check / modal` 向けの checker-shaped inspection command として残してよい
+  - Package 127 close 後の historical closeout queue memory では Package 128 theorem-first emitted-artifact hardening と Package 129 authoritative-room runnable scenario hardening に置いていた
 - theorem-first emitted-artifact loop hardening:
   `specs/examples/601`
   - historical `emit-theorem problem1` helper memory と Problem 1 bundle doc 側の emitted-artifact step memory を保持し、`p06 / p07 / p08` representative theorem line を repo-local output dir へ materialize していた historical emitted-artifact loop として読んでよい
