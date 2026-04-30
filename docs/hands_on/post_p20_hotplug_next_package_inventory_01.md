@@ -2,11 +2,11 @@
 
 ## この文書の役割
 
-この文書は、`R7` docs-first closeout memory と `P21` current closeout line を最短コマンドで確認する landing page です。
+この文書は、`R7` historical closeout memory と `P21` runtime-private engine-state floor を最短コマンドで確認する landing page です。
 
 - final public completion ではありません
-- `P21` close と exact next label intentionally unfixed の current reading だけを確認します
-- rollback / migration / ordering / public ABI は引き続き later family に残します
+- `P20` thin assembly、`P21` runtime-private narrow floor、post-`P21` family pointers の boundary だけを確認します
+- rollback / migration / ordering / public ABI は completion claim せず、post-`P21` family docs から読む対象として残します
 
 ## まず実行するコマンド
 
@@ -23,21 +23,21 @@ git diff --check
 
 ## これで確認できること
 
-- `P20` current closeout が
+- `P20` closeout が
   admitted carrier + existing substrate の thin runtime/report assembly に留まること
 - helper-local `hotplug_lifecycle` / sample-grounded IDs が
   依然 preview ownership に残ること
-- `P21` runtime-crate hot-plug completed-engine narrow cut が
-  current close 済みであること
+- `P21` runtime-crate hot-plug engine-state narrow floor が
+  repo-local current layer で close 済みであること
 - `HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、
   `assemble_hotplug_runtime_engine_report()`、
   `build_hotplug_runtime_engine_report()`
-  により canonical runtime-side engine state progression が narrow に actualize されたこと
-- later family が
+  により runtime-private engine-state report が narrow に actualize されたこと
+- post-`P21` family docs が
   `rollback / durable migration`
   `distributed activation ordering`
   `final public hot-plug ABI`
-  に grouped して読まれること
+  の 3 pointer に分けて読まれること
 
 ## これではまだ確認できないこと
 

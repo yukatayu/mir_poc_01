@@ -2,9 +2,9 @@
 
 ## 目的
 
-`R4` の current line は、
+`R4` の boundary reading は、
 helper-local hot-plug evidence を widened implementation と誤読しないために、
-current minimal contract row の先に残る kept-later boundary を読むことです。
+minimal contract row の先に残る kept-later boundary を読むことです。
 
 ## まず確認するコマンド
 
@@ -33,15 +33,15 @@ python3 scripts/sugoroku_world_samples.py closeout --format json
 - runtime-crate hot-plug engine ownership
 - final public hot-plug ABI
 
-## current reading
+## repository-memory reading
 
 `R4` は helper output を増やす package ではありません。
 current helper floor をそのまま保ちつつ、
 何がまだ deferred かを docs-first に固定する package です。
 historical next relation at `R4` close time は `R5` runtime-crate hot-plug engine ownership cut でした。
-current repo state では `P21` も close 済みであり、
-exact next label intentionally unfixed のまま
-`rollback / durable migration` family hardening を first recommendation として読みます。
+current snapshot の live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照します。
+この page では、post-`P21` first family pointer が `rollback / durable migration` であり、
+それ自体は rollback / migration completion ではない、という boundary だけを確認します。
 
 ## 関連
 

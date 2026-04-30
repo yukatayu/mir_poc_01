@@ -2,15 +2,15 @@
 
 ## この文書の役割
 
-この文書は、`P21` close 後に
-third recommendation family まで docs-first close 済みであることを、
+この文書は、closed post-`P21` docs-first trilogy の
+last historical boundary family が final public hot-plug ABI であることを、
 最短コマンドで読み返す landing page です。
 
-- exact package label は intentionally unfixed のままです
+- live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照します
 - ここで freeze したのは final public ABI ではなく、
   `freeze prerequisite fixed; public ABI still unfrozen`
   という line です
-- 残る open gate は actual `U1` commitment であり、
+- product-shaping gate は actual `U1` commitment であり、
   追加の self-driven post-`P21` docs-first family ではありません
 
 ## まず実行するコマンド
@@ -25,12 +25,12 @@ git diff --check
 
 ## これで確認できること
 
-- `P19` / `P20` / `P21` current runtime-private anchor
+- `P19` / `P20` / `P21` repo-local runtime-private anchor
 - helper-local preview naming と runtime-private naming を
   final public ABI naming に上げていないこと
 - `final public hot-plug ABI` family の docs-first close が
   actual public ABI freeze ではないこと
-- current remaining open gate が actual `U1` commitment であること
+- snapshot docs が product-shaping decision を actual `U1` commitment へ向けていること
 
 ## これではまだ確認できないこと
 

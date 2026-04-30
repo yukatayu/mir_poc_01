@@ -2,13 +2,13 @@
 
 ## この文書の役割
 
-この文書は、`P21` close 後の
-second recommendation closeout memory が
-`distributed activation ordering` family であることを、
+この文書は、closed post-`P21` docs-first trilogy の
+historical second boundary family が
+`distributed activation ordering` であることを、
 最短コマンドで読み返す landing page です。
 
-- exact package label は intentionally unfixed のままです
-- `rollback / durable migration` family は first recommendation close 済みです
+- live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照します
+- `rollback / durable migration` family は historically preceding boundary family です
 - final public hot-plug ABI はこの文書の scope 外です
 - helper-local attach cut を distributed ordering completion と誤読しないことが主眼です
 
@@ -28,8 +28,8 @@ git diff --check
 
 - `P21` close 後の runtime-side engine state progression narrow cut
 - `activation_cut` が still helper-local attach boundary に留まること
-- distributed activation ordering family が second recommendation として docs-first に切り出されたこと
-- third recommendation family の current repository memory が final public hot-plug ABI であること
+- distributed activation ordering family が historical second boundary family として docs-first に切り出されたこと
+- separately documented third boundary family の repository-memory pointer が final public hot-plug ABI であること
 
 ## これではまだ確認できないこと
 
