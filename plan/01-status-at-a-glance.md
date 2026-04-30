@@ -1,5 +1,11 @@
 # plan/01 — 現況サマリ
 
+## この文書について
+
+- この文書は repo-wide status-at-a-glance の repository memory であり、current queue authority は `progress.md` / `tasks.md` に置く
+- ここに残す closeout chain と guardrail inventory は current snapshot の背景 memory として読む。active package order や fresh validation status の判定は `progress.md` / `tasks.md` / `docs/reports/` で再確認する
+- storage / capacity / mount の具体的な数値は point-in-time anchor であり、運用判断の前には `df -h`、`du -sh`、`lsblk -f`、`findmnt` を rerun する
+
 ## repo 全体の主眼
 
 - 主眼は、Mir current-L2 の repo-local alpha-ready current layer を保ちながら、Mirrorea future-axis を sample / progress / storage discipline と結びつけて前進させることにある
@@ -19,34 +25,14 @@
 - `scripts/visual_debugger_viewer_samples.py` が helper/runtime typed visualization inventory を typed public prototype inventory へ正規化する current first-cut surface を持つ
 - `scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` が repository memory / report / dashboard 側の baseline check になる
 
-## current storage audit snapshot
+## storage guardrail memory
 
-- root disk:
-  `/dev/vda2` 99G 中 32G free
-- repo size:
-  `102M`
-- `target/`:
-  repo path は `/mnt/mirrorea-work/cargo-target` への symlink に切り替え済み
-  - external usage:
-    `5.9G`
-- cargo registry cache:
-  `/mnt/mirrorea-work/cargo-registry-cache`
-  - current probe:
-    `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
-- `.git/`:
-  `80M`
-- extra storage:
-  `/dev/vdb1` ext4 `mirrorea-work` が `/mnt/mirrorea-work` に mounted
-  - UUID:
-    `a87650a8-e3e9-4977-8940-6c293a0ee23c`
-  - `/etc/fstab`:
-    UUID-based `defaults,nofail`
-  - current active cutover:
-    `target/` は SSD 側へ移送済み
-  - LLVM path readiness:
-    `/mnt/mirrorea-work/llvm/{src,build,install}` は作成済み、actual artifact はまだない
-  - live mismatch:
-    `/mnt/mirrorea-work/llvm` parent は `root:root` であり、routine helper は ownership repair を行わず、`llvm/src` cleanup exclusion と `llvm/build` / `llvm/install` cleanup guard だけを current line に固定する
+- fresh quantitative readings は `docs/reports/0972-*` と `docs/reports/1001-*` の storage audit evidence を入口にし、運用判断の前に再 probe する
+- repo path `target/` は `/mnt/mirrorea-work/cargo-target` への symlink current line を維持する
+- cargo registry cache は `/mnt/mirrorea-work/cargo-registry-cache` を current external cache path として扱う
+- heavy disposable artifact 用の external workdir は `/mnt/mirrorea-work` mount を前提にしつつ、actual mount / capacity は毎回 probe で確認する
+- `scripts/env/mirrorea_storage_env.sh`、`scripts/storage/detach_prepare.sh`、`scripts/storage/cleanup_disposable_artifacts.sh` が current guardrail surface である
+- `/mnt/mirrorea-work/llvm/{src,build,install}` は reserve path family として維持し、`/mnt/mirrorea-work/llvm` parent が `root:root` non-writable の間は helper が ownership repair を行わず、`llvm/src` cleanup exclusion と `llvm/build` / `llvm/install` cleanup guard だけを current line に固定する
 
 ## twin peaks の current state
 
@@ -144,14 +130,14 @@
 - `docs/reports/0973-*` で `P18` public API / parser grammar gate の repo-side first-cut closeout を close し、freeze checklist / public-boundary inventory / mixed-gate と true user-spec hold line の分離を current line に actualize した
 - historical `P20` closeout memory として、admitted request/verdict carrier と existing substrate の thin runtime/report assembly までは current line に actualize 済みである。`P20` では dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize した。completed engine、rollback、durable migration、distributed activation ordering、final public hot-plug ABI は still later に残す
 - `R7` は close 済みであり、post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を current narrow 実装 line に固定した。historical grouped-later memory は維持しつつ、current repo snapshot では `rollback / durable migration` family、`distributed activation ordering` family、`final public hot-plug ABI` family を順序つき docs-first recommendation としてすべて close した
-- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、repo-side inventory だけでは閉じない。third recommendation docs-first close の後も still later である
+- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、repo-side inventory だけでは閉じない。third recommendation docs-first close の後も still later であり、current maintenance-only line かどうかの queue authority は `progress.md` / `tasks.md` に残す
 
 ### Mirrorea future-axis carrier lane
 
 - project axis:
   **正しい理論に基づき、正しく hot-plug でき、Place をまたいで実行・通信・検証・可視化できる仮想空間システム**
 - `docs/reports/0912-*` で package 1 current-state audit と package 2 AGENTS/reporting discipline を close した
-- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 `NET-01..05` helper-local transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout、`P6` `MessageEnvelope / AuthEvidence` seam hardening closeout、`P7` `VisualizationProtocol / VisualizationSecurity` hardening closeout、`P8` Sugoroku runtime attach hardening closeout、`P9` avatar fairy follow hardening closeout、`P10` `mirrorea-core` first real implementation tranche closeout、`P11` logical multi-place runtime tranche の current third cut actualization、`P12` external adapter / host boundary tranche の current first cut closeout、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout、`P18` public API / parser grammar gate の repo-side first-cut closeout を先に入れた上で、public-freeze path の repo-side framingは一度閉じ、next line を true user-spec hold line として読む
+- current reading は、sample/storage foundation と `TermSignature` / `LayerSignature` / `MessageEnvelope` / `VisualizationProtocol` first cut、phase 9 typed external boundary docs-first sample plan と synthetic preview helper widening と residual reopen matrix fix、phase 12 projection docs-first plan / helper-report preview widening / emitted-program gate closeout、phase 14 hot-plug helper-local lifecycle canary、phase 13 reported `NET-01` Sugoroku parity anchor + `NET-02..05` runnable transport canary、phase 16 backend/LLVM guardrail、hands-on closeout landing page、phase 8 avatar representative slice widening、cross-package sweep、`FAIRY-05` residual reacquire design review、`P4` `TermSignature` registry hardening closeout、`P5` `LayerSignature` system hardening closeout、`P6` `MessageEnvelope / AuthEvidence` seam hardening closeout、`P7` `VisualizationProtocol / VisualizationSecurity` hardening closeout、`P8` Sugoroku runtime attach hardening closeout、`P9` avatar fairy follow hardening closeout、`P10` `mirrorea-core` first real implementation tranche closeout、`P11` logical multi-place runtime tranche の current third cut actualization、`P12` external adapter / host boundary tranche の current first cut closeout、`P13` network transport minimal alpha の current first-cut closeout、`P14` hot-plug package-manager tranche の current first-cut closeout、`P15` projection/codegen first emitted place-specific programs の current first-cut closeout、`P16` visual debugger / viewer first public prototype の current first-cut closeout、`P17` storage / LLVM / backend preparation の current first-cut closeout、`P18` public API / parser grammar gate の repo-side first-cut closeout を先に入れた上で、public-freeze path の repo-side framingは一度閉じ、next line を true user-spec hold line として読む
 - `docs/reports/0933-*` で `Avatar fairy follow residual widening` を close し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、residual planned family を `FAIRY-05` だけに縮めた
 - `docs/reports/0934-*` で `cross-package sweep` を close し、active evidence / planned family / mixed gate / next queue の current reading を recut した
 - `docs/reports/0939-*` で `FAIRY-05 residual reacquire design` を docs-first package として close し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを固定した
