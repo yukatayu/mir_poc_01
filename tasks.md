@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 15:47 JST
+最終更新: 2026-04-30 15:57 JST
 
 ## この文書について
 
@@ -28,6 +28,7 @@
 - 2026-04-30 の reader-facing detailed summary audit も maintenance-only closeout であり、`docs/research_abstract/` の residual `actual next open work` / stale date wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の post-sweep full validation rerun も maintenance-only closeout であり、docs-only refresh 後の sample/helper/cargo/formatter floor が still green であることを再確認しただけで、new implementation queue は reopened していません。
 - 2026-04-30 の remaining-open-gate wording normalization も maintenance-only closeout であり、`specs/11` / `plan/` / `progress.md` / hands-on mirror の `next open work` lexical marker を current snapshot authority と dated snapshot wording に合わせて冷やしただけで、new implementation queue は reopened していません。
+- 2026-04-30 の stale-wording lint feasibility audit では、allowlist なしの lexical lint は `docs/reports/` / `specs/examples/` / `sub-agent-pro/` / `progress.md` recent log に false positive を多発させるため不採用とし、将来やるなら active-current docs 限定の standalone allowlisted pass に留める boundary だけを確認しました。new implementation queue は reopened していません。
 
 ## executable floor
 
@@ -83,7 +84,7 @@ These are safe to do without new product decisions.
 
 | Task | Objective | Validation | Report requirement | Stop line |
 |---|---|---|---|---|
-| docs freshness audit | keep `README.md`, `Documentation.md`, `progress.md`, `tasks.md`, `samples_progress.md`, research summaries, and traceability current | `check_source_hierarchy.py`, `validate_docs.py`, `git diff --check` | new `docs/reports/NNNN-*.md` | do not create new normative decisions in snapshot docs |
+| docs freshness audit | keep `README.md`, `Documentation.md`, `progress.md`, `tasks.md`, `samples_progress.md`, research summaries, and traceability current | `check_source_hierarchy.py`, `validate_docs.py`, `git diff --check` | new `docs/reports/NNNN-*.md` | do not create new normative decisions in snapshot docs; do not use naive banned-phrase scans over `docs/reports/`, `specs/examples/`, `sub-agent-pro/`, or `progress.md` recent log |
 | runnable dashboard refresh | keep sample status, validation timestamps, and blockers evidence-backed | relevant helper closeout commands | report + `samples_progress.md` | do not mark conceptual rows over 25% or use 100% without current-scope commit/push |
 | Rust formatting / regression repair | keep cargo formatting and focused test floors green | `cargo fmt --check`, affected `cargo test` commands | report if behavior or docs status changes | do not mix unrelated feature work into formatting cleanup |
 | storage guardrail check | keep external workdir and cleanup scripts safe on small VPS | `df -h`, `free -h`, `findmnt`, storage scripts | report with resource output | no destructive cleanup / mount / format without explicit confirmation |
