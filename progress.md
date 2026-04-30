@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 23:35 JST
+最終更新: 2026-04-30 23:45 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 23:42 JST — docs / active-example temperature sweep 後の validation rerun を行い、`check_source_hierarchy.py`、`validate_docs.py`、current-L2 / clean near-end / Lean sync / Sugoroku / avatar / typed external / network / projection / viewer closeouts、`cargo test -p mir-ast`、`cargo test -p mirrorea-core`、`cargo test -p mir-runtime`、`cargo test -p mir-semantics`、`cargo fmt --check`、`git diff --check`、`git diff --cached --check` が pass した。tight-memory VPS なので `df -h .` と `free -h` を見たうえで逐次実行し、report / snapshot closeout まで diff hygiene を再確認した。
 - 2026-04-30 23:35 JST — `specs/examples/478/479/480/484..497/530/568` mixed-gate / coupled-later heading normalization を行い、historical reopen line、current kept-later mixed-gate status、historical queue anchor を current repo-level queue authority と分離した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check`、targeted `rg '^## next line$'` zero match を pass し、active example docs の heading-only drift を current scope で回収した。
 - 2026-04-30 23:19 JST — `specs/examples/569`、`561`、`481`、`482`、`483` explicit queue-claim cooling を行い、historical threshold ladder / parser-side reopen / Package 96-98 queue memory を compare-anchor memory に下げ、current repo-level queue authority を `progress.md` / `tasks.md` に戻した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、concrete package-ladder wording の残件を current scope で回収した。
 - 2026-04-30 23:06 JST — `specs/examples/466/467/470..477/570/571/612` の next-line heading/body normalization を行い、historical theorem/order-handoff/helper-summary/model-check follow-up lines を compare-anchor memory または current maintenance reading に下げ、current repo-level queue authority を `progress.md` / `tasks.md` に戻した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、active example docs の live-queue signal を current scope で回収した。
