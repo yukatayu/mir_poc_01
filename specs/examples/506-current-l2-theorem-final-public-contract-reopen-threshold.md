@@ -7,6 +7,8 @@
 `500`
 と
 `e5-underdeclared-lineage`、
+`samples/clean-near-end/order-handoff/05_delegated_rng_service.mir`
+および historical compare-floor note としての
 `p05-dice-owner-guarded-chain`、
 `p06-typed-proof-owner-handoff`、
 `p07-dice-late-join-visible-history`、
@@ -74,15 +76,18 @@ current package では、次を採る。
 3. third reopen は
    - final public verifier contract
    に置く
-4. reached sample は `e5 / p06 / p07 / p08` に取り、`p05` は guard-only に残す
+4. current live subject は `e5-underdeclared-lineage` に取り、`05_delegated_rng_service` を runtime-adjacent compare floor に置く。`p05 / p06 / p07 / p08` は historical compare anchor としてのみ残す
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_theorem_final_public_contract_reopen_threshold` | `e5 / p06 / p07 / p08` reached、`p05` guard-only の threshold manifest を machine-check する |
-| `current_l2_theorem_result_object_actual_adoption` | result-object route first / payload preview keep を prior floor として carry-over する |
-| `current_l2_theorem_proof_object_schema_prover_brand_coupled_later_gate` | proof-object-schema candidate only / prover-brand candidate only を prior floor として carry-over する |
+| `cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support` | result-object/payload first、prover-brand/proof-schema second の reopen threshold reading が current review-unit / formal-hook floor の上に乗っていることを再確認する |
+| `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder` | `e5-underdeclared-lineage` が current theorem-side source-backed subject として green であり、reopen-threshold reading が accepted current-L2 source corpus と乖離していないことを再確認する |
+| `cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe` | current live bridge は non-production Lean stub までで止まり、final public theorem result object / public contract reopen 自体には入っていないことを再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json` | clean-near-end representative output が theorem obligations / layer signatures を持ち、runtime-private compare floor を維持している |
+
+以下の reopen-threshold ref names は helper-local / repository-memory names であり、current CLI や test がそのまま field 名として expose しているわけではない。
 
 ## threshold shape
 
@@ -120,7 +125,7 @@ current helper-local cut では、reopen 順を
    - prover-brand and proof-schema second
    - final public verifier contract third
    に置くのが自然である。
-3. `e5 / p06 / p07 / p08` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. current live subject を `e5` に限定し、`05_delegated_rng_service` を runtime-adjacent compare floor、`p05 / p06 / p07 / p08` を historical compare anchor に留める読みは semantically honest である。
 4. current package を final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、final public verifier contract に昇格させない。
 
 ## retained alternatives

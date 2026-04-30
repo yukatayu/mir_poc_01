@@ -275,15 +275,15 @@ actual-adoption floor では、
 - Lean-first formal skeleton hardening after finite-index widening:
   `specs/examples/567`
   - `samples/lean/foundations/` = actual small proof fragment
-  - `samples/lean/current-l2/` = generated theorem stub corpus
+  - `samples/lean/clean-near-end/` = generated theorem stub corpus
   - `p15 / p16` representative generated corpus widening
-  - Package 93 close と Package 94...98 current queue
+  - historical queue anchor only。current queue authority は `progress.md` / `tasks.md` に置く
 - theorem/model-check bridge carrier reconnect after finite-index widening:
   `specs/examples/568`
   - theorem public seam quartet keep
   - model-check second-line / row-local carrier widening
   - helper-local `bridge_floor_refs` reconnect
-  - Package 94 close と Package 95...98 current queue
+  - historical queue anchor only。current queue authority は `progress.md` / `tasks.md` に置く
 - reserve strengthening actualization:
   `specs/examples/476`
   - `auditable_authority_witness` minimal witness core actualization
@@ -312,40 +312,40 @@ actual-adoption floor では、
   - discharge-entry adjacent
   - notebook-consumer first
   - brand-neutral theorem request
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem contract shape threshold default:
   `specs/examples/485`
   - refs-only reserve schema first
   - review-unit transport anchor
   - brand-neutral request manifest keep
   - consumer-shaped theorem payload later
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem transport/public-contract coupled later gate:
   `specs/examples/486`
   - transport/public-contract adjacent but distinct
   - review-unit anchor
   - refs-only reserve schema first
   - consumer-shaped payload later
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem review-unit transport / notebook-contract actual adoption:
   `specs/examples/487`
   - review-unit transport first
   - notebook-consumer contract first
   - brand-neutral binding reserve keep
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem result-object preview / proof-object-schema reserve actualization:
   `specs/examples/491`
   - notebook-consumer object first
   - consumer-shaped payload preview only
   - proof-object-schema reserve keep
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem proof-object schema / prover-brand coupled later gate:
   `specs/examples/494`
   - result-object preview keep
   - refs-only public-schema candidate only
   - brand-neutral preflight anchor keep
   - concrete brand not adopted
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - model-check property/tool-brand threshold default:
   `specs/examples/482`
   - row-local property preview first
@@ -383,26 +383,26 @@ actual-adoption floor では、
   - notebook-consumer object first
   - consumer-shaped payload candidate only
   - proof-object-schema / prover-brand adjacent keep
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem result-object route actual adoption:
   `specs/examples/500`
   - review-unit transport first
   - notebook-consumer object first
   - consumer-shaped payload preview keep
   - proof-object-schema / prover-brand later
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem final public-contract reopen threshold:
   `specs/examples/506`
   - result-object and payload first
   - prover-brand and proof-schema second
   - final public verifier contract third
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem Lean-first non-production stub pilot actualization:
   `specs/examples/508`
   - review-unit first
   - brand-neutral preflight anchor keep
   - Lean-first non-production stub only
-  - `e5 / p06 / p07 / p08` reached / `p05` guard-only
+  - live theorem subject = `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` compare anchors
 - theorem review-unit to Lean-stub repo-local artifact-conformance bridge:
   `specs/examples/509`
   - representative runtime/static source sample `e2 / e5`
@@ -411,9 +411,10 @@ actual-adoption floor では、
   - actual Lean tool execution / public theorem contract later
 - theorem Lean-stub representative trace-alignment bridge:
   `specs/examples/510`
-  - representative runtime/static/prototype corpus `e2 / e5 / p06 / p07 / p08`
-  - guard-only contrast `p05`
-  - helper-local pair-alignment runtime test
+  - live bridge corpus `e2 / e5`
+  - clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor
+  - historical `p05 / p06 / p07 / p08` compare anchors
+  - helper-local pair-alignment memory
   - actual Lean tool execution / public theorem contract later
 - order-handoff serial-scope reserve surface:
   `specs/examples/511`
@@ -464,14 +465,14 @@ actual-adoption floor では、
   - helper / CLI unification later
 - final-layer closeout queue reconstruction:
   `specs/examples/520`
-  - representative Lean sample set actual Lean execution 後の self-driven queue は empty ではない
+  - historical queue reconstruction anchor only。current snapshot authority は `progress.md` / `tasks.md` に置く
   - layered strong typing / IFC first-fragment
   - Lean formal skeleton / proof obligations
   - broader negative corpus / helper hardening / near-end closeout sync
 - Lean sample corpus and first foundations:
   `specs/examples/521`
   - `samples/lean/foundations/` actual small proof fragment
-  - `samples/lean/current-l2/` representative Lean sample set generated stub corpus
+  - `samples/lean/clean-near-end/` representative Lean sample set generated stub corpus
   - `current_l2_emit_theorem_lean_bundle` + `current_l2_lean_sample_sync.py`
   - generated stub = artifact well-formedness / bridge alignment, not final discharge
 - IFC secret valid/invalid foundation and Japanese Lean corpus sync:
@@ -750,13 +751,13 @@ actual-adoption floor では、
   - `CurrentL2FiniteIndexFirstLayer.lean`
   - representative generated theorem stub corpus `p15 / p16` widening
   - foundation と generated stub の役割差
-  - Package 93 close 後の current active queue は Package 94 theorem-first and model-check second-line carrier、Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
+  - historical queue anchor only。current queue authority は `progress.md` / `tasks.md` に置く
 - theorem/model-check bridge carrier reconnect after finite-index widening:
   `specs/examples/568`
-  - theorem public seam reached quartet は `e5 / p06 / p07 / p08` の representative cut に保つ
+  - theorem public seam live cut は `e5` に置き、clean-near-end `05_delegated_rng_service` を runtime-adjacent compare floor、historical `p05 / p06 / p07 / p08` を compare anchors に保つ
   - model-check second-line / row-local property actual adoption は `p10 / p11 / p12 / p15 / p16` まで widened してよい
   - helper-local CLI summary は guarded case に `bridge_floor_refs` を出してよい
-  - Package 94 close 後の current active queue は Package 95 order-handoff source surface and artifacts、Package 96 authoritative-room first scenario、Package 97 reserve strengthening、Package 98 documentation/report closeout である
+  - historical queue anchor only。current queue authority は `progress.md` / `tasks.md` に置く
 - order-handoff source surface / artifact route tightening:
   `specs/examples/569`
   - edge-row / vertical continuation principal
@@ -792,7 +793,7 @@ actual-adoption floor では、
   - Package 100 close 後の current active queue は Package 101 theorem-first pilot bundle と Package 102 authoritative-room scenario bundle である
 - Problem 1 theorem-first pilot bundle actualization:
   `specs/examples/575`
-  - `p06 / p10 / p11 / p12 / p15 / p16` representative bundle を `bundle problem1` helper、`samples/lean/current-l2/` representative artifact、anchor spec / report まで actualize してよい
+  - `p06 / p10 / p11 / p12 / p15 / p16` representative bundle を `bundle problem1` helper、`samples/lean/clean-near-end/` representative artifact、anchor spec / report まで actualize してよい
   - theorem-first pilot line を docs / helper / Lean artifact まで一本道で辿れる current readable cut に留める
 - Problem 2 authoritative-room scenario bundle actualization:
   `specs/examples/576`

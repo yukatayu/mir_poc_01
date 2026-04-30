@@ -855,7 +855,8 @@ detached exporter consolidation sprint の current understanding では、PoC lo
   - theorem review-unit to Lean-stub repo-local artifact-conformance bridge
     - representative authored source sample `e2 / e5` を formal-hook smoke / review-unit emit / Lean stub emit / pair conformance validation に束ね、regression helper へ接続する Python-side repo-local compare-floor helper
   - theorem Lean-stub representative trace-alignment bridge
-    - representative runtime/static/prototype corpus `e2 / e5 / p06 / p07 / p08` と guard-only `p05` を、review-unit side / Lean stub side の `theorem_trace_alignment_pair:*` exact match に束ねる runtime test/support helper
+    - current live bridge corpus `e2 / e5` と clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor を、review-unit side / Lean stub side の exact-match memory に束ねる runtime test/support helper
+    - historical `p05 / p06 / p07 / p08` widening は compare-floor memory に残し、current live runtime test と同一視しない
   - authoritative-room vertical-slice actualization route
     - `p07/p08` room-default profile、relation/handoff refs、runtime evidence refs、repo-local emitted artifact refs を final emitted schema に上げずに束ねる runtime test/support helper
   - minimal companion / experimental order-handoff surface route

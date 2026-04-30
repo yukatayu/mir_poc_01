@@ -7,6 +7,8 @@
 `475`
 と
 `e5-underdeclared-lineage`、
+`samples/clean-near-end/order-handoff/05_delegated_rng_service.mir`
+および historical compare-floor note としての
 `p05-dice-owner-guarded-chain`、
 `p06-typed-proof-owner-handoff`、
 `p07-dice-late-join-visible-history`、
@@ -69,17 +71,19 @@ current package では、次を採る。
    - non-production emitted stub only
    - Rocq/Iris fallback retained
    に置く
-4. reached sample は `e5 / p06 / p07 / p08` に取り、`p05` は guard-only に残す
+4. current live subject は `e5-underdeclared-lineage` に取り、`05_delegated_rng_service` を runtime-adjacent compare floor に置く。`p05 / p06 / p07 / p08` は historical compare anchor としてのみ残す
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_lean_theorem_stub_support` | proof notebook review unit から Lean-first stub artifact を組み立てる helper-local support |
-| `current_l2_emit_lean_theorem_stub` | review-unit artifact JSON から Lean-first stub artifact JSON を emit する non-production CLI example |
-| `current_l2_theorem_lean_stub_pilot_actualization` | `e5 / p06 / p07 / p08` reached、`p05` guard-only の pilot manifest を machine-check する |
-| `current_l2_theorem_prover_binding_preflight` | brand-neutral preflight manifest と adapter boundary refs を prior floor として carry-over する |
-| `current_l2_theorem_first_pilot_actualization` | review-unit principal / symbolic evidence refs / repo-local emitted artifact refs first を prior floor として carry-over する |
+| `cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe` | proof notebook review unit から Lean-first stub artifact を組み立て、actual probe まで確認する current live non-production stub floor |
+| `cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support` | review-unit principal input floor が current tree で維持され、stub pilot が formal-hook / review-unit chain の上に乗っていることを再確認する |
+| `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder` | accepted current-L2 source corpus では `e5-underdeclared-lineage` が theorem-side static subject として引き続き green である |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | active clean suite と Lean-root inventory が current bridge floor として closeout で再確認できる |
+| `samples/lean/README.md` / `samples/lean/manifest.json` | committed Lean bridge floor は `foundations/` + `clean-near-end/` corpus であり、old `samples/lean/current-l2/` ではない |
+
+`current_l2_emit_lean_theorem_stub` は引き続き non-production code anchor / example だが、current closeout floor そのものは上の test と committed `samples/lean/` corpus で読む。
 
 ## actualization shape
 

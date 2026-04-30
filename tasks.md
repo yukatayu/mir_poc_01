@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 18:53 JST
+最終更新: 2026-04-30 19:29 JST
 
 ## この文書について
 
@@ -42,6 +42,7 @@
 - 2026-04-30 の order-handoff / witness-provider active evidence refresh では、active `specs/examples/471/472/473/476/477/483/484/489/490/493/496/499/502/503/504/505/515` の evidence rows を retired current-L2 target 名から current clean-near-end commands へ移行し、historical report は触らずに active docs authority だけを current runtime/suite surface へ寄せました。runtime-floor evidence と helper-local / doc-level judgment の境界も明示し、new implementation queue は reopened していません。
 - 2026-04-30 の model-check active evidence refresh では、active `specs/examples/478/480/482/488/492/495` の evidence rows を retired model-check helper/test names から current clean-near-end / compatibility-front-door / CLI-shaped commands へ移行し、historical `e5 / p05 / p06 / p07 / p08 / p09` labels は package-reading anchor に下げました。`closeout` rows も canonical inventory / current emitted rows までに限定し、new implementation queue は reopened していません。
 - 2026-04-30 の Problem 2 actual-package evidence refresh では、active `specs/examples/467` の historical `p07/p08` reading を current Sugoroku handoff / late-join slices と network stale-reconnect canary + family check へ分解し、old current-L2 runner / CLI labels も current compatibility-front-door / CLI-shaped clean-sample surface へ寄せました。`NET-03` は stale reconnect / membership-epoch guard canary に限定し、new implementation queue は reopened していません。
+- 2026-04-30 の theorem-side active evidence floor mirror sync では、active `specs/examples/474/479/481/485/486/487/491/494/497/500/506/508/510/514/519/521` と `specs/11` / `specs/12` / `plan/09` の theorem memory を、live subject `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、`samples/lean/foundations` + `samples/lean/clean-near-end` committed bridge floor、historical `p05 / p06 / p07 / p08` compare-anchor split へ同期しました。stale theorem next-queue wording は maintenance lane / `U1` reopen point reading へ冷やし、new implementation queue は reopened していません。
 
 ## executable floor
 

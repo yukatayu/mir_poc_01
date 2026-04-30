@@ -10,6 +10,8 @@
 `475`
 と
 `e5-underdeclared-lineage`、
+`samples/clean-near-end/order-handoff/05_delegated_rng_service.mir`
+および historical compare-floor note としての
 `p05-dice-owner-guarded-chain`、
 `p06-typed-proof-owner-handoff`、
 `p07-dice-late-join-visible-history`、
@@ -87,17 +89,19 @@ current package では、次を採る。
    - brand-neutral contract probe
    の 3 ref に明示的に分ける
 6. repo-local emitted artifact refs は theorem-first pilot actualization と同じ floor に保つ
-7. reached sample は `e5 / p06 / p07 / p08` に取り、`p05` は guard-only に残す
+7. current live subject は `e5-underdeclared-lineage` に取り、`05_delegated_rng_service` を runtime-adjacent compare floor に置く。`p05 / p06 / p07 / p08` は historical compare anchor としてのみ残す
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_theorem_discharge_actual_format_probe` | `e5 / p06 / p07 / p08` reached、`p05` guard-only の actual-format probe manifest を machine-check する |
-| `current_l2_theorem_discharge_prefloor` | actual-format probe が row-local review-unit / reserve floor の上に乗っていることを再確認する |
-| `current_l2_theorem_first_pilot_actualization` | symbolic evidence refs / repo-local emitted artifact refs を probe がそのまま受け継いでいることを再確認する |
-| `current_l2_theorem_prover_binding_preflight` | theorem-first external integration target は brand-neutral preflight に留まり、actual-format probe と collapse しないことを再確認する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime / static corpus の runnable floor 自体は引き続き green である |
+| `cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support` | row-local review-unit principal と formal-hook obligation rows が actual-format probe の current live floor であることを再確認する |
+| `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder` | `e5-underdeclared-lineage` が current theorem-side source-backed subject として green であり、probe が runtime / static current floor と乖離していないことを再確認する |
+| `cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe` | actual-format probe の downstream でも、現在の live bridge は non-production Lean stub までで止まり、dedicated public theorem transport symbol へは上がっていないことを再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json` | clean-near-end representative output が theorem obligations / layer signatures を持ち、runtime-private compare floor を維持している |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | active clean suite と committed Lean roots が current bridge floor として closeout で再確認できる |
+
+以下の `transport_preview_refs` / `public_contract_preview_refs` / `consumer_boundary_refs` は repository-memory 上の helper-local names であり、current CLI や test がそのまま field 名として expose しているわけではない。
 
 ## actualization shape
 
@@ -161,7 +165,7 @@ current helper-local cut では、consumer boundary を
    - public-contract preview only
    - notebook-consumer-first boundary
    に置くのが自然である。
-3. `e5 / p06 / p07 / p08` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. current live subject を `e5` に限定し、`05_delegated_rng_service` を runtime-adjacent compare floor、`p05 / p06 / p07 / p08` を historical compare anchor に留める読みは semantically honest である。
 4. theorem-first external integration target は brand-neutral preflight と actual-format probe を両立させるが、
    actual transport / public theorem contract adoption へは still later に留める。
 

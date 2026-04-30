@@ -39,11 +39,12 @@ current repo では、theorem-prover experimental binding preflight route を次
 
 | evidence | current reading |
 |---|---|
-| `current_l2_theorem_prover_binding_preflight` | theorem-first pilot を brand-neutral preflight manifest まで actualize する helper-local route |
-| `e5-underdeclared-lineage` | static cluster でも preflight manifest ref を machine-check できる |
-| `p06-typed-proof-owner-handoff` | typed/theorem bridge-floor evidence を theorem-first external preflight に保てる |
-| `p07-dice-late-join-visible-history` | order/handoff prototype も theorem-first preflight compare floor に残せる |
-| `p05-dice-owner-guarded-chain` guard-only result | preflight を reached と偽装せず止められる |
+| `cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support` | `e2 / e5` から `proof_notebook_review_unit` と formal-hook rows を抽出でき、brand-neutral preflight の principal floor が現行 tree で生きている |
+| `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder` | accepted current-L2 source corpus では `e5-underdeclared-lineage` が theorem-side current subject として引き続き green である |
+| `cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe` | preflight の先でも non-production Lean stub までしか上げず、concrete discharge transport / public theorem contract を採らない current bridge floor を再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json` | clean-near-end representative output が theorem obligations / layer signatures を持ち、runtime-private compare floor を維持している |
+
+historical `p05 / p06 / p07` は compare-floor memory としては参照してよいが、current accepted theorem-preflight target ではない。
 
 ## actualization shape
 
@@ -101,10 +102,4 @@ current package は次で止める。
 
 ## next self-driven line
 
-theorem-prover experimental binding preflight の後は、
-
-1. `auditable_authority_witness`
-2. `delegated_rng_service`
-3. model-check second-line concretization
-
-の順に進める読みが自然である。
+current theorem-side active evidence floor は maintenance lane で保持し、nearby theorem docs / repository memory mirror と focused validation を先に揃える。product-shaping reopen point は引き続き `U1` actual commitment である。

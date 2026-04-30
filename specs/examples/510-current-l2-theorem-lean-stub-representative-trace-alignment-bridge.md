@@ -13,7 +13,7 @@
 を 1 本に束ねる。
 
 ここで actualize するのは、
-**repo-local theorem artifact-conformance bridge を representative prototype corpus `p06 / p07 / p08` まで伸ばし、`e2 / e5` と同じ pair alignment cut で machine-check する bridge**
+**repo-local theorem artifact-conformance bridge の current live floor を `e2 / e5` に保ちつつ、historical `p06 / p07 / p08` trace-alignment widening を retained compare-floor memory に冷やす current cut**
 であり、
 
 - actual Lean tool execution
@@ -30,19 +30,20 @@
 current repo では、少なくとも次が source-backed である。
 
 1. theorem Lean-first non-production stub pilot actualization
-   - `e5 / p06 / p07 / p08` reached
-   - `p05` guard-only
+   - current live subject は `e5`
+   - clean-near-end `05_delegated_rng_service` は runtime-adjacent compare floor
+   - `p05 / p06 / p07 / p08` は historical compare anchor
 2. theorem review-unit to Lean-stub repo-local artifact-conformance bridge
    - `e2 / e5` representative source sample coverage
    - regression-integrated compare floor
-3. prototype preview / theorem pilot helpers
-   - prototype-side `proof_notebook_review_units`
-   - prototype-side `lean_stub_artifacts`
-   - guard-only reading for unreached rows
+3. committed Lean bridge floor
+   - `samples/lean/foundations/`
+   - `samples/lean/clean-near-end/`
+   - `samples/lean/manifest.json`
 
 したがって current open problem は、
-prototype trace alignment を compare-floor の外に置くことではなく、
-**reached representative prototype corpus に対して review unit / Lean stub pair alignment を helper-local actualization floor に上げられるか**
+prototype trace alignment widening を current live runtime test と誤読させないまま、
+**review unit / Lean stub pair alignment の live floor と historical compare-floor memory をどう分けて保つか**
 である。
 
 ## current actualization cut
@@ -52,33 +53,40 @@ current package では、次を採る。
 1. representative corpus は
    - runtime source sample `e2`
    - static source sample `e5`
+2. runtime-adjacent compare floor は
+   - clean-near-end `05_delegated_rng_service`
+3. historical compare anchor は
    - typed prototype `p06`
    - order-handoff prototypes `p07 / p08`
-   - guard-only contrast `p05`
+   - historical guard anchor `p05`
    に置く
-2. alignment predicate は
+4. alignment predicate は
    - same `theorem_trace_alignment_pair:<subject_ref>:<obligation_kind>`
    - review unit side と Lean stub side が exact match
    に置く
-3. actualization surface は
-   - runtime support builder
-   - focused runtime test
+5. actualization surface は
+   - current review-unit / formal-hook / Lean-stub tests
+   - committed `samples/lean/clean-near-end/` corpus
    に留める
-4. public theorem contract / proof object public schema には上げない
+6. public theorem contract / proof object public schema には上げない
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `build_current_l2_source_sample_theorem_lean_stub_trace_alignment_bridge` | preview route と Lean stub pilot route を束ね、representative corpus の pair alignment を helper-local に actualize する runtime support |
-| `current_l2_theorem_lean_stub_trace_alignment_bridge` | `e2 / e5 / p06 / p07 / p08` reached、`p05` guard-only の representative theorem trace alignment bridge を machine-check する focused runtime test |
-| `theorem_trace_alignment_pair:*` refs | review unit side と Lean stub side の obligation-pair alignment を subject-local に固定する repo-local ref family |
+| `cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support` | `e2 / e5` の review-unit / formal-hook floor が current live theorem bridge であることを再確認する |
+| `cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe` | review-unit から Lean stub への current live bridge と static `e5` actual probe を再確認する |
+| `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder` | accepted current-L2 source corpus で `e2 / e5` bridge floor が current runtime/static floor と乖離していないことを再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json` | clean-near-end representative output が theorem obligations / layer signatures を持ち、runtime-adjacent compare floor を維持している |
+| `samples/lean/README.md` / `samples/lean/manifest.json` | committed Lean bridge floor は `foundations/` + `clean-near-end/` corpus であり、prototype-wide trace alignment current test ではない |
+
+`theorem_trace_alignment_pair:*` refs は repository-memory / helper-local names であり、current test がそのまま live field 名として expose しているわけではない。
 
 ## current recommendation
 
-1. theorem review-unit / Lean-stub line は、representative prototype corpus まで trace alignment bridge を actualize してよい。
-2. reached representative corpus では review unit pair refs と Lean stub pair refs の exact match を first predicate に置く。
-3. `p05` は guard-only contrast として保持する。
+1. theorem review-unit / Lean-stub line の current live bridge は `e2 / e5` と committed clean-near-end corpus に留めるのが自然である。
+2. `05_delegated_rng_service` は runtime-adjacent compare floor として保持し、historical `p06 / p07 / p08` widening は compare-floor memory に冷やす。
+3. `p05` は historical guard anchor として保持する。
 4. actual Lean tool execution、prototype-wide exhaustive alignment、public theorem contract は still later に残す。
 
 ## retained alternatives

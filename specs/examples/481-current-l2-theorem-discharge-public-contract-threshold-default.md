@@ -9,6 +9,8 @@
 `479`
 と
 `e5-underdeclared-lineage`、
+`samples/clean-near-end/order-handoff/05_delegated_rng_service.mir`
+および historical compare-floor note としての
 `p05-dice-owner-guarded-chain`、
 `p06-typed-proof-owner-handoff`、
 `p07-dice-late-join-visible-history`、
@@ -86,17 +88,19 @@ current package では、次を採る。
    - concrete theorem prover brand later
    に分ける
 5. repo-local emitted artifact refs は theorem-first pilot floor に維持する
-6. reached sample は `e5 / p06 / p07 / p08` に取り、`p05` は guard-only に残す
+6. current live subject は `e5-underdeclared-lineage` に取り、`05_delegated_rng_service` を runtime-adjacent compare floor に置く。`p05 / p06 / p07 / p08` は historical compare anchor としてのみ残す
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_theorem_discharge_public_contract_threshold` | `e5 / p06 / p07 / p08` reached、`p05` guard-only の threshold manifest を machine-check する |
-| `current_l2_theorem_discharge_actual_format_probe` | transport/public-contract preview と notebook-consumer-first boundary を threshold が carry-over していることを再確認する |
-| `current_l2_theorem_prover_binding_preflight` | brand-neutral theorem request と adapter-boundary refs を threshold が carry-over していることを再確認する |
-| `current_l2_theorem_first_pilot_actualization` | symbolic evidence refs と repo-local emitted artifact refs を threshold が保持することを再確認する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime / static corpus の runnable floor 自体は引き続き green である |
+| `cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support` | review-unit first / discharge-entry adjacent / notebook-consumer-first threshold reading が current live formal-hook / review-unit floor の上に乗っていることを再確認する |
+| `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder` | `e5-underdeclared-lineage` が current theorem-side source-backed subject として green であり、threshold reading が accepted current-L2 source corpus と乖離していないことを再確認する |
+| `cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe` | threshold default の downstream でも、current live bridge は non-production Lean stub までで止まり、actual discharge transport / public theorem contract へは上がっていないことを再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json` | clean-near-end representative output が theorem obligations / layer signatures を持ち、runtime-private compare floor を維持している |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | active clean suite と committed Lean roots が current bridge floor として closeout で再確認できる |
+
+以下の threshold manifest ref names は helper-local / repository-memory names であり、current CLI や test がそのまま field 名として expose しているわけではない。
 
 ## actualization shape
 
@@ -154,7 +158,7 @@ actual transport / public contract adoption を意味しない。
    - notebook-consumer first
    - brand-neutral theorem request
    に置くのが自然である。
-3. `e5 / p06 / p07 / p08` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. current live subject を `e5` に限定し、`05_delegated_rng_service` を runtime-adjacent compare floor、`p05 / p06 / p07 / p08` を historical compare anchor に留める読みは semantically honest である。
 4. actual discharge transport / public theorem contract 自体は still later mixed gate に残し、current threshold manifest を final public theorem contract や final public verifier contract に昇格させない。
 
 ## retained alternatives

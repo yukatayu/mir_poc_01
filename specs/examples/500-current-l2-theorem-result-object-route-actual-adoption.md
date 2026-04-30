@@ -8,6 +8,8 @@
 `497`
 と
 `e5-underdeclared-lineage`、
+`samples/clean-near-end/order-handoff/05_delegated_rng_service.mir`
+および historical compare-floor note としての
 `p05-dice-owner-guarded-chain`、
 `p06-typed-proof-owner-handoff`、
 `p07-dice-late-join-visible-history`、
@@ -78,16 +80,18 @@ current package では、次を採る。
    - consumer-shaped payload preview only
    - payload public contract later
    に置く
-3. reached sample は `e5 / p06 / p07 / p08` に取り、`p05` は guard-only に残す
+3. current live subject は `e5-underdeclared-lineage` に取り、`05_delegated_rng_service` を runtime-adjacent compare floor に置く。`p05 / p06 / p07 / p08` は historical compare anchor としてのみ残す
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `current_l2_theorem_result_object_actual_adoption` | `e5 / p06 / p07 / p08` reached、`p05` guard-only の actual-adoption manifest を machine-check する |
-| `current_l2_theorem_review_unit_transport_actual_adoption` | review-unit transport first / notebook-consumer contract first を prior floor として carry-over する |
-| `current_l2_theorem_result_object_preview_actualization` | notebook-consumer object first / consumer-shaped payload preview only / proof-object-schema reserve keep を prior floor として carry-over する |
-| `current_l2_theorem_result_payload_public_contract_coupled_later_gate` | payload public-contract side / proof-object-schema-prover-brand adjacent keep を prior floor として carry-over する |
+| `cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support` | review-unit transport first / notebook-consumer object first reading が current review-unit / formal-hook floor の上に乗っていることを再確認する |
+| `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder` | `e5-underdeclared-lineage` が current theorem-side source-backed subject として green であり、result-object route reading が accepted current-L2 source corpus と乖離していないことを再確認する |
+| `cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe` | current live bridge は non-production Lean stub までで止まり、final public theorem result object / consumer-shaped payload public contract へは上がっていないことを再確認する |
+| `cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json` | clean-near-end representative output が theorem obligations / layer signatures を持ち、runtime-private compare floor を維持している |
+
+以下の result-object-route ref names は helper-local / repository-memory names であり、current CLI や test がそのまま field 名として expose しているわけではない。
 
 ## actualization shape
 
@@ -137,7 +141,7 @@ current helper-local cut では、payload-preview keep を
    - consumer-shaped payload preview keep
    - proof-object-schema / prover-brand later
    に置くのが自然である。
-3. `e5 / p06 / p07 / p08` reached、`p05` guard-only の組み合わせは semantically honest である。
+3. current live subject を `e5` に限定し、`05_delegated_rng_service` を runtime-adjacent compare floor、`p05 / p06 / p07 / p08` を historical compare anchor に留める読みは semantically honest である。
 4. current package を final public theorem result object、consumer-shaped theorem payload public contract、concrete theorem prover brand、proof object public schema、final public verifier contract に昇格させない。
 
 ## retained alternatives

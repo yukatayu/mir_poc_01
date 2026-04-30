@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-04-30 15:00 JST
+Last updated: 2026-04-30 19:29 JST
 Current repo-local focus: current-L2 / clean near-end runnable floor, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -28,7 +28,7 @@ Notes:
 |---|---:|---|---|---|
 | Mir core | 90 | active current layer | `samples/current-l2/` base corpus and current-L2 execution | `python3 scripts/current_l2_guided_samples.py closeout --format json` |
 | clean near-end suite | 90 | active clean suite | typing / order-handoff / model-check / modal runnable floor | `python3 scripts/clean_near_end_samples.py closeout` |
-| Lean / theorem | 89 | active proof bridge | small proof foundations + generated theorem stubs | `python3 scripts/current_l2_lean_sample_sync.py` |
+| Lean / theorem | 89 | active proof bridge | small proof foundations + clean-near-end generated theorem stubs; live bridge = `e2/e5` with `05_delegated_rng_service` compare floor | `python3 scripts/current_l2_lean_sample_sync.py` |
 | Sugoroku runtime | 90 | active vertical slice | attach / membership / handoff / late join / detach TODO boundary | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
 | Avatar follow | 90 | active representative slice | `FAIRY-01/02/03/04/06`; `FAIRY-05` remains planned | `python3 scripts/avatar_follow_samples.py closeout --format json` |
 | External adapters | 75 | synthetic preview + host-boundary inventory | `EXT-03` / `EXT-04` helper subset; `EXT-01/02/05` planned | `python3 scripts/typed_external_boundary_samples.py closeout --format json` |
@@ -94,6 +94,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-30 19:29 JST | theorem-side focused floor | pass with warnings | `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder`、`cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support`、`cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe`、`cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json`、`python3 scripts/clean_near_end_samples.py closeout --format json` passed; warnings are existing `dead_code` warnings in theorem support helpers |
 | 2026-04-30 15:00 JST | `python3 scripts/check_source_hierarchy.py` | pass | required 23 / present 23 / missing 0 |
 | 2026-04-30 15:00 JST | `python3 scripts/validate_docs.py` | pass | after report `1001`, documentation scaffold complete; report count 999 |
 | 2026-04-30 15:00 JST | current sample helper closeouts + Lean sync | pass | current-L2 compatibility wrapper, clean near-end, Sugoroku, avatar, typed external, network, projection, viewer closeouts passed; `current_l2_lean_sample_sync.py` refreshed `samples/lean/manifest.json` and left the working tree clean |
