@@ -13,6 +13,7 @@
 近接の self-driven package queue は `plan/11-roadmap-near-term.md` と `tasks.md` を正とする。
 この文書は macro-level の lane / gate / historical recovery 読みを保つための repository memory であり、
 package 3 以降の Mirrorea future-axis 近接順序をここで上書きしない。
+`progress.md` / `tasks.md` が current promoted workline を maintenance と読む場合、この文書の lane 記述は queue authority ではなく lane memory として読む。
 
 ## current overall reading
 
@@ -44,8 +45,8 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
   typed / theorem / model-check / order / memory / syntax / modality を
   docs-first comparison と boundary planning で進める
 - current line:
-  `Macro 5 final-layer closeout packages active`
-  （boundary / pilot / framing floor は fixed 済みであり、`specs/examples/458...465` compare floor、`466...469` actual-adoption floor、`470...474` helper-local actualization / narrowing floor、`475...519` deeper-theory / reserve / mixed-gate / actual-execution actualization floor は close 済みである。corrected runnable floor と representative Lean sample set actual Lean execution は reached 済みであり、`specs/examples/520`、`521`、`522`、`523`、`524`、`525`、`526`、`527`、`528`、`529`、`530`、`531`、`532`、`533`、`534`、`535`、`536`、`537`、`538`、`539`、`540`、`541`、`542`、`543`、`544`、`545`、`546`、`547`、`548`、`549`、`550`、`551`、`552`、`553`、`554`、`555`、`556`、`557`、`558`、`559`、`560`、`561`、`562`、`563` により next active line は phase6 perform-head-request-clause-bundle-attachment comparison と later mixed/user-spec residual と読み、Lean formal skeleton / proof obligations first slice、IFC secret valid/invalid concrete example、source-side authority pair、source-side label-flow negative、delegated RNG provider placement carry-over、order-handoff helper CLI surface preview、order-handoff negative static-stop pair、order-handoff negative pair theorem-side Lean carry-over、IFC typed checker-hint preview narrow actualization、theorem/model-check helper preview widening、near-end closeout sync after Package 58、theorem/model-check reopen-threshold helper mirror、order-handoff/shared-space public-seam helper mirror、IFC actual-checker-payload-family threshold helper mirror、IFC checker-payload-row-family threshold helper mirror、IFC checker-payload-row-detail threshold helper mirror、IFC checker-payload-row-body threshold helper mirror、IFC checker-payload-supported-kind-summary threshold helper mirror、IFC checker-payload-public-schema-sketch threshold helper mirror、IFC public-checker-api sketch threshold helper mirror、IFC public-checker entry-criteria threshold helper mirror、IFC public-checker command-surface threshold helper mirror、IFC shared-output-contract threshold helper mirror、IFC public-checker-boundary threshold helper mirror、IFC verifier-handoff-surface threshold helper mirror、IFC minimal-parser-subset-freeze threshold helper mirror、IFC parser-to-checker-reconnect-freeze threshold helper mirror、IFC phase1-semantics-closeout threshold helper mirror、IFC phase2-parser-free-poc-closeout threshold helper mirror、Phase 4 shared-space self-driven closeout threshold helper mirror、Phase 5 proof/protocol/runtime-policy handoff closeout threshold helper mirror、Phase 6 parser / AST carrier first tranche threshold helper mirror、Phase 6 checker/runtime first tranche threshold helper mirror、Phase 6 compile-ready verification / formal hook threshold helper mirror、Phase 6 next-reopen sequencing threshold helper mirror、Phase 6 parser second tranche attached-slot / predicate fragment first-package threshold helper mirror、first strong typing layer finite-index spine default、phase6 reserve formal tool binding inventory threshold helper mirror、phase6 parser-side follow-up package sequencing threshold helper mirror、phase6 parser second-tranche shared single attachment frame first-package threshold helper mirror、fixed-subset source-sample corpus scope-and-file-layout threshold helper mirror、phase6 request-clause-suite publicization threshold helper mirror、phase6 perform-head structural carrier threshold helper mirror は committed `samples/lean/` corpus、source-side prototype corpus、helper-local CLI summary、source-sample runner static gate、export/sync helper、snapshot / roadmap / traceability sync に actualize 済みと読む）
+  `Macro 5 repo-local closeout reached / no promoted self-driven package`
+  （`specs/examples/458...563` compare / adoption / helper-local actualization / actual Lean execution floor は repository memory として close 済みであり、current snapshot では theory-lab 側に新しい promoted self-driven package は置いていない。残るのは mixed gate、reserve interpretation、public-boundary readiness、docs freshness であり、queue authority は `progress.md` / `tasks.md` / `plan/11-roadmap-near-term.md` を正とする）
 - goal:
   full implementation へ飛ばず、candidate family、adequacy corpus、verifier-boundary、stop line を固定した上で、post-runnable closeout package と mixed-gate package を narrow に閉じる
 
@@ -54,7 +55,8 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 - 主眼:
   thin facade / public shell / shared-space / host-I/O boundary を hidden promotion なしで整理する
 - current line:
-  `Macro 6 minimal working subset actual default / Macro 7 mixed + reserve reopen package active`
+  `Macro 6-7 repo-local floor reached / mixed gate held open`
+  （carrier/runtime floor、typed external preview、network canary、projection/codegen bridge evidence、viewer prototype inventory、hot-plug `P21` narrow floor、post-`P21` docs-first trilogy は current scope で close 済みである。`U1` actual commitment が未決の間、ここで自走する current line は new implementation ではなく maintenance / docs freshness / validation rerun である）
 - goal:
   support-only / shell / excluded bucket を混ぜずに保ちつつ、remaining topics を mixed gate に留める
 
@@ -71,9 +73,9 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 | `Macro 2` | parser-free validation substrate | late | detached loop / fixture corpus / compare helper の drift suppression |
 | `Macro 3` | compile-ready minimal actualization | late | support-only / public-candidate split の安定化 |
 | `Macro 4` | executable fixed-subset sample expansion | active on fixed authored/prototype floor | sample widening / prototype comparison を current semantics を崩さずに保てる |
-| `Macro 5` | typed / theorem / model-check bridge | near-end closeout + pre-floor hardening | current first line / retained alternatives / stop line / later gate が source-backed に揃い、preview-alignment pre-floor、model-check projection pre-floor、theorem discharge pre-floor も helper-local compare として固定される |
-| `Macro 6` | fabric / shared-space / runtime evolution | docs-first boundary only | shared-space docs-first boundary と mixed-gate final profile の分離が保てる |
-| `Macro 7` | toolchain / backend / host-facing integration | mixed | shell / facade / packaging boundary を final target profileから分離できる |
+| `Macro 5` | typed / theorem / model-check bridge | repo-local closeout reached | mixed gate と reserve memory を drift させず、new promoted queue を `tasks.md` と矛盾させない |
+| `Macro 6` | fabric / shared-space / runtime evolution | P21 narrow floor + docs-first trilogy closed | shared-space docs-first boundary、kept-later boundary、public-freeze hold line を maintenance 付きで保てる |
+| `Macro 7` | toolchain / backend / host-facing integration | repo-side prototype / guardrail floor closed; public target unresolved | shell / facade / packaging boundary を final target profile から分離したまま `U1` actual commitment を待てる |
 | `Macro 8` | domain / application realization | application-specific target not started | first target profile が user と合意される |
 
 ## historical sync_v3 recovery policy

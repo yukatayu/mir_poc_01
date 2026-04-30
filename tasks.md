@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-29 12:02 JST
+最終更新: 2026-04-30 13:27 JST
 
 ## この文書について
 
@@ -19,6 +19,7 @@
 - self-driven に残るのは maintenance lane です:
   stale docs cleanup、validation rerun、report creation、formatting cleanup、guardrail maintenance、regression repair。
 - 2026-04-29 の uncommitted Rust formatting cleanup は `b213721` `Apply Rust formatting cleanup` として push 済みです。
+- 2026-04-30 の handoff path normalization / `sub-agent-pro` role sync / `plan/10` current-line cooling は maintenance-only closeout であり、新しい promoted implementation line は開いていません。
 
 ## executable floor
 

@@ -137,6 +137,9 @@
 - `sub-agent-pro/mirrorea_next_stage_full_plan_handoff_2026-04-27.md`
   - Mirrorea next-stage planning、project axis、typed external boundary、`TermSignature` / `LayerSignature`、`MessageEnvelope` / `AuthEvidence` seam、`VerificationLayer` composition、projection / placement、hot-plug、storage discipline、next package queue の long-form handoff として使ってよい。
   - 規範判断の正本ではないが、`specs/10`、`specs/11`、`plan/`、`progress.md`、`tasks.md`、`samples_progress.md`、`AGENTS.md` へ mirror する説明 source である。
+- `sub-agent-pro/mir_poc_01_research_handoff_2026-04-30.md`
+  - 2026-04-30 時点の Codex 向け current-line handoff であり、repo-local alpha-ready current layer、`U1` actual commitment gate、maintenance lane、validation floor、package template を current explanation source として整理する。
+  - 規範判断の正本ではないが、`specs/`、`plan/`、`progress.md`、`tasks.md`、`samples_progress.md`、`docs/reports/` へ mirror する説明 source として使ってよい。
 
 ## 規範的な読書順
 
