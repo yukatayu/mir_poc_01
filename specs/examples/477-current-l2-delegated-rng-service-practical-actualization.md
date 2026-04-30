@@ -81,10 +81,10 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_delegated_rng_service_practical_actualization` | `p09` reached、`p07/p08` guard-only の provider-placement manifest を machine-check する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | current clean near-end delegated-provider sample が旧 `p09` reached / `p07` `p08` guard-only の provider-placement reading を carry-over していることを再確認する |
 | `p09-dice-delegated-rng-provider-placement` | provider draw は delegated capability が返し、publish / handoff / commit は authority が保持する narrow prototype として使える |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | prototype explicit path / adjacent host-plan path の runnable floor 自体は引き続き green である |
-| `current_l2_authoritative_room_vertical_slice_actualization` / `current_l2_auditable_authority_witness_strengthening` | authority baseline と witness strengthening line を separate に保ったまま provider placement line を追加できることを再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family の runnable floor 自体は引き続き green である |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | authority baseline と witness strengthening line を separate に保ったまま provider placement line を追加できることを再確認する |
 
 ## actualization shape
 

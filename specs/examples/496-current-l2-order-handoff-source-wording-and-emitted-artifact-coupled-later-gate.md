@@ -93,10 +93,10 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_order_handoff_source_wording_emitted_artifact_coupled_later_gate` | `p07 / p08` reached、`p05` guard-only の coupled-later manifest を machine-check する |
-| `current_l2_order_handoff_surface_actual_adoption` | principal surface / secondary surface / repo-local emitted artifact refs first を compare floor として carry-over する |
-| `current_l2_witness_provider_emitted_contract_coupled_later_gate` | emitted-handoff contract side と public-contract side の adjacent-but-distinct cut を compare floor として carry-over する |
-| `current_l2_authoritative_room_vertical_slice_actualization` | profile axis refs と repo-local emitted artifact refs を coupled-later gate が保持することを再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family の representative runtime inventory を読み、旧 `p07` / `p08` reached と `p05` guard-only の coupled-later reading を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | principal surface / secondary surface / repo-local emitted artifact refs first を読むための runtime-side compare floor を与える |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | emitted-handoff contract side と public-contract side の adjacent-but-distinct cut を読むための canonical runtime inventory を与える。cut 自体は helper-local / doc-level judgment に残す |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | profile axis refs と repo-local emitted artifact refs first を読むための representative order-handoff runtime evidence を与える |
 
 ## actualization shape
 

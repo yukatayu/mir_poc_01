@@ -80,10 +80,10 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_auditable_authority_witness_strengthening` | `p07` reached、`p08/p05` guard-only の strengthening manifest を machine-check する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json` | current clean near-end witness-bearing sample が旧 `p07` reached / `p08` `p05` guard-only の strengthening reading を carry-over していることを再確認する |
 | `p07-dice-late-join-visible-history` | publication / handoff / late-join-visible-history に接続した witness-bearing authoritative sample として使える |
-| `current_l2_authoritative_room_vertical_slice_actualization` | witness strengthening が room-default vertical slice の上に乗っていることを再確認する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | `p07/p08` の runnable default-profile evidence 自体は引き続き green である |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | witness strengthening が room-default vertical slice の上に乗っていることを再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family の runnable floor 自体は引き続き green である |
 
 ## actualization shape
 

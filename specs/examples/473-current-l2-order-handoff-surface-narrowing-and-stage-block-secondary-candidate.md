@@ -67,8 +67,8 @@ current repo は、order / handoff surface を次に狭める。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_order_handoff_minimal_companion_surface` | edge-row / vertical continuation principal の helper-local actualization |
-| `current_l2_order_handoff_stage_block_surface` | `stage-block + witness` を secondary experimental candidate として helper-local actualization |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | edge-row / vertical continuation principal の current clean near-end actualization |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 04_stage_block_authorized_handoff --format json` | `stage-block + witness` を secondary experimental candidate として current clean near-end suite に actualize する |
 | `p07-dice-late-join-visible-history` | `publish -> handoff -> observe` line を principal / secondary candidate の両方で比較できる |
 | `p08-dice-stale-reconnect-refresh` | rollback / refresh / replay invalidation を principal / secondary candidate の両方で比較できる |
 | `p05-dice-owner-guarded-chain` | reached と guard-only を混同せずに止められる |

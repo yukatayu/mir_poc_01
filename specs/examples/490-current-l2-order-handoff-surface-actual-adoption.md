@@ -82,11 +82,11 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_order_handoff_surface_actual_adoption` | `p07 / p08` reached、`p05` guard-only の actual-adoption manifest を machine-check する |
-| `current_l2_order_handoff_surface_artifact_threshold` | threshold default を actual adoption の compare floor として carry-over する |
-| `current_l2_order_handoff_minimal_companion_surface` | principal surface が minimal companion floor を carry-over していることを再確認する |
-| `current_l2_order_handoff_stage_block_surface` | secondary surface が stage-block floor を carry-over していることを再確認する |
-| `current_l2_authoritative_room_vertical_slice_actualization` | profile axis refs と repo-local emitted artifact refs を actual adoption が保持することを再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family が旧 `p07` / `p08` reached と `p05` guard-only の actual-adoption reading を carry-over していることを再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | threshold default を actual adoption の compare floor として carry-over する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | principal surface が minimal companion floor を carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 04_stage_block_authorized_handoff --format json` | secondary surface が stage-block floor を carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | profile axis refs と repo-local emitted artifact refs を actual adoption が保持することを再確認する |
 
 ## actualization shape
 

@@ -85,9 +85,9 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_order_handoff_source_wording_route_actual_adoption` | `p07 / p08` reached、`p05` guard-only の actual-adoption manifest を machine-check する |
-| `current_l2_order_handoff_surface_actual_adoption` | principal surface / secondary surface / repo-local emitted artifact refs first を prior floor として carry-over する |
-| `current_l2_order_handoff_source_wording_emitted_artifact_coupled_later_gate` | source-wording candidate only / emitted-artifact schema candidate only を prior floor として carry-over する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | clean near-end order-handoff family の representative runtime inventory を読み、旧 `p07` / `p08` reached と `p05` guard-only の actual-adoption reading を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | principal surface / secondary surface / repo-local emitted artifact refs first を読むための runtime-side prior floor を与える |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | source-wording candidate only / emitted-artifact schema candidate only を読むための canonical runtime inventory を与える。route-first actual-adoption judgment 自体は helper-local / doc-level に残す |
 
 ## actualization shape
 

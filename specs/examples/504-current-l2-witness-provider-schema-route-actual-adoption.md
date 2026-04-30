@@ -94,9 +94,9 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_witness_provider_schema_route_actual_adoption` | `p07 / p08 / p09` reached、`p05` guard-only の actual-adoption manifest を machine-check する |
-| `current_l2_witness_provider_route_actual_adoption` | witness/provider route first / public-schema candidate keep / combined public-contract later / final emitted-handoff contract adjacent keep を prior floor として carry-over する |
-| `current_l2_witness_provider_public_schema_coupled_later_gate` | witness-schema / provider-receipt / combined public-contract candidate only を prior floor として carry-over する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | clean near-end order-handoff family の representative runtime inventory を読み、旧 `p07` / `p08` / `p09` reached と `p05` guard-only の actual-adoption reading を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | witness/provider route first / public-schema candidate keep / combined public-contract later / final emitted-handoff contract adjacent keep を読むための canonical runtime inventory を与える |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | witness-schema / provider-receipt / combined public-contract candidate only を読むための canonical runtime inventory を与える。schema-route actual-adoption judgment 自体は helper-local / doc-level に残す |
 
 ## actualization shape
 

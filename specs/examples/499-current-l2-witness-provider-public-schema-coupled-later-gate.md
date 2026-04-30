@@ -80,9 +80,9 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_witness_provider_public_schema_coupled_later_gate` | `p07 / p08 / p09` reached、`p05` guard-only の coupled-later manifest を machine-check する |
-| `current_l2_witness_provider_emitted_contract_coupled_later_gate` | witness/provider public-contract side / emitted-handoff contract side の coupled-later compare floor を carry-over する |
-| `current_l2_witness_provider_artifact_public_shape_actual_adoption` | claim/payload split first / witness-provider route noncollapse / repo-local emitted artifact refs first を shared-space-side source-backed floor として再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | clean near-end order-handoff family の representative runtime inventory を読み、旧 `p07` / `p08` / `p09` reached と `p05` guard-only の coupled-later reading を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | witness/provider public-contract side / emitted-handoff contract side の relation を読むための canonical runtime inventory を与える。coupled-later compare judgment 自体は helper-local / doc-level に残す |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | claim/payload split first / witness-provider route noncollapse / repo-local emitted artifact refs first を読むための shared-space-side runtime inventory を与える |
 
 ## actualization shape
 

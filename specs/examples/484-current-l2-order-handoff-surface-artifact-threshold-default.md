@@ -87,11 +87,11 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_order_handoff_surface_artifact_threshold` | `p07 / p08` reached、`p05` guard-only の threshold manifest を machine-check する |
-| `current_l2_order_handoff_minimal_companion_surface` | edge-row / vertical continuation principal を threshold が carry-over していることを再確認する |
-| `current_l2_order_handoff_stage_block_surface` | `stage` / `after` / `witness` secondary candidate を threshold が carry-over していることを再確認する |
-| `current_l2_authoritative_room_vertical_slice_actualization` | profile axis refs と repo-local emitted artifact refs を threshold が保持することを再確認する |
-| `current_l2_witness_provider_artifact_public_shape_threshold` | final public witness/provider/artifact contract を採らず、repo-local emitted artifact refs first を threshold が保持することを再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family が旧 `p07` / `p08` reached と `p05` guard-only の threshold reading を carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | edge-row / vertical continuation principal を threshold が carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 04_stage_block_authorized_handoff --format json` | `stage` / `after` / `witness` secondary candidate を threshold が carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | profile axis refs と repo-local emitted artifact refs を threshold が保持することを再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | final public witness/provider/artifact contract を採らず、repo-local emitted artifact refs first を threshold が保持することを再確認する |
 
 ## actualization shape
 

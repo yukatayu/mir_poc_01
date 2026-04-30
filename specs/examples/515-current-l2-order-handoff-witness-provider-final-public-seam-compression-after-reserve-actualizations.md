@@ -90,8 +90,8 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `build_current_l2_source_sample_order_handoff_witness_provider_public_seam_compression` | source wording route + serial reserve surface + trace-alignment bridge + final public-contract threshold を束ね、remaining public seam residual を helper-local に actualize する runtime support |
-| `current_l2_order_handoff_witness_provider_public_seam_compression` | `p07 / p08` reached、`p05` guard-only の final public-seam compression を machine-check する focused runtime test |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | provider-boundary / witness-provider trace-alignment 側を読むための representative runtime evidence を与える。source-wording route や reserve-surface judgment 自体は含めない |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | order-handoff side と shared-space side を併記した canonical runtime inventory を与える。final public-seam compression judgment 自体は helper-local / doc-level に残す |
 | `order_handoff_public_seam_residual:*` refs | order-handoff side final wording / emitted-artifact residual を sample-local に固定する repo-local ref family |
 | `shared_space_public_seam_residual:*` refs | shared-space side final public-schema / contract residual を sample-local に固定する repo-local ref family |
 

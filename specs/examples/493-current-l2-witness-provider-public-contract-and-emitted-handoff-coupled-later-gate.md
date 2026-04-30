@@ -92,11 +92,11 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_witness_provider_emitted_contract_coupled_later_gate` | `p07 / p08 / p09` reached、`p05` guard-only の coupled-later manifest を machine-check する |
-| `current_l2_witness_provider_artifact_public_shape_actual_adoption` | witness/provider route non-collapse と repo-local emitted artifact refs first を compare floor として carry-over する |
-| `current_l2_order_handoff_surface_actual_adoption` | `p07 / p08` reached sample では emitted-handoff side が source-surface actual adoption pressure を carry-over していることを再確認する |
-| `current_l2_authoritative_room_vertical_slice_actualization` | profile axis refs と repo-local emitted artifact refs を coupled-later gate が保持することを再確認する |
-| `current_l2_delegated_rng_service_practical_actualization` | delegated-provider sample では provider public-contract side が practical floor を carry-over していることを再確認する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family が旧 `p07` / `p08` / `p09` reached と `p05` guard-only の coupled-later reading を carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | witness/provider route non-collapse と repo-local emitted artifact refs first を compare floor として carry-over する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | `p07 / p08` reached sample では emitted-handoff side が source-surface actual adoption pressure を carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | profile axis refs と repo-local emitted artifact refs を coupled-later gate が保持することを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | delegated-provider sample では provider public-contract side が practical floor を carry-over していることを再確認する |
 
 ## actualization shape
 

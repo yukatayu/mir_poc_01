@@ -89,11 +89,11 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_witness_provider_artifact_public_shape_threshold` | `p07 / p08 / p09` reached、`p05` guard-only の threshold manifest を machine-check する |
-| `current_l2_authoritative_room_vertical_slice_actualization` | baseline room-default profile と repo-local emitted artifact refs を threshold が carry-over していることを再確認する |
-| `current_l2_auditable_authority_witness_strengthening` | witness-bearing sample では minimal witness core を threshold が witness attachment reserve として扱うことを再確認する |
-| `current_l2_delegated_rng_service_practical_actualization` | delegated-provider sample では optional provider attachment refs を threshold が carry-over していることを再確認する |
-| `current_l2_source_sample_runner` / `current_l2_operational_cli` | representative runtime corpus の runnable floor 自体は引き続き green である |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | current clean near-end order-handoff family が旧 `p07` / `p08` / `p09` reached と `p05` guard-only の threshold reading を carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 01_authorized_roll_publish_handoff --format json` | baseline room-default profile と repo-local emitted artifact refs を threshold が carry-over していることを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 06_auditable_authority_witness --format json` | witness-bearing sample では minimal witness core を threshold が witness attachment reserve として扱うことを再確認する |
+| `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json` | delegated-provider sample では optional provider attachment refs を threshold が carry-over していることを再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | representative runtime corpus の runnable floor 自体は引き続き green である |
 
 ## actualization shape
 

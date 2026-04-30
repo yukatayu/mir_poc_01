@@ -39,7 +39,7 @@ current repo では、minimal companion surface を次に置く。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_order_handoff_minimal_companion_surface` | `p07` / `p08` reached、`p05` guard-only の minimal companion cut を machine-check する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | clean near-end order-handoff family が旧 `p07` / `p08` reached と `p05` guard-only の minimal companion reading を carry-over していることを再確認する |
 | `p07-dice-late-join-visible-history` | publication / handoff / late-join-visible-as-past を compact に潰しすぎず helper-local lines へ actualize できる |
 | `p08-dice-stale-reconnect-refresh` | rollback / refresh / replay invalidation を helper-local lines へ actualize できる |
 | `p05-dice-owner-guarded-chain` | companion surface を reached と偽装せず guard-only floor に残せる |

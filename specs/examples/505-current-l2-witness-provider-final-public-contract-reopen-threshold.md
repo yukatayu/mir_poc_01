@@ -88,9 +88,9 @@ current package では、次を採る。
 
 | evidence | current reading |
 |---|---|
-| `current_l2_witness_provider_final_public_contract_reopen_threshold` | `p07 / p08 / p09` reached、`p05` guard-only の threshold manifest を machine-check する |
-| `current_l2_witness_provider_schema_route_actual_adoption` | witness/provider schema route first と combined public-contract candidate keep を prior floor として carry-over する |
-| `current_l2_witness_provider_emitted_contract_coupled_later_gate` | combined public-contract later / final emitted-handoff contract later を prior floor として carry-over する |
+| `python3 scripts/clean_near_end_samples.py run order-handoff --format json` | clean near-end order-handoff family の representative runtime inventory を読み、旧 `p07` / `p08` / `p09` reached と `p05` guard-only の threshold reading を doc-level に再確認する |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | witness/provider schema route first と combined public-contract candidate keep を読むための canonical runtime inventory を与える |
+| `python3 scripts/clean_near_end_samples.py closeout --format json` | combined public-contract later / final emitted-handoff contract later を読むための canonical runtime inventory を与える。reopen-threshold judgment 自体は helper-local / doc-level に残す |
 
 ## threshold shape
 
