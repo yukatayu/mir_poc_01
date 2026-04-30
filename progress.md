@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 16:05 JST
+最終更新: 2026-04-30 16:08 JST
 
 ## この文書について
 
@@ -131,6 +131,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 16:08 JST — `FAIRY-05` reopen criteria docs-first inventory を行い、`plan/31` に current reopen-criteria inventory を追加して、same-package 必須条件を positive reacquire sample / negative companion / `state_timeline` + `anchor_switch` evidence / docs-report-snapshot sync に固定し、`carrier_choice`・helper-local naming・negative companion breadth・same-helper vs separate-helper boundary は未決のまま残した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:05 JST — `VerificationLayer` public naming gate docs-first inventory を行い、`plan/29` に current naming-gate inventory を追加して、active emitted names が helper `verification_handoff_witness` / runtime `verification_model_check` に留まり、`verification_preview` / `verification_summary` / `model_check_summary` / theorem bridge / runtime policy preview は evidence-carrier または downstream-consumer naming に残ることを `plan/14` glossary mirror とともに固定した。public/shared naming と emitted-row-to-consumer naming relation は未決のままとし、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:02 JST — `VerificationLayer` law surface docs-first inventory を行い、`plan/29` に current emitted law-family inventory を追加し、shared emitted laws が `evidence_preservation` / `residual_obligations_are_explicit`、helper-only emitted law が `no_hidden_handoff_without_witness` に留まること、theorem bridge / runtime policy / visualization law families は widening candidate のままであることを `plan/14` glossary mirror とともに固定した。front-door summary は既存 current reading で十分と判断し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:57 JST — stale-wording lint feasibility audit を行い、`scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` は structural/scaffold check のみを担っていること、naive lexical lint は `docs/reports/`、`specs/examples/`、`sub-agent-pro/`、`progress.md` recent log で false positive を多発させることを確認した。将来やるなら active-current docs 限定の standalone allowlisted pass に留めるべきと整理し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。

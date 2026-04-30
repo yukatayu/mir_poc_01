@@ -102,6 +102,24 @@ Do not reopen `FAIRY-05` as runnable widening unless the same package carries:
 - explicit helper-local evidence for ordering and switch boundary
 - docs / report / snapshot sync
 
+## current reopen-criteria inventory
+
+- must be present in the same reopen package:
+  - one positive reacquire-after-return sample
+  - at least one negative companion covering missing return witness or stale membership
+  - explicit helper-local `state_timeline` evidence
+  - explicit helper-local `anchor_switch` evidence
+  - docs / report / snapshot sync for the widened sample family
+- still unresolved before any reopen:
+  - `carrier_choice` remains `UNRESOLVED`
+  - exact helper-local CLI/debug naming remains `UNRESOLVED`
+  - whether the negative companion set should include only one of missing-return-witness / stale-membership or both
+  - whether the widened evidence should remain in the same helper or move behind a separate helper boundary
+- stop line:
+  - reopen criteria do not by themselves fix a final public avatar runtime API
+  - reopen criteria do not by themselves fix a final public visualization protocol
+  - reopen criteria do not by themselves justify hot-plug / projection / transport coupling
+
 ## validation floor
 
 - `python3 -m unittest scripts.tests.test_avatar_follow_samples`
