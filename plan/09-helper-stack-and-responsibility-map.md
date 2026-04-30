@@ -433,6 +433,36 @@ run_directory_named_profile
   - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
   を helper-local coupled-later floor として test/support helper に置いてよい。
   - これは final parser grammar、final public parser/checker/runtime API、final source-surface handoff wording、final emitted-artifact schema、final emitted-handoff contract、final public witness/provider/artifact contract、authoritative-room `serial` sugar adoption、low-level exact source wording、final modal foundation adoption、exhaustive shared-space catalog を意味しない。
+
+## current order-handoff source-wording / emitted-artifact boundary inventory
+
+- current helper-local order-handoff source/artifact memory is split into four adjacent lanes.
+  - surface-first actual-adoption floor:
+    `principal_surface_lines`, `secondary_surface_lines`, `repo_local_emitted_artifact_refs`
+  - source-wording route-first floor:
+    `source_wording_route_refs`, `emitted_artifact_candidate_keep_refs`
+  - coupled-later candidate floor:
+    `source_wording_candidate_refs`, `emitted_artifact_schema_candidate_refs`
+  - final-public seam residual keep:
+    `public_seam_residual_refs`
+- current route/schema relation is explicit.
+  - edge-row / vertical-continuation surface remains principal
+  - stage-block surface remains secondary
+  - thread/node same causal language remains explanation-layer keep, not a separate principal wording family
+  - repo-local emitted artifact refs stay first
+  - source wording route actualizes before any emitted-artifact schema adoption
+- current stop line remains explicit.
+  - final parser grammar
+  - final public parser/checker/runtime API
+  - final source-surface handoff wording
+  - final emitted-artifact schema
+  - final emitted-handoff contract
+  - final public witness/provider/artifact contract
+  - authoritative-room `serial` sugar adoption
+  - low-level exact source wording
+  - final modal foundation adoption
+  - exhaustive shared-space catalog
+- this inventory is current helper/responsibility memory only. It does not freeze a final public order-handoff seam.
 - current theorem result/payload public-contract coupled-later cut では、
   - `actualization_subject_kind` / `actualization_subject_ref`
   - `result_object_candidate_refs`

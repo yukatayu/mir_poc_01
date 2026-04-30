@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 16:46 JST
+最終更新: 2026-04-30 17:41 JST
 
 ## この文書について
 
@@ -37,6 +37,7 @@
 - 2026-04-30 の `VerificationLayer` theorem/runtime boundary spec-memory alignment repair では、reviewer 指摘に従って `plan/29` unresolved wording を `specs/10` に合わせ、runtime-policy matrix row に phase5 handoff threshold memory anchor を補いました。`progress.md` feature row も `widening contract` wording に冷やし、new implementation queue は reopened していません。
 - 2026-04-30 の `VerificationLayer` public composition contract boundary docs-first inventory では、`plan/29` に emitted row / evidence carrier / downstream consumer / kept-later contract carrier の split と current relation を追加し、`plan/27` / `docs/research_abstract/public_api_parser_gate_plan_01.md` / `progress.md` / `tasks.md` を current split へ同期しました。final public verifier contract は still-later gate のまま残し、new implementation queue も reopened していません。
 - 2026-04-30 の witness/provider public-shape boundary docs-first inventory では、`plan/09` に route-first actual-adoption floor / public-schema candidate floor / combined-contract candidate floor / final emitted-handoff adjacent keep をまとめた current boundary inventory を追加し、`progress.md` finite-index / order-handoff row と `tasks.md` research-discovery line を同期しました。final public witness schema、provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract は still-later gate のままであり、new implementation queue も reopened していません。
+- 2026-04-30 の order-handoff source-wording / emitted-artifact boundary docs-first inventory では、`plan/09` に surface-first actual-adoption floor / source-wording route-first floor / coupled-later candidate floor / final-public seam residual keep をまとめた current boundary inventory を追加し、`progress.md` finite-index / order-handoff row と `tasks.md` research-discovery line を同期しました。final source-surface handoff wording、final emitted-artifact schema、final emitted-handoff contract、final public witness/provider/artifact contract は still-later gate のままであり、new implementation queue も reopened していません。
 
 ## executable floor
 
@@ -149,6 +150,7 @@ These are safe to do without new product decisions.
 - `FAIRY-05` reopen criteria, final implementation carrier, and negative companion shape.
 - projection equivalence evidence boundary, future checker relation, and public emitted-program contract beyond committed generated bridge manifest.
 - witness/provider public-shape route, schema candidate, combined-contract candidate, and final emitted-handoff boundary.
+- order-handoff source-wording route, emitted-artifact schema candidate, and final source-surface wording / emitted-handoff / public witness-provider residual boundary.
 - rollback / durable migration engine state machine after `P21`.
 - distributed activation ordering evidence once multi-place / multi-server pressure is available.
 - production transport / replay design that preserves transport / auth / membership / capability / witness separation.
