@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 15:32 JST
+最終更新: 2026-04-30 15:34 JST
 
 ## この文書について
 
@@ -25,6 +25,7 @@
 - 2026-04-30 の `plan/01` point-in-time disclaimer audit も maintenance-only closeout であり、repository memory の storage / queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の `plan/11` / roadmap mirror point-in-time audit も maintenance-only closeout であり、near-term roadmap memory / front-door summary / hands-on landing の stale date / queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の landing docs date-stamp audit も maintenance-only closeout であり、front-door current-line wording と `current_phase_closeout_01.md` 参照の stale queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
+- 2026-04-30 の reader-facing detailed summary audit も maintenance-only closeout であり、`docs/research_abstract/` の residual `actual next open work` / stale date wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 
 ## executable floor
 

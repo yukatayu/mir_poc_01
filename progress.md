@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 15:32 JST
+最終更新: 2026-04-30 15:34 JST
 
 ## この文書について
 
@@ -131,6 +131,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 15:34 JST — reader-facing detailed summary audit を行い、`docs/research_abstract/mirrorea_future_axis_01.md` の `actual next open work` wording を snapshot-reading wording へ冷やし、`docs/research_abstract/projection_placement_plan_01.md` の stale `2026-04-28` preview-floor date stamp を current repo wording へ同期した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:32 JST — landing docs date-stamp audit を行い、`README.md`、`Documentation.md`、`docs/research_abstract/README.md` の stale `2026-04-29` current-line wording と `current_phase_closeout_01.md` 参照の `next queue` wording を冷やした。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:29 JST — `plan/11` と reader-facing roadmap mirror の point-in-time / queue-authority audit を行い、near-term roadmap memory / front-door summary / hands-on landing の role wording を `progress.md` / `tasks.md` authority に合わせて冷やし、`mirrorea_future_axis_01.md` の stale date wording と `NET-01` reported parity anchor + runnable `NET-02..05` canary 読みを同期した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:18 JST — `plan/01` point-in-time disclaimer audit を行い、queue authority を `progress.md` / `tasks.md` に残したまま、storage 数値を historical anchor 扱いへ冷やし、phase 13 transport line を reported `NET-01` parity anchor + runnable `NET-02..05` canary 読みに同期した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。

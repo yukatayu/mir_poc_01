@@ -13,7 +13,7 @@ current plan と helper/report-local preview floor の summary です。
 
 ## current preview floor
 
-2026-04-28 時点では、docs-first に留まらず、次の preview floor を actualize しています。
+current repo では、docs-first に留まらず、次の preview floor を actualize しています。
 
 - Sugoroku helper:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
