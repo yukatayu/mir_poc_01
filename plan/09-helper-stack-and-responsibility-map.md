@@ -544,7 +544,39 @@ run_directory_named_profile
   - `public_seam_residual_refs`
   - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
   を helper-local residual-compression floor として test/support helper に置いてよい。
-  - これは final parser grammar、final public parser/checker/runtime API、final source-surface handoff wording、final emitted-artifact schema、final public witness/provider/artifact contract、`serial` sugar public adoption、low-level exact source wording、final modal foundation adoption、exhaustive shared-space catalog を意味しない。
+  - これは final parser grammar、final public parser/checker/runtime API、final source-surface handoff wording、final emitted-artifact schema、final emitted-handoff contract、final public witness/provider/artifact contract、`serial` sugar public adoption、low-level exact source wording、final modal foundation adoption、exhaustive shared-space catalog を意味しない。
+
+## current order-handoff / witness-provider final public-seam residual inventory
+
+- current helper-local final-public-seam memory is split into four carry-over lanes.
+  - order-handoff carry-over:
+    `source_wording_route_refs`, `emitted_artifact_candidate_keep_refs`
+  - reserve-surface carry-over:
+    `serial_scope_lines`
+  - witness/provider carry-over:
+    `witness_schema_route_refs`, `provider_receipt_route_refs`, `combined_public_contract_keep_refs`
+  - compressed residual keep:
+    `trace_alignment_pair_refs`, `public_seam_residual_refs`
+- current compression relation is explicit.
+  - principal source wording route remains carried over, not frozen
+  - `serial on ...` remains authoritative-room-specific reserve surface, not public principal wording
+  - witness/provider trace alignment is evidence for compression, not public-contract promotion
+  - compressed residual keep leaves order-handoff side and shared-space side adjacent in one helper-local manifest
+- current stop line remains explicit.
+  - final parser grammar
+  - final public parser/checker/runtime API
+  - final source-surface handoff wording
+  - final emitted-artifact schema
+  - final public witness schema
+  - final public provider receipt schema
+  - delegated provider attestation
+  - combined provider+witness public contract
+  - final emitted-handoff contract
+  - authoritative-room `serial` sugar public adoption
+  - low-level exact source wording
+  - final modal foundation adoption
+  - exhaustive shared-space catalog
+- this inventory is current helper/responsibility memory only. It does not freeze a final public seam or reopen a new implementation queue.
 - current theorem final-public-contract reopen-threshold cut では、
   - `actualization_subject_kind` / `actualization_subject_ref`
   - `result_object_route_refs`
