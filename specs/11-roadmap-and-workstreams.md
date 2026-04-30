@@ -480,16 +480,16 @@ actual-adoption floor では、
   `specs/examples/522`
   - `CurrentL2IfcSecretExamples.lean` actualize
   - secret-key valid/invalid + explicit authority declassification concrete example
-  - `samples/lean/` explanation wording を日本語で同期
+  - `samples/lean/` explanation wording を日本語で同期し、`foundations/` / active `clean-near-end/` / archived old corpus split を保つ
 - source-side IFC authority prototype pair and Lean corpus widening:
   `specs/examples/523`
-  - `p10 / p11` source-side explicit authority pair
-  - representative Lean sample set widening
+  - historical prototype anchor `p10 / p11`
+  - current compare floor は clean-near-end typing `01 / 02`
   - stronger typed source principal は still later
 - source-side IFC label-flow negative closeout and Lean corpus widening:
   `specs/examples/524`
-  - `p12` source-side label-flow negative
-  - verifier preview / model-check projection / theorem Lean actualization representative set widening
+  - historical prototype anchor `p12`
+  - current compare floor は clean-near-end typing `03`
   - Package 56 closeout、helper/CLI hardening next
 - delegated RNG provider placement representative carry-over:
   `specs/examples/525`
@@ -513,7 +513,8 @@ actual-adoption floor では、
   - Package 58 broader theorem-side widening after static-stop actualization
 - IFC typed checker-hint preview actualization:
   `specs/examples/529`
-  - `p10 / p11 / p12` source-side IFC trio
+  - current clean-near-end typing trio `01 / 02 / 03`
+  - archived compare anchor `p10 / p11 / p12`
   - sample-local `typed_checker_hint_preview`
   - `family_refs[] + coverage_state` narrow mirror
   - Package 58 IFC helper widening after representative Lean sample set carry-over

@@ -213,14 +213,14 @@
   - `samples/lean/` を current repo-local Lean evidence bucket として固定し、actual small proof fragment と generated theorem stub corpus の読み分け、Package 56/57 の first actual fragment を整理する補助文書。
   - final theorem discharge や final public theorem contract を固定するものではなく、helper-local mechanization floor と committed Lean sample corpus を読むための anchor である。
 - `specs/examples/522-current-l2-ifc-secret-valid-invalid-foundation-and-japanese-lean-corpus-sync.md`
-  - Package 56 の reopened IFC line を `CurrentL2IfcSecretExamples.lean` まで進め、secret-key valid/invalid concrete example と日本語 Lean corpus explanation sync を current mechanization-ready floor として整理する補助文書。
+  - Package 56 の reopened IFC line を `CurrentL2IfcSecretExamples.lean` まで進め、secret-key valid/invalid concrete example と、日本語 Lean corpus explanation の `foundations/` / active `clean-near-end/` / archived old corpus split を current mechanization-ready floor として整理する補助文書。
   - final typed source principal や final IFC syntax を固定するものではなく、helper-local IFC concrete example と sample-facing wording sync を読むための anchor である。
 - `specs/examples/523-current-l2-source-side-ifc-authority-prototype-pair-and-representative-lean-sample-set-widening.md`
-  - Package 56 の source-side explicit authority line を `p10 / p11` corrected prototype pair まで進め、verifier preview / model-check projection / theorem Lean actualization representative set widening を current checker-adjacent IFC floor として整理する補助文書。
-  - final typed source principal や final IFC syntax や final public verifier contract を固定するものではなく、source-side IFC evidence pair と representative Lean sample set widening を読むための anchor である。
+  - Package 56 の source-side explicit authority lineについて、historical prototype anchor `p10 / p11` と current clean-near-end compare floor `01 / 02` を切り分け、checker-adjacent IFC line の authority-success / authority-miss memory を整理する補助文書。
+  - final typed source principal や final IFC syntax や final public verifier contract を固定するものではなく、source-side IFC authority pair の archived/current split を読むための anchor である。
 - `specs/examples/524-current-l2-ifc-label-flow-negative-prototype-closeout-and-representative-lean-sample-set-widening.md`
-  - Package 56 の remaining label-flow negative line を `p12` corrected prototype まで進め、source-side IFC trio と representative Lean sample set widening を current checker-adjacent IFC closeout floor として整理する補助文書。
-  - final typed source principal や final IFC syntax や final public verifier contract を固定するものではなく、source-side IFC trio と Package 56 closeout を読むための anchor である。
+  - Package 56 の remaining label-flow negative lineについて、historical prototype anchor `p12` と current clean-near-end compare floor `03` を切り分け、checker-adjacent IFC closeout memory を整理する補助文書。
+  - final typed source principal や final IFC syntax や final public verifier contract を固定するものではなく、source-side IFC label-flow archived/current split と Package 56 closeout を読むための anchor である。
 - `specs/examples/525-current-l2-delegated-rng-provider-placement-representative-lean-sample-set-carryover.md`
   - Package 58 の first widening slice として `p09` delegated RNG provider placement を representative Lean sample set へ carry over し、broader order-handoff / provider-placement coverage を helper-local evidence として整理する補助文書。
   - final public provider receipt schema や final witness/provider/artifact contract を固定するものではなく、broader coverage carry-over と helper/CLI hardening next line を読むための anchor である。
@@ -234,8 +234,8 @@
   - Package 58 の broader theorem-side widening として `p13 / p14` late-join visibility negative pair を representative Lean sample set / committed Lean corpus に carry over し、static rejection cluster の Lean bridge artifact を inspectable に整理する補助文書。
   - final theorem contract や final proof-object schema や final parser/public API を固定するものではなく、order-handoff negative pair carry-over と helper preview widening / near-end closeout sync next line を読むための anchor である。
 - `specs/examples/529-current-l2-ifc-typed-checker-hint-preview-actualization.md`
-  - Package 58 の IFC helper widening として `p10 / p11 / p12` source-side IFC trio を sample-local `typed_checker_hint_preview` に actualize し、`family_refs[] + coverage_state` を helper-local operational CLI へ narrow に mirror する補助文書。
-  - final public checker artifact や final public verifier contract や final typed source principal を固定するものではなく、current IFC trio checker-hint mirror と theorem/model-check helper preview widening / near-end closeout sync next line を読むための anchor である。
+  - Package 58 の IFC helper widening として、current clean-near-end typing trio `01 / 02 / 03` を sample-local `typed_checker_hint_preview` に actualize し、archived compare anchor `p10 / p11 / p12` を active entrypoint へ戻さずに `family_refs[] + coverage_state` narrow mirror を整理する補助文書。
+  - final public checker artifact や final public verifier contract や final typed source principal を固定するものではなく、current clean-near-end IFC trio checker-hint mirror と theorem/model-check helper preview widening / near-end closeout sync next line を読むための anchor である。
 - `specs/examples/530-current-l2-theorem-and-model-check-helper-preview-widening.md`
   - Package 58 の remaining diagnostics widening として theorem result-object preview と model-check public-checker preview を `run-source-sample` helper summary へ widen し、`p08` / `p09` の reached/guard 非対称を helper-local actualization manifest として整理する補助文書。
   - final public theorem/model-check contract を固定するものではなく、Package 58 close と Package 59 near-end closeout sync next line を読むための anchor である。

@@ -30,18 +30,24 @@ source principal を stronger typed surface へ早期昇格するものではな
 
 ### Lean corpus explanation wording
 
-current repo は `samples/lean/README.md` と
-`samples/lean/current-l2/*/README.md`、
+current repo は `samples/lean/README.md`、
+`samples/lean/clean-near-end/*/README.md`、
 `samples/lean/foundations/*.md`
 を日本語で保持してよい。
+pre-clean-near-end representative corpus の説明は
+`samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/*/README.md`
+に historical appendix として残してよい。
 
 重要なのは、次の読み分けを文面で崩さないことである。
 
 - `foundations/`
   - actual small proof を含む mechanization-ready core
-- `current-l2/`
-  - generated Lean stub を含む representative sample corpus
+- `clean-near-end/`
+  - active clean sample suite から生成した theorem stub corpus
   - `sorry` を含むため、artifact well-formedness / bridge alignment evidence として読む
+- `old/2026-04-22-pre-clean-near-end/current-l2/`
+  - pre-clean-near-end representative sample corpus の archive
+  - current active generated front door ではない
 
 日本語化は wording refresh であって、新しい規範判断ではない。
 ただし current explanation と sample-facing guidance の drift を抑える package としては actual value がある。
