@@ -39,22 +39,24 @@ detach 後の domain action rejection の explicitness、
 - storage detach script と runtime detach lifecycle は別 concern です
 - helper-local `hotplug_lifecycle` は runtime-crate engine ownership や final public ABI ではありません
 
-## current recommendation
+## repository-memory reading
 
 helper floor は widening しません。
 `migration_contract` は protocol ではなく unresolved-state honesty lane として読みます。
 historical next relation at `R4` close time では、helper-local preview と crate-side runtime ownership を分ける
 `R5` runtime-crate hot-plug engine ownership cut を読むのが自然でした。
-current repo state では `R5` / `R6` / `P19` / `P20` / `R7` / `P21` も close 済みです。`R7` close time では `P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として読んでいましたが、現在は exact next label intentionally unfixed のまま later family を順序つきで読みます。
-first recommendation closeout memory は
+`R5` / `R6` / `P19` / `P20` / `R7` / `P21` は historical closeout chain として残します。
+`P21` は runtime-private engine-state floor であり、rollback / migration / distributed ordering / final public ABI completion ではありません。
+closed post-`P21` docs-first trilogy の historical first boundary family は
 `../../plan/36-post-p21-rollback-durable-migration-family.md`
-を入口にした `rollback / durable migration` family hardeningであり、
-second recommendation closeout memory は
+を入口にした `rollback / durable migration` family であり、
+historical second boundary family は
 `../../plan/37-post-p21-distributed-activation-ordering-family.md`
-を入口にした `distributed activation ordering` family hardeningです。
-third recommendation family の current repository memory は
+を入口にした `distributed activation ordering` family です。
+separately documented last historical boundary family は
 `../../plan/38-post-p21-final-public-hotplug-abi-family.md`
 を入口にした final public hot-plug ABI family です。
+live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照します。
 
 ## 関連
 

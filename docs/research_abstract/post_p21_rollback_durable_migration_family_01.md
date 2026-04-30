@@ -2,24 +2,25 @@
 
 ## この文書の役割
 
-この文書は、`P21` close 後の later family のうち
-**`rollback / durable migration` を first recommendation として読む current summary**
+この文書は、closed post-`P21` docs-first trilogy のうち
+**`rollback / durable migration` を historical first boundary family として読む summary**
 です。
 
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/36-post-p21-rollback-durable-migration-family.md`
 - 実行証跡は `docs/reports/` にあります
 
-## current reading
+## repository-memory reading
 
 - `P21` で runtime-side engine state progression は narrow に actualize 済みです
-- その次に first recommendation として harden するのは
-  exact label 未固定のままの `rollback / durable migration` family です
+- closed trilogy の historical first boundary family は
+  `rollback / durable migration` です
 - ここでいう family は
   rollback state machine、durable migration、reattach semantics を
-  まだ 1 bucket に保つ current recommendation を指します
-- `distributed activation ordering` は second recommendation、
-  `final public hot-plug ABI` は third recommendation に残します
+  まだ 1 bucket に保つ docs-first boundary memory を指します
+- `distributed activation ordering` と
+  `final public hot-plug ABI` は separately documented boundary families です
+- live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照します
 
 ## ここでまだ fixed しないこと
 
@@ -27,7 +28,7 @@
 - actual durable migration engine completion
 - distributed activation ordering contract
 - final public hot-plug ABI / package catalog naming
-- exact package label / numbering
+- exact package label / numbering / point-in-time package ownership at trilogy close time
 
 ## stop line
 

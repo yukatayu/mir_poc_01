@@ -2,27 +2,28 @@
 
 ## この文書の役割
 
-この文書は、`P21` close 後の later family のうち
-**`distributed activation ordering` を second recommendation として読む current summary**
+この文書は、closed post-`P21` docs-first trilogy のうち
+**`distributed activation ordering` を historical second boundary family として読む summary**
 です。
 
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/37-post-p21-distributed-activation-ordering-family.md`
 - 実行証跡は `docs/reports/` にあります
 
-## current reading
+## repository-memory reading
 
 - `rollback / durable migration` family hardening は
-  first recommendation close 済みです
-- その次に second recommendation として harden するのは
-  exact label 未固定のままの `distributed activation ordering` family です
+  historically preceding boundary family として docs-first close 済みです
+- closed trilogy の historical second boundary family は
+  `distributed activation ordering` です
 - ここでいう family は
   multi-place / multi-server attach activation ordering、
   durable activation commit、
   visible active state frontier の widening criteria を指します
-- third recommendation family の current repository memory は
+- separately documented third boundary family は
   `final public hot-plug ABI` です
   入口は `plan/38-post-p21-final-public-hotplug-abi-family.md` です
+- live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照します
 
 ## ここでまだ fixed しないこと
 
@@ -31,7 +32,7 @@
 - actual distributed activation ordering implementation
 - actual consensus / network commit protocol
 - final public hot-plug ABI / package catalog naming
-- exact package label / numbering
+- exact package label / numbering / point-in-time package ownership at trilogy close time
 
 ## stop line
 
@@ -44,7 +45,7 @@
 
 - repository memory:
   `../../plan/37-post-p21-distributed-activation-ordering-family.md`
-- first recommendation memory:
+- historically preceding family memory:
   `../../plan/36-post-p21-rollback-durable-migration-family.md`
 - boundary preconditions:
   `../../plan/32-hotplug-real-migration-rollback-boundary.md`

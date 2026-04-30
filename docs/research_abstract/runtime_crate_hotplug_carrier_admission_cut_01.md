@@ -20,11 +20,12 @@
   `attach_lifecycle / detach_lifecycle`
   `attach_activation#1 / detach_boundary#1`
   は引き続き preview ownership に残す
-- current recommendation は
+- `R6` close-time historical recommendation は
   `R6` ->
   `P19` `mirrorea-core` hot-plug request/verdict carrier tranche ->
   `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
-  の順に進めることにある
+  の順に進めることにあった
+- live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照する
 
 ## 何を admissible にしたか
 

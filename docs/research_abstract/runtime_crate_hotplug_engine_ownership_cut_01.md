@@ -73,11 +73,11 @@ attach/detach hot-plug engine を持つとはまだ言えません。
 - final public hot-plug ABI
 - rejoin / reattach semantics
 
-## current recommendation
+## repository-memory use
 
-次に進むときは、
-hot-plug-specific Rust carrier を安易に足す前に、
-どの layer が owner かをこの split で確認します。
+この summary は、
+hot-plug-specific Rust carrier や runtime-private engine-state floor を読む前に、
+どの layer が owner かを確認するための repository-memory pointer です。
 
 reader-facing repository memory の正本は
 `../../plan/33-runtime-crate-hotplug-engine-ownership-cut.md`

@@ -2,20 +2,20 @@
 
 ## この文書の役割
 
-この文書は、`P21` close 後の later family のうち
-**`final public hot-plug ABI` を third recommendation として読む current summary**
+この文書は、closed post-`P21` docs-first trilogy のうち
+**`final public hot-plug ABI` を last historical boundary family として読む summary**
 です。
 
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/38-post-p21-final-public-hotplug-abi-family.md`
 - 実行証跡は `docs/reports/` にあります
 
-## current reading
+## repository-memory reading
 
 - `rollback / durable migration` family と
   `distributed activation ordering` family は
   docs-first close 済みです
-- current self-driven third recommendation も
+- closed trilogy の last docs-first boundary family も
   docs-first close 済みであり、
   ここで fixed したのは
   `freeze prerequisite fixed; public ABI still unfrozen`
@@ -33,6 +33,7 @@
   `AttachPoint` / `Patch` package catalog naming、
   actual shipped public ABI surface は
   post-`P18` mixed gate / `U1` hold line に残します
+- live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照します
 
 ## ここでまだ fixed しないこと
 
@@ -46,7 +47,7 @@
 
 - helper-local preview naming を final public ABI naming と書かない
 - runtime-private naming を final public ABI naming と書かない
-- third recommendation docs-first close を actual final public ABI freeze と書かない
+- last historical boundary docs-first close を actual final public ABI freeze と書かない
 
 ## どこを見るか
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 08:49 JST
+最終更新: 2026-05-01 08:55 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 08:55 JST — `docs/research_abstract/` の hot-plug post-`P20` / post-`P21` trilogy wording を冷やし、`current summary` / recommendation-order wording / completed-engine phrasing を historical closeout bridge、repository-memory reading、runtime-private engine-state floor、`progress.md` / `tasks.md` authority pointer に分離した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check`、targeted hot-plug wording check を pass した。
 - 2026-05-01 08:49 JST — hot-plug hands-on landing pages の post-`P20` / post-`P21` residual wording を冷やし、`current closeout line` / `completed-engine narrow cut` / live gate wording を historical closeout memory、runtime-private engine-state floor、snapshot pointer に分離した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、rollback / migration / distributed ordering / final public ABI の stop line を維持した。
 - 2026-05-01 08:43 JST — `docs/hands_on/README.md` と hands-on closeout pages の landing hierarchy を冷やし、live queue / package-ledger wording を command入口、boundary summary、`progress.md` / `tasks.md` / `plan/` / `docs/reports/` への pointer に分離した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、hands-on docs の役割を runnable confirmation guide に戻した。
 - 2026-05-01 00:05 JST — `docs/research_abstract/README.md` の `current reading の要点` を family pointer index に圧縮し、package ledger を runnable floor / boundary reading / major family pointers / subsystem summaries / command landing へ置き換えた。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass し、research abstract index の role を front door / future-axis summary / hands-on landing と揃えた。

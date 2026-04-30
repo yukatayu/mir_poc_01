@@ -2,7 +2,7 @@
 
 ## この文書の役割
 
-この文書は、`R7` の **docs-first closeout memory** を reader-facing に短く読む summary です。
+この文書は、`R7` の **historical closeout bridge** を reader-facing に短く読む summary です。
 
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/35-post-p20-hotplug-next-package-inventory.md`
@@ -10,22 +10,23 @@
 
 ## `R7` で fixed したこと
 
-- `P20` close 後も remaining lane を vague な `later` に戻さず、
+- `P20` close 後も deferred concerns を vague な `later` に戻さず、
   smallest plausible package cuts に分けて読む
-- `P21` runtime-crate hot-plug completed-engine narrow cut は
-  current close 済みである
+- `P21` runtime-crate hot-plug engine-state narrow floor は
+  repo-local current layer で close 済みである
 - `P21` では
   admitted request / verdict carrier と existing runtime substrate の上に
   `HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、
   consumer-side `assemble_hotplug_runtime_engine_report()`、
   example `build_hotplug_runtime_engine_report()` を置き、
-  canonical runtime-side engine state progression を narrow に actualize した
-- package-level reopen next の exact label は intentionally unfixed のままだが、
-  later family は
+  runtime-private engine-state report を narrow に actualize した
+- `R7` close-time grouped family memory は historical であり、
+  live status / next reopen point は `../../progress.md` と `../../tasks.md` を参照する
+- post-`P21` family docs は
   - `rollback / durable migration`
   - `distributed activation ordering`
   - `final public hot-plug ABI`
-  に grouped して読む
+  の 3 pointer として読む
 
 ## まだ fixed していないこと
 
@@ -33,7 +34,7 @@
 - durable migration / reattach semantics completion
 - distributed activation ordering completion
 - final public hot-plug ABI
-- exact later package labels
+- exact later package labels / point-in-time package ownership at `R7` close time
 
 ## どこを見るか
 
