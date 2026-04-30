@@ -33,11 +33,15 @@
 current repo では、次を current first line に置く。
 
 1. theorem side
-   - representative theorem quartet `e5 / p06 / p07 / p08` を theorem result-object preview / reopen-threshold の reached 集合に保つ
+   - live theorem cut は `e5` と clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor に置く
+   - historical `p05 / p06 / p07 / p08` compare anchors は theorem result-object preview / reopen-threshold の live reached 集合に戻さない
    - `p10 / p11 / p12 / p15 / p16` は theorem public seam に premature に入れず、
      checker-adjacent + Lean-first theorem bridge floor に留める
 2. model-check side
-   - public-checker preview / reopen-threshold の representative checker quartet `e5 / p06 / p07 / p09` は維持する
+   - live model-check floor は current clean-near-end model-check family
+     `01_peterson_sc_pass / 02_peterson_relaxed_counterexample / 03_broken_mutex_counterexample`
+     に置く
+   - historical `e5 / p05 / p06 / p07 / p09` compare anchors は public-checker preview / reopen-threshold の live reached 集合に戻さない
    - ただし row-local carrier / property-tool threshold / row-local actual adoption は
      source-side first strong typing sample set `p10 / p11 / p12 / p15 / p16` まで widened してよい
 3. helper-local CLI
@@ -53,7 +57,7 @@ current package では、次を actualize してよい。
 - `theorem_result_object_preview`
 - `theorem_final_public_contract_reopen_threshold`
 
-は representative theorem quartet の outside では `guarded_not_reached` に保つ。
+は live theorem cut の outside では `guarded_not_reached` に保つ。
 
 ただし source-side first strong typing sample set については、
 次の bridge floor を `bridge_floor_refs` として出してよい。
@@ -72,7 +76,7 @@ current package では、次を actualize してよい。
 - `model_check_public_checker_preview`
 - `model_check_final_public_contract_reopen_threshold`
 
-は representative checker quartet の outside では `guarded_not_reached` に保つ。
+は live model-check floor の outside では `guarded_not_reached` に保つ。
 
 ただし source-side first strong typing sample set については、
 次の reached bridge floor を `bridge_floor_refs` として出してよい。
@@ -111,7 +115,7 @@ model-check row-local carrier line の drift を閉じる。
 
 ## current recommendation
 
-1. `p15 / p16` を theorem public seam や model-check public-checker preview の reached 集合に混ぜない。
+1. `p15 / p16` を theorem public seam や model-check public-checker preview の live reached 集合に混ぜない。
 2. theorem side は checker-adjacent + Lean-first theorem bridge floor を visible にする。
 3. model-check side は row-local carrier / property-tool / checker-boundary bridge floor を visible にする。
 4. `p10 / p11 / p12 / p15 / p16` を source-side first strong typing sample setとして保ちつつ、
@@ -119,8 +123,8 @@ model-check row-local carrier line の drift を閉じる。
 
 ## retained alternatives
 
-- theorem representative quartet を widening して `p10 / p11 / p12 / p15 / p16` を theorem result-object preview reached に入れる
-- model-check public-checker representative quartet を widening して `p10 / p11 / p12 / p15 / p16` を public-checker preview reached に入れる
+- historical theorem compare anchors を widening して `p10 / p11 / p12 / p15 / p16` を theorem result-object preview reached に入れる
+- historical model-check compare anchors を widening して `p10 / p11 / p12 / p15 / p16` を public-checker preview reached に入れる
 - theorem/model-check bridge floor を helper-local `bridge_floor_refs` で出さず、docs-only のままに留める
 - stronger typed source principal を theorem/model-check public seam widening と同時に進める
 
@@ -140,11 +144,14 @@ model-check row-local carrier line の drift を閉じる。
 
 ## next line
 
-current package を close した後の active queue は、
+historical closeout queue memory では、
 
-1. Package 95 order/handoff source surface and artifacts
-2. Package 96 authoritative-room first scenario
-3. Package 97 reserve strengthening
-4. Package 98 documentation/report closeout
+1. order/handoff source surface and artifacts
+2. authoritative-room first scenario
+3. reserve strengthening
+4. documentation/report closeout
 
-として読むのが自然である。
+の順に読んでいた。
+
+current queue authority は `progress.md` / `tasks.md` に残し、
+この文書では historical queue memory を active queue と混同しない。

@@ -22,10 +22,10 @@
 
 を 1 本に束ねる。
 
-ここで actualize するのは、
-**`scripts/current_l2_guided_samples.py emit-reserve model-check-second-line` を使って、
-row-local property carrier second-line を repo-local output dir に narrow materialize する helper-local summary index**
-であり、
+ここで保持するのは、
+**`scripts/current_l2_guided_samples.py emit-reserve model-check-second-line` を使って
+row-local property carrier second-line を repo-local output dir に narrow materialize していた historical helper-local summary index memory**
+であり、current active compatibility front door は clean-near-end `list / smoke-all / closeout` に置く。
 
 - first settled property language
 - concrete model-check tool brand
@@ -42,14 +42,14 @@ current repo では、少なくとも次が source-backed である。
 
 1. model-check second-line concretization 自体は `specs/examples/478` で close 済みである
 2. theorem/model-check bridge reconnect は `specs/examples/568` で
-   - `p06` representative bridge
+   - `p06` historical theorem-model-check bridge anchor
    - `p10 / p11 / p12 / p15 / p16` checker-adjacent bridge-floor widening
    を separate に保っている
-3. closeout 後の reserve reopen line は `specs/examples/606` で helper / snapshot に同期済みである
+3. closeout 後の reserve reopen line は `specs/examples/606` で historical helper / snapshot memory に同期済みである
 
 したがって current open problem は、
 model-check second-line の判断自体を増やすことではなく、
-**この package を単独 command と repo-local summary index で再実行可能にすること**
+**この package の historical reserve-summary memory を current compatibility front door と混同せずに保持すること**
 である。
 
 ## current actualization cut
@@ -57,52 +57,56 @@ model-check second-line の判断自体を増やすことではなく、
 current package では次を採る。
 
 1. `python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line`
-   を reserve package の単独 entrypoint に置く
-2. output dir は
+   は 2026-04-22 clean-sample migration 前の historical reserve package entrypoint として扱い、
+   current active compatibility front door には戻さない
+2. current active compatibility front door は
+   `python3 scripts/current_l2_guided_samples.py list`
+   `python3 scripts/current_l2_guided_samples.py smoke-all --format json`
+   `python3 scripts/current_l2_guided_samples.py closeout --format json`
+   に置く
+3. historical output dir は
    `target/current-l2-guided/reserve-packages/model-check-second-line`
    に固定する
-3. 同 dir に
+4. 同 dir には
    - `package-summary.md`
    - `package-summary.json`
-   を置く
-4. sample set は
-   - `p06` representative theorem-model-check bridge
+   が materialize されていた
+5. sample set は
+   - `p06` historical theorem-model-check bridge anchor
    - `p10` authority release positive carrier
    - `p11 / p12 / p15 / p16` bad pattern rejection pair
    として narrow に保つ
-5. summary index には
+6. historical summary index には
    - `typed_hint_status`
-   - `theorem_preview_status`
+   - `theorem_preview_status`（historical bridge anchor status）
    - `model_check_preview_status`
    - `model_check_reopen_status`
-   をそのまま残し、theorem-first pilot と model-check second-line を collapse しない
+   をそのまま残し、historical theorem bridge anchor と current clean-near-end theorem/model-check live floor を collapse しない
 
-## actual runnable evidence
+## current evidence
 
 | evidence | current reading |
 |---|---|
-| `python3 scripts/current_l2_guided_samples.py emit-reserve model-check-second-line` | reserve package 単独の repo-local summary index |
-| `target/current-l2-guided/reserve-packages/model-check-second-line/package-summary.md` | human-facing summary index |
-| `target/current-l2-guided/reserve-packages/model-check-second-line/package-summary.json` | machine-readable summary index |
-| `p06-typed-proof-owner-handoff.run.json` | representative theorem-model-check bridge |
-| `p10-typed-authorized-fingerprint-declassification.run.json` | authority release positive carrier |
-| `p11-typed-unauthorized-fingerprint-release.run.json` | authority-miss rejection |
-| `p12-typed-classified-fingerprint-publication-block.run.json` | label-flow rejection |
-| `p15-typed-capture-escape-rejected.run.json` | capture/lifetime rejection |
-| `p16-typed-remote-call-budget-exceeded.run.json` | simple cost rejection |
+| `python3 scripts/current_l2_guided_samples.py list` | current active compatibility front door が clean-near-end accepted sample setのみを列挙することを示す |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | current active compatibility front door が active clean-near-end suite を実行することを示す |
+| `python3 scripts/current_l2_guided_samples.py closeout --format json` | current active compatibility front door が canonical current inventory を返すことを示す |
+| `specs/examples/606` | reserve integration entrypoint summary は historical helper memory として保持する |
+| `target/current-l2-guided/reserve-packages/model-check-second-line/package-summary.md` | historical human-facing summary index path |
+| `target/current-l2-guided/reserve-packages/model-check-second-line/package-summary.json` | historical machine-readable summary index path |
 
 ## current recommendation
 
 1. `model-check-second-line` reserve package は、
    reserve list の中に置くだけでなく、
-   単独 command と summary index まで actualize してよい。
+   historical helper-local summary index memory として保持してよい。ただし current active command へ戻さない。
 2. current cut は
    `p06 / p10 / p11 / p12 / p15 / p16`
    の 6 本を保ったまま、
    row-local property carrier second-line を
-   helper-local / non-production summary index に留めるのが自然である。
-3. `matrix problem1` と `bundle problem1` は Problem 1 全体の residual / doc bundle、
-   `emit-reserve model-check-second-line` は model-check second-line package 単独の reopen entrypoint
+   helper-local / non-production summary index に留めるのが自然である。ここでの `p06` は current theorem live floor ではなく historical bridge anchor として読む。
+3. historical `matrix problem1` と historical `bundle problem1` は Problem 1 全体の residual / doc bundle memory、
+   historical `emit-reserve model-check-second-line` は retired reopen memory、
+   current compatibility front door は `list / smoke-all / closeout`
    として読み分ける。
 
 ## retained alternatives

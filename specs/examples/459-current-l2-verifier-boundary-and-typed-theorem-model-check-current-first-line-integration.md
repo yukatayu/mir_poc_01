@@ -25,7 +25,7 @@
 
 - typed / theorem / model-check の current first line だけを扱う。
 - mainline actualization と theory-lab line は分けて書く。
-- `p06` は sample-visible corrected prototype として扱い、final typed calculus や final public verifier contract と同一視しない。
+- `p06` は historical sample-visible corrected prototype anchor として扱い、current clean-near-end theorem/model-check live floor、final typed calculus、final public verifier contract と同一視しない。
 - order / handoff / syntax / modality の current package close は扱わない。
 
 ## source-backed floor
@@ -51,7 +51,7 @@ current repo では、少なくとも次が source-backed にある。
    - row-local machine-facing carrier first
    - same-subject stage-local small-cluster projection reserve
    - property-language seam / tool-binding seam later-gate framing
-5. sample-visible corrected prototype evidence
+5. historical sample-visible corrected prototype anchor
    - `p06-typed-proof-owner-handoff`
    - helper-local `verification_preview`
    - helper-local `artifact_preview`
@@ -117,7 +117,7 @@ current question は、
 `p06-typed-proof-owner-handoff` は、
 
 - typed marker を含む corrected runnable prototype
-- theorem / model-check current bridge floor の sample-visible evidence
+- theorem / model-check current-first-line bridge memory の historical sample-visible anchor
 - helper-local `verification_preview` / `artifact_preview` の実行 anchor
 
 である。
@@ -139,7 +139,7 @@ current CLI output では、
 - settled property language
 
 の evidence ではなく、
-**current bridge floor が sample-visible で reached まで動く**
+**current-first-line bridge memory が sample-visible で reached まで動く**
 ことの evidence と読む。
 
 ## current judgment
@@ -150,8 +150,8 @@ current CLI output では、
    - notebook-first theorem line
    - row-local model-check carrier first
    に置く。
-2. `p06` は sample-visible corrected prototype に留める。
-3. helper-local `verification_preview` / `artifact_preview` は current bridge floor の evidence として使ってよいが、public contract に昇格させない。
+2. `p06` は historical sample-visible corrected prototype anchor に留める。
+3. helper-local `verification_preview` / `artifact_preview` は current-first-line bridge memory の evidence として使ってよいが、current clean-near-end theorem/model-check live floor や public contract に昇格させない。
 4. stronger typed surface actual adoption、theorem discharge result / public-contract concretization、settled property language / concrete tool seam は mixed gate に残す。
 
 ## retained alternatives
