@@ -200,17 +200,21 @@ current package は次で止める。
 - production checker / runtime-policy contract
 - room protocol / fairness / provider receipt family の model-check side collapse
 
-## next line
+## historical package-local next reopen line
 
-current package を close した後は、
-live な principal self-driven package はいったん空になる。
+historical closeout memory では、
+current package を close した後に
+live な principal self-driven package がいったん空になる読みを保持してよい。
 
 ただし、これは theory solved を意味しない。
 
-next reopen line は、
+historical next reopen line としては、
 
 1. theorem discharge public-contract actual format
 2. settled property language / concrete tool seam
 3. final public witness schema / provider receipt optional attachment
 
 の mixed gate として扱うのが自然である。
+
+current queue authority は `progress.md` / `tasks.md` に残し、
+この文書では historical reopen memory を active queue と混同しない。

@@ -164,7 +164,7 @@ current package は次で止める。
 - final emitted handoff contract
 - exhaustive shared-space catalog
 
-## next line
+## current kept-later mixed-gate status
 
 shared-space line の remaining mixed gate は、
 

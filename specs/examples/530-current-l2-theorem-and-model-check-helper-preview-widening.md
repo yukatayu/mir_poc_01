@@ -153,7 +153,7 @@ current package は次で止める。
 - production checker/runtime-policy contract
 - final public verifier contract
 
-## next line
+## historical queue anchor
 
 Package 58 の helper / CLI hardening and broader coverage では、
 

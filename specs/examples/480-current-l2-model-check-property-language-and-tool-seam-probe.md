@@ -183,15 +183,19 @@ current package は次で止める。
 - actual emitted verifier handoff artifact
 - production checker / runtime-policy contract
 
-## next line
+## historical package-local next reopen line
 
-current package を close した後も、
-principal self-driven package は増やさない。
+historical closeout memory では、
+current package を close した後も
+principal self-driven package を増やさない読みを保持してよい。
 
-next reopen line は、
+historical next reopen line としては、
 
 1. actual discharge transport / public theorem contract
 2. first settled property language / concrete model-check tool brand
 3. final public witness schema / provider receipt optional attachment
 
 の mixed gate として扱うのが自然である。
+
+current queue authority は `progress.md` / `tasks.md` に残し、
+この文書では historical reopen memory を active queue と混同しない。

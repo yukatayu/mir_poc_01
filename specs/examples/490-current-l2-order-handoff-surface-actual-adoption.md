@@ -147,7 +147,7 @@ current package は次で止める。
 - low-level `memory_order` exact source surface
 - final modal foundation adoption
 
-## next line
+## current kept-later mixed-gate status
 
 order-handoff line の remaining mixed gate は、
 

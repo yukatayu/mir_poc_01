@@ -142,7 +142,7 @@ model-check row-local carrier line の drift を閉じる。
 - actual public checker migration
 - final public verifier contract
 
-## next line
+## historical queue anchor
 
 historical closeout queue memory では、
 

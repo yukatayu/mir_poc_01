@@ -176,7 +176,7 @@ current package は次で止める。
 - final modal foundation adoption
 - exhaustive shared-space catalog
 
-## next line
+## current kept-later mixed-gate status
 
 order-handoff / shared-space line の remaining mixed gate は、
 

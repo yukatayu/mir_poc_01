@@ -183,7 +183,7 @@ current package は次で止める。
 - final source-surface handoff wording
 - exhaustive shared-space catalog
 
-## next line
+## current kept-later mixed-gate status
 
 shared-space / order-handoff line の remaining mixed gate は、
 

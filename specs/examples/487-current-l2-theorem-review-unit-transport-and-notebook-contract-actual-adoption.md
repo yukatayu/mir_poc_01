@@ -195,7 +195,7 @@ current package は次で止める。
 - proof object public schema
 - final public verifier contract
 
-## next line
+## current kept-later mixed-gate status
 
 theorem line の remaining mixed gate は、
 

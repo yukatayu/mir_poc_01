@@ -166,7 +166,7 @@ current package は次で止める。
 - production checker/runtime-policy contract
 - final public verifier contract
 
-## next line
+## current kept-later mixed-gate status
 
 model-check line の remaining mixed gate は、
 

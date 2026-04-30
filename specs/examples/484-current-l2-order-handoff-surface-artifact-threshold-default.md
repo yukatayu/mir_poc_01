@@ -170,7 +170,7 @@ current package は次で止める。
 - low-level exact source wording
 - final modal foundation adoption
 
-## next line
+## current kept-later mixed-gate status
 
 current threshold package を close した後の later mixed gate は、
 
