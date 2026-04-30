@@ -390,6 +390,31 @@ run_directory_named_profile
   - `compare_floor_refs` / `guard_refs` / `kept_later_refs`
   を helper-local threshold floor として test/support helper に置いてよい。
   - これは final public witness schema、final public provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract、exhaustive shared-space catalog を意味しない。
+
+## current witness/provider public-shape boundary inventory
+
+- current helper-local witness/provider public-shape memory is split into four adjacent lanes.
+  - route-first actual-adoption floor:
+    `witness_route_refs`, `provider_route_refs`, `repo_local_emitted_artifact_refs`
+  - public-schema candidate floor:
+    `witness_schema_candidate_refs`, `provider_receipt_candidate_refs`
+  - combined-contract candidate floor:
+    `combined_public_contract_candidate_refs`
+  - final emitted-handoff adjacent keep:
+    `emitted_contract_candidate_refs`, `final_public_contract_reopen_sequence_refs`
+- current route/schema relation is explicit.
+  - claim / payload split first
+  - witness/provider route non-collapse
+  - repo-local emitted artifact refs first
+  - schema candidates and combined contract candidates remain later than current route actualization
+- current stop line remains explicit.
+  - final public witness schema
+  - final public provider receipt schema
+  - delegated provider attestation
+  - combined provider+witness public contract
+  - final emitted handoff contract
+  - exhaustive shared-space catalog
+- this inventory is current helper/responsibility memory only. It does not freeze a public witness/provider contract.
 - current order-handoff source-wording route actual-adoption cut では、
   - `profile_axis_refs`
   - `repo_local_emitted_artifact_refs`

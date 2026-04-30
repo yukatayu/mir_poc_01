@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 16:40 JST
+最終更新: 2026-04-30 16:46 JST
 
 ## この文書について
 
@@ -36,6 +36,7 @@
 - 2026-04-30 の `VerificationLayer` theorem-bridge / runtime-policy widening boundary docs-first inventory では、proof notebook review unit / Lean bridge / theorem reopen-threshold memory と、phase5 handoff threshold / model-check planning memory / runtime-policy preview language を current non-emitted boundary anchor として `plan/29` に追加し、`plan/14` glossary と `progress.md` feature row を同期しました。theorem bridge / runtime policy は active emitted row・public contract・hidden builtin に上げず、new implementation queue も reopened していません。
 - 2026-04-30 の `VerificationLayer` theorem/runtime boundary spec-memory alignment repair では、reviewer 指摘に従って `plan/29` unresolved wording を `specs/10` に合わせ、runtime-policy matrix row に phase5 handoff threshold memory anchor を補いました。`progress.md` feature row も `widening contract` wording に冷やし、new implementation queue は reopened していません。
 - 2026-04-30 の `VerificationLayer` public composition contract boundary docs-first inventory では、`plan/29` に emitted row / evidence carrier / downstream consumer / kept-later contract carrier の split と current relation を追加し、`plan/27` / `docs/research_abstract/public_api_parser_gate_plan_01.md` / `progress.md` / `tasks.md` を current split へ同期しました。final public verifier contract は still-later gate のまま残し、new implementation queue も reopened していません。
+- 2026-04-30 の witness/provider public-shape boundary docs-first inventory では、`plan/09` に route-first actual-adoption floor / public-schema candidate floor / combined-contract candidate floor / final emitted-handoff adjacent keep をまとめた current boundary inventory を追加し、`progress.md` finite-index / order-handoff row と `tasks.md` research-discovery line を同期しました。final public witness schema、provider receipt schema、delegated provider attestation、combined provider+witness public contract、final emitted handoff contract は still-later gate のままであり、new implementation queue も reopened していません。
 
 ## executable floor
 
@@ -147,6 +148,7 @@ These are safe to do without new product decisions.
 - exact public `VerificationLayer` law surface, public naming, theorem-bridge/runtime-policy widening relation, and composition contract among emitted rows / evidence carriers / downstream consumers / emitted verifier handoff artifacts beyond the current floor (`verification_handoff_witness`, `verification_model_check`).
 - `FAIRY-05` reopen criteria, final implementation carrier, and negative companion shape.
 - projection equivalence evidence boundary, future checker relation, and public emitted-program contract beyond committed generated bridge manifest.
+- witness/provider public-shape route, schema candidate, combined-contract candidate, and final emitted-handoff boundary.
 - rollback / durable migration engine state machine after `P21`.
 - distributed activation ordering evidence once multi-place / multi-server pressure is available.
 - production transport / replay design that preserves transport / auth / membership / capability / witness separation.
