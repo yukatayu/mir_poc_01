@@ -116,7 +116,7 @@ repository memory である。
     - not a hidden verifier builtin
     - not a final public verifier contract
 - shared unresolved widening questions before any emitted-row promotion:
-  - whether theorem bridge and runtime policy widen as separate emitted rows, one composed family, or remain downstream / handoff carriers
+  - whether theorem bridge and runtime policy widen as separate emitted rows or one composed family, and how emitted verifier handoff artifacts fit that widened surface
   - which law families would become shared emitted laws versus family-local obligations
   - the exact relation among `verification_model_check`, theorem result objects, emitted verifier handoff artifacts, and any future public verifier contract
 - this inventory is current repository memory only. It does not choose a widening package and does not freeze public naming.
@@ -129,7 +129,7 @@ repository memory である。
 | runtime model-check | runtime canonical `layer_signatures` row `verification_model_check`、runtime closeout `clean_near_end_canonical_inventory` | current emitted floor | already actualized; keep property/tool/mode assumptions explicit | concrete tool brand、public checker artifact、production checker/runtime-policy contract stay later |
 | finite-index checker preview | helper-local `verification_preview` / static verdict / property preview | current evidence carrier only | settled property language、checker artifact boundary、subject/evidence carrier naming が揃ったとき | final parser / checker / verifier contract と混同しない |
 | theorem bridge | proof notebook review unit、Lean bridge docs、theorem reopen-threshold memory | current evidence carrier only | theorem result object、proof object schema、tool-brand / execution boundary が揃ったとき | final public theorem / verifier contract は later |
-| runtime policy / emitted verifier handoff artifact | model-check second-line planning memory、runtime-policy preview language | kept-later widening candidate | actual emitted verifier handoff artifact と production checker/runtime-policy contract が named になったとき | runtime policy preview を hidden verifier builtin にしない |
+| runtime policy / emitted verifier handoff artifact | model-check second-line planning memory、phase5 proof/protocol/runtime-policy handoff threshold memory、runtime-policy preview language | kept-later widening candidate | actual emitted verifier handoff artifact と production checker/runtime-policy contract が named になったとき | runtime policy preview を hidden verifier builtin にしない |
 | visualization / telemetry around verification | helper `verification_summary` view、helper `model_check_summary` telemetry row、viewer prototype inventory | downstream consumer only | viewer / telemetry package で public viewer contract を別途 narrow したとき | verification evidence downstream surface であり、`VerificationLayer` emitted row と同一視しない |
 
 ## widening rules

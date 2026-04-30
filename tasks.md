@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 16:27 JST
+最終更新: 2026-04-30 16:33 JST
 
 ## この文書について
 
@@ -34,6 +34,7 @@
 - 2026-04-30 の `FAIRY-05` reopen criteria docs-first inventory では、same-package 必須条件を positive reacquire-after-return sample / negative companion / `state_timeline` + `anchor_switch` evidence / docs-report-snapshot sync に固定し、`carrier_choice`・helper-local naming・negative companion breadth・same-helper vs separate-helper boundary は未決のまま `plan/31` に残しました。new implementation queue は reopened していません。
 - 2026-04-30 の projection/codegen equivalence-evidence boundary docs-first inventory では、current `equivalence` reading が committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まり、`P15-GEN-01..04` / `equivalence_review_categories` は current closeout surface、future cross-place equivalence checker / final public emitted-program ABI は kept-later gate のままであることを `plan/20` に固定しました。new implementation queue は reopened していません。
 - 2026-04-30 の `VerificationLayer` theorem-bridge / runtime-policy widening boundary docs-first inventory では、proof notebook review unit / Lean bridge / theorem reopen-threshold memory と、phase5 handoff threshold / model-check planning memory / runtime-policy preview language を current non-emitted boundary anchor として `plan/29` に追加し、`plan/14` glossary と `progress.md` feature row を同期しました。theorem bridge / runtime policy は active emitted row・public contract・hidden builtin に上げず、new implementation queue も reopened していません。
+- 2026-04-30 の `VerificationLayer` theorem/runtime boundary spec-memory alignment repair では、reviewer 指摘に従って `plan/29` unresolved wording を `specs/10` に合わせ、runtime-policy matrix row に phase5 handoff threshold memory anchor を補いました。`progress.md` feature row も `widening contract` wording に冷やし、new implementation queue は reopened していません。
 
 ## executable floor
 
