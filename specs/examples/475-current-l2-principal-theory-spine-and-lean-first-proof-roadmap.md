@@ -282,9 +282,8 @@ current package は次で止める。
 
 ## next self-driven line
 
-current package を close した後の queue は引き続き nonzero である。
-
-follow-up chain は、現在では少なくとも次まで進んでいる。
+historical package-local follow-up chain としては、
+少なくとも次が compare-anchor memory に残る。
 
 1. reserve strengthening / practical actualization
    - `specs/examples/476`
@@ -296,11 +295,15 @@ follow-up chain は、現在では少なくとも次まで進んでいる。
 4. final-layer closeout defaults / reopened self-driven queue
    - `specs/examples/520`
 
-したがって current remaining self-driven line は、
+historical remaining self-driven line として保持していた
 
 1. layered strong typing / IFC first-fragment
 2. Lean formal skeleton / proof obligations
 3. helper / CLI hardening and broader coverage
 4. near-end closeout sync
 
-に残すのが自然である。
+も package-memory の follow-up shape として読める。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の self-driven implementation line を promote しない。

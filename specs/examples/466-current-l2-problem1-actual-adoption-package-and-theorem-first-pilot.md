@@ -178,14 +178,20 @@ current package は次で止める。
 
 ## next self-driven line
 
-next self-driven line は、
-**theorem-first experimental pilot actualization**
-に置く。
+historical package-local next line としては
+`theorem-first experimental pilot actualization`
+を `specs/examples/470` に進める chain が compare-anchor memory に残る。
 
-minimum は次である。
+minimum として保持していた
 
 1. notebook-first review-unit principal
 2. symbolic refs only
 3. repo-local emitted artifact route
 4. reproducible compare floor
 5. no public verifier contract promotion
+
+も package-memory の follow-up shape として読める。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の self-driven implementation line を promote しない。

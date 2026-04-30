@@ -212,7 +212,13 @@ current package は次で止める。
 
 ## next self-driven line
 
-next reserve/self-driven line は、次の 2 本で読むのが自然である。
+historical Problem 2 側の package-local next line としては、
+次の 2 本が compare-anchor memory に残る。
 
 1. `auditable_authority_witness` second strengthening package
 2. `delegated_rng_service` second practical package
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+downstream family の wording も `specs/examples/476/477` で maintenance closeout 済みなので、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の reserve/self-driven implementation line を promote しない。
