@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 13:37 JST
+最終更新: 2026-04-30 15:00 JST
 
 ## この文書について
 
@@ -21,6 +21,7 @@
 - 2026-04-29 の uncommitted Rust formatting cleanup は `b213721` `Apply Rust formatting cleanup` として push 済みです。
 - 2026-04-30 の handoff path normalization / `sub-agent-pro` role sync / `plan/10` current-line cooling は maintenance-only closeout であり、新しい promoted implementation line は開いていません。
 - 2026-04-30 の `plan/02` / `plan/07` / `plan/09` temperature audit も maintenance-only closeout であり、repository memory の stale current-line wording を冷やしただけで、new implementation queue は reopened していません。
+- 2026-04-30 の full validation rerun / `samples/README.md` + `scripts/README.md` + `samples_progress.md` front-door parity sync も maintenance-only closeout であり、current validation floor と sample/script taxonomy の説明を揃えただけで、new implementation queue は reopened していません。
 
 ## executable floor
 
@@ -142,12 +143,15 @@ These are safe to do without new product decisions.
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 python3 scripts/current_l2_guided_samples.py closeout --format json
+python3 scripts/clean_near_end_samples.py closeout
+python3 scripts/current_l2_lean_sample_sync.py
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
 python3 scripts/network_transport_samples.py closeout --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
+bash scripts/storage/detach_prepare.sh
 cargo test -p mir-ast
 cargo test -p mirrorea-core
 cargo test -p mir-runtime

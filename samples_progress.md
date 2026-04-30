@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-04-29 12:02 JST
+Last updated: 2026-04-30 15:00 JST
 Current repo-local focus: current-L2 / clean near-end runnable floor, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -32,7 +32,7 @@ Notes:
 | Sugoroku runtime | 90 | active vertical slice | attach / membership / handoff / late join / detach TODO boundary | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
 | Avatar follow | 90 | active representative slice | `FAIRY-01/02/03/04/06`; `FAIRY-05` remains planned | `python3 scripts/avatar_follow_samples.py closeout --format json` |
 | External adapters | 75 | synthetic preview + host-boundary inventory | `EXT-03` / `EXT-04` helper subset; `EXT-01/02/05` planned | `python3 scripts/typed_external_boundary_samples.py closeout --format json` |
-| Network transport | 100 | helper-local canary family | `NET-01..05` current-scope canaries | `python3 scripts/network_transport_samples.py closeout --format json` |
+| Network transport | 100 | helper-local canary family | `NET-02..05` current-scope canaries; `NET-01` は Sugoroku loopback parity anchor として reported | `python3 scripts/network_transport_samples.py check-all --format json` |
 | Projection / placement | 90 | preview + generated bridge evidence | helper/report preview + committed manifest bridge | `python3 scripts/projection_codegen_samples.py closeout --format json` |
 | Visualization / viewer | 100 | typed prototype inventory | helper/runtime typed panel and telemetry inventory | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | Hot-plug package | 90 | P21 narrow runtime floor + docs-first trilogy closed | helper lifecycle + request/verdict carrier + runtime engine-state narrow floor; public ABI still unfrozen | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
@@ -43,26 +43,26 @@ Notes:
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-29 12:02 JST | `0945`, `0996`, `0997`, `0998` | Snapshot docs are maintenance artifacts, not normative specs |
-| `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-29 12:02 JST | `0904`, `0913`, `0998` | final parser / public API deferred |
-| `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-29 12:02 JST | `0945`, `0959`, `0988`, `0989`, `0998` | current canonical runnable suite |
-| `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-29 12:02 JST | `0955`, `0977`, `0986`, `0997`, `0998` | attach lifecycle / compatibility anchor |
-| `SUG-03` | Sugoroku handoff | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-04-29 12:02 JST | `0950`, `0952`, `0954`, `0955`, `0998` | roll -> publish -> witness -> handoff |
-| `SUG-05` | membership | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | active runnable E2E | 90 | positive | 2026-04-29 12:02 JST | `0955`, `0998` | published history visible before turn insertion |
-| `SUG-08` | reset model-check | `samples/clean-near-end/sugoroku-world/08_reset_interleaving_model_check.mir` | active verification E2E | 90 | positive | 2026-04-29 12:02 JST | `0945`, `0998` | reset safety bridge |
-| `SUG-09` | hot-plug detach TODO | `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | active TODO boundary | 75 | rejection evidence | 2026-04-29 12:02 JST | `0977`, `0979`, `0986`, `0994`, `0995`, `0998` | explicit stop line; not completed migration / rollback |
-| `FAIRY-01/02/03/04/06` | avatar follow | `samples/clean-near-end/avatar-follow/` | active representative slice | 90 | positive + negative + verification | 2026-04-29 12:02 JST | `0956`, `0978`, `0998` | follow / fallback / stale-anchor rejection / detached-anchor safety |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-04-30 15:00 JST | `0945`, `0996`, `0997`, `0998`, `1001` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-04-30 15:00 JST | `0904`, `0913`, `0998` | final parser / public API deferred |
+| `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-04-30 15:00 JST | `0945`, `0959`, `0988`, `0989`, `0998` | current canonical runnable suite |
+| `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-04-30 15:00 JST | `0955`, `0977`, `0986`, `0997`, `0998` | attach lifecycle / compatibility anchor |
+| `SUG-03` | Sugoroku handoff | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-04-30 15:00 JST | `0950`, `0952`, `0954`, `0955`, `0998` | roll -> publish -> witness -> handoff |
+| `SUG-05` | membership | `samples/clean-near-end/sugoroku-world/05_late_join_history_visible.mir` | active runnable E2E | 90 | positive | 2026-04-30 15:00 JST | `0955`, `0998` | published history visible before turn insertion |
+| `SUG-08` | reset model-check | `samples/clean-near-end/sugoroku-world/08_reset_interleaving_model_check.mir` | active verification E2E | 90 | positive | 2026-04-30 15:00 JST | `0945`, `0998` | reset safety bridge |
+| `SUG-09` | hot-plug detach TODO | `samples/clean-near-end/sugoroku-world/09_detach_todo.mir` | active TODO boundary | 75 | rejection evidence | 2026-04-30 15:00 JST | `0977`, `0979`, `0986`, `0994`, `0995`, `0998` | explicit stop line; not completed migration / rollback |
+| `FAIRY-01/02/03/04/06` | avatar follow | `samples/clean-near-end/avatar-follow/` | active representative slice | 90 | positive + negative + verification | 2026-04-30 15:00 JST | `0956`, `0978`, `0998` | follow / fallback / stale-anchor rejection / detached-anchor safety |
 | `FAIRY-05` | avatar follow | `samples/not_implemented/avatar-fairy-follow/05_follow_target_reacquired_after_return.mir` | planned family | 10 | target only | 2026-04-28 21:45 JST | `0956`, `0978` | carrier choice remains `UNRESOLVED`; not active |
-| `EXT-03/04` | typed external | `scripts/typed_external_boundary_samples.py` | helper synthetic preview | 75 | positive + negative | 2026-04-29 12:02 JST | `0966`, `0998` | host-boundary inventory; not final adapter API |
+| `EXT-03/04` | typed external | `scripts/typed_external_boundary_samples.py` | helper synthetic preview | 75 | positive + negative | 2026-04-30 15:00 JST | `0966`, `0998` | helper synthetic preview over planned-path sources; not final adapter API |
 | `EXT-01/02/05` | typed external | `samples/not_implemented/typed-external-boundary/` | planned residual family | 10 | target only | 2026-04-28 09:26 JST | `0946` | reopen criteria fixed; not active |
-| `NET-01..05` | network transport | `scripts/network_transport_samples.py`, Sugoroku loopback mode | helper-local canary family | 100 | positive + negative | 2026-04-29 12:02 JST | `0967`, `0998` | current-scope helper canaries; not production transport |
-| `PRJ-01/02` | projection / placement | Sugoroku `projection_view`, runtime `cross_place_projection` | helper/report preview | 75 | positive | 2026-04-29 12:02 JST | `0948`, `0998` | preview floor; not emitted executable program |
-| `P15-GEN-01..04` | projection / codegen | `samples/generated/projection-placement/manifest.json` | committed generated bridge evidence | 90 | positive | 2026-04-29 12:02 JST | `0970`, `0998` | generated artifact; not source sample / final executable |
-| `P16-VIEW-01..05` | viewer | `scripts/visual_debugger_viewer_samples.py` | typed public prototype inventory | 100 | positive | 2026-04-29 12:02 JST | `0971`, `0998` | typed inventory over helper/runtime surfaces; not final viewer API |
-| `P19-HOTPLUG-CARRIER` | hot-plug carrier | `crates/mirrorea-core/src/fabric.rs` | Rust carrier | 90 | positive + negative | 2026-04-29 12:02 JST | `0988`, `0998` | engine-neutral request/verdict carrier |
-| `P20-HOTPLUG-SKELETON` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | thin runtime/report assembly | 90 | positive + negative | 2026-04-29 12:02 JST | `0989`, `0991`, `0998` | not completed engine |
-| `P21-HOTPLUG-ENGINE-STATE` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | narrow runtime engine-state floor | 90 | positive + negative | 2026-04-29 12:02 JST | `0993`, `0996`, `0997`, `0998` | non-public runtime-private state progression; freeze prerequisite fixed, public ABI still unfrozen |
-| `STORAGE-01` | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | operational guardrail | 100 | positive | 2026-04-29 12:02 JST | `0972`, `0998` | no destructive cleanup / no actual LLVM build |
+| `NET-02..05` | network transport | `scripts/network_transport_samples.py`, Sugoroku loopback mode | helper-local canary family | 100 | positive + negative | 2026-04-30 15:00 JST | `0967`, `0998` | `NET-01` is only a reported Sugoroku loopback parity anchor; not production transport |
+| `PRJ-01/02` | projection / placement | Sugoroku `projection_view`, runtime `cross_place_projection` | helper/report preview | 75 | positive | 2026-04-30 15:00 JST | `0948`, `0998` | preview floor; not emitted executable program |
+| `P15-GEN-01..04` | projection / codegen | `samples/generated/projection-placement/manifest.json` | committed generated bridge evidence | 90 | positive | 2026-04-30 15:00 JST | `0970`, `0998` | generated artifact; not source sample / final executable |
+| `P16-VIEW-01..05` | viewer | `scripts/visual_debugger_viewer_samples.py` | typed public prototype inventory | 100 | positive | 2026-04-30 15:00 JST | `0971`, `0998` | typed inventory over helper/runtime surfaces; not final viewer API |
+| `P19-HOTPLUG-CARRIER` | hot-plug carrier | `crates/mirrorea-core/src/fabric.rs` | Rust carrier | 90 | positive + negative | 2026-04-30 15:00 JST | `0988`, `0998` | engine-neutral request/verdict carrier |
+| `P20-HOTPLUG-SKELETON` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | thin runtime/report assembly | 90 | positive + negative | 2026-04-30 15:00 JST | `0989`, `0991`, `0998` | not completed engine |
+| `P21-HOTPLUG-ENGINE-STATE` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | narrow runtime engine-state floor | 90 | positive + negative | 2026-04-30 15:00 JST | `0993`, `0996`, `0997`, `0998` | non-public runtime-private state progression; freeze prerequisite fixed, public ABI still unfrozen |
+| `STORAGE-01` | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | operational guardrail | 100 | positive | 2026-04-30 15:00 JST | `0972`, `0998` | no destructive cleanup / no actual LLVM build |
 
 ## E2E samples
 
@@ -72,7 +72,7 @@ Notes:
 | `E2E-SUGOROKU` | membership -> attach -> roll -> publish -> witness -> handoff -> late join | `python3 scripts/sugoroku_world_samples.py closeout --format json` | 90 | current shared-space vertical slice | real network / durable distributed runtime |
 | `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar floor | `FAIRY-05` reacquire implementation |
 | `E2E-TYPED-EXTERNAL` | typed effect request -> receipt/failure -> redacted view | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper host-boundary inventory | final adapter API / exact host schema |
-| `E2E-TRANSPORT-CANARY` | loopback / subprocess bridge / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py closeout --format json` | 100 | current-scope helper transport canaries | production socket / durable replay |
+| `E2E-TRANSPORT-CANARY` | loopback / subprocess bridge / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py check-all --format json` | 100 | current-scope helper transport canary execution; `NET-01` parity remains separately reported from Sugoroku anchors | production socket / durable replay |
 | `E2E-PROJECTION-BRIDGE` | system source -> preview -> committed manifest bridge -> live-anchor alignment | `python3 scripts/projection_codegen_samples.py closeout --format json` | 90 | generated bridge evidence alignment | final emitted executable family |
 | `E2E-VIEWER-INVENTORY` | helper/runtime inventory -> typed viewer panels/telemetry | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | 100 | typed prototype inventory | final viewer / telemetry service |
 | `E2E-HOTPLUG-RUNTIME` | request/verdict carrier -> runtime snapshot -> engine-state report | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | 90 | P21 narrow runtime floor | rollback / durable migration / distributed ordering / final ABI |
@@ -94,6 +94,12 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-04-30 15:00 JST | `python3 scripts/check_source_hierarchy.py` | pass | required 23 / present 23 / missing 0 |
+| 2026-04-30 15:00 JST | `python3 scripts/validate_docs.py` | pass | after report `1001`, documentation scaffold complete; report count 999 |
+| 2026-04-30 15:00 JST | current sample helper closeouts + Lean sync | pass | current-L2 compatibility wrapper, clean near-end, Sugoroku, avatar, typed external, network, projection, viewer closeouts passed; `current_l2_lean_sample_sync.py` refreshed `samples/lean/manifest.json` and left the working tree clean |
+| 2026-04-30 15:00 JST | storage scripts | pass with warning | `/mnt/mirrorea-work` remained mounted; LLVM root is root-owned / non-writable; no files deleted |
+| 2026-04-30 15:00 JST | Cargo validation floor | pass with warnings | `mir-ast`, `mirrorea-core`, `mir-runtime`, `mir-semantics`, and `cargo fmt --check` passed; warnings are existing dead-code / storage-env warnings |
+| 2026-04-30 15:00 JST | `git diff --check` | pass | post-closeout docs diff was whitespace-clean |
 | 2026-04-29 12:02 JST | `python3 scripts/check_source_hierarchy.py` | pass | required 23 / present 23 / missing 0 |
 | 2026-04-29 12:02 JST | `python3 scripts/validate_docs.py` | pass | after report `0998`, documentation scaffold complete; report count 996 |
 | 2026-04-29 12:02 JST | current sample helper closeouts | pass | current-L2, clean near-end, Sugoroku, avatar, typed external, network, projection, viewer closeouts all passed |

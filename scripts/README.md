@@ -10,10 +10,12 @@
 - `validate_docs.py`
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
+  compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
 - `sugoroku_world_samples.py`
 - `avatar_follow_samples.py`
 - `typed_external_boundary_samples.py`
 - `network_transport_samples.py`
+  runnable helper-local transport canaries are `NET-02` / `NET-03` / `NET-04` / `NET-05`; `NET-01` remains a reported Sugoroku loopback parity anchor rather than a standalone sample ID
 - `projection_codegen_samples.py`
 - `visual_debugger_viewer_samples.py`
 
@@ -44,6 +46,7 @@
 ## reading rules
 
 - active repo-local command path は上記 front-door runner を先に使う
+- `current_l2_guided_samples.py` は current-L2 front-door compatibility path であり、legacy bundle commands は持たない
 - `current_l2_*` helper 群は public installed CLI ではなく repo-local support surface として読む
 - storage / env script は root setup と cleanup policy を helper 本体から分離する
 

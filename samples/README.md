@@ -27,9 +27,12 @@
 - `not_implemented/` は planned skeleton であり、active sample ではない
   - `avatar-fairy-follow/` は phase 8 residual planned family
   - `typed-external-boundary/` は phase 9 residual planned family
+    - `scripts/typed_external_boundary_samples.py` はこの root の `EXT-03` / `EXT-04` を helper-local synthetic preview anchor として読むが、active semantic sample root へ昇格させない
   - `network-transport/` は phase 13 planned family
 - `clean-near-end/avatar-follow/` は phase 8 active representative slice
 - `clean-near-end/network-transport/` は phase 13 active helper-local canary landing page
+  - runnable helper-local canary ID は `NET-02` / `NET-03` / `NET-04` / `NET-05`
+  - `NET-01` は standalone sample ID ではなく、Sugoroku loopback parity anchor として reported に扱う
 - `prototype/` は historical anchor / compatibility reference であり、active canonical path ではない
 - `old/` は archive
 - `generated/` は reserve path であり、source sample を置かない
@@ -47,7 +50,11 @@ python3 scripts/avatar_follow_samples.py check-all --format json
 python3 scripts/typed_external_boundary_samples.py check-all --format json
 python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py check-all --format json
+python3 scripts/visual_debugger_viewer_samples.py check-all --format json
 ```
+
+- `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する
+- docs checks、storage guardrail、Cargo regression を含む broader validation floor は `samples_progress.md`、`progress.md`、`tasks.md` を参照する
 
 ## move policy
 
