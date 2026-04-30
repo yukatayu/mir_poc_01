@@ -43,7 +43,7 @@
   - `P21` runtime-crate hot-plug completed-engine narrow cut は close 済みであり、exact next label は intentionally unfixed のまま保つ
   - `rollback / durable migration` family hardening は first recommendation close 済みであり、`distributed activation ordering` family hardening も second recommendation close 済みである
   - `final public hot-plug ABI` family hardening も third recommendation close 済みであり、docs-first close の definition は `freeze prerequisite fixed; public ABI still unfrozen` である
-  - current next open work は post-`P18` mixed gate / `U1` hold line にある actual commitment であり、追加の self-driven post-`P21` docs-first family は残っていない
+  - current remaining open gate は post-`P18` mixed gate / `U1` hold line にある actual commitment であり、追加の self-driven post-`P21` docs-first family は残っていない
 - toolchain/backend lane:
   `Macro 7` では mounted workdir、`CARGO_TARGET_DIR`、`CARGO_HOME`、LLVM path readiness、non-destructive cleanup probe を current guardrail として actualize 済み
 - reserve / mixed lane:

@@ -66,7 +66,7 @@
 - `docs/reports/0994-*` は post-`P21` rollback / durable migration family first recommendation closeout を表し、`plan/36` と companion docs により exact label intentionally unfixed のまま first recommendation / second recommendation / third recommendation ordering を current roadmap に actualize した
 - `docs/reports/0995-*` は post-`P21` distributed activation ordering family second recommendation closeout を表し、`plan/37` と companion docs により `activation_cut` widening criteria、durable activation commit / public ABI / transport-collapse stop line、当時の third recommendation handoff を current roadmap に actualize した。現在の third recommendation closeout は `plan/38` と `docs/reports/0997-*` を参照する
 - `docs/reports/0996-*` は post-`P21` final public hot-plug ABI family の audit を表し、minimum sync set、stale wording、traceability break、freeze-prerequisite stop line を inventory として残した
-- `docs/reports/0997-*` は post-`P21` final public hot-plug ABI family third recommendation closeout を表し、`plan/38` と companion docs により `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、next open work = actual `U1` commitment を current roadmap に actualize した
+- `docs/reports/0997-*` は post-`P21` final public hot-plug ABI family third recommendation closeout を表し、`plan/38` と companion docs により `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、remaining open gate = actual `U1` commitment を current roadmap に actualize した
 - next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、third recommendation docs-first close の後に来る。current maintenance-only line かどうかの queue authority は `progress.md` / `tasks.md` に残す
 
 ## historical closeout chain
@@ -113,7 +113,7 @@
 19. post-`P21` distributed activation ordering family
    - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/37-post-p21-distributed-activation-ordering-family.md` で `activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、public ABI と transport-collapse stop line を docs-first に固定した。third recommendation family の current repository memory は `plan/38` を参照する
 20. post-`P21` final public hot-plug ABI family
-   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/38-post-p21-final-public-hotplug-abi-family.md` で `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、`AttachPoint` / `Patch` packaging identity の preview-only line、next open work = actual `U1` commitment を docs-first に固定した
+   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/38-post-p21-final-public-hotplug-abi-family.md` で `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、`AttachPoint` / `Patch` packaging identity の preview-only line、remaining open gate = actual `U1` commitment を docs-first に固定した
 
 ## mixed gate
 

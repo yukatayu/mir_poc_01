@@ -164,7 +164,7 @@ final public hot-plug ABI はここで actualize しない。
 - current third recommendation docs-first close の definition は
   `freeze prerequisite fixed; public ABI still unfrozen`
   である
-- current next open work は
+- current remaining open gate は
   post-`P18` mixed gate / `U1` hold line にある
   actual commitment であり、
   追加の self-driven post-`P21` docs-first family ではない

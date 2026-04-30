@@ -121,7 +121,7 @@ later family のうち、
 - `AttachPoint` / `Patch` packaging identity は
   engine-private または preview inventory に留め、
   public ABI として freeze しない
-- この family close 後の next open work は、
+- この family close 後に残る open gate は、
   追加の self-driven post-`P21` docs-first family ではなく
   actual `U1` commitment である
 

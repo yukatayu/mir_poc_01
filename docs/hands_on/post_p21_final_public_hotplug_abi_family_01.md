@@ -10,7 +10,7 @@ third recommendation family まで docs-first close 済みであることを、
 - ここで freeze したのは final public ABI ではなく、
   `freeze prerequisite fixed; public ABI still unfrozen`
   という line です
-- next open work は actual `U1` commitment であり、
+- 残る open gate は actual `U1` commitment であり、
   追加の self-driven post-`P21` docs-first family ではありません
 
 ## まず実行するコマンド
@@ -30,7 +30,7 @@ git diff --check
   final public ABI naming に上げていないこと
 - `final public hot-plug ABI` family の docs-first close が
   actual public ABI freeze ではないこと
-- current next open work が actual `U1` commitment であること
+- current remaining open gate が actual `U1` commitment であること
 
 ## これではまだ確認できないこと
 

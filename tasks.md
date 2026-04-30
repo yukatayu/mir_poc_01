@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 15:39 JST
+最終更新: 2026-04-30 15:47 JST
 
 ## この文書について
 
@@ -27,6 +27,7 @@
 - 2026-04-30 の landing docs date-stamp audit も maintenance-only closeout であり、front-door current-line wording と `current_phase_closeout_01.md` 参照の stale queue wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の reader-facing detailed summary audit も maintenance-only closeout であり、`docs/research_abstract/` の residual `actual next open work` / stale date wording を current snapshot authority に合わせて冷やしただけで、new implementation queue は reopened していません。
 - 2026-04-30 の post-sweep full validation rerun も maintenance-only closeout であり、docs-only refresh 後の sample/helper/cargo/formatter floor が still green であることを再確認しただけで、new implementation queue は reopened していません。
+- 2026-04-30 の remaining-open-gate wording normalization も maintenance-only closeout であり、`specs/11` / `plan/` / `progress.md` / hands-on mirror の `next open work` lexical marker を current snapshot authority と dated snapshot wording に合わせて冷やしただけで、new implementation queue は reopened していません。
 
 ## executable floor
 

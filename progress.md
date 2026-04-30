@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 15:39 JST
+最終更新: 2026-04-30 15:47 JST
 
 ## この文書について
 
@@ -32,7 +32,7 @@ Place をまたいで実行・通信・検証・可視化できる
   typed external synthetic preview、network helper-local canary、projection preview、projection/codegen committed generated bridge evidence、viewer typed public prototype inventory、storage / LLVM guardrail が current scope close 済みです。
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
-- Current next open work:
+- Current remaining open gate:
   追加の self-driven post-`P21` docs-first family は残っていません。次は actual `U1` commitment であり、installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision が必要です。
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。2026-04-29 には uncommitted Rust formatting cleanup を `b213721` として commit / push 済みです。
@@ -131,6 +131,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 15:47 JST — `remaining open gate` wording normalization を行い、`specs/11`、`plan/01`、`plan/11`、`plan/17`、`plan/35`、`plan/38`、`progress.md`、`docs/hands_on/post_p21_final_public_hotplug_abi_family_01.md` の `next open work` / `current next open work` lexical marker を current snapshot authority と historical snapshot wording に合わせて冷やした。`specs/00` と `specs/10` の dated anchor は historical closeout / handoff anchor と判断し維持した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:39 JST — docs sweep 後の full validation floor を rerun し、`check_source_hierarchy.py`、`validate_docs.py`、current-L2 / clean near-end / Sugoroku / avatar / typed external / network / projection / viewer closeouts、`current_l2_lean_sample_sync.py`、storage guardrail、`cargo test -p mir-ast`、`cargo test -p mirrorea-core`、`cargo test -p mir-runtime`、`cargo test -p mir-semantics`、`cargo fmt --check`、`git diff --check` が pass した。Lean manifest sync は path 出力のみで working tree clean を保ち、storage guardrail は `/mnt/mirrorea-work/llvm` parent non-writable の既知警告のみを再確認した。
 - 2026-04-30 15:34 JST — reader-facing detailed summary audit を行い、`docs/research_abstract/mirrorea_future_axis_01.md` の `actual next open work` wording を snapshot-reading wording へ冷やし、`docs/research_abstract/projection_placement_plan_01.md` の stale `2026-04-28` preview-floor date stamp を current repo wording へ同期した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 15:32 JST — landing docs date-stamp audit を行い、`README.md`、`Documentation.md`、`docs/research_abstract/README.md` の stale `2026-04-29` current-line wording と `current_phase_closeout_01.md` 参照の `next queue` wording を冷やした。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
