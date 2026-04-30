@@ -91,6 +91,36 @@ repository memory である。
   - the exact naming relation between emitted row names and downstream consumer names
 - this naming inventory is current repository memory only and does not claim a final public verifier contract
 
+## current theorem-bridge / runtime-policy boundary inventory
+
+- theorem bridge currently stays on the evidence-carrier side of the boundary.
+  - current anchors:
+    - proof notebook review unit
+    - Lean bridge docs / repo-local stub evidence
+    - theorem reopen-threshold memory
+  - current stop line:
+    - not an active emitted `LayerSignature` row
+    - not a proof-object schema
+    - not a theorem result-object public contract
+    - not a concrete theorem prover brand / execution binding
+    - not a final public verifier contract
+- runtime policy / emitted verifier handoff artifact currently stays on the kept-later side of the boundary.
+  - current anchors:
+    - model-check second-line planning memory
+    - phase5 proof/protocol/runtime-policy handoff threshold memory
+    - runtime-policy preview language
+  - current stop line:
+    - not an active emitted `LayerSignature` row
+    - not an actual emitted verifier handoff artifact
+    - not a production checker / runtime-policy contract
+    - not a hidden verifier builtin
+    - not a final public verifier contract
+- shared unresolved widening questions before any emitted-row promotion:
+  - whether theorem bridge and runtime policy widen as separate emitted rows, one composed family, or remain downstream / handoff carriers
+  - which law families would become shared emitted laws versus family-local obligations
+  - the exact relation among `verification_model_check`, theorem result objects, emitted verifier handoff artifacts, and any future public verifier contract
+- this inventory is current repository memory only. It does not choose a widening package and does not freeze public naming.
+
 ## widening threshold matrix
 
 | family | current carrier | current status | widen only when | kept-later / stop line |

@@ -68,6 +68,7 @@
 - current emitted law floor は shared `evidence_preservation` / `residual_obligations_are_explicit` と helper-only `no_hidden_handoff_without_witness` に留まり、theorem bridge / runtime policy / visualization lane の law families は widening candidate に残す
 - current emitted names は helper `verification_handoff_witness` と runtime `verification_model_check` に留まり、`verification_preview` / `verification_summary` / `model_check_summary` / theorem bridge / runtime policy preview は evidence-carrier または downstream-consumer naming に残す
 - `R1` current line では helper `verification_handoff_witness` / runtime `verification_model_check` だけを emitted floor に保ち、`verification_summary` / `model_check_summary` / theorem bridge / runtime policy は downstream consumer または evidence carrier に残す
+- theorem bridge は proof notebook review unit / Lean bridge docs / theorem reopen-threshold memory に留まり、runtime policy は phase5 handoff threshold memory / model-check planning memory / runtime-policy preview language に留まる。どちらも active emitted row・public contract・hidden builtin ではない
 - hidden verifier builtin や final public verifier contract を意味しない
 
 ### MessageEnvelope

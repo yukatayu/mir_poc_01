@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-04-30 16:21 JST
+最終更新: 2026-04-30 16:27 JST
 
 ## この文書について
 
@@ -83,7 +83,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | theorem / model-check / Lean | current scope close | model-check second line、small Lean proof、generated stub | full domain discharge と production binding |
 | shared-space runtime samples | current scope close | attach / membership / handoff / late join / follow / fallback / reset safety | real transport、durable distributed commit、public runtime API |
 | typed external / network / projection preview | first cuts closed | host-boundary preview、NET canaries、projection preview、generated bridge manifest | final host schema、real transport、final emitted executable family |
-| verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace | final viewer / verifier API、retention policy、telemetry service |
+| verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy emitted-row widening、final viewer / verifier API、retention policy、telemetry service |
 | hot-plug runtime package | P21 + docs-first trilogy closed | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, three later-family boundaries | rollback protocol, durable migration engine, distributed activation ordering, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
 
@@ -131,6 +131,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-04-30 16:27 JST — `VerificationLayer` theorem-bridge / runtime-policy widening boundary docs-first inventory を行い、`plan/29` に proof notebook review unit / Lean bridge / theorem reopen-threshold memory と、phase5 handoff threshold / model-check planning memory / runtime-policy preview language を current non-emitted boundary anchor として追加した。`plan/14` glossary と `progress.md` feature row を同期し、`tasks.md` research-discovery line を theorem-bridge/runtime-policy widening relation まで明示化した。`sugoroku_world_samples.py run 03_roll_publish_handoff --debug layers --format json`、`sugoroku_world_samples.py closeout --format json`、`cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:21 JST — projection/codegen equivalence-evidence boundary docs-first inventory を行い、`plan/20` に current `equivalence` reading が committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まること、`P15-GEN-01..04` と `equivalence_review_categories` が current closeout surface であり、future cross-place equivalence checker / final public emitted-program ABI とは別 gate であることを追加した。reviewer 指摘に従って `progress.md` durable snapshot にも same stop line を鏡写しし、`projection_codegen_samples.py closeout --format json`、Sugoroku projection preview run、clean near-end `05_delegated_rng_service` run、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:08 JST — `FAIRY-05` reopen criteria docs-first inventory を行い、`plan/31` に current reopen-criteria inventory を追加して、same-package 必須条件を positive reacquire sample / negative companion / `state_timeline` + `anchor_switch` evidence / docs-report-snapshot sync に固定し、`carrier_choice`・helper-local naming・negative companion breadth・same-helper vs separate-helper boundary は未決のまま残した。`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-04-30 16:05 JST — `VerificationLayer` public naming gate docs-first inventory を行い、`plan/29` に current naming-gate inventory を追加して、active emitted names が helper `verification_handoff_witness` / runtime `verification_model_check` に留まり、`verification_preview` / `verification_summary` / `model_check_summary` / theorem bridge / runtime policy preview は evidence-carrier または downstream-consumer naming に残ることを `plan/14` glossary mirror とともに固定した。public/shared naming と emitted-row-to-consumer naming relation は未決のままとし、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
