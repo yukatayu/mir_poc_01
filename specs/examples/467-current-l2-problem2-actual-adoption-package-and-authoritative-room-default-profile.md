@@ -74,18 +74,21 @@ current repo では、少なくとも次が source-backed にある。
 4. thread / node parity current wording
 5. authoritative room baseline and append-friendly contrast room
 6. corrected runnable prototypes
-   - `p07`
-   - `p08`
+   - historical `p07` reading maps to current Sugoroku handoff / late-join evidence
+   - historical `p08` reading maps to current stale-reconnect canary plus family check; no single current sample reproduces the old combined story
 
 ## actual runnable evidence
 
 | evidence | current reading |
 |---|---|
-| `p07` success + late join visible history | publication / handoff / observation / history-visible-as-past floor が runnable |
-| `p08` success + stale reconnect fail then refresh | stale replay/refetch floor が runnable |
-| `current_l2_source_sample_runner` | `p07/p08` を runner floor に統合済み |
-| `current_l2_operational_cli` | `p07/p08` を CLI / JSON / pretty floor に統合済み |
-| theorem/model-check pre-floor tests | `p07/p08` を cross-corpus compare floor にも統合済み |
+| `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary --format json` | publication / handoff core floor が current Sugoroku slice として runnable |
+| `python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership --format json` | history-visible-as-past late-join floor が current Sugoroku slice として runnable |
+| `python3 scripts/network_transport_samples.py run NET-03 --debug reconnect --format json` | stale reconnect / membership-epoch guard canary が current network floor として runnable |
+| `python3 scripts/network_transport_samples.py check-all --format json` | network canary family は green であり、historical `p08` fail-then-refresh story は current docs では partial replacement として扱う |
+| `python3 scripts/current_l2_guided_samples.py smoke-all --format json` | compatibility front door から active clean-near-end corpus の runner floor を再確認できる。old `current_l2_source_sample_runner` target 自体は `p07/p08` の direct proof surface ではない |
+| `cargo run -q -p mir-runtime --bin mir-current-l2 -- check-source-sample samples/clean-near-end/order-handoff/01_authorized_roll_publish_handoff.mir --format json` | clean sample を CLI / JSON surface からも読める。old `current_l2_operational_cli` target 自体は `p07/p08` の direct proof surface ではない |
+| `python3 scripts/clean_near_end_samples.py run model-check --format json` | model-check compare floor は active adjacent evidence として残るが、`p07/p08` 自体を model-check sample に変えるわけではない |
+| `python3 scripts/current_l2_lean_sample_sync.py` | theorem-side proof-bridge anchor は current sync されているが、`p07/p08` 自体を theorem sample に変えるわけではない |
 
 ## actual first adoption profile
 
@@ -139,25 +142,25 @@ current default wording は次である。
 
 ## `p07` / `p08` integration note
 
-`p07` は、current first completion line のうち
+historical `p07` reading は、current first completion line のうち
 
 - `publication_order`
 - `observation_order`
 - history-visible-as-past late join
 
-の runnable evidence である。
+を current Sugoroku slices (`03_roll_publish_handoff` / `05_late_join_history_visible`) へ分けて読む。
 
-`p08` は、current first completion line のうち
+historical `p08` reading は、current first completion line のうち
 
 - stale/incompatible replay invalidation
 - fail-then-refresh reconnect
 - no silent merge
 
-の runnable evidence である。
+を current stale-reconnect canary (`NET-03`) と family check へ分けて読む。old combined story を単独で再現する current active sample は存在しない。
 
-したがって `p07` / `p08` は、
+したがって historical `p07` / `p08` reading は、
 final replay theorem や final shared-space catalog の evidence ではなく、
-**first actual adoption profile が runnable で誤読なく比較できる**
+**first actual adoption profile の current runnable replacement が誤読なく比較できる**
 ことの evidence と読む。
 
 ## current recommendation

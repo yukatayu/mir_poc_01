@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 18:42 JST
+最終更新: 2026-04-30 18:53 JST
 
 ## この文書について
 
@@ -41,6 +41,7 @@
 - 2026-04-30 の order-handoff / witness-provider final public-seam residual inventory では、`plan/09` に order-handoff carry-over / reserve-surface carry-over / witness/provider carry-over / compressed residual keep をまとめた current boundary inventory を追加し、compression cut 自体の non-claim に `final emitted-handoff contract` を戻しました。`tasks.md` research-discovery line を final source wording / emitted-artifact schema / final witness-provider-artifact residual の圧縮 carry-over まで同期し、new implementation queue は reopened していません。
 - 2026-04-30 の order-handoff / witness-provider active evidence refresh では、active `specs/examples/471/472/473/476/477/483/484/489/490/493/496/499/502/503/504/505/515` の evidence rows を retired current-L2 target 名から current clean-near-end commands へ移行し、historical report は触らずに active docs authority だけを current runtime/suite surface へ寄せました。runtime-floor evidence と helper-local / doc-level judgment の境界も明示し、new implementation queue は reopened していません。
 - 2026-04-30 の model-check active evidence refresh では、active `specs/examples/478/480/482/488/492/495` の evidence rows を retired model-check helper/test names から current clean-near-end / compatibility-front-door / CLI-shaped commands へ移行し、historical `e5 / p05 / p06 / p07 / p08 / p09` labels は package-reading anchor に下げました。`closeout` rows も canonical inventory / current emitted rows までに限定し、new implementation queue は reopened していません。
+- 2026-04-30 の Problem 2 actual-package evidence refresh では、active `specs/examples/467` の historical `p07/p08` reading を current Sugoroku handoff / late-join slices と network stale-reconnect canary + family check へ分解し、old current-L2 runner / CLI labels も current compatibility-front-door / CLI-shaped clean-sample surface へ寄せました。`NET-03` は stale reconnect / membership-epoch guard canary に限定し、new implementation queue は reopened していません。
 
 ## executable floor
 
