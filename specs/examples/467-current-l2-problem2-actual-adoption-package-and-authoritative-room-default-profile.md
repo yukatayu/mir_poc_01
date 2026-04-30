@@ -210,7 +210,7 @@ current package は次で止める。
 - `delegated_rng_service` practical package gate
 - exhaustive catalog / stronger fairness profile gate
 
-## next self-driven line
+## historical package-local next self-driven line
 
 historical Problem 2 側の package-local next line としては、
 次の 2 本が compare-anchor memory に残る。

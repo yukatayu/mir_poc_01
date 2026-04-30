@@ -106,9 +106,14 @@ adjacent clean-near-end order-handoff checksへ分かれている。
 - final emitted handoff contract
 - final replay taxonomy
 
-## next self-driven line
+## historical package-local next self-driven line
 
-next line は次の 2 本に分けるのが自然である。
+historical helper-summary memory の package-local next line としては、
+次の 2 本に分ける読みが compare-anchor memory に残る。
 
 1. `auditable_authority_witness` / `delegated_rng_service` reserve strengthening
 2. docs/report closeout と sample-facing Japanese explanation 追加
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の next line を promote しない。

@@ -126,11 +126,15 @@ current package は次で止める。
 - production checker/runtime-policy contract
 - final public verifier contract
 
-## next self-driven line
+## historical package-local next reopen line
 
-current package を close した後の next reopen line は、
+historical package-local next reopen line としては、
 
 1. later mixed gate lane
 2. true user-spec hold line
 
-に移るのが自然である。
+に移る読みが compare-anchor memory に残る。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の next reopen line を promote しない。

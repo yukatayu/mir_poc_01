@@ -92,13 +92,17 @@ current package は次で止める。
 - concrete theorem prover production binding
 - stronger typed-surface source-principal adoption
 
-## next self-driven line
+## historical package-local next self-driven line
 
 theorem-prover experimental binding preflight は `specs/examples/474` で close 済みである。
-current next self-driven line は、
+historical package-local next line としては、
 
 1. `auditable_authority_witness`
 2. `delegated_rng_service`
 3. model-check second-line concretization
 
-として読むのが自然である。
+を compare-anchor memory として読むのが自然である。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の self-driven implementation line を promote しない。

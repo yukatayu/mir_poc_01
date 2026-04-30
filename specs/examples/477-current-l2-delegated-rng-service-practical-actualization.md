@@ -157,7 +157,7 @@ current package は次で止める。
 - control-plane separated carrier
 - exhaustive shared-space catalog
 
-## next self-driven line
+## historical package-local next self-driven line
 
 historical package-local next line としては
 model-check second-line concretization が compare-anchor memory に残る。

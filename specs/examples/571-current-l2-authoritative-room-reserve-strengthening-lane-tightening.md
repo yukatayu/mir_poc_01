@@ -182,11 +182,15 @@ current package は次で止める。
 - exhaustive shared-space catalog
 - distributed fairness theorem
 
-## next self-driven line
+## historical package-local next self-driven line
 
-current package を close した後の principal self-driven line は、
+historical package-local follow-up line としては、
 
 1. Package 98 docs / plan / progress / tasks / traceability closeout
 2. 二大問題それぞれの簡潔な日本語解説付き sample 追加
 
-に移るのが自然である。
+に移る読みが compare-anchor memory に残る。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の principal self-driven line を promote しない。

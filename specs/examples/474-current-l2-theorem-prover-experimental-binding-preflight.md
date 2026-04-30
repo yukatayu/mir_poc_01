@@ -100,6 +100,6 @@ current package は次で止める。
 - proof object public schema gate
 - final public verifier contract gate
 
-## next self-driven line
+## current maintenance reading
 
 current theorem-side active evidence floor は maintenance lane で保持し、nearby theorem docs / repository memory mirror と focused validation を先に揃える。product-shaping reopen point は引き続き `U1` actual commitment である。

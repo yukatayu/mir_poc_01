@@ -109,9 +109,9 @@ current package は次で止める。
 - `serial` sugar を authoritative-room default へ昇格させるか
 - final handoff wording / emitted-artifact schema / modal marker gate
 
-## next self-driven line
+## historical package-local next self-driven line
 
-current next self-driven line は、
+historical package-local next line としては、
 
 1. reserve strengthening:
    `auditable_authority_witness`
@@ -120,4 +120,8 @@ current next self-driven line は、
 3. model-check second-line concretization
 
 を優先しつつ、
-surface narrowing 自体は current helper-local compare floor で保持する読みが自然である。
+surface narrowing 自体は current helper-local compare floor で保持する読みが compare-anchor memory に残る。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の self-driven implementation line を promote しない。

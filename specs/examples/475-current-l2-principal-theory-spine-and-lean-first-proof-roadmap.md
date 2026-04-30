@@ -280,7 +280,7 @@ current package は次で止める。
 6. proof/formalization route の current recommendation は Lean-first に置いてよい。
 7. ここで fixed するのは current direction であり、final calculus adoption や final public contract ではない。
 
-## next self-driven line
+## historical package-local next self-driven line
 
 historical package-local follow-up chain としては、
 少なくとも次が compare-anchor memory に残る。

@@ -96,12 +96,16 @@ current package は次で止める。
 - distributed fairness theorem
 - provider receipt / attestation public schema
 
-## next self-driven line
+## historical package-local next self-driven line
 
-Problem 2 側の next self-driven line は、次の 2 本に分かれる。
+historical Problem 2 側の package-local next line としては、次の 2 本が compare-anchor memory に残る。
 
 1. `auditable_authority_witness` strengthening
 2. `delegated_rng_service` practical package
 
 minimal companion / experimental order-handoff surface は、
-source wording 側の next package として別 line で扱う。
+source wording 側の package-memory follow-up line として別 line で扱う。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の self-driven implementation line を promote しない。

@@ -88,9 +88,13 @@ current package は次で止める。
 - final modal foundation adoption
 - full dependent / multimodal calculus adoption
 
-## next self-driven line
+## historical package-local next self-driven line
 
-syntax / modality line の next self-driven line は、
+syntax / modality line の historical package-local next line としては、
 surface narrowing note `specs/examples/473` と theorem-prover experimental binding preflight `specs/examples/474` を close 済みと読んだ上で、
 reserve strengthening package を優先しつつ、
-companion surface 自体は helper-local cut に留める読みが自然である。
+companion surface 自体は helper-local cut に留める読みが compare-anchor memory に残る。
+
+ただし current repo-level queue authority は `progress.md` / `tasks.md` にあり、
+2026-04-30 current-line maintenance closeout 後に
+この package から追加の self-driven implementation line を promote しない。

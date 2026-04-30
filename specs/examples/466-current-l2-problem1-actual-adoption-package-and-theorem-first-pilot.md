@@ -176,7 +176,7 @@ current package は次で止める。
 - settled property language gate
 - model-check concrete tool-seam gate
 
-## next self-driven line
+## historical package-local next self-driven line
 
 historical package-local next line としては
 `theorem-first experimental pilot actualization`

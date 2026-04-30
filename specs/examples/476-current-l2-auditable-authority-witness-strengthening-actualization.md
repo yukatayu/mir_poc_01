@@ -157,7 +157,7 @@ current package は次で止める。
 - exhaustive shared-space catalog
 - final replay invalidation protocol taxonomy
 
-## next self-driven line
+## historical package-local next self-driven line
 
 historical package-local next line としては
 `delegated_rng_service` と model-check second-line concretization が compare-anchor memory に残る。
