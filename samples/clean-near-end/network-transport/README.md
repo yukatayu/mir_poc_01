@@ -10,6 +10,10 @@
 
 ## active commands
 
+`check-all` is the executable canary anchor for `NET-02..05`.
+`closeout` is inventory evidence only; it records process-boundary scope, parity anchors,
+non-collapse lanes, kept-later gates, and validation-floor wording.
+
 ```bash
 python3 scripts/network_transport_samples.py list
 python3 scripts/network_transport_samples.py run NET-02 --debug route-trace

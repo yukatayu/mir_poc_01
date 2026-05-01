@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 11:42 JST
+最終更新: 2026-05-01 11:53 JST
 
 ## この文書について
 
@@ -34,6 +34,8 @@
   executable canary は `python3 scripts/network_transport_samples.py check-all --format json`、`closeout` は inventory evidence として扱います。
 - guided helper retirement audit は 2026-05-01 11:42 JST に再確認済みです:
   `current_l2_guided_samples.py` は `list / smoke-all / closeout` の compatibility wrapper であり、pre-clean-near-end prototype / bundle / reserve wording は `plan/00` / `plan/10` で historical comparison memory へ冷却済みです。
+- network transport active sample docs は 2026-05-01 11:53 JST に再確認済みです:
+  sample README / hands-on canary / `plan/22` は `check-all` executable canary anchor と `closeout` inventory evidence を分離し、`NET-01` を Sugoroku loopback parity anchor として扱います。
 
 ## executable floor
 

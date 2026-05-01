@@ -72,7 +72,7 @@ current helper closeout に
    - same-process logical multi-place current floor
 2. `loopback_socket` parity
    - same envelope fields / same rejection family / same witness references
-   - helper-local `NET-01` canary として `SUG-01` attach、`SUG-03` publish/handoff、`SUG-04` reject path、`check-all --transport loopback_socket` を actualize 済み
+   - helper-local `NET-01` parity anchor として `SUG-01` attach、`SUG-03` publish/handoff、`SUG-04` reject path を `sugoroku_world_samples.py run ... --transport loopback_socket` で actualize 済み。`network_transport_samples.py check-all` は `NET-02..05` の実行 anchor であり、`--transport` flag は持たない
 3. `two_process_loopback`
    - process boundary をまたぐ attach / publish / handoff path
    - 2026-04-27 current cut では `scripts/network_transport_samples.py run NET-02` として helper-local subprocess JSON bridge canary を actualize 済み
@@ -95,8 +95,8 @@ current helper closeout に
   - `non_collapse_lanes`
   - `kept_later_gates`
   - `validation_floor`
-- current reading は、`NET-01..05` helper-local canary を process-boundary closeout として束ね、
-  real transport runtime と誤読させない inventory を executable closeout に固定した、というところで止める。
+- current reading は、reported `NET-01` loopback parity anchor と runnable `NET-02..05` helper-local canary を process-boundary inventory として束ねる。
+  `check-all` は `NET-02..05` の executable canary anchor、`closeout` は inventory evidence であり、real transport runtime と誤読させないところで止める。
 
 ## stop line
 

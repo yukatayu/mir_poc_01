@@ -13,6 +13,9 @@
 
 ## まず実行するコマンド
 
+`check-all` が `NET-02..05` を実行する canary validation anchor です。
+`closeout` は process-boundary scope / canary inventory / kept-later gates を返す inventory evidence であり、canary 実行結果そのものとして扱いません。
+
 ```bash
 python3 scripts/network_transport_samples.py list
 python3 scripts/network_transport_samples.py run NET-02 --debug route-trace
