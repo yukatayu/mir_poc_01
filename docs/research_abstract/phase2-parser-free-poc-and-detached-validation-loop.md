@@ -7,6 +7,8 @@ repo が今どこまで動くかを、parser-free な helper と fixture-friendl
 
 ## 2026-04-23 時点で固まっていること
 
+この節は dated repository-memory anchor です。live status / macro phase / next queue authority は `../../progress.md` と `../../tasks.md` を参照してください。
+
 - `scripts/current_l2_guided_samples.py` による suite-level smoke / closeout
 - `scripts/clean_near_end_samples.py` による family-level run / matrix / closeout
 - `scripts/current_l2_lean_sample_sync.py` による Lean foundations / generated stub の同期

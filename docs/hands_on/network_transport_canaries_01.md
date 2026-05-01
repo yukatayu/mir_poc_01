@@ -1,6 +1,6 @@
 # network transport canaries 01
 
-2026-04-28 current closeout では、phase 13 `Network transport` を **helper-local executable canary + process-boundary closeout** として追います。
+2026-04-28 dated first-cut closeout では、phase 13 `Network transport` を **helper-local executable canary + process-boundary closeout** として追いました。live repo 全体の queue authority は `progress.md` と `tasks.md` を参照してください。
 
 ここで確認するのは、
 

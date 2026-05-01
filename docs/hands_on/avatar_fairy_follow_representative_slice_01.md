@@ -2,7 +2,7 @@
 
 legacy phase 8 sample-family label `avatar fairy follow / fallback anchor` の current runnable floor を最短で追うための page です。
 
-current macro-phase reading は `Macro 6 reserve` です。
+family-local historical lane label は `Macro 6 reserve` です。live repo 全体の macro phase / queue authority は `progress.md` と `tasks.md` を参照してください。
 
 ## run
 

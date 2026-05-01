@@ -7,6 +7,8 @@ Phase 1 は、Mir current-L2 の意味論を **まだ final public syntax に固
 
 ## 2026-04-23 時点で固まっていること
 
+この節は dated repository-memory anchor です。live status / macro phase / next queue authority は `../../progress.md` と `../../tasks.md` を参照してください。
+
 - `atomic_cut` は local finalization / rollback frontier
 - compatibility-preserving overlay と DAG-safe evolution を core invariant として維持
 - order / handoff の principal reading は high-level relation family

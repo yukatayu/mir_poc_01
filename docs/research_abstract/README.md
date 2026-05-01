@@ -8,6 +8,8 @@
 - ここは current state を素早くつかむための summary / detail です
 - 実行コマンド付きの landing page は `../hands_on/README.md` と `../hands_on/current_phase_closeout_01.md` を参照してください
 
+このディレクトリの phase summary は、dated repository-memory anchor を含みます。live status / macro phase / next queue authority は `../../progress.md` と `../../tasks.md`、runnable sample dashboard は `../../samples_progress.md` を正とし、`2026-04-23 時点` の phase wording を最新状態そのものとして読まないでください。
+
 ## 読み方
 
 このディレクトリは 2 層に分かれています。
