@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-01 10:33 JST
+Last updated: 2026-05-01 10:46 JST
 Current repo-local focus: current-L2 / clean near-end runnable floor, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -62,7 +62,7 @@ Notes:
 | `P19-HOTPLUG-CARRIER` | hot-plug carrier | `crates/mirrorea-core/src/fabric.rs` | Rust carrier | 90 | positive + negative | 2026-05-01 10:26 JST | `0988`, `0998`, `1066` | engine-neutral request/verdict carrier |
 | `P20-HOTPLUG-SKELETON` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | thin runtime/report assembly | 90 | positive + negative | 2026-05-01 10:26 JST | `0989`, `0991`, `0998`, `1066` | not completed engine |
 | `P21-HOTPLUG-ENGINE-STATE` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | narrow runtime engine-state floor | 90 | positive + negative | 2026-05-01 10:26 JST | `0993`, `0996`, `0997`, `0998`, `1066` | non-public runtime-private state progression; freeze prerequisite fixed, public ABI still unfrozen |
-| `STORAGE-01` | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | operational guardrail | 100 | positive | 2026-05-01 10:26 JST | `0972`, `0998`, `1066` | no destructive cleanup / no actual LLVM build |
+| `STORAGE-01` | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | operational guardrail | 100 | positive | 2026-05-01 10:46 JST | `0972`, `0998`, `1066`, `1072` | no destructive cleanup / no actual LLVM build |
 
 ## E2E samples
 
@@ -94,6 +94,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-01 10:46 JST | storage guardrail freshness audit | pass with known storage warning | `df -h`, `free -h`, `lsblk -f`, `findmnt`, repo/external `du`, and `bash scripts/storage/detach_prepare.sh` ran. `/mnt/mirrorea-work` remained mounted with external workdir available; repo root stayed small; `detach_prepare.sh` reported the known `/mnt/mirrorea-work/llvm` root-owned warning, listed disposable candidates, and deleted no files. |
 | 2026-05-01 10:26 JST | full validation + Lean/storage supplemental floor | pass with known storage warning | 16-command full floor passed at this checkpoint: source hierarchy / docs scaffold, current-L2, clean near-end, Sugoroku, avatar, typed external, network, projection, viewer, Cargo crate tests, `cargo fmt --check`, and `git diff --check`; log review found no actual Rust warnings / panics / failed targets. Supplemental `current_l2_lean_sample_sync.py` passed and left the tree clean. `detach_prepare.sh` passed with known `/mnt/mirrorea-work/llvm` root-owned warning and no deletion. |
 | 2026-05-01 09:34 JST | warning-noise focused floor | pass | `RUSTFLAGS="-D warnings" cargo test -p mir-ast --test current_l2_stage3_predicate_fragment_spike`、`RUSTFLAGS="-D warnings" cargo test -p mir-semantics --test current_l2_lean_theorem_stub_actual_probe`、`cargo test -p mir-ast`、`cargo test -p mir-semantics`、`cargo fmt --check`、`git diff --check` passed; cleanup was item-level allow for target-specific shared support helpers, not sample behavior change |
 | 2026-05-01 09:26 JST | full validation freshness floor | pass with existing warnings | source hierarchy / docs scaffold passed at that checkpoint; later guardrail packages expanded the required path set. current-L2 / clean near-end / Lean sync / Sugoroku / avatar / typed external / network / projection / viewer closeouts passed、`detach_prepare.sh` passed with known `/mnt/mirrorea-work/llvm` root-owned warning、Cargo floor and `cargo fmt --check` passed with existing dead-code warnings only、`git diff --check` passed |
