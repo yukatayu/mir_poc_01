@@ -90,6 +90,7 @@ pub fn load_fixture_request_clause_fragment(
     parse_fixture_predicate_fragment(predicate)
 }
 
+#[allow(dead_code)]
 pub fn load_fixture_perform_head(
     fixture_name: &str,
     perform_index: usize,
@@ -266,6 +267,7 @@ fn parse_fixture_predicate_fragment(value: &Value) -> Result<Stage3PredicateFrag
     }
 }
 
+#[allow(dead_code)]
 fn parse_fixture_perform_head(value: &Value) -> Result<Stage3PerformHead, String> {
     let kind = value
         .get("kind")

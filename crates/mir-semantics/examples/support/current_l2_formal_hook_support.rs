@@ -7,7 +7,9 @@ const FORMAL_HOOK_SCHEMA_VERSION: &str = "draft-current-l2-formal-hook-v0";
 const FORMAL_HOOK_ARTIFACT_KIND: &str = "current-l2-tool-neutral-formal-hook";
 const STATIC_GATE_SCHEMA_VERSION: &str = "draft-current-l2-static-gate-v0";
 const STATIC_GATE_ARTIFACT_KIND: &str = "current-l2-static-gate-detached-sketch";
+#[allow(dead_code)]
 const DETACHED_BUNDLE_SCHEMA_VERSION: &str = "draft-current-l2-detached-bundle-v0";
+#[allow(dead_code)]
 const DETACHED_BUNDLE_ARTIFACT_KIND: &str = "current-l2-bundle-detached-sketch";
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -62,6 +64,7 @@ pub fn build_formal_hook_from_static_gate_artifact(
     })
 }
 
+#[allow(dead_code)]
 pub fn build_formal_hook_from_detached_bundle_artifact(
     artifact: &DetachedBundleArtifact,
 ) -> Result<ToolNeutralFormalHookArtifact, String> {
@@ -119,6 +122,7 @@ fn validate_static_gate_artifact(artifact: &DetachedStaticGateArtifact) -> Resul
     Ok(())
 }
 
+#[allow(dead_code)]
 fn validate_detached_bundle_artifact(artifact: &DetachedBundleArtifact) -> Result<(), String> {
     if artifact.schema_version != DETACHED_BUNDLE_SCHEMA_VERSION {
         return Err(format!(

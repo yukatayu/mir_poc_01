@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 09:26 JST
+最終更新: 2026-05-01 09:34 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 09:34 JST — existing `dead_code` warning noise の narrow cleanup を行い、target-specific に未使用となる shared support helpers へ item-level `#[allow(dead_code)]` を付けた。削除や artificial use は避け、`RUSTFLAGS="-D warnings"` targeted guards、`cargo test -p mir-ast`、`cargo test -p mir-semantics`、`cargo fmt --check`、`git diff --check` を pass した。
 - 2026-05-01 09:26 JST — full validation freshness checkpoint を rerun し、source hierarchy / docs scaffold / current-L2 / clean near-end / Lean sync / Sugoroku / avatar / typed external / network / projection / viewer / storage guardrail / Cargo test floor / `cargo fmt --check` / `git diff --check` が pass した。`check_source_hierarchy.py` は `scripts/README.md` 追加後の required 24 / present 24、storage guardrail は既知の `/mnt/mirrorea-work/llvm` root-owned warning、Cargo は既存 dead-code warning のみだった。
 - 2026-05-01 09:20 JST — docs validator / source-hierarchy guardrail を軽量監査し、`check_source_hierarchy.py` と `validate_docs.py` は structural / scaffold check であり stale-wording lint や semantic validation ではないことを `scripts/README.md` に明記した。script taxonomy front door の存在確認として `scripts/README.md` を source-hierarchy required set に追加し、targeted check、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-05-01 09:16 JST — `tasks.md` / `samples_progress.md` の snapshot dashboard freshness を監査し、1046-1050 の wording-cooling package は runnable sample path / validation command / progress percentage / blocker / promoted implementation queue を変えていないため、両 dashboard は更新不要と判断した。新規 report で判断と sub-agent close を記録し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。

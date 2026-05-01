@@ -5,6 +5,7 @@ use mir_semantics::{
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[allow(dead_code)]
 pub struct DetachedBundleArtifact {
     pub schema_version: String,
     pub artifact_kind: String,
@@ -14,6 +15,7 @@ pub struct DetachedBundleArtifact {
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[allow(dead_code)]
 pub struct BundleContextArtifact {
     pub fixture_id: String,
     pub fixture_path: String,
@@ -22,6 +24,7 @@ pub struct BundleContextArtifact {
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[allow(dead_code)]
 pub struct PayloadCoreArtifact {
     pub static_verdict: String,
     pub entered_evaluation: bool,
@@ -32,16 +35,19 @@ pub struct PayloadCoreArtifact {
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[allow(dead_code)]
 pub struct NonAdmissibleMetadataArtifact {
     pub option_ref: String,
     pub subreason: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[allow(dead_code)]
 pub struct DetachedNoncoreArtifact {
     pub steps_executed: usize,
 }
 
+#[allow(dead_code)]
 pub fn build_detached_bundle_artifact(
     bundle: &FixtureBundle,
     bundle_report: &BundleRunReport,
@@ -86,6 +92,7 @@ pub fn build_detached_bundle_artifact(
     }
 }
 
+#[allow(dead_code)]
 fn runtime_requirement_name(value: FixtureRuntimeRequirement) -> &'static str {
     match value {
         FixtureRuntimeRequirement::StaticOnly => "static-only",
@@ -93,6 +100,7 @@ fn runtime_requirement_name(value: FixtureRuntimeRequirement) -> &'static str {
     }
 }
 
+#[allow(dead_code)]
 fn static_verdict_name(value: StaticGateVerdict) -> &'static str {
     match value {
         StaticGateVerdict::Valid => "valid",
@@ -101,6 +109,7 @@ fn static_verdict_name(value: StaticGateVerdict) -> &'static str {
     }
 }
 
+#[allow(dead_code)]
 fn terminal_outcome_name(value: TerminalOutcome) -> &'static str {
     match value {
         TerminalOutcome::Success => "success",
@@ -109,6 +118,7 @@ fn terminal_outcome_name(value: TerminalOutcome) -> &'static str {
     }
 }
 
+#[allow(dead_code)]
 fn event_kind_name(value: EventKind) -> &'static str {
     match value {
         EventKind::PerformSuccess => "perform-success",
@@ -119,6 +129,7 @@ fn event_kind_name(value: EventKind) -> &'static str {
     }
 }
 
+#[allow(dead_code)]
 fn non_admissible_subreason_name(value: NonAdmissibleSubreason) -> &'static str {
     match value {
         NonAdmissibleSubreason::AdmitMiss => "admit-miss",
@@ -126,6 +137,7 @@ fn non_admissible_subreason_name(value: NonAdmissibleSubreason) -> &'static str 
     }
 }
 
+#[allow(dead_code)]
 fn non_admissible_metadata_artifact(
     value: &NonAdmissibleMetadata,
 ) -> NonAdmissibleMetadataArtifact {
