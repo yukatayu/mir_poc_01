@@ -71,31 +71,30 @@ helper schema の widening、runtime-crate engine 実装、final public ABI の�
 - helper-local view / telemetry anchor names
   != final public viewer / telemetry API
 
-## current recommendation
+## repository-memory recommendation
 
-- `R2` current minimal contract row は、そのまま helper-local evidence floor として読む
+- `R2` minimal contract row は、そのまま helper-local evidence floor として読む
 - `migration_contract` row は protocol ではなく、
-  current unresolved state を honest に visible にするための row として読む
+  unresolved state を honest に visible にするための row として読む
 - `activation_cut` を広げるときも、first claim は
   request-vs-active-state split に留め、
   distributed activation ordering は kept-later boundary に残す
 - rollback / migration / runtime-crate engine / final public ABI を、
-  current helper-local package-manager inventory に仮託して claim しない
+  helper-local package-manager inventory に仮託して claim しない
 - historical next relation after `R4` close は
   `R5` runtime-crate hot-plug engine ownership cut とし、
   helper-local preview、crate-side carrier、runtime orchestration の owner split を narrow に整理する
 - `R5` closeout 後の owner split memory は
   `plan/33-runtime-crate-hotplug-engine-ownership-cut.md`
-  を reader-facing current memory として参照する
-- current repo state では `P21` も close 済みであり、
-  post-`P21` later family の first recommendation は
+  を reader-facing repository memory として参照する
+- `P21` は historical closeout chain に残る runtime-private engine-state floor であり、
+  post-`P21` later family の historical first boundary family は
   `plan/36-post-p21-rollback-durable-migration-family.md`
-  を入口にした `rollback / durable migration` family hardening と読む
-- current repo state では
-  second recommendation も
+  を入口にした `rollback / durable migration` family と読む
+- historical second boundary family も
   `plan/37-post-p21-distributed-activation-ordering-family.md`
-  を入口にした docs-first hardening として close 済みである
-- third recommendation family の current repository memory は
+  を入口にした docs-first family として close 済みである
+- last historical boundary family は
   final public hot-plug ABI であり、
   `plan/38-post-p21-final-public-hotplug-abi-family.md`
   を入口に読む

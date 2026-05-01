@@ -23,7 +23,7 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 2. parser-free current L2 の runnable validation substrate
 3. compile-ready minimal actualization と fixed-subset source sample の narrow runnable path
 
-したがって current reading は、
+したがって repository-memory reading は、
 **architecture-first だが、fixed subset は理論と実行を ratchet で並走させている**
 である。
 
@@ -33,7 +33,7 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 
 - 主眼:
   fixed-subset source sample と malformed family の narrow widening
-- current line:
+- standing line in this memory:
   `Macro 4 active on fixed authored/prototype floor`
   （current-l2 authored sixteen、corrected prototype set `p01...p14`、runner / CLI / regression floor は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
 - goal:
@@ -44,7 +44,7 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 - 主眼:
   typed / theorem / model-check / order / memory / syntax / modality を
   docs-first comparison と boundary planning で進める
-- current line:
+- standing line in this memory:
   `Macro 5 repo-local closeout reached / no promoted self-driven package`
   （`specs/examples/458...563` compare / adoption / helper-local actualization / actual Lean execution floor は repository memory として close 済みであり、current snapshot では theory-lab 側に新しい promoted self-driven package は置いていない。残るのは mixed gate、reserve interpretation、public-boundary readiness、docs freshness であり、queue authority は `progress.md` / `tasks.md` / `plan/11-roadmap-near-term.md` を正とする）
 - goal:
@@ -54,7 +54,7 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 
 - 主眼:
   thin facade / public shell / shared-space / host-I/O boundary を hidden promotion なしで整理する
-- current line:
+- standing line in this memory:
   `Macro 6-7 repo-local floor reached / mixed gate held open`
   （carrier/runtime floor、typed external preview、network canary、projection/codegen bridge evidence、viewer prototype inventory、hot-plug `P21` narrow floor、post-`P21` docs-first trilogy は current scope で close 済みである。`U1` actual commitment が未決の間、ここで自走する current line は new implementation ではなく maintenance / docs freshness / validation rerun である）
 - goal:
@@ -88,7 +88,7 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 - typed / theorem / model-check / ordering 側の proof-promotion memory、finite decidable first fragment、non-adoption boundary は `plan/18` で管理する。
 - old fixed EBNF、old bundled `atomic_cut` / `durable_cut` / `barrier` surface、tool brand fixed、Stage `0...4` / `1.0` product roadmap は current repo にそのまま戻さない。
 
-## current recommendation
+## standing recommendation
 
 - Lane A は narrow actualization を維持する。
   - corrected runnable prototype と helper-local `debug_outputs` / `verification_preview` を使って usability / falsifier comparison を進めてよい。

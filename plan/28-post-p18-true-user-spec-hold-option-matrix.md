@@ -28,7 +28,7 @@ repository memory である。
 3. `engine-adapter`
 4. `hybrid`
 
-### current recommendation
+### provisional recommendation recorded here
 
 `library-first` を provisional recommendation に置く。
 
@@ -52,7 +52,7 @@ repository memory である。
 3. `engine`
 4. `mixed`
 
-### current recommendation
+### provisional recommendation recorded here
 
 `native process` を provisional recommendation に置く。
 
@@ -73,7 +73,7 @@ repository memory である。
 2. `adapter/viewer/projection/hot-plug first`
 3. `two-step split`
 
-### current recommendation
+### provisional recommendation recorded here
 
 `two-step split` を provisional recommendation に置く。
 
@@ -96,7 +96,7 @@ repository memory である。
 2. `portal / multi-world expansion`
 3. `fairness / quorum / exhaustive catalog`
 
-### current recommendation
+### provisional recommendation recorded here
 
 `minimal subset` を長く維持する。
 
@@ -109,7 +109,7 @@ repository memory である。
 この文書では principal axis にしない。
 
 - broader application target は上の 4 軸に依存する
-- current recommendation は、
+- recommendation recorded here:
   まず packaging shape / host target / shipped-surface scope / catalog breadth を narrow にしてから
   upper-layer application target を reopen することである
 

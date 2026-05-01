@@ -2,9 +2,9 @@
 
 ## role
 
-この文書は、`P21` runtime-crate hot-plug completed-engine narrow cut の後に残る
+この文書は、`P21` runtime-crate hot-plug engine-state narrow floor の後に残る
 later family のうち、
-**`rollback / durable migration` を first recommendation として読む current repository memory**
+**`rollback / durable migration` を historical first boundary family として読む repository memory**
 を置く。
 
 - exact package label / numbering はここでも固定しない
@@ -20,7 +20,7 @@ later family のうち、
   `assemble_hotplug_runtime_engine_report()`
   `build_hotplug_runtime_engine_report()`
   が actualize 済みである
-- current narrow runtime-side state family は
+- narrow runtime-side state family は
   `attach_ready_for_activation_cut`
   `attach_rejected_before_activation`
   `attach_deferred_before_activation`
@@ -35,7 +35,7 @@ later family のうち、
   `hotplug_view_ids`
   `hotplug_telemetry_row_ids`
   に残る
-- current docs-first boundary matrix は
+- docs-first boundary matrix は
   `plan/32-hotplug-real-migration-rollback-boundary.md`
   にあり、
   `activation_cut != distributed activation ordering`
@@ -50,9 +50,9 @@ later family のうち、
 - rollback / durable migration / reattach semantics は
   current helper-local anchor と current runtime-side state progression の両方に grounded に読める
 - distributed activation ordering は
-  `activation_cut` の widening criteria を別に必要とするため second recommendation に残す
+  `activation_cut` の widening criteria を別に必要とするため separate boundary family に残す
 - final public hot-plug ABI は
-  post-`P18` mixed gate / `U1` hold line の dependency を持つため third recommendation に残す
+  post-`P18` mixed gate / `U1` hold line の dependency を持つため later boundary family に残す
 
 ## family scope
 
@@ -81,25 +81,25 @@ later family のうち、
 | rejoin / reattach semantics | `migration_contract` widening の一部として detach -> reattach continuity を読める | membership reincarnation / place rebinding / ownership continuity が standalone cut を要求する |
 | runtime-private names vs public names | runtime-private state / witness / reason family のまま読める | public request/response/event / package catalog naming を決める必要が出る |
 
-## current recommendation
+## repository-memory reading
 
 - exact post-`P21` package label は intentionally unfixed のまま保つ
-- first recommendation closeout memory は
+- historical first boundary family memory は
   **`rollback / durable migration` family hardening**
   と読む
-- `distributed activation ordering` は second recommendation とし、
+- `distributed activation ordering` は historical second boundary family とし、
   `activation_cut` widening criteria の package に残す
-- second recommendation family の current repository memory は
+- historical second boundary family memory は
   `plan/37-post-p21-distributed-activation-ordering-family.md`
   を参照する
-- `final public hot-plug ABI` は third recommendation とし、
+- `final public hot-plug ABI` は last historical boundary family とし、
   post-`P18` mixed gate / `U1` hold line に残す
-- third recommendation family の current repository memory は
+- last historical boundary family memory は
   `plan/38-post-p21-final-public-hotplug-abi-family.md`
   を参照する
 - `AttachPoint` / `Patch` packaging identity は
-  current line では engine-private / preview inventory に留め、
-  first recommendation family でも public ABI に昇格させない
+  repo-local current layer では engine-private / preview inventory に留め、
+  this boundary family でも public ABI に昇格させない
 
 ## validation floor
 

@@ -64,7 +64,7 @@ states:
 
 ## provisional recommendation
 
-current docs-first recommendation is:
+the provisional docs-first reading recorded here is:
 
 - keep helper closeout implementation inventory at `carrier_choice = UNRESOLVED`
 - narrow repository memory to a provisional reading in which `FAIRY-05`
@@ -74,7 +74,7 @@ current docs-first recommendation is:
 - carry visibility-return witness as a timeline witness ref inside that bundle,
   rather than as a standalone top-level carrier
 
-### why this is the current best narrow line
+### why this is the recorded narrow line
 
 - the planned sample explicitly requires both timeline and switch evidence
 - the planned sample wording already points to witness refs inside timeline
@@ -102,7 +102,7 @@ Do not reopen `FAIRY-05` as runnable widening unless the same package carries:
 - explicit helper-local evidence for ordering and switch boundary
 - docs / report / snapshot sync
 
-## current reopen-criteria inventory
+## reopen-criteria inventory
 
 - must be present in the same reopen package:
   - one positive reacquire-after-return sample
@@ -144,8 +144,8 @@ Do not claim:
 - real transport / session / auth semantics
 - hot-plug / `AttachPoint` implementation
 
-## current recommendation
+## historical follow-on focus
 
-historical next relation after `R3` closeout was to move toward kept-later hot-plug
+historical follow-on focus after `R3` closeout was kept-later hot-plug
 work around real migration / rollback boundary rather than looping on
 `FAIRY-05` wording again.

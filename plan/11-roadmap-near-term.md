@@ -6,7 +6,7 @@
 - ここに残す package chain / reopen wording は closeout memory と still-later boundary を読むためのもので、active maintenance line や fresh validation status は `progress.md` / `tasks.md` / `docs/reports/` で再確認する
 - reader-facing summary や hands-on mirror へ current line を反映するときも、この文書だけを live package pointer として読まない
 
-## current reading
+## repository-memory reading
 
 - clean near-end active suite と Sugoroku world vertical slice は current runnable floor として維持する
 - near-term line は 1 本ではなく、`sample/progress/storage discipline` と `Mirrorea future-axis carrier implementation` の 2 track で読む
@@ -27,11 +27,11 @@
 - `docs/reports/0931-*` は `HotPlug Patch / AttachPoint executable widening` closeout を表し、helper-local `hotplug_lifecycle` / `--debug hotplug` / `detach_request#1` canary を current line に actualize した
 - `docs/reports/0932-*` は `Network transport helper-local canaries` closeout を表し、`scripts/network_transport_samples.py`、active landing page、`NET-02..05` executable canary を current line に actualize した
 - `docs/reports/0933-*` は `Avatar fairy follow residual widening` closeout を表し、`FAIRY-02` visibility-loss fallback を active helper canary に昇格させ、phase 8 residual planned family を `FAIRY-05` だけに縮めた
-- `docs/reports/0934-*` は `cross-package sweep` closeout を表し、active evidence / planned family / mixed gate / next queue を `FAIRY-05` promoted line と typed external reopen point に recut した
+- `docs/reports/0934-*` は `cross-package sweep` closeout を表し、active evidence / planned family / mixed gate / historical next-step reading を `FAIRY-05` promoted line と typed external reopen point に recut した
 - `docs/reports/0939-*` は `FAIRY-05 residual reacquire design` docs-first closeout を表し、sample は planned のままに保ちつつ、explicit state timeline / anchor switch evidence gate と exact carrier bundling `UNRESOLVED` だけを current line に actualize した
 - `docs/reports/0941-*` は `Typed external boundary executable widening` closeout を表し、`EXT-03` / `EXT-04` thin synthetic preview helper cut と residual planned family `EXT-01` / `EXT-02` / `EXT-05` を current line に actualize した
 - `docs/reports/0942-*` は `Projection / placement executable widening` closeout を表し、Sugoroku helper `projection_view` / `--debug projection` と clean near-end runtime report-local `cross_place_projection` を current line に actualize した
-- `docs/reports/0945-mirrorea-next-stage-plan-integration.md` は next-stage future-plan integration / next package queue stabilization closeout を表し、handoff 由来の queue numbering と source-hierarchy current reading を repo へ再同期した
+- `docs/reports/0945-mirrorea-next-stage-plan-integration.md` は next-stage future-plan integration / package-sequencing wording stabilization closeout を表し、handoff 由来の queue numbering と source-hierarchy reading を repo へ再同期した
 - `docs/reports/0946-*` は `P2` Typed external boundary residual planned family review closeout を表し、typed external residual reopen matrix と helper pretty command floor を current line に actualize した
 - `docs/reports/0947-*` は `P3` wording drift inspection を表し、queue precision と overclaim risk を inspection report として残した
 - `docs/reports/0948-*` は `P3` Projection / placement residual emitted-program gate closeout を表し、projection validity report minimum、generated artifact reserve policy、`P15` handoff line を current docs に actualize した
@@ -61,13 +61,13 @@
 - `docs/reports/0986-*` は `R6` runtime-crate hot-plug carrier admission cut closeout を表し、post-`R5` の first admissible Rust-side hot-plug-specific family を engine-neutral request / verdict carrier に narrow に固定し、`P19` `mirrorea-core` hot-plug request/verdict carrier tranche と `P20` `mir-runtime` hot-plug orchestration skeleton first tranche の queue split を `plan/34` と reader-facing docs に actualize した
 - `docs/reports/0989-*` は `P20` `mir-runtime` hot-plug orchestration skeleton first tranche closeout を表し、`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize し、`P19` carrier と existing substrate を thin runtime/report assembly として接続した
 - `docs/reports/0988-*` は `P19` `mirrorea-core` hot-plug request/verdict carrier tranche closeout を表し、`crates/mirrorea-core/src/fabric.rs` に engine-neutral `HotPlugRequest` / `HotPlugVerdict` と `hotplug_request_lanes()` / `hotplug_verdict_lanes()` を actualize した
-- `docs/reports/0992-*` は `R7` post-`P20` hot-plug next-package inventory closeout を表し、`plan/35` と companion docs により `P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として固定し、package-level reopen next は exact label 未固定のまま `rollback / durable migration`、`distributed activation ordering`、`final public hot-plug ABI` の later family に grouped して残した
-- `docs/reports/0993-*` は `P21` runtime-crate hot-plug completed-engine narrow cut closeout を表し、`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` による runtime-side engine-state progression narrow cut と、exact next label intentionally unfixed の grouped later-family reading を `plan/35` と snapshot / reader-facing docs に actualize した
-- `docs/reports/0994-*` は post-`P21` rollback / durable migration family first recommendation closeout を表し、`plan/36` と companion docs により exact label intentionally unfixed のまま first recommendation / second recommendation / third recommendation ordering を current roadmap に actualize した
-- `docs/reports/0995-*` は post-`P21` distributed activation ordering family second recommendation closeout を表し、`plan/37` と companion docs により `activation_cut` widening criteria、durable activation commit / public ABI / transport-collapse stop line、当時の third recommendation handoff を current roadmap に actualize した。現在の third recommendation closeout は `plan/38` と `docs/reports/0997-*` を参照する
+- `docs/reports/0992-*` は `R7` post-`P20` hot-plug next-package inventory closeout を表し、`plan/35` と companion docs により `P21` runtime-crate hot-plug engine-state narrow floor を historical next narrow implementation cut として固定し、later-family reading after `P21` は exact label 未固定のまま `rollback / durable migration`、`distributed activation ordering`、`final public hot-plug ABI` の family に grouped して残した
+- `docs/reports/0993-*` は `P21` runtime-crate hot-plug engine-state narrow floor closeout を表し、`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` による runtime-side engine-state progression narrow cut と、exact later-family label intentionally unfixed の grouped later-family reading を `plan/35` と snapshot / reader-facing docs に actualize した
+- `docs/reports/0994-*` は post-`P21` rollback / durable migration family historical first boundary family closeout を表し、`plan/36` と companion docs により exact label intentionally unfixed のまま closed trilogy ordering を roadmap memory に actualize した
+- `docs/reports/0995-*` は post-`P21` distributed activation ordering family historical second boundary family closeout を表し、`plan/37` と companion docs により `activation_cut` widening criteria、durable activation commit / public ABI / transport-collapse stop line、当時の final-public-ABI handoff を roadmap memory に actualize した。final public hot-plug ABI family closeout は `plan/38` と `docs/reports/0997-*` を参照する
 - `docs/reports/0996-*` は post-`P21` final public hot-plug ABI family の audit を表し、minimum sync set、stale wording、traceability break、freeze-prerequisite stop line を inventory として残した
-- `docs/reports/0997-*` は post-`P21` final public hot-plug ABI family third recommendation closeout を表し、`plan/38` と companion docs により `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、remaining open gate = actual `U1` commitment を current roadmap に actualize した
-- next reopen point は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、third recommendation docs-first close の後に来る。current maintenance-only line かどうかの queue authority は `progress.md` / `tasks.md` に残す
+- `docs/reports/0997-*` は post-`P21` final public hot-plug ABI family last historical boundary family closeout を表し、`plan/38` と companion docs により `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、product-shaping gate = actual `U1` commitment を roadmap memory に actualize した
+- later reopen point retained in this memory は installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth の actual commitment であり、last historical boundary docs-first close の後に来る。maintenance-only line かどうかの queue authority は `progress.md` / `tasks.md` に残す
 
 ## historical closeout chain
 
@@ -89,7 +89,7 @@
 7. `U1` post-`P18` true user-spec hold option matrix
    - close 済み。packaging shape / host integration target / first shipped public surface / final shared-space operational catalog breadth を decision-ready inventory と provisional recommendation に整理した
 8. `R1` `VerificationLayer` widening threshold inventory
-   - close 済み。helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor、theorem / runtime-policy / visualization downstream stop line、`plan/29` current reading を fixed した
+   - close 済み。helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor、theorem / runtime-policy / visualization downstream stop line、`plan/29` threshold inventory を fixed した
 9. `R2` `AttachPoint` compatibility / detach minimal contract
    - close 済み。helper-local `hotplug_lifecycle` / explicit detach TODO boundary の current minimal contract row と kept-later migration / rollback gate を docs-first に固定した
 10. `R3` `FAIRY-05` visibility-return carrier bundling
@@ -105,15 +105,15 @@
 15. `P20` `mir-runtime` hot-plug orchestration skeleton first tranche
    - close 済み。`crates/mir-runtime/src/hotplug_runtime.rs` に dedicated `HotPlugRuntimeSkeletonReport`、consumer-side `assemble_hotplug_runtime_skeleton_report()`、example `build_hotplug_runtime_skeleton_report()` を actualize し、admitted request/verdict carrier と existing substrate の thin runtime/report assembly を current line に actualize した。completed engine、rollback、durable migration、distributed activation ordering、final public hot-plug ABI は kept-later に残す
 16. `R7` post-`P20` hot-plug next-package inventory
-   - close 済み。`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により、post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug completed-engine narrow cut を next narrow implementation line として固定した
-17. `P21` runtime-crate hot-plug completed-engine narrow cut
+   - close 済み。`plan/35-post-p20-hotplug-next-package-inventory.md` と companion docs により、post-`P20` kept-later lane を smallest plausible package cuts に分け、`P21` runtime-crate hot-plug engine-state narrow floor を historical next narrow implementation cut として固定した
+17. `P21` runtime-crate hot-plug engine-state narrow floor
    - close 済み。`HotPlugRuntimeEngineState` / `HotPlugRuntimeEngineReport`、consumer-side `assemble_hotplug_runtime_engine_report()`、example `build_hotplug_runtime_engine_report()` により、admitted request/verdict carrier と existing substrate の上に canonical runtime-side engine state progression を narrow に actualize した。rollback / durable migration / distributed activation ordering / final public hot-plug ABI は同じ tranche に混ぜない
 18. post-`P21` rollback / durable migration family
-   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/36-post-p21-rollback-durable-migration-family.md` で keep-one-family vs split-again criteria を fixed し、`distributed activation ordering` second recommendation と `final public hot-plug ABI` third recommendation を current line に残した
+   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/36-post-p21-rollback-durable-migration-family.md` で keep-one-family vs split-again criteria を fixed し、`distributed activation ordering` と `final public hot-plug ABI` を separately documented boundary families として残した
 19. post-`P21` distributed activation ordering family
-   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/37-post-p21-distributed-activation-ordering-family.md` で `activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、public ABI と transport-collapse stop line を docs-first に固定した。third recommendation family の current repository memory は `plan/38` を参照する
+   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/37-post-p21-distributed-activation-ordering-family.md` で `activation_cut` widening criteria、multi-place / multi-server ordering、durable activation commit、public ABI と transport-collapse stop line を docs-first に固定した。final public hot-plug ABI family memory は `plan/38` を参照する
 20. post-`P21` final public hot-plug ABI family
-   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/38-post-p21-final-public-hotplug-abi-family.md` で `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、`AttachPoint` / `Patch` packaging identity の preview-only line、remaining open gate = actual `U1` commitment を docs-first に固定した
+   - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/38-post-p21-final-public-hotplug-abi-family.md` で `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、`AttachPoint` / `Patch` packaging identity の preview-only line、product-shaping gate = actual `U1` commitment を docs-first に固定した
 
 ## mixed gate
 

@@ -3,9 +3,9 @@
 ## 目的
 
 この文書は、`R7` docs-first package として、
-`P20` current closeout の先に残る hot-plug kept-later lanes を
+`P20` closeout の先に残る hot-plug kept-later lanes を
 **smallest plausible package cuts** に分解し、
-次に narrow に昇格させる package を固定する。
+`R7` close time に next narrow implementation line として昇格させる package を固定する。
 
 ここで fixed するのは、
 
@@ -53,7 +53,7 @@ final public hot-plug ABI はここで actualize しない。
   example `build_hotplug_runtime_skeleton_report()`
   を actualize 済みである
 
-## fixed current facts
+## fixed closeout facts
 
 - helper-local
   `hotplug_lifecycle`
@@ -61,11 +61,11 @@ final public hot-plug ABI はここで actualize しない。
   `attach_lifecycle / detach_lifecycle`
   `attach_activation#1 / detach_boundary#1`
   は preview ownership に残る
-- Rust-side current actualized floor は
+- Rust-side actualized floor は
   `P19` request/verdict carrier と
   `P20` thin runtime/report assembly
   までである
-- `P20` current closeout は
+- `P20` closeout は
   completed engine ではなく、
   admitted carrier と existing substrate を結ぶ
   **consumer-side thin assembly**
@@ -82,7 +82,7 @@ final public hot-plug ABI はここで actualize しない。
 
 | cut | current owner / boundary | objective | may actualize here | must not claim here |
 |---|---|---|---|---|
-| `P21` runtime-crate hot-plug completed-engine narrow cut | `mir-runtime` over admitted carrier + existing substrate | `P19` / `P20` floor の上に canonical runtime-side hot-plug engine state progression を narrow に actualize する | request/verdict consumption、engine-side lifecycle state progression、runtime-side canonical state/report surface、reason-to-state mapping | rollback protocol、durable migration / reattach semantics、distributed activation ordering、final public hot-plug ABI、helper sample IDs の public/canonical 化 |
+| `P21` runtime-crate hot-plug engine-state narrow floor | `mir-runtime` over admitted carrier + existing substrate | `P19` / `P20` floor の上に runtime-private hot-plug engine-state report を narrow に actualize する | request/verdict consumption、runtime-side engine-state progression、runtime-private state/report surface、reason-to-state mapping | rollback protocol、durable migration / reattach semantics、distributed activation ordering、final public hot-plug ABI、helper sample IDs の public/canonical 化 |
 | later family `rollback / durable migration` | kept-later after `P21` | rollback state machine と migration / reattach semantics を実際の engine state の上で分けて整理する | current `migration_contract` honesty row から protocol / engine family への widening criteria | distributed activation ordering、final public ABI |
 | later family `distributed activation ordering` | kept-later after `P21` | multi-place / multi-server attach activation ordering と durable activation commit を整理する | `activation_cut` から ordering family への widening criteria | rollback completion、final public ABI |
 | later family `final public hot-plug ABI` | post-`P18` mixed gate / true user-spec hold | public request/response/event schema と naming を actual product target に結び付ける | public boundary option inventory、freeze prerequisites | helper-local anchor naming の public 化、engine completion without evidence |
@@ -90,13 +90,13 @@ final public hot-plug ABI はここで actualize しない。
 ## historical recommendation at `R7` close time
 
 - `R7` close time の next narrow implementation line は
-  **`P21` runtime-crate hot-plug completed-engine narrow cut**
+  **`P21` runtime-crate hot-plug engine-state narrow floor**
   とする
 - `P21` は
-  `P20` thin assembly を canonical runtime-side engine state progression へ
+  `P20` thin assembly を runtime-private engine-state report へ
   narrow に引き上げる package であり、
   first goal を rollback / migration / ordering へ拡大しない
-- `P21` close 後の package-level reopen next は
+- `P21` close 後の later-family reading は
   **exact package label をまだ fixed しない**
   ただし reader-facing / snapshot では
   - `rollback / durable migration`
@@ -104,7 +104,7 @@ final public hot-plug ABI はここで actualize しない。
   - `final public hot-plug ABI`
   の 3 later family へ grouped に読む
 - `rejoin / reattach semantics` は
-  current repo reading では
+  repository-memory reading では
   `rollback / durable migration` family に含めて扱う
 - final public hot-plug ABI は
   引き続き post-`P18` mixed gate / true user-spec hold の外へ出さない
@@ -118,7 +118,7 @@ final public hot-plug ABI はここで actualize しない。
   consumer-side `assemble_hotplug_runtime_engine_report()`、
   example `build_hotplug_runtime_engine_report()`
   を actualize 済みである
-- current narrow state family は
+- narrow state family は
   `attach_ready_for_activation_cut`
   `attach_rejected_before_activation`
   `attach_deferred_before_activation`
@@ -135,41 +135,41 @@ final public hot-plug ABI はここで actualize しない。
 - helper-local sample IDs / view IDs / telemetry IDs は
   引き続き preview ownership に残し、
   runtime-side canonical state や public ABI に import しない
-- current package-level reopen next の exact label は
-  intentionally unfixed である
+- exact later-family label は
+  `R7` close-time memory では intentionally unfixed である
 - grouped later family は引き続き
   `rollback / durable migration`
   `distributed activation ordering`
   `final public hot-plug ABI`
   として読む
-- first recommendation closeout memory は
+- historical first boundary family memory は
   `plan/36-post-p21-rollback-durable-migration-family.md`
   を入口にした
-  `rollback / durable migration` family hardening と読む
+  `rollback / durable migration` family と読む
 
-## current repo reading after docs-first later-family hardening
+## repository-memory reading after docs-first later-family hardening
 
 - `plan/36-post-p21-rollback-durable-migration-family.md`
   により、
-  `rollback / durable migration` family hardening は
-  first recommendation close 済みである
+  `rollback / durable migration` family は
+  historical first boundary family として close 済みである
 - `plan/37-post-p21-distributed-activation-ordering-family.md`
   により、
-  `distributed activation ordering` family hardening は
-  second recommendation close 済みである
+  `distributed activation ordering` family は
+  historical second boundary family として close 済みである
 - `plan/38-post-p21-final-public-hotplug-abi-family.md`
   により、
-  `final public hot-plug ABI` family hardening は
-  third recommendation close 済みである
-- current third recommendation docs-first close の definition は
+  `final public hot-plug ABI` family は
+  last historical boundary family として close 済みである
+- last historical boundary docs-first close の definition は
   `freeze prerequisite fixed; public ABI still unfrozen`
   である
-- current remaining open gate は
+- live product-shaping gate は
   post-`P18` mixed gate / `U1` hold line にある
   actual commitment であり、
   追加の self-driven post-`P21` docs-first family ではない
 - `R7` の grouped-later memory は historical recommendation として残すが、
-  current snapshot では
+  repository snapshot では
   `rollback / durable migration`
   `distributed activation ordering`
   `final public hot-plug ABI`
@@ -188,7 +188,7 @@ final public hot-plug ABI はここで actualize しない。
 
 ## stop line
 
-- `R7` close time の next-line recommendation を `P21` close 後の current state と混同しない
+- `R7` close time の next-line recommendation を `P21` close 後の repository snapshot と混同しない
 - `P21` close を runtime crate hot-plug broad completion と混同しない
 - `P21` で rollback / migration / distributed activation ordering / final public ABI を同時に claim しない
 - helper-local sample IDs / view IDs / telemetry IDs を runtime-side canonical state や public ABI に import しない

@@ -2,14 +2,14 @@
 
 ## role
 
-この文書は、`P21` runtime-crate hot-plug completed-engine narrow cut の後に残る
+この文書は、`P21` runtime-crate hot-plug engine-state narrow floor の後に残る
 later family のうち、
-**`distributed activation ordering` を second recommendation として読む current repository memory**
+**`distributed activation ordering` を historical second boundary family として読む repository memory**
 を置く。
 
 - exact package label / numbering はここでも固定しない
 - actual distributed activation ordering completion を claim しない
-- `rollback / durable migration` first recommendation family は
+- `rollback / durable migration` historical first boundary family は
   `plan/36-post-p21-rollback-durable-migration-family.md`
   で close 済みとして前提化する
 - final public hot-plug ABI を同じ tranche に collapse しない
@@ -25,16 +25,16 @@ later family のうち、
   が actualize 済みである
 - `plan/36-post-p21-rollback-durable-migration-family.md`
   により、
-  `rollback / durable migration` family は first recommendation として
+  `rollback / durable migration` family は historical first boundary family として
   docs-first に harden 済みである
-- current helper-local boundary matrix は
+- helper-local boundary matrix は
   `plan/32-hotplug-real-migration-rollback-boundary.md`
   にあり、
   `activation_cut != distributed activation ordering`
   `migration_contract row != protocol`
   rejected `detached_roll_request#1 != completed rollback`
   を already fixed している
-- current helper-local attach anchor は
+- helper-local attach anchor は
   `attach_request#1`
   `attach_lifecycle`
   `attach_activation#1`
@@ -44,7 +44,7 @@ later family のうち、
 
 ## why this family is second
 
-- `rollback / durable migration` family を first recommendation として切り出した後に残る
+- `rollback / durable migration` family を historical first boundary family として切り出した後に残る
   independent widening seam は
   attach activation の visibility frontier と commit ordering である
 - この seam は
@@ -56,7 +56,7 @@ later family のうち、
   rollback / reattach semantics と同一 validation floor では読み切れない
 - final public hot-plug ABI は
   post-`P18` mixed gate / `U1` hold line への依存を持つため、
-  third recommendation に残す
+  separate later boundary family に残す
 
 ## family scope
 
@@ -89,15 +89,15 @@ later family のうち、
 | distributed ordering vs durable activation commit | ordering proof と commit frontier が同じ emitted/runtime trace family で読める | commit acknowledgement / replay / consensus witness が standalone carrier を要求する |
 | runtime-private names vs public names | runtime-private state / witness / reason family のまま読める | public request/response/event / package catalog naming を決める必要が出る |
 
-## current recommendation
+## repository-memory reading
 
 - exact post-`P21` package label は intentionally unfixed のまま保つ
 - `rollback / durable migration` family hardening は
-  first recommendation close 済みとして扱う
-- second recommendation closeout memory は
+  historical first boundary family close 済みとして扱う
+- historical second boundary family memory は
   **`distributed activation ordering` family hardening**
   と読む
-- third recommendation family の current repository memory は
+- last historical boundary family memory は
   **`final public hot-plug ABI` family**
   として
   `plan/38-post-p21-final-public-hotplug-abi-family.md`
@@ -105,7 +105,7 @@ later family のうち、
 - `AttachPoint` / `Patch` packaging identity、
   helper-local sample IDs / view IDs / telemetry IDs、
   runtime-private state naming は
-  second recommendation family でも public ABI に昇格させない
+  this boundary family でも public ABI に昇格させない
 
 ## validation floor
 
@@ -127,7 +127,7 @@ later family のうち、
 - authentication / authorization / membership / capability / witness を
   transport に collapse しない
 - public request/response/event naming を
-  second recommendation family の名目で freeze しない
+  this boundary family の名目で freeze しない
 
 ## related memory
 

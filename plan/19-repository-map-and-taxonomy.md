@@ -61,7 +61,7 @@
 
 ## current crate classification
 
-| crate | current reading | move risk |
+| crate | reading | move risk |
 |---|---|---|
 | `mir-ast` | Mir language substrate | high |
 | `mir-semantics` | Mir verification substrate | high |
@@ -73,9 +73,9 @@
 | `engine-abi` | external adapter / host boundary placeholder | medium |
 | `shared-ids` / `shared-contracts` | shared utility placeholder | low |
 
-current recommendation:
+standing recommendation:
 
-- `mir-ast` / `mir-semantics` / `mir-runtime` は live chain なので、rename / rebucket しない
+- `mir-ast` / `mir-semantics` / `mir-runtime` は active command path なので、rename / rebucket しない
 - `mirrorea-core` は current ownership cut と `P11` current third cut が入り始めたが、まだ final public crate shape ではないので rename / rebucket しない
 - `mirrorea-control` / `prism-*` / `engine-abi` は placeholder だが、名前自体が subsystem separation を表しているので、早い rename はしない。`P12` current first-cut closeout は helper-local `host_boundary` preview inventory であり、crate-side adapter surface actualization ではない
 - crate split / merge は docs-first lane で boundary が固まってから行う
@@ -143,18 +143,18 @@ current recommendation:
 
 - `scripts/tests/`
 
-current recommendation:
+standing recommendation:
 
 - active command path は維持する
 - re-bucketing が必要なら wrapper / alias を先に残す
 - public CLI / installed binary / final host contract と Python helper surface を混同しない
 
-## current docs taxonomy
+## docs taxonomy
 
 - `docs/research_abstract/`
   summary / detail / hands-on
 - `docs/hands_on/`
-  current closeout landing page。詳細な hands-on 本体は当面 `docs/research_abstract/` に残す
+  closeout landing page。詳細な hands-on 本体は当面 `docs/research_abstract/` に残す
   - `visual_debugger_viewer_01.md`
     `P16` typed public prototype inventory landing page
   - `public_api_parser_gate_01.md`
@@ -256,7 +256,7 @@ current task では move しない。
 - archive docs の stale link をどこまで rewrite するか
 - generated sample artifact を `samples/generated/` と external workdir でどう分担するか
 
-## current recommendation
+## taxonomy recommendation in this memory
 
 - current repo は **flat workspace + explicit docs taxonomy** で十分に前へ進める
 - まず docs / plan / sample/script README を整え、filesystem move は later stage に送る

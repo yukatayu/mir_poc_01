@@ -2,15 +2,15 @@
 
 ## role
 
-この文書は、`P21` runtime-crate hot-plug completed-engine narrow cut の後に残る
+この文書は、`P21` runtime-crate hot-plug engine-state narrow floor の後に残る
 later family のうち、
-**`final public hot-plug ABI` を third recommendation として読む current repository memory**
+**`final public hot-plug ABI` を last historical boundary family として読む repository memory**
 を置く。
 
 - exact package label / numbering はここでも固定しない
 - actual final public hot-plug ABI freeze を claim しない
-- `rollback / durable migration` first recommendation family と
-  `distributed activation ordering` second recommendation family は
+- `rollback / durable migration` historical first boundary family と
+  `distributed activation ordering` historical second boundary family は
   docs-first close 済みとして前提化する
 - ここで fixed するのは
   `freeze prerequisite fixed; public ABI still unfrozen`
@@ -40,10 +40,10 @@ later family のうち、
   が actualize 済みである
 - `plan/36-post-p21-rollback-durable-migration-family.md`
   により、
-  `rollback / durable migration` family は first recommendation close 済みである
+  `rollback / durable migration` family は historical first boundary family として close 済みである
 - `plan/37-post-p21-distributed-activation-ordering-family.md`
   により、
-  `distributed activation ordering` family は second recommendation close 済みである
+  `distributed activation ordering` family は historical second boundary family として close 済みである
 - `plan/27-public-api-parser-gate-roadmap.md`
   により、
   `P18` mixed gate は repo-side freeze checklist / public-boundary inventory /
@@ -97,15 +97,15 @@ later family のうち、
 | protocol naming vs package catalog naming | public request/response/event naming と `AttachPoint` / `Patch` catalog naming が同じ `U1` axis に依存する | host target / package catalog / engine adapter choice が protocol naming と別 decision track を要求する |
 | repo-side prerequisite vs actual public freeze | repo-side wording inventory と `U1` hold line の橋渡しで足りる | actual shipped public surface の commit を伴う |
 
-## current recommendation
+## repository-memory reading
 
 - exact post-`P21` package label は intentionally unfixed のまま保つ
 - `rollback / durable migration` family と
   `distributed activation ordering` family は docs-first close 済みとして扱う
-- current self-driven third recommendation は
+- closed trilogy の last historical boundary family は
   **`final public hot-plug ABI` family hardening**
   と読む
-- current docs-first close の definition は
+- docs-first close の definition は
   **`freeze prerequisite fixed; public ABI still unfrozen`**
   である
 - helper-local `hotplug_lifecycle`、
@@ -121,7 +121,7 @@ later family のうち、
 - `AttachPoint` / `Patch` packaging identity は
   engine-private または preview inventory に留め、
   public ABI として freeze しない
-- この family close 後に残る open gate は、
+- この family close 後に残る product-shaping gate は、
   追加の self-driven post-`P21` docs-first family ではなく
   actual `U1` commitment である
 
@@ -138,7 +138,7 @@ later family のうち、
 - helper-local preview naming を final public ABI naming と書かない
 - runtime-private carrier / engine-state naming を final public ABI naming と書かない
 - `AttachPoint` / `Patch` preview inventory を final public package catalog と書かない
-- third recommendation docs-first close を actual final public ABI freeze と書かない
+- last historical boundary docs-first close を actual final public ABI freeze と書かない
 - transport / auth / membership / capability / witness を public hot-plug ABI の名目で collapse しない
 
 ## related memory

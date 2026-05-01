@@ -188,7 +188,7 @@ repo-side framing の後でも、次は user choice が要る。
 - broader application target
 - exhaustive shared-space operational catalog
 
-current recommendation は、
+repository-memory recommendation は、
 repo-local helper / runtime / report-local evidence を維持したまま
 この hold line を explicit option inventory として扱うことである。
 
