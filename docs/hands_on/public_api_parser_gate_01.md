@@ -16,7 +16,7 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
-python3 scripts/network_transport_samples.py closeout --format json
+python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json

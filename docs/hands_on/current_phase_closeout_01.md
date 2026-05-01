@@ -18,7 +18,7 @@ python3 scripts/current_l2_guided_samples.py closeout --format json
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
-python3 scripts/network_transport_samples.py closeout --format json
+python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 cargo fmt --check

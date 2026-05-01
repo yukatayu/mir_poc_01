@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 11:27 JST
+最終更新: 2026-05-01 11:31 JST
 
 ## この文書について
 
@@ -30,6 +30,8 @@
 - latest report heading guardrail は 2026-05-01 11:21 JST に追加済みです:
   `validate_docs.py` は historical reports 全体を遡及 lint せず、最新 numbered report 1 本だけを template required headings で scaffold check します。unit test は latest missing failure と historical-only missing pass の両方を確認します。
 - 2026-05-01 11:27 JST の post-guardrail docs-focused freshness checkpoint では、clean tree で latest-report heading unit / source hierarchy / docs scaffold / whitespace diff が pass しています。
+- network transport executable validation anchor drift は 2026-05-01 11:31 JST に active hands-on / research abstract 側も修正済みです:
+  executable canary は `python3 scripts/network_transport_samples.py check-all --format json`、`closeout` は inventory evidence として扱います。
 
 ## executable floor
 
