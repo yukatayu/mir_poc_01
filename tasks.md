@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 14:33 JST
+最終更新: 2026-05-01 14:36 JST
 
 ## この文書について
 
@@ -54,6 +54,8 @@
   1093 / 1094 の report-schema guardrail と active docs freshness repair 後も corrected full floor は全件 pass しました。generated output は `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1095` に限定しています。
 - `U1` readiness wording は 2026-05-01 14:33 JST に再確認済みです:
   current reader-facing docs / `plan/27` は `U1` の 4 軸を packaging / host integration / first shipped public surface / final shared-space operational catalog breadth に揃えています。これは option inventory / readiness audit であり、actual `U1` commitment ではありません。
+- 1096 後の docs-focused validation は 2026-05-01 14:36 JST に再確認済みです:
+  report-schema unit、source hierarchy、docs scaffold、`git diff --check` が clean tree で pass しました。full sample / Cargo floor は 1095 の post-guardrail checkpoint を参照します。
 
 ## executable floor
 
