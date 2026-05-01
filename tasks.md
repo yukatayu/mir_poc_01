@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 14:19 JST
+最終更新: 2026-05-01 14:27 JST
 
 ## この文書について
 
@@ -23,8 +23,8 @@
 - 2026-04-30 以降の detailed maintenance chronology はこの snapshot では再列挙しません。package-by-package evidence は package close 後の committed reports を正本にし、in-flight package は当該 report の commit / push status を authority とします。long-lived comparison / boundary memory は relevant `plan/` files、runnable sample status は `samples_progress.md` を参照します。
 - 2026-05-01 の `1051` 以降の guardrail / snapshot / validation / storage follow-up packages は maintenance-only closeout です:
   dashboard freshness、validator/source-hierarchy/report-template guardrail、full/docs/storage validation checkpoint、warning/formatting cleanup、Makefile alias parity、task/progress/sample dashboard compression、active front-door / active-doc wording repair を継続的に閉じています。new implementation queue は reopened していません。
-- 直近の repository-wide validation freshness checkpoint は 2026-05-01 13:52 JST です:
-  source hierarchy / docs scaffold、current-L2 inventory、source regression 23/23、guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer helper floors、Lean sync、storage guardrail、Cargo crate tests、`cargo fmt --check`、`git diff --check` が pass しました。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、generated output は external workdir のみです。
+- 直近の repository-wide validation freshness checkpoint は 2026-05-01 14:27 JST です:
+  report-schema unit、source hierarchy / docs scaffold、current-L2 inventory、source regression 23/23、guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer helper floors、Lean sync、storage guardrail、Cargo crate tests、`cargo fmt --check`、`git diff --check` が pass しました。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、generated output は external workdir のみです。
 - report template compliance guardrail は 2026-05-01 14:08 JST に report closeout schema まで拡張済みです:
   `scripts/tests/test_validate_docs.py` が `docs/reports/TEMPLATE.md` と `scripts/validate_docs.py` の required heading 同期、missing-heading failure、latest-report order / empty section / 未置換 update-status placeholder failure を確認します。required headings は `Commands run`、`Documentation.md update status`、start dirty state、reviewer findings を含みます。actual numbered report 全体の semantic lint ではありません。
 - latest report heading guardrail は 2026-05-01 11:21 JST に追加済みです:
@@ -50,6 +50,8 @@
   `docs/hands_on/current_phase_closeout_01.md` は `current_l2_source_sample_regression.py inventory/regression`、`clean_near_end_samples.py closeout`、`current_l2_lean_sample_sync.py` を top-level closeout commands として mirror します。これは final parser / public API / all proof discharge ではありません。
 - full validation floor は 2026-05-01 13:52 JST に再確認済みです:
   corrected current floor は全件 pass しました。network executable evidence は `check-all`、projection live alignment は `check-all`、projection manifest inventory は `closeout`、storage cleanup は `--list` only として維持します。これは public freeze / production transport / production prover binding / actual LLVM build ではありません。
+- post-guardrail full validation floor は 2026-05-01 14:27 JST に再確認済みです:
+  1093 / 1094 の report-schema guardrail と active docs freshness repair 後も corrected full floor は全件 pass しました。generated output は `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1095` に限定しています。
 
 ## executable floor
 
