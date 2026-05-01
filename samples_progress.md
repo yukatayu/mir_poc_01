@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-01 13:13 JST
+Last updated: 2026-05-01 13:23 JST
 Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -36,14 +36,14 @@ Notes:
 | Projection / placement | 90 | preview + generated bridge evidence | helper/report preview + committed manifest bridge; `equivalence` is review-category alignment inventory only, not generated program / optimizer / planner evidence | `python3 scripts/projection_codegen_samples.py check-all --format json` |
 | Visualization / viewer | 100 | typed prototype inventory | helper/runtime typed panel and telemetry inventory | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | Hot-plug package | 90 | P21 narrow runtime floor + docs-first trilogy closed | helper lifecycle + request/verdict carrier + runtime engine-state narrow floor; public ABI still unfrozen | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
-| Storage / backend guardrail | 100 | current first-cut closeout | external workdir, cargo cache/target binding, LLVM staging visibility | `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`; `bash scripts/storage/detach_prepare.sh`; `bash scripts/storage/cleanup_disposable_artifacts.sh --list`; `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` |
+| Storage / backend guardrail | 100 | current first-cut closeout, not per-package closeout | external workdir, cargo cache/target binding, LLVM staging visibility | `bash scripts/env/mirrorea_storage_env.sh`; `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`; `bash scripts/storage/detach_prepare.sh`; `bash scripts/storage/cleanup_disposable_artifacts.sh --list`; `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` |
 | Docs / traceability | 90 | active maintenance | current snapshot, reports, source hierarchy, stale wording cleanup | `python3 scripts/check_source_hierarchy.py && python3 scripts/validate_docs.py` |
 
 ## Active sample matrix
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 13:13 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 13:23 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090` | Snapshot docs are maintenance artifacts, not normative specs |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 12:46 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084`, `1085` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 12:46 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076`, `1085` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 12:46 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076`, `1085` | attach lifecycle / compatibility anchor |
@@ -62,7 +62,7 @@ Notes:
 | `P19-HOTPLUG-CARRIER` | hot-plug carrier | `crates/mirrorea-core/src/fabric.rs` | Rust carrier | 90 | positive + negative | 2026-05-01 12:46 JST | `0988`, `0998`, `1066`, `1076`, `1085` | engine-neutral request/verdict carrier |
 | `P20-HOTPLUG-SKELETON` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | thin runtime/report assembly | 90 | positive + negative | 2026-05-01 12:46 JST | `0989`, `0991`, `0998`, `1066`, `1076`, `1085` | not completed engine |
 | `P21-HOTPLUG-ENGINE-STATE` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | narrow runtime engine-state floor | 90 | positive + negative | 2026-05-01 12:46 JST | `0993`, `0996`, `0997`, `0998`, `1066`, `1076`, `1085` | non-public runtime-private state progression; freeze prerequisite fixed, public ABI still unfrozen |
-| `STORAGE-01` | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/`, external cargo cache no-run probe | operational guardrail | 100 | positive | 2026-05-01 13:13 JST | `0972`, `0998`, `1066`, `1072`, `1076`, `1085`, `1089` | existing 100% is current-scope guardrail only; no destructive cleanup / no actual LLVM build; known `/mnt/mirrorea-work/llvm` root-owned warning remains; 1089 freshness addition closes only with package commit/push |
+| `STORAGE-01` | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/`, external cargo cache no-run probe | operational guardrail | 100 | positive | 2026-05-01 13:23 JST | `0972`, `0998`, `1066`, `1072`, `1076`, `1085`, `1089`, `1090` | existing 100% is current-scope guardrail only, not a claim that package 1090 is closed before commit/push; no destructive cleanup / no actual LLVM build; known `/mnt/mirrorea-work/llvm` root-owned warning remains; 1090 mirrors the same guardrail bundle into public-gate docs |
 
 ## E2E samples
 
@@ -94,6 +94,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-01 13:23 JST | public-gate storage anchor mirror audit | pass with known storage warning | `docs/hands_on/public_api_parser_gate_01.md` and `plan/27` now mirror env `--ensure-dirs`, detach audit, cleanup list, and external cargo no-run probe as repo-side inventory evidence. This does not claim actual LLVM build / backend choice / packaging adoption. |
 | 2026-05-01 13:13 JST | storage/env entrypoint guardrail freshness | pass with known storage warning | `/mnt/mirrorea-work` mounted on `/dev/vdb1`; repo root 49M, root disk 68%, external workdir 6.1G used / 180G available. `target` symlinks to `/mnt/mirrorea-work/cargo-target`; env scripts report mounted external workdir; cleanup list excludes `llvm/src`; no files deleted; `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` passed. Known `/mnt/mirrorea-work/llvm` root-owned warning remains. |
 | 2026-05-01 12:59 JST | stale validation-command/reference audit | pass | Active docs no longer point at the deleted current-L2 emitted-artifact Cargo target as a regression step. Projection/codegen reader-facing docs now split `check-all` live alignment validation from `closeout` manifest inventory evidence. Network command anchors keep `check-all` as executable canary validation and `closeout` as inventory. Focused network/projection commands, current-L2 regression helper unit tests, source hierarchy/docs scaffold/diff checks passed. |
 | 2026-05-01 12:46 JST | repository-wide validation freshness checkpoint | pass with known storage warning | Source hierarchy/docs scaffold, current-L2 inventory, source regression 23/23, clean near-end closeout, Sugoroku 10 samples, avatar 5 samples, typed external 2 previews, network `NET-02..05` `check-all` and inventory closeout, projection/codegen 4 artifacts `check-all` and inventory closeout, viewer 5 bundles, Lean sync, Cargo crate tests, `cargo fmt --check`, and `git diff --check` passed. Storage guardrail passed with known `/mnt/mirrorea-work/llvm` root-owned warning and deleted no files. |

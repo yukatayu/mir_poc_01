@@ -206,6 +206,10 @@ python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
+bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
+bash scripts/storage/detach_prepare.sh
+bash scripts/storage/cleanup_disposable_artifacts.sh --list
+CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run
 git diff --check
 ```
 
@@ -214,6 +218,11 @@ git diff --check
 check-all` is live anchor / manifest alignment validation; `closeout` is
 committed manifest inventory evidence. Neither command freezes a public
 transport ABI or emitted-program ABI.
+
+The storage commands are guardrail evidence for external workdir routing,
+non-destructive detach audit, explicit-confirmation cleanup policy, and
+external cargo cache usability. They are not actual LLVM build, backend choice,
+or packaging adoption evidence.
 
 ## stop line
 

@@ -22,6 +22,10 @@ python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
+bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
+bash scripts/storage/detach_prepare.sh
+bash scripts/storage/cleanup_disposable_artifacts.sh --list
+CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run
 git diff --check
 ```
 
@@ -30,6 +34,10 @@ git diff --check
 - docs / plan / snapshot / dashboard が `P18` repo-side first cut に同期していること
 - parser / checker / runtime / verifier / viewer / adapter / projection / hot-plug / transport の
   current preview / prototype / inventory に qualifier が残っていること
+- storage commands が external workdir routing、non-destructive detach audit、
+  explicit-confirmation cleanup policy、external cargo cache usability の
+  guardrail evidence に留まること。
+  これは actual LLVM build、backend choice、packaging adoption の evidence ではありません。
 - post-`P18` true user-spec hold line が installed binary / packaging adoption target、host target、first shipped public surface、final catalog に分離されていること
 
 ## これではまだ確認できないこと

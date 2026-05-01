@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 13:13 JST
+最終更新: 2026-05-01 13:23 JST
 
 ## この文書について
 
@@ -44,6 +44,8 @@
   `.docs/current-l2-source-sample-authoring-policy.md`、`plan/27`、public-gate hands-on、projection / Mirrorea research abstracts は current command anchors に同期済みです。network executable evidence は `check-all`、projection live alignment は `check-all`、projection manifest inventory は `closeout` として扱います。
 - storage/env entrypoint guardrail は 2026-05-01 13:13 JST に再確認済みです:
   `/mnt/mirrorea-work` は mounted、`target` は external cargo target への symlink、cleanup list は `llvm/src` を除外し、削除には `--confirm` を要求します。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はありません。
+- public API / parser gate の storage anchor は 2026-05-01 13:23 JST に再確認済みです:
+  `docs/hands_on/public_api_parser_gate_01.md` と `plan/27` は storage guardrail を env export だけで代表させず、`--ensure-dirs`、detach audit、cleanup list、external cargo no-run probe まで mirror します。これは repo-side public-gate inventory の再現性補強であり、actual LLVM build / backend choice / packaging adoption ではありません。
 
 ## executable floor
 
