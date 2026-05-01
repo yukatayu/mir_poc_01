@@ -184,7 +184,8 @@ Alpha-0 package ordering now marks `P-A0-07` closed, promotes `P-A0-08` to the h
 
 ## Commit / push status
 
-Pending commit / push at this report write; local closeout validation is green.
+Package implementation commit `5a8486a` (`mirrorea: add alpha local runtime floor`) was created with `--no-gpg-sign` and pushed to `origin/main`.
+This report closeout status is synchronized in a follow-up docs-only commit immediately afterward.
 
 ## Sub-agent session close status
 
