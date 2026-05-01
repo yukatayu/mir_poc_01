@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 14:08 JST
+最終更新: 2026-05-01 14:19 JST
 
 ## この文書について
 
@@ -201,12 +201,13 @@ git diff --check
 ## reporting requirement
 
 Every non-trivial change must add a new report under `docs/reports/`.
-Use the current report template. At minimum, the report must include:
+Use the current report template and keep all required sections in order. At minimum, the report must include:
 
-- start dirty state and commit / push status
-- documents consulted
-- files changed
-- commands run and validation results
+- objective, scope / assumptions, and start dirty state
+- documents consulted, actions taken, files changed, and commands run
+- validation evidence / outputs, changed understanding, open questions, and suggested next prompt
+- `plan/`, `Documentation.md`, `progress.md`, `tasks.md`, and `samples_progress.md` update status
 - reviewer findings and follow-up
 - skipped validations and reasons
-- relevant open questions / remaining user decision blockers
+- commit / push status
+- sub-agent session close status

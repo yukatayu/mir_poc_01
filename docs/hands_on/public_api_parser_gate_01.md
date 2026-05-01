@@ -20,13 +20,21 @@ python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
-cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
 bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
 bash scripts/storage/detach_prepare.sh
 bash scripts/storage/cleanup_disposable_artifacts.sh --list
 CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run
 git diff --check
+```
+
+## 追加で見る runtime corroboration lane
+
+front-door runner を先に使います。runtime binary 直叩きは補助確認であり、
+public API / parser freeze evidence ではありません。
+
+```bash
+cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 ```
 
 ## これで確認できること
