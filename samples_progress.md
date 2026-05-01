@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-01 09:34 JST
+Last updated: 2026-05-01 10:13 JST
 Current repo-local focus: current-L2 / clean near-end runnable floor, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -95,17 +95,17 @@ Notes:
 | Time | Command | Result | Notes |
 |---|---|---|---|
 | 2026-05-01 09:34 JST | warning-noise focused floor | pass | `RUSTFLAGS="-D warnings" cargo test -p mir-ast --test current_l2_stage3_predicate_fragment_spike`、`RUSTFLAGS="-D warnings" cargo test -p mir-semantics --test current_l2_lean_theorem_stub_actual_probe`、`cargo test -p mir-ast`、`cargo test -p mir-semantics`、`cargo fmt --check`、`git diff --check` passed; cleanup was item-level allow for target-specific shared support helpers, not sample behavior change |
-| 2026-05-01 09:26 JST | full validation freshness floor | pass with existing warnings | `check_source_hierarchy.py` required 24 / present 24 / missing 0、`validate_docs.py` passed、current-L2 / clean near-end / Lean sync / Sugoroku / avatar / typed external / network / projection / viewer closeouts passed、`detach_prepare.sh` passed with known `/mnt/mirrorea-work/llvm` root-owned warning、Cargo floor and `cargo fmt --check` passed with existing dead-code warnings only、`git diff --check` passed |
+| 2026-05-01 09:26 JST | full validation freshness floor | pass with existing warnings | source hierarchy / docs scaffold passed at that checkpoint; later guardrail packages expanded the required path set. current-L2 / clean near-end / Lean sync / Sugoroku / avatar / typed external / network / projection / viewer closeouts passed、`detach_prepare.sh` passed with known `/mnt/mirrorea-work/llvm` root-owned warning、Cargo floor and `cargo fmt --check` passed with existing dead-code warnings only、`git diff --check` passed |
 | 2026-04-30 19:54 JST | model-check + mixed-helper focused floor | pass | `python3 scripts/clean_near_end_samples.py run model-check --format json`、`python3 scripts/current_l2_guided_samples.py smoke-all --format json`、`python3 scripts/current_l2_lean_sample_sync.py`、`cargo test -q -p mir-runtime --test current_l2_operational_cli`、`cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/model-check/01_peterson_sc_pass.mir --format json`、`cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json`、`python3 scripts/check_source_hierarchy.py`、`python3 scripts/validate_docs.py`、`git diff --check` passed; historical `p08/p09` prototype anchors stay report-local because the current accepted sample set does not re-run them |
 | 2026-04-30 19:29 JST | theorem-side focused floor | pass with warnings | `cargo test -q -p mir-runtime --test current_l2_source_sample_runner --test current_l2_source_sample_verification_ladder`、`cargo test -q -p mir-semantics --test current_l2_formal_hook_support --test current_l2_proof_notebook_review_unit_support`、`cargo test -q -p mir-semantics --test current_l2_lean_theorem_stub_support --test current_l2_lean_theorem_stub_actual_probe`、`cargo run -q -p mir-runtime --example mir_current_l2 -- check-source-sample samples/clean-near-end/order-handoff/05_delegated_rng_service.mir --format json`、`python3 scripts/clean_near_end_samples.py closeout --format json` passed; warnings are existing `dead_code` warnings in theorem support helpers |
-| 2026-04-30 15:00 JST | `python3 scripts/check_source_hierarchy.py` | pass | required 23 / present 23 / missing 0 |
-| 2026-04-30 15:00 JST | `python3 scripts/validate_docs.py` | pass | after report `1001`, documentation scaffold complete; report count 999 |
+| 2026-04-30 15:00 JST | `python3 scripts/check_source_hierarchy.py` | pass | historical checkpoint; source hierarchy passed before later required-path expansion |
+| 2026-04-30 15:00 JST | `python3 scripts/validate_docs.py` | pass | after report `1001`, documentation scaffold complete at that checkpoint |
 | 2026-04-30 15:00 JST | current sample helper closeouts + Lean sync | pass | current-L2 compatibility wrapper, clean near-end, Sugoroku, avatar, typed external, network, projection, viewer closeouts passed; `current_l2_lean_sample_sync.py` refreshed `samples/lean/manifest.json` and left the working tree clean |
 | 2026-04-30 15:00 JST | storage scripts | pass with warning | `/mnt/mirrorea-work` remained mounted; LLVM root is root-owned / non-writable; no files deleted |
 | 2026-04-30 15:00 JST | Cargo validation floor | pass with warnings | `mir-ast`, `mirrorea-core`, `mir-runtime`, `mir-semantics`, and `cargo fmt --check` passed; warnings are existing dead-code / storage-env warnings |
 | 2026-04-30 15:00 JST | `git diff --check` | pass | post-closeout docs diff was whitespace-clean |
-| 2026-04-29 12:02 JST | `python3 scripts/check_source_hierarchy.py` | pass | required 23 / present 23 / missing 0 |
-| 2026-04-29 12:02 JST | `python3 scripts/validate_docs.py` | pass | after report `0998`, documentation scaffold complete; report count 996 |
+| 2026-04-29 12:02 JST | `python3 scripts/check_source_hierarchy.py` | pass | historical checkpoint; source hierarchy passed before later required-path expansion |
+| 2026-04-29 12:02 JST | `python3 scripts/validate_docs.py` | pass | after report `0998`, documentation scaffold complete at that checkpoint |
 | 2026-04-29 12:02 JST | current sample helper closeouts | pass | current-L2, clean near-end, Sugoroku, avatar, typed external, network, projection, viewer closeouts all passed |
 | 2026-04-29 12:02 JST | storage scripts | pass with warning | `/mnt/mirrorea-work` mounted; LLVM root is root-owned / non-writable; no files deleted |
 | 2026-04-29 12:02 JST | Cargo validation floor | pass with warnings | `mir-ast`, `mirrorea-core`, `mir-runtime`, `mir-semantics`, and `cargo fmt --check` passed; warnings are existing dead-code / storage-env warnings |
@@ -119,7 +119,7 @@ Notes:
 | 2026-04-29 04:47 JST | `python3 scripts/sugoroku_world_samples.py closeout --format json` | pass | final public hot-plug ABI family docs-first close kept public ABI unfrozen |
 | 2026-04-29 04:47 JST | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | pass | runtime-private hot-plug anchor remained non-public |
 | 2026-04-29 04:47 JST | `python3 scripts/check_source_hierarchy.py` | pass | `plan/38`, reports `0996` / `0997` present |
-| 2026-04-29 04:47 JST | `python3 scripts/validate_docs.py` | pass | documentation scaffold complete; report count was 995 |
+| 2026-04-29 04:47 JST | `python3 scripts/validate_docs.py` | pass | documentation scaffold complete at that checkpoint |
 | 2026-04-29 04:47 JST | `git diff --check` | pass | post-`P21` final-public-hotplug docs-first diff was whitespace-clean |
 
 ## Historical / archived samples
