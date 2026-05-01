@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:48 JST
+最終更新: 2026-05-01 10:50 JST
 
 ## この文書について
 
@@ -134,18 +134,9 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
-- 2026-05-01 10:48 JST — `tasks.md` の `1051` 以降 maintenance-family summary をさらに圧縮し、docs/storage guardrail packages を個別列挙し続けず category として読める形にした。new implementation queue は reopened していない。
-- 2026-05-01 10:46 JST — storage guardrail freshness audit を実行し、root disk / external workdir / memory / repo size / detach guardrail を確認した。`/mnt/mirrorea-work` は mounted、repo root は 47M、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、削除は行っていない。
-- 2026-05-01 10:44 JST — active docs の point-in-time / final-public overclaim targeted audit を再実行し、残る `current closeout` matches は active closeout / inventory 文脈または dated log 文脈であり、追加 patch 不要と判断した。new implementation queue は reopened していない。
-- 2026-05-01 10:43 JST — `tasks.md` の maintenance-family summary に active-doc point-in-time wording repair を mirror した。これは current task map の代表例同期だけであり、new implementation queue は reopened していない。
-- 2026-05-01 10:40 JST — active hands-on / research-abstract の point-in-time wording を修正し、avatar follow の `Macro 6 reserve` を family-local historical lane label に、phase0..6 の `2026-04-23` wording を dated repository-memory anchor に、network transport の `2026-04-28 current closeout` を dated first-cut closeout に冷やした。live status authority は `progress.md` / `tasks.md` に残し、sample status / implementation queue は変えていない。
-- 2026-05-01 10:33 JST — `samples_progress.md` recent validation の `post-1065` / historical `after report` wording と `tasks.md` current summary の report-number-shaped checkpoint name を冷やし、report ID を latest mutable state ではなく historical evidence として読める形にした。sample status / validation result / implementation queue は変えていない。
-- 2026-05-01 10:31 JST — `tasks.md` / `progress.md` の exact maintenance range wording を冷やし、`docs/reports/1001` 以降の committed reports と `1051` 以降の maintenance family への pointer にした。以後の report 追加で active snapshot が即 stale 化しないようにしただけで、new implementation queue は reopened していない。
-- 2026-05-01 10:26 JST — post-`1065` full validation checkpoint を実行し、source hierarchy / docs scaffold、current-L2、clean near-end、Sugoroku、avatar、typed external、network、projection、viewer、Cargo crate tests、`cargo fmt --check`、`git diff --check` が通ることを確認した。補助で Lean sync と storage detach guardrail も確認し、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 warning / failure は見つからなかった。
-- 2026-05-01 10:18 JST — `tasks.md` / `progress.md` の maintenance evidence band を `1051..1064` / `1001..1064` に追随させ、`1059..1064` の snapshot compression / front-door drift / fixed-line audit / sample dashboard wording packages が active snapshot から消えないようにした。new implementation queue は reopened していない。
-- 2026-05-01 10:13 JST — `samples_progress.md` recent validation の mutable source-hierarchy required-count / docs report-count wording を checkpoint-aware wording に冷やした。sample path、progress%、validation command、blocker は変えていない。
-- 2026-05-01 10:09 JST — active hands-on / research-abstract fixed-line command audit を行い、snapshot docs (`progress.md` / `tasks.md`) への fixed line-number reads が残っていないことを確認した。残る fixed range は sample file preview と `plan/28` front matter 参照だけで、status / queue authority の drift ではないため更新不要と判断した。
-- 2026-05-01 10:07 JST — active front-door docs の snapshot drift を修正し、`mirrorea_future_axis_01.md` の package-ledger duplicate table を pointer set へ圧縮、`current_phase_closeout_01.md` の stale report-specific next reopen wording を削除、`post_p18_true_user_spec_hold_01.md` の line-number-based commands を section-anchor commands に置換した。live queue authority は `progress.md` / `tasks.md` に残し、new implementation queue は reopened していない。
+- 2026-05-01 10:50 JST — recent log を再圧縮し、10:07..10:48 の active-doc / task-map / dashboard / storage maintenance package 詳細を `docs/reports/1062..1073` に委譲した。current floor、strict non-claims、`U1` open gate、validation anchors は維持し、new implementation queue は reopened していない。
+- 2026-05-01 10:26..10:48 JST — full validation checkpoint、storage guardrail audit、task/progress/samples dashboard wording cooling、active-doc point-in-time wording repair、no-finding audit、maintenance-family compression を close した。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、sample status / public surface / implementation queue は変えていない。
+- 2026-05-01 10:07..10:18 JST — active front-door docs の snapshot drift、fixed-line command audit、sample validation-count wording、maintenance evidence band follow-up を close した。live queue authority は `progress.md` / `tasks.md` に残し、helper preview / report-local evidence を final public API として扱っていない。
 - 2026-05-01 09:57 JST — `progress.md` current snapshot の maintenance-lane prose を再圧縮し、long example/spec cluster mapping を `docs/reports/` / relevant `plan/` / `tasks.md` に委譲した。active maintenance、`current_l2_guided_samples.py` front door、no blocker、no implementation queue reopened の事実は保持した。
 - 2026-05-01 09:52 JST — `progress.md` recent log を snapshot 文書として再圧縮し、2026-04-28 以降の package-level chronology を `docs/reports/` と relevant `plan/` files へ委譲した。current floor、strict non-claims、`U1` open gate、validation anchors は維持し、new implementation queue は reopened していない。
 - 2026-05-01 09:47 JST — `tasks.md` current task-level status を snapshot 文書として再圧縮した。active floor、closed package bands、maintenance lane、1051..1058 guardrail closeout、`U1` actual commitment を保持した。
