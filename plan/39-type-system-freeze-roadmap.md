@@ -22,6 +22,11 @@ final parser grammar や final public remote-reference API ではない。
   - `crates/mir-runtime/src/current_l2.rs`
   - `crates/mir-ast/tests/fixtures/current-l2/`
 - Alpha-0 sample family / docs taxonomy / scope wording for Mirrorea Spaces alpha is now present via `samples/alpha/` and snapshot-doc sync
+- `P-A0-05` first checker-floor helper actualization now exists via:
+  - `scripts/alpha_lifetime_fallback_checker.py`
+  - `samples/alpha/lifetime-fallback/lif-05..08*.expected.json`
+  - shared helper reuse through `scripts/current_l2_family_checker_support.py`
+  synthetic detached artifact comparison only; no parser/runtime bridge claim
 
 ## decisions mirrored from specs/13
 
@@ -38,15 +43,15 @@ final parser grammar や final public remote-reference API ではない。
 
 reuse current `current_l2` checker/runtime skeleton rather than freezing a new public checker crate.
 
-- bridge Alpha-0 lifetime sample IDs to existing lineage / capability / missing-structure checks
+- bridge selected Alpha-0 lifetime sample IDs to a non-public sidecar-driven checker floor through `expected_static.checked_reason_codes`
 - keep lease-expiry / freshness cutoff as runtime/admissibility line until dedicated checker cluster exists
 - keep parser bridge explicit
 - preserve `nonproduction` wording
 
 ### next cut after first bridge
 
-- add Alpha-0 sample-family aware fixture / source mapping
-- widen static reason-code clusters beyond current lineage/target/capability trio when sample floor requires it
+- add Alpha-0 sample-family aware fixture / source mapping if/when a dedicated artifact emitter exists
+- widen static reason-code clusters beyond `LIF-05..08` when sample floor requires it
 - add explicit no-re-promotion / no-resurrection check rows if executable semantics floor reaches them
 
 ### kept-later
@@ -93,5 +98,5 @@ actual mechanization widening remains later than first checker skeleton.
 
 ## next package
 
-- immediate next package after docs/sample sync:
-  `P-A0-05` checker skeleton first cut
+- immediate next package after lifetime checker first cut:
+  `P-A0-06` cut/save/load checker skeleton

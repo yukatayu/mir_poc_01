@@ -8,15 +8,25 @@
   "kind": "negative static",
   "purpose": "fallback to stronger capability",
   "expected": "static reject",
+  "expected_static": {
+    "verdict": "static reject",
+    "checked_reason_codes": [
+      {
+        "kind": "capability_promotion",
+        "from_capability": "read",
+        "to_capability": "write"
+      }
+    ]
+  },
   "claims": {
     "runnable": false,
     "implemented": false,
     "active_root": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "synthetic-checker-floor",
+    "runner": "python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker",
+    "note": "Validated in this package by non-public synthetic checker-floor tests plus filesystem/docs scaffold checks."
   },
   "deferred": [
     "exact executable syntax",

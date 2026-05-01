@@ -20,6 +20,10 @@ final public layer-attachment ABI や production auth/telemetry service では�
   - `LayerSignature`
   - visualization security envelope
   - hot-plug request/verdict carrier
+- `P-A0-05` first checker-floor helper actualization now exists via:
+  - `scripts/alpha_contract_variance_checker.py`
+  - `samples/alpha/contract-variance/var-02` / `03` / `07` / `09` / `10` / `15` sidecars
+  synthetic detached artifact comparison only; no layer runtime or parser bridge claim
 
 ## decisions mirrored from specs/14
 
@@ -35,18 +39,25 @@ final public layer-attachment ABI や production auth/telemetry service では�
 ### first safe cut
 
 - represent Alpha-0 contract variance sample family as planned skeleton + expected verdict
+- seed selected negative-static rows with `expected_static.checked_reason_codes`
 - map existing runtime/private carriers to attach-point inventory without claiming public ABI
 - keep debug/auth/rate-limit/redaction as typed layer categories only
 
 ### checker-first cut
 
 - reuse current narrow checker/report floor where possible
-- add Alpha-0 planned diagnostics for:
+- actualize Alpha-0 checker helper coverage for:
   - precondition strengthening reject
   - postcondition weakening reject
   - failure-row widening reject
   - effect-row widening reject
-  - mutable covariance reject
+  - cost degradation reject
+  - hidden shadowing reject
+
+remaining later in this family:
+
+- mutable covariance reject
+- positive covariance / contract-preserving transform anchors
 
 ### later runtime cut
 
@@ -90,5 +101,5 @@ must keep visible:
 
 ## next package
 
-- after sample skeleton package:
-  connect first decidable negative/positive rows into checker skeleton bridge
+- after contract/lifetime checker first cut:
+  `P-A0-06` save/load checker skeleton, then reopen positive/runtime-sensitive rows later

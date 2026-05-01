@@ -4,7 +4,8 @@
 - Phase: Phase 1
 - Stage: Stage A -> B bridge
 - Current runners do not execute this family yet.
-- Validation for this package is filesystem/docs integrity only.
+- Current package adds a non-public checker floor for selected negative-static rows via sidecar-declared `expected_static.checked_reason_codes`.
+- Validation for this package is synthetic-artifact checker tests plus filesystem/docs integrity.
 
 ## Rows
 
@@ -30,10 +31,12 @@
 
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
+- `LIF-05..08` currently carry checker-floor seed rows for the first static diagnostic cut.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
 
 ```bash
 find samples/alpha/lifetime-fallback -maxdepth 1 -type f | sort
+python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker
 ```

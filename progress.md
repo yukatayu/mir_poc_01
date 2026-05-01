@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-02 06:32 JST
+最終更新: 2026-05-02 07:01 JST
 
 ## この文書について
 
@@ -27,15 +27,15 @@ Place をまたいで実行・通信・検証・可視化できる
 - Concrete phase:
   Phase 0 — Theory freeze preparation
 - Current package:
-  `P-A0-04` snapshot docs / taxonomy / validator sync
+  `P-A0-06` consistent-cut / save-load checker skeleton
 - Current status:
-  in progress; `specs/13..17`、`plan/39..43`、`samples/alpha/` は追加済みで、`P-A0-04` docs / taxonomy / validator sync は validation green、report / commit / push closeout が current package
+  `P-A0-05` は current repo state で close しており、`scripts/alpha_lifetime_fallback_checker.py` / `scripts/alpha_contract_variance_checker.py` と selected sidecar `expected_static.checked_reason_codes` によって LIF / VAR family の first non-public checker floor を actualize した。これは synthetic detached artifact comparison only であり、alpha parser/runtime execution ではない。
 - Validation freshness:
-  2026-05-02 06:32 JST に Alpha-0 docs/scaffold floor を rerun し、`find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、`validate_docs.py`（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass
+  2026-05-02 07:01 JST に Alpha-0 checker-floor / docs closeout floor を rerun し、alpha checker unit 7 tests、source hierarchy 60/60、`validate_docs.py`（1101 reports）、report-schema unit 11 tests、`git diff --check` が pass
 - Current blockers:
-  checker/runtime skeleton はまだ未実装、`samples/alpha/` runner family も未実装
+  consistent-cut / save-load checker floor、runtime/package/avatar family checker floor、alpha runner/runtime family はまだ未実装
 - Next autonomous package:
-  `P-A0-05` checker skeleton first cut
+  `P-A0-07` local Mirrorea runtime integration
 - User-decision blockers:
   public `U1` gate、first network scope、avatar compatibility first target、native binary policy、save/load initial scope、UI target、final catalog breadth は still later
 
@@ -83,8 +83,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | hot-plug later-family boundary | 82% | 91% | 78% | actual ABI は要仕様確認 | docs-first trilogy close 済み。rollback / durable migration / distributed ordering / final public ABI は completion claim なし |
 | storage / backend guardrail | 82% | 91% | 88% | 着手可能 | external workdir / cleanup / LLVM staging visibility は closeout 済み。actual LLVM build と backend choice は未決 |
 | docs / dashboard / repository structure | 94% | 94% | 89% | 着手可能 | source hierarchy、snapshot docs、dashboard semantics、report schema guardrail は current line に追随。履歴の圧縮は継続保守対象 |
-| lifetime / fallback alpha line | 78% | 42% | 12% | 着手可能 | `specs/13` と `samples/alpha/lifetime-fallback/` は追加済み。checker skeleton pending |
-| layer compatibility alpha line | 76% | 38% | 12% | 着手可能 | `specs/14` と `samples/alpha/contract-variance/` は追加済み。variance checker pending |
+| lifetime / fallback alpha line | 78% | 42% | 25% | 着手可能 | `specs/13` + `samples/alpha/lifetime-fallback/` に加え、`LIF-05..08` の sidecar-driven synthetic checker floor が actualize 済み。parser/runtime は still later |
+| layer compatibility alpha line | 76% | 38% | 25% | 着手可能 | `specs/14` + `samples/alpha/contract-variance/` に加え、`VAR-02/03/07/09/10/15` の sidecar-driven synthetic checker floor が actualize 済み。layer runtime は still later |
 | save/load / consistent-cut alpha line | 68% | 30% | 8% | 着手可能 | `specs/15` と `samples/alpha/cut-save-load/` は追加済み。predicate/checker pending |
 | runtime package / avatar alpha line | 66% | 34% | 8% | 着手可能 | `specs/16` と `samples/alpha/avatar-runtime/` / `hotplug-runtime/` は scaffold 済み。 runtime/package checker pending |
 | Mirrorea Spaces alpha integration | 60% | 34% | 12% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` で stage map と completion condition を fixed。integrated runtime pending |
@@ -115,7 +115,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy widening contract、final viewer / verifier API、retention policy、telemetry service |
 | hot-plug runtime package | P21 + docs-first trilogy closed | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, three later-family boundaries | rollback protocol, durable migration engine, distributed activation ordering, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
-| alpha-local theory freeze / scaffold | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/` | checker skeleton、runtime integration、Docker E2E |
+| alpha-local theory freeze / scaffold | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR checker first cut | CUT checker skeleton、runtime integration、Docker E2E |
 
 ## closed package memory and active gate
 
@@ -128,8 +128,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | post-`P21` rollback / durable migration family | closed docs-first | first recommendation boundary | actual rollback / durable migration engine completion ではない |
 | post-`P21` distributed activation ordering family | closed docs-first | second recommendation boundary | actual distributed activation protocol ではない |
 | post-`P21` final public hot-plug ABI family | closed docs-first | third recommendation bridge: `freeze prerequisite fixed; public ABI still unfrozen` | actual public ABI freeze ではない |
-| `P-A0-01..03` alpha-0 specs / plan / sample scaffold | validation green in worktree | theory-freeze normative and scaffold lane | package-close commit / push is carried by `P-A0-04` closeout |
-| `P-A0-04` snapshot sync | validation green | current package for snapshot docs / taxonomy / validator alignment | report / commit / push pending |
+| `P-A0-01..04` alpha-0 theory freeze / roadmap / scaffold / snapshot sync | closed | normative/spec memory and scaffold lane | checker/runtime family remains later |
+| `P-A0-05` LIF / VAR checker first cut | closed | selected negative-static sidecar rows + shared checker-floor helpers + focused tests | parser/runtime integration and public diagnostics remain later |
 | `U1` actual commitment | open | packaging / host target / shipped surface / final catalog breadth を actual choice へ進める | user-facing decision なしに public freeze しない |
 | docs / validation maintenance | active | stale wording removal、report sync、validation rerun、formatting cleanup | success claim は fresh validation 後に限る |
 
@@ -165,12 +165,15 @@ Place をまたいで実行・通信・検証・可視化できる
   `bash scripts/storage/detach_prepare.sh`
   `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
   `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
+- alpha checker first cut:
+  `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker`
 - formatting / diff:
   `cargo fmt --check`
   `git diff --check`
 
 ## recent log
 
+- 2026-05-02 07:01 JST — `P-A0-05` LIF / VAR checker first cut closeout floor を実行した。alpha checker unit 7 tests、source hierarchy 60/60、docs scaffold（1101 reports）、report-schema unit 11 tests、`git diff --check` が pass。`LIF-05..08` / `VAR-02/03/07/09/10/15` の sidecar-driven synthetic checker floor は actualize 済みで、current package は `P-A0-06` consistent-cut / save-load checker skeleton へ進む。
 - 2026-05-02 06:32 JST — Alpha-0 theory-freeze / scaffold closeout floor を rerun した。`find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、docs scaffold（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass。Alpha checker/runtime は未実装のため未実行で、current package は commit / push closeout待ち。
 - 2026-05-01 14:36 JST — 1096 `U1` readiness wording audit 後の docs-focused validation checkpoint を実行した。report-schema unit 10 tests、source hierarchy、docs scaffold、`git diff --check` が clean tree で pass。actual `U1` commitment / public freeze は行っていない。
 - 2026-05-01 14:33 JST — `U1` readiness wording audit を実施した。`U1` の 4 軸を packaging / host integration / first shipped public surface / final shared-space operational catalog breadth に揃え、`post_p18_true_user_spec_hold_01.md` の command が research-discovery body も表示するよう修正した。actual `U1` commitment / public freeze は行っていない。

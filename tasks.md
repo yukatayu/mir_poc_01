@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-02 06:32 JST
+最終更新: 2026-05-02 07:01 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-02 06:32 JST に更新済みです:
-  `find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、docs scaffold（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass し、current remaining closeout は report / commit / push です。
+- Alpha-0 closeout validation freshness は 2026-05-02 07:01 JST に更新済みです:
+  alpha checker unit 7 tests、source hierarchy 60/60、docs scaffold（1101 reports）、report-schema unit 11 tests、`git diff --check` が pass しました。`P-A0-05` closeout により LIF / VAR sidecar-driven synthetic checker floor が actualize 済みです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..04` を進行中と読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..05` closeout 後の `P-A0-06` queue を current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -70,11 +70,11 @@
 - Concrete phase:
   Phase 0 — Theory freeze preparation
 - Current package:
-  `P-A0-04` snapshot docs sync
+  `P-A0-06` consistent-cut / save-load checker skeleton
 - Current status:
-  validation green; report / commit / push pending
+  `P-A0-05` は current repo state で close 済み。selected `LIF-*` / `VAR-*` negative-static rows は shared helper support を使う non-public checker floor で validation 可能になった。alpha parser/runtime execution と public diagnostics freeze はまだ行っていない。
 - Next autonomous package:
-  `P-A0-05` checker skeleton first cut
+  `P-A0-07` local Mirrorea runtime integration
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -135,9 +135,9 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-04` snapshot docs / taxonomy / validator sync closeout | repo | validation green | report finalization and commit/push |
-| 2 | `P-A0-05` checker skeleton first cut | repo | next | lifetime/fallback and layer-compatibility diagnostics exist with tests |
-| 3 | `P-A0-06` cut/save/load checker skeleton | repo | queued | consistent-cut / rollback / save-load checks exist with tests |
+| 1 | `P-A0-06` cut/save/load checker skeleton | repo | next | consistent-cut / rollback / save-load checks exist with tests |
+| 2 | `P-A0-07` local Mirrorea runtime integration | repo | queued | local runtime evidence + report + commit/push |
+| 3 | `P-A0-08` layer insertion runtime | repo | queued | debug/auth/ratelimit layer evidence + report + commit/push |
 | 4 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 5 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
@@ -157,11 +157,11 @@ These are safe to do without new product decisions.
 
 | Package | Objective | Current status | Close condition |
 |---|---|---|---|
-| `P-A0-01` | theory freeze specs `13..17` | validation green in worktree | package-close commit/push via `P-A0-04` closeout |
-| `P-A0-02` | roadmap memory `39..43` | validation green in worktree | package-close commit/push via `P-A0-04` closeout |
-| `P-A0-03` | `samples/alpha/` matrix scaffold | validation green in worktree | package-close commit/push via `P-A0-04` closeout |
-| `P-A0-04` | snapshot docs / taxonomy / validator sync | validation green | report + commit/push |
-| `P-A0-05` | checker skeleton first cut | next | key LIF / VAR diagnostics + tests + report + commit/push |
+| `P-A0-01` | theory freeze specs `13..17` | closed | carried into commit/push by the Alpha-0 theory-freeze package line |
+| `P-A0-02` | roadmap memory `39..43` | closed | carried into commit/push by the Alpha-0 theory-freeze package line |
+| `P-A0-03` | `samples/alpha/` matrix scaffold | closed | carried into commit/push by the Alpha-0 theory-freeze package line |
+| `P-A0-04` | snapshot docs / taxonomy / validator sync | closed | report `1098`, commit `56e16a3` |
+| `P-A0-05` | checker skeleton first cut | closed | key LIF / VAR diagnostics + tests + report `1100` |
 | `P-A0-06` | cut/save/load checker skeleton | queued | CUT diagnostics + tests + report + commit/push |
 | `P-A0-07` | local Mirrorea runtime integration | queued | local runtime evidence + report + commit/push |
 | `P-A0-08` | layer insertion runtime | queued | debug/auth/ratelimit layer evidence + report + commit/push |
