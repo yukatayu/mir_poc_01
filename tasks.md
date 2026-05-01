@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 11:21 JST
+最終更新: 2026-05-01 11:27 JST
 
 ## この文書について
 
@@ -29,6 +29,7 @@
   `scripts/tests/test_validate_docs.py` が `docs/reports/TEMPLATE.md` と `scripts/validate_docs.py` の required heading 同期、および missing-heading 時の validator failure を確認します。actual numbered report 全体の semantic lint ではありません。
 - latest report heading guardrail は 2026-05-01 11:21 JST に追加済みです:
   `validate_docs.py` は historical reports 全体を遡及 lint せず、最新 numbered report 1 本だけを template required headings で scaffold check します。unit test は latest missing failure と historical-only missing pass の両方を確認します。
+- 2026-05-01 11:27 JST の post-guardrail docs-focused freshness checkpoint では、clean tree で latest-report heading unit / source hierarchy / docs scaffold / whitespace diff が pass しています。
 
 ## executable floor
 
