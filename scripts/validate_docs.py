@@ -24,6 +24,31 @@ REQUIRED = [
     "docs/reports/TEMPLATE.md",
 ]
 
+REQUIRED_TEMPLATE_HEADINGS = [
+    "## Objective",
+    "## Scope and assumptions",
+    "## Documents consulted",
+    "## Actions taken",
+    "## Files changed",
+    "## Evidence / outputs / test results",
+    "## What changed in understanding",
+    "## Open questions",
+    "## Suggested next prompt",
+    "## Plan update status",
+    "## progress.md update status",
+    "## tasks.md update status",
+    "## samples_progress.md update status",
+    "## Skipped validations and reasons",
+    "## Commit / push status",
+    "## Sub-agent session close status",
+]
+
+
+def missing_template_headings(template_text: str) -> list[str]:
+    return [
+        heading for heading in REQUIRED_TEMPLATE_HEADINGS if heading not in template_text
+    ]
+
 
 def main() -> int:
     missing = [p for p in REQUIRED if not (ROOT / p).exists()]
@@ -36,6 +61,14 @@ def main() -> int:
     reports = sorted((ROOT / "docs" / "reports").glob("[0-9][0-9][0-9][0-9]-*.md"))
     if not reports:
         print("No numbered reports found in docs/reports")
+        return 1
+
+    template_text = (ROOT / "docs" / "reports" / "TEMPLATE.md").read_text(encoding="utf-8")
+    missing_template_sections = missing_template_headings(template_text)
+    if missing_template_sections:
+        print("Report template is missing required sections:")
+        for heading in missing_template_sections:
+            print(" -", heading)
         return 1
 
     print("Documentation scaffold looks complete.")
