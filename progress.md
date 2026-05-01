@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 09:16 JST
+最終更新: 2026-05-01 09:20 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 09:20 JST — docs validator / source-hierarchy guardrail を軽量監査し、`check_source_hierarchy.py` と `validate_docs.py` は structural / scaffold check であり stale-wording lint や semantic validation ではないことを `scripts/README.md` に明記した。script taxonomy front door の存在確認として `scripts/README.md` を source-hierarchy required set に追加し、targeted check、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-05-01 09:16 JST — `tasks.md` / `samples_progress.md` の snapshot dashboard freshness を監査し、1046-1050 の wording-cooling package は runnable sample path / validation command / progress percentage / blocker / promoted implementation queue を変えていないため、両 dashboard は更新不要と判断した。新規 report で判断と sub-agent close を記録し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` を pass した。
 - 2026-05-01 09:12 JST — active `plan/` front-door / hot-plug family memory の temperature audit を行い、`current recommendation` / `promoted next` / `completed-engine` / `first-second-third recommendation` / live reopen wording を repository-memory reading、historical closeout chain、historical boundary family、product-shaping gate wording に冷やした。`plan/29` は threshold inventory として維持し、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check`、targeted plan wording check を pass した。
 - 2026-05-01 09:02 JST — non-hot-plug `docs/research_abstract/` の active reader-facing summaries を監査し、`current summary` / `current recommendation` / `promoted queue` / `current status` 系の live-authority wording を repository-memory reading、boundary rule、snapshot pointer に冷やした。`old/` archive は触らず、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check`、targeted active research-abstract wording check を pass した。

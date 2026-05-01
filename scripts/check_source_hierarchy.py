@@ -32,12 +32,15 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/11-roadmap-near-term.md",
         "plan/17-research-phases-and-autonomy-gates.md",
     ],
+    "scripts": [
+        "scripts",
+        "scripts/README.md",
+    ],
     "supporting_dirs": [
         "docs/reports",
         "docs/research_abstract",
         "samples/clean-near-end",
         "samples/clean-near-end/sugoroku-world",
-        "scripts",
         "crates/mir-runtime",
         "sub-agent-pro",
     ],
