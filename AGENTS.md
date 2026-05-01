@@ -27,7 +27,7 @@ The repository therefore treats documentation structure as part of the project's
 4. **Always write a new report**
    - Every non-trivial task must create a **new** markdown file under `docs/reports/`.
    - Never overwrite a previous report.
-   - Use the report template and include: objective, documents consulted, actions taken, files changed, commands run, evidence, unresolved questions, suggested next prompt.
+   - Use the report template and include every required section in order, including `plan/`, `Documentation.md`, `progress.md`, `tasks.md`, and `samples_progress.md` update status, reviewer findings, skipped validations, commit / push status, and sub-agent close status.
 
 5. **Keep the architecture separable**
    - Mir, Mirrorea, PrismCascade, and the Typed-Effect Wiring Platform are related but intentionally separable.
@@ -91,12 +91,24 @@ Every report should contain, in this order:
 1. Title and identifier
 2. Objective
 3. Scope and assumptions
-4. Documents consulted
-5. Actions taken
-6. Evidence / outputs / test results
-7. What changed in understanding
-8. Open questions
-9. Suggested next prompt
+4. Start state / dirty state
+5. Documents consulted
+6. Actions taken
+7. Files changed
+8. Commands run
+9. Evidence / outputs / test results
+10. What changed in understanding
+11. Open questions
+12. Suggested next prompt
+13. `plan/` update status
+14. `Documentation.md` update status
+15. `progress.md` update status
+16. `tasks.md` update status
+17. `samples_progress.md` update status
+18. reviewer findings and follow-up
+19. skipped validations and reasons
+20. commit / push status
+21. sub-agent session close status
 
 ## Editing policy
 

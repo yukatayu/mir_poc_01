@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 13:52 JST
+最終更新: 2026-05-01 14:08 JST
 
 ## この文書について
 
@@ -20,13 +20,13 @@
 - self-driven に残るのは maintenance lane です:
   stale docs cleanup、validation rerun、report creation、formatting cleanup、guardrail maintenance、regression repair、dashboard freshness、source hierarchy / docs scaffold guardrail maintenance。
 - `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims は historical memory として `plan/` / `docs/reports/` / relevant specs examples に委譲し、active command claim へ戻しません。
-- 2026-04-30 以降の detailed maintenance chronology はこの snapshot では再列挙しません。package-by-package evidence は `docs/reports/1001` 以降の committed reports、long-lived comparison / boundary memory は relevant `plan/` files、runnable sample status は `samples_progress.md` を参照します。
+- 2026-04-30 以降の detailed maintenance chronology はこの snapshot では再列挙しません。package-by-package evidence は package close 後の committed reports を正本にし、in-flight package は当該 report の commit / push status を authority とします。long-lived comparison / boundary memory は relevant `plan/` files、runnable sample status は `samples_progress.md` を参照します。
 - 2026-05-01 の `1051` 以降の guardrail / snapshot / validation / storage follow-up packages は maintenance-only closeout です:
   dashboard freshness、validator/source-hierarchy/report-template guardrail、full/docs/storage validation checkpoint、warning/formatting cleanup、Makefile alias parity、task/progress/sample dashboard compression、active front-door / active-doc wording repair を継続的に閉じています。new implementation queue は reopened していません。
 - 直近の repository-wide validation freshness checkpoint は 2026-05-01 13:52 JST です:
   source hierarchy / docs scaffold、current-L2 inventory、source regression 23/23、guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer helper floors、Lean sync、storage guardrail、Cargo crate tests、`cargo fmt --check`、`git diff --check` が pass しました。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、generated output は external workdir のみです。
-- report template compliance guardrail は 2026-05-01 11:13 JST に template-side `Commands run` 欄まで拡張済みです:
-  `scripts/tests/test_validate_docs.py` が `docs/reports/TEMPLATE.md` と `scripts/validate_docs.py` の required heading 同期、および missing-heading 時の validator failure を確認します。actual numbered report 全体の semantic lint ではありません。
+- report template compliance guardrail は 2026-05-01 14:08 JST に report closeout schema まで拡張済みです:
+  `scripts/tests/test_validate_docs.py` が `docs/reports/TEMPLATE.md` と `scripts/validate_docs.py` の required heading 同期、missing-heading failure、latest-report order / empty section / 未置換 update-status placeholder failure を確認します。required headings は `Commands run`、`Documentation.md update status`、start dirty state、reviewer findings を含みます。actual numbered report 全体の semantic lint ではありません。
 - latest report heading guardrail は 2026-05-01 11:21 JST に追加済みです:
   `validate_docs.py` は historical reports 全体を遡及 lint せず、最新 numbered report 1 本だけを template required headings で scaffold check します。unit test は latest missing failure と historical-only missing pass の両方を確認します。
 - 2026-05-01 11:27 JST の post-guardrail docs-focused freshness checkpoint では、clean tree で latest-report heading unit / source hierarchy / docs scaffold / whitespace diff が pass しています。
@@ -201,12 +201,12 @@ git diff --check
 ## reporting requirement
 
 Every non-trivial change must add a new report under `docs/reports/`.
-For the current docs freshness task, the report must include:
+Use the current report template. At minimum, the report must include:
 
-- dirty state and formatting cleanup commit / push status
+- start dirty state and commit / push status
 - documents consulted
 - files changed
+- commands run and validation results
 - reviewer findings and follow-up
-- validation commands and results
 - skipped validations and reasons
-- remaining user decision blockers
+- relevant open questions / remaining user decision blockers

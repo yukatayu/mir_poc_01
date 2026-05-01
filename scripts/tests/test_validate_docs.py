@@ -14,6 +14,22 @@ import validate_docs
 
 
 class ValidateDocsTests(unittest.TestCase):
+    def _valid_template_text(self) -> str:
+        return "\n".join(validate_docs.REQUIRED_TEMPLATE_HEADINGS)
+
+    def _valid_report_text(self) -> str:
+        return "\n\n".join(
+            f"{heading}\n\nRecorded content for {heading}."
+            for heading in validate_docs.REQUIRED_TEMPLATE_HEADINGS
+        )
+
+    def _valid_report_text_without(self, omitted_heading: str) -> str:
+        return "\n\n".join(
+            f"{heading}\n\nRecorded content for {heading}."
+            for heading in validate_docs.REQUIRED_TEMPLATE_HEADINGS
+            if heading != omitted_heading
+        )
+
     def _write_required_scaffold(self, root: Path, template_text: str) -> None:
         for relative in validate_docs.REQUIRED:
             path = root / relative
@@ -38,11 +54,37 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertIn(heading, validate_docs.REQUIRED_TEMPLATE_HEADINGS)
         self.assertIn(heading, template_text)
 
+    def test_report_template_requires_documentation_update_status_section(self) -> None:
+        heading = "## Documentation.md update status"
+        template_text = (
+            Path(__file__).resolve().parents[2]
+            / "docs"
+            / "reports"
+            / "TEMPLATE.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(heading, validate_docs.REQUIRED_TEMPLATE_HEADINGS)
+        self.assertIn(heading, template_text)
+
+    def test_report_template_requires_dirty_state_and_reviewer_sections(self) -> None:
+        headings = [
+            "## Start state / dirty state",
+            "## Reviewer findings and follow-up",
+        ]
+        template_text = (
+            Path(__file__).resolve().parents[2]
+            / "docs"
+            / "reports"
+            / "TEMPLATE.md"
+        ).read_text(encoding="utf-8")
+
+        for heading in headings:
+            self.assertIn(heading, validate_docs.REQUIRED_TEMPLATE_HEADINGS)
+            self.assertIn(heading, template_text)
+
     def test_main_rejects_template_missing_commands_run_section(self) -> None:
         heading = "## Commands run"
-        template_text = "\n".join(
-            h for h in validate_docs.REQUIRED_TEMPLATE_HEADINGS if h != heading
-        )
+        template_text = "\n".join(h for h in validate_docs.REQUIRED_TEMPLATE_HEADINGS if h != heading)
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -59,10 +101,8 @@ class ValidateDocsTests(unittest.TestCase):
 
     def test_main_rejects_latest_report_missing_commands_run_section(self) -> None:
         heading = "## Commands run"
-        template_text = "\n".join(validate_docs.REQUIRED_TEMPLATE_HEADINGS)
-        latest_report_text = "\n".join(
-            h for h in validate_docs.REQUIRED_TEMPLATE_HEADINGS if h != heading
-        )
+        template_text = self._valid_template_text()
+        latest_report_text = self._valid_report_text_without(heading)
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -81,13 +121,101 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertIn("0002-latest.md", stdout.getvalue())
         self.assertIn(heading, stdout.getvalue())
 
+    def test_main_rejects_latest_report_missing_new_required_section(self) -> None:
+        heading = "## Reviewer findings and follow-up"
+        template_text = self._valid_template_text()
+        latest_report_text = self._valid_report_text_without(heading)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                latest_report_text, encoding="utf-8"
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Latest report is missing required sections", stdout.getvalue())
+        self.assertIn(heading, stdout.getvalue())
+
+    def test_main_rejects_latest_report_with_required_sections_out_of_order(self) -> None:
+        template_text = self._valid_template_text()
+        headings = list(validate_docs.REQUIRED_TEMPLATE_HEADINGS)
+        headings[1], headings[2] = headings[2], headings[1]
+        latest_report_text = "\n\n".join(
+            f"{heading}\n\nRecorded content for {heading}." for heading in headings
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                latest_report_text, encoding="utf-8"
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Latest report has required sections out of order", stdout.getvalue())
+
+    def test_main_rejects_latest_report_with_empty_required_section(self) -> None:
+        template_text = self._valid_template_text()
+        latest_report_text = self._valid_report_text().replace(
+            "## Commands run\n\nRecorded content for ## Commands run.",
+            "## Commands run\n\n",
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                latest_report_text, encoding="utf-8"
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Latest report has empty required sections", stdout.getvalue())
+        self.assertIn("## Commands run", stdout.getvalue())
+
+    def test_main_rejects_latest_report_with_unresolved_template_placeholder(self) -> None:
+        template_text = self._valid_template_text()
+        latest_report_text = self._valid_report_text().replace(
+            "Recorded content for ## Plan update status.",
+            "`plan/` 更新不要 / 更新済み:",
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                latest_report_text, encoding="utf-8"
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Latest report has unresolved template placeholders", stdout.getvalue())
+        self.assertIn("## Plan update status", stdout.getvalue())
+
     def test_main_allows_historical_report_missing_heading_when_latest_is_valid(self) -> None:
         heading = "## Commands run"
-        template_text = "\n".join(validate_docs.REQUIRED_TEMPLATE_HEADINGS)
-        historical_report_text = "\n".join(
-            h for h in validate_docs.REQUIRED_TEMPLATE_HEADINGS if h != heading
-        )
-        latest_report_text = "\n".join(validate_docs.REQUIRED_TEMPLATE_HEADINGS)
+        template_text = self._valid_template_text()
+        historical_report_text = self._valid_report_text_without(heading)
+        latest_report_text = self._valid_report_text()
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

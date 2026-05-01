@@ -9,6 +9,8 @@
 
 ## Scope and assumptions
 
+## Start state / dirty state
+
 ## Documents consulted
 
 ## Actions taken
@@ -29,6 +31,10 @@
 
 `plan/` 更新不要 / 更新済み:
 
+## Documentation.md update status
+
+`Documentation.md` 更新不要 / 更新済み:
+
 ## progress.md update status
 
 `progress.md` 更新不要 / 更新済み:
@@ -40,6 +46,8 @@
 ## samples_progress.md update status
 
 `samples_progress.md` 更新不要 / 更新済み:
+
+## Reviewer findings and follow-up
 
 ## Skipped validations and reasons
 

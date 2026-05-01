@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-01 13:52 JST
+Last updated: 2026-05-01 14:08 JST
 Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -38,13 +38,13 @@ Notes:
 | Visualization / viewer | 100 | typed prototype inventory | helper/runtime typed panel and telemetry inventory | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | Hot-plug package | 90 | P21 narrow runtime floor + docs-first trilogy closed | helper lifecycle + request/verdict carrier + runtime engine-state narrow floor; public ABI still unfrozen | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
 | Storage / backend guardrail | 100 | current first-cut closeout, not per-package closeout | external workdir, cargo cache/target binding, LLVM staging visibility | `bash scripts/env/mirrorea_storage_env.sh`; `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`; `bash scripts/storage/detach_prepare.sh`; `bash scripts/storage/cleanup_disposable_artifacts.sh --list`; `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` |
-| Docs / traceability | 90 | active maintenance | current snapshot, reports, source hierarchy, stale wording cleanup | `python3 scripts/check_source_hierarchy.py && python3 scripts/validate_docs.py` |
+| Docs / traceability | 91 | active maintenance | current snapshot, reports, source hierarchy, report schema guardrail, stale wording cleanup | `python3 -m unittest scripts.tests.test_validate_docs && python3 scripts/check_source_hierarchy.py && python3 scripts/validate_docs.py` |
 
 ## Active sample matrix
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 13:52 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 14:08 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093` | Snapshot docs are maintenance artifacts, not normative specs |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 13:52 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084`, `1085`, `1091`, `1092` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 13:52 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076`, `1085`, `1091`, `1092` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 13:52 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076`, `1085`, `1092` | attach lifecycle / compatibility anchor |
@@ -95,6 +95,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-01 14:08 JST | report schema guardrail alignment | pass | `scripts/tests/test_validate_docs.py` was extended RED→GREEN so the report template and validator require `Documentation.md update status`, start dirty state, and reviewer findings, and reject latest-report order / empty-section / unresolved update-status placeholder drift. `check_source_hierarchy.py`, `validate_docs.py`, and `git diff --check` passed after report `1093`; no sample semantics or public surface changed. |
 | 2026-05-01 13:52 JST | full validation freshness checkpoint | pass with known storage warning | Full corrected floor passed: source hierarchy/docs scaffold; current-L2 inventory and 23-step regression; guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer; Lean sync; storage guardrail; Cargo crate tests (`mir-ast` 73, `mirrorea-core` 24, `mir-runtime` 88, `mir-semantics` 79); `cargo fmt --check`; `git diff --check`. Generated output stayed under `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1092`; no repo files were edited by validation. |
 | 2026-05-01 13:39 JST | current phase closeout current-L2 / Lean anchor audit | pass | `current_l2_source_sample_regression.py inventory` passed; `regression --run-label 1091-current-phase-closeout --artifact-root /mnt/mirrorea-work/generated-artifacts/current-l2-regression-1091` passed 23/23; `current_l2_guided_samples.py closeout --format json`, `clean_near_end_samples.py closeout`, and `current_l2_lean_sample_sync.py` passed. Guide mirror only; no final parser / public API / all proof discharge claim. |
 | 2026-05-01 13:23 JST | public-gate storage anchor mirror audit | pass with known storage warning | `docs/hands_on/public_api_parser_gate_01.md` and `plan/27` now mirror env `--ensure-dirs`, detach audit, cleanup list, and external cargo no-run probe as repo-side inventory evidence. This does not claim actual LLVM build / backend choice / packaging adoption. |

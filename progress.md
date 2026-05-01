@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 13:52 JST
+最終更新: 2026-05-01 14:08 JST
 
 ## この文書について
 
@@ -61,7 +61,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | typed external / projection / viewer | 82% | 91% | 82% | public contract は要仕様確認 | helper preview、generated bridge evidence、typed viewer inventory はある。final host / viewer / emitted executable family は未完 |
 | hot-plug later-family boundary | 82% | 91% | 78% | actual ABI は要仕様確認 | docs-first trilogy close 済み。rollback / durable migration / distributed ordering / final public ABI は completion claim なし |
 | storage / backend guardrail | 82% | 91% | 88% | 着手可能 | external workdir / cleanup / LLVM staging visibility は closeout 済み。actual LLVM build と backend choice は未決 |
-| docs / dashboard / repository structure | 94% | 94% | 88% | 着手可能 | source hierarchy、snapshot docs、dashboard semantics は current line に追随。履歴の圧縮は継続保守対象 |
+| docs / dashboard / repository structure | 94% | 94% | 89% | 着手可能 | source hierarchy、snapshot docs、dashboard semantics、report schema guardrail は current line に追随。履歴の圧縮は継続保守対象 |
 
 ## macro phase map
 
@@ -142,6 +142,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 14:08 JST — report schema guardrail alignment を実施した。`docs/reports/TEMPLATE.md` / `scripts/validate_docs.py` / `scripts/tests/test_validate_docs.py` / `AGENTS.md` / `plan/91` を同期し、`Documentation.md update status`、start dirty state、reviewer findings を latest-report scaffold guardrail に入れた。validator は latest report の required heading order、empty required section、未置換 update-status placeholder も検出する。RED→GREEN unit、source hierarchy、docs scaffold、diff whitespace checks が pass。
 - 2026-05-01 13:52 JST — full validation freshness checkpoint を再実行した。source hierarchy / docs scaffold、current-L2 inventory、source regression 23/23、guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer / Lean sync / storage guardrail / Cargo crate tests / `cargo fmt --check` / `git diff --check` が pass。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、generated output は `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1092` のみ。
 - 2026-05-01 13:39 JST — current phase closeout guide の current-L2 / Lean validation anchors を再確認し、`docs/hands_on/current_phase_closeout_01.md` に source inventory、23-step regression、clean near-end script closeout、Lean sync を mirror した。focused run は source inventory、23/23 regression、guided closeout、clean near-end closeout、Lean sync が pass。
 - 2026-05-01 13:23 JST — public API / parser gate の storage validation anchor を再確認し、`docs/hands_on/public_api_parser_gate_01.md` と `plan/27` に `mirrorea_storage_env.sh --ensure-dirs`、`detach_prepare.sh`、`cleanup_disposable_artifacts.sh --list`、external `CARGO_HOME` no-run probe を mirror した。これは repo-side public-gate inventory の再現性補強であり、actual LLVM build / backend choice / packaging adoption ではない。

@@ -168,12 +168,17 @@ PoC ループの task は、できるだけ task 内部で閉じる。
 
 ## report に必ず残すこと
 
+- current report template は `docs/reports/TEMPLATE.md`、guardrail は `scripts/validate_docs.py` / `scripts/tests/test_validate_docs.py` に置く。
 - `plan/` を更新したファイル
 - `plan/` を更新した理由
 - もし更新しなかったなら `plan/ 更新不要`
+- `Documentation.md` / `progress.md` / `tasks.md` / `samples_progress.md` の更新要否
 - task 開始時の dirty state
 - local validation の evidence
-- reviewer の completion 有無
+- reviewer findings and follow-up
+- skipped validations and reasons
+- commit / push status
+- sub-agent session close status
 
 ## `plan/` の見直し頻度
 
