@@ -14,7 +14,15 @@
 ```bash
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
+bash scripts/env/mirrorea_storage_env.sh
+bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
+free -h
+ls -ld target /mnt/mirrorea-work/cargo-target /mnt/mirrorea-work/cargo-registry-cache /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install
+python3 scripts/current_l2_source_sample_regression.py inventory
+python3 scripts/current_l2_source_sample_regression.py regression --run-label current-phase-closeout --artifact-root /mnt/mirrorea-work/generated-artifacts/current-l2-regression-current-phase
 python3 scripts/current_l2_guided_samples.py closeout --format json
+python3 scripts/clean_near_end_samples.py closeout
+python3 scripts/current_l2_lean_sample_sync.py
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
@@ -25,16 +33,19 @@ python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 cargo fmt --check
 cargo test -p mirrorea-core
 cargo test -p mir-runtime --test hotplug_runtime_skeleton
-cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 git diff --check
 find samples/generated -maxdepth 3 -type f | sort
-bash scripts/env/mirrorea_storage_env.sh
-bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
 bash scripts/storage/detach_prepare.sh
 bash scripts/storage/cleanup_disposable_artifacts.sh --list
-free -h
-ls -ld target /mnt/mirrorea-work/cargo-target /mnt/mirrorea-work/cargo-registry-cache /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install
 CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run
+```
+
+## 追加で見る runtime corroboration lane
+
+front-door runner を先に使います。runtime binary 直叩きは補助確認です。
+
+```bash
+cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 ```
 
 ## 追加で見る debug lane
@@ -70,6 +81,8 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 
 ## これで確認できること
 
+- `samples/current-l2/` の base source corpus、23-step source regression、
+  clean-near-end compatibility front door、Lean evidence sync が current validation floor として確認できること。
 - active clean near-end suite、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug Rust floor が current runnable または closeout-backed surface として確認できること。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`AuthEvidence`、`VisualizationProtocol` / telemetry envelope、helper `verification_handoff_witness`、runtime `verification_model_check` の current evidence carriers が helper-local / report-local inventory として読めること。
 - `mirrorea-core` の `MembershipRegistry`、`PlaceCatalog`、`LogicalPlaceRuntimeShell`、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と、`mir-runtime` の hot-plug skeleton / engine report が repo-local floor として確認できること。
