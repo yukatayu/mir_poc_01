@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 12:37 JST
+最終更新: 2026-05-01 12:46 JST
 
 ## この文書について
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。これは active maintenance であり、新しい implementation / product-shaping line ではありません。
   `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
-  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。2026-05-01 11:01 JST の corrected full validation floor も pass 済みで、current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
+  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。2026-05-01 12:46 JST の repository-wide validation freshness checkpoint も pass 済みで、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、new implementation queue も reopened していません。
 
 ## strict non-claims
 
@@ -137,6 +137,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 12:46 JST — repository-wide validation freshness checkpoint を実行し、docs/source hierarchy、current-L2 source regression 23/23、clean near-end / Sugoroku / avatar / typed external / network / projection / viewer helper floors、Lean sync、Cargo crate tests、`cargo fmt --check`、`git diff --check` が pass した。storage guardrail は既知の `/mnt/mirrorea-work/llvm` root-owned warning のみで、削除は行っていない。
 - 2026-05-01 12:37 JST — current-L2 / Lean active-floor wording を再点検し、`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence、`current_l2_guided_samples.py` は clean-near-end active suite への compatibility front door として snapshot / roadmap wording を同期した。source-sample regression helper は削除済み stale emitted-artifact Cargo target を外し、現存する model-check carrier conformance pipeline を追加した 23-step floor として再通過した。
 - 2026-05-01 12:14 JST — projection/codegen bridge evidence の front-door wording を点検し、current `equivalence` reading を committed generated manifest + helper/report-local anchor の review-category alignment inventory に限定した。`check-all` は live alignment validation、`closeout` は manifest inventory evidence として扱い、generated place-program / optimizer / deployment planner / equivalence checker / proof / final emitted ABI は kept-later gate として維持した。
 - 2026-05-01 11:53 JST — network transport sample README / hands-on / `plan/22` の command-anchor drift を修正した。`check-all --format json` は `NET-02..05` executable canary anchor、`closeout --format json` は inventory evidence、`NET-01` は Sugoroku loopback parity anchor として分離した。
