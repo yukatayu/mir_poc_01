@@ -8,15 +8,25 @@
   "kind": "negative",
   "purpose": "witness use included, create omitted",
   "expected": "invalid cut",
+  "expected_static": {
+    "verdict": "invalid cut",
+    "checked_reason_codes": [
+      {
+        "kind": "orphan_witness_use",
+        "use_event": "witness_use",
+        "missing_predecessor": "witness_create"
+      }
+    ]
+  },
   "claims": {
     "runnable": false,
     "implemented": false,
     "active_root": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "synthetic-checker-floor",
+    "runner": "python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker",
+    "note": "Validated in this package by non-public synthetic checker-floor tests plus filesystem/docs scaffold checks."
   },
   "deferred": [
     "exact executable syntax",

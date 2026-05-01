@@ -4,7 +4,8 @@
 - Phase: Phase 2 / 6
 - Stage: Stage A -> F bridge
 - Current runners do not execute this family yet.
-- Validation for this package is filesystem/docs integrity only.
+- Current package adds a non-public checker floor for selected consistency/deferred-surface rows via sidecar-declared `expected_static.checked_reason_codes`.
+- Validation for this package is synthetic-artifact checker tests plus filesystem/docs integrity.
 
 ## Rows
 
@@ -32,10 +33,14 @@
 
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
+- `CUT-05` / `07` / `08` / `09` / `13` / `14` / `15` currently carry checker-floor seed rows for the first structural cut-validity/deferred-surface cut.
+- this first checker cut does not yet cover:
+  `CUT-11` Z-cycle graph modeling, `CUT-12` communication-induced checkpoint repair, `CUT-10/16/17` load non-resurrection verdict split, or membership-dependent dispatch closure
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
 
 ```bash
 find samples/alpha/cut-save-load -maxdepth 1 -type f | sort
+python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker
 ```

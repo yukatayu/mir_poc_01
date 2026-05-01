@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-02 07:01 JST
+最終更新: 2026-05-02 07:25 JST
 
 ## この文書について
 
@@ -27,15 +27,15 @@ Place をまたいで実行・通信・検証・可視化できる
 - Concrete phase:
   Phase 0 — Theory freeze preparation
 - Current package:
-  `P-A0-06` consistent-cut / save-load checker skeleton
-- Current status:
-  `P-A0-05` は current repo state で close しており、`scripts/alpha_lifetime_fallback_checker.py` / `scripts/alpha_contract_variance_checker.py` と selected sidecar `expected_static.checked_reason_codes` によって LIF / VAR family の first non-public checker floor を actualize した。これは synthetic detached artifact comparison only であり、alpha parser/runtime execution ではない。
-- Validation freshness:
-  2026-05-02 07:01 JST に Alpha-0 checker-floor / docs closeout floor を rerun し、alpha checker unit 7 tests、source hierarchy 60/60、`validate_docs.py`（1101 reports）、report-schema unit 11 tests、`git diff --check` が pass
-- Current blockers:
-  consistent-cut / save-load checker floor、runtime/package/avatar family checker floor、alpha runner/runtime family はまだ未実装
-- Next autonomous package:
   `P-A0-07` local Mirrorea runtime integration
+- Current status:
+  `P-A0-06` は current repo state で close しており、`scripts/alpha_cut_save_load_checker.py` と selected CUT sidecar `expected_static.checked_reason_codes` によって save/load family の first non-public checker floor を actualize した。current alpha checker floor は LIF / VAR / CUT の 3 family に広がったが、いずれも synthetic detached artifact comparison only であり、alpha parser/runtime execution ではない。
+- Validation freshness:
+  2026-05-02 07:25 JST に Alpha-0 checker-floor / docs closeout floor を rerun し、alpha checker unit 11 tests、source hierarchy 60/60、`validate_docs.py`（1102 reports）、report-schema unit 11 tests、`git diff --check` が pass
+- Current blockers:
+  Z-cycle graph model、load non-resurrection verdict split、membership-dependent dispatch closure row、runtime/package/avatar family checker floor、alpha runner/runtime family はまだ未実装
+- Next autonomous package:
+  `P-A0-08` layer insertion runtime
 - User-decision blockers:
   public `U1` gate、first network scope、avatar compatibility first target、native binary policy、save/load initial scope、UI target、final catalog breadth は still later
 
@@ -85,7 +85,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | docs / dashboard / repository structure | 94% | 94% | 89% | 着手可能 | source hierarchy、snapshot docs、dashboard semantics、report schema guardrail は current line に追随。履歴の圧縮は継続保守対象 |
 | lifetime / fallback alpha line | 78% | 42% | 25% | 着手可能 | `specs/13` + `samples/alpha/lifetime-fallback/` に加え、`LIF-05..08` の sidecar-driven synthetic checker floor が actualize 済み。parser/runtime は still later |
 | layer compatibility alpha line | 76% | 38% | 25% | 着手可能 | `specs/14` + `samples/alpha/contract-variance/` に加え、`VAR-02/03/07/09/10/15` の sidecar-driven synthetic checker floor が actualize 済み。layer runtime は still later |
-| save/load / consistent-cut alpha line | 68% | 30% | 8% | 着手可能 | `specs/15` と `samples/alpha/cut-save-load/` は追加済み。predicate/checker pending |
+| save/load / consistent-cut alpha line | 68% | 30% | 25% | 着手可能 | `specs/15` + `samples/alpha/cut-save-load/` に加え、`CUT-05/07/08/09/13/14/15` の sidecar-driven synthetic checker floor が actualize 済み。Z-cycle/non-resurrection widening は still later |
 | runtime package / avatar alpha line | 66% | 34% | 8% | 着手可能 | `specs/16` と `samples/alpha/avatar-runtime/` / `hotplug-runtime/` は scaffold 済み。 runtime/package checker pending |
 | Mirrorea Spaces alpha integration | 60% | 34% | 12% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` で stage map と completion condition を fixed。integrated runtime pending |
 
@@ -115,7 +115,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy widening contract、final viewer / verifier API、retention policy、telemetry service |
 | hot-plug runtime package | P21 + docs-first trilogy closed | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, three later-family boundaries | rollback protocol, durable migration engine, distributed activation ordering, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
-| alpha-local theory freeze / scaffold | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR checker first cut | CUT checker skeleton、runtime integration、Docker E2E |
+| alpha-local theory freeze / scaffold | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker first cuts | runtime integration、layer insertion、Docker E2E |
 
 ## closed package memory and active gate
 
@@ -130,6 +130,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | post-`P21` final public hot-plug ABI family | closed docs-first | third recommendation bridge: `freeze prerequisite fixed; public ABI still unfrozen` | actual public ABI freeze ではない |
 | `P-A0-01..04` alpha-0 theory freeze / roadmap / scaffold / snapshot sync | closed | normative/spec memory and scaffold lane | checker/runtime family remains later |
 | `P-A0-05` LIF / VAR checker first cut | closed | selected negative-static sidecar rows + shared checker-floor helpers + focused tests | parser/runtime integration and public diagnostics remain later |
+| `P-A0-06` CUT checker first cut | closed | selected CUT sidecar rows + shared checker-floor helper + focused tests | Z-cycle graph model, non-resurrection split, and runtime integration remain later |
 | `U1` actual commitment | open | packaging / host target / shipped surface / final catalog breadth を actual choice へ進める | user-facing decision なしに public freeze しない |
 | docs / validation maintenance | active | stale wording removal、report sync、validation rerun、formatting cleanup | success claim は fresh validation 後に限る |
 
@@ -166,13 +167,14 @@ Place をまたいで実行・通信・検証・可視化できる
   `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
   `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
 - alpha checker first cut:
-  `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker`
+  `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_cut_save_load_checker`
 - formatting / diff:
   `cargo fmt --check`
   `git diff --check`
 
 ## recent log
 
+- 2026-05-02 07:25 JST — `P-A0-06` CUT checker first cut closeout floor を実行した。alpha checker unit 11 tests、source hierarchy 60/60、docs scaffold（1102 reports）、report-schema unit 11 tests、`git diff --check` が pass。`CUT-05/07/08/09/13/14/15` の sidecar-driven synthetic checker floor は actualize 済みで、current package は `P-A0-07` local Mirrorea runtime integration へ進む。
 - 2026-05-02 07:01 JST — `P-A0-05` LIF / VAR checker first cut closeout floor を実行した。alpha checker unit 7 tests、source hierarchy 60/60、docs scaffold（1101 reports）、report-schema unit 11 tests、`git diff --check` が pass。`LIF-05..08` / `VAR-02/03/07/09/10/15` の sidecar-driven synthetic checker floor は actualize 済みで、current package は `P-A0-06` consistent-cut / save-load checker skeleton へ進む。
 - 2026-05-02 06:32 JST — Alpha-0 theory-freeze / scaffold closeout floor を rerun した。`find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、docs scaffold（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass。Alpha checker/runtime は未実装のため未実行で、current package は commit / push closeout待ち。
 - 2026-05-01 14:36 JST — 1096 `U1` readiness wording audit 後の docs-focused validation checkpoint を実行した。report-schema unit 10 tests、source hierarchy、docs scaffold、`git diff --check` が clean tree で pass。actual `U1` commitment / public freeze は行っていない。

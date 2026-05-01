@@ -161,7 +161,7 @@
 - normative anchor は `specs/13..17`
 - repository memory anchor は `plan/39..43`
 - sample scaffold root は `samples/alpha/`
-- current package reading は `P-A0-01..05` が current repo state で close 済みであり、2026-05-02 07:01 JST 時点では `P-A0-05` により LIF / VAR sidecar-driven synthetic checker floor が actualize 済み、next reopen point は `P-A0-06` consistent-cut / save-load checker skeleton という状態を前提にし、queue authority は `progress.md` / `tasks.md` に残す
+- current package reading は `P-A0-01..06` が current repo state で close 済みであり、2026-05-02 07:25 JST 時点では `P-A0-06` により CUT sidecar-driven synthetic checker floor まで actualize 済み、next reopen point は `P-A0-07` local Mirrorea runtime integration という状態を前提にし、queue authority は `progress.md` / `tasks.md` に残す
 - Stage A current floor と Stage B local runtime target を混同しない
   - Stage A evidence:
     clean near-end suite、current-L2 corpus、Lean evidence、Sugoroku helper、avatar helper、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug carrier/runtime narrow floor

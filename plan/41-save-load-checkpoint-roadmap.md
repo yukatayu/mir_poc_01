@@ -19,7 +19,12 @@ distributed durable save/load completion ではない。
   - `try` / rollback / `atomic_cut`
   - place-local runtime examples
 - Alpha-0 save/load sample family is now present under `samples/alpha/cut-save-load/`
-- cut-validity checker naming and executable predicate surface are still pending
+- `P-A0-06` first checker-floor helper actualization now exists via:
+  - `scripts/alpha_cut_save_load_checker.py`
+  - `samples/alpha/cut-save-load/cut-05` / `07` / `08` / `09` / `13` / `14` / `15` sidecars
+  synthetic detached artifact comparison only; no distributed save/load or runtime bridge claim
+- current first cut intentionally does **not** claim:
+  full Z-cycle graph handling, communication-induced checkpoint repair, load rejection vs stale-preserving load split, or membership-dependent dispatch closure coverage
 
 ## decisions mirrored from specs/15
 
@@ -39,12 +44,14 @@ distributed durable save/load completion ではない。
 
 ### next executable cut
 
-- consistent-cut predicate/checker
+- consistent-cut predicate/checker widening beyond the first orphan/deferred slice
 - local save/load skeleton
 - invalid distributed snapshot reject
 - explicit channel-state/in-flight representation
-- capability-grant / auth-evidence closure checks
-- stale witness / stale membership non-resurrection checks
+- hot-plug activation closure checks
+- Z-cycle structural model
+- membership-dependent dispatch closure row or equivalent sample
+- stale witness / stale membership non-resurrection checks with verdict split
 
 ## Docker / distributed negative sample roadmap
 
