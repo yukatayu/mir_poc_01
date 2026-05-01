@@ -193,7 +193,6 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
                 "runtime lowering test",
                 "source sample runner test",
                 "verification ladder test",
-                "emitted artifact wiring test",
                 "formal hook support test",
                 "runtime formal hook smoke for e1-place-atomic-cut",
                 "runtime formal hook smoke for e2-try-fallback",
@@ -212,6 +211,8 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
                 "static formal hook smoke for e23-malformed-try-fallback-missing-fallback-body",
                 "theorem Lean-stub conformance for e2-try-fallback",
                 "theorem Lean-stub conformance for e5-underdeclared-lineage",
+                "model-check carrier conformance for e2-try-fallback",
+                "model-check carrier conformance for e5-underdeclared-lineage",
             ],
         )
         self.assertEqual(
@@ -224,88 +225,104 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
                 "cargo",
                 "test",
                 "-p",
-                "mir-runtime",
+                "mir-semantics",
                 "--test",
-                "current_l2_source_sample_emitted_artifact_wiring",
+                "current_l2_formal_hook_support",
             ),
         )
-        self.assertEqual(commands[5].argv[0], "/usr/bin/python3")
-        self.assertEqual(commands[5].argv[2], "smoke-formal-hook-runtime")
-        self.assertIn("--artifact-root", commands[5].argv)
-        self.assertIn("--run-label", commands[5].argv)
+        self.assertFalse(
+            any(
+                "current_l2_source_sample_emitted_artifact_wiring" in command.argv
+                for command in commands
+            )
+        )
+        self.assertEqual(commands[4].argv[0], "/usr/bin/python3")
+        self.assertEqual(commands[4].argv[2], "smoke-formal-hook-runtime")
+        self.assertIn("--artifact-root", commands[4].argv)
+        self.assertIn("--run-label", commands[4].argv)
         self.assertEqual(
-            commands[5].argv[commands[5].argv.index("--run-label") + 1],
+            commands[4].argv[commands[4].argv.index("--run-label") + 1],
             "phase6-smoke-e1-place-atomic-cut",
         )
         self.assertEqual(
-            commands[6].argv[commands[6].argv.index("--run-label") + 1],
+            commands[5].argv[commands[5].argv.index("--run-label") + 1],
             "phase6-smoke-e2-try-fallback",
         )
         self.assertEqual(
-            commands[7].argv[commands[7].argv.index("--run-label") + 1],
+            commands[6].argv[commands[6].argv.index("--run-label") + 1],
             "phase6-smoke-e21-try-atomic-cut-frontier",
         )
         self.assertEqual(
-            commands[8].argv[commands[8].argv.index("--run-label") + 1],
+            commands[7].argv[commands[7].argv.index("--run-label") + 1],
             "phase6-smoke-e22-try-atomic-cut-place-mismatch",
         )
         self.assertEqual(
-            commands[9].argv[commands[9].argv.index("--run-label") + 1],
+            commands[8].argv[commands[8].argv.index("--run-label") + 1],
             "phase6-smoke-e4-malformed-lineage",
         )
         self.assertEqual(
-            commands[10].argv[commands[10].argv.index("--run-label") + 1],
+            commands[9].argv[commands[9].argv.index("--run-label") + 1],
             "phase6-smoke-e5-underdeclared-lineage",
         )
         self.assertEqual(
-            commands[11].argv[commands[11].argv.index("--run-label") + 1],
+            commands[10].argv[commands[10].argv.index("--run-label") + 1],
             "phase6-smoke-e12-underdeclared-target-missing",
         )
         self.assertEqual(
-            commands[12].argv[commands[12].argv.index("--run-label") + 1],
+            commands[11].argv[commands[11].argv.index("--run-label") + 1],
             "phase6-smoke-e14-malformed-duplicate-option-declaration",
         )
         self.assertEqual(
-            commands[13].argv[commands[13].argv.index("--run-label") + 1],
+            commands[12].argv[commands[12].argv.index("--run-label") + 1],
             "phase6-smoke-e15-malformed-duplicate-chain-declaration",
         )
         self.assertEqual(
-            commands[14].argv[commands[14].argv.index("--run-label") + 1],
+            commands[13].argv[commands[13].argv.index("--run-label") + 1],
             "phase6-smoke-e16-malformed-missing-chain-head-option",
         )
         self.assertEqual(
-            commands[15].argv[commands[15].argv.index("--run-label") + 1],
+            commands[14].argv[commands[14].argv.index("--run-label") + 1],
             "phase6-smoke-e13-malformed-capability-strengthening",
         )
         self.assertEqual(
-            commands[16].argv[commands[16].argv.index("--run-label") + 1],
+            commands[15].argv[commands[15].argv.index("--run-label") + 1],
             "phase6-smoke-e19-malformed-target-mismatch",
         )
         self.assertEqual(
-            commands[17].argv[commands[17].argv.index("--run-label") + 1],
+            commands[16].argv[commands[16].argv.index("--run-label") + 1],
             "phase6-smoke-e18-malformed-missing-successor-option",
         )
         self.assertEqual(
-            commands[18].argv[commands[18].argv.index("--run-label") + 1],
+            commands[17].argv[commands[17].argv.index("--run-label") + 1],
             "phase6-smoke-e20-malformed-late-capability-strengthening",
         )
         self.assertEqual(
-            commands[19].argv[commands[19].argv.index("--run-label") + 1],
+            commands[18].argv[commands[18].argv.index("--run-label") + 1],
             "phase6-smoke-e23-malformed-try-fallback-missing-fallback-body",
         )
-        self.assertEqual(commands[20].argv[0], "/usr/bin/python3")
+        self.assertEqual(commands[19].argv[0], "/usr/bin/python3")
         self.assertTrue(
-            commands[20].argv[1].endswith("scripts/current_l2_theorem_lean_stub_pipeline.py")
+            commands[19].argv[1].endswith("scripts/current_l2_theorem_lean_stub_pipeline.py")
         )
-        self.assertEqual(commands[20].argv[2], "e2-try-fallback")
+        self.assertEqual(commands[19].argv[2], "e2-try-fallback")
+        self.assertEqual(
+            commands[19].argv[commands[19].argv.index("--run-label") + 1],
+            "phase6-smoke-theorem",
+        )
+        self.assertEqual(commands[20].argv[2], "e5-underdeclared-lineage")
         self.assertEqual(
             commands[20].argv[commands[20].argv.index("--run-label") + 1],
             "phase6-smoke-theorem",
         )
-        self.assertEqual(commands[21].argv[2], "e5-underdeclared-lineage")
+        self.assertEqual(commands[21].argv[2], "e2-try-fallback")
         self.assertEqual(
             commands[21].argv[commands[21].argv.index("--run-label") + 1],
-            "phase6-smoke-theorem",
+            "phase6-smoke-model-check",
+        )
+        self.assertEqual(commands[22].argv[2], "e5-underdeclared-lineage")
+        self.assertEqual(
+            commands[22].argv[commands[22].argv.index("--run-label") + 1],
+            "phase6-smoke-model-check",
         )
 
     def test_plan_regression_commands_rejects_invalid_run_label(self) -> None:
@@ -419,76 +436,86 @@ class SourceSampleRegressionCliTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr.getvalue(), "")
         self.assertIn("fake regression ran", stdout.getvalue())
-        self.assertEqual(len(captured_commands), 22)
+        self.assertEqual(len(captured_commands), 23)
         self.assertEqual(
-            captured_commands[5].argv[captured_commands[5].argv.index("--run-label") + 1],
+            captured_commands[4].argv[captured_commands[4].argv.index("--run-label") + 1],
             "phase6-helper-e1-place-atomic-cut",
         )
         self.assertEqual(
-            captured_commands[6].argv[captured_commands[6].argv.index("--run-label") + 1],
+            captured_commands[5].argv[captured_commands[5].argv.index("--run-label") + 1],
             "phase6-helper-e2-try-fallback",
         )
         self.assertEqual(
-            captured_commands[7].argv[captured_commands[7].argv.index("--run-label") + 1],
+            captured_commands[6].argv[captured_commands[6].argv.index("--run-label") + 1],
             "phase6-helper-e21-try-atomic-cut-frontier",
         )
         self.assertEqual(
-            captured_commands[8].argv[captured_commands[8].argv.index("--run-label") + 1],
+            captured_commands[7].argv[captured_commands[7].argv.index("--run-label") + 1],
             "phase6-helper-e22-try-atomic-cut-place-mismatch",
         )
         self.assertEqual(
-            captured_commands[9].argv[captured_commands[9].argv.index("--run-label") + 1],
+            captured_commands[8].argv[captured_commands[8].argv.index("--run-label") + 1],
             "phase6-helper-e4-malformed-lineage",
         )
         self.assertEqual(
-            captured_commands[10].argv[captured_commands[10].argv.index("--run-label") + 1],
+            captured_commands[9].argv[captured_commands[9].argv.index("--run-label") + 1],
             "phase6-helper-e5-underdeclared-lineage",
         )
         self.assertEqual(
-            captured_commands[11].argv[captured_commands[11].argv.index("--run-label") + 1],
+            captured_commands[10].argv[captured_commands[10].argv.index("--run-label") + 1],
             "phase6-helper-e12-underdeclared-target-missing",
         )
         self.assertEqual(
-            captured_commands[12].argv[captured_commands[12].argv.index("--run-label") + 1],
+            captured_commands[11].argv[captured_commands[11].argv.index("--run-label") + 1],
             "phase6-helper-e14-malformed-duplicate-option-declaration",
         )
         self.assertEqual(
-            captured_commands[13].argv[captured_commands[13].argv.index("--run-label") + 1],
+            captured_commands[12].argv[captured_commands[12].argv.index("--run-label") + 1],
             "phase6-helper-e15-malformed-duplicate-chain-declaration",
         )
         self.assertEqual(
-            captured_commands[14].argv[captured_commands[14].argv.index("--run-label") + 1],
+            captured_commands[13].argv[captured_commands[13].argv.index("--run-label") + 1],
             "phase6-helper-e16-malformed-missing-chain-head-option",
         )
         self.assertEqual(
-            captured_commands[15].argv[captured_commands[15].argv.index("--run-label") + 1],
+            captured_commands[14].argv[captured_commands[14].argv.index("--run-label") + 1],
             "phase6-helper-e13-malformed-capability-strengthening",
         )
         self.assertEqual(
-            captured_commands[16].argv[captured_commands[16].argv.index("--run-label") + 1],
+            captured_commands[15].argv[captured_commands[15].argv.index("--run-label") + 1],
             "phase6-helper-e19-malformed-target-mismatch",
         )
         self.assertEqual(
-            captured_commands[17].argv[captured_commands[17].argv.index("--run-label") + 1],
+            captured_commands[16].argv[captured_commands[16].argv.index("--run-label") + 1],
             "phase6-helper-e18-malformed-missing-successor-option",
         )
         self.assertEqual(
-            captured_commands[18].argv[captured_commands[18].argv.index("--run-label") + 1],
+            captured_commands[17].argv[captured_commands[17].argv.index("--run-label") + 1],
             "phase6-helper-e20-malformed-late-capability-strengthening",
         )
         self.assertEqual(
-            captured_commands[19].argv[captured_commands[19].argv.index("--run-label") + 1],
+            captured_commands[18].argv[captured_commands[18].argv.index("--run-label") + 1],
             "phase6-helper-e23-malformed-try-fallback-missing-fallback-body",
         )
-        self.assertEqual(captured_commands[20].argv[2], "e2-try-fallback")
+        self.assertEqual(captured_commands[19].argv[2], "e2-try-fallback")
+        self.assertEqual(
+            captured_commands[19].argv[captured_commands[19].argv.index("--run-label") + 1],
+            "phase6-helper-theorem",
+        )
+        self.assertEqual(captured_commands[20].argv[2], "e5-underdeclared-lineage")
         self.assertEqual(
             captured_commands[20].argv[captured_commands[20].argv.index("--run-label") + 1],
             "phase6-helper-theorem",
         )
-        self.assertEqual(captured_commands[21].argv[2], "e5-underdeclared-lineage")
+        self.assertEqual(captured_commands[21].argv[2], "e2-try-fallback")
         self.assertEqual(
             captured_commands[21].argv[captured_commands[21].argv.index("--run-label") + 1],
-            "phase6-helper-theorem",
+            "phase6-helper-model-check",
+        )
+        self.assertEqual(captured_commands[22].argv[2], "e5-underdeclared-lineage")
+        self.assertEqual(
+            captured_commands[22].argv[captured_commands[22].argv.index("--run-label") + 1],
+            "phase6-helper-model-check",
         )
 
     def test_main_regression_rejects_inventory_mismatch_before_running_commands(self) -> None:

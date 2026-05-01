@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 12:14 JST
+最終更新: 2026-05-01 12:37 JST
 
 ## この文書について
 
@@ -11,7 +11,7 @@
 ## current task-level status
 
 - active executable floor は維持されています:
-  `samples/clean-near-end/`、`samples/current-l2/`、`samples/lean/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。
+  `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - current promoted implementation line は存在しません。追加の self-driven post-`P21` docs-first family も残っていません。
@@ -36,14 +36,16 @@
   `current_l2_guided_samples.py` は `list / smoke-all / closeout` の compatibility wrapper であり、pre-clean-near-end prototype / bundle / reserve wording は `plan/00` / `plan/10` で historical comparison memory へ冷却済みです。
 - network transport active sample docs は 2026-05-01 11:53 JST に再確認済みです:
   sample README / hands-on canary / `plan/22` は `check-all` executable canary anchor と `closeout` inventory evidence を分離し、`NET-01` を Sugoroku loopback parity anchor として扱います。
-- projection/codegen bridge evidence audit は 2026-05-01 12:05 JST に着手済みです:
+- projection/codegen bridge evidence audit は 2026-05-01 12:14 JST に再確認済みです:
   `projection_codegen_samples.py check-all --format json` は live anchor / manifest alignment validation、`closeout --format json` は manifest inventory evidence として扱います。current `equivalence` reading は review-category alignment inventory であり、generated place-program / optimizer / deployment planner / checker / proof / final emitted ABI ではありません。
+- current-L2 / Lean active-floor wording audit は 2026-05-01 12:23 JST に再確認済みです:
+  `samples/current-l2/` は base source corpus、`samples/lean/` は foundations + generated theorem stub evidence、`current_l2_guided_samples.py list/smoke-all/closeout` は clean-near-end active suite への compatibility front door として扱います。source-sample regression は stale deleted emitted-artifact Cargo target を呼ばず、formal-hook smoke + theorem Lean-stub conformance + model-check carrier conformance を current route とします。
 
 ## executable floor
 
 | lane | current floor | current command | not a claim of |
 |---|---|---|---|
-| Mir current-L2 | `samples/current-l2/` | `python3 scripts/current_l2_guided_samples.py closeout --format json` | final parser grammar / public API |
+| Mir current-L2 base corpus | `samples/current-l2/` | `python3 scripts/current_l2_source_sample_regression.py inventory`; `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>`; `python3 scripts/current_l2_guided_samples.py closeout --format json` は clean-near-end active suite への compatibility front door | final parser grammar / public API / all proof discharge / production prover binding |
 | clean near-end suite | `samples/clean-near-end/` | `python3 scripts/clean_near_end_samples.py closeout` | full language completion |
 | Sugoroku world | `scripts/sugoroku_world_samples.py` | `python3 scripts/sugoroku_world_samples.py closeout --format json` | real network / durable distributed runtime |
 | avatar follow | `scripts/avatar_follow_samples.py` | `python3 scripts/avatar_follow_samples.py closeout --format json` | `FAIRY-05` implementation / public avatar API |
@@ -162,6 +164,8 @@ These are safe to do without new product decisions.
 ```bash
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
+python3 scripts/current_l2_source_sample_regression.py inventory
+python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>
 python3 scripts/current_l2_guided_samples.py closeout --format json
 python3 scripts/clean_near_end_samples.py closeout
 python3 scripts/current_l2_lean_sample_sync.py

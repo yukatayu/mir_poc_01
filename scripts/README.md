@@ -25,6 +25,8 @@
 
 - `current_l2_*`
   current-L2 source corpus、detached validation loop、diff/export assist、Lean sync、checker support
+- `current_l2_model_check_carrier_pipeline.py`
+  current-L2 authored source sample の formal-hook smoke から model-check carrier emit までを確認する repo-local conformance helper。production model checker binding ではない。
 - `new_report.py`
   report utility
 

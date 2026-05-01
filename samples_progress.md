@@ -1,7 +1,7 @@
 # samples_progress
 
-Last updated: 2026-05-01 12:14 JST
-Current repo-local focus: current-L2 / clean near-end runnable floor, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
+Last updated: 2026-05-01 12:37 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
 ## Legend
@@ -26,7 +26,7 @@ Notes:
 
 | Layer | Overall % | Status | Current focus | Next validation |
 |---|---:|---|---|---|
-| Mir core | 90 | active current layer | `samples/current-l2/` base corpus and current-L2 execution | `python3 scripts/current_l2_guided_samples.py closeout --format json` |
+| Mir core | 90 | active current layer | `samples/current-l2/` base corpus + source-corpus regression + clean-near-end compatibility front door | `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` |
 | clean near-end suite | 90 | active clean suite | typing / order-handoff / model-check / modal runnable floor | `python3 scripts/clean_near_end_samples.py closeout` |
 | Lean / theorem | 89 | active proof bridge | small proof foundations + clean-near-end generated theorem stubs; live subject = `e5`, compare floor = `05_delegated_rng_service`, committed bridge floor = `samples/lean/foundations` + `samples/lean/clean-near-end`, `e2` remains foundation/contrast anchor | `python3 scripts/current_l2_lean_sample_sync.py` |
 | Sugoroku runtime | 90 | active vertical slice | attach / membership / handoff / late join / detach TODO boundary | `python3 scripts/sugoroku_world_samples.py closeout --format json` |
@@ -43,8 +43,8 @@ Notes:
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 12:14 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083` | Snapshot docs are maintenance artifacts, not normative specs |
-| `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 11:01 JST | `0904`, `0913`, `0998`, `1066`, `1076` | final parser / public API deferred |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 12:37 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 12:37 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 11:01 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 11:01 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076` | attach lifecycle / compatibility anchor |
 | `SUG-03` | Sugoroku handoff | `samples/clean-near-end/sugoroku-world/03_roll_publish_handoff.mir` | active runnable E2E | 90 | positive | 2026-05-01 11:01 JST | `0950`, `0952`, `0954`, `0955`, `0998`, `1066`, `1076` | roll -> publish -> witness -> handoff |
@@ -94,6 +94,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-01 12:37 JST | current-L2 / Lean active-floor wording and regression helper audit | pass | `samples/current-l2/` is now mirrored as base source corpus, `samples/lean/` as Lean evidence / generated theorem stubs, and `current_l2_guided_samples.py` as clean-near-end compatibility front door. Source-sample regression no longer calls the deleted emitted-artifact Cargo target; it now includes model-check carrier conformance and passed 23/23 commands. Guided `list` / `closeout`, Lean sync, focused wrapper/source/Lean/model-check unit tests, source hierarchy/docs scaffold/diff checks passed. |
 | 2026-05-01 12:14 JST | projection/codegen bridge evidence wording audit | pass | Front-door docs and dashboards now mirror that `check-all` is live anchor / manifest alignment validation and `closeout` is manifest inventory evidence. `check-all` passed `P15-GEN-01..04`, representative runs `P15-GEN-01` / `P15-GEN-03` passed alignment, projection helper unit tests passed 10/10, generated tree contains only README + manifest, and post-review source hierarchy/docs scaffold/diff checks passed after report `1083` update. |
 | 2026-05-01 11:53 JST | network transport sample README anchor audit | pass | Active sample README / hands-on canary / `plan/22` split `check-all` executable canary anchor from `closeout` inventory evidence. `check-all` passed `NET-02..05` 4/4, `closeout` returned inventory fields only, network helper unit tests passed 11/11, source hierarchy/docs scaffold/diff checks passed after report `1082`. |
 | 2026-05-01 11:42 JST | guided-helper retirement audit | pass | Live `current_l2_guided_samples.py` front door and retired-command negative evidence were rechecked; `plan/00` / `plan/10` active wording was narrowed. `list` / `smoke-all` / `closeout` passed, retired `bundle problem1` returned exit 2 as expected, wrapper unit tests passed 4/4, source hierarchy/docs scaffold/diff checks passed after report `1081`. |

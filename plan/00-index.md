@@ -39,7 +39,7 @@
 ## repository snapshot reading
 
 - **repo-local near-end**:
-  `samples/current-l2/` の base corpus と `current_l2_guided_samples.py` の `list / smoke-all / closeout` / clean near-end closeout を分けて辿れば、二大問題の current cut を確認できる。pre-clean-near-end の representative bundle / reserve summary index は historical memory として読む
+  `samples/current-l2/` の base corpus と、clean near-end active suite へ forward する `current_l2_guided_samples.py` の `list / smoke-all / closeout` compatibility front door / clean near-end closeout を分けて辿れば、二大問題の current cut を確認できる。pre-clean-near-end の representative bundle / reserve summary index は historical memory として読む
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 12:14 JST
+最終更新: 2026-05-01 12:37 JST
 
 ## この文書について
 
@@ -23,7 +23,7 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current snapshot
 
 - active floor:
-  `samples/clean-near-end/`、`samples/current-l2/`、`samples/lean/`、Sugoroku world vertical slice、avatar follow representative slice は runnable です。
+  `samples/clean-near-end/`、Sugoroku world vertical slice、avatar follow representative slice は runnable です。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence（foundations + generated theorem stubs）です。
 - Mir current-L2:
   finite-index first strong typing、order / handoff relation family、model-check second line、Lean foundation / generated stub、parser-free helper stack が repo-local に検証できます。
 - Mirrorea carrier / runtime floor:
@@ -111,6 +111,8 @@ Place をまたいで実行・通信・検証・可視化できる
 - docs scaffold:
   `python3 scripts/validate_docs.py`
 - current-L2 / clean suite:
+  `python3 scripts/current_l2_source_sample_regression.py inventory`
+  `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>`
   `python3 scripts/current_l2_guided_samples.py closeout --format json`
   `python3 scripts/clean_near_end_samples.py closeout`
 - Lean / theorem sync:
@@ -135,6 +137,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 12:37 JST — current-L2 / Lean active-floor wording を再点検し、`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence、`current_l2_guided_samples.py` は clean-near-end active suite への compatibility front door として snapshot / roadmap wording を同期した。source-sample regression helper は削除済み stale emitted-artifact Cargo target を外し、現存する model-check carrier conformance pipeline を追加した 23-step floor として再通過した。
 - 2026-05-01 12:14 JST — projection/codegen bridge evidence の front-door wording を点検し、current `equivalence` reading を committed generated manifest + helper/report-local anchor の review-category alignment inventory に限定した。`check-all` は live alignment validation、`closeout` は manifest inventory evidence として扱い、generated place-program / optimizer / deployment planner / equivalence checker / proof / final emitted ABI は kept-later gate として維持した。
 - 2026-05-01 11:53 JST — network transport sample README / hands-on / `plan/22` の command-anchor drift を修正した。`check-all --format json` は `NET-02..05` executable canary anchor、`closeout --format json` は inventory evidence、`NET-01` は Sugoroku loopback parity anchor として分離した。
 - 2026-05-01 11:42 JST — guided helper retirement audit で `current_l2_guided_samples.py` の live front door が `list / smoke-all / closeout` only であることを再確認し、`plan/00` / `plan/10` の pre-clean-near-end prototype / representative bundle wording を historical comparison memory へ冷却した。`samples/current-l2/` は base corpus、`samples/clean-near-end/` は active canonical executable suite として分けて記録した。

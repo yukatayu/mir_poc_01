@@ -14,11 +14,11 @@
 repo が実装済みの current line は、**repo-local alpha-ready current layer** です。
 Mirrorea full runtime、final public API、real network、final auth stack、final visualization API まで完了したことを意味しません。
 
-current executable floor は次です。
+current evidence floor は次です。
 
 | area | current floor | evidence entry |
 |---|---|---|
-| Mir current-L2 | `samples/current-l2/`、finite-index first strong typing、order / handoff relation、model-check second line、Lean foundation / generated stub | `python3 scripts/current_l2_guided_samples.py closeout --format json` |
+| Mir current-L2 base corpus + Lean evidence | `samples/current-l2/` base source corpus、finite-index first strong typing、order / handoff relation、model-check second line、Lean foundation / generated stub | `python3 scripts/current_l2_source_sample_regression.py inventory`; `python3 scripts/current_l2_guided_samples.py closeout --format json` is the clean-near-end compatibility front door; Lean evidence is anchored by `python3 scripts/current_l2_lean_sample_sync.py` |
 | clean near-end | typing / order-handoff / model-check / modal suite | `python3 scripts/clean_near_end_samples.py closeout` |
 | shared-space representative slices | Sugoroku world runtime attachment vertical slice、avatar follow representative slice | `python3 scripts/sugoroku_world_samples.py closeout --format json`, `python3 scripts/avatar_follow_samples.py closeout --format json` |
 | typed external / transport | `EXT-03/04` helper subset、reported `NET-01` parity anchor + runnable `NET-02..05` helper-local canary | `python3 scripts/typed_external_boundary_samples.py closeout --format json`, `python3 scripts/network_transport_samples.py check-all --format json` |

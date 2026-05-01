@@ -278,6 +278,7 @@ def plan_regression_commands(
     python_cmd = python_executable or sys.executable
     detached_loop = SCRIPT_DIR / "current_l2_detached_loop.py"
     theorem_stub_pipeline = SCRIPT_DIR / "current_l2_theorem_lean_stub_pipeline.py"
+    model_check_pipeline = SCRIPT_DIR / "current_l2_model_check_carrier_pipeline.py"
 
     commands = [
         RegressionCommand(
@@ -297,17 +298,6 @@ def plan_regression_commands(
                 "mir-runtime",
                 "--test",
                 "current_l2_source_sample_verification_ladder",
-            ),
-        ),
-        RegressionCommand(
-            name="emitted artifact wiring test",
-            argv=(
-                "cargo",
-                "test",
-                "-p",
-                "mir-runtime",
-                "--test",
-                "current_l2_source_sample_emitted_artifact_wiring",
             ),
         ),
         RegressionCommand(
@@ -561,6 +551,30 @@ def plan_regression_commands(
                 str(artifact_root),
                 "--run-label",
                 f"{effective_label}-theorem",
+            ),
+        ),
+        RegressionCommand(
+            name="model-check carrier conformance for e2-try-fallback",
+            argv=(
+                python_cmd,
+                str(model_check_pipeline),
+                "e2-try-fallback",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                f"{effective_label}-model-check",
+            ),
+        ),
+        RegressionCommand(
+            name="model-check carrier conformance for e5-underdeclared-lineage",
+            argv=(
+                python_cmd,
+                str(model_check_pipeline),
+                "e5-underdeclared-lineage",
+                "--artifact-root",
+                str(artifact_root),
+                "--run-label",
+                f"{effective_label}-model-check",
             ),
         ),
     ]
