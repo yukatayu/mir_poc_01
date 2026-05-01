@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-04-30 23:48 JST
+最終更新: 2026-05-01 09:26 JST
 
 ## この文書について
 
@@ -49,6 +49,7 @@
 - 2026-04-30 の Problem 2 actual-package evidence refresh では、active `specs/examples/467` の historical `p07/p08` reading を current Sugoroku handoff / late-join slices と network stale-reconnect canary + family check へ分解し、old current-L2 runner / CLI labels も current compatibility-front-door / CLI-shaped clean-sample surface へ寄せました。`NET-03` は stale reconnect / membership-epoch guard canary に限定し、new implementation queue は reopened していません。
 - 2026-04-30 の theorem-side active evidence floor mirror sync では、active `specs/examples/474/479/481/485/486/487/491/494/497/500/506/508/510/514/519/521` と `specs/11` / `specs/12` / `plan/09` の theorem memory を、live subject `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、`samples/lean/foundations` + `samples/lean/clean-near-end` committed bridge floor、historical `p05 / p06 / p07 / p08` compare-anchor split へ同期しました。stale theorem next-queue wording は maintenance lane / `U1` reopen point reading へ冷やし、new implementation queue は reopened していません。
 - 2026-04-30 の model-check active evidence floor / theorem-model-check mixed helper mirror shorthand cooling では、active `specs/examples/501/507/517/530/532` と `specs/11` / `specs/12` / `plan/09` / `samples_progress.md` の current reading を current clean-near-end model-check family live floor、live theorem subject `e5`、clean-near-end `05_delegated_rng_service` runtime-adjacent compare floor、committed theorem bridge floor `samples/lean/foundations` + `samples/lean/clean-near-end`、historical `p08/p09` mixed-helper asymmetry anchor split へ同期しました。current accepted sample set は historical `p08/p09` prototype を再実行対象に戻さず、mixed-helper residual は historical report anchor と current clean-near-end / CLI floor を分けて扱い、new implementation queue は reopened していません。
+- 2026-05-01 の full validation freshness checkpoint は maintenance-only closeout であり、source hierarchy / docs scaffold / current-L2 / clean near-end / Lean sync / Sugoroku / avatar / typed external / network / projection / viewer / storage guardrail / Cargo test floor / formatter / diff hygiene が pass したことを確認しただけで、new implementation queue は reopened していません。
 
 ## executable floor
 
