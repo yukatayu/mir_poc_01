@@ -1,0 +1,15 @@
+# Alpha-0 local-runtime sample anchor.
+# ID: LR-02
+# Family: local-runtime
+# Kind: negative
+# Purpose: membership freshness reject
+# Expected: rejected
+# Status: consumed indirectly by the Rust local-runtime floor; this source-ish file is not parsed yet.
+
+module PlannedMirroreaAlpha.LocalRuntime.StaleMembershipRejected
+
+# Scenario sketch:
+# - bootstrap local room and game place
+# - membership frontier advances before Alice's queued roll is dispatched
+# - stale frontier is rejected before publish/witness/handoff
+

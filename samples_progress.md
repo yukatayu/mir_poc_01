@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-02 07:25 JST
+Last updated: 2026-05-02 07:45 JST
 Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and the Mirrorea Spaces alpha-0 theory-freeze / checker-first lane under `samples/alpha/`.
-Current active packages: `P-A0-06` cut/save/load checker first cut is closeout-complete in current repo state, and `P-A0-07` local runtime integration is the next active Alpha-0 package. `P-A0-01..05` remain closed; post-`P21` later-family docs-first trilogy remains closed; actual `U1` commitment remains a separate public-boundary gate.
+Current active packages: `P-A0-07` local runtime integration is closeout-complete in current repo state, and `P-A0-08` layer insertion runtime is the next active Alpha-0 package. `P-A0-01..06` remain closed; post-`P21` later-family docs-first trilogy remains closed; actual `U1` commitment remains a separate public-boundary gate.
 
 ## Legend
 
@@ -26,15 +26,15 @@ Notes:
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage A floor maintained, Stage B preparation reopened through Alpha-0
+  Stage B first Rust local-runtime floor actualized; Phase 4 queue is open
 - Concrete phase:
-  Phase 0 — Theory freeze preparation
+  Phase 4 — layer insertion runtime
 - Current package:
-  `P-A0-07` local runtime integration
-- Current status:
-  `P-A0-06` closeout actualized the first non-public alpha checker floor for selected CUT rows. `samples/alpha/` is still scaffold-root only; parser/runtime execution is still deferred.
-- Next package:
   `P-A0-08` layer insertion runtime
+- Current status:
+  `P-A0-07` closeout actualized the first non-public Rust local-runtime floor for `samples/alpha/local-runtime/LR-01/02`. `samples/alpha/` is still not an active runnable root, but `local-runtime/` now has a dedicated cargo/example evidence floor.
+- Next package:
+  `P-A0-09` network / Docker E2E
 - Current alpha blocker:
   remaining CUT rows, runtime/package/avatar/network families, and runnable alpha execution are still pending
 
@@ -57,7 +57,7 @@ Notes:
 | Alpha lifetime / fallback | 25 | synthetic checker floor | `LIF-05..08` sidecar seeds + shared helper-backed unit tests | `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker` |
 | Alpha contract / variance | 25 | synthetic checker floor | `VAR-02/03/07/09/10/15` sidecar seeds + shared helper-backed unit tests | `python3 -m unittest scripts.tests.test_alpha_contract_variance_checker` |
 | Alpha cut / save-load | 25 | synthetic checker floor | `CUT-05/07/08/09/13/14/15` sidecar seeds + shared helper-backed unit tests | `python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker` |
-| Alpha local runtime | 1 | directory scaffold only | `samples/alpha/local-runtime/` reserved for Phase 3 | `find samples/alpha/local-runtime -maxdepth 1 -type f | sort` |
+| Alpha local runtime | 75 | Rust runtime floor | `LR-01/02` in-memory Rust local-runtime report + event DAG export hook | `cargo test -p mir-runtime --test alpha_local_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership` |
 | Alpha layer insertion | 1 | directory scaffold only | `samples/alpha/layer-insertion/` reserved for Phase 4 | `find samples/alpha/layer-insertion -maxdepth 1 -type f | sort` |
 | Alpha hot-plug runtime | 10 | scaffold only | `samples/alpha/hotplug-runtime/` matrix + expected sidecars | `find samples/alpha/hotplug-runtime -maxdepth 1 -type f | sort` |
 | Alpha avatar runtime | 10 | scaffold only | `samples/alpha/avatar-runtime/` matrix + expected sidecars | `find samples/alpha/avatar-runtime -maxdepth 1 -type f | sort` |
@@ -67,7 +67,7 @@ Notes:
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-02 07:25 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097`, `1098`, `1100`, `1101` | Snapshot docs are maintenance artifacts, not normative specs; 2026-05-02 07:25 JST Alpha-0 checker-floor closeout floor rerun passed |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-02 07:45 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097`, `1098`, `1100`, `1101`, `1102` | Snapshot docs are maintenance artifacts, not normative specs; 2026-05-02 07:45 JST Alpha-0 local-runtime closeout floor rerun passed |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 13:52 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084`, `1085`, `1091`, `1092` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 13:52 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076`, `1085`, `1091`, `1092` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 13:52 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076`, `1085`, `1092` | attach lifecycle / compatibility anchor |
@@ -90,7 +90,7 @@ Notes:
 | `A0-LIF` | alpha lifetime / fallback | `samples/alpha/lifetime-fallback/` | scaffold family + synthetic checker floor | 25 | selected negative-static rows only | 2026-05-02 07:25 JST | `1098`, `1100` | `specs/13` anchored expected-verdict sidecars; `LIF-05..08` now carry `expected_static.checked_reason_codes` and are exercised by `test_alpha_lifetime_fallback_checker` |
 | `A0-VAR` | alpha contract / variance | `samples/alpha/contract-variance/` | scaffold family + synthetic checker floor | 25 | selected negative-static rows only | 2026-05-02 07:25 JST | `1098`, `1100` | `specs/14` anchored expected-verdict sidecars; `VAR-02/03/07/09/10/15` now carry `expected_static.checked_reason_codes` and are exercised by `test_alpha_contract_variance_checker` |
 | `A0-CUT` | alpha cut / save-load | `samples/alpha/cut-save-load/` | scaffold family + synthetic checker floor | 25 | selected structural/deferred rows only | 2026-05-02 07:25 JST | `1098`, `1101` | `specs/15` anchored expected-verdict sidecars; `CUT-05/07/08/09/13/14/15` now carry `expected_static.checked_reason_codes` and are exercised by `test_alpha_cut_save_load_checker` |
-| `A0-LOCAL` | alpha local runtime | `samples/alpha/local-runtime/README.md` | directory scaffold | 1 | target only | 2026-05-02 06:32 JST | `1098` | reserved Phase 3 root only; no sample IDs or sidecars yet |
+| `A0-LOCAL` | alpha local runtime | `samples/alpha/local-runtime/` | Rust in-memory runtime floor | 75 | positive + negative | 2026-05-02 07:45 JST | `1098`, `1102` | `LR-01/02` now carry runtime-side sidecars and are exercised by `alpha_local_runtime` cargo tests plus `mirrorea_alpha_local_runtime` example output; `.mir` files remain source-ish anchors rather than parsed inputs |
 | `A0-LAYER` | alpha layer insertion | `samples/alpha/layer-insertion/README.md` | directory scaffold | 1 | target only | 2026-05-02 06:32 JST | `1098` | reserved Phase 4 root only; rows currently live in contract/hotplug families |
 | `A0-HP` | alpha hot-plug | `samples/alpha/hotplug-runtime/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/16` anchored expected-verdict sidecars; runtime/package implementation pending |
 | `A0-AV` | alpha avatar | `samples/alpha/avatar-runtime/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/16` anchored expected-verdict sidecars; runtime/package implementation pending |
@@ -121,12 +121,13 @@ Notes:
 | distributed activation ordering | hot-plug / transport | high | repo | later implementation after multi-place / durable activation pressure exists |
 | real socket / durable replay | network transport | high | repo + user | preserve helper canaries while production transport remains deferred |
 | actual LLVM build / backend choice | compiler / backend | medium | user + repo | preserve storage guardrail; choose backend target before heavy build |
-| alpha runtime and remaining checker families not yet implemented | alpha-0 scaffold | medium | repo | keep `P-A0-05` / `P-A0-06` as non-public checker floors only, then close `P-A0-07` / `P-A0-08` without overclaiming runnable alpha status |
+| layer/runtime/package families remain partial | alpha-0 scaffold + first Rust runtime floor | medium | repo | keep `P-A0-07` as Stage-B narrow cut only; `P-A0-08` / `P-A0-09` / `P-A0-10` must not overclaim hot-plug/package/avatar/network completion |
 
 ## Recent validation
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-02 07:45 JST | Alpha-0 local-runtime closeout floor | pass | `cargo test -p mirrorea-core --test carriers` passed 12 tests; `cargo test -p mirrorea-core --test runtime_substrate` passed 12 tests; `cargo test -p mir-runtime --test hotplug_runtime_skeleton` passed 8 tests; `cargo test -p mir-runtime --test alpha_local_runtime` passed 3 tests; both `mirrorea_alpha_local_runtime` example runs emitted JSON reports; `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --format json` confirmed Bob handoff/witness parity anchor; source hierarchy passed 60/60; `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1103 numbered report(s).`; report-schema unit ran 11 tests and passed; `cargo fmt --check` and `git diff --check` were clean. This validates the Stage-B narrow Rust local-runtime floor only, not alpha parser/runtime, hot-plug/package/avatar completion, or network/Docker runtime. |
 | 2026-05-02 07:25 JST | Alpha-0 checker-floor closeout floor | pass | `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_cut_save_load_checker` passed 11 tests; source hierarchy passed 60/60; `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1102 numbered report(s).`; report-schema unit ran 11 tests and passed; `git diff --check` was clean. This validates the LIF/VAR/CUT synthetic checker floors and docs closeout only, not Alpha parser/runtime execution. |
 | 2026-05-02 07:01 JST | Alpha-0 checker-floor closeout floor | pass | `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker` passed 7 tests; source hierarchy passed 60/60; `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1101 numbered report(s).`; report-schema unit ran 11 tests and passed; `git diff --check` was clean. This validates the LIF/VAR synthetic checker floor and docs closeout only, not Alpha parser/runtime execution. |
 | 2026-05-02 06:32 JST | Alpha-0 docs/scaffold closeout floor | pass | `find samples/alpha -maxdepth 3 -type f | sort` confirmed populated scaffold families plus README-only reserve directories, source hierarchy passed 60/60, `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1100 numbered report(s).`, report-schema unit ran 11 tests and passed, and `git diff --check` was clean. This validates scaffold/docs closeout only, not Alpha checker/runtime execution. |

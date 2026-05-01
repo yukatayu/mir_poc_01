@@ -1,0 +1,16 @@
+# Alpha-0 local-runtime sample anchor.
+# ID: LR-01
+# Family: local-runtime
+# Kind: positive
+# Purpose: local queue dispatch and event DAG export
+# Expected: accepted
+# Status: consumed indirectly by the Rust local-runtime floor; this source-ish file is not parsed yet.
+
+module PlannedMirroreaAlpha.LocalRuntime.LocalSugorokuRollPublishHandoff
+
+# Scenario sketch:
+# - bootstrap local room and game place
+# - Alice dispatches one roll request through a local queue
+# - runtime emits publish -> witness -> handoff event DAG
+# - Bob becomes next owner
+

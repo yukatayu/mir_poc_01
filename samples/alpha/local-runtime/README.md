@@ -1,18 +1,40 @@
 # alpha sample family — Local Runtime
 
-- Status: planned directory scaffold only
+- Status: first Rust local-runtime floor
 - Phase: Phase 3
 - Stage: Stage B
+- Current runner is a non-public in-memory Rust runtime floor in `mir-runtime`.
+- This family is still not an active parser/runtime sample root.
 
 ## Current reading
 
-- This directory is reserved for Phase 3 local-runtime skeletons.
-- Current Alpha-0 package keeps local-runtime as a directory-level scaffold only.
-- Executable evidence remains in the existing clean-near-end / Sugoroku runtime lanes.
-- Planned related sample families currently live in `../network-docker/`, `../hotplug-runtime/`, and `../e2e/`.
+- `LR-01` actualizes one narrow local room/game dispatch path in Rust:
+  queue -> `MessageEnvelope` dispatch -> membership freshness check -> event DAG export hook.
+- `LR-02` actualizes one negative local-runtime row:
+  stale membership frontier is rejected before state mutation.
+- The source-ish `.mir` files here are anchors for sample identity and intended scenario only.
+  The current runner does not parse them yet.
+- This package does not claim:
+  hot-plug lifecycle completion, layer insertion runtime, runtime package/avatar admission, network/Docker runtime, save/load completion, or final public ABI.
+
+## Rows
+
+| ID | File | Kind | Expected |
+|---|---|---|---|
+| `LR-01` | `lr-01-local_sugoroku_roll_publish_handoff.mir` | positive | accepted + event DAG export |
+| `LR-02` | `lr-02-stale_membership_rejected.mir` | negative | rejected before state mutation |
+
+## Policy
+
+- `.mir` files here are source-ish anchors, not currently parsed executable sources.
+- `.expected.json` sidecars record the runtime-floor contract checked by Rust tests.
+- `claims.runnable = true` means a dedicated Rust test/example now exists for the row, not that `samples/alpha/` became an active front-door sample root.
+- Promotion to active/runnable root status still requires dedicated runner docs, broader closeout evidence, and snapshot updates.
 
 ## Validation anchor for this package
 
 ```bash
-find samples/alpha/local-runtime -maxdepth 1 -type f | sort
+cargo test -p mir-runtime --test alpha_local_runtime
+cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku
+cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership
 ```

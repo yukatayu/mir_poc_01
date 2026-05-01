@@ -24,6 +24,8 @@ final public product completion ではない。
 ### Stage B
 
 - integrated local Mirrorea runtime
+- first actualized subset is now a non-public Rust local-runtime floor over `mirrorea-core` substrate:
+  local queue, `MessageEnvelope` dispatch, membership freshness rejection, and report-local event DAG export hook
 
 ### Stage C
 
@@ -100,6 +102,10 @@ Phase 1+ runtime floor:
 
 - focused Cargo tests for changed crates
 - alpha sample-family runner checks once such runners exist
+- current Phase 3 first-cut floor:
+  `cargo test -p mir-runtime --test alpha_local_runtime`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership`
 - Docker-specific validation only when Docker lane is actually added
 
 ## stop lines
@@ -112,5 +118,4 @@ Phase 1+ runtime floor:
 
 ## next package
 
-- immediate next package after roadmap integration:
-  `P-A0-03` / `P-A0-04` sample skeleton and snapshot sync closeout
+- after `P-A0-07` local-runtime first cut, the next reopen point is `P-A0-08` layer insertion runtime

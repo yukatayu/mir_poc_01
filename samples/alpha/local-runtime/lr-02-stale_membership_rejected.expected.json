@@ -1,0 +1,34 @@
+{
+  "sample_id": "LR-02",
+  "sample_name": "stale_membership_rejected",
+  "family": "local-runtime",
+  "status": "runtime-floor",
+  "phase": "Phase 3",
+  "stage": "Stage B",
+  "kind": "negative",
+  "purpose": "membership freshness reject",
+  "expected": "rejected",
+  "expected_runtime": {
+    "terminal_outcome": "rejected",
+    "reason_family": "membership_freshness",
+    "required_reason_refs": [
+      "membership_epoch_drift"
+    ]
+  },
+  "claims": {
+    "runnable": true,
+    "implemented": true,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "rust-runtime-floor",
+    "runner": "cargo test -p mir-runtime --test alpha_local_runtime",
+    "note": "Validated in this package by a non-public in-memory Rust local-runtime floor. The source-ish .mir file is not parsed by the current runner."
+  },
+  "deferred": [
+    "parser integration",
+    "network transport",
+    "runtime package admission",
+    "final public runtime ABI"
+  ]
+}

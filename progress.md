@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-02 07:25 JST
+最終更新: 2026-05-02 07:45 JST
 
 ## この文書について
 
@@ -23,19 +23,19 @@ Place をまたいで実行・通信・検証・可視化できる
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage A floor maintained, with Stage B local-runtime preparation reopened through the Alpha-0 theory-freeze lane
+  Stage B first Rust local-runtime floor actualized; Stage C/D remain later
 - Concrete phase:
-  Phase 0 — Theory freeze preparation
+  Phase 4 — layer insertion runtime
 - Current package:
-  `P-A0-07` local Mirrorea runtime integration
-- Current status:
-  `P-A0-06` は current repo state で close しており、`scripts/alpha_cut_save_load_checker.py` と selected CUT sidecar `expected_static.checked_reason_codes` によって save/load family の first non-public checker floor を actualize した。current alpha checker floor は LIF / VAR / CUT の 3 family に広がったが、いずれも synthetic detached artifact comparison only であり、alpha parser/runtime execution ではない。
-- Validation freshness:
-  2026-05-02 07:25 JST に Alpha-0 checker-floor / docs closeout floor を rerun し、alpha checker unit 11 tests、source hierarchy 60/60、`validate_docs.py`（1102 reports）、report-schema unit 11 tests、`git diff --check` が pass
-- Current blockers:
-  Z-cycle graph model、load non-resurrection verdict split、membership-dependent dispatch closure row、runtime/package/avatar family checker floor、alpha runner/runtime family はまだ未実装
-- Next autonomous package:
   `P-A0-08` layer insertion runtime
+- Current status:
+  `P-A0-07` は current repo state で close しており、`crates/mir-runtime/src/alpha_local_runtime.rs`、example `mirrorea_alpha_local_runtime`、and `samples/alpha/local-runtime/LR-01/02` によって、`LogicalPlaceRuntimeShell` / `MessageEnvelope` を reuse する first non-public Rust local-runtime floor を actualize した。current cut は one positive local queue dispatch path と one stale-membership rejection path、plus event DAG export hook に限る。これは alpha parser/runtime integration、hot-plug/package/avatar runtime、network/Docker runtime、save/load completion、Stage B completion claim ではない。
+- Validation freshness:
+  2026-05-02 07:45 JST に `P-A0-07` local-runtime / docs closeout floor を rerun し、`cargo test -p mirrorea-core --test carriers`、`cargo test -p mirrorea-core --test runtime_substrate`、`cargo test -p mir-runtime --test hotplug_runtime_skeleton`、`cargo test -p mir-runtime --test alpha_local_runtime`、`cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`、`cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership`、`python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --format json`、source hierarchy 60/60、`validate_docs.py`（1103 reports）、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass
+- Current blockers:
+  layer insertion runtime、Docker/network runtime、runtime package/avatar admission、remaining CUT rows / load non-resurrection split、save/load runtime integration、final public boundary はまだ later line にある
+- Next autonomous package:
+  `P-A0-09` network / Docker E2E
 - User-decision blockers:
   public `U1` gate、first network scope、avatar compatibility first target、native binary policy、save/load initial scope、UI target、final catalog breadth は still later
 
@@ -52,7 +52,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
 - Current reopened alpha-local lane:
-  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を reopen しています。`specs/13..17`、`plan/39..43`、`samples/alpha/` により、Stage A floor を崩さずに Stage B local runtime へ向かう docs/spec/checker skeleton line を current package として進めます。
+  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を reopen しています。`specs/13..17`、`plan/39..43`、`samples/alpha/` に加え、`crates/mir-runtime/src/alpha_local_runtime.rs` により Stage A floor を崩さずに Stage B local-runtime narrow cut へ入る first Rust runtime floor を actualize しました。current package はここから `P-A0-08` layer insertion runtime へ進みます。
 - Public-boundary open gate:
   actual `U1` commitment は引き続き別 gate です。installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision は alpha-local package closeoutだけでは閉じません。
 - Parallel maintenance lane:
@@ -87,21 +87,21 @@ Place をまたいで実行・通信・検証・可視化できる
 | layer compatibility alpha line | 76% | 38% | 25% | 着手可能 | `specs/14` + `samples/alpha/contract-variance/` に加え、`VAR-02/03/07/09/10/15` の sidecar-driven synthetic checker floor が actualize 済み。layer runtime は still later |
 | save/load / consistent-cut alpha line | 68% | 30% | 25% | 着手可能 | `specs/15` + `samples/alpha/cut-save-load/` に加え、`CUT-05/07/08/09/13/14/15` の sidecar-driven synthetic checker floor が actualize 済み。Z-cycle/non-resurrection widening は still later |
 | runtime package / avatar alpha line | 66% | 34% | 8% | 着手可能 | `specs/16` と `samples/alpha/avatar-runtime/` / `hotplug-runtime/` は scaffold 済み。 runtime/package checker pending |
-| Mirrorea Spaces alpha integration | 60% | 34% | 12% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` で stage map と completion condition を fixed。integrated runtime pending |
+| Mirrorea Spaces alpha integration | 60% | 36% | 18% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` に加え、`P-A0-07` で `samples/alpha/local-runtime/LR-01/02` と Rust local-runtime floor を actualize。layer/network/package families remain later |
 
 ## large stage map
 
-| Stage | Name | Current status | Main evidence | Not yet claimed |
-|---|---|---|---|---|
-| A | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
-| B | alpha 0.5 local runtime | preparation active | `specs/13..17`、`plan/39..43`、`samples/alpha/` | integrated local runtime not yet implemented |
-| C | alpha 0.7 transport | planned | `samples/alpha/network-docker/` scaffold、existing `NET-02..05` canary evidence | production WAN / durable replay |
-| D | alpha 0.8 hot-plug lifecycle | planned | `samples/alpha/hotplug-runtime/` scaffold、`P19..P21` carrier/runtime floor | durable migration / final ABI |
-| E | alpha 0.9 devtools | planned | `samples/alpha/visualization/` scaffold、viewer prototype inventory | final viewer API / telemetry service |
-| F | alpha 1 Spaces alpha | planned | `samples/alpha/e2e/` scaffold、Sugoroku + hot-plug + save/load requirements | full VRChat / Reversed Library completion |
-| G | Spaces product expansion | future | placeholder avatar/package/ecosystem roadmap | alpha scope |
-| H | Atlas | future | multi-world / portal / relation layer only as later roadmap | alpha scope |
-| I | Reversed Library | future | knowledge-space flagship later layer | alpha scope |
+| Stage | Progress | Name | Current status | Main evidence | Not yet claimed |
+|---|---:|---|---|---|---|
+| A | 90% | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
+| B | 30% | alpha 0.5 local runtime | first Rust local-runtime floor actualized | `specs/13..17`、`plan/39..43`、`samples/alpha/local-runtime/`、`crates/mir-runtime/src/alpha_local_runtime.rs` | integrated local runtime completion |
+| C | 10% | alpha 0.7 transport | planned | `samples/alpha/network-docker/` scaffold、existing `NET-02..05` canary evidence | production WAN / durable replay |
+| D | 15% | alpha 0.8 hot-plug lifecycle | planned with prior carrier/runtime floor | `samples/alpha/hotplug-runtime/` scaffold、`P19..P21` carrier/runtime floor | durable migration / final ABI |
+| E | 10% | alpha 0.9 devtools | planned | `samples/alpha/visualization/` scaffold、viewer prototype inventory | final viewer API / telemetry service |
+| F | 5% | alpha 1 Spaces alpha | planned | `samples/alpha/e2e/` scaffold、Sugoroku + hot-plug + save/load requirements | full VRChat / Reversed Library completion |
+| G | 0% | Spaces product expansion | future | placeholder avatar/package/ecosystem roadmap | alpha scope |
+| H | 0% | Atlas | future | multi-world / portal / relation layer only as later roadmap | alpha scope |
+| I | 0% | Reversed Library | future | knowledge-space flagship later layer | alpha scope |
 
 ## feature family snapshot
 
@@ -115,7 +115,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy widening contract、final viewer / verifier API、retention policy、telemetry service |
 | hot-plug runtime package | P21 + docs-first trilogy closed | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, three later-family boundaries | rollback protocol, durable migration engine, distributed activation ordering, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
-| alpha-local theory freeze / scaffold | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker first cuts | runtime integration、layer insertion、Docker E2E |
+| alpha-local theory freeze / runtime prep | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker first cuts、`P-A0-07` Rust local-runtime floor | layer insertion、Docker E2E、runtime package/avatar、save/load integration |
 
 ## closed package memory and active gate
 
@@ -174,6 +174,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-02 07:45 JST — `P-A0-07` local-runtime first cut closeout floor を実行した。`mirrorea-core` carriers 12 tests、`runtime_substrate` 12 tests、`mir-runtime` hot-plug skeleton 8 tests、`alpha_local_runtime` 3 tests、Rust local-runtime examples 2 runs、Sugoroku parity anchor 1 run、source hierarchy 60/60、docs scaffold（1103 reports）、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass。`LR-01/02` の non-public Rust local-runtime floor は actualize 済みで、current package は `P-A0-08` layer insertion runtime へ進む。
 - 2026-05-02 07:25 JST — `P-A0-06` CUT checker first cut closeout floor を実行した。alpha checker unit 11 tests、source hierarchy 60/60、docs scaffold（1102 reports）、report-schema unit 11 tests、`git diff --check` が pass。`CUT-05/07/08/09/13/14/15` の sidecar-driven synthetic checker floor は actualize 済みで、current package は `P-A0-07` local Mirrorea runtime integration へ進む。
 - 2026-05-02 07:01 JST — `P-A0-05` LIF / VAR checker first cut closeout floor を実行した。alpha checker unit 7 tests、source hierarchy 60/60、docs scaffold（1101 reports）、report-schema unit 11 tests、`git diff --check` が pass。`LIF-05..08` / `VAR-02/03/07/09/10/15` の sidecar-driven synthetic checker floor は actualize 済みで、current package は `P-A0-06` consistent-cut / save-load checker skeleton へ進む。
 - 2026-05-02 06:32 JST — Alpha-0 theory-freeze / scaffold closeout floor を rerun した。`find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、docs scaffold（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass。Alpha checker/runtime は未実装のため未実行で、current package は commit / push closeout待ち。

@@ -32,6 +32,7 @@
 - alpha-specific parser/runtime runner family は still planned であり、まだ `scripts/` に actualize していない
   - `alpha_lifetime_fallback_checker.py`、`alpha_contract_variance_checker.py`、`alpha_cut_save_load_checker.py` は current first checker-floor helper として actualize 済み
   - これは selected `samples/alpha/` sidecar の `expected_static.checked_reason_codes` と synthetic detached artifact を照合する non-public helper であり、shared support は `current_l2_family_checker_support.py` を reuse する。parser/runtime integration ではない
+  - `P-A0-07` local-runtime first cut は `scripts/` ではなく `crates/mir-runtime` の `alpha_local_runtime` module / example / integration test に actualize している。current sample identity anchor は `samples/alpha/local-runtime/` だが、`.mir` files are still source-ish placeholders rather than parsed inputs
 
 ### storage / env
 

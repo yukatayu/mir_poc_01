@@ -161,12 +161,13 @@
 - normative anchor は `specs/13..17`
 - repository memory anchor は `plan/39..43`
 - sample scaffold root は `samples/alpha/`
-- current package reading は `P-A0-01..06` が current repo state で close 済みであり、2026-05-02 07:25 JST 時点では `P-A0-06` により CUT sidecar-driven synthetic checker floor まで actualize 済み、next reopen point は `P-A0-07` local Mirrorea runtime integration という状態を前提にし、queue authority は `progress.md` / `tasks.md` に残す
+- current package reading は `P-A0-01..07` が current repo state で close 済みであり、2026-05-02 07:45 JST 時点では `P-A0-07` により `crates/mir-runtime/src/alpha_local_runtime.rs`、its example、and `samples/alpha/local-runtime/LR-01/02` からなる first non-public Rust local-runtime floor まで actualize 済み、next reopen point は `P-A0-08` layer insertion runtime という状態を前提にし、queue authority は `progress.md` / `tasks.md` に残す
 - Stage A current floor と Stage B local runtime target を混同しない
   - Stage A evidence:
     clean near-end suite、current-L2 corpus、Lean evidence、Sugoroku helper、avatar helper、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug carrier/runtime narrow floor
   - Stage B target:
     integrated local runtime、event DAG export、Place graph export、fallback degradation trace、hot-plug request/verdict trace
+    first actualized subset は local queue / `MessageEnvelope` dispatch / membership freshness / event DAG export hook に限る
 - `samples/alpha/` は expected-verdict sidecar 付き scaffold であり、active runnable root へ silent promotion しない
 - `samples/not_implemented/` は residual planned family preservation root として残す
 - public-boundary `U1` gate は消えていない

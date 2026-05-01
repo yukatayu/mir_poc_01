@@ -28,6 +28,7 @@
 - `lean/clean-near-end/` は generated theorem stub だが、proof bridge evidence として committed されている
 - `alpha/` は current alpha-local theory-freeze / checker/runtime roadmap 用の scaffold であり、expected-verdict sidecar を伴う
   - current task では skeleton / planning root として扱い、active runnable sample root に silently promote しない
+  - current package では `local-runtime/` だけが non-public Rust runtime floor を持つが、sample file parsing front door ではなく、active root でもない
   - family ごとの status / blocker / next runner は `samples_progress.md` と `progress.md` / `tasks.md` を参照する
 - `not_implemented/` は residual planned skeleton であり、active sample ではない
   - `avatar-fairy-follow/` は phase 8 residual planned family
