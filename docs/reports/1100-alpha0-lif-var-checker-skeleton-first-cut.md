@@ -110,6 +110,8 @@ Close `P-A0-05` by actualizing the smallest safe non-public checker floor for se
 - `python3 scripts/validate_docs.py`
 - `python3 -m unittest scripts.tests.test_validate_docs`
 - `git diff --check`
+- `git commit --no-gpg-sign -m "mirrorea: add alpha lif var checker floor"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -182,7 +184,7 @@ Alpha-0 package ordering now marks `P-A0-05` closed and promotes `P-A0-06` to th
 
 ## Commit / push status
 
-Pending commit / push at this report write; local closeout validation is green.
+Implementation closeout commit `f7c5c75` (`mirrorea: add alpha lif var checker floor`) was created with `--no-gpg-sign` and pushed to `origin/main`.
 
 ## Sub-agent session close status
 
