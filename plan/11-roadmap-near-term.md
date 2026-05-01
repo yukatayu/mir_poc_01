@@ -115,6 +115,38 @@
 20. post-`P21` final public hot-plug ABI family
    - close 済み。exact package label は intentionally unfixed のまま保ち、`plan/38-post-p21-final-public-hotplug-abi-family.md` で `freeze prerequisite fixed; public ABI still unfrozen`、helper-local preview naming / runtime-private naming / public candidate naming の non-equivalence、`AttachPoint` / `Patch` packaging identity の preview-only line、product-shaping gate = actual `U1` commitment を docs-first に固定した
 
+## 2026-05-02 alpha-0 reopened near-term lane
+
+historical post-`P21` trilogy close と `U1` hold-line inventory を保ったまま、current near-term roadmap には Mirrorea Spaces alpha-0 line を parallel lane として追加してよい。
+
+- `P-A0-01`
+  - `specs/13..17` theory freeze
+- `P-A0-02`
+  - `plan/39..43` roadmap memory
+- `P-A0-03`
+  - `samples/alpha/` phase-indexed sample matrix scaffold
+- `P-A0-04`
+  - snapshot docs / taxonomy / validator sync
+- `P-A0-05`
+  - first checker skeleton for lifetime/fallback and layer compatibility
+- `P-A0-06`
+  - consistent-cut / save-load checker skeleton
+- `P-A0-07`
+  - local Mirrorea runtime integration
+- `P-A0-08`
+  - layer insertion runtime
+- `P-A0-09`
+  - network / Docker E2E
+
+guardrails for this reopened lane:
+
+- final public parser grammar は freeze しない
+- avatar / VRM / VRChat / Unity を Mir core primitive にしない
+- PrismCascade を Mirrorea alpha implementation scope に混ぜない
+- distributed save/load without consistent cut を許可しない
+- signature provenance と semantic safety を混同しない
+- `samples/alpha/` は scaffold root として扱い、active runnable root へ silent promotion しない
+
 ## mixed gate
 
 - final typed source principal

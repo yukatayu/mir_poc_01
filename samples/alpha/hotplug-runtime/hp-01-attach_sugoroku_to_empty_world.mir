@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: HP-01
+# Family: hotplug-runtime
+# Kind: positive
+# Purpose: runtime attach module
+# Expected: accepted + activation cut
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.HotplugRuntime.AttachSugorokuToEmptyWorld
+
+# Scenario sketch:
+# - sample_id: HP-01
+# - goal: runtime attach module
+# - expected outcome: accepted + activation cut
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

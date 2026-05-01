@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-01 14:36 JST
-Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
-Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
+Last updated: 2026-05-02 06:32 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and the Mirrorea Spaces alpha-0 theory-freeze / sample-scaffold lane under `samples/alpha/`.
+Current active packages: `P-A0-04` snapshot docs / taxonomy / validator sync is active and validation-green. `P-A0-01..03` are actualized in worktree and are being package-closed through the same closeout band. post-`P21` later-family docs-first trilogy remains closed; actual `U1` commitment remains a separate public-boundary gate.
 
 ## Legend
 
@@ -23,6 +23,21 @@ Notes:
 - conceptual-only rows must stay at or below `25%`.
 - helper-local preview, report-local inventory, and generated bridge evidence are not final public API.
 
+## Current Alpha-0 / Mirrorea Spaces stage
+
+- Large stage:
+  Stage A floor maintained, Stage B preparation reopened through Alpha-0
+- Concrete phase:
+  Phase 0 — Theory freeze preparation
+- Current package:
+  `P-A0-04` snapshot docs sync
+- Current status:
+  scaffold and normative docs exist; docs/scaffold validation green; report / commit / push pending
+- Next package:
+  `P-A0-05` checker skeleton first cut
+- Current alpha blocker:
+  runner/checker/runtime implementation for `samples/alpha/` families is still pending
+
 ## Summary
 
 | Layer | Overall % | Status | Current focus | Next validation |
@@ -39,12 +54,20 @@ Notes:
 | Hot-plug package | 90 | P21 narrow runtime floor + docs-first trilogy closed | helper lifecycle + request/verdict carrier + runtime engine-state narrow floor; public ABI still unfrozen | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
 | Storage / backend guardrail | 100 | current first-cut closeout, not per-package closeout | external workdir, cargo cache/target binding, LLVM staging visibility | `bash scripts/env/mirrorea_storage_env.sh`; `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`; `bash scripts/storage/detach_prepare.sh`; `bash scripts/storage/cleanup_disposable_artifacts.sh --list`; `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` |
 | Docs / traceability | 91 | active maintenance | current snapshot, reports, source hierarchy, report schema guardrail, stale wording cleanup | `python3 -m unittest scripts.tests.test_validate_docs && python3 scripts/check_source_hierarchy.py && python3 scripts/validate_docs.py` |
+| Alpha lifetime / fallback | 10 | scaffold only | `samples/alpha/lifetime-fallback/` matrix + expected sidecars | `find samples/alpha/lifetime-fallback -maxdepth 1 -type f | sort` |
+| Alpha contract / variance | 10 | scaffold only | `samples/alpha/contract-variance/` matrix + expected sidecars | `find samples/alpha/contract-variance -maxdepth 1 -type f | sort` |
+| Alpha cut / save-load | 10 | scaffold only | `samples/alpha/cut-save-load/` matrix + expected sidecars | `find samples/alpha/cut-save-load -maxdepth 1 -type f | sort` |
+| Alpha local runtime | 1 | directory scaffold only | `samples/alpha/local-runtime/` reserved for Phase 3 | `find samples/alpha/local-runtime -maxdepth 1 -type f | sort` |
+| Alpha layer insertion | 1 | directory scaffold only | `samples/alpha/layer-insertion/` reserved for Phase 4 | `find samples/alpha/layer-insertion -maxdepth 1 -type f | sort` |
+| Alpha hot-plug runtime | 10 | scaffold only | `samples/alpha/hotplug-runtime/` matrix + expected sidecars | `find samples/alpha/hotplug-runtime -maxdepth 1 -type f | sort` |
+| Alpha avatar runtime | 10 | scaffold only | `samples/alpha/avatar-runtime/` matrix + expected sidecars | `find samples/alpha/avatar-runtime -maxdepth 1 -type f | sort` |
+| Alpha network / visualization / E2E | 10 | scaffold only | `samples/alpha/network-docker/`, `visualization/`, `e2e/` | `find samples/alpha -maxdepth 2 -type f | sort` |
 
 ## Active sample matrix
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 14:36 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-02 06:32 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097`, `1098` | Snapshot docs are maintenance artifacts, not normative specs; 2026-05-02 06:32 JST Alpha-0 docs/scaffold closeout floor rerun passed |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 13:52 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084`, `1085`, `1091`, `1092` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 13:52 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076`, `1085`, `1091`, `1092` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 13:52 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076`, `1085`, `1092` | attach lifecycle / compatibility anchor |
@@ -64,6 +87,14 @@ Notes:
 | `P20-HOTPLUG-SKELETON` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | thin runtime/report assembly | 90 | positive + negative | 2026-05-01 13:52 JST | `0989`, `0991`, `0998`, `1066`, `1076`, `1085`, `1092` | not completed engine |
 | `P21-HOTPLUG-ENGINE-STATE` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | narrow runtime engine-state floor | 90 | positive + negative | 2026-05-01 13:52 JST | `0993`, `0996`, `0997`, `0998`, `1066`, `1076`, `1085`, `1092` | non-public runtime-private state progression; freeze prerequisite fixed, public ABI still unfrozen |
 | `STORAGE-01` | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/`, external cargo cache no-run probe | operational guardrail | 100 | positive | 2026-05-01 13:52 JST | `0972`, `0998`, `1066`, `1072`, `1076`, `1085`, `1089`, `1090`, `1092` | existing 100% is current-scope guardrail only, not a claim that individual package closeout is complete before commit/push; no destructive cleanup / no actual LLVM build; known `/mnt/mirrorea-work/llvm` root-owned warning remains |
+| `A0-LIF` | alpha lifetime / fallback | `samples/alpha/lifetime-fallback/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/13` anchored expected-verdict sidecars; checker not yet implemented |
+| `A0-VAR` | alpha contract / variance | `samples/alpha/contract-variance/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/14` anchored expected-verdict sidecars; checker not yet implemented |
+| `A0-CUT` | alpha cut / save-load | `samples/alpha/cut-save-load/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/15` anchored expected-verdict sidecars; consistent-cut checker pending |
+| `A0-LOCAL` | alpha local runtime | `samples/alpha/local-runtime/README.md` | directory scaffold | 1 | target only | 2026-05-02 06:32 JST | `1098` | reserved Phase 3 root only; no sample IDs or sidecars yet |
+| `A0-LAYER` | alpha layer insertion | `samples/alpha/layer-insertion/README.md` | directory scaffold | 1 | target only | 2026-05-02 06:32 JST | `1098` | reserved Phase 4 root only; rows currently live in contract/hotplug families |
+| `A0-HP` | alpha hot-plug | `samples/alpha/hotplug-runtime/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/16` anchored expected-verdict sidecars; runtime/package implementation pending |
+| `A0-AV` | alpha avatar | `samples/alpha/avatar-runtime/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/16` anchored expected-verdict sidecars; runtime/package implementation pending |
+| `A0-NET/VIS/E2E` | alpha network / visualization / E2E | `samples/alpha/network-docker/`, `samples/alpha/visualization/`, `samples/alpha/e2e/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/17` stage/E2E boundary only; no runnable alpha runtime yet |
 
 ## E2E samples
 
@@ -90,11 +121,13 @@ Notes:
 | distributed activation ordering | hot-plug / transport | high | repo | later implementation after multi-place / durable activation pressure exists |
 | real socket / durable replay | network transport | high | repo + user | preserve helper canaries while production transport remains deferred |
 | actual LLVM build / backend choice | compiler / backend | medium | user + repo | preserve storage guardrail; choose backend target before heavy build |
+| alpha checker/runtime not yet implemented | alpha-0 scaffold | medium | repo | close `P-A0-04`, then implement `P-A0-05` and `P-A0-06` without overclaiming runnable alpha status |
 
 ## Recent validation
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-02 06:32 JST | Alpha-0 docs/scaffold closeout floor | pass | `find samples/alpha -maxdepth 3 -type f | sort` confirmed populated scaffold families plus README-only reserve directories, source hierarchy passed 60/60, `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1100 numbered report(s).`, report-schema unit ran 11 tests and passed, and `git diff --check` was clean. This validates scaffold/docs closeout only, not Alpha checker/runtime execution. |
 | 2026-05-01 14:36 JST | post-1096 docs-focused validation checkpoint | pass | Clean tree validation after `U1` readiness wording audit: report-schema unit 10 tests, source hierarchy, docs scaffold, and `git diff --check` passed. Full sample/Cargo floor remains the 1095 post-guardrail checkpoint. |
 | 2026-05-01 14:33 JST | `U1` readiness wording audit | pass | Reader-facing docs and `plan/27` now align the `U1` axes to packaging / host integration / first shipped public surface / final shared-space operational catalog breadth. `post_p18_true_user_spec_hold_01.md` now prints both user-decision and research-discovery sections from `tasks.md`. This is readiness / option inventory only, not actual `U1` commitment or public freeze. |
 | 2026-05-01 14:27 JST | post-guardrail full validation freshness checkpoint | pass with known storage warning | Full corrected floor passed after report-schema and active-doc repairs: report-schema unit 10 tests; source hierarchy/docs scaffold; current-L2 inventory and 23-step regression; guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer; Lean sync; storage guardrail; Cargo crate tests (`mir-ast` 73, `mirrorea-core` 24, `mir-runtime` 87, `mir-semantics` 79); `cargo fmt --check`; `git diff --check`. Generated output stayed under `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1095`; known `/mnt/mirrorea-work/llvm` root-owned warning remains. |
@@ -149,6 +182,7 @@ Notes:
 ## Historical / archived samples
 
 - Historical samples live under `samples/old/` and are not active runnable roots.
-- Planned skeletons live under `samples/not_implemented/` and must not be silently promoted.
+- `samples/alpha/` is the primary alpha-local scaffold root and must not be silently promoted to runnable status.
+- Planned residual families live under `samples/not_implemented/` and must not be silently promoted.
 - Generated bridge evidence lives under `samples/generated/` and is not source sample material.
 - Prototype / compatibility anchors are historical or explanatory unless a current runner and validation row explicitly make them active.

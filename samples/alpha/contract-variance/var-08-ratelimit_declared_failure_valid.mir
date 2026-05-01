@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-08
+# Family: contract-variance
+# Kind: positive/runtime
+# Purpose: declared RateLimited failure
+# Expected: valid, runtime Reject(RateLimited)
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.RatelimitDeclaredFailureValid
+
+# Scenario sketch:
+# - sample_id: VAR-08
+# - goal: declared RateLimited failure
+# - expected outcome: valid, runtime Reject(RateLimited)
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

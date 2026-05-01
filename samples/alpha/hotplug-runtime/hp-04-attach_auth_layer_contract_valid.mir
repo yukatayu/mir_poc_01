@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: HP-04
+# Family: hotplug-runtime
+# Kind: positive
+# Purpose: auth with declared failure/contract update
+# Expected: accepted
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.HotplugRuntime.AttachAuthLayerContractValid
+
+# Scenario sketch:
+# - sample_id: HP-04
+# - goal: auth with declared failure/contract update
+# - expected outcome: accepted
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

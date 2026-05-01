@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VIS-02
+# Family: visualization
+# Kind: positive
+# Purpose: Place graph
+# Expected: view
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.Visualization.PlaceGraphExport
+
+# Scenario sketch:
+# - sample_id: VIS-02
+# - goal: Place graph
+# - expected outcome: view
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

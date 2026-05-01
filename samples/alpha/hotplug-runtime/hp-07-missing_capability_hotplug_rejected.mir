@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: HP-07
+# Family: hotplug-runtime
+# Kind: negative
+# Purpose: cap missing
+# Expected: rejected/deferred
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.HotplugRuntime.MissingCapabilityHotplugRejected
+
+# Scenario sketch:
+# - sample_id: HP-07
+# - goal: cap missing
+# - expected outcome: rejected/deferred
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

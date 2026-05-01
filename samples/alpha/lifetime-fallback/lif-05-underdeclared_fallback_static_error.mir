@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-05
+# Family: lifetime-fallback
+# Kind: negative static
+# Purpose: missing lineage evidence
+# Expected: static error
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.UnderdeclaredFallbackStaticError
+
+# Scenario sketch:
+# - sample_id: LIF-05
+# - goal: missing lineage evidence
+# - expected outcome: static error
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

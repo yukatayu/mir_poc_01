@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-06
+# Family: lifetime-fallback
+# Kind: negative static
+# Purpose: unrelated targets in same chain
+# Expected: static reject
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.IncompatibleAccessTargetRejected
+
+# Scenario sketch:
+# - sample_id: LIF-06
+# - goal: unrelated targets in same chain
+# - expected outcome: static reject
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

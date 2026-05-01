@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: E2E-03
+# Family: e2e
+# Kind: positive
+# Purpose: live layer insert
+# Expected: trace begins after attach
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.E2e.HotplugDebugLayerRuntime
+
+# Scenario sketch:
+# - sample_id: E2E-03
+# - goal: live layer insert
+# - expected outcome: trace begins after attach
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

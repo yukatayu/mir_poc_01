@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-06
+# Family: contract-variance
+# Kind: positive
+# Purpose: read-only covariance
+# Expected: valid
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.ReadonlyCovarianceValid
+
+# Scenario sketch:
+# - sample_id: VAR-06
+# - goal: read-only covariance
+# - expected outcome: valid
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

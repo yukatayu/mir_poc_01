@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: E2E-08
+# Family: e2e
+# Kind: non-final positive
+# Purpose: two knowledge rooms + portal
+# Expected: no claim full app
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.E2e.ReversedLibrarySeedDemo
+
+# Scenario sketch:
+# - sample_id: E2E-08
+# - goal: two knowledge rooms + portal
+# - expected outcome: no claim full app
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

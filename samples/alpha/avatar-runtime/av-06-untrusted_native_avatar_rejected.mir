@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: AV-06
+# Family: avatar-runtime
+# Kind: negative
+# Purpose: native untrusted
+# Expected: rejected
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.AvatarRuntime.UntrustedNativeAvatarRejected
+
+# Scenario sketch:
+# - sample_id: AV-06
+# - goal: native untrusted
+# - expected outcome: rejected
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

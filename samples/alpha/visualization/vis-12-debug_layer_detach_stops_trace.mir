@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VIS-12
+# Family: visualization
+# Kind: positive
+# Purpose: detach debug layer
+# Expected: telemetry stops
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.Visualization.DebugLayerDetachStopsTrace
+
+# Scenario sketch:
+# - sample_id: VIS-12
+# - goal: detach debug layer
+# - expected outcome: telemetry stops
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

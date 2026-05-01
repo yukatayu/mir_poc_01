@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 14:36 JST
+最終更新: 2026-05-02 06:32 JST
 
 ## この文書について
 
@@ -20,6 +20,25 @@ Place をまたいで実行・通信・検証・可視化できる
 
 この軸は Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform の separability を消すものではありません。
 
+## Current Alpha-0 / Mirrorea Spaces stage
+
+- Large stage:
+  Stage A floor maintained, with Stage B local-runtime preparation reopened through the Alpha-0 theory-freeze lane
+- Concrete phase:
+  Phase 0 — Theory freeze preparation
+- Current package:
+  `P-A0-04` snapshot docs / taxonomy / validator sync
+- Current status:
+  in progress; `specs/13..17`、`plan/39..43`、`samples/alpha/` は追加済みで、`P-A0-04` docs / taxonomy / validator sync は validation green、report / commit / push closeout が current package
+- Validation freshness:
+  2026-05-02 06:32 JST に Alpha-0 docs/scaffold floor を rerun し、`find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、`validate_docs.py`（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass
+- Current blockers:
+  checker/runtime skeleton はまだ未実装、`samples/alpha/` runner family も未実装
+- Next autonomous package:
+  `P-A0-05` checker skeleton first cut
+- User-decision blockers:
+  public `U1` gate、first network scope、avatar compatibility first target、native binary policy、save/load initial scope、UI target、final catalog breadth は still later
+
 ## current snapshot
 
 - active floor:
@@ -32,10 +51,12 @@ Place をまたいで実行・通信・検証・可視化できる
   typed external synthetic preview、network helper-local canary、projection preview、projection/codegen committed generated bridge evidence、viewer typed public prototype inventory、storage / LLVM guardrail が current scope close 済みです。projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まり、generated place-program synthesis / placement optimizer / deployment planner / checker / proof / final public emitted-program ABI は kept-later gate に残ります。
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
-- Current remaining open gate:
-  追加の self-driven post-`P21` docs-first family は残っていません。次は actual `U1` commitment であり、installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision が必要です。
-- Current maintenance lane:
-  stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。これは active maintenance であり、新しい implementation / product-shaping line ではありません。
+- Current reopened alpha-local lane:
+  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を reopen しています。`specs/13..17`、`plan/39..43`、`samples/alpha/` により、Stage A floor を崩さずに Stage B local runtime へ向かう docs/spec/checker skeleton line を current package として進めます。
+- Public-boundary open gate:
+  actual `U1` commitment は引き続き別 gate です。installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision は alpha-local package closeoutだけでは閉じません。
+- Parallel maintenance lane:
+  stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は引き続き自走可能です。ただし current line は maintenance-only ではなく、alpha-local theory-freeze / checker-runtime preparation lane が並走しています。
   `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
   2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。2026-05-01 14:27 JST の post-guardrail full validation freshness checkpoint も pass 済みで、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、new implementation queue も reopened していません。
 
@@ -62,20 +83,25 @@ Place をまたいで実行・通信・検証・可視化できる
 | hot-plug later-family boundary | 82% | 91% | 78% | actual ABI は要仕様確認 | docs-first trilogy close 済み。rollback / durable migration / distributed ordering / final public ABI は completion claim なし |
 | storage / backend guardrail | 82% | 91% | 88% | 着手可能 | external workdir / cleanup / LLVM staging visibility は closeout 済み。actual LLVM build と backend choice は未決 |
 | docs / dashboard / repository structure | 94% | 94% | 89% | 着手可能 | source hierarchy、snapshot docs、dashboard semantics、report schema guardrail は current line に追随。履歴の圧縮は継続保守対象 |
+| lifetime / fallback alpha line | 78% | 42% | 12% | 着手可能 | `specs/13` と `samples/alpha/lifetime-fallback/` は追加済み。checker skeleton pending |
+| layer compatibility alpha line | 76% | 38% | 12% | 着手可能 | `specs/14` と `samples/alpha/contract-variance/` は追加済み。variance checker pending |
+| save/load / consistent-cut alpha line | 68% | 30% | 8% | 着手可能 | `specs/15` と `samples/alpha/cut-save-load/` は追加済み。predicate/checker pending |
+| runtime package / avatar alpha line | 66% | 34% | 8% | 着手可能 | `specs/16` と `samples/alpha/avatar-runtime/` / `hotplug-runtime/` は scaffold 済み。 runtime/package checker pending |
+| Mirrorea Spaces alpha integration | 60% | 34% | 12% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` で stage map と completion condition を fixed。integrated runtime pending |
 
-## macro phase map
+## large stage map
 
-| Macro phase | 主眼 | 現在位置 | 重さ | 自走可否 |
+| Stage | Name | Current status | Main evidence | Not yet claimed |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | active maintenance | low-medium | 着手可能 |
-| `Macro 1` | semantic kernel / invariant stabilization | late current-L2 | medium | 着手可能 |
-| `Macro 2` | parser-free validation substrate | late | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | late | medium | public parser / API 以外は着手可能 |
-| `Macro 4` | executable sample floor | active clean suite | medium | 着手可能 |
-| `Macro 5` | theorem / model-check bridge | repo-local alpha-ready | medium-high | public seam 以外は着手可能 |
-| `Macro 6` | shared-space / fabric boundary | P21 narrow floor closed | high | real network / public contract 以外は着手可能 |
-| `Macro 7` | toolchain / backend / public operational interface | guardrail + prototype inventory closed | high | repo-side guardrail は着手可能。packaging / shipped surface は要仕様確認 |
-| `Macro 8` | application realization / product commitment | U1 actual choice gate | high | 要仕様確認 |
+| A | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
+| B | alpha 0.5 local runtime | preparation active | `specs/13..17`、`plan/39..43`、`samples/alpha/` | integrated local runtime not yet implemented |
+| C | alpha 0.7 transport | planned | `samples/alpha/network-docker/` scaffold、existing `NET-02..05` canary evidence | production WAN / durable replay |
+| D | alpha 0.8 hot-plug lifecycle | planned | `samples/alpha/hotplug-runtime/` scaffold、`P19..P21` carrier/runtime floor | durable migration / final ABI |
+| E | alpha 0.9 devtools | planned | `samples/alpha/visualization/` scaffold、viewer prototype inventory | final viewer API / telemetry service |
+| F | alpha 1 Spaces alpha | planned | `samples/alpha/e2e/` scaffold、Sugoroku + hot-plug + save/load requirements | full VRChat / Reversed Library completion |
+| G | Spaces product expansion | future | placeholder avatar/package/ecosystem roadmap | alpha scope |
+| H | Atlas | future | multi-world / portal / relation layer only as later roadmap | alpha scope |
+| I | Reversed Library | future | knowledge-space flagship later layer | alpha scope |
 
 ## feature family snapshot
 
@@ -89,6 +115,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy widening contract、final viewer / verifier API、retention policy、telemetry service |
 | hot-plug runtime package | P21 + docs-first trilogy closed | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, three later-family boundaries | rollback protocol, durable migration engine, distributed activation ordering, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
+| alpha-local theory freeze / scaffold | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/` | checker skeleton、runtime integration、Docker E2E |
 
 ## closed package memory and active gate
 
@@ -101,6 +128,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | post-`P21` rollback / durable migration family | closed docs-first | first recommendation boundary | actual rollback / durable migration engine completion ではない |
 | post-`P21` distributed activation ordering family | closed docs-first | second recommendation boundary | actual distributed activation protocol ではない |
 | post-`P21` final public hot-plug ABI family | closed docs-first | third recommendation bridge: `freeze prerequisite fixed; public ABI still unfrozen` | actual public ABI freeze ではない |
+| `P-A0-01..03` alpha-0 specs / plan / sample scaffold | validation green in worktree | theory-freeze normative and scaffold lane | package-close commit / push is carried by `P-A0-04` closeout |
+| `P-A0-04` snapshot sync | validation green | current package for snapshot docs / taxonomy / validator alignment | report / commit / push pending |
 | `U1` actual commitment | open | packaging / host target / shipped surface / final catalog breadth を actual choice へ進める | user-facing decision なしに public freeze しない |
 | docs / validation maintenance | active | stale wording removal、report sync、validation rerun、formatting cleanup | success claim は fresh validation 後に限る |
 
@@ -142,6 +171,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-02 06:32 JST — Alpha-0 theory-freeze / scaffold closeout floor を rerun した。`find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、docs scaffold（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass。Alpha checker/runtime は未実装のため未実行で、current package は commit / push closeout待ち。
 - 2026-05-01 14:36 JST — 1096 `U1` readiness wording audit 後の docs-focused validation checkpoint を実行した。report-schema unit 10 tests、source hierarchy、docs scaffold、`git diff --check` が clean tree で pass。actual `U1` commitment / public freeze は行っていない。
 - 2026-05-01 14:33 JST — `U1` readiness wording audit を実施した。`U1` の 4 軸を packaging / host integration / first shipped public surface / final shared-space operational catalog breadth に揃え、`post_p18_true_user_spec_hold_01.md` の command が research-discovery body も表示するよう修正した。actual `U1` commitment / public freeze は行っていない。
 - 2026-05-01 14:27 JST — post-guardrail full validation freshness checkpoint を実行した。report-schema unit 10 tests、source hierarchy / docs scaffold、current-L2 inventory、source regression 23/23、guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer / Lean sync / storage guardrail / Cargo crate tests / `cargo fmt --check` / `git diff --check` が pass。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、generated output は `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1095` のみ。

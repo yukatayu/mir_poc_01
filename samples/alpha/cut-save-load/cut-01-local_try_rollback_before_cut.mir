@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-01
+# Family: cut-save-load
+# Kind: positive
+# Purpose: rollback local state pre-cut
+# Expected: succeeds
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.LocalTryRollbackBeforeCut
+
+# Scenario sketch:
+# - sample_id: CUT-01
+# - goal: rollback local state pre-cut
+# - expected outcome: succeeds
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

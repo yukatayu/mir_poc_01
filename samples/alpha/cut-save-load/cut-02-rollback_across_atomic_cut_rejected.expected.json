@@ -1,0 +1,26 @@
+{
+  "sample_id": "CUT-02",
+  "sample_name": "rollback_across_atomic_cut_rejected",
+  "family": "cut-save-load",
+  "status": "planned-skeleton",
+  "phase": "Phase 2 / 6",
+  "stage": "Stage A -> F bridge",
+  "kind": "negative semantic",
+  "purpose": "rollback crosses cut",
+  "expected": "pre-cut state remains",
+  "claims": {
+    "runnable": false,
+    "implemented": false,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "skeleton-only",
+    "runner": null,
+    "note": "Validated only by filesystem/docs scaffold checks in this package."
+  },
+  "deferred": [
+    "exact executable syntax",
+    "dedicated runner integration",
+    "checker/runtime implementation"
+  ]
+}

@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: NET-04
+# Family: network-docker
+# Kind: negative E2E
+# Purpose: no capability
+# Expected: Reject(MissingCapability)
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.NetworkDocker.MissingCapabilityRejected
+
+# Scenario sketch:
+# - sample_id: NET-04
+# - goal: no capability
+# - expected outcome: Reject(MissingCapability)
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

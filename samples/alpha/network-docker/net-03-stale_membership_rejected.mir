@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: NET-03
+# Family: network-docker
+# Kind: negative E2E
+# Purpose: old epoch/incarnation
+# Expected: Reject(StaleMembership)
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.NetworkDocker.StaleMembershipRejected
+
+# Scenario sketch:
+# - sample_id: NET-03
+# - goal: old epoch/incarnation
+# - expected outcome: Reject(StaleMembership)
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

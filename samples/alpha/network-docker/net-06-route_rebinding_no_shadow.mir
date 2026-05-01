@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: NET-06
+# Family: network-docker
+# Kind: positive
+# Purpose: route changes but interface preserved
+# Expected: valid
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.NetworkDocker.RouteRebindingNoShadow
+
+# Scenario sketch:
+# - sample_id: NET-06
+# - goal: route changes but interface preserved
+# - expected outcome: valid
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

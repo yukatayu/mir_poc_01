@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: AV-02
+# Family: avatar-runtime
+# Kind: positive
+# Purpose: Mir script runtime package
+# Expected: accepted
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.AvatarRuntime.CustomMirAvatarRuntime
+
+# Scenario sketch:
+# - sample_id: AV-02
+# - goal: Mir script runtime package
+# - expected outcome: accepted
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

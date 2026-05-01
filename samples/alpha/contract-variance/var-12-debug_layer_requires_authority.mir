@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-12
+# Family: contract-variance
+# Kind: negative runtime/static
+# Purpose: non-admin attaches debug layer
+# Expected: reject
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.DebugLayerRequiresAuthority
+
+# Scenario sketch:
+# - sample_id: VAR-12
+# - goal: non-admin attaches debug layer
+# - expected outcome: reject
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

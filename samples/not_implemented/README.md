@@ -2,9 +2,12 @@
 
 この directory は、**rough stimulus としては重要だが、current parser / runner ではそのまま扱えない** sample を置く。
 
+`samples/alpha/` が Mirrorea Spaces alpha-0 の primary scaffold root になった後も、この directory は residual planned family と exact rough stimulus preservation の役割を保つ。`samples/alpha/` の phase-indexed matrix と silent promotion で混同しない。
+
 - exact token / macro / syntax を preservation 目的で残す。
 - current repo では parse / run しない。
 - current runnable analogue がある場合は `samples/clean-near-end/` または `samples/current-l2/` から辿る。
+- current alpha-local theory-freeze / checker-runtime roadmap の scaffold は `samples/alpha/` から辿る。
 - historical prototype anchor が必要な場合だけ `samples/prototype/current-l2-dynamic-attach-detach/` を参照する。
 
 ## current subdirectories

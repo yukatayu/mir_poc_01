@@ -1,0 +1,26 @@
+{
+  "sample_id": "AV-03",
+  "sample_name": "vrm_adapter_skeleton",
+  "family": "avatar-runtime",
+  "status": "planned-skeleton",
+  "phase": "Phase 7",
+  "stage": "Stage D -> F bridge",
+  "kind": "planned/positive",
+  "purpose": "adapter boundary only",
+  "expected": "accepted as limited/planned",
+  "claims": {
+    "runnable": false,
+    "implemented": false,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "skeleton-only",
+    "runner": null,
+    "note": "Validated only by filesystem/docs scaffold checks in this package."
+  },
+  "deferred": [
+    "exact executable syntax",
+    "dedicated runner integration",
+    "checker/runtime implementation"
+  ]
+}

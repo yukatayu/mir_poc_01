@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-01
+# Family: contract-variance
+# Kind: positive
+# Purpose: observe/log only
+# Expected: valid overlay
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.LoggingLayerValid
+
+# Scenario sketch:
+# - sample_id: VAR-01
+# - goal: observe/log only
+# - expected outcome: valid overlay
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-07
+# Family: lifetime-fallback
+# Kind: negative static
+# Purpose: fallback to stronger capability
+# Expected: static reject
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.CapabilityPromotionRejected
+
+# Scenario sketch:
+# - sample_id: LIF-07
+# - goal: fallback to stronger capability
+# - expected outcome: static reject
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

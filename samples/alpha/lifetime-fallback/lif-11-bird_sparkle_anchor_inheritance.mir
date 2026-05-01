@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-11
+# Family: lifetime-fallback
+# Kind: positive
+# Purpose: sparkle inherits bird anchor chain
+# Expected: bird deletion keeps sparkle on FriendHead
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.BirdSparkleAnchorInheritance
+
+# Scenario sketch:
+# - sample_id: LIF-11
+# - goal: sparkle inherits bird anchor chain
+# - expected outcome: bird deletion keeps sparkle on FriendHead
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

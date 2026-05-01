@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 14:36 JST
+最終更新: 2026-05-02 06:32 JST
 
 ## この文書について
 
@@ -12,13 +12,19 @@
 
 - active executable floor は維持されています:
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
+- Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
+  `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
+- Alpha-0 closeout validation freshness は 2026-05-02 06:32 JST に更新済みです:
+  `find samples/alpha -maxdepth 3 -type f | sort`、source hierarchy 60/60、docs scaffold（1100 reports）、report-schema unit 11 tests、`git diff --check` が pass し、current remaining closeout は report / commit / push です。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
-- current promoted implementation line は存在しません。追加の self-driven post-`P21` docs-first family も残っていません。
-- next reopen point は `U1` actual commitment です。
+- historical post-`P21` docs-first family は close したままです。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..04` を進行中と読みます。
+- `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
   stale docs cleanup、validation rerun、report creation、formatting cleanup、guardrail maintenance、regression repair、dashboard freshness、source hierarchy / docs scaffold guardrail maintenance。
+  これに加えて alpha-local theory-freeze / checker-runtime preparation lane が current autonomous package として並走します。
 - `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims は historical memory として `plan/` / `docs/reports/` / relevant specs examples に委譲し、active command claim へ戻しません。
 - 2026-04-30 以降の detailed maintenance chronology はこの snapshot では再列挙しません。package-by-package evidence は package close 後の committed reports を正本にし、in-flight package は当該 report の commit / push status を authority とします。long-lived comparison / boundary memory は relevant `plan/` files、runnable sample status は `samples_progress.md` を参照します。
 - 2026-05-01 の `1051` 以降の guardrail / snapshot / validation / storage follow-up packages は maintenance-only closeout です:
@@ -57,6 +63,21 @@
 - 1096 後の docs-focused validation は 2026-05-01 14:36 JST に再確認済みです:
   report-schema unit、source hierarchy、docs scaffold、`git diff --check` が clean tree で pass しました。full sample / Cargo floor は 1095 の post-guardrail checkpoint を参照します。
 
+## Current Alpha-0 / Mirrorea Spaces stage
+
+- Large stage:
+  Stage A floor maintained, with Stage B local-runtime preparation reopened through the Alpha-0 lane
+- Concrete phase:
+  Phase 0 — Theory freeze preparation
+- Current package:
+  `P-A0-04` snapshot docs sync
+- Current status:
+  validation green; report / commit / push pending
+- Next autonomous package:
+  `P-A0-05` checker skeleton first cut
+- Public-decision gate kept separate:
+  `U1` remains open and is not collapsed into this alpha-local package series
+
 ## executable floor
 
 | lane | current floor | current command | not a claim of |
@@ -71,6 +92,20 @@
 | viewer prototype | `scripts/visual_debugger_viewer_samples.py` | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | final viewer API / telemetry service |
 | hot-plug runtime | `crates/mirrorea-core`, `crates/mir-runtime` | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | rollback / durable migration / distributed ordering / final ABI |
 | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`; `bash scripts/storage/detach_prepare.sh`; `bash scripts/storage/cleanup_disposable_artifacts.sh --list`; `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` | actual LLVM build / backend choice |
+
+## large stage map
+
+| Stage | Name | Status | Main evidence | Not yet claimed |
+|---|---|---|---|---|
+| A | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
+| B | alpha 0.5 local runtime | preparation active | `specs/13..17`、`plan/39..43`、`samples/alpha/` | integrated local runtime |
+| C | alpha 0.7 transport | planned | existing `NET-02..05` canaries + `samples/alpha/network-docker/` scaffold | production WAN / durable replay |
+| D | alpha 0.8 hot-plug lifecycle | planned | `P19..P21` floor + `samples/alpha/hotplug-runtime/` scaffold | durable migration / final ABI |
+| E | alpha 0.9 devtools | planned | viewer prototype inventory + `samples/alpha/visualization/` scaffold | final viewer / telemetry API |
+| F | alpha 1 Spaces alpha | planned | `samples/alpha/e2e/` scaffold + scope spec | full VRChat / Reversed Library completion |
+| G | Spaces product expansion | future | upper-layer roadmap only | alpha scope |
+| H | Atlas | future | upper-layer roadmap only | alpha scope |
+| I | Reversed Library | future | upper-layer roadmap only | alpha scope |
 
 ## package map
 
@@ -100,10 +135,11 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | Documentation freshness / stale-current audit | repo | active maintenance | stale wording removed, report created, validation run, commit/push |
-| 2 | Regression / formatting cleanup | repo | active maintenance | focused tests pass, formatting clean, commit/push |
-| 3 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
-| 4 | Post-`U1` first implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
+| 1 | `P-A0-04` snapshot docs / taxonomy / validator sync closeout | repo | validation green | report finalization and commit/push |
+| 2 | `P-A0-05` checker skeleton first cut | repo | next | lifetime/fallback and layer-compatibility diagnostics exist with tests |
+| 3 | `P-A0-06` cut/save/load checker skeleton | repo | queued | consistent-cut / rollback / save-load checks exist with tests |
+| 4 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
+| 5 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
 ## self-driven maintenance tasks
 
@@ -116,6 +152,20 @@ These are safe to do without new product decisions.
 | runnable dashboard refresh | keep sample status, validation timestamps, and blockers evidence-backed | relevant helper closeout commands | report + `samples_progress.md` | do not mark conceptual rows over 25% or use 100% without current-scope commit/push |
 | Rust formatting / regression repair | keep cargo formatting and focused test floors green | `cargo fmt --check`, affected `cargo test` commands | report if behavior or docs status changes | do not mix unrelated feature work into formatting cleanup |
 | storage guardrail check | keep external workdir and cleanup scripts safe on small VPS | `df -h`, `free -h`, `findmnt`, storage scripts | report with resource output | no destructive cleanup / mount / format without explicit confirmation |
+
+## autonomous alpha packages
+
+| Package | Objective | Current status | Close condition |
+|---|---|---|---|
+| `P-A0-01` | theory freeze specs `13..17` | validation green in worktree | package-close commit/push via `P-A0-04` closeout |
+| `P-A0-02` | roadmap memory `39..43` | validation green in worktree | package-close commit/push via `P-A0-04` closeout |
+| `P-A0-03` | `samples/alpha/` matrix scaffold | validation green in worktree | package-close commit/push via `P-A0-04` closeout |
+| `P-A0-04` | snapshot docs / taxonomy / validator sync | validation green | report + commit/push |
+| `P-A0-05` | checker skeleton first cut | next | key LIF / VAR diagnostics + tests + report + commit/push |
+| `P-A0-06` | cut/save/load checker skeleton | queued | CUT diagnostics + tests + report + commit/push |
+| `P-A0-07` | local Mirrorea runtime integration | queued | local runtime evidence + report + commit/push |
+| `P-A0-08` | layer insertion runtime | queued | debug/auth/ratelimit layer evidence + report + commit/push |
+| `P-A0-09` | network / Docker E2E | queued | Docker transport evidence + report + commit/push |
 
 ## user decision blockers
 
@@ -163,6 +213,50 @@ These are safe to do without new product decisions.
 - reason:
   broader catalog choices can force durability, replay, fairness, and host integration commitments too early.
 
+### Blocker 5. first network scope
+
+- overview:
+  choose whether alpha networking stays local-only, reaches Docker/local-subprocess, or targets broader WAN/federation.
+- affects:
+  `P-A0-09`, transport trait shape, validation floor, non-claim wording.
+- current recommendation:
+  `Docker / local-subprocess first`.
+- reason:
+  it exercises transport/auth/membership separation without prematurely claiming production WAN.
+
+### Blocker 6. avatar compatibility first target
+
+- overview:
+  choose whether first alpha avatar scope is placeholder-only, custom Mir avatar runtime, VRM skeleton, or VRChat-compat skeleton.
+- affects:
+  `P-A0-07`, `P-A0-08`, runtime package scope, adapter policy.
+- current recommendation:
+  `placeholder + custom Mir runtime first`, with VRM / VRChat kept as non-core skeletons.
+- reason:
+  it demonstrates the substrate without importing product-specific runtime assumptions into Mir core.
+
+### Blocker 7. native binary policy
+
+- overview:
+  choose whether native packages are forbidden, sandboxed/trust-policy limited, or admitted by stronger provenance policy.
+- affects:
+  `specs/16`, runtime package admission, sample matrix, deployment claims.
+- current recommendation:
+  `sandboxed / trust-policy limited`.
+- reason:
+  signature alone is not semantic safety; provenance and capability/effect limits both matter.
+
+### Blocker 8. save/load initial scope and UI target
+
+- overview:
+  choose whether initial save/load is local-only or multi-Place, and whether alpha UI target is CLI, HTML viewer, or richer client.
+- affects:
+  `P-A0-06`, `P-A0-09`, visualization/devtools scope, non-claim wording.
+- current recommendation:
+  `local-only save/load + HTML/JSON viewer first`.
+- reason:
+  distributed save/load without consistent cut is disallowed, and the current viewer evidence is closest to typed HTML/JSON surfaces.
+
 ## research-discovery items
 
 - exact public `VerificationLayer` law surface, public naming, theorem-bridge/runtime-policy widening relation, and composition contract among emitted rows / evidence carriers / downstream consumers / emitted verifier handoff artifacts beyond the current floor (`verification_handoff_witness`, `verification_model_check`).
@@ -178,6 +272,7 @@ These are safe to do without new product decisions.
 ## validation floor for this snapshot
 
 ```bash
+find samples/alpha -maxdepth 3 -type f | sort
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 python3 scripts/current_l2_source_sample_regression.py inventory

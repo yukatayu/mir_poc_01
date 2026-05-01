@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-10
+# Family: contract-variance
+# Kind: negative static
+# Purpose: latency/resource bound worsened
+# Expected: reject unless declared
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.CostDegradationRejected
+
+# Scenario sketch:
+# - sample_id: VAR-10
+# - goal: latency/resource bound worsened
+# - expected outcome: reject unless declared
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

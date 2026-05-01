@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-12
+# Family: lifetime-fallback
+# Kind: negative/contrast
+# Purpose: sparkle refs Bird object only
+# Expected: bird deletion => WorldOrigin fallback
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.BirdSparkleNoInheritance
+
+# Scenario sketch:
+# - sample_id: LIF-12
+# - goal: sparkle refs Bird object only
+# - expected outcome: bird deletion => WorldOrigin fallback
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

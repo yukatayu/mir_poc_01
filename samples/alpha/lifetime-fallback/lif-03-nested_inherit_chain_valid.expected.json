@@ -1,0 +1,26 @@
+{
+  "sample_id": "LIF-03",
+  "sample_name": "nested_inherit_chain_valid",
+  "family": "lifetime-fallback",
+  "status": "planned-skeleton",
+  "phase": "Phase 1",
+  "stage": "Stage A -> B bridge",
+  "kind": "positive",
+  "purpose": "explicit chain inheritance",
+  "expected": "valid, canonical `e>b>a`",
+  "claims": {
+    "runnable": false,
+    "implemented": false,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "skeleton-only",
+    "runner": null,
+    "note": "Validated only by filesystem/docs scaffold checks in this package."
+  },
+  "deferred": [
+    "exact executable syntax",
+    "dedicated runner integration",
+    "checker/runtime implementation"
+  ]
+}

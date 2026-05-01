@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-13
+# Family: lifetime-fallback
+# Kind: positive
+# Purpose: snapshot target but not full chain
+# Expected: FriendHead>A, not FriendHead>Shoulder>A
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.SnapshotSelectedAnchor
+
+# Scenario sketch:
+# - sample_id: LIF-13
+# - goal: snapshot target but not full chain
+# - expected outcome: FriendHead>A, not FriendHead>Shoulder>A
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

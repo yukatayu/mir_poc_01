@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-04
+# Family: cut-save-load
+# Kind: positive
+# Purpose: single Place snapshot
+# Expected: load restores local state
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.LocalSaveLoadValid
+
+# Scenario sketch:
+# - sample_id: CUT-04
+# - goal: single Place snapshot
+# - expected outcome: load restores local state
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

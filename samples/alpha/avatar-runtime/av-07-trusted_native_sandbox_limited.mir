@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: AV-07
+# Family: avatar-runtime
+# Kind: positive/limited
+# Purpose: sandboxed external provider
+# Expected: accepted with limited caps
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.AvatarRuntime.TrustedNativeSandboxLimited
+
+# Scenario sketch:
+# - sample_id: AV-07
+# - goal: sandboxed external provider
+# - expected outcome: accepted with limited caps
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

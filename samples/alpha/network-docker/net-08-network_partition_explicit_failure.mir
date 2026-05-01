@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: NET-08
+# Family: network-docker
+# Kind: negative/positive
+# Purpose: partition causes typed failure
+# Expected: Reject(NetworkUnavailable) or Deferred
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.NetworkDocker.NetworkPartitionExplicitFailure
+
+# Scenario sketch:
+# - sample_id: NET-08
+# - goal: partition causes typed failure
+# - expected outcome: Reject(NetworkUnavailable) or Deferred
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

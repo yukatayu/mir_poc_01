@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-04
+# Family: lifetime-fallback
+# Kind: positive/negative distinction
+# Purpose: `ref(d)>a` does not use `d`'s internal fallback
+# Expected: valid, `d` expiry => `a`
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.PlainRefDoesNotInherit
+
+# Scenario sketch:
+# - sample_id: LIF-04
+# - goal: `ref(d)>a` does not use `d`'s internal fallback
+# - expected outcome: valid, `d` expiry => `a`
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: AV-05
+# Family: avatar-runtime
+# Kind: positive
+# Purpose: shader unsupported
+# Expected: fallback material
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.AvatarRuntime.UnsupportedShaderFallback
+
+# Scenario sketch:
+# - sample_id: AV-05
+# - goal: shader unsupported
+# - expected outcome: fallback material
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

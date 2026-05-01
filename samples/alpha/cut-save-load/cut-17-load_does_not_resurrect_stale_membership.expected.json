@@ -1,0 +1,26 @@
+{
+  "sample_id": "CUT-17",
+  "sample_name": "load_does_not_resurrect_stale_membership",
+  "family": "cut-save-load",
+  "status": "planned-skeleton",
+  "phase": "Phase 2 / 6",
+  "stage": "Stage A -> F bridge",
+  "kind": "negative semantic",
+  "purpose": "load does not resurrect stale membership epoch",
+  "expected": "invalid or remains stale",
+  "claims": {
+    "runnable": false,
+    "implemented": false,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "skeleton-only",
+    "runner": null,
+    "note": "Validated only by filesystem/docs scaffold checks in this package."
+  },
+  "deferred": [
+    "exact executable syntax",
+    "dedicated runner integration",
+    "checker/runtime implementation"
+  ]
+}

@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: HP-12
+# Family: hotplug-runtime
+# Kind: negative
+# Purpose: signature but excessive caps
+# Expected: rejected
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.HotplugRuntime.SignedOvercapabilityPackageRejected
+
+# Scenario sketch:
+# - sample_id: HP-12
+# - goal: signature but excessive caps
+# - expected outcome: rejected
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

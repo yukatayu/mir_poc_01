@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: NET-10
+# Family: network-docker
+# Kind: positive
+# Purpose: switch local_queue/TCP
+# Expected: valid if contract unchanged
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.NetworkDocker.TransportMediumChangePreservesContract
+
+# Scenario sketch:
+# - sample_id: NET-10
+# - goal: switch local_queue/TCP
+# - expected outcome: valid if contract unchanged
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

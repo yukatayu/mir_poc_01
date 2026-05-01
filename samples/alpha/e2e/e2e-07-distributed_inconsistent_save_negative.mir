@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: E2E-07
+# Family: e2e
+# Kind: negative
+# Purpose: invalid cut
+# Expected: rejected
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.E2e.DistributedInconsistentSaveNegative
+
+# Scenario sketch:
+# - sample_id: E2E-07
+# - goal: invalid cut
+# - expected outcome: rejected
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

@@ -82,6 +82,42 @@ class ValidateDocsTests(unittest.TestCase):
             self.assertIn(heading, validate_docs.REQUIRED_TEMPLATE_HEADINGS)
             self.assertIn(heading, template_text)
 
+    def test_required_scaffold_includes_alpha0_docs(self) -> None:
+        required = set(validate_docs.REQUIRED)
+        alpha0_required = {
+            "progress.md",
+            "tasks.md",
+            "samples_progress.md",
+            "samples/README.md",
+            "samples/alpha/README.md",
+            "samples/alpha/lifetime-fallback/README.md",
+            "samples/alpha/contract-variance/README.md",
+            "samples/alpha/cut-save-load/README.md",
+            "samples/alpha/local-runtime/README.md",
+            "samples/alpha/layer-insertion/README.md",
+            "samples/alpha/network-docker/README.md",
+            "samples/alpha/hotplug-runtime/README.md",
+            "samples/alpha/avatar-runtime/README.md",
+            "samples/alpha/visualization/README.md",
+            "samples/alpha/e2e/README.md",
+            "scripts/README.md",
+            "plan/01-status-at-a-glance.md",
+            "plan/11-roadmap-near-term.md",
+            "plan/19-repository-map-and-taxonomy.md",
+            "plan/39-type-system-freeze-roadmap.md",
+            "plan/40-layer-compatibility-freeze-roadmap.md",
+            "plan/41-save-load-checkpoint-roadmap.md",
+            "plan/42-runtime-package-avatar-roadmap.md",
+            "plan/43-alpha-e2e-roadmap.md",
+            "specs/13-type-system-lifetime-fallback.md",
+            "specs/14-contract-subtyping-layer-compatibility.md",
+            "specs/15-cut-save-load-checkpoint.md",
+            "specs/16-runtime-package-adapter-hotplug.md",
+            "specs/17-mirrorea-spaces-alpha-scope.md",
+        }
+        for path in alpha0_required:
+            self.assertIn(path, required)
+
     def test_main_rejects_template_missing_commands_run_section(self) -> None:
         heading = "## Commands run"
         template_text = "\n".join(h for h in validate_docs.REQUIRED_TEMPLATE_HEADINGS if h != heading)

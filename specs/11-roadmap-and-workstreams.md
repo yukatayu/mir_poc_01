@@ -1227,9 +1227,56 @@ current repo は flat workspace / flat script root を維持したまま、layer
 
 - current repo map は `plan/19-repository-map-and-taxonomy.md` を repository memory 正本とし、`samples/README.md` と `scripts/README.md` を reader-facing taxonomy anchor に置く。
 - current principle は **low-risk docs / taxonomy hardening first** であり、crate rename / module move / public API move / command-path move は stop line の外に残す。
-- active sample は `samples/clean-near-end/`、base current-L2 corpus は `samples/current-l2/`、planned skeleton は `samples/not_implemented/`、prototype / archive / generated reserve は別 roots に分けて読む。
+- active sample は `samples/clean-near-end/`、base current-L2 corpus は `samples/current-l2/`、alpha-local scaffold は `samples/alpha/`、residual planned family は `samples/not_implemented/`、prototype / archive / generated reserve は別 roots に分けて読む。
 - `samples/generated/` は non-Lean generated sample artifact の reserve として保持し、heavy disposable artifact は external workdir を優先する。
 - root cleanup、script rebucket、crate split は staged migration plan と wrapper strategy があるときだけ進める。
+
+## 2026-05-02 Mirrorea Spaces alpha-0 theory-freeze addendum
+
+current repo は Stage A current floor を維持したまま、Mirrorea Spaces alpha-0 line を **alpha-local theory-freeze + scaffold-first reopen lane** として進めてよい。
+ここでいう reopen は final public product reopen ではなく、`specs/13..17`、`plan/39..43`、`samples/alpha/` を足場に Stage B local runtime へ向かう docs/spec/checker/runtime package 列を再開することを指す。
+
+- Stage A:
+  repo-local alpha-ready floor は引き続き `samples/clean-near-end/`、`samples/current-l2/`、`samples/lean/`、Sugoroku helper、avatar helper、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug carrier/runtime narrow floor を main evidence として保つ。
+- Stage B:
+  integrated local Mirrorea runtime は next promoted alpha-local stage であり、multiple Places inside one local runtime、event DAG export、Place graph export、fallback degradation trace、hot-plug request/verdict trace を要求する。
+- Stage C:
+  real transport narrow cut は Docker / subprocess / TCP などの minimal real transport を扱うが、transport / auth / membership / capability / witness collapse を禁止する。
+- Stage D:
+  hot-plug minimal lifecycle は attach / detach / activation-cut / compatibility / authority / audit を runtime operation として扱う。
+- Stage E:
+  visualization / devtools は event graph、Place graph、route trace、membership / witness / hot-plug timeline、observer-safe redaction view を inspectable にする。
+- Stage F:
+  Mirrorea Spaces alpha は minimal browser-like shared virtual-space platform であり、full VRChat / Reversed Library completion を claim しない。
+
+Concrete alpha-local phases は次の順で読む。
+
+1. Phase 0 — theory freeze preparation
+   - `specs/13..17`
+   - `plan/39..43`
+   - `samples/alpha/`
+   - snapshot docs / taxonomy / validation sync
+2. Phase 1 — typed IR and checker skeleton
+   - lifetime / fallback canonicalizer
+   - contract subtyping checker
+   - diagnostics schema
+3. Phase 2 — executable semantics and event DAG
+4. Phase 3 — local Mirrorea runtime
+5. Phase 4 — layer insertion runtime
+6. Phase 5 — network / Docker E2E
+7. Phase 6 — save/load and consistent cut
+8. Phase 7 — runtime package / avatar adapter
+
+sample taxonomy addendum:
+
+- active runnable root は `samples/clean-near-end/`
+- base source corpus は `samples/current-l2/`
+- Lean evidence は `samples/lean/`
+- alpha-local scaffold root は `samples/alpha/`
+- residual planned family preservation root は `samples/not_implemented/`
+
+`samples/alpha/` は current cut では expected-verdict sidecar 付き scaffold root に留め、silent runnable promotion をしない。
+`samples/not_implemented/` は residual planned family と exact rough stimulus preservation root として維持する。
 
 ## 推奨される phase 順序
 

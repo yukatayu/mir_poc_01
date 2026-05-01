@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: AV-03
+# Family: avatar-runtime
+# Kind: planned/positive
+# Purpose: adapter boundary only
+# Expected: accepted as limited/planned
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.AvatarRuntime.VrmAdapterSkeleton
+
+# Scenario sketch:
+# - sample_id: AV-03
+# - goal: adapter boundary only
+# - expected outcome: accepted as limited/planned
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

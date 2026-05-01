@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-13
+# Family: contract-variance
+# Kind: positive
+# Purpose: auth added by versioned contract update
+# Expected: valid with activation cut
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.AuthLayerContractUpdateValid
+
+# Scenario sketch:
+# - sample_id: VAR-13
+# - goal: auth added by versioned contract update
+# - expected outcome: valid with activation cut
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

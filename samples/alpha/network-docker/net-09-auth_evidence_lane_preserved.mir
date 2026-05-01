@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: NET-09
+# Family: network-docker
+# Kind: positive
+# Purpose: auth not collapsed into transport
+# Expected: envelope lanes preserved
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.NetworkDocker.AuthEvidenceLanePreserved
+
+# Scenario sketch:
+# - sample_id: NET-09
+# - goal: auth not collapsed into transport
+# - expected outcome: envelope lanes preserved
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

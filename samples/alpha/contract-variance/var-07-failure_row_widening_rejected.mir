@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-07
+# Family: contract-variance
+# Kind: negative static
+# Purpose: RateLimited added undeclared
+# Expected: reject
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.FailureRowWideningRejected
+
+# Scenario sketch:
+# - sample_id: VAR-07
+# - goal: RateLimited added undeclared
+# - expected outcome: reject
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

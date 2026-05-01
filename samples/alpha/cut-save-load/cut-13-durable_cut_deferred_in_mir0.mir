@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-13
+# Family: cut-save-load
+# Kind: negative static
+# Purpose: use durable_cut in Mir-0
+# Expected: rejected/deferred diagnostic
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.DurableCutDeferredInMir0
+
+# Scenario sketch:
+# - sample_id: CUT-13
+# - goal: use durable_cut in Mir-0
+# - expected outcome: rejected/deferred diagnostic
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

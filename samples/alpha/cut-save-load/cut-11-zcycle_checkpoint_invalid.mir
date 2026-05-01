@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-11
+# Family: cut-save-load
+# Kind: negative
+# Purpose: checkpoint dependency Z-cycle
+# Expected: unusable checkpoint
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.ZcycleCheckpointInvalid
+
+# Scenario sketch:
+# - sample_id: CUT-11
+# - goal: checkpoint dependency Z-cycle
+# - expected outcome: unusable checkpoint
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

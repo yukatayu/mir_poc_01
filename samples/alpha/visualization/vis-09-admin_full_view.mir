@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VIS-09
+# Family: visualization
+# Kind: positive
+# Purpose: privileged view
+# Expected: full allowed detail
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.Visualization.AdminFullView
+
+# Scenario sketch:
+# - sample_id: VIS-09
+# - goal: privileged view
+# - expected outcome: full allowed detail
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

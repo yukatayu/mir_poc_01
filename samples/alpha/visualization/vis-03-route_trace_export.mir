@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VIS-03
+# Family: visualization
+# Kind: positive
+# Purpose: envelope route
+# Expected: view
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.Visualization.RouteTraceExport
+
+# Scenario sketch:
+# - sample_id: VIS-03
+# - goal: envelope route
+# - expected outcome: view
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

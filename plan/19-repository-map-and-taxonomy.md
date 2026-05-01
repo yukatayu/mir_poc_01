@@ -94,8 +94,12 @@ standing recommendation:
 
 ### current non-active roots
 
+- `samples/alpha/`
+  Mirrorea Spaces alpha-0 phase-indexed scaffold root
+  - `specs/13..17` / `plan/39..43` に結びつく expected-verdict sidecar 付き sample matrix
+  - current task では skeleton / planning root であり、active runnable root ではない
 - `samples/not_implemented/`
-  planned skeleton family
+  residual planned skeleton family
   - `typed-external-boundary/`
     phase 9 planned source family。current repo では synthetic preview helper がこの source stub family を参照する
 - `samples/prototype/`
@@ -111,6 +115,9 @@ standing recommendation:
 - `samples/generated/projection-placement/manifest.json` は committed generated bridge evidence であり、source sample でも final emitted executable program でもない
 - heavy disposable generated artifact は repo root ではなく external workdir を優先する
 - planned skeleton family は active sample として扱わない
+- `samples/alpha/` と `samples/not_implemented/` を混同しない
+  - `samples/alpha/` は current promoted scaffold
+  - `samples/not_implemented/` は residual / exact rough stimulus preservation root
 
 ## script taxonomy
 
@@ -133,6 +140,8 @@ standing recommendation:
   base current-L2 helper、detached loop、diff/export assist、Lean sync、checker support
 - `scripts/new_report.py`
   report utility
+- alpha-specific runner family は planned だが current `scripts/` には未実装である
+  - current validation floor は structural checks と docs/report discipline に留める
 
 ### current storage / env
 
@@ -180,7 +189,7 @@ repo/
   plan/                     # repository memory
   docs/                     # reader-facing summary + reports
   crates/                   # flat workspace, conceptually separated lanes
-  samples/                  # active/base/planned/prototype/archive/generated
+  samples/                  # active/base/alpha-scaffold/residual-prototype/archive/generated
   scripts/                  # active runners + helper/support + storage/env + tests
   sub-agent-pro/            # handoff only
 ```
@@ -222,7 +231,7 @@ conceptual lanes:
 
 ### Stage 4 — physical crate/path migration
 
-- `samples/not_implemented` vs `samples/planned`
+- `samples/alpha` vs `samples/not_implemented` vs `samples/planned`
 - `samples/old` vs `samples/archive`
 - `scripts/current_l2_*` の rebucket
 - future crate split
@@ -239,6 +248,7 @@ current task では move しない。
 - `crates/prism-*`
 - `crates/engine-abi`
 - `samples/not_implemented/avatar-fairy-follow/`
+- `samples/alpha/`
 - `samples/prototype/current-l2-dynamic-attach-detach/`
 - `mir_hilight.html`
 - `scripts/current_l2_*`

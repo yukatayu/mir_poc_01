@@ -10,8 +10,10 @@
   base current-L2 source corpus
 - `lean/`
   mechanization evidence
+- `alpha/`
+  Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars
 - `not_implemented/`
-  planned skeleton family
+  residual planned skeleton family
 - `prototype/`
   historical prototype / compatibility anchor
 - `old/`
@@ -24,7 +26,10 @@
 - active executable sample として読むのは、まず `clean-near-end/`
 - `current-l2/` は active clean suite を支える base source corpus
 - `lean/clean-near-end/` は generated theorem stub だが、proof bridge evidence として committed されている
-- `not_implemented/` は planned skeleton であり、active sample ではない
+- `alpha/` は current alpha-local theory-freeze / checker/runtime roadmap 用の scaffold であり、expected-verdict sidecar を伴う
+  - current task では skeleton / planning root として扱い、active runnable sample root に silently promote しない
+  - family ごとの status / blocker / next runner は `samples_progress.md` と `progress.md` / `tasks.md` を参照する
+- `not_implemented/` は residual planned skeleton であり、active sample ではない
   - `avatar-fairy-follow/` は phase 8 residual planned family
   - `typed-external-boundary/` は phase 9 residual planned family
     - `scripts/typed_external_boundary_samples.py` はこの root の `EXT-03` / `EXT-04` を helper-local synthetic preview anchor として読むが、active semantic sample root へ昇格させない
@@ -39,6 +44,9 @@
   - current committed generated bridge evidence は `samples/generated/projection-placement/manifest.json`
   - これは generated artifact であり、source sample でも final emitted executable program でもない
   - projection / placement の actual emitted executable family、optimizer、deployment planner は kept-later gate に残す
+- `not_implemented/` と `alpha/` を混同しない
+  - `alpha/` は current alpha-local promoted scaffold
+  - `not_implemented/` は residual / historical planned family の preservation root
 
 ## current commands
 

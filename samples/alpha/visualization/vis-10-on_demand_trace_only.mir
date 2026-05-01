@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VIS-10
+# Family: visualization
+# Kind: positive/perf
+# Purpose: tracing only after attach
+# Expected: no trace before attach
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.Visualization.OnDemandTraceOnly
+
+# Scenario sketch:
+# - sample_id: VIS-10
+# - goal: tracing only after attach
+# - expected outcome: no trace before attach
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

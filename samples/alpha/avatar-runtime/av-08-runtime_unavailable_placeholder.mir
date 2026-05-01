@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: AV-08
+# Family: avatar-runtime
+# Kind: positive
+# Purpose: no runtime support
+# Expected: placeholder fallback
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.AvatarRuntime.RuntimeUnavailablePlaceholder
+
+# Scenario sketch:
+# - sample_id: AV-08
+# - goal: no runtime support
+# - expected outcome: placeholder fallback
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

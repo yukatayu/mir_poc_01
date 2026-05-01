@@ -45,7 +45,7 @@ repo が主として検証しているのは、Mir current-L2 の **repo-local a
 
 ## Mirrorea の次軸
 
-Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
+Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-02 時点では、その中に **Mirrorea Spaces alpha-0 theory-freeze lane** を追加しており、規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、Stage A floor から Stage B local runtime へ移るための alpha-local scaffolding です。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 
 current line で reader が押さえるべき点は次です。
 
@@ -54,7 +54,7 @@ current line で reader が押さえるべき点は次です。
 - security / observation split:
   authentication / authorization / membership / capability / witness は transport に潰さず、visualization / telemetry も `label` / `authority` / `redaction` / `retention` を持つ typed effect layer として扱います。
 - current repo-local evidence surfaces:
-  Sugoroku world runtime attachment vertical slice、avatar fairy follow representative slice、typed external `EXT-03/04` preview、network `NET-02..05` canary、projection/codegen manifest bridge evidence、viewer prototype inventory、hot-plug runtime narrow floor は runnable または closeout-backed です。`FAIRY-05` は `samples/not_implemented/avatar-fairy-follow/` に planned family として残しています。
+  Sugoroku world runtime attachment vertical slice、avatar fairy follow representative slice、typed external `EXT-03/04` preview、network `NET-02..05` canary、projection/codegen manifest bridge evidence、viewer prototype inventory、hot-plug runtime narrow floor は runnable または closeout-backed です。加えて `samples/alpha/` には alpha-local theory-freeze / checker skeleton / runtime roadmap 用の sample matrix scaffold を置きますが、これは expected-verdict 付き skeleton であり、まだ runnable root ではありません。`FAIRY-05` は `samples/not_implemented/avatar-fairy-follow/` に residual planned family として残しています。
   projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に限り、generated place-program synthesis、placement optimizer、deployment planner、cross-place equivalence checker、proof completion、final emitted executable family、final public emitted-program ABI ではありません。
 - current runtime / carrier floor:
   `TermSignature` / `LayerSignature` / `MessageEnvelope` / `AuthEvidence` / helper `verification_handoff_witness` / runtime `verification_model_check`、`MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell`、engine-neutral `HotPlugRequest` / `HotPlugVerdict`、runtime-side hot-plug skeleton/engine reports までは repo-local actualization 済みです。
@@ -72,7 +72,7 @@ current line で reader が押さえるべき点は次です。
 - reader-facing roadmap summary:
   `docs/research_abstract/mirrorea_future_axis_01.md`
 - future-axis repository memory:
-  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..38`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..43`
 
 ## 何が built-in で、何が user-defined か
 
@@ -230,8 +230,10 @@ task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、そ
   `samples/clean-near-end/sugoroku-world/`
 - active Lean material:
   `samples/lean/`
+- alpha-local scaffold root:
+  `samples/alpha/`
 - planned skeleton family:
-  `samples/not_implemented/`
+  `samples/not_implemented/` (residual planned family)
 - prototype / compatibility anchor:
   `samples/prototype/`
 - historical archive:

@@ -155,6 +155,23 @@
 - `final public hot-plug ABI` family hardening も docs-first close 済みである。ここで fixed したのは `freeze prerequisite fixed; public ABI still unfrozen` までであり、actual final public ABI freeze は post-`P18` mixed gate / `U1` hold line の dependency を保ったまま still later に残す
 - reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`
 
+## 2026-05-02 alpha-0 integration addendum
+
+- current repo は maintenance-only line に固定せず、Mirrorea Spaces alpha-0 の **theory-freeze and roadmap synchronization lane** を reopen してよい
+- normative anchor は `specs/13..17`
+- repository memory anchor は `plan/39..43`
+- sample scaffold root は `samples/alpha/`
+- current package reading は `P-A0-01` / `P-A0-02` / `P-A0-03` が worktree に actualize 済みで、2026-05-02 06:32 JST の docs/scaffold floor は green、`P-A0-04` snapshot sync closeout は report / commit / push 待ちという状態を前提にし、queue authority は `progress.md` / `tasks.md` に残す
+- Stage A current floor と Stage B local runtime target を混同しない
+  - Stage A evidence:
+    clean near-end suite、current-L2 corpus、Lean evidence、Sugoroku helper、avatar helper、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug carrier/runtime narrow floor
+  - Stage B target:
+    integrated local runtime、event DAG export、Place graph export、fallback degradation trace、hot-plug request/verdict trace
+- `samples/alpha/` は expected-verdict sidecar 付き scaffold であり、active runnable root へ silent promotion しない
+- `samples/not_implemented/` は residual planned family preservation root として残す
+- public-boundary `U1` gate は消えていない
+  - packaging / host target / first shipped public surface / final catalog breadth の user-facing decision は still later
+
 ## current stop line
 
 - final public parser grammar

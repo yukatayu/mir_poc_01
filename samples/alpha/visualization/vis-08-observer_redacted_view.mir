@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VIS-08
+# Family: visualization
+# Kind: positive
+# Purpose: safe observer
+# Expected: no raw high-label data
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.Visualization.ObserverRedactedView
+
+# Scenario sketch:
+# - sample_id: VIS-08
+# - goal: safe observer
+# - expected outcome: no raw high-label data
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

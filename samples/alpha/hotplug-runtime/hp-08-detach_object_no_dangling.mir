@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: HP-08
+# Family: hotplug-runtime
+# Kind: positive
+# Purpose: detach degrades references
+# Expected: valid
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.HotplugRuntime.DetachObjectNoDangling
+
+# Scenario sketch:
+# - sample_id: HP-08
+# - goal: detach degrades references
+# - expected outcome: valid
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

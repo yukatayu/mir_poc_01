@@ -1,0 +1,26 @@
+{
+  "sample_id": "E2E-04",
+  "sample_name": "hotplug_ratelimit_runtime",
+  "family": "e2e",
+  "status": "planned-skeleton",
+  "phase": "Phase 8",
+  "stage": "Stage F",
+  "kind": "positive/negative",
+  "purpose": "rate-limit behavior",
+  "expected": "Reject(RateLimited)",
+  "claims": {
+    "runnable": false,
+    "implemented": false,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "skeleton-only",
+    "runner": null,
+    "note": "Validated only by filesystem/docs scaffold checks in this package."
+  },
+  "deferred": [
+    "exact executable syntax",
+    "dedicated runner integration",
+    "checker/runtime implementation"
+  ]
+}

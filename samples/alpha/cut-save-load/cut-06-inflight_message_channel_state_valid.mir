@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-06
+# Family: cut-save-load
+# Kind: positive
+# Purpose: send included, receive omitted, channel state saved
+# Expected: valid cut
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.InflightMessageChannelStateValid
+
+# Scenario sketch:
+# - sample_id: CUT-06
+# - goal: send included, receive omitted, channel state saved
+# - expected outcome: valid cut
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

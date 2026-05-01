@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-03
+# Family: cut-save-load
+# Kind: negative static/runtime
+# Purpose: rollback region contains irreversible effect
+# Expected: reject/require compensation
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.IrreversibleEffectInRollbackRejected
+
+# Scenario sketch:
+# - sample_id: CUT-03
+# - goal: rollback region contains irreversible effect
+# - expected outcome: reject/require compensation
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

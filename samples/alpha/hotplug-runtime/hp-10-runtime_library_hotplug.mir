@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: HP-10
+# Family: hotplug-runtime
+# Kind: positive
+# Purpose: package attach
+# Expected: accepted
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.HotplugRuntime.RuntimeLibraryHotplug
+
+# Scenario sketch:
+# - sample_id: HP-10
+# - goal: package attach
+# - expected outcome: accepted
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

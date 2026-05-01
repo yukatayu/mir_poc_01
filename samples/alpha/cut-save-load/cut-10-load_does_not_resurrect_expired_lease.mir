@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-10
+# Family: cut-save-load
+# Kind: negative semantic
+# Purpose: saved/load stale lease
+# Expected: invalid or remains expired
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.LoadDoesNotResurrectExpiredLease
+
+# Scenario sketch:
+# - sample_id: CUT-10
+# - goal: saved/load stale lease
+# - expected outcome: invalid or remains expired
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

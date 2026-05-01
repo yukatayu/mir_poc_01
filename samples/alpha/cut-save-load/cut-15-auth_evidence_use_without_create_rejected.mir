@@ -1,0 +1,16 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-15
+# Family: cut-save-load
+# Kind: negative
+# Purpose: auth evidence use included, create omitted
+# Expected: invalid cut
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.AuthEvidenceUseWithoutCreateRejected
+
+# Scenario sketch:
+# - sample_id: CUT-15
+# - goal: auth evidence use included, create omitted
+# - expected outcome: invalid cut
+# - exact executable syntax / checker/runtime carrier remains deferred.

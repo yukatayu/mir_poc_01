@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VIS-05
+# Family: visualization
+# Kind: positive
+# Purpose: epoch/incarnation
+# Expected: view
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.Visualization.MembershipTimeline
+
+# Scenario sketch:
+# - sample_id: VIS-05
+# - goal: epoch/incarnation
+# - expected outcome: view
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

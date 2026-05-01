@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-02
+# Family: lifetime-fallback
+# Kind: positive
+# Purpose: `c > a` lets access degrade
+# Expected: valid, canonical chain `c>a`
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.FallbackExtendsAccessPath
+
+# Scenario sketch:
+# - sample_id: LIF-02
+# - goal: `c > a` lets access degrade
+# - expected outcome: valid, canonical chain `c>a`
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

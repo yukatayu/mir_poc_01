@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: CUT-07
+# Family: cut-save-load
+# Kind: negative
+# Purpose: observe included, publish omitted
+# Expected: invalid cut
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.CutSaveLoad.ObserveWithoutPublishRejected
+
+# Scenario sketch:
+# - sample_id: CUT-07
+# - goal: observe included, publish omitted
+# - expected outcome: invalid cut
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

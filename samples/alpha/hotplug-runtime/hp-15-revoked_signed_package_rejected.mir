@@ -1,0 +1,16 @@
+# Alpha-0 planned skeleton sample.
+# ID: HP-15
+# Family: hotplug-runtime
+# Kind: negative
+# Purpose: signed package is revoked or stale
+# Expected: rejected
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.HotplugRuntime.RevokedSignedPackageRejected
+
+# Scenario sketch:
+# - sample_id: HP-15
+# - goal: signed package is revoked or stale
+# - expected outcome: rejected
+# - exact executable syntax / checker/runtime carrier remains deferred.

@@ -7,9 +7,9 @@
 ### front-door checks and active runners
 
 - `check_source_hierarchy.py`
-  required root docs / specs / plan / support directory が存在するかを見る structural check。文書内容、stale wording、normative consistency、report template completeness は判定しない。
+  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..17`、`plan/39..43`、`samples/alpha/`、`sub-agent-pro/alpha-0/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_docs.py`
-  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
+  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`plan/39..43`、`specs/13..17` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
@@ -29,6 +29,8 @@
   current-L2 authored source sample の formal-hook smoke から model-check carrier emit までを確認する repo-local conformance helper。production model checker binding ではない。
 - `new_report.py`
   report utility
+- alpha-specific runner family は planned だが、まだ `scripts/` に actualize していない
+  - until then `samples/alpha/` は scaffold-only であり、validation anchor は structural checks と report/diff discipline に留める
 
 ### storage / env
 
@@ -52,6 +54,7 @@
 - active repo-local command path は上記 front-door runner を先に使う
 - `current_l2_guided_samples.py` は current-L2 front-door compatibility path であり、legacy bundle commands は持たない
 - `current_l2_*` helper 群は public installed CLI ではなく repo-local support surface として読む
+- `samples/alpha/` 向けの future runner 名は roadmap / sample matrix にだけ置き、実在しない command を current validation floor に入れない
 - storage / env script は root setup と cleanup policy を helper 本体から分離する
 
 ## staged reorganization policy

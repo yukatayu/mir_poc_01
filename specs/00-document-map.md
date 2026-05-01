@@ -156,13 +156,14 @@
 6. `10-open-questions.md`
 7. `11-roadmap-and-workstreams.md`
 8. `12-decision-register.md`
+9. Mirrorea Spaces alpha-0 line を扱う場合は `13-type-system-lifetime-fallback.md`、`14-contract-subtyping-layer-compatibility.md`、`15-cut-save-load-checkpoint.md`、`16-runtime-package-adapter-hotplug.md`、`17-mirrorea-spaces-alpha-scope.md`
 
 ## 例示文書
 
 - `specs/examples/00-representative-mir-programs.md`
   - current L2 の representative Mir programs をまとめた例示文書。
   - parser / interpreter を固定するものではなく、コード片ごとの static 判定、runtime outcome、最小 trace 説明を揃えるための補助正本である。
-  - `specs/04-mir-core.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md` を読んだ後に参照すると、現時点で何が自然に書けるかを追いやすい。
+  - `specs/04-mir-core.md`、`specs/10-open-questions.md`、`specs/12-decision-register.md` を読んだ後に参照すると、現時点で何が自然に書けるかを追いやすい。Mirrorea Spaces alpha-0 line の fallback / layer / save-load / hot-plug boundary を current example と突き合わせるときは `specs/13..17` も併読する。
 - `specs/examples/01-current-l2-surface-syntax-candidates.md`
   - representative examples で使う `perform`、option chain 参照、`try` / `fallback`、`require` / `ensure` clause、statement separator / block nesting の current L2 候補書式をまとめた補助文書。
   - final parser syntax や reserved keyword を固定するものではなく、examples 用の安定した companion notation を示す。
@@ -481,6 +482,9 @@
 - `specs/examples/451-current-l2-runnable-prototype-and-not-implemented-sample-buckets.md`
   - `samples/current-l2/`、`samples/prototype/`、`samples/not_implemented/` の current bucket policy と、corrected runnable prototype / exact rough stimulus preservation の current cut を整理する補助文書。
   - 2026-04-22 以後は historical bucket policy として読む。
+- `samples/alpha/`
+  - Mirrorea Spaces alpha-0 の phase-indexed scaffold root。
+  - `specs/13..17` と `plan/39..43` に結びつく expected-verdict sidecar 付き sample matrix を置くが、current cut では active runnable root ではない。
 - `samples/clean-near-end/`
   - 2026-04-22 以後の active clean sample suite。
   - `typing/`、`order-handoff/`、`model-check/`、`modal/` の current alpha layer を置く。

@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: E2E-02
+# Family: e2e
+# Kind: positive
+# Purpose: network E2E
+# Expected: envelope over Docker network
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.E2e.DockerTwoNodeSugoroku
+
+# Scenario sketch:
+# - sample_id: E2E-02
+# - goal: network E2E
+# - expected outcome: envelope over Docker network
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

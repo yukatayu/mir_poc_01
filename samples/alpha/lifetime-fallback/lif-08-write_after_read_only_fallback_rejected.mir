@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: LIF-08
+# Family: lifetime-fallback
+# Kind: negative runtime/static
+# Purpose: selected fallback is read-only
+# Expected: Reject or static error
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.LifetimeFallback.WriteAfterReadOnlyFallbackRejected
+
+# Scenario sketch:
+# - sample_id: LIF-08
+# - goal: selected fallback is read-only
+# - expected outcome: Reject or static error
+# - exact executable syntax / checker/runtime carrier remains deferred.
+

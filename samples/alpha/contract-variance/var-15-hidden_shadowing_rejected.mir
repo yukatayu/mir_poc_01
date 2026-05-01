@@ -1,0 +1,17 @@
+# Alpha-0 planned skeleton sample.
+# ID: VAR-15
+# Family: contract-variance
+# Kind: negative static
+# Purpose: overlay removes interface
+# Expected: reject
+# Status: planned-skeleton only; not consumed by current active runners.
+# This file is a source-ish placeholder for future checker/runtime integration.
+
+module PlannedMirroreaAlpha.ContractVariance.HiddenShadowingRejected
+
+# Scenario sketch:
+# - sample_id: VAR-15
+# - goal: overlay removes interface
+# - expected outcome: reject
+# - exact executable syntax / checker/runtime carrier remains deferred.
+
