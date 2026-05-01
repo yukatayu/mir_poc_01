@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 12:59 JST
+最終更新: 2026-05-01 13:13 JST
 
 ## この文書について
 
@@ -42,6 +42,8 @@
   `samples/current-l2/` は base source corpus、`samples/lean/` は foundations + generated theorem stub evidence、`current_l2_guided_samples.py list/smoke-all/closeout` は clean-near-end active suite への compatibility front door として扱います。source-sample regression は stale deleted emitted-artifact Cargo target を呼ばず、formal-hook smoke + theorem Lean-stub conformance + model-check carrier conformance を current route とします。
 - stale validation-command/reference audit は 2026-05-01 12:59 JST に再確認済みです:
   `.docs/current-l2-source-sample-authoring-policy.md`、`plan/27`、public-gate hands-on、projection / Mirrorea research abstracts は current command anchors に同期済みです。network executable evidence は `check-all`、projection live alignment は `check-all`、projection manifest inventory は `closeout` として扱います。
+- storage/env entrypoint guardrail は 2026-05-01 13:13 JST に再確認済みです:
+  `/mnt/mirrorea-work` は mounted、`target` は external cargo target への symlink、cleanup list は `llvm/src` を除外し、削除には `--confirm` を要求します。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はありません。
 
 ## executable floor
 
@@ -56,7 +58,7 @@
 | projection / placement | `scripts/projection_codegen_samples.py` + committed generated manifest | `python3 scripts/projection_codegen_samples.py check-all --format json` | final emitted executable family / generated place-program emission / placement optimizer / deployment planner / equivalence checker / proof completion / final public emitted-program ABI |
 | viewer prototype | `scripts/visual_debugger_viewer_samples.py` | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | final viewer API / telemetry service |
 | hot-plug runtime | `crates/mirrorea-core`, `crates/mir-runtime` | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | rollback / durable migration / distributed ordering / final ABI |
-| storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | `bash scripts/storage/detach_prepare.sh` | actual LLVM build / backend choice |
+| storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`; `bash scripts/storage/detach_prepare.sh`; `bash scripts/storage/cleanup_disposable_artifacts.sh --list`; `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` | actual LLVM build / backend choice |
 
 ## package map
 
@@ -178,7 +180,10 @@ python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
+bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
 bash scripts/storage/detach_prepare.sh
+bash scripts/storage/cleanup_disposable_artifacts.sh --list
+CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run
 cargo test -p mir-ast
 cargo test -p mirrorea-core
 cargo test -p mir-runtime

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 12:59 JST
+最終更新: 2026-05-01 13:13 JST
 
 ## この文書について
 
@@ -131,12 +131,18 @@ Place をまたいで実行・通信・検証・可視化できる
   `cargo test -p mirrorea-core`
   `cargo test -p mir-runtime`
   `cargo test -p mir-semantics`
+- storage / backend guardrail:
+  `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`
+  `bash scripts/storage/detach_prepare.sh`
+  `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
+  `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
 - formatting / diff:
   `cargo fmt --check`
   `git diff --check`
 
 ## recent log
 
+- 2026-05-01 13:13 JST — storage/env entrypoint guardrail freshness を確認した。`/mnt/mirrorea-work` は `/dev/vdb1` として mounted、`target` は external cargo target への symlink、cleanup list は `llvm/src` を除外し、`--confirm` なしの削除は行っていない。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、`CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` は pass。
 - 2026-05-01 12:59 JST — stale validation-command/reference audit を実施し、`.docs/current-l2-source-sample-authoring-policy.md` の削除済み current-L2 emitted-artifact Cargo target 参照を current 23-step regression wording に更新した。reader-facing projection / public-gate docs では `projection_codegen_samples.py check-all` を live alignment validation、`closeout` を manifest inventory evidence として分離し、network executable anchor は `check-all` のまま維持した。focused network/projection commands、current-L2 helper unit、docs/source hierarchy/diff checks は pass。
 - 2026-05-01 12:46 JST — repository-wide validation freshness checkpoint を実行し、docs/source hierarchy、current-L2 source regression 23/23、clean near-end / Sugoroku / avatar / typed external / network / projection / viewer helper floors、Lean sync、Cargo crate tests、`cargo fmt --check`、`git diff --check` が pass した。storage guardrail は既知の `/mnt/mirrorea-work/llvm` root-owned warning のみで、削除は行っていない。
 - 2026-05-01 12:37 JST — current-L2 / Lean active-floor wording を再点検し、`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence、`current_l2_guided_samples.py` は clean-near-end active suite への compatibility front door として snapshot / roadmap wording を同期した。source-sample regression helper は削除済み stale emitted-artifact Cargo target を外し、現存する model-check carrier conformance pipeline を追加した 23-step floor として再通過した。
