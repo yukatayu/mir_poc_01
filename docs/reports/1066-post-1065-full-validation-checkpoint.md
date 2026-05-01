@@ -77,6 +77,10 @@ $ sed -n '1,220p' /tmp/mir-validation-floor-vfjWB0/summary.tsv
 16  git diff --check  0
 ```
 
+Correction recorded 2026-05-01 10:56 JST:
+
+The network transport line above used `closeout --format json`, which is inventory-only for `scripts/network_transport_samples.py`. The executable canary validation anchor is `python3 scripts/network_transport_samples.py check-all --format json`; that correction is recorded in report `1075` and mirrored into `progress.md`, `tasks.md`, and `samples_progress.md`. This does not change the result for other lanes in this checkpoint.
+
 Focused evidence extracted from the logs:
 
 ```text

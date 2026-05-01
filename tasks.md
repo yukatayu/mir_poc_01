@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 10:48 JST
+最終更新: 2026-05-01 10:56 JST
 
 ## この文書について
 
@@ -33,7 +33,7 @@
 | Sugoroku world | `scripts/sugoroku_world_samples.py` | `python3 scripts/sugoroku_world_samples.py closeout --format json` | real network / durable distributed runtime |
 | avatar follow | `scripts/avatar_follow_samples.py` | `python3 scripts/avatar_follow_samples.py closeout --format json` | `FAIRY-05` implementation / public avatar API |
 | typed external | `scripts/typed_external_boundary_samples.py` | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | final host schema / final adapter API |
-| network transport | `scripts/network_transport_samples.py` | `python3 scripts/network_transport_samples.py closeout --format json` | production socket / durable replay |
+| network transport | `scripts/network_transport_samples.py` | `python3 scripts/network_transport_samples.py check-all --format json` | production socket / durable replay |
 | projection / placement | `scripts/projection_codegen_samples.py` + committed generated manifest | `python3 scripts/projection_codegen_samples.py closeout --format json` | final emitted executable family |
 | viewer prototype | `scripts/visual_debugger_viewer_samples.py` | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | final viewer API / telemetry service |
 | hot-plug runtime | `crates/mirrorea-core`, `crates/mir-runtime` | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | rollback / durable migration / distributed ordering / final ABI |
@@ -153,7 +153,7 @@ python3 scripts/current_l2_lean_sample_sync.py
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
-python3 scripts/network_transport_samples.py closeout --format json
+python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 bash scripts/storage/detach_prepare.sh

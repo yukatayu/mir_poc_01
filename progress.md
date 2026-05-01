@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:50 JST
+最終更新: 2026-05-01 10:56 JST
 
 ## この文書について
 
@@ -120,7 +120,7 @@ Place をまたいで実行・通信・検証・可視化できる
   `python3 scripts/avatar_follow_samples.py closeout --format json`
 - preview / generated / viewer / transport:
   `python3 scripts/typed_external_boundary_samples.py closeout --format json`
-  `python3 scripts/network_transport_samples.py closeout --format json`
+  `python3 scripts/network_transport_samples.py check-all --format json`
   `python3 scripts/projection_codegen_samples.py closeout --format json`
   `python3 scripts/visual_debugger_viewer_samples.py closeout --format json`
 - Rust crates:
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:56 JST — network transport validation anchor を correction し、`check-all --format json` が `NET-02..05` canaries を実行する command、`closeout --format json` が inventory-only command であることを `progress.md` / `tasks.md` / `samples_progress.md` / report に反映した。`check-all` は 4/4 pass、production socket / durable replay claim はしていない。
 - 2026-05-01 10:50 JST — recent log を再圧縮し、10:07..10:48 の active-doc / task-map / dashboard / storage maintenance package 詳細を `docs/reports/1062..1073` に委譲した。current floor、strict non-claims、`U1` open gate、validation anchors は維持し、new implementation queue は reopened していない。
 - 2026-05-01 10:26..10:48 JST — full validation checkpoint、storage guardrail audit、task/progress/samples dashboard wording cooling、active-doc point-in-time wording repair、no-finding audit、maintenance-family compression を close した。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、sample status / public surface / implementation queue は変えていない。
 - 2026-05-01 10:07..10:18 JST — active front-door docs の snapshot drift、fixed-line command audit、sample validation-count wording、maintenance evidence band follow-up を close した。live queue authority は `progress.md` / `tasks.md` に残し、helper preview / report-local evidence を final public API として扱っていない。
