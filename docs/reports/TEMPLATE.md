@@ -5,20 +5,44 @@
 - Scope:
 - Decision levels touched:
 
-## 1. Objective
+## Objective
 
-## 2. Inputs consulted
+## Scope and assumptions
 
-## 3. Actions taken
+## Documents consulted
 
-## 4. Files changed
+## Actions taken
 
-## 5. Commands run and exact outputs
+## Files changed
 
-## 6. Evidence / findings
+## Evidence / outputs / test results
 
-## 7. Changes in understanding
+## What changed in understanding
 
-## 8. Open questions
+## Open questions
 
-## 9. Suggested next prompt
+## Suggested next prompt
+
+## Plan update status
+
+`plan/` 更新不要 / 更新済み:
+
+## progress.md update status
+
+`progress.md` 更新不要 / 更新済み:
+
+## tasks.md update status
+
+`tasks.md` 更新不要 / 更新済み:
+
+## samples_progress.md update status
+
+`samples_progress.md` 更新不要 / 更新済み:
+
+## Skipped validations and reasons
+
+## Commit / push status
+
+Pending at report write.
+
+## Sub-agent session close status
