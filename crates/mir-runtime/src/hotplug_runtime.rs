@@ -11,8 +11,9 @@ use mirrorea_core::{
     HotPlugRequest, HotPlugVerdict, LogicalPlaceRuntimeShell, LogicalPlaceRuntimeSnapshot,
     MirroreaCoreError, hotplug_request_lanes, hotplug_verdict_lanes,
 };
+use serde::Serialize;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 pub struct HotPlugRuntimeSkeletonReport {
     pub skeleton_scope: String,
     pub request_lanes: Vec<String>,
@@ -25,7 +26,7 @@ pub struct HotPlugRuntimeSkeletonReport {
     pub notes: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 pub struct HotPlugRuntimeEngineState {
     pub state_kind: String,
     pub request_ref: String,
@@ -38,7 +39,7 @@ pub struct HotPlugRuntimeEngineState {
     pub notes: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 pub struct HotPlugRuntimeEngineReport {
     pub engine_scope: String,
     pub skeleton: HotPlugRuntimeSkeletonReport,

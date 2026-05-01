@@ -1,0 +1,17 @@
+# Alpha-0 layer insertion runtime floor sample.
+# ID: LI-05
+# Family: layer-insertion
+# Kind: negative
+# Purpose: incompatible patch rejected before activation
+# Expected: rejected
+# Status: source-ish anchor for the current non-public Rust runtime floor.
+# This file is not parsed by the current runner.
+
+module PlannedMirroreaAlpha.LayerInsertion.IncompatiblePatchRejected
+
+# Scenario sketch:
+# - sample_id: LI-05
+# - mirrors: HP-06
+# - goal: reject a patch that shrinks provided surface and widens observation
+# - expected outcome: rejected before activation cut
+

@@ -1,0 +1,17 @@
+# Alpha-0 layer insertion runtime floor sample.
+# ID: LI-04
+# Family: layer-insertion
+# Kind: positive/runtime-preview
+# Purpose: rate-limit layer with declared failure row
+# Expected: accepted attach plus preview Reject(RateLimited)
+# Status: source-ish anchor for the current non-public Rust runtime floor.
+# This file is not parsed by the current runner.
+
+module PlannedMirroreaAlpha.LayerInsertion.RateLimitDeclaredFailure
+
+# Scenario sketch:
+# - sample_id: LI-04
+# - mirrors: HP-05, VAR-08
+# - goal: admit rate-limit layer only because RateLimited is already declared
+# - expected outcome: accepted attach; preview runtime reject RateLimited
+

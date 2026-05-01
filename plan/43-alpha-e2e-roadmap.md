@@ -34,6 +34,8 @@ final public product completion ではない。
 ### Stage D
 
 - hot-plug lifecycle
+- first actualized subset is now a non-public Rust layer-insertion floor over the Stage-B local-runtime cut:
+  attach-time contract comparison, accepted debug attach, rejected non-admin attach, explicit auth contract-update path, declared-failure rate-limit path, incompatible patch reject
 
 ### Stage E
 
@@ -106,6 +108,9 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_local_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership`
+- current Phase 4 first-cut floor:
+  `cargo test -p mir-runtime --test alpha_layer_insertion_runtime`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout`
 - Docker-specific validation only when Docker lane is actually added
 
 ## stop lines
@@ -118,4 +123,4 @@ Phase 1+ runtime floor:
 
 ## next package
 
-- after `P-A0-07` local-runtime first cut, the next reopen point is `P-A0-08` layer insertion runtime
+- after `P-A0-08` layer-insertion first cut, the next reopen point is `P-A0-09` network / Docker E2E

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-02 07:45 JST
+最終更新: 2026-05-02 08:19 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-02 07:45 JST に更新済みです:
-  `mirrorea-core` carriers 12 tests、`runtime_substrate` 12 tests、`mir-runtime` hot-plug skeleton 8 tests、`alpha_local_runtime` 3 tests、Rust local-runtime examples 2 runs、Sugoroku parity anchor 1 run、source hierarchy 60/60、docs scaffold（1103 reports）、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass しました。`P-A0-07` closeout により `LR-01/02` non-public Rust local-runtime floor も actualize 済みです。
+- Alpha-0 closeout validation freshness は 2026-05-02 08:15 JST に更新済みです:
+  `P-A0-08` rerun では `mirrorea-core` carriers 12 tests、`mir-runtime` hot-plug skeleton 8 tests、`alpha_local_runtime` 3 tests、`alpha_layer_insertion_runtime` 6 tests、Rust layer-insertion closeout example 1 run、`samples/alpha/layer-insertion/` file inventory、source hierarchy 60/60、docs scaffold（1104 reports）、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass しました。`runtime_substrate` 12 tests、Rust local-runtime examples 2 runs、Sugoroku parity anchor 1 run の latest rerun は `P-A0-07` closeout の 2026-05-02 07:45 JST です。current repo state では `LR-01/02` non-public Rust local-runtime floor と `LI-01..05` non-public Rust layer-insertion floor がともに actualize 済みです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..07` closeout 後の `P-A0-08` queue を current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..08` closeout 後の `P-A0-09` queue を current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -66,15 +66,15 @@
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B first Rust local-runtime floor actualized; Stage C/D remain later
+  Stage B local-runtime floor and Stage D layer-insertion floor actualized; Phase 5 queue is open
 - Concrete phase:
-  Phase 4 — layer insertion runtime
+  Phase 5 — network / Docker E2E
 - Current package:
-  `P-A0-08` layer insertion runtime
-- Current status:
-  `P-A0-07` は current repo state で close 済み。`crates/mir-runtime/src/alpha_local_runtime.rs` と `samples/alpha/local-runtime/LR-01/02` により、queue / `MessageEnvelope` dispatch / membership freshness / event DAG export hook を持つ first non-public Rust local-runtime floor が validation 可能になった。alpha parser/runtime integration、hot-plug/package/avatar runtime、network/Docker runtime、distributed save/load completion claim はまだ行っていない。
-- Next autonomous package:
   `P-A0-09` network / Docker E2E
+- Current status:
+  `P-A0-08` は current repo state で close 済み。`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs` と `samples/alpha/layer-insertion/LI-01..05` により、attach-time contract comparison / authority-gated debug attach / explicit auth contract-update path / declared-failure rate-limit preview / incompatible patch reject を持つ first non-public Rust layer-insertion floor が validation 可能になった。completed hot-plug lifecycle、detach runtime、runtime package/avatar runtime、network/Docker runtime、distributed save/load completion claim はまだ行っていない。
+- Next autonomous package:
+  `P-A0-10` runtime package / avatar skeleton
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -100,7 +100,7 @@
 | A | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
 | B | alpha 0.5 local runtime | first Rust local-runtime floor actualized | `specs/13..17`、`plan/39..43`、`samples/alpha/local-runtime/`、`crates/mir-runtime/src/alpha_local_runtime.rs` | integrated local runtime completion |
 | C | alpha 0.7 transport | planned | existing `NET-02..05` canaries + `samples/alpha/network-docker/` scaffold | production WAN / durable replay |
-| D | alpha 0.8 hot-plug lifecycle | planned | `P19..P21` floor + `samples/alpha/hotplug-runtime/` scaffold | durable migration / final ABI |
+| D | alpha 0.8 hot-plug lifecycle | first attach-time layer floor actualized | `P19..P21` floor + `samples/alpha/layer-insertion/` + `samples/alpha/hotplug-runtime/` scaffold | detach / migration / final ABI |
 | E | alpha 0.9 devtools | planned | viewer prototype inventory + `samples/alpha/visualization/` scaffold | final viewer / telemetry API |
 | F | alpha 1 Spaces alpha | planned | `samples/alpha/e2e/` scaffold + scope spec | full VRChat / Reversed Library completion |
 | G | Spaces product expansion | future | upper-layer roadmap only | alpha scope |
@@ -135,11 +135,10 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-08` layer insertion runtime | repo | next | debug/auth/ratelimit layer evidence + report + commit/push |
-| 2 | `P-A0-09` network / Docker E2E | repo | queued | Docker transport evidence + report + commit/push |
-| 3 | `P-A0-10` runtime package/avatar skeleton | repo | queued | package manifest + placeholder/custom avatar evidence + report + commit/push |
-| 4 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
-| 5 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
+| 1 | `P-A0-09` network / Docker E2E | repo | next | Docker transport evidence + report + commit/push |
+| 2 | `P-A0-10` runtime package/avatar skeleton | repo | queued | package manifest + placeholder/custom avatar evidence + report + commit/push |
+| 3 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
+| 4 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
 ## self-driven maintenance tasks
 
@@ -164,7 +163,7 @@ These are safe to do without new product decisions.
 | `P-A0-05` | checker skeleton first cut | closed | key LIF / VAR diagnostics + tests + report `1100` |
 | `P-A0-06` | cut/save/load checker skeleton | closed | CUT diagnostics + tests + report `1101` |
 | `P-A0-07` | local Mirrorea runtime integration | closed | first Rust local-runtime floor + report `1102` |
-| `P-A0-08` | layer insertion runtime | queued | debug/auth/ratelimit layer evidence + report + commit/push |
+| `P-A0-08` | layer insertion runtime | closed | first Rust attach-time layer-insertion floor + report `1103` |
 | `P-A0-09` | network / Docker E2E | queued | Docker transport evidence + report + commit/push |
 | `P-A0-10` | runtime package/avatar skeleton | queued | package manifest + placeholder/custom avatar evidence + report + commit/push |
 

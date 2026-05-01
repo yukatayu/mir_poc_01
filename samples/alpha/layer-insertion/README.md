@@ -1,18 +1,43 @@
 # alpha sample family — Layer Insertion
 
-- Status: planned directory scaffold only
+- Status: first Rust layer-insertion runtime floor
 - Phase: Phase 4
 - Stage: Stage D
+- Current runner is a non-public Rust attach-time layer-insertion floor in `mir-runtime`.
+- This family is still not an active parser/runtime sample root.
 
 ## Current reading
 
-- This directory is reserved for Phase 4 layer-insertion skeletons.
-- Current Alpha-0 package keeps layer-insertion as a directory-level scaffold only.
-- Layer-compatibility and debug/auth/rate-limit planned rows currently live in `../contract-variance/` and `../hotplug-runtime/`.
-- Do not treat this root as runnable until dedicated samples and validation commands exist.
+- `LI-01..05` actualize the smallest honest attach-time cut for `P-A0-08`:
+  one `MessageDispatch` attach point over the `P-A0-07` local-runtime floor, one accepted debug attach, one rejected non-admin debug attach, one explicit auth contract-update path, one declared-failure rate-limit path, and one incompatible patch reject.
+- The source-ish `.mir` files here are anchors for sample identity and intended scenario only.
+  The current runner does not parse them yet.
+- `HP-02..06` and `VAR-08/11/12/13` remain planned/sample-mirror rows.
+  Runtime-sensitive closeout authority for the current cut lives in this directory instead.
+- This package does not claim:
+  completed hot-plug lifecycle, detach runtime, rollback, durable migration, distributed activation ordering, parser integration, runtime package/avatar admission, network/Docker runtime, save/load completion, or final public layer-attachment ABI.
+
+## Rows
+
+| ID | File | Kind | Expected |
+|---|---|---|---|
+| `LI-01` | `li-01-debug_layer_attach_authorized.mir` | positive | accepted + redacted trace after attach |
+| `LI-02` | `li-02-debug_layer_non_admin_rejected.mir` | negative | rejected before activation |
+| `LI-03` | `li-03-auth_layer_contract_update_path.mir` | positive | accepted only via explicit contract update |
+| `LI-04` | `li-04-ratelimit_declared_failure.mir` | positive/runtime-preview | accepted attach + preview `Reject(RateLimited)` |
+| `LI-05` | `li-05-incompatible_patch_rejected.mir` | negative | rejected before activation |
+
+## Policy
+
+- `.mir` files here are source-ish anchors, not currently parsed executable sources.
+- `.expected.json` sidecars record the runtime-floor contract checked by Rust tests.
+- `claims.runnable = true` means a dedicated Rust test/example now exists for the row, not that `samples/alpha/` became an active front-door sample root.
+- Promotion to active/runnable root status still requires dedicated runner docs, broader closeout evidence, and snapshot updates.
 
 ## Validation anchor for this package
 
 ```bash
 find samples/alpha/layer-insertion -maxdepth 1 -type f | sort
+cargo test -p mir-runtime --test alpha_layer_insertion_runtime
+cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout
 ```

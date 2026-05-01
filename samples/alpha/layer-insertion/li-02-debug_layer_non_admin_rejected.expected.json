@@ -1,0 +1,39 @@
+{
+  "sample_id": "LI-02",
+  "sample_name": "debug_layer_non_admin_rejected",
+  "family": "layer-insertion",
+  "status": "runtime-floor",
+  "phase": "Phase 4",
+  "stage": "Stage D",
+  "kind": "negative",
+  "purpose": "non-admin debug layer attach rejected",
+  "expected": "rejected with no active layer",
+  "mirrors": [
+    "HP-03",
+    "VAR-12"
+  ],
+  "expected_runtime": {
+    "terminal_outcome": "rejected",
+    "required_authorization_reason_ref": "attach_capability_missing",
+    "active_layers_after": 0,
+    "post_attach_trace_rows": 0
+  },
+  "claims": {
+    "runnable": true,
+    "implemented": true,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "rust-runtime-floor",
+    "runner": "cargo test -p mir-runtime --test alpha_layer_insertion_runtime",
+    "note": "Validated in this package by a non-public Rust layer-insertion runtime floor. The source-ish .mir file is not parsed by the current runner."
+  },
+  "deferred": [
+    "completed hot-plug lifecycle",
+    "detach runtime",
+    "rollback and durable migration",
+    "distributed activation ordering",
+    "parser integration",
+    "final public layer attachment ABI"
+  ]
+}

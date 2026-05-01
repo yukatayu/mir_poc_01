@@ -1,0 +1,42 @@
+{
+  "sample_id": "LI-01",
+  "sample_name": "debug_layer_attach_authorized",
+  "family": "layer-insertion",
+  "status": "runtime-floor",
+  "phase": "Phase 4",
+  "stage": "Stage D",
+  "kind": "positive",
+  "purpose": "authority-gated debug layer attach",
+  "expected": "accepted with redacted trace after attach",
+  "mirrors": [
+    "HP-02",
+    "VAR-11",
+    "VAR-12",
+    "VIS-10"
+  ],
+  "expected_runtime": {
+    "terminal_outcome": "accepted",
+    "activated_layer": "debug_trace_layer",
+    "post_attach_trace_rows": 2,
+    "redaction_level": "subject_and_payload_redacted",
+    "source_runtime_sample_ref": "LR-01"
+  },
+  "claims": {
+    "runnable": true,
+    "implemented": true,
+    "active_root": false
+  },
+  "current_validation": {
+    "mode": "rust-runtime-floor",
+    "runner": "cargo test -p mir-runtime --test alpha_layer_insertion_runtime",
+    "note": "Validated in this package by a non-public Rust layer-insertion runtime floor. The source-ish .mir file is not parsed by the current runner."
+  },
+  "deferred": [
+    "completed hot-plug lifecycle",
+    "detach runtime",
+    "rollback and durable migration",
+    "distributed activation ordering",
+    "parser integration",
+    "final public layer attachment ABI"
+  ]
+}

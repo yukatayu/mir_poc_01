@@ -5,6 +5,7 @@
 - Stage: Stage D
 - Current runners do not execute this family yet.
 - Validation for this package is filesystem/docs integrity only.
+- `HP-02..06` now have first runtime-sensitive mirrors under `../layer-insertion/`, but this directory itself remains planned skeleton authority for the broader hot-plug lifecycle family.
 
 ## Rows
 
@@ -30,6 +31,7 @@
 
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
+- `HP-02..06` are still not directly executed from this directory in the current repo state; the dedicated Rust attach-time floor lives under `../layer-insertion/`.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package

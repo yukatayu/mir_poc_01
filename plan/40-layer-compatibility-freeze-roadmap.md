@@ -61,9 +61,11 @@ remaining later in this family:
 
 ### later runtime cut
 
-- attach debug layer with authority
-- auth/rate-limit as declared-failure or contract-update path
-- redaction layer validation
+- `P-A0-08` first actualized subset now exists as a non-public Rust layer-insertion floor over the `P-A0-07` local-runtime cut:
+  accepted debug attach with authority, rejected non-admin debug attach, explicit auth contract-update path, declared-failure rate-limit path, incompatible patch reject
+- attachpoint-local contract comparison is current finite-set / exact-type-name floor only
+- redaction / retention / trace-mode safety are checked at attach time in the current cut
+- broader detach / migration / distributed ordering / public ABI remain later
 
 ## devtools / telemetry roadmap
 
@@ -101,5 +103,5 @@ must keep visible:
 
 ## next package
 
-- after contract/lifetime checker first cut:
-  `P-A0-06` save/load checker skeleton, then reopen positive/runtime-sensitive rows later
+- after `P-A0-08` layer-insertion first cut:
+  `P-A0-09` network / Docker E2E, while fuller contract algebra / theorem discharge remains later

@@ -1,0 +1,17 @@
+# Alpha-0 layer insertion runtime floor sample.
+# ID: LI-01
+# Family: layer-insertion
+# Kind: positive
+# Purpose: authority-gated debug layer attach
+# Expected: accepted with redacted trace after attach
+# Status: source-ish anchor for the current non-public Rust runtime floor.
+# This file is not parsed by the current runner.
+
+module PlannedMirroreaAlpha.LayerInsertion.DebugLayerAttachAuthorized
+
+# Scenario sketch:
+# - sample_id: LI-01
+# - mirrors: HP-02, VAR-11, VAR-12, VIS-10
+# - goal: admin attaches debug layer at MessageDispatch attach point
+# - expected outcome: accepted; no trace before attach; redacted trace after attach
+

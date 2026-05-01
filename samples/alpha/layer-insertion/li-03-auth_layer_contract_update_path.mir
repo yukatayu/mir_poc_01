@@ -1,0 +1,17 @@
+# Alpha-0 layer insertion runtime floor sample.
+# ID: LI-03
+# Family: layer-insertion
+# Kind: positive
+# Purpose: auth layer accepted only via explicit contract update
+# Expected: accepted_contract_update
+# Status: source-ish anchor for the current non-public Rust runtime floor.
+# This file is not parsed by the current runner.
+
+module PlannedMirroreaAlpha.LayerInsertion.AuthLayerContractUpdatePath
+
+# Scenario sketch:
+# - sample_id: LI-03
+# - mirrors: HP-04, VAR-13
+# - goal: auth layer changes failure behavior without pretending to be transparent
+# - expected outcome: accepted only when activation cut / contract update ref is explicit
+

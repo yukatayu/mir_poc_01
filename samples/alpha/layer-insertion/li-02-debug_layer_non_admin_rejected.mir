@@ -1,0 +1,17 @@
+# Alpha-0 layer insertion runtime floor sample.
+# ID: LI-02
+# Family: layer-insertion
+# Kind: negative
+# Purpose: non-admin debug layer attach rejected
+# Expected: rejected with no active layer
+# Status: source-ish anchor for the current non-public Rust runtime floor.
+# This file is not parsed by the current runner.
+
+module PlannedMirroreaAlpha.LayerInsertion.DebugLayerNonAdminRejected
+
+# Scenario sketch:
+# - sample_id: LI-02
+# - mirrors: HP-03, VAR-12
+# - goal: non-admin attempts to attach debug layer
+# - expected outcome: rejected before activation cut; no trace emitted
+

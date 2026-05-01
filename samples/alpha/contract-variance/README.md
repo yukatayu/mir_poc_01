@@ -32,6 +32,7 @@
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
 - `VAR-02` / `03` / `07` / `09` / `10` / `15` currently carry checker-floor seed rows for the first static diagnostic cut.
+- `VAR-08` / `11` / `12` / `13` now have runtime-backed mirrors under `../layer-insertion/`, but this directory remains the planned/sample-mirror authority for the broader variance family.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
