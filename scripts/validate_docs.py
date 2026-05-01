@@ -34,6 +34,7 @@ REQUIRED_TEMPLATE_HEADINGS = [
     "## Documents consulted",
     "## Actions taken",
     "## Files changed",
+    "## Commands run",
     "## Evidence / outputs / test results",
     "## What changed in understanding",
     "## Open questions",

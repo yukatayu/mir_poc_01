@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 11:04 JST
+最終更新: 2026-05-01 11:13 JST
 
 ## この文書について
 
@@ -25,6 +25,8 @@
   dashboard freshness、validator/source-hierarchy/report-template guardrail、full/docs/storage validation checkpoint、warning/formatting cleanup、Makefile alias parity、task/progress/sample dashboard compression、active front-door / active-doc wording repair を継続的に閉じています。new implementation queue は reopened していません。
 - 直近の corrected full validation freshness checkpoint は 2026-05-01 11:01 JST です:
   16-command full floor は network transport の executable anchor を `check-all --format json` として全件 pass し、補助の Lean sync / storage guardrail も known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker なしで通っています。
+- report template compliance guardrail は 2026-05-01 11:13 JST に template-side `Commands run` 欄まで拡張済みです:
+  `scripts/tests/test_validate_docs.py` が `docs/reports/TEMPLATE.md` と `scripts/validate_docs.py` の required heading 同期、および missing-heading 時の validator failure を確認します。actual numbered report 全体の semantic lint ではありません。
 
 ## executable floor
 

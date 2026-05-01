@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 11:04 JST
+最終更新: 2026-05-01 11:13 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 11:13 JST — report template compliance guardrail を narrow に補強し、`docs/reports/TEMPLATE.md` と `scripts/validate_docs.py` の required heading に `## Commands run` を追加した。TDD で `scripts/tests/test_validate_docs.py` の RED を確認後に GREEN 化し、template drift 防止を maintenance-only に閉じた。actual numbered report 全体の semantic lint ではない。
 - 2026-05-01 11:04 JST — corrected network transport anchor 後の full validation freshness checkpoint を close した。16-command full floor は `NET-02..05` を `check-all --format json` で実行する corrected command set で全件 pass、Cargo crate tests / `cargo fmt --check` / `git diff --check` も pass。補助で Lean sync と storage guardrail も pass し、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はない。
 - 2026-05-01 10:56 JST — network transport validation anchor を correction し、`check-all --format json` が `NET-02..05` canaries を実行する command、`closeout --format json` が inventory-only command であることを `progress.md` / `tasks.md` / `samples_progress.md` / report に反映した。`check-all` は 4/4 pass、production socket / durable replay claim はしていない。
 - 2026-05-01 10:50 JST — recent log を再圧縮し、10:07..10:48 の active-doc / task-map / dashboard / storage maintenance package 詳細を `docs/reports/1062..1073` に委譲した。current floor、strict non-claims、`U1` open gate、validation anchors は維持し、new implementation queue は reopened していない。
