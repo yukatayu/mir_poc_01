@@ -22,7 +22,7 @@ current evidence floor は次です。
 | clean near-end | typing / order-handoff / model-check / modal suite | `python3 scripts/clean_near_end_samples.py closeout` |
 | shared-space representative slices | Sugoroku world runtime attachment vertical slice、avatar follow representative slice | `python3 scripts/sugoroku_world_samples.py closeout --format json`, `python3 scripts/avatar_follow_samples.py closeout --format json` |
 | typed external / transport | `EXT-03/04` helper subset、reported `NET-01` parity anchor + runnable `NET-02..05` helper-local canary | `python3 scripts/typed_external_boundary_samples.py closeout --format json`, `python3 scripts/network_transport_samples.py check-all --format json` |
-| projection / visualization | helper projection preview、committed generated bridge manifest、typed viewer prototype inventory | `python3 scripts/projection_codegen_samples.py closeout --format json`, `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
+| projection / visualization | helper projection preview、committed generated bridge manifest、typed viewer prototype inventory | `python3 scripts/projection_codegen_samples.py check-all --format json` for live anchor / manifest alignment; `python3 scripts/projection_codegen_samples.py closeout --format json` for manifest inventory; `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | hot-plug Rust floor | `mirrorea-core` request/verdict carrier、`mir-runtime` skeleton / engine-state report | `cargo test -p mirrorea-core`, `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
 
 Mirrorea future-axis 側の repository-memory family は、この summary では package ledger として再列挙しません。
@@ -147,8 +147,10 @@ system-wide source / place-specific program distinction、place split、validity
 - `cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json`
 
 で `projection_view` と `cross_place_projection` を読めます。
-さらに `python3 scripts/projection_codegen_samples.py closeout --format json`
-で committed generated bridge evidence と live-anchor alignment surface を読めます。
+さらに `python3 scripts/projection_codegen_samples.py check-all --format json`
+で live-anchor / manifest alignment を検証し、
+`python3 scripts/projection_codegen_samples.py closeout --format json`
+で committed generated bridge manifest inventory を読めます。
 ただし、これは final projection IR や emitted executable place program を意味しません。
 
 ### hot-plug

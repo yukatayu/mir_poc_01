@@ -63,7 +63,10 @@ current repo が final emitted executable program family をまだ committed sam
 
 ### projection/codegen current first cut
 
-`python3 scripts/projection_codegen_samples.py closeout --format json` では、少なくとも次を確認します。
+`python3 scripts/projection_codegen_samples.py check-all --format json` では、
+helper/runtime anchor と committed generated manifest の alignment を検証します。
+`python3 scripts/projection_codegen_samples.py closeout --format json` では、
+少なくとも次の manifest inventory evidence を確認します。
 
 - `projection_scope = generated_reserve_bridge_evidence`
 - `artifact_boundary = committed manifest bridge evidence only; not a final emitted executable program`
@@ -73,8 +76,9 @@ current repo が final emitted executable program family をまだ committed sam
 - `equivalence_review_categories`
 - `validation_floor`
 
-ここで見ているのは、helper/runtime anchor と committed generated manifest の alignment であって、
-final emitted executable family や optimizer / deployment planner ではありません。
+ここで見ているのは、`check-all` による live alignment validation と、
+`closeout` による manifest inventory evidence であって、final emitted executable
+family や optimizer / deployment planner ではありません。
 
 ## これで確認できること
 

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 12:46 JST
+最終更新: 2026-05-01 12:59 JST
 
 ## この文書について
 
@@ -40,6 +40,8 @@
   `projection_codegen_samples.py check-all --format json` は live anchor / manifest alignment validation、`closeout --format json` は manifest inventory evidence として扱います。current `equivalence` reading は review-category alignment inventory であり、generated place-program / optimizer / deployment planner / checker / proof / final emitted ABI ではありません。
 - current-L2 / Lean active-floor wording audit は 2026-05-01 12:23 JST に再確認済みです:
   `samples/current-l2/` は base source corpus、`samples/lean/` は foundations + generated theorem stub evidence、`current_l2_guided_samples.py list/smoke-all/closeout` は clean-near-end active suite への compatibility front door として扱います。source-sample regression は stale deleted emitted-artifact Cargo target を呼ばず、formal-hook smoke + theorem Lean-stub conformance + model-check carrier conformance を current route とします。
+- stale validation-command/reference audit は 2026-05-01 12:59 JST に再確認済みです:
+  `.docs/current-l2-source-sample-authoring-policy.md`、`plan/27`、public-gate hands-on、projection / Mirrorea research abstracts は current command anchors に同期済みです。network executable evidence は `check-all`、projection live alignment は `check-all`、projection manifest inventory は `closeout` として扱います。
 
 ## executable floor
 

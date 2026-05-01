@@ -29,12 +29,15 @@ repo-local current layer では、docs-first に留まらず、次の preview fl
   - message envelope refs
   - redaction rule refs
 - projection/codegen first cut:
+  `python3 scripts/projection_codegen_samples.py check-all --format json`
+  - live anchor / manifest alignment validation
   `python3 scripts/projection_codegen_samples.py closeout --format json`
   - `P15-GEN-01..04`
   - `generated_bridge_artifact_inventory`
   - `generated_reserve_inventory`
   - `equivalence_review_categories`
   - `validation_floor`
+  - manifest inventory evidence
 
 これは final emitted place program ではありません。
 projection validity を collapse せずに preview する floor です。

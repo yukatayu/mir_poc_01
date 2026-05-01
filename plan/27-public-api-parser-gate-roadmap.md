@@ -199,13 +199,21 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
+python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/network_transport_samples.py closeout --format json
+python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
 git diff --check
 ```
+
+`network_transport_samples.py check-all` is the executable canary anchor for
+`NET-02..05`; `closeout` is inventory evidence. `projection_codegen_samples.py
+check-all` is live anchor / manifest alignment validation; `closeout` is
+committed manifest inventory evidence. Neither command freezes a public
+transport ABI or emitted-program ABI.
 
 ## stop line
 

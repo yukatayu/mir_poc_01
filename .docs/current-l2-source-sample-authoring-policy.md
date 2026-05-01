@@ -23,7 +23,7 @@ current meaning は、
 - corrected runnable prototype sample は `samples/prototype/` に置き、この current authored inventory へ混ぜない。
 - exact rough stimulus preservation は `samples/not_implemented/` に置き、current parser / runner 対象にしない。
 - `e3` は source-authored row まで actualize 済みだが、formal hook stage は `not reached (guarded)` に留め、current theorem-side consumer と current formal-hook top は widen しない。
-- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen では existing `e4` row と new `e19` row を source-backed static-stop pair へ actualize 済みである。さらに capability second source-backed widening actualization では `e13/e20` pair も source-authored static-stop pair として actualize 済みであり、duplicate-cluster source-authored static-stop pair actualization では `e14/e15` pair も source sample / lowerer / runner / ladder / emitted artifact wiring / regression helper まで widened している。public operational CLI concrete shell actualization と shared-space room-profile / host-binding bridge-only note も fixed 済みであり、repo-level current line は theory-lab lane の modality internalization trigger note と reserve integration lane の packaging / fairness-replay reserve に進んでいる。
+- post-sextet first cluster は `e21` / `e22` try-rollback locality contrast として actualize 済みであり、stable-static edge-pair first reopen では existing `e4` row と new `e19` row を source-backed static-stop pair へ actualize 済みである。さらに capability second source-backed widening actualization では `e13/e20` pair も source-authored static-stop pair として actualize 済みであり、duplicate-cluster source-authored static-stop pair actualization では `e14/e15` pair も source sample / lowerer / runner / ladder / formal-hook smoke / regression helper まで widened している。theorem Lean-stub conformance と model-check carrier conformance は current representative pilot として `e2/e5` に限って regression bundle に含める。public operational CLI concrete shell actualization と shared-space room-profile / host-binding bridge-only note も fixed 済みであり、repo-level current line は theory-lab lane の modality internalization trigger note と reserve integration lane の packaging / fairness-replay reserve に進んでいる。
 - regression helper は `python3 scripts/current_l2_source_sample_regression.py` を使う。
 - public CLI、retained artifact bless/update、fixture JSON からの逆生成は current scope 外である。
 - runnable sample 冒頭の leading contiguous `#` line block は current authoring convenience として許してよい。
@@ -46,13 +46,14 @@ current regression helper が束ねるのは次である。
 - `cargo test -p mir-runtime --test current_l2_source_lowering`
 - `cargo test -p mir-runtime --test current_l2_source_sample_runner`
 - `cargo test -p mir-runtime --test current_l2_source_sample_verification_ladder`
-- `cargo test -p mir-runtime --test current_l2_source_sample_emitted_artifact_wiring`
 - `cargo test -p mir-semantics --test current_l2_formal_hook_support`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e1-place-atomic-cut ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e2-try-fallback ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e21-try-atomic-cut-frontier ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-runtime e22-try-atomic-cut-place-mismatch ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e4-malformed-lineage ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e5-underdeclared-lineage ...`
+- `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e12-underdeclared-target-missing ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e14-malformed-duplicate-option-declaration ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e15-malformed-duplicate-chain-declaration ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e16-malformed-missing-chain-head-option ...`
@@ -61,6 +62,10 @@ current regression helper が束ねるのは次である。
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e18-malformed-missing-successor-option ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e20-malformed-late-capability-strengthening ...`
 - `python3 scripts/current_l2_detached_loop.py smoke-formal-hook-static e23-malformed-try-fallback-missing-fallback-body ...`
+- `python3 scripts/current_l2_theorem_lean_stub_pipeline.py e2-try-fallback ...`
+- `python3 scripts/current_l2_theorem_lean_stub_pipeline.py e5-underdeclared-lineage ...`
+- `python3 scripts/current_l2_model_check_carrier_pipeline.py e2-try-fallback ...`
+- `python3 scripts/current_l2_model_check_carrier_pipeline.py e5-underdeclared-lineage ...`
 
 helper は current authored sixteen を inventory 対象にする。ただし `e3` は current formal-hook top の外なので、formal-hook smoke sub-bundleには加えない。
 `inventory` は mismatch があれば non-zero で止まり、`regression` も先に同じ inventory check を行う。
