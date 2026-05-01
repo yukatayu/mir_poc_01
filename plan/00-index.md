@@ -24,7 +24,8 @@
 ## current repo の短い要約
 
 - current 主眼は Mir current-L2
-- authored sixteen と corrected prototype set `p01 ... p16` は runnable
+- active base corpus は `samples/current-l2/`、active canonical executable suite は `samples/clean-near-end/` に置く
+- pre-clean-near-end の authored / corrected prototype set `p01 ... p16` は historical comparison memory であり、current active runner floor ではない
 - Problem 1 は
   typed / IFC、theorem-first emitted artifact loop、model-check second-line reserve summary、
   Lean foundation / generated stub acceptance まで repo-local に actualize 済み
@@ -38,7 +39,7 @@
 ## repository snapshot reading
 
 - **repo-local near-end**:
-  representative bundle と reserve summary index を辿れば、二大問題の current cut を実行付きで確認できる
+  `samples/current-l2/` の base corpus と `current_l2_guided_samples.py` の `list / smoke-all / closeout` / clean near-end closeout を分けて辿れば、二大問題の current cut を確認できる。pre-clean-near-end の representative bundle / reserve summary index は historical memory として読む
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 

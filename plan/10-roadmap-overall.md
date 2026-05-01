@@ -34,8 +34,8 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 - 主眼:
   fixed-subset source sample と malformed family の narrow widening
 - standing line in this memory:
-  `Macro 4 active on fixed authored/prototype floor`
-  （current-l2 authored sixteen、corrected prototype set `p01...p14`、runner / CLI / regression floor は fixed 済みであり、sample corpus 自体は adequacy corpus として active に保つ）
+  `Macro 4 active on current-L2 base corpus and clean near-end executable floor`
+  （`samples/current-l2/` は active base corpus、`samples/clean-near-end/` は active canonical executable suite として保つ。runner / CLI / regression floor は clean near-end 側を canonical executable path として読む。pre-clean-near-end の authored / corrected prototype set `p01...p16` は historical comparison memory であり、current active runner floor ではない）
 - goal:
   runnable corpus を広げつつ、runner / ladder / regression / docs mirror を崩さない
 
@@ -72,7 +72,7 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 | `Macro 1` | semantic kernel / invariant stabilization | late | current L2 semantic reopen が narrow になる |
 | `Macro 2` | parser-free validation substrate | late | detached loop / fixture corpus / compare helper の drift suppression |
 | `Macro 3` | compile-ready minimal actualization | late | support-only / public-candidate split の安定化 |
-| `Macro 4` | executable fixed-subset sample expansion | active on fixed authored/prototype floor | sample widening / prototype comparison を current semantics を崩さずに保てる |
+| `Macro 4` | executable fixed-subset sample expansion | active on current-L2 base corpus and clean near-end executable floor | sample widening / historical prototype comparison を current semantics を崩さずに保てる |
 | `Macro 5` | typed / theorem / model-check bridge | repo-local closeout reached | mixed gate と reserve memory を drift させず、new promoted queue を `tasks.md` と矛盾させない |
 | `Macro 6` | fabric / shared-space / runtime evolution | P21 narrow floor + docs-first trilogy closed | shared-space docs-first boundary、kept-later boundary、public-freeze hold line を maintenance 付きで保てる |
 | `Macro 7` | toolchain / backend / host-facing integration | repo-side prototype / guardrail floor closed; public target unresolved | shell / facade / packaging boundary を final target profile から分離したまま `U1` actual commitment を待てる |
@@ -91,7 +91,7 @@ package 3 以降の Mirrorea future-axis 近接順序をここで上書きしな
 ## standing recommendation
 
 - Lane A は narrow actualization を維持する。
-  - corrected runnable prototype と helper-local `debug_outputs` / `verification_preview` を使って usability / falsifier comparison を進めてよい。
+  - current clean near-end / current-L2 corpus と helper-local `debug_outputs` / `verification_preview` を使って usability / falsifier comparison を進めてよい。pre-clean-near-end prototype は historical comparison memory として扱う。
 - Lane B は mainline の「ついで」ではなく、separable な research program として前進させる。
 - Lane B の narrow mixed-gate pre-floor では、preview summary、model-check projection helper、theorem discharge helper を final public contract や settled property language にせず compare floor を厚くしてよい。
 - Lane C は thin facade と shell concern の boundary hardening、および mixed-gate boundary の明確化に留める。

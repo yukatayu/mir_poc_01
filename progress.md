@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 11:31 JST
+最終更新: 2026-05-01 11:42 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 11:42 JST — guided helper retirement audit で `current_l2_guided_samples.py` の live front door が `list / smoke-all / closeout` only であることを再確認し、`plan/00` / `plan/10` の pre-clean-near-end prototype / representative bundle wording を historical comparison memory へ冷却した。`samples/current-l2/` は base corpus、`samples/clean-near-end/` は active canonical executable suite として分けて記録した。
 - 2026-05-01 11:31 JST — validate/docs scope wording audit 中に remaining active hands-on / research abstract の network transport executable anchor drift を修正した。`current_phase_closeout_01.md`、`public_api_parser_gate_01.md`、`mirrorea_future_axis_01.md` は `network_transport_samples.py check-all --format json` を executable validation anchor として示す。
 - 2026-05-01 11:27 JST — latest-report guardrail commit 後の docs-focused freshness checkpoint を close した。clean tree で `python3 -m unittest scripts.tests.test_validate_docs`、`check_source_hierarchy.py`、`validate_docs.py`、`git diff --check` が pass し、latest report heading guardrail は current scaffold validation に入っている。
 - 2026-05-01 11:21 JST — `validate_docs.py` の scaffold guardrail を latest numbered report 1 本へ narrow に拡張した。historical reports 全体の semantic lint には広げず、latest report が template required headings を欠く場合だけ fail し、historical report 欠落だけでは fail しない behavior-level unit tests を RED→GREEN で追加した。

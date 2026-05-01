@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 11:31 JST
+最終更新: 2026-05-01 11:42 JST
 
 ## この文書について
 
@@ -32,6 +32,8 @@
 - 2026-05-01 11:27 JST の post-guardrail docs-focused freshness checkpoint では、clean tree で latest-report heading unit / source hierarchy / docs scaffold / whitespace diff が pass しています。
 - network transport executable validation anchor drift は 2026-05-01 11:31 JST に active hands-on / research abstract 側も修正済みです:
   executable canary は `python3 scripts/network_transport_samples.py check-all --format json`、`closeout` は inventory evidence として扱います。
+- guided helper retirement audit は 2026-05-01 11:42 JST に再確認済みです:
+  `current_l2_guided_samples.py` は `list / smoke-all / closeout` の compatibility wrapper であり、pre-clean-near-end prototype / bundle / reserve wording は `plan/00` / `plan/10` で historical comparison memory へ冷却済みです。
 
 ## executable floor
 

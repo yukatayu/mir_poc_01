@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-01 11:31 JST
+Last updated: 2026-05-01 11:42 JST
 Current repo-local focus: current-L2 / clean near-end runnable floor, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -43,7 +43,7 @@ Notes:
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 11:31 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 11:42 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081` | Snapshot docs are maintenance artifacts, not normative specs |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 11:01 JST | `0904`, `0913`, `0998`, `1066`, `1076` | final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 11:01 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 11:01 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076` | attach lifecycle / compatibility anchor |
@@ -94,6 +94,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-01 11:42 JST | guided-helper retirement audit | pass | Live `current_l2_guided_samples.py` front door and retired-command negative evidence were rechecked; `plan/00` / `plan/10` active wording was narrowed. `list` / `smoke-all` / `closeout` passed, retired `bundle problem1` returned exit 2 as expected, wrapper unit tests passed 4/4, source hierarchy/docs scaffold/diff checks passed after report `1081`. |
 | 2026-05-01 11:31 JST | validate/docs scope wording audit + network anchor cleanup | pass | Active hands-on / research abstract references to network transport executable validation were aligned to `python3 scripts/network_transport_samples.py check-all --format json`. `check_source_hierarchy.py`, `validate_docs.py`, and `git diff --check` passed after report `1080`; targeted search leaves `closeout` only in `network_transport_canaries_01.md` as inventory evidence. |
 | 2026-05-01 11:27 JST | latest-report guardrail docs-focused freshness floor | pass | Clean tree validation after commit `5a1738b`: `python3 -m unittest scripts.tests.test_validate_docs` passed 4 tests; source hierarchy required/present/missing = 35/35/0; `validate_docs.py` reported 1076 numbered reports before this report; `git diff --check` was clean. |
 | 2026-05-01 11:21 JST | `python3 -m unittest scripts.tests.test_validate_docs` + `python3 scripts/validate_docs.py` | pass | Latest numbered report heading guardrail added. `validate_docs.py` now checks template required headings and the latest numbered report's required headings; unit tests cover latest missing failure and historical-only missing pass, so it intentionally does not retroactively semantic-lint all historical reports. |
