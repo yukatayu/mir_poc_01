@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:43 JST
+最終更新: 2026-05-01 10:44 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:44 JST — active docs の point-in-time / final-public overclaim targeted audit を再実行し、残る `current closeout` matches は active closeout / inventory 文脈または dated log 文脈であり、追加 patch 不要と判断した。new implementation queue は reopened していない。
 - 2026-05-01 10:43 JST — `tasks.md` の maintenance-family summary に active-doc point-in-time wording repair を mirror した。これは current task map の代表例同期だけであり、new implementation queue は reopened していない。
 - 2026-05-01 10:40 JST — active hands-on / research-abstract の point-in-time wording を修正し、avatar follow の `Macro 6 reserve` を family-local historical lane label に、phase0..6 の `2026-04-23` wording を dated repository-memory anchor に、network transport の `2026-04-28 current closeout` を dated first-cut closeout に冷やした。live status authority は `progress.md` / `tasks.md` に残し、sample status / implementation queue は変えていない。
 - 2026-05-01 10:33 JST — `samples_progress.md` recent validation の `post-1065` / historical `after report` wording と `tasks.md` current summary の report-number-shaped checkpoint name を冷やし、report ID を latest mutable state ではなく historical evidence として読める形にした。sample status / validation result / implementation queue は変えていない。
