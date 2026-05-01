@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 13:39 JST
+最終更新: 2026-05-01 13:52 JST
 
 ## この文書について
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。これは active maintenance であり、新しい implementation / product-shaping line ではありません。
   `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
-  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。2026-05-01 12:46 JST の repository-wide validation freshness checkpoint も pass 済みで、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、new implementation queue も reopened していません。
+  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。2026-05-01 13:52 JST の full validation freshness checkpoint も pass 済みで、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、new implementation queue も reopened していません。
 
 ## strict non-claims
 
@@ -142,6 +142,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 13:52 JST — full validation freshness checkpoint を再実行した。source hierarchy / docs scaffold、current-L2 inventory、source regression 23/23、guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer / Lean sync / storage guardrail / Cargo crate tests / `cargo fmt --check` / `git diff --check` が pass。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、generated output は `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1092` のみ。
 - 2026-05-01 13:39 JST — current phase closeout guide の current-L2 / Lean validation anchors を再確認し、`docs/hands_on/current_phase_closeout_01.md` に source inventory、23-step regression、clean near-end script closeout、Lean sync を mirror した。focused run は source inventory、23/23 regression、guided closeout、clean near-end closeout、Lean sync が pass。
 - 2026-05-01 13:23 JST — public API / parser gate の storage validation anchor を再確認し、`docs/hands_on/public_api_parser_gate_01.md` と `plan/27` に `mirrorea_storage_env.sh --ensure-dirs`、`detach_prepare.sh`、`cleanup_disposable_artifacts.sh --list`、external `CARGO_HOME` no-run probe を mirror した。これは repo-side public-gate inventory の再現性補強であり、actual LLVM build / backend choice / packaging adoption ではない。
 - 2026-05-01 13:13 JST — storage/env entrypoint guardrail freshness を確認した。`/mnt/mirrorea-work` は `/dev/vdb1` として mounted、`target` は external cargo target への symlink、cleanup list は `llvm/src` を除外し、`--confirm` なしの削除は行っていない。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、`CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run` は pass。
