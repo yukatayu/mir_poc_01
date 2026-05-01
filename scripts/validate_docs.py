@@ -76,6 +76,15 @@ def main() -> int:
             print(" -", heading)
         return 1
 
+    latest_report = reports[-1]
+    latest_report_text = latest_report.read_text(encoding="utf-8")
+    missing_latest_report_sections = missing_template_headings(latest_report_text)
+    if missing_latest_report_sections:
+        print(f"Latest report is missing required sections: {latest_report.name}")
+        for heading in missing_latest_report_sections:
+            print(" -", heading)
+        return 1
+
     print("Documentation scaffold looks complete.")
     print(f"Found {len(reports)} numbered report(s).")
     return 0

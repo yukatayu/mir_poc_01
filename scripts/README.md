@@ -9,7 +9,7 @@
 - `check_source_hierarchy.py`
   required root docs / specs / plan / support directory が存在するかを見る structural check。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_docs.py`
-  required documentation scaffold、numbered report、report template closeout headings の存在を確認する scaffold check。semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
+  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required headings の存在を確認する scaffold check。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
