@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:07 JST
+最終更新: 2026-05-01 10:09 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:09 JST — active hands-on / research-abstract fixed-line command audit を行い、snapshot docs (`progress.md` / `tasks.md`) への fixed line-number reads が残っていないことを確認した。残る fixed range は sample file preview と `plan/28` front matter 参照だけで、status / queue authority の drift ではないため更新不要と判断した。
 - 2026-05-01 10:07 JST — active front-door docs の snapshot drift を修正し、`mirrorea_future_axis_01.md` の package-ledger duplicate table を pointer set へ圧縮、`current_phase_closeout_01.md` の stale report-specific next reopen wording を削除、`post_p18_true_user_spec_hold_01.md` の line-number-based commands を section-anchor commands に置換した。live queue authority は `progress.md` / `tasks.md` に残し、new implementation queue は reopened していない。
 - 2026-05-01 09:57 JST — `progress.md` current snapshot の maintenance-lane prose を再圧縮し、long example/spec cluster mapping を `docs/reports/` / relevant `plan/` / `tasks.md` に委譲した。active maintenance、`current_l2_guided_samples.py` front door、no blocker、no implementation queue reopened の事実は保持した。
 - 2026-05-01 09:52 JST — `progress.md` recent log を snapshot 文書として再圧縮し、2026-04-28 以降の package-level chronology を `docs/reports/` と relevant `plan/` files へ委譲した。current floor、strict non-claims、`U1` open gate、validation anchors は維持し、new implementation queue は reopened していない。
