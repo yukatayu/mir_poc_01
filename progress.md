@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:18 JST
+最終更新: 2026-05-01 10:26 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:26 JST — post-`1065` full validation checkpoint を実行し、source hierarchy / docs scaffold、current-L2、clean near-end、Sugoroku、avatar、typed external、network、projection、viewer、Cargo crate tests、`cargo fmt --check`、`git diff --check` が通ることを確認した。補助で Lean sync と storage detach guardrail も確認し、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 warning / failure は見つからなかった。
 - 2026-05-01 10:18 JST — `tasks.md` / `progress.md` の maintenance evidence band を `1051..1064` / `1001..1064` に追随させ、`1059..1064` の snapshot compression / front-door drift / fixed-line audit / sample dashboard wording packages が active snapshot から消えないようにした。new implementation queue は reopened していない。
 - 2026-05-01 10:13 JST — `samples_progress.md` recent validation の mutable source-hierarchy required-count / docs report-count wording を checkpoint-aware wording に冷やした。sample path、progress%、validation command、blocker は変えていない。
 - 2026-05-01 10:09 JST — active hands-on / research-abstract fixed-line command audit を行い、snapshot docs (`progress.md` / `tasks.md`) への fixed line-number reads が残っていないことを確認した。残る fixed range は sample file preview と `plan/28` front matter 参照だけで、status / queue authority の drift ではないため更新不要と判断した。
