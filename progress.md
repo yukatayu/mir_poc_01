@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:13 JST
+最終更新: 2026-05-01 10:18 JST
 
 ## この文書について
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。これは active maintenance であり、新しい implementation / product-shaping line ではありません。
   `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
-  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、guardrail packages `1051..1058` は maintenance-only closeout です。current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
+  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、guardrail / snapshot follow-up packages `1051..1064` は maintenance-only closeout です。current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
 
 ## strict non-claims
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:18 JST — `tasks.md` / `progress.md` の maintenance evidence band を `1051..1064` / `1001..1064` に追随させ、`1059..1064` の snapshot compression / front-door drift / fixed-line audit / sample dashboard wording packages が active snapshot から消えないようにした。new implementation queue は reopened していない。
 - 2026-05-01 10:13 JST — `samples_progress.md` recent validation の mutable source-hierarchy required-count / docs report-count wording を checkpoint-aware wording に冷やした。sample path、progress%、validation command、blocker は変えていない。
 - 2026-05-01 10:09 JST — active hands-on / research-abstract fixed-line command audit を行い、snapshot docs (`progress.md` / `tasks.md`) への fixed line-number reads が残っていないことを確認した。残る fixed range は sample file preview と `plan/28` front matter 参照だけで、status / queue authority の drift ではないため更新不要と判断した。
 - 2026-05-01 10:07 JST — active front-door docs の snapshot drift を修正し、`mirrorea_future_axis_01.md` の package-ledger duplicate table を pointer set へ圧縮、`current_phase_closeout_01.md` の stale report-specific next reopen wording を削除、`post_p18_true_user_spec_hold_01.md` の line-number-based commands を section-anchor commands に置換した。live queue authority は `progress.md` / `tasks.md` に残し、new implementation queue は reopened していない。
