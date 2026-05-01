@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:46 JST
+最終更新: 2026-05-01 10:48 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:48 JST — `tasks.md` の `1051` 以降 maintenance-family summary をさらに圧縮し、docs/storage guardrail packages を個別列挙し続けず category として読める形にした。new implementation queue は reopened していない。
 - 2026-05-01 10:46 JST — storage guardrail freshness audit を実行し、root disk / external workdir / memory / repo size / detach guardrail を確認した。`/mnt/mirrorea-work` は mounted、repo root は 47M、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、削除は行っていない。
 - 2026-05-01 10:44 JST — active docs の point-in-time / final-public overclaim targeted audit を再実行し、残る `current closeout` matches は active closeout / inventory 文脈または dated log 文脈であり、追加 patch 不要と判断した。new implementation queue は reopened していない。
 - 2026-05-01 10:43 JST — `tasks.md` の maintenance-family summary に active-doc point-in-time wording repair を mirror した。これは current task map の代表例同期だけであり、new implementation queue は reopened していない。
