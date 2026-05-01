@@ -149,8 +149,7 @@ current closeout で揃ったのは、**仕様・sample・helper・report・prog
 - installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
 - first shipped public surface scope
-- broader application target
-- final shared-space operational catalog
+- final shared-space operational catalog breadth
 
 ## closeout memory and current snapshot reading
 

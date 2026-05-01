@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 14:27 JST
+最終更新: 2026-05-01 14:33 JST
 
 ## この文書について
 
@@ -52,6 +52,8 @@
   corrected current floor は全件 pass しました。network executable evidence は `check-all`、projection live alignment は `check-all`、projection manifest inventory は `closeout`、storage cleanup は `--list` only として維持します。これは public freeze / production transport / production prover binding / actual LLVM build ではありません。
 - post-guardrail full validation floor は 2026-05-01 14:27 JST に再確認済みです:
   1093 / 1094 の report-schema guardrail と active docs freshness repair 後も corrected full floor は全件 pass しました。generated output は `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1095` に限定しています。
+- `U1` readiness wording は 2026-05-01 14:33 JST に再確認済みです:
+  current reader-facing docs / `plan/27` は `U1` の 4 軸を packaging / host integration / first shipped public surface / final shared-space operational catalog breadth に揃えています。これは option inventory / readiness audit であり、actual `U1` commitment ではありません。
 
 ## executable floor
 

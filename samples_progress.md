@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-01 14:27 JST
+Last updated: 2026-05-01 14:33 JST
 Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -44,7 +44,7 @@ Notes:
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 14:27 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 14:33 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096` | Snapshot docs are maintenance artifacts, not normative specs |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 13:52 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084`, `1085`, `1091`, `1092` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 13:52 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076`, `1085`, `1091`, `1092` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 13:52 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076`, `1085`, `1092` | attach lifecycle / compatibility anchor |
@@ -95,6 +95,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-01 14:33 JST | `U1` readiness wording audit | pass | Reader-facing docs and `plan/27` now align the `U1` axes to packaging / host integration / first shipped public surface / final shared-space operational catalog breadth. `post_p18_true_user_spec_hold_01.md` now prints both user-decision and research-discovery sections from `tasks.md`. This is readiness / option inventory only, not actual `U1` commitment or public freeze. |
 | 2026-05-01 14:27 JST | post-guardrail full validation freshness checkpoint | pass with known storage warning | Full corrected floor passed after report-schema and active-doc repairs: report-schema unit 10 tests; source hierarchy/docs scaffold; current-L2 inventory and 23-step regression; guided / clean near-end / Sugoroku / avatar / typed external / network `check-all` / projection `check-all` + `closeout` / viewer; Lean sync; storage guardrail; Cargo crate tests (`mir-ast` 73, `mirrorea-core` 24, `mir-runtime` 87, `mir-semantics` 79); `cargo fmt --check`; `git diff --check`. Generated output stayed under `/mnt/mirrorea-work/generated-artifacts/current-l2-regression-1095`; known `/mnt/mirrorea-work/llvm` root-owned warning remains. |
 | 2026-05-01 14:19 JST | active docs freshness audit | pass | `scripts/README.md` now describes the strengthened `validate_docs.py` guardrail, `public_api_parser_gate_01.md` separates runtime binary corroboration from the top-level public-gate command set, and `tasks.md` mirrors the current report template required sections. Focused docs/source/diff validation passed; no sample semantics or public surface changed. |
 | 2026-05-01 14:08 JST | report schema guardrail alignment | pass | `scripts/tests/test_validate_docs.py` was extended RED→GREEN so the report template and validator require `Documentation.md update status`, start dirty state, and reviewer findings, and reject latest-report order / empty-section / unresolved update-status placeholder drift. `check_source_hierarchy.py`, `validate_docs.py`, and `git diff --check` passed after report `1093`; no sample semantics or public surface changed. |

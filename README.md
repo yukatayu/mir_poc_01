@@ -41,6 +41,7 @@ repo が主として検証しているのは、Mir current-L2 の **repo-local a
 - installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
 - first shipped public surface scope
+- final shared-space operational catalog breadth
 
 ## Mirrorea の次軸
 

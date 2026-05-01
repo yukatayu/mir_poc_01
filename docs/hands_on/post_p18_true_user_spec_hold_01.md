@@ -16,6 +16,7 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 sed -n '1,220p' plan/28-post-p18-true-user-spec-hold-option-matrix.md
 sed -n '/^## user decision blockers/,/^## research-discovery items/p' tasks.md
+sed -n '/^## research-discovery items/,/^## validation floor for this snapshot/p' tasks.md
 sed -n '/^## closed package memory and active gate/,/^## validation anchors/p' progress.md
 git diff --check
 ```

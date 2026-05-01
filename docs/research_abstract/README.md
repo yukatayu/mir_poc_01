@@ -130,6 +130,7 @@
 - installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
 - first shipped public surface scope
+- final shared-space operational catalog breadth
 - final public auth / visualization / projection / hot-plug API
 
 ## historical material

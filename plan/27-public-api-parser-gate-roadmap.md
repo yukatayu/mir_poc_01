@@ -185,8 +185,8 @@ repo-side framing の後でも、次は user choice が要る。
 
 - packaging / installed binary
 - FFI / engine adapter / host integration target
-- broader application target
-- exhaustive shared-space operational catalog
+- first shipped public surface scope
+- final shared-space operational catalog breadth
 
 repository-memory recommendation は、
 repo-local helper / runtime / report-local evidence を維持したまま
@@ -200,11 +200,9 @@ python3 scripts/validate_docs.py
 python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
 python3 scripts/network_transport_samples.py check-all --format json
-python3 scripts/network_transport_samples.py closeout --format json
 python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
-cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
 bash scripts/env/mirrorea_storage_env.sh
 bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
 bash scripts/storage/detach_prepare.sh
@@ -214,10 +212,19 @@ git diff --check
 ```
 
 `network_transport_samples.py check-all` is the executable canary anchor for
-`NET-02..05`; `closeout` is inventory evidence. `projection_codegen_samples.py
-check-all` is live anchor / manifest alignment validation; `closeout` is
-committed manifest inventory evidence. Neither command freezes a public
-transport ABI or emitted-program ABI.
+`NET-02..05`. `projection_codegen_samples.py check-all` is live anchor /
+manifest alignment validation; `closeout` is committed manifest inventory
+evidence. Neither command freezes a public transport ABI or emitted-program ABI.
+
+Additional corroboration / inventory lanes may be run when needed:
+
+```bash
+python3 scripts/network_transport_samples.py closeout --format json
+cargo run -q -p mir-runtime --bin mir-clean-near-end -- closeout --format json
+```
+
+These commands are inventory / runtime corroboration evidence only; they do not
+freeze public parser, public runtime, or public transport surfaces.
 
 The storage commands are guardrail evidence for external workdir routing,
 non-destructive detach audit, explicit-confirmation cleanup policy, and

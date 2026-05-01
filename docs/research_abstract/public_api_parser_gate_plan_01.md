@@ -49,8 +49,7 @@ repo-side framingの後でも、次は user choice が要ります。
 - installed binary / packaging adoption target
 - FFI / engine adapter / host integration target
 - first shipped public surface scope
-- broader application target
-- exhaustive shared-space operational catalog
+- final shared-space operational catalog breadth
 
 ## 関連文書
 
