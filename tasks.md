@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 10:18 JST
+最終更新: 2026-05-01 10:31 JST
 
 ## この文書について
 
@@ -20,9 +20,9 @@
 - self-driven に残るのは maintenance lane です:
   stale docs cleanup、validation rerun、report creation、formatting cleanup、guardrail maintenance、regression repair、dashboard freshness、source hierarchy / docs scaffold guardrail maintenance。
 - `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims は historical memory として `plan/` / `docs/reports/` / relevant specs examples に委譲し、active command claim へ戻しません。
-- 2026-04-30 以降の detailed maintenance chronology はこの snapshot では再列挙しません。package-by-package evidence は `docs/reports/1001..1064`、long-lived comparison / boundary memory は relevant `plan/` files、runnable sample status は `samples_progress.md` を参照します。
-- 2026-05-01 の guardrail / snapshot follow-up packages `1051..1064` は maintenance-only closeout です:
-  dashboard freshness audit、validator scope guardrail、full validation freshness checkpoint、target-specific warning cleanup、Makefile alias parity、report template discipline、template-heading guard、source hierarchy policy/spec coverage、task/progress snapshot compression、active front-door drift cleanup、fixed-line command audit、sample dashboard validation-count wording cooling を閉じましたが、new implementation queue は reopened していません。
+- 2026-04-30 以降の detailed maintenance chronology はこの snapshot では再列挙しません。package-by-package evidence は `docs/reports/1001` 以降の committed reports、long-lived comparison / boundary memory は relevant `plan/` files、runnable sample status は `samples_progress.md` を参照します。
+- 2026-05-01 の `1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です:
+  dashboard freshness audit、validator scope guardrail、full validation freshness checkpoint、target-specific warning cleanup、Makefile alias parity、report template discipline、template-heading guard、source hierarchy policy/spec coverage、task/progress snapshot compression、active front-door drift cleanup、fixed-line command audit、sample dashboard validation-count wording cooling、post-`1065` full validation checkpoint を閉じましたが、new implementation queue は reopened していません。
 
 ## executable floor
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:26 JST
+最終更新: 2026-05-01 10:31 JST
 
 ## この文書について
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。これは active maintenance であり、新しい implementation / product-shaping line ではありません。
   `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
-  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、guardrail / snapshot follow-up packages `1051..1064` は maintenance-only closeout です。current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
+  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
 
 ## strict non-claims
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:31 JST — `tasks.md` / `progress.md` の exact maintenance range wording を冷やし、`docs/reports/1001` 以降の committed reports と `1051` 以降の maintenance family への pointer にした。以後の report 追加で active snapshot が即 stale 化しないようにしただけで、new implementation queue は reopened していない。
 - 2026-05-01 10:26 JST — post-`1065` full validation checkpoint を実行し、source hierarchy / docs scaffold、current-L2、clean near-end、Sugoroku、avatar、typed external、network、projection、viewer、Cargo crate tests、`cargo fmt --check`、`git diff --check` が通ることを確認した。補助で Lean sync と storage detach guardrail も確認し、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 warning / failure は見つからなかった。
 - 2026-05-01 10:18 JST — `tasks.md` / `progress.md` の maintenance evidence band を `1051..1064` / `1001..1064` に追随させ、`1059..1064` の snapshot compression / front-door drift / fixed-line audit / sample dashboard wording packages が active snapshot から消えないようにした。new implementation queue は reopened していない。
 - 2026-05-01 10:13 JST — `samples_progress.md` recent validation の mutable source-hierarchy required-count / docs report-count wording を checkpoint-aware wording に冷やした。sample path、progress%、validation command、blocker は変えていない。
