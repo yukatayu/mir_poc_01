@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:31 JST
+最終更新: 2026-05-01 10:33 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 10:33 JST — `samples_progress.md` recent validation の `post-1065` / historical `after report` wording と `tasks.md` current summary の report-number-shaped checkpoint name を冷やし、report ID を latest mutable state ではなく historical evidence として読める形にした。sample status / validation result / implementation queue は変えていない。
 - 2026-05-01 10:31 JST — `tasks.md` / `progress.md` の exact maintenance range wording を冷やし、`docs/reports/1001` 以降の committed reports と `1051` 以降の maintenance family への pointer にした。以後の report 追加で active snapshot が即 stale 化しないようにしただけで、new implementation queue は reopened していない。
 - 2026-05-01 10:26 JST — post-`1065` full validation checkpoint を実行し、source hierarchy / docs scaffold、current-L2、clean near-end、Sugoroku、avatar、typed external、network、projection、viewer、Cargo crate tests、`cargo fmt --check`、`git diff --check` が通ることを確認した。補助で Lean sync と storage detach guardrail も確認し、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 warning / failure は見つからなかった。
 - 2026-05-01 10:18 JST — `tasks.md` / `progress.md` の maintenance evidence band を `1051..1064` / `1001..1064` に追随させ、`1059..1064` の snapshot compression / front-door drift / fixed-line audit / sample dashboard wording packages が active snapshot から消えないようにした。new implementation queue は reopened していない。
