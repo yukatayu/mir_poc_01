@@ -21,6 +21,10 @@ REQUIRED = [
     "specs/09-invariants-and-constraints.md",
     "specs/10-open-questions.md",
     "specs/11-roadmap-and-workstreams.md",
+    "specs/12-decision-register.md",
+    ".docs/progress-task-axes.md",
+    ".docs/continuous-task-policy.md",
+    ".docs/current-l2-source-sample-authoring-policy.md",
     "docs/reports/TEMPLATE.md",
 ]
 

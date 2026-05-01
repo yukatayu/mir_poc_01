@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 09:41 JST
+最終更新: 2026-05-01 09:44 JST
 
 ## この文書について
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 09:44 JST — source hierarchy / docs scaffold required path coverage を current policy/spec set に同期し、`check_source_hierarchy.py` に subsystem specs `04..08`、`10`、`12`、`.docs/*` policy files、`samples/README.md` を追加し、`validate_docs.py` に `specs/12` と `.docs/*` policy files を追加した。presence guard の拡張に留め、semantic lint には広げていない。
 - 2026-05-01 09:41 JST — `validate_docs.py` に report template closeout-heading guard を追加し、`TEMPLATE.md` が plan/progress/tasks/samples/skipped-validations/commit/sub-agent close 欄を落とした場合に docs scaffold check が失敗するようにした。semantic lint には広げず、template scaffold validation に限定した。
 - 2026-05-01 09:39 JST — `docs/reports/TEMPLATE.md` を current report discipline に合わせ、scope / docs consulted / files changed / evidence / plan-progress-tasks-samples update status / skipped validations / commit-push / sub-agent close status 欄を持つ template に更新した。`new_report.py` の生成ロジックは維持し、docs floor で確認する。
 - 2026-05-01 09:37 JST — `Makefile` front-door validation alias parity を修正し、`make docs` / `make check` が `python3 scripts/check_source_hierarchy.py` と `python3 scripts/validate_docs.py` を通るようにした。`make docs`、`make -n check`、`make check` を pass し、`make check` は docs floor 後に `cargo check` を完了した。

@@ -23,8 +23,20 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "specs/01-charter-and-decision-levels.md",
         "specs/02-system-overview.md",
         "specs/03-layer-model.md",
+        "specs/04-mir-core.md",
+        "specs/05-mirrorea-fabric.md",
+        "specs/06-prismcascade-positioning.md",
+        "specs/07-typed-effects-wiring-platform.md",
+        "specs/08-cross-system-relations.md",
         "specs/09-invariants-and-constraints.md",
+        "specs/10-open-questions.md",
         "specs/11-roadmap-and-workstreams.md",
+        "specs/12-decision-register.md",
+    ],
+    "policies": [
+        ".docs/progress-task-axes.md",
+        ".docs/continuous-task-policy.md",
+        ".docs/current-l2-source-sample-authoring-policy.md",
     ],
     "plan": [
         "plan/00-index.md",
@@ -35,6 +47,9 @@ REQUIRED_PATHS: dict[str, list[str]] = {
     "scripts": [
         "scripts",
         "scripts/README.md",
+    ],
+    "samples": [
+        "samples/README.md",
     ],
     "supporting_dirs": [
         "docs/reports",
