@@ -159,7 +159,7 @@ current snapshot を読むときは、次だけ押さえれば十分です。
 
 - helper-local preview、generated bridge evidence、report-local inventory は final public API / emitted executable / production service contract ではありません。
 - `P0..P21` と post-`P21` docs-first trilogy は close 済みですが、この guide は closed package ledger を再列挙しません。
-- next reopen point はこの guide では固定せず、`progress.md` と `tasks.md` の current snapshot を参照します。report `1046` 作成時点の snapshot は `U1` actual commitment を指しています。
+- next reopen point はこの guide では固定せず、`progress.md` と `tasks.md` の current snapshot を参照します。
 
 ## 関連文書
 

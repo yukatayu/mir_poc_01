@@ -25,23 +25,15 @@ current executable floor は次です。
 | projection / visualization | helper projection preview、committed generated bridge manifest、typed viewer prototype inventory | `python3 scripts/projection_codegen_samples.py closeout --format json`, `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | hot-plug Rust floor | `mirrorea-core` request/verdict carrier、`mir-runtime` skeleton / engine-state report | `cargo test -p mirrorea-core`, `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
 
-Mirrorea future-axis 側の repository-memory family は、major family ごとに次のように読みます。
+Mirrorea future-axis 側の repository-memory family は、この summary では package ledger として再列挙しません。
+live status / next reopen point / active maintenance line は `progress.md` / `tasks.md`、詳細証跡は `docs/reports/`、長期 memory は `plan/28..38` を参照してください。
 
-| family | closeout memory | still not claimed |
-|---|---|---|
-| `P4` / `P5` signatures | `TermSignature` lanes and scope split、`LayerSignature` lanes and helper/runtime inventory split | final public signature schema / final public layer law schema |
-| `P6` / `P7` envelopes and views | `MessageEnvelope` / `AuthEvidence` seam、typed visualization / telemetry security envelope | final auth protocol / final viewer or telemetry service |
-| `P10` / `P11` core substrate | `LayerSignature` / `PrincipalClaim` / `AuthEvidence` / `MessageEnvelope` carriers、`MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell` | full Mirrorea runtime |
-| `P12` / `P13` adapters and transport | helper-local host-boundary inventory、process-boundary canaries | final host schema / production socket or broker / durable replay |
-| `P14` / `P15` / `P16` / `P17` | hot-plug helper inventory、projection generated bridge evidence、typed viewer prototype inventory、storage / LLVM guardrail | final hot-plug runtime lifecycle / final emitted executable / final backend |
-| `P18` / `U1` | public-boundary inventory and true user-spec option matrix | actual product commitment / final public freeze |
-| `R1..R7` | verification widening, AttachPoint minimal contract, `FAIRY-05` recommendation, hot-plug kept-later boundaries and owner split | completed rollback / migration / distributed ordering / public ABI |
-| `P19` / `P20` / `P21` | engine-neutral request/verdict carrier、thin runtime skeleton、runtime-private engine-state progression | rollback protocol / durable migration engine / distributed activation protocol / final public hot-plug ABI |
-| post-`P21` trilogy | rollback-durable family, distributed activation ordering family, final public hot-plug ABI family docs-first closeout | actual public ABI freeze |
+reader がここで押さえるべき closeout reading は次だけです。
 
-The current hot-plug docs-first stop line is deliberately narrow: `freeze prerequisite fixed; public ABI still unfrozen`。
-current snapshot reading では、追加の self-driven post-`P21` docs-first family はなく、actual `U1` commitment hold line が残っています。
-active maintenance line と package order の current snapshot authority は `progress.md` / `tasks.md` に残します。
+- carrier / runtime / adapter / transport / projection / viewer / hot-plug の repo-local floor は closeout-backed です。
+- helper-local preview、report-local inventory、committed generated bridge evidence、runtime-private hot-plug names は final public contract ではありません。
+- hot-plug docs-first family の stop line は narrow で、`freeze prerequisite fixed; public ABI still unfrozen` に留まります。
+- final host schema、production transport、rollback protocol、durable migration engine、distributed activation ordering、final public hot-plug ABI、final public viewer / verifier / adapter / projection surface は still-later gate に残ります。
 
 Current none-auth baseline では、transport / auth / membership / capability / witness を separate lane で読めるようにしています。
 `auth none` は temporary repo-local baseline であり、session token / signature / federation protocol を fixed した意味ではありません。
@@ -272,33 +264,17 @@ post-`P21` later-family trilogy は close 済みです。
 これは Mirrorea system completion ではなく、current repo-local floor と later gate の分離が
 文書・sample・helper・report に mirror された状態を意味します。
 
-closed closeout memory として読む入口は次です。
+closed closeout memory を読む入口は、package-by-package table ではなく次の pointer set で十分です。
 
-| family | reading | entry point |
-|---|---|---|
-| public-boundary inventory | `P18` repo-side first cut。final public freeze ではない | `plan/27-public-api-parser-gate-roadmap.md`, `public_api_parser_gate_plan_01.md` |
-| true user-spec option matrix | `U1` option inventory。actual commitment は未実施 | `plan/28-post-p18-true-user-spec-hold-option-matrix.md`, `post_p18_true_user_spec_hold_option_matrix_01.md` |
-| verification widening threshold | helper/runtime verification floor と widening threshold | `plan/29-verification-layer-widening-threshold.md`, `verification_layer_widening_threshold_01.md` |
-| AttachPoint minimal contract | helper-local lifecycle / detach TODO boundary の minimal contract row | `plan/30-attachpoint-detach-minimal-contract.md`, `attachpoint_detach_minimal_contract_01.md` |
-| `FAIRY-05` carrier bundling | planned family の carrier recommendation。active sample 化ではない | `plan/31-fairy05-visibility-return-carrier-bundling.md`, `fairy05_visibility_return_carrier_bundling_01.md` |
-| rollback / migration boundary | helper-local evidence が証明していない hot-plug kept-later matrix | `plan/32-hotplug-real-migration-rollback-boundary.md`, `hotplug_real_migration_rollback_boundary_01.md` |
-| runtime-crate owner split | helper preview / core carrier / runtime assembly の owner split | `plan/33-runtime-crate-hotplug-engine-ownership-cut.md`, `runtime_crate_hotplug_engine_ownership_cut_01.md` |
-| carrier admission cut | first admissible Rust-side hot-plug family = engine-neutral request / verdict carrier | `plan/34-runtime-crate-hotplug-carrier-admission-cut.md`, `runtime_crate_hotplug_carrier_admission_cut_01.md` |
-| post-`P20` package inventory | `P21` runtime-private engine-state floor への historical closeout bridge | `plan/35-post-p20-hotplug-next-package-inventory.md`, `post_p20_hotplug_next_package_inventory_01.md` |
-| rollback / durable migration family | closed post-`P21` trilogy の historical first boundary family | `plan/36-post-p21-rollback-durable-migration-family.md`, `post_p21_rollback_durable_migration_family_01.md` |
-| distributed activation ordering family | closed post-`P21` trilogy の historical second boundary family | `plan/37-post-p21-distributed-activation-ordering-family.md`, `post_p21_distributed_activation_ordering_family_01.md` |
-| final public hot-plug ABI family | closed post-`P21` trilogy の last historical boundary family: `freeze prerequisite fixed; public ABI still unfrozen` | `plan/38-post-p21-final-public-hotplug-abi-family.md`, `post_p21_final_public_hotplug_abi_family_01.md` |
+- public-boundary inventory and `U1` option matrix:
+  `plan/27-public-api-parser-gate-roadmap.md`、`plan/28-post-p18-true-user-spec-hold-option-matrix.md`
+- verification / AttachPoint / `FAIRY-05` boundary memory:
+  `plan/29-verification-layer-widening-threshold.md`、`plan/30-attachpoint-detach-minimal-contract.md`、`plan/31-fairy05-visibility-return-carrier-bundling.md`
+- hot-plug kept-later and Rust-side narrow floor memory:
+  `plan/32-hotplug-real-migration-rollback-boundary.md` から `plan/38-post-p21-final-public-hotplug-abi-family.md`
 
-現在の snapshot reading は、追加の self-driven post-`P21` docs-first family ではありません。
-`progress.md` / `tasks.md` に記録された actual `U1` commitment hold line です。
-
-- installed binary / packaging adoption target
-- FFI / engine adapter / host integration target
-- first shipped public surface scope
-- final shared-space operational catalog breadth
-
-これらを user-facing decision として確定するまで、final public package structure、
-public hot-plug ABI、public viewer / adapter / projection / verifier API は freeze しません。
+live snapshot が `U1` を next reopen point と読む場合でも、ここでは option categories の案内に留めます。
+installed binary / packaging adoption target、FFI / engine adapter / host integration target、first shipped public surface scope、final shared-space operational catalog breadth を user-facing decision として確定するまで、final public package structure、public hot-plug ABI、public viewer / adapter / projection / verifier API は freeze しません。
 
 ## stop line
 
