@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 09:52 JST
+最終更新: 2026-05-01 09:57 JST
 
 ## この文書について
 
@@ -35,9 +35,9 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current remaining open gate:
   追加の self-driven post-`P21` docs-first family は残っていません。次は actual `U1` commitment であり、installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision が必要です。
 - Current maintenance lane:
-  stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。2026-04-29 には uncommitted Rust formatting cleanup を `b213721` として commit / push 済みです。
-  `scripts/current_l2_guided_samples.py` の current active compatibility front door は `list / smoke-all / closeout` に限定され、legacy bundle / lane / reserve / hold-line / emit-* helper command claims は package ごとに historical memory へ冷やしています。
-  `specs/examples/572..582`、`585..587` と `specs/12 D-157..167/D-170..172`、`specs/11`、`specs/00`、archived `samples/old/2026-04-22-pre-clean-near-end/problem-bundles/` は guided helper / bundle / matrix / quickstart cluster を historical helper memory / archived bundle memory に同期済みです。`specs/examples/583/584` と `specs/12 D-168/D-169` は surviving `smoke-all` compatibility wrapper、`specs/examples/579` と `specs/12 D-164` は archived parser-companion compare-floor inspection、`specs/examples/600` と `specs/12 D-185` は clean-near-end `check-source-sample` current surface に同期済みです。さらに `specs/examples/566/567` と `specs/12 D-151/D-152`、`specs/11`、`specs/00` は finite-index typing / Lean formal skeleton stale-path cluster を current clean-near-end compare floor + active `samples/lean/clean-near-end/` / archived prototype + archived `samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/` split に同期済みです。`specs/examples/522/523/524/529` と `specs/12 D-111/D-112/D-117`、`specs/11`、`specs/00` は IFC carry-over stale-path half を active clean-near-end typing `01/02/03` compare floor + active Lean docs front door + archived `p10/p11/p12` compare anchor split に同期済みです。`specs/examples/525/527/528` と `specs/12 D-113/D-115/D-116`、`specs/11`、`specs/00` は order-handoff representative carry-over stale-path half を active clean-near-end `order-handoff/05/02/03` compare floor + active `samples/lean/clean-near-end/` front door + archived `p09/p13/p14` prototype / old Lean appendix split に同期済みです。`specs/examples/466/467/470..483/530/561/568/569/570/571/612` の historical/current queue-temperature cooling、`specs/examples/484..497` current kept-later mixed-gate heading normalization、`specs/examples/533/569/571` helper-summary parity drift も current repo-level queue authority へ同期済みです。current blocker になる maintenance line はこの family には残っていません。
+  stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。これは active maintenance であり、新しい implementation / product-shaping line ではありません。
+  `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
+  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、guardrail packages `1051..1058` は maintenance-only closeout です。current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
 
 ## strict non-claims
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 09:57 JST — `progress.md` current snapshot の maintenance-lane prose を再圧縮し、long example/spec cluster mapping を `docs/reports/` / relevant `plan/` / `tasks.md` に委譲した。active maintenance、`current_l2_guided_samples.py` front door、no blocker、no implementation queue reopened の事実は保持した。
 - 2026-05-01 09:52 JST — `progress.md` recent log を snapshot 文書として再圧縮し、2026-04-28 以降の package-level chronology を `docs/reports/` と relevant `plan/` files へ委譲した。current floor、strict non-claims、`U1` open gate、validation anchors は維持し、new implementation queue は reopened していない。
 - 2026-05-01 09:47 JST — `tasks.md` current task-level status を snapshot 文書として再圧縮した。active floor、closed package bands、maintenance lane、1051..1058 guardrail closeout、`U1` actual commitment を保持した。
 - 2026-05-01 09:12..09:44 JST — guardrail maintenance band `1051..1058` を close: dashboard freshness audit、validator scope guardrail、full validation freshness checkpoint、target-specific warning cleanup、Makefile docs-check parity、report template discipline、template-heading guard、source hierarchy policy/spec coverage。これは maintenance-only closeout であり、sample semantics / public surface / implementation queue は変えていない。
