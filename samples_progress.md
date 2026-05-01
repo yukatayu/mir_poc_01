@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-01 11:53 JST
+Last updated: 2026-05-01 12:14 JST
 Current repo-local focus: current-L2 / clean near-end runnable floor, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and actual `U1` commitment gate.
 Current active packages: no new implementation package is promoted. Maintenance packages remain active. post-`P21` later-family docs-first trilogy is closed; the next product-shaping work is actual `U1` commitment.
 
@@ -33,7 +33,7 @@ Notes:
 | Avatar follow | 90 | active representative slice | `FAIRY-01/02/03/04/06`; `FAIRY-05` remains planned | `python3 scripts/avatar_follow_samples.py closeout --format json` |
 | External adapters | 75 | synthetic preview + host-boundary inventory | `EXT-03` / `EXT-04` helper subset; `EXT-01/02/05` planned | `python3 scripts/typed_external_boundary_samples.py closeout --format json` |
 | Network transport | 100 | helper-local canary family | `NET-02..05` current-scope canaries; `NET-01` は Sugoroku loopback parity anchor として reported | `python3 scripts/network_transport_samples.py check-all --format json` |
-| Projection / placement | 90 | preview + generated bridge evidence | helper/report preview + committed manifest bridge | `python3 scripts/projection_codegen_samples.py closeout --format json` |
+| Projection / placement | 90 | preview + generated bridge evidence | helper/report preview + committed manifest bridge; `equivalence` is review-category alignment inventory only, not generated program / optimizer / planner evidence | `python3 scripts/projection_codegen_samples.py check-all --format json` |
 | Visualization / viewer | 100 | typed prototype inventory | helper/runtime typed panel and telemetry inventory | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | Hot-plug package | 90 | P21 narrow runtime floor + docs-first trilogy closed | helper lifecycle + request/verdict carrier + runtime engine-state narrow floor; public ABI still unfrozen | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
 | Storage / backend guardrail | 100 | current first-cut closeout | external workdir, cargo cache/target binding, LLVM staging visibility | `bash scripts/storage/detach_prepare.sh` |
@@ -43,7 +43,7 @@ Notes:
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 11:53 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082` | Snapshot docs are maintenance artifacts, not normative specs |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-01 12:14 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083` | Snapshot docs are maintenance artifacts, not normative specs |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 11:01 JST | `0904`, `0913`, `0998`, `1066`, `1076` | final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 11:01 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 11:01 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076` | attach lifecycle / compatibility anchor |
@@ -56,8 +56,8 @@ Notes:
 | `EXT-03/04` | typed external | `scripts/typed_external_boundary_samples.py` | helper synthetic preview | 75 | positive + negative | 2026-05-01 11:01 JST | `0966`, `0998`, `1066`, `1076` | helper synthetic preview over planned-path sources; not final adapter API |
 | `EXT-01/02/05` | typed external | `samples/not_implemented/typed-external-boundary/` | planned residual family | 10 | target only | 2026-04-28 09:26 JST | `0946` | reopen criteria fixed; not active |
 | `NET-02..05` | network transport | `scripts/network_transport_samples.py`, Sugoroku loopback mode | helper-local canary family | 100 | positive + negative | 2026-05-01 11:53 JST | `0967`, `0998`, `1066`, `1075`, `1076`, `1082` | `check-all` executes NET canaries; `closeout` is inventory-only. `NET-01` is only a reported Sugoroku loopback parity anchor; not production transport |
-| `PRJ-01/02` | projection / placement | Sugoroku `projection_view`, runtime `cross_place_projection` | helper/report preview | 75 | positive | 2026-05-01 11:01 JST | `0948`, `0998`, `1066`, `1076` | preview floor; not emitted executable program |
-| `P15-GEN-01..04` | projection / codegen | `samples/generated/projection-placement/manifest.json` | committed generated bridge evidence | 90 | positive | 2026-05-01 11:01 JST | `0970`, `0998`, `1066`, `1076` | generated artifact; not source sample / final executable |
+| `PRJ-01/02` | projection / placement | Sugoroku `projection_view`, runtime `cross_place_projection` | helper/report preview | 75 | positive | 2026-05-01 12:14 JST | `0948`, `0998`, `1066`, `1076`, `1083` | preview floor; not emitted executable program / equivalence proof |
+| `P15-GEN-01..04` | projection / codegen | `samples/generated/projection-placement/manifest.json` | committed generated bridge evidence | 90 | positive | 2026-05-01 12:14 JST | `0970`, `0998`, `1066`, `1076`, `1083` | generated artifact; alignment inventory only; not source sample / final executable / generated program / optimizer / planner / equivalence checker |
 | `P16-VIEW-01..05` | viewer | `scripts/visual_debugger_viewer_samples.py` | typed public prototype inventory | 100 | positive | 2026-05-01 11:01 JST | `0971`, `0998`, `1066`, `1076` | typed inventory over helper/runtime surfaces; not final viewer API |
 | `P19-HOTPLUG-CARRIER` | hot-plug carrier | `crates/mirrorea-core/src/fabric.rs` | Rust carrier | 90 | positive + negative | 2026-05-01 11:01 JST | `0988`, `0998`, `1066`, `1076` | engine-neutral request/verdict carrier |
 | `P20-HOTPLUG-SKELETON` | hot-plug runtime | `crates/mir-runtime/src/hotplug_runtime.rs` | thin runtime/report assembly | 90 | positive + negative | 2026-05-01 11:01 JST | `0989`, `0991`, `0998`, `1066`, `1076` | not completed engine |
@@ -73,7 +73,7 @@ Notes:
 | `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar floor | `FAIRY-05` reacquire implementation |
 | `E2E-TYPED-EXTERNAL` | typed effect request -> receipt/failure -> redacted view | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper host-boundary inventory | final adapter API / exact host schema |
 | `E2E-TRANSPORT-CANARY` | loopback / subprocess bridge / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py check-all --format json` | 100 | current-scope helper transport canary execution; `NET-01` parity remains separately reported from Sugoroku anchors | production socket / durable replay |
-| `E2E-PROJECTION-BRIDGE` | system source -> preview -> committed manifest bridge -> live-anchor alignment | `python3 scripts/projection_codegen_samples.py closeout --format json` | 90 | generated bridge evidence alignment | final emitted executable family |
+| `E2E-PROJECTION-BRIDGE` | system source -> preview -> committed manifest bridge -> live-anchor alignment | `python3 scripts/projection_codegen_samples.py check-all --format json` | 90 | generated bridge evidence review-category alignment inventory | final emitted executable family / generated place-program emission / placement optimizer / deployment planner / equivalence checker / proof completion / final public emitted-program ABI |
 | `E2E-VIEWER-INVENTORY` | helper/runtime inventory -> typed viewer panels/telemetry | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | 100 | typed prototype inventory | final viewer / telemetry service |
 | `E2E-HOTPLUG-RUNTIME` | request/verdict carrier -> runtime snapshot -> engine-state report | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | 90 | P21 narrow runtime floor | rollback / durable migration / distributed ordering / final ABI |
 
@@ -94,6 +94,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-01 12:14 JST | projection/codegen bridge evidence wording audit | pass | Front-door docs and dashboards now mirror that `check-all` is live anchor / manifest alignment validation and `closeout` is manifest inventory evidence. `check-all` passed `P15-GEN-01..04`, representative runs `P15-GEN-01` / `P15-GEN-03` passed alignment, projection helper unit tests passed 10/10, generated tree contains only README + manifest, and post-review source hierarchy/docs scaffold/diff checks passed after report `1083` update. |
 | 2026-05-01 11:53 JST | network transport sample README anchor audit | pass | Active sample README / hands-on canary / `plan/22` split `check-all` executable canary anchor from `closeout` inventory evidence. `check-all` passed `NET-02..05` 4/4, `closeout` returned inventory fields only, network helper unit tests passed 11/11, source hierarchy/docs scaffold/diff checks passed after report `1082`. |
 | 2026-05-01 11:42 JST | guided-helper retirement audit | pass | Live `current_l2_guided_samples.py` front door and retired-command negative evidence were rechecked; `plan/00` / `plan/10` active wording was narrowed. `list` / `smoke-all` / `closeout` passed, retired `bundle problem1` returned exit 2 as expected, wrapper unit tests passed 4/4, source hierarchy/docs scaffold/diff checks passed after report `1081`. |
 | 2026-05-01 11:31 JST | validate/docs scope wording audit + network anchor cleanup | pass | Active hands-on / research abstract references to network transport executable validation were aligned to `python3 scripts/network_transport_samples.py check-all --format json`. `check_source_hierarchy.py`, `validate_docs.py`, and `git diff --check` passed after report `1080`; later report `1082` also made sample README / canary-guide `closeout` references explicit inventory evidence. |

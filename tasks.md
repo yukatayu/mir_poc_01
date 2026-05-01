@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 11:53 JST
+最終更新: 2026-05-01 12:14 JST
 
 ## この文書について
 
@@ -36,6 +36,8 @@
   `current_l2_guided_samples.py` は `list / smoke-all / closeout` の compatibility wrapper であり、pre-clean-near-end prototype / bundle / reserve wording は `plan/00` / `plan/10` で historical comparison memory へ冷却済みです。
 - network transport active sample docs は 2026-05-01 11:53 JST に再確認済みです:
   sample README / hands-on canary / `plan/22` は `check-all` executable canary anchor と `closeout` inventory evidence を分離し、`NET-01` を Sugoroku loopback parity anchor として扱います。
+- projection/codegen bridge evidence audit は 2026-05-01 12:05 JST に着手済みです:
+  `projection_codegen_samples.py check-all --format json` は live anchor / manifest alignment validation、`closeout --format json` は manifest inventory evidence として扱います。current `equivalence` reading は review-category alignment inventory であり、generated place-program / optimizer / deployment planner / checker / proof / final emitted ABI ではありません。
 
 ## executable floor
 
@@ -47,7 +49,7 @@
 | avatar follow | `scripts/avatar_follow_samples.py` | `python3 scripts/avatar_follow_samples.py closeout --format json` | `FAIRY-05` implementation / public avatar API |
 | typed external | `scripts/typed_external_boundary_samples.py` | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | final host schema / final adapter API |
 | network transport | `scripts/network_transport_samples.py` | `python3 scripts/network_transport_samples.py check-all --format json` | production socket / durable replay |
-| projection / placement | `scripts/projection_codegen_samples.py` + committed generated manifest | `python3 scripts/projection_codegen_samples.py closeout --format json` | final emitted executable family |
+| projection / placement | `scripts/projection_codegen_samples.py` + committed generated manifest | `python3 scripts/projection_codegen_samples.py check-all --format json` | final emitted executable family / generated place-program emission / placement optimizer / deployment planner / equivalence checker / proof completion / final public emitted-program ABI |
 | viewer prototype | `scripts/visual_debugger_viewer_samples.py` | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | final viewer API / telemetry service |
 | hot-plug runtime | `crates/mirrorea-core`, `crates/mir-runtime` | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | rollback / durable migration / distributed ordering / final ABI |
 | storage / backend | `/mnt/mirrorea-work`, `scripts/env/`, `scripts/storage/` | `bash scripts/storage/detach_prepare.sh` | actual LLVM build / backend choice |
@@ -167,6 +169,7 @@ python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
 python3 scripts/network_transport_samples.py check-all --format json
+python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 bash scripts/storage/detach_prepare.sh

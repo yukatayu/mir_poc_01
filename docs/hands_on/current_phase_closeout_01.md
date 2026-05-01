@@ -19,6 +19,7 @@ python3 scripts/sugoroku_world_samples.py closeout --format json
 python3 scripts/avatar_follow_samples.py closeout --format json
 python3 scripts/typed_external_boundary_samples.py closeout --format json
 python3 scripts/network_transport_samples.py check-all --format json
+python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/visual_debugger_viewer_samples.py closeout --format json
 cargo fmt --check
@@ -72,7 +73,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - active clean near-end suite、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug Rust floor が current runnable または closeout-backed surface として確認できること。
 - `TermSignature`、`LayerSignature`、`MessageEnvelope`、`AuthEvidence`、`VisualizationProtocol` / telemetry envelope、helper `verification_handoff_witness`、runtime `verification_model_check` の current evidence carriers が helper-local / report-local inventory として読めること。
 - `mirrorea-core` の `MembershipRegistry`、`PlaceCatalog`、`LogicalPlaceRuntimeShell`、engine-neutral `HotPlugRequest` / `HotPlugVerdict` と、`mir-runtime` の hot-plug skeleton / engine report が repo-local floor として確認できること。
-- typed external `EXT-03/04`、network `NET-02..05`、projection/codegen generated manifest bridge、viewer `P16-VIEW-01..05` は final public ABI / service / emitted executable ではなく、typed helper evidence として読めること。
+- typed external `EXT-03/04`、network `NET-02..05`、projection/codegen generated manifest bridge、viewer `P16-VIEW-01..05` は final public ABI / service / emitted executable ではなく、typed helper evidence として読めること。projection/codegen current `equivalence` reading は review-category alignment inventory であり、generated place-program synthesis / placement optimizer / deployment planner / cross-place equivalence checker / proof completion ではないこと。
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness / visualization を collapse していないこと。
 - NET-05 observer route trace が fail-closed であり、observer-safe debug output が principal / auth / freshness / authorization / raw witness refs を漏らさないこと。
 - storage/backend guardrail が external workdir、`CARGO_TARGET_DIR` / `CARGO_HOME`、non-destructive cleanup list-mode、`llvm/src` exclusion、parent non-writable guard を current operational floorとして確認できること。
@@ -157,7 +158,7 @@ current snapshot を読むときは、次だけ押さえれば十分です。
 
 この guide で保持する stop line は次です。
 
-- helper-local preview、generated bridge evidence、report-local inventory は final public API / emitted executable / production service contract ではありません。
+- helper-local preview、generated bridge evidence、report-local inventory は final public API / emitted executable / production service contract ではありません。projection/codegen bridge evidence は generated place-program synthesis / placement optimizer / deployment planner / cross-place equivalence checker / proof completion / final public emitted-program ABI でもありません。
 - `P0..P21` と post-`P21` docs-first trilogy は close 済みですが、この guide は closed package ledger を再列挙しません。
 - next reopen point はこの guide では固定せず、`progress.md` と `tasks.md` の current snapshot を参照します。
 

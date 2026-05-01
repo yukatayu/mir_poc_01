@@ -54,6 +54,7 @@ current line で reader が押さえるべき点は次です。
   authentication / authorization / membership / capability / witness は transport に潰さず、visualization / telemetry も `label` / `authority` / `redaction` / `retention` を持つ typed effect layer として扱います。
 - current repo-local evidence surfaces:
   Sugoroku world runtime attachment vertical slice、avatar fairy follow representative slice、typed external `EXT-03/04` preview、network `NET-02..05` canary、projection/codegen manifest bridge evidence、viewer prototype inventory、hot-plug runtime narrow floor は runnable または closeout-backed です。`FAIRY-05` は `samples/not_implemented/avatar-fairy-follow/` に planned family として残しています。
+  projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に限り、generated place-program synthesis、placement optimizer、deployment planner、cross-place equivalence checker、proof completion、final emitted executable family、final public emitted-program ABI ではありません。
 - current runtime / carrier floor:
   `TermSignature` / `LayerSignature` / `MessageEnvelope` / `AuthEvidence` / helper `verification_handoff_witness` / runtime `verification_model_check`、`MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell`、engine-neutral `HotPlugRequest` / `HotPlugVerdict`、runtime-side hot-plug skeleton/engine reports までは repo-local actualization 済みです。
 - kept-later boundaries:

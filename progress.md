@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 11:53 JST
+最終更新: 2026-05-01 12:14 JST
 
 ## この文書について
 
@@ -29,7 +29,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Mirrorea carrier / runtime floor:
   `TermSignature`、`LayerSignature`、`MessageEnvelope` / `AuthEvidence`、typed visualization / telemetry envelope、`MembershipRegistry`、`PlaceCatalog`、`LogicalPlaceRuntimeShell`、principal-derived `ParticipantPlace[{principal}]` helper、engine-neutral `HotPlugRequest` / `HotPlugVerdict`、runtime-side `HotPlugRuntimeSkeletonReport` / `HotPlugRuntimeEngineReport` まで actualize 済みです。
 - Preview / generated evidence floor:
-  typed external synthetic preview、network helper-local canary、projection preview、projection/codegen committed generated bridge evidence、viewer typed public prototype inventory、storage / LLVM guardrail が current scope close 済みです。projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まり、checker / proof / final public emitted-program ABI は kept-later gate に残ります。
+  typed external synthetic preview、network helper-local canary、projection preview、projection/codegen committed generated bridge evidence、viewer typed public prototype inventory、storage / LLVM guardrail が current scope close 済みです。projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まり、generated place-program synthesis / placement optimizer / deployment planner / checker / proof / final public emitted-program ABI は kept-later gate に残ります。
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
 - Current remaining open gate:
@@ -43,7 +43,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 - standard I/O は Mir core primitive ではありません。
 - `auth none` baseline は final auth design ではありません。
-- helper-local preview / report-local inventory / committed generated bridge evidence は final public API ではありません。projection/codegen current `equivalence` reading も review-category alignment inventory に留まり、cross-place equivalence checker / proof completion / final public emitted-program ABI ではありません。
+- helper-local preview / report-local inventory / committed generated bridge evidence は final public API ではありません。projection/codegen current `equivalence` reading も review-category alignment inventory に留まり、generated place-program synthesis / placement optimizer / deployment planner / cross-place equivalence checker / proof completion / final public emitted-program ABI ではありません。
 - current `VerificationLayer` emitted rows / previews / downstream consumers / emitted verifier handoff artifacts は separate current surfaces であり、それだけで final public verifier contract を意味しません。
 - runtime-private hot-plug request / verdict / engine-state names は final public hot-plug ABI names ではありません。
 - visualization / telemetry は untyped debug leak ではなく、label / authority / redaction / retention を持つ typed information-bearing effect として扱います。
@@ -121,6 +121,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - preview / generated / viewer / transport:
   `python3 scripts/typed_external_boundary_samples.py closeout --format json`
   `python3 scripts/network_transport_samples.py check-all --format json`
+  `python3 scripts/projection_codegen_samples.py check-all --format json`
   `python3 scripts/projection_codegen_samples.py closeout --format json`
   `python3 scripts/visual_debugger_viewer_samples.py closeout --format json`
 - Rust crates:
@@ -134,6 +135,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 12:14 JST — projection/codegen bridge evidence の front-door wording を点検し、current `equivalence` reading を committed generated manifest + helper/report-local anchor の review-category alignment inventory に限定した。`check-all` は live alignment validation、`closeout` は manifest inventory evidence として扱い、generated place-program / optimizer / deployment planner / equivalence checker / proof / final emitted ABI は kept-later gate として維持した。
 - 2026-05-01 11:53 JST — network transport sample README / hands-on / `plan/22` の command-anchor drift を修正した。`check-all --format json` は `NET-02..05` executable canary anchor、`closeout --format json` は inventory evidence、`NET-01` は Sugoroku loopback parity anchor として分離した。
 - 2026-05-01 11:42 JST — guided helper retirement audit で `current_l2_guided_samples.py` の live front door が `list / smoke-all / closeout` only であることを再確認し、`plan/00` / `plan/10` の pre-clean-near-end prototype / representative bundle wording を historical comparison memory へ冷却した。`samples/current-l2/` は base corpus、`samples/clean-near-end/` は active canonical executable suite として分けて記録した。
 - 2026-05-01 11:31 JST — validate/docs scope wording audit 中に remaining active hands-on / research abstract の network transport executable anchor drift を修正した。`current_phase_closeout_01.md`、`public_api_parser_gate_01.md`、`mirrorea_future_axis_01.md` は `network_transport_samples.py check-all --format json` を executable validation anchor として示す。

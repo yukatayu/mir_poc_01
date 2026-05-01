@@ -109,6 +109,7 @@
 
 - runnable floor:
   active canonical sample は `samples/clean-near-end/`、base source corpus は `samples/current-l2/`、Lean evidence は `samples/lean/` です。Sugoroku world、avatar follow representative slice、typed external `EXT-03/04` preview、network `NET-02..05` canary、projection/codegen bridge evidence、viewer prototype inventory、hot-plug Rust floor は runnable または closeout-backed です。
+  projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に限り、generated place-program synthesis、placement optimizer、deployment planner、cross-place equivalence checker、proof completion、final emitted executable family、final public emitted-program ABI ではありません。
 - boundary reading:
   Mirrorea future-axis は current promoted line ではなく、typed external boundary、auth/transport 分離、visualization / telemetry、projection / placement、hot-plug を reader-facing に整理した roadmap-memory family です。live queue authority は `progress.md` / `tasks.md` に残します。
 - major family pointers:

@@ -17,9 +17,13 @@ python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug vi
 cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-sample 05_delegated_rng_service --format json
 python3 scripts/projection_codegen_samples.py run P15-GEN-01 --format json
 python3 scripts/projection_codegen_samples.py run P15-GEN-03 --format json
+python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py closeout --format json
 find samples/generated -maxdepth 3 -type f | sort
 ```
+
+`check-all` は committed manifest と live anchors の alignment validation です。
+`closeout` は manifest inventory evidence であり、final emitted executable family、generated place-program synthesis、placement optimizer、deployment planner、equivalence checker / proof completion ではありません。
 
 ## 何を見るか
 
