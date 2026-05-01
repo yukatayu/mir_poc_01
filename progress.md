@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-01 10:56 JST
+最終更新: 2026-05-01 11:04 JST
 
 ## この文書について
 
@@ -37,7 +37,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Current maintenance lane:
   stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は自走可能です。これは active maintenance であり、新しい implementation / product-shaping line ではありません。
   `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
-  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
+  2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。2026-05-01 11:01 JST の corrected full validation floor も pass 済みで、current blocker になる maintenance line はこの family には残っておらず、new implementation queue も reopened していません。
 
 ## strict non-claims
 
@@ -134,6 +134,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-01 11:04 JST — corrected network transport anchor 後の full validation freshness checkpoint を close した。16-command full floor は `NET-02..05` を `check-all --format json` で実行する corrected command set で全件 pass、Cargo crate tests / `cargo fmt --check` / `git diff --check` も pass。補助で Lean sync と storage guardrail も pass し、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はない。
 - 2026-05-01 10:56 JST — network transport validation anchor を correction し、`check-all --format json` が `NET-02..05` canaries を実行する command、`closeout --format json` が inventory-only command であることを `progress.md` / `tasks.md` / `samples_progress.md` / report に反映した。`check-all` は 4/4 pass、production socket / durable replay claim はしていない。
 - 2026-05-01 10:50 JST — recent log を再圧縮し、10:07..10:48 の active-doc / task-map / dashboard / storage maintenance package 詳細を `docs/reports/1062..1073` に委譲した。current floor、strict non-claims、`U1` open gate、validation anchors は維持し、new implementation queue は reopened していない。
 - 2026-05-01 10:26..10:48 JST — full validation checkpoint、storage guardrail audit、task/progress/samples dashboard wording cooling、active-doc point-in-time wording repair、no-finding audit、maintenance-family compression を close した。known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、sample status / public surface / implementation queue は変えていない。

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-01 10:56 JST
+最終更新: 2026-05-01 11:04 JST
 
 ## この文書について
 
@@ -23,6 +23,8 @@
 - 2026-04-30 以降の detailed maintenance chronology はこの snapshot では再列挙しません。package-by-package evidence は `docs/reports/1001` 以降の committed reports、long-lived comparison / boundary memory は relevant `plan/` files、runnable sample status は `samples_progress.md` を参照します。
 - 2026-05-01 の `1051` 以降の guardrail / snapshot / validation / storage follow-up packages は maintenance-only closeout です:
   dashboard freshness、validator/source-hierarchy/report-template guardrail、full/docs/storage validation checkpoint、warning/formatting cleanup、Makefile alias parity、task/progress/sample dashboard compression、active front-door / active-doc wording repair を継続的に閉じています。new implementation queue は reopened していません。
+- 直近の corrected full validation freshness checkpoint は 2026-05-01 11:01 JST です:
+  16-command full floor は network transport の executable anchor を `check-all --format json` として全件 pass し、補助の Lean sync / storage guardrail も known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker なしで通っています。
 
 ## executable floor
 
