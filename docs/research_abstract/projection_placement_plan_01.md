@@ -3,17 +3,17 @@
 ## 目的
 
 Mirrorea の source を、あとで place-specific program へ safely projection できるようにするための
-current plan と helper/report-local preview floor の summary です。
+repository-memory plan と helper/report-local preview floor の summary です。
 
-## current rule
+## boundary rule
 
 - source principal を server/client に早期固定しない
 - `Place` を participant と同一視しない
 - adapter / visualizer path でも auth / witness / visualization / telemetry を separate lane に保つ
 
-## current preview floor
+## preview floor
 
-current repo では、docs-first に留まらず、次の preview floor を actualize しています。
+repo-local current layer では、docs-first に留まらず、次の preview floor を actualize しています。
 
 - Sugoroku helper:
   `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug projection --format json`
@@ -28,7 +28,7 @@ current repo では、docs-first に留まらず、次の preview floor を actu
   - authority placement と provider placement の分離
   - message envelope refs
   - redaction rule refs
-- projection/codegen current first cut:
+- projection/codegen first cut:
   `python3 scripts/projection_codegen_samples.py closeout --format json`
   - `P15-GEN-01..04`
   - `generated_bridge_artifact_inventory`
@@ -37,19 +37,19 @@ current repo では、docs-first に留まらず、次の preview floor を actu
   - `validation_floor`
 
 これは final emitted place program ではありません。
-projection validity を collapse せずに preview する current floor です。
+projection validity を collapse せずに preview する floor です。
 
-## current emitted-program gate
+## emitted-program gate
 
-`P3` current package で固定するのは、actual emitted place-specific program ではなく、
+`P3` package で固定するのは、actual emitted place-specific program ではなく、
 次の docs-first boundary です。
 
-- current preview floor は helper/report-local preview only
+- preview floor は helper/report-local preview only
 - projection validity report の minimum contents は category 単位で固定する
 - generated place-specific program family は reserve path / external-workdir preference を保つ
-- `P15` current first cut は committed generated bridge evidence only として close し、actual emitted executable family は kept-later gate に残す
+- `P15` first cut は committed generated bridge evidence only として close し、actual emitted executable family は kept-later gate に残す
 
-## current place split
+## place split
 
 - server / authoritative path
 - participant path

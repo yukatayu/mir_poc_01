@@ -4,7 +4,7 @@
 
 Phase 6 は、仕様だけでなく **repo 内で実行・検証・文書追跡ができる最小 actual layer** を作る層です。
 
-## 2026-04-23 時点の current reading
+## 2026-04-23 時点の repository snapshot reading
 
 - clean near-end suite 16 本が active
 - family run / matrix / closeout が動く

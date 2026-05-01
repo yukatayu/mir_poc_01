@@ -3,7 +3,7 @@
 ## 何を整理したか
 
 `R3` では、`FAIRY-05` を active 化せずに、
-visibility-return witness をどの carrier shape で読むのが current repo-local line として
+visibility-return witness をどの carrier shape で読むのが repo-local boundary reading として
 一番 honest かを docs-first に narrow にした。
 
 ## current fixed facts
@@ -32,7 +32,7 @@ visibility-return witness をどの carrier shape で読むのが current repo-l
 
 ## provisional recommendation
 
-current docs-first recommendation は、
+`R3` close-time provisional recommendation は、
 `FAIRY-05` を **typed bundle over `state_timeline` + `anchor_switch`** として読むことです。
 
 ただし、これは helper closeout schema の変更ではありません。
@@ -40,7 +40,7 @@ implementation inventory は `UNRESOLVED` のまま残し、
 repo memory 側だけが provisional recommendation を持ちます。
 
 visibility-return witness は standalone top-level carrier ではなく、
-timeline witness refs の内側に入る reading を current line に置きます。
+timeline witness refs の内側に入る reading を repository memory に置きます。
 
 ## 何を言っていないか
 

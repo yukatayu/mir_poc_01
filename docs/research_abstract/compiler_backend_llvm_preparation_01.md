@@ -3,9 +3,9 @@
 ## 目的
 
 small VPS 上で backend / LLVM を root disk 既成事実にせず進めるための
-docs-first current guardrail です。
+docs-first guardrail です。
 
-## current anchors
+## guardrail anchors
 
 - `/mnt/mirrorea-work`
 - `target/ -> /mnt/mirrorea-work/cargo-target`
@@ -17,7 +17,7 @@ docs-first current guardrail です。
 - `/mnt/mirrorea-work/llvm` owner / writable status
 - `llvm/src` は staging path として保持し、disposable cleanup 対象に含めない
 
-## current rule
+## guardrail rule
 
 - source repo は detachable storage only にしない
 - heavy disposable artifact は external workdir を優先する
@@ -25,7 +25,7 @@ docs-first current guardrail です。
 - cleanup は explicit confirmation なしで delete しない
 - `llvm/build` / `llvm/install` cleanup は parent staging dir が non-writable なままでは実行しない
 - ownership repair は routine helper ではなく explicit setup path に残す
-- current closeout で実際に通したのは list-mode と owner/writable probe までであり、cleanup refusal branch 自体は non-destructive stop line / helper implementation evidence として読む
+- closeout で実際に通したのは list-mode と owner/writable probe までであり、cleanup refusal branch 自体は non-destructive stop line / helper implementation evidence として読む
 
 ## stop line
 

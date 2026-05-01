@@ -3,17 +3,17 @@
 ## 何を固定したか
 
 `R2` では、helper-local `hotplug_lifecycle` / explicit detach TODO boundary を
-current evidence floor に保ったまま、
+helper-local evidence floor に保ったまま、
 `AttachPoint` line の最小 contract row を docs-first に整理した。
 
-ここでの current row は次の 4 つだけです。
+ここでの minimal row は次の 4 つだけです。
 
 - `compatibility`
 - `activation_cut`
 - `detach_boundary`
 - `migration_contract`
 
-## current reading
+## boundary reading
 
 - helper-local `hotplug_lifecycle` は `MessageEnvelope` 由来の evidence summary
 - final public hot-plug ABI ではない
@@ -23,7 +23,7 @@ current evidence floor に保ったまま、
 - `attachpoint_id` / `patch_id` は identity column として残し、
   row は envelope / view / telemetry anchor に紐づけて読む
 
-## current anchor
+## evidence anchor
 
 - sample:
   `01_runtime_attach_game` / `09_detach_todo`
@@ -38,7 +38,7 @@ current evidence floor に保ったまま、
 
 ## 何が分かるか
 
-- attach / detach は current helper-local floor でも explicit lifecycle boundary として読める
+- attach / detach は helper-local floor でも explicit lifecycle boundary として読める
 - compatibility / freshness / capability / authorization を request envelope と cut boundary に残したまま読める
 - detach 後の domain action rejection は visible な boundary evidence として読める
 - migration / rollback / final public ABI はまだ未決だと明示したまま保てる

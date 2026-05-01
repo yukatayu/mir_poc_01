@@ -70,7 +70,7 @@ current repo-local alpha を壊す crate rename / move は、まだ行いませ�
   `scripts/env/`
   `scripts/storage/`
 
-## current recommendation
+## repository-memory recommendation
 
 - まず docs / plan / README で taxonomy を固定する
 - active path を壊す move は later stage へ送る

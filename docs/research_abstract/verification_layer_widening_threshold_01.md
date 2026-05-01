@@ -7,11 +7,11 @@ reader-facing に短く読む summary です。
 
 - final public verifier contract を決める文書ではありません
 - helper/runtime inventory を 1 つの public verifier に潰す文書でもありません
-- current emitted floor と widening threshold を current reading として束ねます
+- emitted floor と widening threshold を repository-memory summary として束ねます
 
-## current emitted floor
+## emitted floor
 
-| surface | current status | current reading |
+| surface | status | reading |
 |---|---|---|
 | helper `verification_handoff_witness` | emitted floor | witness-backed handoff verification の representative slice |
 | runtime `verification_model_check` | emitted floor | model-check second-line canonical inventory |

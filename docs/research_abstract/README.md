@@ -1,6 +1,6 @@
 # research_abstract
 
-このディレクトリは、repo の current reading を **日本語で短く読み返すための概要集** です。
+このディレクトリは、repo の repository-memory reading を **日本語で短く読み返すための概要集** です。
 
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/`
@@ -101,7 +101,7 @@
 この viewer は final public parser / checker ではありません。
 文法、active sample path、reserved keyword、定義宣言形、custom input UI が変わったら、HTML 内の embedded samples、syntax token list、symbol extraction rule、docs、test を同じ task で更新してください。
 
-## current reading の要点
+## repository snapshot の要点
 
 現在の active line は次です。
 
@@ -112,7 +112,7 @@
 - major family pointers:
   overall future-axis summary は `mirrorea_future_axis_01.md`、post-`P18` true user-spec hold line は `post_p18_true_user_spec_hold_option_matrix_01.md`、verification / FAIRY-05 / hot-plug family memory は `verification_layer_widening_threshold_01.md`、`attachpoint_detach_minimal_contract_01.md`、`fairy05_visibility_return_carrier_bundling_01.md`、`hotplug_real_migration_rollback_boundary_01.md`、`runtime_crate_hotplug_engine_ownership_cut_01.md`、`runtime_crate_hotplug_carrier_admission_cut_01.md`、`post_p21_rollback_durable_migration_family_01.md`、`post_p21_distributed_activation_ordering_family_01.md`、`post_p21_final_public_hotplug_abi_family_01.md` を入口にします。
 - subsystem summaries:
-  typed external / adapter、projection / placement、hot-plug attachpoint、network transport、compiler/backend guardrail は、それぞれ `typed_external_boundary_adapter_plan_01.md`、`projection_placement_plan_01.md`、`hotplug_attachpoint_plan_01.md`、`network_transport_plan_01.md`、`compiler_backend_llvm_preparation_01.md` を current anchor にします。
+  typed external / adapter、projection / placement、hot-plug attachpoint、network transport、compiler/backend guardrail は、それぞれ `typed_external_boundary_adapter_plan_01.md`、`projection_placement_plan_01.md`、`hotplug_attachpoint_plan_01.md`、`network_transport_plan_01.md`、`compiler_backend_llvm_preparation_01.md` を repository-memory entry にします。
 - command-oriented landing:
   実行コマンド付きの closeout landing は `../hands_on/current_phase_closeout_01.md` です。avatar follow の planned residual は `samples/not_implemented/avatar-fairy-follow/` に残し、現在は `FAIRY-05` だけを reader-facing plan anchor にします。
 

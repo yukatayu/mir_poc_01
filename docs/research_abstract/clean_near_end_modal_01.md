@@ -26,8 +26,8 @@ built-in として扱うのは、`transition`、`stage`、`publish`、`witness` 
 
 ## この family で確認できること
 
-- `stable` value を stage をまたいで使う current reading
-- `later` value を publish stage で要求する current reading
+- `stable` value を stage をまたいで使う repo-local reading
+- `later` value を publish stage で要求する repo-local reading
 - `published(room)` から `witnessed(draw_pub)` への bridge
 
 ## 現在の評価

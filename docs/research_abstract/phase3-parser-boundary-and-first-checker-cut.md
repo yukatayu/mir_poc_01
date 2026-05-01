@@ -5,7 +5,7 @@
 Phase 3 は、parser-free current layer から **first checker cut** へ進むときの境界を整理する層です。
 ここでは「何を helper-local current layer として残し、何を final public parser / checker API に昇格させるか」を分けます。
 
-## 2026-04-23 時点の current reading
+## 2026-04-23 時点の repository snapshot reading
 
 - active clean near-end suite は parser-free helper line として成立している
 - first strong typing layer は finite decidable index fragment として成立している

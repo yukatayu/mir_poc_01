@@ -36,7 +36,7 @@ runtime-crate engine ownership や final public ABI を意味しません。
 - `PlaceCatalog`
 - `LogicalPlaceRuntimeShell`
 
-を current line に actualize しています。
+を repo-local current layer に actualize しています。
 
 ただし crate doc 自体が、
 final public transport ABI / viewer contract / hot-plug runtime / projection IR

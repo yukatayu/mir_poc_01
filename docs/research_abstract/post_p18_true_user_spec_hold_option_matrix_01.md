@@ -7,14 +7,14 @@
 
 - final public freeze を宣言する文書ではありません
 - actual product target を決める文書でもありません
-- option inventory と provisional recommendation を current reading として束ねます
+- option inventory と provisional recommendation を repository-memory summary として束ねます
 
-## current reading
+## option-inventory reading
 
 `P18` で閉じたのは repo-side framing です。
 actual commitment は still later であり、`U1` では次の 4 軸を explicit にします。
 
-| Axis | Options | Current recommendation |
+| Axis | Options | Provisional recommendation |
 |---|---|---|
 | packaging shape | `CLI` / `library` / `engine-adapter` / `hybrid` | `library-first` |
 | host integration target | `browser` / `native process` / `engine` / `mixed` | `native process` |

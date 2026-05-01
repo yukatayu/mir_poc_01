@@ -2,13 +2,13 @@
 
 ## 目的
 
-phase 9 `Typed external boundary / adapter` を、repo-local current layer で
+phase 9 `Typed external boundary / adapter` を、repo-local layer で
 安全に前進させるための docs-first sample ladder を置きます。
 
 ここで固定するのは **planned sample ID / synthetic preview helper subset / host-boundary preview inventory / evidence anchor / stop line** です。
 final public adapter API や real transport 実装ではありません。
 
-## current evidence anchors
+## evidence anchors
 
 - clean near-end `05_delegated_rng_service`
   - `provider_boundary`
@@ -29,16 +29,16 @@ final public adapter API や real transport 実装ではありません。
 - `EXT-04` adapter failure typed result
 - `EXT-05` debug visualization label restriction
 
-これらは current repo の working sample ID です。
+これらは repo-local working sample ID です。
 exact host schema / final adapter contract は `OPEN` のままです。
 
-## current executable cut
+## executable cut
 
 - synthetic preview helper subset は `EXT-03` / `EXT-04`
 - residual planned family は `EXT-01` / `EXT-02` / `EXT-05`
 - helper entrypoint:
   `python3 scripts/typed_external_boundary_samples.py`
-- `P12` current first-cut closeout では helper subset / closeout に
+- `P12` first-cut closeout では helper subset / closeout に
   `host_boundary_scope = helper_local_synthetic_preview`、
   `host_boundary_lanes = request / receipt / failure / visualization`、
   `non_collapse_lanes = transport / auth / membership / capability / witness / visualization`、
@@ -52,7 +52,7 @@ exact host schema / final adapter contract は `OPEN` のままです。
   `failures`
 - scenario label は helper-local working name であり、final effect 名ではない
 
-## current rule
+## boundary rule
 
 - standard I/O は Mir core primitive にしない
 - adapter boundary で external world へ接続する
@@ -62,7 +62,7 @@ exact host schema / final adapter contract は `OPEN` のままです。
 
 ## residual planned family matrix
 
-| Sample | Current status | Current indirect anchor | Reopen condition | Kept-later gate |
+| Sample | Planned state in this summary | Indirect anchor in this summary | Reopen condition | Kept-later gate |
 |---|---|---|---|---|
 | `EXT-01` | residual planned | clean near-end `provider_boundary` / `provider_boundary_dispatch` | typed adapter request / receipt を `provider_boundary` 上に載せても stdio builtin 誤読にならないことを `summary` / `envelopes` で示せる | `final_console_schema`, final public adapter API |
 | `EXT-02` | residual planned | Sugoroku `visualization_views` / `telemetry_rows` + projection preview floor | label / authority / redaction を保った overlay route を host family split なしで記述できる | `final_host_schema`, browser / network / VR family split, final projection public API |
@@ -70,6 +70,6 @@ exact host schema / final adapter contract は `OPEN` のままです。
 
 ## 次
 
-この文書の current role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、helper-local `host_boundary` preview inventory、evidence anchor、residual reopen criterion を保つことです。
-viewer pressure を current line で読むときは `docs/hands_on/visual_debugger_viewer_01.md` も参照してください。
-具体的な promoted queue は `tasks.md` と `docs/research_abstract/mirrorea_future_axis_01.md` を参照してください。
+この文書の role は、phase 9 planned family、`EXT-03` / `EXT-04` synthetic preview helper subset、helper-local `host_boundary` preview inventory、evidence anchor、residual reopen criterion を保つことです。
+viewer pressure を repository-memory reading として読むときは `docs/hands_on/visual_debugger_viewer_01.md` も参照してください。
+live reopen order は `tasks.md` と `progress.md` を参照してください。

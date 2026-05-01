@@ -7,7 +7,7 @@
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/`
 - 実行証跡は `docs/reports/`
-- current queue authority は `progress.md` / `tasks.md` に置き、ここは current reading と closeout-memory gate を reader-facing にまとめる入口です
+- live queue authority は `progress.md` / `tasks.md` に置き、ここは repository-memory reading と closeout-memory gate を reader-facing にまとめる入口です
 
 ## 現在地
 
@@ -25,7 +25,7 @@ current executable floor は次です。
 | projection / visualization | helper projection preview、committed generated bridge manifest、typed viewer prototype inventory | `python3 scripts/projection_codegen_samples.py closeout --format json`, `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` |
 | hot-plug Rust floor | `mirrorea-core` request/verdict carrier、`mir-runtime` skeleton / engine-state report | `cargo test -p mirrorea-core`, `cargo test -p mir-runtime --test hotplug_runtime_skeleton` |
 
-Mirrorea future-axis 側の current repository memory は、major family ごとに次のように読みます。
+Mirrorea future-axis 側の repository-memory family は、major family ごとに次のように読みます。
 
 | family | closeout memory | still not claimed |
 |---|---|---|
@@ -204,11 +204,11 @@ root disk を build cache や LLVM artifact で既成事実化しない guardrai
 - LLVM path readiness
 - non-destructive cleanup
 
-current repo では、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` に
-current anchor、non-destructive probe floor、stop line を置いてあります。
+repo では、`plan/23-compiler-backend-llvm-guardrail-roadmap.md` に
+guardrail anchor、non-destructive probe floor、stop line を置いてあります。
 actual LLVM build、final backend choice、final packaging / FFI / engine adapter target はまだ fixed しません。
 
-current closeout を実行コマンド付きで追う landing page は `docs/hands_on/current_phase_closeout_01.md` です。
+closeout を実行コマンド付きで追う landing page は `docs/hands_on/current_phase_closeout_01.md` です。
 
 ## representative slices
 
@@ -265,7 +265,7 @@ current helper closeout は `planned_sample_paths` と `fairy05_reopen_gate` を
 - deferred mixed gate:
   parser/public API、auth/public contract、visualization/public contract、projection/public API、hot-plug/public API
 
-## current closeout memory and current snapshot reading
+## closeout memory and snapshot reading
 
 `P0` / `P1` から `P21` までの repo-side package、`R1..R7` の docs-first boundary package、
 post-`P21` later-family trilogy は close 済みです。
@@ -274,7 +274,7 @@ post-`P21` later-family trilogy は close 済みです。
 
 closed closeout memory として読む入口は次です。
 
-| family | current reading | entry point |
+| family | reading | entry point |
 |---|---|---|
 | public-boundary inventory | `P18` repo-side first cut。final public freeze ではない | `plan/27-public-api-parser-gate-roadmap.md`, `public_api_parser_gate_plan_01.md` |
 | true user-spec option matrix | `U1` option inventory。actual commitment は未実施 | `plan/28-post-p18-true-user-spec-hold-option-matrix.md`, `post_p18_true_user_spec_hold_option_matrix_01.md` |
@@ -284,10 +284,10 @@ closed closeout memory として読む入口は次です。
 | rollback / migration boundary | helper-local evidence が証明していない hot-plug kept-later matrix | `plan/32-hotplug-real-migration-rollback-boundary.md`, `hotplug_real_migration_rollback_boundary_01.md` |
 | runtime-crate owner split | helper preview / core carrier / runtime assembly の owner split | `plan/33-runtime-crate-hotplug-engine-ownership-cut.md`, `runtime_crate_hotplug_engine_ownership_cut_01.md` |
 | carrier admission cut | first admissible Rust-side hot-plug family = engine-neutral request / verdict carrier | `plan/34-runtime-crate-hotplug-carrier-admission-cut.md`, `runtime_crate_hotplug_carrier_admission_cut_01.md` |
-| post-`P20` package inventory | `P21` を historical next narrow implementation line とした queue memory | `plan/35-post-p20-hotplug-next-package-inventory.md`, `post_p20_hotplug_next_package_inventory_01.md` |
-| rollback / durable migration family | post-`P21` first recommendation closeout | `plan/36-post-p21-rollback-durable-migration-family.md`, `post_p21_rollback_durable_migration_family_01.md` |
-| distributed activation ordering family | post-`P21` second recommendation closeout | `plan/37-post-p21-distributed-activation-ordering-family.md`, `post_p21_distributed_activation_ordering_family_01.md` |
-| final public hot-plug ABI family | post-`P21` third recommendation closeout: `freeze prerequisite fixed; public ABI still unfrozen` | `plan/38-post-p21-final-public-hotplug-abi-family.md`, `post_p21_final_public_hotplug_abi_family_01.md` |
+| post-`P20` package inventory | `P21` runtime-private engine-state floor への historical closeout bridge | `plan/35-post-p20-hotplug-next-package-inventory.md`, `post_p20_hotplug_next_package_inventory_01.md` |
+| rollback / durable migration family | closed post-`P21` trilogy の historical first boundary family | `plan/36-post-p21-rollback-durable-migration-family.md`, `post_p21_rollback_durable_migration_family_01.md` |
+| distributed activation ordering family | closed post-`P21` trilogy の historical second boundary family | `plan/37-post-p21-distributed-activation-ordering-family.md`, `post_p21_distributed_activation_ordering_family_01.md` |
+| final public hot-plug ABI family | closed post-`P21` trilogy の last historical boundary family: `freeze prerequisite fixed; public ABI still unfrozen` | `plan/38-post-p21-final-public-hotplug-abi-family.md`, `post_p21_final_public_hotplug_abi_family_01.md` |
 
 現在の snapshot reading は、追加の self-driven post-`P21` docs-first family ではありません。
 `progress.md` / `tasks.md` に記録された actual `U1` commitment hold line です。

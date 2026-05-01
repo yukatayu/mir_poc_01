@@ -16,7 +16,7 @@ cargo run -q -p mir-runtime --bin mir-clean-near-end -- run-family model-check -
 
 ## built-in と user-defined の境界
 
-current closeout が built-in vocabulary として列挙している語のうち、この family で主に使うのは次です。
+closeout が built-in vocabulary として列挙している語のうち、この family で主に使うのは次です。
 
 - `transition`
 - `stage`
