@@ -37,6 +37,7 @@
   - `P-A0-10` は `crates/mir-runtime/src/alpha_avatar_runtime.rs` と example `mirrorea_alpha_avatar_runtime` を主体にしつつ、thin runner `alpha_avatar_runtime_samples.py` を `scripts/` に actualize した。これは `samples/alpha/avatar-runtime/` の `AV-01/02/06/08/09` と `samples/alpha/hotplug-runtime/` の `HP-11/12/15` を runtime-private package/avatar admission floor として検証するもので、final avatar API / native execution / hot-plug lifecycle completion を主張しない
   - `P-A0-11` は thin integrated bridge runner `alpha_e2e_samples.py` を `scripts/` に actualize した。これは `samples/alpha/e2e/` の `E2E-01/02/03/04/05/07/09/10` を既存 Stage B/C/D/F subset floor の composition として検証するもので、dedicated alpha visualization/devtools family と Stage F completion を主張しない
   - `P-A0-12` は `alpha_cut_save_load_samples.py` を `scripts/` に actualize した。これは `samples/alpha/cut-save-load/` の `CUT-04` local-only save/load bridge を専用 command として検証し、`alpha_e2e_samples.py` 側では `E2E-06` へ composition する。distributed/durable save/load completion や Z-cycle handling は主張しない
+  - `P-A0-13` は `alpha_visualization_samples.py` を `scripts/` に actualize した。これは `samples/alpha/visualization/` の `VIS-01/03/06/07/08/10/11` を existing alpha/helper/runtime JSON evidence の dedicated Stage-E subset runner として検証するもので、`VIS-02/04/05/09/12`、Stage E completion、Stage F completion、final public viewer/telemetry API は主張しない
 
 ### storage / env
 
@@ -62,7 +63,7 @@
 - `current_l2_*` helper 群は public installed CLI ではなく repo-local support surface として読む
 - `samples/alpha/` 向けの future runner 名は roadmap / sample matrix にだけ置き、実在しない command を current validation floor に入れない
 - `alpha_network_docker_e2e.py` は current actualized command だが、active clean-suite front door ではなく Alpha-0 package closeout evidence command として読む
-- `alpha_avatar_runtime_samples.py` と `alpha_e2e_samples.py` も active clean-suite front door ではなく Alpha-0 package closeout evidence command として読む
+- `alpha_avatar_runtime_samples.py`、`alpha_visualization_samples.py`、`alpha_e2e_samples.py` も active clean-suite front door ではなく Alpha-0 package closeout evidence command として読む
 - storage / env script は root setup と cleanup policy を helper 本体から分離する
 
 ## staged reorganization policy

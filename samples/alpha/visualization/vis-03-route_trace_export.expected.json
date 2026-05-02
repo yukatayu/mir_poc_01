@@ -2,25 +2,63 @@
   "sample_id": "VIS-03",
   "sample_name": "route_trace_export",
   "family": "visualization",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 4 / 5",
   "stage": "Stage E",
   "kind": "positive",
   "purpose": "envelope route",
   "expected": "view",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_e_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_alpha_evidence",
+    "runner": "python3 scripts/alpha_visualization_samples.py run VIS-03 --format json",
+    "note": "Composes existing alpha/helper/runtime JSON evidence without parsing samples/alpha/visualization/*.mir or freezing a final public viewer API."
   },
+  "component_refs": [
+    {
+      "family": "network-docker",
+      "sample_id": "NET-02",
+      "command": "python3 scripts/alpha_network_docker_e2e.py run NET-02 --format json"
+    }
+  ],
+  "evidence_summary": {
+    "route_hop_count": 2,
+    "route_hop_ids": [
+      "net-02_request#1",
+      "delivery_receipt:net-02_request#1"
+    ],
+    "redaction_policies": [
+      "observer_safe_route_trace"
+    ],
+    "retention_scopes": [
+      "helper_local_ephemeral"
+    ],
+    "auth_lane_present_values": [
+      false
+    ],
+    "transport_medium": "docker_bridge_tcp",
+    "transport_surface": "docker_compose_tcp",
+    "visualization_surface": "observer_route_trace_json"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "route trace export survives a real world/participant Docker Compose boundary",
+    "the transport seam remains inspectable without collapsing witness or capability lanes"
+  ],
+  "what_it_does_not_prove": [
+    "no final public viewer API",
+    "no privileged admin-full visibility surface",
+    "no production WAN/session/replay semantics"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "viewer-specific rendering contract",
+    "place graph export",
+    "admin-full visualization path"
   ]
 }

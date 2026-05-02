@@ -47,11 +47,11 @@
   "what_it_does_not_prove": [
     "distributed save/load runtime",
     "Z-cycle handling completion",
-    "dedicated alpha visualization/devtools runner"
+    "Stage E completion"
   ],
   "deferred": [
     "CUT-11/12 Z-cycle widening",
     "CUT-16/17 stale witness/membership load verdict split",
-    "Stage F completion after dedicated alpha devtools bridge"
+    "Stage F completion after remaining Stage-E rows close"
   ]
 }

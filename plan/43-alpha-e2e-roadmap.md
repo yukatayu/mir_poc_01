@@ -42,9 +42,10 @@ final public product completion ではない。
 ### Stage E
 
 - visualization / devtools
-- first actualized subset is now a thin integrated JSON evidence surface over existing component floors:
-  `LR-01.event_dag`, `LI-01.post_attach_trace_rows`, `NET-02.observer_route_trace`, and `AV-08.representation_state`
-- this is not yet a dedicated alpha visualization family runner or Stage E completion
+- first actualized subset is now a dedicated Stage-E subset runner `scripts/alpha_visualization_samples.py` over existing alpha/helper/runtime evidence:
+  `VIS-01/03/06/07/08/10/11`
+- current subset is grounded in `LR-01.event_dag`, `NET-02.observer_route_trace`, `P16-VIEW-02`, `AV-08.representation_state`, `NET-07.observer_route_trace`, `LI-01/02.post_attach_trace_rows`, and `LI-01/05` retention-policy evidence
+- `VIS-02/04/05/09/12` remain planned-only, so this is still not Stage E completion
 
 ### Stage F
 
@@ -130,6 +131,10 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_avatar_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
   `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
+- current Stage E subset floor:
+  `python3 scripts/alpha_visualization_samples.py check-all --format json`
+  `python3 scripts/alpha_visualization_samples.py closeout --format json`
+  `python3 -m unittest scripts.tests.test_alpha_visualization_samples`
 - current Phase 6 first-cut floor:
   `cargo test -p mirrorea-core --test runtime_substrate`
   `cargo test -p mir-runtime --test alpha_cut_save_load_runtime`
@@ -159,12 +164,12 @@ Phase 1+ runtime floor:
 - do not call Docker canary production transport
 - do not call local save distributed save/load
 - do not treat checker-backed invalid distributed cut rejection as distributed save/load runtime completion
-- do not call the current Stage-E/Stage-F bridge runner dedicated alpha visualization/devtools completion
+- do not call the current Stage-E subset runner Stage E completion
+- do not call the current Stage-F bridge runner dedicated alpha visualization/devtools completion
 - do not call Reversed Library implemented during Spaces alpha work
 
 ## next package
 
 - after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
-- the next reopen points after `P-A0-12` are:
-  - `P-A0-13` dedicated alpha visualization/devtools bridge
-  - remaining CUT widening after the local-only positive bridge
+- after `P-A0-13`, the next reopen point is:
+  - `P-A0-14` remaining CUT widening after the local-only positive bridge

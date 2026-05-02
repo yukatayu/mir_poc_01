@@ -6,6 +6,7 @@
 - `python3 scripts/alpha_e2e_samples.py` actualizes `E2E-01/02/03/04/05/06/07/09/10` as a thin integrated bridge over already-actualized Stage B/C/D/F subset floors.
 - `E2E-08` Reversed Library seed remains planned-only.
 - This family is still not an active runnable root, and Stage F remains incomplete.
+- `scripts/alpha_visualization_samples.py` now actualizes the dedicated Stage-E subset runner, but `VIS-02/04/05/09/12` still remain open, so Stage F completion is still blocked.
 
 ## Rows
 
@@ -32,7 +33,7 @@
   - planned-only rows: `E2E-08`
 - `E2E-07` is checker-backed invalid distributed cut evidence only. It must not be read as distributed save/load runtime completion.
 - Promotion to the repo's active runnable root still requires dedicated validation commands, report evidence, and snapshot updates beyond this alpha-local bridge.
-- dedicated alpha visualization/devtools remains the blocker for any future Stage F completion claim.
+- remaining Stage-E visualization/devtools rows and broader lifecycle widening remain the blocker for any future Stage F completion claim.
 
 ## Validation anchor for this package
 
@@ -48,6 +49,7 @@ cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- 
 cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout
 cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout
 python3 scripts/alpha_cut_save_load_samples.py check-all --format json
+python3 scripts/alpha_visualization_samples.py check-all --format json
 python3 scripts/alpha_network_docker_e2e.py check-all --format json
 python3 scripts/alpha_avatar_runtime_samples.py check-all --format json
 python3 scripts/alpha_e2e_samples.py run E2E-06 --format json
@@ -56,5 +58,6 @@ python3 scripts/alpha_e2e_samples.py closeout --format json
 python3 -m unittest \
   scripts.tests.test_alpha_cut_save_load_checker \
   scripts.tests.test_alpha_cut_save_load_samples \
+  scripts.tests.test_alpha_visualization_samples \
   scripts.tests.test_alpha_e2e_samples
 ```

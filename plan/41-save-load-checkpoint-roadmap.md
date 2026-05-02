@@ -87,5 +87,5 @@ distributed durable save/load completion ではない。
 
 ## next package
 
-- after `P-A0-12` local-only save/load positive bridge:
-  widen the remaining CUT family carefully via Z-cycle structure, stale witness/membership load verdict split, and membership-dependent dispatch closure without claiming distributed durable save/load
+- after `P-A0-13` dedicated Stage-E subset runner closeout:
+  `P-A0-14` widens the remaining CUT family carefully via Z-cycle structure, stale witness/membership load verdict split, and membership-dependent dispatch closure without claiming distributed durable save/load

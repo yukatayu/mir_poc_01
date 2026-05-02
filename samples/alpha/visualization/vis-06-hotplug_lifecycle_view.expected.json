@@ -2,25 +2,85 @@
   "sample_id": "VIS-06",
   "sample_name": "hotplug_lifecycle_view",
   "family": "visualization",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 4 / 5",
   "stage": "Stage E",
   "kind": "positive",
   "purpose": "request/verdict/activation",
   "expected": "view",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_e_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_alpha_evidence",
+    "runner": "python3 scripts/alpha_visualization_samples.py run VIS-06 --format json",
+    "note": "Composes existing alpha/helper/runtime JSON evidence without parsing samples/alpha/visualization/*.mir or freezing a final public viewer API."
   },
+  "component_refs": [
+    {
+      "family": "viewer-prototype",
+      "sample_id": "P16-VIEW-02",
+      "command": "python3 scripts/visual_debugger_viewer_samples.py run P16-VIEW-02 --format json"
+    }
+  ],
+  "evidence_summary": {
+    "panel_ids": [
+      "attach_lifecycle",
+      "turn_timeline",
+      "message_route",
+      "verification_summary",
+      "projection_view",
+      "membership_snapshot",
+      "verification_summary@2",
+      "detach_lifecycle"
+    ],
+    "telemetry_ids": [
+      "attach_activation#1",
+      "roll_request#1",
+      "handoff_notice#1",
+      "late_join_membership#1",
+      "late_join_history#1",
+      "reset_model_check#1",
+      "detach_boundary#1"
+    ],
+    "catalog_keys": [
+      "hotplug_scope",
+      "hotplug_view_ids",
+      "hotplug_telemetry_row_ids",
+      "signature_lanes",
+      "layer_signature_lanes"
+    ],
+    "retention_scopes": [
+      "helper_local_ephemeral"
+    ],
+    "redaction_policies": [
+      "counterexample_shape_summary_only",
+      "lifecycle_summary_only",
+      "omit_auth_evidence_payload",
+      "pending_turn_order_only",
+      "projection_summary_only",
+      "published_history_only",
+      "verification_summary_only"
+    ],
+    "visualization_surface": "typed_viewer_bundle_json"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "attach, membership, and detach surfaces are already bundled into a typed lifecycle view",
+    "lifecycle visualization keeps redaction and retention explicit instead of treating debug output as untyped leakage"
+  ],
+  "what_it_does_not_prove": [
+    "no completed detach runtime",
+    "no final public hot-plug lifecycle API",
+    "no durable migration or distributed activation ordering completion"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "completed detach runtime semantics",
+    "final public lifecycle service contract",
+    "distributed activation ordering visualization"
   ]
 }

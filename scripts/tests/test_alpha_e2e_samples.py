@@ -37,6 +37,10 @@ class AlphaE2ESamplesTests(unittest.TestCase):
             payload["validation_floor"],
         )
         self.assertIn(
+            "python3 scripts/alpha_visualization_samples.py check-all --format json",
+            payload["validation_floor"],
+        )
+        self.assertIn(
             "CUT-05 -> E2E-07", payload["negative_coverage_refs"]["invalid_cut_reject"]
         )
         self.assertIn("CUT-04 -> E2E-06", payload["positive_coverage_refs"]["local_save_load"])

@@ -2,25 +2,61 @@
   "sample_id": "VIS-10",
   "sample_name": "on_demand_trace_only",
   "family": "visualization",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 4 / 5",
   "stage": "Stage E",
   "kind": "positive/perf",
   "purpose": "tracing only after attach",
   "expected": "no trace before attach",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_e_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_alpha_evidence",
+    "runner": "python3 scripts/alpha_visualization_samples.py run VIS-10 --format json",
+    "note": "Composes existing alpha/helper/runtime JSON evidence without parsing samples/alpha/visualization/*.mir or freezing a final public viewer API."
   },
+  "component_refs": [
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-01",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- debug-admin"
+    },
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-02",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- debug-non-admin"
+    }
+  ],
+  "evidence_summary": {
+    "pre_attach_trace_count": 0,
+    "post_attach_trace_count": 2,
+    "rejected_attach_trace_count": 0,
+    "trace_mode": "on_demand",
+    "redaction_level": "subject_and_payload_redacted",
+    "retention_scope": "helper_local_ephemeral",
+    "active_layers_after": [
+      "debug_trace_layer"
+    ],
+    "visualization_surface": "post_attach_trace_rows"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "trace rows stay absent before activation and appear only after accepted attach",
+    "the current alpha debug layer remains on-demand, redacted, and authority-gated"
+  ],
+  "what_it_does_not_prove": [
+    "no detach-stops-trace runtime completion",
+    "no final public debugging ABI",
+    "no always-on observer tracing policy"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "post-detach trace shutdown runtime",
+    "final public trace viewer contract",
+    "distributed trace transport"
   ]
 }

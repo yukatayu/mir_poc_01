@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-02 10:39 JST
+最終更新: 2026-05-02 11:38 JST
 
 ## この文書について
 
@@ -23,19 +23,19 @@ Place をまたいで実行・通信・検証・可視化できる
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B 35% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 20% thin integrated devtools bridge, Stage F 50% thin integrated alpha demo bridge
+  Stage B 35% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 45% dedicated subset devtools bridge, Stage F 55% thin integrated alpha demo bridge
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
 - Current package:
-  `P-A0-13` dedicated alpha visualization/devtools bridge
+  `P-A0-14` remaining CUT widening after the local-only positive bridge
 - Current status:
-  `P-A0-12` は current repo state で local-only save/load positive bridge を actualize し、`scripts/alpha_cut_save_load_samples.py` が `samples/alpha/cut-save-load/CUT-04`、`scripts/alpha_e2e_samples.py` が `samples/alpha/e2e/E2E-06` を non-public runtime-backed row として検証可能にした。current cut は room-local runtime savepoint、typed runtime snapshot restore、saved owner marker / visible-history frontier re-check、resumed dispatch、checker-backed invalid distributed-cut non-claim に限る。distributed save/load、durable cut、Z-cycle handling completion、dedicated alpha visualization/devtools family、therefore Stage F completion itself, are still not claimed.
+  `P-A0-13` は current repo state で dedicated Stage-E subset runner `scripts/alpha_visualization_samples.py` を actualize し、`samples/alpha/visualization/` の `VIS-01/03/06/07/08/10/11` を existing alpha/helper/runtime JSON evidence の thin bundle として検証可能にした。current cut は event DAG export、route trace export、hot-plug lifecycle view、fallback degradation view、observer-redacted view、on-demand trace-only、retention-policy-enforced に限る。`VIS-02/04/05/09/12`、Stage E completion、therefore Stage F completion itself, are still not claimed.
 - Validation freshness:
-  2026-05-02 10:39 JST に `P-A0-12` closeout floor を rerun し、`cargo test -p mirrorea-core --test runtime_substrate` 16 tests、`cargo test -p mir-runtime --test alpha_local_runtime --test alpha_cut_save_load_runtime` 4 tests、`cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume`、`python3 scripts/alpha_cut_save_load_samples.py check-all --format json` sample_count 1 all-pass、`python3 scripts/alpha_e2e_samples.py run E2E-06 --format json`、`python3 scripts/alpha_e2e_samples.py check-all --format json` sample_count 9 all-pass with planned-only `E2E-08`、`python3 scripts/alpha_e2e_samples.py closeout --format json`、`python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_e2e_samples` 16 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した
+  2026-05-02 11:38 JST に `P-A0-13` closeout floor を rerun し、`cargo test -p mirrorea-core --test runtime_substrate` 16 tests、`cargo test -p mir-runtime --test alpha_local_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime --test alpha_cut_save_load_runtime` 27 tests、`python3 scripts/alpha_visualization_samples.py check-all --format json` sample_count 7 all-pass、`python3 scripts/alpha_visualization_samples.py closeout --format json` with `stage_e_complete: false`、`python3 scripts/visual_debugger_viewer_samples.py check-all --format json` bundle_count 5 all-pass、`python3 scripts/alpha_e2e_samples.py check-all --format json` sample_count 9 all-pass with planned-only `E2E-08`、`python3 scripts/alpha_e2e_samples.py closeout --format json` with `stage_f_complete: false`、`python3 -m unittest scripts.tests.test_alpha_visualization_samples scripts.tests.test_alpha_e2e_samples` 13 tests、`python3 -m unittest scripts.tests.test_validate_docs` 11 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した
 - Current blockers:
-  dedicated alpha visualization/devtools bridge、remaining CUT rows / load non-resurrection split / Z-cycle widening、route rebinding / partition / medium-change widening、completed lifecycle/detach/migration ordering、final public boundary は still later line にある
+  remaining Stage-E rows `VIS-02/04/05/09/12`、remaining CUT widening / load non-resurrection split / Z-cycle structure / membership-dependent dispatch closure、route rebinding / partition / medium-change widening、completed lifecycle/detach/migration ordering、final public boundary は still later line にある
 - Next autonomous package:
-  `P-A0-13` dedicated alpha visualization/devtools bridge
+  `P-A0-14` remaining CUT widening after the local-only positive bridge
 - User-decision blockers:
   public `U1` gate、first network scope、avatar compatibility first target、native binary policy、save/load initial scope、UI target、final catalog breadth は still later
 
@@ -52,7 +52,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
 - Current reopened alpha-local lane:
-  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を reopen しています。`specs/13..17`、`plan/39..43`、`samples/alpha/` に加え、`crates/mir-runtime/src/alpha_local_runtime.rs` により Stage A floor を崩さずに Stage B local-runtime narrow cut と local-only save/load bridge を、`scripts/alpha_cut_save_load_samples.py` により `CUT-04` dedicated validation floor を、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs` により Stage D layer-insertion narrow cut を、`crates/mir-runtime/src/alpha_network_runtime.rs` と `scripts/alpha_network_docker_e2e.py` により Stage C network / Docker narrow cut を、`crates/mir-runtime/src/alpha_avatar_runtime.rs` と `scripts/alpha_avatar_runtime_samples.py` により Phase 7 runtime-private package/avatar manifest-admission cut を、`scripts/alpha_e2e_samples.py` により Phase 8 thin integrated bridge cut と `E2E-06` local save/load continue row を actualize しました。current package はここから `P-A0-13` dedicated alpha visualization/devtools bridge へ進みます。
+  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を reopen しています。`specs/13..17`、`plan/39..43`、`samples/alpha/` に加え、`crates/mir-runtime/src/alpha_local_runtime.rs` により Stage A floor を崩さずに Stage B local-runtime narrow cut と local-only save/load bridge を、`scripts/alpha_cut_save_load_samples.py` により `CUT-04` dedicated validation floor を、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs` により Stage D layer-insertion narrow cut を、`crates/mir-runtime/src/alpha_network_runtime.rs` と `scripts/alpha_network_docker_e2e.py` により Stage C network / Docker narrow cut を、`crates/mir-runtime/src/alpha_avatar_runtime.rs` と `scripts/alpha_avatar_runtime_samples.py` により Phase 7 runtime-private package/avatar manifest-admission cut を、`scripts/alpha_e2e_samples.py` により Phase 8 thin integrated bridge cut と `E2E-06` local save/load continue row を、`scripts/alpha_visualization_samples.py` により Stage E subset `VIS-01/03/06/07/08/10/11` を actualize しました。current package はここから `P-A0-14` remaining CUT widening after the local-only positive bridge へ進みます。
 - Public-boundary open gate:
   actual `U1` commitment は引き続き別 gate です。installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision は alpha-local package closeoutだけでは閉じません。
 - Parallel maintenance lane:
@@ -87,7 +87,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | layer compatibility alpha line | 78% | 48% | 46% | 着手可能 | `specs/14` + `samples/alpha/contract-variance/` に加え、negative-static checker floor と `samples/alpha/layer-insertion/LI-01..05` / Rust layer-insertion floor が actualize 済み。full theorem discharge / detach family は still later |
 | save/load / consistent-cut alpha line | 72% | 38% | 50% | 着手可能 | `specs/15` + `samples/alpha/cut-save-load/` に加え、`CUT-05/07/08/09/13/14/15` の sidecar-driven synthetic checker floor と `CUT-04` local-only save/load positive bridge が actualize 済み。distributed save/load / Z-cycle / non-resurrection widening は still later |
 | runtime package / avatar alpha line | 82% | 60% | 58% | 着手可能 | `specs/16` と `samples/alpha/avatar-runtime/` / `hotplug-runtime/` に加え、`alpha_avatar_runtime` cargo/example/script floor が `AV-01/02/06/08/09` と `HP-11/12/15` を actualize。final API / native execution / detach lifecycle は still later |
-| Mirrorea Spaces alpha integration | 76% | 64% | 62% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` に加え、`P-A0-07` local-runtime floor、`P-A0-08` layer-insertion floor、`P-A0-09` network / Docker floor、`P-A0-10` avatar/package floor、`P-A0-11` thin integrated bridge runner、`P-A0-12` local save/load positive bridge を actualize。dedicated alpha visualization/devtools と Stage F completion remain later |
+| Mirrorea Spaces alpha integration | 78% | 68% | 66% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` に加え、`P-A0-07` local-runtime floor、`P-A0-08` layer-insertion floor、`P-A0-09` network / Docker floor、`P-A0-10` avatar/package floor、`P-A0-11` thin integrated bridge runner、`P-A0-12` local save/load positive bridge、`P-A0-13` dedicated Stage-E subset runner を actualize。remaining `VIS-02/04/05/09/12`、remaining CUT widening、Stage F completion remain later |
 
 ## large stage map
 
@@ -97,8 +97,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | B | 35% | alpha 0.5 local runtime | first Rust local-runtime floor + local-only save/load bridge actualized | `specs/13..17`、`plan/39..43`、`samples/alpha/local-runtime/`、`samples/alpha/cut-save-load/`、`crates/mir-runtime/src/alpha_local_runtime.rs`、`scripts/alpha_cut_save_load_samples.py` | integrated local runtime completion / distributed save-load completion |
 | C | 35% | alpha 0.7 transport | first Rust network / Docker floor actualized | `samples/alpha/network-docker/`、`crates/mir-runtime/src/alpha_network_runtime.rs`、example `mirrorea_alpha_network_runtime`、`scripts/alpha_network_docker_e2e.py` | production WAN / durable replay / partition completion / final transport ABI |
 | D | 35% | alpha 0.8 hot-plug lifecycle | attach-time layer floor and package-admission subset actualized | `samples/alpha/layer-insertion/`、`samples/alpha/hotplug-runtime/`、`samples/alpha/avatar-runtime/`、`P19..P21` carrier/runtime floor、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs`、`crates/mir-runtime/src/alpha_avatar_runtime.rs` | completed lifecycle / detach / migration / final ABI |
-| E | 20% | alpha 0.9 devtools | thin integrated JSON evidence surfaces actualized | `samples/alpha/visualization/` scaffold、viewer prototype inventory、`alpha_e2e_samples.py` の event/trace/fallback bridge evidence | dedicated alpha visualization family runner / final viewer API / telemetry service |
-| F | 50% | alpha 1 Spaces alpha | thin integrated bridge + local save/load continue actualized; completion still blocked | `samples/alpha/e2e/` thin bridge runner、`scripts/alpha_cut_save_load_samples.py`、Sugoroku + local-runtime + layer-insertion + network/Docker + avatar/package requirements + checker-backed invalid distributed-cut non-claim | dedicated alpha devtools、distributed save/load completion、full VRChat / Reversed Library completion |
+| E | 45% | alpha 0.9 devtools | dedicated Stage-E subset runner actualized; completion still partial | `samples/alpha/visualization/`、`scripts/alpha_visualization_samples.py`、viewer prototype inventory、`LR-01` / `NET-02` / `P16-VIEW-02` / `AV-08` / `NET-07` / `LI-01/02` / `LI-01/05` evidence | remaining `VIS-02/04/05/09/12`、final viewer API、telemetry service |
+| F | 55% | alpha 1 Spaces alpha | thin integrated bridge + local save/load continue + Stage-E subset runner actualized; completion still blocked | `samples/alpha/e2e/` thin bridge runner、`scripts/alpha_visualization_samples.py`、`scripts/alpha_cut_save_load_samples.py`、Sugoroku + local-runtime + layer-insertion + network/Docker + avatar/package requirements + checker-backed invalid distributed-cut non-claim | remaining Stage-E rows、distributed save/load completion、full VRChat / Reversed Library completion |
 | G | 0% | Spaces product expansion | future | placeholder avatar/package/ecosystem roadmap | alpha scope |
 | H | 0% | Atlas | future | multi-world / portal / relation layer only as later roadmap | alpha scope |
 | I | 0% | Reversed Library | future | knowledge-space flagship later layer | alpha scope |
@@ -112,10 +112,10 @@ Place をまたいで実行・通信・検証・可視化できる
 | theorem / model-check / Lean | current scope close | model-check second line、small Lean proof、generated stub | full domain discharge と production binding |
 | shared-space runtime samples | current scope close | attach / membership / handoff / late join / follow / fallback / reset safety | real transport、durable distributed commit、public runtime API |
 | typed external / network / projection preview | first cuts closed | host-boundary preview、NET canaries、projection preview、generated bridge manifest | final host schema、real transport、final emitted executable family |
-| verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy widening contract、final viewer / verifier API、retention policy、telemetry service |
+| verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、`VIS-01/03/06/07/08/10/11` Stage-E subset runner、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy widening contract、final viewer / verifier API、remaining `VIS-02/04/05/09/12`、telemetry service |
 | hot-plug runtime package | first attach-time layer floor actualized | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, `LI-01..05` attach-time layer floor, three later-family boundaries | detach runtime, rollback protocol, durable migration engine, distributed activation ordering, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
-| alpha-local theory freeze / runtime prep | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker first cuts、`P-A0-07` Rust local-runtime floor、`P-A0-08` Rust layer-insertion floor、`P-A0-09` Rust network / Docker floor、`P-A0-10` avatar/package floor、`P-A0-11` thin integrated bridge runner、`P-A0-12` local save/load positive bridge | dedicated alpha devtools、remaining CUT widening、Stage F completion |
+| alpha-local theory freeze / runtime prep | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker first cuts、`P-A0-07` Rust local-runtime floor、`P-A0-08` Rust layer-insertion floor、`P-A0-09` Rust network / Docker floor、`P-A0-10` avatar/package floor、`P-A0-11` thin integrated bridge runner、`P-A0-12` local save/load positive bridge、`P-A0-13` dedicated Stage-E subset runner | remaining CUT widening、remaining `VIS-02/04/05/09/12`、Stage F completion |
 
 ## closed package memory and active gate
 
@@ -135,7 +135,9 @@ Place をまたいで実行・通信・検証・可視化できる
 | `P-A0-08` layer insertion first cut | closed | first Rust attach-time layer-insertion floor | completed lifecycle / detach / migration / final ABI と混同しない |
 | `P-A0-09` network / Docker first cut | closed | first Rust Stage-C network / Docker floor | production WAN / replay / partition completion / final transport ABI と混同しない |
 | `P-A0-10` runtime package / avatar first cut | closed | first runtime-private package/avatar manifest-admission floor | final avatar API / native execution / detach lifecycle / final package ABI と混同しない |
+| `P-A0-11` thin integrated bridge runner | closed | first thin integrated Stage-F bridge floor | Stage F completion / dedicated alpha devtools completion と混同しない |
 | `P-A0-12` local save/load positive bridge | closed | room-local runtime savepoint / restored snapshot / resumed dispatch floor | distributed save/load / durable cut / Z-cycle completion と混同しない |
+| `P-A0-13` dedicated alpha visualization/devtools bridge | closed | dedicated Stage-E subset runner for `VIS-01/03/06/07/08/10/11` | Stage E completion / Stage F completion / final viewer API と混同しない |
 | `U1` actual commitment | open | packaging / host target / shipped surface / final catalog breadth を actual choice へ進める | user-facing decision なしに public freeze しない |
 | docs / validation maintenance | active | stale wording removal、report sync、validation rerun、formatting cleanup | success claim は fresh validation 後に限る |
 
@@ -177,10 +179,13 @@ Place をまたいで実行・通信・検証・可視化できる
   `cargo test -p mirrorea-core --test runtime_substrate`
   `cargo test -p mir-runtime --test alpha_cut_save_load_runtime`
   `python3 scripts/alpha_cut_save_load_samples.py check-all --format json`
+  `python3 scripts/alpha_visualization_samples.py check-all --format json`
+  `python3 scripts/alpha_visualization_samples.py closeout --format json`
+  `python3 scripts/visual_debugger_viewer_samples.py check-all --format json`
   `python3 scripts/alpha_e2e_samples.py run E2E-06 --format json`
   `python3 scripts/alpha_e2e_samples.py check-all --format json`
   `python3 scripts/alpha_e2e_samples.py closeout --format json`
-  `python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_e2e_samples`
+  `python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_visualization_samples scripts.tests.test_alpha_e2e_samples`
 - Rust crates:
   `cargo test -p mir-ast`
   `cargo test -p mirrorea-core`
@@ -199,6 +204,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-02 11:38 JST — `P-A0-13` dedicated alpha visualization/devtools bridge closeout floor を実行した。`runtime_substrate` 16 tests、`alpha_local_runtime` + `alpha_layer_insertion_runtime` + `alpha_network_runtime` + `alpha_avatar_runtime` + `alpha_cut_save_load_runtime` 27 tests、`alpha_visualization_samples.py check-all --format json` 7/7、`alpha_visualization_samples.py closeout --format json`、`visual_debugger_viewer_samples.py check-all --format json` 5/5、`alpha_e2e_samples.py check-all --format json` 9/9、`alpha_e2e_samples.py closeout --format json`、Python unit 13 tests、`test_validate_docs` 11 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass。`VIS-01/03/06/07/08/10/11` dedicated Stage-E subset runner は actualize 済みで、current package は `P-A0-14` remaining CUT widening after the local-only positive bridge へ進む。remaining `VIS-02/04/05/09/12`、distributed save/load / durable cut / Z-cycle completion / Stage F completion は引き続き未claim。
 - 2026-05-02 10:39 JST — `P-A0-12` local save/load positive bridge closeout floor を実行した。`runtime_substrate` 16 tests、`alpha_local_runtime` + `alpha_cut_save_load_runtime` 4 tests、Rust `save-load-resume` example 1 run、`alpha_cut_save_load_samples.py check-all --format json` 1/1、`alpha_e2e_samples.py run E2E-06 --format json`、`alpha_e2e_samples.py check-all --format json` 9/9、`alpha_e2e_samples.py closeout --format json`、Python unit 16 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass。`CUT-04` room-local runtime savepoint bridge と `E2E-06` integrated continue row は actualize 済みで、current package は `P-A0-13` dedicated alpha visualization/devtools bridge へ進む。distributed save/load / durable cut / Z-cycle completion / Stage F completion は引き続き未claim。
 - 2026-05-02 10:09 JST — `P-A0-11` thin integrated bridge closeout floor を実行した。`mir-runtime` alpha local/layer/network/avatar floors 26 tests、Rust local runtime example 1 run、Rust layer closeout example 1 run、Rust network closeout example 1 run、Rust avatar closeout example 1 run、Docker Compose config render、`alpha_network_docker_e2e.py check-all --format json` 6/6、`alpha_avatar_runtime_samples.py check-all --format json` 8/8、`alpha_e2e_samples.py check-all --format json` 8/8、`alpha_e2e_samples.py closeout --format json`、Python unit 22 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass。`E2E-01/02/03/04/05/07/09/10` の thin integrated bridge floor は actualize 済みで、`E2E-06` local save/load positive path と dedicated alpha devtools family は未了のため current package は `P-A0-12` local save/load positive bridge へ進む。
 - 2026-05-02 08:54 JST — `P-A0-09` network / Docker first cut closeout floor を実行した。`mirrorea-core` carriers 12 tests、`mir-runtime` hot-plug skeleton 8 tests、`alpha_local_runtime` 3 tests、`alpha_layer_insertion_runtime` 6 tests、`alpha_network_runtime` 7 tests、Rust local-runtime examples 2 runs、Rust layer-insertion closeout example 1 run、Rust network closeout example 1 run、Docker `check-all` 6/6、source hierarchy 60/60、docs scaffold、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass。`NET-02/03/04/05/07/09` の first non-public Rust Stage-C network / Docker floor は actualize 済みで、current package は `P-A0-10` runtime package / avatar skeleton へ進む。

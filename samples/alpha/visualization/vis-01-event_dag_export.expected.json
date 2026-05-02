@@ -2,25 +2,62 @@
   "sample_id": "VIS-01",
   "sample_name": "event_dag_export",
   "family": "visualization",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 4 / 5",
   "stage": "Stage E",
   "kind": "positive",
   "purpose": "event graph",
   "expected": "JSON/HTML view",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_e_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_alpha_evidence",
+    "runner": "python3 scripts/alpha_visualization_samples.py run VIS-01 --format json",
+    "note": "Composes existing alpha/helper/runtime JSON evidence without parsing samples/alpha/visualization/*.mir or freezing a final public viewer API."
   },
+  "component_refs": [
+    {
+      "family": "local-runtime",
+      "sample_id": "LR-01",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku"
+    }
+  ],
+  "evidence_summary": {
+    "event_dag_scope": "report_local_event_dag_export_hook",
+    "event_dag_node_count": 4,
+    "event_dag_edge_count": 3,
+    "event_ids": [
+      "roll_commit#1",
+      "publish_roll#1",
+      "witness_draw_pub#1",
+      "handoff_turn#1"
+    ],
+    "edge_relations": [
+      "publication_order",
+      "witness_order",
+      "handoff_order"
+    ],
+    "current_owner": "Bob",
+    "visualization_surface": "event_dag_json"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "the alpha local runtime already exposes a typed event DAG JSON surface",
+    "roll, publish, witness, and handoff order remain explicit in the exported graph"
+  ],
+  "what_it_does_not_prove": [
+    "no final public HTML viewer",
+    "no place graph or witness timeline completion",
+    "no network or distributed visualization completion"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "final viewer rendering contract",
+    "dedicated place graph export",
+    "first-class witness timeline carrier"
   ]
 }

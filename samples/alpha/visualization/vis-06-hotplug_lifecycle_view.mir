@@ -1,11 +1,11 @@
-# Alpha-0 planned skeleton sample.
+# Alpha-0 thin-runner sample marker.
 # ID: VIS-06
 # Family: visualization
 # Kind: positive
 # Purpose: request/verdict/activation
 # Expected: view
-# Status: planned-skeleton only; not consumed by current active runners.
-# This file is a source-ish placeholder for future checker/runtime integration.
+# Status: implemented-thin-runner via `scripts/alpha_visualization_samples.py`;
+# this file remains source-ish and is not parsed by the current runner.
 
 module PlannedMirroreaAlpha.Visualization.HotplugLifecycleView
 
@@ -13,5 +13,5 @@ module PlannedMirroreaAlpha.Visualization.HotplugLifecycleView
 # - sample_id: VIS-06
 # - goal: request/verdict/activation
 # - expected outcome: view
-# - exact executable syntax / checker/runtime carrier remains deferred.
-
+# - current evidence anchor: `P16-VIEW-02`
+# - exact executable syntax / completed detach runtime remain deferred.

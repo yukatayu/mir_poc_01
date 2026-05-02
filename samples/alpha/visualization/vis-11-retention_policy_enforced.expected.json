@@ -2,25 +2,70 @@
   "sample_id": "VIS-11",
   "sample_name": "retention_policy_enforced",
   "family": "visualization",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 4 / 5",
   "stage": "Stage E",
   "kind": "negative/positive",
   "purpose": "telemetry retention",
   "expected": "no over-retention",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_e_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_alpha_evidence",
+    "runner": "python3 scripts/alpha_visualization_samples.py run VIS-11 --format json",
+    "note": "Composes existing alpha/helper/runtime JSON evidence without parsing samples/alpha/visualization/*.mir or freezing a final public viewer API."
   },
+  "component_refs": [
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-01",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- debug-admin"
+    },
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-05",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- incompatible"
+    }
+  ],
+  "evidence_summary": {
+    "observed_retention_scopes": [
+      "helper_local_ephemeral"
+    ],
+    "accepted_retention_scope": "helper_local_ephemeral",
+    "rejected_retention_scope": "session_cache",
+    "rejected_reason_refs": [
+      "precondition_strengthened",
+      "postcondition_weakened",
+      "call_capability_strengthened",
+      "provided_capabilities_shrunk",
+      "provided_interface_shrunk",
+      "observation_labels_widened",
+      "redaction_weakened",
+      "retention_scope_widened",
+      "trace_mode_would_overobserve"
+    ],
+    "over_retention_detected": false,
+    "over_retention_rejected": true,
+    "visualization_surface": "layer_retention_policy_json"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "accepted debug traces stay within the declared helper-local retention floor",
+    "a widened retention request is rejected before activation instead of silently over-retaining telemetry"
+  ],
+  "what_it_does_not_prove": [
+    "no final public retention service",
+    "no multi-tenant storage or deletion workflow",
+    "no global telemetry backend completion"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "final retention policy service",
+    "multi-tenant storage and deletion semantics",
+    "global telemetry backend"
   ]
 }
