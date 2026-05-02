@@ -29,12 +29,12 @@ Notes:
   Stage B 40% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 60% widened subset devtools bridge, Stage F 60% thin integrated alpha demo bridge
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
-- Current package:
-  `P-A0-17` accept-side evidence carrier for positive LIF/VAR rows is closeout-complete in current repo state
+- Package status:
+  `P-A0-17` accept-side evidence carrier for positive LIF/VAR rows is the last closed package in current repo state; no follow-on package is promoted yet
 - Current status:
   `P-A0-17` closeout actualized `LIF-02/03/04` and `VAR-01/04/06` as scope-confined non-public helper-local synthetic acceptance-floor rows, while keeping `LIF-01/05..08` and `VAR-02/03/05/07/09/10/15` on the separate negative checker floor. `samples/alpha/` is still not an active runnable root; `CUT-10/12/16`, `VIS-04/09/12`, `E2E-08`, and the remaining runtime/remote/layer-sensitive positive rows remain non-completion lines.
 - Next package:
-  no safe `P-A0-18` is promoted yet; the next reopen point is a review of whether any further positive row can use the helper-local acceptance schema without new runtime / remote / layer / adapter semantics
+  no safe `P-A0-18` is promoted yet; the next reopen point is either proof that a further positive row fits the current helper-local acceptance schema as-is, or a narrower new carrier decision that does not overclaim runtime / remote / layer / adapter semantics
 - Current alpha blocker:
   remaining Stage-E rows `VIS-04/09/12`, remaining CUT-local blocked rows `CUT-10/12/16`, remaining positive rows `LIF-11/13/15` + `VAR-08/11/13/14`, and runnable parser-front-door execution are still pending
 

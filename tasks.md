@@ -69,12 +69,12 @@
   Stage B 40% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 60% widened subset devtools bridge, Stage F 60% thin integrated alpha demo bridge
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
-- Current package:
-  `P-A0-17` accept-side evidence carrier for positive LIF/VAR rows is closeout-complete in current repo state
+- Package status:
+  `P-A0-17` accept-side evidence carrier for positive LIF/VAR rows is the last closed package in current repo state; no follow-on package is promoted yet
 - Current status:
   `P-A0-17` は current repo state で close 済み。`scripts/alpha_lifetime_fallback_acceptance.py` により `LIF-02/03/04`、`scripts/alpha_contract_variance_acceptance.py` により `VAR-01/04/06` が helper-local synthetic acceptance-floor rows として actualize され、positive side は `acceptance_scope = alpha-acceptance-floor`、negative side は `reason_codes_scope = alpha-static-floor` で別 carrier として閉じた。これは selected positive rows の helper-local acceptance schema に限るものであり、parser/runtime bridge、final public checker API、runtime/public variance enforcement 自体はまだ行っていない。
 - Next autonomous package:
-  no safe `P-A0-18` is promoted yet; the next reopen point is a review of whether any further positive row can use the helper-local acceptance schema without new runtime / remote / layer / adapter semantics
+  no safe `P-A0-18` is promoted yet; the next reopen point is either proof that a further positive row fits the current helper-local acceptance schema as-is, or a narrower new carrier decision that does not overclaim runtime / remote / layer / adapter semantics
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -140,7 +140,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-18` acceptance-floor widening review for remaining positive rows | repo | blocked on new semantics boundary | prove a further row fits the helper-local acceptance schema without new runtime / remote / layer / adapter semantics |
+| 1 | post-`P-A0-17` next-carrier decision for remaining positive rows | repo | blocked on new semantics boundary | either prove a further row fits the helper-local acceptance schema as-is, or define a narrower new carrier boundary before promoting any `P-A0-18` package |
 | 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
