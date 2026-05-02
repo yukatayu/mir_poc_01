@@ -2,25 +2,52 @@
   "sample_id": "E2E-09",
   "sample_name": "layer_auth_then_hotplug",
   "family": "e2e",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 8",
   "stage": "Stage F",
   "kind": "positive/negative",
   "purpose": "auth layer affects hot-plug",
   "expected": "correct contract handling",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_f_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_component_floors",
+    "runner": "python3 scripts/alpha_e2e_samples.py run E2E-09 --format json",
+    "note": "Composes existing alpha-local runtime/checker floors without parsing samples/alpha/e2e/*.mir."
   },
+  "component_refs": [
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-03",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- auth-update"
+    }
+  ],
+  "evidence_summary": {
+    "contract_mode": "explicit_contract_update",
+    "compatibility_path": "explicit_contract_update",
+    "contract_update_ref": "activation_cut#auth_contract_update",
+    "active_layers_after": [
+      "auth_gate_layer"
+    ],
+    "source_runtime_sample_ref": null
+  },
+  "terminal_outcome": "accepted_contract_update",
+  "reason_family": null,
+  "what_it_proves": [
+    "auth-layer insertion can proceed via explicit contract-update path rather than silent strengthening",
+    "integrated hot-plug evidence keeps contract variance explicit"
+  ],
+  "what_it_does_not_prove": [
+    "authorization product completion",
+    "distributed activation ordering",
+    "final public contract-update ABI"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "observer redaction visualization family",
+    "detach lifecycle completion"
   ]
 }

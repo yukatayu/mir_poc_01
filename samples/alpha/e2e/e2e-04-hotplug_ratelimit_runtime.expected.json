@@ -2,25 +2,54 @@
   "sample_id": "E2E-04",
   "sample_name": "hotplug_ratelimit_runtime",
   "family": "e2e",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 8",
   "stage": "Stage F",
   "kind": "positive/negative",
   "purpose": "rate-limit behavior",
   "expected": "Reject(RateLimited)",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_f_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_component_floors",
+    "runner": "python3 scripts/alpha_e2e_samples.py run E2E-04 --format json",
+    "note": "Composes existing alpha-local runtime/checker floors without parsing samples/alpha/e2e/*.mir."
   },
+  "component_refs": [
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-04",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- rate-limit"
+    }
+  ],
+  "evidence_summary": {
+    "compatibility_path": "transparent_overlay",
+    "runtime_preview_kind": "rate_limit_dispatch_preview",
+    "runtime_preview_terminal_outcome": "rejected",
+    "runtime_preview_reason_refs": [
+      "failure_row_within_declared_budget",
+      "rate_limit_budget_exhausted",
+      "RateLimited"
+    ],
+    "post_attach_trace_count": 0
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "declared-failure rate-limit behavior is preserved through the integrated attach path",
+    "layer insertion does not need to hide rejection reasons behind transport/runtime errors"
+  ],
+  "what_it_does_not_prove": [
+    "global scheduling/fairness behavior",
+    "detach/migration ordering",
+    "Stage F completion"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "capability-missing hot-plug row",
+    "activation-cut rollback-prevention row"
   ]
 }

@@ -42,10 +42,17 @@ final public product completion ではない。
 ### Stage E
 
 - visualization / devtools
+- first actualized subset is now a thin integrated JSON evidence surface over existing component floors:
+  `LR-01.event_dag`, `LI-01.post_attach_trace_rows`, `NET-02.observer_route_trace`, and `AV-08.representation_state`
+- this is not yet a dedicated alpha visualization family runner or Stage E completion
 
 ### Stage F
 
 - Mirrorea Spaces alpha demo
+- first actualized subset is now a thin integrated bridge runner `scripts/alpha_e2e_samples.py`:
+  `E2E-01/02/03/04/05/07/09/10`
+- `E2E-06` local save/load positive path and `E2E-08` upper-layer seed remain outside the actualized subset
+- current reading is `Stage F bridge actualized, Stage F completion still blocked`
 
 ## phase 0..8 packages
 
@@ -122,6 +129,16 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_avatar_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
   `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
+- current Phase 8 bridge floor:
+  `cargo test -p mir-runtime --test alpha_local_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
+  `python3 scripts/alpha_network_docker_e2e.py check-all --format json`
+  `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
+  `python3 scripts/alpha_e2e_samples.py check-all --format json`
+  `python3 scripts/alpha_e2e_samples.py closeout --format json`
 
 ## stop lines
 
@@ -129,8 +146,13 @@ Phase 1+ runtime floor:
 - do not call skeleton/planned sample rows runnable
 - do not call Docker canary production transport
 - do not call local save distributed save/load
+- do not treat checker-backed invalid distributed cut rejection as distributed save/load runtime completion
+- do not call the current Stage-E/Stage-F bridge runner dedicated alpha visualization/devtools completion
 - do not call Reversed Library implemented during Spaces alpha work
 
 ## next package
 
-- after `P-A0-10` runtime package / avatar first cut, the next reopen point is `P-A0-11` Mirrorea Spaces alpha demo closeout
+- after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
+- the next reopen points after `P-A0-11` are:
+  - `P-A0-12` local save/load positive bridge
+  - `P-A0-13` dedicated alpha visualization/devtools bridge

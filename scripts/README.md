@@ -29,12 +29,13 @@
   current-L2 authored source sample の formal-hook smoke から model-check carrier emit までを確認する repo-local conformance helper。production model checker binding ではない。
 - `new_report.py`
   report utility
-- alpha-specific parser/runtime runner family は still planned であり、まだ `scripts/` に actualize していない
+- alpha-specific helper/runner family は mixed 状態で actualize 済み
   - `alpha_lifetime_fallback_checker.py`、`alpha_contract_variance_checker.py`、`alpha_cut_save_load_checker.py` は current first checker-floor helper として actualize 済み
   - これは selected `samples/alpha/` sidecar の `expected_static.checked_reason_codes` と synthetic detached artifact を照合する non-public helper であり、shared support は `current_l2_family_checker_support.py` を reuse する。parser/runtime integration ではない
   - `P-A0-07` local-runtime first cut と `P-A0-08` layer-insertion first cut は `scripts/` ではなく `crates/mir-runtime` の `alpha_local_runtime` / `alpha_layer_insertion_runtime` modules, examples, and integration tests に actualize している。current sample identity anchors は `samples/alpha/local-runtime/` と `samples/alpha/layer-insertion/` だが、`.mir` files are still source-ish placeholders rather than parsed inputs
   - `P-A0-09` は `crates/mir-runtime/src/alpha_network_runtime.rs` と example `mirrorea_alpha_network_runtime` を主体にしつつ、thin Docker runner `alpha_network_docker_e2e.py` を `scripts/` に actualize した。これは `samples/alpha/network-docker/` の `NET-02/03/04/05/07/09` を narrow local-container / TCP bridge cut として検証するもので、helper-local `network_transport_samples.py` の canary familyを置き換えない
   - `P-A0-10` は `crates/mir-runtime/src/alpha_avatar_runtime.rs` と example `mirrorea_alpha_avatar_runtime` を主体にしつつ、thin runner `alpha_avatar_runtime_samples.py` を `scripts/` に actualize した。これは `samples/alpha/avatar-runtime/` の `AV-01/02/06/08/09` と `samples/alpha/hotplug-runtime/` の `HP-11/12/15` を runtime-private package/avatar admission floor として検証するもので、final avatar API / native execution / hot-plug lifecycle completion を主張しない
+  - `P-A0-11` は thin integrated bridge runner `alpha_e2e_samples.py` を `scripts/` に actualize した。これは `samples/alpha/e2e/` の `E2E-01/02/03/04/05/07/09/10` を既存 Stage B/C/D/F subset floor の composition として検証するもので、`E2E-06` local save/load positive path、dedicated alpha visualization/devtools family、Stage F completion を主張しない
 
 ### storage / env
 
@@ -60,6 +61,7 @@
 - `current_l2_*` helper 群は public installed CLI ではなく repo-local support surface として読む
 - `samples/alpha/` 向けの future runner 名は roadmap / sample matrix にだけ置き、実在しない command を current validation floor に入れない
 - `alpha_network_docker_e2e.py` は current actualized command だが、active clean-suite front door ではなく Alpha-0 package closeout evidence command として読む
+- `alpha_avatar_runtime_samples.py` と `alpha_e2e_samples.py` も active clean-suite front door ではなく Alpha-0 package closeout evidence command として読む
 - storage / env script は root setup と cleanup policy を helper 本体から分離する
 
 ## staged reorganization policy

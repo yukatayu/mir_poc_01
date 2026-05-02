@@ -2,25 +2,74 @@
   "sample_id": "E2E-01",
   "sample_name": "local_integrated_sugoroku",
   "family": "e2e",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 8",
   "stage": "Stage F",
   "kind": "positive",
   "purpose": "local runtime",
   "expected": "roll/publish/handoff",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_f_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_component_floors",
+    "runner": "python3 scripts/alpha_e2e_samples.py run E2E-01 --format json",
+    "note": "Composes existing alpha-local runtime/checker floors without parsing samples/alpha/e2e/*.mir."
   },
+  "component_refs": [
+    {
+      "family": "local-runtime",
+      "sample_id": "LR-01",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku"
+    }
+  ],
+  "evidence_summary": {
+    "dispatch_outcomes": [
+      "accepted"
+    ],
+    "visible_history_count": 2,
+    "event_dag_node_count": 4,
+    "event_dag_edge_count": 3,
+    "visualization_surface": "event_dag_json",
+    "message_envelope_lanes": [
+      "envelope_id",
+      "from_place",
+      "to_place",
+      "transport",
+      "transport_medium",
+      "transport_seam",
+      "payload_kind",
+      "payload_ref",
+      "principal_claim",
+      "auth_evidence",
+      "emitter_principal",
+      "membership_epoch",
+      "member_incarnation",
+      "freshness_checks",
+      "capability_requirements",
+      "authorization_checks",
+      "witness_refs",
+      "dispatch_outcome",
+      "notes"
+    ]
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "a single integrated local world/participant path exists in the Stage-B runtime floor",
+    "roll/publish/witness/handoff remain explicit in the event DAG export"
+  ],
+  "what_it_does_not_prove": [
+    "Docker/network execution",
+    "save/load completion",
+    "final Stage F completion"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "local save/load positive bridge",
+    "dedicated alpha visualization family runner",
+    "parser/front-door execution"
   ]
 }

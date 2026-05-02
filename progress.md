@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-02 09:45 JST
+最終更新: 2026-05-02 10:14 JST
 
 ## この文書について
 
@@ -23,19 +23,19 @@ Place をまたいで実行・通信・検証・可視化できる
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B 30% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 10% devtools scaffold, Stage F 20% alpha demo prerequisites
+  Stage B 30% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 20% thin integrated devtools bridge, Stage F 35% thin integrated alpha demo bridge
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
 - Current package:
-  `P-A0-11` Mirrorea Spaces alpha demo closeout
+  `P-A0-12` local save/load positive bridge
 - Current status:
-  `P-A0-10` は current repo state で close 済みであり、`crates/mir-runtime/src/alpha_avatar_runtime.rs`、example `mirrorea_alpha_avatar_runtime`、thin runner `scripts/alpha_avatar_runtime_samples.py`、and `samples/alpha/avatar-runtime/AV-01/02/06/08/09` + `samples/alpha/hotplug-runtime/HP-11/12/15` によって、first non-public runtime-private package/avatar manifest-admission floor を actualize した。current cut は placeholder/custom avatar acceptance、visible fallback、undeclared effect reject、unsigned/over-capability/revoked native package reject に限る。これは final avatar API、native binary execution、full VRM / VRChat / Unity compatibility、dependent-aware detach completion、save/load completion、Stage F completion claim ではない。
+  `P-A0-11` は current repo state で thin integrated bridge runner `scripts/alpha_e2e_samples.py` を actualize し、`samples/alpha/e2e/E2E-01/02/03/04/05/07/09/10` を already-actualized Stage B/C/D/F subset floor の composition として検証可能にした。current cut は local/runtime Place execution、Docker/container E2E、layer hot-plug、runtime-private avatar/package path、typed JSON evidence surface、checker-backed invalid distributed-cut non-claim に限る。`E2E-06` local save/load positive path、dedicated alpha visualization/devtools family、therefore Stage F completion itself, are still not claimed.
 - Validation freshness:
-  2026-05-02 09:43 JST に reviewer fix-up 後の `P-A0-10` avatar/package closeout floor を rerun し、`cargo test -p mirrorea-core --test carriers` 12 tests、`cargo test -p mir-runtime --test hotplug_runtime_skeleton --test alpha_local_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime` 34 tests、`python3 -m unittest scripts.tests.test_alpha_avatar_runtime_samples scripts.tests.test_validate_docs` 17 tests、`python3 -m py_compile scripts/alpha_avatar_runtime_samples.py`、`cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`、`python3 scripts/alpha_avatar_runtime_samples.py check-all --format json` sample_count 8 all-pass、`python3 scripts/alpha_avatar_runtime_samples.py closeout --format json`、source hierarchy 60/60、docs scaffold、`cargo fmt --check`、`git diff --check`、`df -h .`、`free -h` が pass した
+  2026-05-02 10:09 JST に `P-A0-11` thin integrated bridge floor を rerun し、`cargo test -p mir-runtime --test alpha_local_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime` 26 tests、`cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`、layer closeout 5 rows、network closeout 6 rows、avatar closeout 8 rows、`docker compose -f samples/alpha/network-docker/docker-compose.alpha-net.yml config`、`python3 scripts/alpha_network_docker_e2e.py check-all --format json` sample_count 6 all-pass、`python3 scripts/alpha_avatar_runtime_samples.py check-all --format json` sample_count 8 all-pass、`python3 scripts/alpha_e2e_samples.py check-all --format json` sample_count 8 all-pass with planned-only `E2E-06/08`、`python3 scripts/alpha_e2e_samples.py closeout --format json`、`python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_e2e_samples scripts.tests.test_validate_docs` 22 tests が pass した
 - Current blockers:
-  route rebinding / partition / medium-change widening、completed lifecycle/detach/migration ordering、remaining CUT rows / load non-resurrection split、save/load runtime integration、typed alpha visualization/devtools、integrated demo wiring、final public boundary は still later line にある
+  local save/load positive bridge、dedicated alpha visualization/devtools bridge、route rebinding / partition / medium-change widening、completed lifecycle/detach/migration ordering、remaining CUT rows / load non-resurrection split、final public boundary は still later line にある
 - Next autonomous package:
-  `P-A0-11` Mirrorea Spaces alpha demo closeout
+  `P-A0-12` local save/load positive bridge
 - User-decision blockers:
   public `U1` gate、first network scope、avatar compatibility first target、native binary policy、save/load initial scope、UI target、final catalog breadth は still later
 
@@ -52,7 +52,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
 - Current reopened alpha-local lane:
-  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を reopen しています。`specs/13..17`、`plan/39..43`、`samples/alpha/` に加え、`crates/mir-runtime/src/alpha_local_runtime.rs` により Stage A floor を崩さずに Stage B local-runtime narrow cut へ入り、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs` により Stage D layer-insertion narrow cut を、`crates/mir-runtime/src/alpha_network_runtime.rs` と `scripts/alpha_network_docker_e2e.py` により Stage C network / Docker narrow cut を、`crates/mir-runtime/src/alpha_avatar_runtime.rs` と `scripts/alpha_avatar_runtime_samples.py` により Phase 7 runtime-private package/avatar manifest-admission cut を actualize しました。current package はここから `P-A0-11` Mirrorea Spaces alpha demo closeout へ進みます。
+  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を reopen しています。`specs/13..17`、`plan/39..43`、`samples/alpha/` に加え、`crates/mir-runtime/src/alpha_local_runtime.rs` により Stage A floor を崩さずに Stage B local-runtime narrow cut を、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs` により Stage D layer-insertion narrow cut を、`crates/mir-runtime/src/alpha_network_runtime.rs` と `scripts/alpha_network_docker_e2e.py` により Stage C network / Docker narrow cut を、`crates/mir-runtime/src/alpha_avatar_runtime.rs` と `scripts/alpha_avatar_runtime_samples.py` により Phase 7 runtime-private package/avatar manifest-admission cut を、`scripts/alpha_e2e_samples.py` により Phase 8 thin integrated bridge cut を actualize しました。current package はここから `P-A0-12` local save/load positive bridge へ進みます。
 - Public-boundary open gate:
   actual `U1` commitment は引き続き別 gate です。installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision は alpha-local package closeoutだけでは閉じません。
 - Parallel maintenance lane:
@@ -87,7 +87,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | layer compatibility alpha line | 78% | 48% | 46% | 着手可能 | `specs/14` + `samples/alpha/contract-variance/` に加え、negative-static checker floor と `samples/alpha/layer-insertion/LI-01..05` / Rust layer-insertion floor が actualize 済み。full theorem discharge / detach family は still later |
 | save/load / consistent-cut alpha line | 68% | 30% | 25% | 着手可能 | `specs/15` + `samples/alpha/cut-save-load/` に加え、`CUT-05/07/08/09/13/14/15` の sidecar-driven synthetic checker floor が actualize 済み。Z-cycle/non-resurrection widening は still later |
 | runtime package / avatar alpha line | 82% | 60% | 58% | 着手可能 | `specs/16` と `samples/alpha/avatar-runtime/` / `hotplug-runtime/` に加え、`alpha_avatar_runtime` cargo/example/script floor が `AV-01/02/06/08/09` と `HP-11/12/15` を actualize。final API / native execution / detach lifecycle は still later |
-| Mirrorea Spaces alpha integration | 68% | 54% | 44% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` に加え、`P-A0-07` local-runtime floor、`P-A0-08` layer-insertion floor、`P-A0-09` network / Docker floor、`P-A0-10` avatar/package floor を actualize。save/load/devtools/integrated demo closeout remain later |
+| Mirrorea Spaces alpha integration | 72% | 60% | 56% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` に加え、`P-A0-07` local-runtime floor、`P-A0-08` layer-insertion floor、`P-A0-09` network / Docker floor、`P-A0-10` avatar/package floor、`P-A0-11` thin integrated bridge runner を actualize。local save/load positive path と dedicated alpha visualization/devtools remain later |
 
 ## large stage map
 
@@ -97,8 +97,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | B | 30% | alpha 0.5 local runtime | first Rust local-runtime floor actualized | `specs/13..17`、`plan/39..43`、`samples/alpha/local-runtime/`、`crates/mir-runtime/src/alpha_local_runtime.rs` | integrated local runtime completion |
 | C | 35% | alpha 0.7 transport | first Rust network / Docker floor actualized | `samples/alpha/network-docker/`、`crates/mir-runtime/src/alpha_network_runtime.rs`、example `mirrorea_alpha_network_runtime`、`scripts/alpha_network_docker_e2e.py` | production WAN / durable replay / partition completion / final transport ABI |
 | D | 35% | alpha 0.8 hot-plug lifecycle | attach-time layer floor and package-admission subset actualized | `samples/alpha/layer-insertion/`、`samples/alpha/hotplug-runtime/`、`samples/alpha/avatar-runtime/`、`P19..P21` carrier/runtime floor、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs`、`crates/mir-runtime/src/alpha_avatar_runtime.rs` | completed lifecycle / detach / migration / final ABI |
-| E | 10% | alpha 0.9 devtools | planned | `samples/alpha/visualization/` scaffold、viewer prototype inventory | final viewer API / telemetry service |
-| F | 20% | alpha 1 Spaces alpha | prerequisite floors partially actualized | `samples/alpha/e2e/` scaffold、Sugoroku + local-runtime + layer-insertion + network/Docker + avatar/package requirements | full VRChat / Reversed Library completion |
+| E | 20% | alpha 0.9 devtools | thin integrated JSON evidence surfaces actualized | `samples/alpha/visualization/` scaffold、viewer prototype inventory、`alpha_e2e_samples.py` の event/trace/fallback bridge evidence | dedicated alpha visualization family runner / final viewer API / telemetry service |
+| F | 35% | alpha 1 Spaces alpha | thin integrated bridge actualized; completion still blocked | `samples/alpha/e2e/` thin bridge runner、Sugoroku + local-runtime + layer-insertion + network/Docker + avatar/package requirements + checker-backed invalid distributed-cut non-claim | local save/load positive path、dedicated alpha devtools、full VRChat / Reversed Library completion |
 | G | 0% | Spaces product expansion | future | placeholder avatar/package/ecosystem roadmap | alpha scope |
 | H | 0% | Atlas | future | multi-world / portal / relation layer only as later roadmap | alpha scope |
 | I | 0% | Reversed Library | future | knowledge-space flagship later layer | alpha scope |
@@ -115,7 +115,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | verification / visualization composition | first cuts closed | typed view / telemetry envelope、viewer prototype inventory、fail-closed route trace、helper `verification_handoff_witness` / runtime `verification_model_check` emitted floor | theorem bridge / runtime policy widening contract、final viewer / verifier API、retention policy、telemetry service |
 | hot-plug runtime package | first attach-time layer floor actualized | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, `LI-01..05` attach-time layer floor, three later-family boundaries | detach runtime, rollback protocol, durable migration engine, distributed activation ordering, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
-| alpha-local theory freeze / runtime prep | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker first cuts、`P-A0-07` Rust local-runtime floor、`P-A0-08` Rust layer-insertion floor、`P-A0-09` Rust network / Docker floor、`P-A0-10` avatar/package floor | save/load integration、typed devtools、integrated alpha demo |
+| alpha-local theory freeze / runtime prep | in progress | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker first cuts、`P-A0-07` Rust local-runtime floor、`P-A0-08` Rust layer-insertion floor、`P-A0-09` Rust network / Docker floor、`P-A0-10` avatar/package floor、`P-A0-11` thin integrated bridge runner | local save/load positive bridge、dedicated alpha devtools、Stage F completion |
 
 ## closed package memory and active gate
 
@@ -187,6 +187,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-02 10:09 JST — `P-A0-11` thin integrated bridge closeout floor を実行した。`mir-runtime` alpha local/layer/network/avatar floors 26 tests、Rust local runtime example 1 run、Rust layer closeout example 1 run、Rust network closeout example 1 run、Rust avatar closeout example 1 run、Docker Compose config render、`alpha_network_docker_e2e.py check-all --format json` 6/6、`alpha_avatar_runtime_samples.py check-all --format json` 8/8、`alpha_e2e_samples.py check-all --format json` 8/8、`alpha_e2e_samples.py closeout --format json`、Python unit 22 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass。`E2E-01/02/03/04/05/07/09/10` の thin integrated bridge floor は actualize 済みで、`E2E-06` local save/load positive path と dedicated alpha devtools family は未了のため current package は `P-A0-12` local save/load positive bridge へ進む。
 - 2026-05-02 08:54 JST — `P-A0-09` network / Docker first cut closeout floor を実行した。`mirrorea-core` carriers 12 tests、`mir-runtime` hot-plug skeleton 8 tests、`alpha_local_runtime` 3 tests、`alpha_layer_insertion_runtime` 6 tests、`alpha_network_runtime` 7 tests、Rust local-runtime examples 2 runs、Rust layer-insertion closeout example 1 run、Rust network closeout example 1 run、Docker `check-all` 6/6、source hierarchy 60/60、docs scaffold、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass。`NET-02/03/04/05/07/09` の first non-public Rust Stage-C network / Docker floor は actualize 済みで、current package は `P-A0-10` runtime package / avatar skeleton へ進む。
 - 2026-05-02 09:43 JST — reviewer `1106` の指摘を反映して `P-A0-10` closeout floor を再実行した。`AV-08` は requested package `rejected` + placeholder fallback に分離され、Rust/Python の sidecar parity checks が追加され、runner closeout の planned/mirrored hotplug inventory が補正された。carriers 12 tests、alpha runtime/hot-plug/local/layer/network/avatar floors 34 tests、Python unit 17 tests、`alpha_avatar_runtime_samples.py check-all --format json` 8/8、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check`、資源確認が pass。current package は `P-A0-11` integrated alpha demo closeout へ進む。
 - 2026-05-02 08:15 JST — `P-A0-08` layer-insertion first cut closeout floor を実行した。`mirrorea-core` carriers 12 tests、`mir-runtime` hot-plug skeleton 8 tests、`alpha_local_runtime` 3 tests、`alpha_layer_insertion_runtime` 6 tests、Rust layer-insertion closeout example 1 run、`samples/alpha/layer-insertion/` file inventory、source hierarchy 60/60、docs scaffold（1104 reports）、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass。`LI-01..05` の first non-public Rust layer-insertion floor は actualize 済みで、current package は `P-A0-09` network / Docker E2E へ進む。

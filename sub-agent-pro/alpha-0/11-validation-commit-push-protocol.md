@@ -54,10 +54,17 @@ Run:
 
 ```bash
 docker compose -f <compose-file> config
-python3 scripts/alpha_network_docker_samples.py check-all --format json
+python3 scripts/alpha_network_docker_e2e.py check-all --format json
 ```
 
 If Docker is unavailable, report it explicitly as skipped validation with reason. Do not claim pass.
+
+If an integrated alpha E2E bridge runner is added, also run:
+
+```bash
+python3 scripts/alpha_e2e_samples.py check-all --format json
+python3 scripts/alpha_e2e_samples.py closeout --format json
+```
 
 ## 5. Reports
 

@@ -1,10 +1,11 @@
 # alpha sample family — End-to-End
 
-- Status: planned skeleton only
+- Status: mixed runner-backed non-public bridge + planned rows
 - Phase: Phase 8
 - Stage: Stage F
-- Current runners do not execute this family yet.
-- Validation for this package is filesystem/docs integrity only.
+- `python3 scripts/alpha_e2e_samples.py` actualizes `E2E-01/02/03/04/05/07/09/10` as a thin integrated bridge over already-actualized Stage B/C/D/F subset floors.
+- `E2E-06` local save/load continue and `E2E-08` Reversed Library seed remain planned-only.
+- This family is still not an active runnable root, and Stage F remains incomplete.
 
 ## Rows
 
@@ -25,12 +26,18 @@
 
 ## Policy
 
-- `.mir` files here are source-ish planned skeletons, not active runnable samples.
-- `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
-- Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
+- `.mir` files here remain source-ish placeholders, not parser-front-door inputs.
+- `.expected.json` sidecars now split into:
+  - implemented thin integrated bridge rows: `E2E-01/02/03/04/05/07/09/10`
+  - planned-only rows: `E2E-06/08`
+- `E2E-07` is checker-backed invalid distributed cut evidence only. It must not be read as distributed save/load runtime completion.
+- Promotion to the repo's active runnable root still requires dedicated validation commands, report evidence, and snapshot updates beyond this alpha-local bridge.
+- `E2E-06` remains the local save/load positive blocker for any future Stage F completion claim.
 
 ## Validation anchor for this package
 
 ```bash
 find samples/alpha/e2e -maxdepth 1 -type f | sort
+python3 scripts/alpha_e2e_samples.py check-all --format json
+python3 scripts/alpha_e2e_samples.py closeout --format json
 ```

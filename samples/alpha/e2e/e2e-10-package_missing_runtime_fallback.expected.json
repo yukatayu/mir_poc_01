@@ -2,25 +2,51 @@
   "sample_id": "E2E-10",
   "sample_name": "package_missing_runtime_fallback",
   "family": "e2e",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 8",
   "stage": "Stage F",
   "kind": "positive",
   "purpose": "browser-like fallback",
   "expected": "placeholder",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_f_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_component_floors",
+    "runner": "python3 scripts/alpha_e2e_samples.py run E2E-10 --format json",
+    "note": "Composes existing alpha-local runtime/checker floors without parsing samples/alpha/e2e/*.mir."
   },
+  "component_refs": [
+    {
+      "family": "avatar-runtime",
+      "sample_id": "AV-08",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- run AV-08"
+    }
+  ],
+  "evidence_summary": {
+    "requested_package_verdict_kind": "rejected",
+    "selected_package_id": "RuntimePackage[avatar.placeholder.basic@1.0.0]",
+    "selected_representation": "static_capsule_placeholder",
+    "fallback_applied": true,
+    "fallback_reason": "host_capability_missing:HostMirAvatarVM",
+    "visualization_surface": "representation_state_json"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "runtime-unavailable package requests can degrade to an explicit placeholder path",
+    "fallback extends guarded logical availability rather than the package lifetime itself"
+  ],
+  "what_it_does_not_prove": [
+    "native execution fallback",
+    "full browser/client runtime support",
+    "final avatar/package ABI"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "runtime package detach lifecycle",
+    "trusted native sandbox-limited provider row"
   ]
 }

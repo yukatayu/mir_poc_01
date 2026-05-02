@@ -2,25 +2,52 @@
   "sample_id": "E2E-03",
   "sample_name": "hotplug_debug_layer_runtime",
   "family": "e2e",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 8",
   "stage": "Stage F",
   "kind": "positive",
   "purpose": "live layer insert",
   "expected": "trace begins after attach",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_f_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_component_floors",
+    "runner": "python3 scripts/alpha_e2e_samples.py run E2E-03 --format json",
+    "note": "Composes existing alpha-local runtime/checker floors without parsing samples/alpha/e2e/*.mir."
   },
+  "component_refs": [
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-01",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- debug-admin"
+    }
+  ],
+  "evidence_summary": {
+    "pre_attach_trace_count": 0,
+    "post_attach_trace_count": 2,
+    "active_layers_after": [
+      "debug_trace_layer"
+    ],
+    "source_runtime_sample_ref": "LR-01",
+    "visualization_surface": "post_attach_trace_rows"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "debug-layer attach is authority-gated and visible only after activation",
+    "typed trace output is available in the integrated bridge path"
+  ],
+  "what_it_does_not_prove": [
+    "detach lifecycle completion",
+    "final public hot-plug ABI",
+    "Stage E completion"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "detach/no-dangling runtime row",
+    "runtime-library hot-plug attach row"
   ]
 }
