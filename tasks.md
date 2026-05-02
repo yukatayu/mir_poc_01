@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-02 08:54 JST
+最終更新: 2026-05-02 09:45 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-02 08:54 JST に更新済みです:
-  `P-A0-09` rerun では `mirrorea-core` carriers 12 tests、`mir-runtime` hot-plug skeleton 8 tests、`alpha_local_runtime` 3 tests、`alpha_layer_insertion_runtime` 6 tests、`alpha_network_runtime` 7 tests、Rust local-runtime examples 2 runs、Rust layer-insertion closeout example 1 run、Rust network closeout example 1 run、Docker `check-all` 6/6、source hierarchy 60/60、docs scaffold、report-schema unit 11 tests、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor が actualize 済みです。
+- Alpha-0 closeout validation freshness は 2026-05-02 09:43 JST に更新済みです:
+  reviewer `1106` fix-up 後の `P-A0-10` rerun では carriers 12 tests、`mir-runtime` hot-plug/local/layer/network/avatar floors 34 tests、Python unit 17 tests、`py_compile`、runner `check-all` 8/8、runner `closeout` inventory、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check`、`df -h .`、`free -h` が pass しました。current repo state では `LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor が actualize 済みです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..09` closeout 後の `P-A0-10` queue を current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..10` closeout 後の `P-A0-11` queue を current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -66,15 +66,15 @@
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B 30% local-runtime floor, Stage C 35% network / Docker floor, Stage D 30% layer-insertion floor; Phase 7 queue is open
+  Stage B 30% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 10% devtools scaffold, Stage F 20% alpha demo prerequisites
 - Concrete phase:
-  Phase 7 — runtime package / avatar skeleton
+  Phase 8 — integrated alpha demo closeout
 - Current package:
-  `P-A0-10` runtime package / avatar skeleton
+  `P-A0-11` Mirrorea Spaces alpha demo closeout
 - Current status:
-  `P-A0-09` は current repo state で close 済み。`crates/mir-runtime/src/alpha_network_runtime.rs`、example `mirrorea_alpha_network_runtime`、`scripts/alpha_network_docker_e2e.py`、and `samples/alpha/network-docker/NET-02/03/04/05/07/09` により、Docker/local-container bridge over explicit membership/capability/witness/auth admission checks を持つ first non-public Rust Stage-C network floor が validation 可能になった。route rebinding、partition handling、production WAN/session/replay、runtime package/avatar runtime、distributed save/load completion claim はまだ行っていない。
+  `P-A0-10` は current repo state で close 済み。`crates/mir-runtime/src/alpha_avatar_runtime.rs`、example `mirrorea_alpha_avatar_runtime`、`scripts/alpha_avatar_runtime_samples.py`、and `samples/alpha/avatar-runtime/AV-01/02/06/08/09` + `samples/alpha/hotplug-runtime/HP-11/12/15` により、runtime-private package/avatar manifest-admission floor が validation 可能になった。final avatar API、native binary execution、full VRM / VRChat / Unity compatibility、dependent-aware detach completion、distributed save/load completion claim はまだ行っていない。
 - Next autonomous package:
-  `P-A0-10` runtime package / avatar skeleton
+  `P-A0-11` Mirrorea Spaces alpha demo closeout
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -89,6 +89,7 @@
 | typed external | `scripts/typed_external_boundary_samples.py` | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | final host schema / final adapter API |
 | network transport | `scripts/network_transport_samples.py` | `python3 scripts/network_transport_samples.py check-all --format json` | production socket / durable replay |
 | alpha network / Docker floor | `crates/mir-runtime`, `samples/alpha/network-docker/`, `scripts/alpha_network_docker_e2e.py` | `cargo test -p mir-runtime --test alpha_network_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`; `python3 scripts/alpha_network_docker_e2e.py check-all --format json` | production WAN / durable replay / final public transport ABI |
+| alpha avatar/package floor | `crates/mir-runtime`, `samples/alpha/avatar-runtime/`, `samples/alpha/hotplug-runtime/`, `scripts/alpha_avatar_runtime_samples.py` | `cargo test -p mir-runtime --test alpha_avatar_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`; `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json` | final avatar API / native execution / final package ABI |
 | projection / placement | `scripts/projection_codegen_samples.py` + committed generated manifest | `python3 scripts/projection_codegen_samples.py check-all --format json` | final emitted executable family / generated place-program emission / placement optimizer / deployment planner / equivalence checker / proof completion / final public emitted-program ABI |
 | viewer prototype | `scripts/visual_debugger_viewer_samples.py` | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | final viewer API / telemetry service |
 | hot-plug runtime | `crates/mirrorea-core`, `crates/mir-runtime` | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | rollback / durable migration / distributed ordering / final ABI |
@@ -136,10 +137,9 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-10` runtime package/avatar skeleton | repo | next | package manifest + placeholder/custom avatar evidence + report + commit/push |
-| 2 | `P-A0-11` Mirrorea Spaces alpha demo closeout | repo | queued | integrated demo command + stop-line docs + validation floor + report + commit/push |
-| 3 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
-| 4 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
+| 1 | `P-A0-11` Mirrorea Spaces alpha demo closeout | repo | next | integrated demo command + stop-line docs + validation floor + report + commit/push |
+| 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
+| 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
 ## self-driven maintenance tasks
 
@@ -166,7 +166,7 @@ These are safe to do without new product decisions.
 | `P-A0-07` | local Mirrorea runtime integration | closed | first Rust local-runtime floor + report `1102` |
 | `P-A0-08` | layer insertion runtime | closed | first Rust attach-time layer-insertion floor + report `1103` |
 | `P-A0-09` | network / Docker E2E | closed | first Rust Stage-C network / Docker floor + report `1104` |
-| `P-A0-10` | runtime package/avatar skeleton | queued | package manifest + placeholder/custom avatar evidence + report + commit/push |
+| `P-A0-10` | runtime package/avatar skeleton | closed | first runtime-private package/avatar manifest-admission floor + report `1105` |
 | `P-A0-11` | Mirrorea Spaces alpha demo closeout | queued | integrated demo command + stop-line docs + validation floor + report + commit/push |
 
 ## user decision blockers

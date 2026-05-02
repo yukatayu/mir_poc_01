@@ -17,6 +17,12 @@ full compatibility or final public avatar API ではない。
   - avatar representative slice as sample/runtime evidence
   - `FAIRY-05` residual planned family
 - Alpha-0 avatar/runtime-package sample families are now organized under `samples/alpha/avatar-runtime/` and `samples/alpha/hotplug-runtime/`
+- `P-A0-10` actualized a runtime-private package/avatar manifest-admission floor:
+  - `crates/mir-runtime/src/alpha_avatar_runtime.rs`
+  - example `mirrorea_alpha_avatar_runtime`
+  - thin runner `scripts/alpha_avatar_runtime_samples.py`
+  - current executable rows: `AV-01/02/06/08/09` and `HP-11/12/15`
+- remaining rows `AV-03/04/05/07/10` and `HP-01/07/08/09/10/13/14` stay planned or mirrored elsewhere
 
 ## decisions mirrored from specs/16
 
@@ -31,14 +37,15 @@ full compatibility or final public avatar API ではない。
 ### first safe cut
 
 - manifest field inventory in docs/spec
-- planned sample skeletons for placeholder/custom/runtime-unavailable/native-reject rows
+- runtime-private executable rows for placeholder/custom/runtime-unavailable/undeclared-effect/native-reject rows
 - no final public ABI naming
 
 ### later executable cut
 
 - manifest validator / admission checker
-- runtime-private package admission carrier
+- runtime-private package admission carrier over broader row coverage
 - limited sandboxed external-process skeleton if honestly scoped
+- dependent-aware detach / defer semantics
 
 ## avatar adapter skeleton roadmap
 
@@ -96,3 +103,5 @@ must keep visible:
 
 - after checker / cut packages:
   widen runtime-private hot-plug and avatar sample bridge without promoting any concrete format to core
+- after `P-A0-10`:
+  integrate the current local-runtime / layer-insertion / network / avatar-package floors into Stage-F demo closeout evidence without claiming final avatar API or native execution

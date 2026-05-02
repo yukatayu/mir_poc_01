@@ -12,6 +12,7 @@ logical runtime substrate, not a completed engine, rollback/migration protocol,
 distributed activation ordering, or a final public ABI.
 "#]
 
+pub mod alpha_avatar_runtime;
 pub mod alpha_layer_insertion_runtime;
 pub mod alpha_local_runtime;
 pub mod alpha_network_runtime;

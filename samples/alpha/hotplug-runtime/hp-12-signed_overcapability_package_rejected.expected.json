@@ -1,26 +1,301 @@
 {
+  "abstract_role_inventory": [
+    "EmbodiedPresence",
+    "Renderable",
+    "Animatable",
+    "InputConsumer",
+    "InteractionTarget",
+    "AttachmentProvider",
+    "AnchorProvider",
+    "ExpressionProvider",
+    "EffectProvider",
+    "InspectableObject",
+    "NetworkedStateParticipant"
+  ],
+  "admission_checks": [
+    {
+      "check_name": "manifest_well_formed",
+      "observed": "required manifest families are present",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "provenance_policy_satisfied",
+      "observed": "provenance policy satisfied for current alpha floor",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "role_compatibility",
+      "observed": "provided roles stay within abstract avatar role inventory",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "provided_effects_declared",
+      "observed": "provided effects match declared manifest rows",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "native_policy_satisfied",
+      "observed": "native policy row does not grant full native execution",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "host_support_satisfied",
+      "observed": "host support adequate for current alpha floor",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "capability_budget_contained",
+      "observed": "manifest requests undeclared capability `ReadRawCameraBuffer`",
+      "passed": false,
+      "reason_refs": [
+        "over_capability:ReadRawCameraBuffer"
+      ]
+    },
+    {
+      "check_name": "membership_freshness_current",
+      "observed": "membership_epoch=0, member_incarnation=0",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "authorization_satisfied",
+      "observed": "ExampleAdmin may install runtime packages at AttachPoint[AlphaRoom#1::AvatarRuntime]",
+      "passed": true,
+      "reason_refs": []
+    },
+    {
+      "check_name": "fallback_representation_explicit",
+      "observed": "fallback representation is declared explicitly",
+      "passed": true,
+      "reason_refs": []
+    }
+  ],
+  "host_support": {
+    "available_host_capabilities": [
+      "AttachAvatarRuntime",
+      "ManageRuntimePackageRegistry",
+      "RenderPlaceholderMesh"
+    ],
+    "missing_host_capabilities": [],
+    "native_execution_available": false,
+    "notes": [
+      "current alpha floor does not execute native avatar code",
+      "placeholder/custom role admission is report-local, not final public API"
+    ],
+    "renderer_profile": "alpha_placeholder_renderer",
+    "sandbox_runtime_available": false
+  },
+  "hotplug_skeleton": {
+    "consumed_substrates": [
+      "LogicalPlaceRuntimeShell",
+      "MembershipRegistry",
+      "PlaceCatalog",
+      "HotPlugRequest",
+      "HotPlugVerdict"
+    ],
+    "notes": [
+      "consumer-side runtime/report assembly over admitted carriers and existing substrate",
+      "no helper-local lifecycle ids imported as canonical runtime state"
+    ],
+    "request": {
+      "attachpoint_ref": "AttachPoint[AlphaRoom#1::AvatarRuntime]",
+      "auth_evidence_ref": null,
+      "capability_refs": [
+        "ManageAttachPoint(AlphaRoom#1::AvatarRuntime)",
+        "InstallRuntimePackage(AlphaRoom#1)"
+      ],
+      "message_envelope_ref": "message_envelope#hp-12",
+      "notes": [
+        "non-public runtime package/avatar admission floor",
+        "avatar format remains non-core"
+      ],
+      "operation_kind": "attach",
+      "patch_ref": "RuntimePackage[native.avatar.overcapability@1.2.0]",
+      "request_id": "avatar_package_request#hp-12",
+      "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
+      "requesting_principal": "ExampleAdmin",
+      "witness_refs": [
+        "membership_frontier_snapshot#avatar_runtime"
+      ]
+    },
+    "request_lanes": [
+      "request_id",
+      "attachpoint_ref",
+      "patch_ref",
+      "operation_kind",
+      "requesting_principal",
+      "requesting_participant_place",
+      "message_envelope_ref",
+      "auth_evidence_ref",
+      "capability_refs",
+      "witness_refs",
+      "notes"
+    ],
+    "retained_later_refs": [
+      "helper_local_lifecycle_ids",
+      "completed_engine",
+      "rollback_protocol",
+      "durable_migration",
+      "distributed_activation_ordering",
+      "final_public_hotplug_abi"
+    ],
+    "runtime_snapshot": {
+      "membership": {
+        "members": {
+          "ExampleAdmin": {
+            "active": true,
+            "incarnation": 0,
+            "joined_at_epoch": 0,
+            "left_at_epoch": null,
+            "place": "ParticipantPlace[ExampleAdmin]"
+          }
+        },
+        "membership_epoch": 0
+      },
+      "place_catalog": {
+        "places": {
+          "AttachPoint[AlphaRoom#1::AvatarRuntime]": "AttachPoint",
+          "ParticipantPlace[ExampleAdmin]": "ParticipantPlace"
+        }
+      }
+    },
+    "skeleton_scope": "report_local_orchestration_skeleton",
+    "verdict": {
+      "authorization_reason_refs": [
+        "install_runtime_package_capability_present",
+        "avatar_runtime_attach_authorized"
+      ],
+      "compatibility_reason_refs": [
+        "over_capability:ReadRawCameraBuffer"
+      ],
+      "membership_freshness_reason_refs": [
+        "membership_frontier_current"
+      ],
+      "notes": [
+        "runtime package admission remains runtime-private and non-public",
+        "activation/detach lifecycle completion remains later"
+      ],
+      "request_ref": "avatar_package_request#hp-12",
+      "verdict_kind": "rejected"
+    },
+    "verdict_lanes": [
+      "request_ref",
+      "verdict_kind",
+      "compatibility_reason_refs",
+      "authorization_reason_refs",
+      "membership_freshness_reason_refs",
+      "notes"
+    ]
+  },
+  "manifest": {
+    "adapter_targets": [
+      "native_runtime_package"
+    ],
+    "compatibility_claims": [
+      "alpha_local_only"
+    ],
+    "failure_row": [
+      "ProviderRejected"
+    ],
+    "fallback_representation": "reject_without_attach",
+    "native_code_policy": "sandbox_limited",
+    "observation_labels": [
+      "avatar.audit.redacted"
+    ],
+    "package_id": "RuntimePackage[native.avatar.overcapability@1.2.0]",
+    "package_kind": "runtime_package",
+    "provided_effects": [
+      "emit_avatar_audit"
+    ],
+    "provided_roles": [
+      "EffectProvider"
+    ],
+    "provider": "TrustedPluginVendor",
+    "required_effects": [
+      "emit_avatar_audit"
+    ],
+    "required_host_capabilities": [
+      "ManageRuntimePackageRegistry",
+      "SpawnSandboxedNativeHelper"
+    ],
+    "resource_budget": "cpu=medium;memory=medium",
+    "retention_policy": "audit_log_required",
+    "sandbox_requirement": "external_process_isolation",
+    "signature_or_provenance": "trusted_signer:TrustedPluginVendor",
+    "version": "1.2.0"
+  },
+  "manifest_field_lanes": [
+    "package_id",
+    "package_kind",
+    "version",
+    "provider",
+    "signature_or_provenance",
+    "required_host_capabilities",
+    "provided_roles",
+    "provided_effects",
+    "required_effects",
+    "failure_row",
+    "resource_budget",
+    "observation_labels",
+    "retention_policy",
+    "sandbox_requirement",
+    "native_code_policy",
+    "adapter_targets",
+    "compatibility_claims",
+    "fallback_representation"
+  ],
+  "notes": [
+    "non-public runtime package/avatar admission floor",
+    "avatar formats and engine concepts remain non-core",
+    "native execution is not performed in this alpha cut"
+  ],
+  "reason_family": "capability_policy",
+  "rejection_reason_refs": [
+    "over_capability:ReadRawCameraBuffer"
+  ],
+  "representation_state": {
+    "active_roles": [],
+    "degraded_roles": [],
+    "fallback_applied": false,
+    "fallback_reason": null,
+    "limited_capabilities": [],
+    "native_execution_performed": false,
+    "notes": [
+      "rejected packages never silently attach",
+      "no native execution occurs in the current alpha cut"
+    ],
+    "requested_package_id": "RuntimePackage[native.avatar.overcapability@1.2.0]",
+    "selected_package_id": null,
+    "selected_representation": null
+  },
+  "retained_later_refs": [
+    "vrm_full_compatibility",
+    "vrchat_full_compatibility",
+    "unity_runtime_integration",
+    "native_execution_sandbox_realization",
+    "dependent_detach_runtime",
+    "final_public_avatar_api",
+    "final_public_runtime_package_abi"
+  ],
+  "runtime_scope": "alpha_runtime_package_avatar_stage_f_bridge",
   "sample_id": "HP-12",
   "sample_name": "signed_overcapability_package_rejected",
-  "family": "hotplug-runtime",
-  "status": "planned-skeleton",
-  "phase": "Phase 4 / 8",
-  "stage": "Stage D",
-  "kind": "negative",
-  "purpose": "signature but excessive caps",
-  "expected": "rejected",
-  "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
-  },
-  "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
-  },
-  "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+  "terminal_outcome": "rejected",
+  "what_it_does_not_prove": [
+    "no final avatar API",
+    "no full VRM / VRChat / Unity compatibility",
+    "no native binary production execution",
+    "no completed detach / migration lifecycle",
+    "no final public runtime package ABI"
+  ],
+  "what_it_proves": [
+    "signed packages can still be rejected for over-capability",
+    "signature is provenance only, not blanket permission"
   ]
 }

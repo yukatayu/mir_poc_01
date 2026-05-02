@@ -6,8 +6,9 @@
 - current package では planned skeleton / expected-verdict sidecar を置く
 - `lifetime-fallback/` と `contract-variance/` と `cut-save-load/` には、selected rows について non-public checker floor 用の `expected_static.checked_reason_codes` を追加済み
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
-- `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
+- `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
 - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned/sample-mirror authority であり、current attach-time runtime floor は `layer-insertion/` 側に置く
+- `hotplug-runtime/` の `HP-11/12/15` は `avatar-runtime/` family と共用する runtime-private native-policy subset として actualize 済みだが、family 全体の runnable promotion ではない
 - `samples/not_implemented/` は pre-existing residual planned families を保持する legacy planned root として残す
 
 ## current families
@@ -35,6 +36,8 @@ cargo test -p mir-runtime --test alpha_local_runtime
 cargo test -p mir-runtime --test alpha_layer_insertion_runtime
 cargo test -p mir-runtime --test alpha_network_runtime
 python3 scripts/alpha_network_docker_e2e.py check-all --format json
+cargo test -p mir-runtime --test alpha_avatar_runtime
+python3 scripts/alpha_avatar_runtime_samples.py check-all --format json
 ```
 
 ## stop line
@@ -45,4 +48,5 @@ python3 scripts/alpha_network_docker_e2e.py check-all --format json
 - do not treat the current Rust local-runtime floor as hot-plug/package/avatar/network completion
 - do not treat the current Rust layer-insertion floor as completed lifecycle / detach / migration / public ABI completion
 - do not treat the current Rust/Docker Stage-C network floor as production transport / WAN federation / final public transport ABI completion
+- do not treat the current runtime-private avatar/package floor as final avatar API / native execution / final runtime package ABI completion
 - do not silently move existing `samples/not_implemented/` residual families into active roots

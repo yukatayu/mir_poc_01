@@ -118,6 +118,10 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_network_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`
   `python3 scripts/alpha_network_docker_e2e.py check-all --format json`
+- current Phase 7 first-cut floor:
+  `cargo test -p mir-runtime --test alpha_avatar_runtime`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
+  `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
 
 ## stop lines
 
@@ -129,4 +133,4 @@ Phase 1+ runtime floor:
 
 ## next package
 
-- after `P-A0-09` network / Docker E2E first cut, the next reopen point is `P-A0-10` runtime package / avatar skeleton
+- after `P-A0-10` runtime package / avatar first cut, the next reopen point is `P-A0-11` Mirrorea Spaces alpha demo closeout
