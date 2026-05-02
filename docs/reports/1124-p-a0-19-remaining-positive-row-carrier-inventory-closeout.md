@@ -221,7 +221,8 @@ Review the `P-A0-19` blocker inventory and choose the first row-specific actuali
 
 ## Commit / push status
 
-Pending at report write.
+- Closeout commit `dd2ad41` (`mirrorea: close p-a0-19 carrier inventory`) was created with `--no-gpg-sign` and pushed to `origin/main`.
+- This report section was synchronized afterward in a docs-only follow-up commit.
 
 ## Sub-agent session close status
 
