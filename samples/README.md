@@ -28,7 +28,8 @@
 - `lean/clean-near-end/` は generated theorem stub だが、proof bridge evidence として committed されている
 - `alpha/` は current alpha-local theory-freeze / checker/runtime roadmap 用の scaffold であり、expected-verdict sidecar を伴う
   - current task では skeleton / planning root として扱い、active runnable sample root に silently promote しない
-  - current package line では `local-runtime/` と `layer-insertion/` が non-public Rust runtime floor を持つが、sample file parsing front door ではなく、active root でもない
+  - current package line では `local-runtime/`、`layer-insertion/`、`network-docker/` が non-public Rust runtime floor を持つが、sample file parsing front door ではなく、active root でもない
+  - `network-docker/` は `mirrorea_alpha_network_runtime` + `alpha_network_docker_e2e.py` により `NET-02/03/04/05/07/09` を narrow Stage-C transport / Docker cut として actualize した。helper-local `clean-near-end/network-transport/` canary familyとは別物であり、`NET-01/06/08/10` は引き続き planned
   - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned mirror / verdict authority であり、first runtime-sensitive attach evidence authority は `layer-insertion/` 側に置く
   - family ごとの status / blocker / next runner は `samples_progress.md` と `progress.md` / `tasks.md` を参照する
 - `not_implemented/` は residual planned skeleton であり、active sample ではない

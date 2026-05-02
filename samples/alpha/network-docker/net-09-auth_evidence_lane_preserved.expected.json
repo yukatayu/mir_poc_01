@@ -2,25 +2,36 @@
   "sample_id": "NET-09",
   "sample_name": "auth_evidence_lane_preserved",
   "family": "network-docker",
-  "status": "planned-skeleton",
+  "status": "runtime-floor",
   "phase": "Phase 5",
   "stage": "Stage C",
   "kind": "positive",
   "purpose": "auth not collapsed into transport",
-  "expected": "envelope lanes preserved",
+  "expected": "auth evidence lane preserved separately from transport",
+  "expected_runtime": {
+    "terminal_outcome": "accepted",
+    "auth_present": true,
+    "preserved_separately": true,
+    "required_bindings": [
+      "route=GamePlace[SugorokuGame#1]",
+      "transport=network_transport_lane"
+    ]
+  },
   "claims": {
-    "runnable": false,
-    "implemented": false,
+    "runnable": true,
+    "implemented": true,
     "active_root": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "rust-runtime-floor + docker-compose-runner",
+    "runner": "python3 scripts/alpha_network_docker_e2e.py run NET-09 --format json",
+    "note": "Validated in this package by the non-public Rust Stage-C network runtime plus a dedicated Docker Compose runner. The source-ish .mir file is not parsed by the current runner."
   },
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "route rebinding / shadow discipline",
+    "network partition semantics",
+    "transport medium substitution safety",
+    "production WAN/session/replay runtime",
+    "final public transport ABI"
   ]
 }

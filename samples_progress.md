@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-02 08:19 JST
+Last updated: 2026-05-02 08:54 JST
 Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and the Mirrorea Spaces alpha-0 theory-freeze / checker-first lane under `samples/alpha/`.
-Current active packages: `P-A0-08` layer insertion runtime is closeout-complete in current repo state, and `P-A0-09` network / Docker E2E is the next active Alpha-0 package. `P-A0-01..08` remain closed; post-`P21` later-family docs-first trilogy remains closed; actual `U1` commitment remains a separate public-boundary gate.
+Current active packages: `P-A0-09` network / Docker E2E is closeout-complete in current repo state, and `P-A0-10` runtime package / avatar skeleton is the next active Alpha-0 package. `P-A0-01..09` remain closed; post-`P21` later-family docs-first trilogy remains closed; actual `U1` commitment remains a separate public-boundary gate.
 
 ## Legend
 
@@ -26,17 +26,17 @@ Notes:
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B local-runtime floor and Stage D layer-insertion floor actualized; Phase 5 queue is open
+  Stage B 30% local-runtime floor, Stage C 35% network / Docker floor, Stage D 30% layer-insertion floor; Phase 7 queue is open
 - Concrete phase:
-  Phase 5 — network / Docker E2E
+  Phase 7 — runtime package / avatar skeleton
 - Current package:
-  `P-A0-09` network / Docker E2E
+  `P-A0-10` runtime package / avatar skeleton
 - Current status:
-  `P-A0-08` closeout actualized the first non-public Rust layer-insertion floor for `samples/alpha/layer-insertion/LI-01..05`. `samples/alpha/` is still not an active runnable root, but `layer-insertion/` now has a dedicated cargo/example evidence floor while `hotplug-runtime/` and `contract-variance/` keep their broader planned/mirror roles.
+  `P-A0-09` closeout actualized the first non-public Rust Stage-C network / Docker floor for `samples/alpha/network-docker/NET-02/03/04/05/07/09`. `samples/alpha/` is still not an active runnable root, but `network-docker/` now has dedicated cargo/example/Docker evidence while helper-local `clean-near-end/network-transport/` remains a separate canary family.
 - Next package:
   `P-A0-10` runtime package / avatar skeleton
 - Current alpha blocker:
-  remaining CUT rows, runtime/package/avatar/network families, and runnable alpha execution are still pending
+  remaining CUT rows, runtime/package/avatar admission, alpha visualization / integrated E2E, and runnable parser-front-door execution are still pending
 
 ## Summary
 
@@ -61,13 +61,15 @@ Notes:
 | Alpha layer insertion | 75 | Rust runtime floor | `LI-01..05` attach-time contract/authority/trace floor over Stage-B runtime cut | `cargo test -p mir-runtime --test alpha_layer_insertion_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout` |
 | Alpha hot-plug runtime | 10 | scaffold only | `samples/alpha/hotplug-runtime/` matrix + expected sidecars | `find samples/alpha/hotplug-runtime -maxdepth 1 -type f | sort` |
 | Alpha avatar runtime | 10 | scaffold only | `samples/alpha/avatar-runtime/` matrix + expected sidecars | `find samples/alpha/avatar-runtime -maxdepth 1 -type f | sort` |
-| Alpha network / visualization / E2E | 10 | scaffold only | `samples/alpha/network-docker/`, `visualization/`, `e2e/` | `find samples/alpha -maxdepth 2 -type f | sort` |
+| Alpha network transport | 75 | Rust runtime floor + Docker Compose runner | `NET-02/03/04/05/07/09` narrow Stage-C transport/admission/trace floor | `cargo test -p mir-runtime --test alpha_network_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`; `python3 scripts/alpha_network_docker_e2e.py check-all --format json` |
+| Alpha visualization | 10 | scaffold only | `samples/alpha/visualization/` | `find samples/alpha/visualization -maxdepth 1 -type f | sort` |
+| Alpha integrated E2E | 10 | scaffold only | `samples/alpha/e2e/` | `find samples/alpha/e2e -maxdepth 1 -type f | sort` |
 
 ## Active sample matrix
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-02 08:15 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097`, `1098`, `1100`, `1101`, `1102`, `1103` | Snapshot docs are maintenance artifacts, not normative specs; 2026-05-02 08:15 JST Alpha-0 layer-insertion closeout floor rerun passed |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-02 08:54 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097`, `1098`, `1100`, `1101`, `1102`, `1103`, `1104` | Snapshot docs are maintenance artifacts, not normative specs; 2026-05-02 08:54 JST Alpha-0 network / Docker closeout floor rerun passed |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 13:52 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084`, `1085`, `1091`, `1092` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 13:52 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076`, `1085`, `1091`, `1092` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 13:52 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076`, `1085`, `1092` | attach lifecycle / compatibility anchor |
@@ -94,7 +96,9 @@ Notes:
 | `A0-LAYER` | alpha layer insertion | `samples/alpha/layer-insertion/` | Rust attach-time runtime floor | 75 | positive + negative + runtime-preview | 2026-05-02 08:15 JST | `1098`, `1103` | `LI-01..05` now exercise attach-time contract comparison, accepted/rejected debug attach, explicit auth contract-update path, declared-failure rate-limit preview, and incompatible patch reject; `.mir` files remain source-ish anchors |
 | `A0-HP` | alpha hot-plug | `samples/alpha/hotplug-runtime/` | scaffold family | 10 | target matrix only | 2026-05-02 08:15 JST | `1098`, `1103` | `HP-02..06` now have runtime-backed mirrors under `layer-insertion/`, but this family itself still remains planned lifecycle/package matrix |
 | `A0-AV` | alpha avatar | `samples/alpha/avatar-runtime/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/16` anchored expected-verdict sidecars; runtime/package implementation pending |
-| `A0-NET/VIS/E2E` | alpha network / visualization / E2E | `samples/alpha/network-docker/`, `samples/alpha/visualization/`, `samples/alpha/e2e/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | `specs/17` stage/E2E boundary only; no runnable alpha runtime yet |
+| `A0-NET` | alpha network transport | `samples/alpha/network-docker/` | Rust Stage-C network / Docker floor | 75 | positive + negative + runtime-preview | 2026-05-02 08:54 JST | `1098`, `1104` | `NET-02/03/04/05/07/09` now exercise TCP process-boundary / Docker Compose bridge, explicit membership/capability/witness/auth admission, observer-safe route trace, and auth-lane preservation; `NET-01/06/08/10` remain planned |
+| `A0-VIS` | alpha visualization | `samples/alpha/visualization/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | typed alpha devtools surfaces remain planned; current viewer prototype inventory lives outside this family |
+| `A0-E2E` | alpha integrated E2E | `samples/alpha/e2e/` | scaffold family | 10 | target matrix only | 2026-05-02 06:32 JST | `1098` | Stage-F integrated demo remains planned; current Stage-B/C/D cuts are still separate package closeouts |
 
 ## E2E samples
 
@@ -105,6 +109,7 @@ Notes:
 | `E2E-AVATAR` | follow -> fallback -> stale-anchor rejection -> safety property | `python3 scripts/avatar_follow_samples.py closeout --format json` | 90 | representative avatar floor | `FAIRY-05` reacquire implementation |
 | `E2E-TYPED-EXTERNAL` | typed effect request -> receipt/failure -> redacted view | `python3 scripts/typed_external_boundary_samples.py closeout --format json` | 75 | helper host-boundary inventory | final adapter API / exact host schema |
 | `E2E-TRANSPORT-CANARY` | loopback / subprocess bridge / reconnect / failure / redacted trace | `python3 scripts/network_transport_samples.py check-all --format json` | 100 | current-scope helper transport canary execution; `NET-01` parity remains separately reported from Sugoroku anchors | production socket / durable replay |
+| `E2E-A0-NET` | Stage-C network / Docker floor | `python3 scripts/alpha_network_docker_e2e.py check-all --format json` | 90 | Docker Compose execution for `NET-02/03/04/05/07/09` over explicit membership/capability/witness/auth checks | production WAN / durable replay / final public transport ABI |
 | `E2E-PROJECTION-BRIDGE` | system source -> preview -> committed manifest bridge -> live-anchor alignment | `python3 scripts/projection_codegen_samples.py check-all --format json` | 90 | generated bridge evidence review-category alignment inventory | final emitted executable family / generated place-program emission / placement optimizer / deployment planner / equivalence checker / proof completion / final public emitted-program ABI |
 | `E2E-VIEWER-INVENTORY` | helper/runtime inventory -> typed viewer panels/telemetry | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | 100 | typed prototype inventory | final viewer / telemetry service |
 | `E2E-HOTPLUG-RUNTIME` | request/verdict carrier -> runtime snapshot -> engine-state report | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | 90 | P21 narrow runtime floor | rollback / durable migration / distributed ordering / final ABI |
@@ -127,6 +132,7 @@ Notes:
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-02 08:54 JST | Alpha-0 network / Docker closeout floor | pass | `cargo test -p mirrorea-core --test carriers` passed 12 tests; `cargo test -p mir-runtime --test hotplug_runtime_skeleton` passed 8 tests; `cargo test -p mir-runtime --test alpha_local_runtime` passed 3 tests; `cargo test -p mir-runtime --test alpha_layer_insertion_runtime` passed 6 tests; `cargo test -p mir-runtime --test alpha_network_runtime` passed 7 tests; Rust local-runtime examples ran 2 times; `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout` emitted `LI-01..05` JSON evidence; `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout` emitted `NET-02/03/04/05/07/09` JSON evidence; `python3 scripts/alpha_network_docker_e2e.py check-all --format json` passed 6/6 over Docker Compose; source hierarchy passed 60/60; `validate_docs.py` reported the scaffold complete; report-schema unit ran 11 tests and passed; `cargo fmt --check` and `git diff --check` were clean. This validates the Stage-C narrow Rust network / Docker floor only, not route rebinding completion, partition handling, production WAN/session/replay, runtime package/avatar admission, distributed save/load, or final public parser/runtime. |
 | 2026-05-02 08:15 JST | Alpha-0 layer-insertion closeout floor | pass | `cargo test -p mirrorea-core --test carriers` passed 12 tests; `cargo test -p mir-runtime --test alpha_local_runtime` passed 3 tests; `cargo test -p mir-runtime --test hotplug_runtime_skeleton` passed 8 tests; `cargo test -p mir-runtime --test alpha_layer_insertion_runtime` passed 6 tests; `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout` emitted `LI-01..05` JSON evidence; `find samples/alpha/layer-insertion -maxdepth 1 -type f | sort` confirmed README plus five `.mir` / `.expected.json` pairs; source hierarchy passed 60/60; `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1104 numbered report(s).`; report-schema unit ran 11 tests and passed; `cargo fmt --check` and `git diff --check` were clean. This validates the Stage-D narrow Rust layer-insertion floor only, not completed lifecycle/detach/migration ordering, runtime package/avatar admission, network/Docker completion, distributed save/load, or final public parser/runtime. |
 | 2026-05-02 07:45 JST | Alpha-0 local-runtime closeout floor | pass | `cargo test -p mirrorea-core --test carriers` passed 12 tests; `cargo test -p mirrorea-core --test runtime_substrate` passed 12 tests; `cargo test -p mir-runtime --test hotplug_runtime_skeleton` passed 8 tests; `cargo test -p mir-runtime --test alpha_local_runtime` passed 3 tests; both `mirrorea_alpha_local_runtime` example runs emitted JSON reports; `python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --format json` confirmed Bob handoff/witness parity anchor; source hierarchy passed 60/60; `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1103 numbered report(s).`; report-schema unit ran 11 tests and passed; `cargo fmt --check` and `git diff --check` were clean. This validates the Stage-B narrow Rust local-runtime floor only, not alpha parser/runtime, hot-plug/package/avatar completion, or network/Docker runtime. |
 | 2026-05-02 07:25 JST | Alpha-0 checker-floor closeout floor | pass | `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_cut_save_load_checker` passed 11 tests; source hierarchy passed 60/60; `validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1102 numbered report(s).`; report-schema unit ran 11 tests and passed; `git diff --check` was clean. This validates the LIF/VAR/CUT synthetic checker floors and docs closeout only, not Alpha parser/runtime execution. |

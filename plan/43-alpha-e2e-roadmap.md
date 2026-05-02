@@ -30,6 +30,8 @@ final public product completion ではない。
 ### Stage C
 
 - real transport narrow cut
+- first actualized subset is now a non-public Rust Stage-C network floor over local TCP process-boundary / Docker Compose bridge:
+  explicit membership freshness checks, capability/witness admission checks, observer-safe route trace, and auth-evidence lane preservation for `NET-02/03/04/05/07/09`
 
 ### Stage D
 
@@ -75,6 +77,7 @@ minimum path:
 3. Docker world + participant shape
 4. stale membership / missing capability / missing witness negatives
 5. observer-safe route trace
+6. auth-evidence lane preserved separately from transport delivery
 
 Docker E2E remains evidence of narrow alpha cut, not production WAN federation.
 
@@ -111,7 +114,10 @@ Phase 1+ runtime floor:
 - current Phase 4 first-cut floor:
   `cargo test -p mir-runtime --test alpha_layer_insertion_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout`
-- Docker-specific validation only when Docker lane is actually added
+- current Phase 5 first-cut floor:
+  `cargo test -p mir-runtime --test alpha_network_runtime`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`
+  `python3 scripts/alpha_network_docker_e2e.py check-all --format json`
 
 ## stop lines
 
@@ -123,4 +129,4 @@ Phase 1+ runtime floor:
 
 ## next package
 
-- after `P-A0-08` layer-insertion first cut, the next reopen point is `P-A0-09` network / Docker E2E
+- after `P-A0-09` network / Docker E2E first cut, the next reopen point is `P-A0-10` runtime package / avatar skeleton

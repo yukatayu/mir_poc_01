@@ -161,7 +161,7 @@
 - normative anchor は `specs/13..17`
 - repository memory anchor は `plan/39..43`
 - sample scaffold root は `samples/alpha/`
-- current package reading は `P-A0-01..08` が current repo state で close 済みであり、2026-05-02 08:15 JST 時点では `P-A0-07` による first non-public Rust local-runtime floor に加えて、`P-A0-08` により `crates/mir-runtime/src/alpha_layer_insertion_runtime.rs`、its example、and `samples/alpha/layer-insertion/LI-01..05` からなる first non-public Rust layer-insertion floor まで actualize 済み、next reopen point は `P-A0-09` network / Docker E2E という状態を前提にし、queue authority は `progress.md` / `tasks.md` に残す
+- current package reading は `P-A0-01..09` が current repo state で close 済みであり、2026-05-02 08:54 JST 時点では `P-A0-07` による first non-public Rust local-runtime floor、`P-A0-08` による `crates/mir-runtime/src/alpha_layer_insertion_runtime.rs` と `samples/alpha/layer-insertion/LI-01..05` からなる first non-public Rust layer-insertion floor に加えて、`P-A0-09` により `crates/mir-runtime/src/alpha_network_runtime.rs`、example `mirrorea_alpha_network_runtime`、thin runner `scripts/alpha_network_docker_e2e.py`、and `samples/alpha/network-docker/NET-02/03/04/05/07/09` からなる first non-public Rust Stage-C network / Docker floor まで actualize 済み、next reopen point は `P-A0-10` runtime package / avatar skeleton という状態を前提にし、queue authority は `progress.md` / `tasks.md` に残す
 - Stage A current floor と Stage B local runtime target を混同しない
   - Stage A evidence:
     clean near-end suite、current-L2 corpus、Lean evidence、Sugoroku helper、avatar helper、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory、hot-plug carrier/runtime narrow floor

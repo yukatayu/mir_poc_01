@@ -1,0 +1,42 @@
+services:
+  world:
+    image: debian:bookworm-slim
+    entrypoint:
+      - /usr/local/bin/mirrorea_alpha_network_runtime
+      - world-server
+      - --bind
+      - 0.0.0.0:41001
+      - --transport-medium
+      - ${MIRROREA_ALPHA_NETWORK_TRANSPORT_MEDIUM}
+      - --output
+      - /out/world.json
+    volumes:
+      - ${MIRROREA_ALPHA_NETWORK_BINARY}:/usr/local/bin/mirrorea_alpha_network_runtime:ro
+      - ${MIRROREA_ALPHA_NETWORK_OUTPUT_DIR}:/out
+    networks:
+      - alpha_net
+
+  participant:
+    image: debian:bookworm-slim
+    depends_on:
+      world:
+        condition: service_started
+    entrypoint:
+      - /usr/local/bin/mirrorea_alpha_network_runtime
+      - participant-client
+      - ${MIRROREA_ALPHA_NETWORK_SAMPLE_ID}
+      - --addr
+      - world:41001
+      - --transport-medium
+      - ${MIRROREA_ALPHA_NETWORK_TRANSPORT_MEDIUM}
+      - --output
+      - /out/participant.json
+    volumes:
+      - ${MIRROREA_ALPHA_NETWORK_BINARY}:/usr/local/bin/mirrorea_alpha_network_runtime:ro
+      - ${MIRROREA_ALPHA_NETWORK_OUTPUT_DIR}:/out
+    networks:
+      - alpha_net
+
+networks:
+  alpha_net:
+    driver: bridge

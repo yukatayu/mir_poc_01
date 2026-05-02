@@ -1,8 +1,8 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::error::{MirroreaCoreError, require_non_empty, require_non_empty_items};
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct PrincipalClaim {
     pub principal: String,
     pub participant_place: String,
@@ -32,7 +32,7 @@ impl PrincipalClaim {
     }
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct AuthEvidence {
     pub kind: String,
     pub subject: String,
@@ -52,7 +52,7 @@ impl AuthEvidence {
     }
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct MessageEnvelope {
     pub envelope_id: String,
     pub from_place: String,
