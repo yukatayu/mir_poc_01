@@ -181,10 +181,12 @@ Continue with `P-A0-17`: either define an explicit helper-local acceptance artif
 
 ## Commit / push status
 
-Pending at report write.
+- Primary package closeout commit: `4ed2949` (`mirrorea: close p-a0-16 checker widening`)
+- Push status: pushed to `origin/main`
+- This report metadata section is finalized in an immediate docs-only follow-up after the primary closeout push.
 
 ## Sub-agent session close status
 
-- `Bacon`: completed; close pending at report write.
-- `Hubble`: completed; close pending at report write.
-- `Beauvoir`: running at report write.
+- `Bacon`: completed and closed.
+- `Hubble`: completed and closed.
+- `Beauvoir`: shutdown without findings after two wait windows; close was requested and no review output was produced.
