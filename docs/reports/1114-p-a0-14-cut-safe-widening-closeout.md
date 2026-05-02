@@ -187,7 +187,9 @@ dashboard rows now reflect `A0-CUT` widening to `CUT-04/17` runtime-backed plus 
 
 ## Commit / push status
 
-Pending at report write.
+- Primary closeout commit: `3722d70` (`mirrorea: close p-a0-14 honest cut widening`)
+- Push status: pushed to `origin/main`
+- Report metadata note: this section was finalized immediately after the primary package push.
 
 ## Sub-agent session close status
 
