@@ -56,6 +56,12 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "expected_sidecar": "samples/alpha/e2e/e2e-05-avatar_runtime_package.expected.json",
     },
     {
+        "sample_id": "E2E-06",
+        "summary": "Bridge the local-only save/load positive row into an integrated Stage-F row.",
+        "expected_terminal_outcome": "accepted",
+        "expected_sidecar": "samples/alpha/e2e/e2e-06-local_save_load_continue.expected.json",
+    },
+    {
         "sample_id": "E2E-07",
         "summary": "Bridge checker-backed invalid distributed cut rejection into an integrated Stage-F row.",
         "expected_terminal_outcome": "rejected",
@@ -75,11 +81,11 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
     },
 ]
 
-PLANNED_ONLY_ROWS = ["E2E-06", "E2E-08"]
+PLANNED_ONLY_ROWS = ["E2E-08"]
 
 STOP_LINES = [
     "do not promote samples/alpha/e2e to an active runnable root",
-    "do not mark Stage F complete while E2E-06 local save/load and dedicated alpha visualization/devtools rows remain incomplete",
+    "do not mark Stage F complete while dedicated alpha visualization/devtools rows remain incomplete",
     "do not treat checker-backed invalid distributed cut rejection as distributed save/load completion",
     "do not treat helper-local or Docker-local evidence as production runtime / WAN / durable replay evidence",
     "do not treat Reversed Library seed rows as Mirrorea Spaces alpha completion evidence",
@@ -88,7 +94,6 @@ STOP_LINES = [
 LIMITATIONS = [
     "thin integrated runner over existing Stage B/C/D/F bridge floors only",
     "no parser/front-door execution of samples/alpha/e2e/*.mir",
-    "no local save/load positive runtime row yet",
     "no dedicated alpha visualization family runner yet",
     "no Stage F completion claim",
 ]
@@ -100,6 +105,14 @@ NEGATIVE_COVERAGE = {
     "incompatible_patch_reject": "LI-05",
     "invalid_cut_reject": "CUT-05 -> E2E-07",
     "unsigned_native_package_reject": "HP-11",
+}
+
+POSITIVE_COVERAGE = {
+    "local_runtime": "LR-01 -> E2E-01",
+    "docker_network": "NET-02 -> E2E-02",
+    "layer_hotplug": "LI-01/03/04 -> E2E-03/04/09",
+    "avatar_package": "AV-01/02/08 -> E2E-05/10",
+    "local_save_load": "CUT-04 -> E2E-06",
 }
 
 CUT_REASON_KINDS = {"orphan_receive"}
@@ -200,6 +213,17 @@ def _load_component_report(kind: str, sample_id: str) -> dict[str, Any]:
                 "--",
                 "run",
                 sample_id,
+            ]
+        )
+    if kind == "cut-save-load" and sample_id == "CUT-04":
+        return _run_json_command(
+            [
+                "python3",
+                "scripts/alpha_cut_save_load_samples.py",
+                "run",
+                sample_id,
+                "--format",
+                "json",
             ]
         )
     raise ValueError(f"unsupported component request: {kind} {sample_id}")
@@ -327,7 +351,6 @@ def _build_e2e_01_report() -> dict[str, Any]:
                 "final Stage F completion",
             ],
             "deferred": [
-                "local save/load positive bridge",
                 "dedicated alpha visualization family runner",
                 "parser/front-door execution",
             ],
@@ -541,6 +564,64 @@ def _build_e2e_05_report() -> dict[str, Any]:
     return report
 
 
+def _build_e2e_06_report() -> dict[str, Any]:
+    save_load = _load_component_report("cut-save-load", "CUT-04")
+    report = _base_report(
+        sample_id="E2E-06",
+        sample_name="local_save_load_continue",
+        kind="positive",
+        purpose="local save/load",
+        expected="resume local runtime frontier",
+    )
+    report.update(
+        {
+            "component_refs": [
+                {
+                    "family": "cut-save-load",
+                    "sample_id": "CUT-04",
+                    "command": "python3 scripts/alpha_cut_save_load_samples.py run CUT-04 --format json",
+                }
+            ],
+            "evidence_summary": {
+                "saved_owner": save_load.get("saved_owner"),
+                "resumed_owner": save_load.get("resumed_owner"),
+                "state_roundtrip_equal": save_load.get("state_roundtrip_equal"),
+                "restored_membership_epoch": save_load.get("saved_runtime_snapshot", {})
+                .get("membership", {})
+                .get("membership_epoch"),
+                "restored_visible_history_count": len(
+                    save_load.get("restored_visible_history", [])
+                ),
+                "visible_history_after_resume_count": len(
+                    save_load.get("visible_history_after_resume", [])
+                ),
+                "resumed_dispatch_outcomes": [
+                    record.get("dispatch_outcome")
+                    for record in save_load.get("resumed_dispatch_records", [])
+                ],
+                "visualization_surface": "resumed_event_dag_json",
+            },
+            "terminal_outcome": save_load.get("terminal_outcome"),
+            "reason_family": None,
+            "what_it_proves": [
+                "a room-local runtime savepoint can restore the runtime snapshot, saved owner marker, and visible-history frontier before resumed dispatch",
+                "Stage F keeps local save/load explicit without widening to distributed durable persistence",
+            ],
+            "what_it_does_not_prove": [
+                "distributed save/load runtime",
+                "Z-cycle handling completion",
+                "dedicated alpha visualization/devtools runner",
+            ],
+            "deferred": [
+                "CUT-11/12 Z-cycle widening",
+                "CUT-16/17 stale witness/membership load verdict split",
+                "Stage F completion after dedicated alpha devtools bridge",
+            ],
+        }
+    )
+    return report
+
+
 def _build_e2e_07_report() -> dict[str, Any]:
     cut = _build_cut05_bridge_report()
     report = _base_report(
@@ -572,7 +653,6 @@ def _build_e2e_07_report() -> dict[str, Any]:
                 "Z-cycle handling completion",
             ],
             "deferred": [
-                "CUT-04 local save/load positive runtime row",
                 "CUT-11/12 Z-cycle widening",
                 "CUT-16/17 stale witness/membership load verdict split",
             ],
@@ -689,6 +769,8 @@ def _build_report(sample_id: str) -> dict[str, Any]:
         return _build_e2e_04_report()
     if sample_id == "E2E-05":
         return _build_e2e_05_report()
+    if sample_id == "E2E-06":
+        return _build_e2e_06_report()
     if sample_id == "E2E-07":
         return _build_e2e_07_report()
     if sample_id == "E2E-09":
@@ -749,22 +831,29 @@ def closeout() -> dict[str, Any]:
         "sample_root": str(E2E_ROOT),
         "implemented_rows": [row["sample_id"] for row in IMPLEMENTED_ROWS],
         "planned_only_rows": list(PLANNED_ONLY_ROWS),
+        "positive_coverage_refs": dict(POSITIVE_COVERAGE),
         "negative_coverage_refs": dict(NEGATIVE_COVERAGE),
         "visualization_surface_refs": [
             "LR-01.event_dag",
+            "CUT-04.resumed_event_dag",
             "LI-01.post_attach_trace_rows",
             "NET-02.observer_route_trace",
             "AV-08.representation_state",
         ],
         "validation_floor": [
+            "cargo test -p mirrorea-core --test runtime_substrate",
             "cargo test -p mir-runtime --test alpha_local_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime",
+            "cargo test -p mir-runtime --test alpha_cut_save_load_runtime",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku",
+            "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout",
-            "python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_e2e_samples scripts.tests.test_validate_docs",
+            "python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_e2e_samples scripts.tests.test_validate_docs",
+            "python3 scripts/alpha_cut_save_load_samples.py check-all --format json",
             "python3 scripts/alpha_network_docker_e2e.py check-all --format json",
             "python3 scripts/alpha_avatar_runtime_samples.py check-all --format json",
+            "python3 scripts/alpha_e2e_samples.py run E2E-06 --format json",
             "python3 scripts/alpha_e2e_samples.py check-all --format json",
         ],
         "stop_lines": list(STOP_LINES),
@@ -772,7 +861,6 @@ def closeout() -> dict[str, Any]:
         "stage_e_complete": False,
         "stage_f_complete": False,
         "remaining_blockers": [
-            "E2E-06 local save/load positive bridge remains unimplemented",
             "dedicated alpha visualization/devtools family runner remains unimplemented",
             "Stage F completion claim remains blocked on the above plus broader lifecycle widening",
         ],

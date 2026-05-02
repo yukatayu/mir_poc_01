@@ -25,12 +25,21 @@ class AlphaE2ESamplesTests(unittest.TestCase):
 
     def test_closeout_keeps_stage_e_and_f_incomplete(self) -> None:
         payload = runner.closeout()
-        self.assertEqual(payload["planned_only_rows"], ["E2E-06", "E2E-08"])
+        self.assertEqual(payload["planned_only_rows"], ["E2E-08"])
         self.assertFalse(payload["stage_e_complete"])
         self.assertFalse(payload["stage_f_complete"])
         self.assertIn(
+            "cargo test -p mirrorea-core --test runtime_substrate",
+            payload["validation_floor"],
+        )
+        self.assertIn(
+            "python3 scripts/alpha_e2e_samples.py run E2E-06 --format json",
+            payload["validation_floor"],
+        )
+        self.assertIn(
             "CUT-05 -> E2E-07", payload["negative_coverage_refs"]["invalid_cut_reject"]
         )
+        self.assertIn("CUT-04 -> E2E-06", payload["positive_coverage_refs"]["local_save_load"])
 
     def test_build_e2e10_report_records_placeholder_fallback(self) -> None:
         component_report = {
@@ -73,6 +82,42 @@ class AlphaE2ESamplesTests(unittest.TestCase):
         self.assertEqual(report["sample_id"], "E2E-07")
         self.assertEqual(report["terminal_outcome"], "rejected")
         self.assertEqual(report["reason_family"], "invalid_cut")
+        self.assertIn(
+            "distributed save/load runtime", "\n".join(report["what_it_does_not_prove"])
+        )
+
+    def test_build_e2e06_report_records_local_save_nonclaim(self) -> None:
+        save_load_report = {
+            "sample_id": "CUT-04",
+            "terminal_outcome": "accepted",
+            "state_roundtrip_equal": True,
+            "saved_owner": "Bob",
+            "resumed_owner": "Alice",
+            "saved_runtime_snapshot": {
+                "membership": {"membership_epoch": 0, "members": {}}
+            },
+            "restored_visible_history": [
+                "publish roll_result(Alice, 4) witness=draw_pub#1",
+                "handoff dice_owner Alice -> Bob using witness=draw_pub#1",
+            ],
+            "visible_history_after_resume": [
+                "publish roll_result(Alice, 4) witness=draw_pub#1",
+                "handoff dice_owner Alice -> Bob using witness=draw_pub#1",
+                "publish roll_result(Bob, 2) witness=draw_pub#2",
+                "handoff dice_owner Bob -> Alice using witness=draw_pub#2",
+            ],
+            "resumed_dispatch_records": [
+                {"dispatch_outcome": "accepted", "reason_refs": ["local_save_only"]}
+            ],
+        }
+        with mock.patch.object(
+            runner, "_load_component_report", return_value=save_load_report
+        ):
+            report = runner._build_e2e_06_report()
+
+        self.assertEqual(report["sample_id"], "E2E-06")
+        self.assertEqual(report["terminal_outcome"], "accepted")
+        self.assertTrue(report["evidence_summary"]["state_roundtrip_equal"])
         self.assertIn(
             "distributed save/load runtime", "\n".join(report["what_it_does_not_prove"])
         )

@@ -1,12 +1,12 @@
 use std::collections::BTreeMap;
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::error::{MirroreaCoreError, require_non_empty};
 
 const PARTICIPANT_PLACE_KIND: &str = "ParticipantPlace";
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct MemberRecord {
     pub principal: String,
     pub participant_place: String,
@@ -20,11 +20,31 @@ impl MemberRecord {
     pub fn validate(&self) -> Result<(), MirroreaCoreError> {
         require_non_empty("MemberRecord", "principal", &self.principal)?;
         require_non_empty("MemberRecord", "participant_place", &self.participant_place)?;
+        if self.active && self.left_at_epoch.is_some() {
+            return Err(MirroreaCoreError::new(format!(
+                "MemberRecord `{}` is active but has left_at_epoch set",
+                self.principal
+            )));
+        }
+        if !self.active && self.left_at_epoch.is_none() {
+            return Err(MirroreaCoreError::new(format!(
+                "MemberRecord `{}` is inactive but has no left_at_epoch",
+                self.principal
+            )));
+        }
+        if let Some(left_at_epoch) = self.left_at_epoch {
+            if left_at_epoch < self.joined_at_epoch {
+                return Err(MirroreaCoreError::new(format!(
+                    "MemberRecord `{}` has left_at_epoch {} before joined_at_epoch {}",
+                    self.principal, left_at_epoch, self.joined_at_epoch
+                )));
+            }
+        }
         Ok(())
     }
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct MemberSnapshot {
     pub place: String,
     pub active: bool,
@@ -33,13 +53,13 @@ pub struct MemberSnapshot {
     pub left_at_epoch: Option<u64>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct MembershipSnapshot {
     pub membership_epoch: u64,
     pub members: BTreeMap<String, MemberSnapshot>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
 pub struct MembershipRegistry {
     membership_epoch: u64,
     members: BTreeMap<String, MemberRecord>,
@@ -138,6 +158,43 @@ impl MembershipRegistry {
         }
     }
 
+    pub fn restore(snapshot: &MembershipSnapshot) -> Result<Self, MirroreaCoreError> {
+        let mut members = BTreeMap::new();
+        for (principal, member) in &snapshot.members {
+            require_non_empty("MembershipSnapshot", "principal", principal)?;
+            require_non_empty("MembershipSnapshot", "place", &member.place)?;
+            let record = MemberRecord {
+                principal: principal.clone(),
+                participant_place: member.place.clone(),
+                active: member.active,
+                incarnation: member.incarnation,
+                joined_at_epoch: member.joined_at_epoch,
+                left_at_epoch: member.left_at_epoch,
+            };
+            record.validate()?;
+            if record.joined_at_epoch > snapshot.membership_epoch {
+                return Err(MirroreaCoreError::new(format!(
+                    "MembershipSnapshot principal `{principal}` joined_at_epoch {} exceeds membership frontier {}",
+                    record.joined_at_epoch, snapshot.membership_epoch
+                )));
+            }
+            if let Some(left_at_epoch) = record.left_at_epoch {
+                if left_at_epoch > snapshot.membership_epoch {
+                    return Err(MirroreaCoreError::new(format!(
+                        "MembershipSnapshot principal `{principal}` left_at_epoch {} exceeds membership frontier {}",
+                        left_at_epoch, snapshot.membership_epoch
+                    )));
+                }
+            }
+            members.insert(principal.clone(), record);
+        }
+
+        Ok(Self {
+            membership_epoch: snapshot.membership_epoch,
+            members,
+        })
+    }
+
     fn new_member_record(
         &self,
         principal: &str,
@@ -164,12 +221,12 @@ impl MembershipRegistry {
     }
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
 pub struct PlaceCatalogSnapshot {
     pub places: BTreeMap<String, String>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
 pub struct PlaceCatalog {
     places: BTreeMap<String, String>,
 }
@@ -203,15 +260,25 @@ impl PlaceCatalog {
             places: self.places.clone(),
         }
     }
+
+    pub fn restore(snapshot: &PlaceCatalogSnapshot) -> Result<Self, MirroreaCoreError> {
+        let mut places = BTreeMap::new();
+        for (place_id, kind) in &snapshot.places {
+            require_non_empty("PlaceCatalogSnapshot", "place_id", place_id)?;
+            require_non_empty("PlaceCatalogSnapshot", "kind", kind)?;
+            places.insert(place_id.clone(), kind.clone());
+        }
+        Ok(Self { places })
+    }
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct LogicalPlaceRuntimeSnapshot {
     pub place_catalog: PlaceCatalogSnapshot,
     pub membership: MembershipSnapshot,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
 pub struct LogicalPlaceRuntimeShell {
     place_catalog: PlaceCatalog,
     membership: MembershipRegistry,
@@ -286,6 +353,26 @@ impl LogicalPlaceRuntimeShell {
             place_catalog: self.place_catalog.snapshot(),
             membership: self.membership.snapshot(),
         }
+    }
+
+    pub fn restore(snapshot: &LogicalPlaceRuntimeSnapshot) -> Result<Self, MirroreaCoreError> {
+        let shell = Self {
+            place_catalog: PlaceCatalog::restore(&snapshot.place_catalog)?,
+            membership: MembershipRegistry::restore(&snapshot.membership)?,
+        };
+
+        for (principal, member) in &snapshot.membership.members {
+            shell.ensure_registered_participant_place(&member.place)?;
+            let expected_place = shell.participant_place_for(principal)?;
+            if member.place != expected_place {
+                return Err(MirroreaCoreError::new(format!(
+                    "LogicalPlaceRuntimeShell restore requires principal `{principal}` to use participant place `{expected_place}`, found `{}`",
+                    member.place
+                )));
+            }
+        }
+
+        Ok(shell)
     }
 
     fn ensure_registered_participant_place(

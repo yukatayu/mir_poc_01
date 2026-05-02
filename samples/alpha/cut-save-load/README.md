@@ -1,11 +1,11 @@
 # alpha sample family — Cut / Save / Load
 
-- Status: planned skeleton only
+- Status: mixed runtime/checker/planned family
 - Phase: Phase 2 / 6
 - Stage: Stage A -> F bridge
-- Current runners do not execute this family yet.
-- Current package adds a non-public checker floor for selected consistency/deferred-surface rows via sidecar-declared `expected_static.checked_reason_codes`.
-- Validation for this package is synthetic-artifact checker tests plus filesystem/docs integrity.
+- `scripts/alpha_cut_save_load_samples.py` actualizes `CUT-04` as a local-only save/load runtime bridge over the existing Rust local runtime substrate.
+- `scripts/alpha_cut_save_load_checker.py` continues to cover selected negative/deferred rows via sidecar-declared `expected_static.checked_reason_codes`.
+- This family is still not an active runnable root, and distributed/durable save/load remains out of scope.
 
 ## Rows
 
@@ -14,7 +14,7 @@
 | `CUT-01` | `cut-01-local_try_rollback_before_cut.mir` | positive | succeeds |
 | `CUT-02` | `cut-02-rollback_across_atomic_cut_rejected.mir` | negative semantic | pre-cut state remains |
 | `CUT-03` | `cut-03-irreversible_effect_in_rollback_rejected.mir` | negative static/runtime | reject/require compensation |
-| `CUT-04` | `cut-04-local_save_load_valid.mir` | positive | load restores local state |
+| `CUT-04` | `cut-04-local_save_load_valid.mir` | positive | load restores room-local runtime frontier |
 | `CUT-05` | `cut-05-inconsistent_distributed_snapshot_rejected.mir` | negative | invalid cut |
 | `CUT-06` | `cut-06-inflight_message_channel_state_valid.mir` | positive | valid cut |
 | `CUT-07` | `cut-07-observe_without_publish_rejected.mir` | negative | invalid cut |
@@ -32,9 +32,12 @@
 ## Policy
 
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
-- `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
+- `.expected.json` sidecars split into:
+  - runtime-backed row: `CUT-04`
+  - checker-backed rows: `CUT-05/07/08/09/13/14/15`
+  - planned-only rows: `CUT-01/02/03/06/10/11/12/16/17`
 - `CUT-05` / `07` / `08` / `09` / `13` / `14` / `15` currently carry checker-floor seed rows for the first structural cut-validity/deferred-surface cut.
-- this first checker cut does not yet cover:
+- the current mixed cut does not yet cover:
   `CUT-11` Z-cycle graph modeling, `CUT-12` communication-induced checkpoint repair, `CUT-10/16/17` load non-resurrection verdict split, or membership-dependent dispatch closure
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
@@ -42,5 +45,11 @@
 
 ```bash
 find samples/alpha/cut-save-load -maxdepth 1 -type f | sort
-python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker
+cargo test -p mirrorea-core --test runtime_substrate
+cargo test -p mir-runtime --test alpha_cut_save_load_runtime
+cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume
+python3 scripts/alpha_cut_save_load_samples.py check-all --format json
+python3 -m unittest \
+  scripts.tests.test_alpha_cut_save_load_checker \
+  scripts.tests.test_alpha_cut_save_load_samples
 ```

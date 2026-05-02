@@ -50,9 +50,10 @@ final public product completion ではない。
 
 - Mirrorea Spaces alpha demo
 - first actualized subset is now a thin integrated bridge runner `scripts/alpha_e2e_samples.py`:
-  `E2E-01/02/03/04/05/07/09/10`
-- `E2E-06` local save/load positive path and `E2E-08` upper-layer seed remain outside the actualized subset
-- current reading is `Stage F bridge actualized, Stage F completion still blocked`
+  `E2E-01/02/03/04/05/06/07/09/10`
+- `E2E-06` is now backed by the local-only `CUT-04` save/load bridge
+- `E2E-08` upper-layer seed remains outside the actualized subset
+- current reading is `Stage F bridge + local save/load path actualized, Stage F completion still blocked on dedicated alpha devtools`
 
 ## phase 0..8 packages
 
@@ -129,16 +130,27 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_avatar_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
   `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
+- current Phase 6 first-cut floor:
+  `cargo test -p mirrorea-core --test runtime_substrate`
+  `cargo test -p mir-runtime --test alpha_cut_save_load_runtime`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume`
+  `python3 scripts/alpha_cut_save_load_samples.py check-all --format json`
 - current Phase 8 bridge floor:
+  `cargo test -p mirrorea-core --test runtime_substrate`
   `cargo test -p mir-runtime --test alpha_local_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime`
+  `cargo test -p mir-runtime --test alpha_cut_save_load_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
+  `python3 scripts/alpha_cut_save_load_samples.py check-all --format json`
   `python3 scripts/alpha_network_docker_e2e.py check-all --format json`
   `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
+  `python3 scripts/alpha_e2e_samples.py run E2E-06 --format json`
   `python3 scripts/alpha_e2e_samples.py check-all --format json`
   `python3 scripts/alpha_e2e_samples.py closeout --format json`
+  `python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_e2e_samples`
 
 ## stop lines
 
@@ -153,6 +165,6 @@ Phase 1+ runtime floor:
 ## next package
 
 - after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
-- the next reopen points after `P-A0-11` are:
-  - `P-A0-12` local save/load positive bridge
+- the next reopen points after `P-A0-12` are:
   - `P-A0-13` dedicated alpha visualization/devtools bridge
+  - remaining CUT widening after the local-only positive bridge

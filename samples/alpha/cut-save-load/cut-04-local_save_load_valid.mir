@@ -3,7 +3,7 @@
 # Family: cut-save-load
 # Kind: positive
 # Purpose: single Place snapshot
-# Expected: load restores local state
+# Expected: load restores room-local runtime frontier
 # Status: planned-skeleton only; not consumed by current active runners.
 # This file is a source-ish placeholder for future checker/runtime integration.
 
@@ -12,6 +12,5 @@ module PlannedMirroreaAlpha.CutSaveLoad.LocalSaveLoadValid
 # Scenario sketch:
 # - sample_id: CUT-04
 # - goal: single Place snapshot
-# - expected outcome: load restores local state
+# - expected outcome: load restores room-local runtime frontier
 # - exact executable syntax / checker/runtime carrier remains deferred.
-

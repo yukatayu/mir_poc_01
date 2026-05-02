@@ -23,6 +23,12 @@ distributed durable save/load completion ではない。
   - `scripts/alpha_cut_save_load_checker.py`
   - `samples/alpha/cut-save-load/cut-05` / `07` / `08` / `09` / `13` / `14` / `15` sidecars
   synthetic detached artifact comparison only; no distributed save/load or runtime bridge claim
+- `P-A0-12` local-only save/load positive bridge now exists via:
+  - `crates/mir-runtime/src/alpha_local_runtime.rs`
+  - example `mirrorea_alpha_local_runtime -- save-load-resume`
+  - `scripts/alpha_cut_save_load_samples.py`
+  - `samples/alpha/cut-save-load/cut-04-local_save_load_valid.expected.json`
+  this proves only room-local runtime savepoint -> restore -> resumed dispatch over the existing runtime floor; it does not widen to distributed/durable save/load
 - current first cut intentionally does **not** claim:
   full Z-cycle graph handling, communication-induced checkpoint repair, load rejection vs stale-preserving load split, or membership-dependent dispatch closure coverage
 
@@ -42,10 +48,15 @@ distributed durable save/load completion ではない。
 - docs-first boundary for save-state content inventory
 - no runtime claim beyond local scope
 
+### current executable cut
+
+- `CUT-04` local-only save/load positive bridge
+- consistent-cut predicate/checker first cut for `CUT-05/07/08/09/13/14/15`
+- explicit distributed-save non-claim remains in place
+
 ### next executable cut
 
 - consistent-cut predicate/checker widening beyond the first orphan/deferred slice
-- local save/load skeleton
 - invalid distributed snapshot reject
 - explicit channel-state/in-flight representation
 - hot-plug activation closure checks
@@ -76,5 +87,5 @@ distributed durable save/load completion ではない。
 
 ## next package
 
-- after checker first cut:
-  add consistent-cut checker skeleton or explicit planned status for CUT family rows
+- after `P-A0-12` local-only save/load positive bridge:
+  widen the remaining CUT family carefully via Z-cycle structure, stale witness/membership load verdict split, and membership-dependent dispatch closure without claiming distributed durable save/load

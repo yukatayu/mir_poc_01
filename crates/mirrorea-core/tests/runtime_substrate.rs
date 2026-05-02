@@ -161,6 +161,89 @@ fn logical_place_runtime_shell_tracks_registered_places_and_membership() {
 }
 
 #[test]
+fn logical_place_runtime_shell_restore_roundtrips_snapshot() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .register_place("WorldServerPlace", "WorldServerPlace")
+        .expect("world server");
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial Alice");
+    shell.add_participant("Bob").expect("late join Bob");
+    shell.leave_participant("Bob").expect("Bob leaves");
+
+    let snapshot = shell.snapshot();
+    let restored =
+        LogicalPlaceRuntimeShell::restore(&snapshot).expect("restore from typed snapshot");
+
+    assert_eq!(restored.snapshot(), snapshot);
+}
+
+#[test]
+fn logical_place_runtime_shell_restore_rejects_inactive_member_without_leave_epoch() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial Alice");
+    shell.add_participant("Bob").expect("late join Bob");
+    shell.leave_participant("Bob").expect("Bob leaves");
+
+    let mut snapshot = shell.snapshot();
+    snapshot
+        .membership
+        .members
+        .get_mut("Bob")
+        .unwrap()
+        .left_at_epoch = None;
+
+    let err = LogicalPlaceRuntimeShell::restore(&snapshot)
+        .expect_err("inactive member must keep leave frontier");
+    assert!(err.to_string().contains("inactive"));
+    assert!(err.to_string().contains("left_at_epoch"));
+}
+
+#[test]
+fn logical_place_runtime_shell_restore_rejects_leave_epoch_beyond_frontier() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial Alice");
+    shell.add_participant("Bob").expect("late join Bob");
+    shell.leave_participant("Bob").expect("Bob leaves");
+
+    let mut snapshot = shell.snapshot();
+    snapshot
+        .membership
+        .members
+        .get_mut("Bob")
+        .unwrap()
+        .left_at_epoch = Some(99);
+
+    let err = LogicalPlaceRuntimeShell::restore(&snapshot)
+        .expect_err("leave frontier beyond membership epoch must fail");
+    assert!(err.to_string().contains("left_at_epoch"));
+    assert!(err.to_string().contains("membership frontier"));
+}
+
+#[test]
+fn logical_place_runtime_shell_restore_rejects_principal_place_mismatch() {
+    let mut shell = LogicalPlaceRuntimeShell::default();
+    shell
+        .add_initial_participant("Alice")
+        .expect("initial Alice");
+    shell.add_participant("Bob").expect("late join Bob");
+
+    let mut snapshot = shell.snapshot();
+    snapshot.membership.members.get_mut("Alice").unwrap().place =
+        "ParticipantPlace[Bob]".to_string();
+
+    let err = LogicalPlaceRuntimeShell::restore(&snapshot)
+        .expect_err("principal/place mismatch must fail");
+    assert!(err.to_string().contains("Alice"));
+    assert!(err.to_string().contains("ParticipantPlace[Alice]"));
+}
+
+#[test]
 fn logical_place_runtime_shell_rejects_member_place_not_in_catalog() {
     let mut shell = LogicalPlaceRuntimeShell::default();
     let err = shell

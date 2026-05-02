@@ -52,7 +52,6 @@
     "Z-cycle handling completion"
   ],
   "deferred": [
-    "CUT-04 local save/load positive runtime row",
     "CUT-11/12 Z-cycle widening",
     "CUT-16/17 stale witness/membership load verdict split"
   ]

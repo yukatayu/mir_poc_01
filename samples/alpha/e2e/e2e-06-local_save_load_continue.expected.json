@@ -2,25 +2,56 @@
   "sample_id": "E2E-06",
   "sample_name": "local_save_load_continue",
   "family": "e2e",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 8",
   "stage": "Stage F",
   "kind": "positive",
   "purpose": "local save/load",
-  "expected": "resume local state",
+  "expected": "resume local runtime frontier",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_f_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_component_floors",
+    "runner": "python3 scripts/alpha_e2e_samples.py run E2E-06 --format json",
+    "note": "Composes existing alpha-local runtime/checker floors without parsing samples/alpha/e2e/*.mir."
   },
+  "component_refs": [
+    {
+      "family": "cut-save-load",
+      "sample_id": "CUT-04",
+      "command": "python3 scripts/alpha_cut_save_load_samples.py run CUT-04 --format json"
+    }
+  ],
+  "evidence_summary": {
+    "saved_owner": "Bob",
+    "resumed_owner": "Alice",
+    "state_roundtrip_equal": true,
+    "restored_membership_epoch": 0,
+    "restored_visible_history_count": 2,
+    "visible_history_after_resume_count": 4,
+    "resumed_dispatch_outcomes": [
+      "accepted"
+    ],
+    "visualization_surface": "resumed_event_dag_json"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "a room-local runtime savepoint can restore the runtime snapshot, saved owner marker, and visible-history frontier before resumed dispatch",
+    "Stage F keeps local save/load explicit without widening to distributed durable persistence"
+  ],
+  "what_it_does_not_prove": [
+    "distributed save/load runtime",
+    "Z-cycle handling completion",
+    "dedicated alpha visualization/devtools runner"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "CUT-11/12 Z-cycle widening",
+    "CUT-16/17 stale witness/membership load verdict split",
+    "Stage F completion after dedicated alpha devtools bridge"
   ]
 }
