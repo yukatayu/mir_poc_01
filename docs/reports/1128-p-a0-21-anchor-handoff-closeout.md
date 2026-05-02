@@ -127,7 +127,7 @@ git status --short
   the specified Python closeout suite passed 74 tests.
 - Docs / hierarchy / formatting:
   `python3 scripts/check_source_hierarchy.py` passed `60/60/0`,
-  `python3 scripts/validate_docs.py` reported the scaffold complete and found `1129` numbered reports at validation time,
+  `python3 scripts/validate_docs.py` reported the scaffold complete and found `1130` numbered reports at validation time,
   `cargo fmt --check` passed,
   `git diff --check` passed.
 - No Rust runtime tests were needed because this package changes only helper-local Python/docs/sidecar scope and does not touch Rust/runtime behavior.
@@ -198,9 +198,11 @@ the alpha lifetime/fallback lane now records the anchor-handoff floor and its de
 
 ## Commit / push status
 
-Pending at report write.
+- Main package commit: `650e7d1` (`mirrorea: close p-a0-21 anchor handoff floor`)
+- Push status: pushed to `origin/main`
+- Docs-only finalize follow-up: pending at report write after main push confirmation
 
 ## Sub-agent session close status
 
 - `Archimedes`, `Dewey`, and `McClintock` completed review.
-- Close requests will be issued after the package commit/push is complete.
+- Close requests issued after the main package push; all three reviewer sessions are now closed.
