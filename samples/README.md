@@ -31,8 +31,9 @@
   - root 内には scaffold-only family と runner-backed non-public floor が併存するが、いずれも repo の active canonical root ではない
   - `lifetime-fallback/` は `LIF-01/05..08`、`contract-variance/` は `VAR-02/03/05/07/09/10/15` について `reason_codes_scope = alpha-static-floor` の non-public checker-floor seed rows を current repo state で持つ
   - `lifetime-fallback/` の `LIF-02/03/04` と `contract-variance/` の `VAR-01/04/06` は `acceptance_scope = alpha-acceptance-floor` の helper-local synthetic acceptance rows を current repo state で持つ
+  - `lifetime-fallback/` の `LIF-13` は `snapshot_scope = alpha-snapshot-selected-floor` の helper-local synthetic snapshot-selected row を current repo state で持つ
   - `contract-variance/` の `VAR-08/11/13` は `runtime_mirror.scope = alpha-runtime-mirror-floor` の non-public runtime-mirror rows を current repo state で持ち、source authority は `layer-insertion/` の `LI-04/01/03` runtime-floor sidecars に残す
-  - `reason_codes_scope` confinement、`acceptance_scope` confinement、`runtime_mirror.scope` confinement は別であり、positive row は negative reason code 不在ではなく explicit acceptance rows か runtime-mirror rows で扱う
+  - `reason_codes_scope` confinement、`acceptance_scope` confinement、`snapshot_scope` confinement、`runtime_mirror.scope` confinement は別であり、positive row は negative reason code 不在ではなく explicit acceptance rows、snapshot rows、または runtime-mirror rows で扱う
   - current package line では `local-runtime/`、`layer-insertion/`、`network-docker/`、`avatar-runtime/` が non-public Rust/runtime-private floor を持つが、sample file parsing front door ではなく、active root でもない
   - `network-docker/` は `mirrorea_alpha_network_runtime` + `alpha_network_docker_e2e.py` により `NET-02/03/04/05/07/09` を narrow Stage-C transport / Docker cut として actualize した。helper-local `clean-near-end/network-transport/` canary familyとは別物であり、`NET-01/06/08/10` は引き続き planned
   - `avatar-runtime/` は `mirrorea_alpha_avatar_runtime` + `alpha_avatar_runtime_samples.py` により `AV-01/02/06/08/09` を runtime-private package/avatar admission floor として actualize した。`HP-11/12/15` も同 runner で検証するが、`hotplug-runtime/` family 全体を runnable root へ昇格したわけではない

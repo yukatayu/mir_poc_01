@@ -257,6 +257,48 @@ class CurrentL2FamilyAcceptanceSupportTests(unittest.TestCase):
         self.assertIn("status: matched", output)
         self.assertNotIn("999", output)
 
+    def test_run_family_acceptance_ignores_snapshot_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_path = temp_root / "fixture.json"
+            artifact_path = temp_root / "artifact.json"
+            self.write_json(
+                fixture_path,
+                {
+                    "expected_acceptance": {
+                        "checked_acceptance_scope": "alpha-acceptance-floor",
+                        "checked_acceptance_rows": [{"kind": "alpha_kind", "value": 1}],
+                    }
+                },
+            )
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "acceptance_scope": "alpha-acceptance-floor",
+                        "acceptance_rows": [{"kind": "alpha_kind", "value": 1}],
+                        "snapshot_scope": "wrong-floor",
+                        "snapshot_rows": [{"kind": "alpha_kind", "value": 997}],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = support.run_family_acceptance_checker(
+                    argv=[str(fixture_path), str(artifact_path)],
+                    cluster_name="alpha_acceptance_cluster",
+                    description="alpha acceptance helper",
+                    kinds={"alpha_kind"},
+                    missing_status="fixture_alpha_rows_missing",
+                    expected_scope="alpha-acceptance-floor",
+                )
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("status: matched", output)
+        self.assertNotIn("997", output)
+
 
 if __name__ == "__main__":
     unittest.main()

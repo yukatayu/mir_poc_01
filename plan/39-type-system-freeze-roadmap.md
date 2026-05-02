@@ -57,6 +57,8 @@ reuse current `current_l2` checker/runtime skeleton rather than freezing a new p
 - widen static reason-code clusters beyond the current selected static rows (`LIF-01`, `LIF-05..08`) only when a new checked carrier is explicitly fixed
 - selected positive rows now use an explicit helper-local acceptance artifact schema:
   `LIF-02/03/04` only
+- `LIF-13` now uses a dedicated helper-local snapshot-selected artifact schema:
+  `snapshot_scope = alpha-snapshot-selected-floor` only
 - keep broader positive/remote/runtime-sensitive rows planned until new semantics justify widening
 - add explicit no-re-promotion / no-resurrection check rows if executable semantics floor reaches them
 
@@ -104,15 +106,16 @@ actual mechanization widening remains later than first checker skeleton.
 
 ## next reopen point
 
-- after `P-A0-19`, the current lifetime-family widening is intentionally limited to:
+- after `P-A0-20`, the current lifetime-family widening is intentionally limited to:
   - negative checker-floor rows `LIF-01/05..08`
   - helper-local synthetic acceptance rows `LIF-02/03/04`
-- `P-A0-19` closes only a docs-first remaining-row inventory for:
+- helper-local synthetic snapshot-selected row `LIF-13`
+- `P-A0-19` closes the docs-first remaining-row inventory for:
   - `LIF-11` anchor/deletion outcome semantics
   - `LIF-13` selected-option snapshot semantics
   - `LIF-15` remote freshness/membership/frontier carrier
-- inventory closeout does not widen the acceptance floor or create a parser/runtime bridge
-- next safe reopen requires the first row-specific actualization chosen from that inventory:
-  - either proof that one row still fits a narrow helper-local carrier without new semantics
-  - or a dedicated runtime/remote bridge for that row without overclaim
+- `P-A0-20` actualizes only `LIF-13` through the dedicated snapshot-selected carrier and does not widen the acceptance floor or create a parser/runtime bridge
+- next safe reopen requires the next row-specific actualization chosen from the remaining inventory:
+  - `LIF-11` anchor-handoff floor
+  - or a later dedicated remote carrier for `LIF-15` without overclaim
 - queue authority remains `progress.md` / `tasks.md`

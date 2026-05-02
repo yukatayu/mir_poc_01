@@ -110,6 +110,7 @@ current-scope Stage F closeout requires at least:
 Phase 0 docs/sample-skeleton floor:
 
 - `find samples/alpha -maxdepth 3 -type f | sort`
+- `python3 -m unittest scripts.tests.test_current_l2_family_snapshot_support scripts.tests.test_alpha_lifetime_fallback_snapshot`
 - `python3 scripts/check_source_hierarchy.py`
 - `python3 scripts/validate_docs.py`
 - `git diff --check`
@@ -176,11 +177,12 @@ Phase 1+ runtime floor:
 ## next reopen point
 
 - after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
-- after `P-A0-19`, the current LIF/VAR widening is intentionally limited to scoped helper evidence:
+- after `P-A0-20`, the current LIF/VAR widening is intentionally limited to scoped helper evidence:
   - `LIF-01/05..08` and `VAR-02/03/05/07/09/10/15` remain scope-confined negative synthetic checker-floor rows
   - `LIF-02/03/04` and `VAR-01/04/06` remain non-public helper-local synthetic acceptance-floor rows
+  - `LIF-13` is now actualized only as a non-public helper-local synthetic snapshot-selected row
   - `VAR-08/11/13` are now actualized only as non-public runtime-mirror rows mirrored from `LI-04/01/03`
-  - `reason_codes_scope`, `acceptance_scope`, and `runtime_mirror.scope` remain separate carriers
+  - `reason_codes_scope`, `acceptance_scope`, `snapshot_scope`, and `runtime_mirror.scope` remain separate carriers
   - keep parser/runtime/theorem-backed completion explicitly later
-  - `P-A0-19` itself closes only blocker inventory for `LIF-11/13/15` and `VAR-14`
-  - no safe `P-A0-20` is promoted until one row-specific carrier from that inventory is chosen for actualization
+  - `P-A0-19` closes blocker inventory for `LIF-11/13/15` and `VAR-14`, and `P-A0-20` consumes only the `LIF-13` slice of that inventory
+  - next safe reopen is `LIF-11` anchor-handoff floor; `LIF-15` and `VAR-14` still need dedicated future carriers

@@ -13,13 +13,37 @@
     "implemented": false,
     "active_root": false
   },
+  "expected_snapshot": {
+    "verdict": "valid",
+    "checked_snapshot_scope": "alpha-snapshot-selected-floor",
+    "checked_snapshot_rows": [
+      {
+        "kind": "snapshot_selected_anchor",
+        "sample_id": "LIF-13",
+        "source_chain": [
+          "FriendHead",
+          "SelfShoulder"
+        ],
+        "selected_option": "FriendHead",
+        "appended_fallback": "WorldOrigin",
+        "resulting_chain": [
+          "FriendHead",
+          "WorldOrigin"
+        ],
+        "excluded_options": [
+          "SelfShoulder"
+        ],
+        "full_chain_inherited": false,
+        "snapshot_freezes_selected_option": true
+      }
+    ]
+  },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks; P-A0-19 records the missing selected-option snapshot carrier but does not actualize this row."
+    "mode": "synthetic-snapshot-floor",
+    "runner": "python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_snapshot",
+    "note": "Validated by non-public synthetic helper-local snapshot-selected artifact tests; not parser/runtime/public implementation."
   },
   "deferred": [
-    "selected-option snapshot semantics without hidden full-chain inheritance",
     "exact executable syntax",
     "dedicated runner integration",
     "checker/runtime implementation"

@@ -1,12 +1,13 @@
 # alpha sample family — Lifetime / Fallback
 
-- Status: mixed scaffold with synthetic negative checker floor and selected helper-local acceptance floor
+- Status: mixed scaffold with synthetic negative checker floor, selected helper-local acceptance floor, and selected helper-local snapshot-selected floor
 - Phase: Phase 1
 - Stage: Stage A -> B bridge
 - Current runners still do not execute this family as a parser/runtime sample root.
 - Current package adds a non-public checker floor for selected negative-static rows via sidecar-declared `expected_static.checked_reason_codes`.
 - Current package also adds a helper-local synthetic acceptance floor for `LIF-02/03/04` via sidecar-declared `expected_acceptance.checked_acceptance_rows`.
-- `reason_codes_scope = alpha-static-floor` and `acceptance_scope = alpha-acceptance-floor` are distinct carrier boundaries.
+- `P-A0-20` additionally actualizes `LIF-13` via sidecar-declared `expected_snapshot.checked_snapshot_rows`.
+- `reason_codes_scope = alpha-static-floor`、`acceptance_scope = alpha-acceptance-floor`、`snapshot_scope = alpha-snapshot-selected-floor` は distinct carrier boundaries.
 - Validation for this package is synthetic helper-local checker/acceptance tests plus filesystem/docs integrity.
 
 ## Rows
@@ -35,11 +36,13 @@
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
 - `LIF-01` and `LIF-05..08` currently carry checker-floor seed rows for the first static diagnostic cut.
 - `LIF-02/03/04` currently carry helper-local synthetic acceptance rows only.
-- `LIF-11/13/15` remain outside the current acceptance floor because they need row-specific future carriers:
+- `LIF-13` currently carries helper-local synthetic snapshot-selected rows only.
+- `LIF-11/15` remain outside the current acceptance and snapshot floors because they need row-specific future carriers:
   `LIF-11` anchor/deletion outcome semantics,
-  `LIF-13` selected-option snapshot semantics,
   `LIF-15` remote freshness/membership/frontier carrier.
-- `P-A0-19` records those blockers as docs-first inventory only; it does not actualize the rows.
+- `P-A0-20` actualizes only `LIF-13` as `snapshot_scope = alpha-snapshot-selected-floor`.
+- `snapshot_selected` is not an acceptance row and not a reason-code row. It proves selected-option capture plus exclusion of non-selected options only.
+- `P-A0-19` inventory still records `LIF-11` and `LIF-15` as docs-first blockers only; it does not actualize those rows.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
@@ -48,5 +51,6 @@
 find samples/alpha/lifetime-fallback -maxdepth 1 -type f | sort
 python3 -m unittest \
   scripts.tests.test_alpha_lifetime_fallback_checker \
-  scripts.tests.test_alpha_lifetime_fallback_acceptance
+  scripts.tests.test_alpha_lifetime_fallback_acceptance \
+  scripts.tests.test_alpha_lifetime_fallback_snapshot
 ```

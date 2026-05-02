@@ -10,8 +10,9 @@
   を併存させる
 - `lifetime-fallback/` と `contract-variance/` には、selected negative rows（現在は `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15`）について non-public checker floor 用の `expected_static.checked_reason_codes` を追加済み
 - `lifetime-fallback/` の `LIF-02/03/04` と `contract-variance/` の `VAR-01/04/06` には、selected positive rows 用の helper-local synthetic acceptance floor `expected_acceptance.checked_acceptance_rows` を追加済み
+- `lifetime-fallback/` の `LIF-13` には、selected snapshot-selected positive row 用の helper-local synthetic snapshot floor `expected_snapshot.checked_snapshot_rows` を追加済み
 - `contract-variance/` の `VAR-08/11/13` には、selected runtime-sensitive positive rows 用の `runtime_mirror.scope = alpha-runtime-mirror-floor` を追加済みであり、source authority は `layer-insertion/` の `LI-04/01/03` runtime-floor sidecars に残す
-- `reason_codes_scope = alpha-static-floor`、`acceptance_scope = alpha-acceptance-floor`、`runtime_mirror.scope = alpha-runtime-mirror-floor` は別 carrier であり、negative-static reject row、helper-local positive acceptance row、runtime-mirror row を混同しない
+- `reason_codes_scope = alpha-static-floor`、`acceptance_scope = alpha-acceptance-floor`、`snapshot_scope = alpha-snapshot-selected-floor`、`runtime_mirror.scope = alpha-runtime-mirror-floor` は別 carrier であり、negative-static reject row、helper-local positive acceptance row、snapshot-selected row、runtime-mirror row を混同しない
 - `cut-save-load/` には selected negative rows の checker floor に加えて、`scripts/alpha_cut_save_load_samples.py` が `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize している
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
 - `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
@@ -19,7 +20,8 @@
 - `e2e/` には thin integrated bridge runner `scripts/alpha_e2e_samples.py` が `E2E-01/02/03/04/05/06/07/09/10` を actualize したが、`E2E-08` は planned-only のままであり、Stage F completion claim には使わない
 - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned/sample-mirror authority であり、current attach-time runtime floor は `layer-insertion/` 側に置く
 - `P-A0-18` は `contract-variance/` に parser/runtime bridge を追加せず、`VAR-08/11/13` を existing `layer-insertion/` runtime floor への mirror evidence としてだけ actualize した
-- `P-A0-19` は `LIF-11/13/15` と `VAR-14` を actualize せず、row-specific carrier blocker inventory だけを sidecar / README / roadmap memory に固定する
+- `P-A0-20` は `LIF-13` だけを actualize し、`alpha-acceptance-floor` を広げずに `snapshot_scope = alpha-snapshot-selected-floor` の helper-local synthetic snapshot-selected carrier を追加した
+- `P-A0-19` inventory の残りである `LIF-11/15` と `VAR-14` はまだ actualize せず、row-specific carrier blocker inventory として保持する
 - `hotplug-runtime/` の `HP-11/12/15` は `avatar-runtime/` family と共用する runtime-private native-policy subset として actualize 済みだが、family 全体の runnable promotion ではない
 - `samples/not_implemented/` は pre-existing residual planned families を保持する legacy planned root として残す
 
@@ -44,6 +46,8 @@ python3 -m unittest \
   scripts.tests.test_alpha_lifetime_fallback_checker \
   scripts.tests.test_alpha_contract_variance_checker \
   scripts.tests.test_alpha_lifetime_fallback_acceptance \
+  scripts.tests.test_current_l2_family_snapshot_support \
+  scripts.tests.test_alpha_lifetime_fallback_snapshot \
   scripts.tests.test_alpha_contract_variance_acceptance \
   scripts.tests.test_current_l2_family_runtime_mirror_support \
   scripts.tests.test_alpha_contract_variance_runtime_mirror \
@@ -66,6 +70,8 @@ python3 -m unittest \
   scripts.tests.test_alpha_lifetime_fallback_checker \
   scripts.tests.test_alpha_contract_variance_checker \
   scripts.tests.test_alpha_lifetime_fallback_acceptance \
+  scripts.tests.test_current_l2_family_snapshot_support \
+  scripts.tests.test_alpha_lifetime_fallback_snapshot \
   scripts.tests.test_alpha_contract_variance_acceptance \
   scripts.tests.test_current_l2_family_runtime_mirror_support \
   scripts.tests.test_alpha_contract_variance_runtime_mirror \
