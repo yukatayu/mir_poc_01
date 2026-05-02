@@ -12,8 +12,10 @@
   one `MessageDispatch` attach point over the `P-A0-07` local-runtime floor, one accepted debug attach, one rejected non-admin debug attach, one explicit auth contract-update path, one declared-failure rate-limit path, and one incompatible patch reject.
 - The source-ish `.mir` files here are anchors for sample identity and intended scenario only.
   The current runner does not parse them yet.
-- `HP-02..06` and `VAR-08/11/12/13` remain planned/sample-mirror rows.
-  Runtime-sensitive closeout authority for the current cut lives in this directory instead.
+- `HP-02..06` and `VAR-12` remain planned/sample-mirror rows.
+- `VAR-08/11/13` are now actualized in `../contract-variance/` only as runtime-mirror rows.
+  Runtime-sensitive closeout authority for those rows still lives in this directory through
+  `LI-04/01/03`.
 - This package does not claim:
   completed hot-plug lifecycle, detach runtime, rollback, durable migration, distributed activation ordering, parser integration, runtime package/avatar admission, network/Docker runtime, save/load completion, or final public layer-attachment ABI.
 
@@ -32,6 +34,7 @@
 - `.mir` files here are source-ish anchors, not currently parsed executable sources.
 - `.expected.json` sidecars record the runtime-floor contract checked by Rust tests.
 - `claims.runnable = true` means a dedicated Rust test/example now exists for the row, not that `samples/alpha/` became an active front-door sample root.
+- `mirrors` lists identify planned/sample-mirror targets that may reuse this runtime-floor evidence through helper-local mirror checks. They do not make those target families runnable roots.
 - Promotion to active/runnable root status still requires dedicated runner docs, broader closeout evidence, and snapshot updates.
 
 ## Validation anchor for this package

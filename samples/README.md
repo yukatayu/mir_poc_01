@@ -31,14 +31,15 @@
   - root 内には scaffold-only family と runner-backed non-public floor が併存するが、いずれも repo の active canonical root ではない
   - `lifetime-fallback/` は `LIF-01/05..08`、`contract-variance/` は `VAR-02/03/05/07/09/10/15` について `reason_codes_scope = alpha-static-floor` の non-public checker-floor seed rows を current repo state で持つ
   - `lifetime-fallback/` の `LIF-02/03/04` と `contract-variance/` の `VAR-01/04/06` は `acceptance_scope = alpha-acceptance-floor` の helper-local synthetic acceptance rows を current repo state で持つ
-  - `reason_codes_scope` confinement と `acceptance_scope` confinement は別であり、positive row は negative reason code 不在ではなく explicit acceptance rows で扱う
+  - `contract-variance/` の `VAR-08/11/13` は `runtime_mirror.scope = alpha-runtime-mirror-floor` の non-public runtime-mirror rows を current repo state で持ち、source authority は `layer-insertion/` の `LI-04/01/03` runtime-floor sidecars に残す
+  - `reason_codes_scope` confinement、`acceptance_scope` confinement、`runtime_mirror.scope` confinement は別であり、positive row は negative reason code 不在ではなく explicit acceptance rows か runtime-mirror rows で扱う
   - current package line では `local-runtime/`、`layer-insertion/`、`network-docker/`、`avatar-runtime/` が non-public Rust/runtime-private floor を持つが、sample file parsing front door ではなく、active root でもない
   - `network-docker/` は `mirrorea_alpha_network_runtime` + `alpha_network_docker_e2e.py` により `NET-02/03/04/05/07/09` を narrow Stage-C transport / Docker cut として actualize した。helper-local `clean-near-end/network-transport/` canary familyとは別物であり、`NET-01/06/08/10` は引き続き planned
   - `avatar-runtime/` は `mirrorea_alpha_avatar_runtime` + `alpha_avatar_runtime_samples.py` により `AV-01/02/06/08/09` を runtime-private package/avatar admission floor として actualize した。`HP-11/12/15` も同 runner で検証するが、`hotplug-runtime/` family 全体を runnable root へ昇格したわけではない
   - `cut-save-load/` は `alpha_cut_save_load_samples.py` により `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize し、selected negative rows の checker floor と併存する
   - `visualization/` は `alpha_visualization_samples.py` により `VIS-01/02/03/05/06/07/08/10/11` を dedicated Stage-E subset runner として actualize したが、`VIS-04/09/12` は planned-only のままであり、family 全体や final viewer API を completion 扱いしない
   - `e2e/` は `alpha_e2e_samples.py` により `E2E-01/02/03/04/05/06/07/09/10` を thin integrated Stage-F bridge として actualize したが、`E2E-08` upper-layer seed は planned-only のまま保つ
-  - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned mirror / verdict authority であり、first runtime-sensitive attach evidence authority は `layer-insertion/` 側に置く。`hotplug-runtime/` では `HP-11/12/15` だけが avatar/package runner 経由の native-policy subset として actualize 済み
+  - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned mirror / verdict authority であり、runtime-sensitive attach evidence authority は `layer-insertion/` 側に置く。`P-A0-18` では `VAR-08/11/13` だけを `LI-04/01/03` から mirror actualization したが、`contract-variance/` 自体を runnable root へ昇格していない。`hotplug-runtime/` では `HP-11/12/15` だけが avatar/package runner 経由の native-policy subset として actualize 済み
   - family ごとの status / blocker / next runner は `samples_progress.md` と `progress.md` / `tasks.md` を参照する
 - `not_implemented/` は residual planned skeleton であり、active sample ではない
   - `avatar-fairy-follow/` は phase 8 residual planned family

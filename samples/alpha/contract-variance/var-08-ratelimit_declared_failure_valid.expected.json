@@ -8,15 +8,41 @@
   "kind": "positive/runtime",
   "purpose": "declared RateLimited failure",
   "expected": "valid, runtime Reject(RateLimited)",
+  "runtime_mirror": {
+    "scope": "alpha-runtime-mirror-floor",
+    "source_family": "layer-insertion",
+    "source_sample_id": "LI-04",
+    "source_sidecar": "samples/alpha/layer-insertion/li-04-ratelimit_declared_failure.expected.json",
+    "required_source_status": "runtime-floor",
+    "required_source_claims": {
+      "runnable": true,
+      "implemented": true,
+      "active_root": false
+    },
+    "required_source_current_validation_mode": "rust-runtime-floor",
+    "checked_runtime_mirror_rows": [
+      {
+        "kind": "declared_failure_runtime_preview",
+        "target_sample_id": "VAR-08",
+        "source_sample_id": "LI-04",
+        "terminal_outcome": "accepted",
+        "preview_terminal_outcome": "rejected",
+        "required_preview_reason_refs": [
+          "RateLimited",
+          "rate_limit_budget_exhausted"
+        ]
+      }
+    ]
+  },
   "claims": {
     "runnable": false,
     "implemented": false,
     "active_root": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "runtime-mirror-floor",
+    "runner": "python3 -m unittest scripts.tests.test_alpha_contract_variance_runtime_mirror",
+    "note": "Validated by non-public runtime-mirror helper against existing layer-insertion Rust runtime-floor sidecars; this does not make contract-variance a parser/runtime runnable root."
   },
   "deferred": [
     "exact executable syntax",
