@@ -29,8 +29,18 @@ distributed durable save/load completion ではない。
   - `scripts/alpha_cut_save_load_samples.py`
   - `samples/alpha/cut-save-load/cut-04-local_save_load_valid.expected.json`
   this proves only room-local runtime savepoint -> restore -> resumed dispatch over the existing runtime floor; it does not widen to distributed/durable save/load
-- current first cut intentionally does **not** claim:
-  full Z-cycle graph handling, communication-induced checkpoint repair, load rejection vs stale-preserving load split, or membership-dependent dispatch closure coverage
+- `P-A0-14` honest CUT widening now also exists via:
+  - `crates/mir-runtime/src/alpha_local_runtime.rs`
+  - example `mirrorea_alpha_local_runtime -- save-load-stale-membership`
+  - `scripts/alpha_cut_save_load_samples.py`
+  - `scripts/alpha_cut_save_load_checker.py`
+  - `samples/alpha/cut-save-load/cut-11-zcycle_checkpoint_invalid.expected.json`
+  - `samples/alpha/cut-save-load/cut-17-load_does_not_resurrect_stale_membership.expected.json`
+  this proves only two additional narrow facts:
+  - `CUT-17`: a restored local savepoint does not resurrect stale membership into accepted resumed dispatch after a later membership-frontier advance
+  - `CUT-11`: a useless checkpoint Z-cycle is inadmissible in the checker floor
+- current first cut intentionally still does **not** claim:
+  communication-induced checkpoint repair, stale lease/witness load verdict split, distributed save/load runtime, or durable cut completion
 
 ## decisions mirrored from specs/15
 
@@ -51,18 +61,17 @@ distributed durable save/load completion ではない。
 ### current executable cut
 
 - `CUT-04` local-only save/load positive bridge
-- consistent-cut predicate/checker first cut for `CUT-05/07/08/09/13/14/15`
+- `CUT-17` local stale-membership rejection bridge
+- consistent-cut predicate/checker first cut for `CUT-05/07/08/09/11/13/14/15`
 - explicit distributed-save non-claim remains in place
 
 ### next executable cut
 
-- consistent-cut predicate/checker widening beyond the first orphan/deferred slice
-- invalid distributed snapshot reject
+- invalid distributed snapshot reject widening only if a real distributed-cut carrier is introduced
 - explicit channel-state/in-flight representation
-- hot-plug activation closure checks
-- Z-cycle structural model
-- membership-dependent dispatch closure row or equivalent sample
-- stale witness / stale membership non-resurrection checks with verdict split
+- `CUT-12` communication-induced checkpoint repair once protocol state is specified
+- `CUT-10/16` stale lease/witness non-resurrection rows once lease/witness stores exist in the saved carrier
+- any broader membership-dependent dispatch closure only if it remains local-scope honest
 
 ## Docker / distributed negative sample roadmap
 
@@ -87,5 +96,5 @@ distributed durable save/load completion ではない。
 
 ## next package
 
-- after `P-A0-13` dedicated Stage-E subset runner closeout:
-  `P-A0-14` widens the remaining CUT family carefully via Z-cycle structure, stale witness/membership load verdict split, and membership-dependent dispatch closure without claiming distributed durable save/load
+- after `P-A0-14` honest CUT widening closeout:
+  CUT-local reopen stays blocked on `CUT-10/12/16` because lease/witness store and communication-induced checkpoint protocol are not yet actualized. The next promoted package should therefore prefer Stage-E remaining-row widening unless a new save/load substrate package is explicitly opened.

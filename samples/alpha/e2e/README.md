@@ -32,6 +32,7 @@
   - implemented thin integrated bridge rows: `E2E-01/02/03/04/05/06/07/09/10`
   - planned-only rows: `E2E-08`
 - `E2E-07` is checker-backed invalid distributed cut evidence only. It must not be read as distributed save/load runtime completion.
+- current save/load-adjacent deferred rows have narrowed to `CUT-12` communication-induced checkpoint repair and `CUT-10/16` lease/witness-store-backed non-resurrection splits. `CUT-11` checker-backed Z-cycle inadmissibility and `CUT-17` local stale-membership rejection are already part of the current alpha-local evidence line.
 - Promotion to the repo's active runnable root still requires dedicated validation commands, report evidence, and snapshot updates beyond this alpha-local bridge.
 - remaining Stage-E visualization/devtools rows and broader lifecycle widening remain the blocker for any future Stage F completion claim.
 
@@ -45,6 +46,7 @@ cargo test -p mir-runtime --test alpha_layer_insertion_runtime
 cargo test -p mir-runtime --test alpha_network_runtime
 cargo test -p mir-runtime --test alpha_avatar_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume
+cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership
 cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout
 cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout
 cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout

@@ -53,6 +53,7 @@ final public product completion ではない。
 - first actualized subset is now a thin integrated bridge runner `scripts/alpha_e2e_samples.py`:
   `E2E-01/02/03/04/05/06/07/09/10`
 - `E2E-06` is now backed by the local-only `CUT-04` save/load bridge
+- `CUT-17` local stale-membership rejection and `CUT-11` checker-backed Z-cycle inadmissibility now narrow the integrated save/load non-claim surface without implying distributed repair/runtime completion
 - `E2E-08` upper-layer seed remains outside the actualized subset
 - current reading is `Stage F bridge + local save/load path actualized, Stage F completion still blocked on dedicated alpha devtools`
 
@@ -137,8 +138,10 @@ Phase 1+ runtime floor:
   `python3 -m unittest scripts.tests.test_alpha_visualization_samples`
 - current Phase 6 first-cut floor:
   `cargo test -p mirrorea-core --test runtime_substrate`
+  `cargo test -p mir-runtime --test alpha_local_runtime`
   `cargo test -p mir-runtime --test alpha_cut_save_load_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership`
   `python3 scripts/alpha_cut_save_load_samples.py check-all --format json`
 - current Phase 8 bridge floor:
   `cargo test -p mirrorea-core --test runtime_substrate`
@@ -146,6 +149,7 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_cut_save_load_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume`
+  `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
@@ -171,5 +175,5 @@ Phase 1+ runtime floor:
 ## next package
 
 - after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
-- after `P-A0-13`, the next reopen point is:
-  - `P-A0-14` remaining CUT widening after the local-only positive bridge
+- after `P-A0-14`, the next reopen point is:
+  - `P-A0-15` remaining Stage-E visualization widening after the honest CUT subset closeout

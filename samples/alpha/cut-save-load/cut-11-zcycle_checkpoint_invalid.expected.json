@@ -8,15 +8,29 @@
   "kind": "negative",
   "purpose": "checkpoint dependency Z-cycle",
   "expected": "unusable checkpoint",
+  "expected_static": {
+    "verdict": "unusable checkpoint",
+    "checked_reason_codes": [
+      {
+        "kind": "zcycle_checkpoint_inadmissible",
+        "checkpoint_ref": "checkpoint#2",
+        "cycle_path": [
+          "checkpoint#1",
+          "checkpoint#2",
+          "checkpoint#1"
+        ]
+      }
+    ]
+  },
   "claims": {
     "runnable": false,
     "implemented": false,
     "active_root": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "synthetic-checker-floor",
+    "runner": "python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker",
+    "note": "Validated in this package by non-public synthetic checker-floor tests plus filesystem/docs scaffold checks."
   },
   "deferred": [
     "exact executable syntax",

@@ -10,6 +10,7 @@ CUT_SAVE_LOAD_KINDS = {
     "orphan_observe",
     "orphan_witness_use",
     "orphan_hotplug_activation",
+    "zcycle_checkpoint_inadmissible",
     "durable_cut_deferred",
     "orphan_capability_use",
     "orphan_auth_evidence_use",

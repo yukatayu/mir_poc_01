@@ -17,9 +17,12 @@ class AlphaCutSaveLoadSamplesTests(unittest.TestCase):
 
     def test_closeout_reports_runtime_and_checker_rows(self) -> None:
         payload = runner.closeout()
-        self.assertEqual(payload["implemented_rows"], ["CUT-04"])
+        self.assertEqual(payload["implemented_rows"], ["CUT-04", "CUT-17"])
         self.assertIn("CUT-05", payload["checker_backed_rows"])
-        self.assertIn("CUT-17", payload["planned_only_rows"])
+        self.assertIn("CUT-11", payload["checker_backed_rows"])
+        self.assertIn("CUT-10", payload["planned_only_rows"])
+        self.assertIn("CUT-12", payload["planned_only_rows"])
+        self.assertIn("CUT-16", payload["planned_only_rows"])
         self.assertIn(
             "cargo test -p mirrorea-core --test runtime_substrate",
             payload["validation_floor"],
@@ -29,7 +32,7 @@ class AlphaCutSaveLoadSamplesTests(unittest.TestCase):
 
     def test_list_samples_exposes_runtime_row(self) -> None:
         rows = runner.list_samples()
-        self.assertEqual([row["sample_id"] for row in rows], ["CUT-04"])
+        self.assertEqual([row["sample_id"] for row in rows], ["CUT-04", "CUT-17"])
         self.assertTrue(all(row["family"] == "alpha-cut-save-load" for row in rows))
 
     def test_run_sample_accepts_exact_sidecar(self) -> None:

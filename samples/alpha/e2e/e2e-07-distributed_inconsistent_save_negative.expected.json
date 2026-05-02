@@ -52,7 +52,7 @@
     "Z-cycle handling completion"
   ],
   "deferred": [
-    "CUT-11/12 Z-cycle widening",
-    "CUT-16/17 stale witness/membership load verdict split"
+    "CUT-12 communication-induced checkpoint repair",
+    "CUT-10/16 stale lease/witness load verdict split"
   ]
 }

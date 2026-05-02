@@ -1,6 +1,8 @@
 use std::{fs, path::PathBuf};
 
-use mir_runtime::alpha_local_runtime::build_local_save_load_resume_report;
+use mir_runtime::alpha_local_runtime::{
+    build_local_save_load_resume_report, build_local_save_load_stale_membership_report,
+};
 use serde_json::{Value, to_value};
 
 fn sample_root() -> PathBuf {
@@ -42,5 +44,40 @@ fn local_save_load_report_restores_state_and_resumes_dispatch() {
         report
             .retained_later_refs
             .contains(&"distributed_save_load".to_string())
+    );
+}
+
+#[test]
+fn local_save_load_stale_membership_report_rejects_resumed_dispatch() {
+    let report = build_local_save_load_stale_membership_report()
+        .expect("local save/load stale membership report");
+    let sidecar = read_sidecar("cut-17-load_does_not_resurrect_stale_membership.expected.json");
+
+    assert_eq!(to_value(&report).expect("serialize report"), sidecar);
+    assert!(report.state_roundtrip_equal);
+    assert_eq!(report.saved_runtime_snapshot.membership.membership_epoch, 0);
+    assert_eq!(
+        report.restored_runtime_snapshot.membership.membership_epoch,
+        1
+    );
+    assert_eq!(report.restored_visible_history.len(), 2);
+    assert_eq!(
+        report.visible_history_after_resume,
+        report.restored_visible_history
+    );
+    assert_eq!(report.resumed_dispatch_records.len(), 1);
+    assert_eq!(
+        report.resumed_dispatch_records[0].dispatch_outcome,
+        "rejected_stale_membership"
+    );
+    assert!(
+        report.resumed_dispatch_records[0]
+            .reason_refs
+            .contains(&"membership_epoch_drift".to_string())
+    );
+    assert!(
+        report.resumed_dispatch_records[0]
+            .reason_refs
+            .contains(&"stale_membership_not_resurrected".to_string())
     );
 }

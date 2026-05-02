@@ -1,11 +1,11 @@
-# Alpha-0 planned skeleton sample.
+# Alpha-0 source-ish marker for a runtime-backed row.
 # ID: CUT-17
 # Family: cut-save-load
 # Kind: negative semantic
 # Purpose: load does not resurrect stale membership epoch
 # Expected: invalid or remains stale
-# Status: planned-skeleton only; not consumed by current active runners.
-# This file is a source-ish placeholder for future checker/runtime integration.
+# Status: runtime-backed via scripts/alpha_cut_save_load_samples.py; not parsed by the current runner.
+# This file remains a source-ish marker rather than an active parser input.
 
 module PlannedMirroreaAlpha.CutSaveLoad.LoadDoesNotResurrectStaleMembership
 
@@ -13,4 +13,5 @@ module PlannedMirroreaAlpha.CutSaveLoad.LoadDoesNotResurrectStaleMembership
 # - sample_id: CUT-17
 # - goal: load does not resurrect stale membership epoch
 # - expected outcome: invalid or remains stale
-# - exact executable syntax / checker/runtime carrier remains deferred.
+# - current carrier: cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership
+# - exact executable syntax / parser integration remains deferred.

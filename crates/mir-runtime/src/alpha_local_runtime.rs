@@ -346,6 +346,129 @@ pub fn build_local_save_load_resume_report() -> Result<LocalSaveLoadReport, Mirr
     })
 }
 
+pub fn build_local_save_load_stale_membership_report()
+-> Result<LocalSaveLoadReport, MirroreaCoreError> {
+    let base = build_local_sugoroku_runtime_report()?;
+    let save_point = LocalRuntimeSavePoint {
+        runtime_snapshot: base.runtime_snapshot.clone(),
+        current_owner: base.current_owner.clone(),
+        visible_history: base.visible_history.clone(),
+        pending_envelopes: Vec::new(),
+        notes: vec![
+            "single-runtime local room savepoint only".to_string(),
+            "savepoint is captured after the first handoff and before a later membership frontier advance"
+                .to_string(),
+        ],
+    };
+
+    let serialized_state = serde_json::to_string_pretty(&save_point).map_err(|error| {
+        MirroreaCoreError::new(format!("failed to serialize local savepoint: {error}"))
+    })?;
+    let restored_save_point: LocalRuntimeSavePoint = serde_json::from_str(&serialized_state)
+        .map_err(|error| {
+            MirroreaCoreError::new(format!("failed to deserialize local savepoint: {error}"))
+        })?;
+    validate_saved_turn_frontier(&restored_save_point)?;
+
+    let mut restored_shell =
+        LogicalPlaceRuntimeShell::restore(&restored_save_point.runtime_snapshot)?;
+    let restored_member = restored_save_point
+        .runtime_snapshot
+        .membership
+        .members
+        .get(&restored_save_point.current_owner)
+        .ok_or_else(|| {
+            MirroreaCoreError::new(format!(
+                "restored savepoint missing owner membership for `{}`",
+                restored_save_point.current_owner
+            ))
+        })?;
+
+    restored_shell.add_participant("Carol")?;
+    let restored_runtime_snapshot = restored_shell.snapshot();
+    let resumed_envelope = roll_request_envelope_for(
+        "roll_request#2",
+        &restored_save_point.current_owner,
+        "Alice",
+        "roll(Bob,2)",
+        restored_save_point
+            .runtime_snapshot
+            .membership
+            .membership_epoch,
+        restored_member.incarnation,
+        "rejected_stale_membership",
+    );
+    let resumed_evaluation = evaluate_dispatch(&restored_shell, &resumed_envelope)?;
+    let resumed_dispatch_record = LocalRuntimeDispatchRecord {
+        dispatch_order: 2,
+        envelope_id: resumed_envelope.envelope_id.clone(),
+        from_place: resumed_envelope.from_place.clone(),
+        to_place: resumed_envelope.to_place.clone(),
+        payload_kind: resumed_envelope.payload_kind.clone(),
+        dispatch_outcome: resumed_evaluation.dispatch_outcome.clone(),
+        checked_membership_epoch: resumed_evaluation.checked_membership_epoch,
+        checked_member_incarnation: resumed_evaluation.checked_member_incarnation,
+        queue_depth_before: 1,
+        queue_depth_after: 0,
+        reason_refs: {
+            let mut refs = resumed_evaluation.reason_refs.clone();
+            refs.push("saved_local_state_restored".to_string());
+            refs.push("saved_owner_history_match".to_string());
+            refs.push("membership_frontier_advanced_after_restore".to_string());
+            refs.push("stale_membership_not_resurrected".to_string());
+            refs.push("local_save_only".to_string());
+            refs.push("distributed_save_load_deferred".to_string());
+            refs
+        },
+        generated_event_refs: vec![
+            "load_resume#1".to_string(),
+            "membership_advance#1".to_string(),
+            "reject_stale_membership#2".to_string(),
+        ],
+        witness_refs: resumed_envelope.witness_refs.clone(),
+        notes: vec![
+            "restored local savepoint is re-evaluated only after the live membership frontier advances"
+                .to_string(),
+            "saved membership frontier is not resurrected into accepted resumed dispatch"
+                .to_string(),
+            "no distributed save/load, lease-store, or witness-store completion is claimed in this row"
+                .to_string(),
+        ],
+    };
+
+    let visible_history_after_resume = restored_save_point.visible_history.clone();
+    let state_roundtrip_equal = save_point == restored_save_point;
+
+    Ok(LocalSaveLoadReport {
+        runtime_scope: "alpha_local_save_load_stage_f_bridge".to_string(),
+        sample_id: "CUT-17".to_string(),
+        saved_state_format: "local_runtime_state_json".to_string(),
+        saved_runtime_snapshot: save_point.runtime_snapshot,
+        restored_runtime_snapshot,
+        pending_envelopes_at_save: restored_save_point.pending_envelopes,
+        restored_visible_history: restored_save_point.visible_history,
+        visible_history_after_resume,
+        resumed_dispatch_records: vec![resumed_dispatch_record],
+        resumed_event_dag: save_load_stale_membership_event_dag(),
+        saved_owner: save_point.current_owner.clone(),
+        resumed_owner: save_point.current_owner,
+        terminal_outcome: "rejected".to_string(),
+        state_roundtrip_equal,
+        serialized_state_bytes: serialized_state.len(),
+        retained_later_refs: retained_later_refs(),
+        notes: vec![
+            "non-public local save/load stale-membership bridge over the Stage-B runtime floor"
+                .to_string(),
+            "save/load is local-only and does not widen to distributed durable persistence"
+                .to_string(),
+            "serialized runtime snapshot round-trips, but a later membership frontier advance still rejects resumed dispatch"
+                .to_string(),
+            "this row proves only stale membership is not resurrected into accepted resumed dispatch; stale witness and lease splits remain later"
+                .to_string(),
+        ],
+    })
+}
+
 fn validate_saved_turn_frontier(
     save_point: &LocalRuntimeSavePoint,
 ) -> Result<(), MirroreaCoreError> {
@@ -709,6 +832,75 @@ fn save_load_event_dag() -> EventDagExport {
         notes: vec![
             "event DAG export remains a non-public report hook".to_string(),
             "save/load edge is local-only and does not imply distributed checkpoint closure".to_string(),
+        ],
+    }
+}
+
+fn save_load_stale_membership_event_dag() -> EventDagExport {
+    EventDagExport {
+        scope: "report_local_save_load_event_dag_export_hook".to_string(),
+        nodes: vec![
+            EventDagNode {
+                event_id: "save_local_state#1".to_string(),
+                event_kind: "save".to_string(),
+                place_ref: GAME_PLACE.to_string(),
+                envelope_ref: None,
+                notes: vec![
+                    "single-runtime local room state is serialized after Alice -> Bob handoff"
+                        .to_string(),
+                ],
+            },
+            EventDagNode {
+                event_id: "load_resume#1".to_string(),
+                event_kind: "load".to_string(),
+                place_ref: GAME_PLACE.to_string(),
+                envelope_ref: None,
+                notes: vec![
+                    "saved runtime snapshot, owner marker, and visible-history frontier are restored before a later membership frontier advance"
+                        .to_string(),
+                ],
+            },
+            EventDagNode {
+                event_id: "membership_advance#1".to_string(),
+                event_kind: "membership_update".to_string(),
+                place_ref: WORLD_PLACE.to_string(),
+                envelope_ref: None,
+                notes: vec![
+                    "a later join advances the live membership frontier after restore and before resumed dispatch"
+                        .to_string(),
+                ],
+            },
+            EventDagNode {
+                event_id: "reject_stale_membership#2".to_string(),
+                event_kind: "dispatch_reject".to_string(),
+                place_ref: GAME_PLACE.to_string(),
+                envelope_ref: Some("roll_request#2".to_string()),
+                notes: vec![
+                    "saved membership frontier is rejected instead of being treated as current"
+                        .to_string(),
+                ],
+            },
+        ],
+        edges: vec![
+            EventDagEdge {
+                from_event: "save_local_state#1".to_string(),
+                to_event: "load_resume#1".to_string(),
+                relation: "save_load_roundtrip".to_string(),
+            },
+            EventDagEdge {
+                from_event: "load_resume#1".to_string(),
+                to_event: "membership_advance#1".to_string(),
+                relation: "load_restore_order".to_string(),
+            },
+            EventDagEdge {
+                from_event: "membership_advance#1".to_string(),
+                to_event: "reject_stale_membership#2".to_string(),
+                relation: "membership_dependency_order".to_string(),
+            },
+        ],
+        notes: vec![
+            "event DAG export remains a non-public report hook".to_string(),
+            "membership frontier advance stays explicit and does not imply distributed checkpoint repair".to_string(),
         ],
     }
 }

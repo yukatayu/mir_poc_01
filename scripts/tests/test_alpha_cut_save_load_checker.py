@@ -41,6 +41,7 @@ class AlphaCutSaveLoadCheckerTests(unittest.TestCase):
             "cut-07-observe_without_publish_rejected": "orphan_observe",
             "cut-08-witness_use_without_create_rejected": "orphan_witness_use",
             "cut-09-hotplug_activation_without_request_rejected": "orphan_hotplug_activation",
+            "cut-11-zcycle_checkpoint_invalid": "zcycle_checkpoint_inadmissible",
             "cut-13-durable_cut_deferred_in_mir0": "durable_cut_deferred",
             "cut-14-capability_use_without_grant_rejected": "orphan_capability_use",
             "cut-15-auth_evidence_use_without_create_rejected": "orphan_auth_evidence_use",
@@ -127,6 +128,39 @@ class AlphaCutSaveLoadCheckerTests(unittest.TestCase):
         output = stdout.getvalue()
         self.assertIn("status: sample_expected_reason_rows_missing", output)
         self.assertIn("orphan_observe", output)
+
+    def test_main_reports_matched_rows_for_cut11_zcycle_kind(self) -> None:
+        sidecar_path = self.sidecar_path("cut-11-zcycle_checkpoint_invalid")
+        payload = json.loads(sidecar_path.read_text(encoding="utf-8"))
+        fixture_row = payload["expected_static"]["checked_reason_codes"][0]
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            artifact_path = Path(temp_dir) / "artifact.json"
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "alpha-static-floor",
+                        "reason_codes": [
+                            fixture_row,
+                            {
+                                "kind": "precondition_strengthening",
+                                "base_precondition": "member",
+                                "layer_precondition": "admin",
+                            },
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(sidecar_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("status: matched", output)
+        self.assertIn(fixture_row["kind"], output)
 
     def test_cut13_seed_matches_sample_purpose(self) -> None:
         stem = "cut-13-durable_cut_deferred_in_mir0"

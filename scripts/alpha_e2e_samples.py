@@ -613,8 +613,8 @@ def _build_e2e_06_report() -> dict[str, Any]:
                 "Stage E completion",
             ],
             "deferred": [
-                "CUT-11/12 Z-cycle widening",
-                "CUT-16/17 stale witness/membership load verdict split",
+                "CUT-12 communication-induced checkpoint repair",
+                "CUT-10/16 stale lease/witness load verdict split",
                 "Stage F completion after remaining Stage-E rows close",
             ],
         }
@@ -653,8 +653,8 @@ def _build_e2e_07_report() -> dict[str, Any]:
                 "Z-cycle handling completion",
             ],
             "deferred": [
-                "CUT-11/12 Z-cycle widening",
-                "CUT-16/17 stale witness/membership load verdict split",
+                "CUT-12 communication-induced checkpoint repair",
+                "CUT-10/16 stale lease/witness load verdict split",
             ],
         }
     )

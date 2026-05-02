@@ -18,20 +18,33 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "summary": "Local-only save/load bridge restores state and resumes one dispatch.",
         "expected_terminal_outcome": "accepted",
         "expected_sidecar": "samples/alpha/cut-save-load/cut-04-local_save_load_valid.expected.json",
-    }
+    },
+    {
+        "sample_id": "CUT-17",
+        "summary": "A restored local savepoint does not resurrect stale membership into accepted resumed dispatch.",
+        "expected_terminal_outcome": "rejected",
+        "expected_sidecar": "samples/alpha/cut-save-load/cut-17-load_does_not_resurrect_stale_membership.expected.json",
+    },
 ]
 
-CHECKER_BACKED_ROWS = ["CUT-05", "CUT-07", "CUT-08", "CUT-09", "CUT-13", "CUT-14", "CUT-15"]
+CHECKER_BACKED_ROWS = [
+    "CUT-05",
+    "CUT-07",
+    "CUT-08",
+    "CUT-09",
+    "CUT-11",
+    "CUT-13",
+    "CUT-14",
+    "CUT-15",
+]
 PLANNED_ONLY_ROWS = [
     "CUT-01",
     "CUT-02",
     "CUT-03",
     "CUT-06",
     "CUT-10",
-    "CUT-11",
     "CUT-12",
     "CUT-16",
-    "CUT-17",
 ]
 
 STOP_LINES = [
@@ -74,7 +87,12 @@ def _load_expected_sidecar(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def _build_runtime_report(sample_id: str) -> dict[str, Any]:
-    if sample_id != "CUT-04":
+    scenario_by_sample_id = {
+        "CUT-04": "save-load-resume",
+        "CUT-17": "save-load-stale-membership",
+    }
+    scenario = scenario_by_sample_id.get(sample_id)
+    if scenario is None:
         raise ValueError(f"unsupported runtime sample: {sample_id}")
     completed = subprocess.run(
         [
@@ -86,7 +104,7 @@ def _build_runtime_report(sample_id: str) -> dict[str, Any]:
             "--example",
             "mirrorea_alpha_local_runtime",
             "--",
-            "save-load-resume",
+            scenario,
         ],
         cwd=REPO_ROOT,
         check=True,
@@ -108,6 +126,18 @@ def _validate_expected_fields(sample_id: str, row: dict[str, Any], report: dict[
         )
     if not report.get("state_roundtrip_equal"):
         raise RuntimeError(f"{sample_id}: expected state_roundtrip_equal to be true")
+    if sample_id == "CUT-17":
+        dispatch_records = report.get("resumed_dispatch_records") or []
+        if len(dispatch_records) != 1:
+            raise RuntimeError(f"{sample_id}: expected exactly one resumed dispatch record")
+        if dispatch_records[0].get("dispatch_outcome") != "rejected_stale_membership":
+            raise RuntimeError(
+                f"{sample_id}: expected resumed dispatch outcome 'rejected_stale_membership'"
+            )
+        if report.get("visible_history_after_resume") != report.get("restored_visible_history"):
+            raise RuntimeError(
+                f"{sample_id}: expected visible history to remain unchanged after rejection"
+            )
 
 
 def _validate_sidecar_parity(
@@ -152,8 +182,10 @@ def closeout() -> dict[str, Any]:
         "planned_only_rows": list(PLANNED_ONLY_ROWS),
         "validation_floor": [
             "cargo test -p mirrorea-core --test runtime_substrate",
+            "cargo test -p mir-runtime --test alpha_local_runtime",
             "cargo test -p mir-runtime --test alpha_cut_save_load_runtime",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume",
+            "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership",
             "python3 scripts/alpha_cut_save_load_samples.py check-all --format json",
             "python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples",
         ],

@@ -3,7 +3,7 @@
 - Status: mixed runtime/checker/planned family
 - Phase: Phase 2 / 6
 - Stage: Stage A -> F bridge
-- `scripts/alpha_cut_save_load_samples.py` actualizes `CUT-04` as a local-only save/load runtime bridge over the existing Rust local runtime substrate.
+- `scripts/alpha_cut_save_load_samples.py` actualizes `CUT-04` as a local-only save/load runtime bridge and `CUT-17` as a local stale-membership rejection bridge over the existing Rust local runtime substrate.
 - `scripts/alpha_cut_save_load_checker.py` continues to cover selected negative/deferred rows via sidecar-declared `expected_static.checked_reason_codes`.
 - This family is still not an active runnable root, and distributed/durable save/load remains out of scope.
 
@@ -33,12 +33,12 @@
 
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars split into:
-  - runtime-backed row: `CUT-04`
-  - checker-backed rows: `CUT-05/07/08/09/13/14/15`
-  - planned-only rows: `CUT-01/02/03/06/10/11/12/16/17`
-- `CUT-05` / `07` / `08` / `09` / `13` / `14` / `15` currently carry checker-floor seed rows for the first structural cut-validity/deferred-surface cut.
+  - runtime-backed rows: `CUT-04/17`
+  - checker-backed rows: `CUT-05/07/08/09/11/13/14/15`
+  - planned-only rows: `CUT-01/02/03/06/10/12/16`
+- `CUT-05` / `07` / `08` / `09` / `11` / `13` / `14` / `15` currently carry checker-floor seed rows for the first structural cut-validity/deferred-surface cut.
 - the current mixed cut does not yet cover:
-  `CUT-11` Z-cycle graph modeling, `CUT-12` communication-induced checkpoint repair, `CUT-10/16/17` load non-resurrection verdict split, or membership-dependent dispatch closure
+  `CUT-12` communication-induced checkpoint repair or `CUT-10/16` lease/witness-store-backed non-resurrection verdict split
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
@@ -46,8 +46,10 @@
 ```bash
 find samples/alpha/cut-save-load -maxdepth 1 -type f | sort
 cargo test -p mirrorea-core --test runtime_substrate
+cargo test -p mir-runtime --test alpha_local_runtime
 cargo test -p mir-runtime --test alpha_cut_save_load_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume
+cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership
 python3 scripts/alpha_cut_save_load_samples.py check-all --format json
 python3 -m unittest \
   scripts.tests.test_alpha_cut_save_load_checker \
