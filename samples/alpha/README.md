@@ -19,6 +19,7 @@
 - `e2e/` には thin integrated bridge runner `scripts/alpha_e2e_samples.py` が `E2E-01/02/03/04/05/06/07/09/10` を actualize したが、`E2E-08` は planned-only のままであり、Stage F completion claim には使わない
 - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned/sample-mirror authority であり、current attach-time runtime floor は `layer-insertion/` 側に置く
 - `P-A0-18` は `contract-variance/` に parser/runtime bridge を追加せず、`VAR-08/11/13` を existing `layer-insertion/` runtime floor への mirror evidence としてだけ actualize した
+- `P-A0-19` は `LIF-11/13/15` と `VAR-14` を actualize せず、row-specific carrier blocker inventory だけを sidecar / README / roadmap memory に固定する
 - `hotplug-runtime/` の `HP-11/12/15` は `avatar-runtime/` family と共用する runtime-private native-policy subset として actualize 済みだが、family 全体の runnable promotion ではない
 - `samples/not_implemented/` は pre-existing residual planned families を保持する legacy planned root として残す
 

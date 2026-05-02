@@ -16,9 +16,10 @@
   "current_validation": {
     "mode": "skeleton-only",
     "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "note": "Validated only by filesystem/docs scaffold checks; P-A0-19 records the missing adapter-target contract-preservation carrier but does not actualize this row."
   },
   "deferred": [
+    "adapter-target contract-preservation carrier over postcondition, provided surface, effect/failure containment, observation/redaction/retention, and fallback representation",
     "exact executable syntax",
     "dedicated runner integration",
     "checker/runtime implementation"

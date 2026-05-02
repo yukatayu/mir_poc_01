@@ -39,6 +39,9 @@
 - `VAR-08/11/13` currently carry runtime-mirror rows only. This means the sidecars prove that existing `layer-insertion/LI-04/01/03` runtime-floor sidecars already actualize the needed runtime evidence; it does not make `contract-variance/` a runnable parser/runtime root.
 - `VAR-08/11/13/14` remain outside the current acceptance floor because they need runtime / layer / adapter semantics beyond this helper-local cut.
 - `VAR-14` remains outside both the current acceptance floor and the current runtime-mirror floor because adapter transform preservation semantics are still later.
+- `P-A0-19` records `VAR-14` as a docs-first blocker inventory only:
+  adapter-target contract-preservation carrier,
+  not runtime-mirror widening, acceptance-floor widening, or runnable-root promotion.
 - `VAR-08` / `11` / `13` now have runtime-backed mirrors under `../layer-insertion/`, but this directory remains the planned/sample-mirror authority for the broader variance family.
 - `VAR-12` remains a separate negative runtime/static authority row and is not part of the current runtime-mirror floor.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.

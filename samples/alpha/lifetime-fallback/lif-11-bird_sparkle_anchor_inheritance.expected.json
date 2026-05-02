@@ -16,9 +16,10 @@
   "current_validation": {
     "mode": "skeleton-only",
     "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "note": "Validated only by filesystem/docs scaffold checks; P-A0-19 records the missing anchor/deletion outcome carrier but does not actualize this row."
   },
   "deferred": [
+    "anchor/deletion outcome semantics for inherited access-path degrade after upstream disappearance",
     "exact executable syntax",
     "dedicated runner integration",
     "checker/runtime implementation"

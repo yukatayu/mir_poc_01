@@ -35,7 +35,11 @@
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
 - `LIF-01` and `LIF-05..08` currently carry checker-floor seed rows for the first static diagnostic cut.
 - `LIF-02/03/04` currently carry helper-local synthetic acceptance rows only.
-- `LIF-11/13/15` remain outside the current acceptance floor because they need richer runtime / remote / lineage semantics.
+- `LIF-11/13/15` remain outside the current acceptance floor because they need row-specific future carriers:
+  `LIF-11` anchor/deletion outcome semantics,
+  `LIF-13` selected-option snapshot semantics,
+  `LIF-15` remote freshness/membership/frontier carrier.
+- `P-A0-19` records those blockers as docs-first inventory only; it does not actualize the rows.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package

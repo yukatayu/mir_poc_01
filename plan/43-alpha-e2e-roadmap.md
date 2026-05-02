@@ -176,10 +176,11 @@ Phase 1+ runtime floor:
 ## next reopen point
 
 - after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
-- after `P-A0-18`, the current LIF/VAR widening is intentionally limited to scoped helper evidence:
+- after `P-A0-19`, the current LIF/VAR widening is intentionally limited to scoped helper evidence:
   - `LIF-01/05..08` and `VAR-02/03/05/07/09/10/15` remain scope-confined negative synthetic checker-floor rows
   - `LIF-02/03/04` and `VAR-01/04/06` remain non-public helper-local synthetic acceptance-floor rows
   - `VAR-08/11/13` are now actualized only as non-public runtime-mirror rows mirrored from `LI-04/01/03`
   - `reason_codes_scope`, `acceptance_scope`, and `runtime_mirror.scope` remain separate carriers
   - keep parser/runtime/theorem-backed completion explicitly later
-  - no safe `P-A0-19` is promoted unless a narrower carrier is chosen for `VAR-14` or the remaining lifetime rows
+  - `P-A0-19` itself closes only blocker inventory for `LIF-11/13/15` and `VAR-14`
+  - no safe `P-A0-20` is promoted until one row-specific carrier from that inventory is chosen for actualization

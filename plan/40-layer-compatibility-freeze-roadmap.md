@@ -122,14 +122,16 @@ must keep visible:
 
 ## next reopen point
 
-- after `P-A0-18`, the current contract-variance widening is intentionally limited to:
+- after `P-A0-19`, the current contract-variance widening is intentionally limited to:
   - negative checker-floor rows `VAR-02/03/05/07/09/10/15`
   - helper-local synthetic acceptance rows `VAR-01/04/06`
   - runtime-mirror rows `VAR-08/11/13` mirrored from `LI-04/01/03`
+- `P-A0-19` closes only a docs-first remaining-row inventory for:
+  - `VAR-14` adapter-target contract-preservation carrier
 - current line still keeps out:
-  - `VAR-14` because adapter transform preservation semantics are not yet actualized
+  - `VAR-14` actualization itself
   - any parser/runtime bridge claim for `contract-variance/`
-- next safe reopen requires either:
-  - a narrower carrier for `VAR-14`
-  - or a separate remaining-row inventory/package for `LIF-11/13/15`
+  - any acceptance-floor or runtime-mirror widening for `VAR-14`
+- next safe reopen requires the first row-specific actualization chosen from that inventory,
+  with explicit proof that the carrier is narrower than runtime/package completion
 - queue authority remains `progress.md` / `tasks.md`

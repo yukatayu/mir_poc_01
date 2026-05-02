@@ -59,6 +59,10 @@ planned families to keep explicit:
 
 all remain adapter/runtime-package concern, not core semantics.
 
+- `P-A0-19` adds docs-first blocker inventory only for `VAR-14`:
+  adapter-target contract-preservation remains a separate carrier question,
+  and current runtime-private avatar/package floors do not actualize it
+
 ## native trust policy roadmap
 
 required policy rows:
@@ -98,6 +102,7 @@ must keep visible:
 - native execution beyond skeleton policy
 - renderer / physics / IK detail
 - full VRM / VRChat / Unity compatibility
+- dedicated adapter transform preservation carrier actualization for `VAR-14`
 
 ## next package
 

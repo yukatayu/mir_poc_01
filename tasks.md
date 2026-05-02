@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-02 19:06 JST
+最終更新: 2026-05-02 19:34 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-02 19:06 JST に更新済みです:
-  `P-A0-18` gate では `python3 -m unittest scripts.tests.test_current_l2_family_checker_support scripts.tests.test_current_l2_same_lineage_checker scripts.tests.test_current_l2_missing_option_checker scripts.tests.test_current_l2_capability_checker scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_current_l2_family_acceptance_support scripts.tests.test_alpha_lifetime_fallback_acceptance scripts.tests.test_alpha_contract_variance_acceptance scripts.tests.test_current_l2_family_runtime_mirror_support scripts.tests.test_alpha_contract_variance_runtime_mirror scripts.tests.test_validate_docs` 73 tests、`cargo test -p mir-runtime --test alpha_layer_insertion_runtime` 6 tests、`cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15` の negative-static checker floor、`LIF-02/03/04` と `VAR-01/04/06` の helper-local synthetic acceptance floor、`VAR-08/11/13` の runtime-mirror floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。
+- Alpha-0 closeout validation freshness は 2026-05-02 19:34 JST に更新済みです:
+  `P-A0-19` gate では `python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_lifetime_fallback_acceptance scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_contract_variance_acceptance scripts.tests.test_current_l2_family_runtime_mirror_support scripts.tests.test_alpha_contract_variance_runtime_mirror scripts.tests.test_validate_docs` 48 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15` の negative-static checker floor、`LIF-02/03/04` と `VAR-01/04/06` の helper-local synthetic acceptance floor、`VAR-08/11/13` の runtime-mirror floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。`P-A0-19` は these floors を widen せず、remaining positive-row blocker inventory だけを close しました。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..18` closeout 後、remaining positive rows は current acceptance schema や current runtime-mirror floor だけでは widen しないため safe な `P-A0-19` をまだ promoted していない current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..19` closeout 後、remaining positive rows の row-specific blocker inventory は fixed されたが actualization はまだ進んでいない current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -70,11 +70,11 @@
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
 - Package status:
-  `P-A0-18` runtime-mirror bridge is the last closed package in current repo state; no follow-on package is promoted yet
+  `P-A0-19` remaining positive-row carrier inventory is the last closed package in current repo state; no follow-on package is promoted yet
 - Current status:
-  `P-A0-18` は current repo state で close 済み。`scripts/alpha_lifetime_fallback_acceptance.py` により `LIF-02/03/04`、`scripts/alpha_contract_variance_acceptance.py` により `VAR-01/04/06` が helper-local synthetic acceptance-floor rows として actualize され、`scripts/alpha_contract_variance_runtime_mirror.py` により `VAR-08/11/13` が `LI-04/01/03` runtime-floor sidecars を source authority とする runtime-mirror rows として actualize された。positive side は `acceptance_scope = alpha-acceptance-floor` と `runtime_mirror.scope = alpha-runtime-mirror-floor`、negative side は `reason_codes_scope = alpha-static-floor` で別 carrier として閉じており、これは parser/runtime bridge、final public checker API、runtime/public variance enforcement 自体を意味しない。
+  `P-A0-19` は current repo state で close 済み。`scripts/alpha_lifetime_fallback_acceptance.py` による `LIF-02/03/04` acceptance floor、`scripts/alpha_contract_variance_acceptance.py` による `VAR-01/04/06` acceptance floor、`scripts/alpha_contract_variance_runtime_mirror.py` による `VAR-08/11/13` runtime-mirror floor は維持したまま、remaining positive rows `LIF-11/13/15` と `VAR-14` の blocker semantics を docs-first inventory として固定した。positive side は `acceptance_scope = alpha-acceptance-floor` と `runtime_mirror.scope = alpha-runtime-mirror-floor`、negative side は `reason_codes_scope = alpha-static-floor` で別 carrier のままであり、これは acceptance/runtime-mirror widening、parser/runtime bridge、final public checker API、runtime/public variance enforcement 自体を意味しない。
 - Next autonomous package:
-  no safe `P-A0-19` is promoted yet; the next reopen point is either a narrower carrier for `VAR-14`, or a remaining-row carrier inventory for `LIF-11/13/15`, without overclaiming runtime / remote / layer / adapter semantics
+  no safe `P-A0-20` is promoted yet; the next reopen point is the first row-specific actualization chosen from the `P-A0-19` inventory, without overclaiming runtime / remote / layer / adapter semantics
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -105,7 +105,7 @@
 | A | 90% | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
 | B | 40% | alpha 0.5 local runtime | first Rust local-runtime floor + local save/load accepted/rejected subset actualized | `specs/13..17`、`plan/39..43`、`samples/alpha/local-runtime/`、`samples/alpha/cut-save-load/`、`crates/mir-runtime/src/alpha_local_runtime.rs`、`scripts/alpha_cut_save_load_samples.py` | integrated local runtime completion / distributed save-load completion |
 | C | 35% | alpha 0.7 transport | first Rust network / Docker floor actualized | helper-local `NET-02..05` canaries + `samples/alpha/network-docker/` + `alpha_network_runtime` + `alpha_network_docker_e2e.py` | production WAN / durable replay / partition completion / final transport ABI |
-| D | 35% | alpha 0.8 hot-plug lifecycle | first attach-time layer floor actualized | `P19..P21` floor + `samples/alpha/layer-insertion/` + `samples/alpha/hotplug-runtime/` scaffold | detach / migration / final ABI |
+| D | 40% | alpha 0.8 hot-plug lifecycle | attach-time layer floor, package-admission subset, and runtime-mirror bridge actualized | `P19..P21` floor + `samples/alpha/layer-insertion/` + `samples/alpha/contract-variance/` runtime-mirror rows + `samples/alpha/hotplug-runtime/` + `samples/alpha/avatar-runtime/` | detach / migration / final ABI |
 | E | 60% | alpha 0.9 devtools | widened Stage-E subset runner actualized; completion still partial | `samples/alpha/visualization/` + `scripts/alpha_visualization_samples.py` + viewer prototype inventory + existing alpha bridge evidence | remaining `VIS-04/09/12` / final viewer / telemetry API |
 | F | 60% | alpha 1 Spaces alpha | thin integrated bridge + honest local save/load subset + widened Stage-E subset runner actualized; completion still blocked | `samples/alpha/e2e/` thin bridge runner + `scripts/alpha_visualization_samples.py` + `scripts/alpha_cut_save_load_samples.py` + scope spec | remaining Stage-E rows / distributed save-load completion / full VRChat / Reversed Library completion |
 | G | 0% | Spaces product expansion | future | upper-layer roadmap only | alpha scope |
@@ -140,7 +140,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | post-`P-A0-18` next-carrier decision for remaining positive rows | repo | blocked on new semantics boundary | either define a narrower carrier for `VAR-14`, or define a remaining-row carrier inventory for `LIF-11/13/15`, before promoting any `P-A0-19` package |
+| 1 | post-`P-A0-19` first row-specific actualization from the remaining positive-row inventory | repo | blocked on new semantics boundary | choose one inventoried row and define a narrower carrier that actualizes it without widening acceptance/runtime-mirror floors or overclaiming runtime / remote / adapter completion |
 | 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
@@ -178,6 +178,7 @@ These are safe to do without new product decisions.
 | `P-A0-16` | selected LIF/VAR checker widening after the widened Stage-E subset sync | closed | `LIF-01` raw dangling reference reject + `VAR-05` synthetic mutable/read-write invariance negative row + floor-scope confinement hardening + report `1116` |
 | `P-A0-17` | accept-side evidence carrier for positive LIF/VAR rows | closed | helper-local synthetic acceptance artifact schema for `LIF-02/03/04` + `VAR-01/04/06` with separate `acceptance_scope` confinement |
 | `P-A0-18` | runtime-mirror bridge | closed | `VAR-08/11/13` runtime-mirror floor via `LI-04/01/03` with separate `runtime_mirror.scope` confinement, no parser/runtime bridge claim, and report `1123` |
+| `P-A0-19` | remaining positive-row carrier inventory | closed | docs-first blocker inventory for `LIF-11/13/15` + `VAR-14`, no carrier widening, and report `1124` |
 
 ## user decision blockers
 

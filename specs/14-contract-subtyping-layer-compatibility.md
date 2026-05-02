@@ -345,6 +345,37 @@ current runtime-mirror floor で admissible なのは次だけである。
 `VAR-14` は adapter transform preservation semantics が未actualizeのため、
 current runtime-mirror floor にも上げない。
 
+## remaining positive-row carrier inventory boundary
+
+current alpha-local line では、`VAR-14` を
+docs-first / row-specific carrier inventory として固定してよい。
+
+- これは actualization ではなく blocker inventory である
+- current acceptance floor を widen しない
+- current runtime-mirror floor を widen しない
+- parser/runtime bridge や final public checker verdict を追加しない
+
+`VAR-14` が必要とするのは generic
+“adapter works” claim ではなく、
+adapter-target contract-preservation carrier である。
+
+minimum blocker inventory は少なくとも次を含む。
+
+- transformed target / representation と base abstract contract の対応
+- preserved postcondition
+- preserved provided interface / provided capabilities
+- effect / failure containment
+- no undeclared adapter side effect
+- capability monotonicity on the ordinary call path
+- observation / redaction / retention containment
+- explicit compatibility claims
+- explicit fallback representation for unsupported behavior
+- preservationが成立しない場合の explicit contract-update path
+
+inventory closeout は `VAR-14` を runtime package completion、
+avatar/package compatibility completion、acceptance/runtime-mirror widening、
+or final public attachment ABI completion として actualize したことを意味しない。
+
 ## deferred
 
 この spec で intentionally deferred に残すのは次である。

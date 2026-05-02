@@ -16,9 +16,10 @@
   "current_validation": {
     "mode": "skeleton-only",
     "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "note": "Validated only by filesystem/docs scaffold checks; P-A0-19 records the missing selected-option snapshot carrier but does not actualize this row."
   },
   "deferred": [
+    "selected-option snapshot semantics without hidden full-chain inheritance",
     "exact executable syntax",
     "dedicated runner integration",
     "checker/runtime implementation"

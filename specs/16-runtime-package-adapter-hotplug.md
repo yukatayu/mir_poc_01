@@ -168,6 +168,22 @@ alpha-local recommendation:
 - must declare effects / capabilities / fallback
 - unsafe opaque behavior is rejected or isolated
 
+## adapter transform preservation boundary
+
+adapter は concrete target / representation を変えてよいが、
+declared abstract contract を silent に壊してはならない。
+
+- preservation が成立するなら、
+  capability / effect / failure / observation / redaction / retention /
+  fallback representation の境界を explicit に保つ
+- preservation が成立しないなら、
+  explicit contract update path として扱う
+- limited adapter skeleton や runtime-private package admission を、
+  contract-preservation proof と読まない
+
+current alpha inventory では `VAR-14` がこの boundary を指す planned row であり、
+dedicated carrier は still later である。
+
 ## unsupported runtime fallback
 
 runtime unavailability or rejection must degrade monotonically and visibly.
