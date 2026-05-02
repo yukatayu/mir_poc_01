@@ -170,7 +170,8 @@ Read `tmp_faq/faq_013.md` and choose whether the next autonomous task should be 
 
 ## Commit / push status
 
-Pending at report write.
+- `c08a11d` (`docs: add faq 013 decision inventory`) was committed and pushed to `main`.
+- This report metadata section was synchronized afterward in a docs-only follow-up commit.
 
 ## Sub-agent session close status
 
