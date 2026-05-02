@@ -357,24 +357,31 @@ docs-first / row-specific carrier inventory として固定してよい。
 
 `VAR-14` が必要とするのは generic
 “adapter works” claim ではなく、
-adapter-target contract-preservation carrier である。
+adapter-target contract-preservation carrier
+`adapter_transform_scope = alpha-adapter-transform-floor`
+である。
 
 minimum blocker inventory は少なくとも次を含む。
 
-- transformed target / representation と base abstract contract の対応
-- preserved postcondition
-- preserved provided interface / provided capabilities
-- effect / failure containment
+- source contract
+- target contract
+- input / output relation
+- precondition / postcondition preservation
+- effect row containment
+- failure row containment
+- provided surface preservation
 - no undeclared adapter side effect
 - capability monotonicity on the ordinary call path
-- observation / redaction / retention containment
+- observation / redaction / retention preservation
 - explicit compatibility claims
-- explicit fallback representation for unsupported behavior
-- preservationが成立しない場合の explicit contract-update path
+- fallback representation
+- explicit contract-update path when preservation fails
 
 inventory closeout は `VAR-14` を runtime package completion、
 avatar/package compatibility completion、acceptance/runtime-mirror widening、
 or final public attachment ABI completion として actualize したことを意味しない。
+`VAR-14` は上記 `adapter_transform_scope` の minimum carrier が fixed されるまで
+actualize しない。
 
 ## deferred
 

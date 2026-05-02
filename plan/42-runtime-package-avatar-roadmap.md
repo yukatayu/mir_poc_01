@@ -59,8 +59,9 @@ planned families to keep explicit:
 
 all remain adapter/runtime-package concern, not core semantics.
 
-- `P-A0-19` adds docs-first blocker inventory only for `VAR-14`:
-  adapter-target contract-preservation remains a separate carrier question,
+- `P-A0-22` refines that blocker inventory only:
+  adapter-target contract-preservation remains a separate
+  `adapter_transform_scope = alpha-adapter-transform-floor` question,
   and current runtime-private avatar/package floors do not actualize it
 
 ## native trust policy roadmap
@@ -103,6 +104,7 @@ must keep visible:
 - renderer / physics / IK detail
 - full VRM / VRChat / Unity compatibility
 - dedicated adapter transform preservation carrier actualization for `VAR-14`
+  remains unpromoted until the narrower `alpha-adapter-transform-floor` cut is chosen
 
 ## next package
 

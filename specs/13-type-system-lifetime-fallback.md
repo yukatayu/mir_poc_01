@@ -413,14 +413,25 @@ docs-first / row-specific carrier inventory として固定してよい。
 current inventory で明示しておくべき row-specific blocker は次である。
 
 - `LIF-15`
-  requires remote freshness/membership/frontier carrier
-  - place identity、target identity、membership epoch / participant incarnation、
-    freshness guard、visibility / observation frontier、read / observe capability、
-    fallback chain、label / redaction policy を explicit に持つ必要がある
+  requires dedicated remote-observed reference carrier
+  `remote_observe_scope = alpha-remote-observe-floor`
+  - place identity
+  - target identity
+  - membership epoch
+  - participant incarnation
+  - freshness frontier
+  - visibility / observation frontier
+  - read / observe capability
+  - fallback chain
+  - label / redaction policy
+  - read-only covariance relation under contract / label
+  - stale-frontier rejection line
 
 inventory closeout は
-`LIF-15` を helper-local acceptance row、runtime-mirror row、
-remote-reference runtime completion として actualize したことを意味しない。
+`LIF-15` を helper-local acceptance row、snapshot row、anchor-handoff row、
+remote-observe row、remote-reference runtime completion として actualize したことを意味しない。
+`LIF-15` は上記 `remote_observe_scope` の minimum carrier が fixed されるまで
+actualize しない。
 
 ## deferred
 

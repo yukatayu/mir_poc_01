@@ -39,12 +39,13 @@
 - `LIF-02/03/04` currently carry helper-local synthetic acceptance rows only.
 - `LIF-13` currently carries helper-local synthetic snapshot-selected rows only.
 - `LIF-11` currently carries helper-local synthetic anchor-handoff rows only.
-- `LIF-15` remains outside the current acceptance / snapshot / anchor-handoff floors because it needs a remote freshness/membership/frontier carrier.
+- `LIF-15` remains outside the current acceptance / snapshot / anchor-handoff floors and is now split behind planned-only `remote_observe_scope = alpha-remote-observe-floor`.
+- That future carrier must at least carry place identity, target identity, membership epoch, participant incarnation, freshness frontier, visibility / observation frontier, read / observe capability, fallback chain, label / redaction policy, read-only covariance relation under contract/label, and stale-frontier rejection line.
 - `P-A0-20` actualizes only `LIF-13` as `snapshot_scope = alpha-snapshot-selected-floor`.
 - `P-A0-21` actualizes only `LIF-11` as `anchor_handoff_scope = alpha-anchor-handoff-floor`.
 - `snapshot_selected` is not an acceptance row and not a reason-code row. It proves selected-option capture plus exclusion of non-selected options only.
 - `anchor_handoff` is not an acceptance row, not a snapshot row, and not a reason-code row. It proves explicit inherited anchor-chain outcome after object deletion only; it does not extend Bird lifetime or prove runtime deletion implementation.
-- `P-A0-19` inventory still records only `LIF-15` in this family as a docs-first blocker after `P-A0-20` and `P-A0-21`.
+- `P-A0-22` closes the blocker split for this family and still does not actualize `LIF-15`.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package

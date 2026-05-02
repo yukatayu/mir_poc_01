@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 02:54 JST
+最終更新: 2026-05-03 03:01 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-03 02:54 JST に更新済みです:
-  `P-A0-21` gate では `python3 -m unittest scripts.tests.test_current_l2_family_checker_support scripts.tests.test_current_l2_same_lineage_checker scripts.tests.test_current_l2_missing_option_checker scripts.tests.test_current_l2_capability_checker scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_lifetime_fallback_acceptance scripts.tests.test_current_l2_family_snapshot_support scripts.tests.test_alpha_lifetime_fallback_snapshot scripts.tests.test_current_l2_family_anchor_handoff_support scripts.tests.test_alpha_lifetime_fallback_anchor_handoff scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_contract_variance_acceptance scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_validate_docs` 74 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` の negative-static checker floor、`LIF-02/03/04` の helper-local synthetic acceptance floor、`LIF-13` の helper-local synthetic snapshot-selected floor、`LIF-11` の helper-local synthetic anchor-handoff floor、`VAR-02/03/05/07/09/10/15` の negative-static checker floor、`VAR-01/04/06` の helper-local synthetic acceptance floor、`VAR-08/11/13` の runtime-mirror floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。`P-A0-21` は these floors を widen せず、`LIF-11` だけを dedicated anchor-handoff carrier で持ち上げました。
+- Alpha-0 closeout validation freshness は 2026-05-03 03:01 JST に更新済みです:
+  `P-A0-22` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` の negative-static checker floor、`LIF-02/03/04` の helper-local synthetic acceptance floor、`LIF-13` の helper-local synthetic snapshot-selected floor、`LIF-11` の helper-local synthetic anchor-handoff floor、`VAR-02/03/05/07/09/10/15` の negative-static checker floor、`VAR-01/04/06` の helper-local synthetic acceptance floor、`VAR-08/11/13` の runtime-mirror floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。`P-A0-22` は these floors を widen せず、`LIF-15` と `VAR-14` を future carrier blocker split として固定しました。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..20` closeout 後、remaining positive rows の row-specific blocker inventory は `LIF-13` だけ narrow carrier で actualize され、`LIF-11` / `LIF-15` / `VAR-14` が still blocked という current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..22` closeout 後、remaining positive rows の row-specific actualization は `LIF-13` と `LIF-11` まで narrow carrier で進み、`LIF-15` / `VAR-14` は future carrier blocker split に留まる current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -70,11 +70,11 @@
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
 - Package status:
-  `P-A0-21` anchor-handoff floor is the current promoted package in repo state, and it actualizes `LIF-11` only
+  `P-A0-22` remote/adapter blocker split is the current promoted package in repo state, and it actualizes no new row
 - Current status:
-  `P-A0-21` は `scripts/alpha_lifetime_fallback_anchor_handoff.py` と `current_l2_family_anchor_handoff_support.py` を追加し、`LIF-11` を `anchor_handoff_scope = alpha-anchor-handoff-floor` の helper-local synthetic anchor-handoff row として actualize した。`scripts/alpha_lifetime_fallback_acceptance.py` による `LIF-02/03/04` acceptance floor、`scripts/alpha_lifetime_fallback_snapshot.py` による `LIF-13` snapshot-selected floor、`scripts/alpha_contract_variance_acceptance.py` による `VAR-01/04/06` acceptance floor、`scripts/alpha_contract_variance_runtime_mirror.py` による `VAR-08/11/13` runtime-mirror floor は維持され、negative side は `reason_codes_scope = alpha-static-floor`、acceptance side は `acceptance_scope = alpha-acceptance-floor`、snapshot-selected side は `snapshot_scope = alpha-snapshot-selected-floor`、anchor-handoff side は `anchor_handoff_scope = alpha-anchor-handoff-floor`、runtime-sensitive side は `runtime_mirror.scope = alpha-runtime-mirror-floor` で別 carrier のままである。これは acceptance/runtime-mirror widening、parser/runtime bridge、runtime deletion semantics、final public checker API、runtime/public variance enforcement を意味しない。
+  `P-A0-22` は `LIF-15` を planned-only `remote_observe_scope = alpha-remote-observe-floor`、`VAR-14` を planned-only `adapter_transform_scope = alpha-adapter-transform-floor` として split し、current helper-local acceptance/snapshot/anchor-handoff/runtime-mirror floors を widen しなかった。negative side は `reason_codes_scope = alpha-static-floor`、acceptance side は `acceptance_scope = alpha-acceptance-floor`、snapshot-selected side は `snapshot_scope = alpha-snapshot-selected-floor`、anchor-handoff side は `anchor_handoff_scope = alpha-anchor-handoff-floor`、runtime-sensitive side は `runtime_mirror.scope = alpha-runtime-mirror-floor` で別 carrier のままである。future `alpha-remote-observe-floor` と `alpha-adapter-transform-floor` は still planned-only inventory であり、parser/runtime bridge、runtime-package completion、final public checker API、runtime/public variance enforcement を意味しない。
 - Next autonomous package:
-  `P-A0-22` blocker split is the next reopen point, and it must keep `LIF-15` / `VAR-14` non-actualized while fixing their future carrier inventory
+  no safe `P-A0-23` is promoted; the next reopen must choose either a dedicated `LIF-15` remote-observe carrier cut or a dedicated `VAR-14` adapter-transform carrier cut
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -140,7 +140,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-22` remote / adapter blocker split | repo | ready after `P-A0-21` close | keep `LIF-15` / `VAR-14` non-actualized, split the future carrier inventory precisely, and leave the next actualization choice narrower than parser/runtime or adapter completion |
+| 1 | next carrier-choice reopen after `P-A0-22` | repo | blocked pending narrower cut selection | choose whether the first future carrier package is `LIF-15` remote-observe or `VAR-14` adapter-transform, without widening current floors or claiming parser/runtime bridge |
 | 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
@@ -181,6 +181,7 @@ These are safe to do without new product decisions.
 | `P-A0-19` | remaining positive-row carrier inventory | closed | docs-first blocker inventory for `LIF-11/13/15` + `VAR-14`, no carrier widening, and report `1124` |
 | `P-A0-20` | snapshot-selected floor | closed | dedicated helper-local synthetic snapshot-selected carrier for `LIF-13` only, without widening acceptance/runtime-mirror floors, and report `1127` |
 | `P-A0-21` | anchor-handoff floor | closed | dedicated helper-local synthetic anchor-handoff carrier for `LIF-11` only, without widening acceptance/snapshot/runtime-mirror floors, and report `1128` |
+| `P-A0-22` | remote / adapter blocker split | closed | docs-first split fixing planned-only `alpha-remote-observe-floor` for `LIF-15` and `alpha-adapter-transform-floor` for `VAR-14`, without actualizing either row, and report `1129` |
 
 ## user decision blockers
 

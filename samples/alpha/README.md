@@ -15,6 +15,8 @@
 - `lifetime-fallback/` の `LIF-11` には、selected anchor-handoff positive row 用の helper-local synthetic anchor-handoff floor `expected_anchor_handoff.checked_anchor_handoff_rows` を追加済み
 - `contract-variance/` の `VAR-08/11/13` には、selected runtime-sensitive positive rows 用の `runtime_mirror.scope = alpha-runtime-mirror-floor` を追加済みであり、source authority は `layer-insertion/` の `LI-04/01/03` runtime-floor sidecars に残す
 - `reason_codes_scope = alpha-static-floor`、`acceptance_scope = alpha-acceptance-floor`、`snapshot_scope = alpha-snapshot-selected-floor`、`anchor_handoff_scope = alpha-anchor-handoff-floor`、`runtime_mirror.scope = alpha-runtime-mirror-floor` は別 carrier であり、negative-static reject row、helper-local positive acceptance row、snapshot-selected row、anchor-handoff row、runtime-mirror row を混同しない
+- `LIF-15` は planned-only `remote_observe_scope = alpha-remote-observe-floor` に split 済みであり、place identity / target identity / membership epoch / participant incarnation / frontier / label-redaction / covariance の future carrier inventory を要求する
+- `VAR-14` は planned-only `adapter_transform_scope = alpha-adapter-transform-floor` に split 済みであり、source-target contract / pre-post preservation / effect-failure containment / provided surface / observation-redaction-retention / fallback representation の future carrier inventory を要求する
 - `cut-save-load/` には selected negative rows の checker floor に加えて、`scripts/alpha_cut_save_load_samples.py` が `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize している
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
 - `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
@@ -24,7 +26,7 @@
 - `P-A0-18` は `contract-variance/` に parser/runtime bridge を追加せず、`VAR-08/11/13` を existing `layer-insertion/` runtime floor への mirror evidence としてだけ actualize した
 - `P-A0-20` は `LIF-13` だけを actualize し、`alpha-acceptance-floor` を広げずに `snapshot_scope = alpha-snapshot-selected-floor` の helper-local synthetic snapshot-selected carrier を追加した
 - `P-A0-21` は `LIF-11` だけを actualize し、`alpha-acceptance-floor` や `alpha-snapshot-selected-floor` を広げずに `anchor_handoff_scope = alpha-anchor-handoff-floor` の helper-local synthetic anchor-handoff carrier を追加した
-- `P-A0-19` inventory の残りである `LIF-15` と `VAR-14` はまだ actualize せず、row-specific carrier blocker inventory として保持する
+- `P-A0-22` は `LIF-15` と `VAR-14` を actualize せず、planned-only `alpha-remote-observe-floor` と `alpha-adapter-transform-floor` の blocker split として固定した
 - `hotplug-runtime/` の `HP-11/12/15` は `avatar-runtime/` family と共用する runtime-private native-policy subset として actualize 済みだが、family 全体の runnable promotion ではない
 - `samples/not_implemented/` は pre-existing residual planned families を保持する legacy planned root として残す
 

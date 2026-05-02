@@ -184,6 +184,30 @@ declared abstract contract を silent に壊してはならない。
 current alpha inventory では `VAR-14` がこの boundary を指す planned row であり、
 dedicated carrier は still later である。
 
+`P-A0-22` blocker split では、この future carrier を
+`adapter_transform_scope = alpha-adapter-transform-floor`
+として only-inventory で固定する。
+
+minimum future carrier は少なくとも次を explicit に持つ必要がある。
+
+- source contract
+- target contract
+- input / output relation
+- precondition / postcondition preservation
+- effect row containment
+- failure row containment
+- provided surface preservation
+- no undeclared adapter side effect
+- capability monotonicity on the ordinary call path
+- observation / redaction / retention preservation
+- explicit compatibility claims
+- fallback representation
+- explicit contract-update path when preservation fails
+
+これは current runtime-private avatar/package floor、
+VRM adapter skeleton、VRChat compatibility adapter skeleton、
+Unity adapter skeleton を contract-preservation proof として actualize したことを意味しない。
+
 ## unsupported runtime fallback
 
 runtime unavailability or rejection must degrade monotonically and visibly.

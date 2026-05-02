@@ -114,16 +114,18 @@ actual mechanization widening remains later than first checker skeleton.
 
 ## next reopen point
 
-- after `P-A0-21`, the current lifetime-family widening is intentionally limited to:
+- after `P-A0-22`, the current lifetime-family widening is intentionally limited to:
   - negative checker-floor rows `LIF-01/05..08`
   - helper-local synthetic acceptance rows `LIF-02/03/04`
-- helper-local synthetic snapshot-selected row `LIF-13`
-- helper-local synthetic anchor-handoff row `LIF-11`
-- `P-A0-19` closes the docs-first remaining-row inventory for:
-  - `LIF-15` remote freshness/membership/frontier carrier
-- `P-A0-20` actualizes only `LIF-13` through the dedicated snapshot-selected carrier and does not widen the acceptance floor or create a parser/runtime bridge
-- `P-A0-21` actualizes only `LIF-11` through the dedicated anchor-handoff carrier and does not widen the acceptance/snapshot floors or create a parser/runtime bridge
-- next safe reopen is `P-A0-22` docs-first blocker split for:
-  - `LIF-15` remote-observed reference carrier inventory
-  - `VAR-14` adapter-transform preservation carrier inventory
+  - helper-local synthetic snapshot-selected row `LIF-13`
+  - helper-local synthetic anchor-handoff row `LIF-11`
+- `P-A0-22` closes only a docs-first blocker split and keeps `LIF-15` non-actualized behind:
+  - `remote_observe_scope = alpha-remote-observe-floor`
+  - place identity / target identity / membership epoch / participant incarnation
+  - freshness frontier / visibility frontier / read-observe capability
+  - label-redaction policy / covariance relation / stale-frontier rejection line
+- no acceptance-floor widening, snapshot-floor widening, anchor-handoff widening, or parser/runtime bridge claim is added
+- next safe actualization package is not yet promoted; the next reopen must first choose whether the narrower line is:
+  - dedicated `LIF-15` remote-observe carrier design / helper floor
+  - or a separate non-lifetime carrier first
 - queue authority remains `progress.md` / `tasks.md`
