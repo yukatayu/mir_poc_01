@@ -131,6 +131,9 @@ python3 scripts/validate_docs.py
 cargo fmt --check
 git diff --check
 date '+%Y-%m-%d %H:%M %Z'
+git add Documentation.md plan/01-status-at-a-glance.md plan/39-type-system-freeze-roadmap.md plan/40-layer-compatibility-freeze-roadmap.md plan/43-alpha-e2e-roadmap.md progress.md tasks.md samples_progress.md samples/README.md samples/alpha/README.md samples/alpha/lifetime-fallback/README.md samples/alpha/contract-variance/README.md samples/alpha/lifetime-fallback/lif-02-fallback_extends_access_path.expected.json samples/alpha/lifetime-fallback/lif-03-nested_inherit_chain_valid.expected.json samples/alpha/lifetime-fallback/lif-04-plain_ref_does_not_inherit.expected.json samples/alpha/contract-variance/var-01-logging_layer_valid.expected.json samples/alpha/contract-variance/var-04-output_covariance_valid.expected.json samples/alpha/contract-variance/var-06-readonly_covariance_valid.expected.json scripts/README.md scripts/current_l2_family_acceptance_support.py scripts/alpha_lifetime_fallback_acceptance.py scripts/alpha_contract_variance_acceptance.py scripts/tests/test_current_l2_family_checker_support.py scripts/tests/test_current_l2_family_acceptance_support.py scripts/tests/test_alpha_lifetime_fallback_acceptance.py scripts/tests/test_alpha_contract_variance_acceptance.py specs/13-type-system-lifetime-fallback.md specs/14-contract-subtyping-layer-compatibility.md docs/reports/1117-p-a0-17-acceptance-artifact-closeout.md docs/reports/review-1117-p-a0-17-acceptance-schema-review.md docs/reports/review-1117-p-a0-17-checker-test-review.md docs/reports/review-1117-p-a0-17-snapshot-review.md
+git commit --no-gpg-sign -m "mirrorea: close p-a0-17 acceptance artifact floor"
+git push
 ```
 
 ## Evidence / outputs / test results
@@ -149,6 +152,10 @@ date '+%Y-%m-%d %H:%M %Z'
   passed.
 - Validation timestamp for the closeout floor:
   `2026-05-02 15:28 JST`.
+- Primary closeout commit:
+  `c7c7e8d` (`mirrorea: close p-a0-17 acceptance artifact floor`)
+- Push status:
+  pushed to `origin/main`
 
 ## What changed in understanding
 
@@ -209,10 +216,12 @@ Review whether any one of `LIF-11/13/15` or `VAR-08/11/13/14` can be promoted in
 
 ## Commit / push status
 
-Pending at report write.
+- Primary package closeout commit: `c7c7e8d` (`mirrorea: close p-a0-17 acceptance artifact floor`)
+- Push status: pushed to `origin/main`
+- This report metadata section is finalized in an immediate docs-only follow-up after the primary closeout push.
 
 ## Sub-agent session close status
 
-- theory/spec reviewer: completed.
-- checker/test reviewer: completed.
-- docs/snapshot reviewer: completed.
+- theory/spec reviewer: completed and closed.
+- checker/test reviewer: completed and closed.
+- docs/snapshot reviewer: completed and closed.
