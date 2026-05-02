@@ -210,7 +210,8 @@ no sample-family status or validation freshness claim changed in this docs-only 
 
 ## Commit / push status
 
-Pending at report write.
+- Closeout commit `d1ef69e` (`docs: add faq 014 decision inventory`) was created with `--no-gpg-sign` and pushed to `origin/main`.
+- This report status line is finalized by a docs-only follow-up commit.
 
 ## Sub-agent session close status
 
