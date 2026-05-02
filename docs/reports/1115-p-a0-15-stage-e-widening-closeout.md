@@ -201,7 +201,9 @@ Continue with `P-A0-16`: widen selected positive/static `LIF` / `VAR` rows throu
 
 ## Commit / push status
 
-Pending at report write.
+- Primary package closeout commit: `8472437e6b579aac112e87cc83a63446089e47e3` (`mirrorea: close p-a0-15 stage-e widening`)
+- Push status: pushed to `origin/main`
+- This report metadata section is finalized in an immediate docs-only follow-up after the primary closeout push.
 
 ## Sub-agent session close status
 
