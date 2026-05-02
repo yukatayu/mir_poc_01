@@ -216,9 +216,10 @@ the alpha lifetime/fallback lane now records the snapshot-selected floor and its
 
 ## Commit / push status
 
-Pending at report write.
+- main package commit created and pushed:
+  `9918914` (`mirrorea: close p-a0-20 snapshot selected floor`)
+- docs-only report-finalization follow-up pending at this report revision.
 
 ## Sub-agent session close status
 
-- `Archimedes`, `Dewey`, and `McClintock` completed review.
-- Close requests will be issued after the package commit/push is complete.
+- `Archimedes`, `Dewey`, and `McClintock` completed review and were closed after the main package push.
