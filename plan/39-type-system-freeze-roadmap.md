@@ -22,14 +22,20 @@ final parser grammar や final public remote-reference API ではない。
   - `crates/mir-runtime/src/current_l2.rs`
   - `crates/mir-ast/tests/fixtures/current-l2/`
 - Alpha-0 sample family / docs taxonomy / scope wording for Mirrorea Spaces alpha is now present via `samples/alpha/` and snapshot-doc sync
-- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, and complemented by `P-A0-17` helper-local acceptance floor now exists via:
+- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, and complemented by `P-A0-17` helper-local acceptance floor, `P-A0-20` snapshot-selected floor, and `P-A0-21` anchor-handoff floor now exists via:
   - `scripts/alpha_lifetime_fallback_checker.py`
   - `scripts/alpha_lifetime_fallback_acceptance.py`
+  - `scripts/alpha_lifetime_fallback_snapshot.py`
+  - `scripts/alpha_lifetime_fallback_anchor_handoff.py`
   - `samples/alpha/lifetime-fallback/lif-01` and `lif-05..08*.expected.json`
   - `samples/alpha/lifetime-fallback/lif-02` / `03` / `04*.expected.json`
+  - `samples/alpha/lifetime-fallback/lif-13*.expected.json`
+  - `samples/alpha/lifetime-fallback/lif-11*.expected.json`
   - shared helper reuse through `scripts/current_l2_family_checker_support.py`
   - shared helper reuse through `scripts/current_l2_family_acceptance_support.py`
-  synthetic detached artifact comparison only; negative rows are confined to `reason_codes_scope = alpha-static-floor`, positive rows are confined to `acceptance_scope = alpha-acceptance-floor`, and there is still no parser/runtime bridge claim
+  - shared helper reuse through `scripts/current_l2_family_snapshot_support.py`
+  - shared helper reuse through `scripts/current_l2_family_anchor_handoff_support.py`
+  synthetic detached artifact comparison only; negative rows are confined to `reason_codes_scope = alpha-static-floor`, acceptance rows are confined to `acceptance_scope = alpha-acceptance-floor`, snapshot-selected rows are confined to `snapshot_scope = alpha-snapshot-selected-floor`, anchor-handoff rows are confined to `anchor_handoff_scope = alpha-anchor-handoff-floor`, and there is still no parser/runtime bridge claim
 
 ## decisions mirrored from specs/13
 
@@ -59,6 +65,8 @@ reuse current `current_l2` checker/runtime skeleton rather than freezing a new p
   `LIF-02/03/04` only
 - `LIF-13` now uses a dedicated helper-local snapshot-selected artifact schema:
   `snapshot_scope = alpha-snapshot-selected-floor` only
+- `LIF-11` now uses a dedicated helper-local anchor-handoff artifact schema:
+  `anchor_handoff_scope = alpha-anchor-handoff-floor` only
 - keep broader positive/remote/runtime-sensitive rows planned until new semantics justify widening
 - add explicit no-re-promotion / no-resurrection check rows if executable semantics floor reaches them
 
@@ -106,16 +114,16 @@ actual mechanization widening remains later than first checker skeleton.
 
 ## next reopen point
 
-- after `P-A0-20`, the current lifetime-family widening is intentionally limited to:
+- after `P-A0-21`, the current lifetime-family widening is intentionally limited to:
   - negative checker-floor rows `LIF-01/05..08`
   - helper-local synthetic acceptance rows `LIF-02/03/04`
 - helper-local synthetic snapshot-selected row `LIF-13`
+- helper-local synthetic anchor-handoff row `LIF-11`
 - `P-A0-19` closes the docs-first remaining-row inventory for:
-  - `LIF-11` anchor/deletion outcome semantics
-  - `LIF-13` selected-option snapshot semantics
   - `LIF-15` remote freshness/membership/frontier carrier
 - `P-A0-20` actualizes only `LIF-13` through the dedicated snapshot-selected carrier and does not widen the acceptance floor or create a parser/runtime bridge
-- next safe reopen requires the next row-specific actualization chosen from the remaining inventory:
-  - `LIF-11` anchor-handoff floor
-  - or a later dedicated remote carrier for `LIF-15` without overclaim
+- `P-A0-21` actualizes only `LIF-11` through the dedicated anchor-handoff carrier and does not widen the acceptance/snapshot floors or create a parser/runtime bridge
+- next safe reopen is `P-A0-22` docs-first blocker split for:
+  - `LIF-15` remote-observed reference carrier inventory
+  - `VAR-14` adapter-transform preservation carrier inventory
 - queue authority remains `progress.md` / `tasks.md`

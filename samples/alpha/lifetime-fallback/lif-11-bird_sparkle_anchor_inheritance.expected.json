@@ -6,20 +6,54 @@
   "phase": "Phase 1",
   "stage": "Stage A -> B bridge",
   "kind": "positive",
-  "purpose": "sparkle inherits bird anchor chain",
-  "expected": "bird deletion keeps sparkle on FriendHead",
+  "purpose": "sparkle inherits the explicit bird anchor chain outcome",
+  "expected": "Sparkle keeps inherited FriendHead>SelfShoulder>WorldOrigin access path after Bird disappearance",
   "claims": {
     "runnable": false,
     "implemented": false,
     "active_root": false
   },
+  "expected_anchor_handoff": {
+    "verdict": "valid",
+    "checked_anchor_handoff_scope": "alpha-anchor-handoff-floor",
+    "checked_anchor_handoff_rows": [
+      {
+        "kind": "bird_sparkle_anchor_chain_inherited_after_object_delete",
+        "sample_id": "LIF-11",
+        "deleted_object": "Bird",
+        "inheriting_effect": "Sparkle",
+        "source_chain": [
+          "FriendHead",
+          "SelfShoulder"
+        ],
+        "appended_fallback": "WorldOrigin",
+        "post_delete_chain": [
+          "FriendHead",
+          "SelfShoulder",
+          "WorldOrigin"
+        ],
+        "object_lifetime_extended": false,
+        "chain_inheritance_explicit": true,
+        "hidden_object_reference_retained": false,
+        "later_degradation_order": [
+          {
+            "when": "FriendHeadInvalid",
+            "select": "SelfShoulder"
+          },
+          {
+            "when": "SelfShoulderInvalid",
+            "select": "WorldOrigin"
+          }
+        ]
+      }
+    ]
+  },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks; P-A0-19 records the missing anchor/deletion outcome carrier but does not actualize this row."
+    "mode": "synthetic-anchor-handoff-floor",
+    "runner": "python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_anchor_handoff",
+    "note": "Validated by non-public synthetic helper-local anchor-handoff artifact tests; not parser/runtime/deletion implementation."
   },
   "deferred": [
-    "anchor/deletion outcome semantics for inherited access-path degrade after upstream disappearance",
     "exact executable syntax",
     "dedicated runner integration",
     "checker/runtime implementation"
