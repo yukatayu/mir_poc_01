@@ -1,11 +1,13 @@
 # alpha sample family — Lifetime / Fallback
 
-- Status: planned skeleton only
+- Status: mixed scaffold with synthetic negative checker floor and selected helper-local acceptance floor
 - Phase: Phase 1
 - Stage: Stage A -> B bridge
-- Current runners do not execute this family yet.
+- Current runners still do not execute this family as a parser/runtime sample root.
 - Current package adds a non-public checker floor for selected negative-static rows via sidecar-declared `expected_static.checked_reason_codes`.
-- Validation for this package is synthetic-artifact checker tests plus filesystem/docs integrity.
+- Current package also adds a helper-local synthetic acceptance floor for `LIF-02/03/04` via sidecar-declared `expected_acceptance.checked_acceptance_rows`.
+- `reason_codes_scope = alpha-static-floor` and `acceptance_scope = alpha-acceptance-floor` are distinct carrier boundaries.
+- Validation for this package is synthetic helper-local checker/acceptance tests plus filesystem/docs integrity.
 
 ## Rows
 
@@ -32,11 +34,15 @@
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
 - `LIF-01` and `LIF-05..08` currently carry checker-floor seed rows for the first static diagnostic cut.
+- `LIF-02/03/04` currently carry helper-local synthetic acceptance rows only.
+- `LIF-11/13/15` remain outside the current acceptance floor because they need richer runtime / remote / lineage semantics.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
 
 ```bash
 find samples/alpha/lifetime-fallback -maxdepth 1 -type f | sort
-python3 -m unittest scripts.tests.test_alpha_lifetime_fallback_checker
+python3 -m unittest \
+  scripts.tests.test_alpha_lifetime_fallback_checker \
+  scripts.tests.test_alpha_lifetime_fallback_acceptance
 ```

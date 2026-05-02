@@ -279,6 +279,41 @@ sample inventory の current repository memory は
 `plan/40-layer-compatibility-freeze-roadmap.md` と
 `samples/alpha/contract-variance/` を参照する。
 
+## helper-local positive acceptance artifact boundary
+
+current alpha-local line では、selected positive rows に限って
+helper-local synthetic acceptance artifact を使ってよい。
+
+- これは alpha-local / helper-local / non-public synthetic evidence である
+- negative-static floor の `expected_static.checked_reason_codes` /
+  `detached_noncore.reason_codes` とは別 carrier として扱う
+- positive row の証拠は rejection row 不在ではなく、
+  explicit `expected_acceptance.checked_acceptance_rows` と
+  `detached_noncore.acceptance_rows` の一致で判断する
+- accepted scope は `alpha-acceptance-floor` に限る
+- scope mismatch は reject する
+- これは production layer attachment、runtime layer compatibility completion、
+  final public contract checker を証明しない
+
+current helper-local acceptance floor で admissible なのは次だけである。
+
+- `VAR-01` logging layer valid
+- `VAR-04` output covariance valid
+- `VAR-06` read-only covariance valid
+
+current helper-local positive rows は少なくとも次の kind family を持つ。
+
+- `transparent_observe_only_layer`
+  observe/log only で effect/failure delta なし、precondition strengthening なし、
+  postcondition weakening なしを明示する
+- `output_covariance_checked`
+  output subtype relation と admissibility を明示する
+- `readonly_covariance_checked`
+  read-only covariance、mutable=false、write capability 不在を明示する
+
+`VAR-08` / `VAR-11` / `VAR-13` / `VAR-14` は runtime / layer / adapter meaning を濃く含むため、
+current helper-local acceptance floor には上げない。
+
 ## deferred
 
 この spec で intentionally deferred に残すのは次である。

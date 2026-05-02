@@ -1,11 +1,13 @@
 # alpha sample family — Contract Variance / Layer Compatibility
 
-- Status: planned skeleton only
+- Status: mixed scaffold with synthetic negative checker floor and selected helper-local acceptance floor
 - Phase: Phase 1 / 4
 - Stage: Stage A -> D bridge
-- Current runners do not execute this family yet.
+- Current runners still do not execute this family as a parser/runtime sample root.
 - Current package adds a non-public checker floor for selected negative-static rows via sidecar-declared `expected_static.checked_reason_codes`.
-- Validation for this package is synthetic-artifact checker tests plus filesystem/docs integrity.
+- Current package also adds a helper-local synthetic acceptance floor for `VAR-01/04/06` via sidecar-declared `expected_acceptance.checked_acceptance_rows`.
+- `reason_codes_scope = alpha-static-floor` and `acceptance_scope = alpha-acceptance-floor` are distinct carrier boundaries.
+- Validation for this package is synthetic helper-local checker/acceptance tests plus filesystem/docs integrity.
 
 ## Rows
 
@@ -32,6 +34,8 @@
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
 - `VAR-02` / `03` / `05` / `07` / `09` / `10` / `15` currently carry checker-floor seed rows for the first static diagnostic cut.
+- `VAR-01/04/06` currently carry helper-local synthetic acceptance rows only.
+- `VAR-08/11/13/14` remain outside the current acceptance floor because they need runtime / layer / adapter semantics beyond this helper-local cut.
 - `VAR-08` / `11` / `12` / `13` now have runtime-backed mirrors under `../layer-insertion/`, but this directory remains the planned/sample-mirror authority for the broader variance family.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
@@ -39,5 +43,7 @@
 
 ```bash
 find samples/alpha/contract-variance -maxdepth 1 -type f | sort
-python3 -m unittest scripts.tests.test_alpha_contract_variance_checker
+python3 -m unittest \
+  scripts.tests.test_alpha_contract_variance_checker \
+  scripts.tests.test_alpha_contract_variance_acceptance
 ```

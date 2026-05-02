@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-02 13:23 JST
+最終更新: 2026-05-02 15:28 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-02 13:23 JST に更新済みです:
-  `P-A0-16` gate では `python3 -m unittest scripts.tests.test_current_l2_family_checker_support scripts.tests.test_current_l2_same_lineage_checker scripts.tests.test_current_l2_missing_option_checker scripts.tests.test_current_l2_capability_checker scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_validate_docs` 40 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15` の negative-static checker floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。
+- Alpha-0 closeout validation freshness は 2026-05-02 15:28 JST に更新済みです:
+  `P-A0-17` gate では `python3 -m unittest scripts.tests.test_current_l2_family_checker_support scripts.tests.test_current_l2_same_lineage_checker scripts.tests.test_current_l2_missing_option_checker scripts.tests.test_current_l2_capability_checker scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_current_l2_family_acceptance_support scripts.tests.test_alpha_lifetime_fallback_acceptance scripts.tests.test_alpha_contract_variance_acceptance scripts.tests.test_validate_docs` 57 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15` の negative-static checker floor、`LIF-02/03/04` と `VAR-01/04/06` の helper-local synthetic acceptance floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..16` closeout 後、accept-side carrier が未固定のため safe な `P-A0-17` をまだ promoted していない current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..17` closeout 後、remaining positive rows は current acceptance schema だけでは widen しないため safe な `P-A0-18` をまだ promoted していない current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -70,11 +70,11 @@
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
 - Current package:
-  `P-A0-16` selected LIF/VAR checker widening is closeout-complete in current repo state
+  `P-A0-17` accept-side evidence carrier for positive LIF/VAR rows is closeout-complete in current repo state
 - Current status:
-  `P-A0-16` は current repo state で close 済み。`scripts/alpha_lifetime_fallback_checker.py` により `LIF-01` raw dangling reference reject、`scripts/alpha_contract_variance_checker.py` により `VAR-05` synthetic mutable/read-write invariance negative row が actualize され、shared helper は `reason_codes_scope` mismatch を matched 扱いしないように harden された。これは selected negative-static checker floor widening に限るものであり、positive/accept carrier、runtime/public variance enforcement、parser/runtime bridge 自体はまだ行っていない。
+  `P-A0-17` は current repo state で close 済み。`scripts/alpha_lifetime_fallback_acceptance.py` により `LIF-02/03/04`、`scripts/alpha_contract_variance_acceptance.py` により `VAR-01/04/06` が helper-local synthetic acceptance-floor rows として actualize され、positive side は `acceptance_scope = alpha-acceptance-floor`、negative side は `reason_codes_scope = alpha-static-floor` で別 carrier として閉じた。これは selected positive rows の helper-local acceptance schema に限るものであり、parser/runtime bridge、final public checker API、runtime/public variance enforcement 自体はまだ行っていない。
 - Next autonomous package:
-  no safe `P-A0-17` is promoted yet; the next reopen point is an explicit helper-local acceptance artifact schema or a parser/runtime bridge for positive LIF/VAR rows
+  no safe `P-A0-18` is promoted yet; the next reopen point is a review of whether any further positive row can use the helper-local acceptance schema without new runtime / remote / layer / adapter semantics
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -140,7 +140,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-17` accept-side evidence carrier for positive LIF/VAR rows | repo | blocked on helper-local contract freeze | explicit helper-local acceptance artifact schema or parser/runtime bridge fixed without overclaim |
+| 1 | `P-A0-18` acceptance-floor widening review for remaining positive rows | repo | blocked on new semantics boundary | prove a further row fits the helper-local acceptance schema without new runtime / remote / layer / adapter semantics |
 | 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
@@ -176,7 +176,7 @@ These are safe to do without new product decisions.
 | `P-A0-14` | honest CUT widening closeout | closed | `CUT-17` local stale-membership rejection bridge + `CUT-11` checker-backed Z-cycle inadmissibility row + report `1114` |
 | `P-A0-15` | remaining Stage-E visualization widening after the honest CUT subset closeout | closed | `VIS-02` thin place-catalog projection + `VIS-05` thin membership epoch/incarnation timeline actualization with `VIS-04/09/12` planned-only retention + report `1115` |
 | `P-A0-16` | selected LIF/VAR checker widening after the widened Stage-E subset sync | closed | `LIF-01` raw dangling reference reject + `VAR-05` synthetic mutable/read-write invariance negative row + floor-scope confinement hardening + report `1116` |
-| `P-A0-17` | accept-side evidence carrier for positive LIF/VAR rows | not promoted | explicit helper-local acceptance artifact schema or parser/runtime bridge fixed without overclaim |
+| `P-A0-17` | accept-side evidence carrier for positive LIF/VAR rows | closed | helper-local synthetic acceptance artifact schema for `LIF-02/03/04` + `VAR-01/04/06` with separate `acceptance_scope` confinement |
 
 ## user decision blockers
 

@@ -22,11 +22,14 @@ final parser grammar や final public remote-reference API ではない。
   - `crates/mir-runtime/src/current_l2.rs`
   - `crates/mir-ast/tests/fixtures/current-l2/`
 - Alpha-0 sample family / docs taxonomy / scope wording for Mirrorea Spaces alpha is now present via `samples/alpha/` and snapshot-doc sync
-- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, now exists via:
+- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, and complemented by `P-A0-17` helper-local acceptance floor now exists via:
   - `scripts/alpha_lifetime_fallback_checker.py`
+  - `scripts/alpha_lifetime_fallback_acceptance.py`
   - `samples/alpha/lifetime-fallback/lif-01` and `lif-05..08*.expected.json`
+  - `samples/alpha/lifetime-fallback/lif-02` / `03` / `04*.expected.json`
   - shared helper reuse through `scripts/current_l2_family_checker_support.py`
-  synthetic detached artifact comparison only; rows are confined to `reason_codes_scope = alpha-static-floor`, and there is still no parser/runtime bridge claim
+  - shared helper reuse through `scripts/current_l2_family_acceptance_support.py`
+  synthetic detached artifact comparison only; negative rows are confined to `reason_codes_scope = alpha-static-floor`, positive rows are confined to `acceptance_scope = alpha-acceptance-floor`, and there is still no parser/runtime bridge claim
 
 ## decisions mirrored from specs/13
 
@@ -52,7 +55,9 @@ reuse current `current_l2` checker/runtime skeleton rather than freezing a new p
 
 - add Alpha-0 sample-family aware fixture / source mapping if/when a dedicated artifact emitter exists
 - widen static reason-code clusters beyond the current selected static rows (`LIF-01`, `LIF-05..08`) only when a new checked carrier is explicitly fixed
-- keep positive/accept rows planned-only until an explicit helper-local acceptance artifact schema or parser/runtime bridge exists
+- selected positive rows now use an explicit helper-local acceptance artifact schema:
+  `LIF-02/03/04` only
+- keep broader positive/remote/runtime-sensitive rows planned until new semantics justify widening
 - add explicit no-re-promotion / no-resurrection check rows if executable semantics floor reaches them
 
 ### kept-later
@@ -99,8 +104,10 @@ actual mechanization widening remains later than first checker skeleton.
 
 ## next reopen point
 
-- after `P-A0-16`, no further lifetime-family checker widening is promoted by default
-- next safe reopen requires one of:
-  - an explicit helper-local acceptance artifact schema for positive rows
+- after `P-A0-17`, the current lifetime-family widening is intentionally limited to:
+  - negative checker-floor rows `LIF-01/05..08`
+  - helper-local synthetic acceptance rows `LIF-02/03/04`
+- next safe reopen requires either:
+  - proof that a further row can use the helper-local acceptance schema without new runtime / remote semantics
   - a parser/runtime-backed bridge that can carry accept-side evidence without overclaim
 - queue authority remains `progress.md` / `tasks.md`

@@ -20,10 +20,12 @@ final public layer-attachment ABI や production auth/telemetry service では�
   - `LayerSignature`
   - visualization security envelope
   - hot-plug request/verdict carrier
-- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, now exists via:
+- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, and complemented by `P-A0-17` helper-local acceptance floor now exists via:
   - `scripts/alpha_contract_variance_checker.py`
+  - `scripts/alpha_contract_variance_acceptance.py`
   - `samples/alpha/contract-variance/var-02` / `03` / `05` / `07` / `09` / `10` / `15` sidecars
-  synthetic detached artifact comparison only; rows are confined to `reason_codes_scope = alpha-static-floor`, and there is still no layer runtime or parser bridge claim
+  - `samples/alpha/contract-variance/var-01` / `04` / `06` sidecars
+  synthetic detached artifact comparison only; negative rows are confined to `reason_codes_scope = alpha-static-floor`, positive rows are confined to `acceptance_scope = alpha-acceptance-floor`, and there is still no layer runtime or parser bridge claim
 
 ## decisions mirrored from specs/14
 
@@ -57,8 +59,9 @@ final public layer-attachment ABI や production auth/telemetry service では�
 
 remaining later in this family:
 
-- positive covariance / contract-preserving transform anchors
-- accept-side evidence rows until an explicit helper-local acceptance artifact schema or runtime/layer bridge exists
+- current helper-local acceptance floor actualizes `VAR-01/04/06` only
+- broader positive covariance / contract-preserving transform anchors stay later
+- runtime/layer-backed compatibility evidence stays later
 
 ### later runtime cut
 
@@ -104,8 +107,10 @@ must keep visible:
 
 ## next reopen point
 
-- after `P-A0-16`, no further contract-variance checker widening is promoted by default
-- next safe reopen requires one of:
-  - an explicit helper-local acceptance artifact schema for positive/valid rows
+- after `P-A0-17`, the current contract-variance widening is intentionally limited to:
+  - negative checker-floor rows `VAR-02/03/05/07/09/10/15`
+  - helper-local synthetic acceptance rows `VAR-01/04/06`
+- next safe reopen requires either:
+  - proof that a further row can use the helper-local acceptance schema without new runtime / layer / adapter semantics
   - a layer/runtime-backed bridge that carries accept-side compatibility evidence without overclaim
 - queue authority remains `progress.md` / `tasks.md`

@@ -5,9 +5,12 @@
 - active runnable root ではない
 - root 全体としては mixed alpha-local scaffold であり、family ごとに
   - scaffold-only / checker-seed family
+  - helper-local acceptance-floor family
   - runner-backed non-public floor
   を併存させる
-- `lifetime-fallback/` と `contract-variance/` には、selected rows（現在は `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15`）について non-public checker floor 用の `expected_static.checked_reason_codes` を追加済み
+- `lifetime-fallback/` と `contract-variance/` には、selected negative rows（現在は `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15`）について non-public checker floor 用の `expected_static.checked_reason_codes` を追加済み
+- `lifetime-fallback/` の `LIF-02/03/04` と `contract-variance/` の `VAR-01/04/06` には、selected positive rows 用の helper-local synthetic acceptance floor `expected_acceptance.checked_acceptance_rows` を追加済み
+- `reason_codes_scope = alpha-static-floor` と `acceptance_scope = alpha-acceptance-floor` は別 carrier であり、negative-static reject row と positive acceptance row を混同しない
 - `cut-save-load/` には selected negative rows の checker floor に加えて、`scripts/alpha_cut_save_load_samples.py` が `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize している
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
 - `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
@@ -37,6 +40,8 @@ find samples/alpha -maxdepth 3 -type f | sort
 python3 -m unittest \
   scripts.tests.test_alpha_lifetime_fallback_checker \
   scripts.tests.test_alpha_contract_variance_checker \
+  scripts.tests.test_alpha_lifetime_fallback_acceptance \
+  scripts.tests.test_alpha_contract_variance_acceptance \
   scripts.tests.test_alpha_cut_save_load_checker
 cargo test -p mirrorea-core --test runtime_substrate
 cargo test -p mir-runtime --test alpha_cut_save_load_runtime
@@ -54,6 +59,8 @@ python3 scripts/alpha_e2e_samples.py closeout --format json
 python3 -m unittest \
   scripts.tests.test_alpha_lifetime_fallback_checker \
   scripts.tests.test_alpha_contract_variance_checker \
+  scripts.tests.test_alpha_lifetime_fallback_acceptance \
+  scripts.tests.test_alpha_contract_variance_acceptance \
   scripts.tests.test_alpha_cut_save_load_checker \
   scripts.tests.test_alpha_cut_save_load_samples \
   scripts.tests.test_alpha_visualization_samples \
@@ -65,6 +72,7 @@ python3 -m unittest \
 - do not mark these files active/runnable merely because they exist
 - do not treat `.expected.json` sidecars as proof of implementation
 - do not treat synthetic-artifact checker helpers as parser/runtime implementation
+- do not treat helper-local synthetic acceptance rows as parser/runtime implementation or final public checker verdict
 - do not treat the current Rust local-runtime floor as hot-plug/package/avatar/network completion
 - do not treat the current Rust layer-insertion floor as completed lifecycle / detach / migration / public ABI completion
 - do not treat the current Rust/Docker Stage-C network floor as production transport / WAN federation / final public transport ABI completion

@@ -282,6 +282,7 @@ future checker / proof line が最低限 preserve すべき obligation は次で
 current alpha-local required sample family は少なくとも次を含む。
 
 - `LIF-01` raw dangling reference rejected
+- `LIF-02` fallback extends access path
 - `LIF-03` nested inherit chain valid
 - `LIF-04` plain ref does not inherit
 - `LIF-05` underdeclared fallback static error
@@ -293,6 +294,41 @@ current alpha-local required sample family は少なくとも次を含む。
 
 sample inventory の current repository memory は
 `plan/39-type-system-freeze-roadmap.md` と `samples/alpha/lifetime-fallback/` を参照する。
+
+## helper-local positive acceptance artifact boundary
+
+current alpha-local line では、selected positive rows に限って
+helper-local synthetic acceptance artifact を使ってよい。
+
+- これは alpha-local / helper-local / non-public synthetic evidence である
+- negative-static floor の `expected_static.checked_reason_codes` /
+  `detached_noncore.reason_codes` とは別 carrier として扱う
+- positive row の証拠は negative reason code の不在ではなく、
+  explicit `expected_acceptance.checked_acceptance_rows` と
+  `detached_noncore.acceptance_rows` の一致で判断する
+- accepted scope は `alpha-acceptance-floor` に限る
+- scope mismatch は reject する
+- これは parser/runtime implementation、public checker verdict、
+  final remote-reference API completion を証明しない
+
+current helper-local acceptance floor で admissible なのは次だけである。
+
+- `LIF-02` fallback extends access path
+- `LIF-03` nested inherit chain valid
+- `LIF-04` plain ref does not inherit
+
+current helper-local positive rows は少なくとも次の kind family を持つ。
+
+- `fallback_chain_canonicalized`
+  canonical chain、capability、monotone degradation を明示する
+- `inherited_chain_spliced_with_lineage`
+  source chain、appended fallback、canonical chain、lineage edges、
+  implicit propagation 不在を明示する
+- `plain_ref_boundary_preserved`
+  plain ref が inner chain を hidden に splice していないことを明示する
+
+`LIF-11` / `LIF-13` / `LIF-15` は runtime / remote / richer lineage meaning を濃く含むため、
+current helper-local acceptance floor には上げない。
 
 ## deferred
 
