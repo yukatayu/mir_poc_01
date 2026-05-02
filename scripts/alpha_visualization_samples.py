@@ -20,10 +20,22 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "expected_sidecar": "samples/alpha/visualization/vis-01-event_dag_export.expected.json",
     },
     {
+        "sample_id": "VIS-02",
+        "summary": "Place-catalog projection bundle over the alpha layer-insertion runtime snapshot.",
+        "expected_terminal_outcome": "accepted",
+        "expected_sidecar": "samples/alpha/visualization/vis-02-place_graph_export.expected.json",
+    },
+    {
         "sample_id": "VIS-03",
         "summary": "Route trace export over the Docker-backed alpha network boundary.",
         "expected_terminal_outcome": "accepted",
         "expected_sidecar": "samples/alpha/visualization/vis-03-route_trace_export.expected.json",
+    },
+    {
+        "sample_id": "VIS-05",
+        "summary": "Membership epoch/incarnation timeline over the local save/load stale-membership bridge.",
+        "expected_terminal_outcome": "accepted",
+        "expected_sidecar": "samples/alpha/visualization/vis-05-membership_timeline.expected.json",
     },
     {
         "sample_id": "VIS-06",
@@ -57,19 +69,19 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
     },
 ]
 
-PLANNED_ONLY_ROWS = ["VIS-02", "VIS-04", "VIS-05", "VIS-09", "VIS-12"]
+PLANNED_ONLY_ROWS = ["VIS-04", "VIS-09", "VIS-12"]
 
 STOP_LINES = [
     "do not treat samples/alpha/visualization as an active runnable root",
     "do not freeze a final public viewer API or telemetry schema from this runner",
-    "do not mark VIS-02/04/05/09/12 implemented in this package",
+    "do not mark VIS-04/09/12 implemented in this package",
     "do not treat observer-safe or redacted views as privileged admin-full visibility",
 ]
 
 LIMITATIONS = [
     "thin runner over existing alpha/helper/runtime JSON emitters only",
     "no parser/front-door execution of samples/alpha/visualization/*.mir",
-    "no place graph, witness timeline, membership timeline, admin-full view, or detach-stop runtime completion",
+    "no first-class witness timeline, admin-full view, or detach-stop runtime completion",
     "no final public viewer API, retention service, or telemetry backend",
 ]
 
@@ -210,6 +222,66 @@ def _build_vis01() -> dict[str, Any]:
     )
 
 
+def _build_vis02() -> dict[str, Any]:
+    payload = _run_json_command(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "mir-runtime",
+            "--example",
+            "mirrorea_alpha_layer_insertion_runtime",
+            "--",
+            "debug-admin",
+        ]
+    )
+    places = payload["runtime_snapshot"]["place_catalog"]["places"]
+    place_ids = sorted(places)
+    participant_place_ids = [place_id for place_id in place_ids if places[place_id] == "ParticipantPlace"]
+    attachpoint_ids = [place_id for place_id in place_ids if places[place_id] == "AttachPoint"]
+    world_place_ids = [place_id for place_id in place_ids if places[place_id] == "WorldPlace"]
+    game_place_ids = [place_id for place_id in place_ids if places[place_id] == "SugorokuGamePlace"]
+    return _base_report(
+        sample_id="VIS-02",
+        sample_name="place_graph_export",
+        kind="positive",
+        purpose="place-catalog projection",
+        expected="view",
+        component_refs=[
+            {
+                "family": "layer-insertion",
+                "sample_id": "LI-01",
+                "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- debug-admin",
+            }
+        ],
+        evidence_summary={
+            "place_count": len(place_ids),
+            "place_ids": place_ids,
+            "place_kinds": sorted(set(places.values())),
+            "attachpoint_ids": attachpoint_ids,
+            "world_place_ids": world_place_ids,
+            "game_place_ids": game_place_ids,
+            "participant_place_ids": participant_place_ids,
+            "visualization_surface": "place_catalog_snapshot_json",
+        },
+        what_it_proves=[
+            "the alpha runtime already exposes a typed place-catalog snapshot that can back a report-local place graph export",
+            "attachpoint, world, game, and participant places remain distinct instead of being collapsed into a single host/debug bucket",
+        ],
+        what_it_does_not_prove=[
+            "no final public place graph viewer API",
+            "no cross-place equivalence or placement optimizer completion",
+            "no emitted place-program synthesis or distributed topology completion",
+        ],
+        deferred=[
+            "final public place graph viewer contract",
+            "effect/proof route graph families",
+            "generated place-program synthesis and placement planning",
+        ],
+    )
+
+
 def _build_vis03() -> dict[str, Any]:
     payload = _run_json_command(
         ["python3", "scripts/alpha_network_docker_e2e.py", "run", "NET-02", "--format", "json"]
@@ -252,6 +324,95 @@ def _build_vis03() -> dict[str, Any]:
             "viewer-specific rendering contract",
             "place graph export",
             "admin-full visualization path",
+        ],
+    )
+
+
+def _build_vis05() -> dict[str, Any]:
+    payload = _run_json_command(
+        ["python3", "scripts/alpha_cut_save_load_samples.py", "run", "CUT-17", "--format", "json"]
+    )
+    saved_membership = payload["saved_runtime_snapshot"]["membership"]
+    restored_membership = payload["restored_runtime_snapshot"]["membership"]
+    restored_members = restored_membership["members"]
+    membership_update_event_ids = [
+        node["event_id"]
+        for node in payload["resumed_event_dag"]["nodes"]
+        if node["event_kind"] == "membership_update"
+    ]
+    membership_principals = sorted(restored_members)
+    timeline_entries = [
+        {
+            "entry_id": "saved_membership_frontier#1",
+            "membership_epoch": saved_membership["membership_epoch"],
+            "principals": sorted(saved_membership["members"]),
+            "source_ref": "saved_runtime_snapshot.membership",
+        },
+        {
+            "entry_id": "membership_advance#1",
+            "membership_epoch": restored_membership["membership_epoch"],
+            "principals": [
+                principal
+                for principal, member in sorted(restored_members.items())
+                if member["joined_at_epoch"] == restored_membership["membership_epoch"]
+            ],
+            "source_ref": "resumed_event_dag.nodes[membership_update]",
+        },
+        {
+            "entry_id": "restored_membership_frontier#1",
+            "membership_epoch": restored_membership["membership_epoch"],
+            "principals": membership_principals,
+            "source_ref": "restored_runtime_snapshot.membership",
+        },
+    ]
+    return _base_report(
+        sample_id="VIS-05",
+        sample_name="membership_timeline",
+        kind="positive",
+        purpose="epoch/incarnation",
+        expected="view",
+        component_refs=[
+            {
+                "family": "cut-save-load",
+                "sample_id": "CUT-17",
+                "command": "python3 scripts/alpha_cut_save_load_samples.py run CUT-17 --format json",
+            }
+        ],
+        evidence_summary={
+            "timeline_entry_count": len(timeline_entries),
+            "timeline_entries": timeline_entries,
+            "membership_epochs": [
+                saved_membership["membership_epoch"],
+                restored_membership["membership_epoch"],
+            ],
+            "membership_principals": membership_principals,
+            "active_principals": [
+                principal for principal, member in sorted(restored_members.items()) if member["active"]
+            ],
+            "joined_at_epochs": {
+                principal: member["joined_at_epoch"]
+                for principal, member in sorted(restored_members.items())
+            },
+            "member_incarnations": {
+                principal: member["incarnation"]
+                for principal, member in sorted(restored_members.items())
+            },
+            "membership_update_event_ids": membership_update_event_ids,
+            "visualization_surface": "membership_timeline_json",
+        },
+        what_it_proves=[
+            "existing alpha save/load evidence already exposes membership_epoch, joined_at_epoch, and incarnation fields as a report-local membership timeline bundle",
+            "a later membership-frontier advance stays explicit instead of being silently collapsed into resumed dispatch success",
+        ],
+        what_it_does_not_prove=[
+            "no distributed save/load completion or consistent-cut repair",
+            "no final public membership telemetry service",
+            "no witness/lease co-timeline or detach history completion",
+        ],
+        deferred=[
+            "distributed durable membership timeline across multi-place cuts",
+            "final public membership visualization contract",
+            "witness/lease co-timeline and detach history surfaces",
         ],
     )
 
@@ -560,8 +721,12 @@ def _build_vis11() -> dict[str, Any]:
 def _build_sample_report(sample_id: str) -> dict[str, Any]:
     if sample_id == "VIS-01":
         return _build_vis01()
+    if sample_id == "VIS-02":
+        return _build_vis02()
     if sample_id == "VIS-03":
         return _build_vis03()
+    if sample_id == "VIS-05":
+        return _build_vis05()
     if sample_id == "VIS-06":
         return _build_vis06()
     if sample_id == "VIS-07":
@@ -594,11 +759,31 @@ def _validate_expected_fields(sample_id: str, row: dict[str, Any], report: dict[
             raise RuntimeError(f"{sample_id}: expected event_dag_node_count > 0")
         if evidence.get("event_dag_edge_count", 0) <= 0:
             raise RuntimeError(f"{sample_id}: expected event_dag_edge_count > 0")
+    elif sample_id == "VIS-02":
+        if evidence.get("place_count", 0) <= 0:
+            raise RuntimeError(f"{sample_id}: expected place_count > 0")
+        if not evidence.get("world_place_ids"):
+            raise RuntimeError(f"{sample_id}: expected world_place_ids to be non-empty")
+        if not evidence.get("game_place_ids"):
+            raise RuntimeError(f"{sample_id}: expected game_place_ids to be non-empty")
+        if not evidence.get("participant_place_ids"):
+            raise RuntimeError(f"{sample_id}: expected participant_place_ids to be non-empty")
+        if not evidence.get("attachpoint_ids"):
+            raise RuntimeError(f"{sample_id}: expected attachpoint_ids to be non-empty")
     elif sample_id == "VIS-03":
         if evidence.get("route_hop_count", 0) <= 0:
             raise RuntimeError(f"{sample_id}: expected route_hop_count > 0")
         if not all(value is False for value in evidence.get("auth_lane_present_values", [])):
             raise RuntimeError(f"{sample_id}: expected auth_lane_present_values to stay false")
+    elif sample_id == "VIS-05":
+        if evidence.get("timeline_entry_count", 0) <= 0:
+            raise RuntimeError(f"{sample_id}: expected timeline_entry_count > 0")
+        if len(evidence.get("membership_epochs", [])) < 2:
+            raise RuntimeError(f"{sample_id}: expected at least two membership_epochs")
+        if not evidence.get("membership_principals"):
+            raise RuntimeError(f"{sample_id}: expected membership_principals to be non-empty")
+        if not evidence.get("membership_update_event_ids"):
+            raise RuntimeError(f"{sample_id}: expected membership_update_event_ids to be non-empty")
     elif sample_id == "VIS-06":
         panel_ids = set(evidence.get("panel_ids", []))
         required = {"attach_lifecycle", "membership_snapshot", "detach_lifecycle"}
@@ -670,6 +855,7 @@ def closeout() -> dict[str, Any]:
         "planned_only_rows": list(PLANNED_ONLY_ROWS),
         "validation_floor": [
             "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku",
+            "python3 scripts/alpha_cut_save_load_samples.py run CUT-17 --format json",
             "python3 scripts/alpha_network_docker_e2e.py run NET-02 --format json",
             "python3 scripts/visual_debugger_viewer_samples.py run P16-VIEW-02 --format json",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- run AV-08",

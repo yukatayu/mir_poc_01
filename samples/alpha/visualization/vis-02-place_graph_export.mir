@@ -1,17 +1,17 @@
-# Alpha-0 planned skeleton sample.
+# Alpha-0 thin-runner sample marker.
 # ID: VIS-02
 # Family: visualization
 # Kind: positive
-# Purpose: Place graph
+# Purpose: place-catalog projection
 # Expected: view
-# Status: planned-skeleton only; not consumed by current active runners.
-# This file is a source-ish placeholder for future checker/runtime integration.
+# Status: implemented-thin-runner via `scripts/alpha_visualization_samples.py`;
+# this file remains source-ish and is not parsed by the current runner.
 
 module PlannedMirroreaAlpha.Visualization.PlaceGraphExport
 
 # Scenario sketch:
 # - sample_id: VIS-02
-# - goal: Place graph
+# - goal: place-catalog projection
 # - expected outcome: view
-# - exact executable syntax / checker/runtime carrier remains deferred.
-
+# - current evidence anchor: `LI-01.runtime_snapshot.place_catalog`
+# - exact executable syntax / final viewer rendering remain deferred.

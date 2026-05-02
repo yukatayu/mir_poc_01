@@ -19,9 +19,20 @@ class AlphaVisualizationSamplesTests(unittest.TestCase):
         payload = runner.closeout()
         self.assertEqual(
             payload["implemented_rows"],
-            ["VIS-01", "VIS-03", "VIS-06", "VIS-07", "VIS-08", "VIS-10", "VIS-11"],
+            [
+                "VIS-01",
+                "VIS-02",
+                "VIS-03",
+                "VIS-05",
+                "VIS-06",
+                "VIS-07",
+                "VIS-08",
+                "VIS-10",
+                "VIS-11",
+            ],
         )
-        self.assertIn("VIS-02", payload["planned_only_rows"])
+        self.assertIn("VIS-04", payload["planned_only_rows"])
+        self.assertIn("VIS-09", payload["planned_only_rows"])
         self.assertIn("VIS-12", payload["planned_only_rows"])
         self.assertIn(
             "python3 scripts/alpha_visualization_samples.py check-all --format json",
@@ -33,7 +44,17 @@ class AlphaVisualizationSamplesTests(unittest.TestCase):
         rows = runner.list_samples()
         self.assertEqual(
             [row["sample_id"] for row in rows],
-            ["VIS-01", "VIS-03", "VIS-06", "VIS-07", "VIS-08", "VIS-10", "VIS-11"],
+            [
+                "VIS-01",
+                "VIS-02",
+                "VIS-03",
+                "VIS-05",
+                "VIS-06",
+                "VIS-07",
+                "VIS-08",
+                "VIS-10",
+                "VIS-11",
+            ],
         )
         self.assertTrue(all(row["family"] == "alpha-visualization" for row in rows))
 
@@ -58,6 +79,38 @@ class AlphaVisualizationSamplesTests(unittest.TestCase):
         }
         with self.assertRaisesRegex(RuntimeError, "pre_attach_trace_count"):
             runner._validate_expected_fields("VIS-10", row, report)
+
+    def test_validate_expected_fields_rejects_missing_place_graph(self) -> None:
+        row = runner._implemented_row("VIS-02")
+        report = {
+            "sample_id": "VIS-02",
+            "terminal_outcome": "accepted",
+            "evidence_summary": {
+                "place_count": 0,
+                "place_ids": [],
+                "participant_place_ids": [],
+            },
+        }
+        with self.assertRaisesRegex(RuntimeError, "place_count"):
+            runner._validate_expected_fields("VIS-02", row, report)
+
+    def test_implemented_row_rejects_planned_only_witness_timeline(self) -> None:
+        with self.assertRaisesRegex(ValueError, "VIS-04"):
+            runner._implemented_row("VIS-04")
+
+    def test_validate_expected_fields_rejects_missing_membership_timeline(self) -> None:
+        row = runner._implemented_row("VIS-05")
+        report = {
+            "sample_id": "VIS-05",
+            "terminal_outcome": "accepted",
+            "evidence_summary": {
+                "timeline_entry_count": 0,
+                "membership_epochs": [],
+                "membership_principals": [],
+            },
+        }
+        with self.assertRaisesRegex(RuntimeError, "timeline_entry_count"):
+            runner._validate_expected_fields("VIS-05", row, report)
 
     def test_validate_expected_fields_rejects_over_retention(self) -> None:
         row = runner._implemented_row("VIS-11")

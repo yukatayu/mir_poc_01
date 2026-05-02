@@ -862,7 +862,7 @@ def closeout() -> dict[str, Any]:
         "stage_e_complete": False,
         "stage_f_complete": False,
         "remaining_blockers": [
-            "remaining Stage-E rows `VIS-02/04/05/09/12` still need honest actualization or explicit deferral",
+            "remaining Stage-E rows `VIS-04/09/12` still need honest actualization or explicit deferral",
             "Stage F completion claim remains blocked on the above plus broader lifecycle widening",
         ],
     }

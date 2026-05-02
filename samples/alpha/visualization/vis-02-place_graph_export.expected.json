@@ -2,25 +2,78 @@
   "sample_id": "VIS-02",
   "sample_name": "place_graph_export",
   "family": "visualization",
-  "status": "planned-skeleton",
+  "status": "implemented-thin-runner",
   "phase": "Phase 4 / 5",
   "stage": "Stage E",
   "kind": "positive",
-  "purpose": "Place graph",
+  "purpose": "place-catalog projection",
   "expected": "view",
   "claims": {
-    "runnable": false,
-    "implemented": false,
-    "active_root": false
+    "runnable": true,
+    "implemented": true,
+    "active_root": false,
+    "stage_e_complete": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "thin_runner_over_existing_alpha_evidence",
+    "runner": "python3 scripts/alpha_visualization_samples.py run VIS-02 --format json",
+    "note": "Composes existing alpha/helper/runtime JSON evidence without parsing samples/alpha/visualization/*.mir or freezing a final public viewer API."
   },
+  "component_refs": [
+    {
+      "family": "layer-insertion",
+      "sample_id": "LI-01",
+      "command": "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- debug-admin"
+    }
+  ],
+  "evidence_summary": {
+    "place_count": 7,
+    "place_ids": [
+      "AttachPoint[AlphaRoom#1::MessageDispatch]",
+      "GamePlace[SugorokuGame#1]",
+      "ParticipantPlace[Alice]",
+      "ParticipantPlace[Bob]",
+      "ParticipantPlace[ExampleAdmin]",
+      "ParticipantPlace[Mallory]",
+      "WorldPlace[AlphaRoom#1]"
+    ],
+    "place_kinds": [
+      "AttachPoint",
+      "ParticipantPlace",
+      "SugorokuGamePlace",
+      "WorldPlace"
+    ],
+    "attachpoint_ids": [
+      "AttachPoint[AlphaRoom#1::MessageDispatch]"
+    ],
+    "world_place_ids": [
+      "WorldPlace[AlphaRoom#1]"
+    ],
+    "game_place_ids": [
+      "GamePlace[SugorokuGame#1]"
+    ],
+    "participant_place_ids": [
+      "ParticipantPlace[Alice]",
+      "ParticipantPlace[Bob]",
+      "ParticipantPlace[ExampleAdmin]",
+      "ParticipantPlace[Mallory]"
+    ],
+    "visualization_surface": "place_catalog_snapshot_json"
+  },
+  "terminal_outcome": "accepted",
+  "reason_family": null,
+  "what_it_proves": [
+    "the alpha runtime already exposes a typed place-catalog snapshot that can back a report-local place graph export",
+    "attachpoint, world, game, and participant places remain distinct instead of being collapsed into a single host/debug bucket"
+  ],
+  "what_it_does_not_prove": [
+    "no final public place graph viewer API",
+    "no cross-place equivalence or placement optimizer completion",
+    "no emitted place-program synthesis or distributed topology completion"
+  ],
   "deferred": [
-    "exact executable syntax",
-    "dedicated runner integration",
-    "checker/runtime implementation"
+    "final public place graph viewer contract",
+    "effect/proof route graph families",
+    "generated place-program synthesis and placement planning"
   ]
 }

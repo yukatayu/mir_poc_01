@@ -11,7 +11,7 @@
 - `cut-save-load/` には selected negative rows の checker floor に加えて、`scripts/alpha_cut_save_load_samples.py` が `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize している
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
 - `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
-- `visualization/` には thin runner `scripts/alpha_visualization_samples.py` が `VIS-01/03/06/07/08/10/11` を actualize したが、`VIS-02/04/05/09/12` は planned-only のままであり、Stage E / Stage F completion claim には使わない
+- `visualization/` には thin runner `scripts/alpha_visualization_samples.py` が `VIS-01/02/03/05/06/07/08/10/11` を actualize したが、`VIS-04/09/12` は planned-only のままであり、Stage E / Stage F completion claim には使わない
 - `e2e/` には thin integrated bridge runner `scripts/alpha_e2e_samples.py` が `E2E-01/02/03/04/05/06/07/09/10` を actualize したが、`E2E-08` は planned-only のままであり、Stage F completion claim には使わない
 - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned/sample-mirror authority であり、current attach-time runtime floor は `layer-insertion/` 側に置く
 - `hotplug-runtime/` の `HP-11/12/15` は `avatar-runtime/` family と共用する runtime-private native-policy subset として actualize 済みだが、family 全体の runnable promotion ではない

@@ -43,9 +43,10 @@ final public product completion ではない。
 
 - visualization / devtools
 - first actualized subset is now a dedicated Stage-E subset runner `scripts/alpha_visualization_samples.py` over existing alpha/helper/runtime evidence:
-  `VIS-01/03/06/07/08/10/11`
+  `VIS-01/02/03/05/06/07/08/10/11`
 - current subset is grounded in `LR-01.event_dag`, `NET-02.observer_route_trace`, `P16-VIEW-02`, `AV-08.representation_state`, `NET-07.observer_route_trace`, `LI-01/02.post_attach_trace_rows`, and `LI-01/05` retention-policy evidence
-- `VIS-02/04/05/09/12` remain planned-only, so this is still not Stage E completion
+- `VIS-04/09/12` remain planned-only, so this is still not Stage E completion
+- `VIS-02` is limited to a report-local place-catalog projection over `LI-01`, and `VIS-05` is limited to a report-local membership epoch/incarnation timeline over `CUT-17`; neither freezes a final viewer API
 
 ### Stage F
 
@@ -175,5 +176,8 @@ Phase 1+ runtime floor:
 ## next package
 
 - after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
-- after `P-A0-14`, the next reopen point is:
-  - `P-A0-15` remaining Stage-E visualization widening after the honest CUT subset closeout
+- after `P-A0-15`, the next reopen point is:
+  - `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync
+    - widen selected positive/static lifetime rows through the existing synthetic checker floor when the spec text is already settled
+    - widen selected positive/static contract rows through the existing synthetic checker floor when the overlay law is already settled
+    - keep parser/runtime/theorem-backed completion explicitly later

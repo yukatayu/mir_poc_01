@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-02 12:11 JST
+最終更新: 2026-05-02 12:41 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-02 12:05 JST に更新済みです:
-  `P-A0-14` rerun では `runtime_substrate` 16 tests、`alpha_local_runtime` + `alpha_cut_save_load_runtime` 5 tests、Rust `save-load-resume` / `save-load-stale-membership` examples 各 1 run、`alpha_cut_save_load_samples.py` 2/2 + closeout、Python unit 17 tests、integrated E2E runner 9/9 with planned-only `E2E-08`、integrated closeout inventory が pass しました。current repo state では `LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/03/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。
+- Alpha-0 closeout validation freshness は 2026-05-02 12:41 JST に更新済みです:
+  `P-A0-15` gate では `alpha_visualization_samples.py` 9/9 + closeout、integrated E2E runner 9/9 with planned-only `E2E-08` + closeout、related Python unit 27 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。parallel `check-all` attempt では shared `NET-02` Docker floor contention が再現したため、その結果は無効として sequential rerun を evidence に採用しています。current repo state では `LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..14` closeout 後の `P-A0-15` queue を current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..15` closeout 後の `P-A0-16` queue を current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -66,15 +66,15 @@
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B 40% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 45% dedicated subset devtools bridge, Stage F 58% thin integrated alpha demo bridge
+  Stage B 40% local-runtime floor, Stage C 35% network / Docker floor, Stage D 35% hot-plug/runtime-package floor, Stage E 60% widened subset devtools bridge, Stage F 60% thin integrated alpha demo bridge
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
 - Current package:
-  `P-A0-15` remaining Stage-E visualization widening after the honest CUT subset closeout
+  `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync
 - Current status:
-  `P-A0-14` は current repo state で close 済み。`scripts/alpha_cut_save_load_samples.py` と `scripts/alpha_cut_save_load_checker.py` により `CUT-17` local stale-membership rejection bridge と `CUT-11` checker-backed Z-cycle checkpoint inadmissibility row が validation 可能になった。これは room-local runtime savepoint / later membership-frontier advance rejection と checker-floor structural inadmissibility に限るものであり、`CUT-10/12/16`、distributed save/load、durable cut completion、Stage F completion 自体はまだ行っていない。
+  `P-A0-15` は current repo state で close 済み。`scripts/alpha_visualization_samples.py` により `VIS-02` report-local place-catalog projection と `VIS-05` report-local membership epoch/incarnation timeline が actualize され、`VIS-04/09/12` は explicit planned-only に維持された。これは Stage-E subset widening に限るものであり、Stage E completion、Stage F completion、final viewer API、distributed save/load completion 自体はまだ行っていない。
 - Next autonomous package:
-  `P-A0-15` remaining Stage-E visualization widening after the honest CUT subset closeout
+  `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -106,8 +106,8 @@
 | B | 40% | alpha 0.5 local runtime | first Rust local-runtime floor + local save/load accepted/rejected subset actualized | `specs/13..17`、`plan/39..43`、`samples/alpha/local-runtime/`、`samples/alpha/cut-save-load/`、`crates/mir-runtime/src/alpha_local_runtime.rs`、`scripts/alpha_cut_save_load_samples.py` | integrated local runtime completion / distributed save-load completion |
 | C | 35% | alpha 0.7 transport | first Rust network / Docker floor actualized | helper-local `NET-02..05` canaries + `samples/alpha/network-docker/` + `alpha_network_runtime` + `alpha_network_docker_e2e.py` | production WAN / durable replay / partition completion / final transport ABI |
 | D | 35% | alpha 0.8 hot-plug lifecycle | first attach-time layer floor actualized | `P19..P21` floor + `samples/alpha/layer-insertion/` + `samples/alpha/hotplug-runtime/` scaffold | detach / migration / final ABI |
-| E | 45% | alpha 0.9 devtools | dedicated Stage-E subset runner actualized; completion still partial | `samples/alpha/visualization/` + `scripts/alpha_visualization_samples.py` + viewer prototype inventory + existing alpha bridge evidence | remaining `VIS-02/04/05/09/12` / final viewer / telemetry API |
-| F | 58% | alpha 1 Spaces alpha | thin integrated bridge + honest local save/load subset + Stage-E subset runner actualized; completion still blocked | `samples/alpha/e2e/` thin bridge runner + `scripts/alpha_visualization_samples.py` + `scripts/alpha_cut_save_load_samples.py` + scope spec | remaining Stage-E rows / distributed save-load completion / full VRChat / Reversed Library completion |
+| E | 60% | alpha 0.9 devtools | widened Stage-E subset runner actualized; completion still partial | `samples/alpha/visualization/` + `scripts/alpha_visualization_samples.py` + viewer prototype inventory + existing alpha bridge evidence | remaining `VIS-04/09/12` / final viewer / telemetry API |
+| F | 60% | alpha 1 Spaces alpha | thin integrated bridge + honest local save/load subset + widened Stage-E subset runner actualized; completion still blocked | `samples/alpha/e2e/` thin bridge runner + `scripts/alpha_visualization_samples.py` + `scripts/alpha_cut_save_load_samples.py` + scope spec | remaining Stage-E rows / distributed save-load completion / full VRChat / Reversed Library completion |
 | G | 0% | Spaces product expansion | future | upper-layer roadmap only | alpha scope |
 | H | 0% | Atlas | future | upper-layer roadmap only | alpha scope |
 | I | 0% | Reversed Library | future | upper-layer roadmap only | alpha scope |
@@ -140,7 +140,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-15` remaining Stage-E visualization widening after the honest CUT subset closeout | repo | next | remaining `VIS-02/04/05/09/12` を existing alpha/helper/runtime evidence から honest に actualize できる範囲で widen し、残りは explicit planned-only のまま report + commit/push |
+| 1 | `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync | repo | next | `specs/13` / `specs/14` で決まった decidable fragment について `alpha_lifetime_fallback_checker.py` と `alpha_contract_variance_checker.py` を selected positive/static rows まで widen し、残りは explicit planned-only のまま report + commit/push |
 | 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
@@ -174,7 +174,8 @@ These are safe to do without new product decisions.
 | `P-A0-12` | local save/load positive bridge | closed | `CUT-04` / `E2E-06` local save/load continuation path + report `1112` |
 | `P-A0-13` | dedicated alpha visualization/devtools bridge | closed | `VIS-01/03/06/07/08/10/11` subset runner + integrated visibility/redaction surfaces + report `1113` |
 | `P-A0-14` | honest CUT widening closeout | closed | `CUT-17` local stale-membership rejection bridge + `CUT-11` checker-backed Z-cycle inadmissibility row + report `1114` |
-| `P-A0-15` | remaining Stage-E visualization widening after the honest CUT subset closeout | queued | remaining `VIS-02/04/05/09/12` widening via existing alpha/helper/runtime evidence or explicit planned-only retention + report + commit/push |
+| `P-A0-15` | remaining Stage-E visualization widening after the honest CUT subset closeout | closed | `VIS-02` thin place-catalog projection + `VIS-05` thin membership epoch/incarnation timeline actualization with `VIS-04/09/12` planned-only retention + report `1115` |
+| `P-A0-16` | selected LIF/VAR checker widening after the widened Stage-E subset sync | queued | selected positive/static lifetime + contract rows via existing synthetic checker floor or explicit planned-only retention + report + commit/push |
 
 ## user decision blockers
 
