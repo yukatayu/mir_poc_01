@@ -274,7 +274,8 @@ the Alpha network family was split from visualization / integrated E2E, `A0-NET`
 
 ## Commit / push status
 
-Pending at report write.
+Package implementation commit `066e6b7` (`mirrorea: add alpha network docker runtime floor`) was created with `--no-gpg-sign` and pushed to `origin/main`.
+This report closeout status is synchronized in this docs-only follow-up commit immediately afterward.
 
 ## Sub-agent session close status
 
