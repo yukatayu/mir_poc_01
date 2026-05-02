@@ -162,9 +162,11 @@ the alpha dashboard now records the blocker split, keeps `LIF-15` / `VAR-14` non
 
 ## Commit / push status
 
-Pending at report write.
+- Main package commit: `d7aafd5` (`docs: split p-a0-22 remote adapter blockers`)
+- Push status: pushed to `origin/main`
+- Docs-only finalize follow-up: pending at report write after main push confirmation
 
 ## Sub-agent session close status
 
 - `Archimedes`, `Dewey`, and `McClintock` completed review.
-- Close requests will be issued after the package commit/push is complete.
+- Close requests were issued after the main package push; all three reviewer sessions are now closed.
