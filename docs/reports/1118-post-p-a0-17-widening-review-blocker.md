@@ -85,6 +85,8 @@ date '+%Y-%m-%d %H:%M:%S %Z'
 git status --short
 git diff -- progress.md tasks.md samples_progress.md plan/01-status-at-a-glance.md
 git diff --stat
+git commit --no-gpg-sign -m "docs: record post-p-a0-17 widening blocker"
+git push
 ```
 
 Validation commands are recorded after execution in the evidence section.
@@ -148,7 +150,7 @@ Review the remaining positive-row families and choose whether the next safe line
 
 ## Commit / push status
 
-Pending at report write.
+Blocker-review snapshot/report sync was committed and pushed to `main` in `e4988bd` (`docs: record post-p-a0-17 widening blocker`). This section was finalized in a follow-up docs-only commit.
 
 ## Sub-agent session close status
 
