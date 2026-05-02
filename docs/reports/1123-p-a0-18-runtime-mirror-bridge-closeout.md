@@ -217,7 +217,8 @@ Review whether `VAR-14` should get a docs-only narrower carrier inventory first,
 
 ## Commit / push status
 
-Pending at report write.
+- Closeout commit `a9ba89f` (`mirrorea: close p-a0-18 runtime mirror bridge`) was created with `--no-gpg-sign` and pushed to `origin/main`.
+- This report section was synchronized afterward in a docs-only follow-up commit.
 
 ## Sub-agent session close status
 
