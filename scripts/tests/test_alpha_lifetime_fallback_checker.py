@@ -28,6 +28,7 @@ class AlphaLifetimeFallbackCheckerTests(unittest.TestCase):
 
     def test_seed_sidecars_expose_expected_checker_rows(self) -> None:
         cases = {
+            "lif-01-raw_dangling_reference_rejected": "raw_dangling_reference",
             "lif-05-underdeclared_fallback_static_error": "missing_lineage_evidence",
             "lif-06-incompatible_access_target_rejected": "incompatible_access_target",
             "lif-07-capability_promotion_rejected": "capability_promotion",
@@ -74,6 +75,67 @@ class AlphaLifetimeFallbackCheckerTests(unittest.TestCase):
         self.assertIn("status: matched", output)
         self.assertIn("missing_lineage_evidence", output)
         self.assertNotIn("hidden_shadowing", output)
+
+    def test_main_reports_matched_rows_for_raw_dangling_reference_seed(self) -> None:
+        sidecar_path = self.sidecar_path("lif-01-raw_dangling_reference_rejected")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            artifact_path = Path(temp_dir) / "artifact.json"
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "alpha-static-floor",
+                        "reason_codes": [
+                            {
+                                "kind": "raw_dangling_reference",
+                                "source_ref": "short_lived_ref",
+                                "stored_into": "longer_lived_context",
+                            }
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(sidecar_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("status: matched", output)
+        self.assertIn("raw_dangling_reference", output)
+
+    def test_main_rejects_raw_dangling_reference_seed_from_other_scope(self) -> None:
+        sidecar_path = self.sidecar_path("lif-01-raw_dangling_reference_rejected")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            artifact_path = Path(temp_dir) / "artifact.json"
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "stable-clusters-only",
+                        "reason_codes": [
+                            {
+                                "kind": "raw_dangling_reference",
+                                "source_ref": "short_lived_ref",
+                                "stored_into": "longer_lived_context",
+                            }
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(sidecar_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 1)
+        output = stdout.getvalue()
+        self.assertIn("status: scope_mismatch", output)
+        self.assertIn("expected_reason_codes_scope: alpha-static-floor", output)
+        self.assertIn("artifact_reason_codes_scope: stable-clusters-only", output)
 
     def test_main_reports_missing_expected_rows_when_artifact_has_lifetime_kind(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

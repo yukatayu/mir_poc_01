@@ -28,6 +28,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         kinds=CUT_SAVE_LOAD_KINDS,
         missing_status="sample_expected_reason_rows_missing",
+        expected_scope="alpha-static-floor",
     )
 
 

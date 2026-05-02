@@ -20,10 +20,10 @@ final public layer-attachment ABI や production auth/telemetry service では�
   - `LayerSignature`
   - visualization security envelope
   - hot-plug request/verdict carrier
-- `P-A0-05` first checker-floor helper actualization now exists via:
+- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, now exists via:
   - `scripts/alpha_contract_variance_checker.py`
-  - `samples/alpha/contract-variance/var-02` / `03` / `07` / `09` / `10` / `15` sidecars
-  synthetic detached artifact comparison only; no layer runtime or parser bridge claim
+  - `samples/alpha/contract-variance/var-02` / `03` / `05` / `07` / `09` / `10` / `15` sidecars
+  synthetic detached artifact comparison only; rows are confined to `reason_codes_scope = alpha-static-floor`, and there is still no layer runtime or parser bridge claim
 
 ## decisions mirrored from specs/14
 
@@ -49,6 +49,7 @@ final public layer-attachment ABI や production auth/telemetry service では�
 - actualize Alpha-0 checker helper coverage for:
   - precondition strengthening reject
   - postcondition weakening reject
+  - mutable covariance reject
   - failure-row widening reject
   - effect-row widening reject
   - cost degradation reject
@@ -56,8 +57,8 @@ final public layer-attachment ABI や production auth/telemetry service では�
 
 remaining later in this family:
 
-- mutable covariance reject
 - positive covariance / contract-preserving transform anchors
+- accept-side evidence rows until an explicit helper-local acceptance artifact schema or runtime/layer bridge exists
 
 ### later runtime cut
 
@@ -101,7 +102,10 @@ must keep visible:
 - final label lattice
 - production auth schema / telemetry backend
 
-## next package
+## next reopen point
 
-- after `P-A0-08` layer-insertion first cut:
-  `P-A0-09` network / Docker E2E, while fuller contract algebra / theorem discharge remains later
+- after `P-A0-16`, no further contract-variance checker widening is promoted by default
+- next safe reopen requires one of:
+  - an explicit helper-local acceptance artifact schema for positive/valid rows
+  - a layer/runtime-backed bridge that carries accept-side compatibility evidence without overclaim
+- queue authority remains `progress.md` / `tasks.md`

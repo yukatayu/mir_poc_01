@@ -19,6 +19,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         kinds=CAPABILITY_KINDS,
         missing_status="fixture_capability_rows_missing",
+        expected_scope="stable-clusters-only",
     )
 
 

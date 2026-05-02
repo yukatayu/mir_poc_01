@@ -7,7 +7,7 @@
   - scaffold-only / checker-seed family
   - runner-backed non-public floor
   を併存させる
-- `lifetime-fallback/` と `contract-variance/` には、selected rows について non-public checker floor 用の `expected_static.checked_reason_codes` を追加済み
+- `lifetime-fallback/` と `contract-variance/` には、selected rows（現在は `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15`）について non-public checker floor 用の `expected_static.checked_reason_codes` を追加済み
 - `cut-save-load/` には selected negative rows の checker floor に加えて、`scripts/alpha_cut_save_load_samples.py` が `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize している
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
 - `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない

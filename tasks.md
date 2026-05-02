@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-02 12:41 JST
+最終更新: 2026-05-02 13:23 JST
 
 ## この文書について
 
@@ -14,12 +14,12 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
   `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-02 12:41 JST に更新済みです:
-  `P-A0-15` gate では `alpha_visualization_samples.py` 9/9 + closeout、integrated E2E runner 9/9 with planned-only `E2E-08` + closeout、related Python unit 27 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。parallel `check-all` attempt では shared `NET-02` Docker floor contention が再現したため、その結果は無効として sequential rerun を evidence に採用しています。current repo state では `LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。
+- Alpha-0 closeout validation freshness は 2026-05-02 13:23 JST に更新済みです:
+  `P-A0-16` gate では `python3 -m unittest scripts.tests.test_current_l2_family_checker_support scripts.tests.test_current_l2_same_lineage_checker scripts.tests.test_current_l2_missing_option_checker scripts.tests.test_current_l2_capability_checker scripts.tests.test_alpha_lifetime_fallback_checker scripts.tests.test_alpha_contract_variance_checker scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_validate_docs` 40 tests、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` と `VAR-02/03/05/07/09/10/15` の negative-static checker floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..15` closeout 後の `P-A0-16` queue を current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..16` closeout 後、accept-side carrier が未固定のため safe な `P-A0-17` をまだ promoted していない current line として読みます。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -70,11 +70,11 @@
 - Concrete phase:
   Phase 8 — integrated alpha demo closeout
 - Current package:
-  `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync
+  `P-A0-16` selected LIF/VAR checker widening is closeout-complete in current repo state
 - Current status:
-  `P-A0-15` は current repo state で close 済み。`scripts/alpha_visualization_samples.py` により `VIS-02` report-local place-catalog projection と `VIS-05` report-local membership epoch/incarnation timeline が actualize され、`VIS-04/09/12` は explicit planned-only に維持された。これは Stage-E subset widening に限るものであり、Stage E completion、Stage F completion、final viewer API、distributed save/load completion 自体はまだ行っていない。
+  `P-A0-16` は current repo state で close 済み。`scripts/alpha_lifetime_fallback_checker.py` により `LIF-01` raw dangling reference reject、`scripts/alpha_contract_variance_checker.py` により `VAR-05` synthetic mutable/read-write invariance negative row が actualize され、shared helper は `reason_codes_scope` mismatch を matched 扱いしないように harden された。これは selected negative-static checker floor widening に限るものであり、positive/accept carrier、runtime/public variance enforcement、parser/runtime bridge 自体はまだ行っていない。
 - Next autonomous package:
-  `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync
+  no safe `P-A0-17` is promoted yet; the next reopen point is an explicit helper-local acceptance artifact schema or a parser/runtime bridge for positive LIF/VAR rows
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -140,7 +140,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync | repo | next | `specs/13` / `specs/14` で決まった decidable fragment について `alpha_lifetime_fallback_checker.py` と `alpha_contract_variance_checker.py` を selected positive/static rows まで widen し、残りは explicit planned-only のまま report + commit/push |
+| 1 | `P-A0-17` accept-side evidence carrier for positive LIF/VAR rows | repo | blocked on helper-local contract freeze | explicit helper-local acceptance artifact schema or parser/runtime bridge fixed without overclaim |
 | 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
 
@@ -175,7 +175,8 @@ These are safe to do without new product decisions.
 | `P-A0-13` | dedicated alpha visualization/devtools bridge | closed | `VIS-01/03/06/07/08/10/11` subset runner + integrated visibility/redaction surfaces + report `1113` |
 | `P-A0-14` | honest CUT widening closeout | closed | `CUT-17` local stale-membership rejection bridge + `CUT-11` checker-backed Z-cycle inadmissibility row + report `1114` |
 | `P-A0-15` | remaining Stage-E visualization widening after the honest CUT subset closeout | closed | `VIS-02` thin place-catalog projection + `VIS-05` thin membership epoch/incarnation timeline actualization with `VIS-04/09/12` planned-only retention + report `1115` |
-| `P-A0-16` | selected LIF/VAR checker widening after the widened Stage-E subset sync | queued | selected positive/static lifetime + contract rows via existing synthetic checker floor or explicit planned-only retention + report + commit/push |
+| `P-A0-16` | selected LIF/VAR checker widening after the widened Stage-E subset sync | closed | `LIF-01` raw dangling reference reject + `VAR-05` synthetic mutable/read-write invariance negative row + floor-scope confinement hardening + report `1116` |
+| `P-A0-17` | accept-side evidence carrier for positive LIF/VAR rows | not promoted | explicit helper-local acceptance artifact schema or parser/runtime bridge fixed without overclaim |
 
 ## user decision blockers
 

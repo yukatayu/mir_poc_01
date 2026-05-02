@@ -173,11 +173,10 @@ Phase 1+ runtime floor:
 - do not call the current Stage-F bridge runner dedicated alpha visualization/devtools completion
 - do not call Reversed Library implemented during Spaces alpha work
 
-## next package
+## next reopen point
 
 - after `P-A0-10` runtime package / avatar first cut, `P-A0-11` actualizes the thin integrated demo bridge
-- after `P-A0-15`, the next reopen point is:
-  - `P-A0-16` selected LIF/VAR checker widening after the widened Stage-E subset sync
-    - widen selected positive/static lifetime rows through the existing synthetic checker floor when the spec text is already settled
-    - widen selected positive/static contract rows through the existing synthetic checker floor when the overlay law is already settled
-    - keep parser/runtime/theorem-backed completion explicitly later
+- after `P-A0-16`, the current checker-floor widening is intentionally limited to additional negative-static rows:
+  - `LIF-01` raw dangling reference reject and `VAR-05` mutable covariance reject are now actualized through the existing synthetic checker floor
+  - positive/accept LIF/VAR rows remain planned-only until an explicit helper-local acceptance artifact schema or parser/runtime bridge exists
+  - keep parser/runtime/theorem-backed completion explicitly later

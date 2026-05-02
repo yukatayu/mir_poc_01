@@ -6,6 +6,7 @@ from current_l2_family_checker_support import run_family_checker
 
 
 LIFETIME_FALLBACK_KINDS = {
+    "raw_dangling_reference",
     "missing_lineage_evidence",
     "incompatible_access_target",
     "capability_promotion",
@@ -24,6 +25,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         kinds=LIFETIME_FALLBACK_KINDS,
         missing_status="sample_expected_reason_rows_missing",
+        expected_scope="alpha-static-floor",
     )
 
 

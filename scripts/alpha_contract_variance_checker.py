@@ -8,6 +8,7 @@ from current_l2_family_checker_support import run_family_checker
 CONTRACT_VARIANCE_KINDS = {
     "precondition_strengthening",
     "postcondition_weakening",
+    "mutable_covariance",
     "failure_row_widening",
     "effect_row_widening",
     "cost_degradation",
@@ -26,6 +27,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         kinds=CONTRACT_VARIANCE_KINDS,
         missing_status="sample_expected_reason_rows_missing",
+        expected_scope="alpha-static-floor",
     )
 
 

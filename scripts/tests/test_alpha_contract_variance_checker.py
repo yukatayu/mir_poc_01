@@ -39,6 +39,7 @@ class AlphaContractVarianceCheckerTests(unittest.TestCase):
         cases = {
             "var-02-precondition_strengthening_rejected": "precondition_strengthening",
             "var-03-postcondition_weakening_rejected": "postcondition_weakening",
+            "var-05-mutable_covariance_rejected": "mutable_covariance",
             "var-07-failure_row_widening_rejected": "failure_row_widening",
             "var-09-effect_row_widening_rejected": "effect_row_widening",
             "var-10-cost_degradation_rejected": "cost_degradation",
@@ -123,6 +124,67 @@ class AlphaContractVarianceCheckerTests(unittest.TestCase):
         output = stdout.getvalue()
         self.assertIn("status: sample_expected_reason_rows_missing", output)
         self.assertIn("hidden_shadowing", output)
+
+    def test_main_reports_matched_rows_for_mutable_covariance_seed(self) -> None:
+        sidecar_path = self.sidecar_path("var-05-mutable_covariance_rejected")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            artifact_path = Path(temp_dir) / "artifact.json"
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "alpha-static-floor",
+                        "reason_codes": [
+                            {
+                                "kind": "mutable_covariance",
+                                "base_capability": "read_write_slot",
+                                "widened_capability": "covariant_write_slot",
+                            }
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(sidecar_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 0)
+        output = stdout.getvalue()
+        self.assertIn("status: matched", output)
+        self.assertIn("mutable_covariance", output)
+
+    def test_main_rejects_mutable_covariance_seed_from_other_scope(self) -> None:
+        sidecar_path = self.sidecar_path("var-05-mutable_covariance_rejected")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            artifact_path = Path(temp_dir) / "artifact.json"
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "stable-clusters-only",
+                        "reason_codes": [
+                            {
+                                "kind": "mutable_covariance",
+                                "base_capability": "read_write_slot",
+                                "widened_capability": "covariant_write_slot",
+                            }
+                        ],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = checker.main([str(sidecar_path), str(artifact_path)])
+
+        self.assertEqual(exit_code, 1)
+        output = stdout.getvalue()
+        self.assertIn("status: scope_mismatch", output)
+        self.assertIn("expected_reason_codes_scope: alpha-static-floor", output)
+        self.assertIn("artifact_reason_codes_scope: stable-clusters-only", output)
 
     def test_var07_seed_matches_sample_purpose(self) -> None:
         stem = "var-07-failure_row_widening_rejected"

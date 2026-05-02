@@ -21,6 +21,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         kinds=SAME_LINEAGE_KINDS,
         missing_status="fixture_same_lineage_rows_missing",
+        expected_scope="stable-clusters-only",
     )
 
 

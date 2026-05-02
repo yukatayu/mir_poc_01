@@ -22,11 +22,11 @@ final parser grammar や final public remote-reference API ではない。
   - `crates/mir-runtime/src/current_l2.rs`
   - `crates/mir-ast/tests/fixtures/current-l2/`
 - Alpha-0 sample family / docs taxonomy / scope wording for Mirrorea Spaces alpha is now present via `samples/alpha/` and snapshot-doc sync
-- `P-A0-05` first checker-floor helper actualization now exists via:
+- `P-A0-05` first checker-floor helper actualization, widened by `P-A0-16`, now exists via:
   - `scripts/alpha_lifetime_fallback_checker.py`
-  - `samples/alpha/lifetime-fallback/lif-05..08*.expected.json`
+  - `samples/alpha/lifetime-fallback/lif-01` and `lif-05..08*.expected.json`
   - shared helper reuse through `scripts/current_l2_family_checker_support.py`
-  synthetic detached artifact comparison only; no parser/runtime bridge claim
+  synthetic detached artifact comparison only; rows are confined to `reason_codes_scope = alpha-static-floor`, and there is still no parser/runtime bridge claim
 
 ## decisions mirrored from specs/13
 
@@ -51,7 +51,8 @@ reuse current `current_l2` checker/runtime skeleton rather than freezing a new p
 ### next cut after first bridge
 
 - add Alpha-0 sample-family aware fixture / source mapping if/when a dedicated artifact emitter exists
-- widen static reason-code clusters beyond `LIF-05..08` when sample floor requires it
+- widen static reason-code clusters beyond the current selected static rows (`LIF-01`, `LIF-05..08`) only when a new checked carrier is explicitly fixed
+- keep positive/accept rows planned-only until an explicit helper-local acceptance artifact schema or parser/runtime bridge exists
 - add explicit no-re-promotion / no-resurrection check rows if executable semantics floor reaches them
 
 ### kept-later
@@ -96,7 +97,10 @@ actual mechanization widening remains later than first checker skeleton.
 - dependent lifetime discharge
 - public checker / verifier handoff contract
 
-## next package
+## next reopen point
 
-- immediate next package after lifetime checker first cut:
-  `P-A0-06` cut/save/load checker skeleton
+- after `P-A0-16`, no further lifetime-family checker widening is promoted by default
+- next safe reopen requires one of:
+  - an explicit helper-local acceptance artifact schema for positive rows
+  - a parser/runtime-backed bridge that can carry accept-side evidence without overclaim
+- queue authority remains `progress.md` / `tasks.md`

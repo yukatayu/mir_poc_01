@@ -170,6 +170,7 @@ underdeclared には少なくとも次を含む。
 - remote successor epoch rollback
 - declared target mismatch
 - declared role/path mismatch
+- plain/raw reference をより長寿命な context へ格納して dangling 化させる宣言
 - mutable variance violation
 - write through declared read-only fallback
 - declared contract incompatibility

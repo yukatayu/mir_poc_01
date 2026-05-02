@@ -6,21 +6,31 @@
   "phase": "Phase 1 / 4",
   "stage": "Stage A -> D bridge",
   "kind": "negative static",
-  "purpose": "Java-like mutable variance problem",
+  "purpose": "synthetic mutable/read-write invariance negative row",
   "expected": "reject",
+  "expected_static": {
+    "verdict": "reject",
+    "checked_reason_codes": [
+      {
+        "kind": "mutable_covariance",
+        "base_capability": "read_write_slot",
+        "widened_capability": "covariant_write_slot"
+      }
+    ]
+  },
   "claims": {
     "runnable": false,
     "implemented": false,
     "active_root": false
   },
   "current_validation": {
-    "mode": "skeleton-only",
-    "runner": null,
-    "note": "Validated only by filesystem/docs scaffold checks in this package."
+    "mode": "synthetic-checker-floor",
+    "runner": "python3 -m unittest scripts.tests.test_alpha_contract_variance_checker",
+    "note": "Validated in this package by non-public synthetic checker-floor tests plus filesystem/docs scaffold checks."
   },
   "deferred": [
     "exact executable syntax",
     "dedicated runner integration",
-    "checker/runtime implementation"
+    "dedicated semantic checker/runtime integration"
   ]
 }

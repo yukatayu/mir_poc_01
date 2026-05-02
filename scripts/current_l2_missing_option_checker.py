@@ -21,6 +21,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
         kinds=MISSING_OPTION_KINDS,
         missing_status="fixture_missing_option_rows_missing",
+        expected_scope="stable-clusters-only",
     )
 
 

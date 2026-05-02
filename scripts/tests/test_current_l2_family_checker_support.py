@@ -54,6 +54,7 @@ class CurrentL2FamilyCheckerSupportTests(unittest.TestCase):
                     description="alpha cluster helper",
                     kinds={"alpha_kind"},
                     missing_status="fixture_alpha_rows_missing",
+                    expected_scope="stable-clusters-only",
                 )
 
         self.assertEqual(exit_code, 0)
@@ -89,6 +90,7 @@ class CurrentL2FamilyCheckerSupportTests(unittest.TestCase):
                     description="alpha cluster helper",
                     kinds={"alpha_kind"},
                     missing_status="fixture_alpha_rows_missing",
+                    expected_scope="stable-clusters-only",
                 )
 
         self.assertEqual(exit_code, 1)
@@ -125,11 +127,52 @@ class CurrentL2FamilyCheckerSupportTests(unittest.TestCase):
                     description="alpha cluster helper",
                     kinds={"alpha_kind"},
                     missing_status="fixture_alpha_rows_missing",
+                    expected_scope="stable-clusters-only",
                 )
 
         self.assertEqual(exit_code, 0)
         output = stdout.getvalue()
         self.assertIn("status: out_of_scope", output)
+
+    def test_run_family_checker_reports_scope_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            fixture_path = temp_root / "fixture.json"
+            artifact_path = temp_root / "artifact.json"
+            self.write_json(
+                fixture_path,
+                {
+                    "expected_static": {
+                        "checked_reason_codes": [{"kind": "alpha_kind", "value": 1}]
+                    }
+                },
+            )
+            self.write_json(
+                artifact_path,
+                {
+                    "detached_noncore": {
+                        "reason_codes_scope": "wrong-floor",
+                        "reason_codes": [{"kind": "alpha_kind", "value": 1}],
+                    }
+                },
+            )
+
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                exit_code = support.run_family_checker(
+                    argv=[str(fixture_path), str(artifact_path)],
+                    cluster_name="alpha_cluster",
+                    description="alpha cluster helper",
+                    kinds={"alpha_kind"},
+                    missing_status="fixture_alpha_rows_missing",
+                    expected_scope="stable-clusters-only",
+                )
+
+        self.assertEqual(exit_code, 1)
+        output = stdout.getvalue()
+        self.assertIn("status: scope_mismatch", output)
+        self.assertIn("expected_reason_codes_scope: stable-clusters-only", output)
+        self.assertIn("artifact_reason_codes_scope: wrong-floor", output)
 
 
 if __name__ == "__main__":

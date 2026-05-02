@@ -31,7 +31,7 @@
 
 - `.mir` files here are source-ish planned skeletons, not active runnable samples.
 - `.expected.json` sidecars record the intended verdict or runtime outcome for future runners/checkers.
-- `LIF-05..08` currently carry checker-floor seed rows for the first static diagnostic cut.
+- `LIF-01` and `LIF-05..08` currently carry checker-floor seed rows for the first static diagnostic cut.
 - Promotion to active/runnable status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package

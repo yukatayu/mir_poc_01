@@ -58,6 +58,7 @@ def run_family_checker(
     description: str,
     kinds: set[str],
     missing_status: str,
+    expected_scope: str | None = None,
 ) -> int:
     parser = build_family_checker_parser(description)
     args = parser.parse_args(argv)
@@ -69,22 +70,38 @@ def run_family_checker(
     artifact = read_json(artifact_path)
 
     fixture_rows = filter_reason_rows(read_fixture_checked_reason_codes(fixture), kinds)
-    _, actual_reason_rows = read_actual_reason_code_candidates(artifact)
+    actual_scope, actual_reason_rows = read_actual_reason_code_candidates(artifact)
     actual_rows = filter_reason_rows(actual_reason_rows, kinds)
 
-    status, exit_code = status_for_rows(
-        fixture_rows,
-        actual_rows,
-        missing_status=missing_status,
+    scope_mismatch = (
+        expected_scope is not None
+        and actual_scope is not None
+        and actual_scope != expected_scope
+        and bool(actual_rows)
     )
+
+    if scope_mismatch:
+        status, exit_code = "scope_mismatch", 1
+        checked_actual_rows: list[dict[str, Any]] = []
+    else:
+        checked_actual_rows = actual_rows
+        status, exit_code = status_for_rows(
+            fixture_rows,
+            checked_actual_rows,
+            missing_status=missing_status,
+        )
 
     print(f"fixture: {fixture_path}")
     print(f"artifact: {artifact_path}")
     print(f"cluster: {cluster_name}")
+    print(f"expected_reason_codes_scope: {expected_scope}")
+    print(f"artifact_reason_codes_scope: {actual_scope}")
     print(f"status: {status}")
+    if scope_mismatch:
+        print("scope mismatch: artifact reason rows are outside this checker floor")
     print("fixture rows:")
     print(snippet(fixture_rows))
     print("actual rows:")
-    print(snippet(actual_rows))
+    print(snippet(checked_actual_rows))
 
     return exit_code
