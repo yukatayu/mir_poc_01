@@ -219,7 +219,8 @@ Implement `P-A1-03` with new `samples/practical-alpha1/packages/run-*` fixtures,
 
 ## Commit / push status
 
-Committed and pushed as `5d902ed` (`mirrorea: add p-a1-03 runtime floor review`).
+Initial report commit: `5d902ed` (`mirrorea: add p-a1-03 runtime floor review`).
+This report's commit-status section was then updated in `05f31a9` (`mirrorea: record p-a1-03 review commit status`) and pushed to `origin/main`.
 
 ## Sub-agent session close status
 
