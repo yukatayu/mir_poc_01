@@ -121,6 +121,8 @@ repository-memory roadmap を置く。
 - practical package inputから local TCP / Docker E2E
 - stale membership / missing capability / missing witness negatives
 - route trace export
+- current blocker after `P-A1-04c`:
+  current sample matrix / snapshot wording only stabilize accepted local/Docker path plus stale-membership / route-trace / auth-lane rows, so the exact practical transport row set is not yet internally consistent
 
 ### PA1-6 — devtools / viewer
 
@@ -172,6 +174,7 @@ current reading after `P-A1-04c`:
 - `P-A1-04c` actualized `HP-A1-07` as an explicit deferred detach minimal contract with `operation_kind = detach` and `detach_boundary_ref`
 - current actualized hot-plug rows are `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
 - `P-A1-05` is the promoted next package after `PA1-4`
+- `P-A1-05` is promoted but currently blocked pending row-set reconciliation between the PA1-5 bullets above and the practical sample matrix / snapshot wording
 
 ## readiness reading
 
@@ -258,4 +261,9 @@ but should not require practical runner scripts before they are added.
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
+- current blocker to resolve before implementation:
+  - `plan/44` / stage-roadmap still define `P-A1-05` with stale-membership / missing-capability / missing-witness transport negatives
+  - current sample matrix and snapshot wording only stabilize accepted local/Docker path plus stale-membership / route-trace / auth-lane rows
+  - silent narrowing is not acceptable
+  - current recommendation is to widen the practical transport matrix with distinct transport-specific missing-capability / missing-witness negatives rather than silently borrowing `RUN-*` or `HP-*` evidence or narrowing `PA1-5` without decision
 - queue authority remains `progress.md` / `tasks.md`
