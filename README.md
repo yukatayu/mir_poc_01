@@ -45,7 +45,14 @@ repo が主として検証しているのは、Mir current-L2 の **repo-local a
 
 ## Mirrorea の次軸
 
-Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-02 時点では、その中に **Mirrorea Spaces alpha-0 theory-freeze lane** を追加しており、規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、Stage A floor から Stage B local runtime へ移るための alpha-local scaffolding です。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
+Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-03 時点では、その中に 2 つの line を分けて持ちます。
+
+- **Mirrorea Spaces alpha-0 evidence line**
+  規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence closeout を蓄積する alpha-local scaffolding です。
+- **Mirrorea Spaces practical alpha-1 line**
+  規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。こちらが今後の `100%` の基準であり、source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product prototype を揃えた実用 toolchain を目標にします。
+
+現行の Stage A..F `100%` は evidence closeout であり、practical alpha-1 `100%` ではありません。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 
 current line で reader が押さえるべき点は次です。
 
@@ -67,6 +74,8 @@ current line で reader が押さえるべき点は次です。
   `Documentation.md`
 - live status / next reopen point:
   `progress.md`、`tasks.md`
+- practical alpha-1 scope / roadmap:
+  `specs/18-practical-alpha1-scope.md`、`plan/44-practical-alpha1-roadmap.md`
 - hands-on closeout commands:
   `docs/hands_on/current_phase_closeout_01.md`
 - reader-facing roadmap summary:
@@ -189,6 +198,7 @@ python3 scripts/current_l2_lean_sample_sync.py
 7. `specs/03-layer-model.md`
 8. `specs/09-invariants-and-constraints.md`
 9. 必要な subsystem spec と `plan/00-index.md`
+10. practical alpha-1 を扱う task なら `specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md`
 
 task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、その handoff を user 指示順で先に読みます。
 ただし handoff は規範正本ではなく、必要な内容は `specs/` / `plan/` / docs / report へ mirror して扱います。

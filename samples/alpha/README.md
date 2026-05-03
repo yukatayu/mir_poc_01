@@ -1,8 +1,9 @@
 # alpha samples
 
-この root は、Mirrorea Spaces Alpha-0 line の sample matrix scaffold を置く。
+この root は、Mirrorea Spaces alpha-0 evidence line の sample matrix scaffold を置く。
 
 - active runnable root ではない
+- practical alpha-1 front-door root でもない
 - root 全体としては mixed alpha-local scaffold であり、family ごとに
   - scaffold-only / checker-seed family
   - helper-local scoped evidence family
@@ -21,6 +22,7 @@
 - `local-runtime/` には `scripts/alpha_local_runtime_samples.py` が `LR-01/02` dedicated runner と current-scope Stage B closeout surface を追加し、`CUT-04/17` は supporting local-only save/load subset としてだけ再利用される
 - `scripts/alpha_hotplug_lifecycle_samples.py` は `layer-insertion/` の `LI-01/02/03/04/05` と `avatar-runtime/` / `hotplug-runtime/` の `AV-01/02/06/08/09` / `HP-11/12/15` を current-scope Stage D closeout surface として束ねる
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
+- `P-A1-00` 以降の promoted line は practical alpha-1 package sequence へ移るが、この root 自体は evidence root として維持し、front-door practical package root には使わない
 - `local-runtime/` には current-scope Stage B closeout surface、`layer-insertion/` と `avatar-runtime/` / `hotplug-runtime/` には current-scope Stage D lifecycle closeout surface over the existing Rust layer/package/avatar floors、`network-docker/` には current-scope Stage C transport closeout surface over the existing Rust network floor + Docker Compose runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
 - `visualization/` には `scripts/alpha_visualization_samples.py` が `VIS-01/02/03/05/06/07/08/10/11` を actualize し、`stage-e-closeout` が current-scope Stage E completion surface を与える。`VIS-04/09/12` は planned-only のままであり、final viewer/telemetry API や Stage F completion claim には使わない
 - `e2e/` には thin integrated bridge runner `scripts/alpha_e2e_samples.py` が `E2E-01/02/03/04/05/06/07/09/10` を actualize し、`stage-f-closeout` が current-scope Stage F completion surface を与える。`E2E-08` は planned-only のままであり、public alpha / `U1` completion claim には使わない
@@ -31,6 +33,7 @@
 - `P-A0-22` は `LIF-15` と `VAR-14` を actualize せず、planned-only `alpha-remote-observe-floor` と `alpha-adapter-transform-floor` の blocker split として固定した
 - `hotplug-runtime/` の `HP-11/12/15` は `avatar-runtime/` family と共用する runtime-private native-policy subset として actualize 済みだが、family 全体の runnable promotion ではない
 - `samples/not_implemented/` は pre-existing residual planned families を保持する legacy planned root として残す
+- practical alpha-1 sample root は separate root に置く。`samples/alpha/` をそのまま source front-door root へ昇格させない
 
 ## current families
 
@@ -110,4 +113,5 @@ python3 -m unittest \
 - do not treat the current Rust/Docker Stage-C network floor as production transport / WAN federation / final public transport ABI completion
 - do not treat the current runtime-private avatar/package floor as final avatar API / native execution / final runtime package ABI completion
 - do not treat the current-scope Stage F closeout as public alpha / `U1` completion, and do not treat `VIS-04/09/12` or `E2E-08` as part of the current-scope Stage E/F closeout sets
+- do not treat the current-scope Stage A..F evidence closeout as practical alpha-1 readiness
 - do not silently move existing `samples/not_implemented/` residual families into active roots

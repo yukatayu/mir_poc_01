@@ -1,12 +1,12 @@
 # progress
 
-最終更新: 2026-05-03 12:15 JST
+最終更新: 2026-05-03 15:27 JST
 
 ## この文書について
 
 - この文書は repo 全体の **rough progress snapshot** です。
 - 規範判断の正本は `specs/`、長期参照は `plan/`、実行証跡は `docs/reports/`、runnable sample dashboard は `samples_progress.md` です。
-- 進捗率は **repo-local alpha-ready current layer** と **Mirrorea future-axis docs-first / sample-first integration** に scoped した rough estimate です。final public completion ではありません。
+- この文書でいう `100%` は、明示的に **current-scope evidence closeout** と書かない限り、**practical alpha-1 readiness** 側の達成度を指します。従来の Stage A..F `100%` は historical evidence category として別枠で保持します。
 - 古い package 履歴の詳細は `docs/reports/` と `plan/90-source-traceability.md` を参照します。この snapshot では current checkpoint / next gate / validation floor を優先します。
 
 ## project axis
@@ -20,24 +20,37 @@ Place をまたいで実行・通信・検証・可視化できる
 
 この軸は Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform の separability を消すものではありません。
 
-## Current Alpha-0 / Mirrorea Spaces stage
+## Current Practical Alpha-1 stage
+
+- Large stage:
+  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` alpha-source front-door is the next promoted package
+- Concrete phase:
+  Phase 1/9 — practical readiness semantics are rebased; source front-door work is next
+- Package status:
+  `P-A1-00` practical-alpha-rebaseline is the last closed package in current repo state
+- Current status:
+  `P-A1-00` は、今後の `100%` を practical alpha-1 readiness に読み替え、Stage A..F `100%` を **current-scope evidence closeout** category として分離した。`specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md` を追加し、`README.md`、`Documentation.md`、snapshot docs、sample/dashboard taxonomy を synchronise した。これにより alpha-0 closeout evidence は useful prerequisite として保持されるが、practical front-door / parser / IR checker / reusable runtime / product-like Docker entry / save-load command / devtools export / product prototype は still open package line として読み直される。
+- Validation freshness:
+  `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、`python3 scripts/check_source_hierarchy.py`、`python3 scripts/validate_docs.py`、`cargo fmt --check`、`git diff --check` を rerun し、new `specs/18` / `plan/44` と practical/evidence split wording が docs scaffold と source hierarchy に乗っていることを再確認した。broad runtime/Cargo behavior tests は未実装の practical front-door / parser / runtime package に触れていない docs/spec rebaseline package のため未実行であり、success claim には含めない。
+- Current blockers:
+  practical alpha-1 側の first blocker は user decision ではなく implementation gap である。alpha source/package front-door、typed IR/checker pipeline、runtime plan execution、package/hot-plug practical API、product-like Docker/local TCP command、local save/load command、devtools export、product prototype root は未実装である。
+- Next autonomous package:
+  `P-A1-01` alpha-source front-door design
+- User-decision blockers:
+  packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は `U1` 側に kept-later であり、`P-A1-00` では決めない
+
+## Current-scope alpha-0 evidence closeout reference
 
 - Large stage:
   Stage A 100% imported alpha-ready baseline, Stage B 100% alpha-0.5 local-runtime closeout, Stage C 100% alpha-0.7 transport closeout, Stage D 100% alpha-0.8 hot-plug lifecycle closeout, Stage E 100% alpha-0.9 devtools closeout, Stage F 100% current-scope Spaces alpha closeout
 - Concrete phase:
-  Phase 7/7 — current-scope alpha line complete; later-family and public-boundary blockers remain
+  Phase 7/7 — current-scope evidence line complete; later-family and public-boundary blockers remain
 - Package status:
-  `P-A0-28` Stage A imported-baseline reconciliation is the last closed package in current repo state; no safe `P-A0-29` is auto-promoted
+  `P-A0-28` Stage A imported-baseline reconciliation is the last closed evidence package; this is no longer the promoted product-readiness line
 - Current status:
   `P-A0-28` は current-L2 / clean-near-end / Lean / Sugoroku / avatar / typed external / network canary / projection / viewer / hot-plug narrow floor の imported validation line を rerun し、`specs/17`、`plan/43`、snapshot docs の Stage A wording を synchronized した。これにより alpha line の large-stage reading は current scope で `Stage A..F` sequential closeout として読める。これは imported baseline reconciliation であり、新しい runtime semantics、`samples/alpha/` runnable-root promotion、final public product claim は追加しない。`P-A0-23` で閉じた Stage B local runtime + local-only save/load subset、`P-A0-24` で閉じた Stage C transport narrow cut、`P-A0-25` で閉じた Stage D lifecycle closeout、`P-A0-26` で閉じた Stage E devtools closeout、`P-A0-27` で閉じた Stage F integrated alpha closeout、planned-only `alpha-remote-observe-floor` / `alpha-adapter-transform-floor` blocker split は引き続き維持される。
-- Validation freshness:
-  `P-A0-28` gate では `current_l2_guided_samples.py closeout --format json`、`current_l2_lean_sample_sync.py`、`clean_near_end_samples.py closeout`、`sugoroku_world_samples.py closeout --format json`、`avatar_follow_samples.py closeout --format json`、`typed_external_boundary_samples.py closeout --format json`、`network_transport_samples.py check-all --format json`、`projection_codegen_samples.py check-all --format json`、`visual_debugger_viewer_samples.py closeout --format json`、`cargo test -p mir-runtime --test hotplug_runtime_skeleton` を rerun し、imported Stage A baseline evidence を refresh した。加えて `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` を rerun し、large-stage-first snapshot wording と latest report guardrail の整合性を再確認した。current floor は imported baseline reconciliation に限られ、parser/runtime front door、public alpha / `U1`、distributed save/load completion、active runnable-root promotion は未claimのままである
-- Current blockers:
-  remaining CUT-local blocked rows `CUT-10/12/16`、current scoped floors ではまだ上げない positive rows（`LIF-15`、`VAR-14`）、route rebinding / partition / medium-change widening、detach runtime / durable migration / distributed activation ordering、native execution realization、final public boundary は still later line にある
-- Next autonomous package:
-  no safe `P-A0-29` is auto-promoted; the next reopen must choose one later-family blocker lane (`CUT-10/12/16`, `LIF-15`, `VAR-14`, transport/lifecycle widenings) or the separate public-boundary `U1` lane
-- User-decision blockers:
-  public `U1` gate、first network scope、avatar compatibility first target、native binary policy、save/load initial scope、UI target、final catalog breadth は still later
+- Remaining non-claims:
+  parser/runtime front door、public alpha / `U1`、distributed save/load completion、active runnable-root promotion、later-family blockers は依然として alpha-0 evidence closeout の外側にある
 
 ## current snapshot
 
@@ -51,12 +64,14 @@ Place をまたいで実行・通信・検証・可視化できる
   typed external synthetic preview、network helper-local canary、projection preview、projection/codegen committed generated bridge evidence、viewer typed public prototype inventory、storage / LLVM guardrail が current scope close 済みです。projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に留まり、generated place-program synthesis / placement optimizer / deployment planner / checker / proof / final public emitted-program ABI は kept-later gate に残ります。
 - Hot-plug package floor:
   `P19` / `P20` / `P21` の narrow Rust-side floor は close 済みです。post-`P21` later-family docs-first trilogyも close 済みで、third recommendation の stop line は `freeze prerequisite fixed; public ABI still unfrozen` です。
-- Current reopened alpha-local lane:
-  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、現在は Mirrorea Spaces alpha-0 theory-freeze lane を **large-stage-first queue** として読み、`P-A0-28` で rerun 済みの imported Stage A baseline に加え、`scripts/alpha_local_runtime_samples.py stage-b-closeout`、`scripts/alpha_network_docker_e2e.py stage-c-closeout`、`scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout`、`scripts/alpha_visualization_samples.py stage-e-closeout`、`scripts/alpha_e2e_samples.py stage-f-closeout` まで actualize しました。large-stage-first current scope は `Stage A..F` で一巡し、queue authority は later-family blocker selection または separate public-boundary `U1` lane へ移ります。`LIF-15` と `VAR-14` の future carriers は kept-later blocker inventory のままです。
+- Practical alpha-1 promoted lane:
+  repository の promoted line は `specs/18` / `plan/44` / future `samples/practical-alpha1/` を軸とする practical alpha-1 lane へ移った。`P-A1-00` は progress semantics と repository taxonomy を repair しただけであり、next gate は `P-A1-01` の alpha source/package front-door である。
+- Alpha-0 evidence lane:
+  追加の self-driven post-`P21` docs-first familyがないという historical stateは維持しつつ、Mirrorea Spaces alpha-0 theory-freeze lane は now **current-scope evidence closeout reference** として読む。`P-A0-28` で rerun 済みの imported Stage A baseline に加え、`scripts/alpha_local_runtime_samples.py stage-b-closeout`、`scripts/alpha_network_docker_e2e.py stage-c-closeout`、`scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout`、`scripts/alpha_visualization_samples.py stage-e-closeout`、`scripts/alpha_e2e_samples.py stage-f-closeout` まで actualize 済みである。この lane は practical line と並走する主線ではなく、practical package が blocker に当たったときだけ明示 reopen する reserve/reference lane である。`LIF-15` と `VAR-14` の future carriers は kept-later blocker inventory のままです。
 - Public-boundary open gate:
   actual `U1` commitment は引き続き別 gate です。installed binary / packaging target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth の user-facing decision は alpha-local package closeoutだけでは閉じません。
 - Parallel maintenance lane:
-  stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は引き続き自走可能です。ただし current line は maintenance-only ではなく、alpha-local theory-freeze / checker-runtime preparation lane が並走しています。
+  stale docs cleanup、validation rerun、report discipline、guardrail maintenance、formatting / regression repair は引き続き自走可能です。ただし current implementation line は maintenance-only ではなく、practical alpha-1 package sequence が主線です。alpha-0 theory-freeze / checker-runtime work は reserve/reference lane としてだけ残します。
   `scripts/current_l2_guided_samples.py` の active compatibility front door は `list / smoke-all / closeout` only です。legacy bundle / lane / reserve / hold-line / emit-* helper command claims、pre-clean-near-end prototype labels、old example/spec cluster detail は historical memory として `docs/reports/` / relevant `plan/` / `tasks.md` に委譲し、active command claim へ戻しません。
   2026-04-29 以降の formatting cleanup、guided-helper cooling、example/spec cluster cooling、front-door wording cooling、`1051` 以降の guardrail / snapshot / validation follow-up packages は maintenance-only closeout です。2026-05-01 14:27 JST の post-guardrail full validation freshness checkpoint も pass 済みで、known `/mnt/mirrorea-work/llvm` root-owned warning 以外の新規 blocker はなく、new implementation queue も reopened していません。
 
@@ -69,6 +84,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - runtime-private hot-plug request / verdict / engine-state names は final public hot-plug ABI names ではありません。
 - visualization / telemetry は untyped debug leak ではなく、label / authority / redaction / retention を持つ typed information-bearing effect として扱います。
 - `U1` option matrix は actual product decision ではなく、actual decision の入口です。
+- Stage A..F `100%` は practical alpha-1 readiness `100%` ではありません。明示的に evidence closeout table としてのみ読むこと。
 
 ## 3-axis progress
 
@@ -87,9 +103,24 @@ Place をまたいで実行・通信・検証・可視化できる
 | layer compatibility alpha line | 82% | 64% | 58% | 着手可能 | `specs/14` + `samples/alpha/contract-variance/` に加え、`VAR-02/03/05/07/09/10/15` negative-static checker floor、`VAR-01/04/06` helper-local synthetic acceptance floor、`VAR-08/11/13` runtime-mirror floor、`samples/alpha/layer-insertion/LI-01..05` / Rust layer-insertion floor が actualize 済み。`VAR-14` は planned-only `alpha-adapter-transform-floor` に split され、full theorem discharge / detach family は still later |
 | save/load / consistent-cut alpha line | 76% | 45% | 60% | 着手可能 | `specs/15` + `samples/alpha/cut-save-load/` に加え、`CUT-04/17` runtime-backed local save/load rows と `CUT-05/07/08/09/11/13/14/15` の checker floor が actualize 済み。`CUT-04/17` は current-scope Stage B closeout supporting subset としても再利用されるが、`CUT-10/12/16`、distributed save/load、durable cut completion は still later |
 | runtime package / avatar alpha line | 88% | 72% | 76% | 着手可能 | `specs/16` と `samples/alpha/avatar-runtime/` / `hotplug-runtime/` に加え、`alpha_avatar_runtime` cargo/example/script floor が `AV-01/02/06/08/09` と `HP-11/12/15` を actualize し、`alpha_hotplug_lifecycle_samples.py stage-d-closeout` が current-scope Stage D closeout surface を与える。final API / native execution / detach lifecycle は still later |
-| Mirrorea Spaces alpha integration | 96% | 90% | 95% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` に加え、`P-A0-23` で Stage B、`P-A0-24` で Stage C、`P-A0-25` で Stage D、`P-A0-26` で Stage E、`P-A0-27` で Stage F が current scope で 100% 化された。remaining `CUT-10/12/16`、inventory-only rows `LIF-15` + `VAR-14`、later transport/lifecycle widening、public alpha / `U1` remain later |
+| Mirrorea Spaces alpha-0 evidence integration | 96% | 90% | 95% | 着手可能 | `specs/17`、`plan/43`、`samples/alpha/e2e/` に加え、`P-A0-23` で Stage B、`P-A0-24` で Stage C、`P-A0-25` で Stage D、`P-A0-26` で Stage E、`P-A0-27` で Stage F が current scope で 100% 化された。remaining `CUT-10/12/16`、inventory-only rows `LIF-15` + `VAR-14`、later transport/lifecycle widening、public alpha / `U1` remain later |
+| Mirrorea Spaces practical alpha-1 | 34% | 24% | 12% | 着手可能 | `specs/18` と `plan/44` で practical scope / non-goals / stage packages は固定した。alpha-0 evidence closeout は prerequisite として再利用できるが、front-door source/package input、typed IR/checker、reusable runtime plan execution、product-like Docker/local TCP command、local save/load command、devtools export、product prototype root は still open |
 
-## large stage map
+## practical alpha-1 readiness map
+
+| Stage | Progress | Name | Current status | Main evidence | Not yet claimed |
+|---|---:|---|---|---|---|
+| PA1-0 | 100% | practical-alpha-rebaseline | closeout reached as practical/evidence progress semantics repair | `specs/18`、`plan/44`、`README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、docs validators | front-door / parser / runtime / product prototype |
+| PA1-1 | 10% | alpha-source front-door | promoted next package; design/fixtures not yet implemented | `sub-agent-pro/alpha-1/13` package sequence、`specs/18` source-to-runtime condition | final parser grammar / reusable parser implementation |
+| PA1-2 | 10% | typed IR and checker | planned only; existing synthetic alpha-0 checker floors remain prerequisite evidence | `specs/18` typed-checking condition、alpha-0 `LIF/VAR/CUT` evidence rows | reusable IR/checker pipeline / public `check` command |
+| PA1-3 | 10% | runtime plan execution | planned only; existing alpha-0 local runtime remains prerequisite evidence | `specs/18` runtime condition、`plan/44` package order、Stage B evidence floor | runtime-plan execution from practical source package |
+| PA1-4 | 10% | package and hot-plug practical API | planned only; existing Stage D evidence remains prerequisite | `specs/18` hot-plug condition、Stage D evidence floor | manifest-driven practical attach path / final public ABI |
+| PA1-5 | 10% | transport practical E2E | planned only; existing Stage C evidence remains prerequisite | `specs/18` transport condition、Stage C Docker/local-subprocess evidence | product-like Docker/local TCP command over practical package |
+| PA1-6 | 10% | devtools / viewer | planned only; existing Stage E evidence remains prerequisite | `specs/18` devtools condition、Stage E evidence floor | practical export schema / viewer command |
+| PA1-7 | 10% | local save/load command | planned only; existing `CUT-04/17` and Stage B evidence remain prerequisite | `specs/18` save/load condition、`specs/15` consistent-cut stop line | practical `save` / `load` command |
+| PA1-8 | 0% | practical product prototype | not started | `specs/18` product prototype condition | example world package / local+Docker / devtools / save-load / avatar fallback |
+
+## current-scope evidence closeout map
 
 | Stage | Progress | Name | Current status | Main evidence | Not yet claimed |
 |---|---:|---|---|---|---|
@@ -98,7 +129,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | C | 100% | alpha 0.7 transport | current-scope closeout reached as Docker/local-subprocess transport narrow cut | `specs/17`、`plan/43`、`samples/alpha/network-docker/`、`crates/mir-runtime/src/alpha_network_runtime.rs`、example `mirrorea_alpha_network_runtime`、`scripts/alpha_network_docker_e2e.py`、`stage-c-closeout` | `NET-06/08/10` / production WAN / durable replay / partition completion / final transport ABI |
 | D | 100% | alpha 0.8 hot-plug lifecycle | current-scope closeout reached as attach-time layer subset + runtime-private package/avatar admission subset | `specs/16/17`、`plan/42/43`、`samples/alpha/layer-insertion/`、`samples/alpha/avatar-runtime/`、`samples/alpha/hotplug-runtime/`、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs`、`crates/mir-runtime/src/alpha_avatar_runtime.rs`、`scripts/alpha_hotplug_lifecycle_samples.py`、`stage-d-closeout` | detach runtime / durable migration / distributed activation ordering / native execution / final layer-package-avatar ABI |
 | E | 100% | alpha 0.9 devtools | current-scope closeout reached as implemented visualization/devtools subset | `specs/17`、`plan/43`、`samples/alpha/visualization/`、`scripts/alpha_visualization_samples.py`、`stage-e-closeout`、viewer prototype inventory、`LR-01` / `CUT-17` / `NET-02` / `P16-VIEW-02` / `AV-08` / `NET-07` / `LI-01/02` / `LI-01/05` evidence | `VIS-04/09/12` / final viewer API / telemetry service |
-| F | 100% | alpha 1 Spaces alpha | current-scope closeout reached as thin integrated bridge + Stage-E closeout + local-only save/load subset + checker-backed invalid distributed-cut non-claim | `specs/17`、`plan/43`、`samples/alpha/e2e/`、`scripts/alpha_e2e_samples.py`、`stage-f-closeout`、`scripts/alpha_visualization_samples.py stage-e-closeout`、`scripts/alpha_cut_save_load_samples.py`、Sugoroku + local-runtime + layer-insertion + network/Docker + avatar/package requirements | `E2E-08` / final public alpha completion / full VRChat / Reversed Library completion |
+| F | 100% | Spaces alpha evidence closeout | current-scope closeout reached as thin integrated bridge + Stage-E closeout + local-only save/load subset + checker-backed invalid distributed-cut non-claim | `specs/17`、`plan/43`、`samples/alpha/e2e/`、`scripts/alpha_e2e_samples.py`、`stage-f-closeout`、`scripts/alpha_visualization_samples.py stage-e-closeout`、`scripts/alpha_cut_save_load_samples.py`、Sugoroku + local-runtime + layer-insertion + network/Docker + avatar/package requirements | `E2E-08` / final public alpha completion / full VRChat / Reversed Library completion |
 | G | 0% | Spaces product expansion | future | placeholder avatar/package/ecosystem roadmap | alpha scope |
 | H | 0% | Atlas | future | multi-world / portal / relation layer only as later roadmap | alpha scope |
 | I | 0% | Reversed Library | future | knowledge-space flagship later layer | alpha scope |
@@ -116,6 +147,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | hot-plug runtime package | current-scope Stage D closeout reached | helper lifecycle, request/verdict carrier, runtime engine-state narrow floor, `LI-01..05` attach-time layer floor, `AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar subset, `stage-d-closeout` surface, three later-family boundaries | detach runtime, rollback protocol, durable migration engine, distributed activation ordering, native execution realization, final public ABI |
 | storage / backend guardrail | first cut closed | external workdir, cargo target/cache binding, LLVM staging visibility, cleanup guard | actual LLVM build, backend target, packaging |
 | alpha-local theory freeze / runtime prep | current-scope alpha line complete | `specs/13..17`、`plan/39..43`、`samples/alpha/`、LIF/VAR/CUT checker floors、LIF/VAR helper-local acceptance floors、`LIF-13` helper-local snapshot-selected floor、`LIF-11` helper-local anchor-handoff floor、`VAR-08/11/13` runtime-mirror floor、`P-A0-23` Stage B closeout runner、`P-A0-24` Stage C closeout runner、`P-A0-25` Stage D closeout runner、`P-A0-26` Stage E closeout runner、`P-A0-27` Stage F closeout runner、`P-A0-08` Rust layer-insertion floor、`P-A0-10` avatar/package floor、`P-A0-14` honest CUT widening、`P-A0-22` future-carrier blocker split | `LIF-15`、`VAR-14`、`CUT-10/12/16`、`VIS-04/09/12` later families、later transport/lifecycle widenings、public boundary |
+| practical alpha-1 toolchain | `PA1-0` close / `PA1-1..8` open | `specs/18`、`plan/44`、progress/tasks/sample dashboard semantics rebaseline、practical root planned separately from `samples/alpha/` | alpha source/package front-door、typed IR/checker、runtime plan execution、package/hot-plug practical API、transport practical E2E、devtools export、local save/load command、product prototype |
 
 ## closed package memory and active gate
 
@@ -152,6 +184,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `P-A0-26` Stage E devtools closeout | closed | dedicated Stage E closeout surface over `VIS-01/02/03/05/06/07/08/10/11` | `VIS-04/09/12` / final viewer-telemetry API / Stage F completion と混同しない |
 | `P-A0-27` Stage F integrated alpha closeout | closed | dedicated Stage F closeout surface over `E2E-01/02/03/04/05/06/07/09/10` plus Stage-E dependency surface | `E2E-08` / public alpha / `U1` / active runnable-root promotion と混同しない |
 | `P-A0-28` Stage A imported-baseline reconciliation | closed | rerun imported Stage A validation floor and synchronize `specs/17` / `plan/43` / snapshot docs so the large-stage-first alpha line reads sequentially from Stage A through Stage F | new runtime semantics / `samples/alpha/` runnable-root promotion / final public product claim と混同しない |
+| `P-A1-00` practical-alpha-rebaseline | closed | future `100%` is practical alpha-1 readiness; Stage A..F `100%` are retained only as current-scope evidence closeout, with `specs/18` / `plan/44` added and snapshot docs rebaselined | alpha-0 evidence、helper-local carriers、runtime-mirror evidence、`samples/alpha/` を practical front-door or product-ready runtime と混同しない |
 | `P-A0-14` honest CUT widening closeout | closed | `CUT-17` local stale-membership rejection bridge + `CUT-11` checker-backed Z-cycle inadmissibility row | distributed save/load / durable cut / `CUT-10/12/16` completion と混同しない |
 | `U1` actual commitment | open | packaging / host target / shipped surface / final catalog breadth を actual choice へ進める | user-facing decision なしに public freeze しない |
 | docs / validation maintenance | active | stale wording removal、report sync、validation rerun、formatting cleanup | success claim は fresh validation 後に限る |
@@ -223,6 +256,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-03 15:27 JST — `P-A1-00` practical-alpha-rebaseline を実行した。`specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md` を追加し、`README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、`samples/README.md`、`samples/alpha/README.md`、`scripts/README.md`、`specs/17`、`plan/43` を使って、future `100%` を practical alpha-1 readiness に再定義し、Stage A..F `100%` を current-scope evidence closeout reference へ降格した。`python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、sub-agent review の wording drift も反映済みである。これは docs/spec/taxonomy/validator rebaseline に限り、practical front-door parser/loader、reusable checker/runtime API、product-like Docker/local TCP command、local save/load command、product prototype root は引き続き未claimである。
 - 2026-05-03 12:15 JST — `P-A0-28` Stage A imported-baseline reconciliation を実行した。current-L2 / clean-near-end / Lean / Sugoroku / avatar / typed external / network canary / projection / viewer / hot-plug narrow floor の imported validation line を rerun し、`specs/17`、`plan/43`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md` の large-stage reading を `Stage A..F` sequential closeout として同期した。`current_l2_guided_samples.py closeout --format json`、`current_l2_lean_sample_sync.py`、`clean_near_end_samples.py closeout`、`sugoroku_world_samples.py closeout --format json`、`avatar_follow_samples.py closeout --format json`、`typed_external_boundary_samples.py closeout --format json`、`network_transport_samples.py check-all --format json`、`projection_codegen_samples.py check-all --format json`、`visual_debugger_viewer_samples.py closeout --format json`、`cargo test -p mir-runtime --test hotplug_runtime_skeleton`、`python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した。これは imported baseline reconciliation に限り、`samples/alpha/` runnable-root promotion、parser/runtime front door、public alpha / `U1`、distributed save/load completion、final public product claim は引き続き未claimである。
 - 2026-05-03 11:38 JST — `P-A0-27` Stage F integrated alpha closeout を実行した。existing `E2E-01/02/03/04/05/06/07/09/10` integrated bridge subset に `scripts/alpha_e2e_samples.py stage-f-closeout --format json` を追加し、current-scope Stage F completion を固定した。`python3 -m unittest scripts.tests.test_alpha_e2e_samples` は 10 tests で pass、combined alpha Python suite は 40 tests で pass、`cargo test -p mirrorea-core --test runtime_substrate` は 16 tests で pass、`cargo test -p mir-runtime --test alpha_local_runtime --test alpha_cut_save_load_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime` は 28 tests で pass、sequential `alpha_cut_save_load_samples.py check-all` / `alpha_visualization_samples.py check-all` / `alpha_visualization_samples.py stage-e-closeout` / `alpha_network_docker_e2e.py check-all` / `alpha_avatar_runtime_samples.py check-all` / `alpha_e2e_samples.py check-all` / `alpha_e2e_samples.py closeout` / `alpha_e2e_samples.py stage-f-closeout` は all green、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` も pass した。`E2E-01/06` sidecar wording drift は narrow docs fix で解消し、parallel Docker contention run は discarded evidence として採用していない。current Stage F closeout は implemented subset に限られ、`E2E-08`、public alpha / `U1`、distributed save/load completion、active runnable-root promotion は引き続き未claimである。
 - 2026-05-03 11:18 JST — `P-A0-26` Stage E devtools closeout を実行した。existing `VIS-01/02/03/05/06/07/08/10/11` visualization subset に `scripts/alpha_visualization_samples.py stage-e-closeout` を追加し、current-scope Stage E completion を固定した。`python3 -m unittest scripts.tests.test_alpha_visualization_samples scripts.tests.test_alpha_e2e_samples scripts.tests.test_validate_docs` は 29 tests で pass、`alpha_visualization_samples.py check-all --format json` は sequential rerun で 9/9、`stage-e-closeout` は `stage_e_complete: true` を返し、`alpha_e2e_samples.py closeout --format json` は `stage_e_complete: true` / `stage_f_complete: false` を返し、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` も pass した。current Stage E closeout は implemented devtools subset に限られ、`VIS-04/09/12`、final public viewer/telemetry API、Stage F completion は引き続き未claimである。

@@ -2,11 +2,12 @@
 
 ## role
 
-この文書は、Mirrorea Spaces alpha line の
+この文書は、Mirrorea Spaces alpha-0 evidence line の
 **product scope / stage/phase reading / completion condition / non-goal**
 を alpha-local 規範として置く。
 
 - immediate target is Mirrorea Spaces alpha
+- current Stage A..F reading is evidence closeout, not practical alpha-1 readiness
 - Reversed Library is future upper-layer application
 - PrismCascade is separate media kernel candidate
 - final public parser/API/ABI freeze is not the immediate goal
@@ -82,6 +83,21 @@ current alpha-local implementation shape は次を default に置く。
 - Docker E2E
 
 これは installed binary packaging, final host target, final public ABI の freeze ではない。
+
+## evidence-closeout boundary
+
+この文書で定義する Stage A..F `100%` は、
+**current-scope evidence closeout** の意味である。
+
+これは次を意味しない。
+
+- practical alpha-1 readiness `100%`
+- source front-door execution
+- reusable checker/runtime toolchain completion
+- public alpha / `U1`
+
+practical alpha-1 readiness の定義と completion condition は
+`specs/18-practical-alpha1-scope.md` に置く。
 
 ## completion condition
 
@@ -204,7 +220,7 @@ negative test floor:
   - `LR-02` stale-membership rejection path
   - `CUT-04` local-only save/load resume path
   - `CUT-17` local-only save/load stale-membership non-resurrection path
-- this combination is sufficient to call alpha-0.5 local runtime complete for current scope
+- this combination is sufficient to call alpha-0.5 local runtime evidence complete for current scope
 - this does not imply:
   - distributed/durable save/load completion
   - `CUT-10/12/16` completion
@@ -223,7 +239,7 @@ negative test floor:
   - `NET-05` missing-witness rejection over the transport seam
   - `NET-07` observer-safe redacted route trace
   - `NET-09` auth-evidence lane preserved separately from transport delivery
-- this combination is sufficient to call alpha-0.7 transport complete for current scope
+- this combination is sufficient to call alpha-0.7 transport evidence complete for current scope
 - this does not imply:
   - `NET-06` route-rebinding / no-shadow completion
   - `NET-08` network-partition completion
@@ -250,7 +266,7 @@ negative test floor:
   - `HP-11` unsigned native package rejected
   - `HP-12` signed over-capability package rejected
   - `HP-15` revoked/stale-signed native package rejected
-- this combination is sufficient to call alpha-0.8 hot-plug lifecycle complete for current scope
+- this combination is sufficient to call alpha-0.8 hot-plug lifecycle evidence complete for current scope
 - this does not imply:
   - detach runtime completion
   - durable migration

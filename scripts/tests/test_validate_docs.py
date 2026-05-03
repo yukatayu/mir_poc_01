@@ -109,11 +109,13 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/41-save-load-checkpoint-roadmap.md",
             "plan/42-runtime-package-avatar-roadmap.md",
             "plan/43-alpha-e2e-roadmap.md",
+            "plan/44-practical-alpha1-roadmap.md",
             "specs/13-type-system-lifetime-fallback.md",
             "specs/14-contract-subtyping-layer-compatibility.md",
             "specs/15-cut-save-load-checkpoint.md",
             "specs/16-runtime-package-adapter-hotplug.md",
             "specs/17-mirrorea-spaces-alpha-scope.md",
+            "specs/18-practical-alpha1-scope.md",
         }
         for path in alpha0_required:
             self.assertIn(path, required)

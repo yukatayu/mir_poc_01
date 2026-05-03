@@ -37,6 +37,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "specs/15-cut-save-load-checkpoint.md",
         "specs/16-runtime-package-adapter-hotplug.md",
         "specs/17-mirrorea-spaces-alpha-scope.md",
+        "specs/18-practical-alpha1-scope.md",
     ],
     "policies": [
         ".docs/progress-task-axes.md",
@@ -54,6 +55,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/41-save-load-checkpoint-roadmap.md",
         "plan/42-runtime-package-avatar-roadmap.md",
         "plan/43-alpha-e2e-roadmap.md",
+        "plan/44-practical-alpha1-roadmap.md",
     ],
     "scripts": [
         "scripts",
@@ -83,6 +85,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "crates/mir-runtime",
         "sub-agent-pro",
         "sub-agent-pro/alpha-0",
+        "sub-agent-pro/alpha-1",
     ],
 }
 

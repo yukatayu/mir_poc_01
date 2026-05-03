@@ -9,6 +9,10 @@
 ## repo 全体の主眼
 
 - 主眼は、Mir current-L2 の repo-local alpha-ready current layer を保ちながら、Mirrorea future-axis を sample / progress / storage discipline と結びつけて前進させることにある
+- 2026-05-03 以降は、Mirrorea future-axis を
+  - alpha-0 current-scope evidence closeout line
+  - practical alpha-1 readiness line
+  の 2 系統で読む
 - current active sample suite は `samples/clean-near-end/`
 - Sugoroku world vertical slice は `samples/clean-near-end/sugoroku-world/` と `scripts/sugoroku_world_samples.py` で runnable
 - `samples_progress.md` は phase 0〜16 の runnable sample dashboard として current snapshot に入る
@@ -181,6 +185,18 @@
 - `samples/not_implemented/` は residual planned family preservation root として残す
 - public-boundary `U1` gate は消えていない
   - packaging / host target / first shipped public surface / final catalog breadth の user-facing decision は still later
+
+## 2026-05-03 practical alpha-1 rebaseline addendum
+
+- current-scope Stage A..F `100%` は evidence closeout として保持し、practical alpha-1 readiness `100%` とは分けて読む
+- practical alpha-1 の規範判断は `specs/18-practical-alpha1-scope.md` に置く
+- practical alpha-1 の repository memory は `plan/44-practical-alpha1-roadmap.md` に置く
+- `P-A1-00` は docs/spec/taxonomy rebaseline package であり、practical line promotion の entry point として closed した
+- `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
+- current promoted line は later-family blocker widening ではなく、
+  source front-door / checker / reusable runtime / package / transport / devtools / local save-load / product prototype を持つ practical toolchain line へ移る
+- alpha-0 evidence line は useful prerequisite のまま維持するが、
+  helper-local / non-public / runtime-private closeout を practical product readiness と書かない
 
 ## current stop line
 

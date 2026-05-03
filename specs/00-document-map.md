@@ -140,6 +140,12 @@
 - `sub-agent-pro/mir_poc_01_research_handoff_2026-04-30.md`
   - 2026-04-30 時点の Codex 向け current-line handoff であり、repo-local alpha-ready current layer、`U1` actual commitment gate、maintenance lane、validation floor、package template を current explanation source として整理する。
   - 規範判断の正本ではないが、`specs/`、`plan/`、`progress.md`、`tasks.md`、`samples_progress.md`、`docs/reports/` へ mirror する説明 source として使ってよい。
+ - `specs/18-practical-alpha1-scope.md`
+  - Mirrorea Spaces practical alpha-1 readiness の規範判断を置く。
+  - current-scope evidence closeout と practical alpha-1 `100%` の区別、source front-door / checker / runtime / package / transport / devtools / save-load / product-prototype 条件、非目標、validation boundary を固定する。
+ - `plan/44-practical-alpha1-roadmap.md`
+  - practical alpha-1 の repository-memory roadmap を置く。
+  - `P-A1-00..` package line、front-door / checker / runtime / transport / devtools / save-load / product prototype の順序、evidence line との分離、next reopen point を整理する。
 
 ## 規範的な読書順
 
@@ -157,6 +163,7 @@
 7. `11-roadmap-and-workstreams.md`
 8. `12-decision-register.md`
 9. Mirrorea Spaces alpha-0 line を扱う場合は `13-type-system-lifetime-fallback.md`、`14-contract-subtyping-layer-compatibility.md`、`15-cut-save-load-checkpoint.md`、`16-runtime-package-adapter-hotplug.md`、`17-mirrorea-spaces-alpha-scope.md`
+10. practical alpha-1 line を扱う場合は `18-practical-alpha1-scope.md` も読む
 
 ## 例示文書
 

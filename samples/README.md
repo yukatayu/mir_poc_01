@@ -12,6 +12,9 @@
   mechanization evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars
+  - current-scope evidence root であり、practical alpha-1 front-door root ではない
+  - Stage A..F `100%` は evidence closeout として読む
+  - practical alpha-1 sample root は separate root として later に育てる。`P-A1-00` 時点ではまだ未追加であり、存在しない root を current command set に入れない
 - `not_implemented/`
   residual planned skeleton family
 - `prototype/`
@@ -62,6 +65,9 @@
 - `not_implemented/` と `alpha/` を混同しない
   - `alpha/` は current alpha-local promoted scaffold
   - `not_implemented/` は residual / historical planned family の preservation root
+- `alpha/` と future `practical-alpha1/` を混同しない
+  - `alpha/` は evidence closeout root
+  - `practical-alpha1/` は source front-door / toolchain root として later に追加する。`P-A1-00` では path planning までで、actual fixture root はまだ作っていない
 
 ## current commands
 

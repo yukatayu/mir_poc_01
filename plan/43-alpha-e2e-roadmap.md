@@ -2,11 +2,17 @@
 
 ## purpose
 
-この文書は、Mirrorea Spaces Alpha-0/Alpha-1 line の
+この文書は、Mirrorea Spaces alpha-0 evidence line の
 stage/phase/E2E completion memory を repository-memory として置く。
 
 ここで保持するのは current alpha-local package order と demo completion condition であり、
-final public product completion ではない。
+practical alpha-1 readiness や final public product completion ではない。
+
+practical alpha-1 の readiness roadmap は `plan/44-practical-alpha1-roadmap.md` に分けて置く。
+
+2026-05-03 以降、repository の promoted package line は `plan/44` 側へ移る。
+この文書は alpha-0 evidence closeout memory を保持するが、
+practical alpha-1 package order の authority には使わない。
 
 ## stage A..F map
 
@@ -43,7 +49,7 @@ final public product completion ではない。
 - current-scope closeout is now fixed by:
   - `scripts/alpha_local_runtime_samples.py` for `LR-01/02`
   - `scripts/alpha_local_runtime_samples.py stage-b-closeout` reusing `CUT-04/17` as the local-only save/load subset
-- this closes alpha-0.5 only for local runtime + local-only save/load subset; it does not claim distributed save/load or full CUT-family completion
+- this closes alpha-0.5 evidence only for local runtime + local-only save/load subset; it does not claim distributed save/load, full CUT-family completion, or practical alpha-1 readiness
 
 ### Stage C
 
@@ -53,7 +59,7 @@ final public product completion ではない。
 - current-scope closeout is now fixed by:
   - example `mirrorea_alpha_network_runtime -- closeout`
   - `scripts/alpha_network_docker_e2e.py stage-c-closeout --format json` over `NET-02/03/04/05/07/09`
-- this closes alpha-0.7 only for the existing Docker/local-subprocess transport floor; it does not claim `NET-06/08/10`, WAN federation, partition completion, medium-substitution completion, or final public transport ABI
+- this closes alpha-0.7 evidence only for the existing Docker/local-subprocess transport floor; it does not claim `NET-06/08/10`, WAN federation, partition completion, medium-substitution completion, final public transport ABI, or practical alpha-1 readiness
 
 ### Stage D
 
@@ -66,7 +72,7 @@ final public product completion ではない。
   - example `mirrorea_alpha_layer_insertion_runtime -- closeout`
   - `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
   - `python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json`
-- this closes alpha-0.8 only for the existing attach-time layer subset plus runtime-private package/avatar admission subset; it does not claim detach runtime, durable migration, distributed activation ordering, native execution realization, or final public layer/package/avatar ABI
+- this closes alpha-0.8 evidence only for the existing attach-time layer subset plus runtime-private package/avatar admission subset; it does not claim detach runtime, durable migration, distributed activation ordering, native execution realization, final public layer/package/avatar ABI, or practical alpha-1 readiness
 
 ### Stage E
 
@@ -78,7 +84,7 @@ final public product completion ではない。
   - `python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json`
 - `VIS-04/09/12` remain planned-only, but they are outside the current-scope Stage E closeout set
 - `VIS-02` is limited to a report-local place-catalog projection over `LI-01`, and `VIS-05` is limited to a report-local membership epoch/incarnation timeline over `CUT-17`; neither freezes a final viewer API
-- this closes alpha-0.9 only for the existing devtools subset; it does not claim `VIS-04/09/12`, final public viewer/telemetry API, or Stage F completion
+- this closes alpha-0.9 evidence only for the existing devtools subset; it does not claim `VIS-04/09/12`, final public viewer/telemetry API, Stage F completion, or practical alpha-1 readiness
 
 ### Stage F
 
@@ -90,7 +96,7 @@ final public product completion ではない。
 - `E2E-08` upper-layer seed remains outside the actualized subset
 - current-scope closeout is now fixed by:
   - `python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json`
-- this closes alpha-1 only for `E2E-01/02/03/04/05/06/07/09/10` plus the current-scope Stage E closeout surface; it does not claim `E2E-08`, distributed save/load completion, active runnable-root promotion, public alpha / `U1`, or final public runtime/viewer/transport/hot-plug ABI
+- this closes current-scope Spaces alpha evidence only for `E2E-01/02/03/04/05/06/07/09/10` plus the current-scope Stage E closeout surface; it does not claim `E2E-08`, distributed save/load completion, active runnable-root promotion, practical alpha-1 readiness, public alpha / `U1`, or final public runtime/viewer/transport/hot-plug ABI
 
 ## phase 0..8 packages
 
@@ -205,6 +211,7 @@ Phase 1+ runtime floor:
 ## stop lines
 
 - do not treat current-scope Stage F closeout as public alpha / `U1` completion
+- do not treat current-scope Stage A..F evidence closeout as practical alpha-1 readiness
 - do not treat imported Stage A baseline revalidation as a new runtime semantics package
 - do not call skeleton/planned sample rows runnable
 - do not call Docker canary production transport
@@ -224,3 +231,4 @@ Phase 1+ runtime floor:
 - after `P-A0-28`, Stage A imported baseline is rerun and the large-stage-first alpha line reads sequentially from Stage A through Stage F for current scope; next reopen still must choose a later-family blocker lane or public-boundary lane
 - later helper-local LIF/VAR carriers remain valid and separate, but they are no longer the next promoted line while the large-stage-first sequence is active
 - no safe next package is auto-promoted here; `CUT-10/12/16`, `LIF-15`, `VAR-14`, detach/migration/native, and `U1` remain separate reopen candidates
+- after `P-A1-00`, this evidence roadmap stays valid as prerequisite memory only; promoted package order for repository-wide progress lives in `plan/44-practical-alpha1-roadmap.md`
