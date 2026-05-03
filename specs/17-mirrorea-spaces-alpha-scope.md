@@ -119,6 +119,7 @@ current alpha-local stage reading は次を使う。
 
 - `Stage A`
   - existing repo-local alpha-ready floor
+  - imported baseline for the alpha line
 - `Stage B`
   - integrated local Mirrorea runtime
   - current-scope closeout for this stage is:
@@ -147,6 +148,29 @@ current concrete phase reading は次を使う。
 - `Phase 6` save/load and consistent cut
 - `Phase 7` runtime package / avatar adapter
 - `Phase 8` integrated alpha demo
+
+## Stage A imported-baseline boundary
+
+`Stage A` is an imported baseline for the alpha line, not a new `samples/alpha/` runnable-root promotion.
+
+- admissible evidence:
+  - `python3 scripts/current_l2_guided_samples.py closeout --format json`
+  - `python3 scripts/current_l2_lean_sample_sync.py`
+  - `python3 scripts/clean_near_end_samples.py closeout`
+  - `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  - `python3 scripts/avatar_follow_samples.py closeout --format json`
+  - `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+  - `python3 scripts/network_transport_samples.py check-all --format json`
+  - `python3 scripts/projection_codegen_samples.py check-all --format json`
+  - `python3 scripts/visual_debugger_viewer_samples.py closeout --format json`
+  - `cargo test -p mir-runtime --test hotplug_runtime_skeleton`
+- this combination is sufficient to count Stage A as 100% imported baseline for the current alpha line
+- this does not imply:
+  - parser/runtime front-door execution of `samples/alpha/*.mir`
+  - active runnable-root promotion of `samples/alpha/`
+  - final public parser/runtime/viewer/hot-plug/transport ABI
+  - durable distributed save/load completion
+  - final host / packaging / product commitment
 
 ## required E2E and negative tests
 

@@ -20,6 +20,20 @@ final public product completion ではない。
 - network canary
 - projection bridge evidence
 - viewer prototype inventory
+- hot-plug narrow runtime floor
+- current imported-baseline closeout is fixed by:
+  - `python3 scripts/current_l2_guided_samples.py closeout --format json`
+  - `python3 scripts/current_l2_lean_sample_sync.py`
+  - `python3 scripts/clean_near_end_samples.py closeout`
+  - `python3 scripts/sugoroku_world_samples.py closeout --format json`
+  - `python3 scripts/avatar_follow_samples.py closeout --format json`
+  - `python3 scripts/typed_external_boundary_samples.py closeout --format json`
+  - `python3 scripts/network_transport_samples.py check-all --format json`
+  - `python3 scripts/projection_codegen_samples.py check-all --format json`
+  - `python3 scripts/visual_debugger_viewer_samples.py closeout --format json`
+  - `cargo test -p mir-runtime --test hotplug_runtime_skeleton`
+- this counts as Stage A 100% for the current alpha line current scope
+- this does not claim final public product, parser/runtime execution of `samples/alpha/*.mir`, active runnable-root promotion of `samples/alpha/`, or final public ABI freeze
 
 ### Stage B
 
@@ -191,6 +205,7 @@ Phase 1+ runtime floor:
 ## stop lines
 
 - do not treat current-scope Stage F closeout as public alpha / `U1` completion
+- do not treat imported Stage A baseline revalidation as a new runtime semantics package
 - do not call skeleton/planned sample rows runnable
 - do not call Docker canary production transport
 - do not call local save distributed save/load
@@ -206,5 +221,6 @@ Phase 1+ runtime floor:
 - after `P-A0-25`, Stage D current-scope closeout is fixed and queue authority shifts to Stage E devtools closeout
 - after `P-A0-26`, Stage E current-scope closeout is fixed and queue authority shifts to Stage F integrated alpha closeout
 - after `P-A0-27`, current-scope Stage F closeout is fixed and the large-stage-first alpha line is complete for current scope; next reopen must choose a later-family blocker lane or public-boundary lane rather than widening Stage F itself
+- after `P-A0-28`, Stage A imported baseline is rerun and the large-stage-first alpha line reads sequentially from Stage A through Stage F for current scope; next reopen still must choose a later-family blocker lane or public-boundary lane
 - later helper-local LIF/VAR carriers remain valid and separate, but they are no longer the next promoted line while the large-stage-first sequence is active
 - no safe next package is auto-promoted here; `CUT-10/12/16`, `LIF-15`, `VAR-14`, detach/migration/native, and `U1` remain separate reopen candidates
