@@ -286,7 +286,9 @@ practical transport family `TR-A1-01..07` を dashboard に追加し、`PA1-5` c
 
 ## Commit / push status
 
-Pending at report write.
+- Main package commit: `fe7bb1b` (`mirrorea: close p-a1-05 practical transport e2e`)
+- Push status: pushed to `origin/main`
+- Follow-up docs-only metadata commit may update this report if later package sequencing needs an explicit report-status sync.
 
 ## Sub-agent session close status
 
