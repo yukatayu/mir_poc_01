@@ -87,6 +87,9 @@ python3 scripts/validate_docs.py
 python3 -m unittest scripts.tests.test_validate_docs
 cargo fmt --check
 git diff --check
+git add Documentation.md progress.md tasks.md samples_progress.md plan/44-practical-alpha1-roadmap.md docs/reports/1156-review-p-a1-05-docs-progress-consistency.md docs/reports/1156-p-a1-05-sample-validation-review.md docs/reports/1157-review-p-a1-05-runtime-transport-carrier-split.md docs/reports/review-2026-05-03-pa1-05-transport-scope-review.md docs/reports/1158-p-a1-05-transport-scope-blocker.md
+git commit --no-gpg-sign -m "docs: record p-a1-05 transport scope blocker"
+git push
 ```
 
 ## Evidence / outputs / test results
@@ -112,6 +115,7 @@ git diff --check
   - `python3 -m unittest scripts.tests.test_validate_docs`
   - `cargo fmt --check`
   - `git diff --check`
+- `python3 scripts/validate_docs.py` reported `Found 1159 numbered report(s).`
 
 ## What changed in understanding
 
@@ -176,9 +180,11 @@ practical alpha-1 summary / package map / blocker table / recent validation rowã
 
 ## Commit / push status
 
-Pending at report write.
+- Blocker package state committed as `9cdf2c8` (`docs: record p-a1-05 transport scope blocker`).
+- Pushed to `origin/main`.
+- This report status section is synchronized in a docs-only follow-up commit after the package push.
 
 ## Sub-agent session close status
 
 - Existing reviewer agents for theory/spec, runtime/transport, docs/progress consistency, and sample/validation were reused as evidence sources for this blocker package.
-- They will be closed after commit/push once this blocker state is recorded on `origin/main`.
+- Reviewer sessions `James`, `Ptolemy`, `Singer`, and `Pascal` were closed after the blocker package push.
