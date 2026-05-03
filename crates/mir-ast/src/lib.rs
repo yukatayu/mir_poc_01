@@ -42,9 +42,15 @@ public parser API.
 
 Span-rich diagnostics, final grammar, and full public parser integration remain
 later work.
+
+This crate also carries a **non-final practical alpha-1 package front-door**
+for limited `package.mir.json` loading. That front-door is a narrow
+source/package carrier for practical alpha-1 and does not freeze the final
+textual grammar, typed checker boundary, or runtime execution ABI.
 "#]
 
 pub mod current_l2;
+pub mod practical_alpha1;
 
 pub fn crate_name() -> &'static str {
     "mir_ast"

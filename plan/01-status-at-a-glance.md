@@ -192,7 +192,10 @@
 - practical alpha-1 の規範判断は `specs/18-practical-alpha1-scope.md` に置く
 - practical alpha-1 の repository memory は `plan/44-practical-alpha1-roadmap.md` に置く
 - `P-A1-00` は docs/spec/taxonomy rebaseline package であり、practical line promotion の entry point として closed した
+- `P-A1-01` は closed であり、first practical front-door package として `samples/practical-alpha1/`、`SRC-01..05`、および `crates/mir-ast/src/practical_alpha1.rs` の limited `package.mir.json` loader floor を actualize した
+- `P-A1-02` は next promoted package であり、typed IR/checker integration を current line の次 gate とする
 - `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
+- current practical root は separate に存在するが、まだ active canonical runnable root や product-like CLI root ではない
 - current promoted line は later-family blocker widening ではなく、
   source front-door / checker / reusable runtime / package / transport / devtools / local save-load / product prototype を持つ practical toolchain line へ移る
 - alpha-0 evidence line は useful prerequisite のまま維持するが、

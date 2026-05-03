@@ -4,6 +4,7 @@
 
 - active runnable root ではない
 - practical alpha-1 front-door root でもない
+  - practical front-door root は separate `samples/practical-alpha1/` に置く
 - root 全体としては mixed alpha-local scaffold であり、family ごとに
   - scaffold-only / checker-seed family
   - helper-local scoped evidence family
@@ -33,7 +34,7 @@
 - `P-A0-22` は `LIF-15` と `VAR-14` を actualize せず、planned-only `alpha-remote-observe-floor` と `alpha-adapter-transform-floor` の blocker split として固定した
 - `hotplug-runtime/` の `HP-11/12/15` は `avatar-runtime/` family と共用する runtime-private native-policy subset として actualize 済みだが、family 全体の runnable promotion ではない
 - `samples/not_implemented/` は pre-existing residual planned families を保持する legacy planned root として残す
-- practical alpha-1 sample root は separate root に置く。`samples/alpha/` をそのまま source front-door root へ昇格させない
+- practical alpha-1 sample root は separate `samples/practical-alpha1/` に置く。`samples/alpha/` をそのまま source front-door root へ昇格させない
 
 ## current families
 

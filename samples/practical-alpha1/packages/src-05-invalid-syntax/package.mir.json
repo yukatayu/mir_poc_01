@@ -1,0 +1,15 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "src-05-invalid-syntax",
+  "package_kind": "world",
+  "world": {
+    "id": "broken_world",
+    "entry_place": "broken"
+  }
+  "places": [
+    {
+      "id": "broken",
+      "authority": "shared_host"
+    }
+  ]
+}

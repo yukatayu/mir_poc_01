@@ -26,7 +26,9 @@ repository-memory roadmap を置く。
   - `samples/lean/`
 - `samples/alpha/` は mixed evidence root であり、
   practical front-door sample root ではない
-- practical alpha-1 toolchain の front-door、reusable checker/runtime API、
+- `samples/practical-alpha1/` は current repo state で存在するが、
+  current cut は limited `package.mir.json` front-door fixture family に留まる
+- practical alpha-1 toolchain の reusable checker/runtime API、
   product-like package root、practical CLI/viewer surface はまだ未完成である
 
 ## decisions mirrored from specs/18
@@ -55,6 +57,14 @@ repository-memory roadmap を置く。
 - parser か JSON/package loader
 - positive / negative parse tests
 - separate practical sample root initial cut
+- current actualized cut:
+  - `samples/practical-alpha1/`
+  - `crates/mir-ast/src/practical_alpha1.rs`
+  - `SRC-01..05` parse/load tests over `package.mir.json`
+- non-claim:
+  - final textual grammar ではない
+  - checker/runtime execution ではない
+  - practical CLI command completion ではない
 
 ### PA1-2 — typed IR / checker
 
@@ -120,6 +130,11 @@ recommended current promoted line:
 8. `P-A1-07` local save/load command
 9. `P-A1-08` product prototype
 
+current reading after `P-A1-01`:
+
+- `P-A1-00` and `P-A1-01` are closed
+- `P-A1-02` is the promoted next package
+
 ## readiness reading
 
 rough initial reading after `P-A0-28` and before `P-A1-00` close:
@@ -135,12 +150,14 @@ rough initial reading after `P-A0-28` and before `P-A1-00` close:
 
 practical alpha-1 overall readiness should therefore stay low until
 front-door, reusable checker/runtime, and practical sample root exist.
+`P-A1-01` 後は initial practical sample root と library-first front-door は存在するが、
+checker/runtime/product surfaces が未完成なため overall readiness は still low に保つ。
 
 ## sample-root roadmap
 
 - keep `samples/alpha/` as evidence root
 - do not silently promote it
-- practical root is planned as:
+- practical root is:
 
 ```text
 samples/practical-alpha1/
@@ -151,23 +168,24 @@ samples/practical-alpha1/
   docker/
 ```
 
-- this root should not be required by source-hierarchy validators until it exists
+- current first cut uses `packages/` and `expected/` for `SRC-01..05`
+- `source/` and `docker/` are reserved for later textual-source / Docker packages
 
 ## validator roadmap
 
-`P-A1-00` should extend required scaffold to:
+`P-A1-00` extends required scaffold to:
 
 - `specs/18-practical-alpha1-scope.md`
 - `plan/44-practical-alpha1-roadmap.md`
 - `sub-agent-pro/alpha-1/`
 
-but should not require practical runner scripts or `samples/practical-alpha1/`
-before they are added.
+`P-A1-01` may require `samples/practical-alpha1/README.md` and the root directory,
+but should not require practical runner scripts before they are added.
 
 ## non-claims carried forward
 
 - current alpha-0 evidence closeout is not public alpha / `U1`
-- no practical source front-door exists yet
+- only a narrow non-final `package.mir.json` practical front-door exists so far
 - no final public parser/runtime/checker ABI is fixed
 - no production WAN/federation claim is made
 - no durable distributed save/load claim is made
@@ -175,11 +193,11 @@ before they are added.
 
 ## next reopen point
 
-- after `P-A1-00`, the next safe package is expected to be `P-A1-01`
-  if a narrow alpha source / manifest front-door can be defined without
-  freezing final public grammar
+- after `P-A1-01`, the next safe package is expected to be `P-A1-02`
+  if the current front-door output can be connected to reusable typed-checker
+  diagnostics without freezing a final public checker API
 - current recommendation is:
-  - alpha source may start as a limited textual or JSON/package manifest cut
-  - document it explicitly as alpha-local and non-final
-  - keep `samples/alpha/` unchanged while growing a separate practical root
+  - keep the current `package.mir.json` cut explicit and non-final
+  - add IR/checker integration on top of the existing front-door output
+  - keep `samples/alpha/` unchanged while practical root grows separately
 - queue authority remains `progress.md` / `tasks.md`

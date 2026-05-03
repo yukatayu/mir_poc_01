@@ -1,0 +1,26 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "src-02-fallback-chain",
+  "package_kind": "world",
+  "world": {
+    "id": "fallback_demo",
+    "entry_place": "table"
+  },
+  "places": [
+    {
+      "id": "table",
+      "authority": "host_turn"
+    }
+  ],
+  "fallback_chains": [
+    {
+      "id": "demo_access_path",
+      "capability": "read",
+      "options": [
+        "FriendHead",
+        "SelfShoulder",
+        "WorldOrigin"
+      ]
+    }
+  ]
+}

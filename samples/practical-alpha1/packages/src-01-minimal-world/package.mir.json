@@ -1,0 +1,15 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "src-01-minimal-world",
+  "package_kind": "world",
+  "world": {
+    "id": "minimal_world",
+    "entry_place": "lobby"
+  },
+  "places": [
+    {
+      "id": "lobby",
+      "authority": "shared_host"
+    }
+  ]
+}

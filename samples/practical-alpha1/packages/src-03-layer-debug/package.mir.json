@@ -1,0 +1,22 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "src-03-layer-debug",
+  "package_kind": "world",
+  "world": {
+    "id": "debuggable_world",
+    "entry_place": "board"
+  },
+  "places": [
+    {
+      "id": "board",
+      "authority": "admin_console"
+    }
+  ],
+  "layers": [
+    {
+      "id": "debug_trace_layer",
+      "kind": "Debug",
+      "attach_mode": "requested"
+    }
+  ]
+}

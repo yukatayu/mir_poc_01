@@ -69,6 +69,8 @@ practical alpha-1 を `100%` と呼ぶには、少なくとも次を全て満た
 
 - `samples/practical-alpha1/` または同等の practical root から source/manifest を読む
 - alpha grammar は final public grammar でなくてよい
+- initial admissible cut は limited `package.mir.json` loader でもよい
+- ただし、その cut は practical root から実際に読まれ、positive/negative parse test を持ち、non-final front-door だと明記されること
 - grammar / loader は documented され、実 sample で使われる
 - sample-ID keyed helper ではなく source/manifest input が front-door になる
 
@@ -163,7 +165,7 @@ practical alpha-1 immediate scope では次を goal にしない。
 - `samples/alpha/` は current-scope evidence root であり続ける
 - `samples/alpha/` を active runnable root に silently promote しない
 - practical alpha-1 の front-door root は `samples/practical-alpha1/` または同等の separate root に置く
-- separate root がまだ無い段階では、practical alpha-1 progress を `0%..25%` に留めてよい
+- current initial cut は `samples/practical-alpha1/` の limited `package.mir.json` family であり、full practical runnable root とはまだ分けて読む
 
 ## native boundary
 

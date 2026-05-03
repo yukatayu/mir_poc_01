@@ -51,6 +51,7 @@ Mirrorea future-axis は current promoted line ではなく、docs-first / repo-
   規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence closeout を蓄積する alpha-local scaffolding です。
 - **Mirrorea Spaces practical alpha-1 line**
   規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。こちらが今後の `100%` の基準であり、source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product prototype を揃えた実用 toolchain を目標にします。
+  2026-05-03 時点の first front-door cut は `samples/practical-alpha1/` の limited `package.mir.json` fixtures と `crates/mir-ast::practical_alpha1` library loader です。これは final textual grammar、reusable checker/runtime API、product-like CLI ではありません。
 
 現行の Stage A..F `100%` は evidence closeout であり、practical alpha-1 `100%` ではありません。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 
@@ -81,7 +82,7 @@ current line で reader が押さえるべき点は次です。
 - reader-facing roadmap summary:
   `docs/research_abstract/mirrorea_future_axis_01.md`
 - future-axis repository memory:
-  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..43`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..44`
 
 ## 何が built-in で、何が user-defined か
 

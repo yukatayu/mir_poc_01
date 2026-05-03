@@ -1,0 +1,258 @@
+use std::{
+    fmt, fs,
+    path::{Path, PathBuf},
+};
+
+use serde::Deserialize;
+use serde_json::error::Category;
+
+pub const PRACTICAL_ALPHA1_FORMAT_VERSION: &str = "mirrorea-practical-alpha1-v0";
+pub const PRACTICAL_ALPHA1_PACKAGE_FILE_NAME: &str = "package.mir.json";
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PracticalAlpha1FrontDoorManifest {
+    pub carrier_kind: &'static str,
+    pub accepted_surface_refs: &'static [&'static str],
+    pub code_anchor_refs: &'static [&'static str],
+    pub retained_later_refs: &'static [&'static str],
+}
+
+const PRACTICAL_ALPHA1_FRONT_DOOR_ACCEPTED_SURFACE_REFS: &[&str] = &[
+    "package.mir.json",
+    "world",
+    "places",
+    "fallback_chains",
+    "layers",
+    "manifest",
+];
+
+const PRACTICAL_ALPHA1_FRONT_DOOR_CODE_ANCHOR_REFS: &[&str] = &[
+    "mir_ast_practical_alpha1_module",
+    "practical_alpha1_front_door_tests",
+];
+
+const PRACTICAL_ALPHA1_FRONT_DOOR_RETAINED_LATER_REFS: &[&str] = &[
+    "final_textual_alpha_source_grammar",
+    "typed_ir_checker_integration",
+    "runtime_plan_execution",
+];
+
+pub const PRACTICAL_ALPHA1_FRONT_DOOR_MANIFEST: PracticalAlpha1FrontDoorManifest =
+    PracticalAlpha1FrontDoorManifest {
+        carrier_kind: "practical_alpha1_nonfinal_package_json_front_door",
+        accepted_surface_refs: PRACTICAL_ALPHA1_FRONT_DOOR_ACCEPTED_SURFACE_REFS,
+        code_anchor_refs: PRACTICAL_ALPHA1_FRONT_DOOR_CODE_ANCHOR_REFS,
+        retained_later_refs: PRACTICAL_ALPHA1_FRONT_DOOR_RETAINED_LATER_REFS,
+    };
+
+pub fn practical_alpha1_front_door_manifest() -> &'static PracticalAlpha1FrontDoorManifest {
+    &PRACTICAL_ALPHA1_FRONT_DOOR_MANIFEST
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum PracticalAlpha1FrontDoorErrorKind {
+    MissingPackageFile,
+    Io,
+    JsonParse,
+    SchemaDecode,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PracticalAlpha1FrontDoorError {
+    pub kind: PracticalAlpha1FrontDoorErrorKind,
+    pub path: PathBuf,
+    pub detail: String,
+}
+
+impl fmt::Display for PracticalAlpha1FrontDoorError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{:?} at {}: {}",
+            self.kind,
+            self.path.display(),
+            self.detail
+        )
+    }
+}
+
+impl std::error::Error for PracticalAlpha1FrontDoorError {}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1Package {
+    pub format_version: String,
+    pub package_id: String,
+    pub package_kind: String,
+    #[serde(default)]
+    pub world: Option<PracticalAlpha1World>,
+    #[serde(default)]
+    pub places: Vec<PracticalAlpha1Place>,
+    #[serde(default)]
+    pub fallback_chains: Vec<PracticalAlpha1FallbackChain>,
+    #[serde(default)]
+    pub layers: Vec<PracticalAlpha1LayerAttachment>,
+    #[serde(default)]
+    pub manifest: Option<PracticalAlpha1PackageManifest>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1World {
+    pub id: String,
+    pub entry_place: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1Place {
+    pub id: String,
+    pub authority: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1FallbackChain {
+    pub id: String,
+    pub capability: String,
+    pub options: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1LayerAttachment {
+    pub id: String,
+    pub kind: String,
+    pub attach_mode: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1PackageManifest {
+    pub version: String,
+    #[serde(default)]
+    pub requires_capabilities: Vec<String>,
+    #[serde(default)]
+    pub provided_capabilities: Vec<String>,
+    #[serde(default)]
+    pub effect_row: Vec<String>,
+    #[serde(default)]
+    pub failure_row: Vec<String>,
+}
+
+pub fn load_practical_alpha1_package_path(
+    path: impl AsRef<Path>,
+) -> Result<PracticalAlpha1Package, PracticalAlpha1FrontDoorError> {
+    let resolved_path = resolve_package_path(path.as_ref())?;
+    let text =
+        fs::read_to_string(&resolved_path).map_err(|error| PracticalAlpha1FrontDoorError {
+            kind: PracticalAlpha1FrontDoorErrorKind::Io,
+            path: resolved_path.clone(),
+            detail: error.to_string(),
+        })?;
+
+    parse_practical_alpha1_package_text_at_path(&text, &resolved_path)
+}
+
+pub fn parse_practical_alpha1_package_text(
+    text: &str,
+) -> Result<PracticalAlpha1Package, PracticalAlpha1FrontDoorError> {
+    parse_practical_alpha1_package_text_at_path(text, Path::new("<inline>"))
+}
+
+fn parse_practical_alpha1_package_text_at_path(
+    text: &str,
+    path: &Path,
+) -> Result<PracticalAlpha1Package, PracticalAlpha1FrontDoorError> {
+    let package = serde_json::from_str::<PracticalAlpha1Package>(text).map_err(|error| {
+        let kind = match error.classify() {
+            Category::Syntax | Category::Eof => PracticalAlpha1FrontDoorErrorKind::JsonParse,
+            Category::Data => PracticalAlpha1FrontDoorErrorKind::SchemaDecode,
+            Category::Io => PracticalAlpha1FrontDoorErrorKind::Io,
+        };
+        PracticalAlpha1FrontDoorError {
+            kind,
+            path: path.to_path_buf(),
+            detail: error.to_string(),
+        }
+    })?;
+
+    validate_package_shape(&package, path)?;
+    Ok(package)
+}
+
+fn resolve_package_path(path: &Path) -> Result<PathBuf, PracticalAlpha1FrontDoorError> {
+    if path.is_dir() {
+        let candidate = path.join(PRACTICAL_ALPHA1_PACKAGE_FILE_NAME);
+        if candidate.exists() {
+            return Ok(candidate);
+        }
+
+        return Err(PracticalAlpha1FrontDoorError {
+            kind: PracticalAlpha1FrontDoorErrorKind::MissingPackageFile,
+            path: candidate,
+            detail: format!(
+                "package directory is missing {}",
+                PRACTICAL_ALPHA1_PACKAGE_FILE_NAME
+            ),
+        });
+    }
+
+    if path.file_name().and_then(|name| name.to_str()) != Some(PRACTICAL_ALPHA1_PACKAGE_FILE_NAME) {
+        return Err(PracticalAlpha1FrontDoorError {
+            kind: PracticalAlpha1FrontDoorErrorKind::MissingPackageFile,
+            path: path.to_path_buf(),
+            detail: format!(
+                "practical alpha-1 front-door only accepts {}",
+                PRACTICAL_ALPHA1_PACKAGE_FILE_NAME
+            ),
+        });
+    }
+
+    if path.exists() {
+        return Ok(path.to_path_buf());
+    }
+
+    Err(PracticalAlpha1FrontDoorError {
+        kind: PracticalAlpha1FrontDoorErrorKind::MissingPackageFile,
+        path: path.to_path_buf(),
+        detail: "package file does not exist".to_string(),
+    })
+}
+
+fn validate_package_shape(
+    package: &PracticalAlpha1Package,
+    path: &Path,
+) -> Result<(), PracticalAlpha1FrontDoorError> {
+    if package.format_version != PRACTICAL_ALPHA1_FORMAT_VERSION {
+        return Err(schema_error(
+            path,
+            format!(
+                "unsupported format_version `{}`; expected `{}`",
+                package.format_version, PRACTICAL_ALPHA1_FORMAT_VERSION
+            ),
+        ));
+    }
+
+    match package.package_kind.as_str() {
+        "world" => {
+            if package.world.is_none() {
+                return Err(schema_error(
+                    path,
+                    "world package must include `world`".to_string(),
+                ));
+            }
+        }
+        "layer" | "object" | "runtime" | "avatar" | "adapter" => {}
+        other => {
+            return Err(schema_error(
+                path,
+                format!("unsupported package_kind `{other}`"),
+            ));
+        }
+    }
+
+    Ok(())
+}
+
+fn schema_error(path: &Path, detail: String) -> PracticalAlpha1FrontDoorError {
+    PracticalAlpha1FrontDoorError {
+        kind: PracticalAlpha1FrontDoorErrorKind::SchemaDecode,
+        path: path.to_path_buf(),
+        detail,
+    }
+}

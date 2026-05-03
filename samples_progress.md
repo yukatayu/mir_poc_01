@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-03 15:27 JST
+Last updated: 2026-05-03 16:03 JST
 Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, Sugoroku world and avatar follow representative slices, typed external / network / projection / viewer helper evidence, hot-plug P21 narrow runtime floor, and the new practical alpha-1 package line. `samples/alpha/` remains the alpha-0 evidence root and is not the practical front-door root.
-Current active packages: `P-A1-00` practical-alpha-rebaseline is closeout-complete in current repo state and repairs progress semantics only. `P-A1-01` alpha-source front-door design is the next promoted package. `P-A0-01..28` remain closed as current-scope evidence closeout; post-`P21` later-family docs-first trilogy remains closed; actual `U1` commitment remains a separate public-boundary gate.
+Current active packages: `P-A1-01` alpha-source front-door is closeout-complete in current repo state and adds the first practical source/package input floor. `P-A1-02` typed IR/checker integration is the next promoted package. `P-A0-01..28` remain closed as current-scope evidence closeout; post-`P21` later-family docs-first trilogy remains closed; actual `U1` commitment remains a separate public-boundary gate.
 
 ## Legend
 
@@ -27,17 +27,17 @@ Notes:
 ## Current Practical Alpha-1 stage
 
 - Large stage:
-  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` alpha-source front-door is promoted next
+  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` typed IR/checker is promoted next
 - Concrete phase:
-  Phase 1/9 — practical readiness semantics are rebased; practical front-door work is next
+  Phase 2/9 — practical front-door is present; typed IR/checker work is next
 - Package status:
-  `P-A1-00` practical-alpha-rebaseline is the last closed package in current repo state
+  `P-A1-01` alpha-source front-door is the last closed package in current repo state
 - Current status:
-  `P-A1-00` separates historical alpha-0 evidence closeout from practical alpha-1 readiness. `specs/18` and `plan/44` now define the practical lane, while `samples/alpha/` remains an evidence root only. No new practical front-door parser/loader, practical runtime command, or product prototype root is claimed by this package.
+  `P-A1-01` adds `samples/practical-alpha1/` and `crates/mir-ast::practical_alpha1` as the first practical source/package front-door floor. `SRC-01..05` now validate positive/negative loading for limited `package.mir.json` inputs. This does not yet claim typed checker/runtime execution, practical CLI commands, or product prototype completion.
 - Next package:
-  `P-A1-01` alpha-source front-door design
+  `P-A1-02` typed IR/checker integration
 - Current practical blocker:
-  practical source/package input, typed IR/checker, runtime-plan execution, practical transport/save-load/devtools commands, and product prototype root are still open
+  typed IR/checker, runtime-plan execution, practical transport/save-load/devtools commands, and product prototype root are still open
 
 ## Current-scope alpha-0 evidence closeout reference
 
@@ -56,7 +56,7 @@ Summary の `Overall %` は mixed floor の rough maturity であり、この se
 
 | Layer | Overall % | Status | Current focus | Next validation |
 |---|---:|---|---|---|
-| Practical alpha-1 toolchain | 15 | promoted roadmap | `P-A1-00` closed the practical/evidence split; next is practical source/package front-door under future `samples/practical-alpha1/` | `python3 -m unittest scripts.tests.test_validate_docs && python3 scripts/check_source_hierarchy.py && python3 scripts/validate_docs.py` |
+| Practical alpha-1 toolchain | 25 | promoted roadmap | `P-A1-01` closed the first practical source/package front-door over `samples/practical-alpha1/`; next is reusable typed IR/checker integration | `cargo test -p mir-ast && python3 -m unittest scripts.tests.test_validate_docs && python3 scripts/check_source_hierarchy.py && python3 scripts/validate_docs.py` |
 | Mir core | 90 | active current layer | `samples/current-l2/` base corpus + source-corpus regression + clean-near-end compatibility front door | `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` |
 | clean near-end suite | 90 | active clean suite | typing / order-handoff / model-check / modal runnable floor | `python3 scripts/clean_near_end_samples.py closeout` |
 | Lean / theorem | 89 | active proof bridge | small proof foundations + clean-near-end generated theorem stubs; live subject = `e5`, compare floor = `05_delegated_rng_service`, committed bridge floor = `samples/lean/foundations` + `samples/lean/clean-near-end`, `e2` remains foundation/contrast anchor | `python3 scripts/current_l2_lean_sample_sync.py` |
@@ -86,8 +86,8 @@ Summary の `Overall %` は mixed floor の rough maturity であり、この se
 | Package / stage | Progress | Status | Path / validation anchor | Notes |
 |---|---:|---|---|---|
 | `PA1-0` / `P-A1-00` | 100% | closed | `specs/18-practical-alpha1-scope.md`, `plan/44-practical-alpha1-roadmap.md`, docs validators | future `100%` now means practical readiness unless explicitly marked as evidence closeout |
-| `PA1-1` / `P-A1-01` | 10% | promoted next | future `samples/practical-alpha1/` + parser/loader tests | limited alpha source/package front-door; final grammar freeze is non-goal |
-| `PA1-2` / `P-A1-02` | 10% | pending | future IR/checker module + `check` command | alpha-0 checker floors are prerequisites only |
+| `PA1-1` / `P-A1-01` | 100% | closed | `samples/practical-alpha1/`, `crates/mir-ast/src/practical_alpha1.rs`, `cargo test -p mir-ast practical_alpha1_front_door -- --nocapture` | limited alpha source/package front-door; final grammar freeze is non-goal |
+| `PA1-2` / `P-A1-02` | 10% | promoted next | future IR/checker module + `check` command | alpha-0 checker floors are prerequisites only |
 | `PA1-3` / `P-A1-03` | 10% | pending | future runtime-plan runner + event DAG export | must not depend only on sample-ID keyed bridge |
 | `PA1-4` / `P-A1-04` | 10% | pending | future package manifest / admission checker | debug/rate-limit/auth/object attach path |
 | `PA1-5` / `P-A1-05` | 10% | pending | future product-like Docker/local TCP harness | same practical package input as local run |
@@ -112,7 +112,8 @@ Top-level matrix の `Progress` は sample/family maturity estimate であり、
 
 | Sample ID | Layer | Path / command | Kind | Progress | Positive/Negative | Last validation | Docs / reports | Notes |
 |---|---|---|---|---:|---|---|---|---|
-| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-03 15:27 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097`, `1098`, `1100`, `1101`, `1102`, `1103`, `1104`, `1105`, `1106`, `1107`, `1108`, `1109`, `1110`, `1111`, `1112`, `1113`, `1114`, `1115`, `1116`, `1117`, `1118`, `1119`, `1120`, `1121`, `1122`, `1123`, `1124`, `1130`, `1131`, `1132`, `1133`, `1134`, `1135`, `1136` | Snapshot docs are maintenance artifacts, not normative specs; `P-A1-00` rebaselined future `100%` to practical alpha-1 readiness, retained Stage A..F `100%` only as evidence-closeout reference, and reran source hierarchy / docs scaffold / latest-report guardrail / `cargo fmt --check` / diff checks on the rebaseline tree |
+| `PH0` | repository memory | `samples_progress.md`, `docs/reports/`, `scripts/check_source_hierarchy.py` | dashboard / hierarchy check | 90 | mixed | 2026-05-03 16:03 JST | `0945`, `0996`, `0997`, `0998`, `1001`, `1053`, `1066`, `1076`, `1077`, `1078`, `1079`, `1080`, `1081`, `1082`, `1083`, `1084`, `1085`, `1086`, `1087`, `1088`, `1089`, `1090`, `1091`, `1092`, `1093`, `1094`, `1095`, `1096`, `1097`, `1098`, `1100`, `1101`, `1102`, `1103`, `1104`, `1105`, `1106`, `1107`, `1108`, `1109`, `1110`, `1111`, `1112`, `1113`, `1114`, `1115`, `1116`, `1117`, `1118`, `1119`, `1120`, `1121`, `1122`, `1123`, `1124`, `1130`, `1131`, `1132`, `1133`, `1134`, `1135`, `1136`, `1137` | Snapshot docs are maintenance artifacts, not normative specs; `P-A1-00` rebaselined future `100%` to practical alpha-1 readiness, retained Stage A..F `100%` only as evidence-closeout reference, and `P-A1-01` extended the practical front-door root / validator floor without promoting runtime or public-alpha claims |
+| `SRC-01..05` | practical alpha-1 front-door | `samples/practical-alpha1/packages/`, `cargo test -p mir-ast practical_alpha1_front_door -- --nocapture` | library-first package loader floor | 65 | positive + negative | 2026-05-03 16:03 JST | `1137` | limited `package.mir.json` load/parse floor via `crates/mir-ast::practical_alpha1`, with explicit basename boundary, widened positive expectations, and missing-package / unsupported-shape rejects; not final textual grammar, typed checker verdict, runtime execution, or practical CLI |
 | `PH1` | Mir current-L2 | `samples/current-l2/` | base corpus | 90 | positive + negative | 2026-05-01 13:52 JST | `0904`, `0913`, `0998`, `1066`, `1076`, `1084`, `1085`, `1091`, `1092` | base source corpus; source regression includes formal-hook smoke, theorem Lean-stub conformance, and model-check carrier conformance; final parser / public API deferred |
 | `PH6` | clean near-end | `samples/clean-near-end/` | active clean suite | 90 | positive + negative | 2026-05-01 13:52 JST | `0945`, `0959`, `0988`, `0989`, `0998`, `1066`, `1076`, `1085`, `1091`, `1092` | current canonical runnable suite |
 | `SUG-01` | Sugoroku attach | `samples/clean-near-end/sugoroku-world/01_runtime_attach_game.mir` | active runnable | 90 | positive | 2026-05-01 13:52 JST | `0955`, `0977`, `0986`, `0997`, `0998`, `1066`, `1076`, `1085`, `1092` | attach lifecycle / compatibility anchor |
@@ -178,6 +179,7 @@ Top-level matrix の `Progress` は sample/family maturity estimate であり、
 
 | Time | Command | Result | Notes |
 |---|---|---|---|
+| 2026-05-03 16:03 JST | P-A1-01 alpha-source front-door gate | pass | `cargo test -p mir-ast practical_alpha1_front_door -- --nocapture` passed 11 tests; `cargo test -p mir-ast` passed 73 tests; `python3 -m unittest scripts.tests.test_validate_docs` passed 11 tests; `python3 scripts/check_source_hierarchy.py` reported `73/73/0`; `python3 scripts/validate_docs.py` reported complete docs scaffold with 1139 numbered reports; `cargo fmt --check` and `git diff --check` were clean. This validates the separate practical root plus library-first `package.mir.json` load/parse floor only, not final textual grammar, typed checker/runtime execution, practical CLI/Docker command, save/load command, or product prototype completion. |
 | 2026-05-03 15:27 JST | P-A1-00 practical-alpha-rebaseline gate | pass | `python3 -m unittest scripts.tests.test_validate_docs` passed 11 tests; `python3 scripts/check_source_hierarchy.py` reported `63/63/0`; `python3 scripts/validate_docs.py` reported complete docs scaffold; `cargo fmt --check` and `git diff --check` were clean. This validates practical/evidence progress semantics repair, new `specs/18` / `plan/44`, snapshot/docs/validator sync, and reviewer-follow-up wording fixes only; no practical front-door parser/loader, runtime command, or product prototype is claimed. |
 | 2026-05-03 12:15 JST | P-A0-28 Stage A imported-baseline reconciliation gate | pass | `python3 scripts/current_l2_guided_samples.py closeout --format json`, `python3 scripts/current_l2_lean_sample_sync.py`, `python3 scripts/clean_near_end_samples.py closeout`, `python3 scripts/sugoroku_world_samples.py closeout --format json`, `python3 scripts/avatar_follow_samples.py closeout --format json`, `python3 scripts/typed_external_boundary_samples.py closeout --format json`, `python3 scripts/network_transport_samples.py check-all --format json`, `python3 scripts/projection_codegen_samples.py check-all --format json`, `python3 scripts/visual_debugger_viewer_samples.py closeout --format json`, and `cargo test -p mir-runtime --test hotplug_runtime_skeleton` were all green. `python3 -m unittest scripts.tests.test_validate_docs`, `python3 scripts/check_source_hierarchy.py`, `python3 scripts/validate_docs.py`, `cargo fmt --check`, and `git diff --check` also passed. This validates imported Stage A baseline reconciliation only, not new runtime semantics, `samples/alpha/` runnable-root promotion, parser/runtime front-door execution, or public alpha / `U1` completion. |
 | 2026-05-03 11:38 JST | P-A0-27 Stage F integrated alpha closeout gate | pass | `python3 -m unittest scripts.tests.test_alpha_e2e_samples` passed 10 tests and the combined alpha Python suite passed 40 tests; `cargo test -p mirrorea-core --test runtime_substrate` passed 16 tests; `cargo test -p mir-runtime --test alpha_local_runtime --test alpha_cut_save_load_runtime --test alpha_layer_insertion_runtime --test alpha_network_runtime --test alpha_avatar_runtime` passed 28 tests; sequential `python3 scripts/alpha_cut_save_load_samples.py check-all --format json`, `python3 scripts/alpha_visualization_samples.py check-all --format json`, `python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json`, `python3 scripts/alpha_network_docker_e2e.py check-all --format json`, `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`, `python3 scripts/alpha_e2e_samples.py check-all --format json`, `python3 scripts/alpha_e2e_samples.py closeout --format json`, and `python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json` were all green; `python3 scripts/check_source_hierarchy.py`, `python3 scripts/validate_docs.py`, `cargo fmt --check`, and `git diff --check` were clean. This validates the current-scope Stage F closeout only, not `E2E-08`, public alpha / `U1`, distributed save/load completion, active runnable-root promotion, or final public runtime/viewer/transport/hot-plug ABI. |

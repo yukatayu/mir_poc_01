@@ -1,0 +1,20 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "src-04-layer-manifest",
+  "package_kind": "layer",
+  "manifest": {
+    "version": "0.1.0",
+    "requires_capabilities": [
+      "admin.attach_layer"
+    ],
+    "provided_capabilities": [
+      "observe.debug_trace"
+    ],
+    "effect_row": [
+      "observe.debug_trace"
+    ],
+    "failure_row": [
+      "AttachDenied"
+    ]
+  }
+}
