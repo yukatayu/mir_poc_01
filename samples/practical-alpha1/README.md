@@ -1,6 +1,6 @@
 # samples/practical-alpha1
 
-This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, and first practical devtools export bundle family.
+This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, first practical devtools export bundle family, and first practical local save/load family.
 
 - It is separate from `samples/alpha/`, which remains the alpha-0 evidence root.
 - It is not yet the active runnable root for the whole repo.
@@ -20,6 +20,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   local TCP / Docker Compose TCP package transport with distinct transport-plan/report carriers and exact expected `TR-A1-01..07` reports.
 - `P-A1-06` adds the first practical devtools export cut here:
   `scripts/practical_alpha1_export_devtools.py` emits distinct devtools bundles with exact expected `VIS-A1-01/02/06` JSON and a non-final static HTML viewer surface.
+- `P-A1-07` adds the first practical local save/load cut here:
+  `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
 - This front-door is non-final and does not freeze the final public grammar.
 
 ## Current package map
@@ -60,10 +62,16 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   - `TR-A1-05`: missing witness rejected at the practical transport admission boundary
   - `TR-A1-06`: observer-safe route trace emitted with separated lanes
   - `TR-A1-07`: auth evidence preserved in a lane distinct from transport delivery
+- `packages/sl-a1-*/`
+  - `SL-A1-01`: one exact local-runtime frontier is saved and resumed through a distinct save-load carrier
+  - `SL-A1-02`: one exact local-runtime frontier is saved, later membership freshness advances are injected, and resumed dispatch is rejected
 - `expected/vis-a1-*.expected.json`
   - `VIS-A1-01`: event DAG + publication / witness / handoff relation export
   - `VIS-A1-02`: observer-safe route trace export
   - `VIS-A1-06`: redacted observer view with auth-lane separation
+- `expected/sl-a1-*.expected.json`
+  - `SL-A1-01`: local-only roundtrip resume through a saved local frontier
+  - `SL-A1-02`: stale-membership non-resurrection after restore
 
 ## Current boundary
 
@@ -74,10 +82,13 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
 - The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/06`.
+- The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked world packages for transport are lowered through a distinct transport-plan carrier before transport report assembly.
 - Exact practical reports are lowered through a distinct devtools export bundle before non-final viewer rendering.
+- Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
+- `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
 - It does not complete the full `specs/18` typed-checking list.
-- It does not complete final object package attach, detach runtime lifecycle, WAN/federation, local save/load command, full devtools export, product prototype, or final public runtime/devtools/transport ABI.
+- It does not complete final object package attach, detach runtime lifecycle, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, full devtools export, product prototype, or final public runtime/devtools/transport/save-load ABI.

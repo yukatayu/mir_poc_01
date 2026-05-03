@@ -28,6 +28,7 @@
 - `scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` が projection/codegen current first-cut の committed generated bridge evidence と live-anchor alignment floor を持つ
 - `scripts/visual_debugger_viewer_samples.py` が helper/runtime typed visualization inventory を typed public prototype inventory へ正規化する current first-cut surface を持つ
 - `scripts/practical_alpha1_export_devtools.py` が exact practical local-runtime / transport reports を distinct practical devtools export bundle へ正規化する current first-cut surface を持つ
+- `scripts/practical_alpha1_save_load.py` が one exact practical local-runtime frontier と distinct save-load plan から saved local frontier / non-final save-load report を正規化する current first-cut surface を持つ
 - `scripts/alpha_visualization_samples.py` が alpha-local `VIS-01/02/03/05/06/07/08/10/11` を dedicated Stage-E subset runner として actualize し、`stage-e-closeout` で current-scope Stage E closeout surface を与えている
 - `scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` が repository memory / report / dashboard 側の baseline check になる
 
@@ -199,6 +200,8 @@
 - `P-A1-04a` は closed であり、`crates/mir-ast/src/practical_alpha1_hotplug_plan.rs`、`crates/mir-runtime/src/practical_alpha1_hotplug.rs`、example `mir_practical_alpha1_attach`、`scripts/practical_alpha1_attach.py`、`HP-A1-01..05` practical fixtures により checked practical package -> hotplug plan -> non-final hot-plug report の layer-only first floor を actualize した
 - `P-A1-04b` / `P-A1-04c` は closed であり、attach-time stale-membership / missing-witness negatives、narrow object package attach preview seam、explicit deferred detach minimal contract を same hot-plug carrier lane に追加した
 - `P-A1-05` は closed であり、`crates/mir-ast/src/practical_alpha1_transport_plan.rs`、`crates/mir-runtime/src/practical_alpha1_transport.rs`、example `mir_practical_alpha1_transport`、`scripts/practical_alpha1_transport.py`、`TR-A1-01..07` practical fixtures により checked practical package -> transport plan -> non-final transport report の first practical transport floor を actualize した
+- `P-A1-06` は closed であり、`scripts/practical_alpha1_export_devtools.py`、exact expected `VIS-A1-01/02/06` bundles により exact practical reports -> distinct devtools export bundle -> non-final viewer の first practical devtools export floor を actualize した
+- `P-A1-07` は closed であり、`crates/mir-ast/src/practical_alpha1_save_load_plan.rs`、`crates/mir-runtime/src/practical_alpha1_save_load.rs`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`SL-A1-01/02` practical fixtures により checked practical package -> runtime plan と one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report の first practical local save/load floor を actualize した
 - `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
 - current practical root は separate に存在するが、まだ active canonical runnable root や product-like CLI root ではない
 - current promoted line は later-family blocker widening ではなく、

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 22:25 JST
+最終更新: 2026-05-03 23:18 JST
 
 ## この文書について
 
@@ -15,8 +15,8 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - practical alpha-1 line が新しい promoted package line です:
   `specs/18`、`plan/44`、`samples/practical-alpha1/` を軸に、alpha-0 evidence closeout を prerequisite として保持しつつ、front-door -> checker -> runtime -> hot-plug -> transport -> devtools -> save/load -> product prototype の順で practical toolchain を組み上げます。
-- `P-A1-06` first practical devtools export floor は 2026-05-03 22:25 JST に close しました:
-  `scripts/practical_alpha1_export_devtools.py`、`scripts/tests/test_practical_alpha1_export_devtools.py`、`samples/practical-alpha1/expected/vis-a1-01-event-dag-export.expected.json`、`samples/practical-alpha1/expected/vis-a1-02-route-trace-export.expected.json`、`samples/practical-alpha1/expected/vis-a1-06-redacted-observer-view.expected.json`、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で `P-A1-06` を full devtools completion に広げず、exact practical reports -> distinct devtools export bundle -> non-final viewer の carrier split に narrow した。`VIS-A1-01` event DAG + publication/witness/handoff relation export、`VIS-A1-02` observer-safe route trace export、`VIS-A1-06` auth-lane separated redacted observer view を actualize し、`VIS-A1-03/04/05/07` は deferred observables として保持した。`python3 scripts/practical_alpha1_check.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_attach.py check-all --format json`、`python3 scripts/practical_alpha1_transport.py check-all --format json`、`python3 scripts/practical_alpha1_export_devtools.py list --format json`、`python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-01 --format json`、`python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-02 --format json`、`python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-06 --format json`、`python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-06 --format json`、`python3 scripts/practical_alpha1_export_devtools.py check-all --format json`、`python3 scripts/practical_alpha1_export_devtools.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_practical_alpha1_transport scripts.tests.test_practical_alpha1_export_devtools scripts.tests.test_validate_docs` が pass した。これは first practical devtools export floor であり、membership timeline、hot-plug lifecycle、fallback degradation、retention/on-demand trace、local save/load、product prototype、final public viewer/telemetry ABI はまだ claim しない。
+- `P-A1-07` first practical local save/load floor は 2026-05-03 23:18 JST に close しました:
+  `crates/mir-ast::practical_alpha1_save_load_plan`、`crates/mir-runtime::practical_alpha1_save_load`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`scripts/tests/test_practical_alpha1_save_load.py`、`samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/`、`samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/`、exact expected `sl-a1-*.expected.json`、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で save/load path を local-runtime report 直列化へ寄せず、one exact practical local-runtime frontier と distinct save-load plan に依存する saved local frontier + non-final save-load report に narrow した。`SL-A1-01` local-only roundtrip resume と `SL-A1-02` stale-membership non-resurrection を actualize し、`CHK-CUT-01` reuse は orphan-receive checker guard に限定した。`cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`、`cargo test -p mir-ast practical_alpha1_checker -- --nocapture`、`cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_save_load_plan -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_save_load -- --nocapture`、`python3 scripts/practical_alpha1_check.py run CHK-CUT-01 --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-01 --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-02 --format json`、`python3 scripts/practical_alpha1_save_load.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs` が pass した。これは first practical local save/load floor であり、distributed durable save/load、stale witness / stale lease non-resurrection completion、queue/channel/transport persistence、final public save-load ABI はまだ claim しない。
 - `P-A1-00` rebaseline validation freshness は 2026-05-03 15:27 JST に更新済みです:
   `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、new `specs/18` / `plan/44` と progress semantics repair が snapshot docs / validators に反映された。sub-agent review で見つかった `Documentation.md` / dashboard wording drift も反映済みである。これは docs/spec/taxonomy rebaseline package であり、practical front-door / parser / runtime implementation success はまだ claim しない。
 - Alpha-0 evidence closeout line は retained reference です:
@@ -26,7 +26,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-07` local save/load command が next gate である。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-08` practical product prototype が next gate である。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -73,15 +73,15 @@
 ## Current Practical Alpha-1 stage
 
 - Large stage:
-  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` 100% package/hot-plug practical API closeout; `PA1-5` 100% transport practical E2E closeout; `PA1-6` 45% first practical devtools export floor closed
+  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` 100% package/hot-plug practical API closeout; `PA1-5` 100% transport practical E2E closeout; `PA1-6` 45% first practical devtools export floor closed; `PA1-7` 45% first practical local save/load floor closed
 - Concrete phase:
-  Phase 7/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、first practical devtools export floor are in place; next stage is `P-A1-07` local save/load command
+  Phase 8/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、first practical devtools export floor、first practical local save/load floor are in place; next stage is `P-A1-08` practical product prototype
 - Package status:
-  `P-A1-06` first practical devtools export floor is the last closed package in repo state
+  `P-A1-07` first practical local save/load floor is the last closed package in repo state
 - Current status:
-  `P-A1-06` は `scripts/practical_alpha1_export_devtools.py` と exact expected `vis-a1-*.expected.json` bundles を actualize し、exact practical reports を distinct devtools export bundle へ下ろす first practical devtools floor を与えた。`VIS-A1-01` event DAG + publication/witness/handoff relation export、`VIS-A1-02` observer-safe route trace export、`VIS-A1-06` auth-lane separated redacted observer view が current admissible set であり、`VIS-A1-03/04/05/07`、save/load、product prototype はまだ later である。
+  `P-A1-07` は distinct save-load plan、saved local frontier、non-final save-load report を actualize し、`SL-A1-01` local-only roundtrip resume と `SL-A1-02` stale-membership non-resurrection を current admissible set に入れた。saved carrier は `runtime_snapshot` だけではなく `current_owner` / `visible_history` / `pending_envelopes = []` を保持し、`CHK-CUT-01` reuse は orphan-receive checker guard に限定される。distributed durable save/load、stale witness / stale lease non-resurrection completion、queue/channel/transport persistence、product prototype はまだ later である。
 - Next autonomous package:
-  `P-A1-07` local save/load command
+  `P-A1-08` practical product prototype
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into the practical alpha-1 package series
 
@@ -129,7 +129,7 @@
 | `PA1-4` / `P-A1-04a+b+c` | 100% | closed | `P-A1-04a` closed the first layer/package floor, `P-A1-04b` added missing-witness/stale-membership negatives and the object package attach preview seam, and `P-A1-04c` closed the explicit deferred detach minimal contract boundary |
 | `PA1-5` / `P-A1-05` | 100% | closed | same practical package input で local TCP / Docker Compose TCP を動かし、`TR-A1-01..07` と distinct transport-plan/report carrier を exact expected reports まで揃える |
 | `PA1-6` / `P-A1-06` | 45% | first floor closed | distinct devtools export bundle + non-final viewer over exact practical reports; current actualized observables are `VIS-A1-01/02/06`, while `VIS-A1-03/04/05/07` remain deferred |
-| `PA1-7` / `P-A1-07` | 10% | pending | practical `save` / `load` command、local roundtrip、stale membership non-resurrection、invalid distributed cut reject |
+| `PA1-7` / `P-A1-07` | 45% | first floor closed | practical `save` / `load` command の first floor として `SL-A1-01/02`、distinct save-load plan、saved local frontier、non-final save-load report を actualizeし、`CHK-CUT-01` reuse を orphan-receive guard に限定する |
 | `PA1-8` / `P-A1-08` | 0% | pending | small product prototype を local + Docker で動かし、layer/package attach、avatar fallback、save/load、devtools export、hands-on docs を揃える |
 
 ## current-scope evidence closeout map
@@ -179,9 +179,9 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A1-07` local save/load command | repo | promoted next | add local-only `save` / `load` command after the first practical devtools export floor exists |
+| 1 | `P-A1-08` practical toolchain/product prototype | repo | promoted next | bind local + Docker + hot-plug + save/load + devtools into one small product-like world package after the lower floors exist |
 | 2 | remaining `P-A1-06` devtools observables | repo | staged later | widen from `VIS-A1-01/02/06` to `VIS-A1-03/04/05/07` only when practical evidence exists without synthetic overclaim |
-| 3 | `P-A1-08` practical toolchain/product prototype | repo | staged later | bind local + Docker + hot-plug + save/load + devtools into one small product-like world package after the lower floors exist |
+| 3 | save/load widening after `P-A1-07` | repo | staged later | reopen only when stale witness / stale lease / distributed durable save/load semantics can be added without collapsing the saved local frontier boundary |
 | 4 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
 | 5 | `U1` actual commitment | user + repo | later | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 6 | maintenance / dashboard freshness | repo | active | keep practical/evidence split wording and validation anchors current while package line advances |
@@ -239,7 +239,7 @@ These are safe to do without new product decisions.
 | `P-A1-04c` | practical detach minimal contract | closed | explicit deferred detach-time contract over the current practical hot-plug floor via `operation_kind = detach` and `detach_boundary_ref`, without claiming rollback/migration/native/public ABI completion |
 | `P-A1-05` | transport practical E2E | closed | same practical package input now lowers to distinct practical transport-plan/report carriers and exact expected `TR-A1-01..07` reports over local TCP and Docker Compose TCP surfaces |
 | `P-A1-06` | devtools viewer | closed | first practical devtools export floor over exact practical reports, with `VIS-A1-01/02/06` actualized and `VIS-A1-03/04/05/07` deferred |
-| `P-A1-07` | local save/load command | pending | practical save/load CLI or library path with negative stale-state checks |
+| `P-A1-07` | local save/load command | closed | practical save/load CLI/library path with `SL-A1-01/02`, distinct save-load plan, saved local frontier, and negative stale-membership check |
 | `P-A1-08` | practical alpha product prototype | pending | one small product-like world package with local + Docker + hot-plug + save/load + devtools |
 
 ## user decision blockers
@@ -324,13 +324,13 @@ These are safe to do without new product decisions.
 ### Blocker 9. save/load initial scope and UI target
 
 - overview:
-  choose whether initial save/load is local-only or multi-Place, and whether alpha UI target is CLI, HTML viewer, or richer client.
+  initial local-only save/load floor is now fixed, but the next widening still needs a choice between distributed/durable semantics later and what product-facing UI target should expose save/load.
 - affects:
-  `P-A0-06`, `P-A0-09`, visualization/devtools scope, non-claim wording.
+  `P-A1-07`, `P-A1-08`, later save/load widening, visualization/devtools scope, non-claim wording.
 - current recommendation:
-  `local-only save/load + HTML/JSON viewer first`.
+  keep `local-only save/load + HTML/JSON viewer first` for the current floor, and postpone distributed/durable widening until a dedicated consistency carrier exists.
 - reason:
-  `P-A0-12` already actualized the local-only save/load bridge, distributed save/load without consistent cut is disallowed, and the current viewer evidence is closest to typed HTML/JSON surfaces.
+  `P-A1-07` now actualizes the first practical local-only save/load floor, distributed save/load without consistent cut is still disallowed, and the current viewer evidence is still closest to typed HTML/JSON surfaces.
 
 ## research-discovery items
 

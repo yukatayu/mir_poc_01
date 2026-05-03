@@ -29,6 +29,7 @@ const PRACTICAL_ALPHA1_FRONT_DOOR_ACCEPTED_SURFACE_REFS: &[&str] = &[
     "alpha_local_runtime_input",
     "alpha_local_hotplug_input",
     "alpha_local_transport_input",
+    "alpha_local_save_load_input",
 ];
 
 const PRACTICAL_ALPHA1_FRONT_DOOR_CODE_ANCHOR_REFS: &[&str] = &[
@@ -108,6 +109,8 @@ pub struct PracticalAlpha1Package {
     pub alpha_local_hotplug_input: Option<PracticalAlpha1AlphaLocalHotPlugInput>,
     #[serde(default, alias = "transport")]
     pub alpha_local_transport_input: Option<PracticalAlpha1AlphaLocalTransportInput>,
+    #[serde(default, alias = "save_load")]
+    pub alpha_local_save_load_input: Option<PracticalAlpha1AlphaLocalSaveLoadInput>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -306,6 +309,22 @@ pub struct PracticalAlpha1AlphaLocalTransportInput {
     pub notes: Vec<String>,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1AlphaLocalSaveLoadInput {
+    pub sample_id: String,
+    pub scenario_kind: PracticalAlpha1SaveLoadScenarioKind,
+    pub required_base_terminal_outcome: String,
+    pub required_saved_owner: String,
+    pub required_saved_publish_history_entry: String,
+    pub required_saved_history_tail: String,
+    pub resumed_dispatch_program: PracticalAlpha1RuntimeDispatchProgram,
+    pub resumed_envelope: PracticalAlpha1RuntimeEnvelope,
+    #[serde(default)]
+    pub post_restore_membership_advances: Vec<PracticalAlpha1RuntimeMembershipAdvance>,
+    #[serde(default)]
+    pub notes: Vec<String>,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum PracticalAlpha1HotPlugOperationKind {
@@ -318,6 +337,13 @@ pub enum PracticalAlpha1HotPlugOperationKind {
 pub enum PracticalAlpha1TransportSurface {
     LocalTcp,
     DockerComposeTcp,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PracticalAlpha1SaveLoadScenarioKind {
+    ResumeOneDispatch,
+    RejectStaleMembership,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

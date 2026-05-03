@@ -182,6 +182,31 @@ repository-memory roadmap を置く。
 - local roundtrip
 - stale membership non-resurrection
 - invalid distributed cut reject
+- current actualized cut after `P-A1-07`:
+  - `crates/mir-ast/src/practical_alpha1_save_load_plan.rs`
+  - `crates/mir-runtime/src/practical_alpha1_save_load.rs`
+  - example `crates/mir-runtime/examples/mir_practical_alpha1_save_load.rs`
+  - `scripts/practical_alpha1_save_load.py`
+  - `samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/`
+  - `samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/`
+  - `samples/practical-alpha1/expected/sl-a1-01-local-save-load-resume.expected.json`
+  - `samples/practical-alpha1/expected/sl-a1-02-local-load-stale-membership-rejected.expected.json`
+- current actualized rows:
+  - `SL-A1-01`
+  - `SL-A1-02`
+- current carrier split:
+  - `checked package -> runtime plan`
+  - `checked package + one exact local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report`
+- current guard reuse:
+  - `CHK-CUT-01` is reused only as an existing orphan-receive checker guard
+- current non-claim:
+  - full save/load completion ではない
+  - full consistent-cut / `Z-cycle` completion ではない
+  - stale witness / stale lease non-resurrection completion ではない
+  - distributed durable save/load ではない
+  - Docker/local TCP save/load ではない
+  - hot-plug lifecycle persistence ではない
+  - final public save-load ABI ではない
 
 ### PA1-8 — practical product prototype
 
@@ -207,9 +232,9 @@ recommended current promoted line:
 8. `P-A1-07` local save/load command
 9. `P-A1-08` product prototype
 
-current reading after `P-A1-06`:
+current reading after `P-A1-07`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06` are closed
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07` are closed
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -225,7 +250,11 @@ current reading after `P-A1-06`:
 - `P-A1-06` fixed a fourth distinct carrier split:
   `exact practical reports -> distinct devtools export bundle -> non-final viewer`
 - `P-A1-06` actualized `VIS-A1-01/02/06` as event DAG + publication/witness/handoff export, observer-safe route trace export, and redacted observer view with auth-lane separation
-- `P-A1-07` is the promoted next package after the `P-A1-06` first floor
+- `P-A1-07` fixed a fifth distinct carrier split:
+  `checked package -> runtime plan`, plus `one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report`
+- `P-A1-07` actualized `SL-A1-01/02` as local-only roundtrip resume and stale-membership non-resurrection first-floor rows
+- `CHK-CUT-01` is reused in `P-A1-07` only as an orphan-receive checker guard, not as full consistent-cut or `Z-cycle` completion
+- `P-A1-08` is the promoted next package after the `P-A1-07` first floor
 
 ## readiness reading
 

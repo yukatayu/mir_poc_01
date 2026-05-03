@@ -236,6 +236,34 @@ final public transport API と同一視しない。
 - distributed durable save/load は未実装でもよい
 - invalid distributed cut は explicit reject のまま残す
 
+#### first practical local save/load floor boundary
+
+- current repo state で actualize 済みなのは full save/load completion ではなく、
+  **first practical local save/load floor** である
+- current admissible rows は次に限る
+  - `SL-A1-01`
+    - one exact practical local-runtime frontier を local-only に save/load し、
+      resumed dispatch を 1 回 accepted させる
+  - `SL-A1-02`
+    - one exact practical local-runtime frontier を local-only に save/load したあと、
+      later live membership frontier advance を explicit に入れて resumed dispatch を reject させる
+- current carrier boundary は次のように分ける
+  - checked practical package は distinct runtime-plan carrier を通る
+  - save/load path は、one exact practical local-runtime execution から得た saved local frontier と、
+    distinct save-load plan carrier の両方を要求する
+  - saved local frontier と non-final save-load report は local-runtime report と別 carrier である
+- current floor が save/load report へ persist するのは `runtime_snapshot` だけではなく、
+  `current_owner`、`visible_history`、`pending_envelopes = []` を含む
+  **saved local frontier** である
+- current floor は queue/channel/transport live state persistence を claim しない
+- current floor は `CHK-CUT-01` を existing orphan-receive checker guard としてだけ reuse する
+- `CHK-CUT-01` reuse は full consistent-cut completion、`Z-cycle` completion、
+  distributed save/load runtime completionを意味しない
+- current floor は stale membership non-resurrection だけを actualize する
+- current floor は stale witness non-resurrection、stale lease non-resurrection、
+  distributed durable save/load、Docker/local TCP save/load、
+  hot-plug lifecycle persistence、final public save-load ABI を意味しない
+
 ### 7. devtools / visualization
 
 - event DAG

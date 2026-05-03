@@ -54,6 +54,7 @@ pub mod practical_alpha1;
 pub mod practical_alpha1_checker;
 pub mod practical_alpha1_hotplug_plan;
 pub mod practical_alpha1_runtime_plan;
+pub mod practical_alpha1_save_load_plan;
 pub mod practical_alpha1_transport_plan;
 
 pub fn crate_name() -> &'static str {

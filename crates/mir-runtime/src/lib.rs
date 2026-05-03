@@ -22,6 +22,7 @@ pub mod current_l2_cli;
 pub mod hotplug_runtime;
 pub mod practical_alpha1_hotplug;
 pub mod practical_alpha1_local_runtime;
+pub mod practical_alpha1_save_load;
 pub mod practical_alpha1_transport;
 
 pub fn crate_name() -> &'static str {
