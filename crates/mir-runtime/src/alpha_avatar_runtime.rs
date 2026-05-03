@@ -611,6 +611,7 @@ fn hotplug_verdict_for_scenario(
             "avatar_runtime_attach_authorized".to_string(),
         ],
         membership_freshness_reason_refs: vec!["membership_frontier_current".to_string()],
+        witness_reason_refs: vec!["required_witnesses_present".to_string()],
         notes: vec![
             "runtime package admission remains runtime-private and non-public".to_string(),
             "activation/detach lifecycle completion remains later".to_string(),

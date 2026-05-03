@@ -39,6 +39,7 @@ fn example_admitted_inputs() -> (LogicalPlaceRuntimeShell, HotPlugRequest, HotPl
         compatibility_reason_refs: vec!["attachpoint_registered".to_string()],
         authorization_reason_refs: vec!["attach_capability_present".to_string()],
         membership_freshness_reason_refs: vec!["membership_frontier_verified".to_string()],
+        witness_reason_refs: vec!["required_witnesses_present".to_string()],
         notes: vec![
             "test admitted verdict".to_string(),
             "completed engine semantics remain deferred".to_string(),
@@ -213,6 +214,10 @@ fn hotplug_runtime_engine_report_flattens_reason_refs_and_tracks_membership_epoc
         "membership_frontier_verified".to_string(),
         "membership_epoch_current".to_string(),
     ];
+    verdict.witness_reason_refs = vec![
+        "required_witnesses_present".to_string(),
+        "witness_binding_current".to_string(),
+    ];
 
     let report = assemble_hotplug_runtime_engine_report(&shell, request, verdict).unwrap();
 
@@ -226,6 +231,8 @@ fn hotplug_runtime_engine_report_flattens_reason_refs_and_tracks_membership_epoc
             "admin_role_confirmed".to_string(),
             "membership_frontier_verified".to_string(),
             "membership_epoch_current".to_string(),
+            "required_witnesses_present".to_string(),
+            "witness_binding_current".to_string(),
         ]
     );
     assert_eq!(report.engine_state.requesting_principal, "ExampleAdmin");

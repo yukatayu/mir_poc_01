@@ -39,6 +39,36 @@ fn practical_hotplug_plan_builds_debug_layer_attach_fixture() {
 }
 
 #[test]
+fn practical_hotplug_plan_carries_freshness_claims_for_attach_negative_rows() {
+    let plan = build_practical_alpha1_hotplug_plan_path(practical_package_dir(
+        "hp-a1-04b1-stale-membership-attach-rejected",
+    ))
+    .expect("freshness negative row should still lower into a practical hotplug plan");
+
+    assert_eq!(plan.sample_id, "HP-A1-04B1");
+    assert_eq!(plan.package_kind, "layer");
+    assert_eq!(plan.membership_epoch, 0);
+    assert_eq!(plan.member_incarnation, 0);
+    assert_eq!(plan.pre_attach_membership_advances.len(), 1);
+}
+
+#[test]
+fn practical_hotplug_plan_allows_object_package_attach_preview_fixture() {
+    let plan = build_practical_alpha1_hotplug_plan_path(practical_package_dir(
+        "hp-a1-06-object-package-attach",
+    ))
+    .expect("HP-A1-06 should lower into a practical hotplug plan");
+
+    assert_eq!(plan.sample_id, "HP-A1-06");
+    assert_eq!(plan.package_kind, "object");
+    assert_eq!(plan.attach_profile, "placeholder_avatar_object_package");
+    assert_eq!(
+        plan.attachpoint_ref,
+        "AttachPoint[AlphaRoom#1::AvatarRuntime]"
+    );
+}
+
+#[test]
 fn practical_hotplug_plan_rejects_package_without_hotplug_section() {
     let error =
         build_practical_alpha1_hotplug_plan_path(practical_package_dir("src-04-layer-manifest"))

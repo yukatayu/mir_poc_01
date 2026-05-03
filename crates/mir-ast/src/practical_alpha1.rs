@@ -143,9 +143,17 @@ pub struct PracticalAlpha1PackageManifest {
     #[serde(default)]
     pub provided_capabilities: Vec<String>,
     #[serde(default)]
+    pub provided_roles: Vec<String>,
+    #[serde(default)]
+    pub required_host_capabilities: Vec<String>,
+    #[serde(default)]
     pub effect_row: Vec<String>,
     #[serde(default)]
     pub failure_row: Vec<String>,
+    #[serde(default)]
+    pub observation_labels: Vec<String>,
+    #[serde(default)]
+    pub fallback_representation: Option<String>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -155,6 +163,7 @@ pub enum PracticalAlpha1AttachProfile {
     AuthGateLayer,
     RateLimitLayer,
     UnsafeDebugShadowLayer,
+    PlaceholderAvatarObjectPackage,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -258,7 +267,12 @@ pub struct PracticalAlpha1AlphaLocalHotPlugInput {
     pub requesting_principal: String,
     pub requesting_participant_place: String,
     pub capability_refs: Vec<String>,
+    pub membership_epoch: u64,
+    pub member_incarnation: u64,
     pub witness_refs: Vec<String>,
+    pub required_witness_refs: Vec<String>,
+    #[serde(default)]
+    pub pre_attach_membership_advances: Vec<PracticalAlpha1RuntimeMembershipAdvance>,
     #[serde(default)]
     pub activation_cut_ref: Option<String>,
     #[serde(default)]

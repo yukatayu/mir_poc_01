@@ -6,7 +6,8 @@ use std::{
 use serde::{Deserialize, Serialize};
 
 use crate::practical_alpha1::{
-    PracticalAlpha1AttachProfile, PracticalAlpha1Package, load_practical_alpha1_package_path,
+    PracticalAlpha1AttachProfile, PracticalAlpha1Package, PracticalAlpha1RuntimeMembershipAdvance,
+    load_practical_alpha1_package_path,
 };
 
 pub const PRACTICAL_ALPHA1_HOTPLUG_PLAN_SCOPE: &str = "practical-alpha1-hotplug-plan-floor";
@@ -70,7 +71,12 @@ pub struct PracticalAlpha1HotPlugPlan {
     pub requesting_principal: String,
     pub requesting_participant_place: String,
     pub capability_refs: Vec<String>,
+    pub membership_epoch: u64,
+    pub member_incarnation: u64,
     pub witness_refs: Vec<String>,
+    pub required_witness_refs: Vec<String>,
+    #[serde(default)]
+    pub pre_attach_membership_advances: Vec<PracticalAlpha1RuntimeMembershipAdvance>,
     #[serde(default)]
     pub activation_cut_ref: Option<String>,
     #[serde(default)]
@@ -103,12 +109,12 @@ fn build_practical_alpha1_hotplug_plan_at_path(
     package: &PracticalAlpha1Package,
     path: &Path,
 ) -> Result<PracticalAlpha1HotPlugPlan, PracticalAlpha1HotPlugPlanError> {
-    if package.package_kind != "layer" {
+    if !matches!(package.package_kind.as_str(), "layer" | "object") {
         return Err(PracticalAlpha1HotPlugPlanError {
             kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
             path: path.to_path_buf(),
             detail: format!(
-                "current practical hotplug plan floor only admits layer packages, found `{}`",
+                "current practical hotplug plan floor only admits layer or object packages, found `{}`",
                 package.package_kind
             ),
         });
@@ -138,12 +144,32 @@ fn build_practical_alpha1_hotplug_plan_at_path(
                 detail: "practical hotplug plan requires manifest.attach_profile".to_string(),
             })?;
 
+    match (package.package_kind.as_str(), attach_profile) {
+        ("layer", PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage) => {
+            return Err(PracticalAlpha1HotPlugPlanError {
+                kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
+                path: path.to_path_buf(),
+                detail: "object attach profile is not admitted for layer packages".to_string(),
+            });
+        }
+        ("object", PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage) => {}
+        ("object", _) => {
+            return Err(PracticalAlpha1HotPlugPlanError {
+                kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
+                path: path.to_path_buf(),
+                detail: "current practical object attach preview requires placeholder_avatar_object_package profile".to_string(),
+            });
+        }
+        _ => {}
+    }
+
     if hotplug.sample_id.is_empty()
         || hotplug.attachpoint_ref.is_empty()
         || hotplug.requesting_principal.is_empty()
         || hotplug.requesting_participant_place.is_empty()
         || hotplug.capability_refs.is_empty()
         || hotplug.witness_refs.is_empty()
+        || hotplug.required_witness_refs.is_empty()
     {
         return Err(PracticalAlpha1HotPlugPlanError {
             kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
@@ -194,7 +220,11 @@ fn build_practical_alpha1_hotplug_plan_at_path(
         requesting_principal: hotplug.requesting_principal.clone(),
         requesting_participant_place: hotplug.requesting_participant_place.clone(),
         capability_refs: hotplug.capability_refs.clone(),
+        membership_epoch: hotplug.membership_epoch,
+        member_incarnation: hotplug.member_incarnation,
         witness_refs: hotplug.witness_refs.clone(),
+        required_witness_refs: hotplug.required_witness_refs.clone(),
+        pre_attach_membership_advances: hotplug.pre_attach_membership_advances.clone(),
         activation_cut_ref: hotplug.activation_cut_ref.clone(),
         contract_update_ref: hotplug.contract_update_ref.clone(),
         retained_later_refs: retained_later_refs_default(),
@@ -207,6 +237,9 @@ fn attach_profile_name(profile: PracticalAlpha1AttachProfile) -> &'static str {
         PracticalAlpha1AttachProfile::AuthGateLayer => "auth_gate_layer",
         PracticalAlpha1AttachProfile::RateLimitLayer => "rate_limit_layer",
         PracticalAlpha1AttachProfile::UnsafeDebugShadowLayer => "unsafe_debug_shadow_layer",
+        PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage => {
+            "placeholder_avatar_object_package"
+        }
     }
 }
 

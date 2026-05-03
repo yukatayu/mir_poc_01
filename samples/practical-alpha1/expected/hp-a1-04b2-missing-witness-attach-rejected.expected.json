@@ -3,8 +3,8 @@
   "scope_kind": "alpha_local",
   "hotplug_scope": "practical-alpha1-hotplug-floor",
   "hotplug_plan_scope": "practical-alpha1-hotplug-plan-floor",
-  "sample_id": "HP-A1-01",
-  "package_id": "hp-a1-01-debug-layer-attach",
+  "sample_id": "HP-A1-04B2",
+  "package_id": "hp-a1-04b2-missing-witness-attach-rejected",
   "package_kind": "layer",
   "attach_profile": "debug_trace_layer",
   "offered_membership_epoch": 0,
@@ -232,29 +232,29 @@
       "notes"
     ],
     "request": {
-      "request_id": "practical_hotplug_request#hp-a1-01",
+      "request_id": "practical_hotplug_request#hp-a1-04b2",
       "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
       "patch_ref": "LayerPatch[debug_trace_layer]",
       "operation_kind": "attach",
       "requesting_principal": "ExampleAdmin",
       "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
-      "message_envelope_ref": "practical_hotplug_envelope#hp-a1-01",
+      "message_envelope_ref": "practical_hotplug_envelope#hp-a1-04b2",
       "auth_evidence_ref": null,
       "capability_refs": [
         "AttachDebugLayer(AlphaRoom#1)",
         "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
       ],
       "witness_refs": [
-        "membership_frontier_snapshot#practical_hotplug"
+        "debug_trace_preview#helper_only"
       ],
       "notes": [
-        "sample_id=HP-A1-01",
+        "sample_id=HP-A1-04B2",
         "current verdict is computed from manifest, freshness, witness, authorization, and layer compatibility checks"
       ]
     },
     "verdict": {
-      "request_ref": "practical_hotplug_request#hp-a1-01",
-      "verdict_kind": "accepted",
+      "request_ref": "practical_hotplug_request#hp-a1-04b2",
+      "verdict_kind": "rejected",
       "compatibility_reason_refs": [
         "layer_kind_allowed",
         "attach_point_matches_policy",
@@ -269,7 +269,7 @@
         "member_incarnation_current"
       ],
       "witness_reason_refs": [
-        "required_witnesses_present"
+        "missing_witness:membership_frontier_snapshot#practical_hotplug"
       ],
       "notes": [
         "practical hotplug verdict stays non-final and alpha-local",
@@ -342,14 +342,14 @@
       "no helper-local lifecycle ids imported as canonical runtime state"
     ]
   },
-  "active_layers_after": [
-    "debug_trace_layer"
-  ],
+  "active_layers_after": [],
   "runtime_preview": null,
   "activation_cut_ref": "activation_cut#debug_trace_layer_attach",
-  "terminal_outcome": "accepted",
-  "reason_family": null,
-  "rejection_reason_refs": [],
+  "terminal_outcome": "rejected",
+  "reason_family": "witness",
+  "rejection_reason_refs": [
+    "missing_witness:membership_frontier_snapshot#practical_hotplug"
+  ],
   "object_attach_preview": null,
   "retained_later_refs": [
     "detach_minimal_contract",

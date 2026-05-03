@@ -44,19 +44,36 @@ IMPLEMENTED_ROWS: list[dict[str, str]] = [
         "package_dir": "samples/practical-alpha1/packages/hp-a1-05-incompatible-patch-rejected",
         "expected_report": "samples/practical-alpha1/expected/hp-a1-05-incompatible-patch-rejected.expected.json",
     },
+    {
+        "sample_id": "HP-A1-04B1",
+        "summary": "reject attach before activation when the offered membership frontier is stale",
+        "package_dir": "samples/practical-alpha1/packages/hp-a1-04b1-stale-membership-attach-rejected",
+        "expected_report": "samples/practical-alpha1/expected/hp-a1-04b1-stale-membership-attach-rejected.expected.json",
+    },
+    {
+        "sample_id": "HP-A1-04B2",
+        "summary": "reject attach before activation when required witness refs are missing",
+        "package_dir": "samples/practical-alpha1/packages/hp-a1-04b2-missing-witness-attach-rejected",
+        "expected_report": "samples/practical-alpha1/expected/hp-a1-04b2-missing-witness-attach-rejected.expected.json",
+    },
+    {
+        "sample_id": "HP-A1-06",
+        "summary": "accept a narrow non-final object package attach preview without claiming final avatar/package completion",
+        "package_dir": "samples/practical-alpha1/packages/hp-a1-06-object-package-attach",
+        "expected_report": "samples/practical-alpha1/expected/hp-a1-06-object-package-attach.expected.json",
+    },
 ]
 
 STOP_LINES = [
-    "do not treat the practical alpha-1 attach command as object/runtime/avatar package completion",
-    "do not treat the practical alpha-1 attach command as stale-membership or missing-witness completion",
+    "do not treat the practical alpha-1 attach command as final avatar/runtime/package completion",
     "do not treat the practical alpha-1 attach command as Docker transport, save/load, or final public hotplug ABI completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the hotplug package",
 ]
 
 LIMITATIONS = [
-    "alpha-local non-final practical layer-only hotplug first floor only",
-    "limited HP-A1-01..05 practical sample families only",
-    "no object package attach, stale-membership reject, missing-witness reject, detach-minimal contract, Docker/local TCP, save/load, or final public ABI",
+    "alpha-local non-final practical hotplug floor only",
+    "limited HP-A1 practical sample families only",
+    "no detach-minimal contract, Docker/local TCP, save/load, or final public ABI",
 ]
 
 
@@ -142,14 +159,27 @@ def check_all() -> dict[str, Any]:
         report.get("hotplug_plan_scope") == "practical-alpha1-hotplug-plan-floor"
         for report in reports
     )
+    reason_families = {
+        report.get("sample_id"): report.get("reason_family") for report in reports
+    }
+    freshness_negative_complete = (
+        reason_families.get("HP-A1-04B1") == "membership_freshness"
+        and reason_families.get("HP-A1-04B2") == "witness"
+    )
+    object_attach_seam_present = any(
+        report.get("sample_id") == "HP-A1-06"
+        and report.get("object_attach_preview") is not None
+        for report in reports
+    )
     return {
         "sample_count": len(IMPLEMENTED_ROWS),
         "passed": passed,
         "failed": failed,
         "package_hotplug_first_floor_complete": not failed,
         "hotplug_plan_boundary_present": hotplug_plan_boundary_present,
+        "object_attach_seam_present": object_attach_seam_present,
         "object_attach_claimed": False,
-        "freshness_negative_complete": False,
+        "freshness_negative_complete": freshness_negative_complete,
         "stage_pa1_4_complete": False,
         "run_docker_claimed": False,
         "save_load_claimed": False,
@@ -167,6 +197,9 @@ def closeout() -> dict[str, Any]:
             "cargo test -p mir-runtime --test practical_alpha1_hotplug -- --nocapture",
             "cargo test -p mir-runtime --test alpha_layer_insertion_runtime",
             "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-01-debug-layer-attach --format json",
+            "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-04b1-stale-membership-attach-rejected --format json",
+            "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-04b2-missing-witness-attach-rejected --format json",
+            "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-06-object-package-attach --format json",
             "python3 scripts/practical_alpha1_attach.py check-all --format json",
             "python3 -m unittest scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs",
         ],
@@ -178,6 +211,7 @@ def closeout() -> dict[str, Any]:
         "hotplug_plan_boundary_present": check_all_summary[
             "hotplug_plan_boundary_present"
         ],
+        "object_attach_seam_present": check_all_summary["object_attach_seam_present"],
         "object_attach_claimed": check_all_summary["object_attach_claimed"],
         "freshness_negative_complete": check_all_summary[
             "freshness_negative_complete"

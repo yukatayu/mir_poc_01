@@ -22,6 +22,9 @@ class PracticalAlpha1AttachTests(unittest.TestCase):
             [row["sample_id"] for row in runner.IMPLEMENTED_ROWS],
         )
         self.assertTrue(all(row["family"] == "practical-alpha1-hotplug" for row in rows))
+        self.assertIn("HP-A1-04B1", [row["sample_id"] for row in rows])
+        self.assertIn("HP-A1-04B2", [row["sample_id"] for row in rows])
+        self.assertIn("HP-A1-06", [row["sample_id"] for row in rows])
 
     def test_closeout_keeps_stage_pa1_4_incomplete(self) -> None:
         with mock.patch.object(
@@ -39,8 +42,9 @@ class PracticalAlpha1AttachTests(unittest.TestCase):
                 "failed": [],
                 "package_hotplug_first_floor_complete": True,
                 "hotplug_plan_boundary_present": True,
+                "object_attach_seam_present": True,
                 "object_attach_claimed": False,
-                "freshness_negative_complete": False,
+                "freshness_negative_complete": True,
                 "stage_pa1_4_complete": False,
                 "run_docker_claimed": False,
                 "save_load_claimed": False,
@@ -49,8 +53,9 @@ class PracticalAlpha1AttachTests(unittest.TestCase):
             payload = runner.closeout()
         self.assertTrue(payload["package_hotplug_first_floor_complete"])
         self.assertTrue(payload["hotplug_plan_boundary_present"])
+        self.assertTrue(payload["object_attach_seam_present"])
         self.assertFalse(payload["object_attach_claimed"])
-        self.assertFalse(payload["freshness_negative_complete"])
+        self.assertTrue(payload["freshness_negative_complete"])
         self.assertFalse(payload["stage_pa1_4_complete"])
         self.assertFalse(payload["run_docker_claimed"])
         self.assertFalse(payload["save_load_claimed"])

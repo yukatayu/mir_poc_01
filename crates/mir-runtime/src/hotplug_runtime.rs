@@ -146,6 +146,7 @@ pub fn assemble_hotplug_runtime_engine_report(
             skeleton.verdict.compatibility_reason_refs.clone(),
             skeleton.verdict.authorization_reason_refs.clone(),
             skeleton.verdict.membership_freshness_reason_refs.clone(),
+            skeleton.verdict.witness_reason_refs.clone(),
         ]
         .concat(),
         notes: vec![
@@ -210,6 +211,7 @@ fn build_example_admitted_inputs()
         compatibility_reason_refs: vec!["attachpoint_registered".to_string()],
         authorization_reason_refs: vec!["attach_capability_present".to_string()],
         membership_freshness_reason_refs: vec!["membership_frontier_verified".to_string()],
+        witness_reason_refs: vec!["required_witnesses_present".to_string()],
         notes: vec![
             "example runtime/report assembly verdict".to_string(),
             "completed engine semantics remain deferred".to_string(),

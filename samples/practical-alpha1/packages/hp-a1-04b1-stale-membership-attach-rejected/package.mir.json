@@ -1,6 +1,6 @@
 {
   "format_version": "mirrorea-practical-alpha1-v0",
-  "package_id": "hp-a1-02-non-admin-debug-rejected",
+  "package_id": "hp-a1-04b1-stale-membership-attach-rejected",
   "package_kind": "layer",
   "manifest": {
     "version": "0.1.0",
@@ -17,12 +17,13 @@
     "failure_row": []
   },
   "alpha_local_hotplug_input": {
-    "sample_id": "HP-A1-02",
+    "sample_id": "HP-A1-04B1",
     "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
-    "requesting_principal": "Mallory",
-    "requesting_participant_place": "ParticipantPlace[Mallory]",
+    "requesting_principal": "ExampleAdmin",
+    "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
     "capability_refs": [
-      "ObserveRoom(AlphaRoom#1)"
+      "AttachDebugLayer(AlphaRoom#1)",
+      "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
     ],
     "membership_epoch": 0,
     "member_incarnation": 0,
@@ -32,9 +33,16 @@
     "required_witness_refs": [
       "membership_frontier_snapshot#practical_hotplug"
     ],
+    "pre_attach_membership_advances": [
+      {
+        "kind": "add_participant",
+        "principal": "Carol"
+      }
+    ],
+    "activation_cut_ref": "activation_cut#debug_trace_layer_attach",
     "notes": [
-      "practical layer-only hotplug first floor",
-      "non-admin debug attach must reject before activation cut"
+      "practical hotplug freshness negative support row",
+      "stale membership must reject before activation when the frontier advances"
     ]
   }
 }

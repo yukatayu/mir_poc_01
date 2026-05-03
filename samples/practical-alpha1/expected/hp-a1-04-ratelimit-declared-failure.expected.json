@@ -7,6 +7,11 @@
   "package_id": "hp-a1-04-ratelimit-declared-failure",
   "package_kind": "layer",
   "attach_profile": "rate_limit_layer",
+  "offered_membership_epoch": 0,
+  "offered_member_incarnation": 0,
+  "required_witness_refs": [
+    "membership_frontier_snapshot#practical_hotplug"
+  ],
   "manifest_checks": [
     {
       "check_name": "attach_profile_supported",
@@ -49,6 +54,7 @@
       ]
     }
   ],
+  "package_admission_checks": [],
   "layer_compatibility": {
     "contract_mode": "transparent_overlay",
     "accepted_path": "transparent_overlay",
@@ -222,16 +228,17 @@
       "compatibility_reason_refs",
       "authorization_reason_refs",
       "membership_freshness_reason_refs",
+      "witness_reason_refs",
       "notes"
     ],
     "request": {
-      "request_id": "layer_attach_request#HP-A1-04",
+      "request_id": "practical_hotplug_request#hp-a1-04",
       "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
       "patch_ref": "LayerPatch[rate_limit_layer]",
       "operation_kind": "attach",
       "requesting_principal": "ExampleAdmin",
       "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
-      "message_envelope_ref": "layer_attach_envelope#HP-A1-04",
+      "message_envelope_ref": "practical_hotplug_envelope#hp-a1-04",
       "auth_evidence_ref": null,
       "capability_refs": [
         "AttachRateLimitLayer(AlphaRoom#1)",
@@ -241,12 +248,12 @@
         "membership_frontier_snapshot#practical_hotplug"
       ],
       "notes": [
-        "contract_mode=transparent_overlay",
-        "verdict is computed from current attach-time compatibility checks"
+        "sample_id=HP-A1-04",
+        "current verdict is computed from manifest, freshness, witness, authorization, and layer compatibility checks"
       ]
     },
     "verdict": {
-      "request_ref": "layer_attach_request#HP-A1-04",
+      "request_ref": "practical_hotplug_request#hp-a1-04",
       "verdict_kind": "accepted",
       "compatibility_reason_refs": [
         "layer_kind_allowed",
@@ -258,12 +265,15 @@
         "admin_attach_authority_confirmed"
       ],
       "membership_freshness_reason_refs": [
-        "membership_frontier_verified",
-        "membership_epoch_current"
+        "membership_frontier_current",
+        "member_incarnation_current"
+      ],
+      "witness_reason_refs": [
+        "required_witnesses_present"
       ],
       "notes": [
-        "verdict is not imported as a pre-admitted carrier in this floor",
-        "completed hot-plug lifecycle still remains later"
+        "practical hotplug verdict stays non-final and alpha-local",
+        "detach/minimal lifecycle contract remains later"
       ]
     },
     "runtime_snapshot": {
@@ -352,25 +362,22 @@
   "terminal_outcome": "accepted",
   "reason_family": null,
   "rejection_reason_refs": [],
+  "object_attach_preview": null,
   "retained_later_refs": [
-    "object_package_attach",
-    "stale_membership_attach_reject",
-    "missing_witness_attach_reject",
     "detach_minimal_contract",
     "docker_transport_execution",
     "local_save_load_execution",
     "final_public_hotplug_api"
   ],
   "stop_lines": [
-    "do not treat the practical alpha-1 attach command as object/runtime/avatar package completion",
-    "do not treat the practical alpha-1 attach command as stale-membership or missing-witness completion",
+    "do not treat the practical alpha-1 attach command as final avatar/runtime/package completion",
     "do not treat the practical alpha-1 attach command as Docker transport, save/load, or final public hotplug ABI completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the hotplug package"
   ],
   "limitations": [
-    "alpha-local non-final practical layer-only hotplug first floor only",
-    "limited HP-A1-01..05 practical sample families only",
-    "no object package attach, stale-membership reject, missing-witness reject, detach-minimal contract, Docker/local TCP, save/load, or final public ABI"
+    "alpha-local non-final practical hotplug floor only",
+    "limited HP-A1 practical sample families only",
+    "no detach-minimal contract, Docker/local TCP, save/load, or final public ABI"
   ],
   "public_cli_frozen": false,
   "run_local_claimed": false,

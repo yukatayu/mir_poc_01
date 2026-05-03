@@ -142,32 +142,37 @@ save/load、devtools completion と同一視しない。
 
 ## first package / hot-plug floor boundary
 
-`P-A1-04a` の current actualization は、
+`P-A1-04a` / `P-A1-04b` の current actualization は、
 package / hot-plug stage 全体の completion ではなく、
-**layer-only practical hot-plug first floor** である。
+**non-final practical hot-plug first floor** である。
 
 - checked package carrier、hotplug plan、hot-plug report は分ける
-- current front-door attach path は `layer` package に限定する
+- current front-door attach path は manifest-driven `layer` package attach/reject と、
+  narrow `object` package attach preview seam を distinct hotplug-plan carrier 経由で扱う
 - current actualized row は:
   - `HP-A1-01`
   - `HP-A1-02`
   - `HP-A1-03`
   - `HP-A1-04`
   - `HP-A1-05`
+- `HP-A1-04B1`
+- `HP-A1-04B2`
+- `HP-A1-06`
 - accepted proof は exact hot-plug report と manifest checks で示す
-- rejected proof は exact hot-plug report の `terminal_outcome`、`reason_family`、`rejection_reason_refs` で示す
+- rejected proof は exact hot-plug report の `terminal_outcome`、`reason_family`、
+  `rejection_reason_refs`、`witness_reason_refs` で示す
 - current floor は debug/auth/rate-limit layer の manifest-driven attach path を actualize する
 - current floor は incompatible patch reject と missing attach capability/admin reject を actualize する
-- current floor は object package attach completionを意味しない
-- current floor は missing witness reject completionを意味しない
-- current floor は stale membership reject completionを意味しない
+- current floor は attach-time stale membership reject と missing witness reject を actualize する
+- current floor は narrow object package attach preview seam を actualize する
+- current floor は final object package attach completionを意味しない
 - current floor は detach minimal contract completionを意味しない
 - current floor は Docker/local TCP transport completionを意味しない
 - current floor は final public hot-plug/package ABI を意味しない
 
-したがって、`P-A1-04a` closeout は useful practical package/hot-plug floor だが、
+したがって、`P-A1-04b` closeout は useful practical package/hot-plug floor だが、
 `specs/18` package / hot-plug stage 全体、
-object package attach、freshness/witness negatives、
+final object package attach、detach minimal contract、
 detach contract completion と同一視しない。
 
 ### 3. reusable runtime

@@ -91,6 +91,7 @@ fn sample_hotplug_verdict() -> HotPlugVerdict {
         compatibility_reason_refs: vec!["attachpoint_compatible".to_string()],
         authorization_reason_refs: vec!["request_authority_verified".to_string()],
         membership_freshness_reason_refs: vec!["membership_frontier_verified".to_string()],
+        witness_reason_refs: vec!["required_witnesses_present".to_string()],
         notes: vec!["engine-neutral verdict carrier".to_string()],
     }
 }
@@ -208,6 +209,7 @@ fn hotplug_carrier_lanes_match_current_shape() {
             "compatibility_reason_refs".to_string(),
             "authorization_reason_refs".to_string(),
             "membership_freshness_reason_refs".to_string(),
+            "witness_reason_refs".to_string(),
             "notes".to_string(),
         ]
     );

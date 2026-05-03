@@ -546,6 +546,7 @@ fn build_report(
         compatibility_reason_refs: verdict_compatibility_reasons(&compatibility),
         authorization_reason_refs,
         membership_freshness_reason_refs: membership_reason_refs,
+        witness_reason_refs: vec!["required_witnesses_present".to_string()],
         notes: vec![
             "verdict is not imported as a pre-admitted carrier in this floor".to_string(),
             "completed hot-plug lifecycle still remains later".to_string(),
@@ -879,6 +880,11 @@ fn bootstrap_shell() -> Result<LogicalPlaceRuntimeShell, MirroreaCoreError> {
     shell.add_initial_participant(ADMIN_PRINCIPAL)?;
     shell.add_initial_participant(NON_ADMIN_PRINCIPAL)?;
     Ok(shell)
+}
+
+pub(crate) fn build_default_layer_attach_shell()
+-> Result<LogicalPlaceRuntimeShell, MirroreaCoreError> {
+    bootstrap_shell()
 }
 
 fn message_dispatch_attachpoint_policy() -> AttachPointPolicy {

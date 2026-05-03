@@ -1,6 +1,6 @@
 {
   "format_version": "mirrorea-practical-alpha1-v0",
-  "package_id": "hp-a1-02-non-admin-debug-rejected",
+  "package_id": "hp-a1-04b2-missing-witness-attach-rejected",
   "package_kind": "layer",
   "manifest": {
     "version": "0.1.0",
@@ -17,24 +17,26 @@
     "failure_row": []
   },
   "alpha_local_hotplug_input": {
-    "sample_id": "HP-A1-02",
+    "sample_id": "HP-A1-04B2",
     "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
-    "requesting_principal": "Mallory",
-    "requesting_participant_place": "ParticipantPlace[Mallory]",
+    "requesting_principal": "ExampleAdmin",
+    "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
     "capability_refs": [
-      "ObserveRoom(AlphaRoom#1)"
+      "AttachDebugLayer(AlphaRoom#1)",
+      "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
     ],
     "membership_epoch": 0,
     "member_incarnation": 0,
     "witness_refs": [
-      "membership_frontier_snapshot#practical_hotplug"
+      "debug_trace_preview#helper_only"
     ],
     "required_witness_refs": [
       "membership_frontier_snapshot#practical_hotplug"
     ],
+    "activation_cut_ref": "activation_cut#debug_trace_layer_attach",
     "notes": [
-      "practical layer-only hotplug first floor",
-      "non-admin debug attach must reject before activation cut"
+      "practical hotplug witness negative support row",
+      "missing membership frontier witness must reject before activation"
     ]
   }
 }

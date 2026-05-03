@@ -180,6 +180,7 @@ pub struct HotPlugVerdict {
     pub compatibility_reason_refs: Vec<String>,
     pub authorization_reason_refs: Vec<String>,
     pub membership_freshness_reason_refs: Vec<String>,
+    pub witness_reason_refs: Vec<String>,
     pub notes: Vec<String>,
 }
 
@@ -209,6 +210,11 @@ impl HotPlugVerdict {
             "HotPlugVerdict",
             "membership_freshness_reason_refs",
             &self.membership_freshness_reason_refs,
+        )?;
+        require_non_empty_items(
+            "HotPlugVerdict",
+            "witness_reason_refs",
+            &self.witness_reason_refs,
         )?;
         require_non_empty_items("HotPlugVerdict", "notes", &self.notes)?;
         Ok(())
@@ -275,6 +281,7 @@ pub fn hotplug_verdict_lanes() -> Vec<String> {
         "compatibility_reason_refs",
         "authorization_reason_refs",
         "membership_freshness_reason_refs",
+        "witness_reason_refs",
         "notes",
     ]
     .into_iter()

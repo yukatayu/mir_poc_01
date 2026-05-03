@@ -25,7 +25,12 @@
       "AttachDebugLayer(AlphaRoom#1)",
       "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
     ],
+    "membership_epoch": 0,
+    "member_incarnation": 0,
     "witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "required_witness_refs": [
       "membership_frontier_snapshot#practical_hotplug"
     ],
     "notes": [

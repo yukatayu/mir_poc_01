@@ -37,7 +37,8 @@
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`
   - it consumes checked practical package input through a distinct hotplug-plan boundary
-  - it is a non-final layer-only hot-plug command and does not claim object package attach, stale-membership/missing-witness negative completion, detach lifecycle, Docker transport, save/load, or final public package/hot-plug API
+  - current actualized rows are `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`
+  - it is a non-final hot-plug command and does not claim final object package attach, detach lifecycle, Docker transport, save/load, or final public package/hot-plug API
 
 ### current-L2 helper / detached loop / support
 
@@ -68,7 +69,7 @@
   - `P-A0-12` は `alpha_cut_save_load_samples.py` を `scripts/` に actualize した。これは `samples/alpha/cut-save-load/` の `CUT-04` local-only save/load bridge を専用 command として検証し、`alpha_e2e_samples.py` 側では `E2E-06` へ composition する。distributed/durable save/load completion や Z-cycle handling は主張しない
   - `P-A0-13` / `P-A0-15` / `P-A0-26` は `alpha_visualization_samples.py` を widen し、`samples/alpha/visualization/` の `VIS-01/02/03/05/06/07/08/10/11` を existing alpha/helper/runtime JSON evidence の dedicated Stage-E subset runner として検証し、`stage-e-closeout` command で current-scope Stage E completion surface を与える。`VIS-04/09/12`、Stage F completion、final public viewer/telemetry API は引き続き主張しない
   - `P-A0-14` は `alpha_cut_save_load_samples.py` と `alpha_cut_save_load_checker.py` を widen し、`CUT-17` local stale-membership rejection bridge と `CUT-11` checker-backed Z-cycle inadmissibility row を actualize した。これは saved local state が stale membership を accepted resumed dispatch へ resurrect しないことと、useless checkpoint cycle が checker floor で inadmissible であることだけを示す。`CUT-10/12/16`、distributed/durable save/load completion、Z-cycle repair、final public ABI は主張しない
-  - practical alpha-1 front-door script surface は staged に actualize している。`P-A1-02` で `practical_alpha1_check.py`、`P-A1-03` で `practical_alpha1_run_local.py`、`P-A1-04a` で `practical_alpha1_attach.py` が追加されたが、object package attach、freshness/witness negatives、`run-docker`、save/load、viewer/product command は still later である
+  - practical alpha-1 front-door script surface は staged に actualize している。`P-A1-02` で `practical_alpha1_check.py`、`P-A1-03` で `practical_alpha1_run_local.py`、`P-A1-04a` / `P-A1-04b` で `practical_alpha1_attach.py` が widened されたが、final object package attach、detach minimal contract、`run-docker`、save/load、viewer/product command は still later である
 
 ### storage / env
 
