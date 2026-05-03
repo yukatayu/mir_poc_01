@@ -208,7 +208,8 @@ review only; no runnable-sample status changed in this task.
 
 ## Commit / push status
 
-Pending at report write.
+- committed: `a85e690` (`Add P-A1-04c runtime transport review report`)
+- pushed: `main` -> `origin/main`
 
 ## Sub-agent session close status
 
