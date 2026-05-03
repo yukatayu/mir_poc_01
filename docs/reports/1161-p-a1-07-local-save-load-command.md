@@ -280,10 +280,10 @@ Continue to `P-A1-08` by adding the narrowest honest practical product prototype
 
 ## Commit / push status
 
-Pending at report write.
+Main package commit `6910ec7` (`mirrorea: close p-a1-07 local save-load command`) was pushed to `origin/main`. Report metadata and sub-agent close status were finalized in a docs-only follow-up after the package closeout.
 
 ## Sub-agent session close status
 
-- `Herschel` completed the semantics/runtime review and is pending closure
-- `Noether` completed the carrier/test review and is pending closure
-- `Euler` completed the docs/snapshot review and is pending closure
+- `Herschel` completed the semantics/runtime review and is now closed
+- `Noether` completed the carrier/test review and is now closed
+- `Euler` completed the docs/snapshot review and is now closed
