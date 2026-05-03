@@ -62,18 +62,25 @@ IMPLEMENTED_ROWS: list[dict[str, str]] = [
         "package_dir": "samples/practical-alpha1/packages/hp-a1-06-object-package-attach",
         "expected_report": "samples/practical-alpha1/expected/hp-a1-06-object-package-attach.expected.json",
     },
+    {
+        "sample_id": "HP-A1-07",
+        "summary": "defer detach at the current practical floor through an explicit minimal contract without claiming rollback or migration",
+        "package_dir": "samples/practical-alpha1/packages/hp-a1-07-detach-minimal-contract",
+        "expected_report": "samples/practical-alpha1/expected/hp-a1-07-detach-minimal-contract.expected.json",
+    },
 ]
 
 STOP_LINES = [
     "do not treat the practical alpha-1 attach command as final avatar/runtime/package completion",
     "do not treat the practical alpha-1 attach command as Docker transport, save/load, or final public hotplug ABI completion",
+    "do not treat the practical alpha-1 detach contract as rollback, durable migration, or distributed activation ordering completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the hotplug package",
 ]
 
 LIMITATIONS = [
     "alpha-local non-final practical hotplug floor only",
     "limited HP-A1 practical sample families only",
-    "no detach-minimal contract, Docker/local TCP, save/load, or final public ABI",
+    "no detach runtime lifecycle, Docker/local TCP, save/load, or final public ABI",
 ]
 
 
@@ -171,6 +178,16 @@ def check_all() -> dict[str, Any]:
         and report.get("object_attach_preview") is not None
         for report in reports
     )
+    detach_minimal_contract_complete = any(
+        report.get("sample_id") == "HP-A1-07"
+        and report.get("terminal_outcome") == "deferred_detach_minimal_contract"
+        and report.get("reason_family") == "detach_contract"
+        and report.get("hotplug_runtime_report", {})
+        .get("request", {})
+        .get("operation_kind")
+        == "detach"
+        for report in reports
+    )
     return {
         "sample_count": len(IMPLEMENTED_ROWS),
         "passed": passed,
@@ -180,7 +197,12 @@ def check_all() -> dict[str, Any]:
         "object_attach_seam_present": object_attach_seam_present,
         "object_attach_claimed": False,
         "freshness_negative_complete": freshness_negative_complete,
-        "stage_pa1_4_complete": False,
+        "detach_minimal_contract_complete": detach_minimal_contract_complete,
+        "stage_pa1_4_complete": not failed
+        and hotplug_plan_boundary_present
+        and object_attach_seam_present
+        and freshness_negative_complete
+        and detach_minimal_contract_complete,
         "run_docker_claimed": False,
         "save_load_claimed": False,
     }
@@ -194,12 +216,14 @@ def closeout() -> dict[str, Any]:
         "validation_floor": [
             "cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture",
             "cargo test -p mir-ast --test practical_alpha1_hotplug_plan -- --nocapture",
+            "cargo test -p mir-runtime --test hotplug_runtime_skeleton -- --nocapture",
             "cargo test -p mir-runtime --test practical_alpha1_hotplug -- --nocapture",
             "cargo test -p mir-runtime --test alpha_layer_insertion_runtime",
             "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-01-debug-layer-attach --format json",
             "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-04b1-stale-membership-attach-rejected --format json",
             "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-04b2-missing-witness-attach-rejected --format json",
             "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-06-object-package-attach --format json",
+            "python3 scripts/practical_alpha1_attach.py check samples/practical-alpha1/packages/hp-a1-07-detach-minimal-contract --format json",
             "python3 scripts/practical_alpha1_attach.py check-all --format json",
             "python3 -m unittest scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs",
         ],
@@ -215,6 +239,9 @@ def closeout() -> dict[str, Any]:
         "object_attach_claimed": check_all_summary["object_attach_claimed"],
         "freshness_negative_complete": check_all_summary[
             "freshness_negative_complete"
+        ],
+        "detach_minimal_contract_complete": check_all_summary[
+            "detach_minimal_contract_complete"
         ],
         "stage_pa1_4_complete": check_all_summary["stage_pa1_4_complete"],
         "run_docker_claimed": check_all_summary["run_docker_claimed"],

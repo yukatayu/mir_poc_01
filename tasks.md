@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 18:57 JST
+最終更新: 2026-05-03 19:32 JST
 
 ## この文書について
 
@@ -15,8 +15,8 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - practical alpha-1 line が新しい promoted package line です:
   `specs/18`、`plan/44`、`samples/practical-alpha1/` を軸に、alpha-0 evidence closeout を prerequisite として保持しつつ、front-door -> checker -> runtime -> hot-plug -> transport -> devtools -> save/load -> product prototype の順で practical toolchain を組み上げます。
-- `P-A1-04b` practical hot-plug freshness/object seam freshness は 2026-05-03 18:57 JST に更新済みです:
-  `crates/mirrorea-core::fabric::HotPlugVerdict`、`crates/mir-ast::practical_alpha1_hotplug_plan`、`crates/mir-runtime::practical_alpha1_hotplug`、example `mir_practical_alpha1_attach`、`scripts/practical_alpha1_attach.py`、`HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` expected reports、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で stale-membership reject は offered epoch/incarnation comparison に、missing-witness reject は typed witness lane に、object path は `PlaceholderAvatarObjectPackage` preview seam に narrow 化した。`cargo test -p mirrorea-core --test carriers -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_hotplug_plan -- --nocapture`、`cargo test -p mir-runtime --test hotplug_runtime_skeleton -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_hotplug -- --nocapture`、`cargo test -p mir-runtime --test alpha_layer_insertion_runtime`、`python3 scripts/practical_alpha1_check.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_attach.py check-all --format json`、`python3 scripts/practical_alpha1_attach.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs` が pass した。これは non-final practical hot-plug floor の freshness/object seam closeout であり、final object package attach、detach minimal contract、run-docker、save/load、devtools、product prototype success はまだ claim しない。
+- `P-A1-04c` practical detach minimal contract は 2026-05-03 19:32 JST に更新済みです:
+  `crates/mir-ast::practical_alpha1`、`crates/mir-ast::practical_alpha1_hotplug_plan`、`crates/mir-runtime::practical_alpha1_hotplug`、example `mir_practical_alpha1_attach`、`scripts/practical_alpha1_attach.py`、`HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` / `HP-A1-07` expected reports、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で detach は reject-only ではなく explicit deferred boundary に寄せ、`operation_kind = detach`、detach-only `detach_boundary_ref`、`terminal_outcome = deferred_detach_minimal_contract` を distinct hotplug-plan / hot-plug-report lane に actualize した。`cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_hotplug_plan -- --nocapture`、`cargo test -p mir-runtime --test hotplug_runtime_skeleton -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_hotplug -- --nocapture`、`cargo test -p mir-runtime --test alpha_layer_insertion_runtime`、`python3 scripts/practical_alpha1_check.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_attach.py check-all --format json`、`python3 scripts/practical_alpha1_attach.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs` が pass した。これは current practical package/hot-plug API closeout であり、final object package attach、detach runtime lifecycle、run-docker、save/load、devtools、product prototype success はまだ claim しない。
 - `P-A1-00` rebaseline validation freshness は 2026-05-03 15:27 JST に更新済みです:
   `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、new `specs/18` / `plan/44` と progress semantics repair が snapshot docs / validators に反映された。sub-agent review で見つかった `Documentation.md` / dashboard wording drift も反映済みである。これは docs/spec/taxonomy rebaseline package であり、practical front-door / parser / runtime implementation success はまだ claim しない。
 - Alpha-0 evidence closeout line は retained reference です:
@@ -26,7 +26,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-04c` detach minimal contract を next gate とする。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-05` transport practical E2E を next gate とする。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -73,15 +73,15 @@
 ## Current Practical Alpha-1 stage
 
 - Large stage:
-  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` 65% package/hot-plug practical API in progress via `P-A1-04a+b`
+  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` 100% package/hot-plug practical API closeout; `PA1-5` 10% transport practical E2E pending
 - Concrete phase:
-  Phase 5/9 — front-door、first checker floor、first local-runtime floor、non-final hot-plug floor with stale-membership/missing-witness rejects and narrow object preview seam are closed enough to promote detach work as the next in-stage gate
+  Phase 6/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout are done enough to promote transport work as the next stage
 - Package status:
-  `P-A1-04b` practical hot-plug freshness/object seam is the last closed package in repo state
+  `P-A1-04c` practical detach minimal contract is the last closed package in repo state
 - Current status:
-  `P-A1-04b` は `crates/mir-ast::practical_alpha1_hotplug_plan`、`crates/mir-runtime::practical_alpha1_hotplug`、example `mir_practical_alpha1_attach`、`scripts/practical_alpha1_attach.py`、および `HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` practical fixtures を actualize し、source/package front-door と first checker floor に続く hot-plug floor を practical line に追加した。これは non-final practical hot-plug floor であり、final object package attach、detach minimal contract、Docker/local TCP、save/load、devtools はまだ later である。
+  `P-A1-04c` は `crates/mir-ast::practical_alpha1_hotplug_plan`、`crates/mir-runtime::practical_alpha1_hotplug`、example `mir_practical_alpha1_attach`、`scripts/practical_alpha1_attach.py`、および `HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` / `HP-A1-07` practical fixtures を actualize し、source/package front-door と first checker floor に続く current practical package/hot-plug API closeout を与えた。`HP-A1-07` は explicit deferred detach boundary であり、final object package attach、detach runtime lifecycle、Docker/local TCP、save/load、devtools はまだ later である。
 - Next autonomous package:
-  `P-A1-04c` detach minimal contract
+  `P-A1-05` transport practical E2E
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into the practical alpha-1 package series
 
@@ -126,7 +126,7 @@
 | `PA1-1` / `P-A1-01` | 100% | closed | limited alpha source/package format、initial practical sample fixtures、front-door parser/loader、positive/negative parse tests、report、commit/push |
 | `PA1-2` / `P-A1-02` | 100% | closed | distinct lowered IR、non-final checker report、`scripts/practical_alpha1_check.py`、`CHK-LIF-01..04` / `CHK-VAR-01..03` / `CHK-CUT-01` / `CHK-PKG-01/02` の explicit accepted/rejected evidence |
 | `PA1-3` / `P-A1-03` | 100% | closed | checked package を distinct runtime-plan boundary が consume し、practical source package から local world を起動し event DAG を export |
-| `PA1-4` / `P-A1-04a+b+c` | 65% | in progress | `P-A1-04a` closed the first layer/package floor, `P-A1-04b` added missing-witness/stale-membership negatives and the object package attach preview seam, and `P-A1-04c` remains for detach minimal contract |
+| `PA1-4` / `P-A1-04a+b+c` | 100% | closed | `P-A1-04a` closed the first layer/package floor, `P-A1-04b` added missing-witness/stale-membership negatives and the object package attach preview seam, and `P-A1-04c` closed the explicit deferred detach minimal contract boundary |
 | `PA1-5` / `P-A1-05` | 10% | pending | same practical package input で Docker/local TCP を動かし、route trace と separated lanes を export |
 | `PA1-6` / `P-A1-06` | 10% | pending | JSON schema、viewer command、event DAG / route / membership / hot-plug / fallback の可視化 |
 | `PA1-7` / `P-A1-07` | 10% | pending | practical `save` / `load` command、local roundtrip、stale membership non-resurrection、invalid distributed cut reject |
@@ -179,8 +179,8 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A1-04c` detach minimal contract | repo | ready | add an explicit detach-time outcome contract over the current practical hot-plug floor without claiming rollback/migration/native/public ABI completion |
-| 2 | `P-A1-05..08` practical toolchain completion | repo | staged later | transport E2E, devtools, save/load, and product prototype sequence after package API exists |
+| 1 | `P-A1-05` transport practical E2E | repo | ready | run the same practical package line through product-like local TCP / Docker transport while keeping auth / membership / capability / witness lanes separated |
+| 2 | `P-A1-06..08` practical toolchain completion | repo | staged later | devtools, save/load, and product prototype sequence after transport E2E exists |
 | 3 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
 | 4 | `U1` actual commitment | user + repo | later | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 5 | maintenance / dashboard freshness | repo | active | keep practical/evidence split wording and validation anchors current while package line advances |
@@ -235,8 +235,8 @@ These are safe to do without new product decisions.
 | `P-A1-03` | local runtime from runtime plan | closed | consume checked practical package in a reusable local runtime path with a distinct runtime-plan carrier and non-final local-runtime report |
 | `P-A1-04a` | layer-only practical hot-plug first floor | closed | practical manifest admission plus debug/rate-limit/auth layer attach path over `HP-A1-01..05`, with distinct hotplug-plan carrier and exact expected reports |
 | `P-A1-04b` | practical hot-plug freshness/object seam | closed | missing-witness/stale-membership negatives plus narrow object package attach seam without claiming full Stage-D/public ABI completion |
-| `P-A1-04c` | practical detach minimal contract | promoted next | explicit detach-time reject/defer/fallback contract over the current practical hot-plug floor without claiming rollback/migration/native/public ABI completion |
-| `P-A1-05` | transport practical E2E | pending | same practical package input for local and Docker/local TCP modes |
+| `P-A1-04c` | practical detach minimal contract | closed | explicit deferred detach-time contract over the current practical hot-plug floor via `operation_kind = detach` and `detach_boundary_ref`, without claiming rollback/migration/native/public ABI completion |
+| `P-A1-05` | transport practical E2E | promoted next | same practical package input for local and Docker/local TCP modes |
 | `P-A1-06` | devtools viewer | pending | practical export schema and viewer command |
 | `P-A1-07` | local save/load command | pending | practical save/load CLI or library path with negative stale-state checks |
 | `P-A1-08` | practical alpha product prototype | pending | one small product-like world package with local + Docker + hot-plug + save/load + devtools |

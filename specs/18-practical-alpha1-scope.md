@@ -142,7 +142,7 @@ save/load、devtools completion と同一視しない。
 
 ## first package / hot-plug floor boundary
 
-`P-A1-04a` / `P-A1-04b` の current actualization は、
+`P-A1-04a` / `P-A1-04b` / `P-A1-04c` の current actualization は、
 package / hot-plug stage 全体の completion ではなく、
 **non-final practical hot-plug first floor** である。
 
@@ -158,22 +158,24 @@ package / hot-plug stage 全体の completion ではなく、
 - `HP-A1-04B1`
 - `HP-A1-04B2`
 - `HP-A1-06`
+- `HP-A1-07`
 - accepted proof は exact hot-plug report と manifest checks で示す
-- rejected proof は exact hot-plug report の `terminal_outcome`、`reason_family`、
+- rejected / deferred proof は exact hot-plug report の `terminal_outcome`、`reason_family`、
   `rejection_reason_refs`、`witness_reason_refs` で示す
 - current floor は debug/auth/rate-limit layer の manifest-driven attach path を actualize する
 - current floor は incompatible patch reject と missing attach capability/admin reject を actualize する
 - current floor は attach-time stale membership reject と missing witness reject を actualize する
 - current floor は narrow object package attach preview seam を actualize する
+- current floor は `HP-A1-07` で `operation_kind = detach` と `detach_boundary_ref` を持つ explicit deferred detach minimal contract を actualize する
 - current floor は final object package attach completionを意味しない
-- current floor は detach minimal contract completionを意味しない
+- current floor は detach runtime lifecycle completionを意味しない
 - current floor は Docker/local TCP transport completionを意味しない
 - current floor は final public hot-plug/package ABI を意味しない
 
-したがって、`P-A1-04b` closeout は useful practical package/hot-plug floor だが、
+したがって、`P-A1-04c` closeout は useful practical package/hot-plug floor だが、
 `specs/18` package / hot-plug stage 全体、
-final object package attach、detach minimal contract、
-detach contract completion と同一視しない。
+final object package attach、detach runtime lifecycle、
+detach execution / rollback / migration completion と同一視しない。
 
 ### 3. reusable runtime
 
@@ -188,6 +190,7 @@ detach contract completion と同一視しない。
 - debug layer / auth layer / rate-limit layer / object package の attach path がある
 - incompatible patch / missing capability / missing witness / stale membership は typed reject になる
 - detach minimal contract は reject / defer / fallback の少なくとも 1 つで explicit に扱う
+- current actualization は defer branch を採る。detach request は `detach_boundary_ref` を持つ explicit deferred boundary として扱い、accepted detach execution はまだ claim しない
 
 ### 5. transport
 

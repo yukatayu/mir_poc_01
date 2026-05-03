@@ -153,7 +153,7 @@
       ],
       "notes": [
         "practical hotplug verdict stays non-final and alpha-local",
-        "detach/minimal lifecycle contract remains later"
+        "detach runtime execution, rollback, and durable migration remain later"
       ]
     },
     "runtime_snapshot": {
@@ -198,7 +198,8 @@
   },
   "active_layers_after": [],
   "runtime_preview": null,
-  "activation_cut_ref": "activation_cut#avatar_placeholder_attach",
+  "activation_cut_ref": null,
+  "detach_boundary_ref": null,
   "terminal_outcome": "accepted_object_attach_preview",
   "reason_family": null,
   "rejection_reason_refs": [],
@@ -228,7 +229,7 @@
     ]
   },
   "retained_later_refs": [
-    "detach_minimal_contract",
+    "detach_runtime_lifecycle",
     "docker_transport_execution",
     "local_save_load_execution",
     "final_public_hotplug_api"
@@ -236,12 +237,13 @@
   "stop_lines": [
     "do not treat the practical alpha-1 attach command as final avatar/runtime/package completion",
     "do not treat the practical alpha-1 attach command as Docker transport, save/load, or final public hotplug ABI completion",
+    "do not treat the practical alpha-1 detach contract as rollback, durable migration, or distributed activation ordering completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the hotplug package"
   ],
   "limitations": [
     "alpha-local non-final practical hotplug floor only",
     "limited HP-A1 practical sample families only",
-    "no detach-minimal contract, Docker/local TCP, save/load, or final public ABI"
+    "no detach runtime lifecycle, Docker/local TCP, save/load, or final public ABI"
   ],
   "public_cli_frozen": false,
   "run_local_claimed": false,

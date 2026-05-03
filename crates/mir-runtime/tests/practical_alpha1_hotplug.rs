@@ -199,6 +199,35 @@ fn practical_hotplug_matches_object_package_attach_preview_row() {
 }
 
 #[test]
+fn practical_hotplug_matches_detach_minimal_contract_row() {
+    let report = attach_practical_alpha1_package_path(practical_package_dir(
+        "hp-a1-07-detach-minimal-contract",
+    ))
+    .expect("HP-A1-07 should return an explicit detach minimal-contract rejection");
+    let expected = read_expected_report("hp-a1-07-detach-minimal-contract.expected.json");
+
+    assert_eq!(
+        serde_json::to_value(&report).expect("serialize report"),
+        expected
+    );
+    assert_eq!(report.sample_id, "HP-A1-07");
+    assert_eq!(report.terminal_outcome, "deferred_detach_minimal_contract");
+    assert_eq!(report.reason_family.as_deref(), Some("detach_contract"));
+    assert_eq!(
+        report.detach_boundary_ref.as_deref(),
+        Some("detach_boundary#alpha_local_hotplug_minimal_contract")
+    );
+    assert_eq!(
+        report.hotplug_runtime_report.request.operation_kind,
+        "detach".to_string()
+    );
+    assert_eq!(
+        report.hotplug_runtime_report.verdict.verdict_kind,
+        "deferred".to_string()
+    );
+}
+
+#[test]
 fn practical_hotplug_rejects_front_door_only_package_without_hotplug_section() {
     let error = attach_practical_alpha1_package_path(practical_package_dir("src-01-minimal-world"))
         .expect_err("front-door-only package must not auto-run through practical hotplug");
@@ -254,6 +283,54 @@ fn practical_hotplug_rejects_auth_profile_without_contract_update_ref() {
         .expect_err("auth profile without contract update ref must not enter attach floor");
 
     assert_eq!(error.kind, PracticalAlpha1HotPlugErrorKind::HotPlugPlan);
+
+    fs::remove_dir_all(temp_dir).expect("cleanup temp package dir");
+}
+
+#[test]
+fn practical_hotplug_detach_contract_is_driven_by_operation_kind_not_sample_id() {
+    let temp_dir = write_temp_package_from_fixture("hp-a1-07-detach-minimal-contract", |value| {
+        value["alpha_local_hotplug_input"]
+            .as_object_mut()
+            .expect("hotplug input object")
+            .remove("operation_kind");
+    });
+    let report = attach_practical_alpha1_package_path(&temp_dir)
+        .expect("mutated detach fixture should still produce a report");
+
+    assert_eq!(
+        report.hotplug_runtime_report.request.operation_kind,
+        "attach"
+    );
+    assert_ne!(report.reason_family.as_deref(), Some("detach_contract"));
+    assert_eq!(report.terminal_outcome, "accepted");
+
+    fs::remove_dir_all(temp_dir).expect("cleanup temp package dir");
+}
+
+#[test]
+fn practical_hotplug_detach_contract_semantics_do_not_depend_on_sample_id() {
+    let temp_dir = write_temp_package_from_fixture("hp-a1-07-detach-minimal-contract", |value| {
+        value["alpha_local_hotplug_input"]["sample_id"] = json!("HP-A1-07-RENAMED");
+    });
+    let report = attach_practical_alpha1_package_path(&temp_dir)
+        .expect("renamed detach fixture should still produce the same detach semantics");
+
+    assert_eq!(report.sample_id, "HP-A1-07-RENAMED");
+    assert_eq!(report.terminal_outcome, "deferred_detach_minimal_contract");
+    assert_eq!(report.reason_family.as_deref(), Some("detach_contract"));
+    assert_eq!(
+        report.rejection_reason_refs,
+        vec!["detach_minimal_contract_deferred".to_string()]
+    );
+    assert_eq!(
+        report.hotplug_runtime_report.request.operation_kind,
+        "detach"
+    );
+    assert_eq!(
+        report.hotplug_runtime_report.verdict.verdict_kind,
+        "deferred".to_string()
+    );
 
     fs::remove_dir_all(temp_dir).expect("cleanup temp package dir");
 }

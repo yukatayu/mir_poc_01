@@ -263,6 +263,8 @@ pub struct PracticalAlpha1AlphaLocalRuntimeInput {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1AlphaLocalHotPlugInput {
     pub sample_id: String,
+    #[serde(default = "default_hotplug_operation_kind")]
+    pub operation_kind: PracticalAlpha1HotPlugOperationKind,
     pub attachpoint_ref: String,
     pub requesting_principal: String,
     pub requesting_participant_place: String,
@@ -276,9 +278,18 @@ pub struct PracticalAlpha1AlphaLocalHotPlugInput {
     #[serde(default)]
     pub activation_cut_ref: Option<String>,
     #[serde(default)]
+    pub detach_boundary_ref: Option<String>,
+    #[serde(default)]
     pub contract_update_ref: Option<String>,
     #[serde(default)]
     pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PracticalAlpha1HotPlugOperationKind {
+    Attach,
+    Detach,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -302,6 +313,10 @@ pub struct PracticalAlpha1RuntimeMembershipAdvance {
 #[serde(rename_all = "snake_case")]
 pub enum PracticalAlpha1RuntimeMembershipAdvanceKind {
     AddParticipant,
+}
+
+fn default_hotplug_operation_kind() -> PracticalAlpha1HotPlugOperationKind {
+    PracticalAlpha1HotPlugOperationKind::Attach
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

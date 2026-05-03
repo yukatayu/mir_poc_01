@@ -6,8 +6,8 @@ use std::{
 use serde::{Deserialize, Serialize};
 
 use crate::practical_alpha1::{
-    PracticalAlpha1AttachProfile, PracticalAlpha1Package, PracticalAlpha1RuntimeMembershipAdvance,
-    load_practical_alpha1_package_path,
+    PracticalAlpha1AttachProfile, PracticalAlpha1HotPlugOperationKind, PracticalAlpha1Package,
+    PracticalAlpha1RuntimeMembershipAdvance, load_practical_alpha1_package_path,
 };
 
 pub const PRACTICAL_ALPHA1_HOTPLUG_PLAN_SCOPE: &str = "practical-alpha1-hotplug-plan-floor";
@@ -19,7 +19,7 @@ const PRACTICAL_ALPHA1_HOTPLUG_PLAN_RETAINED_LATER_REFS: &[&str] = &[
     "object_package_attach",
     "stale_membership_attach_reject",
     "missing_witness_attach_reject",
-    "detach_minimal_contract",
+    "detach_runtime_lifecycle",
     "docker_transport_execution",
     "local_save_load_execution",
     "final_public_hotplug_api",
@@ -65,6 +65,7 @@ pub struct PracticalAlpha1HotPlugPlan {
     pub sample_id: String,
     pub package_id: String,
     pub package_kind: String,
+    pub operation_kind: String,
     pub manifest_version: String,
     pub attach_profile: String,
     pub attachpoint_ref: String,
@@ -79,6 +80,8 @@ pub struct PracticalAlpha1HotPlugPlan {
     pub pre_attach_membership_advances: Vec<PracticalAlpha1RuntimeMembershipAdvance>,
     #[serde(default)]
     pub activation_cut_ref: Option<String>,
+    #[serde(default)]
+    pub detach_boundary_ref: Option<String>,
     #[serde(default)]
     pub contract_update_ref: Option<String>,
     #[serde(default = "retained_later_refs_default")]
@@ -163,6 +166,17 @@ fn build_practical_alpha1_hotplug_plan_at_path(
         _ => {}
     }
 
+    if package.package_kind == "object"
+        && hotplug.operation_kind == PracticalAlpha1HotPlugOperationKind::Detach
+    {
+        return Err(PracticalAlpha1HotPlugPlanError {
+            kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
+            path: path.to_path_buf(),
+            detail: "current practical detach minimal contract only admits layer packages"
+                .to_string(),
+        });
+    }
+
     if hotplug.sample_id.is_empty()
         || hotplug.attachpoint_ref.is_empty()
         || hotplug.requesting_principal.is_empty()
@@ -177,6 +191,20 @@ fn build_practical_alpha1_hotplug_plan_at_path(
             detail:
                 "practical hotplug plan requires non-empty request/sample/capability/witness fields"
                     .to_string(),
+        });
+    }
+
+    if hotplug.operation_kind == PracticalAlpha1HotPlugOperationKind::Detach
+        && hotplug
+            .detach_boundary_ref
+            .as_ref()
+            .map(|value| value.is_empty())
+            .unwrap_or(true)
+    {
+        return Err(PracticalAlpha1HotPlugPlanError {
+            kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
+            path: path.to_path_buf(),
+            detail: "detach requests require detach_boundary_ref".to_string(),
         });
     }
 
@@ -214,6 +242,7 @@ fn build_practical_alpha1_hotplug_plan_at_path(
         sample_id: hotplug.sample_id.clone(),
         package_id: package.package_id.clone(),
         package_kind: package.package_kind.clone(),
+        operation_kind: operation_kind_name(hotplug.operation_kind).to_string(),
         manifest_version: manifest.version.clone(),
         attach_profile: attach_profile_name(attach_profile).to_string(),
         attachpoint_ref: hotplug.attachpoint_ref.clone(),
@@ -226,6 +255,7 @@ fn build_practical_alpha1_hotplug_plan_at_path(
         required_witness_refs: hotplug.required_witness_refs.clone(),
         pre_attach_membership_advances: hotplug.pre_attach_membership_advances.clone(),
         activation_cut_ref: hotplug.activation_cut_ref.clone(),
+        detach_boundary_ref: hotplug.detach_boundary_ref.clone(),
         contract_update_ref: hotplug.contract_update_ref.clone(),
         retained_later_refs: retained_later_refs_default(),
     })
@@ -240,6 +270,13 @@ fn attach_profile_name(profile: PracticalAlpha1AttachProfile) -> &'static str {
         PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage => {
             "placeholder_avatar_object_package"
         }
+    }
+}
+
+fn operation_kind_name(operation_kind: PracticalAlpha1HotPlugOperationKind) -> &'static str {
+    match operation_kind {
+        PracticalAlpha1HotPlugOperationKind::Attach => "attach",
+        PracticalAlpha1HotPlugOperationKind::Detach => "detach",
     }
 }
 

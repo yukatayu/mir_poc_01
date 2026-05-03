@@ -159,9 +159,9 @@ recommended current promoted line:
 8. `P-A1-07` local save/load command
 9. `P-A1-08` product prototype
 
-current reading after `P-A1-04b`:
+current reading after `P-A1-04c`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b` are closed
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c` are closed
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -169,8 +169,9 @@ current reading after `P-A1-04b`:
 - `P-A1-04b` actualized `HP-A1-04B1` attach-time stale-membership reject、
   `HP-A1-04B2` attach-time missing-witness reject、
   and `HP-A1-06` narrow object package attach preview seam
-- current actualized hot-plug rows are `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`
-- `P-A1-04c` is the promoted next package inside `PA1-4`
+- `P-A1-04c` actualized `HP-A1-07` as an explicit deferred detach minimal contract with `operation_kind = detach` and `detach_boundary_ref`
+- current actualized hot-plug rows are `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
+- `P-A1-05` is the promoted next package after `PA1-4`
 
 ## readiness reading
 
@@ -187,7 +188,7 @@ rough initial reading after `P-A0-28` and before `P-A1-00` close:
 
 practical alpha-1 overall readiness should therefore stay low until
 front-door, reusable checker/runtime, and practical sample root exist.
-`P-A1-04b` 後は initial practical sample root、library-first front-door、distinct lowered IR、first checker floor、distinct runtime-plan carrier、first practical local-runtime floor、distinct hotplug-plan carrier、attach-time stale-membership/missing-witness reject、narrow object package attach preview seam は存在するが、detach minimal contract、transport、save/load、devtools、product prototype が未完成であり、typed checking も first floor に留まるため overall readiness は still moderate に留める。
+`P-A1-04c` 後は initial practical sample root、library-first front-door、distinct lowered IR、first checker floor、distinct runtime-plan carrier、first practical local-runtime floor、distinct hotplug-plan carrier、attach-time stale-membership/missing-witness reject、narrow object package attach preview seam、explicit deferred detach minimal contract は存在するが、transport、save/load、devtools、product prototype が未完成であり、typed checking も first floor に留まるため overall readiness は still moderate に留める。
 
 ## sample-root roadmap
 
@@ -204,7 +205,7 @@ samples/practical-alpha1/
   docker/
 ```
 
-- current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`、`HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`
+- current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`、`HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
 - `source/` and `docker/` are reserved for later textual-source / Docker packages
 
 ## validator roadmap
@@ -224,7 +225,7 @@ but should not require practical runner scripts before they are added.
 - `cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`
 - `python3 scripts/practical_alpha1_run_local.py check-all --format json`
 
-`P-A1-04b` keeps the practical hot-plug validation path and widens it with freshness/object-preview rows:
+`P-A1-04c` keeps the practical hot-plug validation path and widens it with the detach row:
 
 - `cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`
 - `cargo test -p mir-ast --test practical_alpha1_hotplug_plan -- --nocapture`
@@ -245,15 +246,16 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- after `P-A1-04b`, the next safe package is expected to be `P-A1-04c`
-  if the non-final hot-plug floor stays distinct from final object package attach,
-  detach contract completion, transport execution, save/load command,
+- after `P-A1-04c`, the next safe package is expected to be `P-A1-05`
+  if the practical hot-plug floor stays distinct from final object package attach,
+  detach runtime lifecycle, save/load command,
   and final public runtime/devtools ABI
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
   - keep `P-A1-03` as the first local-runtime floor over `RUN-01/02`
-  - keep `P-A1-04a` / `P-A1-04b` as the first practical hot-plug floor over `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`
+  - keep `P-A1-04a` / `P-A1-04b` / `P-A1-04c` as the first practical hot-plug floor over `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
+  - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
 - queue authority remains `progress.md` / `tasks.md`

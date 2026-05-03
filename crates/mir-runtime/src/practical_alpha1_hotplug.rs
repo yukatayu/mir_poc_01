@@ -44,7 +44,7 @@ const OBJECT_RENDER_CAPABILITY: &str = "render.placeholder_avatar";
 const OBJECT_FALLBACK_REPRESENTATION: &str = "static_capsule_placeholder";
 
 const PRACTICAL_ALPHA1_HOTPLUG_RETAINED_LATER_REFS: &[&str] = &[
-    "detach_minimal_contract",
+    "detach_runtime_lifecycle",
     "docker_transport_execution",
     "local_save_load_execution",
     "final_public_hotplug_api",
@@ -53,13 +53,14 @@ const PRACTICAL_ALPHA1_HOTPLUG_RETAINED_LATER_REFS: &[&str] = &[
 const PRACTICAL_ALPHA1_HOTPLUG_STOP_LINES: &[&str] = &[
     "do not treat the practical alpha-1 attach command as final avatar/runtime/package completion",
     "do not treat the practical alpha-1 attach command as Docker transport, save/load, or final public hotplug ABI completion",
+    "do not treat the practical alpha-1 detach contract as rollback, durable migration, or distributed activation ordering completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the hotplug package",
 ];
 
 const PRACTICAL_ALPHA1_HOTPLUG_LIMITATIONS: &[&str] = &[
     "alpha-local non-final practical hotplug floor only",
     "limited HP-A1 practical sample families only",
-    "no detach-minimal contract, Docker/local TCP, save/load, or final public ABI",
+    "no detach runtime lifecycle, Docker/local TCP, save/load, or final public ABI",
 ];
 
 const OBJECT_HOST_CAPABILITIES: &[&str] = &[
@@ -147,6 +148,8 @@ pub struct PracticalAlpha1HotPlugReport {
     pub runtime_preview: Option<LayerRuntimePreview>,
     #[serde(default)]
     pub activation_cut_ref: Option<String>,
+    #[serde(default)]
+    pub detach_boundary_ref: Option<String>,
     pub terminal_outcome: String,
     #[serde(default)]
     pub reason_family: Option<String>,
@@ -195,6 +198,17 @@ struct HotPlugGateEvaluation {
     accepted: bool,
     reason_family: Option<String>,
     rejection_reason_refs: Vec<String>,
+}
+
+struct HotPlugReportOutcome {
+    terminal_outcome: String,
+    reason_family: Option<String>,
+    rejection_reason_refs: Vec<String>,
+    verdict_kind: String,
+    verdict_notes: Vec<String>,
+    active_layers_after: Vec<String>,
+    runtime_preview: Option<LayerRuntimePreview>,
+    activation_cut_ref: Option<String>,
 }
 
 pub fn attach_practical_alpha1_package_path(
@@ -315,11 +329,13 @@ fn attach_layer_package(
         base_report.compatibility.failed_reason_refs.is_empty(),
         required_attach_capability_refs(&[profile.runtime_contract.attach_capability.as_str()]),
     );
+    let outcome = layer_hotplug_outcome(plan, &gate, &base_report);
     let hotplug_runtime_report = build_hotplug_runtime_report(
         &shell,
         plan,
         &principal_claim,
         &gate,
+        &outcome,
         format!("LayerPatch[{}]", profile.runtime_contract.layer_name),
         "current verdict is computed from manifest, freshness, witness, authorization, and layer compatibility checks",
     )
@@ -328,12 +344,6 @@ fn attach_layer_package(
         path: path.to_path_buf(),
         detail: error.to_string(),
     })?;
-
-    let terminal_outcome = if gate.accepted {
-        base_report.terminal_outcome
-    } else {
-        "rejected".to_string()
-    };
 
     Ok(PracticalAlpha1HotPlugReport {
         surface_kind: surface_kind(),
@@ -351,16 +361,17 @@ fn attach_layer_package(
         package_admission_checks: Vec::new(),
         layer_compatibility: Some(base_report.compatibility),
         hotplug_runtime_report,
-        active_layers_after: if gate.accepted {
-            base_report.active_layers_after
+        active_layers_after: outcome.active_layers_after,
+        runtime_preview: outcome.runtime_preview,
+        activation_cut_ref: outcome.activation_cut_ref,
+        detach_boundary_ref: if plan.operation_kind == "detach" {
+            plan.detach_boundary_ref.clone()
         } else {
-            Vec::new()
+            None
         },
-        runtime_preview: base_report.runtime_preview,
-        activation_cut_ref: plan.activation_cut_ref.clone(),
-        terminal_outcome,
-        reason_family: gate.reason_family,
-        rejection_reason_refs: gate.rejection_reason_refs,
+        terminal_outcome: outcome.terminal_outcome,
+        reason_family: outcome.reason_family,
+        rejection_reason_refs: outcome.rejection_reason_refs,
         object_attach_preview: None,
         retained_later_refs: retained_later_refs_default(),
         stop_lines: stop_lines_default(),
@@ -409,11 +420,13 @@ fn attach_object_package_preview(
             OBJECT_INSTALL_CAPABILITY,
         ]),
     );
+    let outcome = object_hotplug_outcome(&gate);
     let hotplug_runtime_report = build_hotplug_runtime_report(
         &shell,
         plan,
         &principal_claim,
         &gate,
+        &outcome,
         plan.package_id.clone(),
         "current verdict is computed from manifest, package-admission preview checks, freshness, witness, and authorization",
     )
@@ -447,14 +460,15 @@ fn attach_object_package_preview(
         hotplug_runtime_report,
         active_layers_after: Vec::new(),
         runtime_preview: None,
-        activation_cut_ref: plan.activation_cut_ref.clone(),
-        terminal_outcome: if gate.accepted {
-            "accepted_object_attach_preview".to_string()
+        activation_cut_ref: outcome.activation_cut_ref,
+        detach_boundary_ref: if plan.operation_kind == "detach" {
+            plan.detach_boundary_ref.clone()
         } else {
-            "rejected".to_string()
+            None
         },
-        reason_family: gate.reason_family,
-        rejection_reason_refs: gate.rejection_reason_refs,
+        terminal_outcome: outcome.terminal_outcome,
+        reason_family: outcome.reason_family,
+        rejection_reason_refs: outcome.rejection_reason_refs,
         object_attach_preview,
         retained_later_refs: retained_later_refs_default(),
         stop_lines: stop_lines_default(),
@@ -508,6 +522,7 @@ fn build_hotplug_runtime_report(
     plan: &PracticalAlpha1HotPlugPlan,
     principal_claim: &PrincipalClaim,
     gate: &HotPlugGateEvaluation,
+    outcome: &HotPlugReportOutcome,
     patch_ref: String,
     note: &str,
 ) -> Result<HotPlugRuntimeSkeletonReport, MirroreaCoreError> {
@@ -518,7 +533,7 @@ fn build_hotplug_runtime_report(
         ),
         attachpoint_ref: plan.attachpoint_ref.clone(),
         patch_ref,
-        operation_kind: "attach".to_string(),
+        operation_kind: plan.operation_kind.clone(),
         requesting_principal: principal_claim.principal.clone(),
         requesting_participant_place: principal_claim.participant_place.clone(),
         message_envelope_ref: format!(
@@ -532,21 +547,102 @@ fn build_hotplug_runtime_report(
     };
     let verdict = HotPlugVerdict {
         request_ref: request.request_id.clone(),
-        verdict_kind: if gate.accepted {
-            "accepted".to_string()
-        } else {
-            "rejected".to_string()
-        },
+        verdict_kind: outcome.verdict_kind.clone(),
         compatibility_reason_refs: gate.compatibility_reason_refs.clone(),
         authorization_reason_refs: gate.authorization_reason_refs.clone(),
         membership_freshness_reason_refs: gate.membership_freshness_reason_refs.clone(),
         witness_reason_refs: gate.witness_reason_refs.clone(),
-        notes: vec![
-            "practical hotplug verdict stays non-final and alpha-local".to_string(),
-            "detach/minimal lifecycle contract remains later".to_string(),
-        ],
+        notes: outcome.verdict_notes.clone(),
     };
     assemble_hotplug_runtime_skeleton_report(shell, request, verdict)
+}
+
+fn layer_hotplug_outcome(
+    plan: &PracticalAlpha1HotPlugPlan,
+    gate: &HotPlugGateEvaluation,
+    base_report: &crate::alpha_layer_insertion_runtime::LayerInsertionReport,
+) -> HotPlugReportOutcome {
+    if !gate.accepted {
+        return HotPlugReportOutcome {
+            terminal_outcome: "rejected".to_string(),
+            reason_family: gate.reason_family.clone(),
+            rejection_reason_refs: gate.rejection_reason_refs.clone(),
+            verdict_kind: "rejected".to_string(),
+            verdict_notes: vec![
+                "practical hotplug verdict stays non-final and alpha-local".to_string(),
+                "detach runtime execution, rollback, and durable migration remain later"
+                    .to_string(),
+            ],
+            active_layers_after: Vec::new(),
+            runtime_preview: base_report.runtime_preview.clone(),
+            activation_cut_ref: plan.activation_cut_ref.clone(),
+        };
+    }
+
+    if plan.operation_kind == "detach" {
+        return HotPlugReportOutcome {
+            terminal_outcome: "deferred_detach_minimal_contract".to_string(),
+            reason_family: Some("detach_contract".to_string()),
+            rejection_reason_refs: vec!["detach_minimal_contract_deferred".to_string()],
+            verdict_kind: "deferred".to_string(),
+            verdict_notes: vec![
+                "practical hotplug verdict stays non-final and alpha-local".to_string(),
+                "detach requests are explicitly deferred at the current practical floor"
+                    .to_string(),
+            ],
+            active_layers_after: Vec::new(),
+            runtime_preview: None,
+            activation_cut_ref: None,
+        };
+    }
+
+    HotPlugReportOutcome {
+        terminal_outcome: base_report.terminal_outcome.clone(),
+        reason_family: None,
+        rejection_reason_refs: Vec::new(),
+        verdict_kind: "accepted".to_string(),
+        verdict_notes: vec![
+            "practical hotplug verdict stays non-final and alpha-local".to_string(),
+            "detach runtime execution, rollback, and durable migration remain later".to_string(),
+        ],
+        active_layers_after: base_report.active_layers_after.clone(),
+        runtime_preview: base_report.runtime_preview.clone(),
+        activation_cut_ref: plan.activation_cut_ref.clone(),
+    }
+}
+
+fn object_hotplug_outcome(gate: &HotPlugGateEvaluation) -> HotPlugReportOutcome {
+    if gate.accepted {
+        HotPlugReportOutcome {
+            terminal_outcome: "accepted_object_attach_preview".to_string(),
+            reason_family: None,
+            rejection_reason_refs: Vec::new(),
+            verdict_kind: "accepted".to_string(),
+            verdict_notes: vec![
+                "practical hotplug verdict stays non-final and alpha-local".to_string(),
+                "detach runtime execution, rollback, and durable migration remain later"
+                    .to_string(),
+            ],
+            active_layers_after: Vec::new(),
+            runtime_preview: None,
+            activation_cut_ref: None,
+        }
+    } else {
+        HotPlugReportOutcome {
+            terminal_outcome: "rejected".to_string(),
+            reason_family: gate.reason_family.clone(),
+            rejection_reason_refs: gate.rejection_reason_refs.clone(),
+            verdict_kind: "rejected".to_string(),
+            verdict_notes: vec![
+                "practical hotplug verdict stays non-final and alpha-local".to_string(),
+                "detach runtime execution, rollback, and durable migration remain later"
+                    .to_string(),
+            ],
+            active_layers_after: Vec::new(),
+            runtime_preview: None,
+            activation_cut_ref: None,
+        }
+    }
 }
 
 fn evaluate_hotplug_gates(

@@ -3,8 +3,8 @@
   "scope_kind": "alpha_local",
   "hotplug_scope": "practical-alpha1-hotplug-floor",
   "hotplug_plan_scope": "practical-alpha1-hotplug-plan-floor",
-  "sample_id": "HP-A1-04B1",
-  "package_id": "hp-a1-04b1-stale-membership-attach-rejected",
+  "sample_id": "HP-A1-07",
+  "package_id": "hp-a1-07-detach-minimal-contract",
   "package_kind": "layer",
   "attach_profile": "debug_trace_layer",
   "offered_membership_epoch": 0,
@@ -232,13 +232,13 @@
       "notes"
     ],
     "request": {
-      "request_id": "practical_hotplug_request#hp-a1-04b1",
+      "request_id": "practical_hotplug_request#hp-a1-07",
       "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
       "patch_ref": "LayerPatch[debug_trace_layer]",
-      "operation_kind": "attach",
+      "operation_kind": "detach",
       "requesting_principal": "ExampleAdmin",
       "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
-      "message_envelope_ref": "practical_hotplug_envelope#hp-a1-04b1",
+      "message_envelope_ref": "practical_hotplug_envelope#hp-a1-07",
       "auth_evidence_ref": null,
       "capability_refs": [
         "AttachDebugLayer(AlphaRoom#1)",
@@ -248,13 +248,13 @@
         "membership_frontier_snapshot#practical_hotplug"
       ],
       "notes": [
-        "sample_id=HP-A1-04B1",
+        "sample_id=HP-A1-07",
         "current verdict is computed from manifest, freshness, witness, authorization, and layer compatibility checks"
       ]
     },
     "verdict": {
-      "request_ref": "practical_hotplug_request#hp-a1-04b1",
-      "verdict_kind": "rejected",
+      "request_ref": "practical_hotplug_request#hp-a1-07",
+      "verdict_kind": "deferred",
       "compatibility_reason_refs": [
         "layer_kind_allowed",
         "attach_point_matches_policy",
@@ -265,14 +265,15 @@
         "admin_attach_authority_confirmed"
       ],
       "membership_freshness_reason_refs": [
-        "membership_epoch_drift"
+        "membership_frontier_current",
+        "member_incarnation_current"
       ],
       "witness_reason_refs": [
         "required_witnesses_present"
       ],
       "notes": [
         "practical hotplug verdict stays non-final and alpha-local",
-        "detach runtime execution, rollback, and durable migration remain later"
+        "detach requests are explicitly deferred at the current practical floor"
       ]
     },
     "runtime_snapshot": {
@@ -282,14 +283,13 @@
           "GamePlace[SugorokuGame#1]": "SugorokuGamePlace",
           "ParticipantPlace[Alice]": "ParticipantPlace",
           "ParticipantPlace[Bob]": "ParticipantPlace",
-          "ParticipantPlace[Carol]": "ParticipantPlace",
           "ParticipantPlace[ExampleAdmin]": "ParticipantPlace",
           "ParticipantPlace[Mallory]": "ParticipantPlace",
           "WorldPlace[AlphaRoom#1]": "WorldPlace"
         }
       },
       "membership": {
-        "membership_epoch": 1,
+        "membership_epoch": 0,
         "members": {
           "Alice": {
             "place": "ParticipantPlace[Alice]",
@@ -303,13 +303,6 @@
             "active": true,
             "incarnation": 0,
             "joined_at_epoch": 0,
-            "left_at_epoch": null
-          },
-          "Carol": {
-            "place": "ParticipantPlace[Carol]",
-            "active": true,
-            "incarnation": 0,
-            "joined_at_epoch": 1,
             "left_at_epoch": null
           },
           "ExampleAdmin": {
@@ -351,12 +344,12 @@
   },
   "active_layers_after": [],
   "runtime_preview": null,
-  "activation_cut_ref": "activation_cut#debug_trace_layer_attach",
-  "detach_boundary_ref": null,
-  "terminal_outcome": "rejected",
-  "reason_family": "membership_freshness",
+  "activation_cut_ref": null,
+  "detach_boundary_ref": "detach_boundary#alpha_local_hotplug_minimal_contract",
+  "terminal_outcome": "deferred_detach_minimal_contract",
+  "reason_family": "detach_contract",
   "rejection_reason_refs": [
-    "membership_epoch_drift"
+    "detach_minimal_contract_deferred"
   ],
   "object_attach_preview": null,
   "retained_later_refs": [

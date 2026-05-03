@@ -10,4 +10,4 @@ These JSON files describe the current practical alpha-1 expected artifacts.
 - Negative checker proof uses explicit `rejected_rows` and `diagnostics`.
 - They are not public API schemas.
 - `run-*.expected.json` does not imply Docker/package/save-load/devtools completion or public runtime/API freeze.
-- `hp-a1-*.expected.json` may include attach-time stale-membership reject, attach-time missing-witness reject, and narrow object package attach preview evidence, but does not imply final object package attach completion, detach lifecycle completion, Docker transport, save/load, or final public package/hot-plug ABI.
+- `hp-a1-*.expected.json` may include attach-time stale-membership reject, attach-time missing-witness reject, narrow object package attach preview evidence, and an explicit deferred detach minimal contract boundary, but does not imply final object package attach completion, detach runtime lifecycle completion, Docker transport, save/load, or final public package/hot-plug ABI.

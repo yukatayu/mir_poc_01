@@ -1,0 +1,43 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "hp-a1-07-detach-minimal-contract",
+  "package_kind": "layer",
+  "manifest": {
+    "version": "0.1.0",
+    "attach_profile": "debug_trace_layer",
+    "requires_capabilities": [
+      "admin.attach_layer"
+    ],
+    "provided_capabilities": [
+      "observe.debug_trace"
+    ],
+    "effect_row": [
+      "emit_typed_debug_trace"
+    ],
+    "failure_row": []
+  },
+  "alpha_local_hotplug_input": {
+    "sample_id": "HP-A1-07",
+    "operation_kind": "detach",
+    "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+    "requesting_principal": "ExampleAdmin",
+    "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
+    "capability_refs": [
+      "AttachDebugLayer(AlphaRoom#1)",
+      "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
+    ],
+    "membership_epoch": 0,
+    "member_incarnation": 0,
+    "witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "required_witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "detach_boundary_ref": "detach_boundary#alpha_local_hotplug_minimal_contract",
+    "notes": [
+      "practical hotplug detach minimal contract row",
+      "detach is explicitly deferred at the current practical floor without claiming rollback or migration"
+    ]
+  }
+}
