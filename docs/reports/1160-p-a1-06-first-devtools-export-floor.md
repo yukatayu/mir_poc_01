@@ -244,10 +244,10 @@ Close `P-A1-07` by adding the narrowest honest practical local save/load command
 
 ## Commit / push status
 
-Pending at report write.
+Main package commit `8c3297d` (`mirrorea: close p-a1-06 first devtools export floor`) was pushed to `origin/main`. Report metadata and sub-agent close status were finalized in a docs-only follow-up after the package closeout.
 
 ## Sub-agent session close status
 
-- `Gauss` completed; close pending package finalization
-- `Nietzsche` completed; close pending package finalization
-- `Ampere` completed; close pending package finalization
+- `Gauss` completed the semantics/spec review and is now closed
+- `Nietzsche` completed the implementation/test review and is now closed
+- `Ampere` completed the docs/snapshot review and is now closed
