@@ -176,6 +176,17 @@ python3 scripts/practical_alpha1_run_local.py check-all --format json
 python3 scripts/practical_alpha1_attach.py check-all --format json
 python3 scripts/practical_alpha1_attach.py closeout --format json
 python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs
+python3 scripts/check_source_hierarchy.py
+python3 scripts/validate_docs.py
+cargo fmt --check
+cargo fmt
+git diff --check
+git commit --no-gpg-sign -m "mirrorea: close p-a1-04a layer-only hotplug floor"
+git push
+close_agent Bacon
+close_agent Feynman
+close_agent Fermat
+close_agent Godel
 date '+%Y-%m-%d %H:%M JST'
 ```
 
@@ -203,6 +214,10 @@ date '+%Y-%m-%d %H:%M JST'
   - `stage_pa1_4_complete: false`
 - `python3 scripts/practical_alpha1_attach.py closeout --format json` re-emitted the same first-floor booleans and stop lines from executed checks rather than hardcoded success.
 - `python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs` passed `32` tests.
+- `python3 scripts/check_source_hierarchy.py` passed with `required/present/missing = 73/73/0`.
+- `python3 scripts/validate_docs.py` passed with `Documentation scaffold looks complete.` and `Found 1147 numbered report(s).`
+- `cargo fmt --check` initially failed on Rust formatting only; after `cargo fmt`, `cargo fmt --check` passed.
+- `git diff --check` passed after the final report/timestamp sync.
 - Exact expected report sidecars now exist for `HP-A1-01..05` and are checked byte-for-byte in both Rust and Python helper tests.
 
 ## What changed in understanding
@@ -267,7 +282,9 @@ Close `P-A1-04b` by adding explicit practical attach-time missing-witness and st
 
 ## Commit / push status
 
-Pending at report write.
+- implementation closeout commit: `5bf4ed3` (`mirrorea: close p-a1-04a layer-only hotplug floor`)
+- push status: pushed to `origin/main`
+- a docs-only metadata sync follows this implementation closeout to finalize report/package bookkeeping before continuing to `P-A1-04b`
 
 ## Sub-agent session close status
 
@@ -276,4 +293,4 @@ Pending at report write.
   - `Godel` runtime/package boundary review
   - `Bacon` docs/progress consistency review
   - `Feynman` sample/validation review
-- close commands will be issued after package commit/push unless the context is reused immediately for `P-A1-04b`.
+- reviewer agents were closed after package closeout so the next package can request fresh scoped review.
