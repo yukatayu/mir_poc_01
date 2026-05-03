@@ -1,0 +1,31 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-lif-04-snapshot-selected-distinction",
+  "package_kind": "world",
+  "world": {
+    "id": "checker_lif_world",
+    "entry_place": "seat"
+  },
+  "places": [
+    {
+      "id": "seat",
+      "authority": "shared_host"
+    }
+  ],
+  "alpha_local_checker_input": {
+    "family": "lifetime_fallback",
+    "case": {
+      "kind": "snapshot_selected_distinction",
+      "sample_id": "CHK-LIF-04",
+      "source_chain": [
+        "FriendHead",
+        "SelfShoulder"
+      ],
+      "selected_option": "FriendHead",
+      "appended_fallback": "WorldOrigin",
+      "excluded_options": [
+        "SelfShoulder"
+      ]
+    }
+  }
+}

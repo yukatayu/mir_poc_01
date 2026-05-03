@@ -51,6 +51,7 @@ textual grammar, typed checker boundary, or runtime execution ABI.
 
 pub mod current_l2;
 pub mod practical_alpha1;
+pub mod practical_alpha1_checker;
 
 pub fn crate_name() -> &'static str {
     "mir_ast"

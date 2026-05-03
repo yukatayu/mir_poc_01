@@ -193,7 +193,8 @@
 - practical alpha-1 の repository memory は `plan/44-practical-alpha1-roadmap.md` に置く
 - `P-A1-00` は docs/spec/taxonomy rebaseline package であり、practical line promotion の entry point として closed した
 - `P-A1-01` は closed であり、first practical front-door package として `samples/practical-alpha1/`、`SRC-01..05`、および `crates/mir-ast/src/practical_alpha1.rs` の limited `package.mir.json` loader floor を actualize した
-- `P-A1-02` は next promoted package であり、typed IR/checker integration を current line の次 gate とする
+- `P-A1-02` は closed であり、distinct lowered IR、`crates/mir-ast/src/practical_alpha1_checker.rs`、`scripts/practical_alpha1_check.py`、`CHK-LIF-01..04` / `CHK-VAR-01..03` / `CHK-CUT-01` / `CHK-PKG-01/02` による first practical checker floor を actualize した
+- `P-A1-03` は next promoted package であり、checked practical package から local runtime を起動する gate とする
 - `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
 - current practical root は separate に存在するが、まだ active canonical runnable root や product-like CLI root ではない
 - current promoted line は later-family blocker widening ではなく、

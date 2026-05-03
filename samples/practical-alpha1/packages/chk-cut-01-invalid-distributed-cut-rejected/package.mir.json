@@ -1,0 +1,24 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-cut-01-invalid-distributed-cut-rejected",
+  "package_kind": "world",
+  "world": {
+    "id": "checker_cut_world",
+    "entry_place": "lobby"
+  },
+  "places": [
+    {
+      "id": "lobby",
+      "authority": "shared_host"
+    }
+  ],
+  "alpha_local_checker_input": {
+    "family": "cut_predicate",
+    "case": {
+      "kind": "orphan_receive",
+      "sample_id": "CHK-CUT-01",
+      "receive_event": "receive_envelope",
+      "missing_predecessor": "send_envelope"
+    }
+  }
+}

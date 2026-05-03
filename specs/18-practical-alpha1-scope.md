@@ -92,6 +92,32 @@ checker は少なくとも次を検査する。
 
 positive proofは negative reason code 不在ではなく explicit accepted evidence で扱う。
 
+## first checker floor boundary
+
+`P-A1-02` の current actualization は、
+typed checking 全体の completion ではなく、
+**first practical checker floor** である。
+
+- parsed package carrier と checker IR は分ける
+- checker report は non-final alpha-local surface とする
+- current actualized row は:
+  - `CHK-LIF-01/02/03/04`
+  - `CHK-VAR-01/02/03`
+  - `CHK-CUT-01`
+  - `CHK-PKG-01/02`
+- accepted proof は `accepted_obligations` で示す
+- rejected proof は `rejected_rows` と `diagnostics` で示す
+- package admission rows は checker-only preview であり、
+  hot-plug/runtime attach verdict completionを意味しない
+- current floor は runtime plan を emit しない
+- current floor は local run / Docker run / save-load / devtools export を行わない
+
+したがって、`P-A1-02` closeout は useful practical floor だが、
+effect row containment、failure row containment、
+observation/redaction/retention constraints、
+package positive admissionなどを含む
+full typed-checking completion と同一視しない。
+
 ### 3. reusable runtime
 
 - multiple `Place` を持つ reusable runtime API がある
@@ -204,6 +230,7 @@ Docker が使えない場合は success claim をせず、skip reason を report
 - current-scope evidence closeout `100%` を practical alpha-1 `100%` と書かない
 - helper-local / sidecar / runtime-mirror / non-public floor を product-ready runtime と書かない
 - parser/front-door が無い sample を source-executed と書かない
+- first checker floor を full `specs/18` typed-checking completion と書かない
 - Docker/local TCP を production WAN と書かない
 - local save/load を durable distributed save/load と書かない
 - avatar / VRM / VRChat / Unity を Mir core primitive にしない

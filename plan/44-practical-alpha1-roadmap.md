@@ -66,12 +66,23 @@ repository-memory roadmap を置く。
   - checker/runtime execution ではない
   - practical CLI command completion ではない
 
-### PA1-2 — typed IR / checker
+### PA1-2 — typed IR / checker first floor
 
 - IR definitions
 - checker diagnostics
 - LIF / VAR / CUT obligations の reusable checker integration
 - `check` front-door
+- current actualized cut:
+  - `crates/mir-ast/src/practical_alpha1_checker.rs`
+  - `crates/mir-ast/examples/mir_practical_alpha1_check.rs`
+  - `scripts/practical_alpha1_check.py`
+  - `samples/practical-alpha1/packages/chk-*/`
+  - `samples/practical-alpha1/expected/chk-*.expected.json`
+- current non-claim:
+  - full `specs/18` typed-checking completion ではない
+  - runtime plan emission ではない
+  - local run / Docker run ではない
+  - final public checker / CLI API ではない
 
 ### PA1-3 — runtime plan execution
 
@@ -130,10 +141,10 @@ recommended current promoted line:
 8. `P-A1-07` local save/load command
 9. `P-A1-08` product prototype
 
-current reading after `P-A1-01`:
+current reading after `P-A1-02`:
 
-- `P-A1-00` and `P-A1-01` are closed
-- `P-A1-02` is the promoted next package
+- `P-A1-00`、`P-A1-01`、`P-A1-02` are closed
+- `P-A1-03` is the promoted next package
 
 ## readiness reading
 
@@ -150,8 +161,8 @@ rough initial reading after `P-A0-28` and before `P-A1-00` close:
 
 practical alpha-1 overall readiness should therefore stay low until
 front-door, reusable checker/runtime, and practical sample root exist.
-`P-A1-01` 後は initial practical sample root と library-first front-door は存在するが、
-checker/runtime/product surfaces が未完成なため overall readiness は still low に保つ。
+`P-A1-02` 後は initial practical sample root、library-first front-door、distinct lowered IR と first checker floor は存在するが、
+runtime/product surfaces が未完成であり、typed checking も first floor に留まるため overall readiness は moderate 未満に保つ。
 
 ## sample-root roadmap
 
@@ -193,11 +204,12 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- after `P-A1-01`, the next safe package is expected to be `P-A1-02`
-  if the current front-door output can be connected to reusable typed-checker
-  diagnostics without freezing a final public checker API
+- after `P-A1-02`, the next safe package is expected to be `P-A1-03`
+  if the checker output can be consumed as a runtime-plan input boundary
+  without freezing a final public runtime or CLI API
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
-  - add IR/checker integration on top of the existing front-door output
+  - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
+  - consume checked practical packages in `P-A1-03` through a distinct runtime-plan boundary
   - keep `samples/alpha/` unchanged while practical root grows separately
 - queue authority remains `progress.md` / `tasks.md`

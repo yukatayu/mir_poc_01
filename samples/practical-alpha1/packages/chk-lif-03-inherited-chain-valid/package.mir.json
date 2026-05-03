@@ -1,0 +1,32 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-lif-03-inherited-chain-valid",
+  "package_kind": "world",
+  "world": {
+    "id": "checker_lif_world",
+    "entry_place": "perch"
+  },
+  "places": [
+    {
+      "id": "perch",
+      "authority": "shared_host"
+    }
+  ],
+  "alpha_local_checker_input": {
+    "family": "lifetime_fallback",
+    "case": {
+      "kind": "inherited_chain_valid",
+      "sample_id": "CHK-LIF-03",
+      "source_chain": [
+        "FriendHead",
+        "SelfShoulder"
+      ],
+      "appended_fallback": "WorldOrigin",
+      "lineage_edges": [
+        "FriendHead->SelfShoulder",
+        "SelfShoulder->WorldOrigin"
+      ],
+      "implicit_propagation": false
+    }
+  }
+}

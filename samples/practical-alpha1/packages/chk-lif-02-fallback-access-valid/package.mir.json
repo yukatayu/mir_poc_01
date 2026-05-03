@@ -1,0 +1,39 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-lif-02-fallback-access-valid",
+  "package_kind": "world",
+  "world": {
+    "id": "checker_lif_world",
+    "entry_place": "board"
+  },
+  "places": [
+    {
+      "id": "board",
+      "authority": "shared_host"
+    }
+  ],
+  "fallback_chains": [
+    {
+      "id": "demo_access_path",
+      "capability": "read",
+      "options": [
+        "FriendHead",
+        "WorldOrigin"
+      ]
+    }
+  ],
+  "alpha_local_checker_input": {
+    "family": "lifetime_fallback",
+    "case": {
+      "kind": "fallback_chain_valid",
+      "sample_id": "CHK-LIF-02",
+      "role": "demo_access_path",
+      "capability": "read",
+      "options": [
+        "FriendHead",
+        "WorldOrigin"
+      ],
+      "monotone_degradation": true
+    }
+  }
+}

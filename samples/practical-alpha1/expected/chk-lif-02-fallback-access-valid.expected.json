@@ -1,0 +1,59 @@
+{
+  "checker_scope": "practical-alpha1-checker-floor",
+  "sample_id": "CHK-LIF-02",
+  "package_id": "chk-lif-02-fallback-access-valid",
+  "family": "lifetime_fallback",
+  "verdict": "accepted",
+  "accepted_obligations": [
+    {
+      "kind": "fallback_chain_canonicalized",
+      "role": "demo_access_path",
+      "canonical_chain": [
+        "FriendHead",
+        "WorldOrigin"
+      ],
+      "capability": "read",
+      "monotone_degradation": true,
+      "judgment_class": "accepted_obligation",
+      "family": "lifetime_fallback"
+    }
+  ],
+  "diagnostics": [],
+  "retained_later_refs": [
+    "runtime_plan_execution",
+    "run_local_runtime_execution",
+    "docker_transport_execution",
+    "final_public_checker_api"
+  ],
+  "surface_kind": "practical_alpha1_nonfinal_checker_report",
+  "scope_kind": "alpha_local",
+  "stop_lines": [
+    "do not treat the practical alpha-1 checker report as a runtime plan",
+    "do not treat the practical alpha-1 check command as a public CLI/API freeze",
+    "do not treat package-admission preview checks as hot-plug/runtime attach verdicts",
+    "do not promote samples/practical-alpha1 to an active runnable root in the checker package"
+  ],
+  "limitations": [
+    "alpha-local non-final checker floor only",
+    "limited CHK practical sample families only",
+    "no runtime plan emission, local run, Docker run, save/load, or devtools export"
+  ],
+  "public_cli_frozen": false,
+  "runtime_plan_emitted": false,
+  "run_local_claimed": false,
+  "run_docker_claimed": false,
+  "rejected_rows": [],
+  "canonical_fallback_chains": [
+    {
+      "source_kind": "fallback_chain_valid",
+      "canonical_chain": [
+        "FriendHead",
+        "WorldOrigin"
+      ],
+      "capability": "read"
+    }
+  ],
+  "contract_comparison_report": [],
+  "cut_validity_report": [],
+  "package_admission_report": []
+}

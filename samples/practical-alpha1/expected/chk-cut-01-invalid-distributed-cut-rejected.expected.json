@@ -1,0 +1,58 @@
+{
+  "checker_scope": "practical-alpha1-checker-floor",
+  "sample_id": "CHK-CUT-01",
+  "package_id": "chk-cut-01-invalid-distributed-cut-rejected",
+  "family": "cut_predicate",
+  "verdict": "rejected",
+  "accepted_obligations": [],
+  "diagnostics": [
+    {
+      "severity": "error",
+      "family": "cut_predicate",
+      "kind": "orphan_receive",
+      "message": "distributed cut includes a receive without its send predecessor"
+    }
+  ],
+  "retained_later_refs": [
+    "runtime_plan_execution",
+    "run_local_runtime_execution",
+    "docker_transport_execution",
+    "final_public_checker_api"
+  ],
+  "surface_kind": "practical_alpha1_nonfinal_checker_report",
+  "scope_kind": "alpha_local",
+  "stop_lines": [
+    "do not treat the practical alpha-1 checker report as a runtime plan",
+    "do not treat the practical alpha-1 check command as a public CLI/API freeze",
+    "do not treat package-admission preview checks as hot-plug/runtime attach verdicts",
+    "do not promote samples/practical-alpha1 to an active runnable root in the checker package"
+  ],
+  "limitations": [
+    "alpha-local non-final checker floor only",
+    "limited CHK practical sample families only",
+    "no runtime plan emission, local run, Docker run, save/load, or devtools export"
+  ],
+  "public_cli_frozen": false,
+  "runtime_plan_emitted": false,
+  "run_local_claimed": false,
+  "run_docker_claimed": false,
+  "rejected_rows": [
+    {
+      "kind": "orphan_receive",
+      "receive_event": "receive_envelope",
+      "missing_predecessor": "send_envelope",
+      "judgment_class": "rejected_row",
+      "family": "cut_predicate"
+    }
+  ],
+  "canonical_fallback_chains": [],
+  "contract_comparison_report": [],
+  "cut_validity_report": [
+    {
+      "kind": "orphan_receive",
+      "verdict": "rejected",
+      "detail": "distributed cut includes a receive without its send predecessor"
+    }
+  ],
+  "package_admission_report": []
+}

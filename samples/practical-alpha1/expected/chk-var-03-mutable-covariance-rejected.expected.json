@@ -1,0 +1,58 @@
+{
+  "checker_scope": "practical-alpha1-checker-floor",
+  "sample_id": "CHK-VAR-03",
+  "package_id": "chk-var-03-mutable-covariance-rejected",
+  "family": "contract_variance",
+  "verdict": "rejected",
+  "accepted_obligations": [],
+  "diagnostics": [
+    {
+      "severity": "error",
+      "family": "contract_variance",
+      "kind": "mutable_covariance",
+      "message": "mutable/read-write capability is invariant"
+    }
+  ],
+  "retained_later_refs": [
+    "runtime_plan_execution",
+    "run_local_runtime_execution",
+    "docker_transport_execution",
+    "final_public_checker_api"
+  ],
+  "surface_kind": "practical_alpha1_nonfinal_checker_report",
+  "scope_kind": "alpha_local",
+  "stop_lines": [
+    "do not treat the practical alpha-1 checker report as a runtime plan",
+    "do not treat the practical alpha-1 check command as a public CLI/API freeze",
+    "do not treat package-admission preview checks as hot-plug/runtime attach verdicts",
+    "do not promote samples/practical-alpha1 to an active runnable root in the checker package"
+  ],
+  "limitations": [
+    "alpha-local non-final checker floor only",
+    "limited CHK practical sample families only",
+    "no runtime plan emission, local run, Docker run, save/load, or devtools export"
+  ],
+  "public_cli_frozen": false,
+  "runtime_plan_emitted": false,
+  "run_local_claimed": false,
+  "run_docker_claimed": false,
+  "rejected_rows": [
+    {
+      "kind": "mutable_covariance",
+      "base_capability": "ReadWrite<Animal>",
+      "widened_capability": "ReadWrite<Cat>",
+      "judgment_class": "rejected_row",
+      "family": "contract_variance"
+    }
+  ],
+  "canonical_fallback_chains": [],
+  "contract_comparison_report": [
+    {
+      "kind": "mutable_covariance",
+      "verdict": "rejected",
+      "detail": "mutable/read-write capability is invariant"
+    }
+  ],
+  "cut_validity_report": [],
+  "package_admission_report": []
+}

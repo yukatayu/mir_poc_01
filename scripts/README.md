@@ -23,7 +23,11 @@
 - practical alpha-1 initial front-door is currently cargo-based rather than script-based
   - `cargo test -p mir-ast practical_alpha1_front_door -- --nocapture`
   - this exercises `samples/practical-alpha1/` through `crates/mir-ast::practical_alpha1`
-  - practical `check` / `run-local` / `run-docker` scripts remain later work
+- practical alpha-1 first checker floor now has an alpha-local script surface
+  - `python3 scripts/practical_alpha1_check.py check-all --format json`
+  - this exercises `samples/practical-alpha1/packages/chk-*/` through `crates/mir-ast::practical_alpha1_checker`
+  - it is a non-final checker-only command and does not emit runtime plans
+  - practical `run-local` / `run-docker` scripts remain later work
 
 ### current-L2 helper / detached loop / support
 

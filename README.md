@@ -51,7 +51,7 @@ Mirrorea future-axis は current promoted line ではなく、docs-first / repo-
   規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence closeout を蓄積する alpha-local scaffolding です。
 - **Mirrorea Spaces practical alpha-1 line**
   規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。こちらが今後の `100%` の基準であり、source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product prototype を揃えた実用 toolchain を目標にします。
-  2026-05-03 時点の first front-door cut は `samples/practical-alpha1/` の limited `package.mir.json` fixtures と `crates/mir-ast::practical_alpha1` library loader です。これは final textual grammar、reusable checker/runtime API、product-like CLI ではありません。
+  2026-05-03 時点では、`samples/practical-alpha1/` の limited `package.mir.json` fixtures と `crates/mir-ast::practical_alpha1` library loader に加え、`crates/mir-ast::practical_alpha1_checker` と `scripts/practical_alpha1_check.py` による first practical checker floor が入っています。これは final textual grammar、full `specs/18` typed-checking completion、reusable runtime API、product-like CLI ではありません。
 
 現行の Stage A..F `100%` は evidence closeout であり、practical alpha-1 `100%` ではありません。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 

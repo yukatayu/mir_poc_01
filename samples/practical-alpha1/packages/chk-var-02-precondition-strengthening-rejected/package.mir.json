@@ -1,0 +1,25 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-var-02-precondition-strengthening-rejected",
+  "package_kind": "layer",
+  "manifest": {
+    "version": "0.1.0",
+    "requires_capabilities": [
+      "admin.attach_layer"
+    ],
+    "provided_capabilities": [
+      "observe.debug_trace"
+    ],
+    "effect_row": [],
+    "failure_row": []
+  },
+  "alpha_local_checker_input": {
+    "family": "contract_variance",
+    "case": {
+      "kind": "precondition_strengthening",
+      "sample_id": "CHK-VAR-02",
+      "base_precondition": "member",
+      "layer_precondition": "admin"
+    }
+  }
+}

@@ -93,6 +93,10 @@ pub struct PracticalAlpha1Package {
     pub layers: Vec<PracticalAlpha1LayerAttachment>,
     #[serde(default)]
     pub manifest: Option<PracticalAlpha1PackageManifest>,
+    #[serde(default)]
+    pub native: Option<PracticalAlpha1NativeManifest>,
+    #[serde(default, alias = "checker")]
+    pub alpha_local_checker_input: Option<PracticalAlpha1AlphaLocalCheckerInput>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
@@ -132,6 +136,89 @@ pub struct PracticalAlpha1PackageManifest {
     pub effect_row: Vec<String>,
     #[serde(default)]
     pub failure_row: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1NativeManifest {
+    pub entry_ref: String,
+    pub signature_present: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+pub struct PracticalAlpha1AlphaLocalCheckerInput {
+    pub family: PracticalAlpha1AlphaLocalCheckerFamily,
+    pub case: PracticalAlpha1AlphaLocalCheckerCase,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PracticalAlpha1AlphaLocalCheckerFamily {
+    LifetimeFallback,
+    ContractVariance,
+    CutPredicate,
+    PackageAdmission,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum PracticalAlpha1AlphaLocalCheckerCase {
+    RawDanglingReference {
+        sample_id: String,
+        source_ref: String,
+        stored_into: String,
+    },
+    FallbackChainValid {
+        sample_id: String,
+        role: String,
+        capability: String,
+        options: Vec<String>,
+        monotone_degradation: bool,
+    },
+    InheritedChainValid {
+        sample_id: String,
+        source_chain: Vec<String>,
+        appended_fallback: String,
+        lineage_edges: Vec<String>,
+        implicit_propagation: bool,
+    },
+    SnapshotSelectedDistinction {
+        sample_id: String,
+        source_chain: Vec<String>,
+        selected_option: String,
+        appended_fallback: String,
+        excluded_options: Vec<String>,
+    },
+    TransparentObserveOnlyLayer {
+        sample_id: String,
+        layer_kind: String,
+        effect_delta: Vec<String>,
+        failure_delta: Vec<String>,
+        precondition_strengthened: bool,
+        postcondition_weakened: bool,
+    },
+    PreconditionStrengthening {
+        sample_id: String,
+        base_precondition: String,
+        layer_precondition: String,
+    },
+    MutableCovariance {
+        sample_id: String,
+        base_capability: String,
+        widened_capability: String,
+    },
+    OrphanReceive {
+        sample_id: String,
+        receive_event: String,
+        missing_predecessor: String,
+    },
+    UnsignedNativePackage {
+        sample_id: String,
+        required_signature: bool,
+    },
+    OverCapabilityPackage {
+        sample_id: String,
+        allowed_capability_prefixes: Vec<String>,
+    },
 }
 
 pub fn load_practical_alpha1_package_path(

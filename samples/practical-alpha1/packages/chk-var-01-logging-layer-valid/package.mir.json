@@ -1,0 +1,35 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-var-01-logging-layer-valid",
+  "package_kind": "layer",
+  "layers": [
+    {
+      "id": "debug_trace_layer",
+      "kind": "Debug",
+      "attach_mode": "requested"
+    }
+  ],
+  "manifest": {
+    "version": "0.1.0",
+    "requires_capabilities": [
+      "admin.attach_layer"
+    ],
+    "provided_capabilities": [
+      "observe.debug_trace"
+    ],
+    "effect_row": [],
+    "failure_row": []
+  },
+  "alpha_local_checker_input": {
+    "family": "contract_variance",
+    "case": {
+      "kind": "transparent_observe_only_layer",
+      "sample_id": "CHK-VAR-01",
+      "layer_kind": "Debug",
+      "effect_delta": [],
+      "failure_delta": [],
+      "precondition_strengthened": false,
+      "postcondition_weakened": false
+    }
+  }
+}

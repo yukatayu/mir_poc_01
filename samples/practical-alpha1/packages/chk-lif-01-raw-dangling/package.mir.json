@@ -1,0 +1,24 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-lif-01-raw-dangling",
+  "package_kind": "world",
+  "world": {
+    "id": "checker_lif_world",
+    "entry_place": "lobby"
+  },
+  "places": [
+    {
+      "id": "lobby",
+      "authority": "shared_host"
+    }
+  ],
+  "alpha_local_checker_input": {
+    "family": "lifetime_fallback",
+    "case": {
+      "kind": "raw_dangling_reference",
+      "sample_id": "CHK-LIF-01",
+      "source_ref": "short_lived_ref",
+      "stored_into": "longer_lived_context"
+    }
+  }
+}

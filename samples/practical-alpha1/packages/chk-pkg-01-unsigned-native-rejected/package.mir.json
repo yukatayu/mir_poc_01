@@ -1,0 +1,28 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-pkg-01-unsigned-native-rejected",
+  "package_kind": "runtime",
+  "manifest": {
+    "version": "0.1.0",
+    "requires_capabilities": [],
+    "provided_capabilities": [
+      "avatar.placeholder.render"
+    ],
+    "effect_row": [],
+    "failure_row": [
+      "UnsignedNativeRejected"
+    ]
+  },
+  "native": {
+    "entry_ref": "native/avatar_runtime.so",
+    "signature_present": false
+  },
+  "alpha_local_checker_input": {
+    "family": "package_admission",
+    "case": {
+      "kind": "unsigned_native_package",
+      "sample_id": "CHK-PKG-01",
+      "required_signature": true
+    }
+  }
+}

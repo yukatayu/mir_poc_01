@@ -1,0 +1,30 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "chk-pkg-02-over-capability-rejected",
+  "package_kind": "runtime",
+  "manifest": {
+    "version": "0.1.0",
+    "requires_capabilities": [],
+    "provided_capabilities": [
+      "observe.debug_trace",
+      "runtime.native.exec_admin"
+    ],
+    "effect_row": [
+      "observe.debug_trace"
+    ],
+    "failure_row": [
+      "AttachDenied"
+    ]
+  },
+  "alpha_local_checker_input": {
+    "family": "package_admission",
+    "case": {
+      "kind": "over_capability_package",
+      "sample_id": "CHK-PKG-02",
+      "allowed_capability_prefixes": [
+        "observe.debug_trace",
+        "avatar.placeholder"
+      ]
+    }
+  }
+}
