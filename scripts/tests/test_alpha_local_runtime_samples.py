@@ -25,6 +25,10 @@ class AlphaLocalRuntimeSamplesTests(unittest.TestCase):
         self.assertEqual(payload["implemented_rows"], ["LR-01", "LR-02"])
         self.assertEqual(payload["stage_b_support_rows"], ["CUT-04", "CUT-17"])
         self.assertIn(
+            "cargo test -p mirrorea-core --test runtime_substrate",
+            payload["validation_floor"],
+        )
+        self.assertIn(
             "python3 scripts/alpha_local_runtime_samples.py stage-b-closeout --format json",
             payload["validation_floor"],
         )

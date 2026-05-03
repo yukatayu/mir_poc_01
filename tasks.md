@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 23:32 JST
+最終更新: 2026-05-04 01:05 JST
 
 ## この文書について
 
@@ -15,6 +15,8 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - practical alpha-1 line が新しい promoted package line です:
   `specs/18`、`plan/44`、`samples/practical-alpha1/` を軸に、alpha-0 evidence closeout を prerequisite として保持しつつ、front-door -> checker -> runtime -> hot-plug -> transport -> devtools -> save/load -> product prototype の順で practical toolchain を組み上げます。
+- `alpha-0.5` 到達要求は current repo state では既に満たされています:
+  `P-A0-23` が `LR-01/02` と local-only `CUT-04/17` subset による Stage B current-scope closeout を閉じており、2026-05-04 01:05 JST に focused validation floor を fresh rerun しました。以後 `alpha-0.5` ラベルで残るのは validation/docs freshness であり、新しい promoted implementation package ではありません。
 - `P-A1-07` first practical local save/load floor は 2026-05-03 23:18 JST に close しました:
   `crates/mir-ast::practical_alpha1_save_load_plan`、`crates/mir-runtime::practical_alpha1_save_load`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`scripts/tests/test_practical_alpha1_save_load.py`、`samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/`、`samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/`、exact expected `sl-a1-*.expected.json`、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で save/load path を local-runtime report 直列化へ寄せず、one exact practical local-runtime frontier と distinct save-load plan に依存する saved local frontier + non-final save-load report に narrow した。`SL-A1-01` local-only roundtrip resume と `SL-A1-02` stale-membership non-resurrection を actualize し、`CHK-CUT-01` reuse は orphan-receive checker guard に限定した。`cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`、`cargo test -p mir-ast practical_alpha1_checker -- --nocapture`、`cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_save_load_plan -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_save_load -- --nocapture`、`python3 scripts/practical_alpha1_check.py run CHK-CUT-01 --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-01 --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-02 --format json`、`python3 scripts/practical_alpha1_save_load.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs` が pass した。これは first practical local save/load floor であり、distributed durable save/load、stale witness / stale lease non-resurrection completion、queue/channel/transport persistence、final public save-load ABI はまだ claim しない。
 - `P-A1-08` practical product prototype wording は 2026-05-03 23:32 JST に recut-required blocker として固定しました:
@@ -90,11 +92,11 @@
 ## Current-scope alpha-0 evidence reference
 
 - Large stage:
-  Stage A 100% imported alpha-ready baseline, Stage B 100% alpha-0.5 local-runtime closeout, Stage C 100% alpha-0.7 transport closeout, Stage D 100% alpha-0.8 hot-plug lifecycle closeout, Stage E 100% alpha-0.9 devtools closeout, Stage F 100% current-scope Spaces alpha closeout
+  Stage A 100% imported alpha-ready baseline, Stage B 100% current-scope alpha-0.5 local-runtime closeout bundle, Stage C 100% alpha-0.7 transport closeout, Stage D 100% alpha-0.8 hot-plug lifecycle closeout, Stage E 100% alpha-0.9 devtools closeout, Stage F 100% current-scope Spaces alpha closeout
 - Concrete phase:
   Phase 7/7 — current-scope evidence line complete; later-family and public-boundary blockers remain
 - Package status:
-  `P-A0-28` Stage A imported-baseline reconciliation is the last closed evidence package
+  `P-A0-28` Stage A imported-baseline reconciliation is the latest alpha-0 evidence refresh package
 - Current status:
   `P-A0-28` は imported Stage A validation floor を rerun し、`specs/17` / `plan/43` / snapshot docs を同期して alpha line の large-stage reading を `Stage A..F` sequential closeout として固定した。negative side / acceptance side / snapshot-selected side / anchor-handoff side / runtime-mirror side の separate carriers と Stage B..F closeouts は維持されるが、current queue authority は practical line とは別に later-family blocker selection または separate public-boundary `U1` lane へ残っている。
 

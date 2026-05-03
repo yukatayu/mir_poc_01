@@ -1,7 +1,7 @@
 # alpha sample family — Local Runtime
 
 - Status: current-scope Stage B closeout over a non-public Rust local-runtime floor
-- Phase: Phase 3
+- Phase anchor: Phase 3 local-runtime floor; Stage B closeout additionally composes the Phase 6 local-only save/load subset `CUT-04/17`
 - Stage: Stage B
 - Current runner is a non-public in-memory Rust runtime floor in `mir-runtime`, surfaced through `scripts/alpha_local_runtime_samples.py`.
 - This family is still not an active parser/runtime sample root.
@@ -38,9 +38,13 @@
 ## Validation anchor for this package
 
 ```bash
+cargo test -p mirrorea-core --test runtime_substrate
 cargo test -p mir-runtime --test alpha_local_runtime
+cargo test -p mir-runtime --test alpha_cut_save_load_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku
 cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership
 python3 scripts/alpha_local_runtime_samples.py check-all --format json
+python3 scripts/alpha_cut_save_load_samples.py check-all --format json
 python3 scripts/alpha_local_runtime_samples.py stage-b-closeout --format json
+python3 -m unittest scripts.tests.test_alpha_local_runtime_samples scripts.tests.test_alpha_cut_save_load_samples
 ```

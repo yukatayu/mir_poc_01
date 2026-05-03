@@ -202,6 +202,9 @@
 - `P-A1-05` は closed であり、`crates/mir-ast/src/practical_alpha1_transport_plan.rs`、`crates/mir-runtime/src/practical_alpha1_transport.rs`、example `mir_practical_alpha1_transport`、`scripts/practical_alpha1_transport.py`、`TR-A1-01..07` practical fixtures により checked practical package -> transport plan -> non-final transport report の first practical transport floor を actualize した
 - `P-A1-06` は closed であり、`scripts/practical_alpha1_export_devtools.py`、exact expected `VIS-A1-01/02/06` bundles により exact practical reports -> distinct devtools export bundle -> non-final viewer の first practical devtools export floor を actualize した
 - `P-A1-07` は closed であり、`crates/mir-ast/src/practical_alpha1_save_load_plan.rs`、`crates/mir-runtime/src/practical_alpha1_save_load.rs`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`SL-A1-01/02` practical fixtures により checked practical package -> runtime plan と one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report の first practical local save/load floor を actualize した
+- `alpha-0.5` 到達要求は evidence line では既に closed している
+  - `P-A0-23` の Stage B closeout が `LR-01/02` と local-only `CUT-04/17` subset を current admissible set として固定しており、2026-05-04 の focused rerun でもその読みを再確認した
+  - したがって、同じ `alpha-0.5` label で残る作業は freshness / maintenance package に限られ、promoted implementation line は practical alpha-1 側に残る
 - `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
 - current practical root は separate に存在するが、まだ active canonical runnable root や product-like CLI root ではない
 - current promoted line は later-family blocker widening ではなく、

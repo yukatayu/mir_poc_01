@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-03 23:32 JST
+最終更新: 2026-05-04 01:05 JST
 
 ## この文書について
 
@@ -27,7 +27,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - Concrete phase:
   Phase 8/9 — practical front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、first practical devtools export floor、first practical local save/load floor are in place; `P-A1-08` current wording is under recut review before promotion
 - Package status:
-  `P-A1-07` first practical local save/load floor is the last closed package in current repo state
+  `P-A1-07` first practical local save/load floor is the last closed package in current repo state, and current practical closeout stops here until the `P-A1-08` recut blocker is resolved
 - Current status:
   `P-A1-07` は `crates/mir-ast::practical_alpha1_save_load_plan`、`crates/mir-runtime::practical_alpha1_save_load`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/`、`samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/`、exact expected `sl-a1-*.expected.json` を synchronized し、first practical local save/load floor を closeout した。carrier split は `checked package -> runtime plan` と、`one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report` を保つ。`SL-A1-01` local-only roundtrip resume と `SL-A1-02` stale-membership non-resurrection を actualize するが、`CHK-CUT-01` reuse は orphan-receive checker guard reuse に留まり、full consistent-cut / `Z-cycle` / distributed durable save/load completion、stale witness / stale lease non-resurrection completion、queue/channel/transport persistence、final public save-load ABI は still later である。
 - Validation freshness:
@@ -44,13 +44,14 @@ Place をまたいで実行・通信・検証・可視化できる
 ## Current-scope alpha-0 evidence closeout reference
 
 - Large stage:
-  Stage A 100% imported alpha-ready baseline, Stage B 100% alpha-0.5 local-runtime closeout, Stage C 100% alpha-0.7 transport closeout, Stage D 100% alpha-0.8 hot-plug lifecycle closeout, Stage E 100% alpha-0.9 devtools closeout, Stage F 100% current-scope Spaces alpha closeout
+  Stage A 100% imported alpha-ready baseline, Stage B 100% current-scope alpha-0.5 local-runtime closeout bundle, Stage C 100% alpha-0.7 transport closeout, Stage D 100% alpha-0.8 hot-plug lifecycle closeout, Stage E 100% alpha-0.9 devtools closeout, Stage F 100% current-scope Spaces alpha closeout
 - Concrete phase:
   Phase 7/7 — current-scope evidence line complete; later-family and public-boundary blockers remain
 - Package status:
-  `P-A0-28` Stage A imported-baseline reconciliation is the last closed evidence package; this is no longer the promoted product-readiness line
+  `P-A0-28` Stage A imported-baseline reconciliation is the latest alpha-0 evidence refresh package; this is not a reopened promoted implementation line
 - Current status:
   `P-A0-28` は current-L2 / clean-near-end / Lean / Sugoroku / avatar / typed external / network canary / projection / viewer / hot-plug narrow floor の imported validation line を rerun し、`specs/17`、`plan/43`、snapshot docs の Stage A wording を synchronized した。これにより alpha line の large-stage reading は current scope で `Stage A..F` sequential closeout として読める。これは imported baseline reconciliation であり、新しい runtime semantics、`samples/alpha/` runnable-root promotion、final public product claim は追加しない。`P-A0-23` で閉じた Stage B local runtime + local-only save/load subset、`P-A0-24` で閉じた Stage C transport narrow cut、`P-A0-25` で閉じた Stage D lifecycle closeout、`P-A0-26` で閉じた Stage E devtools closeout、`P-A0-27` で閉じた Stage F integrated alpha closeout、planned-only `alpha-remote-observe-floor` / `alpha-adapter-transform-floor` blocker split は引き続き維持される。
+  現在の repo state では、`alpha-0.5` という目標はこの Stage B closeoutで既に満たされている。ここから同じラベルで進められるのは freshness / maintenance package だけであり、新しい promoted implementation package は practical alpha-1 line か separate public-boundary line に限る。
 - Remaining non-claims:
   parser/runtime front door、public alpha / `U1`、distributed save/load completion、active runnable-root promotion、later-family blockers は依然として alpha-0 evidence closeout の外側にある
 
@@ -271,6 +272,8 @@ Place をまたいで実行・通信・検証・可視化できる
   `git diff --check`
 
 ## recent log
+
+- 2026-05-04 01:05 JST — alpha-0.5 / Stage B current-scope closeout の fresh validation を rerun した。`cargo test -p mir-runtime --test alpha_local_runtime`、`cargo test -p mir-runtime --test alpha_cut_save_load_runtime`、`cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`、`stale-membership`、`save-load-resume`、`save-load-stale-membership`、`python3 scripts/alpha_local_runtime_samples.py check-all --format json`、`stage-b-closeout --format json`、`python3 scripts/alpha_cut_save_load_samples.py check-all --format json` が pass し、Stage B は既に満たされていることを再確認した。front-door docs / snapshot wording も、`alpha-0.5` が reopened mainline ではなく closed evidence line だと読みやすいように狭く修正した。
 
 - 2026-05-03 18:23 JST — `P-A1-04a` layer-only practical hot-plug first floor を closeout した。`crates/mir-ast::practical_alpha1_hotplug_plan`、`crates/mir-runtime::practical_alpha1_hotplug`、example `mir_practical_alpha1_attach`、`scripts/practical_alpha1_attach.py`、および `samples/practical-alpha1/packages/hp-a1-*` / `samples/practical-alpha1/expected/hp-a1-*.expected.json` により、checked practical package -> distinct hotplug plan -> non-final hot-plug report の first practical hot-plug floor を actualize した。review で見つかった overclaim を避けるため `P-A1-04` は stage-internal に recut し、`P-A1-04a` を layer-only first floor、`P-A1-04b` を missing-witness/stale-membership negatives と object-attach seam に分離した。`cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_hotplug_plan -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_hotplug -- --nocapture`、`cargo test -p mir-runtime --test alpha_layer_insertion_runtime`、`python3 scripts/practical_alpha1_check.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_attach.py check-all --format json`、`python3 scripts/practical_alpha1_attach.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した。これは layer-only hot-plug first floor に限り、object package attach、missing-witness/stale-membership negatives、detach minimal contract、Docker/local TCP、save/load、devtools、product prototype は引き続き未claimであり、next package は `P-A1-04b` である。
 - 2026-05-03 17:39 JST — `P-A1-03` local runtime from runtime plan を closeout した。`crates/mir-ast::practical_alpha1_runtime_plan`、`crates/mir-runtime::practical_alpha1_local_runtime`、example `mir_practical_alpha1_run_local`、`scripts/practical_alpha1_run_local.py`、および `samples/practical-alpha1/packages/run-*` / `samples/practical-alpha1/expected/run-*.expected.json` により、checked practical package -> distinct runtime plan -> non-final local-runtime report の first practical local-runtime floor を actualize した。review で見つかった `runtime_plan_emitted` overclaim は `false` へ補正し、`closeout` surface は hardcoded success ではなく `check_all()` 由来へ直し、runtime-plan malformed input と checker-rejected runtime package の negative coverage も追加した。`cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`、`cargo test -p mir-runtime --test alpha_local_runtime`、`cargo test -p mir-ast`、`python3 scripts/practical_alpha1_check.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py check samples/practical-alpha1/packages/run-01-local-sugoroku --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した。これは first practical local-runtime floor に限り、package/hot-plug API、Docker/local TCP、save/load、devtools、product prototype は引き続き未claimであり、next package は `P-A1-04` package/hot-plug practical API である。

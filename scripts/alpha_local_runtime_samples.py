@@ -207,6 +207,7 @@ def closeout() -> dict[str, Any]:
         "implemented_rows": [row["sample_id"] for row in IMPLEMENTED_ROWS],
         "stage_b_support_rows": list(STAGE_B_SUPPORT_ROWS),
         "validation_floor": [
+            "cargo test -p mirrorea-core --test runtime_substrate",
             "cargo test -p mir-runtime --test alpha_local_runtime",
             "cargo test -p mir-runtime --test alpha_cut_save_load_runtime",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku",
