@@ -219,7 +219,7 @@ Implement `P-A1-03` with new `samples/practical-alpha1/packages/run-*` fixtures,
 
 ## Commit / push status
 
-Pending at report write.
+Committed and pushed as `5d902ed` (`mirrorea: add p-a1-03 runtime floor review`).
 
 ## Sub-agent session close status
 
