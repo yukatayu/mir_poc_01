@@ -158,10 +158,10 @@ Choose one of these two paths:
 
 ## Commit / push status
 
-Pending at report write.
+Main package commit `dfbec26` (`docs: record p-a1-08 recut blocker`) was pushed to `origin/main`. Report metadata and sub-agent close status were finalized in a docs-only follow-up after the blocker package closeout.
 
 ## Sub-agent session close status
 
-- `Raman` completed the semantics/stage-honesty review and is pending closure
-- `Aquinas` completed the runtime/helper feasibility review and is pending closure
-- `Mendel` completed the docs/progress/sample consistency review and is pending closure
+- `Raman` completed the semantics/stage-honesty review and is now closed
+- `Aquinas` completed the runtime/helper feasibility review and is now closed
+- `Mendel` completed the docs/progress/sample consistency review and is now closed
