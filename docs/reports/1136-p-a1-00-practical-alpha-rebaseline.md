@@ -137,7 +137,7 @@ date '+%Y-%m-%d %H:%M JST'
 
 - `python3 -m unittest scripts.tests.test_validate_docs` passed `11` tests.
 - `python3 scripts/check_source_hierarchy.py` reported required/present/missing = `63/63/0`.
-- `python3 scripts/validate_docs.py` reported `Documentation scaffold looks complete.` and found `1137 numbered report(s)` before adding this report.
+- `python3 scripts/validate_docs.py` reported `Documentation scaffold looks complete.` and found `1138 numbered report(s)` on the final rerun after adding this report and syncing reviewer follow-ups.
 - `cargo fmt --check` passed.
 - `git diff --check` passed on the draft tree before closeout commit.
 - Reviewer findings:
@@ -204,12 +204,14 @@ Continue with `P-A1-01 alpha-source front-door design` by defining the narrowest
 
 ## Commit / push status
 
-Pending at report write.
+- main package commit: `f79ac7e` (`mirrorea: close p-a1-00 practical alpha rebaseline`)
+- push: `origin/main` updated successfully
+- report metadata follow-up: pending at this report version
+- worktree status at report update: clean
 
 ## Sub-agent session close status
 
-- `Ohm`: completed
-- `Beauvoir`: completed
-- `Cicero`: completed
-- `Banach`: completed
-- close pending at report write
+- `Ohm`: completed and closed
+- `Beauvoir`: completed and closed
+- `Cicero`: completed and closed
+- `Banach`: completed and closed
