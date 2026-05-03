@@ -1,0 +1,122 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "tr-a1-07-auth-lane-preserved",
+  "package_kind": "world",
+  "world": {
+    "id": "practical_sugoroku_world",
+    "entry_place": "GamePlace[SugorokuGame#1]"
+  },
+  "places": [
+    {
+      "id": "WorldPlace[AlphaRoom#1]",
+      "authority": "shared_host"
+    },
+    {
+      "id": "GamePlace[SugorokuGame#1]",
+      "authority": "shared_host"
+    }
+  ],
+  "alpha_local_checker_input": {
+    "family": "contract_variance",
+    "case": {
+      "kind": "transparent_observe_only_layer",
+      "sample_id": "CHK-VAR-01",
+      "layer_kind": "Debug",
+      "effect_delta": [],
+      "failure_delta": [],
+      "precondition_strengthened": false,
+      "postcondition_weakened": false
+    }
+  },
+  "alpha_local_transport_input": {
+    "sample_id": "TR-A1-07",
+    "transport_surface": "local_tcp",
+    "bridge_kind": "tcp_json_socket",
+    "runtime_places": [
+      {
+        "place_id": "WorldPlace[AlphaRoom#1]",
+        "kind": "WorldPlace"
+      },
+      {
+        "place_id": "GamePlace[SugorokuGame#1]",
+        "kind": "SugorokuGamePlace"
+      }
+    ],
+    "bootstrap_participants": [
+      {
+        "principal": "Alice"
+      },
+      {
+        "principal": "Bob"
+      }
+    ],
+    "request_envelope": {
+      "envelope_id": "tr-a1-07_request#1",
+      "from_place": "ParticipantPlace[Alice]",
+      "to_place": "GamePlace[SugorokuGame#1]",
+      "transport": "network_transport_lane",
+      "transport_medium": "loopback_tcp",
+      "transport_seam": "network_transport_lane",
+      "payload_kind": "auth_lane_probe",
+      "payload_ref": "auth_lane_probe",
+      "principal_claim": {
+        "principal": "Alice",
+        "participant_place": "ParticipantPlace[Alice]",
+        "claimed_authority": "GameAuthority.Player",
+        "claimed_capabilities": [
+          "PublishRoll",
+          "HandoffTurn"
+        ]
+      },
+      "auth_evidence": {
+        "kind": "session_attestation",
+        "subject": "Alice",
+        "issuer": "LocalAuthService",
+        "bindings": [
+          "route=GamePlace[SugorokuGame#1]",
+          "transport=network_transport_lane"
+        ],
+        "notes": [
+          "transport carries auth as a separate lane",
+          "signatures prove provenance, not semantic safety"
+        ]
+      },
+      "emitter_principal": "Alice",
+      "membership_epoch": 0,
+      "member_incarnation": 0,
+      "freshness_checks": [
+        "membership_epoch matches active registry frontier",
+        "member_incarnation matches active member record"
+      ],
+      "capability_requirements": [
+        "PublishRoll",
+        "HandoffTurn"
+      ],
+      "authorization_checks": [
+        "principal/place binding remains explicit",
+        "transport does not mint capability/auth/witness lanes"
+      ],
+      "witness_refs": [
+        "draw_pub#1"
+      ],
+      "dispatch_outcome": "delivery_requested",
+      "notes": [
+        "auth evidence must remain separate from transport metadata"
+      ]
+    },
+    "required_capabilities": [
+      "PublishRoll",
+      "HandoffTurn"
+    ],
+    "required_witness_refs": [
+      "draw_pub#1"
+    ],
+    "auth_bindings_required": [
+      "route=GamePlace[SugorokuGame#1]",
+      "transport=network_transport_lane"
+    ],
+    "notes": [
+      "practical transport auth-lane row"
+    ]
+  }
+}

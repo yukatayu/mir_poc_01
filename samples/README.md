@@ -16,7 +16,7 @@
   - Stage A..F `100%` は evidence closeout として読む
 - `practical-alpha1/`
   practical alpha-1 front-door sample root
-  - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、first local-runtime fixture family、attach-time freshness/witness negatives、narrow object preview seam、explicit deferred detach minimal contract を含む practical hot-plug fixture family
+  - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、first local-runtime fixture family、attach-time freshness/witness negatives、narrow object preview seam、explicit deferred detach minimal contract を含む practical hot-plug fixture family、distinct transport-plan/report carrier を通る `TR-A1-01..07` practical transport fixture family
   - active canonical runnable root や full toolchain root ではまだない
 - `not_implemented/`
   residual planned skeleton family
@@ -70,8 +70,8 @@
   - `not_implemented/` は residual / historical planned family の preservation root
 - `alpha/` と `practical-alpha1/` を混同しない
   - `alpha/` は evidence closeout root
-  - `practical-alpha1/` は current repo state では `package.mir.json` loader fixtures、first checker-floor fixtures、first local-runtime fixtures、`HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` / `HP-A1-07` hot-plug fixtures を持つ
-  - `practical-alpha1/` もまだ active canonical runnable root ではなく、final object package attach、detach runtime lifecycle、runtime/transport/devtools/save-load/product surfaces は later packages に残る
+  - `practical-alpha1/` は current repo state では `package.mir.json` loader fixtures、first checker-floor fixtures、first local-runtime fixtures、`HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` / `HP-A1-07` hot-plug fixtures、`TR-A1-01..07` transport fixtures を持つ
+  - `practical-alpha1/` もまだ active canonical runnable root ではなく、final object package attach、detach runtime lifecycle、WAN/federation、devtools/save-load/product surfaces は later packages に残る
 
 ## current commands
 
@@ -88,6 +88,7 @@ cargo test -p mir-ast practical_alpha1_front_door -- --nocapture
 python3 scripts/practical_alpha1_check.py check-all --format json
 python3 scripts/practical_alpha1_run_local.py check-all --format json
 python3 scripts/practical_alpha1_attach.py check-all --format json
+python3 scripts/practical_alpha1_transport.py check-all --format json
 ```
 
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する

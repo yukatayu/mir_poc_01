@@ -199,6 +199,36 @@ detach execution / rollback / migration completion と同一視しない。
 - observer-safe route trace がある
 - production WAN / federation は要求しない
 
+## first practical transport floor boundary
+
+`P-A1-05` の current actualization は、
+transport stage 全体の completion ではなく、
+**non-final practical transport first floor** である。
+
+- checked package carrier、transport plan、transport report は分ける
+- current actualized row は:
+  - `TR-A1-01`
+  - `TR-A1-02`
+  - `TR-A1-03`
+  - `TR-A1-04`
+  - `TR-A1-05`
+  - `TR-A1-06`
+  - `TR-A1-07`
+- current floor は same practical package input を `local_tcp` と `docker_compose_tcp` surface へ下ろす
+- current floor は stale-membership / missing-capability / missing-witness negatives を transport-specific reject として actualize する
+- current floor は observer-safe route trace を exact transport report に残す
+- current floor は auth evidence を transport delivery lane と分けて扱う
+- current floor は WAN/federation completionを意味しない
+- current floor は local save/load command completionを意味しない
+- current floor は devtools / viewer completionを意味しない
+- current floor は product prototype completionを意味しない
+- current floor は final public transport ABI を意味しない
+
+したがって、`P-A1-05` closeout は useful practical transport floor だが、
+transport stage 全体、production WAN/federation、
+save/load、devtools、product prototype、
+final public transport API と同一視しない。
+
 ### 6. save/load
 
 - local save/load が CLI/library から使える

@@ -1,0 +1,41 @@
+services:
+  world:
+    image: debian:bookworm-slim
+    entrypoint:
+      - /usr/local/bin/mir_practical_alpha1_transport
+      - world-server
+      - /pkg
+      - --bind
+      - 0.0.0.0:41001
+      - --output
+      - /out/world.json
+    volumes:
+      - ${MIRROREA_PRACTICAL_ALPHA1_BINARY}:/usr/local/bin/mir_practical_alpha1_transport:ro
+      - ${MIRROREA_PRACTICAL_ALPHA1_OUTPUT_DIR}:/out
+      - ${MIRROREA_PRACTICAL_ALPHA1_PACKAGE_DIR}:/pkg:ro
+    networks:
+      - practical_alpha1_net
+
+  participant:
+    image: debian:bookworm-slim
+    depends_on:
+      world:
+        condition: service_started
+    entrypoint:
+      - /usr/local/bin/mir_practical_alpha1_transport
+      - participant-client
+      - /pkg
+      - --addr
+      - world:41001
+      - --output
+      - /out/participant.json
+    volumes:
+      - ${MIRROREA_PRACTICAL_ALPHA1_BINARY}:/usr/local/bin/mir_practical_alpha1_transport:ro
+      - ${MIRROREA_PRACTICAL_ALPHA1_OUTPUT_DIR}:/out
+      - ${MIRROREA_PRACTICAL_ALPHA1_PACKAGE_DIR}:/pkg:ro
+    networks:
+      - practical_alpha1_net
+
+networks:
+  practical_alpha1_net:
+    driver: bridge

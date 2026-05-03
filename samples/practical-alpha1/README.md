@@ -1,6 +1,6 @@
 # samples/practical-alpha1
 
-This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, and non-final practical hot-plug sample family.
+This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, and non-final practical transport sample family.
 
 - It is separate from `samples/alpha/`, which remains the alpha-0 evidence root.
 - It is not yet the active runnable root for the whole repo.
@@ -16,6 +16,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   attach-time stale-membership reject, attach-time missing-witness reject, and a narrow object package attach preview seam.
 - `P-A1-04c` widens the same practical hot-plug cut here:
   explicit deferred detach minimal contract with `operation_kind = detach` and `detach_boundary_ref`.
+- `P-A1-05` adds the first practical transport cut here:
+  local TCP / Docker Compose TCP package transport with distinct transport-plan/report carriers and exact expected `TR-A1-01..07` reports.
 - This front-door is non-final and does not freeze the final public grammar.
 
 ## Current package map
@@ -48,6 +50,14 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   - `HP-A1-04B2`: missing-witness attach rejected before activation cut
   - `HP-A1-06`: object package attach admitted only as a narrow preview seam
   - `HP-A1-07`: detach admitted only as an explicit deferred minimal contract boundary
+- `packages/tr-a1-*/`
+  - `TR-A1-01`: local TCP accepted through the practical transport carrier
+  - `TR-A1-02`: Docker Compose TCP accepted through the practical transport carrier
+  - `TR-A1-03`: stale membership rejected before transport delivery mutates world state
+  - `TR-A1-04`: missing capability rejected at the practical transport admission boundary
+  - `TR-A1-05`: missing witness rejected at the practical transport admission boundary
+  - `TR-A1-06`: observer-safe route trace emitted with separated lanes
+  - `TR-A1-07`: auth evidence preserved in a lane distinct from transport delivery
 
 ## Current boundary
 
@@ -56,8 +66,10 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current checker floor is non-final and checker-only.
 - The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
+- The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
+- Checked world packages for transport are lowered through a distinct transport-plan carrier before transport report assembly.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - It does not complete the full `specs/18` typed-checking list.
-- It does not complete final object package attach, detach runtime lifecycle, Docker/local TCP transport, local save/load command, or final public runtime/devtools ABI.
+- It does not complete final object package attach, detach runtime lifecycle, WAN/federation, local save/load command, devtools export, product prototype, or final public runtime/devtools/transport ABI.

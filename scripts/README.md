@@ -40,6 +40,13 @@
   - current actualized rows are `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
   - `HP-A1-07` is an explicit deferred detach minimal contract boundary with `operation_kind = detach` and `detach_boundary_ref`
   - it is a non-final hot-plug command and does not claim final object package attach, detach runtime lifecycle, Docker transport, save/load, or final public package/hot-plug API
+- practical alpha-1 first transport floor now has an alpha-local script surface
+  - `python3 scripts/practical_alpha1_transport.py check-all --format json`
+  - this exercises `samples/practical-alpha1/packages/tr-a1-*/` through `crates/mir-ast::practical_alpha1_transport_plan` and `crates/mir-runtime::practical_alpha1_transport`
+  - it consumes checked practical package input through a distinct transport-plan boundary
+  - current actualized rows are `TR-A1-01..07`
+  - `TR-A1-02` uses `samples/practical-alpha1/docker/docker-compose.practical-alpha1.yml` to run a world server plus participant client over Docker Compose TCP
+  - it is a non-final transport command and does not claim WAN/federation, save/load, devtools export, product prototype, or final public transport API
 
 ### current-L2 helper / detached loop / support
 

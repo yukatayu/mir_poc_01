@@ -26,8 +26,9 @@ repository-memory roadmap を置く。
   - `samples/lean/`
 - `samples/alpha/` は mixed evidence root であり、
   practical front-door sample root ではない
-- `samples/practical-alpha1/` は current repo state で存在するが、
-  current cut は limited `package.mir.json` front-door fixture family に留まる
+- `samples/practical-alpha1/` は current repo state で存在し、
+  current cut は limited `package.mir.json` front-door fixture family に加え、
+  checker / local-runtime / hot-plug / transport の current practical fixture family まで actualize 済みである
 - practical alpha-1 toolchain の reusable checker/runtime API、
   product-like package root、practical CLI/viewer surface はまだ未完成である
 
@@ -121,8 +122,35 @@ repository-memory roadmap を置く。
 - practical package inputから local TCP / Docker E2E
 - stale membership / missing capability / missing witness negatives
 - route trace export
-- current blocker after `P-A1-04c`:
-  current sample matrix / snapshot wording only stabilize accepted local/Docker path plus stale-membership / route-trace / auth-lane rows, so the exact practical transport row set is not yet internally consistent
+- auth lane separation
+- current actualized cut:
+  - `crates/mir-ast/src/practical_alpha1_transport_plan.rs`
+  - `crates/mir-runtime/src/practical_alpha1_transport.rs`
+  - example `crates/mir-runtime/examples/mir_practical_alpha1_transport.rs`
+  - `scripts/practical_alpha1_transport.py`
+  - `samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted/`
+  - `samples/practical-alpha1/packages/tr-a1-02-docker-two-node-accepted/`
+  - `samples/practical-alpha1/packages/tr-a1-03-stale-membership-rejected/`
+  - `samples/practical-alpha1/packages/tr-a1-04-missing-capability-rejected/`
+  - `samples/practical-alpha1/packages/tr-a1-05-missing-witness-rejected/`
+  - `samples/practical-alpha1/packages/tr-a1-06-observer-safe-route-trace/`
+  - `samples/practical-alpha1/packages/tr-a1-07-auth-lane-preserved/`
+  - `samples/practical-alpha1/expected/tr-a1-01-local-tcp-accepted.expected.json`
+  - `samples/practical-alpha1/expected/tr-a1-02-docker-two-node-accepted.expected.json`
+  - `samples/practical-alpha1/expected/tr-a1-03-stale-membership-rejected.expected.json`
+  - `samples/practical-alpha1/expected/tr-a1-04-missing-capability-rejected.expected.json`
+  - `samples/practical-alpha1/expected/tr-a1-05-missing-witness-rejected.expected.json`
+  - `samples/practical-alpha1/expected/tr-a1-06-observer-safe-route-trace.expected.json`
+  - `samples/practical-alpha1/expected/tr-a1-07-auth-lane-preserved.expected.json`
+  - `samples/practical-alpha1/docker/docker-compose.practical-alpha1.yml`
+- current carrier split:
+  `checked package -> transport plan -> non-final transport report`
+- current non-claim:
+  - WAN/federation ではない
+  - local save/load command ではない
+  - devtools / viewer completion ではない
+  - product prototype completion ではない
+  - final public transport ABI ではない
 
 ### PA1-6 — devtools / viewer
 
@@ -161,9 +189,9 @@ recommended current promoted line:
 8. `P-A1-07` local save/load command
 9. `P-A1-08` product prototype
 
-current reading after `P-A1-04c`:
+current reading after `P-A1-05`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c` are closed
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05` are closed
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -173,8 +201,10 @@ current reading after `P-A1-04c`:
   and `HP-A1-06` narrow object package attach preview seam
 - `P-A1-04c` actualized `HP-A1-07` as an explicit deferred detach minimal contract with `operation_kind = detach` and `detach_boundary_ref`
 - current actualized hot-plug rows are `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
-- `P-A1-05` is the promoted next package after `PA1-4`
-- `P-A1-05` is promoted but currently blocked pending row-set reconciliation between the PA1-5 bullets above and the practical sample matrix / snapshot wording
+- `P-A1-05` fixed a third distinct carrier split:
+  `checked package -> transport plan -> non-final transport report`
+- `P-A1-05` actualized `TR-A1-01..07` as local TCP accept, Docker Compose TCP accept, stale-membership reject, missing-capability reject, missing-witness reject, observer-safe route trace, and auth-lane separation
+- `P-A1-06` is the promoted next package after `PA1-5`
 
 ## readiness reading
 
@@ -208,7 +238,8 @@ samples/practical-alpha1/
   docker/
 ```
 
-- current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`、`HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
+- current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`、`HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`、`TR-A1-01..07`
+- `docker/` now contains the Compose fixture used by `TR-A1-02`
 - `source/` and `docker/` are reserved for later textual-source / Docker packages
 
 ## validator roadmap
@@ -238,6 +269,15 @@ but should not require practical runner scripts before they are added.
 - `python3 scripts/practical_alpha1_attach.py check-all --format json`
 - `python3 scripts/practical_alpha1_attach.py closeout --format json`
 
+`P-A1-05` adds the practical transport validation path:
+
+- `docker --version`
+- `docker compose version`
+- `cargo test -p mir-ast --test practical_alpha1_transport_plan -- --nocapture`
+- `cargo test -p mir-runtime --test practical_alpha1_transport -- --nocapture`
+- `python3 scripts/practical_alpha1_transport.py check-all --format json`
+- `python3 scripts/practical_alpha1_transport.py closeout --format json`
+
 ## non-claims carried forward
 
 - current alpha-0 evidence closeout is not public alpha / `U1`
@@ -249,21 +289,15 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- after `P-A1-04c`, the next safe package is expected to be `P-A1-05`
-  if the practical hot-plug floor stays distinct from final object package attach,
-  detach runtime lifecycle, save/load command,
-  and final public runtime/devtools ABI
+- after `P-A1-05`, the next safe package is expected to be `P-A1-06`
+  if devtools export stays distinct from the checker/runtime/hot-plug/transport carriers already actualized
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
   - keep `P-A1-03` as the first local-runtime floor over `RUN-01/02`
   - keep `P-A1-04a` / `P-A1-04b` / `P-A1-04c` as the first practical hot-plug floor over `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
+  - keep `P-A1-05` as the first practical transport floor over `TR-A1-01..07` without collapsing it into WAN/federation, save/load, devtools, or product prototype claims
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
-- current blocker to resolve before implementation:
-  - `plan/44` / stage-roadmap still define `P-A1-05` with stale-membership / missing-capability / missing-witness transport negatives
-  - current sample matrix and snapshot wording only stabilize accepted local/Docker path plus stale-membership / route-trace / auth-lane rows
-  - silent narrowing is not acceptable
-  - current recommendation is to widen the practical transport matrix with distinct transport-specific missing-capability / missing-witness negatives rather than silently borrowing `RUN-*` or `HP-*` evidence or narrowing `PA1-5` without decision
 - queue authority remains `progress.md` / `tasks.md`

@@ -28,6 +28,7 @@ const PRACTICAL_ALPHA1_FRONT_DOOR_ACCEPTED_SURFACE_REFS: &[&str] = &[
     "alpha_local_checker_input",
     "alpha_local_runtime_input",
     "alpha_local_hotplug_input",
+    "alpha_local_transport_input",
 ];
 
 const PRACTICAL_ALPHA1_FRONT_DOOR_CODE_ANCHOR_REFS: &[&str] = &[
@@ -105,6 +106,8 @@ pub struct PracticalAlpha1Package {
     pub alpha_local_runtime_input: Option<PracticalAlpha1AlphaLocalRuntimeInput>,
     #[serde(default, alias = "hotplug")]
     pub alpha_local_hotplug_input: Option<PracticalAlpha1AlphaLocalHotPlugInput>,
+    #[serde(default, alias = "transport")]
+    pub alpha_local_transport_input: Option<PracticalAlpha1AlphaLocalTransportInput>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -285,11 +288,36 @@ pub struct PracticalAlpha1AlphaLocalHotPlugInput {
     pub notes: Vec<String>,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1AlphaLocalTransportInput {
+    pub sample_id: String,
+    pub transport_surface: PracticalAlpha1TransportSurface,
+    pub bridge_kind: String,
+    pub runtime_places: Vec<PracticalAlpha1RuntimePlaceSeed>,
+    pub bootstrap_participants: Vec<PracticalAlpha1RuntimeBootstrapParticipant>,
+    #[serde(default)]
+    pub pre_dispatch_membership_advances: Vec<PracticalAlpha1RuntimeMembershipAdvance>,
+    pub request_envelope: PracticalAlpha1RuntimeEnvelope,
+    pub required_capabilities: Vec<String>,
+    pub required_witness_refs: Vec<String>,
+    #[serde(default)]
+    pub auth_bindings_required: Vec<String>,
+    #[serde(default)]
+    pub notes: Vec<String>,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum PracticalAlpha1HotPlugOperationKind {
     Attach,
     Detach,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PracticalAlpha1TransportSurface {
+    LocalTcp,
+    DockerComposeTcp,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

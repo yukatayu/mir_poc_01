@@ -1,0 +1,263 @@
+{
+  "surface_kind": "practical_alpha1_nonfinal_transport_report",
+  "scope_kind": "alpha_local",
+  "transport_scope": "practical-alpha1-transport-floor",
+  "transport_plan_scope": "practical-alpha1-transport-plan-floor",
+  "sample_id": "TR-A1-04",
+  "package_id": "tr-a1-04-missing-capability-rejected",
+  "world_id": "practical_sugoroku_world",
+  "transport_surface": "local_tcp",
+  "transport_medium": "loopback_tcp",
+  "transport_seam": "network_transport_lane",
+  "bridge_kind": "tcp_json_socket",
+  "bridge_processes": [
+    {
+      "process_id": "world-server",
+      "role": "world_server",
+      "endpoint": "loopback-tcp-world",
+      "containerized": false
+    },
+    {
+      "process_id": "participant-client",
+      "role": "participant_client",
+      "endpoint": "loopback-tcp-client",
+      "containerized": false
+    }
+  ],
+  "message_envelope_lanes": [
+    "envelope_id",
+    "from_place",
+    "to_place",
+    "transport",
+    "transport_medium",
+    "transport_seam",
+    "payload_kind",
+    "payload_ref",
+    "principal_claim",
+    "auth_evidence",
+    "emitter_principal",
+    "membership_epoch",
+    "member_incarnation",
+    "freshness_checks",
+    "capability_requirements",
+    "authorization_checks",
+    "witness_refs",
+    "dispatch_outcome",
+    "notes"
+  ],
+  "auth_evidence_lanes": [
+    "kind",
+    "subject",
+    "issuer",
+    "bindings",
+    "notes"
+  ],
+  "request_envelope": {
+    "envelope_id": "tr-a1-04_request#1",
+    "from_place": "ParticipantPlace[Alice]",
+    "to_place": "GamePlace[SugorokuGame#1]",
+    "transport": "network_transport_lane",
+    "transport_medium": "loopback_tcp",
+    "transport_seam": "network_transport_lane",
+    "payload_kind": "published_turn_transition",
+    "payload_ref": "handoff_from_roll:draw_pub#1",
+    "principal_claim": {
+      "principal": "Alice",
+      "participant_place": "ParticipantPlace[Alice]",
+      "claimed_authority": "GameAuthority.Player",
+      "claimed_capabilities": [
+        "PublishRoll"
+      ]
+    },
+    "auth_evidence": null,
+    "emitter_principal": "Alice",
+    "membership_epoch": 0,
+    "member_incarnation": 0,
+    "freshness_checks": [
+      "membership_epoch matches active registry frontier",
+      "member_incarnation matches active member record"
+    ],
+    "capability_requirements": [
+      "PublishRoll",
+      "HandoffTurn"
+    ],
+    "authorization_checks": [
+      "principal/place binding remains explicit",
+      "transport does not mint capability/auth/witness lanes"
+    ],
+    "witness_refs": [
+      "draw_pub#1"
+    ],
+    "dispatch_outcome": "delivery_requested",
+    "notes": [
+      "missing capability must reject over the practical transport lane"
+    ]
+  },
+  "required_capabilities": [
+    "PublishRoll",
+    "HandoffTurn"
+  ],
+  "required_witness_refs": [
+    "draw_pub#1"
+  ],
+  "admission_checks": [
+    {
+      "check_name": "principal_place_binding",
+      "passed": true,
+      "observed": "Alice -> ParticipantPlace[Alice]",
+      "reason_refs": [
+        "principal_place_binding_mismatch"
+      ]
+    },
+    {
+      "check_name": "membership_epoch_current",
+      "passed": true,
+      "observed": "offered=0 current=0",
+      "reason_refs": [
+        "membership_epoch_drift"
+      ]
+    },
+    {
+      "check_name": "member_incarnation_current",
+      "passed": true,
+      "observed": "offered=0 current=0",
+      "reason_refs": [
+        "member_incarnation_drift"
+      ]
+    },
+    {
+      "check_name": "participant_active",
+      "passed": true,
+      "observed": "active=true",
+      "reason_refs": [
+        "participant_inactive"
+      ]
+    },
+    {
+      "check_name": "participant_place_current",
+      "passed": true,
+      "observed": "recorded=ParticipantPlace[Alice] offered=ParticipantPlace[Alice]",
+      "reason_refs": [
+        "participant_place_drift"
+      ]
+    },
+    {
+      "check_name": "destination_registered",
+      "passed": true,
+      "observed": "destination=GamePlace[SugorokuGame#1]",
+      "reason_refs": [
+        "destination_place_unregistered"
+      ]
+    },
+    {
+      "check_name": "capability_sufficient",
+      "passed": false,
+      "observed": "claimed=[\"PublishRoll\"] required=[\"PublishRoll\", \"HandoffTurn\"]",
+      "reason_refs": [
+        "missing_capability:HandoffTurn"
+      ]
+    },
+    {
+      "check_name": "required_witness_present",
+      "passed": true,
+      "observed": "actual=[\"draw_pub#1\"] required=[\"draw_pub#1\"]",
+      "reason_refs": []
+    },
+    {
+      "check_name": "auth_evidence_coherent",
+      "passed": true,
+      "observed": "auth absent",
+      "reason_refs": []
+    }
+  ],
+  "observer_route_trace": [
+    {
+      "hop_index": 1,
+      "envelope_id": "tr-a1-04_request#1",
+      "from_place": "ParticipantPlace[Alice]",
+      "to_place": "GamePlace[SugorokuGame#1]",
+      "transport_medium": "loopback_tcp",
+      "transport_seam": "network_transport_lane",
+      "payload_kind": "published_turn_transition",
+      "dispatch_outcome": "delivery_requested",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "retention_scope": "helper_local_ephemeral",
+      "witness_ref_count": 1,
+      "auth_lane_present": false,
+      "redaction": "observer_safe_route_trace"
+    },
+    {
+      "hop_index": 2,
+      "envelope_id": "delivery_receipt:tr-a1-04_request#1",
+      "from_place": "GamePlace[SugorokuGame#1]",
+      "to_place": "ParticipantPlace[Alice]",
+      "transport_medium": "loopback_tcp",
+      "transport_seam": "network_transport_lane",
+      "payload_kind": "dispatch_receipt",
+      "dispatch_outcome": "rejected",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "retention_scope": "helper_local_ephemeral",
+      "witness_ref_count": 1,
+      "auth_lane_present": false,
+      "redaction": "observer_safe_route_trace"
+    }
+  ],
+  "auth_lane": null,
+  "world_membership_epoch": 0,
+  "world_active_participants": [
+    "Alice",
+    "Bob"
+  ],
+  "world_places": [
+    "GamePlace[SugorokuGame#1]",
+    "ParticipantPlace[Alice]",
+    "ParticipantPlace[Bob]",
+    "WorldPlace[AlphaRoom#1]"
+  ],
+  "terminal_outcome": "rejected",
+  "reason_family": "capability",
+  "rejection_reason_refs": [
+    "missing_capability:HandoffTurn"
+  ],
+  "retained_later_refs": [
+    "wan_federation",
+    "session_replay_repair",
+    "network_partition_recovery",
+    "local_save_load_execution",
+    "devtools_viewer_execution",
+    "final_public_transport_api"
+  ],
+  "stop_lines": [
+    "do not treat the practical alpha-1 transport floor as WAN or federation completion",
+    "do not treat the practical alpha-1 transport floor as local save/load, devtools, or product prototype completion",
+    "do not treat the practical alpha-1 transport floor as a final public transport ABI",
+    "do not promote samples/practical-alpha1 to an active runnable root in the transport package"
+  ],
+  "limitations": [
+    "alpha-local non-final practical transport floor only",
+    "limited TR-A1 practical sample families only",
+    "no WAN federation, local save/load command, devtools export, or final public ABI"
+  ],
+  "what_it_proves": [
+    "checked practical package can cross a local TCP process boundary",
+    "capability insufficiency stays explicit across transport",
+    "observer-safe route trace stays typed and redacted"
+  ],
+  "what_it_does_not_prove": [
+    "no production WAN or federation claim",
+    "no session replay repair or network partition recovery",
+    "no local save/load, devtools, or product prototype completion",
+    "no final public transport ABI"
+  ],
+  "notes": [
+    "non-final practical transport floor",
+    "same practical package input line as run-local/hotplug",
+    "no WAN/session/replay/partition claim"
+  ],
+  "public_cli_frozen": false,
+  "transport_plan_emitted": false,
+  "run_local_claimed": true,
+  "run_docker_claimed": false,
+  "package_hotplug_claimed": false,
+  "save_load_claimed": false
+}
