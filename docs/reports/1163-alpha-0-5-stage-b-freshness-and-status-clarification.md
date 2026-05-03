@@ -234,7 +234,7 @@ If you want the main implementation line to move again, choose whether `P-A1-08`
 
 ## commit / push status
 
-Pending at report write. Commit and push will be executed after final source-hierarchy/docs/format/diff validation and then reflected in a follow-up update if needed.
+Main package commit `8e3418a` (`docs: clarify alpha-0.5 stage-b status`) was pushed to `origin/main`. This report section is being finalized in a docs-only follow-up so the report carries the exact pushed hash.
 
 ## sub-agent session close status
 
