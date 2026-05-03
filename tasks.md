@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 10:08 JST
+最終更新: 2026-05-03 10:31 JST
 
 ## この文書について
 
@@ -13,13 +13,13 @@
 - active executable floor は維持されています:
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
-  `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、large-stage-first で alpha-0.5 closeout を終え、次は Stage C transport closeout へ向かいます。
-- Alpha-0 closeout validation freshness は 2026-05-03 10:08 JST に更新済みです:
-  `P-A0-23` gate では local-runtime / CUT runtime floors、new `scripts/alpha_local_runtime_samples.py` unit and closeout checks、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LR-01/02` non-public Rust local-runtime floor に `CUT-04/17` supporting local-only save/load subset を加えた current-scope Stage B closeout が actualize 済みであり、distributed save/load、`CUT-10/12/16`、parser/runtime bridge、active runnable-root promotion は引き続き未claimです。
+  `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、large-stage-first で alpha-0.7 transport closeout を終え、次は Stage D lifecycle closeout へ向かいます。
+- Alpha-0 closeout validation freshness は 2026-05-03 10:31 JST に更新済みです:
+  `P-A0-24` gate では `alpha_network_docker_e2e.py` unit、`cargo build -p mir-runtime --example mirrorea_alpha_network_runtime`、`cargo test -p mir-runtime --test alpha_network_runtime`、Rust network closeout example、Docker `check-all` 6/6、new `stage-c-closeout` surface、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `NET-02/03/04/05/07/09` existing Docker/local-subprocess floor を current-scope Stage C closeout として actualize 済みであり、`NET-06/08/10`、production WAN/session/replay、network partition completion、active runnable-root promotion は引き続き未claimです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..23` closeout 後、large-stage-first queue として Stage C transport closeout を次 line に置きます。`LIF-15` / `VAR-14` は future carrier blocker split に留まり、stage-first line を横切って先に actualize しません。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..24` closeout 後、large-stage-first queue として Stage D lifecycle closeout を次 line に置きます。`LIF-15` / `VAR-14` は future carrier blocker split に留まり、stage-first line を横切って先に actualize しません。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -66,15 +66,15 @@
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B 100% alpha-0.5 local-runtime closeout, Stage C 35% network / Docker floor, Stage D 40% hot-plug/runtime-package floor, Stage E 60% widened subset devtools bridge, Stage F 60% thin integrated alpha demo bridge
+  Stage B 100% alpha-0.5 local-runtime closeout, Stage C 100% alpha-0.7 transport closeout, Stage D 40% hot-plug/runtime-package floor, Stage E 60% widened subset devtools bridge, Stage F 60% thin integrated alpha demo bridge
 - Concrete phase:
-  Phase 5 — Stage C transport completion after the alpha-0.5 closeout
+  Phase 4/7 — Stage D lifecycle closeout after the alpha-0.7 transport closeout
 - Package status:
-  `P-A0-23` Stage B alpha-0.5 closeout is the current promoted package in repo state, and it fixes Stage B current-scope completion without widening distributed save/load claims
+  `P-A0-24` Stage C transport closeout is the current promoted package in repo state, and it fixes Stage C current-scope completion without widening WAN or final transport claims
 - Current status:
-  `P-A0-23` は `scripts/alpha_local_runtime_samples.py` により `LR-01/02` dedicated local-runtime runner と `CUT-04/17` supporting local-only save/load subset を束ね、alpha-0.5 current-scope closeout を固定した。negative side / acceptance side / snapshot-selected side / anchor-handoff side / runtime-mirror side の separate carriers は維持されるが、current queue authority は Stage C transport closeout へ移っている。
+  `P-A0-24` は `scripts/alpha_network_docker_e2e.py stage-c-closeout` により `NET-02/03/04/05/07/09` existing Docker/local-subprocess floor を束ね、alpha-0.7 current-scope closeout を固定した。negative side / acceptance side / snapshot-selected side / anchor-handoff side / runtime-mirror side の separate carriers は維持されるが、current queue authority は Stage D lifecycle closeout へ移っている。
 - Next autonomous package:
-  promote Stage C transport closeout over the existing Docker/local-subprocess floor before reopening new lifetime/variance carrier cuts
+  promote Stage D lifecycle closeout over the existing layer/package/avatar floors before reopening new lifetime/variance carrier cuts
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -105,7 +105,7 @@
 |---|---:|---|---|---|---|
 | A | 90% | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
 | B | 100% | alpha 0.5 local runtime | current-scope closeout reached as local runtime + local-only save/load subset | `specs/15/17`、`plan/41/43`、`samples/alpha/local-runtime/`、`samples/alpha/cut-save-load/`、`crates/mir-runtime/src/alpha_local_runtime.rs`、`scripts/alpha_local_runtime_samples.py`、`scripts/alpha_cut_save_load_samples.py` | distributed save-load completion / CUT family completion / final public runtime ABI |
-| C | 35% | alpha 0.7 transport | first Rust network / Docker floor actualized | helper-local `NET-02..05` canaries + `samples/alpha/network-docker/` + `alpha_network_runtime` + `alpha_network_docker_e2e.py` | production WAN / durable replay / partition completion / final transport ABI |
+| C | 100% | alpha 0.7 transport | current-scope closeout reached as Docker/local-subprocess transport narrow cut | helper-local `NET-02..05` canaries + `samples/alpha/network-docker/` + `alpha_network_runtime` + `alpha_network_docker_e2e.py` + `stage-c-closeout` | `NET-06/08/10` / production WAN / durable replay / partition completion / final transport ABI |
 | D | 40% | alpha 0.8 hot-plug lifecycle | attach-time layer floor, package-admission subset, and runtime-mirror bridge actualized | `P19..P21` floor + `samples/alpha/layer-insertion/` + `samples/alpha/contract-variance/` runtime-mirror rows + `samples/alpha/hotplug-runtime/` + `samples/alpha/avatar-runtime/` | detach / migration / final ABI |
 | E | 60% | alpha 0.9 devtools | widened Stage-E subset runner actualized; completion still partial | `samples/alpha/visualization/` + `scripts/alpha_visualization_samples.py` + viewer prototype inventory + existing alpha bridge evidence | remaining `VIS-04/09/12` / final viewer / telemetry API |
 | F | 60% | alpha 1 Spaces alpha | thin integrated bridge + honest local save/load subset + widened Stage-E subset runner actualized; completion still blocked | `samples/alpha/e2e/` thin bridge runner + `scripts/alpha_visualization_samples.py` + `scripts/alpha_cut_save_load_samples.py` + scope spec | remaining Stage-E rows / distributed save-load completion / full VRChat / Reversed Library completion |
@@ -141,9 +141,10 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | Stage C transport closeout | repo | ready | close the existing Docker/local-subprocess transport floor as the next large-stage package without widening to WAN/federation or final transport ABI |
-| 2 | Stage D lifecycle closeout after Stage C | repo | later | re-read existing hot-plug / package / runtime-mirror evidence after Stage C and decide the narrow close condition for alpha-0.8 |
-| 3 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
+| 1 | Stage D lifecycle closeout | repo | ready | close the existing layer/package/avatar floor as the next large-stage package without widening to detach/migration/final ABI completion |
+| 2 | Stage E devtools closeout after Stage D | repo | later | re-read the widened visualization subset and decide the narrow close condition for alpha-0.9 without overclaiming final viewer API |
+| 3 | Stage F integrated alpha closeout after Stage E | repo | later | re-read the thin integrated bridge after Stage D/E are fixed and decide the narrow close condition for alpha-1 without reopening distributed save/load claims |
+| 4 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 
 ## self-driven maintenance tasks
 
@@ -184,6 +185,7 @@ These are safe to do without new product decisions.
 | `P-A0-21` | anchor-handoff floor | closed | dedicated helper-local synthetic anchor-handoff carrier for `LIF-11` only, without widening acceptance/snapshot/runtime-mirror floors, and report `1128` |
 | `P-A0-22` | remote / adapter blocker split | closed | docs-first split fixing planned-only `alpha-remote-observe-floor` for `LIF-15` and `alpha-adapter-transform-floor` for `VAR-14`, without actualizing either row, and report `1129` |
 | `P-A0-23` | Stage B alpha-0.5 closeout | closed | dedicated local-runtime runner plus Stage B closeout surface over `LR-01/02` and `CUT-04/17` supporting subset; distributed save/load and CUT family completion remain later |
+| `P-A0-24` | Stage C transport closeout | closed | dedicated Docker/local-subprocess closeout surface over `NET-02/03/04/05/07/09`; `NET-06/08/10` and WAN/final-ABI claims remain later |
 
 ## user decision blockers
 

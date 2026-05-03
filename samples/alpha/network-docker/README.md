@@ -1,6 +1,6 @@
 # alpha sample family — Network / Docker
 
-- Status: first Rust network runtime floor + Docker Compose runner
+- Status: current-scope Stage C transport closeout surface over the existing Rust network runtime floor + Docker Compose runner
 - Phase: Phase 5
 - Stage: Stage C
 - This family is still not an active runnable root.
@@ -25,6 +25,7 @@
 
 - `.mir` files here remain source-ish anchors; the current runner is sample-ID keyed and non-public.
 - `NET-02/03/04/05/07/09` are actualized by the dedicated `mir-runtime` Stage-C floor plus Docker Compose runner.
+- `scripts/alpha_network_docker_e2e.py stage-c-closeout` treats exactly `NET-02/03/04/05/07/09` as the admissible current-scope Stage C closeout set.
 - `NET-01/06/08/10` remain planned and must not be promoted by similarity to helper-local canaries.
 - `scripts/network_transport_samples.py` continues to prove the separate helper-local `samples/clean-near-end/network-transport/` family only.
 
@@ -34,6 +35,7 @@
 cargo test -p mir-runtime --test alpha_network_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout
 python3 scripts/alpha_network_docker_e2e.py check-all --format json
+python3 scripts/alpha_network_docker_e2e.py stage-c-closeout --format json
 ```
 
 ## Stop line
@@ -42,3 +44,4 @@ python3 scripts/alpha_network_docker_e2e.py check-all --format json
 - do not treat current Docker Compose evidence as continuous shared runtime state across worlds
 - do not claim `NET-06`, `NET-08`, or `NET-10` are implemented in this package
 - do not collapse auth, membership, capability, or witness lanes into transport success
+- do not treat Stage C closeout as Stage D/E/F completion

@@ -188,6 +188,26 @@ negative test floor:
   - Stage C/D/E/F completion
   - final public runtime ABI
 
+## Stage C current-scope closeout boundary
+
+`Stage C` current-scope closeout is narrower than full transport-family completion.
+
+- admissible evidence:
+  - `NET-02` accepted Docker/local-subprocess envelope exchange
+  - `NET-03` stale-membership rejection over the transport seam
+  - `NET-04` missing-capability rejection over the transport seam
+  - `NET-05` missing-witness rejection over the transport seam
+  - `NET-07` observer-safe redacted route trace
+  - `NET-09` auth-evidence lane preserved separately from transport delivery
+- this combination is sufficient to call alpha-0.7 transport complete for current scope
+- this does not imply:
+  - `NET-06` route-rebinding / no-shadow completion
+  - `NET-08` network-partition completion
+  - `NET-10` transport-medium substitution completion
+  - production WAN / session / replay runtime
+  - final public transport ABI
+  - Stage D/E/F completion
+
 ## relationship to Reversed Library
 
 Reversed Library / 裏返した図書館 is upper-layer flagship application.

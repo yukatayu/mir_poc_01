@@ -26,40 +26,47 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "summary": "World/participant exchange over Docker Compose TCP bridge.",
         "expected_terminal_outcome": "accepted",
         "expected_reason_family": None,
+        "expected_sidecar": "samples/alpha/network-docker/net-02-docker_two_process_envelope.expected.json",
     },
     {
         "sample_id": "NET-03",
         "summary": "Reject stale membership epoch/incarnation over the Docker bridge.",
         "expected_terminal_outcome": "rejected",
         "expected_reason_family": "membership_freshness",
+        "expected_sidecar": "samples/alpha/network-docker/net-03-stale_membership_rejected.expected.json",
     },
     {
         "sample_id": "NET-04",
         "summary": "Reject missing capability across the Docker bridge.",
         "expected_terminal_outcome": "rejected",
         "expected_reason_family": "capability",
+        "expected_sidecar": "samples/alpha/network-docker/net-04-missing_capability_rejected.expected.json",
     },
     {
         "sample_id": "NET-05",
         "summary": "Reject missing required witness across the Docker bridge.",
         "expected_terminal_outcome": "rejected",
         "expected_reason_family": "witness",
+        "expected_sidecar": "samples/alpha/network-docker/net-05-missing_witness_rejected.expected.json",
     },
     {
         "sample_id": "NET-07",
         "summary": "Emit observer-safe route trace without raw auth/capability leakage.",
         "expected_terminal_outcome": "accepted",
         "expected_reason_family": None,
+        "expected_sidecar": "samples/alpha/network-docker/net-07-observer_safe_route_trace.expected.json",
     },
     {
         "sample_id": "NET-09",
         "summary": "Keep auth evidence in a separate lane from transport delivery.",
         "expected_terminal_outcome": "accepted",
         "expected_reason_family": None,
+        "expected_sidecar": "samples/alpha/network-docker/net-09-auth_evidence_lane_preserved.expected.json",
     },
 ]
 
 PLANNED_ONLY_ROWS = ["NET-01", "NET-06", "NET-08", "NET-10"]
+STAGE_C_REQUIRED_ROWS = ["NET-02", "NET-03", "NET-04", "NET-05", "NET-07", "NET-09"]
 
 LIMITATIONS = [
     "narrow local Docker Compose bridge only",
@@ -74,6 +81,11 @@ def _implemented_row(sample_id: str) -> dict[str, Any]:
         if row["sample_id"] == sample_id:
             return row
     raise ValueError(f"unknown implemented alpha network sample: {sample_id}")
+
+
+def _load_expected_sidecar(row: dict[str, Any]) -> dict[str, Any]:
+    sidecar_path = REPO_ROOT / row["expected_sidecar"]
+    return json.loads(sidecar_path.read_text())
 
 
 def list_samples() -> list[dict[str, str]]:
@@ -186,7 +198,14 @@ def _run_compose(sample_id: str) -> dict[str, Any]:
         participant_path = output_dir / "participant.json"
         world = _read_json_file(world_path)
         participant = _read_json_file(participant_path)
-        _validate_outputs(sample_id, row, world, participant)
+        _validate_outputs(
+            sample_id,
+            row,
+            _load_expected_sidecar(row),
+            world,
+            participant,
+            compose_transport_surface="docker_compose_tcp",
+        )
 
         return {
             "sample_id": sample_id,
@@ -209,9 +228,13 @@ def _read_json_file(path: Path) -> dict[str, Any]:
 def _validate_outputs(
     sample_id: str,
     row: dict[str, Any],
+    expected_sidecar: dict[str, Any],
     world: dict[str, Any],
     participant: dict[str, Any],
+    *,
+    compose_transport_surface: str,
 ) -> None:
+    expected_runtime = expected_sidecar.get("expected_runtime", {})
     if world.get("sample_id") != sample_id:
         raise RuntimeError(
             f"{sample_id}: world output sample_id mismatch: {world.get('sample_id')!r}"
@@ -220,39 +243,122 @@ def _validate_outputs(
         raise RuntimeError(
             f"{sample_id}: participant output sample_id mismatch: {participant.get('sample_id')!r}"
         )
-    if participant.get("terminal_outcome") != row["expected_terminal_outcome"]:
+    if participant.get("terminal_outcome") != expected_runtime.get("terminal_outcome"):
         raise RuntimeError(
-            f"{sample_id}: expected terminal_outcome {row['expected_terminal_outcome']!r} "
+            f"{sample_id}: expected terminal_outcome {expected_runtime.get('terminal_outcome')!r} "
             f"but observed {participant.get('terminal_outcome')!r}"
         )
-    expected_reason_family = row["expected_reason_family"]
+    expected_reason_family = expected_runtime.get("reason_family")
     if participant.get("reason_family") != expected_reason_family:
         raise RuntimeError(
             f"{sample_id}: expected reason_family {expected_reason_family!r} "
             f"but observed {participant.get('reason_family')!r}"
         )
+    expected_transport_surfaces = set(expected_runtime.get("transport_surfaces") or [])
+    if expected_transport_surfaces:
+        observed_transport_surfaces = {
+            participant.get("transport_surface"),
+            compose_transport_surface,
+        }
+        observed_transport_surfaces.discard(None)
+        if compose_transport_surface not in expected_transport_surfaces:
+            raise RuntimeError(
+                f"{sample_id}: compose transport surface {compose_transport_surface!r} "
+                f"is outside expected transport surfaces {sorted(expected_transport_surfaces)!r}"
+            )
+        if not observed_transport_surfaces:
+            raise RuntimeError(f"{sample_id}: no observed transport surface evidence")
+        if not observed_transport_surfaces.issubset(expected_transport_surfaces):
+            raise RuntimeError(
+                f"{sample_id}: observed transport surfaces {sorted(observed_transport_surfaces)!r} "
+                f"escape expected transport surfaces {sorted(expected_transport_surfaces)!r}"
+            )
+
+    retained_later_refs = set(participant.get("retained_later_refs") or [])
+    for kept_later in [
+        "route_rebinding_no_shadow",
+        "network_partition_explicit_failure",
+        "transport_medium_change_preserves_contract",
+        "production_wan_federation",
+        "final_public_transport_abi",
+    ]:
+        if kept_later not in retained_later_refs:
+            raise RuntimeError(f"{sample_id}: missing kept-later ref {kept_later!r}")
+
     if sample_id == "NET-07":
+        expected_rows = expected_runtime.get("observer_route_trace_rows")
         rows = participant.get("observer_route_trace")
         if not isinstance(rows, list) or not rows:
             raise RuntimeError("NET-07: observer_route_trace missing or empty")
+        if expected_rows is not None and len(rows) != expected_rows:
+            raise RuntimeError(
+                f"NET-07: expected {expected_rows} route-trace rows but observed {len(rows)}"
+            )
+        if participant.get("terminal_outcome") != "accepted":
+            raise RuntimeError("NET-07: expected accepted route-trace outcome")
         for route_row in rows:
-            if route_row.get("redaction") != "observer_safe_route_trace":
+            if route_row.get("redaction") != expected_runtime.get("route_trace_redaction"):
                 raise RuntimeError("NET-07: route trace redaction mismatch")
-            for forbidden_key in [
-                "principal",
-                "claimed_authority",
-                "claimed_capabilities",
-                "auth_evidence",
-                "witness_refs",
-            ]:
+            for forbidden_key in expected_runtime.get("no_raw_fields") or []:
                 if forbidden_key in route_row:
                     raise RuntimeError(
                         f"NET-07: raw field {forbidden_key!r} leaked into observer trace"
                     )
+    elif sample_id == "NET-02":
+        required_witness_ref = expected_runtime.get("required_witness_ref")
+        required_witness_refs = set(participant.get("required_witness_refs") or [])
+        if required_witness_ref and required_witness_ref not in required_witness_refs:
+            raise RuntimeError(
+                f"NET-02: missing required witness ref {required_witness_ref!r}"
+            )
+        expected_rows = expected_runtime.get("observer_route_trace_rows")
+        route_rows = participant.get("observer_route_trace") or []
+        if expected_rows is not None and len(route_rows) != expected_rows:
+            raise RuntimeError(
+                f"NET-02: expected {expected_rows} route-trace rows but observed {len(route_rows)}"
+            )
+    elif sample_id == "NET-03":
+        reason_refs = set(participant.get("rejection_reason_refs") or [])
+        for required_reason in expected_runtime.get("required_reason_refs") or []:
+            if required_reason not in reason_refs:
+                raise RuntimeError(
+                    f"NET-03: missing required reason ref {required_reason!r}"
+                )
+    elif sample_id == "NET-04":
+        missing_capability = expected_runtime.get("missing_capability")
+        reason_refs = set(participant.get("rejection_reason_refs") or [])
+        expected_ref = (
+            f"missing_capability:{missing_capability}" if missing_capability else None
+        )
+        if expected_ref and expected_ref not in reason_refs:
+            raise RuntimeError(
+                f"NET-04: missing capability rejection ref {expected_ref!r}"
+            )
+    elif sample_id == "NET-05":
+        missing_witness = expected_runtime.get("missing_witness")
+        reason_refs = set(participant.get("rejection_reason_refs") or [])
+        expected_ref = f"missing_witness:{missing_witness}" if missing_witness else None
+        if expected_ref and expected_ref not in reason_refs:
+            raise RuntimeError(
+                f"NET-05: missing witness rejection ref {expected_ref!r}"
+            )
     if sample_id == "NET-09":
         auth_lane = participant.get("auth_lane")
-        if not isinstance(auth_lane, dict) or not auth_lane.get("preserved_separately"):
+        if not isinstance(auth_lane, dict):
+            raise RuntimeError("NET-09: auth lane evidence missing")
+        if auth_lane.get("auth_present") != expected_runtime.get("auth_present"):
+            raise RuntimeError(
+                f"NET-09: expected auth_present {expected_runtime.get('auth_present')!r} "
+                f"but observed {auth_lane.get('auth_present')!r}"
+            )
+        if auth_lane.get("preserved_separately") != expected_runtime.get("preserved_separately"):
             raise RuntimeError("NET-09: auth lane preservation evidence missing")
+        observed_bindings = set(auth_lane.get("bindings") or [])
+        required_bindings = set(expected_runtime.get("required_bindings") or [])
+        if not required_bindings.issubset(observed_bindings):
+            raise RuntimeError(
+                f"NET-09: missing required auth bindings {sorted(required_bindings - observed_bindings)!r}"
+            )
 
 
 def check_all() -> dict[str, Any]:
@@ -281,6 +387,7 @@ def closeout() -> dict[str, Any]:
         "compose_file": str(COMPOSE_FILE),
         "binary_path": str(BINARY_PATH),
         "implemented_samples": [row["sample_id"] for row in IMPLEMENTED_ROWS],
+        "stage_c_required_rows": list(STAGE_C_REQUIRED_ROWS),
         "planned_only_rows": list(PLANNED_ONLY_ROWS),
         "transport_surface": "docker_compose_tcp",
         "transport_medium": TRANSPORT_MEDIUM,
@@ -288,6 +395,7 @@ def closeout() -> dict[str, Any]:
             "cargo build -p mir-runtime --example mirrorea_alpha_network_runtime",
             "cargo test -p mir-runtime --test alpha_network_runtime",
             "python3 scripts/alpha_network_docker_e2e.py check-all --format json",
+            "python3 scripts/alpha_network_docker_e2e.py stage-c-closeout --format json",
         ],
         "stop_lines": [
             "do not treat helper-local scripts/network_transport_samples.py as Alpha-0 Docker validation",
@@ -295,6 +403,29 @@ def closeout() -> dict[str, Any]:
             "do not mark NET-06/08/10 implemented in this package",
         ],
         "limitations": list(LIMITATIONS),
+    }
+
+
+def stage_c_closeout() -> dict[str, Any]:
+    network_payload = check_all()
+    failed = network_payload.get("failed") or []
+    return {
+        "stage": "Stage C",
+        "stage_name": "alpha 0.7 transport",
+        "stage_c_complete": not failed,
+        "implemented_rows": [row["sample_id"] for row in IMPLEMENTED_ROWS],
+        "planned_only_rows": list(PLANNED_ONLY_ROWS),
+        "network_check": network_payload,
+        "wan_federation_claimed": False,
+        "network_partition_complete": False,
+        "transport_medium_change_complete": False,
+        "active_root_promoted": False,
+        "final_public_transport_abi_claimed": False,
+        "note": (
+            "Stage C closeout is satisfied only by NET-02/03/04/05/07/09 over the "
+            "existing Docker/local-subprocess floor. It does not claim WAN federation, "
+            "partition completion, medium-substitution completion, or final public transport ABI."
+        ),
     }
 
 
@@ -309,6 +440,14 @@ def format_pretty(payload: Any) -> str:
             f"{payload['sample_id']} docker_compose_tcp",
             f"  outcome: {participant.get('terminal_outcome')}",
             f"  reason_family: {participant.get('reason_family')}",
+        ]
+        return "\n".join(lines)
+    if isinstance(payload, dict) and payload.get("stage") == "Stage C":
+        lines = [
+            f"{payload['stage']} {payload['stage_name']}",
+            f"  stage_c_complete: {payload.get('stage_c_complete')}",
+            f"  implemented_rows: {', '.join(payload.get('implemented_rows', []))}",
+            f"  planned_only_rows: {', '.join(payload.get('planned_only_rows', []))}",
         ]
         return "\n".join(lines)
     return json.dumps(payload, indent=2)
@@ -330,6 +469,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     closeout_parser = subparsers.add_parser("closeout")
     closeout_parser.add_argument("--format", choices=["json", "pretty"], default="pretty")
+
+    stage_c_parser = subparsers.add_parser("stage-c-closeout")
+    stage_c_parser.add_argument("--format", choices=["json", "pretty"], default="pretty")
     return parser
 
 
@@ -343,6 +485,8 @@ def main(argv: list[str] | None = None) -> int:
         payload = _run_compose(args.sample_id)
     elif args.command == "check-all":
         payload = check_all()
+    elif args.command == "stage-c-closeout":
+        payload = stage_c_closeout()
     elif args.command == "closeout":
         payload = closeout()
     else:  # pragma: no cover - argparse enforces command choices.

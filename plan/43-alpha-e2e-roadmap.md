@@ -36,6 +36,10 @@ final public product completion ではない。
 - real transport narrow cut
 - first actualized subset is now a non-public Rust Stage-C network floor over local TCP process-boundary / Docker Compose bridge:
   explicit membership freshness checks, capability/witness admission checks, observer-safe route trace, and auth-evidence lane preservation for `NET-02/03/04/05/07/09`
+- current-scope closeout is now fixed by:
+  - example `mirrorea_alpha_network_runtime -- closeout`
+  - `scripts/alpha_network_docker_e2e.py stage-c-closeout --format json` over `NET-02/03/04/05/07/09`
+- this closes alpha-0.7 only for the existing Docker/local-subprocess transport floor; it does not claim `NET-06/08/10`, WAN federation, partition completion, medium-substitution completion, or final public transport ABI
 
 ### Stage D
 
@@ -135,6 +139,7 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_network_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`
   `python3 scripts/alpha_network_docker_e2e.py check-all --format json`
+  `python3 scripts/alpha_network_docker_e2e.py stage-c-closeout --format json`
 - current Phase 7 first-cut floor:
   `cargo test -p mir-runtime --test alpha_avatar_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
@@ -182,5 +187,6 @@ Phase 1+ runtime floor:
 ## next reopen point
 
 - after `P-A0-23`, Stage B current-scope closeout is fixed and queue authority shifts to Stage C-first completion work
+- after `P-A0-24`, Stage C current-scope closeout is fixed and queue authority shifts to Stage D lifecycle closeout
 - later helper-local LIF/VAR carriers remain valid and separate, but they are no longer the next promoted line while the large-stage-first sequence is active
-- next reopen should prefer Stage C transport closeout over new lifetime/variance carrier widening unless a new plan inconsistency is found
+- next reopen should prefer Stage D lifecycle closeout over new lifetime/variance carrier widening unless a new plan inconsistency is found
