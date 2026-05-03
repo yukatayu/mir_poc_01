@@ -182,7 +182,9 @@ git diff --check
 
 ## Commit / push status
 
-Pending at report write.
+- Main closeout commit created: `35ae708` (`mirrorea: close p-a0-28 stage-a imported baseline`)
+- Pushed to `origin/main`
+- This report section was finalized in a docs-only follow-up after push, per repository reporting policy
 
 ## Sub-agent session close status
 
