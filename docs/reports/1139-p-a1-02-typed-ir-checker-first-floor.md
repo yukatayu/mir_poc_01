@@ -250,7 +250,8 @@ Continue with `P-A1-03 local runtime from runtime plan` by consuming checked pra
 
 ## Commit / push status
 
-Pending at report write; closeout validation, commit, and push remain to be completed.
+Closeout commit `1de9b44` (`mirrorea: close p-a1-02 practical checker floor`) was created and pushed to `origin/main`.
+This report section was then updated in a docs-only follow-up commit so the report records the actual pushed closeout hash.
 
 ## Sub-agent session close status
 
